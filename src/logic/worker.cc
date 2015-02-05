@@ -349,7 +349,7 @@ bool Worker::run_setbobdescription
 		bob = list[1];
 	}
 
-	if(state.svar1 == "world") {
+	if (state.svar1 == "world") {
 		state.ivar2 = game.world().get_bob(bob.c_str());
 	} else {
 		int ship_index = game.tribes().ship_index(bob.c_str());

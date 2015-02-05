@@ -37,8 +37,6 @@
 #include "logic/widelands.h"
 #include "logic/workarea_info.h"
 #include "scripting/lua_table.h"
-// NOCOM(GunChleoc): Compiler barfs at this - circular dependency between scripting + logic.
-// The basic problem here is that LuaTable depends on Coroutine, which in turn has knowledge about the game.
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -66,14 +64,14 @@ class BuildingDescr : public MapObjectDescr {
 public:
 	using FormerBuildings = std::vector<BuildingIndex>;
 	struct HelpTexts {
-		const std::string lore_;
-		const std::string lore_author_;
-		const std::string purpose_;
-		const std::string note_;
-		const std::string performance_;
+		std::string lore_;
+		std::string lore_author_;
+		std::string purpose_;
+		std::string note_;
+		std::string performance_;
 	};
 
-	BuildingDescr(MapObjectType type, const LuaTable& t);
+	BuildingDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
@@ -114,7 +112,7 @@ public:
 	// Returns the building from which this building can be enhanced or
 	// INVALID_INDEX if it cannot be built as an enhanced building.
 	const BuildingIndex& enhanced_from() const {return m_enhanced_from;}
-	void set_enhanced_from(const BuildingIndex& index) const {m_enhanced_from = index;}
+	void set_enhanced_from(const BuildingIndex& index) {m_enhanced_from = index;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -136,8 +134,6 @@ public:
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
 
-	// NOCOM(GunChleoc): Get rid?
-	const TribeDescr & tribe() const {return m_tribe;}
 	WorkareaInfo m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -148,7 +144,7 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	const TribeDescr & m_tribe;
+	const EditorGameBase& egbase_;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
@@ -189,7 +185,7 @@ public:
 	using FormerBuildings = std::vector<BuildingIndex>;
 
 public:
-	Building(const BuildingDescr &);
+	Building(const BuildingDescr&);
 	virtual ~Building();
 
 	void load_finish(EditorGameBase &) override;

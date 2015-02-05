@@ -95,24 +95,12 @@ public:
 	WareIndex nrworkers() const;
 	BuildingIndex nrbuildings() const;
 
-	bool ware_exists(const WareIndex& index) const {
-		return wares_.count(index) == 1;
-	}
-	bool worker_exists(const WareIndex& index) const {
-		return workers_.count(index) == 1;
-	}
-	bool building_exists(const std::string& buildingname) const {
-		return building_index(buildingname) != -1;
-	}
-	bool building_exists(const BuildingIndex& index) const {
-		return buildings_.count(index) == 1;
-	}
-	bool immovable_exists(int index) const {
-		return immovables_.count(index) == 1;
-	}
-	bool ship_exists(int index) const {
-		return ships_.count(index) == 1;
-	}
+	bool ware_exists(const WareIndex& index) const;
+	bool worker_exists(const WareIndex& index) const;
+	bool building_exists(const std::string& buildingname) const;
+	bool building_exists(const BuildingIndex& index) const;
+	bool immovable_exists(int index) const;
+	bool ship_exists(int index) const;
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	int safe_immovable_index(const std::string& immovablename) const;

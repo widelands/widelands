@@ -26,15 +26,17 @@
 
 namespace Widelands {
 
-void Buildcost::parse(const LuaTable& table)
+void Buildcost::parse(std::unique_ptr<LuaTable> table)
 {
-	for (const std::string& warename : table.keys()) {
-		int amount = table.get_int(warename);
+	for (const std::string& warename : table->keys<std::string>()) {
+		int amount = table->get_int(warename);
 		try {
 			if (amount < 1 || 255 < amount) {
 				throw wexception("count is out of range 1 .. 255");
 			}
-			WareIndex const idx = tribe.ware_index(warename);
+			// NOCOM fix this
+			/*
+			WareIndex const idx = tribes.safe_ware_index(warename);
 			if (idx != INVALID_INDEX) {
 				if (count(idx)) {
 					throw wexception
@@ -46,6 +48,7 @@ void Buildcost::parse(const LuaTable& table)
 				throw wexception
 					("tribes do not define a ware type with this name");
 			}
+			*/
 		} catch (const WException & e) {
 			throw wexception("[buildcost] \"%s=%d\": %s", warename.c_str(), amount, e.what());
 		}

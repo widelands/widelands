@@ -61,13 +61,13 @@ public:
 	int preciousness(const std::string& tribename) const;
 
 	/// How much of the ware type an economy should store in warehouses.
-	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked and should
-	/// not be configurable.
+	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked
+  ///  and should not be configurable.
 	int default_target_quantity(const std::string& tribename) const;
 
 	/// \return ware's localized descriptive text
 	/// Prepends the default helptext to the 'tribename''s specific text if there is any.
-	const std::string& helptext(const std::string tribename) const;
+	const std::string& helptext(const std::string& tribename) const;
 
 	/// \return index to ware's icon inside picture stack
 	const Image* icon() const {return icon_;}
@@ -88,9 +88,9 @@ public:
 	void add_producer(const BuildingIndex& building_index);
 
 	// The buildings that consume this ware
-	const std::set<BuildingIndex>& consumers();
+	const std::set<BuildingIndex>& consumers() const;
 	// The buildings that produce this ware
-	const std::set<BuildingIndex>& producers();
+	const std::set<BuildingIndex>& producers() const;
 
 private:
 	const std::string generic_name_;

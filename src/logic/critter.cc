@@ -122,58 +122,8 @@ bool Critter::run_remove
 ===========================================================================
 */
 
-CritterDescr::CritterDescr(char const* const _name,
-                                     char const* const _descname,
-                                     const std::string& directory,
-                                     Profile& prof,
-                                     Section& global_s,
-												 TribeDescr & _tribe)
-	:
-	BobDescr(MapObjectType::CRITTER, _name, _descname, &_tribe)
-{
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-
-	// Parse attributes
-	{
-		std::vector<std::string> attributes;
-		while (Section::Value const* val = global_s.get_next_val("attrib")) {
-			attributes.emplace_back(val->get_string());
-		}
-		add_attributes(attributes, std::set<uint32_t>());
-	}
-
-	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str();
-	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
-
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string program_name = v->get_string();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		CritterProgram * prog = nullptr;
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-
-			prog = new CritterProgram(v->get_string());
-			std::vector<std::string> lines(section_to_strings(&prof.get_safe_section(program_name)));
-			prog->parse(lines);
-			m_programs[program_name] = prog;
-		} catch (const std::exception & e) {
-			delete prog;
-			throw wexception
-				("Parse error in program %s: %s", v->get_string(), e.what());
-		}
-	}
-}
-
 CritterDescr::CritterDescr(const LuaTable& table)
-	: BobDescr(MapObjectType::CRITTER, table.get_string("name"),
-              table.get_string("descname"),
-              nullptr)  // Can only handle world critters.
+	: BobDescr(MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
 {
 	add_directional_animation(&m_walk_anims, "walk");
 

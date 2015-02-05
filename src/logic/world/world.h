@@ -59,7 +59,7 @@ public:
 	int32_t get_nr_bobs() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	int32_t get_immovable_index(char const* const l) const;
+	int32_t get_immovable_index(const std::string& name) const;
 	int32_t get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(int32_t index) const;
 

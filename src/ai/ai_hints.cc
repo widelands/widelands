@@ -19,21 +19,20 @@
 
 #include "ai/ai_hints.h"
 
-#include "profile/profile.h"
-
-BuildingHints::BuildingHints(const LuaTable& table)
-	: renews_map_resource(table.has_key("renews_map_resource") ? table.get_string("renews_map_resource") : ""),
-	  mines_(table.has_key("mines") ? table.get_bool("mines") : ""),
-	  log_producer_(table.has_key("logproducer") ? table.get_bool("logproducer") : false),
-	  stone_producer_(table.has_key("stoneproducer") ? table.get_bool("stoneproducer") : false),
-	  needs_water_(table.has_key("needs_water") ? table.get_bool("needs_water") : false),
-	  mines_water_(table.has_key("mines_water") ? table.get_bool("mines_water") : false),
-	  recruitment_(table.has_key("recruitment") ? table.get_bool("recruitment") : false),
-	  space_consumer_(table.has_key("space_consumer") ? table.get_bool("space_consumer") : false),
-	  expansion_(table.has_key("expansion") ? table.get_bool("expansion") : false),
-	  fighting_(table.has_key("fighting") ? table.get_bool("fighting") : false),
-	  mountain_conqueror_(table.has_key("mountain_conqueror") ? table.get_bool("mountain_conqueror") : false),
-	  prohibited_till_(table.has_key("prohibited_till") ? table.get_int("prohibited_till", 0) : 0),
-	  forced_after_(table.has_key("forced_after") ? table.get_int("forced_after", 864000) : 0),  // 10 days default
-	  mines_percent_(table.has_key("mines_percent") ? table.get_int("mines_percent", 100) : 0) {
+BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
+	: renews_map_resource(table->has_key("renews_map_resource") ? table->get_string("renews_map_resource") : ""),
+	  mines_(table->has_key("mines") ? table->get_bool("mines") : ""),
+	  log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
+	  stone_producer_(table->has_key("stoneproducer") ? table->get_bool("stoneproducer") : false),
+	  needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
+	  mines_water_(table->has_key("mines_water") ? table->get_bool("mines_water") : false),
+	  recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
+	  space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
+	  expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
+	  fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
+	  mountain_conqueror_(table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
+	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till", 0) : 0),
+	  // 10 days default
+	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after", 864000) : 0),
+	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent", 100) : 0) {
 {}

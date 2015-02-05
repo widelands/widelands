@@ -26,6 +26,7 @@
 #include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/constants.h"
+#include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
@@ -127,15 +128,6 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
-
-	/// Per-player and per-field constructionsite information
-	struct ConstructionsiteInformation {
-		ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-		const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
-		const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
-		uint32_t               totaltime;
-		uint32_t               completedtime;
-	};
 
 	/// Per-player field information.
 	struct Field {

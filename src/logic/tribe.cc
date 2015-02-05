@@ -55,7 +55,7 @@
 
 using namespace std;
 /*
- * NOCOM TODO
+ * NOCOM todo
  icon = "images/atlanteans/icon.png",
  */
 
@@ -86,13 +86,14 @@ TribeDescr::TribeDescr
 		// NOCOM(GunChleoc): And the hotspot + fps?
 
 		items_table = table.get_table("wares_order");
-		for (const LuaTable column_table : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
+			const LuaTable column_table = items_table.get_table(key);
 			vector<WareIndex> column;
-			for (const std::string& key : column_table.keys()) {
+			for (const std::string& key : column_table.keys<std::string>()) {
 				const std::string warename = column_table.get_string(key);
 				try {
 					WareIndex ware_index = egbase_.tribes().safe_ware_index(warename);
-					if(wares_.count(ware_index) == 1) {
+					if (wares_.count(ware_index) == 1) {
 						throw new GameDataError("Duplicate definition of ware", warename);
 					}
 					wares_.insert(ware_index);
@@ -108,27 +109,29 @@ TribeDescr::TribeDescr
 		}
 
 		items_table = table.get_table("immovables");
-		for (const std::string& key : items_table.keys()) {
+		for (const std::string& key : items_table.keys<std::string>()) {
 			const std::string immovablename = column_table.get_string(key);
 			try {
 				int immovable_index = egbase_.tribes().safe_immovable_index(immovablename);
-				if(immovables_.count(immovable_index) == 1) {
+				if (immovables_.count(immovable_index) == 1) {
 					throw new GameDataError("Duplicate definition of immovable", immovablename);
 				}
 				immovables_.insert(immovable_index);
 			} catch (const WException& e) {
-				throw new GameDataError("Failed adding immovable %s to tribe %s: %s", immovablename, name_, e.what);
+				throw new GameDataError("Failed adding immovable %s to tribe %s: %s",
+												immovablename, name_, e.what);
 			}
 		}
 
 		items_table = table.get_table("workers_order");
-		for (const LuaTable column_table : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
+			const LuaTable column_table = items_table.get_table(key);
 			vector<WareIndex> column;
-			for (const std::string& key : column_table.keys()) {
+			for (const std::string& key : column_table.keys<std::string>()) {
 				const std::string workername = column_table.get_string(key);
 				try {
 					WareIndex worker_index = egbase_.tribes().safe_worker_index(workername);
-					if(workers_.count(worker_index) == 1) {
+					if (workers_.count(worker_index) == 1) {
 						throw new GameDataError("Duplicate definition of worker", workername);
 					}
 					workers_.insert(worker_index);
@@ -147,32 +150,32 @@ TribeDescr::TribeDescr
 		}
 
 		items_table = table.get_table("constructionsites");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("dismantlesites");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("militarysites");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("trainingsites");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("productionsites");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("warehouses");
-		for (const std::string& key : items_table.keys()) {
+		for (const int key : items_table.keys<int>()) {
 			add_building(items_table.get_string(key));
 		}
 
@@ -262,7 +265,8 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
-// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes. Need to have a look at the control flow.
+// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes.
+// Need to have a look at the control flow.
 std::vector<std::string> TribeDescr::get_all_tribenames() {
 	std::vector<std::string> tribenames;
 
@@ -286,7 +290,8 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 	return tribenames;
 }
 
-// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes. Need to have a look at the control flow.
+// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes.
+// Need to have a look at the control flow.
 std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
@@ -317,9 +322,9 @@ const EditorGameBase& TribeDescr::egbase() const {return egbase_;}
 WareIndex TribeDescr::get_nrwares() const {return wares_.size();}
 WareIndex TribeDescr::get_nrworkers() const {return workers_.size();}
 
-const std::set<BuildingIndex> TribeDescr::buildings() const { return buildings_;}
-const std::set<WareIndex> TribeDescr::wares() const { return wares_;}
-const std::set<WareIndex> TribeDescr::workers() const { return workers_;}
+const std::set<BuildingIndex> TribeDescr::buildings() const {return buildings_;}
+const std::set<WareIndex> TribeDescr::wares() const {return wares_;}
+const std::set<WareIndex> TribeDescr::workers() const {return workers_;}
 
 bool TribeDescr::has_building(const BuildingIndex& index) const {
 	return buildings_.count(index) == 1;
@@ -497,7 +502,7 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 void TribeDescr::add_building(const std::string& buildingname) {
 	try {
 		BuildingIndex building_index = egbase_.tribes().safe_building_index(buildingname);
-		if(buildings_.count(building_index) == 1) {
+		if (buildings_.count(building_index) == 1) {
 			throw new GameDataError("Duplicate definition of building", buildingname);
 		}
 		buildings_.insert(building_index);

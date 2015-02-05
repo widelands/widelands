@@ -161,6 +161,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
+	EditorGameBase& egbase = get_egbase(L);
 	const std::string building_name = luaL_checkstring(L, 2);
 	const BuildingIndex building_index = egbase.tribes().building_index(building_name);
 	if (building_index == INVALID_INDEX) {
@@ -176,8 +177,8 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	.. function:: get_ware_description(ware_description.name)
 
 		:arg ware_name: the name of the ware
+ Registers a ware description so Lua can reference it from the game.749
 
-		Registers a ware description so Lua can reference it from the game.
 
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
@@ -187,7 +188,6 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	}
 	EditorGameBase& egbase = get_egbase(L);
 	const std::string ware_name = luaL_checkstring(L, 2);
-
 	WareIndex ware_index = egbase.tribes().ware_index(ware_name);
 	if (ware_index == INVALID_INDEX) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
@@ -210,8 +210,8 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
+	EditorGameBase& egbase = get_egbase(L);
 	const std::string worker_name = luaL_checkstring(L, 2);
-
 	const WareIndex worker_index = egbase.tribes().worker_index(worker_name);
 	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
@@ -464,7 +464,7 @@ int LuaPlayerBase::place_road(lua_State * L) {
 		:returns: a subclass of :class:`wl.map.Building`
 */
 int LuaPlayerBase::place_building(lua_State * L) {
-	const char * name = luaL_checkstring(L, 2);
+	const std::string& name = luaL_checkstring(L, 2);
 	LuaMaps::LuaField * c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	bool constructionsite = false;
 	bool force = false;
@@ -477,7 +477,7 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	const Tribes& tribes = get_egbase(L).tribes();
 
 	if (!tribes.building_exists(name)) {
-		report_error(L, "Unknown Building: '%s'", name);
+		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
 	BuildingIndex building_index = tribes.building_index(name);
 
@@ -534,8 +534,8 @@ int LuaPlayerBase::place_bob(lua_State * L) {
 	EditorGameBase & egbase = get_egbase(L);
 	Player& player = get(L, egbase);
 	int ship_index = player.tribe().ship();
-	const std::string& shipname = egbase.tribes().get_ship_descr(ship_index)->name();
-	Bob& bob = egbase.create_bob(c->coords(), shipname, MapObjectDescr::OwnerType::kTribe, &player);
+	const ShipDescr* descr = egbase.tribes().get_ship_descr(ship_index);
+	Bob& bob = egbase.create_bob(c->coords(), descr->name(), MapObjectDescr::OwnerType::kTribe, &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &bob);
 

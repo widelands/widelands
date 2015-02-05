@@ -107,7 +107,7 @@ namespace Widelands {
 struct MapObjectData {
 	MapObjectData() : map_object_descr(nullptr) {}
 	const MapObjectDescr                     * map_object_descr;
-	Player::ConstructionsiteInformation         csi;
+	ConstructionsiteInformation         csi;
 };
 
 namespace {
@@ -221,12 +221,10 @@ struct WorldImmovableNonexistent : public FileRead::DataError {
 	char const* const name;
 };
 struct BuildingNonexistent : public FileRead::DataError {
-	BuildingNonexistent(const std::string& Tribename, char const* const Name)
-	   : DataError("tribe %s does not define building type \"%s\"", Tribename.c_str(), Name),
-	     tribename(Tribename),
+	BuildingNonexistent(char const* const Name)
+		: DataError("tribes do not define building type \"%s\"", Name),
 	     name(Name) {
 	}
-	const std::string& tribename;
 	char const* const name;
 };
 
@@ -300,25 +298,18 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 		return read_immovable_type(fr, egbase.world());
 }
 
+
 // Reads a c_string and interprets it as the name of an immovable type.
 //
 // \returns a reference to the building type description.
 //
-// \throws Building_Nonexistent if there is no building type with that
-const BuildingDescr& read_building_type(StreamRead* fr, const TribeDescr& tribe) {
-	char const* const name = fr->c_string();
-	BuildingIndex const index = tribe.building_index(name);
-	if (index == INVALID_INDEX)
-		throw BuildingNonexistent(tribe.name(), name);
-	return *tribe.get_building_descr(index);
-}
-
-// Calls read_tribe(const EditorGameBase &) to read a tribe and then reads a
-// c_string and interprets it as the name of a building type in that tribe.
-//
-// \returns a reference to the building type description.
+// \throws Building_Nonexistent if there is no building type with that name
 const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
-	return read_building_type(fr, read_tribe(fr, egbase));
+	char const* const name = fr->c_string();
+	BuildingIndex const index = egbase.tribes().building_index(name);
+	if (index == INVALID_INDEX)
+		throw BuildingNonexistent(name);
+	return *egbase.tribes().get_building_descr(index);
 }
 
 // Encode a tribe into 'wr'.
@@ -333,13 +324,12 @@ void write_tribe(StreamWrite* wr, TribeDescr const* tribe) {
 
 // Encode a Immovable_Type into 'wr'.
 void write_immovable_type(StreamWrite* wr, const ImmovableDescr& immovable) {
-	wr->unsigned_8(immovable.owner_type());
+	wr->unsigned_8(static_cast<uint8_t>(immovable.owner_type()));
 	wr->string(immovable.name());
 }
 
 // Encode a Building_Type into 'wr'.
 void write_building_type(StreamWrite* wr, const BuildingDescr& building) {
-	write_tribe(wr, building.tribe());
 	wr->string(building.name());
 }
 
@@ -992,7 +982,7 @@ inline static void write_unseen_immovable
 	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
 	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
-	const Player::ConstructionsiteInformation & csi = map_object_data->csi;
+	const ConstructionsiteInformation & csi = map_object_data->csi;
 	assert(!Road::is_road_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 

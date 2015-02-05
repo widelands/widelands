@@ -173,7 +173,7 @@ void MapBuildingPacket::write_priorities
 	std::map<int32_t, std::map<WareIndex, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<WareIndex, int32_t> >::iterator it;
 
-	const TribeDescr & tribe = building.descr().tribe();
+	const TribeDescr & tribe = building.owner().tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
@@ -213,7 +213,7 @@ void MapBuildingPacket::read_priorities
 {
 	fr.unsigned_32(); // unused, was base_priority which is unused. Remove after b20.
 
-	const TribeDescr & tribe = building.descr().tribe();
+	const TribeDescr & tribe = building.owner().tribe();
 	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.unsigned_8())) {

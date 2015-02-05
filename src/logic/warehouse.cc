@@ -251,13 +251,13 @@ Warehouse Building
 */
 
 WarehouseDescr::WarehouseDescr
-	(const LuaTable& table)
-	: BuildingDescr(MapObjectType::WAREHOUSE, table),
+	(const LuaTable& table, const EditorGameBase& egbase)
+	: BuildingDescr(MapObjectType::WAREHOUSE, table, egbase),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
 {
 	m_heal_per_second = table.get_int("heal_per_second");
-	if(table.has_key("conquers")) {
+	if (table.has_key("conquers")) {
 		m_conquers = table.get_int("conquers");
 		m_workarea_info[m_conquers].insert(descname() + " conquer");
 	}

@@ -20,6 +20,7 @@
 #ifndef WL_AI_AI_HINTS_H
 #define WL_AI_AI_HINTS_H
 
+#include <memory>
 #include <stdint.h>
 #include <string>
 
@@ -32,7 +33,7 @@ class Section;
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	BuildingHints(const LuaTable&);
+	BuildingHints(std::unique_ptr<LuaTable>);
 	~BuildingHints();
 
 	bool renews_map_resource() const {

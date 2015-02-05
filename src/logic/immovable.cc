@@ -259,7 +259,7 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObj
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
 
 	LuaTable helptexts_table = table.get_table("helptext");
-	for (const std::string& key : helptexts_table.keys()) {
+	for (const std::string& key : helptexts_table.keys<std::string>()) {
 		helptexts_.insert(key, helptexts_table.get_string(key));
 	}
 
@@ -718,7 +718,7 @@ MapObject::Loader * Immovable::load
 			Immovable * imm = nullptr;
 
 			if (owner_name != "world") { //  It is a tribe immovable.
-				// NOCOM(GunChleoc): DO we need something like this for tribes()? egbase.manually_load_tribe(owner_name);
+				// NOCOM(GunChleoc): Do we need something like this for tribes()? egbase.manually_load_tribe(owner_name);
 				try {
 					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
 					imm = new Immovable(egbase.tribes().get_immovable_descr(idx));

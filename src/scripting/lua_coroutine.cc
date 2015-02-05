@@ -105,6 +105,12 @@ void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	++m_ninput_args;
 }
 
+void LuaCoroutine::push_arg(const std::string& string) {
+	assert(!string.empty());
+	lua_pushstring(m_L, string);
+	++m_ninput_args;
+}
+
 std::string LuaCoroutine::pop_string() {
 	if (!m_nreturn_values) {
 		return "";

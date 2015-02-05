@@ -20,6 +20,7 @@
 #include "logic/bob.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <stdint.h>
 
@@ -27,6 +28,7 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -50,18 +52,9 @@
 
 namespace Widelands {
 
-BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
-                  const std::string& init_descname,
-						MapObjectDescr::OwnerType owner_type)
+BobDescr::BobDescr(const MapObjectType init_type, MapObjectDescr::OwnerType owner_type, const LuaTable& table)
 	:
-	MapObjectDescr(object_type, init_name, init_descname),
-	owner_type_   (owner_type)
-{
-}
-
-BobDescr::BobDescr(const MapObjectType type, const LuaTable& table)
-	:
-	MapObjectDescr(type,  table.get_string("name"), table.get_string("descname")),
+	MapObjectDescr(init_type,  table.get_string("name"), table.get_string("descname")),
 	owner_type_   (owner_type),
 	// Only tribe bobs have a vision range, since it would be irrelevant for world bobs.
 	vision_range_ (owner_type == MapObjectDescr::OwnerType::kTribe ? table.get_int("vision_range") : 0)

@@ -50,7 +50,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const LuaTable& t);
+	WarehouseDescr(const LuaTable& t, const EditorGameBase& egbase);
 	~WarehouseDescr() override {}
 
 	Building & create_object() const override;

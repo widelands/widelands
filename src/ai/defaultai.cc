@@ -49,7 +49,6 @@
 #include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 
 // Building of new military buildings can be restricted
 constexpr int kPushExpansion = 1;

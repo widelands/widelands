@@ -56,7 +56,8 @@ struct NoteShipMessage {
 	}
 };
 
-class ShipDescr : BobDescr {
+class ShipDescr : public BobDescr {
+public:
 	ShipDescr(const LuaTable& t);
 	~ShipDescr() override {}
 

@@ -32,6 +32,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -374,10 +375,11 @@ void BuildingStatisticsMenu::update() {
 	const Widelands::Player      & player = iplayer().player();
 	const Widelands::TribeDescr & tribe  = player.tribe();
 	const Widelands::Map         & map   = iplayer().game().map();
-	for (const BuildingIndex& building_index : tribe.buildings()) {
-		const Widelands::BuildingDescr& building_descr = player.egbase().tribes().get_building_descr(building_index);
+	for (const Widelands::BuildingIndex& building_index : tribe.buildings()) {
+		const Widelands::BuildingDescr* building_descr =
+				player.egbase().tribes().get_building_descr(building_index);
 
-		if(!(building_descr.is_buildable() || building_descr.is_enhanced())) {
+		if (!(building_descr->is_buildable() || building_descr->is_enhanced())) {
 			continue;
 		}
 
@@ -405,7 +407,7 @@ void BuildingStatisticsMenu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionSiteDescr const, productionsite, &building_descr);
+		upcast(Widelands::ProductionSiteDescr const, productionsite, building_descr);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;
@@ -423,7 +425,7 @@ void BuildingStatisticsMenu::update() {
 			m_table.has_selection() && m_table.get_selected() == building_index;
 
 		if (is_selected) {
-			m_anim = building_descr.get_ui_anim();
+			m_anim = building_descr->get_ui_anim();
 			m_btn[PrevOwned]       ->set_enabled(nr_owned);
 			m_btn[NextOwned]       ->set_enabled(nr_owned);
 			m_btn[PrevConstruction]->set_enabled(nr_build);
@@ -432,16 +434,16 @@ void BuildingStatisticsMenu::update() {
 
 		//  add new Table Entry
 		te->set_picture
-			(Columns::Name, building_descr.get_icon(), building_descr.descname());
+			(Columns::Name, building_descr->get_icon(), building_descr->descname());
 
 		{
 			char const * pic = "pics/novalue.png";
-			if (building_descr.get_ismine()) {
+			if (building_descr->get_ismine()) {
 				pic = "pics/menu_tab_buildmine.png";
-			} else if (building_descr.get_isport()) {
+			} else if (building_descr->get_isport()) {
 				pic = "pics/menu_tab_buildport.png";
 			}
-			else switch (building_descr.get_size()) {
+			else switch (building_descr->get_size()) {
 			case Widelands::BaseImmovable::SMALL:
 				pic = "pics/menu_tab_buildsmall.png";
 				break;

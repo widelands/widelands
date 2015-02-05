@@ -84,15 +84,15 @@ private:
 			const Widelands::TribeDescr& owner_tribe = m_economy.owner().tribe();
 			if (type == Widelands::wwWORKER) {
 				for (const WareIndex& worker_index : owner_tribe.workers()) {
-					const WorkerDescr& worker_descr = owner_tribe.egbase().tribes().get_worker_descr(worker_index);
-					if (!worker_descr.has_demand_check()) {
+					const WorkerDescr* worker_descr = owner_tribe.get_worker_descr(worker_index);
+					if (!worker_descr->has_demand_check()) {
 						hide_ware(worker_index);
 					}
 				}
 			} else {
 				for (const WareIndex& ware_index : owner_tribe.wares()) {
-					const WareDescr& ware_descr = owner_tribe.egbase().tribes().get_ware_descr(ware_index);
-					if (!ware_descr.has_demand_check(owner_tribe.name())) {
+					const WareDescr* ware_descr = owner_tribe.get_ware_descr(ware_index);
+					if (!ware_descr->has_demand_check(owner_tribe.name())) {
 						hide_ware(ware_index);
 					}
 				}
@@ -234,7 +234,7 @@ private:
 
 		void decrease_target() {
 			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
-				if (m_display.ware_selected(id)) {
+				if (m_display.ware_selected(worker_index)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(worker_index);
 					if (1 < tq.permanent) {
@@ -243,7 +243,7 @@ private:
 						game.send_player_command
 							(*new Widelands::CmdSetWorkerTargetQuantity
 								(game.get_gametime(), player.player_number(),
-								 player.get_economy_number(&m_economy), worker.first,
+								 player.get_economy_number(&m_economy), worker_index,
 								 tq.permanent - 1));
 					}
 				}

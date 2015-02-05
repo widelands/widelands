@@ -50,7 +50,7 @@ namespace Widelands {
 
 ShipDescr::ShipDescr(const LuaTable& table)
 	:
-	BobDescr(MapObjectType::SHIP, table)
+	BobDescr(MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table)
 {
 	// Read the sailing animations
 	// NOCOM(GunChleoc): Double-check if this works

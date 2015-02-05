@@ -33,7 +33,7 @@ class World;
 
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
-	TrainingSiteDescr(MapObjectType type, const LuaTable& t, const World&);
+	TrainingSiteDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;

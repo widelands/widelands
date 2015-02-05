@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
@@ -45,6 +46,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
@@ -54,16 +56,17 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 BuildingDescr::BuildingDescr
-	(const MapObjectType _type, const LuaTable& table)
+	(const MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
 	:
 	MapObjectDescr(_type, table.get_string("name"), table.get_string("descname")),
+	egbase_         (egbase),
 	m_buildable     (true),
-	m_icon     (nullptr),
+	m_icon          (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
 	m_enhanced_from (INVALID_INDEX),
-	m_hints         (table.get_table("aihints")),
+	m_hints         (table.get_table("ai_hints")),
 	m_vision_range  (0)
 {
 	using boost::iequals;
@@ -85,7 +88,7 @@ BuildingDescr::BuildingDescr
 		} else {
 			throw GameDataError
 				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size);
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
 		}
 	} catch (const WException & e) {
 		throw GameDataError("size: %s", e.what());
@@ -97,19 +100,18 @@ BuildingDescr::BuildingDescr
 	m_enhancement = INVALID_INDEX;
 
 	if (table.has_key("enhancement")) {
-		const std::string& enhancement = table.get_string("enhancement");
+		const std::string& enh = table.get_string("enhancement");
 
-		if (enhancement == name()) {
+		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		BuildingIndex const en_i = tribe().building_index(enhancement);
+		BuildingIndex const en_i = egbase_.tribes().building_index(enh);
 		if (en_i != INVALID_INDEX) {
 			m_enhancement = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const BuildingDescr * tmp_enhancement =
-				tribe().get_building_descr(en_i);
+			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
 			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
 			{
 				std::set<std::string> & strs = m_workarea_info[area.first];
@@ -119,16 +121,15 @@ BuildingDescr::BuildingDescr
 		} else {
 			throw wexception
 				("\"%s\" has not been defined as a building type (wrong declaration order?)",
-				enhancement.c_str());
+				enh.c_str());
 		}
 	}
 
 	m_enhanced_building = table.has_key("enhanced_building") ? table.get_bool("enhanced_building") : false;
 
-	// NOCOM(GunChleoc): Deal with dirname
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
-		m_icon_fname  = directory;
+		// NOCOM(GunChleoc): Deal with dirname m_icon_fname  = directory;
 		m_icon_fname += "/menu.png";
 
 		// Get costs
@@ -160,16 +161,19 @@ BuildingDescr::BuildingDescr
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 
-	if(table.has_key("vision_range")) {
+	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
 
+	// NOCOM fix these
+	/*
 	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
 	helptexts_.lore_ = items_table->get_string("lore");
 	helptexts_.lore_author_ = items_table->get_string("lore_author");
 	helptexts_.purpose_ = items_table->get_string("purpose");
 	helptexts_.note_ = items_table->get_string("note");
 	helptexts_.performance_ = items_table->get_string("performance");
+	*/
 }
 
 
@@ -241,8 +245,8 @@ Create a construction site for this type of building
 Building & BuildingDescr::create_constructionsite() const
 {
 	BuildingDescr const * const descr =
-		m_tribe.get_building_descr
-			(m_tribe.safe_building_index("constructionsite"));
+		egbase_.tribes().get_building_descr
+			(egbase_.tribes().safe_building_index("constructionsite"));
 	ConstructionSite & csite =
 		dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
@@ -260,14 +264,14 @@ Implementation
 */
 
 Building::Building(const BuildingDescr & building_descr) :
-PlayerImmovable(building_descr),
-m_optionswindow(nullptr),
-m_flag         (nullptr),
-m_anim(0),
-m_animstart(0),
-m_leave_time(0),
-m_defeating_player(0),
-m_seeing(false)
+	PlayerImmovable(building_descr),
+	m_optionswindow(nullptr),
+	m_flag         (nullptr),
+	m_anim(0),
+	m_animstart(0),
+	m_leave_time(0),
+	m_defeating_player(0),
+	m_seeing(false)
 {}
 
 Building::~Building()
@@ -492,7 +496,6 @@ void Building::destroy(EditorGameBase & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const TribeDescr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -820,7 +823,7 @@ void Building::log_general_info(const EditorGameBase & egbase) {
 
 void Building::add_worker(Worker & worker) {
 	if (!get_workers().size()) {
-		if (descr().tribe().safe_worker_index(worker.descr().name()) != descr().tribe().builder()) {
+		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
 		}
 	}

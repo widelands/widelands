@@ -362,7 +362,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 		registry.open_window = [this, &registry] {
 			new UI::LuaTextHelpWindow(
-				&igbase(), registry, m_building.descr(), &igbase().egbase().lua());
+				&igbase(), registry, m_building.descr(), building().owner().tribe(), &igbase().egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));

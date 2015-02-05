@@ -32,15 +32,15 @@ Tribes::Tribes(EditorGameBase& egbase) :
 }
 
 void Tribes::add_constructionsite_type(const LuaTable& t) {
-	buildings_->add(new ConstructionSiteDescr(t));
+	buildings_->add(new ConstructionSiteDescr(t, egbase_));
 }
 
 void Tribes::add_dismantlesite_type(const LuaTable& t) {
-	buildings_->add(new DismantleSiteDescr(t));
+	buildings_->add(new DismantleSiteDescr(t, egbase_));
 }
 
 void Tribes::add_militarysite_type(const LuaTable& t) {
-	buildings_->add(new MilitarySiteDescr(t));
+	buildings_->add(new MilitarySiteDescr(t, egbase_));
 }
 
 void Tribes::add_productionsite_type(const LuaTable& t) {
@@ -52,7 +52,7 @@ void Tribes::add_trainingsite_type(const LuaTable& t) {
 }
 
 void Tribes::add_warehouse_type(const LuaTable& t) {
-	buildings_->add(new WarehouseDescr(t));
+	buildings_->add(new WarehouseDescr(t, egbase_));
 }
 
 void Tribes::add_immovable_type(const LuaTable& t) {
@@ -93,6 +93,26 @@ WareIndex Tribes::nrworkers() const {
 
 BuildingIndex Tribes::nrbuildings() const {
 	return buildings_.size();
+}
+
+
+bool Tribes::ware_exists(const WareIndex& index) const {
+	return wares_->get(index) != nullptr;
+}
+bool Tribes::worker_exists(const WareIndex& index) const {
+	return workers_->get(index) != nullptr;
+}
+bool Tribes::building_exists(const std::string& buildingname) const {
+	return buildings_->exists(buildingname) != nullptr;
+}
+bool Tribes::building_exists(const BuildingIndex& index) const {
+	return buildings_->get(index) != nullptr;
+}
+bool Tribes::immovable_exists(int index) const {
+	return immovables_->get(index) != nullptr;
+}
+bool Tribes::ship_exists(int index) const {
+	return ships_->get(index) != nullptr;
 }
 
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
@@ -229,9 +249,10 @@ void Tribes::post_load() {
 		}
 		// Register which buildings buildings can have been enhanced from
 		const BuildingIndex& enhancement = building_descr.enhancement();
-		if(building_exists(enhancement)) {
+		if (building_exists(enhancement)) {
 			get_building_descr(enhancement)->set_enhanced_from(i);
 		}
+		// NOCOM(GunChleoc): parse buildcost for buildings
 	}
 }
 

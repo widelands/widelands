@@ -41,10 +41,10 @@
 
 namespace Widelands {
 
-MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table)
+MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::MILITARYSITE, table),
+		(MapObjectType::MILITARYSITE, table, egbase),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)
@@ -394,7 +394,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 descr().tribe().soldier(),
+					 owner().tribe().soldier(),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -450,7 +450,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				descr().tribe().soldier(),
+				owner().tribe().soldier(),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
@@ -870,7 +870,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (BuildingIndex former_idx : m_old_buildings) {
-			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
+			const BuildingDescr * old_descr = owner().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');

@@ -187,6 +187,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
 	 const Widelands::BuildingDescr& building_description,
+	 const Widelands::TribeDescr& tribe,
 	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:
@@ -196,12 +197,12 @@ LuaTextHelpWindow::LuaTextHelpWindow
 {
 	try {
 		std::unique_ptr<LuaTable> t(
-			lua->run_script("tribes/scripting/format_help.lua");
+			lua->run_script("tribes/scripting/format_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(&building_description);
 		// NOCOM(GunChleoc): Should buildingdescr know its tribe?
 		// Iterate through all tribes to see which one has the building?
-		cr->push_arg(&building_description.tribe());
+		cr->push_arg(tribe.name());
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea->set_text(help_text);

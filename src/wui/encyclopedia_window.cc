@@ -36,6 +36,8 @@
 #include "logic/production_program.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
+#include "logic/ware_descr.h"
 #include "logic/warelist.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
@@ -90,8 +92,7 @@ void EncyclopediaWindow::fill_wares() {
 	std::vector<Ware> ware_vec;
 
 	for (const WareIndex& ware_index : tribe.wares()) {
-		const WareDescr& ware_descr = tribe.egbase().tribes().get_ware_descr(ware_index);
-		Ware w(i, ware_descr);
+		Ware w(ware_index, tribe.get_ware_descr(ware_index));
 		ware_vec.push_back(w);
 	}
 
@@ -113,13 +114,14 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	condTable.clear();
 
 	for (const BuildingIndex& building_index : selectedWare->consumers()) {
-		const BuildingDescr& building_descr = tribe.egbase().tribes().get_building_descr(building_index);
-		prodSites.add(building_descr.descname(), building_index, building_descr.get_icon());
+		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
+		prodSites.add(building_descr->descname(), building_index, building_descr->get_icon());
 
 	}
-	if (tribe.is_construction_material(selectedWare)) {
+	if (tribe.is_construction_material(wares.get_selected())) {
 		const BuildingIndex& building_index = tribe.building_index("constructionsite");
-		prodSites.add(building_descr.descname(), building_index, building_descr.get_icon());
+		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
+		prodSites.add(building_descr->descname(), building_index, building_descr->get_icon());
 	}
 	if (!prodSites.empty()) {
 		prodSites.select(0);
@@ -177,7 +179,7 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 						no_of_wares = no_of_wares + ware_types.size();
 
 						std::string ware_type_names =
-								i18n::localize_item_list(ware_type_descnames, i18n::ConcatenateWith::OR);
+								i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
 
 						//  Make sure to detect if someone changes the type so that it
 						//  needs more than 3 decimal digits to represent.

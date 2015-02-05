@@ -65,7 +65,7 @@ m_warehouse(wh)
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 	if (type == Widelands::wwWORKER) {
-		hide_ware(m_warehouse.descr().tribe().carrier());
+		hide_ware(m_warehouse.owner().tribe().carrier());
 	}
 }
 
@@ -157,7 +157,7 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 				}
 			}
 		} else {
-			for (const Widelands::WareIndex& ware_index : m_tribe.wares()) {
+			for (const Widelands::WareIndex& ware_index : m_wh.owner().tribe().wares()) {
 				if (m_display.ware_selected(ware_index)) {
 					m_gb.game().send_player_command
 						(*new Widelands::CmdSetStockPolicy

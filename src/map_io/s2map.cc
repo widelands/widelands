@@ -33,6 +33,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
+#include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/mapregion.h"
 #include "logic/world/world.h"
@@ -688,7 +689,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 		if (idx < 0) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
-		egbase.create_immovable(location, idx, MapObjectDescr::OwnerType::kWorld);
+		egbase.create_immovable(location, idx, Widelands::MapObjectDescr::OwnerType::kWorld);
 	};
 
 	uint8_t c;

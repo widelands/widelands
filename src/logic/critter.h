@@ -36,13 +36,6 @@ struct CritterProgram;
 // Description
 //
 struct CritterDescr : BobDescr {
-	CritterDescr
-		(char const* const _name,
-		 char const* const _descname,
-		 const std::string& directory,
-		 Profile& prof,
-		 Section& global_s,
-		 TribeDescr & _tribe);
 	CritterDescr(const LuaTable&);
 	~CritterDescr() override;
 

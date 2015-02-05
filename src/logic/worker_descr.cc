@@ -34,15 +34,16 @@
 namespace Widelands {
 
 WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
-	BobDescr(type, table),
+	BobDescr(type, MapObjectDescr::OwnerType::kTribe, table),
 	icon_fname_        (directory + "/menu.png"),
 	icon_              (nullptr),
 	ware_hotspot_      (Point(0, 15)),
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX)
 {
+	// NOCOM(GunChleoc): Use unique_ptr for LuaTables
 	LuaTable items_table = table.get_table("buildcost");
-	for (const std::string& key : items_table.keys()) {
+	for (const std::string& key : items_table.keys<std::string>()) {
 		try {
 			if (buildcost_.count(key)) {
 				throw wexception("a buildcost item of this ware type has already been defined: %s", key.c_str());
@@ -77,15 +78,15 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 	add_directional_animation(&walkload_anims_, "walkload");
 
 	// Read the becomes and experience
-	if(table.has_key("becomes")) {
+	if (table.has_key("becomes")) {
 		becomes_ = table.get_string("becomes");
 		needed_experience_ = table.get_int("experience");
 	}
 
 	// Read programs
-	if(table.has_key("programs")) {
+	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
-		for (std::string program_name : items_table.keys()) {
+		for (std::string program_name : items_table.keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -116,12 +117,12 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 	}
 
 	// For carriers
-	if(table.has_key("default_target_quantity")) {
+	if (table.has_key("default_target_quantity")) {
 		default_target_quantity_ = items_table.get_int("default_target_quantity");
 	}
-	if(table.has_key("ware_hotspot")) {
+	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
-		ware_hotspot_(Point(items_table.get_int("1"),items_table.get_int("2")));
+		ware_hotspot_(Point(items_table.get_int("1"), items_table.get_int("2")));
 	}
 }
 

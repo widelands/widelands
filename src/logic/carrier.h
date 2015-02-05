@@ -27,7 +27,7 @@ namespace Widelands {
 
 class CarrierDescr : public WorkerDescr {
 public:
-	CarrierDescr(const LuaTable& table) : WorkerDescr(MapObjectType::CARRIER, table)	{}
+	CarrierDescr(const LuaTable& table) : WorkerDescr(MapObjectType::CARRIER, table) {}
 	~CarrierDescr() override {}
 
 protected:

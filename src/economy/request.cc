@@ -183,10 +183,10 @@ void Request::write
 
 	//  Target and economy should be set. Same is true for callback stuff.
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	if (m_type == wwWARE ) {
+	if (m_type == wwWARE) {
 		assert(game.tribes().ware_exists(m_index));
 		fw.c_string(game.tribes().get_ware_descr(m_index)->name());
-	} else if (m_type == wwWORKER ) {
+	} else if (m_type == wwWORKER) {
 		assert(game.tribes().worker_exists(m_index));
 		fw.c_string(game.tribes().get_worker_descr(m_index)->name());
 	}

@@ -40,10 +40,10 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
 TrainingSiteDescr::TrainingSiteDescr
-	(MapObjectType type, const LuaTable& table, const World&)
+	(MapObjectType type, const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::TRAININGSITE, table, world),
+		(MapObjectType::TRAININGSITE, table, egbase),
 	m_num_soldiers      (table.get_int("soldier_capacity")),
 	m_max_stall         (table.get_int("trainer_patience")),
 
@@ -75,10 +75,10 @@ TrainingSiteDescr::TrainingSiteDescr
 		// For building help - NOCOM(GunChleoc): Extract function
 		if (items_table.has_key("food")) {
 			LuaTable food_table = items_table.get_table("food");
-			for (int key : food_table.keys()) {
+			for (const int key : food_table.keys<int>()) {
 				std::vector<std::string> food_vector;
 				LuaTable food_row = food_table.get_table(key);
-				for (int key2 : food_row.keys()) {
+				for (const int key2 : food_row.keys<int>()) {
 					food_vector.push_back(food_row.get_string(key2));
 				}
 				food_hp_.push_back(food_vector);
@@ -86,7 +86,7 @@ TrainingSiteDescr::TrainingSiteDescr
 		}
 		if (items_table.has_key("weapons")) {
 			LuaTable weapons_table = items_table.get_table("weapons");
-			for (int key : weapons_table.keys()) {
+			for (const int key : weapons_table.keys<int>()) {
 				weapons_hp_.push_back(weapons_table.get_string(key));
 			}
 		}
@@ -99,10 +99,10 @@ TrainingSiteDescr::TrainingSiteDescr
 		// For building help - NOCOM(GunChleoc): Extract function
 		if (items_table.has_key("food")) {
 			LuaTable food_table = items_table.get_table("food");
-			for (int key : food_table.keys()) {
+			for (const int key : food_table.keys<int>()) {
 				std::vector<std::string> food_vector;
 				LuaTable food_row = food_table.get_table(key);
-				for (int key2 : food_row.keys()) {
+				for (const int key2 : food_row.keys<int>()) {
 					food_vector.push_back(food_row.get_string(key2));
 				}
 				food_attack_.push_back(food_vector);
@@ -110,7 +110,7 @@ TrainingSiteDescr::TrainingSiteDescr
 		}
 		if (items_table.has_key("weapons")) {
 			LuaTable weapons_table = items_table.get_table("weapons");
-			for (int key : weapons_table.keys()) {
+			for (const int key : weapons_table.keys<int>()) {
 				weapons_attack_.push_back(weapons_table.get_string(key));
 			}
 		}
@@ -123,10 +123,10 @@ TrainingSiteDescr::TrainingSiteDescr
 		// For building help - NOCOM(GunChleoc): Extract function
 		if (items_table.has_key("food")) {
 			LuaTable food_table = items_table.get_table("food");
-			for (int key : food_table.keys()) {
+			for (const int key : food_table.keys<int>()) {
 				std::vector<std::string> food_vector;
 				LuaTable food_row = food_table.get_table(key);
-				for (int key2 : food_row.keys()) {
+				for (int key2 : food_row.keys<int>()) {
 					food_vector.push_back(food_row.get_string(key2));
 				}
 				food_defense_.push_back(food_vector);
@@ -134,7 +134,7 @@ TrainingSiteDescr::TrainingSiteDescr
 		}
 		if (items_table.has_key("weapons")) {
 			LuaTable weapons_table = items_table.get_table("weapons");
-			for (int key : weapons_table.keys()) {
+			for (const int key : weapons_table.keys<int>()) {
 				weapons_defense_.push_back(weapons_table.get_string(key));
 			}
 		}
@@ -147,10 +147,10 @@ TrainingSiteDescr::TrainingSiteDescr
 		// For building help - NOCOM(GunChleoc): Extract function
 		if (items_table.has_key("food")) {
 			LuaTable food_table = items_table.get_table("food");
-			for (int key : food_table.keys()) {
+			for (const int key : food_table.keys<int>()) {
 				std::vector<std::string> food_vector;
 				LuaTable food_row = food_table.get_table(key);
-				for (int key2 : food_row.keys()) {
+				for (const int key2 : food_row.keys<int>()) {
 					food_vector.push_back(food_row.get_string(key2));
 				}
 				food_evade_.push_back(food_vector);
@@ -158,7 +158,7 @@ TrainingSiteDescr::TrainingSiteDescr
 		}
 		if (items_table.has_key("weapons")) {
 			LuaTable weapons_table = items_table.get_table("weapons");
-			for (int key : weapons_table.keys()) {
+			for (const int key : weapons_table.keys<int>()) {
 				weapons_evade_.push_back(weapons_table.get_string(key));
 			}
 		}
@@ -355,7 +355,7 @@ void TrainingSite::update_soldier_request() {
 			m_soldier_request =
 				new Request
 					(*this,
-					 descr().tribe().soldier(),
+					 owner().tribe().soldier(),
 					 TrainingSite::request_soldier_callback,
 					 wwWORKER);
 

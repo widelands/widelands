@@ -64,8 +64,8 @@ void MapAllowedWorkerTypesPacket::read
 						continue;
 
 					for (const WareIndex& worker_index : tribe.workers()) {
-						const WorkerDescr& worker_descr = egbase().tribes().get_worker_descr(worker_index);
-						player->allow_worker_type(w, s->get_bool(worker_descr.name().c_str(), true));
+						const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
+						player->allow_worker_type(worker_index, s->get_bool(worker_descr->name().c_str(), true));
 					}
 
 				} catch (const WException & e) {
@@ -97,10 +97,11 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
+		// NOCOM(GunChleoc): Do we need all workers for all tribes here?
 		for (const WareIndex& worker_index : tribe.workers()) {
 			if (!player->is_worker_type_allowed(worker_index)) {
-				const WorkerDescr& worker_descr = egbase().tribes().get_worker_descr(worker_index);
-				section.set_bool(worker_descr.name().c_str(), false);
+				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
+				section.set_bool(worker_descr->name().c_str(), false);
 				forbidden_worker_seen = true;
 			}
 		}

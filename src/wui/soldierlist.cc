@@ -112,7 +112,7 @@ m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.descr().tribe(), m_icon_width, m_icon_height);
+	Soldier::calc_info_icon_size(building.owner().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 

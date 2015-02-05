@@ -103,7 +103,7 @@ void MapBuildingdataPacket::read
 							log
 								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",
-								 building.descr().tribe().name().c_str(),
+								 building.owner().tribe().name().c_str(),
 								 building.descr().descname().c_str(),
 								 animation_name);
 							building.m_anim = building.descr().get_animation("idle");
@@ -158,7 +158,7 @@ void MapBuildingdataPacket::read
 						// will be built after other data are loaded, see below.
 						// read_formerbuildings_v2()
 						while (fr.unsigned_8()) {
-							BuildingIndex oldidx = building.descr().tribe().safe_building_index(fr.c_string());
+							BuildingIndex oldidx = building.owner().tribe().safe_building_index(fr.c_string());
 							building.m_old_buildings.push_back(oldidx);
 						}
 						// Only construction sites may have an empty list
@@ -260,10 +260,11 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (const BuildingIndex& building_index : game.tribes().buildings()) {
-			const BuildingDescr& building_descr = game.tribes().get_building_descr(building_index);
-			if (building_descr.enhancement() == former_idx) {
-				b.m_old_buildings.insert(b.m_old_buildings.begin(), building_index);
+		// NOCOM(GunChleoc): Can we do this faster now with enhanced_from()?
+		for (BuildingIndex i = 0; i < game.tribes().nrbuildings(); ++i) {
+			const BuildingDescr* building_descr = game.tribes().get_building_descr(i);
+			if (building_descr->enhancement() == former_idx) {
+				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
 			}
 		}
@@ -280,7 +281,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PARTIALLYFB_PACKET_VERSION) {
-			const TribeDescr & tribe = pfb.descr().tribe();
+			const TribeDescr & tribe = pfb.owner().tribe();
 			pfb.m_building =
 				tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -346,7 +347,7 @@ void MapBuildingdataPacket::read_constructionsite
 		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
-			const TribeDescr & tribe = constructionsite.descr().tribe();
+			const TribeDescr & tribe = constructionsite.owner().tribe();
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
 				  wares_iter != constructionsite.m_wares.end();
@@ -378,7 +379,7 @@ void MapBuildingdataPacket::read_constructionsite_v1
 	 Game                  & game,
 	 MapObjectLoader & mol)
 {
-	const TribeDescr & tribe = constructionsite.descr().tribe();
+	const TribeDescr & tribe = constructionsite.owner().tribe();
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 	if (fr.unsigned_8()) {
@@ -474,7 +475,7 @@ void MapBuildingdataPacket::read_warehouse
 				(nr_tribe_workers, Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
-			const TribeDescr & tribe = warehouse.descr().tribe();
+			const TribeDescr & tribe = warehouse.owner().tribe();
 			while (fr.unsigned_8()) {
 				WareIndex const id = tribe.ware_index(fr.c_string());
 				if (packet_version >= 5) {
@@ -753,7 +754,7 @@ void MapBuildingdataPacket::read_militarysite
 					(new Request
 						(militarysite,
 						 (!militarysite.m_normal_soldier_request) ? 0
-						: militarysite.descr().tribe().soldier(),
+						: militarysite.owner().tribe().soldier(),
 						MilitarySite::request_soldier_callback,
 						wwWORKER));
 				militarysite.m_upgrade_soldier_request->read(fr, game, mol);
@@ -868,7 +869,7 @@ void MapBuildingdataPacket::read_productionsite
 								throw GameDataError
 									("request for %s does not match any free working "
 									 "position",
-									 productionsite.descr().tribe()
+									 productionsite.owner().tribe()
 									 .get_worker_descr(req.get_index())->name().c_str
 									 	());
 							}
@@ -883,7 +884,7 @@ void MapBuildingdataPacket::read_productionsite
 					throw GameDataError(
 					   "site has request for %s, for which there is no working "
 					   "position",
-					   productionsite.descr().tribe().get_worker_descr(req.get_index())->name().c_str());
+						productionsite.owner().tribe().get_worker_descr(req.get_index())->name().c_str());
 
 				wp->worker_request = &req;
 			}
@@ -1150,7 +1151,7 @@ void MapBuildingdataPacket::write
 				fw.unsigned_32(0);
 			}
 			{
-				const TribeDescr& td = building->descr().tribe();
+				const TribeDescr& td = building->owner().tribe();
 				for (BuildingIndex b_idx : building->m_old_buildings) {
 					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.unsigned_8(1);
@@ -1268,7 +1269,7 @@ void MapBuildingdataPacket::write_warehouse
 	fw.unsigned_16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
 	//  supply
-	const TribeDescr & tribe = warehouse.descr().tribe();
+	const TribeDescr & tribe = warehouse.owner().tribe();
 	const WareList & wares = warehouse.m_supply->get_wares();
 	for (WareIndex i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.unsigned_8(1);

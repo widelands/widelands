@@ -63,7 +63,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 void WorkerProgram::parse
 	(WorkerDescr * descr, Parser * parser, char const * const name)
 {
-	if(parser->prof == nullptr) {
+	if (parser->prof == nullptr) {
 		const LuaTable program_table = table.get_table(name);
 
 		for (uint32_t idx = 1;; ++idx) {

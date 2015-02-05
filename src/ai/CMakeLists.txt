@@ -10,9 +10,9 @@ wl_library(ai
     defaultai.h
   DEPENDS
     base_macros
-    economy
     base_log
-    profile
     base_i18n
+    economy
     logic
+    scripting_lua_table
 )

@@ -19,6 +19,8 @@
 
 #include "logic/ware_descr.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -35,17 +37,17 @@ WareDescr::WareDescr(const LuaTable& table) :
 	icon_(g_gr->images().get("pics/but0.png")) {
 
 	LuaTable items_table = table.get_table("default_target_quantity");
-	for (const std::string& key : items_table.keys()) {
+	for (const std::string& key : items_table.keys<std::string>()) {
 		default_target_quantities_.insert(key, items_table.get_int(key));
 	}
 
 	items_table = table.get_table("preciousness");
-	for (const std::string& key : items_table.keys()) {
+	for (const std::string& key : items_table.keys<std::string>()) {
 		preciousnesses_.insert(key, items_table.get_int(key));
 	}
 
 	items_table = table.get_table("helptext");
-	for (const std::string& key : items_table.keys()) {
+	for (const std::string& key : items_table.keys<std::string>()) {
 		helptexts_.insert(key, items_table.get_string(key));
 	}
 
@@ -70,7 +72,7 @@ int WareDescr::default_target_quantity(const std::string& tribename) const {
 	return kInvalidWare;
 }
 
-const std::string& WareDescr::helptext(const std::string tribename) const {
+const std::string& WareDescr::helptext(const std::string& tribename) const {
 	if (helptexts_.count(tribename > 0)) {
 		i18n::Textdomain td("tribes");
 		if (helptexts_.count("default" > 0)) {
@@ -116,11 +118,11 @@ void WareDescr::add_producer(const BuildingIndex& building_index) {
 	producers_.emplace(building_index);
 }
 
-const std::set<BuildingIndex>& WareDescr::consumers() {
+const std::set<BuildingIndex>& WareDescr::consumers() const {
 	return consumers_;
 }
 
-const std::set<BuildingIndex>& WareDescr::producers() {
+const std::set<BuildingIndex>& WareDescr::producers() const {
 	return producers_;
 }
 

@@ -55,12 +55,9 @@ class BobDescr : public MapObjectDescr {
 public:
 	friend struct MapBobdataPacket;
 
-	BobDescr(MapObjectType type,
-	         const std::string& init_name,
-	         const std::string& init_descname,
-				MapObjectDescr::OwnerType owner_type);
-
-	BobDescr(const MapObjectType type, const LuaTable& t);
+	BobDescr(const MapObjectType type,
+				MapObjectDescr::OwnerType owner_type,
+				const LuaTable& table);
 
 	~BobDescr() override {}
 

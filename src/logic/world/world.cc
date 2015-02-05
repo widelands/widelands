@@ -155,8 +155,8 @@ int32_t World::get_nr_bobs() const {
 	return bobs_->get_nitems();
 }
 
-int32_t World::get_immovable_index(char const* const l) const {
-	return immovables_->get_index(l);
+int32_t World::get_immovable_index(const std::string& name) const {
+	return immovables_->get_index(name);
 }
 
 int32_t World::get_nr_immovables() const {

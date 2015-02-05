@@ -53,7 +53,8 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, const LuaTable& table, EditorGameBase& egbase) : BuildingDescr(_type, table)
+	(MapObjectType _type, const LuaTable& table, EditorGameBase& egbase)
+	: BuildingDescr(_type, table, egbase)
 {
 	LuaTable items_table;
 
@@ -70,7 +71,7 @@ ProductionSiteDescr::ProductionSiteDescr
 
 	if (table.has_key("outputs")) {
 		items_table = table.get_table("outputs");
-		for (int item_key : items_table.keys()) {
+		for (int item_key : items_table.keys<int>()) {
 			try {
 				const std::string& output = items_table.get_string(item_key);
 				WareIndex idx = tribes().ware_index(output);
@@ -92,13 +93,13 @@ ProductionSiteDescr::ProductionSiteDescr
 
 	if (table.has_key("inputs")) {
 		items_table = table.get_table("inputs");
-		for (const std::string& ware_name : items_table.keys()) {
+		for (const std::string& ware_name : items_table.keys<std::string>()) {
 			int amount = items_table.get_int(ware_name);
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const idx = tribe().ware_index(ware_name);
+				WareIndex const idx = egbase_.tribes().ware_index(ware_name);
 				if (idx != INVALID_INDEX) {
 					for (const WareAmount& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
@@ -121,13 +122,13 @@ ProductionSiteDescr::ProductionSiteDescr
 	// If not, we might not have a worker
 	if (table.has_key("working_positions")) {
 		items_table = table.get_table("working_positions");
-		for (const std::string& worker_name : items_table.keys()) {
+		for (const std::string& worker_name : items_table.keys<std::string>()) {
 			int amount = items_table.get_int(worker_name);
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const woi = tribe().worker_index(worker_name);
+				WareIndex const woi = egbase_.tribes().worker_index(worker_name);
 				if (woi != INVALID_INDEX) {
 					for (const WareAmount& wp : working_positions()) {
 						if (wp.first == woi) {
@@ -151,7 +152,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	// Get programs
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
-		for (std::string program_name : items_table.keys()) {
+		for (std::string program_name : items_table.keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -273,7 +274,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionSiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			WareIndex need = bld->working_positions()[0].first;
@@ -282,7 +283,7 @@ bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
 					return false; // no one is in this house
 				} else {
 					WareIndex have = working_positions()[i].worker->descr().worker_index();
-					if (descr().tribe().get_worker_descr(have)->can_act_as(need)) {
+					if (owner().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
 				}
@@ -765,7 +766,7 @@ bool ProductionSite::get_building_work
 		{
 			WareIndex const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
-				*descr().tribe().get_ware_descr(ware_type_with_count.first);
+				*owner().tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & ware =
 					*new WareInstance(ware_index, &ware_ware_descr);
@@ -787,7 +788,7 @@ bool ProductionSite::get_building_work
 			*m_recruited_workers.rbegin();
 		{
 			const WorkerDescr & worker_descr =
-				*descr().tribe().get_worker_descr(worker_type_with_count.first);
+				*owner().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
 					dynamic_cast<Worker&>(worker_descr.create_object());
@@ -809,7 +810,7 @@ bool ProductionSite::get_building_work
 	for (WaresQueue * queue : m_input_queues) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *owner().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);

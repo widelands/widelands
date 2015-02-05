@@ -149,7 +149,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	bool to_be_selected = !ware_selected(m_selection_anchor);
 
 	if (m_type == Widelands::wwWORKER) {
-		for (const Widelands::WareIndex& worker_index :  m_wh.owner().tribe().workers()) {
+		for (const Widelands::WareIndex& worker_index : m_tribe.workers()) {
 			if (!m_in_selection[worker_index]) {
 				continue;
 			}
@@ -287,7 +287,7 @@ void WaresDisplay::remove_all_warelists() {
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
 	if (m_type == Widelands::wwWORKER) {
-		for (const Widelands::WareIndex& worker_index :  m_wh.owner().tribe().workers()) {
+		for (const Widelands::WareIndex& worker_index : m_tribe.workers()) {
 			if (m_hidden[worker_index]) continue;
 			draw_ware(dst, worker_index);
 		}
@@ -459,8 +459,9 @@ WaresDisplay::~WaresDisplay()
 
 std::string WaresDisplay::info_for_ware(Widelands::WareIndex ware) {
 	int totalstock = 0;
-	for (Widelands::WareIndex i = 0; i < m_warelists.size(); ++i)
-		totalstock += m_warelists[i]->stock(ware);
+	for (const Widelands::WareList* warelist : m_warelists) {
+		totalstock += warelist->stock(ware);
+	}
 	return boost::lexical_cast<std::string>(totalstock);
 }
 

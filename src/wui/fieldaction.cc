@@ -500,32 +500,32 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 	m_fastclick = false;
 
 	for (const Widelands::BuildingIndex& building_index : tribe.buildings()) {
-		const Widelands::BuildingDescr& building_descr = tribe.egbase().tribes().get_building_descr(building_index);
+		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid * * ppgrid;
 
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game *>(&ibase().egbase())) {
-			if (!building_descr.is_buildable() || !m_plr->is_building_type_allowed(building_index))
+			if (!building_descr->is_buildable() || !m_plr->is_building_type_allowed(building_index))
 				continue;
-		} else if (!building_descr.is_buildable() && !building_descr.is_enhanced())
+		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
-		if (building_descr.get_ismine()) {
+		if (building_descr->get_ismine()) {
 			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
 				continue;
 
 			ppgrid = &bbg_mine;
 		} else {
-			int32_t size = building_descr.get_size() - Widelands::BaseImmovable::SMALL;
+			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
-			if (building_descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
 				continue;
 
-			if (building_descr.get_isport())
+			if (building_descr->get_isport())
 				ppgrid = &bbg_house[3];
 			else
 				ppgrid = &bbg_house[size];

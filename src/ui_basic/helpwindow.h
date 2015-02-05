@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
+#include "logic/tribe.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
@@ -90,6 +91,7 @@ struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
 		(Panel * parent, UI::UniqueWindow::Registry& reg,
 		 const Widelands::BuildingDescr& building_description,
+		 const Widelands::TribeDescr& tribe,
 		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();
