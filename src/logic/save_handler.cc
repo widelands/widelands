@@ -19,6 +19,7 @@
 
 #include "logic/save_handler.h"
 
+#include <cstring>
 #include <memory>
 
 #include <boost/format.hpp>

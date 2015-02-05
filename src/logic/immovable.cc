@@ -20,6 +20,7 @@
 #include "logic/immovable.h"
 
 #include <cstdio>
+#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
