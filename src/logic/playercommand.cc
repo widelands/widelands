@@ -784,6 +784,16 @@ void CmdShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
+		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
+			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
+			log (" %1d:ship on %3dx%3d received scout command but not in "
+				"EXP_WAITING or PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
+			return;
+		}
 		ship->exp_scout_direction(game, dir);
 	}
 }
@@ -841,6 +851,15 @@ void CmdShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
+		if (ship->get_ship_state() != Widelands::Ship::EXP_FOUNDPORTSPACE) {
+			log (" %1d:ship on %3dx%3d received build port command but "
+			"not in PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
+			return;
+		}
 		ship->exp_construct_port(game, coords);
 	}
 }
@@ -891,14 +910,24 @@ CmdShipExploreIsland::CmdShipExploreIsland (StreamRead& des) :
 	PlayerCommand (0, des.unsigned_8())
 {
 	serial = des.unsigned_32();
-	clockwise = des.unsigned_8() == 1;
+	scouting_direction = ScoutingDirection::kClockwise;
 }
 
 void CmdShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		ship->exp_explore_island(game, clockwise);
+		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
+			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
+			log (" %1d:ship on %3dx%3d received explore island command "
+			"but not in EXP_WAITING or PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
+			return;
+		}
+		ship->exp_explore_island(game, scouting_direction);
 	}
 }
 
@@ -907,7 +936,7 @@ void CmdShipExploreIsland::serialize (StreamWrite & ser)
 	ser.unsigned_8 (PLCMD_SHIP_EXPLORE);
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_8 (clockwise ? 1 : 0);
+	ser.unsigned_8 (static_cast<uint8_t>(scouting_direction));
 }
 
 #define PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION 1
@@ -919,7 +948,7 @@ void CmdShipExploreIsland::read
 		if (packet_version == PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-			clockwise = fr.unsigned_8() == 1;
+			scouting_direction = static_cast<ScoutingDirection>(fr.unsigned_8());
 		} else
 			throw GameDataError("unknown/unhandled version %u", packet_version);
 	} catch (const WException & e) {
@@ -938,7 +967,7 @@ void CmdShipExploreIsland::write
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
 	// Direction of exploration
-	fw.unsigned_8 (clockwise ? 1 : 0);
+	fw.unsigned_8(static_cast<uint8_t>(scouting_direction));
 }
 
 

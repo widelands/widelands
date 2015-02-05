@@ -212,7 +212,7 @@ ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
 }
 
-void ProductionSite::load_finish(EditorGameBase & egbase){
+void ProductionSite::load_finish(EditorGameBase & egbase) {
 	Building::load_finish(egbase);
 	calc_statistics();
 }
