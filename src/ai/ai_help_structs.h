@@ -31,9 +31,9 @@
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "logic/ship.h"
 
 namespace Widelands {
 
@@ -410,14 +410,9 @@ struct ShipObserver {
 	Widelands::Coords expedition_start_point_;
 	std::unordered_set<uint32_t> visited_spots_;
 
-	enum ScoutingDirection {
-		CLOCKWISE = true,
-		COUNTERCLOCKWISE = false
-	};
-
 	// a ship circumvents all islands in the same direction, the value
 	// is assigned only once
-	bool island_circ_direction = CLOCKWISE;
+	Widelands::ScoutingDirection island_circ_direction = Widelands::ScoutingDirection::kClockwise;
 	bool waiting_for_command_ = false;
 	int32_t last_command_time = 0;
 };

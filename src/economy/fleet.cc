@@ -164,7 +164,7 @@ void Fleet::find_other_fleet(EditorGameBase & egbase)
 				if (upcast(PortDock, dock, imm)) {
 					// here might be a problem so I (tiborb) put here
 					// this test, might be removed after some time
-					if (dock->get_fleet() == nullptr){
+					if (dock->get_fleet() == nullptr) {
 						log ("The dock on %3dx%3d withouth a fleet!\n",
 						dock->m_dockpoints.front().x,
 						dock->m_dockpoints.front().y);

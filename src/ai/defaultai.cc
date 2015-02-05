@@ -522,7 +522,7 @@ void DefaultAI::late_initialization() {
 			FCoords f = map.get_fcoords(Coords(x, y));
 			//there are too many bobs on the map so we investigate
 			//only bobs on water
-			if (f.field->nodecaps() & MOVECAPS_SWIM){
+			if (f.field->nodecaps() & MOVECAPS_SWIM) {
 				for (Bob * bob = f.field->get_first_bob();
 					bob;
 					bob = bob->get_next_on_field()) {
@@ -3498,9 +3498,9 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	allships.push_back(ShipObserver());
 	allships.back().ship = &ship;
 	if (game().get_gametime() % 2 == 0) {
-	   allships.back().island_circ_direction = ShipObserver::CLOCKWISE;
+		allships.back().island_circ_direction = ScoutingDirection::kClockwise;
 	} else {
-	   allships.back().island_circ_direction = ShipObserver::COUNTERCLOCKWISE;
+		allships.back().island_circ_direction = ScoutingDirection::kCounterClockwise;
 	}
 }
 

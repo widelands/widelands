@@ -888,11 +888,11 @@ void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship & ship, bool cw)
+void Game::send_player_ship_explore_island(Ship & ship, ScoutingDirection direction)
 {
 	send_player_command
 		(*new CmdShipExploreIsland
-			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_sink_ship(Ship & ship) {

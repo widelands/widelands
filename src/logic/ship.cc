@@ -580,7 +580,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// for
 				// a swimable field begins at the neighbour field of the direction we came from.
 				m_expedition->direction = get_backward_dir(m_expedition->direction);
-				if (m_expedition->clockwise) {
+				if (m_expedition->scouting_direction == ScoutingDirection::kClockwise) {
 					do {
 						m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
 					} while (!exp_dir_swimable(m_expedition->direction));
@@ -793,7 +793,7 @@ void Ship::start_task_expedition(Game& game) {
 	m_expedition->island_exploration = false;
 	m_expedition->direction = 0;
 	m_expedition->exploration_start = Coords(0, 0);
-	m_expedition->clockwise = false;
+	m_expedition->scouting_direction = ScoutingDirection::kClockwise;
 	m_expedition->economy.reset(new Economy(*get_owner()));
 
 	// We are no longer in any other economy, but instead are an economy of our
@@ -840,12 +840,12 @@ void Ship::exp_construct_port(Game&, const Coords& c) {
 	m_ship_state = EXP_COLONIZING;
 }
 
-/// Initializes / changes the direction the island exploration in @arg clockwise direction
+/// Initializes / changes the direction the island exploration in @arg scouting_direction direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game&, bool clockwise) {
+void Ship::exp_explore_island(Game&, ScoutingDirection scouting_direction) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
-	m_expedition->clockwise = clockwise;
+	m_expedition->scouting_direction = scouting_direction;
 	m_expedition->direction = 0;
 	m_expedition->island_exploration = true;
 }
@@ -999,7 +999,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t version) {
 				// Start coordinates of an island exploration
 				m_expedition->exploration_start = read_coords_32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->clockwise = fr.unsigned_8() == 1;
+				m_expedition->scouting_direction = static_cast<ScoutingDirection>(fr.unsigned_8());
 			}
 		} else
 			m_ship_state = TRANSPORT;
@@ -1118,7 +1118,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		// Start coordinates of an island exploration
 		write_coords_32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
-		fw.unsigned_8(m_expedition->clockwise ? 1 : 0);
+		fw.unsigned_8(static_cast<uint8_t>(m_expedition->scouting_direction));
 	}
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
