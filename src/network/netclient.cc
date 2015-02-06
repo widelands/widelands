@@ -125,13 +125,7 @@ NetClient::NetClient
 	file = nullptr;
 
 	// Get the default win condition script
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> win_conditions(lua.run_script("scripting/win_conditions/init.lua"));
-	std::string filename = win_conditions->get_string(1);
-	if (!g_fs->file_exists(filename)) {
-		throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
-	}
-	d->settings.win_condition_script = filename;
+	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
 }
 
 NetClient::~NetClient ()

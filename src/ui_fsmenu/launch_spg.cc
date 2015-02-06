@@ -127,18 +127,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::start_clicked, boost::ref(*this)));
 
-
 	m_lua = new LuaInterface();
-	std::unique_ptr<LuaTable> win_conditions(m_lua->run_script("scripting/win_conditions/init.lua"));
-	for (const int key : win_conditions->keys<int>()) {
-		std::string filename = win_conditions->get_string(key);
-		if (g_fs->file_exists(filename)) {
-			m_win_condition_scripts.push_back(filename);
-		} else {
-			throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
-		}
-	}
-
+	m_win_condition_scripts = m_settings->settings().win_condition_scripts;
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
