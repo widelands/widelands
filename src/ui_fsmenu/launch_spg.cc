@@ -25,6 +25,7 @@
 
 #include "base/i18n.h"
 #include "base/warning.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
@@ -126,15 +127,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::start_clicked, boost::ref(*this)));
 
-
 	m_lua = new LuaInterface();
-	std::set<std::string> win_conditions =
-	   filter(g_fs->list_directory("scripting/win_conditions"),
-	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-
-	m_win_condition_scripts.insert(
-	   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
-
+	m_win_condition_scripts = m_settings->settings().win_condition_scripts;
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
