@@ -52,93 +52,122 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 400, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 400, _("Save Map")),
+
+	  // Values for alignment and size
+	  padding_(5),
+	  butw_(get_inner_w() / 4 - 1.5 * padding_),
+	  buth_(20),
+	  details_box_x_(get_inner_w() / 2 + padding_),
+	  details_box_y_(2 * padding_),
+	  details_box_w_(get_inner_w() / 2 - 2 * padding_),
+	  details_box_h_(get_inner_h() - 2 * details_box_y_ - 2 * buth_ - 4 * padding_),
+	  details_label_w_(details_box_w_ / 2 - padding_),
+
+	  details_box_(this, details_box_x_, details_box_y_, UI::Box::Vertical,
+			 details_box_w_, details_box_h_, padding_ / 2),
+
+	  name_box_(&details_box_, 0, 0, UI::Box::Horizontal,
+			 details_box_w_, 2 * buth_ + padding_, padding_ / 2),
+	  name_label_(&details_box_, 0, 0, details_label_w_, buth_, _("Name:")),
+	  name_(&name_box_, 0, 0, details_box_w_ - padding_, 2 * buth_, "---"),
+
+	  author_box_(&details_box_, 0, 0, UI::Box::Horizontal,
+			 details_box_w_, buth_ + padding_, padding_ / 2),
+	  author_label_(&details_box_, 0, 0, details_label_w_, buth_, _("Authors:")),
+	  author_(&author_box_, 0, 0, details_box_w_ - padding_, buth_, "---"),
+
+	  size_box_(&details_box_, 0, 0, UI::Box::Horizontal,
+			 details_box_w_, buth_ + padding_, padding_ / 2),
+	  size_label_(&size_box_, 0, 0, details_label_w_, buth_, _("Size:")),
+	  size_(&size_box_, 0, 0, details_box_w_ - details_label_w_ - padding_, buth_, "---"),
+
+	  nrplayers_box_(&details_box_, 0, 0, UI::Box::Horizontal,
+			 details_box_w_, buth_ + padding_, padding_ / 2),
+	  nrplayers_label_(&nrplayers_box_, 0, 0, details_label_w_, buth_, _("Players:")),
+	  nrplayers_(&nrplayers_box_, 0, 0, details_box_w_ - details_label_w_ - padding_, buth_, "---"),
+
+	  descr_box_(&details_box_, 0, 0, UI::Box::Horizontal,
+			 details_box_w_, buth_ + padding_, padding_ / 2),
+	  descr_label_(&details_box_, 0, 0, details_box_w_, buth_, _("Descr:")),
+	  descr_(&descr_box_, padding_, 0, details_box_w_ + padding_, 5 * buth_, "---"),
+
+	  list_box_(this, padding_, details_box_y_, UI::Box::Vertical,
+			 details_box_w_, details_box_h_, padding_ / 2),
+
+	  editbox_label_(this, padding_, details_box_y_ + details_box_h_ + 3 * padding_,
+						  details_box_w_, buth_, _("Filename:"), UI::Align::Align_Right)
 {
-	int32_t const spacing =  5;
-	int32_t const offsx   = spacing;
-	int32_t const offsy   = 10;
-	int32_t posx          = offsx;
-	int32_t posy          = offsy;
-	int32_t const descr_label_w = 100;
+	list_ = new UI::Listselect<const char*>(&list_box_, 0, 0, details_box_w_, details_box_h_);
+	editbox_ = new UI::EditBox(this, details_box_x_, details_box_y_ + details_box_h_ + 3 * padding_,
+										details_box_w_, buth_,
+										g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
 
-	m_ls =
-		new UI::Listselect<const char *>
-			(this,
-			 posx, posy,
-			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
-	m_ls->focus();
-	m_editbox =
-		new UI::EditBox
-			(this,
-			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
-			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
-	m_editbox->set_text(parent.egbase().map().get_name());
-	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
+	details_box_.add(&name_label_, UI::Box::AlignLeft);
+	name_box_.add_space(2 * padding_);
+	name_box_.add(&name_, UI::Box::AlignLeft);
+	details_box_.add(&name_box_, UI::Box::AlignLeft);
+	details_box_.add_space(padding_);
 
-	posx = get_inner_w() / 2 + spacing;
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
-	m_name =
-		new UI::MultilineTextarea
-			(this, posx + descr_label_w, posy, 200, 60, "---", UI::Align_CenterLeft);
-	posy += 60 + spacing;
+	details_box_.add(&author_label_, UI::Box::AlignLeft);
+	author_box_.add_space(2 * padding_);
+	author_box_.add(&author_, UI::Box::AlignLeft);
+	details_box_.add(&author_box_, UI::Box::AlignLeft);
+	details_box_.add_space(padding_);
 
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Authors:"), UI::Align_CenterLeft);
-	m_author =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+	size_box_.add(&size_label_, UI::Box::AlignLeft);
+	size_box_.add(&size_, UI::Box::AlignLeft);
+	details_box_.add(&size_box_, UI::Box::AlignLeft);
+	details_box_.add_space(padding_);
 
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Size:"), UI::Align_CenterLeft);
-	m_size =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+	nrplayers_box_.add(&nrplayers_label_, UI::Box::AlignLeft);
+	nrplayers_box_.add(&nrplayers_, UI::Box::AlignLeft);
+	details_box_.add(&nrplayers_box_, UI::Box::AlignLeft);
+	details_box_.add_space(padding_);
 
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Players:"), UI::Align_CenterLeft);
-	m_nrplayers =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+	details_box_.add(&descr_label_, UI::Box::AlignLeft);
+	descr_box_.add_space(2 * padding_);
+	descr_box_.add(&descr_, UI::Box::AlignLeft);
+	details_box_.add(&descr_box_, UI::Box::AlignLeft);
+	details_box_.add_space(padding_);
 
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Descr: "), UI::Align_CenterLeft);
-	m_descr =
-		new UI::MultilineTextarea
-			(this,
-			 posx + descr_label_w, posy,
-			 get_inner_w() - posx - spacing - descr_label_w,
-			 get_inner_h() - posy - spacing - 40,
-			 "---", UI::Align_CenterLeft);
+	details_box_.set_size(details_box_w_, get_h() - details_box_.get_y());
+	descr_box_.set_size(details_box_.get_inner_w(),
+							  details_box_h_ - descr_label_.get_h() - descr_label_.get_y());
+	descr_.set_size(descr_box_.get_inner_w() - 3 * padding_, descr_box_.get_inner_h());
 
 
-	posy = get_inner_h() - 30;
+
+	list_box_.add(list_, UI::Box::AlignLeft);
+	list_box_.set_size(details_box_w_, get_h() - list_box_.get_y());
+
+	list_->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
+	list_->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
+	list_->focus();
+
+	editbox_->set_text(parent.egbase().map().get_name());
+	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
-		 posx, posy,
-		 get_inner_w() / 4 - 1.5 * spacing, 20,
+		 details_box_x_, get_inner_h() - padding_ - buth_,
+		 butw_, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 posx + get_inner_w() / 4 - spacing / 2, posy,
-		 get_inner_w() / 4 - 1.5 * spacing, 20,
+		 get_inner_w() - butw_- padding_, get_inner_h() - padding_ - buth_,
+		 butw_, buth_,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
-		 spacing, posy, 185, 20,
+		 padding_, get_inner_h() - padding_ - buth_,
+		 185, buth_,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
@@ -160,10 +189,10 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
  */
 void MainMenuSaveMap::clicked_ok() {
 	assert(m_ok_btn->enabled());
-	std::string filename = m_editbox->text();
+	std::string filename = editbox_->text();
 
 	if (filename == "") //  Maybe a directory is selected.
-		filename = m_ls->get_selected();
+		filename = list_->get_selected();
 
 	if
 		(g_fs->is_directory(filename.c_str())
@@ -171,7 +200,7 @@ void MainMenuSaveMap::clicked_ok() {
 		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
 		m_curdir = g_fs->canonicalize_name(filename);
-		m_ls->clear();
+		list_->clear();
 		m_mapfiles.clear();
 		fill_list();
 	} else { //  Ok, save this map
@@ -202,7 +231,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		fullname            += "/";
 		fullname            += md.get_dirname();
 		g_fs->make_directory(fullname);
-		m_ls->clear();
+		list_->clear();
 		m_mapfiles.clear();
 		fill_list();
 	}
@@ -212,7 +241,7 @@ void MainMenuSaveMap::clicked_make_directory() {
  * called when an item was selected
  */
 void MainMenuSaveMap::clicked_item(uint32_t) {
-	const char * const name = m_ls->get_selected();
+	const char * const name = list_->get_selected();
 
 	if (Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
@@ -222,39 +251,39 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 			ml->preload_map(true); // This has worked before, no problem
 		}
 
-		m_editbox->set_text(FileSystem::fs_filename(name));
+		editbox_->set_text(FileSystem::fs_filename(name));
 
 		{
 			i18n::Textdomain td("maps");
 			const std::string& localized_name = _(map.get_name());
 			if (localized_name == map.get_name()) {
-				m_name->set_text(map.get_name());
+				name_.set_text(map.get_name());
 			} else {
-				m_name->set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
+				name_.set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
 			}
 		}
-		m_name  ->set_tooltip(map.get_name    ());
-		m_author->set_text(map.get_author     ());
-		m_descr ->set_text(map.get_description());
+		name_.set_tooltip(map.get_name());
+		author_.set_text(map.get_author());
+		descr_.set_text(map.get_description());
 
-		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
+		nrplayers_.set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		m_size->set_text((boost::format(_("%1$ix%2$i"))
-								% map.get_width() % map.get_height()).str());
+		size_.set_text((boost::format(_("%1$ix%2$i"))
+							 % map.get_width() % map.get_height()).str());
 	} else {
-		m_name     ->set_text(FileSystem::fs_filename(name));
-		m_name     ->set_tooltip("");
-		m_author   ->set_text("");
-		m_nrplayers->set_text("");
-		m_size     ->set_text("");
+		name_.set_text(FileSystem::fs_filename(name));
+		name_.set_tooltip("");
+		author_.set_text("");
+		nrplayers_.set_text("");
+		size_.set_text("");
 		if (g_fs->is_directory(name)) {
-			m_name->set_tooltip((boost::format(_("Directory: %s"))
-										% FileSystem::fs_filename(name)).str());
-			m_descr->set_text((boost::format("\\<%s\\>") % _("directory")).str());
+			name_.set_tooltip((boost::format(_("Directory: %s"))
+									 % FileSystem::fs_filename(name)).str());
+			descr_.set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
 			const std::string not_map_string = _("Not a map file");
-			m_name->set_tooltip(not_map_string);
-			m_descr->set_text((boost::format("\\<%s\\>") % not_map_string).str());
+			name_.set_tooltip(not_map_string);
+			descr_.set_text((boost::format("\\<%s\\>") % not_map_string).str());
 		}
 
 	}
@@ -265,11 +294,11 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
  * An Item has been doubleclicked
  */
 void MainMenuSaveMap::double_clicked_item(uint32_t) {
-	const char * const name = m_ls->get_selected();
+	const char * const name = list_->get_selected();
 
 	if (g_fs->is_directory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		m_curdir = name;
-		m_ls->clear();
+		list_->clear();
 		m_mapfiles.clear();
 		fill_list();
 	} else
@@ -291,7 +320,7 @@ void MainMenuSaveMap::fill_list() {
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 
-		m_ls->add
+		list_->add
 				/** TRANSLATORS: Parent directory */
 				((boost::format("\\<%s\\>") % _("parent")).str(),
 				 m_parentdir.c_str(),
@@ -311,7 +340,7 @@ void MainMenuSaveMap::fill_list() {
 			 g_fs->is_directory(name)                       &&
 			 !Widelands::WidelandsMapLoader::is_widelands_map(name))
 
-		m_ls->add
+		list_->add
 			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
@@ -331,22 +360,22 @@ void MainMenuSaveMap::fill_list() {
 		if (upcast(Widelands::WidelandsMapLoader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
-				m_ls->add
+				list_->add
 					((boost::format("%s (%s)") % FileSystem::fs_filename(name) % map.get_name()).str(),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
-	if (m_ls->size())
-		m_ls->select(0);
+	if (list_->size())
+		list_->select(0);
 }
 
 /**
  * The editbox was changed. Enable ok button
  */
 void MainMenuSaveMap::edit_box_changed() {
-	m_ok_btn->set_enabled(m_editbox->text().size());
+	m_ok_btn->set_enabled(!editbox_->text().empty());
 }
 
 /**

@@ -21,6 +21,9 @@
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "io/filesystem/filesystem.h"
+#include "ui_basic/box.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 struct EditorInteractive;
@@ -28,8 +31,6 @@ namespace UI {
 struct Button;
 struct EditBox;
 template <typename T> struct Listselect;
-struct MultilineTextarea;
-struct Textarea;
 }
 
 /**
@@ -49,11 +50,37 @@ private:
 	void fill_list();
 	bool save_map(std::string, bool);
 
-	UI::EditBox * m_editbox;
-	UI::MultilineTextarea * m_name;
-	UI::Textarea * m_author, * m_size, * m_nrplayers;
-	UI::MultilineTextarea * m_descr;
-	UI::Listselect<const char *> * m_ls;
+	const int padding_;
+	const int butw_, buth_;
+	const int details_box_x_, details_box_y_;
+	const int details_box_w_, details_box_h_;
+	const int details_label_w_;
+
+	UI::Box details_box_;
+	UI::Box name_box_;
+	UI::Textarea name_label_;
+	UI::MultilineTextarea name_;
+
+	UI::Box author_box_;
+	UI::Textarea author_label_, author_;
+
+	UI::Box size_box_;
+	UI::Textarea size_label_, size_;
+
+	UI::Box nrplayers_box_;
+	UI::Textarea nrplayers_label_, nrplayers_;
+
+	UI::Box descr_box_;
+	UI::Textarea descr_label_;
+	UI::MultilineTextarea descr_;
+
+	UI::Box list_box_;
+	UI::Listselect<const char*>* list_;
+
+	UI::Textarea editbox_label_;
+	UI::EditBox* editbox_;
+
+
 	UI::Button * m_ok_btn;
 
 	std::string   m_basedir;
