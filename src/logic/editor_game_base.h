@@ -215,7 +215,7 @@ public:
 	// Returns the world that can be modified. Prefer world() whenever possible.
 	World* mutable_world();
 
-	// Returns the tribe.
+	// Returns the tribes.
 	const Tribes& tribes() const;
 
 	// Returns the mutable tribe. Prefer tribes() whenever possible.
