@@ -52,7 +52,7 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 330, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 400, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -83,8 +83,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::MultilineTextarea
-			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
-	posy += 40 + spacing;
+			(this, posx + descr_label_w, posy, 200, 60, "---", UI::Align_CenterLeft);
+	posy += 60 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, descr_label_w, 20, _("Authors:"), UI::Align_CenterLeft);
@@ -179,14 +179,8 @@ void MainMenuSaveMap::clicked_ok() {
 		if (map.get_name() != _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
-				((4 <= filename_size
-				  && filename[filename_size - 1] == 'f'
-				  && filename[filename_size - 2] == 'm'
-				  && filename[filename_size - 3] == 'w'
-				  && filename[filename_size - 4] == '.'
-				  ?
-				  filename.substr(0, filename_size - 4) : filename)
-				 .c_str());
+				(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
+				  filename.substr(0, filename_size - 4) : filename);
 		}
 		if
 			(save_map
@@ -230,7 +224,15 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 
 		m_editbox->set_text(FileSystem::fs_filename(name));
 
-		m_name  ->set_text(map.get_name       ());
+		{
+			i18n::Textdomain td("maps");
+			const std::string& localized_name = _(map.get_name());
+			if (localized_name == map.get_name()) {
+				m_name->set_text(map.get_name());
+			} else {
+				m_name->set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
+			}
+		}
 		m_name  ->set_tooltip(map.get_name    ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
@@ -330,7 +332,7 @@ void MainMenuSaveMap::fill_list() {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::filename_without_ext(name),
+					((boost::format("%s (%s)") % FileSystem::fs_filename(name) % map.get_name()).str(),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries

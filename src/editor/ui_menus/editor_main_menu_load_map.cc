@@ -50,7 +50,7 @@ using Widelands::WidelandsMapLoader;
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
-	: UI::Window(&parent, "load_map_menu", 0, 0, 560, 300, _("Load Map"))
+	: UI::Window(&parent, "load_map_menu", 0, 0, 560, 400, _("Load Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -72,8 +72,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::MultilineTextarea
-			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
-	posy += 40 + spacing;
+			(this, posx + descr_label_w, posy, 200, 60, "---", UI::Align_CenterLeft);
+	posy += 60 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, 150, 20, _("Authors:"), UI::Align_CenterLeft);
@@ -166,14 +166,20 @@ void MainMenuLoadMap::selected(uint32_t) {
 			map_loader->preload_map(true); //  This has worked before, no problem.
 		}
 
-		// Translate the map data
-		i18n::Textdomain td("maps");
-		m_name  ->set_text(map.get_name());
+		{
+			i18n::Textdomain td("maps");
+			const std::string& localized_name = _(map.get_name());
+			if (localized_name == map.get_name()) {
+				m_name->set_text(map.get_name());
+			} else {
+				m_name->set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
+			}
+		}
 		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
-			(_(map.get_description()) +
-			 (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
+			(map.get_description() +
+			 (map.get_hint().empty() ? "" : (std::string("\n\n") + (map.get_hint()))));
 
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
@@ -228,12 +234,13 @@ void MainMenuLoadMap::fill_list() {
 			(strcmp(FileSystem::fs_filename(name), ".")    &&
 			 strcmp(FileSystem::fs_filename(name), "..")   &&
 			 g_fs->is_directory(name)                       &&
-			 !WidelandsMapLoader::is_widelands_map(name))
+			 !WidelandsMapLoader::is_widelands_map(name)) {
 
 		m_ls->add
 			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
+		}
 	}
 
 	Widelands::Map map;
@@ -249,7 +256,7 @@ void MainMenuLoadMap::fill_list() {
 			try {
 				map_loader->preload_map(true);
 				m_ls->add
-					(FileSystem::filename_without_ext(name),
+					((boost::format("%s (%s)") % FileSystem::fs_filename(name) % map.get_name()).str(),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())
