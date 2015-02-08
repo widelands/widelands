@@ -44,8 +44,8 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
@@ -124,12 +124,8 @@ NetClient::NetClient
 	d->desiredspeed = 1000;
 	file = nullptr;
 
-	// Temporarily register win condition scripts to get the default
-	std::set<std::string> win_condition_scripts =
-		filter(g_fs->list_directory("scripting/win_conditions"),
-	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-	assert(win_condition_scripts.size());
-	d->settings.win_condition_script = *win_condition_scripts.begin();
+	// Get the default win condition script
+	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
 }
 
 NetClient::~NetClient ()

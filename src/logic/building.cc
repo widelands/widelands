@@ -20,6 +20,7 @@
 #include "logic/building.h"
 
 #include <cstdio>
+#include <cstring>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>

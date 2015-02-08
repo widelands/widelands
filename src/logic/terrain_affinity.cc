@@ -23,6 +23,7 @@
 
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world/terrain_description.h"

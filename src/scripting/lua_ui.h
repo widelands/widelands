@@ -20,8 +20,8 @@
 #ifndef WL_SCRIPTING_LUA_UI_H
 #define WL_SCRIPTING_LUA_UI_H
 
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"

@@ -23,13 +23,13 @@
 #include <memory>
 #include <set>
 #include <string>
+#include <vector>
 
 #include <boost/lexical_cast.hpp>
 
-#include "scripting/c_utils.h"
+#include "scripting/lua.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_errors.h"
-#include "third_party/eris/lua.hpp"
 
 class LuaTableKeyError : public LuaError {
 public:

@@ -20,11 +20,15 @@
 #ifndef WL_LOGIC_GAME_SETTINGS_H
 #define WL_LOGIC_GAME_SETTINGS_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/tribe_basic_info.h"
 #include "logic/widelands.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 enum class PlayerEndResult : uint8_t;
@@ -82,7 +86,18 @@ struct GameSettings {
 		scenario(false),
 		multiplayer(false),
 		savegame(false)
-	{}
+	{
+		std::unique_ptr<LuaTable> win_conditions(
+					(new LuaInterface)->run_script("scripting/win_conditions/init.lua"));
+		for (const int key : win_conditions->keys<int>()) {
+			std::string filename = win_conditions->get_string(key);
+			if (g_fs->file_exists(filename)) {
+				win_condition_scripts.push_back(filename);
+			} else {
+				throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
+			}
+		}
+	}
 
 	/// Number of player position
 	int16_t playernum;
@@ -95,6 +110,8 @@ struct GameSettings {
 
 	/// Lua file defining the win condition to use.
 	std::string win_condition_script;
+	/// An ordered list of all win condition script files.
+	std::vector<std::string> win_condition_scripts;
 
 	/// Is map a scenario
 	bool scenario;

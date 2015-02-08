@@ -21,6 +21,7 @@ wl_library(graphic_text
   DEPENDS
     base_exceptions
     base_geometry
+    base_i18n
     base_log
     base_macros
     graphic_color
@@ -30,5 +31,6 @@ wl_library(graphic_text
     graphic_surface
     io_fileread
     io_filesystem
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
 )

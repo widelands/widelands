@@ -21,12 +21,9 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "scripting/c_utils.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
-#include "scripting/luna.h"
-#include "scripting/persistence.h"
 
 namespace {
 

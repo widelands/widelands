@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "third_party/eris/lua.hpp"
+#include "scripting/lua.h"
 
 class FileRead;
 class FileWrite;

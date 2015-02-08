@@ -27,6 +27,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
@@ -38,8 +39,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/save_handler.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 
