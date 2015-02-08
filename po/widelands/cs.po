@@ -1132,6 +1132,7 @@ msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Pracovník chybí"
 msgstr[1] "Pracovníci chybí"
+msgstr[2] ""
 
 #: ../../src/logic/productionsite.cc:238
 msgid "(stopped)"
