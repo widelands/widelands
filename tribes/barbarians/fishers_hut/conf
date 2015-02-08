@@ -26,6 +26,14 @@ worker=fish
 title=_Out of Fish
 message=_The fisher working out of this fisher’s hut can’t find any fish in his working radius.
 
+[build]
+pics=build_??.png  # ???
+hotspot=39 52
+
+[unoccupied]
+pics=unoccupied_??.png  # ???
+hotspot=39 52
+
 [idle]
-pics=fishers_hut_i_??.png  # ???
-hotspot=39 40
+pics=idle_??.png  # ???
+hotspot=39 52
