@@ -17,8 +17,8 @@ workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builde
 
 # Image file paths for this tribe's road textures
 [roads]
-busy=tribes/barbarians/pics/roadt_busy.png
-normal=tribes/barbarians/pics/roadt_normal.png
+busy_00=tribes/barbarians/pics/roadt_busy.png
+normal_00=tribes/barbarians/pics/roadt_normal.png
 
 [frontier]
 pics=pics/frontier_??.png

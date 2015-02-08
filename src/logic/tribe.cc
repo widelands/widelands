@@ -32,8 +32,8 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
-#include "io/filesystem/filesystem.h"
 #include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
@@ -236,15 +236,32 @@ TribeDescr::TribeDescr
 				PARSE_ORDER_INFORMATION(ware);
 				PARSE_ORDER_INFORMATION(worker);
 			}
-			Section road_s = root_conf.get_safe_section("roads"); {
-				m_road_filenames.emplace(Widelands::RoadTextureType::kBusy, road_s.get_safe_string("busy"));
-				m_road_filenames.emplace(Widelands::RoadTextureType::kNormal, road_s.get_safe_string("normal"));
-				for (std::pair<Widelands::RoadTextureType, std::string> road : m_road_filenames) {
-					if (!g_fs->file_exists(road.second)) {
-						throw new GameDataError("File %s for roadtype %d in tribe %s does not exist",
-														road.second.c_str(), road.first, m_name.c_str());
+
+			{
+				Section road_s = root_conf.get_safe_section("roads");
+				const auto load_roads = [&road_s, this](
+				   const std::string& prefix, std::vector<std::string>* images) {
+					for (int i = 0; i < 99; ++i) {
+						const char* img =
+						   road_s.get_string((boost::format("%s_%02i") % prefix % i).str().c_str(), nullptr);
+						if (img == nullptr) {
+							break;
+						}
+						if (!g_fs->file_exists(img)) {
+							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
+							                        img,
+							                        prefix.c_str(),
+							                        m_name.c_str());
+						}
+						images->emplace_back(img);
 					}
-				}
+					if (images->empty()) {
+						throw new GameDataError(
+						   "No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
+					}
+				};
+				load_roads("normal", &m_normal_road_filenames);
+				load_roads("busy", &m_busy_road_filenames);
 			}
 
 			m_frontier_animation_id =
@@ -304,6 +321,13 @@ void TribeDescr::load_graphics()
 		m_buildings.get(i)->load_graphics();
 }
 
+const std::vector<std::string>& TribeDescr::normal_road_filenames() const {
+	return m_normal_road_filenames;
+}
+
+const std::vector<std::string>& TribeDescr::busy_road_filenames() const {
+	return m_busy_road_filenames;
+}
 
 /*
  * does this tribe exist?

@@ -64,7 +64,11 @@ struct TribeDescr {
 
 
 	const std::string& name() const {return m_name;}
-	const std::string& road_filename(Widelands::RoadTextureType roadtype) const {return m_road_filenames.at(roadtype);}
+
+	// A vector of all texture images that can be used for drawing a
+	// (normal|busy) road. The images are guaranteed to exist.
+	const std::vector<std::string>& normal_road_filenames() const;
+	const std::vector<std::string>& busy_road_filenames() const;
 
 	WareIndex get_nrworkers() const {return m_workers.get_nitems();}
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
@@ -177,7 +181,8 @@ struct TribeDescr {
 private:
 	const std::string m_name;
 
-	std::map<Widelands::RoadTextureType, std::string> m_road_filenames; // Key, filename for road texture
+	std::vector<std::string> m_normal_road_filenames;
+	std::vector<std::string> m_busy_road_filenames;
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;

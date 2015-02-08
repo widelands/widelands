@@ -213,8 +213,9 @@ void GameRenderer::draw(RenderTarget& dst,
 			if (owner_number > 0) {
 				const Player& owner = egbase.player(owner_number);
 				// NOCOM(GunChleoc): We want a texture atlas instead
-				f.busy_road_filename = owner.tribe().road_filename(Widelands::RoadTextureType::kBusy);
-				f.normal_road_filename = owner.tribe().road_filename(Widelands::RoadTextureType::kNormal);
+				// NOCOM(#sirver): and use all of the pictures.
+				f.busy_road_filename = owner.tribe().busy_road_filenames().at(0);
+				f.normal_road_filename = owner.tribe().normal_road_filenames().at(0);
 			}
 
 			f.roads = field_roads(fcoords, map, player);
