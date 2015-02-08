@@ -42,7 +42,7 @@ struct PlayerImmovable;
 class Soldier;
 class TrainingSite;
 struct Flag;
-struct TribeDescr;
+class TribeDescr;
 struct Road;
 struct AttackController;
 

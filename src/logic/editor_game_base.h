@@ -26,6 +26,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "graphic/texture.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
@@ -49,7 +50,7 @@ class Map;
 struct ObjectManager;
 class Player;
 struct PlayerImmovable;
-struct TribeDescr;
+class TribeDescr;
 struct Flag;
 struct AttackController;
 
@@ -262,9 +263,10 @@ private:
 	uint32_t lasttrackserial_;
 	std::map<uint32_t, void*> trackpointers_;
 
+	std::unique_ptr<Texture> road_texture_;
 
-		DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
-	};
+	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
+};
 
 #define iterate_players_existing(p, nr_players, egbase, player)                                    \
 	iterate_player_numbers(                                                                         \

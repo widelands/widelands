@@ -32,6 +32,9 @@
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
+#include "graphic/texture_atlas.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/constants.h"
@@ -282,7 +285,34 @@ void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 		tribe_descr->load_graphics();
 	}
 
-	// TODO(unknown): load player graphics? (maybe)
+	// Construct and hold on to the texture atlas that contains all road images.
+	TextureAtlas ta;
+
+	// These will be deleted at the end of the method.
+	std::vector<std::unique_ptr<Texture>> individual_textures_;
+	for (auto* tribe : tribes_) {
+		for (const std::string& texture_path : tribe->normal_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+		for (const std::string& texture_path : tribe->busy_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+	}
+
+	std::vector<std::unique_ptr<Texture>> textures;
+	road_texture_ = ta.pack(&textures);
+
+	size_t next_texture_to_move = 0;
+	for (auto* tribe : tribes_) {
+		for (size_t i = 0; i < tribe->normal_road_paths().size(); ++i) {
+			tribe->add_normal_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+		for (size_t i = 0; i < tribe->busy_road_paths().size(); ++i) {
+			tribe->add_busy_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+	}
 }
 
 /**

@@ -18,7 +18,9 @@ workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjac
 # Image file paths for this tribe's road textures
 [roads]
 busy_00=tribes/empire/pics/roadt_busy.png
-normal_00=tribes/empire/pics/roadt_normal.png
+normal_00=tribes/empire/pics/roadt_normal_00.png
+normal_01=tribes/empire/pics/roadt_normal_01.png
+normal_02=tribes/empire/pics/roadt_normal_02.png
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]

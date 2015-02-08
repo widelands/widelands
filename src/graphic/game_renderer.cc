@@ -211,11 +211,9 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			PlayerNumber owner_number = fcoords.field->get_owned_by();
 			if (owner_number > 0) {
-				const Player& owner = egbase.player(owner_number);
-				// NOCOM(GunChleoc): We want a texture atlas instead
-				// NOCOM(#sirver): and use all of the pictures.
-				f.busy_road_filename = owner.tribe().busy_road_filenames().at(0);
-				f.normal_road_filename = owner.tribe().normal_road_filenames().at(0);
+				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
+			} else {
+				f.road_textures = nullptr;
 			}
 
 			f.roads = field_roads(fcoords, map, player);

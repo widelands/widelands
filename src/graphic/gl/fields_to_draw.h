@@ -26,6 +26,7 @@
 
 #include <stdint.h>
 
+#include "logic/road_textures.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
@@ -39,8 +40,7 @@ public:
 		float brightness;            // brightness of the pixel
 		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.
 		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
-		std::string normal_road_filename;
-		std::string busy_road_filename;
+		const RoadTextures* road_textures; // Road Textures to use for drawing.
 	};
 
 	FieldsToDraw(int minfx, int maxfx, int minfy, int maxfy)

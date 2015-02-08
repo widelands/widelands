@@ -260,8 +260,8 @@ TribeDescr::TribeDescr
 						   "No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
 					}
 				};
-				load_roads("normal", &m_normal_road_filenames);
-				load_roads("busy", &m_busy_road_filenames);
+				load_roads("normal", &m_normal_road_paths);
+				load_roads("busy", &m_busy_road_paths);
 			}
 
 			m_frontier_animation_id =
@@ -321,13 +321,27 @@ void TribeDescr::load_graphics()
 		m_buildings.get(i)->load_graphics();
 }
 
-const std::vector<std::string>& TribeDescr::normal_road_filenames() const {
-	return m_normal_road_filenames;
+const std::vector<std::string>& TribeDescr::normal_road_paths() const {
+	return m_normal_road_paths;
 }
 
-const std::vector<std::string>& TribeDescr::busy_road_filenames() const {
-	return m_busy_road_filenames;
+const std::vector<std::string>& TribeDescr::busy_road_paths() const {
+	return m_busy_road_paths;
 }
+
+
+void TribeDescr::add_normal_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_normal_road_texture(std::move(texture));
+}
+
+void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_busy_road_texture(std::move(texture));
+}
+
+const RoadTextures& TribeDescr::road_textures() const {
+	return m_road_textures;
+}
+
 
 /*
  * does this tribe exist?

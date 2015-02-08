@@ -39,7 +39,7 @@ class Image;
 
 namespace Widelands {
 
-struct TribeDescr;
+class TribeDescr;
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an

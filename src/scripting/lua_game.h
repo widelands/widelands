@@ -27,7 +27,7 @@
 #include "third_party/eris/lua.hpp"
 
 namespace Widelands {
-	struct TribeDescr;
+	class TribeDescr;
 	class Objective;
 	struct Message;
 }

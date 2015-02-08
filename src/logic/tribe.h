@@ -21,14 +21,17 @@
 #define WL_LOGIC_TRIBE_H
 
 #include <map>
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
 #include "graphic/animation.h"
+#include "graphic/texture.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
+#include "logic/road_textures.h"
 #include "logic/roadtype.h"
 #include "logic/tribe_basic_info.h"
 #include "logic/ware_descr.h"
@@ -53,7 +56,8 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct TribeDescr {
+class TribeDescr {
+public:
 	TribeDescr(const std::string & name, EditorGameBase &);
 
 	//  Static function to check for tribes.
@@ -67,8 +71,16 @@ struct TribeDescr {
 
 	// A vector of all texture images that can be used for drawing a
 	// (normal|busy) road. The images are guaranteed to exist.
-	const std::vector<std::string>& normal_road_filenames() const;
-	const std::vector<std::string>& busy_road_filenames() const;
+	const std::vector<std::string>& normal_road_paths() const;
+	const std::vector<std::string>& busy_road_paths() const;
+
+	// Add the corresponding texture (which probably resides in a
+	// texture atlas) for roads.
+	void add_normal_road_texture(std::unique_ptr<Texture> texture);
+	void add_busy_road_texture(std::unique_ptr<Texture> texture);
+
+	// The road textures used for drawing roads.
+	const RoadTextures& road_textures() const;
 
 	WareIndex get_nrworkers() const {return m_workers.get_nitems();}
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
@@ -181,8 +193,9 @@ struct TribeDescr {
 private:
 	const std::string m_name;
 
-	std::vector<std::string> m_normal_road_filenames;
-	std::vector<std::string> m_busy_road_filenames;
+	std::vector<std::string> m_normal_road_paths;
+	std::vector<std::string> m_busy_road_paths;
+	RoadTextures m_road_textures;
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;
