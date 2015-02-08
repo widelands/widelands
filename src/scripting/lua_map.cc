@@ -166,7 +166,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
 			for (WareIndex i = 0; \
-					i < tribe.get_nr##type##s (); ++i) \
+					i < static_cast<int>(tribe.get_nr##type##s ()); ++i) \
 				rv.insert(i); \
 		} else { \
 			/* Only one item requested */ \
@@ -2057,7 +2057,7 @@ int LuaWorkerDescription::get_becomes(lua_State * L) {
 		return 1;
 	}
 	return to_lua<LuaWorkerDescription>(
-		L, new LuaWorkerDescription(get()->tribe().get_worker_descr(becomes_index)));
+		L, new LuaWorkerDescription(get_egbase(L).tribes().get_worker_descr(becomes_index)));
 }
 
 

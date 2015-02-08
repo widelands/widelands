@@ -21,6 +21,7 @@
 
 #include <clocale>
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -57,12 +58,12 @@ MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table, const EditorGameBase
 		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
 	m_prefers_heroes_at_start = table.get_bool("prefer_heroes");
 
-	const LuaTable items_table = table.get_table("messages");
-	m_occupied_str = items_table.get_string("occupied");
-	m_aggressor_str = items_table.get_string("aggressor");
-	m_attack_str = items_table.get_string("attack");
-	m_defeated_enemy_str = items_table.get_string("defeated_enemy");
-	m_defeated_you_str = items_table.get_string("defeated_you");
+	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
+	m_occupied_str = items_table->get_string("occupied");
+	m_aggressor_str = items_table->get_string("aggressor");
+	m_attack_str = items_table->get_string("attack");
+	m_defeated_enemy_str = items_table->get_string("defeated_enemy");
+	m_defeated_you_str = items_table->get_string("defeated_you");
 }
 
 

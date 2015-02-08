@@ -19,6 +19,8 @@
 
 #include "logic/tribes/tribes.h"
 
+#include "logic/game_data_error.h"
+
 namespace Widelands {
 
 Tribes::Tribes(EditorGameBase& egbase) :
@@ -68,31 +70,35 @@ void Tribes::add_ware_type(const LuaTable& t) {
 }
 
 void Tribes::add_carrier_type(const LuaTable& t) {
-	workers_->add(new CarrierDescr(t));
+	workers_->add(new CarrierDescr(t), egbase_);
 }
 
 void Tribes::add_soldier_type(const LuaTable& t) {
-	workers_->add(SoldierDescr(t));
+	workers_->add(SoldierDescr(t), egbase_);
 }
 
 void Tribes::add_worker_type(const LuaTable& t) {
-	workers_->add(new WorkerDescr(t));
+	workers_->add(new WorkerDescr(t), egbase_);
 }
 
 void Tribes::add_tribe(const LuaTable& t) {
 	tribes_->add(new TribeDescr(t, egbase_));
 }
 
-WareIndex Tribes::nrwares() const {
+size_t Tribes::nrbuildings() const {
+	return buildings_.size();
+}
+
+size_t Tribes::nrtribes() const {
+	return tribes_.size();
+}
+
+size_t Tribes::nrwares() const {
 	return wares_.size();
 }
 
-WareIndex Tribes::nrworkers() const {
+size_t Tribes::nrworkers() const {
 	return workers_.size();
-}
-
-BuildingIndex Tribes::nrbuildings() const {
-	return buildings_.size();
 }
 
 
@@ -139,6 +145,14 @@ int safe_ship_index(const std::string& shipname) const {
 	return result;
 }
 
+int Tribes::safe_tribe_index(const std::string& tribename) const {
+	const int result = tribe_index(tribename);
+	if (result == -1) {
+		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
+	}
+	return result;
+}
+
 WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	const WareIndex result = ware_index(warename);
 	if (result == -1) {
@@ -154,6 +168,7 @@ WareIndex Tribes::safe_worker_index(const std::string& workername) const {
 	}
 	return result;
 }
+
 
 BuildingIndex Tribes::building_index(const std::string& buildingname) const {
 	int result = -1;
@@ -172,23 +187,19 @@ int Tribes::ship_index(const std::string& shipname) const {
 	return ships_.get_index(shipname);
 }
 
+int Tribes::tribe_index(const std::string& tribename) const {
+	tribes_.get_index(tribename);
+}
+
+
 WareIndex Tribes::ware_index(const std::string& warename) const {
-	int result = -1;
-	for (size_t i = 0; i < wares_.size(); ++i) {
-		if (wares_.get(i)->name() == warename.name()) {
-			return result;
-		}
-	}
+	wares_.get_index(warename);
 }
 
 WareIndex Tribes::worker_index(const std::string& workername) const {
-	int result = -1;
-	for (size_t i = 0; i < workers_.size(); ++i) {
-		if (workers_.get(i)->name() == workername.name()) {
-			return result;
-		}
-	}
+	workers_.get_index(workername);
 }
+
 
 BuildingDescr const * Tribes::get_building_descr(BuildingIndex building_index) const {
 	return buildings_.get(building_index);
@@ -211,12 +222,16 @@ WorkerDescr const * Tribes::get_worker_descr(WareIndex worker_index) const {
 	return workers_.get(worker_index);
 }
 
-void Tribes::set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename) const {
+TribeDescr const* get_tribe_descr(int tribe_index) const {
+	return tribes_.get(tribe_index);
+}
+
+void Tribes::set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename) const {
 	wares_.get(ware_index)->set_has_demand_check(tribename);
 }
 
-void Tribes::set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename) const {
-	workers_.get(worker_index)->set_has_demand_check(tribename);
+void Tribes::set_worker_type_has_demand_check(const WareIndex& worker_index) const {
+	workers_.get(worker_index)->set_has_demand_check();
 }
 
 

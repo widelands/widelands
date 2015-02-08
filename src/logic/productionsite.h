@@ -53,10 +53,11 @@ class WorkerDescr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSiteDescr : public BuildingDescr {
+class ProductionSiteDescr : public BuildingDescr {
+public:
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr(MapObjectType type, const LuaTable& t, EditorGameBase& egbase);
+	ProductionSiteDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
 
 	~ProductionSiteDescr() override;
 

@@ -52,7 +52,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-#include "notifications/notifications.h"
+// NOCOM(GunChleoc): Compiler doesn't like #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -222,11 +222,11 @@ ImmovableDescr IMPLEMENTATION
 /**
  * Parse an immovable from its init file.
  */
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObjectDescr::OwnerType type) :
+ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
 	m_size(BaseImmovable::NONE),
-	owner_type_(type)
+	owner_type_(input_type)
 {
 	m_size = string_to_size(table.get_string("size"));
 	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {MapObject::Attribute::RESI});
@@ -258,9 +258,9 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObj
 	}
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
 
-	LuaTable helptexts_table = table.get_table("helptext");
-	for (const std::string& key : helptexts_table.keys<std::string>()) {
-		helptexts_.insert(key, helptexts_table.get_string(key));
+	std::unique_ptr<LuaTable> helptexts_table = table.get_table("helptext");
+	for (const std::string& key : helptexts_table->keys<std::string>()) {
+		// NOCOM(GunChleoc): Compiler doesn't like helptexts_.insert(key, helptexts_table->get_string(key));
 	}
 
 	make_sure_default_program_is_there();
@@ -667,9 +667,7 @@ void Immovable::save
 	fw.unsigned_8(HeaderImmovable);
 	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
 
-	// NOCOM(GunChleoc) This used to be get_owner_tribe. I can't find the load code.
-	// I don't know how saveloading will be handled anyway.
-	fw.unsigned_8(descr().owner_type());
+	fw.unsigned_8(static_cast<uint8_t>(descr().owner_type()));
 
 	fw.string(descr().name());
 
@@ -721,7 +719,7 @@ MapObject::Loader * Immovable::load
 				// NOCOM(GunChleoc): Do we need something like this for tribes()? egbase.manually_load_tribe(owner_name);
 				try {
 					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
-					imm = new Immovable(egbase.tribes().get_immovable_descr(idx));
+					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
 				} catch (const WException& e) {
 					throw GameDataError("Failed to load immovable: %s", e.what());
 				}
@@ -908,7 +906,7 @@ ImmovableProgram::ActGrow::ActGrow
 			case ':': {
 				*p = '\0';
 				++p;
-				if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
+				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
 						 "immovable type not in tribes but target type has scope "
@@ -991,7 +989,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 			case ':': {
 				*p = '\0';
 				++p;
-				if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
+				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
 						 "immovable type not in tribes but target type has scope "
@@ -1073,7 +1071,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 	(char * parameters, ImmovableDescr & descr, const std::string & directory, Profile & prof)
 {
 	try {
-		if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
+		if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 			throw GameDataError("only usable for tribe immovable");
 
 		std::vector<std::string> params = split_string(parameters, " ");
@@ -1104,7 +1102,7 @@ struct ActConstructionData : ImmovableActionData {
 	const char * name() const override {return "construction";}
 	void save(FileWrite & fw, Immovable & imm) override {
 		fw.unsigned_8(CONSTRUCTION_DATA_VERSION);
-		delivered.save(fw, *imm.descr().get_owner_type()); // NOCOM(GunChleoc): Will this work?
+		delivered.save(fw, imm.get_owner()->tribe());
 	}
 
 	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
@@ -1113,7 +1111,7 @@ struct ActConstructionData : ImmovableActionData {
 		try {
 			uint8_t version = fr.unsigned_8();
 			if (version == CONSTRUCTION_DATA_VERSION) {
-				d->delivered.load(fr, *imm.descr().get_owner_type()); // NOCOM(GunChleoc): Will this work?
+				d->delivered.load(fr, imm.get_owner()->tribe());
 			} else
 				throw GameDataError("unknown version %u", version);
 		} catch (const WException & e) {

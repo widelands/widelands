@@ -91,9 +91,10 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table);
 
-	WareIndex nrwares() const;
-	WareIndex nrworkers() const;
-	BuildingIndex nrbuildings() const;
+	size_t nrbuildings() const;
+	size_t nrtribes() const;
+	size_t nrwares() const;
+	size_t nrworkers() const;
 
 	bool ware_exists(const WareIndex& index) const;
 	bool worker_exists(const WareIndex& index) const;
@@ -105,12 +106,14 @@ public:
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	int safe_immovable_index(const std::string& immovablename) const;
 	int safe_ship_index(const std::string& shipname) const;
+	int safe_tribe_index(const std::string& tribename) const;
 	WareIndex safe_ware_index(const std::string& warename) const;
 	WareIndex safe_worker_index(const std::string& workername) const;
 
 	BuildingIndex building_index(const std::string& buildingname) const;
 	int immovable_index(const std::string& immovablename) const;
 	int ship_index(const std::string& shipname) const;
+	int tribe_index(const std::string& tribename);
 	WareIndex ware_index(const std::string& warename) const;
 	WareIndex worker_index(const std::string& workername) const;
 
@@ -119,9 +122,10 @@ public:
 	ShipDescr const* get_ship_descr(int ship_index) const;
 	WareDescr const* get_ware_descr(WareIndex ware_index) const;
 	WorkerDescr const* get_worker_descr(WareIndex worker_index) const;
+	TribeDescr const* get_tribe_descr(int tribe_index) const;
 
-	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
-	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
+	void set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename);
+	void set_worker_type_has_demand_check(const WareIndex& worker_index);
 
 	/// Load tribes' graphics
 	void load_graphics();

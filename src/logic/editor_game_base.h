@@ -170,10 +170,8 @@ public:
 	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
-	const TribeDescr& manually_load_tribe(const std::string& tribes);
-	const TribeDescr& manually_load_tribe(PlayerNumber const p) {
-		return manually_load_tribe(map().get_scenario_player_tribe(p));
-	}
+	void manually_load_tribe(const std::string& tribes);
+	void manually_load_tribe(PlayerNumber const p);
 	// Get a tribe from the loaded list, when known or nullptr.
 	TribeDescr const* get_tribe(const std::string& name) const;
 
@@ -218,7 +216,7 @@ public:
 	// Returns the tribes.
 	const Tribes& tribes() const;
 
-	// Returns the mutable tribe. Prefer tribes() whenever possible.
+	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
 
 protected:

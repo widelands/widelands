@@ -33,7 +33,7 @@ class World;
 
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
-	TrainingSiteDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
+	TrainingSiteDescr(const LuaTable& table, const EditorGameBase& egbase);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -76,10 +76,14 @@ public:
 	}
 
 private:
+	// Read the table to add needed food and weapons for training a property.
+	// Properties are hp, attack, defense, and evade.
+	void add_training_inputs(const LuaTable& table,
+			std::vector<std::vector<std::string>>* food, std::vector<std::string>* weapons);
+
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
-
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/

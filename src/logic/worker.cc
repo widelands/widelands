@@ -83,7 +83,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	Player & player = *get_owner();
 	WareIndex const wareid(action.iparam1);
 	WareInstance & ware =
-		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
+		*new WareInstance(wareid, player.tribe().get_ware_descr(wareid));
 	ware.init(game);
 
 	set_carried_ware(game, &ware);
@@ -352,8 +352,7 @@ bool Worker::run_setbobdescription
 	if (state.svar1 == "world") {
 		state.ivar2 = game.world().get_bob(bob.c_str());
 	} else {
-		int ship_index = game.tribes().ship_index(bob.c_str());
-		state.ivar2 = game.tribes().get_ship_descr(ship_index);
+		state.ivar2 = game.tribes().ship_index(bob.c_str());
 	}
 
 	if (state.ivar2 < 0) {
@@ -992,7 +991,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const TribeDescr & t = descr().tribe();
+		const TribeDescr & t = owner().tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
@@ -1173,7 +1172,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(descr().name().c_str()), 1);
+			(owner().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1183,7 +1182,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
+		m_economy->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 
@@ -1340,7 +1339,7 @@ WareIndex Worker::level(Game & game) {
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(descr().becomes());
-	const TribeDescr & t = descr().tribe();
+	const TribeDescr & t = owner().tribe();
 	WareIndex const old_index = t.worker_index(descr().name());
 	WareIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
@@ -3096,7 +3095,7 @@ void Worker::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWorker);
-	fw.c_string(descr().tribe().name());
+	fw.c_string(owner().tribe().name());
 	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);

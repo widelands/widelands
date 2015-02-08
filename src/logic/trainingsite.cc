@@ -20,6 +20,7 @@
 #include "logic/trainingsite.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -40,7 +41,7 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
 TrainingSiteDescr::TrainingSiteDescr
-	(MapObjectType type, const LuaTable& table, const EditorGameBase& egbase)
+	(const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
 		(MapObjectType::TRAININGSITE, table, egbase),
@@ -60,108 +61,40 @@ TrainingSiteDescr::TrainingSiteDescr
 	m_max_defense       (0),
 	m_max_evade         (0)
 {
-	LuaTable items_table;
-
 	// Read the range of levels that can update this building
 	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
 	//  sections starting with the name of each soldier type.
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
+	std::unique_ptr<LuaTable> items_table;
 	if (table.has_key("soldier hp")) {
 		items_table = table.get_table("soldier hp");
 		m_train_hp      = true;
-		m_min_hp        = items_table.get_int("min_level");
-		m_max_hp        = items_table.get_int("max_level");
-		// For building help - NOCOM(GunChleoc): Extract function
-		if (items_table.has_key("food")) {
-			LuaTable food_table = items_table.get_table("food");
-			for (const int key : food_table.keys<int>()) {
-				std::vector<std::string> food_vector;
-				LuaTable food_row = food_table.get_table(key);
-				for (const int key2 : food_row.keys<int>()) {
-					food_vector.push_back(food_row.get_string(key2));
-				}
-				food_hp_.push_back(food_vector);
-			}
-		}
-		if (items_table.has_key("weapons")) {
-			LuaTable weapons_table = items_table.get_table("weapons");
-			for (const int key : weapons_table.keys<int>()) {
-				weapons_hp_.push_back(weapons_table.get_string(key));
-			}
-		}
+		m_min_hp = items_table->get_int("min_level");
+		m_max_hp = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_hp_, &weapons_hp_);
 	}
+
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		m_train_attack      = true;
-		m_min_attack        = items_table.get_int("min_level");
-		m_max_attack        = items_table.get_int("max_level");
-		// For building help - NOCOM(GunChleoc): Extract function
-		if (items_table.has_key("food")) {
-			LuaTable food_table = items_table.get_table("food");
-			for (const int key : food_table.keys<int>()) {
-				std::vector<std::string> food_vector;
-				LuaTable food_row = food_table.get_table(key);
-				for (const int key2 : food_row.keys<int>()) {
-					food_vector.push_back(food_row.get_string(key2));
-				}
-				food_attack_.push_back(food_vector);
-			}
-		}
-		if (items_table.has_key("weapons")) {
-			LuaTable weapons_table = items_table.get_table("weapons");
-			for (const int key : weapons_table.keys<int>()) {
-				weapons_attack_.push_back(weapons_table.get_string(key));
-			}
-		}
+		m_min_attack = items_table->get_int("min_level");
+		m_max_attack = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		m_train_defense      = true;
-		m_min_defense        = items_table.get_int("min_level");
-		m_max_defense        = items_table.get_int("max_level");
-		// For building help - NOCOM(GunChleoc): Extract function
-		if (items_table.has_key("food")) {
-			LuaTable food_table = items_table.get_table("food");
-			for (const int key : food_table.keys<int>()) {
-				std::vector<std::string> food_vector;
-				LuaTable food_row = food_table.get_table(key);
-				for (int key2 : food_row.keys<int>()) {
-					food_vector.push_back(food_row.get_string(key2));
-				}
-				food_defense_.push_back(food_vector);
-			}
-		}
-		if (items_table.has_key("weapons")) {
-			LuaTable weapons_table = items_table.get_table("weapons");
-			for (const int key : weapons_table.keys<int>()) {
-				weapons_defense_.push_back(weapons_table.get_string(key));
-			}
-		}
+		m_min_defense = items_table->get_int("min_level");
+		m_max_defense = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		m_train_evade      = true;
-		m_min_evade        = items_table.get_int("min_level");
-		m_max_evade        = items_table.get_int("max_level");
-		// For building help - NOCOM(GunChleoc): Extract function
-		if (items_table.has_key("food")) {
-			LuaTable food_table = items_table.get_table("food");
-			for (const int key : food_table.keys<int>()) {
-				std::vector<std::string> food_vector;
-				LuaTable food_row = food_table.get_table(key);
-				for (const int key2 : food_row.keys<int>()) {
-					food_vector.push_back(food_row.get_string(key2));
-				}
-				food_evade_.push_back(food_vector);
-			}
-		}
-		if (items_table.has_key("weapons")) {
-			LuaTable weapons_table = items_table.get_table("weapons");
-			for (const int key : weapons_table.keys<int>()) {
-				weapons_evade_.push_back(weapons_table.get_string(key));
-			}
-		}
+		m_min_evade = items_table->get_int("min_level");
+		m_max_evade = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_evade_, &weapons_evade_);
 	}
 }
 
@@ -219,6 +152,30 @@ int32_t
 TrainingSiteDescr::get_max_stall() const
 {
 	return m_max_stall;
+}
+
+void TrainingSiteDescr::add_training_inputs(
+		const LuaTable& table,
+		std::vector<std::vector<std::string>>* food,
+		std::vector<std::string>* weapons) {
+
+	if (table.has_key("food")) {
+		std::unique_ptr<LuaTable> food_table = table.get_table("food");
+		for (const int key : food_table->keys<int>()) {
+			std::vector<std::string> food_vector;
+			std::unique_ptr<LuaTable> food_row = food_table->get_table(key);
+			for (int key2 : food_row->keys<int>()) {
+				food_vector.push_back(food_row->get_string(key2));
+			}
+			food->push_back(food_vector);
+		}
+	}
+	if (table.has_key("weapons")) {
+		std::unique_ptr<LuaTable> weapons_table = table.get_table("weapons");
+		for (const int key : weapons_table->keys<int>()) {
+			weapons->push_back(weapons_table->get_string(key));
+		}
+	}
 }
 
 /*

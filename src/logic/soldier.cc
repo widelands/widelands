@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <list>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -72,17 +73,17 @@ void remove_spaces(std::string& s) {
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierDescr::SoldierDescr(const LuaTable& table) :
-	WorkerDescr(MapObjectType::SOLDIER, table)
+SoldierDescr::SoldierDescr(const LuaTable& table, const EditorGameBase& egbase) :
+	WorkerDescr(MapObjectType::SOLDIER, table, egbase)
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
 
 	m_base_hp = table.get_int("hp");
 
 	// Parse attack
-	LuaTable items_table = table.get_table("attack");
-	m_min_attack = items_table.get_int("minimum");
-	m_max_attack = items_table.get_int("maximum");
+	std::unique_ptr<LuaTable> items_table = table.get_table("attack");
+	m_min_attack = items_table->get_int("minimum");
+	m_max_attack = items_table->get_int("maximum");
 	if (m_min_attack > m_max_attack) {
 		throw GameDataError("Minimum attack %d is greater than maximum attack %d.", m_min_attack, m_max_attack);
 	}
@@ -111,30 +112,39 @@ SoldierDescr::SoldierDescr(const LuaTable& table) :
 	m_defense_pics_fn.resize(m_max_defense_level + 1);
 	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
 
-	// NOCOM(GunChleoc): We need the directory
-	std::string dir = directory;
-	dir += "/";
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
-		m_hp_pics_fn[i] = dir;
-		m_hp_pics_fn[i] += table.get_string((boost::format("hp_level_%u_pic")
-																	% i).str());
-
+		m_hp_pics_fn[i] = table.get_string((boost::format("hp_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
-		m_attack_pics_fn[i] = dir;
-		m_attack_pics_fn[i] += table.get_string((boost::format("attack_level_%u_pic")
-																		 % i).str());
+		m_attack_pics_fn[i] = table.get_string((boost::format("attack_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
-		m_defense_pics_fn[i] = dir;
-		m_defense_pics_fn[i] += table.get_string((boost::format("defense_level_%u_pic")
-																		  % i).str());
+		m_defense_pics_fn[i] = table.get_string((boost::format("defense_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
-		m_evade_pics_fn[i] = dir;
-		m_evade_pics_fn[i] += table.get_string((boost::format("evade_level_%u_pic")
-																		% i).str());
+		m_evade_pics_fn[i] = table.get_string((boost::format("evade_level_%u_pic") % i).str());
 	}
+
+	//  Battle animations
+	// attack_success_*-> soldier is attacking and hit his opponent
+	add_battle_animation(table.get_table("attack_success_w"), &m_attack_success_w_name);
+	add_battle_animation(table.get_table("attack_success_e"), &m_attack_success_e_name);
+
+	// attack_failure_*-> soldier is attacking and miss hit, defender evades
+	add_battle_animation(table.get_table("attack_failure_w"), &m_attack_failure_w_name);
+	add_battle_animation(table.get_table("attack_failure_e"), &m_attack_failure_e_name);
+
+	// evade_success_* -> soldier is defending and opponent misses
+	add_battle_animation(table.get_table("evade_success_w"), &m_evade_success_w_name);
+	add_battle_animation(table.get_table("evade_success_e"), &m_evade_success_e_name);
+
+	// evade_failure_* -> soldier is defending and opponent hits
+	add_battle_animation(table.get_table("evade_failure_w"), &m_evade_failure_w_name);
+	add_battle_animation(table.get_table("evade_failure_e"), &m_evade_failure_e_name);
+
+	// die_*           -> soldier is dying
+	add_battle_animation(table.get_table("die_w"), &m_die_w_name);
+	add_battle_animation(table.get_table("die_e"), &m_die_e_name);
 }
 
 /**
@@ -234,6 +244,15 @@ uint32_t SoldierDescr::get_rand_anim
  * Create a new soldier
  */
 Bob & SoldierDescr::create_object() const {return *new Soldier(*this);}
+
+void SoldierDescr::add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result) {
+	for (const std::string& anim_name : table->keys<std::string>()) {
+		if (!is_animation_known(anim_name)) {
+			throw GameDataError("Trying to add unknown battle animation: %s", anim_name.c_str());
+		}
+		result->push_back(anim_name);
+	}
+}
 
 /*
 ==============================
@@ -888,7 +907,7 @@ void Soldier::attack_update(Game & game, State & state)
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
 			defenders = wh->count_workers
-				(game, wh->descr().tribe().soldier(), noreq);
+				(game, wh->owner().tribe().soldier(), noreq);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;

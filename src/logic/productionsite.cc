@@ -20,6 +20,8 @@
 
 #include "logic/productionsite.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -53,16 +55,16 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, const LuaTable& table, EditorGameBase& egbase)
+	(MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(_type, table, egbase)
 {
-	LuaTable items_table;
+	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
-		m_out_of_resource_title = items_table.get_string("title");
-		m_out_of_resource_message = items_table.get_string("message");
-		m_out_of_resource_delay_attempts = items_table.get_int("delay_attempts");
+		m_out_of_resource_title = items_table->get_string("title");
+		m_out_of_resource_message = items_table->get_string("message");
+		m_out_of_resource_delay_attempts = items_table->get_int("delay_attempts");
 	} else {
 		m_out_of_resource_title = "";
 		m_out_of_resource_message = "";
@@ -71,15 +73,15 @@ ProductionSiteDescr::ProductionSiteDescr
 
 	if (table.has_key("outputs")) {
 		items_table = table.get_table("outputs");
-		for (int item_key : items_table.keys<int>()) {
+		for (int item_key : items_table->keys<int>()) {
+			const std::string& output = items_table->get_string(item_key);
 			try {
-				const std::string& output = items_table.get_string(item_key);
-				WareIndex idx = tribes().ware_index(output);
+				WareIndex idx = egbase.tribes().ware_index(output);
 				if (idx != INVALID_INDEX) {
 					if (m_output_ware_types.count(idx))
 						throw wexception("this ware type has already been declared as an output");
 					m_output_ware_types.insert(idx);
-				} else if ((idx = tribes().worker_index(output)) != INVALID_INDEX) {
+				} else if ((idx = egbase.tribes().worker_index(output)) != INVALID_INDEX) {
 					if (m_output_worker_types.count(idx))
 						throw wexception("this worker type has already been declared as an output");
 					m_output_worker_types.insert(idx);
@@ -93,13 +95,13 @@ ProductionSiteDescr::ProductionSiteDescr
 
 	if (table.has_key("inputs")) {
 		items_table = table.get_table("inputs");
-		for (const std::string& ware_name : items_table.keys<std::string>()) {
-			int amount = items_table.get_int(ware_name);
+		for (const std::string& ware_name : items_table->keys<std::string>()) {
+			int amount = items_table->get_int(ware_name);
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const idx = egbase_.tribes().ware_index(ware_name);
+				WareIndex const idx = egbase.tribes().ware_index(ware_name);
 				if (idx != INVALID_INDEX) {
 					for (const WareAmount& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
@@ -112,7 +114,7 @@ ProductionSiteDescr::ProductionSiteDescr
 						("tribes do not define a ware type with this name");
 				}
 			} catch (const WException & e) {
-				throw wexception("input \"%s=%d\": %s", ware_name, amount, e.what());
+				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
 			}
 		}
 	}
@@ -122,13 +124,13 @@ ProductionSiteDescr::ProductionSiteDescr
 	// If not, we might not have a worker
 	if (table.has_key("working_positions")) {
 		items_table = table.get_table("working_positions");
-		for (const std::string& worker_name : items_table.keys<std::string>()) {
-			int amount = items_table.get_int(worker_name);
+		for (const std::string& worker_name : items_table->keys<std::string>()) {
+			int amount = items_table->get_int(worker_name);
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const woi = egbase_.tribes().worker_index(worker_name);
+				WareIndex const woi = egbase.tribes().worker_index(worker_name);
 				if (woi != INVALID_INDEX) {
 					for (const WareAmount& wp : working_positions()) {
 						if (wp.first == woi) {
@@ -140,7 +142,7 @@ ProductionSiteDescr::ProductionSiteDescr
 					throw wexception("invalid");
 				}
 			} catch (const WException & e) {
-				throw wexception("%s=\"%d\": %s", worker_name, amount, e.what());
+				throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 			}
 		}
 	}
@@ -152,7 +154,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	// Get programs
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
-		for (std::string program_name : items_table.keys<std::string>()) {
+		for (std::string program_name : items_table->keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -161,9 +163,9 @@ ProductionSiteDescr::ProductionSiteDescr
 					throw wexception("this program has already been declared");
 				}
 				m_programs[program_name] =
-						new ProductionProgram(program_name, items_table.get_string("descname"),
-													 items_table.get_table("actions"),
-													 EditorGameBase& egbase.world(), this);
+						new ProductionProgram(program_name, items_table->get_string("descname"),
+													 items_table->get_table("actions"),
+													 egbase, this);
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
@@ -590,10 +592,10 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			for (const WareIndex& worker_index : game.tribes().workers()) {
-						const WorkerDescr& worker_descr = game.tribes().get_worker_descr(worker_index);
+			for (WareIndex i = 0;  i < static_cast<int>(game.tribes().nrworkers()); ++i) {
+				const WorkerDescr& worker_descr = *game.tribes().get_worker_descr(i);
 				if (worker_descr.becomes() == idx) {
-					idx = worker_index;
+					idx = i;
 					worker_placed = true;
 					break;
 				}

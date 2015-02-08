@@ -28,6 +28,7 @@
 #include "graphic/animation.h"
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
+#include "logic/editor_game_base.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
 #include "logic/tribe_basic_info.h"
@@ -54,8 +55,9 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct TribeDescr {
-	TribeDescr(const LuaTable& table, const EditorGameBase& egbase);
+class TribeDescr {
+public:
+	TribeDescr(const LuaTable& table, EditorGameBase& egbase);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
@@ -65,11 +67,11 @@ struct TribeDescr {
 
 
 	const std::string& name() const;
-	const EditorGameBase& egbase();
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	WareIndex get_nrwares() const;
-	WareIndex get_nrworkers() const;
+	size_t get_nrbuildings() const;
+	size_t get_nrwares() const;
+	size_t get_nrworkers() const;
 
 	const std::set<BuildingIndex> buildings() const;
 	const std::set<WareIndex> wares() const;
@@ -77,6 +79,7 @@ struct TribeDescr {
 
 	bool has_building(const BuildingIndex& index) const;
 	bool has_ware(const WareIndex& index) const;
+	bool has_worker(const WareIndex& index) const;
 	bool is_construction_material(const WareIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;
@@ -109,9 +112,6 @@ struct TribeDescr {
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
-	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const;
-	void set_worker_type_has_demand_check(const WareIndex& index) const;
-
 	struct Initialization {
 		std::string script;
 		std::string descname;
@@ -139,10 +139,10 @@ struct TribeDescr {
 private:
 	// Helper function for adding a building type
 	void add_building(const std::string& buildingname);
-	WareIndex parse_worker(const std::string& workername);
+	WareIndex add_special_worker(const std::string& workername);
 
 	const std::string name_;
-	const EditorGameBase& egbase_;
+	EditorGameBase& egbase_;
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;

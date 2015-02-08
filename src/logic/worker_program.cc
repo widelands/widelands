@@ -61,7 +61,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
  * Parse a program
  */
 void WorkerProgram::parse
-	(WorkerDescr * descr, Parser * parser, char const * const name)
+	(WorkerDescr * descr, Parser * parser, char const * const name, const Tribes& tribes)
 {
 	if (parser->prof == nullptr) {
 		const LuaTable program_table = table.get_table(name);
@@ -92,7 +92,7 @@ void WorkerProgram::parse
 				if (!s_parsemap[mapidx].name)
 					throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 
-				(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+				(this->*s_parsemap[mapidx].function)(descr, &act, parser, tribes, cmd);
 
 				m_actions.push_back(act);
 			} catch (const std::exception & e) {
@@ -149,16 +149,17 @@ void WorkerProgram::parse
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware
-	(WorkerDescr                   * descr,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: createware <ware type>");
 
 	act->function = &Worker::run_createware;
-	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]);
+	act->iparam1 = tribes.safe_ware_index(cmd[1]);
 }
 
 /**
@@ -171,9 +172,10 @@ void WorkerProgram::parse_createware
  * sparam1 = resource
  */
 void WorkerProgram::parse_mine
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
@@ -198,9 +200,10 @@ void WorkerProgram::parse_mine
  * sparam1 = resource
  */
 void WorkerProgram::parse_breed
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
@@ -225,10 +228,11 @@ void WorkerProgram::parse_breed
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setdescription
-	(WorkerDescr                   *,
-	 Worker::Action                 *,
-	 Parser                         *,
-	 const std::vector<std::string> &)
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
+	 const std::vector<std::string> & cmd)
 {
 }
 
@@ -242,9 +246,10 @@ void WorkerProgram::parse_setdescription
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setbobdescription
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() < 2)
@@ -278,9 +283,10 @@ void WorkerProgram::parse_setbobdescription
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	uint32_t i;
@@ -357,9 +363,10 @@ void WorkerProgram::parse_findobject
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	uint32_t i;
@@ -442,9 +449,10 @@ void WorkerProgram::parse_findspace
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
@@ -472,9 +480,10 @@ void WorkerProgram::parse_walk
  *
  */
 void WorkerProgram::parse_animation
-	(WorkerDescr                   * descr,
-	 Worker::Action                 * act,
-	 Parser                         * parser,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	char * endp;
@@ -508,10 +517,11 @@ void WorkerProgram::parse_animation
  * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
 void WorkerProgram::parse_return
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
-	 const std::vector<std::string> &)
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
+	 const std::vector<std::string> & cmd)
 {
 	act->function = &Worker::run_return;
 	act->iparam1 = 1; // drop a ware on our owner's flag
@@ -526,9 +536,10 @@ void WorkerProgram::parse_return
  * sparam1 = object command name
  */
 void WorkerProgram::parse_object
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
@@ -549,9 +560,10 @@ void WorkerProgram::parse_object
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() < 2)
@@ -581,10 +593,11 @@ void WorkerProgram::parse_plant
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
 void WorkerProgram::parse_create_bob
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
-	 const std::vector<std::string> &)
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
+	 const std::vector<std::string> & cmd)
 {
 	act->function = &Worker::run_create_bob;
 }
@@ -594,10 +607,11 @@ void WorkerProgram::parse_create_bob
  * Simply remove the currently selected object - make no fuss about it.
  */
 void WorkerProgram::parse_removeobject
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
-	 const std::vector<std::string> &)
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
+	 const std::vector<std::string> & cmd)
 {
 	act->function = &Worker::run_removeobject;
 }
@@ -614,9 +628,10 @@ void WorkerProgram::parse_removeobject
  * sparam1 = subcommand
  */
 void WorkerProgram::parse_geologist
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	char * endp;
@@ -643,9 +658,10 @@ void WorkerProgram::parse_geologist
  * when possible.
  */
 void WorkerProgram::parse_geologist_find
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 1)
@@ -663,9 +679,10 @@ void WorkerProgram::parse_geologist_find
  * iparam2 = time
  */
 void WorkerProgram::parse_scout
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
@@ -677,9 +694,10 @@ void WorkerProgram::parse_scout
 }
 
 void WorkerProgram::parse_play_fx
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         * parser,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() < 2 || cmd.size() > 3)
@@ -703,9 +721,10 @@ void WorkerProgram::parse_play_fx
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct
-	(WorkerDescr                   *,
-	 Worker::Action                 * act,
-	 Parser                         *,
+	(WorkerDescr*,
+	 Worker::Action* act,
+	 Parser*,
+	 const Tribes& tribes,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 1)

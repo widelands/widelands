@@ -1342,10 +1342,10 @@ void CmdResetWareTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
 	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
-		const int32_t count =
-			tribe.get_ware_descr(ware_type())->default_target_quantity();
+		const int count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  count, 0);
+			(ware_type(), count, 0);
 	}
 }
 
@@ -1460,10 +1460,10 @@ void CmdResetWorkerTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
 	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
-		const int32_t count =
-			tribe.get_ware_descr(ware_type())->default_target_quantity();
+		const int count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
 		player.get_economy_by_number(economy())->set_worker_target_quantity
-			(ware_type(),  count, 0);
+			(ware_type(), count, 0);
 	}
 }
 

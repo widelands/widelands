@@ -181,7 +181,7 @@ void ProductionSiteWindow::update_worker_table()
 										% worker->get_current_experience()
 										% worker->descr().get_needed_experience()).str());
 				er.set_string
-					(2, worker->descr().tribe().get_worker_descr
+					(2, worker->owner().tribe().get_worker_descr
 						(worker->descr().becomes())->descname());
 			} else {
 				// Worker is not upgradeable

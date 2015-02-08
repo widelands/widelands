@@ -112,7 +112,7 @@ void PartiallyFinishedBuilding::request_builder(Game &) {
 	m_builder_request =
 		new Request
 			(*this,
-			 descr().tribe().builder(),
+			 owner().tribe().builder(),
 			 PartiallyFinishedBuilding::request_builder_callback,
 			 wwWORKER);
 }

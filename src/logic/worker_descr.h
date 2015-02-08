@@ -45,8 +45,8 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr(MapObjectType type, const LuaTable& t);
-	WorkerDescr(const LuaTable& t);
+	WorkerDescr(MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
+	WorkerDescr(const LuaTable& t, const EditorGameBase& egbase);
 	~WorkerDescr() override;
 
 	Bob & create_object() const override;
@@ -56,9 +56,6 @@ public:
 	const Buildcost & buildcost() const {
 		return buildcost_;
 	}
-
-	/// The tribe in which this worker is defined.
-	const TribeDescr & tribe() const;
 
 	std::string helptext() const {return helptext_;}
 	Point get_ware_hotspot() const {return ware_hotspot_;}
@@ -126,6 +123,7 @@ protected:
 	WareIndex becomes_;
 	Programs  programs_;
 private:
+	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 

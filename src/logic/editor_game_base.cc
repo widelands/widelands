@@ -38,6 +38,7 @@
 #include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -138,6 +139,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// to tribe through this method already.
 		ScopedTimer timer("Loading the tribes took %ums");
 		tribes_.reset(new Tribes(*this));
+
 		try {
 			lua_->run_script("tribes/init.lua");
 			tribes_->post_load();
@@ -176,27 +178,30 @@ Player * EditorGameBase::add_player
 }
 
 /// Load the given tribe into structure
-const TribeDescr & EditorGameBase::manually_load_tribe
+void EditorGameBase::manually_load_tribe
 	(const std::string & tribe)
 {
 	for (const TribeDescr* tribe_descr : tribe_descriptions_) {
 		if (tribe_descr->name() == tribe) {
-			return *tribe_descr;
+			return;
 		}
 	}
-
+	const std::string scriptfile = "/tribes/" + tribe + ".lua";
 	try {
-		const std::string scriptfile = "/tribes/" + tribe + ".lua";
-		std::unique_ptr<LuaTable> t(lua_.run_script(scriptfile));
-		TribeDescr & result = *new TribeDescr(t, *this);
+		std::unique_ptr<LuaTable> table(lua_->run_script(scriptfile));
+		// NOCOM(GunChleoc): this needs to be added to the tribes as well?
+		TribeDescr* result = new TribeDescr(*table.get(), *this);
 		//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
 		int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-		result.resize_ware_orders(number);
-		tribe_descriptions_.push_back(&result);
+		result->resize_ware_orders(number);
+		tribe_descriptions_.push_back(result);
 	} catch (LuaError& e) {
 		throw GameDataError("Unable to manually load tribe from %s: %s", scriptfile.c_str(), e.what());
 	}
-	return result;
+}
+
+void EditorGameBase::manually_load_tribe(PlayerNumber const p) {
+	manually_load_tribe(map().get_scenario_player_tribe(p));
 }
 
 Player* EditorGameBase::get_player(const int32_t n) const
@@ -289,7 +294,7 @@ void EditorGameBase::postload()
 			 !dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
-			tribe_descriptions_[id]->postload(*this);
+			// NOCOM(GunChleoc): Can this go? tribe_descriptions_[id]->postload(*this);
 			++id;
 		} else {
 			delete tribe_descriptions_[id]; // the tribe is no longer used, remove it
@@ -309,7 +314,7 @@ void EditorGameBase::postload()
 void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading tribes' graphics"));
-	tribes_.load_graphics();
+	tribes_->load_graphics();
 
 	// TODO(unknown): load player graphics? (maybe)
 }
@@ -390,31 +395,39 @@ Bob & EditorGameBase::create_bob
 	(Coords const c,
 	 int const idx, MapObjectDescr::OwnerType type, Player * owner)
 {
-	const BobDescr & descr =
-		*
-		(type == MapObjectDescr::OwnerType::kTribe ?
-		 tribes().get_bob_descr(idx)
-		 :
-		 world().get_bob_descr(idx));
-
-	return create_bob(c, descr, owner);
+	// NOCOM(GunChleoc): split into critter and ship
+	if (type == MapObjectDescr::OwnerType::kWorld) {
+		const BobDescr& descr = *world().get_bob_descr(idx);
+		return create_bob(c, descr, owner);
+	} else {
+		const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(idx));
+		return create_bob(c, *descr, owner);
+	}
 }
 
 Bob & EditorGameBase::create_bob
 	(Coords c, const std::string & name, MapObjectDescr::OwnerType type,
 	 Player * owner)
 {
-	const BobDescr * descr =
-		type == MapObjectDescr::OwnerType::kTribe ?
-		tribes().get_bob_descr(name) :
-		world().get_bob_descr(name);
-
-	if (!descr)
-		throw wexception
-			("create_bob(%i,%i,%s,%s): bob not found",
-			 c.x, c.y, name.c_str(), type == MapObjectDescr::OwnerType::kTribe ? "tribes" : "world");
-
-	return create_bob(c, *descr, owner);
+	// NOCOM(GunChleoc): split into critter and ship
+	if (type == MapObjectDescr::OwnerType::kWorld) {
+		const BobDescr* descr = world().get_bob_descr(name);
+		if (descr == nullptr)
+			throw GameDataError
+				("create_bob(%i,%i,%s,%s): critter not found",
+				 c.x, c.y, name.c_str(), owner->get_name().c_str());
+		return create_bob(c, *descr, owner);
+	} else {
+		try {
+			int idx = tribes_->safe_ship_index(name);
+			const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(idx));
+			return create_bob(c, *descr, owner);
+		} catch (const GameDataError& e) {
+			throw GameDataError
+				("create_bob(%i,%i,%s,%s): ship not found: %s",
+				 c.x, c.y, name.c_str(), owner->get_name().c_str(), e.what());
+		}
+	}
 }
 
 

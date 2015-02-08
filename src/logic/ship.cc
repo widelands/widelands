@@ -951,7 +951,7 @@ Load / Save implementation
 ==============================
 */
 
-#define SHIP_SAVEGAME_VERSION 4
+#define SHIP_SAVEGAME_VERSION 5
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -963,16 +963,17 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t version) {
-	Bob::Loader::load(fr);
+	try {
+		if (version == SHIP_SAVEGAME_VERSION) {
+			Bob::Loader::load(fr);
 
-	if (version >= 2) {
-		// The state the ship is in
-		if (version >= 3) {
+			// The state the ship is in
 			m_ship_state = fr.unsigned_8();
 
 			// Expedition specific data
 			if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
-			    m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
+				 m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
+
 				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
@@ -990,17 +991,20 @@ void Ship::Loader::load(FileRead& fr, uint8_t version) {
 				m_expedition->exploration_start = read_coords_32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
 				m_expedition->scouting_direction = static_cast<ScoutingDirection>(fr.unsigned_8());
+
+				m_lastdock = fr.unsigned_32();
+				m_destination = fr.unsigned_32();
+
+				m_items.resize(fr.unsigned_32());
+				for (ShippingItem::Loader& item_loader : m_items) {
+					item_loader.load(fr);
+				}
 			}
-		} else
-			m_ship_state = TRANSPORT;
-
-		m_lastdock = fr.unsigned_32();
-		m_destination = fr.unsigned_32();
-
-		m_items.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& item_loader : m_items) {
-			item_loader.load(fr);
+		} else {
+			throw GameDataError("unknown/unhandled version %u", version);
 		}
+	} catch (const std::exception& e) {
+		throw wexception("loading ship: %s", e.what());
 	}
 }
 
@@ -1052,8 +1056,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 		// The header has been peeled away by the caller
 
 		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
-			std::string owner = fr.c_string(); // NOCOM Why unused?
+		if (version == SHIP_SAVEGAME_VERSION) {
 			std::string name = fr.c_string();
 			const ShipDescr* descr = nullptr;
 
@@ -1080,8 +1083,6 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderShip);
 	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
-
-	fw.unsigned_8(descr().get_owner_type()); // NOCOM(GunChleoc): Handle loading
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);

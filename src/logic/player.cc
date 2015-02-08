@@ -124,10 +124,10 @@ void find_former_buildings
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (const BuildingIndex& building_index : tribes.buildings()) {
-			const BuildingDescr& building_descr = tribes.get_building_descr(building_index);
-			if (building_descr.enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), building_index);
+		for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+			const BuildingDescr* building_descr = tribes.get_building_descr(i);
+			if (building_descr->enhancement() == oldest_idx) {
+				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
 		}
@@ -546,9 +546,9 @@ Building * Player::build
 		return nullptr;
 	}
 
-	const BuildingDescr & descr = egbase().tribes().get_building_descr(idx);
+	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 
-	if (!descr.is_buildable()) {
+	if (!descr->is_buildable()) {
 		return nullptr;
 	}
 
@@ -557,20 +557,20 @@ Building * Player::build
 	map.normalize_coords(c);
 	buildcaps = get_buildcaps(map.get_fcoords(c));
 
-	if (descr.get_ismine()) {
+	if (descr->get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
 			return nullptr;
 	} else {
-		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1)
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1)
 			return nullptr;
-		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT))
+		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT))
 			return nullptr;
 	}
 
 	if (constructionsite)
 		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buildings);
 	else {
-		return &descr.create(egbase(), *this, c, false, false, former_buildings);
+		return &descr->create(egbase(), *this, c, false, false, former_buildings);
 	}
 }
 
@@ -781,8 +781,8 @@ void Player::flagaction(Flag & flag)
 
 
 void Player::allow_worker_type(WareIndex const i, bool const allow) {
-	assert(i < m_allowed_worker_types.size());
-	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
+	assert(i < static_cast<int>(m_allowed_worker_types.size()));
+	assert(!allow || tribe().has_worker(i));
 	m_allowed_worker_types[i] = allow;
 }
 
@@ -1210,7 +1210,8 @@ void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
 const std::vector<uint32_t> * Player::get_ware_production_statistics
 		(WareIndex const ware) const
 {
-	assert(ware < m_ware_productions.size());
+	// NOCOM(GunChleoc): Does this still make sense?
+	assert(ware < static_cast<int>(m_ware_productions.size()));
 
 	return &m_ware_productions[ware];
 }
@@ -1222,7 +1223,8 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 		(WareIndex const ware) const {
 
-	assert(ware < m_ware_consumptions.size());
+	// NOCOM(GunChleoc): Does this still make sense?
+	assert(ware < static_cast<int>(m_ware_consumptions.size()));
 
 	return &m_ware_consumptions[ware];
 }
@@ -1230,7 +1232,8 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
 		(WareIndex const ware) const
 {
-	assert(ware < m_ware_stocks.size());
+	// NOCOM(GunChleoc): Does this still make sense?
+	assert(ware < static_cast<int>(m_ware_stocks.size()));
 
 	return &m_ware_stocks[ware];
 }
@@ -1259,7 +1262,7 @@ void Player::update_building_statistics
 		constructionsite->building().name() : building.descr().name();
 
 	// NOCOM(GunChleoc): Building statistic should show the tribe's buildings + conquered military buildings.
-	BuildingIndex const nr_buildings = egbase.tribes().nrbuildings();
+	const size_t nr_buildings = tribe().get_nrbuildings();
 
 	// Get the valid vector for this
 	if (m_building_stats.size() < nr_buildings)
@@ -1404,7 +1407,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 					("Statistics for player %u (%s) has %u ware types "
 					 "(should be %u). Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
-					 nr_wares, tribe().get_nrwares());
+					 nr_wares, static_cast<unsigned int>(tribe().get_nrwares()));
 
 				// Eat and discard all data
 				for (uint32_t i = 0; i < nr_wares; ++i) {

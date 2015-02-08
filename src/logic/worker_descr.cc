@@ -19,7 +19,10 @@
 
 #include "logic/worker_descr.h"
 
+#include <memory>
+
 #include "base/i18n.h"
+#include "base/point.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -33,17 +36,18 @@
 
 namespace Widelands {
 
-WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
-	BobDescr(type, MapObjectDescr::OwnerType::kTribe, table),
-	icon_fname_        (directory + "/menu.png"),
-	icon_              (nullptr),
+WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const EditorGameBase& egbase) :
+	BobDescr(init_type, MapObjectDescr::OwnerType::kTribe, table),
 	ware_hotspot_      (Point(0, 15)),
+	icon_fname_        ("/menu.png"), // NOCOM(GunChleoc): Add directory - init.lua?
+	icon_              (nullptr),
 	needed_experience_ (-1),
-	becomes_           (INVALID_INDEX)
+	becomes_           (INVALID_INDEX),
+	egbase_            (egbase)
 {
-	// NOCOM(GunChleoc): Use unique_ptr for LuaTables
-	LuaTable items_table = table.get_table("buildcost");
-	for (const std::string& key : items_table.keys<std::string>()) {
+	std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");
+	for (const std::string& key : items_table->keys<std::string>()) {
+		int32_t value;
 		try {
 			if (buildcost_.count(key)) {
 				throw wexception("a buildcost item of this ware type has already been defined: %s", key.c_str());
@@ -58,7 +62,7 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 					 key.c_str());
 			}
 			*/
-			int32_t const value = items_table.get_int(key);
+			value = items_table->get_int(key);
 			uint8_t const count = value;
 			if (count != value)
 				throw wexception("count is out of range 1 .. 255");
@@ -79,14 +83,14 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 
 	// Read the becomes and experience
 	if (table.has_key("becomes")) {
-		becomes_ = table.get_string("becomes");
+		becomes_ = egbase_.tribes().safe_worker_index(table.get_string("becomes"));
 		needed_experience_ = table.get_int("experience");
 	}
 
 	// Read programs
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
-		for (std::string program_name : items_table.keys<std::string>()) {
+		for (std::string program_name : items_table->keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -100,12 +104,12 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 				WorkerProgram::Parser parser;
 
 				parser.descr = this;
-				parser.directory = directory;
+				// NOCOM(GunChleoc): DO we need this? parser.directory = directory;
 				parser.prof = nullptr;
-				parser.table = &items_table;
+				parser.table = items_table.get();
 
 				program = new WorkerProgram(program_name);
-				program->parse(this, &parser, program_name.c_str());
+				program->parse(this, &parser, egbase_.tribes(), program_name.c_str());
 				programs_[program_name.c_str()] = program;
 			}
 
@@ -118,16 +122,16 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 
 	// For carriers
 	if (table.has_key("default_target_quantity")) {
-		default_target_quantity_ = items_table.get_int("default_target_quantity");
+		default_target_quantity_ = items_table->get_int("default_target_quantity");
 	}
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
-		ware_hotspot_(Point(items_table.get_int("1"), items_table.get_int("2")));
+		ware_hotspot_(Point(items_table->get_int("1"), items_table->get_int("2")));
 	}
 }
 
-WorkerDescr::WorkerDescr(const LuaTable& table) :
-	WorkerDescr(MapObjectType::WORKER, table)
+WorkerDescr::WorkerDescr(const LuaTable& table, const EditorGameBase& egbase) :
+	WorkerDescr(MapObjectType::WORKER, table, egbase)
 {}
 
 
@@ -139,12 +143,6 @@ WorkerDescr::~WorkerDescr()
 	}
 }
 
-// NOCOM(GunChleoc): WorkerDescr, won't know their tribe, only the workers.
-const TribeDescr& WorkerDescr::tribe() const {
-	const TribeDescr* owner_tribe = get_owner_tribe();
-	assert(owner_tribe != nullptr);
-	return *owner_tribe;
-}
 
 /**
  * Load graphics (other than animations).
@@ -205,19 +203,19 @@ Bob & WorkerDescr::create_object() const
 * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(WareIndex const index) const {
-	assert(tribe().has_worker(index));
+	assert(egbase_.tribes().worker_exists(index));
 	if (index == worker_index()) {
 		return true;
 	}
 
 	// if requested worker type can be promoted, compare with that type
-	const WorkerDescr & descr = *tribe().get_worker_descr(index);
+	const WorkerDescr& descr = *egbase_.tribes().get_worker_descr(index);
 	WareIndex const becomes_index = descr.becomes();
 	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
 WareIndex WorkerDescr::worker_index() const {
-	return tribe().worker_index(name());
+	return egbase_.tribes().worker_index(name());
 }
 
 }

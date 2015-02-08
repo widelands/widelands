@@ -21,6 +21,7 @@
 #define WL_LOGIC_IMMOVABLE_H
 
 #include <memory>
+#include <unordered_map>
 
 #include "base/macros.h"
 #include "graphic/animation.h"
@@ -148,7 +149,7 @@ protected:
 	Buildcost m_buildcost;
 
 	// tribename or "default", helptext
-	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
+	// NOCOM(GunChleoc): Compiler doesn't like std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
 
 private:
 	// Adds a default program if none was defined.

@@ -43,7 +43,7 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const LuaTable& t);
+	SoldierDescr(const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
 	void load_graphics() override;
@@ -125,6 +125,9 @@ protected:
 	std::vector<std::string> m_die_e_name;
 
 private:
+	// Reads list of animation names from the table and pushes them into result.
+	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 

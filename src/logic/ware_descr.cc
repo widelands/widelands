@@ -36,19 +36,19 @@ WareDescr::WareDescr(const LuaTable& table) :
 	icon_fname_(table.get_string("menu_picture")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
-	LuaTable items_table = table.get_table("default_target_quantity");
-	for (const std::string& key : items_table.keys<std::string>()) {
-		default_target_quantities_.insert(key, items_table.get_int(key));
+	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
+	for (const std::string& key : items_table->keys<std::string>()) {
+		default_target_quantities_.emplace(key, items_table->get_int(key));
 	}
 
 	items_table = table.get_table("preciousness");
-	for (const std::string& key : items_table.keys<std::string>()) {
-		preciousnesses_.insert(key, items_table.get_int(key));
+	for (const std::string& key : items_table->keys<std::string>()) {
+		preciousnesses_.emplace(key, items_table->get_int(key));
 	}
 
 	items_table = table.get_table("helptext");
-	for (const std::string& key : items_table.keys<std::string>()) {
-		helptexts_.insert(key, items_table.get_string(key));
+	for (const std::string& key : items_table->keys<std::string>()) {
+		helptexts_.emplace(key, items_table->get_string(key));
 	}
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
@@ -58,21 +58,26 @@ WareDescr::WareDescr(const LuaTable& table) :
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {
+	/* NOCOM(GunChleoc): Fix this
 	if (preciousnesses_.count(tribename > 0)) {
 		return preciousnesses_.at(tribename);
 	}
+	*/
 	return kInvalidWare;
 }
 
 
 int WareDescr::default_target_quantity(const std::string& tribename) const {
+	/* NOCOM(GunChleoc): Fix this
 	if (default_target_quantities_.count(tribename > 0)) {
 		return default_target_quantities_.at(tribename);
 	}
+	*/
 	return kInvalidWare;
 }
 
 const std::string& WareDescr::helptext(const std::string& tribename) const {
+	/* NOCOM(GunChleoc): Fix this
 	if (helptexts_.count(tribename > 0)) {
 		i18n::Textdomain td("tribes");
 		if (helptexts_.count("default" > 0)) {
@@ -88,6 +93,7 @@ const std::string& WareDescr::helptext(const std::string& tribename) const {
 	} else {
 		return _("This ware has no help text yet.");
 	}
+	*/ return "";
 }
 
 
@@ -104,10 +110,12 @@ bool WareDescr::has_demand_check(const std::string& tribename) const {
 }
 
 void WareDescr::set_has_demand_check(const std::string& tribename) {
+	/* NOCOM(GunChleoc): Fix this
 	if (default_target_quantities_.count(tribename > 0)
 		 && default_target_quantities_.at(tribename) == kInvalidWare) {
 		default_target_quantities_.at(tribename) = 1;
 	}
+	*/
 }
 
 void WareDescr::add_consumer(const BuildingIndex& building_index) {

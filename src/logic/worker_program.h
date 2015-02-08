@@ -39,10 +39,11 @@ struct WorkerProgram : public BobProgramBase {
 	};
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> &);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>&);
 
 	WorkerProgram(const std::string & name) : m_name(name) {}
 	virtual ~WorkerProgram() {}
@@ -57,7 +58,7 @@ struct WorkerProgram : public BobProgramBase {
 		return &m_actions[idx];
 	}
 
-	void parse(WorkerDescr *, Parser *, char const * name);
+	void parse(WorkerDescr *, Parser *, char const * name, const Tribes& tribes);
 	const WorkareaInfo & get_workarea_info() const {return m_workarea_info;}
 
 private:
@@ -68,100 +69,119 @@ private:
 	};
 
 	void parse_mine
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_breed
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_createware
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_setdescription
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_setbobdescription
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_findobject
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_findspace
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_walk
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_animation
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_return
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_object
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_plant
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_create_bob
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_removeobject
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_geologist
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_geologist_find
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_scout
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_play_fx
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 	void parse_construct
-		(WorkerDescr                   *,
-		 Worker::Action                 *,
-		 Parser                         *,
-		 const std::vector<std::string> & cmd);
+		(WorkerDescr*,
+		 Worker::Action*,
+		 Parser*,
+		 const Tribes& tribes,
+		 const std::vector<std::string>& cmd);
 
 	const std::string                 m_name;
 	Actions           m_actions;
