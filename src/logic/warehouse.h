@@ -38,7 +38,7 @@ class PortDock;
 class Request;
 struct Requirements;
 class Soldier;
-struct TribeDescr;
+class TribeDescr;
 class WareInstance;
 struct WareList;
 

@@ -220,7 +220,7 @@ WorkersMap get_valid_workers_for(const Road& r) {
 	WorkersMap valid_workers;
 	valid_workers.insert(WorkerAmount(r.owner().tribe().worker_index("carrier"), 1));
 
-	if (r.get_roadtype() == Road_Busy)
+	if (r.get_roadtype() == RoadType::kBusy)
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
 
 	return valid_workers;
@@ -2531,9 +2531,9 @@ int LuaRoad::get_end_flag(lua_State * L) {
 */
 int LuaRoad::get_road_type(lua_State * L) {
 	switch (get(L, get_egbase(L))->get_roadtype()) {
-		case Road_Normal:
+		case RoadType::kNormal:
 			lua_pushstring(L, "normal"); break;
-		case Road_Busy:
+		case RoadType::kBusy:
 			lua_pushstring(L, "busy"); break;
 		default:
 		   report_error(L, "Unknown Roadtype! This is a bug in widelands!");

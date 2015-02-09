@@ -37,7 +37,7 @@ struct WorkerProgram;
 
 class WorkerDescr : public BobDescr
 {
-	friend struct TribeDescr;
+	friend class TribeDescr;
 	friend class Warehouse;
 	friend struct WorkerProgram;
 
