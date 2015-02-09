@@ -199,7 +199,7 @@ wl_library(graphic
     logic
     notifications
     profile
-    scripting
+    scripting_lua_table
     sound
     wui_overlay_manager
 )

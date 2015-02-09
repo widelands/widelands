@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 06:26+0000\n"
+"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"PO-Revision-Date: 2015-01-23 02:05+0000\n"
 "Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:40+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:31+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -218,18 +218,42 @@ msgid ""
 msgstr "メッセージウィンドウでは、つぎの追加ショートカットを使用できます。"
 
 #: ../../txts/README.lua:82
+msgid "0: shows all messages"
+msgstr ""
+
+#: ../../txts/README.lua:83
+msgid "1: shows geologists' messages only"
+msgstr ""
+
+#: ../../txts/README.lua:84
+msgid "2: shows economy messages only"
+msgstr ""
+
+#: ../../txts/README.lua:85
+msgid "3: shows seafaring messages only"
+msgstr ""
+
+#: ../../txts/README.lua:86
+msgid "4: shows warfare messages only"
+msgstr ""
+
+#: ../../txts/README.lua:87
+msgid "5: shows scenario messages only"
+msgstr ""
+
+#: ../../txts/README.lua:88
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G 選択したメッセージが対応する位置に移動"
 
-#: ../../txts/README.lua:83
-msgid "DELETE: archives the current message"
-msgstr "Delete 選択したメッセージの保管"
+#: ../../txts/README.lua:89
+msgid "DELETE: archives/restores the current message"
+msgstr ""
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:91
 msgid "Online Help"
 msgstr "オンラインヘルプ"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:93
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -241,29 +265,29 @@ msgstr ""
 "Wikiでは最新のオンラインヘルプを、\n"
 "またオンライン事典では部族経済の詳細な説明を閲覧できます。"
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:97
 msgid "Reporting Bugs"
 msgstr "バグ報告"
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:99
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "バグが発生した場合は、バグトラッカーに報告してください。"
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:103
 msgid "Please provide enough background information. Tell us:"
 msgstr "どうか十分なバックグラウンド情報を提供してください。内容は、"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:105
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "・バグを発生させる方法の詳しい手順。"
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:107
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "・その手順を実行するときに起こると予想されることと、実際に起こったこと。"
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:109
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -273,7 +297,7 @@ msgstr ""
 "・実行していたWidelandsのバージョン\n"
 "（つまりビルド番号。  また、開発バージョンやデイリービルドを実行している場合はリビジョン番号）。"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:112
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -282,11 +306,11 @@ msgstr ""
 "・バグによっては特定のプラットフォームで発生しますので、\n"
 "   Widelandsを実行しているオペレーティングシステムも記載してください。"
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:115
 msgid "- Which map you were playing when the bug occurred."
 msgstr "・バグが発生したときにプレイしていたマップ。"
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:117
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -296,7 +320,7 @@ msgstr ""
 "またはスクリーンショットが問題を説明する手助けになるならば、\n"
 "一枚以上のスクリーンショットを添付してください。"
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:120
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -306,11 +330,11 @@ msgstr ""
 "（たとえばクラッシュなどの、どこが切っ掛けになるかを正確に伝えるのが難しいもの）。\n"
 "  詳細については下記のリプレイの項目を参照してください。"
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:124
 msgid "Replays"
 msgstr "リプレイ"
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:126
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -328,7 +352,7 @@ msgstr ""
 "プレイヤーの入力したコマンドをすべて含みます。\n"
 "ファイル名の残り部分はゲーム開始時刻を教えてくれます。"
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:132
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -348,7 +372,7 @@ msgstr ""
 "これはネットワークゲームで別バージョンのプレイヤーがいるときに、\n"
 "非同期問題に悩まされる理由に近いです。"
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "
@@ -378,17 +402,17 @@ msgid "Elders"
 msgstr "長老"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:367
+#: ../../txts/developers:364
 msgid "Graphics"
 msgstr "グラフィック"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:360
+#: ../../txts/developers:357
 msgid "Homepage"
 msgstr "ホームページ"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:374
+#: ../../txts/developers:371
 msgid "Sound"
 msgstr "サウンド"
 
@@ -400,53 +424,49 @@ msgstr "言語"
 msgid "Coders"
 msgstr "コーダー"
 
-#: ../../txts/developers:93
+#: ../../txts/developers:94
 msgid "Graphicians"
 msgstr "グラフィッカー"
 
-#: ../../txts/developers:123
+#: ../../txts/developers:124
 msgid "Musicians"
 msgstr "BGM"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "Sound Effects"
 msgstr "効果音"
 
-#: ../../txts/developers:145
+#: ../../txts/developers:146
 msgid "Maps and Missions"
 msgstr "マップとミッション"
 
-#: ../../txts/developers:165
-msgid "Tutorials"
-msgstr ""
-
-#: ../../txts/developers:171
+#: ../../txts/developers:167
 msgid "Campaign Story"
 msgstr "キャンペーン"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:170
 msgid "Barbarian"
 msgstr "バーバリアン"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:176
 msgid "Empire"
 msgstr "帝国"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:180
 msgid "Atlantean"
 msgstr "アトランティス"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:187
 msgid "Translators"
 msgstr "翻訳者"
 
-#: ../../txts/developers:194
+#: ../../txts/developers:190
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr "注意: launchpad.netへ移動する以前のWidelands翻訳者一覧です。 "
 
-#: ../../txts/developers:195
+#: ../../txts/developers:191
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -454,99 +474,99 @@ msgstr ""
 "launchpad.net経由のWidelands翻訳者一覧は、https://translations.launchpad.net/widelandsを"
 "参照してください。"
 
-#: ../../txts/developers:199
+#: ../../txts/developers:195
 msgid "Czech"
 msgstr "チェコ語"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:202
 msgid "Dansk"
 msgstr "デンマーク語"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:208
 msgid "Dutch"
 msgstr "オランダ語"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:215
 msgid "Finnish"
 msgstr "フィンランド語"
 
-#: ../../txts/developers:225
+#: ../../txts/developers:221
 msgid "French"
 msgstr "フランス語"
 
-#: ../../txts/developers:232
+#: ../../txts/developers:228
 msgid "Galician"
 msgstr "ガリシア語"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:233
 msgid "German"
 msgstr "ドイツ語"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:245
 msgid "Hebrew"
 msgstr "ヘブライ語"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:250
 msgid "Hungarian"
 msgstr "ハンガリー語"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:255
 msgid "Italian"
 msgstr "イタリア語"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:260
 msgid "Polish"
 msgstr "ポーランド語"
 
-#: ../../txts/developers:272
+#: ../../txts/developers:268
 msgid "Russian"
 msgstr "ロシア語"
 
-#: ../../txts/developers:277
+#: ../../txts/developers:273
 msgid "Slovak"
 msgstr "スロバキア語"
 
-#: ../../txts/developers:282
+#: ../../txts/developers:278
 msgid "Spanish"
 msgstr "スペイン語"
 
-#: ../../txts/developers:287
+#: ../../txts/developers:283
 msgid "Swedish"
 msgstr "スウェーデン語"
 
-#: ../../txts/developers:294
+#: ../../txts/developers:290
 msgid "Packagers"
 msgstr "パッケージ"
 
-#: ../../txts/developers:298
+#: ../../txts/developers:294
 msgid "Linux Distributions"
 msgstr "Linuxディストリビューション"
 
-#: ../../txts/developers:309
+#: ../../txts/developers:305
 msgid "Other Unix Distributions"
 msgstr "その他のUnixディストリビューション"
 
-#: ../../txts/developers:320
+#: ../../txts/developers:316
 msgid "Non Unix Distributions"
 msgstr "Unix以外のディストリビューション"
 
-#: ../../txts/developers:332
+#: ../../txts/developers:328
 msgid "Homepage Coders"
 msgstr "ホームページコーダー"
 
-#: ../../txts/developers:341
+#: ../../txts/developers:338
 msgid "Documentation, Help and Wiki"
 msgstr "ドキュメント、ヘルプ、Wiki"
 
-#: ../../txts/developers:356
+#: ../../txts/developers:353
 msgid "Former elders"
 msgstr "以前の長老"
 
-#: ../../txts/developers:379
+#: ../../txts/developers:376
 msgid "Translation"
 msgstr "翻訳"
 
-#: ../../txts/developers:386
+#: ../../txts/developers:383
 msgid "Other"
 msgstr "その他"
 

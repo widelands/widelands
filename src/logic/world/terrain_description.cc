@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
@@ -79,11 +80,11 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      fertility_(table.get_double("fertility")),
      humidity_(table.get_double("humidity")) {
 
-	if (!(0 <= fertility_ && fertility_ <= 1.)) {
-		throw GameDataError("%s: fertility is not in [0, 1].", name_.c_str());
+	if (!(0 < fertility_ && fertility_ < 1.)) {
+		throw GameDataError("%s: fertility is not in (0, 1).", name_.c_str());
 	}
-	if (!(0 <= humidity_ && humidity_ <= 1.)) {
-		throw GameDataError("%s: humidity is not in [0, 1].", name_.c_str());
+	if (!(0 < humidity_ && humidity_ < 1.)) {
+		throw GameDataError("%s: humidity is not in (0, 1).", name_.c_str());
 	}
 	if (temperature_ < 0) {
 		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());

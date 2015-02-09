@@ -17,7 +17,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description,
 		_"Trains soldiers in ‘Evade’." .. " " .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
-		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
+		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.") ..
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually

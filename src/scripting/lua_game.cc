@@ -35,9 +35,9 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "scripting/c_utils.h"
+#include "scripting/globals.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
-#include "scripting/scripting.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -125,7 +125,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 			(RO) The name of this Player.
 */
 int LuaPlayer::get_name(lua_State * L) {
-	Game & game = get_game(L);
+	Game& game = get_game(L);
 	Player & p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;

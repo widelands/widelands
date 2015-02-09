@@ -44,7 +44,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
+#include "scripting/lua_interface.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"

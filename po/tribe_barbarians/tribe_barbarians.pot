@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -569,8 +569,9 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -1703,13 +1704,13 @@ msgid ""
 "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/farm/conf:45
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid ""
 "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -2465,11 +2466,6 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid ""
 "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."
 msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29

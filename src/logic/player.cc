@@ -52,7 +52,6 @@
 #include "logic/warehouse.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 

@@ -20,6 +20,7 @@
 #include "logic/immovable.h"
 
 #include <cstdio>
+#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
@@ -230,21 +231,25 @@ ImmovableDescr::ImmovableDescr
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
-	if (char const * const string = global_s.get_string("size"))
+	using boost::iequals;
+
+	if (global_s.has_val("size")) {
+		const auto& size = global_s.get_string("size");
 		try {
-			if      (!strcasecmp(string, "small"))
+			if      (iequals(size, "small"))
 				m_size = BaseImmovable::SMALL;
-			else if (!strcasecmp(string, "medium"))
+			else if (iequals(size, "medium"))
 				m_size = BaseImmovable::MEDIUM;
-			else if (!strcasecmp(string, "big"))
+			else if (iequals(size, "big"))
 				m_size = BaseImmovable::BIG;
 			else
 				throw GameDataError
 					("expected %s but found \"%s\"",
-					 "{\"small\"|\"medium\"|\"big\"}", string);
+					 "{\"small\"|\"medium\"|\"big\"}", size);
 		} catch (const WException & e) {
 			throw GameDataError("size: %s", e.what());
 		}
+	}
 
 	// parse attributes
 	{

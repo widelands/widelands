@@ -26,6 +26,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "random/random.h"
+#include "scripting/logic.h"
 
 namespace UI {struct ProgressWindow;}
 struct ComputerPlayer;
@@ -106,6 +107,9 @@ public:
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
 	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
 	bool run(UI::ProgressWindow * loader_ui, StartGameType, const std::string& script_to_run, bool replay);
+
+	// Returns the upcasted lua interface.
+	LuaGameInterface& lua() override;
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.

@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 06:27+0000\n"
+"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"PO-Revision-Date: 2015-01-23 02:25+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:40+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "Language: sk\n"
 
 #: ../../txts/README.lua:6
@@ -227,18 +227,42 @@ msgid ""
 msgstr "V okne správ sú dostupné aj tieto dodatočné skratky:"
 
 #: ../../txts/README.lua:82
+msgid "0: shows all messages"
+msgstr ""
+
+#: ../../txts/README.lua:83
+msgid "1: shows geologists' messages only"
+msgstr ""
+
+#: ../../txts/README.lua:84
+msgid "2: shows economy messages only"
+msgstr ""
+
+#: ../../txts/README.lua:85
+msgid "3: shows seafaring messages only"
+msgstr ""
+
+#: ../../txts/README.lua:86
+msgid "4: shows warfare messages only"
+msgstr ""
+
+#: ../../txts/README.lua:87
+msgid "5: shows scenario messages only"
+msgstr ""
+
+#: ../../txts/README.lua:88
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: skočí na miesto zodpovedajúce aktuálnej správe"
 
-#: ../../txts/README.lua:83
-msgid "DELETE: archives the current message"
-msgstr "DELETE: archivuje aktuálnu správu"
+#: ../../txts/README.lua:89
+msgid "DELETE: archives/restores the current message"
+msgstr ""
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:91
 msgid "Online Help"
 msgstr "Online pomoc"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:93
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -251,30 +275,30 @@ msgstr ""
 "našej Wiki\n"
 "a podrobný popis ekonomík kmeňov na našej encyklopédii online."
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:97
 msgid "Reporting Bugs"
 msgstr "Hlásenie chýb"
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:99
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Ak narazíte na chybu, nahláste ju, prosím, na náš sledovač chýb:"
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:103
 msgid "Please provide enough background information. Tell us:"
 msgstr "Uveďte, prosím, dostatočné informácie. Povedzte nám:"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:105
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- Podrobný popis krokov na vyvolanie chyby, ak je to možné."
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:107
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 "- Čo ste očakávali, aby sa stalo, pri vykonávaní krokov a čo sa stalo naozaj."
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:109
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -284,7 +308,7 @@ msgstr ""
 "- Akú verziu hry používate (buď číslo zostavenia, alebo číslo revízie,\n"
 "pokiaľ spúšťate vývojovú verziu alebo každodenné zostavenie.)"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:112
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -293,11 +317,11 @@ msgstr ""
 "- Uveďte tiež, prosím, v ktorom operačnom systéme spúšťate Widelands,\n"
 "keďže niektoré chyby môžu byť príznačné pre istú platformu."
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:115
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Akú mapu ste hrali, keď nastala chyba."
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:117
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -307,7 +331,7 @@ msgstr ""
 "to pomôže\n"
 "demonštrovať problém, zahrňte, prosím, jednu alebo viac snímok obrazovky."
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:120
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -317,11 +341,11 @@ msgstr ""
 "pády, pri ktorých je ťažké rozlíšiť, čo ich aktivuje), zahrňte ich, prosím,\n"
 "tiež. O ďalších informáciách sa môžete dočítať v časti Záznamy nižšie."
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:124
 msgid "Replays"
 msgstr "Záznamy"
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:126
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -340,7 +364,7 @@ msgstr ""
 "stavanie cesty alebo útok na nepriateľa. Zvyšok názvov súborov vám povie\n"
 "čas, kedy ste začali hrať hru."
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:132
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -360,7 +384,7 @@ msgstr ""
 "jeden z hráčov v sieťovej hre odlišnú verziu hry, nastanú problémy so "
 "synchronizáciou."
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "
@@ -393,17 +417,17 @@ msgid "Elders"
 msgstr "Rada starších"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:367
+#: ../../txts/developers:364
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:360
+#: ../../txts/developers:357
 msgid "Homepage"
 msgstr "Domovská stránka"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:374
+#: ../../txts/developers:371
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -415,47 +439,43 @@ msgstr "Jazyky"
 msgid "Coders"
 msgstr "Programátori"
 
-#: ../../txts/developers:93
+#: ../../txts/developers:94
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:123
+#: ../../txts/developers:124
 msgid "Musicians"
 msgstr "Hudobníci"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../txts/developers:145
+#: ../../txts/developers:146
 msgid "Maps and Missions"
 msgstr "Mapy a misie"
 
-#: ../../txts/developers:165
-msgid "Tutorials"
-msgstr ""
-
-#: ../../txts/developers:171
+#: ../../txts/developers:167
 msgid "Campaign Story"
 msgstr "Kampane"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:170
 msgid "Barbarian"
 msgstr "Barbari"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:176
 msgid "Empire"
 msgstr "Impérium"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:180
 msgid "Atlantean"
 msgstr "Atlantíďania"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:187
 msgid "Translators"
 msgstr "Prekladatelia"
 
-#: ../../txts/developers:194
+#: ../../txts/developers:190
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -463,7 +483,7 @@ msgstr ""
 "POZNÁMKA: v tomto zozname sú ľudia, ktorí preložili Widelands predtým, ako "
 "sme sa presunuli na launchpad.net. "
 
-#: ../../txts/developers:195
+#: ../../txts/developers:191
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -471,99 +491,99 @@ msgstr ""
 "Zoznam ľudí, ktorí pomáhali preložiť Widelands cez launchpad.net, nájdete na "
 "adrese https://translations.launchpad.net/widelands."
 
-#: ../../txts/developers:199
+#: ../../txts/developers:195
 msgid "Czech"
 msgstr "Čeština"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:202
 msgid "Dansk"
 msgstr "Dánčina"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:208
 msgid "Dutch"
 msgstr "Holandčina"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:215
 msgid "Finnish"
 msgstr "Fínčina"
 
-#: ../../txts/developers:225
+#: ../../txts/developers:221
 msgid "French"
 msgstr "Francúzština"
 
-#: ../../txts/developers:232
+#: ../../txts/developers:228
 msgid "Galician"
 msgstr "Galčina"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:233
 msgid "German"
 msgstr "Nemčina"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:245
 msgid "Hebrew"
 msgstr "Hebrejčina"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:250
 msgid "Hungarian"
 msgstr "Maďarčina"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:255
 msgid "Italian"
 msgstr "Taliančina"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:260
 msgid "Polish"
 msgstr "Poľština"
 
-#: ../../txts/developers:272
+#: ../../txts/developers:268
 msgid "Russian"
 msgstr "Ruština"
 
-#: ../../txts/developers:277
+#: ../../txts/developers:273
 msgid "Slovak"
 msgstr "Slovenčina"
 
-#: ../../txts/developers:282
+#: ../../txts/developers:278
 msgid "Spanish"
 msgstr "Španielčina"
 
-#: ../../txts/developers:287
+#: ../../txts/developers:283
 msgid "Swedish"
 msgstr "Švédčina"
 
-#: ../../txts/developers:294
+#: ../../txts/developers:290
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
-#: ../../txts/developers:298
+#: ../../txts/developers:294
 msgid "Linux Distributions"
 msgstr "Linuxové distribúcie"
 
-#: ../../txts/developers:309
+#: ../../txts/developers:305
 msgid "Other Unix Distributions"
 msgstr "Iné unixové distribúcie"
 
-#: ../../txts/developers:320
+#: ../../txts/developers:316
 msgid "Non Unix Distributions"
 msgstr "Neunixové distribúcie"
 
-#: ../../txts/developers:332
+#: ../../txts/developers:328
 msgid "Homepage Coders"
 msgstr "Domovskú stránku napísali"
 
-#: ../../txts/developers:341
+#: ../../txts/developers:338
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentácia, pomoc a Wiki"
 
-#: ../../txts/developers:356
+#: ../../txts/developers:353
 msgid "Former elders"
 msgstr "Bývalá rada starších"
 
-#: ../../txts/developers:379
+#: ../../txts/developers:376
 msgid "Translation"
 msgstr "Preklad"
 
-#: ../../txts/developers:386
+#: ../../txts/developers:383
 msgid "Other"
 msgstr "Ostatní"
 

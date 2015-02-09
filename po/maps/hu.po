@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-04-16 03:37+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"PO-Revision-Date: 2015-01-24 19:25+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:33+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-25 05:22+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "Language: hu\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 #: ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Pusztulásból teremtésbe"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -33,7 +33,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/elemental:8
 #: ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Egy hely, amit otthonnak hívunk"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -44,7 +44,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/elemental:7
 #: ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Ez a föld a miénk"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -56,15 +56,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "A második birodalom"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbárok"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Könnyű. Bemutatja a barbárokat"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -82,18 +82,29 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és "
+"egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes "
+"legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, "
+"Chat'Karuth a legidősebb fiára hagyta a trónt - ezzel magára haragítva másik "
+"két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron "
+"elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és "
+"visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az "
+"Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei "
+"vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy "
+"megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani "
+"nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Hónapok száműzetésben"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Birodalom"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "A birodalom bemutatása"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -108,18 +119,28 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
+"Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – százötven "
+"katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek "
+"léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. "
+"Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is "
+"elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel "
+"az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább "
+"figyelmen kívül hagyták a lehetséges ellenséget. Ezt nem kellett volna. Egy "
+"márciusi éjszakán száz barbár gyalogos megtámadta a felkészületlen sereget, "
+"mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája "
+"menekült meg."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Hajsza a tűz után"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantisziak"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Kihívást jelentő. Az atlantisziak bemutatása"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -129,16 +150,21 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"Mikor istenük csalódott az atlantisziakban, és szigetüket elsüllyesztette, "
+"egy asszony küzdelme az igazságért és egy új esélyért népének, legendává "
+"lett. Jundlina, ki a megmaradt atlantisziakat a világ egy új részére, új "
+"jövőbe vezette, kora leghatalmasabb embere lett – de ezért nagy árat "
+"fizetett: emberségét és lelkét."
 
 #: ../../campaigns/campaigns.conf:78
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Malac' Mor partjai"
 
 #: ../../campaigns/campaigns.conf:83
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "A száműzetés előőrse"
 
 #: ../../campaigns/campaigns.conf:88
 #: ../../campaigns/campaigns.conf:100
@@ -183,46 +209,55 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Alapvető kezelés"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
 msgstr ""
+"Ebben az oktatójátékban megtanulod, hogyan kell navigálni a Widelandsben, "
+"illetve, hogy miként lehet épületeket és utakat építeni."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Hadviselés"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
 msgstr ""
+"Ebben az oktatójátékban megismered a hadviselés titkait: hogyan készíthetsz "
+"katonákat, miként fejlesztheted őket, és hogyan vezetheted őket a harcban."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Hajózás"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
 msgstr ""
+"Ebben az oktatójátékban megismered a hajózást, azon belül a hajók és a "
+"kikötők kezelését."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Gazdaság"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your "
 "economy. Recommended for players with some experience."
 msgstr ""
+"Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Widelands "
+"gazdaságod finomhangolására. Némi tapasztalattal már rendelkező játékosoknak "
+"ajánljuk."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -565,7 +600,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Csempészek"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
@@ -573,6 +608,9 @@ msgid ""
 "have appeared and now a rivalry among smugglers has started: Which team will "
 "be the first to smuggle a certain number of wares?"
 msgstr ""
+"Jólszervezett csempészútvonalaid hirtelen mozgalmasabbá váltak: két másik "
+"törzs jelent meg, így versengés indult a csempészek között: melyik csapat "
+"csempészik át hamarabb egy bizonyos mennyiségű árut?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"

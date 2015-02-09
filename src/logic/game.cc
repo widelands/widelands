@@ -60,8 +60,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication.h"
@@ -907,6 +907,9 @@ void Game::send_player_cancel_expedition_ship(Ship & ship) {
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
+LuaGameInterface& Game::lua() {
+	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+}
 
 /**
  * Sample global statistics for the game.
