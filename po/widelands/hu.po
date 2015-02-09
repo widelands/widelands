@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:41+0000\n"
+"X-Launchpad-Export-Date: 2015-02-09 05:43+0000\n"
 "X-Generator: Launchpad (build 17331)\n"
 "Language: hu\n"
 
@@ -4188,12 +4188,3 @@ msgstr "Követ"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Maximum of players:"
-#~ msgstr "Játékosok maximum száma:"
-
-#~ msgid "The name of the map that was played"
-#~ msgstr "A játszott térkép neve."
-
-#~ msgid "The filename the game was saved under"
-#~ msgstr "Amilyen néven mentve lett a játék"
