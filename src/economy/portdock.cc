@@ -172,8 +172,10 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	if (egbase.objects().object_still_available(m_warehouse)) {
 
+		//we need to remember this for possible recreation of portdock
 		wh = m_warehouse;
 
+		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
 			for (ShippingItem& shipping_item : m_waiting) {
 				WareInstance* ware;
@@ -187,7 +189,6 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 				}
 			}
 		}
-
 		m_waiting.clear();
 		m_warehouse->m_portdock = nullptr;
 	}
@@ -212,19 +213,16 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	PlayerImmovable::cleanup(egbase);
 
-	if (wh) {
+	//now let attempt to recreate the portdock
+	if (!wh->m_cleanup_in_progress){
 		if (upcast(Game, game, &egbase)) {
-			if (game->is_loaded()) {
+			if (game->is_loaded()) { //do not attempt when shutting down
 				Player& player = owner();
-				log("Message: Portdock lost, trying to restore it (player %d)\n",
-				    player.player_number());
 				wh->restore_portdock_or_destroy(egbase);
-				return;
 			}
 		}
-		// this is not a (running) game, destroying the port
-		wh->destroy(egbase);
 	}
+
 }
 
 /**

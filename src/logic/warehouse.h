@@ -274,6 +274,11 @@ private:
 	std::vector<PlannedWorkers> m_planned_workers;
 
 	PortDock * m_portdock;
+
+	//this is information for portdock,to know whether it should
+	//try to recreate itself
+	bool m_cleanup_in_progress;
+
 };
 
 }
