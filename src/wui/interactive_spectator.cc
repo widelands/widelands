@@ -241,6 +241,7 @@ void InteractiveSpectator::toggle_buildhelp(){
 	Widelands::Map & map = game().map();
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(m_showbuildhelp);
+	m_toggle_buildhelp.set_perm_pressed(m_showbuildhelp);
 }
 
 
