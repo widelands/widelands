@@ -83,7 +83,7 @@ InteractiveSpectator::InteractiveSpectator
 	m_toggle_minimap
 		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap"))),
 	m_toggle_buildhelp
-	  (INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
+		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 	m_showbuildhelp(false)
 
 {
@@ -178,7 +178,7 @@ void InteractiveSpectator::start()
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-  (boost::bind(&int_player_overlay_callback_function, _1, boost::ref(game()) ));
+	(boost::bind(&int_player_overlay_callback_function, _1, boost::ref(game()) ));
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map(game().world());
