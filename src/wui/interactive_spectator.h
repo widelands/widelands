@@ -50,6 +50,7 @@ private:
 	void toggle_chat();
 	void toggle_options_menu();
 	void toggle_statistics();
+	void toggle_buildhelp();
 	void exit_btn();
 	void save_btn();
 	bool can_see(Widelands::PlayerNumber) const override;
@@ -64,10 +65,13 @@ private:
 	UI::Button m_toggle_options_menu;
 	UI::Button m_toggle_statistics;
 	UI::Button m_toggle_minimap;
+	UI::Button m_toggle_buildhelp;
 
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;
+
+	bool m_showbuildhelp;
 };
 
 
