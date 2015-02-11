@@ -29,6 +29,14 @@ title=_Out of Game
 message=_The hunter working out of this hunter’s hut can’t find any game in his working radius. Remember that you can build a gamekeeper’s hut to release more game into the wild.
 delay_attempts=10
 
+[build]
+pics=build_??.png
+hotspot=44 44
+
 [idle]
-pics=hunters_hut_i_??.png
-hotspot=45 40
+pics=idle_??.png
+hotspot=44 44
+
+[unoccupied]
+pics=unoccupied_??.png
+hotspot=44 44
