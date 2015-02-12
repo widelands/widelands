@@ -2102,13 +2102,15 @@ int LuaMapObject::__eq(lua_State * L) {
 	MapObject * me = m_get_or_zero(egbase);
 	MapObject * you = other->m_get_or_zero(egbase);
 
-	// Both objects are destroyed: they are equal
-	if (me == you) lua_pushboolean(L, true);
-	else if (!me || !you) // One of the objects is destroyed: they are distinct
+	// Both objects are destroyed (nullptr) or equal: they are equal
+	if (me == you) {
+		lua_pushboolean(L, true);
+	} else if (me == nullptr || you == nullptr) { // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, false);
-	else // Compare them
+	} else { // Compare their serial number.
 		lua_pushboolean
 			(L, other->get(L, egbase)->serial() == get(L, egbase)->serial());
+	}
 
 	return 1;
 }
