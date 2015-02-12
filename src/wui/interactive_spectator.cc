@@ -40,7 +40,7 @@ namespace  {
 
 // This function is the callback for recalculation of field overlays for
 // spectators (iteration over all players and first match returned)
-int32_t int_player_overlay_callback_function
+int32_t all_player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, const Widelands::Game& game)
 {
 	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
@@ -178,7 +178,7 @@ void InteractiveSpectator::start()
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-	(boost::bind(&int_player_overlay_callback_function, _1, boost::ref(game()) ));
+	(boost::bind(&all_player_overlay_callback_function, _1, boost::ref(game()) ));
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map(game().world());
