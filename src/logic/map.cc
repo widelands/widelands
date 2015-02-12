@@ -158,7 +158,7 @@ void Map::recalc_whole_map(const World& world)
 	for (int16_t y = 0; y < m_height; ++y)
 		for (int16_t x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
-			uint32_t radius;
+			uint32_t radius = 0;
 			check_neighbour_heights(f, radius);
 			recalc_brightness     (f);
 			recalc_border         (f);
