@@ -285,6 +285,7 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 		m_next_worker_without_cost_spawn[i] = never();
 	}
 	m_next_stock_remove_act = 0;
+	m_cleanup_in_progress = false;
 }
 
 

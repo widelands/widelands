@@ -100,8 +100,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_productionsite_check_due_(0),
      next_mine_check_due_(0),
      next_militarysite_check_due_(0),
-     next_ship_check_due(5 * 60 * 1000),
-     next_marine_decisions_due(5 * 60 * 1000),
+     next_ship_check_due(30 * 1000),
+     next_marine_decisions_due(30 * 1000),
      next_attack_consideration_due_(300000),
      next_trainingsites_check_due_(15 * 60 * 1000),
      next_bf_check_due_(1000),
@@ -515,6 +515,21 @@ void DefaultAI::late_initialization() {
 
 	Map& map = game().map();
 
+	//here we generate list of all ports and their vicinity from entire map
+	for (const Coords& c : map.get_port_spaces()) {
+		//printf ("portspace found at %3dx %3d\n",c.x,c.y);
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
+		do {
+			const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
+			if (port_reserved_coords.count(hash) == 0)
+				port_reserved_coords.insert(hash);
+		} while (mr.advance(map));
+	}
+	
+	if (!port_reserved_coords.empty()) {
+		seafaring_economy=true;
+	}
+
 	//here we scan entire map for own ships
 	std::set<OPtr<Ship>> found_ships;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
@@ -558,6 +573,27 @@ void DefaultAI::late_initialization() {
 			}
 		}
 	}
+	
+	printf (" doing late initialization before portspaces: ports: %2d %s, ships: %d, ports: %d\n",
+	map.get_port_spaces().size(), (seafaring_economy)?" - seafaring on":"",
+	allships.size(),num_ports );
+	
+	//blocking space consumers vicinity (for game reload)
+	for (const ProductionSiteObserver& ps_obs : productionsites) {
+		if (ps_obs.bo->space_consumer_ && !ps_obs.bo->plants_trees_) {
+			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));			
+			//MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
+			do {
+				BlockedField blocked2(
+				   map.get_fcoords(*(mr.location().field)), game().get_gametime() + 20 * 60 * 1000);
+				blocked_fields.push_back(blocked2);
+			} while (mr.advance(map));
+		}
+	}
+	
+	printf(" Blocked fields: %3d\n", blocked_fields.size());
+	
+	
 }
 
 /**
@@ -711,21 +747,23 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	// if curent port is a portspace we need add near fields to a list
-	// of fields prohibited for buildings
+	//// if curent port is a portspace we need add near fields to a list //NOCOM
+	//// of fields prohibited for buildings
 	if (!field.is_portspace_) {  // if we know it, no need to do it once more
 		if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
 			field.is_portspace_ = true;
-			seafaring_economy = true;
-			// blocking fields in vicinity
-			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(field.coords), 3));
-			do {
-				const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
-				if (port_reserved_coords.count(hash) == 0)
-					port_reserved_coords.insert(hash);
-			} while (mr.advance(map));
 		}
 	}
+			//seafaring_economy = true;
+			//// blocking fields in vicinity
+			//MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(field.coords), 3));
+			//do {
+				//const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
+				//if (port_reserved_coords.count(hash) == 0)
+					//port_reserved_coords.insert(hash);
+			//} while (mr.advance(map));
+		//}
+	//}
 
 	// testing if a port is nearby, such field will get a priority boost
 	uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
@@ -777,7 +815,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && (field.fish_nearby_ = -1 || game().get_gametime() % 10 == 0)) {
+		if (field.water_nearby_ > 0 && (field.fish_nearby_ == -1 || game().get_gametime() % 10 == 0)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -978,12 +1016,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 
 	// Reset statistics for all buildings
 	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		if (buildings_.at(i).cnt_built_ > 0) {
-			buildings_.at(i).current_stats_ = 0;
-		} else {
-			buildings_.at(i).current_stats_ = 0;
-		}
-
+		buildings_.at(i).current_stats_ = 0;
 		buildings_.at(i).unoccupied_ = false;
 	}
 
@@ -2093,12 +2126,12 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 
 	// if this is end flag (or sole building) or just randomly
 	if (flag.nr_of_roads() <= 1 || gametime % 200 == 0) {
-		create_shortcut_road(flag, 13, 20);
+		create_shortcut_road(flag, 13, 20, gametime);
 		inhibit_road_building_ = gametime + 800;
 	}
 	// this is when a flag is full
 	else if (flag.current_wares() > 6 && gametime % 10 == 0) {
-		create_shortcut_road(flag, 9, 0);
+		create_shortcut_road(flag, 9, 0, gametime);
 		inhibit_road_building_ = gametime + 400;
 	}
 
@@ -2109,7 +2142,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 // and tries to find alternative route from one flag to another.
 // if route exists, it is not too long, and current road is not intensively used
 // the road can be dismantled
-bool DefaultAI::dispensable_road_test(const Road& road) {
+bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
@@ -2182,67 +2215,141 @@ bool DefaultAI::dispensable_road_test(const Road& road) {
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
-bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uint16_t minred) {
+bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uint16_t minred, int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
+	//if we passed grace time this will be last attempt and if it fails
+	//building is destroyes
+	bool last_attempt_ = false;
 
-	// there are two special situations which have a bit different treatment
-	bool is_remote_port_csite = false;
-	bool stationed_military = false;
-	if (flag.get_economy()->warehouses().empty()) {
-		// first very special case - lonesome port (in the phase of constructionsite)
-		// obviously it has no warehouse/road network to connect to
-		if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
-			BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
-			if (bo.is_port_ &&
-			    remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
-				is_remote_port_csite = true;
-			}
-		}
+	//first we deal with situations when this is economy with no warehouses
+	//and this is a flag belonging to a building/constructionsite
+	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
 
-		// second exemption is when a military buiding was conquered, it
-		// might be just too far from near connected building
-		if (Building* b = flag.get_building()) {
-			if (upcast(MilitarySite, militb, b)) {
-				if (militb->present_soldiers().size() > 0) {
-					stationed_military = true;
-					// also increasing checkradius a bit
-					checkradius += 4;
+		//if we are within grace time, it is OK
+		if (eco->dismantle_grace_time_ > gametime && eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()){
+			;
+		//if grace time is not set, this is probably first time without a warehouse and we must
+		//set it
+		} else if (eco->dismantle_grace_time_ == std::numeric_limits<int32_t>::max()) {
+
+			// adding grace time for constructionsites
+			// first very special case - a port (in the phase of constructionsite)
+			// this might be new colonization port
+			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
+				BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
+				if (bo.is_port_){
+					eco->dismantle_grace_time_ = gametime + 60 * 60 * 1000; //one hour should be enough
+					printf (" %d: granting grace time for port at %3dx%3d: %3d minutes\n",
+					player_number(),
+					flag.get_building()->get_position().x, flag.get_building()->get_position().y,
+					(eco->dismantle_grace_time_-gametime)/60000);
+				} else {  //other constructionsites
+					eco->dismantle_grace_time_ = gametime + 60 * 1000; //one hour should be enough
+					//printf (" %d: granting grace time for a construction site %3dx%3d: %3d minutes\n",
+					//player_number(),
+					//flag.get_building()->get_position().x,flag.get_building()->get_position().y,
+					//(eco->dismantle_grace_time_-gametime)/60000);
+				}
+			
+			//buildings
+			} else {
+				bool occupied_military_ = false;
+				Building* b = flag.get_building();
+				if (upcast(MilitarySite, militb, b)) {
+					if (militb->stationed_soldiers().size() > 0) {
+						occupied_military_ = true;
+					}
+				}
+
+				if (occupied_military_) {
+					eco->dismantle_grace_time_ = (gametime + 15 * 60 * 1000) +
+					(eco->flags.size() * 15 * 1000);
+					checkradius += 3;
+					printf (" %d: granting grace time for military building at %3dx%3d: %3d minutes (till: %6d min.)\n",
+						player_number(),
+						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
+						(eco->dismantle_grace_time_-gametime)/60000,
+						eco->dismantle_grace_time_/60000);
+				} else { //for other normal buildings
+					eco->dismantle_grace_time_ = gametime +  30 * 1000 + eco->flags.size() * 15 * 1000 ;
+					printf (" %d: granting grace time for common building at %3dx%3d: %3d minutes\n",
+						player_number(),
+						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
+						(eco->dismantle_grace_time_-gametime)/60000);
 				}
 			}
+
+		//we have passed grace_time - it is time to dismantle
+		} else {
+			last_attempt_ = true;
+			//generally we increase a check radius in such case
+			checkradius += 4;
 		}
-	}
 
-	if (is_remote_port_csite ||
-	    (stationed_military && game().get_gametime() % 10 > 0)) {  // counter disabled
-		;
-	} else if (flag.get_economy()->warehouses().empty()) {
-		eco->failed_connection_tries += 1;
-	} else {
-		eco->failed_connection_tries = 0;
-	}
+	} 
 
-	// explanation for 'eco->flags.size() * eco->flags.size()'
-	// The AI is able to dismantle whole economy without warehouse as soon as single
-	// building not connected anywhere. But so fast dismantling is not deserved (probably)
-	// so the bigger economy the longer it takes to be dismantled
-	if (eco->failed_connection_tries > 3 + eco->flags.size() * eco->flags.size()) {
 
-		Building* bld = flag.get_building();
+					//stationed_military = true;  NOCOM
+					//// also increasing checkradius a bit
+					//checkradius += 4;
+	//// there are two special situations which have a bit different treatment
+	//bool is_remote_port_csite = false;
+	//bool stationed_military = false;
+	//if (flag.get_economy()->warehouses().empty()) {
+		//// first very special case - lonesome port (in the phase of constructionsite)
+		//// obviously it has no warehouse/road network to connect to
+		//if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
+			//BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
+			//if (bo.is_port_ &&
+			    //remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
+				//is_remote_port_csite = true;
+			//}
+		//}
 
-		if (bld) {
-			// first we block the field for 15 minutes, probably it is not good place to build a
-			// building on
-			BlockedField blocked(
-			   game().map().get_fcoords(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
-			blocked_fields.push_back(blocked);
-			eco->flags.remove(&flag);
-			game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-		}
-		return true;
-	}
+		//// second exemption is when a military buiding was conquered, it
+		//// might be just too far from near connected building
+		//if (Building* b = flag.get_building()) {
+			//if (upcast(MilitarySite, militb, b)) {
+				//if (militb->present_soldiers().size() > 0) {
+					//stationed_military = true;
+					//// also increasing checkradius a bit
+					//checkradius += 4;
+				//}
+			//}
+		//}
+	//}
+
+	//if (is_remote_port_csite ||
+	    //(stationed_military && game().get_gametime() % 10 > 0)) {  // counter disabled
+		//;
+	//} else if (flag.get_economy()->warehouses().empty()) {
+		//eco->failed_connection_tries += 1;
+	//} else {
+		//eco->failed_connection_tries = 0;
+	//}
+
+	//// explanation for 'eco->flags.size() * eco->flags.size()'
+	//// The AI is able to dismantle whole economy without warehouse as soon as single
+	//// building not connected anywhere. But so fast dismantling is not deserved (probably)
+	//// so the bigger economy the longer it takes to be dismantled
+	//if (eco->failed_connection_tries > 3 + eco->flags.size() * eco->flags.size()) {
+
+		//Building* bld = flag.get_building();
+
+		//if (bld) {
+			//// first we block the field for 15 minutes, probably it is not good place to build a
+			//// building on
+			//BlockedField blocked(
+			   //game().map().get_fcoords(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
+			//blocked_fields.push_back(blocked);
+			//eco->flags.remove(&flag);
+			//game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+		//}
+		//return true;
+	//}
 
 	Map& map = game().map();
 
@@ -2255,10 +2362,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	std::vector<Coords> reachable;
 
 	// vector reachable now contains all suitable fields
-	map.find_reachable_fields(
+	const uint32_t reachable_fields_count = map.find_reachable_fields(
 	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
 
-	if (reachable.empty()) {
+	if (reachable_fields_count == 0) {
 		return false;
 	}
 
@@ -2432,6 +2539,21 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	}
 
 	// if all possible roads skipped
+	if (last_attempt_) {
+		Building* bld = flag.get_building();
+		printf ("  destroying a building at %3dx %3d because after grace time (current time: %6d).\n",
+		bld->get_position().x, bld->get_position().y,
+		gametime/60000);
+		// first we block the field for 15 minutes, probably it is not good place to build a
+		// building on
+		BlockedField blocked(
+		   game().map().get_fcoords(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
+		blocked_fields.push_back(blocked);
+		eco->flags.remove(&flag);
+		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+		return true;
+	}
+
 	return false;
 }
 
@@ -2792,7 +2914,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	if (gametime < next_marine_decisions_due) {
 		return false;
 	}
-	next_marine_decisions_due += kMarineDecisionInterval;
+	next_marine_decisions_due = gametime + kMarineDecisionInterval;
 
 	if (!seafaring_economy) {
 		return false;
@@ -2805,7 +2927,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	uint16_t working_shipyards_count = 0;
 	uint16_t expeditions_in_prep = 0;
 	uint16_t expeditions_in_progress = 0;
-	uint16_t territories_count = 1;
+	//uint16_t territories_count = 1; NOCOM
 	bool idle_shipyard_stocked = false;
 
 	// goes over all warehouses (these includes ports)
@@ -2817,7 +2939,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 					expeditions_in_prep += 1;
 				}
 			} else {
-				log("  there is a port without portdock at %3dx%3d?\n",
+				log("  there is a port without portdock at %3dx%3d?\n", //NOCOM - remove
 				    wh_obs.site->get_position().x,
 				    wh_obs.site->get_position().y);
 			}
@@ -2852,41 +2974,45 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 		}
 	}
 
-	// we must verify that all remote ports are still ours (and exists at all)
-	bool still_ours;
-	for (std::unordered_set<uint32_t>::iterator ports_iter = remote_ports_coords.begin();
-	     ports_iter != remote_ports_coords.end();
-	     ++ports_iter) {
-		still_ours = false;
-		FCoords fcoords = game().map().get_fcoords(coords_unhash(*ports_iter));
-		if (fcoords.field->get_owned_by() == player_number()) {
-			if (upcast(PlayerImmovable, imm, fcoords.field->get_immovable())) {
-				still_ours = true;
-			}
-		}
+	//// we must verify that all remote ports are still ours (and exists at all)
+	//bool still_ours;
+	//for (std::unordered_set<uint32_t>::iterator ports_iter = remote_ports_coords.begin();
+	     //ports_iter != remote_ports_coords.end();
+	     //++ports_iter) {
+		//still_ours = false;
+		//FCoords fcoords = game().map().get_fcoords(coords_unhash(*ports_iter));
+		//if (fcoords.field->get_owned_by() == player_number()) {
+			//if (upcast(PlayerImmovable, imm, fcoords.field->get_immovable())) {
+				//still_ours = true;
+			//}
+		//}
 
-		if (!still_ours) {
-			remote_ports_coords.erase(*ports_iter);
-			break;
-		}
-	}
-	territories_count += remote_ports_coords.size();
+		//if (!still_ours) {
+			//remote_ports_coords.erase(*ports_iter);
+			//break;
+		//}
+	//}
+	////territories_count += remote_ports_coords.size();
 
 	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (static_cast<float>(allships.size()) >
-	    static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
+	if (static_cast<float>(allships.size()) >= ports_count) {
+	   // static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) { NOCOM
 		enough_ships = FleetStatus::kEnoughShips;
-	} else if (static_cast<float>(allships.size()) <
-	           static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
+		//printf (" %d: ship not needed\n", player_number());
+	} else if (static_cast<float>(allships.size()) < ports_count){
+	         //  static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) { NOCOM
 		enough_ships = FleetStatus::kNeedShip;
+		//printf (" %d: ship needed\n", player_number());
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
 	if (shipyards_count > 0 && enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked &&
 	    ports_count > 0) {
+
+		printf (" %d: want to build a ship\n", player_number());
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
 			if (ps_obs.bo->is_shipyard_ && ps_obs.site->can_start_working() &&
@@ -2912,6 +3038,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && enough_ships == FleetStatus::kEnoughShips && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
+		printf (" %d: starting preparation for expedition\n", player_number());
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 
@@ -2930,7 +3057,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		return false;
 	}
 
-	next_ship_check_due += kShipCheckInterval;
+	next_ship_check_due = gametime + kShipCheckInterval;
 
 	if (!seafaring_economy) {
 		return false;
@@ -3693,8 +3820,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces()->front());
 
 		if ((gametime / 10) % 8 < spot_score) {  // we build a port here
-			const Coords last_portspace = so.ship->exp_port_spaces()->front();
-			remote_ports_coords.insert(coords_hash(last_portspace));
+			//const Coords last_portspace = so.ship->exp_port_spaces()->front();
+			//remote_ports_coords.insert(coords_hash(last_portspace));
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
@@ -3842,6 +3969,15 @@ void DefaultAI::gain_building(Building& b) {
 			if (bo.is_port_) {
 				++num_ports;
 				seafaring_economy = true;
+				//unblock nearby fields, might be used for some buildings...
+				Map& map = game().map();
+				MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
+				do {
+					const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
+					if (port_reserved_coords.count(hash) > 0)
+						port_reserved_coords.erase(hash);
+				} while (mr.advance(map));
+				
 			}
 		}
 	}

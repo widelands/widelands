@@ -259,6 +259,7 @@ struct BuildableField {
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
 	     near_border_(false),
+	     unowned_mines_pots_nearby_(0),
 	     trees_nearby_(0),
 	     // explanation of starting values
 	     // this is done to save some work for AI (CPU utilization)
@@ -279,6 +280,7 @@ struct BuildableField {
 	     military_in_constr_nearby_(0),
 	     military_presence_(0),
 	     military_stationed_(0),
+	     military_unstationed_(0),
 	     is_portspace_(false),
 	     port_nearby_(false) {
 	}
@@ -304,12 +306,12 @@ struct MineableField {
 struct EconomyObserver {
 	Widelands::Economy& economy;
 	std::list<Widelands::Flag const*> flags;
-	int32_t next_connection_try;
-	uint32_t failed_connection_tries;
+	int32_t dismantle_grace_time_;
 
 	EconomyObserver(Widelands::Economy& e) : economy(e) {
-		next_connection_try = 0;
-		failed_connection_tries = 0;
+		//next_connection_try = 0;
+		//failed_connection_tries = 0;
+		dismantle_grace_time_ = std::numeric_limits<int32_t>::max();
 	}
 };
 
