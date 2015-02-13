@@ -27,9 +27,10 @@ fi
 
 set -x # Print all commands.
 
-# Pull translations from Transifex into local trunk
+# Pull translations from Transifex into local trunk and add new translation files
 pushd ../trunk && bzr pull
 tx pull -a
+bzr add po/*/*.po
 bzr commit -m "Merged translations."
 
 # Fix line breaks.
