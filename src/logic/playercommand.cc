@@ -1349,7 +1349,7 @@ void CmdResetWareTargetQuantity::execute(Game & game)
 		const int32_t count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  count, duetime() );
+			(ware_type(),  count, duetime());
 	}
 }
 
