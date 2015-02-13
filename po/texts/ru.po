@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2015-01-23 02:01+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
-"X-Generator: Launchpad (build 17306)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:36+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -353,17 +353,17 @@ msgid "Elders"
 msgstr "Старейшины"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:364
+#: ../../txts/developers:366
 msgid "Graphics"
 msgstr "Графика"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:357
+#: ../../txts/developers:359
 msgid "Homepage"
 msgstr "Домашняя страница"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:371
+#: ../../txts/developers:373
 msgid "Sound"
 msgstr "Звук"
 
@@ -375,43 +375,43 @@ msgstr ""
 msgid "Coders"
 msgstr "Кодеры"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:96
 msgid "Graphicians"
 msgstr "Художники"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:126
 msgid "Musicians"
 msgstr "Музыканты"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:138
 msgid "Sound Effects"
 msgstr "Звуковые эффекты"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:148
 msgid "Maps and Missions"
 msgstr "Карты и миссии"
 
-#: ../../txts/developers:167
+#: ../../txts/developers:169
 msgid "Campaign Story"
 msgstr "Историческая кампания"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:172
 msgid "Barbarian"
 msgstr "Варвар"
 
-#: ../../txts/developers:176
+#: ../../txts/developers:178
 msgid "Empire"
 msgstr "Империя"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:182
 msgid "Atlantean"
 msgstr "Атланты"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:189
 msgid "Translators"
 msgstr "Переводчики"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:192
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -419,7 +419,7 @@ msgstr ""
 "ПРИМЕЧАНИЕ: в этом списке перечислены те, кто переводил Widelands до "
 "переезда на launchpad.net. "
 
-#: ../../txts/developers:191
+#: ../../txts/developers:193
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -427,99 +427,99 @@ msgstr ""
 "См. список переводивших Widelands на launchpad.net по адресу "
 "https://translations.launchpad.net/widelands."
 
-#: ../../txts/developers:195
+#: ../../txts/developers:197
 msgid "Czech"
 msgstr "Чешский"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:204
 msgid "Dansk"
 msgstr "Датский"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:210
 msgid "Dutch"
 msgstr "Голландский"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:217
 msgid "Finnish"
 msgstr "Финский"
 
-#: ../../txts/developers:221
+#: ../../txts/developers:223
 msgid "French"
 msgstr "Французский"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:230
 msgid "Galician"
 msgstr "Галисийский"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:235
 msgid "German"
 msgstr "Немецкий"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:247
 msgid "Hebrew"
 msgstr "Иврит"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:252
 msgid "Hungarian"
 msgstr "Венгерский"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:257
 msgid "Italian"
 msgstr "Итальянский"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:262
 msgid "Polish"
 msgstr "Польский"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:270
 msgid "Russian"
 msgstr "Русский"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:275
 msgid "Slovak"
 msgstr "Словацкий"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:280
 msgid "Spanish"
 msgstr "Испанский"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:285
 msgid "Swedish"
 msgstr "Шведский"
 
-#: ../../txts/developers:290
+#: ../../txts/developers:292
 msgid "Packagers"
 msgstr "Упаковщики"
 
-#: ../../txts/developers:294
+#: ../../txts/developers:296
 msgid "Linux Distributions"
 msgstr "Дистрибутивы Linux"
 
-#: ../../txts/developers:305
+#: ../../txts/developers:307
 msgid "Other Unix Distributions"
 msgstr "Другие дистрибутивы Unix"
 
-#: ../../txts/developers:316
+#: ../../txts/developers:318
 msgid "Non Unix Distributions"
 msgstr "Не Unix дистрибутив"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:330
 msgid "Homepage Coders"
 msgstr "Домашняя страница разработчиков"
 
-#: ../../txts/developers:338
+#: ../../txts/developers:340
 msgid "Documentation, Help and Wiki"
 msgstr "Документация, помощь и вики"
 
-#: ../../txts/developers:353
+#: ../../txts/developers:355
 msgid "Former elders"
 msgstr "Бывшие старейшины"
 
-#: ../../txts/developers:376
+#: ../../txts/developers:378
 msgid "Translation"
 msgstr "Перевод"
 
-#: ../../txts/developers:383
+#: ../../txts/developers:385
 msgid "Other"
 msgstr "Прочее"
 

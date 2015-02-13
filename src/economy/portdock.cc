@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/fleet.h"
@@ -165,7 +167,14 @@ void PortDock::init_fleet(EditorGameBase& egbase) {
 }
 
 void PortDock::cleanup(EditorGameBase& egbase) {
+
+	Warehouse* wh = nullptr;
+
 	if (egbase.objects().object_still_available(m_warehouse)) {
+
+		//we need to remember this for possible recreation of portdock
+		wh = m_warehouse;
+
 		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
 			for (ShippingItem& shipping_item : m_waiting) {
@@ -203,6 +212,17 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 	}
 
 	PlayerImmovable::cleanup(egbase);
+
+	//now let attempt to recreate the portdock
+	if (!wh->m_cleanup_in_progress){
+		if (upcast(Game, game, &egbase)) {
+			if (game->is_loaded()) { //do not attempt when shutting down
+				Player& player = owner();
+				wh->restore_portdock_or_destroy(egbase);
+			}
+		}
+	}
+
 }
 
 /**

@@ -12,7 +12,10 @@ function flag_tests:setup()
    self.f = player1:place_flag(self.field, 1)
 end
 function flag_tests:teardown()
-   pcall(self.f.remove, self.f)
+   pcall(function() self.f:remove() end)
+   pcall(function() self.f1:remove() end)
+   pcall(function() self.f2:remove() end)
+   pcall(function() self.w:remove() end)
 end
 
 function flag_tests:test_name()
@@ -138,4 +141,22 @@ function flag_tests:test_get_wares_non_existant_name()
    assert_error("non existent ware", function()
       self.f:get_wares{"meat", "balloon"}
    end)
+end
+
+-- ===================
+-- buildings and roads
+-- ===================
+function flag_tests:roads_and_buildings_test()
+   local field = map:get_field(4,14)
+   self.w = player1:place_building("warehouse", field)
+   self.f1 = self.w.flag
+   local road = player1:place_road(self.f1, "br", "br", "br")
+   self.f2 = self.f1.fields[1].brn.brn.brn.immovable
+
+   assert_equal(self.f2.roads.tl, road)
+   assert_equal(self.f2.roads.tl.start_flag, self.f1)
+   assert_equal(self.f2.roads.tl.end_flag, self.f2)
+   assert_equal(self.f1.building, self.w)
+   assert_nil(self.f2.building)
+   assert_equal(self.f2.debug_economy, self.w.debug_economy)
 end

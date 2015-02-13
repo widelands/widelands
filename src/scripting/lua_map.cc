@@ -2103,13 +2103,15 @@ int LuaMapObject::__eq(lua_State * L) {
 	MapObject * me = m_get_or_zero(egbase);
 	MapObject * you = other->m_get_or_zero(egbase);
 
-	// Both objects are destroyed: they are equal
-	if (me == you) lua_pushboolean(L, true);
-	else if (!me || !you) // One of the objects is destroyed: they are distinct
+	// Both objects are destroyed (nullptr) or equal: they are equal
+	if (me == you) {
+		lua_pushboolean(L, true);
+	} else if (me == nullptr || you == nullptr) { // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, false);
-	else // Compare them
+	} else { // Compare their serial number.
 		lua_pushboolean
 			(L, other->get(L, egbase)->serial() == get(L, egbase)->serial());
+	}
 
 	return 1;
 }
@@ -2343,6 +2345,8 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
+	PROP_RO(LuaFlag, roads),
+	PROP_RO(LuaFlag, building),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2352,7 +2356,52 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+	.. attribute:: roads
 
+		(RO) Array of roads leading to the flag. Directions
+		can be tr,r,br,bl,l and tl
+
+		:returns: The array of 'direction:road', if any
+*/
+int LuaFlag::get_roads(lua_State * L) {
+
+		const std::vector<std::string> directions = {"tr", "r", "br", "bl", "l", "tl"};
+
+		lua_newtable(L);
+
+		EditorGameBase & egbase = get_egbase(L);
+		Flag * f = get(L, egbase);
+
+		for (uint32_t i = 1; i <= 6; i++){
+ 	       if (f->get_road(i) != nullptr)  {
+				lua_pushstring(L, directions.at(i - 1));
+				upcasted_map_object_to_lua(L, f->get_road(i));
+				lua_rawset(L, -3);
+			}
+		}
+		return 1;
+}
+
+/* RST
+	.. attribute:: building
+
+		(RO) building belonging to the flag
+*/
+int LuaFlag::get_building(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
+
+	PlayerImmovable * building = f->get_building();
+	if (!building)  {
+		return 0;
+	} else {
+		upcasted_map_object_to_lua(L, building);
+	}
+	return 1;
+
+}
 /*
  ==========================================================
  LUA METHODS

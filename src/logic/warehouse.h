@@ -136,6 +136,8 @@ public:
 
 	void destroy(EditorGameBase &) override;
 
+	void restore_portdock_or_destroy(EditorGameBase &);
+
 	void act(Game & game, uint32_t data) override;
 
 	void set_economy(Economy *) override;
@@ -272,6 +274,11 @@ private:
 	std::vector<PlannedWorkers> m_planned_workers;
 
 	PortDock * m_portdock;
+
+	//this is information for portdock,to know whether it should
+	//try to recreate itself
+	bool m_cleanup_in_progress;
+
 };
 
 }
