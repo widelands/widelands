@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 02:57+0000\n"
+"PO-Revision-Date: 2015-02-12 13:43+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:42+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"X-Launchpad-Export-Date: 2015-02-13 05:41+0000\n"
+"X-Generator: Launchpad (build 17336)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -517,7 +517,7 @@ msgstr "teàrnadh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "Thathar den bheachd gun tuirt an trèanair cliùiteach Neidhardt seo."
+msgstr "Thathar den bheachd gun tuirt am maighstir cliùiteach Neidhardt seo."
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid ""
@@ -1144,7 +1144,7 @@ msgstr "Sealgair"
 
 #: ../../tribes/barbarians/conf:118
 msgid "Innkeeper"
-msgstr "Tàrnadaiche"
+msgstr "Tàrnadair"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Lime-Burner"
@@ -1176,7 +1176,7 @@ msgstr "Clachair"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Trainer"
-msgstr "Trèanair"
+msgstr "Maighstir"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Weaver"
