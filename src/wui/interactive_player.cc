@@ -268,8 +268,7 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const
 	return m_player_number;
 }
 
-int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) 
-{
+int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
 	assert(get_player());
 	return get_player()->get_buildcaps(c);
 }

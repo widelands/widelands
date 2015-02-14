@@ -133,8 +133,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).
  */
-void InteractiveGameBase::postload()
-{
+void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
