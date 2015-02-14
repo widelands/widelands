@@ -35,28 +35,6 @@
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 
-
-namespace  {
-
-// This function is the callback for recalculation of field overlays for
-// spectators (iteration over all players and first match returned)
-int32_t all_player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, const Widelands::Game& game)
-{
-	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
-	
-	iterate_players_existing(p, nr_players, game, player) {
-		Widelands::NodeCaps nc = player->get_buildcaps(c);
-		if( nc > Widelands::NodeCaps::CAPS_NONE ){
-			return nc;
-		}
-	}
-
-	return Widelands::NodeCaps::CAPS_NONE;
-}
-
-}
-
 /**
  * Setup the replay UI for the given game.
  */
@@ -81,11 +59,7 @@ InteractiveSpectator::InteractiveSpectator
 	m_toggle_statistics
 		(INIT_BTN("menu_general_stats", "general_stats", _("Statistics"))),
 	m_toggle_minimap
-		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap"))),
-	m_toggle_buildhelp
-		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
-	m_showbuildhelp(false)
-
+		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap")))
 {
 	m_toggle_chat.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
 	m_exit.sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
@@ -93,7 +67,6 @@ InteractiveSpectator::InteractiveSpectator
 	m_toggle_options_menu.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_options_menu, this));
 	m_toggle_statistics.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_statistics, this));
 	m_toggle_minimap.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
-	m_toggle_buildhelp.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_buildhelp, this));
 
 	m_toolbar.set_layout_toplevel(true);
 	if (!is_multiplayer()) {
@@ -169,19 +142,20 @@ Widelands::Player * InteractiveSpectator::get_player() const
 }
 
 
-/**
- * Called just before the game starts, after postload, init and gfxload
- */
-void InteractiveSpectator::start()
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) 
 {
-	Widelands::Map & map = game().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
-	overlay_manager.register_overlay_callback_function
-	(boost::bind(&all_player_overlay_callback_function, _1, boost::ref(game()) ));
+	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
+	
+	iterate_players_existing(p, nr_players, game(), player) 
+	{
+		const Widelands::NodeCaps nc = player->get_buildcaps(c);
+		if( nc > Widelands::NodeCaps::CAPS_NONE )
+		{
+			return nc;
+		}
+	}
 
-	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(game().world());
+	return Widelands::NodeCaps::CAPS_NONE;
 }
 
 
@@ -233,15 +207,6 @@ void InteractiveSpectator::toggle_statistics() {
 		delete m_mainm_windows.general_stats.window;
 	else
 		new GeneralStatisticsMenu(*this, m_mainm_windows.general_stats);
-}
-
-
-void InteractiveSpectator::toggle_buildhelp(){
-	m_showbuildhelp = !m_showbuildhelp;
-	Widelands::Map & map = game().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(m_showbuildhelp);
-	m_toggle_buildhelp.set_perm_pressed(m_showbuildhelp);
 }
 
 

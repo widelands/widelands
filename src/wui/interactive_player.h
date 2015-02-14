@@ -51,8 +51,6 @@ public:
 
 	~InteractivePlayer();
 
-	void start() override;
-
 	void toggle_chat        ();
 
 	bool can_see(Widelands::PlayerNumber) const override;
@@ -77,13 +75,13 @@ public:
 	// For load
 	void cleanup_for_load() override;
 	void think() override;
-	void postload() override;
 
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message &);
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
@@ -97,7 +95,6 @@ private:
 	UI::Button m_toggle_statistics_menu;
 	UI::Button m_toggle_objectives;
 	UI::Button m_toggle_minimap;
-	UI::Button m_toggle_buildhelp;
 	UI::Button m_toggle_message_menu;
 	UI::Button m_toggle_help;
 

@@ -40,8 +40,6 @@ struct InteractiveSpectator : public InteractiveGameBase {
 
 	~InteractiveSpectator();
 
-	void start() override;
-
 	Widelands::Player * get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
@@ -50,9 +48,9 @@ private:
 	void toggle_chat();
 	void toggle_options_menu();
 	void toggle_statistics();
-	void toggle_buildhelp();
 	void exit_btn();
 	void save_btn();
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> ) override;
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
@@ -65,13 +63,10 @@ private:
 	UI::Button m_toggle_options_menu;
 	UI::Button m_toggle_statistics;
 	UI::Button m_toggle_minimap;
-	UI::Button m_toggle_buildhelp;
 
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;
-
-	bool m_showbuildhelp;
 };
 
 
