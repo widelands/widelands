@@ -2247,11 +2247,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 					flag.get_building()->get_position().x, flag.get_building()->get_position().y,
 					(eco->dismantle_grace_time_-gametime)/60000);
 				} else {  //other constructionsites
-					eco->dismantle_grace_time_ = gametime + 60 * 1000; //one hour should be enough
-					//printf (" %d: granting grace time for a construction site %3dx%3d: %3d minutes\n",
-					//player_number(),
-					//flag.get_building()->get_position().x,flag.get_building()->get_position().y,
-					//(eco->dismantle_grace_time_-gametime)/60000);
+					eco->dismantle_grace_time_ = gametime + 60 * 1000 + //one minute
+					(eco->flags.size() * 30 * 1000); // + 30 seconds for every flag in economy
 				}
 			
 			//buildings
@@ -2266,7 +2263,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time_ = (gametime + 15 * 60 * 1000) +
-					(eco->flags.size() * 15 * 1000);
+					(eco->flags.size() * 30 * 1000);
 					checkradius += 3;
 					printf (" %d: granting grace time for military building at %3dx%3d: %3d minutes (till: %6d min.)\n",
 						player_number(),
@@ -2274,7 +2271,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 						(eco->dismantle_grace_time_-gametime)/60000,
 						eco->dismantle_grace_time_/60000);
 				} else { //for other normal buildings
-					eco->dismantle_grace_time_ = gametime +  30 * 1000 + eco->flags.size() * 15 * 1000 ;
+					eco->dismantle_grace_time_ = gametime + (90 * 1000) + (eco->flags.size() * 30 * 1000) ;
 					printf (" %d: granting grace time for common building at %3dx%3d: %3d minutes\n",
 						player_number(),
 						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
