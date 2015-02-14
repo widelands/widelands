@@ -574,15 +574,10 @@ void DefaultAI::late_initialization() {
 		}
 	}
 	
-	printf (" doing late initialization before portspaces: ports: %2d %s, ships: %d, ports: %d\n",
-	map.get_port_spaces().size(), (seafaring_economy)?" - seafaring on":"",
-	allships.size(),num_ports );
-	
 	//blocking space consumers vicinity (for game reload)
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->space_consumer_ && !ps_obs.bo->plants_trees_) {
 			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));			
-			//MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
 			do {
 				BlockedField blocked2(
 				   map.get_fcoords(*(mr.location().field)), game().get_gametime() + 20 * 60 * 1000);
@@ -590,9 +585,6 @@ void DefaultAI::late_initialization() {
 			} while (mr.advance(map));
 		}
 	}
-	
-	printf(" Blocked fields: %3d\n", blocked_fields.size());
-	
 	
 }
 
@@ -747,23 +739,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	//// if curent port is a portspace we need add near fields to a list //NOCOM
-	//// of fields prohibited for buildings
+	//// identifying portspace fields
 	if (!field.is_portspace_) {  // if we know it, no need to do it once more
 		if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
 			field.is_portspace_ = true;
 		}
 	}
-			//seafaring_economy = true;
-			//// blocking fields in vicinity
-			//MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(field.coords), 3));
-			//do {
-				//const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
-				//if (port_reserved_coords.count(hash) == 0)
-					//port_reserved_coords.insert(hash);
-			//} while (mr.advance(map));
-		//}
-	//}
 
 	// testing if a port is nearby, such field will get a priority boost
 	uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
@@ -2224,6 +2205,15 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	//building is destroyes
 	bool last_attempt_ = false;
 
+	//this should not happen, but if the economy has warehouse and dismantle 
+	//grace time set, we must 'zero' the dismantle grace time
+	if (!flag.get_economy()->warehouses().empty() && 
+	eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()) {
+		printf(" %d: strange: economy with warehouse and dismantle grace time ???\n",
+		player_number());
+		eco->dismantle_grace_time_ = std::numeric_limits<int32_t>::max();
+	}
+
 	//first we deal with situations when this is economy with no warehouses
 	//and this is a flag belonging to a building/constructionsite
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
@@ -2235,23 +2225,23 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		//set it
 		} else if (eco->dismantle_grace_time_ == std::numeric_limits<int32_t>::max()) {
 
-			// adding grace time for constructionsites
-			// first very special case - a port (in the phase of constructionsite)
-			// this might be new colonization port
+			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
 				BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
+				// first very special case - a port (in the phase of constructionsite)
+				// this might be new colonization port
 				if (bo.is_port_){
 					eco->dismantle_grace_time_ = gametime + 60 * 60 * 1000; //one hour should be enough
 					printf (" %d: granting grace time for port at %3dx%3d: %3d minutes\n",
 					player_number(),
 					flag.get_building()->get_position().x, flag.get_building()->get_position().y,
 					(eco->dismantle_grace_time_-gametime)/60000);
-				} else {  //other constructionsites
+				} else {  //other constructionsitesm usually new standalone constructionsites
 					eco->dismantle_grace_time_ = gametime + 60 * 1000 + //one minute
 					(eco->flags.size() * 30 * 1000); // + 30 seconds for every flag in economy
 				}
 			
-			//buildings
+			// buildings
 			} else {
 				bool occupied_military_ = false;
 				Building* b = flag.get_building();
@@ -2262,8 +2252,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 				}
 
 				if (occupied_military_) {
-					eco->dismantle_grace_time_ = (gametime + 15 * 60 * 1000) +
-					(eco->flags.size() * 30 * 1000);
+					eco->dismantle_grace_time_ = (gametime + 20 * 60 * 1000) +
+					(eco->flags.size() * 20 * 1000);
 					checkradius += 3;
 					printf (" %d: granting grace time for military building at %3dx%3d: %3d minutes (till: %6d min.)\n",
 						player_number(),
@@ -2271,7 +2261,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 						(eco->dismantle_grace_time_-gametime)/60000,
 						eco->dismantle_grace_time_/60000);
 				} else { //for other normal buildings
-					eco->dismantle_grace_time_ = gametime + (90 * 1000) + (eco->flags.size() * 30 * 1000) ;
+					eco->dismantle_grace_time_ = gametime + (5 * 60 * 1000) + (eco->flags.size() * 20 * 1000) ;
 					printf (" %d: granting grace time for common building at %3dx%3d: %3d minutes\n",
 						player_number(),
 						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
@@ -2283,70 +2273,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		} else {
 			last_attempt_ = true;
 			//generally we increase a check radius in such case
-			checkradius += 4;
+			checkradius += 2;
 		}
-
 	} 
-
-
-					//stationed_military = true;  NOCOM
-					//// also increasing checkradius a bit
-					//checkradius += 4;
-	//// there are two special situations which have a bit different treatment
-	//bool is_remote_port_csite = false;
-	//bool stationed_military = false;
-	//if (flag.get_economy()->warehouses().empty()) {
-		//// first very special case - lonesome port (in the phase of constructionsite)
-		//// obviously it has no warehouse/road network to connect to
-		//if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
-			//BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
-			//if (bo.is_port_ &&
-			    //remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
-				//is_remote_port_csite = true;
-			//}
-		//}
-
-		//// second exemption is when a military buiding was conquered, it
-		//// might be just too far from near connected building
-		//if (Building* b = flag.get_building()) {
-			//if (upcast(MilitarySite, militb, b)) {
-				//if (militb->present_soldiers().size() > 0) {
-					//stationed_military = true;
-					//// also increasing checkradius a bit
-					//checkradius += 4;
-				//}
-			//}
-		//}
-	//}
-
-	//if (is_remote_port_csite ||
-	    //(stationed_military && game().get_gametime() % 10 > 0)) {  // counter disabled
-		//;
-	//} else if (flag.get_economy()->warehouses().empty()) {
-		//eco->failed_connection_tries += 1;
-	//} else {
-		//eco->failed_connection_tries = 0;
-	//}
-
-	//// explanation for 'eco->flags.size() * eco->flags.size()'
-	//// The AI is able to dismantle whole economy without warehouse as soon as single
-	//// building not connected anywhere. But so fast dismantling is not deserved (probably)
-	//// so the bigger economy the longer it takes to be dismantled
-	//if (eco->failed_connection_tries > 3 + eco->flags.size() * eco->flags.size()) {
-
-		//Building* bld = flag.get_building();
-
-		//if (bld) {
-			//// first we block the field for 15 minutes, probably it is not good place to build a
-			//// building on
-			//BlockedField blocked(
-			   //game().map().get_fcoords(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
-			//blocked_fields.push_back(blocked);
-			//eco->flags.remove(&flag);
-			//game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-		//}
-		//return true;
-	//}
 
 	Map& map = game().map();
 
@@ -2538,9 +2467,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	// if all possible roads skipped
 	if (last_attempt_) {
 		Building* bld = flag.get_building();
-		printf ("  destroying a building at %3dx %3d because after grace time (current time: %6d).\n",
+		printf (" %d: destroying a building at %3dx %3d because after grace time (cur. time: %6d, flags count: %3d).\n",
+		player_number(),
 		bld->get_position().x, bld->get_position().y,
-		gametime/60000);
+		gametime/60000,
+		get_economy_observer(flag.economy())->flags.size());
 		// first we block the field for 15 minutes, probably it is not good place to build a
 		// building on
 		BlockedField blocked(
@@ -2970,26 +2901,6 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 			expeditions_in_progress += 1;
 		}
 	}
-
-	//// we must verify that all remote ports are still ours (and exists at all)
-	//bool still_ours;
-	//for (std::unordered_set<uint32_t>::iterator ports_iter = remote_ports_coords.begin();
-	     //ports_iter != remote_ports_coords.end();
-	     //++ports_iter) {
-		//still_ours = false;
-		//FCoords fcoords = game().map().get_fcoords(coords_unhash(*ports_iter));
-		//if (fcoords.field->get_owned_by() == player_number()) {
-			//if (upcast(PlayerImmovable, imm, fcoords.field->get_immovable())) {
-				//still_ours = true;
-			//}
-		//}
-
-		//if (!still_ours) {
-			//remote_ports_coords.erase(*ports_iter);
-			//break;
-		//}
-	//}
-	////territories_count += remote_ports_coords.size();
 
 	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
