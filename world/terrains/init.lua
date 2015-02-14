@@ -38,6 +38,16 @@ world:new_terrain_type{
    -- Type of terrain. Describes if the terrain is walkable, swimmable, if
    -- mines or buildings can be build on it, if flags can be build on it and so
    -- on.
+   --
+   -- The following properties are available:
+   -- "green": Allows building of normal buildings and roads
+   -- "mountain": Allows building of mines and roads
+   -- "dry": Allows building of roads only. Trees don't like this terrain.
+   -- "water": Nothing can be built here, but ships and aquatic animals can pass
+   -- "acid"/"dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
+   -- "unpassable": Nothing can be built here, and nothing can walk on it
+   --
+   -- Note that "is" also has implications for trees' terrain affinity.
    is = "green",
 
    -- The list resources that can be found in this terrain.
