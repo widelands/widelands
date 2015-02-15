@@ -70,15 +70,15 @@ void Tribes::add_ware_type(const LuaTable& t) {
 }
 
 void Tribes::add_carrier_type(const LuaTable& t) {
-	workers_->add(new CarrierDescr(t), egbase_);
+	workers_->add(new CarrierDescr(t, egbase_));
 }
 
 void Tribes::add_soldier_type(const LuaTable& t) {
-	workers_->add(SoldierDescr(t), egbase_);
+	workers_->add(new SoldierDescr(t, egbase_));
 }
 
 void Tribes::add_worker_type(const LuaTable& t) {
-	workers_->add(new WorkerDescr(t), egbase_);
+	workers_->add(new WorkerDescr(t, egbase_));
 }
 
 void Tribes::add_tribe(const LuaTable& t) {
@@ -86,19 +86,19 @@ void Tribes::add_tribe(const LuaTable& t) {
 }
 
 size_t Tribes::nrbuildings() const {
-	return buildings_.size();
+	return buildings_->size();
 }
 
 size_t Tribes::nrtribes() const {
-	return tribes_.size();
+	return tribes_->size();
 }
 
 size_t Tribes::nrwares() const {
-	return wares_.size();
+	return wares_->size();
 }
 
 size_t Tribes::nrworkers() const {
-	return workers_.size();
+	return workers_->size();
 }
 
 
@@ -123,7 +123,7 @@ bool Tribes::ship_exists(int index) const {
 
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
 	const BuildingIndex result = building_index(buildingname);
-	if (result == -1) {
+	if (result == INVALID_INDEX) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
 	return result;
@@ -137,7 +137,7 @@ int Tribes::safe_immovable_index(const std::string& immovablename) const {
 	return result;
 }
 
-int safe_ship_index(const std::string& shipname) const {
+int Tribes::safe_ship_index(const std::string& shipname) const {
 	const int result = ship_index(shipname);
 	if (result == -1) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
@@ -171,103 +171,105 @@ WareIndex Tribes::safe_worker_index(const std::string& workername) const {
 
 
 BuildingIndex Tribes::building_index(const std::string& buildingname) const {
-	int result = -1;
-	for (size_t i = 0; i < buildings_.size(); ++i) {
-		if (buildings_.get(i)->name() == buildingname.name()) {
-			return result;
-		}
+	// NOCOM(GunChleoc): We have a mix of data types here (BuildingIndex is unsigned, WareIndex is signed).
+	BuildingIndex result = INVALID_INDEX;
+	int32_t index = buildings_->get_index(buildingname);
+	if (index != -1) {
+		result = static_cast<BuildingIndex>(index);
 	}
+	return result;
 }
 
 int Tribes::immovable_index(const std::string& immovablename) const {
-	return immovables_.get_index(immovablename);
+	return immovables_->get_index(immovablename);
 }
 
 int Tribes::ship_index(const std::string& shipname) const {
-	return ships_.get_index(shipname);
+	return ships_->get_index(shipname);
 }
 
 int Tribes::tribe_index(const std::string& tribename) const {
-	tribes_.get_index(tribename);
+	return tribes_->get_index(tribename);
 }
 
 
 WareIndex Tribes::ware_index(const std::string& warename) const {
-	wares_.get_index(warename);
+	return wares_->get_index(warename);
 }
 
 WareIndex Tribes::worker_index(const std::string& workername) const {
-	workers_.get_index(workername);
+	return workers_->get_index(workername);
 }
 
 
-BuildingDescr const * Tribes::get_building_descr(BuildingIndex building_index) const {
-	return buildings_.get(building_index);
+const BuildingDescr* Tribes::get_building_descr(BuildingIndex buildingindex) const {
+	return buildings_->get(buildingindex);
 }
 
-ImmovableDescr const * Tribes::get_immovable_descr(int immovable_index) const {
-	return immovables_.get(immovable_index);
+const ImmovableDescr* Tribes::get_immovable_descr(int immovableindex) const {
+	return immovables_->get(immovableindex);
 }
 
-ShipDescr const * Tribes::get_ship_descr(int ship_index) const {
-	return ships_.get(ship_index);
+const ShipDescr* Tribes::get_ship_descr(int shipindex) const {
+	return ships_->get(shipindex);
 }
 
 
-WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
-	return wares_.get(ware_index);
+const WareDescr* Tribes::get_ware_descr(WareIndex wareindex) const {
+	return wares_->get(wareindex);
 }
 
-WorkerDescr const * Tribes::get_worker_descr(WareIndex worker_index) const {
-	return workers_.get(worker_index);
+const WorkerDescr* Tribes::get_worker_descr(WareIndex workerindex) const {
+	return workers_->get(workerindex);
 }
 
-TribeDescr const* get_tribe_descr(int tribe_index) const {
-	return tribes_.get(tribe_index);
+const TribeDescr* Tribes::get_tribe_descr(int tribeindex) const {
+	return tribes_->get(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename) const {
-	wares_.get(ware_index)->set_has_demand_check(tribename);
+void Tribes::set_ware_type_has_demand_check(const WareIndex& wareindex, const std::string& tribename) {
+	wares_->get(wareindex)->set_has_demand_check(tribename);
 }
 
-void Tribes::set_worker_type_has_demand_check(const WareIndex& worker_index) const {
-	workers_.get(worker_index)->set_has_demand_check();
+void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) {
+	workers_->get(workerindex)->set_has_demand_check();
 }
 
 
 void Tribes::load_graphics()
 {
-	for (const WorkerDescr& worker : workers_) {
-		worker.load_graphics();
+	for (WareIndex i = 0; i < static_cast<WareIndex>(workers_->get_nitems()); ++i) {
+		workers_->get(i)->load_graphics();
 	}
 
-	for (const WareDescr& ware : wares_) {
-		ware.load_graphics();
+	for (WareIndex i = 0; i < static_cast<WareIndex>(wares_->get_nitems()); ++i) {
+		wares_->get(i)->load_graphics();
 	}
 
-	for (const BuildingDescr& building: buildings_) {
-		building.load_graphics();
+	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
+		buildings_->get(i)->load_graphics();
 	}
 }
 
 void Tribes::post_load() {
 	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
-		const BuildingDescr& building_descr = get_building_descr(i);
+		BuildingDescr& building_descr = *buildings_->get(i);
+		// NOCOM(GunChleoc): parse buildcost for buildings
+
 		// Add consumers and producers to wares.
-		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
-			for (const BillOfMaterials& ware_amount : de->inputs()) {
-				get_ware_descr(ware_amount.first)->add_consumer(i);
+		if (upcast(ProductionSiteDescr, de, &building_descr)) {
+			for (const WareAmount& ware_amount : de->inputs()) {
+				wares_->get(ware_amount.first)->add_consumer(i);
 			}
-			for (const WareIndex& ware_index : de->output_ware_types()) {
-				get_ware_descr(ware_index)->add_producer(i);
+			for (const WareIndex& wareindex : de->output_ware_types()) {
+				wares_->get(wareindex)->add_producer(i);
 			}
 		}
 		// Register which buildings buildings can have been enhanced from
 		const BuildingIndex& enhancement = building_descr.enhancement();
 		if (building_exists(enhancement)) {
-			get_building_descr(enhancement)->set_enhanced_from(i);
+			buildings_->get(enhancement)->set_enhanced_from(i);
 		}
-		// NOCOM(GunChleoc): parse buildcost for buildings
 	}
 }
 

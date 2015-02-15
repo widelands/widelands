@@ -58,6 +58,7 @@ public:
 	friend struct ProductionProgram; // To add animations
 
 	ProductionSiteDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
+	ProductionSiteDescr(const LuaTable& t, const EditorGameBase& egbase);
 
 	~ProductionSiteDescr() override;
 

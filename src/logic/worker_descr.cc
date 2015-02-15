@@ -109,7 +109,7 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 				parser.table = items_table.get();
 
 				program = new WorkerProgram(program_name);
-				program->parse(this, &parser, egbase_.tribes(), program_name.c_str());
+				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
 				programs_[program_name.c_str()] = program;
 			}
 
@@ -126,7 +126,7 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 	}
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
-		ware_hotspot_(Point(items_table->get_int("1"), items_table->get_int("2")));
+		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
 	}
 }
 

@@ -173,6 +173,11 @@ ProductionSiteDescr::ProductionSiteDescr
 	}
 }
 
+ProductionSiteDescr::ProductionSiteDescr
+	(const LuaTable& table, const EditorGameBase& egbase)
+	: ProductionSiteDescr(MapObjectType::PRODUCTIONSITE, table, egbase)
+{}
+
 
 ProductionSiteDescr::~ProductionSiteDescr()
 {

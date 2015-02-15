@@ -19,6 +19,7 @@
 
 #include "logic/worker_program.h"
 
+#include <memory>
 #include <string>
 
 #include "graphic/graphic.h"
@@ -64,13 +65,13 @@ void WorkerProgram::parse
 	(WorkerDescr * descr, Parser * parser, char const * const name, const Tribes& tribes)
 {
 	if (parser->prof == nullptr) {
-		const LuaTable program_table = table.get_table(name);
+		std::unique_ptr<LuaTable> program_table = parser->table->get_table(name);
 
 		for (uint32_t idx = 1;; ++idx) {
 			try
 			{
 				const std::string string =
-						program_table.get_string(std::to_string(static_cast<unsigned int>(idx)));
+						program_table->get_string(std::to_string(static_cast<unsigned int>(idx)));
 
 				if (string.empty()) {
 					break;
@@ -126,18 +127,17 @@ void WorkerProgram::parse
 				if (!s_parsemap[mapidx].name)
 					throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 
-				(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+				(this->*s_parsemap[mapidx].function)(descr, &act, parser, tribes, cmd);
 
 				m_actions.push_back(act);
 			} catch (const std::exception & e) {
 				throw wexception("Line %i: %s", idx, e.what());
 			}
 		}
+		// Check for line numbering problems
+		if (program_s.get_num_values() != m_actions.size())
+			throw wexception("Line numbers appear to be wrong");
 	}
-
-	// Check for line numbering problems
-	if (program_s.get_num_values() != m_actions.size())
-		throw wexception("Line numbers appear to be wrong");
 }
 
 
@@ -175,7 +175,7 @@ void WorkerProgram::parse_mine
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
+	 const Tribes&,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
@@ -203,7 +203,7 @@ void WorkerProgram::parse_breed
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
+	 const Tribes&,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
@@ -220,24 +220,6 @@ void WorkerProgram::parse_breed
 
 
 /**
- * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUABLE
- *    just kept here for savegame compatibility for Build15 and earlier
- *
- * setdescription \<immovable name\> \<immovable name\> ...
- *
- * sparamv = possible bobs
- */
-void WorkerProgram::parse_setdescription
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
-{
-}
-
-
-/**
  * setbobdescription \<bob name\> \<bob name\> ...
  *
  * Randomly select a bob name that can be used in subsequent commands
@@ -249,8 +231,8 @@ void WorkerProgram::parse_setbobdescription
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: setbobdescription <bob name> <bob name> ...");
@@ -286,8 +268,8 @@ void WorkerProgram::parse_findobject
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	uint32_t i;
 
@@ -366,8 +348,8 @@ void WorkerProgram::parse_findspace
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	uint32_t i;
 
@@ -452,8 +434,8 @@ void WorkerProgram::parse_walk
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: walk <where>");
@@ -480,11 +462,11 @@ void WorkerProgram::parse_walk
  *
  */
 void WorkerProgram::parse_animation
-	(WorkerDescr*,
+	(WorkerDescr* descr,
 	 Worker::Action* act,
-	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 Parser* parser,
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	char * endp;
 
@@ -520,8 +502,8 @@ void WorkerProgram::parse_return
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>&)
 {
 	act->function = &Worker::run_return;
 	act->iparam1 = 1; // drop a ware on our owner's flag
@@ -539,8 +521,8 @@ void WorkerProgram::parse_object
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: object <program name>");
@@ -563,8 +545,8 @@ void WorkerProgram::parse_plant
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: plant <immovable type> <immovable type> ... [unless object]");
@@ -596,8 +578,8 @@ void WorkerProgram::parse_create_bob
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>&)
 {
 	act->function = &Worker::run_create_bob;
 }
@@ -610,8 +592,8 @@ void WorkerProgram::parse_removeobject
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>&)
 {
 	act->function = &Worker::run_removeobject;
 }
@@ -631,8 +613,8 @@ void WorkerProgram::parse_geologist
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	char * endp;
 
@@ -661,8 +643,8 @@ void WorkerProgram::parse_geologist_find
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: geologist-find");
@@ -682,8 +664,8 @@ void WorkerProgram::parse_scout
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Usage: scout <radius> <time>");
@@ -696,9 +678,9 @@ void WorkerProgram::parse_scout
 void WorkerProgram::parse_play_fx
 	(WorkerDescr*,
 	 Worker::Action* act,
-	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 Parser* parser,
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2 || cmd.size() > 3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
@@ -724,8 +706,8 @@ void WorkerProgram::parse_construct
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+	 const Tribes&,
+	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: construct");

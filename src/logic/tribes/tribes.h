@@ -113,16 +113,16 @@ public:
 	BuildingIndex building_index(const std::string& buildingname) const;
 	int immovable_index(const std::string& immovablename) const;
 	int ship_index(const std::string& shipname) const;
-	int tribe_index(const std::string& tribename);
+	int tribe_index(const std::string& tribename) const;
 	WareIndex ware_index(const std::string& warename) const;
 	WareIndex worker_index(const std::string& workername) const;
 
-	BuildingDescr const* get_building_descr(BuildingIndex building_index) const;
-	ImmovableDescr const* get_immovable_descr(int immovable_index) const;
-	ShipDescr const* get_ship_descr(int ship_index) const;
-	WareDescr const* get_ware_descr(WareIndex ware_index) const;
-	WorkerDescr const* get_worker_descr(WareIndex worker_index) const;
-	TribeDescr const* get_tribe_descr(int tribe_index) const;
+	const BuildingDescr* get_building_descr(BuildingIndex building_index) const;
+	const ImmovableDescr* get_immovable_descr(int immovable_index) const;
+	const ShipDescr* get_ship_descr(int ship_index) const;
+	const WareDescr* get_ware_descr(WareIndex ware_index) const;
+	const WorkerDescr* get_worker_descr(WareIndex worker_index) const;
+	const TribeDescr* get_tribe_descr(int tribe_index) const;
 
 	void set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename);
 	void set_worker_type_has_demand_check(const WareIndex& worker_index);
