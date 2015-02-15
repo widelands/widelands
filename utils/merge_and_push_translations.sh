@@ -20,7 +20,8 @@ if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; th
 fi
 
 # Make sure we have a local trunk branch.
-if [ ! -d "../trunk" ]; then
+PARENT= bzr config parent_location
+if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" ]; then
 	echo "Please branch lp:widelands into ../trunk";
 	exit;
 fi
@@ -28,18 +29,18 @@ fi
 set -x # Print all commands.
 
 # Pull translations from Transifex into local trunk and add new translation files
-pushd ../trunk && bzr pull
+bzr pull
 tx pull -a
-bzr add po/*/*.po
-bzr commit -m "Merged translations."
+bzr add po/*/*.po || true
 
 # Fix line breaks.
-utils/remove_lf_in_translations.py
-bzr commit -m "Fixed LF in translations." || true
+# TODO(GunChleoc): We hope that Transifex will fix these already.
+# This script can be removed if we don't get any errors in the future.
+# utils/remove_lf_in_translations.py
 
 # Update catalogues.
 utils/buildcat.py
-bzr commit -m "Updated catalogues."
+bzr commit -m "Fetched translations and updated catalogues."
 bzr push lp:widelands
 
 # Push catalogues to Transifex
