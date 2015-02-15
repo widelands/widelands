@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2015-02-03 02:54+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-04 05:33+0000\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:36+0000\n"
 "X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
 
@@ -421,17 +421,17 @@ msgid "Elders"
 msgstr "Seanairean"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:364
+#: ../../txts/developers:366
 msgid "Graphics"
 msgstr "Grafaigeachd"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:357
+#: ../../txts/developers:359
 msgid "Homepage"
 msgstr "Duilleag-dhachaigh"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:371
+#: ../../txts/developers:373
 msgid "Sound"
 msgstr "Fuaim"
 
@@ -443,43 +443,43 @@ msgstr "Teangannan"
 msgid "Coders"
 msgstr "Prògramairean"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:96
 msgid "Graphicians"
 msgstr "Luchd-grafaigeachd"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:126
 msgid "Musicians"
 msgstr "Ceòladairean"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:138
 msgid "Sound Effects"
 msgstr "Èifeachdan fuaime"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:148
 msgid "Maps and Missions"
 msgstr "Mapaichean is miseanan"
 
-#: ../../txts/developers:167
+#: ../../txts/developers:169
 msgid "Campaign Story"
 msgstr "Sgeulachd na h-iomairte"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:172
 msgid "Barbarian"
 msgstr "Tùsanach"
 
-#: ../../txts/developers:176
+#: ../../txts/developers:178
 msgid "Empire"
 msgstr "An Impireachd"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:182
 msgid "Atlantean"
 msgstr "Atlantach"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:189
 msgid "Translators"
 msgstr "Eadar-theangadairean"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:192
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -487,7 +487,7 @@ msgstr ""
 "AN AIRE: tha daoine a dh’eadar-theangaich Widelands mus do ghluais sinn gu "
 "launchpad.net air an liosta seo. "
 
-#: ../../txts/developers:191
+#: ../../txts/developers:193
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -495,99 +495,99 @@ msgstr ""
 "Thoir sùil air https://translations.launchpad.net/widelands airson liosta "
 "dhe na daoine a chuidich gus Widelands eadar-theangachadh le launchpad.net."
 
-#: ../../txts/developers:195
+#: ../../txts/developers:197
 msgid "Czech"
 msgstr "Seicis"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:204
 msgid "Dansk"
 msgstr "Danmhairgis"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:210
 msgid "Dutch"
 msgstr "Duitsis"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:217
 msgid "Finnish"
 msgstr "Fionnlainnis"
 
-#: ../../txts/developers:221
+#: ../../txts/developers:223
 msgid "French"
 msgstr "Fraingis"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:230
 msgid "Galician"
 msgstr "Gailìsis"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:235
 msgid "German"
 msgstr "Gearmailtis"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:247
 msgid "Hebrew"
 msgstr "Eabhra"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:252
 msgid "Hungarian"
 msgstr "Ungairis"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:257
 msgid "Italian"
 msgstr "Eadailtis"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:262
 msgid "Polish"
 msgstr "Pòlainnis"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:270
 msgid "Russian"
 msgstr "Ruisis"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:275
 msgid "Slovak"
 msgstr "Slòbhacais"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:280
 msgid "Spanish"
 msgstr "Spàinntis"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:285
 msgid "Swedish"
 msgstr "Suainis"
 
-#: ../../txts/developers:290
+#: ../../txts/developers:292
 msgid "Packagers"
 msgstr "Luchd-pacaididh"
 
-#: ../../txts/developers:294
+#: ../../txts/developers:296
 msgid "Linux Distributions"
 msgstr "Sgaoilidhean Linux"
 
-#: ../../txts/developers:305
+#: ../../txts/developers:307
 msgid "Other Unix Distributions"
 msgstr "Sgaoilidhean Linux eile"
 
-#: ../../txts/developers:316
+#: ../../txts/developers:318
 msgid "Non Unix Distributions"
 msgstr "Sgaoilidhean ach Linux"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:330
 msgid "Homepage Coders"
 msgstr "Prògramairean na duilleige-dachaigh"
 
-#: ../../txts/developers:338
+#: ../../txts/developers:340
 msgid "Documentation, Help and Wiki"
 msgstr "An docamaideadh, a’ chobhair is an uicidh"
 
-#: ../../txts/developers:353
+#: ../../txts/developers:355
 msgid "Former elders"
 msgstr "Seanairean roimhe"
 
-#: ../../txts/developers:376
+#: ../../txts/developers:378
 msgid "Translation"
 msgstr "Eadar-theangachadh"
 
-#: ../../txts/developers:383
+#: ../../txts/developers:385
 msgid "Other"
 msgstr "Eile"
 

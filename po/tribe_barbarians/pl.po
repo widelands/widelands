@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2014-11-21 21:50+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-08 02:44+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:44+0000\n"
-"X-Generator: Launchpad (build 17306)\n"
+"X-Launchpad-Export-Date: 2015-02-09 05:42+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: pl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -535,12 +535,13 @@ msgid ""
 msgstr "'Unik' zwiększa szansę żołnierza na uniknięcie ataku przeciwnika."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
-"level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
-"Żołnierze barbarzyńscy nie mogą być ćwiczeni w obronie i pozostają na jej "
-"oryginalnym poziomie."
+"Barbarzyńscy żołnierze nie mogą być szkoleni w obronie i pozostaną na swoim "
+"początkowym poziomie."
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
@@ -1609,12 +1610,12 @@ msgstr "sadzenie pszenicy"
 msgid "harvesting wheat"
 msgstr "żęcie pszenicy"
 
-#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/farm/conf:45
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Brak pól"
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
@@ -2565,14 +2566,6 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Trenuje żołnierzy w ataku i zdrowiu."
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
-"initial level."
-msgstr ""
-"Barbarzyńscy żołnierze nie mogą być szkoleni w obronie i pozostaną na swoim "
-"początkowym poziomie."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
