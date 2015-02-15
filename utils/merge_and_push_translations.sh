@@ -5,7 +5,8 @@
 ## Afterwards, the catalogs will be updated and the result pushed to
 ## trunk on Launchpad.
 
-set -e # Exit as soon as any line in the bash script fails.
+# Exit as soon as any line in the bash script fails.
+set -e
 
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
@@ -16,17 +17,18 @@ fi
 if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
 	echo "Unable to find 'utils/buildcat.py' or 'utils/remove_lf_in_translations.py'."
 	echo "Make sure you start this script from Widelands' base or utils directory.";
-	exit;
+	exit 1;
 fi
 
 # Make sure we have a local trunk branch.
-PARENT= bzr config parent_location
+PARENT=$(bzr config parent_location)
 if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" ]; then
-	echo "Please branch lp:widelands into ../trunk";
-	exit;
+	echo "The current bzr branch is not trunk.";
+	exit 1;
 fi
 
-set -x # Print all commands.
+# Print all commands.
+set -x
 
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
