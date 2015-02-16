@@ -46,8 +46,6 @@ world:new_terrain_type{
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
    -- "dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
    -- "unpassable": Nothing can be built here, and nothing can walk on it
-   --
-   -- Note that "is" also has implications for trees' terrain affinity.
    is = "green",
 
    -- The list resources that can be found in this terrain.
