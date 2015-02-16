@@ -34,7 +34,7 @@ class Section;
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(std::unique_ptr<LuaTable>);
-	~BuildingHints();
+	~BuildingHints() {}
 
 	bool renews_map_resource() const {
 		return !renews_map_resource_.empty();

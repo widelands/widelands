@@ -544,7 +544,7 @@ Load/save support
 ==============================
 */
 
-#define WAREINSTANCE_SAVEGAME_VERSION 1
+#define WAREINSTANCE_SAVEGAME_VERSION 2
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -600,7 +600,6 @@ void WareInstance::save
 {
 	fw.unsigned_8(HeaderWareInstance);
 	fw.unsigned_8(WAREINSTANCE_SAVEGAME_VERSION);
-	fw.c_string(descr().tribe().name());
 	fw.c_string(descr().name());
 
 	MapObject::save(egbase, mos, fw);
@@ -625,17 +624,12 @@ MapObject::Loader * WareInstance::load
 		if (version != WAREINSTANCE_SAVEGAME_VERSION)
 			throw wexception("unknown/unhandled version %i", version);
 
-		const std::string tribename = fr.c_string();
 		const std::string warename = fr.c_string();
 
-		egbase.manually_load_tribe(tribename);
+		// NOCOM(GunChleoc): Do we need something like this for tribes? egbase.manually_load_tribe(tribename);
 
-		const TribeDescr * tribe = egbase.get_tribe(tribename);
-		if (!tribe)
-			throw wexception("unknown tribe '%s'", tribename.c_str());
-
-		WareIndex wareindex = tribe->ware_index(warename);
-		const WareDescr * descr = tribe->get_ware_descr(wareindex);
+		WareIndex wareindex = egbase.tribes().ware_index(warename);
+		const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
 
 		std::unique_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));

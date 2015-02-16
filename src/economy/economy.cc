@@ -57,7 +57,7 @@ Economy::Economy(Player & player) :
 		TargetQuantity tq;
 		if (tribe.has_ware(i)) {
 			tq.permanent =
-				tribe.get_ware_descr(i)->default_target_quantity();
+				tribe.get_ware_descr(i)->default_target_quantity(tribe.name());
 		} else {
 			tq.permanent = 0;
 		}

@@ -12,7 +12,6 @@ wl_library(ai
     base_macros
     base_log
     base_i18n
-    economy
     logic
     scripting_lua_table
 )

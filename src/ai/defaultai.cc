@@ -358,18 +358,17 @@ void DefaultAI::late_initialization() {
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
 
 	wares.resize(game().tribes().nrwares());
-	for (const WareIndex& ware_index : game().tribes().wares()) {
-		const WareDescr& ware_descr = game.tribes().get_ware_descr(ware_index);
-		wares.at(ware.first).producers_ = 0;
-		wares.at(ware.first).consumers_ = 0;
-		wares.at(ware.first).preciousness_ = ware_descr.preciousness(tribe_->name());
+	for (WareIndex i; i < static_cast<WareIndex>(game().tribes().nrwares()); ++i) {
+		wares.at(i).producers_ = 0;
+		wares.at(i).consumers_ = 0;
+		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
 	}
 
 	// collect information about the different buildings our tribe can construct
 	const World& world = game().world();
 
-	for (const BuildingIndex& building_index : tribe.buildings()) {
-		const BuildingDescr& bld = game().tribes().get_building_descr(building_index);
+	for (const BuildingIndex& building_index : tribe_->buildings()) {
+		const BuildingDescr& bld = *game().tribes().get_building_descr(building_index);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
@@ -449,6 +448,7 @@ void DefaultAI::late_initialization() {
 				bo.is_fisher_ = false;
 			}
 
+			// NOCOM(GunChleoc): This will break. Add a property/ AI hint to the BuildingDescr instead.
 			if (building_name == "shipyard") {
 				bo.is_shipyard_ = true;
 			} else {
@@ -1193,8 +1193,8 @@ bool DefaultAI::construct_building(int32_t gametime) {
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 			// using default ware quantity, not the best solution but will do
-			if (get_warehoused_stock(wt) <
-			    tribe_->get_ware_descr(wt)->default_target_quantity() * 2 / 3) {
+			if (static_cast<int>(get_warehoused_stock(wt)) <
+				 tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name()) * 2 / 3) {
 				bo.build_material_shortage_ = true;
 			}
 		}
@@ -4234,7 +4234,7 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	for (EconomyObserver* observer : economies) {
 		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
 		for (Widelands::WareIndex id = 0; id < nritems; ++id) {
-			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity();
+			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 			                              gametime,
@@ -4271,12 +4271,12 @@ void DefaultAI::print_stats() {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
-	log (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
+	log (" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%2d. Missing: %s\n",
 		pn,
-		productionsites.size(),
-		militarysites.size(),
-		mines_.size(),
-		warehousesites.size() - num_ports,
+		static_cast<unsigned int>(productionsites.size()),
+		static_cast<unsigned int>(militarysites.size()),
+		static_cast<unsigned int>(mines_.size()),
+		static_cast<unsigned int>(warehousesites.size()) - num_ports,
 		num_ports,
 		summary.c_str());
 }

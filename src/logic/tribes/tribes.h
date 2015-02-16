@@ -50,7 +50,7 @@ class WorkerDescr;
 class Tribes {
 public:
 	Tribes(EditorGameBase&);
-	~Tribes();
+	~Tribes() {}
 
 	/// Adds this building type to the tribe description.
 	void add_constructionsite_type(const LuaTable& table);

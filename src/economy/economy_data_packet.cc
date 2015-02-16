@@ -47,7 +47,8 @@ void EconomyDataPacket::read(FileRead & fr)
 							fr.unsigned_32();
 						WareIndex i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
-							if (tribe.get_ware_descr(i)->default_target_quantity() ==
+							// NOCOM(GunChleoc): Give this a proper invalid index
+							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
 							    std::numeric_limits<uint32_t>::max())
 								log("WARNING: target quantity configured for %s, "
 								    "which should not have target quantity, "
@@ -109,9 +110,8 @@ void EconomyDataPacket::write(FileWrite & fw)
 		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[ware_index];
 		if (Time const last_modified = tq.last_modified) {
-			const WareDescr& ware_descr = tribe.get_ware_descr(ware_index);
 			fw.unsigned_32(last_modified);
-			fw.c_string(ware_descr.name());
+			fw.c_string(tribe.get_ware_descr(ware_index)->name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
@@ -120,9 +120,8 @@ void EconomyDataPacket::write(FileWrite & fw)
 		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[worker_index];
 		if (Time const last_modified = tq.last_modified) {
-					const WorkerDescr& worker_descr = tribe.get_worker_descr(worker_index);
 			fw.unsigned_32(last_modified);
-			fw.c_string(worker_descr.name());
+			fw.c_string(tribe.get_worker_descr(worker_index)->name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
