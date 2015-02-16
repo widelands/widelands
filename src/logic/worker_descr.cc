@@ -52,16 +52,14 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 			if (buildcost_.count(key)) {
 				throw wexception("a buildcost item of this ware type has already been defined: %s", key.c_str());
 			}
-			// NOCOM(GunChleoc): Do the check with the new tribes object
-			/*
-			if (tribe().ware_index(key) == INVALID_INDEX &&
-				 tribe().worker_index(key) == INVALID_INDEX) {
+
+			if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&
+				 egbase_.tribes().worker_index(key) == INVALID_INDEX) {
 				throw wexception
 					("\"%s\" has not been defined as a ware/worker type (wrong "
 					 "declaration order?)",
 					 key.c_str());
 			}
-			*/
 			value = items_table->get_int(key);
 			uint8_t const count = value;
 			if (count != value)
@@ -104,8 +102,6 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 				WorkerProgram::Parser parser;
 
 				parser.descr = this;
-				// NOCOM(GunChleoc): DO we need this? parser.directory = directory;
-				parser.prof = nullptr;
 				parser.table = items_table.get();
 
 				program = new WorkerProgram(program_name);

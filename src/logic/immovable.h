@@ -149,7 +149,7 @@ protected:
 	Buildcost m_buildcost;
 
 	// tribename or "default", helptext
-	// NOCOM(GunChleoc): Compiler doesn't like std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
+	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
 
 private:
 	// Adds a default program if none was defined.

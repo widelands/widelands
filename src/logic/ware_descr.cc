@@ -58,42 +58,36 @@ WareDescr::WareDescr(const LuaTable& table) :
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {
-	/* NOCOM(GunChleoc): Fix this
-	if (preciousnesses_.count(tribename > 0)) {
+	if (preciousnesses_.count(tribename) > 0) {
 		return preciousnesses_.at(tribename);
 	}
-	*/
 	return kInvalidWare;
 }
 
 
 int WareDescr::default_target_quantity(const std::string& tribename) const {
-	/* NOCOM(GunChleoc): Fix this
-	if (default_target_quantities_.count(tribename > 0)) {
+	if (default_target_quantities_.count(tribename) > 0) {
 		return default_target_quantities_.at(tribename);
 	}
-	*/
 	return kInvalidWare;
 }
 
 const std::string& WareDescr::helptext(const std::string& tribename) const {
-	/* NOCOM(GunChleoc): Fix this
-	if (helptexts_.count(tribename > 0)) {
+	if (helptexts_.count(tribename) > 0) {
 		i18n::Textdomain td("tribes");
-		if (helptexts_.count("default" > 0)) {
+		if (helptexts_.count("default") > 0) {
 			return (boost::format("%s %s")
 					  % _(helptexts_.at("default"))
 					  % _(helptexts_.at(tribename))).str();
 		} else {
 			return _(helptexts_.at(tribename));
 		}
-	} else if (helptexts_.count("default" > 0)) {
+	} else if (helptexts_.count("default") > 0) {
 		i18n::Textdomain td("tribes");
 		return _(helptexts_.at("default"));
 	} else {
 		return _("This ware has no help text yet.");
 	}
-	*/ return "";
 }
 
 
