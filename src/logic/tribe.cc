@@ -188,6 +188,7 @@ TribeDescr::TribeDescr
 		builder_ = add_special_worker(table.get_string("builder"));
 		carrier_ = add_special_worker(table.get_string("carrier"));
 		carrier2_ = add_special_worker(table.get_string("carrier2"));
+		geologist_ = add_special_worker(table.get_string("geologist"));
 		soldier_ = add_special_worker(table.get_string("soldier"));
 
 		const std::string shipname = table.get_string("ship");
@@ -396,6 +397,10 @@ WareIndex TribeDescr::carrier() const {
 WareIndex TribeDescr::carrier2() const {
 	assert(egbase_.tribes().worker_exists(carrier2_));
 	return carrier2_;
+}
+WareIndex TribeDescr::geologist() const {
+	assert(egbase_.tribes().worker_exists(geologist_));
+	return geologist_;
 }
 WareIndex TribeDescr::soldier() const {
 	assert(egbase_.tribes().worker_exists(soldier_));

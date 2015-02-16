@@ -145,7 +145,8 @@ tribes:new_tribe {
 
 	builder = "empire_builder",
 	carrier = "empire_carrier",
-	carrier2 = "empire_donkey"
+	carrier2 = "empire_donkey",
+	geologist = "barbarians_geologist",
    soldier = "empire_soldier",
    ship = "ship_empire",
 

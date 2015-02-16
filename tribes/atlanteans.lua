@@ -145,8 +145,9 @@ tribes:new_tribe {
 	builder = "atlanteans_builder",
 	carrier = "atlanteans_carrier",
 	carrier2 = "atlanteans_horse",
-   soldier = "atlanteans_soldier"
-   ship = "ship_atlanteans"
+	geologist = "atlanteans_geologist",
+   soldier = "atlanteans_soldier",
+   ship = "ship_atlanteans",
 
    immovables = {
 		"ashes",

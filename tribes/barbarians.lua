@@ -140,7 +140,8 @@ tribes:new_tribe {
 
 	builder = "barbarians_builder",
 	carrier = "barbarians_carrier",
-	carrier2 = "barbarians_ox"
+	carrier2 = "barbarians_ox",
+	geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "ship_barbarians",
 

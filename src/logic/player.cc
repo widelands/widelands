@@ -155,14 +155,14 @@ Player::Player
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
 	m_fields            (nullptr),
-	m_allowed_worker_types  (the_egbase.tribes().nrworkers(), true),
+	m_allowed_worker_types(the_egbase.tribes().nrworkers(), true),
 	m_allowed_building_types(the_egbase.tribes().nrbuildings(), true),
 	m_ai(""),
-	m_current_produced_statistics(tribe_descr.get_nrwares()), // NOCOM(GunChleoc): All tribes' wares or just the current tribe?
-	m_current_consumed_statistics(tribe_descr.get_nrwares()),
-	m_ware_productions  (tribe_descr.get_nrwares()),
-	m_ware_consumptions  (tribe_descr.get_nrwares()),
-	m_ware_stocks  (tribe_descr.get_nrwares())
+	m_current_produced_statistics(the_egbase.tribes().nrwares()),
+	m_current_consumed_statistics(the_egbase.tribes().nrwares()),
+	m_ware_productions(the_egbase.tribes().nrwares()),
+	m_ware_consumptions(the_egbase.tribes().nrwares()),
+	m_ware_stocks(the_egbase.tribes().nrwares())
 {
 	set_name(name);
 
@@ -498,7 +498,7 @@ Building & Player::force_building
 {
 	Map & map = egbase().map();
 	BuildingIndex idx = former_buildings.back();
-	const BuildingDescr* descr = tribe().get_building_descr(idx);
+	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
@@ -516,7 +516,7 @@ Building& Player::force_csite
 	Map & map = egbase().map();
 	if (!former_buildings.empty()) {
 		BuildingIndex idx = former_buildings.back();
-		const BuildingDescr * descr = tribe().get_building_descr(idx);
+		const BuildingDescr * descr = egbase().tribes().get_building_descr(idx);
 		terraform_for_building(egbase(), player_number(), location, descr);
 	}
 	FCoords flag_loc;
@@ -772,10 +772,7 @@ Perform an action on the given flag.
 void Player::flagaction(Flag & flag)
 {
 	if (&flag.owner() == this) { //  Additional security check.
-		flag.add_flag_job
-			(dynamic_cast<Game&>(egbase()),
-			 tribe().worker_index("geologist"),
-			 "expedition");
+		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
 	}
 }
 
@@ -1139,12 +1136,12 @@ void Player::unsee_node
  */
 void Player::sample_statistics()
 {
-	assert (m_ware_productions.size() == tribe().get_nrwares());
-	assert (m_ware_consumptions.size() == tribe().get_nrwares());
-	assert (m_ware_stocks.size() == tribe().get_nrwares());
+	assert (m_ware_productions.size() == egbase().tribes().nrwares());
+	assert (m_ware_consumptions.size() == egbase().tribes().nrwares());
+	assert (m_ware_stocks.size() == egbase().tribes().nrwares());
 
 	//calculate stocks
-	std::vector<uint32_t> stocks(tribe().get_nrwares());
+	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
 	const uint32_t nrecos = get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
@@ -1182,7 +1179,7 @@ void Player::sample_statistics()
  * A ware was produced. Update the corresponding statistics.
  */
 void Player::ware_produced(WareIndex const wareid) {
-	assert (m_ware_productions.size() == tribe().get_nrwares());
+	assert (m_ware_productions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
 	++m_current_produced_statistics[wareid];
@@ -1197,7 +1194,7 @@ void Player::ware_produced(WareIndex const wareid) {
  * \param count the number of consumed wares
  */
 void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
-	assert (m_ware_consumptions.size() == tribe().get_nrwares());
+	assert (m_ware_consumptions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
 	m_current_consumed_statistics[wareid] += count;
@@ -1210,9 +1207,7 @@ void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
 const std::vector<uint32_t> * Player::get_ware_production_statistics
 		(WareIndex const ware) const
 {
-	// NOCOM(GunChleoc): Does this still make sense?
 	assert(ware < static_cast<int>(m_ware_productions.size()));
-
 	return &m_ware_productions[ware];
 }
 
@@ -1223,7 +1218,6 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 		(WareIndex const ware) const {
 
-	// NOCOM(GunChleoc): Does this still make sense?
 	assert(ware < static_cast<int>(m_ware_consumptions.size()));
 
 	return &m_ware_consumptions[ware];
@@ -1232,7 +1226,6 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
 		(WareIndex const ware) const
 {
-	// NOCOM(GunChleoc): Does this still make sense?
 	assert(ware < static_cast<int>(m_ware_stocks.size()));
 
 	return &m_ware_stocks[ware];
@@ -1243,7 +1236,7 @@ const Player::BuildingStatsVector& Player::get_building_statistics(const Buildin
 }
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const BuildingIndex& i) {
-	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
+	BuildingIndex const nr_buildings = egbase().tribes().nrbuildings();
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 	return &m_building_stats[i];
@@ -1261,15 +1254,14 @@ void Player::update_building_statistics
 		constructionsite ?
 		constructionsite->building().name() : building.descr().name();
 
-	// NOCOM(GunChleoc): Building statistic should show the tribe's buildings + conquered military buildings.
-	const size_t nr_buildings = tribe().get_nrbuildings();
+	const size_t nr_buildings = egbase().tribes().nrbuildings();
 
 	// Get the valid vector for this
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 
 	std::vector<BuildingStats>& stat =
-	   *get_mutable_building_statistics(tribe().building_index(building_name.c_str()));
+		*get_mutable_building_statistics(egbase().tribes().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;
@@ -1325,7 +1317,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 
 		for (uint16_t i = 0; i < nr_wares; ++i) {
 			std::string name = fr.c_string();
-			WareIndex idx = tribe().ware_index(name);
+			WareIndex idx = egbase().tribes().ware_index(name);
 			if (idx == INVALID_INDEX) {
 				log
 					("Player %u statistics: unknown ware name %s",
@@ -1349,7 +1341,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 
 			for (uint16_t i = 0; i < nr_wares; ++i) {
 				std::string name = fr.c_string();
-				WareIndex idx = tribe().ware_index(name);
+				WareIndex idx = egbase().tribes().ware_index(name);
 				if (idx == INVALID_INDEX) {
 					log
 						("Player %u consumption statistics: unknown ware name %s",
@@ -1373,7 +1365,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 
 				for (uint16_t i = 0; i < nr_wares; ++i) {
 					std::string name = fr.c_string();
-					WareIndex idx = tribe().ware_index(name);
+					WareIndex idx = egbase().tribes().ware_index(name);
 					if (idx == INVALID_INDEX) {
 						log
 							("Player %u stock statistics: unknown ware name %s",
@@ -1391,8 +1383,8 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 		uint16_t nr_entries = fr.unsigned_16();
 
 		if (nr_wares > 0) {
-			if (nr_wares == tribe().get_nrwares()) {
-				assert(m_ware_productions.size() == nr_wares); // NOCOM(GunChleoc) All tribes' wares?
+			if (nr_wares == egbase().tribes().nrwares()) {
+				assert(m_ware_productions.size() == nr_wares);
 				assert(m_current_produced_statistics.size() == nr_wares);
 
 				for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i) {
@@ -1407,7 +1399,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 					("Statistics for player %u (%s) has %u ware types "
 					 "(should be %u). Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
-					 nr_wares, static_cast<unsigned int>(tribe().get_nrwares()));
+					 nr_wares, static_cast<unsigned int>(egbase().tribes().nrwares()));
 
 				// Eat and discard all data
 				for (uint32_t i = 0; i < nr_wares; ++i) {
@@ -1465,7 +1457,7 @@ void Player::write_statistics(FileWrite & fw) const {
 
 	for (uint8_t i = 0; i < m_current_produced_statistics.size(); ++i) {
 		fw.c_string
-			(tribe().get_ware_descr(i)->name());
+			(egbase().tribes().get_ware_descr(i)->name());
 		fw.unsigned_32(m_current_produced_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.unsigned_32(m_ware_productions[i][j]);
@@ -1477,7 +1469,7 @@ void Player::write_statistics(FileWrite & fw) const {
 
 	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
 		fw.c_string
-			(tribe().get_ware_descr(i)->name());
+			(egbase().tribes().get_ware_descr(i)->name());
 		fw.unsigned_32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
 			fw.unsigned_32(m_ware_consumptions[i][j]);
@@ -1488,7 +1480,7 @@ void Player::write_statistics(FileWrite & fw) const {
 	fw.unsigned_16(m_ware_stocks[0].size());
 
 	for (uint8_t i = 0; i < m_ware_stocks.size(); ++i) {
-		fw.c_string(tribe().get_ware_descr(i)->name());
+		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
 		for (uint32_t j = 0; j < m_ware_stocks[i].size(); ++j)
 			fw.unsigned_32(m_ware_stocks[i][j]);
 	}

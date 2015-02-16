@@ -102,6 +102,7 @@ public:
 	WareIndex builder() const;
 	WareIndex carrier() const;
 	WareIndex carrier2() const;
+	WareIndex geologist() const;
 	WareIndex soldier() const;
 	int ship() const;
 	const std::vector<WareIndex>& worker_types_without_cost() const;
@@ -147,23 +148,24 @@ private:
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;
 
-	std::set<BuildingIndex>           buildings_;
-	std::set<int>                     immovables_;  // The player immovables
-	std::set<WareIndex>               workers_;
-	std::set<WareIndex>               wares_;
-	std::set<WareIndex>               construction_materials_; // The wares that are used by construction sites
+	std::set<BuildingIndex>     buildings_;
+	std::set<int>               immovables_;  // The player immovables
+	std::set<WareIndex>         workers_;
+	std::set<WareIndex>         wares_;
+	std::set<WareIndex>         construction_materials_; // The wares that are used by construction sites
 	// Special units
-	WareIndex                         builder_;  // The builder for this tribe
-	WareIndex                         carrier_;  // The basic carrier for this tribe
-	WareIndex                         carrier2_; // Additional carrier for busy roads
-	WareIndex                         soldier_;  // The soldier that this tribe uses
-	int                               ship_;     // The ship that this tribe uses
-	std::vector<WareIndex>            worker_types_without_cost_;
+	WareIndex                   builder_;  // The builder for this tribe
+	WareIndex                   carrier_;  // The basic carrier for this tribe
+	WareIndex                   carrier2_; // Additional carrier for busy roads
+	WareIndex                   geologist_; // This tribe's geologist worker
+	WareIndex                   soldier_;  // The soldier that this tribe uses
+	int                         ship_;     // The ship that this tribe uses
+	std::vector<WareIndex>      worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display
-	WaresOrder                        wares_order_;
-	WaresOrderCoords                  wares_order_coords_;
-	WaresOrder                        workers_order_;
-	WaresOrderCoords                  workers_order_coords_;
+	WaresOrder                  wares_order_;
+	WaresOrderCoords            wares_order_coords_;
+	WaresOrder                  workers_order_;
+	WaresOrderCoords            workers_order_coords_;
 
 	std::vector<Initialization> m_initializations;
 
