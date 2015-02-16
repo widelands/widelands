@@ -215,7 +215,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::UNPASSABLE) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Type::kUnpassable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -225,7 +225,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::UNPASSABLE) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Type::kUnpassable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -238,7 +238,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::UNPASSABLE) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Type::kUnpassable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -251,7 +251,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::UNPASSABLE) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Type::kUnpassable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -1039,26 +1039,26 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	uint8_t cnt_water = 0;
 	uint8_t cnt_dead = 0;
 
-	if  (tr_d_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
-	if  (tl_r_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
-	if  (tl_d_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
-	if   (l_r_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
-	if   (f_d_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
-	if   (f_r_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
+	if  (tr_d_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
+	if  (tl_r_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
+	if  (tl_d_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
+	if   (l_r_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
+	if   (f_d_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
+	if   (f_r_terrain_is & TerrainDescription::Type::kUnpassable) ++cnt_unpassable;
 
-	if  (tr_d_terrain_is & TerrainDescription::WATER)      ++cnt_water;
-	if  (tl_r_terrain_is & TerrainDescription::WATER)      ++cnt_water;
-	if  (tl_d_terrain_is & TerrainDescription::WATER)      ++cnt_water;
-	if   (l_r_terrain_is & TerrainDescription::WATER)      ++cnt_water;
-	if   (f_d_terrain_is & TerrainDescription::WATER)      ++cnt_water;
-	if   (f_r_terrain_is & TerrainDescription::WATER)      ++cnt_water;
+	if  (tr_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if  (tl_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if  (tl_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if   (l_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if   (f_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if   (f_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
 
-	if  (tr_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
-	if  (tl_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
-	if  (tl_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
-	if   (l_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
-	if   (f_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
-	if   (f_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if  (tr_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if  (tl_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if  (tl_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if   (l_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if   (f_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if   (f_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
 
 
 	//  2) Passability
@@ -1265,10 +1265,10 @@ int Map::calc_buildsize
 	uint32_t cnt_mountain = 0;
 	uint32_t cnt_dry = 0;
 	for (uint32_t i = 0; i < 6; ++i) {
-		if (terrains[i] & TerrainDescription::WATER)
+		if (terrains[i] & TerrainDescription::Type::kWater)
 			return BaseImmovable::NONE;
-		if (terrains[i] & TerrainDescription::MOUNTAIN) ++cnt_mountain;
-		if (terrains[i] & TerrainDescription::DRY) ++cnt_dry;
+		if (terrains[i] & TerrainDescription::Type::kMountain) ++cnt_mountain;
+		if (terrains[i] & TerrainDescription::Type::kDry) ++cnt_dry;
 	}
 
 	if (cnt_mountain == 6) {
