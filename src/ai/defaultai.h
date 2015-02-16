@@ -84,6 +84,7 @@ struct DefaultAI : ComputerPlayer {
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
@@ -94,6 +95,7 @@ struct DefaultAI : ComputerPlayer {
 
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
@@ -104,6 +106,7 @@ struct DefaultAI : ComputerPlayer {
 
 	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
