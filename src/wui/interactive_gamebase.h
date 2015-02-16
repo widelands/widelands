@@ -86,7 +86,7 @@ public:
 	void start() override {};
 protected:
 	void draw_overlay(RenderTarget &) override;
-	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) =0;
+	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
 
 	GameMainMenuWindows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
