@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-14 02:36+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-12 13:43+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:39+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-13 05:41+0000\n"
+"X-Generator: Launchpad (build 17336)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -517,7 +517,7 @@ msgstr "teàrnadh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "Thathar den bheachd gun tuirt an trèanair cliùiteach Neidhardt seo."
+msgstr "Thathar den bheachd gun tuirt am maighstir cliùiteach Neidhardt seo."
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid ""
@@ -539,9 +539,10 @@ msgstr ""
 "nàmhaid ach nach tèid a leònadh."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
-"level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
 "Cha ghabh saighdearan nan tùsanach trèanadh ann an “Dìon” agus bidh an "
 "leibheil tùsail aca gu buan."
@@ -1143,7 +1144,7 @@ msgstr "Sealgair"
 
 #: ../../tribes/barbarians/conf:118
 msgid "Innkeeper"
-msgstr "Tàrnadaiche"
+msgstr "Tàrnadair"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Lime-Burner"
@@ -1175,7 +1176,7 @@ msgstr "Clachair"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Trainer"
-msgstr "Trèanair"
+msgstr "Maighstir"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Weaver"
@@ -1616,12 +1617,12 @@ msgstr "cruithneachd a chur"
 msgid "harvesting wheat"
 msgstr "cruithneachd a bhuain"
 
-#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/farm/conf:45
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Chan eil achadh ann"
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -2595,14 +2596,6 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Trèanaidh e “Ionnsaigh” agus “Slàinte” nan saighdearan."
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
-"initial level."
-msgstr ""
-"Cha ghabh saighdearan nan tùsanach trèanadh ann an “Dìon” agus bidh an "
-"leibheil tùsail aca gu buan."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"

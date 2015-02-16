@@ -2,20 +2,20 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-10-18 19:42+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-03 02:53+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
 
 #. * TRANSLATORS: %s = version information
@@ -110,30 +110,42 @@ msgstr ""
 "                           àireimh de làithean seo. Cha tèid faidhlichean\n"
 "                           a sguabadh às mas e 0 a th' ann."
 
+#: ../../src/wlapplication_messages.cc:71
+msgid " --autosave=[...]     Automatically save each n minutes"
+msgstr " --autosave=[...]          Sàbhail gu fèin-obrachail gach n mionaid"
+
 #: ../../src/wlapplication_messages.cc:72
+msgid ""
+" --rolling_autosave=[...]\n"
+"                      Use this many files for rolling autosaves"
+msgstr ""
+" --rolling_autosave=[...]  Cleachd an uiread de dh'fhaidhlichean seo airson\n"
+"                           fèin-sàbhaladh car mu char"
+
+#: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
 msgstr "Roghainnean fuaime:"
 
-#: ../../src/wlapplication_messages.cc:73
+#: ../../src/wlapplication_messages.cc:76
 msgid " --nosound            Starts the game with sound disabled."
 msgstr ""
 " --nosound                 Tòisichidh seo an geama leis an fuaim à comas."
 
-#: ../../src/wlapplication_messages.cc:74
+#: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx              Cuir èifeachdan fuaime à comas."
 
-#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
 msgstr " --disable_music           Cuir an ceòl à comas."
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr ""
 " --nozip                   Na sàbhail faidhlichean nan tasglannan\n"
 "                           bìnearaidh zip."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
@@ -144,7 +156,7 @@ msgstr ""
 "                           gus am mapa AINM-FAIDHLE a luchdadh sa bhad\n"
 "                           san deasaiche."
 
-#: ../../src/wlapplication_messages.cc:80
+#: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
@@ -152,13 +164,13 @@ msgstr ""
 " --scenario=FILENAME       Tòisichidh seo am mapa AINM-FAIDHLE sa bhad\n"
 "                           mar mhapa cnàmh-sgeòil."
 
-#: ../../src/wlapplication_messages.cc:82
+#: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr ""
 " --loadgame=FILENAME       Luchdaichidh seo an geama air a shàbhaladh\n"
 "                           AINM-FAIDHLE sa bhad."
 
-#: ../../src/wlapplication_messages.cc:83
+#: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -169,7 +181,7 @@ msgstr ""
 "loadgame\n"
 "                           no --editor."
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:88
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr ""
 " --dedicated=FILENAME      Tòisichidh seo frithealaiche sònraichte le\n"
@@ -177,7 +189,7 @@ msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:88
+#: ../../src/wlapplication_messages.cc:91
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -191,13 +203,13 @@ msgstr ""
 "                           bratach air a chur ann nach eil ceangailte ri "
 "rathad."
 
-#: ../../src/wlapplication_messages.cc:92
+#: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
 msgstr "Roghainnean grafaigeachd:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
@@ -207,19 +219,19 @@ msgstr ""
 "                           Co-dhiù an tèid gus nach tèid an sgrìn slàn a\n"
 "                           chleachdadh airson a' gheama."
 
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]              Leud na h-uinneige ann am piogsailean."
 
-#: ../../src/wlapplication_messages.cc:99
+#: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]              Àirde na h-uinneige ann am piogsailean."
 
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
 msgstr "Roghainnean airson manaidsear nan uinneagan taobh a-staigh:"
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -232,7 +244,7 @@ msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:110
+#: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -244,7 +256,7 @@ msgstr ""
 "                           air falbh nuair a bhios oir na h-uinneige ri oir\n"
 "                           na  sgrìn."
 
-#: ../../src/wlapplication_messages.cc:114
+#: ../../src/wlapplication_messages.cc:117
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -255,7 +267,7 @@ msgstr ""
 "                           Gluais uinneag gu oir na panail ma bhios i taobh\n"
 "                           a-staigh an astair seo o oir na panail."
 
-#: ../../src/wlapplication_messages.cc:118
+#: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -266,17 +278,17 @@ msgstr ""
 "                           Na gluais uinneag gu oir panail ma bhios i\n"
 "                           tar-chòmdaichte leis a' phanail."
 
-#: ../../src/wlapplication_messages.cc:123
+#: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
 msgstr ""
 " --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach\n"
 "                           an comas"
 
-#: ../../src/wlapplication_messages.cc:125
+#: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
 msgstr " --help                    Seall a' chobhair seo"
 
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:130
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

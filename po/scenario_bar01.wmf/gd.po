@@ -2,13 +2,13 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-10-29 20:25+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-03 02:52+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:36+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:35+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
@@ -27,13 +27,15 @@ msgstr "Tog dà bhothan maoir-choille"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Tog bothan maoir-choille faisg air gach bothan coillteir."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
 msgstr ""
+"Chan fhàs craobhan ach gu slaodach. Feumaidh tu bothanan coillteir a thogail "
+"ach am bi fiodh gu leòr agad an-còmhnaidh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -212,6 +214,8 @@ msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
 msgstr ""
+"Leasaich a’ mhèinn guail no a’ mhèinn iarainn gu mèinn dhomhain agus an "
+"taigh-tàirn gu taigh-òil."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
@@ -293,7 +297,7 @@ msgstr "Tog àth-aoil is eaconamaidh guail"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Tog àth-aoil le taic tobair ’s àth-ghuail no mèinne guail."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
@@ -320,6 +324,9 @@ msgid ""
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
 msgstr ""
+"A chum gun gairm thu clach-eòlaiche ach an lorg e uisge dhut, briog air "
+"bratach san sfìre far a bheil thu airson sireadh agus briog air a’ phutan "
+"“Cuir clach-eòlaiche gus an làrach a rùrachadh” an uairsin."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
@@ -327,12 +334,17 @@ msgid ""
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
 msgstr ""
+"’S urrainn dhut taghadh an tog thu àth-ghuail no mèinn guail ach am faigh "
+"thu gual. Co-dhiù, ’s e obair slaodach a th’ ann gual a losgadh à fiodh. Cha "
+"bu chòir dhut àth-ghuail a thogail ach mur eil gual ri làimh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
 msgstr ""
+"Tog àth-aoil ’s tobar. Tog àth-ghuail no mèinn guail cuideachd gus gual a "
+"thoirt dhi."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:130
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
@@ -511,6 +523,11 @@ msgid ""
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
 msgstr ""
+"Tha an t-iomagan a’ fàs air Boldrad rè nan làithean. Tha an leann-dubh a’ "
+"tighinn air mo chuideachd on a tha an geamhradh gu bhith tighinn oirnn agus "
+"chan eil sinn a’ fuireach ach ann am bothanan. Cha do chuir mi romham "
+"fuireach san fhàsach seo cho fada sin – ach cha shaoilinn a-riamh gum "
+"maireadh an còmhstri gun chiall seo eadar mo dhà bhràthair cho fada."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:219
 msgid ""
@@ -519,6 +536,11 @@ msgid ""
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
 msgstr ""
+"’S dòcha gun tàinig an t-àm gun dèanamaid ar beatha an-seo beagan nas "
+"cofhurtaile. ’S dòcha gun tàinig an t-àm gun toireamaid dachaigh ùr an àite "
+"an dachaigh a chaill sinn dhan fheadhainn a tha a’ fuireach ’s a’ "
+"beachdachadh còmhla. Gus an tig an t-àm a thilleamaid dhan àite a bhiodh ’na "
+"dhachaigh dhuinn uair…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:224
 msgid "Somebody Comes up to You"
@@ -571,6 +593,8 @@ msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
 msgstr ""
+"Chì mi gun do thog thu coireall agus dà bhothan coillteir mar-thà. Seo "
+"toiseach tòiseachaidh math ma tha sinn airson fuireach an-seo nas fhaide."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
@@ -709,7 +733,7 @@ msgstr "Do chompanach dìleas"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Thàinig Boldrad dàna ri do thaobh…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:289
 msgid ""
@@ -718,6 +742,12 @@ msgid ""
 "to Al’thunran. Too long have we waited while our brethren have fought on the "
 "battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
+"An ann gu bheil sibh airson ar n-ullachadh ach am fuiricheamaid sna "
+"coilltean seo nas fhaide, a Throin? Uill, tuigidh mi an gliocas a th’ ann, "
+"ach tha fadachd ’nam chridhe gus an tilleamaid gu Al’tùnran gu "
+"soirbheachail. Tha sinn air fuireach ro fhada mar-thà fad ’s a tha ar "
+"cuideachd a’ sabaid an aghaidh càch a chèile air a’ bhlàr agus tha na "
+"tuaghan is claidheamhan againn air am fàs meirgeach."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "Khantrukh joins in…"
@@ -729,6 +759,10 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr ""
+"Gabhaibh mo leisgeul, a cheannaird, ach feumaidh mi ur n-aire a thoirt air "
+"cùis chudromach. Tha na creagan faisg air a’ champachadh againn a’ crìonadh "
+"gu luath fo acainnean an luchd-obrach againn agus cha mhair iad fada "
+"tuilleadh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "Boldreth jumps up…"
@@ -741,6 +775,11 @@ msgid ""
 "warriors and venturing somewhat closer to the great mountain of Kal’mavrath "
 "– maybe we will find some more big rocks to please the old man?"
 msgstr ""
+"Ged nach e obair dàna gaisgich a th’ ann, seo rudeigin as urrainn dhuinn "
+"dèanamh co-dhiù! A Throin, dè ur beachd nan toirinn cuid dhe na gaisgich as "
+"an-fhoiseile againn còmhla rium ach an rùraich sinn nas fhaisge air beinn "
+"mhòr Chal’mabhraid – ’s dòcha gun lorg sinn barrachd creagan mòra ann ach am "
+"biodh am bodach toilichte?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:310
 msgid "Khantrukh grumbles…"
@@ -748,7 +787,7 @@ msgstr "Tha Kantrach mì-thoilichte…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:311
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Bodach, an e? Òganaich gun spèis!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Khantrukh nods satisfied…"
@@ -756,7 +795,7 @@ msgstr "Tha Kantrach toilichte…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:317
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Mu dheireadh thall! Bu chòir do na creagan ud mairsinn ùine mhath."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Boldreth exclaims…"
@@ -767,6 +806,8 @@ msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr ""
+"Seallaibh! Tha beinn mhòr Chal’mabhraid gu ear! Saoil dè an ulaidh a "
+"dh’fhalaich an nàdar dhuinn fo a slèibhtean mòra!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:325
 msgid ""
@@ -774,6 +815,9 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr ""
+"Dèanamaid leudachadh gu ear. Tha seans gum bi na bodaich feumail dhuibh o àm "
+"gu àm! Cuireamaid an fheadhainn ann a bhios eòlach air teanga nan clach ach "
+"an lorg iad rùintean-dìomhair na beinne!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:331
 msgid "Boldreth laughs…"
@@ -787,7 +831,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "’S dòcha gum bi e gu leòr gus…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh interrupts…"
@@ -800,6 +844,11 @@ msgid ""
 "up on the mountain in this bitter cold, and providing these supplies may not "
 "be easy."
 msgstr ""
+"Ged a tha sin fìor, bu chòir dhuinn smaoineachadh air uaireigin eile on a "
+"tha cnapan-starra eile romhainn an-dràsta. Bidh na mèinnearan ag iarraidh "
+"greimeannan bidhe as motha airson obair àrd air a’ bheinn san fhuachd "
+"uabhasach a tha ann agus is dòcha nach bi e furasta na dh’fheumas iad a "
+"thoirt dhaibh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:346
 msgid "Boldreth nods…"
@@ -807,7 +856,7 @@ msgstr "Tha Boldrad ag aontachadh…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:347
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Feumaidh mi aideachadh gu bheil thu ceart, a bhodaich."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:349
 msgid ""
@@ -815,6 +864,10 @@ msgid ""
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr ""
+"Tha coltas gu bheil mòran bheathaichean sna coilltean an-seo – ’s dòcha gun "
+"tèid leinn barrachd dhiubh a shealg. Agus bhiodh an sluagh glè thoilichte "
+"nan robh taigh-tàirn ùr ann gun teagamh – saoil, nach toir sinn “Urram "
+"Thròin” air ma thogras tu?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "The elder jumps into the air…"

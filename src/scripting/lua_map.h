@@ -596,12 +596,14 @@ public:
 	/*
 	 * Properties
 	 */
-
+	int get_roads(lua_State * L);
+	int get_building(lua_State * L);
 	/*
 	 * Lua Methods
 	 */
 	int set_wares(lua_State *);
 	int get_wares(lua_State *);
+
 
 	/*
 	 * C Methods

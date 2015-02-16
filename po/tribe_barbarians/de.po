@@ -7,23 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-15 23:14+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-08 02:38+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:39+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-09 05:42+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
-
-#: ../../tribes/barbarians/conf:57
-msgid "Blackwood"
-msgstr "Hartholz"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -543,12 +539,13 @@ msgstr ""
 "Gegner getroffen wird und daher keinen Schaden nimmt."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
-"level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
-"Die Soldaten der Barbaren können nicht in \"Verteidigung\" trainiert werden "
-"und werden auf der niedrigsten Stufe bleiben."
+"Die Soldaten der Barbaren können nicht in der Verteidigung ausgebildet "
+"werden und bleiben bei ihrer Anfangsstufe."
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
@@ -922,6 +919,10 @@ msgstr "Streitaxt"
 #: ../../tribes/barbarians/conf:56
 msgid "Beer"
 msgstr "Bier"
+
+#: ../../tribes/barbarians/conf:57
+msgid "Blackwood"
+msgstr "Schwarzholz"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Broad Ax"
@@ -1610,12 +1611,12 @@ msgstr "Das Pflanzen von Weizen"
 msgid "harvesting wheat"
 msgstr "Das Ernten von Weizen"
 
-#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/farm/conf:45
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Keine Felder"
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -2572,14 +2573,6 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Trainiert Soldaten in \"Angriff\" und \"Lebenspunkte\"."
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
-"initial level."
-msgstr ""
-"Die Soldaten der Barbaren können nicht in der Verteidigung ausgebildet "
-"werden und bleiben bei ihrer Anfangsstufe."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"

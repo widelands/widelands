@@ -198,10 +198,10 @@ public:
 
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t const dir) const {
-		return (roads >> dir) & Road_Mask;
+		return (roads >> dir) & RoadType::kMask;
 	}
 	void set_road(int32_t const dir, int32_t const type) {
-		roads &= ~(Road_Mask << dir);
+		roads &= ~(RoadType::kMask << dir);
 		roads |= type << dir;
 	}
 

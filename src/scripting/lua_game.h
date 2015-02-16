@@ -27,7 +27,7 @@
 #include "scripting/luna.h"
 
 namespace Widelands {
-	struct TribeDescr;
+	class TribeDescr;
 	class Objective;
 	struct Message;
 }

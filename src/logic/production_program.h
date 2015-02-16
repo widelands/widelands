@@ -43,7 +43,7 @@ class Game;
 struct ImmovableDescr;
 struct ProductionSiteDescr;
 class ProductionSite;
-struct TribeDescr;
+class TribeDescr;
 class Worker;
 class World;
 

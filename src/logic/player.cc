@@ -1054,8 +1054,8 @@ void Player::rediscover_node
 		Field & tr_field = m_fields[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
 			tr_field.terrains.d = tr.field->terrain_d();
-			tr_field.roads &= ~(Road_Mask << Road_SouthWest);
-			tr_field.roads |= Road_Mask << Road_SouthWest & tr.field->get_roads();
+			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
+			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
 		}
 	}
 	{ //  discover both triangles and the SE edge of the top left  neighbour
@@ -1063,8 +1063,8 @@ void Player::rediscover_node
 		Field & tl_field = m_fields[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
 			tl_field.terrains = tl.field->get_terrains();
-			tl_field.roads &= ~(Road_Mask << Road_SouthEast);
-			tl_field.roads |= Road_Mask << Road_SouthEast & tl.field->get_roads();
+			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
+			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
 		}
 	}
 	{ //  discover the R triangle and the  E edge of the     left  neighbour
@@ -1072,8 +1072,8 @@ void Player::rediscover_node
 		Field & l_field = m_fields[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
 			l_field.terrains.r = l.field->terrain_r();
-			l_field.roads &= ~(Road_Mask << Road_East);
-			l_field.roads |= Road_Mask << Road_East & l.field->get_roads();
+			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
+			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
 		}
 	}
 }

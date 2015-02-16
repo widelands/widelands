@@ -26,6 +26,7 @@
 #include "economy/flag.h"
 #include "logic/message_id.h"
 #include "logic/path.h"
+#include "logic/ship.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -356,8 +357,8 @@ private:
 struct CmdShipExploreIsland : public PlayerCommand {
 	CmdShipExploreIsland() : PlayerCommand(), serial(0) {} // For savegame loading
 	CmdShipExploreIsland
-		(int32_t const t, PlayerNumber const p, Serial s, bool cw)
-		: PlayerCommand(t, p), serial(s), clockwise(cw)
+		(int32_t const t, PlayerNumber const p, Serial s, ScoutingDirection direction)
+		: PlayerCommand(t, p), serial(s), scouting_direction(direction)
 	{}
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -372,7 +373,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 
 private:
 	Serial serial;
-	bool clockwise;
+	ScoutingDirection scouting_direction;
 };
 
 struct CmdShipSink : public PlayerCommand {

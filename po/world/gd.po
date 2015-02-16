@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-04 12:06+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-08 02:41+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:50+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-09 05:44+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
 
 #: ../../world/critters/badger/init.lua:14
@@ -672,6 +672,9 @@ msgstr "Graineal"
 
 #: ../../world/resources/init.lua:57
 #: ../../world/terrains/init.lua:284
+#: ../../world/terrains/init.lua:515
+#: ../../world/terrains/init.lua:747
+#: ../../world/terrains/init.lua:977
 msgid "Water"
 msgstr "Uisge"
 
@@ -692,26 +695,23 @@ msgid "Winter"
 msgstr "Geamhradh"
 
 #: ../../world/terrains/init.lua:19
+#: ../../world/terrains/init.lua:767
+#: ../../world/terrains/init.lua:917
+#: ../../world/terrains/init.lua:932
+#: ../../world/terrains/init.lua:947
 msgid "Desert"
 msgstr "Fàsach"
 
 #: ../../world/terrains/init.lua:33
-msgid "Meadow 1"
-msgstr "Faiche 1"
-
 #: ../../world/terrains/init.lua:71
-msgid "Meadow 2"
-msgstr "Faiche 2"
-
 #: ../../world/terrains/init.lua:87
-msgid "Meadow 3"
-msgstr "Faiche 3"
-
 #: ../../world/terrains/init.lua:102
-msgid "Meadow 4"
-msgstr "Faiche 4"
+#: ../../world/terrains/init.lua:812
+msgid "Meadow"
+msgstr ""
 
 #: ../../world/terrains/init.lua:117
+#: ../../world/terrains/init.lua:797
 msgid "Steppe"
 msgstr "Steip"
 
@@ -720,34 +720,37 @@ msgid "Barren Steppe"
 msgstr "Steip sheasg"
 
 #: ../../world/terrains/init.lua:147
+#: ../../world/terrains/init.lua:827
 msgid "Mountain Meadow"
 msgstr "Cluain"
 
 #: ../../world/terrains/init.lua:162
-#: ../../world/terrains/init.lua:408
-msgid "Mountain 1"
-msgstr "Beinn 1"
-
 #: ../../world/terrains/init.lua:177
-#: ../../world/terrains/init.lua:423
-msgid "Mountain 2"
-msgstr "Beinn 2"
-
 #: ../../world/terrains/init.lua:192
-#: ../../world/terrains/init.lua:438
-msgid "Mountain 3"
-msgstr "Beinn 3"
-
 #: ../../world/terrains/init.lua:207
+#: ../../world/terrains/init.lua:408
+#: ../../world/terrains/init.lua:423
+#: ../../world/terrains/init.lua:438
 #: ../../world/terrains/init.lua:453
-msgid "Mountain 4"
-msgstr "Beinn 4"
+#: ../../world/terrains/init.lua:625
+#: ../../world/terrains/init.lua:640
+#: ../../world/terrains/init.lua:655
+#: ../../world/terrains/init.lua:670
+#: ../../world/terrains/init.lua:857
+#: ../../world/terrains/init.lua:872
+#: ../../world/terrains/init.lua:887
+#: ../../world/terrains/init.lua:902
+msgid "Mountain"
+msgstr ""
 
 #: ../../world/terrains/init.lua:222
 msgid "Swamp"
 msgstr "Boglach"
 
 #: ../../world/terrains/init.lua:238
+#: ../../world/terrains/init.lua:468
+#: ../../world/terrains/init.lua:700
+#: ../../world/terrains/init.lua:962
 msgid "Beach"
 msgstr "Tràigh"
 
@@ -761,60 +764,31 @@ msgid "Lava"
 msgstr "Làbha"
 
 #: ../../world/terrains/init.lua:303
+#: ../../world/terrains/init.lua:318
 msgid "Ashes"
 msgstr "Luaithre"
 
-#: ../../world/terrains/init.lua:318
-msgid "Ashes 2"
-msgstr "Luaithre 2"
-
 #: ../../world/terrains/init.lua:333
-msgid "Hard Ground 1"
-msgstr "Talamh chruaidh 1"
-
 #: ../../world/terrains/init.lua:348
-msgid "Hard Ground 2"
-msgstr "Talamh chruaidh 2"
-
 #: ../../world/terrains/init.lua:363
-msgid "Hard Ground 3"
-msgstr "Talamh chruaidh 3"
-
 #: ../../world/terrains/init.lua:378
-msgid "Hard Ground 4"
-msgstr "Talamh chruaidh 4"
+msgid "Hard Ground"
+msgstr ""
 
 #: ../../world/terrains/init.lua:393
 msgid "Igneous Rocks"
 msgstr "Clach theinnteach"
 
-#: ../../world/terrains/init.lua:468
-msgid "Beach (Wasteland)"
-msgstr "Tràigh (talamh fàs)"
-
 #: ../../world/terrains/init.lua:483
-msgid "Lava Rocks 1"
-msgstr "Creagan làbha 1"
-
 #: ../../world/terrains/init.lua:499
-msgid "Lava Rocks 2"
-msgstr "Creagan làbha 2"
-
-#: ../../world/terrains/init.lua:515
-msgid "Water (Wasteland)"
-msgstr "Uisge (talamh fàs)"
+msgid "Lava Rocks"
+msgstr ""
 
 #: ../../world/terrains/init.lua:535
+#: ../../world/terrains/init.lua:550
+#: ../../world/terrains/init.lua:565
 msgid "Tundra"
 msgstr "Tundra"
-
-#: ../../world/terrains/init.lua:550
-msgid "Tundra 2"
-msgstr "Tundra 2"
-
-#: ../../world/terrains/init.lua:565
-msgid "Tundra 3"
-msgstr "Tundra 3"
 
 #: ../../world/terrains/init.lua:580
 msgid "Tundra Taiga"
@@ -824,98 +798,19 @@ msgstr "Tundra taidhgea"
 msgid "Taiga"
 msgstr "Taidhgea"
 
-#: ../../world/terrains/init.lua:625
-msgid "Mountain 1 (Winter)"
-msgstr "Beinn 1 (geamhradh)"
-
-#: ../../world/terrains/init.lua:640
-msgid "Mountain 2 (Winter)"
-msgstr "Beinn 2 (geamhradh)"
-
-#: ../../world/terrains/init.lua:655
-msgid "Mountain 3 (Winter)"
-msgstr "Beinn 3 (geamhradh)"
-
-#: ../../world/terrains/init.lua:670
-msgid "Mountain 4 (Winter)"
-msgstr "Beinn 4 (geamhradh)"
-
 #: ../../world/terrains/init.lua:685
 msgid "Ice"
 msgstr "Deigh"
 
-#: ../../world/terrains/init.lua:700
-msgid "Beach (Winter)"
-msgstr "Tràigh (geamhradh)"
-
 #: ../../world/terrains/init.lua:715
+#: ../../world/terrains/init.lua:731
 msgid "Ice Floes"
 msgstr "Clàran-deighe"
-
-#: ../../world/terrains/init.lua:731
-msgid "Ice Floes 2"
-msgstr "Clàran-deighe 2"
-
-#: ../../world/terrains/init.lua:747
-msgid "Water (Winter)"
-msgstr "Uisge (geamhradh)"
-
-#: ../../world/terrains/init.lua:767
-msgid "Desert 4"
-msgstr "Fàsach 4"
 
 #: ../../world/terrains/init.lua:782
 msgid "Dry Soil"
 msgstr "Ùir thioram"
 
-#: ../../world/terrains/init.lua:797
-msgid "Steppe (Desert)"
-msgstr "Steip (fàsach)"
-
-#: ../../world/terrains/init.lua:812
-msgid "Meadow (Desert)"
-msgstr "Faiche (fàsach)"
-
-#: ../../world/terrains/init.lua:827
-msgid "Mountain Meadow (Desert)"
-msgstr "Cluain (fàsach)"
-
 #: ../../world/terrains/init.lua:842
-msgid "High Mountain Meadow (Desert)"
-msgstr "Àilean beinne (fàsach)"
-
-#: ../../world/terrains/init.lua:857
-msgid "Mountain 1 (Desert)"
-msgstr "Beinn 1 (fàsach)"
-
-#: ../../world/terrains/init.lua:872
-msgid "Mountain 2 (Desert)"
-msgstr "Beinn 2 (fàsach)"
-
-#: ../../world/terrains/init.lua:887
-msgid "Mountain 3 (Desert)"
-msgstr "Beinn 3 (fàsach)"
-
-#: ../../world/terrains/init.lua:902
-msgid "Mountain 4 (Desert)"
-msgstr "Beinn 4 (fàsach)"
-
-#: ../../world/terrains/init.lua:917
-msgid "Desert 1"
-msgstr "Fàsach 1"
-
-#: ../../world/terrains/init.lua:932
-msgid "Desert 2"
-msgstr "Fàsach 2"
-
-#: ../../world/terrains/init.lua:947
-msgid "Desert 3"
-msgstr "Fàsach 3"
-
-#: ../../world/terrains/init.lua:962
-msgid "Beach (Desert)"
-msgstr "Tràigh (fàsach)"
-
-#: ../../world/terrains/init.lua:977
-msgid "Water (Desert)"
-msgstr "Uisge (fàsach)"
+msgid "High Mountain Meadow"
+msgstr ""
