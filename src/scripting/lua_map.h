@@ -431,7 +431,6 @@ public:
 	 * Properties
 	 */
 	int get_becomes(lua_State*);
-	int get_buildable(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_icon_name(lua_State*);
 	int get_needed_experience(lua_State*);
