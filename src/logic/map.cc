@@ -1037,7 +1037,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unpassable = 0;
 	uint8_t cnt_water = 0;
-	uint8_t cnt_acid = 0;
+	uint8_t cnt_dead = 0;
 
 	if  (tr_d_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
 	if  (tl_r_terrain_is & TerrainDescription::UNPASSABLE) ++cnt_unpassable;
@@ -1053,12 +1053,12 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	if   (f_d_terrain_is & TerrainDescription::WATER)      ++cnt_water;
 	if   (f_r_terrain_is & TerrainDescription::WATER)      ++cnt_water;
 
-	if  (tr_d_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
-	if  (tl_r_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
-	if  (tl_d_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
-	if   (l_r_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
-	if   (f_d_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
-	if   (f_r_terrain_is & TerrainDescription::ACID)       ++cnt_acid;
+	if  (tr_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if  (tl_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if  (tl_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if   (l_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if   (f_d_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
+	if   (f_r_terrain_is & TerrainDescription::DEAD)       ++cnt_dead;
 
 
 	//  2) Passability
@@ -1075,7 +1075,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
 	// as lava), we can neither walk nor swim to this node.
-	if (cnt_acid)
+	if (cnt_dead)
 		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
 	//  === everything below is used to check buildability ===

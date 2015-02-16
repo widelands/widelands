@@ -113,7 +113,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	if (terrain_is & Widelands::TerrainDescription::Type::WATER) {
 		terrain_is_strings.push_back(_("aquatic"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::ACID) {
+	if (terrain_is & Widelands::TerrainDescription::Type::DEAD) {
 		terrain_is_strings.push_back(_("dead"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::MOUNTAIN) {

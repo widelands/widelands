@@ -47,8 +47,8 @@ static const int32_t check[] = {
 	TerrainDescription::DRY,                                   //  "dry"
 	TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
 	TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
-	TerrainDescription::ACID | TerrainDescription::DRY |
-		TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
+	TerrainDescription::DEAD | TerrainDescription::DRY |
+		TerrainDescription::UNPASSABLE,  //  "dead"
 	TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
 	-1,  // end marker
 };
@@ -115,7 +115,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mountainous"));
 			}
-			if (ter_is & TerrainDescription::ACID) {
+			if (ter_is & TerrainDescription::DEAD) {
 				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
 				     *dead,
 				     Rect(0, 0, dead->width(), dead->height()),

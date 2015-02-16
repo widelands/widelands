@@ -44,7 +44,7 @@ world:new_terrain_type{
    -- "mountain": Allows building of mines and roads
    -- "dry": Allows building of roads only. Trees don't like this terrain.
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
-   -- "acid"/"dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
+   -- "dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
    -- "unpassable": Nothing can be built here, and nothing can walk on it
    --
    -- Note that "is" also has implications for trees' terrain affinity.
@@ -277,7 +277,7 @@ world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
    editor_category = "green",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -492,7 +492,7 @@ world:new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -508,7 +508,7 @@ world:new_terrain_type{
    name = "lava-stone2",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,

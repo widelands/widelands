@@ -46,7 +46,7 @@ public:
 		GREEN = 0,
 		DRY = 1,
 		WATER =  2,
-		ACID = 4,
+		DEAD = 4,
 		MOUNTAIN = 8,
 		UNPASSABLE = 16,
 	};

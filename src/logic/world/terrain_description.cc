@@ -48,17 +48,13 @@ TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 		return static_cast<TerrainDescription::Type>(
 		   TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
-	if (type == "acid") {
+	if (type == "dead") {
 		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+			TerrainDescription::DEAD | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	if (type == "mountain") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
 		                                             TerrainDescription::MOUNTAIN);
-	}
-	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
 	}
 	if (type == "unpassable") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
