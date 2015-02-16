@@ -38,8 +38,6 @@
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
-class Profile;
-
 namespace Widelands {
 
 class Game;

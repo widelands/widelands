@@ -427,35 +427,29 @@ void WorkerProgram::parse_walk
 void WorkerProgram::parse_animation
 	(WorkerDescr* descr,
 	 Worker::Action* act,
-	 Parser* parser,
+	 Parser*,
 	 const Tribes&,
 	 const std::vector<std::string>& cmd)
 {
 	char * endp;
 
 	if (cmd.size() != 3)
-		throw wexception("Usage: animation <name> <time>");
+		throw GameDataError("Usage: animation <name> <time>");
+
+	if (!descr->is_animation_known(cmd[1])) {
+		throw GameDataError("unknown animation \"%s\" in worker program for worker \"%s\"",
+								  cmd[1].c_str(), descr->name().c_str());
+	}
 
 	act->function = &Worker::run_animation;
-
-	if (!descr->is_animation_known(cmd[1].c_str())) {
-		// dynamically allocate animations here
-		// NOCOM(GunChleoc): Do LuaTable version
-		/*
-		descr->add_animation
-			(cmd[1].c_str(),
-			 (g_gr->animations().load(parser->directory,
-				 parser->prof->get_safe_section(cmd[1].c_str()))));
-				 */
-	}
-	act->iparam1 = descr->get_animation(cmd[1].c_str());
+	act->iparam1 = descr->get_animation(cmd[1]);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (*endp)
-		throw wexception("Bad duration '%s'", cmd[2].c_str());
+		throw GameDataError("Bad duration '%s'", cmd[2].c_str());
 
 	if (act->iparam2 <= 0)
-		throw wexception("animation duration must be positive");
+		throw GameDataError("animation duration must be positive");
 }
 
 

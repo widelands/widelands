@@ -808,13 +808,13 @@ ProductionProgram::ActAnimate::ActAnimate(
 		if (animation_name == "idle")
 			throw GameDataError
 				("idle animation is default; calling is not allowed");
-		if (descr->is_animation_known(animation_name))
-			m_id = descr->get_animation(animation_name);
-		else {
-			// NOCOM(GunChleoc): Animation now from LuaTable, so this doesn't work anymore
-			// m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
-			// descr->add_animation(animation_name, m_id);
+		if (!descr->is_animation_known(animation_name)) {
+			throw GameDataError("unknown animation \"%s\" in production program for building \"%s\"",
+									  animation_name.c_str(), descr->name().c_str());
 		}
+
+		m_id = descr->get_animation(animation_name);
+
 		parameters.erase(parameters.begin());
 		if (!parameters.empty()) { //  The next parameter is the duration.
 			m_duration = get_unsigned_number<Duration>(parameters.front(), "duration in ms");

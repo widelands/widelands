@@ -105,8 +105,7 @@ private:
 		 const std::vector<std::string>& cmd);
 	void parse_animation
 		(WorkerDescr* descr,
-		 Worker::Action*,
-		 Parser*parser, const Tribes&,
+		 Worker::Action*, Parser*, const Tribes&,
 		 const std::vector<std::string>& cmd);
 	void parse_return
 		(WorkerDescr*,
