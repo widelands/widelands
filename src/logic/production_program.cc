@@ -811,8 +811,9 @@ ProductionProgram::ActAnimate::ActAnimate(
 		if (descr->is_animation_known(animation_name))
 			m_id = descr->get_animation(animation_name);
 		else {
-			// NOCOM(GunChleoc): Animation now from LuaTable m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
-			descr->add_animation(animation_name, m_id);
+			// NOCOM(GunChleoc): Animation now from LuaTable, so this doesn't work anymore
+			// m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
+			// descr->add_animation(animation_name, m_id);
 		}
 		parameters.erase(parameters.begin());
 		if (!parameters.empty()) { //  The next parameter is the duration.

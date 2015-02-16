@@ -85,6 +85,10 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool is_shipyard() const {
+		return shipyard_;
+	}
+
 	int32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
@@ -109,6 +113,7 @@ private:
 	bool expansion_;
 	bool fighting_;
 	bool mountain_conqueror_;
+	bool shipyard_;
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	uint8_t mines_percent_;

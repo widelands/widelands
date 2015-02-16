@@ -448,12 +448,7 @@ void DefaultAI::late_initialization() {
 				bo.is_fisher_ = false;
 			}
 
-			// NOCOM(GunChleoc): This will break. Add a property/ AI hint to the BuildingDescr instead.
-			if (building_name == "shipyard") {
-				bo.is_shipyard_ = true;
-			} else {
-				bo.is_shipyard_ = false;
-			}
+			bo.is_shipyard_ = bh.is_shipyard();
 
 			continue;
 		}

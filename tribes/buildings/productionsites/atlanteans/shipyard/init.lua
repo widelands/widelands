@@ -44,7 +44,8 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		needs_water = true
+		needs_water = true,
+		shipyard = true
    },
 
 	working_positions = {

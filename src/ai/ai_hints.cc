@@ -32,6 +32,7 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	  fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
 	  mountain_conqueror_(table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
 	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
+	  shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
 	  // 10 days default
 	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
 	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100)
