@@ -31,7 +31,7 @@ MAINPOTS = [
         "../../campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../txts/license",
-                  "../../txts/*.lua",
+                  "../../txts/README.lua",
                   "../../txts/developers",
                   "../../txts/editor_readme",
                   "../../txts/tips/*.tip"] ),
