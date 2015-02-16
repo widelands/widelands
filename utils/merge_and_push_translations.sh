@@ -22,7 +22,7 @@ fi
 
 # Make sure we have a local trunk branch.
 PARENT=$(bzr config parent_location)
-if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" ]; then
+if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" || "$PARENT" != "bzr+ssh://bazaar.launchpad.net/+branch/widelands/" ]; then
 	echo "The current bzr branch is not trunk.";
 	exit 1;
 fi
