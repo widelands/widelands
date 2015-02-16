@@ -1,11 +1,12 @@
 #!/bin/bash
 
-## This script will fix translations in the translation branch
-## and then push the fix to the translations branch on Launchpad.
-## Afterwards, the translations branch will be merged into trunk,
-## the catalogs be updated and the result pushed to trunk on Launchpad.
+## This script will pull new translations from Transifex into local trunk
+## and fix the line breaks.
+## Afterwards, the catalogs will be updated and the result pushed to
+## trunk on Launchpad.
 
-set -e # Exit as soon as any line in the bash script fails.
+# Exit as soon as any line in the bash script fails.
+set -e
 
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
@@ -16,34 +17,33 @@ fi
 if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
 	echo "Unable to find 'utils/buildcat.py' or 'utils/remove_lf_in_translations.py'."
 	echo "Make sure you start this script from Widelands' base or utils directory.";
-	exit;
+	exit 1;
 fi
 
-# Make sure we have the needed branches.
-if [ ! -d "../trunk" ]; then
-	echo "Please branch lp:widelands into ../trunk";
-	exit;
+# Make sure we have a local trunk branch.
+PARENT=$(bzr config parent_location)
+if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" || "$PARENT" != "bzr+ssh://bazaar.launchpad.net/+branch/widelands/" ]; then
+	echo "The current bzr branch is not trunk.";
+	exit 1;
 fi
 
-if [ ! -d "../translations" ]; then
-	echo "Please branch lp:~widelands-dev/widelands/translations into ../translations";
-	exit;
-fi
+# Print all commands.
+set -x
 
-set -x # Print all commands.
+# Pull translations from Transifex into local trunk and add new translation files
+bzr pull
+tx pull -a
+bzr add po/*/*.po || true
 
-# Fix LF in translation branch.
-pushd ../translations && bzr pull
-utils/remove_lf_in_translations.py
-bzr commit -m "Fixed LF in translations." || true
-bzr push lp:~widelands-dev/widelands/translations
-
-# Merge translations.
-pushd ../trunk && bzr pull
-bzr merge lp:~widelands-dev/widelands/translations
-bzr commit -m "Merged translations."
+# Fix line breaks.
+# TODO(GunChleoc): We hope that Transifex will fix these already.
+# This script can be removed if we don't get any errors in the future.
+# utils/remove_lf_in_translations.py
 
 # Update catalogues.
 utils/buildcat.py
-bzr commit -m "Updated catalogues."
+bzr commit -m "Fetched translations and updated catalogues."
 bzr push lp:widelands
+
+# Push catalogues to Transifex
+tx push -s
