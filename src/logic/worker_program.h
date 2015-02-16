@@ -34,7 +34,6 @@ struct WorkerProgram : public BobProgramBase {
 	struct Parser {
 		WorkerDescr* descr;
 		std::string  directory;
-		Profile*     prof;
 		LuaTable*    table;
 	};
 

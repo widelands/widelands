@@ -260,14 +260,7 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		// NOCOM(GunChleoc): Can we do this faster now with enhanced_from()?
-		for (BuildingIndex i = 0; i < game.tribes().nrbuildings(); ++i) {
-			const BuildingDescr* building_descr = game.tribes().get_building_descr(i);
-			if (building_descr->enhancement() == former_idx) {
-				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
-				break;
-			}
-		}
+		b.m_old_buildings.insert(b.m_old_buildings.begin(), oldest->enhanced_from());
 	}
 }
 
