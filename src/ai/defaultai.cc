@@ -67,7 +67,7 @@ constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
-//this is intended for map developers, by default should be off
+// this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
@@ -130,34 +130,34 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-			if (note.player != player_) {
+		   	if (note.player != player_) {
 			   return;
 		   }
-			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
-		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-			if (player_ == nullptr) {
-				return;
-			}
-			if (note.pi->owner().player_number() != player_->player_number()) {
-				return;
-			}
-			if (note.ownership == NoteImmovable::Ownership::GAINED) {
-				gain_immovable(*note.pi);
-			} else {
-				lose_immovable(*note.pi);
-			}
+	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+		   	if (player_ == nullptr) {
+			   return;
+		   }
+		   	if (note.pi->owner().player_number() != player_->player_number()) {
+			   return;
+		   }
+		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			   gain_immovable(*note.pi);
+		   } else {
+			   lose_immovable(*note.pi);
+		   }
 		});
 
 	// Subscribe to ProductionSiteOutOfResources.
 	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
 	   [this](const NoteProductionSiteOutOfResources& note) {
-			if (note.ps->owner().player_number() != player_->player_number()) {
+		   	if (note.ps->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
 
@@ -169,42 +169,42 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
 
-			// in a short time between start and late_initialization the player
-			// can get notes that can not be processed.
-			// It seems that this causes no problem, at least no substantial
-			if (player_ == nullptr) {
-				return;
-			}
-			if (note.ship->get_owner()->player_number() != player_->player_number()) {
+		   // in a short time between start and late_initialization the player
+		   // can get notes that can not be processed.
+		   // It seems that this causes no problem, at least no substantial
+		   	if (player_ == nullptr) {
+			   return;
+		   }
+		   	if (note.ship->get_owner()->player_number() != player_->player_number()) {
 			   return;
 		   }
 
-			switch (note.message) {
+		   	switch (note.message) {
 
-			case NoteShipMessage::Message::kGained:
+		   	case NoteShipMessage::Message::kGained:
 			   gain_ship(*note.ship, NewShip::kBuilt);
 			   break;
 
-			case NoteShipMessage::Message::kLost:
-				for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-					if (i->ship == note.ship) {
+		   	case NoteShipMessage::Message::kLost:
+			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+				   	if (i->ship == note.ship) {
 					   allships.erase(i);
 					   break;
 				   }
 			   }
 			   break;
 
-			case NoteShipMessage::Message::kWaitingForCommand:
+		   	case NoteShipMessage::Message::kWaitingForCommand:
 			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-					if (i->ship == note.ship) {
+				   	if (i->ship == note.ship) {
 					   i->waiting_for_command_ = true;
 					   break;
 				   }
 			   }
 			   break;
-		   default:
+		   	default:
 				;
-			}
+		   }
 		});
 }
 
@@ -339,7 +339,7 @@ void DefaultAI::think() {
 		review_wares_targets(gametime);
 	}
 
-	//print statistics
+	// print statistics
 	if (kPrintStats && next_statistics_report_ <= gametime) {
 		print_stats();
 		next_statistics_report_ += 60 * 60 * 1000;
@@ -515,32 +515,39 @@ void DefaultAI::late_initialization() {
 
 	Map& map = game().map();
 
-	//here we generate list of all ports and their vicinity from entire map
+	// here we generate list of all ports and their vicinity from entire map
 	for (const Coords& c : map.get_port_spaces()) {
-		//printf ("portspace found at %3dx %3d\n",c.x,c.y);
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
 		do {
 			const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
 			if (port_reserved_coords.count(hash) == 0)
 				port_reserved_coords.insert(hash);
 		} while (mr.advance(map));
-	}
-	
-	if (!port_reserved_coords.empty()) {
-		seafaring_economy=true;
+
+		//the same for NW neighbour of a field
+		Coords c_nw;
+		map.get_tln(c, &c_nw);
+		MapRegion<Area<FCoords>> mr_nw(map, Area<FCoords>(map.get_fcoords(c_nw), 3));
+		do {
+			const int32_t hash = coords_hash(map.get_fcoords(*(mr_nw.location().field)));
+			if (port_reserved_coords.count(hash) == 0)
+				port_reserved_coords.insert(hash);
+		} while (mr_nw.advance(map));
 	}
 
-	//here we scan entire map for own ships
+	if (!port_reserved_coords.empty()) {
+		seafaring_economy = true;
+	}
+
+	// here we scan entire map for own ships
 	std::set<OPtr<Ship>> found_ships;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
 		for (int16_t x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
-			//there are too many bobs on the map so we investigate
-			//only bobs on water
+			// there are too many bobs on the map so we investigate
+			// only bobs on water
 			if (f.field->nodecaps() & MOVECAPS_SWIM) {
-				for (Bob * bob = f.field->get_first_bob();
-					bob;
-					bob = bob->get_next_on_field()) {
+				for (Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
 					if (upcast(Ship, ship, bob)) {
 						if (ship->get_owner() == player_ && !found_ships.count(ship)) {
 							found_ships.insert(ship);
@@ -552,7 +559,7 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	//here we scan entire map for owned unused fields and own buildings
+	// here we scan entire map for owned unused fields and own buildings
 	std::set<OPtr<PlayerImmovable>> found_immovables;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
 		for (int16_t x = 0; x < map.get_width(); ++x) {
@@ -573,11 +580,12 @@ void DefaultAI::late_initialization() {
 			}
 		}
 	}
-	
-	//blocking space consumers vicinity (for game reload)
+
+	// blocking space consumers vicinity (when reloading a game)
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->space_consumer_ && !ps_obs.bo->plants_trees_) {
-			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));			
+			MapRegion<Area<FCoords>> mr(
+			   map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
 			do {
 				BlockedField blocked2(
 				   map.get_fcoords(*(mr.location().field)), game().get_gametime() + 20 * 60 * 1000);
@@ -585,7 +593,6 @@ void DefaultAI::late_initialization() {
 			} while (mr.advance(map));
 		}
 	}
-	
 }
 
 /**
@@ -739,11 +746,23 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	//// identifying portspace fields
+	// identifying portspace fields
 	if (!field.is_portspace_) {  // if we know it, no need to do it once more
 		if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
 			field.is_portspace_ = true;
 		}
+	}
+
+	//testing for near porspaces
+	if (field.portspace_nearby_ == Widelands::ExtendedBool::kUnset) {
+		field.portspace_nearby_ = ExtendedBool::kFalse;
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 2));
+		do {
+			if (port_reserved_coords.count(coords_hash(mr.location())) > 0) {
+				field.portspace_nearby_ = ExtendedBool::kTrue;
+				break;
+			}
+		} while (mr.advance(map));
 	}
 
 	// testing if a port is nearby, such field will get a priority boost
@@ -796,7 +815,8 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && (field.fish_nearby_ == -1 || game().get_gametime() % 10 == 0)) {
+		if (field.water_nearby_ > 0 &&
+		    (field.fish_nearby_ == -1 || game().get_gametime() % 10 == 0)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -1712,6 +1732,15 @@ bool DefaultAI::construct_building(int32_t gametime) {
 				if (resource_necessity_water_needed_)
 					prio += bf->distant_water_ * resource_necessity_water_ / 255;
 
+				//special bonus if a portspace is close
+				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
+					if (num_ports == 0){
+						prio += 25;
+					} else {
+						prio += 5;
+					}
+				}
+
 				if (bo.desc->get_size() < maxsize) {
 					prio = prio - 5;
 				}  // penalty
@@ -2196,53 +2225,57 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
-bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uint16_t minred, int32_t gametime) {
+bool DefaultAI::create_shortcut_road(const Flag& flag,
+                                     uint16_t checkradius,
+                                     uint16_t minred,
+                                     int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
-	//if we passed grace time this will be last attempt and if it fails
-	//building is destroyes
+	// if we passed grace time this will be last attempt and if it fails
+	// building is destroyes
 	bool last_attempt_ = false;
 
-	//this should not happen, but if the economy has warehouse and dismantle 
-	//grace time set, we must 'zero' the dismantle grace time
-	if (!flag.get_economy()->warehouses().empty() && 
-	eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()) {
-		printf(" %d: strange: economy with warehouse and dismantle grace time ???\n",
-		player_number());
+	// this should not happen, but if the economy has a warehouse and a dismantle
+	// grace time set, we must 'zero' the dismantle grace time
+	if (!flag.get_economy()->warehouses().empty() &&
+	    eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()) {
 		eco->dismantle_grace_time_ = std::numeric_limits<int32_t>::max();
 	}
 
-	//first we deal with situations when this is economy with no warehouses
-	//and this is a flag belonging to a building/constructionsite
+	// first we deal with situations when this is economy with no warehouses
+	// and this is a flag belonging to a building/constructionsite
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
 
-		//if we are within grace time, it is OK
-		if (eco->dismantle_grace_time_ > gametime && eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()){
+		// if we are within grace time, it is OK, just go on
+		if (eco->dismantle_grace_time_ > gametime &&
+		    eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()) {
 			;
-		//if grace time is not set, this is probably first time without a warehouse and we must
-		//set it
+
+		// if grace time is not set, this is probably first time without a warehouse and we must
+		// set it
 		} else if (eco->dismantle_grace_time_ == std::numeric_limits<int32_t>::max()) {
 
 			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
-				BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
+				BuildingObserver& bo =
+				   get_building_observer(constructionsite->building().name().c_str());
 				// first very special case - a port (in the phase of constructionsite)
-				// this might be new colonization port
-				if (bo.is_port_){
-					eco->dismantle_grace_time_ = gametime + 60 * 60 * 1000; //one hour should be enough
-					printf (" %d: granting grace time for port at %3dx%3d: %3d minutes\n",
-					player_number(),
-					flag.get_building()->get_position().x, flag.get_building()->get_position().y,
-					(eco->dismantle_grace_time_-gametime)/60000);
-				} else {  //other constructionsitesm usually new standalone constructionsites
-					eco->dismantle_grace_time_ = gametime + 60 * 1000 + //one minute
-					(eco->flags.size() * 30 * 1000); // + 30 seconds for every flag in economy
+				// this might be a new colonization port
+				if (bo.is_port_) {
+					eco->dismantle_grace_time_ = gametime + 60 * 60 * 1000;  // one hour should be enough
+				} else {  // other constructionsites, usually new (standalone) constructionsites
+					eco->dismantle_grace_time_ =
+					   gametime + 30 * 1000 +  // very shot time is enough
+					   (eco->flags.size() * 30 * 1000);  // + 30 seconds for every flag in economy
 				}
-			
+
 			// buildings
 			} else {
+
+				//occupied military buildings get special treatment
+				//(extended grace time)
 				bool occupied_military_ = false;
 				Building* b = flag.get_building();
 				if (upcast(MilitarySite, militb, b)) {
@@ -2252,30 +2285,23 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 				}
 
 				if (occupied_military_) {
-					eco->dismantle_grace_time_ = (gametime + 20 * 60 * 1000) +
-					(eco->flags.size() * 20 * 1000);
+					eco->dismantle_grace_time_ =
+					   (gametime + 20 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
 					checkradius += 3;
-					printf (" %d: granting grace time for military building at %3dx%3d: %3d minutes (till: %6d min.)\n",
-						player_number(),
-						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
-						(eco->dismantle_grace_time_-gametime)/60000,
-						eco->dismantle_grace_time_/60000);
-				} else { //for other normal buildings
-					eco->dismantle_grace_time_ = gametime + (5 * 60 * 1000) + (eco->flags.size() * 20 * 1000) ;
-					printf (" %d: granting grace time for common building at %3dx%3d: %3d minutes\n",
-						player_number(),
-						flag.get_building()->get_position().x, flag.get_building()->get_position().y,
-						(eco->dismantle_grace_time_-gametime)/60000);
+
+				} else {  // for other normal buildings
+					eco->dismantle_grace_time_ =
+					   gametime + (5 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
 				}
 			}
 
-		//we have passed grace_time - it is time to dismantle
+			// we have passed grace_time - it is time to dismantle
 		} else {
 			last_attempt_ = true;
-			//generally we increase a check radius in such case
+			//we increase a check radius in last attempt
 			checkradius += 2;
 		}
-	} 
+	}
 
 	Map& map = game().map();
 
@@ -2467,11 +2493,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	// if all possible roads skipped
 	if (last_attempt_) {
 		Building* bld = flag.get_building();
-		printf (" %d: destroying a building at %3dx %3d because after grace time (cur. time: %6d, flags count: %3d).\n",
-		player_number(),
-		bld->get_position().x, bld->get_position().y,
-		gametime/60000,
-		get_economy_observer(flag.economy())->flags.size());
 		// first we block the field for 15 minutes, probably it is not good place to build a
 		// building on
 		BlockedField blocked(
@@ -2855,7 +2876,6 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	uint16_t working_shipyards_count = 0;
 	uint16_t expeditions_in_prep = 0;
 	uint16_t expeditions_in_progress = 0;
-	//uint16_t territories_count = 1; NOCOM
 	bool idle_shipyard_stocked = false;
 
 	// goes over all warehouses (these includes ports)
@@ -2866,10 +2886,6 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 				if (pd->expedition_started()) {
 					expeditions_in_prep += 1;
 				}
-			} else {
-				log("  there is a port without portdock at %3dx%3d?\n", //NOCOM - remove
-				    wh_obs.site->get_position().x,
-				    wh_obs.site->get_position().y);
 			}
 		}
 	}
@@ -2907,20 +2923,14 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
 	if (static_cast<float>(allships.size()) >= ports_count) {
-	   // static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) { NOCOM
 		enough_ships = FleetStatus::kEnoughShips;
-		//printf (" %d: ship not needed\n", player_number());
-	} else if (static_cast<float>(allships.size()) < ports_count){
-	         //  static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) { NOCOM
+	} else if (static_cast<float>(allships.size()) < ports_count) {
 		enough_ships = FleetStatus::kNeedShip;
-		//printf (" %d: ship needed\n", player_number());
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
 	if (shipyards_count > 0 && enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked &&
 	    ports_count > 0) {
-
-		printf (" %d: want to build a ship\n", player_number());
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
 			if (ps_obs.bo->is_shipyard_ && ps_obs.site->can_start_working() &&
@@ -2946,7 +2956,6 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && enough_ships == FleetStatus::kEnoughShips && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
-		printf (" %d: starting preparation for expedition\n", player_number());
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 
@@ -3616,8 +3625,8 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		}
 
 		// sometimes we search for any owned teritory (f.e. when considering
-		//a port location), but when testing (starting from) own military building
-		//we must ignore own teritory, of course
+		// a port location), but when testing (starting from) own military building
+		// we must ignore own teritory, of course
 		if (f->get_owned_by() > 0) {
 			if (type == WalkSearch::kAnyPlayer ||
 			    (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn)) {
@@ -3728,8 +3737,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces()->front());
 
 		if ((gametime / 10) % 8 < spot_score) {  // we build a port here
-			//const Coords last_portspace = so.ship->exp_port_spaces()->front();
-			//remote_ports_coords.insert(coords_hash(last_portspace));
+			// const Coords last_portspace = so.ship->exp_port_spaces()->front();
+			// remote_ports_coords.insert(coords_hash(last_portspace));
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
@@ -3877,15 +3886,15 @@ void DefaultAI::gain_building(Building& b) {
 			if (bo.is_port_) {
 				++num_ports;
 				seafaring_economy = true;
-				//unblock nearby fields, might be used for some buildings...
+				// unblock nearby fields, might be used for other buildings...
 				Map& map = game().map();
-				MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
+				MapRegion<Area<FCoords>> mr(
+				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 4));
 				do {
 					const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
 					if (port_reserved_coords.count(hash) > 0)
 						port_reserved_coords.erase(hash);
 				} while (mr.advance(map));
-				
 			}
 		}
 	}
@@ -4301,10 +4310,24 @@ void DefaultAI::print_stats() {
 
 	PlayerNumber const pn = player_number();
 
-	//we test following materials
-	const std::vector <std::string> materials = {"coal", "log", "ironore", "marble",
-		 "plank", "water", "goldore", "granite", "fish", "diamond", "stone", "corn",
-		 "wheat", "grape", "quartz", "bread", "meat" };
+	// we test following materials
+	const std::vector<std::string> materials = {"coal",
+	                                            "log",
+	                                            "ironore",
+	                                            "marble",
+	                                            "plank",
+	                                            "water",
+	                                            "goldore",
+	                                            "granite",
+	                                            "fish",
+	                                            "diamond",
+	                                            "stone",
+	                                            "corn",
+	                                            "wheat",
+	                                            "grape",
+	                                            "quartz",
+	                                            "bread",
+	                                            "meat"};
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
 		WareIndex const index = tribe_->ware_index(materials.at(j));
@@ -4316,12 +4339,12 @@ void DefaultAI::print_stats() {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
-	log (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
-		pn,
-		productionsites.size(),
-		militarysites.size(),
-		mines_.size(),
-		warehousesites.size() - num_ports,
-		num_ports,
-		summary.c_str());
+	log(" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
+	    pn,
+	    productionsites.size(),
+	    militarysites.size(),
+	    mines_.size(),
+	    warehousesites.size() - num_ports,
+	    num_ports,
+	    summary.c_str());
 }

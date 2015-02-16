@@ -40,6 +40,8 @@ namespace Widelands {
 class ProductionSite;
 class MilitarySite;
 
+enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse };
+
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
 	   : player_(pl), movecaps_(mc), open_end_(oe) {
@@ -129,14 +131,13 @@ struct FindNodeUnownedMineable {
 struct FindNodeMineable {
 	bool accept(const Map&, const FCoords& fc) const {
 
-		return (fc.field->nodecaps() & BUILDCAPS_MINE) &&
-			(fc.field->get_resources() == res);
+		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_resources() == res);
 	}
 
 	Game& game;
 	int32_t res;
 
-	FindNodeMineable(Game& g, int32_t r) : game(g), res(r)  {
+	FindNodeMineable(Game& g, int32_t r) : game(g), res(r) {
 	}
 };
 
@@ -248,6 +249,7 @@ struct BuildableField {
 	bool is_portspace_;
 	bool port_nearby_;  // to increase priority if a port is nearby,
 	// especially for new colonies
+	Widelands::ExtendedBool portspace_nearby_;  // prefer military buildings closer to the portspace
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -282,7 +284,8 @@ struct BuildableField {
 	     military_stationed_(0),
 	     military_unstationed_(0),
 	     is_portspace_(false),
-	     port_nearby_(false) {
+	     port_nearby_(false),
+	     portspace_nearby_(Widelands::ExtendedBool::kUnset) {
 	}
 };
 
@@ -294,12 +297,15 @@ struct MineableField {
 	bool preferred_;
 
 	int32_t mines_nearby_;
-	//this is to provide that a mine is not built on the edge of mine area
+	// this is to provide that a mine is not built on the edge of mine area
 	int32_t same_mine_fields_nearby_;
 
 	MineableField(const Widelands::FCoords& fc)
-	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0),
-	   same_mine_fields_nearby_(0) {
+	   : coords(fc),
+	     next_update_due_(0),
+	     preferred_(false),
+	     mines_nearby_(0),
+	     same_mine_fields_nearby_(0) {
 	}
 };
 
@@ -309,8 +315,8 @@ struct EconomyObserver {
 	int32_t dismantle_grace_time_;
 
 	EconomyObserver(Widelands::Economy& e) : economy(e) {
-		//next_connection_try = 0;
-		//failed_connection_tries = 0;
+		// next_connection_try = 0;
+		// failed_connection_tries = 0;
 		dismantle_grace_time_ = std::numeric_limits<int32_t>::max();
 	}
 };
