@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_SOLDIER_H
 #define WL_LOGIC_SOLDIER_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/training_attribute.h"
 #include "logic/worker.h"

@@ -52,7 +52,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-// NOCOM(GunChleoc): Compiler doesn't like #include "notifications/notifications.h"
+#include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"

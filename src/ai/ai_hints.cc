@@ -19,6 +19,8 @@
 
 #include "ai/ai_hints.h"
 
+#include <memory>
+
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	: renews_map_resource_(table->has_key("renews_map_resource") ? table->get_string("renews_map_resource") : ""),
 	  mines_(table->has_key("mines") ? table->get_string("mines") : ""),

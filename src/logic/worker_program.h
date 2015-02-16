@@ -105,7 +105,7 @@ private:
 		 Parser*, const Tribes&,
 		 const std::vector<std::string>& cmd);
 	void parse_animation
-		(WorkerDescr*descr,
+		(WorkerDescr* descr,
 		 Worker::Action*,
 		 Parser*parser, const Tribes&,
 		 const std::vector<std::string>& cmd);
@@ -149,7 +149,7 @@ private:
 	void parse_play_fx
 		(WorkerDescr*,
 		 Worker::Action*,
-		 Parser*parser, const Tribes&,
+		 Parser* parser, const Tribes&,
 		 const std::vector<std::string>& cmd);
 	void parse_construct
 		(WorkerDescr*,
