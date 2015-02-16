@@ -98,7 +98,6 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
 
-				// NOCOM(GunChleoc): Redefine the parser for Lua Tables.
 				WorkerProgram::Parser parser;
 
 				parser.descr = this;

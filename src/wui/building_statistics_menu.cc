@@ -379,7 +379,11 @@ void BuildingStatisticsMenu::update() {
 		const Widelands::BuildingDescr* building_descr =
 				player.egbase().tribes().get_building_descr(building_index);
 
-		if (!(building_descr->is_buildable() || building_descr->is_enhanced())) {
+		// Building statistic should show the tribe's buildable buildings + conquered military buildings.
+		if ((tribe.has_building(building_index) &&
+			  !(building_descr->is_buildable() || building_descr->is_enhanced())) ||
+			 (!tribe.has_building(building_index) &&
+			  building_descr->type() != Widelands::MapObjectType::MILITARYSITE)) {
 			continue;
 		}
 

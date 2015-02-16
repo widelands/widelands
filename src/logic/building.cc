@@ -164,15 +164,12 @@ BuildingDescr::BuildingDescr
 		m_vision_range = table.get_int("vision_range");
 	}
 
-	// NOCOM fix these
-	/*
 	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
 	helptexts_.lore_ = items_table->get_string("lore");
 	helptexts_.lore_author_ = items_table->get_string("lore_author");
 	helptexts_.purpose_ = items_table->get_string("purpose");
 	helptexts_.note_ = items_table->get_string("note");
 	helptexts_.performance_ = items_table->get_string("performance");
-	*/
 }
 
 

@@ -113,7 +113,7 @@ protected:
 	std::vector<std::string> m_evade_pics_fn;
 	std::vector<std::string> m_defense_pics_fn;
 
-	// animation names // NOCOM(GunChleoc): Will be obsolete?
+	// animation names
 	std::vector<std::string> m_attack_success_w_name;
 	std::vector<std::string> m_attack_failure_w_name;
 	std::vector<std::string> m_evade_success_w_name;

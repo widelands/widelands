@@ -44,7 +44,7 @@ class Game;
 struct ImmovableDescr;
 struct ProductionSiteDescr;
 class ProductionSite;
-struct TribeDescr; // NOCOM(GunChleoc): Can this go?
+struct TribeDescr;
 class Worker;
 class World;
 

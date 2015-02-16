@@ -260,7 +260,7 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObj
 
 	std::unique_ptr<LuaTable> helptexts_table = table.get_table("helptext");
 	for (const std::string& key : helptexts_table->keys<std::string>()) {
-		// NOCOM(GunChleoc): Compiler doesn't like helptexts_.insert(key, helptexts_table->get_string(key));
+		helptexts_.emplace(key, helptexts_table->get_string(key));
 	}
 
 	make_sure_default_program_is_there();
