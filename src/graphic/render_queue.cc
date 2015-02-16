@@ -49,12 +49,12 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::RenderProgram::HIGHEST_PROGRAM_ID < 8,
+static_assert(RenderQueue::Program::HIGHEST_PROGRAM_ID < 8,
               "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
 make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
-	assert(program_id < HIGHEST_PROGRAM_ID);
+	assert(program_id < RenderQueue::Program::HIGHEST_PROGRAM_ID);
 	assert(z_value < std::numeric_limits<uint16_t>::max());
 
 	// TODO(sirver): As a higher priority for sorting then z value, texture
@@ -70,7 +70,7 @@ make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_
 //   - if z value is the same, we order by program second to have potential batching.
 uint64_t
 make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
-	assert(program_id < RenderQueue::RenderProgram::HIGHEST_PROGRAM_ID);
+	assert(program_id < RenderQueue::Program::HIGHEST_PROGRAM_ID);
 	assert(z_value < std::numeric_limits<uint16_t>::max());
 
 	// Sort opaque objects increasing, alpha objects decreasing in order.
