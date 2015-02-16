@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_weaponsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Weapon Smithy",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

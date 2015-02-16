@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "barbarians_lime_burner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Lime-Burner",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {

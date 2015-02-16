@@ -14,6 +14,7 @@ tribes:new_worker_type {
    name = "barbarians_weaver",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Weaver",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {

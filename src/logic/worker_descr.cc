@@ -39,7 +39,7 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const EditorGameBase& egbase) :
 	BobDescr(init_type, MapObjectDescr::OwnerType::kTribe, table),
 	ware_hotspot_      (Point(0, 15)),
-	icon_fname_        ("/menu.png"), // NOCOM(GunChleoc): Add directory - init.lua?
+	icon_fname_        (table.get_string("icon")),
 	icon_              (nullptr),
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX),

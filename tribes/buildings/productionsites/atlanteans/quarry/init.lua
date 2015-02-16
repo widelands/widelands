@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Quarry",
+   icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {

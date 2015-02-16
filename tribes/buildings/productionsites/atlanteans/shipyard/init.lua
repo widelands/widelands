@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Shipyard",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

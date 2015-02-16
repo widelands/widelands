@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "empire_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Well",
+   icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {

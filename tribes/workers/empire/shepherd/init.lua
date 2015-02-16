@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "empire_shepherd",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Shepherd",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {

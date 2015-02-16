@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "empire_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Smelting Works",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

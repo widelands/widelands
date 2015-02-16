@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "atlanteans_tower_small",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Small Tower",
+   icon = dirname .. "menu.png",
    size = "small",
    vision_range=13,
 

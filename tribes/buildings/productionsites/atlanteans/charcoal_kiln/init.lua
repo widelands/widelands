@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_charcoal_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Charcoal Kiln",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

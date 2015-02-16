@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "barbarians_barrier",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Barrier",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

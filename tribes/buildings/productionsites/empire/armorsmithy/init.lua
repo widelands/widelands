@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "empire_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Armor Smithy",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_big_inn",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Big Inn",
+   icon = dirname .. "menu.png",
    size = "medium",
    buildable = false,
    enhanced_building = true,

@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_foresters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Forester’s House",
+   icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {

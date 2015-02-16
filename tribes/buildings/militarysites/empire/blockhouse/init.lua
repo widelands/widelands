@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "empire_blockhouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Blockhouse",
+   icon = dirname .. "menu.png",
    size = "small",
    enhancement = "empire_sentry",
 

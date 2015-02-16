@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "empire_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Outpost",
+   icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_barrier",
 

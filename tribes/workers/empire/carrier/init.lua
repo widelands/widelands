@@ -15,6 +15,7 @@ tribes:new_carrier_type {
    name = "empire_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Carrier",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
 	-- TRANSLATORS: Helptext for a worker: Carrier

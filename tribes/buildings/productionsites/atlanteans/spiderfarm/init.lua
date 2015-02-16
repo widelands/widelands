@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_spiderfarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Spider Farm",
+   icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {

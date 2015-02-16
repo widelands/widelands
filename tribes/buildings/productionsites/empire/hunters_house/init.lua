@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "empire_hunters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Hunter’s House",
+   icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {

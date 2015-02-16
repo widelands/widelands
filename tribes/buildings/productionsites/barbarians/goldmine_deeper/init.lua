@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_goldmine_deeper",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Deeper Gold Mine",
+   icon = dirname .. "menu.png",
    size = "mine",
    buildable = false,
    enhanced_building = true,

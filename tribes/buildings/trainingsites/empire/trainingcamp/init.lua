@@ -4,6 +4,7 @@ tribes:new_trainingsite_type {
    name = "empire_trainingcamp",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Training Camp",
+   icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {

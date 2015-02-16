@@ -129,8 +129,7 @@ BuildingDescr::BuildingDescr
 
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
-		// NOCOM(GunChleoc): Deal with dirname m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
+		m_icon_fname = table.get_string("icon");
 
 		// Get costs
 		if (m_buildable) {

@@ -4,6 +4,7 @@ tribes:new_trainingsite_type {
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Dungeon",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

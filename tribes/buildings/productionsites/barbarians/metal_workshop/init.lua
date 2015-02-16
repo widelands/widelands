@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_metal_workshop",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Metal Workshop",
+   icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "barbarians_axfactory",
 

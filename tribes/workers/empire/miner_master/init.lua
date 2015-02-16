@@ -14,6 +14,7 @@ tribes:new_worker_type {
    name = "empire_miner_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Master Miner",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
 	-- TRANSLATORS: Helptext for a worker: Master Miner

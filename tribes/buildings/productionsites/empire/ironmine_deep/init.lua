@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "empire_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Deep Iron Mine",
+   icon = dirname .. "menu.png",
    size = "mine",
    buildable = false,
    enhanced_building = true,

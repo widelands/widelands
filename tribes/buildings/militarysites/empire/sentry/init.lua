@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "empire_sentry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Sentry",
+   icon = dirname .. "menu.png",
    size = "small",
    enhanced_building = true,
 

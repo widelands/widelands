@@ -4,6 +4,7 @@ tribes:new_trainingsite_type {
    name = "empire_colosseum",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Colosseum",
+   icon = dirname .. "menu.png",
    size = "big",
    buildable = false,
    enhanced_building = true,

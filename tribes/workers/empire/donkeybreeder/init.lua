@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "empire_donkeybreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Donkey Breeder",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {

@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "atlanteans_guardhouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Guardhouse",
+   icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {

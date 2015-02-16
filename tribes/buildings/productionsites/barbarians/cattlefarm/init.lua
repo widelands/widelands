@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_cattlefarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Cattle Farm",
+   icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {

@@ -4,6 +4,7 @@ tribes:new_warehouse_type {
    name = "atlanteans_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Warehouse",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

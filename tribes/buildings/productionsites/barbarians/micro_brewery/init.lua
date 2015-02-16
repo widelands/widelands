@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_micro_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Micro Brewery",
+   icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "barbarians_brewery",
 

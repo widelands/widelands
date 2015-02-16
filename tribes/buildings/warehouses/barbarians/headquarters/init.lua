@@ -4,6 +4,7 @@ tribes:new_warehouse_type {
    name = "barbarians_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Headquarters",
+   icon = dirname .. "menu.png",
    size = "big",
    buildable = false,
    destructible = false,

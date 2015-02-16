@@ -4,6 +4,7 @@ tribes:new_productionsite_type {
    name = "barbarians_wood_hardener",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Wood Hardener",
+   icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {

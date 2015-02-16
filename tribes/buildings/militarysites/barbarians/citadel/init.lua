@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "barbarians_citadel",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Citadel",
+   icon = dirname .. "menu.png",
    size = "big",
    buildable = false,
    enhanced_building = true,

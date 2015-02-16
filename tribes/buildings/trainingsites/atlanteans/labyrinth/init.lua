@@ -4,6 +4,7 @@ tribes:new_trainingsite_type {
    name = "atlanteans_labyrinth",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Labyrinth",
+   icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {

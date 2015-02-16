@@ -4,6 +4,7 @@ tribes:new_militarysite_type {
    name = "atlanteans_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"High Tower",
+   icon = dirname .. "menu.png",
    size = "medium",
    buildable = false
    vision_range=21,

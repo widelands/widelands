@@ -19,6 +19,7 @@ tribes:new_worker_type {
    name = "barbarians_lumberjack",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Lumberjack",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {

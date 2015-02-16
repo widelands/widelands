@@ -15,6 +15,7 @@ tribes:new_carrier_type {
    name = "atlanteans_horse",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Horse",
+   icon = dirname .. "menu.png",
    vision_range = 2,
 
 	default_target_quantity = 10,
