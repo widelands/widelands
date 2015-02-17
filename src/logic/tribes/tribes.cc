@@ -277,11 +277,11 @@ const TribeDescr* Tribes::get_tribe_descr(int tribeindex) const {
 	return tribes_->get(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const WareIndex& wareindex, const std::string& tribename) {
+void Tribes::set_ware_type_has_demand_check(const WareIndex& wareindex, const std::string& tribename) const {
 	wares_->get(wareindex)->set_has_demand_check(tribename);
 }
 
-void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) {
+void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) const {
 	workers_->get(workerindex)->set_has_demand_check();
 }
 
@@ -300,7 +300,7 @@ void Tribes::load_graphics()
 		buildings_->get(i)->load_graphics();
 	}
 }
-
+//NOCOM(GunChleoc): Rename this, so it won't get confused with postload in egbase.
 void Tribes::post_load() {
 	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get(i);

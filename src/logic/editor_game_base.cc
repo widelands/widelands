@@ -249,6 +249,7 @@ void EditorGameBase::postload()
 void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading tribes' graphics"));
+	tribes(); // Make sure that the tribes information has been loaded
 	tribes_->load_graphics();
 
 	// TODO(unknown): load player graphics? (maybe)

@@ -133,7 +133,7 @@ ImmovableProgram IMPLEMENTATION
 
 ==============================================================================
 */
-// NOCOM(GunChleoc): Kill this
+// NOCOM(GunChleoc): Port ActPlayFX and ActConstruction to other constructor and kill this
 ImmovableProgram::ImmovableProgram(const std::string& directory,
                                    Profile& prof,
                                    const std::string& _name,

@@ -61,20 +61,9 @@ TribeDescr::TribeDescr
 
 		m_initializations = info.initializations;
 
-		// NOCOM(GunChleoc): Fix these animations
-		/*
-		m_frontier_animation_id =
-			g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
-		m_flag_animation_id =
-			g_gr->animations().load(path, root_conf.get_safe_section("flag"));
-		*/
-
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		std::unique_ptr<LuaTable> anims_table = items_table->get_table("frontier");
-		// NOCOM m_frontier_animation_id = g_gr->animations().load(anims_table->get_string("pictures"));
-		anims_table = items_table->get_table("flag");
-		// NOCOM m_flag_animation_id = g_gr->animations().load(anims_table->get_string("pictures"));
-		// NOCOM(GunChleoc): And the hotspot + fps?
+		m_frontier_animation_id = g_gr->animations().load(*items_table->get_table("frontier"));
+		m_flag_animation_id = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {

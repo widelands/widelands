@@ -96,7 +96,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 					for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
 						const TribeDescr& tribe_descr = *tribes.get_tribe_descr(i);
 						if (tribe_descr.has_ware(wareindex)) {
-							// NOCOM(GunChleoc): Fix this - mutable_tribes? tribes.set_ware_type_has_demand_check(wareindex, tribe_descr.name());
+							tribes.set_ware_type_has_demand_check(wareindex, tribe_descr.name());
 						}
 					}
 					return
@@ -107,7 +107,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 					for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
 						const TribeDescr* tribe_descr = tribes.get_tribe_descr(i);
 						if (tribe_descr->has_worker(workerindex)) {
-							// NOCOM(GunChleoc): Fix this - mutable_tribes? tribes.set_worker_type_has_demand_check(workerindex, tribe_descr->name());
+							tribes.set_worker_type_has_demand_check(workerindex);
 						}
 					}
 					return

@@ -136,8 +136,8 @@ public:
 	const WorkerDescr* get_worker_descr(WareIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(int tribe_index) const;
 
-	void set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename);
-	void set_worker_type_has_demand_check(const WareIndex& worker_index);
+	void set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename) const;
+	void set_worker_type_has_demand_check(const WareIndex& worker_index) const;
 
 	/// Load tribes' graphics
 	void load_graphics();

@@ -4227,7 +4227,7 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	}
 
 	for (EconomyObserver* observer : economies) {
-		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
+		WareIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::WareIndex id = 0; id < nritems; ++id) {
 			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
 
