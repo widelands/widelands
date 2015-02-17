@@ -67,7 +67,7 @@ public:
 
 	/// \return ware's localized descriptive text
 	/// Prepends the default helptext to the 'tribename''s specific text if there is any.
-	const std::string& helptext(const std::string& tribename) const;
+	std::string helptext(const std::string& tribename) const;
 
 	/// \return index to ware's icon inside picture stack
 	const Image* icon() const {return icon_;}

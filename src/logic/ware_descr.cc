@@ -72,7 +72,7 @@ int WareDescr::default_target_quantity(const std::string& tribename) const {
 	return kInvalidWare;
 }
 
-const std::string& WareDescr::helptext(const std::string& tribename) const {
+std::string WareDescr::helptext(const std::string& tribename) const {
 	if (helptexts_.count(tribename) > 0) {
 		i18n::Textdomain td("tribes");
 		if (helptexts_.count("default") > 0) {
@@ -104,12 +104,10 @@ bool WareDescr::has_demand_check(const std::string& tribename) const {
 }
 
 void WareDescr::set_has_demand_check(const std::string& tribename) {
-	/* NOCOM(GunChleoc): Fix this
-	if (default_target_quantities_.count(tribename > 0)
+	if (default_target_quantities_.count(tribename) > 0
 		 && default_target_quantities_.at(tribename) == kInvalidWare) {
 		default_target_quantities_.at(tribename) = 1;
 	}
-	*/
 }
 
 void WareDescr::add_consumer(const BuildingIndex& building_index) {
