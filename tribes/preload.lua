@@ -15,7 +15,7 @@ return {
 			dirname .. "scripting/starting_conditions/barbarians/headquarters.lua";
 			dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
 		}
-   }
+   },
 
 	-- Basic information for the Empire tribe
    empire = {
@@ -29,7 +29,7 @@ return {
 			dirname .. "scripting/starting_conditions/empire/headquarters.lua";
 			dirname .. "scripting/starting_conditions/empire/fortified_village.lua";
 		}
-	}
+	},
 
 	-- Basic information for the Atlantean tribe
 	atlanteans = {

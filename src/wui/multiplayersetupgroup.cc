@@ -328,14 +328,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribe->set_tooltip(random.c_str());
 				tribe->set_pic(m_tribepics[random]);
 			} else {
-				std::string tribepath("tribes/" + player_setting.tribe);
 				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
-					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
-					Section & global = prof.get_safe_section("tribe");
-					m_tribenames[player_setting.tribe] = global.get_safe_string("name");
-					m_tribepics[player_setting.tribe] =
-						g_gr->images().get((tribepath + "/") + global.get_safe_string("icon"));
+					i18n::Textdomain td("tribes");
+					for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+						m_tribenames[tribeinfo.name] = _(tribeinfo.descname);
+						m_tribepics[tribeinfo.name] = g_gr->images().get(tribeinfo.icon);
+					}
 				}
 				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
 				tribe->set_pic(m_tribepics[player_setting.tribe]);

@@ -846,6 +846,7 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 		lua_pop(L, 1); // Pop the meta table
 	}
 	register_class<LuaWorld>(L, "", false);
+	register_class<LuaTribes>(L, "", false);
 }
 
 }

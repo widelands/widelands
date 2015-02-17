@@ -32,8 +32,8 @@ namespace Widelands {
 
 WareDescr::WareDescr(const LuaTable& table) :
 	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), table.get_string("descname")),
-	generic_name_(table.get_string("genericname")),
-	icon_fname_(table.get_string("menu_picture")),
+	generic_name_(table.get_string("genericname")), // NOCOM(GunChleoc): Use this in the production programs
+	icon_fname_(table.get_string("icon")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
