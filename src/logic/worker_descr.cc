@@ -50,12 +50,12 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 		int32_t value;
 		try {
 			if (buildcost_.count(key)) {
-				throw wexception("a buildcost item of this ware type has already been defined: %s", key.c_str());
+				throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
 			}
 
 			if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&
 				 egbase_.tribes().worker_index(key) == INVALID_INDEX) {
-				throw wexception
+				throw GameDataError
 					("\"%s\" has not been defined as a ware/worker type (wrong "
 					 "declaration order?)",
 					 key.c_str());
@@ -63,10 +63,10 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 			value = items_table->get_int(key);
 			uint8_t const count = value;
 			if (count != value)
-				throw wexception("count is out of range 1 .. 255");
+				throw GameDataError("count is out of range 1 .. 255");
 			buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
 		} catch (const WException & e) {
-			throw wexception
+			throw GameDataError
 				("[buildcost] \"%s=%d\": %s",
 				 key.c_str(), value, e.what());
 		}

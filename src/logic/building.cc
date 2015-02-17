@@ -134,8 +134,8 @@ BuildingDescr::BuildingDescr
 		// Get costs
 		if (m_buildable) {
 			try {
-				m_buildcost.parse(table.get_table("buildcost"));
-				m_return_dismantle.parse(table.get_table("return_on_dismantle"));
+				m_buildcost = parse_buildcost(table.get_table("buildcost"));
+				m_return_dismantle = parse_buildcost(table.get_table("return_on_dismantle"));
 			} catch (const WException & e) {
 				throw wexception
 						("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -145,8 +145,8 @@ BuildingDescr::BuildingDescr
 
 		if (m_enhanced_building) {
 			try {
-				m_enhance_cost.parse(table.get_table("enhancement_cost"));
-				m_return_enhanced.parse(table.get_table("return_on_dismantle_on_enhanced"));
+				m_enhance_cost = parse_buildcost(table.get_table("enhancement_cost"));
+				m_return_enhanced = parse_buildcost(table.get_table("return_on_dismantle_on_enhanced"));
 			} catch (const WException & e) {
 				throw wexception
 						("An enhanced building must define \"enhancement_cost\""
@@ -248,6 +248,33 @@ Building & BuildingDescr::create_constructionsite() const
 	csite.set_building(*this);
 
 	return csite;
+}
+
+Buildcost BuildingDescr::parse_buildcost(std::unique_ptr<LuaTable> table) {
+	Buildcost result;
+	for (const std::string& warename : table->keys<std::string>()) {
+		int32_t value;
+		try {
+			WareIndex const idx = egbase_.tribes().safe_ware_index(warename);
+			if (idx == INVALID_INDEX) {
+				throw GameDataError
+					("\"%s\" has not been defined as a ware type (wrong "
+					 "declaration order?)",
+					 warename.c_str());
+			}
+			value = table->get_int(warename);
+			uint8_t const count = value;
+			if (count != value) {
+				throw GameDataError("count is out of range 1 .. 255");
+			}
+			result.insert(std::pair<WareIndex, uint8_t>(idx, count));
+		} catch (const WException & e) {
+			throw GameDataError
+				("[buildcost] \"%s=%d\": %s",
+				 warename.c_str(), value, e.what());
+		}
+	}
+	return result;
 }
 
 

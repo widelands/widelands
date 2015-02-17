@@ -35,7 +35,6 @@ namespace Widelands {
 struct TribeDescr;
 
 struct Buildcost : std::map<WareIndex, uint8_t> {
-	void parse(std::unique_ptr<LuaTable> table);
 
 	uint32_t total() const;
 
