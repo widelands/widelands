@@ -47,9 +47,7 @@ void EconomyDataPacket::read(FileRead & fr)
 							fr.unsigned_32();
 						WareIndex i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
-							// NOCOM(GunChleoc): Give this a proper invalid index
-							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
-							    std::numeric_limits<uint32_t>::max())
+							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) == kInvalidWare)
 								log("WARNING: target quantity configured for %s, "
 								    "which should not have target quantity, "
 								    "ignoring\n",

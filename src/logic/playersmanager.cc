@@ -85,12 +85,12 @@ Player* PlayersManager::add_player
 			m_number_of_players--;
 		}
 	}
-	m_egbase.tribes(); // Make sure that the tribes are loaded
+
 	p = new Player
 		(m_egbase,
 		 player_number,
 		 initialization_index,
-		 *m_egbase.get_tribe(tribe),
+		 *m_egbase.tribes().get_tribe_descr(m_egbase.tribes().tribe_index(tribe)),
 		 name);
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {

@@ -248,11 +248,13 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& trib
 //
 // \throws Tribe_Nonexistent if the there is no tribe with that name.
 const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
-	char const* const name = fr->c_string();
-	if (TribeDescr const* const result = egbase.get_tribe(name))
-		return *result;
-	else
-		throw TribeNonexistent(name);
+	const std::string& name = fr->c_string();
+	const Tribes& tribes = egbase.tribes();
+	if (tribes.tribe_exists(name)) {
+		return *tribes.get_tribe_descr(tribes.tribe_index(name));
+	} else {
+		throw TribeNonexistent(name.c_str());
+	}
 }
 
 // Reads a c_string and interprets it as the name of a tribe.
@@ -263,14 +265,17 @@ const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
 // \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 // with that name.
 TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
-	char const* const name = fr->c_string();
-	if (*name)
-		if (TribeDescr const* const result = egbase.get_tribe(name))
-			return result;
-		else
-			throw TribeNonexistent(name);
-	else
+	const std::string& name = fr->c_string();
+	const Tribes& tribes = egbase.tribes();
+	if (!name.empty()) {
+		if (tribes.tribe_exists(name)) {
+			return tribes.get_tribe_descr(tribes.tribe_index(name));
+		} else {
+			throw TribeNonexistent(name.c_str());
+		}
+	} else {
 		return nullptr;
+	}
 }
 
 // Reads a c_string and interprets it as the name of an immovable type.

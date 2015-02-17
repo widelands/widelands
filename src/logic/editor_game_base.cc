@@ -85,9 +85,6 @@ EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
 
-	for (TribeDescr* tribe_descr : tribe_descriptions_) {
-		delete tribe_descr;
-	}
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.egbase_);
 		g_sound_handler.egbase_ = nullptr;
@@ -187,17 +184,6 @@ Player& EditorGameBase::player(const int32_t n) const
 	return player_manager_->player(n);
 }
 
-/// Returns a tribe description from the internally loaded list
-const TribeDescr * EditorGameBase::get_tribe(const std::string& tribename) const
-{
-	for (const TribeDescr* tribe : tribe_descriptions_) {
-		if (tribe->name() == tribename) {
-			return tribe;
-		}
-	}
-	return nullptr;
-}
-
 void EditorGameBase::inform_players_about_ownership
 	(MapIndex const i, PlayerNumber const new_owner)
 {
@@ -242,36 +228,14 @@ void EditorGameBase::allocate_player_maps() {
 
 
 /**
- * Load and prepare detailled game data.
+ * Load and prepare detailed game data.
  * This happens once just after the host has started the game and before the
  * graphics are loaded.
  */
 void EditorGameBase::postload()
 {
-	uint32_t id;
-	int32_t pid;
-
 	// Postload tribes
-	id = 0;
-	while (id < tribe_descriptions_.size()) {
-		for (pid = 1; pid <= MAX_PLAYERS; ++pid)
-			if (const Player * const plr = get_player(pid))
-				if (&plr->tribe() == tribe_descriptions_[id])
-					break;
-
-		if
-			(pid <= MAX_PLAYERS
-			 ||
-			 !dynamic_cast<const Game *>(this))
-		{ // if this is editor, load the tribe anyways
-			// the tribe is used, postload it
-			// NOCOM(GunChleoc): Can this go? tribe_descriptions_[id]->postload(*this);
-			++id;
-		} else {
-			delete tribe_descriptions_[id]; // the tribe is no longer used, remove it
-			tribe_descriptions_.erase(tribe_descriptions_.begin() + id);
-		}
-	}
+	tribes(); // NOCOM(GunChleoc): Do we need this?
 
 	// TODO(unknown): postload players? (maybe)
 }

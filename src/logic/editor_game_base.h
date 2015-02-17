@@ -169,9 +169,6 @@ public:
 	void* get_trackpointer(uint32_t serial);
 	void remove_trackpointer(uint32_t serial);
 
-	// Get a tribe from the loaded list, when known or nullptr.
-	TribeDescr const* get_tribe(const std::string& name) const;
-
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
@@ -215,10 +212,6 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
-
-protected:
-	using TribeVector = std::vector<TribeDescr*>;
-	TribeVector tribe_descriptions_;
 
 private:
 	/// \param preferred_player
