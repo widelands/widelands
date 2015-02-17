@@ -29,7 +29,7 @@
 #include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
@@ -70,7 +70,7 @@ EditorPlayerMenu::EditorPlayerMenu
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
 
-	m_tribes = Widelands::TribeDescr::get_all_tribenames();
+	m_tribes = Widelands::Tribes::get_all_tribenames();
 
 	set_inner_size(375, 135);
 
@@ -307,7 +307,7 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 		if (!menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
-		if (!Widelands::TribeDescr::exists_tribe(t))
+		if (!Widelands::Tribes::tribe_exists(t))
 			throw wexception
 				("Map defines tribe %s, but it does not exist!", t.c_str());
 		uint32_t i;

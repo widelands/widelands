@@ -193,7 +193,7 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (map.get_starting_pos(m_plnum)) {
-		const TribeDescr::Initialization & initialization =
+		const TribeBasicInfo::Initialization & initialization =
 			tribe().initialization(m_initialization_index);
 
 		Game & game = dynamic_cast<Game&>(egbase());

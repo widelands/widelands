@@ -22,11 +22,11 @@
 #include <boost/format.hpp>
 
 #include "ai/computer_player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::TribeDescr::get_all_tribe_infos();
+	s.tribes = Widelands::Tribes::get_all_tribeinfos();
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;

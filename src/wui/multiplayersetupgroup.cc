@@ -360,11 +360,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		else if (settings.savegame)
 			init->set_title(_("Savegame"));
 		else {
-			std::string tribepath("tribes/" + player_setting.tribe);
-			i18n::Textdomain td(tribepath); // for translated initialisation
+			i18n::Textdomain td("tribes"); // for translated initialisation
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
-					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).second));
+					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).descname));
 					break;
 				}
 			}

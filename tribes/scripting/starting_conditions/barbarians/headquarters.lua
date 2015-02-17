@@ -7,7 +7,7 @@ include "scripting/infrastructure.lua"
 set_textdomain("tribes")
 
 init = {
-   name = _ "Headquarters",
+   descname = _ "Headquarters",
    func = function(player, shared_in_start)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field

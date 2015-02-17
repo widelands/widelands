@@ -39,7 +39,7 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
@@ -59,11 +59,9 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	for (const std::string& tribename : Widelands::TribeDescr::get_all_tribenames()) {
-		ScopedTimer timer((boost::format("Loading %s took %%ums.") % tribename).str());
-		loader_ui->stepf(_("Loading tribe: %s"), tribename.c_str());
-		egbase->manually_load_tribe(tribename);
-	}
+	loader_ui->stepf(_("Loading tribes"));
+	// NOCOM(GunChleoc): Do we need the full tribes in the editor, or just the TribeBasicInfo?
+	egbase->tribes();
 }
 
 }  // namespace

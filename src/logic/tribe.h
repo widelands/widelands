@@ -57,14 +57,7 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table, EditorGameBase& egbase);
-
-	//  Static function to check for tribes.
-	static bool exists_tribe
-		(const std::string & name, TribeBasicInfo * info = nullptr);
-	static std::vector<std::string> get_all_tribenames();
-	static std::vector<TribeBasicInfo> get_all_tribe_infos();
-
+	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& egbase);
 
 	const std::string& name() const;
 
@@ -113,13 +106,8 @@ public:
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
-	struct Initialization {
-		std::string script;
-		std::string descname;
-	};
-
 	// Returns the initalization at 'index' (which must not be out of bounds).
-	const Initialization& initialization(const uint8_t index) const {
+	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
 		return m_initializations.at(index);
 	}
 
@@ -167,7 +155,7 @@ private:
 	WaresOrder                  workers_order_;
 	WaresOrderCoords            workers_order_coords_;
 
-	std::vector<Initialization> m_initializations;
+	std::vector<TribeBasicInfo::Initialization> m_initializations;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };

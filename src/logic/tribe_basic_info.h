@@ -20,22 +20,41 @@
 #ifndef WL_LOGIC_TRIBE_BASIC_INFO_H
 #define WL_LOGIC_TRIBE_BASIC_INFO_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
 #include <stdint.h>
 
+#include "scripting/lua_table.h"
+
 /// Basic information about the tribe that is determined only from the conf
 /// file and needed before the actual game.
 struct TribeBasicInfo {
+
+	/// Script path and localized name for a starting condition
+	struct Initialization {
+		Initialization(std::string init_script, std::string init_descname) :
+			script(init_script),
+			descname(init_descname) {}
+		std::string script;
+		std::string descname;
+	};
+
+	TribeBasicInfo(const std::string& name, std::unique_ptr<LuaTable> table);
+
+	/// Internal name to reference this tribe
 	std::string name;
+	/// Who designed this tribe
+	std::string author;
+	/// Name to present to the user
+	std::string descname;
+	/// Basic information about this tribe
+	std::string helptext;
+	/// Filepath of the tribe's icon
+	std::string icon;
 
-	/// Relative position of this tribe in a list of tribes.
-	uint8_t uiposition;
-
-	using Initialization = std::pair<std::string, std::string>;
-	using Initializations = std::vector<Initialization>;
-	Initializations initializations;
+	std::vector<Initialization> initializations;
 };
 
 #endif  // end of include guard: WL_LOGIC_TRIBE_BASIC_INFO_H

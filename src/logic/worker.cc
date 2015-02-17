@@ -3064,17 +3064,10 @@ MapObject::Loader * Worker::load
 {
 	try {
 		// header has already been read by caller
-		std::string tribename = fr.c_string();
 		std::string name = fr.c_string();
 
-		egbase.manually_load_tribe(tribename);
-
-		const TribeDescr * tribe = egbase.get_tribe(tribename);
-		if (!tribe)
-			throw GameDataError("unknown tribe '%s'", tribename.c_str());
-
 		const WorkerDescr * descr =
-			tribe->get_worker_descr(tribe->safe_worker_index(name));
+			egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());
 		std::unique_ptr<Loader> loader(worker->create_loader());
@@ -3095,7 +3088,6 @@ void Worker::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWorker);
-	fw.c_string(owner().tribe().name());
 	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);

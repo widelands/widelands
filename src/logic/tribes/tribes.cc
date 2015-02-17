@@ -33,6 +33,51 @@ Tribes::Tribes(EditorGameBase& egbase) :
 	tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
+
+std::vector<std::string> Tribes::get_all_tribenames() {
+	std::vector<std::string> tribenames;
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	for (const std::string tribename : table->keys<std::string>())
+	{
+		tribenames.push_back(tribename);
+	}
+	return tribenames;
+}
+
+std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
+	std::vector<TribeBasicInfo> tribeinfos;
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	for (const std::string tribename : table->keys<std::string>())
+	{
+		tribeinfos.push_back(TribeBasicInfo(tribename, table->get_table(tribename)));
+	}
+	return tribeinfos;
+}
+
+TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
+	if (tribe_exists(tribename)) {
+		for (const TribeBasicInfo& info : get_all_tribeinfos()) {
+			if (info.name == tribename) {
+				return info;
+			}
+		}
+	} else {
+		throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+	}
+	assert(false); // A TribeBasicInfo should have been found
+}
+
+bool Tribes::tribe_exists(const std::string& tribename) {
+	for (const std::string& name : get_all_tribenames()) {
+		if (name == tribename) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void Tribes::add_constructionsite_type(const LuaTable& t) {
 	buildings_->add(new ConstructionSiteDescr(t, egbase_));
 }
@@ -82,7 +127,12 @@ void Tribes::add_worker_type(const LuaTable& t) {
 }
 
 void Tribes::add_tribe(const LuaTable& t) {
-	tribes_->add(new TribeDescr(t, egbase_));
+	const std::string name = t.get_string("name");
+	if (tribe_exists(name)) {
+		tribes_->add(new TribeDescr(t, Tribes::tribeinfo(name), egbase_));
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
+	}
 }
 
 size_t Tribes::nrbuildings() const {
@@ -254,7 +304,6 @@ void Tribes::load_graphics()
 void Tribes::post_load() {
 	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get(i);
-		// NOCOM(GunChleoc): parse buildcost for buildings
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
@@ -265,11 +314,14 @@ void Tribes::post_load() {
 				wares_->get(wareindex)->add_producer(i);
 			}
 		}
+
 		// Register which buildings buildings can have been enhanced from
 		const BuildingIndex& enhancement = building_descr.enhancement();
 		if (building_exists(enhancement)) {
 			buildings_->get(enhancement)->set_enhanced_from(i);
 		}
+
+		// set_ware_type_has_demand_check(wareindex, tribe_descr.name());
 	}
 }
 

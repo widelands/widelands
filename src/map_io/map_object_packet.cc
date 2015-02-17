@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 MapObjectPacket::~MapObjectPacket() {

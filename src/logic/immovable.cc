@@ -133,7 +133,7 @@ ImmovableProgram IMPLEMENTATION
 
 ==============================================================================
 */
-
+// NOCOM(GunChleoc): Kill this
 ImmovableProgram::ImmovableProgram(const std::string& directory,
                                    Profile& prof,
                                    const std::string& _name,
@@ -716,7 +716,6 @@ MapObject::Loader * Immovable::load
 			Immovable * imm = nullptr;
 
 			if (owner_name != "world") { //  It is a tribe immovable.
-				// NOCOM(GunChleoc): Do we need something like this for tribes()? egbase.manually_load_tribe(owner_name);
 				try {
 					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));

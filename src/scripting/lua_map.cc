@@ -981,9 +981,6 @@ int LuaMap::place_immovable(lua_State * const L) {
 	BaseImmovable * m = nullptr;
 	if (from_where != "world") {
 		try {
-			//const Widelands::TribeDescr & tribe =
-			// NOCOM(GunChleoc): Do we need somethig like this for tribes()?	egbase.manually_load_tribe(from_where);
-
 			int32_t const imm_idx = egbase.tribes().safe_immovable_index(objname);
 			m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
 		} catch (GameDataError& e) {

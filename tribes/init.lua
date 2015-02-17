@@ -2,6 +2,11 @@
 
 -- Tribes initialization
 
+-- First the units are loaded, then the tribe descriptions
+
+-- All tribes also have some basic information for the load screens
+-- and the editor in preload.lua
+
 set_textdomain("tribes")
 
 -- ===================================

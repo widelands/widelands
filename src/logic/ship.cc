@@ -1060,8 +1060,6 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 			std::string name = fr.c_string();
 			const ShipDescr* descr = nullptr;
 
-			// NOCOM(GunChleoc): Do we need to do the same with tribes()? egbase.manually_load_tribe(owner);
-
 			try {
 				int32_t const idx = egbase.tribes().safe_ship_index(name);
 				descr = egbase.tribes().get_ship_descr(idx);

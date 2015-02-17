@@ -2,12 +2,6 @@ dirname = path.dirname(__file__)
 
 tribes:new_tribe {
    name = "empire",
-   author = _"The Widelands Development Team",
-   -- TRANSLATORS: This is a tribe name
-   descname = _"Empire",
-   helptext = _"This is the culture of the Roman Empire.",
-   uiposition = 20,
-   icon = "images/empire/icon.png",
 
    animations = {
 		-- No idea for the frontier. Maybe some javelins?

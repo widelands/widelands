@@ -626,8 +626,6 @@ MapObject::Loader * WareInstance::load
 
 		const std::string warename = fr.c_string();
 
-		// NOCOM(GunChleoc): Do we need something like this for tribes? egbase.manually_load_tribe(tribename);
-
 		WareIndex wareindex = egbase.tribes().ware_index(warename);
 		const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
 

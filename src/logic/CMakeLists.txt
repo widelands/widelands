@@ -181,6 +181,7 @@ wl_library(logic
     tribe.cc
     tribe.h
     tribe_basic_info.h
+    tribe_basic_info.cc
     walkingdir.cc
     walkingdir.h
     ware_descr.cc

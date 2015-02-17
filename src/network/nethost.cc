@@ -47,7 +47,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
@@ -651,7 +651,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::TribeDescr::get_all_tribe_infos();
+	d->settings.tribes = Widelands::Tribes::get_all_tribeinfos();
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -2112,7 +2112,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 			d->settings.tribes[i].initializations.size();
 		s.unsigned_8(nr_initializations);
 		for (uint8_t j = 0; j < nr_initializations; ++j)
-			s.string(d->settings.tribes[i].initializations[j].first);
+			s.string(d->settings.tribes[i].initializations[j].script);
 	}
 	s.send(client.sock);
 

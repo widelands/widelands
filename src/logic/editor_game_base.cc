@@ -136,7 +136,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 	if (!tribes_) {
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
-		// to tribe through this method already.
+		// to tribes through this method already.
 		ScopedTimer timer("Loading the tribes took %ums");
 		tribes_.reset(new Tribes(*this));
 
@@ -145,7 +145,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 			tribes_->post_load();
 		}
 		catch (const WException& e) {
-			log("Could not read tribe information: %s", e.what());
+			log("Could not read tribes information: %s", e.what());
 			throw;
 		}
 	}
@@ -177,33 +177,6 @@ Player * EditorGameBase::add_player
 			name, team);
 }
 
-/// Load the given tribe into structure
-void EditorGameBase::manually_load_tribe
-	(const std::string & tribe)
-{
-	for (const TribeDescr* tribe_descr : tribe_descriptions_) {
-		if (tribe_descr->name() == tribe) {
-			return;
-		}
-	}
-	const std::string scriptfile = "/tribes/" + tribe + ".lua";
-	try {
-		std::unique_ptr<LuaTable> table(lua_->run_script(scriptfile));
-		// NOCOM(GunChleoc): this needs to be added to the tribes as well?
-		TribeDescr* result = new TribeDescr(*table.get(), *this);
-		//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
-		int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-		result->resize_ware_orders(number);
-		tribe_descriptions_.push_back(result);
-	} catch (LuaError& e) {
-		throw GameDataError("Unable to manually load tribe from %s: %s", scriptfile.c_str(), e.what());
-	}
-}
-
-void EditorGameBase::manually_load_tribe(PlayerNumber const p) {
-	manually_load_tribe(map().get_scenario_player_tribe(p));
-}
-
 Player* EditorGameBase::get_player(const int32_t n) const
 {
 	return player_manager_->get_player(n);
@@ -213,8 +186,6 @@ Player& EditorGameBase::player(const int32_t n) const
 {
 	return player_manager_->player(n);
 }
-
-
 
 /// Returns a tribe description from the internally loaded list
 const TribeDescr * EditorGameBase::get_tribe(const std::string& tribename) const

@@ -32,7 +32,6 @@ class Building;
 class Request;
 class WaresQueue;
 
-// NOCOM this used to be in player.h as Player::ConstructionsiteInformation, but compiler didn't like
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}

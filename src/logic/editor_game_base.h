@@ -169,9 +169,6 @@ public:
 	void* get_trackpointer(uint32_t serial);
 	void remove_trackpointer(uint32_t serial);
 
-	// Manually load a tribe into memory. Used by the editor
-	void manually_load_tribe(const std::string& tribes);
-	void manually_load_tribe(PlayerNumber const p);
 	// Get a tribe from the loaded list, when known or nullptr.
 	TribeDescr const* get_tribe(const std::string& name) const;
 

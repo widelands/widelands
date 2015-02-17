@@ -29,10 +29,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "helper.h"
-#include "io/fileread.h"
-#include "io/filesystem/disk_filesystem.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -52,17 +48,10 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-
-using namespace std;
-/*
- * NOCOM todo
- icon = "images/atlanteans/icon.png",
- */
-
 namespace Widelands {
 
 TribeDescr::TribeDescr
-	(const LuaTable& table, EditorGameBase& input_egbase)
+	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& input_egbase)
 	: name_(table.get_string("name")), egbase_(input_egbase)
 {
 
@@ -70,9 +59,7 @@ TribeDescr::TribeDescr
 		// Grab the localization textdomain.
 		i18n::Textdomain td(std::string("tribes"));
 
-		// NOCOM(GunChleoc) Use these? table.get_string("author");
-		//table.get_string("descname"); // descriptive name
-		//table.get_string("helptext"); // long description
+		m_initializations = info.initializations;
 
 		// NOCOM(GunChleoc): Fix these animations
 		/*
@@ -92,7 +79,7 @@ TribeDescr::TribeDescr
 		items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {
 			std::unique_ptr<LuaTable> column_table = items_table->get_table(key);
-			vector<WareIndex> column;
+			std::vector<WareIndex> column;
 			for (const int column_key : column_table->keys<int>()) {
 				const std::string warename = column_table->get_string(column_key);
 				try {
@@ -131,7 +118,7 @@ TribeDescr::TribeDescr
 		items_table = table.get_table("workers_order");
 		for (const int key : items_table->keys<int>()) {
 			std::unique_ptr<LuaTable> column_table = items_table->get_table(key);
-			vector<WareIndex> column;
+			std::vector<WareIndex> column;
 			for (const int column_key : column_table->keys<int>()) {
 				const std::string workername = column_table->get_string(column_key);
 				try {
@@ -199,124 +186,9 @@ TribeDescr::TribeDescr
 											shipname.c_str(), name_.c_str(), e.what());
 		}
 
-		try {
-			// NOCOM(GunChleoc): Use the new init.lua in tribes/scripting
-			const std::string path = "tribes/scripting/starting_conditions/";
-
-			// Read initializations -- all scripts are initializations currently
-			for (const std::string& script :
-				  filter(g_fs->list_directory(path + name_),
-							[](const string& fn) {return boost::ends_with(fn, ".lua");})) {
-				std::unique_ptr<LuaTable> t = egbase_.lua().run_script(script);
-				t->do_not_warn_about_unaccessed_keys();
-
-				m_initializations.resize(m_initializations.size() + 1);
-				Initialization& init = m_initializations.back();
-				init.script = script;
-				init.descname = t->get_string("name");
-			}
-		} catch (const std::exception & e) {
-			throw GameDataError("tribe scripting: %s", e.what());
-		}
 	} catch (const WException & e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
-}
-
-
-/*
- * does this tribe exist?
- */
-bool TribeDescr::exists_tribe
-	(const std::string & tribename, TribeBasicInfo * const info)
-{
-	const std::string initfile = "/tribes/" + tribename + ".lua";
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> table(lua.run_script(initfile));
-		if (info) {
-			try {
-				info->name = tribename;
-				info->uiposition = table->has_key("uiposition") ? table->get_int("uiposition") : 0;
-
-				// NOCOM(GunChleoc): Use the new init.lua in tribes/scripting
-				const std::string path = "tribes/scripting/starting_conditions/";
-					// Read initializations -- all scripts are initializations currently
-				for (const std::string& script :
-					  filter(g_fs->list_directory(path + tribename),
-								[](const string& fn) {return boost::ends_with(fn, ".lua");})) {
-					std::unique_ptr<LuaTable> t = lua.run_script(script);
-					t->do_not_warn_about_unaccessed_keys();
-
-					info->initializations.push_back(
-								TribeBasicInfo::Initialization(script, t->get_string("name")));
-				}
-			} catch (const WException & e) {
-				throw GameDataError
-					("reading basic info for tribe \"%s\": %s",
-					 tribename.c_str(), e.what());
-			}
-			return true;
-		}
-	} catch (LuaError& e) {
-		throw GameDataError("Unable to verify if tribe exists from '%s': %s", initfile.c_str(), e.what());
-	}
-	return false;
-}
-
-struct TribeBasicComparator {
-	bool operator()(const TribeBasicInfo & t1, const TribeBasicInfo & t2) {
-		return t1.uiposition < t2.uiposition;
-	}
-};
-
-/**
- * Fills the given string vector with the names of all tribes that exist.
- */
-// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes.
-// Need to have a look at the control flow.
-std::vector<std::string> TribeDescr::get_all_tribenames() {
-	std::vector<std::string> tribenames;
-
-	//  get all tribes
-	std::vector<TribeBasicInfo> tribes;
-	FilenameSet m_tribes = g_fs->list_directory("tribes");
-	for
-		(FilenameSet::iterator pname = m_tribes.begin();
-		 pname != m_tribes.end();
-		 ++pname)
-	{
-		TribeBasicInfo info;
-		if (TribeDescr::exists_tribe(pname->substr(7), &info))
-			tribes.push_back(info);
-	}
-
-	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	for (const TribeBasicInfo& tribe : tribes) {
-		tribenames.push_back(tribe.name);
-	}
-	return tribenames;
-}
-
-// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes.
-// Need to have a look at the control flow.
-std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
-	std::vector<TribeBasicInfo> tribes;
-
-	//  get all tribes
-	FilenameSet m_tribes = g_fs->list_directory("tribes");
-	for
-		(FilenameSet::iterator pname = m_tribes.begin();
-		 pname != m_tribes.end();
-		 ++pname)
-	{
-		TribeBasicInfo info;
-		if (TribeDescr::exists_tribe(pname->substr(7), &info))
-			tribes.push_back(info);
-	}
-
-	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	return tribes;
 }
 
 

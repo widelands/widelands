@@ -1,13 +1,7 @@
-path.dirname(__file__)
+dirname = path.dirname(__file__)
 
 tribes:new_tribe {
    name = "atlanteans",
-   author = _"The Widelands Development Team",
-   -- TRANSLATORS: This is a tribe name
-   descname = _"Atlanteans",
-   helptext = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
-   uiposition = 100,
-   icon = "images/atlanteans/icon.png",
 
    animations = {
 		-- Some blue fires would be fine, but just an idea
