@@ -142,7 +142,7 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(const std::string & directory, char * parameters, const ImmovableDescr &);
+		ActPlayFX(char* parameters, const ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
@@ -163,7 +163,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruction : public Action {
-		ActConstruction(char * parameters, ImmovableDescr &, const std::string & directory, Profile &);
+		ActConstruction(char* parameters, ImmovableDescr&);
 		void execute(Game &, Immovable &) const override;
 
 		Duration buildtime() const {return m_buildtime;}

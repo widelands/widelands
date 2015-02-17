@@ -60,7 +60,6 @@
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {

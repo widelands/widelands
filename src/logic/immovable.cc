@@ -53,7 +53,6 @@
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "notifications/notifications.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_base.h"
@@ -133,49 +132,6 @@ ImmovableProgram IMPLEMENTATION
 
 ==============================================================================
 */
-// NOCOM(GunChleoc): Port ActPlayFX and ActConstruction to other constructor and kill this
-ImmovableProgram::ImmovableProgram(const std::string& directory,
-                                   Profile& prof,
-                                   const std::string& _name,
-											  ImmovableDescr& immovable)
-   : m_name(_name) {
-	Section& program_s = prof.get_safe_section(_name.c_str());
-	while (Section::Value* const v = program_s.get_next_val()) {
-		Action* action;
-		if (!strcmp(v->get_name(), "animate")) {
-			// Copying, as next_word() modifies the string..... Awful design.
-			std::unique_ptr<char []> arguments(new char[strlen(v->get_string()) + 1]);
-			strncpy(arguments.get(), v->get_string(), strlen(v->get_string()) + 1);
-
-			char* full_line = arguments.get();
-			bool reached_end;
-			char * const animation_name = next_word(full_line, reached_end);
-			if (!immovable.is_animation_known(animation_name)) {
-				immovable.add_animation(
-				   animation_name,
-				   g_gr->animations().load(directory, prof.get_safe_section(animation_name)));
-			}
-			action = new ActAnimate(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "transform")) {
-			action = new ActTransform(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "grow")) {
-			action = new ActGrow(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "remove")) {
-			action = new ActRemove(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "seed")) {
-			action = new ActSeed(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "playFX")) {
-			action = new ActPlayFX(directory, v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "construction")) {
-			action = new ActConstruction(v->get_string(), immovable, directory, prof);
-		} else {
-			throw GameDataError("unknown command type \"%s\"", v->get_name());
-		}
-		m_actions.push_back(action);
-	}
-	if (m_actions.empty())
-		throw GameDataError("no actions");
-}
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
@@ -201,9 +157,13 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
+		} else if (parts[0] == "playFX") {
+			action = new ActPlayFX(arguments.get(), *immovable);
+		} else if (parts[0] == "construction") {
+			action = new ActConstruction(arguments.get(), *immovable);
 		} else {
 			throw GameDataError(
-			   "unknown or (here)not support command type \"%s\"", parts[0].c_str());
+				"unknown command type \"%s\" in immovable \"%s\"", parts[0].c_str(), immovable->name().c_str());
 		}
 		m_actions.push_back(action);
 	}
@@ -782,13 +742,10 @@ void ImmovableProgram::ActAnimate::execute
 }
 
 
-ImmovableProgram::ActPlayFX::ActPlayFX
-	(const std::string & directory, char * parameters, const ImmovableDescr &)
-{
+ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) {
 	try {
 		bool reached_end;
-		std::string filename = next_word(parameters, reached_end);
-		name = directory + "/" + filename;
+		name = next_word(parameters, reached_end);
 
 		if (!reached_end) {
 			char * endp;
@@ -800,7 +757,10 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed(directory, filename, name);
+		// NOCOM(GunChleoc): Check if this works
+		g_sound_handler.load_fx_if_needed(FileSystem::fs_dirname(name),
+													 FileSystem::fs_filename(name.c_str()),
+													 name);
 	} catch (const WException & e) {
 		throw GameDataError("playFX: %s", e.what());
 	}
@@ -1066,9 +1026,7 @@ void ImmovableProgram::ActSeed::execute
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActConstruction::ActConstruction
-	(char * parameters, ImmovableDescr & descr, const std::string & directory, Profile & prof)
-{
+ImmovableProgram::ActConstruction::ActConstruction(char* parameters, ImmovableDescr& descr) {
 	try {
 		if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 			throw GameDataError("only usable for tribe immovable");
@@ -1082,14 +1040,13 @@ ImmovableProgram::ActConstruction::ActConstruction
 		m_decaytime = atoi(params[2].c_str());
 
 		std::string animation_name = params[0];
-		if (descr.is_animation_known(animation_name))
-			m_animid = descr.get_animation(animation_name);
-		else {
-			m_animid =
-				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
-
-			descr.add_animation(animation_name, m_animid);
+		if (!descr.is_animation_known(animation_name)) {
+			throw GameDataError("unknown animation \"%s\" in immovable program for immovable \"%s\"",
+									  animation_name.c_str(), descr.name().c_str());
 		}
+		m_animid = descr.get_animation(animation_name);
+		descr.add_animation(animation_name, m_animid);
+
 	} catch (const WException & e) {
 		throw GameDataError("construction: %s", e.what());
 	}

@@ -25,7 +25,6 @@
 
 #include "logic/game_data_error.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {

@@ -38,30 +38,9 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 
-
 namespace Widelands {
-
-namespace {
-
-// Parses program lines in a section into a vector of strings.
-std::vector<std::string> section_to_strings(Section* section) {
-	std::vector<std::string> return_value;
-	for (uint32_t idx = 0;; ++idx) {
-		char const* const string = section->get_string(std::to_string(idx).c_str(), nullptr);
-		if (!string)
-			break;
-		return_value.emplace_back(string);
-	}
-	// Check for line numbering problems
-	if (section->get_num_values() != return_value.size())
-		throw wexception("Line numbers appear to be wrong");
-	return return_value;
-}
-
-}  // namespace
 
 void CritterProgram::parse(const std::vector<std::string>& lines) {
 	for (const std::string& line : lines) {
