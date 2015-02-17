@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Kitchen Tools",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"kitchen tools",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1,
 		empire = 1

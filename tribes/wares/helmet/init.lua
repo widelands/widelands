@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Helmet",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"helmets",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1
 	},

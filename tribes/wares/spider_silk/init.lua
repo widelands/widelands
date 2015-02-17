@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Spider Silk",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"spider silk",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 10
 	},

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Armor",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"suits of armor",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		empire = 1
 	},

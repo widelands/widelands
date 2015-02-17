@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Felling Ax",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"felling axes",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 5,
 		empire = 3

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Planks",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"planks",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 40,
 		empire = 40

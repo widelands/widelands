@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Bread",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"bread",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20
 	},

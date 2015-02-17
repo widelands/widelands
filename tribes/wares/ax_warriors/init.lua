@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Warrior’s Ax",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"warrior’s axes",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1
 	},

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Scythe",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"scythes",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 1,
 		barbarians = 1,

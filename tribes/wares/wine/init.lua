@@ -4,6 +4,7 @@ tribes:new_ware_type{
    descname = _"Wine",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"wine",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		empire = 20
    },

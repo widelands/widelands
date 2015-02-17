@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Gold Ore",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"gold ore",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 15,
 		barbarians = 15,

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Fishing Rod",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"fishing rods",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1,
 		empire = 1

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Coal",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"coal",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20,
 		barbarians = 20,

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Blackroot Flour",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"blackroot flour",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 15
 	},

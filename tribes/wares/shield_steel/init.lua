@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Steel Shield",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"steel shields",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 1
 	},

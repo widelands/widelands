@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Log",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"logs",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 40,
 		barbarians = 40,

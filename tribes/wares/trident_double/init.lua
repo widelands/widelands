@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Double Trident",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"double tridents",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 1
 	},

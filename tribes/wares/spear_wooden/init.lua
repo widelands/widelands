@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Wooden Spear",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"wooden spear",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		empire = 30
 	},

@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Wheat",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"wheat",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 25,
 		empire = 25

@@ -6,8 +6,9 @@ tribes:new_ware_type{
    descname = _"Pick",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"picks",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 3
+		atlanteans = 3,
 		barbarians = 2,
 		empire = 2
 	},

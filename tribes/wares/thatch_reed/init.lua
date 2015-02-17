@@ -6,6 +6,7 @@ tribes:new_ware_type{
    descname = _"Thatch Reed",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = _"thatch reed",
+   icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 10
 	},
