@@ -7,7 +7,7 @@ tribes:new_immovable_type{
    size = "big",
    programs = {
 		program = {
-			"animate=burn 30000",
+			"animate=idle 30000",
 			"transform=ashes",
       }
    },
@@ -15,7 +15,7 @@ tribes:new_immovable_type{
 		default = ""
    },
    animations = {
-      burn = {
+      idle = {
          pictures = path.list_directory(dirname, "burn_\\d+.png"),
          hotspot = { 40, 57 },
          fps = 10,

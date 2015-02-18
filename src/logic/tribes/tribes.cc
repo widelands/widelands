@@ -103,7 +103,7 @@ void Tribes::add_warehouse_type(const LuaTable& t) {
 }
 
 void Tribes::add_immovable_type(const LuaTable& t) {
-	immovables_->add(new ImmovableDescr(t, egbase_.world(), MapObjectDescr::OwnerType::kTribe));
+	immovables_->add(new ImmovableDescr(t, *this));
 }
 
 void Tribes::add_ship_type(const LuaTable& t) {

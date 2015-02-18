@@ -180,52 +180,103 @@ ImmovableDescr IMPLEMENTATION
 */
 
 /**
- * Parse an immovable from its init file.
+ * Parse a common immovable functions from init file.
  */
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObjectDescr::OwnerType input_type) :
+ImmovableDescr::ImmovableDescr(const LuaTable& table, MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
 	m_size(BaseImmovable::NONE),
-	owner_type_(input_type)
-{
-	m_size = string_to_size(table.get_string("size"));
-	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {MapObject::Attribute::RESI});
-
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	for (const std::string& animation : anims->keys<std::string>()) {
-		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+	owner_type_(input_type) {
+	if (table.has_key("size")) {
+		m_size = string_to_size(table.get_string("size"));
 	}
 
 	if (table.has_key("terrain_affinity")) {
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
+	if (table.has_key("attributes")) {
+		add_attributes(table.get_table("attributes")->
+							array_entries<std::string>(), {MapObject::Attribute::RESI});
+	}
+
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	for (const std::string& animation : anims->keys<std::string>()) {
+		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+	}
 	assert(is_animation_known("idle"));
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
 			m_programs[program_name] = new ImmovableProgram(
-			   program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
+				program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
 		} catch (const std::exception& e) {
 			throw wexception("Error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 
+	make_sure_default_program_is_there();
+}
+
+/**
+ * Parse a world immovable from its init file.
+ */
+ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
+	ImmovableDescr(table, MapObjectDescr::OwnerType::kWorld) {
+
 	int editor_category_index =
-	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
+			world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index < 0) {
 		throw GameDataError("Unknown editor_category: %s\n",
-		                      table.get_string("editor_category").c_str());
+									 table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
+}
+
+/**
+ * Parse a tribes immovable from its init file.
+ */
+ImmovableDescr::ImmovableDescr(const LuaTable& table, const Tribes& tribes) :
+	ImmovableDescr(table, MapObjectDescr::OwnerType::kTribe) {
+	// NOCOM(GunChleoc): Code duplication with building.cc - refactor
+	if (table.has_key("buildcost")) {
+		std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");
+		for (const std::string& key : items_table->keys<std::string>()) {
+			int32_t value;
+			try {
+				WareIndex index = tribes.ware_index(key);
+
+				// NOCOM(GunChleoc): Do we need to allow workers like for buildings?
+				if (index == INVALID_INDEX) {
+					throw GameDataError
+						("\"%s\" has not been defined as a ware/worker type (wrong "
+						 "declaration order?)",
+						 key.c_str());
+				}
+
+				if (m_buildcost.count(index)) {
+					throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
+				}
+
+				value = items_table->get_int(key);
+				uint8_t const count = value;
+				if (count != value) {
+					throw GameDataError("count is out of range 1 .. 255");
+				}
+				m_buildcost.insert(std::pair<WareIndex, uint8_t>(index, count));
+			} catch (const WException & e) {
+				throw GameDataError
+					("[buildcost] \"%s=%d\": %s",
+					 key.c_str(), value, e.what());
+			}
+		}
+	}
 
 	std::unique_ptr<LuaTable> helptexts_table = table.get_table("helptext");
 	for (const std::string& key : helptexts_table->keys<std::string>()) {
 		helptexts_.emplace(key, helptexts_table->get_string(key));
 	}
-
-	make_sure_default_program_is_there();
 }
 
 const EditorCategory& ImmovableDescr::editor_category() const {
@@ -1047,7 +1098,6 @@ ImmovableProgram::ActConstruction::ActConstruction(char* parameters, ImmovableDe
 									  animation_name.c_str(), descr.name().c_str());
 		}
 		m_animid = descr.get_animation(animation_name);
-		descr.add_animation(animation_name, m_animid);
 
 	} catch (const WException & e) {
 		throw GameDataError("construction: %s", e.what());

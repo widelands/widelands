@@ -40,6 +40,7 @@ namespace Widelands {
 class Economy;
 class Map;
 class TerrainAffinity;
+class Tribes;
 class WareInstance;
 class Worker;
 class World;
@@ -113,7 +114,8 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram *>;
 
-	ImmovableDescr(const LuaTable&, const World&, MapObjectDescr::OwnerType owner_type);
+	ImmovableDescr(const LuaTable&, const World& world); // World immovable
+	ImmovableDescr(const LuaTable&, const Tribes& tribes); // Tribes immovable
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
@@ -152,6 +154,8 @@ protected:
 	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
 
 private:
+	ImmovableDescr(const LuaTable&, MapObjectDescr::OwnerType type); // Common constructor functions for tribes and world.
+
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 

@@ -103,7 +103,7 @@ const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 }
 
 void World::add_immovable_type(const LuaTable& table) {
-	immovables_->add(new ImmovableDescr(table, *this, MapObjectDescr::OwnerType::kWorld));
+	immovables_->add(new ImmovableDescr(table, *this));
 }
 
 void World::add_editor_terrain_category(const LuaTable& table) {

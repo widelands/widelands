@@ -1,14 +1,14 @@
 dirname = path.dirname(__file__)
 
-tribes:new_resource_type {
+tribes:new_immovable_type {
    name = "new_immovable_type",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = _"Some Stones",
-   attrib = "resi",
+   attributes = { "resi" },
    programs = {
 		program = {
 			"animate=idle 600000",
-			"remove=remove"
+			"remove="
       }
    },
    helptext = {

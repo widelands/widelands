@@ -1316,13 +1316,13 @@ void Warehouse::PlannedWorkers::cleanup()
 
 Warehouse::StockPolicy Warehouse::get_ware_policy(WareIndex ware) const
 {
-	assert(ware < m_ware_policy.size());
+	assert(ware < static_cast<WareIndex>(m_ware_policy.size()));
 	return m_ware_policy[ware];
 }
 
 Warehouse::StockPolicy Warehouse::get_worker_policy(WareIndex ware) const
 {
-	assert(ware < m_worker_policy.size());
+	assert(ware < static_cast<WareIndex>(m_worker_policy.size()));
 	return m_worker_policy[ware];
 }
 
@@ -1338,14 +1338,14 @@ Warehouse::StockPolicy Warehouse::get_stock_policy
 
 void Warehouse::set_ware_policy(WareIndex ware, Warehouse::StockPolicy policy)
 {
-	assert(ware < m_ware_policy.size());
+	assert(ware < static_cast<WareIndex>(m_ware_policy.size()));
 	m_ware_policy[ware] = policy;
 }
 
 void Warehouse::set_worker_policy
 	(WareIndex ware, Warehouse::StockPolicy policy)
 {
-	assert(ware < m_worker_policy.size());
+	assert(ware < static_cast<WareIndex>(m_worker_policy.size()));
 	m_worker_policy[ware] = policy;
 }
 
@@ -1356,7 +1356,7 @@ void Warehouse::set_worker_policy
 void Warehouse::check_remove_stock(Game & game)
 {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
-		for (WareIndex ware = 0; ware < m_ware_policy.size(); ++ware) {
+		for (WareIndex ware = 0; ware < static_cast<WareIndex>(m_ware_policy.size()); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
@@ -1365,7 +1365,7 @@ void Warehouse::check_remove_stock(Game & game)
 		}
 	}
 
-	for (WareIndex widx = 0; widx < m_worker_policy.size(); ++widx) {
+	for (WareIndex widx = 0; widx < static_cast<WareIndex>(m_worker_policy.size()); ++widx) {
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 

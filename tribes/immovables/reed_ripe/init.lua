@@ -5,14 +5,14 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Reed (ripe)",
    size = "small",
-   attrib = "ripe_reed",
+   attributes = { "ripe_reed" },
    programs = {
 		program = {
 			"animate=idle 500000",
-			"remove=remove",
+			"remove=",
       },
 		harvest = {
-			"remove=remove",
+			"remove=",
       }
    },
    helptext = {

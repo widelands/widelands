@@ -4,11 +4,11 @@ tribes:new_immovable_type {
    name = "resi_stones2",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = _"A Lot of Stones",
-   attrib = "resi",
+   attributes = { "resi" },
    programs = {
 		program = {
 			"animate=idle 600000",
-			"remove=remove"
+			"remove="
       }
    },
    helptext = {

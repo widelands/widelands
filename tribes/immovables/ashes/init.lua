@@ -7,7 +7,7 @@ tribes:new_immovable_type{
    programs = {
 		program = {
 			"animate=idle 45000",
-			"remove=remove",
+			"remove=",
       }
    },
    helptext = {

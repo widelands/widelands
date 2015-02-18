@@ -50,12 +50,13 @@ namespace Widelands {
 
 ShipDescr::ShipDescr(const LuaTable& table)
 	:
-	BobDescr(MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table)
-{
+	BobDescr(MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 	// Read the sailing animations
-	add_directional_animation(&m_sail_anims, "sail");
+	// NOCOM(GunChleoc): Fix this
+	//add_directional_animation(&m_sail_anims, "sail");
 
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
+	helptext_ = table.get_string("helptext");
 }
 
 

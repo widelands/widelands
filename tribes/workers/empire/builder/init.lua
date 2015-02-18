@@ -8,6 +8,10 @@ animations = {
    },
    work = {
       pictures = path.list_directory(dirname, "work_\\d+.png"),
+      sound_effect = {
+            directory = "../../../sound/hammering",
+            name = "hammering",
+      },
       hotspot = { 11, 21 },
       fps = 10
    }

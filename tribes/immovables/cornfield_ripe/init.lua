@@ -5,11 +5,10 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"_Cornfield (ripe)",
    size = "small",
-   attrib = "ripe_corn",
    programs = {
 		program = {
 			"animate=idle 50000",
-			"remove=remove",
+			"remove=",
       },
 		harvest = {
 			"transform=cornfield_harvested",

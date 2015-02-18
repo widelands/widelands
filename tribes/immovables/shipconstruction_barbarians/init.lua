@@ -23,6 +23,7 @@ tribes:new_immovable_type {
       idle = {
          pictures = path.list_directory(dirname, "build_\\d+.png"),
          hotspot = { 115, 82 },
+         fps = 1
       },
    }
 }
