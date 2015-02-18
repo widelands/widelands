@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The gamekeeper pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 52.5):bformat(52.5))
-   }
+   },
 
    animations = {
 		idle = {

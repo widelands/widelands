@@ -34,7 +34,7 @@ tribes:new_productionsite_type {
 		note = _"The barbarian axfactory is the intermediate production site in a series of three buildings. It is an upgrade from the metal workshop but doesn’t require additional qualification for the worker.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, this building can produce each type of ax in about %s on average.":bformat(ngettext("%d second", "%d seconds", 57):bformat(57)) .. " " .. _"All three weapons take the same time for making, but the required raw materials vary."
-   }
+   },
 
    animations = {
 		idle = {
@@ -44,6 +44,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 57, 76 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
@@ -55,6 +56,8 @@ tribes:new_productionsite_type {
 			fps = 10
 		},
 	},
+
+	aihints = {},
 
 	working_positions = {
 		barbarians_blacksmith = 1

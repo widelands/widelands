@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		note = _"The quarry needs rocks to cut within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

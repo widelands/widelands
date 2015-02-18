@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, this building can produce an ox in %s on average.":bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
-   }
+   },
 
    animations = {
 		idle = {

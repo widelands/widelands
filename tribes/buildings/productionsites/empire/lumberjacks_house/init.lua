@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 		note = _"The lumberjack's house needs trees to fell within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

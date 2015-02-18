@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 		note = _"The hunter’s hut needs animals to hunt within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The hunter pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
-   }
+   },
 
    animations = {
 		idle = {

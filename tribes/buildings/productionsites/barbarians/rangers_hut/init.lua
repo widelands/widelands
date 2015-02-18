@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		note = _"The ranger’s hut needs free space within the working radius to plant the trees.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 5):bformat(5))
-   }
+   },
 
    animations = {
 		idle = {
@@ -36,6 +36,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 40, 33 },
+			fps = 1
 		},
 	},
 

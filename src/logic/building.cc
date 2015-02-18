@@ -66,7 +66,7 @@ BuildingDescr::BuildingDescr
 	m_mine          (false),
 	m_port          (false),
 	m_enhanced_from (INVALID_INDEX),
-	m_hints         (table.get_table("ai_hints")),
+	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
 	using boost::iequals;

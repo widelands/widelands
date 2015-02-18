@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 		note = _"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"A reed yard can produce a sheaf of thatch reed in about %s on average.":bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
-   }
+   },
 
    animations = {
 		idle = {

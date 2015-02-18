@@ -25,7 +25,7 @@ tribes:new_productionsite_type {
 		note = _"The lumberjack’s hut needs trees to fell within the working radius.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
-   }
+   },
 
    animations = {
 		idle = {
@@ -35,6 +35,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 40, 36 },
+			fps = 1
 		},
 	},
 

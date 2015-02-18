@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 		note = _"The hunter’s house needs animals to hunt within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

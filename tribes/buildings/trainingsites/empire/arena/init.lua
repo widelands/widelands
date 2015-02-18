@@ -34,7 +34,7 @@ tribes:new_trainingsite_type {
 		note = _"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
@@ -46,6 +46,8 @@ tribes:new_trainingsite_type {
 			hotspot = { 82, 83 }
 		}
 	},
+
+	aihints = {},
 
 	working_positions = {
 		empire_trainer = 1
@@ -90,7 +92,7 @@ tribes:new_trainingsite_type {
 				"train=soldier evade 0 1"
 			}
 		},
-	}
+	},
 
    soldier_capacity = 8,
    trainer_patience = 8

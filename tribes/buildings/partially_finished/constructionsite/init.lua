@@ -19,7 +19,7 @@ tribes:new_constructionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		-- The constructionsite is a mess. Not nice and clean, but rather some
@@ -33,4 +33,6 @@ tribes:new_constructionsite_type {
 			hotspot = { 33, 36 },
 		}
 	},
+
+	aihints = {},
 }

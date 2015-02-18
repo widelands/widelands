@@ -34,7 +34,7 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -43,7 +43,8 @@ tribes:new_militarysite_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 90, 105 }
+			hotspot = { 90, 105 },
+			fps = 1
 		}
 	},
 
@@ -51,17 +52,17 @@ tribes:new_militarysite_type {
 		"empire_soldier",
    },
 
-	max_soldiers = 8,
-   heal_per_second = 170,
-   conquers = 11,
-   prefer_heroes = true,
-
    aihints = {
 		expansion = true,
 		fighting = true,
 		mountain_conqueror = true,
 		prohibited_till=1500
    },
+
+	max_soldiers = 8,
+   heal_per_second = 170,
+   conquers = 11,
+   prefer_heroes = true,
 
    messages = {
 		occupied = _"Your soldiers have occupied your fortress.",

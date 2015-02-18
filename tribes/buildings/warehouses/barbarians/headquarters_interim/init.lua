@@ -20,7 +20,7 @@ tribes:new_warehouse_type {
 		note = _"The headquarters is your main building." .. "<br>" .. _"Text needed",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
 	-- The interim headquarters of the barbarians is a simple stone building thatched
 	-- with reed and coated with many different wares.
@@ -30,6 +30,8 @@ tribes:new_warehouse_type {
 			hotspot = { 64, 106 }
 		},
 	},
+
+	aihints = {},
 
 	heal_per_second = 170,
 	conquers = 9,

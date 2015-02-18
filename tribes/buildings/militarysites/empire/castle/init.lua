@@ -32,7 +32,7 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -40,6 +40,8 @@ tribes:new_militarysite_type {
 			hotspot = { 94, 106 }
 		}
 	},
+
+	aihints = {},
 
 	outputs = {
 		"empire_soldier",

@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
 		note = _"The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, this building can produce each tool in about %s on average.":bformat(ngettext("%d second", "%d seconds", 67):bformat(67))
-   }
+   },
 
    animations = {
 		idle = {
@@ -42,6 +42,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 57, 76 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),

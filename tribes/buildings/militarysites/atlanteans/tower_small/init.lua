@@ -6,7 +6,7 @@ tribes:new_militarysite_type {
    descname = _"Small Tower",
    icon = dirname .. "menu.png",
    size = "small",
-   vision_range=13,
+   vision_range = 13,
 
    buildcost = {
 		log = 1,
@@ -29,7 +29,7 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -37,6 +37,10 @@ tribes:new_militarysite_type {
 			hotspot = { 42, 65 },
 		}
 	},
+
+   aihints = {
+		fighting = true
+   },
 
 	outputs = {
 		"atlanteans_soldier",
@@ -46,10 +50,6 @@ tribes:new_militarysite_type {
    heal_per_second = 100,
    conquers = 5,
    prefer_heroes = true,
-
-   aihints = {
-		fighting = true
-   },
 
    messages = {
 		occupied = _"Your soldiers have occupied your small tower.",

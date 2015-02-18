@@ -33,7 +33,7 @@ tribes:new_trainingsite_type {
 		note = _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %1$s and %2$s on average.":bformat(ngettext("%d minute", "%d minutes", 1):bformat(1), ngettext("%d second", "%d seconds", 10):bformat(10))
-   }
+   },
 
    animations = {
 		idle = {
@@ -118,7 +118,7 @@ tribes:new_trainingsite_type {
 				"train=soldier evade 1 2"
 			}
 		},
-	}
+	},
 
    soldier_capacity = 8,
    trainer_patience = 3

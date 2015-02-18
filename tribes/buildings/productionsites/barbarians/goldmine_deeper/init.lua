@@ -29,7 +29,7 @@ tribes:new_productionsite_type {
 		note = _"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore.":bformat("10%"),
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If the food supply is steady, this mine can produce gold ore in %s on average.":bformat(ngettext("%d second", "%d seconds", 18.5):bformat(18.5))
-   }
+   },
 
    animations = {
 		idle = {
@@ -39,6 +39,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 60, 37 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),

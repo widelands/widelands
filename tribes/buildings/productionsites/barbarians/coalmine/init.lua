@@ -29,7 +29,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("1/3"),
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If the food supply is steady, this mine can produce coal in %s on average.":bformat(ngettext("%d second", "%d seconds", 32.5):bformat(32.5))
-   }
+   },
 
    animations = {
 		idle = {
@@ -39,6 +39,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 21, 36 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),

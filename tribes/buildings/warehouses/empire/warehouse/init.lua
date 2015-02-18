@@ -32,7 +32,7 @@ tribes:new_warehouse_type {
 		note = "",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -40,6 +40,8 @@ tribes:new_warehouse_type {
 			hotspot = { 58, 55 }
 		}
 	},
+
+	aihints = {},
 
    heal_per_second = 170,
 }

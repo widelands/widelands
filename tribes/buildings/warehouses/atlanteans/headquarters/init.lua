@@ -20,7 +20,7 @@ tribes:new_warehouse_type {
 		note = _"The headquarters is your main building." .. "<br>" .. _"Text needed",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -28,6 +28,8 @@ tribes:new_warehouse_type {
 			hotspot = { 81, 110 },
 		},
 	},
+
+	aihints = {},
 
 	heal_per_second = 220,
 	conquers = 9,

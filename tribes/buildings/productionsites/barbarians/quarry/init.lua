@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The stonemason pauses %s before going back to work again.":bformat(
 		ngettext("%d second", "%d seconds", 65):bformat(65))
-   }
+   },
 
    animations = {
 		idle = {
@@ -36,6 +36,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 44, 36 },
+			fps = 1
 		},
 	},
 

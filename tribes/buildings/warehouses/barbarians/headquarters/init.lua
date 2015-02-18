@@ -20,7 +20,7 @@ tribes:new_warehouse_type {
 		note = _"The headquarters is your main building." .. "<br>" .. _"Text needed",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
 	-- The Headquarters of the barbarians is from the apperance a stable military
 	-- Building, fortified base and some towers made of blackwood. Some flags
@@ -32,6 +32,8 @@ tribes:new_warehouse_type {
 			fps = 10
 		},
 	},
+
+	aihints = {},
 
 	heal_per_second = 220,
 	conquers = 9,

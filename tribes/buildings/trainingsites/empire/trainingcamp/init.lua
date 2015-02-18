@@ -35,7 +35,7 @@ tribes:new_trainingsite_type {
 		note = _"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
@@ -195,7 +195,7 @@ tribes:new_trainingsite_type {
 				"train=soldier hp 3 4"
 			}
 		},
-	}
+	},
 
    soldier_capacity = 12,
    trainer_patience = 12

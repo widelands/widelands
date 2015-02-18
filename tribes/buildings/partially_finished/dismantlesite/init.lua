@@ -19,7 +19,7 @@ tribes:new_dismantlesite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
@@ -27,4 +27,6 @@ tribes:new_dismantlesite_type {
 			hotspot = { 5, 5 },
 		},
 	},
+
+	aihints = {},
 }

@@ -27,7 +27,7 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -37,17 +37,20 @@ tribes:new_militarysite_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 44, 62 }
+			hotspot = { 44, 62 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
-			hotspot = { 44, 62 }
+			hotspot = { 44, 62 },
 		}
 	},
 
 	outputs = {
 		"barbarians_soldier",
    },
+
+   aihints = {},
 
 	max_soldiers = 5,
    heal_per_second = 130,

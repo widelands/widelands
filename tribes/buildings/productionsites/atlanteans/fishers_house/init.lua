@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		note = _"The fisher’s house needs water full of fish within the working radius." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

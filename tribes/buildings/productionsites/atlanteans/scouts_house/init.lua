@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
@@ -38,6 +38,8 @@ tribes:new_productionsite_type {
 			hotspot = { 41, 44 },
 		}
 	},
+
+	aihints = {},
 
 	working_positions = {
 		atlanteans_scout = 1

@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
 		note = _"The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, this building can produce grout in about %s on average.":bformat(ngettext("%d second", "%d seconds", 41):bformat(41))
-   }
+   },
 
    animations = {
 		idle = {
@@ -40,6 +40,8 @@ tribes:new_productionsite_type {
 			hotspot = { 45, 53 },
 		},
 	},
+
+	aihints = {},
 
 	working_positions = {
 		barbarians_lime_burner = 1

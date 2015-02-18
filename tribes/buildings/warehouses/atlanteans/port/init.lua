@@ -35,7 +35,7 @@ tribes:new_warehouse_type {
 		note = "",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -45,9 +45,12 @@ tribes:new_warehouse_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 74, 70 }
+			hotspot = { 74, 70 },
+			fps = 1
 		}
 	},
+
+	aihints = {},
 
    conquers = 5,
    heal_per_second = 170,

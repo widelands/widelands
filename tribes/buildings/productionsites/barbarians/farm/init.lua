@@ -29,7 +29,7 @@ tribes:new_productionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

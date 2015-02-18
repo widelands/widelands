@@ -32,7 +32,7 @@ tribes:new_trainingsite_type {
 		note = _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average.":bformat(ngettext("%d minute", "%d minutes", 4):bformat(4), ngettext("%d second", "%d seconds", 40):bformat(40))
-   }
+   },
 
    animations = {
 		idle = {
@@ -201,7 +201,7 @@ tribes:new_trainingsite_type {
 				"train=soldier hp 2 3"
 			}
 		},
-	}
+	},
 
    soldier_capacity = 12,
    trainer_patience = 5

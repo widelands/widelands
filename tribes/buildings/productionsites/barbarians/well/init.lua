@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"The carrier needs %s to get one bucket full of water.":bformat(
 		ngettext("%d second", "%d seconds", 40):bformat(40))
-   }
+   },
 
    animations = {
 		idle = {
@@ -36,6 +36,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 19, 33 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),

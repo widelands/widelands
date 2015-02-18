@@ -30,7 +30,11 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
+
+   aihints = {
+		fighting = true
+   },
 
    animations = {
 		idle = {
@@ -47,10 +51,6 @@ tribes:new_militarysite_type {
    heal_per_second = 140,
    conquers = 7,
    prefer_heroes = true,
-
-   aihints = {
-		fighting = true
-   },
 
    messages = {
 		occupied = _"Your soldiers have occupied your guardhall.",

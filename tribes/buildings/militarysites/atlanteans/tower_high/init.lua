@@ -6,8 +6,8 @@ tribes:new_militarysite_type {
    descname = _"High Tower",
    icon = dirname .. "menu.png",
    size = "medium",
-   buildable = false
-   vision_range=21,
+   buildable = false,
+   vision_range = 21,
    enhanced_building = true,
 
    enhancement_cost = {
@@ -30,7 +30,7 @@ tribes:new_militarysite_type {
 		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = ""
-   }
+   },
 
    animations = {
 		idle = {
@@ -38,6 +38,8 @@ tribes:new_militarysite_type {
 			hotspot = { 50, 73 },
 		}
 	},
+
+	aihints = {},
 
 	outputs = {
 		"atlanteans_soldier",

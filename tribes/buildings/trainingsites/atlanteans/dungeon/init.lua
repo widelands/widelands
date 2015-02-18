@@ -36,7 +36,7 @@ tribes:new_trainingsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
@@ -44,6 +44,8 @@ tribes:new_trainingsite_type {
 			hotspot = { 47, 47 },
 		}
 	},
+
+	aihints = {},
 
 	working_positions = {
 		atlanteans_trainer = 1
@@ -130,7 +132,7 @@ tribes:new_trainingsite_type {
 				"train=soldier attack 3 4"
 			}
 		},
-	}
+	},
 
    soldier_capacity = 8,
    trainer_patience = 16

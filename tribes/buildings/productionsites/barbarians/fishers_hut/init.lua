@@ -25,7 +25,7 @@ tribes:new_productionsite_type {
 		note = _"The fisher’s hut needs water full of fish within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The fisher pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 18):bformat(18))
-   }
+   },
 
    animations = {
 		idle = {

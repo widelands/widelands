@@ -29,7 +29,7 @@ tribes:new_productionsite_type {
 			.. _"It cannot be upgraded."),
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If the food supply is steady, this mine can produce granite in %s on average.":format(ngettext("%d second", "%d seconds", 20):bformat(20))
-   }
+   },
 
    animations = {
 		idle = {
@@ -39,6 +39,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 42, 35 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),

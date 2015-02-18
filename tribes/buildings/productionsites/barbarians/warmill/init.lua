@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
 		note = _"The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an axfactory.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If all needed wares are delivered in time, this building can produce each type of ax in about %s on average.":bformat(ngettext("%d second", "%d seconds", 57):bformat(57)) .. " " ..	_"All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."
-   }
+   },
 
    animations = {
 		idle = {
@@ -43,6 +43,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 57, 76 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
@@ -54,6 +55,8 @@ tribes:new_productionsite_type {
 			fps = 10
 		},
 	},
+
+	aihints = {},
 
 	working_positions = {
 		barbarians_blacksmith = 1,

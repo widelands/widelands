@@ -30,12 +30,13 @@ tribes:new_productionsite_type {
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 60, 59 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"), -- TODO(GunChleoc): No animation yet.

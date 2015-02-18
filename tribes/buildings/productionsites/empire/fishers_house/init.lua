@@ -27,7 +27,7 @@ tribes:new_productionsite_type {
 		note = _"The fisher’s house needs water full of fish within the working radius.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {

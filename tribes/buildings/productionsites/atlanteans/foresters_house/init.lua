@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
 		note = _"The forester’s house needs free space within the working radius to plant the trees.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
-   }
+   },
 
    animations = {
 		idle = {
