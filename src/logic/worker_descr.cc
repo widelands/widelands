@@ -75,7 +75,6 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 	helptext_ = table.get_string("helptext");
 
 	// Read the walking animations
-	// NOCOM(GunChleoc): Double-check if this works
 	add_directional_animation(&walk_anims_, "walk");
 	add_directional_animation(&walkload_anims_, "walkload");
 

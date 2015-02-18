@@ -55,6 +55,7 @@ WareDescr::WareDescr(const LuaTable& table) :
 	for (const std::string& animation : anims->keys<std::string>()) {
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
+	assert(is_animation_known("idle"));
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {

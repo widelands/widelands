@@ -170,6 +170,8 @@ BuildingDescr::BuildingDescr
 	helptexts_.purpose_ = items_table->get_string("purpose");
 	helptexts_.note_ = items_table->get_string("note");
 	helptexts_.performance_ = items_table->get_string("performance");
+
+	assert(is_animation_known("idle"));
 }
 
 

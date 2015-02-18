@@ -112,7 +112,7 @@ include "tribes/wares/wool/init.lua"
 -- 'animationname' name of the animation, e.g. "walkload"
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-      table[animationname] = {
+      table[animationname .. "_" .. dir] = {
          pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
          hotspot = hotspot,
          fps = fps,

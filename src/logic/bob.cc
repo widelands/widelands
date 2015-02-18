@@ -62,6 +62,7 @@ BobDescr::BobDescr(const MapObjectType init_type, MapObjectDescr::OwnerType owne
 	for (const std::string& animation : anims->keys<std::string>()) {
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
+	assert(is_animation_known("idle"));
 }
 
 /**

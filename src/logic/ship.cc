@@ -53,7 +53,6 @@ ShipDescr::ShipDescr(const LuaTable& table)
 	BobDescr(MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table)
 {
 	// Read the sailing animations
-	// NOCOM(GunChleoc): Double-check if this works
 	add_directional_animation(&m_sail_anims, "sail");
 
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;

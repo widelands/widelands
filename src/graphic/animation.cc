@@ -42,7 +42,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
@@ -116,7 +115,6 @@ void get_point(const LuaTable& table, Point* p) {
 class NonPackedAnimation : public Animation {
 public:
 	virtual ~NonPackedAnimation() {}
-	NonPackedAnimation(const string& directory, Section & section);
 	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
@@ -154,58 +152,11 @@ private:
 	string sound_effect_;
 };
 
-NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section)
-		: frametime_(FRAME_LENGTH),
-		  hasplrclrs_(false) {
-	// If this animation has a sound effect associated, try to load it now.
-	const std::string sfx = section.get_string("sfx", "");
-	if (!sfx.empty()) {
-			sound_effect_ = string(directory) + "/" + sfx;
-			g_sound_handler.load_fx_if_needed(directory, sfx, sound_effect_);
-	}
-
-	int32_t const fps = section.get_int("fps");
-	if (fps < 0)
-		throw wexception("fps is %i, must be non-negative", fps);
-	if (fps > 0)
-		frametime_ = 1000 / fps;
-
-	hotspot_ = section.get_point("hotspot");
-
-	//  In the filename template, the last sequence of '?' characters (if any)
-	//  is replaced with a number, for example the template "idle_??" is
-	//  replaced with "idle_00". Then the code looks if there is a PNG with that
-	//  name, increments the number and continues . on until it can not find any
-	//  file. Then it is assumed that there are no more frames in the animation.
-	string picnametempl;
-	if (char const * const pics = section.get_string("pics")) {
-		picnametempl = directory + pics;
-	} else {
-		picnametempl = directory + section.get_name();
-	}
-	// Strip the .png extension if it has one.
-	boost::replace_all(picnametempl, ".png", "");
-
-	NumberGlob glob(picnametempl);
-	string filename_wo_ext;
-	while (glob.next(&filename_wo_ext)) {
-		const string filename = filename_wo_ext + ".png";
-		if (!g_fs->file_exists(filename))
-			break;
-		image_files_.push_back(filename);
-
-		const string pc_filename = filename_wo_ext + "_pc.png";
-		if (g_fs->file_exists(pc_filename)) {
-			hasplrclrs_ = true;
-			pc_mask_image_files_.push_back(pc_filename);
-		}
-	}
-}
-
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
 	// TODO(sirver): the LuaTable constructor has no support for player_colors right now.
+	// NOCOM(GunChleoc): We really need player color now.
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	if (table.has_key("sound_effect")) {
@@ -368,77 +319,6 @@ DirAnimations::DirAnimations
 	m_animations[5] = dir6;
 }
 
-
-/**
- * Load direction animations of the given name.
- *
- * If a section of the given name exists, it is expected to contain a 'dirpics'
- * key and assorted information of the old direction animation format.
- *
- * Otherwise, sections with the names 'name_??', with ?? replaced
- * by nw, ne, e, se, sw, and w are expected to exist and describe
- * the corresponding animations.
- *
- * @param optional No error if animations do not exist
- */
-void DirAnimations::parse
-	(Widelands::MapObjectDescr & b,
-	 const string & directory,
-	 Profile & prof,
-	 const string & name,
-	 bool optional,
-	 const string & default_dirpics)
-{
-	if (Section * section = prof.get_section(name)) {
-		// NOTE: deprecate this format eventually
-		char dirpictempl[256];
-		char * repl;
-
-		snprintf
-			(dirpictempl, sizeof(dirpictempl), "%s",
-			 section->get_string("dirpics", default_dirpics.c_str()));
-		repl = strstr(dirpictempl, "!!");
-		if (!repl)
-			throw wexception
-				("DirAnimations dirpics name templates %s does not contain !!",
-				 dirpictempl);
-		strncpy(repl, "%s", 2);
-
-		for (int32_t dir = 0; dir < 6; ++dir) {
-			static char const * const dirstrings[6] =
-				{"ne", "e", "se", "sw", "w", "nw"};
-
-			// Fake the section name here, so that the animation loading code is
-			// using the correct glob pattern to load the images from.
-			char pictempl[256];
-			snprintf(pictempl, sizeof(pictempl), dirpictempl, dirstrings[dir]);
-			section->set_name(pictempl);
-			m_animations[dir] = g_gr->animations().load(directory, *section);
-
-			char animname[256];
-			snprintf(animname, sizeof(animname), "%s_%s", name.c_str(), dirstrings[dir]);
-			b.add_animation(animname, m_animations[dir]);
-		}
-	} else {
-		for (int32_t dir = 0; dir < 6; ++dir) {
-			static char const * const dirstrings[6] =
-				{"ne", "e", "se", "sw", "w", "nw"};
-
-			char animname[256];
-			snprintf(animname, sizeof(animname), "%s_%s", name.c_str(), dirstrings[dir]);
-			Section * dirsection = prof.get_section(animname);
-			if (dirsection) {
-				m_animations[dir] = g_gr->animations().load(directory, *dirsection);
-				b.add_animation(animname, m_animations[dir]);
-			} else {
-				if (!optional)
-					throw wexception("DirAnimations: did not find section %s", animname);
-			}
-		}
-	}
-}
-
-
 /*
 ==============================================================================
 
@@ -446,11 +326,6 @@ AnimationManager IMPLEMENTATION
 
 ==============================================================================
 */
-
-uint32_t AnimationManager::load(const string& directory, Section & s) {
-	m_animations.push_back(new NonPackedAnimation(directory, s));
-	return m_animations.size();
-}
 
 uint32_t AnimationManager::load(const LuaTable& table) {
 	m_animations.push_back(new NonPackedAnimation(table));

@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "waiting_\\d+.png" },
+      pictures = { dirname .. "waiting_\\d+.png" }, --NOCOM(GunChleoc): rename to idle
       hotspot = { 16, 23 },
       fps=10,
    },

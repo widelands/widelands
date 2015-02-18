@@ -259,7 +259,13 @@ void MapObjectDescr::add_animation
 void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		anims->set_animation(dir, get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
+		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
+		try {
+			anims->set_animation(dir, get_animation(anim_name));
+		} catch (const MapObjectDescr::AnimationNonexistent&) {
+			throw GameDataError("MO: no directional animation '%s'",
+									  anim_name.c_str());
+		}
 	}
 }
 

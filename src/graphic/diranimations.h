@@ -28,22 +28,11 @@
 
 namespace Widelands {struct MapObjectDescr;}
 
-class Profile;
-class Section;
-
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
 	DirAnimations
 		(uint32_t dir1 = 0, uint32_t dir2 = 0, uint32_t dir3 = 0,
 		 uint32_t dir4 = 0, uint32_t dir5 = 0, uint32_t dir6 = 0);
-
-	void parse
-		(Widelands::MapObjectDescr &,
-		 const std::string           & directory,
-		 Profile                     &,
-		 const std::string & name,
-		 bool optional = false,
-		 const std::string & default_dirpics = std::string());
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];

@@ -236,8 +236,11 @@ uint32_t SoldierDescr::get_rand_anim
 		uint32_t i = game.logic_rand() % m_die_e_name.size();
 		run = m_die_e_name[i];
 	}
-
-	return get_animation(run.c_str());
+	if (!is_animation_known(run)) {
+		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(), name().c_str());
+		run = "idle";
+	}
+	return get_animation(run);
 }
 
 /**
