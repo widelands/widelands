@@ -110,8 +110,8 @@ include "tribes/wares/wool/init.lua"
 -- searched for in 'dirname'. All files should look like this
 -- 'basename'_(e|ne|se|sw|w|nw)_\d+.png.
 -- 'hotspot' is the hotspot for blitting.
--- 'animationname' name of the animation, e.g. "walkload"
--- 'fps' only use this the animation has more than 1 frame.
+-- 'animationname' is the name of the animation, e.g. "walkload"
+-- 'fps' are the frames per second. Only use this if the animation has more than 1 frame.
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
 	if (fps ~= nil) then
 		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
