@@ -315,8 +315,6 @@ struct EconomyObserver {
 	int32_t dismantle_grace_time_;
 
 	EconomyObserver(Widelands::Economy& e) : economy(e) {
-		// next_connection_try = 0;
-		// failed_connection_tries = 0;
 		dismantle_grace_time_ = std::numeric_limits<int32_t>::max();
 	}
 };
