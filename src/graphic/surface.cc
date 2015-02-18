@@ -39,7 +39,7 @@ BlitSource to_blit_source(const Image& image, const Rect& src_rect) {
 	// coordinates given it is a full texture (values between 0 and 1) and then
 	// adjust these for the texture coordinates in the parent texture.
 
-	const FloatRect rc(src_rect.x + 0.5f, src_rect.y + 0.5f, src_rect.w - 1.f, src_rect.h - 1.f);
+	const FloatRect rc(src_rect.x, src_rect.y, src_rect.w, src_rect.h);
 	const FloatRect in_texture = rect_to_gl_texture(image.width(), image.height(), rc);
 	const FloatRect& texture_coordinates = image.texture_coordinates();
 	const float left = texture_coordinates.x + in_texture.x * texture_coordinates.w;
@@ -98,12 +98,8 @@ void Surface::blit_monochrome(const Rect& dst_rect,
                               const Image& image,
                               const Rect& src_rect,
                               const RGBAColor& blend) {
-	FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	const BlitSource texture = to_blit_source(image, src_rect);
-	rect.x += 0.5 / width();
-	rect.y += 0.5 / height();
-	rect.w -= 1. / width();
-	rect.h -= 1. / height();
+	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit_monochrome(rect, texture, blend);
 }
 
@@ -114,12 +110,7 @@ void Surface::blit_blended(const Rect& dst_rect,
                            const RGBColor& blend) {
 	const BlitSource texture = to_blit_source(image, src_rect);
 	const BlitSource mask = to_blit_source(texture_mask, src_rect);
-	FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
-	// NOCOM(#sirver): hackish
-	rect.x += 0.5 / width();
-	rect.y += 0.5 / height();
-	rect.w -= 1. / width();
-	rect.h -= 1. / height();
+	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit_blended(rect, texture, mask, blend);
 }
 
@@ -129,11 +120,6 @@ void Surface::blit(const Rect& dst_rect,
                    float opacity,
                    BlendMode blend_mode) {
 	const BlitSource texture = to_blit_source(image, src_rect);
-	FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
-	rect.x += 0.5 / width();
-	rect.y += 0.5 / height();
-	rect.w -= 1. / width();
-	rect.h -= 1. / height();
-
+	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit(rect, texture, opacity, blend_mode);
 }
