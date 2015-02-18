@@ -2,19 +2,18 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "waiting_\\d+.png" }, --NOCOM(GunChleoc): rename to idle
+      pictures = path.list_directory(dirname, "waiting_\\d+.png"), --NOCOM(GunChleoc): rename to idle
       hotspot = { 16, 23 },
       fps=10,
    },
    work = {
-      pictures = { dirname .. "work_\\d+.png" },
+      pictures = path.list_directory(dirname, "work_\\d+.png"),
       sfx = "../../../sound/hammering/hammering",
       hotspot = { 6, 22 },
       fps=10,
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {8, 24}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {8, 24}, 10)
 
 
 tribes:new_worker_type {

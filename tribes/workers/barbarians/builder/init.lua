@@ -2,12 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "waiting_\\d+.png" },
+      pictures = path.list_directory(dirname, "waiting_\\d+.png"),
       hotspot = { 11, 22 },
       fps = 10
    },
    work = {
-      pictures = { dirname .. "work_\\d+.png" },
+      pictures = path.list_directory(dirname, "work_\\d+.png"),
       sfx = "../../../sound/hammering/hammering",
       hotspot = { 10, 22 },
       fps = 10

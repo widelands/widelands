@@ -2,21 +2,21 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "idle_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 4, 23 }
    },
    dig = {
-      pictures = { dirname .. "dig_\\d+.png" },
+      pictures = path.list_directory(dirname, "dig_\\d+.png"),
       hotspot = { 8, 24 },
       fps = 10
    },
    plant = {
-      pictures = { dirname .. "plant_\\d+.png" },
+      pictures = path.list_directory(dirname, "plant_\\d+.png"),
       hotspot = { 15, 23 },
       fps = 10
    },
    gather = {
-      pictures = { dirname .. "gather_\\d+.png" },
+      pictures = path.list_directory(dirname, "gather_\\d+.png"),
       hotspot = { 9, 22 },
       fps = 10
    }

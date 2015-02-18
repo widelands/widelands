@@ -36,11 +36,11 @@ tribes:new_warehouse_type {
 
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 60, 78 }
 		},
 		build = {
-			pictures = { dirname .. "build_\\d+.png" },
+			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 60, 78 }
 		}
 	},

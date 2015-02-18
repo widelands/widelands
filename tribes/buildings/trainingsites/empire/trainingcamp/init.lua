@@ -39,7 +39,7 @@ tribes:new_trainingsite_type {
 
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 82, 105 }
 		}
 	},

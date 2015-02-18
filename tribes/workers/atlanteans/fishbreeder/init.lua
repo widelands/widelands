@@ -2,18 +2,16 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "waiting_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 8, 22 }
    },
    freeing = {
-      pictures = { dirname .. "freeing_\\d+.png" },
+      pictures = path.list_directory(dirname, "freeing_\\d+.png"),
       hotspot = { 10, 19 },
       fps = 10
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {11, 23}, 20)
-add_worker_animations(animations, "walkload", dirname, "walk", {11, 23}, 20)
-
 
 tribes:new_worker_type {
    name = "atlanteans_fishbreeder",
@@ -31,11 +29,11 @@ tribes:new_worker_type {
 		breed = {
 			"findspace size:any radius:7 breed resource:fish",
 			"walk coords",
-			"animation freeing 3000 # Play a freeing animation",
+			"animation freeing 3000", -- Play a freeing animation
 			"breed fish 1",
 			"return"
 		}
-	}
+	},
 
 	-- TRANSLATORS: Helptext for a worker: Fish Breeder
    helptext = _"Breeds fish.",

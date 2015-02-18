@@ -26,7 +26,7 @@ tribes:new_warehouse_type {
 	-- with reed and coated with many different wares.
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 64, 106 }
 		},
 	},

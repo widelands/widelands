@@ -2,21 +2,21 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "idle_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 8, 23 },
    },
    dig = {
-      pictures = { dirname .. "dig_\\d+.png" },
+      pictures = path.list_directory(dirname, "dig_\\d+.png"),
       hotspot = { 5, 23 },
       fps = 5
    },
    crop = {
-      pictures = { dirname .. "plant_\\d+.png" },
+      pictures = path.list_directory(dirname, "plant_\\d+.png"),
       hotspot = { 17, 21 },
       fps = 10
    },
    water = {
-      pictures = { dirname .. "water_\\d+.png" },
+      pictures = path.list_directory(dirname, "water_\\d+.png"),
       hotspot = { 18, 25 },
       fps = 5
    }
@@ -41,8 +41,8 @@ tribes:new_worker_type {
 		plant = {
 			"findspace size:any radius:5 avoid:seed",
 			"walk coords",
-			"animation dig 2000 # Play a planting animation",
-			"animation crop 1000 # Play a planting animation",
+			"animation dig 2000", -- Play a planting animation
+			"animation crop 1000", -- Play a planting animation
 			"plant attrib:tree_sapling",
 			"animation water 2000",
 			"return"

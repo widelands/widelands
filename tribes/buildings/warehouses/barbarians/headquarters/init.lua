@@ -27,7 +27,7 @@ tribes:new_warehouse_type {
 	-- in the player colors may be present
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 90, 96 },
 			fps = 10
 		},

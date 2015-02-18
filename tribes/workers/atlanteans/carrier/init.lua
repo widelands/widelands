@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "waiting_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 13, 24 },
       fps=10,
    }
@@ -17,6 +17,8 @@ tribes:new_carrier_type {
    descname = _"Carrier",
    icon = dirname .. "menu.png",
    vision_range = 2,
+
+   buildcost = {},
 
 	-- TRANSLATORS: Helptext for a worker: Carrier
    helptext = _"Carries items along your roads.",

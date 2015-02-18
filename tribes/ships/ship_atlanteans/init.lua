@@ -2,12 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
 	idle = {
-		pictures = { dirname .. "idle_\\d+.png" },
+		pictures = path.list_directory(dirname, "idle_\\d+.png"),
 		hotspot = { 89, 86 },
 		fps = 10
 	},
 	sinking = {
-		pictures = { dirname .. "sinking_\\d+.png" },
+		pictures = path.list_directory(dirname, "sinking_\\d+.png"),
 		hotspot = { 89, 86 },
 		fps = 7
 	}

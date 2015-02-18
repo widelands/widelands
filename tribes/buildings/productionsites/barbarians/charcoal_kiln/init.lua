@@ -32,15 +32,15 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 50, 71 },
 		},
 		build = {
-			pictures = { dirname .. "build_\\d+.png" },
+			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 50, 71 },
 		},
 		working = {
-			pictures = { dirname .. "working_\\d+.png" },
+			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 50, 71 },
 		},
 	},

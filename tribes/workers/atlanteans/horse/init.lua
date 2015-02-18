@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "wildhorse_idle_sw_\\d+.png" },
+      pictures = path.list_directory(dirname, "wildhorse_idle_sw_\\d+.png"), -- NOCOM/GunChleoc): Rename
       hotspot = { 18, 23 },
       fps = 10
    }
@@ -19,6 +19,8 @@ tribes:new_carrier_type {
    genericname = _"horses",
    icon = dirname .. "menu.png",
    vision_range = 2,
+
+   buildcost = {},
 
 	default_target_quantity = 10,
 	ware_hotspot = {-2, 12},

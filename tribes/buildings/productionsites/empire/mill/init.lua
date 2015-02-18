@@ -33,11 +33,11 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = { dirname .. "idle_\\d+.png" },
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 41, 87 },
 		},
 		working = {
-			pictures = { dirname .. "working_\\d+.png" }, -- Let's see the mill turn!
+			pictures = path.list_directory(dirname, "working_\\d+.png"), -- Let's see the mill turn!
 			hotspot = { 41, 87 },
 			fps = 25
 		},

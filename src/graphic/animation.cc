@@ -169,11 +169,17 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	}
 
 	image_files_ = table.get_table("pictures")->array_entries<std::string>();
+	for (const std::string& file : image_files_) {
+		if (!g_fs->file_exists(file)) {
+			throw wexception("Animation picture file '%s' does not exist.", file.c_str());
+		}
+	}
 	if (image_files_.empty()) {
 		throw wexception("Animation without pictures.");
 	} else if (image_files_.size() == 1) {
 		if (table.has_key("fps")) {
-			throw wexception("Animation with one picture must not have 'fps'.");
+			throw wexception("Animation with one picture must not have 'fps'.\n"
+								  "The animation's picture is: %s", image_files_.front().c_str());
 		}
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");

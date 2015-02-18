@@ -2,57 +2,57 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "idle_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 16, 31 },
       fps = 5
    },
    atk_ok_e = {
-      pictures = { dirname .. "atk_ok_e_\\d+.png" },
+      pictures = path.list_directory(dirname, "atk_ok_e_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    atk_fail_e = {
-      pictures = { dirname .. "atk_fail_e\\d+.png" },
+      pictures = path.list_directory(dirname, "atk_fail_e\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    eva_ok_e = {
-      pictures = { dirname .. "eva_ok_e_\\d+.png" },
+      pictures = path.list_directory(dirname, "eva_ok_e_\\d+.png"),
       hotspot = { 18, 34 },
       fps = 20
    },
    eva_fail_e = {
-      pictures = { dirname .. "eva_fail_e_\\d+.png" },
+      pictures = path.list_directory(dirname, "eva_fail_e_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    atk_ok_w = {
-      pictures = { dirname .. "atk_ok_w_\\d+.png" },
+      pictures = path.list_directory(dirname, "atk_ok_w_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    atk_fail_w = {
-      pictures = { dirname .. "atk_fail_w_\\d+.png" },
+      pictures = path.list_directory(dirname, "atk_fail_w_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    eva_ok_w = {
-      pictures = { dirname .. "eva_ok_w_\\d+.png" },
+      pictures = path.list_directory(dirname, "eva_ok_w_\\d+.png"),
       hotspot = { 18, 34 },
       fps = 20
    },
    eva_fail_w = {
-      pictures = { dirname .. "eva_fail_w_\\d+.png" },
+      pictures = path.list_directory(dirname, "eva_fail_w_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
    die_w = {
-      pictures = { dirname .. "die_\\d+.png" },
+      pictures = path.list_directory(dirname, "die_\\d+.png"),
       hotspot = { 16, 31 },
       fps = 20
    },
    die_e = {
-      pictures = { dirname .. "die_\\d+.png" },
+      pictures = path.list_directory(dirname, "die_\\d+.png"),
       hotspot = { 16, 31 },
       fps = 20
    },

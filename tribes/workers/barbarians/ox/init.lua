@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "idle_\\d+.png" },
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 10, 25 },
       fps = 20
    }
@@ -20,6 +20,8 @@ tribes:new_carrier_type {
    genericname = _"oxen",
    icon = dirname .. "menu.png",
    vision_range = 2,
+
+   buildcost = {},
 
    default_target_quantity = 10,
    ware_hotspot = { -2, 13 },
