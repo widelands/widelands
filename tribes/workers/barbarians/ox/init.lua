@@ -16,6 +16,8 @@ tribes:new_carrier_type {
    name = "barbarians_ox",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Ox",
+   -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
+   genericname = _"oxen",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

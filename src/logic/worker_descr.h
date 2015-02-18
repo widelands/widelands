@@ -53,6 +53,10 @@ public:
 
 	virtual void load_graphics();
 
+	/// Returns the workers's generic mass name. Needed in the production programs.
+	/// If no mass name has been defined in the init.lua, returns the descname instead.
+	const std::string& genericname() const;
+
 	const Buildcost & buildcost() const {
 		return buildcost_;
 	}
@@ -123,6 +127,8 @@ protected:
 	WareIndex becomes_;
 	Programs  programs_;
 private:
+	// Used by production programs for economy conditions.
+	const std::string generic_name_;
 	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };

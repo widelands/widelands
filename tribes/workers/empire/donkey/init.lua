@@ -7,7 +7,7 @@ animations = {
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "donkey_walk", {14, 25}, 10)
+add_worker_animations(animations, "walk", dirname, "donkey_walk", {14, 25}, 10) -- NOCOM(GunChleoc): rename
 add_worker_animations(animations, "walkload", dirname, "donkey_walk", {14, 25}, 10)
 
 
@@ -15,6 +15,8 @@ tribes:new_carrier_type {
    name = "empire_donkey",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Donkey",
+   -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
+   genericname = _"donkeys",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

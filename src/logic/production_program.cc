@@ -282,19 +282,19 @@ bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description
 	(const Tribes& tribes) const
 {
-	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
-	// so for "Log"; we will also have "logs" (numberless plural)
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
-	std::string result =  (boost::format(_("the economy needs the ware ‘%s’"))
-			  % tribes.get_ware_descr(ware_type)->descname()).str();
+	/** TRANSLATORS: %s is a ware or worker's generic mass name, e.g. "suits of armor" for the ware "Armor". */
+	/** TRANSLATORS: Completed/Skipped/Did not start ... because the economy needs suits of armor */
+	std::string result =  (boost::format(_("the economy needs %s"))
+			  % tribes.get_ware_descr(ware_type)->genericname()).str();
 	return result;
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 	(const Tribes& tribes) const
 {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
-	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’"))
-			  % tribes.get_ware_descr(ware_type)->descname()).str();
+	/** TRANSLATORS: %s is a ware or worker's generic mass name, e.g. "suits of armor" for the ware "Armor". */
+	/** TRANSLATORS: Completed/Skipped/Did not start ... because the economy doesn’t need suits of armor */
+	std::string result = (boost::format(_("the economy doesn’t need %s"))
+			  % tribes.get_ware_descr(ware_type)->genericname()).str();
 	return result;
 }
 
@@ -306,18 +306,15 @@ bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description
 	(const Tribes& tribes) const
 {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
-	std::string result = (boost::format(_("the economy needs the worker ‘%s’"))
-			  % tribes.get_worker_descr(worker_type)->descname()).str();
+	std::string result = (boost::format(_("the economy needs %s"))
+			  % tribes.get_worker_descr(worker_type)->genericname()).str();
 	return result;
 }
 
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation
 	(const Tribes& tribes) const
 {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
-	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
-	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’"))
+	std::string result = (boost::format(_("the economy doesn’t need %s"))
 			  % tribes.get_worker_descr(worker_type)->descname()).str();
 	return result;
 }
@@ -542,21 +539,21 @@ void ProductionProgram::ActReturn::execute
 
 		std::string result_string = "";
 		if (m_result == Failed) {
-			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Did not start working because the economy needs suits of armor" */
 			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else if (m_result == Completed) {
-			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Completed working because the economy needs suits of armor" */
 			result_string =  (boost::format(_("Completed %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else {
-			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Skipped working because the economy needs suits of armor" */
 			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)

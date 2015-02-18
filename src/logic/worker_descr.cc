@@ -43,6 +43,7 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 	icon_              (nullptr),
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX),
+	generic_name_(table.has_key("genericname") ? table.get_string("genericname") : ""),
 	egbase_            (egbase)
 {
 	std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");
@@ -144,6 +145,10 @@ WorkerDescr::~WorkerDescr()
 void WorkerDescr::load_graphics()
 {
 	icon_ = g_gr->images().get(icon_fname_);
+}
+
+const std::string& WorkerDescr::genericname() const {
+	return generic_name_.empty() ? descname() : generic_name_;
 }
 
 

@@ -32,7 +32,7 @@ namespace Widelands {
 
 WareDescr::WareDescr(const LuaTable& table) :
 	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), table.get_string("descname")),
-	generic_name_(table.get_string("genericname")), // NOCOM(GunChleoc): Use this in the production programs
+	generic_name_(table.get_string("genericname")),
 	icon_fname_(table.get_string("icon")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
@@ -56,6 +56,10 @@ WareDescr::WareDescr(const LuaTable& table) :
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 	assert(is_animation_known("idle"));
+}
+
+const std::string& WareDescr::genericname() const {
+	return generic_name_;
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {
