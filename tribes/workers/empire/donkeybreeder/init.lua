@@ -4,7 +4,6 @@ animations = {
    idle = {
       pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 19, 23 },
-      fps = 20
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {28, 26}, 10)

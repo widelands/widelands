@@ -38,7 +38,7 @@ tribes:new_worker_type {
 			"createware log",
 			"return"
 		}
-	}
+	},
 
 	-- TRANSLATORS: Helptext for a worker: Woodcutter
    helptext = _"Fells trees.",

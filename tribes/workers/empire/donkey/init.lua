@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "donkey_idle_\\d+.png"), -- NOCOM(GunChleoc): rename
+      pictures = path.list_directory(dirname, "donkey_idle_e_\\d+.png"), -- NOCOM(GunChleoc): rename
       hotspot = { 14, 20 },
       fps = 10
    }
@@ -20,10 +20,8 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {},
-
    default_target_quantity = 10,
-   ware_hotspot =  { -2, 8 }
+   ware_hotspot =  { -2, 8 },
 
 	-- TRANSLATORS: Helptext for a worker: Donkey
    helptext = _"Donkeys help to carry items along busy roads. They are reared in a donkey farm.",

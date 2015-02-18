@@ -108,15 +108,26 @@ include "tribes/wares/wool/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
--- 'basename'_(e|ne|se|sw|w|nw)_\d+.png. 'hotspot' is the hotspot for blitting.
+-- 'basename'_(e|ne|se|sw|w|nw)_\d+.png.
+-- 'hotspot' is the hotspot for blitting.
 -- 'animationname' name of the animation, e.g. "walkload"
+-- 'fps' only use this the animation has more than 1 frame.
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
-   for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-      table[animationname .. "_" .. dir] = {
-         pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
-         hotspot = hotspot,
-         fps = fps,
-      }
+	if (fps ~= nil) then
+		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+			table[animationname .. "_" .. dir] = {
+				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				hotspot = hotspot,
+				fps = fps,
+			}
+		end
+	else
+		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+			table[animationname .. "_" .. dir] = {
+				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				hotspot = hotspot,
+			}
+		end
    end
 end
 
@@ -150,10 +161,10 @@ include "tribes/workers/atlanteans/weaver/init.lua"
 include "tribes/workers/atlanteans/woodcutter/init.lua"
 
 include "tribes/workers/barbarians/baker/init.lua"
-include "tribes/workers/barbarians/blacksmith/init.lua"
 include "tribes/workers/barbarians/blacksmith_master/init.lua"
-include "tribes/workers/barbarians/brewer/init.lua"
+include "tribes/workers/barbarians/blacksmith/init.lua"
 include "tribes/workers/barbarians/brewer_master/init.lua"
+include "tribes/workers/barbarians/brewer/init.lua"
 include "tribes/workers/barbarians/builder/init.lua"
 include "tribes/workers/barbarians/carrier/init.lua"
 include "tribes/workers/barbarians/cattlebreeder/init.lua"
@@ -168,9 +179,9 @@ include "tribes/workers/barbarians/hunter/init.lua"
 include "tribes/workers/barbarians/innkeeper/init.lua"
 include "tribes/workers/barbarians/lime_burner/init.lua"
 include "tribes/workers/barbarians/lumberjack/init.lua"
-include "tribes/workers/barbarians/miner/init.lua"
-include "tribes/workers/barbarians/miner_chief/init.lua"
 include "tribes/workers/barbarians/miner_master/init.lua"
+include "tribes/workers/barbarians/miner_chief/init.lua"
+include "tribes/workers/barbarians/miner/init.lua"
 include "tribes/workers/barbarians/ox/init.lua"
 include "tribes/workers/barbarians/ranger/init.lua"
 include "tribes/workers/barbarians/scout/init.lua"
@@ -199,8 +210,8 @@ include "tribes/workers/empire/hunter/init.lua"
 include "tribes/workers/empire/innkeeper/init.lua"
 include "tribes/workers/empire/lumberjack/init.lua"
 include "tribes/workers/empire/miller/init.lua"
-include "tribes/workers/empire/miner/init.lua"
 include "tribes/workers/empire/miner_master/init.lua"
+include "tribes/workers/empire/miner/init.lua"
 include "tribes/workers/empire/pigbreeder/init.lua"
 include "tribes/workers/empire/scout/init.lua"
 include "tribes/workers/empire/shepherd/init.lua"

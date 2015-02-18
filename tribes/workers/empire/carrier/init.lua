@@ -18,8 +18,6 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {},
-
 	-- TRANSLATORS: Helptext for a worker: Carrier
    helptext = _"Carries items along your roads.",
    animations = animations,

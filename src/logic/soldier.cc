@@ -249,7 +249,9 @@ uint32_t SoldierDescr::get_rand_anim
 Bob & SoldierDescr::create_object() const {return *new Soldier(*this);}
 
 void SoldierDescr::add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result) {
-	for (const std::string& anim_name : table->keys<std::string>()) {
+	// NOCOM(GunChleoc): Use array_entries for this kind of stuff.
+	for (const int key : table->keys<int>()) {
+		const std::string& anim_name = table->get_string(key);
 		if (!is_animation_known(anim_name)) {
 			throw GameDataError("Trying to add unknown battle animation: %s", anim_name.c_str());
 		}

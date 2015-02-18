@@ -46,30 +46,33 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 	generic_name_(table.has_key("genericname") ? table.get_string("genericname") : ""),
 	egbase_            (egbase)
 {
-	std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");
-	for (const std::string& key : items_table->keys<std::string>()) {
-		int32_t value;
-		try {
-			if (buildcost_.count(key)) {
-				throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
-			}
+	std::unique_ptr<LuaTable> items_table;
+	if (table.has_key("buildcost")) {
+		items_table = table.get_table("buildcost");
+		for (const std::string& key : items_table->keys<std::string>()) {
+			int32_t value;
+			try {
+				if (buildcost_.count(key)) {
+					throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
+				}
 
-			if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&
-				 egbase_.tribes().worker_index(key) == INVALID_INDEX) {
+				if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&
+					 egbase_.tribes().worker_index(key) == INVALID_INDEX) {
+					throw GameDataError
+						("\"%s\" has not been defined as a ware/worker type (wrong "
+						 "declaration order?)",
+						 key.c_str());
+				}
+				value = items_table->get_int(key);
+				uint8_t const count = value;
+				if (count != value)
+					throw GameDataError("count is out of range 1 .. 255");
+				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
+			} catch (const WException & e) {
 				throw GameDataError
-					("\"%s\" has not been defined as a ware/worker type (wrong "
-					 "declaration order?)",
-					 key.c_str());
+					("[buildcost] \"%s=%d\": %s",
+					 key.c_str(), value, e.what());
 			}
-			value = items_table->get_int(key);
-			uint8_t const count = value;
-			if (count != value)
-				throw GameDataError("count is out of range 1 .. 255");
-			buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
-		} catch (const WException & e) {
-			throw GameDataError
-				("[buildcost] \"%s=%d\": %s",
-				 key.c_str(), value, e.what());
 		}
 	}
 
@@ -77,7 +80,13 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");
-	add_directional_animation(&walkload_anims_, "walkload");
+
+	// Many workers don't carry wares, so they have no walkload animation.
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	anims->do_not_warn_about_unaccessed_keys();
+	if (anims->has_key("walkload")) {
+		add_directional_animation(&walkload_anims_, "walkload");
+	}
 
 	// Read the becomes and experience
 	if (table.has_key("becomes")) {
@@ -117,7 +126,7 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 
 	// For carriers
 	if (table.has_key("default_target_quantity")) {
-		default_target_quantity_ = items_table->get_int("default_target_quantity");
+		default_target_quantity_ = table.get_int("default_target_quantity");
 	}
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");

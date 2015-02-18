@@ -20,8 +20,6 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {},
-
 	default_target_quantity = 10,
 	ware_hotspot = {-2, 12},
 

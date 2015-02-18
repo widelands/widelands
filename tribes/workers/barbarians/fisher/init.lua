@@ -4,7 +4,6 @@ animations = {
    idle = {
       pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 9, 39 },
-      fps = 10
    },
    fishing = {
       pictures = path.list_directory(dirname, "fishing_\\d+.png"),

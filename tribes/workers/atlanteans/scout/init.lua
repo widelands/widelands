@@ -4,12 +4,9 @@ animations = {
    idle = {
       pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 4, 22 },
-      fps = 10
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {9, 25}, 10)
-
 
 tribes:new_worker_type {
    name = "atlanteans_scout",

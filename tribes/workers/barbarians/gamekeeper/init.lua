@@ -17,7 +17,7 @@ animations = {
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {15, 22}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {15, 22}, 10)
+add_worker_animations(animations, "walkload", dirname, "walkload", {15, 22})
 
 
 tribes:new_worker_type {

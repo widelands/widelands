@@ -12,7 +12,7 @@ animations = {
       fps = 10
    },
    atk_fail_e = {
-      pictures = path.list_directory(dirname, "atk_fail_e\\d+.png"),
+      pictures = path.list_directory(dirname, "atk_fail_e_\\d+.png"),
       hotspot = { 30, 36 },
       fps = 10
    },
@@ -127,17 +127,17 @@ tribes:new_soldier_type {
 	},
 	evade_success_e = {
 		"eva_ok_e",
-	}
+	},
 	evade_failure_w = {
 		"eva_fail_w",
-	}
+	},
 	evade_failure_e = {
 		"eva_fail_e",
-	}
+	},
 	die_w = {
 		"die_w",
-	}
+	},
 	die_e = {
 		"die_e",
-	}
+	},
 }

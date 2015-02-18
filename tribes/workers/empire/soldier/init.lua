@@ -128,17 +128,17 @@ tribes:new_soldier_type {
 	},
 	evade_success_e = {
 		"eva_ok_e",
-	}
+	},
 	evade_failure_w = {
 		"eva_fail_w",
-	}
+	},
 	evade_failure_e = {
 		"eva_fail_e",
-	}
+	},
 	die_w = {
 		"die_w",
-	}
+	},
 	die_e = {
 		"die_e",
-	}
+	},
 }
