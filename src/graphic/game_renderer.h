@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "base/point.h"
+#include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {
 	class Player;
@@ -76,6 +77,10 @@ private:
 	                  int maxfx,
 	                  int minfy,
 	                  int maxfy);
+
+	// This is owned and handled by us, but handed to the RenderQueue, so we
+	// basically promise that this stays valid for one frame.
+	FieldsToDraw fields_to_draw_;
 
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };

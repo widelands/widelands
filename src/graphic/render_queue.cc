@@ -49,7 +49,7 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::Program::HIGHEST_PROGRAM_ID < 8,
+static_assert(RenderQueue::Program::HIGHEST_PROGRAM_ID <= 8,
               "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
@@ -131,7 +131,7 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 }  // namespace
 
 RenderQueue::RenderQueue()
-   : next_z(1),
+   : next_z_(1),
      terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
      road_program_(new RoadProgram()) {
@@ -165,8 +165,10 @@ void RenderQueue::enqueue(const Item& given_item) {
 			break;
 
 		case Program::RECT:
-			/* fallthrough intended */
-		case Program::TERRAIN:
+		case Program::TERRAIN_BASE:
+		case Program::TERRAIN_DITHER:
+		case Program::TERRAIN_ROAD:
+			/* all fallthroughs intended */
 			break;
 
 		default:
@@ -176,24 +178,20 @@ void RenderQueue::enqueue(const Item& given_item) {
 	if (given_item.blend_mode == BlendMode::Copy) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
-		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z, extra_value);
+		item->z_value = to_opengl_z(next_z_);
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z_, extra_value);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
-		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z, extra_value);
+		item->z_value = to_opengl_z(next_z_);
+		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z_, extra_value);
 	}
-
-	// Add more than 1 since some items have multiple programs that all need a
-	// separate z buffer.
-	// NOCOM(#sirver): fix this.
-	next_z += 3;
+	++next_z_;
 }
 
 // NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw(const int screen_width, const int screen_height) {
-	if (next_z >= kMaximumZValue) {
+	if (next_z_ >= kMaximumZValue) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
 
@@ -217,7 +215,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 
 	glDepthMask(GL_TRUE);
 
-	next_z = 1;
+	next_z_ = 1;
 }
 
 
@@ -251,7 +249,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			   batch_up<FillRectProgram::Arguments>(Program::RECT, items, &i));
 			break;
 
-		case Program::TERRAIN:
+		case Program::TERRAIN_BASE:
+			// NOCOM(#sirver): move scissor into programs
 			glScissor(item.destination_rect.x,
 			          item.destination_rect.y,
 			          item.destination_rect.w,
@@ -262,18 +261,37 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
 										  item.z_value);
-			// NOCOM(#sirver): not pretty. Instead put the other two in the blending buckte.
-			glEnable(GL_BLEND);
+			glDisable(GL_SCISSOR_TEST);
+			++i;
+			break;
+
+		case Program::TERRAIN_DITHER:
+			// NOCOM(#sirver): move scissor into programs
+			glScissor(item.destination_rect.x,
+			          item.destination_rect.y,
+			          item.destination_rect.w,
+			          item.destination_rect.h);
+			glEnable(GL_SCISSOR_TEST);
 
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
 			                      item.z_value + kOpenGlZDelta);
+			glDisable(GL_SCISSOR_TEST);
+			++i;
+			break;
+
+		case Program::TERRAIN_ROAD:
+			// NOCOM(#sirver): move scissor into programs
+			glScissor(item.destination_rect.x,
+			          item.destination_rect.y,
+			          item.destination_rect.w,
+			          item.destination_rect.h);
+			glEnable(GL_SCISSOR_TEST);
+
 			road_program_->draw(*item.terrain_arguments.screen,
 			                    *item.terrain_arguments.fields_to_draw,
 			                    item.z_value + 2 * kOpenGlZDelta);
-			delete item.terrain_arguments.fields_to_draw;
-			glDisable(GL_BLEND);
 			glDisable(GL_SCISSOR_TEST);
 			++i;
 			break;

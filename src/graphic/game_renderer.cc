@@ -166,11 +166,11 @@ void GameRenderer::draw(RenderTarget& dst,
 	Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
-	std::unique_ptr<FieldsToDraw> fields_to_draw(new FieldsToDraw(minfx, maxfx, minfy, maxfy));
+	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
-			   *fields_to_draw->mutable_field(fields_to_draw->calculate_index(fx, fy));
+			   *fields_to_draw_.mutable_field(fields_to_draw_.calculate_index(fx, fy));
 
 			f.fx = fx;
 			f.fy = fy;
@@ -207,7 +207,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 	// Enqueue the drawing of the terrain.
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::TERRAIN;
+	i.program_id = RenderQueue::Program::TERRAIN_BASE;
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect =
 	   FloatRect(bounding_rect.x,
@@ -217,7 +217,16 @@ void GameRenderer::draw(RenderTarget& dst,
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.screen = surface;
 	i.terrain_arguments.terrains = &egbase.world().terrains();
-	i.terrain_arguments.fields_to_draw = fields_to_draw.release();
+	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the dither layer.
+	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
+	i.blend_mode = BlendMode::UseAlpha;
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the road layer.
+	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
 	RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);

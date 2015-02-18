@@ -114,10 +114,6 @@ void ImageCache::compactify() {
 	// code works also for small max texture sizes.
 	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
 
-	// NOCOM(#sirver): remove
-	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write("texture_atlas.png"));
-	   save_to_png(texture_atlases_.back().get(), sw.get(), ColorType::RGBA);
-
 	assert(new_textures.size() == hashes.size());
 	std::set<int> gl_textures;
 	for (size_t i = 0; i < hashes.size(); ++i) {

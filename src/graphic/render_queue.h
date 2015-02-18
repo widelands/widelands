@@ -43,7 +43,9 @@ class TerrainProgram;
 class RenderQueue {
 public:
 	enum Program {
-		TERRAIN,
+		TERRAIN_BASE,
+		TERRAIN_DITHER,
+		TERRAIN_ROAD,
 		BLIT,
 		BLIT_MONOCHROME,
 		BLIT_BLENDED,
@@ -51,8 +53,6 @@ public:
 		LINE,
 		HIGHEST_PROGRAM_ID,
 	};
-
-	// NOCOM(#sirver): maybe BlendMode::REMOVE?
 
 	struct VanillaBlitArguments {
 		BlitSource texture;
@@ -83,11 +83,8 @@ public:
 		TerrainArguments() {}
 
 		int gametime;
-		// NOCOM(#sirver): passing the Surface feels strange.
 		Surface* screen;
-		// NOCOM(#sirver): all of this does not belong here.
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
-		// NOCOM(#sirver): not owning fields_to_draw is dangerous due to multithreading in future.
 		FieldsToDraw* fields_to_draw;
 	};
 
@@ -128,7 +125,7 @@ private:
 
 	// The z value that should be used for the next draw, so that it is on top
 	// of everything before.
-	int next_z;
+	int next_z_;
 
 	std::unique_ptr<TerrainProgram> terrain_program_;
 	std::unique_ptr<DitherProgram> dither_program_;
