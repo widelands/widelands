@@ -41,7 +41,7 @@ struct TribeBasicInfo {
 		std::string descname;
 	};
 
-	TribeBasicInfo(const std::string& name, std::unique_ptr<LuaTable> table);
+	TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
 	/// Internal name to reference this tribe
 	std::string name;

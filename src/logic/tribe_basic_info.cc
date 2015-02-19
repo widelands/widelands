@@ -19,15 +19,17 @@
 
 #include "logic/tribe_basic_info.h"
 
+#include "base/i18n.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 
-TribeBasicInfo::TribeBasicInfo(const std::string& init_name, std::unique_ptr<LuaTable> table) {
-	name = init_name;
+TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 	try {
-		author = table->get_string("author");
-		descname = table->get_string("descname");
-		helptext = table->get_string("helptext");
+		i18n::Textdomain td("tribes");
+		name = table->get_string("name");
+		author = _(table->get_string("author"));
+		descname = _(table->get_string("descname"));
+		helptext = _(table->get_string("helptext"));
 		icon = table->get_string("icon");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;

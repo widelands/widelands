@@ -4,7 +4,8 @@ set_textdomain("tribes")
 
 return {
 	-- Basic information for the Barbarian tribe
-   barbarians = {
+   {
+		name = "barbarians",
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Barbarians",
@@ -18,7 +19,8 @@ return {
    },
 
 	-- Basic information for the Empire tribe
-   empire = {
+   {
+		name = "empire",
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Empire",
@@ -32,7 +34,8 @@ return {
 	},
 
 	-- Basic information for the Atlantean tribe
-	atlanteans = {
+	{
+		name = "atlanteans",
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Atlanteans",

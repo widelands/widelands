@@ -56,7 +56,7 @@ TribeDescr::TribeDescr
 
 	try {
 		// Grab the localization textdomain.
-		i18n::Textdomain td(std::string("tribes"));
+		i18n::Textdomain td("tribes");
 
 		m_initializations = info.initializations;
 
