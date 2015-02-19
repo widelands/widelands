@@ -43,7 +43,8 @@ tribes:new_trainingsite_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 110, 72 }
+			hotspot = { 110, 72 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
@@ -58,7 +59,7 @@ tribes:new_trainingsite_type {
 
 	aihints = {
 		prohibited_till = 2700
-	}
+	},
 
 	working_positions = {
 		barbarians_trainer = 1
@@ -83,7 +84,6 @@ tribes:new_trainingsite_type {
 			{"bread_barbarians"}
 		}
 	},
-
 
 	programs = {
 		sleep = {

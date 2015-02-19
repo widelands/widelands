@@ -43,7 +43,8 @@ tribes:new_trainingsite_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 82, 83 }
+			hotspot = { 82, 83 },
+			fps = 1
 		}
 	},
 

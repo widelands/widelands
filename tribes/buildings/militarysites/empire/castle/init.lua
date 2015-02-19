@@ -7,6 +7,7 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
    buildable = false,
+   enhanced_building = true,
 
    enhancement_cost = {
 		planks = 5,

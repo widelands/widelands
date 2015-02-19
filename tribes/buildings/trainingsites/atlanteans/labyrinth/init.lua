@@ -46,7 +46,7 @@ tribes:new_trainingsite_type {
 
 	aihints = {
 		prohibited_till = 2700
-	}
+	},
 
 	working_positions = {
 		atlanteans_trainer = 1
@@ -70,7 +70,7 @@ tribes:new_trainingsite_type {
 		food = {
 			{"smoked_fish", "smoked_meat"},
 			{"bread_atlanteans"}
-		}
+		},
 		weapons = {
 			"shield_steel",
 			"shield_advanced"
@@ -82,7 +82,7 @@ tribes:new_trainingsite_type {
 		food = {
 			{"smoked_fish", "smoked_meat"},
 			{"bread_atlanteans"}
-		}
+		},
 		weapons = {
 			"tabard_golden"
 		}

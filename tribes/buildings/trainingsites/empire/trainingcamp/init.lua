@@ -46,7 +46,7 @@ tribes:new_trainingsite_type {
 
 	aihints = {
 		prohibited_till = 2700
-	}
+	},
 
 	working_positions = {
 		empire_trainer = 1
@@ -111,7 +111,7 @@ tribes:new_trainingsite_type {
 			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier attack from level 0 to level 1",
 			actions = {
-				"check_soldier=soldier attack 0" -- Fails when aren't any soldier of level 0 attack
+				"check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
 				"sleep=30000",
 				"check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
 				"consume=spear bread_empire fish,meat",

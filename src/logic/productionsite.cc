@@ -155,6 +155,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
+			log("NOCOM(GunChleoc): found program %s\n", program_name.c_str());
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -162,9 +163,11 @@ ProductionSiteDescr::ProductionSiteDescr
 				if (m_programs.count(program_name)) {
 					throw wexception("this program has already been declared");
 				}
+				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
+				log("NOCOM(GunChleoc): descname %s\n", program_table->get_string("descname").c_str());
 				m_programs[program_name] =
-						new ProductionProgram(program_name, items_table->get_string("descname"),
-													 items_table->get_table("actions"),
+						new ProductionProgram(program_name, program_table->get_string("descname"),
+													 program_table->get_table("actions"),
 													 egbase, this);
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());

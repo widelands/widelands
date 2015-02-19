@@ -42,7 +42,8 @@ tribes:new_trainingsite_type {
 		},
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 110, 77 }
+			hotspot = { 110, 77 },
+			fps = 1
 		},
 		unoccupied = {
 			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
@@ -52,7 +53,7 @@ tribes:new_trainingsite_type {
 
 	aihints = {
 		prohibited_till = 2700
-	}
+	},
 
 	working_positions = {
 		barbarians_trainer = 1
@@ -92,7 +93,7 @@ tribes:new_trainingsite_type {
 	},
 	["soldier hp"] = {
 		min_level = 0,
-		max_level = 2.
+		max_level = 2,
 		food = {
 			{"fish", "meat"},
 			{"bread_barbarians"}
@@ -175,7 +176,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 0",
 				"sleep=30000",
 				"check_soldier=soldier hp 0",
-				"consume=helmet fish,meat,bread_barbarians",
+				"consume=helmet bread_barbarians,fish,meat",
 				"train=soldier hp 0 1"
 			}
 		},
