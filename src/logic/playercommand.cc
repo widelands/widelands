@@ -910,14 +910,7 @@ CmdShipExploreIsland::CmdShipExploreIsland (StreamRead& des) :
 	PlayerCommand (0, des.unsigned_8())
 {
 	serial = des.unsigned_32();
-	//NOCOM - coding question
-	//can I cast uint8_t to ScoutingDirection directly???
-	uint8_t unsign = des.unsigned_8();
-	if (static_cast<uint8_t>(ScoutingDirection::kClockwise) == unsign) {
-		scouting_direction = ScoutingDirection::kClockwise;
-	} else {
-		scouting_direction = ScoutingDirection::kCounterClockwise;
-	}
+	scouting_direction = static_cast<ScoutingDirection>(des.unsigned_8());
 }
 
 void CmdShipExploreIsland::execute (Game & game)
