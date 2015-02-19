@@ -6,12 +6,12 @@ tribes:new_tribe {
    animations = {
 		-- No idea for the frontier. Maybe some javelins?
 		frontier = {
-			pictures = { dirname .. "images/empire/frontier_\\d+.png" },
+			pictures = path.list_directory(dirname .. "images/empire/", "frontier_\\d+.png"),
 			hotspot = { 1, 19 },
 		},
 		-- Not just a plain color, maybe a cross or some stripes
 		flag = {
-			pictures = { dirname .. "images/empire/flag_\\d+.png" },
+			pictures = path.list_directory(dirname .. "images/empire/", "flag_\\d+.png"),
 			hotspot = { 14, 38 },
 			fps = 10
 		}
@@ -52,7 +52,7 @@ tribes:new_tribe {
 			"iron",
 			"gold_ore",
 			"gold"
-		}
+		},
 		{
 			-- Tools
 			"pick",
@@ -67,7 +67,7 @@ tribes:new_tribe {
 			"basket",
 			"kitchen_tools",
 			"fire_tongs"
-		}
+		},
 		{
 			-- Weapons & Armor
 			"spear_wooden",

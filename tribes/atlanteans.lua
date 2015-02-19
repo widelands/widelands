@@ -6,12 +6,12 @@ tribes:new_tribe {
    animations = {
 		-- Some blue fires would be fine, but just an idea
 		frontier = {
-			pictures = { dirname .. "images/atlanteans/frontier_\\d+.png" },
+			pictures = path.list_directory(dirname .. "images/atlanteans/", "frontier_\\d+.png"),
 			hotspot = { 3, 12 },
 		},
 		flag = {
 			-- Not just a plain color, maybe a cross or some stripes
-			pictures = { dirname .. "images/atlanteans/flag_\\d+.png" },
+			pictures = path.list_directory(dirname .. "images/atlanteans/", "flag_\\d+.png"),
 			hotspot = { 15, 35 },
 			fps = 10
 		}
@@ -121,11 +121,11 @@ tribes:new_tribe {
 			"atlanteans_miner",
 			"atlanteans_charcoal_burner",
 			"atlanteans_smelter"
-		}
+		},
 		{
 			-- Tools
 			"atlanteans_toolsmith"
-		}
+		},
 		{
 			-- Military
 			"atlanteans_soldier",
