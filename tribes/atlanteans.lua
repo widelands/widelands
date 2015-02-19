@@ -51,7 +51,7 @@ tribes:new_tribe {
 			"iron",
 			"gold_ore",
 			"gold"
-		}
+		},
 		{
 			-- Tools
 			"pick",
@@ -66,7 +66,7 @@ tribes:new_tribe {
 			"scythe",
 			"bread_paddle",
 			"fire_tongs"
-		}
+		},
 		{
 			-- Military
 			"trident_light",

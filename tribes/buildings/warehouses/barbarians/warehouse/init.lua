@@ -47,4 +47,6 @@ tribes:new_warehouse_type {
 	},
 
 	aihints = {},
+
+	heal_per_second = 170,
 }

@@ -48,7 +48,7 @@ tribes:new_tribe {
 			 "iron",
 			 "gold_ore",
 			 "gold"
-		}
+		},
 		{
 			-- Tools
 			 "pick",
@@ -61,7 +61,7 @@ tribes:new_tribe {
 			 "bread_paddle",
 			 "kitchen_tools",
 			 "fire_tongs"
-		}
+		},
 		{
 			-- Weapons & Armor
 			 "ax",

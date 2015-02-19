@@ -58,7 +58,6 @@ ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(_type, table, egbase)
 {
-				log("NOCOM(gunchleoc): Adding productionsite %s\n", name().c_str());
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {

@@ -26,7 +26,6 @@ tribes:new_warehouse_type {
 		idle = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 95, 109 },
-			fps = 10
 		},
 	},
 
