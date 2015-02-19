@@ -41,6 +41,7 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 44, 61 },
+			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
@@ -95,6 +96,7 @@ tribes:new_productionsite_type {
 				"animate=working 30000",
 				"playFX=../../../sound/smiths/sharpening 120",
 				"produce=spear_wooden"
+			}
 		},
 		produce_spear = {
 			-- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
@@ -107,6 +109,7 @@ tribes:new_productionsite_type {
 				"animate=working 45000",
 				"playFX=../../../sound/smiths/sharpening 120",
 				"produce=spear"
+			}
 		},
 		produce_spear_advanced = {
 			-- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
@@ -119,6 +122,7 @@ tribes:new_productionsite_type {
 				"animate=working 45000",
 				"playFX=../../../sound/smiths/sharpening 120",
 				"produce=spear_advanced"
+			}
 		},
 		produce_spear_heavy = {
 			-- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
@@ -131,6 +135,7 @@ tribes:new_productionsite_type {
 				"animate=working 45000",
 				"playFX=../../../sound/smiths/sharpening 120",
 				"produce=spear_heavy"
+			}
 		},
 		produce_spear_war = {
 			-- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
@@ -143,6 +148,7 @@ tribes:new_productionsite_type {
 				"animate=working 45000",
 				"playFX=../../../sound/smiths/sharpening 120",
 				"produce=spear_war"
+			}
 		},
 	},
 }

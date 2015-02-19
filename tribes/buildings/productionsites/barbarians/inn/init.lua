@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    size = "medium",
    buildable = false,
    enhanced_building = true,
-   enhancement = "barbarians_big_inn"
+   enhancement = "barbarians_big_inn",
 
    enhancement_cost = {
 		log = 2,
@@ -46,6 +46,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 57, 88 },
+			fps = 1
 		},
 	},
 
@@ -82,7 +83,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"return=skipped unless economy needs ration",
 				"sleep=14000",
-				"consume=fish,bread_barbarians,meat",
+				"consume=bread_barbarians,fish,meat",
 				"animate=working 19000",
 				"produce=ration"
 			}

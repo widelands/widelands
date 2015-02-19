@@ -36,7 +36,6 @@ tribes:new_productionsite_type {
 		idle = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"),
 			hotspot = { 60, 59 },
-			fps = 1
 		},
 		working = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"), -- TODO(GunChleoc): No animation yet.

@@ -41,6 +41,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 19, 33 },
+			fps = 1
 		},
 	},
 
@@ -62,31 +63,14 @@ tribes:new_productionsite_type {
 			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
 			descname = _"working",
 			actions = {
-				"call=plant_wheat",
-				"call=harvest_wheat",
-				"playFX=../../../sound/farm/farm_animal 192",
-				"return=skipped"
-			}
-		},
-		plant_wheat = {
-			-- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-			descname = _"planting wheat",
-			actions = {
-				"sleep=14000",
-				"worker=plant"
-			}
-		},
-		harvest_wheat = {
-			-- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-			descname = _"harvesting wheat",
-			actions = {
 				"sleep=20000",
 				"animate=working 20000",
 				"mine=water 1 100 65 2",
-				"produce=water"
+				"produce=water",
 			}
 		},
 	},
+
 	out_of_resource_notification = {
 		title = _"Out of Water",
 		message = _"The carrier working at this well can’t find any water in his working radius.",

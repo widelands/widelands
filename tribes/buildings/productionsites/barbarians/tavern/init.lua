@@ -6,7 +6,7 @@ tribes:new_productionsite_type {
    descname = _"Tavern",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_inn"
+   enhancement = "barbarians_inn",
 
    buildcost = {
 		log = 3,
@@ -46,6 +46,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 57, 88 },
+			fps = 1
 		},
 	},
 
@@ -73,9 +74,10 @@ tribes:new_productionsite_type {
 			actions = {
 				"sleep=14000",
 				"return=skipped unless economy needs ration",
-				"consume=fish,bread_barbarians,meat",
+				"consume=bread_barbarians,fish,meat",
 				"animate=working 19000",
 				"produce=ration"
+			},
 		},
 	},
 }

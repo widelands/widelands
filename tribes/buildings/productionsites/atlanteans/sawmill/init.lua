@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
 			-- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
 			descname = _"sawing logs",
 			actions = {
-				"sleep=16500" -- Much faster than barbarians' wood hardener
+				"sleep=16500", -- Much faster than barbarians' wood hardener
 				"return=skipped unless economy needs planks",
 				"consume=log:2",
 				"playFX=../../../sound/sawmill/sawmill 192",

@@ -36,6 +36,8 @@ tribes:new_productionsite_type {
 		},
 	},
 
+	aihints = {},
+
 	working_positions = {
 		empire_hunter = 1
 	},

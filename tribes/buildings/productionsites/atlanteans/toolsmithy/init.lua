@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
 	},
    outputs = {
 		"bread_paddle",
-		"bucket",
+		"buckets",
 		"fire_tongs",
 		"fishing_net",
 		"hammer",
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
 			descname = _"working",
 			actions = {
 				"call=produce_bread_paddle",
-				"call=produce_bucket",
+				"call=produce_buckets",
 				"call=produce_fire_tongs",
 				"call=produce_fishing_net",
 				"call=produce_hammer",
@@ -102,15 +102,15 @@ tribes:new_productionsite_type {
 				"produce=bread_paddle"
 			}
 		},
-		produce_bucket = {
-			-- TRANSLATORS: Completed/Skipped/Did not start making a bucket because ...
-			descname = _"making a bucket",
+		produce_buckets = {
+			-- TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
+			descname = _"making a pair of buckets",
 			actions = {
-				"return=skipped unless economy needs bucket",
+				"return=skipped unless economy needs buckets",
 				"sleep=32000",
 				"consume=iron log",
 				"animate=working 35000",
-				"produce=bucket"
+				"produce=buckets"
 			}
 		},
 		produce_fire_tongs = {

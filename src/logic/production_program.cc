@@ -1027,8 +1027,8 @@ ProductionProgram::ActProduce::ActProduce
 					(item.first = tribes.safe_ware_index(ware)))
 				throw GameDataError
 					(
-					 "%s is not declared as an output (\"output=%s\" was not "
-					 "found in the [global] section)",
+					 "%s is not declared as an output (\"%s\" was not "
+						"found in the \"outputs\" table)",
 					 ware, ware);
 		}
 	} catch (const WException & e) {
@@ -1123,8 +1123,8 @@ ProductionProgram::ActRecruit::ActRecruit
 					(item.first = tribes.safe_worker_index(worker)))
 				throw GameDataError
 					(
-					 "%s is not declared as an output (\"output=%s\" was not "
-					 "found in the [global] section)",
+					 "%s is not declared as an output (\"%s\" was not "
+					 "found in the \"outputs\" table)",
 					 worker, worker);
 		}
 	} catch (const WException & e) {

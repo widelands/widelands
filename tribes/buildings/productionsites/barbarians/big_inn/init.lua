@@ -44,6 +44,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 57, 88 },
+			fps = 1
 		},
 	},
 
@@ -85,7 +86,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"return=skipped unless economy needs ration",
 				"sleep=33000",
-				"consume=fish,bread_barbarians,meat",
+				"consume=bread_barbarians,fish,meat",
 				"produce=ration"
 			}
 		},

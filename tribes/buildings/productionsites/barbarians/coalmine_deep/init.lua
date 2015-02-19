@@ -28,7 +28,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Digs coal out of the ground in mountain terrain.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("2/3")),
+		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("2/3"),
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"If the food supply is steady, this mine can produce coal in %s on average.":bformat(ngettext("%d second", "%d seconds", 19.5):bformat(19.5))
    },
@@ -46,6 +46,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 21, 37 },
+			fps = 1
 		},
 		empty = {
 			pictures = path.list_directory(dirname, "empty_\\d+.png"),

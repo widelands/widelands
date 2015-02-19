@@ -24,11 +24,11 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Carves granite out of the rock in mountain terrain.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite.":bformat("5%") .. "<br>"
+		note = (_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite.":bformat("5%") .. "<br>"
 			-- TRANSLATORS: 'It' is a mine
 			.. _"It cannot be upgraded."),
 		-- TRANSLATORS: Performance helptext for a building
-		performance = _"If the food supply is steady, this mine can produce granite in %s on average.":format(ngettext("%d second", "%d seconds", 20):bformat(20))
+		performance = _"If the food supply is steady, this mine can produce granite in %s on average.":bformat(ngettext("%d second", "%d seconds", 20):bformat(20))
    },
 
    animations = {
@@ -44,6 +44,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 42, 35 },
+			fps = 1
 		},
 		empty = {
 			pictures = path.list_directory(dirname, "empty_\\d+.png"),

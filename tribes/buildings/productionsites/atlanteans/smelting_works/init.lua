@@ -81,7 +81,7 @@ tribes:new_productionsite_type {
 				"produce=iron"
 			}
 		},
-		smelt_iron = {
+		smelt_gold = {
 			-- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 			descname = _"smelting gold",
 			actions = {

@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
 		beer = 6
 	},
    outputs = {
-		"iron"
+		"iron_ore"
    },
 
 	programs = {

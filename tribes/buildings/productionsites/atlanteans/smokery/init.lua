@@ -84,7 +84,7 @@ tribes:new_productionsite_type {
 				"produce=smoked_meat:2"
 			}
 		},
-		smoke_meat = {
+		smoke_fish = {
 			-- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 			descname = _"smoking fish",
 			actions = {

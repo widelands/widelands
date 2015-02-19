@@ -45,6 +45,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 60, 37 },
+			fps = 1
 		},
 		empty = {
 			pictures = path.list_directory(dirname, "empty_\\d+.png"),

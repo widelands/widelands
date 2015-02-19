@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
    buildable = false,
-   enhanced_building = true
+   enhanced_building = true,
 
    enhancement_cost = {
 		log = 1,

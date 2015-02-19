@@ -45,6 +45,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 21, 37 },
+			fps = 1
 		},
 		empty = {
 			pictures = path.list_directory(dirname, "empty_\\d+.png"),
@@ -78,7 +79,7 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs iron_ore",
 				"consume=snack",
 				"animate=working 18000",
-				"mine=iron 2 66 5 17".
+				"mine=iron 2 66 5 17",
 				"produce=iron_ore",
 				"animate=working 18000",
 				"mine=iron 2 66 5 17",

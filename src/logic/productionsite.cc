@@ -58,6 +58,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(_type, table, egbase)
 {
+				log("NOCOM(gunchleoc): Adding productionsite %s\n", name().c_str());
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
@@ -77,16 +78,22 @@ ProductionSiteDescr::ProductionSiteDescr
 			const std::string& output = items_table->get_string(item_key);
 			try {
 				WareIndex idx = egbase.tribes().ware_index(output);
-				if (idx != INVALID_INDEX) {
-					if (m_output_ware_types.count(idx))
+				if (idx != -1) {
+					if (m_output_ware_types.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
+					}
 					m_output_ware_types.insert(idx);
-				} else if ((idx = egbase.tribes().worker_index(output)) != INVALID_INDEX) {
-					if (m_output_worker_types.count(idx))
-						throw wexception("this worker type has already been declared as an output");
-					m_output_worker_types.insert(idx);
-				} else
-					throw wexception("tribes do not define a ware or worker type with this name");
+				} else {
+					idx = egbase.tribes().worker_index(output);
+					if (idx != -1) {
+						if (m_output_worker_types.count(idx)) {
+							throw wexception("this worker type has already been declared as an output");
+						}
+						m_output_worker_types.insert(idx);
+					} else {
+						throw wexception("tribes do not define a ware or worker type with this name");
+					}
+				}
 			} catch (const WException & e) {
 				throw wexception("output \"%s\": %s", output.c_str(), e.what());
 			}
@@ -155,7 +162,6 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
-			log("NOCOM(GunChleoc): found program %s\n", program_name.c_str());
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -164,7 +170,6 @@ ProductionSiteDescr::ProductionSiteDescr
 					throw wexception("this program has already been declared");
 				}
 				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-				log("NOCOM(GunChleoc): descname %s\n", program_table->get_string("descname").c_str());
 				m_programs[program_name] =
 						new ProductionProgram(program_name, program_table->get_string("descname"),
 													 program_table->get_table("actions"),

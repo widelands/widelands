@@ -87,6 +87,7 @@ tribes:new_productionsite_type {
 		smelt_gold = {
 			-- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 			descname = _"smelting gold",
+			actions = {
 				"return=skipped unless economy needs gold",
 				"sleep=32000",
 				"consume=coal gold_ore",

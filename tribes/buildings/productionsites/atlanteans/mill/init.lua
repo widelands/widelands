@@ -39,6 +39,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 58, 61 },
+			fps = 1
 		}
 	},
 
@@ -81,7 +82,7 @@ tribes:new_productionsite_type {
 				"produce=cornmeal"
 			}
 		},
-		produce_shield_advanced = {
+		produce_blackroot_flour = {
 			-- TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
 			descname = _"grinding blackroot",
 			actions = {
