@@ -128,6 +128,26 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 	return all_args;
 }
 
+// Calls glScissor for the given 'rect' and enables GL_SCISSOR_TEST at
+// creation. Disables GL_SCISSOR_TEST at desctruction again.
+class ScopedScissor {
+public:
+	ScopedScissor(const FloatRect& rect);
+	~ScopedScissor();
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(ScopedScissor);
+};
+
+ScopedScissor::ScopedScissor(const FloatRect& rect) {
+	glScissor(rect.x, rect.y, rect.w, rect.h);
+	glEnable(GL_SCISSOR_TEST);
+}
+
+ScopedScissor::~ScopedScissor() {
+	glDisable(GL_SCISSOR_TEST);
+}
+
 }  // namespace
 
 RenderQueue::RenderQueue()
@@ -218,7 +238,6 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	next_z_ = 1;
 }
 
-
 void RenderQueue::draw_items(const std::vector<Item>& items) {
 	size_t i = 0;
 	while (i < items.size()) {
@@ -249,53 +268,31 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			   batch_up<FillRectProgram::Arguments>(Program::RECT, items, &i));
 			break;
 
-		case Program::TERRAIN_BASE:
-			// NOCOM(#sirver): move scissor into programs
-			glScissor(item.destination_rect.x,
-			          item.destination_rect.y,
-			          item.destination_rect.w,
-			          item.destination_rect.h);
-			glEnable(GL_SCISSOR_TEST);
-
+		case Program::TERRAIN_BASE: {
+			ScopedScissor scoped_scissor(item.destination_rect);
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
-										  item.z_value);
-			glDisable(GL_SCISSOR_TEST);
+			                       item.z_value);
 			++i;
-			break;
+		} break;
 
-		case Program::TERRAIN_DITHER:
-			// NOCOM(#sirver): move scissor into programs
-			glScissor(item.destination_rect.x,
-			          item.destination_rect.y,
-			          item.destination_rect.w,
-			          item.destination_rect.h);
-			glEnable(GL_SCISSOR_TEST);
-
+		case Program::TERRAIN_DITHER: {
+			ScopedScissor scoped_scissor(item.destination_rect);
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
 			                      item.z_value + kOpenGlZDelta);
-			glDisable(GL_SCISSOR_TEST);
 			++i;
-			break;
+		} break;
 
-		case Program::TERRAIN_ROAD:
-			// NOCOM(#sirver): move scissor into programs
-			glScissor(item.destination_rect.x,
-			          item.destination_rect.y,
-			          item.destination_rect.w,
-			          item.destination_rect.h);
-			glEnable(GL_SCISSOR_TEST);
-
+		case Program::TERRAIN_ROAD: {
+			ScopedScissor scoped_scissor(item.destination_rect);
 			road_program_->draw(*item.terrain_arguments.screen,
 			                    *item.terrain_arguments.fields_to_draw,
 			                    item.z_value + 2 * kOpenGlZDelta);
-			glDisable(GL_SCISSOR_TEST);
 			++i;
-			break;
-
+		} break;
 
 		default:
 			throw wexception("Unknown item.program_id: %d", item.program_id);
