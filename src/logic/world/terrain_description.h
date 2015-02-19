@@ -43,12 +43,12 @@ constexpr int kTextureSideLength = 64;
 class TerrainDescription {
 public:
 	enum Type {
-		GREEN = 0,
-		DRY = 1,
-		WATER =  2,
-		ACID = 4,
-		MOUNTAIN = 8,
-		UNPASSABLE = 16,
+		kGreen = 0,
+		kDry = 1,
+		kWater =  2,
+		kDead = 4,
+		kMountain = 8,
+		kUnpassable = 16,
 	};
 
 	TerrainDescription(const LuaTable& table, const World&);

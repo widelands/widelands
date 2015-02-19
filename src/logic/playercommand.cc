@@ -912,7 +912,7 @@ CmdShipExploreIsland::CmdShipExploreIsland (StreamRead& des) :
 	PlayerCommand (0, des.unsigned_8())
 {
 	serial = des.unsigned_32();
-	scouting_direction = ScoutingDirection::kClockwise;
+	scouting_direction = static_cast<ScoutingDirection>(des.unsigned_8());
 }
 
 void CmdShipExploreIsland::execute (Game & game)
