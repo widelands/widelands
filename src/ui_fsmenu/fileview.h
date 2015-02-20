@@ -34,16 +34,21 @@ void fileview_window
 	 UI::UniqueWindow::Registry & reg,
 	 const std::string          & filename);
 
+void authors_window
+	(UI::Panel                  & parent,
+	 UI::UniqueWindow::Registry & reg);
+
 /**
  * Shows a Text in a Fullscreen Menu. Can automatically handle Lua files and
  * plain text files. Waits for the button Ok to be clicked.
 */
 class FullscreenMenuTextView : public FullscreenMenuBase {
 public:
-	FullscreenMenuTextView(const std::string & filename);
+	FullscreenMenuTextView();
 
 protected:
-	void set_text(const std::string & text);
+	void set_title(const std::string& title);
+	void set_text(const std::string& text);
 
 private:
 	UI::Textarea                                title;
@@ -60,6 +65,12 @@ public:
 	FullscreenMenuFileView(const std::string & filename);
 };
 
+class FullscreenMenuAuthorsView : public FullscreenMenuTextView {
+public:
+	// NOCOM(GunChleoc): This parameter doesn't do anything, but if I remove it,
+	// wlapplication won't run the panel (compiler complains it's not a class).
+	FullscreenMenuAuthorsView(const std::string& foo);
+};
 
 
 #endif  // end of include guard: WL_UI_FSMENU_FILEVIEW_H

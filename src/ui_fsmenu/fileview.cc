@@ -56,13 +56,19 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 	return true;
 }
 
+bool read_authors(std::string* title, std::string* content) {
+	// NOCOM(GunChleoc): Parse translators
+	return read_text("txts/AUTHORS.lua", title, content);
+}
+
 }  // namespace
+
 FullscreenMenuTextView::FullscreenMenuTextView
-	(const std::string & filename)
+	()
 	:
 	FullscreenMenuBase("fileviewmenu.jpg"),
 
-	title (this, get_w() * 3 / 50, get_h() / 10),
+	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align_Center),
 
 	textview
 		(this,
@@ -77,12 +83,6 @@ FullscreenMenuTextView::FullscreenMenuTextView
 {
 	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
 
-	std::string content, title_text;
-	read_text(filename, &title_text, &content);
-
-	title   .set_text(title_text);
-	textview.set_text(content);
-
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
@@ -95,18 +95,65 @@ void FullscreenMenuTextView::set_text(const std::string & text)
 	textview.set_text(text);
 }
 
+void FullscreenMenuTextView::set_title(const std::string& text)
+{
+	title.set_text(text);
+}
+
 FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
-: FullscreenMenuTextView(filename)
-{}
+: FullscreenMenuTextView()
+{
+	std::string content, title_text;
+	read_text(filename, &title_text, &content);
+	set_text(content);
+	set_title(title_text);
+}
+
+FullscreenMenuAuthorsView::FullscreenMenuAuthorsView(const std::string&)
+: FullscreenMenuTextView()
+{
+	std::string content, title_text;
+	read_authors(&title_text, &content);
+	set_text(content);
+	set_title(title_text);
+}
+
+struct TextViewWindow : public UI::UniqueWindow {
+	TextViewWindow
+		(UI::Panel                  & parent,
+		 UI::UniqueWindow::Registry & reg);
+protected:
+	void set_text(const std::string & text);
+private:
+	UI::MultilineTextarea textview;
+};
+
+TextViewWindow::TextViewWindow
+	(UI::Panel                  & parent,
+	 UI::UniqueWindow::Registry & reg)
+	:
+	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
+	textview(this, 0, 0, 560, 240)
+{
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
+
+	set_inner_size(560, 240);
+
+	if (get_usedefaultpos())
+		center_to_parent();
+}
+
+void TextViewWindow::set_text(const std::string& text)
+{
+	textview.set_text(text);
+}
 
 
-struct FileViewWindow : public UI::UniqueWindow {
+struct FileViewWindow : public TextViewWindow {
 	FileViewWindow
 		(UI::Panel                  & parent,
 		 UI::UniqueWindow::Registry & reg,
 		 const std::string          & filename);
-private:
-	UI::MultilineTextarea textview;
 };
 
 FileViewWindow::FileViewWindow
@@ -114,19 +161,27 @@ FileViewWindow::FileViewWindow
 	 UI::UniqueWindow::Registry & reg,
 	 const std::string          & filename)
 	:
-	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
-	textview(this, 0, 0, 560, 240)
+	TextViewWindow(parent, reg)
 {
 	std::string title_text, content;
 	read_text(filename, &title_text, &content);
+	set_text(content);
+	set_title(title_text);
+}
 
-	textview.set_text(content);
-	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
-	set_inner_size(560, 240);
+struct AuthorsWindow : public TextViewWindow {
+	AuthorsWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg);
+};
 
-	if (get_usedefaultpos())
-		center_to_parent();
+AuthorsWindow::AuthorsWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg)
+	:
+	TextViewWindow(parent, reg)
+{
+	std::string title_text, content;
+	read_authors(&title_text, &content);
+	set_text(content);
+	set_title(title_text);
 }
 
 
@@ -139,4 +194,12 @@ void fileview_window
 	 const std::string          & filename)
 {
 	new FileViewWindow(parent, reg, filename);
+}
+
+
+/**
+ * Display the contents of the authors file in a scrollable window.
+*/
+void authors_window(UI::Panel& parent, UI::UniqueWindow::Registry& reg) {
+	new AuthorsWindow(parent, reg);
 }

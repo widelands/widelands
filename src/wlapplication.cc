@@ -1084,7 +1084,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kAuthors: {
-				FullscreenMenuFileView ff("txts/AUTHORS.lua");
+				FullscreenMenuAuthorsView ff("foo"); // NOCOM(GunChleoc): won't run without a string
 				ff.run();
 				break;
 			}
