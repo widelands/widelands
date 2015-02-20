@@ -144,11 +144,11 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.license.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.license),
-		 "txts/license");
+		 "txts/LICENSE.lua");
 	m_windows.authors.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.authors),
-		 "txts/developers");
+		 "txts/AUTHORS.lua");
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
