@@ -154,9 +154,12 @@ private:
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
 	bool improve_roads(int32_t);
-	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
+	bool create_shortcut_road(const Widelands::Flag&,
+	                          uint16_t maxcheckradius,
+	                          uint16_t minred,
+	                          const int32_t gametime);
 	// trying to identify roads that might be removed
-	bool dispensable_road_test(const Widelands::Road&);
+	bool dispensable_road_test(Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
 	bool check_trainingsites(int32_t);
@@ -226,8 +229,6 @@ private:
 	std::list<BuildableField*> buildable_fields;
 	std::list<BlockedField> blocked_fields;
 	std::unordered_set<uint32_t> port_reserved_coords;
-	// to distinquish which ports are on home teritory and which one are remote
-	std::unordered_set<uint32_t> remote_ports_coords;
 	std::list<MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
 	std::list<Widelands::Coords> flags_to_be_removed;

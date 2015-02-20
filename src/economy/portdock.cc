@@ -214,11 +214,13 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 
 	//now let attempt to recreate the portdock
-	if (!wh->m_cleanup_in_progress){
-		if (upcast(Game, game, &egbase)) {
-			if (game->is_loaded()) { //do not attempt when shutting down
-				Player& player = owner();
-				wh->restore_portdock_or_destroy(egbase);
+	if (wh) {
+		if (!wh->m_cleanup_in_progress){
+			if (upcast(Game, game, &egbase)) {
+				if (game->is_loaded()) { //do not attempt when shutting down
+					Player& player = owner();
+					wh->restore_portdock_or_destroy(egbase);
+				}
 			}
 		}
 	}
@@ -439,14 +441,16 @@ void PortDock::cancel_expedition(Game& game) {
 void PortDock::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	Coords pos(m_warehouse->get_position());
-	molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
-	      m_warehouse ? m_warehouse->serial() : 0,
-	      pos.x,
-	      pos.y,
-	      m_fleet ? m_fleet->serial() : 0,
-	      m_need_ship ? "true" : "false",
-	      m_waiting.size());
+	if (!m_warehouse) {
+		Coords pos(m_warehouse->get_position());
+		molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
+		      m_warehouse ? m_warehouse->serial() : 0,
+		      pos.x,
+		      pos.y,
+		      m_fleet ? m_fleet->serial() : 0,
+		      m_need_ship ? "true" : "false",
+		      m_waiting.size());
+	}
 
 	for (ShippingItem& shipping_item : m_waiting) {
 		molog("  IT %u, destination %u\n",
