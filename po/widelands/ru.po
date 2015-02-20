@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-15 18:36+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-16 10:38+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,19 +19,23 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../../src/ai/computer_player.cc:39
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/computer_player.cc:40
 msgid "None"
 msgstr "Отсутствует"
 
-#: ../../src/ai/defaultai.h:82
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
 msgstr "Агрессивный"
 
-#: ../../src/ai/defaultai.h:92
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:99
 msgid "Normal"
 msgstr "Обычный"
 
-#: ../../src/ai/defaultai.h:102
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:110
 msgid "Defensive"
 msgstr "Оборонительный"
 
@@ -192,13 +196,13 @@ msgid "Tool Size"
 msgstr "Размер инструмента"
 
 #: ../../src/editor/editorinteractive.cc:95
-#: ../../src/wui/interactive_player.cc:116
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:103
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
 msgstr "Миникарта"
 
 #: ../../src/editor/editorinteractive.cc:98
-#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
@@ -871,11 +875,11 @@ msgstr "%i%% построено"
 msgid "%u%% dismantled"
 msgstr "Разобрано: %u%%"
 
-#: ../../src/logic/editor_game_base.cc:278
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
 msgstr "Загрузка данных мира"
 
-#: ../../src/logic/editor_game_base.cc:281
+#: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
 msgstr "Загружаем племена"
 
@@ -1192,36 +1196,44 @@ msgstr "Ошибки при сохранении игры!"
 msgid "Game saved"
 msgstr "Игра сохранена"
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
 msgstr "Найдено место для постройки порта"
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
 msgstr "Экспедиционный корабль нашел место для строительства нового порта."
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:569
+#: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Корабль экспедиции обогнул остров без проишествий."
 
-#: ../../src/logic/ship.cc:624
+#: ../../src/logic/ship.cc:628
 msgid "Coast Reached"
 msgstr "Берег достигнут"
 
-#: ../../src/logic/ship.cc:626
+#: ../../src/logic/ship.cc:630
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
-#: ../../src/logic/ship.cc:788
+#: ../../src/logic/ship.cc:674
+msgid "New port constructionsite is gone"
+msgstr ""
+
+#: ../../src/logic/ship.cc:675
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
 msgstr "Экспедиция готова"
 
-#: ../../src/logic/ship.cc:789
+#: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
 msgstr "Экспедиционный корабль ждёт ваших указаний."
 
@@ -2707,8 +2719,8 @@ msgid "Editor"
 msgstr "Редактор"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
-#: ../../src/wui/interactive_player.cc:107
-#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Настройки"
 
@@ -3296,7 +3308,7 @@ msgid "Building materials"
 msgstr "Стройматериалы"
 
 #: ../../src/wui/encyclopedia_window.cc:65
-#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Ware Encyclopedia"
 msgstr ""
 
@@ -3401,8 +3413,8 @@ msgstr "Отменить дорогу"
 msgid "Build roads"
 msgstr "Строить дороги"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:91
+#: ../../src/wui/interactive_spectator.cc:52
 msgid "Chat"
 msgstr "Общение"
 
@@ -3436,7 +3448,7 @@ msgstr "Запасы"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
 #: ../../src/wui/game_options_menu.cc:117
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Сохранить игру"
 
@@ -3623,7 +3635,7 @@ msgid "Show Inbox"
 msgstr "Входящие"
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_player.cc:100
 msgid "Objectives"
 msgstr "Задания"
 
@@ -3786,27 +3798,27 @@ msgstr "Потеряно гражданских строений"
 msgid "Military"
 msgstr "Войска"
 
-#: ../../src/wui/interactive_gamebase.cc:43
+#: ../../src/wui/interactive_gamebase.cc:44
 msgid "PAUSE"
 msgstr "ПАУЗА"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:117
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:110
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:97
+#: ../../src/wui/interactive_spectator.cc:60
 msgid "Statistics"
 msgstr "Статистика"
 
-#: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:254
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:225
 msgid "Messages"
 msgstr "Сообщения"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:232
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3814,7 +3826,7 @@ msgstr[0] "%u новое сообщение"
 msgstr[1] "%u новых сообщения"
 msgstr[2] "%u новых сообщений"
 
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
 msgstr "Выйти из повтора"
 

@@ -1,39 +1,41 @@
-# Widelands po/gl_ES/widelands.po
-# Copyright (C) 2007 Widelands Development Team
-#
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007, 2010.
-# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2010
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 02:42+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-16 10:38+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Galician (http://www.transifex.com/projects/p/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Galician\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: gl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../src/ai/computer_player.cc:39
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/computer_player.cc:40
 msgid "None"
 msgstr "Nada"
 
-#: ../../src/ai/defaultai.h:82
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
 msgstr "Agresivo"
 
-#: ../../src/ai/defaultai.h:92
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:99
 msgid "Normal"
 msgstr "Normal"
 
-#: ../../src/ai/defaultai.h:102
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:110
 msgid "Defensive"
 msgstr "Defensivo"
 
@@ -68,7 +70,8 @@ msgid "%1$s and %2$s"
 msgstr ""
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
@@ -76,7 +79,8 @@ msgid "Jan"
 msgstr ""
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
@@ -84,7 +88,8 @@ msgid "Feb"
 msgstr ""
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
@@ -92,7 +97,8 @@ msgid "Mar"
 msgstr ""
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
@@ -100,7 +106,8 @@ msgid "Apr"
 msgstr ""
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
@@ -108,7 +115,8 @@ msgid "May"
 msgstr ""
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
@@ -116,7 +124,8 @@ msgid "Jun"
 msgstr ""
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
@@ -124,7 +133,8 @@ msgid "Jul"
 msgstr ""
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
@@ -132,7 +142,8 @@ msgid "Aug"
 msgstr ""
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
@@ -140,7 +151,8 @@ msgid "Sep"
 msgstr ""
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:149
@@ -148,7 +160,8 @@ msgid "Oct"
 msgstr ""
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:155
@@ -156,7 +169,8 @@ msgid "Nov"
 msgstr ""
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
@@ -182,13 +196,13 @@ msgid "Tool Size"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:95
-#: ../../src/wui/interactive_player.cc:116
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:103
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
 msgstr "Mapa"
 
 #: ../../src/editor/editorinteractive.cc:98
-#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
@@ -214,9 +228,7 @@ msgstr "Non se soporta o formato"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
-"Widelands non puido cargar o ficheiro «%s». O formato do ficheiro semella "
-"incompatible."
+msgstr "Widelands non puido cargar o ficheiro «%s». O formato do ficheiro semella incompatible."
 
 #: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
@@ -556,11 +568,9 @@ msgstr "Establecer a orixe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the top-"
-"left corner of a generated minimap."
-msgstr ""
-"Establecer a posición que terá por coordenadas (0, 0). Esta será a esquina "
-"superior esquerda do mapa xerado."
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Establecer a posición que terá por coordenadas (0, 0). Esta será a esquina superior esquerda do mapa xerado."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -865,11 +875,11 @@ msgstr ""
 msgid "%u%% dismantled"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:278
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
 msgstr "Cargando información do mundo"
 
-#: ../../src/logic/editor_game_base.cc:281
+#: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
 msgstr ""
 
@@ -928,10 +938,8 @@ msgstr "Falta unha posición de inicio"
 #: ../../src/logic/game.cc:486
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with the Widelands Editor to fix "
-"this problem."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
 #: ../../src/logic/map.cc:333
@@ -990,29 +998,26 @@ msgstr "sen descr"
 #: ../../src/logic/player.cc:229
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this "
-"problem."
-msgstr ""
-"Widelands non puido iniciar a partida porque o xogador %u non tiña unha "
-"posición inicial.\n"
-"Podes engadir unha posición inicial manualmente co editor do Widelands para "
-"solucionar o problema."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
+msgstr "Widelands non puido iniciar a partida porque o xogador %u non tiña unha posición inicial.\nPodes engadir unha posición inicial manualmente co editor do Widelands para solucionar o problema."
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
@@ -1031,14 +1036,16 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %%1$i = "2"
 #. * TRANSLATORS:    %2$s = "Coal"
-#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
+#. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:411
@@ -1062,23 +1069,29 @@ msgstr ""
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
+#. experience'.
 #: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
+#. need no experience'.
 #: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
 msgstr ""
 
-#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: "Did not start working because the economy needs the ware
+#. ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$s = "working"
 #. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test
+#. these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there
+#. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:578
 #: ../../src/logic/production_program.cc:969
@@ -1098,8 +1111,10 @@ msgstr ""
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
+#. bread is missing'
 #: ../../src/logic/production_program.cc:957
 #, c-format
 msgid "%s is missing"
@@ -1119,7 +1134,8 @@ msgstr ""
 msgid "Recruited %s"
 msgstr ""
 
-#. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
+#. * TRANSLATORS: %1$s = production site name, %2$s = production program name,
+#. %3$s = resource
 #: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
@@ -1158,11 +1174,9 @@ msgstr "Rematou a repetición"
 
 #: ../../src/logic/replay_game_controller.cc:109
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may "
-"unpause the game and continue watching if you want to."
-msgstr ""
-"Chegouse á fin da repetición e detívose a partida. Se queres podes continuar "
-"vendo."
+"The end of the replay has been reached and the game has been paused. You may"
+" unpause the game and continue watching if you want to."
+msgstr "Chegouse á fin da repetición e detívose a partida. Se queres podes continuar vendo."
 
 #: ../../src/logic/save_handler.cc:102
 msgid "Saving game..."
@@ -1176,36 +1190,44 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:569
+#: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:624
+#: ../../src/logic/ship.cc:628
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:626
+#: ../../src/logic/ship.cc:630
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:788
+#: ../../src/logic/ship.cc:674
+msgid "New port constructionsite is gone"
+msgstr ""
+
+#: ../../src/logic/ship.cc:675
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:789
+#: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -1238,18 +1260,14 @@ msgstr ""
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"debería minar o recurso %s, que non existe no mundo. A tribo non é "
-"compatible co mundo"
+msgstr "debería minar o recurso %s, que non existe no mundo. A tribo non é compatible co mundo"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"debería reproducir o tipo de recurso %s, que non existe no mundo. A tribo "
-"non é compatible co mundo"
+msgstr "debería reproducir o tipo de recurso %s, que non existe no mundo. A tribo non é compatible co mundo"
 
 #: ../../src/logic/worker.cc:958
 msgid "A geologist found resources."
@@ -1470,10 +1488,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
-msgstr ""
-"O Widelands non puido conectarse co enderezo fornecido.\n"
-"Ou non había ningún servidor do Widelands executándose no porto correcto, ou "
-"o servidor apagou mentres intentabas conectarse a el."
+msgstr "O Widelands non puido conectarse co enderezo fornecido.\nOu non había ningún servidor do Widelands executándose no porto correcto, ou o servidor apagou mentres intentabas conectarse a el."
 
 #: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
 #: ../../src/wlapplication.cc:1316
@@ -1680,8 +1695,8 @@ msgstr "Xogador"
 #: ../../src/network/nethost.cc:2153
 #, c-format
 msgid ""
-"This server is password protected. You can send the password with: \"@%s pwd "
-"PASSWORD\""
+"This server is password protected. You can send the password with: \"@%s pwd"
+" PASSWORD\""
 msgstr ""
 
 #: ../../src/network/nethost.cc:2251
@@ -1750,9 +1765,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
-"O servidor enviou unha SOLICITUDE DE SINCRONIZACIÓN a pesar de que non hai "
-"ningunha partida activa."
+msgstr "O servidor enviou unha SOLICITUDE DE SINCRONIZACIÓN a pesar de que non hai ningunha partida activa."
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
@@ -1764,8 +1777,7 @@ msgstr "Recibiuse o orde LANZAR do servidor de improvisto."
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
-"O servidor enviou unha actualización de xogador para un xogador inexistente."
+msgstr "O servidor enviou unha actualización de xogador para un xogador inexistente."
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
@@ -1782,14 +1794,11 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
-msgstr ""
-"O cliente envía informes de hora ao anfitrión que van atrás no tempo."
+msgstr "O cliente envía informes de hora ao anfitrión que van atrás no tempo."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
-"O simulación do cliente prodúcese máis adiante no tempo do permitido polo "
-"anfitrión."
+msgstr "O simulación do cliente prodúcese máis adiante no tempo do permitido polo anfitrión."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
@@ -1813,8 +1822,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
-"O cliente enviou a orde HORA a pesar de que a partida non está en marcha."
+msgstr "O cliente enviou a orde HORA a pesar de que a partida non está en marcha."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
@@ -1885,37 +1893,43 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:49
 msgid "true"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:53
 msgid "yes"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:57
 msgid "on"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:67
 msgid "false"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:75
 msgid "off"
 msgstr ""
@@ -1944,7 +1958,8 @@ msgstr "Non"
 msgid "Preparing..."
 msgstr "Preparando..."
 
-#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced
+#. options
 #: ../../src/ui_basic/spinbox.cc:127
 #, c-format
 msgid "%i %s"
@@ -2215,7 +2230,8 @@ msgstr ""
 msgid "Press ESC or click to continue ..."
 msgstr "Preme Esc ou fai clic para continuar..."
 
-#. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
+#. * TRANSLATORS: Dialog box title for selecting between map or saved game for
+#. new multiplayer game
 #: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
 msgstr ""
@@ -2293,10 +2309,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:401
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the "
-"option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, "
-"please select another saved game or zip the directories’ content."
+"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:256
@@ -2306,12 +2320,9 @@ msgstr "Non se atopou o ficheiro"
 #: ../../src/ui_fsmenu/launch_mpg.cc:432
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens, the host might have selected a file that you do not own. "
-"Normally, such a file should be sent from the host to you, but perhaps the "
-"transfer was not yet finished!?!"
+"If this happens, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:456
@@ -2380,7 +2391,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any player"
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
@@ -2389,8 +2401,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
-"In the middle are the settings for the players. To start a game, each player "
-"must be one of the following:"
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
@@ -2399,8 +2411,9 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse "
-"hover texts indicate the strength of the currently selected computer player)."
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
@@ -2421,8 +2434,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe "
-"and the team for that player"
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
@@ -2431,10 +2444,10 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
-"You can see information about the selected map or savegame on the right-hand "
-"side. A button next to the map name allows the host to change to a different "
-"map. Furthermore, the host is able to set a specific win condition, and "
-"finally can start the game as soon as all players are set up."
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_spg.cc:63
@@ -2473,12 +2486,9 @@ msgstr "Cambiar á posición"
 #: ../../src/ui_fsmenu/launch_spg.cc:258
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that "
-"you do not own. Normally, such a file should be sent from the host to you, "
-"but perhaps the transfer was not yet finished!?!"
+"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a map's name.
@@ -2552,7 +2562,8 @@ msgstr ""
 msgid "The date this game was saved"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:188
 #, c-format
@@ -2629,7 +2640,8 @@ msgstr ""
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "SP"
 msgstr ""
@@ -2637,7 +2649,8 @@ msgstr ""
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:548
 msgid "H (%1%)"
@@ -2646,13 +2659,15 @@ msgstr ""
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "MP (%1%)"
 msgstr ""
 
-#. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
+#. * TRANSLATORS: Error message introduction for when an old savegame can't be
+#. loaded
 #: ../../src/ui_fsmenu/loadgame.cc:573
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
@@ -2686,14 +2701,13 @@ msgstr ""
 msgid "Watch Replay"
 msgstr "Reproducir unha repetición"
 
-# É a mensaxe que aparece no menú principal nada máis iniciar o xogo.
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Editor"
 msgstr "Editor de mapas"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
-#: ../../src/wui/interactive_player.cc:107
-#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Opcións"
 
@@ -2765,7 +2779,8 @@ msgstr ""
 msgid "Show all maps"
 msgstr ""
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
 msgstr ""
@@ -2803,14 +2818,16 @@ msgstr ""
 msgid "Teams of 4"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:305
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
@@ -2958,12 +2975,10 @@ msgstr "FPS máximos:"
 msgid "Language"
 msgstr "Lingua"
 
-# O de “Enable” non fai falla traducilo, dado que xa hai unha casiña para activar o desactivar que achega dito significado.
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Enable Music"
 msgstr "Música"
 
-# O de “Enable” non fai falla traducilo, dado que xa hai unha casiña para activar o desactivar que achega dito significado.
 #: ../../src/ui_fsmenu/options.cc:209
 msgid "Enable Sound"
 msgstr "Son"
@@ -3060,9 +3075,7 @@ msgstr "Reproducir un son ao chegar unha mensaxe."
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
-"Non comprimir os ficheiros de datos do Widelands (mapas, repeticións e "
-"partidas)."
+msgstr "Non comprimir os ficheiros de datos do Widelands (mapas, repeticións e partidas)."
 
 #: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
@@ -3094,17 +3107,14 @@ msgstr "Houbo un erro cos datos do xogo"
 msgid ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find "
-"related messages in the standard output (stdout.txt on Windows). You are "
-"using build %1$s (%2$s). "
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr ""
 
 #: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. "
-"It is often – though not always – possible to load it and continue playing.\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:222
@@ -3281,7 +3291,7 @@ msgid "Building materials"
 msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:65
-#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Ware Encyclopedia"
 msgstr ""
 
@@ -3385,8 +3395,8 @@ msgstr "Cancelar camiño"
 msgid "Build roads"
 msgstr "Trazar camiños"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:91
+#: ../../src/wui/interactive_spectator.cc:52
 msgid "Chat"
 msgstr "Conversar"
 
@@ -3420,7 +3430,7 @@ msgstr "Existencias"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
 #: ../../src/wui/game_options_menu.cc:117
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Salvar xogo"
 
@@ -3575,7 +3585,8 @@ msgstr ""
 msgid "Warfare"
 msgstr ""
 
-#. * TRANSLATORS: This show up instead of a message's type when there are no messages found
+#. * TRANSLATORS: This show up instead of a message's type when there are no
+#. messages found
 #: ../../src/wui/game_message_menu.cc:568
 msgid "No message found"
 msgstr ""
@@ -3605,7 +3616,7 @@ msgid "Show Inbox"
 msgstr "Amosar as mensaxes entrantes"
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_player.cc:100
 msgid "Objectives"
 msgstr "Obxectivos"
 
@@ -3768,34 +3779,34 @@ msgstr "Edificios civís perdidos"
 msgid "Military"
 msgstr "Exército"
 
-#: ../../src/wui/interactive_gamebase.cc:43
+#: ../../src/wui/interactive_gamebase.cc:44
 msgid "PAUSE"
 msgstr "Pausa"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:117
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:110
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:97
+#: ../../src/wui/interactive_spectator.cc:60
 msgid "Statistics"
 msgstr "Estatísticas"
 
-#: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:254
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:225
 msgid "Messages"
 msgstr "Mensaxes"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:232
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u mensaxe nova"
 msgstr[1] "%u mensaxes novas"
 
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
 msgstr "Saír da repetición"
 
@@ -3821,8 +3832,7 @@ msgstr "Identificarse con unha conta rexistrada"
 
 #: ../../src/wui/login_box.cc:60
 msgid "Automatically use this login information from now on."
-msgstr ""
-"Utilizar esta información de sesión automaticamente a partires de agora."
+msgstr "Utilizar esta información de sesión automaticamente a partires de agora."
 
 #: ../../src/wui/login_box.cc:67
 msgid "Login"

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-15 20:46+0000\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 17:22+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +79,7 @@ msgstr "Slànachadh:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %s per second"
-msgstr "Thèid saighdearan san togalach seo a shlànachadh le %s gach diog"
+msgstr "Gheibh saighdearan a tha san togalach seo slànachadh le %s gach diog"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -100,7 +101,7 @@ msgstr "Trèanadh:"
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
 msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Trèanaich ‘%1$s’ o %2$s gu ruige %3$s"
+msgstr "Trèanaich “%1$s” o %2$s gu ruige %3$s"
 
 #: ../../tribes/scripting/format_help.lua:300
 msgid "Attack"
@@ -145,7 +146,7 @@ msgstr "Tochladh:"
 
 #: ../../tribes/scripting/format_help.lua:404
 msgid "Produces:"
-msgstr "Nì an togalach:"
+msgstr "Saothrachadh:"
 
 #: ../../tribes/scripting/format_help.lua:439
 msgid "Outgoing:"
