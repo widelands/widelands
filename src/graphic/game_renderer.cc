@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/gl/coordinate_conversion.h"
-#include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
@@ -215,7 +214,8 @@ void GameRenderer::draw(RenderTarget& dst,
 	             bounding_rect.w,
 	             bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
-	i.terrain_arguments.screen = surface;
+	i.terrain_arguments.renderbuffer_width = surface->width();
+	i.terrain_arguments.renderbuffer_height = surface->height();
 	i.terrain_arguments.terrains = &egbase.world().terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
 	RenderQueue::instance().enqueue(i);

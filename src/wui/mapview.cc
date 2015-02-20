@@ -88,13 +88,6 @@ void MapView::draw(RenderTarget & dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
-	static bool has_compactified = false;
-	if (!has_compactified) {
-		// NOCOM(#sirver): remove before submitting
-		g_gr->images().compactify();
-		has_compactified = true;
-	}
-
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		m_renderer->rendermap(dst, egbase, m_viewpoint, interactive_player->player());
 	} else {

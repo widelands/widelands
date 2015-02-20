@@ -15,13 +15,13 @@ wl_library(graphic_render_queue
     render_queue.cc
     render_queue.h
   DEPENDS
-    # NOCOMMIT(#sirver): circular dep on graphic_surface and other stuff
     base_exceptions
     base_geometry
     base_log
     base_macros
-    graphic_game_renderer
-    graphic_surface
+    graphic_color
+    graphic_terrain_programs
+    graphic_draw_programs
     logic
 )
 
@@ -46,6 +46,7 @@ wl_library(graphic_image_io
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
+    base_log
     graphic_surface
     io_fileread
     io_filesystem
@@ -58,7 +59,6 @@ wl_library(graphic_image_cache
     image_cache.h
   USES_SDL2
   DEPENDS
-    base_log
     base_macros
     graphic_image_io
     graphic_surface
@@ -82,11 +82,34 @@ wl_library(graphic_gl_utils
   USES_OPENGL
   DEPENDS
     base_exceptions
+    base_geometry
     base_log
     base_macros
 )
 
-wl_library(graphic_surface
+wl_library(graphic_terrain_programs
+  SRCS
+    gl/fields_to_draw.h
+    gl/road_program.cc
+    gl/road_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+    gl/dither_program.cc
+    gl/dither_program.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_gl_utils
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+)
+
+wl_library(graphic_draw_programs
   SRCS
     blend_mode.h
     gl/blit_program.cc
@@ -96,6 +119,17 @@ wl_library(graphic_surface
     gl/draw_line_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
+  DEPENDS
+    base_exceptions
+    base_macros
+    base_geometry
+    graphic_gl_utils
+    base_log
+    graphic_color
+)
+
+wl_library(graphic_surface
+  SRCS
     image.h
     screen.cc
     screen.h
@@ -114,6 +148,7 @@ wl_library(graphic_surface
     base_macros
     graphic
     graphic_color
+    graphic_draw_programs
     graphic_gl_utils
     graphic_render_queue
     graphic_sdl_utils
@@ -133,24 +168,14 @@ wl_library(graphic_game_renderer
   SRCS
     game_renderer.cc
     game_renderer.h
-    gl/fields_to_draw.h
-    gl/road_program.cc
-    gl/road_program.h
-    gl/terrain_program.cc
-    gl/terrain_program.h
-    gl/dither_program.cc
-    gl/dither_program.h
   DEPENDS
-    base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic
     graphic_gl_utils
-    graphic_image_io
     graphic_render_queue
     graphic_surface
-    io_filesystem
+    graphic_terrain_programs
     logic
     wui_mapview_pixelfunctions
     wui_overlay_manager
@@ -202,6 +227,7 @@ wl_library(graphic
     base_geometry
     base_i18n
     base_log
+    graphic_draw_programs
     base_macros
     build_info
     graphic_color

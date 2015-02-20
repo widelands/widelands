@@ -26,6 +26,9 @@ wl_library(logic_game_settings
     single_player_game_settings_provider.cc
     single_player_game_settings_provider.h
   DEPENDS
+    io_filesystem
+    scripting_lua_interface
+    scripting_lua_table
     logic
     ai
 )

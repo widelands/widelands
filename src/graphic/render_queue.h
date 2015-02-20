@@ -36,7 +36,6 @@
 
 class DitherProgram;
 class RoadProgram;
-class Surface;
 class TerrainProgram;
 
 // NOCOM(#sirver): document
@@ -83,7 +82,8 @@ public:
 		TerrainArguments() {}
 
 		int gametime;
-		Surface* screen;
+		int renderbuffer_width;
+		int renderbuffer_height;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
 	};

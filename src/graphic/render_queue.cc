@@ -287,7 +287,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::TERRAIN_ROAD: {
 			ScopedScissor scoped_scissor(item.destination_rect);
-			road_program_->draw(*item.terrain_arguments.screen,
+			road_program_->draw(item.terrain_arguments.renderbuffer_width,
+			                    item.terrain_arguments.renderbuffer_height,
 			                    *item.terrain_arguments.fields_to_draw,
 			                    item.z_value + 2 * kOpenGlZDelta);
 			++i;

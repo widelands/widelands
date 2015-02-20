@@ -200,9 +200,6 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 			pc_mask_image_files_.push_back(pc_filename);
 		}
 	}
-
-	// NOCOM(#sirver): remove before submitting.
-	ensure_graphics_are_loaded();
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
@@ -230,9 +227,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
-
-	// NOCOM(#sirver): remove before submitting
-	ensure_graphics_are_loaded();
 }
 
 void NonPackedAnimation::ensure_graphics_are_loaded() const {
