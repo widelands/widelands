@@ -31,29 +31,20 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {
-	if (boost::algorithm::ends_with(filename, ".lua")) {
-		try {
-			LuaInterface lua;
-			std::unique_ptr<LuaTable> t(lua.run_script(filename));
-			*content = t->get_string("text");
-			*title = t->get_string("title");
-		} catch (LuaError & err) {
-			*content = err.what();
-			*title = "Lua error";
-			return false;
-		}
-	} else {  // Old style plain text file.
-		Profile prof(filename.c_str(), "global", "texts"); // section-less file
-		Section & s = prof.get_safe_section("global");
-
-		*title = s.get_safe_string("title");
-		*content = s.get_safe_string("text");
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> t(lua.run_script(filename));
+		*content = t->get_string("text");
+		*title = t->get_string("title");
+	} catch (LuaError & err) {
+		*content = err.what();
+		*title = "Lua error";
+		return false;
 	}
 	return true;
 }
