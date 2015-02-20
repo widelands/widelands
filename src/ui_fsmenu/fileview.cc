@@ -19,9 +19,11 @@
 
 #include "ui_fsmenu/fileview.h"
 
+#include <map>
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
@@ -57,8 +59,57 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 }
 
 bool read_authors(std::string* title, std::string* content) {
-	// NOCOM(GunChleoc): Parse translators
-	return read_text("txts/AUTHORS.lua", title, content);
+	bool result = read_text("txts/AUTHORS.lua", title, content);
+	const std::string userlocale = i18n::get_locale();
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+
+		// Sort the locales for their sort_name
+		std::map<std::string, std::string> sorted_locales;
+		{
+			i18n::Textdomain td("texts");
+			for (const std::string code : all_locales->keys<std::string>()) {
+				std::unique_ptr<LuaTable> locale = all_locales->get_table(code);
+				locale->do_not_warn_about_unaccessed_keys();
+				sorted_locales.emplace(_(locale->get_string("localized_name")), code);
+			}
+		}
+
+		i18n::Textdomain td("translator_credits");
+		std::string translators;
+		for (const std::pair<std::string, std::string>& locale_pair : sorted_locales) {
+			std::unique_ptr<LuaTable> locale = all_locales->get_table(locale_pair.second);
+			locale->do_not_warn_about_unaccessed_keys();
+			i18n::set_locale(locale_pair.second);
+			const std::string locale_translators = _("Translator Credits");
+			if (!boost::iequals(locale_translators, "Translator Credits")) { // Do not list empty credits
+				// Display language name
+				translators =
+						(boost::format("%s<rt><p font-size=14 font-weight=bold font-color=D1D1D1>%s<br></p></rt>")
+						 % translators.c_str()
+						 % locale_pair.first.c_str()).str();
+				// Display the translators list
+				std::vector<std::string> lines;
+				boost::split(lines, locale_translators, boost::is_any_of("\n"));
+				for (const std::string locale_translator : lines) {
+					translators =
+							(boost::format("%s<rt image=pics/fsel_editor_set_height.png"
+												" image-align=left text-align=left><p font-size=12>%s</p></rt>")
+							 % translators.c_str()
+							 % locale_translator.c_str()).str();
+				}
+			}
+		}
+		*content = (boost::format(*content) % translators.c_str()).str();
+	} catch (LuaError & err) {
+		i18n::set_locale(userlocale);
+		*content = err.what();
+		*title = "Lua error";
+		return false;
+	}
+	i18n::set_locale(userlocale);
+	return result;
 }
 
 }  // namespace

@@ -433,7 +433,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
 
-				const std::string name = table->get_string("name");
+				const std::string name = table->get_string("native_name");
 				const std::string sortname = table->get_string("sort_name");
 				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
 				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));

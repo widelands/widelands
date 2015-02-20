@@ -154,120 +154,6 @@ local campaign_authors = {
 	}
 }
 
-
-local translators = {
-	{
-		_"Czech",
-		{
-			"Matej Svrcek (prometheus)",
-			"Martin Vecera (Marvec)",
-			"Marek Donar (Markus7cz)"
-		}
-	},
-	{
-		_"Danish",
-		{
-			"Erik Soe Sorensen",
-			"Joe Hansen (joedalton)"
-		}
-	},
-	{
-		_"Dutch",
-		{
-			"Rob Snelders (Ertai)",
-			"Johan Jonkman (Dikjuh)",
-			"Pieter Ouwerkerk (Pietertje)"
-		}
-	},
-	{
-		_"Finnish",
-		{
-			"Pekka Järvinen (Raspi)",
-			"Sini Ruohomaa (Byakushin)"
-		}
-	},
-	{
-		_"French",
-		{
-			"AnubiS",
-			"Emmanuel Andry (Eandry)",
-			"Jean-Pierre Gemble"
-		}
-	},
-	{
-		_"Galician",
-		{
-			"Antonio Trueba (Fasser)"
-		}
-	},
-	{
-		_"German",
-		{
-			"Hagen",
-			"Peter Schwanemann (Nasenbaer)",
-			"Philipp Niemann (Azagtoth)",
-			"Johannes (nuefke)",
-			"Tino Miegel (TinoM)",
-			"Markus Pfitzner (janus)",
-			"Hanna Podewski (kristin)",
-			"Matthias Krüger"
-		}
-	},
-	{
-		_"Hebrew",
-		{
-		   "Solomon Gruber (Piql7)"
-		}
-	},
-	{
-		_"Hungarian",
-		{
-			"Dániel Varga (EuroF)"
-		}
-	},
-	{
-		_"Italian",
-		{
-			"Gabriel Rota"
-		}
-	},
-	{
-		_"Polish",
-		{
-			"Januzi (januzi)",
-			"Andrzej Krentosz (Endrju)",
-			"Jacek Wolszczak (Shutdownrunner)",
-			"Stanisław Gackowski (Soeb)"
-		}
-	},
-	{
-		_"Russian",
-		{
-			"Alexander Bikmeyev (Rombal)"
-		}
-	},
-	{
-		_"Slovak",
-		{
-			"Vladímir Tóth (Ike)"
-		}
-	},
-	{
-		_"Spanish",
-		{
-			"Antonio Trueba(Fasser)"
-		}
-	},
-	{
-		_"Swedish",
-		{
-			"Daniel Nylander (yeager)",
-			"Frederik Pettersson (luno)"
-		}
-	}
-}
-
-
 local homepage_authors = {
 	{
 		_"Homepage Coders",
@@ -462,10 +348,6 @@ function campaigns(text)
 	return "<rt image=pics/ls_wlmap.png image-align=left text-align=left><p font-size=12>" .. text .. "</p></rt>"
 end
 
-function translator(text)
-	return "<rt image=pics/fsel_editor_set_height.png image-align=left text-align=left><p font-size=12>" .. text .. "</p></rt>"
-end
-
 function packager(text)
 	return "<rt><p font-size=18 font-decoration=underline font-face=serif font-color=2F9131>" .. text .. "</p></rt>"
 end
@@ -536,8 +418,7 @@ return {
 		list_people_with_header(campaign_authors, h2, campaigns) ..
 
 		h1_authors(_"Translators") ..
-		-- NOCOM(GunChleoc): Parse file
-		list_people_with_header(translators, h2, translator) ..
+		"%s" .. -- Place holder to insert translators list, which is parsed in C++.
 
 		h1_authors(_"Packagers") ..
 		h2(_"Linux Distributions") ..
