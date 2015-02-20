@@ -32,7 +32,6 @@
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
 
-// NOCOM(#sirver): minimap is broken.
 namespace {
 
 constexpr int kMaximumZValue = std::numeric_limits<uint16_t>::max();

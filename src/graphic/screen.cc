@@ -42,7 +42,7 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	std::unique_ptr<uint8_t[]> pixels(new uint8_t[m_w * m_h * 4]);
 	glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
 
-	Gl::swap_rows(m_w, m_h, m_w, 4, pixels.get());
+	Gl::swap_rows(m_w, m_h, m_w * 4, 4, pixels.get());
 
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free
