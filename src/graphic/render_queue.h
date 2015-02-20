@@ -38,7 +38,42 @@ class DitherProgram;
 class RoadProgram;
 class TerrainProgram;
 
-// NOCOM(#sirver): document
+// NOCOM(#sirver): proof read
+// The RenderQueue is a Singleton implementing the concept of deferred
+// rendering. Every rendering call that pretends to draw onto the screen will
+// instead enqueue an item into the RenderQueue. The Graphic class will then
+// setup OpenGL to render onto the screen and then call RenderQueue::draw()
+// which will execute all the draw calls.
+//
+// The advantage of this design is that render calls can be reordered and
+// batched up to avoid OpenGL state changes as much as possible. This can
+// reduce the amount of OpenGL calls done in the system per frame by an order
+// of magnitude if assets are properly batched up into texture atlases.
+//
+// Rendering is simple: first everything fully opaque is rendered front to back
+// (so that no pixel is drawn twice). This allows for maximum program batching,
+// as for example all opaque rectangles can be rendered in one draw call,
+// ignoring Z-value.
+//
+// In the second step, all transparent operations are done. This has to be done
+// strictly in z ordering, so that transparency works correctly. But common
+// operations can still be batched - for example the blitting of houses could
+// all be done with a common z value and from a common texture atlas. Then they
+// could be drawn in one woosh.
+//
+// Non overlapping rectangles can be drawn in parallel, ignoring z-order. I
+// implemented a linear algorithm to find all overlapping rectangle pairs, but
+// it did not buy the performance I was hoping it would. So I abandoned this
+// idea again.
+//
+// TODO(sirver): we could (even) better performance by being z-layer aware
+// while drawing. For example the UI could draw non-overlapping windows and
+// sibling children with the same z-value for better batching. Also for example
+// build-help symbols, buildings, and flags could all be drawn with the same
+// z-layer for better batching up.
+//
+// Note: all draw calls that target a Texture are not going to the RenderQueue,
+// but are still immediately executed.
 class RenderQueue {
 public:
 	enum Program {
@@ -88,7 +123,9 @@ public:
 		FieldsToDraw* fields_to_draw;
 	};
 
-	// NOCOM(#sirver): document and figure out.
+	// The union of all possible program arguments represents an Item that is
+	// enqueued in the Queue. This is on purpose not done with OOP so that the
+	// queue is more cache friendly.
 	struct Item {
 		Item() {}
 
@@ -96,10 +133,23 @@ public:
 			return key < other.key;
 		}
 
+		// The program that will be used to draw this item. Also defines which
+		// union type is filled in.
 		int program_id;
+
+		// The z-value in GL space that will be used for drawing.
 		float z_value;
+
+		// The bounding box in the renderbuffer where this draw will change pixels.
 		FloatRect destination_rect;
+
+		// The key for sorting this item in the queue. It depends on the type of
+		// item how this is calculated, but it will contain at least the program,
+		// the z-layer, if it is opaque or transparent and program specific
+		// options. After ordering the queue by this, it defines the batching.
 		uint64_t key;
+
+		// If this is opaque or, if not, which blend_mode to use.
 		BlendMode blend_mode;
 
 		union {
@@ -114,8 +164,13 @@ public:
 
 	static RenderQueue& instance();
 
+	// Enqueues 'item' in the queue with a higher 'z' value than the last enqueued item.
 	void enqueue(const Item& item);
 
+	// Draws all items in the queue in an optimal ordering and as much batching
+	// as possible. This will draw one complete frame onto the screen and this
+	// function is the only one that actually triggers draws to the screen
+	// directly.
 	void draw(int screen_width, int screen_height);
 
 private:

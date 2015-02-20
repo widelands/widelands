@@ -208,7 +208,6 @@ void RenderQueue::enqueue(const Item& given_item) {
 	++next_z_;
 }
 
-// NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw(const int screen_width, const int screen_height) {
 	if (next_z_ >= kMaximumZValue) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
