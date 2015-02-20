@@ -29,13 +29,10 @@
 #include "base/wexception.h"
 #include "graphic/gl/system_headers.h"
 
-struct SDL_PixelFormat;
-
 namespace Gl {
 
 class Shader;
 
-const SDL_PixelFormat & gl_rgba_format();
 GLenum _handle_glerror(const char * file, unsigned int line);
 
 // Thin wrapper around a OpenGL program object to ensure proper cleanup. Throws

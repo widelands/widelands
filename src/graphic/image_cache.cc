@@ -21,17 +21,15 @@
 
 #include <cassert>
 #include <memory>
+#include <set>
 #include <string>
 
 #include <SDL.h>
 #include <boost/format.hpp>
 
-#include "base/log.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "io/filewrite.h"
 
 namespace  {
 
@@ -90,8 +88,6 @@ const Image* ImageCache::get(const std::string& hash) {
 	}
 	return it->second.get();
 }
-
-// NOCOM(#sirver): check headers
 
 void ImageCache::compactify() {
 	TextureAtlas texture_atlas;

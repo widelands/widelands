@@ -67,26 +67,16 @@ public:
 		Unlock_NoChange
 	};
 
-	/// This returns the pixel format for direct pixel access.
-	const SDL_PixelFormat & format() const;
-
-	// Number of bytes per row.
-	uint16_t get_pitch() const;
-
-	// Pointer to the raw pixel data. May only be called inside lock/unlock
-	// pairs.
-	uint8_t * get_pixels() const;
-
 	// Lock/Unlock pairs must guard any of the direct pixel access using the
 	// functions below. Lock/Unlock pairs cannot be nested.
 	void lock();
 	void unlock(UnlockMode);
 
-	// Returns the color of the pixel as a value as defined by 'format()'.
-	uint32_t get_pixel(uint16_t x, uint16_t y);
+	// Returns the color of the pixel.
+	RGBAColor get_pixel(uint16_t x, uint16_t y);
 
 	// Sets the pixel to the 'clr'.
-	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
+	void set_pixel(uint16_t x, uint16_t y, const RGBAColor& color);
 
 	// NOCOM(#sirver): remove
 	bool owns_texture() const {

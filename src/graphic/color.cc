@@ -19,7 +19,7 @@
 
 #include "graphic/color.h"
 
-RGBColor::RGBColor() {
+RGBColor::RGBColor() : RGBColor(0, 0, 0) {
 }
 
 RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :

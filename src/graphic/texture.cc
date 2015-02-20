@@ -20,6 +20,8 @@
 
 #include <cassert>
 
+#include <SDL.h>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -33,6 +35,36 @@
 #include "graphic/surface.h"
 
 namespace  {
+
+namespace  {
+
+/**
+ * \return the standard 32-bit RGBA format that we use for our textures.
+ */
+const SDL_PixelFormat & rgba_format()
+{
+	static SDL_PixelFormat format;
+	static bool init = false;
+	if (init)
+		return format;
+
+	init = true;
+	memset(&format, 0, sizeof(format));
+	format.BitsPerPixel = 32;
+	format.BytesPerPixel = 4;
+	format.Rmask = 0x000000ff;
+	format.Gmask = 0x0000ff00;
+	format.Bmask = 0x00ff0000;
+	format.Amask = 0xff000000;
+	format.Rshift = 0;
+	format.Gshift = 8;
+	format.Bshift = 16;
+	format.Ashift = 24;
+	return format;
+}
+
+}  // namespace
+
 
 class GlFramebuffer {
 public:
@@ -197,8 +229,6 @@ void Texture::lock() {
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	Gl::swap_rows(m_w, m_h, m_w, 4, m_pixels.get());
 }
 
 void Texture::unlock(UnlockMode mode) {
@@ -208,8 +238,6 @@ void Texture::unlock(UnlockMode mode) {
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
-		Gl::swap_rows(m_w, m_h, m_w, 4, m_pixels.get());
-
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
             (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
@@ -220,36 +248,33 @@ void Texture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-uint8_t * Texture::get_pixels() const
-{
-	return m_pixels.get();
-}
-
-uint32_t Texture::get_pixel(uint16_t x, uint16_t y) {
+RGBAColor Texture::get_pixel(uint16_t x, uint16_t y) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
 
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	return *(reinterpret_cast<uint32_t *>(data));
+	RGBAColor color;
+
+	SDL_GetRGBA(*reinterpret_cast<uint32_t*>(&m_pixels[(m_h - y - 1) * 4 * m_w + 4 * x]),
+	            &rgba_format(),
+	            &color.r,
+	            &color.g,
+	            &color.b,
+	            &color.a);
+	return color;
 }
 
-uint16_t Texture::get_pitch() const {
-	return 4 * m_w;
-}
+// NOCOM(#sirver): write png writes upside down now? Check screenshots and wl_map_info and savegame previews.
 
-const SDL_PixelFormat & Texture::format() const {
-	return Gl::gl_rgba_format();
-}
-
-
-void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
+// NOCOM(#sirver): take a RGBColor?
+void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
 
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	*(reinterpret_cast<uint32_t *>(data)) = clr;
+	uint8_t* data = &m_pixels[(m_h - y - 1) * 4 * m_w + 4 * x];
+	uint32_t packed_color = SDL_MapRGBA(&rgba_format(), color.r, color.g, color.b, color.a);
+	*(reinterpret_cast<uint32_t *>(data)) = packed_color;
 }
 
 
