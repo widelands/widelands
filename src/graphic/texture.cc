@@ -264,9 +264,6 @@ RGBAColor Texture::get_pixel(uint16_t x, uint16_t y) {
 	return color;
 }
 
-// NOCOM(#sirver): write png writes upside down now? Check screenshots and wl_map_info and savegame previews.
-
-// NOCOM(#sirver): take a RGBColor?
 void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 	assert(m_pixels);
 	assert(x < m_w);
@@ -278,9 +275,6 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 }
 
 
-// NOCOM(#sirver):
-// http://stackoverflow.com/questions/17068703/
-//    2d-drawing-in-opengl-linear-filtering-with-pixel-accuracy-at-native-size
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);

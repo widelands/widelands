@@ -66,8 +66,12 @@ varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
 
 void main() {
+	// The arbitrary multiplication by 0.99 makes sure that we never sample
+	// outside of the texture in the texture atlas - this means non-perfect
+	// pixel mapping of textures to the screen, but we are pretty meh about that
+	// here.
 	vec4 clr = texture2D(u_terrain_texture,
-			var_texture_offset + u_texture_dimensions * fract(var_texture_position));
+			var_texture_offset + u_texture_dimensions * fract(var_texture_position) * 0.99);
 	clr.rgb *= var_brightness;
 	gl_FragColor = clr;
 }
