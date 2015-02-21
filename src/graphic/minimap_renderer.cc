@@ -220,7 +220,6 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
-	assert(texture->format().BytesPerPixel == sizeof(uint32_t));
 
 	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
 
