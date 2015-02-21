@@ -194,7 +194,6 @@ void draw_minimap_int(Texture* texture,
 				}
 
 				if (vision > 0) {
-					assert(owner != 0);
 					pixel_color = calc_minimap_color(egbase, f, layers, owner, vision > 1);
 				}
 			}
