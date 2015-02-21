@@ -71,17 +71,16 @@ TribeDescr::TribeDescr
 			std::vector<WareIndex> column;
 			std::vector<std::string> warenames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
-				const std::string& warename = warenames[rowindex];
 				try {
-					WareIndex wareindex = egbase_.tribes().safe_ware_index(warename);
+					WareIndex wareindex = egbase_.tribes().safe_ware_index(warenames[rowindex]);
 					if (has_ware(wareindex)) {
-						throw GameDataError("Duplicate definition of ware '%s'", warename.c_str());
+						throw GameDataError("Duplicate definition of ware '%s'", warenames[rowindex].c_str());
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
 					wares_order_coords_[wareindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
 				} catch (const WException& e) {
-					throw GameDataError("Failed adding ware '%s: %s", warename.c_str(), e.what());
+					throw GameDataError("Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
 				}
 			}
 			if (!column.empty()) {
@@ -98,11 +97,10 @@ TribeDescr::TribeDescr
 			std::vector<WareIndex> column;
 			std::vector<std::string> workernames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
-				const std::string& workername = workernames[rowindex];
 				try {
-					WareIndex workerindex = egbase_.tribes().safe_worker_index(workername);
+					WareIndex workerindex = egbase_.tribes().safe_worker_index(workernames[rowindex]);
 					if (has_worker(workerindex)) {
-						throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
+						throw GameDataError("Duplicate definition of worker '%s'", workernames[rowindex].c_str());
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
@@ -112,7 +110,7 @@ TribeDescr::TribeDescr
 						worker_types_without_cost_.push_back(workerindex);
 					}
 				} catch (const WException& e) {
-					throw GameDataError("Failed adding worker '%s: %s", workername.c_str(), e.what());
+					throw GameDataError("Failed adding worker '%s: %s", workernames[rowindex].c_str(), e.what());
 				}
 			}
 			if (!column.empty()) {

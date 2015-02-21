@@ -275,13 +275,6 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 	m_next_military_act(0),
 	m_portdock(nullptr)
 {
-	uint8_t nr_worker_types_without_cost =
-		owner().tribe().worker_types_without_cost().size();
-	m_next_worker_without_cost_spawn =
-		new uint32_t[nr_worker_types_without_cost];
-	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
-		m_next_worker_without_cost_spawn[i] = never();
-	}
 	m_next_stock_remove_act = 0;
 }
 
@@ -420,10 +413,18 @@ void Warehouse::init(EditorGameBase & egbase)
 	m_ware_policy.resize(nr_wares, SP_Normal);
 	m_worker_policy.resize(nr_workers, SP_Normal);
 
+	Player & player = owner();
+	uint8_t nr_worker_types_without_cost =
+		player.tribe().worker_types_without_cost().size();
+	m_next_worker_without_cost_spawn =
+		new uint32_t[nr_worker_types_without_cost];
+	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
+		m_next_worker_without_cost_spawn[i] = never();
+	}
+
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
-	Player & player = owner();
 	if (upcast(Game, game, &egbase)) {
 		player.see_area
 			(Area<FCoords>
@@ -442,10 +443,9 @@ void Warehouse::init(EditorGameBase & egbase)
 			}
 		}
 		// m_next_military_act is not touched in the loading code. Is only needed
-		// if there warehous is created in the game?  I assume it's for the
+		// if there warehouse is created in the game?  I assume it's for the
 		// conquer_radius thing
 		m_next_military_act = schedule_act(*game, 1000);
-
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
