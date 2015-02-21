@@ -52,7 +52,9 @@ tribes:new_warehouse_type {
 		}
 	},
 
-	aihints = {},
+	aihints = {
+		prohibited_till = 900
+	},
 
    conquers = 5,
    heal_per_second = 170,
