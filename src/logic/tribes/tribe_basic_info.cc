@@ -35,9 +35,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		icon = table->get_string("icon");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;
-		for (const int key : starting_conditions->keys<int>())
+
+		for (const std::string& script_path : starting_conditions->array_entries<std::string>())
 		{
-			const std::string& script_path = starting_conditions->get_string(key);
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname")));

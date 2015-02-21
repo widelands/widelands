@@ -163,17 +163,15 @@ void TrainingSiteDescr::add_training_inputs(
 		std::unique_ptr<LuaTable> food_table = table.get_table("food");
 		for (const int key : food_table->keys<int>()) {
 			std::vector<std::string> food_vector;
-			std::unique_ptr<LuaTable> food_row = food_table->get_table(key);
-			for (int key2 : food_row->keys<int>()) {
-				food_vector.push_back(food_row->get_string(key2));
+			for (const std::string& food_item : food_table->get_table(key)->array_entries<std::string>()) {
+				food_vector.push_back(food_item);
 			}
 			food->push_back(food_vector);
 		}
 	}
 	if (table.has_key("weapons")) {
-		std::unique_ptr<LuaTable> weapons_table = table.get_table("weapons");
-		for (const int key : weapons_table->keys<int>()) {
-			weapons->push_back(weapons_table->get_string(key));
+		for (const std::string& weapon : table.get_table("weapons")->array_entries<std::string>()) {
+			weapons->push_back(weapon);
 		}
 	}
 }

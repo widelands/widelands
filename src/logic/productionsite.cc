@@ -72,9 +72,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	}
 
 	if (table.has_key("outputs")) {
-		items_table = table.get_table("outputs");
-		for (int item_key : items_table->keys<int>()) {
-			const std::string& output = items_table->get_string(item_key);
+		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
 				WareIndex idx = egbase.tribes().ware_index(output);
 				if (idx != -1) {

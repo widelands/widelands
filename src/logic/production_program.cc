@@ -1707,8 +1707,7 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		ProductionSiteDescr* building)
 	: m_name(_name), m_descname(_descname) {
 
-	for (const int key : actions_table->keys<int>()) {
-		const std::string& action_string = actions_table->get_string(key);
+	for (const std::string& action_string : actions_table->array_entries<std::string>()) {
 		std::vector<std::string> parts;
 		boost::split(parts, action_string, boost::is_any_of("="));
 		if (parts.size() != 2) {
