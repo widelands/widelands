@@ -31,7 +31,7 @@ tribes:new_worker_type {
 		harvest = {
 			"findobject attrib:tree radius:10",
 			"walk object",
-			"playFX ../../../sound/sawmill/sawmill 230",
+			"playFX sound/sawmill/sawmill 230",
 			"animation sawing 10000",
 			"object fall",
 			"animation idle 2000",

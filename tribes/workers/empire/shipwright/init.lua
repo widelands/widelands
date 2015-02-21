@@ -8,7 +8,7 @@ animations = {
    work = {
       pictures = path.list_directory(dirname,  "work_\\d+.png"),
       sound_effect = {
-            directory = "../../../sound/hammering",
+            directory = "sound/hammering",
             name = "hammering",
       },
       hotspot = { 12, 27 },
@@ -35,7 +35,7 @@ tribes:new_worker_type {
 		buildship = {
 			"walk object-or-coords",
 			"plant tribe:shipconstruction unless object",
-			"playFX ../../../sound/sawmill/sawmill 230",
+			"playFX sound/sawmill/sawmill 230",
 			"animation work 500",
 			"construct",
 			"animation work 5000",

@@ -91,9 +91,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs ax",
 				"sleep=32000",
 				"consume=coal iron",
-				"playFX=../../../sound/smiths/smith 192",
+				"playFX=sound/smiths/smith 192",
 				"animate=working 25000",
-				"playFX=../../../sound/smiths/sharpening 192",
+				"playFX=sound/smiths/sharpening 192",
 				"produce=ax"
 			}
 		},
@@ -104,9 +104,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs ax_sharp",
 				"sleep=32000",
 				"consume=coal iron:2",
-				"playFX=../../../sound/smiths/smith 192",
+				"playFX=sound/smiths/smith 192",
 				"animate=working 25000",
-				"playFX=../../../sound/smiths/sharpening 192",
+				"playFX=sound/smiths/sharpening 192",
 				"produce=ax_sharp"
 			}
 		},
@@ -117,9 +117,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs ax_broad",
 				"sleep=32000",
 				"consume=coal:2 iron:2",
-				"playFX=../../../sound/smiths/smith 192",
+				"playFX=sound/smiths/smith 192",
 				"animate=working 25000",
-				"playFX=../../../sound/smiths/sharpening 192",
+				"playFX=sound/smiths/sharpening 192",
 				"produce=ax_broad"
 			}
 		},

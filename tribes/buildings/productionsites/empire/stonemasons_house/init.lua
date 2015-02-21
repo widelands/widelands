@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
 				"sleep=50000",
 				"return=skipped unless economy needs marble_column",
 				"consume=marble:2",
-				"playFX=../../../sound/stonecutting/stonemason 192",
+				"playFX=sound/stonecutting/stonemason 192",
 				"animate=working 32000",
 				"produce=marble_column"
 			}

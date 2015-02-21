@@ -9,7 +9,7 @@ animations = {
    work = {
       pictures = path.list_directory(dirname, "work_\\d+.png"),
       sound_effect = {
-            directory = "../../../sound/hammering",
+            directory = "sound/hammering",
             name = "hammering",
       },
       hotspot = { 10, 22 },
