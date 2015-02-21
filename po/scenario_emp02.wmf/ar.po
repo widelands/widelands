@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 10:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgid "To watch deep inside the enemy territory, build a tower."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
-msgid "Destroy the barbarian tribe"
+msgid "Destroy the Barbarian tribe"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
@@ -143,12 +143,12 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
-"barbarian buildings."
+"Barbarian buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the barbarian "
+"Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
 msgstr ""
@@ -391,7 +391,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
-"of one of those hated, evil, barbarian tribes with whom we have had so many "
+"of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
 msgstr ""
 
@@ -431,15 +431,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
-"There are still a few barbarians hiding on our island, but I am sure that we"
-" will find them soon. Every barbarian who doesn’t attack us will be put in a"
+"There are still a few Barbarians hiding on our island, but I am sure that we"
+" will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
-"barbarians from the island."
+"Barbarians from the island."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238

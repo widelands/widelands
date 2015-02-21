@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-16 02:33+0000\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 21:57+0000\n"
 "Last-Translator: Patrick de Castro <raybackpc@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -98,23 +98,23 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "As outras duas importantes fontes alimentares são peixe e carne defumada. Carne crua é fornecida pelos caçadores. Os pescadores pesca peixes no mar enquanto o piscicultor garante que os peixes não serão extintos. Garanta que sempre haja peixe sobrando, do contrário o piscicultor não po- derá procriá-los. A defumação ocorre na defumaria, você precisará de ao menos duas delas."
+msgstr "As outras duas importantes fontes alimentares são peixe e carne defumada. Carne crua é fornecida pelos caçadores. Os pescadores pescam peixes no mar enquanto o piscicultor garante que os peixes não serão extintos. Garanta que sempre haja peixe sobrando, do contrário o piscicultor não po- derá procriá-los. A defumação ocorre na defumaria, você precisará de ao menos duas delas."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr "Construa uma Fazenda e uma Fazenda de Raiz Escura"
+msgstr "Construa uma fazenda e uma fazenda de raiz escura"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr "Construa um moinho para fazer farinha de milho e de blackroot "
+msgstr "Construa um moinho para fazer farinha de milho e de raiz escura"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr "Construa um poço artesiano"
+msgstr "Construa um poço "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr "Construa uma padaria para assar pães com farinha de milho, farinha de blackroot e água"
+msgstr "Construa uma padaria para assar pães com farinha de milho, farinha de raid escura e água"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -136,7 +136,7 @@ msgstr "Construa duas defumarias para defumar peixe e carne"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr "Constrói uma Criação de aranhas e uma Tecelagem"
+msgstr "Construai uma Criação de aranhas e uma Tecelagem"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
@@ -149,7 +149,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold yarn and "
 "spideryarn as raw material. Spideryarn is produced by the spider farm, while"
 " gold yarn is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Os tecelões produzem tecidos e e panos na fábrica de tecelagem. Tecido é necessário para a construção de alguns edifícios e vestuário, enquanto panos são os uniformes dos soldados. A tecelagem de fios necessita de ouro e teia de aranha como matéria-prima. A teia de aranha é produzido pela fazenda de aranha, enquanto fios de ouro é produzido pela fábrica de fiação de ouro."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -161,15 +161,15 @@ msgstr "Construa uma criação de aranhas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr "Construa uma fábrica de fios de ouro"
+msgstr "Construa uma fábrica de fiação de ouro"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
-msgstr "Construir indústria e minas"
+msgstr "Construa indústrias e minas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Industry and Mines"
-msgstr "Indústria e minas"
+msgstr "Indústrias e minas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -184,7 +184,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Os metais precisam ser derretidos na fundição antes de poderem ser usados. Depois de derretidos, são usados na ferragem de armas, de armaduras e no ferreiro."
+msgstr "Os metais precisam ser derretidos na fundição antes de poderem ser usados. Depois de derretidos, são usados na fabricação de armas, de armaduras e ferramentas."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
@@ -194,11 +194,11 @@ msgstr "Construa uma mina de cada tipo. Mande um geólogo à montanha antes."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
-msgstr "Construa uma fundição"
+msgstr "Construa uma casa de fundição"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Construa uma ferragem de armas e uma de armaduras"
+msgstr "Construa uma ferraria de armas e uma de armaduras"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -218,11 +218,11 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "Como todas as outras tribos, os Atlantes também são aptos para treinar soldados: a caverna treina ataque – o maior atributo dos Atlantes – e o labirinto treina evasão, saúde e defesa. Estes itens produzidos pela indústria são usados para treinar melhor os soldados nos dois centros de treinamento."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
-msgstr "Constrói uma Masmorra e um Labirinto"
+msgstr "Construa uma caverna e um Labirinto"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
@@ -254,7 +254,7 @@ msgstr "Construa 3 navios para escapar desta ilha"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Escape From the Island"
-msgstr "Fuga da ilha"
+msgstr "Fuja da ilha"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:123
 msgid ""
@@ -292,7 +292,7 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr "Esta história ocorre durante o reinado do Rei Askandor, o 43o sucessor do Rei Ajanthul. Ele foi um bom Rei, governando Atlântida com sabedoria e previdência. Mas com os anos, ele se tornou temente à morte e assim passou a procurar por cura para a morte mesmo que a maioria dos clérigos o tenham avisado. Alguns lhe disseram que vida eterna é apenas para os Deuses, e buscá-la era proibido."
+msgstr "Esta história ocorre durante o reinado do Rei Askandor, o 43º sucessor do Rei Ajanthul. Ele foi um bom Rei, governando Atlântida com sabedoria e previdência. Mas com os anos, ele se tornou temente à morte e assim passou a procurar por cura para a morte mesmo que a maioria dos clérigos o tenham avisado. Alguns lhe disseram que vida eterna é apenas para os Deuses, e buscá-la era proibido."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:143
 msgid "Disgraced Before the God"
@@ -308,7 +308,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Mas tudo parecia bem. Apenas os cavalos pareciam pressentir algum perigo. À noite, eles pareciam loucos aterrorizados. Não demorou muito para que nosso domador Xydra descobrisse o que havia de errado com eles: o nível do mar em frente ao estábulo estava subindo cada dia mais depressa."
+msgstr "Mas tudo parecia bem. Apenas os cavalos pareciam pressentir algum perigo. À noite, eles pareciam loucos e aterrorizados. Não demorou muito para que nosso domador Xydra descobrisse o que havia de errado com eles: o nível do mar em frente ao estábulo estava subindo cada dia mais depressa."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:147
 msgid ""
@@ -333,7 +333,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail..."
-msgstr ""
+msgstr "Com sentimento de culpa, o rei coneteu suicidou. Sem um monarca, o povo voltou-se para os clérigos, mas eles não tinham ajuda substancial para oferecer. A maioria aceita o seu destino, enquanto outros tentaram mudar a mente de Deus através da oferta de animais no seu templo. Mas não adiantou ..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:155
 msgid ""
@@ -342,7 +342,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "Jundlina, filha do falecido Rei e alta sacerdotisa era a clériga mais determinada. Como inúmeras oferendas não mudaram a situação, ela se convenceu que para agradar o Deus, uma oferenda de grande valor pessoal era necessária. Então ela ofereceu seu maior amor: <br> seu esposo, pai de seu único filho."
+msgstr "Jundlina, filha do falecido Rei e alta sacerdotisa era a clériga mais determinada. Como inúmeras oferendas não mudaram a situação, ela se convenceu que para agradar o Deus, uma oferenda de grande valor pessoal era necessária. Então ela ofereceu seu maior amor: seu esposo, pai de seu único filho."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid ""

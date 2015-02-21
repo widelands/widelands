@@ -1,24 +1,23 @@
-# Gaelic; Scottish translation for widelands
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2013-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-11-04 12:05+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 17:33+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
-"(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -34,11 +33,9 @@ msgstr "Chaidh ruaig a chur ort!"
 
 #: ../../scripting/win_condition_texts.lua:8
 msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as "
-"spectator if you want."
-msgstr ""
-"Chaill thu an taigh-stòrais mu dheireadh agad is chaidh ruaig a chur ort mar "
-"sin. Faodaidh tu leantainn air adhart mar amharc ma thogras tu."
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "Chaill thu an taigh-stòrais mu dheireadh agad is chaidh ruaig a chur ort mar sin. Faodaidh tu leantainn air adhart ’nad amharc ma thogras tu."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
@@ -72,10 +69,7 @@ msgstr "Cruinnichean"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr ""
-"Gheibh thu puingean airson bathar luachail sna taighean-stòrais agad. "
-"Buannaichidh an cluicheadair aig a bheil barrachd bhathar na aig càch an "
-"ceann 4 uairean."
+msgstr "Gheibh thu puingean airson bathar luachail sna taighean-stòrais agad. Buannaichidh an cluicheadair aig a bheil barrachd bhatharan na aig càch an ceann 4 uairean."
 
 #: ../../scripting/win_conditions/collectors.lua:21
 msgid "Points"
@@ -85,7 +79,7 @@ msgstr "Puingean"
 msgid "Status for %s"
 msgstr "An staid airson %s"
 
-#: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+#: TRANSLATORS For example 'gold (3 P) x 4 = 12 P", P meaning "Points'
 #: ../../scripting/win_conditions/collectors.lua:110
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr "  %1$s (%2$i P) x %3$i = %4$i P"
@@ -98,7 +92,7 @@ msgstr[1] "Iomlan: %i phuing"
 msgstr[2] "Iomlan: %i puingean"
 msgstr[3] "Iomlan: %i puing"
 
-#: TRANSLATORS: Context: 'The game will end in %s.'
+#: TRANSLATORS Context 'The game will end in %s.'
 #: ../../scripting/win_conditions/collectors.lua:128
 msgid "%1$ih%2$02im"
 msgstr "%1$i uair(ean) ’s  %2$02i mionaid(ean)"
@@ -137,8 +131,7 @@ msgstr "Gun chrìch no ceò"
 
 #: ../../scripting/win_conditions/endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
-"Seo geama gun chrìch is gun riaghailtean. Tha ceò a’ chogaidh à comas."
+msgstr "Seo geama gun chrìch is gun riaghailtean. Tha ceò a’ chogaidh à comas."
 
 #: ../../scripting/win_conditions/territorial_lord.lua:14
 msgid "Territorial Lord"
@@ -149,10 +142,7 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
-msgstr ""
-"Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ "
-"mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an "
-"roinn seo fad co-dhiù 20 mionaid."
+msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an roinn seo fad co-dhiù 20 mionaid."
 
 #: ../../scripting/win_conditions/territorial_lord.lua:152
 #: ../../scripting/win_conditions/territorial_time.lua:24
@@ -197,11 +187,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr ""
-"Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ "
-"mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an "
-"roinn seo fad co-dhiù 20 mionaid no am fear aig a cheil barrachd tìre na aig "
-"càch an ceann 4 uairean, ge b’ e dè dhiubh a thachras nas luaithe."
+msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an roinn seo fad co-dhiù 20 mionaid no am fear aig a bheil barrachd tìre na aig càch an ceann 4 uairean, ge b’ e dè dhiubh a thachras an toiseach."
 
 #: ../../scripting/win_conditions/territorial_time.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -237,11 +223,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr ""
-"On a tha thu nad ghille-dubh, tha thu measail air coilltean mòra. Mar sin, "
-"is an t-amas agad gum bi barrachd chraobhan air an tìr agad na air tìr càch. "
-"Thig an geama gu crìch an ceann 4 uairean. Buannaichidh an cluicheadair aig "
-"a bheil barrachd chraobhan na aig càch aig an deireadh."
+msgstr "On a tha thu ’nad ghille-dubh, tha thu measail air coilltean mòra. Mar sin, is an t-amas agad gum bi barrachd chraobhan air an tìr agad na air tìr càich. Thig an geama gu crìch an ceann 4 uairean. Buannaichidh an cluicheadair aig a bheil barrachd chraobhan na aig càch aig an deireadh."
 
 #: ../../scripting/win_conditions/wood_gnome.lua:19
 msgid "Trees owned"

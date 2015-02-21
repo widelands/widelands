@@ -1,36 +1,40 @@
-# Widelands po/hu_HU/widelands.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# GunChleoc, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 03:01+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-16 10:38+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../src/ai/computer_player.cc:39
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/computer_player.cc:40
 msgid "None"
 msgstr "Nincs"
 
-#: ../../src/ai/defaultai.h:82
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
 msgstr "Agresszív"
 
-#: ../../src/ai/defaultai.h:92
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:99
 msgid "Normal"
 msgstr "Átlagos"
 
-#: ../../src/ai/defaultai.h:102
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:110
 msgid "Defensive"
 msgstr "Védekező"
 
@@ -65,7 +69,8 @@ msgid "%1$s and %2$s"
 msgstr ""
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
@@ -73,7 +78,8 @@ msgid "Jan"
 msgstr ""
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
@@ -81,7 +87,8 @@ msgid "Feb"
 msgstr ""
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
@@ -89,7 +96,8 @@ msgid "Mar"
 msgstr ""
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
@@ -97,7 +105,8 @@ msgid "Apr"
 msgstr ""
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
@@ -105,7 +114,8 @@ msgid "May"
 msgstr ""
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
@@ -113,7 +123,8 @@ msgid "Jun"
 msgstr ""
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
@@ -121,7 +132,8 @@ msgid "Jul"
 msgstr ""
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
@@ -129,7 +141,8 @@ msgid "Aug"
 msgstr ""
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
@@ -137,7 +150,8 @@ msgid "Sep"
 msgstr ""
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:149
@@ -145,7 +159,8 @@ msgid "Oct"
 msgstr ""
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:155
@@ -153,7 +168,8 @@ msgid "Nov"
 msgstr ""
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
@@ -179,13 +195,13 @@ msgid "Tool Size"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:95
-#: ../../src/wui/interactive_player.cc:116
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:103
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
 msgstr "Térkép"
 
 #: ../../src/editor/editorinteractive.cc:98
-#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
@@ -211,9 +227,7 @@ msgstr "Nem támogatott formátum"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
-"Widelands nem tudja betölteni a \"%s\" fájl. Úgy tűnik a fájl nem "
-"kompatibilis ezzel a verzióval."
+msgstr "Widelands nem tudja betölteni a \"%s\" fájl. Úgy tűnik a fájl nem kompatibilis ezzel a verzióval."
 
 #: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
@@ -553,11 +567,9 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the top-"
-"left corner of a generated minimap."
-msgstr ""
-"Állítsd be a (0,0) koordináták helyét. Ez lesz a bal felső sarka a "
-"létrehozott mini-térképnek."
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Állítsd be a (0,0) koordináták helyét. Ez lesz a bal felső sarka a létrehozott mini-térképnek."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -862,11 +874,11 @@ msgstr ""
 msgid "%u%% dismantled"
 msgstr "%u%% lebontották"
 
-#: ../../src/logic/editor_game_base.cc:278
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
 msgstr "Világ adatainak betöltése"
 
-#: ../../src/logic/editor_game_base.cc:281
+#: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
 msgstr "Törzsek betöltése"
 
@@ -925,15 +937,9 @@ msgstr "Hiányzó kezdőpont"
 #: ../../src/logic/game.cc:486
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with the Widelands Editor to fix "
-"this problem."
-msgstr ""
-"A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő "
-"helye.\n"
-"A hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a "
-"játékosnak a szerkesztőben."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with the Widelands Editor to fix this problem."
+msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
 #: ../../src/logic/map.cc:333
 msgid "Player 1"
@@ -991,29 +997,26 @@ msgstr "nincs leírás"
 #: ../../src/logic/player.cc:229
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this "
-"problem."
-msgstr ""
-"A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő "
-"helye.\n"
-"A hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a "
-"játékosnak a szerkesztőben."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
+msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
@@ -1032,14 +1035,16 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %%1$i = "2"
 #. * TRANSLATORS:    %2$s = "Coal"
-#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
+#. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:411
@@ -1063,23 +1068,29 @@ msgstr ""
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
+#. experience'.
 #: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
+#. need no experience'.
 #: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
 msgstr ""
 
-#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: "Did not start working because the economy needs the ware
+#. ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$s = "working"
 #. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test
+#. these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there
+#. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:578
 #: ../../src/logic/production_program.cc:969
@@ -1099,8 +1110,10 @@ msgstr ""
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
+#. bread is missing'
 #: ../../src/logic/production_program.cc:957
 #, c-format
 msgid "%s is missing"
@@ -1120,7 +1133,8 @@ msgstr "Termelt: %s"
 msgid "Recruited %s"
 msgstr ""
 
-#. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
+#. * TRANSLATORS: %1$s = production site name, %2$s = production program name,
+#. %3$s = resource
 #: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
@@ -1159,11 +1173,9 @@ msgstr "Visszajátszás vége"
 
 #: ../../src/logic/replay_game_controller.cc:109
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may "
-"unpause the game and continue watching if you want to."
-msgstr ""
-"A visszajátszás a végére ért és a játék lejátszása leállt. A visszajátszás "
-"indításával folytathatja a játék megfigyelését, ha szeretné."
+"The end of the replay has been reached and the game has been paused. You may"
+" unpause the game and continue watching if you want to."
+msgstr "A visszajátszás a végére ért és a játék lejátszása leállt. A visszajátszás indításával folytathatja a játék megfigyelését, ha szeretné."
 
 #: ../../src/logic/save_handler.cc:102
 msgid "Saving game..."
@@ -1177,36 +1189,44 @@ msgstr "A mentés nem sikerült!"
 msgid "Game saved"
 msgstr "Játék elmentve"
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:569
+#: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:624
+#: ../../src/logic/ship.cc:628
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:626
+#: ../../src/logic/ship.cc:630
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:788
+#: ../../src/logic/ship.cc:674
+msgid "New port constructionsite is gone"
+msgstr ""
+
+#: ../../src/logic/ship.cc:675
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:789
+#: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -1239,9 +1259,7 @@ msgstr ""
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"Ez a törzs nem kompatibilis ezzel a térképpel, mert itt nem bányázható %s, "
-"pedig szüksége lenne rá"
+msgstr "Ez a törzs nem kompatibilis ezzel a térképpel, mert itt nem bányázható %s, pedig szüksége lenne rá"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
@@ -1469,10 +1487,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
-msgstr ""
-"A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\n"
-"Vagy nem fut Widelands szerver a feltételezett porton, vagy\n"
-"a szerver leállt ahogy csatlakozni próbáltál."
+msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\nVagy nem fut Widelands szerver a feltételezett porton, vagy\na szerver leállt ahogy csatlakozni próbáltál."
 
 #: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
 #: ../../src/wlapplication.cc:1316
@@ -1679,8 +1694,8 @@ msgstr "Játékos"
 #: ../../src/network/nethost.cc:2153
 #, c-format
 msgid ""
-"This server is password protected. You can send the password with: \"@%s pwd "
-"PASSWORD\""
+"This server is password protected. You can send the password with: \"@%s pwd"
+" PASSWORD\""
 msgstr ""
 
 #: ../../src/network/nethost.cc:2251
@@ -1749,9 +1764,7 @@ msgstr "Ismeretlen játékos elhagyta a játékot (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
-"A szerver SYNCREQUEST csomagot küldött annak ellenére, hogy a játék nem is "
-"indult még el."
+msgstr "A szerver SYNCREQUEST csomagot küldött annak ellenére, hogy a játék nem is indult még el."
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
@@ -1808,9 +1821,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
-"A klienst TIME parancsot küldött annak ellenére, hogy a játék még nem indult "
-"el."
+msgstr "A klienst TIME parancsot küldött annak ellenére, hogy a játék még nem indult el."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
@@ -1881,37 +1892,43 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:49
 msgid "true"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:53
 msgid "yes"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:57
 msgid "on"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:67
 msgid "false"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:75
 msgid "off"
 msgstr ""
@@ -1940,7 +1957,8 @@ msgstr "Nem"
 msgid "Preparing..."
 msgstr "Előkészítés…"
 
-#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced
+#. options
 #: ../../src/ui_basic/spinbox.cc:127
 #, c-format
 msgid "%i %s"
@@ -2211,7 +2229,8 @@ msgstr ""
 msgid "Press ESC or click to continue ..."
 msgstr "A folytatáshoz kattints vagy nyomd meg az ESC billentyűt…"
 
-#. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
+#. * TRANSLATORS: Dialog box title for selecting between map or saved game for
+#. new multiplayer game
 #: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
 msgstr "Kérlek, válassz"
@@ -2289,10 +2308,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:401
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the "
-"option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, "
-"please select another saved game or zip the directories’ content."
+"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:256
@@ -2302,12 +2319,9 @@ msgstr "A fájl nem található"
 #: ../../src/ui_fsmenu/launch_mpg.cc:432
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens, the host might have selected a file that you do not own. "
-"Normally, such a file should be sent from the host to you, but perhaps the "
-"transfer was not yet finished!?!"
+"If this happens, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:456
@@ -2366,22 +2380,18 @@ msgstr "Kliensbeállítások"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
-"Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a "
-"beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
+msgstr "Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:672
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
-"Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja "
-"ugyanazon színt, akkor közösen irányítanak egy játékost (\"megosztott "
-"királyság mód\")."
+msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja ugyanazon színt, akkor közösen irányítanak egy játékost (\"megosztott királyság mód\")."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any player"
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
 msgstr "Néző mód: mindent lát, de senkit sem tud irányítani."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
@@ -2390,11 +2400,9 @@ msgstr "Játékosbeállítások"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
-"In the middle are the settings for the players. To start a game, each player "
-"must be one of the following:"
-msgstr ""
-"Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden "
-"játékosnak az alábbiak egyikének kell lennie:"
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden játékosnak az alábbiak egyikének kell lennie:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -2402,12 +2410,10 @@ msgstr "Csatlakozva egy vagy több klienshez (lásd: Kliensbeállítások)"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse "
-"hover texts indicate the strength of the currently selected computer player)."
-msgstr ""
-"Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret "
-"fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes "
-"játékos erősségét)."
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr "Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes játékos erősségét)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
@@ -2427,8 +2433,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe "
-"and the team for that player"
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
@@ -2437,15 +2443,11 @@ msgstr "Térkép adatai"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
-"You can see information about the selected map or savegame on the right-hand "
-"side. A button next to the map name allows the host to change to a different "
-"map. Furthermore, the host is able to set a specific win condition, and "
-"finally can start the game as soon as all players are set up."
-msgstr ""
-"A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz "
-"információkat. A játék szervezője a térkép neve melletti gombbal választhat "
-"másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha "
-"minden játékos be lett állítva – elindíthatja a játékot."
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz információkat. A játék szervezője a térkép neve melletti gombbal választhat másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha minden játékos be lett állítva – elindíthatja a játékot."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:63
 msgid "Select map"
@@ -2483,12 +2485,9 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_spg.cc:258
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that "
-"you do not own. Normally, such a file should be sent from the host to you, "
-"but perhaps the transfer was not yet finished!?!"
+"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a map's name.
@@ -2562,7 +2561,8 @@ msgstr "Mentés ideje"
 msgid "The date this game was saved"
 msgstr "A játék elmentésének időpontja"
 
-#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:188
 #, c-format
@@ -2639,7 +2639,8 @@ msgstr ""
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "SP"
 msgstr "EJ"
@@ -2647,7 +2648,8 @@ msgstr "EJ"
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:548
 msgid "H (%1%)"
@@ -2656,13 +2658,15 @@ msgstr "Sz"
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "MP (%1%)"
 msgstr "TJ (%1%)"
 
-#. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
+#. * TRANSLATORS: Error message introduction for when an old savegame can't be
+#. loaded
 #: ../../src/ui_fsmenu/loadgame.cc:573
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
@@ -2701,8 +2705,8 @@ msgid "Editor"
 msgstr "Térképkészítő"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
-#: ../../src/wui/interactive_player.cc:107
-#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Beállítások"
 
@@ -2774,7 +2778,8 @@ msgstr "A térkép mérete (szélesség × magasság)"
 msgid "Show all maps"
 msgstr "Minden térkép megjelenítése"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
 msgstr "Eredeti térképnevek mutatása"
@@ -2812,14 +2817,16 @@ msgstr "3 fős csapatok"
 msgid "Teams of 4"
 msgstr "4 fős csapatok"
 
-#. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:305
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
@@ -3067,9 +3074,7 @@ msgstr "Hangjelzés üzenet érkezésekor"
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
-"Ne tömörítse a Widelands adatfájlokat (térképek, visszajátszások, mentett "
-"játékok)"
+msgstr "Ne tömörítse a Widelands adatfájlokat (térképek, visszajátszások, mentett játékok)"
 
 #: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
@@ -3101,27 +3106,15 @@ msgstr "Játékadat hiba"
 msgid ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find "
-"related messages in the standard output (stdout.txt on Windows). You are "
-"using build %1$s (%2$s). "
-msgstr ""
-"\n"
-"\n"
-"Kérlek jelentsd be ezt a hibát ezzel segítsd a Widelands fejlesztését. A "
-"hibával kapcoslatos üzeneteket megtalálod a standard kimeneten (stdout.txt "
-"Windowson). Te ezt a verziót használod: %1$s (%2$s). "
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
+msgstr "\n\nKérlek jelentsd be ezt a hibát ezzel segítsd a Widelands fejlesztését. A hibával kapcoslatos üzeneteket megtalálod a standard kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. "
-"It is often – though not always – possible to load it and continue playing.\n"
-msgstr ""
-"Kérlek add hozzá ezt is a bejelentéshez.\n"
-"\n"
-"Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran - de "
-"nem mindig - be lehet tölteni ezt a mentést és folytatni  játékot.\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
+msgstr "Kérlek add hozzá ezt is a bejelentéshez.\n\nWidelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran - de nem mindig - be lehet tölteni ezt a mentést és folytatni  játékot.\n"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Destroy building?"
@@ -3297,7 +3290,7 @@ msgid "Building materials"
 msgstr "Építőanayag"
 
 #: ../../src/wui/encyclopedia_window.cc:65
-#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Ware Encyclopedia"
 msgstr ""
 
@@ -3401,8 +3394,8 @@ msgstr "Mégsem kell ide út"
 msgid "Build roads"
 msgstr "Út építése"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:91
+#: ../../src/wui/interactive_spectator.cc:52
 msgid "Chat"
 msgstr "Csevegés"
 
@@ -3436,7 +3429,7 @@ msgstr "Készletek"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
 #: ../../src/wui/game_options_menu.cc:117
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Játék mentése"
 
@@ -3591,7 +3584,8 @@ msgstr ""
 msgid "Warfare"
 msgstr ""
 
-#. * TRANSLATORS: This show up instead of a message's type when there are no messages found
+#. * TRANSLATORS: This show up instead of a message's type when there are no
+#. messages found
 #: ../../src/wui/game_message_menu.cc:568
 msgid "No message found"
 msgstr ""
@@ -3621,7 +3615,7 @@ msgid "Show Inbox"
 msgstr "Bejövők"
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_player.cc:100
 msgid "Objectives"
 msgstr "Célkitűzések"
 
@@ -3784,34 +3778,34 @@ msgstr "Elveszített civil épületek"
 msgid "Military"
 msgstr "Haderő"
 
-#: ../../src/wui/interactive_gamebase.cc:43
+#: ../../src/wui/interactive_gamebase.cc:44
 msgid "PAUSE"
 msgstr "SZÜNET"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:117
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:110
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:97
+#: ../../src/wui/interactive_spectator.cc:60
 msgid "Statistics"
 msgstr "Statisztikák"
 
-#: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:254
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:225
 msgid "Messages"
 msgstr "Üzenetek"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:232
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u új üzenet"
 msgstr[1] "%u új üzenet"
 
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
 msgstr "Kilépés a visszajátszásból"
 
@@ -3829,8 +3823,7 @@ msgstr "Jelszó:"
 
 #: ../../src/wui/login_box.cc:50
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
-"VIGYÁZAT: A jelszó megjelenik a képernyőn és titkosítatlanul tárolódik!"
+msgstr "VIGYÁZAT: A jelszó megjelenik a képernyőn és titkosítatlanul tárolódik!"
 
 #: ../../src/wui/login_box.cc:55
 msgid "Log in to a registered account"

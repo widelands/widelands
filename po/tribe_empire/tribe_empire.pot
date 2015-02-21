@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -523,7 +523,7 @@ msgstr ""
 #: ../../tribes/empire/marblemine/conf:32
 #: ../../tribes/empire/quarry/conf:25
 #: ../../tribes/empire/sawmill/conf:25
-#: ../../tribes/empire/shipyard/conf:29
+#: ../../tribes/empire/shipyard/conf:30
 #: ../../tribes/empire/smelting_works/conf:31
 #: ../../tribes/empire/stonemasons_house/conf:26
 #: ../../tribes/empire/toolsmithy/conf:62
@@ -2040,7 +2040,7 @@ msgid ""
 "Works at the shipyard and constructs new ships."
 msgstr ""
 
-#: ../../tribes/empire/shipyard/conf:27
+#: ../../tribes/empire/shipyard/conf:28
 msgid ""
 "constructing a ship"
 msgstr ""
