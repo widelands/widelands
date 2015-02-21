@@ -38,12 +38,11 @@ class DitherProgram;
 class RoadProgram;
 class TerrainProgram;
 
-// NOCOM(#sirver): proof read
-// The RenderQueue is a Singleton implementing the concept of deferred
-// rendering. Every rendering call that pretends to draw onto the screen will
-// instead enqueue an item into the RenderQueue. The Graphic class will then
-// setup OpenGL to render onto the screen and then call RenderQueue::draw()
-// which will execute all the draw calls.
+// The RenderQueue is a singleton implementing the concept of deferred
+// rendering: Every rendering call that pretends to draw onto the screen will
+// instead enqueue an item into the RenderQueue. The Graphic::refresh() will
+// then setup OpenGL to render onto the screen and then call
+// RenderQueue::draw() which will execute all the draw calls.
 //
 // The advantage of this design is that render calls can be reordered and
 // batched up to avoid OpenGL state changes as much as possible. This can
@@ -53,27 +52,30 @@ class TerrainProgram;
 // Rendering is simple: first everything fully opaque is rendered front to back
 // (so that no pixel is drawn twice). This allows for maximum program batching,
 // as for example all opaque rectangles can be rendered in one draw call,
-// ignoring Z-value.
+// ignoring z-value.
 //
-// In the second step, all transparent operations are done. This has to be done
-// strictly in z ordering, so that transparency works correctly. But common
-// operations can still be batched - for example the blitting of houses could
-// all be done with a common z value and from a common texture atlas. Then they
-// could be drawn in one woosh.
+// In the second step, all drawing calls with (partially) transparent pixels
+// are done. This has to be done strictly in z ordering (back to front), so
+// that transparency works correctly. But common operations can still be
+// batched - for example the blitting of houses could all be done with the same
+// z value and using a common texture atlas. Then they could be drawn in one
+// woosh.
 //
 // Non overlapping rectangles can be drawn in parallel, ignoring z-order. I
-// implemented a linear algorithm to find all overlapping rectangle pairs, but
-// it did not buy the performance I was hoping it would. So I abandoned this
-// idea again.
+// experimented with a linear algorithm to find all overlapping rectangle
+// pairs (see bzr history), but it did not buy the performance I was hoping it
+// would. So I abandoned this idea again.
+//
+// Note: all draw calls that target a Texture are not going to the RenderQueue,
+// but are still immediately executed. The RenderQueue is only used for
+// rendering onto the screen.
 //
 // TODO(sirver): we could (even) better performance by being z-layer aware
 // while drawing. For example the UI could draw non-overlapping windows and
 // sibling children with the same z-value for better batching. Also for example
 // build-help symbols, buildings, and flags could all be drawn with the same
-// z-layer for better batching up.
-//
-// Note: all draw calls that target a Texture are not going to the RenderQueue,
-// but are still immediately executed.
+// z-layer for better batching up. This would also get rid of the z-layer
+// issues we are having.
 class RenderQueue {
 public:
 	enum Program {
