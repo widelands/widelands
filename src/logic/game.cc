@@ -56,7 +56,7 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"

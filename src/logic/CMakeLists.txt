@@ -178,10 +178,12 @@ wl_library(logic
     training_attribute.h
     trainingsite.cc
     trainingsite.h
-    tribe.cc
-    tribe.h
-    tribe_basic_info.h
-    tribe_basic_info.cc
+    tribes/tribe.cc
+    tribes/tribe.h
+    tribes/tribe_basic_info.h
+    tribes/tribe_basic_info.cc
+    tribes/tribes.h
+    tribes/tribes.cc
     walkingdir.cc
     walkingdir.h
     ware_descr.cc
@@ -211,8 +213,6 @@ wl_library(logic
     world/terrain_description.h
     world/world.cc
     world/world.h
-    tribes/tribes.h
-    tribes/tribes.cc
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS

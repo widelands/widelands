@@ -38,7 +38,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 

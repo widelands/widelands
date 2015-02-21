@@ -19,6 +19,7 @@
 
 #include "logic/production_program.h"
 
+#include <memory>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
@@ -45,7 +46,7 @@
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/worker_program.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
@@ -215,7 +216,7 @@ void ProductionProgram::Action::building_work_failed(Game &, ProductionSite &, W
 }
 
 void ProductionProgram::parse_ware_type_group
-	(char*& parameters,
+	(char * & parameters,
 	 WareTypeGroup& group,
 	 const Tribes& tribes,
 	 const BillOfMaterials& inputs)
@@ -832,8 +833,7 @@ ProductionProgram::ActAnimate::ActAnimate(
 		if (descr->is_animation_known(animation_name))
 			m_id = descr->get_animation(animation_name);
 		else {
-			// NOCOM(GunChleoc): Animation now from LuaTable m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
-			descr->add_animation(animation_name, m_id);
+			throw GameDataError("Unknown animation '%s'", animation_name);
 		}
 		if (!reached_end) { //  The next parameter is the duration.
 			char * endp;

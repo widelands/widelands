@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_TRIBE_H
-#define WL_LOGIC_TRIBE_H
+#ifndef WL_LOGIC_TRIBES_TRIBE_H
+#define WL_LOGIC_TRIBES_TRIBE_H
 
 #include <map>
 #include <memory>
@@ -31,7 +31,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
-#include "logic/tribe_basic_info.h"
+#include "logic/tribes/tribe_basic_info.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
@@ -161,4 +161,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_TRIBE_H
+#endif  // end of include guard: WL_LOGIC_TRIBES_TRIBE_H

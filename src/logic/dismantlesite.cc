@@ -32,7 +32,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 

@@ -25,7 +25,7 @@
 #include "logic/checkstep.h"
 #include "logic/constants.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "scripting/factory.h"

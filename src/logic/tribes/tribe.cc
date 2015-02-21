@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 
 #include <algorithm>
 #include <iostream>

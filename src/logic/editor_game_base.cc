@@ -44,7 +44,7 @@
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
@@ -245,8 +245,9 @@ void EditorGameBase::postload()
  * This function needs to be called once at startup when the graphics system is ready.
  * If the graphics system is to be replaced at runtime, the function must be called after that has happened.
  */
-void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
+void EditorGameBase::load_graphics(UI::ProgressWindow&)
 {
+	// NOCOM(GunChleoc): Remove UI::ProgressWindow if we won't use it
 	assert(tribes_);
 	tribes_->load_graphics();
 

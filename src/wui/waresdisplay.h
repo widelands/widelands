@@ -24,7 +24,7 @@
 
 #include <boost/signals2.hpp>
 
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "ui_basic/textarea.h"

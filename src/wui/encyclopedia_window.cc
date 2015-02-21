@@ -35,7 +35,7 @@
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/warelist.h"

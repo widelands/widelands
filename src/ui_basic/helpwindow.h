@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"

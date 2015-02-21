@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_TRIBE_BASIC_INFO_H
-#define WL_LOGIC_TRIBE_BASIC_INFO_H
+#ifndef WL_LOGIC_TRIBES_TRIBE_BASIC_INFO_H
+#define WL_LOGIC_TRIBES_TRIBE_BASIC_INFO_H
 
 #include <memory>
 #include <string>
@@ -57,4 +57,4 @@ struct TribeBasicInfo {
 	std::vector<Initialization> initializations;
 };
 
-#endif  // end of include guard: WL_LOGIC_TRIBE_BASIC_INFO_H
+#endif  // end of include guard: WL_LOGIC_TRIBES_TRIBE_BASIC_INFO_H

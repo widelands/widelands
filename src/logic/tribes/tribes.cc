@@ -19,6 +19,8 @@
 
 #include "logic/tribes/tribes.h"
 
+#include <memory>
+
 #include "logic/game_data_error.h"
 
 namespace Widelands {

@@ -24,7 +24,7 @@
 #include "economy/wares_queue.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 

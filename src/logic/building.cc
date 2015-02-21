@@ -45,7 +45,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"

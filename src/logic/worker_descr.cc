@@ -29,7 +29,7 @@
 #include "logic/game_data_error.h"
 #include "logic/nodecaps.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/worker.h"
 #include "logic/worker_program.h"
 #include "sound/sound_handler.h"
@@ -53,7 +53,8 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 			int32_t value;
 			try {
 				if (buildcost_.count(key)) {
-					throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
+					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
+											  key.c_str());
 				}
 
 				if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&

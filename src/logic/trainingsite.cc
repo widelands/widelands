@@ -33,7 +33,7 @@
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/worker.h"
 
 namespace Widelands {

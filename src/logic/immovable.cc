@@ -47,7 +47,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/terrain_affinity.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
@@ -256,7 +256,8 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const Tribes& tribes) :
 				}
 
 				if (m_buildcost.count(index)) {
-					throw GameDataError("a buildcost item of this ware type has already been defined: %s", key.c_str());
+					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
+											  key.c_str());
 				}
 
 				value = items_table->get_int(key);
@@ -723,17 +724,23 @@ MapObject::Loader * Immovable::load
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
+			bool is_tribe_immovable;
+			if (version <= 5) {  // This compatibility code is needed for the maps
+				is_tribe_immovable = !boost::equals(fr.c_string(), "world");
+			} else {
+				is_tribe_immovable = (static_cast<MapObjectDescr::OwnerType>(fr.unsigned_8())
+											 == MapObjectDescr::OwnerType::kTribe);
+			}
 
-			const std::string owner_name = fr.c_string();
 			const std::string old_name = fr.c_string();
 			Immovable * imm = nullptr;
 
-			if (owner_name != "world") { //  It is a tribe immovable.
+			if (is_tribe_immovable) { // tribe immovable
 				try {
 					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
 				} catch (const WException& e) {
-					throw GameDataError("Failed to load immovable: %s", e.what());
+					throw GameDataError("Failed to load tribes immovable: %s", e.what());
 				}
 			} else { //  world immovable
 				const World & world = egbase.world();

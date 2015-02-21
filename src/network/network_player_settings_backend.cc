@@ -23,7 +23,7 @@
 #include "base/log.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "profile/profile.h"
 
 

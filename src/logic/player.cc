@@ -48,7 +48,7 @@
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warehouse.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"

@@ -26,7 +26,7 @@
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
@@ -72,7 +72,7 @@ void WorkerProgram::parse
 				break;
 			}
 
-			const std::string string =	program_table->get_string(idx);
+			const std::string string = program_table->get_string(idx);
 
 			if (string.empty()) {
 				break;

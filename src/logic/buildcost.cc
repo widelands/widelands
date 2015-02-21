@@ -24,7 +24,7 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 
 namespace Widelands {
 

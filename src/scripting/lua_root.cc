@@ -27,7 +27,7 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/immovable.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "logic/world/world.h"
 #include "scripting/globals.h"

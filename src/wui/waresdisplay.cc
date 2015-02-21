@@ -33,7 +33,7 @@
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 

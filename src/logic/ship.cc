@@ -39,7 +39,7 @@
 #include "logic/mapregion.h"
 #include "logic/path.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"

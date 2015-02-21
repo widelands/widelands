@@ -22,7 +22,8 @@
 #include <memory>
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-	: renews_map_resource_(table->has_key("renews_map_resource") ? table->get_string("renews_map_resource") : ""),
+	: renews_map_resource_(table->has_key("renews_map_resource") ?
+									  table->get_string("renews_map_resource") : ""),
 	  mines_(table->has_key("mines") ? table->get_string("mines") : ""),
 	  log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
 	  stone_producer_(table->has_key("stoneproducer") ? table->get_bool("stoneproducer") : false),
@@ -32,9 +33,10 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	  space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
 	  expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
 	  fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
-	  mountain_conqueror_(table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
-	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
+	  mountain_conqueror_(table->has_key("mountain_conqueror") ?
+									 table->get_bool("mountain_conqueror") : false),
 	  shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
+	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
 	  // 10 days default
 	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
 	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100)

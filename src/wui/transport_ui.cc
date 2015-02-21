@@ -23,7 +23,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/ware_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"

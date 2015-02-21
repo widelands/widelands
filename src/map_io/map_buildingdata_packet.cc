@@ -42,7 +42,7 @@
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"

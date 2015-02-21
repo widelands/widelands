@@ -31,7 +31,7 @@
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/tribes/tribes.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_player.h"

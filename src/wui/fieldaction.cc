@@ -30,7 +30,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warehouse.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

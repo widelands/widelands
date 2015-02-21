@@ -33,7 +33,7 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/ship.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/map_object_loader.h"

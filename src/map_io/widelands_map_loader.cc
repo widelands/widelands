@@ -28,7 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "map_io/map_allowed_building_types_packet.h"
 #include "map_io/map_allowed_worker_types_packet.h"
 #include "map_io/map_bob_packet.h"

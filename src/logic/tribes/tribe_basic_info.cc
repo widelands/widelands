@@ -17,7 +17,9 @@
  *
  */
 
-#include "logic/tribe_basic_info.h"
+#include "logic/tribes/tribe_basic_info.h"
+
+#include <memory>
 
 #include "base/i18n.h"
 #include "logic/game_data_error.h"

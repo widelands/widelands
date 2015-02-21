@@ -34,7 +34,7 @@
 #include "logic/field.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/world/world.h"
 
 

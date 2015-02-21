@@ -24,7 +24,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe.h"
 #include "logic/warelist.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
