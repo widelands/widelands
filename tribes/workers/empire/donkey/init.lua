@@ -2,13 +2,13 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "donkey_idle_e_\\d+.png"), -- NOCOM(GunChleoc): rename
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 14, 20 },
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "donkey_walk", {14, 25}, 10) -- NOCOM(GunChleoc): rename
-add_worker_animations(animations, "walkload", dirname, "donkey_walk", {14, 25}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {14, 25}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {14, 25}, 10) -- TODO(GunChleoc): Make animation
 
 
 tribes:new_carrier_type {

@@ -2,15 +2,14 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "wisent_idle_se_\\d+.png"), -- NOCOM(GunChleoc): rename
+      pictures = path.list_directory(dirname, "idle_\\d+.png"),
       hotspot = { 10, 25 },
       fps = 20
    }
 }
--- TODO: fix naming once we have real oxen animations
-add_worker_animations(animations, "walk", dirname, "wisent_walk", {21, 31}, 20)
-add_worker_animations(animations, "walkload", dirname, "wisent_walk", {21, 31}, 10)
-
+-- TODO(GunChleoc): Make real oxen animations
+add_worker_animations(animations, "walk", dirname, "walk", {21, 31}, 20)
+add_worker_animations(animations, "walkload", dirname, "walk", {21, 31}, 10)
 
 tribes:new_carrier_type {
    name = "barbarians_ox",

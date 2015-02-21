@@ -95,7 +95,6 @@ tribes:new_soldier_type {
 	evade = 30,
 	evade_incr_per_level = 17,
 
-	-- NOCOM(#GunChleoc): Canonical filenames, then we can get rid of these?
 	hp_level_0_pic = dirname .. "hp_level0.png",
 	hp_level_1_pic = dirname .. "hp_level1.png",
 	evade_level_0_pic = dirname .. "evade_level0.png",
@@ -111,6 +110,7 @@ tribes:new_soldier_type {
 	defense_level_2_pic = dirname .. "defense_level2.png",
 
 	-- Random animations for battle
+	-- TODO(GunChleoc): Make more animations to use the random function
 	attack_success_w = {
 		"atk_ok_w",
 	},

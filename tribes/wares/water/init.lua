@@ -13,11 +13,11 @@ tribes:new_ware_type{
 		empire = 25
 	},
    preciousness = {
-		atlanteans = 8,
+		atlanteans = 7,
 		barbarians = 8,
-		empire = 8
+		empire = 7
 	},
-   -- NOCOM: Empire + Atlanteans preciousness = 7,
+
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Water
 		default = _"Water is the essence of life!",
