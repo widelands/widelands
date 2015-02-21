@@ -29,9 +29,9 @@ function save_coroutine()
    removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
    removed_tree:remove()
 
-   building_descr = game:get_building_description("barbarians", "barbarians_lumberjacks_hut")
-   ware_descr = game:get_ware_description("barbarians", "ax")
-   worker_descr = game:get_worker_description("barbarians", "barbarians_lumberjack")
+   building_descr = game:get_building_description("barbarians_lumberjacks_hut")
+   ware_descr = game:get_ware_description("ax")
+   worker_descr = game:get_worker_description("barbarians_lumberjack")
 
    corout = coroutine.create(function()
       local a = 100

@@ -109,7 +109,7 @@ function warehouse_tests:test_set_get_workers_table_arg()
    assert_equal(170, k.barbarians_lumberjack)
 end
 function warehouse_tests:test_set_get_workers_set_is_not_increase()
-   k = self.w:get_workers{"barbarians_builder", "lbarbarians_umberjack"}
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    k.barbarians_builder = 20
    k.barbarians_lumberjack = 40
    self.w:set_workers(k)
