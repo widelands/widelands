@@ -20,7 +20,7 @@ add_worker_animations(animations, "walkload", dirname, "walkload", {9, 22}, 10)
 
 
 tribes:new_worker_type {
-   name = "empire_shipyard",
+   name = "empire_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Shipyard",
    icon = dirname .. "menu.png",

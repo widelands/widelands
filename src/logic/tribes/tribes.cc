@@ -153,22 +153,22 @@ size_t Tribes::nrworkers() const {
 
 // NOCOM(GunChleoc): Use these instead of index comparisons
 bool Tribes::ware_exists(const WareIndex& index) const {
-	return wares_->get(index) != nullptr;
+	return wares_->get_mutable(index) != nullptr;
 }
 bool Tribes::worker_exists(const WareIndex& index) const {
-	return workers_->get(index) != nullptr;
+	return workers_->get_mutable(index) != nullptr;
 }
 bool Tribes::building_exists(const std::string& buildingname) const {
 	return buildings_->exists(buildingname) != nullptr;
 }
 bool Tribes::building_exists(const BuildingIndex& index) const {
-	return buildings_->get(index) != nullptr;
+	return buildings_->get_mutable(index) != nullptr;
 }
 bool Tribes::immovable_exists(int index) const {
-	return immovables_->get(index) != nullptr;
+	return immovables_->get_mutable(index) != nullptr;
 }
 bool Tribes::ship_exists(int index) const {
-	return ships_->get(index) != nullptr;
+	return ships_->get_mutable(index) != nullptr;
 }
 
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
@@ -253,75 +253,73 @@ WareIndex Tribes::worker_index(const std::string& workername) const {
 
 
 const BuildingDescr* Tribes::get_building_descr(BuildingIndex buildingindex) const {
-	return buildings_->get(buildingindex);
+	return buildings_->get_mutable(buildingindex);
 }
 
 const ImmovableDescr* Tribes::get_immovable_descr(int immovableindex) const {
-	return immovables_->get(immovableindex);
+	return immovables_->get_mutable(immovableindex);
 }
 
 const ShipDescr* Tribes::get_ship_descr(int shipindex) const {
-	return ships_->get(shipindex);
+	return ships_->get_mutable(shipindex);
 }
 
 
 const WareDescr* Tribes::get_ware_descr(WareIndex wareindex) const {
-	return wares_->get(wareindex);
+	return wares_->get_mutable(wareindex);
 }
 
 const WorkerDescr* Tribes::get_worker_descr(WareIndex workerindex) const {
-	return workers_->get(workerindex);
+	return workers_->get_mutable(workerindex);
 }
 
 const TribeDescr* Tribes::get_tribe_descr(int tribeindex) const {
-	return tribes_->get(tribeindex);
+	return tribes_->get_mutable(tribeindex);
 }
 
 void Tribes::set_ware_type_has_demand_check(const WareIndex& wareindex, const std::string& tribename) const {
-	wares_->get(wareindex)->set_has_demand_check(tribename);
+	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
 }
 
 void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) const {
-	workers_->get(workerindex)->set_has_demand_check();
+	workers_->get_mutable(workerindex)->set_has_demand_check();
 }
 
 
 void Tribes::load_graphics()
 {
-	for (WareIndex i = 0; i < static_cast<WareIndex>(workers_->get_nitems()); ++i) {
-		workers_->get(i)->load_graphics();
+	for (WareIndex i = 0; i < static_cast<WareIndex>(workers_->size()); ++i) {
+		workers_->get_mutable(i)->load_graphics();
 	}
 
-	for (WareIndex i = 0; i < static_cast<WareIndex>(wares_->get_nitems()); ++i) {
-		wares_->get(i)->load_graphics();
+	for (WareIndex i = 0; i < static_cast<WareIndex>(wares_->size()); ++i) {
+		wares_->get_mutable(i)->load_graphics();
 	}
 
-	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
-		buildings_->get(i)->load_graphics();
+	for (BuildingIndex i = 0; i < buildings_->size(); ++i) {
+		buildings_->get_mutable(i)->load_graphics();
 	}
 }
-//NOCOM(GunChleoc): Rename this, so it won't get confused with postload in egbase.
-void Tribes::post_load() {
-	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
-		BuildingDescr& building_descr = *buildings_->get(i);
+
+void Tribes::postload() {
+	for (BuildingIndex i = 0; i < buildings_->size(); ++i) {
+		BuildingDescr& building_descr = *buildings_->get_mutable(i);
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
 			for (const WareAmount& ware_amount : de->inputs()) {
-				wares_->get(ware_amount.first)->add_consumer(i);
+				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const WareIndex& wareindex : de->output_ware_types()) {
-				wares_->get(wareindex)->add_producer(i);
+				wares_->get_mutable(wareindex)->add_producer(i);
 			}
 		}
 
 		// Register which buildings buildings can have been enhanced from
 		const BuildingIndex& enhancement = building_descr.enhancement();
 		if (building_exists(enhancement)) {
-			buildings_->get(enhancement)->set_enhanced_from(i);
+			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}
-
-		// set_ware_type_has_demand_check(wareindex, tribe_descr.name());
 	}
 }
 

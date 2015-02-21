@@ -6,12 +6,12 @@ tribes:new_tribe {
    animations = {
 		-- No idea for the frontier. Maybe some javelins?
 		frontier = {
-			pictures = path.list_directory(dirname .. "images/empire/", "frontier_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/empire", "frontier_\\d+.png"),
 			hotspot = { 1, 19 },
 		},
 		-- Not just a plain color, maybe a cross or some stripes
 		flag = {
-			pictures = path.list_directory(dirname .. "images/empire/", "flag_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/empire", "flag_\\d+.png"),
 			hotspot = { 14, 38 },
 			fps = 10
 		}
@@ -87,7 +87,6 @@ tribes:new_tribe {
    workers_order = {
 		{
 			-- Carriers
-			"empire_builder",
 			"empire_carrier",
 			"empire_donkey",
 			"empire_donkeybreeder"
@@ -122,11 +121,11 @@ tribes:new_tribe {
 			"empire_miner_master",
 			"empire_charcoal_burner",
 			"empire_smelter"
-		}
+		},
 		{
 			-- Tools
 			"empire_toolsmith"
-		}
+		},
 		{
 			-- Military
 			"empire_soldier",
@@ -136,12 +135,12 @@ tribes:new_tribe {
 			"empire_scout"
 		}
 	},
-
 	builder = "empire_builder",
 	carrier = "empire_carrier",
 	carrier2 = "empire_donkey",
-	geologist = "barbarians_geologist",
+	geologist = "empire_geologist",
    soldier = "empire_soldier",
+
    ship = "ship_empire",
 
    immovables = {
@@ -168,7 +167,9 @@ tribes:new_tribe {
 		"resi_stones2",
 		"shipconstruction_empire",
 	},
-	militarysites = {
+
+	buildings = {
+		-- Militarysites
 		"empire_barrier",
 		"empire_blockhouse",
 		"empire_castle",
@@ -176,17 +177,16 @@ tribes:new_tribe {
 		"empire_outpost",
 		"empire_sentry",
 		"empire_tower",
-	},
-	trainingsites = {
+
+		-- Trainingsites
 		"empire_arena",
 		"empire_colosseum",
 		"empire_trainingcamp",
-	},
-   productionsites = {
-		-- Carriers
+
+		-- Productionsites - Carriers
 		"empire_donkeyfarm",
 
-		-- Building Materials
+		-- Productionsites - Building Materials
 		"empire_foresters_house",
 		"empire_lumberjacks_house",
 		"empire_quarry",
@@ -195,7 +195,7 @@ tribes:new_tribe {
 		"empire_sheepfarm",
 		"empire_weaving_mill",
 
-		-- Food
+		-- Productionsites - Food
 		"empire_bakery",
 		"empire_brewery",
 		"empire_farm",
@@ -209,7 +209,7 @@ tribes:new_tribe {
 		"empire_well",
 		"empire_winery",
 
-		-- Mining
+		-- Productionsites - Mining
 		"empire_charcoal_kiln",
 		"empire_coalmine",
 		"empire_coalmine_deep",
@@ -221,23 +221,21 @@ tribes:new_tribe {
 		"empire_marblemine_deep",
 		"empire_smelting_works",
 
-		-- Tools, Military & Ships
+		-- Productionsites - Tools, Military & Ships
 		"empire_armorsmithy",
 		"empire_scouts_house",
 		"empire_shipvard",
 		"empire_toolsmithy",
 		"empire_weaponsmithy",
-	},
-   warehouses = {
-		"barbarians_headquarters",
-		"barbarians_headquarters_shipwreck",
-		"barbarians_port",
-		"barbarians_warehouse",
-	},
-   constructionsites = {
-		"constructionsite"
-	},
-   dismantlesites = {
-		"dismantlesite"
+
+		-- Warehouses
+		"empire_headquarters",
+		"empire_headquarters_shipwreck",
+		"empire_port",
+		"empire_warehouse",
+
+		-- Partially Finished Buildings
+		"constructionsite",
+		"dismantlesite",
 	},
 }

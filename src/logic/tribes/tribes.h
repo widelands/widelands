@@ -143,7 +143,7 @@ public:
 	void load_graphics();
 
 	/// Complete the Description objects' information with data from other Description objects.
-	void post_load();
+	void postload();
 
 private:
 	EditorGameBase& egbase_;

@@ -126,8 +126,7 @@ public:
 	void resize_ware_orders(size_t maxLength);
 
 private:
-	// Helper function for adding a building type
-	void add_building(const std::string& buildingname);
+	// Helper function for adding a special worker type (carriers etc.)
 	WareIndex add_special_worker(const std::string& workername);
 
 	const std::string name_;

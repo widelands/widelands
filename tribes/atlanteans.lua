@@ -6,12 +6,12 @@ tribes:new_tribe {
    animations = {
 		-- Some blue fires would be fine, but just an idea
 		frontier = {
-			pictures = path.list_directory(dirname .. "images/atlanteans/", "frontier_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/atlanteans", "frontier_\\d+.png"),
 			hotspot = { 3, 12 },
 		},
 		flag = {
 			-- Not just a plain color, maybe a cross or some stripes
-			pictures = path.list_directory(dirname .. "images/atlanteans/", "flag_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/atlanteans", "flag_\\d+.png"),
 			hotspot = { 15, 35 },
 			fps = 10
 		}
@@ -60,7 +60,7 @@ tribes:new_tribe {
 			"hammer",
 			"milking_tongs",
 			"fishing_net",
-			"bucket",
+			"buckets",
 			"hunting_bow",
 			"hook_pole",
 			"scythe",
@@ -88,7 +88,6 @@ tribes:new_tribe {
    workers_order = {
 		{
 			-- Carriers
-			"atlanteans_builder",
 			"atlanteans_carrier",
 			"atlanteans_horse",
 			"atlanteans_horsebreeder"
@@ -135,12 +134,12 @@ tribes:new_tribe {
 			"atlanteans_scout"
 		}
 	},
-
 	builder = "atlanteans_builder",
 	carrier = "atlanteans_carrier",
 	carrier2 = "atlanteans_horse",
 	geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
+
    ship = "ship_atlanteans",
 
    immovables = {
@@ -168,22 +167,23 @@ tribes:new_tribe {
 		"resi_stones2",
 		"shipconstruction_atlanteans",
 	},
-	militarysites = {
+
+	buildings = {
+		-- Militarysites
 		"atlanteans_castle",
 		"atlanteans_guardhall",
 		"atlanteans_tower",
 		"atlanteans_tower_high",
-		"atlanteans_tower_small"
-	},
-	trainingsites = {
+		"atlanteans_tower_small",
+
+		-- Trainingsites
 		"atlanteans_dungeon",
 		"atlanteans_labyrinth",
-	},
-   productionsites = {
-		-- Carriers
+
+		-- Productionsites - Carriers
 		"atlanteans_horsefarm",
 
-		-- Building Materials
+		-- Productionsites - Building Materials
 		"atlanteans_foresters_house",
 		"atlanteans_quarry",
 		"atlanteans_sawmill",
@@ -191,7 +191,7 @@ tribes:new_tribe {
 		"atlanteans_weaving_mill",
 		"atlanteans_woodcutters_house",
 
-		-- Food
+		-- Productionsites - Food
 		"atlanteans_bakery",
 		"atlanteans_blackroot_farm",
 		"atlanteans_farm",
@@ -202,7 +202,7 @@ tribes:new_tribe {
 		"atlanteans_smokery",
 		"atlanteans_well",
 
-		-- Mining
+		-- Productionsites - Mining
 		"atlanteans_charcoal_kiln",
 		"atlanteans_coalmine",
 		"atlanteans_crystalmine",
@@ -211,23 +211,20 @@ tribes:new_tribe {
 		"atlanteans_ironmine",
 		"atlanteans_smelting_works",
 
-		-- Tools, Military & Ships
+		-- Productionsites - Tools, Military & Ships
 		"atlanteans_armorsmithy",
 		"atlanteans_scouts_house",
 		"atlanteans_shipyard",
 		"atlanteans_toolsmithy",
 		"atlanteans_weaponsmithy",
 
-	},
-   warehouses = {
+		-- Warehouses
 		"atlanteans_headquarters",
 		"atlanteans_port",
 		"atlanteans_warehouse",
-	},
-   constructionsites = {
-		"constructionsite"
-	},
-   dismantlesites = {
-		"dismantlesite"
+
+		-- Partially Finished Buildings
+		"constructionsite",
+		"dismantlesite",
 	},
 }

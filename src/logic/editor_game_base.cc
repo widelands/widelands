@@ -139,9 +139,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 
 		try {
 			lua_->run_script("tribes/init.lua");
-			tribes_->post_load();
-		}
-		catch (const WException& e) {
+		} catch (const WException& e) {
 			log("Could not read tribes information: %s", e.what());
 			throw;
 		}
@@ -235,7 +233,8 @@ void EditorGameBase::allocate_player_maps() {
 void EditorGameBase::postload()
 {
 	// Postload tribes
-	tribes(); // NOCOM(GunChleoc): Do we need this?
+	assert(tribes_);
+	tribes_->postload();
 
 	// TODO(unknown): postload players? (maybe)
 }
@@ -248,8 +247,7 @@ void EditorGameBase::postload()
  */
 void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 {
-	loader_ui.step(_("Loading tribes' graphics"));
-	tribes(); // Make sure that the tribes information has been loaded
+	assert(tribes_);
 	tribes_->load_graphics();
 
 	// TODO(unknown): load player graphics? (maybe)
@@ -355,7 +353,7 @@ Bob & EditorGameBase::create_bob
 		return create_bob(c, *descr, owner);
 	} else {
 		try {
-			int idx = tribes_->safe_ship_index(name);
+			int idx = tribes().safe_ship_index(name);
 			const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(idx));
 			return create_bob(c, *descr, owner);
 		} catch (const GameDataError& e) {

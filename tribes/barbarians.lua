@@ -5,11 +5,11 @@ tribes:new_tribe {
 
    animations = {
 		frontier = {
-			pictures = path.list_directory(dirname .. "images/barbarians/", "frontier_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/barbarians", "frontier_\\d+.png"),
 			hotspot = { 1, 19 },
 		},
 		flag = {
-			pictures = path.list_directory(dirname .. "images/barbarians/", "flag_\\d+.png"),
+			pictures = path.list_directory(dirname .. "images/barbarians", "flag_\\d+.png"),
 			hotspot = { 10, 38 },
 			fps = 5
 		}
@@ -82,7 +82,6 @@ tribes:new_tribe {
    workers_order = {
 		{
 			-- Carriers
-			"barbarians_builder",
 			"barbarians_carrier",
 			"barbarians_ox",
 			"barbarians_cattlebreeder"
@@ -103,7 +102,7 @@ tribes:new_tribe {
 			"barbarians_fisher",
 			"barbarians_hunter",
 			"barbarians_gamekeeper",
-			"barbarians_farmer"
+			"barbarians_farmer",
 			"barbarians_baker",
 			"barbarians_brewer",
 			"barbarians_brewer_master",
@@ -113,16 +112,16 @@ tribes:new_tribe {
 			-- Mining
 			"barbarians_geologist",
 			"barbarians_miner",
-			"barbarians_miner_chief"
+			"barbarians_miner_chief",
 			"barbarians_miner_master",
 			"barbarians_charcoal_burner",
 			"barbarians_smelter"
-		}
+		},
 		{
 			-- Tools
 			"barbarians_blacksmith",
 			"barbarians_blacksmith_master"
-		}
+		},
 		{
 			-- Military
 			"barbarians_soldier",
@@ -131,12 +130,12 @@ tribes:new_tribe {
 			"barbarians_scout"
 		}
 	},
-
 	builder = "barbarians_builder",
 	carrier = "barbarians_carrier",
 	carrier2 = "barbarians_ox",
 	geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
+
    ship = "ship_barbarians",
 
    immovables = {
@@ -163,22 +162,23 @@ tribes:new_tribe {
 		"resi_stones2",
 		"shipconstruction_barbarians",
 	},
-	militarysites = {
+
+	buildings = {
+		--Militarysites
 		"barbarians_barrier",
 		"barbarians_citadel",
 		"barbarians_fortress",
 		"barbarians_sentry",
 		"barbarians_tower",
-	},
-	trainingsites = {
+
+		-- Trainingsites
 		"barbarians_battlearena",
 		"barbarians_trainingcamp",
-	},
-   productionsites = {
-		-- Carriers
+
+		-- Productionsites - Carriers
 		"barbarians_cattlefarm",
 
-		-- Building Materials
+		-- Productionsites - Building Materials
 		"barbarians_lime_kiln",
 		"barbarians_lumberjacks_hut",
 		"barbarians_quarry",
@@ -186,7 +186,7 @@ tribes:new_tribe {
 		"barbarians_reed_yard",
 		"barbarians_wood_hardener",
 
-		-- Food
+		-- Productionsites - Food
 		"barbarians_bakery",
 		"barbarians_big_inn",
 		"barbarians_brewery",
@@ -199,7 +199,7 @@ tribes:new_tribe {
 		"barbarians_tavern",
 		"barbarians_well",
 
-		-- Mining
+		-- Productionsites - Mining
 		"barbarians_charcoal_kiln",
 		"barbarians_coalmine",
 		"barbarians_coalmine_deep",
@@ -213,7 +213,7 @@ tribes:new_tribe {
 		"barbarians_ironmine_deeper",
 		"barbarians_smelting_works",
 
-		-- Tools, Military & Ships
+		-- Productionsites - Tools, Military & Ships
 		"barbarians_axfactory",
 		"barbarians_helmsmithy",
 		"barbarians_metal_workshop",
@@ -221,17 +221,15 @@ tribes:new_tribe {
 		"barbarians_shipyard",
 		"barbarians_warmill",
 		"barbarians_weaving_mill",
-	},
-   warehouses = {
+
+		-- Warehouses
 		"barbarians_headquarters",
 		"barbarians_headquarters_interim",
 		"barbarians_port",
 		"barbarians_warehouse",
-	},
-   constructionsites = {
-		"constructionsite"
-	},
-   dismantlesites = {
-		"dismantlesite"
+
+		-- Partially Finished Buildings
+		"constructionsite",
+		"dismantlesite",
 	},
 }

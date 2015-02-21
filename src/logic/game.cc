@@ -232,6 +232,8 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	if (!background.empty()) {
 		loaderUI.set_background(background);
 	}
+	loaderUI.stepf(_("Loading tribes"));
+	tribes();
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
@@ -286,6 +288,12 @@ void Game::init_newgame
 	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
+
+	if (loaderUI) {
+		loaderUI->step(_("Loading tribes"));
+	}
+	tribes();
+
 	std::string const background = map().get_background();
 	if (loaderUI) {
 		if (!background.empty()) {

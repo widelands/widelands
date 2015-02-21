@@ -2962,7 +2962,7 @@ Load/save support
 ==============================
 */
 
-#define WORKER_SAVEGAME_VERSION 2
+#define WORKER_SAVEGAME_VERSION 3
 
 Worker::Loader::Loader() :
 	m_location(0),
@@ -2975,7 +2975,7 @@ void Worker::Loader::load(FileRead & fr)
 	Bob::Loader::load(fr);
 
 	uint8_t version = fr.unsigned_8();
-	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
+	if (version != WORKER_SAVEGAME_VERSION)
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
@@ -2983,11 +2983,9 @@ void Worker::Loader::load(FileRead & fr)
 	m_carried_ware = fr.unsigned_32();
 	worker.m_current_exp = fr.signed_32();
 
-	if (version >= 2) {
-		if (fr.unsigned_8()) {
-			worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
-			worker.m_transfer->read(fr, m_transfer);
-		}
+	if (fr.unsigned_8()) {
+		worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
+		worker.m_transfer->read(fr, m_transfer);
 	}
 }
 

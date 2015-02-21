@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type{
-   name = "empire_shipconstruction",
+   name = "shipconstruction_empire",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Ship Under Construction",
    size = "small",

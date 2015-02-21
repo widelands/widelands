@@ -4,7 +4,6 @@ tribes:new_warehouse_type {
    name = "empire_headquarters_shipwreck",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Headquarters Shipwreck",
-   icon = dirname .. "menu.png",
    size = "big",
    buildable = false,
    destructible = false,

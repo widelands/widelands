@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
-   name = "new_immovable_type",
+   name = "resi_stones1",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = _"Some Stones",
    attributes = { "resi" },

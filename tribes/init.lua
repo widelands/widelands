@@ -15,6 +15,7 @@ tribes = wl.Tribes()
 --    Wares
 -- ===================================
 
+print("Loading Wares")
 include "tribes/wares/armor/init.lua"
 include "tribes/wares/armor_chain/init.lua"
 include "tribes/wares/armor_gilded/init.lua"
@@ -131,6 +132,7 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    end
 end
 
+print("Loading Workers")
 include "tribes/workers/atlanteans/armorsmith/init.lua"
 include "tribes/workers/atlanteans/baker/init.lua"
 include "tribes/workers/atlanteans/blackroot_farmer/init.lua"
@@ -146,6 +148,7 @@ include "tribes/workers/atlanteans/horse/init.lua"
 include "tribes/workers/atlanteans/horsebreeder/init.lua"
 include "tribes/workers/atlanteans/hunter/init.lua"
 include "tribes/workers/atlanteans/miller/init.lua"
+include "tribes/workers/atlanteans/miner/init.lua"
 include "tribes/workers/atlanteans/sawyer/init.lua"
 include "tribes/workers/atlanteans/scout/init.lua"
 include "tribes/workers/atlanteans/shipwright/init.lua"
@@ -230,6 +233,7 @@ include "tribes/workers/empire/weaver/init.lua"
 --    Ships
 -- ===================================
 
+print("Loading Ships")
 include "tribes/ships/ship_atlanteans/init.lua"
 include "tribes/ships/ship_barbarians/init.lua"
 include "tribes/ships/ship_empire/init.lua"
@@ -239,6 +243,7 @@ include "tribes/ships/ship_empire/init.lua"
 --    Immovables
 -- ===================================
 
+print("Loading Immovables")
 include "tribes/immovables/ashes/init.lua"
 include "tribes/immovables/blackrootfield_harvested/init.lua"
 include "tribes/immovables/blackrootfield_medium/init.lua"
@@ -283,6 +288,7 @@ include "tribes/immovables/shipconstruction_empire/init.lua"
 --    Militarysites
 -- ===================================
 
+print("Loading Militarysites")
 include "tribes/buildings/militarysites/atlanteans/castle/init.lua"
 include "tribes/buildings/militarysites/atlanteans/guardhall/init.lua"
 include "tribes/buildings/militarysites/atlanteans/guardhouse/init.lua"
@@ -293,6 +299,7 @@ include "tribes/buildings/militarysites/barbarians/barrier/init.lua"
 include "tribes/buildings/militarysites/barbarians/citadel/init.lua"
 include "tribes/buildings/militarysites/barbarians/fortress/init.lua"
 include "tribes/buildings/militarysites/barbarians/sentry/init.lua"
+include "tribes/buildings/militarysites/barbarians/tower/init.lua"
 include "tribes/buildings/militarysites/empire/barrier/init.lua"
 include "tribes/buildings/militarysites/empire/sentry/init.lua"
 include "tribes/buildings/militarysites/empire/blockhouse/init.lua"
@@ -306,6 +313,7 @@ include "tribes/buildings/militarysites/empire/tower/init.lua"
 --    Trainingsites
 -- ===================================
 
+print("Loading Trainingsites")
 include "tribes/buildings/trainingsites/atlanteans/dungeon/init.lua"
 include "tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua"
 include "tribes/buildings/trainingsites/barbarians/battlearena/init.lua"
@@ -319,6 +327,7 @@ include "tribes/buildings/trainingsites/empire/trainingcamp/init.lua"
 --    Productionsites
 -- ===================================
 
+print("Loading Productionsites")
 include "tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/bakery/init.lua"
 include "tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua"
@@ -347,6 +356,7 @@ include "tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua"
 include "tribes/buildings/productionsites/atlanteans/well/init.lua"
 include "tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua"
+
 include "tribes/buildings/productionsites/barbarians/warmill/init.lua"
 include "tribes/buildings/productionsites/barbarians/axfactory/init.lua"
 include "tribes/buildings/productionsites/barbarians/bakery/init.lua"
@@ -404,6 +414,7 @@ include "tribes/buildings/productionsites/empire/ironmine/init.lua"
 include "tribes/buildings/productionsites/empire/lumberjacks_house/init.lua"
 include "tribes/buildings/productionsites/empire/marblemine_deep/init.lua"
 include "tribes/buildings/productionsites/empire/marblemine/init.lua"
+include "tribes/buildings/productionsites/empire/mill/init.lua"
 include "tribes/buildings/productionsites/empire/piggery/init.lua"
 include "tribes/buildings/productionsites/empire/quarry/init.lua"
 include "tribes/buildings/productionsites/empire/sawmill/init.lua"
@@ -425,6 +436,7 @@ include "tribes/buildings/productionsites/empire/winery/init.lua"
 --    Warehouses
 -- ===================================
 
+print("Loading Warehouses")
 include "tribes/buildings/warehouses/atlanteans/headquarters/init.lua"
 include "tribes/buildings/warehouses/atlanteans/port/init.lua"
 include "tribes/buildings/warehouses/atlanteans/warehouse/init.lua"
@@ -442,15 +454,19 @@ include "tribes/buildings/warehouses/empire/warehouse/init.lua"
 --    Partially Finished Buildings
 -- ===================================
 
+print("Loading Partially Finished Buildings")
 include "tribes/buildings/partially_finished/constructionsite/init.lua"
 include "tribes/buildings/partially_finished/dismantlesite/init.lua"
-
 
 
 -- ===================================
 --    Tribes
 -- ===================================
-
+print("Loading Atlanteans")
 include "tribes/atlanteans.lua"
+print("Loading Barbarians")
 include "tribes/barbarians.lua"
+print("Loading Empire")
 include "tribes/empire.lua"
+
+print("Finished loading tribes")
