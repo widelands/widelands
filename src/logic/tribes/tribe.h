@@ -132,8 +132,8 @@ private:
 	const std::string name_;
 	EditorGameBase& egbase_;
 
-	uint32_t m_frontier_animation_id;
-	uint32_t m_flag_animation_id;
+	uint32_t frontier_animation_id_;
+	uint32_t flag_animation_id_;
 
 	std::set<BuildingIndex>     buildings_;
 	std::set<int>               immovables_;  // The player immovables

@@ -247,7 +247,6 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const Tribes& tribes) :
 			try {
 				WareIndex index = tribes.ware_index(key);
 
-				// NOCOM(GunChleoc): Do we need to allow workers like for buildings?
 				if (index == INVALID_INDEX) {
 					throw GameDataError
 						("\"%s\" has not been defined as a ware/worker type (wrong "

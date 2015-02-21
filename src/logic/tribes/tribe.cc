@@ -61,8 +61,8 @@ TribeDescr::TribeDescr
 		m_initializations = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		m_frontier_animation_id = g_gr->animations().load(*items_table->get_table("frontier"));
-		m_flag_animation_id = g_gr->animations().load(*items_table->get_table("flag"));
+		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
+		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(egbase_.tribes().nrwares());
@@ -107,6 +107,10 @@ TribeDescr::TribeDescr
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
 					workers_order_coords_[workerindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
+
+					if (egbase_.tribes().get_worker_descr(workerindex)->buildcost().size() < 1) {
+						worker_types_without_cost_.push_back(workerindex);
+					}
 				} catch (const WException& e) {
 					throw GameDataError("Failed adding worker '%s: %s", workername.c_str(), e.what());
 				}
@@ -269,11 +273,11 @@ const std::vector<WareIndex>& TribeDescr::worker_types_without_cost() const {
 }
 
 uint32_t TribeDescr::frontier_animation() const {
-	return m_frontier_animation_id;
+	return frontier_animation_id_;
 }
 
 uint32_t TribeDescr::flag_animation() const {
-	return m_flag_animation_id;
+	return flag_animation_id_;
 }
 
 /*
