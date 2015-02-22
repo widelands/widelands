@@ -30,11 +30,16 @@
 
 namespace Widelands {
 
-WareDescr::WareDescr(const LuaTable& table) :
-	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), table.get_string("descname")),
-	generic_name_(table.get_string("genericname")),
+WareDescr::WareDescr(const std::string& init_descname,
+							const std::string& init_genericname,
+							const LuaTable& table) :
+	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname),
+	generic_name_(init_genericname),
 	icon_fname_(table.get_string("icon")),
 	icon_(g_gr->images().get("pics/but0.png")) {
+
+	assert(!generic_name_.empty());
+	i18n::Textdomain td("tribes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
 	for (const std::string& key : items_table->keys<std::string>()) {
@@ -48,7 +53,7 @@ WareDescr::WareDescr(const LuaTable& table) :
 
 	items_table = table.get_table("helptext");
 	for (const std::string& key : items_table->keys<std::string>()) {
-		helptexts_.emplace(key, items_table->get_string(key));
+		helptexts_.emplace(key, _(items_table->get_string(key)));
 	}
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));

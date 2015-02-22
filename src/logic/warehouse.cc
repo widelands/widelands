@@ -251,8 +251,8 @@ Warehouse Building
 */
 
 WarehouseDescr::WarehouseDescr
-	(const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(MapObjectType::WAREHOUSE, table, egbase),
+	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
+	: BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, egbase),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
 {

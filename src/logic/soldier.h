@@ -45,7 +45,8 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const LuaTable& t, const EditorGameBase& egbase);
+	SoldierDescr(const std::string& init_descname, const std::string& init_genericname,
+					 const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
 	void load_graphics() override;

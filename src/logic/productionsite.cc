@@ -55,15 +55,17 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(_type, table, egbase)
+	(const std::string& init_descname, MapObjectType _type,
+	 const LuaTable& table, const EditorGameBase& egbase)
+	: BuildingDescr(init_descname, _type, table, egbase)
 {
+	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
-		m_out_of_resource_title = items_table->get_string("title");
-		m_out_of_resource_message = items_table->get_string("message");
+		m_out_of_resource_title = _(items_table->get_string("title"));
+		m_out_of_resource_message = _(items_table->get_string("message"));
 		m_out_of_resource_delay_attempts = items_table->get_int("delay_attempts");
 	} else {
 		m_out_of_resource_title = "";
@@ -179,8 +181,8 @@ ProductionSiteDescr::ProductionSiteDescr
 }
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const LuaTable& table, const EditorGameBase& egbase)
-	: ProductionSiteDescr(MapObjectType::PRODUCTIONSITE, table, egbase)
+	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
+	: ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, egbase)
 {}
 
 

@@ -36,16 +36,21 @@
 
 namespace Widelands {
 
-WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const EditorGameBase& egbase) :
-	BobDescr(init_type, MapObjectDescr::OwnerType::kTribe, table),
+WorkerDescr::WorkerDescr(const std::string& init_descname,
+								 const std::string& init_genericname,
+								 MapObjectType init_type,
+								 const LuaTable& table,
+								 const EditorGameBase& egbase) :
+	BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
 	ware_hotspot_      (Point(0, 15)),
 	icon_fname_        (table.get_string("icon")),
 	icon_              (nullptr),
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX),
-	generic_name_(table.has_key("genericname") ? table.get_string("genericname") : ""),
+	generic_name_      (init_genericname),
 	egbase_            (egbase)
 {
+	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 	if (table.has_key("buildcost")) {
 		items_table = table.get_table("buildcost");
@@ -77,7 +82,7 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 		}
 	}
 
-	helptext_ = table.get_string("helptext");
+	helptext_ = _(table.get_string("helptext"));
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");
@@ -125,9 +130,10 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 		}
 	}
 
-	// For carriers
 	if (table.has_key("default_target_quantity")) {
 		default_target_quantity_ = table.get_int("default_target_quantity");
+	} else {
+		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
 	}
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
@@ -135,8 +141,9 @@ WorkerDescr::WorkerDescr(MapObjectType init_type, const LuaTable& table, const E
 	}
 }
 
-WorkerDescr::WorkerDescr(const LuaTable& table, const EditorGameBase& egbase) :
-	WorkerDescr(MapObjectType::WORKER, table, egbase)
+WorkerDescr::WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+								 const LuaTable& table, const EditorGameBase& egbase) :
+	WorkerDescr(init_descname, init_genericname, MapObjectType::WORKER, table, egbase)
 {}
 
 

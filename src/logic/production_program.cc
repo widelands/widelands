@@ -148,6 +148,9 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 						const TribeDescr* tribe_descr = tribes.get_tribe_descr(i);
 						if (tribe_descr->has_worker(workerindex)) {
 							tribes.set_worker_type_has_demand_check(workerindex);
+							if (tribes.get_worker_descr(workerindex)->genericname().empty()) {
+								throw GameDataError("Worker '%s' needs a genericname in the init.lua", type_name);
+							}
 						}
 					}
 					return

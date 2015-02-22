@@ -101,8 +101,8 @@ bool Critter::run_remove
 ===========================================================================
 */
 
-CritterDescr::CritterDescr(const LuaTable& table)
-	: BobDescr(MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
+CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& table)
+	: BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
 {
 	add_directional_animation(&m_walk_anims, "walk");
 

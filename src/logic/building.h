@@ -71,7 +71,8 @@ public:
 		std::string performance_;
 	};
 
-	BuildingDescr(MapObjectType type, const LuaTable& t, const EditorGameBase& egbase);
+	BuildingDescr(const std::string& init_descname, MapObjectType type,
+					  const LuaTable& t, const EditorGameBase& egbase);
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}

@@ -36,7 +36,7 @@ struct CritterProgram;
 // Description
 //
 struct CritterDescr : BobDescr {
-	CritterDescr(const LuaTable&);
+	CritterDescr(const std::string& init_descname, const LuaTable&);
 	~CritterDescr() override;
 
 	Bob & create_object() const override;

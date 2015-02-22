@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 tribes:new_productionsite_type {
    name = "barbarians_rangers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Farm",
+   descname = _"Ranger’s Hut",
    icon = dirname .. "menu.png",
    size = "small",
 

@@ -56,9 +56,10 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 BuildingDescr::BuildingDescr
-	(const MapObjectType _type, const LuaTable& table, const EditorGameBase& egbase)
+	(const std::string& init_descname, const MapObjectType _type,
+	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, table.get_string("name"), table.get_string("descname")),
+	MapObjectDescr(_type, table.get_string("name"), init_descname),
 	egbase_         (egbase),
 	m_buildable     (true),
 	m_icon          (nullptr),
@@ -69,20 +70,20 @@ BuildingDescr::BuildingDescr
 	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
-	using boost::iequals;
+	i18n::Textdomain td("tribes");
 
 	try {
 		const std::string size = table.get_string("size");
-		if (iequals(size, "small")) {
+		if (boost::iequals(size, "small")) {
 			m_size = BaseImmovable::SMALL;
-		} else if (iequals(size, "medium")) {
+		} else if (boost::iequals(size, "medium")) {
 			m_size = BaseImmovable::MEDIUM;
-		} else if (iequals(size, "big")) {
+		} else if (boost::iequals(size, "big")) {
 			m_size = BaseImmovable::BIG;
-		} else if (iequals(size, "mine")) {
+		} else if (boost::iequals(size, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
-		} else if (iequals(size, "port")) {
+		} else if (boost::iequals(size, "port")) {
 			m_size = BaseImmovable::BIG;
 			m_port = true;
 		} else {
@@ -165,11 +166,11 @@ BuildingDescr::BuildingDescr
 	}
 
 	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
-	helptexts_.lore_ = items_table->get_string("lore");
-	helptexts_.lore_author_ = items_table->get_string("lore_author");
-	helptexts_.purpose_ = items_table->get_string("purpose");
-	helptexts_.note_ = items_table->get_string("note");
-	helptexts_.performance_ = items_table->get_string("performance");
+	helptexts_.lore_ = _(items_table->get_string("lore"));
+	helptexts_.lore_author_ = _(items_table->get_string("lore_author"));
+	helptexts_.purpose_ = _(items_table->get_string("purpose"));
+	helptexts_.note_ = _(items_table->get_string("note"));
+	helptexts_.performance_ = _(items_table->get_string("performance"));
 
 	assert(is_animation_known("idle"));
 }

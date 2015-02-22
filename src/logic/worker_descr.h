@@ -45,8 +45,10 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr(MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
-	WorkerDescr(const LuaTable& t, const EditorGameBase& egbase);
+	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
+	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+					const LuaTable& t, const EditorGameBase& egbase);
 	~WorkerDescr() override;
 
 	Bob & create_object() const override;
@@ -128,7 +130,9 @@ protected:
 	Programs  programs_;
 private:
 	// Used by production programs for economy conditions.
+	// Init files only need to set this if the worker type has a demand check.
 	const std::string generic_name_;
+
 	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };

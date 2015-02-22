@@ -33,7 +33,7 @@ class World;
 
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
-	TrainingSiteDescr(const LuaTable& table, const EditorGameBase& egbase);
+	TrainingSiteDescr(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;

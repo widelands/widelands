@@ -36,7 +36,7 @@ class World;
 
 class MilitarySiteDescr : public ProductionSiteDescr {
 public:
-	MilitarySiteDescr(const LuaTable& t, const EditorGameBase& egbase);
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;

@@ -182,9 +182,9 @@ ImmovableDescr IMPLEMENTATION
 /**
  * Parse a common immovable functions from init file.
  */
-ImmovableDescr::ImmovableDescr(const LuaTable& table, MapObjectDescr::OwnerType input_type) :
+ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
-	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
+	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname),
 	m_size(BaseImmovable::NONE),
 	owner_type_(input_type) {
 	if (table.has_key("size")) {
@@ -222,8 +222,8 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, MapObjectDescr::OwnerType 
 /**
  * Parse a world immovable from its init file.
  */
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
-	ImmovableDescr(table, MapObjectDescr::OwnerType::kWorld) {
+ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, const World& world) :
+	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
 
 	int editor_category_index =
 			world.editor_immovable_categories().get_index(table.get_string("editor_category"));
@@ -237,8 +237,8 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 /**
  * Parse a tribes immovable from its init file.
  */
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const Tribes& tribes) :
-	ImmovableDescr(table, MapObjectDescr::OwnerType::kTribe) {
+ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes) :
+	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
 	// NOCOM(GunChleoc): Code duplication with building.cc - refactor
 	if (table.has_key("buildcost")) {
 		std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");

@@ -58,7 +58,7 @@ struct NoteShipMessage {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const LuaTable& t);
+	ShipDescr(const std::string& init_descname, const LuaTable& t);
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;

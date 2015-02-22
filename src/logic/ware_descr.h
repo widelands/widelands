@@ -50,7 +50,7 @@ struct TribeDescr;
 */
 class WareDescr : public MapObjectDescr {
 public:
-	WareDescr(const LuaTable& t);
+	WareDescr(const std::string& init_descname, const std::string& init_genericname, const LuaTable& t);
 	~WareDescr() override {}
 
 	/// Returns the ware's generic mass name. Needed in the production programs.

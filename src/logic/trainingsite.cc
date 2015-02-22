@@ -41,10 +41,10 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
 TrainingSiteDescr::TrainingSiteDescr
-	(const LuaTable& table, const EditorGameBase& egbase)
+	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::TRAININGSITE, table, egbase),
+		(init_descname, MapObjectType::TRAININGSITE, table, egbase),
 	m_num_soldiers      (table.get_int("soldier_capacity")),
 	m_max_stall         (table.get_int("trainer_patience")),
 

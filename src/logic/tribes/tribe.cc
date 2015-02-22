@@ -55,9 +55,6 @@ TribeDescr::TribeDescr
 {
 
 	try {
-		// Grab the localization textdomain.
-		i18n::Textdomain td("tribes");
-
 		m_initializations = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");

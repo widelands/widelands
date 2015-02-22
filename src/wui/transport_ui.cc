@@ -201,7 +201,6 @@ private:
 		bool m_can_act;
 		TargetWaresDisplay m_display;
 		Economy & m_economy;
-
 		EconomyOptionsWorkerPanel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),

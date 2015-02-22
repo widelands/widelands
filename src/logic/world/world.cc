@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/i18n.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "graphic/texture_atlas.h"
@@ -95,7 +96,8 @@ void World::add_terrain_type(const LuaTable& table) {
 }
 
 void World::add_critter_type(const LuaTable& table) {
-	bobs_->add(new CritterDescr(table));
+	i18n::Textdomain td("world");
+	bobs_->add(new CritterDescr(_(table.get_string("descname")), table));
 }
 
 const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
@@ -103,7 +105,8 @@ const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 }
 
 void World::add_immovable_type(const LuaTable& table) {
-	immovables_->add(new ImmovableDescr(table, *this));
+	i18n::Textdomain td("world");
+	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
 }
 
 void World::add_editor_terrain_category(const LuaTable& table) {

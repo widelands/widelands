@@ -42,14 +42,18 @@
 
 namespace Widelands {
 
-MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table, const EditorGameBase& egbase)
+MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
+												 const LuaTable& table,
+												 const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::MILITARYSITE, table, egbase),
+		(init_descname, MapObjectType::MILITARYSITE, table, egbase),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)
 {
+	i18n::Textdomain td("tribes");
+
 	m_conquer_radius      = table.get_int("conquers");
 	m_num_soldiers        = table.get_int("max_soldiers");
 	m_heal_per_second     = table.get_int("heal_per_second");
@@ -59,11 +63,11 @@ MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table, const EditorGameBase
 	m_prefers_heroes_at_start = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
-	m_occupied_str = items_table->get_string("occupied");
-	m_aggressor_str = items_table->get_string("aggressor");
-	m_attack_str = items_table->get_string("attack");
-	m_defeated_enemy_str = items_table->get_string("defeated_enemy");
-	m_defeated_you_str = items_table->get_string("defeated_you");
+	m_occupied_str = _(items_table->get_string("occupied"));
+	m_aggressor_str = _(items_table->get_string("aggressor"));
+	m_attack_str = _(items_table->get_string("attack"));
+	m_defeated_enemy_str = _(items_table->get_string("defeated_enemy"));
+	m_defeated_you_str = _(items_table->get_string("defeated_you"));
 }
 
 

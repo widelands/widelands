@@ -41,8 +41,10 @@
 
 namespace Widelands {
 
-ConstructionSiteDescr::ConstructionSiteDescr(const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(MapObjectType::CONSTRUCTIONSITE, table, egbase)
+ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
+															const LuaTable& table,
+															const EditorGameBase& egbase)
+	: BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase)
 {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
