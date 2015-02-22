@@ -868,29 +868,16 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy conquers the building
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
-		Player            * enemyplayer = enemy.get_owner();
-		const TribeDescr & enemytribe  = enemyplayer->tribe();
 
-		// Add suffix to all descr in former buildings in cases
-		// the new owner comes from another tribe
-		Building::FormerBuildings former_buildings;
-		for (BuildingIndex former_idx : m_old_buildings) {
-			const BuildingDescr * old_descr = owner().tribe().get_building_descr(former_idx);
-			std::string bldname = old_descr->name();
-			// Has this building already a suffix? == conquered building?
-			std::string::size_type const dot = bldname.rfind('.');
-			if (dot >= bldname.size()) {
-				// Add suffix, if the new owner uses another tribe than we.
-				if (enemytribe.name() != owner().tribe().name())
-					bldname += "." + owner().tribe().name();
-			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
-				bldname = bldname.substr(0, dot);
-			BuildingIndex bldi = enemytribe.safe_building_index(bldname.c_str());
-			former_buildings.push_back(bldi);
-		}
+		Building::FormerBuildings former_buildings = m_old_buildings;
+
+		// The enemy conquers the building
+		// In fact we do not conquer it, but place a new building of same type at
+		// the old location.
+		Player* enemyplayer = enemy.get_owner();
 
 		// Now we destroy the old building before we place the new one.
-		set_defeating_player(enemy.owner().player_number());
+		set_defeating_player(enemyplayer->player_number());
 		schedule_destroy(game);
 
 		enemyplayer->force_building(coords, former_buildings);
