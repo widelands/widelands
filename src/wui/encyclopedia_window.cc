@@ -113,15 +113,11 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	prodSites.clear();
 	condTable.clear();
 
-	for (const BuildingIndex& building_index : selectedWare->consumers()) {
+	for (const BuildingIndex& building_index : selectedWare->producers()) {
 		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
-		prodSites.add(building_descr->descname(), building_index, building_descr->get_icon());
-
-	}
-	if (tribe.is_construction_material(wares.get_selected())) {
-		const BuildingIndex& building_index = tribe.building_index("constructionsite");
-		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
-		prodSites.add(building_descr->descname(), building_index, building_descr->get_icon());
+		if (tribe.has_building(building_index)) {
+			prodSites.add(building_descr->descname(), building_index, building_descr->get_icon());
+		}
 	}
 	if (!prodSites.empty()) {
 		prodSites.select(0);
