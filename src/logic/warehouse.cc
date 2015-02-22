@@ -871,7 +871,7 @@ Worker & Warehouse::launch_worker
 				// Create a new one
 				// NOTE: This code lies about the TrainingAttributes of the new worker
 				m_supply->remove_workers(ware, 1);
-				const WorkerDescr & workerdescr = *owner().tribe().get_worker_descr(ware);
+				const WorkerDescr & workerdescr = *game.tribes().get_worker_descr(ware);
 				return workerdescr.create(game, owner(), this, m_position);
 			}
 		}
@@ -880,7 +880,7 @@ Worker & Warehouse::launch_worker
 			// don't want to use an upgraded worker, so create new one.
 			create_worker(game, ware);
 		} else {
-			ware = owner().tribe().get_worker_descr(ware)->becomes();
+			ware = game.tribes().get_worker_descr(ware)->becomes();
 		}
 	} while (ware != INVALID_INDEX);
 
@@ -1025,11 +1025,14 @@ bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
 		const std::string & input_name = buildcost.first;
 		WareIndex id_w = owner().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
-			if (m_supply->stock_wares(id_w) < buildcost.second)
+			if (m_supply->stock_wares(id_w) < buildcost.second) {
 				return false;
+			}
 		} else if ((id_w = owner().tribe().worker_index(input_name)) != INVALID_INDEX) {
-			if (m_supply->stock_workers(id_w) < buildcost.second)
+			if (m_supply->stock_workers(id_w) < buildcost.second) {
+				//NOCOM(GunChleoc) This will fail for <tribe>_carrier as buildcost
 				return false;
+			}
 		} else
 			throw wexception
 				("worker type %s needs \"%s\" to be built but that is neither "
@@ -1050,7 +1053,7 @@ void Warehouse::create_worker(Game & game, WareIndex const worker) {
 		const std::string & input = buildcost.first;
 		WareIndex const id_ware = owner().tribe().ware_index(input);
 		if (id_ware != INVALID_INDEX) {
-			remove_wares  (id_ware,                        buildcost.second);
+			remove_wares(id_ware, buildcost.second);
 			//update statistic accordingly
 			owner().ware_consumed(id_ware, buildcost.second);
 		} else

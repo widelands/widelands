@@ -1908,7 +1908,7 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
 	PROP_RO(LuaWareDescription, icon_name),
-	PROP_RO(LuaWareDescription, is_construction_material),
+	PROP_RO(LuaWareDescription, construction_material),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
@@ -1962,15 +1962,19 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: is_construction_material
+	.. attribute:: construction_material
 
 		:arg tribename: the name of the tribe that this ware gets checked for
 		:type tribename: :class:`string`
 
 		(RO) A bool that is true if this ware is used by the tribe's construction sites.
 */
-int LuaWareDescription::get_is_construction_material(lua_State * L) {
-	std::string tribename = luaL_checkstring(L, 2);
+// NOCOM(GunChleoc): Write test
+int LuaWareDescription::get_construction_material(lua_State * L) {
+	// NOCOM(GunChleoc): This is always "construction_material". Why?
+	// used in tribes/scripting/format_help.lua building_help_dependencies_production
+	std::string tribename = luaL_checkstring(L, -1);
+	log("NOCOM tribename %s\n", tribename.c_str());
 	const Tribes& tribes = get_egbase(L).tribes();
 	if (tribes.tribe_exists(tribename)) {
 		const WareIndex& ware_index = tribes.safe_ware_index(get()->name());

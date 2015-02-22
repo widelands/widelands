@@ -395,7 +395,7 @@ public:
 	 */
 	int get_consumers(lua_State *);
 	int get_icon_name(lua_State*);
-	int get_is_construction_material(lua_State *);
+	int get_construction_material(lua_State *);
 	int get_producers(lua_State *);
 
 	/*

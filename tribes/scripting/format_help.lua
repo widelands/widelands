@@ -390,12 +390,14 @@ function building_help_dependencies_production(tribename, building_description)
 	local outgoing = ""
 	for i, ware_description in ipairs(building_description.output_ware_types) do
 		-- constructionsite isn't listed with the consumers, so we need a special check
-		if (ware_description.is_construction_material(tribename)) then
+		--[[ NOCOM(GunChleoc). This just doesn't like me. See NOCOM in lua_map.cc
+		if (ware_description.construction_material(tribename)) then
 			local constructionsite_description =
 			   wl.Game():get_building_description("constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
 															 constructionsite_description.descname)
 		end
+		]]
 
 		for j, consumer in ipairs(ware_description.consumers) do
 			outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
