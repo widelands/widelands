@@ -122,7 +122,6 @@ struct ImmovableProgram {
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
-		bool        tribe;
 		uint8_t probability;
 	};
 

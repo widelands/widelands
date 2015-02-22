@@ -393,7 +393,7 @@ Immovable & EditorGameBase::create_immovable
 	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
 	const int32_t idx =
-		type == MapObjectDescr::OwnerType::kTribe ?
+		(type == MapObjectDescr::OwnerType::kTribe) ?
 		tribes().immovable_index(name.c_str())
 		:
 		world().get_immovable_index(name.c_str());
@@ -401,7 +401,7 @@ Immovable & EditorGameBase::create_immovable
 		throw wexception
 			("EditorGameBase::create_immovable(%i, %i): %s is not defined for "
 			 "%s",
-			 c.x, c.y, name.c_str(), type == MapObjectDescr::OwnerType::kTribe ? "tribes" : "world");
+			 c.x, c.y, name.c_str(), (type == MapObjectDescr::OwnerType::kTribe) ? "tribes" : "world");
 
 	return create_immovable(c, idx, type);
 }

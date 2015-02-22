@@ -895,12 +895,13 @@ void ImmovableProgram::ActTransform::execute
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
+		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
 		if (bob) {
 			game.create_bob(c, type_name, MapObjectDescr::OwnerType::kTribe, player);
 		} else {
-			Immovable & imm = game.create_immovable(c, type_name, MapObjectDescr::OwnerType::kTribe);
+			Immovable & imm = game.create_immovable(c, type_name, owner_type);
 			if (player)
 				imm.set_owner(player);
 		}
@@ -960,8 +961,9 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, MapObjectDescr::OwnerType::kTribe);
+		game.create_immovable(f, type_name, owner_type);
 	} else {
 		immovable.program_step(game);
 	}
@@ -1000,7 +1002,6 @@ void ImmovableProgram::ActRemove::execute
 ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 {
 	try {
-		tribe = true;
 		probability = 0;
 		for (char * p = parameters;;)
 			switch (*p) {
@@ -1019,7 +1020,6 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 						 "scope \"%s\" given for target type (must be "
 						 "\"world\")",
 						 parameters);
-				tribe = false;
 				parameters = p;
 				break;
 			}
@@ -1076,9 +1076,7 @@ void ImmovableProgram::ActSeed::execute
 		    logic_rand_as_double(&game) <
 		       probability_to_grow(
 		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
-			game.create_immovable(
-						mr.location(), type_name,
-						tribe ? MapObjectDescr::OwnerType::kTribe : MapObjectDescr::OwnerType::kWorld);
+			game.create_immovable(mr.location(), type_name, descr.owner_type());
 		}
 	}
 
