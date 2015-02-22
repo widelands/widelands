@@ -163,72 +163,71 @@ tribes:new_tribe {
 		"shipconstruction_barbarians",
 	},
 
+	-- The order here also determines the order in lists on screen.
 	buildings = {
-		--Militarysites
-		"barbarians_barrier",
-		"barbarians_citadel",
-		"barbarians_fortress",
-		"barbarians_sentry",
-		"barbarians_tower",
-
-		-- Trainingsites
-		"barbarians_battlearena",
-		"barbarians_trainingcamp",
-
-		-- Productionsites - Carriers
-		"barbarians_cattlefarm",
-
-		-- Productionsites - Building Materials
-		"barbarians_lime_kiln",
-		"barbarians_lumberjacks_hut",
-		"barbarians_quarry",
-		"barbarians_rangers_hut",
-		"barbarians_reed_yard",
-		"barbarians_wood_hardener",
-
-		-- Productionsites - Food
-		"barbarians_bakery",
-		"barbarians_big_inn",
-		"barbarians_brewery",
-		"barbarians_farm",
-		"barbarians_fishers_hut",
-		"barbarians_gamekeepers_hut",
-		"barbarians_hunters_hut",
-		"barbarians_inn",
-		"barbarians_micro_brewery",
-		"barbarians_tavern",
-		"barbarians_well",
-
-		-- Productionsites - Mining
-		"barbarians_charcoal_kiln",
-		"barbarians_coalmine",
-		"barbarians_coalmine_deep",
-		"barbarians_coalmine_deeper",
-		"barbarians_goldmine",
-		"barbarians_goldmine_deep",
-		"barbarians_goldmine_deeper",
-		"barbarians_granitemine",
-		"barbarians_ironmine",
-		"barbarians_ironmine_deep",
-		"barbarians_ironmine_deeper",
-		"barbarians_smelting_works",
-
-		-- Productionsites - Tools, Military & Ships
-		"barbarians_axfactory",
-		"barbarians_helmsmithy",
-		"barbarians_metal_workshop",
-		"barbarians_scouts_hut",
-		"barbarians_shipyard",
-		"barbarians_warmill",
-		"barbarians_weaving_mill",
-
 		-- Warehouses
 		"barbarians_headquarters",
 		"barbarians_headquarters_interim",
-		"barbarians_port",
 		"barbarians_warehouse",
+		"barbarians_port",
 
-		-- Partially Finished Buildings
+		-- Small
+		"barbarians_quarry",
+		"barbarians_lumberjacks_hut",
+		"barbarians_rangers_hut",
+		"barbarians_fishers_hut",
+		"barbarians_hunters_hut",
+		"barbarians_gamekeepers_hut",
+		"barbarians_well",
+		"barbarians_scouts_hut",
+
+		-- Medium
+		"barbarians_wood_hardener",
+		"barbarians_lime_kiln",
+		"barbarians_reed_yard",
+		"barbarians_bakery",
+		"barbarians_micro_brewery",
+		"barbarians_brewery",
+		"barbarians_tavern",
+		"barbarians_inn",
+		"barbarians_big_inn",
+		"barbarians_charcoal_kiln",
+		"barbarians_smelting_works",
+		"barbarians_shipyard",
+		"barbarians_metal_workshop",
+		"barbarians_warmill",
+		"barbarians_axfactory",
+
+		-- Big
+		"barbarians_cattlefarm",
+		"barbarians_farm",
+		"barbarians_weaving_mill",
+		"barbarians_helmsmithy",
+
+		-- Mines
+		"barbarians_granitemine",
+		"barbarians_coalmine",
+		"barbarians_coalmine_deep",
+		"barbarians_coalmine_deeper",
+		"barbarians_ironmine",
+		"barbarians_ironmine_deep",
+		"barbarians_ironmine_deeper",
+		"barbarians_goldmine",
+		"barbarians_goldmine_deep",
+		"barbarians_goldmine_deeper",
+
+		-- Military Sites
+		"barbarians_sentry",
+		"barbarians_barrier",
+		"barbarians_tower",
+		"barbarians_fortress",
+		"barbarians_citadel",
+
+		-- Training Sites
+		"barbarians_battlearena",
+		"barbarians_trainingcamp",
+
+		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",
 		"dismantlesite",
 	},

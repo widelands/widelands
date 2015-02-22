@@ -148,7 +148,7 @@ TribeDescr::TribeDescr
 				if (has_building(index)) {
 					throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 				}
-				buildings_.insert(index);
+				buildings_.push_back(index);
 
 				// Register construction materials
 				for (std::pair<WareIndex, uint8_t> build_cost : get_building_descr(index)->buildcost()) {
@@ -183,12 +183,12 @@ size_t TribeDescr::get_nrbuildings() const {return buildings_.size();}
 size_t TribeDescr::get_nrwares() const {return wares_.size();}
 size_t TribeDescr::get_nrworkers() const {return workers_.size();}
 
-const std::set<BuildingIndex> TribeDescr::buildings() const {return buildings_;}
+const std::vector<BuildingIndex> TribeDescr::buildings() const {return buildings_;}
 const std::set<WareIndex> TribeDescr::wares() const {return wares_;}
 const std::set<WareIndex> TribeDescr::workers() const {return workers_;}
 
 bool TribeDescr::has_building(const BuildingIndex& index) const {
-	return buildings_.count(index) == 1;
+	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();
 }
 bool TribeDescr::has_ware(const WareIndex& index) const {
 	return wares_.count(index) == 1;

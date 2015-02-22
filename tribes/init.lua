@@ -453,7 +453,7 @@ include "tribes/buildings/militarysites/barbarians/barrier/init.lua"
 include "tribes/buildings/militarysites/barbarians/tower/init.lua"
 include "tribes/buildings/militarysites/barbarians/citadel/init.lua"
 include "tribes/buildings/militarysites/barbarians/fortress/init.lua"
--- NOCOM(GunChleoc): We should reverse sentry/blockhouse and barrier/outpost in the building grid. This will need an extra data structure in TribeDescr
+
 include "tribes/buildings/militarysites/empire/sentry/init.lua"
 include "tribes/buildings/militarysites/empire/blockhouse/init.lua"
 include "tribes/buildings/militarysites/empire/barrier/init.lua"

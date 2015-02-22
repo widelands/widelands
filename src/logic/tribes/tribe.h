@@ -66,7 +66,7 @@ public:
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
-	const std::set<BuildingIndex> buildings() const;
+	const std::vector<BuildingIndex> buildings() const;
 	const std::set<WareIndex> wares() const;
 	const std::set<WareIndex> workers() const;
 
@@ -135,7 +135,7 @@ private:
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
 
-	std::set<BuildingIndex>     buildings_;
+	std::vector<BuildingIndex>     buildings_;
 	std::set<int>               immovables_;  // The player immovables
 	std::set<WareIndex>         workers_;
 	std::set<WareIndex>         wares_;

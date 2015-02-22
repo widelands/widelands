@@ -168,73 +168,73 @@ tribes:new_tribe {
 		"shipconstruction_empire",
 	},
 
+	-- The order here also determines the order in lists on screen.
 	buildings = {
-		-- Militarysites
-		"empire_barrier",
-		"empire_blockhouse",
-		"empire_castle",
-		"empire_fortress",
-		"empire_outpost",
-		"empire_sentry",
-		"empire_tower",
+		-- Warehouses
+		"empire_headquarters",
+		"empire_headquarters_shipwreck",
+		"empire_warehouse",
+		"empire_port",
 
-		-- Trainingsites
+		-- Small
+		"empire_quarry",
+		"empire_lumberjacks_house",
+		"empire_foresters_house",
+		"empire_fishers_house",
+		"empire_hunters_house",
+		"empire_well",
+		"empire_scouts_house",
+
+		-- Medium
+		"empire_stonemasons_house",
+		"empire_sawmill",
+		"empire_mill",
+		"empire_bakery",
+		"empire_brewery",
+		"empire_vineyard",
+		"empire_winery",
+		"empire_tavern",
+		"empire_inn",
+		"empire_charcoal_kiln",
+		"empire_smelting_works",
+		"empire_shipvard",
+		"empire_toolsmithy",
+		"empire_armorsmithy",
+
+		-- Big
+		"empire_donkeyfarm",
+		"empire_farm",
+		"empire_piggery",
+		"empire_sheepfarm",
+		"empire_weaving_mill",
+		"empire_weaponsmithy",
+
+
+		-- Mines
+		"empire_marblemine",
+		"empire_marblemine_deep",
+		"empire_coalmine",
+		"empire_coalmine_deep",
+		"empire_ironmine",
+		"empire_ironmine_deep",
+		"empire_goldmine",
+		"empire_goldmine_deep",
+
+		-- Military Sites
+		"empire_blockhouse",
+		"empire_sentry",
+		"empire_outpost",
+		"empire_barrier",
+		"empire_tower",
+		"empire_fortress",
+		"empire_castle",
+
+		-- Training Sites
 		"empire_arena",
 		"empire_colosseum",
 		"empire_trainingcamp",
 
-		-- Productionsites - Carriers
-		"empire_donkeyfarm",
-
-		-- Productionsites - Building Materials
-		"empire_foresters_house",
-		"empire_lumberjacks_house",
-		"empire_quarry",
-		"empire_sawmill",
-		"empire_stonemasons_house",
-		"empire_sheepfarm",
-		"empire_weaving_mill",
-
-		-- Productionsites - Food
-		"empire_bakery",
-		"empire_brewery",
-		"empire_farm",
-		"empire_fishers_house",
-		"empire_hunters_house",
-		"empire_inn",
-		"empire_mill",
-		"empire_piggery",
-		"empire_tavern",
-		"empire_vineyard",
-		"empire_well",
-		"empire_winery",
-
-		-- Productionsites - Mining
-		"empire_charcoal_kiln",
-		"empire_coalmine",
-		"empire_coalmine_deep",
-		"empire_goldmine",
-		"empire_goldmine_deep",
-		"empire_ironmine",
-		"empire_ironmine_deep",
-		"empire_marblemine",
-		"empire_marblemine_deep",
-		"empire_smelting_works",
-
-		-- Productionsites - Tools, Military & Ships
-		"empire_armorsmithy",
-		"empire_scouts_house",
-		"empire_shipvard",
-		"empire_toolsmithy",
-		"empire_weaponsmithy",
-
-		-- Warehouses
-		"empire_headquarters",
-		"empire_headquarters_shipwreck",
-		"empire_port",
-		"empire_warehouse",
-
-		-- Partially Finished Buildings
+		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",
 		"dismantlesite",
 	},

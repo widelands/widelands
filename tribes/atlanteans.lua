@@ -168,62 +168,62 @@ tribes:new_tribe {
 		"shipconstruction_atlanteans",
 	},
 
+	-- The order here also determines the order in lists on screen.
 	buildings = {
-		-- Militarysites
-		"atlanteans_castle",
-		"atlanteans_guardhall",
-		"atlanteans_tower",
-		"atlanteans_tower_high",
-		"atlanteans_tower_small",
+		-- Warehouses
+		"atlanteans_headquarters",
+		"atlanteans_warehouse",
+		"atlanteans_port",
 
-		-- Trainingsites
-		"atlanteans_dungeon",
-		"atlanteans_labyrinth",
-
-		-- Productionsites - Carriers
-		"atlanteans_horsefarm",
-
-		-- Productionsites - Building Materials
-		"atlanteans_foresters_house",
+		-- Small
 		"atlanteans_quarry",
-		"atlanteans_sawmill",
-		"atlanteans_spiderfarm",
-		"atlanteans_weaving_mill",
 		"atlanteans_woodcutters_house",
-
-		-- Productionsites - Food
-		"atlanteans_bakery",
-		"atlanteans_blackroot_farm",
-		"atlanteans_farm",
-		"atlanteans_fishbreeders_house",
+		"atlanteans_foresters_house",
 		"atlanteans_fishers_house",
+		"atlanteans_fishbreeders_house",
 		"atlanteans_hunters_house",
-		"atlanteans_mill",
-		"atlanteans_smokery",
 		"atlanteans_well",
-
-		-- Productionsites - Mining
-		"atlanteans_charcoal_kiln",
-		"atlanteans_coalmine",
-		"atlanteans_crystalmine",
-		"atlanteans_goldmine",
 		"atlanteans_gold_spinning_mill",
-		"atlanteans_ironmine",
-		"atlanteans_smelting_works",
-
-		-- Productionsites - Tools, Military & Ships
-		"atlanteans_armorsmithy",
 		"atlanteans_scouts_house",
+
+		-- Medium
+		"atlanteans_sawmill",
+		"atlanteans_smokery",
+		"atlanteans_mill",
+		"atlanteans_bakery",
+		"atlanteans_charcoal_kiln",
+		"atlanteans_smelting_works",
 		"atlanteans_shipyard",
 		"atlanteans_toolsmithy",
 		"atlanteans_weaponsmithy",
+		"atlanteans_armorsmithy",
 
-		-- Warehouses
-		"atlanteans_headquarters",
-		"atlanteans_port",
-		"atlanteans_warehouse",
+		-- Big
+		"atlanteans_horsefarm",
+		"atlanteans_farm",
+		"atlanteans_blackroot_farm",
+		"atlanteans_spiderfarm",
+		"atlanteans_weaving_mill",
 
-		-- Partially Finished Buildings
+		-- Mines
+		"atlanteans_crystalmine",
+		"atlanteans_coalmine",
+		"atlanteans_ironmine",
+		"atlanteans_goldmine",
+
+		-- Military Sites
+		"atlanteans_guardhouse",
+		"atlanteans_guardhall",
+		"atlanteans_tower_small",
+		"atlanteans_tower",
+		"atlanteans_tower_high",
+		"atlanteans_castle",
+
+		-- Training Sites
+		"atlanteans_dungeon",
+		"atlanteans_labyrinth",
+
+		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",
 		"dismantlesite",
 	},
