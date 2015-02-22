@@ -155,11 +155,11 @@ private:
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-	// TODO(sirver): the LuaTable constructor has no support for player_colors right now.
-	// NOCOM(GunChleoc): We really need player color now.
+
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	if (table.has_key("sound_effect")) {
+		// NOCOM(GunChleoc): this is broken. Used by builders and shipwrights only.
 		std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 
 		const std::string name = sound_effects->get_string("name");
@@ -169,11 +169,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	}
 
 	image_files_ = table.get_table("pictures")->array_entries<std::string>();
-	for (const std::string& file : image_files_) {
-		if (!g_fs->file_exists(file)) {
-			throw wexception("Animation picture file '%s' does not exist.", file.c_str());
-		}
-	}
 	if (image_files_.empty()) {
 		throw wexception("Animation without pictures.");
 	} else if (image_files_.size() == 1) {
@@ -183,6 +178,21 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");
+	}
+
+	const std::string& dirname = g_fs->fs_dirname(image_files_[0]);
+	for (const std::string& file : image_files_) {
+		if (!g_fs->file_exists(file)) {
+			throw wexception("Animation picture file '%s' does not exist.", file.c_str());
+		}
+		const std::string pc_filename = dirname + FileSystem::filename_without_ext(file.c_str()) + "_pc.png";
+		if (g_fs->file_exists(pc_filename)) {
+			hasplrclrs_ = true;
+			pc_mask_image_files_.push_back(pc_filename);
+		} else if (hasplrclrs_) {
+			throw wexception("Missing playercolor file '%s' for animation that has player color.",
+								  pc_filename.c_str());
+		}
 	}
 }
 

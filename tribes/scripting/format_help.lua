@@ -2,6 +2,8 @@
 
 set_textdomain("tribes")
 
+include "scripting/formatting.lua"
+
 --  =======================================================
 --  *************** Basic helper functions ****************
 --  =======================================================
@@ -248,8 +250,8 @@ function building_help_general_string(building_description)
 -- TODO(GunChleoc) use aihints for gamekeeper, forester?
 	local representative_resource = nil
 	if (building_description.type_name == "productionsite" or
-	    building_description.type_name == "militarysite"
-	    building_description.type_name == "trainingsite" or) then
+	    building_description.type_name == "militarysite" or
+	    building_description.type_name == "trainingsite") then
 		representative_resource = building_description.output_ware_types[1]
 		if(not representative_resource) then
 			representative_resource = building_description.output_worker_types[1]
@@ -443,8 +445,7 @@ end
 function building_help_dependencies_training(tribename, building_description)
 	local result = rt(h2(_"Dependencies"))
 	if(building_description.max_hp and building_description.min_hp) then
-		result = result .. rt(h3(_"Health Training:")) ..
-		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result .. rt(h3(_"Health Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribename .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
@@ -454,8 +455,7 @@ function building_help_dependencies_training(tribename, building_description)
 		result = result .. dependencies_training_weapons(building_description.weapons_hp)
 	end
 	if(building_description.max_attack and building_description.min_attack) then
-		result = result .. rt(h3(_"Attack Training:")) ..
-		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result .. rt(h3(_"Attack Training:")) .. rt(h3(_"Soldiers:")) ..
 			dependencies_basic({
 				"tribes/workers/" .. tribename .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
 				building_description.icon_name,
@@ -464,8 +464,7 @@ function building_help_dependencies_training(tribename, building_description)
 		result = result .. dependencies_training_weapons(building_description.weapons_attack)
 	end
 	if(building_description.max_defense and building_description.min_defense) then
-		result = result .. rt(h3(_"Defense Training:")) ..
-		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result .. rt(h3(_"Defense Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribename .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
@@ -475,8 +474,7 @@ function building_help_dependencies_training(tribename, building_description)
 		result = result .. dependencies_training_weapons(building_description.weapons_defense)
 	end
 	if(building_description.max_evade and building_description.min_evade) then
-		result = result .. rt(h3(_"Evade Training:")) ..
-		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result .. rt(h3(_"Evade Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribename .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
@@ -812,16 +810,15 @@ end
 function building_help(building_description, tribename)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(building_description.name)
-	local result = ""
 	if (building_description.type_name == "productionsite") then
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_production(tribename, building_description) ..
 			building_help_crew_string(building_description) ..
 			building_help_building_section(building_description) ..building_help_production_section()
-	else if (building_description.type_name == "militarysite") then
+	elseif (building_description.type_name == "militarysite") then
 		return building_help_general_string(building_description) ..
 			building_help_building_section(building_description)
-	else if (building_description.type_name == "warehouse") then
+	elseif (building_description.type_name == "warehouse") then
 		if (building_description.is_port) then
 			return building_help_general_string(building_description) ..
 				-- TODO(GunChleoc) expedition costs here?
@@ -831,19 +828,19 @@ function building_help(building_description, tribename)
 			return building_help_general_string(building_description) ..
 				building_help_building_section(building_description)
 		end
-	else if (building_description.type_name == "trainingsite") then
+	elseif (building_description.type_name == "trainingsite") then
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_training(tribename, building_description) ..
 			building_help_crew_string(building_description) ..
 			building_help_building_section(building_description) ..building_help_production_section()
-	else if (building_description.type_name == "constructionsite" or
+	elseif (building_description.type_name == "constructionsite" or
 				building_description.type_name == "dismantlesite") then
 				-- TODO(GunChleoc) Get them a crew string for the builder
 		return building_help_general_string(building_description)
 	else
 		return ""
 	end
-}
+end
 
 -- The main function call
 return {
