@@ -44,7 +44,7 @@
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"

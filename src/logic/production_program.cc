@@ -46,7 +46,7 @@
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker_program.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"

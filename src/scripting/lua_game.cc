@@ -33,7 +33,7 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"

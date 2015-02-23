@@ -45,7 +45,7 @@
 #include "logic/productionsite.h"
 #include "logic/ship.h"
 #include "logic/trainingsite.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
 #include "logic/world/world.h"

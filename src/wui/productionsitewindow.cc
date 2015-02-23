@@ -26,7 +26,7 @@
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
 #include "logic/trainingsite.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/tabpanel.h"

@@ -29,7 +29,7 @@
 #include "logic/game_data_error.h"
 #include "logic/nodecaps.h"
 #include "logic/soldier.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "logic/worker_program.h"
 #include "sound/sound_handler.h"

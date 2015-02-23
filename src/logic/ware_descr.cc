@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 
 namespace Widelands {
 

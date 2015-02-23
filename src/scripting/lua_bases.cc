@@ -25,7 +25,7 @@
 #include "logic/checkstep.h"
 #include "logic/constants.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "scripting/factory.h"
@@ -79,6 +79,7 @@ EditorGameBase
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
 	METHOD(LuaEditorGameBase, get_building_description),
+	METHOD(LuaEditorGameBase, get_tribe_description),
 	METHOD(LuaEditorGameBase, get_ware_description),
 	METHOD(LuaEditorGameBase, get_worker_description),
 	{nullptr, nullptr},
@@ -171,6 +172,29 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }
+
+/* RST
+	.. function:: get_tribe_description(tribe_name)
+
+		:arg tribe_name: the name of the building
+
+		Registers a tribe description so Lua can reference it from the game.
+
+		(RO) The :class:`~wl.Game.Tribe_description`.
+*/
+int LuaEditorGameBase::get_tribe_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	EditorGameBase& egbase = get_egbase(L);
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	if (!egbase.tribes().tribe_exists(tribe_name)) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
+	}
+	const TribeDescr* descr = egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
+}
+
 
 
 /* RST

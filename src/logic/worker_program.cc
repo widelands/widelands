@@ -26,7 +26,7 @@
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 

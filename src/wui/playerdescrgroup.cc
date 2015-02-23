@@ -29,7 +29,7 @@
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"

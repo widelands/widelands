@@ -180,10 +180,10 @@ wl_library(logic
     training_attribute.h
     trainingsite.cc
     trainingsite.h
-    tribes/tribe.cc
-    tribes/tribe.h
     tribes/tribe_basic_info.h
     tribes/tribe_basic_info.cc
+    tribes/tribe_descr.cc
+    tribes/tribe_descr.h
     tribes/tribes.h
     tribes/tribes.cc
     walkingdir.cc

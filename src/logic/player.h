@@ -30,7 +30,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 

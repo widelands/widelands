@@ -34,7 +34,7 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribe_basic_info.h"
 #include "logic/warehouse.h"
 #include "logic/ware_descr.h"

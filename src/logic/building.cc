@@ -45,7 +45,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
@@ -166,12 +166,26 @@ BuildingDescr::BuildingDescr
 	}
 
 	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
-	helptexts_.lore_ = _(items_table->get_string("lore"));
-	helptexts_.lore_author_ = _(items_table->get_string("lore_author"));
-	helptexts_.purpose_ = _(items_table->get_string("purpose"));
-	helptexts_.note_ = _(items_table->get_string("note"));
-	helptexts_.performance_ = _(items_table->get_string("performance"));
-
+	std::string helptext = items_table->get_string("lore");
+	if(!helptext.empty()) {
+		helptexts_.lore_ = _(helptext);
+	}
+	helptext = items_table->get_string("lore_author");
+	if(!helptext.empty()) {
+		helptexts_.lore_author_ = _(helptext);
+	}
+	helptext = items_table->get_string("purpose");
+	if(!helptext.empty()) {
+		helptexts_.purpose_ = _(helptext);
+	}
+	helptext = items_table->get_string("note");
+	if(!helptext.empty()) {
+		helptexts_.note_ = _(helptext);
+	}
+	helptext = items_table->get_string("performance");
+	if(!helptext.empty()) {
+		helptexts_.performance_ = _(helptext);
+	}
 	assert(is_animation_known("idle"));
 }
 

@@ -21,7 +21,7 @@
 
 #include "io/fileread.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"

@@ -41,7 +41,7 @@
 #include "logic/pathfield.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "map_io/s2map.h"

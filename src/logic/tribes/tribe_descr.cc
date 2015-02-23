@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 
 #include <algorithm>
 #include <iostream>
@@ -52,8 +52,8 @@
 namespace Widelands {
 
 TribeDescr::TribeDescr
-	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& input_egbase)
-	: name_(table.get_string("name")), egbase_(input_egbase)
+	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& init_egbase)
+	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase)
 {
 
 	try {
@@ -228,6 +228,7 @@ TribeDescr::TribeDescr
   */
 
 const std::string& TribeDescr::name() const {return name_;}
+const std::string& TribeDescr::descname() const {return descname_;}
 
 size_t TribeDescr::get_nrbuildings() const {return buildings_.size();}
 size_t TribeDescr::get_nrwares() const {return wares_.size();}

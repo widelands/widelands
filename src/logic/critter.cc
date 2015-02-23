@@ -35,7 +35,7 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"

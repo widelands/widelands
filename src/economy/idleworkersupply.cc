@@ -26,7 +26,7 @@
 #include "logic/player.h"
 #include "logic/requirements.h"
 #include "logic/soldier.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 

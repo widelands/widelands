@@ -21,7 +21,7 @@
 
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 
 namespace {
 

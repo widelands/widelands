@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_TRIBES_TRIBE_H
-#define WL_LOGIC_TRIBES_TRIBE_H
+#ifndef WL_LOGIC_TRIBES_TRIBE_DESCR_H
+#define WL_LOGIC_TRIBES_TRIBE_DESCR_H
 
 #include <map>
 #include <memory>
@@ -61,6 +61,7 @@ public:
 	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& egbase);
 
 	const std::string& name() const;
+	const std::string& descname() const;
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
 	size_t get_nrbuildings() const;
@@ -144,6 +145,7 @@ private:
 	WareIndex add_special_worker(const std::string& workername);
 
 	const std::string name_;
+	const std::string descname_;
 	EditorGameBase& egbase_;
 
 	uint32_t frontier_animation_id_;
@@ -178,4 +180,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_TRIBES_TRIBE_H
+#endif  // end of include guard: WL_LOGIC_TRIBES_TRIBE_DESCR_H

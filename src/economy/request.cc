@@ -31,7 +31,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/map_object_loader.h"

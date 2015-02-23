@@ -1037,6 +1037,115 @@ int LuaMap::recalculate(lua_State * L) {
  */
 
 
+/* RST
+TribeDescription
+--------------------
+
+.. class:: TribeDescription
+NOCOM more documentation + tests
+	A static description of a tribe, so it can be used in help files.
+	This class contains information about which buildings a tribe uses etc.
+*/
+const char LuaTribeDescription::className[] = "TribeDescription";
+const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
+	METHOD(LuaTribeDescription, has_building),
+	METHOD(LuaTribeDescription, has_ware),
+	METHOD(LuaTribeDescription, has_worker),
+	{nullptr, nullptr},
+};
+const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
+	PROP_RO(LuaTribeDescription, descname),
+	PROP_RO(LuaTribeDescription, name),
+	{nullptr, nullptr, nullptr},
+};
+
+// Only base classes can be persisted.
+void LuaTribeDescription::__persist(lua_State*) {
+	assert(false);
+}
+
+void LuaTribeDescription::__unpersist(lua_State*) {
+	assert(false);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+
+/* RST
+	.. attribute:: descname
+
+			(RO) a :class:`string` with the tribe's localized name
+*/
+
+int LuaTribeDescription::get_descname(lua_State * L) {
+	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: name
+
+			(RO) a :class:`string` with the tribe's internal name
+*/
+
+int LuaTribeDescription::get_name(lua_State * L) {
+	lua_pushstring(L, get()->name());
+	return 1;
+}
+
+/* RST
+	.. method:: has_building(buildingname)
+
+		Returns true if buildingname is a building and the tribe uses it.
+
+		:returns: :const:`true` or :const:`false`
+		:rtype: :class:`bool`
+*/
+int LuaTribeDescription::has_building(lua_State * L) {
+	const std::string buildingname = luaL_checkstring(L, 2);
+	const BuildingIndex index = get_egbase(L).tribes().building_index(buildingname);
+	lua_pushboolean(L, get()->has_building(index));
+	return 1;
+}
+
+/* RST
+	.. method:: has_ware(warename)
+
+		Returns true if warename is a ware and the tribe uses it.
+
+		:returns: :const:`true` or :const:`false`
+		:rtype: :class:`bool`
+*/
+int LuaTribeDescription::has_ware(lua_State * L) {
+	const std::string warename = luaL_checkstring(L, 2);
+	const WareIndex index = get_egbase(L).tribes().ware_index(warename);
+	lua_pushboolean(L, get()->has_ware(index));
+	return 1;
+}
+
+
+/* RST
+	.. method:: has_worker(workername)
+
+		Returns true if workername is a worker and the tribe uses it.
+
+		:returns: :const:`true` or :const:`false`
+		:rtype: :class:`bool`
+*/
+int LuaTribeDescription::has_worker(lua_State * L) {
+	const std::string workername = luaL_checkstring(L, 2);
+	const WareIndex index = get_egbase(L).tribes().worker_index(workername);
+	lua_pushboolean(L, get()->has_worker(index));
+	return 1;
+}
+
+
+
 
 /* RST
 MapObjectDescription
@@ -1255,7 +1364,12 @@ int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 		return 0;
 	}
 	const BuildingIndex& enhanced_from = get()->enhanced_from();
-	return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
+	if (enhanced_from != INVALID_INDEX) {
+		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
+	} else {
+		lua_pushnil(L);
+		return 1;
+	}
 }
 
 
@@ -1903,12 +2017,12 @@ WareDescription
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
+	METHOD(LuaWareDescription, is_construction_material),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
 	PROP_RO(LuaWareDescription, icon_name),
-	PROP_RO(LuaWareDescription, construction_material),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
@@ -1962,7 +2076,7 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: construction_material
+	.. attribute:: is_construction_material
 
 		:arg tribename: the name of the tribe that this ware gets checked for
 		:type tribename: :class:`string`
@@ -1970,11 +2084,8 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 		(RO) A bool that is true if this ware is used by the tribe's construction sites.
 */
 // NOCOM(GunChleoc): Write test
-int LuaWareDescription::get_construction_material(lua_State * L) {
-	// NOCOM(GunChleoc): This is always "construction_material". Why?
-	// used in tribes/scripting/format_help.lua building_help_dependencies_production
+int LuaWareDescription::is_construction_material(lua_State * L) {
 	std::string tribename = luaL_checkstring(L, -1);
-	log("NOCOM tribename %s\n", tribename.c_str());
 	const Tribes& tribes = get_egbase(L).tribes();
 	if (tribes.tribe_exists(tribename)) {
 		const WareIndex& ware_index = tribes.safe_ware_index(get()->name());
@@ -4296,6 +4407,7 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // S:
 
 	register_class<LuaMap>(L, "map");
+	register_class<LuaTribeDescription>(L, "map");
 	register_class<LuaMapObjectDescription>(L, "map");
 
 	register_class<LuaBuildingDescription>(L, "map", true);

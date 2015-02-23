@@ -327,15 +327,19 @@ end
 --
 function building_help_dependencies_production(tribename, building_description)
 	local building_description = wl.Game():get_building_description(building_description.name)
+	local tribe = wl.Game():get_tribe_description(tribename)
 	local result = ""
 	local hasinput = false
+
 	for i, ware_description in ipairs(building_description.inputs) do
 	 hasinput = true
 		for j, producer in ipairs(ware_description.producers) do
-			result = result .. dependencies(
-				{producer, ware_description},
-				_"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
-			)
+			if (tribe:has_building(producer.name)) then
+				result = result .. dependencies(
+					{producer, ware_description},
+					_"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
+				)
+			end
 		end
 	end
 	if (hasinput) then
@@ -390,22 +394,22 @@ function building_help_dependencies_production(tribename, building_description)
 	local outgoing = ""
 	for i, ware_description in ipairs(building_description.output_ware_types) do
 		-- constructionsite isn't listed with the consumers, so we need a special check
-		--[[ NOCOM(GunChleoc). This just doesn't like me. See NOCOM in lua_map.cc
-		if (ware_description.construction_material(tribename)) then
+		if (ware_description:is_construction_material(tribename)) then
 			local constructionsite_description =
 			   wl.Game():get_building_description("constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
 															 constructionsite_description.descname)
 		end
-		]]
 
 		for j, consumer in ipairs(ware_description.consumers) do
-			outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
+			if (tribe:has_building(consumer.name)) then
+				outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
+			end
 		end
 
 		-- soldiers aren't listed with the consumers
 		local soldier
-		-- NOCOM(GunChleoc): This is now atlantean_soldier etc. Ugly hack, can this be improved?
+		-- NOCOM(GunChleoc): use tribe.soldier
 		if (tribename == "atlanteans") then
 		   soldier = wl.Game():get_worker_description("atlanteans_soldier")
 		elseif (tribename == "barbarians") then
@@ -417,13 +421,13 @@ function building_help_dependencies_production(tribename, building_description)
 		for j, buildcost in ipairs(soldier.buildcost) do
 			if(buildcost == ware) then
 			local headquarters_description
-			-- NOCOM(GunChleoc): This is now atlantean_headquarters etc. Ugly hack, can this be improved?
+			-- NOCOM(GunChleoc): This is now atlantean_headquarters etc. Ugly hack, can this be improved? This should also include headquarters_interim and headquarters_shipwreck
 			if (tribename == "atlanteans") then
-				headquarters_description = wl.Game():get_worker_description("atlanteans_headquarters")
+				headquarters_description = wl.Game():get_building_description("atlanteans_headquarters")
 			elseif (tribename == "barbarians") then
-				headquarters_description = wl.Game():get_worker_description("barbarians_headquarters")
+				headquarters_description = wl.Game():get_building_description("barbarians_headquarters")
 			else
-				headquarters_description = wl.Game():get_worker_description("empire_headquarters")
+				headquarters_description = wl.Game():get_building_description("empire_headquarters")
 			end
 			outgoing = outgoing .. dependencies({ware, headquarters_description, soldier}, soldier.descname)
 			end
@@ -563,7 +567,7 @@ function building_help_building_section(building_description)
 				if (building_description.buildable) then
 					result = result .. text_line(_"Or enhanced from:", former_building.descname)
 				else
-					result = result .. text_line(_"Enhanced from:", former_building.descname)
+					result = result .. text_line(_"Enhanced from:", former_building.descname) -- NOCOM: fails for mine
 				end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
@@ -697,9 +701,8 @@ end
 --    :arg building_description: the building_description from C++.
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(building_description)
-	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
-	local building_description = wl.Game():get_building_description(building_description.name)
+function building_help_crew_string(tribename, building_description)
+
 	local result = ""
 
 	if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then
@@ -733,9 +736,7 @@ function building_help_crew_string(building_description)
 			end
 		end
 
-		if(#toolnames > 0) then
-			result = result .. building_help_tool_string(toolnames, number_of_workers)
-		end
+		result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
 
 		if(becomes_description) then
 
@@ -764,20 +765,27 @@ end
 
 
 -- RST
--- .. function building_help_tool_string( toolname)
+-- .. function building_help_tool_string(tribename, toolname, no_of_workers)
 --
 --    Displays tools with an intro text and images
 --
+--    :arg tribename: e.g. "atlanteans".
 --    :arg toolnames: e.g. {"shovel", "basket"}.
 --    :arg no_of_workers: the number of workers using the tools; for plural formatting.
 --    :returns: text_line for the tools
 --
-function building_help_tool_string(toolnames, no_of_workers)
-	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
+function building_help_tool_string(tribename, toolnames, no_of_workers)
+	local result = ""
 	local game  = wl.Game();
 	for i, toolname in ipairs(toolnames) do
-		local ware_description = game:get_ware_description(toolname)
-		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+		local tribe = wl.Game():get_tribe_description(tribename)
+		if (tribe:has_ware(toolname)) then
+			local ware_description = game:get_ware_description(toolname)
+			result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+		end
+	end
+	if (result ~= "") then
+		result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers))) .. result
 	end
 	return result
 end
@@ -815,8 +823,9 @@ function building_help(building_description, tribename)
 	if (building_description.type_name == "productionsite") then
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_production(tribename, building_description) ..
-			building_help_crew_string(building_description) ..
-			building_help_building_section(building_description) ..building_help_production_section()
+			building_help_crew_string(tribename, building_description) ..
+			building_help_building_section(building_description) ..
+			building_help_production_section(building_description)
 	elseif (building_description.type_name == "militarysite") then
 		return building_help_general_string(building_description) ..
 			building_help_building_section(building_description)
@@ -825,16 +834,17 @@ function building_help(building_description, tribename)
 			return building_help_general_string(building_description) ..
 				-- TODO(GunChleoc) expedition costs here?
 				building_help_building_section(building_description) ..
-				building_help_production_section()
+				building_help_production_section(building_description)
 		else
 			return building_help_general_string(building_description) ..
 				building_help_building_section(building_description)
 		end
 	elseif (building_description.type_name == "trainingsite") then
+		-- NOCOM attempt to index a number value
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_training(tribename, building_description) ..
 			building_help_crew_string(building_description) ..
-			building_help_building_section(building_description) ..building_help_production_section()
+			building_help_building_section(building_description) ..building_help_production_section(building_description)
 	elseif (building_description.type_name == "constructionsite" or
 				building_description.type_name == "dismantlesite") then
 				-- TODO(GunChleoc) Get them a crew string for the builder

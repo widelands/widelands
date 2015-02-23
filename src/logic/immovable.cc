@@ -47,7 +47,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/terrain_affinity.h"
-#include "logic/tribes/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"

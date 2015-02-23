@@ -45,6 +45,7 @@ namespace Widelands {
 	class Bob;
 	class WareDescr;
 	class WorkerDescr;
+	class TribeDescr;
 }
 
 namespace LuaMaps {
@@ -93,6 +94,53 @@ private:
 };
 
 
+class LuaTribeDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTribeDescription);
+
+	virtual ~LuaTribeDescription() {}
+
+	LuaTribeDescription() : tribedescr_(nullptr) {}
+	LuaTribeDescription(const Widelands::TribeDescr* const tribedescr)
+		: tribedescr_(tribedescr) {}
+	LuaTribeDescription(lua_State* L) : tribedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaTribeDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_descname(lua_State *);
+	int get_name(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int has_building(lua_State *);
+	int has_ware(lua_State *);
+	int has_worker(lua_State *);
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::TribeDescr* get() const {
+		assert(tribedescr_ != nullptr);
+		return tribedescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::TribeDescr* pointer) {
+		tribedescr_ = pointer;
+	}
+
+private:
+	const Widelands::TribeDescr* tribedescr_;
+};
+
+
 class LuaMapObjectDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaMapObjectDescription);
@@ -137,6 +185,7 @@ protected:
 private:
 	const Widelands::MapObjectDescr* mapobjectdescr_;
 };
+
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
 	const Widelands::klass* get() const {                                                           \
@@ -395,12 +444,12 @@ public:
 	 */
 	int get_consumers(lua_State *);
 	int get_icon_name(lua_State*);
-	int get_construction_material(lua_State *);
 	int get_producers(lua_State *);
 
 	/*
 	 * Lua methods
 	 */
+	int is_construction_material(lua_State *);
 
 	/*
 	 * C methods
