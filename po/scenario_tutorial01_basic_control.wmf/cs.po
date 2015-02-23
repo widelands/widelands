@@ -1,23 +1,23 @@
-# Czech translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
+# Matej Svrcek <mmatej@yahoo.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
+"Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-08-07 09:31+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 10:38+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
 "Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
@@ -25,15 +25,11 @@ msgstr "Krásně jednoduché po celou dobu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
-"I am sorry, but will I have to tear this down again. We might need the space "
-"here later on. If I am too slow for you, you might want to play a real game "
-"and just find everything out for yourself. Otherwise, please bear with me, I "
-"am not the youngest and quickest anymore."
-msgstr ""
-"Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo "
-"potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší spustit "
-"normální hru a zjistit si vše sám. V opačném případě se mnou prosím zůstaň, "
-"už nejsem nejmladší ani nejrychlejší."
+"I am sorry, but will I have to tear this down again. We might need the space"
+" here later on. If I am too slow for you, you might want to play a real game"
+" and just find everything out for yourself. Otherwise, please bear with me, "
+"I am not the youngest and quickest anymore."
+msgstr "Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší spustit normální hru a zjistit si vše sám. V opačném případě se mnou prosím zůstaň, už nejsem nejmladší ani nejrychlejší."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -48,7 +44,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr ""
+msgstr "Widelands je rozvážná, budovatelská strategická hra s důrazem spíše na budování než na ničení. Tento úvod vás provede základy hry."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -67,11 +63,8 @@ msgid ""
 "There are three different tribes in Widelands: the Barbarians, the Empire "
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
-"barbarians for now."
+"Barbarians for now."
 msgstr ""
-"Ve Widelands jsou tři různé kmeny: barbaři, císařství a atlanťané. Každý "
-"kmen má jinou ekonomiku, silné a slabé stránky, ale obecné herní principy "
-"jsou stejné pro všechny. Nyní budeme hrát za barbary."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -80,35 +73,23 @@ msgid ""
 "that stores wares, workers and soldiers. Some wares are needed for building "
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
-"The most important wares in the early game are the basic construction wares: "
-"logs and raw stone. Let’s make sure that we do not run out of logs. For "
+"The most important wares in the early game are the basic construction wares:"
+" logs and raw stone. Let’s make sure that we do not run out of logs. For "
 "this, we need a lumberjack and a hut for him to stay in."
-msgstr ""
-"Na začátku hry máš obvykle jednu základnu. To je ta velká budova s modrou "
-"vlajkou před vstupem. Základna slouží jako skladiště, kde se přechovává "
-"zboží, pracovníci a vojáci. Některé zboží je potřebné ke stavbě domů, z "
-"jiného se vyrábí další zboží. Zboží v základně pochopitelně nevydrží navěky, "
-"proto musíš zajistit také jeho přísun. Nejdůležitějším zbožím na začátku hry "
-"je základní stavební materiál: klády a kámen. Nyní zařídíme, aby nám nedošly "
-"klády. K tomu potřebujeme dřevorubce a chatu, ve které bude přebývat."
+msgstr "Na začátku hry máš obvykle jednu základnu. To je ta velká budova s modrou vlajkou před vstupem. Základna slouží jako skladiště, kde se přechovává zboží, pracovníci a vojáci. Některé zboží je potřebné ke stavbě domů, z jiného se vyrábí další zboží. Zboží v základně pochopitelně nevydrží navěky, proto musíš zajistit také jeho přísun. Nejdůležitějším zbožím na začátku hry je základní stavební materiál: klády a kámen. Nyní zařídíme, aby nám nedošly klády. K tomu potřebujeme dřevorubce a chatu, ve které bude přebývat."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
-"either by clicking on the ‘Show Building Spaces’ button at the bottom of the "
-"screen, which is the fourth one from the left. Or you can use the SPACE key "
-"to toggle it."
-msgstr ""
-"Pro dřevorubcovu chatu musíme najít hezké místo. To si můžeme usnadnit tak, "
-"že aktivujeme nápovědu k výstavbě. Lze to provést dvěma způsoby: buď můžeš "
-"kliknout na tlačítko nápovědy k výstavbě na spodním okraji obrazovky (čtvrté "
-"zleva), nebo můžeš nápovědu přepínat pomocí mezerníku."
+"either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
+" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" to toggle it."
+msgstr "Pro dřevorubcovu chatu musíme najít hezké místo. To si můžeme usnadnit tak, že aktivujeme nápovědu k výstavbě. Lze to provést dvěma způsoby: buď můžeš kliknout na tlačítko nápovědy k výstavbě na spodním okraji obrazovky (čtvrté zleva), nebo můžeš nápovědu přepínat pomocí mezerníku."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
-"Zavři tento panel kliknutím na tlačítko \"OK\" a pak si to vyzkoušej."
+msgstr "Zavři tento panel kliknutím na tlačítko \"OK\" a pak si to vyzkoušej."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
@@ -122,16 +103,14 @@ msgstr "Zobrazit stavební místa."
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr ""
-"Je snazší rozeznat, jaký typ budov lze stavět na jakém políčku, když je "
-"zapnuté zobrazení stavebních míst."
+msgstr "Je snazší rozeznat, jaký typ budov lze stavět na jakém políčku, když je zapnuté zobrazení stavebních míst."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "Do so now, either by pressing SPACE or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr ""
+msgstr "Pro provedení, stiskněte buď mezerník nebo klikněte na čtvrté tlačítko z leva ve spodní části obrazovky. Klikněte pravou myší na toto okno a vyzkoušejte to."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -139,17 +118,12 @@ msgstr "Dřevorubcovo umístění"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 msgid ""
-"There you go. I will explain about all those symbols in a minute. First, let "
-"me show you how to make a lumberjack’s hut and how to connect it with a "
-"road. There is a sweet spot for a lumberjack right next to those trees. I’ll "
-"describe the steps I will take and then ask you to click on the ‘OK’ button "
-"for me to demonstrate."
-msgstr ""
-"A je to. Všechny ty symboly ti vysvětlím za chvilku. Nejprve ti ukážu, jak "
-"postavit chatu dřevorubce a jak ji cestou připojit k základně. Hned vedle "
-"těch stromů je krásné místečko pro dřevorubce. V následujícím panelu ti "
-"vysvětlím všechny kroky a jakmile klikneš na tlačítko \"OK\", tak ti je i "
-"předvedu."
+"There you go. I will explain about all those symbols in a minute. First, let"
+" me show you how to make a lumberjack’s hut and how to connect it with a "
+"road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
+" describe the steps I will take and then ask you to click on the ‘OK’ button"
+" for me to demonstrate."
+msgstr "A je to. Všechny ty symboly ti vysvětlím za chvilku. Nejprve ti ukážu, jak postavit chatu dřevorubce a jak ji cestou připojit k základně. Hned vedle těch stromů je krásné místečko pro dřevorubce. V následujícím panelu ti vysvětlím všechny kroky a jakmile klikneš na tlačítko \"OK\", tak ti je i předvedu."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
@@ -157,27 +131,19 @@ msgstr "Stavba dřevorubce"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 msgid ""
-"First, I’ll left-click on the symbol where I want the lumberjack’s hut to be "
-"built. A window will appear where I can choose between buildings. Because "
+"First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
+" built. A window will appear where I can choose between buildings. Because "
 "I’ll click a yellow house symbol – which means that its field can house "
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
-"Nejprve kliknu levým tlačítkem na symbol, kde chci postavit dřevorubcovu "
-"chatu. Objeví se okno, kde můžu vybírat mezi budovami. Protože kliknu na "
-"symbol žlutého domu - to znamená, že na pozemku pod ním lze stavět středně "
-"velké a malé budovy - zobrazí se mi všechny střední budovy, které mohu "
-"stavět. Chata dřevorubce je malá budova, proto se dále přepnu na panel s "
-"malými budovami. Tam vyberu chatu dřevorubce."
+msgstr "Nejprve kliknu levým tlačítkem na symbol, kde chci postavit dřevorubcovu chatu. Objeví se okno, kde můžu vybírat mezi budovami. Protože kliknu na symbol žlutého domu - to znamená, že na pozemku pod ním lze stavět středně velké a malé budovy - zobrazí se mi všechny střední budovy, které mohu stavět. Chata dřevorubce je malá budova, proto se dále přepnu na panel s malými budovami. Tam vyberu chatu dřevorubce."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr ""
-"Klikni na tlačítko \"OK\" a sleduj mě. Budu postupovat opravdu pomalu: "
-"kliknu na žlutý dům - pak změním panel - a nakonec vyberu budovu."
+msgstr "Klikni na tlačítko \"OK\" a sleduj mě. Budu postupovat opravdu pomalu: kliknu na žlutý dům - pak změním panel - a nakonec vyberu budovu."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -190,11 +156,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr ""
-"To ještě nestačí. Ještě musím připojit dřevorubcovu chatu ke zbytku dopravní "
-"sítě. Když jsem založil staveniště, dostal jsem se automaticky do režimu "
-"stavby cest, takže jediné, co musím udělat, je kliknout na modrou vlajku "
-"před základnou."
+msgstr "To ještě nestačí. Ještě musím připojit dřevorubcovu chatu ke zbytku dopravní sítě. Když jsem založil staveniště, dostal jsem se automaticky do režimu stavby cest, takže jediné, co musím udělat, je kliknout na modrou vlajku před základnou."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -204,7 +166,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "To ještě nebude stačit. Stále potřebuji propojit dřevorubce s okolními cestami. Vypnuli jste volbu 'Postavit cestu při umístění vlajky' (pro změnu vyberte Volby v hlavní nabídce Widelands). Proto jsem se přepnul do módu stavba cest a teď stačí jen kliknout na modrou vlajku před mým velitelstvím."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -215,10 +177,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr ""
-"Pozorně teď sleduj, jak stavař vychází ze základny a míří na staveniště. Své "
-"místo zaujme také nosič: postaví se mezi dvě modré vlajky a bude přenášet "
-"zboží od jedné vlajky ke druhé."
+msgstr "Pozorně teď sleduj, jak stavař vychází ze základny a míří na staveniště. Své místo zaujme také nosič: postaví se mezi dvě modré vlajky a bude přenášet zboží od jedné vlajky ke druhé."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
@@ -229,15 +188,13 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
-msgstr ""
+msgstr "Pěkně pracují, není pravda ? Ale ubohý nosiš to má docela daleko. Můžeme mu to ale usnadnit (a dopravu zefektivnit) pokud do cesty umístíme ještě jednu modrou vlajku."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
-msgstr ""
-"Teď si to zkus sám: klikni na symbol žluté vlajky uprostřed cesty mezi dvěma "
-"modrými vlajkami, které jsem zrovna umístil, a pak klikni na"
+msgstr "Teď si to zkus sám: klikni na symbol žluté vlajky uprostřed cesty mezi dvěma modrými vlajkami, které jsem zrovna umístil, a pak klikni na"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:120
 msgid "build flag symbol."
@@ -256,18 +213,13 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
-"Čím jsou úseky tvých cest kratší, tím rychleji je tvé zboží přepravováno. "
-"Proto by jsi měl zajistit, že tvé cesty budou mít tolik vlajek, kolik je jen "
-"možné."
+msgstr "Čím jsou úseky tvých cest kratší, tím rychleji je tvé zboží přepravováno. Proto by jsi měl zajistit, že tvé cesty budou mít tolik vlajek, kolik je jen možné."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:129
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
-"Nyní postav modrou vlajku v prostředku cesty, která spojuje tvou hlavní "
-"budovu s tvým dřevorubcem."
+msgstr "Nyní postav modrou vlajku v prostředku cesty, která spojuje tvou hlavní budovu s tvým dřevorubcem."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
@@ -280,55 +232,53 @@ msgstr "Výborně! Počkáme, až bude chata dokončena."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard "
-"to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the PAGE UP key on your keyboard"
+" to increase the game speed. You can use PAGE DOWN to make the game slower "
 "again."
-msgstr ""
-"Pokud chceš věci urychlit, jednoduše stiskni na klávesnici PAGE UP a hra se "
-"zrychlí. Klávesou PAGE DOWN můžeš hru zase zpomalit."
+msgstr "Pokud chceš věci urychlit, jednoduše stiskni na klávesnici PAGE UP a hra se zrychlí. Klávesou PAGE DOWN můžeš hru zase zpomalit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
-msgstr ""
+msgstr "Čeká se na dokončení stavby"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr ""
+msgstr "Chtěl jsem vás naučit, jak stavět vlajky, ale vypadá to, že už jste na to přišli sami."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
 msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr ""
+msgstr "Teď jste rozdělili cestu na dvě části s vlastními nosiči. To znamená méně práce pro ně a vyšší efektivita pro nás. Bude proto nejlepší vždy umístit na cesty tolik vlajek, kolik je jen možné."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "Teď stačí jen počkat na dokončení stavby."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
-msgstr ""
+msgstr "Staveniště"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
-msgstr ""
+msgstr "Podívejte se na postup prací"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
-"If you click on the construction site, a window opens. You can see the wares "
-"that are still missing grayed out. You can also see the progress of this "
+"If you click on the construction site, a window opens. You can see the wares"
+" that are still missing grayed out. You can also see the progress of this "
 "construction site."
-msgstr ""
+msgstr "Jestliže kliknete na staveničtě, otevře se okno. V něm bude přehled surovin. Ty, které stále chybí, budou označeny šedě."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid ""
 "To close the window, simply right-click on it. All windows in Widelands can "
-"be closed that way, except the ones with instructions, like this one. Try it "
-"out!"
-msgstr ""
+"be closed that way, except the ones with instructions, like this one. Try it"
+" out!"
+msgstr "Okno zavřete kliknutím pravou myší. Všechna okna ve Widelands se mohou zavírat tímto způsobem, krome instrukcí jako je tato. Zkuste to!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
@@ -339,15 +289,15 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the raw stone."
-msgstr ""
+msgstr "Výborbě. Dřevorubcův srub je hotov. Dřevorubec se může nastěhovat a začít kácet stromy. Zajistí to tak příjem dříví. Teď ke kamenivu."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Byly nalezeny skály"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "Otevírání lomu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -355,7 +305,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Kameny lze těžit v žulových lomech, ale nejsnazší je vystavět lom vedle nalezených skal. Celkem náhodou je hromada skal hned vedle na západ (vlevo) od velitelství. Naučím vás, jak tam posunout pohled."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -388,11 +338,9 @@ msgstr "První je použít šipky na klávesnici."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:195
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
-"mouse button anywhere on the map, then move your mouse around and you’ll see "
-"the view scroll."
-msgstr ""
-"Druhý je obvyklejší a rychlejší: stikni a drž pravé tlačítko myši kdekoliv "
-"na mapě, když pohneš myší, můžeš vidět jak se tvá kamera pohybuje."
+"mouse button anywhere on the map, then move your mouse around and you’ll see"
+" the view scroll."
+msgstr "Druhý je obvyklejší a rychlejší: stikni a drž pravé tlačítko myši kdekoliv na mapě, když pohneš myší, můžeš vidět jak se tvá kamera pohybuje."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:196
 msgid ""
@@ -405,19 +353,14 @@ msgid "Other Ways to Move the View"
 msgstr "JIné způsoby pohybu pohledu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
-msgid ""
-"Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr ""
-"Výborně. Teď je tu ještě rychlejší způsob pohybu tentokrát za pomoci myši:"
+msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
+msgstr "Výborně. Teď je tu ještě rychlejší způsob pohybu tentokrát za pomoci myši:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr ""
-"Jednoduše klikněte-a-držte pravým tlačítkem kdekoliv na mapě, poté posuňte "
-"myší a místo aby se pohnul kurzor, pohne se celý váš pohled na mapu. Zkuste "
-"si to."
+msgstr "Jednoduše klikněte-a-držte pravým tlačítkem kdekoliv na mapě, poté posuňte myší a místo aby se pohnul kurzor, pohne se celý váš pohled na mapu. Zkuste si to."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
@@ -443,15 +386,12 @@ msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr ""
-"Minimapa ukazuje kompletní mapu ve zmenšeném měřítku. Můžeš přímo skočit ma "
-"libovolné políčko tak, že na něj klikneš levým tlačítkem. V minimapě můžeš "
-"také přepínat indikátory budov, cest, vlajek a hráčů."
+msgstr "Minimapa ukazuje kompletní mapu ve zmenšeném měřítku. Můžeš přímo skočit ma libovolné políčko tak, že na něj klikneš levým tlačítkem. V minimapě můžeš také přepínat indikátory budov, cest, vlajek a hráčů."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid ""
 "Try it out. Open the minimap, click on a few buttons and try moving around. "
-"Close it when you have have experimented enough."
+"Close it when you have experimented enough."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
@@ -470,8 +410,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""
-"Close the minimap when you are ready to continue by using the same button or "
-"‘m’ again. Of course, a right-click also works."
+"Close the minimap when you are ready to continue by using the same button or"
+" ‘m’ again. Of course, a right-click also works."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
@@ -513,8 +453,7 @@ msgstr "Na symbolu zeleného domu může být postaveno cokoliv."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:254
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
-"Na symbolu žlutého domu může být postaveno cokoliv kromě velkých budov."
+msgstr "Na symbolu žlutého domu může být postaveno cokoliv kromě velkých budov."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:255
 msgid "Red building symbols can only hold small buildings and flags."
@@ -528,19 +467,14 @@ msgstr ""
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr ""
-"Pokud něco umístíš na pole, okolní pole mohou ztratit  místo na stavbu "
-"budov, takže vybírej moudře."
+msgstr "Pokud něco umístíš na pole, okolní pole mohou ztratit  místo na stavbu budov, takže vybírej moudře."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:260
 msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr ""
-"Teď jdi a zkus si to sám. Lom je malá budova, takže když klikneš na symbol "
-"střední či velké budovy, budeš muset nejprve vybrat kartu malých budov, abys "
-"mohl najít tu svou. Jen si to vyzkoušej!"
+msgstr "Teď jdi a zkus si to sám. Lom je malá budova, takže když klikneš na symbol střední či velké budovy, budeš muset nejprve vybrat kartu malých budov, abys mohl najít tu svou. Jen si to vyzkoušej!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
@@ -561,15 +495,12 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press SPACE for that)."
-msgstr ""
-"Lom je malá budova stejně jako domek dřevorubce. Proto ho můžeš postavit na "
-"jakémkoliv poli, které má červený, žlutý nebo zelený symbol domečku, pokud "
-"jsou zobrazena stavení místa (pro jejich zobrazení stiskni Mezerník)."
+msgstr "Lom je malá budova stejně jako domek dřevorubce. Proto ho můžeš postavit na jakémkoliv poli, které má červený, žlutý nebo zelený symbol domečku, pokud jsou zobrazena stavení místa (pro jejich zobrazení stiskni Mezerník)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
-"Just click on any house symbol next to the rocks, select the small buildings "
-"tab in the window that opens up, then click on the quarry symbol."
+"Just click on any house symbol next to the rocks, select the small buildings"
+" tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
@@ -585,11 +516,7 @@ msgid ""
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site. You can enter road building mode for any "
 "flag by left-clicking on a flag and selecting"
-msgstr ""
-"Výborně! Okamžitě po umístění budovy jsi v módu pro stavbu silnic. Nová "
-"cesta začne na vlajce před nově umístěným staveništěm. Můžeš vstoupit do "
-"módu pro stavbu silnic pro jakoukoliv vlajku tak, že na vlajku klikneš levým "
-"tlačítkem a vybereš ji"
+msgstr "Výborně! Okamžitě po umístění budovy jsi v módu pro stavbu silnic. Nová cesta začne na vlajce před nově umístěným staveništěm. Můžeš vstoupit do módu pro stavbu silnic pro jakoukoliv vlajku tak, že na vlajku klikneš levým tlačítkem a vybereš ji"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:280
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:297
@@ -600,9 +527,7 @@ msgstr "symbol pro stavbu cest"
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
-msgstr ""
-"Pokud se rozhodneš, že teď cestu stavět nechceš, můžeš stavbu cesty zrušit "
-"kliknutím na startovní pozici na cestě a výběrem"
+msgstr "Pokud se rozhodneš, že teď cestu stavět nechceš, můžeš stavbu cesty zrušit kliknutím na startovní pozici na cestě a výběrem"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:283
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
@@ -612,8 +537,8 @@ msgstr "symbol pro zrušení"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid ""
 "Now, about this road. Remember: we are already in road building mode since "
-"you just ordered the quarry. You can either make it longer by one field at a "
-"time by left-clicking multiple times on neighboring fields for perfect "
+"you just ordered the quarry. You can either make it longer by one field at a"
+" time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
 msgstr ""
 
@@ -633,8 +558,8 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:302
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
-"longer by one field at a time by left-clicking multiple times on neighboring "
-"fields for perfect control over the route the road takes, like so:"
+"longer by one field at a time by left-clicking multiple times on neighboring"
+" fields for perfect control over the route the road takes, like so:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
@@ -646,43 +571,36 @@ msgstr ""
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr ""
-"Ještě jedna věc: okolo políčka kde by měla končit tvá cesta můžeš vidět "
-"různé ukazatele. Mají následující význam :"
+msgstr "Ještě jedna věc: okolo políčka kde by měla končit tvá cesta můžeš vidět různé ukazatele. Mají následující význam :"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:322
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
-"Zde je terén rovný. Tví nosiči budou velmi rychlí na tomto typu terénu."
+msgstr "Zde je terén rovný. Tví nosiči budou velmi rychlí na tomto typu terénu."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:323
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr ""
-"Je tu malé stoupání, které je třeba zdolat  cestou na toto pole. To znamená, "
-"že tví pracovníci budou rychleji zcházet do údolí než stoupat nahoru."
+msgstr "Je tu malé stoupání, které je třeba zdolat  cestou na toto pole. To znamená, že tví pracovníci budou rychleji zcházet do údolí než stoupat nahoru."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:324
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr ""
-"Spojení mezi políčky je extrémně strmé. Nárůst rychlosti v jednom směru je "
-"obrovský, zpomalení v opačném směru je ovšem také značné."
+msgstr "Spojení mezi políčky je extrémně strmé. Nárůst rychlosti v jednom směru je obrovský, zpomalení v opačném směru je ovšem také značné."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:326
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
-"Also, try to keep roads as short as possible and always remember to place as "
-"many flags as you can on road segments to share the load better. If you hold "
-"Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically."
+"Also, try to keep roads as short as possible and always remember to place as"
+" many flags as you can on road segments to share the load better. If you "
+"hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
+"automatically."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
-msgid ""
-"Now please rebuild the road between your quarry and your headquarters."
+msgid "Now please rebuild the road between your quarry and your headquarters."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
@@ -698,19 +616,14 @@ msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr ""
-"Propoj pomocí cesty staveniště lomu se svou základnou. Po vybudování nové "
-"stavby jsi hned přepnutý v módu stavění cesty. Ale to nyní nejsi."
+msgstr "Propoj pomocí cesty staveniště lomu se svou základnou. Po vybudování nové stavby jsi hned přepnutý v módu stavění cesty. Ale to nyní nejsi."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:337
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr ""
-"Pro postavení úplně nové cesty jednoduše klikni na vlajku před staveništěm, "
-"klikni na ikonu pro stavění cesty a klikni a vlajku před velitelstvím. Poté "
-"počkej na dokončení stavby."
+msgstr "Pro postavení úplně nové cesty jednoduše klikni na vlajku před staveništěm, klikni na ikonu pro stavění cesty a klikni a vlajku před velitelstvím. Poté počkej na dokončení stavby."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:343
 msgid "Build a second quarry"
@@ -756,12 +669,7 @@ msgid ""
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’ and you can toggle "
 "them via the ‘c’ key or via the button on the ‘Watch’ tab of any field."
-msgstr ""
-"Zatím, co čekáme, tak ti rychle ukážu další užitečnou věc. Všechna "
-"staveniště vypadají stejně i některé budovy jsou si podobné. Občas je těžké "
-"je od sebe rozeznat. Widelands nabízí funkci zobrazení jmenovek nad "
-"budovami. Nazývají se \"přehled\" a můžeš je zapínat/vypínat přes klávesu "
-"\"c\" nebo přes talčítko \"sledovat\" na záložce libovolného políčka."
+msgstr "Zatím, co čekáme, tak ti rychle ukážu další užitečnou věc. Všechna staveniště vypadají stejně i některé budovy jsou si podobné. Občas je těžké je od sebe rozeznat. Widelands nabízí funkci zobrazení jmenovek nad budovami. Nazývají se \"přehled\" a můžeš je zapínat/vypínat přes klávesu \"c\" nebo přes talčítko \"sledovat\" na záložce libovolného políčka."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -769,20 +677,14 @@ msgid ""
 "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This will "
 "display information about the productivity of buildings or the progress of "
 "construction sites."
-msgstr ""
-"Podobně je to i se statistikami budov, které se dají rovněž zapínat přes "
-"tlačítko \"sledovat\" na záložce libovolného políčka. Zkratka je \"s\". "
-"Tímto si zobrazíš informace o produktivitě budovy nebo postupu výstavby."
+msgstr "Podobně je to i se statistikami budov, které se dají rovněž zapínat přes tlačítko \"sledovat\" na záložce libovolného políčka. Zkratka je \"s\". Tímto si zobrazíš informace o produktivitě budovy nebo postupu výstavby."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid ""
-"Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys. "
-"Alternatively, you can click on any field without a building on it, select "
+"Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys."
+" Alternatively, you can click on any field without a building on it, select "
 "the watch tab and then click on the corresponding buttons."
-msgstr ""
-"Hned ti tyhle dvě zpřístupním. Pamatuj: ´c´ a ´s´ jsou ony klávesy. Další "
-"možností je kliknout na políčko, kde není postavena budova, vybrat záložku "
-"\"sledovat\" a poté kliknout na odpovídající tlačítko."
+msgstr "Hned ti tyhle dvě zpřístupním. Pamatuj: ´c´ a ´s´ jsou ony klávesy. Další možností je kliknout na políčko, kde není postavena budova, vybrat záložku \"sledovat\" a poté kliknout na odpovídající tlačítko."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:372
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -809,23 +711,16 @@ msgid ""
 "bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr ""
-"Okno zpráv může být zapnuto/vypnuto tlačítkem úplně vpravo na spodním okraji "
-"obrazovky. Toto tlačítko také změní svůj vzhled kdykoliv ti přijde nová "
-"zpráva, spolu s tím také uslyšíš zvukové upozornění."
+msgstr "Okno zpráv může být zapnuto/vypnuto tlačítkem úplně vpravo na spodním okraji obrazovky. Toto tlačítko také změní svůj vzhled kdykoliv ti přijde nová zpráva, spolu s tím také uslyšíš zvukové upozornění."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:384
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
-"your economy. Let’s learn how to archive messages: You can check them off in "
-"your inbox so that they get a tick-symbol in front of them. Then, you can "
+"your economy. Let’s learn how to archive messages: You can check them off in"
+" your inbox so that they get a tick-symbol in front of them. Then, you can "
 "click the"
-msgstr ""
-"Aktuálně máš dvě zprávy. Tu, kterou právě čteš a druhou, která tě informuje "
-"o postavení nové základny. Nyní se naučíme, jak archivovat zprávy: Můžeš je "
-"zaškrtnout v příchozích zprávách, tím se vedle nich objeví fajfka. Pak "
-"klikni na"
+msgstr "Aktuálně máš dvě zprávy. Tu, kterou právě čteš a druhou, která tě informuje o postavení nové základny. Nyní se naučíme, jak archivovat zprávy: Můžeš je zaškrtnout v příchozích zprávách, tím se vedle nich objeví fajfka. Pak klikni na"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid "archive message button to move them into your archive."
@@ -835,9 +730,7 @@ msgstr "tlačítko \"archivovat zprávu\" přesune zprávu do archivu."
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
-msgstr ""
-"Archivuje všechny zprávy, které máš momentálně v příjatých zprávách, včetně "
-"této."
+msgstr "Archivuje všechny zprávy, které máš momentálně v příjatých zprávách, včetně této."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:392
 msgid "Archive all messages in your inbox"
@@ -852,10 +745,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty. "
-msgstr ""
-"Okno zpráv je základem pro plnou kontrolu jmění tvého kmene. Ale poněvadž "
-"během hry budeš dostávat opravdu hodně zpráv, tak je dobré udržovat svou "
-"schránku prázdnou, abys neztratil přehled. "
+msgstr "Okno zpráv je základem pro plnou kontrolu jmění tvého kmene. Ale poněvadž během hry budeš dostávat opravdu hodně zpráv, tak je dobré udržovat svou schránku prázdnou, abys neztratil přehled. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:397
 msgid "Archive all your messages in your inbox now."
@@ -866,10 +756,7 @@ msgid ""
 "To do so, open the message window by pressing ‘n’ or clicking the rightmost "
 "button at the very bottom of the screen. Then mark all messages by checking "
 "the check box in front of them. Then, click the ‘Archive All’ button."
-msgstr ""
-"Za tímto účelem otevři okno zpráv stiskem \"n\" nebo klikem na tlačítko "
-"nejvíce vpravo na spodku obrazovky. Následně označ všechny zprávy "
-"zaškrtnutním zaškrtávátka před nimi. Poté klikni na tlačítko \"Archivovat\"."
+msgstr "Za tímto účelem otevři okno zpráv stiskem \"n\" nebo klikem na tlačítko nejvíce vpravo na spodku obrazovky. Následně označ všechny zprávy zaškrtnutním zaškrtávátka před nimi. Poté klikni na tlačítko \"Archivovat\"."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
@@ -885,11 +772,9 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
-"First, close this window by pressing the button below, then right-click into "
-"the messages window to close it."
-msgstr ""
-"Nejprve zavři toto okno stisknutím tlačítka pod textem a poté klikni pravým "
-"tlačítkem na okno vzkazů, abys ho zavřel."
+"First, close this window by pressing the button below, then right-click into"
+" the messages window to close it."
+msgstr "Nejprve zavři toto okno stisknutím tlačítka pod textem a poté klikni pravým tlačítkem na okno vzkazů, abys ho zavřel."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid "Close the messages window"
@@ -904,9 +789,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
-msgstr ""
-"Všechna okna ve Widelands mohou být zavřena pravým kliknutím. Některá také "
-"tlačítky ve spodní části obrazovky."
+msgstr "Všechna okna ve Widelands mohou být zavřena pravým kliknutím. Některá také tlačítky ve spodní části obrazovky."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
 msgid "Close the messages window now by right-clicking into it."
@@ -947,8 +830,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid ""
-"Since our quarries are useless now, you can destroy them and reuse the space "
-"later on."
+"Since our quarries are useless now, you can destroy them and reuse the space"
+" later on."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
@@ -976,32 +859,23 @@ msgstr "Rozšiřování tvého území"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 msgid ""
-"There is one more thing I’d like to teach you now: Expanding your territory. "
-"The place that we started with around our headquarters is barely enough for "
-"a basic building infrastructure, and we do not have access to mountains, "
-"which we need to mine minerals and coal. So, we have to expand our territory."
-msgstr ""
-"Je tu jedna další věc, kterou bych tě chtěl teď naučit : Rozšiřování tvého "
-"území. Oblast s kterou jsme začali okolo hlavního stanu je sotva dostačující "
-"pro základní infrastrukturu, a navíc nemáme přístup k horám, které "
-"potřebujeme abychom mohli těžit minerály a uhlí. A tak musíme naše území "
-"rozšířit."
+"There is one more thing I’d like to teach you now: Expanding your territory."
+" The place that we started with around our headquarters is barely enough for"
+" a basic building infrastructure, and we do not have access to mountains, "
+"which we need to mine minerals and coal. So, we have to expand our "
+"territory."
+msgstr "Je tu jedna další věc, kterou bych tě chtěl teď naučit : Rozšiřování tvého území. Oblast s kterou jsme začali okolo hlavního stanu je sotva dostačující pro základní infrastrukturu, a navíc nemáme přístup k horám, které potřebujeme abychom mohli těžit minerály a uhlí. A tak musíme naše území rozšířit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
-"territory. The barbarians have a selection of different military buildings: "
+"territory. The Barbarians have a selection of different military buildings: "
 "sentries, barriers, donjons, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
 msgstr ""
-"Expandování probíhá jednoduše stavbou vojenské budovy v rohu tvého území. "
-"Barbaři mají několik různých vojenských budov: strážní věže, zábrany, "
-"donjony, pevnosti a citadely. Čím větší budova, tím dražší je její stavba, "
-"tím víc území zabere okolo sebe a tím více vojáků zde může být umístěno. "
-"Budovy se také odlišují svým dohledem: budovy s věží vidí dále než ostatní."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -1046,8 +920,8 @@ msgstr ""
 msgid ""
 "Remember that big buildings (green icon) cannot be built on small (red) or "
 "medium (yellow) building plots, but buildings can be built on a building "
-"plot that provides more space than they need. You should always keep that in "
-"mind when you search for a suitable place."
+"plot that provides more space than they need. You should always keep that in"
+" mind when you search for a suitable place."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
@@ -1104,10 +978,9 @@ msgstr "tlačítko pro ukončení hry"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:498
 msgid ""
-"Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at"
-msgstr ""
-"Děkujeme za dohrání tohoto tutoriálu. Užij si Widelands a nezapomeň nás "
-"navštívit na"
+"Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
+"at"
+msgstr "Děkujeme za dohrání tohoto tutoriálu. Užij si Widelands a nezapomeň nás navštívit na"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

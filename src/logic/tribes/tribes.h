@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "graphic/texture.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
 #include "logic/description_maintainer.h"
@@ -153,6 +154,8 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+
+	std::unique_ptr<Texture> road_texture_; // Used in loading the road texture graphics
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

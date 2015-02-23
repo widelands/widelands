@@ -21,6 +21,9 @@
 
 #include <memory>
 
+#include "graphic/texture_atlas.h"
+#include "graphic/image_io.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 
 namespace Widelands {
@@ -319,6 +322,37 @@ void Tribes::load_graphics()
 
 	for (BuildingIndex i = 0; i < buildings_->size(); ++i) {
 		buildings_->get_mutable(i)->load_graphics();
+	}
+
+	// Construct and hold on to the texture atlas that contains all road images.
+	TextureAtlas ta;
+
+	// These will be deleted at the end of the method.
+	std::vector<std::unique_ptr<Texture>> individual_textures_;
+	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
+		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
+		for (const std::string& texture_path : tribe->normal_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+		for (const std::string& texture_path : tribe->busy_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+	}
+
+	std::vector<std::unique_ptr<Texture>> textures;
+	road_texture_ = ta.pack(&textures);
+
+	size_t next_texture_to_move = 0;
+	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
+		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
+		for (size_t i = 0; i < tribe->normal_road_paths().size(); ++i) {
+			tribe->add_normal_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+		for (size_t i = 0; i < tribe->busy_road_paths().size(); ++i) {
+			tribe->add_busy_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
 	}
 }
 

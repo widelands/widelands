@@ -176,7 +176,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			throw wexception("Animation with one picture must not have 'fps'.\n"
 								  "The animation's picture is: %s", image_files_.front().c_str());
 		}
-	} else {
+	} else if (table.has_key("fps")) {
 		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
 

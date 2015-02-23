@@ -28,7 +28,9 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -60,6 +62,24 @@ TribeDescr::TribeDescr
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+
+		items_table = table.get_table("roads");
+		std::vector<std::string> roads = items_table->get_table("busy")->array_entries<std::string>();
+		for (const std::string& filename : roads) {
+			if (g_fs->file_exists(filename)) {
+				busy_road_paths_.push_back(filename);
+			} else {
+				throw GameDataError("File '%s' for busy road texture doesn't exist", filename.c_str());
+			}
+		}
+		roads = items_table->get_table("normal")->array_entries<std::string>();
+		for (const std::string& filename : roads) {
+			if (g_fs->file_exists(filename)) {
+				normal_road_paths_.push_back(filename);
+			} else {
+				throw GameDataError("File '%s' for normal road texture doesn't exist", filename.c_str());
+			}
+		}
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(egbase_.tribes().nrwares());
@@ -172,6 +192,36 @@ TribeDescr::TribeDescr
 	}
 }
 
+			/* NOCOM
+				Section road_s = root_conf.get_safe_section("roads");
+				const auto load_roads = [&road_s, this](
+					const std::string& prefix, std::vector<std::string>* images) {
+					for (int i = 0; i < 99; ++i) {
+						const char* img =
+							road_s.get_string((boost::format("%s_%02i") % prefix % i).str().c_str(), nullptr);
+						if (img == nullptr) {
+							break;
+						}
+						if (!g_fs->file_exists(img)) {
+							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
+															img,
+															prefix.c_str(),
+															m_name.c_str());
+						}
+						images->emplace_back(img);
+					}
+					if (images->empty()) {
+						throw new GameDataError(
+							"No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
+					}
+				};
+				load_roads("normal", &m_normal_road_paths);
+				load_roads("busy", &m_busy_road_paths);
+			}
+			 */
+
+// NOCOM(GunChleoc): New, fix up!
+
 
 /**
   * Access functions
@@ -273,6 +323,26 @@ uint32_t TribeDescr::frontier_animation() const {
 
 uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
+}
+
+const std::vector<std::string>& TribeDescr::normal_road_paths() const {
+	return normal_road_paths_;
+}
+
+const std::vector<std::string>& TribeDescr::busy_road_paths() const {
+	return busy_road_paths_;
+}
+
+void TribeDescr::add_normal_road_texture(std::unique_ptr<Texture> texture) {
+	road_textures_.add_normal_road_texture(std::move(texture));
+}
+
+void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
+	road_textures_.add_busy_road_texture(std::move(texture));
+}
+
+const RoadTextures& TribeDescr::road_textures() const {
+	return road_textures_;
 }
 
 /*

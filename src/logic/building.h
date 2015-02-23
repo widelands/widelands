@@ -48,7 +48,7 @@ namespace Widelands {
 
 struct Flag;
 struct Message;
-struct TribeDescr;
+class TribeDescr;
 class WaresQueue;
 
 class Building;

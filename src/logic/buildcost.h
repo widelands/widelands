@@ -32,7 +32,7 @@ class Section;
 
 namespace Widelands {
 
-struct TribeDescr;
+class TribeDescr;
 
 struct Buildcost : std::map<WareIndex, uint8_t> {
 

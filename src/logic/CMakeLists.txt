@@ -166,6 +166,8 @@ wl_library(logic
     replay.h
     requirements.cc
     requirements.h
+    road_textures.cc
+    road_textures.h
     roadtype.h
     save_handler.cc
     save_handler.h

@@ -48,21 +48,18 @@ private:
 		float texture_x;
 		float texture_y;
 		float brightness;
-
-		// This is a hack: we want to draw busy and normal roads in the same
-		// run, but since samplers (apparently?) cannot be passed through
-		// attribute arrays, we instead sample twice (busy and normal) and mix
-		// them together with 'texture_mix' which is either 1 or 0.
-		float texture_mix;
 	};
-	static_assert(sizeof(PerVertexData) == 24, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
+	enum Direction {kEast, kSouthEast, kSouthWest};
 	void add_road(const Surface& surface,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
-	              const Widelands::RoadType road_type);
+	              const Widelands::RoadType road_type,
+	              const Direction direction,
+					  int* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -74,18 +71,12 @@ private:
 	GLint attr_position_;
 	GLint attr_texture_position_;
 	GLint attr_brightness_;
-	GLint attr_texture_mix_;
 
 	// Uniforms.
-	GLint u_normal_road_texture_;
-	GLint u_busy_road_texture_;
+	GLint u_texture_;
 
 	// All vertices that get rendered this frame.
 	std::vector<PerVertexData> vertices_;
-
-	// The road textures.
-	std::unique_ptr<Texture> normal_road_texture_;
-	std::unique_ptr<Texture> busy_road_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(RoadProgram);
 };

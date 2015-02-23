@@ -34,7 +34,19 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 72, 73 },
+			hotspot = { 69, 76 },
+		},
+		build = {
+			pictures = path.list_directory(dirname, "build_\\d+.png"),
+			hotspot = { 69, 76 },
+		},
+		unoccupied = {
+			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
+			hotspot = { 69, 76 },
+		},
+		working = {
+			pictures = path.list_directory(dirname, "working_\\d+.png"),
+			hotspot = { 69, 76 },
 		},
 	},
 
@@ -74,7 +86,8 @@ tribes:new_productionsite_type {
 			descname = _"harvesting wheat",
 			actions = {
 				"sleep=4000",
-				"worker=harvest"
+				"worker=harvest",
+				"animate=working 30000"
 			}
 		},
 	},

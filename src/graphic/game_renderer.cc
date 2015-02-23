@@ -209,6 +209,13 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			f.brightness = field_brightness(fcoords, gametime, map, player);
 
+			PlayerNumber owner_number = fcoords.field->get_owned_by();
+			if (owner_number > 0) {
+				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
+			} else {
+				f.road_textures = nullptr;
+			}
+
 			f.roads = field_roads(fcoords, map, player);
 		}
 	}

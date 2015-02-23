@@ -1,37 +1,40 @@
-# Widelands po/nl_NL/widelands.po
-# Copyright (C) 2009 Widelands Development Team
-#
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4575\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 05:57+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-16 10:38+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
-"X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-Language: Dutch\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../src/ai/computer_player.cc:39
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/computer_player.cc:40
 msgid "None"
 msgstr "Geen"
 
-#: ../../src/ai/defaultai.h:82
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
 msgstr "Aggressief"
 
-#: ../../src/ai/defaultai.h:92
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:99
 msgid "Normal"
 msgstr "Normaal"
 
-#: ../../src/ai/defaultai.h:102
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:110
 msgid "Defensive"
 msgstr "Verdedigend"
 
@@ -66,7 +69,8 @@ msgid "%1$s and %2$s"
 msgstr ""
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
@@ -74,7 +78,8 @@ msgid "Jan"
 msgstr ""
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
@@ -82,7 +87,8 @@ msgid "Feb"
 msgstr ""
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
@@ -90,7 +96,8 @@ msgid "Mar"
 msgstr ""
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
@@ -98,7 +105,8 @@ msgid "Apr"
 msgstr ""
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
@@ -106,7 +114,8 @@ msgid "May"
 msgstr ""
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
@@ -114,7 +123,8 @@ msgid "Jun"
 msgstr ""
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
@@ -122,7 +132,8 @@ msgid "Jul"
 msgstr ""
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
@@ -130,7 +141,8 @@ msgid "Aug"
 msgstr ""
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
@@ -138,7 +150,8 @@ msgid "Sep"
 msgstr ""
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:149
@@ -146,7 +159,8 @@ msgid "Oct"
 msgstr ""
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:155
@@ -154,7 +168,8 @@ msgid "Nov"
 msgstr ""
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
@@ -180,13 +195,13 @@ msgid "Tool Size"
 msgstr "Gereedschapsgrootte"
 
 #: ../../src/editor/editorinteractive.cc:95
-#: ../../src/wui/interactive_player.cc:116
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:103
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
 msgstr "Minikaart"
 
 #: ../../src/editor/editorinteractive.cc:98
-#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr "Toon Bouwlocaties (aan/uit)"
 
@@ -212,9 +227,7 @@ msgstr "Niet ondersteund formaat"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
-"Widelands kon het bestand \"%s\" niet laden. Het bestandsformaat lijkt niet "
-"compatible te zijn."
+msgstr "Widelands kon het bestand \"%s\" niet laden. Het bestandsformaat lijkt niet compatible te zijn."
 
 #: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
@@ -236,7 +249,7 @@ msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 #: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Geen naam"
@@ -249,143 +262,189 @@ msgstr "Geen naam"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../../src/editor/tools/editor_info_tool.cc:43
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr "Veldinformatie"
 
-#: ../../src/editor/tools/editor_info_tool.cc:51
+#: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
 msgstr "Knooppunt:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:53
+#: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr "Coördinaten: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
-#: ../../src/editor/tools/editor_info_tool.cc:60
+#: ../../src/editor/tools/editor_info_tool.cc:61
 msgid " small"
 msgstr " klein"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " medium"
 msgstr " middelgroot"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
-#: ../../src/editor/tools/editor_info_tool.cc:64
+#: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " big"
 msgstr " groot"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " flag"
 msgstr " vlag"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk
-#: ../../src/editor/tools/editor_info_tool.cc:70
+#: ../../src/editor/tools/editor_info_tool.cc:71
 msgid " mine"
 msgstr " mijn"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
-#: ../../src/editor/tools/editor_info_tool.cc:72
+#: ../../src/editor/tools/editor_info_tool.cc:73
 msgid " port"
 msgstr " haven"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
-#: ../../src/editor/tools/editor_info_tool.cc:74
+#: ../../src/editor/tools/editor_info_tool.cc:75
 msgid " walk"
 msgstr " loop"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: swim
-#: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid " swim"
 msgstr " zwem"
 
-#: ../../src/editor/tools/editor_info_tool.cc:78
+#: ../../src/editor/tools/editor_info_tool.cc:79
 #, c-format
 msgid "Caps:%s"
 msgstr "Eigenschappen:%s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:82
+#: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Owned by: Player %u"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:85
+#: ../../src/editor/tools/editor_info_tool.cc:86
 msgid "Owned by: —"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:88
+#: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
 msgstr "Heeft stationair object"
 
-#: ../../src/editor/tools/editor_info_tool.cc:88
+#: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "No base immovable"
 msgstr "Geen stationair object"
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has animals"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No animals"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:95
+#: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
 msgstr "Terrein:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:101
-#: ../../src/editor/tools/editor_info_tool.cc:121
+#: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/tools/editor_info_tool.cc:147
 #, c-format
 msgid "Name: %s"
 msgstr "Naam: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:104
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:108
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
+msgid "arable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:111
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:148
+msgid "treeless"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:114
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:105
+msgid "aquatic"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:117
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:127
+msgid "dead"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:120
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
+msgid "mountainous"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/editor_info_tool.cc:123
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
+msgid "unpassable"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:125
+#, c-format
+msgid "Category: %s"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:127
+#, c-format
+msgid "Editor Category: %s"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
 msgstr "Hulpbronnen:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:111
+#: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Resource name: %s"
 msgstr "Hulpbron naam: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:113
+#: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Hulpbron hoeveelheid: %i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:116
+#: ../../src/editor/tools/editor_info_tool.cc:142
 msgid "No resources"
 msgstr "Geen hulpbronnen"
 
-#: ../../src/editor/tools/editor_info_tool.cc:120
+#: ../../src/editor/tools/editor_info_tool.cc:146
 #: ../../src/ui_fsmenu/mapselect.cc:293
 msgid "Map:"
 msgstr "Kaart:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:122
+#: ../../src/editor/tools/editor_info_tool.cc:148
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Grootte: %1$ix%2$i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:127
+#: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
 msgid "Players: %d"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:130
+#: ../../src/editor/tools/editor_info_tool.cc:156
 msgid "Players: -"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:133
+#: ../../src/editor/tools/editor_info_tool.cc:159
 #, c-format
 msgid "Author: %s"
 msgstr "Auteur: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:134
+#: ../../src/editor/tools/editor_info_tool.cc:160
 #, c-format
 msgid "Descr: %s"
 msgstr "Beschr.: %s"
@@ -400,7 +459,6 @@ msgstr "Hoofdmenu"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
-#: ../../src/ui_fsmenu/editor.cc:38
 msgid "New Map"
 msgstr "Nieuwe kaart"
 
@@ -411,12 +469,11 @@ msgstr "Nieuwe  willekeurige kaart"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:53
-#: ../../src/ui_fsmenu/editor.cc:41
 msgid "Load Map"
 msgstr "Laad kaart"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
 msgstr "Sla kaart op"
 
@@ -435,25 +492,25 @@ msgid "Exit Editor"
 msgstr "Verlaat editor"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:72
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name:"
 msgstr "Naam:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:79
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:89
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Authors:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:96
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size:"
 msgstr "Grootte:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
-#: ../../src/ui_fsmenu/loadgame.cc:279
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
+#: ../../src/ui_fsmenu/loadgame.cc:310
 msgid "Players:"
 msgstr "Spelers:"
 
@@ -462,9 +519,9 @@ msgid "Descr:"
 msgstr "Beschr:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:392 ../../src/ui_basic/helpwindow.cc:85
+#: ../../src/scripting/lua_game.cc:384 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
@@ -472,9 +529,9 @@ msgid "OK"
 msgstr "OK"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:135
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:66
-#: ../../src/ui_fsmenu/launch_mpg.cc:85 ../../src/ui_fsmenu/options.cc:118
+#: ../../src/ui_fsmenu/launch_mpg.cc:85 ../../src/ui_fsmenu/options.cc:119
 #: ../../src/ui_fsmenu/options.cc:530
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
@@ -482,20 +539,20 @@ msgstr "Annuleren"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
 #, c-format
 msgid "%1$ix%2$i"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr "bovenliggende map"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
-#: ../../src/ui_fsmenu/loadgame.cc:277
+#: ../../src/ui_fsmenu/loadgame.cc:308
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
 msgstr "Kaartnaam:"
@@ -510,11 +567,9 @@ msgstr "Zet oorsprong"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the top-"
-"left corner of a generated minimap."
-msgstr ""
-"Bepaal de positie voor de coördinaten (0,0). Dit zal de linkerbovenhoek van "
-"de te genereren minikaart zijn."
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Bepaal de positie voor de coördinaten (0,0). Dit zal de linkerbovenhoek van de te genereren minikaart zijn."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -589,7 +644,7 @@ msgid "Low"
 msgstr "Laag"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
-#: ../../src/logic/building.cc:533
+#: ../../src/logic/building.cc:537
 msgid "Medium"
 msgstr "Middelgroot"
 
@@ -615,54 +670,50 @@ msgstr "Genereer kaart"
 msgid "Generating random map..."
 msgstr "willekeurige kaart aan het genereren..."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:110
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 msgid "Descr: "
 msgstr "Beschr: "
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:142
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
 msgstr "Maak map"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
 msgid "unnamed"
 msgstr "naamloos"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
 #, c-format
 msgid "Directory: %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
 msgstr "map"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
 msgid "Not a map file"
 msgstr "Geen mapbestand"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Een bestand met de naam '%s' bestaat al. Overschrijven?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
 msgid "Error Saving Map!"
 msgstr "Fout bij het opslaan van de map!!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""
-"Fout Tijdens Opslaan Kaart!\n"
-"Opgeslagen kaart is mogelijk onbruikbaar!\n"
-"\n"
-"Opgegeven reden:\n"
+msgstr "Fout Tijdens Opslaan Kaart!\nOpgeslagen kaart is mogelijk onbruikbaar!\n\nOpgegeven reden:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
@@ -700,26 +751,6 @@ msgid ""
 "animals that depend on this player and try again."
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
-msgid "Allowed Buildings"
-msgstr "Toegestane gebouwen"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:62
-msgid "Allowed Buildings:"
-msgstr "Toegestane gebouwen:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
-msgid "Forbidden Buildings:"
-msgstr "Verboden gebouwen:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
-msgid "Forbid"
-msgstr "Verbied"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
-msgid "Allow"
-msgstr "Toestaan"
-
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
 msgstr "Hoogtegereedschapsopties"
@@ -752,7 +783,7 @@ msgid "Noise height"
 msgstr "Ruw oppervlak"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-#: ../../src/wui/minimap.cc:150
+#: ../../src/wui/minimap.cc:146
 msgid "Terrain"
 msgstr "Terrein"
 
@@ -792,37 +823,7 @@ msgstr "Zet waarde: %u"
 msgid "Immovable Select"
 msgstr ""
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
-msgid "arable"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:104
-msgid "aquatic"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:114
-msgid "mountainous"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:124
-msgid "dead"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:134
-msgid "unpassable"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:143
-msgid "treeless"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:166
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:171
 msgid "Terrain Select"
 msgstr "Selecteer terrein"
 
@@ -831,39 +832,39 @@ msgstr "Selecteer terrein"
 msgid "Current Size: %u"
 msgstr "Huidige grootte: %u"
 
-#: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:849
+#: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:847
 msgid "unknown"
 msgstr "onbekend"
 
-#: ../../src/logic/building.cc:526
+#: ../../src/logic/building.cc:530
 msgid "mine"
 msgstr "mijn"
 
-#: ../../src/logic/building.cc:527
+#: ../../src/logic/building.cc:531
 msgid "small"
 msgstr "klein"
 
-#: ../../src/logic/building.cc:528
+#: ../../src/logic/building.cc:532
 msgid "big"
 msgstr "groot"
 
-#: ../../src/logic/building.cc:528
+#: ../../src/logic/building.cc:532
 msgid "medium"
 msgstr "middelgroot"
 
-#: ../../src/logic/building.cc:531
+#: ../../src/logic/building.cc:535
 msgid "Mine"
 msgstr "Mijn"
 
-#: ../../src/logic/building.cc:532
+#: ../../src/logic/building.cc:536
 msgid "Small"
 msgstr "Klein"
 
-#: ../../src/logic/building.cc:533
+#: ../../src/logic/building.cc:537
 msgid "Big"
 msgstr "Groot"
 
-#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:569
+#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:574
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% gebouwd"
@@ -873,11 +874,11 @@ msgstr "%i%% gebouwd"
 msgid "%u%% dismantled"
 msgstr "%u%% ontmanteld"
 
-#: ../../src/logic/editor_game_base.cc:278
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
 msgstr "Wereldgegevens worden geladen"
 
-#: ../../src/logic/editor_game_base.cc:281
+#: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
 msgstr "Stammen laden"
 
@@ -895,9 +896,10 @@ msgstr "Een kaart voorladen"
 msgid "Adding player %u"
 msgstr "Speler %u toevoegen"
 
+#. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
-#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:236
-#: ../../src/ui_fsmenu/mapselect.cc:154
+#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:230
+#: ../../src/ui_fsmenu/mapselect.cc:154 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
 msgstr "Scenario"
@@ -920,7 +922,7 @@ msgid "Loading map"
 msgstr "Kaart laden"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1476
+#: ../../src/wlapplication.cc:1426
 msgid "Loading..."
 msgstr "Bezig met laden…"
 
@@ -928,22 +930,16 @@ msgstr "Bezig met laden…"
 msgid "Creating player infrastructure"
 msgstr "Speler's infrastructuur wordt gecreëerd"
 
-#: ../../src/logic/game.cc:484 ../../src/logic/player.cc:228
+#: ../../src/logic/game.cc:484 ../../src/logic/player.cc:227
 msgid "Missing starting position"
 msgstr "Ontbrekende startpositie"
 
 #: ../../src/logic/game.cc:486
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with the Widelands Editor to fix "
-"this problem."
-msgstr ""
-"Widelands kon het spel niet starten omdat speler %u geen startpositie "
-"heeft.\n"
-"Je kunt handmatig een startpositie toevoegen met de Widelands Editor om dit "
-"probleem op te lossen."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with the Widelands Editor to fix this problem."
+msgstr "Widelands kon het spel niet starten omdat speler %u geen startpositie heeft.\nJe kunt handmatig een startpositie toevoegen met de Widelands Editor om dit probleem op te lossen."
 
 #: ../../src/logic/map.cc:333
 msgid "Player 1"
@@ -998,32 +994,29 @@ msgstr "Je wordt aangevallen"
 msgid "no descr"
 msgstr "geen beschr"
 
-#: ../../src/logic/player.cc:230
+#: ../../src/logic/player.cc:229
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this "
-"problem."
-msgstr ""
-"Widelands kon het spel niet starten omdat speler %u geen startpositie "
-"heeft.\n"
-"Je kunt handmatig een startpositie toevoegen met Widelands Editor om dit "
-"probleem te verhelpen."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
+msgstr "Widelands kon het spel niet starten omdat speler %u geen startpositie heeft.\nJe kunt handmatig een startpositie toevoegen met Widelands Editor om dit probleem te verhelpen."
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
@@ -1042,14 +1035,16 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %%1$i = "2"
 #. * TRANSLATORS:    %2$s = "Coal"
-#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
+#. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:411
@@ -1073,23 +1068,29 @@ msgstr ""
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
+#. experience'.
 #: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
+#. need no experience'.
 #: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
 msgstr ""
 
-#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: "Did not start working because the economy needs the ware
+#. ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$s = "working"
 #. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test
+#. these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there
+#. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:578
 #: ../../src/logic/production_program.cc:969
@@ -1109,8 +1110,10 @@ msgstr ""
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
+#. bread is missing'
 #: ../../src/logic/production_program.cc:957
 #, c-format
 msgid "%s is missing"
@@ -1130,7 +1133,8 @@ msgstr "%s geproduceerd"
 msgid "Recruited %s"
 msgstr "Gerecruteerd %s"
 
-#. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
+#. * TRANSLATORS: %1$s = production site name, %2$s = production program name,
+#. %3$s = resource
 #: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
@@ -1145,21 +1149,21 @@ msgstr "Geen soldaten om te trainen!"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
 
-#: ../../src/logic/productionsite.cc:226
+#: ../../src/logic/productionsite.cc:231
 msgid "(not occupied)"
 msgstr "(niet bezet)"
 
-#: ../../src/logic/productionsite.cc:233
+#: ../../src/logic/productionsite.cc:238
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Werker ontbreekt"
 msgstr[1] "Werkers ontbreken"
 
-#: ../../src/logic/productionsite.cc:238
+#: ../../src/logic/productionsite.cc:243
 msgid "(stopped)"
 msgstr "(gestopt)"
 
-#: ../../src/logic/productionsite.cc:920
+#: ../../src/logic/productionsite.cc:925
 msgid "Can’t find any more resources!"
 msgstr "Kan geen hulpbronnen meer vinden!"
 
@@ -1169,62 +1173,65 @@ msgstr "Einde van herhaling"
 
 #: ../../src/logic/replay_game_controller.cc:109
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may "
-"unpause the game and continue watching if you want to."
-msgstr ""
-"Het einde van de herhaling is bereikt en het spel is gepauzeerd. Je mag het "
-"spel uit de pauzestand halen en verder kijken als je dat wilt."
+"The end of the replay has been reached and the game has been paused. You may"
+" unpause the game and continue watching if you want to."
+msgstr "Het einde van de herhaling is bereikt en het spel is gepauzeerd. Je mag het spel uit de pauzestand halen en verder kijken als je dat wilt."
 
-#: ../../src/logic/save_handler.cc:77
+#: ../../src/logic/save_handler.cc:102
 msgid "Saving game..."
 msgstr "Het spel wordt opgeslagen..."
 
-#: ../../src/logic/save_handler.cc:96
+#: ../../src/logic/save_handler.cc:121
 msgid "Saving failed!"
 msgstr "Het opslaan is mislukt!"
 
-#: ../../src/logic/save_handler.cc:115
+#: ../../src/logic/save_handler.cc:140
 msgid "Game saved"
 msgstr "Het spel is opgeslagen"
 
-#: ../../src/logic/ship.cc:450
+#: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
 msgstr "Havenlocatie Gevonden"
 
-#: ../../src/logic/ship.cc:451
+#: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
-msgstr ""
-"Een expeditieschip heeft een nieuwe bouwlocatie voor een haven gevonden."
+msgstr "Een expeditieschip heeft een nieuwe bouwlocatie voor een haven gevonden."
 
-#: ../../src/logic/ship.cc:561
+#: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
 msgstr "Eiland rondgevaren"
 
-#: ../../src/logic/ship.cc:562
+#: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
-"Een expeditieschip is rond zijn eiland gevaren zonder dat er iets is gebeurd."
+msgstr "Een expeditieschip is rond zijn eiland gevaren zonder dat er iets is gebeurd."
 
-#: ../../src/logic/ship.cc:619
+#: ../../src/logic/ship.cc:628
 msgid "Coast Reached"
 msgstr "Kust bereikt"
 
-#: ../../src/logic/ship.cc:621
+#: ../../src/logic/ship.cc:630
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
-"Een expeditieschip heeft een kust bereikt en wacht op verdere opdrachten."
+msgstr "Een expeditieschip heeft een kust bereikt en wacht op verdere opdrachten."
 
-#: ../../src/logic/ship.cc:785
+#: ../../src/logic/ship.cc:674
+msgid "New port constructionsite is gone"
+msgstr ""
+
+#: ../../src/logic/ship.cc:675
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
 msgstr "Expeditie gereed"
 
-#: ../../src/logic/ship.cc:786
+#: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een expeditieschip wacht op jouw opdrachten."
 
 #: ../../src/logic/single_player_game_settings_provider.cc:87
-#: ../../src/network/nethost.cc:2073 ../../src/ui_fsmenu/launch_mpg.cc:562
+#: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:562
 #: ../../src/wui/multiplayersetupgroup.cc:123
 #: ../../src/wui/multiplayersetupgroup.cc:294
 #, c-format
@@ -1235,39 +1242,42 @@ msgstr "Speler %u"
 msgid "Logic error"
 msgstr "Logische fout"
 
-#: ../../src/logic/warehouse.cc:417
-#, c-format
-msgid "A new %s was added to your economy."
-msgstr "Een nieuwe %s is aan je economie toegevoegd."
+#: ../../src/logic/warehouse.cc:455
+msgid "A new port was added to your economy."
+msgstr ""
+
+#: ../../src/logic/warehouse.cc:462
+msgid "A new headquarters was added to your economy."
+msgstr ""
+
+#: ../../src/logic/warehouse.cc:469
+msgid "A new warehouse was added to your economy."
+msgstr ""
 
 #: ../../src/logic/worker.cc:120
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"de grondstof %s moet gedolven worden, die niet in deze wereld aanwezig is; "
-"de stam is niet geschikt voor deze wereld"
+msgstr "de grondstof %s moet gedolven worden, die niet in deze wereld aanwezig is; de stam is niet geschikt voor deze wereld"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"zou hulpbron type %s moeten fokken, die niet bestaat in de wereld; de stam "
-"is niet geschikt voor deze wereld"
+msgstr "zou hulpbron type %s moeten fokken, die niet bestaat in de wereld; de stam is niet geschikt voor deze wereld"
 
-#: ../../src/logic/worker.cc:939
+#: ../../src/logic/worker.cc:958
 msgid "A geologist found resources."
 msgstr "Een geoloog heeft grondstoffen gevonden."
 
-#: ../../src/logic/worker.cc:1840
+#: ../../src/logic/worker.cc:1871
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1848
+#: ../../src/logic/worker.cc:1879
 msgid "Worker got lost!"
 msgstr "Werker is verdwaald!"
 
@@ -1275,144 +1285,135 @@ msgstr "Werker is verdwaald!"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Setters II Kaart. Geen commentaar gedefinieerd!"
 
-#: ../../src/network/internet_gaming.cc:117
-#: ../../src/ui_fsmenu/internet_lobby.cc:428
+#: ../../src/network/internet_gaming.cc:115
+#: ../../src/ui_fsmenu/internet_lobby.cc:411
 msgid "Connection problem"
 msgstr "Verbindingsprobleem"
 
-#: ../../src/network/internet_gaming.cc:117
+#: ../../src/network/internet_gaming.cc:115
 msgid "Widelands could not connect to the metaserver."
 msgstr "Widelands kon geen verbinding maken met de metaserver."
 
-#: ../../src/network/internet_gaming.cc:123 ../../src/network/netclient.cc:108
+#: ../../src/network/internet_gaming.cc:121 ../../src/network/netclient.cc:108
 msgid "Could not establish connection to host"
 msgstr "Kon geen verbinding met de host maken"
 
-#: ../../src/network/internet_gaming.cc:125
+#: ../../src/network/internet_gaming.cc:123
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr ""
-"Widelands kon geen verbiding krijgen met het opgegeven netwerk adres.\n"
-"Er is op de aangegeven locatie geen poort beschikbaar of\n"
-"de netwerk verbinding is verbroken."
+msgstr "Widelands kon geen verbiding krijgen met het opgegeven netwerk adres.\nEr is op de aangegeven locatie geen poort beschikbaar of\nde netwerk verbinding is verbroken."
 
-#: ../../src/network/internet_gaming.cc:172
+#: ../../src/network/internet_gaming.cc:170
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Neem AUB. een kijkje in de notities om een game to hosten in:"
 
-#: ../../src/network/internet_gaming.cc:303
+#: ../../src/network/internet_gaming.cc:301
 msgid "Something went wrong: "
 msgstr "Er ging iets fout: "
 
-#: ../../src/network/internet_gaming.cc:393
+#: ../../src/network/internet_gaming.cc:391
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Succesvol herverbonden met de metaserver!"
 
-#: ../../src/network/internet_gaming.cc:400
+#: ../../src/network/internet_gaming.cc:398
 msgid "Mixed up"
 msgstr "gehusseld"
 
-#: ../../src/network/internet_gaming.cc:400
+#: ../../src/network/internet_gaming.cc:398
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "De metaserver stuurde een vreemde ERROR gedurende de verbinding"
 
-#: ../../src/network/internet_gaming.cc:411
+#: ../../src/network/internet_gaming.cc:409
 msgid "Unexpected packet"
 msgstr "Onverwacht pakket"
 
-#: ../../src/network/internet_gaming.cc:413
+#: ../../src/network/internet_gaming.cc:411
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
-msgstr ""
-"Verwachte een LOGIN, RELOGIN of REJECTED packet van de server, maar heb dit "
-"comando %s ontvangen. Misschien gebruikt de metaserver een andere protocol "
-"versie ?"
+msgstr "Verwachte een LOGIN, RELOGIN of REJECTED packet van de server, maar heb dit comando %s ontvangen. Misschien gebruikt de metaserver een andere protocol versie ?"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:424
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
-"WAARSCHUWING: ontvangen commando: %s zonder in CONNECTING state te zijn."
+msgstr "WAARSCHUWING: ontvangen commando: %s zonder in CONNECTING state te zijn."
 
-#: ../../src/network/internet_gaming.cc:436
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
 msgstr[0] "InternetSpel: Server tijdverschil is %u seconde."
 msgstr[1] "InternetSpel: Server tijdverschil is %u seconden."
 
-#: ../../src/network/internet_gaming.cc:441
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
 msgstr[0] "Tijdsverschil met server is %u seconde."
 msgstr[1] "Tijdsverschil met server is %u seconden."
 
-#: ../../src/network/internet_gaming.cc:464
+#: ../../src/network/internet_gaming.cc:462
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Ongeldig chat bericht van type \"%s\"."
 
-#: ../../src/network/internet_gaming.cc:464
+#: ../../src/network/internet_gaming.cc:462
 msgid "Invalid message type"
 msgstr "Ongeldig bericht type"
 
-#: ../../src/network/internet_gaming.cc:500
+#: ../../src/network/internet_gaming.cc:498
 #, c-format
 msgid "The game %s is now available"
 msgstr "Het spel %s is nu beschikbaar"
 
-#: ../../src/network/internet_gaming.cc:509
+#: ../../src/network/internet_gaming.cc:507
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Het spel %s is gesloten"
 
-#: ../../src/network/internet_gaming.cc:544
+#: ../../src/network/internet_gaming.cc:542
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s sloot zich aan bij de lobby"
 
-#: ../../src/network/internet_gaming.cc:553
+#: ../../src/network/internet_gaming.cc:551
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s verliet de lobby"
 
-#: ../../src/network/internet_gaming.cc:587
+#: ../../src/network/internet_gaming.cc:585
 msgid "Chat message could not be sent. "
 msgstr "Chat bericht kon niet verzonden worden. "
 
-#: ../../src/network/internet_gaming.cc:601
+#: ../../src/network/internet_gaming.cc:599
 #, c-format
 msgid "ERROR: %s"
 msgstr "FOUT: %s"
 
-#: ../../src/network/internet_gaming.cc:611
+#: ../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Onbekende opdracht ontvangen van de metaserver: %s"
 
-#: ../../src/network/internet_gaming.cc:744
+#: ../../src/network/internet_gaming.cc:742
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
-"Bericht kon niet verzonden worden: Je bent niet verbonden met de metaserver!"
+msgstr "Bericht kon niet verzonden worden: Je bent niet verbonden met de metaserver!"
 
-#: ../../src/network/internet_gaming.cc:756
+#: ../../src/network/internet_gaming.cc:754
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
-"Bericht kon niet verzonden worden: Was dit bedoelt als een prive bericht?"
+msgstr "Bericht kon niet verzonden worden: Was dit bedoelt als een prive bericht?"
 
-#: ../../src/network/internet_gaming.cc:830
+#: ../../src/network/internet_gaming.cc:828
 msgid "Conversion error"
 msgstr "Conversiefout"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:833
+#: ../../src/network/internet_gaming.cc:831
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
@@ -1423,7 +1424,7 @@ msgid "There is no user with the name %s logged in!"
 msgstr "Er is geen gebruiker met de naam %s aangemeld!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1281
+#: ../../src/network/nethost.cc:1272
 msgid "The sent password was incorrect!"
 msgstr "Het verstuurde wachtwoord was incorrrect!"
 
@@ -1439,16 +1440,11 @@ msgstr "Je bent reeds aangemeld!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
-"Je verbinding werd verbroken, omdat je een superuser-opdracht verstuurde "
-"zonder toestemming als superuser. Dit incident wordt genoteerd en "
-"gerapporteerd aan de beheerder."
+msgstr "Je verbinding werd verbroken, omdat je een superuser-opdracht verstuurde zonder toestemming als superuser. Dit incident wordt genoteerd en gerapporteerd aan de beheerder."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr ""
-"De verbinding is verbroken, aangezien de metaserver momenteel opnieuw "
-"opstart."
+msgstr "De verbinding is verbroken, aangezien de metaserver momenteel opnieuw opstart."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
@@ -1470,9 +1466,7 @@ msgstr "Er kan geen verbinding worden gemaakt vanaf internet naar jouw spel"
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
-"De verbinding met de metaservers is verbroken, omdat je een PING-verzoek "
-"niet op tijd hebt beantwoord."
+msgstr "De verbinding met de metaservers is verbroken, omdat je een PING-verzoek niet op tijd hebt beantwoord."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -1480,249 +1474,231 @@ msgid ""
 "connected to from the internet! Please take a look at "
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
-msgstr ""
-"De metaserver kan geen verbinding maken met jouw spel. Hoogstwaarschijnlijk "
-"kan er vanaf het internet geen verbinding mee worden gemaakt! Kijk a.u.b. "
-"naar http://wl.widelands.org/wiki/InternetGaming om te weten hoe je jouw "
-"internetverbinding voor het hosten van een online spel kunt instellen."
+msgstr "De metaserver kan geen verbinding maken met jouw spel. Hoogstwaarschijnlijk kan er vanaf het internet geen verbinding mee worden gemaakt! Kijk a.u.b. naar http://wl.widelands.org/wiki/InternetGaming om te weten hoe je jouw internetverbinding voor het hosten van een online spel kunt instellen."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
-msgstr ""
-"Je probeerde opnieuw aan te melden, maar de server heeft geen gegevens meer "
-"van jouw vorige status."
+msgstr "Je probeerde opnieuw aan te melden, maar de server heeft geen gegevens meer van jouw vorige status."
 
 #: ../../src/network/netclient.cc:110
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
-msgstr ""
-"Widelands kon geen verbinding maken met het opgegeven adres.\n"
-"Ofwel draaide er geen Widelands server op de gebruikelijke poort\n"
-"of werd de server afgesloten toen je probeerde te verbinden."
+msgstr "Widelands kon geen verbinding maken met het opgegeven adres.\nOfwel draaide er geen Widelands server op de gebruikelijke poort\nof werd de server afgesloten toen je probeerde te verbinden."
 
-#: ../../src/network/netclient.cc:199 ../../src/network/nethost.cc:847
-#: ../../src/wlapplication.cc:1366
+#: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
+#: ../../src/wlapplication.cc:1316
 msgid "Preparing game"
 msgstr "Voorbereiden spel"
 
-#: ../../src/network/netclient.cc:860
+#: ../../src/network/netclient.cc:856
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me 's bestand faalde op de md5 checksum controle"
 
-#: ../../src/network/netclient.cc:890
+#: ../../src/network/netclient.cc:886
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
-"/me heeft het ontvangen bestand gecontroleerd. Hoewel de md5 controle "
-"succesvol was, kan ik het bestand niet verwerken."
+msgstr "/me heeft het ontvangen bestand gecontroleerd. Hoewel de md5 controle succesvol was, kan ik het bestand niet verwerken."
 
-#: ../../src/network/netclient.cc:1099
+#: ../../src/network/netclient.cc:1095
 msgid " An automatic savegame will be created."
 msgstr " Een automatische opgeslagen spel wordt gecreërd."
 
-#: ../../src/network/netclient.cc:1103
+#: ../../src/network/netclient.cc:1099
 msgid "Disconnected from Host"
 msgstr "Verbinding met de Host is verbroken"
 
-#: ../../src/network/nethost.cc:371 ../../src/network/nethost.cc:1211
-#: ../../src/network/nethost.cc:1222
+#: ../../src/network/nethost.cc:362 ../../src/network/nethost.cc:1202
+#: ../../src/network/nethost.cc:1213
 msgid "Available host commands are:"
 msgstr "Beschikbare host-opdrachten zijn:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:373 ../../src/network/nethost.cc:1213
-#: ../../src/network/nethost.cc:1224
+#: ../../src/network/nethost.cc:364 ../../src/network/nethost.cc:1204
+#: ../../src/network/nethost.cc:1215
 msgid "/help  -  Shows this help"
 msgstr "/help - Toont deze hulp"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:375
+#: ../../src/network/nethost.cc:366
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr ""
-"/announce <bericht> - Stuur een chatbericht als aankondiging (system chat)"
+msgstr "/announce <bericht> - Stuur een chatbericht als aankondiging (system chat)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:377
+#: ../../src/network/nethost.cc:368
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <naam> <reden> - Waarschuw de gebruiker <naam> vanwege <reden>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:379
+#: ../../src/network/nethost.cc:370
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <naam> <reden> - Verwijder de gebruiker <naam> vanwege >reden>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:381
+#: ../../src/network/nethost.cc:372
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause - Dwing het spel tot pauzeren."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:383
+#: ../../src/network/nethost.cc:374
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcePause - Ga terug naar normale spelsnelheid."
 
-#: ../../src/network/nethost.cc:392
+#: ../../src/network/nethost.cc:383
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Verkeerd gebruik, moet zijn /announce <bericht>"
 
-#: ../../src/network/nethost.cc:405
+#: ../../src/network/nethost.cc:396
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Verkeerd gebruik, moet zijn /warn <naam> <reden>"
 
-#: ../../src/network/nethost.cc:413
+#: ../../src/network/nethost.cc:404
 msgid "Why would you warn yourself?"
 msgstr "Waarom wil je jezelf waarschuwen?"
 
-#: ../../src/network/nethost.cc:415
+#: ../../src/network/nethost.cc:406
 msgid "Why would you want to warn the dedicated server?"
 msgstr "Waarom wil je de server waarschuwen?"
 
-#: ../../src/network/nethost.cc:419 ../../src/network/nethost.cc:445
+#: ../../src/network/nethost.cc:410 ../../src/network/nethost.cc:436
 #, c-format
 msgid "The client %s could not be found."
 msgstr "De client %s werd niet gevonden."
 
-#: ../../src/network/nethost.cc:430
+#: ../../src/network/nethost.cc:421
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Verkeerd gebruik, moet zijn /kick <naam> <reden>"
 
-#: ../../src/network/nethost.cc:441
+#: ../../src/network/nethost.cc:432
 msgid "You can not kick yourself!"
 msgstr "Het is niet mogelijk jezelf te verwijderen!"
 
-#: ../../src/network/nethost.cc:443
+#: ../../src/network/nethost.cc:434
 msgid "You can not kick the dedicated server"
 msgstr "je kunt de speciale server niet verwijderen"
 
-#: ../../src/network/nethost.cc:448
+#: ../../src/network/nethost.cc:439
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Weet je zeker dat je %s wilt verwijderen?"
 
-#: ../../src/network/nethost.cc:449
+#: ../../src/network/nethost.cc:440
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "De genoemde reden was: %s"
 
-#: ../../src/network/nethost.cc:450
+#: ../../src/network/nethost.cc:441
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Indien ja, type: /ack_kick %s"
 
-#: ../../src/network/nethost.cc:460
+#: ../../src/network/nethost.cc:451
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "verwijderbevestiging geannuleerd: Geen naam opgegeven!"
 
-#: ../../src/network/nethost.cc:462
+#: ../../src/network/nethost.cc:453
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Verkeerd gebruik, moet zijn: /ack_kick <naam>"
 
-#: ../../src/network/nethost.cc:468
+#: ../../src/network/nethost.cc:459
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "verwijderbevestiging geannuleerd: Verkeerde naam opgegeven!"
 
-#: ../../src/network/nethost.cc:479
+#: ../../src/network/nethost.cc:470
 msgid "Pause was already forced - game should be paused."
 msgstr "Pauze was al geforceerd - spel zou gepauzeerd moeten zijn."
 
-#: ../../src/network/nethost.cc:491
+#: ../../src/network/nethost.cc:482
 msgid "There is no forced pause - nothing to end."
 msgstr "Er is geen geforceerde pauze - niets te stoppen."
 
-#: ../../src/network/nethost.cc:502
+#: ../../src/network/nethost.cc:493
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Ongeldige opdracht! Type /help voor een opdrachtenlijst."
 
-#: ../../src/network/nethost.cc:741
+#: ../../src/network/nethost.cc:732
 #, c-format
 msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
-msgstr ""
-"Dit is een dedicated server. Zend \"@%s help\" voor een volledige lijst met "
-"beschikbare opdrachten."
+msgstr "Dit is een dedicated server. Zend \"@%s help\" voor een volledige lijst met beschikbare opdrachten."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:1215 ../../src/network/nethost.cc:1226
+#: ../../src/network/nethost.cc:1206 ../../src/network/nethost.cc:1217
 msgid "host $ - Tries to run the host command $"
 msgstr "host $ - Probeert host-opdracht $ uit te voeren"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:1217
+#: ../../src/network/nethost.cc:1208
 msgid "save $ - Saves the current game state as $.wgf"
 msgstr "save $ - Slaat het huidige spel op als $.wgf"
 
-#: ../../src/network/nethost.cc:1230
+#: ../../src/network/nethost.cc:1221
 msgid "pwd $  - Sends the password $ to the host"
 msgstr "pwd $ - Verstuurt het wachtwoord $ naar de host"
 
-#: ../../src/network/nethost.cc:1237
+#: ../../src/network/nethost.cc:1228
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
-msgstr ""
-"Geen toegang tot de host. Stuur, om toegang te krijgen, het wachtwoord met "
-"het pwd commando."
+msgstr "Geen toegang tot de host. Stuur, om toegang te krijgen, het wachtwoord met het pwd commando."
 
-#: ../../src/network/nethost.cc:1242
+#: ../../src/network/nethost.cc:1233
 #, c-format
 msgid "%1$s told me to run the command: \"%2$s\""
 msgstr "%1$s vertelde me de opdracht \"%2$s\" uit te voeren"
 
-#: ../../src/network/nethost.cc:1251
+#: ../../src/network/nethost.cc:1242
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr "Sorry! Saving is op deze server niet geactiveerd!."
 
-#: ../../src/network/nethost.cc:1254
+#: ../../src/network/nethost.cc:1245
 msgid "Cannot save while there is no game running!"
 msgstr "Kan niet opslaan wanneer er geen spel draait!"
 
-#: ../../src/network/nethost.cc:1266
+#: ../../src/network/nethost.cc:1257
 msgid "Game successfully saved!"
 msgstr "Spel succesvol opgeslagen!"
 
-#: ../../src/network/nethost.cc:1269
+#: ../../src/network/nethost.cc:1260
 #, c-format
 msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
 msgstr "Kon het spel niet opslaan als bestand: \"%1$s\"! (%2$s)"
 
-#: ../../src/network/nethost.cc:1278
+#: ../../src/network/nethost.cc:1269
 msgid "This server is not password protected!"
 msgstr "Deze server is niet wachtwoordbeveiligd!"
 
-#: ../../src/network/nethost.cc:1294
+#: ../../src/network/nethost.cc:1285
 msgid "The password was correct, access was granted!"
 msgstr "Het wachtwoord was correct, toegang toegewezen!"
 
-#: ../../src/network/nethost.cc:1300
+#: ../../src/network/nethost.cc:1291
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Onbekend server commando \"%s\"!"
 
-#: ../../src/network/nethost.cc:2002
+#: ../../src/network/nethost.cc:1993
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
 
-#: ../../src/network/nethost.cc:2067 ../../src/wui/game_summary.cc:95
+#: ../../src/network/nethost.cc:2058 ../../src/wui/game_summary.cc:95
 msgid "Player"
 msgstr "Speler"
 
-#: ../../src/network/nethost.cc:2162
+#: ../../src/network/nethost.cc:2153
 #, c-format
 msgid ""
-"This server is password protected. You can send the password with: \"@%s pwd "
-"PASSWORD\""
-msgstr ""
-"Deze server is met een wachtwoord beveiligd. Je kunt het wachtwoord "
-"versturen met: \"@%s pwd WACHTWOORD\""
+"This server is password protected. You can send the password with: \"@%s pwd"
+" PASSWORD\""
+msgstr "Deze server is met een wachtwoord beveiligd. Je kunt het wachtwoord versturen met: \"@%s pwd WACHTWOORD\""
 
-#: ../../src/network/nethost.cc:2260
+#: ../../src/network/nethost.cc:2251
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -1800,13 +1776,11 @@ msgstr "Ontving onverwacht een \"LAUNCH\" commando van de server."
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
-"Server heeft een spelersupdate gestuurd voor een speler die niet bestaat."
+msgstr "Server heeft een spelersupdate gestuurd voor een speler die niet bestaat."
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
-msgstr ""
-"Server verzond een gebruikers-update voor een gebruiker die niet bestaat."
+msgstr "Server verzond een gebruikers-update voor een gebruiker die niet bestaat."
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
@@ -1859,8 +1833,7 @@ msgstr "Cliënt zond een onverwacht synchronisatierapport."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
-msgstr ""
-"Cliënt verzoekt om bestand terwijl er geen beschikbaar is om te versturen."
+msgstr "Cliënt verzoekt om bestand terwijl er geen beschikbaar is om te versturen."
 
 #: ../../src/network/network_gaming_messages.cc:154
 msgid "Client requests file part that does not exist."
@@ -1874,8 +1847,7 @@ msgstr "Host stuurde speler %s naar de hal!"
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr ""
-"WAARSCHUWING: %1$s gebruikt versie: %2$s, terwijl Host versie: %3$s gebruikt"
+msgstr "WAARSCHUWING: %1$s gebruikt versie: %2$s, terwijl Host versie: %3$s gebruikt"
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
@@ -1917,53 +1889,58 @@ msgstr "Cliënt %1$s antwoordde niet gedurende meer dan %2$s."
 msgid ""
 "Client %1$s will automatically be kicked, if no answer is received within "
 "%2$s."
-msgstr ""
-"Cliënt %1$s zal automatisch worden verwijderd, als er geen antwoord wordt "
-"ontvangen binnen %2$s."
+msgstr "Cliënt %1$s zal automatisch worden verwijderd, als er geen antwoord wordt ontvangen binnen %2$s."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:45
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:49
 msgid "true"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:49
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:53
 msgid "yes"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:53
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:57
 msgid "on"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:63
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:67
 msgid "false"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:67
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:71
 msgid "no"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
-#: ../../src/profile/profile.cc:71
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
+#: ../../src/profile/profile.cc:75
 msgid "off"
 msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:986
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#: ../../src/scripting/lua_game.cc:978 ../../src/ui_fsmenu/loadgame.cc:73
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../src/ui_basic/helpwindow.cc:49 ../../src/ui_basic/helpwindow.cc:193
+#: ../../src/ui_basic/helpwindow.cc:50 ../../src/ui_basic/helpwindow.cc:194
 #, c-format
 msgid "Help: %s"
 msgstr "Help: %s"
@@ -1980,7 +1957,8 @@ msgstr "Nee"
 msgid "Preparing..."
 msgstr "Voorbereiden..."
 
-#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced
+#. options
 #: ../../src/ui_basic/spinbox.cc:127
 #, c-format
 msgid "%i %s"
@@ -2015,7 +1993,7 @@ msgstr "Beschrijving:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:89
 #: ../../src/ui_fsmenu/campaign_select.cc:335
-#: ../../src/ui_fsmenu/loadgame.cc:122
+#: ../../src/ui_fsmenu/loadgame.cc:153
 msgid "Return to the main menu"
 msgstr ""
 
@@ -2051,7 +2029,7 @@ msgid "Difficulty"
 msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
-#: ../../src/wui/multiplayersetupgroup.cc:451
+#: ../../src/wui/multiplayersetupgroup.cc:447
 msgid "Tribe"
 msgstr "Stam"
 
@@ -2165,20 +2143,7 @@ msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr ""
 
-#: ../../src/ui_fsmenu/editor.cc:31 ../../src/ui_fsmenu/main.cc:49
-msgid "Editor"
-msgstr "Editor"
-
-#: ../../src/ui_fsmenu/editor.cc:44 ../../src/ui_fsmenu/internet_lobby.cc:94
-#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:72
-#: ../../src/ui_fsmenu/load_map_or_game.cc:61
-#: ../../src/ui_fsmenu/multiplayer.cc:47
-#: ../../src/ui_fsmenu/netsetup_lan.cc:72
-#: ../../src/ui_fsmenu/singleplayer.cc:49
-msgid "Back"
-msgstr "Terug"
-
-#: ../../src/ui_fsmenu/fileview.cc:75 ../../src/wui/watchwindow.cc:140
+#: ../../src/ui_fsmenu/fileview.cc:76 ../../src/wui/watchwindow.cc:140
 msgid "Close"
 msgstr "Sluit"
 
@@ -2198,63 +2163,65 @@ msgstr "Lijst met spellen:"
 msgid "Name of your server:"
 msgstr "Naam van je server:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:71
-msgid "Maximum of players:"
-msgstr "Maximum spelers:"
-
-#: ../../src/ui_fsmenu/internet_lobby.cc:84
+#: ../../src/ui_fsmenu/internet_lobby.cc:74
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
 msgid "Join this game"
 msgstr "Sluit aan bij dit spel"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:89
+#: ../../src/ui_fsmenu/internet_lobby.cc:79
 msgid "Open a new game"
 msgstr "Open een nieuw spel"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:155
+#: ../../src/ui_fsmenu/internet_lobby.cc:84
+#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:73
+#: ../../src/ui_fsmenu/load_map_or_game.cc:61
+#: ../../src/ui_fsmenu/multiplayer.cc:47
+#: ../../src/ui_fsmenu/netsetup_lan.cc:72
+#: ../../src/ui_fsmenu/singleplayer.cc:49
+msgid "Back"
+msgstr "Terug"
+
+#: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "User Status"
 msgstr "Gebruikersstatus"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:158
+#: ../../src/ui_fsmenu/internet_lobby.cc:146
 msgid "Registered"
 msgstr "Geregistreerd"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:160
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Administrator"
 msgstr "Beheerder"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:162
+#: ../../src/ui_fsmenu/internet_lobby.cc:150
 msgid "Unregistered"
 msgstr "Niet geregistreerd"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:165
+#: ../../src/ui_fsmenu/internet_lobby.cc:153
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Name"
 msgstr "Naam"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:166
+#: ../../src/ui_fsmenu/internet_lobby.cc:154
 msgid "Points"
 msgstr "Punten"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:167
+#: ../../src/ui_fsmenu/internet_lobby.cc:155
 msgid "Game"
 msgstr "Spel"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:398
+#: ../../src/ui_fsmenu/internet_lobby.cc:381
 msgid "Connection timed out"
 msgstr "Wachttijd voor verbinding verstreken"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:401
+#: ../../src/ui_fsmenu/internet_lobby.cc:384
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
-msgstr ""
-"Widelands kon niet snel genoeg het IP-adres van de server verkrijgen.\n"
-"Er schijnt een netwerkprobleem te zijn, òf aan jouw kant òf aan de kant\n"
-"van de server.\n"
+msgstr "Widelands kon niet snel genoeg het IP-adres van de server verkrijgen.\nEr schijnt een netwerkprobleem te zijn, òf aan jouw kant òf aan de kant\nvan de server.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:429
+#: ../../src/ui_fsmenu/internet_lobby.cc:412
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands kon geen verbinding maken met de host."
 
@@ -2262,13 +2229,14 @@ msgstr "Widelands kon geen verbinding maken met de host."
 msgid "Press ESC or click to continue ..."
 msgstr "Druk ESC of klik om verder te gaan ..."
 
-#. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
+#. * TRANSLATORS: Dialog box title for selecting between map or saved game for
+#. new multiplayer game
 #: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
 msgstr "Selecteer"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:171
-#: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:142
+#: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
 msgid "Map"
 msgstr "Kaart"
 
@@ -2292,7 +2260,7 @@ msgstr "Annuleer selectie"
 msgid "Change map or saved game"
 msgstr "Verander kaart of opgeslagen spel"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:132 ../../src/ui_fsmenu/launch_spg.cc:77
+#: ../../src/ui_fsmenu/launch_mpg.cc:132 ../../src/ui_fsmenu/launch_spg.cc:78
 msgid "Start game"
 msgstr "Start spel"
 
@@ -2308,11 +2276,11 @@ msgstr "Multiplayer Spel Instellen"
 msgid "Clients"
 msgstr "Cliënten"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:175 ../../src/ui_fsmenu/launch_spg.cc:112
+#: ../../src/ui_fsmenu/launch_mpg.cc:175 ../../src/ui_fsmenu/launch_spg.cc:113
 msgid "Type of game"
 msgstr "Speltype"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:215 ../../src/ui_fsmenu/launch_spg.cc:288
+#: ../../src/ui_fsmenu/launch_mpg.cc:215 ../../src/ui_fsmenu/launch_spg.cc:282
 msgid "(no map)"
 msgstr "(geen kaart)"
 
@@ -2320,7 +2288,7 @@ msgstr "(geen kaart)"
 msgid "The host has not yet selected a map or saved game."
 msgstr "De host heeft nog geen kaart of opgeslagen spel gekozen."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:238
+#: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:232
 msgid "Win condition is set through the scenario"
 msgstr "Winconditie wordt tijdens het scenario gesteld"
 
@@ -2331,8 +2299,7 @@ msgstr "Opgeslagen spel"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:299
 msgid "The game is a saved game – the win condition was set before."
-msgstr ""
-"Het spel is een bewaard spel - de winconditie was al eerder ingesteld."
+msgstr "Het spel is een bewaard spel - de winconditie was al eerder ingesteld."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:399
 msgid "Saved game is directory"
@@ -2341,45 +2308,27 @@ msgstr "Opgeslagen spel is map"
 #: ../../src/ui_fsmenu/launch_mpg.cc:401
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the "
-"option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, "
-"please select another saved game or zip the directories’ content."
-msgstr ""
-"WAARSCHUWING:\n"
-"Het opgeslagen spel dat je hebt geselecteerd is een directory. Dit gebeurt "
-"als je de optie 'nozip' aanvinkt of het bewaarde spel handmatig unzipped. "
-"Widelands kan geen directory-structuur versturen naar de cliënten, selecteer "
-"a.u.b. een ander bewaard spel of zip de inhoud van de directory."
+"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
+msgstr "WAARSCHUWING:\nHet opgeslagen spel dat je hebt geselecteerd is een directory. Dit gebeurt als je de optie 'nozip' aanvinkt of het bewaarde spel handmatig unzipped. Widelands kan geen directory-structuur versturen naar de cliënten, selecteer a.u.b. een ander bewaard spel of zip de inhoud van de directory."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:262
+#: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:256
 msgid "File not found"
 msgstr "Bestand niet gevonden"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:432
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens, the host might have selected a file that you do not own. "
-"Normally, such a file should be sent from the host to you, but perhaps the "
-"transfer was not yet finished!?!"
-msgstr ""
-"Widelands probeerde een spel te starten met een bestand dat niet kon worden "
-"gevonden in het opgegeven pad.\n"
-"Het bestand was: %s\n"
-"Als dit gebeurt, dan kan het zijn dat de host een spel heeft gekozen dat jij "
-"niet bezit. Normaal gesproken zou zo'n bestand van de host naar jou moeten "
-"worden verzonden, maar mogelijk is de overdracht nog niet voltooid!?!"
+"If this happens, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
+msgstr "Widelands probeerde een spel te starten met een bestand dat niet kon worden gevonden in het opgegeven pad.\nHet bestand was: %s\nAls dit gebeurt, dan kan het zijn dat de host een spel heeft gekozen dat jij niet bezit. Normaal gesproken zou zo'n bestand van de host naar jou moeten worden verzonden, maar mogelijk is de overdracht nog niet voltooid!?!"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:456
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr ""
-"Het gekozen bestand kan niet worden gevonden. Als het niet automatisch naar "
-"jou wordt overgegebracht, scrhijf dan a.u.b. naar de host over dit probleem."
+msgstr "Het gekozen bestand kan niet worden gevonden. Als het niet automatisch naar jou wordt overgegebracht, scrhijf dan a.u.b. naar de host over dit probleem."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
@@ -2437,16 +2386,13 @@ msgstr ""
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
-"De speler met de kleur van de vlag. Als meer dan één cliënt dezelfde kleur "
-"hebben gekozen, dan delen ze dezelfde speler ('shared kingdom mode')."
+msgstr "De speler met de kleur van de vlag. Als meer dan één cliënt dezelfde kleur hebben gekozen, dan delen ze dezelfde speler ('shared kingdom mode')."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any player"
-msgstr ""
-"Toeschouwer modus, wat betekent dat je alles kunt zien, maar geen enkele "
-"speler kunt besturen"
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr "Toeschouwer modus, wat betekent dat je alles kunt zien, maar geen enkele speler kunt besturen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
 msgid "Player settings"
@@ -2454,11 +2400,9 @@ msgstr "Spelerinstellingen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
-"In the middle are the settings for the players. To start a game, each player "
-"must be one of the following:"
-msgstr ""
-"In het midden staan de instellingen voor de spelers. Om het spel te starten, "
-"iedere speler dient een van de volgende instellingen te hebben:"
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "In het midden staan de instellingen voor de spelers. Om het spel te starten, iedere speler dient een van de volgende instellingen te hebben:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -2466,12 +2410,10 @@ msgstr "Verbonden met één of meer cliënten (zie 'Client settings')."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse "
-"hover texts indicate the strength of the currently selected computer player)."
-msgstr ""
-"Verbonden met een computerspeler (zowel het gezicht in het plaatje als de "
-"tekst wanneer je er met de muis overheen gaat geven de sterkte aan van de "
-"huidige gekozen computerspeler)."
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr "Verbonden met een computerspeler (zowel het gezicht in het plaatje als de tekst wanneer je er met de muis overheen gaat geven de sterkte aan van de huidige gekozen computerspeler)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
@@ -2487,20 +2429,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
-"De laatste drie kunnen alleen worden gekozen door de hosting cliënt met "
-"links klikken op de 'type' knop van een speler. Het hosten van spelers kan "
-"ook de initialisatie van iedere speler instellen (de verzameling gebouwen, "
-"waren en werkers waarmee de speler begint) en de stam en het team voor "
-"computerspelers."
+msgstr "De laatste drie kunnen alleen worden gekozen door de hosting cliënt met links klikken op de 'type' knop van een speler. Het hosten van spelers kan ook de initialisatie van iedere speler instellen (de verzameling gebouwen, waren en werkers waarmee de speler begint) en de stam en het team voor computerspelers."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe "
-"and the team for that player"
-msgstr ""
-"Iedere cliënt verbonden met een speler (de ingestelde 'rol' speler) kan de "
-"stam en het team instellen voor die speler."
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
+msgstr "Iedere cliënt verbonden met een speler (de ingestelde 'rol' speler) kan de stam en het team instellen voor die speler."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"
@@ -2508,253 +2443,243 @@ msgstr "Kaartdetails"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
-"You can see information about the selected map or savegame on the right-hand "
-"side. A button next to the map name allows the host to change to a different "
-"map. Furthermore, the host is able to set a specific win condition, and "
-"finally can start the game as soon as all players are set up."
-msgstr ""
-"Je kunt informatie over het gekozen spel of bewaard spel zien aan de "
-"rechterzijde. De host kan met een knop naast de naam van de kaart een andere "
-"kaart instellen. Verder kan de host een specifieke winvoorwaarde instellen, "
-"en kan tenslotte het spel starten zodra alle spelers zijn ingesteld."
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr "Je kunt informatie over het gekozen spel of bewaard spel zien aan de rechterzijde. De host kan met een knop naast de naam van de kaart een andere kaart instellen. Verder kan de host een specifieke winvoorwaarde instellen, en kan tenslotte het spel starten zodra alle spelers zijn ingesteld."
 
-#: ../../src/ui_fsmenu/launch_spg.cc:62
+#: ../../src/ui_fsmenu/launch_spg.cc:63
 msgid "Select map"
 msgstr "Selecteer kaart"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:83
+#: ../../src/ui_fsmenu/launch_spg.cc:84
 msgid "Launch Game"
 msgstr "lanceer spel"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:91
+#: ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Player’s name"
 msgstr "Naam van speler"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:96
+#: ../../src/ui_fsmenu/launch_spg.cc:97
 msgid "Player’s type"
 msgstr "Type speler"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:100 ../../src/wui/game_summary.cc:96
-#: ../../src/wui/multiplayersetupgroup.cc:463
+#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
+#: ../../src/wui/multiplayersetupgroup.cc:459
 msgid "Team"
 msgstr "Team"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:104
+#: ../../src/ui_fsmenu/launch_spg.cc:105
 msgid "Player’s tribe"
 msgstr "Speler's stam"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:108
+#: ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start type"
 msgstr "Start type"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:164
+#: ../../src/ui_fsmenu/launch_spg.cc:158
 msgid "Switch to position"
 msgstr "Schakel naar positie"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:264
+#: ../../src/ui_fsmenu/launch_spg.cc:258
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that "
-"you do not own. Normally, such a file should be sent from the host to you, "
-"but perhaps the transfer was not yet finished!?!"
-msgstr ""
-"Widelands probeerde een spel te starten met een bestand dat niet kon worden "
-"gevonden in het opgegeven pad.\n"
-"Het bestand was: %s\n"
-"Als dit gebeurt tijdens een netwerkspel, dan kan het zijn dat de host een "
-"spel heeft gekozen dat jij niet bezit. Normaal gesproken zou zo'n bestand "
-"van de host naar jou moeten worden verzonden, maar mogelijk is de overdracht "
-"nog niet voltooid!?!"
+"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
+msgstr "Widelands probeerde een spel te starten met een bestand dat niet kon worden gevonden in het opgegeven pad.\nHet bestand was: %s\nAls dit gebeurt tijdens een netwerkspel, dan kan het zijn dat de host een spel heeft gekozen dat jij niet bezit. Normaal gesproken zou zo'n bestand van de host naar jou moeten worden verzonden, maar mogelijk is de overdracht nog niet voltooid!?!"
 
-#: ../../src/ui_fsmenu/loadgame.cc:57
+#. * TRANSLATORS: %1% is a map's name.
+#: ../../src/ui_fsmenu/loadgame.cc:66
+msgid "Autosave: %1%"
+msgstr ""
+
+#. * TRANSLATORS: %1% is a number, %2% a map's name.
+#: ../../src/ui_fsmenu/loadgame.cc:69
+msgid "Autosave %1%: %2%"
+msgstr ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Choose a replay"
 msgstr "Kies een herhaling"
 
-#: ../../src/ui_fsmenu/loadgame.cc:57
+#: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Choose a saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:95
+#: ../../src/ui_fsmenu/loadgame.cc:126
 #: ../../src/wui/game_main_menu_save_game.cc:110
 msgid "Delete"
 msgstr "Verwijder"
 
-#: ../../src/ui_fsmenu/loadgame.cc:117
+#: ../../src/ui_fsmenu/loadgame.cc:148
 msgid "The time that elapsed inside this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:118
+#: ../../src/ui_fsmenu/loadgame.cc:149
 msgid "The number of players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:119
+#: ../../src/ui_fsmenu/loadgame.cc:150
 msgid "The win condition that was set for this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:123
+#: ../../src/ui_fsmenu/loadgame.cc:154
 msgid "Load this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:124
+#: ../../src/ui_fsmenu/loadgame.cc:155
 msgid "The map that this replay is based on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:125
+#: ../../src/ui_fsmenu/loadgame.cc:156
 msgid "Delete this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:127 ../../src/ui_fsmenu/mapselect.cc:93
+#: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/mapselect.cc:93
 msgid "Return to the single player menu"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:128
+#: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "Load this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:129
+#: ../../src/ui_fsmenu/loadgame.cc:160
 msgid "The map that this game is based on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:130
+#: ../../src/ui_fsmenu/loadgame.cc:161
 msgid "Delete this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:139
+#: ../../src/ui_fsmenu/loadgame.cc:170
 msgid "Save Date"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:139
+#: ../../src/ui_fsmenu/loadgame.cc:170
 msgid "The date this game was saved"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:156
+#: ../../src/ui_fsmenu/loadgame.cc:188
 #, c-format
 msgid "Game Mode: %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:159
+#: ../../src/ui_fsmenu/loadgame.cc:191
 msgid "Numbers are the number of players."
 msgstr ""
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:165
+#: ../../src/ui_fsmenu/loadgame.cc:197
 msgid "Mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:169 ../../src/ui_fsmenu/mapselect.cc:105
-msgid "Map Name"
-msgstr "Kaartnaam"
-
-#: ../../src/ui_fsmenu/loadgame.cc:169
-msgid "The name of the map that was played"
+#: ../../src/ui_fsmenu/loadgame.cc:203
+msgid "Description"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:173
-msgid "Filename"
+#: ../../src/ui_fsmenu/loadgame.cc:204
+msgid ""
+"The filename that the game was saved under followed by the map’s name, or "
+"the map’s name followed by the last objective achieved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:173
-msgid "The filename the game was saved under"
-msgstr ""
-
-#: ../../src/ui_fsmenu/loadgame.cc:226
+#: ../../src/ui_fsmenu/loadgame.cc:257
 msgid "Save Date:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:235 ../../src/ui_fsmenu/loadgame.cc:356
+#: ../../src/ui_fsmenu/loadgame.cc:266 ../../src/ui_fsmenu/loadgame.cc:384
 msgid "Filename:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:239
+#: ../../src/ui_fsmenu/loadgame.cc:270
 msgid "Do you really want to delete this replay?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:242
+#: ../../src/ui_fsmenu/loadgame.cc:273
 msgid "Do you really want to delete this game?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:246
+#: ../../src/ui_fsmenu/loadgame.cc:277
 msgid "Confirm deleting file"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:278
+#: ../../src/ui_fsmenu/loadgame.cc:309
 msgid "Gametime:"
 msgstr "Speeltijd:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:280
+#: ../../src/ui_fsmenu/loadgame.cc:311
 msgid "Win Condition:"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:464
+#: ../../src/ui_fsmenu/loadgame.cc:495
 msgid "Today, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:477
+#: ../../src/ui_fsmenu/loadgame.cc:508
 msgid "Yesterday, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:483
+#: ../../src/ui_fsmenu/loadgame.cc:514
 msgid "%2% %1%, %3%"
 msgstr ""
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:509
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
+#: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "SP"
 msgstr ""
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:517
+#: ../../src/ui_fsmenu/loadgame.cc:548
 msgid "H (%1%)"
 msgstr ""
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:526
+#: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "MP (%1%)"
 msgstr ""
 
-#. * TRANSLATORS: Used in filenames for loading games
-#: ../../src/ui_fsmenu/loadgame.cc:539
-msgid "Autosave: %1%"
-msgstr ""
-
-#. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
-#: ../../src/ui_fsmenu/loadgame.cc:550
+#. * TRANSLATORS: Error message introduction for when an old savegame can't be
+#. loaded
+#: ../../src/ui_fsmenu/loadgame.cc:573
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:553
+#: ../../src/ui_fsmenu/loadgame.cc:576
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:566 ../../src/ui_fsmenu/loadgame.cc:568
+#: ../../src/ui_fsmenu/loadgame.cc:589 ../../src/ui_fsmenu/loadgame.cc:591
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
@@ -2775,9 +2700,13 @@ msgstr "Multiplayer"
 msgid "Watch Replay"
 msgstr "Bekijk herhaling"
 
+#: ../../src/ui_fsmenu/main.cc:49
+msgid "Editor"
+msgstr "Editor"
+
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
-#: ../../src/wui/interactive_player.cc:107
-#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Opties"
 
@@ -2830,6 +2759,10 @@ msgid "Pl."
 msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
+msgid "Map Name"
+msgstr "Kaartnaam"
+
+#: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "The name of the map or scenario"
 msgstr ""
 
@@ -2845,7 +2778,8 @@ msgstr ""
 msgid "Show all maps"
 msgstr "Toon alle kaarten"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
 msgstr ""
@@ -2858,7 +2792,8 @@ msgstr ""
 msgid "Unbalanced"
 msgstr "Ongebalanceerd"
 
-#: ../../src/ui_fsmenu/mapselect.cc:153
+#. * TRANSLATORS: This is a message's type
+#: ../../src/ui_fsmenu/mapselect.cc:153 ../../src/wui/game_message_menu.cc:553
 msgid "Seafaring"
 msgstr ""
 
@@ -2882,14 +2817,16 @@ msgstr "Teams van 3"
 msgid "Teams of 4"
 msgstr "Teams van 4"
 
-#. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:305
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
@@ -2939,9 +2876,7 @@ msgstr ""
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
-msgstr ""
-"Deze kaart is niet in uw bestandssysteem aanwezig. De getoonde gegevens zijn "
-"afkomstig van de server."
+msgstr "Deze kaart is niet in uw bestandssysteem aanwezig. De getoonde gegevens zijn afkomstig van de server."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:34
 msgid "Choose game type"
@@ -3007,79 +2942,79 @@ msgstr "Open"
 msgid "Closed"
 msgstr "Gesloten"
 
-#: ../../src/ui_fsmenu/options.cc:113 ../../src/ui_fsmenu/options.cc:541
+#: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:541
 msgid "Advanced Options"
 msgstr "Gevorderde Opties"
 
-#: ../../src/ui_fsmenu/options.cc:123 ../../src/ui_fsmenu/options.cc:535
+#: ../../src/ui_fsmenu/options.cc:124 ../../src/ui_fsmenu/options.cc:535
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ../../src/ui_fsmenu/options.cc:129
+#: ../../src/ui_fsmenu/options.cc:130
 msgid "General Options"
 msgstr "Algemene opties"
 
-#: ../../src/ui_fsmenu/options.cc:135
+#: ../../src/ui_fsmenu/options.cc:136
 msgid "In-game resolution"
 msgstr "Spelresolutie"
 
-#: ../../src/ui_fsmenu/options.cc:151
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Fullscreen"
 msgstr "Volledig scherm"
 
-#: ../../src/ui_fsmenu/options.cc:162
+#: ../../src/ui_fsmenu/options.cc:163
 msgid "Grab Input"
 msgstr "Pak invoer"
 
-#: ../../src/ui_fsmenu/options.cc:169
+#: ../../src/ui_fsmenu/options.cc:170
 msgid "Maximum FPS:"
 msgstr "Maximum FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:182
+#: ../../src/ui_fsmenu/options.cc:183
 msgid "Language"
 msgstr "Taal"
 
-#: ../../src/ui_fsmenu/options.cc:198
+#: ../../src/ui_fsmenu/options.cc:199
 msgid "Enable Music"
 msgstr "Zet muziek aan"
 
-#: ../../src/ui_fsmenu/options.cc:208
+#: ../../src/ui_fsmenu/options.cc:209
 msgid "Enable Sound"
 msgstr "Zet geluid aan"
 
-#: ../../src/ui_fsmenu/options.cc:215
+#: ../../src/ui_fsmenu/options.cc:216
 msgid "In-game Options"
 msgstr "Spelopties"
 
-#: ../../src/ui_fsmenu/options.cc:223
+#: ../../src/ui_fsmenu/options.cc:224
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:233
+#: ../../src/ui_fsmenu/options.cc:234
 msgid "Start building road after placing a flag"
 msgstr "Start met wegenaanleg na het plaatsen van een vlag"
 
-#: ../../src/ui_fsmenu/options.cc:244
+#: ../../src/ui_fsmenu/options.cc:245
 msgid "Show buildings area preview"
 msgstr "Werkgebied van gebouw tonen"
 
-#: ../../src/ui_fsmenu/options.cc:255
+#: ../../src/ui_fsmenu/options.cc:256
 msgid "Snap windows only when overlapping"
 msgstr "Haak schermen alleen bij overlappen"
 
-#: ../../src/ui_fsmenu/options.cc:265
+#: ../../src/ui_fsmenu/options.cc:266
 msgid "Dock windows to edges"
 msgstr "Zet schermen vast aan de randen"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:274 ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:275 ../../src/ui_fsmenu/options.cc:388
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:283
 msgid "Save game automatically every"
 msgstr "Sla spel automatisch op elke"
 
@@ -3114,10 +3049,6 @@ msgstr ""
 msgid "Try system language"
 msgstr "Probeer systeemtaal"
 
-#: ../../src/ui_fsmenu/options.cc:407
-msgid "English"
-msgstr ""
-
 #: ../../src/ui_fsmenu/options.cc:547
 msgid "Distance for windows to snap to other panels:"
 msgstr "Afstand voor vensters om aan te haken aan andere panelen:"
@@ -3143,9 +3074,7 @@ msgstr "Speel een geluid af als er een bericht aankomt."
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
-"Comprimeer widelands gegevenbestand niet (kaarten, herhalingen en opgeslagen "
-"spellen)."
+msgstr "Comprimeer widelands gegevenbestand niet (kaarten, herhalingen en opgeslagen spellen)."
 
 #: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
@@ -3168,38 +3097,24 @@ msgstr "Laad spel"
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1102
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
-#: ../../src/wlapplication.cc:1126
+#: ../../src/wlapplication.cc:1112
 #, c-format
 msgid ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find "
-"related messages in the standard output (stdout.txt on Windows). You are "
-"using build %1$s (%2$s). "
-msgstr ""
-"\n"
-"\n"
-"Rapporteer a.u.b. dit probleem om ons te helpen Widelands te verbeteren. Je "
-"kunt\n"
-"gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder\n"
-"Windows). Je gebruikt build %1$s (%2$s). "
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
+msgstr "\n\nRapporteer a.u.b. dit probleem om ons te helpen Widelands te verbeteren. Je kunt\ngerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder\nWindows). Je gebruikt build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1133
+#: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. "
-"It is often – though not always – possible to load it and continue playing.\n"
-msgstr ""
-"Voeg deze informatie a.u.b. toe aan je rapport.\n"
-"\n"
-"Widelands probeert een savegame (bewaard spel) te creëren als er een fout "
-"optreedt tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze "
-"te laden en verder te spelen.\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
+msgstr "Voeg deze informatie a.u.b. toe aan je rapport.\n\nWidelands probeert een savegame (bewaard spel) te creëren als er een fout optreedt tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze te laden en verder te spelen.\n"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Destroy building?"
@@ -3283,7 +3198,7 @@ msgid "Jump to unproductive"
 msgstr "Spring naar werkeloze"
 
 #: ../../src/wui/building_statistics_menu.cc:112
-#: ../../src/wui/multiplayersetupgroup.cc:443
+#: ../../src/wui/multiplayersetupgroup.cc:439
 msgid "Type"
 msgstr "Type"
 
@@ -3375,7 +3290,7 @@ msgid "Building materials"
 msgstr "Bouwmaterialen"
 
 #: ../../src/wui/encyclopedia_window.cc:65
-#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Ware Encyclopedia"
 msgstr "Stam goederen encyclopedie"
 
@@ -3479,8 +3394,8 @@ msgstr "Weg annuleren"
 msgid "Build roads"
 msgstr "Leg wegen aan"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:91
+#: ../../src/wui/interactive_spectator.cc:52
 msgid "Chat"
 msgstr "Chat"
 
@@ -3514,7 +3429,7 @@ msgstr "Voorraad"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
 #: ../../src/wui/game_options_menu.cc:117
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Sla spel op"
 
@@ -3539,11 +3454,7 @@ msgid ""
 "Saved game file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""
-"Fout Tijdens Opslaan Spel!\n"
-"Opgeslagen spelbestand is mogelijk corrupt!\n"
-"\n"
-"Opgegeven reden:\n"
+msgstr "Fout Tijdens Opslaan Spel!\nOpgeslagen spelbestand is mogelijk corrupt!\n\nOpgegeven reden:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:245
 #: ../../src/wui/game_main_menu_save_game.cc:257
@@ -3559,71 +3470,152 @@ msgstr "Bestand verwijderen"
 msgid "Do you really want to delete the file %s?"
 msgstr "Wil je bestand %s echt verwijderen?"
 
-#: ../../src/wui/game_message_menu.cc:45
-#: ../../src/wui/game_message_menu.cc:367
+#: ../../src/wui/game_message_menu.cc:46
+#: ../../src/wui/game_message_menu.cc:618
 msgid "Messages: Inbox"
 msgstr "Berichten: inbox"
 
-#: ../../src/wui/game_message_menu.cc:55
+#: ../../src/wui/game_message_menu.cc:57
 msgid "Select"
 msgstr "Selecteer"
 
-#: ../../src/wui/game_message_menu.cc:56 ../../src/wui/game_summary.cc:97
+#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:97
 msgid "Status"
 msgstr "Status"
 
-#: ../../src/wui/game_message_menu.cc:57
+#: ../../src/wui/game_message_menu.cc:59
 msgid "Title"
 msgstr "Titel"
 
-#: ../../src/wui/game_message_menu.cc:58
+#: ../../src/wui/game_message_menu.cc:60
 msgid "Time sent"
 msgstr "Tijd verzonden"
 
-#: ../../src/wui/game_message_menu.cc:66
-msgid "Clear"
-msgstr "Wissen"
-
-#: ../../src/wui/game_message_menu.cc:66
+#: ../../src/wui/game_message_menu.cc:129
 msgid "Clear selection"
 msgstr "Selectie wissen"
 
-#: ../../src/wui/game_message_menu.cc:75
-msgid "Invert"
-msgstr "Omkeren"
-
-#: ../../src/wui/game_message_menu.cc:75
+#: ../../src/wui/game_message_menu.cc:139
 msgid "Invert selection"
 msgstr "Selectie omkeren"
 
-#: ../../src/wui/game_message_menu.cc:85
-#: ../../src/wui/game_message_menu.cc:369
+#. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:150
+#: ../../src/wui/game_message_menu.cc:610
+#: ../../src/wui/game_message_menu.cc:621
+#, c-format
+msgid "Del: %s"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:152
+#: ../../src/wui/game_message_menu.cc:623
 msgid "Archive selected messages"
 msgstr "Archiveer geselecteerde berichten"
 
-#: ../../src/wui/game_message_menu.cc:94
-#: ../../src/wui/game_message_menu.cc:370
+#: ../../src/wui/game_message_menu.cc:162
+#: ../../src/wui/game_message_menu.cc:625
 msgid "Show Archive"
 msgstr "Toon archief"
 
-#: ../../src/wui/game_message_menu.cc:104
-msgid "center main mapview on location"
-msgstr "centreer overzichtskaart  op locatie"
+#. * TRANSLATORS: %s is a tooltip, G is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:173
+#, c-format
+msgid "G: %s"
+msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:360
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:175
+msgid "Center main mapview on location"
+msgstr ""
+
+#. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
+#: ../../src/wui/game_message_menu.cc:500
+#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:527
+msgid "%1% (Hotkey: %2%)"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:502
+msgid "Show all messages"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:513
+msgid "Show geologists' messages only"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:517
+msgid "Show economy messages only"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:521
+msgid "Show seafaring messages only"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:525
+msgid "Show warfare messages only"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:529
+msgid "Show scenario messages only"
+msgstr ""
+
+#. * TRANSLATORS: This is a message's type
+#: ../../src/wui/game_message_menu.cc:543
+msgid "Geologists"
+msgstr ""
+
+#. * TRANSLATORS: This is a message's type
+#: ../../src/wui/game_message_menu.cc:548
+msgid "Economy"
+msgstr ""
+
+#. * TRANSLATORS: This is a message's type
+#: ../../src/wui/game_message_menu.cc:558
+msgid "Warfare"
+msgstr ""
+
+#. * TRANSLATORS: This show up instead of a message's type when there are no
+#. messages found
+#: ../../src/wui/game_message_menu.cc:568
+msgid "No message found"
+msgstr ""
+
+#. * TRANSLATORS: This is the default message type
+#: ../../src/wui/game_message_menu.cc:572
+msgid "General"
+msgstr ""
+
+#. * TRANSLATORS: %s is a message's type
+#: ../../src/wui/game_message_menu.cc:578
+#, c-format
+msgid "Type of this message: %s"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Archive"
 msgstr "Berichten: archief"
 
-#: ../../src/wui/game_message_menu.cc:362
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:612
 msgid "Restore selected messages"
 msgstr "Herstel geselecteerde berichten"
 
-#: ../../src/wui/game_message_menu.cc:363
+#: ../../src/wui/game_message_menu.cc:614
 msgid "Show Inbox"
 msgstr "Laat Inbox zien"
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_player.cc:100
 msgid "Objectives"
 msgstr "Doelstellingen"
 
@@ -3748,7 +3740,7 @@ msgstr "Land"
 msgid "Workers"
 msgstr "Werkers"
 
-#: ../../src/wui/general_statistics_menu.cc:193 ../../src/wui/minimap.cc:174
+#: ../../src/wui/general_statistics_menu.cc:193 ../../src/wui/minimap.cc:170
 msgid "Buildings"
 msgstr "Gebouwen"
 
@@ -3786,34 +3778,34 @@ msgstr "Civiele gebouwen verloren"
 msgid "Military"
 msgstr "Leger"
 
-#: ../../src/wui/interactive_gamebase.cc:43
+#: ../../src/wui/interactive_gamebase.cc:44
 msgid "PAUSE"
 msgstr "PAUZE"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:117
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:110
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:97
+#: ../../src/wui/interactive_spectator.cc:60
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:254
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:225
 msgid "Messages"
 msgstr "Berichten"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:232
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u nieuw bericht"
 msgstr[1] "%u nieuwe berichten"
 
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
 msgstr "Verlaat herhaling"
 
@@ -3831,9 +3823,7 @@ msgstr "Wachtwoord:"
 
 #: ../../src/wui/login_box.cc:50
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
-"WAARSCHUWING: Het wachtwoord zal worden getoond en leesbaar worden "
-"opgeslagen!"
+msgstr "WAARSCHUWING: Het wachtwoord zal worden getoond en leesbaar worden opgeslagen!"
 
 #: ../../src/wui/login_box.cc:55
 msgid "Log in to a registered account"
@@ -3875,19 +3865,19 @@ msgstr "Voer alsjeblieft je wachtwoord in!"
 msgid "Soldiers"
 msgstr "Soldaten"
 
-#: ../../src/wui/minimap.cc:156
+#: ../../src/wui/minimap.cc:152
 msgid "Owner"
 msgstr "Bezet door"
 
-#: ../../src/wui/minimap.cc:162
+#: ../../src/wui/minimap.cc:158
 msgid "Flags"
 msgstr "Vlaggen"
 
-#: ../../src/wui/minimap.cc:168
+#: ../../src/wui/minimap.cc:164
 msgid "Roads"
 msgstr "Wegen"
 
-#: ../../src/wui/minimap.cc:180
+#: ../../src/wui/minimap.cc:176
 msgid "Zoom"
 msgstr "Zoomen"
 
@@ -3935,11 +3925,11 @@ msgstr "Client naam"
 msgid "Role"
 msgstr "Rol"
 
-#: ../../src/wui/multiplayersetupgroup.cc:435
+#: ../../src/wui/multiplayersetupgroup.cc:431
 msgid "Start"
 msgstr "Start"
 
-#: ../../src/wui/multiplayersetupgroup.cc:459
+#: ../../src/wui/multiplayersetupgroup.cc:455
 #: ../../src/wui/playerdescrgroup.cc:100
 msgid "Initialization"
 msgstr "Initialisatie"

@@ -172,8 +172,10 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	if (egbase.objects().object_still_available(m_warehouse)) {
 
+		//we need to remember this for possible recreation of portdock
 		wh = m_warehouse;
 
+		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
 			for (ShippingItem& shipping_item : m_waiting) {
 				WareInstance* ware;
@@ -187,7 +189,6 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 				}
 			}
 		}
-
 		m_waiting.clear();
 		m_warehouse->m_portdock = nullptr;
 	}
@@ -212,19 +213,18 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	PlayerImmovable::cleanup(egbase);
 
+	//now let attempt to recreate the portdock
 	if (wh) {
-		if (upcast(Game, game, &egbase)) {
-			if (game->is_loaded()) {
-				Player& player = owner();
-				log("Message: Portdock lost, trying to restore it (player %d)\n",
-				    player.player_number());
-				wh->restore_portdock_or_destroy(egbase);
-				return;
+		if (!wh->m_cleanup_in_progress){
+			if (upcast(Game, game, &egbase)) {
+				if (game->is_loaded()) { //do not attempt when shutting down
+					Player& player = owner();
+					wh->restore_portdock_or_destroy(egbase);
+				}
 			}
 		}
-		// this is not a (running) game, destroying the port
-		wh->destroy(egbase);
 	}
+
 }
 
 /**
@@ -441,14 +441,16 @@ void PortDock::cancel_expedition(Game& game) {
 void PortDock::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	Coords pos(m_warehouse->get_position());
-	molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
-	      m_warehouse ? m_warehouse->serial() : 0,
-	      pos.x,
-	      pos.y,
-	      m_fleet ? m_fleet->serial() : 0,
-	      m_need_ship ? "true" : "false",
-	      m_waiting.size());
+	if (!m_warehouse) {
+		Coords pos(m_warehouse->get_position());
+		molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
+		      m_warehouse ? m_warehouse->serial() : 0,
+		      pos.x,
+		      pos.y,
+		      m_fleet ? m_fleet->serial() : 0,
+		      m_need_ship ? "true" : "false",
+		      m_waiting.size());
+	}
 
 	for (ShippingItem& shipping_item : m_waiting) {
 		molog("  IT %u, destination %u\n",

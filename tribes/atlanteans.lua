@@ -17,6 +17,17 @@ tribes:new_tribe {
 		}
 	},
 
+	-- Image file paths for this tribe's road textures
+	roads = {
+		busy = {
+			"tribes/images/atlanteans/roadt_busy.png",
+		},
+		normal = {
+			"tribes/images/atlanteans/roadt_normal_00.png",
+			"tribes/images/atlanteans/roadt_normal_01.png",
+		},
+	},
+
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.

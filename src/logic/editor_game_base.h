@@ -50,7 +50,7 @@ struct ObjectManager;
 class Player;
 struct PlayerImmovable;
 class Tribes;
-struct TribeDescr;
+class TribeDescr;
 struct Flag;
 struct AttackController;
 
@@ -266,9 +266,8 @@ private:
 	uint32_t lasttrackserial_;
 	std::map<uint32_t, void*> trackpointers_;
 
-
-		DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
-	};
+	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
+};
 
 #define iterate_players_existing(p, nr_players, egbase, player)                                    \
 	iterate_player_numbers(                                                                         \

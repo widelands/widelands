@@ -41,7 +41,6 @@ tribes:new_militarysite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 53, 81 },
-			fps = 1
 		}
 	},
 

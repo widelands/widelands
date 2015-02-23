@@ -276,6 +276,7 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 	m_portdock(nullptr)
 {
 	m_next_stock_remove_act = 0;
+	m_cleanup_in_progress = false;
 }
 
 
@@ -446,6 +447,7 @@ void Warehouse::init(EditorGameBase & egbase)
 		// if there warehouse is created in the game?  I assume it's for the
 		// conquer_radius thing
 		m_next_military_act = schedule_act(*game, 1000);
+
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
@@ -491,6 +493,9 @@ void Warehouse::init(EditorGameBase & egbase)
 			get_position().y);
 		}
 	}
+
+	//this is default
+	m_cleanup_in_progress = false;
 
 }
 
@@ -557,14 +562,19 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 	}
 }
 
+
 /// Destroy the warehouse.
 void Warehouse::cleanup(EditorGameBase& egbase) {
 
-	// storing object of the portdock if exists
-	PortDock* pd = nullptr;
+	// if this is a port, it will remove also portdock.
+	// But portdock must know that it should not try to recreate itself
+	m_cleanup_in_progress = true;
 
 	if (egbase.objects().object_still_available(m_portdock)) {
-		pd = m_portdock;
+		m_portdock->remove(egbase);
+	}
+
+	if (!egbase.objects().object_still_available(m_portdock)) {
 		m_portdock = nullptr;
 	}
 
@@ -600,18 +610,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	player.unsee_area
 			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
-	if (upcast(Game, game, &egbase)) {
-		log("Message: removing %s (player %i)\n",
-		    to_string(descr().type()).c_str(),
-		    player.player_number());
-	}
-
 	Building::cleanup(egbase);
-
-	// if there was a portdock, removing it now
-	if (pd) {
-		pd->remove(egbase);
-	}
 }
 
 

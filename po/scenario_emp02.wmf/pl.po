@@ -1,23 +1,22 @@
-# Widelands po/pl_PL/campaigns/emp02.wmf.po
-# Copyright (C) 2008 Widelands Development Team
-# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2014
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4804\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-17 12:12+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:35+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
@@ -78,12 +77,9 @@ msgstr "Chata kamieniarza i infrastruktura górnicza"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, "
-"armor smithy and smelting works)."
-msgstr ""
-"Zbuduj zakład kamieniarski, a potem dokończ infrastrukturę górniczą i "
-"produkcyjną (kopalnię węgla i/lub smolarnię, kopalnię rudy żelaza, pracownie "
-"rzemieślnika, zbrojmistrza i płatnerza oraz hutę)."
+"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
+" armor smithy and smelting works)."
+msgstr "Zbuduj zakład kamieniarski, a potem dokończ infrastrukturę górniczą i produkcyjną (kopalnię węgla i/lub smolarnię, kopalnię rudy żelaza, pracownie rzemieślnika, zbrojmistrza i płatnerza oraz hutę)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -96,40 +92,29 @@ msgstr "Jedzenie dla górników"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
-"To supply them with some good and strong drinks, we could build up a brewery "
-"and a winery."
-msgstr ""
-"Aby wyprodukować krzepiącą żywność dla naszych górników, musimy zbudować "
-"tawernę. Aby zaopatrzyć ich w dobre, mocne napoje, moglibyśmy zbudować "
-"browar i winiarnię."
+"To supply them with some good and strong drinks, we could build up a brewery"
+" and a winery."
+msgstr "Aby wyprodukować krzepiącą żywność dla naszych górników, musimy zbudować tawernę. Aby zaopatrzyć ich w dobre, mocne napoje, moglibyśmy zbudować browar i winiarnię."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
-msgstr ""
-"Oczywiście to oznacza, że potrzebujemy więcej zasobów do przygotowywania "
-"jedzenia - takich jak ryba, mięso lub chleb. Aby je zapewnić, musisz "
-"zbudować domek rybaka, farmę, młyn i piekarnię."
+msgstr "Oczywiście to oznacza, że potrzebujemy więcej zasobów do przygotowywania jedzenia - takich jak ryba, mięso lub chleb. Aby je zapewnić, musisz zbudować domek rybaka, farmę, młyn i piekarnię."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr ""
-"Możesz też potrzebować kwatery myśliwego, chlewu, plantacji winorośli i "
-"studni."
+msgstr "Możesz też potrzebować kwatery myśliwego, chlewu, plantacji winorośli i studni."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least "
-"rations, which are produced out of bread OR meat OR fish."
-msgstr ""
-"Od ciebie zależy, co chcesz zbudować. Ale pamiętaj - kopalnie węgla i żelaza "
-"potrzebują piwa, zaś kopalnie marmuru i złota wina, wszystkie zaś wymagają "
-"przynajmniej racji produkowanych z chleba LUB mięsa LUB ryby."
+"mines need beer, marble and gold mines need wine and all mines need at least"
+" rations, which are produced out of bread OR meat OR fish."
+msgstr "Od ciebie zależy, co chcesz zbudować. Ale pamiętaj - kopalnie węgla i żelaza potrzebują piwa, zaś kopalnie marmuru i złota wina, wszystkie zaś wymagają przynajmniej racji produkowanych z chleba LUB mięsa LUB ryby."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -143,17 +128,15 @@ msgstr "Chroń swoją wschodnią granicę"
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr ""
-"Zbuduj większe budynki wojskowe, takie jak bariera, wieża czy placówka, na "
-"wschodnim froncie."
+msgstr "Zbuduj większe budynki wojskowe, takie jak bariera, wieża czy placówka, na wschodnim froncie."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
 msgstr "Żeby widzieć dalej na terytorium wroga, zbuduj wieżę."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
-msgid "Destroy the barbarian tribe"
-msgstr "Zniszcz plemię barbarzyńców"
+msgid "Destroy the Barbarian tribe"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -162,20 +145,15 @@ msgstr "Zniszcz plemię barbarzyńców"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
-"barbarian buildings."
+"Barbarian buildings."
 msgstr ""
-"Kiedy tylko będziesz miał wystarczająco dużo żołnierzy, zaatakuj i zniszcz "
-"wszystkie budynki barbarzyńców."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the barbarian "
-"headquarters stood before), to avoid new settlements of other tribes in that "
-"region."
+"Finally, build up a fortress on the peninsula (near where the Barbarian "
+"headquarters stood before), to avoid new settlements of other tribes in that"
+" region."
 msgstr ""
-"Na koniec zbuduj fortecę na półwyspie (blisko miejsca, gdzie wcześniej stała "
-"kwatera główna barbarzyńców), aby upewnić się, że inne plemiona nie będą "
-"osadzać się w tym miejscu."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -195,24 +173,18 @@ msgstr "Dziennik Lucjusza"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
-"Finally! This island appears to have been made for us, it is a gift from the "
-"Gods to my people and myself. Until now, we have only seen a small part of "
+"Finally! This island appears to have been made for us, it is a gift from the"
+" Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr ""
-"W końcu! Ta wyspa wygląda, jakby była darem Bogów dla moich ludzi i dla "
-"mnie. Póki co, widzieliśmy tylko mały skrawek tej wyspy, ale sama ta część "
-"napełnia mnie radością. Mam wrażenie, że znaleźliśmy bezcenny skarb, wyspę "
-"niczym raj."
+msgstr "W końcu! Ta wyspa wygląda, jakby była darem Bogów dla moich ludzi i dla mnie. Póki co, widzieliśmy tylko mały skrawek tej wyspy, ale sama ta część napełnia mnie radością. Mam wrażenie, że znaleźliśmy bezcenny skarb, wyspę niczym raj."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:112
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr ""
-"Na tej wyspie zaczniemy nowe życie. Zbudujemy tu azyl na naszym wygnaniu, "
-"który może się stanie nowym, pięknym domem dla każdego z nas."
+msgstr "Na tej wyspie zaczniemy nowe życie. Zbudujemy tu azyl na naszym wygnaniu, który może się stanie nowym, pięknym domem dla każdego z nas."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
@@ -223,28 +195,20 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr ""
-"Przechadzając się z Saledusem przez te piękne lasy na północy poczuliśmy, że "
-"nasza przyszłość właśnie się zaczęła. Ten ląd jest tak spokojny, piękny i "
-"dobry, mógłbym tutaj spędzić resztę mojego życia."
+msgstr "Przechadzając się z Saledusem przez te piękne lasy na północy poczuliśmy, że nasza przyszłość właśnie się zaczęła. Ten ląd jest tak spokojny, piękny i dobry, mógłbym tutaj spędzić resztę mojego życia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the "
-"present, and build a few lumberjack’s houses and a sawmill to produce some "
+"But until that day, may many years pass! For now, we must concentrate on the"
+" present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
-"Ale do tego dnia minie wiele lat! Póki co, musimy się skoncentrować na "
-"teraźniejszości i zbudować parę chat drwala i tartak, aby zacząć produkować "
-"podstawowe materiały."
+msgstr "Ale do tego dnia minie wiele lat! Póki co, musimy się skoncentrować na teraźniejszości i zbudować parę chat drwala i tartak, aby zacząć produkować podstawowe materiały."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But we shouldn’t forget to preserve this natural bounty. These forests "
 "should last forever, so we really should build a forester’s house too."
-msgstr ""
-"Ale nie powinniśmy zapominać o zachowaniu tego naturalnego skarbu. Te lasy "
-"powinny przetrwać wiecznie, koniecznie musimy zatem zbudować leśniczówkę."
+msgstr "Ale nie powinniśmy zapominać o zachowaniu tego naturalnego skarbu. Te lasy powinny przetrwać wiecznie, koniecznie musimy zatem zbudować leśniczówkę."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -254,20 +218,14 @@ msgstr "Skały"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stone for our larger buildings."
-msgstr ""
-"Później przeszedłem się do skał na południu i szukałem miejsca, gdzie byśmy "
-"mogli zbudować kamieniołom, żeby zdobyć trochę kamienia dla większych "
-"budynków."
+msgstr "Później przeszedłem się do skał na południu i szukałem miejsca, gdzie byśmy mogli zbudować kamieniołom, żeby zdobyć trochę kamienia dla większych budynków."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr ""
-"Znów przyszło mi na myśl porównanie do raju, kiedy zauważyłem, że wśród skał "
-"jest też marmur. Wygląda na to, że wkrótce będziemy mogli budować potężne, "
-"luksusowe budynki, takie, jak w Fremil."
+msgstr "Znów przyszło mi na myśl porównanie do raju, kiedy zauważyłem, że wśród skał jest też marmur. Wygląda na to, że wkrótce będziemy mogli budować potężne, luksusowe budynki, takie, jak w Fremil."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
@@ -277,9 +235,7 @@ msgstr "Drzewo dla kolonii"
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr ""
-"Dobre wieści! Dzisiaj postawiliśmy na nogi naszą gospodarkę drzewną. Teraz "
-"możemy się nie martwić o drewno na nasze przyszłe budynki."
+msgstr "Dobre wieści! Dzisiaj postawiliśmy na nogi naszą gospodarkę drzewną. Teraz możemy się nie martwić o drewno na nasze przyszłe budynki."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
@@ -289,9 +245,7 @@ msgstr "Kamień dla kolonii"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
-msgstr ""
-"Świetnie, budowa kamieniołomu została dzisiaj ukończona. Teraz mamy "
-"wystarczająca dużo kamienia do budowy większych budynków."
+msgstr "Świetnie, budowa kamieniołomu została dzisiaj ukończona. Teraz mamy wystarczająca dużo kamienia do budowy większych budynków."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:152
 msgid "Dangerous Ship Parts"
@@ -303,32 +257,24 @@ msgstr "Saledus wygląda na niezadowolonego"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which "
-"gives me a sinking feeling in my stomach and spreads waves of fear in my "
+"Greetings Lutius, I don’t want to start a panic, but I found something which"
+" gives me a sinking feeling in my stomach and spreads waves of fear in my "
 "heart. As I walked down to the southern shore, I found the remains of "
 "another ship. I don’t know whether these parts are all that is left of that "
 "ship. In any case, these parts do not seem to be old."
-msgstr ""
-"Witaj, Lucjuszu. Nie chcę wzbudzać paniki, lecz znalazłem coś, co nie daje "
-"mi spokoju, a wręcz sieje panikę w moim sercu. Kiedy przeszedłem się na "
-"południowy brzeg, zauważyłem resztki innej łodzi. Nie wiem, czy te szczątki "
-"to wszystko, co z niej zostało. W każdym razie, nie wyglądają na stare."
+msgstr "Witaj, Lucjuszu. Nie chcę wzbudzać paniki, lecz znalazłem coś, co nie daje mi spokoju, a wręcz sieje panikę w moim sercu. Kiedy przeszedłem się na południowy brzeg, zauważyłem resztki innej łodzi. Nie wiem, czy te szczątki to wszystko, co z niej zostało. W każdym razie, nie wyglądają na stare."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
-msgstr ""
-"Być może ludzie na tej łodzi trafili na ten sam sztorm, co przyniósł nas do "
-"Malac' Mor, i znaleźli się tutaj."
+msgstr "Być może ludzie na tej łodzi trafili na ten sam sztorm, co przyniósł nas do Malac' Mor, i znaleźli się tutaj."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:159
 msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
-msgstr ""
-"Proszę Cię, bądź ostrożny i zbuduj jakieś koszary i strażnice dokoła naszej "
-"kolonii."
+msgstr "Proszę Cię, bądź ostrożny i zbuduj jakieś koszary i strażnice dokoła naszej kolonii."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Marble on the Mountain"
@@ -341,23 +287,17 @@ msgstr "Saledus się uśmiecha"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am "
-"right – but I believe we could mine marble from some places on the mountain."
-msgstr ""
-"Lucjuszu, mam dla Ciebie dobre wieści: Kiedy poszedłem na wschód, znalazłem "
-"większą górę. Nie jestem pewien - geolog musiałby sprawdzić, czy mam rację - "
-"ale mam wrażenie, że moglibyśmy wydobyć marmur w niektórych miejscach na "
-"górze."
+"larger mountain. I am not absolutely sure – a geologist should check if I am"
+" right – but I believe we could mine marble from some places on the "
+"mountain."
+msgstr "Lucjuszu, mam dla Ciebie dobre wieści: Kiedy poszedłem na wschód, znalazłem większą górę. Nie jestem pewien - geolog musiałby sprawdzić, czy mam rację - ale mam wrażenie, że moglibyśmy wydobyć marmur w niektórych miejscach na górze."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr ""
-"Byłby to doskonały sposób na powiększenie naszych zapasy dobrego marmuru "
-"ponad te marne ilości dostępne z kamieniołomów. Może miałeś rację, kiedy "
-"powiedziałeś, że ta wyspa jest jak raj."
+msgstr "Byłby to doskonały sposób na powiększenie naszych zapasy dobrego marmuru ponad te marne ilości dostępne z kamieniołomów. Może miałeś rację, kiedy powiedziałeś, że ta wyspa jest jak raj."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid "Let us expand to that mountain and start mining marble."
@@ -376,24 +316,16 @@ msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
 "of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
-"smithies."
-msgstr ""
-"Na bogów, co za niewiarygodne szczęście! Znaleźliśmy dwie kolejne góry i "
-"wygląda na to, że jedna ma duże ilości węgla, a druga rud żelaza! "
-"Natychmiast należy nam zacząć budować kopalnie węgla (albo przynajmniej "
-"smolarnie) i rudy żelaza, hutę i pracownie rzemieślnika, zbrojmistrza i "
-"płatnerza."
+"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
+" smithies."
+msgstr "Na bogów, co za niewiarygodne szczęście! Znaleźliśmy dwie kolejne góry i wygląda na to, że jedna ma duże ilości węgla, a druga rud żelaza! Natychmiast należy nam zacząć budować kopalnie węgla (albo przynajmniej smolarnie) i rudy żelaza, hutę i pracownie rzemieślnika, zbrojmistrza i płatnerza."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So, let’s build a stonemason, who will cut columns from "
 "marble."
-msgstr ""
-"Jednakże, do budowy wszystkich tych budynków potrzebujemy lepszych i "
-"bardziej wyszukanych materiałów budowlanych. Zbudujmy pracownię kamieniarza, "
-"aby wycinał kolumny z marmuru."
+msgstr "Jednakże, do budowy wszystkich tych budynków potrzebujemy lepszych i bardziej wyszukanych materiałów budowlanych. Zbudujmy pracownię kamieniarza, aby wycinał kolumny z marmuru."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -411,8 +343,7 @@ msgstr "Amalea wchodzi..."
 msgid ""
 "Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
 "forgot something."
-msgstr ""
-"Lucjuszu, wybacz mi krytykę, ale wyglada na to, że o czymś zapomniałeś."
+msgstr "Lucjuszu, wybacz mi krytykę, ale wyglada na to, że o czymś zapomniałeś."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -420,19 +351,13 @@ msgid ""
 "a more comfortable life, but the people working in the mines are unhappy "
 "with the current situation. They have to do hard work and have no time for "
 "making their own food."
-msgstr ""
-"Wybudowanie kopalni jest świetnym pomysłem, który poprawi nasze warunki "
-"życia, ale ludzie pracujący w kopalniach nie są zbyt szczęśliwi z obecnej "
-"sytuacji. Muszą ciężko pracować i nie mają czasu na przygotowywanie sobie "
-"jedzenia."
+msgstr "Wybudowanie kopalni jest świetnym pomysłem, który poprawi nasze warunki życia, ale ludzie pracujący w kopalniach nie są zbyt szczęśliwi z obecnej sytuacji. Muszą ciężko pracować i nie mają czasu na przygotowywanie sobie jedzenia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:192
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
-"Co myślisz o tym, aby im pomóc? Nie potrafię ci powiedzieć, czego dokładnie "
-"potrzebujemy... ale mam kilka sugestii:"
+msgstr "Co myślisz o tym, aby im pomóc? Nie potrafię ci powiedzieć, czego dokładnie potrzebujemy... ale mam kilka sugestii:"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Our New Tavern"
@@ -444,20 +369,15 @@ msgstr "Amalea się uśmiecha"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
-"they serve is really tasty. You really should have a drink there, too."
-msgstr ""
-"Witaj mój przyjacielu, właśnie wróciłam z nowej tawerny 'Pod palmami'. Piwo, "
-"które tam serwują, jest naprawdę świetne. Myślę, że również powinieneś ją "
-"odwiedzić."
+"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
+" they serve is really tasty. You really should have a drink there, too."
+msgstr "Witaj mój przyjacielu, właśnie wróciłam z nowej tawerny 'Pod palmami'. Piwo, które tam serwują, jest naprawdę świetne. Myślę, że również powinieneś ją odwiedzić."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr ""
-"Dobrze wiedzieć, że atmosfera na wyspie staje się bardziej swojska. "
-"Dziekuję, Lucjuszu."
+msgstr "Dobrze wiedzieć, że atmosfera na wyspie staje się bardziej swojska. Dziekuję, Lucjuszu."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
@@ -465,22 +385,17 @@ msgstr "Barbarzyńcy"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
-"By the Gods! This is absolutely terrible. It seems as if we stand close to a "
-"test – and it seems as if Saledus was right with his fear concerning the "
+"By the Gods! This is absolutely terrible. It seems as if we stand close to a"
+" test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
-"Na bogów! To okropne. Wygląda na to, że zbliża się czas próby - a także na "
-"to, że Saledus miał rację, gdy się obawiał o resztki łodzi, którą znalazł."
+msgstr "Na bogów! To okropne. Wygląda na to, że zbliża się czas próby - a także na to, że Saledus miał rację, gdy się obawiał o resztki łodzi, którą znalazł."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
-"of one of those hated, evil, barbarian tribes with whom we have had so many "
+"of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
 msgstr ""
-"Dziś, kiedy poszedłem na wschodni brzeg, byłem zszokowany tym, co "
-"zobaczyłem. Ujrzałem jedno z tych znienawidzonych, złych barbarzyńskich "
-"plemion, od których zaznaliśmy dawniej tylu nieszczęść."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
@@ -488,12 +403,7 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing-spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
-"Na początku byłem na tyle naiwny, iż wierzyłem, że są pokojowo nastawieni, "
-"lecz kiedy zobaczyłem jednego z nich biegnącego w mym kierunku i próbującego "
-"rzucić we mnie oszczepem, zrozumiałem, że tak nie jest. Dziękuję bogom, że "
-"byłem w stanie uciec i ukryć się w ciemnościach przed powrotem do naszej "
-"kolonii."
+msgstr "Na początku byłem na tyle naiwny, iż wierzyłem, że są pokojowo nastawieni, lecz kiedy zobaczyłem jednego z nich biegnącego w mym kierunku i próbującego rzucić we mnie oszczepem, zrozumiałem, że tak nie jest. Dziękuję bogom, że byłem w stanie uciec i ukryć się w ciemnościach przed powrotem do naszej kolonii."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
@@ -509,10 +419,7 @@ msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
-"To dobrze. Pierwszy duży budynek wojskowy jest gotowy, a infrastruktura "
-"górnicza z dnia na dzień wygląda coraz lepiej. Powinniśmy pomyśleć o "
-"przygotowaniu się do walki."
+msgstr "To dobrze. Pierwszy duży budynek wojskowy jest gotowy, a infrastruktura górnicza z dnia na dzień wygląda coraz lepiej. Powinniśmy pomyśleć o przygotowaniu się do walki."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:227
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:233
@@ -526,21 +433,16 @@ msgstr "Dzisiaj jest dumny dzień - zwyciężyliśmy w walce o nasz nowy dom."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
-"There are still a few barbarians hiding on our island, but I am sure that we "
-"will find them soon. Every barbarian who doesn’t attack us will be put in a "
-"boat with the other peaceful ones, and sent back to their country."
+"There are still a few Barbarians hiding on our island, but I am sure that we"
+" will find them soon. Every Barbarian who doesn’t attack us will be put in a"
+" boat with the other peaceful ones, and sent back to their country."
 msgstr ""
-"Paru barbarzyńców wciąż ukrywa się na naszej wyspie, ale jestem pewien, że "
-"wkrótce ich znajdziemy. Każdy barbarzyńca, który nas nie zaatakuje, zostanie "
-"razem z innymi nastawionymi pokojowo wysłany na łodzi do swojego kraju."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
-"barbarians from the island."
+"Barbarians from the island."
 msgstr ""
-"Utworzyłeś sprawną gospodarkę, wyszkoliłeś nowych żołnierzy i przepędziłeś "
-"barbarzyńców z wyspy."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238
 msgid "As Time is Running By"
@@ -558,9 +460,7 @@ msgstr "Wiadomość"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr ""
-"Dzisiaj gołąb wylądował na naszej wyspie. Przyniósł wiadomość, która "
-"napełnia mnie mrocznymi myślami i znów budzi moje obawy."
+msgstr "Dzisiaj gołąb wylądował na naszej wyspie. Przyniósł wiadomość, która napełnia mnie mrocznymi myślami i znów budzi moje obawy."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:250
 msgid ""
@@ -568,19 +468,13 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
-"Wiadomość zaadresowana była do mnie i błagała, abym wracał do Fremil. "
-"Napisano w niej, że Imperium prowadzi wojnę z barbarzyńcami. Zaatakowani "
-"zostali z północy przez to samo plemię, z którym zabroniono mi walczyć. Nie "
-"mam wątpliwości, co powinienem teraz zrobić..."
+msgstr "Wiadomość zaadresowana była do mnie i błagała, abym wracał do Fremil. Napisano w niej, że Imperium prowadzi wojnę z barbarzyńcami. Zaatakowani zostali z północy przez to samo plemię, z którym zabroniono mi walczyć. Nie mam wątpliwości, co powinienem teraz zrobić..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:252
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
-"Udało ci się zakończyć tę misję. Możesz kontynuować rozgrywkę bądź przejść "
-"do następnej misji."
+msgstr "Udało ci się zakończyć tę misję. Możesz kontynuować rozgrywkę bądź przejść do następnej misji."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

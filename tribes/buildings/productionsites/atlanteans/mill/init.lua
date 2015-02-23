@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
 		working = {
 			pictures = path.list_directory(dirname, "working_\\d+.png"),
 			hotspot = { 58, 61 },
-			fps = 1
+			fps = 25
 		}
 	},
 

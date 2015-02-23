@@ -35,7 +35,7 @@ namespace Widelands {
 class Map;
 struct Route;
 struct Transfer;
-struct TribeDescr;
+class TribeDescr;
 
 
 /**

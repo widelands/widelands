@@ -250,8 +250,6 @@ void EditorGameBase::load_graphics(UI::ProgressWindow&)
 	// NOCOM(GunChleoc): Remove UI::ProgressWindow if we won't use it
 	assert(tribes_);
 	tribes_->load_graphics();
-
-	// TODO(unknown): load player graphics? (maybe)
 }
 
 /**
@@ -493,12 +491,12 @@ void EditorGameBase::set_road
 	assert(&first_field <= f.field);
 	assert                (f.field < &first_field + m.max_index());
 	assert
-		(direction == Road_SouthWest ||
-		 direction == Road_SouthEast ||
-		 direction == Road_East);
+		(direction == RoadType::kSouthWest ||
+		 direction == RoadType::kSouthEast ||
+		 direction == RoadType::kEast);
 	assert
-		(roadtype == Road_None || roadtype == Road_Normal ||
-		 roadtype == Road_Busy || roadtype == Road_Water);
+		(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
+		 roadtype == RoadType::kBusy || roadtype == RoadType::kWater);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
@@ -507,17 +505,17 @@ void EditorGameBase::set_road
 	FCoords neighbour;
 	uint8_t mask = 0;
 	switch (direction) {
-	case Road_SouthWest:
+	case RoadType::kSouthWest:
 		neighbour = m.bl_n(f);
-		mask = Road_Mask << Road_SouthWest;
+		mask = RoadType::kMask << RoadType::kSouthWest;
 		break;
-	case Road_SouthEast:
+	case RoadType::kSouthEast:
 		neighbour = m.br_n(f);
-		mask = Road_Mask << Road_SouthEast;
+		mask = RoadType::kMask << RoadType::kSouthEast;
 		break;
-	case Road_East:
+	case RoadType::kEast:
 		neighbour = m. r_n(f);
-		mask = Road_Mask << Road_East;
+		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
 		assert(false);

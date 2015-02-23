@@ -480,11 +480,11 @@ void MapPlayersViewPacket::read
 					{ //  edges
 						uint8_t mask = 0;
 						if (f_vision | bl_vision)
-							mask  = Road_Mask << Road_SouthWest;
+							mask  = RoadType::kMask << RoadType::kSouthWest;
 						if (f_vision | br_vision)
-							mask |= Road_Mask << Road_SouthEast;
+							mask |= RoadType::kMask << RoadType::kSouthEast;
 						if (f_vision |  r_vision)
-							mask |= Road_Mask << Road_East;
+							mask |= RoadType::kMask << RoadType::kEast;
 						f_player_field.roads = f.field->get_roads() & mask;
 					}
 
@@ -811,17 +811,17 @@ void MapPlayersViewPacket::read
 				{ //  edges
 					uint8_t mask = 0;
 					if (f_seen | bl_seen) {
-						mask  = Road_Mask << Road_SouthWest;
+						mask  = RoadType::kMask << RoadType::kSouthWest;
 					} else if (f_everseen | bl_everseen) {
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
-							try {roads  = legacy_road_bitbuffer.get() << Road_SouthWest;}
+							try {roads  = legacy_road_bitbuffer.get() << RoadType::kSouthWest;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
 									("MapPlayersViewPacket::read: player %u: in "
 									"\"%s\": node (%i, %i): unexpected end of file while "
-									"reading Road_SouthWest",
+									"reading RoadType::kSouthWest",
 									plnum, roads_filename, f.x, f.y);
 							}
 						} else {
@@ -829,17 +829,17 @@ void MapPlayersViewPacket::read
 						}
 					}
 					if (f_seen | br_seen) {
-						mask |= Road_Mask << Road_SouthEast;
+						mask |= RoadType::kMask << RoadType::kSouthEast;
 					} else if (f_everseen | br_everseen) {
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
-							try {roads |= legacy_road_bitbuffer.get() << Road_SouthEast;}
+							try {roads |= legacy_road_bitbuffer.get() << RoadType::kSouthEast;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
 									("MapPlayersViewPacket::read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
-										"reading Road_SouthEast",
+										"reading RoadType::kSouthEast",
 										plnum, roads_filename, f.x, f.y);
 							}
 						} else {
@@ -847,17 +847,17 @@ void MapPlayersViewPacket::read
 						}
 					}
 					if (f_seen |  r_seen) {
-						mask |= Road_Mask << Road_East;
+						mask |= RoadType::kMask << RoadType::kEast;
 					} else if (f_everseen |  r_everseen) {
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
-							try {roads |= legacy_road_bitbuffer.get() << Road_East;}
+							try {roads |= legacy_road_bitbuffer.get() << RoadType::kEast;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
 									("MapPlayersViewPacket::read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
-										"reading Road_East",
+										"reading RoadType::kEast",
 										plnum, roads_filename, f.x, f.y);
 							}
 						} else {

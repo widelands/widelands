@@ -29,17 +29,17 @@ abilities = {
    body = rt(
       p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
-      p(_[[If a barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
+      p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
    rt("image=tribes/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
-   rt(p(_[[The total life of a soldier. A barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
+   rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
    rt("image=tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
-   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
+   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
    -- The Atlanteans' image, because the Barbarian one has a white background
    rt("image=tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
-   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a barbarian soldier, the barbarian will lose 35·0.97 = 34 health.]])) ..
+   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a Barbarian soldier, the Barbarian will lose 35·0.97 = 34 health.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
-   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
+   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
 }
 
 battlearena1 = {
@@ -104,7 +104,7 @@ trainingcamp2 = {
    body = rt(
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
       p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no stout. Instead, they need different axes for attack training and helmets for health training.]]) ..
-      p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. To explain this in detail would lead too far at the moment. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
+      p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
       p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
    )
 }
@@ -126,13 +126,13 @@ soldier_capacity = {
    title = _"Soldier capacity",
    body = rt(
       h1(_"Adjusting the number of soldiers") ..
-      p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
+      p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every building has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
       p(_[[Let me also describe what the numbers in the statistics string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]]) ..
-      listitem_bullet(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers are maybe attacking an enemy. They will return when they have been successful.]]) ..
-      listitem_bullet(_[[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two have maybe died. They will be replaced by new soldiers from your warehouse, if possible.]])
+      listitem_bullet(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers may be attacking an enemy. They will return when they have been successful.]]) ..
+      listitem_bullet(_[[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two may have died. They will be replaced by new soldiers from your warehouse, if possible.]])
    )
 }
 
@@ -175,7 +175,7 @@ fortress_enhancement = {
       h1(_"Enhance Your Fortress") ..
       paragraphdivider() ..
       listitem_bullet(_[[Enhance your fortress to a mighty citadel.]]) ..
-      listitem_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
+      listitem_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the Barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
    )
 }
 

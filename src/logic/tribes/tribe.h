@@ -30,6 +30,7 @@
 #include "logic/description_maintainer.h"
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
+#include "logic/road_textures.h"
 #include "logic/ship.h"
 #include "logic/tribes/tribe_basic_info.h"
 #include "logic/tribes/tribes.h"
@@ -103,6 +104,19 @@ public:
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
 
+	// A vector of all texture images that can be used for drawing a
+	// (normal|busy) road. The images are guaranteed to exist.
+	const std::vector<std::string>& normal_road_paths() const;
+	const std::vector<std::string>& busy_road_paths() const;
+
+	// Add the corresponding texture (which probably resides in a
+	// texture atlas) for roads.
+	void add_normal_road_texture(std::unique_ptr<Texture> texture);
+	void add_busy_road_texture(std::unique_ptr<Texture> texture);
+
+	// The road textures used for drawing roads.
+	const RoadTextures& road_textures() const;
+
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
@@ -134,6 +148,9 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	std::vector<std::string> normal_road_paths_;
+	std::vector<std::string> busy_road_paths_;
+	RoadTextures road_textures_;
 
 	std::vector<BuildingIndex>     buildings_;
 	std::set<int>               immovables_;  // The player immovables

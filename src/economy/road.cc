@@ -99,7 +99,7 @@ Road & Road::create
 	Player & owner          = start.owner();
 	Road & road             = *new Road();
 	road.set_owner(&owner);
-	road.m_type             = Road_Normal;
+	road.m_type             = RoadType::kNormal;
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
@@ -224,7 +224,7 @@ void Road::_unmark_map(EditorGameBase & egbase) {
 			Direction const rdir = 2 * (dir - WALK_E);
 
 			if (rdir <= 4)
-				egbase.set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, RoadType::kNone);
 		}
 
 		// mark the road that leads away from this field
@@ -233,7 +233,7 @@ void Road::_unmark_map(EditorGameBase & egbase) {
 			Direction const rdir = 2 * (dir - WALK_E);
 
 			if (rdir <= 4)
-				egbase.set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, RoadType::kNone);
 
 			map.get_neighbour(curf, dir, &curf);
 		}
@@ -293,7 +293,7 @@ void Road::_link_into_flags(EditorGameBase & egbase) {
 			} else if
 				(!slot.carrier_request &&
 				 (slot.carrier_type == 1 ||
-				  m_type == Road_Busy)) {
+				  m_type == RoadType::kBusy)) {
 				_request_carrier(slot);
 			}
 		}
@@ -584,7 +584,7 @@ void Road::postsplit(Game & game, Flag & flag)
 			(!slot.carrier.get(game) &&
 			 !slot.carrier_request &&
 			 (slot.carrier_type == 1 ||
-			  m_type == Road_Busy)) {
+			  m_type == RoadType::kBusy)) {
 			_request_carrier(slot);
 		}
 	}
@@ -632,7 +632,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 								// ie: cancelling current task
 								m_carrier_slots[1].carrier = nullptr;
 								m_carrier_slots[1].carrier_request = nullptr;
-								m_type = Road_Normal;
+								m_type = RoadType::kNormal;
 								_mark_map(game);
 							}
 						}
@@ -648,7 +648,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	if (100 < tdelta) {
 		m_busyness_last_update = gametime;
 		if (500 < (m_busyness += 10)) {
-			m_type = Road_Busy;
+			m_type = RoadType::kBusy;
 			_mark_map(game);
 			for (CarrierSlot& slot : m_carrier_slots) {
 				if

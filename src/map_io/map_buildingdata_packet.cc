@@ -521,8 +521,8 @@ void MapBuildingdataPacket::read_warehouse
 
 			assert(warehouse.m_incorporated_workers.empty());
 			{
-				uint16_t const nr_workers = fr.unsigned_16();
-				for (uint16_t i = 0; i < nr_workers; ++i) {
+				uint16_t const nrworkers = fr.unsigned_16();
+				for (uint16_t i = 0; i < nrworkers; ++i) {
 					uint32_t const worker_serial = fr.unsigned_32();
 
 					try {

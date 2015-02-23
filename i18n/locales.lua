@@ -145,6 +145,12 @@ return {
 		font = "hebrew"
 	},
 
+	hi = {
+		name = "हिन्दी",
+		sort_name = "Hindi",
+		font = "devanagari"
+	},
+
 	hr = {
 		name = "Hrvatski",
 		sort_name = "Hrvatski",
