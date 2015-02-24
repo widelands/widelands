@@ -200,8 +200,8 @@ LuaTextHelpWindow::LuaTextHelpWindow
 		std::unique_ptr<LuaTable> t(
 			lua->run_script("tribes/scripting/format_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
-		cr->push_arg(&building_description);
 		cr->push_arg(tribe.name());
+		cr->push_arg(building_description.name());
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea->set_text(help_text);

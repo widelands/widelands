@@ -79,22 +79,23 @@ int wares_map_to_lua(lua_State* L, const Buildcost& wares_map) {
 }
 
 // Pushes a lua table of tables with food ware names on the stack. Returns 1.
+// Resulting table will look e.g. like {{"barbarians_bread"}, {"fish", "meat"}}
 int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& table) {
 	lua_newtable(L);
-	int counter = 1;
+	int counter = 0;
 	for (const std::vector<std::string>& foodlist : table) {
-		lua_pushnumber(L, counter);
+		lua_pushnumber(L, ++counter);
 		lua_newtable(L);
+		int counter2 = 0;
 		for (const std::string& foodname : foodlist) {
+			lua_pushnumber(L, ++counter2);
 			lua_pushstring(L, foodname);
-			lua_settable(L, -2);
+			lua_settable(L,-3);
 		}
-		lua_settable(L, -3);
-		++counter;
+		lua_settable(L,-3);
 	}
 	return 1;
 }
-
 
 struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
@@ -1813,7 +1814,8 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 /* RST
 	.. attribute:: food_attack
 
-		(RO) A table of tables with food ware names used for Attack training
+		(RO) A table of tables with food ware names used for Attack training,
+			  e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_attack(lua_State * L) {
 	return food_list_to_lua(L, get()->get_food_attack());
@@ -1822,7 +1824,8 @@ int LuaTrainingSiteDescription::get_food_attack(lua_State * L) {
 /* RST
 	.. attribute:: food_defense
 
-		(RO) A table of tables with food ware names used for Defense training
+		(RO) A table of tables with food ware names used for Defense training,
+			  e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_defense(lua_State * L) {
 	return food_list_to_lua(L, get()->get_food_defense());
@@ -1831,7 +1834,8 @@ int LuaTrainingSiteDescription::get_food_defense(lua_State * L) {
 /* RST
 	.. attribute:: food_evade
 
-		(RO) A table of tables with food ware names used for Evade training
+		(RO) A table of tables with food ware names used for Evade training,
+			  e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_evade(lua_State * L) {
 	return food_list_to_lua(L, get()->get_food_evade());
@@ -1841,7 +1845,8 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State * L) {
 /* RST
 	.. attribute:: food_hp
 
-		(RO) A table of tables with food ware names used for Health training
+		(RO) A table of tables with food ware names used for Health training,
+			  e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
 int LuaTrainingSiteDescription::get_food_hp(lua_State * L) {
 	return food_list_to_lua(L, get()->get_food_hp());

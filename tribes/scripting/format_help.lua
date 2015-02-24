@@ -145,20 +145,20 @@ end
 function dependencies_training_food(foods)
 	local result = ""
 	for countlist, foodlist in pairs(foods) do
-		local images = ""
-		local text = ""
+		local food_warenames = {}
+		local food_images = {}
 		for countfood, food in pairs(foodlist) do
 			local ware_description = wl.Game():get_ware_description(food)
-			if(countfood > 1) then
-				images = images .. ";"
-				text = _"%1$s or %2$s":bformat(text, ware_description.descname)
-			else
-				text = ware_description.descname
-			end
-			images = ware_description.icon_name
+			food_warenames[countfood] = ware_description.descname
+			food_images[countfood] = ware_description.icon_name
 		end
-		if(countlist > 1) then
+		local text = localize_list(food_warenames, "or")
+		if (countlist > 1) then
 			text = _"%s and":bformat(text)
+		end
+		local images = food_images[1]
+		for k,v in ipairs({table.unpack(food_images,2)}) do
+			images = images .. ";" .. v
 		end
 		result = image_line(images, 1, p(text)) .. result
 	end
@@ -175,7 +175,7 @@ end
 --    :returns: a list weapons images with the producing and receiving building
 --
 function dependencies_training_weapons(weapons)
-	local result;
+	local result = "";
 	local producers;
 	for count, weaponname in pairs(weapons) do
 		local weapon_description = wl.Game():get_ware_description(weaponname)
@@ -188,6 +188,7 @@ function dependencies_training_weapons(weapons)
 	end
 
 	local building_count = 0;
+	--[[ NOCOM nil here
 	for manufacturer, weaponnames in ipairs(producers) do
 		local manufacturer_description = wl.Game():get_building_description(manufacturer)
 		local weaponsstring = ""
@@ -213,6 +214,7 @@ function dependencies_training_weapons(weapons)
 				rt(p(manufacturer_description.descname))
 		)
 	end
+	]]
 	return result
 end
 
@@ -227,13 +229,11 @@ end
 --
 --    Creates the string for the general section in building help
 --
---    :arg building_description: The building's building description from C++
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(building_description)
-	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
-	local building_description = wl.Game():get_building_description(building_description.name)
-
 	local helptexts = building_description.helptexts
 	local result = rt(h2(_"Lore")) ..
 		rt("image=" .. building_description.representative_image, p(helptexts["lore"]))
@@ -317,17 +317,16 @@ end
 
 
 -- RST
--- .. function:: building_help_dependencies_production(tribename, building_description)
+-- .. function:: building_help_dependencies_production(tribe, building_description)
 --
 --    The input and output wares of a productionsite
 --
---    :arg tribename: e.g. "barbarians".
---    :arg building_description: The building description we get from C++
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_dependencies_production(tribename, building_description)
-	local building_description = wl.Game():get_building_description(building_description.name)
-	local tribe = wl.Game():get_tribe_description(tribename)
+function building_help_dependencies_production(tribe, building_description)
 	local result = ""
 	local hasinput = false
 
@@ -395,7 +394,7 @@ function building_help_dependencies_production(tribename, building_description)
 	for i, ware_description in ipairs(building_description.output_ware_types) do
 
 		-- Constructionsite isn't listed with the consumers, so we need a special check
-		if (ware_description:is_construction_material(tribename)) then
+		if (ware_description:is_construction_material(tribe.name)) then
 			local constructionsite_description =
 			   wl.Game():get_building_description("constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
@@ -429,32 +428,33 @@ function building_help_dependencies_production(tribename, building_description)
 end
 
 -- RST
--- .. function:: building_help_dependencies_training(tribename, building_description)
+-- .. function:: building_help_dependencies_training(tribe, building_description)
 --
 --    Shows the production dependencies for a training site.
 --
---    :arg tribename: name of the tribe.
---    :arg building_description: the trainingsite's building description from C++
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: rt string with training dependencies information.
 --
-function building_help_dependencies_training(tribename, building_description)
+function building_help_dependencies_training(tribe, building_description)
 	local result = rt(h2(_"Dependencies"))
 	if(building_description.max_hp and building_description.min_hp) then
 		result = result .. rt(h3(_"Health Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
-				"tribes/workers/" .. tribename .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
+				"tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
 				building_description.icon_name,
-				"tribes/workers/" .. tribename .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
+				"tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
 		result = result .. dependencies_training_food(building_description.food_hp)
 		result = result .. dependencies_training_weapons(building_description.weapons_hp)
 	end
 	if(building_description.max_attack and building_description.min_attack) then
 		result = result .. rt(h3(_"Attack Training:")) .. rt(h3(_"Soldiers:")) ..
 			dependencies_basic({
-				"tribes/workers/" .. tribename .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
+				"tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
 				building_description.icon_name,
-				"tribes/workers/" .. tribename .. "/soldier/attack_level" .. (building_description.max_attack + 1) ..".png"})
+				"tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. (building_description.max_attack + 1) ..".png"})
 		result = result .. dependencies_training_food(building_description.food_attack)
 		result = result .. dependencies_training_weapons(building_description.weapons_attack)
 	end
@@ -462,9 +462,9 @@ function building_help_dependencies_training(tribename, building_description)
 		result = result .. rt(h3(_"Defense Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
-				"tribes/workers/" .. tribename .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
+				"tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
 				building_description.icon_name,
-				"tribes/workers/" .. tribename .. "/soldier/defense_level" .. (building_description.max_defense + 1) ..".png"})
+				"tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. (building_description.max_defense + 1) ..".png"})
 		result = result .. dependencies_training_food(building_description.food_defense)
 		result = result .. dependencies_training_weapons(building_description.weapons_defense)
 	end
@@ -472,9 +472,9 @@ function building_help_dependencies_training(tribename, building_description)
 		result = result .. rt(h3(_"Evade Training:")) .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
-				"tribes/workers/" .. tribename .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
+				"tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
 				building_description.icon_name,
-				"tribes/workers/" .. tribename .. "/soldier/evade_level" .. (building_description.max_evade + 1) ..".png"})
+				"tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. (building_description.max_evade + 1) ..".png"})
 		result = result .. dependencies_training_food(building_description.food_evade)
 		result = result .. dependencies_training_weapons(building_description.weapons_evade)
 	end
@@ -506,7 +506,8 @@ end
 --
 --    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
---    :arg building_description: The building description we get from C++
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: an rt string describing the building section
 --
 function building_help_building_section(building_description)
@@ -685,14 +686,16 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(building_description)
+-- .. function building_help_crew_string(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :arg building_description: the building_description from C++.
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribename, building_description)
+function building_help_crew_string(tribe, building_description)
 
 	local result = ""
 
@@ -727,7 +730,7 @@ function building_help_crew_string(tribename, building_description)
 			end
 		end
 
-		result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
+		result = result .. building_help_tool_string(tribe, toolnames, number_of_workers)
 
 		if(becomes_description) then
 
@@ -756,20 +759,19 @@ end
 
 
 -- RST
--- .. function building_help_tool_string(tribename, toolname, no_of_workers)
+-- .. function building_help_tool_string(tribe, toolname, no_of_workers)
 --
 --    Displays tools with an intro text and images
 --
---    :arg tribename: e.g. "atlanteans".
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
 --    :arg toolnames: e.g. {"shovel", "basket"}.
 --    :arg no_of_workers: the number of workers using the tools; for plural formatting.
 --    :returns: text_line for the tools
 --
-function building_help_tool_string(tribename, toolnames, no_of_workers)
+function building_help_tool_string(tribe, toolnames, no_of_workers)
 	local result = ""
 	local game  = wl.Game();
 	for i, toolname in ipairs(toolnames) do
-		local tribe = wl.Game():get_tribe_description(tribename)
 		if (tribe:has_ware(toolname)) then
 			local ware_description = game:get_ware_description(toolname)
 			result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
@@ -786,7 +788,8 @@ end
 --
 --    Displays the production/performance section with a headline
 --
---    :arg building_description: The building's building description from C++
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: rt for the production section
 --
 function building_help_production_section(building_description)
@@ -804,17 +807,17 @@ end
 --
 --    Main function to create a building help string.
 --
---    :arg building_description: The building's building description from C++
---    :arg tribename: The name of the tribe that is used for tribe-specific information.
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
-function building_help(building_description, tribename)
-	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
-	local building_description = wl.Game():get_building_description(building_description.name)
+function building_help(tribe, building_description)
+
 	if (building_description.type_name == "productionsite") then
 		return building_help_general_string(building_description) ..
-			building_help_dependencies_production(tribename, building_description) ..
-			building_help_crew_string(tribename, building_description) ..
+			building_help_dependencies_production(tribe, building_description) ..
+			building_help_crew_string(tribe, building_description) ..
 			building_help_building_section(building_description) ..
 			building_help_production_section(building_description)
 	elseif (building_description.type_name == "militarysite") then
@@ -831,10 +834,9 @@ function building_help(building_description, tribename)
 				building_help_building_section(building_description)
 		end
 	elseif (building_description.type_name == "trainingsite") then
-		-- NOCOM attempt to index a number value
 		return building_help_general_string(building_description) ..
-			building_help_dependencies_training(tribename, building_description) ..
-			building_help_crew_string(building_description) ..
+			building_help_dependencies_training(tribe, building_description) ..
+			building_help_crew_string(tribe, building_description) ..
 			building_help_building_section(building_description) ..building_help_production_section(building_description)
 	elseif (building_description.type_name == "constructionsite" or
 				building_description.type_name == "dismantlesite") then
@@ -847,7 +849,9 @@ end
 
 -- The main function call
 return {
-   func = function(building_description, tribename)
-		return building_help(building_description, tribename)
+   func = function(tribename, buildingname)
+		local tribe = wl.Game():get_tribe_description(tribename)
+		local building_description = wl.Game():get_building_description(buildingname)
+		return building_help(tribe, building_description)
    end
 }
