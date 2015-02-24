@@ -407,8 +407,7 @@ m_program     (nullptr),
 m_program_ptr (0),
 m_anim_construction_total(0),
 m_anim_construction_done(0),
-m_program_step(0),
-m_reserved_by_worker(false)
+m_program_step(0)
 {}
 
 Immovable::~Immovable()
@@ -582,21 +581,7 @@ void Immovable::draw_construction
 }
 
 
-/**
- * Returns whether this immovable was reserved by a worker.
- */
-bool Immovable::is_reserved_by_worker() const
-{
-	return m_reserved_by_worker;
-}
 
-/**
- * Change whether this immovable is marked as reserved by a worker.
- */
-void Immovable::set_reserved_by_worker(bool reserve)
-{
-	m_reserved_by_worker = reserve;
-}
 
 /**
  * Set the current action's data to \p data.
@@ -690,8 +675,9 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-	if (version >= 3)
-		imm.m_reserved_by_worker = fr.unsigned_8();
+    //TODO(daAlx1): loading of m_reserved_by_worker must move to MapObject.load
+    //if (version >= 3)
+    //imm.m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
 		std::string dataname = fr.c_string();
@@ -753,7 +739,7 @@ void Immovable::save
 	fw.unsigned_32(m_program_ptr);
 	fw.signed_32(m_program_step);
 
-	fw.unsigned_8(m_reserved_by_worker);
+    //TODO(daAlx1): fw.unsigned_8(m_reserved_by_worker); has moved to MapObject.save
 
 	if (m_action_data) {
 		fw.c_string(m_action_data->name());

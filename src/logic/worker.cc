@@ -390,91 +390,107 @@ bool Worker::run_setbobdescription
  */
 bool Worker::run_findobject(Game & game, State & state, const Action & action)
 {
-	CheckStepWalkOn cstep(descr().movecaps(), false);
+    CheckStepWalkOn cstep(descr().movecaps(), false);
 
-	Map & map = game.map();
-	Area<FCoords> area (map.get_fcoords(get_position()), 0);
-	if (action.sparam1 == "immovable") {
-		bool found_reserved = false;
+    Map & map = game.map();
+    Area<FCoords> area (map.get_fcoords(get_position()), 0);
+    bool found_reserved = false;
 
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))) {
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
-				}
-				return true;
-			}
-			std::vector<ImmovableFound> list;
-			if (action.iparam2 < 0)
-				map.find_reachable_immovables
-					(area, &list, cstep);
-			else
-				map.find_reachable_immovables
-					(area, &list, cstep, FindImmovableAttribute(action.iparam2));
+    if (action.sparam1 == "immovable") {
 
-			for (int idx = list.size() - 1; idx >= 0; idx--) {
-				if (upcast(Immovable, imm, list[idx].object)) {
-					if (imm->is_reserved_by_worker()) {
-						found_reserved = true;
-						list.erase(list.begin() + idx);
-					}
-					else
-					{
-						Coords const coord = imm->get_position();
-						MapIndex mapidx = map.get_index(coord, map.get_width());
-						Vision const visible = owner().vision(mapidx);
-						if (!visible) {
-							list.erase(list.begin() + idx);
-						}
-					}
-				}
-			}
+        for (;; ++area.radius) {
+            if (action.iparam1 < area.radius) {
+                send_signal(game, "fail"); //  no object found, cannot run program
+                pop_task(game);
+                if (upcast(ProductionSite, productionsite, get_location(game))) {
+                    if (!found_reserved) {
+                        productionsite->notify_player(game, 30);
+                    }
+                    else {
+                        productionsite->unnotify_player();
+                    }
+                }
+                return true;
+            }
+            std::vector<ImmovableFound> list;
+            if (action.iparam2 < 0)
+                map.find_reachable_immovables
+                        (area, &list, cstep);
+            else
+                map.find_reachable_immovables
+                        (area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
-			if (!list.empty()) {
-				set_program_objvar
-					(game, state, list[game.logic_rand() % list.size()].object);
-				break;
-			}
-		}
-	} else {
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->notify_player(game, 30);
-				return true;
-			}
-			else {
-				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->unnotify_player();
-			}
-			std::vector<Bob *> list;
-			if (action.iparam2 < 0)
-				map.find_reachable_bobs
-					(area, &list, cstep);
-			else
-				map.find_reachable_bobs
-					(area, &list, cstep, FindBobAttribute(action.iparam2));
+            for (int idx = list.size() - 1; idx >= 0; idx--) {
+                if (upcast(Immovable, imm, list[idx].object)) {
+                    if (imm->is_reserved_by_worker()) {
+                        found_reserved = true;
+                        list.erase(list.begin() + idx);
+                    }
+                    else
+                    {
+                        Coords const coord = imm->get_position();
+                        MapIndex mapidx = map.get_index(coord, map.get_width());
+                        Vision const visible = owner().vision(mapidx);
+                        if (!visible) {
+                            list.erase(list.begin() + idx);
+                        }
+                    }
+                }
+            }
 
-			if (!list.empty()) {
-				set_program_objvar
-					(game, state, list[game.logic_rand() % list.size()]);
-				break;
-			}
-		}
-	}
+            if (!list.empty()) {
+                set_program_objvar
+                        (game, state, list[game.logic_rand() % list.size()].object);
+                break;
+            }
+        }
+    } else {
+        for (;; ++area.radius) {
+            if (action.iparam1 < area.radius) {
+                send_signal(game, "fail"); //  no object found, cannot run program
+                pop_task(game);
+                if (upcast(ProductionSite, productionsite, get_location(game))){
+                    if (!found_reserved) {
+                        productionsite->notify_player(game, 30);
+                    }
+                    else {
+                        productionsite->unnotify_player();
+                    }
+                }
+                return true;
+            }
+            //Todo(DaAlx1): Check whether this else branch is a copy and paste error?
+            else {
+                if (upcast(ProductionSite, productionsite, get_location(game)))
+                    productionsite->unnotify_player();
+            }
+            std::vector<Bob *> list;
+            if (action.iparam2 < 0)
+                map.find_reachable_bobs
+                        (area, &list, cstep);
+            else
+                map.find_reachable_bobs
+                        (area, &list, cstep, FindBobAttribute(action.iparam2));
 
-	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
+            for (int idx = list.size() - 1; idx >= 0; idx--) {
+                if (upcast(MapObject, bop, list[idx])) {
+                    if (bop->is_reserved_by_worker()) {
+                        found_reserved = true;
+                        list.erase(list.begin() + idx);
+                    }
+                }
+            }
+            if (!list.empty()) {
+                set_program_objvar
+                        (game, state, list[game.logic_rand() % list.size()]);
+                break;
+            }
+
+        }
+    }
+    ++state.ivar1;
+    schedule_act(game, 10);
+    return true;
 }
 
 
@@ -1951,14 +1967,15 @@ void Worker::set_program_objvar(Game & game, State & state, MapObject * obj)
 {
 	assert(state.task == &taskProgram);
 
-	if (upcast(Immovable, imm, state.objvar1.get(game))) {
-		imm->set_reserved_by_worker(false);
-	}
+
+    if (state.objvar1.get(game)) {
+        (state.objvar1.get(game))->set_reserved_by_worker(false);
+    }
 
 	state.objvar1 = obj;
 
-	if (upcast(Immovable, imm, obj)) {
-		imm->set_reserved_by_worker(true);
+    if (obj) {
+        obj->set_reserved_by_worker(true);
 	}
 }
 

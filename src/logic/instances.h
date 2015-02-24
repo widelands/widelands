@@ -278,6 +278,28 @@ public:
 		HeaderFleet = 11,
 	};
 
+    protected:
+    /**
+     * MapObjects like trees are reserved by a worker that is walking
+     * towards them, so that e.g. two lumberjacks don't attempt to
+     * work on the same tree simultaneously or two hunters try to hunt
+     * the same animal.
+     */
+    bool m_reserved_by_worker;
+
+    public:
+
+    /**
+     * Returns whether this immovable was reserved by a worker.
+     */
+    bool is_reserved_by_worker() const;
+
+    /**
+     * Change whether this immovable is marked as reserved by a worker.
+     */
+    void set_reserved_by_worker(bool reserve);
+
+
 	/**
 	 * Static load functions of derived classes will return a pointer to
 	 * a Loader class. The caller needs to call the virtual functions
