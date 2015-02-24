@@ -31,7 +31,7 @@ class FileWrite;
 
 namespace Widelands {
 class Player;
-struct BuildingDescr;
+class BuildingDescr;
 struct Coords;
 }  // namespace Widelands
 

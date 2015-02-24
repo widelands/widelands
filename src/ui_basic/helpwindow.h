@@ -31,7 +31,7 @@
 class LuaInterface;
 
 namespace Widelands {
-struct BuildingDescr;
+class BuildingDescr;
 }
 
 namespace UI {

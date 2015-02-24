@@ -166,7 +166,7 @@ private:
 };
 
 class Immovable : public BaseImmovable {
-	friend struct ImmovableDescr;
+	friend class ImmovableDescr;
 	friend struct ImmovableProgram;
 	friend class Map;
 

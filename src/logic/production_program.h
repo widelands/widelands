@@ -41,8 +41,8 @@
 namespace Widelands {
 
 class Game;
-struct ImmovableDescr;
-struct ProductionSiteDescr;
+class ImmovableDescr;
+class ProductionSiteDescr;
 class ProductionSite;
 class TribeDescr;
 class Worker;
