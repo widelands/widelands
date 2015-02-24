@@ -6,8 +6,6 @@ tribes:new_militarysite_type {
    descname = _"Castle",
    icon = dirname .. "menu.png",
    size = "big",
-   buildable = false,
-   enhanced_building = true,
 
    enhancement_cost = {
 		planks = 5,

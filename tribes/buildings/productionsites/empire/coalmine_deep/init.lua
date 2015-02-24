@@ -6,8 +6,6 @@ tribes:new_productionsite_type {
    descname = _"Deep Coal Mine",
    icon = dirname .. "menu.png",
    size = "mine",
-   buildable = false,
-   enhanced_building = true,
 
    enhancement_cost = {
 		log = 4,

@@ -6,9 +6,6 @@ tribes:new_trainingsite_type {
    descname = _"Colosseum",
    icon = dirname .. "menu.png",
    size = "big",
-   buildable = false,
-   enhanced_building = true,
-
 
    enhancement_cost = {
 		planks = 2,

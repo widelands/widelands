@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    descname = _"Barrier",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhanced_building = true,
 
    buildcost = {
 		log = 2,

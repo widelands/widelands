@@ -6,8 +6,6 @@ tribes:new_productionsite_type {
    descname = _"Inn",
    icon = dirname .. "menu.png",
    size = "medium",
-   buildable = false,
-   enhanced_building = true,
    enhancement = "barbarians_big_inn",
 
    enhancement_cost = {

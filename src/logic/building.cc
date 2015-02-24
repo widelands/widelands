@@ -61,12 +61,13 @@ BuildingDescr::BuildingDescr
 	:
 	MapObjectDescr(_type, table.get_string("name"), init_descname),
 	egbase_         (egbase),
-	m_buildable     (true),
+	m_buildable     (false),
 	m_icon          (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
 	m_enhanced_from (INVALID_INDEX),
+	m_enhanced_building(false),
 	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
@@ -96,7 +97,6 @@ BuildingDescr::BuildingDescr
 	}
 
 	// Parse build options
-	m_buildable = table.has_key("buildable") ? table.get_bool("buildable") : true;
 	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
 	m_enhancement = INVALID_INDEX;
 
@@ -126,34 +126,32 @@ BuildingDescr::BuildingDescr
 		}
 	}
 
-	m_enhanced_building = table.has_key("enhanced_building") ? table.get_bool("enhanced_building") : false;
+	if (table.has_key("buildcost")) {
+		m_buildable = true;
+		try {
+			m_buildcost = parse_buildcost(table.get_table("buildcost"));
+			m_return_dismantle = parse_buildcost(table.get_table("return_on_dismantle"));
+		} catch (const WException & e) {
+			throw wexception
+					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
+					 e.what());
+		}
+	}
+	if (table.has_key("enhancement_cost")) {
+		m_enhanced_building = true;
+		try {
+			m_enhance_cost = parse_buildcost(table.get_table("enhancement_cost"));
+			m_return_enhanced = parse_buildcost(table.get_table("return_on_dismantle_on_enhanced"));
+		} catch (const WException & e) {
+			throw wexception
+					("An enhanced building must define \"enhancement_cost\""
+					 "and \"return_on_dismantle_on_enhanced\": %s", e.what());
+		}
+	}
 
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_icon_fname = table.get_string("icon");
-
-		// Get costs
-		if (m_buildable) {
-			try {
-				m_buildcost = parse_buildcost(table.get_table("buildcost"));
-				m_return_dismantle = parse_buildcost(table.get_table("return_on_dismantle"));
-			} catch (const WException & e) {
-				throw wexception
-						("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
-						 e.what());
-			}
-		}
-
-		if (m_enhanced_building) {
-			try {
-				m_enhance_cost = parse_buildcost(table.get_table("enhancement_cost"));
-				m_return_enhanced = parse_buildcost(table.get_table("return_on_dismantle_on_enhanced"));
-			} catch (const WException & e) {
-				throw wexception
-						("An enhanced building must define \"enhancement_cost\""
-						 "and \"return_on_dismantle_on_enhanced\": %s", e.what());
-			}
-		}
 	}
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));

@@ -6,8 +6,6 @@ tribes:new_productionsite_type {
    descname = _"Deep Iron Mine",
    icon = dirname .. "menu.png",
    size = "mine",
-   buildable = false,
-   enhanced_building = true,
    enhancement = "barbarians_ironmine_deeper",
 
    enhancement_cost = {

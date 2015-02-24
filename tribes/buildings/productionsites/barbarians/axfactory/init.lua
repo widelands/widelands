@@ -6,8 +6,6 @@ tribes:new_productionsite_type {
    descname = _"Axfactory",
    icon = dirname .. "menu.png",
    size = "medium",
-   buildable = false,
-   enhanced_building = true,
    enhancement = "barbarians_warmill",
 
    enhancement_cost = {

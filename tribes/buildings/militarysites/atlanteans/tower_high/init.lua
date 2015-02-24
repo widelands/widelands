@@ -6,9 +6,7 @@ tribes:new_militarysite_type {
    descname = _"High Tower",
    icon = dirname .. "menu.png",
    size = "medium",
-   buildable = false,
    vision_range = 21,
-   enhanced_building = true,
 
    enhancement_cost = {
 		log = 1,

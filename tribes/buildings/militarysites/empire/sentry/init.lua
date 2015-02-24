@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    descname = _"Sentry",
    icon = dirname .. "menu.png",
    size = "small",
-   enhanced_building = true,
 
    buildcost = {
 		planks = 1,

@@ -6,8 +6,6 @@ tribes:new_militarysite_type {
    descname = _"Citadel",
    icon = dirname .. "menu.png",
    size = "big",
-   buildable = false,
-   enhanced_building = true,
 
    enhancement_cost = {
 		blackwood = 9,

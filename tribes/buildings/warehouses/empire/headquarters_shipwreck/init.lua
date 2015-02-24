@@ -5,7 +5,6 @@ tribes:new_warehouse_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Headquarters Shipwreck",
    size = "big",
-   buildable = false,
    destructible = false,
 
    helptexts = {
