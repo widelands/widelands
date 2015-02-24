@@ -102,7 +102,7 @@ BuildingWindow::~BuildingWindow()
 	m_registry = nullptr;
 }
 
-namespace Widelands {struct BuildingDescr;}
+namespace Widelands {class BuildingDescr;}
 using Widelands::Building;
 
 /*

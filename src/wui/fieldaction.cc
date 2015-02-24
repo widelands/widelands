@@ -46,7 +46,7 @@
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
-namespace Widelands {struct BuildingDescr;}
+namespace Widelands {class BuildingDescr;}
 using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;

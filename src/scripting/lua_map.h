@@ -41,7 +41,7 @@
 
 namespace Widelands {
 	struct SoldierDescr;
-	struct BuildingDescr;
+	class BuildingDescr;
 	class Bob;
 	class WareDescr;
 	class WorkerDescr;

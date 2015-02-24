@@ -145,8 +145,6 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	Buildcost parse_buildcost(std::unique_ptr<LuaTable> table);
-
 	const EditorGameBase& egbase_;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
@@ -172,7 +170,7 @@ private:
 
 
 class Building : public PlayerImmovable {
-	friend struct BuildingDescr;
+	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
 
 	MO_DESCR(BuildingDescr)

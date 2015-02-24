@@ -45,7 +45,7 @@ class WareDescr;
 class Warehouse;
 class WorkerDescr;
 class World;
-struct BuildingDescr;
+class BuildingDescr;
 struct Event;
 
 /*

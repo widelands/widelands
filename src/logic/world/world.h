@@ -38,7 +38,7 @@ class EditorGameBase;
 class ResourceDescription;
 class TerrainDescription;
 struct CritterDescr;
-struct ImmovableDescr;
+class ImmovableDescr;
 
 /// This is the in memory descriptions of the world and provides access to
 /// terrains, immovables and resources.

@@ -265,33 +265,6 @@ Building & BuildingDescr::create_constructionsite() const
 	return csite;
 }
 
-Buildcost BuildingDescr::parse_buildcost(std::unique_ptr<LuaTable> table) {
-	Buildcost result;
-	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value;
-		try {
-			WareIndex const idx = egbase_.tribes().safe_ware_index(warename);
-			if (idx == INVALID_INDEX) {
-				throw GameDataError
-					("\"%s\" has not been defined as a ware type (wrong "
-					 "declaration order?)",
-					 warename.c_str());
-			}
-			value = table->get_int(warename);
-			uint8_t const count = value;
-			if (count != value) {
-				throw GameDataError("count is out of range 1 .. 255");
-			}
-			result.insert(std::pair<WareIndex, uint8_t>(idx, count));
-		} catch (const WException & e) {
-			throw GameDataError
-				("[buildcost] \"%s=%d\": %s",
-				 warename.c_str(), value, e.what());
-		}
-	}
-	return result;
-}
-
 
 /*
 ==============================

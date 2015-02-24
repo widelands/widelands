@@ -179,6 +179,29 @@ ImmovableDescr IMPLEMENTATION
 ==============================================================================
 */
 
+Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) {
+	Buildcost result;
+	for (const std::string& warename : table->keys<std::string>()) {
+		int32_t value(-1);
+		try {
+			WareIndex const idx = tribes.safe_ware_index(warename);
+			if (result.count(idx)) {
+				throw GameDataError(
+				   "a buildcost item of this ware type has already been defined: %s", warename.c_str());
+			}
+			value = table->get_int(warename);
+			uint8_t const count = value;
+			if (count != value) {
+				throw GameDataError("count is out of range 1 .. 255");
+			}
+			result.insert(std::pair<WareIndex, uint8_t>(idx, count));
+		} catch (const WException& e) {
+			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
+		}
+	}
+	return result;
+}
+
 /**
  * Parse a common immovable functions from init file.
  */
@@ -239,38 +262,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable&
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes) :
 	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
-	// NOCOM(GunChleoc): Code duplication with building.cc - refactor
 	if (table.has_key("buildcost")) {
-		std::unique_ptr<LuaTable> items_table = table.get_table("buildcost");
-		for (const std::string& key : items_table->keys<std::string>()) {
-			int32_t value;
-			try {
-				WareIndex index = tribes.ware_index(key);
-
-				if (index == INVALID_INDEX) {
-					throw GameDataError
-						("\"%s\" has not been defined as a ware/worker type (wrong "
-						 "declaration order?)",
-						 key.c_str());
-				}
-
-				if (m_buildcost.count(index)) {
-					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
-											  key.c_str());
-				}
-
-				value = items_table->get_int(key);
-				uint8_t const count = value;
-				if (count != value) {
-					throw GameDataError("count is out of range 1 .. 255");
-				}
-				m_buildcost.insert(std::pair<WareIndex, uint8_t>(index, count));
-			} catch (const WException & e) {
-				throw GameDataError
-					("[buildcost] \"%s=%d\": %s",
-					 key.c_str(), value, e.what());
-			}
-		}
+		m_buildcost = ImmovableDescr::parse_buildcost(table.get_table("buildcost"), tribes);
 	}
 
 	std::unique_ptr<LuaTable> helptexts_table = table.get_table("helptext");
