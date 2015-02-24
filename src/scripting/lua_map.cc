@@ -1983,9 +1983,11 @@ int LuaTrainingSiteDescription::get_min_hp(lua_State * L) {
 */
 int LuaTrainingSiteDescription::get_weapons_attack(lua_State * L) {
 	lua_newtable(L);
+	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_attack()) {
+		lua_pushnumber(L, ++counter);
 		lua_pushstring(L, weaponname);
-		lua_settable(L, -2);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -1997,9 +1999,11 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State * L) {
 */
 int LuaTrainingSiteDescription::get_weapons_defense(lua_State * L) {
 	lua_newtable(L);
+	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_defense()) {
+		lua_pushnumber(L, ++counter);
 		lua_pushstring(L, weaponname);
-		lua_settable(L, -2);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -2011,9 +2015,11 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State * L) {
 */
 int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
 	lua_newtable(L);
+	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_evade()) {
+		lua_pushnumber(L, ++counter);
 		lua_pushstring(L, weaponname);
-		lua_settable(L, -2);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -2025,9 +2031,11 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
 */
 int LuaTrainingSiteDescription::get_weapons_hp(lua_State * L) {
 	lua_newtable(L);
+	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_hp()) {
+		lua_pushnumber(L, ++counter);
 		lua_pushstring(L, weaponname);
-		lua_settable(L, -2);
+		lua_settable(L, -3);
 	}
 	return 1;
 }

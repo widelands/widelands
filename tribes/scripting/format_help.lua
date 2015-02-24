@@ -162,6 +162,9 @@ function dependencies_training_food(foods)
 		end
 		result = image_line(images, 1, p(text)) .. result
 	end
+	if (result ~= "") then
+		result = rt(h3(_"Food:")) .. result
+	end
 	return result
 end
 
@@ -176,45 +179,40 @@ end
 --
 function dependencies_training_weapons(weapons)
 	local result = "";
-	local producers;
+	local producers = {};
 	for count, weaponname in pairs(weapons) do
 		local weapon_description = wl.Game():get_ware_description(weaponname)
 		for i, producer in ipairs(weapon_description.producers) do
-			if (producers[producer] == nil) then
-				producers[producer] = {}
+			if (producers[producer.name] == nil) then
+				producers[producer.name] = {}
 			end
-			producers[producer][weaponname] = true;
+			producers[producer.name][weaponname] = true;
 		end
 	end
 
 	local building_count = 0;
-	--[[ NOCOM nil here
-	for manufacturer, weaponnames in ipairs(producers) do
-		local manufacturer_description = wl.Game():get_building_description(manufacturer)
+	for producer, weaponnames in pairs(producers) do
+		local producer_description = wl.Game():get_building_description(producer)
 		local weaponsstring = ""
-		for count, weapon in pairs(weaponnames) do
-			if(count > 1) then
-				weaponsstring = weaponsstring .. ";"
+		for weaponname, hasweapon in pairs(weaponnames) do
+			if (hasweapon) then
+				if(weaponsstring ~= "") then
+					weaponsstring = weaponsstring .. ";"
+				end
+				local weapon_description = wl.Game():get_ware_description(weaponname)
+				weaponsstring = weaponsstring .. weapon_description.icon_name
 			end
-			local weapon_description = wl.Game():get_ware_description(weapon)
-			weaponsstring = weaponsstring .. weapon_description.icon_name
-		end
-		local equipmentstring
-		if (building_count == 0) then
-			-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
-			equipmentstring = _"and equipment from"
-		else
-			-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
-			equipmentstring = _"or equipment from"
 		end
 		building_count = building_count + 1;
-		result = result .. rt(p(equipmentstring)) ..
+		result = result ..
 			dependencies_basic(
-				{manufacturer_description.icon_name, weaponsstring},
-				rt(p(manufacturer_description.descname))
+				{producer_description.icon_name, weaponsstring},
+				rt(p(producer_description.descname))
 		)
 	end
-	]]
+	if (result ~= "") then
+		result = rt(h3(_"Equipment:")) .. result
+	end
 	return result
 end
 
@@ -291,24 +289,6 @@ function building_help_general_string(building_description)
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 
 	elseif(building_description.type_name == "trainingsite") then
-		result = result .. rt(h3(_"Training:"))
-		if(building_description.max_attack and building_description.min_attack) then
-			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Attack", building_description.min_attack, building_description.max_attack+1)))
-		end
-		if(building_description.max_defense and building_description.min_defense) then
-			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1)))
-		end
-		if(building_description.max_evade and building_description.min_evade) then
-			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1)))
-		end
-		if(building_description.max_hp and building_description.min_hp) then
-			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Health", building_description.min_hp, building_description.max_hp+1)))
-		end
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 	end
 	result = result .. text_line(_"Vision range:", building_description.vision_range)
@@ -438,9 +418,12 @@ end
 --    :returns: rt string with training dependencies information.
 --
 function building_help_dependencies_training(tribe, building_description)
-	local result = rt(h2(_"Dependencies"))
-	if(building_description.max_hp and building_description.min_hp) then
-		result = result .. rt(h3(_"Health Training:")) .. rt(h3(_"Soldiers:"))
+	local result = ""
+	if (building_description.max_hp and building_description.min_hp) then
+		result = result .. rt(h2(_"Health Training"))
+		result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Health", building_description.min_hp, building_description.max_hp+1)))
+		result = result .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
@@ -449,8 +432,12 @@ function building_help_dependencies_training(tribe, building_description)
 		result = result .. dependencies_training_food(building_description.food_hp)
 		result = result .. dependencies_training_weapons(building_description.weapons_hp)
 	end
-	if(building_description.max_attack and building_description.min_attack) then
-		result = result .. rt(h3(_"Attack Training:")) .. rt(h3(_"Soldiers:")) ..
+	if (building_description.max_attack and building_description.min_attack) then
+		result = result .. rt(h2(_"Attack Training"))
+		-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
+		result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
+			bformat(_"Attack", building_description.min_attack, building_description.max_attack+1)))
+		result = result .. rt(h3(_"Soldiers:")) ..
 			dependencies_basic({
 				"tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
 				building_description.icon_name,
@@ -458,8 +445,11 @@ function building_help_dependencies_training(tribe, building_description)
 		result = result .. dependencies_training_food(building_description.food_attack)
 		result = result .. dependencies_training_weapons(building_description.weapons_attack)
 	end
-	if(building_description.max_defense and building_description.min_defense) then
-		result = result .. rt(h3(_"Defense Training:")) .. rt(h3(_"Soldiers:"))
+	if (building_description.max_defense and building_description.min_defense) then
+		result = result .. rt(h2(_"Defense Training"))
+		result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1)))
+				result = result .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
@@ -468,8 +458,11 @@ function building_help_dependencies_training(tribe, building_description)
 		result = result .. dependencies_training_food(building_description.food_defense)
 		result = result .. dependencies_training_weapons(building_description.weapons_defense)
 	end
-	if(building_description.max_evade and building_description.min_evade) then
-		result = result .. rt(h3(_"Evade Training:")) .. rt(h3(_"Soldiers:"))
+	if (building_description.max_evade and building_description.min_evade) then
+		result = result .. rt(h2(_"Evade Training"))
+		result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1)))
+		result = result .. rt(h3(_"Soldiers:"))
 		result = result ..
 			dependencies_basic({
 				"tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
