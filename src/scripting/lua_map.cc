@@ -1054,8 +1054,12 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
+	PROP_RO(LuaTribeDescription, buildings),
 	PROP_RO(LuaTribeDescription, descname),
 	PROP_RO(LuaTribeDescription, name),
+	PROP_RO(LuaTribeDescription, soldier),
+	PROP_RO(LuaTribeDescription, wares),
+	PROP_RO(LuaTribeDescription, workers),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1073,6 +1077,23 @@ void LuaTribeDescription::__unpersist(lua_State*) {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+	.. attribute:: buildings
+
+			(RO) an array of :class:`string` with the names of all the buildings that the tribe uses
+*/
+
+int LuaTribeDescription::get_buildings(lua_State * L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (BuildingIndex building : get()->buildings()) {
+		lua_pushinteger(L, ++counter);
+		lua_pushstring(L, get_egbase(L).tribes().get_building_descr(building)->name());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
 
 /* RST
@@ -1097,6 +1118,51 @@ int LuaTribeDescription::get_name(lua_State * L) {
 	lua_pushstring(L, get()->name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: soldier
+
+			(RO) the :class:`string` internal name of the solder type that this tribe uses
+*/
+
+int LuaTribeDescription::get_soldier(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->soldier())->name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: wares
+
+			(RO) an array of :class:`string` with the names of all the wares that the tribe uses
+*/
+
+int LuaTribeDescription::get_wares(lua_State * L) {
+	int counter = 0;
+	for (WareIndex ware : get()->wares()) {
+		lua_pushinteger(L, ++counter);
+		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware)->name());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: workers
+
+			(RO) an array of :class:`string` with the names of all the workers that the tribe uses
+*/
+
+int LuaTribeDescription::get_workers(lua_State * L) {
+	int counter = 0;
+	for (WareIndex worker : get()->workers()) {
+		lua_pushinteger(L, ++counter);
+		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(worker)->name());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 
 /* RST
 	.. method:: has_building(buildingname)
@@ -1359,17 +1425,14 @@ int LuaBuildingDescription::get_enhanced(lua_State * L) {
 			(RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
-
-	if (!get()->is_enhanced()) {
-		return 0;
-	}
-	const BuildingIndex& enhanced_from = get()->enhanced_from();
-	if (enhanced_from != INVALID_INDEX) {
+	if (get()->is_enhanced()) {
+		const BuildingIndex& enhanced_from = get()->enhanced_from();
+		assert(get_egbase(L).tribes().building_exists(enhanced_from));
+		log(" from: %s\n", get_egbase(L).tribes().get_building_descr(enhanced_from)->name().c_str());
 		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
-	} else {
-		lua_pushnil(L);
-		return 1;
 	}
+	lua_pushnil(L);
+	return 0;
 }
 
 

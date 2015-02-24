@@ -113,8 +113,12 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_buildings(lua_State *);
 	int get_descname(lua_State *);
 	int get_name(lua_State *);
+	int get_soldier(lua_State *);
+	int get_wares(lua_State *);
+	int get_workers(lua_State *);
 
 	/*
 	 * Lua methods

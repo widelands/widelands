@@ -393,7 +393,8 @@ function building_help_dependencies_production(tribename, building_description)
 
 	local outgoing = ""
 	for i, ware_description in ipairs(building_description.output_ware_types) do
-		-- constructionsite isn't listed with the consumers, so we need a special check
+
+		-- Constructionsite isn't listed with the consumers, so we need a special check
 		if (ware_description:is_construction_material(tribename)) then
 			local constructionsite_description =
 			   wl.Game():get_building_description("constructionsite")
@@ -401,35 +402,23 @@ function building_help_dependencies_production(tribename, building_description)
 															 constructionsite_description.descname)
 		end
 
+		-- Normal buildings
 		for j, consumer in ipairs(ware_description.consumers) do
 			if (tribe:has_building(consumer.name)) then
 				outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
 			end
 		end
 
-		-- soldiers aren't listed with the consumers
-		local soldier
-		-- NOCOM(GunChleoc): use tribe.soldier
-		if (tribename == "atlanteans") then
-		   soldier = wl.Game():get_worker_description("atlanteans_soldier")
-		elseif (tribename == "barbarians") then
-		   soldier = wl.Game():get_worker_description("barbarians_soldier")
-		else
-		   soldier = wl.Game():get_worker_description("empire_soldier")
-		end
-		local addsoldier = false
+		-- Soldiers aren't listed with the consumers. Get their buildcost wares and list the warehouses.
+		local soldier = wl.Game():get_worker_description(tribe.soldier)
 		for j, buildcost in ipairs(soldier.buildcost) do
-			if(buildcost == ware) then
-			local headquarters_description
-			-- NOCOM(GunChleoc): This is now atlantean_headquarters etc. Ugly hack, can this be improved? This should also include headquarters_interim and headquarters_shipwreck
-			if (tribename == "atlanteans") then
-				headquarters_description = wl.Game():get_building_description("atlanteans_headquarters")
-			elseif (tribename == "barbarians") then
-				headquarters_description = wl.Game():get_building_description("barbarians_headquarters")
-			else
-				headquarters_description = wl.Game():get_building_description("empire_headquarters")
-			end
-			outgoing = outgoing .. dependencies({ware, headquarters_description, soldier}, soldier.descname)
+			if (buildcost == ware) then
+				for k, buildingname in ipairs(tribe.buildings) do
+					local warehouse_description = wl.Game():get_building_description(buildingname)
+					if (warehouse_description.type_name == "warehouse") then
+						outgoing = outgoing .. dependencies({ware, warehouse_description, soldier}, soldier.descname)
+					end
+				end
 			end
 		end
 	end
@@ -563,11 +552,11 @@ function building_help_building_section(building_description)
 		end
 		local former_building = nil
 		if (building_description.enhanced) then
-			former_building = building_description.get_enhanced_from
+			former_building = building_description.enhanced_from
 				if (building_description.buildable) then
 					result = result .. text_line(_"Or enhanced from:", former_building.descname)
 				else
-					result = result .. text_line(_"Enhanced from:", former_building.descname) -- NOCOM: fails for mine
+					result = result .. text_line(_"Enhanced from:", former_building.descname)
 				end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
@@ -588,13 +577,14 @@ function building_help_building_section(building_description)
 
 			local former_buildings = {};
 			former_building = building_description
+
 			while former_building.enhanced do
-				former_building = former_building.get_enhanced_from
+				former_building = former_building.enhanced_from
 				table.insert(former_buildings, former_building)
 			end
 
 			for index, former in pairs(former_buildings) do
-				former_building = wl.Game():get_building_description(former)
+				former_building = wl.Game():get_building_description(former.name)
 				if (former_building.buildable) then
 					for ware, amount in pairs(former_building.build_cost) do
 						if (warescost[ware]) then
@@ -613,6 +603,7 @@ function building_help_building_section(building_description)
 					end
 				end
 			end
+
 			if (warescost ~= {}) then
 				for ware, amount in pairs(warescost) do
 					local ware_description = wl.Game():get_ware_description(ware)
@@ -642,7 +633,7 @@ function building_help_building_section(building_description)
 				end
 			end
 			for index, former in pairs(former_buildings) do
-				former_building = wl.Game():get_building_description(former)
+				former_building = wl.Game():get_building_description(former.name)
 				if (former_building.buildable) then
 					for ware, amount in pairs(former_building.returned_wares) do
 						if (warescost[ware]) then
