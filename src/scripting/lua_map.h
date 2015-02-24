@@ -114,6 +114,7 @@ public:
 	 * Properties
 	 */
 	int get_buildings(lua_State *);
+	int get_carrier(lua_State *);
 	int get_descname(lua_State *);
 	int get_name(lua_State *);
 	int get_soldier(lua_State *);

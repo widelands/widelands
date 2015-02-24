@@ -705,8 +705,7 @@ function building_help_crew_string(tribe, building_description)
 
 			-- Get the tools for the workers.
 			for j, buildcost in ipairs(worker_description.buildcost) do
-				-- NOCOM(GunChleoc): Different carrier types now
-				if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
+				if( not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
 					toolnames[#toolnames + 1] = buildcost
 				end
 			end
