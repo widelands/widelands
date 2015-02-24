@@ -129,8 +129,10 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("buildcost")) {
 		m_buildable = true;
 		try {
-			m_buildcost = parse_buildcost(table.get_table("buildcost"));
-			m_return_dismantle = parse_buildcost(table.get_table("return_on_dismantle"));
+			m_buildcost =
+					ImmovableDescr::parse_buildcost(table.get_table("buildcost"), egbase_.tribes());
+			m_return_dismantle = ImmovableDescr::parse_buildcost(
+											table.get_table("return_on_dismantle"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -140,8 +142,10 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("enhancement_cost")) {
 		m_enhanced_building = true;
 		try {
-			m_enhance_cost = parse_buildcost(table.get_table("enhancement_cost"));
-			m_return_enhanced = parse_buildcost(table.get_table("return_on_dismantle_on_enhanced"));
+			m_enhance_cost = ImmovableDescr::parse_buildcost(
+									  table.get_table("enhancement_cost"), egbase_.tribes());
+			m_return_enhanced = ImmovableDescr::parse_buildcost(
+										  table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("An enhanced building must define \"enhancement_cost\""
