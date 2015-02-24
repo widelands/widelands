@@ -114,6 +114,8 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram *>;
 
+	static Buildcost parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
+
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world); // World immovable
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes); // Tribes immovable
 	~ImmovableDescr() override;
