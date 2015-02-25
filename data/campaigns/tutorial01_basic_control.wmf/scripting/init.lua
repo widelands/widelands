@@ -5,8 +5,6 @@
 plr = wl.Game().players[1]
 map = wl.Game().map
 
-set_textdomain("scenario_tutorial01_basic_control.wmf")
-
 include "data/scripting/coroutine.lua"
 include "data/scripting/infrastructure.lua"
 include "data/scripting/messages.lua"
@@ -26,6 +24,9 @@ terminate_bad_boy_sentinel = false
 immovable_is_legal = function(i) return false end
 
 include "map:scripting/starting_conditions.lua"
+
+-- Starting conditions switch the textdomain
+set_textdomain("scenario_tutorial01_basic_control.wmf")
 
 include "map:scripting/texts.lua"
 include "map:scripting/helper_functions.lua"

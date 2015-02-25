@@ -24,16 +24,17 @@
 #endif
 
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2
@@ -59,7 +60,8 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
+	const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset().serif(),
+														 UI_FONT_SIZE_SMALL);
 	m_label_rectangle.x = xres / 4;
 	m_label_rectangle.w = xres / 2;
 	m_label_rectangle.y =
@@ -67,7 +69,8 @@ void ProgressWindow::draw_background
 	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
 	const Image* bg = g_gr->images().get(m_background);
-	rt.blitrect_scale(Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()));
+	rt.blitrect_scale(
+	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
 
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;

@@ -1,25 +1,23 @@
-# Widelands po/es_ES/maps.po
-# Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2013-11-16 04:13+0000\n"
-"Last-Translator: Joseph Molina <joey_011092@hotmail.com>\n"
-"Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:37+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/atl01.wmf/elemental:9
+#: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
 msgstr ""
 
@@ -29,7 +27,7 @@ msgid ""
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
 
-#: ../../campaigns/bar01.wmf/elemental:8
+#: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
 msgstr ""
 
@@ -39,7 +37,7 @@ msgid ""
 "introduced."
 msgstr ""
 
-#: ../../campaigns/bar02.wmf/elemental:7
+#: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
 msgstr ""
 
@@ -49,6 +47,91 @@ msgid ""
 "and will introduce fighting."
 msgstr ""
 
+#: ../../campaigns/campaigns.conf:27
+msgid "The Second Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:29
+msgid "Barbarians"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:31
+msgid "Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:32
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:35
+msgid "The Months of Exile"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:37
+msgid "Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:39
+msgid "Easy. Introduces the Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:40
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:43
+msgid "The Run for the Fire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:45
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:47
+msgid "Challenging. Introduces the Atlanteans"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:48
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Todavía no implementado"
@@ -61,21 +144,13 @@ msgstr ""
 msgid "Sorry, this map is not yet implemented."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr ""
-
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
 "After losing an important battle against the barbarians which lead to the "
 "loss of a big part of the Empire’s territory, Lutius leaves Fremil to start "
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
-"destroys it. Only with a lot of luck he manages to beach his damaged ship on "
-"an unknown desert strand and save his people. For now."
-msgstr ""
-
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
+"destroys it. Only with a lot of luck he manages to beach his damaged ship on"
+" an unknown desert strand and save his people. For now."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:11
@@ -87,6 +162,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr ""
 
@@ -97,6 +173,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr ""
 
@@ -107,6 +184,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr ""
 
@@ -117,13 +195,14 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your "
-"economy. Recommended for players with some experience."
+"In this tutorial, you will learn what option Widelands offers to adjust your"
+" economy. Recommended for players with some experience."
 msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
@@ -141,8 +220,8 @@ msgstr ""
 #: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
-"the ways to encompass these large territories are long and meandering, so it "
-"is easy to err into the land of the foreign clans."
+"the ways to encompass these large territories are long and meandering, so it"
+" is easy to err into the land of the foreign clans."
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
@@ -162,8 +241,8 @@ msgstr "Isla del Cometa"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
-"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
-"you have not seen any reason to sail there, but yesterday a big fireball "
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
+" you have not seen any reason to sail there, but yesterday a big fireball "
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
@@ -175,12 +254,9 @@ msgstr "Cráter"
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the "
-"crater. Two tribes are now fighting for the rich resources."
-msgstr ""
-"Mucho tiempo después de que un meteorito se estrellase en un par de "
-"montañas, la vida surgió en el cráter. Dos tribus están luchado ahora por "
-"los preciados recursos."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the"
+" crater. Two tribes are now fighting for the rich resources."
+msgstr "Mucho tiempo después de que un meteorito se estrellase en un par de montañas, la vida surgió en el cráter. Dos tribus están luchado ahora por los preciados recursos."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
@@ -188,7 +264,7 @@ msgstr ""
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Tripula tu embarcación y navega hacia el horizonte."
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -207,9 +283,10 @@ msgstr "Cauce Seco"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
-"It has been a long time since the last raindrop touched these grounds. Small "
-"wonder that there is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last of the remaining water."
+"It has been a long time since the last raindrop touched these grounds. Small"
+" wonder that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of the remaining "
+"water."
 msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:7
@@ -257,9 +334,9 @@ msgstr "Juegos de fuego"
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
 "Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but no-one knows what might happen if you met an opposing "
-"tribe?"
+"your tribe woke up on this island among fire and lava? Until now it seems as"
+" if you are alone, but no-one knows what might happen if you met an opposing"
+" tribe?"
 msgstr ""
 
 #: ../../maps/Four Castles.wmf/elemental:7
@@ -270,9 +347,7 @@ msgstr "Cuatro Castillos"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
-msgstr ""
-"Bien protegidos en sus grandes fortalezas, cuatro señores de la guerra "
-"sedientos de poder están completando sus planes para dominar estas tierras..."
+msgstr "Bien protegidos en sus grandes fortalezas, cuatro señores de la guerra sedientos de poder están completando sus planes para dominar estas tierras..."
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
@@ -284,12 +359,7 @@ msgid ""
 "them and claim the resources for his own tribe? Hint I: Water can be found "
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
-msgstr ""
-"Cada tribu está rodeada por cuatro poderosas montañas. ¿Quién será el "
-"primero en conquistarlas y reclamar los recursos para su tribu? Pista 1: El "
-"agua puede ser encontrada a lo largo del río. Pista 2: Los muñecos de nieve "
-"marcan fuentes de agua adicionales. Pista 3: Cada montaña contiene solo una "
-"fuente."
+msgstr "Cada tribu está rodeada por cuatro poderosas montañas. ¿Quién será el primero en conquistarlas y reclamar los recursos para su tribu? Pista 1: El agua puede ser encontrada a lo largo del río. Pista 2: Los muñecos de nieve marcan fuentes de agua adicionales. Pista 3: Cada montaña contiene solo una fuente."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -319,8 +389,8 @@ msgstr "Guerras nevadas"
 msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr ""
 
-#: ../../maps/Ice wars.wmf/elemental:12
-#: ../../maps/Sun of fire.wmf/elemental:12
+#: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
+#: fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Las posiciones iniciales van en sentido del reloj"
 
@@ -333,10 +403,7 @@ msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr ""
-"Después del impacto de un asteroide y el duro invierno siguiente, tres islas "
-"están conectadas por hielo y piedra, fijando el fin a la coexistencia "
-"pacífica de las tres tribus."
+msgstr "Después del impacto de un asteroide y el duro invierno siguiente, tres islas están conectadas por hielo y piedra, fijando el fin a la coexistencia pacífica de las tres tribus."
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
@@ -351,13 +418,13 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Reyes y Reinas"
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
-"An old legend tells that these seven kingdoms, that have flourished for ages "
-"in prosperity, will someday collapse into a devastating war. Has your latest "
-"betrayal been one too many, and will the prophecy come true?"
+"An old legend tells that these seven kingdoms, that have flourished for ages"
+" in prosperity, will someday collapse into a devastating war. Has your "
+"latest betrayal been one too many, and will the prophecy come true?"
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
@@ -379,19 +446,19 @@ msgstr "El Último Bastión"
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth thousandfold and melted glaciers and people "
-"plunged into the deep. But now – high in the majestic mountains, on the last "
-"scrap of land – two surviving tribes are sheltering. Even though the Gods "
+"plunged into the deep. But now – high in the majestic mountains, on the last"
+" scrap of land – two surviving tribes are sheltering. Even though the Gods "
 "showed mercy and the climate thus turned cooler again, the water is still "
 "rising and rising. Onto the last secure place – the highest mountain range "
 "where the amount of gold and the space to live merely suffice for one tribe "
-"– only two opposite paths lead. But remember, be careful... this last living "
-"space is also a hard and small place to live. Don’t forget to take care of "
+"– only two opposite paths lead. But remember, be careful... this last living"
+" space is also a hard and small place to live. Don’t forget to take care of "
 "your timber supplies, you’ll need them."
 msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Largo, largo camino."
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
@@ -405,9 +472,10 @@ msgstr "De Isla en Isla"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
-"A special tournament in Atlantean culture is the so-called ‘Island Hopping’, "
-"where two or more groups try to reach the center island as fast as possible, "
-"to be the first erecting a castle on the top of the central mountain."
+"A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
+" where two or more groups try to reach the center island as fast as "
+"possible, to be the first erecting a castle on the top of the central "
+"mountain."
 msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
@@ -417,8 +485,8 @@ msgstr ""
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"have appeared and now a rivalry among smugglers has started: Which team will"
+" be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
@@ -454,12 +522,7 @@ msgid ""
 "as a sign of your superiority! Hint: In the centre is only space for one "
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
-msgstr ""
-"Sólo una pequeña colina en el centro del mapa conecta a éstas cuatro tribus "
-"rivales. ¡Lleva a tu ejército inmediatamente a ésta colina y construye una "
-"fortaleza gigante como signo de tu superioridad! Ayuda: En la colina sólo "
-"hay espacio para una fortaleza. Se puede encontrar agua en todos lados, por "
-"lo que no hay necesidad de usar geólogos."
+msgstr "Sólo una pequeña colina en el centro del mapa conecta a éstas cuatro tribus rivales. ¡Lleva a tu ejército inmediatamente a ésta colina y construye una fortaleza gigante como signo de tu superioridad! Ayuda: En la colina sólo hay espacio para una fortaleza. Se puede encontrar agua en todos lados, por lo que no hay necesidad de usar geólogos."
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
@@ -482,9 +545,7 @@ msgstr "Marismas"
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
-"Una tierra mística, repleta de diferentes paisajes, todos atravesados por un "
-"puñado de grandes ríos."
+msgstr "Una tierra mística, repleta de diferentes paisajes, todos atravesados por un puñado de grandes ríos."
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
@@ -494,8 +555,8 @@ msgstr ""
 msgid ""
 "For hundreds of years, this island was kept as a sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others "
-"followed in its wake."
+"been barefaced enough to settle on the coast of that island, a lot of others"
+" followed in its wake."
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
@@ -530,30 +591,18 @@ msgid ""
 "forests, full of big and predatory game, cut across by wetlands and hills "
 "were shrouded in mystery. The ones who had managed to come back mentioned "
 "tremendous buildings, decorated with carvings and gold from majestic "
-"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
-"some crumbly ruins remain of these good old times, covered with moss and "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only"
+" some crumbly ruins remain of these good old times, covered with moss and "
 "trees. Their shapes give only an idea about the craftsmanship of ancient "
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
-"die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
-msgstr ""
-"Algunos dicen que las tierras impenetrables del extremo norte ahuyentan "
-"incluso a los colonos más valientes y al más valiente de los guerreros "
-"valientes. Grandes y antiguos bosques, llenos de grandes depredadores, "
-"cortado por los humedales y las colinas estaban envueltas en el misterio. "
-"Los que habían conseguido volver mencionaron edificios enormes, decorados "
-"con tallas y el oro de majestuosas montañas encadenadas en algún lugar entre "
-"el desierto. Decenas de años después sólo quedan algunas ruinas "
-"desmenuzables de estos buenos viejos tiempos, cubiertas de musgo y árboles. "
-"Sus formas sólo dan una idea acerca de la artesanía de los constructores "
-"antiguos. Nadie sabe por qué desaparecieron. Nadie sabe por qué. La gente "
-"dice que ahora no hay nada bloqueando el camino hacia la riqueza. Sin "
-"embargo, muchos murieron separados por los lobos, rodeado por pantanos ... "
-"rodeados por tribus hostiles."
+"die pulled apart by wolves, engulfed by swamp... encircled by hostile "
+"tribes."
+msgstr "Algunos dicen que las tierras impenetrables del extremo norte ahuyentan incluso a los colonos más valientes y al más valiente de los guerreros valientes. Grandes y antiguos bosques, llenos de grandes depredadores, cortado por los humedales y las colinas estaban envueltas en el misterio. Los que habían conseguido volver mencionaron edificios enormes, decorados con tallas y el oro de majestuosas montañas encadenadas en algún lugar entre el desierto. Decenas de años después sólo quedan algunas ruinas desmenuzables de estos buenos viejos tiempos, cubiertas de musgo y árboles. Sus formas sólo dan una idea acerca de la artesanía de los constructores antiguos. Nadie sabe por qué desaparecieron. Nadie sabe por qué. La gente dice que ahora no hay nada bloqueando el camino hacia la riqueza. Sin embargo, muchos murieron separados por los lobos, rodeado por pantanos ... rodeados por tribus hostiles."
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "El Nilo"
 
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
@@ -567,8 +616,8 @@ msgstr "El Triángulo de Oasis"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
-"There is something mystical like a gray atmosphere around these three oases, "
-"which no one has found out about yet. Perhaps you will be the one, but be "
+"There is something mystical like a gray atmosphere around these three oases,"
+" which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
 
@@ -593,10 +642,10 @@ msgstr ""
 msgid ""
 "This island once appeared out of the deepest depths of the sea. In those "
 "days, fire rose out of the salty seawater and brought ash, stones and soil "
-"to light. And the fire came nearer and nearer to the sun, while the mountain "
-"grew and grew. Until one day, when the whole fire mountain exploded. "
-"Nowadays only this ring is left from that mighty fire mountain. Do you think "
-"that it is big enough for more than one tribe?"
+"to light. And the fire came nearer and nearer to the sun, while the mountain"
+" grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you think"
+" that it is big enough for more than one tribe?"
 msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
@@ -605,8 +654,8 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way but to occupy the land of your enemies."
+"Another strange test by the Gods. To reach the other side, there seems to be"
+" no other way but to occupy the land of your enemies."
 msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
@@ -628,10 +677,7 @@ msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
-msgstr ""
-"Poderosas montañas dividen esta tierra en tres fértiles valles. Pero una "
-"caminoconecta los valles y por tanto la lucha parece inevitable. Pista: "
-"Puede encontrase agua alrededor de los lagos."
+msgstr "Poderosas montañas dividen esta tierra en tres fértiles valles. Pero una caminoconecta los valles y por tanto la lucha parece inevitable. Pista: Puede encontrase agua alrededor de los lagos."
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
@@ -645,32 +691,32 @@ msgid ""
 "those that could not produce them. Based on these trades, a very friendly "
 "commerce was common between the four harbors and the people living on the "
 "Craw Islands – until recently, when two of the harbors united to form an "
-"exclusive trade alliance, forcing the other two to do the same. Suddenly, it "
-"seems only a matter of time before the first fights between the harbors will "
-"shatter the peaceful life that has lasted for so long..."
+"exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
+" seems only a matter of time before the first fights between the harbors "
+"will shatter the peaceful life that has lasted for so long..."
 msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tridente de Fuego"
 
 #: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting "
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to "
-"explore enough resources to compete with its opponents."
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
 msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, "
-"black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
+"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
+" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Lagunas Gemelas"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""
@@ -690,9 +736,7 @@ msgstr "aguas parpadeantes"
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
-msgstr ""
-"Muchas bellas islas verdes esperan a los mas valientes capaces de pasar las "
-"mil olas, brillando en el sol."
+msgstr "Muchas bellas islas verdes esperan a los mas valientes capaces de pasar las mil olas, brillando en el sol."
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
@@ -704,13 +748,13 @@ msgstr ""
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Invierno Volcanico"
 
 #: ../../maps/Volcanic Winter.wmf/elemental:11
 msgid ""
 "In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left "
-"were those that enforced this dramatic change. Continents, oceans and seas "
+"Suddenly, the sun seemed to be gone and the only light and heat sources left"
+" were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
 msgstr ""
 
@@ -720,8 +764,8 @@ msgstr "Guerra de Valles"
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
-"It is said that even the sun and moon must find their way between the spires "
-"of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
+"It is said that even the sun and moon must find their way between the spires"
+" of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
 msgstr ""
 
@@ -732,7 +776,7 @@ msgstr "Valle Wisent"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
 "It seems as if this magical valley has been inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offered enough space for a peaceful life. But can your tribe live in peace "
+"beginning of days. When your tribe came to this place, you were sure that it"
+" offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""

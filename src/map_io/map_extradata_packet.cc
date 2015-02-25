@@ -21,7 +21,6 @@
 
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -59,7 +58,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 					const std::string hash = std::string("map:") + FileSystem::fs_filename(pname->c_str());
 					const Image* image = nullptr;
 					if (!g_gr->images().has(hash)) {
-						image = g_gr->images().insert(new_in_memory_image(hash, load_image(*pname, &fs)));
+						image = g_gr->images().insert(hash, load_image(*pname, &fs));
 					} else {
 						image = g_gr->images().get(hash);
 					}

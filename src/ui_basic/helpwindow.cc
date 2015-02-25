@@ -28,14 +28,16 @@
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -83,7 +85,8 @@ HelpWindow::HelpWindow
 		 ImageCatalog::Key::kButton0,
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
-	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
+	btn->set_font(Font::get((UI::g_fh1->fontset()).serif(),
+									(fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
 }

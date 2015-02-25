@@ -1,24 +1,22 @@
-# Widelands po/es_ES/campaigns/emp02.wmf.po
-# Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Kiba Gasteiz <kibafang@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2010-11-21 10:36+0000\n"
-"Last-Translator: Siz <siz-asuka@hotmail.com>\n"
-"Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:38+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
@@ -26,11 +24,11 @@ msgstr "Crea una economía maderera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Wood Economy"
-msgstr ""
+msgstr "Economía maderera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Construye tres casas de leñadores, una de silvicultor y un aserradero."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
@@ -38,7 +36,7 @@ msgstr "Construye una cantera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
-msgstr ""
+msgstr "Cantera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
@@ -46,11 +44,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
-msgstr "Piedra para la colonia"
+msgstr "Protege tu colonia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:48
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "Protege tu colonia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some barracks and sentries around the colony."
@@ -62,7 +60,7 @@ msgstr "Empieza a minar mármol"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:57
 msgid "Marble"
-msgstr ""
+msgstr "Mármol"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Expand to the east, to start mining marble from the mountain."
@@ -79,23 +77,23 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, "
-"armor smithy and smelting works)."
+"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
+" armor smithy and smelting works)."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
-msgstr "Provea a sus mineros de comida"
+msgstr "Provee a tus mineros con comida"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Comida para tus mineros"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
-"To supply them with some good and strong drinks, we could build up a brewery "
-"and a winery."
+"To supply them with some good and strong drinks, we could build up a brewery"
+" and a winery."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
@@ -114,8 +112,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least "
-"rations, which are produced out of bread OR meat OR fish."
+"mines need beer, marble and gold mines need wine and all mines need at least"
+" rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
@@ -137,8 +135,8 @@ msgid "To watch deep inside the enemy territory, build a tower."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
-msgid "Destroy the barbarian tribe"
-msgstr "Destruya a la tribu Bárbara"
+msgid "Destroy the Barbarian tribe"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -147,14 +145,14 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
-"barbarian buildings."
+"Barbarian buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the barbarian "
-"headquarters stood before), to avoid new settlements of other tribes in that "
-"region."
+"Finally, build up a fortress on the peninsula (near where the Barbarian "
+"headquarters stood before), to avoid new settlements of other tribes in that"
+" region."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
@@ -175,8 +173,8 @@ msgstr "Diario de Lutius"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
-"Finally! This island appears to have been made for us, it is a gift from the "
-"Gods to my people and myself. Until now, we have only seen a small part of "
+"Finally! This island appears to have been made for us, it is a gift from the"
+" Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
 msgstr ""
@@ -201,8 +199,8 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the "
-"present, and build a few lumberjack’s houses and a sawmill to produce some "
+"But until that day, may many years pass! For now, we must concentrate on the"
+" present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
 msgstr ""
 
@@ -231,7 +229,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Madera para la colonia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
@@ -241,7 +239,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
-msgstr ""
+msgstr "Piedra para la colonia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:148
 msgid ""
@@ -259,8 +257,8 @@ msgstr "Saledus parece descontento"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which "
-"gives me a sinking feeling in my stomach and spreads waves of fear in my "
+"Greetings Lutius, I don’t want to start a panic, but I found something which"
+" gives me a sinking feeling in my stomach and spreads waves of fear in my "
 "heart. As I walked down to the southern shore, I found the remains of "
 "another ship. I don’t know whether these parts are all that is left of that "
 "ship. In any case, these parts do not seem to be old."
@@ -280,7 +278,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Marble on the Mountain"
-msgstr ""
+msgstr "Mármol en la montaña"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:165
 msgid "Saledus smiles"
@@ -289,8 +287,9 @@ msgstr "Saledus sonríe"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am "
-"right – but I believe we could mine marble from some places on the mountain."
+"larger mountain. I am not absolutely sure – a geologist should check if I am"
+" right – but I believe we could mine marble from some places on the "
+"mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -306,7 +305,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
-msgstr ""
+msgstr "Montañas lejanas"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Saledus is amazed"
@@ -317,8 +316,8 @@ msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
 "of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
-"smithies."
+"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
+" smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
@@ -334,7 +333,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:186
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Comida para los mineros"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid "Amalea enters…"
@@ -370,8 +369,8 @@ msgstr "Amalea sonríe..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
-"they serve is really tasty. You really should have a drink there, too."
+"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
+" they serve is really tasty. You really should have a drink there, too."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
@@ -386,15 +385,15 @@ msgstr "Los Bárbaros"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
-"By the Gods! This is absolutely terrible. It seems as if we stand close to a "
-"test – and it seems as if Saledus was right with his fear concerning the "
+"By the Gods! This is absolutely terrible. It seems as if we stand close to a"
+" test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
-"of one of those hated, evil, barbarian tribes with whom we have had so many "
+"of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
 msgstr ""
 
@@ -434,15 +433,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
-"There are still a few barbarians hiding on our island, but I am sure that we "
-"will find them soon. Every barbarian who doesn’t attack us will be put in a "
-"boat with the other peaceful ones, and sent back to their country."
+"There are still a few Barbarians hiding on our island, but I am sure that we"
+" will find them soon. Every Barbarian who doesn’t attack us will be put in a"
+" boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
-"barbarians from the island."
+"Barbarians from the island."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238
@@ -451,7 +450,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
-msgstr ""
+msgstr "7 días después..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"
@@ -479,7 +478,7 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

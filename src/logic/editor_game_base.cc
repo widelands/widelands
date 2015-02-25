@@ -32,6 +32,9 @@
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
+#include "graphic/texture_atlas.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/constants.h"
@@ -47,8 +50,8 @@
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
+#include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
@@ -282,7 +285,34 @@ void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 		tribe_descr->load_graphics();
 	}
 
-	// TODO(unknown): load player graphics? (maybe)
+	// Construct and hold on to the texture atlas that contains all road images.
+	TextureAtlas ta;
+
+	// These will be deleted at the end of the method.
+	std::vector<std::unique_ptr<Texture>> individual_textures_;
+	for (auto* tribe : tribes_) {
+		for (const std::string& texture_path : tribe->normal_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+		for (const std::string& texture_path : tribe->busy_road_paths()) {
+			individual_textures_.emplace_back(load_image(texture_path, g_fs));
+			ta.add(*individual_textures_.back());
+		}
+	}
+
+	std::vector<std::unique_ptr<Texture>> textures;
+	road_texture_ = ta.pack(&textures);
+
+	size_t next_texture_to_move = 0;
+	for (auto* tribe : tribes_) {
+		for (size_t i = 0; i < tribe->normal_road_paths().size(); ++i) {
+			tribe->add_normal_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+		for (size_t i = 0; i < tribe->busy_road_paths().size(); ++i) {
+			tribe->add_busy_road_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+	}
 }
 
 /**
@@ -516,12 +546,12 @@ void EditorGameBase::set_road
 	assert(&first_field <= f.field);
 	assert                (f.field < &first_field + m.max_index());
 	assert
-		(direction == Road_SouthWest ||
-		 direction == Road_SouthEast ||
-		 direction == Road_East);
+		(direction == RoadType::kSouthWest ||
+		 direction == RoadType::kSouthEast ||
+		 direction == RoadType::kEast);
 	assert
-		(roadtype == Road_None || roadtype == Road_Normal ||
-		 roadtype == Road_Busy || roadtype == Road_Water);
+		(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
+		 roadtype == RoadType::kBusy || roadtype == RoadType::kWater);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
@@ -530,17 +560,17 @@ void EditorGameBase::set_road
 	FCoords neighbour;
 	uint8_t mask = 0;
 	switch (direction) {
-	case Road_SouthWest:
+	case RoadType::kSouthWest:
 		neighbour = m.bl_n(f);
-		mask = Road_Mask << Road_SouthWest;
+		mask = RoadType::kMask << RoadType::kSouthWest;
 		break;
-	case Road_SouthEast:
+	case RoadType::kSouthEast:
 		neighbour = m.br_n(f);
-		mask = Road_Mask << Road_SouthEast;
+		mask = RoadType::kMask << RoadType::kSouthEast;
 		break;
-	case Road_East:
+	case RoadType::kEast:
 		neighbour = m. r_n(f);
-		mask = Road_Mask << Road_East;
+		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
 		assert(false);

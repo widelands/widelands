@@ -22,7 +22,6 @@
 #include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "scripting/c_utils.h"
 #include "wui/interactive_player.h"
 
 namespace LuaEditor {

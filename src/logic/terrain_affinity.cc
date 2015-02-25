@@ -23,6 +23,7 @@
 
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world/terrain_description.h"
@@ -110,20 +111,21 @@ double probability_to_grow(const TerrainAffinity& affinity,
 		average(ln.field->terrain_r());
 	}
 
-	const double sigma_fertility = (1. - affinity.pickiness()) * 0.25 + 1e-2;
-	const double sigma_humidity = (1. - affinity.pickiness()) * 0.25 + 1e-2;
-	const double sigma_temperature = (1. - affinity.pickiness()) * 12.5 + 1e-1;
+	constexpr double kHumidityWeight = 0.500086642549548;
+	constexpr double kFertilityWeight = 0.5292268046607387;
+	constexpr double kTemperatureWeight = 61.31300863608306;
 
-	const double pure_gauss = exp(
-	   -pow2(affinity.preferred_fertility() - terrain_fertility) / (2 * pow2(sigma_fertility)) -
-	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_humidity)) -
-	   pow2(affinity.preferred_temperature() - terrain_temperature) / (2 * pow2(sigma_temperature)));
+	const double sigma_humidity = (1. - affinity.pickiness());
+	const double sigma_temperature = (1. - affinity.pickiness());
+	const double sigma_fertility = (1. - affinity.pickiness());
 
-	double advanced_gauss = pure_gauss * 1.1 + 0.05;
-	if (advanced_gauss > 0.95)
-		advanced_gauss = 0.95;
-
-	return advanced_gauss;
+	return exp((-pow2((affinity.preferred_fertility() - terrain_fertility) /
+	                  (kFertilityWeight * sigma_fertility)) -
+	            pow2((affinity.preferred_humidity() - terrain_humidity) /
+	                 (kHumidityWeight * sigma_humidity)) -
+	            pow2((affinity.preferred_temperature() - terrain_temperature) /
+	                 (kTemperatureWeight * sigma_temperature))) /
+	           2);
 }
 
 }  // namespace Widelands

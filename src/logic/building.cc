@@ -20,17 +20,22 @@
 #include "logic/building.h"
 
 #include <cstdio>
+#include <cstring>
 #include <sstream>
+
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constructionsite.h"
@@ -44,7 +49,6 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 
@@ -67,24 +71,26 @@ BuildingDescr::BuildingDescr
 	m_global        (false),
 	m_vision_range  (0)
 {
+	using boost::iequals;
+
 	try {
-		char const * const string = global_s.get_safe_string("size");
-		if      (!strcasecmp(string, "small"))
+		const auto& size = global_s.get_safe_string("size");
+		if      (iequals(size, "small"))
 			m_size = BaseImmovable::SMALL;
-		else if (!strcasecmp(string, "medium"))
+		else if (iequals(size, "medium"))
 			m_size = BaseImmovable::MEDIUM;
-		else if (!strcasecmp(string, "big"))
+		else if (iequals(size, "big"))
 			m_size = BaseImmovable::BIG;
-		else if (!strcasecmp(string, "mine")) {
+		else if (iequals(size, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
-		} else if (!strcasecmp(string, "port")) {
+		} else if (iequals(size, "port")) {
 			m_size = BaseImmovable::BIG;
 			m_port = true;
 		} else
 			throw GameDataError
 				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size);
 	} catch (const WException & e) {
 		throw GameDataError("size: %s", e.what());
 	}
@@ -878,7 +884,7 @@ void Building::set_seeing(bool see)
  */
 void Building::send_message
 	(Game & game,
-	 const std::string & msgsender,
+	 const Message::Type msgtype,
 	 const std::string & title,
 	 const std::string & description,
 	 bool link_to_building_lifetime,
@@ -889,13 +895,13 @@ void Building::send_message
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = g_gr->animations().get_animation
-		(get_ui_anim()).representative_image_from_disk().hash();
+		(get_ui_anim()).representative_image_from_disk_filename();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
+		 strlen("<p font-size=14 font-face=serif>") +
 		 description.size() +
-		 strlen("</rt>"));
+		 strlen("</p></rt>"));
 	rt_description  = "<rt image=";
 	rt_description += img;
 	{
@@ -904,12 +910,11 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	rt_description = (boost::format("%s><p font-face=serif font-size=14>%s</p></rt>")
+			% rt_description % description).str();
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), title, rt_description,
+		(msgtype, game.get_gametime(), title, rt_description,
 		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)

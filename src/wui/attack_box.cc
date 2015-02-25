@@ -24,9 +24,11 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "logic/soldier.h"
-#include "wui/text_constants.h"
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,
@@ -165,7 +167,9 @@ void AttackBox::init() {
 	sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
 
 	m_text_soldiers =
-		&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
+		&add_text(columnbox, buf, UI::Box::AlignCenter,
+					 UI::g_fh1->fontset().serif(),
+					 UI_FONT_SIZE_ULTRASMALL);
 
 	m_slider_soldiers =
 		&add_slider

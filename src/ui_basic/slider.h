@@ -21,7 +21,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/font.h"
 #include "graphic/image_catalog.h"
 #include "ui_basic/panel.h"
 

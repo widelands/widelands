@@ -60,7 +60,7 @@ struct MapAuthorData {
 	void parse(const std::string& author_list) {
 		std::vector<std::string> authors;
 		boost::split(authors, author_list, boost::is_any_of(","));
-		m_names = localize_item_list(authors, i18n::ConcatenateWith::AMPERSAND);
+		m_names = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		m_number = authors.size();
 	}
 

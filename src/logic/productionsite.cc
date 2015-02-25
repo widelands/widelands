@@ -29,6 +29,7 @@
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "graphic/text_constants.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -39,7 +40,6 @@
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -212,6 +212,11 @@ ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
 }
 
+void ProductionSite::load_finish(EditorGameBase & egbase) {
+	Building::load_finish(egbase);
+	calc_statistics();
+}
+
 
 /**
  * Display whether we're occupied.
@@ -306,9 +311,7 @@ void ProductionSite::calc_statistics()
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
-		color = UI_FONT_CLR_IDLE_HEX;
-	else if (percOk < 33)
+	if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;
@@ -925,7 +928,7 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-					  "produce",
+				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,

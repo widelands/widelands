@@ -6,6 +6,7 @@
 
 include "data/scripting/coroutine.lua"
 include "data/scripting/table.lua"
+include "data/scripting/ui.lua"
 
 -- RST
 -- .. function:: send_message(player, title, body, parameters)
@@ -175,4 +176,3 @@ function message_box_objective(player, message)
       return nil
    end
 end
-

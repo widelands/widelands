@@ -6,30 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-03-13 12:55+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-01-15 15:49+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:48+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "La tua economia e le sue impostazioni"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
-msgstr ""
+msgstr "Economia"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
 msgstr ""
+"Bentornato. In questo tutorial, ti dirò che cosa si può fare per controllare "
+"come funziona la tua economia."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
@@ -37,22 +39,30 @@ msgid ""
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
 msgstr ""
+"Costruire la propria economia e farla funzionare bene e crescere è la parte "
+"principale di Widelands. Ma non puoi controllare i lavoratori direttamente – "
+"seguiranno le condizioni generali che hai impostato."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
 msgstr ""
+"Questo è quello che ti farò vedere in questo tutorial: quali azioni si "
+"possono adottare per definire le condizioni generali?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "Una terra pacifica"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
 msgstr ""
+"Ora, riguardo alla mappa: si sono insediati in una bella valle tra due "
+"montagne, ricche di marmi, minerale di ferro e carbone. Tutti speravano in "
+"una vita pacifica."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -61,20 +71,26 @@ msgid ""
 "there. But the border could not be left undefended, and so you constructed "
 "three castles."
 msgstr ""
+"Un giorno, però, avete scoperto un deserto arido con degli edifici "
+"abbandonati ad est. Una strana aura proveniva da lì, e nessuno voleva "
+"metterci piede. Ma il confine non poteva essere lasciato indifeso, e per "
+"questo hai costruito tre castelli."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
 msgstr ""
+"Tu non eri preparato per la guerra, e ora devi sbrigarti per formare un "
+"esercito."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "La taverna è in fiamme!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"
-msgstr ""
+msgstr "Un incidente"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:45
 msgid ""
@@ -82,20 +98,25 @@ msgid ""
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
 msgstr ""
+"Oh no, guarda questo: la nostra taverna sta bruciando! In tutta fretta, alla "
+"nostra locandiera è caduta accidentalmente una torcia. Lei sta bene, ma non "
+"siamo riusciti a spegnere l'incendio in tempo."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
-msgstr ""
+msgstr "Statistiche dell'edificio"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
-msgstr ""
+msgstr "Dai un'occhiata alle tue taverne"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a list where you can easily check this."
 msgstr ""
+"Inizialmente, dobbiamo scoprire quante taverne abbiamo attualmente. "
+"Widelands ti propone una lista dove si può facilmente controllare questo."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid ""
@@ -105,15 +126,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "Afterwards, choose the ‘Building statistics’."
-msgstr ""
+msgstr "In seguito, scegli le 'Statistiche degli edifici'."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 msgid "Open the building statistics window."
-msgstr ""
+msgstr "Apri la finestra delle statistiche degli edifici."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "When you have looked up the number of taverns, close it."
-msgstr ""
+msgstr "Quando hai trovato il numero delle taverne, chiudila."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
 msgid "Look up your number of taverns in the building statistics window."
@@ -151,11 +172,11 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:104
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid "Stock"
-msgstr ""
+msgstr "Scorte"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid "Check for rations"
-msgstr ""
+msgstr "Controlla le razioni"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
@@ -176,7 +197,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:93
 msgid "Open your stock window."
-msgstr ""
+msgstr "Apri la finestra delle tue riserve."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 msgid ""
@@ -245,7 +266,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:135
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Hai chiuso la finestra delle riserve!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:137
 msgid ""
@@ -255,7 +276,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
 msgid "Open the stock window again."
-msgstr ""
+msgstr "Apri di nuovo la finestra delle riserve."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:148
 msgid ""
@@ -273,11 +294,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid "New taverns"
-msgstr ""
+msgstr "Nuove taverne"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:160
 msgid "We need new taverns"
-msgstr ""
+msgstr "Abbiamo bisogno di nuove taverne"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:161
 msgid ""
@@ -294,7 +315,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:167
 msgid "Build new taverns."
-msgstr ""
+msgstr "Costruisci delle nuove taverne."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -302,7 +323,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:176
 msgid "Ware Encyclopedia"
-msgstr ""
+msgstr "Enciclopedia dei beni"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:178
 msgid ""
@@ -319,7 +340,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid "This encyclopedia can be accessed via"
-msgstr ""
+msgstr "Questa enciclopedia è accessibile tramite"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid ""
@@ -335,11 +356,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:190
 msgid "Priority Settings"
-msgstr ""
+msgstr "Impostazioni delle priorità"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:192
 msgid "Send the wares where they’re needed"
-msgstr ""
+msgstr "Invia le merci dove sono necessarie"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 msgid ""
@@ -373,24 +394,24 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:261
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Statistiche sui beni"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:206
 msgid "In the statistics menu, there is also a"
-msgstr ""
+msgstr "Nel menù delle statistiche c'è anche un"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "‘Ware statistics’ button."
-msgstr ""
+msgstr "pulsante 'Statistiche sui beni'."
 
 #: TRANSLATORS: "it" refers to the ware statistics button
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid "Click on it."
-msgstr ""
+msgstr "Cliccaci sopra."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
 msgid "Open the ware statistics window."
-msgstr ""
+msgstr "Apri la finestra delle statistiche sui beni."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
@@ -404,11 +425,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "I’ll continue as soon as you click on the"
-msgstr ""
+msgstr "Continuerò appena clicchi sulla"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:228
 msgid "third tab (‘Economy Health’)."
-msgstr ""
+msgstr "terza scheda ('Salute dell'economia')."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid "Switch to the third tab in the ware statistics menu window."
@@ -465,11 +486,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 msgid "Close this window when you’re done."
-msgstr ""
+msgstr "Chiudi questa finestra quando hai finito."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Close the ware statistics window."
-msgstr ""
+msgstr "Chiudi la finestra delle statistiche sui beni."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
@@ -484,7 +505,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Hai chiuso la finestra delle statistiche sui beni!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
@@ -495,7 +516,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:312
 msgid "Open the ware statistics window again."
-msgstr ""
+msgstr "Apri di nuovo la finestra delle statistiche sui beni."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:293
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:314
@@ -520,7 +541,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:344
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:356
 msgid "Economy options"
-msgstr ""
+msgstr "Opzioni dell'economia"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
@@ -537,20 +558,21 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:328
 msgid "This is the icon."
-msgstr ""
+msgstr "Questa è l'icona."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:331
 msgid "Open this window."
-msgstr ""
+msgstr "Apri questa finestra."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:335
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "Apri la finestra 'Configura l'economia'."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:339
 msgid "The window can be accessed by clicking on any flag you own."
 msgstr ""
+"La finestra è accessibile cliccando su qualsiasi bandiera si possieda."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:346
 msgid ""
@@ -640,7 +662,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
 msgid "Warehouse Preferences"
-msgstr ""
+msgstr "Preferenze del magazzino"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 msgid "Bring the marble columns to the front line"
@@ -698,11 +720,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:400
 msgid "Borders Secured"
-msgstr ""
+msgstr "Confini messi in sicurezza"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:402
 msgid "We’re safe now"
-msgstr ""
+msgstr "Siamo al sicuro ora"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
 msgid ""
@@ -731,10 +753,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

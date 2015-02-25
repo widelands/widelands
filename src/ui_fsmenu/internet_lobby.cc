@@ -26,13 +26,13 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
@@ -65,16 +65,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(this,
 		 get_w() * 17 / 25, get_h() * 63 / 100,
 		 _("Name of your server:")),
-	m_maxclients
-		(this,
-		 get_w() * 17 / 25, get_h() * 73 / 100,
-		 _("Maximum of players:")),
-
-// Spinboxes
-	maxclients
-		(this,
-		 get_w() * 17 / 25, get_h() * 77 / 100, m_butw, m_buth * 7 / 10,
-		 7, 1, 7), //  start/min./max. value dummy initializations
 
 // Buttons
 	joingame
@@ -133,10 +123,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 			 (&FullscreenMenuInternetLobby::clicked_back,
 			  boost::ref(*this)));
 
-	back.set_font(font_small());
-	joingame.set_font(font_small());
-	hostgame.set_font(font_small());
-
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
 
@@ -144,8 +130,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_clients     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_maxclients.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	maxclients  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
 	servername  .set_text (server);
 	servername  .changed.connect
@@ -216,12 +200,7 @@ void FullscreenMenuInternetLobby::connect_to_metaserver()
 	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
 
-
-	if (InternetGaming::ref().login(nickname, password, reg, metaserver, port))
-	{
-		// Update of server spinbox
-		maxclients.set_interval(1, InternetGaming::ref().max_clients());
-	}
+	InternetGaming::ref().login(nickname, password, reg, metaserver, port);
 }
 
 
@@ -451,8 +430,6 @@ void FullscreenMenuInternetLobby::clicked_hostgame()
 
 	// Set up the game
 	InternetGaming::ref().set_local_servername(servername.text());
-	uint32_t max = static_cast<uint32_t>(get_maxclients());
-	InternetGaming::ref().set_local_maxclients(max);
 
 	// Start the game
 	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);

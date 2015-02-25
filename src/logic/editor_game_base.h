@@ -26,16 +26,17 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "graphic/texture.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
+#include "scripting/lua_interface.h"
 
 namespace UI {struct ProgressWindow;}
 struct FullscreenMenuLaunchGame;
 class InteractiveBase;
-class LuaInterface;
 
 namespace Widelands {
 
@@ -49,7 +50,7 @@ class Map;
 struct ObjectManager;
 class Player;
 struct PlayerImmovable;
-struct TribeDescr;
+class TribeDescr;
 struct Flag;
 struct AttackController;
 
@@ -190,7 +191,7 @@ public:
 	}
 
 	/// Lua frontend, used to run Lua scripts
-	LuaInterface& lua() {
+	virtual LuaInterface& lua() {
 		return *lua_;
 	}
 
@@ -262,9 +263,10 @@ private:
 	uint32_t lasttrackserial_;
 	std::map<uint32_t, void*> trackpointers_;
 
+	std::unique_ptr<Texture> road_texture_;
 
-		DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
-	};
+	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
+};
 
 #define iterate_players_existing(p, nr_players, egbase, player)                                    \
 	iterate_player_numbers(                                                                         \

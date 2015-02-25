@@ -37,6 +37,23 @@ function port2()
    return nil
 end
 
+function portdock2()
+	local portdock = map:get_field(15, 4).immovable
+	if portdock then
+		return portdock
+	end
+	local portdock = map:get_field(14, 5).immovable
+	if portdock then
+		return portdock
+	end
+	local portdock = map:get_field(14, 4).immovable
+	if portdock then
+		return portdock
+	end
+	print ("portdock not found")
+	return nill
+end
+
 function start_building_farm()
    p1:place_building("farm", map:get_field(18, 4), true, true)
    connected_road(p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)

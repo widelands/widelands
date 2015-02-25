@@ -4,8 +4,6 @@ wl_library(ui_fsmenu
     base.h
     campaign_select.cc
     campaign_select.h
-    editor.cc
-    editor.h
     fileview.cc
     fileview.h
     internet_lobby.cc
@@ -45,9 +43,10 @@ wl_library(ui_fsmenu
     build_info
     game_io
     graphic
-    graphic_image
     graphic_image_io
     graphic_surface
+    graphic_text
+    graphic_text_layout
     helper
     io_filesystem
     logic
@@ -57,11 +56,11 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     sound
     ui_basic
     widelands_ball_of_mud
     wui
     wui_chat_ui
-    wui_text_layout
 )

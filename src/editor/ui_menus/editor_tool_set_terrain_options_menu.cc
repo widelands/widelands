@@ -28,7 +28,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
@@ -44,25 +43,26 @@ namespace {
 using namespace Widelands;
 
 static const int32_t check[] = {
-	TerrainDescription::GREEN,                                 //  "green"
-	TerrainDescription::DRY,                                   //  "dry"
-	TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
-	TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
-	TerrainDescription::ACID | TerrainDescription::DRY |
-		TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
-	TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
+	TerrainDescription::Type::kGreen,                                 //  "green"
+	TerrainDescription::Type::kDry,                                   //  "dry"
+	TerrainDescription::Type::kDry | TerrainDescription::Type::kMountain,    //  "mountain"
+	TerrainDescription::Type::kDry | TerrainDescription::Type::kImpassable,  //  "impassable"
+	TerrainDescription::Type::kDead | TerrainDescription::Type::kDry |
+		TerrainDescription::Type::kImpassable,  //  "dead"
+	TerrainDescription::Type::kImpassable | TerrainDescription::Type::kDry | TerrainDescription::Type::kWater,
 	-1,  // end marker
 };
 
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
                                       const TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
-	const Image* green = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainGreen);
-	const Image* water = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainWater);
-	const Image* mountain = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainMountain);
-	const Image* dead = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainDead);
-	const Image* unpassable = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainUnpassable);
-	const Image* dry = g_gr->cataloged_image(ImageCatalog::Key::kEditorTerrainDry);
+
+	const Image* green = g_gr->images().get("wui/editor/terrain_green.png");
+	const Image* water = g_gr->images().get("wui/editor/terrain_water.png");
+	const Image* mountain = g_gr->images().get("wui/editor/terrain_mountain.png");
+	const Image* dead = g_gr->images().get("wui/editor/terrain_dead.png");
+	const Image* impassable = g_gr->images().get("wui/editor/terrain_impassable.png");
+	const Image* dry = g_gr->images().get("wui/editor/terrain_dry.png");
 
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;
@@ -76,68 +76,88 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 		const Texture& terrain_texture = terrain_descr.get_texture(0);
 		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-		texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-		              &terrain_texture,
-		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()));
+		blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+		              terrain_texture,
+		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+		              1.,
+		              BlendMode::UseAlpha, texture);
 		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
-		if (ter_is == TerrainDescription::GREEN) {
-			texture->blit(Rect(pt.x, pt.y, green->width(), green->height()),
-			              green->texture(),
-			              Rect(0, 0, green->width(), green->height()));
+		if (ter_is == TerrainDescription::Type::kGreen) {
+			blit(Rect(pt.x, pt.y, green->width(), green->height()),
+			     *green,
+			     Rect(0, 0, green->width(), green->height()),
+			     1.,
+			     BlendMode::UseAlpha,
+			     texture);
 			pt.x += kSmallPicWidth + 1;
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
 			tooltips.push_back(_("arable"));
 		} else {
-			if (ter_is & TerrainDescription::WATER) {
-				texture->blit(Rect(pt.x, pt.y, water->width(), water->height()),
-				              water->texture(),
-				              Rect(0, 0, water->width(), water->height()));
+			if (ter_is & TerrainDescription::Type::kWater) {
+				blit(Rect(pt.x, pt.y, water->width(), water->height()),
+				     *water,
+				     Rect(0, 0, water->width(), water->height()),
+				     1.,
+				     BlendMode::UseAlpha,
+				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("aquatic"));
 			}
-			else if (ter_is & TerrainDescription::MOUNTAIN) {
-				texture->blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
-				              mountain->texture(),
-				              Rect(0, 0, mountain->width(), mountain->height()));
+			else if (ter_is & TerrainDescription::Type::kMountain) {
+				blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
+				     *mountain,
+				     Rect(0, 0, mountain->width(), mountain->height()),
+				     1.,
+				     BlendMode::UseAlpha,
+				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mountainous"));
 			}
-			if (ter_is & TerrainDescription::ACID) {
-				texture->blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
-				              dead->texture(),
-				              Rect(0, 0, dead->width(), dead->height()));
+			if (ter_is & TerrainDescription::Type::kDead) {
+				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
+				     *dead,
+				     Rect(0, 0, dead->width(), dead->height()),
+				     1.,
+				     BlendMode::UseAlpha,
+				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("dead"));
 			}
-			if (ter_is & TerrainDescription::UNPASSABLE) {
-				texture->blit(Rect(pt.x, pt.y, unpassable->width(), unpassable->height()),
-				              unpassable->texture(),
-				              Rect(0, 0, unpassable->width(), unpassable->height()));
+			if (ter_is & TerrainDescription::Type::kImpassable) {
+				blit(Rect(pt.x, pt.y, impassable->width(), impassable->height()),
+				     *impassable,
+				     Rect(0, 0, impassable->width(), impassable->height()),
+				     1.,
+				     BlendMode::UseAlpha,
+				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("unpassable"));
+				tooltips.push_back(_("impassable"));
 			}
-			if (ter_is & TerrainDescription::DRY) {
-				texture->blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
-				              dry->texture(),
-				              Rect(0, 0, dry->width(), dry->height()));
+			if (ter_is & TerrainDescription::Type::kDry) {
+				blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
+				     *dry,
+				     Rect(0, 0, dry->width(), dry->height()),
+				     1.,
+				     BlendMode::UseAlpha,
+				     texture);
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				 tooltips.push_back(_("treeless"));
 			}
 		}
 
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
+		offscreen_images->emplace_back(texture);
 		break;
 	}
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
 	const std::string tooltip = ((boost::format("%1%: %2%"))
 								  % terrain_descr.descname()
-								  % i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str();
+								  % i18n::localize_list(tooltips, i18n::ConcatenateWith::AND)).str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);

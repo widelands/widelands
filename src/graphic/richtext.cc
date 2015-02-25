@@ -27,6 +27,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
 #include "io/filesystem/layered_filesystem.h"
 

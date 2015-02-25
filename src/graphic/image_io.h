@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_IMAGE_IO_H
 #define WL_GRAPHIC_IMAGE_IO_H
 
+#include <memory>
 #include <string>
 
 #include "base/wexception.h"
@@ -27,9 +28,7 @@
 class FileSystem;
 class Texture;
 class StreamWrite;
-class Surface;
 struct SDL_Surface;
-enum class COLOR_TYPE {RGB, RGBA};
 
 class ImageNotFound : public WException {
 public:
@@ -45,12 +44,13 @@ public:
 };
 
 /// Loads the image 'fn' from 'fs'.
-Texture* load_image(const std::string& fn, FileSystem* fs = nullptr);
+std::unique_ptr<Texture> load_image(const std::string& fn, FileSystem* fs = nullptr);
 
 /// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);
 
-/// Saves the 'surface' to 'sw' as a PNG.
-bool save_surface_to_png(Surface* surface, StreamWrite* sw, COLOR_TYPE color_type);
+/// Saves the 'texture' to 'sw' as a PNG.
+enum class ColorType {RGB, RGBA};
+bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type);
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_IO_H

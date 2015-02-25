@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
@@ -38,30 +39,28 @@ namespace  {
 // Parse a terrain type from the giving string.
 TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 	if (type == "green") {
-		return TerrainDescription::GREEN;
+		return TerrainDescription::Type::kGreen;
 	}
 	if (type == "dry") {
-		return TerrainDescription::DRY;
+		return TerrainDescription::Type::kDry;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "acid") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
-		                                             TerrainDescription::MOUNTAIN);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
+																	TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
+																	TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
-	if (type == "unpassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
-		                                             TerrainDescription::UNPASSABLE);
+	if (type == "mountain") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kMountain);
+	}
+	if (type == "impassable") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }
@@ -79,11 +78,11 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      fertility_(table.get_double("fertility")),
      humidity_(table.get_double("humidity")) {
 
-	if (!(0 <= fertility_ && fertility_ <= 1.)) {
-		throw GameDataError("%s: fertility is not in [0, 1].", name_.c_str());
+	if (!(0 < fertility_ && fertility_ < 1.)) {
+		throw GameDataError("%s: fertility is not in (0, 1).", name_.c_str());
 	}
-	if (!(0 <= humidity_ && humidity_ <= 1.)) {
-		throw GameDataError("%s: humidity is not in [0, 1].", name_.c_str());
+	if (!(0 < humidity_ && humidity_ < 1.)) {
+		throw GameDataError("%s: humidity is not in (0, 1).", name_.c_str());
 	}
 	if (temperature_ < 0) {
 		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());

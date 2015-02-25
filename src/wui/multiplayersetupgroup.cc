@@ -27,6 +27,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
@@ -38,7 +39,6 @@
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup
@@ -430,10 +430,6 @@ m_fname(fname)
 
 	clientbox.set_size(w / 3, h - buth);
 	clientbox.set_scrolling(true);
-	c.resize(MAXCLIENTS);
-	for (uint32_t i = 0; i < c.size(); ++i) {
-		c.at(i) = nullptr;
-	}
 
 	// Playerbox and labels
 	labels.push_back
@@ -473,14 +469,14 @@ m_fname(fname)
 	labels.back()->set_textstyle(tsmaller);
 
 	playerbox.set_size(w * 9 / 15, h - buth);
-	p.resize(MAX_PLAYERS);
-	for (uint8_t i = 0; i < p.size(); ++i) {
-		p.at(i) = new MultiPlayerPlayerGroup
+	multi_player_player_groups.resize(MAX_PLAYERS);
+	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
+		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
 			 s, npsb.get(), UI::Font::get(fname, fsize),
 			 m_tribepics, m_tribenames);
-		playerbox.add(&*p.at(i), 1);
+		playerbox.add(multi_player_player_groups.at(i), 1);
 	}
 	refresh();
 }
@@ -488,9 +484,6 @@ m_fname(fname)
 
 MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
 {
-	for (uint32_t i = 0; i < c.size(); ++i) {
-		delete c.at(i);
-	}
 }
 
 
@@ -502,19 +495,20 @@ void MultiPlayerSetupGroup::refresh()
 	const GameSettings & settings = s->settings();
 
 	// Update / initialize client groups
-	for (uint32_t i = 0; (i < settings.users.size()) && (i < MAXCLIENTS); ++i) {
-		if (!c.at(i)) {
-			c.at(i) = new MultiPlayerClientGroup
-				(&clientbox, i,
-				 0, 0, clientbox.get_w(), m_buth,
-				 s, UI::Font::get(m_fname, m_fsize));
-			clientbox.add(&*c.at(i), 1);
+	if (multi_player_client_groups.size() < settings.users.size()) {
+		multi_player_client_groups.resize(settings.users.size());
+	}
+	for (uint32_t i = 0; i < settings.users.size(); ++i) {
+		if (!multi_player_client_groups.at(i)) {
+			multi_player_client_groups.at(i) = new MultiPlayerClientGroup(
+			   &clientbox, i, 0, 0, clientbox.get_w(), m_buth, s, UI::Font::get(m_fname, m_fsize));
+			clientbox.add(&*multi_player_client_groups.at(i), 1);
 		}
-		c.at(i)->refresh();
+		multi_player_client_groups.at(i)->refresh();
 	}
 
 	// Update player groups
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		p.at(i)->refresh();
+		multi_player_player_groups.at(i)->refresh();
 	}
 }

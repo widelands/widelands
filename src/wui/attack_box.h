@@ -23,6 +23,9 @@
 #include <list>
 
 #include "graphic/image_catalog.h"
+#include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/player.h"
@@ -31,7 +34,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 using Widelands::Bob;
 using Widelands::Building;
@@ -67,7 +69,7 @@ struct AttackBox : public UI::Box {
 			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
-			 const std::string & fontname = UI_FONT_NAME,
+			 const std::string & fontname = UI::g_fh1->fontset().serif(),
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Button & add_button
 			(UI::Box           & parent,

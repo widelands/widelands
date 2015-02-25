@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -358,15 +359,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	g_fs->ensure_directory_exists(m_basedir);
 
 	//  OK, first check if the extension matches (ignoring case).
-	bool assign_extension = true;
-	if (filename.size() >= strlen(WLMF_SUFFIX)) {
-		char buffer[10]; //  enough for the extension
-		filename.copy
-			(buffer, sizeof(WLMF_SUFFIX), filename.size() - strlen(WLMF_SUFFIX));
-		if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
-			assign_extension = false;
-	}
-	if (assign_extension)
+	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
 	//  append directory name

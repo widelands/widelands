@@ -29,6 +29,7 @@
 #include "logic/immovable.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
+#include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"

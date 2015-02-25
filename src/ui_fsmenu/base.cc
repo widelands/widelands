@@ -28,10 +28,11 @@
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
 
 /*
 ==============================================================================
@@ -48,11 +49,7 @@ FullscreenMenuBase
  */
 FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Key background_image_key)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
-	textstyle_small_ = UI::TextStyle::ui_small();
-	textstyle_small_.font = UI::Font::get(ui_fn(), fs_small());
 
-	textstyle_big_ = UI::TextStyle::ui_big();
-	textstyle_big_.font = UI::Font::get(ui_fn(), fs_big());
 	background_image_key_ = background_image_key;
 }
 
@@ -66,7 +63,11 @@ FullscreenMenuBase::~FullscreenMenuBase()
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
 	const Image* bg = g_gr->cataloged_image(background_image_key_);
-	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()));
+	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()),
+	                   bg,
+	                   Rect(0, 0, bg->width(), bg->height()),
+	                   1.,
+	                   BlendMode::UseAlpha);
 }
 
 uint32_t FullscreenMenuBase::fs_small() {
@@ -75,24 +76,4 @@ uint32_t FullscreenMenuBase::fs_small() {
 
 uint32_t FullscreenMenuBase::fs_big() {
 	return UI_FONT_SIZE_BIG * get_h() / 600;
-}
-
-UI::TextStyle & FullscreenMenuBase::ts_small()
-{
-	return textstyle_small_;
-}
-
-UI::TextStyle & FullscreenMenuBase::ts_big()
-{
-	return textstyle_big_;
-}
-
-UI::Font * FullscreenMenuBase::font_small()
-{
-	return textstyle_small_.font;
-}
-
-UI::Font * FullscreenMenuBase::font_big()
-{
-	return textstyle_big_.font;
 }

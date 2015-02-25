@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2014-05-29 18:29+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:49+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: cs\n"
 
 #: ../../scripting/win_condition_texts.lua:2
@@ -63,27 +63,11 @@ msgstr "Stav"
 msgid "Player overview:"
 msgstr "Přehled hráče:"
 
-#: ../../scripting/win_conditions/00_endless_game.lua:12
-msgid "Endless Game"
-msgstr "Nekonečná hra"
-
-#: ../../scripting/win_conditions/00_endless_game.lua:14
-msgid "This is an endless game without rules."
-msgstr "Toto je nekonečná hra bez pravidel."
-
-#: ../../scripting/win_conditions/01_defeat_all.lua:12
-msgid "Autocrat"
-msgstr "Autokrat"
-
-#: ../../scripting/win_conditions/01_defeat_all.lua:14
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "Kmen nebo tým, který dokáže porazit všechny ostatní, vyhrává!"
-
-#: ../../scripting/win_conditions/02_collectors.lua:15
+#: ../../scripting/win_conditions/collectors.lua:15
 msgid "Collectors"
 msgstr "Sběratelé"
 
-#: ../../scripting/win_conditions/02_collectors.lua:18
+#: ../../scripting/win_conditions/collectors.lua:18
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -91,20 +75,20 @@ msgstr ""
 "Za každé vzácné zboží ve svém skladu dostaneš body. Vyhrává hráč s největším "
 "počtem zboží na konci 4 hodinové hry."
 
-#: ../../scripting/win_conditions/02_collectors.lua:21
+#: ../../scripting/win_conditions/collectors.lua:21
 msgid "Points"
 msgstr "Body"
 
-#: ../../scripting/win_conditions/02_collectors.lua:100
+#: ../../scripting/win_conditions/collectors.lua:100
 msgid "Status for %s"
 msgstr "Stav pro %s"
 
 #: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/02_collectors.lua:110
+#: ../../scripting/win_conditions/collectors.lua:110
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:114
+#: ../../scripting/win_conditions/collectors.lua:114
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Celkem: %i bod"
@@ -112,26 +96,50 @@ msgstr[1] "Celkem: %i body"
 msgstr[2] "Celkem: %i bodů"
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
-#: ../../scripting/win_conditions/02_collectors.lua:128
+#: ../../scripting/win_conditions/collectors.lua:128
 msgid "%1$ih%2$02im"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:130
+#: ../../scripting/win_conditions/collectors.lua:130
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuta"
 msgstr[1] "%i minuty"
 msgstr[2] "%i minut"
 
-#: ../../scripting/win_conditions/02_collectors.lua:132
+#: ../../scripting/win_conditions/collectors.lua:132
 msgid "The game will end in %s."
 msgstr "Hra skončí v %s."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:14
+#: ../../scripting/win_conditions/defeat_all.lua:12
+msgid "Autocrat"
+msgstr "Autokrat"
+
+#: ../../scripting/win_conditions/defeat_all.lua:14
+msgid "The tribe or team that can defeat all others wins the game!"
+msgstr "Kmen nebo tým, který dokáže porazit všechny ostatní, vyhrává!"
+
+#: ../../scripting/win_conditions/endless_game.lua:12
+msgid "Endless Game"
+msgstr "Nekonečná hra"
+
+#: ../../scripting/win_conditions/endless_game.lua:14
+msgid "This is an endless game without rules."
+msgstr "Toto je nekonečná hra bez pravidel."
+
+#: ../../scripting/win_conditions/endless_game_fogless.lua:12
+msgid "Endless Game (no fog)"
+msgstr "Nekonečná hra (bez mlhy)"
+
+#: ../../scripting/win_conditions/endless_game_fogless.lua:13
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr "Toto je nekonečná hra bez pravidel. Válečná mlha je vypnuta."
+
+#: ../../scripting/win_conditions/territorial_lord.lua:14
 msgid "Territorial Lord"
 msgstr "Vládce území"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:17
+#: ../../scripting/win_conditions/territorial_lord.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -141,42 +149,42 @@ msgstr ""
 "bude hráč nebo tým, který bude schopen udržet tuto rozlohu minimálně 20 "
 "minut."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:152
-#: ../../scripting/win_conditions/03_territorial_time.lua:24
+#: ../../scripting/win_conditions/territorial_lord.lua:152
+#: ../../scripting/win_conditions/territorial_time.lua:24
 msgid "Team %i"
 msgstr "Tým %i"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:154
-#: ../../scripting/win_conditions/03_territorial_time.lua:198
+#: ../../scripting/win_conditions/territorial_lord.lua:154
+#: ../../scripting/win_conditions/territorial_time.lua:198
 msgid "%s owns more than half of the map’s area."
 msgstr "%s ovládá více než polovinu mapy."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:156
-#: ../../scripting/win_conditions/03_territorial_time.lua:200
+#: ../../scripting/win_conditions/territorial_lord.lua:156
+#: ../../scripting/win_conditions/territorial_time.lua:200
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Stále máš %i minutu k zabránění vítězství."
 msgstr[1] "Stále máš %i minuty k zabránění vítězství."
 msgstr[2] "Stále máš %i minut k zabránění vítězství."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:161
-#: ../../scripting/win_conditions/03_territorial_time.lua:205
+#: ../../scripting/win_conditions/territorial_lord.lua:161
+#: ../../scripting/win_conditions/territorial_time.lua:205
 msgid "You own more than half of the map’s area."
 msgstr "Olvládáš více než polovinu mapy."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:163
-#: ../../scripting/win_conditions/03_territorial_time.lua:207
+#: ../../scripting/win_conditions/territorial_lord.lua:163
+#: ../../scripting/win_conditions/territorial_time.lua:207
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Vydrž ještě %i minutu a vyhraješ."
 msgstr[1] "Vydrž ještě %i minuty a vyhraješ."
 msgstr[2] "Vydrž ještě %i minut a vyhraješ."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:14
+#: ../../scripting/win_conditions/territorial_time.lua:14
 msgid "Territorial Time"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:17
+#: ../../scripting/win_conditions/territorial_time.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -187,34 +195,34 @@ msgstr ""
 "tým, který je schopen udržet si tento prostor po dobu alespoň 20 minut nebo "
 "ten s největším uzemím po uplynutí 4 hodin, podle toho, co nastane dříve."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:22
+#: ../../scripting/win_conditions/territorial_time.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:23
+#: ../../scripting/win_conditions/territorial_time.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:221
+#: ../../scripting/win_conditions/territorial_time.lua:221
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "V opačném případě hra skončí za %i minutu."
 msgstr[1] "V opačném případě hra skončí za %i minuty."
 msgstr[2] "V opačném případě hra skončí za %i minut."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:226
-#: ../../scripting/win_conditions/04_wood_gnome.lua:83
+#: ../../scripting/win_conditions/territorial_time.lua:226
+#: ../../scripting/win_conditions/wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Hra skončí za %i minutu."
 msgstr[1] "Hra skončí za %i minuty."
 msgstr[2] "Hra skončí za %i minut."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:13
+#: ../../scripting/win_conditions/wood_gnome.lua:13
 msgid "Wood Gnome"
 msgstr "Lesní skřítek"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:16
+#: ../../scripting/win_conditions/wood_gnome.lua:16
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
@@ -224,35 +232,27 @@ msgstr ""
 "svém území více než ostatní hráči. Hra bude ukončena po 4 hodinách hraní. "
 "Ten s největším počtem stromů v tu chvíli bude vítěz."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:19
+#: ../../scripting/win_conditions/wood_gnome.lua:19
 msgid "Trees owned"
 msgstr "Vlastněné stromy"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:89
-#: ../../scripting/win_conditions/04_wood_gnome.lua:141
-#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+#: ../../scripting/win_conditions/wood_gnome.lua:89
+#: ../../scripting/win_conditions/wood_gnome.lua:141
+#: ../../scripting/win_conditions/wood_gnome.lua:145
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i strom"
 msgstr[1] "%i stromy"
 msgstr[2] "%i stromů"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:91
+#: ../../scripting/win_conditions/wood_gnome.lua:91
 msgid "%1$s has %2$s at the moment."
 msgstr ""
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+#: ../../scripting/win_conditions/wood_gnome.lua:142
 msgid "%1$s had %2$s."
 msgstr "%1$s měl %2$s."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:147
+#: ../../scripting/win_conditions/wood_gnome.lua:147
 msgid "The winner is %1$s with %2$s."
 msgstr ""
-
-#: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
-msgid "Endless Game (no fog)"
-msgstr "Nekonečná hra (bez mlhy)"
-
-#: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
-msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Toto je nekonečná hra bez pravidel. Válečná mlha je vypnuta."

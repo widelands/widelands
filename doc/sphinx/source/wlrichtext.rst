@@ -58,8 +58,8 @@ font-size
    mission texts.
 
 font-face
-   Name of the font to use. The valid fonts can be found in the ``data/i18n/fonts/``
-   directory inside the widelands directory. The default is ``DejaVuSans``.
+   Font face style of the font to use. The valid fonts are ``sans``, ``serif``,
+   and ``condensed``.
 
 font-color
    The color of this font as a RGB hex tuple. That means 000000 is completely
@@ -68,12 +68,18 @@ font-color
 
 font-weight
    ``normal`` or ``bold``. Note that not everything is supported by all fonts.
+   Do not use with ``font-style=italic`` at the same time; double formatting is
+   typographically bad.
 
 font-style
    ``normal`` or ``italic``. Note that not everything is supported by all fonts.
+   Do not use with ``font-weight=bold`` at the same time; double formatting is
+   typographically bad.
 
 font-decoration
    ``normal`` or ``underline``. Note that not everything is supported by all fonts.
+   Do not use with ``font-weight=bold`` or ``font-style=italic`` at the same time;
+   double formatting is typographically bad.
 
 line-spacing
    Line spacing in points. Default is 0.

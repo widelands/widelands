@@ -26,11 +26,10 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
-
 
 /*
  * UI 1 - Selection of Campaign
@@ -86,7 +85,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 get_right_column_w(m_right_column_x + m_indent),
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
 	m_ta_campname.set_tooltip(_("The name of this campaign"));
@@ -228,11 +227,16 @@ void FullscreenMenuCampaignSelect::fill_table()
 			CampaignListData campaign_data;
 
 			campaign_data.index = i;
-			campaign_data.name = s.get_string(cname.c_str(), "");
-			campaign_data.tribename = s.get_string(ctribename.c_str(), "");
-			campaign_data.difficulty = difficulty;
-			campaign_data.difficulty_description = s.get_string(cdiff_descr.c_str(), "");
-			campaign_data.description = s.get_string(cdescription.c_str(), "");
+
+			{
+				i18n::Textdomain td("maps");
+				campaign_data.name = _(s.get_string(cname.c_str(), ""));
+				campaign_data.tribename = _(s.get_string(ctribename.c_str(), ""));
+				campaign_data.difficulty = difficulty;
+				campaign_data.difficulty_description = _(s.get_string(cdiff_descr.c_str(), ""));
+				campaign_data.description = _(s.get_string(cdescription.c_str(), ""));
+			}
+
 			m_campaigns_data.push_back(campaign_data);
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
@@ -322,7 +326,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	m_is_tutorial(is_tutorial)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	if (m_is_tutorial) {
 		m_ok.set_tooltip(_("Play this tutorial"));
@@ -425,9 +429,11 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		}
 		m_label_author.set_text(ngettext("Author:", "Authors:", authors.get_number()));
 
-		i18n::Textdomain td("maps");
-		m_ta_mapname.set_text(_(map.get_name()));
-		m_ta_description.set_text(_(map.get_description()));
+		{
+			i18n::Textdomain td("maps");
+			m_ta_mapname.set_text(_(map.get_name()));
+			m_ta_description.set_text(_(map.get_description()));
+		}
 		m_ta_description.scroll_to_top();
 	}
 }
@@ -459,15 +465,17 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		Section & global_s = prof->get_safe_section("global");
 
 		// Set subtitle of the page
-		const std::string campaign_name = (boost::format("campname%u") % campaign).str();
-		const std::string campaign_tribe = (boost::format("camptribe%u") % campaign).str();
-		m_subtitle.set_text((boost::format("%s — %s")
-									% global_s.get_string(campaign_tribe.c_str())
-									% global_s.get_string(campaign_name.c_str())).str());
+		const char* campaign_tribe = _(global_s.get_string(
+													 (boost::format("camptribe%u") % campaign).str().c_str()));
+		const char* campaign_name;
+		{
+			i18n::Textdomain td("maps");
+			campaign_name = _(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
+		}
+		m_subtitle.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str());
 
 		// Get section of campaign-maps
-		const std::string campaign_section = (boost::format("campsect%u") % campaign).str();
-		campsection = global_s.get_string(campaign_section.c_str());
+		campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
 	}
 
 	// Create the entry we use to load the section of the map

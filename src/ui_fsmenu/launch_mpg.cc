@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constants.h"
 #include "logic/game.h"
@@ -36,20 +37,18 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
-#include "wui/text_constants.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow
-		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
-		 UI::Font * font)
+		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h)
 	:
 	/** TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game */
 	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
@@ -69,7 +68,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 1));
-		btn->set_font(font);
 
 		btn = new UI::Button
 			(this, "saved_game",
@@ -79,7 +77,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2));
-		btn->set_font(font);
 
 		btn = new UI::Button
 			(this, "cancel",
@@ -89,7 +86,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 0));
-		btn->set_font(font);
 	}
 
 
@@ -203,12 +199,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 			 (&FullscreenMenuLaunchMPG::help_clicked,
 			  boost::ref(*this)));
 
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-	m_wincondition.set_font(font_small());
-	m_help_button.set_font(font_small());
-	m_change_map_or_save.set_font(font_small());
-	m_wincondition_type.set_textstyle(ts_small());
+	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
 
 	m_lua = new LuaInterface();
 	win_condition_clicked();
@@ -326,7 +317,7 @@ void FullscreenMenuLaunchMPG::win_condition_update() {
 /// Opens a popup window to select a map or saved game
 void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
-		(this, m_ctrl, get_w() / 3, get_h() / 4, font_small());
+		(this, m_ctrl, get_w() / 3, get_h() / 4);
 	switch (selection_window.run()) {
 		case 1:
 			select_map();
@@ -491,14 +482,11 @@ void FullscreenMenuLaunchMPG::refresh()
 		}
 	} else {
 		// Write client infos
-		std::string temp =
-			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
-			?
-			(boost::format(_("Player %i")) % (settings.playernum + 1)).str()
-			:
-			_("Spectator");
-		temp  = (boost::format(_("At the moment you are %s")) % temp.c_str()).str();
-		m_client_info.set_text(temp);
+		std::string client_info =
+			(settings.playernum >= 0) && (settings.playernum < MAX_PLAYERS) ?
+					(boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
+					_("You are a spectator.");
+		m_client_info.set_text(client_info);
 	}
 
 	m_ok.set_enabled(m_settings->can_launch());

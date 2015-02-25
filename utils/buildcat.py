@@ -27,14 +27,15 @@ MAINPOTS = [
     ( "maps/maps", [
         "../../data/maps/*/elemental",
         "../../data/maps/*/*/elemental",
-        "../../data/campaigns/cconfig",
+        "../../data/campaigns/*.conf",
         "../../data/campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../data/txts/license",
-                  "../../data/txts/*.lua",
+                  "../../data/txts/README.lua",
                   "../../data/txts/developers",
                   "../../data/txts/editor_readme",
                   "../../data/txts/tips/*.tip"] ),
+    ( "translator_credits/translator_credits", ["../../data/txts/translator_credits.lua"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
@@ -118,26 +119,6 @@ ITERATIVEPOTS = [
     ),
 ]
 
-# Paths to search for exectuables
-PATHS = [
-    "/bin", "/usr/bin",
-    "/opt/local/bin", "/sw/bin",
-    "/usr/local/bin"
-]
-def find_exectuable(cmd):
-    """
-    Try to find the executable given some paths. Defaults to just return
-    the cmd if it is not found in any paths
-    """
-    for p in PATHS:
-        full_path = os.path.join(p, cmd)
-        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
-            return full_path
-    return cmd
-
-MSGMERGE = find_exectuable("msgmerge")
-XGETTEXT = find_exectuable("xgettext")
-
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
@@ -146,14 +127,12 @@ XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
-MSGMERGEOPTS="-q --no-wrap"
-
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
     if (not os.path.isdir("po")):
-        print "Error: no 'po/' subdir found.\n"
-        print ("This script needs to access translations placed " +
+        print("Error: no 'po/' subdir found.\n")
+        print("This script needs to access translations placed " +
             "under 'po/' subdir, but these seem unavailable. Check " +
             "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
@@ -202,7 +181,7 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
+    gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
             (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
     try:
         for one_pattern in srcfiles:
@@ -211,7 +190,7 @@ def do_compile_src( potfile, srcfiles ):
             for one_file in glob(os.path.normpath(one_pattern)):
                 gettext_input.write(one_file + "\n")
         return gettext_input.close()
-    except IOError, err_msg:
+    except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return -1
 
@@ -286,7 +265,7 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-    rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+    rv = os.system("msgmerge -q --no-wrap %s %s -o %s" % (po, pot, dst))
     if rv:
         raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
     return rv
@@ -370,4 +349,4 @@ if __name__ == "__main__":
     # Make sure .pot files are up to date.
     do_update_potfiles()
 
-    print ""
+    print("")

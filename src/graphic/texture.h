@@ -19,13 +19,15 @@
 #ifndef WL_GRAPHIC_TEXTURE_H
 #define WL_GRAPHIC_TEXTURE_H
 
+#include <memory>
+
 #include "base/rect.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/surface.h"
 
 struct SDL_Surface;
 
-class Texture : public Surface {
+class Texture : public Surface, public Image {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
@@ -41,37 +43,58 @@ public:
 
 	virtual ~Texture();
 
-	/// Interface implementation
-	//@{
-	void lock(LockMode) override;
-	void unlock(UnlockMode) override;
+	// Implements Surface
+	int width() const override;
+	int height() const override;
+	void setup_gl() override;
+	void pixel_to_gl(float* x, float* y) const override;
 
-	// Note: the following functions are reimplemented here though they
-	// basically only call the functions in Surface wrapped in calls to
-	// setup_gl(), reset_gl(). The same functionality can be achieved by making
-	// those two functions virtual and calling them in Surface. However,
-	// especially for blit which is called very often and mostly on the screen,
-	// this costs two virtual function calls which makes a notable difference in
-	// profiles.
-	void fill_rect(const Rect&, const RGBAColor&) override;
-	void draw_rect(const Rect&, const RGBColor&) override;
-	void brighten_rect(const Rect&, int32_t factor) override;
-	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	void blit(const Rect& dstretc,
-	          const Texture*,
-	          const Rect& srcrc,
-	          BlendMode blend_mode = BlendMode::UseAlpha) override;
+	// Implements Image.
+	int get_gl_texture() const override;
+	const FloatRect& texture_coordinates() const override;
 
-	GLuint get_gl_texture() const {return m_texture;}
+	enum UnlockMode {
+		/**
+		 * Update mode will ensure that any changes in the pixel data
+		 * will appear in subsequent operations.
+		 */
+		Unlock_Update = 0,
 
-	const FloatRect& texture_coordinates() const {
-		return m_texture_coordinates;
-	}
+		/**
+		 * NoChange mode indicates that the caller changed no pixel data.
+		 *
+		 * \note If the caller did change pixel data but specifies NoChange
+		 * mode, the results are undefined.
+		 */
+		Unlock_NoChange
+	};
+
+	/// This returns the pixel format for direct pixel access.
+	const SDL_PixelFormat & format() const;
+
+	// Number of bytes per row.
+	uint16_t get_pitch() const;
+
+	// Pointer to the raw pixel data. May only be called inside lock/unlock
+	// pairs.
+	uint8_t * get_pixels() const;
+
+	// Lock/Unlock pairs must guard any of the direct pixel access using the
+	// functions below. Lock/Unlock pairs cannot be nested.
+	void lock();
+	void unlock(UnlockMode);
+
+	// Returns the color of the pixel as a value as defined by 'format()'.
+	uint32_t get_pixel(uint16_t x, uint16_t y);
+
+	// Sets the pixel to the 'clr'.
+	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
 private:
-	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
+
+	// Width and height.
+	int m_w, m_h;
 
 	// True if we own the texture, i.e. if we need to delete it.
 	bool m_owns_texture;
@@ -80,6 +103,11 @@ private:
 	FloatRect m_texture_coordinates;
 
 	GLuint m_texture;
+
+	/// Pixel data, while the texture is locked
+	std::unique_ptr<uint8_t[]> m_pixels;
+
+	DISALLOW_COPY_AND_ASSIGN(Texture);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

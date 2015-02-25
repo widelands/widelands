@@ -22,10 +22,10 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	FullscreenMenuBase(ImageCatalog::Key::kFullscreen),
@@ -106,15 +106,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 
 	Section & s = g_options.pull_section("global"); //  for playername
 
-	joingame.set_font(font_small());
-	hostgame.set_font(font_small());
-	back.set_font(font_small());
-	loadlasthost.set_font(font_small());
-
-	title       .set_textstyle(ts_big());
-	m_opengames .set_textstyle(ts_small());
-	m_playername.set_textstyle(ts_small());
-	m_hostname  .set_textstyle(ts_small());
+	title       .set_textstyle(UI::TextStyle::ui_big());
 	hostname    .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);

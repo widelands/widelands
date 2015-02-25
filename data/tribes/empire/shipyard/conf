@@ -2,6 +2,7 @@ size=medium
 
 [aihints]
 needs_water=true
+prohibited_till=1500
 
 [buildcost]
 log=3
@@ -40,7 +41,7 @@ animate=working 35000
 return=completed
 
 [idle]
-pics=work_??.png
+pics=idle_??.png
 hotspot=50 63
 
 [build]

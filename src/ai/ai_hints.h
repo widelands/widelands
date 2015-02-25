@@ -21,6 +21,7 @@
 #define WL_AI_AI_HINTS_H
 
 #include <stdint.h>
+#include <string>
 
 #include "base/macros.h"
 
@@ -31,14 +32,21 @@ class Section;
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(Section*);
-	~BuildingHints();
 
-	char const* get_renews_map_resource() const {
-		return renews_map_resource;
+	bool renews_map_resource() const {
+		return !renews_map_resource_.empty();
+	}
+
+	std::string get_renews_map_resource() const {
+		return renews_map_resource_;
+	}
+
+	bool has_mines() const {
+		return !mines_.empty();
 	}
 
 	char const* get_mines() const {
-		return mines_;
+		return mines_.c_str();
 	}
 
 	bool is_logproducer() const {
@@ -87,8 +95,8 @@ struct BuildingHints {
 	}
 
 private:
-	char* renews_map_resource;
-	char* mines_;
+	std::string renews_map_resource_;
+	std::string mines_;
 	bool log_producer_;
 	bool stone_producer_;
 	bool needs_water_;

@@ -20,13 +20,12 @@
 #include "wui/game_tips.h"
 
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "profile/profile.h"
-#include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
 

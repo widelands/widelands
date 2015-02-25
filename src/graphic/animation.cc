@@ -38,9 +38,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
-#include "graphic/image_transformations.h"
 #include "graphic/surface.h"
-#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -127,19 +125,19 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const Image& representative_image(const RGBColor& clr) const override;
 	const Image& representative_image_from_disk() const override;
+	const std::string& representative_image_from_disk_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:
+	// Loads the graphics if they are not yet loaded.
+	void ensure_graphics_are_loaded() const;
+
 	// Load the needed graphics from disk.
 	void load_graphics();
-
-	// Returns the given frame image with the given clr (if not NULL).
-	const Image& get_frame(uint32_t time, const RGBColor* playercolor = NULL) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -231,6 +229,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	}
 }
 
+void NonPackedAnimation::ensure_graphics_are_loaded() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
+}
+
 void NonPackedAnimation::load_graphics() {
 	if (image_files_.empty())
 		throw wexception("animation without pictures.");
@@ -271,23 +275,17 @@ void NonPackedAnimation::load_graphics() {
 }
 
 uint16_t NonPackedAnimation::width() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->width();
 }
 
 uint16_t NonPackedAnimation::height() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->height();
 }
 
 uint16_t NonPackedAnimation::nr_frames() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_.size();
 }
 
@@ -299,12 +297,13 @@ const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const {
-	return get_frame(0, &clr);
+const Image& NonPackedAnimation::representative_image_from_disk() const {
+	ensure_graphics_are_loaded();
+	return *frames_[0];
 }
 
-const Image& NonPackedAnimation::representative_image_from_disk() const {
-	return get_frame(0, nullptr);
+const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {
+	return image_files_[0];
 }
 
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
@@ -322,23 +321,24 @@ void NonPackedAnimation::blit
 {
 	assert(target);
 
-	const Image& frame = get_frame(time, clr);
-	target->blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h), frame.texture(), srcrc);
-}
+	const int idx = time / frametime_ % nr_frames();
+	assert(idx < nr_frames());
 
-const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	if (!hasplrclrs_ || clr == nullptr) {
+		::blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		     *frames_.at(idx),
+		     srcrc,
+		     1.,
+		     BlendMode::UseAlpha,
+		     target);
+	} else {
+		blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		             *frames_.at(idx),
+		             *pcmasks_.at(idx),
+		             srcrc,
+		             *clr,
+		             target);
 	}
-	const uint32_t framenumber = time / frametime_ % nr_frames();
-	assert(framenumber < nr_frames());
-	const Image* original = frames_[framenumber];
-
-	if (!hasplrclrs_ || !playercolor)
-		return *original;
-
-	assert(frames_.size() == pcmasks_.size());
-	return *ImageTransformations::player_colored(*playercolor, original, pcmasks_[framenumber]);
 }
 
 }  // namespace

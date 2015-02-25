@@ -103,6 +103,8 @@ wl_library(widelands_ball_of_mud
     build_info
     editor
     graphic
+    graphic_text
+    graphic_text_layout
     helper
     io_dedicated_log
     io_filesystem

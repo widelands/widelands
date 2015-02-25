@@ -23,12 +23,12 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
-
 
 using namespace std;
 
@@ -1215,21 +1215,16 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
-	std::string style
-		(g_options.pull_section("global").get_string
-		 	("ui_font", UI_FONT_NAME_SERIF));
-	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_SERIF;
-	if (style == "sans")
-		return UI_FONT_NAME_SANS;
-	if (g_fs->file_exists("data/i18n/fonts/" + style))
+	std::string style(UI::g_fh1->fontset().serif());
+	if (g_fs->file_exists("data/i18n/fonts/" + style)) {
 		return style;
+	}
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
 		 style.c_str());
-	return UI_FONT_NAME;
+	return UI::FontSet::kFallbackFont;
 }
 
 }

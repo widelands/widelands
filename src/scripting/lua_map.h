@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 
 namespace Widelands {
@@ -596,12 +596,14 @@ public:
 	/*
 	 * Properties
 	 */
-
+	int get_roads(lua_State * L);
+	int get_building(lua_State * L);
 	/*
 	 * Lua Methods
 	 */
 	int set_wares(lua_State *);
 	int get_wares(lua_State *);
+
 
 	/*
 	 * C Methods

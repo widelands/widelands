@@ -32,6 +32,8 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -42,7 +44,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
+#include "scripting/lua_interface.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -53,8 +55,6 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
 #include "wui/unique_window_handler.h"
 
 using Widelands::Area;
@@ -767,7 +767,7 @@ void InteractiveBase::roadb_add_overlay()
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
-		set_to |=  Widelands::Road_Normal << shift;
+		set_to |=  Widelands::RoadType::kNormal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 

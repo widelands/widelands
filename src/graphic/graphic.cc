@@ -19,6 +19,8 @@
 
 #include "graphic/graphic.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -27,11 +29,9 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
@@ -41,10 +41,6 @@ using namespace std;
 Graphic * g_gr;
 
 namespace  {
-
-/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
-/// These are all surfaces that are not loaded from disk.
-const uint32_t TRANSIENT_TEXTURE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
@@ -63,17 +59,14 @@ void set_icon(SDL_Window* sdl_window) {
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
+Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
-     texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
-     image_cache_(new ImageCache(texture_cache_.get())),
 	  image_catalog_(new ImageCatalog()),
+     image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
-	ImageTransformations::initialize();
-
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -87,7 +80,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	                                m_window_mode_height,
 	                                SDL_WINDOW_OPENGL);
 	resolution_changed();
-	set_fullscreen(fullscreen);
+	set_fullscreen(init_fullscreen);
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(m_sdl_window);
@@ -95,8 +88,10 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	m_glcontext = SDL_GL_CreateContext(m_sdl_window);
 	SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
 
-	// See graphic/gl/system_headers.h for an explanation of the
-	// next line.
+#ifdef USE_GLBINDING
+	glbinding::Binding::initialize();
+#else
+	// See graphic/gl/system_headers.h for an explanation of the next line.
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -104,6 +99,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 			 err, glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
+#endif
 
 	log("Graphics: OpenGL: Version \"%s\"\n",
 		 reinterpret_cast<const char*>(glGetString(GL_VERSION)));
@@ -148,7 +144,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 
 Graphic::~Graphic()
 {
-	texture_cache_->flush();
 	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();
@@ -288,8 +283,8 @@ const Image* Graphic::cataloged_image(ImageCatalog::Key key) {
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(image->texture(), sw, COLOR_TYPE::RGBA);
+void Graphic::save_png(Texture* texture, StreamWrite * sw) const {
+	save_to_png(texture, sw, ColorType::RGBA);
 }
 
 /**
@@ -298,7 +293,6 @@ void Graphic::save_png(const Image* image, StreamWrite * sw) const {
 void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
-	StreamWrite * sw = g_fs->open_stream_write(fname);
-	save_surface_to_png(screen_.get(), sw, COLOR_TYPE::RGB);
-	delete sw;
+	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(fname));
+	save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
 }

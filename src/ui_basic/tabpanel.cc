@@ -248,7 +248,9 @@ void TabPanel::draw(RenderTarget & dst)
 		                        picture_width,
 		                        picture_height),
 		                   m_tabs[idx]->pic,
-		                   Rect(0, 0, m_tabs[idx]->pic->width(), m_tabs[idx]->pic->height()));
+		                   Rect(0, 0, m_tabs[idx]->pic->width(), m_tabs[idx]->pic->height()),
+		                   1.,
+		                   BlendMode::UseAlpha);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);

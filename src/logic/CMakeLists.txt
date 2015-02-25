@@ -12,7 +12,6 @@ wl_binary(wl_map_info
     io_filesystem
     logic
     map_io_map_loader
-    scripting
 )
 
 wl_library(logic_widelands_geometry
@@ -168,6 +167,8 @@ wl_library(logic
     replay.h
     requirements.cc
     requirements.h
+    road_textures.cc
+    road_textures.h
     roadtype.h
     save_handler.cc
     save_handler.h
@@ -232,6 +233,8 @@ wl_library(logic
     graphic_color
     graphic_image_io
     graphic_surface
+    graphic_text
+    graphic_text_layout
     graphic_texture_atlas
     helper
     io_fileread
@@ -246,12 +249,14 @@ wl_library(logic
     notifications
     profile
     random
-    scripting
+    scripting_coroutine
+    scripting_logic
+    scripting_lua_interface
+    scripting_lua_table
     sound
     ui_basic
     widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
     wui_overlay_manager
-    wui_text_layout
 )

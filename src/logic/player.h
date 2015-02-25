@@ -42,7 +42,7 @@ struct PlayerImmovable;
 class Soldier;
 class TrainingSite;
 struct Flag;
-struct TribeDescr;
+class TribeDescr;
 struct Road;
 struct AttackController;
 
@@ -246,14 +246,14 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const {return roads & Road_Mask;}
+		uint8_t road_e() const {return roads & RoadType::kMask;}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
 		uint8_t road_se() const {
-			return roads >> Road_SouthEast & Road_Mask;
+			return roads >> RoadType::kSouthEast & RoadType::kMask;
 		}
 
 		/// Whether there is a road between this node and the node to the
@@ -261,7 +261,7 @@ public:
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
 		uint8_t road_sw() const {
-			return roads >> Road_SouthWest & Road_Mask;
+			return roads >> RoadType::kSouthWest & RoadType::kMask;
 		}
 
 		/**
@@ -489,11 +489,7 @@ public:
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	// Statistics
-	const BuildingStatsVector & get_building_statistics
-		(const BuildingIndex& i) const
-	{
-		return m_building_stats[i];
-	}
+	const BuildingStatsVector& get_building_statistics(const BuildingIndex& i) const;
 
 	std::vector<uint32_t> const * get_ware_production_statistics
 		(WareIndex const) const;
@@ -522,9 +518,10 @@ public:
 	}
 
 private:
+	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const std::string & sender);
+	void play_message_sound(const Message::Type & msgtype);
 	void _enhance_or_dismantle
 		(Building *, BuildingIndex const index_of_new_building);
 

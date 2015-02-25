@@ -25,8 +25,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
-#include "graphic/image.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -260,7 +258,6 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
-	// First create a temporary SDL Surface to draw the minimap.
 	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created texture could be cached and only redrawn two
 	//       or three times per second
@@ -271,12 +268,12 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	Texture* texture = new Texture(map_w, map_h);
 	assert(texture->format().BytesPerPixel == sizeof(uint32_t));
 
-	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
-	texture->lock(Surface::Lock_Normal);
+	fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255), texture);
+	texture->lock();
 
 	draw_minimap_int(texture, egbase, player, viewpoint, layers);
 
-	texture->unlock(Surface::Unlock_Update);
+	texture->unlock(Texture::Unlock_Update);
 
 	return std::unique_ptr<Texture>(texture);
 }
@@ -308,7 +305,5 @@ void write_minimap_image
 
 	// Render minimap
 	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	std::unique_ptr<const Image> image(new_in_memory_image("minimap", texture.release()));
-	g_gr->save_png(image.get(), streamwrite);
-	image.reset();
+	g_gr->save_png(texture.get(), streamwrite);
 }

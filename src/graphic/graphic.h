@@ -29,12 +29,9 @@
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
 
-#define MAX_RECTS 20
-
 class AnimationManager;
 class RenderTarget;
-class Surface;
-class TextureCache;
+class Screen;
 class StreamWrite;
 
 // Will be send whenever the resolution changes.
@@ -74,8 +71,6 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	TextureCache& textures() const {return *texture_cache_.get();}
-
 	// Returns all cached images. Use cataloged_image instead of this function
 	// if the image is registered there.
 	ImageCache& images() const {return *image_cache_.get();}
@@ -87,7 +82,7 @@ public:
 
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
-	void save_png(const Image*, StreamWrite*) const;
+	void save_png(Texture*, StreamWrite*) const;
 
 	void screenshot(const std::string& fname) const;
 
@@ -101,7 +96,7 @@ private:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	std::unique_ptr<Surface> screen_;
+	std::unique_ptr<Screen> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
@@ -112,13 +107,12 @@ private:
 	/// This marks the complete screen for updating.
 	bool m_update;
 
-	/// Volatile cache of Hardware dependant textures.
-	std::unique_ptr<TextureCache> texture_cache_;
-	/// Non-volatile cache of hardware independent images. The use the
-	/// texture_cache_ to cache their pixel data.
+	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
+
 	/// Maps images from keys to filenames.
 	std::unique_ptr<ImageCatalog> image_catalog_;
+
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
 };

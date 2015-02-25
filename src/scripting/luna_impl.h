@@ -26,8 +26,10 @@
 #ifndef WL_SCRIPTING_LUNA_IMPL_H
 #define WL_SCRIPTING_LUNA_IMPL_H
 
-#include "scripting/c_utils.h"
-#include "third_party/eris/lua.hpp"
+#include <cassert>
+
+#include "scripting/lua.h"
+#include "scripting/report_error.h"
 
 int luna_unpersisting_closure(lua_State * L);
 
@@ -240,7 +242,7 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
-	assert(lua_gettop(L) == 1); // S: lightuserdata
+	assert(lua_gettop(L) == 1);  // S: lightuserdata
 	T * * const obj = get_user_class<T>(L, 1);
 
 	lua_newtable(L);  // S: user_obj table

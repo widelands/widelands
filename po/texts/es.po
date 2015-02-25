@@ -1,24 +1,22 @@
-# Widelands po/es_ES/texts.po
-# Copyright (C) 2007 Widelands Development Team
-#
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007, 2009.
-# Raul Ferriz <raul.ferriz@gmail.com>, 2009.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
+# Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-06-06 04:54+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
-"Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 11:20+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:39+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -28,18 +26,15 @@ msgstr "LEEME"
 msgid "an open source strategy game"
 msgstr "un juego de estrategia de Código Abierto"
 
-#: ../../txts/README.lua:17
-#: ../../txts/editor_readme:7
+#: ../../txts/README.lua:17 ../../txts/editor_readme:7
 msgid "Introduction"
 msgstr "Introducción"
 
 #: ../../txts/README.lua:19
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer\n"
-"campaigns and a multiplayer mode. The game was inspired by Settlers II but "
-"has\n"
-"significantly more variety and depth to it. Still, it is easy to get "
-"started\n"
+"campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
+"significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
 msgstr ""
 
@@ -60,10 +55,7 @@ msgstr "Visita la página principal de Widelands:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
-"Widelands está disponible bajo la Licencia Pública General de GNU (GPL). "
-"Para\n"
-"más información, consulta el archivo «COPYING»."
+msgstr "Widelands está disponible bajo la Licencia Pública General de GNU (GPL). Para\nmás información, consulta el archivo «COPYING»."
 
 #: ../../txts/README.lua:37
 msgid "Status"
@@ -72,12 +64,9 @@ msgstr "Estado"
 #: ../../txts/README.lua:39
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even\n"
-"more in multiplayer with others. Still, there is always more work to be done "
-"in\n"
-"all areas. If you are interested in contributing – be it by making "
-"graphics,\n"
-"fixing bugs or adding new features, translating the game into your language "
-"or\n"
+"more in multiplayer with others. Still, there is always more work to be done in\n"
+"all areas. If you are interested in contributing – be it by making graphics,\n"
+"fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
 msgstr ""
 
@@ -87,18 +76,15 @@ msgstr "Control general del juego"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, "
-"click\n"
-"on the title bar of that window either with the middle mouse button or with "
-"the left\n"
+"To close an open window, right-click on it. To minimize/maximize a window, click\n"
+"on the title bar of that window either with the middle mouse button or with the left\n"
 "mouse button while holding down CTRL."
 msgstr ""
 
 #: ../../txts/README.lua:51
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction "
-"are\n"
+"If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr ""
 
@@ -124,13 +110,11 @@ msgstr ""
 msgid "PAUSE: pauses the game"
 msgstr ""
 
-#: ../../txts/README.lua:63
-#: ../../txts/editor_readme:21
+#: ../../txts/README.lua:63 ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
-#: ../../txts/README.lua:64
-#: ../../txts/editor_readme:29
+#: ../../txts/README.lua:64 ../../txts/editor_readme:29
 msgid "M: toggles minimap"
 msgstr ""
 
@@ -138,8 +122,7 @@ msgstr ""
 msgid "N: toggles messages (‘news’)"
 msgstr ""
 
-#: ../../txts/README.lua:66
-#: ../../txts/editor_readme:23
+#: ../../txts/README.lua:66 ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr ""
 
@@ -188,133 +171,142 @@ msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr ""
 
 #: ../../txts/README.lua:78
-msgid "F11: takes a screenshot"
+msgid "CTRL+F11: takes a screenshot"
 msgstr ""
 
 #: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
-"En la ventana de mensajes, se encuentran disponibles las siguientes teclas "
-"de acceso rápido:"
+msgstr "En la ventana de mensajes, se encuentran disponibles las siguientes teclas de acceso rápido:"
 
 #: ../../txts/README.lua:82
-msgid "G: jumps to the location corresponding to the current message"
+msgid "0: shows all messages"
 msgstr ""
 
 #: ../../txts/README.lua:83
-msgid "DELETE: archives the current message"
+msgid "1: shows geologists' messages only"
+msgstr ""
+
+#: ../../txts/README.lua:84
+msgid "2: shows economy messages only"
 msgstr ""
 
 #: ../../txts/README.lua:85
-msgid "Online Help"
-msgstr "Ayuda online"
+msgid "3: shows seafaring messages only"
+msgstr ""
+
+#: ../../txts/README.lua:86
+msgid "4: shows warfare messages only"
+msgstr ""
 
 #: ../../txts/README.lua:87
-msgid ""
-"If you need documentation or help for Widelands or the Widelands Editor, be\n"
-"sure to visit our homepage. You can find an up to date online help in our "
-"Wiki\n"
-"and a detailed description of the tribe economies in our online encyclopedia."
+msgid "5: shows scenario messages only"
+msgstr ""
+
+#: ../../txts/README.lua:88
+msgid "G: jumps to the location corresponding to the current message"
+msgstr ""
+
+#: ../../txts/README.lua:89
+msgid "DELETE: archives/restores the current message"
 msgstr ""
 
 #: ../../txts/README.lua:91
-msgid "Reporting Bugs"
-msgstr "Comunicando fallos"
+msgid "Online Help"
+msgstr "Ayuda online"
 
 #: ../../txts/README.lua:93
-msgid "If you encounter a bug, please report it to our bugtracker:"
+msgid ""
+"If you need documentation or help for Widelands or the Widelands Editor, be\n"
+"sure to visit our homepage. You can find an up to date online help in our Wiki\n"
+"and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
 
 #: ../../txts/README.lua:97
+msgid "Reporting Bugs"
+msgstr "Comunicando fallos"
+
+#: ../../txts/README.lua:99
+msgid "If you encounter a bug, please report it to our bugtracker:"
+msgstr ""
+
+#: ../../txts/README.lua:103
 msgid "Please provide enough background information. Tell us:"
 msgstr "Por favor, comunícanos suficiente información auxiliar. Dinos:"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:105
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:107
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:109
 msgid ""
-"- Which version of Widelands you are running (i.e. either the build number "
-"or\n"
-"the revision number if you are running a development version or a daily "
-"build.)"
+"- Which version of Widelands you are running (i.e. either the build number or\n"
+"the revision number if you are running a development version or a daily build.)"
 msgstr ""
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:112
 msgid ""
-"- Please also include which operating system you are running Widelands on "
-"as\n"
+"- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:115
 msgid "- Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:117
 msgid ""
-"- If the bug concerns something not being displayed correctly or if it "
-"helps\n"
+"- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:120
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:124
 msgid "Replays"
-msgstr ""
-
-#: ../../txts/README.lua:120
-msgid ""
-"Widelands records every game you play in two files. One of these files has "
-"a\n"
-".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
-".wrpl extension and contains all commands that were issued by all players, "
-"such\n"
-"as building a road or attacking an enemy. The rest of the filenames will "
-"tell\n"
-"you the time you started the game."
 msgstr ""
 
 #: ../../txts/README.lua:126
 msgid ""
-"Using the Watch Replay option in the main menu, a previously played game "
-"will\n"
+"Widelands records every game you play in two files. One of these files has a\n"
+".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
+".wrpl extension and contains all commands that were issued by all players, such\n"
+"as building a road or attacking an enemy. The rest of the filenames will tell\n"
+"you the time you started the game."
+msgstr ""
+
+#: ../../txts/README.lua:132
+msgid ""
+"Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
-"changes in the game data files or the Widelands executable can cause a "
-"replay\n"
-"to become incompatible and to ‘go out of sync’. This is similar to how "
-"network\n"
-"games will suffer from desynchronization problems if one of the players has "
-"a\n"
+"changes in the game data files or the Widelands executable can cause a replay\n"
+"to become incompatible and to ‘go out of sync’. This is similar to how network\n"
+"games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
 msgstr ""
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
-"can be useful as attachments to bug reports. The replay files are saved in "
-"the\n"
+"can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
 
 #: ../../txts/developers:1
-msgid "Development"
-msgstr "Desarrollo"
+msgid "Authors"
+msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -328,18 +320,15 @@ msgstr "Jefe"
 msgid "Elders"
 msgstr "Ancianos"
 
-#: ../../txts/developers:18
-#: ../../txts/developers:368
+#: ../../txts/developers:18 ../../txts/developers:366
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../../txts/developers:23
-#: ../../txts/developers:361
+#: ../../txts/developers:23 ../../txts/developers:359
 msgid "Homepage"
 msgstr "Página inicial"
 
-#: ../../txts/developers:28
-#: ../../txts/developers:375
+#: ../../txts/developers:28 ../../txts/developers:373
 msgid "Sound"
 msgstr "Sonido"
 
@@ -351,155 +340,147 @@ msgstr ""
 msgid "Coders"
 msgstr "Programadores"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:96
 msgid "Graphicians"
 msgstr "Grafistas"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:126
 msgid "Musicians"
 msgstr "Músicos"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:138
 msgid "Sound Effects"
 msgstr "Efectos de sonido"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:148
 msgid "Maps and Missions"
 msgstr "Mapas y Misiones"
 
-#: ../../txts/developers:166
-msgid "Tutorials"
-msgstr ""
-
-#: ../../txts/developers:172
+#: ../../txts/developers:169
 msgid "Campaign Story"
 msgstr "Historia de la Campaña"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:172
 msgid "Barbarian"
 msgstr "Bárbaro"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:178
 msgid "Empire"
 msgstr "Imperio"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:182
 msgid "Atlantean"
 msgstr "Atlante"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid "Translators"
 msgstr "Traductores"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:192
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
-msgstr ""
-"NOTA: esta lista contiene a la gente que ha traducido Widelands antes de "
-"transladarnos a launchpad.net. "
+msgstr "NOTA: esta lista contiene a la gente que ha traducido Widelands antes de transladarnos a launchpad.net. "
 
-#: ../../txts/developers:196
+#: ../../txts/developers:193
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
-msgstr ""
-"Vaya a https://translations.launchpad.net/widelands para ver la lista de la "
-"gente que ha ayudado a traducir Widelands via launchpad.net."
+msgstr "Vaya a https://translations.launchpad.net/widelands para ver la lista de la gente que ha ayudado a traducir Widelands via launchpad.net."
 
-#: ../../txts/developers:200
+#: ../../txts/developers:197
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:204
 msgid "Dansk"
 msgstr "Danes"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:210
 msgid "Dutch"
 msgstr "Holandés"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:217
 msgid "Finnish"
 msgstr "Finlandés"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:223
 msgid "French"
 msgstr "Francés"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:230
 msgid "Galician"
 msgstr "Gallego"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:235
 msgid "German"
 msgstr "Alemán"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:247
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:252
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:257
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:262
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:270
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:275
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:280
 msgid "Spanish"
 msgstr "Castellano"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:285
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../../txts/developers:295
+#: ../../txts/developers:292
 msgid "Packagers"
 msgstr "Empaquetadores"
 
-#: ../../txts/developers:299
+#: ../../txts/developers:296
 msgid "Linux Distributions"
 msgstr "Distribuciones Linux"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:307
 msgid "Other Unix Distributions"
 msgstr "Otras Distribuciones Unix"
 
-#: ../../txts/developers:321
+#: ../../txts/developers:318
 msgid "Non Unix Distributions"
 msgstr "Distribuciones no Unix"
 
-#: ../../txts/developers:333
+#: ../../txts/developers:330
 msgid "Homepage Coders"
 msgstr "Programadores de la página de inicio"
 
-#: ../../txts/developers:342
+#: ../../txts/developers:340
 msgid "Documentation, Help and Wiki"
 msgstr "Documentación, ayuda y wiki"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:355
 msgid "Former elders"
 msgstr "Ancianos previos"
 
-#: ../../txts/developers:380
+#: ../../txts/developers:378
 msgid "Translation"
 msgstr "Traducción"
 
-#: ../../txts/developers:387
+#: ../../txts/developers:385
 msgid "Other"
 msgstr "Otro"
 
@@ -608,8 +589,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/license:16
-msgid ""
-"We are also shipping the GPL as a text document with Widelands itself."
+msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr ""
 
 #: ../../txts/license:18
@@ -627,28 +607,24 @@ msgstr ""
 
 #: ../../txts/license:20
 msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded "
-"from the website."
+"On MacOS, you can find the file called COPYING in the archive you downloaded"
+" from the website."
 msgstr ""
 
 #: ../../txts/license:22
 msgid ""
 "This game comes as-is and without any warranty. For more information and "
-"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for "
-"questions or general support) or https://launchpad.net/widelands "
+"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
+" questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
 msgstr ""
 
-#: ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
-"Algunos edificios (por ejemplo, las granjas) tienen una pequeña área de "
-"producción .Si el edificio está rodeado de árboles o caminos, se parará la "
-"producción."
+msgstr "Algunos edificios (por ejemplo, las granjas) tienen una pequeña área de producción .Si el edificio está rodeado de árboles o caminos, se parará la producción."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -656,8 +632,7 @@ msgid ""
 "out of logs or food."
 msgstr ""
 
-#: ../../txts/tips/barbarians.tip:6
-#: ../../txts/tips/empire.tip:6
+#: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop fishing."
@@ -677,8 +652,8 @@ msgstr ""
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection. "
-"If you then click on the map, an instance of one of the selected animal "
+"You can select multiple animal types if you hold down CTRL during selection."
+" If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr ""
 
@@ -691,8 +666,8 @@ msgstr ""
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down SHIFT switches the first alternative tool on. This tool is in "
-"most cases the complete opposite of the normal tool (for example deletion of "
-"an object instead of placing one)."
+"most cases the complete opposite of the normal tool (for example deletion of"
+" an object instead of placing one)."
 msgstr ""
 
 #: ../../txts/tips/editor.tip:18
@@ -720,16 +695,13 @@ msgstr ""
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
-"La construcción sólo comenzará cuando haya un camino construido hasta el "
-"punto de edificación."
+msgstr "La construcción sólo comenzará cuando haya un camino construido hasta el punto de edificación."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
-"Be sure to send a geologist to survey sites before building a well or a mine."
-msgstr ""
-"Asegúrate de enviar un geólogo a explorar el área antes de construir un pozo "
-"o una mina."
+"Be sure to send a geologist to survey sites before building a well or a "
+"mine."
+msgstr "Asegúrate de enviar un geólogo a explorar el área antes de construir un pozo o una mina."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
@@ -745,9 +717,7 @@ msgstr ""
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
-"Divide tus caminos en varios tramos pequeños, colocando banderas "
-"intermedias. De este modo acelerarás el transporte de tus mercancías."
+msgstr "Divide tus caminos en varios tramos pequeños, colocando banderas intermedias. De este modo acelerarás el transporte de tus mercancías."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -782,47 +752,37 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
-msgstr ""
-"Pulsa Ctrl+(0-9) para guardar ubicaciones importantes, y pulsa 0-9 para "
-"volver a ellas."
+"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
+"them."
+msgstr "Pulsa Ctrl+(0-9) para guardar ubicaciones importantes, y pulsa 0-9 para volver a ellas."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
-"Pressing and holding the ALT GR key lets you drag the window below the mouse "
-"pointer."
+"Removing a road while holding Ctrl lets you remove all flags up to the first"
+" junction."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:50
-msgid ""
-"Removing a road while holding Ctrl lets you remove all flags up to the first "
-"junction."
-msgstr ""
-
-#: ../../txts/tips/general_game.tip:54
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:58
+#: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:62
+#: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:66
+#: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
-"Una economía está formada por todos los edificios y banderas conectados por "
-"carreteras. Los suministros y demandas de los edificios se manejan en su "
-"economía."
+msgstr "Una economía está formada por todos los edificios y banderas conectados por carreteras. Los suministros y demandas de los edificios se manejan en su economía."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
@@ -838,13 +798,12 @@ msgstr ""
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
-"Use ‘@name’ at the beginning of a chat message to send it to only one player."
+"Use ‘@name’ at the beginning of a chat message to send it to only one "
+"player."
 msgstr ""
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr ""
-"Nuestros jugadores computadora son demasiado aburridos? Visita nuestra web "
-"en www.widelands.org y conoce a otros jugadores para jugar en línea."
+msgstr "Nuestros jugadores computadora son demasiado aburridos? Visita nuestra web en www.widelands.org y conoce a otros jugadores para jugar en línea."

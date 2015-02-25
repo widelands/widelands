@@ -61,14 +61,6 @@ bool is_bgr_surface(const SDL_PixelFormat& fmt) {
 	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
 }
 
-inline void setup_gl(const GLuint texture) {
-	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-}
-
-inline void reset_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
 
 }  // namespace
 
@@ -80,8 +72,8 @@ Texture::Texture(int w, int h)
 		return;
 	}
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
-		 GL_UNSIGNED_BYTE, nullptr);
+		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
+			GL_UNSIGNED_BYTE, nullptr);
 }
 
 Texture::Texture(SDL_Surface * surface, bool intensity)
@@ -95,9 +87,8 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || m_w != static_cast<uint32_t>(surface->w) ||
-	    m_h != static_cast<uint32_t>(surface->h) || (bpp != 3 && bpp != 4) ||
-	    is_bgr_surface(*surface->format)) {
+	if (surface->format->palette || m_w != surface->w || m_h != surface->h ||
+	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(m_w, m_h);
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
@@ -115,7 +106,7 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	SDL_LockSurface(surface);
 
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_w, m_h, 0,
+        (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), m_w, m_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
@@ -146,6 +137,22 @@ Texture::~Texture()
 	}
 }
 
+int Texture::width() const {
+	return m_w;
+}
+
+int Texture::height() const {
+	return m_h;
+}
+
+int Texture::get_gl_texture() const {
+	return m_texture;
+}
+
+const FloatRect& Texture::texture_coordinates() const {
+	return m_texture_coordinates;
+}
+
 void Texture::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = (*y / m_h) * 2. - 1.;
@@ -171,11 +178,11 @@ void Texture::init(uint16_t w, uint16_t h)
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
 	// makes no difference
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
-void Texture::lock(LockMode mode) {
+void Texture::lock() {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
@@ -189,11 +196,9 @@ void Texture::lock(LockMode mode) {
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
-	if (mode == Lock_Normal) {
-		glBindTexture(GL_TEXTURE_2D, m_texture);
-		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::unlock(UnlockMode mode) {
@@ -205,7 +210,7 @@ void Texture::unlock(UnlockMode mode) {
 	if (mode == Unlock_Update) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
-			(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
+            (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -213,65 +218,40 @@ void Texture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-void Texture::draw_rect(const Rect& rectangle, const RGBColor& clr)
+uint8_t * Texture::get_pixels() const
 {
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-	setup_gl(m_texture);
-	Surface::draw_rect(rectangle, clr);
-	reset_gl();
+	return m_pixels.get();
+}
+
+uint32_t Texture::get_pixel(uint16_t x, uint16_t y) {
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
+
+	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
+	return *(reinterpret_cast<uint32_t *>(data));
+}
+
+uint16_t Texture::get_pitch() const {
+	return 4 * m_w;
+}
+
+const SDL_PixelFormat & Texture::format() const {
+	return Gl::gl_rgba_format();
 }
 
 
-/**
- * Draws a filled rectangle
- */
-void Texture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
+void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
 
-	setup_gl(m_texture);
-	Surface::fill_rect(rectangle, clr);
-	reset_gl();
+	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
+	*(reinterpret_cast<uint32_t *>(data)) = clr;
 }
 
-/**
- * Change the brightness of the given rectangle
- */
-void Texture::brighten_rect(const Rect& rectangle, const int32_t factor)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
 
-	setup_gl(m_texture);
-	Surface::brighten_rect(rectangle, factor);
-	reset_gl();
-}
-
-void Texture::draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::draw_line(x1, y1, x2, y2, color, gwidth);
-	reset_gl();
-}
-
-void Texture::blit
-	(const Rect& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::blit(dst, src, srcrc, blend_mode);
-	reset_gl();
+void Texture::setup_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 }

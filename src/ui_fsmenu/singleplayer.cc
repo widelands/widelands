@@ -21,7 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "wui/text_constants.h"
+#include "graphic/text_constants.h"
 
 FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	FullscreenMenuMainMenu(),

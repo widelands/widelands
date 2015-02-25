@@ -28,10 +28,12 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
@@ -50,8 +52,8 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 
 
 using namespace std;
@@ -235,6 +237,33 @@ TribeDescr::TribeDescr
 				PARSE_ORDER_INFORMATION(worker);
 			}
 
+			{
+				Section road_s = root_conf.get_safe_section("roads");
+				const auto load_roads = [&road_s, this](
+				   const std::string& prefix, std::vector<std::string>* images) {
+					for (int i = 0; i < 99; ++i) {
+						const char* img =
+						   road_s.get_string((boost::format("%s_%02i") % prefix % i).str().c_str(), nullptr);
+						if (img == nullptr) {
+							break;
+						}
+						if (!g_fs->file_exists(img)) {
+							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
+							                        img,
+							                        prefix.c_str(),
+							                        m_name.c_str());
+						}
+						images->emplace_back(img);
+					}
+					if (images->empty()) {
+						throw new GameDataError(
+						   "No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
+					}
+				};
+				load_roads("normal", &m_normal_road_paths);
+				load_roads("busy", &m_busy_road_paths);
+			}
+
 			m_frontier_animation_id =
 			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
 			m_flag_animation_id =
@@ -290,6 +319,27 @@ void TribeDescr::load_graphics()
 		 i < m_buildings.get_nitems();
 		 ++i)
 		m_buildings.get(i)->load_graphics();
+}
+
+const std::vector<std::string>& TribeDescr::normal_road_paths() const {
+	return m_normal_road_paths;
+}
+
+const std::vector<std::string>& TribeDescr::busy_road_paths() const {
+	return m_busy_road_paths;
+}
+
+
+void TribeDescr::add_normal_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_normal_road_texture(std::move(texture));
+}
+
+void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_busy_road_texture(std::move(texture));
+}
+
+const RoadTextures& TribeDescr::road_textures() const {
+	return m_road_textures;
 }
 
 

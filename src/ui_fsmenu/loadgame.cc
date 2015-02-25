@@ -34,8 +34,7 @@
 #include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
-#include "graphic/in_memory_image.h"
+#include "graphic/text_constants.h"
 #include "graphic/texture.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -45,8 +44,38 @@
 #include "logic/replay.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
 
+namespace {
+
+// This function concatenates the filename and localized map name for a savegame/replay.
+// If the filename starts with the map name, the map name is omitted.
+// It also prefixes autosave files with a numbered and localized "Autosave" prefix.
+std::string map_filename(const std::string& filename, const std::string& mapname) {
+	std::string result = FileSystem::filename_without_ext(filename.c_str());
+	std::string mapname_localized;
+	{
+		i18n::Textdomain td("maps");
+		mapname_localized = _(mapname);
+	}
+
+	if (boost::starts_with(result, "wl_autosave")) {
+		std::vector<std::string> autosave_name;
+		boost::split(autosave_name, result, boost::is_any_of("_"));
+		if (autosave_name.empty() || autosave_name.size() < 3) {
+			/** TRANSLATORS: %1% is a map's name. */
+			result = (boost::format(_("Autosave: %1%")) % mapname_localized).str();
+		} else {
+			/** TRANSLATORS: %1% is a number, %2% a map's name. */
+			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname_localized).str();
+		}
+	} else if (!(boost::starts_with(result, mapname) || boost::starts_with(result, mapname_localized))) {
+		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
+		result = (boost::format(_("%1% (%2%)")) % result % mapname_localized).str();
+	}
+	return result;
+}
+
+} // namespace
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
@@ -115,7 +144,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_settings(gsp),
 	m_ctrl(gc)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
@@ -139,6 +168,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	m_table.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
+	int used_width = 130;
 	if (m_is_replay || m_settings->settings().multiplayer) {
 		std::vector<std::string> modes;
 		if (m_is_replay) {
@@ -156,7 +186,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 				/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 				/** TRANSLATORS: %s is a list of game modes. */
 				((boost::format(_("Game Mode: %s."))
-				  % i18n::localize_item_list(modes, i18n::ConcatenateWith::COMMA))).str();
+				  % i18n::localize_list(modes, i18n::ConcatenateWith::COMMA))).str();
 		const std::string mode_tooltip_2 =
 				_("Numbers are the number of players.");
 
@@ -167,14 +197,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 								 _("Mode"),
 								 (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
 								 UI::Align_Left);
-		m_table.add_column(m_table.get_w() - 130 - 65,
-								 _("Map Name"), _("The name of the map that was played"),
-								 UI::Align_Left);
-	} else {
-		m_table.add_column(m_table.get_w() - 130,
-								 _("Filename"), _("The filename the game was saved under"),
-								 UI::Align_Left);
+		used_width += 65;
 	}
+	m_table.add_column(m_table.get_w() - used_width,
+							 _("Description"),
+							 _("The filename that the game was saved under followed by the map’s name, "
+								"or the map’s name followed by the last objective achieved."),
+								 UI::Align_Left);
 	m_table.set_column_compare
 		(0,
 		 boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));
@@ -317,13 +346,9 @@ void FullscreenMenuLoadGame::entry_selected()
 			if (!minimap_path.empty()) {
 				try {
 					// Load the image
-					std::unique_ptr<Texture> texture(
-								load_image(
-									minimap_path,
-									std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
-
-					m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
-																			texture.release()));
+					m_minimap_image = load_image(
+					   minimap_path,
+					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 
 					// Scale it
 					double scale = double(m_minimap_w) / m_minimap_image->width();
@@ -411,6 +436,9 @@ void FullscreenMenuLoadGame::fill_table() {
 		Widelands::GamePreloadPacket gpdp;
 
 		for (const std::string& gamefilename : gamefiles) {
+			if (gamefilename == "save/campvis" || gamefilename == "save\\campvis") {
+				continue;
+			}
 
 			gamedata = new SavegameData();
 
@@ -533,43 +561,34 @@ void FullscreenMenuLoadGame::fill_table() {
 							gametypestring = "";
 					}
 					te.set_string(1, gametypestring);
-					te.set_string(2, gpdp.get_mapname());
-
+					te.set_string(2, map_filename(gamedata->filename, gamedata->mapname));
 				} else {
-					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
-					if (fs_filename == "wl_autosave" || fs_filename == "wl_autosave2") {
-						/** TRANSLATORS: Used in filenames for loading games */
-						te.set_string(1, (boost::format(_("Autosave: %1%")) % gpdp.get_mapname()).str());
-					} else {
-						te.set_string(1, fs_filename);
-					}
+					te.set_string(1, map_filename(gamedata->filename, gamedata->mapname));
 				}
 			} catch (const WException & e) {
 				//  we simply skip illegal entries
-				if (gamedata->filename != "save/campvis") {
-					gamedata->errormessage =
-							((boost::format("%s\n\n%s\n\n%s"))
-							 /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-							 % _("This file has the wrong format and can’t be loaded."
-								  " Maybe it was created with an older version of Widelands.")
-							 /** TRANSLATORS: This text is on a separate line with an error message below */
-							 % _("Error message:")
-							 % e.what()).str();
+				gamedata->errormessage =
+						((boost::format("%s\n\n%s\n\n%s"))
+						 /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+						 % _("This file has the wrong format and can’t be loaded."
+							  " Maybe it was created with an older version of Widelands.")
+						 /** TRANSLATORS: This text is on a separate line with an error message below */
+						 % _("Error message:")
+						 % e.what()).str();
 
-					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
-					gamedata->mapname = fs_filename;
-					m_games_data.push_back(*gamedata);
+				const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
+				gamedata->mapname = fs_filename;
+				m_games_data.push_back(*gamedata);
 
-					UI::Table<uintptr_t const>::EntryRecord & te =
-						m_table.add(m_games_data.size() - 1);
-					te.set_string(0, "");
-					if (m_is_replay || m_settings->settings().multiplayer) {
-						te.set_string(1, "");
-						/** TRANSLATORS: Prefix for incompatible files in load game screens */
-						te.set_string(2, (boost::format(_("Incompatible: %s")) % fs_filename).str());
-					} else {
-						te.set_string(1, (boost::format(_("Incompatible: %s")) % fs_filename).str());
-					}
+				UI::Table<uintptr_t const>::EntryRecord & te =
+					m_table.add(m_games_data.size() - 1);
+				te.set_string(0, "");
+				if (m_is_replay || m_settings->settings().multiplayer) {
+					te.set_string(1, "");
+					/** TRANSLATORS: Prefix for incompatible files in load game screens */
+					te.set_string(2, (boost::format(_("Incompatible: %s")) % fs_filename).str());
+				} else {
+					te.set_string(1, (boost::format(_("Incompatible: %s")) % fs_filename).str());
 				}
 			}
 		}

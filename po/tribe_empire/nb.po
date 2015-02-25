@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-08-03 12:33+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2014-12-06 17:14+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:43+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:39+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -285,12 +285,12 @@ msgstr ""
 #: ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "sover"
 
 #: ../../tribes/empire/arena/conf:32
 #: ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats unnvikelse fra nivå 0 til 1"
 
 #: ../../tribes/empire/arena/help.lua:15
 #: ../../tribes/empire/armorsmithy/help.lua:13
@@ -369,7 +369,7 @@ msgstr "Trenger tekst"
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Trener soldater i «Unnvikelse»."
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -377,6 +377,8 @@ msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"«Unnvikelse» øker en soldats sjanse til å unnvike fiendtlige angrep og "
+"dermed ikke bli truffet."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -389,7 +391,7 @@ msgstr ""
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
-msgstr ""
+msgstr "Unnvikelse trening:"
 
 #: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
@@ -446,19 +448,19 @@ msgstr "Lager rustninger til soldatene."
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
-msgstr ""
+msgstr "smir en hjelm"
 
 #: ../../tribes/empire/armorsmithy/conf:34
 msgid "forging an armor"
-msgstr ""
+msgstr "smir en rustning"
 
 #: ../../tribes/empire/armorsmithy/conf:36
 msgid "forging a chain armor"
-msgstr ""
+msgstr "smir en ringbrynje"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr ""
+msgstr "smir en platerustning"
 
 #: ../../tribes/empire/armorsmithy/conf:40
 #: ../../tribes/empire/bakery/conf:25
@@ -479,7 +481,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
-msgstr ""
+msgstr "arbeider"
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
@@ -604,7 +606,7 @@ msgstr "Produserer øl eller vin."
 
 #: ../../tribes/empire/brewery/conf:26
 msgid "brewing"
-msgstr ""
+msgstr "brygger"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -656,7 +658,7 @@ msgstr ""
 #: ../../tribes/empire/goldmine/conf:27
 #: ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr ""
+msgstr "graver"
 
 #: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -672,11 +674,11 @@ msgstr ""
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver kull i fjellområder."
 
 #: ../../tribes/empire/colosseum/conf:40
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats unnvikelse fra nivå 1 til 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1338,7 +1340,7 @@ msgstr ""
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver gullmalm i fjellområder."
 
 #: ../../tribes/empire/deep_marblemine/conf:42
 #: ../../tribes/empire/marblemine/conf:57
@@ -1371,7 +1373,7 @@ msgstr ""
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver jernmalm i fjellområder."
 
 #: ../../tribes/empire/donkey/conf:1
 msgid ""
@@ -1393,21 +1395,22 @@ msgstr ""
 
 #: ../../tribes/empire/farm/conf:25
 msgid "planting wheat"
-msgstr ""
+msgstr "planter hvete"
 
 #: ../../tribes/empire/farm/conf:27
 msgid "harvesting wheat"
-msgstr ""
+msgstr "høster inn hvete"
 
 #: ../../tribes/empire/farm/conf:46
 #: ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
-msgstr ""
+msgstr "Tom for åkre"
 
 #: ../../tribes/empire/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Bonden som jobber på denne gården har ingen ledig plass til å så nye frø."
 
 #: ../../tribes/empire/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1439,7 +1442,7 @@ msgstr "Fanger fisk i sjøen."
 
 #: ../../tribes/empire/fishers_house/conf:21
 msgid "fishing"
-msgstr ""
+msgstr "fisker"
 
 #: ../../tribes/empire/fishers_house/conf:28
 msgid "Out of Fish"
@@ -1450,6 +1453,8 @@ msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
 msgstr ""
+"Fiskeren i dette fiskerhuset klarte ikke finne fisk innenfor arbeidsområdet "
+"sitt."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1480,7 +1485,7 @@ msgstr "Planter trær."
 
 #: ../../tribes/empire/foresters_house/help.lua:17
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Planter trær i områdene rundt."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
@@ -1577,7 +1582,7 @@ msgstr "Jegeren bringer godt kjøtt til kolonistene."
 
 #: ../../tribes/empire/hunters_house/conf:19
 msgid "hunting"
-msgstr ""
+msgstr "jakter"
 
 #: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
@@ -1608,11 +1613,11 @@ msgstr ""
 #: ../../tribes/empire/inn/conf:26
 #: ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
-msgstr ""
+msgstr "tilbereder en rasjon"
 
 #: ../../tribes/empire/inn/conf:28
 msgid "preparing a meal"
-msgstr ""
+msgstr "tilbereder et måltid"
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1790,13 +1795,15 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Tom for stein"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
 msgstr ""
+"Steinhuggeren i dette steinbruddet klarte ikke finne steiner innenfor "
+"arbeidsområdet sitt."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1804,7 +1811,7 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
+msgstr "Steinbruddet trenger steiner innenfor arbeidsområdet."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1828,7 +1835,7 @@ msgstr ""
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
-msgstr ""
+msgstr "speider"
 
 #: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
@@ -1872,7 +1879,7 @@ msgstr "Jobber på skipsverftet og lager nye skip."
 
 #: ../../tribes/empire/shipyard/conf:27
 msgid "constructing a ship"
-msgstr ""
+msgstr "bygger et skip"
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1886,11 +1893,11 @@ msgstr "Smelter jern."
 
 #: ../../tribes/empire/smelting_works/conf:27
 msgid "smelting iron"
-msgstr ""
+msgstr "smelter jern"
 
 #: ../../tribes/empire/smelting_works/conf:29
 msgid "smelting gold"
-msgstr ""
+msgstr "smelter gull"
 
 #: ../../tribes/empire/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1918,11 +1925,11 @@ msgstr "Lager verktøy til arbeiderne."
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "making an ax"
-msgstr ""
+msgstr "lager en øks"
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "making a basket"
-msgstr ""
+msgstr "lager en kurv"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "making a bread paddle"
@@ -1930,39 +1937,39 @@ msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "making fire tongs"
-msgstr ""
+msgstr "lager en ildtang"
 
 #: ../../tribes/empire/toolsmithy/conf:46
 msgid "making a fishing rod"
-msgstr ""
+msgstr "lager en fiskestang"
 
 #: ../../tribes/empire/toolsmithy/conf:48
 msgid "making a hammer"
-msgstr ""
+msgstr "lager en hammer"
 
 #: ../../tribes/empire/toolsmithy/conf:50
 msgid "making a hunting spear"
-msgstr ""
+msgstr "lager et jaktspyd"
 
 #: ../../tribes/empire/toolsmithy/conf:52
 msgid "making kitchen tools"
-msgstr ""
+msgstr "lager kjøkkenredskaper"
 
 #: ../../tribes/empire/toolsmithy/conf:54
 msgid "making a pick"
-msgstr ""
+msgstr "lager en hakke"
 
 #: ../../tribes/empire/toolsmithy/conf:56
 msgid "making a saw"
-msgstr ""
+msgstr "lager en sag"
 
 #: ../../tribes/empire/toolsmithy/conf:58
 msgid "making a scythe"
-msgstr ""
+msgstr "lager en ljå"
 
 #: ../../tribes/empire/toolsmithy/conf:60
 msgid "making a shovel"
-msgstr ""
+msgstr "lager en spade"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your tower."
@@ -1974,47 +1981,47 @@ msgstr "Trener soldatene."
 
 #: ../../tribes/empire/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 0 til 1"
 
 #: ../../tribes/empire/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 1 til 2"
 
 #: ../../tribes/empire/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 2 til 3"
 
 #: ../../tribes/empire/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 3 til 4"
 
 #: ../../tribes/empire/trainingcamp/conf:57
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 0 til 1"
 
 #: ../../tribes/empire/trainingcamp/conf:59
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 1 til 2"
 
 #: ../../tribes/empire/trainingcamp/conf:61
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 2 til 3"
 
 #: ../../tribes/empire/trainingcamp/conf:63
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 3 til 4"
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Trener soldater i «Angrep» og «Liv»."
 
 #: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Angrep trening:"
 
 #: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"
-msgstr ""
+msgstr "Liv trening:"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."

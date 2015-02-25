@@ -4,6 +4,8 @@ wl_library(graphic_text
   SRCS
     font_io.cc
     font_io.h
+    font_set.cc
+    font_set.h
     rt_errors.h
     rt_errors_impl.h
     rt_parse.cc
@@ -17,13 +19,18 @@ wl_library(graphic_text
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
-    graphic_sdl_utils
     base_exceptions
     base_geometry
+    base_i18n
+    base_log
+    base_macros
     graphic_color
-    graphic_image
+    graphic_image_cache
     graphic_image_io
+    graphic_sdl_utils
     graphic_surface
     io_fileread
     io_filesystem
+    scripting_lua_interface
+    scripting_lua_table
 )

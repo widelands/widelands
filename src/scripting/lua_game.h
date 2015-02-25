@@ -22,12 +22,12 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
+#include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 namespace Widelands {
-	struct TribeDescr;
+	class TribeDescr;
 	class Objective;
 	struct Message;
 }
@@ -161,7 +161,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_sender(lua_State * L);
 	int get_sent(lua_State * L);
 	int get_title(lua_State * L);
 	int get_body(lua_State * L);

@@ -20,16 +20,14 @@
 #include "ui_basic/button.h"
 
 #include "base/log.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
-
 
 namespace UI {
 
@@ -55,10 +53,9 @@ Button::Button //  for textual buttons
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
 	m_title         (title_text),
-	background_image_(g_gr->cataloged_image(background_image_key)),
-	foreground_image_(nullptr),
-	foreground_image_disabled_(nullptr),
-	m_font(UI::Font::ui_small()),
+	m_pic_background(bg_pic),
+	m_pic_custom    (nullptr),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -83,12 +80,9 @@ Button::Button //  for pictorial buttons
 	m_flat          (flat),
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
-	background_image_(g_gr->cataloged_image(background_image_key)),
-	foreground_image_    (foreground_image),
-	foreground_image_disabled_(foreground_image ?
-									 ImageTransformations::gray_out(foreground_image) :
-									 nullptr),
-	m_font(UI::Font::ui_small()),
+	m_pic_background(bg_pic),
+	m_pic_custom    (fg_pic),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -111,8 +105,7 @@ void Button::set_image(const Image* foreground)
 	if (foreground_image_ == foreground)
 		return;
 
-	foreground_image_ = foreground;
-	foreground_image_disabled_ = ImageTransformations::gray_out(foreground);
+	m_pic_custom = pic;
 
 	update();
 }
@@ -184,20 +177,28 @@ void Button::draw(RenderTarget & dst)
 		int blit_width = image_scale * foreground_image_->width();
 		int blit_height = image_scale * foreground_image_->height();
 
+		if (m_enabled) {
 		dst.blitrect_scale(
 		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-			m_enabled ? foreground_image_ : foreground_image_disabled_,
-			Rect(0, 0, foreground_image_->width(), foreground_image_->height()));
+			m_pic_custom,
+			Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+		   1.,
+		   BlendMode::UseAlpha);
+		} else {
+			dst.blitrect_scale_monochrome(
+			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+				m_pic_custom,
+				Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+			   RGBAColor(255, 255, 255, 127));
+		}
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered
-		UI::TextStyle ts;
-		ts.font = m_font;
-		ts.bold = true;
-		ts.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
+
+		m_textstyle.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
 
 		UI::g_fh->draw_text
-			(dst, ts, Point(get_w() / 2, get_h() / 2),
+			(dst, m_textstyle, Point(get_w() / 2, get_h() / 2),
 			 m_title, Align_Center,
 			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
 	}

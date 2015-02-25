@@ -25,7 +25,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
@@ -57,7 +56,6 @@ constexpr int kBuildGridCellSize = 50;
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent,
-	          const RGBColor& player_color,
 	          const Widelands::TribeDescr& tribe,
 	          int32_t x,
 	          int32_t y,
@@ -75,15 +73,13 @@ private:
 	void mousein_slot(int32_t idx);
 
 private:
-	const RGBColor player_color_;
 	const Widelands::TribeDescr& tribe_;
 };
 
 BuildGrid::BuildGrid(
-		UI::Panel* parent, const RGBColor& player_color, const Widelands::TribeDescr& tribe,
+		UI::Panel* parent, const Widelands::TribeDescr& tribe,
 		int32_t x, int32_t y, int32_t cols) :
 	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
-	player_color_(player_color),
 	tribe_(tribe)
 {
 	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
@@ -100,13 +96,16 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 {
 	const Widelands::BuildingDescr & descr =
 		*tribe_.get_building_descr(Widelands::BuildingIndex(id));
-	UI::IconGrid::add(
-	   descr.name(),
-	   &g_gr->animations().get_animation(descr.get_animation("idle")).representative_image(
-	      player_color_),
-	   reinterpret_cast<void*>(id),
-	   descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-	      waremap_to_richtext(tribe_, descr.buildcost()));
+	// TODO(sirver): change this to take a Button subclass instead of
+	// parameters. This will allow overriding the way it is rendered
+	// to bring back player colors.
+	UI::IconGrid::add(descr.name(),
+	                  &g_gr->animations()
+	                      .get_animation(descr.get_animation("idle"))
+	                      .representative_image_from_disk(),
+	                  reinterpret_cast<void*>(id),
+	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
+	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
 }
 
 
@@ -176,7 +175,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int32_t buildcaps, const RGBColor& player_color);
+	void add_buttons_build(int32_t buildcaps);
 	void add_buttons_road(bool flag);
 	void add_buttons_attack();
 
@@ -372,7 +371,7 @@ void FieldActionWindow::add_buttons_auto()
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
 			    (buildcaps & Widelands::BUILDCAPS_MINE)) {
 				assert(igbase->get_player());
-				add_buttons_build(buildcaps, igbase->get_player()->get_playercolor());
+				add_buttons_build(buildcaps);
 			}
 
 			// Add build actions
@@ -468,7 +467,7 @@ void FieldActionWindow::add_buttons_attack ()
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& player_color)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 {
 	if (!m_plr)
 		return;
@@ -518,7 +517,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, player_color, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));

@@ -26,10 +26,13 @@
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 /**
@@ -48,14 +51,14 @@ BaseListselect::BaseListselect
 	 Align const align, bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
-	m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
+	m_lineheight(g_fh->get_fontheight(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL)),
 	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 	m_scrollpos     (0),
 	m_selection     (no_selection_index()),
 	m_last_click_time(-10000),
 	m_last_selection(no_selection_index()),
 	m_show_check(show_check),
-	m_fontname(UI_FONT_NAME),
+	m_fontname(UI::g_fh1->fontset().serif()),
 	m_fontsize(UI_FONT_SIZE_SMALL)
 {
 	set_thinks(false);
@@ -122,7 +125,8 @@ void BaseListselect::add
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text)
+	 const std::string  & tooltip_text,
+	 const std::string  & fontname)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -131,14 +135,15 @@ void BaseListselect::add
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
+	er->font_face = fontname;
 	uint32_t entry_height = 0;
 	if (!pic) {
-		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 	} else {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
-			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
+			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -160,7 +165,8 @@ void BaseListselect::add_front
 	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text)
+	 const std::string  & tooltip_text,
+	 const std::string& fontname)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -173,15 +179,16 @@ void BaseListselect::add_front
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
+	er->font_face = fontname;
 
 	uint32_t entry_height = 0;
 	if (!pic)
-		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 	else {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
-			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
+			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -393,11 +400,13 @@ void BaseListselect::draw(RenderTarget & dst)
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
+			 TextStyle::makebold(Font::get(er.font_face.empty() ? m_fontname : er.font_face, m_fontsize),
+										er.use_clr ? er.clr : UI_FONT_CLR_FG),
 			 Point
 			 	(x,
 			 	 y +
-			 	 (get_lineheight() - g_fh->get_fontheight(m_fontname, m_fontsize))
+				 (get_lineheight() - g_fh->get_fontheight(er.font_face.empty() ? m_fontname : er.font_face,
+																		m_fontsize))
 			 	 /
 			 	 2),
 			 er.name,

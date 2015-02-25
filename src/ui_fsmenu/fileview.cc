@@ -24,13 +24,14 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/i18n.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
-#include "wui/text_constants.h"
-
 
 namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {
@@ -76,8 +77,6 @@ FullscreenMenuTextView::FullscreenMenuTextView
 {
 	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
 
-	close_button.set_font(font_small());
-
 	std::string content, title_text;
 	read_text(filename, &title_text, &content);
 
@@ -88,7 +87,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
 void FullscreenMenuTextView::set_text(const std::string & text)
@@ -122,8 +121,7 @@ FileViewWindow::FileViewWindow
 	read_text(filename, &title_text, &content);
 
 	textview.set_text(content);
-
-	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
 

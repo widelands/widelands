@@ -24,6 +24,7 @@
 #include "chat/chat.h"
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
+#include "logic/player.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -75,6 +76,7 @@ InteractiveSpectator::InteractiveSpectator
 		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
@@ -140,17 +142,17 @@ Widelands::Player * InteractiveSpectator::get_player() const
 }
 
 
-/**
- * Called just before the game starts, after postload, init and gfxload
- */
-void InteractiveSpectator::start()
-{
-	Widelands::Map & map = game().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
+	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
 
-	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(game().world());
+	iterate_players_existing(p, nr_players, game(), player) {
+		const Widelands::NodeCaps nc = player->get_buildcaps(c);
+		if (nc > Widelands::NodeCaps::CAPS_NONE) {
+			return nc;
+		}
+	}
+
+	return Widelands::NodeCaps::CAPS_NONE;
 }
 
 
@@ -245,6 +247,10 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down)
 		switch (code.sym) {
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
+
 		case SDLK_m:
 			toggle_minimap();
 			return true;

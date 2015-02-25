@@ -20,78 +20,36 @@
 #include "graphic/image_cache.h"
 
 #include <cassert>
+#include <memory>
 #include <string>
 
 #include "base/log.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
 
-namespace  {
-
-// Image Implementation that loads images from disc when they should be drawn.
-// Uses TextureCache. These images are meant to be cached in ImageCache.
-class FromDiskImage : public Image {
-public:
-	FromDiskImage(const std::string& filename, TextureCache* texture_cache) :
-		filename_(filename),
-		texture_cache_(texture_cache) {
-			Texture* texture = reload_image_();
-			w_ = texture->width();
-			h_ = texture->height();
-		}
-	virtual ~FromDiskImage() {}
-
-	// Implements Image.
-	uint16_t width() const override {return w_; }
-	uint16_t height() const override {return h_;}
-	const std::string& hash() const override {return filename_;}
-	Texture* texture() const override {
-		Texture* texture = texture_cache_->get(filename_);
-		if (texture)
-			return texture;
-		return reload_image_();
-	}
-
-private:
-	Texture* reload_image_() const {
-		Texture* texture = texture_cache_->insert(filename_, load_image(filename_), false);
-		return texture;
-	}
-	uint16_t w_, h_;
-	const std::string filename_;
-
-	TextureCache* const texture_cache_;  // Not owned.
-};
-
-}  // namespace
-
-ImageCache::ImageCache(TextureCache* const texture_cache) : texture_cache_(texture_cache) {
+ImageCache::ImageCache() {
 }
 
 ImageCache::~ImageCache() {
-	for (ImageMap::value_type& p : images_) {
-		delete p.second;
-	}
-	images_.clear();
 }
 
 bool ImageCache::has(const std::string& hash) const {
 	return images_.count(hash);
 }
 
-const Image* ImageCache::insert(const Image* image) {
-	assert(!has(image->hash()));
-	images_.insert(make_pair(image->hash(), image));
-	return image;
+const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const Image> image) {
+	assert(!has(hash));
+	const Image* return_value = image.get();
+	images_.insert(make_pair(hash, std::move(image)));
+	return return_value;
 }
 
 const Image* ImageCache::get(const std::string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, new FromDiskImage(hash, texture_cache_)));
+		images_.insert(make_pair(hash, load_image(hash)));
 		return get(hash);
 	}
-	return it->second;
+	return it->second.get();
 }

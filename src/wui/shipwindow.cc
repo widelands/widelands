@@ -57,7 +57,7 @@ struct ShipWindow : UI::Window {
 	void act_cancel_expedition();
 	void act_scout_towards(uint8_t);
 	void act_construct_port();
-	void act_explore_island(bool);
+	void act_explore_island(ScoutingDirection);
 
 private:
 	InteractiveGameBase & m_igbase;
@@ -108,7 +108,7 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 			make_button
 				(exp_top, "expcw", _("Explore the island’s coast clockwise"),
 				 ImageCatalog::Key::kShipExploreClockwise,
-				 boost::bind(&ShipWindow::act_explore_island, this, true));
+				 boost::bind(&ShipWindow::act_explore_island, this, ScoutingDirection::kClockwise));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
 		m_btn_scout[WALK_NE - 1] =
@@ -146,7 +146,7 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 			make_button
 				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"),
 				 ImageCatalog::Key::kShipExploreCounterclockwise,
-				 boost::bind(&ShipWindow::act_explore_island, this, false));
+				 boost::bind(&ShipWindow::act_explore_island, this, ScoutingDirection::kCounterClockwise));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
 		m_btn_scout[WALK_SE - 1] =
@@ -319,7 +319,7 @@ void ShipWindow::act_construct_port() {
 }
 
 /// Explores the island cw or ccw
-void ShipWindow::act_explore_island(bool cw) {
+void ShipWindow::act_explore_island(ScoutingDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
@@ -330,7 +330,7 @@ void ShipWindow::act_explore_island(bool cw) {
 	}
 	if (!coast_nearby || !moveable)
 		return;
-	m_igbase.game().send_player_ship_explore_island(m_ship, cw);
+	m_igbase.game().send_player_ship_explore_island(m_ship, direction);
 }
 
 

@@ -22,7 +22,7 @@
 #include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
-#include "scripting/c_utils.h"
+#include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "wui/interactive_player.h"
@@ -520,8 +520,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-LuaMapView::LuaMapView(lua_State * L) :
-	LuaPanel(get_egbase(L).get_ibase()) {
+LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L)

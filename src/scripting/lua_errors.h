@@ -26,15 +26,12 @@
 
 class LuaError : public WException {
 public:
-	LuaError(const std::string& reason) : wexception("%s", reason.c_str()) {
-	}
+	LuaError(const std::string& reason);
 };
 
 class LuaScriptNotExistingError : public LuaError {
 public:
-	LuaScriptNotExistingError(const std::string& name)
-	   : LuaError("The script '" + name + "' was not found!") {
-	}
+	LuaScriptNotExistingError(const std::string& name);
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ERRORS_H
