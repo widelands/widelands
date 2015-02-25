@@ -135,8 +135,8 @@ ImmovableProgram IMPLEMENTATION
 */
 
 ImmovableProgram::ImmovableProgram(const std::string& directory,
-                                   Profile& prof,
-                                   const std::string& _name,
+								   Profile& prof,
+								   const std::string& _name,
 											  ImmovableDescr& immovable)
    : m_name(_name) {
 	Section& program_s = prof.get_safe_section(_name.c_str());
@@ -178,7 +178,7 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 }
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
-                                   const std::vector<std::string>& lines,
+								   const std::vector<std::string>& lines,
 											  ImmovableDescr* immovable)
    : m_name(init_name) {
 	for (const std::string& line : lines) {
@@ -319,7 +319,7 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index < 0) {
 		throw GameDataError("Unknown editor_category: %s\n",
-		                      table.get_string("editor_category").c_str());
+							  table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
 
@@ -574,9 +574,9 @@ void Immovable::draw_construction
 			 .str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48),
-		         UI::g_fh1->render(m_construct_string),
-		         BlendMode::UseAlpha,
-		         UI::Align_Center);
+				 UI::g_fh1->render(m_construct_string),
+				 BlendMode::UseAlpha,
+				 UI::Align_Center);
 	}
 }
 
@@ -675,9 +675,10 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-    //TODO(daAlx1): loading of m_reserved_by_worker must move to MapObject.load
-    if (version >= 3)
-    imm.m_reserved_by_worker = fr.unsigned_8();
+	//TODO(daAlx1): reserved_by_worker is already dealt with in MapObject,
+	//so storing / loading twice is redundant but I keep it for compatability
+	if (version >= 3)
+	imm.m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
 		std::string dataname = fr.c_string();
@@ -739,8 +740,9 @@ void Immovable::save
 	fw.unsigned_32(m_program_ptr);
 	fw.signed_32(m_program_step);
 
-    //TODO(daAlx1): Must be moved to MapObject.save
-	fw.unsigned_8(m_reserved_by_worker); 
+	//TODO(daAlx1):  reserved_by_worker is already dealt with in MapObject,
+	//so storing / loading twice is redundant, I keep it for compatability
+	fw.unsigned_8(m_reserved_by_worker);
 
 	if (m_action_data) {
 		fw.c_string(m_action_data->name());
@@ -999,7 +1001,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		TribeDescr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable(f, type_name, owner_tribe);
@@ -1099,7 +1101,7 @@ void ImmovableProgram::ActSeed::execute
 	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		// Seed a new tree.
 		MapFringeRegion<> mr(map, Area<>(f, 0));
 		uint32_t fringe_size = 0;
@@ -1114,10 +1116,10 @@ void ImmovableProgram::ActSeed::execute
 
 		const FCoords new_location = map.get_fcoords(mr.location());
 		if (!new_location.field->get_immovable() &&
-		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
-		    logic_rand_as_double(&game) <
-		       probability_to_grow(
-		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
+			(new_location.field->nodecaps() & MOVECAPS_WALK) &&
+			logic_rand_as_double(&game) <
+			   probability_to_grow(
+				  descr.terrain_affinity(), new_location, map, game.world().terrains())) {
 			game.create_immovable(
 			   mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
 		}
