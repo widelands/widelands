@@ -676,8 +676,8 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	imm.m_program_step = fr.signed_32();
 
     //TODO(daAlx1): loading of m_reserved_by_worker must move to MapObject.load
-    //if (version >= 3)
-    //imm.m_reserved_by_worker = fr.unsigned_8();
+    if (version >= 3)
+    imm.m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
 		std::string dataname = fr.c_string();
@@ -739,7 +739,8 @@ void Immovable::save
 	fw.unsigned_32(m_program_ptr);
 	fw.signed_32(m_program_step);
 
-    //TODO(daAlx1): fw.unsigned_8(m_reserved_by_worker); has moved to MapObject.save
+    //TODO(daAlx1): Must be moved to MapObject.save
+	fw.unsigned_8(m_reserved_by_worker); 
 
 	if (m_action_data) {
 		fw.c_string(m_action_data->name());

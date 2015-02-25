@@ -524,7 +524,8 @@ void MapObject::Loader::load(FileRead & fr)
 		} catch (const WException & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
-        get_object()->m_reserved_by_worker = fr.unsigned_8();
+	//TODO(DaAlx1): Here we should load the bool m_reserved_by-worker now
+	//get_object()->m_reserved_by_worker = fr.unsigned_8();
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
@@ -566,7 +567,8 @@ void MapObject::save
 	fw.unsigned_8(CURRENT_SAVEGAME_VERSION);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
-    fw.unsigned_8(m_reserved_by_worker);
+	// TODO(DaAlx1): We must safe the m_reserved_by_worker boolean!
+	// fw.unsigned_8(m_reserved_by_worker);
 }
 
 std::string to_string(const MapObjectType type) {
