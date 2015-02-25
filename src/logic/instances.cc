@@ -495,7 +495,7 @@ void MapObject::set_reserved_by_worker(bool reserve)
 }
 
 
-#define CURRENT_SAVEGAME_VERSION 1
+#define CURRENT_SAVEGAME_VERSION 2
 
 /**
  * Load the entire data package from the given file.
@@ -508,29 +508,31 @@ void MapObject::set_reserved_by_worker(bool reserve)
  */
 void MapObject::Loader::load(FileRead & fr)
 {
-	try {
-		uint8_t const header = fr.unsigned_8();
-		if (header != HeaderMapObject)
-			throw wexception
-				("header is %u, expected %u", header, HeaderMapObject);
-
-		uint8_t const version = fr.unsigned_8();
-		if (version != CURRENT_SAVEGAME_VERSION)
-			throw GameDataError("unknown/unhandled version %u", version);
-
-		Serial const serial = fr.unsigned_32();
-		try {
-			mol().register_object<MapObject>(serial, *get_object());
-		} catch (const WException & e) {
-			throw wexception("%u: %s", serial, e.what());
-		}
-	//TODO(DaAlx1): Here we should load the bool m_reserved_by-worker now
-	get_object()->m_reserved_by_worker = fr.unsigned_8();
-	} catch (const WException & e) {
-		throw wexception("map object: %s", e.what());
-	}
-
-	egbase().objects().insert(get_object());
+  try {
+    uint8_t const header = fr.unsigned_8();
+    if (header != HeaderMapObject)
+      throw wexception
+	("header is %u, expected %u", header, HeaderMapObject);
+    
+    uint8_t const version = fr.unsigned_8();
+    if (version <= 0 || version > CURRENT_SAVEGAME_VERSION)
+      throw GameDataError("unknown/unhandled version %u", version);
+    
+    Serial const serial = fr.unsigned_32();
+    try {
+      mol().register_object<MapObject>(serial, *get_object());
+    } catch (const WException & e) {
+      throw wexception("%u: %s", serial, e.what());
+    }
+    
+    //TODO(DaAlx1): Here we should load the bool m_reserved_by-worker now
+    if (version == CURRENT_SAVEGAME_VERSION)
+      get_object()->m_reserved_by_worker = fr.unsigned_8();
+  } catch (const WException & e) {
+    throw wexception("map object: %s", e.what());
+  }
+  
+  egbase().objects().insert(get_object());
 }
 
 
@@ -568,7 +570,7 @@ void MapObject::save
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
 	// TODO(DaAlx1): We must safe the m_reserved_by_worker boolean!
-	// fw.unsigned_8(m_reserved_by_worker);
+	fw.unsigned_8(m_reserved_by_worker);
 }
 
 std::string to_string(const MapObjectType type) {
