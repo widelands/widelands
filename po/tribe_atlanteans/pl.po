@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-15 21:18+0000\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 11:18+0000\n"
 "Last-Translator: Igor Kotrasiński <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -583,584 +583,584 @@ msgid ""
 "Atlantis."
 msgstr "Plemię to znane jest z najstarszych opowieści. Synowie i córki Atlantydy."
 
-#: ../../tribes/atlanteans/conf:29
+#: ../../tribes/atlanteans/conf:35
 msgid "Ashes"
 msgstr "Popiół"
 
-#: ../../tribes/atlanteans/conf:30
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field"
 msgstr "Pole czarnych korzeni"
 
-#: ../../tribes/atlanteans/conf:31
+#: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field (harvested)"
 msgstr "Pole czarnych korzeni (zebrane)"
 
-#: ../../tribes/atlanteans/conf:32
+#: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (medium)"
 msgstr "Pole czarnych korzeni (średnie)"
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:39
 msgid "Blackroot Field (small)"
 msgstr "Pole czarnych korzeni (małe)"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:40
 msgid "Blackroot Field (tiny)"
 msgstr "Pole czarnych korzeni (malutkie)"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield"
 msgstr "Pole kukurydzy"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:42
 msgid "Cornfield (harvested)"
 msgstr "Pole kukurydzy (zebrane)"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (medium)"
 msgstr "Pole kukurydzy (średnie)"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:44
 msgid "Cornfield (small)"
 msgstr "Pole kukurydzy (małe)"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:45
 msgid "Cornfield (tiny)"
 msgstr "Pole kukurydzy (malutkie)"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:46
 msgid "Destroyed Building"
 msgstr "Zniszczony budynek"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Coal (little)"
 msgstr "Wskaźnik zasobów: węgiel (mało)"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Coal (much)"
 msgstr "Wskaźnik zasobów: węgiel (dużo)"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Gold (little)"
 msgstr "Wskaźnik zasobów: złoto (mało)"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Gold (much)"
 msgstr "Wskaźnik zasobów: złoto (dużo)"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Granite (little)"
 msgstr "Wskaźnik zasobów: granit (mało)"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Granite (much)"
 msgstr "Wskaźnik zasobów: granit (dużo)"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: Iron (little)"
 msgstr "Wskaźnik zasobów: żelazo (mało)"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Iron (much)"
 msgstr "Wskaźnik zasobów: żelazo (dużo)"
 
-#: ../../tribes/atlanteans/conf:49
+#: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator: No resource"
 msgstr "Wskaźnik zasobów: brak"
 
-#: ../../tribes/atlanteans/conf:50
+#: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator: Water"
 msgstr "Wskaźnik zasobów: woda"
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:57
 msgid "Ship Construction Site"
 msgstr "Plac budowy statku"
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:60
 msgid "Advanced Shield"
 msgstr "Zaawansowana tarcza"
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:61
 msgid "Bread Paddle"
 msgstr "Łopata do chleba"
 
-#: ../../tribes/atlanteans/conf:56
+#: ../../tribes/atlanteans/conf:62
 msgid "Blackroot Flour"
 msgstr "Mąka korzenna"
 
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:63
 msgid "Blackroot"
 msgstr "Czarny korzeń"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:64
 msgid "Bread"
 msgstr "Chleb"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:65
 msgid "Buckets"
 msgstr "Wiadra"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:66
 msgid "Coal"
 msgstr "Węgiel"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:67
 msgid "Cornflour"
 msgstr "Mąka kukurydziana"
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:68
 msgid "Corn"
 msgstr "Kukurydza"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:69
 msgid "Diamond"
 msgstr "Diament"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:70
 msgid "Double Trident"
 msgstr "Podwójny trójząb"
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:71
 msgid "Fire Tongs"
 msgstr "Szczypce"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:72
 msgid "Fishing Net"
 msgstr "Sieć rybacka"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:73
 msgid "Fish"
-msgstr "Ryby"
+msgstr "Ryba"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:74
 msgid "Golden Tabard"
 msgstr "Złota kamizelka"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:75
 msgid "Gold Ore"
 msgstr "Ruda złota"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:76
 msgid "Gold"
 msgstr "Złoto"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:77
 msgid "Gold Yarn"
 msgstr "Złota przędza"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:78
 msgid "Hammer"
 msgstr "Młotek"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:79
 msgid "Heavy Double Trident"
 msgstr "Ciężki podwójny trójząb"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:80
 msgid "Hook pole"
 msgstr "Hak"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:81
 msgid "Hunting Bow"
 msgstr "Łuk myśliwego"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:82
 msgid "Iron Ore"
 msgstr "Ruda żelaza"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:83
 msgid "Iron"
 msgstr "Żelazo"
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:84
 msgid "Light Trident"
 msgstr "Lekki trójząb"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:85
 msgid "Long Trident"
 msgstr "Długi trójząb"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:86
 msgid "Meat"
 msgstr "Mięso"
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:87
 msgid "Milking Tongs"
 msgstr "Szczypce do dojenia"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:88
 msgid "Quartz"
 msgstr "Kwarc"
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:89
 msgid "Pick"
 msgstr "Kilof"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:90
 msgid "Planks"
 msgstr "Deski"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:91
 msgid "Saw"
 msgstr "Piła"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:92
 msgid "Scythe"
 msgstr "Kosa"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:93
 msgid "Shovel"
 msgstr "Łopata"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:94
 msgid "Smoked Fish"
 msgstr "Wędzona ryba"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:95
 msgid "Smoked Meat"
 msgstr "Wędzone mięso"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:96
 msgid "Spidercloth"
 msgstr "Pajęcza tkanina"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:97
 msgid "Spideryarn"
 msgstr "Pajęcza przędza"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:98
 msgid "Steel Shield"
 msgstr "Stalowa tarcza"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:99
 msgid "Steel Trident"
 msgstr "Stalowy Trójząb"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:100
 msgid "Stone"
 msgstr "Kamień"
 
-#: ../../tribes/atlanteans/conf:95
+#: ../../tribes/atlanteans/conf:101
 msgid "Tabard"
 msgstr "Kamizelka"
 
-#: ../../tribes/atlanteans/conf:96
+#: ../../tribes/atlanteans/conf:102
 msgid "Log"
 msgstr "Kłoda"
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:103
 msgid "Water"
 msgstr "Woda"
 
-#: ../../tribes/atlanteans/conf:100
+#: ../../tribes/atlanteans/conf:106
 msgid "Carrier"
 msgstr "Tragarz"
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:107
 msgid "Horse"
 msgstr "Koń"
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:110
 msgid "Soldier"
 msgstr "Żołnierz"
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:113
 msgid "Armorsmith"
 msgstr "Płatnerz"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:114
 msgid "Baker"
 msgstr "Piekarz"
 
-#: ../../tribes/atlanteans/conf:109
+#: ../../tribes/atlanteans/conf:115
 msgid "Blackroot Farmer"
 msgstr "Farmer czarnych korzeni"
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:116
 msgid "Builder"
 msgstr "Budowniczy"
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:117
 msgid "Charcoal Burner"
 msgstr "Węglarz"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:118
 msgid "Shipwright"
 msgstr "Szkutnik"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:119
 msgid "Farmer"
 msgstr "Farmer"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:120
 msgid "Fish Breeder"
 msgstr "Hodowca ryb"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:121
 msgid "Fisher"
 msgstr "Rybak"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:122
 msgid "Forester"
 msgstr "Leśnik"
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:123
 msgid "Geologist"
 msgstr "Geolog"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:124
 msgid "Hunter"
 msgstr "Myśliwy"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:125
 msgid "Miller"
 msgstr "Młynarz"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:126
 msgid "Miner"
 msgstr "Górnik"
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:127
 msgid "Sawyer"
 msgstr "Tracz"
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:128
 msgid "Smelter"
 msgstr "Hutnik"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:129
 msgid "Smoker"
 msgstr "Wędzarz"
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:130
 msgid "Spider Breeder"
 msgstr "Hodowca pająków"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:131
 msgid "Stonecutter"
 msgstr "Kamieniarz"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:132
 msgid "Toolsmith"
 msgstr "Rzemieślnik"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:133
 msgid "Trainer"
 msgstr "Trener"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:134
 msgid "Weaponsmith"
 msgstr "Zbrojmistrz"
 
-#: ../../tribes/atlanteans/conf:129
+#: ../../tribes/atlanteans/conf:135
 msgid "Weaver"
 msgstr "Tkacz"
 
-#: ../../tribes/atlanteans/conf:130
+#: ../../tribes/atlanteans/conf:136
 msgid "Woodcutter"
 msgstr "Drwal"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:137
 msgid "Scout"
 msgstr "Zwiadowca"
 
-#: ../../tribes/atlanteans/conf:132
+#: ../../tribes/atlanteans/conf:138
 msgid "Horse Breeder"
 msgstr "Hodowca koni"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:141
 msgid "Ship"
 msgstr "Statek"
 
-#: ../../tribes/atlanteans/conf:138
+#: ../../tribes/atlanteans/conf:144
 msgid "Construction Site"
 msgstr "Plac budowy"
 
-#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:147
 msgid "Dismantle Site"
 msgstr "Plac rozbiórki"
 
-#: ../../tribes/atlanteans/conf:144 ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:150 ../../tribes/atlanteans/conf:157
 msgid "Barrier"
 msgstr "Bariera"
 
-#: ../../tribes/atlanteans/conf:145
+#: ../../tribes/atlanteans/conf:151
 msgid "Citadel"
 msgstr "Cytadela"
 
-#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:152
 msgid "Donjon"
 msgstr "Stołp"
 
-#: ../../tribes/atlanteans/conf:147 ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:153 ../../tribes/atlanteans/conf:159
 msgid "Fortress"
 msgstr "Forteca"
 
-#: ../../tribes/atlanteans/conf:148 ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:154 ../../tribes/atlanteans/conf:155
 msgid "Sentry"
 msgstr "Strażnica"
 
-#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:156
 msgid "Barracks"
 msgstr "Koszary"
 
-#: ../../tribes/atlanteans/conf:152 ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:158 ../../tribes/atlanteans/conf:205
 msgid "Castle"
 msgstr "Zamek"
 
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:160
 msgid "Outpost"
 msgstr "Placówka"
 
-#: ../../tribes/atlanteans/conf:155 ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:161 ../../tribes/atlanteans/conf:204
 msgid "Tower"
 msgstr "Wieża"
 
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:164
 #: ../../tribes/atlanteans/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Kwatera główna"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:165
 msgid "Warehouse"
 msgstr "Magazyn"
 
-#: ../../tribes/atlanteans/conf:160
+#: ../../tribes/atlanteans/conf:166
 msgid "Port"
 msgstr "Port"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:169
 msgid "Quarry"
 msgstr "Kamieniołom"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:170
 msgid "Woodcutter’s House"
 msgstr "Chata drwala"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:171
 msgid "Forester’s House"
 msgstr "Leśniczówka"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:172
 msgid "Gold Spinning Mill"
 msgstr "Tkalnia złota"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:173
 msgid "Fisher’s House"
 msgstr "Domek rybaka"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:174
 msgid "Fish Breeder’s House"
 msgstr "Chata hodowcy ryb"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:175
 msgid "Hunter’s House"
 msgstr "Kwatera myśliwego"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:176
 msgid "Well"
 msgstr "Studnia"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:177
 msgid "Scout’s House"
 msgstr "Dom zwiadowcy"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:178
 msgid "Sawmill"
 msgstr "Tartak"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:179
 msgid "Smokery"
 msgstr "Wędzarnia"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:180
 msgid "Mill"
 msgstr "Młyn"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:181
 msgid "Shipyard"
 msgstr "Stocznia"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:182
 msgid "Bakery"
 msgstr "Piekarnia"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:183
 msgid "Charcoal Kiln"
 msgstr "Smolarnia"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:184
 msgid "Smelting Works"
 msgstr "Huta"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:185
 msgid "Toolsmithy"
 msgstr "Warsztat"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"
 msgstr "Pracownia zbrojmistrza"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:187
 msgid "Armor Smithy"
 msgstr "Pracownia płatnerza"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:188
 msgid "Horse Farm"
 msgstr "Stadnina"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:189
 msgid "Spider Farm"
 msgstr "Ferma pająków"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:190
 msgid "Weaving Mill"
 msgstr "Tkalnia"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:191
 msgid "Farm"
 msgstr "Farma"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:192
 msgid "Blackroot Farm"
 msgstr "Farma czarnych korzeni"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:193
 msgid "Crystal Mine"
 msgstr "Kopalnia kryształów"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:194
 msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:195
 msgid "Iron Mine"
 msgstr "Kopalnia rudy żelaza"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:196
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:200
 msgid "Guardhouse"
 msgstr "Wartownia"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:201
 msgid "Guardhall"
 msgstr "Warownia"
 
-#: ../../tribes/atlanteans/conf:196
+#: ../../tribes/atlanteans/conf:202
 msgid "High Tower"
 msgstr "Wysoka wieża"
 
-#: ../../tribes/atlanteans/conf:197
+#: ../../tribes/atlanteans/conf:203
 msgid "Small Tower"
 msgstr "Mała wieża"
 
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:209
 msgid "Dungeon"
 msgstr "Podziemia"
 
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:210
 msgid "Labyrinth"
 msgstr "Labirynt"
 

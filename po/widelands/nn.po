@@ -1,36 +1,41 @@
-# Norwegian Nynorsk translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Thorbjørn Bruarøy, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 03:07+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Norwegian Nynorsk <nn@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"PO-Revision-Date: 2015-02-18 09:11+0000\n"
+"Last-Translator: Thorbjørn Bruarøy\n"
+"Language-Team: Norwegian Nynorsk (http://www.transifex.com/projects/p/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: nn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../src/ai/computer_player.cc:39
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/computer_player.cc:40
 msgid "None"
 msgstr "Ingen"
 
-#: ../../src/ai/defaultai.h:82
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
 msgstr "Aggressiv"
 
-#: ../../src/ai/defaultai.h:92
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:99
 msgid "Normal"
 msgstr "Vanleg"
 
-#: ../../src/ai/defaultai.h:102
+#. * TRANSLATORS: This is the name of an AI used in the game setup screens
+#: ../../src/ai/defaultai.h:110
 msgid "Defensive"
 msgstr "Varsam"
 
@@ -39,14 +44,14 @@ msgstr "Varsam"
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr ""
+msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s eller %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with a comma.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -55,109 +60,121 @@ msgstr ""
 #: ../../src/base/i18n.cc:339 ../../src/base/i18n.cc:349
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:343
 #, c-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s og %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:149
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:155
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
-#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
+#. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
+#. the CLDR
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
-msgstr ""
+msgstr "Des"
 
 #: ../../src/editor/editorinteractive.cc:64
 #, c-format
@@ -179,13 +196,13 @@ msgid "Tool Size"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:95
-#: ../../src/wui/interactive_player.cc:116
-#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:103
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
 msgstr "Minikart"
 
 #: ../../src/editor/editorinteractive.cc:98
-#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr ""
 
@@ -211,9 +228,7 @@ msgstr "Ikkje-støtta format"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
-"Widelands kunne ikkje laste fila «%s». Filformatet ser ikkje ut til å vere "
-"kompatibelt."
+msgstr "Widelands kunne ikkje laste fila «%s». Filformatet ser ikkje ut til å vere kompatibelt."
 
 #: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
@@ -226,11 +241,11 @@ msgstr "Lastar grafikk"
 
 #: ../../src/editor/editorinteractive.cc:257
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Ikkje lagra kart"
 
 #: ../../src/editor/editorinteractive.cc:258
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Kartet er ikkje lagra enda, ynskjer du verkeleg å avslutta?"
 
 #: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
@@ -309,11 +324,11 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Eigd av: Spelar %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 msgid "Owned by: —"
-msgstr ""
+msgstr "Egd av: —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
@@ -325,67 +340,67 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has animals"
-msgstr ""
+msgstr "Har dyr"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No animals"
-msgstr ""
+msgstr "Ingen dyr"
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Terreng:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #: ../../src/editor/tools/editor_info_tool.cc:147
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Namn: %s"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "arable"
-msgstr ""
+msgstr "dyrkbar"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:111
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:148
 msgid "treeless"
-msgstr ""
+msgstr "trelaus"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:105
 msgid "aquatic"
-msgstr ""
+msgstr "akvatisk"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:117
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:127
 msgid "dead"
-msgstr ""
+msgstr "død"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:120
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
 msgid "mountainous"
-msgstr ""
+msgstr "fjellrikt"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
 msgid "unpassable"
-msgstr ""
+msgstr "upasserbar"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategori: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:127
 #, c-format
 msgid "Editor Category: %s"
-msgstr ""
+msgstr "Rediger kategori: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
@@ -395,45 +410,45 @@ msgstr "Ressursar:"
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Ressursnamn: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Ressursmengd: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:142
 msgid "No resources"
-msgstr ""
+msgstr "Ingen ressursar"
 
 #: ../../src/editor/tools/editor_info_tool.cc:146
 #: ../../src/ui_fsmenu/mapselect.cc:293
 msgid "Map:"
-msgstr ""
+msgstr "Kart:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:148
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Storleik: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "Spelarar: %d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:156
 msgid "Players: -"
-msgstr ""
+msgstr "Spelarar: -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:159
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Forfattar: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:160
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Skildr: %s"
 
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:163
 msgid "Current:"
@@ -528,7 +543,7 @@ msgstr "Avbryt"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
 #, c-format
 msgid "%1$ix%2$i"
-msgstr ""
+msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
@@ -553,11 +568,9 @@ msgstr "Vel origo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the top-"
-"left corner of a generated minimap."
-msgstr ""
-"Vel posisjonen som skal ha koordinata (0,0).  Dette blir hjørnet øvst til "
-"venstre ved eit laga minikart."
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Vel posisjonen som skal ha koordinata (0,0).  Dette blir hjørnet øvst til venstre ved eit laga minikart."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -585,15 +598,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
 msgid "Winter"
-msgstr ""
+msgstr "Vinter"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
 msgid "Desert"
-msgstr ""
+msgstr "Ørken"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Black"
-msgstr ""
+msgstr "Svart"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:78
 msgid "Random Number:"
@@ -603,25 +616,25 @@ msgstr "Tilfeldig tal:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Vatn: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:199
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:430
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Land: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Ødemark: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:233
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Fjell: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
@@ -674,26 +687,26 @@ msgstr "namnlaus"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Mappe: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
-msgstr ""
+msgstr "mappe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
 msgid "Not a map file"
-msgstr ""
+msgstr "Ikkje ei kartfil"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Ei fil med namnet ‘%s’ eksiterer allereie. Skriv over?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Feil i lagring av kart!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
 msgid ""
@@ -701,7 +714,7 @@ msgid ""
 "Saved map file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""
+msgstr "Feil i lagring av kart!\nLagra kartfil kan være øydelagd!\n\nGrunn gjeve:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
@@ -727,7 +740,7 @@ msgstr "Tal på spelarar"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Spelar %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:323
 msgid "Error!"
@@ -737,7 +750,7 @@ msgstr "Feil!"
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
-msgstr ""
+msgstr "Kan ikkje fjerna spelar. Det er ein referanse ein stad.. Fjern alle bygningar og dyr som er knytta til denne spelaren og prøv på ny."
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
@@ -746,7 +759,7 @@ msgstr "Verktøyval for høgd"
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:56
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Øk/minsk verdi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:87
@@ -756,7 +769,7 @@ msgstr "Sett verdi"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:52
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Ressursar"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
 msgid "Current Selection"
@@ -777,7 +790,7 @@ msgstr "Terreng"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Ubevegelege"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
@@ -862,11 +875,11 @@ msgstr ""
 msgid "%u%% dismantled"
 msgstr "%u%% opphevd"
 
-#: ../../src/logic/editor_game_base.cc:278
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
 msgstr "Lastar verdsdata"
 
-#: ../../src/logic/editor_game_base.cc:281
+#: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
 msgstr "Lastar stammar"
 
@@ -925,11 +938,9 @@ msgstr "Manglar startstad"
 #: ../../src/logic/game.cc:486
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with the Widelands Editor to fix "
-"this problem."
-msgstr ""
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with the Widelands Editor to fix this problem."
+msgstr "Widelands kunne ikkje starte spelet då spelar %u ikkje har nokon startstad.\nDu kan manuelt legga til ein startstad med Widelands Editor for å løysa problemet."
 
 #: ../../src/logic/map.cc:333
 msgid "Player 1"
@@ -987,29 +998,26 @@ msgstr "inga skildr"
 #: ../../src/logic/player.cc:229
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting "
-"position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this "
-"problem."
-msgstr ""
-"Widelands kunne ikkje starte spelet sia spelar %u ikkje hadde noken "
-"startstad.\n"
-"Du kan legge til ein startstad manuelt i skriveprogrammet for Widelands for "
-"å løyse dette problemet."
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
+msgstr "Widelands kunne ikkje starte spelet sia spelar %u ikkje hadde noken startstad.\nDu kan legge til ein startstad manuelt i skriveprogrammet for Widelands for å løyse dette problemet."
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
@@ -1028,14 +1036,16 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$i = "3"
 #. * TRANSLATORS:    %2$s = "water"
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %%1$i = "2"
 #. * TRANSLATORS:    %2$s = "Coal"
-#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
+#. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:411
@@ -1059,23 +1069,29 @@ msgstr ""
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
+#. experience'.
 #: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
+#. need no experience'.
 #: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
 msgstr ""
 
-#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: "Did not start working because the economy needs the ware
+#. ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
 #. * TRANSLATORS:    %1$s = "working"
 #. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test
+#. these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there
+#. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:578
 #: ../../src/logic/production_program.cc:969
@@ -1095,8 +1111,10 @@ msgstr ""
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
+#. bread is missing'
 #: ../../src/logic/production_program.cc:957
 #, c-format
 msgid "%s is missing"
@@ -1116,7 +1134,8 @@ msgstr "Produserte %s"
 msgid "Recruited %s"
 msgstr ""
 
-#. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
+#. * TRANSLATORS: %1$s = production site name, %2$s = production program name,
+#. %3$s = resource
 #: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
@@ -1155,11 +1174,9 @@ msgstr "Reprisen er slutt"
 
 #: ../../src/logic/replay_game_controller.cc:109
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may "
-"unpause the game and continue watching if you want to."
-msgstr ""
-"Reprisen er slut og spelet er sett på pause.  Du kan halde fram med spelet "
-"og fortsette å sjå viss du vil."
+"The end of the replay has been reached and the game has been paused. You may"
+" unpause the game and continue watching if you want to."
+msgstr "Reprisen er slut og spelet er sett på pause.  Du kan halde fram med spelet og fortsette å sjå viss du vil."
 
 #: ../../src/logic/save_handler.cc:102
 msgid "Saving game..."
@@ -1173,36 +1190,44 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:569
+#: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:624
+#: ../../src/logic/ship.cc:628
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:626
+#: ../../src/logic/ship.cc:630
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:788
+#: ../../src/logic/ship.cc:674
+msgid "New port constructionsite is gone"
+msgstr ""
+
+#: ../../src/logic/ship.cc:675
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:789
+#: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -1235,17 +1260,14 @@ msgstr ""
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"burde grave etter %s, som ikkje finst i verda, stammen verkar ikkje med verda"
+msgstr "burde grave etter %s, som ikkje finst i verda, stammen verkar ikkje med verda"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
-"burde formeire %s-resursane som ikkje finst i denne verda, stammen verkar "
-"ikkje med verda"
+msgstr "burde formeire %s-resursane som ikkje finst i denne verda, stammen verkar ikkje med verda"
 
 #: ../../src/logic/worker.cc:958
 msgid "A geologist found resources."
@@ -1313,9 +1335,7 @@ msgstr "Uventa pakke"
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
-msgstr ""
-"Venta ei LOGG PÅ, LOGG PÅ ATT eller AVVIST pakke frå tenaren, men fekk ordre "
-"%s.  Kan vere at metatenaren brukar ein annan protokollversjon?"
+msgstr "Venta ei LOGG PÅ, LOGG PÅ ATT eller AVVIST pakke frå tenaren, men fekk ordre %s.  Kan vere at metatenaren brukar ein annan protokollversjon?"
 
 #: ../../src/network/internet_gaming.cc:424
 #, c-format
@@ -1447,9 +1467,7 @@ msgstr ""
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
-"Du blei fråkopla frå metatenaren, sia du ikkje svarte PING-førespurnaden i "
-"tide."
+msgstr "Du blei fråkopla frå metatenaren, sia du ikkje svarte PING-førespurnaden i tide."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -1470,10 +1488,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
-msgstr ""
-"Widelands kunne ikkje kople til den gitte adressa.\n"
-"Anten er det ingen Widelands-tenar som køyrer på den gitte porten eller\n"
-"slo tenaren seg av mens du prøvde å kople til."
+msgstr "Widelands kunne ikkje kople til den gitte adressa.\nAnten er det ingen Widelands-tenar som køyrer på den gitte porten eller\nslo tenaren seg av mens du prøvde å kople til."
 
 #: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
 #: ../../src/wlapplication.cc:1316
@@ -1488,9 +1503,7 @@ msgstr "fila til /me feila md5 sjekksum."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
-"/me sjekka den mottekne fila. Sjølv om md5 sjekksummen var i orden, kan eg "
-"ikkje handtera fila."
+msgstr "/me sjekka den mottekne fila. Sjølv om md5 sjekksummen var i orden, kan eg ikkje handtera fila."
 
 #: ../../src/network/netclient.cc:1095
 msgid " An automatic savegame will be created."
@@ -1633,9 +1646,7 @@ msgstr ""
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
-msgstr ""
-"Tilgang til vertskommandoar avkrefta.  For å få tilgang, send passordet med "
-"pwd-komandoen."
+msgstr "Tilgang til vertskommandoar avkrefta.  For å få tilgang, send passordet med pwd-komandoen."
 
 #: ../../src/network/nethost.cc:1233
 #, c-format
@@ -1684,10 +1695,9 @@ msgstr "Spelar"
 #: ../../src/network/nethost.cc:2153
 #, c-format
 msgid ""
-"This server is password protected. You can send the password with: \"@%s pwd "
-"PASSWORD\""
-msgstr ""
-"Denne tenaren er passordverna.  Du kan gi passordet med «@%s pwd PASSORD»"
+"This server is password protected. You can send the password with: \"@%s pwd"
+" PASSWORD\""
+msgstr "Denne tenaren er passordverna.  Du kan gi passordet med «@%s pwd PASSORD»"
 
 #: ../../src/network/nethost.cc:2251
 #, c-format
@@ -1755,9 +1765,7 @@ msgstr "Ukjend brukar har forlate spelet (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
-"Tenaren sendte ein SYNKFORESPURNAD sjølv om det ikkje er noken spel som "
-"køyrer."
+msgstr "Tenaren sendte ein SYNKFORESPURNAD sjølv om det ikkje er noken spel som køyrer."
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
@@ -1885,37 +1893,43 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:49
 msgid "true"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:53
 msgid "yes"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:57
 msgid "on"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:67
 msgid "false"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
-#. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
+#. * TRANSLATORS: Needs to be consistent with the translations in widelands-
+#. console
 #: ../../src/profile/profile.cc:75
 msgid "off"
 msgstr ""
@@ -1944,7 +1958,8 @@ msgstr "Nei"
 msgid "Preparing..."
 msgstr "Førebur …"
 
-#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced
+#. options
 #: ../../src/ui_basic/spinbox.cc:127
 #, c-format
 msgid "%i %s"
@@ -2215,7 +2230,8 @@ msgstr ""
 msgid "Press ESC or click to continue ..."
 msgstr "Trykk ESC eller klikk for å helde fram…"
 
-#. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
+#. * TRANSLATORS: Dialog box title for selecting between map or saved game for
+#. new multiplayer game
 #: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
 msgstr "Vel"
@@ -2293,10 +2309,8 @@ msgstr "Lagra spel er ei mappe"
 #: ../../src/ui_fsmenu/launch_mpg.cc:401
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the "
-"option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, "
-"please select another saved game or zip the directories’ content."
+"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:256
@@ -2306,12 +2320,9 @@ msgstr "Fann ikkje fila"
 #: ../../src/ui_fsmenu/launch_mpg.cc:432
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens, the host might have selected a file that you do not own. "
-"Normally, such a file should be sent from the host to you, but perhaps the "
-"transfer was not yet finished!?!"
+"If this happens, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:456
@@ -2380,7 +2391,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any player"
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
@@ -2389,11 +2401,9 @@ msgstr "Spelarval"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
-"In the middle are the settings for the players. To start a game, each player "
-"must be one of the following:"
-msgstr ""
-"I midten er vala for spelarane.  For å starte eit spel må kvar spelar vera "
-"ein av følgande:"
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "I midten er vala for spelarane.  For å starte eit spel må kvar spelar vera ein av følgande:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -2401,8 +2411,9 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse "
-"hover texts indicate the strength of the currently selected computer player)."
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
@@ -2423,8 +2434,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe "
-"and the team for that player"
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
@@ -2433,10 +2444,10 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
-"You can see information about the selected map or savegame on the right-hand "
-"side. A button next to the map name allows the host to change to a different "
-"map. Furthermore, the host is able to set a specific win condition, and "
-"finally can start the game as soon as all players are set up."
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_spg.cc:63
@@ -2475,12 +2486,9 @@ msgstr "Skift til posisjon"
 #: ../../src/ui_fsmenu/launch_spg.cc:258
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the "
-"given path.\n"
+"Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that "
-"you do not own. Normally, such a file should be sent from the host to you, "
-"but perhaps the transfer was not yet finished!?!"
+"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a map's name.
@@ -2554,7 +2562,8 @@ msgstr ""
 msgid "The date this game was saved"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:188
 #, c-format
@@ -2631,7 +2640,8 @@ msgstr ""
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "SP"
 msgstr ""
@@ -2639,7 +2649,8 @@ msgstr ""
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:548
 msgid "H (%1%)"
@@ -2648,13 +2659,15 @@ msgstr ""
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
-#. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
+#. * TRANSLATORS: Make sure that this translation is consistent with the
+#. tooltip.
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "MP (%1%)"
 msgstr ""
 
-#. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
+#. * TRANSLATORS: Error message introduction for when an old savegame can't be
+#. loaded
 #: ../../src/ui_fsmenu/loadgame.cc:573
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
@@ -2693,8 +2706,8 @@ msgid "Editor"
 msgstr "Endreprogram"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
-#: ../../src/wui/interactive_player.cc:107
-#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:94
+#: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Val"
 
@@ -2766,7 +2779,8 @@ msgstr ""
 msgid "Show all maps"
 msgstr "Syn alle kart"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
 msgstr ""
@@ -2804,14 +2818,16 @@ msgstr ""
 msgid "Teams of 4"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:305
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
@@ -3059,8 +3075,7 @@ msgstr "Spel av ein lyd når meldingar kjem"
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
-"Ikkje komprimer datafiler for widelands (kart, filmar og lagra spel)."
+msgstr "Ikkje komprimer datafiler for widelands (kart, filmar og lagra spel)."
 
 #: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
@@ -3092,17 +3107,14 @@ msgstr "Speldata-feil"
 msgid ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find "
-"related messages in the standard output (stdout.txt on Windows). You are "
-"using build %1$s (%2$s). "
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr ""
 
 #: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. "
-"It is often – though not always – possible to load it and continue playing.\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:222
@@ -3279,7 +3291,7 @@ msgid "Building materials"
 msgstr "Byggematerialer"
 
 #: ../../src/wui/encyclopedia_window.cc:65
-#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Ware Encyclopedia"
 msgstr ""
 
@@ -3383,8 +3395,8 @@ msgstr "Avbryt veg"
 msgid "Build roads"
 msgstr "Bygg vegar"
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:91
+#: ../../src/wui/interactive_spectator.cc:52
 msgid "Chat"
 msgstr "Prat"
 
@@ -3418,7 +3430,7 @@ msgstr "Lager"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
 #: ../../src/wui/game_options_menu.cc:117
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Lagra spel"
 
@@ -3573,7 +3585,8 @@ msgstr ""
 msgid "Warfare"
 msgstr ""
 
-#. * TRANSLATORS: This show up instead of a message's type when there are no messages found
+#. * TRANSLATORS: This show up instead of a message's type when there are no
+#. messages found
 #: ../../src/wui/game_message_menu.cc:568
 msgid "No message found"
 msgstr ""
@@ -3603,7 +3616,7 @@ msgid "Show Inbox"
 msgstr "Vis innboks"
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_player.cc:100
 msgid "Objectives"
 msgstr "Mål"
 
@@ -3766,34 +3779,34 @@ msgstr "Tapte sivile bygg"
 msgid "Military"
 msgstr "Militær"
 
-#: ../../src/wui/interactive_gamebase.cc:43
+#: ../../src/wui/interactive_gamebase.cc:44
 msgid "PAUSE"
 msgstr "PAUSE"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:117
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:110
-#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:97
+#: ../../src/wui/interactive_spectator.cc:60
 msgid "Statistics"
 msgstr "Statistikk"
 
-#: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:254
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:225
 msgid "Messages"
 msgstr "Meldingar"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:232
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u ny melding"
 msgstr[1] "%u nye meldingar"
 
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
 msgstr "Avslutt reprise"
 

@@ -247,7 +247,7 @@ local elders = {
 	{
 		_"Graphics",
 		{
-			_"vacant"
+			"Chuck Wilder (chuckw)"
 		}
 	},
 	{
@@ -285,7 +285,6 @@ local former_elders = {
 		{
 			"Salamander",
 			"Alexia Death (death)",
-			"Chuck Wilder (chuckw)"
 		}
 	},
 	{

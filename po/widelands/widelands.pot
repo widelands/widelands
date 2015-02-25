@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1141,7 +1141,7 @@ msgstr[1] ""
 msgid "(stopped)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1219,15 +1219,15 @@ msgstr ""
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr ""
 

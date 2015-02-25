@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Thorbjørn Bruarøy, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:16+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-18 08:56+0000\n"
+"Last-Translator: Thorbjørn Bruarøy\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/projects/p/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,19 +22,19 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Dette er Widelands versjonssteg %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Bruk: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr ""
+msgstr "Val:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr "--<config-entry-name>=verdi overstyrer alle konfigurasjonsinnstillingar"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
@@ -55,7 +56,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "Standard er ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -101,19 +102,19 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
-msgstr ""
+msgstr "Lydinnstillingar:"
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound Startar spelet med lydar dekativert."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx Deaktiver lydeffektar."
 
 #: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music Deaktiver musikk."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
@@ -224,7 +225,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help Syn denne hjelpa."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid ""

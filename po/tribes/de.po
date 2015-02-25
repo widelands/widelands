@@ -1,22 +1,22 @@
-# German translation for widelands
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Venatrix, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-09-08 09:45+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-19 20:41+0000\n"
+"Last-Translator: Venatrix\n"
+"Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:46+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../tribes/scripting/format_help.lua:150
 #: ../../tribes/scripting/format_help.lua:442
@@ -35,17 +35,20 @@ msgstr "%1$s oder %2$s"
 msgid "%s and"
 msgstr "%s und"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
 msgstr "Ausrüstung von"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
 msgstr "und Ausrüstung von"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
 msgstr "oder Ausrüstung von"
@@ -75,12 +78,12 @@ msgstr "Heilung:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %s per second"
-msgstr "Stationierte Soldaten werden um %s pro Sekunde geheilt."
+msgstr "Hier stationierte Soldaten werden um %s pro Sekunde geheilt."
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
 msgid "Conquer range:"
-msgstr "Eroberungsradius"
+msgstr "Eroberungsradius:"
 
 #: ../../tribes/scripting/format_help.lua:292
 #: ../../tribes/scripting/format_help.lua:314
@@ -89,10 +92,10 @@ msgstr "Kapazität:"
 
 #: ../../tribes/scripting/format_help.lua:296
 msgid "Training:"
-msgstr "Training"
+msgstr "Training:"
 
-#: TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-#: ../../tribes/scripting/format_help.lua:299
+#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#: numbers. ../../tribes/scripting/format_help.lua:299
 #: ../../tribes/scripting/format_help.lua:303
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
@@ -117,11 +120,11 @@ msgstr "die Lebenspunkte"
 
 #: ../../tribes/scripting/format_help.lua:316
 msgid "Vision range:"
-msgstr "Sichtreichweite"
+msgstr "Sichtreichweite:"
 
 #: ../../tribes/scripting/format_help.lua:333
 msgid "Lore"
-msgstr "Überlieferung"
+msgstr "Weisheit"
 
 #: ../../tribes/scripting/format_help.lua:361
 msgid "%1$s from: %2$s"
@@ -135,7 +138,7 @@ msgstr "Eingehend:"
 msgid "Collects:"
 msgstr "Sammelt:"
 
-#: TRANSLATORS: This is a verb (The miner mines)
+#: TRANSLATORS This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid "Mines:"
 msgstr "Baut ab:"
@@ -152,7 +155,7 @@ msgstr "Ausgehend:"
 msgid "None"
 msgstr "Keine"
 
-#: TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
@@ -201,9 +204,7 @@ msgstr "unbekannt"
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
-msgstr ""
-"Dieses Gebäude kann entweder direkt gebaut oder durch das Erweitern eines "
-"anderen Gebäudes erhalten werden."
+msgstr "Dieses Gebäude kann entweder direkt gebaut oder durch das Erweitern eines anderen Gebäudes erhalten werden."
 
 #: ../../tribes/scripting/format_help.lua:511
 msgid "Direct build cost:"
@@ -228,16 +229,16 @@ msgstr "Gesamtkosten:"
 
 #: ../../tribes/scripting/format_help.lua:580
 msgid "If built directly, dismantle yields:"
-msgstr "Beim Abreißen zurückgewonnene Ressourcen, wenn direkt gebaut:"
+msgstr "Beim Abreißen zurückgewonnene Rohstoffe, wenn direkt gebaut:"
 
 #: ../../tribes/scripting/format_help.lua:585
 msgid "If enhanced, dismantle yields:"
-msgstr "Beim Abreißen zurückgewonnene Ressourcen, wenn erweitert:"
+msgstr "Beim Abreißen zurückgewonnene Rohstoffe, wenn erweitert:"
 
 #: ../../tribes/scripting/format_help.lua:587
 #: ../../tribes/scripting/format_help.lua:628
 msgid "Dismantle yields:"
-msgstr "Beim Abreißen zurückgewonnene Ressourcen:"
+msgstr "Beim Abreißen zurückgewonnene Rohstoffe:"
 
 #: ../../tribes/scripting/format_help.lua:637
 msgid "Can be enhanced to:"

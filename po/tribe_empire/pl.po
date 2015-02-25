@@ -1,21 +1,23 @@
-# Widelands po/pl_PL/tribes/empire.po
-# Copyright (C) 2008 Widelands Development Team
-# Jacek Wolszczak <shutdownrunner@o2.pl>, 2008.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2014
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4804\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-10-16 17:16+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 13:27+0000\n"
+"Last-Translator: Igor Kotrasiński <ikk_pl@yahoo.co.uk>\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:39+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
@@ -278,19 +280,14 @@ msgid ""
 "This is an advanced lance with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
-"Długa lanca ze stalowym grotem. Produkuje się ją w pracowni zbrojmistrza i "
-"wykorzystuje w obozach treningowych - wraz z jedzeniem - do podnoszenia "
-"umiejętności ataku żołnierzy z poziomu 1 do poziomu 2."
+msgstr "Długa lanca ze stalowym grotem. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 1 do poziomu 2."
 
-#: ../../tribes/empire/arena/conf:30
-#: ../../tribes/empire/colosseum/conf:36
+#: ../../tribes/empire/arena/conf:30 ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
 msgstr "spanie"
 
-#: ../../tribes/empire/arena/conf:32
-#: ../../tribes/empire/colosseum/conf:38
+#: ../../tribes/empire/arena/conf:32 ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 
@@ -326,18 +323,15 @@ msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:13
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 #: ../../tribes/empire/hunters_house/help.lua:13
-#: ../../tribes/empire/inn/help.lua:13
-#: ../../tribes/empire/inn/help.lua:17
+#: ../../tribes/empire/inn/help.lua:13 ../../tribes/empire/inn/help.lua:17
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
-#: ../../tribes/empire/mill/help.lua:13
-#: ../../tribes/empire/mill/help.lua:17
+#: ../../tribes/empire/mill/help.lua:13 ../../tribes/empire/mill/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:17
-#: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/port/help.lua:17
+#: ../../tribes/empire/port/help.lua:13 ../../tribes/empire/port/help.lua:17
 #: ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:17
@@ -362,8 +356,7 @@ msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 #: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:17
 #: ../../tribes/empire/weaving-mill/help.lua:13
-#: ../../tribes/empire/well/help.lua:13
-#: ../../tribes/empire/winery/help.lua:13
+#: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
 msgstr "Potrzeba tekstu"
@@ -386,9 +379,7 @@ msgstr "'Unik' zwiększa szansę żołnierza na uniknięcie ataku przeciwnika."
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
-msgstr ""
-"Żołnierze Imperium nie mogą być ćwiczeni w obronie i pozostają na jej "
-"oryginalnym poziomie."
+msgstr "Żołnierze Imperium nie mogą być ćwiczeni w obronie i pozostają na jej oryginalnym poziomie."
 
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
@@ -418,8 +409,7 @@ msgstr "Trening uniku:"
 #: ../../tribes/empire/mill/help.lua:30
 #: ../../tribes/empire/oremine/help.lua:30
 #: ../../tribes/empire/piggery/help.lua:29
-#: ../../tribes/empire/port/help.lua:26
-#: ../../tribes/empire/quarry/help.lua:29
+#: ../../tribes/empire/port/help.lua:26 ../../tribes/empire/quarry/help.lua:29
 #: ../../tribes/empire/sawmill/help.lua:29
 #: ../../tribes/empire/scouts_house/help.lua:29
 #: ../../tribes/empire/sheepfarm/help.lua:29
@@ -432,20 +422,16 @@ msgstr "Trening uniku:"
 #: ../../tribes/empire/vineyard/help.lua:29
 #: ../../tribes/empire/weaponsmithy/help.lua:29
 #: ../../tribes/empire/weaving-mill/help.lua:29
-#: ../../tribes/empire/well/help.lua:30
-#: ../../tribes/empire/winery/help.lua:29
+#: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
 msgstr "Wymagane obliczenia"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
-"Basic armor for Empire soldiers. It is produced in the armor smithy and used "
-"in the training camp – together with food – to train soldiers from health "
+"Basic armor for Empire soldiers. It is produced in the armor smithy and used"
+" in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
-"Podstawowa zbroja żołnierzy Imperium. Produkowana jest w pracowni płatnerza "
-"i wykorzystywana w obozach treningowych - wraz z jedzeniem - do podnoszenia "
-"liczby punktów zdrowia żołnierzy z poziomu 1 do poziomu 2."
+msgstr "Podstawowa zbroja żołnierzy Imperium. Produkowana jest w pracowni płatnerza i wykorzystywana w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 1 do poziomu 2."
 
 #: ../../tribes/empire/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -467,23 +453,16 @@ msgstr "kucie kolczugi"
 msgid "forging a plate armor"
 msgstr "kucie zbroi płytowej"
 
-#: ../../tribes/empire/armorsmithy/conf:40
-#: ../../tribes/empire/bakery/conf:25
-#: ../../tribes/empire/charcoal_kiln/conf:25
-#: ../../tribes/empire/farm/conf:29
-#: ../../tribes/empire/foresters_house/conf:21
-#: ../../tribes/empire/inn/conf:30
+#: ../../tribes/empire/armorsmithy/conf:40 ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/charcoal_kiln/conf:25 ../../tribes/empire/farm/conf:29
+#: ../../tribes/empire/foresters_house/conf:21 ../../tribes/empire/inn/conf:30
 #: ../../tribes/empire/lumberjacks_house/conf:21
-#: ../../tribes/empire/marblemine/conf:32
-#: ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:25
-#: ../../tribes/empire/shipyard/conf:29
+#: ../../tribes/empire/marblemine/conf:32 ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/sawmill/conf:25 ../../tribes/empire/shipyard/conf:29
 #: ../../tribes/empire/smelting_works/conf:31
 #: ../../tribes/empire/stonemasons_house/conf:26
-#: ../../tribes/empire/toolsmithy/conf:62
-#: ../../tribes/empire/vineyard/conf:27
-#: ../../tribes/empire/weaponsmithy/conf:44
-#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/toolsmithy/conf:62 ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/weaponsmithy/conf:44 ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
 msgstr "praca"
@@ -511,8 +490,7 @@ msgstr "praca"
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
-#: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/quarry/help.lua:13
+#: ../../tribes/empire/port/help.lua:13 ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/scouts_house/help.lua:13
 #: ../../tribes/empire/sentry/help.lua:13
@@ -528,15 +506,14 @@ msgstr "praca"
 #: ../../tribes/empire/warehouse/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaving-mill/help.lua:13
-#: ../../tribes/empire/well/help.lua:13
-#: ../../tribes/empire/winery/help.lua:13
+#: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
 msgstr "Potrzeba źródła"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
 "The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Topór to narzędzie drwala. Produkuje je rzemieślnik."
+msgstr "Topór to narzędzie drwala. Produkuje je warsztat."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -567,10 +544,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
-"Jeśli brakuje ci żołnierzy do zajmowania nowych budynków wojskowych, kliknij "
-"na strzałkę w dół, by zmniejszyć stan osobowy budynku. Możesz również "
-"kliknąć samego żołnierza, by go odesłać."
+msgstr "Jeśli brakuje ci żołnierzy do zajmowania nowych budynków wojskowych, kliknij na przycisk strzałki w dół, by zmniejszyć stan osobowy budynku. Możesz również kliknąć samego żołnierza, by go odesłać."
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your barrier."
@@ -580,36 +554,26 @@ msgstr "Twoi żołnierze zajęli miejsce w twojej barierze."
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
-msgstr ""
-"Kosze potrzebne są hodowcom winorośli do zbierania winogron. Produkuje je "
-"rzemieślnik."
+msgstr "Kosze potrzebne są hodowcom winorośli do zbierania winogron. Produkuje je warsztat."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
-"This beer is produced in a brewery out of wheat and water. It is consumed by "
-"miners in coal and iron ore mines."
-msgstr ""
-"To piwo produkowane jest w browarze z pszenicy i wody. Spożywają je górnicy "
-"w kopalniach węgla i żelaza."
+"This beer is produced in a brewery out of wheat and water. It is consumed by"
+" miners in coal and iron ore mines."
+msgstr "To piwo produkowane jest w browarze z pszenicy i wody. Spożywają je górnicy w kopalniach węgla i żelaza."
 
 #: ../../tribes/empire/bread/conf:1
 msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr ""
-"Piekarze Imperium produkują wyjątkowo smakowity chleb z mąki i wody. "
-"Wykorzystuje się go w tawernach i karczmach by produkować racje i posiłki. "
-"Chleb jest także wykorzystywany w obiektach treningowych (arena, koloseum, "
-"obóz treningowy)."
+msgstr "Piekarze Imperium produkują wyjątkowo smakowity chleb z mąki i wody. Wykorzystuje się go w tawernach i karczmach, by produkować racje i posiłki. Chleb jest także wykorzystywany w budynkach szkoleniowych (arena, koloseum, obóz szkoleniowy)."
 
 #: ../../tribes/empire/bread_paddle/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr ""
-"Łopata do chleba jest narzędziem piekarza, każdy piekarz potrzebuje własnej. "
-"Produkowana jest przez rzemieślnika."
+msgstr "Łopata do chleba jest narzędziem piekarza, każdy piekarz potrzebuje własnej. Produkowana jest przez warsztat."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -640,10 +604,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr ""
-"Kolczuga to średnia zbroja żołnierzy Imperium. Wytwarza się ją w pracowniach "
-"płatnerza i wykorzystuje w obozach treningowych - wraz z jedzeniem - do "
-"podnoszenia liczby punktów zdrowia żołnierzy z poziomu 2 do poziomu 3."
+msgstr "Kolczuga to średnia zbroja żołnierzy Imperium. Wytwarza się ją w pracowniach płatnerza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 2 do poziomu 3."
 
 #: ../../tribes/empire/charcoal_burner/conf:1
 msgid "Burns coal."
@@ -651,29 +612,23 @@ msgstr "Wypala węgiel."
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
-"Cloth is needed to build several buildings. It is also consumed in the armor "
-"smithy."
-msgstr ""
-"Tkanina niezbędna jest do budowy niektórych obiektów. Wykorzystuje się ją "
-"także w pracowniach płatnerza."
+"Cloth is needed to build several buildings. It is also consumed in the armor"
+" smithy."
+msgstr "Tkanina niezbędna jest do budowy niektórych obiektów. Wykorzystuje się ją także w pracowniach płatnerza."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal kiln out of logs."
-msgstr ""
-"Paleniska Imperialnych hut, pracowni płatnerzy i zbrojmistrzów zazwyczaj "
-"opalane są węglem. Wydobywa się go w kopalniach węgla lub produkuje w "
-"mielerzach z surowych kłód drzew."
+msgstr "Paleniska Imperialnych hut, pracowni płatnerzy i zbrojmistrzów zazwyczaj opalane są węglem. Wydobywa się go w kopalniach węgla lub produkuje w smolarniach z surowych kłód drzew."
 
 #: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
 #: ../../tribes/empire/deep_goldmine/conf:27
 #: ../../tribes/empire/deep_marblemine/conf:28
 #: ../../tribes/empire/deep_oremine/conf:27
-#: ../../tribes/empire/goldmine/conf:27
-#: ../../tribes/empire/oremine/conf:27
+#: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
 msgstr "wydobycie"
 
@@ -686,9 +641,7 @@ msgstr "Wyczerpano główną żyłę węgla"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
@@ -709,631 +662,626 @@ msgstr "Imperium"
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the Roman Empire."
-msgstr "Oto cywilizacja rzymskiego Impreium."
+msgstr "Oto cywilizacja rzymskiego Imperium."
 
-#: ../../tribes/empire/conf:29
+#: ../../tribes/empire/conf:37
 msgid "Ashes"
 msgstr "Popiół"
 
-#: ../../tribes/empire/conf:30
+#: ../../tribes/empire/conf:38
 msgid "Field (medium)"
-msgstr "Średnie pole"
+msgstr "Pole (średnie)"
 
-#: ../../tribes/empire/conf:31
+#: ../../tribes/empire/conf:39
 msgid "Field (small)"
-msgstr "Małe pole"
+msgstr "Pole (małe)"
 
-#: ../../tribes/empire/conf:32
+#: ../../tribes/empire/conf:40
 msgid "Field (tiny)"
-msgstr "Malutkie pole"
+msgstr "Pole (malutkie)"
 
-#: ../../tribes/empire/conf:33
+#: ../../tribes/empire/conf:41
 msgid "Field (ripe)"
-msgstr "Dojrzałe pole"
+msgstr "Pole (dojrzałe)"
 
-#: ../../tribes/empire/conf:34
+#: ../../tribes/empire/conf:42
 msgid "Field (harvested)"
-msgstr "Zebrane pole"
+msgstr "Pole (zebrane)"
 
-#: ../../tribes/empire/conf:35
+#: ../../tribes/empire/conf:43
 msgid "Destroyed Building"
 msgstr "Zniszczony budynek"
 
-#: ../../tribes/empire/conf:36
+#: ../../tribes/empire/conf:44
 msgid "Resource indicator: Coal (little)"
 msgstr "Wskaźnik zasobów: węgiel (mało)"
 
-#: ../../tribes/empire/conf:37
+#: ../../tribes/empire/conf:45
 msgid "Resource indicator: Coal (much)"
 msgstr "Wskaźnik zasobów: węgiel (dużo)"
 
-#: ../../tribes/empire/conf:38
+#: ../../tribes/empire/conf:46
 msgid "Resource indicator: Gold (little)"
 msgstr "Wskaźnik zasobów: złoto (mało)"
 
-#: ../../tribes/empire/conf:39
+#: ../../tribes/empire/conf:47
 msgid "Resource indicator: Gold (much)"
 msgstr "Wskaźnik zasobów: złoto (dużo)"
 
-#: ../../tribes/empire/conf:40
+#: ../../tribes/empire/conf:48
 msgid "Resource indicator: Granite (little)"
 msgstr "Wskaźnik zasobów: granit (mało)"
 
-#: ../../tribes/empire/conf:41
+#: ../../tribes/empire/conf:49
 msgid "Resource indicator: Granite (much)"
 msgstr "Wskaźnik zasobów: granit (dużo)"
 
-#: ../../tribes/empire/conf:42
+#: ../../tribes/empire/conf:50
 msgid "Resource indicator: Iron (little)"
 msgstr "Wskaźnik zasobów: żelazo (mało)"
 
-#: ../../tribes/empire/conf:43
+#: ../../tribes/empire/conf:51
 msgid "Resource indicator: Iron (much)"
 msgstr "Wskaźnik zasobów: żelazo (dużo)"
 
-#: ../../tribes/empire/conf:44
+#: ../../tribes/empire/conf:52
 msgid "Resource indicator: No resource"
 msgstr "Wskaźnik zasobów: brak"
 
-#: ../../tribes/empire/conf:45
+#: ../../tribes/empire/conf:53
 msgid "Resource indicator: Water"
 msgstr "Wskaźnik zasobów: woda"
 
-#: ../../tribes/empire/conf:46
+#: ../../tribes/empire/conf:54
 msgid "Vine (medium)"
-msgstr "Średnia winorośl"
+msgstr "Winorośl (średnia)"
 
-#: ../../tribes/empire/conf:47
+#: ../../tribes/empire/conf:55
 msgid "Vine (small)"
-msgstr "Mała winorośl"
+msgstr "Winorośl (mała)"
 
-#: ../../tribes/empire/conf:48
+#: ../../tribes/empire/conf:56
 msgid "Vine (tiny)"
-msgstr "Malutka winorośl"
+msgstr "Winorośl (malutka)"
 
-#: ../../tribes/empire/conf:49
+#: ../../tribes/empire/conf:57
 msgid "Vine (ripe)"
-msgstr "Dojrzała winorośl"
+msgstr "Winorośl (dojrzała)"
 
-#: ../../tribes/empire/conf:50
+#: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
-msgstr "Budowany statek"
+msgstr "Plac budowy statku"
 
-#: ../../tribes/empire/conf:53
+#: ../../tribes/empire/conf:61
 msgid "Advanced Lance"
 msgstr "Długa lanca"
 
-#: ../../tribes/empire/conf:54
+#: ../../tribes/empire/conf:62
 msgid "Armor"
 msgstr "Zbroja"
 
-#: ../../tribes/empire/conf:55
+#: ../../tribes/empire/conf:63
 msgid "Ax"
 msgstr "Topór"
 
-#: ../../tribes/empire/conf:56
+#: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
 msgstr "Łopata do chleba"
 
-#: ../../tribes/empire/conf:57
+#: ../../tribes/empire/conf:65
 msgid "Basket"
 msgstr "Kosz"
 
-#: ../../tribes/empire/conf:58
+#: ../../tribes/empire/conf:66
 msgid "Beer"
 msgstr "Piwo"
 
-#: ../../tribes/empire/conf:59
+#: ../../tribes/empire/conf:67
 msgid "Bread"
 msgstr "Chleb"
 
-#: ../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:68
 msgid "Chain Armor"
 msgstr "Kolczuga"
 
-#: ../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:69
 msgid "Cloth"
 msgstr "Tkanina"
 
-#: ../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:70
 msgid "Coal"
 msgstr "Węgiel"
 
-#: ../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:71
 msgid "Fire Tongs"
 msgstr "Szczypce"
 
-#: ../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:72
 msgid "Fish"
 msgstr "Ryba"
 
-#: ../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:73
 msgid "Fishing Rod"
 msgstr "Wędka"
 
-#: ../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:74
 msgid "Flour"
 msgstr "Mąka"
 
-#: ../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:75
 msgid "Gold"
 msgstr "Złoto"
 
-#: ../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:76
 msgid "Gold Ore"
 msgstr "Ruda złota"
 
-#: ../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:77
 msgid "Grape"
 msgstr "Winogrona"
 
-#: ../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:78
 msgid "Hammer"
 msgstr "Młotek"
 
-#: ../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:79
 msgid "Heavy Lance"
 msgstr "Ciężka lanca"
 
-#: ../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:80
 msgid "Helmet"
 msgstr "Hełm"
 
-#: ../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:81
 msgid "Hunting Spear"
 msgstr "Dzida"
 
-#: ../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:82
 msgid "Iron"
 msgstr "Żelazo"
 
-#: ../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:83
 msgid "Iron Ore"
 msgstr "Ruda żelaza"
 
-#: ../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:84
 msgid "Kitchen Tools"
 msgstr "Przybory kuchenne"
 
-#: ../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:85
 msgid "Lance"
 msgstr "Lanca"
 
-#: ../../tribes/empire/conf:78
+#: ../../tribes/empire/conf:86
 msgid "Marble Column"
 msgstr "Marmurowa kolumna"
 
-#: ../../tribes/empire/conf:79
+#: ../../tribes/empire/conf:87
 msgid "Marble"
 msgstr "Marmur"
 
-#: ../../tribes/empire/conf:80
+#: ../../tribes/empire/conf:88
 msgid "Meal"
 msgstr "Posiłek"
 
-#: ../../tribes/empire/conf:81
+#: ../../tribes/empire/conf:89
 msgid "Meat"
 msgstr "Mięso"
 
-#: ../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:90
 msgid "Pick"
 msgstr "Kilof"
 
-#: ../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:91
 msgid "Plate Armor"
 msgstr "Zbroja płytowa"
 
-#: ../../tribes/empire/conf:84
+#: ../../tribes/empire/conf:92
 msgid "Ration"
 msgstr "Racja"
 
-#: ../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:93
 msgid "Saw"
 msgstr "Piła"
 
-#: ../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:94
 msgid "Scythe"
 msgstr "Kosa"
 
-#: ../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:95
 msgid "Shovel"
 msgstr "Łopata"
 
-#: ../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:96
 msgid "Stones"
 msgstr "Kamienie"
 
-#: ../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:97
 msgid "Log"
 msgstr "Kłoda"
 
-#: ../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:98
 msgid "War-Lance"
 msgstr "Lanca bojowa"
 
-#: ../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:99
 msgid "Water"
 msgstr "Woda"
 
-#: ../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:100
 msgid "Wheat"
 msgstr "Pszenica"
 
-#: ../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:101
 msgid "Wine"
 msgstr "Wino"
 
-#: ../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:102
 msgid "Wood"
 msgstr "Drewno"
 
-#: ../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:103
 msgid "Wood Lance"
 msgstr "Drewniana lanca"
 
-#: ../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:104
 msgid "Wool"
 msgstr "Wełna"
 
-#: ../../tribes/empire/conf:99
+#: ../../tribes/empire/conf:107
 msgid "Carrier"
 msgstr "Tragarz"
 
-#: ../../tribes/empire/conf:100
+#: ../../tribes/empire/conf:108
 msgid "Donkey"
 msgstr "Osioł"
 
-#: ../../tribes/empire/conf:103
+#: ../../tribes/empire/conf:111
 msgid "Soldier"
 msgstr "Żołnierz"
 
-#: ../../tribes/empire/conf:106
+#: ../../tribes/empire/conf:114
 msgid "Armorsmith"
 msgstr "Płatnerz"
 
-#: ../../tribes/empire/conf:107
+#: ../../tribes/empire/conf:115
 msgid "Baker"
 msgstr "Piekarz"
 
-#: ../../tribes/empire/conf:108
+#: ../../tribes/empire/conf:116
 msgid "Brewer"
 msgstr "Piwowar"
 
-#: ../../tribes/empire/conf:109
+#: ../../tribes/empire/conf:117
 msgid "Builder"
 msgstr "Budowniczy"
 
-#: ../../tribes/empire/conf:110
+#: ../../tribes/empire/conf:118
 msgid "Charcoal Burner"
 msgstr "Węglarz"
 
-#: ../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:119
 msgid "Carpenter"
 msgstr "Stolarz"
 
-#: ../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:120
 msgid "Farmer"
 msgstr "Farmer"
 
-#: ../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:121
 msgid "Fisher"
 msgstr "Rybak"
 
-#: ../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:122
 msgid "Forester"
 msgstr "Leśnik"
 
-#: ../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:123
 msgid "Geologist"
 msgstr "Geolog"
 
-#: ../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:124
 msgid "Hunter"
 msgstr "Myśliwy"
 
-#: ../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:125
 msgid "Innkeeper"
 msgstr "Karczmarz"
 
-#: ../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:126
 msgid "Lumberjack"
 msgstr "Drwal"
 
-#: ../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:127
 msgid "Master Miner"
 msgstr "Nadsztygar"
 
-#: ../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:128
 msgid "Miller"
 msgstr "Młynarz"
 
-#: ../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:129
 msgid "Miner"
 msgstr "Górnik"
 
-#: ../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:130
 msgid "Pig Breeder"
 msgstr "Świniopas"
 
-#: ../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:131
 msgid "Shepherd"
 msgstr "Pasterz"
 
-#: ../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:132
 msgid "Shipwright"
 msgstr "Szkutnik"
 
-#: ../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:133
 msgid "Smelter"
 msgstr "Hutnik"
 
-#: ../../tribes/empire/conf:126
+#: ../../tribes/empire/conf:134
 msgid "Stonemason"
 msgstr "Kamieniarz"
 
-#: ../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:135
 msgid "Toolsmith"
 msgstr "Rzemieślnik"
 
-#: ../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:136
 msgid "Trainer"
 msgstr "Trener"
 
-#: ../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:137
 msgid "Weaponsmith"
 msgstr "Zbrojmistrz"
 
-#: ../../tribes/empire/conf:130
+#: ../../tribes/empire/conf:138
 msgid "Weaver"
 msgstr "Tkacz"
 
-#: ../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:139
 msgid "Vine Farmer"
 msgstr "Hodowca winorośli"
 
-#: ../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:140
 msgid "Scout"
 msgstr "Zwiadowca"
 
-#: ../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:141
 msgid "Donkey Breeder"
 msgstr "Hodowca osłów"
 
-#: ../../tribes/empire/conf:136
+#: ../../tribes/empire/conf:144
 msgid "Ship"
 msgstr "Statek"
 
-#: ../../tribes/empire/conf:139
+#: ../../tribes/empire/conf:147
 msgid "Construction Site"
 msgstr "Plac budowy"
 
-#: ../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:150
 msgid "Dismantle Site"
 msgstr "Plac rozbiórki"
 
-#: ../../tribes/empire/conf:145
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:153 ../../tribes/empire/conf:215
 msgid "Castle"
 msgstr "Zamek"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:154
 msgid "Guardhall"
 msgstr "Warownia"
 
-#: ../../tribes/empire/conf:147
+#: ../../tribes/empire/conf:155
 msgid "Guardhouse"
 msgstr "Wartownia"
 
-#: ../../tribes/empire/conf:148
+#: ../../tribes/empire/conf:156
 msgid "High Tower"
 msgstr "Wysoka wieża"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:157
 msgid "Small Tower"
 msgstr "Mała wieża"
 
-#: ../../tribes/empire/conf:150
-#: ../../tribes/empire/conf:206
+#: ../../tribes/empire/conf:158 ../../tribes/empire/conf:214
 msgid "Tower"
 msgstr "Wieża"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:159 ../../tribes/empire/conf:212
 msgid "Barrier"
 msgstr "Bariera"
 
-#: ../../tribes/empire/conf:152
+#: ../../tribes/empire/conf:160
 msgid "Citadel"
 msgstr "Cytadela"
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:161
 msgid "Donjon"
 msgstr "Stołp"
 
-#: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:162 ../../tribes/empire/conf:216
 msgid "Fortress"
 msgstr "Forteca"
 
-#: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:163 ../../tribes/empire/conf:210
 msgid "Sentry"
 msgstr "Strażnica"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:166
 #: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Kwatera główna"
 
-#: ../../tribes/empire/conf:159
+#: ../../tribes/empire/conf:167
 msgid "Headquarters Shipwreck"
 msgstr "Kwatera główna z wraku statku"
 
-#: ../../tribes/empire/conf:160
+#: ../../tribes/empire/conf:168
 msgid "Warehouse"
 msgstr "Magazyn"
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:169
 msgid "Port"
 msgstr "Port"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:172
 msgid "Quarry"
 msgstr "Kamieniołom"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:173
 msgid "Lumberjack’s House"
 msgstr "Chata drwala"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:174
 msgid "Forester’s House"
 msgstr "Leśniczówka"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:175
 msgid "Fisher’s House"
 msgstr "Domek rybaka"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:176
 msgid "Hunter’s House"
 msgstr "Kwatera myśliwego"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:177
 msgid "Well"
 msgstr "Studnia"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:178
 msgid "Scout’s House"
 msgstr "Dom zwiadowcy"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
 msgstr "Pracownia kamieniarza"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:180
 msgid "Sawmill"
 msgstr "Tartak"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:181
 msgid "Mill"
 msgstr "Młyn"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:182
 msgid "Bakery"
 msgstr "Piekarnia"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:183
 msgid "Brewery"
 msgstr "Browar"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:184
 msgid "Vineyard"
 msgstr "Plantacja winorośli"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:185
 msgid "Winery"
 msgstr "Winnica"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:186
 msgid "Inn"
 msgstr "Karczma"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:187
 msgid "Tavern"
 msgstr "Tawerna"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:188
 msgid "Charcoal Kiln"
 msgstr "Smolarnia"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:189
 msgid "Smelting Works"
 msgstr "Huta"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:190
 msgid "Shipyard"
 msgstr "Stocznia"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:191
 msgid "Toolsmithy"
-msgstr "Pracownia rzemieślnika"
+msgstr "Warsztat"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:192
 msgid "Armor Smithy"
 msgstr "Pracownia płatnerza"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:193
 msgid "Donkey Farm"
 msgstr "Ośla farma"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:194
 msgid "Sheep Farm"
 msgstr "Owczarnia"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:195
 msgid "Weaving Mill"
 msgstr "Tkalnia"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:196
 msgid "Piggery"
 msgstr "Chlew"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:197
 msgid "Farm"
 msgstr "Farma"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:198
 msgid "Weapon Smithy"
 msgstr "Pracownia zbrojmistrza"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:199
 msgid "Deep Marble Mine"
 msgstr "Głęboka kopalnia marmuru"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:200
 msgid "Marble Mine"
 msgstr "Kopalnia marmuru"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:201
 msgid "Deep Coal Mine"
 msgstr "Głęboka kopalnia węgla"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:202
 msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:203
 msgid "Deep Iron Ore Mine"
 msgstr "Głęboka kopalnia rudy żelaza"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:204
 msgid "Iron Ore Mine"
 msgstr "Kopalnia rudy żelaza"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:205
 msgid "Deep Gold Mine"
 msgstr "Głęboka kopalnia złota"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:206
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:211
 msgid "Barracks"
 msgstr "Koszary"
 
-#: ../../tribes/empire/conf:205
+#: ../../tribes/empire/conf:213
 msgid "Outpost"
 msgstr "Placówka"
 
-#: ../../tribes/empire/conf:212
+#: ../../tribes/empire/conf:220
 msgid "Colosseum"
 msgstr "Koloseum"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:221
 msgid "Arena"
 msgstr "Arena"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:222
 msgid "Training Camp"
 msgstr "Obóz szkoleniowy"
 
@@ -1342,10 +1290,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
-"rozbiórkę lub zniszczenie."
+msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
 
 #: ../../tribes/empire/deep_goldmine/conf:41
 #: ../../tribes/empire/goldmine/conf:41
@@ -1357,10 +1302,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
-"rozbiórkę lub zniszczenie."
+msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
@@ -1377,10 +1319,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr ""
-"Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
-"rozbiórkę lub zniszczenie."
+msgstr "Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1396,10 +1335,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Główna żyła żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
-"rozbiórkę lub zniszczenie."
+msgstr "Główna żyła żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
@@ -1410,9 +1346,7 @@ msgstr "Wydobywa rudę żelaza na terenach górskich."
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
-"Osły pomagają nosić przedmioty na często używanych drogach. Hodowane są na "
-"oślich farmach."
+msgstr "Osły pomagają nosić przedmioty na często używanych drogach. Hodowane są na oślich farmach."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -1434,8 +1368,7 @@ msgstr "sadzenie pszenicy"
 msgid "harvesting wheat"
 msgstr "żęcie pszenicy"
 
-#: ../../tribes/empire/farm/conf:46
-#: ../../tribes/empire/vineyard/conf:43
+#: ../../tribes/empire/farm/conf:46 ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
 msgstr "Brak pól"
 
@@ -1456,18 +1389,13 @@ msgstr "Obsiewa pola."
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
-msgstr ""
-"Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są "
-"przez rzemieślnika."
+msgstr "Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są przez warsztat."
 
 #: ../../tribes/empire/fish/conf:1
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
-"Poza chlebem i mięsem, także ryby są częścią zaplecza żywieniowego Imperium. "
-"Ryby wykorzystuje się w tawernach, karczmach i budynkach treningowych "
-"(arena, koloseum, obóz treningowy)."
+msgstr "Poza chlebem i mięsem, także ryby są częścią diety obywatela Imperium. Ryby wykorzystuje się w tawernach, karczmach i budynkach szkoleniowych (arena, koloseum, obóz szkoleniowy)."
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1483,33 +1411,29 @@ msgstr "Brak ryb"
 
 #: ../../tribes/empire/fishers_house/conf:29
 msgid ""
-"The fisher working in this fisher’s house can’t find any fish in his working "
-"radius."
-msgstr ""
-"Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb w swoim "
-"obszarze pracy."
+"The fisher working in this fisher’s house can’t find any fish in his working"
+" radius."
+msgstr "Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb w swoim obszarze pracy."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
 msgstr "Łowi ryby na brzegu w pobliżu domku."
 
 #: ../../tribes/empire/fishers_house/help.lua:18
-msgid ""
-"The fisher’s house needs water full of fish within the working radius."
+msgid "The fisher’s house needs water full of fish within the working radius."
 msgstr "Domek rybaka potrzebuje w sąsiedztwie wód zasobnych w ryby."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-msgstr "Wędki potrzebne są do łowienia ryb. Produkowane przez rzemieślnika."
+"Fishing rods are needed by fishers, to catch fish. Produced by the "
+"toolsmith."
+msgstr "Wędki potrzebne są do łowienia ryb. Produkowane przez warsztat."
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr ""
-"Mąkę produkuje się w młynach z pszenicy i wykorzystuje w piekarni do "
-"produkcji smakowitego imperialnego chleba."
+msgstr "Mąkę produkuje się w młynach z pszenicy i wykorzystuje w piekarni do produkcji smakowitego imperialnego chleba."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
@@ -1523,9 +1447,7 @@ msgstr "Sadzi drzewa w okolicy."
 msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
-msgstr ""
-"Leśniczówka potrzebuje wolnej przestrzeni na obszarze pracy, na której można "
-"sadzić drzewa."
+msgstr "Leśniczówka potrzebuje wolnej przestrzeni na obszarze pracy, na której można sadzić drzewa."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1540,52 +1462,37 @@ msgid ""
 "Gold is the most valuable of all metals; armor and weapons are embellished "
 "with it. It is produced in the smelting works out of gold ore and processed "
 "in the armor smithy and the weapon smithy."
-msgstr ""
-"Złoto jest najcenniejszym z metali; dekoruje się nim zbroje i broń. "
-"Produkuje się je w hutach ze złotych samorodków i przetwarza w warsztatach "
-"płatnerskich i warsztatach zbrojmistrzy."
+msgstr "Złoto jest najcenniejszym z metali; dekoruje się nim zbroje i broń. Produkuje się je w hutach ze złotych samorodków i przetwarza w pracowniach płatnerza i zbrojmistrza."
 
 #: ../../tribes/empire/goldmine/conf:42
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr ""
-"Ruda złota wydobywana jest w kopalni złota. W hucie wytapia się z niej "
-"złoto, wykorzystywane jako cenny budulec i materiał do produkcji broni i "
-"zbroi."
+msgstr "Ruda złota wydobywana jest w kopalni złota. W hucie wytapia się z niej złoto, wykorzystywane jako cenny budulec i materiał do produkcji broni i zbroi."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
-"These grapes are the base for a tasty wine. They are harvested in a vineyard "
-"and processed in a winery."
-msgstr ""
-"Te winogrona to baza dla dobrego wina. Zbiera się je w plantacjach winorośli "
-"i przetwarza w winiarniach."
+"These grapes are the base for a tasty wine. They are harvested in a vineyard"
+" and processed in a winery."
+msgstr "Te winogrona to baza dla dobrego wina. Zbiera się je w plantacjach winorośli i przetwarza w winiarniach."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr ""
-"Młotek to jedno z kluczowych narzędzi. Potrzebują go geolodzy, "
-"budowniczowie, płatnerze i zbrojmistrzowie. Upewnij się, że zawsze masz choć "
-"kilka w zapasie! Produkowany jest przez warsztat."
+msgstr "Młotek to jedno z kluczowych narzędzi. Potrzebują go geolodzy, budowniczowie, płatnerze i zbrojmistrzowie. Upewnij się, że zawsze masz choć kilka w zapasie! Produkowany jest przez warsztat."
 
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
-msgstr ""
-"Miejsce zamieszkania twoich ludzi. Przechowuje również twoje towary i "
-"narzędzia."
+msgstr "Miejsce zamieszkania twoich ludzi. Przechowuje również twoje towary i narzędzia."
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
@@ -1595,38 +1502,26 @@ msgstr "Kwatera główna to twój najważniejszy budynek."
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
-"Choć statek ten utknął na mieliźnie, wciąż może służyć za schronienie dla "
-"twoich ludzi. Można w nim także przechowywać towary i narzędzia."
+msgstr "Choć statek ten utknął na mieliźnie, wciąż może służyć za schronienie dla twoich ludzi. Można w nim także przechowywać towary i narzędzia."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
-msgstr ""
-"Kwatera główna, nawet ulokowana we wraku statku, to twój najważniejszy "
-"budynek."
+msgstr "Kwatera główna, nawet ulokowana we wraku statku, to twój najważniejszy budynek."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
 "This is a strong lance with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
-"Mocna lanca ze stalowym czubkiem i niewielkim ostrzem. Produkuje się ją w "
-"pracowni zbrojmistrza i wykorzystuje w obozach treningowych - wraz z "
-"jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do "
-"poziomu 3."
+msgstr "Mocna lanca ze stalowym czubkiem i niewielkim ostrzem. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do poziomu 3."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
 "The helmet is the basic defense of a warrior. It is produced in an armor "
 "smithy. In combination with a wood lance, it is the equipment to fit out "
-"young soldiers. Helmets are also used in training camps – together with food "
-"– to train soldiers from health level 0 to level 1."
-msgstr ""
-"Hełm to podstawa obrony dla wojownika. Produkuje go warsztat płatnerza. Wraz "
-"z drewnianymi lancami stanowią one wyposażenie młodych żołnierzy. Hełmy "
-"wykorzystuje się także w obozach treningowych - wraz z jedzeniem - do "
-"podnoszenia liczby punktów zdrowia żołnierzy z poziomu 0 do poziomu 1."
+"young soldiers. Helmets are also used in training camps – together with food"
+" – to train soldiers from health level 0 to level 1."
+msgstr "Hełm to podstawa obrony dla wojownika. Produkuje go pracownia płatnerza. Wraz z drewnianymi lancami stanowią one wyposażenie młodych żołnierzy. Hełmy wykorzystuje się także w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 0 do poziomu 1."
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1644,9 +1539,7 @@ msgstr "Brak zwierzyny"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
-msgstr ""
-"Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć "
-"zwierzyny w swoim obszarze pracy."
+msgstr "Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć zwierzyny w swoim obszarze pracy."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1654,21 +1547,15 @@ msgstr "Poluje na zwierzęta dla pozyskania mięsa."
 
 #: ../../tribes/empire/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the working radius."
-msgstr ""
-"Kwatera myśliwego potrzebuje w swoim obszarze pracy zwierząt, na które można "
-"polować."
+msgstr "Kwatera myśliwego potrzebuje w swoim obszarze pracy zwierząt, na które można polować."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by hunters."
-msgstr ""
-"Ta dzida jest wystarczająco lekka, by można było nią rzucać, a jednocześnie "
-"wystarczająco ciężka, by jednym ciosem powalić każde zwierzę. Używają jej "
-"wyłącznie myśliwi."
+"This spear is light enough to be thrown, but heavy enough to kill any animal"
+" in one blow. It is only used by hunters."
+msgstr "Ta dzida jest wystarczająco lekka, by można było nią rzucać, a jednocześnie wystarczająco ciężka, by jednym ciosem powalić każde zwierzę. Używają jej wyłącznie myśliwi."
 
-#: ../../tribes/empire/inn/conf:26
-#: ../../tribes/empire/tavern/conf:29
+#: ../../tribes/empire/inn/conf:26 ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
 msgstr "przygotowywanie racji"
 
@@ -1684,46 +1571,33 @@ msgstr "Produkuje jedzenie dla górników."
 msgid ""
 "Weapons, armor and tools are made of iron. It is extracted from iron ore in "
 "the smelting works."
-msgstr ""
-"Broń, zbroje i narzędzia robi się z żelaza. Uzyskuje się je z rudy żelaza w "
-"hutach."
+msgstr "Broń, zbroje i narzędzia robi się z żelaza. Uzyskuje się je z rudy żelaza w hutach."
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
 "Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
 "is produced in iron mines."
-msgstr ""
-"Ruda żelaza musi być wytopiona w hucie celem pozyskania żelaza. Rudę żelaza "
-"wydobywa się w kopalniach żelaza."
+msgstr "Ruda żelaza musi być wytopiona w hucie celem pozyskania żelaza. Rudę żelaza wydobywa się w kopalniach żelaza."
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr ""
-"Jak można przyrządzać racje lub posiłki bez narzędzi kuchennych? Produkuje "
-"się je w warsztatach rzemieślniczych i wykorzystuje w tawernach i karczmach."
+msgstr "Jak można przyrządzać racje lub posiłki bez narzędzi kuchennych? Produkuje się je w warsztatach i wykorzystuje w tawernach i karczmach."
 
 #: ../../tribes/empire/lance/conf:1
 msgid ""
 "This lance has an iron spike. It is produced in a weapon smithy and used in "
-"a training camp – together with food – to train soldiers from attack level 0 "
-"to attack level 1."
-msgstr ""
-"Ta lanca ma żelazny kolec. Produkuje się ją w pracowni zbrojmistrza i "
-"wykorzystuje w obozach treningowych - wraz z jedzeniem - do podnoszenia "
-"umiejętności ataku żołnierzy z poziomu 0 do poziomu 1."
+"a training camp – together with food – to train soldiers from attack level 0"
+" to attack level 1."
+msgstr "Ta lanca ma żelazny kolec. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 0 do poziomu 1."
 
 #: ../../tribes/empire/log/conf:1
 msgid ""
-"Logs are an important building material for the Empire. The lumberjacks fell "
-"the trees; foresters care for the supply of trees. Logs are also used by the "
-"charcoal kiln, the toolsmithy and the sawmill."
-msgstr ""
-"Ścięte pnie drzew to ważny dla Imperium materiał budowlany. Drzewa ścinane "
-"są przez drwali; leśnicy dbają, by ich nie zabrakło. W tartakach wytwarza "
-"się z nich deski. Surowego drewna potrzebują również smolarnia i warsztat "
-"rzemieślnika."
+"Logs are an important building material for the Empire. The lumberjacks fell"
+" the trees; foresters care for the supply of trees. Logs are also used by "
+"the charcoal kiln, the toolsmithy and the sawmill."
+msgstr "Ścięte pnie drzew to ważny dla Imperium materiał budowlany. Drzewa ścinane są przez drwali; leśnicy dbają, by ich nie zabrakło. W tartakach wytwarza się z nich deski. Surowego drewna potrzebują również smolarnia i warsztat."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -1738,9 +1612,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his working radius. You should consider dismantling or destroying the "
 "building or building a forester’s house."
-msgstr ""
-"Drwal pracujący z tej chaty drwala nie może znaleźć drzew w swoim obszarze "
-"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew w swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1755,20 +1627,14 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as building material and gets chiselled into "
 "marble columns in the stonemason’s house."
-msgstr ""
-"Marmur to piękny kamień, który wycina się w górach lub produkuje w "
-"kamieniołomach. Marmur jest materiałem budowlanym, z którego formuje się "
-"marmurowe kolumny w pracowniach kamieniarza."
+msgstr "Marmur to piękny kamień, który wycina się w górach lub produkuje w kamieniołomach. Marmur jest materiałem budowlanym, z którego formuje się marmurowe kolumny w pracowniach kamieniarza."
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr ""
-"Marmurowe kolumny reprezentują wysoki poziom kultury w Imperium, więc "
-"wymagane są do budowy niemalże każdego większego budynku. Produkuje się je z "
-"marmuru w pracowniach kamieniarza."
+msgstr "Marmurowe kolumny reprezentują wysoki poziom kultury w Imperium, więc wymagane są do budowy niemalże każdego większego budynku. Produkuje się je z marmuru w pracowniach kamieniarza."
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
@@ -1783,39 +1649,29 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr ""
-"Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr "Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
 msgstr "Czerpie marmur i kamień ze skał na terenach górskich."
 
-#: ../../tribes/empire/master-miner/conf:1
-#: ../../tribes/empire/miner/conf:1
+#: ../../tribes/empire/master-miner/conf:1 ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Pracuje głęboko w kopalniach wydobywując węgiel, żelazo lub złoto."
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo lub złoto."
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
-msgstr ""
-"Posiłek z prawdziwego zdarzenia produkowany jest w karczmach z chleba i "
-"ryb/mięsa. Zaspokaja potrzeby górników w głębokich kopalniach."
+msgstr "Posiłek z prawdziwego zdarzenia produkowany jest w karczmach z chleba i ryb/mięsa. Zaspokaja potrzeby górników w głębokich kopalniach."
 
 #: ../../tribes/empire/meat/conf:1
 msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and is consumed at the training sites (arena, "
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare"
+" lunch for the miners and is consumed at the training sites (arena, "
 "colosseum, training camp). There are two sources of meat: pork from "
 "piggeries and the meat of wild game hunted by the hunters."
-msgstr ""
-"Mięso ma bardzo dużą wartość energetyczną. Wykorzystuje się je w karczmach i "
-"tawernach do przygotowywania przekąsek dla górników i jest spożywane w "
-"obiektach treningowych (arena, koloseum, obóz treningowy). Są dwa źródła "
-"mięsa: wieprzowina ze świniarni i mięso z dzikiej zwierzyny upolowanej przez "
-"myśliwych."
+msgstr "Mięso ma bardzo dużą wartość energetyczną. Wykorzystuje się je w karczmach i tawernach do przygotowywania przekąsek dla górników i jest spożywane w budynkach szkoleniowych (arena, koloseum, obóz szkoleniowy). Są dwa źródła mięsa: wieprzowina z chlewu i mięso z dzikiej zwierzyny upolowanej przez myśliwych."
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
@@ -1829,9 +1685,7 @@ msgstr "Miele pszenicę na mąkę."
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Główna żyła żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego "
-"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr "Główna żyła żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1841,9 +1695,7 @@ msgstr "Twoi żołnierze zajęli miejsce na twojej placówce."
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
-msgstr ""
-"Kilof używany jest przez kamieniarzy i przez górników. Produkowane je "
-"rzemieślnik."
+msgstr "Kilof używany jest przez kamieniarzy i przez górników. Produkuje je warsztat."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -1858,11 +1710,7 @@ msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
-"Zbroja płytowa to najmocniejszy typ zbroi na wyposażeniu żołnierzy Imperium. "
-"Wytwarza się ją w zakładach płatnerskich i wykorzystuje w obozach "
-"treningowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia "
-"żołnierzy z poziomu 3 do poziomu 4."
+msgstr "Zbroja płytowa to najmocniejszy typ zbroi na wyposażeniu żołnierzy Imperium. Wytwarza się ją w pracowniach płatnerza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 3 do poziomu 4."
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
@@ -1880,9 +1728,7 @@ msgstr "Brak skał"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
-msgstr ""
-"Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał w "
-"swoim obszarze pracy."
+msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał w swoim obszarze pracy."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1890,30 +1736,23 @@ msgstr "Pozyskuje marmur i kamień z głazów w okolicy."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
-"Kamieniołom potrzebuje głazów w obszarze pracy, z których będzie pozyskiwać "
-"kamień."
+msgstr "Kamieniołom potrzebuje głazów w obszarze pracy, z których będzie pozyskiwać kamień."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
-"A small bite to keep miners strong and working. Rations are also consumed by "
-"the scout on his scouting trips. They are produced in a tavern out of fish "
+"A small bite to keep miners strong and working. Rations are also consumed by"
+" the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
-msgstr ""
-"Mała przekąska, by górnicy mogli zachować pełnię sił i pracować dalej. Racje "
-"spożywane są także przez zwiadowców w trakcie prowadzenia misji. Produkuje "
-"się je w tawernach z ryb lub mięsa lub chleba."
+msgstr "Mała przekąska, by górnicy mogli zachować pełnię sił i pracować dalej. Racje spożywane są także przez zwiadowców w trakcie prowadzenia misji. Produkuje się je w tawernach z ryb lub mięsa lub chleba."
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr "Ta piła potrzebna jest traczom. Produkuje ją rzemieślnik."
+msgstr "Ta piła potrzebna jest traczom. Produkuje je warsztat."
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
-"Prowadzi zwiad jak Zbigniew Zwiadowca zwiedzający niezwiedzony teren w "
-"zwiadowczej manierze."
+msgstr "Prowadzi zwiad jak Zbigniew Zwiadowca zwiedzający niezwiedzony teren w zwiadowczej manierze."
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
@@ -1932,15 +1771,11 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
-"Nie ma miejsca dla niektórych z twoich początkowych budynków, więc nie "
-"zostały one zbudowane. Jesteś przez to poszkodowany; spróbuj zrestartować "
-"mapę z uczciwymi warunkami początkowymi."
+msgstr "Nie ma miejsca dla niektórych z twoich początkowych budynków, więc nie zostały one zbudowane. Jesteś przez to poszkodowany; spróbuj zrestartować mapę z uczciwymi warunkami początkowymi."
 
 #: ../../tribes/empire/scythe/conf:1
-msgid ""
-"The Scythe is the tool of the farmer. It is produced by the toolsmith."
-msgstr "Kosa jest narzędziem farmerów. Produkowana jest przez rzemieślnika."
+msgid "The Scythe is the tool of the farmer. It is produced by the toolsmith."
+msgstr "Kosa jest narzędziem rolników. Produkowana jest przez warsztat."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your sentry."
@@ -1970,9 +1805,7 @@ msgstr "budowa statku"
 msgid ""
 "The shovel is needed for the proper handling of plants. Therefore the "
 "forester and the vinefarmer use it. It is produced by the toolsmith."
-msgstr ""
-"Nie sposób dbać o rośliny bez dobrej łopaty. Stanowi ona niezbędne narzędzie "
-"leśnika i hodowcy winorośli. Produkuje je rzemieślnik."
+msgstr "Nie sposób dbać o rośliny bez dobrej łopaty. Stanowi ona niezbędne narzędzie leśnika i hodowcy winorośli. Produkuje je warsztat."
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
@@ -1998,9 +1831,7 @@ msgstr "Broń i podbijaj!"
 msgid ""
 "Stones are a basic building material of the Empire. They are produced in "
 "quarries and marble mines."
-msgstr ""
-"Kamienie są podstawowym materiałem budowlanym w Imperium. Produkuje się je w "
-"kamieniołomach i kopalniach marmuru."
+msgstr "Kamienie są podstawowym materiałem budowlanym w Imperium. Produkuje się je w kamieniołomach i kopalniach marmuru."
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
@@ -2136,11 +1967,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "warriors. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
-"To najlepsza i najostrzejsza broń stworzona przez zbrojmistrzów Imperium dla "
-"jego wojowników. Wykorzystuje się ją w obozach treningowych - wraz z "
-"jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 3 do "
-"poziomu 4."
+msgstr "To najlepsza i najostrzejsza broń stworzona przez zbrojmistrzów Imperium dla jego wojowników. Wykorzystuje się ją w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 3 do poziomu 4."
 
 #: ../../tribes/empire/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
@@ -2151,9 +1978,7 @@ msgid ""
 "Water is the essence of life! It is used in the bakery and the brewery. The "
 "donkey farm, the sheep farm and the piggery also need to be supplied with "
 "water."
-msgstr ""
-"Woda to esencja życia! Wykorzystują ją piekarnie i browary. Także ośla "
-"farma, owczarnia i świniarnia muszą być zaopatrywane w wodę."
+msgstr "Woda to esencja życia! Wykorzystują ją piekarnie i browary. Także ośla farma, owczarnia i chlew muszą być zaopatrywane w wodę."
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -2198,9 +2023,7 @@ msgstr "Brak wody"
 #: ../../tribes/empire/well/conf:32
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
-msgstr ""
-"Tragarz pracujący przy tej studni nie może znaleźć wody w swoim obszarze "
-"pracy."
+msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swoim obszarze pracy."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -2211,36 +2034,26 @@ msgid ""
 "Wheat is essential for surviving. It is produced by farms and used by mills "
 "and breweries. Donkey farms, sheep farms and piggeries also need to be "
 "supplied with wheat."
-msgstr ""
-"Pszenica to podstawa przetrwania. Produkuje się ją w farmach i przetwarza w "
-"młynach i browarach. Także ośle farmy, owczarnie i świniarnie muszą być "
-"zaopatrywane w pszenicę."
+msgstr "Pszenica to podstawa przetrwania. Produkuje się ją w farmach i przetwarza w młynach i browarach. Także ośle farmy, owczarnie i chlewy muszą być zaopatrywane w pszenicę."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
-"This tasty wine is drunk by the miners working the marble and gold mines. It "
-"is produced in a winery."
-msgstr ""
-"To smakowite wino spożywane jest w kopalniach złota i marmuru. Produkuje się "
-"je w winiarniach."
+"This tasty wine is drunk by the miners working the marble and gold mines. It"
+" is produced in a winery."
+msgstr "To smakowite wino spożywane jest w kopalniach złota i marmuru. Produkuje się je w winiarniach."
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""
 "Wood is a basic building material of the Empire. It is also used by the "
 "weapon smithy."
-msgstr ""
-"Drewno to podstawowy materiał budowlany Imperium. Potrzebne jest także w "
-"pracowni zbrojmistrza."
+msgstr "Drewno to podstawowy materiał budowlany Imperium. Potrzebne jest także w pracowni zbrojmistrza."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This wooden lance is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
-"Ta drewniana lanca jest podstawową bronią w systemie wojskowym Imperium. "
-"Produkuje się ją w pracowni zbrojmistrza. Wraz z hełmem stanowi wyposażenie "
-"każdego młodego żołnierza."
+msgstr "Ta drewniana lanca jest podstawową bronią w systemie wojskowym Imperium. Produkuje się ją w pracowni zbrojmistrza. Wraz z hełmem stanowi wyposażenie każdego młodego żołnierza."
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."

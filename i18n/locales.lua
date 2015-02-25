@@ -170,6 +170,12 @@ return {
 		font = "hebrew"
 	},
 
+	hi = {
+		name = "हिन्दी",
+		sort_name = "Hindi",
+		font = "devanagari"
+	},
+
 	hr = {
 		native_name = "Hrvatski",
 		localized_name = _"Croatian",
