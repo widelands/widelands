@@ -525,7 +525,7 @@ void MapObject::Loader::load(FileRead & fr)
 			throw wexception("%u: %s", serial, e.what());
 		}
 	//TODO(DaAlx1): Here we should load the bool m_reserved_by-worker now
-	//get_object()->m_reserved_by_worker = fr.unsigned_8();
+	get_object()->m_reserved_by_worker = fr.unsigned_8();
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
