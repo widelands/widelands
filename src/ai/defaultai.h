@@ -80,6 +80,11 @@ struct DefaultAI : ComputerPlayer {
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
+	enum class ScheduleTasks : uint8_t {kBFCheck, kRoadCheck, kUnbuildableFCheck, kConsiderAttack,
+		 kCheckEconomies, kProductionsitesStats, kConstructBuilding,  kCheckProductionsites,
+		  kCheckShips, KMarineDecisions, kCheckMines, kWareReview, kprintStats, kIdle,
+		  kCheckMilitarysites, kCheckTrainingsites };
+	
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -135,6 +140,11 @@ private:
 	                          bool* output_is_needed,
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
+	                          
+	void scheduler_review(int32_t *next_check_due_,
+	int32_t *oldestTaskTime,
+	ScheduleTasks *DueTask,
+	ScheduleTasks thisTask);                          
 
 	bool construct_building(int32_t);
 
@@ -165,9 +175,9 @@ private:
 	bool check_trainingsites(int32_t);
 	bool check_mines_(int32_t);
 	bool check_militarysites(int32_t);
-	bool marine_main_decisions(uint32_t);
-	bool check_ships(uint32_t);
-	void print_stats();
+	bool marine_main_decisions(int32_t);
+	bool check_ships(int32_t);
+	void print_stats(int32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
@@ -213,8 +223,10 @@ private:
 	// Variables of default AI
 	uint8_t type_;
 
-	bool m_buildable_changed;
-	bool m_mineable_changed;
+	//bool m_buildable_changed; NOCOM
+	//bool m_mineable_changed;
+
+	uint32_t schedStat[20]={0}; //NOCOM
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
@@ -243,6 +255,7 @@ private:
 
 	std::vector<WareObserver> wares;
 
+	int32_t next_ai_think_;
 	int32_t next_road_due_;
 	int32_t next_stats_update_due_;
 	int32_t next_construction_due_;
@@ -250,11 +263,13 @@ private:
 	int32_t next_productionsite_check_due_;
 	int32_t next_mine_check_due_;
 	int32_t next_militarysite_check_due_;
-	uint32_t next_ship_check_due;
-	uint32_t next_marine_decisions_due;
+	int32_t next_ship_check_due_;
+	int32_t next_economies_check_due_;
+	int32_t next_marine_decisions_due;
 	int32_t next_attack_consideration_due_;
 	int32_t next_trainingsites_check_due_;
 	int32_t next_bf_check_due_;
+	int32_t next_uf_check_due_;
 	int32_t next_wares_review_due_;
 	int32_t next_statistics_report_;
 	int32_t inhibit_road_building_;
