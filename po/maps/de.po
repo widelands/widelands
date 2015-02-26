@@ -3,6 +3,7 @@
 # 
 # Translators:
 # wl-zocker, 2014
+# millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
 # Venatrix, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-19 20:42+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-24 14:41+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +125,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihre Seele."
+msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihrer Seele."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -184,7 +185,7 @@ msgstr "Kriegsführung"
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr "In diesem Einführungsspiel werden dir die Geheimnisse der Kriegsführung erklärt: Wie Soldaten erschaffen, trainiert und in den Kampf geführt werden."
+msgstr "In diesem Einführungsspiel werden dir die Geheimnisse der Kriegsführung erklärt: Wie Soldaten rekrutiert, ausgebildet und in den Kampf geführt werden."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
@@ -225,7 +226,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "Das Leben in der Schönheit dieser zerklüfteten Landschaft ergreift schnell ein jedes Siedler-Herz. Doch die Wege, die durch diese weiten Gebiete führen sind lang und gewunden. Sich in diesen Ländern der alten Stämme nicht zu verirren wird somit umso schwieriger."
+msgstr "Das Leben in der Schönheit dieser zerklüfteten Landschaft ergreift schnell ein jedes Siedler-Herz. Doch die Wege, die durch diese weiten Gebiete führen, sind lang und gewunden. Sich in diesen Ländern der alten Stämme nicht zu verirren wird somit umso schwieriger."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -311,7 +312,7 @@ msgid ""
 "Coal is hard to find – learn to make it efficiently. Starting positions are "
 "similar, so the map should be fair. There is plenty of gold near the "
 "starting point – Do you see it?"
-msgstr "Kohle ist schwer zu finden – lerne, sie effizient zu nutzen. Die Startpunkte sind identisch, die Karte sollte daher fair sein. Es gibt jede Menge Gold in der Nähe der Startpunkte – Siehst du es?"
+msgstr "Kohle ist schwer zu finden – lerne, sie effizient zu nutzen. Die Startpunkte sind identisch, die Karte sollte daher ausgeglichen sein. Es gibt jede Menge Gold in der Nähe der Startpunkte – siehst du es?"
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
@@ -328,7 +329,7 @@ msgstr "Finnische Seen"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an dir, deinen Weg hindurch zu finden ..."
+msgstr "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an dir, deinen Weg hindurch zu finden …"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -350,7 +351,7 @@ msgstr "Vier Burgen"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
-msgstr "Gut geschützt in ihren mächtigen Festungen, vollenden vier machthungrige Kriegshäuptlinge ihren Plan, um diese Länder endlich unter ihre Herrschaft zu bringen."
+msgstr "Gut geschützt in ihren mächtigen Festungen, vollenden vier machthungrige Kriegsherren ihren Plan, um diese Länder endlich unter ihre Herrschaft zu bringen."
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
@@ -382,7 +383,7 @@ msgstr "Goldene Halbinsel"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr "Zwei Reiche liefern sich ein Wettrennen um die Schätze einer legendären Halbinsel ..."
+msgstr "Zwei Reiche liefern sich ein Wettrennen um die Schätze einer legendären Halbinsel …"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
@@ -395,7 +396,7 @@ msgstr "Nach dem Herbst kam der Winter. Manche Dinge sind gefroren, doch nicht d
 #: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
 #: fire.wmf/elemental:12
 msgid "Start positions are clockwise"
-msgstr "Hinweis: Die Startpositionen sind im Uhrzeigersinn verteilt"
+msgstr "Die Startpositionen sind im Uhrzeigersinn verteilt"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -439,7 +440,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores..."
-msgstr "Dieser See, in den Tiefen der ältesten Wälder, war lange Zeit für seine Schönheit und den idyllischen Frieden bekannt. Doch nun wurde seine Heiligkeit gestört, da zwei feindliche Stämme an seinen Ufern angekommen sind ..."
+msgstr "Dieser See, in den Tiefen der ältesten Wälder, war lange Zeit für seine Schönheit und den idyllischen Frieden bekannt. Doch nun wurde seine Heiligkeit gestört, da zwei feindliche Stämme an seinen Ufern angekommen sind …"
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
@@ -467,7 +468,7 @@ msgstr "Langer, langer Weg"
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
 "long, long way to conquer all the islands. Good luck!"
-msgstr "\"Wo's das? Tausend Meilen von hier.\" [Porgy and Bess] Du hast einen sehr, sehr langen Weg vor dir, um all diese Inseln zu erobern. Viel Glück!"
+msgstr "„Wo´s das? Tausend Meilen von hier.“ [Porgy and Bess] Du hast einen sehr, sehr langen Weg vor dir, um all diese Inseln zu erobern. Viel Glück!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -479,7 +480,7 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "Ein besonderer Wettkampf in der atlantischen Kultur ist das sogenannte \"Insel-Springen\". Dabei versuchen zwei oder mehr Gruppen die zentrale Insel so schnell wie möglich zu erreichen, um als erstes eine Burg auf der Spitze des zentralen Berges zu errichten."
+msgstr "Ein besonderer Wettkampf in der atlantischen Kultur ist das sogenannte „Insel-Springen“. Dabei versuchen zwei oder mehr Gruppen die zentrale Insel so schnell wie möglich zu erreichen, um als erstes eine Burg auf der Spitze des zentralen Berges zu errichten."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
@@ -490,7 +491,7 @@ msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Deine gut funktionierenden Schmuggelrouten sind plötzlich gestört: Zwei weitere Stämme sind aufgetaucht und Rivalitäten tauchen auf: Welches Team wird zuerst eine bestimmte Anzahl an Waren schmuggeln können?"
+msgstr "Deine gut funktionierenden Schmuggelrouten sind plötzlich gestört: Zwei weitere Stämme sind aufgetaucht und machen dir die Macht streitig: Welches Team wird zuerst eine bestimmte Anzahl an Waren schmuggeln können?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -601,7 +602,7 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile "
 "tribes."
-msgstr "Man sagt, dass die undurchdringlichen Ländereien im hohen Norden selbst die mutigsten Siedler und die Tapfersten der tapferen Soldaten abgeschreckt haben. Riesige, uralte Wälder, voller Großwild und Raubtieren, unterbrochen nur von Feuchtgebieten und Hügeln, blieben geheimnisumwittert. Die wenigen, die es geschafft haben, zurückzukehren, berichten von gewaltigen Bauten, reich verziert mit Ornamenten und Gold aus den majestätischen Gebirgszügen in der Wildnis. Dutzende Jahre später zeugen nur noch einige moosüberwucherte Ruinen von den guten alten Zeiten. Ihre Gestalt deutet die Kunstfertigkeiten ihrer Erbauer nur an. Niemand weiß, warum sie verschwunden sind. Die Leute erzählen, dass Wagemutigen auf dem Weg zu Reichtum nun nichts mehr im Wege steht. Aber viele werden von Wölfen zerrissen werden oder in den Sümpfen versinken... umzingelt von feindlichen Stämmen."
+msgstr "Man sagt, dass die undurchdringlichen Ländereien im hohen Norden selbst die mutigsten Siedler und die Tapfersten der tapferen Soldaten abgeschreckt haben. Riesige, uralte Wälder, voller Großwild und Raubtieren, unterbrochen nur von Feuchtgebieten und Hügeln, blieben geheimnisumwittert. Die wenigen, die es geschafft haben, zurückzukehren, berichten von gewaltigen Bauten, reich verziert mit Ornamenten und Gold aus den majestätischen Gebirgszügen in der Wildnis. Dutzende Jahre später zeugen nur noch einige moosüberwucherte Ruinen von den guten alten Zeiten. Ihre Gestalt deutet die Kunstfertigkeiten ihrer Erbauer nur an. Niemand weiß, warum sie verschwunden sind. Die Leute erzählen, dass Wagemutigen auf dem Weg zu Reichtum nun nichts mehr im Wege steht. Aber viele werden von Wölfen zerrissen werden oder in den Sümpfen versinken … umzingelt von feindlichen Stämmen."
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
