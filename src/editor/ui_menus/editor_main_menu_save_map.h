@@ -22,8 +22,9 @@
 
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/window.h"
 
 struct EditorInteractive;
@@ -40,11 +41,26 @@ struct MainMenuSaveMap : public UI::Window {
 	MainMenuSaveMap(EditorInteractive &);
 
 private:
+	struct SaveMapData {
+		std::string filename;
+		std::string mapname;
+		std::string localized_name;
+		std::string description;
+		std::string authors;
+		uint32_t width = 0;
+		uint32_t height = 0;
+		uint32_t nrplayers = 0;
+		bool isdir = false;
+	};
+
+	bool compare_filenames(uint32_t, uint32_t);
+	bool compare_mapnames(uint32_t, uint32_t);
+
 	EditorInteractive & eia();
-	void clicked_ok            ();
+	void clicked_ok();
 	void clicked_make_directory();
-	void        clicked_item(uint32_t);
-	void double_clicked_item(uint32_t);
+	void clicked_item();
+	void double_clicked_item();
 	void edit_box_changed();
 
 	void fill_list();
@@ -75,18 +91,18 @@ private:
 	UI::MultilineTextarea descr_;
 
 	UI::Box list_box_;
-	UI::Listselect<const char*>* list_;
 
 	UI::Textarea editbox_label_;
 	UI::EditBox* editbox_;
 
+	UI::Table<uintptr_t const>    m_table;
 
 	UI::Button * m_ok_btn;
 
 	std::string   m_basedir;
 	std::string   m_curdir;
-	std::string   m_parentdir;
-	FilenameSet m_mapfiles;
+
+	std::vector<SaveMapData> m_maps_data;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H

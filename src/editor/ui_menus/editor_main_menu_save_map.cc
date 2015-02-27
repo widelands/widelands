@@ -46,21 +46,24 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
+
 inline EditorInteractive & MainMenuSaveMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 400, _("Save Map")),
+	: UI::Window(&parent, "save_map_menu",
+					 0, 0, parent.get_inner_w() - 80, parent.get_inner_h() - 80,
+					 _("Save Map")),
 
 	  // Values for alignment and size
 	  padding_(5),
 	  butw_(get_inner_w() / 4 - 1.5 * padding_),
 	  buth_(20),
-	  details_box_x_(get_inner_w() / 2 + padding_),
+	  details_box_x_(get_inner_w() * 2 / 3),
 	  details_box_y_(2 * padding_),
-	  details_box_w_(get_inner_w() / 2 - 2 * padding_),
+	  details_box_w_(get_inner_w() - details_box_x_ - 2 * padding_),
 	  details_box_h_(get_inner_h() - 2 * details_box_y_ - 2 * buth_ - 4 * padding_),
 	  details_label_w_(details_box_w_ / 2 - padding_),
 
@@ -68,7 +71,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			 details_box_w_, details_box_h_, padding_ / 2),
 
 	  name_box_(&details_box_, 0, 0, UI::Box::Horizontal,
-			 details_box_w_, 2 * buth_ + padding_, padding_ / 2),
+			 details_box_w_, 3 * buth_ + padding_, padding_ / 2),
 	  name_label_(&details_box_, 0, 0, details_label_w_, buth_, _("Name:")),
 	  name_(&name_box_, 0, 0, details_box_w_ - padding_, 2 * buth_, "---"),
 
@@ -93,12 +96,35 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	  descr_(&descr_box_, padding_, 0, details_box_w_ + padding_, 5 * buth_, "---"),
 
 	  list_box_(this, padding_, details_box_y_, UI::Box::Vertical,
-			 details_box_w_, details_box_h_, padding_ / 2),
+			 details_box_x_ - padding_, details_box_h_, padding_ / 2),
 
 	  editbox_label_(this, padding_, details_box_y_ + details_box_h_ + 3 * padding_,
-						  details_box_w_, buth_, _("Filename:"), UI::Align::Align_Right)
+						  details_box_w_, buth_, _("Filename:"), UI::Align::Align_Right),
+
+	  m_table(&list_box_, 0, 0, details_box_x_ - padding_, details_box_h_)
 {
-	list_ = new UI::Listselect<const char*>(&list_box_, 0, 0, details_box_w_, details_box_h_);
+
+	m_table.add_column(m_table.get_w() / 2,
+							 _("Filename"),
+							 _("The filename that the map was saved under."),
+								 UI::Align_Left);
+	m_table.add_column(m_table.get_w() / 2,
+							 _("Map Name"),
+							 _("The map’s name."),
+								 UI::Align_Left);
+
+	m_table.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
+	m_table.double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
+	m_table.set_column_compare
+		(0,
+		 boost::bind(&MainMenuSaveMap::compare_filenames, this, _1, _2));
+	m_table.set_column_compare
+		(1,
+		 boost::bind(&MainMenuSaveMap::compare_mapnames, this, _1, _2));
+	m_table.set_sort_column(0);
+
+	m_table.focus();
+
 	editbox_ = new UI::EditBox(this, details_box_x_, details_box_y_ + details_box_h_ + 3 * padding_,
 										details_box_w_, buth_,
 										g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
@@ -136,21 +162,15 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 							  details_box_h_ - descr_label_.get_h() - descr_label_.get_y());
 	descr_.set_size(descr_box_.get_inner_w() - 3 * padding_, descr_box_.get_inner_h());
 
-
-
-	list_box_.add(list_, UI::Box::AlignLeft);
-	list_box_.set_size(details_box_w_, get_h() - list_box_.get_y());
-
-	list_->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
-	list_->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
-	list_->focus();
+	list_box_.add(&m_table, UI::Box::AlignLeft);
+	list_box_.set_size(details_box_x_ - padding_, get_h() - list_box_.get_y());
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
-		 details_box_x_, get_inner_h() - padding_ - buth_,
+		 get_inner_w() * 3 / 4 + padding_, get_inner_h() - padding_ - buth_,
 		 butw_, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
@@ -158,7 +178,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 get_inner_w() - butw_- padding_, get_inner_h() - padding_ - buth_,
+		 get_inner_w() * 1 / 2 + padding_, get_inner_h() - padding_ - buth_,
 		 butw_, buth_,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
@@ -172,7 +192,6 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
-
 
 	m_basedir = "maps";
 	m_curdir  = "maps";
@@ -191,8 +210,9 @@ void MainMenuSaveMap::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = editbox_->text();
 
-	if (filename == "") //  Maybe a directory is selected.
-		filename = list_->get_selected();
+	if (filename == "") { //  Maybe a directory is selected.
+		filename = m_maps_data[m_table.get_selected()].filename;
+	}
 
 	if
 		(g_fs->is_directory(filename.c_str())
@@ -200,8 +220,8 @@ void MainMenuSaveMap::clicked_ok() {
 		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
 		m_curdir = g_fs->canonicalize_name(filename);
-		list_->clear();
-		m_mapfiles.clear();
+		m_table.clear();
+		m_maps_data.clear();
 		fill_list();
 	} else { //  Ok, save this map
 		Widelands::Map & map = eia().egbase().map();
@@ -223,6 +243,7 @@ void MainMenuSaveMap::clicked_ok() {
  * Called, when the make directory button was clicked.
  */
 void MainMenuSaveMap::clicked_make_directory() {
+	// NOCOM make this much bigger
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run()) {
 		g_fs->ensure_directory_exists(m_basedir);
@@ -231,8 +252,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		fullname            += "/";
 		fullname            += md.get_dirname();
 		g_fs->make_directory(fullname);
-		list_->clear();
-		m_mapfiles.clear();
+		m_table.clear();
 		fill_list();
 	}
 }
@@ -240,45 +260,46 @@ void MainMenuSaveMap::clicked_make_directory() {
 /**
  * called when an item was selected
  */
-void MainMenuSaveMap::clicked_item(uint32_t) {
-	const char * const name = list_->get_selected();
+void MainMenuSaveMap::clicked_item() {
+	const SaveMapData& mapdata = m_maps_data[m_table.get_selected()];
+	const std::string& filename = m_maps_data[m_table.get_selected()].filename;
 
-	if (Widelands::WidelandsMapLoader::is_widelands_map(name)) {
+	if (Widelands::WidelandsMapLoader::is_widelands_map(filename)) {
 		Widelands::Map map;
 		{
 			std::unique_ptr<Widelands::MapLoader> const ml
-				(map.get_correct_loader(name));
+				(map.get_correct_loader(filename));
 			ml->preload_map(true); // This has worked before, no problem
 		}
 
-		editbox_->set_text(FileSystem::fs_filename(name));
+		editbox_->set_text(FileSystem::fs_filename(filename.c_str()));
 
 		{
 			i18n::Textdomain td("maps");
-			const std::string& localized_name = _(map.get_name());
-			if (localized_name == map.get_name()) {
-				name_.set_text(map.get_name());
+			const std::string& localized_name = _(mapdata.mapname);
+			if (localized_name == mapdata.mapname) {
+				name_.set_text(mapdata.mapname);
 			} else {
-				name_.set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
+				name_.set_text((boost::format("%s (%s)") % mapdata.mapname % localized_name).str());
 			}
 		}
-		name_.set_tooltip(map.get_name());
-		author_.set_text(map.get_author());
-		descr_.set_text(map.get_description());
+		name_.set_tooltip(mapdata.mapname);
+		author_.set_text(mapdata.authors);
+		descr_.set_text(mapdata.description);
 
-		nrplayers_.set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
+		nrplayers_.set_text(std::to_string(mapdata.nrplayers));
 
 		size_.set_text((boost::format(_("%1$ix%2$i"))
-							 % map.get_width() % map.get_height()).str());
+							 % mapdata.width % mapdata.height).str());
 	} else {
-		name_.set_text(FileSystem::fs_filename(name));
+		name_.set_text(FileSystem::fs_filename(filename.c_str()));
 		name_.set_tooltip("");
 		author_.set_text("");
 		nrplayers_.set_text("");
 		size_.set_text("");
-		if (g_fs->is_directory(name)) {
+		if (g_fs->is_directory(filename)) {
 			name_.set_tooltip((boost::format(_("Directory: %s"))
-									 % FileSystem::fs_filename(name)).str());
+									 % FileSystem::fs_filename(filename.c_str())).str());
 			descr_.set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
 			const std::string not_map_string = _("Not a map file");
@@ -293,82 +314,125 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 /**
  * An Item has been doubleclicked
  */
-void MainMenuSaveMap::double_clicked_item(uint32_t) {
-	const char * const name = list_->get_selected();
+void MainMenuSaveMap::double_clicked_item() {
+	const std::string& filename = m_maps_data[m_table.get_selected()].filename;
 
-	if (g_fs->is_directory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
-		m_curdir = name;
-		list_->clear();
-		m_mapfiles.clear();
+	if (g_fs->is_directory(filename) && !Widelands::WidelandsMapLoader::is_widelands_map(filename)) {
+		m_curdir = filename;
+		m_table.clear();
+		m_maps_data.clear();
 		fill_list();
 	} else
 		clicked_ok();
 }
 
+
+bool MainMenuSaveMap::compare_filenames(uint32_t rowa, uint32_t rowb)
+{ // NOCOM fixme
+	const SaveMapData & r1 = m_maps_data[m_table[rowa]];
+	const SaveMapData & r2 = m_maps_data[m_table[rowb]];
+
+	if (r1.isdir && !r2.isdir) {
+		return true;
+	}
+	return r1.filename < r2.filename;
+}
+
+bool MainMenuSaveMap::compare_mapnames(uint32_t rowa, uint32_t rowb)
+{ // NOCOM fixme
+	const SaveMapData & r1 = m_maps_data[m_table[rowa]];
+	const SaveMapData & r2 = m_maps_data[m_table[rowb]];
+
+	if (r1.isdir && !r2.isdir) {
+		return true;
+	}
+	return r1.mapname < r2.mapname;
+}
+
+
 /**
  * fill the file list
  */
 void MainMenuSaveMap::fill_list() {
-	// Fill it with all files we find.
-	m_mapfiles = g_fs->list_directory(m_curdir);
+
+	//  Fill it with all files we find in all directories.
+	FilenameSet files = g_fs->list_directory(m_curdir);
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
+		SaveMapData mapdata;
 #ifndef _WIN32
-		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
+		mapdata.filename = m_curdir.substr(0, m_curdir.rfind('/'));
 #else
-		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
+		mapdata.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-
-		list_->add
-				/** TRANSLATORS: Parent directory */
-				((boost::format("\\<%s\\>") % _("parent")).str(),
-				 m_parentdir.c_str(),
-				 g_gr->images().get("pics/ls_dir.png"));
+		mapdata.isdir = true;
+		m_maps_data.push_back(mapdata);
+		UI::Table<uintptr_t const>::EntryRecord& te = m_table.add(m_maps_data.size() - 1);
+		/** TRANSLATORS: Parent directory */
+		te.set_picture(0, g_gr->images().get("pics/ls_dir.png"), (boost::format("\\<%s\\>") % _("parent")).str());
+		te.set_string(1, "");
 	}
 
-	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		const char * const name = pname->c_str();
-		if
-			(strcmp(FileSystem::fs_filename(name), ".")    &&
-			 strcmp(FileSystem::fs_filename(name), "..")   &&
-			 g_fs->is_directory(name)                       &&
-			 !Widelands::WidelandsMapLoader::is_widelands_map(name))
+	//Add subdirectories to the list (except for uncompressed maps)
+	for (const std::string& mapfilename : files) {
+		char const * const name = mapfilename.c_str();
+		if (!strcmp(FileSystem::fs_filename(name), "."))
+			continue;
+		// Upsy, appeared again. ignore
+		if (!strcmp(FileSystem::fs_filename(name), ".."))
+			continue;
+		if (!g_fs->is_directory(name))
+			continue;
+		if (Widelands::WidelandsMapLoader::is_widelands_map(name))
+			continue;
 
-		list_->add
-			(FileSystem::fs_filename(name),
-			 name,
-			 g_gr->images().get("pics/ls_dir.png"));
+		SaveMapData mapdata;
+		mapdata.filename = name;
+		mapdata.isdir = true;
+
+		m_maps_data.push_back(mapdata);
+		UI::Table<uintptr_t const>::EntryRecord& te = m_table.add(m_maps_data.size() - 1);
+		te.set_picture(0, g_gr->images().get("pics/ls_dir.png"), FileSystem::fs_filename(name));
+		te.set_string(1, "");
 	}
+
 
 	Widelands::Map map;
 
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		char const * const name = pname->c_str();
+	for (const std::string& pname : files) {
+		char const * const name = pname.c_str();
 
 		// we do not list S2 files since we only write wmf
-		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
+		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(pname));
+
 		if (upcast(Widelands::WidelandsMapLoader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
-				list_->add
-					((boost::format("%s (%s)") % FileSystem::fs_filename(name) % map.get_name()).str(),
-					 name,
-					 g_gr->images().get("pics/ls_wlmap.png"));
+				SaveMapData mapdata;
+				mapdata.filename    = pname;
+				mapdata.mapname     = map.get_name();
+				mapdata.authors     = map.get_author();
+				mapdata.description = map.get_description();
+				mapdata.nrplayers   = map.get_nrplayers();
+				mapdata.width       = map.get_width();
+				mapdata.height      = map.get_height();
+				mapdata.isdir       = false;
+
+				// Finally write the entry to the list
+				m_maps_data.push_back(mapdata);
+				UI::Table<uintptr_t const>::EntryRecord& te = m_table.add(m_maps_data.size() - 1);
+				te.set_picture(0, g_gr->images().get("pics/ls_wlmap.png"), FileSystem::fs_filename(name));
+				te.set_string(1, mapdata.mapname);
+
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
-	if (list_->size())
-		list_->select(0);
+	m_table.sort();
+
+	if (m_table.size()) {
+		m_table.select(0);
+	}
 }
 
 /**

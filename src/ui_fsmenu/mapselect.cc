@@ -395,8 +395,6 @@ void FullscreenMenuMapSelect::fill_table()
 		//  Fill it with all files we find in all directories.
 		FilenameSet files = g_fs->list_directory(m_curdir);
 
-		int32_t ndirs = 0;
-
 		//If we are not at the top of the map directory hierarchy (we're not talking
 		//about the absolute filesystem top!) we manually add ".."
 		if (m_curdir != m_basedir) {
@@ -416,8 +414,6 @@ void FullscreenMenuMapSelect::fill_table()
 				(col_name,  g_gr->images().get("pics/ls_dir.png"),
 				mapdata.localized_name);
 			te.set_string(col_size, "");
-
-			++ndirs;
 		}
 
 		//Add subdirectories to the list (except for uncompressed maps)
@@ -448,8 +444,6 @@ void FullscreenMenuMapSelect::fill_table()
 			te.set_string(col_players, "");
 			te.set_picture(col_name, g_gr->images().get("pics/ls_dir.png"), mapdata.localized_name);
 			te.set_string(col_size, "");
-
-			++ndirs;
 		}
 
 		//Add map files(compressed maps) and directories(uncompressed)
