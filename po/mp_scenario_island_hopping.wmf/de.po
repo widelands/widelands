@@ -1,23 +1,22 @@
-# German translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-# Mirian Margiani <mirian.margiani@gmail.com>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Mirian Margiani <mirian.margiani@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-11-03 20:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-22 21:57+0000\n"
+"Last-Translator: Venatrix\n"
+"Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -31,65 +30,75 @@ msgstr "10 Minuten"
 msgid "15 minutes"
 msgstr "15 Minuten"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:99
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:99
 msgid "Game Status"
 msgstr "Spielstatus"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:117
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:117
 msgid "%s Log"
 msgid_plural "%s Logs"
 msgstr[0] "%s Stamm"
 msgstr[1] "%s Stämme"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:119
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:119
 msgid "%s Plank"
 msgid_plural "%s Planks"
 msgstr[0] "%s Brett"
 msgstr[1] "%s Bretter"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:121
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:121
 msgid "%s Stone"
 msgid_plural "%s Stones"
 msgstr[0] "%s Stein"
 msgstr[1] "%s Steine"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:123
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:123
 msgid "%s Spidercloth"
 msgid_plural "%s Spidercloths"
 msgstr[0] "%s Spinnenstoff"
 msgstr[1] "%s Spinnenstoffe"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:125
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:125
 msgid "%s Corn"
 msgid_plural "%s Corn"
 msgstr[0] "%s Mais"
 msgstr[1] "%s Mais"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:127
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:127
 msgid "%s Coal"
 msgid_plural "%s Coal"
 msgstr[0] "%s Kohle"
 msgstr[1] "%s Kohle"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:129
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:129
 msgid "%s Iron Ore"
 msgid_plural "%s Iron Ore"
 msgstr[0] "%s Eisenerz"
 msgstr[1] "%s Eisenerz"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:131
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:131
 msgid "%s Gold Ore"
 msgid_plural "%s Gold Ore"
 msgstr[0] "%s Golderz"
 msgstr[1] "%s Golderz"
 
-#: TRANSLATORS: number + resource name, e.g. '1 stone'
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:134
+#: TRANSLATORS number + resource name, e.g. '1 stone' ../../maps/MP
+#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:134
 msgid "%1$i %2$s"
 msgstr "%1$i %2$s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:245
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+#: ../../maps/MP Scenarios/Island
+#: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
+#: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Regeln"
 
@@ -100,38 +109,25 @@ msgstr "Willkommen zum Insel-Springen"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
 "Island Hopping is a traditional tournament in Atlantean culture. The rules "
-"of the game are simple: you start with a headquarters on an island. When you "
-"finish a castle at the end of the first island, you are granted a second "
+"of the game are simple: you start with a headquarters on an island. When you"
+" finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr ""
-"Inselspringen ist ein traditioneller Wettbewerb in der atlantischen Kultur. "
-"Die Regeln sind einfach: Du startest mit einem Hauptquartier auf einer "
-"Insel. Wenn du eine Burg im Zielgebiet der ersten Insel fertigstellst, "
-"bekommst du ein Hauptquartier auf der zweiten Insel, dass alle Waren "
-"enthält, die du auf der ersten Insel gesammelt hast."
+msgstr "Inselspringen ist ein traditioneller Wettbewerb in der atlantischen Kultur. Die Regeln sind einfach: Du startest mit einem Hauptquartier auf einer Insel. Wenn du eine Burg im Zielgebiet der ersten Insel fertigstellst, bekommst du ein Hauptquartier auf der zweiten Insel, dass alle Waren enthält, die du auf der ersten Insel gesammelt hast."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
 msgid ""
-"If you finish a castle in the target area on the second island, you will get "
-"a third headquarters on the third island. You must build a castle at the "
+"If you finish a castle in the target area on the second island, you will get"
+" a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr ""
-"Wenn du eine Burg im Zielgebiet auf der zweiten Insel fertigstellst, "
-"bekommst du ein Hauptquartier auf der dritten Insel. Du musst eine Burg auf "
-"der dritten Insel fertigstellen und 20 Minuten halten, um das Spiel zu "
-"gewinnen."
+msgstr "Wenn du eine Burg im Zielgebiet auf der zweiten Insel fertigstellst, bekommst du ein Hauptquartier auf der dritten Insel. Du musst eine Burg auf der dritten Insel fertigstellen und 20 Minuten halten, um das Spiel zu gewinnen."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr ""
-"Immer wenn Du ein Ziel auf der Insel erreichst, bekommst Du zusätzliche "
-"Waren; abhängig davon, wieviele Spieler vor Dir schon das Ziel erreicht "
-"haben. Je früher Du das Ziel erreichst, desto weniger Waren erhältst Du. "
-"Weiter unten erfährst Du die Details."
+msgstr "Immer wenn Du ein Ziel auf der Insel erreichst, bekommst Du zusätzliche Waren; abhängig davon, wieviele Spieler vor Dir schon das Ziel erreicht haben. Je früher Du das Ziel erreichst, desto weniger Waren erhältst Du. Weiter unten erfährst Du die Details."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
@@ -139,17 +135,11 @@ msgid ""
 "only meadows and resources. The economies you leave behind will continue to "
 "work for you, but you will only reap the benefits at the moment you reach a "
 "new island."
-msgstr ""
-"Der Trick ist, dass die erste Insel nur Holz und Stein bietet, die zweite "
-"nur Weideland und Bodenschätze. Die Wirtschaft, die Du zurück lässt, wird "
-"weiter für Dich arbeiten, aber du wirst die Erträge nur erhalten, wenn Du "
-"eine neue Insel erreichst."
+msgstr "Der Trick ist, dass die erste Insel nur Holz und Stein bietet, die zweite nur Weideland und Bodenschätze. Die Wirtschaft, die Du zurück lässt, wird weiter für Dich arbeiten, aber du wirst die Erträge nur erhalten, wenn Du eine neue Insel erreichst."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr ""
-"Schließlich: Sei vorsichtig und verschwende deine Bergkristalle und "
-"Diamanten nicht."
+msgstr "Schließlich: Sei vorsichtig und verschwende deine Bergkristalle und Diamanten nicht."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "Finish Rewards"
@@ -207,9 +197,7 @@ msgstr "Die Belohnung dafür ist:"
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr ""
-"%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls "
-"ihm niemand vorher die Kontrolle über den Hügel nimmt."
+msgstr "%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls ihm niemand vorher die Kontrolle über den Hügel nimmt."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s lost control of the hill."

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-20 08:51+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-24 14:41+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -304,7 +304,7 @@ msgstr "Das Schmieden einer Breitaxt"
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:19
 #: ../../tribes/barbarians/reed_yard/conf:25
-#: ../../tribes/barbarians/shipyard/conf:29
+#: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
 #: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
@@ -323,7 +323,7 @@ msgstr "Ein altes Barbarensprichwort<br> besagt, dass man manche Risiken eingehe
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "\"Eine neue Kriegsaxt weckt das Beste in dem, der sie trägt - oder das Schlimmste in dem, der sie fertigt.\""
+msgstr "„Eine neue Kriegsaxt weckt das Beste in dem, der sie trägt – oder das Schlimmste in dem, der sie fertigt.“"
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "Produces axes, sharp axes and broad axes."
@@ -382,7 +382,7 @@ msgstr "Alle drei Waffen benötigen die gleiche Zeit zur Herstellung, aber die b
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Backt Brot für Arbeiter."
+msgstr "Bäckt Brot für Arbeiter."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/barrier/help.lua:13
@@ -504,17 +504,17 @@ msgstr "Soll angeblich von Neidhardt, dem berühmten Trainer, stammen."
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "\"Der beste Freund in der Schlacht ist der feindliche Schlag, der dich verfehlt.\""
+msgstr "„Der beste Freund in der Schlacht ist der feindliche Schlag, der dich verfehlt.“"
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr "Trainiert Soldaten in \"Ausweichen\"."
+msgstr "Trainiert Soldaten in „Ausweichen“."
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "\"Ausweichen\" erhöht die Wahrscheinlichkeit, dass der Soldat nicht vom Gegner getroffen wird und daher keinen Schaden nimmt."
+msgstr "„Ausweichen“ erhöht die Wahrscheinlichkeit, dass der Soldat nicht vom Gegner getroffen wird und daher keinen Schaden nimmt."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
 #: ../../tribes/barbarians/trainingcamp/help.lua:21
@@ -1376,7 +1376,7 @@ msgstr "Auszug aus „unsere unterirdischen Schätze“,<br>einem traditionellen
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...’"
-msgstr "‘Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> Sonnenstrahlen, hervorgebracht in Ewigkeit ...’"
+msgstr "„Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> Sonnenstrahlen, hervorgebracht in Ewigkeit …“"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:18
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:18
@@ -1424,7 +1424,7 @@ msgstr "Zitat eines anonymen Bergmanns."
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "‘Ich schaue Tag für Tag auf das, was ich herausschlage, und verstehe, warum meine Arbeit wichtig ist.’"
+msgstr "„Ich schaue Tag für Tag auf das, was ich herausschlage, und verstehe, warum meine Arbeit wichtig ist.“"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:18
 #: ../../tribes/barbarians/deeper_oremine/help.lua:18
@@ -1560,7 +1560,7 @@ msgstr "Der Fischer in dieser Fischerhütte kann keinen Fisch in seinem Arbeitsb
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "‘Was soll das heißen, mein Fisch sei nicht frisch?!’"
+msgstr "„Was soll das heißen, mein Fisch sei nicht frisch?!“"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -1654,7 +1654,7 @@ msgstr "Dieser Satz war die Antwort von Rimbert dem Bergmann – später bekannt
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr "\"Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz kann ich nichts anfangen!\""
+msgstr "„Ich kann mit Unmengen von Granit umgehen, aber nicht mit deinem leeren Geschwätz!“"
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
@@ -1748,11 +1748,11 @@ msgstr "Der Jäger in dieser Jagdhütte kann keine Tiere in seinem Arbeitsbereic
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "‘Still wie ein Panther,<br>flink wie ein Wiesel,<br>schnell wie ein Pfeil,<br>tödlich wie eine Schlange.’"
+msgstr "„Still wie ein Panther,<br>flink wie ein Wiesel,<br>schnell wie ein Pfeil,<br>tödlich wie eine Schlange.“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
-msgstr "‘Die Kunst des Jagens’"
+msgstr "„Die Kunst des Jagens“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1807,11 +1807,11 @@ msgstr "Brennt Kalk im Kalkofen."
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr "Die Antwort von Ragnald, dem Kind, auf die Frage, was er im Schmutz mache. Seine ‘neuen Steine’ sind jetzt ein wichtiger Baustoff."
+msgstr "Die Antwort von Ragnald, dem Kind, auf die Frage, was er im Schmutz mache. Seine „neuen Steine“ sind jetzt ein wichtiger Baustoff."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "‘Ich mache mit Hilfe von Feuer und Wasser neue Steine.’"
+msgstr "„Ich mache mit Hilfe von Feuer und Wasser neue Steine.“"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:17
 msgid ""
@@ -1949,7 +1949,7 @@ msgstr "Inschrift auf der Türschwelle des nun zerstörten Olde Forge in Harrads
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid "‘We make it work!’"
-msgstr "‘Wir bringen es zum Laufen!’"
+msgstr "„Wir bringen es zum Laufen!“"
 
 #: ../../tribes/barbarians/metalworks/help.lua:17
 msgid ""
@@ -1979,7 +1979,7 @@ msgstr "Verbreitetstes Brot der Bergleute"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr "‘Lass die erste deinen Hunger stillen, die zweite dir die Nervosität nehmen; und wenn Du die dritte runtergeschluckt hast ist es Zeit für die nächste Schicht!’"
+msgstr "„Lass das erste deinen Hunger stillen, das zweite dir die Nervosität nehmen; und wenn du das dritte runtergeschluckt hast, ist es Zeit für die nächste Schicht!“"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:17
 msgid ""
@@ -2052,7 +2052,7 @@ msgstr "Chat’Karuth im Gespräch mit einem Förster"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
-msgstr "‘Wer zwei Bäume wachsen lassen kann, wo normalerweise nur einer wächst, übertrifft den besten General!’"
+msgstr "„Wer zwei Bäume wachsen lassen kann, wo bisher nur einer wächst, der ist größer als der größte Feldherr!“"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:18
 msgid "Plants trees in the surrounding area."
@@ -2103,7 +2103,7 @@ msgstr "Motto der Reetbauernzunft"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "‘We grow roofs’"
-msgstr "‘Wir züchten Dächer.’"
+msgstr "„Wir züchten Dächer.“"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:17
 msgid ""
@@ -2172,7 +2172,7 @@ msgstr "Ein seetüchtiges Schiff"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 
-#: ../../tribes/barbarians/shipyard/conf:27
+#: ../../tribes/barbarians/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "Das Bauen eines Schiffs"
 
@@ -2272,11 +2272,11 @@ msgstr "Häuptling Caht´Katuth hält vor seiner Armee eine Rede."
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr "’Wer stark ist, wird weder vergeben noch vergessen, aber erlittenes Unrecht rächen – in der Vergangenheit und für alle Zukunft.‘"
+msgstr "„Wer stark ist, wird weder vergeben noch vergessen, sondern erlittenes Unrecht rächen – in der Vergangenheit und für alle Zukunft.“"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr "Trainiert Soldaten in \"Angriff\" und \"Lebenspunkte\"."
+msgstr "Trainiert Soldaten in „Angriff“ und „Lebenspunkte“."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
@@ -2385,7 +2385,7 @@ msgstr "Lied, geschrieben von Sigurd dem Barden,<br> als das erste Mal Regen nac
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr "‘Oh wie süß ist der Quell des Lebens,<br> der vom Himmel herab kommt <br> und die Erde trinken lässt.’"
+msgstr "„Oh wie süß ist der Quell des Lebens,<br> der vom Himmel herab kommt <br> und die Erde trinken lässt.“"
 
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Draws water out of the deep."

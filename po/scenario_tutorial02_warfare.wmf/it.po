@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Guybrush88 <erpizzo@alice.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-21 13:34+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -284,7 +285,7 @@ msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "L'impostazione iniziale dipende dal tipo di edificio. Per i barbari, la guardiola è l'unico edificio che preferisce in maniera predefinita le reclute. Dovresti cambiare questa impostazione per adattarla ai tuoi bisogni correnti."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
@@ -345,7 +346,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid "Dismantle your sentry"
-msgstr ""
+msgstr "Smantella la tua guardiola"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Dismantling military buildings"
@@ -374,7 +375,7 @@ msgstr ""
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Hai visto la tua guardiola? Dato che non può contenere molti soldati ed è accanto a un fortino più forte, è piuttosto inutile."
 
 #: TRANSLATORS 'it' refers to the Barbarian sentry
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
@@ -389,7 +390,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Smantella la tua guardiola a nord-ovest"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid ""
@@ -401,7 +402,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "Smantella la tua guardiola a nord-ovest, accanto al fortino."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
