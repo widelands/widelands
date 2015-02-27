@@ -80,11 +80,24 @@ struct DefaultAI : ComputerPlayer {
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
-	enum class ScheduleTasks : uint8_t {kBFCheck, kRoadCheck, kUnbuildableFCheck, kConsiderAttack,
-		 kCheckEconomies, kProductionsitesStats, kConstructBuilding,  kCheckProductionsites,
-		  kCheckShips, KMarineDecisions, kCheckMines, kWareReview, kprintStats, kIdle,
-		  kCheckMilitarysites, kCheckTrainingsites };
-	
+	enum class ScheduleTasks : uint8_t {
+		kBFCheck,
+		kRoadCheck,
+		kUnbuildableFCheck,
+		kConsiderAttack,
+		kCheckEconomies,
+		kProductionsitesStats,
+		kConstructBuilding,
+		kCheckProductionsites,
+		kCheckShips,
+		KMarineDecisions,
+		kCheckMines,
+		kWareReview,
+		kprintStats,
+		kIdle,
+		kCheckMilitarysites,
+		kCheckTrainingsites
+	};
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -140,11 +153,11 @@ private:
 	                          bool* output_is_needed,
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
-	                          
-	void scheduler_review(int32_t *next_check_due_,
-	int32_t *oldestTaskTime,
-	ScheduleTasks *DueTask,
-	ScheduleTasks thisTask);                          
+
+	void scheduler_review(int32_t* next_check_due_,
+	                      int32_t* oldestTaskTime,
+	                      ScheduleTasks* DueTask,
+	                      ScheduleTasks thisTask);
 
 	bool construct_building(int32_t);
 
@@ -182,7 +195,6 @@ private:
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
-	void check_helpersites(int32_t);
 	void review_wares_targets(int32_t);
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
@@ -223,10 +235,7 @@ private:
 	// Variables of default AI
 	uint8_t type_;
 
-	//bool m_buildable_changed; NOCOM
-	//bool m_mineable_changed;
-
-	uint32_t schedStat[20]={0}; //NOCOM
+	uint32_t schedStat[20] = {0};  // NOCOM
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
