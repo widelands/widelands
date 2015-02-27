@@ -8,10 +8,10 @@ fishing_rod=1
 [fish]
 0=findspace size:any radius:7 resource:fish
 1=walk coords
-2=playFX fisher/fisher_throw_net 192
+2=playFX ../../../sound/fisher/fisher_throw_net 192
 3=mine fish 1
 4=animation fishing 3000 # Play a fishing animation
-5=playFX fisher/fisher_pull_net 192
+5=playFX ../../../sound/fisher/fisher_pull_net 192
 6=createware fish
 7=return
 

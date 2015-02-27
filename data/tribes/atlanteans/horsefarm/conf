@@ -28,7 +28,7 @@ work=_breeding horses
 sleep=15000
 return=skipped unless economy needs horse
 consume=corn water
-playFX=farm/horse 192
+playFX=../../../sound/farm/horse 192
 animate=working 15000 # feeding cute little foals ;)
 recruit=horse
 

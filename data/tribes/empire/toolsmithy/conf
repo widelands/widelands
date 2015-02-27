@@ -65,7 +65,7 @@ work=_working
 return=skipped unless economy needs ax
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=ax
 
@@ -73,7 +73,7 @@ produce=ax
 return=skipped unless economy needs basket
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=basket
 
@@ -81,7 +81,7 @@ produce=basket
 return=skipped unless economy needs bread_paddle
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=bread_paddle
 
@@ -89,7 +89,7 @@ produce=bread_paddle
 return=skipped unless economy needs fire_tongs
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=fire_tongs
 
@@ -97,7 +97,7 @@ produce=fire_tongs
 return=skipped unless economy needs fishing_rod
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=fishing_rod
 
@@ -105,7 +105,7 @@ produce=fishing_rod
 return=skipped unless economy needs hammer
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hammer
 
@@ -113,7 +113,7 @@ produce=hammer
 return=skipped unless economy needs hunting_spear
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hunting_spear
 
@@ -121,7 +121,7 @@ produce=hunting_spear
 return=skipped unless economy needs kitchen_tools
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=kitchen_tools
 
@@ -129,7 +129,7 @@ produce=kitchen_tools
 return=skipped unless economy needs pick
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=pick
 
@@ -137,7 +137,7 @@ produce=pick
 return=skipped unless economy needs saw
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=saw
 
@@ -145,7 +145,7 @@ produce=saw
 return=skipped unless economy needs scythe
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=scythe
 
@@ -153,7 +153,7 @@ produce=scythe
 return=skipped unless economy needs shovel
 sleep=32000
 consume=iron log
-playFX=smiths/toolsmith 192
+playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=shovel
 

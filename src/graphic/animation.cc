@@ -160,8 +160,8 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	// If this animation has a sound effect associated, try to load it now.
 	const std::string sfx = section.get_string("sfx", "");
 	if (!sfx.empty()) {
-			sound_effect_ = string(directory) + sfx;
-			g_sound_handler.load_fx_if_needed("", sfx, sound_effect_);
+			sound_effect_ = string(directory) + "/" + sfx;
+			g_sound_handler.load_fx_if_needed(directory, sfx, sound_effect_);
 	}
 
 	int32_t const fps = section.get_int("fps");

@@ -28,7 +28,7 @@ work=_working
 sleep=16500 # much faster than barbarians hardener
 return=skipped unless economy needs wood
 consume=log:2
-playFX=sawmill/sawmill 180
+playFX=../../../sound/sawmill/sawmill 180
 animate=working 20000 # much more faster than barbarians hardener
 produce=wood
 

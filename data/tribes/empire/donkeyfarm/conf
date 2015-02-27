@@ -28,7 +28,7 @@ work=_rearing donkeys
 sleep=15000
 return=skipped unless economy needs donkey
 consume=wheat water
-playFX=farm/donkey 192
+playFX=../../../sound/farm/donkey 192
 animate=working 15000 # feeding cute little baby donkeys ;)
 recruit=donkey
 

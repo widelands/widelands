@@ -40,7 +40,7 @@ worker=harvest
 [work]
 call=plant_corn
 call=harvest_corn
-playFX=farm/farm_animal 192
+playFX=../../../sound/farm/farm_animal 192
 return=skipped
 
 [out_of_resource_notification]

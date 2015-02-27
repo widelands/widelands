@@ -27,7 +27,7 @@ normal_02=tribes/empire/pics/roadt_normal_02.png
 pics=pics/frontier_??.png
 hotspot=1 19
 
-# Not just a plain color, maybe a cross or some stripes
+# Not just a plain color, maybe a cross or some stribes
 [flag]
 pics=pics/flag_??.png
 hotspot=14 38

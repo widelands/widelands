@@ -214,9 +214,9 @@ void SoundHandler::read_config()
 
 	random_order_    =  s.get_bool("sound_random_order", true);
 
-	register_song("", "intro");
-	register_song("", "menu");
-	register_song("", "ingame");
+	register_song("music", "intro");
+	register_song("music", "menu");
+	register_song("music", "ingame");
 }
 
 /** Load systemwide sound fx into memory.
@@ -225,13 +225,13 @@ void SoundHandler::read_config()
 */
 void SoundHandler::load_system_sounds()
 {
-	load_fx_if_needed("", "click", "click");
-	load_fx_if_needed("", "create_construction_site", "create_construction_site");
-	load_fx_if_needed("", "message", "message");
-	load_fx_if_needed("military", "under_attack", "military/under_attack");
-	load_fx_if_needed("military", "site_occupied", "military/site_occupied");
-	load_fx_if_needed("", "lobby_chat", "lobby_chat");
-	load_fx_if_needed("", "lobby_freshmen", "lobby_freshmen");
+	load_fx_if_needed("sound", "click", "click");
+	load_fx_if_needed("sound", "create_construction_site", "create_construction_site");
+	load_fx_if_needed("sound", "message", "message");
+	load_fx_if_needed("sound/military", "under_attack", "military/under_attack");
+	load_fx_if_needed("sound/military", "site_occupied", "military/site_occupied");
+	load_fx_if_needed("sound", "lobby_chat", "lobby_chat");
+	load_fx_if_needed("sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
@@ -259,11 +259,8 @@ void SoundHandler::load_fx_if_needed
 
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
-	// NOCOM(GunChleoc): Review this. All sounds have to sit in this directory and its subdirectories now.
-	// So, I moved over the duck's sounds from 'world'.
-
-	// filename is relative to dir.
-	const std::string full_path = "sound/" + dir + (dir.empty() ? "" : "/") + filename;
+	// filename can be relative to dir.
+	const std::string full_path = dir + "/" + filename;
 	const std::string basename = FileSystem::fs_filename(full_path.c_str());
 	const std::string dirname = FileSystem::fs_dirname(full_path);
 	boost::regex re(basename + "_\\d+\\.ogg");
@@ -530,8 +527,7 @@ void SoundHandler::register_song
 
 	FilenameSet files;
 
-	// NOCOM(GunChleoc): Review this. All music has to sit in this directory and its subdirectories now.
-	files = filter(g_fs->list_directory("music/" + dir), [&basename](const std::string& fn) {
+	files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
 		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
 		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});

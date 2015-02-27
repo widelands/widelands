@@ -51,54 +51,54 @@ work=_working
 return=skipped unless economy needs ax
 sleep=32000
 consume=coal iron
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=ax
 
 [produce_sharpax]
 return=skipped unless economy needs sharpax
 sleep=32000
 consume=coal iron:2
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=sharpax
 
 [produce_broadax]
 return=skipped unless economy needs broadax
 sleep=32000
 consume=coal:2 iron:2
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=broadax
 
 [produce_bronzeax]
 return=skipped unless economy needs bronzeax
 sleep=32000
 consume=coal:2 iron:2
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=bronzeax
 
 [produce_battleax]
 return=skipped unless economy needs battleax
 sleep=32000
 consume=coal gold iron:2
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=battleax
 
 [produce_warriorsax]
 return=skipped unless economy needs warriorsax
 sleep=32000
 consume=coal:2 gold:2 iron:2
-playFX=smiths/smith 192
+playFX=../../../sound/smiths/smith 192
 animate=working 25000
-playFX=smiths/sharpening 192
+playFX=../../../sound/smiths/sharpening 192
 produce=warriorsax
 
 [work]

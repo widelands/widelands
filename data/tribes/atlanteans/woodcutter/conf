@@ -8,7 +8,7 @@ saw=1
 [harvest]
 0=findobject attrib:tree radius:10
 1=walk object
-2=playFX sawmill/sawmill 230
+2=playFX ../../../sound/sawmill/sawmill 230
 3=animation sawing 10000
 4=object fall
 5=animation idle 2000

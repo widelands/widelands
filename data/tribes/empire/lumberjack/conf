@@ -8,9 +8,9 @@ ax=1
 [chop]
 0=findobject attrib:tree radius:10
 1=walk object
-2=playFX woodcutting/fast_woodcutting 250
+2=playFX ../../../sound/woodcutting/fast_woodcutting 250
 3=animation hacking 10000
-4=playFX spoken/timber 156
+4=playFX ../../../sound/spoken/timber 156
 5=object fall
 6=animation idle 2000
 7=createware log

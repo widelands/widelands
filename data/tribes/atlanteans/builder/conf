@@ -11,7 +11,7 @@ fps=10
 
 [work]
 pics=work_??.png
-sfx=hammering/hammering
+sfx=../../../sound/hammering/hammering
 hotspot=6 22
 fps=10
 

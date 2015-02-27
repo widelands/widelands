@@ -869,7 +869,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed("", filename, name);
+		g_sound_handler.load_fx_if_needed(directory, filename, name);
 	} catch (const WException & e) {
 		throw GameDataError("playFX: %s", e.what());
 	}

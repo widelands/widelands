@@ -28,7 +28,7 @@ work=_rearing cattle
 sleep=15000
 return=skipped unless economy needs ox
 consume=wheat water
-playFX=farm/ox 192
+playFX=../../../sound/farm/ox 192
 animate=working 15000 # animation of feeding the cattles
 recruit=ox
 

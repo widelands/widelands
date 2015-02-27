@@ -17,7 +17,7 @@ scythe=1
 [harvest]
 0=findobject attrib:wheat radius:2
 1=walk object
-2=playFX farm/scythe 220
+2=playFX ../../../sound/farm/scythe 220
 3=animation harvesting 10000
 4=object harvest
 5=animation gathering 4000

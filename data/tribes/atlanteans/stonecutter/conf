@@ -8,7 +8,7 @@ carrier=1
 [cut_stone]
 0=findobject attrib:granite radius:6
 1=walk object
-2=playFX stonecutting/stonecutter 192
+2=playFX ../../../sound/stonecutting/stonecutter 192
 3=animation hacking 10000
 4=object shrink
 5=createware stone

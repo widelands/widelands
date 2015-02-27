@@ -648,7 +648,7 @@ void WorkerProgram::parse_play_fx
 
 	act->sparam1 = parser->directory + "/" + cmd[1];
 
-	g_sound_handler.load_fx_if_needed("", cmd[1], act->sparam1);
+	g_sound_handler.load_fx_if_needed(parser->directory, cmd[1], act->sparam1);
 
 	act->function = &Worker::run_playfx;
 	act->iparam1 =

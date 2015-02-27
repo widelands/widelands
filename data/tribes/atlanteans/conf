@@ -26,7 +26,7 @@ normal_01=tribes/atlanteans/pics/roadt_normal_01.png
 pics=pics/frontier_??.png
 hotspot=3 12
 
-# Not just a plain color, maybe a cross or some stripes
+# Not just a plain color, maybe a cross or some stribes
 [flag]
 pics=pics/flag_??.png
 hotspot=15 35

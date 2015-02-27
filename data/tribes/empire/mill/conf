@@ -28,7 +28,7 @@ work=_grinding wheat
 sleep=5000
 return=skipped unless economy needs flour
 consume=wheat
-playFX=mill/mill_turning 240
+playFX=../../../sound/mill/mill_turning 240
 animate=working 10000
 produce=flour
 

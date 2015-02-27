@@ -9,18 +9,18 @@ scythe=1
 [plant]
 0=findspace size:any radius:2 space
 1=walk coords
-2=animation planting 4000
+2=animation planting 4000  
 3=plant tribe:field0t
-4=animation planting 4000
+4=animation planting 4000  
 5=return
 
 [harvest]
 0=findobject attrib:wheat radius:2
 1=walk object
-2=playFX farm/scythe 220
+2=playFX ../../../sound/farm/scythe 220
 3=animation harvesting 10000
 4=object harvest
-5=animation gathering 4000
+5=animation gathering 4000  
 6=createware wheat
 7=return
 

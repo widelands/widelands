@@ -16,7 +16,7 @@ hammer=1
 [search]
 0=animation hacking 5000
 1=animation idle 2000
-2=playFX hammering/geologist_hammer 192
+2=playFX ../../../sound/hammering/geologist_hammer 192
 3=animation hacking 3000
 4=geologist-find
 
