@@ -37,7 +37,7 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 	if (!terrain.is_resource_valid(resource)) {
 		return -1;
 	}
-	if (terrain.get_is() & Widelands::TerrainDescription::Type::kUnpassable) {
+	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
 		return 8;
 	}
 	return 1;
@@ -59,7 +59,7 @@ int32_t editor_change_resource_tool_callback
 	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
 	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
 
-	//  If one of the neighbours is unpassable, count its resource stronger.
+	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
 	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);

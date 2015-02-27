@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-18 17:47+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-21 13:36+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -39,25 +39,25 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella caserma."
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr "La tua barriera ha scoperto un aggressore."
+msgstr "Il tuo fortino ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr "La tua barriera è sotto attacco"
+msgstr "Il tuo fortino è sotto attacco."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "Il nemico ha sconfitto i tuoi soldati nella barriera"
+msgstr "Il nemico ha sconfitto i tuoi soldati nel fortino."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "I tuoi soldati hanno sconfitto il nemico nella barriera."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel fortino."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -102,22 +102,22 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella cittadella."
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr "Il tuo dongione ha scoperto un aggressore."
+msgstr "Il tuo mastio ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr "Il tuo dongione è sotto attacco."
+msgstr "Il tuo mastio è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel dongione."
+msgstr "Il nemico ha sconfitto i tuoi soldati nel mastio."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel dongione."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel mastio."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
@@ -149,31 +149,31 @@ msgstr "Il tuo posto di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr "Il tuo posto di guardia è sotto attacco"
+msgstr "Il tuo posto di guardia è sotto attacco."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia"
+msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia"
+msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Il tuo corpo di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Il tuo corpo di guardia è sotto attacco."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati al corpo di guardia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico al corpo di guardia."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
@@ -211,25 +211,25 @@ msgstr "I tuoi soldati hanno sconfitto i nemici nell' avamposto"
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "La tua guardiola ha scoperto un aggressore."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "La tua guardiola è sotto attacco."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella guardiola."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella guardiola."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
@@ -241,11 +241,11 @@ msgstr "La tua torre piccola è sotto attacco."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella torre piccola."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella torre piccola."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
@@ -302,7 +302,7 @@ msgstr "sta forgiando un'ascia grande"
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:19
 #: ../../tribes/barbarians/reed_yard/conf:25
-#: ../../tribes/barbarians/shipyard/conf:29
+#: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
 #: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
@@ -461,7 +461,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo fortino."
 
 #: ../../tribes/barbarians/barrier/help.lua:16
 #: ../../tribes/barbarians/citadel/help.lua:16
@@ -469,7 +469,7 @@ msgstr ""
 #: ../../tribes/barbarians/fortress/help.lua:16
 #: ../../tribes/barbarians/sentry/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Manda dei soldati ad occupare degli edifici militari per espandere il tuo territorio."
 
 #: ../../tribes/barbarians/barrier/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:17
@@ -1133,7 +1133,7 @@ msgstr "Castello"
 
 #: ../../tribes/barbarians/conf:147
 msgid "Guardhall"
-msgstr "Guardia ingresso"
+msgstr "Posto di guardia"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Guardhouse"
@@ -1809,7 +1809,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "'Formare della nuova pietra partendo dalla vecchia con fuoco e acqua.'"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:17
 msgid ""
@@ -1913,31 +1913,31 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "making a fishing rod"
-msgstr ""
+msgstr "producendo una canna da pesca"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "making a hammer"
-msgstr ""
+msgstr "producendo un martello"
 
 #: ../../tribes/barbarians/metalworks/conf:49
 msgid "making a hunting spear"
-msgstr ""
+msgstr "producendo una lancia da caccia"
 
 #: ../../tribes/barbarians/metalworks/conf:51
 msgid "making kitchen tools"
-msgstr ""
+msgstr "producendo degli utensili da cucina"
 
 #: ../../tribes/barbarians/metalworks/conf:53
 msgid "making a pick"
-msgstr ""
+msgstr "producendo un piccone"
 
 #: ../../tribes/barbarians/metalworks/conf:55
 msgid "making a scythe"
-msgstr ""
+msgstr "producendo una falce"
 
 #: ../../tribes/barbarians/metalworks/conf:57
 msgid "making a shovel"
-msgstr ""
+msgstr "producendo una pala"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -2152,7 +2152,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato la tua guardiola."
 
 #: ../../tribes/barbarians/sharpax/conf:1
 msgid ""
@@ -2170,7 +2170,7 @@ msgstr "Una valida nave"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Lavora al cantiere navale e costruisce navi."
 
-#: ../../tribes/barbarians/shipyard/conf:27
+#: ../../tribes/barbarians/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "sta costruendo una nave"
 

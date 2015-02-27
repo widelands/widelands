@@ -48,7 +48,7 @@ public:
 		kWater =  2,
 		kDead = 4,
 		kMountain = 8,
-		kUnpassable = 16,
+		kImpassable = 16,
 	};
 
 	TerrainDescription(const LuaTable& table, const World&);
