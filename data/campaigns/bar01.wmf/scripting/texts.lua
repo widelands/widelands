@@ -2,8 +2,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
@@ -45,16 +45,16 @@ obj_build_mines = {
       listitem_bullet(_"Build a coal mine and an iron ore mine.") ..
       listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that he will find, choosing the appropriate mine to be built:") ..
 		"</rt>" ..
-		rt("image=data/tribes/barbarians/resi_coal1/resi_00.png", p(_"a bit of coal")) ..
-		rt("image=data/tribes/barbarians/resi_coal2/resi_00.png", p(_"a lot of coal")) ..
-		rt("image=data/tribes/barbarians/resi_iron1/resi_00.png", p(_"a bit of iron")) ..
-		rt("image=data/tribes/barbarians/resi_iron2/resi_00.png", p(_"a lot of iron")) ..
-		rt("image=data/tribes/barbarians/resi_gold1/resi_00.png", p(_"a bit of gold")) ..
-		rt("image=data/tribes/barbarians/resi_gold2/resi_00.png", p(_"a lot of gold")) ..
-		rt("image=data/tribes/barbarians/resi_granite1/resi_00.png", p(_"a bit of granite")) ..
-		rt("image=data/tribes/barbarians/resi_granite2/resi_00.png", p(_"a lot of granite")) ..
-		rt("image=data/tribes/barbarians/resi_water1/resi_00.png", p(_"water")) ..
-		rt("image=data/tribes/barbarians/resi_none/resi_00.png", p(_"nothing was found here")) ..
+		rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_"a bit of coal")) ..
+		rt("image=tribes/barbarians/resi_coal2/resi_00.png", p(_"a lot of coal")) ..
+		rt("image=tribes/barbarians/resi_iron1/resi_00.png", p(_"a bit of iron")) ..
+		rt("image=tribes/barbarians/resi_iron2/resi_00.png", p(_"a lot of iron")) ..
+		rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_"a bit of gold")) ..
+		rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_"a lot of gold")) ..
+		rt("image=tribes/barbarians/resi_granite1/resi_00.png", p(_"a bit of granite")) ..
+		rt("image=tribes/barbarians/resi_granite2/resi_00.png", p(_"a lot of granite")) ..
+		rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_"water")) ..
+		rt("image=tribes/barbarians/resi_none/resi_00.png", p(_"nothing was found here")) ..
 		"<rt>" ..
 			p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
 }
@@ -118,7 +118,7 @@ obj_better_material_2 = {
       _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])
       ..paragraphdivider() ..
       "</p></rt>" ..
-      rt("image=wui/fieldaction/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.")
+      rt("image=images/wui/fieldaction/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.")
       .. paragraphdivider() ..
       _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]])
       .. paragraphdivider() ..

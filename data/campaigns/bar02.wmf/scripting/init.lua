@@ -4,11 +4,11 @@
 
 set_textdomain("scenario_bar02.wmf")
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/objective_utils.lua"
-include "data/scripting/infrastructure.lua"
-include "data/scripting/table.lua"
-include "data/scripting/ui.lua"
+include "scripting/coroutine.lua"
+include "scripting/objective_utils.lua"
+include "scripting/infrastructure.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 game = wl.Game()
 p1 = game.players[1]

@@ -818,7 +818,7 @@ void Ship::start_task_expedition(Game& game) {
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, msg_head, msg_body, ImageCatalog::Key::kDockExpeditionStart);
+	send_message(game, msg_head, msg_body, "wui/buildings/start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
@@ -926,15 +926,19 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param image_key an image from the ImageCatalog.
+ * \param picture picture name relative to the images/ directory
  */
 void Ship::send_message(Game& game,
-								const std::string& title,
-								const std::string& description,
-								ImageCatalog::Key image_key) {
-	std::string rt_description  = "<rt image=";
-	rt_description += g_gr->image_catalog().filepath(image_key);
-	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+                        const std::string& title,
+                        const std::string& description,
+                        const std::string& picture) {
+	std::string rt_description;
+	if (picture.size() > 3) {
+		rt_description = "<rt image=images/";
+		rt_description += picture;
+		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+	} else
+		rt_description = "<rt><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 

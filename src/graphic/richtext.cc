@@ -19,8 +19,6 @@
 
 #include "graphic/richtext.h"
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -29,7 +27,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
-#include "io/filesystem/layered_filesystem.h"
 
 namespace UI {
 
@@ -336,19 +333,14 @@ void RichText::parse(const std::string & rtext)
 		text.images_height = 0;
 		text.images_width = 0;
 
-		// NOCOM(GunChleoc): Review this.
-		for (const std::string& image_filename : cur_block_images) {
-			const Image* image;
-			// Images that come in from Lua should define their paths starting from kBaseDir,
-			// unless they are map images.
-			if (!g_fs->file_exists(image_filename) && !boost::starts_with(image_filename, "map:")) {
-				image = g_gr->images().get(g_gr->image_catalog().kBaseDir + image_filename);
-			} else {
-				image = g_gr->images().get(image_filename);
-			}
-			if (!image) {
+		for
+			(std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
+			 image_it != cur_block_images.end();
+			 ++image_it)
+		{
+			const Image* image = g_gr->images().get(*image_it);
+			if (!image)
 				continue;
-			}
 
 			Rect bbox;
 			bbox.x = text.images_width;

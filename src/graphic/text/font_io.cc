@@ -32,7 +32,7 @@
 namespace RT {
 
 IFont* load_font(const std::string& face, int ptsize) {
-	std::string filename = "data/i18n/fonts/";
+	std::string filename = "i18n/fonts/";
 	filename += face;
 
 	// Some older versions of sdl_ttf seem to rely on this block of memory to

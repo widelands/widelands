@@ -2,12 +2,12 @@
 --                      Atlanteans Tutorial Mission 01
 -- =======================================================================
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/infrastructure.lua"
-include "data/scripting/messages.lua"
-include "data/scripting/objective_utils.lua"
-include "data/scripting/table.lua"
-include "data/scripting/ui.lua"
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
+include "scripting/objective_utils.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 include "map:scripting/water_rising.lua"
 

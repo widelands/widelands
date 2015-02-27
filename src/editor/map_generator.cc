@@ -45,7 +45,7 @@ MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorG
 	map_info_(mapInfo),
 	egbase_(egbase)
 {
-	std::unique_ptr<LuaTable> map_gen_config(egbase.lua().run_script("data/world/map_generation.lua"));
+	std::unique_ptr<LuaTable> map_gen_config(egbase.lua().run_script("world/map_generation.lua"));
 	map_gen_config->do_not_warn_about_unaccessed_keys();
 
 	map_gen_info_.reset(

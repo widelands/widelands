@@ -29,6 +29,16 @@
 
 using Widelands::Warehouse;
 
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
+static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
+static const char pic_tab_dock_wares[] = "images/wui/buildings/menu_tab_wares_dock.png";
+static const char pic_tab_dock_workers[] = "images/wui/buildings/menu_tab_workers_dock.png";
+static const char pic_tab_expedition[] = "images/wui/buildings/start_expedition.png";
+
+static const char pic_policy_prefer[] = "images/wui/buildings/stock_policy_prefer.png";
+static const char pic_policy_dontstock[] = "images/wui/buildings/stock_policy_dontstock.png";
+static const char pic_policy_remove[] = "images/wui/buildings/stock_policy_remove.png";
+
 /**
  * Extends the wares display to show and modify stock policy of items.
  */
@@ -69,18 +79,9 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex w
 	const Image* pic;
 
 	switch (policy) {
-		case Warehouse::SP_Prefer: {
-			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyPrefer);
-			break;
-		}
-		case Warehouse::SP_DontStock: {
-			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyDontStock);
-			break;
-		}
-		case Warehouse::SP_Remove: {
-			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyRemove);
-			break;
-		}
+	case Warehouse::SP_Prefer: pic = g_gr->images().get(pic_policy_prefer); break;
+	case Warehouse::SP_DontStock: pic = g_gr->images().get(pic_policy_dontstock); break;
+	case Warehouse::SP_Remove: pic = g_gr->images().get(pic_policy_remove); break;
 	default:
 		// don't draw anything for the normal policy
 		return;
@@ -124,28 +125,20 @@ WarehouseWaresPanel::WarehouseWaresPanel
 		UI::Button * b;
 		add(buttons, UI::Box::AlignLeft);
 
-#define ADD_POLICY_BUTTON(policy, policyname, image_key, tooltip)                                           \
+#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 ImageCatalog::Key::kButton4,                                   \
-			 g_gr->cataloged_image(image_key),      \
+			 g_gr->images().get("images/ui_basic/but4.png"),                                   \
+			 g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
 		buttons->add(b, UI::Box::AlignCenter);
 
-		ADD_POLICY_BUTTON(normal, Normal,
-								ImageCatalog::Key::kBuildingStockPolicyNormalButton,
-								_("Normal policy"))
-		ADD_POLICY_BUTTON(prefer, Prefer,
-								ImageCatalog::Key::kBuildingStockPolicyPreferButton,
-								_("Preferably store selected wares here"))
-		ADD_POLICY_BUTTON(dontstock, DontStock,
-								ImageCatalog::Key::kBuildingStockPolicyDontStockButton,
-								_("Do not store selected wares here"))
-		ADD_POLICY_BUTTON(remove, Remove,
-								ImageCatalog::Key::kBuildingStockPolicyRemoveButton,
-								_("Remove selected wares from here"))
+		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
+		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
+		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
+		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 	}
 }
 
@@ -198,7 +191,7 @@ WarehouseWindow::WarehouseWindow
 {
 	get_tabs()->add
 		("wares",
-		 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWares),
+		 g_gr->images().get(pic_tab_wares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -208,7 +201,7 @@ WarehouseWindow::WarehouseWindow
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
-		 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWorkers),
+		 g_gr->images().get(pic_tab_workers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -220,18 +213,18 @@ WarehouseWindow::WarehouseWindow
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
 			("dock_wares",
-			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabDockWares),
+			 g_gr->images().get(pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("dock_workers",
-			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabDockWorkers),
+			 g_gr->images().get(pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 		if (pd->expedition_started()) {
 			get_tabs()->add
 				("expedition_wares_queue",
-				 g_gr->cataloged_image(ImageCatalog::Key::kDockExpeditionStart),
+				 g_gr->images().get(pic_tab_expedition),
 				 create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
 				 _("Expedition"));
 		}

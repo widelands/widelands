@@ -1,7 +1,7 @@
 -- The Imperial Deep Gold Mine
 
-include "data/scripting/formatting.lua"
-include "data/tribes/scripting/format_help.lua"
+include "scripting/formatting.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_empire")
 

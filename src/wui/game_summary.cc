@@ -36,6 +36,19 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
+namespace {
+static char const * const flag_pictures[] = {
+	"images/players/genstats_enable_plr_01.png",
+	"images/players/genstats_enable_plr_02.png",
+	"images/players/genstats_enable_plr_03.png",
+	"images/players/genstats_enable_plr_04.png",
+	"images/players/genstats_enable_plr_05.png",
+	"images/players/genstats_enable_plr_06.png",
+	"images/players/genstats_enable_plr_07.png",
+	"images/players/genstats_enable_plr_08.png"
+};
+} // namespace
+
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen
@@ -74,16 +87,16 @@ m_game(parent->game())
 	m_continue_button = new UI::Button
 		(buttonBox, "continue_button",
 		 0, 0, 35, 35,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kActionContinue),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/continue.png"),
 		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
 	m_stop_button = new UI::Button
 		(buttonBox, "stop_button",
 		 0, 0, 35, 35,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptionsExit),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
 		_("Exit Game"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
@@ -144,10 +157,8 @@ void GameSummaryScreen::fill_data()
 		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerFlag1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(pes.player - 1 +
-																						static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(flag_pictures[pes.player - 1]);
+		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string team_str =

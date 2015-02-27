@@ -33,8 +33,8 @@ struct EditorInfoTool : public EditorTool {
 	                          EditorInteractive& parent,
 	                          EditorActionArgs& args) override;
 
-	ImageCatalog::Key get_sel_impl() const override {
-		return ImageCatalog::Key::kEditorToolInfo;
+	char const* get_sel_impl() const override {
+		return "images/wui/editor/fsel_editor_info.png";
 	}
 };
 

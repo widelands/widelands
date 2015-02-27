@@ -53,7 +53,7 @@ struct SpinBoxImpl {
 	std::string unit;
 
 	/// Background tile style of buttons.
-	ImageCatalog::Key button_background_;
+	const Image* background;
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
@@ -81,7 +81,7 @@ SpinBox::SpinBox
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
 	 const std::string &       unit,
-	 const ImageCatalog::Key button_background,
+	 const Image* background,
 	 bool                const big,
 	 Align               const alignm)
 	:
@@ -94,7 +94,7 @@ SpinBox::SpinBox
 	sbi->max   = maxval;
 	sbi->unit  = unit;
 
-	sbi->button_background_ = button_background;
+	sbi->background = background;
 	sbi->align      = alignm;
 
 	if (w < 20)
@@ -134,7 +134,7 @@ SpinBox::SpinBox
 		new Button
 			(this, "+",
 			 but_plus_x, 0, butw, butw,
-			 sbi->button_background_,
+			 sbi->background,
 			 "+", _("Increase the value"),
 			 true, false);
 	sbi->butPlus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
@@ -142,7 +142,7 @@ SpinBox::SpinBox
 		new Button
 			(this, "-",
 			 but_minus_x, 0, butw, butw,
-			 sbi->button_background_,
+			 sbi->background,
 			 "-", _("Decrease the value"),
 			 true, false);
 	sbi->butMinus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
@@ -153,7 +153,7 @@ SpinBox::SpinBox
 			new Button
 				(this, "++",
 				 w - 2 * butw, 0, butw * 2, butw,
-				 sbi->button_background_,
+				 sbi->background,
 				 "++", _("Increase the value by 10"),
 				 true, false);
 		sbi->butTenPlus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
@@ -161,7 +161,7 @@ SpinBox::SpinBox
 			new Button
 				(this, "--",
 				 0, 0, butw * 2, butw,
-				 sbi->button_background_,
+				 sbi->background,
 				 "--", _("Decrease the value by 10"),
 				 true, false);
 		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));

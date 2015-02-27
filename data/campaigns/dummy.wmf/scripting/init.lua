@@ -3,8 +3,8 @@
 -- =======================================================================
 set_textdomain("scenario_dummy.wmf")
 
-include "data/scripting/messages.lua"
-include "data/scripting/ui.lua"
+include "scripting/messages.lua"
+include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
 dummy_msg = {

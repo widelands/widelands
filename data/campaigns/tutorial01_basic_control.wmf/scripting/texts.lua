@@ -6,8 +6,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 -- =============
 -- Texts below
@@ -117,7 +117,7 @@ lumberjack_message_05 = {
       paragraphdivider() ..
       listitem_bullet(_[[You try it this time: click on the yellow flag symbol in between the two blue flags we just placed and then click on the]])
    ) ..
-   rt("image=wui/fieldaction/menu_build_flag.png", p(_"build flag symbol.")
+   rt("image=images/wui/fieldaction/menu_build_flag.png", p(_"build flag symbol.")
    ),
    h = 300,
    obj_name = "build_flag_on_road_to_lumberjack",
@@ -216,7 +216,7 @@ tell_about_minimap = {
    body = rt(
       p(_[[Very good. And now about the minimap. You can open it by clicking on the]])
    ) ..
-   rt("image=wui/menus/menu_toggle_minimap.png", p(_[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]])
+   rt("image=images/wui/menus/menu_toggle_minimap.png", p(_[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]])
    ) ..
    rt(
       p(_[[The minimap shows the complete map in miniature. You can directly jump to any field by left-clicking on it. You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]) ..
@@ -250,10 +250,10 @@ order_quarry_recap_how_to_build = {
       p(_[[Make sure that you are showing the building spaces, then just click on the space were you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
       p(_[[You can build four things on fields in Widelands: flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]])
    ) ..
-   rt("image=wui/overlays/big.png", p(_[[Everything can be built on the green house symbol.]])) ..
-   rt("image=wui/overlays/medium.png", p(_[[Everything except for big buildings can be built on a yellow house symbol.]])) ..
-   rt("image=wui/overlays/small.png", p(_[[Red building symbols can only hold small buildings and flags.]])) ..
-   rt("image=wui/overlays/set_flag.png", p(_[[And finally, the yellow flag symbol only allows for flags.]])) ..
+   rt("image=images/wui/overlays/big.png", p(_[[Everything can be built on the green house symbol.]])) ..
+   rt("image=images/wui/overlays/medium.png", p(_[[Everything except for big buildings can be built on a yellow house symbol.]])) ..
+   rt("image=images/wui/overlays/small.png", p(_[[Red building symbols can only hold small buildings and flags.]])) ..
+   rt("image=images/wui/overlays/set_flag.png", p(_[[And finally, the yellow flag symbol only allows for flags.]])) ..
    rt(
       p(_[[If you place something on a field, the surrounding fields might have less space for holding buildings, so choose your fields wisely.]]) ..
       paragraphdivider() ..
@@ -277,10 +277,10 @@ talk_about_roadbuilding_00a = {
    body = rt(
       p(_[[Excellent! Directly after placing the building, you have been switched into road building mode. The new road will start at the flag in front of your newly placed construction site. You can enter road building mode for any flag by left-clicking on a flag and selecting]])
       ) ..
-   rt("image=wui/fieldaction/menu_build_way.png", p(_[[the road building symbol.]])) ..
+   rt("image=images/wui/fieldaction/menu_build_way.png", p(_[[the road building symbol.]])) ..
    rt(
       p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
-   rt("image=wui/menu_abort.png", p(_[[the abort symbol.]])) ..
+   rt("image=images/wui/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
       p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
@@ -294,10 +294,10 @@ talk_about_roadbuilding_00b = {
    body = rt(
       p(_[[Excellent! To enter road building mode for any flag, left-click on a flag and select]])
       ) ..
-   rt("image=wui/fieldaction/menu_build_way.png", p(_[[the road building symbol.]])) ..
+   rt("image=images/wui/fieldaction/menu_build_way.png", p(_[[the road building symbol.]])) ..
    rt(
       p(_[[If you decide that you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
-   rt("image=wui/menu_abort.png", p(_[[the abort symbol.]])) ..
+   rt("image=images/wui/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
       p(_[[Now, about this road. I’ll enter the road building mode and then make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
@@ -319,9 +319,9 @@ talk_about_roadbuilding_02 = {
    body = rt(
       p(_[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]])
    ) ..
-   rt("image=wui/overlays/roadb_green.png", p(_[[The terrain is flat here. Your carriers will be very swift on this terrain.]])) ..
-   rt("image=wui/overlays/roadb_yellow.png", p(_[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]])) ..
-   rt("image=wui/overlays/roadb_red.png", p(_[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]])) ..
+   rt("image=images/wui/overlays/roadb_green.png", p(_[[The terrain is flat here. Your carriers will be very swift on this terrain.]])) ..
+   rt("image=images/wui/overlays/roadb_yellow.png", p(_[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]])) ..
+   rt("image=images/wui/overlays/roadb_red.png", p(_[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]])) ..
    rt(
       p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better. If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
       paragraphdivider() ..
@@ -383,7 +383,7 @@ teaching_about_messages = {
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
    ) ..
-   rt("image=wui/messages/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..
+   rt("image=images/wui/messages/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..
    rt(
       paragraphdivider() ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
@@ -493,8 +493,8 @@ conclude_tutorial = {
       p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]])
    ) ..
-   rt("image=wui/menus/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
-   rt("image=wui/menus/menu_exit_game.png", p(_[[‘Exit Game’ button.]])) ..
+   rt("image=images/wui/menus/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
+   rt("image=images/wui/menus/menu_exit_game.png", p(_[[‘Exit Game’ button.]])) ..
    rt(p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]])) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>"),
    h = 450

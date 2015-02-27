@@ -127,8 +127,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevOwned]->sigclicked.connect
@@ -138,8 +138,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextOwned]->sigclicked.connect
@@ -149,8 +149,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevConstruction]->sigclicked.connect
@@ -160,8 +160,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextConstruction]->sigclicked.connect
@@ -171,8 +171,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevUnproductive]->sigclicked.connect
@@ -182,8 +182,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 ImageCatalog::Key::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextUnproductive]->sigclicked.connect
@@ -442,27 +442,27 @@ void BuildingStatisticsMenu::update() {
 			(Columns::Name, building.get_icon(), building.descname());
 
 		{
-			ImageCatalog::Key image_key = ImageCatalog::Key::kNoValue;
+			char const * pic = "images/novalue.png";
 			if (building.get_ismine()) {
-				image_key = ImageCatalog::Key::kFieldTabBuildMine;
+				pic = "images/wui/fieldaction/menu_tab_buildmine.png";
 			} else if (building.get_isport()) {
-				image_key = ImageCatalog::Key::kFieldTabBuildPort;
+				pic = "images/wui/fieldaction/menu_tab_buildport.png";
 			}
 			else switch (building.get_size()) {
-				case Widelands::BaseImmovable::SMALL:
-					image_key = ImageCatalog::Key::kFieldTabBuildSmall;
-					break;
-				case Widelands::BaseImmovable::MEDIUM:
-					image_key = ImageCatalog::Key::kFieldTabBuildMedium;
-					break;
-				case Widelands::BaseImmovable::BIG:
-					image_key = ImageCatalog::Key::kFieldTabBuildBig;
-					break;
-				default:
-					assert(false);
-					break;
+			case Widelands::BaseImmovable::SMALL:
+				pic = "images/wui/fieldaction/menu_tab_buildsmall.png";
+				break;
+			case Widelands::BaseImmovable::MEDIUM:
+				pic = "images/wui/fieldaction/menu_tab_buildmedium.png";
+				break;
+			case Widelands::BaseImmovable::BIG:
+				pic = "images/wui/fieldaction/menu_tab_buildbig.png";
+				break;
+			default:
+				assert(false);
+				break;
 			}
-			te->set_picture(Columns::Size, g_gr->cataloged_image(image_key));
+			te->set_picture(Columns::Size, g_gr->images().get(pic));
 		}
 
 		if (productionsite && nr_owned) {

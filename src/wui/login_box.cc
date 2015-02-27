@@ -36,13 +36,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	eb_nickname =
 		new UI::EditBox
 			(this, 150, margin, 330, 20,
-			 ImageCatalog::Key::kButton2, UI::Align_Left);
+			 g_gr->images().get("images/ui_basic/but2.png"), UI::Align_Left);
 
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
-			 ImageCatalog::Key::kButton2, UI::Align_Left);
+			 g_gr->images().get("images/ui_basic/but2.png"), UI::Align_Left);
 
 	pwd_warning =
 		new UI::MultilineTextarea
@@ -63,13 +63,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
 		 200, 20,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_login, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_cancel, boost::ref(*this)));
 

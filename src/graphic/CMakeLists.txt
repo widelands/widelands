@@ -38,12 +38,6 @@ wl_library(graphic_image_io
     io_stream
 )
 
-wl_library(graphic_image_catalog
-  SRCS
-    image_catalog.cc
-    image_catalog.h
-)
-
 wl_library(graphic_image_cache
   SRCS
     image_cache.cc
@@ -52,7 +46,6 @@ wl_library(graphic_image_cache
   DEPENDS
     base_log
     base_macros
-    graphic_image_catalog
     graphic_image_io
     graphic_surface
 )

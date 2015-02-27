@@ -1,6 +1,6 @@
-include "data/scripting/lunit.lua"
-include "data/scripting/coroutine.lua"
-include "data/scripting/ui.lua"
+include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
 
 -- This is a test case for bug 1234058: there is constant demand for logs,
 -- so the expedition initially never got any.

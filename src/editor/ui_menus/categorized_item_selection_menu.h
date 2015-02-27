@@ -81,7 +81,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
 	tool_(tool)
 {
-	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0);
+	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0, nullptr);
 	add(tab_panel, UI::Align_Center);
 
 	for (uint32_t category_index = 0; category_index < categories.get_nitems(); ++category_index) {

@@ -2,12 +2,12 @@
 --                      Scenario Trident of Fire
 -- =======================================================================
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/table.lua"
-include "data/scripting/infrastructure.lua"
-include "data/scripting/objective_utils.lua"
-include "data/scripting/ui.lua"
-include "data/scripting/set.lua"
+include "scripting/coroutine.lua"
+include "scripting/table.lua"
+include "scripting/infrastructure.lua"
+include "scripting/objective_utils.lua"
+include "scripting/ui.lua"
+include "scripting/set.lua"
 
 game = wl.Game()
 map = game.map

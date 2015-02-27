@@ -42,8 +42,8 @@ struct EditorDrawTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Key get_sel_impl() const override {
-		return ImageCatalog::Key::kUnknownImage;
+	char const * get_sel_impl() const override {
+		return "images/ui_basic/fsel.png";
 	}
 
 	void add_action(EditorToolAction ac, EditorActionArgs & args);

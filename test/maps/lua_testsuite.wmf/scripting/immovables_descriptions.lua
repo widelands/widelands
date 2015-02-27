@@ -93,7 +93,7 @@ function test_descr:test_enhancement()
 end
 
 function test_descr:test_icon_name()
-   assert_equal("data/tribes/barbarians/headquarters/menu.png", egbase:get_building_description("barbarians","headquarters").icon_name)
+   assert_equal("tribes/barbarians/headquarters/menu.png", egbase:get_building_description("barbarians","headquarters").icon_name)
 end
 
 function test_descr:test_ismine()
@@ -347,7 +347,7 @@ function test_descr:test_consumers()
 end
 
 function test_descr:test_icon_name()
-   assert_equal("data/tribes/barbarians/coal/menu.png", egbase:get_ware_description("barbarians","coal").icon_name)
+   assert_equal("tribes/barbarians/coal/menu.png", egbase:get_ware_description("barbarians","coal").icon_name)
 end
 
 function test_descr:test_producers()
@@ -389,7 +389,7 @@ function test_descr:test_becomes()
 end
 
 function test_descr:test_icon_name()
-   assert_equal("data/tribes/barbarians/miner//menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
+   assert_equal("tribes/barbarians/miner//menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
 end
 
 function test_descr:test_needed_experience()

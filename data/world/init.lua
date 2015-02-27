@@ -2,183 +2,183 @@ world = wl.World()
 
 set_textdomain("world")
 
-include "data/world/resources/init.lua"
-include "data/world/terrains/init.lua"
+include "world/resources/init.lua"
+include "world/terrains/init.lua"
 
 
 world:new_editor_immovable_category{
    name = "miscellaneous",
    descname = _ "Miscellaneous",
-   picture = "data/world/immovables/ruin5/idle.png",
+   picture = "world/immovables/ruin5/idle.png",
 }
 
 world:new_editor_immovable_category{
    name = "plants",
    descname = _ "Plants",
-   picture = "data/world/immovables/cactus3/idle.png",
+   picture = "world/immovables/cactus3/idle.png",
 }
 
 world:new_editor_immovable_category{
    name = "standing_stones",
    descname = _ "Standing Stones",
-   picture = "data/world/immovables/standing_stones/standing_stone4_desert/idle.png",
+   picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
 }
 
 world:new_editor_immovable_category{
    name = "stones",
    descname = _ "Stones",
-   picture = "data/world/immovables/stones/greenland_stones6/idle.png",
+   picture = "world/immovables/stones/greenland_stones6/idle.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_coniferous",
    descname = _ "Coniferous Trees",
-   picture = "data/world/immovables/trees/spruce/old/idle_0.png",
+   picture = "world/immovables/trees/spruce/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_dead",
    descname = _ "Dead Trees",
-   picture = "data/world/immovables/trees/deadtree2/idle.png",
+   picture = "world/immovables/trees/deadtree2/idle.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_deciduous",
    descname = _ "Deciduous Trees",
-   picture = "data/world/immovables/trees/alder/old/idle_0.png",
+   picture = "world/immovables/trees/alder/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_palm",
    descname = _ "Palm Trees",
-   picture = "data/world/immovables/trees/palm_borassus/old/idle_0.png",
+   picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_wasteland",
    descname = _ "Wasteland Trees",
-   picture = "data/world/immovables/trees/umbrella_red/old/idle_0.png",
+   picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
 }
 
-include "data/world/immovables/grass1/init.lua"
-include "data/world/immovables/bush1/init.lua"
-include "data/world/immovables/bush2/init.lua"
-include "data/world/immovables/bush3/init.lua"
-include "data/world/immovables/bush4/init.lua"
-include "data/world/immovables/bush5/init.lua"
-include "data/world/immovables/cactus1/init.lua"
-include "data/world/immovables/cactus2/init.lua"
-include "data/world/immovables/cactus3/init.lua"
-include "data/world/immovables/cactus4/init.lua"
-include "data/world/immovables/grass2/init.lua"
-include "data/world/immovables/grass3/init.lua"
-include "data/world/immovables/manmade/bar-ruin00/init.lua"
-include "data/world/immovables/manmade/bar-ruin01/init.lua"
-include "data/world/immovables/manmade/bar-ruin02/init.lua"
-include "data/world/immovables/manmade/bar-ruin03/init.lua"
-include "data/world/immovables/manmade/debris00/init.lua"
-include "data/world/immovables/manmade/debris01/init.lua"
-include "data/world/immovables/manmade/debris02/init.lua"
-include "data/world/immovables/manmade/snowman/init.lua"
-include "data/world/immovables/mushroom1/init.lua"
-include "data/world/immovables/mushroom2/init.lua"
-include "data/world/immovables/pebble1/init.lua"
-include "data/world/immovables/pebble2/init.lua"
-include "data/world/immovables/pebble3/init.lua"
-include "data/world/immovables/pebble4/init.lua"
-include "data/world/immovables/pebble5/init.lua"
-include "data/world/immovables/pebble6/init.lua"
-include "data/world/immovables/ruin1/init.lua"
-include "data/world/immovables/ruin2/init.lua"
-include "data/world/immovables/ruin3/init.lua"
-include "data/world/immovables/ruin4/init.lua"
-include "data/world/immovables/ruin5/init.lua"
-include "data/world/immovables/skeleton1/init.lua"
-include "data/world/immovables/skeleton2/init.lua"
-include "data/world/immovables/skeleton3/init.lua"
-include "data/world/immovables/skeleton4/init.lua"
-include "data/world/immovables/track_winter/init.lua"
+include "world/immovables/grass1/init.lua"
+include "world/immovables/bush1/init.lua"
+include "world/immovables/bush2/init.lua"
+include "world/immovables/bush3/init.lua"
+include "world/immovables/bush4/init.lua"
+include "world/immovables/bush5/init.lua"
+include "world/immovables/cactus1/init.lua"
+include "world/immovables/cactus2/init.lua"
+include "world/immovables/cactus3/init.lua"
+include "world/immovables/cactus4/init.lua"
+include "world/immovables/grass2/init.lua"
+include "world/immovables/grass3/init.lua"
+include "world/immovables/manmade/bar-ruin00/init.lua"
+include "world/immovables/manmade/bar-ruin01/init.lua"
+include "world/immovables/manmade/bar-ruin02/init.lua"
+include "world/immovables/manmade/bar-ruin03/init.lua"
+include "world/immovables/manmade/debris00/init.lua"
+include "world/immovables/manmade/debris01/init.lua"
+include "world/immovables/manmade/debris02/init.lua"
+include "world/immovables/manmade/snowman/init.lua"
+include "world/immovables/mushroom1/init.lua"
+include "world/immovables/mushroom2/init.lua"
+include "world/immovables/pebble1/init.lua"
+include "world/immovables/pebble2/init.lua"
+include "world/immovables/pebble3/init.lua"
+include "world/immovables/pebble4/init.lua"
+include "world/immovables/pebble5/init.lua"
+include "world/immovables/pebble6/init.lua"
+include "world/immovables/ruin1/init.lua"
+include "world/immovables/ruin2/init.lua"
+include "world/immovables/ruin3/init.lua"
+include "world/immovables/ruin4/init.lua"
+include "world/immovables/ruin5/init.lua"
+include "world/immovables/skeleton1/init.lua"
+include "world/immovables/skeleton2/init.lua"
+include "world/immovables/skeleton3/init.lua"
+include "world/immovables/skeleton4/init.lua"
+include "world/immovables/track_winter/init.lua"
 
 -- Standing Stones
-include "data/world/immovables/standing_stones/standing_stone1_desert/init.lua"
-include "data/world/immovables/standing_stones/standing_stone1_summer/init.lua"
-include "data/world/immovables/standing_stones/standing_stone1_wasteland/init.lua"
-include "data/world/immovables/standing_stones/standing_stone1_winter/init.lua"
-include "data/world/immovables/standing_stones/standing_stone2_desert/init.lua"
-include "data/world/immovables/standing_stones/standing_stone2_summer/init.lua"
-include "data/world/immovables/standing_stones/standing_stone2_wasteland/init.lua"
-include "data/world/immovables/standing_stones/standing_stone2_winter/init.lua"
-include "data/world/immovables/standing_stones/standing_stone3_desert/init.lua"
-include "data/world/immovables/standing_stones/standing_stone3_summer/init.lua"
-include "data/world/immovables/standing_stones/standing_stone3_wasteland/init.lua"
-include "data/world/immovables/standing_stones/standing_stone3_winter/init.lua"
-include "data/world/immovables/standing_stones/standing_stone4_desert/init.lua"
-include "data/world/immovables/standing_stones/standing_stone4_summer/init.lua"
-include "data/world/immovables/standing_stones/standing_stone4_wasteland/init.lua"
-include "data/world/immovables/standing_stones/standing_stone4_winter/init.lua"
-include "data/world/immovables/standing_stones/standing_stone5_desert/init.lua"
-include "data/world/immovables/standing_stones/standing_stone5_summer/init.lua"
-include "data/world/immovables/standing_stones/standing_stone5_wasteland/init.lua"
-include "data/world/immovables/standing_stones/standing_stone5_winter/init.lua"
-include "data/world/immovables/standing_stones/standing_stone6/init.lua"
-include "data/world/immovables/standing_stones/standing_stone7/init.lua"
+include "world/immovables/standing_stones/standing_stone1_desert/init.lua"
+include "world/immovables/standing_stones/standing_stone1_summer/init.lua"
+include "world/immovables/standing_stones/standing_stone1_wasteland/init.lua"
+include "world/immovables/standing_stones/standing_stone1_winter/init.lua"
+include "world/immovables/standing_stones/standing_stone2_desert/init.lua"
+include "world/immovables/standing_stones/standing_stone2_summer/init.lua"
+include "world/immovables/standing_stones/standing_stone2_wasteland/init.lua"
+include "world/immovables/standing_stones/standing_stone2_winter/init.lua"
+include "world/immovables/standing_stones/standing_stone3_desert/init.lua"
+include "world/immovables/standing_stones/standing_stone3_summer/init.lua"
+include "world/immovables/standing_stones/standing_stone3_wasteland/init.lua"
+include "world/immovables/standing_stones/standing_stone3_winter/init.lua"
+include "world/immovables/standing_stones/standing_stone4_desert/init.lua"
+include "world/immovables/standing_stones/standing_stone4_summer/init.lua"
+include "world/immovables/standing_stones/standing_stone4_wasteland/init.lua"
+include "world/immovables/standing_stones/standing_stone4_winter/init.lua"
+include "world/immovables/standing_stones/standing_stone5_desert/init.lua"
+include "world/immovables/standing_stones/standing_stone5_summer/init.lua"
+include "world/immovables/standing_stones/standing_stone5_wasteland/init.lua"
+include "world/immovables/standing_stones/standing_stone5_winter/init.lua"
+include "world/immovables/standing_stones/standing_stone6/init.lua"
+include "world/immovables/standing_stones/standing_stone7/init.lua"
 
 -- Stones
-include "data/world/immovables/stones/blackland_stones1/init.lua"
-include "data/world/immovables/stones/blackland_stones2/init.lua"
-include "data/world/immovables/stones/blackland_stones3/init.lua"
-include "data/world/immovables/stones/blackland_stones4/init.lua"
-include "data/world/immovables/stones/blackland_stones5/init.lua"
-include "data/world/immovables/stones/blackland_stones6/init.lua"
-include "data/world/immovables/stones/desert_stones1/init.lua"
-include "data/world/immovables/stones/desert_stones2/init.lua"
-include "data/world/immovables/stones/desert_stones3/init.lua"
-include "data/world/immovables/stones/desert_stones4/init.lua"
-include "data/world/immovables/stones/desert_stones5/init.lua"
-include "data/world/immovables/stones/desert_stones6/init.lua"
-include "data/world/immovables/stones/greenland_stones1/init.lua"
-include "data/world/immovables/stones/greenland_stones2/init.lua"
-include "data/world/immovables/stones/greenland_stones3/init.lua"
-include "data/world/immovables/stones/greenland_stones4/init.lua"
-include "data/world/immovables/stones/greenland_stones5/init.lua"
-include "data/world/immovables/stones/greenland_stones6/init.lua"
-include "data/world/immovables/stones/winterland_stones1/init.lua"
-include "data/world/immovables/stones/winterland_stones2/init.lua"
-include "data/world/immovables/stones/winterland_stones3/init.lua"
-include "data/world/immovables/stones/winterland_stones4/init.lua"
-include "data/world/immovables/stones/winterland_stones5/init.lua"
-include "data/world/immovables/stones/winterland_stones6/init.lua"
+include "world/immovables/stones/blackland_stones1/init.lua"
+include "world/immovables/stones/blackland_stones2/init.lua"
+include "world/immovables/stones/blackland_stones3/init.lua"
+include "world/immovables/stones/blackland_stones4/init.lua"
+include "world/immovables/stones/blackland_stones5/init.lua"
+include "world/immovables/stones/blackland_stones6/init.lua"
+include "world/immovables/stones/desert_stones1/init.lua"
+include "world/immovables/stones/desert_stones2/init.lua"
+include "world/immovables/stones/desert_stones3/init.lua"
+include "world/immovables/stones/desert_stones4/init.lua"
+include "world/immovables/stones/desert_stones5/init.lua"
+include "world/immovables/stones/desert_stones6/init.lua"
+include "world/immovables/stones/greenland_stones1/init.lua"
+include "world/immovables/stones/greenland_stones2/init.lua"
+include "world/immovables/stones/greenland_stones3/init.lua"
+include "world/immovables/stones/greenland_stones4/init.lua"
+include "world/immovables/stones/greenland_stones5/init.lua"
+include "world/immovables/stones/greenland_stones6/init.lua"
+include "world/immovables/stones/winterland_stones1/init.lua"
+include "world/immovables/stones/winterland_stones2/init.lua"
+include "world/immovables/stones/winterland_stones3/init.lua"
+include "world/immovables/stones/winterland_stones4/init.lua"
+include "world/immovables/stones/winterland_stones5/init.lua"
+include "world/immovables/stones/winterland_stones6/init.lua"
 
 -- Trees
-include "data/world/immovables/trees/alder/init.lua"
-include "data/world/immovables/trees/aspen/init.lua"
-include "data/world/immovables/trees/beech/init.lua"
-include "data/world/immovables/trees/birch/init.lua"
-include "data/world/immovables/trees/cirrus/init.lua"
-include "data/world/immovables/trees/deadtree1/init.lua"
-include "data/world/immovables/trees/deadtree2/init.lua"
-include "data/world/immovables/trees/deadtree3/init.lua"
-include "data/world/immovables/trees/deadtree4/init.lua"
-include "data/world/immovables/trees/deadtree5/init.lua"
-include "data/world/immovables/trees/deadtree6/init.lua"
-include "data/world/immovables/trees/fallentree/init.lua"
-include "data/world/immovables/trees/larch/init.lua"
-include "data/world/immovables/trees/liana/init.lua"
-include "data/world/immovables/trees/maple/init.lua"
-include "data/world/immovables/trees/mushroom_dark/init.lua"
-include "data/world/immovables/trees/mushroom_green/init.lua"
-include "data/world/immovables/trees/mushroom_red/init.lua"
-include "data/world/immovables/trees/oak/init.lua"
-include "data/world/immovables/trees/palm_borassus/init.lua"
-include "data/world/immovables/trees/palm_coconut/init.lua"
-include "data/world/immovables/trees/palm_date/init.lua"
-include "data/world/immovables/trees/palm_oil/init.lua"
-include "data/world/immovables/trees/palm_roystonea/init.lua"
-include "data/world/immovables/trees/rowan/init.lua"
-include "data/world/immovables/trees/spruce/init.lua"
-include "data/world/immovables/trees/twine/init.lua"
-include "data/world/immovables/trees/umbrella_green/init.lua"
-include "data/world/immovables/trees/umbrella_red/init.lua"
+include "world/immovables/trees/alder/init.lua"
+include "world/immovables/trees/aspen/init.lua"
+include "world/immovables/trees/beech/init.lua"
+include "world/immovables/trees/birch/init.lua"
+include "world/immovables/trees/cirrus/init.lua"
+include "world/immovables/trees/deadtree1/init.lua"
+include "world/immovables/trees/deadtree2/init.lua"
+include "world/immovables/trees/deadtree3/init.lua"
+include "world/immovables/trees/deadtree4/init.lua"
+include "world/immovables/trees/deadtree5/init.lua"
+include "world/immovables/trees/deadtree6/init.lua"
+include "world/immovables/trees/fallentree/init.lua"
+include "world/immovables/trees/larch/init.lua"
+include "world/immovables/trees/liana/init.lua"
+include "world/immovables/trees/maple/init.lua"
+include "world/immovables/trees/mushroom_dark/init.lua"
+include "world/immovables/trees/mushroom_green/init.lua"
+include "world/immovables/trees/mushroom_red/init.lua"
+include "world/immovables/trees/oak/init.lua"
+include "world/immovables/trees/palm_borassus/init.lua"
+include "world/immovables/trees/palm_coconut/init.lua"
+include "world/immovables/trees/palm_date/init.lua"
+include "world/immovables/trees/palm_oil/init.lua"
+include "world/immovables/trees/palm_roystonea/init.lua"
+include "world/immovables/trees/rowan/init.lua"
+include "world/immovables/trees/spruce/init.lua"
+include "world/immovables/trees/twine/init.lua"
+include "world/immovables/trees/umbrella_green/init.lua"
+include "world/immovables/trees/umbrella_red/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
@@ -193,19 +193,19 @@ function add_walking_animations(table, dirname, basename, hotspot, fps)
    end
 end
 
-include "data/world/critters/badger/init.lua"
-include "data/world/critters/brownbear/init.lua"
-include "data/world/critters/bunny/init.lua"
-include "data/world/critters/chamois/init.lua"
-include "data/world/critters/deer/init.lua"
-include "data/world/critters/duck/init.lua"
-include "data/world/critters/elk/init.lua"
-include "data/world/critters/fox/init.lua"
-include "data/world/critters/lynx/init.lua"
-include "data/world/critters/marten/init.lua"
-include "data/world/critters/reindeer/init.lua"
-include "data/world/critters/sheep/init.lua"
-include "data/world/critters/stag/init.lua"
-include "data/world/critters/wildboar/init.lua"
-include "data/world/critters/wisent/init.lua"
-include "data/world/critters/wolf/init.lua"
+include "world/critters/badger/init.lua"
+include "world/critters/brownbear/init.lua"
+include "world/critters/bunny/init.lua"
+include "world/critters/chamois/init.lua"
+include "world/critters/deer/init.lua"
+include "world/critters/duck/init.lua"
+include "world/critters/elk/init.lua"
+include "world/critters/fox/init.lua"
+include "world/critters/lynx/init.lua"
+include "world/critters/marten/init.lua"
+include "world/critters/reindeer/init.lua"
+include "world/critters/sheep/init.lua"
+include "world/critters/stag/init.lua"
+include "world/critters/wildboar/init.lua"
+include "world/critters/wisent/init.lua"
+include "world/critters/wolf/init.lua"

@@ -132,11 +132,11 @@ int32_t FullscreenMenuCampaignSelect::get_campaign()
 }
 
 /// Pictorial descriptions of difficulty levels.
-static const std::vector<ImageCatalog::Key> difficulty_picture_keys = {
-	ImageCatalog::Key::kNoValue,
-	ImageCatalog::Key::kFullscreenDifficulty2,
-	ImageCatalog::Key::kFullscreenDifficulty3,
-	ImageCatalog::Key::kFullscreenDifficulty4
+static char const * const difficulty_picture_filenames[] = {
+	"images/novalue.png",
+	"images/ui_fsmenu/easy.png",
+	"images/ui_fsmenu/challenging.png",
+	"images/ui_fsmenu/hard.png"
 };
 
 
@@ -191,7 +191,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 	m_table.clear();
 
 	// Read in the campaign config
-	Profile prof("data/campaigns/campaigns.conf", nullptr, "maps");
+	Profile prof("campaigns/campaigns.conf", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
@@ -220,7 +220,12 @@ void FullscreenMenuCampaignSelect::fill_table()
 		if (c.get_bool(csection.c_str())) {
 
 			uint32_t difficulty = s.get_int(cdifficulty.c_str());
-			if (difficulty >= difficulty_picture_keys.size()) {
+			if
+				(sizeof (difficulty_picture_filenames)
+				 /
+				 sizeof(*difficulty_picture_filenames)
+				 <=
+				 difficulty) {
 				difficulty = 0;
 			}
 
@@ -240,7 +245,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 			m_campaigns_data.push_back(campaign_data);
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
-			tableEntry.set_picture(0, g_gr->cataloged_image(difficulty_picture_keys.at(difficulty)));
+			tableEntry.set_picture(0, g_gr->images().get(difficulty_picture_filenames[difficulty]));
 			tableEntry.set_string(1, campaign_data.tribename);
 			tableEntry.set_string(2, campaign_data.name);
 		}
@@ -448,7 +453,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 	Profile* prof;
 	std::string campsection;
 	if (m_is_tutorial) {
-		prof = new Profile("data/campaigns/tutorials.conf", nullptr, "maps");
+		prof = new Profile("campaigns/tutorials.conf", nullptr, "maps");
 
 		// Set subtitle of the page
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit \"OK\".");
@@ -460,7 +465,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		campsection = "tutorials";
 
 	} else {
-		prof = new Profile("data/campaigns/campaigns.conf", nullptr, "maps");
+		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
 
 		Section & global_s = prof->get_safe_section("global");
 
@@ -499,9 +504,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(1,
-										  g_gr->cataloged_image(ImageCatalog::Key::kFilesWLMap),
-										  scenario_data.name);
+			tableEntry.set_picture(1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
 		}
 
 		// Increase counter & mapsection

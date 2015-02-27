@@ -20,11 +20,11 @@
 #include "ui_fsmenu/main_menu.h"
 
 FullscreenMenuMainMenu::FullscreenMenuMainMenu():
-	FullscreenMenuMainMenu(ImageCatalog::Key::kFullscreen)
+	FullscreenMenuMainMenu("images/ui_fsmenu/ui_fsmenu.jpg")
 	{}
 
-FullscreenMenuMainMenu::FullscreenMenuMainMenu(ImageCatalog::Key background_image_key):
-	FullscreenMenuBase(background_image_key),
+FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_image):
+	FullscreenMenuBase(background_image),
 
 	// Values for alignment and size
 	m_box_x(get_w() * 13 / 40),
@@ -33,5 +33,5 @@ FullscreenMenuMainMenu::FullscreenMenuMainMenu(ImageCatalog::Key background_imag
 	m_buth(get_h() * 9 / 200),
 	m_title_y(get_h() * 3 / 40),
 	m_padding(m_buth / 3),
-	m_button_background(ImageCatalog::Key::kButton3)
+	m_button_background("images/ui_basic//but3.png")
 {}

@@ -22,12 +22,12 @@ function _array_contains(list, string)
 end
 
 function path_test:test_list_directory()
-   assert_true(_array_contains(path.list_directory("/"), "data"))
-   assert_false(_array_contains(path.list_directory("/", "[^d].*"), "data"))
-   local specific = path.list_directory("/data/images/ui_basic", "cursor\\.png")
+   assert_true(_array_contains(path.list_directory("/"), "world"))
+   assert_false(_array_contains(path.list_directory("/", "[^w].*"), "world"))
+   local specific = path.list_directory("/images/ui_basic", "cursor\\.png")
    assert_equal(#specific, 1)
-   assert_equal(specific[1], "data/images/ui_basic/cursor.png")
-   local no_slash = path.list_directory("data/images/ui_basic", "cursor\\.png")
+   assert_equal(specific[1], "images/ui_basic/cursor.png")
+   local no_slash = path.list_directory("images/ui_basic", "cursor\\.png")
    assert_equal(#no_slash, 1)
-   assert_equal(no_slash[1], "data/images/ui_basic/cursor.png")
+   assert_equal(no_slash[1], "images/ui_basic/cursor.png")
 end

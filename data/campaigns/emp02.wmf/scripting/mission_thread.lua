@@ -2,7 +2,7 @@
 --                              Mission Threads
 -- =======================================================================
 
-include "data/scripting/messages.lua"
+include "scripting/messages.lua"
 
 function building_materials()
    sleep(200)

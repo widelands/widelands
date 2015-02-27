@@ -41,8 +41,6 @@ class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuCampaignSelect();
 
-	static constexpr int kMaxDifficulty = 4;
-
 	int32_t get_campaign();
 
 protected:

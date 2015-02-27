@@ -43,23 +43,23 @@ InteractiveSpectator::InteractiveSpectator
 	:
 	InteractiveGameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
 
-#define INIT_BTN(image_key, name, tooltip)                            \
+#define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->cataloged_image(image_key),                      \
+ g_gr->images().get("images/wui/menus/" picture ".png"),                      \
  tooltip                                                                      \
 
 	m_toggle_chat
-		(INIT_BTN(ImageCatalog::Key::kMenuChat, "chat", _("Chat"))),
+		(INIT_BTN("menu_chat", "chat", _("Chat"))),
 	m_exit
-		(INIT_BTN(ImageCatalog::Key::kMenuOptionsExit, "exit_replay", _("Exit Replay"))),
+		(INIT_BTN("menu_exit_game", "exit_replay", _("Exit Replay"))),
 	m_save
-		(INIT_BTN(ImageCatalog::Key::kMenuOptionsSave, "save_game", _("Save Game"))),
+		(INIT_BTN("menu_save_game", "save_game", _("Save Game"))),
 	m_toggle_options_menu
-		(INIT_BTN(ImageCatalog::Key::kMenuOptions, "options_menu", _("Options"))),
+		(INIT_BTN("menu_options_menu", "options_menu", _("Options"))),
 	m_toggle_statistics
-		(INIT_BTN(ImageCatalog::Key::kMenuStatsGeneral, "general_stats", _("Statistics"))),
+		(INIT_BTN("menu_general_stats", "general_stats", _("Statistics"))),
 	m_toggle_minimap
-		(INIT_BTN(ImageCatalog::Key::kMenuMinimap, "minimap", _("Minimap")))
+		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap")))
 {
 	m_toggle_chat.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
 	m_exit.sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));

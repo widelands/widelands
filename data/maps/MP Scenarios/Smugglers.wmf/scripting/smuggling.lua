@@ -2,7 +2,7 @@
 --                              Smuggling logic
 -- =======================================================================
 
-include "data/scripting/messages.lua"
+include "scripting/messages.lua"
 
 -- =================
 -- Helper functions

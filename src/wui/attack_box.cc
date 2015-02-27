@@ -69,7 +69,7 @@ UI::Slider & AttackBox::add_slider
 	 uint32_t          width,
 	 uint32_t          height,
 	 uint32_t          min, uint32_t max, uint32_t initial,
-	 ImageCatalog::Key image_key,
+	 char      const * picname,
 	 char      const * hint)
 {
 	UI::HorizontalSlider & result =
@@ -78,7 +78,7 @@ UI::Slider & AttackBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 image_key,
+			 g_gr->images().get(picname),
 			 hint);
 	parent.add(&result, UI::Box::AlignCenter);
 	return result;
@@ -111,7 +111,7 @@ UI::Button & AttackBox::add_button
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
-			 ImageCatalog::Key::kButton2,
+			 g_gr->images().get("images/ui_basic/but2.png"),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
@@ -176,7 +176,7 @@ void AttackBox::init() {
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
-			 ImageCatalog::Key::kButton2,
+			 "images/ui_basic/but2.png",
 			 _("Number of soldiers"));
 
 	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));

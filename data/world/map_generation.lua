@@ -1,5 +1,5 @@
 -- This file is only used by the random map generator. It is not part of the
--- world definition (i.e. it is not sourced by data/world/init.lua) and is only
+-- world definition (i.e. it is not sourced by world/init.lua) and is only
 -- loaded when the random map generator is initialized in the Editor.
 
 

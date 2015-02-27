@@ -1,4 +1,4 @@
-include "data/scripting/messages.lua"
+include "scripting/messages.lua"
 
 -- RST
 -- win_condition_functions.lua

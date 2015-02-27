@@ -4,10 +4,10 @@
 -- This tests saving and loading of various Lua objects in the global
 -- environment.
 
-include "data/scripting/lunit.lua"
-include "data/scripting/coroutine.lua"
+include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
 
-include "data/scripting/set.lua"
+include "scripting/set.lua"
 
 global_value_1 = false
 global_table = { 1 }

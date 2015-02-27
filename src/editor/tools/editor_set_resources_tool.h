@@ -42,8 +42,8 @@ struct EditorSetResourcesTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Key get_sel_impl() const override {
-		return ImageCatalog::Key::kEditorToolResourcesSet;
+	char const * get_sel_impl() const override {
+		return "images/wui/editor/fsel_editor_set_resources.png";
 	}
 
 	uint8_t get_set_to() const       {return m_set_to;}

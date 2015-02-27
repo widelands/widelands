@@ -45,11 +45,24 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
 
+namespace {
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool /* autolaunch */)
 	:
-	FullscreenMenuBase(ImageCatalog::Key::kFullscreen),
+	FullscreenMenuBase(),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -59,22 +72,22 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_select_map
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10 + m_buth, m_butw, m_buth,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 17 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 9 / 10, m_butw, m_buth,
-		 ImageCatalog::Key::kButton2,
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -126,7 +139,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_ok.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::start_clicked, boost::ref(*this)));
-
 	m_lua = new LuaInterface();
 	m_win_condition_scripts = m_settings->settings().win_condition_scripts;
 	m_cur_wincondition = -1;
@@ -147,15 +159,14 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 
 	uint32_t y = get_h() * 3 / 10 - m_buth;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(i + static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(player_pictures_small[i]);
+		assert(player_image);
 
 		m_pos[i] =
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
-				 ImageCatalog::Key::kButton1,
+				 g_gr->images().get("images/ui_basic/but1.png"),
 				 player_image,
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
@@ -327,7 +338,6 @@ void FullscreenMenuLaunchSPG::select_map()
 {
 	if (!m_settings->can_change_map())
 		return;
-
 	FullscreenMenuMapSelect msm(m_settings, nullptr);
 	int code = msm.run();
 

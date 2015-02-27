@@ -2,12 +2,12 @@
 --                         An endless game without rules
 -- =======================================================================
 
-include "data/scripting/coroutine.lua" -- for sleep
-include "data/scripting/win_condition_functions.lua"
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "data/scripting/win_condition_texts.lua"
+include "scripting/win_condition_texts.lua"
 
 local wc_name    = _ "Endless Game (no fog)"
 local wc_desc    = _ "This is an endless game without rules. Fog of war is disabled."

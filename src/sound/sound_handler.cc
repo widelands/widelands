@@ -263,10 +263,9 @@ void SoundHandler::load_fx_if_needed
 	// So, I moved over the duck's sounds from 'world'.
 
 	// filename is relative to dir.
-	const std::string full_path = "data/sound/" + dir + (dir.empty() ? "" : "/") + filename;
+	const std::string full_path = "sound/" + dir + (dir.empty() ? "" : "/") + filename;
 	const std::string basename = FileSystem::fs_filename(full_path.c_str());
 	const std::string dirname = FileSystem::fs_dirname(full_path);
-
 	boost::regex re(basename + "_\\d+\\.ogg");
 	files = filter(g_fs->list_directory(dirname), [&re](const std::string& fn) {
 		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
@@ -532,7 +531,7 @@ void SoundHandler::register_song
 	FilenameSet files;
 
 	// NOCOM(GunChleoc): Review this. All music has to sit in this directory and its subdirectories now.
-	files = filter(g_fs->list_directory("data/music/" + dir), [&basename](const std::string& fn) {
+	files = filter(g_fs->list_directory("music/" + dir), [&basename](const std::string& fn) {
 		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
 		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});

@@ -40,7 +40,8 @@ struct SpinBox : public Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 const std::string & unit             = std::string(),
-		 const ImageCatalog::Key button_background = ImageCatalog::Key::kButton2,
+		 const Image* buttonbackground =
+		 	g_gr->images().get("images/ui_basic/but2.png"),
 		 bool big = false,
 		 Align align = Align_Center);
 	~SpinBox();

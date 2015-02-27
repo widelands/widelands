@@ -359,10 +359,10 @@ void AbstractWaresDisplay::draw_ware
 	}
 
 	//  draw a background
-	const Image* bgpic = draw_selected ?
-									g_gr->cataloged_image(ImageCatalog::Key::kBackgroundButtonFlatSelected):
-									g_gr->cataloged_image(ImageCatalog::Key::kBackgroundButtonFlat);
-
+	const Image* bgpic =
+		g_gr->images().get(draw_selected ?
+									 "images/wui/ware_list_bg_selected.png" :
+									 "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);

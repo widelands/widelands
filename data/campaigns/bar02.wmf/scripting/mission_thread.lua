@@ -2,7 +2,7 @@
 --                          Various mission threads
 -- =======================================================================
 
-include "data/scripting/messages.lua"
+include "scripting/messages.lua"
 
 game = wl.Game()
 -- Mountain and frontier fields

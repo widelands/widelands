@@ -100,12 +100,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_road_build_player(0),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-	  m_workarea_pics{g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea123),
-							g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea23),
-							g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea3),
-							g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea12),
-							g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea2),
-							g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea1)} {
+     m_workarea_pics{g_gr->images().get("images/wui/overlays/workarea123.png"),
+                     g_gr->images().get("images/wui/overlays/workarea23.png"),
+                     g_gr->images().get("images/wui/overlays/workarea3.png"),
+                     g_gr->images().get("images/wui/overlays/workarea12.png"),
+                     g_gr->images().get("images/wui/overlays/workarea2.png"),
+                     g_gr->images().get("images/wui/overlays/workarea1.png")} {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -134,7 +134,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	m_sel.pic = g_gr->cataloged_image(ImageCatalog::Key::kSelect);
+	m_sel.pic = g_gr->images().get("images/ui_basic/fsel.png");
 
 	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand
@@ -224,12 +224,12 @@ void InteractiveBase::set_sel_radius(const uint32_t n) {
 /*
  * Set/Unset sel picture
  */
-void InteractiveBase::set_sel_picture(ImageCatalog::Key key) {
-	m_sel.pic = g_gr->cataloged_image(key);
+void InteractiveBase::set_sel_picture(const char * const file) {
+	m_sel.pic = g_gr->images().get(file);
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture(ImageCatalog::Key::kSelect);
+	set_sel_picture("images/ui_basic/fsel.png");
 }
 
 
@@ -815,22 +815,22 @@ void InteractiveBase::roadb_add_overlay()
 		else
 			slope = endpos.field->get_height() - neighb.field->get_height();
 
-		const Image* road_image = nullptr;
+		const char * name = nullptr;
 
 		if (slope <= -4)
-			road_image = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingSteepDecending);
+			name = "images/wui/overlays/roadb_reddown.png";
 		else if (slope <= -2)
-			road_image = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingDecending);
+			name = "images/wui/overlays/roadb_yellowdown.png";
 		else if (slope < 2)
-			road_image = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingLevel);
+			name = "images/wui/overlays/roadb_green.png";
 		else if (slope < 4)
-			road_image = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingAscending);
+			name = "images/wui/overlays/roadb_yellow.png";
 		else
-			road_image = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingSteepAscending);
+			name = "images/wui/overlays/roadb_red.png";
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
-			 road_image,
+			 g_gr->images().get(name),
 			 7,
 			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);

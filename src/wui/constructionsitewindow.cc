@@ -27,6 +27,8 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
+
 /**
  * Status window for construction sites.
  */
@@ -69,10 +71,8 @@ ConstructionSiteWindow::ConstructionSiteWindow
 			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
 			 UI::Box::AlignLeft);
 
-	get_tabs()->add("wares",
-						 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWares),
-						 &box,
-						 _("Building materials"));
+
+	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
 
 

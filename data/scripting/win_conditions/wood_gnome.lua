@@ -2,13 +2,13 @@
 --                       Wood Gnome win condition
 -- =======================================================================
 
-include "data/scripting/coroutine.lua" -- for sleep
-include "data/scripting/table.lua"
-include "data/scripting/win_condition_functions.lua"
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "data/scripting/win_condition_texts.lua"
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Wood Gnome"
 local wc_version = 2
@@ -104,7 +104,7 @@ return {
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
 		name = wc_trees_owned,
-		pic = "wui/stats/genstats_trees.png",
+		pic = "images/wui/stats/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
 			return pts[p.number]

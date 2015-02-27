@@ -2,8 +2,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)

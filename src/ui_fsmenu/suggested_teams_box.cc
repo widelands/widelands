@@ -24,6 +24,19 @@
 
 #include "graphic/graphic.h"
 
+namespace {
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 namespace UI {
 
 SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
@@ -113,11 +126,8 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
-					ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-					const Image* player_image =
-							g_gr->cataloged_image(static_cast<ImageCatalog::Key>(player +
-																									static_cast<uint8_t>(offset)));
-
+					const Image* player_image = g_gr->images().get(player_pictures_small[++player]);
+					assert(player_image);
 					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20, player_image);
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();

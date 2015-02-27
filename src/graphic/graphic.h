@@ -25,7 +25,6 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
-#include "graphic/image_catalog.h"
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
 
@@ -71,15 +70,7 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	// Returns all cached images. Use cataloged_image instead of this function
-	// if the image is registered there.
 	ImageCache& images() const {return *image_cache_.get();}
-
-	// Uses catalog 'key' to fetch an image from images().
-	// NOCOM(GunChleoc): Review these 2 functions
-	const Image* cataloged_image(ImageCatalog::Key key);
-	ImageCatalog& image_catalog() const {return *image_catalog_.get();}
-
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
 	void save_png(Texture*, StreamWrite*) const;
@@ -109,9 +100,6 @@ private:
 
 	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
-
-	/// Maps images from keys to filenames.
-	std::unique_ptr<ImageCatalog> image_catalog_;
 
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;

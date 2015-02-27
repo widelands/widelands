@@ -6,8 +6,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 
 -- =============
@@ -57,7 +57,7 @@ tell_about_port_building = {
       h1(_"How to build a port") ..
       p(_[[Ports are big buildings, but they can only be built at special locations: those marked with the]])
    ) ..
-   rt("image=wui/overlays/port.png", p(_[[blue port space icon.]])) ..
+   rt("image=images/wui/overlays/port.png", p(_[[blue port space icon.]])) ..
    rt(
       p(_[[Port spaces are set by the map designer, so a map will either contain them or not. They might, however, be hidden under trees or be blocked by surrounding buildings.]]) ..
       p(_[[You might already have noticed that you have such an icon next to your castle.]]) ..
@@ -109,7 +109,7 @@ tell_about_ships = {
       listitem_bullet(_[[We should wait until we have two ships. That should be enough for now.]]) ..
       listitem_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]])
    ) ..
-   rt("image=ui_basic/stop.png",p(_[[This is the icon for stopping production. You will find it in the building window.]])),
+   rt("image=images/ui_basic/stop.png",p(_[[This is the icon for stopping production. You will find it in the building window.]])),
    obj_name = "wait_for_ships",
    obj_title = _"Construct two ships",
    obj_body = rt(
@@ -140,7 +140,7 @@ expedition2 = {
       h1(_"Expeditions") ..
       p(_[[During an expedition, you send a ship out to discover new islands and maybe found a colony there.]])
    ) ..
-   rt("image=wui/buildings/start_expedition.png",p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so this is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]] .. " " ..
+   rt("image=images/wui/buildings/start_expedition.png",p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so this is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]] .. " " ..
 		_[[You can check out the needed wares in the fifth tab of your port (it will appear when you’ve started an expedition).]]) ..
       p(_[[Now try this out. I will tell you later what the next steps are.]]) ..
       paragraphdivider() ..
@@ -152,7 +152,7 @@ expedition2 = {
       paragraphdivider() ..
       listitem_bullet(_[[Start an expedition.]])
    ) ..
-   rt("image=wui/buildings/start_expedition.png",p(_[[To do so, click on the ‘Start Expedition’ button in any port. A new tab where you can see the needed wares will appear.]])
+   rt("image=images/wui/buildings/start_expedition.png",p(_[[To do so, click on the ‘Start Expedition’ button in any port. A new tab where you can see the needed wares will appear.]])
    )
 }
 

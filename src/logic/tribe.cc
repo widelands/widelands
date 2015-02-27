@@ -64,7 +64,7 @@ TribeDescr::TribeDescr
 	(const std::string & tribename, EditorGameBase & egbase)
 	: m_name(tribename)
 {
-	std::string path = "data/tribes/";
+	std::string path = "tribes/";
 	try {
 		path            += tribename;
 
@@ -159,7 +159,7 @@ TribeDescr::TribeDescr
 			// global militarysites are in /data/global not in /tribes
 			std::string temp                = path;
 			std::string::size_type sizetemp = base_path_size;
-			path           = "data/global/militarysites/";
+			path           = "global/militarysites/";
 			base_path_size = path.size();
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
@@ -248,7 +248,7 @@ TribeDescr::TribeDescr
 							break;
 						}
 						if (!g_fs->file_exists(img)) {
-							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
+							throw GameDataError("File %s for roadtype %s in tribe %s does not exist",
 							                        img,
 							                        prefix.c_str(),
 							                        m_name.c_str());
@@ -256,7 +256,7 @@ TribeDescr::TribeDescr
 						images->emplace_back(img);
 					}
 					if (images->empty()) {
-						throw new GameDataError(
+						throw GameDataError(
 						   "No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
 					}
 				};
@@ -349,7 +349,7 @@ const RoadTextures& TribeDescr::road_textures() const {
 bool TribeDescr::exists_tribe
 	(const std::string & name, TribeBasicInfo * const info)
 {
-	std::string buf = "data/tribes/";
+	std::string buf = "tribes/";
 	buf            += name;
 	buf            += "/conf";
 
@@ -363,7 +363,7 @@ bool TribeDescr::exists_tribe
 				info->uiposition =
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
-				std::string path = "data/tribes/" + name + "/scripting";
+				std::string path = "tribes/" + name + "/scripting";
 				for (const std::string& script :
 					  filter(g_fs->list_directory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
@@ -396,7 +396,7 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	FilenameSet m_tribes = g_fs->list_directory("data/tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -419,7 +419,7 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	FilenameSet m_tribes = g_fs->list_directory("data/tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();

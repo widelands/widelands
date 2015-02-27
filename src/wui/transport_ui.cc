@@ -40,24 +40,28 @@ using Widelands::WareDescr;
 using Widelands::WareIndex;
 using Widelands::WorkerDescr;
 
+
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
+static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
+
 struct EconomyOptionsWindow : public UI::UniqueWindow {
 	EconomyOptionsWindow(InteractiveGameBase & parent, Economy & economy)
 		:
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, ImageCatalog::Key::kButton1)
+		m_tabpanel(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png"))
 	{
 		set_center_panel(&m_tabpanel);
 
 		m_tabpanel.add
 			("wares",
-			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWares),
+			 g_gr->images().get(pic_tab_wares),
 			 new EconomyOptionsWarePanel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
-			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWorkers),
+			 g_gr->images().get(pic_tab_workers),
 			 new EconomyOptionsWorkerPanel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 	}
@@ -131,7 +135,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  ImageCatalog::Key::kButton4,            \
+		  g_gr->images().get("images/ui_basic/but4.png"),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -222,12 +226,11 @@ private:
 			add(buttons, UI::Box::AlignLeft);
 
 			UI::Button * b = nullptr;
-
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  ImageCatalog::Key::kButton4,              \
+		  g_gr->images().get("images/ui_basic/but4.png"),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);

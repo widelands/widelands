@@ -76,7 +76,7 @@ function dependencies_basic(images, text)
 
 	local string = "image=" .. images[1]
 	for k,v in ipairs({table.unpack(images,2)}) do
-		string = string .. ";richtext/arrow-right.png;" .. v
+		string = string .. ";images/richtext/arrow-right.png;" .. v
 	end
 
 	return rt(string, text)
@@ -99,7 +99,7 @@ function dependencies(items, text)
 	end
 	local string = "image=" .. items[1].icon_name
 	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";richtext/arrow-right.png;" ..  v.icon_name
+		string = string .. ";images/richtext/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -120,9 +120,9 @@ function dependencies_resi(tribename, resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=data/tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
+	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
-		string = string .. ";richtext/arrow-right.png;" ..  v.icon_name
+		string = string .. ";images/richtext/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -149,13 +149,13 @@ function dependencies_training(tribename, building_description, untrained, inter
 	return
 		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
 		dependencies_basic({
-			"data/tribes/" .. tribename .. "/soldier/" .. untrained .. ".png",
+			"tribes/" .. tribename .. "/soldier/" .. untrained .. ".png",
 			building_description.icon_name,
-			"data/tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
+			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
 		dependencies_basic({
-			"data/tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
+			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
 			building_description.icon_name,
-			"data/tribes/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
+			"tribes/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
 end
 
 
@@ -482,16 +482,16 @@ function building_help_building_section(tribename, building_description, enhance
 
 	-- Space required
 	if (building_description.is_mine) then
-		result = result .. text_line(_"Space required:",_"Mine plot","wui/overlays/mine.png")
+		result = result .. text_line(_"Space required:",_"Mine plot","images/wui/overlays/mine.png")
 	elseif (building_description.is_port) then
-		result = result .. text_line(_"Space required:",_"Port plot","wui/overlays/port.png")
+		result = result .. text_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
 	else
 		if (building_description.size == 1) then
-			result = result .. text_line(_"Space required:",_"Small plot","wui/overlays/small.png")
+			result = result .. text_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
 		elseif (building_description.size == 2) then
-			result = result .. text_line(_"Space required:",_"Medium plot","wui/overlays/medium.png")
+			result = result .. text_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
 		elseif (building_description.size == 3) then
-			result = result .. text_line(_"Space required:",_"Big plot","wui/overlays/big.png")
+			result = result .. text_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
 		else
 			result = result .. p(_"Space required:" .. _"Unknown")
 		end

@@ -41,9 +41,7 @@ struct EditorSetOriginTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Key get_sel_impl() const override {
-		return ImageCatalog::Key::kSelect;
-	}
+	char const * get_sel_impl() const override {return "images/ui_basic/fsel.png";}
 
 	bool has_size_one() const override {return true;}
 };

@@ -52,37 +52,37 @@ EditorMainMenu::EditorMainMenu
 	m_button_new_map
 		(this, "new_map",
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("New Map")),
 	m_button_new_random_map
 		(this, "new_random_map",
 		 hmargin, vmargin + 1 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("New Random Map")),
 	m_button_load_map
 		(this, "load_map",
 		 hmargin, vmargin + 2 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Load Map")),
 	m_button_save_map
 		(this, "save_map",
 		 hmargin, vmargin + 3 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Save Map")),
 	m_button_map_options
 		(this, "map_options",
 		 hmargin, vmargin + 4 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Map Options")),
 	m_button_view_readme
 		(this, "readme",
 		 hmargin, vmargin + 5 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("View Readme")),
 	m_button_exit_editor
 		(this, "exit",
 		 hmargin, vmargin + 6 * (height + vspacing), width, height,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Exit Editor"))
 {
 	m_button_new_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
@@ -92,7 +92,7 @@ EditorMainMenu::EditorMainMenu
 	m_button_map_options.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
 
 	m_window_readme.open_window = [this] {
-		fileview_window(eia(), m_window_readme, "data/txts/editor_readme");
+		fileview_window(eia(), m_window_readme, "txts/editor_readme");
 	};
 	m_button_view_readme.sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, m_window_readme));

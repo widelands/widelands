@@ -1,5 +1,5 @@
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)

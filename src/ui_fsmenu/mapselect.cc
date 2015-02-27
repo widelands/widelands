@@ -78,7 +78,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_is_scenario(false),
 
 	// Runtime variables
-	m_curdir("data/maps"), m_basedir("data/maps"),
+	m_curdir("maps"), m_basedir("maps"),
 
 	m_settings(settings),
 	m_ctrl(ctrl)
@@ -171,7 +171,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
-
 	m_table.focus();
 	fill_table();
 
@@ -371,7 +370,7 @@ void FullscreenMenuMapSelect::entry_selected()
  * be taken to sort uncompressed maps (which look like and really are
  * directories) with the files.
  *
- * The search starts in \ref m_curdir ("..../data/maps") and there is no possibility
+ * The search starts in \ref m_curdir ("../data/maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  *
@@ -380,6 +379,15 @@ void FullscreenMenuMapSelect::entry_selected()
  */
 void FullscreenMenuMapSelect::fill_table()
 {
+	if (!g_fs->file_exists(m_curdir)) {
+		throw wexception("Current dir %s does not exist", m_curdir.c_str());
+	}
+	if (!g_fs->file_exists(m_basedir)) {
+		throw wexception("Base dir %s does not exist", m_basedir.c_str());
+	}
+	assert(g_fs->file_exists(m_basedir));
+	assert(g_fs->file_exists(m_curdir));
+
 	uint8_t col_players = 0;
 	uint8_t col_name = 1;
 	uint8_t col_size = 2;
@@ -413,7 +421,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			te.set_string(col_players, "");
 			te.set_picture
-				(col_name,  g_gr->cataloged_image(ImageCatalog::Key::kFilesDirectory),
+				(col_name,  g_gr->images().get("images/ui_basic/ls_dir.png"),
 				mapdata.localized_name);
 			te.set_string(col_size, "");
 
@@ -435,7 +443,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			MapData mapdata;
 			mapdata.filename = name;
-			if (strcmp (name, "data/maps/MP Scenarios") == 0) {
+			if (strcmp (name, "maps/MP Scenarios") == 0) {
 				/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 				mapdata.localized_name = _("Multiplayer Scenarios");
 			} else {
@@ -446,9 +454,7 @@ void FullscreenMenuMapSelect::fill_table()
 			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			te.set_picture(col_name,
-								g_gr->cataloged_image(ImageCatalog::Key::kFilesDirectory),
-								mapdata.localized_name);
+			te.set_picture(col_name, g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -513,11 +519,12 @@ void FullscreenMenuMapSelect::fill_table()
 						map_displayname = mapdata.name;
 					}
 					te.set_picture
-						(col_name,  g_gr->cataloged_image
+						(col_name,  g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
-							  (mapdata.scenario ? ImageCatalog::Key::kFilesScenario :
-														 ImageCatalog::Key::kFilesWLMap) :
-							  ImageCatalog::Key::kFilesS2Map),
+							  (mapdata.scenario ?
+									"images/ui_basic/ls_wlscenario.png" :
+									"images/ui_basic/ls_wlmap.png") :
+						"images/ui_basic/ls_s2map.png"),
 						map_displayname);
 
 					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
@@ -572,9 +579,9 @@ void FullscreenMenuMapSelect::fill_table()
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
 					(col_name,
-					 g_gr->cataloged_image((mapdata.scenario ?
-														ImageCatalog::Key::kFilesScenario :
-														ImageCatalog::Key::kFilesWLMap)),
+					 g_gr->images().get((mapdata.scenario ?
+													"images/ui_basic/ls_wlscenario.png" :
+													"images/ui_basic/ls_wlmap.png")),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 
@@ -599,8 +606,8 @@ void FullscreenMenuMapSelect::fill_table()
 
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
-					(col_name, g_gr->cataloged_image
-					 ((mapdata.scenario ? ImageCatalog::Key::kFilesScenario : ImageCatalog::Key::kFilesWLMap)),
+					(col_name, g_gr->images().get
+					 ((mapdata.scenario ? "images/ui_basic/ls_wlscenario.png" : "images/ui_basic/ls_wlmap.png")),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 			}

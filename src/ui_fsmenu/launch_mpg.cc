@@ -63,7 +63,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 ImageCatalog::Key::kButton0,
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -72,7 +72,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 ImageCatalog::Key::kButton0,
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -81,7 +81,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 ImageCatalog::Key::kButton1,
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -104,7 +104,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase(ImageCatalog::Key::kFullscreenLaunchMPG),
+	FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -122,29 +122,29 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kMenuMinimap),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 ImageCatalog::Key::kButton2,
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kHelp),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -587,7 +587,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		m_settings->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		Profile tribe((new std::string("data/tribes/" + player_save_tribe[i - 1] + "/conf"))->c_str(),
+		Profile tribe((new std::string("tribes/" + player_save_tribe[i - 1] + "/conf"))->c_str(),
 				nullptr, "tribe_" + player_save_tribe[i - 1]);
 		Section & global = tribe.get_safe_section("tribe");
 		player_save_tribe[i - 1] = global.get_safe_string("name");
@@ -671,10 +671,10 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
 		  "share control over the player (‘shared kingdom mode’)."),
-		 ImageCatalog::Key::kEditorToolPortSpaceSet);
+		 "images/players/genstats_enable_plr_08.png");
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
-		 ImageCatalog::Key::kMenuWatch);
+		"images/wui/fieldaction/menu_tab_watch.png");
 	m_help->add_heading(_("Player settings"));
 	m_help->add_paragraph
 		(_
@@ -682,14 +682,15 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		  "following:"));
 	m_help->add_picture_li
 		(_("Connected to one or more clients (see ‘Client settings’)."),
-		 ImageCatalog::Key::kStatsWorkersNumber);
+		 "images/wui/stats/genstats_nrworkers.png");
 	m_help->add_picture_li
 		(_
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
-		  "indicate the strength of the currently selected computer player)."), ImageCatalog::Key::kAiNormal);
+		  "indicate the strength of the currently selected computer player)."),
+		"images/ai/Normal.png");
 	m_help->add_picture_li(_("Set as shared in starting position for another player."),
-								  ImageCatalog::Key::kFullscreenSharedIn);
-	m_help->add_picture_li(_("Closed."), ImageCatalog::Key::kActionStop);
+								  "images/ui_fsmenu/shared_in.png");
+	m_help->add_picture_li(_("Closed."), "images/ui_basic/stop.png");
 	m_help->add_block
 		(_
 		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "

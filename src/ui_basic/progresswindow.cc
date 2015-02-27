@@ -42,8 +42,8 @@
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(ImageCatalog::Key background_image_key) {
-	set_background(g_gr->image_catalog().filepath(background_image_key));
+ProgressWindow::ProgressWindow(const std::string& background) {
+	set_background(background);
 	step(_("Preparing..."));
 }
 
@@ -87,7 +87,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		m_background = file_name;
 	} else {
-		m_background = g_gr->image_catalog().filepath(ImageCatalog::Key::kLoadscreen);
+		m_background = "images/loadscreens/progress.png";
 	}
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);

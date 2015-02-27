@@ -80,7 +80,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	m_editbox =
 		new UI::EditBox
 			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-			 ImageCatalog::Key::kButton1);
+			 g_gr->images().get("images/ui_basic/but1.png"));
 	m_editbox->changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	m_editbox->ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
@@ -88,7 +88,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "ok",
 			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 ImageCatalog::Key::kButton4,
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("OK"),
 			 std::string(),
 			 false);
@@ -98,7 +98,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "cancel",
 			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 ImageCatalog::Key::kButton4,
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
@@ -106,7 +106,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "delete",
 			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 ImageCatalog::Key::kButton4,
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 

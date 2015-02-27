@@ -40,6 +40,29 @@
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
+namespace {
+static char const * const flag_pictures[] = {
+	"images/players/genstats_enable_plr_01.png",
+	"images/players/genstats_enable_plr_02.png",
+	"images/players/genstats_enable_plr_03.png",
+	"images/players/genstats_enable_plr_04.png",
+	"images/players/genstats_enable_plr_05.png",
+	"images/players/genstats_enable_plr_06.png",
+	"images/players/genstats_enable_plr_07.png",
+	"images/players/genstats_enable_plr_08.png"
+};
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup
 		(UI::Panel            * const parent, uint8_t id,
@@ -64,7 +87,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			type = new UI::Button
 				(this, "client_type",
 				 0, 0, h, h,
-				 ImageCatalog::Key::kButton1,
+				 g_gr->images().get("images/ui_basic/but1.png"),
 				 std::string(), std::string(), true, false);
 			type->sigclicked.connect
 				(boost::bind
@@ -74,7 +97,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else { // just a shown client
 			type_icon = new UI::Icon
 				(this, 0, 0, h, h,
-				 g_gr->cataloged_image(ImageCatalog::Key::kFieldTabWatch));
+				 g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"));
 			add(type_icon, UI::Box::AlignCenter);
 		}
 
@@ -115,27 +138,24 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				const Image* player_image;
+				std::string pic;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					// NOCOM(GunChleoc): Review this
-					ImageCatalog::Key offset = ImageCatalog::Key::kPlayerFlag1;
-					player_image = g_gr->cataloged_image(static_cast<ImageCatalog::Key>(us.position +
-																									static_cast<uint8_t>(offset)));
+					pic = flag_pictures[us.position];
 					temp_tooltip = (boost::format(_("Player %u"))
 										 % static_cast<unsigned int>(us.position + 1)).str();
 				} else {
-					player_image = g_gr->cataloged_image(ImageCatalog::Key::kFieldTabWatch);
+					pic = "images/wui/fieldaction/menu_tab_watch.png";
 					temp_tooltip = _("Spectator");
 				}
 
 				// Either Button if changeable OR text if not
 				if (m_id == s->settings().usernum) {
-					type->set_image(player_image);
+					type->set_pic(g_gr->images().get(pic));
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
 				} else {
-					type_icon->set_icon(player_image);
+					type_icon->set_icon(g_gr->images().get(pic));
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
@@ -174,17 +194,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 m_tribenames(tn)
 	{
 		set_size(w, h);
-
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(id + static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(player_pictures_small[id]);
+		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player, UI::Box::AlignCenter);
-
 		type = new UI::Button
 			(this, "player_type",
 			 0, 0, h, h,
-			 ImageCatalog::Key::kButton1,
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 std::string(), std::string(), true, false);
 		type->sigclicked.connect
 			(boost::bind
@@ -194,7 +211,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe = new UI::Button
 			(this, "player_tribe",
 			 0, 0, h, h,
-			 ImageCatalog::Key::kButton1,
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 std::string(), std::string(), true, false);
 		tribe->sigclicked.connect
 			(boost::bind
@@ -205,7 +222,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init = new UI::Button
 			(this, "player_init",
 			 0, 0, w - 4 * h, h,
-			 ImageCatalog::Key::kButton1,
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 std::string(), std::string(), true, false);
 		init->sigclicked.connect
 			(boost::bind
@@ -215,7 +232,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team = new UI::Button
 			(this, "player_team",
 			 0, 0, h, h,
-			 ImageCatalog::Key::kButton1,
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 std::string(), std::string(), true, false);
 		team->sigclicked.connect
 			(boost::bind
@@ -266,7 +283,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {
 			type ->set_tooltip(_("Closed"));
-			type ->set_image(g_gr->cataloged_image(ImageCatalog::Key::kActionStop));
+			type ->set_pic(g_gr->images().get("images/ui_basic/stop.png"));
 			team ->set_visible(false);
 			team ->set_enabled(false);
 			tribe->set_visible(false);
@@ -277,7 +294,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type ->set_tooltip(_("Open"));
-			type ->set_image(g_gr->cataloged_image(ImageCatalog::Key::kActionContinue));
+			type ->set_pic(g_gr->images().get("images/ui_basic/continue.png"));
 			team ->set_visible(false);
 			team ->set_enabled(false);
 			tribe->set_visible(false);
@@ -288,14 +305,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type ->set_tooltip(_("Shared in"));
-			type ->set_image(g_gr->cataloged_image(ImageCatalog::Key::kFullscreenSharedIn));
-
-			ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-			const Image* player_image =
-					g_gr->cataloged_image(static_cast<ImageCatalog::Key>(player_setting.shared_in - 1 +
-																							static_cast<uint8_t>(offset)));
-
-			tribe->set_image(player_image);
+			type ->set_pic(g_gr->images().get("images/ui_fsmenu/shared_in.png"));
+			const Image* player_image = g_gr->images().get(player_pictures_small[player_setting.shared_in - 1]);
+			assert(player_image);
+			tribe->set_pic(player_image);
 			tribe->set_tooltip((boost::format(_("Player %u"))
 									  % static_cast<unsigned int>(player_setting.shared_in)).str());
 
@@ -306,37 +319,34 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_enabled(true);
 		} else {
 			std::string title;
-			std::string pic;
+			std::string pic = "images/";
 			if (player_setting.state == PlayerSettings::stateComputer) {
 				if (player_setting.ai.empty()) {
 					title = _("Computer");
-					pic = g_gr->image_catalog().filepath(ImageCatalog::Key::kNoValue);
+					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
 						title = (boost::format(_("AI: %s")) % _("Random")).str();
-						pic = g_gr->image_catalog().filepath(ImageCatalog::Key::kAiRandom);
+						pic += "ai/Random.png";
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
-						// TODO(GunChleoc): We should use the image catalog instead.
-						// NOCOM(GunChleoc): Review this. I could not get these to play ball easily, so I decided to leave this one.
-						pic = (boost::format("data/images/ai/%s.png")
-								 % player_setting.ai.c_str()).str();
+						pic += "ai/" + player_setting.ai + ".png";
 					}
 				}
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
-				pic = g_gr->image_catalog().filepath(ImageCatalog::Key::kStatsWorkersNumber);
+				pic += "wui/stats/genstats_nrworkers.png";
 			}
 			type->set_tooltip(title.c_str());
-			type->set_image(g_gr->images().get(pic));
+			type->set_pic(g_gr->images().get(pic));
 			if (player_setting.random_tribe) {
 				std::string random = _("Random");
 				if (!m_tribenames["random"].size())
-					m_tribepics[random] = g_gr->cataloged_image(ImageCatalog::Key::kFullscreenRandomTribe);
+					m_tribepics[random] = g_gr->images().get("images/ui_fsmenu/random.png");
 				tribe->set_tooltip(random.c_str());
-				tribe->set_image(m_tribepics[random]);
+				tribe->set_pic(m_tribepics[random]);
 			} else {
-				std::string tribepath("data/tribes/" + player_setting.tribe);
+				std::string tribepath("tribes/" + player_setting.tribe);
 				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
 					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
@@ -346,7 +356,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						g_gr->images().get((tribepath + "/") + global.get_safe_string("icon"));
 				}
 				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
-				tribe->set_image(m_tribepics[player_setting.tribe]);
+				tribe->set_pic(m_tribepics[player_setting.tribe]);
 			}
 			tribe->set_flat(false);
 
@@ -368,7 +378,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		else if (settings.savegame)
 			init->set_title(_("Savegame"));
 		else {
-			std::string tribepath("data/tribes/" + player_setting.tribe);
 			// for translated initialisation
 			i18n::Textdomain td(textdomain(std::string("tribe_" + player_setting.tribe).c_str()));
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {

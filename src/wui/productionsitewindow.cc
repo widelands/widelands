@@ -35,6 +35,9 @@
 
 using Widelands::ProductionSite;
 
+static char const * pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+static char const * pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
+
 /*
 ===============
 Create the window and its panels, add it to the registry.
@@ -61,7 +64,7 @@ ProductionSiteWindow::ProductionSiteWindow
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWares),
+			("wares", g_gr->images().get(pic_tab_wares),
 			 prod_box, _("Wares"));
 	}
 
@@ -90,8 +93,8 @@ ProductionSiteWindow::ProductionSiteWindow
 			m_worker_caps->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(m_worker_caps, "evict", 0, 0, 34, 34,
-							 ImageCatalog::Key::kButton4,
-							 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierDrop),
+							 g_gr->images().get("images/ui_basic/but4.png"),
+							 g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
@@ -101,7 +104,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWorkers),
+			("workers", g_gr->images().get(pic_tab_workers),
 			 worker_box,
 			 (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions()))
 			);

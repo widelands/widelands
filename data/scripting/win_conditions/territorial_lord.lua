@@ -2,14 +2,14 @@
 --                   Territorial Lord Win condition
 -- =======================================================================
 
-include "data/scripting/coroutine.lua" -- for sleep
-include "data/scripting/messages.lua"
-include "data/scripting/table.lua"
-include "data/scripting/win_condition_functions.lua"
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/messages.lua"
+include "scripting/table.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "data/scripting/win_condition_texts.lua"
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Territorial Lord"
 local wc_version = 2

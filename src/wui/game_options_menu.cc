@@ -75,7 +75,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 ImageCatalog::Key::kButton4,
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("README"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show general information about Widelands and keyboard shortcuts")),
@@ -84,7 +84,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 ImageCatalog::Key::kButton4,
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("License"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show the distribution licence document")),
@@ -93,7 +93,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 ImageCatalog::Key::kButton4,
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Authors"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show information about the Widelands Development Team")),
@@ -102,7 +102,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
-		 ImageCatalog::Key::kButton4,
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Sound Options"),
 		/** TRANSLATORS: Button tooltip */
 		_("Set sound effect and music options")),
@@ -111,8 +111,8 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
 		 buttonw(1), 35,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptionsSave),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_save_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game
@@ -121,8 +121,8 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
 		 35 + vspacing(),
 		 buttonw(1), 35,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptionsExit),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
@@ -140,15 +140,15 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.readme.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.readme),
-		 "data/txts/README.lua");
+		 "txts/README.lua");
 	m_windows.license.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.license),
-		 "data/txts/license");
+		 "txts/license");
 	m_windows.authors.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.authors),
-		 "data/txts/developers");
+		 "txts/developers");
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \

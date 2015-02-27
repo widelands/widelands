@@ -952,7 +952,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// TODO(sirver): this is very wrong: It assumes a directory layout
 			// that might not be around forever.
 			const std::string message =
-					(boost::format("<rt image=data/world/resources/pics/%s4.png>"
+					(boost::format("<rt image=world/resources/pics/%s4.png>"
 										"<p font-face=serif font-size=14>%s</p></rt>")
 					 % rdescr->name().c_str()
 					 % _("A geologist found resources.")).str();

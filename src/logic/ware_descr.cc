@@ -36,7 +36,7 @@ WareDescr::WareDescr
 	m_tribe         (gtribe),
 	m_helptext      (global_s.get_string("help", "")),
 	m_icon_fname    (directory + "/menu.png"),
-	m_icon(g_gr->cataloged_image(ImageCatalog::Key::kButton0))
+	m_icon(g_gr->images().get("images/ui_basic/but0.png"))
 {
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());

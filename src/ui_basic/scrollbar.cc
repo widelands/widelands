@@ -56,14 +56,16 @@ Scrollbar::Scrollbar
 	m_time_nextact  (0),
 	m_knob_grabdelta(0),
 	m_pic_minus
-		(g_gr->cataloged_image(horiz ? ImageCatalog::Key::kScrollbarLeft :
-												 ImageCatalog::Key::kScrollbarUp)),
+		(g_gr->images().get(horiz ?
+									  "images/ui_basic/scrollbar_left.png"  :
+									  "images/ui_basic/scrollbar_up.png")),
 	m_pic_plus
-		(g_gr->cataloged_image(horiz ? ImageCatalog::Key::kScrollbarRight :
-												 ImageCatalog::Key::kScrollbarDown)),
+		(g_gr->images().get(horiz ?
+									  "images/ui_basic/scrollbar_right.png" :
+									  "images/ui_basic/scrollbar_down.png")),
 	m_pic_background
-		(g_gr->cataloged_image(ImageCatalog::Key::kScrollbarBackground)),
-	m_pic_buttons   (g_gr->cataloged_image(ImageCatalog::Key::kButton3))
+		(g_gr->images().get("images/ui_basic/scrollbar_background.png")),
+	m_pic_buttons   (g_gr->images().get("images/ui_basic/but3.png"))
 {
 	set_thinks(true);
 }

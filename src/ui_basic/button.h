@@ -25,7 +25,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/image_catalog.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
@@ -41,25 +40,23 @@ struct Button : public NamedPanel {
 		(Panel * const parent,
 		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 const ImageCatalog::Key background_image_key,
+		 const Image* background_pictute_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
-	// NOCOM(GunChleoc): Review these constructors. The foreground image can come from Lua/conf, so we need to operate with the filename here.
-	// I have also changed the background image for other ui_basic classes over to the new system.
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const ImageCatalog::Key background_image_key,
-		 const Image* foreground_image,
+		 const Image* background_pictute_id,
+		 const Image* foreground_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false);
 	~Button();
 
-	void set_image(const Image* foreground);
+	void set_pic(const Image* pic);
 	void set_title(const std::string &);
 	const std::string & get_title() const {return m_title;}
 

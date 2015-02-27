@@ -55,6 +55,18 @@
 
 namespace {
 
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+
+
 using Widelands::Building;
 
 // Load all tribes from disk.
@@ -75,38 +87,36 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
 
+#define INIT_BUTTON(picture, name, tooltip)                         \
+	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
+	g_gr->images().get("images/wui/" picture ".png"),                      \
+	tooltip                                                                      \
+
 	m_toggle_main_menu
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("menu"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptions),
-	 _("Menu")),
+	(INIT_BUTTON
+	 ("menus/menu_toggle_menu", "menu", _("Menu"))),
 	m_toggle_tool_menu
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("tools"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuTools),
-	 _("Tools")),
+	(INIT_BUTTON
+	 ("editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
 	m_toggle_toolsize_menu
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("toolsize"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolSize),
-	 _("Tool Size")),
+	(INIT_BUTTON
+	 ("editor/editor_menu_set_toolsize_menu", "toolsize",
+	  _("Tool Size"))),
 	m_toggle_minimap
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("minimap"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kMenuMinimap),
-	 _("Minimap")),
+	(INIT_BUTTON
+	 ("menus/menu_toggle_minimap", "minimap", _("Minimap"))),
 	m_toggle_buildhelp
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("buildhelp"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kMenuBuildhelp),
-	 _("Show Building Spaces (on/off)")),
+	(INIT_BUTTON
+	 ("menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 	m_toggle_player_menu
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("players"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuPlayer),
-	 _("Players")),
+	(INIT_BUTTON
+	 ("editor/editor_menu_player_menu", "players", _("Players"))),
 	m_undo
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("undo"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kEditorUndo),
-	 _("Undo")),
+	(INIT_BUTTON
+	 ("editor/editor_undo", "undo", _("Undo"))),
 	m_redo
-	(TOOLBAR_BUTTON_COMMON_PARAMETERS("redo"),
-	 g_gr->cataloged_image(ImageCatalog::Key::kEditorRedo),
-	 _("Redo"))
+	(INIT_BUTTON
+	 ("editor/editor_redo", "redo", _("Redo")))
 {
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
 	m_toggle_tool_menu.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
@@ -150,12 +160,10 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
-			const Image* player_image =
-					g_gr->cataloged_image(static_cast<ImageCatalog::Key>(p - 1 + static_cast<uint8_t>(offset)));
-
+			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
+			assert(player_image);
 			map.overlay_manager().register_overlay
-				(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+					(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
@@ -192,7 +200,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui(ImageCatalog::Key::kLoadscreenEditor);
+	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -510,12 +518,10 @@ void EditorInteractive::select_tool
 	tools.current_pointer = &primary;
 	tools.use_tool        = which;
 
-	ImageCatalog::Key sel_key = primary.get_sel(which);
-	if (g_gr->image_catalog().has_key(sel_key)) {
-		set_sel_picture(sel_key);
-	} else {
+	if (char const * const sel_pic = primary.get_sel(which))
+		set_sel_picture(sel_pic);
+	else
 		unset_sel_picture();
-	}
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
@@ -578,7 +584,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui(ImageCatalog::Key::kLoadscreenEditor);
+		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

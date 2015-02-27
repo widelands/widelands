@@ -56,13 +56,12 @@ static const int32_t check[] = {
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
                                       const TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
-
-	const Image* green = g_gr->images().get("wui/editor/terrain_green.png");
-	const Image* water = g_gr->images().get("wui/editor/terrain_water.png");
-	const Image* mountain = g_gr->images().get("wui/editor/terrain_mountain.png");
-	const Image* dead = g_gr->images().get("wui/editor/terrain_dead.png");
-	const Image* impassable = g_gr->images().get("wui/editor/terrain_impassable.png");
-	const Image* dry = g_gr->images().get("wui/editor/terrain_dry.png");
+	const Image* green = g_gr->images().get("images/wui/editor/terrain_green.png");
+	const Image* water = g_gr->images().get("images/wui/editor/terrain_water.png");
+	const Image* mountain = g_gr->images().get("images/wui/editor/terrain_mountain.png");
+	const Image* dead = g_gr->images().get("images/wui/editor/terrain_dead.png");
+	const Image* impassable = g_gr->images().get("images/wui/editor/terrain_impassable.png");
+	const Image* dry = g_gr->images().get("images/wui/editor/terrain_dry.png");
 
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;

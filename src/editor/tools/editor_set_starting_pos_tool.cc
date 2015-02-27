@@ -26,6 +26,29 @@
 #include "logic/map.h"
 #include "wui/overlay_manager.h"
 
+namespace {
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 // global variable to pass data from callback to class
 static int32_t m_current_player;
 
@@ -56,10 +79,10 @@ int32_t editor_tool_set_starting_pos_callback
 }
 
 EditorSetStartingPosTool::EditorSetStartingPosTool()
-	: EditorTool(*this, *this, false), m_current_sel_pic(ImageCatalog::Key::kUnknownImage)
+	: EditorTool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
-	fsel_picsname = ImageCatalog::Key::kPlayerStartingPosSmall1;
+	fsel_picsname = "images/players/fsel_editor_set_player_01_pos.png";
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
@@ -82,10 +105,8 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(m_current_player - 1 +
-																						static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(player_pictures[m_current_player - 1]);
+		assert(player_image);
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
@@ -95,10 +116,11 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 			//  add new overlay
 			overlay_manager.register_overlay
-					(center.node, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			(center.node, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map.set_starting_pos(m_current_player, center.node);
+
 		}
 	}
 	return 1;
@@ -113,8 +135,6 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
-	ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-	fsel_picsname = static_cast<ImageCatalog::Key>(m_current_player - 1 + static_cast<uint8_t>(offset));
-
+	fsel_picsname = player_pictures_small[m_current_player - 1];
 	m_current_sel_pic = fsel_picsname;
 }

@@ -39,6 +39,12 @@
 
 #define INACTIVE 0
 
+static const char pic_tab_production[] = "images/wui/stats/menu_tab_wares_production.png";
+static const char pic_tab_consumption[] = "images/wui/stats/menu_tab_wares_consumption.png";
+static const char pic_tab_economy[] = "images/wui/stats/menu_tab_wares_econ_health.png";
+// TODO(unknown): replace place holder
+static const char pic_tab_stock[] = "images/wui/stats/menu_tab_wares_stguchleocock.png";
+
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
 	RGBColor(255,   0,   0),
@@ -156,7 +162,7 @@ m_parent(&parent)
 
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, ImageCatalog::Key::kButton1);
+			 (box, spacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
 
 
 	m_plot_production =
@@ -167,7 +173,7 @@ m_parent(&parent)
 	m_plot_production->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("production", g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWaresProduction),
+		("production", g_gr->images().get(pic_tab_production),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
@@ -178,7 +184,7 @@ m_parent(&parent)
 	m_plot_consumption->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("consumption", g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWaresConsumption),
+		("consumption", g_gr->images().get(pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
@@ -189,7 +195,7 @@ m_parent(&parent)
 	m_plot_economy->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("economy_health", g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWaresEconomyHealth),
+		("economy_health", g_gr->images().get(pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
 	m_plot_stock = new WuiPlotArea
@@ -199,7 +205,7 @@ m_parent(&parent)
 	m_plot_stock->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
 	tabs->add
-		("stock", g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWaresStock),
+		("stock", g_gr->images().get(pic_tab_stock),
 			m_plot_stock, _("Stock"));
 
 	tabs->activate(0);
@@ -250,7 +256,7 @@ m_parent(&parent)
 		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			ImageCatalog::Key::kButton1),
+			g_gr->images().get("images/ui_basic/but1.png")),
 		 UI::Box::AlignLeft, true);
 
 }

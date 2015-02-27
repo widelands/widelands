@@ -2,7 +2,7 @@
 -- Helper functions
 -- =================
 
--- A copy of prefilled_buildings from data/scripting/infrastructure.lua, but with
+-- A copy of prefilled_buildings from scripting/infrastructure.lua, but with
 -- as much wares as possible, if not indicated otherwise, and only one soldier
 function filled_buildings_one_soldier(p, ...)
    for idx,bdescr in ipairs({...}) do

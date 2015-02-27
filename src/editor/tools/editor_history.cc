@@ -106,7 +106,7 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 	if (draw && tool.is_unduable()) {
 		if
 			(undo_stack.empty() ||
-			 undo_stack.front().tool.get_sel_impl() != m_draw_tool.get_sel_impl())
+			 undo_stack.front().tool.get_sel_impl() != std::string(m_draw_tool.get_sel_impl()))
 		{
 			EditorToolAction da
 				(m_draw_tool, EditorTool::First,

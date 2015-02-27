@@ -65,8 +65,8 @@ GameMessageMenu::GameMessageMenu
 			new UI::Button
 				(this, "filter_geologists_messages",
 				 5, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_geologist.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/fieldaction/menu_geologist.png"),
 				 "",
 				 true);
 	m_geologistsbtn->sigclicked.connect
@@ -76,8 +76,8 @@ GameMessageMenu::GameMessageMenu
 			new UI::Button
 				(this, "filter_economy_messages",
 				 2 * 5 + 34, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_build_flag.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"),
 				 "",
 				 true);
 	m_economybtn->sigclicked.connect
@@ -87,8 +87,8 @@ GameMessageMenu::GameMessageMenu
 			new UI::Button
 				(this, "filter_seafaring_messages",
 				 3 * 5 + 2 * 34, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/start_expedition.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/buildings/start_expedition.png"),
 				 "",
 				 true);
 	m_seafaringbtn->sigclicked.connect
@@ -98,8 +98,8 @@ GameMessageMenu::GameMessageMenu
 			new UI::Button
 				(this, "filter_warfare_messages",
 				 4 * 5 + 3 * 34, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/messages_warfare.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/messages/messages_warfare.png"),
 				 "",
 				 true);
 	m_warfarebtn->sigclicked.connect
@@ -109,8 +109,8 @@ GameMessageMenu::GameMessageMenu
 			new UI::Button
 				(this, "filter_scenario_messages",
 				 5 * 5 + 4 * 34, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_objectives.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/menus/menu_objectives.png"),
 				 "",
 				 true);
 	m_scenariobtn->sigclicked.connect
@@ -124,8 +124,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "clear_selection",
 			 5 * 5 + 6 * 34 + 17, 5, 34, 34,
-			 ImageCatalog::Key::kButton2,
-			 g_gr->images().get("wui/messages/message_clear_selection.png"),
+			 g_gr->images().get("images/ui_basic/but2.png"),
+			 g_gr->images().get("images/wui/messages/message_clear_selection.png"),
 			 _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
@@ -134,8 +134,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "invert_selection",
 			 6 * 5 + 7 * 34 + 17, 5, 34, 34,
-			 ImageCatalog::Key::kButton0,
-			 g_gr->images().get("wui/messages/message_selection_invert.png"),
+			 g_gr->images().get("images/ui_basic/but2.png"),
+			 g_gr->images().get("images/wui/messages/message_selection_invert.png"),
 			 _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));
@@ -144,8 +144,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
 			 6 * 5 + 9 * 34 + 34, 5, 34, 34,
-			 ImageCatalog::Key::kButton2,
-			 g_gr->cataloged_image(ImageCatalog::Key::kMessageActionArchive),
+			 g_gr->images().get("images/ui_basic/but2.png"),
+			 g_gr->images().get("images/wui/messages/message_archive.png"),
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 			 (boost::format(_("Del: %s"))
 			  /** TRANSLATORS: Tooltip in the messages window */
@@ -157,8 +157,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
 			 7 * 5 + 10 * 34 + 34, 5, 34, 34,
-			 ImageCatalog::Key::kButton2,
-			 g_gr->images().get("wui/messages/message_archived.png"),
+			 g_gr->images().get("images/ui_basic/but2.png"),
+			 g_gr->images().get("images/wui/messages/message_archived.png"),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -167,8 +167,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "center_main_mapview_on_location",
 			 580 - 5 - 34, 5, 34, 34,
-			 ImageCatalog::Key::kButton2,
-			 g_gr->cataloged_image(ImageCatalog::Key::kMenuGoto),
+			 g_gr->images().get("images/ui_basic/but2.png"),
+			 g_gr->images().get("images/wui/menus/menu_goto.png"),
 			 /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
 			 (boost::format(_("G: %s"))
 			  /** TRANSLATORS: Tooltip in the messages window */
@@ -181,7 +181,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::MultilineTextarea
 			(this,
 			 5, 375 - 5 - 34, 5 * 34, 40,
-			 "<rt image=pics/message_new.png></rt>",
+			 "<rt image=images/wui/messages/message_new.png></rt>",
 			 UI::Align::Align_BottomLeft, false);
 
 	if (get_usedefaultpos())
@@ -211,10 +211,10 @@ bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
 	return false; // shouldn't happen
 }
 
-static constexpr ImageCatalog::Key status_picture_keys[] = {
-	ImageCatalog::Key::kMessageNew,
-	ImageCatalog::Key::kMessageRead,
-	ImageCatalog::Key::kMessageArchived,
+static char const * const status_picture_filename[] = {
+	"images/wui/messages/message_new.png",
+	"images/wui/messages/message_read.png",
+	"images/wui/messages/message_archived.png"
 };
 
 void GameMessageMenu::show_new_message
@@ -294,7 +294,7 @@ void GameMessageMenu::update_record
 {
 	er.set_picture
 		(ColStatus,
-		 g_gr->cataloged_image(status_picture_keys[message.status()]));
+		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
 	er.set_string(ColTitle, message.title());
 
 	const uint32_t time = message.sent();
@@ -541,27 +541,27 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 		case Widelands::Message::Type::kGeologists:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Geologists");
-			message_type_image =  "<rt image=pics/menu_geologist.png></rt>";
+			message_type_image =  "<rt image=images/wui/fieldaction/menu_geologist.png></rt>";
 			break;
 		case Widelands::Message::Type::kEconomy:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Economy");
-			message_type_image =  "<rt image=pics/menu_build_flag.png></rt>";
+			message_type_image =  "<rt image=images/wui/fieldaction/menu_build_flag.png></rt>";
 			break;
 		case Widelands::Message::Type::kSeafaring:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Seafaring");
-			message_type_image =  "<rt image=pics/start_expedition.png></rt>";
+			message_type_image =  "<rt image=images/wui/buildings/start_expedition.png></rt>";
 			break;
 		case Widelands::Message::Type::kWarfare:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Warfare");
-			message_type_image =  "<rt image=pics/messages_warfare.png></rt>";
+			message_type_image =  "<rt image=images/wui/messages/messages_warfare.png></rt>";
 			break;
 		case Widelands::Message::Type::kScenario:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Scenario");
-			message_type_image =  "<rt image=pics/menu_objectives.png></rt>";
+			message_type_image =  "<rt image=images/wui/menus/menu_objectives.png></rt>";
 			break;
 		case Widelands::Message::Type::kNoMessages:
 			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
@@ -570,7 +570,7 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 		default:
 			/** TRANSLATORS: This is the default message type */
 			message_type_tooltip = _("General");
-			message_type_image =  "<rt image=pics/message_new.png></rt>";
+			message_type_image =  "<rt image=images/wui/messages/message_new.png></rt>";
 	}
 
 	m_display_message_type_label->set_tooltip(
@@ -605,23 +605,23 @@ void GameMessageMenu::toggle_mode()
 	case Inbox:
 		mode = Archive;
 		set_title(_("Messages: Archive"));
-		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Key::kMessageActionRestore));
+		m_archivebtn->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Restore selected messages")).str());
-		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_new.png"));
+		m_togglemodebtn->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
 		m_togglemodebtn->set_tooltip(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
-		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Key::kMessageActionArchive));
+		m_archivebtn->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Archive selected messages")).str());
-		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_archived.png"));
+		m_togglemodebtn->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
 		m_togglemodebtn->set_tooltip(_("Show Archive"));
 		break;
 	default:

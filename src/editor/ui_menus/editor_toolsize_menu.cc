@@ -45,15 +45,15 @@ EditorToolsizeMenu::EditorToolsizeMenu
 	m_increase
 		(this, "incr",
 		 get_inner_w() / 2 - 10, 25, 20, 20,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
 		 get_inner_w() / 2 + 10, 25, 20, 20,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {

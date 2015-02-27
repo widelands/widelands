@@ -138,10 +138,8 @@ protected:
 	void draw_overlay(RenderTarget &) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	// Uses 'key' to fetch and set the sel_picture from the ImageCatalog.
-	void set_sel_picture(ImageCatalog::Key key);
 	void unset_sel_picture();
-
+	void set_sel_picture(const char * const);
 	void adjust_toolbar_position() {
 		m_toolbar.set_pos
 			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
@@ -200,7 +198,8 @@ private:
 	std::vector<const Image*> m_workarea_pics;
 };
 
+#define PIC2 g_gr->images().get("images/ui_basic/but2.png")
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
-	 &m_toolbar, name, 0, 0, 34U, 34U, ImageCatalog::Key::kButton2
+    &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

@@ -61,8 +61,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - 2 * width - hspacing(),
 		 m_lower_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < noise_tool.get_interval().min),
 	m_lower_increase
@@ -70,8 +70,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - width - hspacing(),
 		 m_lower_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 	m_upper_decrease
@@ -79,8 +79,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - 2 * width - hspacing(),
 		 m_upper_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < noise_tool.get_interval().max),
 	m_upper_increase
@@ -88,8 +88,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - width - hspacing(),
 		 m_upper_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 	m_set_label
@@ -103,8 +103,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - 2 * width - hspacing(),
 		 m_set_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < noise_tool.set_tool().get_interval().min),
 	m_setto_increase
@@ -112,8 +112,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - width - hspacing(),
 		 m_set_label.get_y(),
 		 width, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT)
 {

@@ -130,7 +130,7 @@ BuildingDescr::BuildingDescr
 	}
 
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
-	m_global = directory.find("data/global/") < directory.size();
+	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_icon_fname  = directory;

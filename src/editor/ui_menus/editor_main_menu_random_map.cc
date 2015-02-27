@@ -78,7 +78,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	new UI::Textarea(this, posx, posy, _("Random Number:"));
 	posy += height + spacing;
 
-	m_nrEditbox = new UI::EditBox(this, posx, posy, width, height, ImageCatalog::Key::kButton1);
+	m_nrEditbox =
+		new UI::EditBox
+			(this,
+			 posx, posy,
+			 width, height,
+			 g_gr->images().get("images/ui_basic/but1.png"));
 	m_nrEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
 	RNG rng;
@@ -103,16 +108,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	widthupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_PLUS));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	widthdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_MINUS));
 
@@ -131,16 +136,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	heightupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_PLUS));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	heightdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_MINUS));
 
@@ -152,16 +157,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * waterupbtn = new UI::Button
 		(this, "water_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	waterupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_PLUS));
 
 	UI::Button * waterdownbtn = new UI::Button
 		(this, "water_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	waterdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
 
@@ -177,16 +182,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * landupbtn = new UI::Button
 		(this, "land_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	landupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_PLUS));
 
 	UI::Button * landdownbtn = new UI::Button
 		(this, "land_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	landdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
 
@@ -202,16 +207,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * wastelandupbtn = new UI::Button
 		(this, "wasteland_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	wastelandupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_PLUS));
 
 	UI::Button * wastelanddownbtn = new UI::Button
 		(this, "wasteland_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	wastelanddownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
 
@@ -257,7 +262,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_res = new UI::Button
 		(this, "resources",
 		 posx, posy, width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 m_res_amounts[m_res_amount].c_str());
 	m_res->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_RES));
 
@@ -267,7 +272,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_world = new UI::Button
 		(this, "world",
 		 posx, posy, width, height,
-		 ImageCatalog::Key::kButton1,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 m_world_descriptions[m_current_world].descrname);
 	m_world->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_WORLD));
@@ -279,7 +284,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	new UI::Textarea(this, posx, posy, _("Map ID:"));
 	posy += height + spacing;
 
-	m_idEditbox = new UI::EditBox(this, posx, posy, width, height, ImageCatalog::Key::kButton1);
+	m_idEditbox =
+		new UI::EditBox
+			(this,
+			 posx, posy,
+			 width, height,
+			 g_gr->images().get("images/ui_basic/but1.png"));
 	m_idEditbox->set_text("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
@@ -292,16 +302,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * playerupbtn = new UI::Button
 		(this, "player_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"));
 	playerupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_PLUS));
 
 	UI::Button * playerdownbtn = new UI::Button
 		(this, "player_down",
 		 posx, posy, height, height,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"));
 	playerdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_MINUS));
 
@@ -318,7 +328,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_goButton = new UI::Button
 		(this, "generate_map",
 		 posx, posy, width, height,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Generate Map"));
 	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;

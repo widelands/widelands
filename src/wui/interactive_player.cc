@@ -74,39 +74,39 @@ InteractivePlayer::InteractivePlayer
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Minimap is different as it warps and stuff
 
-#define INIT_BTN_this(image_key, name, tooltip)                       \
+#define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->cataloged_image(image_key),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
-#define INIT_BTN(image_key, name, tooltip)                            \
+#define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->cataloged_image(image_key),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 m_toggle_chat
 	(INIT_BTN_this
-	 (ImageCatalog::Key::kMenuChat, "chat", _("Chat"))),
+	 ("wui/menus/menu_chat", "chat", _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 (ImageCatalog::Key::kMenuOptions, "options_menu", _("Options"))),
+	 ("wui/menus/menu_options_menu", "options_menu", _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 (ImageCatalog::Key::kMenuStatistics, "statistics_menu", _("Statistics"))),
+	 ("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 (ImageCatalog::Key::kMenuObjectives, "objectives", _("Objectives"))),
+	 ("wui/menus/menu_objectives", "objectives", _("Objectives"))),
 m_toggle_minimap
 	(INIT_BTN_this
-	 (ImageCatalog::Key::kMenuMinimap, "minimap", _("Minimap"))),
+	 ("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 (ImageCatalog::Key::kMenuMessagesOld, "messages", _("Messages"))),
+	 ("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 (ImageCatalog::Key::kHelp, "help", _("Tribal Ware Encyclopedia")))
+	 ("ui_basic/menu_help", "help", _("Tribal Ware Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
@@ -221,19 +221,18 @@ void InteractivePlayer::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		ImageCatalog::Key image_key = ImageCatalog::Key::kMenuMessagesOld;
-
+		char const * msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 				player().messages().nr_messages(Widelands::Message::Status::kNew))
 		{
-			image_key = ImageCatalog::Key::kMenuMessagesNew;
+			msg_icon    = "images/wui/menus/menu_toggle_newmessage_menu.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();
 		}
-		m_toggle_message_menu.set_image(g_gr->cataloged_image(image_key));
+		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }

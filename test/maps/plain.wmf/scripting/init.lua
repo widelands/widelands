@@ -1,6 +1,6 @@
-include "data/scripting/lunit.lua"
-include "data/scripting/coroutine.lua"
-include "data/scripting/ui.lua"
+include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
 
 game = wl.Game()
 map = game.map

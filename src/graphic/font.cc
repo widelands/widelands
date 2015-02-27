@@ -54,7 +54,7 @@ namespace UI {
 Font::Font(const std::string & name, int size)
 {
 	// Load the TrueType Font
-	std::string filename = "data/i18n/fonts/";
+	std::string filename = "i18n/fonts/";
 	filename += name;
 
 	//  We must keep this File Read open, otherwise the following calls are

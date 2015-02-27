@@ -7,11 +7,11 @@ map = wl.Game().map
 
 set_textdomain("scenario_tutorial03_seafaring.wmf")
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/infrastructure.lua"
-include "data/scripting/messages.lua"
-include "data/scripting/table.lua"
-include "data/scripting/ui.lua"
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 sf = map.player_slots[1].starting_field
 second_port_field = map:get_field(37, 27)

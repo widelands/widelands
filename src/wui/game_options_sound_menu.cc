@@ -49,7 +49,7 @@ ingame_music_volume
 	 + 1 * vspacing() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),
-	 ImageCatalog::Key::kButton1),
+	 g_gr->images().get("images/ui_basic/but1.png")),
 ingame_sound_volume_label
 	(this,
 	 hmargin(),
@@ -64,7 +64,7 @@ ingame_sound_volume
 	 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_fx_volume(),
-	 ImageCatalog::Key::kButton1)
+	 g_gr->images().get("images/ui_basic/but1.png"))
 {
 	ingame_music.set_state(!g_sound_handler.get_disable_music());
 	ingame_sound.set_state(!g_sound_handler.get_disable_fx   ());

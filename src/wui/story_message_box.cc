@@ -64,7 +64,7 @@ StoryMessageBox::StoryMessageBox
 	UI::Button * okbtn = new UI::Button
 		(this, "ok",
 		 posx, posy, but_width, 20,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 button_text);
 	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
 

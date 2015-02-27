@@ -28,6 +28,11 @@
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 
+static char const * pic_priority_low     = "images/wui/buildings/low_priority_button.png";
+static char const * pic_priority_normal  = "images/wui/buildings/normal_priority_button.png";
+static char const * pic_priority_high    = "images/wui/buildings/high_priority_button.png";
+static char const * pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
+
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
@@ -45,7 +50,7 @@ m_increase_max_fill(nullptr),
 m_decrease_max_fill(nullptr),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::wwWARE),
-m_max_fill_indicator(g_gr->cataloged_image(ImageCatalog::Key::kBuildingMaxFillIndicator)),
+m_max_fill_indicator(g_gr->images().get(pic_max_fill_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
 m_cache_max_fill(queue->get_max_fill()),
@@ -184,19 +189,13 @@ void WaresQueueDisplay::update_priority_buttons()
 		m_priority_radiogroup = new UI::Radiogroup();
 
 		m_priority_radiogroup->add_button
-			(this, pos,
-			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingPriorityHigh),
-			 _("Highest priority"));
+			(this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
 		pos.y += PriorityButtonSize;
 		m_priority_radiogroup->add_button
-				(this, pos,
-				 g_gr->cataloged_image(ImageCatalog::Key::kBuildingPriorityNormal),
-				 _("Normal priority"));
+				(this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
 		pos.y += PriorityButtonSize;
 		m_priority_radiogroup->add_button
-				(this, pos,
-				 g_gr->cataloged_image(ImageCatalog::Key::kBuildingPriorityLow),
-				 _("Lowest priority"));
+				(this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 	}
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
@@ -240,8 +239,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_decrease_max_fill = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 		 _("Decrease the number of wares you want to be stored here."));
 	m_decrease_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -250,8 +249,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_increase_max_fill = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 ImageCatalog::Key::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 		 _("Increase the number of wares you want to be stored here."));
 	m_increase_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));

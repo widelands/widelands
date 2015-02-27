@@ -52,6 +52,7 @@ void set_locale(std::string);
 const std::string & get_locale();
 
 void set_localedir(std::string);
+const std::string& get_localedir();
 
 
 // Localize a list of 'items'. The last 2 items are concatenated with "and" or

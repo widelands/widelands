@@ -6,8 +6,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 
 -- =============
@@ -55,8 +55,8 @@ building_stat = {
       h1(_[[Check out your taverns]]) ..
       p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a list where you can easily check this.]])
    ) ..
-   rt("image=wui/menus/menu_toggle_menu.png",p(_[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]])) ..
-   rt("image=wui/menus/menu_building_stats.png",p(_[[Afterwards, choose the ‘Building statistics’.]]) ..
+   rt("image=images/wui/menus/menu_toggle_menu.png",p(_[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]])) ..
+   rt("image=images/wui/menus/menu_building_stats.png",p(_[[Afterwards, choose the ‘Building statistics’.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Open the building statistics window.]]) ..
       listitem_bullet(_[[When you have looked up the number of taverns, close it.]])
@@ -65,7 +65,7 @@ building_stat = {
    obj_name = "open_building_stat",
    obj_title = _"Look up your number of taverns in the building statistics window.",
    obj_body =
-      rt("image=wui/menus/menu_building_stats.png", p(_[[The building statistics window gives you an overview over the buildings you have.]])) ..
+      rt("image=images/wui/menus/menu_building_stats.png", p(_[[The building statistics window gives you an overview over the buildings you have.]])) ..
    rt(
       paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the building statistics window
@@ -83,7 +83,7 @@ inventory1 = {
       h1(_[[Check for rations]]) ..
       p(_[[OK. In the list, you’ve seen that you have no more taverns or inns. That means that you’re not producing any rations. But let’s see what we still have in stock.]])
    ) ..
-   rt("image=wui/menus/menu_stock.png",p(_[[Click on the ‘Stock’ button.]])) ..
+   rt("image=images/wui/menus/menu_stock.png",p(_[[Click on the ‘Stock’ button.]])) ..
    rt(
       paragraphdivider() ..
       listitem_arrow(_[[You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window quickly.]])
@@ -107,7 +107,7 @@ inventory2 = {
       p(_[[Looking at the rations, there are currently only five in total, probably on their way to somewhere. Five rations are not much for such a big economy.]]) ..
       p(_[[The second tab shows you all your workers, again those on roads and in buildings summed up.]]) ..
       p(_[[Now have a look at these two tabs. When you click on the]])) ..
-   rt("image=wui/stats/menu_tab_wares_warehouse.png",p(_[[third tab (‘Wares in warehouses’), I’ll continue.]])
+   rt("image=images/wui/stats/menu_tab_wares_warehouse.png",p(_[[third tab (‘Wares in warehouses’), I’ll continue.]])
    ),
    h = 350,
    show_instantly = true,
@@ -179,7 +179,7 @@ ware_encyclopedia = {
       p(_[[When you’ve played a lot, you will know such things by heart. But when you’re unsure what this tribe needs for a special ware, you can easily look it up in your tribe’s ware encyclopedia.]]) ..
       p(_[[This encyclopedia can be accessed via]])
    ) ..
-   rt("image=menu_help.png",p(_[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
+   rt("image=images/ui_basic/menu_help.png",p(_[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
       p(_[[If you want, you can try it out. A soldier needs a wood lance and a helm – from there on out, you can search backwards.]])
    ),
    h = 350
@@ -204,7 +204,7 @@ ware_stats1 = {
    title = _"Ware Statistics",
    body = rt(
       p(_[[In the statistics menu, there is also a]])) ..
-      rt("image=wui/menus/menu_ware_stats.png",p(_[[‘Ware statistics’ button.]])) ..
+      rt("image=images/wui/menus/menu_ware_stats.png",p(_[[‘Ware statistics’ button.]])) ..
       rt(paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the ware statistics button
       listitem_bullet(_[[Click on it.]])
@@ -225,7 +225,7 @@ ware_stats2 = {
       p(_[[In this menu window, you can select wares to see how their production or consumption has changed over time. Try it out with some wares.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[I’ll continue as soon as you click on the]])) ..
-   rt("image=wui/stats/menu_tab_wares_econ_health.png",p(_[[third tab (‘Economy Health’).]])
+   rt("image=images/wui/stats/menu_tab_wares_econ_health.png",p(_[[third tab (‘Economy Health’).]])
    ),
    h = 250,
    show_instantly = true,
@@ -325,7 +325,7 @@ economy_settings1 = {
       p(_[[I’ve shown you our stock menu window, where you could see which wares are at the warehouses. You remember?]]) ..
       p(_[[Now I’ll tell you how you can determine how many wares you want to have. The menu window for this purpose can be accessed via any flag and is called ‘Configure economy’.]])) ..
    -- Yup, that's indeed the correct icon
-   rt("image=wui/stats/genstats_nrwares.png",p(_[[This is the icon.]])) ..
+   rt("image=images/wui/stats/genstats_nrwares.png",p(_[[This is the icon.]])) ..
    rt(
       paragraphdivider() ..
       listitem_bullet(_[[Open this window.]])

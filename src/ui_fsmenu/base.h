@@ -23,7 +23,6 @@
 #include <string>
 #include <memory>
 
-#include "graphic/image_catalog.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
@@ -41,7 +40,11 @@ class Image;
  */
 class FullscreenMenuBase : public UI::Panel {
 public:
-	FullscreenMenuBase(ImageCatalog::Key background_image_key);
+	/// Calls FullscreenMenuBase(const std::string& bgpic)
+	/// with a default background image
+	FullscreenMenuBase();
+
+	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;
@@ -52,7 +55,7 @@ public:
 	uint32_t fs_big();
 
 private:
-	ImageCatalog::Key background_image_key_;
+	std::string background_image_;
 };
 
 

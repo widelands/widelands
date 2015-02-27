@@ -37,13 +37,13 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
 		  m_butw, get_h() - vbox.get_y(), m_padding),
 	metaserver
-		(&vbox, "metaserver", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "metaserver", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Internet game"), "", true, false),
 	lan
-		(&vbox, "lan", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "lan", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("LAN / Direct IP"), "", true, false),
 	back
-		(&vbox, "back", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Back"), "", true, false)
 {
 	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
@@ -79,8 +79,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 			new UI::Button
 				(this, "login_dialog",
 				 m_box_x + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
-				 ImageCatalog::Key::kButton1,
-				 g_gr->cataloged_image(ImageCatalog::Key::kActionContinue),
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 g_gr->images().get("images/ui_basic/continue.png"),
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind

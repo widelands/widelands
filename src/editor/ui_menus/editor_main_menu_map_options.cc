@@ -63,7 +63,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 ImageCatalog::Key::kButton1);
+			 g_gr->images().get("images/ui_basic/but1.png"));
 	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 0));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
@@ -81,7 +81,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 ImageCatalog::Key::kButton1);
+			 g_gr->images().get("images/ui_basic/but1.png"));
 	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 1));
 	posy += height + spacing;
 	m_descr =
@@ -96,7 +96,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 		new UI::Button
 			(this, "set_origin",
 			 5, get_inner_h() - 25, get_inner_w() - 10, 20,
-			 ImageCatalog::Key::kButton0,
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Set origin"),
 			 _
 				("Set the position that will have the coordinates (0, 0). This will "

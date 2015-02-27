@@ -7,11 +7,11 @@ plr2 = wl.Game().players[2]
 
 set_textdomain("scenario_tutorial04_economy.wmf")
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/infrastructure.lua"
-include "data/scripting/messages.lua"
-include "data/scripting/table.lua"
-include "data/scripting/ui.lua"
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 map = wl.Game().map
 mv = wl.ui.MapView()

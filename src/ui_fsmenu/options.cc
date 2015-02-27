@@ -94,7 +94,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:
-	FullscreenMenuBase(ImageCatalog::Key::kFullscreenOptions),
+	FullscreenMenuBase("images/ui_fsmenu/optionsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw   (get_h() * 333 / 10000),
@@ -110,17 +110,17 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_advanced_options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton2,
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton2,
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 	// Title
@@ -173,7 +173,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(),
 		 80, m_vbutw,
 		 opt.maxfps, 0, 99, "",
-		 ImageCatalog::Key::kButton1),
+		 g_gr->images().get("images/ui_basic/but1.png")),
 
 
 	// First options block 'general options', second column
@@ -273,7 +273,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
-		 ImageCatalog::Key::kButton1, true),
+		 g_gr->images().get("images/ui_basic/but1.png"), true),
 	m_label_autosave
 		(this,
 		 m_dock_windows_to_edges.get_x(),
@@ -290,7 +290,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
-		 ImageCatalog::Key::kButton1, true),
+		 g_gr->images().get("images/ui_basic/but1.png"), true),
 	m_label_remove_replays
 		(this,
 		 m_label_autosave.get_x(),
@@ -406,30 +406,29 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
 	m_language_list.add("English", "en", nullptr, current_locale == "en");
 
-	// We start with the locale directory so we can pick up locales
-	// that don't have a configuration file yet.
-	FilenameSet files = g_fs->list_directory("locale");
-
 	// Add translation directories to the list
 	std::vector<LanguageEntry> entries;
-	std::string localename;
 	std::string selected_locale;
 
 	try {  // Begin read locales table
 		LuaInterface lua;
-		std::unique_ptr<LuaTable> all_locales(lua.run_script("data/i18n/locales.lua"));
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
 		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
 
-		for (const std::string& filename : files) {  // Begin scan locales directory
-			char const* const path = filename.c_str();
+		// We start with the locale directory so we can pick up locales
+		// that don't have a configuration file yet.
+		// NOCOM(GunChleoc): Review this
+		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir()));
+		FilenameSet files = fs->list_directory(".");
+
+		for (const std::string& localename : files) {  // Begin scan locales directory
+			const char* path = localename.c_str();
 			if (!strcmp(FileSystem::fs_filename(path), ".") ||
-				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				 !strcmp(FileSystem::fs_filename(path), "..") || !fs->is_directory(path)) {
 				continue;
 			}
 
 			try {  // Begin read locale from table
-				localename = g_fs->filename_without_ext(path);
-
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
 
@@ -512,7 +511,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	(OptionsCtrl::OptionsStruct const opt)
 	:
-	FullscreenMenuBase(ImageCatalog::Key::kFullscreen),
+	FullscreenMenuBase("ui_fsmenu/ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw   (get_h() * 333 / 10000),
@@ -526,12 +525,12 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton0,
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
-		 ImageCatalog::Key::kButton2,
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Title
@@ -556,14 +555,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(),
 			 get_w() / 5, m_vbutw,
 			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance),
-			 ImageCatalog::Key::kButton1),
+			 g_gr->images().get("images/ui_basic/but1.png")),
 
 	m_sb_dis_border
 			(this,
 			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(),
 			 get_w() / 5, m_vbutw,
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance),
-			 ImageCatalog::Key::kButton1),
+			 g_gr->images().get("images/ui_basic/but1.png")),
 
 	m_transparent_chat (this, Point(m_hmargin,
 											  m_label_snap_dis_border.get_y() +

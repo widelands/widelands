@@ -36,16 +36,16 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
 		  m_butw, get_h() - vbox.get_y(), m_padding),
 	new_game
-		(&vbox, "new_game", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "new_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("New Game"), "", true, false),
 	campaign
-		(&vbox, "campaigns", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "campaigns", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Campaigns"), "", true, false),
 	load_game
-		(&vbox, "load_game", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "load_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Load Game"), "", true, false),
 	back
-		(&vbox, "back", 0, 0, m_butw, m_buth, m_button_background,
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Back"), "", true, false)
 {
 	new_game.sigclicked.connect

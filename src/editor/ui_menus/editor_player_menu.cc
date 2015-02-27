@@ -36,6 +36,29 @@
 #include "ui_basic/textarea.h"
 #include "wui/overlay_manager.h"
 
+namespace {
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
 inline EditorInteractive & EditorPlayerMenu::eia() {
@@ -50,15 +73,15 @@ EditorPlayerMenu::EditorPlayerMenu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 ImageCatalog::Key::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
@@ -144,7 +167,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 ImageCatalog::Key::kButton0);
+					 g_gr->images().get("images/ui_basic/but0.png"));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -156,7 +179,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 ImageCatalog::Key::kButton0,
+					 g_gr->images().get("images/ui_basic/but0.png"),
 					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -180,17 +203,16 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 ImageCatalog::Key::kButton0,
+					 g_gr->images().get("images/ui_basic/but0.png"),
 					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(p - 1 + static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(player_pictures_small[p - 1]);
+		assert(player_image);
 
-		m_plr_set_pos_buts[p - 1]->set_image(player_image);
+		m_plr_set_pos_buts[p - 1]->set_pic(player_image);
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -228,17 +250,13 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
-			const Image* player_image =
-					g_gr->cataloged_image(static_cast<ImageCatalog::Key>(old_nr_players - 1 +
-																							static_cast<uint8_t>(offset)));
+			const Image* player_image = g_gr->images().get(player_pictures[old_nr_players - 1]);
+			assert(player_image);
 			map.overlay_manager().remove_overlay(sp, player_image);
 		}
 	}
 	map.set_nrplayers(nr_players);
 	m_remove_last_player.set_enabled(1 < nr_players);
-
-	// TODO(GunChleoc): Player selection tool isn't updated, it has the wrong color.
 
 	update();
 	// TODO(SirVer): Take steps when the player is referenced someplace. Not
@@ -427,9 +445,8 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
-		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(n - 1 + static_cast<uint8_t>(offset)));
+		const Image* player_image = g_gr->images().get(player_pictures[n - 1]);
+		assert(player_image);
 		overlay_manager.remove_overlay(start_pos, player_image);
 	}
 

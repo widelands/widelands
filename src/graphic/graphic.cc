@@ -45,9 +45,9 @@ namespace  {
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
 #ifndef _WIN32
-	const std::string icon_name = "data/images/logos/wl-ico-128.png";
+	const std::string icon_name = "images/logos/wl-ico-128.png";
 #else
-	const std::string icon_name = "data/images/logos/wl-ico-32.png";
+	const std::string icon_name = "images/logos/wl-ico-32.png";
 #endif
 	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_SetWindowIcon(sdl_window, s);
@@ -63,7 +63,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
-	  image_catalog_(new ImageCatalog()),
      image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
@@ -270,10 +269,6 @@ void Graphic::refresh()
 
 	SDL_GL_SwapWindow(m_sdl_window);
 	m_update = false;
-}
-
-const Image* Graphic::cataloged_image(ImageCatalog::Key key) {
-	return images().get(image_catalog_.get()->filepath(key));
 }
 
 

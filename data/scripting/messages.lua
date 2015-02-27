@@ -4,9 +4,9 @@
 --
 -- Functions to send messages to the player and to add objectives to campaigns.
 
-include "data/scripting/coroutine.lua"
-include "data/scripting/table.lua"
-include "data/scripting/ui.lua"
+include "scripting/coroutine.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 -- RST
 -- .. function:: send_message(player, title, body, parameters)

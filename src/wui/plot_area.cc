@@ -58,6 +58,7 @@ const uint32_t time_in_ms[] = {
 	30 * hours
 };
 
+const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor LINE_COLOR(0, 0, 0);
 const RGBColor ZERO_LINE_COLOR(255, 255, 255);
 
@@ -180,7 +181,7 @@ void draw_diagram
 	// first, tile the background
 	dst.tile
 		(Rect(Point(0, 0), inner_w, inner_h),
-		 g_gr->cataloged_image(ImageCatalog::Key::kBackgroundPlot), Point(0, 0));
+		 g_gr->images().get(BG_PIC), Point(0, 0));
 
 	// Draw coordinate system
 	// X Axis

@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font.h"
@@ -42,15 +40,19 @@ FullscreenMenuBase
 ==============================================================================
 */
 
+FullscreenMenuBase::FullscreenMenuBase():
+	FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg")
+	{}
+
 /**
  * Initialize a pre-game menu
  *
- * Args: background_image_key ImageCatalog key for the background picture
+ * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Key background_image_key)
+FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
 
-	background_image_key_ = background_image_key;
+	background_image_ = bgpic;
 }
 
 FullscreenMenuBase::~FullscreenMenuBase()
@@ -62,7 +64,7 @@ FullscreenMenuBase::~FullscreenMenuBase()
  * Draw the background / splash screen
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
-	const Image* bg = g_gr->cataloged_image(background_image_key_);
+	const Image* bg = g_gr->images().get(background_image_);
 	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()),
 	                   bg,
 	                   Rect(0, 0, bg->width(), bg->height()),

@@ -47,7 +47,7 @@ Statebox::Statebox
 		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
-			g_gr->cataloged_image(ImageCatalog::Key::kCheckboxLight);
+			g_gr->images().get("images/ui_basic/checkbox_light.png");
 }
 
 
@@ -70,9 +70,9 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (!(m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = enabled ?
-								  g_gr->cataloged_image(ImageCatalog::Key::kCheckboxLight) :
-								  g_gr->cataloged_image(ImageCatalog::Key::kCheckbox);
+		m_pic_graphics = g_gr->images().get(enabled ?
+															"images/ui_basic/checkbox_light.png" :
+															"images/ui_basic/checkbox.png");
 		set_flags
 			(Is_Highlighted, (m_flags & Is_Highlighted) && (m_flags & Is_Enabled));
 	}

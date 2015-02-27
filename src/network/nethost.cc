@@ -826,7 +826,7 @@ void NetHost::run(bool const autorun)
 				set_win_condition_script(gpdp.get_win_condition());
 			}
 		} else {
-			loaderUI.reset(new UI::ProgressWindow(ImageCatalog::Key::kLoadscreen));
+			loaderUI.reset(new UI::ProgressWindow ("images/loadscreens/progress.png"));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");
@@ -1299,7 +1299,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 	if (d->settings.maps.empty()) {
 		// Read in maps
 		std::vector<std::string> directories;
-		directories.push_back("data/maps");
+		directories.push_back("maps");
 		while (!directories.empty()) {
 			FilenameSet files = g_fs->list_directory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);

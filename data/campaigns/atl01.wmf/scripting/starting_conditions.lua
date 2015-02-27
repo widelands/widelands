@@ -10,7 +10,7 @@ p1:allow_buildings("all")
 p1:forbid_buildings{"shipyard"}
 
 -- A default headquarters
-include "data/tribes/atlanteans/scripting/sc00_headquarters.lua"
+include "tribes/atlanteans/scripting/sc00_headquarters.lua"
 init.func(p1) -- defined in sc00_headquarters
 
 local hq = wl.Game().map.player_slots[1].starting_field.immovable

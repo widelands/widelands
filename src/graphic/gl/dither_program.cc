@@ -88,7 +88,7 @@ DitherProgram::DitherProgram() {
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
 
-	dither_mask_.reset(new Texture(load_image_as_sdl_surface("data/world/pics/edge.png", g_fs), true));
+	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
 
 	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP));

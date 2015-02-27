@@ -2,9 +2,9 @@
 --                     TEXTS - No logic inside this file
 -- =======================================================================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
-include "data/scripting/messages.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
+include "scripting/messages.lua"
 
 
 -- ===========

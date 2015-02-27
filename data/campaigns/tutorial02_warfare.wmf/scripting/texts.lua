@@ -6,8 +6,8 @@
 -- Some formating functions
 -- =========================
 
-include "data/scripting/formatting.lua"
-include "data/scripting/format_scenario.lua"
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 -- =============
 -- Texts below
@@ -31,14 +31,14 @@ abilities = {
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
-   rt("image=data/tribes/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
+   rt("image=tribes/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
    rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
-   rt("image=data/tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
+   rt("image=tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
    rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
    -- The Atlanteans' image, because the Barbarian one has a white background
-   rt("image=data/tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
+   rt("image=tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
    rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a Barbarian soldier, the Barbarian will lose 35·0.97 = 34 health.]])) ..
-   rt("image=data/tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
+   rt("image=tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
    rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
 }
 
@@ -73,9 +73,9 @@ battlearena2 = {
 		_[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
-   rt("image=data/tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
-   rt("image=data/tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
-   rt("image=data/tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
+   rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
+   rt("image=tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
+   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
    h = 450
 }
 

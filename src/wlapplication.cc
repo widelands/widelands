@@ -773,7 +773,9 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	i18n::set_localedir(m_datadir + "/locale");
+	// NOCOM(GunChleoc): Review this
+	i18n::set_localedir(absolute_path_if_not_windows(FileSystem::get_working_directory() +
+																	 FileSystem::file_separator() + "locale"));
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -1074,17 +1076,17 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kReadme: {
-				FullscreenMenuFileView ff("data/txts/README.lua");
+				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kLicense: {
-				FullscreenMenuFileView ff("data/txts/license");
+				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kAuthors: {
-				FullscreenMenuFileView ff("data/txts/developers");
+				FullscreenMenuFileView ff("txts/developers");
 				ff.run();
 				break;
 			}

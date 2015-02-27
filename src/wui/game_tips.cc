@@ -28,6 +28,7 @@
 #include "profile/profile.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
+#define BG_IMAGE "images/loadscreens/tips_bg.png"
 
 GameTips::GameTips
 	(UI::ProgressWindow & progressWindow, const std::vector<std::string>& names)
@@ -59,7 +60,7 @@ GameTips::~GameTips() {
 /// Loads tips out of \var filename
 void GameTips::load_tips(std::string name)
 {
-	std::string filename = "data/txts/tips/" + name + ".tip";
+	std::string filename = "txts/tips/" + name + ".tip";
 	try {
 		Profile prof(filename.c_str());
 		while (Section * const s = prof.get_next_section(nullptr)) {
@@ -103,7 +104,7 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const Image* pic_background = g_gr->cataloged_image(ImageCatalog::Key::kLoadscreenTips);
+	const Image* pic_background = g_gr->images().get(BG_IMAGE);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();

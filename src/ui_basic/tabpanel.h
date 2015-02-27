@@ -22,7 +22,6 @@
 
 #include <vector>
 
-#include "graphic/image_catalog.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -69,13 +68,12 @@ private:
 struct TabPanel : public Panel {
 	friend struct Tab;
 
-	TabPanel(Panel * parent, int32_t x, int32_t y,
-				const ImageCatalog::Key background_image_key = ImageCatalog::Key::kUnknownImage);
+	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background);
 	// For Fullscreen menus
 	TabPanel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const ImageCatalog::Key background_image_key = ImageCatalog::Key::kUnknownImage);
+		 const Image* background);
 
 	uint32_t add
 		(const std::string & name,
@@ -109,7 +107,7 @@ private:
 	uint32_t         m_active;         ///< index of the currently active tab
 	int32_t          m_highlight;      ///< index of the highlighted button
 
-	const ImageCatalog::Key background_image_key_; ///< picture used to draw background
+	const Image* m_pic_background; ///< picture used to draw background
 };
 }
 

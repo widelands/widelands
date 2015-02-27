@@ -142,8 +142,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->cataloged_image(ImageCatalog::Key::kCursor);
-	s_default_cursor_click = g_gr->cataloged_image(ImageCatalog::Key::kCursorClick);
+	s_default_cursor = g_gr->images().get("images/ui_basic/cursor.png");
+	s_default_cursor_click = g_gr->images().get("images/ui_basic/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -1216,7 +1216,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 std::string Panel::ui_fn() {
 	std::string style(UI::g_fh1->fontset().serif());
-	if (g_fs->file_exists("data/i18n/fonts/" + style)) {
+	if (g_fs->file_exists("i18n/fonts/" + style)) {
 		return style;
 	}
 	log
