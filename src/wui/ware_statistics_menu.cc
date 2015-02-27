@@ -43,7 +43,7 @@ static const char pic_tab_production[] = "images/wui/stats/menu_tab_wares_produc
 static const char pic_tab_consumption[] = "images/wui/stats/menu_tab_wares_consumption.png";
 static const char pic_tab_economy[] = "images/wui/stats/menu_tab_wares_econ_health.png";
 // TODO(unknown): replace place holder
-static const char pic_tab_stock[] = "images/wui/stats/menu_tab_wares_stguchleocock.png";
+static const char pic_tab_stock[] = "images/wui/stats/menu_tab_wares_stock.png";
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
