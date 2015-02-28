@@ -18,7 +18,7 @@
 #define _LIBGETTEXT_H 1
 
 /* NLS can be disabled through the configure --disable-nls option.  */
-#define ENABLE_NLS 1 // We want this on
+#define ENABLE_NLS 1
 #if ENABLE_NLS
 
 /* Get declarations of GNU message catalog functions.  */
@@ -111,15 +111,15 @@
 #define GETTEXT_CONTEXT_GLUE "\004"
 
 /* Pseudo function calls, taking a MSGCTXT and a MSGID instead of just a
-   MSGID.  MSGCTXT and MSGID must be string literals.  MSGCTXT should be
-   short and rarely need to change.
-   The letter 'p' stands for 'particular' or 'special'.  */
+	MSGID.  MSGCTXT and MSGID must be string literals.  MSGCTXT should be
+	short and rarely need to change.
+	The letter 'p' stands for 'particular' or 'special'.  */
 #ifdef DEFAULT_TEXT_DOMAIN
 # define pgettext(Msgctxt, Msgid) \
-   pgettext_aux (DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
+	pgettext_aux (DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
 #else
 # define pgettext(Msgctxt, Msgid) \
-   pgettext_aux (NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
+	pgettext_aux (NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
 #endif
 #define dpgettext(Domainname, Msgctxt, Msgid) \
   pgettext_aux (Domainname, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, LC_MESSAGES)
@@ -127,10 +127,10 @@
   pgettext_aux (Domainname, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, Category)
 #ifdef DEFAULT_TEXT_DOMAIN
 # define npgettext(Msgctxt, Msgid, MsgidPlural, N) \
-   npgettext_aux (DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, LC_MESSAGES)
+	npgettext_aux (DEFAULT_TEXT_DOMAIN, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, LC_MESSAGES)
 #else
 # define npgettext(Msgctxt, Msgid, MsgidPlural, N) \
-   npgettext_aux (NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, LC_MESSAGES)
+	npgettext_aux (NULL, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, LC_MESSAGES)
 #endif
 #define dnpgettext(Domainname, Msgctxt, Msgid, MsgidPlural, N) \
   npgettext_aux (Domainname, Msgctxt GETTEXT_CONTEXT_GLUE Msgid, Msgid, MsgidPlural, N, LC_MESSAGES)
@@ -139,28 +139,122 @@
 
 inline static const char *
 pgettext_aux (const char *domain,
-              const char *msg_ctxt_id, const char *msgid,
-              int category)
+				  const char *msg_ctxt_id, const char *msgid,
+				  int category)
 {
   const char *translation = dcgettext (domain, msg_ctxt_id, category);
   if (translation == msg_ctxt_id)
-    return msgid;
+	 return msgid;
   else
-    return translation;
+	 return translation;
 }
 
 inline static const char *
 npgettext_aux (const char *domain,
-               const char *msg_ctxt_id, const char *msgid,
-               const char *msgid_plural, unsigned long int n,
-               int category)
+					const char *msg_ctxt_id, const char *msgid,
+					const char *msgid_plural, unsigned long int n,
+					int category)
 {
   const char *translation =
-    dcngettext (domain, msg_ctxt_id, msgid_plural, n, category);
+	 dcngettext (domain, msg_ctxt_id, msgid_plural, n, category);
   if (translation == msg_ctxt_id || translation == msgid_plural)
-    return (n == 1 ? msgid : msgid_plural);
+	 return (n == 1 ? msgid : msgid_plural);
   else
-    return translation;
+	 return translation;
+}
+
+/* The same thing extended for non-constant arguments.  Here MSGCTXT and MSGID
+	can be arbitrary expressions.  But for string literals these macros are
+	less efficient than those above.  */
+
+#include <string.h>
+
+#if (((__GNUC__ >= 3 || __GNUG__ >= 2) && !defined __STRICT_ANSI__) \
+	  /* || __STDC_VERSION__ >= 199901L */ )
+# define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 1
+#else
+# define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 0
+#endif
+
+#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#include <stdlib.h>
+#endif
+
+#define pgettext_expr(Msgctxt, Msgid) \
+  dcpgettext_expr (NULL, Msgctxt, Msgid, LC_MESSAGES)
+#define dpgettext_expr(Domainname, Msgctxt, Msgid) \
+  dcpgettext_expr (Domainname, Msgctxt, Msgid, LC_MESSAGES)
+
+inline static const char *
+dcpgettext_expr (const char *domain,
+					  const char *msgctxt, const char *msgid,
+					  int category)
+{
+  size_t msgctxt_len = strlen (msgctxt) + 1;
+  size_t msgid_len = strlen (msgid) + 1;
+  const char *translation;
+#if _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+  char msg_ctxt_id[msgctxt_len + msgid_len];
+#else
+  char buf[1024];
+  char *msg_ctxt_id =
+	 (msgctxt_len + msgid_len <= sizeof (buf)
+	  ? buf
+	  : static_cast<char *>(malloc(msgctxt_len + msgid_len)));
+  if (msg_ctxt_id != NULL)
+#endif
+	 {
+		memcpy (msg_ctxt_id, msgctxt, msgctxt_len - 1);
+		msg_ctxt_id[msgctxt_len - 1] = '\004';
+		memcpy (msg_ctxt_id + msgctxt_len, msgid, msgid_len);
+		translation = dcgettext (domain, msg_ctxt_id, category);
+#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+		if (msg_ctxt_id != buf)
+		  free (msg_ctxt_id);
+#endif
+		if (translation != msg_ctxt_id)
+		  return translation;
+	 }
+  return msgid;
+}
+
+#define npgettext_expr(Msgctxt, Msgid, MsgidPlural, N) \
+  dcnpgettext_expr (NULL, Msgctxt, Msgid, MsgidPlural, N, LC_MESSAGES)
+#define dnpgettext_expr(Domainname, Msgctxt, Msgid, MsgidPlural, N) \
+  dcnpgettext_expr (Domainname, Msgctxt, Msgid, MsgidPlural, N, LC_MESSAGES)
+
+inline static const char *
+dcnpgettext_expr (const char *domain,
+						const char *msgctxt, const char *msgid,
+						const char *msgid_plural, unsigned long int n,
+						int category)
+{
+  size_t msgctxt_len = strlen (msgctxt) + 1;
+  size_t msgid_len = strlen (msgid) + 1;
+  const char *translation;
+#if _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+  char msg_ctxt_id[msgctxt_len + msgid_len];
+#else
+  char buf[1024];
+  char *msg_ctxt_id =
+	 (msgctxt_len + msgid_len <= sizeof (buf)
+	  ? buf
+	  : static_cast<char *>(malloc(msgctxt_len + msgid_len)));
+  if (msg_ctxt_id != NULL)
+#endif
+	 {
+		memcpy (msg_ctxt_id, msgctxt, msgctxt_len - 1);
+		msg_ctxt_id[msgctxt_len - 1] = '\004';
+		memcpy (msg_ctxt_id + msgctxt_len, msgid, msgid_len);
+		translation = dcngettext (domain, msg_ctxt_id, msgid_plural, n, category);
+#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+		if (msg_ctxt_id != buf)
+		  free (msg_ctxt_id);
+#endif
+		if (!(translation == msg_ctxt_id || translation == msgid_plural))
+		  return translation;
+	 }
+  return (n == 1 ? msgid : msgid_plural);
 }
 
 #endif /* _LIBGETTEXT_H */
