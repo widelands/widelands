@@ -243,7 +243,6 @@ void MainMenuSaveMap::clicked_ok() {
  * Called, when the make directory button was clicked.
  */
 void MainMenuSaveMap::clicked_make_directory() {
-	// NOCOM make this much bigger
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run()) {
 		g_fs->ensure_directory_exists(m_basedir);
