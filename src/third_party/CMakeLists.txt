@@ -72,3 +72,9 @@ wl_library(third_party_eris
     eris/lzio.c
     eris/lzio.h
 )
+
+wl_library(third_party_gettext
+  THIRD_PARTY
+  SRCS
+    gettext/gettext.h
+)
