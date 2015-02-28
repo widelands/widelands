@@ -79,7 +79,7 @@ struct DefaultAI : Computer_Player {
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public Computer_Player::Implementation {
 		AggressiveImpl() {
-			name = _("Aggressive");
+			name = pgettext("ai_name", "Aggressive");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
 		                             Widelands::Player_Number const p) const override {
@@ -89,7 +89,7 @@ struct DefaultAI : Computer_Player {
 
 	struct NormalImpl : public Computer_Player::Implementation {
 		NormalImpl() {
-			name = _("Normal");
+			name = pgettext("ai_name", "Normal");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
 		                             Widelands::Player_Number const p) const override {
@@ -99,7 +99,7 @@ struct DefaultAI : Computer_Player {
 
 	struct DefensiveImpl : public Computer_Player::Implementation {
 		DefensiveImpl() {
-			name = _("Defensive");
+			name = pgettext("ai_name", "Defensive");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
 		                             Widelands::Player_Number const p) const override {

@@ -137,7 +137,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		// TODO(GunChleoc): This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
 		/** TRANSLATORS: This is preceded by a number */
 		m_players_label.set_text(
-		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
+			(boost::format(ngettext("%u player", "%u players", player_nr)) % player_nr).str());
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
 
@@ -174,7 +174,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
+			// TODO(GunChleoc): This should be ngettext("%u player" etc.
 			// with boost::format, but it refuses to work
 			/** TRANSLATORS: This is preceded by a number */
 			ngettext("player", "players", gpdp.get_number_of_players()));

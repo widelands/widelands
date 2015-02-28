@@ -2075,9 +2075,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 	if (haveUserName(effective_name, client.usernum)) {
 		uint32_t i = 2;
 		do {
-			char buf[32];
-			snprintf(buf, sizeof(buf), "%u", i++);
-			effective_name = (boost::format(_("Player %s")) % buf).str();
+			effective_name = (boost::format(_("Player %u")) % i).str();
 		} while (haveUserName(effective_name, client.usernum));
 	}
 

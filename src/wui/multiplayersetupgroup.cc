@@ -119,7 +119,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					snprintf
 						(buf, sizeof(buf),
 						 "pics/genstats_enable_plr_0%i.png", us.position + 1);
-					snprintf(buf2, sizeof(buf2), _("Player %i"), us.position + 1);
+					snprintf(buf2, sizeof(buf2), _("Player %u"), us.position + 1);
 				} else
 					snprintf(buf2, sizeof(buf2), _("Spectator"));
 
@@ -285,7 +285,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			char pic[42], hover[128];
 			snprintf(pic, sizeof(pic), "pics/fsel_editor_set_player_0%i_pos.png", player_setting.shared_in);
-			snprintf(hover, sizeof(hover), _("Player %i"), player_setting.shared_in);
+			snprintf(hover, sizeof(hover), _("Player %u"), player_setting.shared_in);
 
 			tribe->set_pic(g_gr->images().get(pic));
 			tribe->set_tooltip(hover);
@@ -304,7 +304,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
-						title = (boost::format(_("AI: %s")) % _("Random")).str();
+						title = (boost::format(_("AI: %s")) % pgettext("ai_name", "Random")).str();
 						pic += "ai_Random.png";
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
@@ -318,7 +318,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->images().get(pic));
 			if (player_setting.random_tribe) {
-				std::string random = _("Random");
+				std::string random = pgettext("tribe", "Random");
 				if (!m_tribenames["random"].size())
 					m_tribepics[random] = g_gr->images().get("pics/random.png");
 				tribe->set_tooltip(random.c_str());

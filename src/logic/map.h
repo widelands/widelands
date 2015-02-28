@@ -175,7 +175,7 @@ public:
 	    uint32_t w = 64,
 	    uint32_t h = 64,
 	    char const* name = _("No Name"),
-	    char const* author = _("Unknown"),
+		 char const* author = pgettext("author_name", "Unknown"),
 	    char const* description = _("no description defined"));
 
 	void recalc_whole_map(const World& world);

@@ -241,7 +241,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 	if (gpdp.get_number_of_players() > 0) {
 		sprintf(buf, "%i", gpdp.get_number_of_players());
 	} else {
-		sprintf(buf, "%s", _("Unknown"));
+		sprintf(buf, "%s", pgettext("number_of_players", "Unknown"));
 	}
 	m_ta_players.set_text(buf);
 	m_ta_win_condition.set_text(gpdp.get_win_condition());

@@ -167,7 +167,8 @@ void GameSummaryScreen::fill_data()
 				 stat_str = _("Resigned");
 				 break;
 			default:
-				stat_str = _("Unknown");
+				/** TRANSLATORS: It is unknown whether the player won, lost or resigned */
+				stat_str = pgettext("player_won", "Unknown");
 		}
 		te.set_string(2, stat_str);
 		// Time

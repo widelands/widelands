@@ -199,7 +199,7 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		if (gpdp.get_number_of_players() > 0) {
 			sprintf(buf, "%i", gpdp.get_number_of_players());
 		} else {
-			sprintf(buf, "%s", _("Unknown"));
+			sprintf(buf, "%s", pgettext("number_of_players", "Unknown"));
 		}
 		m_ta_players.set_text(buf);
 

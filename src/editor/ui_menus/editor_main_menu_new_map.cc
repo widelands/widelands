@@ -148,11 +148,12 @@ void Main_Menu_New_Map::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
-	map.create_empty_map(egbase.world(),
-	                     Widelands::MAP_DIMENSIONS[m_w],
-	                     Widelands::MAP_DIMENSIONS[m_h],
-	                     _("No Name"),
-	                     g_options.pull_section("global").get_string("realname", _("Unknown")));
+	map.create_empty_map(
+				egbase.world(),
+				Widelands::MAP_DIMENSIONS[m_w],
+				Widelands::MAP_DIMENSIONS[m_h],
+				_("No Name"),
+				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);

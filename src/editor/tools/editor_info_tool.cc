@@ -99,7 +99,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
 	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
-	buf += "• " + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
+	buf += "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
 	buf += "• " + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
 
 	// *** Resources info
@@ -120,7 +120,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
+	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map.get_name()).str() + "\n";
 	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 

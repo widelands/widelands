@@ -191,7 +191,7 @@ void PlayerDescriptionGroup::refresh()
 				m_tribenames[player.tribe] = global.get_safe_string("name");
 			}
 			if (player.random_tribe) {
-				d->btnPlayerTribe->set_title(_("Random"));
+				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
 			} else {
 				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
 			}

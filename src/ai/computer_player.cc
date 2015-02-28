@@ -36,7 +36,8 @@ struct EmptyAI : Computer_Player {
 	void think() override {}
 
 	struct EmptyAIImpl : Implementation {
-		EmptyAIImpl() {name = _("None");}
+		/** TRANSLATORS: The name of the empty AI */
+		EmptyAIImpl() {name = pgettext("ai_name", "None");}
 		Computer_Player * instantiate
 			(Widelands::Game & g, Widelands::Player_Number const pid) const override
 		{

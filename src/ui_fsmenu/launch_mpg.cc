@@ -484,7 +484,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		std::string temp =
 			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
 			?
-			(format(_("Player %i")) % (settings.playernum + 1)).str()
+			(format(_("Player %u")) % (settings.playernum + 1)).str()
 			:
 			_("Spectator");
 		temp  = (format(_("At the moment you are %s")) % temp.c_str()).str() + "\n\n";

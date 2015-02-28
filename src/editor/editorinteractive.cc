@@ -592,8 +592,9 @@ void Editor_Interactive::run_editor(const std::string& filename, const std::stri
 				   editor.world(),
 				   64,
 				   64,
+					/** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-				   g_options.pull_section("global").get_string("realname", _("Unknown")));
+					g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 				load_all_tribes(&editor, &loader_ui);
 
