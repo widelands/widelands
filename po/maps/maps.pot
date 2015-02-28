@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2014 Widelands Development Team
+# Copyright (C) 2005-2015 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-07 20:39+0000\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,9 +15,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
+#: ../../campaigns/campaigns.conf:95
 msgid ""
-"01 – From Nemesis to Genesis"
+"From Nemesis to Genesis"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
@@ -25,89 +25,113 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining Atlanteans struggle to make a new home for themselves."
 msgstr ""
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/bar01.wmf/elemental:8
+#: ../../campaigns/campaigns.conf:67
 msgid ""
-"Barbarians – The Second Empire"
+"A Place to Call Home"
 msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/bar01.wmf/elemental:10
+msgid ""
+"In this scenario, the higher production buildings including mining will be introduced."
+msgstr ""
+
+#: ../../campaigns/bar02.wmf/elemental:7
+#: ../../campaigns/campaigns.conf:72
+msgid ""
+"This Land is Our Land"
+msgstr ""
+
+#: ../../campaigns/bar02.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings and will introduce fighting."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:27
+msgid ""
+"The Second Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:29
+msgid ""
+"Barbarians"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:31
 msgid ""
 "Easy. Introduces the Barbarians"
 msgstr ""
 
-#: ../../campaigns/cconfig:31
+#: ../../campaigns/campaigns.conf:32
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons, and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees, and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father’s spirit that he’d return to re-established order. While his brothers have raged blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 msgstr ""
 
-#: ../../campaigns/cconfig:34
+#: ../../campaigns/campaigns.conf:35
 msgid ""
-"Empire – The Months of Exile"
+"The Months of Exile"
 msgstr ""
 
-#: ../../campaigns/cconfig:37
+#: ../../campaigns/campaigns.conf:37
+msgid ""
+"Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:39
 msgid ""
 "Easy. Introduces the Empire"
 msgstr ""
 
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/campaigns.conf:40
 msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few Barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 Barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 msgstr ""
 
-#: ../../campaigns/cconfig:41
+#: ../../campaigns/campaigns.conf:43
 msgid ""
-"Atlanteans – The Run for the Fire"
+"The Run for the Fire"
 msgstr ""
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/campaigns.conf:45
+msgid ""
+"Atlanteans"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:47
 msgid ""
 "Challenging. Introduces the Atlanteans"
 msgstr ""
 
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/campaigns.conf:48
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
 msgstr ""
 
-#: ../../campaigns/cconfig:64
-#: ../../campaigns/t01.wmf/elemental:7
-msgid ""
-"01 – Eyes in the Dark"
-msgstr ""
-
-#: ../../campaigns/cconfig:69
-#: ../../campaigns/t02.wmf/elemental:7
-msgid ""
-"02 – A Place to Call Home"
-msgstr ""
-
-#: ../../campaigns/cconfig:74
-#: ../../campaigns/t03.wmf/elemental:7
-msgid ""
-"03 – This Land is Our Land"
-msgstr ""
-
-#: ../../campaigns/cconfig:81
+#: ../../campaigns/campaigns.conf:78
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid ""
-"01 – The Strands of Malac’ Mor"
+"The Strands of Malac’ Mor"
 msgstr ""
 
-#: ../../campaigns/cconfig:86
+#: ../../campaigns/campaigns.conf:83
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid ""
-"02 – An Outpost for Exile"
+"An Outpost for Exile"
 msgstr ""
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
+#: ../../campaigns/campaigns.conf:88
+#: ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid ""
 "Not yet implemented"
 msgstr ""
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid ""
+"Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid ""
 "Sorry, this map is not yet implemented."
 msgstr ""
@@ -122,29 +146,48 @@ msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the quest to find a good place for a new beginning. Only a few days later, they land on a green, Mediterranean island, looking like paradise. Overjoyed, they set out to explore this new living space."
 msgstr ""
 
-#: ../../campaigns/t01.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:15
 msgid ""
-"In this tutorial, the basic gameplay and control as well as basic production buildings of the Barbarians are introduced."
+"Basic Control"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"In this scenario, the higher production buildings including mining and military expansions will be introduced."
+"In this tutorial, you will learn how to navigate in Widelands and how to build buildings and roads."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/elemental:9
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:19
 msgid ""
-"This tutorial explains the handling of military and training site buildings and will introduce fighting."
+"Warfare"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/elemental:7
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
-"Tutorial 1"
+"In this tutorial, you will be taught the secrets of warfare: how to create soldiers, how to train them and how to lead them in battle."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/elemental:9
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:23
 msgid ""
-"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+"Seafaring"
+msgstr ""
+
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
+msgid ""
+"In this tutorial, you will get to know seafaring, which is how to handle ships and ports."
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:27
+msgid ""
+"Economy"
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your economy. Recommended for players with some experience."
 msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
@@ -157,11 +200,6 @@ msgid ""
 "Who will be the real king of the big atoll?"
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:12
-msgid ""
-"Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr ""
-
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid ""
 "Calvisson"
@@ -170,11 +208,6 @@ msgstr ""
 #: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But the ways to encompass these large territories are long and meandering, so it is easy to err into the land of the foreign clans."
-msgstr ""
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, green) | (blue, green) vs. (red, yellow)"
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
@@ -217,12 +250,6 @@ msgid ""
 "Man your ship and sail to the horizon."
 msgstr ""
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid ""
-"Suggested Teams: all ok"
-msgstr ""
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid ""
 "Desert Tournament"
@@ -231,13 +258,6 @@ msgstr ""
 #: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
-msgstr ""
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green)"
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
@@ -258,11 +278,6 @@ msgstr ""
 #: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
-msgstr ""
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, green)"
 msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:9
@@ -318,11 +333,6 @@ msgstr ""
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint III: Each mountain contains only one resource."
-msgstr ""
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, yellow)"
 msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -421,11 +431,6 @@ msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a long, long way to conquer all the islands. Good luck!"
 msgstr ""
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, black, purple) vs. (red, green, orange, white)"
-msgstr ""
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid ""
 "Island Hopping"
@@ -436,9 +441,14 @@ msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’, where two or more groups try to reach the center island as fast as possible, to be the first erecting a castle on the top of the central mountain."
 msgstr ""
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid ""
+"Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. Yellow + Green."
+"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
@@ -459,11 +469,6 @@ msgstr ""
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
 "You are standing on an island, crowned by mighty mountains which keep a wonderful and mighty treasure in their middle – The Green Plateau, which is hard to conquer but easy to lose. So, if you want it, be aware of the other clans."
-msgstr ""
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid ""
-"Suggested Teams: blue vs. yellow"
 msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
@@ -544,11 +549,6 @@ msgstr ""
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
 "The river has always provided food and communication. This time, eight empires will fight for control over this land."
-msgstr ""
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, yellow, black, purple)"
 msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7

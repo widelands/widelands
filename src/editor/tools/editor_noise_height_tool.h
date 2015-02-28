@@ -23,30 +23,30 @@
 #include "editor/tools/editor_set_height_tool.h"
 
 /// Set the height of a node to a random value within a defined interval.
-struct Editor_Noise_Height_Tool : public Editor_Tool {
-	Editor_Noise_Height_Tool
-	(Editor_Set_Height_Tool & the_set_tool,
+struct EditorNoiseHeightTool : public EditorTool {
+	EditorNoiseHeightTool
+	(EditorSetHeightTool & the_set_tool,
 	 const Widelands::HeightInterval the_interval =
 	     Widelands::HeightInterval(10, 14))
 		:
-		Editor_Tool(the_set_tool, the_set_tool),
+		EditorTool(the_set_tool, the_set_tool),
 		m_set_tool(the_set_tool),
 		m_interval(the_interval)
 	{}
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
-	                         Editor_Interactive& parent,
-	                         Editor_Action_Args& args) override;
+	                         Widelands::NodeAndTriangle<> center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs& args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_noise_height.png";
@@ -59,10 +59,10 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 		m_interval = i;
 	}
 
-	Editor_Set_Height_Tool & set_tool() const {return m_set_tool;}
+	EditorSetHeightTool & set_tool() const {return m_set_tool;}
 
 private:
-	Editor_Set_Height_Tool & m_set_tool;
+	EditorSetHeightTool & m_set_tool;
 	Widelands::HeightInterval m_interval;
 };
 

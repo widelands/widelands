@@ -35,16 +35,11 @@
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
 
-struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
-
-	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
+class FullscreenMenuInternetLobby : public FullscreenMenuBase {
+public:
+	FullscreenMenuInternetLobby (const char *, const char *, bool);
 
 	void think() override;
-
-	/// \returns the maximum number of clients that may connect
-	int32_t get_maxclients() {
-		return maxclients.getValue();
-	}
 
 private:
 	uint32_t m_butx;
@@ -56,12 +51,10 @@ private:
 	std::string m_fn;
 	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;
-	UI::Textarea m_maxclients;
-	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
-	UI::Table<const INet_Client * const> clientsonline;
-	UI::Listselect<INet_Game> opengames;
+	UI::Table<const InternetClient * const> clientsonline;
+	UI::Listselect<InternetGame> opengames;
 	GameChatPanel chat;
 
 	// Login information
@@ -69,10 +62,10 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillGamesList (const std::vector<INet_Game> &);
-	void fillClientList(const std::vector<INet_Client> &);
+	void fill_games_list (const std::vector<InternetGame> &);
+	void fill_client_list(const std::vector<InternetClient> &);
 
-	void connectToMetaserver();
+	void connect_to_metaserver();
 
 	void client_doubleclicked (uint32_t);
 	void server_selected (uint32_t);

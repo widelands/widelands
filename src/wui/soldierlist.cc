@@ -22,9 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
-#include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/building.h"
@@ -46,11 +44,11 @@ using Widelands::SoldierControl;
  * Iconic representation of soldiers, including their levels and current HP.
  */
 struct SoldierPanel : UI::Panel {
-	typedef boost::function<void (const Soldier *)> SoldierFn;
+	using SoldierFn = boost::function<void (const Soldier *)>;
 
-	SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building);
+	SoldierPanel(UI::Panel & parent, Widelands::EditorGameBase & egbase, Widelands::Building & building);
 
-	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
+	Widelands::EditorGameBase & egbase() const {return m_egbase;}
 
 	void think() override;
 	void draw(RenderTarget &) override;
@@ -83,7 +81,7 @@ private:
 		/*@}*/
 	};
 
-	Widelands::Editor_Game_Base & m_egbase;
+	Widelands::EditorGameBase & m_egbase;
 	SoldierControl & m_soldiers;
 
 	SoldierFn m_mouseover_fn;
@@ -106,7 +104,7 @@ private:
 
 SoldierPanel::SoldierPanel
 	(UI::Panel & parent,
-	 Widelands::Editor_Game_Base & gegbase,
+	 Widelands::EditorGameBase & gegbase,
 	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
@@ -118,7 +116,7 @@ m_last_animate_time(0)
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
-	uint32_t maxcapacity = m_soldiers.maxSoldierCapacity();
+	uint32_t maxcapacity = m_soldiers.max_soldier_capacity();
 	if (maxcapacity <= MaxColumns) {
 		m_cols = maxcapacity;
 		m_rows = 1;
@@ -129,12 +127,12 @@ m_last_animate_time(0)
 
 	set_size(m_cols * m_icon_width, m_rows * m_icon_height);
 	set_desired_size(m_cols * m_icon_width, m_rows * m_icon_height);
-	set_think(true);
+	set_thinks(true);
 
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier * soldier : m_soldiers.presentSoldiers()) {
+	for (Soldier * soldier : m_soldiers.present_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -168,10 +166,10 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn & fn)
 void SoldierPanel::think()
 {
 	bool changes = false;
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_soldiers.soldier_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_soldiers.present_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(m_rows);
 
@@ -280,7 +278,7 @@ void SoldierPanel::think()
 void SoldierPanel::draw(RenderTarget & dst)
 {
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_soldiers.soldier_capacity();
 	uint32_t fullrows = capacity / MaxColumns;
 
 	if (fullrows)
@@ -362,7 +360,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
 struct SoldierList : UI::Box {
 	SoldierList
 		(UI::Panel & parent,
-		 Interactive_GameBase & igb,
+		 InteractiveGameBase & igb,
 		 Widelands::Building & building);
 
 	SoldierControl & soldiers() const;
@@ -373,7 +371,7 @@ private:
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 
-	Interactive_GameBase & m_igb;
+	InteractiveGameBase & m_igb;
 	Widelands::Building & m_building;
 	SoldierPanel m_soldierpanel;
 	UI::Radiogroup m_soldier_preference;
@@ -382,7 +380,7 @@ private:
 
 SoldierList::SoldierList
 	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
+	 InteractiveGameBase & igb,
 	 Widelands::Building & building)
 :
 UI::Box(&parent, 0, 0, UI::Box::Vertical),
@@ -488,9 +486,9 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 void SoldierList::eject(const Soldier * soldier)
 {
-	uint32_t const capacity_min = soldiers().minSoldierCapacity();
+	uint32_t const capacity_min = soldiers().min_soldier_capacity();
 	bool can_act = m_igb.can_act(m_building.owner().player_number());
-	bool over_min = capacity_min < soldiers().presentSoldiers().size();
+	bool over_min = capacity_min < soldiers().present_soldiers().size();
 
 	if (can_act && over_min)
 		m_igb.game().send_player_drop_soldier(m_building, soldier->serial());
@@ -507,7 +505,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 
 UI::Panel * create_soldier_list
 	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
+	 InteractiveGameBase & igb,
 	 Widelands::Building & building)
 {
 	return new SoldierList(parent, igb, building);

@@ -42,21 +42,21 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
-#define WINDOW_WIDTH  std::min(700, g_gr->get_xres() - 40)
+#define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-
-#define QUANTITY_COLUMN_WIDTH 74
-#define WARE_GROUPS_TABLE_WIDTH (WINDOW_WIDTH * 1 / 2 - 5)
+constexpr uint32_t quantityColumnWidth = 100;
+constexpr uint32_t wareColumnWidth = 250;
+#define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - wareColumnWidth - quantityColumnWidth - 10)
 
 using namespace Widelands;
 
-inline Interactive_Player & EncyclopediaWindow::iaplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 
 EncyclopediaWindow::EncyclopediaWindow
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "encyclopedia",
@@ -64,33 +64,33 @@ EncyclopediaWindow::EncyclopediaWindow
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribal Ware Encyclopedia")),
 	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 10, 145),
+	prodSites        (this, 5, WINDOW_HEIGHT - 150, PRODSITE_GROUPS_WIDTH, 145),
 	condTable
 		(this,
-		 WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 5, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 145),
+		 PRODSITE_GROUPS_WIDTH + 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 5, 145),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
-	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
+	wares.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
 
-	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
+	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
 	condTable.add_column
-		(WARE_GROUPS_TABLE_WIDTH
-		 - QUANTITY_COLUMN_WIDTH,
-		 _("Consumed ware type(s)"));
-	condTable.add_column (QUANTITY_COLUMN_WIDTH, _("Quantity"));
+			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
+			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
+	condTable.add_column (quantityColumnWidth, _("Quantity"));
+	condTable.focus();
 
-	fillWares();
+	fill_wares();
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void EncyclopediaWindow::fillWares() {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
-	Ware_Index const nr_wares = tribe.get_nrwares();
+void EncyclopediaWindow::fill_wares() {
+	const TribeDescr & tribe = iaplayer().player().tribe();
+	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
@@ -100,12 +100,12 @@ void EncyclopediaWindow::fillWares() {
 
 	for (uint32_t i = 0; i < ware_vec.size(); i++) {
 		Ware cur = ware_vec[i];
-		wares.add(cur.m_descr->descname().c_str(), cur.m_i, cur.m_descr->icon());
+		wares.add(cur.m_descr->descname(), cur.m_i, cur.m_descr->icon());
 	}
 }
 
-void EncyclopediaWindow::wareSelected(uint32_t) {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+void EncyclopediaWindow::ware_selected(uint32_t) {
+	const TribeDescr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->helptext());
@@ -115,8 +115,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	bool found = false;
 
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSiteDescr const, de, &descr)) {
 
@@ -125,7 +125,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{
-				prodSites.add(de->descname().c_str(), i, de->get_icon());
+				prodSites.add(de->descname(), i, de->get_icon());
 				found = true;
 			}
 		}
@@ -135,15 +135,14 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 }
 
-void EncyclopediaWindow::prodSiteSelected(uint32_t) {
+void EncyclopediaWindow::prod_site_selected(uint32_t) {
 	assert(prodSites.has_selection());
+	size_t no_of_wares = 0;
 	condTable.clear();
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 
-	const ProductionSiteDescr::Programs & programs =
-		ref_cast<ProductionSiteDescr const, BuildingDescr const>
-			(*tribe.get_building_descr(prodSites.get_selected()))
-		.programs();
+	upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prodSites.get_selected()));
+	const ProductionSiteDescr::Programs & programs = descr->programs();
 
 	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
 	//  the program name is not any of produce_iron, smelt_iron, prog_iron
@@ -177,33 +176,33 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
 
-				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
-					const std::set<Ware_Index> & ware_types = temp_group.first;
+				for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
+					const std::set<WareIndex> & ware_types = temp_group.first;
 					assert(ware_types.size());
 					std::vector<std::string> ware_type_descnames;
-					for (const Ware_Index& ware_index : ware_types) {
+					for (const WareIndex& ware_index : ware_types) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
+					no_of_wares = no_of_wares + ware_types.size();
 
 					std::string ware_type_names =
-							i18n::localize_item_list(ware_type_descnames, i18n::ConcatenateWith::OR);
+							i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
 					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
-					char amount_string[4]; //  Space for 3 digits + terminator.
-					sprintf(amount_string, "%u", temp_group.second);
 
 					//  picture only of first ware type in group
-					UI::Table<uintptr_t>::Entry_Record & tableEntry =
+					UI::Table<uintptr_t>::EntryRecord & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
 						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
-					tableEntry.set_string (1, amount_string);
+					tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
 					condTable.set_sort_column(0);
 					condTable.sort();
 				}
 			}
 		}
 	}
+	condTable.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
 }

@@ -33,11 +33,11 @@ using Widelands::TCoords;
 namespace  {
 
 int32_t resource_value(const Widelands::TerrainDescription& terrain,
-                       const Widelands::Resource_Index resource) {
+                       const Widelands::ResourceIndex resource) {
 	if (!terrain.is_resource_valid(resource)) {
 		return -1;
 	}
-	if (terrain.get_is() & Widelands::TerrainDescription::UNPASSABLE) {
+	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
 		return 8;
 	}
 	return 1;
@@ -46,7 +46,7 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 }  // namespace
 
 
-int32_t Editor_Change_Resource_Tool_Callback
+int32_t editor_change_resource_tool_callback
 	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map,
 	 const Widelands::World& world, int32_t const curres)
 {
@@ -59,7 +59,7 @@ int32_t Editor_Change_Resource_Tool_Callback
 	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
 	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
 
-	//  If one of the neighbours is unpassable, count its resource stronger.
+	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
 	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
@@ -78,18 +78,18 @@ int32_t Editor_Change_Resource_Tool_Callback
 
 /*
 ===========
-Editor_Increase_Resources_Tool::handle_click_impl()
+EditorIncreaseResourcesTool::handle_click_impl()
 
 increase the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
 int32_t
-Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
+EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
-                                                  Widelands::Node_and_Triangle<> const center,
-                                                  Editor_Interactive& /* parent */,
-                                                  Editor_Action_Args& args) {
+                                                  Widelands::NodeAndTriangle<> const center,
+                                                  EditorInteractive& /* parent */,
+                                                  EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -110,7 +110,7 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 		if
 		((res == args.cur_res || !mr.location().field->get_resources_amount())
 		        &&
-		        Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res))
+				  editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic =
@@ -121,10 +121,10 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
-				mr.location().field->set_starting_res_amount(0);
+				mr.location().field->set_initial_res_amount(0);
 			} else {
 				mr.location().field->set_resources(args.cur_res, amount);
-				mr.location().field->set_starting_res_amount(amount);
+				mr.location().field->set_initial_res_amount(amount);
 				//  set new overlay
 				pic = g_gr->images().get
 				        (world.get_resource(args.cur_res)->get_editor_pic(amount));
@@ -137,18 +137,18 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 	return mr.radius();
 }
 
-int32_t Editor_Increase_Resources_Tool::handle_undo_impl(
+int32_t EditorIncreaseResourcesTool::handle_undo_impl(
    Widelands::Map& map,
    const Widelands::World& world,
-   Widelands::Node_and_Triangle<Widelands::Coords> center,
-   Editor_Interactive& parent,
-   Editor_Action_Args& args) {
+   Widelands::NodeAndTriangle<Widelands::Coords> center,
+   EditorInteractive& parent,
+   EditorActionArgs& args) {
 	return m_set_tool.handle_undo_impl(map, world, center, parent, args);
 }
 
-Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.change_by = m_change_by;
 	a.cur_res = m_cur_res;
 	return a;

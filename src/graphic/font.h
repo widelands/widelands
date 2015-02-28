@@ -44,9 +44,6 @@ struct Font {
 
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
-	static Font * ui_big();
-	static Font * ui_small();
-	static Font * ui_ultrasmall();
 
 	uint32_t ascent() const;
 	uint32_t height() const;
@@ -67,50 +64,6 @@ private:
 	 */
 	int32_t m_computed_typical_miny;
 	int32_t m_computed_typical_maxy;
-};
-
-/**
- * Text style combines font with other characteristics like color
- * and style (italics, bold).
- */
-struct TextStyle {
-	TextStyle() :
-		font(nullptr),
-		fg(255, 255, 255),
-		bold(false),
-		italics(false),
-		underline(false)
-	{}
-
-	static TextStyle makebold(Font * font, RGBColor fg) {
-		TextStyle ts;
-		ts.font = font;
-		ts.bold = true;
-		ts.fg = fg;
-		return ts;
-	}
-
-	static const TextStyle & ui_big();
-	static const TextStyle & ui_small();
-	static const TextStyle & ui_ultrasmall();
-	uint32_t calc_bare_width(const std::string & text) const;
-	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
-	void setup() const;
-
-	Font * font;
-	RGBColor fg;
-	bool bold : 1;
-	bool italics : 1;
-	bool underline : 1;
-
-	bool operator== (const TextStyle & o) const {
-		return
-			font == o.font && fg == o.fg &&
-			bold == o.bold && italics == o.italics && underline == o.underline;
-	}
-	bool operator!= (const TextStyle & o) const {
-		return !(*this == o);
-	}
 };
 
 } // namespace UI

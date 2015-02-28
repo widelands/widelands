@@ -21,21 +21,25 @@
 #define WL_LOGIC_TRIBE_H
 
 #include <map>
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
 #include "graphic/animation.h"
+#include "graphic/texture.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
+#include "logic/road_textures.h"
+#include "logic/roadtype.h"
 #include "logic/tribe_basic_info.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class ResourceDescription;
 class Warehouse;
 class WorkerDescr;
@@ -52,8 +56,9 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct Tribe_Descr {
-	Tribe_Descr(const std::string & name, Editor_Game_Base &);
+class TribeDescr {
+public:
+	TribeDescr(const std::string & name, EditorGameBase &);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
@@ -62,48 +67,61 @@ struct Tribe_Descr {
 	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
-	const std::string & name() const {return m_name;}
+	const std::string& name() const {return m_name;}
 
-	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
-	WorkerDescr const * get_worker_descr(const Ware_Index& index) const {
+	// A vector of all texture images that can be used for drawing a
+	// (normal|busy) road. The images are guaranteed to exist.
+	const std::vector<std::string>& normal_road_paths() const;
+	const std::vector<std::string>& busy_road_paths() const;
+
+	// Add the corresponding texture (which probably resides in a
+	// texture atlas) for roads.
+	void add_normal_road_texture(std::unique_ptr<Texture> texture);
+	void add_busy_road_texture(std::unique_ptr<Texture> texture);
+
+	// The road textures used for drawing roads.
+	const RoadTextures& road_textures() const;
+
+	WareIndex get_nrworkers() const {return m_workers.get_nitems();}
+	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
 		return m_workers.get(index);
 	}
-	Ware_Index worker_index(const std::string & workername) const {
+	WareIndex worker_index(const std::string & workername) const {
 		return m_workers.get_index(workername);
 	}
-	Ware_Index worker_index(char const * const workername) const {
+	WareIndex worker_index(char const * const workername) const {
 		return m_workers.get_index(workername);
 	}
-	Ware_Index carrier2() const {
+	WareIndex carrier2() const {
 		if (m_carrier2.size())
 			return worker_index(m_carrier2);
 		return worker_index("carrier");
 	}
-	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
-	Ware_Index safe_ware_index(const std::string & warename) const;
-	Ware_Index ware_index(const std::string & warename) const;
-	WareDescr const * get_ware_descr(const Ware_Index& index) const {
+	WareIndex get_nrwares() const {return m_wares.get_nitems();}
+	WareIndex safe_ware_index(const std::string & warename) const;
+	WareIndex ware_index(const std::string & warename) const;
+	WareDescr const * get_ware_descr(const WareIndex& index) const {
 		return m_wares.get(index);
 	}
-	void set_ware_type_has_demand_check(const Ware_Index& index) const {
+	void set_ware_type_has_demand_check(const WareIndex& index) const {
 		m_wares.get(index)->set_has_demand_check();
 	}
-	void set_worker_type_has_demand_check(const Ware_Index& index) const {
+	void set_worker_type_has_demand_check(const WareIndex& index) const {
 		m_workers.get(index)->set_has_demand_check();
 	}
-	Ware_Index safe_worker_index(const std::string & workername) const;
-	Building_Index get_nrbuildings() const {
+	WareIndex safe_worker_index(const std::string & workername) const;
+	BuildingIndex get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
-	Building_Index safe_building_index(char const * name) const;
-	BuildingDescr const * get_building_descr(const Building_Index& index) const
+	BuildingIndex safe_building_index(char const * name) const;
+	BuildingDescr const * get_building_descr(const BuildingIndex& index) const
 	{
 		return m_buildings.get(index);
 	}
-	Building_Index building_index(const std::string & buildingname) const {
+	BuildingIndex building_index(const std::string & buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
-	Building_Index building_index(char const * const buildingname) const {
+	BuildingIndex building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
 	int32_t get_immovable_index(char const * const l) const {
@@ -128,7 +146,7 @@ struct Tribe_Descr {
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
-	const std::vector<Ware_Index> & worker_types_without_cost() const {
+	const std::vector<WareIndex> & worker_types_without_cost() const {
 		return m_worker_types_without_cost;
 	}
 
@@ -145,7 +163,7 @@ struct Tribe_Descr {
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
-	void postload(Editor_Game_Base &);
+	void postload(EditorGameBase &);
 	void load_graphics();
 
 	struct Initialization {
@@ -158,8 +176,8 @@ struct Tribe_Descr {
 		return m_initializations.at(index);
 	}
 
-	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
-	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
+	using WaresOrder = std::vector<std::vector<Widelands::WareIndex>>;
+	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder & wares_order() const {return m_wares_order;}
 	const WaresOrderCoords & wares_order_coords() const {
 		return m_wares_order_coords;
@@ -174,6 +192,11 @@ struct Tribe_Descr {
 
 private:
 	const std::string m_name;
+
+	std::vector<std::string> m_normal_road_paths;
+	std::vector<std::string> m_busy_road_paths;
+	RoadTextures m_road_textures;
+
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;
 	uint32_t m_bob_vision_range;
@@ -190,11 +213,11 @@ private:
 	WaresOrder                        m_workers_order;
 	WaresOrderCoords                  m_workers_order_coords;
 
-	std::vector<Ware_Index> m_worker_types_without_cost;
+	std::vector<WareIndex> m_worker_types_without_cost;
 
 	std::vector<Initialization> m_initializations;
 
-	DISALLOW_COPY_AND_ASSIGN(Tribe_Descr);
+	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
 
 }

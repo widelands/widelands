@@ -1,5 +1,4 @@
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
 
 set_textdomain("texts")
 
@@ -75,12 +74,19 @@ _"PAGEUP: increases game speed" .. "<br>"
 .. _".: goes to the next location" .. "<br>"
 .. _"F6: shows the debug console (only in debug-builds)" .. "<br>"
 .. _"CTRL+F10: quits the game immediately" .. "<br>"
-.. _"F11: takes a screenshot"
+.. _"CTRL+Leftclick: skips confirmation dialogs" .. "<br>"
+.. _"CTRL+F11: takes a screenshot"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
-_ "G: jumps to the location corresponding to the current message" .. "<br>"
-.. _"DELETE: archives the current message"
+_ "0: shows all messages" .. "<br>"
+.. _ "1: shows geologists' messages only" .. "<br>"
+.. _ "2: shows economy messages only" .. "<br>"
+.. _ "3: shows seafaring messages only" .. "<br>"
+.. _ "4: shows warfare messages only" .. "<br>"
+.. _ "5: shows scenario messages only" .. "<br>"
+.. _ "G: jumps to the location corresponding to the current message" .. "<br>"
+.. _"DELETE: archives/restores the current message"
    ) .. h2(_
 [[Online Help]]
    ) .. p( _

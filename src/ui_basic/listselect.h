@@ -60,16 +60,18 @@ struct BaseListselect : public Panel {
 		(const uint32_t Begin = 0,
 		 uint32_t End = std::numeric_limits<uint32_t>::max());
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 uint32_t value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string(),
+		 const std::string& fontname = "");
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string(),
+		 const std::string& fontname = "");
 	void remove(uint32_t);
 	void remove(const char * name);
 
@@ -103,7 +105,7 @@ struct BaseListselect : public Panel {
 	void select(uint32_t i);
 	bool has_selection() const;
 
-	struct No_Selection {};
+	struct NoSelection {};
 	uint32_t get_selected() const;
 	void remove_selected();
 
@@ -117,7 +119,8 @@ struct BaseListselect : public Panel {
 	bool handle_mousepress  (uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mousemove   (uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second
@@ -127,20 +130,21 @@ private:
 private:
 	static const int32_t ms_darken_value = -20;
 
-	struct Entry_Record {
+	struct EntryRecord {
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
 		const Image* pic;
 		std::string name;
 		std::string tooltip;
+		std::string font_face;
 	};
-	typedef std::deque<Entry_Record *> Entry_Record_deque;
+	using EntryRecordDeque = std::deque<EntryRecord *>;
 
 	uint32_t m_max_pic_width;
 	uint32_t m_lineheight;
 	Align m_align;
-	Entry_Record_deque m_entry_records;
+	EntryRecordDeque m_entry_records;
 	Scrollbar m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
 	uint32_t m_selection;
@@ -166,17 +170,18 @@ struct Listselect : public BaseListselect {
 	{}
 
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string(),
+		 const std::string & font_face = "")
 	{
 		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
+		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text, font_face);
 	}
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
@@ -209,7 +214,7 @@ private:
  */
 template<typename Entry>
 struct Listselect<Entry &> : public Listselect<Entry *> {
-	typedef Listselect<Entry *> Base;
+	using Base = Listselect<Entry *>;
 
 	Listselect
 		(Panel * parent,
@@ -221,7 +226,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	{}
 
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 Entry      &       value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
@@ -230,7 +235,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		Base::add(name, &value, pic, select_this, tooltip_text);
 	}
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 Entry      &       value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,

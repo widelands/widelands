@@ -21,11 +21,13 @@
 #ifndef WL_GRAPHIC_FONT_HANDLER1_H
 #define WL_GRAPHIC_FONT_HANDLER1_H
 
+#include <memory>
 #include <string>
 
 #include "base/macros.h"
 #include "base/point.h"
 #include "graphic/align.h"
+#include "graphic/text/font_set.h"
 
 
 class FileSystem;
@@ -37,10 +39,10 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-class IFont_Handler1 {
+class IFontHandler1 {
 public:
-	IFont_Handler1() = default;
-	virtual ~IFont_Handler1() {}
+	IFontHandler1() = default;
+	virtual ~IFontHandler1() {}
 
 	/*
 	 * Renders the given text into an image. The image is cached and therefore
@@ -48,13 +50,21 @@ public:
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 
-	DISALLOW_COPY_AND_ASSIGN(IFont_Handler1);
+	/// Returns the font handler's current FontSet
+	virtual UI::FontSet& fontset() const = 0;
+
+	/// Loads the FontSet for the currently active locale into the
+	/// font handler. This needs to be called after the language of the
+	/// game has changed.
+	virtual void reinitialize_fontset() = 0;
+
+	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };
 
-// Create a new Font_Handler1. Ownership for the objects is not taken.
-IFont_Handler1 * create_fonthandler(Graphic* gr);
+// Create a new FontHandler1. Ownership for the objects is not taken.
+IFontHandler1 * create_fonthandler(Graphic* gr);
 
-extern IFont_Handler1 * g_fh1;
+extern IFontHandler1 * g_fh1;
 
 }
 

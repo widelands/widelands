@@ -32,34 +32,34 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 /**
  * Status window for construction sites.
  */
-struct ConstructionSite_Window : public Building_Window {
-	ConstructionSite_Window
-		(Interactive_GameBase        & parent,
+struct ConstructionSiteWindow : public BuildingWindow {
+	ConstructionSiteWindow
+		(InteractiveGameBase        & parent,
 		 Widelands::ConstructionSite &,
 		 UI::Window *                & registry);
 
 	void think() override;
 
 private:
-	UI::Progress_Bar * m_progress;
+	UI::ProgressBar * m_progress;
 };
 
 
-ConstructionSite_Window::ConstructionSite_Window
-	(Interactive_GameBase        & parent,
+ConstructionSiteWindow::ConstructionSiteWindow
+	(InteractiveGameBase        & parent,
 	 Widelands::ConstructionSite & cs,
 	 UI::Window *                & registry)
-	: Building_Window(parent, cs, registry)
+	: BuildingWindow(parent, cs, registry)
 {
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
 	m_progress =
-		new UI::Progress_Bar
+		new UI::ProgressBar
 			(&box,
 			 0, 0,
-			 UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
-			 UI::Progress_Bar::Horizontal);
+			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
 	box.add(m_progress, UI::Box::AlignCenter);
 
@@ -81,12 +81,12 @@ ConstructionSite_Window::ConstructionSite_Window
 Make sure the window is redrawn when necessary.
 ===============
 */
-void ConstructionSite_Window::think()
+void ConstructionSiteWindow::think()
 {
-	Building_Window::think();
+	BuildingWindow::think();
 
 	const Widelands::ConstructionSite & cs =
-		ref_cast<Widelands::ConstructionSite, Widelands::Building>(building());
+		dynamic_cast<Widelands::ConstructionSite&>(building());
 
 	m_progress->set_state(cs.get_built_per64k());
 }
@@ -98,7 +98,7 @@ Create the status window describing the construction site.
 ===============
 */
 void Widelands::ConstructionSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	new ConstructionSite_Window(parent, *this, registry);
+	new ConstructionSiteWindow(parent, *this, registry);
 }

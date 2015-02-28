@@ -34,19 +34,19 @@ struct Scrollbar;
  * This defines an area, where a text can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
  */
-struct Multiline_Textarea : public Panel {
+struct MultilineTextarea : public Panel {
 	enum ScrollMode {
 		ScrollNormal = 0, ///< (default) only explicit or forced scrolling
 		ScrollLog = 1,    ///< follow the bottom of the text
 	};
 
-	Multiline_Textarea
+	MultilineTextarea
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::string & text         = std::string(),
 		 const Align                      = Align_Left,
 		 const bool always_show_scrollbar = false);
-	~Multiline_Textarea();
+	~MultilineTextarea();
 
 	const std::string & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
@@ -64,7 +64,8 @@ struct Multiline_Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	void scroll_to_top();
 
 	const char *  get_font_name() {return m_fontname.c_str();}
 	int32_t       get_font_size() {return m_fontsize;}

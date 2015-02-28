@@ -74,7 +74,7 @@ function dependencies_basic(images, text)
 		text = ""
 	end
 
-	string = "image=" .. images[1]
+	local string = "image=" .. images[1]
 	for k,v in ipairs({table.unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
@@ -97,7 +97,7 @@ function dependencies(items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=" .. items[1].icon_name
+	local string = "image=" .. items[1].icon_name
 	for k,v in ipairs({table.unpack(items,2)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
@@ -668,15 +668,15 @@ function building_help_crew_string(tribename, building_description)
 		local worker_description = building_description.working_positions[1]
 		local becomes_description = nil
 		local number_of_workers = 0
-		local toolname = nil
+		local toolnames = {}
 
 		for i, worker_description in ipairs(building_description.working_positions) do
 
-			-- get the tool for the workers. This assumes that each building only uses 1 tool
+			-- Get the tools for the workers.
 			if(worker_description.buildable) then
 				for j, buildcost in ipairs(worker_description.buildcost) do
 					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
-						toolname = buildcost
+						toolnames[#toolnames + 1] = buildcost
 					end
 				end
 			end
@@ -693,7 +693,9 @@ function building_help_crew_string(tribename, building_description)
 			end
 		end
 
-		if(toolname) then result = result .. building_help_tool_string(tribename, toolname, number_of_workers) end
+		if(#toolnames > 0) then
+			result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
+		end
 
 		if(becomes_description) then
 
@@ -724,17 +726,21 @@ end
 -- RST
 -- .. function building_help_tool_string(tribename, toolname)
 --
---    Displays a tool with an intro text and image
+--    Displays tools with an intro text and images
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg toolname: e.g. "felling_axe".
---    :arg no_of_workers: the number of workers using the tool; for plural formatting.
---    :returns: text_line for the tool
+--    :arg toolnames: e.g. {"shovel", "basket"}.
+--    :arg no_of_workers: the number of workers using the tools; for plural formatting.
+--    :returns: text_line for the tools
 --
-function building_help_tool_string(tribename, toolname, no_of_workers)
-	local ware_description = wl.Game():get_ware_description(tribename, toolname)
-	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
-		ware_description.descname, ware_description.icon_name)
+function building_help_tool_string(tribename, toolnames, no_of_workers)
+	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
+	local game  = wl.Game();
+	for i, toolname in ipairs(toolnames) do
+		local ware_description = game:get_ware_description(tribename, toolname)
+		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+	end
+	return result
 end
 
 -- RST

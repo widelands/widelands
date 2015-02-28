@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-30 18:51+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2014-10-04 16:10+0000\n"
+"Last-Translator: François Rousselet <francoisrouslt@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-31 05:42+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:39+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -478,12 +478,12 @@ msgstr "Forge une armure de plaques"
 #: ../../tribes/empire/lumberjacks_house/conf:21
 #: ../../tribes/empire/marblemine/conf:32
 #: ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:24
-#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/sawmill/conf:25
+#: ../../tribes/empire/shipyard/conf:29
 #: ../../tribes/empire/smelting_works/conf:31
-#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/stonemasons_house/conf:26
 #: ../../tribes/empire/toolsmithy/conf:62
-#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/vineyard/conf:27
 #: ../../tribes/empire/weaponsmithy/conf:44
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
@@ -668,7 +668,7 @@ msgid ""
 "charcoal kiln out of logs."
 msgstr ""
 
-#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
 #: ../../tribes/empire/deep_goldmine/conf:27
 #: ../../tribes/empire/deep_marblemine/conf:28
@@ -678,12 +678,12 @@ msgstr ""
 msgid "mining"
 msgstr "Mine"
 
-#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
 msgstr "Veine principale de charbon épuisée"
 
-#: ../../tribes/empire/coalmine/conf:41
+#: ../../tribes/empire/coalmine/conf:42
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
@@ -1380,6 +1380,9 @@ msgid ""
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
 msgstr ""
+"Cette mine de marbre est épuisée. Attendez-vous à une diminution du "
+"rendement. Cette mine ne peut pas être améliorée, et vous devriez la "
+"démanteler ou la détruire."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1417,7 +1420,7 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Elève des ânes mignons et utiles"
 
-#: ../../tribes/empire/donkeyfarm/conf:26
+#: ../../tribes/empire/donkeyfarm/conf:25
 msgid "rearing donkeys"
 msgstr "Charge les mules"
 
@@ -1434,7 +1437,7 @@ msgid "harvesting wheat"
 msgstr "récolte le blé"
 
 #: ../../tribes/empire/farm/conf:46
-#: ../../tribes/empire/vineyard/conf:45
+#: ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
 msgstr "En dehors des champs"
 
@@ -1446,7 +1449,6 @@ msgstr ""
 "ses graines."
 
 #: ../../tribes/empire/farm/help.lua:17
-#: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
 msgstr "Sème et récolte le blé"
 
@@ -1488,6 +1490,8 @@ msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
 msgstr ""
+"Le pêcheur travaillant à cette cabane de pêche ne trouve plus de poisson "
+"dans son rayon d'action."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1497,6 +1501,8 @@ msgstr "Pêchez sur la côte près de la maison."
 msgid ""
 "The fisher’s house needs water full of fish within the working radius."
 msgstr ""
+"La cabane de pêche nécessite un point d'eau rempli de poissons dans son "
+"rayon d'action."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1526,6 +1532,8 @@ msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
 msgstr ""
+"La cabane du forestier nécessite de l'espace disponible dans son rayon "
+"d'action pour planter des arbres."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1596,6 +1604,9 @@ msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
+"Bien que ce navire se soit échoué, il peut encore servir de logement pour la "
+"population. Il peut aussi être utilisé pour stocker la marchandise et les "
+"outils."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
@@ -1629,15 +1640,15 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Le chasseur apporte de la bonne viande aux colons."
 
-#: ../../tribes/empire/hunters_house/conf:20
+#: ../../tribes/empire/hunters_house/conf:19
 msgid "hunting"
 msgstr "chasse"
 
-#: ../../tribes/empire/hunters_house/conf:28
+#: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
 msgstr "Hors du Jeu"
 
-#: ../../tribes/empire/hunters_house/conf:29
+#: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
@@ -1650,6 +1661,8 @@ msgstr "Chassez les animaux pour produire de la viande."
 #: ../../tribes/empire/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the working radius."
 msgstr ""
+"La cabane du chasseur nécéssite des animaux dans son champs d'action pour "
+"les chasser."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1736,6 +1749,7 @@ msgstr "Abattez les arbres dans les alentours et transformez les en troncs."
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
 msgid "The lumberjack's house needs trees to fell within the working radius."
 msgstr ""
+"La cabane de bûcheron nécessite des arbres à abattre dans son rayon d'action."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -1837,7 +1851,7 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Élève des cochons."
 
-#: ../../tribes/empire/piggery/conf:26
+#: ../../tribes/empire/piggery/conf:25
 msgid "raising pigs"
 msgstr "Élève des cochons"
 
@@ -1902,7 +1916,7 @@ msgstr ""
 "Les éclaireurs comme l'éclaireuse Claire explorent clairement les "
 "clairières, c'est clair."
 
-#: ../../tribes/empire/scouts_house/conf:21
+#: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
 msgstr ""
 
@@ -1950,7 +1964,7 @@ msgstr "Un digne navire de mer"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Travaille au chantier naval et construit de nouveaux navires."
 
-#: ../../tribes/empire/shipyard/conf:28
+#: ../../tribes/empire/shipyard/conf:27
 msgid "constructing a ship"
 msgstr ""
 
@@ -2103,17 +2117,21 @@ msgstr ""
 msgid "Grows vine."
 msgstr "Cultive la vigne."
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:23
 msgid "planting grapevines"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 msgid "harvesting grapes"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:46
+#: ../../tribes/empire/vineyard/conf:44
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
+
+#: ../../tribes/empire/vineyard/help.lua:17
+msgid "Plant grapevines and harvest grapes."
 msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1

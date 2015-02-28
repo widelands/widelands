@@ -7,6 +7,7 @@ wl_binary(wl_render_richtext
     render_richtext.cc
   DEPENDS
     base_log
+    graphic
     graphic_image_io
     graphic_surface
     graphic_text
@@ -20,7 +21,7 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    graphic_image
+    graphic_image_cache
     graphic_surface
     graphic_text
     io_filesystem

@@ -27,21 +27,26 @@ MAINPOTS = [
     ( "maps/maps", [
         "../../maps/*/elemental",
         "../../maps/*/*/elemental",
-        "../../campaigns/cconfig",
+        "../../campaigns/*.conf",
         "../../campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../txts/license",
-                  "../../txts/*.lua",
+                  "../../txts/README.lua",
                   "../../txts/developers",
                   "../../txts/editor_readme",
                   "../../txts/tips/*.tip"] ),
+    ( "translator_credits/translator_credits", ["../../txts/translator_credits.lua"] ),
     ( "widelands/widelands", [
-                    "../../src/*.cc",
+                    "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
                     "../../src/*/*/*.cc",
-                    "../../src/*.h",
+                    "../../src/wlapplication.h",
                     "../../src/*/*.h",
                     "../../src/*/*/*.h",
+    ] ),
+    ( "widelands_console/widelands_console", [
+                    "../../src/wlapplication_messages.cc",
+                    "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
         "../../scripting/win_conditions/*.lua",
@@ -114,42 +119,20 @@ ITERATIVEPOTS = [
     ),
 ]
 
-# Paths to search for exectuables
-PATHS = [
-    "/bin", "/usr/bin",
-    "/opt/local/bin", "/sw/bin",
-    "/usr/local/bin"
-]
-def find_exectuable(cmd):
-    """
-    Try to find the executable given some paths. Defaults to just return
-    the cmd if it is not found in any paths
-    """
-    for p in PATHS:
-        full_path = os.path.join(p, cmd)
-        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
-            return full_path
-    return cmd
-
-MSGMERGE = find_exectuable("msgmerge")
-XGETTEXT = find_exectuable("xgettext")
-
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
 XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
-XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
-
-MSGMERGEOPTS="-q --no-wrap"
+XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
     if (not os.path.isdir("po")):
-        print "Error: no 'po/' subdir found.\n"
-        print ("This script needs to access translations placed " +
+        print("Error: no 'po/' subdir found.\n")
+        print("This script needs to access translations placed " +
             "under 'po/' subdir, but these seem unavailable. Check " +
             "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
@@ -198,7 +181,7 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
+    gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
             (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
     try:
         for one_pattern in srcfiles:
@@ -207,7 +190,7 @@ def do_compile_src( potfile, srcfiles ):
             for one_file in glob(os.path.normpath(one_pattern)):
                 gettext_input.write(one_file + "\n")
         return gettext_input.close()
-    except IOError, err_msg:
+    except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return -1
 
@@ -258,7 +241,7 @@ def do_update_potfiles():
             oldcwd = os.getcwd()
             os.chdir(path)
             potfile = os.path.basename(pot) + '.pot'
-            if pot.endswith('widelands'):
+            if pot.startswith('widelands'):
                 # This catalogs can be built with xgettext
                 do_compile_src(potfile , srcfiles )
                 succ = True
@@ -272,7 +255,6 @@ def do_update_potfiles():
             else:
                 os.rmdir(path)
 
-
         print("")
 
 
@@ -283,7 +265,7 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-    rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+    rv = os.system("msgmerge -q --no-wrap %s %s -o %s" % (po, pot, dst))
     if rv:
         raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
     return rv
@@ -367,4 +349,4 @@ if __name__ == "__main__":
     # Make sure .pot files are up to date.
     do_update_potfiles()
 
-    print ""
+    print("")

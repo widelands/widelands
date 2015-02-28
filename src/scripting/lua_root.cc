@@ -29,6 +29,7 @@
 #include "logic/immovable.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
+#include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
@@ -75,27 +76,27 @@ Game
 	construct as many instances of this class as you like, but
 	they all will access the one game currently running.
 */
-const char L_Game::className[] = "Game";
-const MethodType<L_Game> L_Game::Methods[] = {
-	METHOD(L_Game, launch_coroutine),
-	METHOD(L_Game, save),
+const char LuaGame::className[] = "Game";
+const MethodType<LuaGame> LuaGame::Methods[] = {
+	METHOD(LuaGame, launch_coroutine),
+	METHOD(LuaGame, save),
 	{nullptr, nullptr},
 };
-const PropertyType<L_Game> L_Game::Properties[] = {
-	PROP_RO(L_Game, time),
-	PROP_RW(L_Game, desired_speed),
-	PROP_RW(L_Game, allow_autosaving),
-	PROP_RW(L_Game, allow_saving),
+const PropertyType<LuaGame> LuaGame::Properties[] = {
+	PROP_RO(LuaGame, time),
+	PROP_RW(LuaGame, desired_speed),
+	PROP_RW(LuaGame, allow_autosaving),
+	PROP_RW(LuaGame, allow_saving),
 	{nullptr, nullptr, nullptr},
 };
 
-L_Game::L_Game(lua_State * /* L */) {
+LuaGame::LuaGame(lua_State * /* L */) {
 	// Nothing to do.
 }
 
-void L_Game::__persist(lua_State * /* L */) {
+void LuaGame::__persist(lua_State * /* L */) {
 }
-void L_Game::__unpersist(lua_State * /* L */) {
+void LuaGame::__unpersist(lua_State * /* L */) {
 }
 
 
@@ -110,7 +111,7 @@ void L_Game::__unpersist(lua_State * /* L */) {
 
 	(RO) The absolute time elapsed since the game was started in milliseconds.
 */
-int L_Game::get_time(lua_State * L) {
+int LuaGame::get_time(lua_State * L) {
 	lua_pushint32(L, get_game(L).get_gametime());
 	return 1;
 }
@@ -124,13 +125,13 @@ int L_Game::get_time(lua_State * L) {
 	network games as expected.
 */
 // UNTESTED
-int L_Game::set_desired_speed(lua_State * L) {
-	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
+int LuaGame::set_desired_speed(lua_State * L) {
+	get_game(L).game_controller()->set_desired_speed(luaL_checkuint32(L, -1));
 	return 1;
 }
 // UNTESTED
-int L_Game::get_desired_speed(lua_State * L) {
-	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
+int LuaGame::get_desired_speed(lua_State * L) {
+	lua_pushuint32(L, get_game(L).game_controller()->desired_speed());
 	return 1;
 }
 
@@ -143,23 +144,23 @@ int L_Game::get_desired_speed(lua_State * L) {
 		meantime would crash the game.
 */
 // UNTESTED
-int L_Game::set_allow_saving(lua_State * L) {
+int LuaGame::set_allow_saving(lua_State * L) {
 	get_game(L).save_handler().set_allow_saving
 		(luaL_checkboolean(L, -1));
 	return 0;
 }
 // UNTESTED
-int L_Game::get_allow_saving(lua_State * L) {
+int LuaGame::get_allow_saving(lua_State * L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
 }
-int L_Game::set_allow_autosaving(lua_State * L) {
+int LuaGame::set_allow_autosaving(lua_State * L) {
 	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
 	get_game(L).save_handler().set_allow_saving
 		(luaL_checkboolean(L, -1));
 	return 0;
 }
-int L_Game::get_allow_autosaving(lua_State * L) {
+int LuaGame::get_allow_autosaving(lua_State * L) {
 	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
@@ -186,7 +187,7 @@ int L_Game::get_allow_autosaving(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-int L_Game::launch_coroutine(lua_State * L) {
+int LuaGame::launch_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 2)
@@ -199,7 +200,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 	LuaCoroutine * cr = new LuaCoroutine(luaL_checkthread(L, 2));
 	lua_pop(L, 2); // Remove coroutine and Game object from stack
 
-	get_game(L).enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
+	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, cr));
 
 	return 0;
 }
@@ -217,7 +218,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 		:type name: :class:`string`
 		:returns: :const:`nil`
 */
-int L_Game::save(lua_State * L) {
+int LuaGame::save(lua_State * L) {
 	const std::string filename = luaL_checkstring(L, -1);
 	get_game(L).save_handler().request_save(filename);
 
@@ -246,21 +247,21 @@ Editor
 	that is used in a Game.
 */
 
-const char L_Editor::className[] = "Editor";
-const MethodType<L_Editor> L_Editor::Methods[] = {
+const char LuaEditor::className[] = "Editor";
+const MethodType<LuaEditor> LuaEditor::Methods[] = {
 	{nullptr, nullptr},
 };
-const PropertyType<L_Editor> L_Editor::Properties[] = {
+const PropertyType<LuaEditor> LuaEditor::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-L_Editor::L_Editor(lua_State * /* L */) {
+LuaEditor::LuaEditor(lua_State * /* L */) {
 	// Nothing to do.
 }
 
-void L_Editor::__persist(lua_State * /* L */) {
+void LuaEditor::__persist(lua_State * /* L */) {
 }
-void L_Editor::__unpersist(lua_State * /* L */) {
+void LuaEditor::__unpersist(lua_State * /* L */) {
 }
 
 /*
@@ -292,28 +293,28 @@ World
 	new objects.
 */
 
-const char L_World::className[] = "World";
-const MethodType<L_World> L_World::Methods[] = {
-	METHOD(L_World, new_critter_type),
-	METHOD(L_World, new_editor_immovable_category),
-	METHOD(L_World, new_editor_terrain_category),
-	METHOD(L_World, new_immovable_type),
-	METHOD(L_World, new_resource_type),
-	METHOD(L_World, new_terrain_type),
+const char LuaWorld::className[] = "World";
+const MethodType<LuaWorld> LuaWorld::Methods[] = {
+	METHOD(LuaWorld, new_critter_type),
+	METHOD(LuaWorld, new_editor_immovable_category),
+	METHOD(LuaWorld, new_editor_terrain_category),
+	METHOD(LuaWorld, new_immovable_type),
+	METHOD(LuaWorld, new_resource_type),
+	METHOD(LuaWorld, new_terrain_type),
 	{0, 0},
 };
-const PropertyType<L_World> L_World::Properties[] = {
+const PropertyType<LuaWorld> LuaWorld::Properties[] = {
 	{0, 0, 0},
 };
 
-L_World::L_World(lua_State * /* L */) {
+LuaWorld::LuaWorld(lua_State * /* L */) {
 	// Nothing to do.
 }
 
-void L_World::__persist(lua_State*) {
+void LuaWorld::__persist(lua_State*) {
 	// Nothing to be done.
 }
-void L_World::__unpersist(lua_State*) {
+void LuaWorld::__unpersist(lua_State*) {
 	// Nothing to be done.
 }
 
@@ -338,7 +339,7 @@ void L_World::__unpersist(lua_State*) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_resource_type(lua_State* L) {
+int LuaWorld::new_resource_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -362,7 +363,7 @@ int L_World::new_resource_type(lua_State* L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_terrain_type(lua_State * L) {
+int LuaWorld::new_terrain_type(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -386,7 +387,7 @@ int L_World::new_terrain_type(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_critter_type(lua_State * L) {
+int LuaWorld::new_critter_type(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -409,7 +410,7 @@ int L_World::new_critter_type(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_immovable_type(lua_State* L) {
+int LuaWorld::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -432,7 +433,7 @@ int L_World::new_immovable_type(lua_State* L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_editor_terrain_category(lua_State* L) {
+int LuaWorld::new_editor_terrain_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -453,7 +454,7 @@ int L_World::new_editor_terrain_category(lua_State* L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_editor_immovable_category(lua_State* L) {
+int LuaWorld::new_editor_immovable_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -484,15 +485,15 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 	lua_pop(L, 1);  // S:
 
 	if (in_editor) {
-		register_class<L_Editor>(L, "", true);
-		add_parent<L_Editor, LuaBases::L_EditorGameBase>(L);
+		register_class<LuaEditor>(L, "", true);
+		add_parent<LuaEditor, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1); // Pop the meta table
 	} else {
-		register_class<L_Game>(L, "", true);
-		add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
+		register_class<LuaGame>(L, "", true);
+		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1); // Pop the meta table
 	}
-	register_class<L_World>(L, "", false);
+	register_class<LuaWorld>(L, "", false);
 }
 
 }

@@ -44,12 +44,12 @@ class Building;
 class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
 	friend struct WorkerProgram;
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	MO_DESCR(WorkerDescr)
 
 	struct Action {
-		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
+		using WorkerExecuteActionFn = bool (Worker::*)(Game &, Bob::State &, const Action &);
 
 		enum {
 			walkObject = 1, //  walk to objvar1
@@ -61,7 +61,7 @@ class Worker : public Bob {
 			plantUnlessObject
 		};
 
-		execute_t function;
+		WorkerExecuteActionFn function;
 		int32_t iparam1;
 		int32_t iparam2;
 		int32_t iparam3;
@@ -78,7 +78,7 @@ public:
 	virtual ~Worker();
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
-	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
+	PlayerImmovable * get_location(EditorGameBase & egbase) {
 		return m_location.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {return m_location;}
@@ -99,21 +99,21 @@ public:
 	void set_location(PlayerImmovable *);
 	void set_economy(Economy *);
 
-	WareInstance       * get_carried_ware(Editor_Game_Base       & egbase) {
+	WareInstance       * get_carried_ware(EditorGameBase       & egbase) {
 		return m_carried_ware.get(egbase);
 	}
-	WareInstance const * get_carried_ware(const Editor_Game_Base & egbase) const
+	WareInstance const * get_carried_ware(const EditorGameBase & egbase) const
 	{
 		return m_carried_ware.get(egbase);
 	}
-	void set_carried_ware(Editor_Game_Base &, WareInstance *);
-	WareInstance * fetch_carried_ware(Editor_Game_Base &);
+	void set_carried_ware(EditorGameBase &, WareInstance *);
+	WareInstance * fetch_carried_ware(EditorGameBase &);
 
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	bool wakeup_flag_capacity(Game &, Flag &);
 	bool wakeup_leave_building(Game &, Building &);
@@ -122,19 +122,19 @@ public:
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
 	/// overqualified for his current working position and can be replaced.
-	/// If so, his old Ware_Index is returned so that the calling code can
+	/// If so, his old WareIndex is returned so that the calling code can
 	/// request a new worker of his old type. Otherwise INVALID_INDEX is
 	/// returned.
-	Ware_Index gain_experience   (Game &);
+	WareIndex gain_experience   (Game &);
 
 	void create_needed_experience(Game &);
-	Ware_Index level             (Game &);
+	WareIndex level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
 	bool needs_experience() const {return descr().get_needed_experience() != -1;}
 
 	// debug
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
@@ -170,8 +170,8 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const Editor_Game_Base &, RenderTarget &, const Point&) const;
-	void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
+	void draw_inner(const EditorGameBase &, RenderTarget &, const Point&) const;
+	void draw(const EditorGameBase &, RenderTarget &, const Point&) const override;
 	void init_auto_task(Game &) override;
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
@@ -239,7 +239,7 @@ private:
 	bool run_geologist        (Game &, State &, const Action &);
 	bool run_geologist_find   (Game &, State &, const Action &);
 	bool run_scout            (Game &, State &, const Action &);
-	bool run_playFX           (Game &, State &, const Action &);
+	bool run_playfx           (Game &, State &, const Action &);
 	bool run_construct        (Game &, State &, const Action &);
 
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
@@ -272,12 +272,12 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	virtual void do_save
-		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
+		(EditorGameBase &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 };
 
 }

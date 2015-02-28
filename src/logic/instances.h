@@ -30,7 +30,6 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/cmd_queue.h"
@@ -39,12 +38,12 @@
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {struct Tab_Panel;}
+namespace UI {struct TabPanel;}
 
 namespace Widelands {
 
 class EditorCategory;
-class MapMapObjectLoader;
+class MapObjectLoader;
 class Player;
 struct Path;
 
@@ -103,11 +102,11 @@ struct MapObjectDescr {
 	// Type of the MapObjectDescr.
 	MapObjectType type() const {return m_type;}
 
-	struct Animation_Nonexistent {};
+	struct AnimationNonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
 		if (it == m_anims.end())
-			throw Animation_Nonexistent();
+			throw AnimationNonexistent();
 		return it->second;
 	}
 	uint32_t get_animation(const std::string & animname) const {
@@ -133,17 +132,17 @@ protected:
 	void add_attribute(uint32_t attr);
 
 private:
-	typedef std::map<std::string, uint32_t> Anims;
-	typedef std::map<std::string, uint32_t> AttribMap;
-	typedef std::vector<uint32_t>           Attributes;
+	using Anims = std::map<std::string, uint32_t>;
+	using AttribMap = std::map<std::string, uint32_t>;
+	using Attributes = std::vector<uint32_t>;
 
-	const MapObjectType   m_type;           /// Subclasses pick from the enum above
-	std::string const m_name;           /// The name for internal reference
-	std::string const m_descname;       /// A localized Descriptive name
-	Attributes        m_attributes;
-	Anims             m_anims;
-	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
-	static AttribMap  s_dyn_attribs;
+	const MapObjectType m_type;           /// Subclasses pick from the enum above
+	std::string const   m_name;           /// The name for internal reference
+	std::string const   m_descname;       /// A localized Descriptive name
+	Attributes          m_attributes;
+	Anims               m_anims;
+	static uint32_t     s_dyn_attribhigh; ///< highest attribute ID used
+	static AttribMap    s_dyn_attribs;
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -157,10 +156,10 @@ private:
  * deal with one of the derived classes, BaseImmovable or Bob.
  *
  * Every MapObject has a unique serial number. This serial number is used as
- * key in the Object_Manager map, and in the safe Object_Ptr.
+ * key in the ObjectManager map, and in the safe ObjectPointer.
  *
  * Unless you're perfectly sure about when an object can be destroyed you
- * should use an Object_Ptr or, better yet, the type safe OPtr template.
+ * should use an ObjectPointer or, better yet, the type safe OPtr template.
  * This is not necessary when the relationship and lifetime between objects
  * is well-defined, such as in the relationship between Building and Flag.
  *
@@ -181,14 +180,14 @@ private:
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
-#define MO_DESCR(type) \
-public: const type & descr() const { \
-		return ref_cast<type const, MapObjectDescr const>(*m_descr);          \
+#define MO_DESCR(type)                     \
+public: const type & descr() const {       \
+		return dynamic_cast<const type&>(*m_descr); \
    }                                                                          \
 
 class MapObject {
-	friend struct Object_Manager;
-	friend struct Object_Ptr;
+	friend struct ObjectManager;
+	friend struct ObjectPointer;
 
 	MO_DESCR(MapObjectDescr)
 
@@ -210,7 +209,7 @@ public:
 		virtual ~LogSink() {}
 	};
 
-	virtual void load_finish(Editor_Game_Base &) {}
+	virtual void load_finish(EditorGameBase &) {}
 
 protected:
 	MapObject(MapObjectDescr const * descr);
@@ -238,14 +237,14 @@ public:
 	}
 
 	/**
-	 * \return the value of the given \ref tAttribute. -1 if this object
+	 * \return the value of the given \ref TrainingAttribute. -1 if this object
 	 * doesn't have this kind of attribute.
 	 * The default behaviour returns \c -1 for all attributes.
 	 */
-	virtual int32_t get_tattribute(uint32_t attr) const;
+	virtual int32_t get_training_attribute(uint32_t attr) const;
 
-	void remove(Editor_Game_Base &);
-	virtual void destroy(Editor_Game_Base &);
+	void remove(EditorGameBase &);
+	virtual void destroy(EditorGameBase &);
 
 	//  The next functions are really only needed in games, not in the editor.
 	void schedule_destroy(Game &);
@@ -254,13 +253,13 @@ public:
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels
-		(const Editor_Game_Base & egbase, UI::Tab_Panel & tabs);
+		(const EditorGameBase & egbase, UI::TabPanel & tabs);
 
 	LogSink * get_logsink() {return m_logsink;}
 	void set_logsink(LogSink *);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const EditorGameBase &);
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
@@ -289,8 +288,8 @@ public:
 	 * all Loader objects should be deleted.
 	 */
 	struct Loader {
-		Editor_Game_Base      * m_egbase;
-		MapMapObjectLoader * m_mol;
+		EditorGameBase      * m_egbase;
+		MapObjectLoader * m_mol;
 		MapObject            * m_object;
 
 	protected:
@@ -300,18 +299,18 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base & e, MapMapObjectLoader & m, MapObject & object)
+			(EditorGameBase & e, MapObjectLoader & m, MapObject & object)
 		{
 			m_egbase = &e;
 			m_mol    = &m;
 			m_object = &object;
 		}
 
-		Editor_Game_Base      & egbase    () {return *m_egbase;}
-		MapMapObjectLoader & mol   () {return *m_mol;}
+		EditorGameBase      & egbase    () {return *m_egbase;}
+		MapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
-			return ref_cast<T, MapObject>(*m_object);
+			return dynamic_cast<T&>(*m_object);
 		}
 
 	protected:
@@ -326,16 +325,16 @@ public:
 	/// to the new MapObject saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
+	virtual void save(EditorGameBase &, MapObjectSaver &, FileWrite &);
 	// Pure MapObjects cannot be loaded
 
 protected:
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
 	/// cause bugs.
-	virtual void init(Editor_Game_Base &);
+	virtual void init(EditorGameBase &);
 
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void cleanup(EditorGameBase &);
 
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));
@@ -357,16 +356,16 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  *
  * Keeps the list of all objects currently in the game.
  */
-struct Object_Manager  {
-	typedef boost::unordered_map<Serial, MapObject *> objmap_t;
+struct ObjectManager  {
+	using MapObjectMap = boost::unordered_map<Serial, MapObject *>;
 
-	Object_Manager() {m_lastserial = 0;}
-	~Object_Manager();
+	ObjectManager() {m_lastserial = 0;}
+	~ObjectManager();
 
-	void cleanup(Editor_Game_Base &);
+	void cleanup(EditorGameBase &);
 
 	MapObject * get_object(Serial const serial) const {
-		const objmap_t::const_iterator it = m_objects.find(serial);
+		const MapObjectMap::const_iterator it = m_objects.find(serial);
 		return it != m_objects.end() ? it->second : nullptr;
 	}
 
@@ -376,7 +375,7 @@ struct Object_Manager  {
 	bool object_still_available(const MapObject * const t) const {
 		if (!t)
 			return false;
-		objmap_t::const_iterator it = m_objects.begin();
+		MapObjectMap::const_iterator it = m_objects.begin();
 		while (it != m_objects.end()) {
 			if (it->second == t)
 				return true;
@@ -393,39 +392,39 @@ struct Object_Manager  {
 
 private:
 	Serial   m_lastserial;
-	objmap_t m_objects;
+	MapObjectMap m_objects;
 
-	DISALLOW_COPY_AND_ASSIGN(Object_Manager);
+	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };
 
 /**
  * Provides a safe pointer to a MapObject
  */
-struct Object_Ptr {
+struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.
-	Object_Ptr() {m_serial = 0;}
-	Object_Ptr(MapObject * const obj) {m_serial = obj ? obj->m_serial : 0;}
+	ObjectPointer() {m_serial = 0;}
+	ObjectPointer(MapObject * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
-	Object_Ptr & operator= (MapObject * const obj) {
+	ObjectPointer & operator= (MapObject * const obj) {
 		m_serial = obj ? obj->m_serial : 0;
 		return *this;
 	}
 
 	bool is_set() const {return m_serial;}
 
-	// dammit... without a Editor_Game_Base object, we can't implement a
+	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a
 	// MapObject* operator (would be _really_ nice)
-	MapObject * get(const Editor_Game_Base &);
-	MapObject * get(const Editor_Game_Base & egbase) const;
+	MapObject * get(const EditorGameBase &);
+	MapObject * get(const EditorGameBase & egbase) const;
 
-	bool operator<  (const Object_Ptr & other) const {
+	bool operator<  (const ObjectPointer & other) const {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (const Object_Ptr & other) const {
+	bool operator== (const ObjectPointer & other) const {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (const Object_Ptr & other) const {
+	bool operator!= (const ObjectPointer & other) const {
 		return m_serial != other.m_serial;
 	}
 
@@ -446,10 +445,10 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T * get(const Editor_Game_Base &       egbase) {
+	T * get(const EditorGameBase &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T * get(const Editor_Game_Base &       egbase) const {
+	T * get(const EditorGameBase &       egbase) const {
 		return static_cast<T *>(m.get(egbase));
 	}
 
@@ -460,7 +459,7 @@ struct OPtr {
 	Serial serial() const {return m.serial();}
 
 private:
-	Object_Ptr m;
+	ObjectPointer m;
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {
@@ -468,8 +467,8 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject (int32_t t, MapObject &);
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
@@ -477,14 +476,14 @@ private:
 	Serial obj_serial;
 };
 
-struct Cmd_Act : public GameLogicCommand {
-	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	Cmd_Act (int32_t t, MapObject &, int32_t a);
+struct CmdAct : public GameLogicCommand {
+	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
+	CmdAct (int32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ACT;}
 

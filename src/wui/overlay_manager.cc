@@ -34,14 +34,14 @@ OverlayManager::OverlayManager() :
  * \returns the currently registered overlays and the buildhelp for a node.
  */
 uint8_t OverlayManager::get_overlays
-	(Widelands::FCoords const c, Overlay_Info * const overlays) const
+	(Widelands::FCoords const c, OverlayInfo * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 
 	uint8_t num_ret = 0;
 
-	const Registered_Overlays_Map & overlay_map = m_overlays[Widelands::TCoords<>::None];
-	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
+	const RegisteredOverlaysMap & overlay_map = m_overlays[Widelands::TCoords<>::None];
+	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() && it->first == c && it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
 		overlays[num_ret].pic = it->second.pic;
@@ -74,15 +74,15 @@ end:
  * \returns the currently registered overlays for a triangle.
  */
 uint8_t OverlayManager::get_overlays
-	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
+	(Widelands::TCoords<> const c, OverlayInfo * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 	assert(c.t == Widelands::TCoords<>::D || c.t == Widelands::TCoords<>::R);
 
 	uint8_t num_ret = 0;
 
-	const Registered_Overlays_Map & overlay_map = m_overlays[c.t];
-	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
+	const RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
+	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 	while
 		(it != overlay_map.end()
 		 &&
@@ -138,9 +138,9 @@ void OverlayManager::register_overlay
 		hotspot = Point(pic->width() / 2, pic->height() / 2);
 	}
 
-	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
+	RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
 	for
-		(Registered_Overlays_Map::iterator it = overlay_map.find(c);
+		(RegisteredOverlaysMap::iterator it = overlay_map.find(c);
 		 it != overlay_map.end() && it->first == c;
 		 ++it)
 		if
@@ -155,15 +155,15 @@ void OverlayManager::register_overlay
 		}
 
 	overlay_map.insert
-		(std::pair<Widelands::Coords const, Registered_Overlays>
-		 	(c, Registered_Overlays(jobid, pic, hotspot, level)));
+		(std::pair<Widelands::Coords const, RegisteredOverlays>
+		 	(c, RegisteredOverlays(jobid, pic, hotspot, level)));
 
 	//  Now manually sort, so that they are ordered
 	//    * first by c (done by std::multimap)
 	//    * second by levels (done manually here)
 
 	// there is at least one registered
-	Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c), jt;
+	RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c), jt;
 
 	do {
 		jt = it;
@@ -188,10 +188,10 @@ void OverlayManager::remove_overlay
 {
 	assert(c.t <= 2);
 
-	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
+	RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
 
 	if (overlay_map.count(c)) {
-		Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c);
+		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
 		do {
 			if (pic && it->second.pic == pic) {
 				overlay_map.erase(it);
@@ -207,9 +207,9 @@ void OverlayManager::remove_overlay
  * remove all overlays with this jobid
  */
 void OverlayManager::remove_overlay(const JobId jobid) {
-	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
-	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
-		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
+	const RegisteredOverlaysMap * const overlays_end = m_overlays + 3;
+	for (RegisteredOverlaysMap * j = m_overlays; j != overlays_end; ++j)
+		for (RegisteredOverlaysMap::iterator it = j->begin(); it != j->end();) {
 			it->second.jobids.erase(jobid);
 			if (it->second.jobids.empty())
 				j->erase(it++); //  This is necessary!
@@ -224,12 +224,12 @@ void OverlayManager::remove_overlay(const JobId jobid) {
 void OverlayManager::register_road_overlay
 	(Widelands::Coords const c, uint8_t const where, JobId const jobid)
 {
-	const Registered_Road_Overlays overlay = {jobid, where};
-	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
+	const RegisteredRoadOverlays overlay = {jobid, where};
+	RegisteredRoadOverlaysMap::iterator it = m_road_overlays.find(c);
 	if (it == m_road_overlays.end())
 		m_road_overlays.insert
 			(std::pair<const Widelands::Coords,
-			 Registered_Road_Overlays>(c, overlay));
+			 RegisteredRoadOverlays>(c, overlay));
 	else
 		it->second = overlay;
 }
@@ -238,7 +238,7 @@ void OverlayManager::register_road_overlay
  * Remove road overlay
  */
 void OverlayManager::remove_road_overlay(const Widelands::Coords c) {
-	const Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
+	const RegisteredRoadOverlaysMap::iterator it = m_road_overlays.find(c);
 	if (it != m_road_overlays.end())
 		m_road_overlays.erase(it);
 }
@@ -247,8 +247,8 @@ void OverlayManager::remove_road_overlay(const Widelands::Coords c) {
  * remove all overlays with this jobid
  */
 void OverlayManager::remove_road_overlay(JobId const jobid) {
-	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
-	const Registered_Road_Overlays_Map::const_iterator end =
+	RegisteredRoadOverlaysMap::iterator it = m_road_overlays.begin();
+	const RegisteredRoadOverlaysMap::const_iterator end =
 		m_road_overlays.end();
 	while (it != end)
 		if (it->second.jobid == jobid)
@@ -267,7 +267,7 @@ void OverlayManager::load_graphics() {
 	if (m_are_graphics_loaded)
 		return;
 
-	Overlay_Info * buildhelp_info = m_buildhelp_infos;
+	OverlayInfo * buildhelp_info = m_buildhelp_infos;
 	static const char * filenames[] = {
 		"pics/set_flag.png",
 		"pics/small.png",
@@ -282,7 +282,7 @@ void OverlayManager::load_graphics() {
 	buildhelp_info->pic = g_gr->images().get(*filename);
 	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
-	const Overlay_Info * const buildhelp_infos_end =
+	const OverlayInfo * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) { // The other buildhelp overlays.
 		++buildhelp_info, ++filename;
@@ -295,7 +295,7 @@ void OverlayManager::load_graphics() {
 	m_are_graphics_loaded = true;
 }
 
-void OverlayManager::register_overlay_callback_function(CallbackFunction function) {
+void OverlayManager::register_overlay_callback_function(CallbackFn function) {
 	m_callback = function;
 }
 

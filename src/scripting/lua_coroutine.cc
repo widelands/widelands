@@ -21,12 +21,9 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "scripting/c_utils.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
-#include "scripting/luna.h"
-#include "scripting/persistence.h"
 
 namespace {
 
@@ -92,19 +89,19 @@ int LuaCoroutine::resume()
 }
 
 void LuaCoroutine::push_arg(const Widelands::Player * plr) {
-	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
+	to_lua<LuaGame::LuaPlayer>(m_L, new LuaGame::LuaPlayer(plr->player_number()));
 	m_ninput_args++;
 }
 
 void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
-	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
+	to_lua<LuaMaps::LuaField>(m_L, new LuaMaps::LuaField(coords));
 	++m_nargs;
 	++m_ninput_args;
 }
 
 void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	assert(building_descr != nullptr);
-	to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
+	to_lua<LuaMaps::LuaBuildingDescription>(m_L, new LuaMaps::LuaBuildingDescription(building_descr));
 	++m_ninput_args;
 }
 
@@ -136,22 +133,22 @@ uint32_t LuaCoroutine::pop_uint32() {
 
 #define COROUTINE_DATA_PACKET_VERSION 3
 void LuaCoroutine::write(FileWrite& fw) {
-	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
+	fw.unsigned_8(COROUTINE_DATA_PACKET_VERSION);
 
-	fw.Unsigned32(m_ninput_args);
-	fw.Unsigned32(m_nreturn_values);
-	fw.Unsigned32(m_idx);
+	fw.unsigned_32(m_ninput_args);
+	fw.unsigned_32(m_nreturn_values);
+	fw.unsigned_32(m_idx);
 }
 
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 
 	if (version != COROUTINE_DATA_PACKET_VERSION)
 		throw wexception("Unhandled data packet version: %i\n", version);
 
-	m_ninput_args = fr.Unsigned32();
-	m_nreturn_values = fr.Unsigned32();
-	m_idx = fr.Unsigned32();
+	m_ninput_args = fr.unsigned_32();
+	m_nreturn_values = fr.unsigned_32();
+	m_idx = fr.unsigned_32();
 
 	lua_getglobal(parent, kReferenceTableName);
 	lua_rawgeti(parent, -1, m_idx);

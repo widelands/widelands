@@ -20,7 +20,6 @@
 #ifndef WL_ECONOMY_ROUTEASTAR_H
 #define WL_ECONOMY_ROUTEASTAR_H
 
-#include "base/deprecated.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routing_node.h"
 
@@ -75,7 +74,7 @@ protected:
  */
 template<typename Est_>
 struct RouteAStar : BaseRouteAStar {
-	typedef Est_ Estimator;
+	using Estimator = Est_;
 
 	RouteAStar(Router & router, WareWorker type, const Estimator & est = Estimator());
 

@@ -23,9 +23,9 @@
 #include "base/macros.h"
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 
-struct TrainingSite_Window;
+struct TrainingSiteWindow;
 
 namespace Widelands {
 
@@ -35,7 +35,7 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 	TrainingSiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe, const World& world);
+		 const TribeDescr & tribe, const World& world);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -48,8 +48,8 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 	bool get_train_defense() const {return m_train_defense;}
 	bool get_train_evade  () const {return m_train_evade;}
 
-	int32_t get_min_level(tAttribute) const;
-	int32_t get_max_level(tAttribute) const;
+	int32_t get_min_level(TrainingAttribute) const;
+	int32_t get_max_level(TrainingAttribute) const;
 	int32_t get_max_stall() const;
 
 private:
@@ -102,12 +102,12 @@ private:
  *        contains soldiers!
  */
 class TrainingSite : public ProductionSite, public SoldierControl {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 	MO_DESCR(TrainingSiteDescr)
-	friend struct ::TrainingSite_Window;
+	friend struct ::TrainingSiteWindow;
 
 	struct Upgrade {
-		tAttribute attribute; // attribute for this upgrade
+		TrainingAttribute attribute; // attribute for this upgrade
 		std::string prefix; // prefix for programs
 		int32_t min, max; // minimum and maximum program number (inclusive)
 		uint32_t prio; // relative priority
@@ -122,8 +122,8 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSiteDescr &);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
 	void add_worker   (Worker &) override;
@@ -143,43 +143,43 @@ public:
 	void set_economy(Economy * e) override;
 
 	// Begin implementation of SoldierControl
-	std::vector<Soldier *> presentSoldiers() const override;
-	std::vector<Soldier *> stationedSoldiers() const override;
-	uint32_t minSoldierCapacity() const override;
-	uint32_t maxSoldierCapacity() const override;
-	uint32_t soldierCapacity() const override;
-	void setSoldierCapacity(uint32_t capacity) override;
-	void dropSoldier(Soldier &) override;
-	int incorporateSoldier(Editor_Game_Base &, Soldier &) override;
+	std::vector<Soldier *> present_soldiers() const override;
+	std::vector<Soldier *> stationed_soldiers() const override;
+	uint32_t min_soldier_capacity() const override;
+	uint32_t max_soldier_capacity() const override;
+	uint32_t soldier_capacity() const override;
+	void set_soldier_capacity(uint32_t capacity) override;
+	void drop_soldier(Soldier &) override;
+	int incorporate_soldier(EditorGameBase &, Soldier &) override;
 	// End implementation of SoldierControl
 
-	int32_t get_pri(enum tAttribute atr);
-	void set_pri(enum tAttribute atr, int32_t prio);
+	int32_t get_pri(enum TrainingAttribute atr);
+	void set_pri(enum TrainingAttribute atr, int32_t prio);
 
 	// These are for premature soldier kick-out
-	void trainingAttempted(uint32_t type, uint32_t level);
-	void trainingSuccessful(uint32_t type, uint32_t level);
-	void trainingDone();
+	void training_attempted(uint32_t type, uint32_t level);
+	void training_successful(uint32_t type, uint32_t level);
+	void training_done();
 
 
 protected:
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
-	void program_end(Game &, Program_Result) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
+	void program_end(Game &, ProgramResult) override;
 
 private:
 	void update_soldier_request();
 	static void request_soldier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	void find_and_start_next_program(Game &) override;
 	void start_upgrade(Game &, Upgrade &);
-	void add_upgrade(tAttribute, const std::string & prefix);
+	void add_upgrade(TrainingAttribute, const std::string & prefix);
 	void calc_upgrades();
 
 	void drop_unupgradable_soldiers(Game &);
 	void drop_stalled_soldiers(Game &);
-	Upgrade * get_upgrade(tAttribute);
+	Upgrade * get_upgrade(TrainingAttribute);
 
 private:
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
@@ -202,18 +202,18 @@ private:
 	std::vector<Upgrade> m_upgrades;
 	Upgrade * m_current_upgrade;
 
-	Program_Result m_result; /// The result of the last training program.
+	ProgramResult m_result; /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier;
 	// Unuque key to address each training level of each war art
-	typedef std::pair<uint16_t, uint16_t> TypeAndLevel_t;
+	using TypeAndLevel = std::pair<uint16_t, uint16_t>;
 	// First entry is the "stallness", second is a bool
-	typedef std::pair<uint16_t, uint8_t> FailAndPresence_t; // first might wrap in a long play..
-	typedef std::map<TypeAndLevel_t, FailAndPresence_t> TrainFailCount_t;
-	TrainFailCount_t training_failure_count;
+	using FailAndPresence = std::pair<uint16_t, uint8_t>; // first might wrap in a long play..
+	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
+	TrainFailCount training_failure_count;
 	uint32_t max_stall_val;
-	void init_kick_state(const tAttribute&, const TrainingSiteDescr&);
+	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 
 
 };

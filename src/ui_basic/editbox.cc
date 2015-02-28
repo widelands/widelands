@@ -21,14 +21,14 @@
 
 #include <limits>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "ui_basic/is_printable.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -72,10 +72,10 @@ EditBox::EditBox
 	m_history_active(false),
 	m_history_position(-1)
 {
-	set_think(false);
+	set_thinks(false);
 
 	m->background = background;
-	m->fontname = UI_FONT_NAME;
+	m->fontname = UI::g_fh1->fontset().serif();
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 
@@ -87,6 +87,7 @@ EditBox::EditBox
 
 	set_handle_mouse(true);
 	set_can_focus(true);
+	set_handle_textinput();
 
 	// Initialize history as empty string
 	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
@@ -122,7 +123,7 @@ void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
  * The text is truncated if it is longer than the maximum length set by
  * \ref setMaxLength().
  */
-void EditBox::setText(const std::string & t)
+void EditBox::set_text(const std::string & t)
 {
 	if (t == m->text)
 		return;
@@ -142,7 +143,7 @@ void EditBox::setText(const std::string & t)
 /**
  * \return the maximum length of the input string
  */
-uint32_t EditBox::maxLength() const
+uint32_t EditBox::max_length() const
 {
 	return m->maxLength;
 }
@@ -154,7 +155,7 @@ uint32_t EditBox::maxLength() const
  * If the current string is longer than the new maximum length,
  * its end is cut off to fit into the maximum length.
  */
-void EditBox::setMaxLength(uint32_t const n)
+void EditBox::set_max_length(uint32_t const n)
 {
 	m->maxLength = n;
 
@@ -184,7 +185,7 @@ Align EditBox::align() const
  * Note that vertical alignment is always centered, independent of what
  * you select here.
  */
-void EditBox::setAlign(Align _align)
+void EditBox::set_align(Align _align)
 {
 	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	if (_align != m->align) {
@@ -220,7 +221,7 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 // TODO(unknown): Text input works only because code.unicode happens to map to ASCII for
 // ASCII characters (--> //HERE). Instead, all user editable strings should be
 // real unicode.
-bool EditBox::handle_key(bool const down, SDL_keysym const code)
+bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -248,7 +249,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -270,9 +270,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP4:
+		case SDLK_KP_4:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -290,9 +289,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP6:
+		case SDLK_KP_6:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -315,9 +313,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP7:
+		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -330,9 +327,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP1:
+		case SDLK_KP_1:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -344,9 +340,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP8:
+		case SDLK_KP_8:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -364,9 +359,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP2:
+		case SDLK_KP_2:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
@@ -384,16 +378,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-
 		default:
-			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
-			// example ~ + o results in a o with a tilde over it. The ~ is reported
-			// as a 0 on keystroke, the o then as the unicode character. We simply
-			// ignore the 0.
-			if (is_printable(code) && code.unicode) {
-				insert(code);
-				return true;
-			}
 			break;
 		}
 	}
@@ -401,31 +386,15 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 	return false;
 }
 
-/**
- * Insert the utf8 character according to the specified key code
- */
-void EditBox::insert(SDL_keysym const code)
-{
-	if (m->text.size() < m->maxLength) {
-		if (code.unicode < 0x80) // 1 byte char
-			m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
-		else if (code.unicode < 0x800) { // 2 byte char
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0x7c0) >> 6) | 0xc0));
-			m->text.insert
-				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
-		} else { // 3 byte char
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0xf000) >> 12) | 0xe0));
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0xfc0) >> 6) | 0x80));
-			m->text.insert
-				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
-		}
+bool EditBox::handle_textinput(const std::string& input_text) {
+	if ((m->text.size() +  input_text.length()) < m->maxLength) {
+		m->text.insert(m->caret, input_text);
+		m->caret += input_text.length();
 		check_caret();
 		changed();
 		update();
 	}
+	return true;
 }
 
 void EditBox::draw(RenderTarget & odst)

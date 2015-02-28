@@ -108,8 +108,8 @@ public:
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
-		 const Widelands::Tribe_Descr & tribe,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
+		 const Widelands::TribeDescr & tribe,
+		 boost::function<void(Widelands::WareIndex, bool)> callback_function,
 		 std::vector<uint8_t> & color_map)
 	:
 		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
@@ -120,11 +120,11 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::Ware_Index const /* ware */) override {
+	std::string info_for_ware(Widelands::WareIndex const /* ware */) override {
 		return "";
 	}
 
-	RGBColor info_color_for_ware(Widelands::Ware_Index const ware) override
+	RGBColor info_color_for_ware(Widelands::WareIndex const ware) override
 	{
 		size_t index = static_cast<size_t>(ware);
 
@@ -132,15 +132,13 @@ protected:
 	}
 };
 
-Ware_Statistics_Menu::Ware_Statistics_Menu
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+WareStatisticsMenu::WareStatisticsMenu
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
-	set_cache(false);
-
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares();
 
 	//init color sets
@@ -161,49 +159,49 @@ m_parent(&parent)
 	uint8_t const plot_width = get_inner_w() - 2 * spacing;
 	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
 
-	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
+	UI::TabPanel * tabs =
+		 new UI::TabPanel
 			 (box, spacing, 0, g_gr->images().get("pics/but1.png"));
 
 
 	m_plot_production =
-		new WUIPlot_Area
+		new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_production->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("production", g_gr->images().get(pic_tab_production),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
-		new WUIPlot_Area
+		new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_consumption->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("consumption", g_gr->images().get(pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
-		new DifferentialPlot_Area
+		new DifferentialPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_economy->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_economy->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("economy_health", g_gr->images().get(pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
-	m_plot_stock = new WUIPlot_Area
+	m_plot_stock = new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_stock->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
+	m_plot_stock->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
 	tabs->add
 		("stock", g_gr->images().get(pic_tab_stock),
@@ -215,46 +213,46 @@ m_parent(&parent)
 	box->add(tabs, UI::Box::AlignLeft, true);
 
 	//register statistics data
-	for (Widelands::Ware_Index cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+	for (Widelands::WareIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
 		m_plot_production->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_production_statistics
-				(Widelands::Ware_Index(cur_ware)),
+				(Widelands::WareIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_consumption->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
-				(Widelands::Ware_Index(cur_ware)),
+				(Widelands::WareIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_economy->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_production_statistics
-				(Widelands::Ware_Index(cur_ware)),
+				(Widelands::WareIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_economy->register_negative_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
-				(Widelands::Ware_Index(cur_ware)));
+				(Widelands::WareIndex(cur_ware)));
 
 		m_plot_stock->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_stock_statistics
-				(Widelands::Ware_Index(cur_ware)),
+				(Widelands::WareIndex(cur_ware)),
 				colors[cur_ware]);
 	}
 
 	box->add
 		(new StatisticWaresDisplay
 			(box, 0, 0, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2),
+			 boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2),
 			 m_color_map),
 		 UI::Box::AlignLeft, true);
 
 	box->add
-		(new WUIPlot_Generic_Area_Slider
+		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
 			g_gr->images().get("pics/but1.png")),
@@ -266,7 +264,7 @@ m_parent(&parent)
  * Callback for the ware buttons. Change the state of all ware statistics
  * simultaneously.
  */
-void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
+void WareStatisticsMenu::cb_changed_to(Widelands::WareIndex id, bool what) {
 	if (what) { //activate ware
 		//search lowest free color
 		uint8_t color_index = INACTIVE;
@@ -305,7 +303,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
  * Callback for the time buttons. Change the time axis of all ware
  * statistics simultaneously.
  */
-void Ware_Statistics_Menu::set_time(int32_t timescale) {
+void WareStatisticsMenu::set_time(int32_t timescale) {
 	m_plot_production->set_time_id(timescale);
 	m_plot_consumption->set_time_id(timescale);
 	m_plot_economy->set_time_id(timescale);

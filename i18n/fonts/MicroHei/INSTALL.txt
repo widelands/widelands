@@ -1,0 +1,132 @@
+
+==========================================================
+
+                 Wen Quan Yi Micro Hei
+
+                  Installation Guide
+
+----------------------------------------------------------
+
+WenQuanYi Micro Hei font is a Chinese/Japanese/Korean outline font
+with Hei-Ti style (a sans-serif style) Han glyphs. This font
+is developed for general purpose use of Chinese for formating,
+printing and on-screen display.
+
+The installation process for this font on various systems will
+be outlined below in this document.
+
+----------------------------------------------------------
+
+Table of Content:
+
+I.   Installation for GNU/Linux, Unix or BSD-like systems
+II.  Installation for Windows
+III. Installation for Mac OS
+
+----------------------------------------------------------
+
+I.   Installation for GNU/Linux, Unix or BSD systems
+
+The installation of this font on Linux/BSD type system is quite
+straightforward if you are using the latest fontconfig/freetype2
+libraries. Three types of packages were provided for this font:
+Debian deb package, Redhat RPM package and generic tgz compression
+format.
+
+----------------------------------------------------------
+
+1. Install Debian deb package
+
+One-command installation is available for this font on Debian-based
+systems. You can download the wqy-microhei*.deb package and cd to the
+directory where the downloaded file locates, and type
+
+    dpkg -i wqy-microhei*.deb
+
+where * is the actual version number. This will copy the font to
+appropriate folders and set the configurations automatically.
+
+to verify, after the installation, type
+    ls /usr/share/fonts/wenquanyi/wqy-microhei/
+and see if this directory exists. You can also type
+    fc-list | grep WenQuanYi
+and see if you can see Micro Hei in the output
+
+----------------------------------------------------------
+
+2. Install Redhat RPM package
+
+This is similar to the above case, you can simply type
+
+    rpm -ivh wqy-microhei*.rpm
+
+to install and configure this font to your system
+
+----------------------------------------------------------
+
+3. Manual Installation with tgz package
+
+If you are running BSD-type or Unix systems, you can install this
+font manually.
+
+
+3.1 Installation for all users
+
+First, extract the font files with
+
+   tar zxvf wqy-microhei*.tar.gz
+
+Then, change to root user, move the extracted folder, "wqy-microhei"
+under /usr/share/fonts/wenquanyi/ (If this dir does not exist, use
+mkdir -p /usr/share/fonts/wenquanyi/ to create it first.)
+
+Then edit /etc/X11/xorg.conf or /etc/X11/XF86Config-4
+and find the section with FontPath. Append
+
+   FontPath /usr/share/fonts/wenquanyi/wqy-microhei
+
+under any of the FontPath line, save this file.
+
+Then, if your system has /etc/fonts/fonts.conf, edit
+it and append
+
+  <dir>/usr/share/fonts/wenquanyi/wqy-microhei/</dir>
+
+before </fontconfig>
+
+
+Restart X server and you should be able to use this font.
+
+2. Installation for single user
+
+If you do not have root access, you can also install this font
+by copying wqy-microhei.ttf to ~/.fonts/  (If this folder
+does not exist, create it first), then you can type
+fc-cache ~/.fonts/ to activate this font.
+
+Alternatively, if you are running KDE/GNOME, you can use
+the font installer tool from the preference dialog and install
+this font.
+
+
+==========================================================
+II.  Installation for Windows
+
+To install this font on Windows is similar to any other true-type
+fonts: extract the wqy-microhei.ttf file from the tar.gz package
+and copy/paste it to c:\windows\fonts\ folder or c:\winnt\fonts\ folder.
+
+If you have already installed an earlier version of this font, you
+need to uninstall it before installing a new version.
+
+We also provide a windows installer to automate the
+installation process. It is a self-executable file and simply
+click and run.
+
+==========================================================
+III.  Installation for Mac OS
+
+Similar to Windows, download the tgz package and extract the ttf file,
+double click on the ttf file on Finder, and click "Install".
+
+

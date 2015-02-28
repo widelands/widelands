@@ -30,6 +30,8 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/suggested_teams_box.h"
 
 
 using Widelands::Map;
@@ -44,71 +46,81 @@ namespace UI {
  * Data about a map that we're interested in.
  */
 struct MapData {
-	typedef std::set<std::string> Tags;
+	using Tags = std::set<std::string>;
 
 	std::string filename;
 	std::string name;
-	std::string author;
+	std::string localized_name;
 	std::string description;
 	std::string hint;
 	Tags tags;
+	std::vector<Map::SuggestedTeamLineup> suggested_teams;
 
-	uint32_t width;
-	uint32_t height;
-	uint32_t nrplayers;
-	bool scenario; // is this a scenario we should list?
-
-	MapData()
-		: width(0), height(0), nrplayers(0), scenario(false) {}
+	MapAuthorData authors;
+	uint32_t width = 0;
+	uint32_t height = 0;
+	uint32_t nrplayers = 0;
+	bool scenario = false; // is this a scenario we should list?
 };
+
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-
-struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MapSelect(GameSettingsProvider *, GameController *);
+class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
+public:
+	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*, bool is_editor = false);
 
 	bool is_scenario();
-	MapData const * get_map() const;
+	MapData const* get_map() const;
 	void think() override;
 
-private:
-	void ok();
-	void map_selected(uint32_t);
-	void changed(bool);
-	void double_clicked(uint32_t);
-	void fill_list();
-	bool compare_maprows(uint32_t, uint32_t);
+protected:
+	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+	bool set_has_selection() override;
 
-	UI::Checkbox * _add_tag_checkbox(UI::Box *, std::string, std::string);
+
+private:
+	bool compare_players(uint32_t, uint32_t);
+	bool compare_mapnames(uint32_t, uint32_t);
+	bool compare_size(uint32_t, uint32_t);
+
+	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
-	uint32_t     m_butw;
-	uint32_t     m_buth;
-	UI::Textarea m_title;
-	UI::Textarea m_label_load_map_as_scenario;
-	UI::Textarea m_label_name,       m_name;
-	UI::Textarea m_label_author,     m_author;
-	UI::Textarea m_label_size,       m_size;
-	UI::Textarea m_label_nr_players, m_nr_players;
-	UI::Textarea m_label_descr;
-	UI::Multiline_Textarea m_descr;
-	UI::Button m_back, m_ok;
-	UI::Checkbox                      m_load_map_as_scenario;
-	UI::Checkbox *                    m_show_all_maps;
-	std::vector<UI::Checkbox *>       m_tags_checkboxes;
-	UI::Table<uintptr_t const>        m_table;
-	std::string                       m_curdir, m_basedir;
-	Map::ScenarioTypes  m_scenario_types;
+	bool const                    m_is_editor;
+	int32_t const                 m_checkbox_space;
+	int32_t const                 m_checkboxes_y;
 
-	std::vector<std::string> m_tags_ordered;
-	std::set<uint32_t> m_req_tags;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_author;
+	UI::MultilineTextarea         m_ta_author;
+	UI::Textarea                  m_label_description;
+	UI::MultilineTextarea         m_ta_description;
 
-	std::vector<MapData> m_maps_data;
+	UI::Checkbox*                 m_cb_dont_localize_mapnames;
+	bool                          m_has_translated_mapname;
 
-	GameSettingsProvider * m_settings;
-	GameController       * m_ctrl;
+	UI::Checkbox*                 m_cb_show_all_maps;
+	std::vector<UI::Checkbox*>    m_tags_checkboxes;
+
+	UI::SuggestedTeamsBox*        m_suggested_teams_box;
+
+	bool                          m_is_scenario;
+	std::string                   m_curdir, m_basedir;
+	Map::ScenarioTypes            m_scenario_types;
+
+	std::vector<std::string>      m_tags_ordered;
+	std::set<uint32_t>            m_req_tags;
+
+	std::vector<MapData>          m_maps_data;
+
+	GameSettingsProvider*         m_settings;
+	GameController*               m_ctrl;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constants.h"
 #include "logic/game.h"
@@ -36,22 +37,18 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
-#include "wui/text_constants.h"
-
-using boost::format;
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow
-		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
-		 UI::Font * font)
+		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h)
 	:
 	/** TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game */
 	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
@@ -71,7 +68,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 1));
-		btn->set_font(font);
 
 		btn = new UI::Button
 			(this, "saved_game",
@@ -81,7 +77,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2));
-		btn->set_font(font);
 
 		btn = new UI::Button
 			(this, "cancel",
@@ -91,7 +86,6 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 0));
-		btn->set_font(font);
 	}
 
 
@@ -107,42 +101,48 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		GameController * m_ctrl;
 };
 
-Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
+FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	Fullscreen_Menu_Base("launchMPGmenu.jpg"),
+	FullscreenMenuBase("launchMPGmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
 	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
+	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
+	// so we can have the SuggestedTeamsBox
+	m_padding(4),
+	m_indent(10),
+	m_label_height(20),
+	m_right_column_x(get_w() * 37 / 50),
 
 // Buttons
 	m_change_map_or_save
 		(this, "change_map_or_save",
-		 get_w() * 37 / 50 + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
+		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
-		 get_w() * 37 / 50, get_h() * 12 / 20, m_butw, m_buth,
+		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
-		 get_w() * 37 / 50, get_h() * 218 / 240, m_butw, m_buth,
+		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
-		 get_w() * 37 / 50, get_h() * 11 / 20, m_butw, m_buth,
+		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
 		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
-		 get_w() * 37 / 50 + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
+		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/menu_help.png"),
 		 _("Show the help window"), true, false),
@@ -154,7 +154,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 _("Multiplayer Game Setup"), UI::Align_HCenter),
 	m_mapname
 		(this,
-		 get_w() * 37 / 50, get_h() * 3 / 20,
+		 m_right_column_x, get_h() * 3 / 20,
 		 std::string()),
 	m_clients
 		(this,
@@ -167,15 +167,15 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 _("Players"), UI::Align_HCenter),
 	m_map
 		(this,
-		 get_w() * 37 / 50, get_h() / 10, m_butw, get_h() / 10,
+		 m_right_column_x, get_h() / 10, m_butw, get_h() / 10,
 		 _("Map"), UI::Align_HCenter),
 	m_wincondition_type
 		(this,
-		 get_w() * 37 / 50 + (m_butw / 2), get_h() * 10 / 20,
+		 m_right_column_x + (m_butw / 2), get_h() * 10 / 20 - 1.5 * m_label_height,
 		 _("Type of game"), UI::Align_HCenter),
 
-	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 23 / 80),
-	m_client_info(this, get_w() * 37 / 50, get_h() * 13 / 20, m_butw, get_h() * 5 / 20),
+	m_map_info(this, m_right_column_x, get_h() * 2 / 10, m_butw, get_h() * 23 / 80 - 2 * m_label_height),
+	m_client_info(this, m_right_column_x, get_h() * 13 / 20 - 2 * m_label_height, m_butw, 2 * m_label_height),
 	m_help(nullptr),
 
 // Variables and objects used in the menu
@@ -185,26 +185,21 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 {
 	m_change_map_or_save.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::change_map_or_save, boost::ref(*this)));
+			 (&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
 	m_ok.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::start_clicked, boost::ref(*this)));
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchMPG::back_clicked, boost::ref(*this)));
+			 (&FullscreenMenuLaunchMPG::start_clicked, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::back_clicked, boost::ref(*this)));
 	m_wincondition.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::win_condition_clicked,
+			 (&FullscreenMenuLaunchMPG::win_condition_clicked,
 			  boost::ref(*this)));
 	m_help_button.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::help_clicked,
+			 (&FullscreenMenuLaunchMPG::help_clicked,
 			  boost::ref(*this)));
 
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-	m_wincondition.set_font(font_small());
-	m_help_button.set_font(font_small());
-	m_change_map_or_save.set_font(font_small());
-	m_wincondition_type.set_textstyle(ts_small());
+	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
 
 	m_lua = new LuaInterface();
 	win_condition_clicked();
@@ -231,12 +226,18 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		change_map_or_save();
 		// Try to associate the host with the first player
 		if (!m_settings->settings().players.empty()) {
-			m_settings->setPlayerNumber(0);
+			m_settings->set_player_number(0);
 		}
 	}
+
+	// Y coordinate will be set later, when we know how high this box will get.
+	m_suggested_teams_box = new UI::SuggestedTeamsBox
+									(this, m_right_column_x, 0, UI::Box::Vertical,
+									 m_padding, m_indent, m_label_height,
+									 get_w() - m_right_column_x, 4 * m_label_height);
 }
 
-Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
+FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete m_lua;
 	delete m_mpsg;
 	if (m_help)
@@ -245,7 +246,7 @@ Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 }
 
 
-void Fullscreen_Menu_LaunchMPG::think()
+void FullscreenMenuLaunchMPG::think()
 {
 	if (m_ctrl)
 		m_ctrl->think();
@@ -259,7 +260,7 @@ void Fullscreen_Menu_LaunchMPG::think()
  *
  * This automatically creates and displays a chat panel when appropriate.
  */
-void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
+void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider & chat)
 {
 	delete m_chat;
 	m_chat = new GameChatPanel
@@ -270,7 +271,7 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 /**
  * back-button has been pressed
  */
-void Fullscreen_Menu_LaunchMPG::back_clicked()
+void FullscreenMenuLaunchMPG::back_clicked()
 {
 	end_modal(0);
 }
@@ -278,16 +279,16 @@ void Fullscreen_Menu_LaunchMPG::back_clicked()
 /**
  * WinCondition button has been pressed
  */
-void Fullscreen_Menu_LaunchMPG::win_condition_clicked()
+void FullscreenMenuLaunchMPG::win_condition_clicked()
 {
-	m_settings->nextWinCondition();
+	m_settings->next_win_condition();
 	win_condition_update();
 }
 
 /**
  * update win conditions information
  */
-void Fullscreen_Menu_LaunchMPG::win_condition_update() {
+void FullscreenMenuLaunchMPG::win_condition_update() {
 	if (m_settings->settings().scenario) {
 		m_wincondition.set_title(_("Scenario"));
 		m_wincondition.set_tooltip
@@ -297,7 +298,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
+		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->get_win_condition_script());
 		t->do_not_warn_about_unaccessed_keys();
 
 		try {
@@ -314,9 +315,9 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 }
 
 /// Opens a popup window to select a map or saved game
-void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
+void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
-		(this, m_ctrl, get_w() / 3, get_h() / 4, font_small());
+		(this, m_ctrl, get_w() / 3, get_h() / 4);
 	switch (selection_window.run()) {
 		case 1:
 			select_map();
@@ -332,20 +333,20 @@ void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 /**
  * Select a map and send all information to the user interface.
  */
-void Fullscreen_Menu_LaunchMPG::select_map() {
-	if (!m_settings->canChangeMap())
+void FullscreenMenuLaunchMPG::select_map() {
+	if (!m_settings->can_change_map())
 		return;
 
-	Fullscreen_Menu_MapSelect msm(m_settings, m_ctrl);
+	FullscreenMenuMapSelect msm(m_settings, m_ctrl);
 	int code = msm.run();
 
 	if (code <= 0) {
 		// Set scenario = false, else the menu might crash when back is pressed.
-		m_settings->setScenario(false);
+		m_settings->set_scenario(false);
 		return;  // back was pressed
 	}
 
-	m_settings->setScenario(code == 2);
+	m_settings->set_scenario(code == 2);
 
 	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
@@ -356,32 +357,32 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 	if (mapdata.filename == m_filename_proof)
 		m_filename_proof = m_filename_proof + "new";
 
-	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
+	m_settings->set_map(mapdata.name, mapdata.filename, m_nr_players);
 }
 
 /**
  * Select a multi player saved game and send all information to the user
  * interface.
  */
-void Fullscreen_Menu_LaunchMPG::select_saved_game() {
-	if (!m_settings->canChangeMap())
+void FullscreenMenuLaunchMPG::select_saved_game() {
+	if (!m_settings->can_change_map())
 		return;
 
 	Widelands::Game game; // The place all data is saved to.
-	Fullscreen_Menu_LoadGame lsgm(game, m_settings, m_ctrl);
+	FullscreenMenuLoadGame lsgm(game, m_settings, m_ctrl);
 	int code = lsgm.run();
 
 	if (code <= 0)
 		return; // back was pressed
 
 	// Saved game was selected - therefore not a scenario
-	m_settings->setScenario(false);
+	m_settings->set_scenario(false);
 
 	std::string filename = lsgm.filename();
 
-	if (g_fs->FileExists(filename.c_str())) {
+	if (g_fs->file_exists(filename.c_str())) {
 		// Read the needed data from file "elemental" of the used map.
-		std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(filename.c_str()));
+		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename.c_str()));
 		Profile prof;
 		prof.read("map/elemental", nullptr, *l_fs);
 		Section & s = prof.get_safe_section("global");
@@ -389,10 +390,10 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 		std::string mapname = s.get_safe_string("name");
 		m_nr_players = s.get_safe_int("nr_players");
 
-		m_settings->setMap(mapname, filename, m_nr_players, true);
+		m_settings->set_map(mapname, filename, m_nr_players, true);
 
 		// Check for sendability
-		if (g_fs->IsDirectory(filename)) {
+		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning
 				(this, _("Saved game is directory"),
@@ -412,7 +413,7 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 		// this file is obviously a file from the dedicated server's saved games pool not available locally.
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i)
 			if (m_settings->settings().saved_games.at(i).path == filename) {
-				m_settings->setMap(filename, filename, m_settings->settings().saved_games.at(i).players, true);
+				m_settings->set_map(filename, filename, m_settings->settings().saved_games.at(i).players, true);
 				return;
 			}
 		throw wexception("The selected file could not be found in the pool of dedicated saved games.");
@@ -422,10 +423,10 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 /**
  * start-button has been pressed
  */
-void Fullscreen_Menu_LaunchMPG::start_clicked()
+void FullscreenMenuLaunchMPG::start_clicked()
 {
-	if (!g_fs->FileExists(m_settings->settings().mapfilename))
-		throw warning
+	if (!g_fs->file_exists(m_settings->settings().mapfilename))
+		throw WLWarning
 			(_("File not found"),
 			 _
 			 	("Widelands tried to start a game with a file that could not be "
@@ -435,7 +436,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "not own. Normally, such a file should be sent from the host to "
 			 	 "you, but perhaps the transfer was not yet finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
-	if (m_settings->canLaunch())
+	if (m_settings->can_launch())
 		end_modal(1);
 }
 
@@ -444,12 +445,12 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
  * update the user interface and take care about the visibility of
  * buttons and text.
  */
-void Fullscreen_Menu_LaunchMPG::refresh()
+void FullscreenMenuLaunchMPG::refresh()
 {
 	const GameSettings & settings = m_settings->settings();
 
 	if (settings.mapfilename != m_filename_proof) {
-		if (!g_fs->FileExists(settings.mapfilename)) {
+		if (!g_fs->file_exists(settings.mapfilename)) {
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
@@ -464,9 +465,9 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			// Care about the newly selected file. This has to be done here and not
 			// after selection of a new map / saved game, as the clients user
 			// interface can only notice the change after the host broadcasted it.
-			if (settings.savegame)
+			if (settings.savegame) {
 				load_previous_playerdata();
-			else {
+			} else {
 				load_map_info();
 				if (settings.scenario)
 					set_scenario_values();
@@ -481,24 +482,20 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		}
 	} else {
 		// Write client infos
-		std::string temp =
-			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
-			?
-			(format(_("Player %u")) % (settings.playernum + 1)).str()
-			:
-			_("Spectator");
-		temp  = (format(_("At the moment you are %s")) % temp.c_str()).str() + "\n\n";
-		temp += _("Click on the ‘?’ in the top right corner to get help.");
-		m_client_info.set_text(temp);
+		std::string client_info =
+			(settings.playernum >= 0) && (settings.playernum < MAX_PLAYERS) ?
+					(boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
+					_("You are a spectator.");
+		m_client_info.set_text(client_info);
 	}
 
-	m_ok.set_enabled(m_settings->canLaunch());
+	m_ok.set_enabled(m_settings->can_launch());
 
-	m_change_map_or_save.set_enabled(m_settings->canChangeMap());
-	m_change_map_or_save.set_visible(m_settings->canChangeMap());
+	m_change_map_or_save.set_enabled(m_settings->can_change_map());
+	m_change_map_or_save.set_visible(m_settings->can_change_map());
 
 	m_wincondition.set_enabled
-		(m_settings->canChangeMap() && !settings.savegame && !settings.scenario);
+		(m_settings->can_change_map() && !settings.savegame && !settings.scenario);
 
 	win_condition_update();
 
@@ -512,30 +509,30 @@ void Fullscreen_Menu_LaunchMPG::refresh()
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void Fullscreen_Menu_LaunchMPG::set_scenario_values()
+void FullscreenMenuLaunchMPG::set_scenario_values()
 {
 	const GameSettings & settings = m_settings->settings();
 	if (settings.mapfilename.empty())
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");
-	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(settings.mapfilename));
-	map.set_filename(settings.mapfilename.c_str());
+	Widelands::Map map; //  MapLoader needs a place to put its preload data
+	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(settings.mapfilename));
+	map.set_filename(settings.mapfilename);
 	ml->preload_map(true);
-	Widelands::Player_Number const nrplayers = map.get_nrplayers();
+	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1));
-		m_settings->setPlayerCloseable(i, map.get_scenario_player_closeable(i + 1));
+		m_settings->set_player_tribe    (i, map.get_scenario_player_tribe    (i + 1));
+		m_settings->set_player_closeable(i, map.get_scenario_player_closeable(i + 1));
 		std::string ai(map.get_scenario_player_ai(i + 1));
 		if (!ai.empty()) {
-			m_settings->setPlayerState(i, PlayerSettings::stateComputer);
-			m_settings->setPlayerAI   (i, ai);
+			m_settings->set_player_state(i, PlayerSettings::stateComputer);
+			m_settings->set_player_ai   (i, ai);
 		} else if
 			(settings.players.at(i).state != PlayerSettings::stateHuman
 			 &&
 			 settings.players.at(i).state != PlayerSettings::stateOpen)
 		{
-			m_settings->setPlayerState(i, PlayerSettings::stateOpen);
+			m_settings->set_player_state(i, PlayerSettings::stateOpen);
 		}
 	}
 }
@@ -543,60 +540,55 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 /**
  * load all playerdata from savegame and update UI accordingly
  */
-void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
+void FullscreenMenuLaunchMPG::load_previous_playerdata()
 {
-	std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str()));
+	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(m_settings->settings().mapfilename.c_str()));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
-	std::string strbuf;
 	std::string infotext = _("Saved players are:");
 	std::string player_save_name [MAX_PLAYERS];
 	std::string player_save_tribe[MAX_PLAYERS];
 	std::string player_save_ai   [MAX_PLAYERS];
-	char buf[32];
 
 	uint8_t i = 1;
 	for (; i <= m_nr_players; ++i) {
 		infotext += "\n* ";
-		strbuf = std::string();
-		snprintf(buf, sizeof(buf), "player_%u", i);
-		Section & s = prof.get_safe_section(buf);
+		Section & s = prof.get_safe_section((boost::format("player_%u")
+														 % static_cast<unsigned int>(i)).str());
 		player_save_name [i - 1] = s.get_string("name");
 		player_save_tribe[i - 1] = s.get_string("tribe");
 		player_save_ai   [i - 1] = s.get_string("ai");
 
-		snprintf(buf, sizeof(buf), _("Player %u"), i);
-		infotext += buf;
+		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
 				(boost::format("\\<%s\\>") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
-			m_settings->setPlayerState(i - 1, PlayerSettings::stateClosed);
+			m_settings->set_player_state(i - 1, PlayerSettings::stateClosed);
 			continue; // if tribe is empty, the player does not exist
 		}
 
 		// Set team to "none" - to get the real team, we would need to load the savegame completely
 		// Do we want that? No! So we just reset teams to not confuse the clients.
-		m_settings->setPlayerTeam(i - 1, 0);
+		m_settings->set_player_team(i - 1, 0);
 
 		if (player_save_ai[i - 1].empty()) {
 			// Assure that player is open
 			if (m_settings->settings().players.at(i - 1).state != PlayerSettings::stateHuman)
-				m_settings->setPlayerState(i - 1, PlayerSettings::stateOpen);
+				m_settings->set_player_state(i - 1, PlayerSettings::stateOpen);
 		} else {
-			m_settings->setPlayerState(i - 1, PlayerSettings::stateComputer);
-			m_settings->setPlayerAI(i - 1, player_save_ai[i - 1]);
+			m_settings->set_player_state(i - 1, PlayerSettings::stateComputer);
+			m_settings->set_player_ai(i - 1, player_save_ai[i - 1]);
 		}
 
 		// Set player's tribe
-		m_settings->setPlayerTribe(i - 1, player_save_tribe[i - 1]);
+		m_settings->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		strbuf = "tribes/" + player_save_tribe[i - 1];
-		strbuf += "/conf";
-		Profile tribe(strbuf.c_str(), nullptr, "tribe_" + player_save_tribe[i - 1]);
+		Profile tribe((new std::string("tribes/" + player_save_tribe[i - 1] + "/conf"))->c_str(),
+				nullptr, "tribe_" + player_save_tribe[i - 1]);
 		Section & global = tribe.get_safe_section("tribe");
 		player_save_tribe[i - 1] = global.get_safe_string("name");
 		infotext += " (";
@@ -626,17 +618,16 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 /**
  * load map informations and update the UI
  */
-void Fullscreen_Menu_LaunchMPG::load_map_info()
+void FullscreenMenuLaunchMPG::load_map_info()
 {
-	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+	Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-	char const * const name = m_settings->settings().mapfilename.c_str();
-	std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+	std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_settings->settings().mapfilename);
 	if (!ml) {
-		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
+		throw WLWarning("There was an error!", "The map file seems to be invalid!");
 	}
 
-	map.set_filename(name);
+	map.set_filename(m_settings->settings().mapfilename);
 	{
 		i18n::Textdomain td("maps");
 		ml->preload_map(true);
@@ -644,12 +635,12 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u"))
+	infotext += std::string("• ") + (boost::format(_("Size: %1$u x %2$u"))
 					 % map.get_width() % map.get_height()).str() + "\n";
-	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players))
+	infotext += std::string("• ") + (boost::format(ngettext("%u Player", "%u Players", m_nr_players))
 					 % m_nr_players).str() + "\n";
 	if (m_settings->settings().scenario)
-		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
+		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
 	infotext += map.get_description();
 	infotext += "\n";
@@ -657,10 +648,16 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;
+
+	m_suggested_teams_box->hide();
+	m_suggested_teams_box->show(map.get_suggested_teams());
+	m_suggested_teams_box->set_pos(
+				Point(m_suggested_teams_box->get_x(),
+						m_back.get_y() - m_padding - m_suggested_teams_box->get_h() - m_padding));
 }
 
 /// Show help
-void Fullscreen_Menu_LaunchMPG::help_clicked() {
+void FullscreenMenuLaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
 	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);

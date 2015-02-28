@@ -1,22 +1,22 @@
 wl_library(game_io
   SRCS
-    game_cmd_queue_data_packet.cc
-    game_cmd_queue_data_packet.h
+    game_cmd_queue_packet.cc
+    game_cmd_queue_packet.h
     game_data_packet.h
-    game_game_class_data_packet.cc
-    game_game_class_data_packet.h
-    game_interactive_player_data_packet.cc
-    game_interactive_player_data_packet.h
+    game_class_packet.cc
+    game_class_packet.h
+    game_interactive_player_packet.cc
+    game_interactive_player_packet.h
     game_loader.cc
     game_loader.h
-    game_map_data_packet.cc
-    game_map_data_packet.h
-    game_player_economies_data_packet.cc
-    game_player_economies_data_packet.h
-    game_player_info_data_packet.cc
-    game_player_info_data_packet.h
-    game_preload_data_packet.cc
-    game_preload_data_packet.h
+    game_map_packet.cc
+    game_map_packet.h
+    game_player_economies_packet.cc
+    game_player_economies_packet.h
+    game_player_info_packet.cc
+    game_player_info_packet.h
+    game_preload_packet.cc
+    game_preload_packet.h
     game_saver.cc
     game_saver.h
   DEPENDS
@@ -24,15 +24,20 @@ wl_library(game_io
     base_log
     base_macros
     base_scoped_timer
+    base_time_string
     economy
     graphic
-    graphic_surface
+    graphic_minimap_renderer
     io_fileread
     io_filesystem
     logic
+    logic_game_controller
     map_io
     map_io_map_loader
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

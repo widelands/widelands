@@ -20,148 +20,91 @@
 #ifndef WL_GRAPHIC_GRAPHIC_H
 #define WL_GRAPHIC_GRAPHIC_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include <SDL.h>
 
-#include "base/rect.h"
 #include "graphic/image_cache.h"
-
-#define MAX_RECTS 20
+#include "notifications/notifications.h"
+#include "notifications/note_ids.h"
 
 class AnimationManager;
 class RenderTarget;
-class Surface;
-class SurfaceCache;
-struct SDL_Surface;
+class Screen;
 class StreamWrite;
-struct Texture;
 
-/// Stores the capabilities of opengl
-struct GLCaps
-{
-	/// The OpenGL major version
-	int major_version;
-	/// The OpenGL minor version
-	int minor_version;
-	/// The maximum texture size
-	int tex_max_size;
-	/// If true sizes of texture must be a power of two
-	bool tex_power_of_two;
-	/// How many bits the stencil buffer support
-	int stencil_buffer_bits;
-	/// How many Aux Buffers the opengl context support
-	int aux_buffers;
-	/// Whether the BlendEquation support is available
-	bool blendequation;
-	/// Maximum number of textures that can be combined
-	int max_tex_combined;
-	/// Whether multitexturing is supported
-	bool multitexture;
+// Will be send whenever the resolution changes.
+struct GraphicResolutionChanged {
+	CAN_BE_SEND_AS_NOTE(NoteId::GraphicResolutionChanged)
+
+	// New width and height in pixels.
+	int width;
+	int height;
 };
 
 /**
- * A structure to store the capabilities of the current rendere. This is set
- * during init() and can be retrieved by g_gr->get_caps()
- */
-struct GraphicCaps
-{
-	/// The capabilities of the opengl hardware and drive
-	GLCaps gl;
-};
-
-/**
- * This class is a kind of Swiss Army knife for your graphics need. It
- * initializes the graphic system and provides access to resolutions. It has an
- * Animation, Image and Surface cache and owns the road textures. It also
- * offers functionality to save a screenshot.
+ * This class is a kind of Swiss Army knife for your graphics need.
+ * It initializes the graphic system and provides access to
+ * resolutions. It owns an Animation, Image and Surface cache. It
+ * also offers functionality to save a screenshot.
  */
 class Graphic {
 public:
-	Graphic();
+	// Creates a new graphic mode with the given resolution if fullscreen is
+	// false, otherwise a window that fills the screen.
+	Graphic(int window_mode_w, int window_mode_height, bool fullscreen);
 	~Graphic();
 
-	// Initialize or reinitialize the graphics system. Throws on error.
-	void initialize
-		(int32_t w, int32_t h, bool fullscreen, bool opengl);
+	// Gets and sets the resolution.
+	void change_resolution(int w, int h);
+	int get_xres();
+	int get_yres();
 
-	int32_t get_xres();
-	int32_t get_yres();
-	bool is_fullscreen();
+	// Changes the window to be fullscreen or not.
+	bool fullscreen();
+	void set_fullscreen(bool);
 
 	RenderTarget * get_render_target();
-	void toggle_fullscreen();
-	void update_fullscreen();
-	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update_rectangle(const Rect& rect) {
-		update_rectangle (rect.x, rect.y, rect.w, rect.h);
-	}
+	void update();
 	bool need_update() const;
-	void refresh(bool force = true);
+	void refresh();
+	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	SurfaceCache& surfaces() const {return *surface_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
-	void save_png(const Image*, StreamWrite*) const;
-
-	// Creates a new Texture() with the given 'frametime' and using the given
-	// 'texture_files' as the images for it and returns it id.
-	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
-	void animate_maptextures(uint32_t time);
+	void save_png(Texture*, StreamWrite*) const;
 
 	void screenshot(const std::string& fname) const;
-	Texture * get_maptexture_data(uint32_t id);
-
-	Surface& get_road_texture(int32_t roadtex);
-
-	const GraphicCaps& caps() const {return m_caps;}
-
-	bool check_fallback_settings_in_effect();
 
 private:
-	void cleanup();
+	// Called when the resolution (might) have changed.
+	void resolution_changed();
 
-	bool m_fallback_settings_in_effect;
+	// The height & width of the window should we be in window mode.
+	int m_window_mode_width;
+	int m_window_mode_height;
 
-protected:
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	std::unique_ptr<Surface> screen_;
+	std::unique_ptr<Screen> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
-	SDL_Surface * m_sdl_screen;
+	SDL_Window * m_sdl_window;
+	SDL_GLContext m_glcontext;
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> m_rendertarget;
-	/// keeps track which screen regions needs to be redrawn during the next
-	/// update(). Only used for SDL rendering.
-	SDL_Rect m_update_rects[MAX_RECTS];
-	/// saves how many screen regions need updating. @see m_update_rects
-	int32_t m_nr_update_rects;
-	/// This marks the komplete screen for updating.
-	bool m_update_fullscreen;
-	/// stores which features the current renderer has
-	GraphicCaps m_caps;
+	/// This marks the complete screen for updating.
+	bool m_update;
 
-	/// Volatile cache of Hardware dependant surfaces.
-	std::unique_ptr<SurfaceCache> surface_cache_;
-	/// Non-volatile cache of hardware independent images. The use the
-	/// surface_cache_ to cache their pixel data.
+	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
+
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
-
-	// The texture needed to draw roads.
-	std::unique_ptr<Surface> pic_road_normal_;
-	std::unique_ptr<Surface> pic_road_busy_;
-
-	std::vector<std::unique_ptr<Texture>> m_maptextures;
 };
 
 extern Graphic * g_gr;
-extern bool g_opengl;
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H

@@ -7,24 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2014-04-16 02:59+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:53+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: vi\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:28
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
+#: ../../maps/Plateau.wmf/scripting/texts.lua:15
+#: ../../maps/Plateau.wmf/scripting/texts.lua:17
+#: ../../maps/Plateau.wmf/scripting/texts.lua:68
 msgid "The Forbidden Island"
 msgstr "Hòn đảo cấm"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:30
-#: ../../maps/Plateau.wmf/scripting/texts.lua:86
+#: ../../maps/Plateau.wmf/scripting/texts.lua:18
+#: ../../maps/Plateau.wmf/scripting/texts.lua:69
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -38,19 +39,21 @@ msgstr ""
 "ta, vì vậy hãy giữ yên lặng và xây dựng dinh lũy. Quân ta sẽ sớm mạnh lên để "
 "truy quét địch."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:41
+#: ../../maps/Plateau.wmf/scripting/texts.lua:26
+#: ../../maps/Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
 msgstr "Chiếm giữ toà thành cổ"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:42
+#: ../../maps/Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Hãy đánh bại Lanissa là chiếm giữ tòa thành cổ."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:47
+#: ../../maps/Plateau.wmf/scripting/texts.lua:35
+#: ../../maps/Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
 msgstr "Hãy đánh bại Erwyn"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:48
+#: ../../maps/Plateau.wmf/scripting/texts.lua:38
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this "
 "island."
@@ -58,32 +61,29 @@ msgstr ""
 "Hãy đánh bại Erwyn. Anh ta chỉ huy nhóm lính chống đối khỏe mạnh nhất còn "
 "lại trên hòn đảo này."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:52
+#: ../../maps/Plateau.wmf/scripting/texts.lua:43
+#: ../../maps/Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
 msgstr "Hãy đánh bại Jomo"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:53
+#: ../../maps/Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:66
-msgid "New Objective"
-msgstr ""
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:81
+#: ../../maps/Plateau.wmf/scripting/texts.lua:64
 msgid "First Briefing"
 msgstr "Mệnh lệnh thứ nhất"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:94
-#: ../../maps/Plateau.wmf/scripting/texts.lua:109
+#: ../../maps/Plateau.wmf/scripting/texts.lua:74
+#: ../../maps/Plateau.wmf/scripting/texts.lua:85
 msgid "Second Briefing"
 msgstr "Mệnh lệnh thứ hai"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+#: ../../maps/Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
 msgstr "Một tòa thành cổ"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:99
+#: ../../maps/Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -95,7 +95,7 @@ msgstr ""
 "được xây dựng theo phong cách ngoại quốc. Hiển nhiên đó không phải công "
 "trình của lũ mọi rợ."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:102
+#: ../../maps/Plateau.wmf/scripting/texts.lua:80
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -107,11 +107,11 @@ msgstr ""
 "cường này mà không cần đánh lớn! <br>Dù vậy thực sự chúng ta cần chiếm giữ "
 "nó. Rất có thể nó sẽ là điểm trọng yếu để ta có thể bình định hòn đảo này!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:113
+#: ../../maps/Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
 msgstr "Tòa thành cổ đã bị chiếm giữ"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:114
+#: ../../maps/Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
@@ -119,7 +119,7 @@ msgstr ""
 "Tuyệt vời! Cuối cùng quân ta đã đánh bại Lanissa cùng binh lính của bà ta. "
 "Tòa thành cổ đã thuộc về chúng ta!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:115
+#: ../../maps/Plateau.wmf/scripting/texts.lua:91
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -132,16 +132,16 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:126
-#: ../../maps/Plateau.wmf/scripting/texts.lua:135
+#: ../../maps/Plateau.wmf/scripting/texts.lua:96
+#: ../../maps/Plateau.wmf/scripting/texts.lua:105
 msgid "Another Briefing"
 msgstr "Một mệnh lệnh khác"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+#: ../../maps/Plateau.wmf/scripting/texts.lua:100
 msgid "Erwyn Defeated"
 msgstr "Erwyn đã bị đánh bại"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+#: ../../maps/Plateau.wmf/scripting/texts.lua:101
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
 "less strong warlord on this island!"
@@ -149,11 +149,11 @@ msgstr ""
 "Tốt rồi! Erwyn đã đầu hàng khi thấy tòa nhà cuối cùng của họ bị cháy rụi. Số "
 "lãnh chúa dũng mãnh trên đảo này đã bớt đi một!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:139
+#: ../../maps/Plateau.wmf/scripting/texts.lua:109
 msgid "Jomo Defeated"
 msgstr "Jomo đã bị đánh bại"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+#: ../../maps/Plateau.wmf/scripting/texts.lua:110
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
@@ -161,15 +161,15 @@ msgstr ""
 "Tốt rồi! Jomo đã đầu hàng khi thấy tòa nhà cuối cùng của họ bị cháy rụi. Số "
 "lãnh chúa dũng mãnh trên đảo này đã bớt đi một!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:144
+#: ../../maps/Plateau.wmf/scripting/texts.lua:114
 msgid "Last Briefing"
 msgstr "Mệnh lệnh cuối cùng"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:148
+#: ../../maps/Plateau.wmf/scripting/texts.lua:118
 msgid "Victory!"
 msgstr "Chiến thắng!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:149
+#: ../../maps/Plateau.wmf/scripting/texts.lua:119
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better "
 "than the warlords did."
@@ -177,7 +177,7 @@ msgstr ""
 "Cuối cùng rồi cũng xong! Toàn bộ hòn đảo thuộc về chúng ta. Bây giờ ta chỉ "
 "cần bảo vệ nó chắc chắn hơn so với các lãnh chúa trước đã làm."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:150
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

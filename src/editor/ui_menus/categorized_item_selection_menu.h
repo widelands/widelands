@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
@@ -82,7 +81,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
 	tool_(tool)
 {
-	UI::Tab_Panel* tab_panel = new UI::Tab_Panel(this, 0, 0, nullptr);
+	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0, nullptr);
 	add(tab_panel, UI::Align_Center);
 
 	for (uint32_t category_index = 0; category_index < categories.get_nitems(); ++category_index) {
@@ -122,15 +121,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-
-		const Image* category_picture = category.picture();
-		const int kCategoryImageSize = 24;
-		if (category_picture->width() > kCategoryImageSize ||
-		    category_picture->height() > kCategoryImageSize) {
-			category_picture =
-			   ImageTransformations::resize(category_picture, kCategoryImageSize, kCategoryImageSize);
-		}
-		tab_panel->add(category.name(), category_picture, vertical, category.descname());
+		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
 	}
 	add(&current_selection_names_, UI::Align_Center, true);
 }
@@ -144,7 +135,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
+	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
 	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {

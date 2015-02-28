@@ -25,20 +25,23 @@
 namespace Widelands {
 
 // FindNodeWithFlagOrRoad
-
 bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
-		return pimm->get_economy() != economy && (dynamic_cast<Flag const*>(pimm)
-		                                          || (dynamic_cast<Road const*>(pimm) &&
-		                                             (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+		return (dynamic_cast<Flag const*>(pimm) ||
+		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;
 }
 
 // CheckStepRoadAI
 
-bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
-   const {
+bool CheckStepRoadAI::allowed(
+   Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player_->get_buildcaps(end);
+
+	// we should not cross fields with road or flags (or any other immovable)
+	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
+		return false;
+	}
 
 	// Calculate cost and passability
 	if (!(endcaps & movecaps_))
@@ -60,7 +63,7 @@ bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep
 	return true;
 }
 
-bool CheckStepRoadAI::reachabledest(Map& map, FCoords const dest) const {
+bool CheckStepRoadAI::reachable_dest(Map& map, FCoords const dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {

@@ -2,7 +2,7 @@ size=medium
 output=blackwood
 
 [aihints]
-is_basic=true
+forced_after=0
 
 [buildcost]
 log=3
@@ -29,10 +29,18 @@ consume=log:2
 animate=working 24000
 produce=blackwood
 
+[build]
+pics=build_??.png  # ???
+hotspot=52 64
+
 [idle]
-pics=hardener_i_??.png  # ???
-hotspot=38 50
+pics=idle_??.png  # ???
+hotspot=52 64
+
+[unoccupied]
+pics=unoccupied_??.png  # ???
+hotspot=52 64
 
 [working]
-pics=hardener_i_??.png  # ???
-hotspot=38 50
+pics=working_??.png  # ???
+hotspot=52 64

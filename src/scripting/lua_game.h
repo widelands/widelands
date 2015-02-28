@@ -22,12 +22,12 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
+#include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 namespace Widelands {
-	struct Tribe_Descr;
+	class TribeDescr;
 	class Objective;
 	struct Message;
 }
@@ -37,22 +37,22 @@ namespace LuaGame {
 /*
  * Base class for all classes in wl.game
  */
-class L_GameModuleClass : public LunaClass {
+class LuaGameModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "game";}
 };
 
-class L_Player : public LuaBases::L_PlayerBase {
+class LuaPlayer : public LuaBases::LuaPlayerBase {
 public:
-	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
-	// L_GameModuleClass and L_PlayerBase
+	// Overwritten from LuaPlayerBase, avoid ambiguity when deriving from
+	// LuaGameModuleClass and LuaPlayerBase
 	const char * get_modulename() override {return "game";}
 
-	LUNA_CLASS_HEAD(L_Player);
+	LUNA_CLASS_HEAD(LuaPlayer);
 
-	L_Player() : LuaBases::L_PlayerBase() {}
-	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
-	L_Player(lua_State * L) {
+	LuaPlayer() : LuaBases::LuaPlayerBase() {}
+	LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n)  {}
+	LuaPlayer(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
@@ -93,23 +93,23 @@ public:
 	 */
 private:
 	void m_parse_building_list
-		(lua_State *, const Widelands::Tribe_Descr &,
-		 std::vector<Widelands::Building_Index> &);
+		(lua_State *, const Widelands::TribeDescr &,
+		 std::vector<Widelands::BuildingIndex> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
 
 };
 
-class L_Objective : public L_GameModuleClass {
+class LuaObjective : public LuaGameModuleClass {
 	std::string m_name;
 
 public:
-	LUNA_CLASS_HEAD(L_Objective);
+	LUNA_CLASS_HEAD(LuaObjective);
 
-	virtual ~L_Objective() {}
+	virtual ~LuaObjective() {}
 
-	L_Objective(const Widelands::Objective& n);
-	L_Objective() : m_name("") {}
-	L_Objective(lua_State * L) {
+	LuaObjective(const Widelands::Objective& n);
+	LuaObjective() : m_name("") {}
+	LuaObjective(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -141,17 +141,17 @@ public:
 	Widelands::Objective & get(lua_State *, Widelands::Game &);
 };
 
-class L_Message : public L_GameModuleClass {
+class LuaMessage : public LuaGameModuleClass {
 	uint32_t m_plr;
-	Widelands::Message_Id m_mid;
+	Widelands::MessageId m_mid;
 
 public:
-	LUNA_CLASS_HEAD(L_Message);
-	virtual ~L_Message() {}
+	LUNA_CLASS_HEAD(LuaMessage);
+	virtual ~LuaMessage() {}
 
-	L_Message(uint8_t, Widelands::Message_Id);
-	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * L) {
+	LuaMessage(uint8_t, Widelands::MessageId);
+	LuaMessage() : m_plr(0), m_mid(0) {}
+	LuaMessage(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -161,11 +161,9 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_sender(lua_State * L);
 	int get_sent(lua_State * L);
 	int get_title(lua_State * L);
 	int get_body(lua_State * L);
-	int get_duration(lua_State * L);
 	int get_field(lua_State * L);
 	int get_status(lua_State * L);
 	int set_status(lua_State * L);

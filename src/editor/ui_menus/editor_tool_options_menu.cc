@@ -19,8 +19,8 @@
 
 #include "editor/ui_menus/editor_tool_options_menu.h"
 
-Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
-	(Editor_Interactive         &       parent,
+EditorToolOptionsMenu::EditorToolOptionsMenu
+	(EditorInteractive         &       parent,
 	 UI::UniqueWindow::Registry &       registry,
 	 uint32_t const width, uint32_t const height,
 	 char                 const * const title)
@@ -34,7 +34,7 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 }
 
 
-void Editor_Tool_Options_Menu::select_correct_tool() {
-	ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
-		.select_tool(*m_current_pointer, Editor_Tool::First);
+void EditorToolOptionsMenu::select_correct_tool() {
+	dynamic_cast<EditorInteractive&>(*get_parent())
+		.select_tool(*m_current_pointer, EditorTool::First);
 }

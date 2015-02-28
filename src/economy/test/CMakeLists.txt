@@ -1,11 +1,9 @@
 wl_test(test_economy
   SRCS
     economy_test_main.cc
-    test_economy.cc
     test_road.cc
     test_routing.cc
   DEPENDS
-    base_deprecated
     economy
     io_filesystem
     logic

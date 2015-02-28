@@ -37,17 +37,17 @@ struct WorkerProgram;
 
 class WorkerDescr : public BobDescr
 {
-	friend struct Tribe_Descr;
+	friend class TribeDescr;
 	friend class Warehouse;
 	friend struct WorkerProgram;
 
 public:
-	typedef std::map<std::string, uint8_t> Buildcost;
+	using Buildcost = std::map<std::string, uint8_t>;
 
 	WorkerDescr
 		(MapObjectType type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~WorkerDescr() override;
 
 	Bob & create_object() const override;
@@ -61,7 +61,7 @@ public:
 	}
 
 	/// The tribe in which this worker is defined.
-	const Tribe_Descr & tribe() const;
+	const TribeDescr & tribe() const;
 
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
@@ -94,17 +94,16 @@ public:
 
 	// For leveling
 	int32_t get_needed_experience() const {return m_needed_experience;}
-	Ware_Index becomes() const {return m_becomes;}
-	Ware_Index worker_index() const;
-	bool can_act_as(Ware_Index) const;
+	WareIndex becomes() const {return m_becomes;}
+	WareIndex worker_index() const;
+	bool can_act_as(WareIndex) const;
 
 	Worker & create
-		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
+		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
 
-	typedef std::map<WorkerDescr const *, std::string> becomes_map_t;
 	uint32_t movecaps() const override;
 
-	typedef std::map<std::string, WorkerProgram *> Programs;
+	using Programs = std::map<std::string, WorkerProgram *>;
 	const Programs & programs() const {return m_programs;}
 
 protected:
@@ -126,9 +125,9 @@ protected:
 	int32_t m_needed_experience;
 
 	/**
-	 * Type that this worker can become, i.e. level up to (or Null).
+	 * Type that this worker can become, i.e. level up to (or null).
 	 */
-	Ware_Index  m_becomes;
+	WareIndex  m_becomes;
 	Programs    m_programs;
 private:
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);

@@ -1,0 +1,146 @@
+[main]
+host = https://www.transifex.com
+
+[widelands.scenario_atl01]
+file_filter = po/scenario_atl01.wmf/<lang>.po
+source_file = po/scenario_atl01.wmf/scenario_atl01.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_bar01]
+file_filter = po/scenario_bar01.wmf/<lang>.po
+source_file = po/scenario_bar01.wmf/scenario_bar01.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_bar02]
+file_filter = po/scenario_bar02.wmf/<lang>.po
+source_file = po/scenario_bar02.wmf/scenario_bar02.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.widelands_console]
+file_filter = po/widelands_console/<lang>.po
+source_file = po/widelands_console/widelands_console.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_dummy]
+file_filter = po/scenario_dummy.wmf/<lang>.po
+source_file = po/scenario_dummy.wmf/scenario_dummy.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_emp01]
+file_filter = po/scenario_emp01.wmf/<lang>.po
+source_file = po/scenario_emp01.wmf/scenario_emp01.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_emp02]
+file_filter = po/scenario_emp02.wmf/<lang>.po
+source_file = po/scenario_emp02.wmf/scenario_emp02.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.mp_scenario_island_hopping]
+file_filter = po/mp_scenario_island_hopping.wmf/<lang>.po
+source_file = po/mp_scenario_island_hopping.wmf/mp_scenario_island_hopping.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.maps]
+file_filter = po/maps/<lang>.po
+source_file = po/maps/maps.pot
+source_lang = en
+type = PO
+
+[widelands.mp_scenario_smugglers]
+file_filter = po/mp_scenario_smugglers.wmf/<lang>.po
+source_file = po/mp_scenario_smugglers.wmf/mp_scenario_smugglers.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.texts]
+file_filter = po/texts/<lang>.po
+source_file = po/texts/texts.pot
+source_lang = en
+type = PO
+
+[widelands.map_plateau]
+file_filter = po/map_plateau.wmf/<lang>.po
+source_file = po/map_plateau.wmf/map_plateau.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.tribes]
+file_filter = po/tribes/<lang>.po
+source_file = po/tribes/tribes.pot
+source_lang = en
+type = PO
+
+[widelands.tribe_atlanteans]
+file_filter = po/tribe_atlanteans/<lang>.po
+source_file = po/tribe_atlanteans/tribe_atlanteans.pot
+source_lang = en
+type = PO
+
+[widelands.tribe_barbarians]
+file_filter = po/tribe_barbarians/<lang>.po
+source_file = po/tribe_barbarians/tribe_barbarians.pot
+source_lang = en
+type = PO
+
+[widelands.tribe_empire]
+file_filter = po/tribe_empire/<lang>.po
+source_file = po/tribe_empire/tribe_empire.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_tutorial01_basic_control]
+file_filter = po/scenario_tutorial01_basic_control.wmf/<lang>.po
+source_file = po/scenario_tutorial01_basic_control.wmf/scenario_tutorial01_basic_control.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_tutorial02_warfare]
+file_filter = po/scenario_tutorial02_warfare.wmf/<lang>.po
+source_file = po/scenario_tutorial02_warfare.wmf/scenario_tutorial02_warfare.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_tutorial03_seafaring]
+file_filter = po/scenario_tutorial03_seafaring.wmf/<lang>.po
+source_file = po/scenario_tutorial03_seafaring.wmf/scenario_tutorial03_seafaring.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.scenario_tutorial04_economy]
+file_filter = po/scenario_tutorial04_economy.wmf/<lang>.po
+source_file = po/scenario_tutorial04_economy.wmf/scenario_tutorial04_economy.wmf.pot
+source_lang = en
+type = PO
+
+[widelands.widelands]
+file_filter = po/widelands/<lang>.po
+source_file = po/widelands/widelands.pot
+source_lang = en
+type = PO
+
+[widelands.win_conditions]
+file_filter = po/win_conditions/<lang>.po
+source_file = po/win_conditions/win_conditions.pot
+source_lang = en
+type = PO
+
+[widelands.world]
+file_filter = po/world/<lang>.po
+source_file = po/world/world.pot
+source_lang = en
+type = PO
+
+[widelands.translator_credits]
+file_filter = po/translator_credits/<lang>.po
+source_file = po/translator_credits/translator_credits.pot
+source_lang = en
+type = PO

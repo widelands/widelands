@@ -24,7 +24,6 @@
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
@@ -37,7 +36,7 @@ static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 Interactive_GameBase  & igb,
+	 InteractiveGameBase  & igb,
 	 Widelands::Building   & building,
 	 Widelands::WaresQueue * const queue,
 	 bool show_only)
@@ -63,7 +62,6 @@ m_show_only(show_only)
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.icon();
-	m_icon_grey = ImageTransformations::change_luminosity(ImageTransformations::gray_out(m_icon), 0.65, false);
 
 	uint16_t ph = m_max_fill_indicator->height();
 
@@ -74,7 +72,7 @@ m_show_only(show_only)
 
 	max_size_changed();
 
-	set_think(true);
+	set_thinks(true);
 }
 
 WaresQueueDisplay::~WaresQueueDisplay()
@@ -143,10 +141,20 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	point.x = Border + (m_show_only ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
-	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing)
-		dst.blit(point, m_icon);
-	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing)
-		dst.blit(point, m_icon_grey);
+	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing) {
+		dst.blitrect_scale(
+				Rect(point.x, point.y, m_icon->width(), m_icon->height()),
+				m_icon,
+				Rect(0, 0, m_icon->width(), m_icon->height()),
+				1.0,
+				BlendMode::UseAlpha);
+	}
+	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
+		dst.blitrect_scale_monochrome(Rect(point.x, point.y, m_icon->width(), m_icon->height()),
+		                              m_icon,
+		                              Rect(0, 0, m_icon->width(), m_icon->height()),
+		                              RGBAColor(166, 166, 166, 127));
+	}
 
 	if (!m_show_only) {
 		uint16_t pw = m_max_fill_indicator->width();

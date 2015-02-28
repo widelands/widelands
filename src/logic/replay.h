@@ -36,7 +36,7 @@
 #define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
 
-struct md5_checksum;
+struct Md5Checksum;
 
 class StreamRead;
 class StreamWrite;
@@ -54,8 +54,8 @@ public:
 	ReplayReader(Game & game, const std::string & filename);
 	~ReplayReader();
 
-	Command * GetNextCommand(uint32_t time);
-	bool EndOfReplay();
+	Command * get_next_command(uint32_t time);
+	bool end_of_replay();
 
 private:
 	StreamRead * m_cmdlog;
@@ -71,8 +71,8 @@ public:
 	ReplayWriter(Game &, const std::string & filename);
 	~ReplayWriter();
 
-	void SendPlayerCommand(PlayerCommand *);
-	void SendSync(const md5_checksum &);
+	void send_player_command(PlayerCommand *);
+	void send_sync(const Md5Checksum &);
 
 private:
 	Game        & m_game;

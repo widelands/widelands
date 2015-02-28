@@ -60,7 +60,7 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
-	enum Buildhelp_Index {
+	enum BuildhelpIndex {
 		Buildhelp_Flag   = 0,
 		Buildhelp_Small  = 1,
 		Buildhelp_Medium = 2,
@@ -70,17 +70,17 @@ struct Field {
 		Buildhelp_None   = 6
 	};
 
-	typedef uint8_t Height;
-	typedef uint8_t Resource_Amount;
+	using Height = uint8_t;
+	using ResourceAmount = uint8_t;
 
 	struct Terrains {
-		Terrain_Index d, r;
+		TerrainIndex d, r;
 	};
 	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
-	struct Resources        {Resource_Index  d : 4, r : 4;};
+	struct Resources        {ResourceIndex  d : 4, r : 4;};
 	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
-	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};
-	static_assert(sizeof(Resource_Amounts) == 1, "assert(sizeof(Resource_Amounts) == 1) failed.");
+	struct ResourceAmounts {ResourceAmount d : 4, r : 4;};
+	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
 
 private:
 	/**
@@ -99,13 +99,13 @@ private:
 	 * The next highest bit is the border bit.
 	 * The low bits are the player number of the owner.
 	 */
-	typedef Player_Number Owner_Info_and_Selections_Type;
+	using OwnerInfoAndSelectionsType = PlayerNumber;
 	static const uint8_t Border_Bit =
-		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
-	static const Owner_Info_and_Selections_Type Border_Bitmask = 1 << Border_Bit;
-	static const Owner_Info_and_Selections_Type Player_Number_Bitmask =
+		std::numeric_limits<OwnerInfoAndSelectionsType>::digits - 1;
+	static const OwnerInfoAndSelectionsType Border_Bitmask = 1 << Border_Bit;
+	static const OwnerInfoAndSelectionsType Player_Number_Bitmask =
 		Border_Bitmask - 1;
-	static const Owner_Info_and_Selections_Type Owner_Info_Bitmask =
+	static const OwnerInfoAndSelectionsType Owner_Info_Bitmask =
 		Player_Number_Bitmask + Border_Bitmask;
 	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
 
@@ -121,10 +121,10 @@ private:
 	Height height;
 	int8_t brightness;
 
-	Owner_Info_and_Selections_Type owner_info_and_selections;
+	OwnerInfoAndSelectionsType owner_info_and_selections;
 
-	Resource_Index m_resources; ///< Resource type on this field, if any
-	uint8_t m_starting_res_amount; ///< Initial amount of m_resources
+	ResourceIndex m_resources; ///< Resource type on this field, if any
+	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
 	uint8_t m_res_amount; ///< Current amount of m_resources
 
 	Terrains terrains;
@@ -135,18 +135,18 @@ public:
 	uint16_t get_caps()     const {return caps;}
 
 	Terrains      get_terrains() const {return terrains;}
-	Terrain_Index terrain_d   () const {return terrains.d;}
-	Terrain_Index terrain_r   () const {return terrains.r;}
+	TerrainIndex terrain_d   () const {return terrains.d;}
+	TerrainIndex terrain_r   () const {return terrains.r;}
 	void          set_terrains(const Terrains & i) {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex& t, Terrain_Index const i)
+		(const TCoords<FCoords>::TriangleIndex& t, TerrainIndex const i)
 
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
 		else set_terrain_r(i);
 	}
-	void set_terrain_d(Terrain_Index const i) {terrains.d = i;}
-	void set_terrain_r(Terrain_Index const i) {terrains.r = i;}
+	void set_terrain_d(TerrainIndex const i) {terrains.d = i;}
+	void set_terrain_r(TerrainIndex const i) {terrains.r = i;}
 
 	Bob * get_first_bob() const {return bobs;}
 	const BaseImmovable * get_immovable() const {return immovable;}
@@ -160,13 +160,13 @@ public:
 	 * Does not change the border bit of this or neighbouring fields. That must
 	 * be done separately.
 	 */
-	void set_owned_by(const Player_Number n) {
+	void set_owned_by(const PlayerNumber n) {
 		assert(n <= MAX_PLAYERS);
 		owner_info_and_selections =
 			n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
-	Player_Number get_owned_by() const {
+	PlayerNumber get_owned_by() const {
 		assert
 			((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
 		return owner_info_and_selections & Player_Number_Bitmask;
@@ -180,7 +180,7 @@ public:
 	///
 	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
 	/// behaviour is undefined.
-	bool is_interior(const Player_Number player_number) const {
+	bool is_interior(const PlayerNumber player_number) const {
 		assert(0 < player_number);
 		assert    (player_number <= Player_Number_Bitmask);
 		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);
@@ -192,20 +192,20 @@ public:
 	}
 
 	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(Buildhelp_Index const i) {
+	void set_buildhelp_overlay_index(BuildhelpIndex const i) {
 		buildhelp_overlay_index = i;
 	}
 
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t const dir) const {
-		return (roads >> dir) & Road_Mask;
+		return (roads >> dir) & RoadType::kMask;
 	}
 	void set_road(int32_t const dir, int32_t const type) {
-		roads &= ~(Road_Mask << dir);
+		roads &= ~(RoadType::kMask << dir);
 		roads |= type << dir;
 	}
 
-	// TODO(unknown): This should return Resource_Index
+	// TODO(unknown): This should return ResourceIndex
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t const res, uint8_t const amount) {
@@ -214,11 +214,11 @@ public:
 	}
 
 	// TODO(unknown): This should take uint8_t
-	void set_starting_res_amount(int32_t const amount) {
-		m_starting_res_amount = amount;
+	void set_initial_res_amount(int32_t const amount) {
+		m_initial_res_amount = amount;
 	}
 	// TODO(unknown): This should return uint8_t
-	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
+	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not

@@ -23,19 +23,18 @@
 #include <sys/time.h>
 #endif
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2
@@ -43,10 +42,7 @@
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string & background)
-	: m_xres(0), m_yres(0),
-	m_background_pic(nullptr)
-{
+ProgressWindow::ProgressWindow(const std::string& background) {
 	set_background(background);
 	step(_("Preparing..."));
 }
@@ -64,22 +60,17 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	if (!m_background_pic || xres != m_xres || yres != m_yres) {
-		// (Re-)Load background graphics
-		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
+	const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset().serif(),
+														 UI_FONT_SIZE_SMALL);
+	m_label_rectangle.x = xres / 4;
+	m_label_rectangle.w = xres / 2;
+	m_label_rectangle.y =
+	m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
+	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
-		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
-		m_label_rectangle.x = xres / 4;
-		m_label_rectangle.w = xres / 2;
-		m_label_rectangle.y =
-		m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
-		m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
-		// remember last resolution
-		m_xres = xres;
-		m_yres = yres;
-	}
-
-	rt.blit(Point(0, 0), m_background_pic);
+	const Image* bg = g_gr->images().get(m_background);
+	rt.blitrect_scale(
+	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
 
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
@@ -93,12 +84,11 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	if (!file_name.empty() && g_fs->FileExists(file_name)) {
+	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		m_background = file_name;
 	} else {
 		m_background = "pics/progress.png";
 	}
-	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }
@@ -117,7 +107,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::TextStyle ts(UI::TextStyle::ui_small());
 	ts.fg = PROGRESS_FONT_COLOR_FG;
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
-	g_gr->update_rectangle(m_label_rectangle);
+	g_gr->update();
 
 #ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
@@ -131,7 +121,7 @@ void ProgressWindow::update(bool const repaint) {
 	for (IProgressVisualization * visualization : m_visualizations) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
-	g_gr->refresh(false);
+	g_gr->refresh();
 }
 
 /**

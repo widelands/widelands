@@ -20,13 +20,12 @@
 #include "wui/game_tips.h"
 
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "profile/profile.h"
-#include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "pics/tips_bg.png"
@@ -121,5 +120,5 @@ void GameTips::show_tip(int32_t index) {
 	const Image* rendered_text = UI::g_fh1->render(as_game_tip(m_tips[index].text), tips_area.w);
 	rt.blit(center - Point(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
 
-	g_gr->update_rectangle(tips_area);
+	g_gr->update();
 }

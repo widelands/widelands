@@ -25,25 +25,30 @@
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "base/rect.h"
+
+class Texture;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-class Surface;
-
 class Image {
 public:
 	Image() = default;
 	virtual ~Image() {}
 
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
+	// Dimensions of this Image in pixels.
+	virtual int width() const = 0;
+	virtual int height() const = 0;
 
-	// Internal functions needed for caching.
-	virtual Surface* surface() const = 0;
-	virtual const std::string& hash() const = 0;
+	// OpenGL texture and texture coordinates backing this Image. This can
+	// change at any time, so do not hold one to this value for more than one
+	// frame.
+	virtual int get_gl_texture() const = 0;
+	virtual const FloatRect& texture_coordinates() const = 0;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
 

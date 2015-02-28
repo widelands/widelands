@@ -24,14 +24,14 @@
 #include "logic/productionsite.h"
 #include "ui_basic/table.h"
 
-struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window
-		(Interactive_GameBase & parent,
+struct ProductionSiteWindow : public BuildingWindow {
+	ProductionSiteWindow
+		(InteractiveGameBase & parent,
 		 Widelands::ProductionSite &,
 		 UI::Window *         & registry);
 
 	Widelands::ProductionSite & productionsite() {
-		return ref_cast<Widelands::ProductionSite, Widelands::Building>(building());
+		return dynamic_cast<Widelands::ProductionSite&>(building());
 	}
 	void update_worker_table();
 protected:

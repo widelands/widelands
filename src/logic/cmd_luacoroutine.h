@@ -24,22 +24,21 @@
 
 #include "logic/cmd_queue.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/scripting.h"
 
 namespace Widelands {
 
-struct Cmd_LuaCoroutine : public GameLogicCommand {
-	Cmd_LuaCoroutine() : GameLogicCommand(0), m_cr(nullptr) {} // For savegame loading
-	Cmd_LuaCoroutine(int32_t const _duetime, LuaCoroutine * const cr) :
+struct CmdLuaCoroutine : public GameLogicCommand {
+	CmdLuaCoroutine() : GameLogicCommand(0), m_cr(nullptr) {} // For savegame loading
+	CmdLuaCoroutine(int32_t const _duetime, LuaCoroutine * const cr) :
 		GameLogicCommand(_duetime), m_cr(cr) {}
 
-	~Cmd_LuaCoroutine() {
+	~CmdLuaCoroutine() {
 		delete m_cr;
 	}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_LUACOROUTINE;}
 

@@ -27,16 +27,16 @@ namespace Widelands {
 
 #define CMD_INCORPORATE_VERSION 1
 
-struct Cmd_Incorporate : public GameLogicCommand {
-	Cmd_Incorporate() : GameLogicCommand(0), worker(nullptr) {} // For savegame loading
-	Cmd_Incorporate (int32_t const t, Worker * const w)
+struct CmdIncorporate : public GameLogicCommand {
+	CmdIncorporate() : GameLogicCommand(0), worker(nullptr) {} // For savegame loading
+	CmdIncorporate (int32_t const t, Worker * const w)
 		: GameLogicCommand(t), worker(w)
 	{}
 
 	void execute (Game & game) override {worker->incorporate(game);}
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_INCORPORATE;}
 

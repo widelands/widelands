@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -33,20 +34,20 @@
 #include "random/random.h"
 #include "sound/fxset.h"
 
-namespace Widelands {class Editor_Game_Base;}
+namespace Widelands {class EditorGameBase;}
 struct Songset;
 struct SDL_mutex;
 class FileRead;
 
 /// How many milliseconds in the past to consider for
-/// Sound_Handler::play_or_not()
+/// SoundHandler::play_or_not()
 #define SLIDING_WINDOW_SIZE 20000
 
-extern class Sound_Handler g_sound_handler;
+extern class SoundHandler g_sound_handler;
 
 /** The 'sound server' for Widelands.
  *
- * Sound_Handler collects all functions for dealing with music and sound effects
+ * SoundHandler collects all functions for dealing with music and sound effects
  * in one class. It is similar in task - though not in scope - to well known
  * sound servers like gstreamer, EsounD or aRts. For the moment (and probably
  * forever), the only backend supported is SDL_mixer.
@@ -167,13 +168,13 @@ extern class Sound_Handler g_sound_handler;
 enum {
 	CHANGE_MUSIC
 };
-class Sound_Handler
+class SoundHandler
 {
 	friend struct Songset;
 	friend struct FXset;
 public:
-	Sound_Handler();
-	~Sound_Handler();
+	SoundHandler();
+	~SoundHandler();
 
 	void init();
 	void shutdown();
@@ -225,12 +226,12 @@ public:
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
 	*/
-	Widelands::Editor_Game_Base * egbase_;
+	Widelands::EditorGameBase * egbase_;
 
 	/** Only for buffering the command line option --nosound until real initialization is done.
 	 *  And disabling sound on dedicated servers
-	 * \see Sound_Handler::Sound_Handler()
-	 * \see Sound_Handler::init()
+	 * \see SoundHandler::SoundHandler()
+	 * \see SoundHandler::init()
 	 */
 	// TODO(unknown): This is ugly. Find a better way to do it
 	bool nosound_;
@@ -242,7 +243,9 @@ public:
 	bool lock_audio_disabling_;
 
 protected:
-	Mix_Chunk * RWopsify_MixLoadWAV(FileRead &);
+	// Prints an error and disables the sound system.
+	void initialization_error(const std::string& msg);
+
 	void load_one_fx(const char * filename, const std::string & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
@@ -266,17 +269,17 @@ protected:
 	bool random_order_;
 
 	/// A collection of songsets
-	typedef std::map<std::string, Songset *> Songset_map;
-	Songset_map songs_;
+	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
+	SongsetMap songs_;
 
 	/// A collection of effect sets
-	typedef std::map<std::string, FXset *> FXset_map;
-	FXset_map fxs_;
+	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
+	FXsetMap fxs_;
 
 	/// List of currently playing effects, and the channel each one is on
 	/// Access to this variable is protected through fx_lock_ mutex.
-	typedef std::map<uint32_t, std::string> Activefx_map;
-	Activefx_map active_fx_;
+	using ActivefxMap = std::map<uint32_t, std::string>;
+	ActivefxMap active_fx_;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.

@@ -49,10 +49,11 @@ class LuaInterface;
  *    1  - normal game (either single or multi player)
  *    2  - scenario game (at the moment only single player)
  */
-struct Fullscreen_Menu_LaunchSPG : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchSPG
+class FullscreenMenuLaunchSPG : public FullscreenMenuBase {
+public:
+	FullscreenMenuLaunchSPG
 		(GameSettingsProvider *, GameController * = nullptr, bool autolaunch = false);
-	~Fullscreen_Menu_LaunchSPG();
+	~FullscreenMenuLaunchSPG();
 
 	void start() override;
 	void think() override;

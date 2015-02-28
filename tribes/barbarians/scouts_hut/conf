@@ -1,7 +1,6 @@
 size=small
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=2
@@ -26,6 +25,15 @@ sleep=30000
 consume=ration
 worker=scout
 
+[build]
+pics=build_??.png
+hotspot=45 92
+
 [idle]
-pics=scouts_hut_i_??.png
-hotspot=45 43
+pics=idle_??.png
+hotspot=45 92
+
+[unoccupied]
+pics=unoccupied_??.png
+hotspot=45 92
+

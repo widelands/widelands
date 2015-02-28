@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2014-08-03 12:35+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:48+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:39+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -469,12 +469,12 @@ msgstr ""
 #: ../../tribes/empire/lumberjacks_house/conf:21
 #: ../../tribes/empire/marblemine/conf:32
 #: ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:24
-#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/sawmill/conf:25
+#: ../../tribes/empire/shipyard/conf:29
 #: ../../tribes/empire/smelting_works/conf:31
-#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/stonemasons_house/conf:26
 #: ../../tribes/empire/toolsmithy/conf:62
-#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/vineyard/conf:27
 #: ../../tribes/empire/weaponsmithy/conf:44
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
@@ -645,7 +645,7 @@ msgid ""
 "charcoal kiln out of logs."
 msgstr ""
 
-#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
 #: ../../tribes/empire/deep_goldmine/conf:27
 #: ../../tribes/empire/deep_marblemine/conf:28
@@ -655,12 +655,12 @@ msgstr ""
 msgid "mining"
 msgstr ""
 
-#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/empire/coalmine/conf:41
+#: ../../tribes/empire/coalmine/conf:42
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
@@ -1380,7 +1380,7 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Разводит милых и полезных ослов."
 
-#: ../../tribes/empire/donkeyfarm/conf:26
+#: ../../tribes/empire/donkeyfarm/conf:25
 msgid "rearing donkeys"
 msgstr ""
 
@@ -1397,7 +1397,7 @@ msgid "harvesting wheat"
 msgstr ""
 
 #: ../../tribes/empire/farm/conf:46
-#: ../../tribes/empire/vineyard/conf:45
+#: ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
 msgstr ""
 
@@ -1407,7 +1407,6 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/farm/help.lua:17
-#: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
 msgstr ""
 
@@ -1564,15 +1563,15 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Охотник добывает хорошее мясо для колонистов."
 
-#: ../../tribes/empire/hunters_house/conf:20
+#: ../../tribes/empire/hunters_house/conf:19
 msgid "hunting"
 msgstr ""
 
-#: ../../tribes/empire/hunters_house/conf:28
+#: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
 msgstr ""
 
-#: ../../tribes/empire/hunters_house/conf:29
+#: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
@@ -1747,7 +1746,7 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Разводит свиней."
 
-#: ../../tribes/empire/piggery/conf:26
+#: ../../tribes/empire/piggery/conf:25
 msgid "raising pigs"
 msgstr ""
 
@@ -1803,7 +1802,7 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
 
-#: ../../tribes/empire/scouts_house/conf:21
+#: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
 msgstr ""
 
@@ -1847,7 +1846,7 @@ msgstr "Годный для плавания корабль"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Работает на верфи и строит новые суда."
 
-#: ../../tribes/empire/shipyard/conf:28
+#: ../../tribes/empire/shipyard/conf:27
 msgid "constructing a ship"
 msgstr ""
 
@@ -1995,17 +1994,21 @@ msgstr ""
 msgid "Grows vine."
 msgstr "Выращивает виноград."
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:23
 msgid "planting grapevines"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 msgid "harvesting grapes"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:46
+#: ../../tribes/empire/vineyard/conf:44
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
+
+#: ../../tribes/empire/vineyard/help.lua:17
+msgid "Plant grapevines and harvest grapes."
 msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1

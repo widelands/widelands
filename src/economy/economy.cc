@@ -44,25 +44,25 @@ Economy::Economy(Player & player) :
 	m_owner(player),
 	m_request_timerid(0)
 {
-	const Tribe_Descr & tribe = player.tribe();
-	Ware_Index const nr_wares   = tribe.get_nrwares();
-	Ware_Index const nr_workers = tribe.get_nrworkers();
+	const TribeDescr & tribe = player.tribe();
+	WareIndex const nr_wares   = tribe.get_nrwares();
+	WareIndex const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
 	m_workers.set_nrwares(nr_workers);
 
 	player.add_economy(*this);
 
-	m_ware_target_quantities   = new Target_Quantity[nr_wares];
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
-		Target_Quantity tq;
+	m_ware_target_quantities   = new TargetQuantity[nr_wares];
+	for (WareIndex i = 0; i < nr_wares; ++i) {
+		TargetQuantity tq;
 		tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
 		m_ware_target_quantities[i] = tq;
 	}
-	m_worker_target_quantities = new Target_Quantity[nr_workers];
-	for (Ware_Index i = 0; i < nr_workers; ++i) {
-		Target_Quantity tq;
+	m_worker_target_quantities = new TargetQuantity[nr_workers];
+	for (WareIndex i = 0; i < nr_workers; ++i) {
+		TargetQuantity tq;
 		tq.permanent =
 			tribe.get_worker_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
@@ -139,7 +139,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 void Economy::_check_splits()
 {
-	Editor_Game_Base & egbase = owner().egbase();
+	EditorGameBase & egbase = owner().egbase();
 	Map & map = egbase.map();
 
 	while (m_split_checks.size()) {
@@ -320,29 +320,29 @@ void Economy::_reset_all_pathfinding_cycles()
 }
 
 /**
- * Set the target quantities for the given Ware_Index to the
+ * Set the target quantities for the given WareIndex to the
  * numbers given in permanent. Also update the last
  * modification time.
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
 void Economy::set_ware_target_quantity
-	(Ware_Index const ware_type,
+	(WareIndex const ware_type,
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_ware_target_quantities[ware_type];
+	TargetQuantity & tq = m_ware_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
 
 
 void Economy::set_worker_target_quantity
-	(Ware_Index const ware_type,
+	(WareIndex const ware_type,
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_worker_target_quantities[ware_type];
+	TargetQuantity & tq = m_worker_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -354,7 +354,7 @@ void Economy::set_worker_target_quantity
  * This is also called when a ware is added to the economy through trade or
  * a merger.
 */
-void Economy::add_wares(Ware_Index const id, uint32_t const count)
+void Economy::add_wares(WareIndex const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -363,7 +363,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 
 	// TODO(unknown): add to global player inventory?
 }
-void Economy::add_workers(Ware_Index const id, uint32_t const count)
+void Economy::add_workers(WareIndex const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -379,7 +379,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
-void Economy::remove_wares(Ware_Index const id, uint32_t const count)
+void Economy::remove_wares(WareIndex const id, uint32_t const count)
 {
 	assert(id < m_owner.tribe().get_nrwares());
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
@@ -394,7 +394,7 @@ void Economy::remove_wares(Ware_Index const id, uint32_t const count)
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */
-void Economy::remove_workers(Ware_Index const id, uint32_t const count)
+void Economy::remove_workers(WareIndex const id, uint32_t const count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
@@ -499,7 +499,7 @@ void Economy::remove_supply(Supply & supply)
 }
 
 
-bool Economy::needs_ware(Ware_Index const ware_type) const {
+bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
 	for (const Warehouse * wh : m_warehouses) {
@@ -511,7 +511,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 }
 
 
-bool Economy::needs_worker(Ware_Index const worker_type) const {
+bool Economy::needs_worker(WareIndex const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
 	for (const Warehouse * wh : m_warehouses) {
@@ -531,17 +531,17 @@ bool Economy::needs_worker(Ware_Index const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (Ware_Index i = m_owner.tribe().get_nrwares(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrwares(); i;) {
 		--i;
-		Target_Quantity other_tq = e.m_ware_target_quantities[i];
-		Target_Quantity & this_tq = m_ware_target_quantities[i];
+		TargetQuantity other_tq = e.m_ware_target_quantities[i];
+		TargetQuantity & this_tq = m_ware_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
-	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
-		Target_Quantity other_tq = e.m_worker_target_quantities[i];
-		Target_Quantity & this_tq = m_worker_target_quantities[i];
+		TargetQuantity other_tq = e.m_worker_target_quantities[i];
+		TargetQuantity & this_tq = m_worker_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
@@ -584,11 +584,11 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (Ware_Index i = m_owner.tribe().get_nrwares  (); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrwares  (); i;) {
 		--i;
 		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
 	}
-	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
@@ -613,7 +613,7 @@ void Economy::_start_request_timer(int32_t const delta)
 {
 	if (upcast(Game, game, &m_owner.egbase()))
 		game->cmdqueue().enqueue
-			(new Cmd_Call_Economy_Balance
+			(new CmdCallEconomyBalance
 			 	(game->get_gametime() + delta, this, m_request_timerid));
 }
 
@@ -694,12 +694,9 @@ struct RequestSupplyPair {
 	};
 };
 
-typedef
-	std::priority_queue
-	<RequestSupplyPair,
+using RSPairQueue = std::priority_queue<RequestSupplyPair,
 	std::vector<RequestSupplyPair>,
-	RequestSupplyPair::Compare>
-	RSPairQueue;
+	RequestSupplyPair::Compare>;
 
 struct RSPairStruct {
 	RSPairQueue queue;
@@ -721,9 +718,9 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite & ss = game.syncstream();
-			ss.Unsigned8 (req.get_type  ());
-			ss.Unsigned8 (req.get_index ());
-			ss.Unsigned32(req.target    ().serial());
+			ss.unsigned_8 (req.get_type  ());
+			ss.unsigned_8 (req.get_index ());
+			ss.unsigned_32(req.target    ().serial());
 		}
 
 		int32_t cost; // estimated time in milliseconds to fulfill Request
@@ -807,12 +804,12 @@ std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal inva
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
  */
-void Economy::_create_requested_worker(Game & game, Ware_Index index)
+void Economy::_create_requested_worker(Game & game, WareIndex index)
 {
 	unsigned demand = 0;
 
 	bool soldier_level_check;
-	const Tribe_Descr & tribe = owner().tribe();
+	const TribeDescr & tribe = owner().tribe();
 	const WorkerDescr & w_desc = *tribe.get_worker_descr(index);
 
 	// Make a dummy soldier, which should never be assigned to any economy
@@ -935,9 +932,9 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	const Tribe_Descr & tribe = owner().tribe();
+	const TribeDescr & tribe = owner().tribe();
 	for
-		(Ware_Index index = 0;
+		(WareIndex index = 0;
 		 index < tribe.get_nrworkers(); ++index)
 	{
 		if (!owner().is_worker_type_allowed(index))
@@ -954,7 +951,7 @@ void Economy::_create_requested_workers(Game & game)
  */
 static bool accept_warehouse_if_policy
 	(Warehouse & wh, WareWorker type,
-	 Ware_Index ware, Warehouse::StockPolicy policy)
+	 WareIndex ware, Warehouse::StockPolicy policy)
 {
 	return wh.get_stock_policy(type, ware) == policy;
 }
@@ -968,7 +965,7 @@ void Economy::_handle_active_supplies(Game & game)
 	if (!warehouses().size())
 		return;
 
-	typedef std::vector<std::pair<Supply *, Warehouse *> > Assignments;
+	using Assignments = std::vector<std::pair<Supply *, Warehouse *>>;
 	Assignments assignments;
 
 	for (uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
@@ -977,7 +974,7 @@ void Economy::_handle_active_supplies(Game & game)
 			continue;
 
 		WareWorker type;
-		Ware_Index ware;
+		WareIndex ware;
 		supply.get_ware_type(type, ware);
 
 		bool haveprefer = false;
@@ -1020,12 +1017,12 @@ void Economy::_handle_active_supplies(Game & game)
 	// to avoid potential future problems caused by the m_supplies changing
 	// under us in some way.
 	::StreamWrite & ss = game.syncstream();
-	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
-	ss.Unsigned32(assignments.size());
+	ss.unsigned_32(0x02decafa); // appears as facade02 in sync stream
+	ss.unsigned_32(assignments.size());
 
 	for (const std::pair<Supply *, Warehouse *>& temp_assignment : assignments) {
-		ss.Unsigned32(temp_assignment.first->get_position(game)->serial());
-		ss.Unsigned32(temp_assignment.second->serial());
+		ss.unsigned_32(temp_assignment.first->get_position(game)->serial());
+		ss.unsigned_32(temp_assignment.second->serial());
 
 		temp_assignment.first->send_to_storage(game, temp_assignment.second);
 	}
@@ -1037,11 +1034,12 @@ void Economy::_handle_active_supplies(Game & game)
 */
 void Economy::balance(uint32_t const timerid)
 {
-	if (m_request_timerid != timerid)
+	if (m_request_timerid != timerid) {
 		return;
+	}
 	++m_request_timerid;
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	_check_splits();
 

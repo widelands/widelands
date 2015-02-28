@@ -24,6 +24,7 @@
 #include "chat/chat.h"
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
+#include "logic/player.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -37,10 +38,10 @@
 /**
  * Setup the replay UI for the given game.
  */
-Interactive_Spectator::Interactive_Spectator
+InteractiveSpectator::InteractiveSpectator
 	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
 	:
-	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
+	InteractiveGameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
@@ -60,12 +61,12 @@ Interactive_Spectator::Interactive_Spectator
 	m_toggle_minimap
 		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap")))
 {
-	m_toggle_chat.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_chat, this));
-	m_exit.sigclicked.connect(boost::bind(&Interactive_Spectator::exit_btn, this));
-	m_save.sigclicked.connect(boost::bind(&Interactive_Spectator::save_btn, this));
-	m_toggle_options_menu.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_options_menu, this));
-	m_toggle_statistics.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_statistics, this));
-	m_toggle_minimap.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_minimap, this));
+	m_toggle_chat.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
+	m_exit.sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
+	m_save.sigclicked.connect(boost::bind(&InteractiveSpectator::save_btn, this));
+	m_toggle_options_menu.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_options_menu, this));
+	m_toggle_statistics.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_statistics, this));
+	m_toggle_minimap.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
 
 	m_toolbar.set_layout_toplevel(true);
 	if (!is_multiplayer()) {
@@ -75,6 +76,7 @@ Interactive_Spectator::Interactive_Spectator
 		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
@@ -94,9 +96,7 @@ Interactive_Spectator::Interactive_Spectator
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.connect(boost::bind(&Interactive_Spectator::node_action, this));
-
-	set_display_flag(dfSpeed, true);
+	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
@@ -112,7 +112,7 @@ Interactive_Spectator::Interactive_Spectator
 
 }
 
-Interactive_Spectator::~Interactive_Spectator() {
+InteractiveSpectator::~InteractiveSpectator() {
 	// We need to remove these callbacks because the opened window might
         // (theoretically) live longer than 'this' window, and thus the
         // buttons. The assertions are safeguards in case somewhere else in the
@@ -136,28 +136,28 @@ Interactive_Spectator::~Interactive_Spectator() {
  * \note We might want to implement a feature to watch a specific player,
  * including their vision. Then this should be changed.
  */
-Widelands::Player * Interactive_Spectator::get_player() const
+Widelands::Player * InteractiveSpectator::get_player() const
 {
 	return nullptr;
 }
 
 
-/**
- * Called just before the game starts, after postload, init and gfxload
- */
-void Interactive_Spectator::start()
-{
-	Widelands::Map & map = game().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
+	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
 
-	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(game().world());
+	iterate_players_existing(p, nr_players, game(), player) {
+		const Widelands::NodeCaps nc = player->get_buildcaps(c);
+		if (nc > Widelands::NodeCaps::CAPS_NONE) {
+			return nc;
+		}
+	}
+
+	return Widelands::NodeCaps::CAPS_NONE;
 }
 
 
 // Toolbar button callback functions.
-void Interactive_Spectator::toggle_chat()
+void InteractiveSpectator::toggle_chat()
 {
 	if (m_chat.window)
 		delete m_chat.window;
@@ -166,7 +166,7 @@ void Interactive_Spectator::toggle_chat()
 }
 
 
-void Interactive_Spectator::exit_btn()
+void InteractiveSpectator::exit_btn()
 {
 	if (is_multiplayer()) {
 		return;
@@ -175,7 +175,7 @@ void Interactive_Spectator::exit_btn()
 }
 
 
-void Interactive_Spectator::save_btn()
+void InteractiveSpectator::save_btn()
 {
 	if (is_multiplayer()) {
 		return;
@@ -183,12 +183,12 @@ void Interactive_Spectator::save_btn()
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
-		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+		new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
 	}
 }
 
 
-void Interactive_Spectator::toggle_options_menu() {
+void InteractiveSpectator::toggle_options_menu() {
 	if (!is_multiplayer()) {
 		return;
 	}
@@ -199,23 +199,23 @@ void Interactive_Spectator::toggle_options_menu() {
 }
 
 
-void Interactive_Spectator::toggle_statistics() {
+void InteractiveSpectator::toggle_statistics() {
 	if (m_mainm_windows.general_stats.window)
 		delete m_mainm_windows.general_stats.window;
 	else
-		new General_Statistics_Menu(*this, m_mainm_windows.general_stats);
+		new GeneralStatisticsMenu(*this, m_mainm_windows.general_stats);
 }
 
 
-bool Interactive_Spectator::can_see(Widelands::Player_Number) const
+bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const
 {
 	return true;
 }
-bool Interactive_Spectator::can_act(Widelands::Player_Number) const
+bool InteractiveSpectator::can_act(Widelands::PlayerNumber) const
 {
 	return false;
 }
-Widelands::Player_Number Interactive_Spectator::player_number() const
+Widelands::PlayerNumber InteractiveSpectator::player_number() const
 {
 	return 0;
 }
@@ -224,7 +224,7 @@ Widelands::Player_Number Interactive_Spectator::player_number() const
 /**
  * Observer has clicked on the given node; bring up the context menu.
  */
-void Interactive_Spectator::node_action() {
+void InteractiveSpectator::node_action() {
 	if //  special case for buildings
 		(upcast
 		 	(Widelands::Building,
@@ -243,10 +243,14 @@ void Interactive_Spectator::node_action() {
 /**
  * Global in-game keypresses:
  */
-bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
+bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down)
 		switch (code.sym) {
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
+
 		case SDLK_m:
 			toggle_minimap();
 			return true;
@@ -257,14 +261,10 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+				new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
 			} else
 				set_display_flag
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
-			return true;
-
-		case SDLK_f:
-			g_gr->toggle_fullscreen();
 			return true;
 
 		case SDLK_RETURN:
@@ -275,13 +275,12 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 			if (!m_chat.window)
 				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
-			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
-				.enter_chat_message();
+			dynamic_cast<GameChatMenu*>(m_chat.window)->enter_chat_message();
 			return true;
 
 		default:
 			break;
 		}
 
-	return Interactive_GameBase::handle_key(down, code);
+	return InteractiveGameBase::handle_key(down, code);
 }

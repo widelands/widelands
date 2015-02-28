@@ -19,6 +19,8 @@
 
 #include "io/dedicated_log.h"
 
+#include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -97,18 +99,18 @@ void DedicatedLog::chat(ChatMessage & c) {
 	temp += c.sender.empty() ? "SYSTEM" : c.sender;
 	temp += "</td><td class=\"recipient\"> ->" + c.recipient + "</td><td class=\"message\">";
 	temp += c.msg + "</td></tr>\n";
-	m_chat.Printf("%s", temp.c_str());
-	m_chat.WriteAppend(*root, m_chat_file_path.c_str());
+	m_chat.print_f("%s", temp.c_str());
+	m_chat.write_append(*root, m_chat_file_path.c_str());
 }
 
 /// Add's a spacer to the chat log
-void DedicatedLog::chatAddSpacer() {
+void DedicatedLog::chat_add_spacer() {
 	if (m_chat_file_path.empty())
 		return;
 
-	m_chat.Printf("<tr><td class=\"space\"></td><td class=\"space\"></td>");
-	m_chat.Printf("<td class=\"space\"></td><td class=\"space\"></td></tr>\n");
-	m_chat.WriteAppend(*root, m_chat_file_path.c_str());
+	m_chat.print_f("<tr><td class=\"space\"></td><td class=\"space\"></td>");
+	m_chat.print_f("<td class=\"space\"></td><td class=\"space\"></td></tr>\n");
+	m_chat.write_append(*root, m_chat_file_path.c_str());
 }
 
 
@@ -165,13 +167,13 @@ void DedicatedLog::info_update() {
 	temp += "<tr><td class=\"infoname\">Server MOTD</td><td class=\"info\">" + d_motd  + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Started on</td><td class=\"info\">"  + d_start + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logins</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_logins).str() + "</td></tr>\n";
+	temp += std::to_string(d_logins) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logouts</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_logouts).str() + "</td></tr>\n";
+	temp += std::to_string(d_logouts) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Chat messages</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_chatmessages).str() + "</td></tr>\n";
+	temp += std::to_string(d_chatmessages) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Games started</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_games.size()).str() + "</td></tr>\n";
+	temp += std::to_string(d_games.size()) + "</td></tr>\n";
 	if (!d_games.empty()) {
 		// Games information
 		temp += "</table><br><table class=\"infogames\">\n";
@@ -206,8 +208,8 @@ void DedicatedLog::info_update() {
 		}
 	}
 	temp += "</table>\n";
-	m_chat.Printf("%s", temp.c_str());
-	m_chat.Write(*root, m_info_file_path.c_str());
+	m_chat.print_f("%s", temp.c_str());
+	m_chat.write(*root, m_info_file_path.c_str());
 }
 
 /// Appends the String \arg msg to the log file
@@ -224,8 +226,8 @@ void DedicatedLog::dlog(std::string msg) {
 	temp += "</td><td class=\"log\">";
 	temp += msg;
 	temp += "</td></tr>\n";
-	m_chat.Printf("%s", temp.c_str());
-	m_chat.WriteAppend(*root, m_log_file_path.c_str());
+	m_chat.print_f("%s", temp.c_str());
+	m_chat.write_append(*root, m_log_file_path.c_str());
 }
 
 
@@ -252,8 +254,8 @@ bool DedicatedLog::set_chat_file_path(std::string path) {
 	m_chat_file_path = path;
 
 	// Initialize the chat file
-	m_chat.Printf("<tr><th>Time</th><th>Sender</th><th>Recipient</th><th>Message</th></tr>");
-	m_chat.Write(*root, m_chat_file_path.c_str()); // Not WriteAppend, to make sure the file is cleared
+	m_chat.print_f("<tr><th>Time</th><th>Sender</th><th>Recipient</th><th>Message</th></tr>");
+	m_chat.write(*root, m_chat_file_path.c_str()); // Not write_append, to make sure the file is cleared
 	return true;
 }
 
@@ -307,8 +309,8 @@ bool DedicatedLog::set_log_file_path (std::string path) {
 	m_log_file_path = path;
 
 	// Initialize the log file
-	m_chat.Printf("<tr><th></th><th>Widelands dedicated server log:</th></tr>\n");
-	m_chat.Write(*root, m_log_file_path.c_str()); // Not WriteAppend, to make sure the file is cleared
+	m_chat.print_f("<tr><th></th><th>Widelands dedicated server log:</th></tr>\n");
+	m_chat.write(*root, m_log_file_path.c_str()); // Not write_append, to make sure the file is cleared
 	return true;
 }
 
@@ -323,14 +325,14 @@ bool DedicatedLog::set_log_file_path (std::string path) {
  *          written to does not exist, in all other cases true.
  */
 bool DedicatedLog::check_file_writeable(std::string & path) {
-	bool existing = root->FileExists(path);
-	if (existing && root->IsDirectory(path))
+	bool existing = root->file_exists(path);
+	if (existing && root->is_directory(path))
 		return false;
-	if (root->FileIsWriteable(path)) {
+	if (root->file_is_writeable(path)) {
 		if (existing) {
 			std::string rnpath(path + '~');
-			if (root->FileIsWriteable(rnpath))
-				root->Rename(path, rnpath);
+			if (root->file_is_writeable(rnpath))
+				root->fs_rename(path, rnpath);
 			else
 				log("Note: original file %s could not be backuped\n", path.c_str());
 		}

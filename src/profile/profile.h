@@ -21,6 +21,8 @@
 #define WL_PROFILE_PROFILE_H
 
 #include <cstring>
+#include <memory>
+#include <string>
 #include <vector>
 
 #include "base/macros.h"
@@ -55,17 +57,18 @@ public:
 	friend class Profile;
 
 	struct Value {
-		bool   m_used;
-		char * m_name;
-		char * m_value;
+		using string = std::string;
 
-		Value(char const * nname, char const * nval);
+		Value(const string & name, const char * const value);
 		Value(const Value &);
-		~Value();
+		Value(Value && other);
 
-		Value & operator= (const Value &);
+		// destructor would be empty
 
-		char const * get_name() const {return m_name;}
+		Value & operator= (Value);
+		Value & operator= (Value && other);
+
+		char const * get_name() const {return m_name.c_str();}
 
 		bool is_used() const;
 		void mark_used();
@@ -74,19 +77,25 @@ public:
 		uint32_t get_natural () const;
 		uint32_t get_positive() const;
 		bool get_bool() const;
-		char const * get_string() const {return m_value;}
-		char       * get_string()       {return m_value;}
-		Point  get_Point () const;
+		char const * get_string() const {return m_value.get();}
+		char       * get_string()       {return m_value.get();}
+		Point  get_point () const;
 
 		void set_string(char const *);
+
+		friend void swap(Value& first, Value& second);
+
+	private:
+		bool m_used;
+		string m_name;
+		std::unique_ptr<char []> m_value;
+
+		Value() = default;
 	};
 
-	typedef std::vector<Value> Value_list;
+	using ValueList = std::vector<Value>;
 
-	Section(Profile *, char const * name);
-	Section(const Section &);
-
-	Section & operator= (const Section &);
+	Section(Profile *, const std::string & name);
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
@@ -119,7 +128,7 @@ public:
 	const char *             get_string
 		(char             const * name,
 		 char             const * def = nullptr);
-	Point                    get_Point
+	Point                    get_point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
 
@@ -170,7 +179,7 @@ private:
 	Profile  * m_profile;
 	bool       m_used;
 	std::string m_section_name;
-	Value_list m_values;
+	ValueList m_values;
 };
 
 /**
@@ -233,8 +242,8 @@ public:
 
 private:
 	std::string m_filename;
-	typedef std::vector<Section> Section_list;
-	Section_list m_sections;
+	using SectionList = std::vector<Section>;
+	SectionList m_sections;
 	int32_t m_error_level;
 
 	DISALLOW_COPY_AND_ASSIGN(Profile);

@@ -19,12 +19,16 @@
 
 #include "profile/profile.h"
 
+#include <algorithm>
 #include <cctype>
 #include <cstdarg>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <limits>
 #include <string>
+
+#include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -36,48 +40,76 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 
-#define TRUE_WORDS 4
+#define TRUE_WORDS 7
 static char const * trueWords[TRUE_WORDS] =
 {
 	"true",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("true"),
 	"yes",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("yes"),
 	"on",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("on"),
 	"1"
 };
 
-#define FALSE_WORDS 4
+#define FALSE_WORDS 7
 static char const * falseWords[FALSE_WORDS] =
 {
 	"false",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("false"),
 	"no",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("no"),
 	"off",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("off"),
 	"0"
 };
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const char * const nname, const char * const nval) :
-	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
-{}
-
-Section::Value::Value(const Section::Value & o) :
-m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
-
-Section::Value::~Value()
+Section::Value::Value(const string & nname, const char * const nval) :
+	m_used(false),
+	m_name(nname)
 {
-	free(m_name);
-	free(m_value);
+	set_string(nval);
 }
 
-Section::Value & Section::Value::operator= (const Section::Value & o)
+Section::Value::Value(const Section::Value & o) :
+	m_used(o.m_used),
+	m_name(o.m_name)
 {
-	if (this != &o) {
-		free(m_name);
-		free(m_value);
-		m_used = o.m_used;
-		m_name = strdup(o.m_name);
-		m_value = strdup(o.m_value);
-	}
+	set_string(o.m_value.get());
+}
+
+Section::Value::Value(Section::Value && o)
+	: Value()
+{
+	using std::swap;
+	swap(*this, o);
+}
+
+Section::Value & Section::Value::operator= (Section::Value other)
+{
+	using std::swap;
+	swap(*this, other);
+	return *this;
+}
+
+Section::Value & Section::Value::operator= (Section::Value && other)
+{
+	using std::swap;
+	swap(*this, other);
 	return *this;
 }
 
@@ -94,12 +126,12 @@ void Section::Value::mark_used()
 int32_t Section::Value::get_int() const
 {
 	char * endp;
-	long int const i = strtol(m_value, &endp, 0);
+	long int const i = strtol(m_value.get(), &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
+		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	int32_t const result = i;
 	if (i != result)
-		throw wexception("%s: '%s' is out of range",   get_name(), m_value);
+		throw wexception("%s: '%s' is out of range",   get_name(), get_string());
 
 	return result;
 }
@@ -108,9 +140,9 @@ int32_t Section::Value::get_int() const
 uint32_t Section::Value::get_natural() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 0)
-		throw wexception("%s: '%s' is not natural", get_name(), m_value);
+		throw wexception("%s: '%s' is not natural", get_name(), get_string());
 	return i;
 }
 
@@ -118,9 +150,9 @@ uint32_t Section::Value::get_natural() const
 uint32_t Section::Value::get_positive() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 1)
-		throw wexception("%s: '%s' is not positive", get_name(), m_value);
+		throw wexception("%s: '%s' is not positive", get_name(), get_string());
 	return i;
 }
 
@@ -128,31 +160,43 @@ uint32_t Section::Value::get_positive() const
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
-		if (!strcasecmp(m_value, trueWords[i]))
+		if (boost::iequals(m_value.get(), trueWords[i]))
 			return true;
 	for (int32_t i = 0; i < FALSE_WORDS; ++i)
-		if (!strcasecmp(m_value, falseWords[i]))
+		if (boost::iequals(m_value.get(), falseWords[i]))
 			return false;
 
-	throw wexception("%s: '%s' is not a boolean value", get_name(), m_value);
+	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
 }
 
 
-Point Section::Value::get_Point() const
+Point Section::Value::get_point() const
 {
-	char * endp = m_value;
+	char * endp = m_value.get();
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not a Point", get_name(), m_value);
+		throw wexception("%s: '%s' is not a Point", get_name(), get_string());
 
 	return Point(x, y);
 }
 
 void Section::Value::set_string(char const * const value)
 {
-	free(m_value);
-	m_value = strdup(value);
+	using std::copy;
+
+	const auto len = strlen(value) + 1;
+	m_value.reset(new char[len]);
+	copy(value, value + len, m_value.get());
+}
+
+void swap(Section::Value & first, Section::Value & second)
+{
+	using std::swap;
+
+	swap(first.m_name,  second.m_name);
+	swap(first.m_value, second.m_value);
+	swap(first.m_used,  second.m_used);
 }
 
 
@@ -171,28 +215,8 @@ void Section::set_name(const std::string& name) {
 	m_section_name = name;
 }
 
-Section::Section(Profile * const prof, const char * const name) :
+Section::Section(Profile * const prof, const std::string & name) :
 m_profile(prof), m_used(false), m_section_name(name) {}
-
-Section::Section(const Section & o) :
-	m_profile     (o.m_profile),
-	m_used        (o.m_used),
-	m_section_name(o.m_section_name),
-	m_values      (o.m_values)
-{
-	assert(this != &o);
-}
-
-Section & Section::operator= (const Section & o) {
-	if (this != &o) {
-		m_profile      = o.m_profile;
-		m_used         = o.m_used;
-		m_section_name = o.m_section_name;
-		m_values       = o.m_values;
-	}
-
-	return *this;
-}
 
 /** Section::is_used()
  *
@@ -230,7 +254,7 @@ void Section::check_used() const
 bool Section::has_val(char const * const name) const
 {
 	for (const Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			return true;
 		}
 	}
@@ -247,7 +271,7 @@ bool Section::has_val(char const * const name) const
 Section::Value * Section::get_val(char const * const name)
 {
 	for (Value& value : m_values) {
-		if (!strcasecmp(value.get_name(), name)) {
+		if (boost::iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
 		}
@@ -266,7 +290,7 @@ Section::Value * Section::get_next_val(char const * const name)
 {
 	for (Value& value : m_values) {
 		if (!value.is_used()) {
-			if (!name || !strcasecmp(value.get_name(), name)) {
+			if (!name || boost::iequals(value.get_name(), name)) {
 				value.mark_used();
 				return &value;
 			}
@@ -279,7 +303,7 @@ Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
 	for (Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
 		}
@@ -290,8 +314,7 @@ Section::Value & Section::create_val
 Section::Value & Section::create_val_duplicate
 	(char const * const name, char const * const value)
 {
-	Value v(name, value);
-	m_values.push_back(v);
+	m_values.emplace_back(name, value);
 	return m_values.back();
 }
 
@@ -457,10 +480,10 @@ char const * Section::get_string
 	return v ? v->get_string() : def;
 }
 
-Point Section::get_Point(const char * const name, const Point def)
+Point Section::get_point(const char * const name, const Point def)
 {
 	Value const * const v = get_val(name);
-	return v ? v->get_Point() : def;
+	return v ? v->get_point() : def;
 }
 
 
@@ -490,9 +513,7 @@ char const * Section::get_next_bool
  */
 void Section::set_int(char const * const name, int32_t const value)
 {
-	char buffer[sizeof("-2147483649")];
-	sprintf(buffer, "%i", value);
-	set_string(name, buffer);
+	set_string(name, std::to_string(value));
 }
 
 
@@ -601,7 +622,7 @@ void Profile::check_used() const
 Section * Profile::get_section(const std::string & name)
 {
 	for (Section& temp_section : m_sections) {
-		if (!strcasecmp(temp_section.get_name(), name.c_str())) {
+		if (boost::iequals(temp_section.get_name(), name.c_str())) {
 			temp_section.mark_used();
 			return &temp_section;
 		}
@@ -645,7 +666,7 @@ Section * Profile::get_next_section(char const * const name)
 {
 	for (Section& section : m_sections) {
 		if (!section.is_used()) {
-			if (!name || !strcasecmp(section.get_name(), name)) {
+			if (!name || boost::iequals(section.get_name(), name)) {
 				section.mark_used();
 				return &section;
 			}
@@ -658,7 +679,7 @@ Section * Profile::get_next_section(char const * const name)
 Section & Profile::create_section          (char const * const name)
 {
 	for (Section& section : m_sections) {
-		if (!strcasecmp(section.get_name(), name)) {
+		if (boost::iequals(section.get_name(), name)) {
 			return section;
 		}
 	}
@@ -715,7 +736,7 @@ void Profile::read
 	uint32_t linenr = 0;
 	try {
 		FileRead fr;
-		fr.Open(fs, filename);
+		fr.open(fs, filename);
 
 		char    * p = nullptr;
 		Section * s = nullptr;
@@ -724,7 +745,7 @@ void Profile::read
 		std::string data;
 		char * key = nullptr;
 		bool translate_line = false;
-		while (char * line = fr.ReadLine()) {
+		while (char * line = fr.read_line()) {
 			++linenr;
 
 			if (!reading_multiline)
@@ -829,7 +850,7 @@ void Profile::read
 			}
 		}
 	}
-	catch (const FileNotFound_error &) {
+	catch (const FileNotFoundError &) {
 		//It's no problem if the config file does not exist. (It'll get
 		//written on exit anyway)
 		log("There's no configuration file, using default values.\n");
@@ -852,7 +873,7 @@ void Profile::write
 {
 	FileWrite fw;
 
-	fw.Printf
+	fw.print_f
 		("# Automatically created by Widelands %s (%s)\n",
 		 build_id().c_str(), build_type().c_str());
 
@@ -860,7 +881,7 @@ void Profile::write
 		if (used_only && !temp_section.is_used())
 			continue;
 
-		fw.Printf("\n[%s]\n", temp_section.get_name());
+		fw.print_f("\n[%s]\n", temp_section.get_name());
 
 		for (const Section::Value& temp_value : temp_section.m_values) {
 			if (used_only && !temp_value.is_used())
@@ -908,11 +929,11 @@ void Profile::write
 					// End of multilined text.
 					tempstr += '"';
 
-				fw.Printf("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
+				fw.print_f("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
 			} else
-				fw.Printf("%s=\n", temp_value.get_name());
+				fw.print_f("%s=\n", temp_value.get_name());
 		}
 	}
 
-	fw.Write(fs, filename);
+	fw.write(fs, filename);
 }

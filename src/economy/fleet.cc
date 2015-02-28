@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -35,8 +34,8 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/warehouse.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -101,7 +100,7 @@ void Fleet::set_economy(Economy * e)
  * Initialize the fleet, including a search through the map
  * to rejoin with the next other fleet we can find.
  */
-void Fleet::init(Editor_Game_Base & egbase)
+void Fleet::init(EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
@@ -140,7 +139,7 @@ struct StepEvalFindFleet {
  * Search the map, starting at our ships and ports, for another fleet
  * of the same player.
  */
-void Fleet::find_other_fleet(Editor_Game_Base & egbase)
+void Fleet::find_other_fleet(EditorGameBase & egbase)
 {
 	Map & map = egbase.map();
 	MapAStar<StepEvalFindFleet> astar(map, StepEvalFindFleet());
@@ -163,6 +162,13 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
 			if (imm->descr().type() == MapObjectType::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
+					// here might be a problem so I (tiborb) put here
+					// this test, might be removed after some time
+					if (dock->get_fleet() == nullptr) {
+						log ("The dock on %3dx%3d withouth a fleet!\n",
+						dock->m_dockpoints.front().x,
+						dock->m_dockpoints.front().y);
+					}
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
 						return;
@@ -192,7 +198,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 /**
  * Merge the @p other fleet into this fleet, and remove the other fleet.
  */
-void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
+void Fleet::merge(EditorGameBase & egbase, Fleet * other)
 {
 	if (m_ports.empty() && !other->m_ports.empty()) {
 		other->merge(egbase, this);
@@ -244,7 +250,7 @@ void Fleet::check_merge_economy()
 	}
 }
 
-void Fleet::cleanup(Editor_Game_Base & egbase)
+void Fleet::cleanup(EditorGameBase & egbase)
 {
 	while (!m_ports.empty()) {
 		PortDock * pd = m_ports.back();
@@ -371,7 +377,7 @@ void Fleet::add_ship(Ship * ship)
 	}
 }
 
-void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
+void Fleet::remove_ship(EditorGameBase & egbase, Ship * ship)
 {
 	std::vector<Ship *>::iterator it = std::find(m_ships.begin(), m_ships.end(), ship);
 	if (it != m_ships.end()) {
@@ -432,7 +438,7 @@ struct StepEvalFindPorts {
  * Note that this is done lazily, i.e. the first time a path is actually requested,
  * because path finding is flaky during map loading.
  */
-void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
+void Fleet::connect_port(EditorGameBase & egbase, uint32_t idx)
 {
 	Map & map = egbase.map();
 	StepEvalFindPorts se;
@@ -508,7 +514,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	}
 }
 
-void Fleet::add_port(Editor_Game_Base & /* egbase */, PortDock * port)
+void Fleet::add_port(EditorGameBase & /* egbase */, PortDock * port)
 {
 	m_ports.push_back(port);
 	port->set_fleet(this);
@@ -522,7 +528,7 @@ void Fleet::add_port(Editor_Game_Base & /* egbase */, PortDock * port)
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
 }
 
-void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
+void Fleet::remove_port(EditorGameBase & egbase, PortDock * port)
 {
 	std::vector<PortDock *>::iterator it = std::find(m_ports.begin(), m_ports.end(), port);
 	if (it != m_ports.end()) {
@@ -582,7 +588,7 @@ PortDock * Fleet::get_arbitrary_dock() const
 /**
  * Trigger an update of ship scheduling
  */
-void Fleet::update(Editor_Game_Base & egbase)
+void Fleet::update(EditorGameBase & egbase)
 {
 	if (m_act_pending)
 		return;
@@ -672,7 +678,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 }
 
-void Fleet::log_general_info(const Editor_Game_Base & egbase)
+void Fleet::log_general_info(const EditorGameBase & egbase)
 {
 	MapObject::log_general_info(egbase);
 
@@ -692,22 +698,22 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 
 	Fleet & fleet = get<Fleet>();
 
-	uint32_t nrships = fr.Unsigned32();
+	uint32_t nrships = fr.unsigned_32();
 	m_ships.resize(nrships);
 	for (uint32_t i = 0; i < nrships; ++i)
-		m_ships[i] = fr.Unsigned32();
+		m_ships[i] = fr.unsigned_32();
 
-	uint32_t nrports = fr.Unsigned32();
+	uint32_t nrports = fr.unsigned_32();
 	m_ports.resize(nrports);
 	for (uint32_t i = 0; i < nrports; ++i)
-		m_ports[i] = fr.Unsigned32();
+		m_ports[i] = fr.unsigned_32();
 
 	if (version >= 2) {
-		fleet.m_act_pending = fr.Unsigned8();
+		fleet.m_act_pending = fr.unsigned_8();
 		if (version < 3)
 			fleet.m_act_pending = false;
 		if (version < 4)
-			fr.Unsigned32(); // m_roundrobin
+			fr.unsigned_32(); // m_roundrobin
 	}
 }
 
@@ -750,28 +756,28 @@ void Fleet::Loader::load_finish()
 }
 
 MapObject::Loader * Fleet::load
-		(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+		(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
-			Player_Number owner_number = fr.Unsigned8();
+			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
-				throw game_data_error
+				throw GameDataError
 					("owner number is %u but there are only %u players",
 					 owner_number, egbase.map().get_nrplayers());
 
 			Player * owner = egbase.get_player(owner_number);
 			if (!owner)
-				throw game_data_error("owning player %u does not exist", owner_number);
+				throw GameDataError("owning player %u does not exist", owner_number);
 
 			loader->init(egbase, mol, *(new Fleet(*owner)));
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}
@@ -779,25 +785,25 @@ MapObject::Loader * Fleet::load
 	return loader.release();
 }
 
-void Fleet::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void Fleet::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderFleet);
-	fw.Unsigned8(FLEET_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderFleet);
+	fw.unsigned_8(FLEET_SAVEGAME_VERSION);
 
-	fw.Unsigned8(m_owner.player_number());
+	fw.unsigned_8(m_owner.player_number());
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.Unsigned32(m_ships.size());
+	fw.unsigned_32(m_ships.size());
 	for (const Ship * temp_ship : m_ships) {
-		fw.Unsigned32(mos.get_object_file_index(*temp_ship));
+		fw.unsigned_32(mos.get_object_file_index(*temp_ship));
 	}
-	fw.Unsigned32(m_ports.size());
+	fw.unsigned_32(m_ports.size());
 	for (const PortDock * temp_port : m_ports) {
-		fw.Unsigned32(mos.get_object_file_index(*temp_port));
+		fw.unsigned_32(mos.get_object_file_index(*temp_port));
 	}
 
-	fw.Unsigned8(m_act_pending);
+	fw.unsigned_8(m_act_pending);
 }
 
 } // namespace Widelands

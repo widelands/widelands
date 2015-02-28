@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_tool_change_height_options_menu.h"
 
 #include <cstdio>
+#include <string>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -31,12 +32,12 @@
 
 #define width  20
 #define height 20
-Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
-	(Editor_Interactive          & parent,
-	 Editor_Increase_Height_Tool & increase_tool,
+EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
+	(EditorInteractive          & parent,
+	 EditorIncreaseHeightTool & increase_tool,
 	 UI::UniqueWindow::Registry  & registry)
 	:
-	Editor_Tool_Options_Menu
+	EditorToolOptionsMenu
 		(parent, registry, 250, 135, _("Height Tools Options")),
 	m_increase_tool(increase_tool),
 	m_change_by_label
@@ -105,14 +106,14 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 {
 	m_change_by_increase.sigclicked.connect
 		(boost::bind
-		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)));
+		 (&EditorToolChangeHeightOptionsMenu::clicked_change_by_increment, boost::ref(*this)));
 	m_change_by_decrease.sigclicked.connect
 		(boost::bind
-		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)));
+		 (&EditorToolChangeHeightOptionsMenu::clicked_change_by_decrement, boost::ref(*this)));
 	m_set_to_increase.sigclicked.connect
-		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)));
+		(boost::bind(&EditorToolChangeHeightOptionsMenu::clicked_setto_increment, boost::ref(*this)));
 	m_set_to_decrease.sigclicked.connect
-		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)));
+		(boost::bind(&EditorToolChangeHeightOptionsMenu::clicked_setto_decrement, boost::ref(*this)));
 
 	m_change_by_increase.set_repeating(true);
 	m_change_by_decrease.set_repeating(true);
@@ -122,7 +123,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 }
 
 
-void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement() {
+void EditorToolChangeHeightOptionsMenu::clicked_change_by_decrement() {
 	int32_t change_by = m_increase_tool.get_change_by();
 	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
 	assert(1 < change_by);
@@ -138,7 +139,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement() {
 }
 
 
-void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment() {
+void EditorToolChangeHeightOptionsMenu::clicked_change_by_increment() {
 	int32_t change_by = m_increase_tool.get_change_by();
 	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
 	assert(change_by < MAX_FIELD_HEIGHT_DIFF);
@@ -154,7 +155,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment() {
 }
 
 
-void Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement() {
+void EditorToolChangeHeightOptionsMenu::clicked_setto_decrement() {
 	Widelands::Field::Height setto =
 		m_increase_tool.set_tool().get_interval().min;
 	assert(setto == m_increase_tool.set_tool().get_interval().max);
@@ -171,7 +172,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement() {
 }
 
 
-void Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment() {
+void EditorToolChangeHeightOptionsMenu::clicked_setto_increment() {
 	Widelands::Field::Height setto =
 		m_increase_tool.set_tool().get_interval().min;
 	assert(setto == m_increase_tool.set_tool().get_interval().max);
@@ -189,10 +190,9 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment() {
 
 
 /// Update all the textareas, so that they represent the correct values.
-void Editor_Tool_Change_Height_Options_Menu::update() {
-	char buf[250];
-	sprintf(buf, "%i", m_increase_tool.get_change_by());
-	m_change_by_value.set_text(buf);
-	sprintf(buf, "%i", m_increase_tool.set_tool().get_interval().min);
-	m_set_to_value.set_text(buf);
+void EditorToolChangeHeightOptionsMenu::update() {
+	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
+
+	m_set_to_value.set_text(std::to_string(
+										static_cast<unsigned int>(m_increase_tool.set_tool().get_interval().min)));
 }

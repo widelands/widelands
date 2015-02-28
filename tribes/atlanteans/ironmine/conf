@@ -2,8 +2,8 @@ size=mine
 output=ironore
 
 [aihints]
-build_material=false
 mines=iron
+prohibited_till=1200
 
 [buildcost]
 log=7

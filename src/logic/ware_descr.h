@@ -39,7 +39,7 @@ class Image;
 
 namespace Widelands {
 
-struct Tribe_Descr;
+class TribeDescr;
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an
@@ -47,12 +47,12 @@ struct Tribe_Descr;
 */
 struct WareDescr : public MapObjectDescr {
 	WareDescr
-		(const Tribe_Descr & tribe, char const * const name,
+		(const TribeDescr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 	~WareDescr() override {}
 
-	const Tribe_Descr & tribe() const {return m_tribe;}
+	const TribeDescr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
 	const Image* icon() const {return m_icon;}
@@ -85,7 +85,7 @@ struct WareDescr : public MapObjectDescr {
 	uint8_t preciousness() const {return m_preciousness;}
 
 private:
-	const Tribe_Descr & m_tribe;
+	const TribeDescr & m_tribe;
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture

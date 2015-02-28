@@ -20,13 +20,15 @@
 #ifndef WL_LOGIC_PARSE_MAP_OBJECT_TYPES_H
 #define WL_LOGIC_PARSE_MAP_OBJECT_TYPES_H
 
+#include <cstring>
+
 #define PARSE_MAP_OBJECT_TYPES_BEGIN(kind)                                    \
    if (Section * const section = root_conf.get_section(kind " types")) {      \
       while (Section::Value const * const v = section->get_next_val()) {      \
          char const * const     _name = v->get_name  ();                      \
          char const * const _descname = v->get_string();                      \
          if (names.count(_name))                                              \
-            throw game_data_error                                             \
+				throw GameDataError                                             \
                ("object name \"%s\" is already used", _name);                 \
          names.insert(_name);                                                 \
          path += _name;                                                       \
@@ -39,7 +41,7 @@
 #define PARSE_MAP_OBJECT_TYPES_END                                            \
             prof.check_used();                                                \
          } catch (const std::exception & e) {                                 \
-            throw game_data_error                                             \
+				throw GameDataError                                             \
                ("%s=\"%s\": %s", _name, _descname, e.what());                 \
          }                                                                    \
          path.resize(base_path_size);                                         \

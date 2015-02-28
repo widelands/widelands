@@ -50,37 +50,37 @@ public:
 
 	// Add a new filesystem to the top of the stack. Take ownership of the given
 	// filesystem.
-	void AddFileSystem(FileSystem*);
+	void add_file_system(FileSystem*);
 
 	// Set the home filesystem (which is the preferred filesystem for writing
 	// files). Take ownership of the given filesystem.
-	void SetHomeFileSystem(FileSystem*);
+	void set_home_file_system(FileSystem*);
 
-	virtual void RemoveFileSystem(const FileSystem &);
+	virtual void remove_file_system(const FileSystem &);
 
-	std::set<std::string> ListDirectory(const std::string& path) override;
+	std::set<std::string> list_directory(const std::string& path) override;
 
-	bool IsWritable() const override;
-	bool            FileExists(const std::string & path) override;
-	bool     IsDirectory      (const std::string & path) override;
-	void EnsureDirectoryExists(const std::string & dirname) override;
-	void   MakeDirectory      (const std::string & dirname) override;
+	bool is_writable            () const override;
+	bool file_exists            (const std::string & path) override;
+	bool is_directory           (const std::string & path) override;
+	void ensure_directory_exists(const std::string & fs_dirname) override;
+	void make_directory         (const std::string & fs_dirname) override;
 
-	void * Load(const std::string & fname, size_t & length) override;
-	virtual void Write
+	void * load(const std::string & fname, size_t & length) override;
+	virtual void write
 		(const std::string & fname, void const * data, int32_t length) override;
 
-	StreamRead  * OpenStreamRead (const std::string & fname) override;
-	StreamWrite * OpenStreamWrite(const std::string & fname) override;
+	StreamRead  * open_stream_read (const std::string & fname) override;
+	StreamWrite * open_stream_write(const std::string & fname) override;
 
-	FileSystem * MakeSubFileSystem(const std::string & dirname) override;
-	FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
-	void Unlink(const std::string & file) override;
-	void Rename(const std::string &, const std::string &) override;
+	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
+	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
+	void fs_unlink(const std::string & file) override;
+	void fs_rename(const std::string &, const std::string &) override;
 
-	std::string getBasename() override {return std::string();}
+	std::string get_basename() override {return std::string();}
 
-	unsigned long long DiskSpace() override;
+	unsigned long long disk_space() override;
 
 private:
 	std::vector<std::unique_ptr<FileSystem>> m_filesystems;

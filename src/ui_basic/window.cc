@@ -19,15 +19,13 @@
 
 #include "ui_basic/window.h"
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "base/log.h"
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "wui/text_layout.h"
-
+#include "graphic/text_layout.h"
 
 using namespace std;
 
@@ -101,7 +99,6 @@ Window::Window
 	set_border
 		(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS,
 		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
-	set_cache(true);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 }
@@ -321,7 +318,7 @@ void Window::draw_border(RenderTarget & dst)
 		dst.blit
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 				UI::g_fh1->render(m_title),
-				CM_Normal,
+				BlendMode::UseAlpha,
 				Align_Center);
 	}
 
@@ -436,7 +433,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	if
-		(((get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+		(((get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL))
 		  &&
 		  btn == SDL_BUTTON_LEFT)
 		 ||
@@ -461,17 +458,6 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		grab_mouse(false);
 		_dragging = false;
 	}
-	return true;
-}
-
-bool Window::handle_alt_drag(int32_t mx, int32_t my)
-{
-	_dragging = true;
-	_drag_start_win_x = get_x();
-	_drag_start_win_y = get_y();
-	_drag_start_mouse_x = get_x() + get_lborder() + mx;
-	_drag_start_mouse_y = get_y() + get_tborder() + my;
-	grab_mouse(true);
 	return true;
 }
 

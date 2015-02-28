@@ -51,7 +51,7 @@ struct WLMessageBoxImpl;
  *       not work.
 */
 struct WLMessageBox : public Window {
-	enum MB_Type {
+	enum MBoxType {
 		OK,
 		YESNO
 	};
@@ -59,7 +59,7 @@ struct WLMessageBox : public Window {
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
-		 MB_Type,
+		 MBoxType,
 		 Align = Align_Center);
 	~WLMessageBox();
 
@@ -69,12 +69,12 @@ struct WLMessageBox : public Window {
 
 	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
-	virtual void pressedOk();
-	virtual void pressedYes();
-	virtual void pressedNo();
+	virtual void pressed_ok();
+	virtual void pressed_yes();
+	virtual void pressed_no();
 
 private:
 	std::unique_ptr<WLMessageBoxImpl> d;

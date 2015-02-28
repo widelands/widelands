@@ -43,7 +43,7 @@ if (WIN32)
     SRCS
       main.cc
       ${WIN32_ICON_O}
-    USES_SDL
+    USES_SDL2
     DEPENDS
       base_log
       base_exceptions
@@ -54,7 +54,7 @@ else()
   wl_binary(widelands
     SRCS
       main.cc
-    USES_SDL
+    USES_SDL2
     DEPENDS
       base_log
       base_exceptions
@@ -90,7 +90,10 @@ wl_library(widelands_ball_of_mud
   SRCS
     wlapplication.cc
     wlapplication.h
-  USES_SDL
+    wlapplication_messages.cc
+    wlapplication_messages.h
+  USES_SDL2
+  USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
     base_geometry
@@ -100,6 +103,8 @@ wl_library(widelands_ball_of_mud
     build_info
     editor
     graphic
+    graphic_text
+    graphic_text_layout
     helper
     io_dedicated_log
     io_filesystem
@@ -120,7 +125,7 @@ wl_library(helper
   SRCS
     helper.cc
     helper.h
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_exceptions
 )

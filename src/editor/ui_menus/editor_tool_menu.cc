@@ -40,8 +40,8 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 
-Editor_Tool_Menu::Editor_Tool_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+EditorToolMenu::EditorToolMenu
+	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 {
@@ -74,7 +74,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
 	{
-		const Editor_Tool & current = parent.tools.current();
+		const EditorTool & current = parent.tools.current();
 		m_radioselect.set_state
 			(&current == &parent.tools.noise_height       ? 1 :
 			 &current == &parent.tools.set_terrain        ? 2 :
@@ -85,8 +85,8 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 			 0);
 	}
 
-	m_radioselect.changed.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
-	m_radioselect.clicked.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
+	m_radioselect.changed.connect(boost::bind(&EditorToolMenu::changed_to, this));
+	m_radioselect.clicked.connect(boost::bind(&EditorToolMenu::changed_to, this));
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -95,13 +95,13 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 /**
  * Called when the radiogroup changes or is reclicked
 */
-void Editor_Tool_Menu::changed_to() {
+void EditorToolMenu::changed_to() {
 	const int32_t n = m_radioselect.get_state();
 
-	Editor_Interactive & parent =
-		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+	EditorInteractive & parent =
+		dynamic_cast<EditorInteractive&>(*get_parent());
 
-	Editor_Tool                * current_tool_pointer = nullptr;
+	EditorTool                * current_tool_pointer = nullptr;
 	UI::UniqueWindow::Registry * current_registry_pointer = nullptr;
 	switch (n) {
 	case 0:
@@ -137,12 +137,12 @@ void Editor_Tool_Menu::changed_to() {
 		break;
 	}
 
-	parent.select_tool(*current_tool_pointer, Editor_Tool::First);
+	parent.select_tool(*current_tool_pointer, EditorTool::First);
 	if (current_tool_pointer == &parent.tools.set_port_space) {
 		// Set correct overlay
 		Widelands::Map & map = parent.egbase().map();
 		map.overlay_manager().register_overlay_callback_function(
-				boost::bind(&Editor_Tool_Set_Port_Space_Callback, _1, boost::ref(map)));
+				boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
 		map.recalc_whole_map(parent.egbase().world());
 		update();
 	}
@@ -157,37 +157,37 @@ void Editor_Tool_Menu::changed_to() {
 		} else
 			switch (n) { //  create window
 			case 0:
-				new Editor_Tool_Change_Height_Options_Menu
+				new EditorToolChangeHeightOptionsMenu
 					(parent,
 					parent.tools.increase_height,
 					*current_registry_pointer);
 				break;
 			case 1:
-				new Editor_Tool_Noise_Height_Options_Menu
+				new EditorToolNoiseHeightOptionsMenu
 					(parent,
 					parent.tools.noise_height,
 					*current_registry_pointer);
 				break;
 			case 2:
-				new Editor_Tool_Set_Terrain_Options_Menu
+				new EditorToolSetTerrainOptionsMenu
 					(parent,
 					parent.tools.set_terrain,
 					*current_registry_pointer);
 				break;
 			case 3:
-				new Editor_Tool_Place_Immovable_Options_Menu
+				new EditorToolPlaceImmovableOptionsMenu
 					(parent,
 					parent.tools.place_immovable,
 					*current_registry_pointer);
 				break;
 			case 4:
-				new Editor_Tool_Place_Bob_Options_Menu
+				new EditorToolPlaceBobOptionsMenu
 					(parent,
 					parent.tools.place_bob,
 					*current_registry_pointer);
 				break;
 			case 5:
-				new Editor_Tool_Change_Resources_Options_Menu
+				new EditorToolChangeResourcesOptionsMenu
 					(parent,
 					parent.tools.increase_resources,
 					*current_registry_pointer);

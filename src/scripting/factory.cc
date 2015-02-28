@@ -22,11 +22,21 @@
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 
-void EditorFactory::push_player(lua_State * L, Widelands::Player_Number plr) {
-	to_lua<LuaEditor::L_Player>(L, new LuaEditor::L_Player(plr));
+void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
+	to_lua<LuaEditor::LuaPlayer>(L, new LuaEditor::LuaPlayer(plr));
 }
 
-void GameFactory::push_player(lua_State * L, Widelands::Player_Number plr) {
-		to_lua<LuaGame::L_Player>(L, new LuaGame::L_Player(plr));
+void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
+		to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
 }
 
+Factory & get_factory(lua_State * const L) {
+	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
+	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
+	lua_pop(L, 1); // pop this userdata
+
+	if (!fac)
+		throw LuaError("\"factory\" field was nil, which should be impossible!");
+
+	return *fac;
+}

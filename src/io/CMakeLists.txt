@@ -7,7 +7,7 @@ wl_library(io_stream
     streamread.h
     streamwrite.cc
     streamwrite.h
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_macros
@@ -37,7 +37,6 @@ wl_library(io_filesystem
     filesystem/zip_filesystem.cc
     filesystem/zip_filesystem.h
   DEPENDS
-    base_deprecated
     base_exceptions
     base_log
     base_macros

@@ -50,7 +50,7 @@ private:
 	RoutingNode * m_nb;
 	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
 };
-typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
+using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
 
 /**
  * A routing node is a field with a cost attached to it
@@ -65,10 +65,10 @@ struct RoutingNode {
 			return a.cost() < b.cost();
 		}
 	};
-	typedef cookie_priority_queue<RoutingNode, LessCost> Queue;
+	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
 	uint32_t      mpf_cycle;
-	Queue::cookie mpf_cookie;
+	Queue::Cookie mpf_cookie;
 	int32_t       mpf_realcost; ///< real cost of getting to this flag
 	RoutingNode * mpf_backlink; ///< flag where we came from
 	int32_t       mpf_estimate; ///< estimate of cost to destination
@@ -83,7 +83,7 @@ public:
 	}
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
-	Queue::cookie & cookie() {return mpf_cookie;}
+	Queue::Cookie & cookie() {return mpf_cookie;}
 
 	virtual Flag & base_flag() = 0;
 	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours &) = 0;

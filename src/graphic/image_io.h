@@ -20,22 +20,23 @@
 #ifndef WL_GRAPHIC_IMAGE_IO_H
 #define WL_GRAPHIC_IMAGE_IO_H
 
+#include <memory>
 #include <string>
 
 #include "base/wexception.h"
 
 class FileSystem;
+class Texture;
 class StreamWrite;
-class Surface;
 struct SDL_Surface;
 
-class ImageNotFound : public _wexception {
+class ImageNotFound : public WException {
 public:
 	ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
 	}
 };
 
-class ImageLoadingError : public _wexception {
+class ImageLoadingError : public WException {
 public:
 	ImageLoadingError(const std::string& fn, const std::string& reason)
 	   : wexception("Error loading %s: %s", fn.c_str(), reason.c_str()) {
@@ -43,13 +44,13 @@ public:
 };
 
 /// Loads the image 'fn' from 'fs'.
-Surface* load_image(const std::string& fn, FileSystem* fs = nullptr);
+std::unique_ptr<Texture> load_image(const std::string& fn, FileSystem* fs = nullptr);
 
 /// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);
 
-
-/// Saves the 'surface' to 'sw' as a PNG.
-bool save_surface_to_png(Surface* surface, StreamWrite* sw);
+/// Saves the 'texture' to 'sw' as a PNG.
+enum class ColorType {RGB, RGBA};
+bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type);
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_IO_H

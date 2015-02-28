@@ -1,4 +1,3 @@
-
 wl_library(ui_basic
   SRCS
     box.cc
@@ -15,8 +14,6 @@ wl_library(ui_basic
     icon.h
     icongrid.cc
     icongrid.h
-    is_printable.cc
-    is_printable.h
     listselect.cc
     listselect.h
     messagebox.cc
@@ -51,9 +48,8 @@ wl_library(ui_basic
     window.cc
     window.h
   USES_BOOST_REGEX
-  USES_SDL
+  USES_SDL2
   DEPENDS
-    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
@@ -61,15 +57,15 @@ wl_library(ui_basic
     base_macros
     graphic
     graphic_color
-    graphic_image
     graphic_surface
-    helper
+    graphic_text
+    graphic_text_layout
     io_filesystem
     # TODO(sirver): should not depend on logic
     logic
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     sound
     widelands_ball_of_mud
-    wui_text_layout
 )

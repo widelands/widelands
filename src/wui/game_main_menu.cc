@@ -32,11 +32,11 @@
 
 
 GameMainMenu::GameMainMenu
-	(Interactive_Player                         & plr,
+	(InteractivePlayer                         & plr,
 	 UI::UniqueWindow::Registry                 & registry,
-	 Interactive_Player::Game_Main_Menu_Windows & windows)
+	 InteractivePlayer::GameMainMenuWindows & windows)
 :
-UI::UniqueWindow(&plr, "main_menu", &registry, 180, 55, _("Main Menu")),
+UI::UniqueWindow(&plr, "main_menu", &registry, 180, 55, _("Statistics Menu")),
 m_player      (plr),
 m_windows     (windows),
 general_stats
@@ -65,7 +65,7 @@ stock
 	 _("Stock"))
 {
 	general_stats.sigclicked.connect
-		(boost::bind(&General_Statistics_Menu::Registry::toggle, boost::ref(m_windows.general_stats)));
+		(boost::bind(&GeneralStatisticsMenu::Registry::toggle, boost::ref(m_windows.general_stats)));
 	ware_stats.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.ware_stats)));
 	building_stats.sigclicked.connect
@@ -86,13 +86,13 @@ stock
 	INIT_BTN_HOOKS(m_windows.stock, stock)
 
 	m_windows.general_stats.open_window = [this] {
-		new General_Statistics_Menu(m_player, m_windows.general_stats);
+		new GeneralStatisticsMenu(m_player, m_windows.general_stats);
 	};
 	m_windows.ware_stats.open_window = [this] {
-		new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
+		new WareStatisticsMenu(m_player, m_windows.ware_stats);
 	};
 	m_windows.building_stats.open_window = [this] {
-		new Building_Statistics_Menu(m_player, m_windows.building_stats);
+		new BuildingStatisticsMenu(m_player, m_windows.building_stats);
 	};
 
 	if (get_usedefaultpos())

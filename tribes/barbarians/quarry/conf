@@ -2,7 +2,7 @@ size=small
 output=raw_stone
 
 [aihints]
-is_basic=true
+forced_after=0
 stoneproducer=true
 
 [buildcost]
@@ -27,9 +27,13 @@ title=_Out of Rocks
 message=_The stonemason working at this quarry can’t find any rocks in his working radius.
 
 [idle]
-pics=quarry_i_??.png  # ???
-hotspot=45 40
+pics=idle_??.png  # ???
+hotspot=45 48
 
 [build]
-pics=quarry_b_??.png  # ???
-hotspot=44 36
+pics=build_??.png  # ???
+hotspot=45 48
+
+[unoccupied]
+pics=unoccupied_??.png  # ???
+hotspot=45 48

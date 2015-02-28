@@ -28,15 +28,14 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/render/minimaprenderer.h"
-#include "graphic/surface.h"
+#include "graphic/minimap_renderer.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/scripting.h"
 
 using namespace Widelands;
 
@@ -47,42 +46,37 @@ void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
-#ifdef HAS_GETENV
-	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
-	putenv(dummy_video_env);
-#endif
-
-	g_gr = new Graphic();
-	g_gr->initialize(1, 1, false, false);
+	g_gr = new Graphic(1, 1, false);
 }
 
 }  // namespace
+
 int main(int argc, char ** argv)
 {
-	if (argc != 2) {
-		log("Need exactly one map file.\n");
+	if (!(2 <= argc && argc <= 3)) {
+		log("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}
 
-	const std::string map_path = argv[1];
+	const std::string map_path = argv[argc - 1];
 
 	try {
 		initialize();
 
-		std::string map_dir = FileSystem::FS_Dirname(map_path);
+		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {
 			map_dir = ".";
 		}
-		const std::string map_file = FileSystem::FS_Filename(map_path.c_str());
-		FileSystem* in_out_filesystem = &FileSystem::Create(map_dir);
-		g_fs->AddFileSystem(in_out_filesystem);
+		const std::string map_file = FileSystem::fs_filename(map_path.c_str());
+		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
+		g_fs->add_file_system(in_out_filesystem);
 
 		Map* map = new Map();
-		Editor_Game_Base egbase(nullptr);
+		EditorGameBase egbase(nullptr);
 		egbase.set_map(map);
-		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader(map_file));
+		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {
 			log("Cannot load map file.\n");
@@ -92,13 +86,14 @@ int main(int argc, char ** argv)
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
-		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 
 		// Write minimap
 		{
 			FileWrite fw;
-			save_surface_to_png(minimap.get(), &fw);
-			fw.Write(*in_out_filesystem, (map_file + ".png").c_str());
+			save_to_png(minimap.get(), &fw, ColorType::RGBA);
+			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 
 		// Write JSON.
@@ -106,7 +101,7 @@ int main(int argc, char ** argv)
 			FileWrite fw;
 
 			const auto write_string = [&fw] (const std::string& s) {
-				fw.Data(s.c_str(), s.size());
+				fw.data(s.c_str(), s.size());
 			};
 			const auto write_key_value =
 			   [&write_string](const std::string& key, const std::string& quoted_value) {
@@ -135,14 +130,15 @@ int main(int argc, char ** argv)
 			write_key_value_int("nr_players", map->get_nrplayers());
 			write_string(",\n  ");
 
-			const std::string world_name = static_cast<Widelands::WL_Map_Loader*>(ml.get())->old_world_name();
+			const std::string world_name =
+					static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			write_key_value_string("world_name", world_name);
 			write_string(",\n  ");
 			write_key_value_string("minimap", map_path + ".png");
 			write_string("\n");
 
 			write_string("}\n");
-			fw.Write(*in_out_filesystem, (map_file + ".json").c_str());
+			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
 	}
 	catch (std::exception& e) {

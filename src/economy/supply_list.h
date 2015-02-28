@@ -43,7 +43,7 @@ struct SupplyList {
 	bool have_supplies(Game & game, const Request &);
 
 private:
-	typedef std::vector<Supply *> Supplies;
+	using Supplies = std::vector<Supply *>;
 	Supplies m_supplies;
 };
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2011-04-19 16:02+0000\n"
 "Last-Translator: Juanjo Navarro <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -15,14 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:54+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:10
+#: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "Encara no implementat"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Ho sentim, aquest mapa encara no està implementat."
 
@@ -30,7 +30,7 @@ msgstr "Ho sentim, aquest mapa encara no està implementat."
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

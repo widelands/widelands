@@ -32,7 +32,7 @@
 namespace RT {
 
 IFont* load_font(const std::string& face, int ptsize) {
-	std::string filename = "fonts/";
+	std::string filename = "i18n/fonts/";
 	filename += face;
 
 	// Some older versions of sdl_ttf seem to rely on this block of memory to
@@ -41,8 +41,8 @@ IFont* load_font(const std::string& face, int ptsize) {
 	std::unique_ptr<std::string> memory;
 	{
 		FileRead* fr = new FileRead();
-		fr->Open(*g_fs, filename);
-		memory.reset(new std::string(fr->Data(0), fr->GetSize()));
+		fr->open(*g_fs, filename);
+		memory.reset(new std::string(fr->data(0), fr->get_size()));
 	}
 
 	SDL_RWops* ops = SDL_RWFromConstMem(memory->data(), memory->size());
@@ -57,6 +57,6 @@ IFont* load_font(const std::string& face, int ptsize) {
 		throw BadFont((boost::format("Font loading error for %s, %i pts: %s") % face % ptsize %
 		               TTF_GetError()).str());
 
-	return new SDLTTF_Font(font, face, ptsize, memory.release());
+	return new SdlTtfFont(font, face, ptsize, memory.release());
 }
 }

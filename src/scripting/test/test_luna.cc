@@ -17,14 +17,15 @@
  *
  */
 
+#include <cstring>
 #include <exception>
 #include <memory>
 
 #include <boost/test/unit_test.hpp>
 
+#include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "scripting/luna_impl.h"
-#include "third_party/eris/lua.hpp"
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) \
@@ -39,16 +40,16 @@ struct LuaCloser {
 	}
 };
 
-class L_Class : public LunaClass
+class LuaClass : public LunaClass
 {
 	int x;
 	int prop;
 public:
-	LUNA_CLASS_HEAD(L_Class);
+	LUNA_CLASS_HEAD(LuaClass);
 	const char * get_modulename() override {return "test";}
-	L_Class() :x(123), prop(246) {}
-	virtual ~L_Class() {}
-	L_Class(lua_State * /* L */) :x(124), prop(248) {}
+	LuaClass() :x(123), prop(246) {}
+	virtual ~LuaClass() {}
+	LuaClass(lua_State * /* L */) :x(124), prop(248) {}
 	virtual int test(lua_State* L)
 	{
 		lua_pushuint32(L, x);
@@ -72,23 +73,23 @@ public:
 	void __persist(lua_State * /* L */) override {}
 	void __unpersist(lua_State * /* L */) override {}
 };
-const char L_Class::className[] = "Class";
-const MethodType<L_Class> L_Class::Methods[] = {
-	METHOD(L_Class, test),
+const char LuaClass::className[] = "Class";
+const MethodType<LuaClass> LuaClass::Methods[] = {
+	METHOD(LuaClass, test),
 	{nullptr, nullptr},
 };
-BEGIN_LUNA_PROPERTIES(L_Class)
-	PROP_RO(L_Class, propr),
-	PROP_RW(L_Class, prop1),
+BEGIN_LUNA_PROPERTIES(LuaClass)
+	PROP_RO(LuaClass, propr),
+	PROP_RW(LuaClass, prop1),
 END_LUNA_PROPERTIES()
 
-class L_SubClass : public L_Class
+class LuaSubClass : public LuaClass
 {
 	int y;
 public:
-	LUNA_CLASS_HEAD(L_SubClass);
-	L_SubClass() : y(1230) {}
-	L_SubClass(lua_State* L) : L_Class(L), y(1240) {}
+	LUNA_CLASS_HEAD(LuaSubClass);
+	LuaSubClass() : y(1230) {}
+	LuaSubClass(lua_State* L) : LuaClass(L), y(1240) {}
 	virtual int subtest(lua_State* L)
 	{
 		lua_pushuint32(L, y);
@@ -97,21 +98,21 @@ public:
 	void __persist(lua_State * /* L */) override {}
 	void __unpersist(lua_State * /* L */) override {}
 };
-const char L_SubClass::className[] = "SubClass";
-const MethodType<L_SubClass> L_SubClass::Methods[] = {
-	METHOD(L_SubClass, subtest),
+const char LuaSubClass::className[] = "SubClass";
+const MethodType<LuaSubClass> LuaSubClass::Methods[] = {
+	METHOD(LuaSubClass, subtest),
 	{nullptr, nullptr},
 };
-BEGIN_LUNA_PROPERTIES(L_SubClass)
+BEGIN_LUNA_PROPERTIES(LuaSubClass)
 END_LUNA_PROPERTIES()
 
-class L_VirtualClass : public L_Class
+class LuaVirtualClass : public LuaClass
 {
 	int z;
 public:
-	LUNA_CLASS_HEAD(L_VirtualClass);
-	L_VirtualClass() :z(12300) {}
-	L_VirtualClass(lua_State* L) : L_Class(L), z(12400) {}
+	LUNA_CLASS_HEAD(LuaVirtualClass);
+	LuaVirtualClass() :z(12300) {}
+	LuaVirtualClass(lua_State* L) : LuaClass(L), z(12400) {}
 	virtual int virtualtest(lua_State* L)
 	{
 		lua_pushuint32(L, z);
@@ -120,19 +121,19 @@ public:
 	void __persist(lua_State * /* L */) override {}
 	void __unpersist(lua_State * /* L */) override {}
 };
-const char L_VirtualClass::className[] = "VirtualClass";
-const MethodType<L_VirtualClass> L_VirtualClass::Methods[] = {
-	METHOD(L_VirtualClass, virtualtest),
+const char LuaVirtualClass::className[] = "VirtualClass";
+const MethodType<LuaVirtualClass> LuaVirtualClass::Methods[] = {
+	METHOD(LuaVirtualClass, virtualtest),
 	{nullptr, nullptr},
 };
-BEGIN_LUNA_PROPERTIES(L_VirtualClass)
+BEGIN_LUNA_PROPERTIES(LuaVirtualClass)
 END_LUNA_PROPERTIES()
 
-class L_Second
+class LuaSecond
 {
 public:
 	int get_second(lua_State* L) {lua_pushint32(L, 2001); return 1;}
-	virtual ~L_Second() {}
+	virtual ~LuaSecond() {}
 
 	virtual int multitest(lua_State* L)
 	{
@@ -141,13 +142,13 @@ public:
 	}
 };
 
-class L_MultiClass : public L_Class, public L_Second
+class LuaMultiClass : public LuaClass, public LuaSecond
 {
 	int z;
 public:
-	LUNA_CLASS_HEAD(L_MultiClass);
-	L_MultiClass () :z(12300) {}
-	L_MultiClass (lua_State* L) : L_Class(L), z(12400) {}
+	LUNA_CLASS_HEAD(LuaMultiClass);
+	LuaMultiClass () :z(12300) {}
+	LuaMultiClass (lua_State* L) : LuaClass(L), z(12400) {}
 	virtual int virtualtest(lua_State* L)
 	{
 		lua_pushuint32(L, z);
@@ -156,14 +157,14 @@ public:
 	void __persist(lua_State * /* L */) override {}
 	void __unpersist(lua_State * /* L */) override {}
 };
-const char L_MultiClass::className[] = "MultiClass";
-const MethodType<L_MultiClass> L_MultiClass::Methods[] = {
-	METHOD(L_MultiClass, virtualtest),
-	METHOD(L_Second, multitest),
+const char LuaMultiClass::className[] = "MultiClass";
+const MethodType<LuaMultiClass> LuaMultiClass::Methods[] = {
+	METHOD(LuaMultiClass, virtualtest),
+	METHOD(LuaSecond, multitest),
 	{nullptr, nullptr},
 };
-BEGIN_LUNA_PROPERTIES(L_MultiClass)
-	PROP_RO(L_MultiClass, second),
+BEGIN_LUNA_PROPERTIES(LuaMultiClass)
+	PROP_RO(LuaMultiClass, second),
 END_LUNA_PROPERTIES()
 
 const static struct luaL_Reg wltest [] = {
@@ -181,7 +182,7 @@ static int test_check_int(lua_State* L) {
 	return 0;
 }
 
-static void InitLuaTests(lua_State* L)
+static void init_lua_tests(lua_State* L)
 {
 	luaL_openlibs(L);
 
@@ -210,8 +211,8 @@ BOOST_AUTO_TEST_CASE(test_luna_simple)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
-	register_class<L_Class>(L, "test");
+	init_lua_tests(L);
+	register_class<LuaClass>(L, "test");
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
 	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
@@ -226,8 +227,8 @@ BOOST_AUTO_TEST_CASE(test_luna_property_ro)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
-	register_class<L_Class>(L, "test");
+	init_lua_tests(L);
+	register_class<LuaClass>(L, "test");
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
 	// Should get LUA runtime error instead of for example crashing
@@ -243,11 +244,11 @@ BOOST_AUTO_TEST_CASE(test_luna_inheritance)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// single inheritance
-	register_class<L_SubClass>(L, "test", true);
-	add_parent<L_SubClass, L_Class>(L);
+	register_class<LuaSubClass>(L, "test", true);
+	add_parent<LuaSubClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script2, strlen(script2), "testscript2"));
@@ -262,11 +263,11 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
-	register_class<L_VirtualClass>(L, "test", true);
-	add_parent<L_VirtualClass, L_Class>(L);
+	register_class<LuaVirtualClass>(L, "test", true);
+	add_parent<LuaVirtualClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script3, strlen(script3), "testscript3"));
@@ -281,11 +282,11 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_property)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
-	register_class<L_VirtualClass>(L, "test", true);
-	add_parent<L_VirtualClass, L_Class>(L);
+	register_class<LuaVirtualClass>(L, "test", true);
+	add_parent<LuaVirtualClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script4, strlen(script4), "testscript4"));
@@ -301,11 +302,11 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_method)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
-	register_class<L_MultiClass>(L, "test", true);
-	add_parent<L_MultiClass, L_Class>(L);
+	register_class<LuaMultiClass>(L, "test", true);
+	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script5, strlen(script5), "testscript5"));
@@ -321,10 +322,10 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_get)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
-	register_class<L_MultiClass>(L, "test", true);
-	add_parent<L_MultiClass, L_Class>(L);
+	register_class<LuaMultiClass>(L, "test", true);
+	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));
@@ -341,10 +342,10 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_set)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
-	register_class<L_MultiClass>(L, "test", true);
-	add_parent<L_MultiClass, L_Class>(L);
+	register_class<LuaMultiClass>(L, "test", true);
+	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));

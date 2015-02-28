@@ -20,28 +20,35 @@
 #ifndef WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "base/macros.h"
+#include "graphic/color.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
 class LuaTable;
+class Texture;
 
 namespace Widelands {
 
 class EditorCategory;
 class World;
 
+/// TerrainTextures have a fixed size and are squares.
+constexpr int kTextureSideLength = 64;
+
 class TerrainDescription {
 public:
 	enum Type {
-		GREEN = 0,
-		DRY = 1,
-		WATER =  2,
-		ACID = 4,
-		MOUNTAIN = 8,
-		UNPASSABLE = 16,
+		kGreen = 0,
+		kDry = 1,
+		kWater =  2,
+		kDead = 4,
+		kMountain = 8,
+		kImpassable = 16,
 	};
 
 	TerrainDescription(const LuaTable& table, const World&);
@@ -53,14 +60,25 @@ public:
 	/// The name showed to users of Widelands. Usually translated.
 	const std::string& descname() const;
 
-	/// Returns the texture index for this terrain.
-	uint32_t get_texture() const;
+
+	const std::vector<std::string>& texture_paths() const;
+
+	/// Returns the texture for the given gametime.
+	const Texture& get_texture(uint32_t gametime) const;
+	void add_texture(std::unique_ptr<Texture> texture);
+
+	// Sets the base minimap color.
+	void set_minimap_color(const RGBColor& color);
+
+	// Return the basic terrain colour to be used in the minimap.
+	// 'shade' must be a brightness value, i.e. in [-128, 127].
+	const RGBColor& get_minimap_color(int shade);
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
 	Type get_is() const;
 
 	/// Returns the valid resource with the given index.
-	Resource_Index get_valid_resource(uint8_t index) const;
+	ResourceIndex get_valid_resource(uint8_t index) const;
 
 	/// Returns the number of valid resources.
 	int get_num_valid_resources() const;
@@ -70,7 +88,7 @@ public:
 
 	/// Returns the resource index that can by default always be found in this
 	/// terrain.
-	int8_t get_default_resource() const;
+	int get_default_resource() const;
 
 	/// Returns the default amount of resources you can find in this terrain.
 	int32_t get_default_resource_amount() const;
@@ -98,14 +116,16 @@ private:
 	const EditorCategory* editor_category_;  ///< not owned.
 	Type is_;
 	std::vector<uint8_t> valid_resources_;
-	int8_t default_resource_index_;
-	int32_t default_resource_amount_;
-	const std::vector<std::string> texture_paths_;
-	int32_t dither_layer_;
-	uint32_t texture_;  ///< renderer's texture
+	int default_resource_index_;
+	int default_resource_amount_;
+	int dither_layer_;
+	int frame_length_;
 	double temperature_;
 	double fertility_;
 	double humidity_;
+	std::vector<std::string> texture_paths_;
+	std::vector<std::unique_ptr<Texture>> textures_;
+	RGBColor    minimap_colors_[256];
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };

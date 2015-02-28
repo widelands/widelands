@@ -20,26 +20,57 @@
 #ifndef WL_BASE_POINT_H
 #define WL_BASE_POINT_H
 
+#include <limits>
+
 #include <stdint.h>
 
-struct Point {
-	// Initializes the Point to (0,0).
-	Point();
-	Point(int32_t px, int32_t py);
+template <typename T> struct GenericPoint {
+	GenericPoint(const T& px, const T& py) : x(px), y(py) {
+	}
+	GenericPoint() : GenericPoint(T(0), T(0)) {
+	}
 
 	// Returns an invalid point.
-	static Point invalid();
+	static GenericPoint invalid() {
+		return GenericPoint(std::numeric_limits<T>::max(), std::numeric_limits<T>::max());
+	}
 
-	bool operator == (const Point& other) const;
-	bool operator != (const Point& other) const;
-	Point operator + (const Point& other) const;
-	Point operator - () const;
-	Point operator - (const Point& other) const;
-	Point& operator += (const Point& other);
-	Point& operator -= (const Point& other);
+	bool operator == (const GenericPoint& other) const {
+		return x == other.x && y == other.y;
+	}
+	bool operator != (const GenericPoint& other) const {
+		return !(*this == other);
+	}
 
-	int32_t x, y;
+	GenericPoint operator + (const GenericPoint& other) const {
+		return GenericPoint(x + other.x, y + other.y);
+	}
+
+	GenericPoint operator - () const {
+		return GenericPoint(-x, -y);
+	}
+
+	GenericPoint operator - (const GenericPoint& other) const {
+		return GenericPoint(x - other.x, y - other.y);
+	}
+
+	GenericPoint& operator += (const GenericPoint& other) {
+		x += other.x;
+		y += other.y;
+		return *this;
+	}
+
+	GenericPoint& operator -= (const GenericPoint& other) {
+		x -= other.x;
+		y -= other.y;
+		return *this;
+	}
+
+	T x, y;
 };
+
+using Point = GenericPoint<int>;
+using FloatPoint = GenericPoint<float>;
 
 /// Returns the point in the middle between a and b (rounded to integer
 /// values).

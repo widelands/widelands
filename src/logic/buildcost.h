@@ -30,15 +30,15 @@ class Section;
 
 namespace Widelands {
 
-struct Tribe_Descr;
+class TribeDescr;
 
-struct Buildcost : std::map<Ware_Index, uint8_t> {
-	void parse(const Tribe_Descr & tribe, Section & buildcost_s);
+struct Buildcost : std::map<WareIndex, uint8_t> {
+	void parse(const TribeDescr & tribe, Section & buildcost_s);
 
 	uint32_t total() const;
 
-	void save(FileWrite & fw, const Tribe_Descr & tribe) const;
-	void load(FileRead & fw, const Tribe_Descr & tribe);
+	void save(FileWrite & fw, const TribeDescr & tribe) const;
+	void load(FileRead & fw, const TribeDescr & tribe);
 };
 
 } // namespace Widelands

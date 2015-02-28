@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -35,8 +36,8 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
-#include "map_io/widelands_map_saver.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
@@ -45,73 +46,74 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-inline Editor_Interactive & Main_Menu_Save_Map::eia() {
-	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+inline EditorInteractive & MainMenuSaveMap::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 
-Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 500, 330, _("Save Map"))
+MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
+	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
-	int32_t const offsy   = 30;
+	int32_t const offsy   = 10;
 	int32_t posx          = offsx;
 	int32_t posy          = offsy;
+	int32_t const descr_label_w = 100;
 
 	m_ls =
 		new UI::Listselect<const char *>
 			(this,
 			 posx, posy,
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->clicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_item, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Save_Map::double_clicked_item, this, _1));
+	m_ls->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
+	m_ls->focus();
 	m_editbox =
 		new UI::EditBox
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("pics/but1.png"));
-	m_editbox->setText(parent.egbase().map().get_name());
-	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
+			 g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
+	m_editbox->set_text(parent.egbase().map().get_name());
+	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
-	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+		new UI::MultilineTextarea
+			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
+	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Descr: "), UI::Align_CenterLeft);
 	m_descr =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
-			 posx + 70, posy,
-			 get_inner_w() - posx - spacing - 70,
+			 posx + descr_label_w, posy,
+			 get_inner_w() - posx - spacing - descr_label_w,
 			 get_inner_h() - posy - spacing - 40,
 			 "---", UI::Align_CenterLeft);
 
@@ -120,25 +122,27 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
-		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 posx, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
-	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
+	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 posx, posy, 80, 20,
+		 posx + get_inner_w() / 4 - spacing / 2, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
+	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
-		 spacing, posy, 120, 20,
+		 spacing, posy, 185, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
-		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
+		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 
 
 	m_basedir = "maps";
@@ -154,7 +158,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 /**
  * Called when the ok button was pressed or a file in list was double clicked.
  */
-void Main_Menu_Save_Map::clicked_ok() {
+void MainMenuSaveMap::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();
 
@@ -162,17 +166,17 @@ void Main_Menu_Save_Map::clicked_ok() {
 		filename = m_ls->get_selected();
 
 	if
-		(g_fs->IsDirectory(filename.c_str())
+		(g_fs->is_directory(filename.c_str())
 		 &&
-		 !Widelands::WL_Map_Loader::is_widelands_map(filename))
+		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
-		m_curdir = g_fs->FS_CanonicalizeName(filename);
+		m_curdir = g_fs->canonicalize_name(filename);
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
 	} else { //  Ok, save this map
 		Widelands::Map & map = eia().egbase().map();
-		if (!strcmp(map.get_name(), _("No Name"))) {
+		if (map.get_name() != _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
 				((4 <= filename_size
@@ -195,15 +199,15 @@ void Main_Menu_Save_Map::clicked_ok() {
 /**
  * Called, when the make directory button was clicked.
  */
-void Main_Menu_Save_Map::clicked_make_directory() {
-	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed"));
+void MainMenuSaveMap::clicked_make_directory() {
+	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run()) {
-		g_fs->EnsureDirectoryExists(m_basedir);
+		g_fs->ensure_directory_exists(m_basedir);
 		//  create directory
 		std::string fullname = m_curdir;
 		fullname            += "/";
 		fullname            += md.get_dirname();
-		g_fs->MakeDirectory(fullname);
+		g_fs->make_directory(fullname);
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -213,42 +217,42 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 /**
  * called when an item was selected
  */
-void Main_Menu_Save_Map::clicked_item(uint32_t) {
+void MainMenuSaveMap::clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
+	if (Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::MapLoader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
 
-		m_editbox->setText(FileSystem::FS_Filename(name));
+		m_editbox->set_text(FileSystem::fs_filename(name));
 
 		m_name  ->set_text(map.get_name       ());
+		m_name  ->set_tooltip(map.get_name    ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nrplayers->set_text(buf);
+		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size->set_text(buf);
+		m_size->set_text((boost::format(_("%1$ix%2$i"))
+								% map.get_width() % map.get_height()).str());
 	} else {
-		m_name     ->set_text(FileSystem::FS_Filename(name));
+		m_name     ->set_text(FileSystem::fs_filename(name));
+		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		if (g_fs->IsDirectory(name)) {
-			std::string dir_string =
-				(boost::format("\\<%s\\>") % _("directory")).str();
-			m_descr    ->set_text(dir_string);
+		if (g_fs->is_directory(name)) {
+			m_name->set_tooltip((boost::format(_("Directory: %s"))
+										% FileSystem::fs_filename(name)).str());
+			m_descr->set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
-			std::string not_map_string =
-				(boost::format("\\<%s\\>") % _("Not a map file")).str();
-			m_descr    ->set_text(not_map_string);
+			const std::string not_map_string = _("Not a map file");
+			m_name->set_tooltip(not_map_string);
+			m_descr->set_text((boost::format("\\<%s\\>") % not_map_string).str());
 		}
 
 	}
@@ -258,10 +262,10 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 /**
  * An Item has been doubleclicked
  */
-void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
+void MainMenuSaveMap::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	if (g_fs->IsDirectory(name) && !Widelands::WL_Map_Loader::is_widelands_map(name)) {
+	if (g_fs->is_directory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		m_curdir = name;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -273,9 +277,9 @@ void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 /**
  * fill the file list
  */
-void Main_Menu_Save_Map::fill_list() {
+void MainMenuSaveMap::fill_list() {
 	// Fill it with all files we find.
-	m_mapfiles = g_fs->ListDirectory(m_curdir);
+	m_mapfiles = g_fs->list_directory(m_curdir);
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
@@ -284,30 +288,29 @@ void Main_Menu_Save_Map::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		std::string parent_string =
-				/** TRANSLATORS: Parent directory */
-				(boost::format("\\<%s\\>") % _("parent")).str();
+
 		m_ls->add
-			(parent_string.c_str(),
-			 m_parentdir.c_str(),
-			 g_gr->images().get("pics/ls_dir.png"));
+				/** TRANSLATORS: Parent directory */
+				((boost::format("\\<%s\\>") % _("parent")).str(),
+				 m_parentdir.c_str(),
+				 g_gr->images().get("pics/ls_dir.png"));
 	}
 
-	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
+	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    &&
-			 strcmp(FileSystem::FS_Filename(name), "..")   &&
-			 g_fs->IsDirectory(name)                       &&
-			 !Widelands::WL_Map_Loader::is_widelands_map(name))
+			(strcmp(FileSystem::fs_filename(name), ".")    &&
+			 strcmp(FileSystem::fs_filename(name), "..")   &&
+			 g_fs->is_directory(name)                       &&
+			 !Widelands::WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
-			(FileSystem::FS_Filename(name),
+			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -315,22 +318,22 @@ void Main_Menu_Save_Map::fill_list() {
 	Widelands::Map map;
 
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wmf
-		std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
-		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
+		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
+		if (upcast(Widelands::WidelandsMapLoader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_Filename(name),
+					(FileSystem::filename_without_ext(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
-			} catch (const _wexception &) {} //  we simply skip illegal entries
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 	if (m_ls->size())
@@ -340,7 +343,7 @@ void Main_Menu_Save_Map::fill_list() {
 /**
  * The editbox was changed. Enable ok button
  */
-void Main_Menu_Save_Map::edit_box_changed() {
+void MainMenuSaveMap::edit_box_changed() {
 	m_ok_btn->set_enabled(m_editbox->text().size());
 }
 
@@ -351,20 +354,12 @@ void Main_Menu_Save_Map::edit_box_changed() {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
+bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the base directory exists.
-	g_fs->EnsureDirectoryExists(m_basedir);
+	g_fs->ensure_directory_exists(m_basedir);
 
 	//  OK, first check if the extension matches (ignoring case).
-	bool assign_extension = true;
-	if (filename.size() >= strlen(WLMF_SUFFIX)) {
-		char buffer[10]; //  enough for the extension
-		filename.copy
-			(buffer, sizeof(WLMF_SUFFIX), filename.size() - strlen(WLMF_SUFFIX));
-		if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
-			assign_extension = false;
-	}
-	if (assign_extension)
+	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
 	//  append directory name
@@ -373,21 +368,21 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	complete_filename            += filename;
 
 	//  Check if file exists. If so, show a warning.
-	if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->file_exists(complete_filename)) {
 		std::string s =
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
-				% FileSystem::FS_Filename(filename.c_str())).str();
+				% FileSystem::fs_filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
 			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
 		if (!mbox.run())
 			return false;
 
-		g_fs->Unlink(complete_filename);
+		g_fs->fs_unlink(complete_filename);
 	}
 
 	std::unique_ptr<FileSystem> fs
-			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-	Widelands::Map_Saver wms(*fs, eia().egbase());
+			(g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+	Widelands::MapSaver wms(*fs, eia().egbase());
 	try {
 		wms.save();
 		eia().set_need_save(false);

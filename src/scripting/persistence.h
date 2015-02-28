@@ -22,15 +22,15 @@
 
 #include <string>
 
-#include "third_party/eris/lua.hpp"
+#include "scripting/lua.h"
 
 class FileRead;
 class FileWrite;
 
 namespace Widelands {
-	class MapMapObjectLoader;
-	struct MapMapObjectSaver;
-	class Editor_Game_Base;
+	class MapObjectLoader;
+	struct MapObjectSaver;
+	class EditorGameBase;
 	class Game;
 }
 
@@ -42,13 +42,13 @@ namespace Widelands {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 FileWrite &, Widelands::MapMapObjectSaver &);
+	 FileWrite &, Widelands::MapObjectSaver &);
 
 // Does all the unpersisting work. The unpersisted object is at the top of the
 // stack after the function returns.
 void unpersist_object
 	(lua_State * L,
-	 FileRead & fr, Widelands::MapMapObjectLoader & mol,
+	 FileRead & fr, Widelands::MapObjectLoader & mol,
 	 uint32_t size);
 
 #endif  // end of include guard: WL_SCRIPTING_PERSISTENCE_H

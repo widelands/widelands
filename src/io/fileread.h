@@ -40,12 +40,12 @@ public:
 		Pos(size_t const p = 0) : pos(p) {
 		}
 		/// Returns a special value indicating invalidity.
-		static Pos Null() {
+		static Pos null() {
 			return std::numeric_limits<size_t>::max();
 		}
 
-		bool isNull() const {
-			return *this == Null();
+		bool is_null() const {
+			return *this == null();
 		}
 		operator size_t() const {
 			return pos;
@@ -61,8 +61,8 @@ public:
 		size_t pos;
 	};
 
-	struct File_Boundary_Exceeded : public StreamRead::_data_error {
-		File_Boundary_Exceeded() : StreamRead::_data_error("end of file") {
+	struct FileBoundaryExceeded : public StreamRead::DataError {
+		FileBoundaryExceeded() : StreamRead::DataError("end of file") {
 		}
 	};
 
@@ -72,45 +72,45 @@ public:
 	~FileRead() override;
 
 	// See base class.
-	size_t Data(void* dst, size_t bufsize) override;
-	bool EndOfFile() const override;
-	char const* CString() override;
+	size_t data(void* dst, size_t bufsize) override;
+	bool end_of_file() const override;
+	char const* c_string() override;
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
 	/// so that text files can be handled like a null-terminated string.
 	/// \throws an exception if the file couldn't be loaded for whatever reason.
 
 	// TODO(unknown): error handling
-	void Open(FileSystem& fs, const std::string& filename);
+	void open(FileSystem& fs, const std::string& filename);
 
-	/// Works just like Open, but returns false when the load fails.
-	// TODO(sirver): This method can be expressed through Open() and should not
+	/// Works just like open, but returns false when the load fails.
+	// TODO(sirver): This method can be expressed through open() and should not
 	// be part of the public API, rather a stand alone function.
-	bool TryOpen(FileSystem& fs, const std::string& filename);
+	bool try_open(FileSystem& fs, const std::string& filename);
 
 	/// Frees allocated memory.
-	void Close();
+	void close();
 
 	// Returns the size of the file in bytes;
-	size_t GetSize() const;
+	size_t get_size() const;
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
-	void SetFilePos(Pos pos);
+	void set_file_pos(Pos pos);
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
-	Pos GetPos() const;
+	Pos get_pos() const;
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* Data(uint32_t bytes, Pos pos = Pos::Null());
+	char* data(uint32_t bytes, Pos pos = Pos::null());
 
 	// Returns the whole file as a string starting from 'pos'.
-	char* CString(Pos pos);
+	char* c_string(Pos pos);
 
 	// Returns the next line.
-	char* ReadLine();
+	char* read_line();
 
 private:
 	char* data_;

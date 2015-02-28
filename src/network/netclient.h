@@ -48,15 +48,15 @@ struct NetClient :
 
 	// GameController interface
 	void think() override;
-	void sendPlayerCommand(Widelands::PlayerCommand &) override;
-	int32_t getFrametime() override;
-	std::string getGameDescription() override;
+	void send_player_command(Widelands::PlayerCommand &) override;
+	int32_t get_frametime() override;
+	GameController::GameType get_game_type() override;
 
-	uint32_t realSpeed() override;
-	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t speed) override;
-	bool isPaused() override;
-	void setPaused(bool paused) override;
+	uint32_t real_speed() override;
+	uint32_t desired_speed() override;
+	void set_desired_speed(uint32_t speed) override;
+	bool is_paused() override;
+	void set_paused(bool paused) override;
 	void report_result
 		(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 	// End GameController interface
@@ -64,44 +64,44 @@ struct NetClient :
 	// GameSettingsProvider interface
 	const GameSettings & settings() override;
 
-	void setScenario(bool) override;
-	bool canChangeMap() override;
-	bool canChangePlayerState(uint8_t number) override;
-	bool canChangePlayerTribe(uint8_t number) override;
-	bool canChangePlayerInit (uint8_t number) override;
-	bool canChangePlayerTeam (uint8_t number) override;
+	void set_scenario(bool) override;
+	bool can_change_map() override;
+	bool can_change_player_state(uint8_t number) override;
+	bool can_change_player_tribe(uint8_t number) override;
+	bool can_change_player_init (uint8_t number) override;
+	bool can_change_player_team (uint8_t number) override;
 
-	bool canLaunch() override;
+	bool can_launch() override;
 
-	virtual void setMap
+	virtual void set_map
 		(const std::string & mapname,
 		 const std::string & mapfilename,
 		 uint32_t maxplayers,
 		 bool savegame = false) override;
-	void setPlayerState    (uint8_t number, PlayerSettings::State state) override;
-	virtual void setPlayerAI
+	void set_player_state    (uint8_t number, PlayerSettings::State state) override;
+	virtual void set_player_ai
 		(uint8_t number, const std::string & ai, bool const random_ai = false) override;
-	void nextPlayerState   (uint8_t number) override;
-	virtual void setPlayerTribe
+	void next_player_state   (uint8_t number) override;
+	virtual void set_player_tribe
 		(uint8_t number, const std::string & tribe, bool const random_tribe = false) override;
-	void setPlayerInit     (uint8_t number, uint8_t index) override;
-	void setPlayerName     (uint8_t number, const std::string & name) override;
-	void setPlayer         (uint8_t number, PlayerSettings ps) override;
-	void setPlayerNumber   (uint8_t number) override;
-	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) override;
-	void setPlayerCloseable(uint8_t number, bool closeable) override;
-	void setPlayerShared   (uint8_t number, uint8_t shared) override;
-	void setWinConditionScript   (std::string) override;
-	void nextWinCondition  () override;
-	std::string getWinConditionScript() override;
+	void set_player_init     (uint8_t number, uint8_t index) override;
+	void set_player_name     (uint8_t number, const std::string & name) override;
+	void set_player         (uint8_t number, PlayerSettings ps) override;
+	void set_player_number   (uint8_t number) override;
+	void set_player_team     (uint8_t number, Widelands::TeamNumber team) override;
+	void set_player_closeable(uint8_t number, bool closeable) override;
+	void set_player_shared   (uint8_t number, uint8_t shared) override;
+	void set_win_condition_script   (std::string) override;
+	void next_win_condition  () override;
+	std::string get_win_condition_script() override;
 
 	// ChatProvider interface
 	void send(const std::string & msg) override;
-	const std::vector<ChatMessage> & getMessages() const override;
+	const std::vector<ChatMessage> & get_messages() const override;
 
 private:
 	/// for unique backupname
-	std::string backupFileName(std::string & path) {return path + "~backup";}
+	std::string backup_file_name(std::string & path) {return path + "~backup";}
 
 	NetTransferFile * file;
 
@@ -109,9 +109,9 @@ private:
 
 	void handle_packet(RecvPacket &);
 	void handle_network ();
-	void sendTime();
-	void recvOnePlayer(uint8_t  number, StreamRead &);
-	void recvOneUser  (uint32_t number, StreamRead &);
+	void send_time();
+	void receive_one_player(uint8_t  number, StreamRead &);
+	void receive_one_user  (uint32_t number, StreamRead &);
 	void disconnect
 		(const std::string & reason, const std::string & arg = "", bool sendreason = true, bool showmsg = true);
 

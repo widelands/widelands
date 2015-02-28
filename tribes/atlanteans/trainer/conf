@@ -2,6 +2,8 @@ help=_Trains the soldiers.
 
 [buildcost]
 carrier=1
+light_trident=1
+tabard=1
 
 [idle]
 pics=idle_??.png

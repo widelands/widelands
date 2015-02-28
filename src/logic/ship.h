@@ -29,7 +29,7 @@
 #include "graphic/diranimations.h"
 
 namespace UI {class Window;}
-class Interactive_GameBase;
+class InteractiveGameBase;
 
 namespace Widelands {
 
@@ -37,11 +37,30 @@ class Economy;
 struct Fleet;
 class PortDock;
 
+// This can't be part of the Ship class because of forward declaration in game.h
+enum class ScoutingDirection {
+	kCounterClockwise = 0, // This comes first for savegame compatibility (used to be = 0)
+	kClockwise = 1
+};
+
+struct NoteShipMessage {
+	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+
+	Ship* ship;
+
+	enum class Message {kLost, kGained, kWaitingForCommand};
+	Message message;
+
+	NoteShipMessage(Ship* const init_ship, Message const init_message)
+	   : ship(init_ship), message(init_message) {
+	}
+};
+
 struct ShipDescr : BobDescr {
 	ShipDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;
@@ -76,11 +95,11 @@ struct Ship : Bob {
 
 	// Returns the current destination or nullptr if there is no current
 	// destination.
-	PortDock* get_destination(Editor_Game_Base& egbase) const;
+	PortDock* get_destination(EditorGameBase& egbase) const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
-	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
+	PortDock* get_lastdock(EditorGameBase& egbase) const;
 
 	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);
@@ -88,14 +107,14 @@ struct Ship : Bob {
 
 	void init_auto_task(Game &) override;
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	uint32_t get_nritems() const {return m_items.size();}
 	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
@@ -103,9 +122,9 @@ struct Ship : Bob {
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
 
-	void show_window(Interactive_GameBase &, bool avoid_fastclick = false);
+	void show_window(InteractiveGameBase &, bool avoid_fastclick = false);
 	void close_window();
-	void refresh_window(Interactive_GameBase &);
+	void refresh_window(InteractiveGameBase &);
 
 	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING,
 	// EXP_FOUNDPORTSPACE or EXP_COLONIZING in the first states, the owning player of this ship can
@@ -185,7 +204,7 @@ struct Ship : Bob {
 
 	void exp_scout_direction(Game &, uint8_t);
 	void exp_construct_port (Game &, const Coords&);
-	void exp_explore_island (Game &, bool);
+	void exp_explore_island (Game &, ScoutingDirection);
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
@@ -205,11 +224,10 @@ private:
 	void ship_update_expedition(Game &, State &);
 	void ship_update_idle(Game &, State &);
 
-	void init_fleet(Editor_Game_Base &);
+	void init_fleet(EditorGameBase &);
 	void set_fleet(Fleet * fleet);
 
-	void send_message
-		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
+	void send_message(Game &, const std::string &, const std::string &, const std::string &);
 
 	UI::Window * m_window;
 
@@ -226,7 +244,7 @@ private:
 		bool island_exploration;
 		uint8_t direction;
 		Coords exploration_start;
-		bool clockwise;
+		ScoutingDirection scouting_direction;
 		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;
@@ -251,10 +269,10 @@ protected:
 	};
 
 public:
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands

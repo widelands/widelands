@@ -28,7 +28,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-
+#include "ui_fsmenu/suggested_teams_box.h"
 
 struct ChatProvider;
 struct GameChatPanel;
@@ -48,11 +48,12 @@ class LuaInterface;
  *    3  - multi player savegame
  *    4  - multi player scenario savegame <- not yet implemented
  */
-struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchMPG(GameSettingsProvider *, GameController *);
-	~Fullscreen_Menu_LaunchMPG();
+class FullscreenMenuLaunchMPG : public FullscreenMenuBase {
+public:
+	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
+	~FullscreenMenuLaunchMPG();
 
-	void setChatProvider(ChatProvider &);
+	void set_chat_provider(ChatProvider &);
 
 	void think() override;
 
@@ -77,11 +78,17 @@ private:
 	uint32_t    m_buth;
 	uint32_t    m_fs;
 	std::string m_fn;
+	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
+	// so we can have the SuggestedTeamsBox
+	int32_t const m_padding;               // Common padding between panels
+	int32_t const m_indent;                // Indent for elements below labels
+	int32_t const m_label_height;
+	int32_t const m_right_column_x;
 
 	UI::Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Button       m_help_button;
 	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map, m_wincondition_type;
-	UI::Multiline_Textarea    m_map_info, m_client_info;
+	UI::MultilineTextarea    m_map_info, m_client_info;
 	UI::HelpWindow          * m_help;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl;
@@ -89,6 +96,8 @@ private:
 	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state
 	int16_t                   m_nr_players;
+
+	UI::SuggestedTeamsBox*    m_suggested_teams_box;
 };
 
 

@@ -34,17 +34,15 @@ namespace Widelands {class Game;}
  *
  * This class provides the UI, runs the game logic, etc.
  */
-struct Interactive_Spectator : public Interactive_GameBase {
-	Interactive_Spectator
+struct InteractiveSpectator : public InteractiveGameBase {
+	InteractiveSpectator
 		(Widelands::Game &, Section & global_s, bool multiplayer = false);
 
-	~Interactive_Spectator();
-
-	void start() override;
+	~InteractiveSpectator();
 
 	Widelands::Player * get_player() const override;
 
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	void toggle_chat();
@@ -52,9 +50,10 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
-	bool can_see(Widelands::Player_Number) const override;
-	bool can_act(Widelands::Player_Number) const override;
-	Widelands::Player_Number player_number() const override;
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) override;
+	bool can_see(Widelands::PlayerNumber) const override;
+	bool can_act(Widelands::PlayerNumber) const override;
+	Widelands::PlayerNumber player_number() const override;
 	void node_action() override;
 
 private:

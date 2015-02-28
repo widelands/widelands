@@ -22,7 +22,6 @@
 #include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "scripting/c_utils.h"
 #include "wui/interactive_player.h"
 
 namespace LuaEditor {
@@ -70,11 +69,11 @@ Player
 	:attr:`wl.Editor.players`.
 
 */
-const char L_Player::className[] = "Player";
-const MethodType<L_Player> L_Player::Methods[] = {
+const char LuaPlayer::className[] = "Player";
+const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
 	{nullptr, nullptr},
 };
-const PropertyType<L_Player> L_Player::Properties[] = {
+const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
@@ -96,8 +95,8 @@ void luaopen_wleditor(lua_State * const L) {
 	lua_settable(L, -3); // S: wl_table
 	lua_pop(L, 1); // S:
 
-	register_class<L_Player>(L, "editor", true);
-	add_parent<L_Player, LuaBases::L_PlayerBase>(L);
+	register_class<LuaPlayer>(L, "editor", true);
+	add_parent<LuaPlayer, LuaBases::LuaPlayerBase>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 

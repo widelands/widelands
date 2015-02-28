@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/request.h"
@@ -42,7 +44,7 @@ const uint32_t TrainingSite::training_state_multiplier = 12;
 TrainingSiteDescr::TrainingSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe, const World& world)
+	 const TribeDescr & _tribe, const World& world)
 	:
 	ProductionSiteDescr
 		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
@@ -102,7 +104,7 @@ Building & TrainingSiteDescr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -123,7 +125,7 @@ int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSiteDescr::get_max_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -177,18 +179,18 @@ m_result         (Failed)
 		init_kick_state(atrEvade, d);
 }
 void
-TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & d)
+TrainingSite::init_kick_state(const TrainingAttribute & art, const TrainingSiteDescr & d)
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
-			trainingAttempted(art, t);
+			training_attempted(art, t);
 }
 
 
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(Editor_Game_Base & egbase)
+void TrainingSite::init(EditorGameBase & egbase)
 {
 	ProductionSite::init(egbase);
 
@@ -224,7 +226,7 @@ void TrainingSite::set_economy(Economy * e)
  *
  * Cancel all soldier requests and release all soldiers
  */
-void TrainingSite::cleanup(Editor_Game_Base & egbase)
+void TrainingSite::cleanup(EditorGameBase & egbase)
 {
 	delete m_soldier_request;
 	m_soldier_request = nullptr;
@@ -319,7 +321,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request = nullptr;
 
 		while (m_soldiers.size() > m_capacity)
-			dropSoldier(**m_soldiers.rbegin());
+			drop_soldier(**m_soldiers.rbegin());
 	}
 }
 
@@ -335,17 +337,17 @@ void TrainingSite::request_soldier_callback
 #else
 	 Request         &,
 #endif
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	TrainingSite & tsite = ref_cast<TrainingSite, PlayerImmovable>(target);
-	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
+	TrainingSite& tsite = dynamic_cast<TrainingSite&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
 
 	assert(s.get_location(game) == &tsite);
 	assert(tsite.m_soldier_request == &rq);
 
-	tsite.incorporateSoldier(game, s);
+	tsite.incorporate_soldier(game, s);
 }
 
 /*
@@ -355,9 +357,9 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+int TrainingSite::incorporate_soldier(EditorGameBase & egbase, Soldier & s) {
 	if (s.get_location(egbase) != this) {
-		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+		if (stationed_soldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
 
 		s.set_location(this);
@@ -374,30 +376,30 @@ int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 }
 
 
-std::vector<Soldier *> TrainingSite::presentSoldiers() const
+std::vector<Soldier *> TrainingSite::present_soldiers() const
 {
 	return m_soldiers;
 }
 
-std::vector<Soldier *> TrainingSite::stationedSoldiers() const
+std::vector<Soldier *> TrainingSite::stationed_soldiers() const
 {
 	return m_soldiers;
 }
 
-uint32_t TrainingSite::minSoldierCapacity() const {
+uint32_t TrainingSite::min_soldier_capacity() const {
 	return 0;
 }
-uint32_t TrainingSite::maxSoldierCapacity() const {
+uint32_t TrainingSite::max_soldier_capacity() const {
 	return descr().get_max_number_of_soldiers();
 }
-uint32_t TrainingSite::soldierCapacity() const
+uint32_t TrainingSite::soldier_capacity() const
 {
 	return m_capacity;
 }
 
-void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
-	assert(minSoldierCapacity() <= capacity);
-	assert                        (capacity <= maxSoldierCapacity());
+void TrainingSite::set_soldier_capacity(uint32_t const capacity) {
+	assert(min_soldier_capacity() <= capacity);
+	assert                        (capacity <= max_soldier_capacity());
 	assert(m_capacity != capacity);
 	m_capacity = capacity;
 	update_soldier_request();
@@ -412,14 +414,14 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  * \note This is called from player commands, so we need to verify that the
  * soldier is actually stationed here, without breaking anything if he isn't.
  */
-void TrainingSite::dropSoldier(Soldier & soldier)
+void TrainingSite::drop_soldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
 	if (it == m_soldiers.end()) {
-		molog("TrainingSite::dropSoldier: soldier not in training site");
+		molog("TrainingSite::drop_soldier: soldier not in training site");
 		return;
 	}
 
@@ -455,7 +457,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
 	for (Soldier * soldier : droplist) {
-		dropSoldier(*soldier);
+		drop_soldier(*soldier);
 	}
 }
 
@@ -497,8 +499,8 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 					break;
 				}
 
-				TypeAndLevel_t train_tl(it->attribute, level);
-				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
+				TypeAndLevel train_tl(it->attribute, level);
+				TrainFailCount::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
@@ -528,7 +530,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	if (nullptr != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
-			dropSoldier (*soldier_to_drop);
+			drop_soldier (*soldier_to_drop);
 		}
 }
 
@@ -546,7 +548,7 @@ void TrainingSite::act(Game & game, uint32_t const data)
 }
 
 
-void TrainingSite::program_end(Game & game, Program_Result const result)
+void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
 	m_result = result;
 	ProductionSite::program_end(game, result);
@@ -563,7 +565,7 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 		}
 		m_current_upgrade = nullptr;
 	}
-	trainingDone();
+	training_done();
 }
 
 
@@ -655,12 +657,12 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	upgrade.lastattempt = level;
 	upgrade.lastsuccess = false;
 
-	char buf[200];
-	sprintf(buf, "%s%d", upgrade.prefix.c_str(), level);
-	return program_start(game, buf);
+	return program_start(game, (boost::format("%s%i")
+										 % upgrade.prefix.c_str()
+										 % level).str());
 }
 
-TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
+TrainingSite::Upgrade * TrainingSite::get_upgrade(TrainingAttribute const atr)
 {
 	for (Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -674,7 +676,7 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 /**
  * Gets the priority of given attribute
  */
-int32_t TrainingSite::get_pri(tAttribute atr)
+int32_t TrainingSite::get_pri(TrainingAttribute atr)
 {
 	for (const Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -687,7 +689,7 @@ int32_t TrainingSite::get_pri(tAttribute atr)
 /**
  * Sets the priority of given attribute
  */
-void TrainingSite::set_pri(tAttribute atr, int32_t prio)
+void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio)
 {
 	if (prio < 0)
 		prio = 0;
@@ -704,7 +706,7 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
  * Only called from \ref calc_upgrades
  */
 void TrainingSite::add_upgrade
-	(tAttribute const atr, const std::string & prefix)
+	(TrainingAttribute const atr, const std::string & prefix)
 {
 	Upgrade u;
 	u.attribute = atr;
@@ -739,9 +741,9 @@ void TrainingSite::calc_upgrades() {
 
 
 void
-TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
+TrainingSite::training_attempted(uint32_t type, uint32_t level)
 	{
-	        TypeAndLevel_t key(type, level);
+	        TypeAndLevel key(type, level);
 		if (training_failure_count.find(key) == training_failure_count.end())
 			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
@@ -753,17 +755,17 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
  */
 
 void
-TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
+TrainingSite::training_successful(uint32_t type, uint32_t level)
 {
-	TypeAndLevel_t key(type, level);
+	TypeAndLevel key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
 	training_failure_count[key].first = 0;
 }
 
 void
-TrainingSite::trainingDone()
+TrainingSite::training_done()
 {
-	TrainFailCount_t::iterator it;
+	TrainFailCount::iterator it;
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate

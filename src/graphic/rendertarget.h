@@ -24,8 +24,8 @@
 
 #include "base/rect.h"
 #include "graphic/align.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/compositemode.h"
 #include "graphic/image.h"
 
 class Surface;
@@ -49,6 +49,8 @@ class Player;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
+// TODO(sirver): remove window functions and merge with surface once
+// the old richtext renderer is gone.
 class RenderTarget {
 public:
 	RenderTarget(Surface*);
@@ -64,9 +66,37 @@ public:
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);
 
-	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
-	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_Normal);
-	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst,
+	          const Image* image,
+	          BlendMode blend_mode = BlendMode::UseAlpha,
+	          UI::Align = UI::Align_TopLeft);
+
+	void blitrect(const Point& dst,
+	              const Image* image,
+	              const Rect& src,
+	              BlendMode blend_mode = BlendMode::UseAlpha);
+
+	// Blits the 'source_rect' from 'image' into the
+	// 'destination_rect' in this rendertarget. All alpha values are
+	// multiplied with 'opacity' before blitting. The 'blend_mode'
+	// defines if values are blended with whats already there or just
+	// copied over.
+	void blitrect_scale(const Rect& destination_rect,
+	                    const Image* image,
+	                    const Rect& source_rect,
+	                    float opacity,
+	                    BlendMode blend_mode);
+
+	// Like blitrect_scale. See MonochromeBlitProgram for details.
+	void blitrect_scale_monochrome(const Rect& destination_rect,
+	                               const Image* image,
+	                               const Rect& source_rect,
+	                               const RGBAColor& blend);
+
+	void tile(const Rect&,
+	          const Image* image,
+	          const Point& ofs,
+	          BlendMode blend_mode = BlendMode::UseAlpha);
 
 	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
 	void drawanimrect

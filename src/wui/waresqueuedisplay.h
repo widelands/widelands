@@ -30,10 +30,10 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
 
-class Interactive_GameBase;
+class InteractiveGameBase;
 
 namespace UI {
-struct Panel;
+class Panel;
 struct Radiogroup;
 }
 
@@ -59,7 +59,7 @@ public:
 	WaresQueueDisplay
 		(UI::Panel             * parent,
 		 int32_t x, int32_t y,
-		 Interactive_GameBase  & igb,
+		 InteractiveGameBase  & igb,
 		 Widelands::Building   & building,
 		 Widelands::WaresQueue * queue,
 		 bool = false);
@@ -69,16 +69,15 @@ public:
 	void draw(RenderTarget &) override;
 
 private:
-	Interactive_GameBase  & m_igb;
+	InteractiveGameBase  & m_igb;
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
 	UI::Radiogroup        * m_priority_radiogroup;
 	UI::Button   * m_increase_max_fill;
 	UI::Button   * m_decrease_max_fill;
-	Widelands::Ware_Index   m_ware_index;
+	Widelands::WareIndex   m_ware_index;
 	Widelands::WareWorker m_ware_type;
 	const Image* m_icon;            //< Index to ware's picture
-	const Image* m_icon_grey;
 	const Image* m_max_fill_indicator;
 
 

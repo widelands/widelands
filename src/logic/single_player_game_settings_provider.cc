@@ -19,18 +19,20 @@
 
 #include "logic/single_player_game_settings_provider.h"
 
+#include <boost/format.hpp>
+
 #include "ai/computer_player.h"
 #include "logic/tribe.h"
 
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
+	s.tribes = Widelands::TribeDescr::get_all_tribe_infos();
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;
 }
 
-void SinglePlayerGameSettingsProvider::setScenario(bool const set) {
+void SinglePlayerGameSettingsProvider::set_scenario(bool const set) {
 	s.scenario = set;
 }
 
@@ -38,35 +40,35 @@ const GameSettings & SinglePlayerGameSettingsProvider::settings() {
 	return s;
 }
 
-bool SinglePlayerGameSettingsProvider::canChangeMap() {
+bool SinglePlayerGameSettingsProvider::can_change_map() {
 	return true;
 }
 
-bool SinglePlayerGameSettingsProvider::canChangePlayerState(uint8_t number) {
+bool SinglePlayerGameSettingsProvider::can_change_player_state(uint8_t number) {
 	return (!s.scenario & (number != s.playernum));
 }
 
-bool SinglePlayerGameSettingsProvider::canChangePlayerTribe(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::canChangePlayerInit (uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_init (uint8_t) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::canChangePlayerTeam(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::canLaunch() {
+bool SinglePlayerGameSettingsProvider::can_launch() {
 	return s.mapname.size() != 0 && s.players.size() >= 1;
 }
 
-std::string SinglePlayerGameSettingsProvider::getMap() {
+std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
 }
 
-void SinglePlayerGameSettingsProvider::setMap (const std::string & mapname, const std::string & mapfilename,
+void SinglePlayerGameSettingsProvider::set_map (const std::string & mapname, const std::string & mapfilename,
 		uint32_t const maxplayers, bool const savegame) {
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
@@ -82,27 +84,25 @@ void SinglePlayerGameSettingsProvider::setMap (const std::string & mapname, cons
 		player.tribe                = s.tribes.at(0).name;
 		player.random_tribe         = false;
 		player.initialization_index = 0;
-		char buf[200];
-		snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
-		player.name = buf;
+		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::stateComputer) {
-			const Computer_Player::ImplementationVector & impls =
-				Computer_Player::getImplementations();
+			const ComputerPlayer::ImplementationVector & impls =
+				ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
 			}
 			//If AI player then set tribe to random
 			if (!s.scenario)
-				setPlayerTribe(oldplayers, "", true);
+				set_player_tribe(oldplayers, "", true);
 		}
 		++oldplayers;
 	}
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerState (uint8_t const number, PlayerSettings::State state) {
+void SinglePlayerGameSettingsProvider::set_player_state (uint8_t const number, PlayerSettings::State state) {
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
@@ -112,7 +112,7 @@ void SinglePlayerGameSettingsProvider::setPlayerState (uint8_t const number, Pla
 	s.players[number].state = state;
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerAI(uint8_t const number, const std::string & ai,
+void SinglePlayerGameSettingsProvider::set_player_ai(uint8_t const number, const std::string & ai,
 		bool const random_ai) {
 	if (number < s.players.size()) {
 		s.players[number].ai = ai;
@@ -120,14 +120,14 @@ void SinglePlayerGameSettingsProvider::setPlayerAI(uint8_t const number, const s
 	}
 }
 
-void SinglePlayerGameSettingsProvider::nextPlayerState(uint8_t const number) {
+void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
-	const Computer_Player::ImplementationVector & impls =
-		Computer_Player::getImplementations();
+	const ComputerPlayer::ImplementationVector & impls =
+		ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
-		Computer_Player::ImplementationVector::const_iterator it =
+		ComputerPlayer::ImplementationVector::const_iterator it =
 			impls.begin();
 		do {
 			++it;
@@ -150,7 +150,7 @@ void SinglePlayerGameSettingsProvider::nextPlayerState(uint8_t const number) {
 	s.players[number].state = PlayerSettings::stateComputer;
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerTribe(uint8_t const number, const std::string & tribe,
+void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number, const std::string & tribe,
 		bool random_tribe) {
 	if (number >= s.players.size())
 		return;
@@ -176,7 +176,7 @@ void SinglePlayerGameSettingsProvider::setPlayerTribe(uint8_t const number, cons
 	}
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerInit(uint8_t const number, uint8_t const index) {
+void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uint8_t const index) {
 	if (number >= s.players.size())
 		return;
 
@@ -191,30 +191,30 @@ void SinglePlayerGameSettingsProvider::setPlayerInit(uint8_t const number, uint8
 	assert(false);
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
+void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if (number < s.players.size())
 		s.players[number].team = team;
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerCloseable(uint8_t, bool) {
+void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerShared(uint8_t, uint8_t) {
+void SinglePlayerGameSettingsProvider::set_player_shared(uint8_t, uint8_t) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerName(uint8_t const number, const std::string & name) {
+void SinglePlayerGameSettingsProvider::set_player_name(uint8_t const number, const std::string & name) {
 	if (number < s.players.size())
 		s.players[number].name = name;
 }
 
-void SinglePlayerGameSettingsProvider::setPlayer(uint8_t const number, PlayerSettings const ps) {
+void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, PlayerSettings const ps) {
 	if (number < s.players.size())
 		s.players[number] = ps;
 }
 
-void SinglePlayerGameSettingsProvider::setPlayerNumber(uint8_t const number) {
+void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	if (number >= s.players.size())
 		return;
 	PlayerSettings const position = settings().players.at(number);
@@ -224,21 +224,21 @@ void SinglePlayerGameSettingsProvider::setPlayerNumber(uint8_t const number) {
 		 (position.state == PlayerSettings::stateOpen ||
 		  position.state == PlayerSettings::stateComputer))
 	{
-		setPlayer(number, player);
-		setPlayer(settings().playernum, position);
+		set_player(number, player);
+		set_player(settings().playernum, position);
 		s.playernum = number;
 	}
 }
 
-std::string SinglePlayerGameSettingsProvider::getWinConditionScript() {
+std::string SinglePlayerGameSettingsProvider::get_win_condition_script() {
 	return s.win_condition_script;
 }
 
-void SinglePlayerGameSettingsProvider::setWinConditionScript(std::string wc) {
+void SinglePlayerGameSettingsProvider::set_win_condition_script(std::string wc) {
 	s.win_condition_script = wc;
 }
 
-void SinglePlayerGameSettingsProvider::nextWinCondition() {
+void SinglePlayerGameSettingsProvider::next_win_condition() {
 	// not implemented - feel free to do so, if you need it.
 	assert(false);
 }

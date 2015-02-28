@@ -25,10 +25,10 @@
 #include <sstream>
 
 /*
- * class _wexception implementation
+ * class WException implementation
  */
 #undef wexception
-_wexception::_wexception
+WException::WException
 	(char const * const file, uint32_t const line, char const * const fmt, ...)
 {
 	char buffer[512];
@@ -43,7 +43,7 @@ _wexception::_wexception
 	m_what = ost.str();
 }
 
-char const * _wexception::what() const noexcept {
+char const * WException::what() const noexcept {
 	return m_what.c_str();
 }
 
@@ -51,7 +51,7 @@ char const * _wexception::what() const noexcept {
 /*
  * class warning implementation
  */
-warning::warning(char const * const et, char const * const em, ...) :
+WLWarning::WLWarning(char const * const et, char const * const em, ...) :
 	m_title(et)
 {
 	char buffer[512];
@@ -64,11 +64,11 @@ warning::warning(char const * const et, char const * const em, ...) :
 	m_what = buffer;
 }
 
-char const * warning::title() const
+char const * WLWarning::title() const
 {
 	return m_title.c_str();
 }
 
-char const * warning::what() const noexcept {
+char const * WLWarning::what() const noexcept {
 	return m_what.c_str();
 }

@@ -34,9 +34,9 @@ class FileWrite;
 
 namespace Widelands {
 
-class Editor_Game_Base;
-struct MapMapObjectSaver;
-class MapMapObjectLoader;
+class EditorGameBase;
+struct MapObjectSaver;
+class MapObjectLoader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -110,14 +110,14 @@ struct GameLogicCommand : public Command {
 	GameLogicCommand (int32_t const _duetime) : Command(_duetime) {}
 
 	// Write these commands to a file (for savegames)
-	virtual void Write
-		(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &);
-	virtual void Read
-		(FileRead  &, Editor_Game_Base &, MapMapObjectLoader &);
+	virtual void write
+		(FileWrite &, EditorGameBase &, MapObjectSaver  &);
+	virtual void read
+		(FileRead  &, EditorGameBase &, MapObjectLoader &);
 };
 
-class Cmd_Queue {
-	friend struct Game_Cmd_Queue_Data_Packet;
+class CmdQueue {
+	friend struct GameCmdQueuePacket;
 
 	enum {
 		cat_nongamelogic = 0,
@@ -125,7 +125,7 @@ class Cmd_Queue {
 		cat_playercommand
 	};
 
-	struct cmditem {
+	struct CmdItem {
 		Command * cmd;
 
 		/**
@@ -136,7 +136,7 @@ class Cmd_Queue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (const cmditem & c) const
+		bool operator< (const CmdItem & c) const
 		{
 			if (cmd->duetime() != c.cmd->duetime())
 				return cmd->duetime() > c.cmd->duetime();
@@ -148,8 +148,8 @@ class Cmd_Queue {
 	};
 
 public:
-	Cmd_Queue(Game &);
-	~Cmd_Queue();
+	CmdQueue(Game &);
+	~CmdQueue();
 
 	/// Add a command to the queue. Takes ownership.
 	void enqueue (Command *);
@@ -166,7 +166,7 @@ private:
 	Game                       & m_game;
 	uint32_t                     nextserial;
 	uint32_t m_ncmds;
-	typedef std::vector<std::priority_queue<cmditem> > CommandsContainer;
+	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer m_cmds;
 };
 

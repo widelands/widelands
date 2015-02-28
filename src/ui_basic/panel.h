@@ -23,7 +23,6 @@
 
 #include <cassert>
 #include <cstring>
-#include <memory>
 #include <string>
 
 #include <SDL_keyboard.h>
@@ -57,10 +56,11 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals2::trackable {
+class Panel : public boost::signals2::trackable {
+public:
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
-		pf_think = 2, ///< call think() function during run
+		pf_thinks = 2, ///< call think() function during run
 		pf_top_on_click = 4, ///< bring panel on top when clicked inside it
 		pf_die = 8, ///< this panel needs to die
 		pf_child_die = 16, ///< a child needs to die
@@ -72,9 +72,9 @@ struct Panel : boost::signals2::trackable {
 		pf_dock_windows_to_edges = 256,
 		/// whether any change in the desired size should propagate to the actual size
 		pf_layout_toplevel = 512,
-		/// whether widget panels should be cached when possible
-		pf_cache = 1024,
-	}; // TODO(unknown): Turn this into separate bool flags
+		/// whether widget wants to receive unicode textinput messages
+		pf_handle_textinput = 1024,
+	};
 
 	Panel
 		(Panel * const nparent,
@@ -172,7 +172,6 @@ struct Panel : boost::signals2::trackable {
 	void update(int32_t x, int32_t y, int32_t w, int32_t h);
 	void update();
 	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
-	void set_cache(bool enable);
 
 	// Events
 	virtual void think();
@@ -186,24 +185,24 @@ struct Panel : boost::signals2::trackable {
 	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_key(bool down, SDL_keysym code);
-	virtual bool handle_alt_drag(int32_t x, int32_t y);
+	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_Keysym);
+	virtual bool handle_textinput(const std::string& text);
 	virtual bool handle_tooltip();
 
 	/// \returns whether a certain given is currently down.
 	///
 	/// \note Never call this function from a keyboard event handler (a function
-	/// that overrides bool handle_key(bool, SDL_keysym code)) to get the state
+	/// that overrides bool handle_key(bool, SDL_Keysym code)) to get the state
 	/// of a modifier key. In that case code.mod must be used. It contains the
 	/// state of the modifier keys at the time of the event. Unfortunately there
 	/// is no information about modifier key states in mouse events (tracker
 	/// item #1916453). That is "a huge oversight" in SDL 1.2 and a fix is
 	/// promised in SDL 1.3:
 	/// http://lists.libsdl.org/pipermail/sdl-libsdl.org/2008-March/064560.html
-	bool get_key_state(SDLKey) const;
+	bool get_key_state(SDL_Scancode) const;
 
 	void set_handle_mouse(bool yes);
-	bool get_handle_mouse() const {return _flags & pf_handle_mouse;}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
@@ -212,10 +211,7 @@ struct Panel : boost::signals2::trackable {
 		assert(get_can_focus());
 		return (_parent->_focus == this);
 	}
-	virtual void focus();
-
-	void set_think(bool yes);
-	bool get_think() const {return _flags & pf_think;}
+	virtual void focus(bool topcaller = true);
 
 	void set_top_on_click(bool const on) {
 		if (on)
@@ -235,6 +231,16 @@ struct Panel : boost::signals2::trackable {
 	std::string ui_fn();
 
 protected:
+	// This panel will never receive keypresses (do_key), instead
+	// textinput will be passed on (do_textinput).
+	void set_handle_textinput() {
+		_flags |= pf_handle_textinput;
+	}
+
+	// Defines if think() should be called repeatedly. This is true on construction.
+	void set_thinks(bool yes);
+
+
 	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
@@ -247,8 +253,15 @@ protected:
 	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
-	class CacheImage;
-	friend class CacheImage;
+	bool handles_mouse() const {
+		return (_flags & pf_handle_mouse) != 0;
+	}
+	bool handles_textinput() const {
+		return (_flags & pf_handle_textinput) != 0;
+	}
+	bool thinks() const {
+		return (_flags & pf_thinks) != 0;
+	}
 
 	void check_child_death();
 
@@ -263,16 +276,19 @@ private:
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_key(bool down, SDL_keysym code);
+	bool do_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool do_key(bool down, SDL_Keysym code);
+	bool do_textinput(const std::string& text);
 	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
-	static void ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
-	static void ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
-	static void ui_mousemove
+	static bool ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
+	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
+	static bool ui_mousemove
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static void ui_key(bool down, SDL_keysym code);
-
+	static bool ui_mousewheel(uint32_t which, int32_t x, int32_t y);
+	static bool ui_key(bool down, SDL_Keysym code);
+	static bool ui_textinput(const std::string& text);
 
 	Panel * _parent;
 	Panel * _next, * _prev;
@@ -281,8 +297,6 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	std::unique_ptr<const Image> _cache;
-	bool _needdraw;
 
 	/**
 	 * The outer rectangle is defined by (_x, _y, _w, _h)

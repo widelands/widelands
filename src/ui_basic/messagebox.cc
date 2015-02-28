@@ -30,8 +30,8 @@ namespace UI {
 
 
 struct WLMessageBoxImpl {
-	Multiline_Textarea * textarea;
-	WLMessageBox::MB_Type type;
+	MultilineTextarea * textarea;
+	WLMessageBox::MBoxType type;
 };
 
 
@@ -39,14 +39,14 @@ WLMessageBox::WLMessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
-	 const MB_Type type,
+	 const MBoxType type,
 	 Align align)
 	:
 	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
-	d->textarea = new Multiline_Textarea
+	d->textarea = new MultilineTextarea
 		(this,
 		 5, 5, 30, 30,
 		 text.c_str(), align);
@@ -88,21 +88,21 @@ WLMessageBox::WLMessageBox
 			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("OK"));
-		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)));
+		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_ok, boost::ref(*this)));
 	} else if (type == YESNO) {
 		UI::Button * yesbtn = new Button
 			(this, "yes",
 			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Yes"));
-		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)));
+		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_yes, boost::ref(*this)));
 		UI::Button * nobtn = new Button
 			(this, "no",
 			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 120, 20,
 			 g_gr->images().get("pics/but1.png"),
 			 _("No"));
-		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)));
+		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_no, boost::ref(*this)));
 	}
 }
 
@@ -121,9 +121,9 @@ bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		if (d->type == OK)
-			pressedOk();
+			pressed_ok();
 		else
-			pressedNo();
+			pressed_no();
 	}
 	return true;
 }
@@ -133,7 +133,7 @@ bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
 	return true;
 }
 
-bool WLMessageBox::handle_key(bool down, SDL_keysym code)
+bool WLMessageBox::handle_key(bool down, SDL_Keysym code)
 {
 	if (!down) {
 		return false;
@@ -142,12 +142,12 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 	switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			pressedYes();
-			pressedOk();
+			pressed_yes();
+			pressed_ok();
 			return true;
 		case SDLK_ESCAPE:
-			pressedNo();
-			pressedOk();
+			pressed_no();
+			pressed_ok();
 			return true;
 		default:
 			return false;
@@ -155,21 +155,21 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 
 }
 
-void WLMessageBox::pressedOk()
+void WLMessageBox::pressed_ok()
 {
 	ok();
 	if (is_modal())
 		end_modal(0);
 }
 
-void WLMessageBox::pressedYes()
+void WLMessageBox::pressed_yes()
 {
 	yes();
 	if (is_modal())
 		end_modal(1);
 }
 
-void WLMessageBox::pressedNo()
+void WLMessageBox::pressed_no()
 {
 	no();
 	if (is_modal())

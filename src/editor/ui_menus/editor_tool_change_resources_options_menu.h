@@ -25,18 +25,19 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 
-struct Editor_Interactive;
-struct Editor_Increase_Resources_Tool;
+struct EditorInteractive;
+struct EditorIncreaseResourcesTool;
 
-struct Editor_Tool_Change_Resources_Options_Menu :
-	public Editor_Tool_Options_Menu
+struct EditorToolChangeResourcesOptionsMenu :
+	public EditorToolOptionsMenu
 {
-	Editor_Tool_Change_Resources_Options_Menu
-		(Editor_Interactive             &,
-		 Editor_Increase_Resources_Tool &,
+	EditorToolChangeResourcesOptionsMenu
+		(EditorInteractive             &,
+		 EditorIncreaseResourcesTool &,
 		 UI::UniqueWindow::Registry     &);
 
 private:
+	EditorInteractive & eia();
 	void selected();
 	enum Button {
 		Change_By_Increase, Change_By_Decrease,
@@ -52,7 +53,7 @@ private:
 	UI::Textarea                     m_set_to_value;
 	UI::Textarea                     m_cur_selection;
 	UI::Radiogroup m_radiogroup;
-	Editor_Increase_Resources_Tool & m_increase_tool;
+	EditorIncreaseResourcesTool & m_increase_tool;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H

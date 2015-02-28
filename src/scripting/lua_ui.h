@@ -20,8 +20,8 @@
 #ifndef WL_SCRIPTING_LUA_UI_H
 #define WL_SCRIPTING_LUA_UI_H
 
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
@@ -32,25 +32,25 @@ namespace LuaUi {
 /*
  * Base class for all classes in wl.ui
  */
-class L_UiModuleClass : public LunaClass {
+class LuaUiModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "ui";}
 };
 
 
-class L_Panel : public L_UiModuleClass {
+class LuaPanel : public LuaUiModuleClass {
 protected:
 	UI::Panel * m_panel;
 
 public:
-	LUNA_CLASS_HEAD(L_Panel);
+	LUNA_CLASS_HEAD(LuaPanel);
 
-	L_Panel() : m_panel(nullptr) {}
-	L_Panel(UI::Panel * p) : m_panel(p) {}
-	L_Panel(lua_State * L) : m_panel(nullptr) {
+	LuaPanel() : m_panel(nullptr) {}
+	LuaPanel(UI::Panel * p) : m_panel(p) {}
+	LuaPanel(lua_State * L) : m_panel(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~L_Panel() {}
+	virtual ~LuaPanel() {}
 
 	void __persist(lua_State * L) override {
 		report_error
@@ -91,14 +91,14 @@ public:
 	 */
 };
 
-class L_Button : public L_Panel {
+class LuaButton : public LuaPanel {
 public:
-	LUNA_CLASS_HEAD(L_Button);
+	LUNA_CLASS_HEAD(LuaButton);
 
-	L_Button() : L_Panel() {}
-	L_Button(UI::Panel * p) : L_Panel(p) {}
-	L_Button(lua_State * L) : L_Panel(L) {}
-	virtual ~L_Button() {}
+	LuaButton() : LuaPanel() {}
+	LuaButton(UI::Panel * p) : LuaPanel(p) {}
+	LuaButton(lua_State * L) : LuaPanel(L) {}
+	virtual ~LuaButton() {}
 
 	/*
 	 * Properties
@@ -117,14 +117,14 @@ public:
 	UI::Button * get() {return static_cast<UI::Button *>(m_panel);}
 };
 
-class L_Tab : public L_Panel {
+class LuaTab : public LuaPanel {
 public:
-	LUNA_CLASS_HEAD(L_Tab);
+	LUNA_CLASS_HEAD(LuaTab);
 
-	L_Tab() : L_Panel() {}
-	L_Tab(UI::Panel * p) : L_Panel(p) {}
-	L_Tab(lua_State * L) : L_Panel(L) {}
-	virtual ~L_Tab() {}
+	LuaTab() : LuaPanel() {}
+	LuaTab(UI::Panel * p) : LuaPanel(p) {}
+	LuaTab(lua_State * L) : LuaPanel(L) {}
+	virtual ~LuaTab() {}
 
 	/*
 	 * Properties
@@ -143,14 +143,14 @@ public:
 	UI::Tab * get() {return static_cast<UI::Tab *>(m_panel);}
 };
 
-class L_Window : public L_Panel {
+class LuaWindow : public LuaPanel {
 public:
-	LUNA_CLASS_HEAD(L_Window);
+	LUNA_CLASS_HEAD(LuaWindow);
 
-	L_Window() : L_Panel() {}
-	L_Window(UI::Panel * p) : L_Panel(p) {}
-	L_Window(lua_State * L) : L_Panel(L) {}
-	virtual ~L_Window() {}
+	LuaWindow() : LuaPanel() {}
+	LuaWindow(UI::Panel * p) : LuaPanel(p) {}
+	LuaWindow(lua_State * L) : LuaPanel(L) {}
+	virtual ~LuaWindow() {}
 
 	/*
 	 * Properties
@@ -169,14 +169,14 @@ public:
 };
 
 
-class L_MapView : public L_Panel {
+class LuaMapView : public LuaPanel {
 public:
-	LUNA_CLASS_HEAD(L_MapView);
+	LUNA_CLASS_HEAD(LuaMapView);
 
-	L_MapView() : L_Panel() {}
-	L_MapView(Map_View * p) : L_Panel(p) {}
-	L_MapView(lua_State * L);
-	virtual ~L_MapView() {}
+	LuaMapView() : LuaPanel() {}
+	LuaMapView(MapView * p) : LuaPanel(p) {}
+	LuaMapView(lua_State * L);
+	virtual ~LuaMapView() {}
 
 	void __persist(lua_State *) override {}
 	void __unpersist(lua_State * L) override;
@@ -207,7 +207,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Interactive_Base * get() {return static_cast<Interactive_Base *>(m_panel);}
+	InteractiveBase * get() {return static_cast<InteractiveBase *>(m_panel);}
 };
 
 void luaopen_wlui(lua_State *);

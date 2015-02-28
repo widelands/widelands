@@ -41,7 +41,7 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 		editor_pictures_.push_back(editor_picture);
 	}
 	if (editor_pictures_.empty()) {
-		throw game_data_error("Resource %s has no editor_pictures.", name_.c_str());
+		throw GameDataError("Resource %s has no editor_pictures.", name_.c_str());
 	}
 }
 

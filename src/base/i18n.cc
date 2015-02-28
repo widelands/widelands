@@ -254,7 +254,7 @@ void set_locale(std::string name) {
 	locale = lang;
 #endif
 #ifdef _WIN32
-	putenv(const_cast<char *>((std::string("LANG=") + lang).c_str()));
+	_putenv_s("LANG", lang.c_str());
 	locale = lang;
 #endif
 
@@ -309,7 +309,7 @@ void set_locale(std::string name) {
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
-		bind_textdomain_codeset (domain, "UTF-8");
+		bind_textdomain_codeset(domain, "UTF-8");
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
@@ -318,22 +318,29 @@ void set_locale(std::string name) {
 const std::string & get_locale() {return locale;}
 
 
-std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
+std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
 	std::string result = "";
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
 			result = *it;
 		}
 		else if (it == --items.end()) {
-			if (listtype == ConcatenateWith::AND) {
+			if (listtype == ConcatenateWith::AMPERSAND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
-			}
-			else {
+				result = (boost::format(_("%1$s & %2$s")) % result % (*it)).str();
+			} else if (listtype == ConcatenateWith::OR) {
 				/** TRANSLATORS: Join the last 2 items on a list with "or". */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s or %2$s")) % result % (*it)).str();
+			} else if (listtype == ConcatenateWith::COMMA) {
+				/** TRANSLATORS: Join the last 2 items on a list with a comma. */
+				/** TRANSLATORS: RTL languages might want to change the word order here. */
+				result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+			} else {
+				/** TRANSLATORS: Concatenate the last 2 items on a list. */
+				/** TRANSLATORS: RTL languages might want to change the word order here. */
+				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
 			}
 		}
 		else {

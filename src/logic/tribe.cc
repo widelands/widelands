@@ -19,17 +19,21 @@
 
 #include "logic/tribe.h"
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
@@ -48,16 +52,16 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 
 
 using namespace std;
 
 namespace Widelands {
 
-Tribe_Descr::Tribe_Descr
-	(const std::string & tribename, Editor_Game_Base & egbase)
+TribeDescr::TribeDescr
+	(const std::string & tribename, EditorGameBase & egbase)
 	: m_name(tribename)
 {
 	std::string path = "tribes/";
@@ -101,7 +105,7 @@ Tribe_Descr::Tribe_Descr
 #define PARSE_SPECIAL_WORKER_TYPES(name, descr_type)                                               \
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr = *new descr_type(_name, _descname, path, prof, global_s, *this);      \
-	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
 	PARSE_MAP_OBJECT_TYPES_END;
@@ -113,7 +117,7 @@ Tribe_Descr::Tribe_Descr
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr =                                                                      \
 		*new WorkerDescr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
-	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
 	PARSE_MAP_OBJECT_TYPES_END;
@@ -198,7 +202,7 @@ Tribe_Descr::Tribe_Descr
 				(categories_s, boost::token_finder(boost::is_any_of(";"))); \
 			It1 != boost::split_iterator<string::iterator>(); \
 			++It1) { \
-			vector<Ware_Index> column; \
+			vector<WareIndex> column; \
 			std::string column_s = boost::copy_range<std::string>(*It1); \
 			for (boost::split_iterator<string::iterator> It2 = \
 				boost::make_split_iterator \
@@ -207,7 +211,7 @@ Tribe_Descr::Tribe_Descr
 				++It2) { \
 				std::string instance_name = boost::copy_range<std::string>(*It2); \
 				boost::trim(instance_name); \
-				Ware_Index id = safe_##w##_index(instance_name); \
+				WareIndex id = safe_##w##_index(instance_name); \
 				column.push_back(id); \
 				/* it has been added to the column, but the column not */ \
 				/* yet to the array */ \
@@ -219,7 +223,7 @@ Tribe_Descr::Tribe_Descr
 \
 		/* Check that every ##w## has been added */ \
 		for \
-			(Ware_Index id = 0; \
+			(WareIndex id = 0; \
 			 id < m_##w##s.get_nitems(); ++id) { \
 			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
 					[m_##w##s_order_coords[id].second]) { \
@@ -233,6 +237,33 @@ Tribe_Descr::Tribe_Descr
 				PARSE_ORDER_INFORMATION(worker);
 			}
 
+			{
+				Section road_s = root_conf.get_safe_section("roads");
+				const auto load_roads = [&road_s, this](
+				   const std::string& prefix, std::vector<std::string>* images) {
+					for (int i = 0; i < 99; ++i) {
+						const char* img =
+						   road_s.get_string((boost::format("%s_%02i") % prefix % i).str().c_str(), nullptr);
+						if (img == nullptr) {
+							break;
+						}
+						if (!g_fs->file_exists(img)) {
+							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
+							                        img,
+							                        prefix.c_str(),
+							                        m_name.c_str());
+						}
+						images->emplace_back(img);
+					}
+					if (images->empty()) {
+						throw new GameDataError(
+						   "No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
+					}
+				};
+				load_roads("normal", &m_normal_road_paths);
+				load_roads("busy", &m_busy_road_paths);
+			}
+
 			m_frontier_animation_id =
 			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
 			m_flag_animation_id =
@@ -241,7 +272,7 @@ Tribe_Descr::Tribe_Descr
 			{
 				// Read initializations -- all scripts are initializations currently
 				for (const std::string& script :
-				     filter(g_fs->ListDirectory(path + "scripting"),
+					  filter(g_fs->list_directory(path + "scripting"),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 					t->do_not_warn_about_unaccessed_keys();
@@ -253,10 +284,10 @@ Tribe_Descr::Tribe_Descr
 				}
 			}
 		} catch (const std::exception & e) {
-			throw game_data_error("root conf: %s", e.what());
+			throw GameDataError("root conf: %s", e.what());
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("tribe %s: %s", tribename.c_str(), e.what());
+	} catch (const WException & e) {
+		throw GameDataError("tribe %s: %s", tribename.c_str(), e.what());
 	}
 }
 
@@ -266,7 +297,7 @@ Tribe_Descr::Tribe_Descr
 Load all logic data
 ===============
 */
-void Tribe_Descr::postload(Editor_Game_Base &) {
+void TribeDescr::postload(EditorGameBase &) {
 	// TODO(unknown): move more loads to postload
 }
 
@@ -275,26 +306,47 @@ void Tribe_Descr::postload(Editor_Game_Base &) {
 Load tribe graphics
 ===============
 */
-void Tribe_Descr::load_graphics()
+void TribeDescr::load_graphics()
 {
-	for (Ware_Index i = 0; i < m_workers.get_nitems(); ++i)
+	for (WareIndex i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-	for (Ware_Index i = 0; i < m_wares.get_nitems  (); ++i)
+	for (WareIndex i = 0; i < m_wares.get_nitems  (); ++i)
 		m_wares.get(i)->load_graphics();
 
 	for
-		(Building_Index i = 0;
+		(BuildingIndex i = 0;
 		 i < m_buildings.get_nitems();
 		 ++i)
 		m_buildings.get(i)->load_graphics();
+}
+
+const std::vector<std::string>& TribeDescr::normal_road_paths() const {
+	return m_normal_road_paths;
+}
+
+const std::vector<std::string>& TribeDescr::busy_road_paths() const {
+	return m_busy_road_paths;
+}
+
+
+void TribeDescr::add_normal_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_normal_road_texture(std::move(texture));
+}
+
+void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
+	m_road_textures.add_busy_road_texture(std::move(texture));
+}
+
+const RoadTextures& TribeDescr::road_textures() const {
+	return m_road_textures;
 }
 
 
 /*
  * does this tribe exist?
  */
-bool Tribe_Descr::exists_tribe
+bool TribeDescr::exists_tribe
 	(const std::string & name, TribeBasicInfo * const info)
 {
 	std::string buf = "tribes/";
@@ -303,7 +355,7 @@ bool Tribe_Descr::exists_tribe
 
 	LuaInterface lua;
 	FileRead f;
-	if (f.TryOpen(*g_fs, buf)) {
+	if (f.try_open(*g_fs, buf)) {
 		if (info)
 			try {
 				Profile prof(buf.c_str());
@@ -313,15 +365,15 @@ bool Tribe_Descr::exists_tribe
 
 				std::string path = "tribes/" + name + "/scripting";
 				for (const std::string& script :
-				     filter(g_fs->ListDirectory(path),
+					  filter(g_fs->list_directory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
 					t->do_not_warn_about_unaccessed_keys();
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
-			} catch (const _wexception & e) {
-				throw game_data_error
+			} catch (const WException & e) {
+				throw GameDataError
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
@@ -339,19 +391,19 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
-std::vector<std::string> Tribe_Descr::get_all_tribenames() {
+std::vector<std::string> TribeDescr::get_all_tribenames() {
 	std::vector<std::string> tribenames;
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
-		(filenameset_t::iterator pname = m_tribes.begin();
+		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
+		if (TribeDescr::exists_tribe(pname->substr(7), &info))
 			tribes.push_back(info);
 	}
 
@@ -363,18 +415,18 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 }
 
 
-std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
+std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
-		(filenameset_t::iterator pname = m_tribes.begin();
+		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
+		if (TribeDescr::exists_tribe(pname->substr(7), &info))
 			tribes.push_back(info);
 	}
 
@@ -388,32 +440,30 @@ std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
 Find the best matching indicator for the given amount.
 ==============
 */
-uint32_t Tribe_Descr::get_resource_indicator
+uint32_t TribeDescr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const
 {
 	if (!res || !amount) {
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
-			throw game_data_error
+			throw GameDataError
 				("tribe %s does not declare a resource indicator resi_none!",
 				 name().c_str());
 		return idx;
 	}
 
-	char buffer[256];
-
 	int32_t i = 1;
 	int32_t num_indicators = 0;
 	for (;;) {
-		snprintf(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), i);
-		if (get_immovable_index(buffer) == -1)
+		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
+		if (get_immovable_index(resi_filename) == -1)
 			break;
 		++i;
 		++num_indicators;
 	}
 
 	if (!num_indicators)
-		throw game_data_error
+		throw GameDataError
 			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
 			 res->name().c_str());
@@ -424,7 +474,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 *
 			 num_indicators);
 	if (bestmatch > num_indicators)
-		throw game_data_error
+		throw GameDataError
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
@@ -432,40 +482,34 @@ uint32_t Tribe_Descr::get_resource_indicator
 	if (static_cast<int32_t>(amount) < res->max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 
-	snprintf
-		(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), bestmatch);
-
-	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
-	//res->get_name(), buffer, amount);
-
-
-
-	return get_immovable_index(buffer);
+	return get_immovable_index((boost::format("resi_%s%i")
+										 % res->name().c_str()
+										 % bestmatch).str());
 }
 
 /*
  * Return the given ware or die trying
  */
-Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
-	const Ware_Index result = ware_index(warename);
+WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
+	const WareIndex result = ware_index(warename);
 	if (result == INVALID_INDEX) {
-		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
+		throw GameDataError("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
 	}
 	return result;
 }
 
-Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
-	Ware_Index const wi = m_wares.get_index(warename);
+WareIndex TribeDescr::ware_index(const std::string & warename) const {
+	WareIndex const wi = m_wares.get_index(warename);
 	return wi;
 }
 
 /*
  * Return the given worker or die trying
  */
-Ware_Index Tribe_Descr::safe_worker_index(const std::string& workername) const {
-const Ware_Index result = worker_index(workername);
+WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
+const WareIndex result = worker_index(workername);
 	if (result == INVALID_INDEX) {
-		throw game_data_error(
+		throw GameDataError(
 		   "tribe %s does not define worker type \"%s\"", name().c_str(), workername.c_str());
 	}
 	return result;
@@ -474,16 +518,16 @@ const Ware_Index result = worker_index(workername);
 /*
  * Return the given building or die trying
  */
-Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) const {
-	const Building_Index result = building_index(buildingname);
+BuildingIndex TribeDescr::safe_building_index(char const* const buildingname) const {
+	const BuildingIndex result = building_index(buildingname);
 	if (result == INVALID_INDEX) {
-		throw game_data_error(
+		throw GameDataError(
 		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
 	}
 	return result;
 }
 
-void Tribe_Descr::resize_ware_orders(size_t maxLength) {
+void TribeDescr::resize_ware_orders(size_t maxLength) {
 	bool need_resize = false;
 
 	//check if we actually need to resize
@@ -499,10 +543,10 @@ void Tribe_Descr::resize_ware_orders(size_t maxLength) {
 		//build new smaller wares_order
 		WaresOrder new_wares_order;
 		for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
-			for (std::vector<Widelands::Ware_Index>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
+			new_wares_order.push_back(std::vector<Widelands::WareIndex>());
+			for (std::vector<Widelands::WareIndex>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
 				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
+					new_wares_order.push_back(std::vector<Widelands::WareIndex>());
 				}
 				new_wares_order.rbegin()->push_back(*it2);
 				m_wares_order_coords[*it2].first = new_wares_order.size() - 1;

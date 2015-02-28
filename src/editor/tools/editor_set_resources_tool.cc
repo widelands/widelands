@@ -32,11 +32,11 @@
 /**
  * Sets the resources of the current to a fixed value
 */
-int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
                                                      const Widelands::World& world,
-                                                     Widelands::Node_and_Triangle<> const center,
-                                                     Editor_Interactive& /* parent */,
-                                                     Editor_Action_Args& args) {
+                                                     Widelands::NodeAndTriangle<> const center,
+                                                     EditorInteractive& /* parent */,
+                                                     EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -55,7 +55,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 		args.orgResT.push_back(res);
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
-		if (Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res)) {
+		if (editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic = g_gr->images().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
@@ -63,10 +63,10 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
-				mr.location().field->set_starting_res_amount(0);
+				mr.location().field->set_initial_res_amount(0);
 			} else {
 				mr.location().field->set_resources(args.cur_res, amount);
-				mr.location().field->set_starting_res_amount(amount);
+				mr.location().field->set_initial_res_amount(amount);
 				//  set new overlay
 				pic =
 				    g_gr->images().get(world.get_resource(args.cur_res)->get_editor_pic(amount));
@@ -79,11 +79,11 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
+EditorSetResourcesTool::handle_undo_impl(Widelands::Map& map,
                                             const Widelands::World& world,
-                                            Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                            Editor_Interactive& /* parent */,
-                                            Editor_Action_Args& args) {
+                                            Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                            EditorInteractive& /* parent */,
+                                            EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -107,10 +107,10 @@ Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
 
 		if (!amount) {
 			mr.location().field->set_resources(0, 0);
-			mr.location().field->set_starting_res_amount(0);
+			mr.location().field->set_initial_res_amount(0);
 		} else {
 			mr.location().field->set_resources(*it, amount);
-			mr.location().field->set_starting_res_amount(amount);
+			mr.location().field->set_initial_res_amount(amount);
 			//  set new overlay
 			pic = g_gr->images().get(world.get_resource(*it)->get_editor_pic(amount));
 			overlay_manager.register_overlay(mr.location(), pic, 4);
@@ -124,9 +124,9 @@ Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
 	return mr.radius();
 }
 
-Editor_Action_Args Editor_Set_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.cur_res = m_cur_res;
 	a.set_to = m_set_to;
 	return a;

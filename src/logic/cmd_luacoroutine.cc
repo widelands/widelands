@@ -27,17 +27,17 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "scripting/logic.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/scripting.h"
 
 namespace Widelands {
 
-void Cmd_LuaCoroutine::execute (Game & game) {
+void CmdLuaCoroutine::execute (Game & game) {
 	try {
 		int rv = m_cr->resume();
 		const uint32_t sleeptime = m_cr->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, m_cr));
 			m_cr = nullptr;  // Remove our ownership so we don't delete.
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
@@ -50,20 +50,19 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message & msg =
 				*new Widelands::Message
-				("Game Logic", game.get_gametime(),
-				 Forever(), "Lua Coroutine Failed", e.what());
+				(Message::Type::kGameLogic, game.get_gametime(), "Lua Coroutine Failed", e.what());
 			game.player(i).add_message(game, msg, true);
 		}
-		game.gameController()->setDesiredSpeed(0);
+		game.game_controller()->set_desired_speed(0);
 	}
 }
 
 #define CMD_LUACOROUTINE_VERSION 3
-void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectLoader& mol) {
+void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 
 			// This function is only called when saving/loading savegames. So save
 			// to cast here
@@ -72,17 +71,17 @@ void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObject
 
 			m_cr = lgi->read_coroutine(fr);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("lua function: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("lua function: %s", e.what());
 	}
 }
-void Cmd_LuaCoroutine::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void CmdLuaCoroutine::write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
-	GameLogicCommand::Write(fw, egbase, mos);
+	fw.unsigned_16(CMD_LUACOROUTINE_VERSION);
+	GameLogicCommand::write(fw, egbase, mos);
 
 	// This function is only called when saving/loading savegames. So save to
 	// cast here

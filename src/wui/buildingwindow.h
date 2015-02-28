@@ -32,22 +32,22 @@
  *
  * This class is sub-classed for all building types to provide something useful.
  */
-struct Building_Window : public UI::Window {
-	friend struct TrainingSite_Window;
-	friend struct MilitarySite_Window;
+struct BuildingWindow : public UI::Window {
+	friend struct TrainingSiteWindow;
+	friend struct MilitarySiteWindow;
 	enum {
 		Width = 4 * 34 //  4 normally sized buttons
 	};
 
-	Building_Window
-		(Interactive_GameBase & parent, Widelands::Building &, UI::Window * & registry);
+	BuildingWindow
+		(InteractiveGameBase & parent, Widelands::Building &, UI::Window * & registry);
 
-	virtual ~Building_Window();
+	virtual ~BuildingWindow();
 
 	Widelands::Building & building() {return m_building;}
 
-	Interactive_GameBase & igbase() const {
-		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
+	InteractiveGameBase & igbase() const {
+		return dynamic_cast<InteractiveGameBase&>(*get_parent());
 	}
 
 	void draw(RenderTarget &) override;
@@ -55,7 +55,7 @@ struct Building_Window : public UI::Window {
 	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
 
 protected:
-	UI::Tab_Panel * get_tabs() {return m_tabs;}
+	UI::TabPanel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
 	void act_dismantle();
@@ -66,7 +66,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::Building_Index);
+	void act_enhance(Widelands::BuildingIndex);
 	void clicked_goto();
 
 	void create_ware_queue_panel
@@ -79,14 +79,14 @@ protected:
 private:
 	Widelands::Building& m_building;
 
-	UI::Tab_Panel * m_tabs;
+	UI::TabPanel * m_tabs;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
 	UI::Button * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;
-	Widelands::Player_Number m_capscache_player_number;
+	Widelands::PlayerNumber m_capscache_player_number;
 	bool m_caps_setup;
 
 	OverlayManager::JobId m_workarea_job_id;

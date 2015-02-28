@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-Partially_Finished_Building::Partially_Finished_Building
+PartiallyFinishedBuilding::PartiallyFinishedBuilding
 	(const BuildingDescr & gdescr) :
 Building         (gdescr),
 m_building       (nullptr),
@@ -46,13 +46,13 @@ m_work_steps     (0)
 Set the type of building we're going to build
 ===============
 */
-void Partially_Finished_Building::set_building(const BuildingDescr & building_descr) {
+void PartiallyFinishedBuilding::set_building(const BuildingDescr & building_descr) {
 	assert(!m_building);
 
 	m_building = &building_descr;
 }
 
-void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
+void PartiallyFinishedBuilding::cleanup(EditorGameBase & egbase) {
 	if (m_builder_request) {
 		delete m_builder_request;
 		m_builder_request = nullptr;
@@ -67,7 +67,7 @@ void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
 	Building::cleanup(egbase);
 }
 
-void Partially_Finished_Building::init(Editor_Game_Base & egbase) {
+void PartiallyFinishedBuilding::init(EditorGameBase & egbase) {
 	Building::init(egbase);
 
 	if (upcast(Game, game, &egbase))
@@ -82,7 +82,7 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void Partially_Finished_Building::set_economy(Economy * const e)
+void PartiallyFinishedBuilding::set_economy(Economy * const e)
 {
 	if (Economy * const old = get_economy()) {
 		for (WaresQueue * temp_ware : m_wares) {
@@ -106,14 +106,14 @@ void Partially_Finished_Building::set_economy(Economy * const e)
 Issue a request for the builder.
 ===============
 */
-void Partially_Finished_Building::request_builder(Game &) {
+void PartiallyFinishedBuilding::request_builder(Game &) {
 	assert(!m_builder.is_set() && !m_builder_request);
 
 	m_builder_request =
 		new Request
 			(*this,
 			 descr().tribe().safe_worker_index("builder"),
-			 Partially_Finished_Building::request_builder_callback,
+			 PartiallyFinishedBuilding::request_builder_callback,
 			 wwWORKER);
 }
 
@@ -122,7 +122,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 Override: construction size is always the same size as the building
 ===============
 */
-int32_t Partially_Finished_Building::get_size() const {
+int32_t PartiallyFinishedBuilding::get_size() const {
 	return m_building->get_size();
 }
 
@@ -132,7 +132,7 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint32_t Partially_Finished_Building::get_playercaps() const {
+uint32_t PartiallyFinishedBuilding::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
 	caps |= PCap_Bulldoze;
@@ -147,7 +147,7 @@ Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
-uint32_t Partially_Finished_Building::get_ui_anim() const
+uint32_t PartiallyFinishedBuilding::get_ui_anim() const
 {
 	return m_building->get_animation("idle");
 }
@@ -160,7 +160,7 @@ Return the completion "percentage", where 2^16 = completely built,
 ===============
 */
 // TODO(unknown): should take gametime or so
-uint32_t Partially_Finished_Building::get_built_per64k() const
+uint32_t PartiallyFinishedBuilding::get_built_per64k() const
 {
 	const uint32_t time = owner().egbase().get_gametime();
 	uint32_t thisstep = 0;
@@ -192,16 +192,16 @@ uint32_t Partially_Finished_Building::get_built_per64k() const
 Called by transfer code when the builder has arrived on site.
 ===============
 */
-void Partially_Finished_Building::request_builder_callback
+void PartiallyFinishedBuilding::request_builder_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
 	assert(w);
 
-	Partially_Finished_Building & b = ref_cast<Partially_Finished_Building, PlayerImmovable>(target);
+	PartiallyFinishedBuilding & b = dynamic_cast<PartiallyFinishedBuilding&>(target);
 
 	b.m_builder = w;
 

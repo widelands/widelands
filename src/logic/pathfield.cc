@@ -19,7 +19,6 @@
 
 #include "logic/pathfield.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 
 namespace Widelands {
@@ -32,7 +31,7 @@ Pathfields::Pathfields(uint32_t const nrfields)
 PathfieldManager::PathfieldManager() : m_nrfields(0) {}
 
 
-void PathfieldManager::setSize(uint32_t const nrfields)
+void PathfieldManager::set_size(uint32_t const nrfields)
 {
 	if (m_nrfields != nrfields)
 		m_list.clear();

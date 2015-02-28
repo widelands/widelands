@@ -80,8 +80,8 @@ m_align(align)
 void Textarea::init()
 {
 	set_handle_mouse(false);
-	set_think(false);
-	set_textstyle(TextStyle::ui_small());
+	set_thinks(false);
+	set_textstyle(UI::TextStyle::ui_small());
 }
 
 /**

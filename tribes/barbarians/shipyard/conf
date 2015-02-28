@@ -1,8 +1,8 @@
 size=medium
 
 [aihints]
-build_material=false
 needs_water=true
+prohibited_till=1500
 
 [buildcost]
 log=3
@@ -32,6 +32,7 @@ work=_working
 [work]
 sleep=20000
 call=ship
+return=skipped
 
 [ship]
 check_map=seafaring

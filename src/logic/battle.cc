@@ -29,8 +29,8 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -65,9 +65,9 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	assert(First.get_owner() != Second.get_owner());
 	{
 		StreamWrite & ss = game.syncstream();
-		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump
-		ss.Unsigned32(First .serial());
-		ss.Unsigned32(Second.serial());
+		ss.unsigned_32(0x00e111ba); // appears as ba111e00 in a hexdump
+		ss.unsigned_32(First .serial());
+		ss.unsigned_32(Second.serial());
 	}
 
 	// Ensures only live soldiers eganges in a battle
@@ -77,29 +77,33 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 }
 
 
-void Battle::init (Editor_Game_Base & egbase)
+void Battle::init (EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
 	m_creationtime = egbase.get_gametime();
 
-	if (Battle* battle = m_first ->getBattle())
-		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_first);
-	m_first->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
-	if (Battle* battle = m_second->getBattle())
-		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_second);
-	m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
+	Game& game = dynamic_cast<Game&>(egbase);
+
+	if (Battle* battle = m_first ->get_battle()) {
+		battle->cancel(game, *m_first);
+	}
+	m_first->set_battle(game, this);
+	if (Battle* battle = m_second->get_battle()) {
+		battle->cancel(game, *m_second);
+	}
+	m_second->set_battle(game, this);
 }
 
 
-void Battle::cleanup (Editor_Game_Base & egbase)
+void Battle::cleanup (EditorGameBase & egbase)
 {
 	if (m_first) {
-		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_first ->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_second->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		m_second = nullptr;
 	}
 
@@ -114,10 +118,10 @@ void Battle::cancel(Game & game, Soldier & soldier)
 {
 	if (&soldier == m_first)  {
 		m_first = nullptr;
-		soldier.setBattle(game, nullptr);
+		soldier.set_battle(game, nullptr);
 	} else if (&soldier == m_second) {
 		m_second = nullptr;
-		soldier.setBattle(game, nullptr);
+		soldier.set_battle(game, nullptr);
 	} else
 		return;
 
@@ -146,12 +150,12 @@ Soldier * Battle::opponent(Soldier& soldier)
 //  Could be, but we need to be able change the animations of the soldiers
 //  easily without unneeded hacks, and this code is not so difficult, only it
 //  had some translations errors
-void Battle::getBattleWork(Game & game, Soldier & soldier)
+void Battle::get_battle_work(Game & game, Soldier & soldier)
 {
 	// Identify what soldier is calling the routine
 	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
 
-	assert(m_first->getBattle() == this || m_second->getBattle() == this);
+	assert(m_first->get_battle() == this || m_second->get_battle() == this);
 
 	//  Created this three 'states' of the battle:
 	// *First time entered, one enters :
@@ -217,7 +221,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	if (bothReadyToFight) {
 		//  Our opponent is waiting for us to fight.
 		// Time for one of us to hurt the other. Which one is on turn is decided
-		// by calculateRound.
+		// by calculate_round.
 		assert
 			((m_readyflags == 1 && this_soldier_is == 2) ||
 			 (m_readyflags == 2 && this_soldier_is == 1));
@@ -227,7 +231,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		assert(m_readyflags == 3);
 
 		// Resolve combat turn
-		calculateRound(game);
+		calculate_round(game);
 
 		// Wake up opponent, so he could update his animation
 		opponent(soldier)->send_signal(game, "wakeup");
@@ -239,7 +243,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		m_readyflags = 0;
 	}
 
-	// The function calculateRound inverts value of m_first_strikes, so
+	// The function calculate_round inverts value of m_first_strikes, so
 	// attacker will be the m_first when m_first_strikes = false and
 	// attacker will be m_second when m_first_strikes = true
 	molog
@@ -293,7 +297,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
 }
 
-void Battle::calculateRound(Game & game)
+void Battle::calculate_round(Game & game)
 {
 	assert(!m_damage);
 
@@ -346,15 +350,15 @@ void Battle::Loader::load(FileRead & fr, uint8_t const version)
 
 	Battle & battle = get<Battle>();
 
-	battle.m_creationtime  = fr.Signed32();
-	battle.m_readyflags    = fr.Unsigned8();
-	battle.m_first_strikes = fr.Unsigned8();
+	battle.m_creationtime  = fr.signed_32();
+	battle.m_readyflags    = fr.unsigned_8();
+	battle.m_first_strikes = fr.unsigned_8();
 
 	if (version == BATTLE_SAVEGAME_VERSION)
-		battle.m_damage     = fr.Unsigned32();
+		battle.m_damage     = fr.unsigned_32();
 
-	m_first                = fr.Unsigned32();
-	m_second               = fr.Unsigned32();
+	m_first                = fr.unsigned_32();
+	m_second               = fr.unsigned_32();
 }
 
 void Battle::Loader::load_pointers()
@@ -365,53 +369,53 @@ void Battle::Loader::load_pointers()
 		if (m_first)
 			try {
 				battle.m_first = &mol().get<Soldier>(m_first);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("soldier 1 (%u): %s", m_first, e.what());
 			}
 		if (m_second)
 			try {
 				battle.m_second = &mol().get<Soldier>(m_second);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("soldier 2 (%u): %s", m_second, e.what());
 			}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("battle: %s", e.what());
 	}
 }
 
 void Battle::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderBattle);
-	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderBattle);
+	fw.unsigned_8(BATTLE_SAVEGAME_VERSION);
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.Signed32(m_creationtime);
-	fw.Unsigned8(m_readyflags);
-	fw.Unsigned8(m_first_strikes);
-	fw.Unsigned32(m_damage);
+	fw.signed_32(m_creationtime);
+	fw.unsigned_8(m_readyflags);
+	fw.unsigned_8(m_first_strikes);
+	fw.unsigned_32(m_damage);
 
 	// And now, the serials of the soldiers !
-	fw.Unsigned32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
-	fw.Unsigned32(m_second ? mos.get_object_file_index(*m_second) : 0);
+	fw.unsigned_32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
+	fw.unsigned_32(m_second ? mos.get_object_file_index(*m_second) : 0);
 }
 
 
 MapObject::Loader * Battle::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// Header has been peeled away by caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (version <= BATTLE_SAVEGAME_VERSION) {
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

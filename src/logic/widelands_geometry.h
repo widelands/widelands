@@ -27,34 +27,29 @@
 
 namespace Widelands {
 
-typedef uint32_t Map_Index;
+using MapIndex = uint32_t;
 
 struct Extent {
 	Extent(uint16_t const W, uint16_t const H) : w(W), h(H) {}
 	uint16_t w, h;
 };
 
-// TODO(sirver): Remove these typedefs.
-typedef int16_t Coordinate;
-typedef Coordinate X_Coordinate;
-typedef Coordinate Y_Coordinate;
-
 /**
  * Structure used to store map coordinates
  */
 struct Coords {
 	Coords();
-	Coords(X_Coordinate nx, Y_Coordinate ny);
+	Coords(int16_t nx, int16_t ny);
 
 	/// Returns a special value indicating invalidity.
-	static Coords Null();
+	static Coords null();
 
 	bool operator== (const Coords& other) const;
 	bool operator!= (const Coords & other) const;
 	operator bool() const;
 
 	// Ordering functor for use with std:: containers.
-	struct ordering_functor {
+	struct OrderingFunctor {
 		bool operator()(const Coords & a, const Coords & b) const {
 			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
 		}
@@ -63,46 +58,46 @@ struct Coords {
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent & extent);
 
-	X_Coordinate x;
-	Y_Coordinate y;
+	int16_t x;
+	int16_t y;
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
-template <typename _Coords_type = Coords, typename _Radius_type = uint16_t>
-struct Area : public _Coords_type
+template <typename _CoordsType = Coords, typename _RadiusType = uint16_t>
+struct Area : public _CoordsType
 {
-	typedef _Coords_type Coords_type;
-	typedef _Radius_type Radius_type;
+	using CoordsType = _CoordsType;
+	using RadiusType = _RadiusType;
 	Area() {}
-	Area(const Coords_type center, const Radius_type Radius)
-		: Coords_type(center), radius(Radius)
+	Area(const CoordsType center, const RadiusType Radius)
+		: CoordsType(center), radius(Radius)
 	{}
 
 	bool operator== (const Area& other) const {
-		return Coords_type::operator== (other) && radius == other.radius;
+		return CoordsType::operator== (other) && radius == other.radius;
 	}
 	bool operator!= (const Area& other) const {
-		return Coords_type::operator!= (other) ||  radius != other.radius;
+		return CoordsType::operator!= (other) ||  radius != other.radius;
 	}
 
-	Radius_type radius;
+	RadiusType radius;
 };
 
-template <typename Area_type = Area<> > struct HollowArea : public Area_type {
+template <typename AreaType = Area<> > struct HollowArea : public AreaType {
 	HollowArea
-		(const Area_type area, const typename Area_type::Radius_type Hole_Radius)
-		: Area_type(area), hole_radius(Hole_Radius)
+		(const AreaType area, const typename AreaType::RadiusType Hole_Radius)
+		: AreaType(area), hole_radius(Hole_Radius)
 	{}
 
 	bool operator== (const HollowArea& other) const {
 		return
-			Area_type::operator== (other) && hole_radius == other.hole_radius;
+			AreaType::operator== (other) && hole_radius == other.hole_radius;
 	}
 	bool operator!= (const HollowArea& other) const {
 		return !(*this == other);
 	}
 
-	typename Area_type::Radius_type hole_radius;
+	typename AreaType::RadiusType hole_radius;
 };
 
 struct Field;
@@ -124,19 +119,19 @@ struct FCoords : public Coords {
 };
 
 
-template <typename Coords_type = Coords> struct TCoords : public Coords_type {
+template <typename CoordsType = Coords> struct TCoords : public CoordsType {
 	enum TriangleIndex {D, R, None};
 
 	TCoords() : t() {}
-	TCoords(const Coords_type C, const TriangleIndex T = None)
-		: Coords_type(C), t(T)
+	TCoords(const CoordsType C, const TriangleIndex T = None)
+		: CoordsType(C), t(T)
 	{}
 
 	bool operator== (const TCoords& other) const {
-		return Coords_type::operator== (other) && t == other.t;
+		return CoordsType::operator== (other) && t == other.t;
 	}
 	bool operator!= (const TCoords& other) const {
-		return Coords_type::operator!= (other) ||  t != other.t;
+		return CoordsType::operator!= (other) ||  t != other.t;
 	}
 
 	TriangleIndex t;
@@ -144,25 +139,25 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 
 
 template
-<typename Node_Coords_type = Coords, typename Triangle_Coords_type = Coords>
-struct Node_and_Triangle {
-	Node_and_Triangle() {}
-	Node_and_Triangle
-		(const Node_Coords_type              Node,
-		 const TCoords<Triangle_Coords_type>& Triangle)
+<typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
+struct NodeAndTriangle {
+	NodeAndTriangle() {}
+	NodeAndTriangle
+		(const NodeCoordsType              Node,
+		 const TCoords<TriangleCoordsType>& Triangle)
 
 			: node(Node), triangle(Triangle)
 	{}
 
-	bool operator== (Node_and_Triangle<> const other) const {
+	bool operator== (NodeAndTriangle<> const other) const {
 		return node == other.node && triangle == other.triangle;
 	}
-	bool operator!= (Node_and_Triangle<> const other) const {
+	bool operator!= (NodeAndTriangle<> const other) const {
 		return !(*this == other);
 	}
 
-	Node_Coords_type              node;
-	TCoords<Triangle_Coords_type> triangle;
+	NodeCoordsType              node;
+	TCoords<TriangleCoordsType> triangle;
 };
 
 // A height interval.

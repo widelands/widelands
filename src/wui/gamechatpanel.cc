@@ -38,10 +38,10 @@ GameChatPanel::GameChatPanel
 	editbox  (this, 0, h - 20, w,  20),
 	chat_message_counter(std::numeric_limits<uint32_t>::max())
 {
-	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
-	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
-	editbox.cancel.connect(boost::bind(&GameChatPanel::keyEscape, this));
-	editbox.setAlign(UI::Align_Left);
+	chatbox.set_scrollmode(UI::MultilineTextarea::ScrollLog);
+	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
+	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
+	editbox.set_align(UI::Align_Left);
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);
@@ -57,7 +57,7 @@ GameChatPanel::GameChatPanel
  */
 void GameChatPanel::recalculate()
 {
-	const std::vector<ChatMessage> msgs = m_chat.getMessages();
+	const std::vector<ChatMessage> msgs = m_chat.get_messages();
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
@@ -94,24 +94,24 @@ void GameChatPanel::recalculate()
 /**
  * Put the focus on the message input panel.
  */
-void GameChatPanel::focusEdit()
+void GameChatPanel::focus_edit()
 {
 	editbox.focus();
 }
 
-void GameChatPanel::keyEnter()
+void GameChatPanel::key_enter()
 {
 	const std::string & str = editbox.text();
 
 	if (str.size())
 		m_chat.send(str);
 
-	editbox.setText("");
+	editbox.set_text("");
 	sent();
 }
 
-void GameChatPanel::keyEscape()
+void GameChatPanel::key_escape()
 {
-	editbox.setText("");
+	editbox.set_text("");
 	aborted();
 }

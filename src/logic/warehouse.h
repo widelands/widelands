@@ -28,17 +28,17 @@
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
 
-class Interactive_Player;
+class InteractivePlayer;
 class Profile;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class PortDock;
 class Request;
 struct Requirements;
 class Soldier;
-struct Tribe_Descr;
+class TribeDescr;
 class WareInstance;
 struct WareList;
 
@@ -52,7 +52,7 @@ struct WarehouseDescr : public BuildingDescr {
 	WarehouseDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~WarehouseDescr() override {}
 
 	Building & create_object() const override;
@@ -72,7 +72,7 @@ private:
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 
 	MO_DESCR(WarehouseDescr)
 
@@ -114,7 +114,7 @@ public:
 	Warehouse(const WarehouseDescr &);
 	virtual ~Warehouse();
 
-	void load_finish(Editor_Game_Base &) override;
+	void load_finish(EditorGameBase &) override;
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
@@ -130,11 +130,13 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	void init(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
 
-	void cleanup(Editor_Game_Base &) override;
+	void cleanup(EditorGameBase &) override;
 
-	void destroy(Editor_Game_Base &) override;
+	void destroy(EditorGameBase &) override;
+
+	void restore_portdock_or_destroy(EditorGameBase &);
 
 	void act(Game & game, uint32_t data) override;
 
@@ -149,86 +151,86 @@ public:
 	 */
 	Workers get_incorporated_workers();
 
-	void insert_wares  (Ware_Index, uint32_t count);
-	void remove_wares  (Ware_Index, uint32_t count);
-	void insert_workers(Ware_Index, uint32_t count);
-	void remove_workers(Ware_Index, uint32_t count);
+	void insert_wares  (WareIndex, uint32_t count);
+	void remove_wares  (WareIndex, uint32_t count);
+	void insert_workers(WareIndex, uint32_t count);
+	void remove_workers(WareIndex, uint32_t count);
 
 	/* SoldierControl implementation */
-	std::vector<Soldier *> presentSoldiers() const override;
-	std::vector<Soldier *> stationedSoldiers() const override {
-		return presentSoldiers();
+	std::vector<Soldier *> present_soldiers() const override;
+	std::vector<Soldier *> stationed_soldiers() const override {
+		return present_soldiers();
 	}
-	uint32_t minSoldierCapacity() const override {return 0;}
-	uint32_t maxSoldierCapacity() const override {return 4294967295U;}
-	uint32_t soldierCapacity() const override {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t /* capacity */) override {
+	uint32_t min_soldier_capacity() const override {return 0;}
+	uint32_t max_soldier_capacity() const override {return 4294967295U;}
+	uint32_t soldier_capacity() const override {return max_soldier_capacity();}
+	void set_soldier_capacity(uint32_t /* capacity */) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	void dropSoldier(Soldier &) override {
+	void drop_soldier(Soldier &) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	int outcorporateSoldier(Editor_Game_Base &, Soldier &) override;
-	int incorporateSoldier(Editor_Game_Base &, Soldier& soldier) override;
+	int outcorporate_soldier(EditorGameBase &, Soldier &) override;
+	int incorporate_soldier(EditorGameBase &, Soldier& soldier) override;
 
 	bool fetch_from_flag(Game &) override;
 
-	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
-	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
+	uint32_t count_workers(const Game &, WareIndex, const Requirements &);
+	Worker & launch_worker(Game &, WareIndex, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
-	void incorporate_worker(Editor_Game_Base&, Worker* worker);
+	void incorporate_worker(EditorGameBase&, Worker* worker);
 
-	WareInstance & launch_ware(Game &, Ware_Index);
+	WareInstance & launch_ware(Game &, WareIndex);
 	void do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
-	void incorporate_ware(Editor_Game_Base&, WareInstance* ware);
+	void incorporate_ware(EditorGameBase&, WareInstance* ware);
 
-	bool can_create_worker(Game &, Ware_Index) const;
-	void     create_worker(Game &, Ware_Index);
+	bool can_create_worker(Game &, WareIndex) const;
+	void     create_worker(Game &, WareIndex);
 
-	uint32_t get_planned_workers(Game &, Ware_Index index) const;
-	void plan_workers(Game &, Ware_Index index, uint32_t amount);
+	uint32_t get_planned_workers(Game &, WareIndex index) const;
+	void plan_workers(Game &, WareIndex index, uint32_t amount);
 	std::vector<uint32_t> calc_available_for_worker
-		(Game &, Ware_Index index) const;
+		(Game &, WareIndex index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	// Begin Attackable implementation
 	Player & owner() const override {return Building::owner();}
-	bool canAttack() override;
+	bool can_attack() override;
 	void aggressor(Soldier &) override;
 	bool attack   (Soldier &) override;
 	// End Attackable implementation
 
-	void receive_ware(Game &, Ware_Index ware) override;
+	void receive_ware(Game &, WareIndex ware) override;
 	void receive_worker(Game &, Worker & worker) override;
 
-	StockPolicy get_ware_policy(Ware_Index ware) const;
-	StockPolicy get_worker_policy(Ware_Index ware) const;
-	StockPolicy get_stock_policy(WareWorker waretype, Ware_Index wareindex) const;
-	void set_ware_policy(Ware_Index ware, StockPolicy policy);
-	void set_worker_policy(Ware_Index ware, StockPolicy policy);
+	StockPolicy get_ware_policy(WareIndex ware) const;
+	StockPolicy get_worker_policy(WareIndex ware) const;
+	StockPolicy get_stock_policy(WareWorker waretype, WareIndex wareindex) const;
+	void set_ware_policy(WareIndex ware, StockPolicy policy);
+	void set_worker_policy(WareIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
 
 	// Returns the waresqueue of the expedition if this is a port. Will
 	// assert(false) otherwise.
-	WaresQueue& waresqueue(Ware_Index) override;
+	WaresQueue& waresqueue(WareIndex) override;
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 protected:
 	/// Create the warehouse information window.
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
 private:
-	void init_portdock(Editor_Game_Base & egbase);
+	void init_portdock(EditorGameBase & egbase);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
@@ -237,7 +239,7 @@ private:
 	 */
 	struct PlannedWorkers {
 		/// Index of the worker type we plan to create
-		Ware_Index index;
+		WareIndex index;
 
 		/// How many workers of this type are we supposed to create?
 		uint32_t amount;
@@ -249,7 +251,7 @@ private:
 	};
 
 	static void request_cb
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
 	bool _load_finish_planned_worker(PlannedWorkers & pw);
@@ -262,8 +264,8 @@ private:
 	std::vector<StockPolicy> m_worker_policy;
 
 	// Workers who live here at the moment
-	typedef std::vector<Worker *> WorkerList;
-	typedef std::map<Ware_Index, WorkerList> IncorporatedWorkers;
+	using WorkerList = std::vector<Worker *>;
+	using IncorporatedWorkers = std::map<WareIndex, WorkerList>;
 	IncorporatedWorkers        m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;
@@ -272,6 +274,11 @@ private:
 	std::vector<PlannedWorkers> m_planned_workers;
 
 	PortDock * m_portdock;
+
+	//this is information for portdock,to know whether it should
+	//try to recreate itself
+	bool m_cleanup_in_progress;
+
 };
 
 }

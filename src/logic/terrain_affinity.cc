@@ -23,6 +23,7 @@
 
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world/terrain_description.h"
@@ -44,16 +45,16 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
      preferred_temperature_(table.get_double("preferred_temperature")),
      pickiness_(table.get_double("pickiness")) {
 	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1.)) {
-		throw game_data_error("%s: preferred_fertility is not in [0, 1].", immovable_name.c_str());
+		throw GameDataError("%s: preferred_fertility is not in [0, 1].", immovable_name.c_str());
 	}
 	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1.)) {
-		throw game_data_error("%s: preferred_humidity is not in [0, 1].", immovable_name.c_str());
+		throw GameDataError("%s: preferred_humidity is not in [0, 1].", immovable_name.c_str());
 	}
 	if (!(0 <= pickiness_ && pickiness_ <= 1.)) {
-		throw game_data_error("%s: pickiness is not in [0, 1].", immovable_name.c_str());
+		throw GameDataError("%s: pickiness is not in [0, 1].", immovable_name.c_str());
 	}
 	if (preferred_temperature_ < 0) {
-		throw game_data_error("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
+		throw GameDataError("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
 	}
 }
 
@@ -110,20 +111,21 @@ double probability_to_grow(const TerrainAffinity& affinity,
 		average(ln.field->terrain_r());
 	}
 
-	const double sigma_fertility = (1. - affinity.pickiness()) * 0.25 + 1e-2;
-	const double sigma_humidity = (1. - affinity.pickiness()) * 0.25 + 1e-2;
-	const double sigma_temperature = (1. - affinity.pickiness()) * 12.5 + 1e-1;
+	constexpr double kHumidityWeight = 0.500086642549548;
+	constexpr double kFertilityWeight = 0.5292268046607387;
+	constexpr double kTemperatureWeight = 61.31300863608306;
 
-	const double pure_gauss = exp(
-	   -pow2(affinity.preferred_fertility() - terrain_fertility) / (2 * pow2(sigma_fertility)) -
-	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_humidity)) -
-	   pow2(affinity.preferred_temperature() - terrain_temperature) / (2 * pow2(sigma_temperature)));
+	const double sigma_humidity = (1. - affinity.pickiness());
+	const double sigma_temperature = (1. - affinity.pickiness());
+	const double sigma_fertility = (1. - affinity.pickiness());
 
-	double advanced_gauss = pure_gauss * 1.1 + 0.05;
-	if (advanced_gauss > 0.95)
-		advanced_gauss = 0.95;
-
-	return advanced_gauss;
+	return exp((-pow2((affinity.preferred_fertility() - terrain_fertility) /
+	                  (kFertilityWeight * sigma_fertility)) -
+	            pow2((affinity.preferred_humidity() - terrain_humidity) /
+	                 (kHumidityWeight * sigma_humidity)) -
+	            pow2((affinity.preferred_temperature() - terrain_temperature) /
+	                 (kTemperatureWeight * sigma_temperature))) /
+	           2);
 }
 
 }  // namespace Widelands

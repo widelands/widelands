@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2012-03-29 17:25+0000\n"
 "Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:54+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:10
+#: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "Nije još implementirano"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Oprostite, ovaj zemljovid još nije implementiran."
 
@@ -31,7 +31,7 @@ msgstr "Oprostite, ovaj zemljovid još nije implementiran."
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

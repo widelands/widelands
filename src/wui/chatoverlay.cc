@@ -77,14 +77,14 @@ ChatOverlay::ChatOverlay
 	Section & s = g_options.pull_section("global");
 	m->transparent_ = s.get_bool("transparent_chat", true);
 
-	set_think(true);
+	set_thinks(true);
 }
 
 ChatOverlay::~ChatOverlay()
 {
 }
 
-void ChatOverlay::setChatProvider(ChatProvider & chat)
+void ChatOverlay::set_chat_provider(ChatProvider & chat)
 {
 	m->chat_ = &chat;
 	m->recompute();
@@ -101,6 +101,10 @@ void ChatOverlay::think()
 	}
 }
 
+void ChatOverlay::recompute() {
+	m->recompute();
+}
+
 /**
  * Recompute the chat message display.
  */
@@ -112,31 +116,31 @@ void ChatOverlay::Impl::recompute()
 
 	// Parse the chat message list as well as the log message list
 	// and display them in chronological order
-	int32_t chat_idx = chat_ != nullptr ? chat_->getMessages().size() - 1 : -1;
+	int32_t chat_idx = chat_ != nullptr ? chat_->get_messages().size() - 1 : -1;
 	int32_t log_idx = log_messages_.empty() ? -1 : log_messages_.size() - 1;
 	std::string richtext;
 
 	while ((chat_idx >= 0 || log_idx >= 0)) {
 		if
 			(chat_idx < 0 ||
-				(log_idx >= 0 && chat_->getMessages()[chat_idx].time < log_messages_[log_idx].time))
+				(log_idx >= 0 && chat_->get_messages()[chat_idx].time < log_messages_[log_idx].time))
 		{
 			// Log message is more recent
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = "<p><font face=DejaVuSerif size=14 color=dddddd bold=1>"
+				richtext = "<p><font face=serif size=14 color=dddddd bold=1>"
 					+ log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}
 			log_idx--;
 		} else if
 			(log_idx < 0 ||
-				(chat_idx >= 0 && chat_->getMessages()[chat_idx].time >= log_messages_[log_idx].time))
+				(chat_idx >= 0 && chat_->get_messages()[chat_idx].time >= log_messages_[log_idx].time))
 		{
 			// Chat message is more recent
-			oldest_ = chat_->getMessages()[chat_idx].time;
+			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->getMessages()[chat_idx])
+				richtext = format_as_richtext(chat_->get_messages()[chat_idx])
 					+ richtext;
 			}
 			chat_idx--;

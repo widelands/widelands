@@ -37,7 +37,7 @@ struct WorkerProgram : public BobProgramBase {
 		Profile          * prof;
 	};
 
-	typedef void (WorkerProgram::*parse_t)
+	using ParseWorkerProgramFn = void (WorkerProgram::*)
 		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
@@ -47,7 +47,7 @@ struct WorkerProgram : public BobProgramBase {
 	virtual ~WorkerProgram() {}
 
 	std::string get_name() const override {return m_name;}
-	typedef std::vector<Worker::Action> Actions;
+	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {return m_actions.size();}
 	const Actions & actions() const {return m_actions;}
 	Worker::Action const * get_action(int32_t idx) const {
@@ -57,13 +57,13 @@ struct WorkerProgram : public BobProgramBase {
 	}
 
 	void parse(WorkerDescr *, Parser *, char const * name);
-	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
+	const WorkareaInfo & get_workarea_info() const {return m_workarea_info;}
 
 private:
-	Workarea_Info m_workarea_info;
+	WorkareaInfo m_workarea_info;
 	struct ParseMap {
 		const char * name;
-		parse_t      function;
+		ParseWorkerProgramFn function;
 	};
 
 	void parse_mine
@@ -151,7 +151,7 @@ private:
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
-	void parse_playFX
+	void parse_play_fx
 		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,

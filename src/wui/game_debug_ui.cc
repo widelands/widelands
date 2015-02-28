@@ -21,6 +21,7 @@
 #include "wui/game_debug_ui.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -47,23 +48,23 @@ struct MapObjectDebugPanel
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
-		 const Widelands::Editor_Game_Base &,
+		 const Widelands::EditorGameBase &,
 		 Widelands::MapObject       &);
 	~MapObjectDebugPanel();
 
 	void log(std::string str) override;
 
 private:
-	const Widelands::Editor_Game_Base & m_egbase;
-	Widelands::Object_Ptr         m_object;
+	const Widelands::EditorGameBase & m_egbase;
+	Widelands::ObjectPointer         m_object;
 
-	UI::Multiline_Textarea        m_log;
+	UI::MultilineTextarea        m_log;
 };
 
 
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
-	 const Widelands::Editor_Game_Base & egbase,
+	 const Widelands::EditorGameBase & egbase,
 	 Widelands::MapObject       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
@@ -71,7 +72,7 @@ m_egbase (egbase),
 m_object (&obj),
 m_log    (this, 0, 0, 350, 200, "")
 {
-	m_log.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
+	m_log.set_scrollmode(UI::MultilineTextarea::ScrollLog);
 	obj.set_logsink(this);
 }
 
@@ -105,7 +106,7 @@ building_ui.cc).
 ===============
 */
 void Widelands::MapObject::create_debug_panels
-	(const Widelands::Editor_Game_Base & egbase, UI::Tab_Panel & tabs)
+	(const Widelands::EditorGameBase & egbase, UI::TabPanel & tabs)
 {
 	tabs.add
 		("debug", g_gr->images().get("pics/menu_debug.png"),
@@ -129,24 +130,24 @@ that are provided by the map object itself via the virtual function
 collect_debug_tabs().
 */
 struct MapObjectDebugWindow : public UI::Window {
-	MapObjectDebugWindow(Interactive_Base & parent, Widelands::MapObject &);
+	MapObjectDebugWindow(InteractiveBase & parent, Widelands::MapObject &);
 
-	Interactive_Base & ibase() {
-		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
+	InteractiveBase & ibase() {
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
 
 private:
 	bool                  m_log_general_info;
-	Widelands::Object_Ptr m_object;
+	Widelands::ObjectPointer m_object;
 	uint32_t              m_serial;
-	UI::Tab_Panel         m_tabs;
+	UI::TabPanel         m_tabs;
 };
 
 
 MapObjectDebugWindow::MapObjectDebugWindow
-	(Interactive_Base & parent, Widelands::MapObject & obj)
+	(InteractiveBase & parent, Widelands::MapObject & obj)
 	:
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
@@ -155,11 +156,8 @@ MapObjectDebugWindow::MapObjectDebugWindow
 		(this, 0, 0,
 		 g_gr->images().get("pics/but1.png"))
 {
-	char buffer[128];
-
 	m_serial = obj.serial();
-	snprintf(buffer, sizeof(buffer), "%u", m_serial);
-	set_title(buffer);
+	set_title(std::to_string(m_serial));
 
 	obj.create_debug_panels(parent.egbase(), m_tabs);
 
@@ -174,7 +172,7 @@ Remove self when the object disappears.
 */
 void MapObjectDebugWindow::think()
 {
-	Widelands::Editor_Game_Base & egbase = ibase().egbase();
+	Widelands::EditorGameBase & egbase = ibase().egbase();
 	if (Widelands::MapObject * const obj = m_object.get(egbase)) {
 		if (m_log_general_info)  {
 			obj->log_general_info(egbase);
@@ -182,10 +180,7 @@ void MapObjectDebugWindow::think()
 		}
 		UI::Window::think();
 	} else {
-		char buffer[128];
-
-		snprintf(buffer, sizeof(buffer), "DEAD: %u", m_serial);
-		set_title(buffer);
+		set_title((boost::format("DEAD: %u") % m_serial).str());
 	}
 
 }
@@ -199,7 +194,7 @@ Show debug window for a MapObject
 ===============
 */
 void show_mapobject_debug
-	(Interactive_Base & parent, Widelands::MapObject & obj)
+	(InteractiveBase & parent, Widelands::MapObject & obj)
 {
 	new MapObjectDebugWindow(parent, obj);
 }
@@ -214,10 +209,10 @@ FieldDebugWindow
 */
 
 struct FieldDebugWindow : public UI::Window {
-	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
+	FieldDebugWindow(InteractiveBase & parent, Widelands::Coords);
 
-	Interactive_Base & ibase() {
-		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
+	InteractiveBase & ibase() {
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -229,14 +224,14 @@ private:
 	Widelands::Map             & m_map;
 	Widelands::FCoords const     m_coords;
 
-	UI::Multiline_Textarea       m_ui_field;
+	UI::MultilineTextarea       m_ui_field;
 	UI::Button m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 
 
 FieldDebugWindow::FieldDebugWindow
-	(Interactive_Base & parent, Widelands::Coords const coords)
+	(InteractiveBase & parent, Widelands::Coords const coords)
 :
 	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
@@ -274,20 +269,20 @@ This is done every frame in order to have up to date information all the time.
 void FieldDebugWindow::think()
 {
 	std::string str;
-	char buffer[512];
 
 	UI::Window::think();
 
 	// Select information about the field itself
-	const Widelands::Editor_Game_Base & egbase =
-		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
+	const Widelands::EditorGameBase & egbase =
+		dynamic_cast<const InteractiveBase&>(*get_parent())
 		.egbase();
 	{
-		Widelands::Player_Number const owner = m_coords.field->get_owned_by();
-		snprintf
-			(buffer, sizeof(buffer), "(%i, %i)\nheight: %u\nowner: %u\n",
-			 m_coords.x, m_coords.y, m_coords.field->get_height(), owner);
-		str += buffer;
+		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
+		str += (boost::format("(%i, %i)\nheight: %u\nowner: %u\n")
+				  % m_coords.x % m_coords.y
+				  % static_cast<unsigned int>(m_coords.field->get_height())
+				  % static_cast<unsigned int>(owner)).str();
+
 		if (owner) {
 			Widelands::NodeCaps const buildcaps =
 				egbase.player(owner).get_buildcaps(m_coords);
@@ -309,39 +304,35 @@ void FieldDebugWindow::think()
 		str += "is walkable\n";
 	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_SWIM)
 		str += "is swimable\n";
-	Widelands::Map_Index const i = m_coords.field - &m_map[0];
-	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
+	Widelands::MapIndex const i = m_coords.field - &m_map[0];
+	Widelands::PlayerNumber const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field & player_field = player->fields()[i];
-		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
-		str += buffer;
-		snprintf
-			(buffer, sizeof(buffer),
-			 "  military influence: %u\n", player_field.military_influence);
-		str += buffer;
+		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
+		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
+
 		Widelands::Vision const vision = player_field.vision;
-		snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
-		str += buffer;
+		str += (boost::format("  vision: %u\n") % vision).str();
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
-			if (time_last_surveyed != Widelands::Never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  D triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.d);
-				str += buffer;
+
+			if (time_last_surveyed != Widelands::never()) {
+				str += (boost::format("  D triangle last surveyed at %u: amount %u\n")
+						  % time_last_surveyed
+						  % static_cast<unsigned int>(player_field.resource_amounts.d)).str();
+
 			} else str += "  D triangle never surveyed\n";
 		}
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
-			if (time_last_surveyed != Widelands::Never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  R triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.r);
-				str += buffer;
+
+			if (time_last_surveyed != Widelands::never()) {
+				str += (boost::format("  R triangle last surveyed at %u: amount %u\n")
+						  % time_last_surveyed
+						  % static_cast<unsigned int>(player_field.resource_amounts.r)).str();
+
 			} else str += "  R triangle never surveyed\n";
 		}
 		switch (vision) {
@@ -352,38 +343,29 @@ void FieldDebugWindow::think()
 				animation_name = "(seen an animation)";
 			}
 
-			snprintf
-				(buffer, sizeof(buffer),
-				 "  last seen at %u:\n"
-				 "    owner: %u\n"
-				 "    immovable animation:\n%s\n"
-				 "      ",
-				 player_field.time_node_last_unseen,
-				 player_field.owner,
-				 animation_name.c_str());
-			str += buffer;
+			str += (boost::format("  last seen at %u:\n"
+										"    owner: %u\n"
+										"    immovable animation:\n%s\n"
+										"      ")
+					  % player_field.time_node_last_unseen
+					  % static_cast<unsigned int>(player_field.owner)
+					  % animation_name.c_str()).str();
 			break;
 		}
 		default:
-			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
-			str += buffer;
+			str += (boost::format("  seen %u times\n") % (vision - 1)).str();
 			break;
 		}
 	}
 	{
-		Widelands::Resource_Index ridx = m_coords.field->get_resources();
+		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
-		int startingAmount = m_coords.field->get_starting_res_amount();
-		snprintf(buffer,
-		         sizeof(buffer),
-		         "Resource: %s\n",
-		         ibase().egbase().world().get_resource(ridx)->name().c_str());
+		int initial_amount = m_coords.field->get_initial_res_amount();
 
-		str += buffer;
+		str += (boost::format("Resource: %s\n")
+				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
 
-		snprintf
-		(buffer, sizeof(buffer), "  Amount: %i/%i\n", ramount, startingAmount);
-		str += buffer;
+		str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
 	}
 
 	m_ui_field.set_text(str.c_str());
@@ -391,10 +373,9 @@ void FieldDebugWindow::think()
 	// Immovable information
 	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
 	{
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%s (%u)", imm->descr().name().c_str(), imm->serial());
-		m_ui_immovable.set_title(buffer);
+		m_ui_immovable.set_title((boost::format("%s (%u)")
+										  % imm->descr().name().c_str()
+										  % imm->serial()).str());
 		m_ui_immovable.set_enabled(true);
 	} else {
 		m_ui_immovable.set_title("no immovable");
@@ -439,7 +420,7 @@ void FieldDebugWindow::think()
 		m_ui_bobs.add(
 			(boost::format("%s (%u)")
 				% temp_bob->descr().name()
-				% temp_bob->serial()).str().c_str(),
+				% temp_bob->serial()).str(),
 			temp_bob->serial());
 	}
 }
@@ -479,7 +460,7 @@ Open a debug window for the given field.
 ===============
 */
 void show_field_debug
-	(Interactive_Base & parent, Widelands::Coords const coords)
+	(InteractiveBase & parent, Widelands::Coords const coords)
 {
 	new FieldDebugWindow(parent, coords);
 }

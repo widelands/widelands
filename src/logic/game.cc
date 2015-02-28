@@ -38,7 +38,7 @@
 #include "base/warning.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -60,8 +60,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "scripting/logic.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication.h"
@@ -79,23 +79,23 @@ Game::SyncWrapper::~SyncWrapper() {
 		m_dump = nullptr;
 
 		if (!m_syncstreamsave)
-			g_fs->Unlink(m_dumpfname);
+			g_fs->fs_unlink(m_dumpfname);
 	}
 }
 
-void Game::SyncWrapper::StartDump(const std::string & fname) {
+void Game::SyncWrapper::start_dump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
-	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
+	m_dump = g_fs->open_stream_write(m_dumpfname);
 }
 
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
-void Game::SyncWrapper::Data(void const * const data, size_t const size) {
+void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
+		log(" %02x", (static_cast<uint8_t const *>(sync_data))[i]);
 	log("\n");
 #endif
 
@@ -105,7 +105,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	{
 		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
-		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			delete m_dump;
 			m_dump = nullptr;
@@ -114,8 +114,8 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if (m_dump) {
 		try {
-			m_dump->Data(data, size);
-		} catch (const _wexception &) {
+			m_dump->data(sync_data, size);
+		} catch (const WException &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
 				 m_dumpfname.c_str());
@@ -125,13 +125,13 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 		}
 	}
 
-	m_target.Data(data, size);
+	m_target.data(sync_data, size);
 	m_counter += size;
 }
 
 
 Game::Game() :
-	Editor_Game_Base(new LuaGameInterface(this)),
+	EditorGameBase(new LuaGameInterface(this)),
 	m_syncwrapper         (*this, m_synchash),
 	m_ctrl                (nullptr),
 	m_writereplay         (true),
@@ -139,6 +139,7 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (nullptr),
+	/** TRANSLATORS: Win condition for this game has not been set. */
 	m_win_condition_displayname(_("Not set"))
 {
 }
@@ -149,7 +150,7 @@ Game::~Game()
 }
 
 
-void Game::SyncReset() {
+void Game::sync_reset() {
 	m_syncwrapper.m_counter = 0;
 
 	m_synchash.Reset();
@@ -167,13 +168,13 @@ bool Game::get_allow_cheats()
 
 
 /**
- * \return a pointer to the \ref Interactive_Player if any.
+ * \return a pointer to the \ref InteractivePlayer if any.
  * \note This function may return 0 (in particular, it will return 0 during
  * playback or if player is spectator)
  */
-Interactive_Player * Game::get_ipl()
+InteractivePlayer * Game::get_ipl()
 {
-	return dynamic_cast<Interactive_Player *>(get_ibase());
+	return dynamic_cast<InteractivePlayer *>(get_ibase());
 }
 
 void Game::set_game_controller(GameController * const ctrl)
@@ -181,7 +182,7 @@ void Game::set_game_controller(GameController * const ctrl)
 	m_ctrl = ctrl;
 }
 
-GameController * Game::gameController()
+GameController * Game::game_controller()
 {
 	return m_ctrl;
 }
@@ -220,7 +221,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_map(new Map);
 
-	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
@@ -233,7 +234,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	}
 
 	// We have to create the players here.
-	Player_Number const nr_players = map().get_nrplayers();
+	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -241,12 +242,12 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 			 0,
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
-		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	m_win_condition_displayname = _("Scenario");
 
 	set_ibase
-		(new Interactive_Player
+		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step (_("Loading a map"));
@@ -282,7 +283,7 @@ void Game::init_newgame
 	assert(!get_map());
 	set_map(new Map);
 
-	std::unique_ptr<Map_Loader> maploader
+	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
@@ -313,7 +314,7 @@ void Game::init_newgame
 			 playersettings.tribe,
 			 playersettings.name,
 			 playersettings.team);
-		get_player(i + 1)->setAI(playersettings.ai);
+		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
 	// Add shared in starting positions
@@ -333,7 +334,7 @@ void Game::init_newgame
 		table->do_not_warn_about_unaccessed_keys();
 		m_win_condition_displayname = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
@@ -359,8 +360,8 @@ void Game::init_savegame
 	assert(!get_map());
 	set_map(new Map);
 	try {
-		Game_Loader gl(settings.mapfilename, *this);
-		Widelands::Game_Preload_Data_Packet gpdp;
+		GameLoader gl(settings.mapfilename, *this);
+		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		m_win_condition_displayname = gpdp.get_win_condition();
 		if (loaderUI) {
@@ -388,15 +389,15 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 	set_map(new Map);
 
 	{
-		Game_Loader gl(filename, *this);
+		GameLoader gl(filename, *this);
 
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
-			(new Interactive_Player
+			(new InteractivePlayer
 			 	(*this, g_options.pull_section("global"), player_nr, false));
 
 		loaderUI.step(_("Loading..."));
@@ -424,11 +425,11 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
  * during single/multiplayer/scenario).
  *
  * Ensure that players and player controllers are setup properly (in particular
- * AI and the \ref Interactive_Player if any).
+ * AI and the \ref InteractivePlayer if any).
  */
 void Game::postload()
 {
-	Editor_Game_Base::postload();
+	EditorGameBase::postload();
 
 	if (g_gr) {
 		assert(get_ibase() != nullptr);
@@ -458,14 +459,14 @@ void Game::postload()
  * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	(UI::ProgressWindow * loader_ui, StartGameType const start_game_type,
 	 const std::string& script_to_run, bool replay)
 {
 	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {
-		Player_Number const nr_players = map().get_nrplayers();
+		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
 			std::string step_description = _("Creating player infrastructure");
 			iterate_players_existing(p, nr_players, *this, plr) {
@@ -479,7 +480,7 @@ bool Game::run
 			// Is a scenario!
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p))
-				throw warning
+				throw WLWarning
 					(_("Missing starting position"),
 					 _
 					 	("Widelands could not start the game, because player %u has "
@@ -504,7 +505,7 @@ bool Game::run
 			const std::string                                              no_name;
 			const std::string & player_tribe = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name  = plr ? plr->    get_name() : no_name;
-			const std::string & player_ai    = plr ? plr->    getAI()    : no_name;
+			const std::string & player_ai    = plr ? plr->    get_ai()    : no_name;
 			map().set_scenario_player_tribe    (p, player_tribe);
 			map().set_scenario_player_name     (p, player_name);
 			map().set_scenario_player_ai       (p, player_ai);
@@ -513,17 +514,17 @@ bool Game::run
 
 		// Run the init script, if the map provides one.
 		if (start_game_type == NewSPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(), "map:scripting/init.lua"));
+			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
-				(new Cmd_LuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+				(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
 		// Queue first statistics calculation
-		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
-		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -531,10 +532,6 @@ bool Game::run
 		std::string fname(REPLAY_DIR);
 		fname += '/';
 		fname += timestring();
-		if (m_ctrl) {
-			fname += ' ';
-			fname += m_ctrl->getGameDescription();
-		}
 		fname += REPLAY_SUFFIX;
 
 		if (m_writereplay) {
@@ -547,10 +544,10 @@ bool Game::run
 		}
 
 		if (m_writesyncstream)
-			m_syncwrapper.StartDump(fname);
+			m_syncwrapper.start_dump(fname);
 	}
 
-	SyncReset();
+	sync_reset();
 
 	if (loader_ui) {
 		load_graphics(*loader_ui);
@@ -614,10 +611,7 @@ void Game::think()
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
-
-		if (g_gr) // not in dedicated server mode
-			g_gr->animate_maptextures(get_gametime());
+		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
 		// check if autosave is needed
 		m_savehandler.think(*this, WLApplication::get()->get_time());
@@ -640,9 +634,9 @@ void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
-	Editor_Game_Base::cleanup_for_load();
+	EditorGameBase::cleanup_for_load();
 
-	for (Tribe_Descr* tribe : tribes_) {
+	for (TribeDescr* tribe : tribes_) {
 		delete tribe;
 	}
 
@@ -677,12 +671,12 @@ StreamWrite & Game::syncstream()
  *
  * \return the checksum
  */
-md5_checksum Game::get_sync_hash() const
+Md5Checksum Game::get_sync_hash() const
 {
 	MD5Checksum<StreamWrite> copy(m_synchash);
 
-	copy.FinishChecksum();
-	return copy.GetChecksum();
+	copy.finish_checksum();
+	return copy.get_checksum();
 }
 
 
@@ -695,7 +689,7 @@ md5_checksum Game::get_sync_hash() const
 uint32_t Game::logic_rand()
 {
 	uint32_t const result = rng().rand();
-	syncstream().Unsigned32(result);
+	syncstream().unsigned_32(result);
 	return result;
 }
 
@@ -707,7 +701,7 @@ uint32_t Game::logic_rand()
  */
 void Game::send_player_command (PlayerCommand & pc)
 {
-	m_ctrl->sendPlayerCommand(pc);
+	m_ctrl->send_player_command(pc);
 }
 
 
@@ -723,7 +717,7 @@ void Game::enqueue_command (Command * const cmd)
 {
 	if (m_writereplay && m_replaywriter) {
 		if (upcast(PlayerCommand, plcmd, cmd)) {
-			m_replaywriter->SendPlayerCommand(plcmd);
+			m_replaywriter->send_player_command(plcmd);
 		}
 	}
 	cmdqueue().enqueue(cmd);
@@ -733,88 +727,88 @@ void Game::enqueue_command (Command * const cmd)
 void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 {
 	send_player_command
-		(*new Cmd_Bulldoze
+		(*new CmdBulldoze
 		 	(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_dismantle (PlayerImmovable & pi)
 {
 	send_player_command
-		(*new Cmd_DismantleBuilding
+		(*new CmdDismantleBuilding
 		 	(get_gametime(), pi.owner().player_number(), pi));
 }
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, Building_Index const id)
+	(int32_t const pid, Coords const coords, BuildingIndex const id)
 {
 	assert(id != INVALID_INDEX);
-	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
+	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag (int32_t const pid, Coords const coords)
 {
-	send_player_command (*new Cmd_BuildFlag(get_gametime(), pid, coords));
+	send_player_command (*new CmdBuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road (int32_t pid, Path & path)
 {
-	send_player_command (*new Cmd_BuildRoad(get_gametime(), pid, path));
+	send_player_command (*new CmdBuildRoad(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction (Flag & flag)
 {
 	send_player_command
-		(*new Cmd_FlagAction
+		(*new CmdFlagAction
 		 	(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
-		(*new Cmd_StartStopBuilding
+		(*new CmdStartStopBuilding
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference (Building & building, uint8_t my_preference)
 {
 	send_player_command
-		(*new Cmd_MilitarySiteSetSoldierPreference
+		(*new CmdMilitarySiteSetSoldierPreference
 		 (get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition (Building & building)
 {
 	send_player_command
-		(*new Cmd_StartOrCancelExpedition
+		(*new CmdStartOrCancelExpedition
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_enhance_building
-	(Building & building, Building_Index const id)
+	(Building & building, BuildingIndex const id)
 {
 	assert(id != INVALID_INDEX);
 
 	send_player_command
-		(*new Cmd_EnhanceBuilding
+		(*new CmdEnhanceBuilding
 		 	(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_evict_worker(Worker & worker)
 {
 	send_player_command
-		(*new Cmd_EvictWorker
+		(*new CmdEvictWorker
 			(get_gametime(), worker.owner().player_number(), worker));
 }
 
 void Game::send_player_set_ware_priority
 	(PlayerImmovable &       imm,
 	 int32_t           const type,
-	 Ware_Index        const index,
+	 WareIndex        const index,
 	 int32_t           const prio)
 {
 	send_player_command
-		(*new Cmd_SetWarePriority
+		(*new CmdSetWarePriority
 		 	(get_gametime(),
 		 	 imm.owner().player_number(),
 		 	 imm,
@@ -825,11 +819,11 @@ void Game::send_player_set_ware_priority
 
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
-	 Ware_Index        const index,
+	 WareIndex        const index,
 	 uint32_t          const max_fill)
 {
 	send_player_command
-		(*new Cmd_SetWareMaxFill
+		(*new CmdSetWareMaxFill
 		 	(get_gametime(),
 		 	 imm.owner().player_number(),
 		 	 imm,
@@ -842,7 +836,7 @@ void Game::send_player_change_training_options
 	(TrainingSite & ts, int32_t const atr, int32_t const val)
 {
 	send_player_command
-		(*new Cmd_ChangeTrainingOptions
+		(*new CmdChangeTrainingOptions
 		 	(get_gametime(), ts.owner().player_number(), ts, atr, val));
 }
 
@@ -850,7 +844,7 @@ void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 {
 	assert(ser != -1);
 	send_player_command
-		(*new Cmd_DropSoldier
+		(*new CmdDropSoldier
 		 	(get_gametime(), b.owner().player_number(), b, ser));
 }
 
@@ -858,14 +852,14 @@ void Game::send_player_change_soldier_capacity
 	(Building & b, int32_t const val)
 {
 	send_player_command
-		(*new Cmd_ChangeSoldierCapacity
+		(*new CmdChangeSoldierCapacity
 		 	(get_gametime(), b.owner().player_number(), b, val));
 }
 
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
-	 Player_Number const who_attacks,
+	 PlayerNumber const who_attacks,
 	 uint32_t      const num_soldiers)
 {
 	if
@@ -875,7 +869,7 @@ void Game::send_player_enemyflagaction
 		 	(Map::get_index
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
-			(*new Cmd_EnemyFlagAction
+			(*new CmdEnemyFlagAction
 			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
@@ -883,36 +877,39 @@ void Game::send_player_enemyflagaction
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
 	send_player_command
-		(*new Cmd_ShipScoutDirection
+		(*new CmdShipScoutDirection
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 {
 	send_player_command
-		(*new Cmd_ShipConstructPort
+		(*new CmdShipConstructPort
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship & ship, bool cw)
+void Game::send_player_ship_explore_island(Ship & ship, ScoutingDirection direction)
 {
 	send_player_command
-		(*new Cmd_ShipExploreIsland
-			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
+		(*new CmdShipExploreIsland
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_sink_ship(Ship & ship) {
 	send_player_command
-		(*new Cmd_ShipSink
+		(*new CmdShipSink
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship & ship) {
 	send_player_command
-		(*new Cmd_ShipCancelExpedition
+		(*new CmdShipCancelExpedition
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
+LuaGameInterface& Game::lua() {
+	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+}
 
 /**
  * Sample global statistics for the game.
@@ -920,7 +917,7 @@ void Game::send_player_cancel_expedition_ship(Ship & ship) {
 void Game::sample_statistics()
 {
 	// Update general stats
-	Player_Number const nr_plrs = map().get_nrplayers();
+	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
 	std::vector<uint32_t> nr_buildings;
 	std::vector<uint32_t> nr_casualties;
@@ -954,7 +951,7 @@ void Game::sample_statistics()
 	const Map &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-		if (Player_Number const owner = fc.field->get_owned_by())
+		if (PlayerNumber const owner = fc.field->get_owned_by())
 			++land_size[owner - 1];
 
 			// Get the immovable
@@ -985,16 +982,16 @@ void Game::sample_statistics()
 
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
-			const Tribe_Descr & tribe = plr->tribe();
-			Ware_Index const tribe_wares = tribe.get_nrwares();
+			const TribeDescr & tribe = plr->tribe();
+			WareIndex const tribe_wares = tribe.get_nrwares();
 			for
-				(Ware_Index wareid = 0;
+				(WareIndex wareid = 0;
 				 wareid < tribe_wares;
 				 ++wareid)
 				wastock += eco->stock_ware(wareid);
-			Ware_Index const tribe_workers = tribe.get_nrworkers();
+			WareIndex const tribe_workers = tribe.get_nrworkers();
 			for
-				(Ware_Index workerid = 0;
+				(WareIndex workerid = 0;
 				 workerid < tribe_workers;
 				 ++workerid)
 				if
@@ -1056,7 +1053,7 @@ void Game::sample_statistics()
 
 
 	// Calculate statistics for the players
-	const Player_Number nr_players = map().get_nrplayers();
+	const PlayerNumber nr_players = map().get_nrplayers();
 	iterate_players_existing(p, nr_players, *this, plr)
 		plr->sample_statistics();
 }
@@ -1070,14 +1067,14 @@ void Game::sample_statistics()
  *   is 4, support for older versions (used in widelands build <= 12) was
  *   dropped after the release of build 15
  */
-void Game::ReadStatistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr, uint32_t const version)
 {
 	if (version >= 3) {
-		fr.Unsigned32(); // used to be last stats update time
+		fr.unsigned_32(); // used to be last stats update time
 
 		// Read general statistics
-		uint32_t entries = fr.Unsigned16();
-		const Player_Number nr_players = map().get_nrplayers();
+		uint32_t entries = fr.unsigned_16();
+		const PlayerNumber nr_players = map().get_nrplayers();
 		m_general_stats.resize(nr_players);
 
 		iterate_players_existing_novar(p, nr_players, *this) {
@@ -1099,20 +1096,20 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 		iterate_players_existing_novar(p, nr_players, *this)
 			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
 			{
-				m_general_stats[p - 1].land_size       [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_workers      [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_buildings    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_wares        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].productivity    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_casualties   [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_kills        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_msites_lost        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.Unsigned32();
-				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
+				m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
+				m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
 				if (version == 4)
-					m_general_stats[p - 1].custom_statistic[j] = fr.Unsigned32();
+					m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
 			}
 	} else
 		throw wexception("Unsupported version %i", version);
@@ -1122,38 +1119,38 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write general statistics to the given file.
  */
-void Game::WriteStatistics(FileWrite & fw)
+void Game::write_statistics(FileWrite & fw)
 {
-	fw.Unsigned32(0); // Used to be last stats update time. No longer needed
+	fw.unsigned_32(0); // Used to be last stats update time. No longer needed
 
 	// General statistics
 	// First, we write the size of the statistics arrays
 	uint32_t entries = 0;
 
-	const Player_Number nr_players = map().get_nrplayers();
+	const PlayerNumber nr_players = map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *this)
 		if (!m_general_stats.empty()) {
 			entries = m_general_stats[p - 1].land_size.size();
 			break;
 		}
 
-	fw.Unsigned16(entries);
+	fw.unsigned_16(entries);
 
 	iterate_players_existing_novar(p, nr_players, *this)
 		for (uint32_t j = 0; j < entries; ++j) {
-			fw.Unsigned32(m_general_stats[p - 1].land_size       [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_workers      [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_buildings    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_wares        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].productivity    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_casualties   [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_kills        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_msites_lost        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_msites_defeated    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
-			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
-			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
+			fw.unsigned_32(m_general_stats[p - 1].land_size       [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_workers      [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_buildings    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_wares        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].productivity    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_casualties   [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_kills        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_msites_lost        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_msites_defeated    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
+			fw.unsigned_32(m_general_stats[p - 1].miltary_strength[j]);
+			fw.unsigned_32(m_general_stats[p - 1].custom_statistic[j]);
 		}
 }
 

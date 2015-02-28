@@ -42,19 +42,19 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 
 namespace Widelands {
 
-BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
+BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
                   const std::string& init_descname,
-                  Tribe_Descr const* tribe)
+                  TribeDescr const* tribe)
 	:
-	MapObjectDescr(type, init_name, init_descname),
+	MapObjectDescr(object_type, init_name, init_descname),
 	owner_tribe_    (tribe)
 {
 }
@@ -82,7 +82,7 @@ uint32_t BobDescr::vision_range() const
  * Create a bob of this type
  */
 Bob & BobDescr::create
-	(Editor_Game_Base & egbase,
+	(EditorGameBase & egbase,
 	 Player * const owner,
 	 const Coords & coords)
 	const
@@ -132,7 +132,7 @@ Bob::~Bob()
  *
  * \note Make sure you call this from derived classes!
  */
-void Bob::init(Editor_Game_Base & egbase)
+void Bob::init(EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
@@ -147,10 +147,11 @@ void Bob::init(Editor_Game_Base & egbase)
 /**
  * Perform independent cleanup as necessary.
  */
-void Bob::cleanup(Editor_Game_Base & egbase)
+void Bob::cleanup(EditorGameBase & egbase)
 {
-	while (!m_stack.empty()) //  bobs in the editor do not have tasks
-		do_pop_task(ref_cast<Game, Editor_Game_Base>(egbase));
+	while (!m_stack.empty()) { //  bobs in the editor do not have tasks
+		do_pop_task(dynamic_cast<Game&>(egbase));
+	}
 
 	set_owner(nullptr); // implicitly remove ourselves from owner's map
 
@@ -475,7 +476,7 @@ struct BlockedTracker {
 			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
-	typedef std::map<CoordData, bool, CoordOrdering> Cache;
+	using Cache = std::map<CoordData, bool, CoordOrdering>;
 
 	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
@@ -510,7 +511,7 @@ struct BlockedTracker {
 		}
 	}
 
-	bool isBlocked(const FCoords & field) {
+	bool is_blocked(const FCoords & field) {
 		if (disabled)
 			return false;
 
@@ -522,7 +523,7 @@ struct BlockedTracker {
 		if (it != nodes.end())
 			return it->second;
 
-		bool const blocked = m_bob.checkNodeBlocked(m_game, field, false);
+		bool const blocked = m_bob.check_node_blocked(m_game, field, false);
 		nodes.insert(std::make_pair(cd, blocked));
 		if (blocked)
 			++nrblocked;
@@ -546,9 +547,9 @@ struct CheckStepBlocked {
 		if (end == m_tracker.m_finaldest)
 			return true;
 
-		return !m_tracker.isBlocked(end);
+		return !m_tracker.is_blocked(end);
 	}
-	bool reachabledest(Map &, FCoords) const {return true;}
+	bool reachable_dest(Map &, FCoords) const {return true;}
 
 	BlockedTracker & m_tracker;
 };
@@ -665,10 +666,10 @@ bool Bob::start_task_movepath
 	if (curidx != index) {
 		if (curidx < index) {
 			path.truncate(index);
-			path.starttrim(curidx);
+			path.trim_start(curidx);
 		} else {
 			path.truncate(curidx);
-			path.starttrim(index);
+			path.trim_start(index);
 			path.reverse();
 		}
 		start_task_movepath(game, path, anims, forceonlast, only_step);
@@ -694,7 +695,7 @@ void Bob::movepath_update(Game & game, State & state)
 		return pop_task(game);
 
 	if
-		(static_cast<Path::Step_Vector::size_type>(state.ivar1)
+		(static_cast<Path::StepVector::size_type>(state.ivar1)
 		 >=
 		 path->get_nsteps())
 	{
@@ -712,7 +713,7 @@ void Bob::movepath_update(Game & game, State & state)
 	if
 		(state.ivar2
 		 &&
-		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
+		 static_cast<Path::StepVector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
 	{
@@ -777,7 +778,7 @@ void Bob::move_update(Game & game, State &)
 ///
 /// pos is the location, in pixels, of the node m_position (height is already
 /// taken into account).
-Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
+Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 {
 	const Map & map = game.get_map();
 	const FCoords end = m_position;
@@ -848,7 +849,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw
-	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & egbase, RenderTarget & dst, const Point& pos) const
 {
 	if (m_anim)
 		dst.drawanim
@@ -862,7 +863,7 @@ void Bob::draw
 /**
  * Set a looping animation, starting now.
  */
-void Bob::set_animation(Editor_Game_Base & egbase, uint32_t const anim)
+void Bob::set_animation(EditorGameBase & egbase, uint32_t const anim)
 {
 	m_anim = anim;
 	m_animstart = egbase.get_gametime();
@@ -893,9 +894,9 @@ int32_t Bob::start_walk
 			return -1;
 	}
 
-	//  Always call checkNodeBlocked, because it might communicate with other
+	//  Always call check_node_blocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newnode, true) && !force)
+	if (check_node_blocked(game, newnode, true) && !force)
 		return -2;
 
 	// Move is go
@@ -913,7 +914,7 @@ int32_t Bob::start_walk
 }
 
 
-bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
+bool Bob::check_node_blocked(Game & game, const FCoords & field, bool)
 {
 	// Battles always block movement!
 	std::vector<Bob *> soldiers;
@@ -923,7 +924,7 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 	if (!soldiers.empty()) {
 		for (Bob * temp_bob : soldiers) {
 			upcast(Soldier, soldier, temp_bob);
-			if (soldier->getBattle())
+			if (soldier->get_battle())
 				return true;
 		}
 	}
@@ -955,7 +956,7 @@ void Bob::set_owner(Player * const player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
+void Bob::set_position(EditorGameBase & egbase, const Coords & coords)
 {
 	FCoords oldposition = m_position;
 
@@ -989,14 +990,14 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 	// randomly generated movements.
 	if (upcast(Game, game, &egbase)) {
 		StreamWrite & ss = game->syncstream();
-		ss.Unsigned32(serial());
-		ss.Signed16(coords.x);
-		ss.Signed16(coords.y);
+		ss.unsigned_32(serial());
+		ss.signed_16(coords.x);
+		ss.signed_16(coords.y);
 	}
 }
 
 /// Give debug information.
-void Bob::log_general_info(const Editor_Game_Base & egbase)
+void Bob::log_general_info(const EditorGameBase & egbase)
 {
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
@@ -1038,13 +1039,13 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 		molog("\n* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
-			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+			Path::StepVector::size_type nr_steps = path.get_nsteps();
 			molog
 				("** Path length: %lu\n",
 				 static_cast<long unsigned int>(nr_steps));
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
-			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
+			for (Path::StepVector::size_type j = 0; j < nr_steps; ++j)
 				molog
 					("** Step %lu/%lu: %i\n",
 					 static_cast<long unsigned int>(j + 1),
@@ -1075,72 +1076,72 @@ void Bob::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version != BOB_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version: %u", version);
+		throw GameDataError("unknown/unhandled version: %u", version);
 
 	Bob & bob = get<Bob>();
 
-	if (Player_Number owner_number = fr.Unsigned8()) {
+	if (PlayerNumber owner_number = fr.unsigned_8()) {
 		if (owner_number > egbase().map().get_nrplayers())
-			throw game_data_error
+			throw GameDataError
 				("owner number is %u but there are only %u players",
 				 owner_number, egbase().map().get_nrplayers());
 
 		Player * owner = egbase().get_player(owner_number);
 		if (!owner)
-			throw game_data_error("owning player %u does not exist", owner_number);
+			throw GameDataError("owning player %u does not exist", owner_number);
 
 		bob.set_owner(owner);
 	}
 
-	bob.set_position(egbase(), ReadCoords32(&fr));
+	bob.set_position(egbase(), read_coords_32(&fr));
 
-	std::string animname = fr.CString();
+	std::string animname = fr.c_string();
 	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
-	bob.m_animstart = fr.Signed32();
-	bob.m_walking = static_cast<WalkingDir>(ReadDirection8_allow_null(&fr));
+	bob.m_animstart = fr.signed_32();
+	bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 	if (bob.m_walking) {
-		bob.m_walkstart = fr.Signed32();
-		bob.m_walkend = fr.Signed32();
+		bob.m_walkstart = fr.signed_32();
+		bob.m_walkend = fr.signed_32();
 	}
 
-	bob.m_actid = fr.Unsigned32();
-	bob.m_signal = fr.CString();
+	bob.m_actid = fr.unsigned_32();
+	bob.m_signal = fr.c_string();
 
-	uint32_t stacksize = fr.Unsigned32();
+	uint32_t stacksize = fr.unsigned_32();
 	bob.m_stack.resize(stacksize);
 	states.resize(stacksize);
 	for (uint32_t i = 0; i < stacksize; ++i) {
 		State & state = bob.m_stack[i];
 		LoadState & loadstate = states[i];
 
-		state.task = get_task(fr.CString());
-		state.ivar1 = fr.Signed32();
-		state.ivar2 = fr.Signed32();
-		state.ivar3 = fr.Signed32();
-		loadstate.objvar1 = fr.Unsigned32();
-		state.svar1 = fr.CString();
-		state.coords = ReadCoords32_allow_null(&fr, egbase().map().extent());
+		state.task = get_task(fr.c_string());
+		state.ivar1 = fr.signed_32();
+		state.ivar2 = fr.signed_32();
+		state.ivar3 = fr.signed_32();
+		loadstate.objvar1 = fr.unsigned_32();
+		state.svar1 = fr.c_string();
+		state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
 
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			uint32_t anims[6];
 			for (int j = 0; j < 6; ++j)
-				anims[j] = bob.descr().get_animation(fr.CString());
+				anims[j] = bob.descr().get_animation(fr.c_string());
 			state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 		}
 
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			state.path = new Path;
 			state.path->load(fr, egbase().map());
 		}
 
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			state.route = new Route;
 			state.route->load(loadstate.route, fr);
 		}
 
-		std::string programname = fr.CString();
+		std::string programname = fr.c_string();
 		if (programname.size())
 			state.program = get_program(programname);
 	}
@@ -1185,79 +1186,79 @@ const Bob::Task * Bob::Loader::get_task(const std::string & name)
 	if (name == "movepath") return &taskMovepath;
 	if (name == "idle") return &taskIdle;
 
-	throw game_data_error("unknown bob task '%s'", name.c_str());
+	throw GameDataError("unknown bob task '%s'", name.c_str());
 }
 
 const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 {
-	throw game_data_error("unknown bob program '%s'", name.c_str());
+	throw GameDataError("unknown bob program '%s'", name.c_str());
 }
 
 void Bob::save
-	(Editor_Game_Base & eg, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & eg, MapObjectSaver & mos, FileWrite & fw)
 {
 	MapObject::save(eg, mos, fw);
 
-	fw.Unsigned8(BOB_SAVEGAME_VERSION);
+	fw.unsigned_8(BOB_SAVEGAME_VERSION);
 
-	fw.Unsigned8(m_owner ? m_owner->player_number() : 0);
-	WriteCoords32(&fw, m_position);
+	fw.unsigned_8(m_owner ? m_owner->player_number() : 0);
+	write_coords_32(&fw, m_position);
 
 	// m_linkpprev and m_linknext are recreated automatically
 
-	fw.CString(m_anim ? descr().get_animation_name(m_anim) : "");
-	fw.Signed32(m_animstart);
-	WriteDirection8_allow_null(&fw, m_walking);
+	fw.c_string(m_anim ? descr().get_animation_name(m_anim) : "");
+	fw.signed_32(m_animstart);
+	write_direction_8_allow_null(&fw, m_walking);
 	if (m_walking) {
-		fw.Signed32(m_walkstart);
-		fw.Signed32(m_walkend);
+		fw.signed_32(m_walkstart);
+		fw.signed_32(m_walkend);
 	}
 
-	fw.Unsigned32(m_actid);
-	fw.CString(m_signal);
+	fw.unsigned_32(m_actid);
+	fw.c_string(m_signal);
 
-	fw.Unsigned32(m_stack.size());
+	fw.unsigned_32(m_stack.size());
 	for (unsigned int i = 0; i < m_stack.size(); ++i) {
 		const State & state = m_stack[i];
 
-		fw.CString(state.task->name);
-		fw.Signed32(state.ivar1);
-		fw.Signed32(state.ivar2);
-		fw.Signed32(state.ivar3);
+		fw.c_string(state.task->name);
+		fw.signed_32(state.ivar1);
+		fw.signed_32(state.ivar2);
+		fw.signed_32(state.ivar3);
 		if (const MapObject * obj = state.objvar1.get(eg)) {
-			fw.Unsigned32(mos.get_object_file_index(*obj));
+			fw.unsigned_32(mos.get_object_file_index(*obj));
 		} else {
-			fw.Unsigned32(0);
+			fw.unsigned_32(0);
 		}
-		fw.CString(state.svar1);
+		fw.c_string(state.svar1);
 
-		WriteCoords32(&fw, state.coords);
+		write_coords_32(&fw, state.coords);
 
 		if (state.diranims) {
-			fw.Unsigned8(1);
+			fw.unsigned_8(1);
 			for (int dir = 1; dir <= 6; ++dir)
-				fw.CString
+				fw.c_string
 					(descr().get_animation_name
 						(state.diranims.get_animation(dir)).c_str());
 		} else {
-			fw.Unsigned8(0);
+			fw.unsigned_8(0);
 		}
 
 		if (state.path) {
-			fw.Unsigned8(1);
+			fw.unsigned_8(1);
 			state.path->save(fw);
 		} else {
-			fw.Unsigned8(0);
+			fw.unsigned_8(0);
 		}
 
 		if (state.route) {
-			fw.Unsigned8(1);
+			fw.unsigned_8(1);
 			state.route->save(fw, eg, mos);
 		} else {
-			fw.Unsigned8(0);
+			fw.unsigned_8(0);
 		}
 
-		fw.CString(state.program ? state.program->get_name() : "");
+		fw.c_string(state.program ? state.program->get_name() : "");
 	}
 }
 

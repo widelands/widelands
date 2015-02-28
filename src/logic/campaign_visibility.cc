@@ -31,14 +31,14 @@
 /**
  * Get the path of campaign visibility save-file
  */
-std::string Campaign_visibility_save::get_path()
+std::string CampaignVisibilitySave::get_path()
 {
 	std::string savepath = "save";
-	g_fs->EnsureDirectoryExists(savepath); // Make sure save directory exists
+	g_fs->ensure_directory_exists(savepath); // Make sure save directory exists
 	savepath += "/campvis"; // add the name of save-file
 
 	// check if campaigns visibility-save is available
-	if (!(g_fs->FileExists(savepath)))
+	if (!(g_fs->file_exists(savepath)))
 		make_campvis(savepath);
 
 	// check if campaigns visibility-save is up to date
@@ -49,7 +49,7 @@ std::string Campaign_visibility_save::get_path()
 		update_campvis(savepath);
 	else {
 		Section & ca_s = ca.get_safe_section("global");
-		Profile cc("campaigns/cconfig");
+		Profile cc("campaigns/campaigns.conf");
 		Section & cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
 			update_campvis(savepath);
@@ -62,7 +62,7 @@ std::string Campaign_visibility_save::get_path()
 /**
  * Create the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::make_campvis(const std::string & savepath)
+void CampaignVisibilitySave::make_campvis(const std::string & savepath)
 {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
@@ -78,7 +78,7 @@ void Campaign_visibility_save::make_campvis(const std::string & savepath)
 /**
  * Update the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::update_campvis(const std::string & savepath)
+void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 {
 	// Variable declaration
 	int32_t i = 0;
@@ -88,8 +88,8 @@ void Campaign_visibility_save::update_campvis(const std::string & savepath)
 	std::string mapsection;
 	std::string cms;
 
-	// Prepare cconfig and campvis
-	Profile cconfig("campaigns/cconfig");
+	// Prepare campaigns.conf and campvis
+	Profile cconfig("campaigns/campaigns.conf");
 	Section & cconf_s = cconfig.get_safe_section("global");
 	Profile campvisr(savepath.c_str());
 	Profile campvisw(savepath.c_str());
@@ -163,7 +163,7 @@ void Campaign_visibility_save::update_campvis(const std::string & savepath)
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void Campaign_visibility_save::set_campaign_visibility
+void CampaignVisibilitySave::set_campaign_visibility
 	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
@@ -181,7 +181,7 @@ void Campaign_visibility_save::set_campaign_visibility
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void Campaign_visibility_save::set_map_visibility
+void CampaignVisibilitySave::set_map_visibility
 	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();

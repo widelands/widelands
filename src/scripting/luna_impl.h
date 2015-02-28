@@ -26,8 +26,10 @@
 #ifndef WL_SCRIPTING_LUNA_IMPL_H
 #define WL_SCRIPTING_LUNA_IMPL_H
 
-#include "scripting/c_utils.h"
-#include "third_party/eris/lua.hpp"
+#include <cassert>
+
+#include "scripting/lua.h"
+#include "scripting/report_error.h"
 
 int luna_unpersisting_closure(lua_State * L);
 
@@ -143,7 +145,7 @@ int m_property_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
 
-	typedef int (PT::* const * ConstMethodPtr)(lua_State *);
+	using ConstMethodPtr = int (PT::* const *)(lua_State *);
 	ConstMethodPtr pfunc = reinterpret_cast<ConstMethodPtr>
 		(lua_touserdata(L, -1));
 	lua_pop(L, 1);
@@ -175,7 +177,7 @@ int m_method_dispatch(lua_State * const L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 
 	// Get the method pointer from the closure
-	typedef int (PT::* const * ConstMethod)(lua_State *);
+	using ConstMethod = int (PT::* const *)(lua_State *);
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 
@@ -240,7 +242,7 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
-	assert(lua_gettop(L) == 1); // S: lightuserdata
+	assert(lua_gettop(L) == 1);  // S: lightuserdata
 	T * * const obj = get_user_class<T>(L, 1);
 
 	lua_newtable(L);  // S: user_obj table

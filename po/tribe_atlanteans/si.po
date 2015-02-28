@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2010-03-13 01:09+0000\n"
 "Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:45+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:37+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -292,20 +292,20 @@ msgstr ""
 #: ../../tribes/atlanteans/bakery/conf:27
 #: ../../tribes/atlanteans/blackroot_farm/conf:27
 #: ../../tribes/atlanteans/charcoal_kiln/conf:24
-#: ../../tribes/atlanteans/farm/conf:29
+#: ../../tribes/atlanteans/farm/conf:30
 #: ../../tribes/atlanteans/fish_breeders_house/conf:21
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
 #: ../../tribes/atlanteans/mill/conf:31
 #: ../../tribes/atlanteans/quarry/conf:20
-#: ../../tribes/atlanteans/sawmill/conf:23
-#: ../../tribes/atlanteans/shipyard/conf:31
+#: ../../tribes/atlanteans/sawmill/conf:24
+#: ../../tribes/atlanteans/shipyard/conf:30
 #: ../../tribes/atlanteans/smelting_works/conf:31
 #: ../../tribes/atlanteans/smokery/conf:32
 #: ../../tribes/atlanteans/spiderfarm/conf:22
 #: ../../tribes/atlanteans/toolsmithy/conf:63
 #: ../../tribes/atlanteans/weaponsmithy/conf:44
-#: ../../tribes/atlanteans/weaving-mill/conf:34
-#: ../../tribes/atlanteans/well/conf:21
+#: ../../tribes/atlanteans/weaving-mill/conf:35
+#: ../../tribes/atlanteans/well/conf:23
 #: ../../tribes/atlanteans/woodcutters_house/conf:21
 msgid "working"
 msgstr ""
@@ -462,7 +462,7 @@ msgid "harvesting blackroot"
 msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:43
-#: ../../tribes/atlanteans/farm/conf:46
+#: ../../tribes/atlanteans/farm/conf:47
 msgid "Out of Fields"
 msgstr ""
 
@@ -542,23 +542,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
-"The Atlantean fires in smelting works, armorsmithies and weaponsmithies are "
-"fed with coal. This coal is mined in coal mines or produced out of logs by a "
-"charcoal kiln."
+"The Atlantean fires in smelting works, armor smithies and weapon smithies "
+"are fed with coal. This coal is mined in coal mines or produced out of logs "
+"by a charcoal kiln."
 msgstr ""
 
-#: ../../tribes/atlanteans/coalmine/conf:26
-#: ../../tribes/atlanteans/crystalmine/conf:34
+#: ../../tribes/atlanteans/coalmine/conf:27
+#: ../../tribes/atlanteans/crystalmine/conf:35
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
 msgstr ""
 
-#: ../../tribes/atlanteans/coalmine/conf:43
+#: ../../tribes/atlanteans/coalmine/conf:44
 msgid "Main Coal Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/atlanteans/coalmine/conf:44
+#: ../../tribes/atlanteans/coalmine/conf:45
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
@@ -1181,23 +1181,23 @@ msgid ""
 "Atlantean bread produced in bakeries."
 msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:28
+#: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "mining stone"
 msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:30
+#: ../../tribes/atlanteans/crystalmine/conf:31
 msgid "mining quartz"
 msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:32
+#: ../../tribes/atlanteans/crystalmine/conf:33
 msgid "mining diamonds"
 msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:88
+#: ../../tribes/atlanteans/crystalmine/conf:89
 msgid "Main Crystal Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:89
+#: ../../tribes/atlanteans/crystalmine/conf:90
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
@@ -1248,15 +1248,15 @@ msgstr ""
 msgid "Attack Training:"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:25
+#: ../../tribes/atlanteans/farm/conf:26
 msgid "planting corn"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:27
+#: ../../tribes/atlanteans/farm/conf:28
 msgid "harvesting corn"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:47
+#: ../../tribes/atlanteans/farm/conf:48
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1328,7 +1328,7 @@ msgstr ""
 msgid "Plants trees."
 msgstr ""
 
-#: ../../tribes/atlanteans/foresters_house/conf:21
+#: ../../tribes/atlanteans/foresters_house/conf:22
 msgid "planting trees"
 msgstr ""
 
@@ -1441,7 +1441,7 @@ msgstr ""
 msgid "Breeds the strong atlantean horses"
 msgstr ""
 
-#: ../../tribes/atlanteans/horsefarm/conf:26
+#: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
 msgstr ""
 
@@ -1650,7 +1650,7 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
 
-#: ../../tribes/atlanteans/scouts_house/conf:22
+#: ../../tribes/atlanteans/scouts_house/conf:21
 msgid "scouting"
 msgstr ""
 
@@ -1682,7 +1682,7 @@ msgstr ""
 msgid "Works at the shipyard and constructs new ships."
 msgstr ""
 
-#: ../../tribes/atlanteans/shipyard/conf:29
+#: ../../tribes/atlanteans/shipyard/conf:28
 msgid "constructing a ship"
 msgstr ""
 
@@ -1881,23 +1881,23 @@ msgstr ""
 msgid "Produces cloth for buildings, ships and soldiers."
 msgstr ""
 
-#: ../../tribes/atlanteans/weaving-mill/conf:28
+#: ../../tribes/atlanteans/weaving-mill/conf:29
 msgid "weaving spidercloth"
 msgstr ""
 
-#: ../../tribes/atlanteans/weaving-mill/conf:30
+#: ../../tribes/atlanteans/weaving-mill/conf:31
 msgid "tailoring a tabard"
 msgstr ""
 
-#: ../../tribes/atlanteans/weaving-mill/conf:32
+#: ../../tribes/atlanteans/weaving-mill/conf:33
 msgid "tailoring a golden tabard"
 msgstr ""
 
-#: ../../tribes/atlanteans/well/conf:30
+#: ../../tribes/atlanteans/well/conf:32
 msgid "Out of Water"
 msgstr ""
 
-#: ../../tribes/atlanteans/well/conf:31
+#: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""

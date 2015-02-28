@@ -6,7 +6,12 @@ map_w="144"
 map_h="144"
 nr_players="4"
 world="greenland"
-name="Smugglers"
+name=_"Smugglers"
 author="Nasenbaer,SirVer"
-descr=_"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. Yellow + Green."
+descr=_"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares?"
 tags="official"
+
+[teams00]
+team1=0,1
+team2=2,3
+#  blue, red vs. yellow, green

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2014-03-11 10:02+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -13,17 +13,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:54+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: pt\n"
 
 #
 # File: ../../maps/MP, line: -1
 # File: Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua, line: 48
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:94
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:97
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:100
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:96
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:99
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:102
 msgid "Game Status"
 msgstr "Estado do Jogo"
 
@@ -33,9 +33,9 @@ msgstr "Mercadorias contrabandeadas"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:31
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:53
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:88
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:55
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:90
 msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i ponto"
@@ -56,7 +56,7 @@ msgstr "Regras"
 msgid "Smugglers"
 msgstr "Contrabandistas"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:7
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
@@ -67,7 +67,7 @@ msgstr ""
 "vários túneis nesta ilha, cada qual consiste de uma ponta por onde se "
 "recebem itens e outra de onde se os enviam. "
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:11
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
@@ -79,7 +79,7 @@ msgstr ""
 "transportado a cada 10 segundos. "
 
 #: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
@@ -89,17 +89,21 @@ msgstr ""
 
 # File: ../../maps/MP, line: -1
 # File: Scenarios/Smugglers.wmf/scripting/texts.lua, line: 16
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:11
 msgid "A sending spot"
 msgstr "Um local de envio"
 
 # File: ../../maps/MP, line: -1
 # File: Scenarios/Smugglers.wmf/scripting/texts.lua, line: 17
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:12
 msgid "A receiving spot"
 msgstr "Um local de recepção"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:21
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:13
+msgid "Notes"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
@@ -109,7 +113,7 @@ msgstr ""
 "acima à esquerda da tua base, o ponto correspondente estará no canto direito "
 "inferior da base do teu companheiro de equipa."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:25
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid ""
 "You can see the number of wares traded at any time in the general statistics "
 "menu. Good luck!"
@@ -118,34 +122,38 @@ msgstr ""
 "geral de estatísticas. Boa sorte e diverte-te!"
 
 #: TRANSLATORS: the first 2 parameters are player names, the last parameter is '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:30
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:19
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
 msgstr ""
 
 #: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:35
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
 msgstr ""
 
 #: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:40
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
 msgstr ""
 
 #: TRANSLATORS: the first parameter is '<number> points', the last 2 parameters are player names
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:46
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr ""
 "A rota de contrabando evaluada em %1$s de %2$s até %3$s fora interrompida!"
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:38
+msgid "Game over!"
+msgstr ""
+
 #: TRANSLATORS: the first 4 parameters are player names, the last parameter is '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:53
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:40
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."

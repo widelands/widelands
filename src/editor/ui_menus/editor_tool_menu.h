@@ -25,8 +25,8 @@
 #include "ui_basic/unique_window.h"
 
 /// The tool selection window/menu.
-struct Editor_Tool_Menu : public UI::UniqueWindow {
-	Editor_Tool_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
+struct EditorToolMenu : public UI::UniqueWindow {
+	EditorToolMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
 
 private:
 	UI::Radiogroup m_radioselect;

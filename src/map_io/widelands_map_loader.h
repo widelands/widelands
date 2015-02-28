@@ -20,7 +20,7 @@
 #ifndef WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 #define WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 
-#include <cstring>
+#include <boost/algorithm/string.hpp>
 #include <memory>
 #include <string>
 
@@ -31,22 +31,22 @@ class LuaInterface;
 
 namespace Widelands {
 
-class Editor_Game_Base;
-class MapMapObjectLoader;
+class EditorGameBase;
+class MapObjectLoader;
 
 /// Takes ownership of the filesystem that is passed to it.
-struct WL_Map_Loader : public Map_Loader {
+struct WidelandsMapLoader : public MapLoader {
 	// Takes ownership of 'fs'.
-	WL_Map_Loader(FileSystem* fs, Map *);
-	virtual ~WL_Map_Loader();
+	WidelandsMapLoader(FileSystem* fs, Map *);
+	virtual ~WidelandsMapLoader();
 
 	int32_t preload_map(bool) override;
-	int32_t load_map_complete(Editor_Game_Base &, bool) override;
+	int32_t load_map_complete(EditorGameBase &, bool) override;
 
-	MapMapObjectLoader * get_map_object_loader() {return m_mol.get();}
+	MapObjectLoader * get_map_object_loader() {return m_mol.get();}
 
 	static bool is_widelands_map(const std::string & filename) {
-		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
+		return boost::iends_with(filename, WLMF_SUFFIX);
 	}
 
 	// If this was made pre one-world, the name of the world.
@@ -57,7 +57,7 @@ struct WL_Map_Loader : public Map_Loader {
 private:
 	FileSystem* m_fs;  // not owned (owned by Map).
 	std::string m_filename;
-	std::unique_ptr<MapMapObjectLoader> m_mol;
+	std::unique_ptr<MapObjectLoader> m_mol;
 	std::string m_old_world_name;
 };
 

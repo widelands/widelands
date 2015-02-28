@@ -20,8 +20,9 @@
 #ifndef WL_UI_FSMENU_MULTIPLAYER_H
 #define WL_UI_FSMENU_MULTIPLAYER_H
 
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/main_menu.h"
 #include "network/internet_gaming.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -29,28 +30,29 @@
  * Fullscreen Menu for MultiPlayer.
  * Here you select what game you want to play.
  */
-struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MultiPlayer();
+class FullscreenMenuMultiPlayer : public FullscreenMenuMainMenu {
+public:
+	FullscreenMenuMultiPlayer();
 
-	enum {Back = dying_code, Metaserver, Lan};
+	enum class MenuTarget: int32_t {
+		kBack = UI::Panel::dying_code,
+		kMetaserver,
+		kLan
+	};
 
-	void showInternetLogin();
-	void internetLogin();
+	void show_internet_login();
+	void internet_login();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}
 
 private:
-	uint32_t                                            m_butw;
-	uint32_t                                            m_buth;
-	uint32_t                                            m_butx;
-	uint32_t                                            m_fs;
-	std::string                                         m_fn;
-	UI::Textarea                                        title;
-	UI::Button                             metaserver;
-	UI::Button                           * showloginbox;
-	UI::Button                             lan;
-	UI::Button                             back;
+	UI::Textarea title;
+	UI::Box      vbox;
+	UI::Button   metaserver;
+	UI::Button*  showloginbox;
+	UI::Button   lan;
+	UI::Button   back;
 
 	// Values from internet login window
 	std::string m_nickname;

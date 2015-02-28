@@ -9,12 +9,11 @@ macro(_parse_common_args ARGS)
     USES_INTL
     USES_OPENGL
     USES_PNG
-    USES_SDL
-    USES_SDL_GFX
-    USES_SDL_IMAGE
-    USES_SDL_MIXER
-    USES_SDL_NET
-    USES_SDL_TTF
+    USES_SDL2
+    USES_SDL2_IMAGE
+    USES_SDL2_MIXER
+    USES_SDL2_NET
+    USES_SDL2_TTF
     USES_ZLIB
   )
   set(ONE_VALUE_ARG )
@@ -87,10 +86,17 @@ macro(_common_compile_tasks)
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
   # other.
   if(ARG_USES_OPENGL)
-    wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${GLEW_LIBRARY})
-    target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
+    if(OPTION_USE_GLBINDING)
+      wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
+      target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      add_definitions("-DUSE_GLBINDING")
+    else()
+      wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
+      target_link_libraries(${NAME} ${GLEW_LIBRARY})
+      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      add_definitions(${GLEW_EXTRA_DEFINITIONS})
+    endif()
   endif()
 
   if(ARG_USES_PNG)
@@ -98,34 +104,29 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${PNG_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL)
-    wl_include_system_directories(${NAME} ${SDL_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL_LIBRARY})
+  if(ARG_USES_SDL2)
+    wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL2_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL_MIXER)
-    wl_include_system_directories(${NAME} ${SDLMIXER_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
+  if(ARG_USES_SDL2_MIXER)
+    wl_include_system_directories(${NAME} ${SDL2MIXER_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL2MIXER_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL_NET)
-    wl_include_system_directories(${NAME} ${SDLNET_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDLNET_LIBRARY})
+  if(ARG_USES_SDL2_NET)
+    wl_include_system_directories(${NAME} ${SDL2NET_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL2NET_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL_IMAGE)
-    wl_include_system_directories(${NAME} ${SDLIMAGE_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDLIMAGE_LIBRARY})
+  if(ARG_USES_SDL2_IMAGE)
+    wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL_GFX)
-    wl_include_system_directories(${NAME} ${SDLGFX_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
-  endif()
-
-  if(ARG_USES_SDL_TTF)
-    wl_include_system_directories(${NAME} ${SDLTTF_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
+  if(ARG_USES_SDL2_TTF)
+    wl_include_system_directories(${NAME} ${SDL2TTF_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL2TTF_LIBRARY})
   endif()
 
   if (ARG_USES_INTL)
@@ -176,10 +177,10 @@ function(wl_test NAME)
   endif()
   target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
-  # Tests need to link with SDL library without main.
-  set(SDL_LIBRARY_TEMP ${SDL_LIBRARY})
-  list(REMOVE_ITEM SDL_LIBRARY_TEMP ${SDLMAIN_LIBRARY})
-  target_link_libraries(${NAME} ${SDL_LIBRARY_TEMP})
+  # Tests need to link with SDL2 library without main.
+  set(SDL2_LIBRARY_TEMP ${SDL2_LIBRARY})
+  list(REMOVE_ITEM SDL2_LIBRARY_TEMP ${SDL2MAIN_LIBRARY})
+  target_link_libraries(${NAME} ${SDL2_LIBRARY_TEMP})
 
   _common_compile_tasks()
 
@@ -255,5 +256,7 @@ function(wl_binary NAME)
 
   _common_compile_tasks()
 
-  install(TARGETS ${NAME} DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+  #Quoting the CMake documentation on DESTINATION:
+  #"If a relative path is given it is interpreted relative to the value of CMAKE_INSTALL_PREFIX"
+  install(TARGETS ${NAME} DESTINATION "." COMPONENT ExecutableFiles)
 endfunction()

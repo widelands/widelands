@@ -52,7 +52,7 @@ namespace Widelands {
  * Display information about a ship.
  */
 struct ShipWindow : UI::Window {
-	ShipWindow(Interactive_GameBase & igb, Ship & ship);
+	ShipWindow(InteractiveGameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
 	void think() override;
@@ -70,10 +70,10 @@ struct ShipWindow : UI::Window {
 	void act_cancel_expedition();
 	void act_scout_towards(uint8_t);
 	void act_construct_port();
-	void act_explore_island(bool);
+	void act_explore_island(ScoutingDirection);
 
 private:
-	Interactive_GameBase & m_igbase;
+	InteractiveGameBase & m_igbase;
 	Ship & m_ship;
 
 	UI::Button * m_btn_goto;
@@ -87,7 +87,7 @@ private:
 	ItemWaresDisplay * m_display;
 };
 
-ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
+ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 	Window(&igb, "shipwindow", 0, 0, 0, 0, _("Ship")),
 	m_igbase(igb),
 	m_ship(ship)
@@ -120,7 +120,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		m_btn_explore_island_cw =
 			make_button
 				(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
-				 boost::bind(&ShipWindow::act_explore_island, this, true));
+				 boost::bind(&ShipWindow::act_explore_island, this, ScoutingDirection::kClockwise));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
 		m_btn_scout[WALK_NE - 1] =
@@ -156,7 +156,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		m_btn_explore_island_ccw =
 			make_button
 				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
-				 boost::bind(&ShipWindow::act_explore_island, this, false));
+				 boost::bind(&ShipWindow::act_explore_island, this, ScoutingDirection::kCounterClockwise));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
 		m_btn_scout[WALK_SE - 1] =
@@ -195,7 +195,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		buttons->add(m_btn_cancel_expedition, 0, false);
 	}
 	set_center_panel(vbox);
-	set_think(true);
+	set_thinks(true);
 
 	center_to_parent();
 	move_out_of_the_way();
@@ -211,9 +211,9 @@ ShipWindow::~ShipWindow()
 void ShipWindow::think()
 {
 	UI::Window::think();
-	Interactive_Base * ib = m_ship.get_owner()->egbase().get_ibase();
+	InteractiveBase * ib = m_ship.get_owner()->egbase().get_ibase();
 	bool can_act = false;
-	if (upcast(Interactive_GameBase, igb, ib))
+	if (upcast(InteractiveGameBase, igb, ib))
 		can_act = igb->can_act(m_ship.get_owner()->player_number());
 
 	m_btn_destination->set_enabled(m_ship.get_destination(m_igbase.egbase()));
@@ -291,23 +291,23 @@ void ShipWindow::act_destination()
 /// Sink the ship if confirmed
 void ShipWindow::act_sink()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
-		show_ship_sink_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
+		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(m_igbase), m_ship);
 	}
 }
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		m_igbase.game().send_player_cancel_expedition_ship(m_ship);
 	}
 	else {
 		show_ship_cancel_expedition_confirm
-			(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
+			(dynamic_cast<InteractivePlayer&>(m_igbase), m_ship);
 	}
 }
 
@@ -327,7 +327,7 @@ void ShipWindow::act_construct_port() {
 }
 
 /// Explores the island cw or ccw
-void ShipWindow::act_explore_island(bool cw) {
+void ShipWindow::act_explore_island(ScoutingDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
@@ -338,7 +338,7 @@ void ShipWindow::act_explore_island(bool cw) {
 	}
 	if (!coast_nearby || !moveable)
 		return;
-	m_igbase.game().send_player_ship_explore_island(m_ship, cw);
+	m_igbase.game().send_player_ship_explore_island(m_ship, direction);
 }
 
 
@@ -346,7 +346,7 @@ void ShipWindow::act_explore_island(bool cw) {
  * Show the window for this ship as long as it is not sinking:
  * either bring it to the front, or create it.
  */
-void Ship::show_window(Interactive_GameBase & igb, bool avoid_fastclick)
+void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 {
 	// No window, if ship is sinking
 	if (m_ship_state == SINK_REQUEST || m_ship_state == SINK_ANIMATION)
@@ -377,7 +377,7 @@ void Ship::close_window()
 /**
  * refreshes the window of this ship - useful if some ui elements have to be removed or added
  */
-void Ship::refresh_window(Interactive_GameBase & igb) {
+void Ship::refresh_window(InteractiveGameBase & igb) {
 	// Only do something if there is actually a window
 	if (m_window) {
 		Point window_position = m_window->get_pos();

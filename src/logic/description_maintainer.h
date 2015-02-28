@@ -36,6 +36,9 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the number of entries in the container.
 	size_t get_nitems() const {return items_.size();}
+	// TODO(sirver): Remove get_nitems().
+
+	size_t size() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
@@ -52,8 +55,12 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the entry with the given 'idx' or nullptr if 'idx' is out of
 	// bound. Ownership is retained.
+	// TODO(sirver): remove get() and use get_mutable
 	T* get(const int32_t idx) const {
 		return (idx >= 0 && idx < static_cast<int32_t>(items_.size())) ? items_[idx].get() : nullptr;
+	}
+	T* get_mutable(const int32_t idx) const {
+		return get(idx);
 	}
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
@@ -65,7 +72,7 @@ template <typename T> struct DescriptionMaintainer {
 	}
 
 private:
-	typedef std::map<std::string, int> NameToIndexMap;
+	using NameToIndexMap = std::map<std::string, int>;
 	std::vector<std::unique_ptr<T>> items_;
 	NameToIndexMap name_to_index_;
 };

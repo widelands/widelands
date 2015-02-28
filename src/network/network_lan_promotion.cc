@@ -22,15 +22,14 @@
 #include <cstdio>
 #include <cstring>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "build_info.h"
 #include "network/constants.h"
 
-/*** class LAN_Base ***/
+/*** class LanBase ***/
 
-LAN_Base::LAN_Base ()
+LanBase::LanBase ()
 {
 
 	sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP); //  open the socket
@@ -74,12 +73,12 @@ DIAG_ON("-Wold-style-cast")
 #endif
 }
 
-LAN_Base::~LAN_Base ()
+LanBase::~LanBase ()
 {
 	closesocket (sock);
 }
 
-void LAN_Base::bind (uint16_t port)
+void LanBase::bind (uint16_t port)
 {
 	sockaddr_in addr;
 
@@ -92,7 +91,7 @@ DIAG_ON("-Wold-style-cast")
 	::bind (sock, reinterpret_cast<sockaddr *>(&addr), sizeof(addr));
 }
 
-bool LAN_Base::avail ()
+bool LanBase::avail ()
 {
 	fd_set fds;
 	timeval tv;
@@ -108,7 +107,7 @@ DIAG_ON("-Wold-style-cast")
 	return select(sock + 1, &fds, nullptr, nullptr, &tv) == 1;
 }
 
-ssize_t LAN_Base::recv
+ssize_t LanBase::receive
 	(void * const buf, size_t const len, sockaddr_in * const addr)
 {
 	socklen_t addrlen = sizeof(sockaddr_in);
@@ -122,7 +121,7 @@ ssize_t LAN_Base::recv
 			 &addrlen);
 }
 
-void LAN_Base::send
+void LanBase::send
 	(void const * const buf, size_t const len, sockaddr_in const * const addr)
 {
 	sendto
@@ -134,7 +133,7 @@ void LAN_Base::send
 		 sizeof(sockaddr_in));
 }
 
-void LAN_Base::broadcast
+void LanBase::broadcast
 	(void const * const buf, size_t const len, uint16_t const port)
 {
 	for (const in_addr_t& temp_address : broadcast_addresses) {
@@ -155,9 +154,9 @@ DIAG_ON("-Wold-style-cast")
 	}
 }
 
-/*** class LAN_Game_Promoter ***/
+/*** class LanGamePromoter ***/
 
-LAN_Game_Promoter::LAN_Game_Promoter ()
+LanGamePromoter::LanGamePromoter ()
 {
 	bind (WIDELANDS_LAN_PROMOTION_PORT);
 
@@ -175,14 +174,14 @@ LAN_Game_Promoter::LAN_Game_Promoter ()
 	gethostname (gameinfo.hostname, sizeof(gameinfo.hostname));
 }
 
-LAN_Game_Promoter::~LAN_Game_Promoter ()
+LanGamePromoter::~LanGamePromoter ()
 {
 	gameinfo.state = LAN_GAME_CLOSED;
 
 	broadcast (&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT);
 }
 
-void LAN_Game_Promoter::run ()
+void LanGamePromoter::run ()
 {
 	if (needupdate) {
 		needupdate = false;
@@ -194,7 +193,7 @@ void LAN_Game_Promoter::run ()
 		char magic[8];
 		sockaddr_in addr;
 
-		if (recv(magic, 8, &addr) < 8)
+		if (receive(magic, 8, &addr) < 8)
 			continue;
 
 		log ("Received %s packet\n", magic);
@@ -207,16 +206,16 @@ void LAN_Game_Promoter::run ()
 	}
 }
 
-void LAN_Game_Promoter::set_map (char const * map)
+void LanGamePromoter::set_map (char const * map)
 {
 	strncpy (gameinfo.map, map, sizeof(gameinfo.map));
 
 	needupdate = true;
 }
 
-/*** class LAN_Game_Finder ***/
+/*** class LanGameFinder ***/
 
-LAN_Game_Finder::LAN_Game_Finder () :
+LanGameFinder::LanGameFinder () :
 	callback(nullptr)
 {
 	bind (WIDELANDS_LAN_DISCOVERY_PORT);
@@ -224,7 +223,7 @@ LAN_Game_Finder::LAN_Game_Finder () :
 	reset();
 }
 
-void LAN_Game_Finder::reset ()
+void LanGameFinder::reset ()
 {
 	char magic[8];
 
@@ -237,14 +236,14 @@ void LAN_Game_Finder::reset ()
 }
 
 
-void LAN_Game_Finder::run ()
+void LanGameFinder::run ()
 {
 	while (avail()) {
-		Net_Game_Info info;
+		NetGameInfo info;
 		sockaddr_in addr;
 
 		if
-			(recv
+			(receive
 			 	(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
 			continue;
 
@@ -259,7 +258,7 @@ void LAN_Game_Finder::run ()
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		bool was_in_list = false;
-		for (Net_Open_Game* opengame : opengames) {
+		for (NetOpenGame* opengame : opengames) {
 			if (0 == strncmp(opengame->info.hostname, info.hostname, 128)) {
 				opengame->info = info;
 				callback(GameUpdated, opengame, userdata);
@@ -269,7 +268,7 @@ void LAN_Game_Finder::run ()
 		}
 
 		if (!was_in_list) {
-			opengames.push_back(new Net_Open_Game);
+			opengames.push_back(new NetOpenGame);
 			DIAG_OFF("-Wold-style-cast")
 			opengames.back()->address = addr.sin_addr.s_addr;
 			opengames.back()->port = htons(WIDELANDS_PORT);
@@ -281,8 +280,8 @@ void LAN_Game_Finder::run ()
 	}
 }
 
-void LAN_Game_Finder::set_callback
-	(void (* const cb)(int32_t, Net_Open_Game const *, void *), void * const ud)
+void LanGameFinder::set_callback
+	(void (* const cb)(int32_t, NetOpenGame const *, void *), void * const ud)
 {
 	callback = cb;
 	userdata = ud;

@@ -22,11 +22,11 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-class Interactive_Base;
+class InteractiveBase;
 
 struct MiniMap : public UI::UniqueWindow {
 	struct Registry : public UI::UniqueWindow::Registry {
@@ -39,7 +39,7 @@ struct MiniMap : public UI::UniqueWindow {
 		}
 	};
 
-	MiniMap(Interactive_Base & parent, Registry *);
+	MiniMap(InteractiveBase & parent, Registry *);
 
 	boost::signals2::signal<void (int32_t, int32_t)> warpview;
 
@@ -65,7 +65,7 @@ private:
 		View
 			(UI::Panel & parent, MiniMapLayer * flags,
 			 int32_t x, int32_t y, uint32_t w, uint32_t h,
-			 Interactive_Base &);
+			 InteractiveBase &);
 
 		void set_view_pos(int32_t x, int32_t y);
 
@@ -78,7 +78,7 @@ private:
 
 
 	private:
-		Interactive_Base & m_ibase;
+		InteractiveBase & m_ibase;
 		int32_t                m_viewx, m_viewy;
 		const Image* m_pic_map_spot;
 	public:

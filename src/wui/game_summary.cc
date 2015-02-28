@@ -39,8 +39,8 @@
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen
-	(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r)
-: UI::UniqueWindow(parent, "game_summary", r, 500, 400, _("Game over")),
+	(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r)
+: UI::UniqueWindow(parent, "game_summary", r, 550, 260, _("Game over")),
 m_game(parent->game())
 {
 	// Init boxes
@@ -50,7 +50,7 @@ m_game(parent->game())
 	vbox->add_space(PADDING);
 
 	UI::Box * hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 260, 200);
+	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 150 + 80 + 100 + 100, 200);
 	hbox1->add_space(PADDING);
 	hbox1->add(m_players_table, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
@@ -59,35 +59,41 @@ m_game(parent->game())
 	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time:"));
 	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
 	m_gametime_value = new UI::Textarea(infoBox);
-	infoBox->add(m_gametime_value, UI::Box::AlignRight);
-	infoBox->add_space(PADDING);
-	m_info_area = new UI::Multiline_Textarea(infoBox, 0, 0, 130, 130, "");
+	infoBox->add(m_gametime_value, UI::Box::AlignLeft);
+	infoBox->add_space(2 * PADDING);
+	m_info_area_label = new UI::Textarea(infoBox, _("Player info:"));
+	infoBox->add(m_info_area_label, UI::Box::AlignLeft);
+	m_info_area = new UI::MultilineTextarea(infoBox, 0, 0, 130, 130, "");
 	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
 	vbox->add(hbox1, UI::Box::AlignLeft);
-	vbox->add_space(PADDING);
 
 	UI::Box * buttonBox = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	m_continue_button = new UI::Button
 		(buttonBox, "continue_button",
-		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
-		_("Continue"), _("Continue playing"));
+		 0, 0, 35, 35,
+		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("pics/continue.png"),
+		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
 	m_stop_button = new UI::Button
 		(buttonBox, "stop_button",
-		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
-		_("Quit"), _("Return to main menu"));
+		 0, 0, 35, 35,
+		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("pics/menu_exit_game.png"),
+		_("Exit Game"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);
+	buttonBox->add_space(PADDING);
 	vbox->add(buttonBox, UI::Box::AlignBottom);
 	vbox->add_space(PADDING);
 	set_center_panel(vbox);
 
 	// Prepare table
 	m_players_table->add_column(150, _("Player"));
-	m_players_table->add_column(50, _("Team"), "", UI::Align_HCenter);
+	m_players_table->add_column(80, _("Team"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Status"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
 
@@ -126,7 +132,7 @@ void GameSummaryScreen::fill_data()
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
-	Interactive_Player* ipl = m_game.get_ipl();
+	InteractivePlayer* ipl = m_game.get_ipl();
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
@@ -135,19 +141,18 @@ void GameSummaryScreen::fill_data()
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
-		UI::Table<uintptr_t const>::Entry_Record & te
+		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
-		// Boost doesn't handle uint8_t as integers
-		uint16_t player_number = pes.player;
 		std::string pic_path =
-			(boost::format("pics/genstats_enable_plr_0%|1$u|.png") % player_number).str();
+			(boost::format("pics/genstats_enable_plr_0%|1$u|.png")
+			 % static_cast<unsigned int>(pes.player)).str();
 		const Image* pic = g_gr->images().get(pic_path);
 		te.set_picture(0, pic, p->get_name());
 		// Team
-		uint16_t team_number = p->team_number();
 		std::string team_str =
-			(boost::format("%|1$u|") % team_number).str();
+			(boost::format("%|1$u|")
+			 % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, team_str);
 		// Status
 		std::string stat_str;
@@ -187,9 +192,9 @@ void GameSummaryScreen::fill_data()
 			m_title_area->set_text
 				((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
-			uint16_t team_number = team_won;
 			m_title_area->set_text
-				((boost::format(_("Team %|1$u| won!")) % team_number).str());
+				((boost::format(_("Team %|1$u| won!"))
+				  % static_cast<unsigned int>(team_won)).str());
 		}
 	}
 	m_players_table->update();
@@ -226,15 +231,15 @@ void GameSummaryScreen::player_selected(uint32_t idx)
 
 std::string GameSummaryScreen::parse_player_info(std::string& info)
 {
-	typedef boost::split_iterator<std::string::iterator> string_split_iterator;
+	using StringSplitIterator = boost::split_iterator<std::string::iterator>;
 	std::string info_str;
 	if (info.empty()) {
 		return info_str;
 	}
 	// Iterate through all key=value pairs
-	string_split_iterator substring_it = boost::make_split_iterator
+	StringSplitIterator substring_it = boost::make_split_iterator
 		(info, boost::first_finder(";", boost::is_equal()));
-	while (substring_it != string_split_iterator()) {
+	while (substring_it != StringSplitIterator()) {
 		std::string substring = boost::copy_range<std::string>(*substring_it);
 		std::vector<std::string> pair;
 		boost::split(pair, substring, boost::is_any_of("="));
@@ -249,10 +254,6 @@ std::string GameSummaryScreen::parse_player_info(std::string& info)
 				(boost::format("%1%\n") % pair.at(1)).str();
 		}
 		++substring_it;
-	}
-	if (!info_str.empty()) {
-		info_str =
-			(boost::format("%1% :\n%2%") % _("Player info") % info_str).str();
 	}
 	return info_str;
 }

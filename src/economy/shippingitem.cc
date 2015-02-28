@@ -25,8 +25,8 @@
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -40,7 +40,7 @@ ShippingItem::ShippingItem(Worker & worker) :
 {
 }
 
-void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const {
+void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
 	if (ware) {
 		*ware = nullptr;
 	}
@@ -154,7 +154,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
 /**
  * Remove the underlying item directly. This is used when ships are removed.
  */
-void ShippingItem::remove(Editor_Game_Base & egbase)
+void ShippingItem::remove(EditorGameBase & egbase)
 {
 	if (MapObject * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
@@ -167,14 +167,14 @@ void ShippingItem::remove(Editor_Game_Base & egbase)
 
 void ShippingItem::Loader::load(FileRead & fr)
 {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (1 <= version && version <= SHIPPINGITEM_SAVEGAME_VERSION) {
-		m_serial = fr.Unsigned32();
+		m_serial = fr.unsigned_32();
 	} else
-		throw game_data_error("unknown ShippingItem version %u", version);
+		throw GameDataError("unknown ShippingItem version %u", version);
 }
 
-ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
+ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 {
 	ShippingItem it;
 	if (m_serial != 0)
@@ -182,10 +182,10 @@ ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
 	return it;
 }
 
-void ShippingItem::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(SHIPPINGITEM_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
+	fw.unsigned_8(SHIPPINGITEM_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
 }
 
 } // namespace Widelands

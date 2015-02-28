@@ -28,9 +28,9 @@ struct ChatProvider;
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
 
-class Interactive_GameBase : public Interactive_Base {
+class InteractiveGameBase : public InteractiveBase {
 public:
-	class Game_Main_Menu_Windows {
+	class GameMainMenuWindows {
 	public:
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
@@ -41,12 +41,12 @@ public:
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
-		General_Statistics_Menu::Registry general_stats;
+		GeneralStatisticsMenu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
 	};
 
-	Interactive_GameBase
+	InteractiveGameBase
 		(Widelands::Game &,
 		 Section         & global_s,
 		 PlayerType        pt          = NONE,
@@ -70,9 +70,9 @@ public:
 		return m_building_tooltip_format;
 	}
 
-	virtual bool can_see(Widelands::Player_Number) const = 0;
-	virtual bool can_act(Widelands::Player_Number) const = 0;
-	virtual Widelands::Player_Number player_number() const = 0;
+	virtual bool can_see(Widelands::PlayerNumber) const = 0;
+	virtual bool can_act(Widelands::PlayerNumber) const = 0;
+	virtual Widelands::PlayerNumber player_number() const = 0;
 
 	virtual void node_action() = 0;
 	const PlayerType & get_playertype()const {return m_playertype;}
@@ -82,9 +82,13 @@ public:
 	bool is_multiplayer() {return m_multiplayer;}
 
 	void show_game_summary();
-
+	void postload() override;
+	void start() override {};
 protected:
-	Game_Main_Menu_Windows m_mainm_windows;
+	void draw_overlay(RenderTarget &) override;
+	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
+
+	GameMainMenuWindows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
@@ -94,6 +98,8 @@ protected:
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_game_summary;
+
+	UI::Button m_toggle_buildhelp;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

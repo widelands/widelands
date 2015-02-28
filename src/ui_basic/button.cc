@@ -20,17 +20,18 @@
 #include "ui_basic/button.h"
 
 #include "base/log.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
-
 
 namespace UI {
+
+// Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
+constexpr int kButtonImageMargin = 2;
 
 Button::Button //  for textual buttons
 	(Panel * const parent,
@@ -53,17 +54,12 @@ Button::Button //  for textual buttons
 	m_title         (title_text),
 	m_pic_background(bg_pic),
 	m_pic_custom    (nullptr),
-	m_pic_custom_disabled(nullptr),
-	m_font(UI::Font::ui_small()),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
-
-	if (m_pic_background)
-		set_cache(true);
+	set_thinks(false);
 }
-
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
@@ -85,15 +81,11 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : nullptr),
-	m_font(UI::Font::ui_small()),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
-
-	if (m_pic_background)
-		set_cache(true);
+	set_thinks(false);
 }
 
 
@@ -113,7 +105,6 @@ void Button::set_pic(const Image* pic)
 		return;
 
 	m_pic_custom = pic;
-	m_pic_custom_disabled = ImageTransformations::gray_out(pic);
 
 	update();
 }
@@ -148,7 +139,7 @@ void Button::set_enabled(bool const on)
 	else {
 		if (m_pressed) {
 			m_pressed = false;
-			set_think(false);
+			set_thinks(false);
 			grab_mouse(false);
 		}
 		m_enabled = false;
@@ -176,26 +167,37 @@ void Button::draw(RenderTarget & dst)
 
 	//  if we got a picture, draw it centered
 	if (m_pic_custom) {
-		uint16_t cpw = m_pic_custom->width();
-		uint16_t cph = m_pic_custom->height();
+		const int max_image_w = get_w() - 2 * kButtonImageMargin;
+		const int max_image_h = get_h() - 2 * kButtonImageMargin;
+		double image_scale =
+		   std::min(1.,
+		            std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
+		                     static_cast<double>(max_image_h) / m_pic_custom->height()));
+		int blit_width = image_scale * m_pic_custom->width();
+		int blit_height = image_scale * m_pic_custom->height();
 
-		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
-		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		dst.blit
-			(Point
-			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
-			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+		if (m_enabled) {
+		dst.blitrect_scale(
+		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+		   m_pic_custom,
+		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+		   1.,
+		   BlendMode::UseAlpha);
+		} else {
+			dst.blitrect_scale_monochrome(
+			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+			   m_pic_custom,
+			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+			   RGBAColor(255, 255, 255, 127));
+		}
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered
-		UI::TextStyle ts;
-		ts.font = m_font;
-		ts.bold = true;
-		ts.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
+
+		m_textstyle.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
 
 		UI::g_fh->draw_text
-			(dst, ts, Point(get_w() / 2, get_h() / 2),
+			(dst, m_textstyle, Point(get_w() / 2, get_h() / 2),
 			 m_title, Align_Center,
 			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
 	}
@@ -253,7 +255,6 @@ void Button::draw(RenderTarget & dst)
 			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
 			dst.fill_rect(Rect(Point(0, get_h() - 2), get_w(), get_h()), shade);
 			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
-			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 		}
 	}
 }
@@ -314,7 +315,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		if (m_repeating) {
 			m_time_nextact =
 				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
-			set_think(true);
+			set_thinks(true);
 		}
 	}
 	update();
@@ -327,7 +328,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 
 	if (m_pressed) {
 		m_pressed = false;
-		set_think(false);
+		set_thinks(false);
 		grab_mouse(false);
 		update();
 		if (m_highlighted && m_enabled) {
@@ -341,6 +342,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+
 bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }

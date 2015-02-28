@@ -26,10 +26,10 @@
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 class Player;
 class Request;
 class Worker;
@@ -39,23 +39,23 @@ class Worker;
  */
 class WaresQueue {
 public:
-	typedef void (callback_t)
-		(Game &, WaresQueue *, Ware_Index ware, void * data);
+	using CallbackFn = void
+		(Game &, WaresQueue *, WareIndex ware, void * data);
 
-	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size);
+	WaresQueue(PlayerImmovable &, WareIndex, uint8_t size);
 
 #ifndef NDEBUG
 	~WaresQueue() {assert(m_ware == INVALID_INDEX);}
 #endif
 
-	Ware_Index get_ware()   const          {return m_ware;}
+	WareIndex get_ware()    const {return m_ware;}
 	uint32_t get_max_fill() const {return m_max_fill;}
 	uint32_t get_max_size() const {return m_max_size;}
 	uint32_t get_filled()   const {return m_filled;}
 
 	void cleanup();
 
-	void set_callback(callback_t *, void * data);
+	void set_callback(CallbackFn *, void * data);
 
 	void remove_from_economy(Economy &);
 	void add_to_economy(Economy &);
@@ -67,16 +67,16 @@ public:
 
 	Player & owner() const {return m_owner.owner();}
 
-	void Read (FileRead  &, Game &, MapMapObjectLoader &);
-	void Write(FileWrite &, Game &, MapMapObjectSaver  &);
+	void read (FileRead  &, Game &, MapObjectLoader &);
+	void write(FileWrite &, Game &, MapObjectSaver  &);
 
 private:
 	static void request_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 	void update();
 
 	PlayerImmovable & m_owner;
-	Ware_Index        m_ware;    ///< ware ID
+	WareIndex         m_ware;    ///< ware ID
 	uint32_t m_max_size;         ///< nr of items that fit into the queue maximum
 	uint32_t m_max_fill;         ///< nr of wares that should be ideally in this queue
 	uint32_t m_filled;           ///< nr of items that are currently in the queue
@@ -86,7 +86,7 @@ private:
 
 	Request         * m_request; ///< currently pending request
 
-	callback_t      * m_callback_fn;
+	CallbackFn      * m_callback_fn;
 	void            * m_callback_data;
 };
 

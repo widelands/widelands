@@ -19,13 +19,14 @@
 
 #include "graphic/text/sdl_ttf_font.h"
 
+#include <SDL.h>
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
-#include "graphic/render/sdl_helper.h"
-#include "graphic/surface.h"
-#include "graphic/surface_cache.h"
+#include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 
 using namespace std;
 using namespace boost;
@@ -35,17 +36,17 @@ static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
+SdlTtfFont::SdlTtfFont(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
 	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),
 	ttf_file_memory_block_(ttf_memory_block) {
 }
 
-SDLTTF_Font::~SDLTTF_Font() {
+SdlTtfFont::~SdlTtfFont() {
 	TTF_CloseFont(font_);
 	font_ = nullptr;
 }
 
-void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
+void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -57,33 +58,34 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 	*gw = w; *gh = h;
 }
 
-const Surface& SDLTTF_Font::render
-	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
+const Texture& SdlTtfFont::render
+	(const string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 			.str();
-	const Surface* rv = surface_cache->get(hash);
+	const Texture* rv = texture_cache->get(hash);
 	if (rv) return *rv;
 
 	m_set_style(style);
 
 	SDL_Surface * text_surface = nullptr;
 
-	SDL_Color sdlclr = {clr.r, clr.g, clr.b, 0};
+	SDL_Color sdlclr = {clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE};
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 		SDL_FillRect(text_surface,
 		             NULL,
-		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+						 SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
-		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceAlphaMod(shadow, SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceBlendMode(shadow, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
 		uint32_t* spix = static_cast<uint32_t*>(tsurf->pixels);
@@ -118,17 +120,17 @@ const Surface& SDLTTF_Font::render
 	if (!text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *surface_cache->insert(hash, Surface::create(text_surface), true);
+	return *texture_cache->insert(hash, new Texture(text_surface), true);
 }
 
-uint16_t SDLTTF_Font::ascent(int style) const {
+uint16_t SdlTtfFont::ascent(int style) const {
 	uint16_t rv = TTF_FontAscent(font_);
 	if (style & SHADOW)
 		rv += SHADOW_OFFSET;
 	return rv;
 }
 
-void SDLTTF_Font::m_set_style(int style) {
+void SdlTtfFont::m_set_style(int style) {
 	// Those must have been handled by loading the correct font.
 	assert(!(style & BOLD));
 	assert(!(style & ITALIC));

@@ -58,7 +58,7 @@ struct ProductionSiteDescr : public BuildingDescr {
 	ProductionSiteDescr
 		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &, const World&);
+		 const TribeDescr &, const World&);
 	~ProductionSiteDescr() override;
 
 	Building & create_object() const override;
@@ -73,18 +73,18 @@ struct ProductionSiteDescr : public BuildingDescr {
 	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const Ware_Index& i) const {
+	bool is_output_ware_type  (const WareIndex& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const Ware_Index& i) const {
+	bool is_output_worker_type(const WareIndex& i) const {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	typedef std::set<Ware_Index>                       Output;
+	using Output = std::set<WareIndex>;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	typedef std::map<std::string, ProductionProgram *> Programs;
+	using Programs = std::map<std::string, ProductionProgram *>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {
@@ -112,19 +112,19 @@ private:
 };
 
 class ProductionSite : public Building {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 	friend struct ProductionProgram::ActReturn;
-	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
+	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheck_Map;
+	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
 	friend struct ProductionProgram::ActRecruit;
 	friend struct ProductionProgram::ActMine;
-	friend struct ProductionProgram::ActCheck_Soldier;
+	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
@@ -134,26 +134,27 @@ public:
 	ProductionSite(const ProductionSiteDescr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
 
-	struct Working_Position {
-		Working_Position(Request * const wr = nullptr, Worker * const w = nullptr)
+	struct WorkingPosition {
+		WorkingPosition(Request * const wr = nullptr, Worker * const w = nullptr)
 			: worker_request(wr), worker(w)
 		{}
 		Request * worker_request;
 		Worker  * worker;
 	};
 
-	Working_Position const * working_positions() const {
+	WorkingPosition const * working_positions() const {
 		return m_working_positions;
 	}
 
-	virtual bool has_workers(Building_Index targetSite, Game & game);
+	virtual bool has_workers(BuildingIndex targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
+
 
 	const std::string& production_result() const {return m_production_result;}
 
@@ -164,22 +165,22 @@ public:
 		m_production_result = text;
 	}
 
-	WaresQueue & waresqueue(Ware_Index) override;
+	WaresQueue & waresqueue(WareIndex) override;
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
 	void remove_worker(Worker &) override;
-	int warp_worker(Editor_Game_Base &, const WorkerDescr & wd);
+	int warp_worker(EditorGameBase &, const WorkerDescr & wd);
 
 	bool fetch_from_flag(Game &) override;
 	bool get_building_work(Game &, Worker &, bool success) override;
 
 	void set_economy(Economy *) override;
 
-	typedef std::vector<WaresQueue *> Input_Queues;
-	const Input_Queues & warequeues() const {return m_input_queues;}
+	using InputQueues = std::vector<WaresQueue *>;
+	const InputQueues & warequeues() const {return m_input_queues;}
 	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const;
@@ -194,7 +195,10 @@ protected:
 	void update_statistics_string(std::string* statistics) override;
 
 	void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
+
+
+	void load_finish(EditorGameBase & egbase) override;
 
 protected:
 	struct State {
@@ -207,7 +211,7 @@ protected:
 		 * Instruction-dependent additional data.
 		 */
 		/*@{*/
-		Object_Ptr objvar;
+		ObjectPointer objvar;
 		Coords coord;
 		/*@}*/
 
@@ -216,12 +220,12 @@ protected:
 			ip(0),
 			phase(0),
 			flags(0),
-			coord(Coords::Null()) {}
+			coord(Coords::null()) {}
 	};
 
-	Request & request_worker(Ware_Index);
+	Request & request_worker(WareIndex);
 	static void request_worker_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -241,7 +245,7 @@ protected:
 	void program_step(Game &, uint32_t delay = 10, uint32_t phase = 0);
 
 	void program_start(Game &, const std::string & program_name);
-	virtual void program_end(Game &, Program_Result);
+	virtual void program_end(Game &, ProgramResult);
 	virtual void train_workers(Game &);
 
 	void calc_statistics();
@@ -249,7 +253,7 @@ protected:
 	void set_post_timer (int32_t const t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
-	Working_Position                   * m_working_positions;
+	WorkingPosition                   * m_working_positions;
 
 	int32_t m_fetchfromflag; ///< Number of wares to fetch from flag
 
@@ -258,10 +262,10 @@ protected:  // TrainingSite must have access to this stuff
 	/// name to game time. When a program ends with the result Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	typedef std::map<std::string, Time> Skipped_Programs;
-	Skipped_Programs m_skipped_programs;
+	using SkippedPrograms = std::map<std::string, Time>;
+	SkippedPrograms m_skipped_programs;
 
-	typedef std::vector<State> Stack;
+	using Stack = std::vector<State>;
 	Stack        m_stack; ///<  program stack
 	bool         m_program_timer; ///< execute next instruction based on pointer
 	int32_t      m_program_time; ///< timer time
@@ -269,7 +273,7 @@ protected:  // TrainingSite must have access to this stuff
 
 	ProductionProgram::ActProduce::Items m_produced_wares;
 	ProductionProgram::ActProduce::Items m_recruited_workers;
-	Input_Queues m_input_queues; ///< input queues for all inputs
+	InputQueues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
@@ -291,16 +295,34 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const Ware_Index& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const WareIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 
-	Ware_Index ware() const {return m_ware;}
+	WareIndex ware() const {return m_ware;}
 	uint8_t     max() const {return m_max;}
 
 private:
-	Ware_Index m_ware;
+	WareIndex m_ware;
 	uint8_t    m_max;
+};
+
+/**
+ * Note to be published when a production site is out of resources
+ */
+// A note we're using to notify the AI
+struct NoteProductionSiteOutOfResources {
+	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+
+	// The production site that is out of resources.
+	ProductionSite* ps;
+
+	// The player that owns the production site.
+	Player * player;
+
+	NoteProductionSiteOutOfResources(ProductionSite* const init_ps, Player* init_player)
+		: ps(init_ps), player(init_player) {
+	}
 };
 
 }

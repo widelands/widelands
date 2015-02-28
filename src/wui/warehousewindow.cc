@@ -49,7 +49,7 @@ public:
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
-	void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware) override;
+	void draw_ware(RenderTarget & dst, Widelands::WareIndex ware) override;
 
 private:
 	Warehouse & m_warehouse;
@@ -65,13 +65,13 @@ m_warehouse(wh)
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 	if (type == Widelands::wwWORKER) {
-		Widelands::Ware_Index carrier_index =
+		Widelands::WareIndex carrier_index =
 			m_warehouse.descr().tribe().worker_index("carrier");
 		hide_ware(carrier_index);
 	}
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)
+void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex ware)
 {
 	WaresDisplay::draw_ware(dst, ware);
 
@@ -96,11 +96,11 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type);
+		 InteractiveGameBase &, Warehouse &, Widelands::WareWorker type);
 
 	void set_policy(Warehouse::StockPolicy);
 private:
-	Interactive_GameBase & m_gb;
+	InteractiveGameBase & m_gb;
 	Warehouse & m_wh;
 	bool m_can_act;
 	Widelands::WareWorker m_type;
@@ -109,7 +109,7 @@ private:
 
 WarehouseWaresPanel::WarehouseWaresPanel
 	(UI::Panel * parent, uint32_t width,
-	 Interactive_GameBase & gb, Warehouse & wh, Widelands::WareWorker type)
+	 InteractiveGameBase & gb, Warehouse & wh, Widelands::WareWorker type)
 :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
 	m_gb(gb),
@@ -147,17 +147,17 @@ WarehouseWaresPanel::WarehouseWaresPanel
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	bool is_workers = m_type == Widelands::wwWORKER;
-	Widelands::Ware_Index nritems =
+	Widelands::WareIndex nritems =
 	                   is_workers ? m_wh.owner().tribe().get_nrworkers() :
 				        m_wh.owner().tribe().get_nrwares();
 	if (m_gb.can_act(m_wh.owner().player_number())) {
 		for
-			(Widelands::Ware_Index id = 0;
+			(Widelands::WareIndex id = 0;
 			 id < nritems; ++id)
 		{
 			if (m_display.ware_selected(id)) {
 				m_gb.game().send_player_command
-					(*new Widelands::Cmd_SetStockPolicy
+					(*new Widelands::CmdSetStockPolicy
 						(m_gb.game().get_gametime(),
 						 m_wh.owner().player_number(),
 						 m_wh, is_workers,
@@ -171,23 +171,23 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 /**
  * Status window for warehouses
  */
-struct Warehouse_Window : public Building_Window {
-	Warehouse_Window
-		(Interactive_GameBase & parent, Warehouse &, UI::Window * & registry);
+struct WarehouseWindow : public BuildingWindow {
+	WarehouseWindow
+		(InteractiveGameBase & parent, Warehouse &, UI::Window * & registry);
 
 	Warehouse & warehouse() {
-		return ref_cast<Warehouse, Widelands::Building>(building());
+		return dynamic_cast<Warehouse&>(building());
 	}
 };
 
 /**
  * Create the tabs of a warehouse window.
  */
-Warehouse_Window::Warehouse_Window
-	(Interactive_GameBase & parent,
+WarehouseWindow::WarehouseWindow
+	(InteractiveGameBase & parent,
 	 Warehouse            & wh,
 	 UI::Window *         & registry)
-	: Building_Window(parent, wh, registry)
+	: BuildingWindow(parent, wh, registry)
 {
 	get_tabs()->add
 		("wares",
@@ -235,7 +235,7 @@ Warehouse_Window::Warehouse_Window
  * Create the status window describing the warehouse.
  */
 void Widelands::Warehouse::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	new Warehouse_Window(parent, *this, registry);
+	new WarehouseWindow(parent, *this, registry);
 }

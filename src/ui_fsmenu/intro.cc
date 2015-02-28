@@ -22,8 +22,8 @@
 #include "base/i18n.h"
 
 
-Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
-	: Fullscreen_Menu_Base("splash.jpg"),
+FullscreenMenuIntro::FullscreenMenuIntro()
+	: FullscreenMenuBase("splash.jpg"),
 
 // Text area
 m_message
@@ -34,21 +34,21 @@ m_message
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }
 
-bool Fullscreen_Menu_Intro::handle_mousepress  (uint8_t, int32_t, int32_t)
+bool FullscreenMenuIntro::handle_mousepress  (uint8_t, int32_t, int32_t)
 {
 	end_modal(0);
 
 	return true;
 }
-bool Fullscreen_Menu_Intro::handle_mouserelease(uint8_t, int32_t, int32_t)
+bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t)
 {
 	return true;
 }
 
-bool Fullscreen_Menu_Intro::handle_key(bool const down, SDL_keysym const code)
+bool FullscreenMenuIntro::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down && code.sym == SDLK_ESCAPE)
 		end_modal(0);
 
-	return true;
+	return false;
 }

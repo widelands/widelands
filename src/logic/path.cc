@@ -65,14 +65,14 @@ void Path::append(const Map & map, const Direction dir) {
  */
 void Path::save(FileWrite & fw) const
 {
-	fw.Unsigned8(1); // version number
-	WriteCoords32(&fw, m_start);
+	fw.unsigned_8(1); // version number
+	write_coords_32(&fw, m_start);
 
 	// Careful: steps are stored in the reverse order in m_path
 	// However, we save them in the forward order, to make loading easier
-	fw.Unsigned32(m_path.size());
+	fw.unsigned_32(m_path.size());
 	for (uint32_t i = m_path.size(); i > 0; --i)
-		WriteDirection8(&fw, m_path[i - 1]);
+		write_direction_8(&fw, m_path[i - 1]);
 }
 
 /**
@@ -83,15 +83,15 @@ void Path::save(FileWrite & fw) const
  */
 void Path::load(FileRead & fr, const Map & map)
 {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version != 1)
-		throw game_data_error("path: unknown version %u", version);
+		throw GameDataError("path: unknown version %u", version);
 
-	m_start = m_end = ReadCoords32(&fr, map.extent());
+	m_start = m_end = read_coords_32(&fr, map.extent());
 	m_path.clear();
-	uint32_t steps = fr.Unsigned32();
+	uint32_t steps = fr.unsigned_32();
 	while (steps--)
-		append(map, ReadDirection8(&fr));
+		append(map, read_direction_8(&fr));
 }
 
 /*
@@ -107,8 +107,8 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 
 	Coords c = path.get_start();
 
-	Path::Step_Vector::size_type nr_steps = path.get_nsteps();
-	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+	Path::StepVector::size_type nr_steps = path.get_nsteps();
+	for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const char dir = path[i];
 
 		m_path.push_back(dir);
@@ -162,7 +162,7 @@ void CoordPath::truncate(const std::vector<char>::size_type after) {
 Opposite of truncate: remove the first n steps of the path.
 ===============
 */
-void CoordPath::starttrim(const std::vector<char>::size_type before) {
+void CoordPath::trim_start(const std::vector<char>::size_type before) {
 	assert(before <= m_path.size());
 
 	m_path.erase(m_path.begin(), m_path.begin() + before);
@@ -179,8 +179,8 @@ void CoordPath::append(const Map & map, const Path & tail) {
 
 	Coords c = get_end();
 
-	const Path::Step_Vector::size_type nr_steps = tail.get_nsteps();
-	for (CoordPath::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+	const Path::StepVector::size_type nr_steps = tail.get_nsteps();
+	for (CoordPath::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const char dir = tail[i];
 
 		map.get_neighbour(c, dir, &c);

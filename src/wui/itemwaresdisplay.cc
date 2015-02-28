@@ -43,7 +43,7 @@ ItemWaresDisplay::ItemWaresDisplay(Panel * parent, const Widelands::Player & gpl
 	Panel(parent, 0, 0, 0, 0),
 	m_player(gplayer),
 	m_capacity(0),
-	m_itemsperrow(IWD_DefaultItemsPerRow)
+	m_items_per_row(IWD_DefaultItemsPerRow)
 {
 	set_desired_size(2 * IWD_HBorder, 2 * IWD_VBorder);
 }
@@ -76,18 +76,18 @@ void ItemWaresDisplay::set_capacity(uint32_t cap)
 /**
  * Set the items shown per row of the panel.
  */
-void ItemWaresDisplay::set_itemsperrow(uint32_t nr)
+void ItemWaresDisplay::set_items_per_row(uint32_t nr)
 {
-	if (nr != m_itemsperrow) {
-		m_itemsperrow = nr;
+	if (nr != m_items_per_row) {
+		m_items_per_row = nr;
 		recalc_desired_size();
 	}
 }
 
 void ItemWaresDisplay::recalc_desired_size()
 {
-	uint32_t nrrows = (m_capacity + m_itemsperrow - 1) / m_itemsperrow;
-	uint32_t rowitems = m_capacity >= m_itemsperrow ? m_itemsperrow : m_capacity;
+	uint32_t nrrows = (m_capacity + m_items_per_row - 1) / m_items_per_row;
+	uint32_t rowitems = m_capacity >= m_items_per_row ? m_items_per_row : m_capacity;
 
 	set_desired_size(2 * IWD_HBorder + rowitems * IWD_ItemWidth, 2 * IWD_VBorder + nrrows * IWD_ItemHeight);
 }
@@ -95,7 +95,7 @@ void ItemWaresDisplay::recalc_desired_size()
 /**
  * Add an item to the end of the internal list.
  */
-void ItemWaresDisplay::add(bool worker, Widelands::Ware_Index index)
+void ItemWaresDisplay::add(bool worker, Widelands::WareIndex index)
 {
 	Item it;
 	it.worker = worker;
@@ -106,14 +106,14 @@ void ItemWaresDisplay::add(bool worker, Widelands::Ware_Index index)
 
 void ItemWaresDisplay::draw(RenderTarget & dst)
 {
-	const Widelands::Tribe_Descr & tribe(player().tribe());
+	const Widelands::TribeDescr & tribe(player().tribe());
 
 	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		const Item & it = m_items[idx];
-		uint32_t row = idx / m_itemsperrow;
-		uint32_t col = idx % m_itemsperrow;
+		uint32_t row = idx / m_items_per_row;
+		uint32_t col = idx % m_items_per_row;
 
 		uint32_t x = IWD_HBorder / 2 + col * IWD_ItemWidth;
 		uint32_t y = IWD_VBorder + row * IWD_ItemHeight;

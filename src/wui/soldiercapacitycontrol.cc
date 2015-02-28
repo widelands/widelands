@@ -34,7 +34,7 @@ using Widelands::SoldierControl;
  */
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl
-		(UI::Panel * parent, Interactive_GameBase & igb,
+		(UI::Panel * parent, InteractiveGameBase & igb,
 		 Widelands::Building & building);
 
 protected:
@@ -45,7 +45,7 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	Interactive_GameBase & m_igb;
+	InteractiveGameBase & m_igb;
 	Widelands::Building & m_building;
 
 	UI::Button m_decrease;
@@ -54,7 +54,7 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl
-	(UI::Panel * parent, Interactive_GameBase & igb,
+	(UI::Panel * parent, InteractiveGameBase & igb,
 	 Widelands::Building & building)
 :
 Box(parent, 0, 0, Horizontal),
@@ -81,21 +81,21 @@ m_value(this, "199", UI::Align_Center)
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
 
-	set_think(true);
+	set_thinks(true);
 }
 
 void SoldierCapacityControl::think()
 {
 	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
-	uint32_t const capacity = soldiers->soldierCapacity();
+	uint32_t const capacity = soldiers->soldier_capacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && soldiers->minSoldierCapacity() < capacity);
-	m_increase.set_enabled(can_act && soldiers->maxSoldierCapacity() > capacity);
+	m_decrease.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
+	m_increase.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)
@@ -114,7 +114,7 @@ void SoldierCapacityControl::click_increase()
 }
 
 UI::Panel * create_soldier_capacity_control
-	(UI::Panel & parent, Interactive_GameBase & igb,
+	(UI::Panel & parent, InteractiveGameBase & igb,
 	 Widelands::Building & building)
 {
 	return new SoldierCapacityControl(&parent, igb, building);

@@ -19,7 +19,6 @@
 
 #include "logic/requirements.h"
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -38,31 +37,31 @@ bool Requirements::check(const MapObject & obj) const
 /**
  * Read this requirement from a file
  */
-void Requirements::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+void Requirements::read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == REQUIREMENTS_VERSION) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("requirements: %s", e.what());
 	}
 }
 
-void Requirements::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void Requirements::write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
-	fw.Unsigned16(REQUIREMENTS_VERSION);
+	fw.unsigned_16(REQUIREMENTS_VERSION);
 
 	if (!m) {
-		fw.Unsigned16(0);
+		fw.unsigned_16(0);
 	} else {
-		fw.Unsigned16(m->storage().id());
+		fw.unsigned_16(m->storage().id());
 		m->write(fw, egbase, mos);
 	}
 }
@@ -86,9 +85,9 @@ uint32_t RequirementsStorage::id() const
 }
 
 Requirements RequirementsStorage::read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const id = fr.Unsigned16();
+	uint32_t const id = fr.unsigned_16();
 
 	if (id == 0)
 		return Requirements();
@@ -97,7 +96,7 @@ Requirements RequirementsStorage::read
 	StorageMap::iterator it = s.find(id);
 
 	if (it == s.end())
-		throw game_data_error("unknown requirement id %u", id);
+		throw GameDataError("unknown requirement id %u", id);
 
 	return it->second->m_reader(fr, egbase, mol);
 }
@@ -126,33 +125,33 @@ bool RequireOr::check(const MapObject & obj) const
 }
 
 void RequireOr::write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
-	fw.Unsigned16(m.size());
+	fw.unsigned_16(m.size());
 
 	for (const Requirements& req : m) {
-		req.Write(fw, egbase, mos);
+		req.write(fw, egbase, mos);
 	}
 }
 
-static Requirements readOr
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+static Requirements read_or
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const count = fr.Unsigned16();
+	uint32_t const count = fr.unsigned_16();
 	RequireOr req;
 
 	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
-		sub.Read(fr, egbase, mol);
+		sub.read(fr, egbase, mol);
 		req.add(sub);
 	}
 
 	return req;
 }
 
-const RequirementsStorage RequireOr::storage(requirementIdOr, readOr);
+const RequirementsStorage RequireOr::storage(requirementIdOr, read_or);
 
 
 void RequireAnd::add(const Requirements & req)
@@ -171,81 +170,81 @@ bool RequireAnd::check(const MapObject & obj) const
 }
 
 void RequireAnd::write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
-	fw.Unsigned16(m.size());
+	fw.unsigned_16(m.size());
 
 	for (const Requirements& req : m) {
-		req.Write(fw, egbase, mos);
+		req.write(fw, egbase, mos);
 	}
 }
 
-static Requirements readAnd
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+static Requirements read_and
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const count = fr.Unsigned16();
+	uint32_t const count = fr.unsigned_16();
 	RequireAnd req;
 
 	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
-		sub.Read(fr, egbase, mol);
+		sub.read(fr, egbase, mol);
 		req.add(sub);
 	}
 
 	return req;
 }
 
-const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
+const RequirementsStorage RequireAnd::storage(requirementIdAnd, read_and);
 
 
 bool RequireAttribute::check(const MapObject & obj) const
 {
 	if (atrTotal != at)
 	{
-		int32_t const value = obj.get_tattribute(at);
+		int32_t const value = obj.get_training_attribute(at);
 
 		return value >= min && value <= max;
 	}
 	else
 	{
 		int32_t value = 0;
-		value += obj.get_tattribute(atrHP);
-		value += obj.get_tattribute(atrAttack);
-		value += obj.get_tattribute(atrDefense);
-		value += obj.get_tattribute(atrEvade);
+		value += obj.get_training_attribute(atrHP);
+		value += obj.get_training_attribute(atrAttack);
+		value += obj.get_training_attribute(atrDefense);
+		value += obj.get_training_attribute(atrEvade);
 		return value >= min && value <= max;
 	}
 }
 
 void RequireAttribute::write
-	(FileWrite & fw, Editor_Game_Base &, MapMapObjectSaver &) const
+	(FileWrite & fw, EditorGameBase &, MapObjectSaver &) const
 {
-	fw.Unsigned32(at);
-	fw.Signed32(min);
-	fw.Signed32(max);
+	fw.unsigned_32(at);
+	fw.signed_32(min);
+	fw.signed_32(max);
 }
 
-static Requirements readAttribute
-	(FileRead & fr, Editor_Game_Base &, MapMapObjectLoader &)
+static Requirements read_attribute
+	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
-	tAttribute const at  = static_cast<tAttribute>(fr.Unsigned32());
+	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.unsigned_32());
 	if
 		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
 		 &&
 		 at != atrTotal)
-		throw game_data_error
+		throw GameDataError
 			(
 			 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
 			 "(%u) or atrTotal (%u) but found unknown attribute value (%u)",
 			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
-	int32_t const min = fr.Signed32();
-	int32_t const max = fr.Signed32();
+	int32_t const min = fr.signed_32();
+	int32_t const max = fr.signed_32();
 
 	return RequireAttribute(at, min, max);
 }
 
 const RequirementsStorage RequireAttribute::
-	storage(requirementIdAttribute, readAttribute);
+	storage(requirementIdAttribute, read_attribute);
 }

@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
 
 namespace UI {
@@ -185,7 +186,7 @@ struct TextBuilder {
 	RichTextImpl & rti;
 
 	/// Current richtext block
-	std::vector<Richtext_Block>::iterator richtext;
+	std::vector<RichtextBlock>::iterator richtext;
 
 	/// Extent of images in the current richtext block
 	/*@{*/
@@ -203,7 +204,7 @@ struct TextBuilder {
 	uint32_t linewidth;
 
 	/// Current text block
-	std::vector<Text_Block>::const_iterator textblock;
+	std::vector<TextBlock>::const_iterator textblock;
 	TextStyle style;
 	uint32_t spacewidth;
 	uint32_t linespacing;
@@ -311,8 +312,8 @@ void RichText::parse(const std::string & rtext)
 {
 	m->clear();
 
-	std::vector<Richtext_Block> blocks;
-	Text_Parser p;
+	std::vector<RichtextBlock> blocks;
+	TextParser p;
 	std::string copy(rtext);
 	p.parse(copy, blocks);
 
@@ -322,7 +323,7 @@ void RichText::parse(const std::string & rtext)
 	TextBuilder text(*m);
 
 	for (text.richtext = blocks.begin(); text.richtext != blocks.end(); ++text.richtext) {
-		const std::vector<Text_Block> & cur_text_blocks = text.richtext->get_text_blocks();
+		const std::vector<TextBlock> & cur_text_blocks = text.richtext->get_text_blocks();
 		const std::vector<std::string> & cur_block_images = text.richtext->get_images();
 
 		// First obtain the data of all images of this richtext block and prepare
@@ -347,7 +348,7 @@ void RichText::parse(const std::string & rtext)
 			bbox.w = image->width();
 			bbox.h = image->height();
 
-			text.images_height = std::max(text.images_height, bbox.h);
+			text.images_height = std::max<int>(text.images_height, bbox.h);
 			text.images_width += bbox.w;
 
 			m->elements.push_back(new ImageElement(bbox, image));

@@ -20,6 +20,8 @@
 #ifndef WL_BASE_TIME_STRING_H
 #define WL_BASE_TIME_STRING_H
 
+#include <string>
+
 #include <stdint.h>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in
@@ -27,9 +29,18 @@
 /// string which might be overwritten by subsequent calls.
 char * timestring();
 
+/// Turn a month number into a short, localized month string,
+/// 0 = "Jan" ... 11 = "Dec"
+std::string localize_month(int8_t month);
+
+/// Get a string representation of the game time as hhh:mm:ss. If Time
+/// represents more than 999 hours, it wraps around. Use this in table columns
+/// for easy sorting.
+char * gamestring_with_leading_zeros(uint32_t gametime);
+
 /// Get a string representation of the game time
-/// as hhh:mm:ss. If Time represents more than
+/// as [hhh:]mm:ss. If Time represents more than
 /// 999 hours, it wraps around
-char * gametimestring(uint32_t gametime);
+std::string gametimestring(uint32_t gametime);
 
 #endif  // end of include guard: WL_BASE_TIME_STRING_H

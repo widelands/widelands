@@ -26,7 +26,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 
 class FileRead;
 class FileWrite;
@@ -34,17 +34,17 @@ class FileWrite;
 namespace Widelands {
 
 class MapObject;
-class Editor_Game_Base;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class EditorGameBase;
+class MapObjectLoader;
+struct MapObjectSaver;
 
 struct RequirementsStorage;
 
 /**
  * Requirements can be attached to Requests.
  *
- * Requirements are matched to a \ref MapObject 's \ref tAttribute as
- * returned by \ref get_tattribute .
+ * Requirements are matched to a \ref MapObject 's \ref TrainingAttribute as
+ * returned by \ref get_training_attribute .
  */
 struct Requirements {
 private:
@@ -53,7 +53,7 @@ private:
 
 		virtual bool check(const MapObject &) const = 0;
 		virtual void write
-			(FileWrite &, Editor_Game_Base &, MapMapObjectSaver &) const
+			(FileWrite &, EditorGameBase &, MapObjectSaver &) const
 			= 0;
 		virtual const RequirementsStorage & storage() const = 0;
 	};
@@ -66,8 +66,8 @@ private:
 
 		void write
 			(FileWrite            & fw,
-			 Editor_Game_Base     & egbase,
-			 MapMapObjectSaver & mos)
+			 EditorGameBase     & egbase,
+			 MapObjectSaver & mos)
 			const override
 		{
 			m.write(fw, egbase, mos);
@@ -89,8 +89,8 @@ public:
 	bool check(const MapObject &) const;
 
 	// For Save/Load Games
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &);
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) const;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &);
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) const;
 
 private:
 	boost::shared_ptr<BaseCapsule> m;
@@ -112,18 +112,18 @@ enum {
  * Factory-like system for requirement loading from files.
  */
 struct RequirementsStorage {
-	typedef
-		Requirements (*Reader)
-			(FileRead &, Editor_Game_Base &, MapMapObjectLoader &);
+	using Reader =
+		Requirements (*)
+			(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 	RequirementsStorage(uint32_t _id, Reader reader);
 	uint32_t id() const;
 
 	static Requirements read
-		(FileRead &, Editor_Game_Base &, MapMapObjectLoader &);
+		(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 private:
-	typedef std::map<uint32_t, RequirementsStorage *> StorageMap;
+	using StorageMap = std::map<uint32_t, RequirementsStorage *>;
 
 	uint32_t m_id;
 	Reader m_reader;
@@ -141,7 +141,7 @@ struct RequireOr {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -159,7 +159,7 @@ struct RequireAnd {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -169,25 +169,25 @@ private:
 
 
 /**
- * Require that a \ref tAttribute lies in the given, inclusive, range.
+ * Require that a \ref TrainingAttribute lies in the given, inclusive, range.
  */
 struct RequireAttribute {
 	RequireAttribute
-		(tAttribute const _at, int32_t const _min, int32_t const _max)
+		(TrainingAttribute const _at, int32_t const _min, int32_t const _max)
 		: at(_at), min(_min), max(_max) {}
 
 	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
-	int32_t getMin() const {return min; }
-	int32_t getMax() const {return max; }
+	int32_t get_min() const {return min; }
+	int32_t get_max() const {return max; }
 
 private:
-	tAttribute at;
+	TrainingAttribute at;
 	int32_t min;
 	int32_t max;
 };

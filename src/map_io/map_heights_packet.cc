@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include "map_io/map_heights_packet.h"
+
+#include "io/fileread.h"
+#include "io/filewrite.h"
+#include "logic/editor_game_base.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/world/world.h"
+
+namespace Widelands {
+
+#define CURRENT_PACKET_VERSION 1
+
+
+void MapHeightsPacket::read
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
+{
+
+	FileRead fr;
+	fr.open(fs, "binary/heights");
+
+	try {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map & map = egbase.map();
+			MapIndex const max_index = map.max_index();
+			for (MapIndex i = 0; i < max_index; ++i)
+				map[i].set_height(fr.unsigned_8());
+		} else
+			throw GameDataError
+				("unknown/unhandled version %u", packet_version);
+	} catch (const WException & e) {
+		throw GameDataError("heights: %s", e.what());
+	}
+}
+
+
+/*
+ * Write Function
+ */
+void MapHeightsPacket::write
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
+
+{
+	FileWrite fw;
+
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
+
+	Map & map = egbase.map();
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i)
+		fw.unsigned_8(map[i].get_height());
+
+	fw.write(fs,  "binary/heights");
+}
+
+}

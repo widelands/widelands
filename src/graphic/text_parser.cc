@@ -24,18 +24,19 @@
 #include <string>
 #include <vector>
 
-#include "base/deprecated.h"
 #include "base/log.h"
+#include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
 #include "helper.h"
 
 namespace UI {
 
-Richtext_Block::Richtext_Block() :
+RichtextBlock::RichtextBlock() :
 	m_image_align(Align_Left),
 	m_text_align (Align_Left)
 {}
 
-Richtext_Block::Richtext_Block(const Richtext_Block & src) {
+RichtextBlock::RichtextBlock(const RichtextBlock & src) {
 	m_images.clear();
 	m_text_blocks.clear();
 	for (uint32_t i = 0; i < src.m_images.size(); ++i)
@@ -46,24 +47,24 @@ Richtext_Block::Richtext_Block(const Richtext_Block & src) {
 	m_text_align = src.m_text_align;
 }
 
-Text_Block::Text_Block() {
+TextBlock::TextBlock() {
 	m_font_size = 10;
 	m_font_color = RGBColor(255, 255, 0);
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = "DejaVuSans.ttf";
+	m_font_face = (UI::g_fh1->fontset()).sans();
 	m_line_spacing = 0;
 }
 
-void Text_Parser::parse
+void TextParser::parse
 	(std::string                 & text,
-	 std::vector<Richtext_Block> & blocks)
+	 std::vector<RichtextBlock> & blocks)
 {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
 	while (more_richtext_blocks) {
-		Richtext_Block new_richtext_block;
+		RichtextBlock new_richtext_block;
 		std::string unparsed_text;
 		std::string richtext_format;
 
@@ -77,13 +78,13 @@ void Text_Parser::parse
 				 std::string("</rt>"));
 		parse_richtexttext_attributes(richtext_format, &new_richtext_block);
 
-		std::vector<Text_Block> text_blocks;
+		std::vector<TextBlock> text_blocks;
 
 		//Second while loop parses all textblocks of current richtext block
 		bool more_text_blocks = true;
 		while (more_text_blocks) {
 			std::string block_format;
-			Text_Block new_block;
+			TextBlock new_block;
 
 			std::vector<std::string> words;
 			std::vector<std::vector<std::string>::size_type> line_breaks;
@@ -102,7 +103,7 @@ void Text_Parser::parse
 	}
 }
 
-bool Text_Parser::parse_textblock
+bool TextParser::parse_textblock
 	(std::string                                      & block,
 	 std::string                                      & block_format,
 	 std::vector<std::string>                         & words,
@@ -144,7 +145,7 @@ bool Text_Parser::parse_textblock
 	return extract_more;
 }
 
-void Text_Parser::split_words(const std::string & in, std::vector<std::string>* plist)
+void TextParser::split_words(const std::string & in, std::vector<std::string>* plist)
 {
 	std::string::size_type pos = 0;
 
@@ -165,7 +166,7 @@ void Text_Parser::split_words(const std::string & in, std::vector<std::string>* 
 	}
 }
 
-bool Text_Parser::extract_format_block
+bool TextParser::extract_format_block
 	(std::string       & block,
 	 std::string       & block_text,
 	 std::string       & block_format,
@@ -212,8 +213,8 @@ bool Text_Parser::extract_format_block
 	return block.find(block_start) != std::string::npos;
 }
 
-void Text_Parser::parse_richtexttext_attributes
-	(std::string format, Richtext_Block * const element)
+void TextParser::parse_richtexttext_attributes
+	(std::string format, RichtextBlock * const element)
 {
 	if (format.empty())
 		return;
@@ -243,8 +244,8 @@ void Text_Parser::parse_richtexttext_attributes
 	}
 }
 
-void Text_Parser::parse_text_attributes
-	(std::string format, Text_Block & element)
+void TextParser::parse_text_attributes
+	(std::string format, TextBlock & element)
 {
 	if (format.empty())
 		return;
@@ -253,9 +254,9 @@ void Text_Parser::parse_text_attributes
 
 	while (format.size()) {
 		std::string::size_type const key_end = format.find('=');
-		if (key_end == std::string::npos)
+		if (key_end == std::string::npos) {
 			return;
-		else {
+		} else {
 			std::string key = format.substr(0, key_end);
 			format.erase(0, key_end + 1);
 			std::string::size_type val_end = format.find(' ');
@@ -265,11 +266,19 @@ void Text_Parser::parse_text_attributes
 			format.erase(0, val_end + 1);
 			if (key == "font-size") {
 				element.set_font_size(atoi(val.c_str()));
-			} else if (key == "font-face")
-				element.set_font_face(val + ".ttf");
-			else if (key == "line-spacing")
+			} else if (key == "font-face") {
+				UI::FontSet fontset = UI::g_fh1->fontset();
+				if (val == fontset.condensed() || val == "condensed") {
+					val = fontset.condensed();
+				} else if (val == fontset.sans() || val == "serif") {
+					val = fontset.serif();
+				} else {
+					val = fontset.sans();
+				}
+				element.set_font_style(val);
+			} else if (key == "line-spacing") {
 				element.set_line_spacing(atoi(val.c_str()));
-			else if (key == "font-color") {
+			} else if (key == "font-color") {
 				std::string::size_type const offset = val[0] == '#';
 				std::string const r = "0x" + val.substr(offset,     2);
 				std::string const g = "0x" + val.substr(offset + 2, 2);
@@ -280,17 +289,18 @@ void Text_Parser::parse_text_attributes
 				long int const green = strtol(g.c_str(), &ptr, 0);
 				long int const blue  = strtol(b.c_str(), &ptr, 0);
 				element.set_font_color(RGBColor(red, green, blue));
-			} else if (key == "font-weight")
+			} else if (key == "font-weight") {
 				element.set_font_weight(val);
-			else if (key == "font-style")
+			} else if (key == "font-style") {
 				element.set_font_style(val);
-			else if (key == "font-decoration")
+			} else if (key == "font-decoration") {
 				element.set_font_decoration(val);
+			}
 		}
 	}
 }
 
-Align Text_Parser::set_align(const std::string & align) {
+Align TextParser::set_align(const std::string & align) {
 	return
 		align == "right"  ? Align_Right   :
 		align == "center" ? Align_HCenter :

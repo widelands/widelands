@@ -30,11 +30,14 @@
 #undef main // No, we do not want SDL_main
 
 #include "base/log.h"
+#include "config.h"
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
 namespace {
@@ -88,6 +91,16 @@ int parse_arguments(
 	return 0;
 }
 
+// Setup the static objects Widelands needs to operate and initializes systems.
+void initialize() {
+	SDL_Init(SDL_INIT_VIDEO);
+
+	g_fs = new LayeredFileSystem();
+	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
+
+	g_gr = new Graphic(1, 1, false);
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -117,19 +130,20 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	initialize();
+
 	StandaloneRenderer standalone_renderer;
 
 	try {
-		std::unique_ptr<SDLSurface> surf(
-		   static_cast<SDLSurface*>(standalone_renderer.renderer()->render(txt, w, allowed_tags)));
+		std::unique_ptr<Texture> texture(
+		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
 
-		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
-		std::unique_ptr<StreamWrite> sw(fs->OpenStreamWrite(outname));
-		if (!save_surface_to_png(surf.get(), sw.get())) {
+		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
+		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
+		if (!save_to_png(texture.get(), sw.get(), ColorType::RGBA)) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}
-	}
-	catch (RT::Exception& e) {
+	} catch (RT::Exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 

@@ -33,7 +33,7 @@
  * X Axis as time (actually Minus Time)
  * and the Y Axis some Data
  */
-struct WUIPlot_Area : public UI::Panel {
+struct WuiPlotArea : public UI::Panel {
 	enum TIME {
 		TIME_15_MINS = 0,
 		TIME_30_MINS,
@@ -52,7 +52,7 @@ struct WUIPlot_Area : public UI::Panel {
 		PLOTMODE_ABSOLUTE
 	};
 
-	WUIPlot_Area
+	WuiPlotArea
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	void draw(RenderTarget &) override;
@@ -115,10 +115,10 @@ private:
  * A discrete slider with plot time steps preconfigured and automatic signal
  * setup.
  */
-struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
-	WUIPlot_Area_Slider
+struct WuiPlotAreaSlider : public UI::DiscreteSlider {
+	WuiPlotAreaSlider
 		(Panel * const parent,
-		 WUIPlot_Area & plot_area,
+		 WuiPlotArea & plot_area,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
@@ -136,14 +136,14 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 	  m_plot_area(plot_area),
 	  m_last_game_time_id(plot_area.get_game_time_id())
 	{
-		changedto.connect(boost::bind(&WUIPlot_Area::set_time_id, &plot_area, _1));
+		changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_area, _1));
 	}
 
 protected:
 	void draw(RenderTarget & dst) override;
 
 private:
-	WUIPlot_Area & m_plot_area;
+	WuiPlotArea & m_plot_area;
 	int32_t m_last_game_time_id;
 };
 
@@ -152,9 +152,9 @@ private:
  * X Axis as time (actually Minus Time)
  * and the Y Axis as the difference between two data vectors
  */
-struct DifferentialPlot_Area : public WUIPlot_Area {
+struct DifferentialPlotArea : public WuiPlotArea {
 public:
-	DifferentialPlot_Area
+	DifferentialPlotArea
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	void draw(RenderTarget &) override;

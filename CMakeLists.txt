@@ -4,27 +4,17 @@ cmake_minimum_required (VERSION 2.8.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
+option(OPTION_USE_GLBINDING "USe glbinding instead of GLEW" OFF)
+
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
 # Define the directory structure for installation - will be hardcoded in WL bin
-# (through config.h).
-if(WIN32 OR APPLE OR WL_PORTABLE)
-  wl_set_if_unset(WL_INSTALL_PREFIX ".")
-  wl_set_if_unset(WL_INSTALL_DATADIR ".")
-  wl_set_if_unset(WL_INSTALL_LOCALEDIR "locale")
-  wl_set_if_unset(WL_INSTALL_BINDIR ".")
-else()
-  wl_set_if_unset(WL_INSTALL_PREFIX "/usr/local")
-  wl_set_if_unset(WL_INSTALL_DATADIR "share/games/widelands")
-  wl_set_if_unset(WL_INSTALL_LOCALEDIR "${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
-  wl_set_if_unset(WL_INSTALL_BINDIR "games")
-endif()
-
-if (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
-  message(FATAL_ERROR "Build directory and install directory must not be the same.")
-endif (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
+# (through config.h). If not specified, we are going to use the directory where
+# the executable is in. Also on Linux.
+# Packagers (or people using make install) have to set this variable to an absolute path.
+wl_set_if_unset(WL_INSTALL_DATADIR ".")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
@@ -51,17 +41,20 @@ find_package(Boost 1.48
 
 find_package (PythonInterp REQUIRED)
 
-find_package(GLEW REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
-find_package(SDL REQUIRED)
-find_package(SDL_gfx REQUIRED)
-find_package(SDL_image REQUIRED)
-find_package(SDL_mixer REQUIRED)
-find_package(SDL_net REQUIRED)
-find_package(SDL_ttf REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_net REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
+if(OPTION_USE_GLBINDING)
+  find_package(glbinding REQUIRED)
+else()
+  find_package(GLEW REQUIRED)
+endif()
 
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
@@ -174,6 +167,7 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 
 
 IF (WIN32)
+  add_definitions(-DMINGW_HAS_SECURE_API)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     message (STATUS "Enabled large address awareness on mingw32")
@@ -193,7 +187,7 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 if (NOT DEFINED WL_VERSION)
   add_custom_target (
     BzrRevision ALL
-    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BzrRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BzrRevision.cmake
   )
 
   # Detect version now
@@ -209,7 +203,7 @@ if (NOT DEFINED WL_VERSION)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
@@ -242,7 +236,7 @@ add_subdirectory(src)
 install(
   DIRECTORY
     campaigns
-    fonts
+    i18n
     global
     tribes
     txts

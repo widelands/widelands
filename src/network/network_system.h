@@ -44,8 +44,8 @@
 
 #define DATATYPE    char
 // microsoft doesn't have these
-typedef uint16_t in_port_t;
-typedef uint32_t in_addr_t;
+using in_port_t = uint16_t;
+using in_addr_t = uint32_t;
 
 #ifndef s_addr
 #define s_addr S_addr

@@ -24,77 +24,108 @@
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 /*
  * Fullscreen Menu for all Campaigns
  */
 
+
 /*
  * UI 1 - Selection of Campaign
  *
  */
-struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_CampaignSelect();
-	void clicked_back();
-	void clicked_ok();
-	void campaign_selected(uint32_t);
-	void double_clicked(uint32_t);
-	void fill_list();
+class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+public:
+	FullscreenMenuCampaignSelect();
+
 	int32_t get_campaign();
 
-private:
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
+protected:
+	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+	bool set_has_selection() override;
 
-	UI::Textarea                             title;
-	UI::Textarea                             label_campname;
-	UI::Textarea                             tacampname;
-	UI::Textarea                             label_difficulty;
-	UI::Multiline_Textarea                   tadifficulty;
-	UI::Textarea                             label_campdescr;
-	UI::Multiline_Textarea                   tacampdescr;
-	UI::Button                               b_ok, back;
-	UI::Listselect<const char *>             m_list;
+
+private:
+	/**
+	 * Data about a campaign that we're interested in.
+	 */
+	struct CampaignListData {
+		uint32_t index;
+		std::string name;
+		std::string tribename;
+		uint32_t difficulty;
+		std::string difficulty_description;
+		std::string description;
+
+		CampaignListData() : index(0), difficulty(0) {}
+	};
+
+	bool compare_difficulty(uint32_t, uint32_t);
+
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_campname;
+	UI::MultilineTextarea         m_ta_campname;
+	UI::Textarea                  m_label_tribename;
+	UI::MultilineTextarea         m_ta_tribename;
+	UI::Textarea                  m_label_difficulty;
+	UI::MultilineTextarea         m_ta_difficulty;
+	UI::Textarea                  m_label_description;
+	UI::MultilineTextarea         m_ta_description;
+
+	std::vector<CampaignListData> m_campaigns_data;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
-	int32_t                                           campaign;
+	int32_t                       campaign;
 };
 /*
  * UI 2 - Selection of a map
  *
  */
-struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_CampaignMapSelect();
-	void clicked_back();
-	void clicked_ok();
-	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
-	void fill_list();
+class FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
+public:
+	FullscreenMenuCampaignMapSelect(bool is_tutorial = false);
+
 	std::string get_map();
 	void set_campaign(uint32_t);
 
+protected:
+	void entry_selected() override;
+	void fill_table() override;
+	bool set_has_selection() override;
+
 private:
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
+	/**
+	 * Data about a campaign scenario that we're interested in.
+	 */
+	struct CampaignScenarioData {
+		uint32_t index;
+		std::string name;
+		std::string path;
 
-	UI::Textarea                            title;
-	UI::Textarea                            label_mapname;
-	UI::Textarea                            tamapname;
-	UI::Textarea                            label_author;
-	UI::Textarea                            taauthor;
-	UI::Textarea                            label_mapdescr;
-	UI::Multiline_Textarea                  tamapdescr;
-	UI::Button                              b_ok, back;
-	UI::Listselect<std::string>             m_list;
-	uint32_t                                campaign;
-	std::string                             campmapfile;
+		CampaignScenarioData() : index(0) {}
+	};
 
+	UI::Textarea                  m_title;
+	UI::MultilineTextarea         m_subtitle;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_author;
+	UI::MultilineTextarea         m_ta_author;
+	UI::Textarea                  m_label_description;
+	UI::MultilineTextarea         m_ta_description;
+
+	uint32_t                      campaign;
+	std::string                   campmapfile;
+
+	std::vector<CampaignScenarioData> m_scenarios_data;
+
+	bool m_is_tutorial;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010, 2012 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,64 +14,100 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
  */
 
 #ifndef WL_GRAPHIC_TEXTURE_H
 #define WL_GRAPHIC_TEXTURE_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
-#include <stdint.h>
+#include "base/rect.h"
+#include "graphic/gl/system_headers.h"
+#include "graphic/surface.h"
 
-#include "graphic/colormap.h"
-#include "graphic/render/gl_surface_texture.h"
+struct SDL_Surface;
 
-/// Textures have a fixed size and are squares.
-/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
-#define TEXTURE_WIDTH 64
-#define TEXTURE_HEIGHT TEXTURE_WIDTH
+class Texture : public Surface, public Image {
+public:
+	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
+	// is created. Ownership is taken.
+	Texture(SDL_Surface * surface, bool intensity = false);
 
-/** struct Texture
-*
-* Texture represents are terrain texture, which is strictly
-* TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and
-* a pointer to the corresponding palette and color lookup table is
-* provided.
-*
-* Currently, this is initialized from a 16 bit bitmap. This should be
-* changed to load 8 bit bitmaps directly.
-*/
-struct Texture {
-	Texture(const std::vector<std::string>& texture_files,
-	        uint32_t frametime,
-	        const SDL_PixelFormat&);
-	~Texture();
+	// Create a new empty (that is randomly filled) Surface with the given
+	// dimensions.
+	Texture(int w, int h);
 
-	const std::string & get_texture_image() const {return m_texture_image;}
+	// Create a logical texture that is a 'subrect' (in Pixel) in
+	// another texture. Ownership of 'texture' is not taken.
+	Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h);
 
-	uint8_t * get_pixels   () const {return m_pixels;}
-	uint8_t * get_curpixels() const {return m_curframe;}
-	void    * get_colormap () const {return m_colormap->get_colormap();}
+	virtual ~Texture();
 
-	RGBColor get_minimap_color(int8_t shade);
+	// Implements Surface
+	int width() const override;
+	int height() const override;
+	void setup_gl() override;
+	void pixel_to_gl(float* x, float* y) const override;
 
-	void animate(uint32_t time);
-	uint32_t getTexture() const
-		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
+	// Implements Image.
+	int get_gl_texture() const override;
+	const FloatRect& texture_coordinates() const override;
+
+	enum UnlockMode {
+		/**
+		 * Update mode will ensure that any changes in the pixel data
+		 * will appear in subsequent operations.
+		 */
+		Unlock_Update = 0,
+
+		/**
+		 * NoChange mode indicates that the caller changed no pixel data.
+		 *
+		 * \note If the caller did change pixel data but specifies NoChange
+		 * mode, the results are undefined.
+		 */
+		Unlock_NoChange
+	};
+
+	/// This returns the pixel format for direct pixel access.
+	const SDL_PixelFormat & format() const;
+
+	// Number of bytes per row.
+	uint16_t get_pitch() const;
+
+	// Pointer to the raw pixel data. May only be called inside lock/unlock
+	// pairs.
+	uint8_t * get_pixels() const;
+
+	// Lock/Unlock pairs must guard any of the direct pixel access using the
+	// functions below. Lock/Unlock pairs cannot be nested.
+	void lock();
+	void unlock(UnlockMode);
+
+	// Returns the color of the pixel as a value as defined by 'format()'.
+	uint32_t get_pixel(uint16_t x, uint16_t y);
+
+	// Sets the pixel to the 'clr'.
+	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
 private:
-	std::unique_ptr<Colormap> m_colormap;
-	uint8_t   * m_pixels;
-	RGBColor    m_minimap_colors[256];
-	uint8_t   * m_curframe;
-	int32_t     m_frame_num;
-	std::string m_texture_image;
-	uint32_t    m_nrframes;
-	uint32_t    m_frametime;
-	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
+	void init(uint16_t w, uint16_t h);
+
+	// Width and height.
+	int m_w, m_h;
+
+	// True if we own the texture, i.e. if we need to delete it.
+	bool m_owns_texture;
+
+	// Texture coordinates in m_texture.
+	FloatRect m_texture_coordinates;
+
+	GLuint m_texture;
+
+	/// Pixel data, while the texture is locked
+	std::unique_ptr<uint8_t[]> m_pixels;
+
+	DISALLOW_COPY_AND_ASSIGN(Texture);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

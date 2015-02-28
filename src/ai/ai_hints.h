@@ -21,6 +21,7 @@
 #define WL_AI_AI_HINTS_H
 
 #include <stdint.h>
+#include <string>
 
 #include "base/macros.h"
 
@@ -31,26 +32,21 @@ class Section;
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(Section*);
-	~BuildingHints();
 
-	char const* get_renews_map_resource() const {
-		return renews_map_resource;
+	bool renews_map_resource() const {
+		return !renews_map_resource_.empty();
+	}
+
+	std::string get_renews_map_resource() const {
+		return renews_map_resource_;
+	}
+
+	bool has_mines() const {
+		return !mines_.empty();
 	}
 
 	char const* get_mines() const {
-		return mines_;
-	}
-
-	bool is_basic() const {
-		return basic_;
-	}
-
-	bool is_food_basic() const {
-		return food_basic_;
-	}
-
-	bool prod_build_material() const {
-		return build_material_;
+		return mines_.c_str();
 	}
 
 	bool is_logproducer() const {
@@ -59,10 +55,6 @@ struct BuildingHints {
 
 	bool is_stoneproducer() const {
 		return stone_producer_;
-	}
-
-	bool is_marbleproducer() const {
-		return marble_producer_;
 	}
 
 	bool mines_water() const {
@@ -90,19 +82,23 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	int32_t get_prohibited_till() const {
+		return prohibited_till_;
+	}
+
+	int32_t get_forced_after() const {
+		return forced_after_;
+	}
+
 	uint8_t get_mines_percent() const {
 		return mines_percent_;
 	}
 
 private:
-	char* renews_map_resource;
-	char* mines_;
-	bool basic_;
-	bool food_basic_;
-	bool build_material_;  // whether the building produces build material
+	std::string renews_map_resource_;
+	std::string mines_;
 	bool log_producer_;
 	bool stone_producer_;
-	bool marble_producer_;
 	bool needs_water_;
 	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers
@@ -110,6 +106,8 @@ private:
 	bool expansion_;
 	bool fighting_;
 	bool mountain_conqueror_;
+	int32_t prohibited_till_;
+	int32_t forced_after_;
 	uint8_t mines_percent_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);

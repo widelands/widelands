@@ -41,7 +41,7 @@ const RoadDescr& Road::descr() const {
 	return g_road_descr;
 }
 
-bool Road::IsRoadDescr(MapObjectDescr const * const descr)
+bool Road::is_road_descr(MapObjectDescr const * const descr)
 {
 	return descr == &g_road_descr;
 }
@@ -89,7 +89,7 @@ Road::~Road()
  * Create a road between the given flags, using the given path.
 */
 Road & Road::create
-	(Editor_Game_Base & egbase,
+	(EditorGameBase & egbase,
 	 Flag & start, Flag & end, const Path & path)
 {
 	assert(start.get_position() == path.get_start());
@@ -99,7 +99,7 @@ Road & Road::create
 	Player & owner          = start.owner();
 	Road & road             = *new Road();
 	road.set_owner(&owner);
-	road.m_type             = Road_Normal;
+	road.m_type             = RoadType::kNormal;
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
@@ -121,14 +121,14 @@ bool Road::get_passable() const
 }
 
 BaseImmovable::PositionList Road::get_positions
-	(const Editor_Game_Base & egbase) const
+	(const EditorGameBase & egbase) const
 {
 	Map & map = egbase.map();
 	Coords curf = map.get_fcoords(m_path.get_start());
 
 	PositionList rv;
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			rv.push_back(curf);
@@ -156,7 +156,7 @@ int32_t Road::get_cost(FlagId fromflag)
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
 */
-void Road::_set_path(Editor_Game_Base & egbase, const Path & path)
+void Road::_set_path(EditorGameBase & egbase, const Path & path)
 {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_flags[FlagStart]->get_position());
@@ -172,13 +172,13 @@ void Road::_set_path(Editor_Game_Base & egbase, const Path & path)
 /**
  * Add road markings to the map
 */
-void Road::_mark_map(Editor_Game_Base & egbase)
+void Road::_mark_map(EditorGameBase & egbase)
 {
 	Map & map = egbase.map();
 	FCoords curf = map.get_fcoords(m_path.get_start());
 
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(egbase, curf);
@@ -208,12 +208,12 @@ void Road::_mark_map(Editor_Game_Base & egbase)
 /**
  * Remove road markings from the map
 */
-void Road::_unmark_map(Editor_Game_Base & egbase) {
+void Road::_unmark_map(EditorGameBase & egbase) {
 	Map & map = egbase.map();
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps < nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(egbase, curf);
@@ -224,7 +224,7 @@ void Road::_unmark_map(Editor_Game_Base & egbase) {
 			Direction const rdir = 2 * (dir - WALK_E);
 
 			if (rdir <= 4)
-				egbase.set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, RoadType::kNone);
 		}
 
 		// mark the road that leads away from this field
@@ -233,7 +233,7 @@ void Road::_unmark_map(Editor_Game_Base & egbase) {
 			Direction const rdir = 2 * (dir - WALK_E);
 
 			if (rdir <= 4)
-				egbase.set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, RoadType::kNone);
 
 			map.get_neighbour(curf, dir, &curf);
 		}
@@ -243,7 +243,7 @@ void Road::_unmark_map(Editor_Game_Base & egbase) {
 /**
  * Initialize the road.
 */
-void Road::init(Editor_Game_Base & egbase)
+void Road::init(EditorGameBase & egbase)
 {
 	PlayerImmovable::init(egbase);
 
@@ -258,7 +258,7 @@ void Road::init(Editor_Game_Base & egbase)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::_link_into_flags(Editor_Game_Base & egbase) {
+void Road::_link_into_flags(EditorGameBase & egbase) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -293,7 +293,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			} else if
 				(!slot.carrier_request &&
 				 (slot.carrier_type == 1 ||
-				  m_type == Road_Busy)) {
+				  m_type == RoadType::kBusy)) {
 				_request_carrier(slot);
 			}
 		}
@@ -303,7 +303,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 /**
  * Cleanup the road
 */
-void Road::cleanup(Editor_Game_Base & egbase)
+void Road::cleanup(EditorGameBase & egbase)
 {
 
 	for (CarrierSlot& slot : m_carrier_slots) {
@@ -376,17 +376,17 @@ void Road::_request_carrier(CarrierSlot & slot)
 void Road::_request_carrier_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
 	assert(w);
 
-	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
+	Road& road = dynamic_cast<Road&>(target);
 
 	for (CarrierSlot& slot : road.m_carrier_slots) {
 		if (slot.carrier_request == &rq) {
-			Carrier & carrier = ref_cast<Carrier, Worker> (*w);
+			Carrier & carrier = dynamic_cast<Carrier&> (*w);
 			slot.carrier_request = nullptr;
 			slot.carrier = &carrier;
 
@@ -412,7 +412,7 @@ void Road::_request_carrier_callback
 */
 void Road::remove_worker(Worker & w)
 {
-	Editor_Game_Base & egbase = owner().egbase();
+	EditorGameBase & egbase = owner().egbase();
 
 	for (CarrierSlot& slot : m_carrier_slots) {
 		Carrier const * carrier = slot.carrier.get(egbase);
@@ -462,7 +462,7 @@ void Road::presplit(Game & game, Coords) {_unmark_map(game);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
-// TODO(SirVer): This need to take an Editor_Game_Base as well.
+// TODO(SirVer): This needs to take an EditorGameBase as well.
 void Road::postsplit(Game & game, Flag & flag)
 {
 	Flag & oldend = *m_flags[FlagEnd];
@@ -480,7 +480,7 @@ void Road::postsplit(Game & game, Flag & flag)
 	assert(static_cast<uint32_t>(index) < path.get_nsteps() - 1);
 
 	path.truncate(index);
-	secondpath.starttrim(index);
+	secondpath.trim_start(index);
 
 	molog("splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
@@ -584,7 +584,7 @@ void Road::postsplit(Game & game, Flag & flag)
 			(!slot.carrier.get(game) &&
 			 !slot.carrier_request &&
 			 (slot.carrier_type == 1 ||
-			  m_type == Road_Busy)) {
+			  m_type == RoadType::kBusy)) {
 			_request_carrier(slot);
 		}
 	}
@@ -632,7 +632,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 								// ie: cancelling current task
 								m_carrier_slots[1].carrier = nullptr;
 								m_carrier_slots[1].carrier_request = nullptr;
-								m_type = Road_Normal;
+								m_type = RoadType::kNormal;
 								_mark_map(game);
 							}
 						}
@@ -648,7 +648,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	if (100 < tdelta) {
 		m_busyness_last_update = gametime;
 		if (500 < (m_busyness += 10)) {
-			m_type = Road_Busy;
+			m_type = RoadType::kBusy;
 			_mark_map(game);
 			for (CarrierSlot& slot : m_carrier_slots) {
 				if
@@ -663,7 +663,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	return false;
 }
 
-void Road::log_general_info(const Editor_Game_Base & egbase)
+void Road::log_general_info(const EditorGameBase & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 	molog("m_busyness: %i\n", m_busyness);

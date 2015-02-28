@@ -51,58 +51,58 @@ void ReplayGameController::think() {
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime = frametime * realSpeed() / 1000;
+	frametime = frametime * real_speed() / 1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
 	if (m_replayreader) {
 		while
 			(Widelands::Command * const cmd =
-				m_replayreader->GetNextCommand(m_time))
+				m_replayreader->get_next_command(m_time))
 			m_game.enqueue_command(cmd);
 
-		if (m_replayreader->EndOfReplay()) {
+		if (m_replayreader->end_of_replay()) {
 			m_replayreader.reset(nullptr);
 			m_game.enqueue_command
-				(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
+				(new CmdReplayEnd(m_time = m_game.get_gametime()));
 		}
 	}
 }
 
-void ReplayGameController::sendPlayerCommand(Widelands::PlayerCommand &) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand &) {
 	throw wexception("Trying to send a player command during replay");
 }
 
-int32_t ReplayGameController::getFrametime() {
+int32_t ReplayGameController::get_frametime() {
 	return m_time - m_game.get_gametime();
 }
 
-std::string ReplayGameController::getGameDescription() {
-	return "replay";
+GameController::GameType ReplayGameController::get_game_type() {
+	return GameController::GameType::REPLAY;
 }
 
-uint32_t ReplayGameController::realSpeed() {
+uint32_t ReplayGameController::real_speed() {
 	return m_paused ? 0 : m_speed;
 }
 
-uint32_t ReplayGameController::desiredSpeed() {
+uint32_t ReplayGameController::desired_speed() {
 	return m_speed;
 }
 
-void ReplayGameController::setDesiredSpeed(uint32_t const speed) {
+void ReplayGameController::set_desired_speed(uint32_t const speed) {
 	m_speed = speed;
 }
 
-bool ReplayGameController::isPaused() {
+bool ReplayGameController::is_paused() {
 	return m_paused;
 }
 
-void ReplayGameController::setPaused(bool const paused) {
+void ReplayGameController::set_paused(bool const paused) {
 	m_paused = paused;
 }
 
-void ReplayGameController::Cmd_ReplayEnd::execute (Widelands::Game & game) {
-	game.gameController()->setDesiredSpeed(0);
+void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
+	game.game_controller()->set_desired_speed(0);
 	UI::WLMessageBox mmb
 		(game.get_ibase(),
 		 _("End of replay"),
@@ -113,6 +113,6 @@ void ReplayGameController::Cmd_ReplayEnd::execute (Widelands::Game & game) {
 	mmb.run();
 }
 
-uint8_t ReplayGameController::Cmd_ReplayEnd::id() const {
+uint8_t ReplayGameController::CmdReplayEnd::id() const {
 	return QUEUE_CMD_REPLAYEND;
 }

@@ -35,7 +35,7 @@ namespace Widelands {
 class Map;
 struct Route;
 struct Transfer;
-struct Tribe_Descr;
+class TribeDescr;
 
 
 /**
@@ -53,17 +53,17 @@ class Bob;
 // Description for the Bob class.
 class BobDescr : public MapObjectDescr {
 public:
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	BobDescr(MapObjectType type,
 	         const std::string& init_name,
 	         const std::string& init_descname,
-	         Tribe_Descr const* tribe);
+	         TribeDescr const* tribe);
 	~BobDescr() override {}
 
-	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
+	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
-	Tribe_Descr const* get_owner_tribe() const {
+	TribeDescr const* get_owner_tribe() const {
 		return owner_tribe_;
 	}
 
@@ -76,7 +76,7 @@ protected:
 	virtual Bob& create_object() const = 0;
 
 private:
-	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
+	const TribeDescr* const owner_tribe_;  //  nullptr if world bob
 	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 
@@ -153,12 +153,12 @@ private:
 class Bob : public MapObject {
 public:
 	friend class Map;
-	friend struct Map_Bobdata_Data_Packet;
-	friend struct Map_Bob_Data_Packet;
+	friend struct MapBobdataPacket;
+	friend struct MapBobPacket;
 
 	struct State;
-	typedef void (Bob::*Ptr)(Game &, State &);
-	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
+	using Ptr = void (Bob::*)(Game &, State &);
+	using PtrSignal = void (Bob::*)(Game &, State &, const std::string &);
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
@@ -202,7 +202,7 @@ public:
 			ivar1   (0),
 			ivar2   (0),
 			ivar3   (0),
-			coords  (Coords::Null()),
+			coords  (Coords::null()),
 			path    (nullptr),
 			route   (nullptr),
 			program (nullptr)
@@ -212,7 +212,7 @@ public:
 		int32_t                ivar1;
 		int32_t                ivar2;
 		union                  {int32_t ivar3; uint32_t ui32var3;};
-		Object_Ptr             objvar1;
+		ObjectPointer             objvar1;
 		std::string            svar1;
 
 		Coords                 coords;
@@ -227,16 +227,16 @@ public:
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
-	Point calc_drawpos(const Editor_Game_Base &, Point) const;
+	Point calc_drawpos(const EditorGameBase &, Point) const;
 	void set_owner(Player *);
 	Player * get_owner() const {return m_owner;}
-	void set_position(Editor_Game_Base &, const Coords &);
+	void set_position(EditorGameBase &, const Coords &);
 	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const {return m_linknext;}
 
@@ -245,13 +245,13 @@ public:
 	/// \param commit indicates whether this function is called from the
 	///    \ref start_walk function, i.e. whether the bob will actually move
 	///    onto the \p to node if this function allows it to.
-	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
+	virtual bool check_node_blocked(Game &, const FCoords &, bool commit);
 
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
+		(const EditorGameBase &, RenderTarget &, const Point&) const;
 
 	// For debug
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -308,7 +308,7 @@ public:
 	virtual void init_auto_task(Game &) {}
 
 	// low level animation and walking handling
-	void set_animation(Editor_Game_Base &, uint32_t anim);
+	void set_animation(EditorGameBase &, uint32_t anim);
 
 	/// \return true if we're currently walking
 	bool is_walking() {return m_walking != IDLE;}
@@ -405,7 +405,7 @@ protected:
 public:
 	bool has_new_save_support() override {return true;}
 
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 

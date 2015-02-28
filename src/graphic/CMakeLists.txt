@@ -1,19 +1,35 @@
 add_subdirectory(text)
 
+# TODO(sirver): Separate this directory into a base directory and one
+# that is Widelands aware (can include logic stuff).
+
 wl_library(graphic_color
   SRCS
     color.h
     color.cc
-  USES_SDL
+  USES_SDL2
 )
+
+wl_library(graphic_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+    text_constants.h
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_color
+    graphic_text
+)
+
 
 wl_library(graphic_image_io
   SRCS
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL
-  USES_SDL_IMAGE
+  USES_SDL2
+  USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
     graphic_surface
@@ -22,13 +38,11 @@ wl_library(graphic_image_io
     io_stream
 )
 
-wl_library(graphic_image
+wl_library(graphic_image_cache
   SRCS
-    image.h
     image_cache.cc
     image_cache.h
-  USES_SDL
-  USES_SDL_IMAGE
+  USES_SDL2
   DEPENDS
     base_log
     base_macros
@@ -36,34 +50,105 @@ wl_library(graphic_image
     graphic_surface
 )
 
+wl_library(graphic_sdl_utils
+  SRCS
+    sdl_utils.h
+    sdl_utils.cc
+  USES_SDL2
+)
+
+wl_library(graphic_gl_utils
+  SRCS
+    gl/system_headers.h
+    gl/utils.cc
+    gl/utils.h
+  USES_SDL2
+  USES_OPENGL
+  DEPENDS
+    base_exceptions
+    base_log
+    base_macros
+)
+
 wl_library(graphic_surface
   SRCS
-    compositemode.h
-    render/gl_surface.cc
-    render/gl_surface.h
-    render/gl_surface_screen.cc
-    render/gl_surface_screen.h
-    render/gl_surface_texture.cc
-    render/gl_surface_texture.h
-    render/gl_utils.cc
-    render/gl_utils.h
-    render/sdl_helper.cc
-    render/sdl_helper.h
-    render/sdl_surface.cc
-    render/sdl_surface.h
+    blend_mode.h
+    gl/blit_program.cc
+    gl/blit_program.h
+    gl/draw_line_program.cc
+    gl/draw_line_program.h
+    gl/fill_rect_program.cc
+    gl/fill_rect_program.h
+    image.h
+    screen.cc
+    screen.h
     surface.cc
     surface.h
-    surface_cache.cc
-    surface_cache.h
+    texture.cc
+    texture.h
+    texture_cache.cc
+    texture_cache.h
   USES_OPENGL
-  USES_SDL
+  USES_SDL2
   DEPENDS
-    base_macros
     base_exceptions
     base_geometry
     base_log
+    base_macros
     graphic
     graphic_color
+    graphic_gl_utils
+    graphic_sdl_utils
+)
+
+wl_library(graphic_texture_atlas
+  SRCS
+    texture_atlas.h
+    texture_atlas.cc
+  DEPENDS
+    base_exceptions
+    base_macros
+    graphic_surface
+)
+
+wl_library(graphic_game_renderer
+  SRCS
+    game_renderer.cc
+    game_renderer.h
+    gl/dither_program.cc
+    gl/dither_program.h
+    gl/fields_to_draw.h
+    gl/road_program.cc
+    gl/road_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_gl_utils
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
+)
+
+wl_library(graphic_minimap_renderer
+  SRCS
+    minimap_renderer.cc
+    minimap_renderer.h
+  DEPENDS
+    base_geometry
+    base_macros
+    economy
+    graphic
+    graphic_surface
+    logic
+    wui_mapview_pixelfunctions
 )
 
 wl_library(graphic
@@ -72,8 +157,6 @@ wl_library(graphic
     align.h
     animation.cc
     animation.h
-    colormap.cc
-    colormap.h
     default_resolution.h
     diranimations.h
     font.cc
@@ -84,60 +167,39 @@ wl_library(graphic
     font_handler1.h
     graphic.cc
     graphic.h
-    image_transformations.cc
-    image_transformations.h
-    in_memory_image.cc
-    in_memory_image.h
-    render/gamerenderer.cc
-    render/gamerenderer.h
-    render/gamerenderer_gl.cc
-    render/gamerenderer_gl.h
-    render/gamerenderer_sdl.cc
-    render/gamerenderer_sdl.h
-    render/minimaprenderer.cc
-    render/minimaprenderer.h
-    render/terrain_sdl.cc
-    render/terrain_sdl.h
-    render/vertex.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
     richtext.h
     text_parser.cc
     text_parser.h
-    texture.cc
-    texture.h
     wordwrap.cc
     wordwrap.h
   USES_OPENGL
-  USES_SDL
-  USES_SDL_GFX
-  USES_SDL_IMAGE
-  USES_SDL_TTF
+  USES_SDL2
+  USES_SDL2_TTF
   DEPENDS
-    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
     base_log
     base_macros
     build_info
-    economy
     graphic_color
-    graphic_image
+    graphic_gl_utils
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text
+    graphic_text_layout
     helper
     io_fileread
     io_filesystem
     io_stream
     logic
+    notifications
     profile
-    random
-    scripting
+    scripting_lua_table
     sound
-    ui_basic
-    wui
-    wui_text_layout
+    wui_overlay_manager
 )

@@ -6,18 +6,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-07-27 17:12+0000\n"
-"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2014-11-11 18:23+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:47+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
-"Language: ru_RU\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:38+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
+"Language: ru\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -25,15 +25,15 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Ваша казарма атакована."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "Враг победил ваших солдат в казарме."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Ваши солдаты в казарме победили врага."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
@@ -274,22 +274,22 @@ msgid ""
 msgstr ""
 "Топор - базовое оружие всех варваров. Все молодые солдаты экипируются им."
 
-#: ../../tribes/barbarians/axfactory/conf:33
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/axfactory/conf:32
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "forging an ax"
 msgstr ""
 
-#: ../../tribes/barbarians/axfactory/conf:35
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/axfactory/conf:34
+#: ../../tribes/barbarians/warmill/conf:38
 msgid "forging a sharp ax"
 msgstr ""
 
-#: ../../tribes/barbarians/axfactory/conf:37
-#: ../../tribes/barbarians/warmill/conf:41
+#: ../../tribes/barbarians/axfactory/conf:36
+#: ../../tribes/barbarians/warmill/conf:40
 msgid "forging a broad ax"
 msgstr ""
 
-#: ../../tribes/barbarians/axfactory/conf:39
+#: ../../tribes/barbarians/axfactory/conf:38
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
@@ -302,10 +302,10 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:19
-#: ../../tribes/barbarians/reed_yard/conf:24
-#: ../../tribes/barbarians/shipyard/conf:30
+#: ../../tribes/barbarians/reed_yard/conf:25
+#: ../../tribes/barbarians/shipyard/conf:29
 #: ../../tribes/barbarians/smelting_works/conf:34
-#: ../../tribes/barbarians/warmill/conf:49
+#: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
 msgid "working"
 msgstr ""
@@ -488,7 +488,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:34
-#: ../../tribes/barbarians/trainingcamp/conf:44
+#: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "sleeping"
 msgstr ""
 
@@ -522,10 +522,13 @@ msgstr ""
 "невредимым."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
-"level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
+"Солдаты варваров не могут тренировать навык защиты - он будет оставаться на "
+"начальном уровне."
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
@@ -566,7 +569,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
-#: ../../tribes/barbarians/tavern/conf:30
+#: ../../tribes/barbarians/tavern/conf:29
 msgid "preparing a ration"
 msgstr ""
 
@@ -662,7 +665,7 @@ msgstr "Переносит товары по дорогам."
 msgid "Breeds the strong oxen that help with transporting wares."
 msgstr "Разводит сильных волов, которы помогают перевозить товары."
 
-#: ../../tribes/barbarians/cattlefarm/conf:26
+#: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
 msgstr ""
 
@@ -702,7 +705,7 @@ msgid ""
 "buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:25
+#: ../../tribes/barbarians/coalmine/conf:26
 #: ../../tribes/barbarians/deep_coalmine/conf:28
 #: ../../tribes/barbarians/deep_goldmine/conf:28
 #: ../../tribes/barbarians/deep_oremine/conf:28
@@ -710,18 +713,18 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/conf:27
 #: ../../tribes/barbarians/deeper_oremine/conf:27
 #: ../../tribes/barbarians/goldmine/conf:26
-#: ../../tribes/barbarians/granitemine/conf:23
+#: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:36
+#: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
 #: ../../tribes/barbarians/deeper_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:37
+#: ../../tribes/barbarians/coalmine/conf:38
 #: ../../tribes/barbarians/deep_coalmine/conf:43
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1536,12 +1539,12 @@ msgstr ""
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:43
-#: ../../tribes/barbarians/reed_yard/conf:40
+#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1687,11 +1690,11 @@ msgstr ""
 "Золотая руда добывается в золотой шахте, переплавляется в золото в литейной "
 "и затем используется в стоительных работах и производстве оружия и доспехов."
 
-#: ../../tribes/barbarians/granitemine/conf:34
+#: ../../tribes/barbarians/granitemine/conf:35
 msgid "Main Granite Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/granitemine/conf:35
+#: ../../tribes/barbarians/granitemine/conf:36
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
@@ -1946,14 +1949,14 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid ""
-"\"Take 200 hits to fell a tree and you're a baby. Take 100 and you're a "
-"soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
-"lumberjack.\""
+msgid "Krumta, carpenter of Chat’Karuth"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid "Krumta, carpenter of Chat'Karuth"
+msgid ""
+"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
+"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
+"lumberjack.’"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
@@ -1961,7 +1964,7 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Валит деревья поблизости и обрабатывает их в брёвна."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack's hut needs trees to fell within the working radius."
+msgid "The lumberjack’s hut needs trees to fell within the working radius."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
@@ -2201,15 +2204,15 @@ msgstr ""
 "Камни - основной строительный материал варваров. Они добываются в "
 "каменоломнях и гранитных шахтах."
 
-#: ../../tribes/barbarians/reed_yard/conf:20
+#: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:22
+#: ../../tribes/barbarians/reed_yard/conf:23
 msgid "harvesting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:41
+#: ../../tribes/barbarians/reed_yard/conf:42
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
@@ -2247,7 +2250,7 @@ msgstr ""
 "Разведчики, такие как разведчик Скотти, разведывательно разведывают "
 "неразведанные земли."
 
-#: ../../tribes/barbarians/scouts_hut/conf:22
+#: ../../tribes/barbarians/scouts_hut/conf:21
 msgid "scouting"
 msgstr ""
 
@@ -2301,7 +2304,7 @@ msgstr "Годный для плавания корабль"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Работает на верфи и строит новые суда."
 
-#: ../../tribes/barbarians/shipyard/conf:28
+#: ../../tribes/barbarians/shipyard/conf:27
 msgid "constructing a ship"
 msgstr ""
 
@@ -2369,35 +2372,35 @@ msgstr "Трострик выращивается в оранжерее и ис�
 msgid "Trains the soldiers."
 msgstr "Обучает солдат."
 
-#: ../../tribes/barbarians/trainingcamp/conf:46
+#: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:48
+#: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:50
+#: ../../tribes/barbarians/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:52
+#: ../../tribes/barbarians/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:54
+#: ../../tribes/barbarians/trainingcamp/conf:57
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:56
+#: ../../tribes/barbarians/trainingcamp/conf:59
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:58
+#: ../../tribes/barbarians/trainingcamp/conf:61
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:60
+#: ../../tribes/barbarians/trainingcamp/conf:63
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
 
@@ -2416,14 +2419,6 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
-"initial level."
-msgstr ""
-"Солдаты варваров не могут тренировать навык защиты - он будет оставаться на "
-"начальном уровне."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
@@ -2453,15 +2448,15 @@ msgstr ""
 "мастерской и используется в тренировочном лагере - в совокупности с едой - "
 "чтобы увеличить здоровье войнов с 1 до 2."
 
-#: ../../tribes/barbarians/warmill/conf:43
+#: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:45
+#: ../../tribes/barbarians/warmill/conf:44
 msgid "forging a battle ax"
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:47
+#: ../../tribes/barbarians/warmill/conf:46
 msgid "forging a warrior’s ax"
 msgstr ""
 

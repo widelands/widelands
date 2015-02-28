@@ -67,7 +67,7 @@ GameChatMenu* GameChatMenu::create_script_console(
 
 void GameChatMenu::enter_chat_message(bool close_on_send)
 {
-	m_chat.focusEdit();
+	m_chat.focus_edit();
 	m_close_on_send = close_on_send;
 }
 

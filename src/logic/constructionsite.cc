@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
@@ -38,14 +39,13 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 
 ConstructionSiteDescr::ConstructionSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const TribeDescr & _tribe)
 	:
 	BuildingDescr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -75,7 +75,7 @@ IMPLEMENTATION
 
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
-Partially_Finished_Building (cs_descr),
+PartiallyFinishedBuilding (cs_descr),
 m_fetchfromflag     (0),
 m_builder_idle      (false)
 {}
@@ -93,7 +93,7 @@ void ConstructionSite::update_statistics_string(std::string* s)
 Access to the wares queues by id
 =======
 */
-WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
+WaresQueue & ConstructionSite::waresqueue(WareIndex const wi) {
 	for (WaresQueue * ware : m_wares) {
 		if (ware->get_ware() == wi) {
 			return *ware;
@@ -111,7 +111,7 @@ Set the type of building we're going to build
 ===============
 */
 void ConstructionSite::set_building(const BuildingDescr & building_descr) {
-	Partially_Finished_Building::set_building(building_descr);
+	PartiallyFinishedBuilding::set_building(building_descr);
 
 	m_info.becomes = &building_descr;
 }
@@ -121,14 +121,14 @@ void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(Editor_Game_Base & egbase)
+void ConstructionSite::init(EditorGameBase & egbase)
 {
-	Partially_Finished_Building::init(egbase);
+	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<Ware_Index, uint8_t> * buildcost;
+	const std::map<WareIndex, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
 		// Enhancement
-		Building_Index was_index = m_old_buildings.back();
+		BuildingIndex was_index = m_old_buildings.back();
 		const BuildingDescr* was_descr = descr().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
@@ -141,7 +141,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost->begin();
+	std::map<WareIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
@@ -161,26 +161,26 @@ Release worker and material (if any is left).
 If construction was finished successfully, place the building at our position.
 ===============
 */
-void ConstructionSite::cleanup(Editor_Game_Base & egbase)
+void ConstructionSite::cleanup(EditorGameBase & egbase)
 {
-	Partially_Finished_Building::cleanup(egbase);
+	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		Building_Index becomes_idx = descr().tribe().building_index(m_building->name());
+		BuildingIndex becomes_idx = descr().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
-			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
 		if (m_optionswindow) {
 			Point window_position = m_optionswindow->get_pos();
 			hide_options();
-			Interactive_GameBase & igbase =
-				ref_cast<Interactive_GameBase, Interactive_Base>(*egbase.get_ibase());
+			InteractiveGameBase & igbase =
+				dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
 		}
 	}
@@ -315,7 +315,7 @@ Called by WaresQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-	(Game & game, WaresQueue *, Ware_Index, void * const data)
+	(Game & game, WaresQueue *, WareIndex, void * const data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
@@ -331,7 +331,7 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
+	(const EditorGameBase & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
@@ -361,10 +361,10 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (MapObjectDescr::Animation_Nonexistent&) {
+	} catch (MapObjectDescr::AnimationNonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
-		} catch (MapObjectDescr::Animation_Nonexistent) {
+		} catch (MapObjectDescr::AnimationNonexistent) {
 			anim_idx = building().get_animation("idle");
 		}
 	}
@@ -387,14 +387,14 @@ void ConstructionSite::draw
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
-		Building_Index prev_idx = m_old_buildings.back();
+		BuildingIndex prev_idx = m_old_buildings.back();
 		const BuildingDescr* prev_building = descr().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t prev_building_anim_idx;
 		try {
 			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (MapObjectDescr::Animation_Nonexistent &) {
+		} catch (MapObjectDescr::AnimationNonexistent &) {
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);

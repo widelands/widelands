@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-07-12 11:34+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2014-10-31 13:06+0000\n"
+"Last-Translator: Tinker <room101@rhima.info>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:55+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: \n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
-msgstr ""
+msgstr "Badger"
 
 #: ../../world/critters/brownbear/init.lua:14
 msgid "Brown bear"
-msgstr ""
+msgstr "Brown bear"
 
 #: ../../world/critters/bunny/init.lua:13
 msgid "Bunny"
@@ -44,7 +44,7 @@ msgstr "Duck"
 
 #: ../../world/critters/elk/init.lua:14
 msgid "Elk"
-msgstr ""
+msgstr "Elk"
 
 #: ../../world/critters/fox/init.lua:14
 msgid "Fox"
@@ -52,7 +52,7 @@ msgstr "Fox"
 
 #: ../../world/critters/lynx/init.lua:14
 msgid "Lynx"
-msgstr ""
+msgstr "Lynx"
 
 #: ../../world/critters/marten/init.lua:14
 msgid "Marten"
@@ -68,11 +68,11 @@ msgstr "Sheep"
 
 #: ../../world/critters/stag/init.lua:14
 msgid "Stag"
-msgstr ""
+msgstr "Stag"
 
 #: ../../world/critters/wildboar/init.lua:14
 msgid "Wild boar"
-msgstr ""
+msgstr "Wild boar"
 
 #: ../../world/critters/wisent/init.lua:14
 msgid "Wisent"
@@ -80,7 +80,7 @@ msgstr "Wisent"
 
 #: ../../world/critters/wolf/init.lua:14
 msgid "Wolf"
-msgstr ""
+msgstr "Wolf"
 
 #: ../../world/immovables/bush1/init.lua:5
 #: ../../world/immovables/bush2/init.lua:5
@@ -113,13 +113,13 @@ msgstr "Grass"
 #: ../../world/immovables/ruin4/init.lua:5
 #: ../../world/immovables/ruin5/init.lua:5
 msgid "Ruin"
-msgstr ""
+msgstr "Ruin"
 
 #: ../../world/immovables/manmade/debris00/init.lua:5
 #: ../../world/immovables/manmade/debris01/init.lua:5
 #: ../../world/immovables/manmade/debris02/init.lua:5
 msgid "Debris"
-msgstr ""
+msgstr "Debris"
 
 #: ../../world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
@@ -147,7 +147,7 @@ msgstr "Skeleton"
 #: ../../world/immovables/skeleton2/init.lua:5
 #: ../../world/immovables/skeleton4/init.lua:5
 msgid "Seashell"
-msgstr ""
+msgstr "Seashell"
 
 #: ../../world/immovables/standing_stones/standing_stone1_desert/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone1_summer/init.lua:5
@@ -172,138 +172,138 @@ msgstr ""
 #: ../../world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone7/init.lua:5
 msgid "Standing Stone"
-msgstr ""
+msgstr "Standing Stone"
 
 #: ../../world/immovables/stones/blackland_stones1/init.lua:12
 #: ../../world/immovables/stones/desert_stones1/init.lua:12
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
 msgid "Stones 1"
-msgstr ""
+msgstr "Stones"
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
 #: ../../world/immovables/stones/greenland_stones2/init.lua:12
 #: ../../world/immovables/stones/winterland_stones2/init.lua:12
 msgid "Stones 2"
-msgstr ""
+msgstr "Stones"
 
 #: ../../world/immovables/stones/blackland_stones3/init.lua:12
 #: ../../world/immovables/stones/desert_stones3/init.lua:12
 #: ../../world/immovables/stones/greenland_stones3/init.lua:12
 #: ../../world/immovables/stones/winterland_stones3/init.lua:12
 msgid "Stones 3"
-msgstr ""
+msgstr "Stones"
 
 #: ../../world/immovables/stones/blackland_stones4/init.lua:12
 #: ../../world/immovables/stones/desert_stones4/init.lua:12
 #: ../../world/immovables/stones/greenland_stones4/init.lua:12
 #: ../../world/immovables/stones/winterland_stones4/init.lua:12
 msgid "Stones 4"
-msgstr ""
+msgstr "Stones"
 
 #: ../../world/immovables/stones/blackland_stones5/init.lua:12
 #: ../../world/immovables/stones/desert_stones5/init.lua:12
 #: ../../world/immovables/stones/greenland_stones5/init.lua:12
 #: ../../world/immovables/stones/winterland_stones5/init.lua:12
 msgid "Stones 5"
-msgstr ""
+msgstr "Stones"
 
 #: ../../world/immovables/stones/blackland_stones6/init.lua:12
 #: ../../world/immovables/stones/desert_stones6/init.lua:12
 #: ../../world/immovables/stones/greenland_stones6/init.lua:12
 #: ../../world/immovables/stones/winterland_stones6/init.lua:12
 msgid "Stones 6"
-msgstr ""
+msgstr "Stones"
 
 #: TRANSLATORS: This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid "Track"
-msgstr ""
+msgstr "Track"
 
 #: ../../world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
-msgstr ""
+msgstr "Alder (Sapling)"
 
 #: ../../world/immovables/trees/alder/init.lua:43
 msgid "Alder (Pole)"
-msgstr ""
+msgstr "Alder (Pole)"
 
 #: ../../world/immovables/trees/alder/init.lua:66
 msgid "Alder (Mature)"
-msgstr ""
+msgstr "Alder (Mature)"
 
 #: ../../world/immovables/trees/alder/init.lua:89
 msgid "Alder (Old)"
-msgstr ""
+msgstr "Alder (Old)"
 
 #: ../../world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Aspen (Sapling)"
 
 #: ../../world/immovables/trees/aspen/init.lua:35
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Aspen (Pole)"
 
 #: ../../world/immovables/trees/aspen/init.lua:58
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Aspen (Mature)"
 
 #: ../../world/immovables/trees/aspen/init.lua:84
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Aspen (Old)"
 
 #: ../../world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Beech (Sapling)"
 
 #: ../../world/immovables/trees/beech/init.lua:35
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Beech (Pole)"
 
 #: ../../world/immovables/trees/beech/init.lua:58
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Beech (Mature)"
 
 #: ../../world/immovables/trees/beech/init.lua:81
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Beech (Old)"
 
 #: ../../world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Birch (Sapling)"
 
 #: ../../world/immovables/trees/birch/init.lua:35
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Birch (Pole)"
 
 #: ../../world/immovables/trees/birch/init.lua:58
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Birch (Mature)"
 
 #: ../../world/immovables/trees/birch/init.lua:84
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Birch (Old)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr ""
+msgstr "Cirrus Tree (Sapling)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr ""
+msgstr "Cirrus Tree (Pole)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr ""
+msgstr "Cirrus Tree (Mature)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
-msgstr ""
+msgstr "Cirrus Tree (Old)"
 
 #: ../../world/immovables/trees/deadtree1/init.lua:5
 #: ../../world/immovables/trees/deadtree2/init.lua:5
@@ -320,195 +320,195 @@ msgstr "Fallen Tree"
 
 #: ../../world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Larch (Sapling)"
 
 #: ../../world/immovables/trees/larch/init.lua:35
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Larch (Pole)"
 
 #: ../../world/immovables/trees/larch/init.lua:58
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Larch (Mature)"
 
 #: ../../world/immovables/trees/larch/init.lua:81
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Larch (Old)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
-msgstr ""
+msgstr "Liana Tree (Sapling)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:37
 msgid "Liana Tree (Pole)"
-msgstr ""
+msgstr "Liana Tree (Pole)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:61
 msgid "Liana Tree (Mature)"
-msgstr ""
+msgstr "Liana Tree (Mature)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:88
 msgid "Liana Tree (Old)"
-msgstr ""
+msgstr "Liana Tree (Old)"
 
 #: ../../world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
-msgstr ""
+msgstr "Maple (Sapling)"
 
 #: ../../world/immovables/trees/maple/init.lua:35
 msgid "Maple (Pole)"
-msgstr ""
+msgstr "Maple (Pole)"
 
 #: ../../world/immovables/trees/maple/init.lua:58
 msgid "Maple (Mature)"
-msgstr ""
+msgstr "Maple (Mature)"
 
 #: ../../world/immovables/trees/maple/init.lua:81
 msgid "Maple (Old)"
-msgstr ""
+msgstr "Maple (Old)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Dark Mushroom Tree (Sapling)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:37
 msgid "Dark Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Dark Mushroom Tree (Pole)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:61
 msgid "Dark Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Dark Mushroom Tree (Mature)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:85
 msgid "Dark Mushroom Tree (Old)"
-msgstr ""
+msgstr "Dark Mushroom Tree (Old)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Green Mushroom Tree (Sapling)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:37
 msgid "Green Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Green Mushroom Tree (Pole)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:61
 msgid "Green Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Green Mushroom Tree (Mature)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:85
 msgid "Green Mushroom Tree (Old)"
-msgstr ""
+msgstr "Green Mushroom Tree (Old)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Red Mushroom Tree (Sapling)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:37
 msgid "Red Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Red Mushroom Tree (Pole)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:61
 msgid "Red Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Red Mushroom Tree (Mature)"
 
 #: TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:88
 msgid "Red Mushroom Tree (Old)"
-msgstr ""
+msgstr "Red Mushroom Tree (Old)"
 
 #: ../../world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Oak (Sapling)"
 
 #: ../../world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Oak (Pole)"
 
 #: ../../world/immovables/trees/oak/init.lua:58
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Oak (Mature)"
 
 #: ../../world/immovables/trees/oak/init.lua:81
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Oak (Old)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
-msgstr ""
+msgstr "Borassus Palm (Sapling)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:35
 msgid "Borassus Palm (Pole)"
-msgstr ""
+msgstr "Borassus Palm (Pole)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:58
 msgid "Borassus Palm (Mature)"
-msgstr ""
+msgstr "Borassus Palm (Mature)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:81
 msgid "Borassus Palm (Old)"
-msgstr ""
+msgstr "Borassus Palm (Old)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
-msgstr ""
+msgstr "Coconut Palm (Sapling)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:35
 msgid "Coconut Palm (Pole)"
-msgstr ""
+msgstr "Coconut Palm (Pole)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:58
 msgid "Coconut Palm (Mature)"
-msgstr ""
+msgstr "Coconut Palm (Mature)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:81
 msgid "Coconut Palm (Old)"
-msgstr ""
+msgstr "Coconut Palm (Old)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
-msgstr ""
+msgstr "Date Palm (Sapling)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:35
 msgid "Date Palm (Pole)"
-msgstr ""
+msgstr "Date Palm (Pole)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:58
 msgid "Date Palm (Mature)"
-msgstr ""
+msgstr "Date Palm (Mature)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:84
 msgid "Date Palm (Old)"
-msgstr ""
+msgstr "Date Palm (Old)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
-msgstr ""
+msgstr "Oil Palm (Sapling)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:35
 msgid "Oil Palm (Pole)"
-msgstr ""
+msgstr "Oil Palm (Pole)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:58
 msgid "Oil Palm (Mature)"
-msgstr ""
+msgstr "Oil Palm (Mature)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:85
 msgid "Oil Palm (Old)"
-msgstr ""
+msgstr "Oil Palm (Old)"
 
 #: ../../world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
@@ -672,6 +672,9 @@ msgstr "Granite"
 
 #: ../../world/resources/init.lua:57
 #: ../../world/terrains/init.lua:284
+#: ../../world/terrains/init.lua:515
+#: ../../world/terrains/init.lua:747
+#: ../../world/terrains/init.lua:977
 msgid "Water"
 msgstr "Water"
 
@@ -692,26 +695,23 @@ msgid "Winter"
 msgstr ""
 
 #: ../../world/terrains/init.lua:19
+#: ../../world/terrains/init.lua:767
+#: ../../world/terrains/init.lua:917
+#: ../../world/terrains/init.lua:932
+#: ../../world/terrains/init.lua:947
 msgid "Desert"
 msgstr "Desert"
 
 #: ../../world/terrains/init.lua:33
-msgid "Meadow 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:71
-msgid "Meadow 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:87
-msgid "Meadow 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:102
-msgid "Meadow 4"
+#: ../../world/terrains/init.lua:812
+msgid "Meadow"
 msgstr ""
 
 #: ../../world/terrains/init.lua:117
+#: ../../world/terrains/init.lua:797
 msgid "Steppe"
 msgstr ""
 
@@ -720,27 +720,27 @@ msgid "Barren Steppe"
 msgstr ""
 
 #: ../../world/terrains/init.lua:147
+#: ../../world/terrains/init.lua:827
 msgid "Mountain Meadow"
 msgstr ""
 
 #: ../../world/terrains/init.lua:162
-#: ../../world/terrains/init.lua:408
-msgid "Mountain 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:177
-#: ../../world/terrains/init.lua:423
-msgid "Mountain 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:192
-#: ../../world/terrains/init.lua:438
-msgid "Mountain 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:207
+#: ../../world/terrains/init.lua:408
+#: ../../world/terrains/init.lua:423
+#: ../../world/terrains/init.lua:438
 #: ../../world/terrains/init.lua:453
-msgid "Mountain 4"
+#: ../../world/terrains/init.lua:625
+#: ../../world/terrains/init.lua:640
+#: ../../world/terrains/init.lua:655
+#: ../../world/terrains/init.lua:670
+#: ../../world/terrains/init.lua:857
+#: ../../world/terrains/init.lua:872
+#: ../../world/terrains/init.lua:887
+#: ../../world/terrains/init.lua:902
+msgid "Mountain"
 msgstr ""
 
 #: ../../world/terrains/init.lua:222
@@ -748,11 +748,14 @@ msgid "Swamp"
 msgstr ""
 
 #: ../../world/terrains/init.lua:238
+#: ../../world/terrains/init.lua:468
+#: ../../world/terrains/init.lua:700
+#: ../../world/terrains/init.lua:962
 msgid "Beach"
 msgstr ""
 
 #: ../../world/terrains/init.lua:253
-#: ../../world/terrains/init.lua:608
+#: ../../world/terrains/init.lua:610
 msgid "Snow"
 msgstr ""
 
@@ -761,161 +764,53 @@ msgid "Lava"
 msgstr ""
 
 #: ../../world/terrains/init.lua:303
+#: ../../world/terrains/init.lua:318
 msgid "Ashes"
 msgstr ""
 
-#: ../../world/terrains/init.lua:318
-msgid "Ashes 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:333
-msgid "Hard Ground 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:348
-msgid "Hard Ground 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:363
-msgid "Hard Ground 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:378
-msgid "Hard Ground 4"
+msgid "Hard Ground"
 msgstr ""
 
 #: ../../world/terrains/init.lua:393
 msgid "Igneous Rocks"
 msgstr ""
 
-#: ../../world/terrains/init.lua:468
-msgid "Beach (Wasteland)"
-msgstr ""
-
 #: ../../world/terrains/init.lua:483
-msgid "Lava Rocks 1"
+#: ../../world/terrains/init.lua:499
+msgid "Lava Rocks"
 msgstr ""
 
-#: ../../world/terrains/init.lua:498
-msgid "Lava Rocks 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:513
-msgid "Water (Wasteland)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:533
+#: ../../world/terrains/init.lua:535
+#: ../../world/terrains/init.lua:550
+#: ../../world/terrains/init.lua:565
 msgid "Tundra"
 msgstr ""
 
-#: ../../world/terrains/init.lua:548
-msgid "Tundra 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:563
-msgid "Tundra 3"
-msgstr ""
-
-#: ../../world/terrains/init.lua:578
+#: ../../world/terrains/init.lua:580
 msgid "Tundra Taiga"
 msgstr ""
 
-#: ../../world/terrains/init.lua:593
+#: ../../world/terrains/init.lua:595
 msgid "Taiga"
 msgstr ""
 
-#: ../../world/terrains/init.lua:623
-msgid "Mountain 1 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:638
-msgid "Mountain 2 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:653
-msgid "Mountain 3 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:668
-msgid "Mountain 4 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:683
+#: ../../world/terrains/init.lua:685
 msgid "Ice"
 msgstr ""
 
-#: ../../world/terrains/init.lua:698
-msgid "Beach (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:713
+#: ../../world/terrains/init.lua:715
+#: ../../world/terrains/init.lua:731
 msgid "Ice Floes"
 msgstr ""
 
-#: ../../world/terrains/init.lua:729
-msgid "Ice Floes 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:745
-msgid "Water (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:765
-msgid "Desert 4"
-msgstr ""
-
-#: ../../world/terrains/init.lua:780
+#: ../../world/terrains/init.lua:782
 msgid "Dry Soil"
 msgstr ""
 
-#: ../../world/terrains/init.lua:795
-msgid "Steppe (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:810
-msgid "Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:825
-msgid "Mountain Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:840
-msgid "High Mountain Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:855
-msgid "Mountain 1 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:870
-msgid "Mountain 2 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:885
-msgid "Mountain 3 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:900
-msgid "Mountain 4 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:915
-msgid "Desert 1"
-msgstr ""
-
-#: ../../world/terrains/init.lua:930
-msgid "Desert 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:945
-msgid "Desert 3"
-msgstr ""
-
-#: ../../world/terrains/init.lua:960
-msgid "Beach (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:975
-msgid "Water (Desert)"
+#: ../../world/terrains/init.lua:842
+msgid "High Mountain Meadow"
 msgstr ""

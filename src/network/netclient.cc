@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
@@ -43,8 +44,8 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
@@ -103,7 +104,7 @@ NetClient::NetClient
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == nullptr)
-		throw warning
+		throw WLWarning
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given "
@@ -114,7 +115,7 @@ NetClient::NetClient
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
-	d->settings.playernum = UserSettings::notConnected();
+	d->settings.playernum = UserSettings::not_connected();
 	d->settings.usernum = -2;
 	d->localplayername = playername;
 	d->modal = nullptr;
@@ -123,12 +124,8 @@ NetClient::NetClient
 	d->desiredspeed = 1000;
 	file = nullptr;
 
-	// Temporarily register win condition scripts to get the default
-	std::set<std::string> win_condition_scripts =
-	   filter(g_fs->ListDirectory("scripting/win_conditions"),
-	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-	assert(win_condition_scripts.size());
-	d->settings.win_condition_script = *win_condition_scripts.begin();
+	// Get the default win condition script
+	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
 }
 
 NetClient::~NetClient ()
@@ -144,10 +141,10 @@ NetClient::~NetClient ()
 void NetClient::run ()
 {
 	SendPacket s;
-	s.Unsigned8(NETCMD_HELLO);
-	s.Unsigned8(NETWORK_PROTOCOL_VERSION);
-	s.String(d->localplayername);
-	s.String(build_id());
+	s.unsigned_8(NETCMD_HELLO);
+	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
+	s.string(d->localplayername);
+	s.string(build_id());
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
@@ -155,14 +152,14 @@ void NetClient::run ()
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	{
-		Fullscreen_Menu_LaunchMPG lgm(this, this);
-		lgm.setChatProvider(*this);
+		FullscreenMenuLaunchMPG lgm(this, this);
+		lgm.set_chat_provider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
 		d->modal = nullptr;
 		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
 			SendPacket subs;
-			subs.Unsigned8(NETCMD_LAUNCH);
+			subs.unsigned_8(NETCMD_LAUNCH);
 			subs.send(d->sock);
 
 			// Reopen the menu - perhaps the start is denied or other problems occur
@@ -191,8 +188,8 @@ void NetClient::run ()
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
-			tipstext.push_back(getPlayersTribe());
-		} catch (No_Tribe) {}
+			tipstext.push_back(get_players_tribe());
+		} catch (NoTribe) {}
 		GameTips tips (*loaderUI, tipstext);
 
 		loaderUI->step(_("Preparing game"));
@@ -200,15 +197,15 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
-		Interactive_GameBase * igb;
+		InteractiveGameBase * igb;
 		if (pn > 0)
 			igb =
-				new Interactive_Player
+				new InteractivePlayer
 					(game, g_options.pull_section("global"),
 					 pn, true);
 		else
 			igb =
-				new Interactive_Spectator
+				new InteractiveSpectator
 					(game, g_options.pull_section("global"), true);
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
@@ -257,17 +254,17 @@ void NetClient::think()
 			(d->server_is_waiting &&
 			 d->game->get_gametime() == d->time.networktime())
 		{
-			sendTime();
+			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
 			int32_t curtime = WLApplication::get()->get_time();
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
-				sendTime();
+				send_time();
 		}
 	}
 }
 
-void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
+void NetClient::send_player_command(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
 	if (pc.sender() != d->settings.playernum + 1)
@@ -279,8 +276,8 @@ void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 	log("[Client]: send playercommand at time %i\n", d->game->get_gametime());
 
 	SendPacket s;
-	s.Unsigned8(NETCMD_PLAYERCOMMAND);
-	s.Signed32(d->game->get_gametime());
+	s.unsigned_8(NETCMD_PLAYERCOMMAND);
+	s.signed_32(d->game->get_gametime());
 	pc.serialize(s);
 	s.send(d->sock);
 
@@ -290,16 +287,14 @@ void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 	delete &pc;
 }
 
-int32_t NetClient::getFrametime()
+int32_t NetClient::get_frametime()
 {
 	return d->time.time() - d->game->get_gametime();
 }
 
-std::string NetClient::getGameDescription()
+GameController::GameType NetClient::get_game_type()
 {
-	char buf[200];
-	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
-	return buf;
+	return GameController::GameType::NETCLIENT;
 }
 
 void NetClient::report_result
@@ -322,7 +317,7 @@ const GameSettings & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::setScenario(bool scenario)
+void NetClient::set_scenario(bool scenario)
 {
 	// only accessible, if server is a dedicated server and access is granted
 	if (!m_dedicated_access)
@@ -330,13 +325,13 @@ void NetClient::setScenario(bool scenario)
 	m_dedicated_temp_scenario = scenario;
 }
 
-bool NetClient::canChangeMap()
+bool NetClient::can_change_map()
 {
 	// only true, if server is a dedicated server and access is granted
 	return m_dedicated_access;
 }
 
-bool NetClient::canChangePlayerState(uint8_t const number)
+bool NetClient::can_change_player_state(uint8_t const number)
 {
 	if (!m_dedicated_access) // normal case
 		return false;
@@ -356,12 +351,12 @@ bool NetClient::canChangePlayerState(uint8_t const number)
 	return true;
 }
 
-bool NetClient::canChangePlayerTribe(uint8_t number)
+bool NetClient::can_change_player_tribe(uint8_t number)
 {
-	return canChangePlayerTeam(number);
+	return can_change_player_team(number);
 }
 
-bool NetClient::canChangePlayerTeam(uint8_t number)
+bool NetClient::can_change_player_team(uint8_t number)
 {
 	if (!m_dedicated_access) // normal case
 		return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
@@ -377,7 +372,7 @@ bool NetClient::canChangePlayerTeam(uint8_t number)
 	}
 }
 
-bool NetClient::canChangePlayerInit(uint8_t number)
+bool NetClient::can_change_player_init(uint8_t number)
 {
 	if (!m_dedicated_access) // normal case
 		return false;
@@ -388,7 +383,7 @@ bool NetClient::canChangePlayerInit(uint8_t number)
 	}
 }
 
-bool NetClient::canLaunch()
+bool NetClient::can_launch()
 {
 	// only true, if server is a dedicated server and access is granted
 	if (!m_dedicated_access)
@@ -402,7 +397,7 @@ bool NetClient::canLaunch()
 
 	// if there is one client that is currently receiving a file, we can not launch.
 	for (uint8_t i = 0; i < d->settings.users.size(); ++i) {
-		if (d->settings.users[i].position == d->settings.users[i].notConnected())
+		if (d->settings.users[i].position == d->settings.users[i].not_connected())
 			continue;
 		if (!d->settings.users[i].ready)
 			return false;
@@ -416,7 +411,7 @@ bool NetClient::canLaunch()
 	return true;
 }
 
-void NetClient::setMap
+void NetClient::set_map
 	(const std::string & name,
 	 const std::string & path,
 	 uint32_t /* players */,
@@ -426,119 +421,119 @@ void NetClient::setMap
 	if (!m_dedicated_access)
 		return;
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_MAP);
-	s.String(name);
-	s.String(path);
-	s.Unsigned8(savegame ? 1 : 0);
-	s.Unsigned8(m_dedicated_temp_scenario ? 1 : 0);
+	s.unsigned_8(NETCMD_SETTING_MAP);
+	s.string(name);
+	s.string(path);
+	s.unsigned_8(savegame ? 1 : 0);
+	s.unsigned_8(m_dedicated_temp_scenario ? 1 : 0);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
+void NetClient::set_player_state(uint8_t, PlayerSettings::State)
 {
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t, const std::string &, bool const /* random_ai */)
+void NetClient::set_player_ai(uint8_t, const std::string &, bool const /* random_ai */)
 {
 	// client is not allowed to do this
 }
 
-void NetClient::nextPlayerState(uint8_t number)
+void NetClient::next_player_state(uint8_t number)
 {
 	// only accessible, if server is a dedicated server and access is granted
 	if (!m_dedicated_access)
 		return;
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_PLAYER);
-	s.Unsigned8(number);
+	s.unsigned_8(NETCMD_SETTING_PLAYER);
+	s.unsigned_8(number);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe, bool const random_tribe)
+void NetClient::set_player_tribe(uint8_t number, const std::string & tribe, bool const random_tribe)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
-	s.Unsigned8(number);
-	s.String(tribe);
-	s.Unsigned8(random_tribe ? 1 : 0);
+	s.unsigned_8(NETCMD_SETTING_CHANGETRIBE);
+	s.unsigned_8(number);
+	s.string(tribe);
+	s.unsigned_8(random_tribe ? 1 : 0);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+void NetClient::set_player_team(uint8_t number, Widelands::TeamNumber team)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGETEAM);
-	s.Unsigned8(number);
-	s.Unsigned8(team);
+	s.unsigned_8(NETCMD_SETTING_CHANGETEAM);
+	s.unsigned_8(number);
+	s.unsigned_8(team);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerCloseable(uint8_t, bool)
+void NetClient::set_player_closeable(uint8_t, bool)
 {
 	//  client is not allowed to do this
 }
 
-void NetClient::setPlayerShared(uint8_t number, uint8_t player)
+void NetClient::set_player_shared(uint8_t number, uint8_t player)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGESHARED);
-	s.Unsigned8(number);
-	s.Unsigned8(player);
+	s.unsigned_8(NETCMD_SETTING_CHANGESHARED);
+	s.unsigned_8(number);
+	s.unsigned_8(player);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerInit(uint8_t number, uint8_t)
+void NetClient::set_player_init(uint8_t number, uint8_t)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	// Host will decide what to change, therefore the init is not send, just the request to change
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGEINIT);
-	s.Unsigned8(number);
+	s.unsigned_8(NETCMD_SETTING_CHANGEINIT);
+	s.unsigned_8(number);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerName(uint8_t, const std::string &)
+void NetClient::set_player_name(uint8_t, const std::string &)
 {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void NetClient::setPlayer(uint8_t, PlayerSettings)
+void NetClient::set_player(uint8_t, PlayerSettings)
 {
 	// do nothing here - the request for a positionchange is send in
-	// setPlayerNumber(uint8_t) to the host.
+	// set_player_number(uint8_t) to the host.
 }
 
-std::string NetClient::getWinConditionScript() {
+std::string NetClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void NetClient::setWinConditionScript(std::string) {
+void NetClient::set_win_condition_script(std::string) {
 	// Clients are not allowed to change this
 }
 
-void NetClient::nextWinCondition() {
+void NetClient::next_win_condition() {
 	// only accessible, if server is a dedicated server and access is granted
 	if (!m_dedicated_access)
 		return;
 	SendPacket s;
-	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.unsigned_8(NETCMD_WIN_CONDITION);
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerNumber(uint8_t const number)
+void NetClient::set_player_number(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
 	// for sending a request to the host.
@@ -555,22 +550,22 @@ void NetClient::setPlayerNumber(uint8_t const number)
 
 	// Send request
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
-	s.Unsigned8(number);
+	s.unsigned_8(NETCMD_SETTING_CHANGEPOSITION);
+	s.unsigned_8(number);
 	s.send(d->sock);
 }
 
-uint32_t NetClient::realSpeed()
+uint32_t NetClient::real_speed()
 {
 	return d->realspeed;
 }
 
-uint32_t NetClient::desiredSpeed()
+uint32_t NetClient::desired_speed()
 {
 	return d->desiredspeed;
 }
 
-void NetClient::setDesiredSpeed(uint32_t speed)
+void NetClient::set_desired_speed(uint32_t speed)
 {
 	if (speed > std::numeric_limits<uint16_t>::max())
 		speed = std::numeric_limits<uint16_t>::max();
@@ -579,39 +574,39 @@ void NetClient::setDesiredSpeed(uint32_t speed)
 		d->desiredspeed = speed;
 
 		SendPacket s;
-		s.Unsigned8(NETCMD_SETSPEED);
-		s.Unsigned16(d->desiredspeed);
+		s.unsigned_8(NETCMD_SETSPEED);
+		s.unsigned_16(d->desiredspeed);
 		s.send(d->sock);
 	}
 }
 
 // Network games cannot be paused
-bool NetClient::isPaused()
+bool NetClient::is_paused()
 {
 	return false;
 }
 
-void NetClient::setPaused(bool /* paused */)
+void NetClient::set_paused(bool /* paused */)
 {
 }
 
-void NetClient::recvOnePlayer(uint8_t const number, StreamRead& packet) {
+void NetClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
 	PlayerSettings & player = d->settings.players.at(number);
-	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
-	player.name = packet.String();
-	player.tribe = packet.String();
-	player.random_tribe = packet.Unsigned8() == 1;
-	player.initialization_index = packet.Unsigned8();
-	player.ai = packet.String();
-	player.random_ai = packet.Unsigned8() == 1;
-	player.team = packet.Unsigned8();
-	player.shared_in = packet.Unsigned8();
+	player.state = static_cast<PlayerSettings::State>(packet.unsigned_8());
+	player.name = packet.string();
+	player.tribe = packet.string();
+	player.random_tribe = packet.unsigned_8() == 1;
+	player.initialization_index = packet.unsigned_8();
+	player.ai = packet.string();
+	player.random_ai = packet.unsigned_8() == 1;
+	player.team = packet.unsigned_8();
+	player.shared_in = packet.unsigned_8();
 }
 
-void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
+void NetClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
@@ -621,9 +616,9 @@ void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
 		d->settings.users.push_back(newuser);
 	}
 
-	d->settings.users.at(number).name     = packet.String  ();
-	d->settings.users.at(number).position = packet.Signed32();
-	d->settings.users.at(number).ready    = packet.Unsigned8() == 1;
+	d->settings.users.at(number).name     = packet.string  ();
+	d->settings.users.at(number).position = packet.signed_32();
+	d->settings.users.at(number).ready    = packet.unsigned_8() == 1;
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
@@ -633,25 +628,25 @@ void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
 void NetClient::send(const std::string & msg)
 {
 	SendPacket s;
-	s.Unsigned8(NETCMD_CHAT);
-	s.String(msg);
+	s.unsigned_8(NETCMD_CHAT);
+	s.string(msg);
 	s.send(d->sock);
 }
 
-const std::vector<ChatMessage> & NetClient::getMessages() const
+const std::vector<ChatMessage> & NetClient::get_messages() const
 {
 	return d->chatmessages;
 }
 
-void NetClient::sendTime()
+void NetClient::send_time()
 {
 	assert(d->game);
 
 	log("[Client]: sending timestamp: %i\n", d->game->get_gametime());
 
 	SendPacket s;
-	s.Unsigned8(NETCMD_TIME);
-	s.Signed32(d->game->get_gametime());
+	s.unsigned_8(NETCMD_TIME);
+	s.signed_32(d->game->get_gametime());
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
@@ -662,9 +657,9 @@ void NetClient::syncreport()
 {
 	if (d->sock) {
 		SendPacket s;
-		s.Unsigned8(NETCMD_SYNCREPORT);
-		s.Signed32(d->game->get_gametime());
-		s.Data(d->game->get_sync_hash().data, 16);
+		s.unsigned_8(NETCMD_SYNCREPORT);
+		s.signed_32(d->game->get_gametime());
+		s.data(d->game->get_sync_hash().data, 16);
 		s.send(d->sock);
 	}
 }
@@ -677,15 +672,15 @@ void NetClient::syncreport()
  */
 void NetClient::handle_packet(RecvPacket & packet)
 {
-	uint8_t cmd = packet.Unsigned8();
+	uint8_t cmd = packet.unsigned_8();
 
 	if (cmd == NETCMD_DISCONNECT) {
-		uint8_t number = packet.Unsigned8();
-		std::string reason = packet.String();
+		uint8_t number = packet.unsigned_8();
+		std::string reason = packet.string();
 		if (number == 1)
 			disconnect(reason,  "", false);
 		else {
-			std::string arg = packet.String();
+			std::string arg = packet.string();
 			disconnect(reason, arg, false);
 		}
 		return;
@@ -694,10 +689,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	if (d->settings.usernum == -2) {
 		if (cmd != NETCMD_HELLO)
 			throw ProtocolException(cmd);
-		uint8_t const version = packet.Unsigned8();
+		uint8_t const version = packet.unsigned_8();
 		if (version != NETWORK_PROTOCOL_VERSION)
 			throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
-		d->settings.usernum = packet.Unsigned32();
+		d->settings.usernum = packet.unsigned_32();
 		d->settings.playernum = -1;
 		return;
 	}
@@ -705,7 +700,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	switch (cmd) {
 	case NETCMD_PING: {
 		SendPacket s;
-		s.Unsigned8(NETCMD_PONG);
+		s.unsigned_8(NETCMD_PONG);
 		s.send(d->sock);
 
 		log ("[Client] Pong!\n");
@@ -713,10 +708,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_MAP: {
-		d->settings.mapname = packet.String();
-		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
-		d->settings.savegame = packet.Unsigned8() == 1;
-		d->settings.scenario = packet.Unsigned8() == 1;
+		d->settings.mapname = packet.string();
+		d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
+		d->settings.savegame = packet.unsigned_8() == 1;
+		d->settings.scenario = packet.unsigned_8() == 1;
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
@@ -729,54 +724,54 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_DEDICATED_MAPS: {
 		DedicatedMapInfos info;
-		info.path     = g_fs->FileSystem::fixCrossFile(packet.String());
-		info.players  = packet.Unsigned8();
-		info.scenario = packet.Unsigned8() == 1;
+		info.path     = g_fs->FileSystem::fix_cross_file(packet.string());
+		info.players  = packet.unsigned_8();
+		info.scenario = packet.unsigned_8() == 1;
 		d->settings.maps.push_back(info);
 		break;
 	}
 
 	case NETCMD_DEDICATED_SAVED_GAMES: {
 		DedicatedMapInfos info;
-		info.path    = g_fs->FileSystem::fixCrossFile(packet.String());
-		info.players = packet.Unsigned8();
+		info.path    = g_fs->FileSystem::fix_cross_file(packet.string());
+		info.players = packet.unsigned_8();
 		d->settings.saved_games.push_back(info);
 		break;
 	}
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
-		std::string path = g_fs->FileSystem::fixCrossFile(packet.String());
-		uint32_t bytes   = packet.Unsigned32();
-		std::string md5  = packet.String();
+		std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
+		uint32_t bytes   = packet.unsigned_32();
+		std::string md5  = packet.string();
 
 		// Check whether the file or a file with that name already exists
-		if (g_fs->FileExists(path)) {
+		if (g_fs->file_exists(path)) {
 			// If the file is a directory, we have to rename the file and replace it with the version of the
 			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
-			if (!g_fs->IsDirectory(path)) {
+			if (!g_fs->is_directory(path)) {
 				FileRead fr;
-				fr.Open(*g_fs, path);
-				if (bytes == fr.GetSize()) {
+				fr.open(*g_fs, path);
+				if (bytes == fr.get_size()) {
 					std::unique_ptr<char[]> complete(new char[bytes]);
 					if (!complete) throw wexception("Out of memory");
 
-					fr.DataComplete(complete.get(), bytes);
+					fr.data_complete(complete.get(), bytes);
 					SimpleMD5Checksum md5sum;
-					md5sum.Data(complete.get(), bytes);
-					md5sum.FinishChecksum();
-					std::string localmd5 = md5sum.GetChecksum().str();
+					md5sum.data(complete.get(), bytes);
+					md5sum.finish_checksum();
+					std::string localmd5 = md5sum.get_checksum().str();
 					if (localmd5 == md5)
 						// everything is alright we already have the file.
 						return;
 				}
 			}
 			// Don't overwrite the file, better rename the original one
-			g_fs->Rename(path, backupFileName(path));
+			g_fs->fs_rename(path, backup_file_name(path));
 		}
 
 		// Yes we need the file!
 		SendPacket s;
-		s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+		s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 		s.send(d->sock);
 
 		if (file)
@@ -786,10 +781,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file->bytes = bytes;
 		file->filename = path;
 		file->md5sum = md5;
-		size_t position = path.rfind(g_fs->fileSeparator(), path.size() - 2);
+		size_t position = path.rfind(g_fs->file_separator(), path.size() - 2);
 		if (position != std::string::npos) {
 			path.resize(position);
-			g_fs->EnsureDirectoryExists(path);
+			g_fs->ensure_directory_exists(path);
 		}
 		break;
 	}
@@ -801,14 +796,14 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (!file)
 			return; // silently ignore
 
-		uint32_t part = packet.Unsigned32();
-		uint32_t size = packet.Unsigned32();
+		uint32_t part = packet.unsigned_32();
+		uint32_t size = packet.unsigned_32();
 
 		// Send an answer
 		SendPacket s;
-		s.Unsigned8(NETCMD_FILE_PART);
-		s.Unsigned32(part);
-		s.String(file->md5sum);
+		s.unsigned_8(NETCMD_FILE_PART);
+		s.unsigned_32(part);
+		s.string(file->md5sum);
 		s.send(d->sock);
 
 		FilePart fp;
@@ -816,7 +811,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		char buf[NETFILEPARTSIZE];
 		assert(size <= NETFILEPARTSIZE);
 
-		if (packet.Data(buf, size) != size)
+		if (packet.data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
 		file->parts.push_back(fp);
@@ -831,36 +826,36 @@ void NetClient::handle_packet(RecvPacket & packet)
 			while (left > 0) {
 				uint32_t writeout
 					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
-				fw.Data(file->parts[i].part, writeout, FileWrite::Pos::Null());
+				fw.data(file->parts[i].part, writeout, FileWrite::Pos::null());
 				left -= writeout;
 				++i;
 			}
 			// Now really write the file
-			fw.Write(*g_fs, file->filename.c_str());
+			fw.write(*g_fs, file->filename.c_str());
 
 			// Check for consistence
 			FileRead fr;
-			fr.Open(*g_fs, file->filename);
+			fr.open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
 			if (!complete) throw wexception("Out of memory");
 
-			fr.DataComplete(complete.get(), file->bytes);
+			fr.data_complete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
-			md5sum.Data(complete.get(), file->bytes);
-			md5sum.FinishChecksum();
-			std::string localmd5 = md5sum.GetChecksum().str();
+			md5sum.data(complete.get(), file->bytes);
+			md5sum.finish_checksum();
+			std::string localmd5 = md5sum.get_checksum().str();
 			if (localmd5 != file->md5sum) {
 				// Something went wrong! We have to rerequest the file.
 				s.reset();
-				s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+				s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 				s.send(d->sock);
 				// Notify the players
 				s.reset();
-				s.Unsigned8(NETCMD_CHAT);
-				s.String(_("/me 's file failed md5 checksumming."));
+				s.unsigned_8(NETCMD_CHAT);
+				s.string(_("/me 's file failed md5 checksumming."));
 				s.send(d->sock);
-				g_fs->Unlink(file->filename);
+				g_fs->fs_unlink(file->filename);
 			}
 			// Check file for validity
 			bool invalid = false;
@@ -868,25 +863,25 @@ void NetClient::handle_packet(RecvPacket & packet)
 				// Saved game check - does Widelands recognize the file as saved game?
 				Widelands::Game game;
 				try {
-					Widelands::Game_Loader gl(file->filename, game);
+					Widelands::GameLoader gl(file->filename, game);
 				} catch (...) {
 					invalid = true;
 				}
 			} else {
 				// Map check - does Widelands recognize the file as map?
 				Widelands::Map map;
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(file->filename);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file->filename);
 				if (!ml)
 					invalid = true;
 			}
 			if (invalid) {
-				g_fs->Unlink(file->filename);
+				g_fs->fs_unlink(file->filename);
 				// Restore original file, if there was one before
-				if (g_fs->FileExists(backupFileName(file->filename)))
-					g_fs->Rename(backupFileName(file->filename), file->filename);
+				if (g_fs->file_exists(backup_file_name(file->filename)))
+					g_fs->fs_rename(backup_file_name(file->filename), file->filename);
 				s.reset();
-				s.Unsigned8(NETCMD_CHAT);
-				s.String
+				s.unsigned_8(NETCMD_CHAT);
+				s.string
 					(_
 					  ("/me checked the received file. Although md5 check summing succeeded, "
 					   "I can not handle the file."));
@@ -898,14 +893,14 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
-		for (uint8_t i = packet.Unsigned8(); i; --i) {
+		for (uint8_t i = packet.unsigned_8(); i; --i) {
 			TribeBasicInfo info;
-			info.name = packet.String();
+			info.name = packet.string();
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
-			for (uint8_t j = packet.Unsigned8(); j; --j) {
-				std::string const initialization_script = packet.String();
+			for (uint8_t j = packet.unsigned_8(); j; --j) {
+				std::string const initialization_script = packet.string();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
@@ -917,35 +912,35 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_ALLPLAYERS: {
-		d->settings.players.resize(packet.Unsigned8());
+		d->settings.players.resize(packet.unsigned_8());
 		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
-			recvOnePlayer(i, packet);
+			receive_one_player(i, packet);
 		break;
 	}
 	case NETCMD_SETTING_PLAYER: {
-		uint8_t player = packet.Unsigned8();
-		recvOnePlayer(player, packet);
+		uint8_t player = packet.unsigned_8();
+		receive_one_player(player, packet);
 		break;
 	}
 	case NETCMD_SETTING_ALLUSERS: {
-		d->settings.users.resize(packet.Unsigned8());
+		d->settings.users.resize(packet.unsigned_8());
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-			recvOneUser(i, packet);
+			receive_one_user(i, packet);
 		break;
 	}
 	case NETCMD_SETTING_USER: {
-		uint32_t user = packet.Unsigned32();
-		recvOneUser(user, packet);
+		uint32_t user = packet.unsigned_32();
+		receive_one_user(user, packet);
 		break;
 	}
 	case NETCMD_SET_PLAYERNUMBER: {
-		int32_t number = packet.Signed32();
+		int32_t number = packet.signed_32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
-		d->settings.win_condition_script = packet.String();
+		d->settings.win_condition_script = packet.string();
 		break;
 	}
 
@@ -956,13 +951,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 	case NETCMD_SETSPEED:
-		d->realspeed = packet.Unsigned16();
+		d->realspeed = packet.unsigned_16();
 		log
 			("[Client] speed: %u.%03u\n",
 			 d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
-		d->time.recv(packet.Signed32());
+		d->time.receive(packet.signed_32());
 		break;
 	case NETCMD_WAIT:
 		log("[Client]: server is waiting.\n");
@@ -972,30 +967,30 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 
-		int32_t const time = packet.Signed32();
+		int32_t const time = packet.signed_32();
 		Widelands::PlayerCommand & plcmd =
 			*Widelands::PlayerCommand::deserialize(packet);
 		plcmd.set_duetime(time);
 		d->game->enqueue_command(&plcmd);
-		d->time.recv(time);
+		d->time.receive(time);
 		break;
 	}
 	case NETCMD_SYNCREQUEST: {
 		if (!d->game)
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
-		int32_t const time = packet.Signed32();
-		d->time.recv(time);
-		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
+		int32_t const time = packet.signed_32();
+		d->time.receive(time);
+		d->game->enqueue_command(new CmdNetCheckSync(time, this));
 		break;
 	}
 	case NETCMD_CHAT: {
 		ChatMessage c;
 		c.time = time(nullptr);
-		c.playern = packet.Signed16();
-		c.sender = packet.String();
-		c.msg = packet.String();
-		if (packet.Unsigned8())
-			c.recipient = packet.String();
+		c.playern = packet.signed_16();
+		c.sender = packet.string();
+		c.msg = packet.string();
+		if (packet.unsigned_8())
+			c.recipient = packet.string();
 		d->chatmessages.push_back(c);
 		Notifications::publish(c);
 		break;
@@ -1003,10 +998,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
 		ChatMessage c;
 		c.time = time(nullptr);
-		std::string code = packet.String();
-		std::string arg1 = packet.String();
-		std::string arg2 = packet.String();
-		std::string arg3 = packet.String();
+		std::string code = packet.string();
+		std::string arg1 = packet.string();
+		std::string arg2 = packet.string();
+		std::string arg3 = packet.string();
 		c.msg = NetworkGamingMessages::get_message(code, arg1, arg2, arg3);
 		c.playern = UserSettings::none(); //  == System message
 		// c.sender remains empty to indicate a system message
@@ -1073,11 +1068,11 @@ void NetClient::disconnect
 	if (d->sock) {
 		if (sendreason) {
 			SendPacket s;
-			s.Unsigned8(NETCMD_DISCONNECT);
-			s.Unsigned8(arg.size() < 1 ? 1 : 2);
-			s.String(reason);
+			s.unsigned_8(NETCMD_DISCONNECT);
+			s.unsigned_8(arg.size() < 1 ? 1 : 2);
+			s.string(reason);
 			if (!arg.empty()) {
-				s.String(arg);
+				s.string(arg);
 			}
 			s.send(d->sock);
 		}

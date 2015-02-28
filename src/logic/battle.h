@@ -52,12 +52,12 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements MapObject.
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 
 	// Cancel this battle immediately and schedule destruction.
 	void cancel(Game &, Soldier &);
@@ -76,7 +76,7 @@ public:
 
 	// Called by the battling soldiers once they've met on a common node and are
 	// idle.
-	void getBattleWork(Game &, Soldier &);
+	void get_battle_work(Game &, Soldier &);
 
 private:
 	struct Loader : public MapObject::Loader {
@@ -87,7 +87,7 @@ private:
 		Serial m_second;
 	};
 
-	void calculateRound(Game &);
+	void calculate_round(Game &);
 
 	Soldier * m_first;
 	Soldier * m_second;

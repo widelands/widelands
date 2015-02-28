@@ -29,6 +29,7 @@
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "graphic/text_constants.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -39,7 +40,6 @@
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -56,7 +56,7 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe, const World& world)
+	 const TribeDescr & _tribe, const World& world)
 	:
 	BuildingDescr(_type, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -76,7 +76,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
-			Ware_Index idx = tribe().ware_index(op->get_string());
+			WareIndex idx = tribe().ware_index(op->get_string());
 			if (idx != INVALID_INDEX) {
 				if (m_output_ware_types.count(idx))
 					throw wexception("this ware type has already been declared as an output");
@@ -87,14 +87,14 @@ ProductionSiteDescr::ProductionSiteDescr
 				m_output_worker_types.insert(idx);
 			} else
 				throw wexception("tribe does not define a ware or worker type with this name");
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
 
 	if (Section * const s = prof.get_section("inputs"))
 		while (Section::Value const * const val = s->get_next_val())
 			try {
-				Ware_Index const idx = tribe().ware_index(val->get_name());
+				WareIndex const idx = tribe().ware_index(val->get_name());
 				if (idx != INVALID_INDEX) {
 					for (const WareAmount& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
@@ -104,11 +104,11 @@ ProductionSiteDescr::ProductionSiteDescr
 					int32_t const value = val->get_int();
 					if (value < 1 || 255 < value)
 						throw wexception("count is out of range 1 .. 255");
-					m_inputs.push_back(std::pair<Ware_Index, uint8_t>(idx, value));
+					m_inputs.push_back(std::pair<WareIndex, uint8_t>(idx, value));
 				} else
 					throw wexception
 						("tribe does not define a ware type with this name");
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("input \"%s=%s\": %s", val->get_name(), val->get_string(), e.what());
 			}
 
@@ -117,17 +117,17 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (Section * const working_positions_s = prof.get_section("working positions"))
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
-				Ware_Index const woi = tribe().worker_index(v->get_name());
+				WareIndex const woi = tribe().worker_index(v->get_name());
 				if (woi != INVALID_INDEX) {
 					for (const WareAmount& wp : working_positions()) {
 						if (wp.first == woi) {
 							throw wexception("duplicated");
 						}
 					}
-					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
+					m_working_positions.push_back(std::pair<WareIndex, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
 	if (working_positions().empty() && !global_s.has_val("max_soldiers"))
@@ -192,7 +192,7 @@ IMPLEMENTATION
 
 ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	Building            (ps_descr),
-	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
+	m_working_positions (new WorkingPosition[ps_descr.nr_working_positions()]),
 	m_fetchfromflag     (0),
 	m_program_timer     (false),
 	m_program_time      (0),
@@ -210,6 +210,11 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 
 ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
+}
+
+void ProductionSite::load_finish(EditorGameBase & egbase) {
+	Building::load_finish(egbase);
+	calc_statistics();
 }
 
 
@@ -246,18 +251,18 @@ void ProductionSite::update_statistics_string(std::string* s) {
  * Detect if the workers are experienced enough for an upgrade
  * @param idx Index of the enhancement
  */
-bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
+bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
-			Ware_Index need = bld->working_positions()[0].first;
+			WareIndex need = bld->working_positions()[0].first;
 			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
-					Ware_Index have = working_positions()[i].worker->descr().worker_index();
+					WareIndex have = working_positions()[i].worker->descr().worker_index();
 					if (descr().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
@@ -270,7 +275,7 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 }
 
 
-WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
+WaresQueue & ProductionSite::waresqueue(WareIndex const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {
 		if (ip_queue->get_ware() == wi) {
 			return *ip_queue;
@@ -299,16 +304,14 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	// Somehow boost::format doesn't handle correctly uint8_t in this case
+	// boost::format would treat uint8_t as char
 	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
 	m_last_stat_percent = percOk;
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
-		color = UI_FONT_CLR_IDLE_HEX;
-	else if (percOk < 33)
+	if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;
@@ -343,13 +346,13 @@ void ProductionSite::calc_statistics()
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(Editor_Game_Base & egbase)
+void ProductionSite::init(EditorGameBase & egbase)
 {
 	Building::init(egbase);
 
 	const BillOfMaterials & inputs = descr().inputs();
 	m_input_queues.resize(inputs.size());
-	for (ware_range i(inputs); i; ++i)
+	for (WareRange i(inputs); i; ++i)
 		m_input_queues[i.i] =
 			new WaresQueue
 			(*this,
@@ -357,9 +360,9 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 			 i.current->second);
 
 	//  Request missing workers.
-	Working_Position * wp = m_working_positions;
+	WorkingPosition * wp = m_working_positions;
 	for (const WareAmount& temp_wp : descr().working_positions()) {
-		Ware_Index const worker_index = temp_wp.first;
+		WareIndex const worker_index = temp_wp.first;
 		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
 				worker->set_location(this);
@@ -399,7 +402,7 @@ void ProductionSite::set_economy(Economy * const e)
 /**
  * Cleanup after a production site is removed
  */
-void ProductionSite::cleanup(Editor_Game_Base & egbase)
+void ProductionSite::cleanup(EditorGameBase & egbase)
 {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
@@ -432,12 +435,12 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  * returns 0 on success -1 if there is no room for this worker
  */
 int ProductionSite::warp_worker
-	(Editor_Game_Base & egbase, const WorkerDescr & wdes)
+	(EditorGameBase & egbase, const WorkerDescr & wdes)
 {
 	bool assigned = false;
-	Working_Position * current = m_working_positions;
+	WorkingPosition * current = m_working_positions;
 	for
-		(Working_Position * const end = current + descr().nr_working_positions();
+		(WorkingPosition * const end = current + descr().nr_working_positions();
 		 current < end;
 		 ++current)
 	{
@@ -473,17 +476,17 @@ int ProductionSite::warp_worker
 void ProductionSite::remove_worker(Worker & w)
 {
 	molog("%s leaving\n", w.descr().descname().c_str());
-	Working_Position * wp = m_working_positions;
+	WorkingPosition * wp = m_working_positions;
 
 	for (const WareAmount& temp_wp : descr().working_positions()) {
-		Ware_Index const worker_index = temp_wp.first;
+		WareIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
 				// evicted to make place for a level 0 worker.
-				// Therefore we again request the worker from the Working_Position of descr()
-				*wp = Working_Position(&request_worker(worker_index), nullptr);
+				// Therefore we again request the worker from the WorkingPosition of descr()
+				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
 				return;
 			}
@@ -497,7 +500,7 @@ void ProductionSite::remove_worker(Worker & w)
 /**
  * Issue the worker requests
  */
-Request & ProductionSite::request_worker(Ware_Index const wareid) {
+Request & ProductionSite::request_worker(WareIndex const wareid) {
 	return
 		*new Request
 			(*this,
@@ -513,11 +516,11 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
 void ProductionSite::request_worker_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index              /* widx */,
+	 WareIndex              /* widx */,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	ProductionSite & psite = ref_cast<ProductionSite, PlayerImmovable>(target);
+	ProductionSite & psite = dynamic_cast<ProductionSite&>(target);
 
 	assert(w);
 	assert(w->get_location(game) == &psite);
@@ -530,17 +533,17 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	Ware_Index     idx = w->descr().worker_index();
-	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
+	WareIndex     idx = w->descr().worker_index();
+	for (WorkingPosition * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
 				delete &rq;
-				*wp = Working_Position(nullptr, w);
+				*wp = WorkingPosition(nullptr, w);
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
-				Ware_Index workerid = wp->worker_request->get_index();
+				WareIndex workerid = wp->worker_request->get_index();
 				delete wp->worker_request;
 				wp->worker_request = &psite.request_worker(workerid);
 			}
@@ -551,13 +554,13 @@ void ProductionSite::request_worker_callback
 		{
 			uint8_t nwp = psite.descr().nr_working_positions();
 			uint8_t pos = 0;
-			Working_Position * wp = psite.m_working_positions;
+			WorkingPosition * wp = psite.m_working_positions;
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker && !worker_placed)
 					if (wp->worker_request->get_index() == idx) {
 						delete wp->worker_request;
-						*wp = Working_Position(nullptr, w);
+						*wp = WorkingPosition(nullptr, w);
 						worker_placed = true;
 						break;
 					}
@@ -565,8 +568,8 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			Ware_Index nuwo    = psite.descr().tribe().get_nrworkers();
-			Ware_Index current = Ware_Index(static_cast<size_t>(0));
+			WareIndex nuwo    = psite.descr().tribe().get_nrworkers();
+			WareIndex current = WareIndex(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
 				WorkerDescr const * worker = psite.descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
@@ -670,7 +673,7 @@ bool ProductionSite::fetch_from_flag(Game & game)
 }
 
 
-void ProductionSite::log_general_info(const Editor_Game_Base & egbase) {
+void ProductionSite::log_general_info(const EditorGameBase & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);
@@ -736,10 +739,10 @@ bool ProductionSite::get_building_work
 	if (!m_produced_wares.empty()) {
 		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
-		std::pair<Ware_Index, uint8_t> & ware_type_with_count =
+		std::pair<WareIndex, uint8_t> & ware_type_with_count =
 			*m_produced_wares.rbegin();
 		{
-			Ware_Index const ware_index = ware_type_with_count.first;
+			WareIndex const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
 				*descr().tribe().get_ware_descr(ware_type_with_count.first);
 			{
@@ -759,14 +762,14 @@ bool ProductionSite::get_building_work
 	if (!m_recruited_workers.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
-		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
+		std::pair<WareIndex, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
 			const WorkerDescr & worker_descr =
 				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
-					ref_cast<Worker, Bob>(worker_descr.create_object());
+					dynamic_cast<Worker&>(worker_descr.create_object());
 				recruit.set_owner(&worker.owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);
@@ -842,7 +845,7 @@ void ProductionSite::program_start
 
 	m_program_timer = true;
 	uint32_t tdelta = 10;
-	Skipped_Programs::const_iterator i = m_skipped_programs.find(program_name);
+	SkippedPrograms::const_iterator i = m_skipped_programs.find(program_name);
 	if (i != m_skipped_programs.end()) {
 		uint32_t const gametime = game.get_gametime();
 		uint32_t const earliest_allowed_start_time = i->second + 10000;
@@ -859,7 +862,7 @@ void ProductionSite::program_start
  * \pre Any program is running
  * \post No program is running, acting is scheduled
  */
-void ProductionSite::program_end(Game & game, Program_Result const result)
+void ProductionSite::program_end(Game & game, ProgramResult const result)
 {
 	assert(m_stack.size());
 
@@ -912,6 +915,7 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
+
 	if (m_out_of_resource_delay_counter >=
 		 descr().out_of_resource_delay_attempts()) {
 		if (descr().out_of_resource_title().empty())
@@ -924,12 +928,16 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-					  "produce",
+				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,
 				 minutes * 60000, 0);
 		}
+		// following sends "out of resources" messages to be picked up by AI
+		// used as a information for dismantling and upgrading mines
+		if (descr().get_ismine())
+			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
 	}
 	if (m_out_of_resource_delay_counter++ >=
 		 descr().out_of_resource_delay_attempts()) {

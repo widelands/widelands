@@ -3,9 +3,7 @@ output=grape
 
 [aihints]
 space_consumer=true
-is_basic=true
-build_material=false
-is_food_basic=true
+forced_after=120
 
 [buildcost]
 wood=2

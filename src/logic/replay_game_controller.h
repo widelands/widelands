@@ -35,18 +35,18 @@ public:
 
 	void think() override;
 
-	void sendPlayerCommand(Widelands::PlayerCommand &) override;
-	int32_t getFrametime() override;
-	std::string getGameDescription() override;
-	uint32_t realSpeed() override;
-	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t const speed) override;
-	bool isPaused() override;
-	void setPaused(bool const paused) override;
+	void send_player_command(Widelands::PlayerCommand &) override;
+	int32_t get_frametime() override;
+	GameController::GameType get_game_type() override;
+	uint32_t real_speed() override;
+	uint32_t desired_speed() override;
+	void set_desired_speed(uint32_t const speed) override;
+	bool is_paused() override;
+	void set_paused(bool const paused) override;
 
 private:
-	struct Cmd_ReplayEnd : public Widelands::Command {
-		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
+	struct CmdReplayEnd : public Widelands::Command {
+		CmdReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
 		virtual void execute (Widelands::Game & game);
 		virtual uint8_t id() const;
 	};

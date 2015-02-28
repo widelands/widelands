@@ -19,26 +19,18 @@
 
 #include "logic/world/world.h"
 
-#include <iostream>
 #include <memory>
-#include <sstream>
 
-#include "base/i18n.h"
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
-#include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "io/filewrite.h"
+#include "graphic/image_io.h"
+#include "graphic/texture.h"
+#include "graphic/texture_atlas.h"
+#include "logic/bob.h"
 #include "logic/critter.h"
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
-#include "logic/parse_map_object_types.h"
-#include "logic/widelands.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -52,6 +44,42 @@ World::World()
 }
 
 World::~World() {
+}
+
+void World::load_graphics() {
+	TextureAtlas ta;
+
+	// These will be deleted at the end of the method.
+	std::vector<std::unique_ptr<Texture>> individual_textures_;
+
+	for (size_t i = 0; i < terrains_->size(); ++i) {
+		TerrainDescription* terrain = terrains_->get_mutable(i);
+		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
+			SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
+
+			// Set the minimap color on the first loaded image.
+			if (j == 0) {
+				uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
+				const SDL_Color top_left_pixel_color =
+				   sdl_surface->format->palette->colors[top_left_pixel];
+				terrain->set_minimap_color(
+				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
+			}
+			individual_textures_.emplace_back(new Texture(sdl_surface));
+			ta.add(*individual_textures_.back());
+		}
+	}
+
+	std::vector<std::unique_ptr<Texture>> textures;
+	terrain_texture_ = ta.pack(&textures);
+
+	int next_texture_to_move = 0;
+	for (size_t i = 0; i < terrains_->size(); ++i) {
+		TerrainDescription* terrain = terrains_->get_mutable(i);
+		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
+			terrain->add_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+	}
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
@@ -98,11 +126,11 @@ int32_t World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
-		throw game_data_error("world does not define resource type \"%s\"", resourcename);
+		throw GameDataError("world does not define resource type \"%s\"", resourcename);
 	return result;
 }
 
-TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
+TerrainDescription& World::terrain_descr(TerrainIndex const i) const {
 	return *terrains_->get(i);
 }
 
@@ -143,7 +171,7 @@ int32_t World::get_resource(const char* const name) const {
 	return resources_->get_index(name);
 }
 
-ResourceDescription const* World::get_resource(Resource_Index const res) const {
+ResourceDescription const* World::get_resource(ResourceIndex const res) const {
 	assert(res < resources_->get_nitems());
 	return resources_->get(res);
 }

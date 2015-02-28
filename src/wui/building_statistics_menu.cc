@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -63,12 +64,12 @@
 
 namespace Columns {enum {Name, Size, Prod, Owned, Build};}
 
-inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & BuildingStatisticsMenu::iplayer() const {
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
-Building_Statistics_Menu::Building_Statistics_Menu
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+BuildingStatisticsMenu::BuildingStatisticsMenu
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "building_statistics",
@@ -80,7 +81,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_progbar
 		(this,
 		 LABEL_X, PROGRESS_BAR_Y, WINDOW_WIDTH - LABEL_X - HMARGIN, 20,
-		 UI::Progress_Bar::Horizontal),
+		 UI::ProgressBar::Horizontal),
 	m_total_productivity_label
 		(this,
 		 LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
@@ -113,16 +114,17 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_table.add_column (70, _("Prod"), "",     UI::Align_Right);
 	m_table.add_column (70, _("Owned"), "",    UI::Align_Right);
 	m_table.add_column (70, _("Build"), "",    UI::Align_Right);
-	m_table.selected.connect(boost::bind(&Building_Statistics_Menu::table_changed, this, _1));
+	m_table.selected.connect(boost::bind(&BuildingStatisticsMenu::table_changed, this, _1));
 	m_table.set_column_compare
 		(Columns::Size,
 		 boost::bind
-		 	(&Building_Statistics_Menu::compare_building_size, this, _1, _2));
+		 	(&BuildingStatisticsMenu::compare_building_size, this, _1, _2));
+	m_table.focus();
 
 	//  toggle when to run button
 	m_progbar.set_total(100);
 
-	m_btn[Prev_Owned] =
+	m_btn[PrevOwned] =
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
@@ -130,10 +132,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Owned]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Owned));
+	m_btn[PrevOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevOwned));
 
-	m_btn[Next_Owned] =
+	m_btn[NextOwned] =
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
@@ -141,10 +143,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Owned]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Owned));
+	m_btn[NextOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextOwned));
 
-	m_btn[Prev_Construction] =
+	m_btn[PrevConstruction] =
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
@@ -152,10 +154,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Construction]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Construction));
+	m_btn[PrevConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevConstruction));
 
-	m_btn[Next_Construction] =
+	m_btn[NextConstruction] =
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
@@ -163,10 +165,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Construction]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Construction));
+	m_btn[NextConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextConstruction));
 
-	m_btn[Prev_Unproductive] =
+	m_btn[PrevUnproductive] =
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
@@ -174,10 +176,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Unproductive]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Unproductive));
+	m_btn[PrevUnproductive]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevUnproductive));
 
-	m_btn[Next_Unproductive] =
+	m_btn[NextUnproductive] =
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
@@ -185,15 +187,15 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Unproductive]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Unproductive));
+	m_btn[NextUnproductive]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextUnproductive));
 }
 
 
 /*
  * Update this statistic
  */
-void Building_Statistics_Menu::think() {
+void BuildingStatisticsMenu::think() {
 	const Widelands::Game & game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
@@ -208,7 +210,7 @@ void Building_Statistics_Menu::think() {
  *
  * Draw this window
  */
-void Building_Statistics_Menu::draw(RenderTarget & dst) {
+void BuildingStatisticsMenu::draw(RenderTarget & dst) {
 	UI::Window::draw(dst);
 
 	const Widelands::Player & player = iplayer().player();
@@ -221,7 +223,7 @@ void Building_Statistics_Menu::draw(RenderTarget & dst) {
 /*
  * validate if this pointer is ok
  */
-int32_t Building_Statistics_Menu::validate_pointer
+int32_t BuildingStatisticsMenu::validate_pointer
 	(int32_t * const id, int32_t const size)
 {
 	if (*id < 0)
@@ -233,27 +235,27 @@ int32_t Building_Statistics_Menu::validate_pointer
 }
 
 
-void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
+void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 	assert(m_table.has_selection());
 	if (m_last_table_index != m_table.selection_index())
 		m_last_building_index = 0;
 	m_last_table_index = m_table.selection_index();
-	const std::vector<Widelands::Player::Building_Stats> & vec =
+	const std::vector<Widelands::Player::BuildingStats> & vec =
 		iplayer().get_player()->get_building_statistics
-			(Widelands::Building_Index
+			(Widelands::BuildingIndex
 				(static_cast<size_t>(m_table.get_selected())));
 	const Widelands::Map & map = iplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
 
 	switch (id) {
-	case Prev_Owned:
+	case PrevOwned:
 		--m_last_building_index;
 		break;
-	case Next_Owned:
+	case NextOwned:
 		++m_last_building_index;
 		break;
-	case Prev_Construction: {
+	case PrevConstruction: {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
@@ -261,7 +263,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 				break;
 		break;
 	}
-	case Next_Construction: {
+	case NextConstruction: {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
@@ -269,7 +271,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 				break;
 		break;
 	}
-	case Prev_Unproductive: {
+	case PrevUnproductive: {
 		int32_t const curindex = m_last_building_index;
 		found = false;
 		while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
@@ -294,7 +296,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 					found = true;
 		break;
 	}
-	case Next_Unproductive: {
+	case NextUnproductive: {
 		int32_t const curindex = m_last_building_index;
 		found = false;
 		while
@@ -334,17 +336,17 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 /*
  * The table has been selected
  */
-void Building_Statistics_Menu::table_changed(uint32_t) {update();}
+void BuildingStatisticsMenu::table_changed(uint32_t) {update();}
 
 /**
  * Callback to sort table based on building size.
  */
-bool Building_Statistics_Menu::compare_building_size
+bool BuildingStatisticsMenu::compare_building_size
 	(uint32_t const rowa, uint32_t const rowb)
 {
-	const Widelands::Tribe_Descr & tribe = iplayer().player().tribe();
-	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
-	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
+	const Widelands::TribeDescr & tribe = iplayer().player().tribe();
+	Widelands::BuildingIndex a = Widelands::BuildingIndex(m_table[rowa]);
+	Widelands::BuildingIndex b = Widelands::BuildingIndex(m_table[rowb]);
 	const Widelands::BuildingDescr * descra = tribe.get_building_descr(a);
 	const Widelands::BuildingDescr * descrb = tribe.get_building_descr(b);
 
@@ -365,17 +367,17 @@ bool Building_Statistics_Menu::compare_building_size
 /*
  * Update table
  */
-void Building_Statistics_Menu::update() {
+void BuildingStatisticsMenu::update() {
 	m_owned   .set_text("");
 	m_in_build.set_text("");
 	m_progbar .set_state(0);
 
 	const Widelands::Player      & player = iplayer().player();
-	const Widelands::Tribe_Descr & tribe  = player.tribe();
+	const Widelands::TribeDescr & tribe  = player.tribe();
 	const Widelands::Map         & map   = iplayer().game().map();
-	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
+	Widelands::BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::Building_Index i = 0;
+		(Widelands::BuildingIndex i = 0;
 		 i < nr_buildings;
 		 ++i)
 	{
@@ -387,14 +389,14 @@ void Building_Statistics_Menu::update() {
 			 || building.global()))
 			continue;
 
-		const std::vector<Widelands::Player::Building_Stats> & vec =
+		const std::vector<Widelands::Player::BuildingStats> & vec =
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
-		UI::Table<uintptr_t const>::Entry_Record * te = nullptr;
+		UI::Table<uintptr_t const>::EntryRecord * te = nullptr;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
-			UI::Table<uintptr_t const>::Entry_Record & er = m_table.get_record(l);
+			UI::Table<uintptr_t const>::EntryRecord & er = m_table.get_record(l);
 			if (UI::Table<uintptr_t const>::get(er) == i) {
 				te = &er;
 				break;
@@ -419,7 +421,7 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+						dynamic_cast<Widelands::ProductionSite&>
 							(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
@@ -430,14 +432,13 @@ void Building_Statistics_Menu::update() {
 
 		if (is_selected) {
 			m_anim = building.get_ui_anim();
-			m_btn[Prev_Owned]       ->set_enabled(nr_owned);
-			m_btn[Next_Owned]       ->set_enabled(nr_owned);
-			m_btn[Prev_Construction]->set_enabled(nr_build);
-			m_btn[Next_Construction]->set_enabled(nr_build);
+			m_btn[PrevOwned]       ->set_enabled(nr_owned);
+			m_btn[NextOwned]       ->set_enabled(nr_owned);
+			m_btn[PrevConstruction]->set_enabled(nr_build);
+			m_btn[NextConstruction]->set_enabled(nr_build);
 		}
 
 		//  add new Table Entry
-		char buffer[100];
 		te->set_picture
 			(Columns::Name, building.get_icon(), building.descname());
 
@@ -469,41 +470,44 @@ void Building_Statistics_Menu::update() {
 			uint32_t const percent =
 				static_cast<uint32_t>
 					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%3u", percent);
+			te->set_string(Columns::Prod, (boost::format("%3u") % percent).str()); //  space-pad for sort
 			if (is_selected)  {
 				m_progbar.set_state(percent);
-				m_btn[Prev_Unproductive]->set_enabled(true);
-				m_btn[Next_Unproductive]->set_enabled(true);
+				m_btn[PrevUnproductive]->set_enabled(true);
+				m_btn[NextUnproductive]->set_enabled(true);
 			}
 		} else {
-			snprintf(buffer, sizeof(buffer), " ");
+			te->set_string(Columns::Prod,  " ");
 			if (is_selected) {
-				m_btn[Prev_Unproductive]->set_enabled(false);
-				m_btn[Next_Unproductive]->set_enabled(false);
+				m_btn[PrevUnproductive]->set_enabled(false);
+				m_btn[NextUnproductive]->set_enabled(false);
 			}
 		}
-		te->set_string(Columns::Prod, buffer);
 
-		//  number of this buildings
-		snprintf(buffer, sizeof(buffer), "%3u", nr_owned); //  space-pad for sort
-		te->set_string(Columns::Owned, buffer);
-		if (is_selected)
-			m_owned.set_text(buffer);
+		//  number of these buildings
+		const std::string owned_string =
+		   (boost::format("%3u") % nr_owned).str();  //  space-pad for sort
+		te->set_string(Columns::Owned, owned_string);
+		if (is_selected) {
+			m_owned.set_text(owned_string);
+		}
 
-		//  number of currently builds
-		snprintf(buffer, sizeof(buffer), "%3u", nr_build); //  space-pad for sort
-		te->set_string(Columns::Build, buffer);
-		if (is_selected)
-			m_in_build.set_text(buffer);
+		//  number of these buildings currently being built
+		const std::string build_string =
+		   (boost::format("%3u") % nr_build).str();  //  space-pad for sort
+		te->set_string(Columns::Build, build_string);
+		if (is_selected) {
+			m_in_build.set_text(build_string);
+		}
 	}
 
 	//  disable all buttons, if nothing to select
 	if (!m_table.has_selection()) {
-		m_btn[Prev_Owned]       ->set_enabled(false);
-		m_btn[Next_Owned]       ->set_enabled(false);
-		m_btn[Prev_Construction]->set_enabled(false);
-		m_btn[Next_Construction]->set_enabled(false);
-		m_btn[Prev_Unproductive]->set_enabled(false);
-		m_btn[Next_Unproductive]->set_enabled(false);
+		m_btn[PrevOwned]       ->set_enabled(false);
+		m_btn[NextOwned]       ->set_enabled(false);
+		m_btn[PrevConstruction]->set_enabled(false);
+		m_btn[NextConstruction]->set_enabled(false);
+		m_btn[PrevUnproductive]->set_enabled(false);
+		m_btn[NextUnproductive]->set_enabled(false);
 	}
 }

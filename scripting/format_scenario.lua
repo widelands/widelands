@@ -33,11 +33,11 @@ function speech(img, clr, g_title, g_text)
    end
 
    -- Surround the text with translatable ","
-   text = (_ '“%s”'):format(text)
+   text = (_'“%s”'):format(text)
 
    local s = ""
    if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif " ..
+      s = rt("<p font-size=20 font-weight=bold font-face=serif " ..
          ("font-color=%s>"):format(clr) .. title ..
          "</p><p font-size=8> <br></p>"
       )
@@ -57,7 +57,7 @@ end
 --
 --    :returns: symbol .. " " .. text .. paragraphdivider()
 function listitem(symbol, text)
-   return symbol .. " " .. text .. paragraphdivider()
+   return symbol .. " " .. text .. listdivider()
 end
 
 -- RST
@@ -82,6 +82,19 @@ end
 --    :returns: listitem("•", text)
 function listitem_bullet(text)
    return listitem("•", text)
+end
+
+
+-- RST
+-- .. function:: listdivider()
+--
+--    Closes a paragraph and opens a new paragraph.
+--    Use this before starting a list when it doesn't create a paragraph.
+--    If you want more space, before the list, use paragraphdivider().
+--
+--    :returns: <br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>
+function listdivider()
+	return ("<br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>")
 end
 
 -- RST
@@ -122,13 +135,14 @@ end
 --       objective text & title.
 --
 function new_objectives(...)
+   local sum = 0
    local s = ""
    for idx,obj in ipairs{...} do
-   	s = rt("<p font-size=10> <br></p>" ..
-	   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
-	   .. ngettext("New Objective", "New Objectives", obj.number) .. "</p>")
-	   .. obj.body
+   	s = s .. obj.body
+      sum = sum + obj.number
    end
-   return s
+   return rt("<p font-size=10> <br></p>" ..
+	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
+	   .. ngettext("New Objective", "New Objectives", sum) .. "</p>") .. s
 end
 

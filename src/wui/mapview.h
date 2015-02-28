@@ -29,25 +29,25 @@
 #include "ui_basic/panel.h"
 
 class GameRenderer;
-class Interactive_Base;
+class InteractiveBase;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
-struct Map_View : public UI::Panel {
+struct MapView : public UI::Panel {
 	/**
 	 * Callback function type for when the view position changes.
 	 *
 	 * Parameters are x/y screen coordinates and whether the change should
 	 * be considered a "jump" or a smooth scrolling event.
 	 */
-	typedef boost::function<void (Point, bool)> ChangeViewFn;
+	using ChangeViewFn = boost::function<void (Point, bool)>;
 
-	Map_View
+	MapView
 		(UI::Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 Interactive_Base &);
-	virtual ~Map_View();
+		 InteractiveBase &);
+	virtual ~MapView();
 
 	void set_changeview(const ChangeViewFn & fn);
 
@@ -78,20 +78,18 @@ struct Map_View : public UI::Panel {
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 	void track_sel(Point m);
-	void need_complete_redraw() {m_complete_redraw_needed = true;}
 
 protected:
-	Interactive_Base & intbase() const {return m_intbase;}
+	InteractiveBase & intbase() const {return m_intbase;}
 
 private:
 	void stop_dragging();
 
 	std::unique_ptr<GameRenderer> m_renderer;
-	Interactive_Base & m_intbase;
+	InteractiveBase & m_intbase;
 	ChangeViewFn m_changeview;
 	Point              m_viewpoint;
 	bool               m_dragging;
-	bool               m_complete_redraw_needed;
 };
 
 

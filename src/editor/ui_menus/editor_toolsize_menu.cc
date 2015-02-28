@@ -21,21 +21,23 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
 
-inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
-	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+inline EditorInteractive & EditorToolsizeMenu::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 
 /**
  * Create all the buttons etc...
 */
-Editor_Toolsize_Menu::Editor_Toolsize_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+EditorToolsizeMenu::EditorToolsizeMenu
+	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
 		(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
@@ -55,8 +57,8 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {
-	m_increase.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::increase_radius, boost::ref(*this)));
-	m_decrease.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::decrease_radius, boost::ref(*this)));
+	m_increase.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
+	m_decrease.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
 
 	m_increase.set_repeating(true);
 	m_decrease.set_repeating(true);
@@ -67,21 +69,19 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 }
 
 
-void Editor_Toolsize_Menu::update(uint32_t const val) {
+void EditorToolsizeMenu::update(uint32_t const val) {
 	eia().set_sel_radius(val);
 	m_decrease.set_enabled(0 < val);
 	m_increase.set_enabled    (val < MAX_TOOL_AREA);
-	char buffer[250];
-	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
-	m_textarea.set_text(buffer);
+	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 
-void Editor_Toolsize_Menu::decrease_radius() {
+void EditorToolsizeMenu::decrease_radius() {
 	assert(0 < eia().get_sel_radius());
 	update(eia().get_sel_radius() - 1);
 }
-void Editor_Toolsize_Menu::increase_radius() {
+void EditorToolsizeMenu::increase_radius() {
 	assert(eia().get_sel_radius() < MAX_TOOL_AREA);
 	update(eia().get_sel_radius() + 1);
 }

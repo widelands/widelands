@@ -31,17 +31,18 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 
-struct Net_Open_Game;
-struct Net_Game_Info;
+struct NetOpenGame;
+struct NetGameInfo;
 
-struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
+class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
+public:
 	enum {
 		CANCEL = 0,
 		HOSTGAME,
 		JOINGAME,
 	};
 
-	Fullscreen_Menu_NetSetupLAN ();
+	FullscreenMenuNetSetupLAN ();
 
 	void think() override;
 
@@ -68,21 +69,21 @@ private:
 	UI::Button joingame, hostgame, back, loadlasthost;
 	UI::EditBox playername;
 	UI::EditBox hostname;
-	UI::Table<const Net_Open_Game * const> opengames;
-	LAN_Game_Finder discovery;
+	UI::Table<const NetOpenGame * const> opengames;
+	LanGameFinder discovery;
 
 	void game_selected (uint32_t);
 	void game_doubleclicked (uint32_t);
 
-	static void discovery_callback (int32_t, Net_Open_Game const *, void *);
+	static void discovery_callback (int32_t, NetOpenGame const *, void *);
 
-	void game_opened  (Net_Open_Game const *);
-	void game_closed  (Net_Open_Game const *);
-	void game_updated (Net_Open_Game const *);
+	void game_opened  (NetOpenGame const *);
+	void game_closed  (NetOpenGame const *);
+	void game_updated (NetOpenGame const *);
 
 	void update_game_info
-		(UI::Table<const Net_Open_Game * const>::Entry_Record &,
-		 const Net_Game_Info &);
+		(UI::Table<const NetOpenGame * const>::EntryRecord &,
+		 const NetGameInfo &);
 
 	void change_hostname();
 	void change_playername();

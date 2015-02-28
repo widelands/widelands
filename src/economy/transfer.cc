@@ -33,8 +33,8 @@
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -178,7 +178,7 @@ PlayerImmovable * Transfer::get_next_step
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, location))
 			if (&road->get_flag(Road::FlagEnd) == &m_route.get_flag(m_game, 1))
-				m_route.starttrim(1);
+				m_route.trim_start(1);
 
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, destination))
@@ -316,24 +316,24 @@ Load/save support
 
 void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version != TRANSFER_SAVEGAME_VERSION)
 		throw wexception("unhandled/unknown transfer version %u", version);
 
-	rd.destination = fr.Unsigned32();
+	rd.destination = fr.unsigned_32();
 }
 
 void Transfer::read_pointers
-	(MapMapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
+	(MapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);
 }
 
-void Transfer::write(MapMapObjectSaver & mos, FileWrite & fw)
+void Transfer::write(MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
+	fw.unsigned_8(TRANSFER_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
 	// not saving route right now, will be recaculated anyway
 }
 

@@ -21,7 +21,9 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
+#include <boost/format.hpp>
 #include <stdint.h>
 
 #include "base/wexception.h"
@@ -48,9 +50,7 @@ namespace {
 std::vector<std::string> section_to_strings(Section* section) {
 	std::vector<std::string> return_value;
 	for (uint32_t idx = 0;; ++idx) {
-		char buffer[32];
-		snprintf(buffer, sizeof(buffer), "%i", idx);
-		char const* const string = section->get_string(buffer, nullptr);
+		char const* const string = section->get_string(std::to_string(idx).c_str(), nullptr);
 		if (!string)
 			break;
 		return_value.emplace_back(string);
@@ -136,7 +136,7 @@ CritterDescr::CritterDescr(char const* const _name,
                                      const std::string& directory,
                                      Profile& prof,
                                      Section& global_s,
-												 Tribe_Descr & _tribe)
+												 TribeDescr & _tribe)
 	:
 	BobDescr(MapObjectType::CRITTER, _name, _descname, &_tribe)
 {
@@ -154,8 +154,7 @@ CritterDescr::CritterDescr(char const* const _name,
 		add_attributes(attributes, std::set<uint32_t>());
 	}
 
-	char defaultpics[256];
-	snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
+	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str();
 	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
@@ -303,8 +302,7 @@ void Critter::program_update(Game & game, State & state)
 
 	for (;;) {
 		const CritterProgram & program =
-			ref_cast<CritterProgram const, BobProgramBase const>
-				(*state.program);
+			dynamic_cast<const CritterProgram&>(*state.program);
 
 		if (state.ivar1 >= program.get_size())
 			return pop_task(game);
@@ -399,8 +397,8 @@ const BobProgramBase * Critter::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
-												  MapMapObjectLoader& mol,
+MapObject::Loader* Critter::load(EditorGameBase& egbase,
+												  MapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -408,10 +406,10 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
-			const std::string owner = fr.CString();
-			std::string critter_name = fr.CString();
+			const std::string owner = fr.c_string();
+			std::string critter_name = fr.c_string();
 			const CritterDescr * descr = nullptr;
 
 			if (owner == "world") {
@@ -421,19 +419,19 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 			} else {
 				egbase.manually_load_tribe(owner);
 
-				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+				if (const TribeDescr * tribe = egbase.get_tribe(owner))
 					descr = dynamic_cast<const CritterDescr *>
 						(tribe->get_bob_descr(critter_name));
 			}
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading critter: %s", e.what());
 	}
@@ -442,15 +440,15 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 }
 
 void Critter::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderCritter);
-	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderCritter);
+	fw.unsigned_8(CRITTER_SAVEGAME_VERSION);
 
 	std::string owner =
 		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
-	fw.CString(owner);
-	fw.CString(descr().name());
+	fw.c_string(owner);
+	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
 }

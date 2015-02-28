@@ -29,34 +29,34 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 /**
  * Status window for dismantle sites.
  */
-struct DismantleSite_Window : public Building_Window {
-	DismantleSite_Window
-		(Interactive_GameBase        & parent,
+struct DismantleSiteWindow : public BuildingWindow {
+	DismantleSiteWindow
+		(InteractiveGameBase        & parent,
 		 Widelands::DismantleSite &,
 		 UI::Window *                & registry);
 
 	void think() override;
 
 private:
-	UI::Progress_Bar * m_progress;
+	UI::ProgressBar * m_progress;
 };
 
 
-DismantleSite_Window::DismantleSite_Window
-	(Interactive_GameBase        & parent,
+DismantleSiteWindow::DismantleSiteWindow
+	(InteractiveGameBase        & parent,
 	 Widelands::DismantleSite & cs,
 	 UI::Window *                & registry)
-	: Building_Window(parent, cs, registry)
+	: BuildingWindow(parent, cs, registry)
 {
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
 	m_progress =
-		new UI::Progress_Bar
+		new UI::ProgressBar
 			(&box,
 			 0, 0,
-			 UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
-			 UI::Progress_Bar::Horizontal);
+			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
 	box.add(m_progress, UI::Box::AlignCenter);
 
@@ -64,7 +64,7 @@ DismantleSite_Window::DismantleSite_Window
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
+		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -75,12 +75,12 @@ DismantleSite_Window::DismantleSite_Window
 Make sure the window is redrawn when necessary.
 ===============
 */
-void DismantleSite_Window::think()
+void DismantleSiteWindow::think()
 {
-	Building_Window::think();
+	BuildingWindow::think();
 
 	const Widelands::DismantleSite & ds =
-		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
+		dynamic_cast<Widelands::DismantleSite&>(building());
 
 	m_progress->set_state(ds.get_built_per64k());
 }
@@ -92,7 +92,7 @@ Create the status window describing the site.
 ===============
 */
 void Widelands::DismantleSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	new DismantleSite_Window(parent, *this, registry);
+	new DismantleSiteWindow(parent, *this, registry);
 }

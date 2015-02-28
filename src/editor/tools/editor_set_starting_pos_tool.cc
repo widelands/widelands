@@ -32,12 +32,12 @@ static int32_t m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int32_t Editor_Tool_Set_Starting_Pos_Callback
+int32_t editor_tool_set_starting_pos_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map)
 {
 	// Area around already placed players
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
-	for (Widelands::Player_Number p = 1, last = m_current_player - 1;; ++p) {
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
+	for (Widelands::PlayerNumber p = 1, last = m_current_player - 1;; ++p) {
 		for (; p <= last; ++p)
 			if (Widelands::Coords const sp = map.get_starting_pos(p))
 				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS)
@@ -55,18 +55,18 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	return 0;
 }
 
-Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-	: Editor_Tool(*this, *this, false), m_current_sel_pic(nullptr)
+EditorSetStartingPosTool::EditorSetStartingPosTool()
+	: EditorTool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
-int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
                                                         const Widelands::World&,
-                                                        Widelands::Node_and_Triangle<> const center,
-                                                        Editor_Interactive&,
-                                                        Editor_Action_Args&) {
+                                                        Widelands::NodeAndTriangle<> const center,
+                                                        EditorInteractive&,
+                                                        EditorActionArgs&) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -88,7 +88,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
 		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
-		if (Editor_Tool_Set_Starting_Pos_Callback(map.get_fcoords(center.node), map)) {
+		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
 			OverlayManager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);
@@ -105,14 +105,14 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
 	return 1;
 }
 
-Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
+Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 () const
 {
 	return m_current_player;
 }
 
 
-void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t const i) {
+void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
 
 	fsel_picsname[28] = '0' + m_current_player / 10;

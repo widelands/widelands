@@ -37,21 +37,21 @@
 #include "wui/interactive_base.h"
 
 class Editor;
-class Editor_Tool;
+class EditorTool;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
-struct Editor_Interactive : public Interactive_Base {
-	friend struct Editor_Tool_Menu;
+struct EditorInteractive : public InteractiveBase {
+	friend struct EditorToolMenu;
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.
 	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 private:
-	Editor_Interactive(Widelands::Editor_Game_Base &);
+	EditorInteractive(Widelands::EditorGameBase &);
 
 public:
 	void register_overlays();
@@ -62,11 +62,11 @@ public:
 	void think() override;
 
 	void map_clicked(bool draw = false);
-	void set_sel_pos(Widelands::Node_and_Triangle<>) override;
+	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
@@ -74,7 +74,7 @@ public:
 		Tools()
 			:
 			current_pointer(&increase_height),
-			use_tool(Editor_Tool::First),
+			use_tool(EditorTool::First),
 			increase_height(decrease_height, set_height),
 			noise_height(set_height),
 			place_immovable(delete_immovable),
@@ -82,32 +82,32 @@ public:
 			increase_resources(decrease_resources, set_resources),
 			set_port_space(unset_port_space)
 		{}
-		Editor_Tool & current() const {return *current_pointer;}
-		typedef std::vector<Editor_Tool *> Tool_Vector;
-		//Tool_Vector                     tools;
-		Editor_Tool          *          current_pointer;
-		Editor_Tool::Tool_Index         use_tool;
-		Editor_Info_Tool                info;
-		Editor_Set_Height_Tool          set_height;
-		Editor_Decrease_Height_Tool     decrease_height;
-		Editor_Increase_Height_Tool     increase_height;
-		Editor_Noise_Height_Tool        noise_height;
-		Editor_Set_Terrain_Tool         set_terrain;
-		Editor_Delete_Immovable_Tool    delete_immovable;
-		Editor_Place_Immovable_Tool     place_immovable;
-		Editor_Set_Starting_Pos_Tool    set_starting_pos;
-		Editor_Delete_Bob_Tool          delete_bob;
-		Editor_Place_Bob_Tool           place_bob;
-		Editor_Decrease_Resources_Tool  decrease_resources;
-		Editor_Set_Resources_Tool       set_resources;
-		Editor_Increase_Resources_Tool  increase_resources;
-		Editor_Set_Port_Space_Tool      set_port_space;
-		Editor_Unset_Port_Space_Tool    unset_port_space;
-		Editor_Set_Origin_Tool          set_origin;
-		Editor_Make_Infrastructure_Tool make_infrastructure;
+		EditorTool & current() const {return *current_pointer;}
+		using ToolVector = std::vector<EditorTool *>;
+		//ToolVector                     tools;
+		EditorTool          *          current_pointer;
+		EditorTool::ToolIndex         use_tool;
+		EditorInfoTool                info;
+		EditorSetHeightTool          set_height;
+		EditorDecreaseHeightTool     decrease_height;
+		EditorIncreaseHeightTool     increase_height;
+		EditorNoiseHeightTool        noise_height;
+		EditorSetTerrainTool         set_terrain;
+		EditorDeleteImmovableTool    delete_immovable;
+		EditorPlaceImmovableTool     place_immovable;
+		EditorSetStartingPosTool    set_starting_pos;
+		EditorDeleteBobTool          delete_bob;
+		EditorPlaceBobTool           place_bob;
+		EditorDecreaseResourcesTool  decrease_resources;
+		EditorSetResourcesTool       set_resources;
+		EditorIncreaseResourcesTool  increase_resources;
+		EditorSetPortSpaceTool      set_port_space;
+		EditorUnsetPortSpaceTool    unset_port_space;
+		EditorSetOriginTool          set_origin;
+		EditorMakeInfrastructureTool make_infrastructure;
 	} tools;
 
-	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
+	void select_tool(EditorTool &, EditorTool::ToolIndex);
 
 	Widelands::Player * get_player() const override {return nullptr;}
 
@@ -115,9 +115,9 @@ public:
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::Player_Number, void const * const) override;
-	void unreference_player_tribe(Widelands::Player_Number, void const * const);
-	bool is_player_tribe_referenced(Widelands::Player_Number);
+	void   reference_player_tribe(Widelands::PlayerNumber, void const * const) override;
+	void unreference_player_tribe(Widelands::PlayerNumber, void const * const);
+	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {m_need_save = t;}
 
 private:
@@ -129,16 +129,16 @@ private:
 
 	//  state variables
 	bool m_need_save;
-	struct Player_References {
+	struct PlayerReferences {
 		int32_t      player;
 		void const * object;
 	};
-	std::vector<Player_References> m_player_tribe_references;
+	std::vector<PlayerReferences> m_player_tribe_references;
 
 	int32_t m_realtime;
 	bool m_left_mouse_button_is_down;
 
-	Editor_History m_history;
+	EditorHistory m_history;
 
 	UI::UniqueWindow::Registry m_toolmenu;
 

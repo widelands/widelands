@@ -20,27 +20,27 @@
 #ifndef WL_SCRIPTING_LUA_ROOT_H
 #define WL_SCRIPTING_LUA_ROOT_H
 
+#include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 namespace LuaRoot {
 
 /*
  * Base class for all classes in wl
  */
-class L_RootModuleClass : public LunaClass {
+class LuaRootModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "";}
 };
 
-class L_Game : public LuaBases::L_EditorGameBase {
+class LuaGame : public LuaBases::LuaEditorGameBase {
 public:
-	LUNA_CLASS_HEAD(L_Game);
+	LUNA_CLASS_HEAD(LuaGame);
 	const char * get_modulename() override {return "";}
 
-	L_Game() {}
-	L_Game(lua_State * L);
+	LuaGame() {}
+	LuaGame(lua_State * L);
 
 	void __persist(lua_State * L) override;
 	void __unpersist(lua_State * L) override;
@@ -67,14 +67,14 @@ public:
 	 */
 };
 
-class L_Editor : public LuaBases::L_EditorGameBase {
+class LuaEditor : public LuaBases::LuaEditorGameBase {
 public:
-	LUNA_CLASS_HEAD(L_Editor);
+	LUNA_CLASS_HEAD(LuaEditor);
 	const char * get_modulename() override {return "";}
 
-	L_Editor() {}
-	L_Editor(lua_State * L);
-	virtual ~L_Editor() {}
+	LuaEditor() {}
+	LuaEditor(lua_State * L);
+	virtual ~LuaEditor() {}
 
 	void __persist(lua_State * L) override;
 	void __unpersist(lua_State * L) override;
@@ -92,13 +92,13 @@ public:
 	 */
 };
 
-class L_World : public L_RootModuleClass {
+class LuaWorld : public LuaRootModuleClass {
 public:
-	LUNA_CLASS_HEAD(L_World);
+	LUNA_CLASS_HEAD(LuaWorld);
 	const char * get_modulename() override {return "";}
 
-	L_World() {}
-	L_World(lua_State * L);
+	LuaWorld() {}
+	LuaWorld(lua_State * L);
 
 	void __persist(lua_State * L) override;
 	void __unpersist(lua_State * L) override;

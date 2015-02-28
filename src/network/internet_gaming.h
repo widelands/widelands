@@ -36,7 +36,7 @@
 
 
 /// A simple network client struct
-struct INet_Client {
+struct InternetClient {
 	std::string   name;
 	std::string   build_id;
 	std::string   game;
@@ -45,7 +45,7 @@ struct INet_Client {
 };
 
 /// A simple network game struct
-struct INet_Game {
+struct InternetGame {
 	std::string   name;
 	std::string   build_id;
 	bool          connectable;
@@ -62,7 +62,7 @@ struct InternetGaming : public ChatProvider {
 	void reset();
 
 	// Login and logout
-	void initialiseConnection();
+	void initialize_connection();
 	bool login
 		(const std::string & nick, const std::string & pwd, bool registered,
 		 const std::string & metaserver, uint32_t port);
@@ -72,7 +72,7 @@ struct InternetGaming : public ChatProvider {
 	/// \returns whether the client is logged in
 	bool logged_in() {return (m_state == LOBBY) || (m_state == CONNECTING) || (m_state == IN_GAME);}
 	bool error()     {return (m_state == COMMUNICATION_ERROR);}
-	void setError()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
+	void set_error()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
 
 	void handle_metaserver_communication();
 
@@ -85,20 +85,13 @@ struct InternetGaming : public ChatProvider {
 
 
 	// Informative functions for lobby
-	bool updateForGames();
-	const std::vector<INet_Game>   & games();
-	bool updateForClients();
-	const std::vector<INet_Client> & clients();
-
-	/// \returns the maximum allowed number of clients in a game (players + spectators)
-	uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
-
-	/// sets the maximum number of players that may be in the game
-	void set_local_maxclients(uint32_t mp) {m_maxclients = mp;}
+	bool update_for_games();
+	const std::vector<InternetGame>   & games();
+	bool update_for_clients();
+	const std::vector<InternetClient> & clients();
 
 	/// sets the name of the local server as shown in the games list
 	void set_local_servername(const std::string & name) {m_gamename = name;}
-
 
 	/// \returns the name of the local server
 	std::string & get_local_servername() {return m_gamename;}
@@ -120,13 +113,13 @@ struct InternetGaming : public ChatProvider {
 	}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage> & getMessages() const override {return messages;}
+	const std::vector<ChatMessage> & get_messages() const override {return messages;}
 
 	/// Silence the internet lobby chat if we are in game as we do not see the messages anyways
 	bool sound_off() override {return m_state == IN_GAME;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
-	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {
+	void get_ingame_system_messages(std::vector<ChatMessage> & msg) {
 		msg = ingame_system_chat;
 		ingame_system_chat.clear();
 	}
@@ -140,7 +133,7 @@ private:
 	bool str2bool(std::string);
 	std::string bool2str(bool);
 
-	void formatAndAddChat(std::string from, std::string to, bool system, std::string msg);
+	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
 
 
 	/// The socket that connects us to the host
@@ -173,7 +166,6 @@ private:
 
 	/// informations of the clients game
 	std::string      m_gamename;
-	uint32_t         m_maxclients;
 	std::string      m_gameip;
 
 	/// Metaserver informations
@@ -181,8 +173,8 @@ private:
 	bool                     gameupdateonmetaserver;
 	bool                     clientupdate;
 	bool                     gameupdate;
-	std::vector<INet_Client> clientlist;
-	std::vector<INet_Game>   gamelist;
+	std::vector<InternetClient> clientlist;
+	std::vector<InternetGame>   gamelist;
 	int32_t                  time_offset;
 
 	/// ChatProvider: chat messages

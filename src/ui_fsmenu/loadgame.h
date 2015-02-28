@@ -25,72 +25,98 @@
 #include <memory>
 
 #include "graphic/image.h"
-#include "io/filesystem/filesystem.h"
+#include "logic/game_controller.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 namespace Widelands {
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 class Map;
-class Map_Loader;
+class MapLoader;
 }
 class Image;
 class RenderTarget;
 class GameController;
 struct GameSettingsProvider;
 
+
+/**
+ * Data about a savegame/replay that we're interested in.
+ */
+struct SavegameData {
+	std::string filename;
+	std::string mapname;
+	std::string wincondition;
+	std::string minimap_path;
+	std::string savedatestring;
+	std::string errormessage;
+
+	uint32_t gametime;
+	uint32_t nrplayers;
+	time_t savetimestamp;
+	GameController::GameType gametype;
+
+	SavegameData() : gametime(0), nrplayers(0), savetimestamp(0),
+		gametype(GameController::GameType::SINGLEPLAYER) {}
+};
+
+
+
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame
-		(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
+class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
+public:
+	FullscreenMenuLoadGame
+		(Widelands::Game&, GameSettingsProvider* gsp, GameController* gc = nullptr,
+		 bool is_replay = false);
 
 	const std::string & filename() {return m_filename;}
 
-	void clicked_ok    ();
-	void clicked_delete();
-	void map_selected  (uint32_t);
-	void double_clicked(uint32_t);
-	void fill_list     ();
-	void think() override;
+	void think();
 
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+protected:
+	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+	bool set_has_selection() override;
+
 
 private:
-	void no_selection();
+	bool compare_date_descending(uint32_t, uint32_t);
+	void clicked_delete();
 
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
-	uint16_t    m_minimap_max_size;
+	bool                          m_is_replay;
 
-	Widelands::Game &                               m_game;
-	UI::Button                             m_back;
-	UI::Button                             m_ok;
-	UI::Button                             m_delete;
-	UI::Listselect<const char *>                    m_list;
-	UI::Textarea                                    m_title;
-	UI::Textarea                                    m_label_mapname;
-	UI::Textarea                                    m_tamapname;
-	UI::Textarea                                    m_label_gametime;
-	UI::Textarea                                    m_tagametime;
-	UI::Textarea                                    m_label_players;
-	UI::Textarea                                    m_ta_players;
-	UI::Textarea                                    m_ta_win_condition;
-	UI::Textarea                                    m_label_minimap;
-	UI::Icon                                        m_minimap_icon;
-	std::string                                     m_filename;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;  // Multiline for long names
+	UI::Textarea                  m_label_gametime;
+	UI::MultilineTextarea         m_ta_gametime; // Multiline because we want tooltips
+	UI::Textarea                  m_label_players;
+	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_win_condition;
+	UI::MultilineTextarea         m_ta_win_condition;
 
-	filenameset_t                                   m_gamefiles;
+	UI::Button                    m_delete;
 
-	GameSettingsProvider                          * m_settings;
-	GameController                                * m_ctrl;
-	std::unique_ptr<const Image>                    m_minimap_image;
+	UI::MultilineTextarea         m_ta_errormessage;
+
+	int32_t const                 m_minimap_y, m_minimap_w, m_minimap_h;
+	UI::Icon                      m_minimap_icon;
+	std::unique_ptr<const Image>  m_minimap_image;
+
+	std::vector<SavegameData>     m_games_data;
+	std::string                   m_filename;
+
+	Widelands::Game&              m_game;
+	GameSettingsProvider*         m_settings;
+	GameController*               m_ctrl;
 };
 
 

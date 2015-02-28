@@ -36,15 +36,15 @@
 #define vmargin margin
 #define vspacing 15
 
-inline Editor_Interactive & Editor_Main_Menu::eia() {
-	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+inline EditorInteractive & EditorMainMenu::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 /**
  * Create all the buttons etc...
 */
-Editor_Main_Menu::Editor_Main_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+EditorMainMenu::EditorMainMenu
+	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "main_menu", &registry, 2 * hmargin + width,
@@ -85,11 +85,11 @@ Editor_Main_Menu::Editor_Main_Menu
 		 g_gr->images().get("pics/but0.png"),
 		 _("Exit Editor"))
 {
-	m_button_new_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::new_map_btn, this));
-	m_button_new_random_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::new_random_map_btn, this));
-	m_button_load_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::load_btn, this));
-	m_button_save_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::save_btn, this));
-	m_button_map_options.sigclicked.connect(boost::bind(&Editor_Main_Menu::map_options_btn, this));
+	m_button_new_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
+	m_button_new_random_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
+	m_button_load_map.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
+	m_button_save_map.sigclicked.connect(boost::bind(&EditorMainMenu::save_btn, this));
+	m_button_map_options.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
 
 	m_window_readme.open_window = [this] {
 		fileview_window(eia(), m_window_readme, "txts/editor_readme");
@@ -97,7 +97,7 @@ Editor_Main_Menu::Editor_Main_Menu
 	m_button_view_readme.sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, m_window_readme));
 
-	m_button_exit_editor.sigclicked.connect(boost::bind(&Editor_Main_Menu::exit_btn, this));
+	m_button_exit_editor.sigclicked.connect(boost::bind(&EditorMainMenu::exit_btn, this));
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
@@ -107,27 +107,27 @@ Editor_Main_Menu::Editor_Main_Menu
 /**
  * Called, when buttons get clicked
 */
-void Editor_Main_Menu::new_map_btn() {
-	new Main_Menu_New_Map(eia());
+void EditorMainMenu::new_map_btn() {
+	new MainMenuNewMap(eia());
 	die();
 }
 
-void Editor_Main_Menu::new_random_map_btn() {
-	new Main_Menu_New_Random_Map(eia());
+void EditorMainMenu::new_random_map_btn() {
+	new MainMenuNewRandomMap(eia());
 	die();
 }
 
-void Editor_Main_Menu::load_btn() {
-	new Main_Menu_Load_Map(eia());
+void EditorMainMenu::load_btn() {
+	new MainMenuLoadMap(eia());
 	die();
 }
 
-void Editor_Main_Menu::save_btn() {
-	new Main_Menu_Save_Map(eia());
+void EditorMainMenu::save_btn() {
+	new MainMenuSaveMap(eia());
 	die();
 }
-void Editor_Main_Menu::map_options_btn() {
-	new Main_Menu_Map_Options(eia());
+void EditorMainMenu::map_options_btn() {
+	new MainMenuMapOptions(eia());
 	die();
 }
-void Editor_Main_Menu::exit_btn() {eia().exit();}
+void EditorMainMenu::exit_btn() {eia().exit();}

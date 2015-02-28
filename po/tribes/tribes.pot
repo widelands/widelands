@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2014 Widelands Development Team
+# Copyright (C) 2005-2015 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-07 20:39+0000\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -299,18 +299,18 @@ msgid ""
 "%s or better"
 msgstr ""
 
-#: ../../tribes/scripting/format_help.lua:699
+#: ../../tribes/scripting/format_help.lua:701
 msgid ""
 "Experience levels:"
 msgstr ""
 
-#: ../../tribes/scripting/format_help.lua:700
-#: ../../tribes/scripting/format_help.lua:709
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/format_help.lua:711
 msgid ""
 "%s to %s (%s EP)"
 msgstr ""
 
-#: ../../tribes/scripting/format_help.lua:735
+#: ../../tribes/scripting/format_help.lua:736
 msgid ""
 "Worker uses:"
 msgid_plural ""
@@ -318,12 +318,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../tribes/scripting/format_help.lua:748
+#: ../../tribes/scripting/format_help.lua:754
 msgid ""
 "Performance:"
 msgstr ""
 
-#: ../../tribes/scripting/format_help.lua:748
+#: ../../tribes/scripting/format_help.lua:754
 msgid ""
 "Production"
 msgstr ""

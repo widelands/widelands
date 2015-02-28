@@ -33,7 +33,7 @@ struct DedicatedLog {
 	static DedicatedLog * get();
 
 	// chat logging functions
-	void   chatAddSpacer();
+	void   chat_add_spacer();
 	void   chat(ChatMessage & c);
 
 	// info logging functions

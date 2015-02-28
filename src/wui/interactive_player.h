@@ -30,7 +30,7 @@
 #include "ui_basic/textarea.h"
 
 namespace UI {
-struct Multiline_Textarea;
+struct MultilineTextarea;
 struct Textarea;
 }
 
@@ -41,27 +41,25 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public Interactive_GameBase {
+class InteractivePlayer : public InteractiveGameBase {
 public:
-	Interactive_Player
+	InteractivePlayer
 		(Widelands::Game &,
 		 Section         & global_s,
-		 Widelands::Player_Number,
+		 Widelands::PlayerNumber,
 		 bool              multiplayer);
 
-	~Interactive_Player();
-
-	void start() override;
+	~InteractivePlayer();
 
 	void toggle_chat        ();
 
-	bool can_see(Widelands::Player_Number) const override;
-	bool can_act(Widelands::Player_Number) const override;
-	Widelands::Player_Number player_number() const override;
+	bool can_see(Widelands::PlayerNumber) const override;
+	bool can_act(Widelands::PlayerNumber) const override;
+	Widelands::PlayerNumber player_number() const override;
 
 	void node_action() override;
 
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 	Widelands::Player & player() const {
 		return game().player(m_player_number);
@@ -77,18 +75,18 @@ public:
 	// For load
 	void cleanup_for_load() override;
 	void think() override;
-	void postload() override;
 
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;
 	}
 
-	void popup_message(Widelands::Message_Id, const Widelands::Message &);
+	void popup_message(Widelands::MessageId, const Widelands::Message &);
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
 
-	Widelands::Player_Number m_player_number;
+	Widelands::PlayerNumber m_player_number;
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 
@@ -97,7 +95,6 @@ private:
 	UI::Button m_toggle_statistics_menu;
 	UI::Button m_toggle_objectives;
 	UI::Button m_toggle_minimap;
-	UI::Button m_toggle_buildhelp;
 	UI::Button m_toggle_message_menu;
 	UI::Button m_toggle_help;
 

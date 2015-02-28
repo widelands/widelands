@@ -26,11 +26,12 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "random/random.h"
+#include "scripting/logic.h"
 
 namespace UI {struct ProgressWindow;}
-struct Computer_Player;
-class Interactive_Player;
-struct Game_Main_Menu_Load_Game;
+struct ComputerPlayer;
+class InteractivePlayer;
+struct GameMainMenuLoadGame;
 struct WLApplication;
 struct GameSettings;
 class GameController;
@@ -40,6 +41,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+enum class ScoutingDirection;
 struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
@@ -61,14 +63,14 @@ enum {
 };
 
 class Player;
-class Map_Loader;
+class MapLoader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
-class Game : public Editor_Game_Base {
+class Game : public EditorGameBase {
 public:
-	struct General_Stats {
+	struct GeneralStats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
 		std::vector< uint32_t > nr_buildings;
@@ -84,13 +86,13 @@ public:
 
 		std::vector< uint32_t > custom_statistic;
 	};
-	typedef std::vector<General_Stats> General_Stats_vector;
+	using GeneralStatsVector = std::vector<GeneralStats>;
 
-	friend class Cmd_Queue; // this class handles the commands
-	friend struct Game_Game_Class_Data_Packet;
-	friend struct Game_Player_Info_Data_Packet;
-	friend struct Game_Loader;
-	friend struct ::Game_Main_Menu_Load_Game;
+	friend class CmdQueue; // this class handles the commands
+	friend struct GameClassPacket;
+	friend struct GamePlayerInfoPacket;
+	friend struct GameLoader;
+	friend struct ::GameMainMenuLoadGame;
 	friend struct ::WLApplication;
 
 	Game();
@@ -98,14 +100,17 @@ public:
 
 	// life cycle
 	void set_game_controller(GameController *);
-	GameController * gameController();
+	GameController * game_controller();
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow *, const GameSettings &);
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
-	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, const std::string& script_to_run, bool replay);
+	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
+	bool run(UI::ProgressWindow * loader_ui, StartGameType, const std::string& script_to_run, bool replay);
+
+	// Returns the upcasted lua interface.
+	LuaGameInterface& lua() override;
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
@@ -133,8 +138,8 @@ public:
 	void cleanup_for_load() override;
 
 	// in-game logic
-	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
-	Cmd_Queue       & cmdqueue()       {return m_cmdqueue;}
+	const CmdQueue & cmdqueue() const {return m_cmdqueue;}
+	CmdQueue       & cmdqueue()       {return m_cmdqueue;}
 	const RNG       & rng     () const {return m_rng;}
 	RNG             & rng     ()       {return m_rng;}
 
@@ -146,7 +151,7 @@ public:
 	void logic_rand_seed (uint32_t const seed) {rng().seed (seed);}
 
 	StreamWrite & syncstream();
-	md5_checksum get_sync_hash() const;
+	Md5Checksum get_sync_hash() const;
 
 	bool get_allow_cheats();
 
@@ -156,7 +161,7 @@ public:
 
 	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
 	void send_player_dismantle  (PlayerImmovable &);
-	void send_player_build      (int32_t, Coords, Building_Index);
+	void send_player_build      (int32_t, Coords, BuildingIndex);
 	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
@@ -164,35 +169,35 @@ public:
 	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
 	void send_player_start_or_cancel_expedition    (Building &);
 
-	void send_player_enhance_building (Building &, Building_Index);
+	void send_player_enhance_building (Building &, BuildingIndex);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
-		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
+		(PlayerImmovable &, int32_t type, WareIndex index, int32_t prio);
 	void send_player_set_ware_max_fill
-		(PlayerImmovable &, Ware_Index index, uint32_t);
+		(PlayerImmovable &, WareIndex index, uint32_t);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(const Flag &, Player_Number, uint32_t count);
+		(const Flag &, PlayerNumber, uint32_t count);
 
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);
-	void send_player_ship_explore_island(Ship &, bool);
+	void send_player_ship_explore_island(Ship &, ScoutingDirection);
 	void send_player_sink_ship(Ship &);
 	void send_player_cancel_expedition_ship(Ship &);
 
-	Interactive_Player * get_ipl();
+	InteractivePlayer * get_ipl();
 
 	SaveHandler & save_handler() {return m_savehandler;}
 
 	// Statistics
-	const General_Stats_vector & get_general_statistics() const {
+	const GeneralStatsVector & get_general_statistics() const {
 		return m_general_stats;
 	}
 
-	void ReadStatistics(FileRead &, uint32_t version);
-	void WriteStatistics(FileWrite &);
+	void read_statistics(FileRead &, uint32_t version);
+	void write_statistics(FileWrite &);
 
 	void sample_statistics();
 
@@ -201,7 +206,7 @@ public:
 	bool is_replay() const {return m_replay;}
 
 private:
-	void SyncReset();
+	void sync_reset();
 
 	MD5Checksum<StreamWrite> m_synchash;
 
@@ -221,11 +226,11 @@ private:
 		///
 		/// Note that this file is deleted at the end of the game, unless
 		/// \ref m_syncstreamsave has been set.
-		void StartDump(const std::string & fname);
+		void start_dump(const std::string & fname);
 
-		void Data(void const * data, size_t size) override;
+		void data(void const * data, size_t size) override;
 
-		void Flush() override {m_target.Flush();}
+		void flush() override {m_target.flush();}
 
 	public:
 		Game        &   m_game;
@@ -253,14 +258,14 @@ private:
 
 	RNG                  m_rng;
 
-	Cmd_Queue            m_cmdqueue;
+	CmdQueue            m_cmdqueue;
 
 	SaveHandler          m_savehandler;
 
 	ReplayReader       * m_replayreader;
 	ReplayWriter       * m_replaywriter;
 
-	General_Stats_vector m_general_stats;
+	GeneralStatsVector m_general_stats;
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;

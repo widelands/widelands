@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr7199[trunk] (Release)
+
+[global]
+packet_version="1"
+map_w="112"
+map_h="80"
+nr_players="1"
+name=_"Seafaring"
+author="wl-zocker"
+descr=_"In this tutorial, you will get to know seafaring, which is how to handle ships and ports."

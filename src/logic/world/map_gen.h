@@ -62,14 +62,14 @@ struct MapGenAreaInfo {
 
 	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType areaType);
 
-	size_t getNumTerrains(MapGenTerrainType) const;
-	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index) const;
-	uint32_t getWeight() const {return weight_;}
+	size_t get_num_terrains(MapGenTerrainType) const;
+	TerrainIndex get_terrain(MapGenTerrainType terrType, uint32_t index) const;
+	uint32_t get_weight() const {return weight_;}
 
 private:
-	std::vector<Terrain_Index>  terrains1_; //  ocean, coast, inner or foot
-	std::vector<Terrain_Index>  terrains2_; //  shelf, land, outer or mountain
-	std::vector<Terrain_Index>  terrains3_; //  shallow, upper, snow
+	std::vector<TerrainIndex>  terrains1_; //  ocean, coast, inner or foot
+	std::vector<TerrainIndex>  terrains2_; //  shelf, land, outer or mountain
+	std::vector<TerrainIndex>  terrains3_; //  shallow, upper, snow
 
 	uint32_t weight_;
 	MapGenAreaType areaType_;
@@ -96,12 +96,12 @@ private:
 struct MapGenLandResource {
 	MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo);
 
-	uint32_t getWeight() const {return weight_;}
-	const MapGenBobCategory * getBobCategory
+	uint32_t get_weight() const {return weight_;}
+	const MapGenBobCategory * get_bob_category
 		(MapGenAreaInfo::MapGenTerrainType terrType) const;
 
-	uint8_t getImmovableDensity() const {return immovable_density_;}
-	uint8_t getMoveableDensity() const {return critter_density_;}
+	uint8_t get_immovable_density() const {return immovable_density_;}
+	uint8_t get_moveable_density() const {return critter_density_;}
 
 private:
 	uint32_t        weight_;
@@ -122,27 +122,27 @@ private:
 struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 
-	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType) const;
-	const MapGenAreaInfo & getArea
+	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType areaType) const;
+	const MapGenAreaInfo & get_area
 		(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
 		const;
-	const MapGenBobCategory * getBobCategory(const std::string & bobCategory) const;
+	const MapGenBobCategory * get_bob_category(const std::string & bobCategory) const;
 
-	uint8_t getWaterOceanHeight  () const {return ocean_height_;}
-	uint8_t getWaterShelfHeight  () const {return shelf_height_;}
-	uint8_t getWaterShallowHeight() const {return shallow_height_;}
-	uint8_t getLandCoastHeight   () const {return coast_height_;}
-	uint8_t getLandUpperHeight   () const {return upperland_height_;}
-	uint8_t getMountainFootHeight() const {return mountainfoot_height_;}
-	uint8_t getMountainHeight    () const {return mountain_height_;}
-	uint8_t getSnowHeight        () const {return snow_height_;}
-	uint8_t getSummitHeight      () const {return summit_height_;}
+	uint8_t get_water_ocean_height  () const {return ocean_height_;}
+	uint8_t get_water_shelf_height  () const {return shelf_height_;}
+	uint8_t get_water_shallow_height() const {return shallow_height_;}
+	uint8_t get_land_coast_height   () const {return coast_height_;}
+	uint8_t get_land_upper_height   () const {return upperland_height_;}
+	uint8_t get_mountain_foot_height() const {return mountainfoot_height_;}
+	uint8_t get_mountain_height     () const {return mountain_height_;}
+	uint8_t get_snow_height         () const {return snow_height_;}
+	uint8_t get_summit_height       () const {return summit_height_;}
 
-	uint32_t getSumLandWeight() const;
+	uint32_t get_sum_land_weight() const;
 
-	size_t getNumLandResources() const;
-	const MapGenLandResource & getLandResource(size_t index) const;
-	uint32_t getSumLandResourceWeight() const;
+	size_t get_num_land_resources() const;
+	const MapGenLandResource & get_land_resource(size_t index) const;
+	uint32_t get_sum_land_resource_weight() const;
 
 private:
 	std::vector<MapGenAreaInfo> water_areas_;

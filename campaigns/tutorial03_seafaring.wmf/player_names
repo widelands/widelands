@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr7199[trunk] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Spieler 1"
+tribe="atlanteans"
+ai=
+closeable="false"

@@ -30,7 +30,6 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -39,9 +38,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
-#include "graphic/image_transformations.h"
 #include "graphic/surface.h"
-#include "graphic/surface_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -58,7 +55,6 @@ namespace  {
 /// A class that makes iteration over filename_?.png templates easy.
 class NumberGlob {
 public:
-	typedef uint32_t type;
 	NumberGlob(const std::string& pictmp);
 
 	/// If there is a next filename, puts it in 's' and returns true.
@@ -129,19 +125,19 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const Image& representative_image(const RGBColor& clr) const override;
 	const Image& representative_image_from_disk() const override;
+	const std::string& representative_image_from_disk_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:
+	// Loads the graphics if they are not yet loaded.
+	void ensure_graphics_are_loaded() const;
+
 	// Load the needed graphics from disk.
 	void load_graphics();
-
-	// Returns the given frame image with the given clr (if not NULL).
-	const Image& get_frame(uint32_t time, const RGBColor* playercolor = NULL) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -174,7 +170,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	if (fps > 0)
 		frametime_ = 1000 / fps;
 
-	hotspot_ = section.get_Point("hotspot");
+	hotspot_ = section.get_point("hotspot");
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -194,12 +190,12 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	string filename_wo_ext;
 	while (glob.next(&filename_wo_ext)) {
 		const string filename = filename_wo_ext + ".png";
-		if (!g_fs->FileExists(filename))
+		if (!g_fs->file_exists(filename))
 			break;
 		image_files_.push_back(filename);
 
 		const string pc_filename = filename_wo_ext + "_pc.png";
-		if (g_fs->FileExists(pc_filename)) {
+		if (g_fs->file_exists(pc_filename)) {
 			hasplrclrs_ = true;
 			pc_mask_image_files_.push_back(pc_filename);
 		}
@@ -230,6 +226,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");
+	}
+}
+
+void NonPackedAnimation::ensure_graphics_are_loaded() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
 	}
 }
 
@@ -273,23 +275,17 @@ void NonPackedAnimation::load_graphics() {
 }
 
 uint16_t NonPackedAnimation::width() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->width();
 }
 
 uint16_t NonPackedAnimation::height() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->height();
 }
 
 uint16_t NonPackedAnimation::nr_frames() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_.size();
 }
 
@@ -301,12 +297,13 @@ const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const {
-	return get_frame(0, &clr);
+const Image& NonPackedAnimation::representative_image_from_disk() const {
+	ensure_graphics_are_loaded();
+	return *frames_[0];
 }
 
-const Image& NonPackedAnimation::representative_image_from_disk() const {
-	return get_frame(0, nullptr);
+const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {
+	return image_files_[0];
 }
 
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
@@ -324,23 +321,24 @@ void NonPackedAnimation::blit
 {
 	assert(target);
 
-	const Image& frame = get_frame(time, clr);
-	target->blit(dst, frame.surface(), srcrc);
-}
+	const int idx = time / frametime_ % nr_frames();
+	assert(idx < nr_frames());
 
-const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	if (!hasplrclrs_ || clr == nullptr) {
+		::blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		     *frames_.at(idx),
+		     srcrc,
+		     1.,
+		     BlendMode::UseAlpha,
+		     target);
+	} else {
+		blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		             *frames_.at(idx),
+		             *pcmasks_.at(idx),
+		             srcrc,
+		             *clr,
+		             target);
 	}
-	const uint32_t framenumber = time / frametime_ % nr_frames();
-	assert(framenumber < nr_frames());
-	const Image* original = frames_[framenumber];
-
-	if (!hasplrclrs_ || !playercolor)
-		return *original;
-
-	assert(frames_.size() == pcmasks_.size());
-	return *ImageTransformations::player_colored(*playercolor, original, pcmasks_[framenumber]);
 }
 
 }  // namespace

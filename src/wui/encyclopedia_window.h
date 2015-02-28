@@ -29,21 +29,21 @@
 
 namespace Widelands {
 struct WareDescr;
-struct Tribe_Descr;
+class TribeDescr;
 }
 
-class Interactive_Player;
+class InteractivePlayer;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
+	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
 private:
 	struct Ware {
-		Ware(Widelands::Ware_Index i, const Widelands::WareDescr * descr)
+		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
 			:
 			m_i(i),
 			m_descr(descr)
 			{}
-		Widelands::Ware_Index m_i;
+		Widelands::WareIndex m_i;
 		const Widelands::WareDescr * m_descr;
 
 		bool operator<(const Ware o) const {
@@ -51,15 +51,15 @@ private:
 		}
 	};
 
-	Interactive_Player & iaplayer() const;
-	UI::Listselect<Widelands::Ware_Index> wares;
-	UI::Listselect<Widelands::Building_Index> prodSites;
+	InteractivePlayer & iaplayer() const;
+	UI::Listselect<Widelands::WareIndex> wares;
+	UI::Listselect<Widelands::BuildingIndex> prodSites;
 	UI::Table     <uintptr_t>                 condTable;
-	UI::Multiline_Textarea    descrTxt;
+	UI::MultilineTextarea    descrTxt;
 	Widelands::WareDescr const * selectedWare;
-	void fillWares();
-	void wareSelected(uint32_t);
-	void prodSiteSelected(uint32_t);
+	void fill_wares();
+	void ware_selected(uint32_t);
+	void prod_site_selected(uint32_t);
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

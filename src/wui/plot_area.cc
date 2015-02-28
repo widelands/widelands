@@ -21,20 +21,19 @@
 #include "wui/plot_area.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-#include "wui/text_layout.h"
 
 using namespace std;
-using boost::format;
 
 namespace {
 
@@ -70,12 +69,12 @@ enum UNIT {
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
-	static format f("<rt><p><font face=DejaVuSansCondensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
-
 }
+
 string xtick_text_style(const string& text) {
 	return ytick_text_style(text, RGBColor(255, 0, 0));
 }
@@ -141,7 +140,7 @@ int32_t calc_how_many(uint32_t time_ms, int32_t sample_rate) {
  */
 void draw_value(const string& value, const RGBColor& color, const Point& pos, RenderTarget & dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(pos, pic, CM_Normal, UI::Align_CenterRight);
+	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align_CenterRight);
 }
 
 /**
@@ -222,7 +221,7 @@ void draw_diagram
 			(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		dst.blit
 			(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 10),
-			 xtick, CM_Normal, UI::Align_Center);
+			 xtick, BlendMode::UseAlpha, UI::Align_Center);
 
 		posx -= sub;
 	}
@@ -241,12 +240,12 @@ void draw_diagram
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_unit_name(unit)));
-	dst.blit(Point(2, spacing + 2), xtick, CM_Normal, UI::Align_CenterLeft);
+	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align_CenterLeft);
 }
 
 }  // namespace
 
-WUIPlot_Area::WUIPlot_Area
+WuiPlotArea::WuiPlotArea
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
@@ -258,7 +257,7 @@ m_game_time_id(0)
 {}
 
 
-uint32_t WUIPlot_Area::get_game_time() {
+uint32_t WuiPlotArea::get_game_time() {
 	uint32_t game_time = 0;
 
 	// Find running time of the game, based on the plot data
@@ -268,7 +267,7 @@ uint32_t WUIPlot_Area::get_game_time() {
 	return game_time;
 }
 
-std::vector<std::string> WUIPlot_Area::get_labels() {
+std::vector<std::string> WuiPlotArea::get_labels() {
 	std::vector<std::string> labels;
 	for (int32_t i = 0; i < m_game_time_id; i++) {
 		UNIT unit = get_suggested_unit(time_in_ms[i]);
@@ -279,7 +278,7 @@ std::vector<std::string> WUIPlot_Area::get_labels() {
 	return labels;
 }
 
-uint32_t WUIPlot_Area::get_plot_time() {
+uint32_t WuiPlotArea::get_plot_time() {
 	if (m_time == TIME_GAME) {
 		// Start with the game time
 		uint32_t time_ms = get_game_time();
@@ -315,7 +314,7 @@ uint32_t WUIPlot_Area::get_plot_time() {
  * We start to search with i=1 to ensure that at least one option besides
  * "game" will be offered to the user.
  */
-int32_t WUIPlot_Area::get_game_time_id() {
+int32_t WuiPlotArea::get_game_time_id() {
 	uint32_t game_time = get_game_time();
 	uint32_t i;
 	for (i = 1; i < 7 && time_in_ms[i] <= game_time; i++) {
@@ -327,7 +326,7 @@ int32_t WUIPlot_Area::get_game_time_id() {
 /*
  * Draw this. This is the main function
  */
-void WUIPlot_Area::draw(RenderTarget & dst) {
+void WuiPlotArea::draw(RenderTarget & dst) {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 
@@ -367,7 +366,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  print the maximal value into the top right corner
 	draw_value
-		((format("%u") % max).str(), RGBColor(60, 125, 0),
+		(std::to_string(max), RGBColor(60, 125, 0),
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
 
 	//  plot the pixels
@@ -410,7 +409,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
  * \param dataset the y values of the line
  * \param sub horizontal difference between 2 y values
  */
-void WUIPlot_Area::draw_plot_line
+void WuiPlotArea::draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t const yoffset)
 {
@@ -448,7 +447,7 @@ void WUIPlot_Area::draw_plot_line
 /*
  * Register a new plot data stream
  */
-void WUIPlot_Area::register_plot_data
+void WuiPlotArea::register_plot_data
 	(uint32_t const id,
 	 std::vector<uint32_t> const * const data,
 	 RGBColor const color)
@@ -466,7 +465,7 @@ void WUIPlot_Area::register_plot_data
 /**
  * Change the plot color of a registed data stream
  */
-void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
+void WuiPlotArea::set_plotcolor(uint32_t id, RGBColor color) {
 	if (id > m_plotdata.size()) return;
 
 	m_plotdata[id].plotcolor = color;
@@ -475,7 +474,7 @@ void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
 /*
  * Show this plot data?
  */
-void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
+void WuiPlotArea::show_plot(uint32_t const id, bool const t) {
 	assert(id < m_plotdata.size());
 	m_plotdata[id].showplot = t;
 }
@@ -483,12 +482,12 @@ void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
 /*
  * Set sample rate the data uses
  */
-void WUIPlot_Area::set_sample_rate(uint32_t const id) {
+void WuiPlotArea::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }
 
 
-void WUIPlot_Area_Slider::draw(RenderTarget & dst) {
+void WuiPlotAreaSlider::draw(RenderTarget & dst) {
 	int32_t new_game_time_id = m_plot_area.get_game_time_id();
 	if (new_game_time_id != m_last_game_time_id) {
 		m_last_game_time_id = new_game_time_id;
@@ -498,14 +497,14 @@ void WUIPlot_Area_Slider::draw(RenderTarget & dst) {
 	UI::DiscreteSlider::draw(dst);
 }
 
-DifferentialPlot_Area::DifferentialPlot_Area
+DifferentialPlotArea::DifferentialPlotArea
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
-WUIPlot_Area (parent, x, y, w, h)
+WuiPlotArea (parent, x, y, w, h)
 {}
 
-void DifferentialPlot_Area::draw(RenderTarget & dst) {
+void DifferentialPlotArea::draw(RenderTarget & dst) {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 	//yoffset of the zero line
@@ -514,7 +513,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	const uint32_t time_ms = get_plot_time();
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
-	//draw zero line
+	// draw zero line
 	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 yoffset,
@@ -570,7 +569,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	}
 	//print the min and max values
 	draw_value
-		((boost::format("%u") % highest_scale).str(), RGBColor(60, 125, 0),
+		(std::to_string(highest_scale), RGBColor(60, 125, 0),
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
 
 	draw_value
@@ -618,7 +617,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
  * Register a new negative plot data stream. This stream is
  * used as subtrahend for calculating the plot data.
  */
-void DifferentialPlot_Area::register_negative_plot_data
+void DifferentialPlotArea::register_negative_plot_data
 	(uint32_t const id, std::vector<uint32_t> const * const data) {
 
 	if (id >= m_negative_plotdata.size())

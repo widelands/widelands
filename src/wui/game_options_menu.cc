@@ -30,11 +30,35 @@
 #include "ui_fsmenu/fileview.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
+#include "wui/unique_window_handler.h"
+
+class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
+public:
+	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
+		: UI::WLMessageBox(&parent,
+								 /** TRANSLATORS: Window label when "Exit game" has been pressed */
+								 _("Exit Game Confirmation"),
+								 _("Are you sure you wish to exit this game?"),
+								 YESNO),
+		  m_gb(gb) {
+	}
+
+	void pressed_yes() override {
+		m_gb.end_modal(0);
+	}
+
+	void pressed_no() override {
+		die();
+	}
+
+private:
+	InteractiveGameBase& m_gb;
+};
 
 GameOptionsMenu::GameOptionsMenu
-	(Interactive_GameBase                         & gb,
-	 UI::UniqueWindow::Registry                   & registry,
-	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
+	(InteractiveGameBase                      & gb,
+	 UI::UniqueWindow::Registry               & registry,
+	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
 	UI::UniqueWindow
 		(&gb, "options", &registry,
@@ -52,28 +76,36 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("README")),
+		 _("README"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show general information about Widelands and keyboard shortcuts")),
 	license
 		(this, "license",
 		 posx(0, 1),
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("License")),
+		 _("License"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show the distribution licence document")),
 	authors
 		(this, "authors",
 		 posx(0, 1),
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("Authors")),
+		 _("Authors"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show information about the Widelands Development Team")),
 	sound
 		(this, "sound_options",
 		 posx(0, 1),
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("Sound Options")),
+		 _("Sound Options"),
+		/** TRANSLATORS: Button tooltip */
+		_("Set sound effect and music options")),
 	save_game
 		(this, "save_game",
 		 posx(0, 1),
@@ -81,6 +113,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_save_game.png"),
+		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -90,6 +123,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_exit_game.png"),
+		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
 	readme.sigclicked.connect
@@ -134,6 +168,7 @@ GameOptionsMenu::GameOptionsMenu
 		center_to_parent();
 }
 
+
 void GameOptionsMenu::clicked_sound() {
 	if (m_windows.sound_options.window)
 		delete m_windows.sound_options.window;
@@ -142,8 +177,16 @@ void GameOptionsMenu::clicked_sound() {
 }
 
 void GameOptionsMenu::clicked_save_game() {
-	new Game_Main_Menu_Save_Game(m_gb, m_windows.savegame);
+	new GameMainMenuSaveGame(m_gb, m_windows.savegame);
 	die();
 }
 
-void GameOptionsMenu::clicked_exit_game() {m_gb.end_modal(0);}
+void GameOptionsMenu::clicked_exit_game() {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+		m_gb.end_modal(0);
+	}
+	else {
+		new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);
+		die();
+	}
+}

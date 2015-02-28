@@ -27,26 +27,26 @@
 
 class FileRead;
 
-struct S2_Map_Loader : public Widelands::Map_Loader {
+struct S2MapLoader : public Widelands::MapLoader {
 	enum WorldType {
 		GREENLAND = 0,
 		BLACKLAND = 1,
 		WINTERLAND = 2,
 	};
 
-	S2_Map_Loader(const char *, Widelands::Map &);
+	S2MapLoader(const std::string& filename, Widelands::Map& M);
 
 	int32_t preload_map(bool) override;
 	virtual int32_t load_map_complete
-		(Widelands::Editor_Game_Base &, bool scenario) override;
+		(Widelands::EditorGameBase &, bool scenario) override;
 
 private:
 	const std::string m_filename;
 	WorldType m_worldtype;
 
 	void load_s2mf_header(FileRead&);
-	void load_s2mf(Widelands::Editor_Game_Base &);
-	void postload_fix_conversion(Widelands::Editor_Game_Base &);
+	void load_s2mf(Widelands::EditorGameBase &);
+	void postload_fix_conversion(Widelands::EditorGameBase &);
 };
 
 
