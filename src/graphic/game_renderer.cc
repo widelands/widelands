@@ -210,12 +210,12 @@ void GameRenderer::draw(RenderTarget& dst,
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect =
 	   FloatRect(bounding_rect.x,
-	             surface->height() - bounding_rect.y - bounding_rect.h,
+	             surface_height - bounding_rect.y - bounding_rect.h,
 	             bounding_rect.w,
 	             bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
-	i.terrain_arguments.renderbuffer_width = surface->width();
-	i.terrain_arguments.renderbuffer_height = surface->height();
+	i.terrain_arguments.renderbuffer_width = surface_width;
+	i.terrain_arguments.renderbuffer_height = surface_height;
 	i.terrain_arguments.terrains = &egbase.world().terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
 	RenderQueue::instance().enqueue(i);
@@ -223,7 +223,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	// Enqueue the drawing of the dither layer.
 	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
 	i.blend_mode = BlendMode::UseAlpha;
-	RenderQueue::instance().enqueue(i);
+	// RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::TERRAIN_ROAD;

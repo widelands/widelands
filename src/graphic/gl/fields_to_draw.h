@@ -53,8 +53,9 @@ public:
 		max_fy_ = maxfy;
 		w_ = max_fx_ - min_fx_ + 1;
 		h_ = max_fy_ - min_fy_ + 1;
-		if (fields_.size() < static_cast<size_t>(w_ * h_)) {
-			fields_.resize(w_ * h_);
+		const size_t size = w_ * h_;
+		if (fields_.size() != size) {
+			fields_.resize(size);
 		}
 	}
 
