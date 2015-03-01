@@ -40,7 +40,7 @@ return {
             meat = 3,
             water = 12,
             bread_paddle = 2,
-            bucket = 2,
+            buckets = 2,
             fire_tongs = 2,
             fishing_net = 4,
             hammer = 11,

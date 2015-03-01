@@ -22,7 +22,7 @@ tribes:new_worker_type {
 
    buildcost = {
 		atlanteans_carrier = 1,
-		bucket = 1
+		buckets = 1
 	},
 
 	programs = {
