@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,4 +50,3 @@ FILETYPE VFT_APP
 		 VALUE "Translation", 0x0809, 1252
 	 }
 }
-
