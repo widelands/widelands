@@ -358,7 +358,7 @@ void DefaultAI::late_initialization() {
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
 
 	wares.resize(game().tribes().nrwares());
-	for (WareIndex i; i < static_cast<WareIndex>(game().tribes().nrwares()); ++i) {
+	for (WareIndex i = 0; i < static_cast<WareIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
 		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
