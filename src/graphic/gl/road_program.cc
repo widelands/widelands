@@ -124,11 +124,15 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	const auto& texture_rect = texture.texture_coordinates();
 
+	// TODO(sirver): This is a hack to make sure we are sampling inside of the
+	// terrain texture. This is a common problem with OpenGL and texture atlases.
+	const float MARGIN = 5e-2;
+
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
 	   start.pixel_y - road_overshoot_y + road_thickness_y,
-	   texture_rect.x,
-	   texture_rect.y,
+	   texture_rect.x + MARGIN,
+	   texture_rect.y + MARGIN,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -137,8 +141,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
 	   start.pixel_y - road_overshoot_y - road_thickness_y,
-	   texture_rect.x,
-	   texture_rect.y + texture_rect.h,
+	   texture_rect.x + MARGIN,
+	   texture_rect.y + texture_rect.h - MARGIN,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -147,8 +151,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x + road_thickness_x,
 	   end.pixel_y + road_overshoot_y + road_thickness_y,
-	   texture_rect.x + texture_rect.w,
-	   texture_rect.y,
+	   texture_rect.x + texture_rect.w - MARGIN,
+	   texture_rect.y + MARGIN,
 	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -164,8 +168,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x - road_thickness_x,
 	   end.pixel_y + road_overshoot_y - road_thickness_y,
-	   texture_rect.x + texture_rect.w,
-	   texture_rect.y + texture_rect.h,
+	   texture_rect.x + texture_rect.w - MARGIN,
+	   texture_rect.y + texture_rect.h - MARGIN,
 	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
