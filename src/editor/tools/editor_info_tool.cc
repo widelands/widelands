@@ -119,8 +119,8 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
 		terrain_is_strings.push_back(_("mountainous"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kUnpassable) {
-		terrain_is_strings.push_back(_("unpassable"));
+	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
+		terrain_is_strings.push_back(_("impassable"));
 	}
 	buf += "• " + (boost::format(_("Category: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-20 08:51+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-23 20:35+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -300,7 +300,7 @@ msgstr "Das Schmieden eines verbesserten Schilds"
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
 #: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:20
 #: ../../tribes/atlanteans/sawmill/conf:24
-#: ../../tribes/atlanteans/shipyard/conf:30
+#: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
 #: ../../tribes/atlanteans/smokery/conf:32
 #: ../../tribes/atlanteans/spiderfarm/conf:22
@@ -486,7 +486,7 @@ msgstr "Pflanzt und erntet Schwarzwurzeln."
 msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
-msgstr "Schwarzwurzelmehl wird in Mühlen aus Schwarzwurzeln hergestellt. Es wird in Bäckereien verwendet, um leckeres Brot zu produzieren."
+msgstr "Schwarzwurzelmehl wird in Mühlen aus Schwarzwurzeln hergestellt. Es wird in Bäckereien verwendet, um leckeres Brot zu backen."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1202,7 +1202,7 @@ msgstr "Die Hauptader dieser Kristallmine ist erschöpft. Die Produktivität wir
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
-msgstr "Schneidet Steine aus den Granitvorkommen in den Bergen."
+msgstr "Schlägt Steine aus den Granitvorkommen in den Bergen."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1239,7 +1239,7 @@ msgstr "Verbessert Angriff des Soldaten von Stufe 3 auf 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
-msgstr "Trainiert Soldaten in \"Angriff\"."
+msgstr "Trainiert Soldaten in „Angriff“."
 
 #: ../../tribes/atlanteans/dungeon/help.lua:28
 msgid "Attack Training:"
@@ -1529,7 +1529,7 @@ msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 1 auf 2"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:19
 msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-msgstr "Trainiert Soldaten in \"Verteidigung\", \"Ausweichen\" und \"Lebenspunkte\"."
+msgstr "Trainiert Soldaten in „Verteidigung“, „Ausweichen“ und „Lebenspunkte“."
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:28
 msgid "Defense Training:"
@@ -1679,7 +1679,7 @@ msgstr "Ein seetüchtiges Schiff"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 
-#: ../../tribes/atlanteans/shipyard/conf:28
+#: ../../tribes/atlanteans/shipyard/conf:29
 msgid "constructing a ship"
 msgstr "Das Bauen eines Schiffs"
 

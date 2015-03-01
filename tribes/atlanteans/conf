@@ -18,7 +18,8 @@ workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, for
 # Image file paths for this tribe's road textures
 [roads]
 busy_00=tribes/atlanteans/pics/roadt_busy.png
-normal_00=tribes/atlanteans/pics/roadt_normal.png
+normal_00=tribes/atlanteans/pics/roadt_normal_00.png
+normal_01=tribes/atlanteans/pics/roadt_normal_01.png
 
 # Some blue fires would be fine, but just an idea
 [frontier]
