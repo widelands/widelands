@@ -194,10 +194,13 @@ bool Tribes::immovable_exists(int index) const {
 bool Tribes::ship_exists(int index) const {
 	return ships_->get_mutable(index) != nullptr;
 }
+bool Tribes::tribe_exists(int index) const {
+	return tribes_->get_mutable(index) != nullptr;
+}
 
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
 	const BuildingIndex result = building_index(buildingname);
-	if (result == INVALID_INDEX) {
+	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
 	return result;
@@ -205,7 +208,7 @@ BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const
 
 int Tribes::safe_immovable_index(const std::string& immovablename) const {
 	const int result = immovable_index(immovablename);
-	if (result == -1) {
+	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
 	return result;
@@ -213,7 +216,7 @@ int Tribes::safe_immovable_index(const std::string& immovablename) const {
 
 int Tribes::safe_ship_index(const std::string& shipname) const {
 	const int result = ship_index(shipname);
-	if (result == -1) {
+	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
 	return result;
@@ -221,7 +224,7 @@ int Tribes::safe_ship_index(const std::string& shipname) const {
 
 int Tribes::safe_tribe_index(const std::string& tribename) const {
 	const int result = tribe_index(tribename);
-	if (result == -1) {
+	if (!tribe_exists(result)) {
 		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
 	}
 	return result;
@@ -229,7 +232,7 @@ int Tribes::safe_tribe_index(const std::string& tribename) const {
 
 WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	const WareIndex result = ware_index(warename);
-	if (result == -1) {
+	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
 	return result;
@@ -237,7 +240,7 @@ WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 
 WareIndex Tribes::safe_worker_index(const std::string& workername) const {
 	const WareIndex result = worker_index(workername);
-	if (result == -1) {
+	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
 	return result;

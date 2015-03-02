@@ -53,6 +53,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 	if (table.has_key("buildcost")) {
+		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			int32_t value;
@@ -61,9 +62,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
 											  key.c_str());
 				}
-
-				if (egbase_.tribes().ware_index(key) == INVALID_INDEX &&
-					 egbase_.tribes().worker_index(key) == INVALID_INDEX) {
+				// NOCOM(GunChleoc): Track down comparisons with INVALID_INDEX and -1 throughout the code and replace with tribes.<entity>_exists
+				if (!tribes.ware_exists(tribes.ware_index(key)) &&
+					 !tribes.worker_exists(tribes.worker_index(key))) {
 					throw GameDataError
 						("\"%s\" has not been defined as a ware/worker type (wrong "
 						 "declaration order?)",

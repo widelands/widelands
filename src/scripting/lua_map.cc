@@ -145,7 +145,7 @@ using SoldiersList = std::vector<Widelands::Soldier *>;
 		(lua_State * L, const Tribes& tribes,  const std::string & what) \
 	{ \
 		WareIndex idx = tribes. type ## _index(what); \
-		if (idx == INVALID_INDEX) \
+		if (!tribes. type ## _exists(idx)) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}

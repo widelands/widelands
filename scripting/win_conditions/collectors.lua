@@ -63,11 +63,11 @@ return {
          armor_helmet = 2,
          armor = 3,
          armor_chain = 4,
-         armor_plate = 8,
+         armor_gilded = 8,
       },
       empire_order = {
          "gold", "spear_wooden", "spear", "spear_advanced", "spear_heavy",
-         "spear_war", "armor_helmet", "armor", "armor_chain", "armor_plate"
+         "spear_war", "armor_helmet", "armor", "armor_chain", "armor_gilded"
       },
 
       atlanteans = {
