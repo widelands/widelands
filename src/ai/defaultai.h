@@ -98,6 +98,14 @@ struct DefaultAI : ComputerPlayer {
 		kCheckMilitarysites,
 		kCheckTrainingsites
 	};
+	enum class MilitaryStrategy :  uint8_t {
+		kNoNewMilitary,
+		kDefenseOnly,
+		kResourcesOrDefense,
+		kExpansion,
+		kPushExpansion
+	};
+		
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {

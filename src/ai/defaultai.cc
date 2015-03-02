@@ -50,11 +50,11 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 
-// Building of new military buildings can be restricted
-constexpr int kPushExpansion = 1;
-constexpr int kResourcesOrDefense = 2;
-constexpr int kDefenseOnly = 3;
-constexpr int kNoNewMilitary = 4;
+//// Building of new military buildings can be restricted //NOCOM
+//constexpr int kPushExpansion = 1;
+//constexpr int kResourcesOrDefense = 2;
+//constexpr int kDefenseOnly = 3;
+//constexpr int kNoNewMilitary = 4;
 
 // following is in miliseconds (widelands counts time in ms)
 constexpr int kFieldUpdateInterval = 2000;
@@ -1124,7 +1124,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 	// here we possible stop building of new buildings
 	new_buildings_stop_ = false;
-	uint8_t expansion_mode = kResourcesOrDefense;
+	MilitaryStrategy expansion_mode = MilitaryStrategy::kResourcesOrDefense;
 
 	// there are many reasons why to stop building production buildings
 	// (note there are numerous exceptions)
@@ -1155,13 +1155,15 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	const uint32_t treshold = militarysites.size() / 40 + 2;
 
 	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold) {
-		expansion_mode = kNoNewMilitary;
+		expansion_mode = MilitaryStrategy::kNoNewMilitary;
 	} else if (unstationed_milit_buildings_ + num_milit_constructionsites > 2 * treshold) {
-		expansion_mode = kDefenseOnly;
+		expansion_mode = MilitaryStrategy::kDefenseOnly;
+	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= treshold - 1) {
+		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
 	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
-		expansion_mode = kResourcesOrDefense;
+		expansion_mode = MilitaryStrategy::kExpansion;
 	} else {
-		expansion_mode = kPushExpansion;
+		expansion_mode = MilitaryStrategy::kPushExpansion;
 	}
 
 	// we must consider need for mines
@@ -1688,11 +1690,21 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					continue;
 				}
 
-				if (expansion_mode == kNoNewMilitary) {
+				if (expansion_mode == MilitaryStrategy::kNoNewMilitary) {
 					continue;
 				}
 
-				if (expansion_mode == kDefenseOnly && !bf->enemy_nearby_) {
+				if (expansion_mode == MilitaryStrategy::kDefenseOnly &&
+				!bf->enemy_nearby_) {
+					continue;
+				}
+
+				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense &&
+					! (bf->unowned_mines_pots_nearby_ ||
+					bf->stones_nearby_ ||
+					bf->water_nearby_ ||
+					(bf->distant_water_ && resource_necessity_water_needed_)||
+					(bf->enemy_nearby_ && resource_necessity_water_needed_) ) ) {
 					continue;
 				}
 
@@ -1703,19 +1715,26 @@ bool DefaultAI::construct_building(int32_t gametime) {
 				         (bo.mountain_conqueror_ || bo.expansion_type_)) {
 					;
 				}  // it is ok, go on
-				else if (bf->unowned_land_nearby_ && bo.expansion_type_ &&
-				         num_milit_constructionsites <= 1) {
-					;  // we allow big buildings now
-				} else if (bf->unowned_land_nearby_ &&
-				           bo.expansion_type_) {  // decreasing probability for big buidlings
+				else if (bo.expansion_type_) {
 					if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
 						continue;
 					}
 					if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
 						continue;
 					}
-				}
-				// it is ok, go on
+					;
+				} 
+					//;  // we allow big buildings now
+				//} else if (bf->unowned_land_nearby_ &&
+				           //bo.expansion_type_) {  // decreasing probability for big buidlings
+					//if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
+						//continue;
+					//}
+					//if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
+						//continue;
+					//}
+				//}
+				//// it is ok, go on
 				else {
 					continue;
 				}  // the building is not suitable for situation
@@ -1728,7 +1747,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 				// a boost to prevent an expansion halt
 				int32_t local_boost = 0;
-				if (expansion_mode == kPushExpansion) {
+				if (expansion_mode == MilitaryStrategy::kPushExpansion) {
 					local_boost = 200;
 				}
 
