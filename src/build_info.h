@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <string>
 
 constexpr uint16_t kWidelandsCopyrightStart = 2002;
-constexpr uint16_t kWidelandsCopyrightEnd = 2014;
+constexpr uint16_t kWidelandsCopyrightEnd = 2015;
 
 ///\return the build id which is automagically created from the checkout's
 ///revision number or the VERSION file
