@@ -54,7 +54,7 @@ private:
 
 	UI::Button ok_, cancel_;
 
-	std::string basedir_;
+	const std::string basedir_;
 	std::string curdir_;
 
 	UI::Checkbox* cb_dont_localize_mapnames_;

@@ -35,7 +35,6 @@
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 
-using Widelands::WidelandsMapLoader;
 
 /**
  * Create all the buttons etc...
@@ -54,7 +53,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
 	  tableh_(get_inner_h() - tabley_ - buth_ - 4 * padding_),
 	  right_column_x_(tablew_ + 2 * padding_),
-	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
+	  table_(this, tablex_, tabley_, tablew_, tableh_, MapTable::Type::kMapnames, false),
 	  map_details_(
 		  this, right_column_x_, tabley_,
 		  get_inner_w() - right_column_x_ - padding_,
@@ -110,7 +109,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 void MainMenuLoadMap::clicked_ok() {
 	assert(table_.has_selection());
 	const MapData& mapdata = *table_.get_map();
-	if (g_fs->is_directory(mapdata.filename) && !WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
+	if (g_fs->is_directory(mapdata.filename) && !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
@@ -175,7 +174,7 @@ void MainMenuLoadMap::fill_table() {
 			continue;
 		if (!g_fs->is_directory(name))
 			continue;
-		if (WidelandsMapLoader::is_widelands_map(name))
+		if (Widelands::WidelandsMapLoader::is_widelands_map(name))
 			continue;
 
 		MapData mapdata;
@@ -218,7 +217,7 @@ void MainMenuLoadMap::fill_table() {
 				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
 					 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
 					mapdata.maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+					} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
 					mapdata.maptype = MapData::MapType::kNormal;
 				} else {
 					mapdata.maptype = MapData::MapType::kSettlers2;

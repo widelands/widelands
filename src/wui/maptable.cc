@@ -23,18 +23,25 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/filesystem.h"
 
 MapTable::MapTable
 		(UI::Panel * parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h, Type type,
 		 const bool descending) :
 	UI::Table<uintptr_t>(parent, x, y, w, h, descending),
+	type_(type),
 	localize_map_names_(true) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	add_column(get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"),
-				  UI::Align_Left);
+	if (type_ == MapTable::Type::kFilenames) {
+		add_column(get_w() - 35 - 115, _("Filename"), _("The filename of the map or scenario"),
+					  UI::Align_Left);
+	} else {
+		add_column(get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"),
+					  UI::Align_Left);
+	}
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
 	set_column_compare
 		(0,
@@ -48,6 +55,7 @@ MapTable::MapTable
 	set_sort_column(0);
 }
 
+// NOCOM fix column sorting
 
 bool MapTable::compare_players(uint32_t rowa, uint32_t rowb)
 {
@@ -129,17 +137,21 @@ void MapTable::fill(std::vector<MapData> entries, bool localize_map_names)
 			} else if (mapdata.maptype == MapData::MapType::kSettlers2) {
 				picture = "pics/ls_s2map.png";
 			}
-			te.set_picture(
-						col_name,
-						g_gr->images().get(picture),
-						localize_map_names_ ? mapdata.localized_name : mapdata.name);
+
+			if (type_ == MapTable::Type::kFilenames) {
+				te.set_picture(
+							col_name,
+							g_gr->images().get(picture),
+							FileSystem::filename_without_ext(mapdata.filename.c_str()));
+			} else {
+				te.set_picture(
+							col_name,
+							g_gr->images().get(picture),
+							localize_map_names_ ? mapdata.localized_name : mapdata.name);
+			}
 
 			te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 		}
 	}
-
 	sort();
-	if (size()) {
-		select(0);
-	}
 }

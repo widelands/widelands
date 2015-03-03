@@ -31,8 +31,13 @@
  */
 class MapTable : public UI::Table<uintptr_t> {
 public:
+	enum class Type {
+		kFilenames,
+		kMapnames
+	};
+
 	MapTable(UI::Panel * parent,
-				 int32_t x, int32_t y, uint32_t w, uint32_t h,
+				 int32_t x, int32_t y, uint32_t w, uint32_t h, MapTable::Type type,
 				 const bool descending);
 
 	/// Get the current selected map. Returns nullptr if there is nothing selected.
@@ -48,6 +53,7 @@ private:
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
 
+	MapTable::Type type_;
 	bool localize_map_names_;
 	std::vector<MapData> maps_data_;
 };

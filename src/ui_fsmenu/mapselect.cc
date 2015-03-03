@@ -48,7 +48,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 
-	table_(this, tablex_, tabley_, tablew_, tableh_, false),
+	table_(this, tablex_, tabley_, tablew_, tableh_, MapTable::Type::kMapnames, false),
 	map_details_(this, right_column_x_, tabley_,
 					 get_right_column_w(right_column_x_ + indent_),
 					 tableh_ - buth_ - 4 * padding_),
