@@ -23,6 +23,7 @@
 #include <string>
 
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/window.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
@@ -38,7 +39,7 @@ struct MainMenuLoadMap : public UI::Window {
 private:
 	void clicked_ok();
 	bool set_has_selection();
-	void selected();
+	void entry_selected();
 
 	void fill_table();
 
@@ -55,6 +56,9 @@ private:
 
 	std::string basedir_;
 	std::string curdir_;
+
+	UI::Checkbox* cb_dont_localize_mapnames_;
+	bool has_translated_mapname_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

@@ -50,9 +50,9 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	  butw_(get_inner_w() / 4 - 1.5 * padding_),
 	  buth_(20),
 	  tablex_(padding_),
-	  tabley_(padding_),
+	  tabley_(buth_ + 2 * padding_),
 	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
-	  tableh_(get_inner_h() - buth_ - 4 * padding_),
+	  tableh_(get_inner_h() - tabley_ - buth_ - 4 * padding_),
 	  right_column_x_(tablew_ + 2 * padding_),
 	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	  map_details_(
@@ -71,16 +71,36 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		  butw_, buth_,
 		  g_gr->images().get("pics/but1.png"),
 		  _("Cancel")),
-	  basedir_("maps") {
+	  basedir_("maps"),
+	  has_translated_mapname_(false) {
 	curdir_ = basedir_;
 
-	table_.selected.connect(boost::bind(&MainMenuLoadMap::selected, this));
+	UI::Box* vbox = new UI::Box(this, tablex_, padding_,
+										 UI::Box::Horizontal, padding_, get_w());
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	cb_dont_localize_mapnames_->set_state(false);
+	cb_dont_localize_mapnames_->changedto.connect
+			(boost::bind(&MainMenuLoadMap::fill_table, boost::ref(*this)));
+	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
+	UI::Textarea * ta_dont_localize_mapnames =
+			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
+	vbox->add_space(padding_);
+	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
+	vbox->set_size(get_inner_w(), buth_);
+
+	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
 	table_.double_clicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, boost::ref(*this)));
 	table_.focus();
 	fill_table();
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
+
+	// We don't need the unlocalizing option if there is nothing to unlocalize.
+	// We know this after the list is filled.
+	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
+	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
 
 	center_to_parent();
 	move_to_top();
@@ -113,9 +133,9 @@ bool MainMenuLoadMap::set_has_selection()
 /**
  * Called when a entry is selected
  */
-void MainMenuLoadMap::selected() {
+void MainMenuLoadMap::entry_selected() {
 	if (set_has_selection()) {
-		map_details_.update(*table_.get_map(), false); // NOCOM localize?
+		map_details_.update(*table_.get_map(), !cb_dont_localize_mapnames_->get_state());
 	}
 }
 
@@ -126,6 +146,7 @@ void MainMenuLoadMap::selected() {
 void MainMenuLoadMap::fill_table() {
 	std::vector<MapData> maps_data;
 	table_.clear();
+	has_translated_mapname_ = false;
 
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
@@ -203,6 +224,9 @@ void MainMenuLoadMap::fill_table() {
 					mapdata.maptype = MapData::MapType::kSettlers2;
 				}
 
+				has_translated_mapname_ =
+						has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+
 				if (!mapdata.width || !mapdata.height) {
 					continue;
 				}
@@ -212,6 +236,6 @@ void MainMenuLoadMap::fill_table() {
 		}
 	}
 
-	table_.fill(maps_data, false); // NOCOM(GunChleoc): Do we want to localize the map names here?
+	table_.fill(maps_data, !cb_dont_localize_mapnames_->get_state());
 	set_has_selection();
 }
