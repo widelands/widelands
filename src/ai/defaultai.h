@@ -187,7 +187,7 @@ private:
 	bool improve_roads(int32_t);
 	bool create_shortcut_road(const Widelands::Flag&,
 	                          uint16_t maxcheckradius,
-	                          uint16_t minred,
+	                          int16_t minred,
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(Widelands::Road&);

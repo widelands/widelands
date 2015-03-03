@@ -1174,9 +1174,9 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	if (virtual_mines <= 7) {
 		resource_necessity_mines_ = std::numeric_limits<uint8_t>::max();
 	} else if (virtual_mines > 19) {
-		resource_necessity_mines_ = 0;
+		resource_necessity_mines_ = 50;
 	} else {
-		const uint32_t tmp = ((18 - virtual_mines) * 255) / 12;
+		const uint32_t tmp = (24 - virtual_mines) * 10;
 		resource_necessity_mines_ = tmp;
 	}
 
@@ -1751,14 +1751,14 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					local_boost = 200;
 				}
 
-				prio = (bf->unowned_land_nearby_ * 2 * resource_necessity_territory_ / 255 +
-				        bf->unowned_mines_pots_nearby_ * resource_necessity_mines_ / 255 +
+				prio = ((bf->unowned_land_nearby_ * 2 * resource_necessity_territory_) / 255 +
+				        (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 255 +
 				        bf->stones_nearby_ / 2 + bf->military_loneliness_ / 10 - 60 + local_boost +
-				        bf->water_nearby_ * resource_necessity_water_ / 255);
+				        (bf->water_nearby_ * resource_necessity_water_) / 255);
 
 				// special bonus due to remote water for atlanteans
 				if (resource_necessity_water_needed_)
-					prio += bf->distant_water_ * resource_necessity_water_ / 255;
+					prio += (bf->distant_water_ * resource_necessity_water_) / 255;
 
 				// special bonus if a portspace is close
 				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
@@ -2118,12 +2118,12 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 		roads.pop_front();
 
 		// occasionaly we test if the road can be dismounted
-		if (gametime % 25 == 0) {
+		if (gametime % 5 == 0) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
-				return true;
 			}
+			return true;
 		}
 	}
 
@@ -2171,13 +2171,13 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	if (flag.nr_of_roads() <= 1 || gametime % 10 == 0) {
 		create_shortcut_road(flag, 11, 20, gametime);
 		inhibit_road_building_ = gametime + 800;
-	}
-	// this is when a flag is full
-	else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		create_shortcut_road(flag, 9, 0, gametime);
+	// a warehouse with 3 or less roads
+	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
+		create_shortcut_road(flag, 9, -1, gametime);
 		inhibit_road_building_ = gametime + 400;
-	} else if (flag.current_wares() > 6 && gametime % 10 == 0) {
-		create_shortcut_road(flag, 9, 0, gametime);
+	// and when a flag is full with wares
+	} else if (flag.current_wares() > 5) {
+		create_shortcut_road(flag, 9, -2, gametime);
 		inhibit_road_building_ = gametime + 400;
 	}
 
@@ -2263,7 +2263,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
-                                     uint16_t minred,
+                                     int16_t minred,
                                      int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
@@ -2282,7 +2282,19 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// first we deal with situations when this is economy with no warehouses
 	// and this is a flag belonging to a building/constructionsite
+	// such economy must get dismantle grace time (if not set yet)
+	// end sometimes extended checkradius
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
+		
+		// occupied military buildings get special treatment
+		//(extended grace time + longer radius)
+		bool occupied_military_ = false;
+		Building* b = flag.get_building();
+		if (upcast(MilitarySite, militb, b)) {
+			if (militb->stationed_soldiers().size() > 0) {
+				occupied_military_ = true;
+			}
+		}
 
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time_ > gametime &&
@@ -2310,20 +2322,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				// buildings
 			} else {
 
-				// occupied military buildings get special treatment
-				//(extended grace time)
-				bool occupied_military_ = false;
-				Building* b = flag.get_building();
-				if (upcast(MilitarySite, militb, b)) {
-					if (militb->stationed_soldiers().size() > 0) {
-						occupied_military_ = true;
-					}
-				}
-
 				if (occupied_military_) {
 					eco->dismantle_grace_time_ =
 					   (gametime + 20 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
-					checkradius += 5;
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time_ =
@@ -2337,6 +2338,14 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			// we increase a check radius in last attempt
 			checkradius += 2;
 		}
+
+		//and bon us for occupied military buildings:
+		if (occupied_military_) {
+			checkradius += 4;
+		}
+		
+		//and generally increase radius for unconnected buildings
+		checkradius += 2;
 	}
 
 	Map& map = game().map();
