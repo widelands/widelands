@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/suggested_teams_box.h"
+#include "wui/suggested_teams_box.h"
 
 #include <set>
 #include <string>

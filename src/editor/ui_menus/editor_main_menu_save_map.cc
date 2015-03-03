@@ -101,8 +101,9 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	  editbox_label_(this, padding_, details_box_y_ + details_box_h_ + 3 * padding_,
 						  details_box_w_, buth_, _("Filename:"), UI::Align::Align_Right),
 
-	  m_table(&list_box_, 0, 0, details_box_x_ - padding_, details_box_h_)
-{
+	  m_table(&list_box_, 0, 0, details_box_x_ - padding_, details_box_h_),
+	  m_basedir("maps") {
+	m_curdir  = m_basedir;
 
 	m_table.add_column(m_table.get_w() / 2,
 							 _("Filename"),
@@ -192,9 +193,6 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
-
-	m_basedir = "maps";
-	m_curdir  = "maps";
 
 	fill_list();
 	edit_box_changed();

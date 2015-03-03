@@ -97,10 +97,10 @@ private:
 
 	UI::Table<uintptr_t const>    m_table;
 
-	UI::Button * m_ok_btn;
-
-	std::string   m_basedir;
+	const std::string   m_basedir;
 	std::string   m_curdir;
+
+	UI::Button * m_ok_btn;
 
 	std::vector<SaveMapData> m_maps_data;
 };

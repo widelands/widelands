@@ -21,28 +21,19 @@
 
 #include <cstdio>
 #include <memory>
-#include <string>
+
 
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/building.h"
-#include "logic/editor_game_base.h"
+#include "logic/map.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
-#include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/listselect.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
 
 using Widelands::WidelandsMapLoader;
 
@@ -50,87 +41,46 @@ using Widelands::WidelandsMapLoader;
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
-	: UI::Window(&parent, "load_map_menu", 0, 0, 560, 400, _("Load Map"))
-{
-	int32_t const spacing =  5;
-	int32_t const offsx   = spacing;
-	int32_t const offsy   = 10;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
-	int32_t const descr_label_w = 100;
+	: UI::Window(&parent, "load_map_menu",
+					 0, 0, parent.get_inner_w() - 80, parent.get_inner_h() - 80,
+					 _("Load Map")),
 
-	m_ls = new UI::Listselect<const char *>
-		(this,
-		 posx, posy,
-		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
-	m_ls->selected.connect(boost::bind(&MainMenuLoadMap::selected, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
-	m_ls->focus();
+	  // Values for alignment and size
+	  padding_(4),
+	  butw_(get_inner_w() / 4 - 1.5 * padding_),
+	  buth_(20),
+	  tablex_(padding_),
+	  tabley_(padding_),
+	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
+	  tableh_(get_inner_h() - buth_ - 4 * padding_),
+	  right_column_x_(tablew_ + 2 * padding_),
+	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
+	  map_details_(
+		  this, right_column_x_, tabley_,
+		  get_inner_w() - right_column_x_ - padding_,
+		  tableh_),
+	  ok_(
+		  this, "ok",
+		  get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
+		  butw_, buth_,
+		  g_gr->images().get("pics/but0.png"),
+		  _("OK")),
+	  cancel_(
+		  this, "cancel",
+		  get_inner_w() - 2 * butw_ - 2 * padding_, get_inner_h() - padding_ - buth_,
+		  butw_, buth_,
+		  g_gr->images().get("pics/but1.png"),
+		  _("Cancel")),
+	  basedir_("maps") {
+	curdir_ = basedir_;
 
-	posx = get_inner_w() / 2 + spacing;
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
-	m_name =
-		new UI::MultilineTextarea
-			(this, posx + descr_label_w, posy, 200, 60, "---", UI::Align_CenterLeft);
-	posy += 60 + spacing;
+	table_.selected.connect(boost::bind(&MainMenuLoadMap::selected, this));
+	table_.double_clicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, boost::ref(*this)));
+	table_.focus();
+	fill_table();
 
-	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Authors:"), UI::Align_CenterLeft);
-	m_author =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Size:"), UI::Align_CenterLeft);
-	m_size =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Players:"), UI::Align_CenterLeft);
-	m_nrplayers =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-
-	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Descr:"), UI::Align_CenterLeft);
-	m_descr =
-		new UI::MultilineTextarea
-			(this,
-			 posx + descr_label_w, posy,
-			 get_inner_w() - posx - spacing - descr_label_w,
-			 get_inner_h() - posy - spacing - 40,
-			 "---", UI::Align_CenterLeft);
-
-	posy = get_inner_h() - 30;
-
-	m_ok_btn = new UI::Button
-		(this, "ok",
-		 posx, posy,
-		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but0.png"),
-		 _("OK"),
-		 std::string(),
-		 false);
-	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
-
-	UI::Button * cancelbtn = new UI::Button
-		(this, "cancel",
-		 posx + get_inner_w() / 4 - spacing / 2, posy,
-		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but1.png"),
-		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
-
-	m_basedir = "maps";
-	m_curdir  = "maps";
-
-	fill_list();
+	ok_.sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
+	cancel_.sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 
 	center_to_parent();
 	move_to_top();
@@ -138,133 +88,130 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 
 
 void MainMenuLoadMap::clicked_ok() {
-	const char * const filename(m_ls->get_selected());
-
-	if (g_fs->is_directory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
-		m_curdir = filename;
-		m_ls->clear();
-		m_mapfiles.clear();
-		fill_list();
+	assert(table_.has_selection());
+	const MapData& mapdata = *table_.get_map();
+	if (g_fs->is_directory(mapdata.filename) && !WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
+		curdir_ = mapdata.filename;
+		fill_table();
 	} else {
-		dynamic_cast<EditorInteractive&>(*get_parent()).load(filename);
+		dynamic_cast<EditorInteractive&>(*get_parent()).load(mapdata.filename);
 		die();
 	}
+}
+
+bool MainMenuLoadMap::set_has_selection()
+{
+	bool has_selection = table_.has_selection();
+	ok_.set_enabled(has_selection);
+
+	if (!has_selection) {
+		map_details_.clear();
+	}
+	return has_selection;
 }
 
 /**
  * Called when a entry is selected
  */
-void MainMenuLoadMap::selected(uint32_t) {
-	const char * const name = m_ls->get_selected();
-
-	m_ok_btn->set_enabled(true);
-
-	if (!g_fs->is_directory(name) || WidelandsMapLoader::is_widelands_map(name)) {
-		Widelands::Map map;
-		{
-			std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
-			map_loader->preload_map(true); //  This has worked before, no problem.
-		}
-
-		{
-			i18n::Textdomain td("maps");
-			const std::string& localized_name = _(map.get_name());
-			if (localized_name == map.get_name()) {
-				m_name->set_text(map.get_name());
-			} else {
-				m_name->set_text((boost::format("%s (%s)") % map.get_name() % localized_name).str());
-			}
-		}
-		m_name  ->set_tooltip(map.get_name());
-		m_author->set_text(map.get_author());
-		m_descr ->set_text
-			(map.get_description() +
-			 (map.get_hint().empty() ? "" : (std::string("\n\n") + (map.get_hint()))));
-
-		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
-
-		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
-									  % map.get_width()
-									  % map.get_height()).str());
-	} else {
-		m_name     ->set_text("");
-		m_name     ->set_tooltip("");
-		m_author   ->set_text("");
-		m_descr    ->set_text("");
-		m_nrplayers->set_text("");
-		m_size     ->set_text("");
+void MainMenuLoadMap::selected() {
+	if (set_has_selection()) {
+		map_details_.update(*table_.get_map(), false); // NOCOM localize?
 	}
 }
 
-/**
- * An entry has been doubleclicked
- */
-void MainMenuLoadMap::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list
  */
-void MainMenuLoadMap::fill_list() {
+void MainMenuLoadMap::fill_table() {
+	std::vector<MapData> maps_data;
+	table_.clear();
+
 	//  Fill it with all files we find.
-	m_mapfiles = g_fs->list_directory(m_curdir);
+	FilenameSet files = g_fs->list_directory(curdir_);
 
-	//  First, we add all directories. We manually add the parent directory.
-	if (m_curdir != m_basedir) {
+	//If we are not at the top of the map directory hierarchy (we're not talking
+	//about the absolute filesystem top!) we manually add ".."
+	if (curdir_ != basedir_) {
+		MapData mapdata;
 #ifndef _WIN32
-		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
+		mapdata.filename = curdir_.substr(0, curdir_.rfind('/'));
 #else
-		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
+		mapdata.filename = curdir_.substr(0, curdir_.rfind('\\'));
 #endif
-
-		m_ls->add
-				/** TRANSLATORS: Parent directory */
-				((boost::format("\\<%s\\>") % _("parent")).str(),
-				 m_parentdir.c_str(),
-				 g_gr->images().get("pics/ls_dir.png"));
+		mapdata.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
+		mapdata.maptype = MapData::MapType::kDirectory;
+		maps_data.push_back(mapdata);
 	}
 
-	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		const char * const name = pname->c_str();
-		if
-			(strcmp(FileSystem::fs_filename(name), ".")    &&
-			 strcmp(FileSystem::fs_filename(name), "..")   &&
-			 g_fs->is_directory(name)                       &&
-			 !WidelandsMapLoader::is_widelands_map(name)) {
+	//Add subdirectories to the list (except for uncompressed maps)
+	for (const std::string& mapfilename : files) {
+		char const * const name = mapfilename.c_str();
+		if (!strcmp(FileSystem::fs_filename(name), "."))
+			continue;
+		// Upsy, appeared again. ignore
+		if (!strcmp(FileSystem::fs_filename(name), ".."))
+			continue;
+		if (!g_fs->is_directory(name))
+			continue;
+		if (WidelandsMapLoader::is_widelands_map(name))
+			continue;
 
-		m_ls->add
-			(FileSystem::fs_filename(name),
-			 name,
-			 g_gr->images().get("pics/ls_dir.png"));
+		MapData mapdata;
+		mapdata.filename = name;
+		if (strcmp (name, "maps/MP Scenarios") == 0) {
+			/** TRANSLATORS: Directory name for MP Scenarios in map selection */
+			mapdata.localized_name = _("Multiplayer Scenarios");
+		} else {
+			mapdata.localized_name = FileSystem::fs_filename(name);
 		}
+		mapdata.maptype = MapData::MapType::kDirectory;
+		maps_data.push_back(mapdata);
 	}
 
+	//Add map files(compressed maps) and directories(uncompressed)
 	Widelands::Map map;
 
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		char const * const name = pname->c_str();
-		std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
-		if (map_loader.get() != nullptr) {
+	for (const std::string& mapfilename : files) {
+		char const * const name = mapfilename.c_str();
+
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+		if (ml.get() != nullptr) {
 			try {
-				map_loader->preload_map(true);
-				m_ls->add
-					((boost::format("%s (%s)") % FileSystem::fs_filename(name) % map.get_name()).str(),
-					 name,
-					 g_gr->images().get
-						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())
-							? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+				ml->preload_map(true);
+
+				i18n::Textdomain td("maps");
+
+				MapData mapdata;
+				mapdata.filename       = mapfilename;
+				mapdata.name           = map.get_name();
+				mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
+				mapdata.authors.parse(map.get_author());
+				mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
+				mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
+				mapdata.nrplayers      = map.get_nrplayers();
+				mapdata.width          = map.get_width();
+				mapdata.height         = map.get_height();
+				mapdata.suggested_teams = map.get_suggested_teams();
+
+				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+					 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+					mapdata.maptype = MapData::MapType::kScenario;
+					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+					mapdata.maptype = MapData::MapType::kNormal;
+				} else {
+					mapdata.maptype = MapData::MapType::kSettlers2;
+				}
+
+				if (!mapdata.width || !mapdata.height) {
+					continue;
+				}
+				maps_data.push_back(mapdata);
+
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 
-	if (m_ls->size())
-		m_ls->select(0);
+	table_.fill(maps_data, false); // NOCOM(GunChleoc): Do we want to localize the map names here?
+	set_has_selection();
 }

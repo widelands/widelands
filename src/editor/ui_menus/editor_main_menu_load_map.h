@@ -20,16 +20,14 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
 
-#include "io/filesystem/filesystem.h"
+#include <string>
+
+#include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "wui/mapdetails.h"
+#include "wui/maptable.h"
 
 struct EditorInteractive;
-namespace UI {
-struct Button;
-template <typename T> struct Listselect;
-struct Textarea;
-struct MultilineTextarea;
-}
 
 /**
  * Choose a filename and save your brand new created map
@@ -39,21 +37,24 @@ struct MainMenuLoadMap : public UI::Window {
 
 private:
 	void clicked_ok();
-	void selected      (uint32_t);
-	void double_clicked(uint32_t);
+	bool set_has_selection();
+	void selected();
 
-	void fill_list();
+	void fill_table();
 
-	UI::MultilineTextarea * m_name;
-	UI::Textarea * m_author, * m_size, * m_nrplayers;
-	UI::MultilineTextarea * m_descr;
-	UI::Listselect<const char *> * m_ls;
-	UI::Button * m_ok_btn;
+	// UI coordinates and spacers
+	int32_t const padding_;      // Common padding between panels
+	int32_t const butw_, buth_;  // Button dimensions
+	int32_t const tablex_, tabley_, tablew_, tableh_;
+	int32_t const right_column_x_;
 
-	std::string m_basedir;
-	std::string m_curdir;
-	std::string m_parentdir;
-	FilenameSet m_mapfiles;
+	MapTable table_;
+	MapDetails map_details_;
+
+	UI::Button ok_, cancel_;
+
+	std::string basedir_;
+	std::string curdir_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

@@ -37,223 +37,125 @@
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect
-		(GameSettingsProvider* const settings, GameController* const ctrl, bool is_editor) :
+		(GameSettingsProvider* const settings, GameController* const ctrl) :
 	FullscreenMenuLoadMapOrGame(),
-
-	m_is_editor(is_editor),
-	m_checkbox_space(25),
-	m_checkboxes_y(m_tabley - 120),
+	checkbox_space_(25),
+	checkboxes_y_(tabley_ - 120),
 
 	// Main title
-	m_title
-		(this, get_w() / 2, m_checkboxes_y / 3,
+	title_
+		(this, get_w() / 2, checkboxes_y_ / 3,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 
-	// Map description
-	m_label_mapname(this, m_right_column_x, m_tabley, "", UI::Align_Left),
-	m_ta_mapname(this,
-					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
+	table_(this, tablex_, tabley_, tablew_, tableh_, false),
+	map_details_(this, right_column_x_, tabley_,
+					 get_right_column_w(right_column_x_ + indent_),
+					 tableh_ - buth_ - 4 * padding_),
 
-	m_label_author
-		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
-		 "",
-		 UI::Align_Left),
-	m_ta_author(this,
-					 m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
-
-	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 2 * m_padding,
-		 _("Description:"),
-		 UI::Align_Left),
-	m_ta_description
-		(this,
-		 m_right_column_x + m_indent,
-		 get_y_from_preceding(m_label_description) + m_padding,
-		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
-
-	m_is_scenario(false),
-
-	// Runtime variables
-	m_curdir("maps"), m_basedir("maps"),
-
-	m_settings(settings),
-	m_ctrl(ctrl)
+	basedir_("maps"),
+	settings_(settings),
+	ctrl_(ctrl),
+	is_scenario_(false),
+	has_translated_mapname_(false)
 {
-	m_title.set_textstyle(UI::TextStyle::ui_big());
-	if (m_is_editor) {
-		m_back.set_tooltip(_("Return to the editor menu"));
+	curdir_ = basedir_,
+	title_.set_textstyle(UI::TextStyle::ui_big());
+	if (settings_->settings().multiplayer) {
+		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {
-		if (m_settings->settings().multiplayer) {
-			m_back.set_tooltip(_("Return to the multiplayer game setup"));
-		} else {
-			m_back.set_tooltip(_("Return to the single player menu"));
-		}
+		back_.set_tooltip(_("Return to the single player menu"));
 	}
-	m_ta_description.set_tooltip(_("Story and hints"));
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
-	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
-	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	table_.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
+	table_.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
-	/** TRANSLATORS: Column title for number of players in map list */
-	m_table.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"),
-							 UI::Align_Left);
-	m_table.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
-	m_table.set_column_compare
-		(0,
-		 boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
-	m_table.set_column_compare
-		(1,
-		 boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
-	m_table.set_column_compare
-		(2,
-		 boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
-	m_table.set_sort_column(0);
-	m_is_scenario = false;
-
-	// Suggested teams
-	// Y coordinate will be set later, when we know how high this box will get.
-	m_suggested_teams_box = new UI::SuggestedTeamsBox(this, m_right_column_x, 0, UI::Box::Vertical,
-								 m_padding, m_indent, m_label_height,
-								 get_w() - m_right_column_x, 4 * m_label_height);
-
-	UI::Box* vbox = new UI::Box(this, m_tablex, m_checkboxes_y,
-										 UI::Box::Horizontal, m_checkbox_space, get_w());
+	UI::Box* vbox = new UI::Box(this, tablex_, checkboxes_y_,
+										 UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
-	m_cb_dont_localize_mapnames = new UI::Checkbox(vbox, Point(0, 0));
-	m_cb_dont_localize_mapnames->set_state(false);
-	m_cb_dont_localize_mapnames->changedto.connect
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	cb_dont_localize_mapnames_->set_state(false);
+	cb_dont_localize_mapnames_->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 
-	m_cb_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
-	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
-	m_cb_show_all_maps->set_state(true);
+	cb_show_all_maps_ = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
+	tags_checkboxes_.clear(); // Remove this again, it is a special tag checkbox
+	cb_show_all_maps_->set_state(true);
 
-	vbox->add(m_cb_dont_localize_mapnames, UI::Box::AlignLeft, true);
+	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
 	UI::Textarea * ta_dont_localize_mapnames =
 			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
-	vbox->add_space(m_padding);
+	vbox->add_space(padding_);
 	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
-	vbox->add_space(m_checkbox_space);
-	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
+	vbox->add_space(checkbox_space_);
+	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
-							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, m_checkbox_space, get_w());
+							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
+							 UI::Box::Horizontal, checkbox_space_, get_w());
 	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
-	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
-							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, m_checkbox_space, get_w());
+							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
+							 UI::Box::Horizontal, checkbox_space_, get_w());
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
 
-	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
-							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, m_checkbox_space, get_w());
+							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
+							 UI::Box::Horizontal, checkbox_space_, get_w());
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
-	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
-	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
+	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
-	m_table.focus();
+	table_.focus();
 	fill_table();
 
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
-	m_cb_dont_localize_mapnames->set_visible(m_has_translated_mapname);
-	ta_dont_localize_mapnames->set_visible(m_has_translated_mapname);
+	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
+	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
 }
 
 void FullscreenMenuMapSelect::think()
 {
-	if (m_ctrl) {
-		m_ctrl->think();
+	if (ctrl_) {
+		ctrl_->think();
 	}
 }
-
-
-bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb)
-{
-	const MapData & r1 = m_maps_data[m_table[rowa]];
-	const MapData & r2 = m_maps_data[m_table[rowb]];
-
-	if (r1.nrplayers == r2.nrplayers) {
-		return compare_mapnames(rowa, rowb);
-	}
-	return r1.nrplayers < r2.nrplayers;
-}
-
-
-bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb)
-{
-	const MapData & r1 = m_maps_data[m_table[rowa]];
-	const MapData & r2 = m_maps_data[m_table[rowb]];
-
-	if (!r1.width && !r2.width) {
-		return r1.name < r2.name;
-	} else if (!r1.width && r2.width) {
-		return true;
-	} else if (r1.width && !r2.width) {
-		return false;
-	} else if (m_cb_dont_localize_mapnames->get_state()) {
-		return r1.name < r2.name;
-	}
-	return r1.localized_name < r2.localized_name;
-}
-
-
-bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
-{
-	const MapData & r1 = m_maps_data[m_table[rowa]];
-	const MapData & r2 = m_maps_data[m_table[rowb]];
-
-	if (r1.width != r2.width) {
-		return r1.width < r2.width;
-	} else if (r1.height == r2.height) {
-		return compare_mapnames(rowa, rowb);
-	}
-	return r1.height < r2.height;
-}
-
 
 bool FullscreenMenuMapSelect::is_scenario()
 {
-	return m_is_scenario;
+	return is_scenario_;
 }
 
 
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
-	if (!m_table.has_selection()) {
-		return nullptr;
-	}
-	return &m_maps_data[m_table.get_selected()];
+	return table_.get_map();
 }
 
 
 void FullscreenMenuMapSelect::clicked_ok()
 {
-	const MapData & mapdata = m_maps_data[m_table.get_selected()];
+	assert(table_.has_selection());
+	const MapData& mapdata = *table_.get_map();
 
 	if (!mapdata.width) {
-		m_curdir = mapdata.filename;
+		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
 		end_modal(1 + is_scenario());
@@ -262,19 +164,11 @@ void FullscreenMenuMapSelect::clicked_ok()
 
 bool FullscreenMenuMapSelect::set_has_selection()
 {
-	bool has_selection = m_table.has_selection();
-	FullscreenMenuLoadMapOrGame::set_has_selection();
+	bool has_selection = table_.has_selection();
+	ok_.set_enabled(has_selection);
 
 	if (!has_selection) {
-		m_label_mapname.set_text(std::string());
-		m_label_author.set_text(std::string());
-		m_label_description.set_text(std::string());
-
-		m_ta_mapname.set_text(std::string());
-		m_ta_author.set_text(std::string());
-		m_ta_description.set_text(std::string());
-
-		m_suggested_teams_box->hide();
+		map_details_.clear();
 	}
 	return has_selection;
 }
@@ -283,78 +177,7 @@ bool FullscreenMenuMapSelect::set_has_selection()
 void FullscreenMenuMapSelect::entry_selected()
 {
 	if (set_has_selection()) {
-		const MapData & map = m_maps_data[m_table.get_selected()];
-
-		if (map.width) {
-			// Show map information
-			if (map.scenario) {
-				m_label_mapname.set_text(_("Scenario:"));
-			} else {
-				m_label_mapname.set_text(_("Map:"));
-			}
-			std::string map_displayname = map.localized_name;
-			if (m_cb_dont_localize_mapnames->get_state()) {
-				map_displayname = map.name;
-			}
-			m_ta_mapname.set_text(map_displayname);
-			if (map.localized_name != map.name) {
-				if (m_cb_dont_localize_mapnames->get_state()) {
-					m_ta_mapname.set_tooltip
-					/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
-					/** TRANSLATORS: %s is the localized name of the map. */
-							((boost::format(_("The name of this map in your language: %s"))
-							  % map.localized_name).str());
-				} else {
-					m_ta_mapname.set_tooltip
-					/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
-					/** TRANSLATORS: %s is the English name of the map. */
-							((boost::format(_("The original name of this map: %s"))
-							  % map.name).str());
-				}
-			} else {
-				m_ta_mapname.set_tooltip(_("The name of this map"));
-			}
-			m_label_author.set_text(ngettext("Author:", "Authors:", map.authors.get_number()));
-			m_ta_author.set_tooltip(ngettext("The designer of this map", "The designers of this map",
-														map.authors.get_number()));
-			m_ta_author.set_text(map.authors.get_names());
-			m_ta_description.set_text(map.description +
-											  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
-			m_label_author.set_visible(true);
-			m_label_description.set_visible(true);
-			m_ta_description.set_size
-					(m_ta_description.get_w(),
-					 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding);
-			m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
-		} else {
-			// Show directory information
-			m_label_mapname.set_text(_("Directory:"));
-			m_ta_mapname.set_text(map.localized_name);
-			m_ta_mapname.set_tooltip(_("The name of this directory"));
-
-			m_ta_author.set_text(std::string());
-			m_ta_description.set_text(std::string());
-			m_label_author.set_visible(false);
-			m_label_description.set_visible(false);
-			m_ok.set_tooltip(_("Open this directory"));
-		}
-
-		m_is_scenario = map.scenario; // reset
-		m_ta_description.scroll_to_top();
-
-		// Show / hide suggested teams
-		m_suggested_teams_box->hide();
-
-		if (!map.suggested_teams.empty()) {
-			m_suggested_teams_box->show(map.suggested_teams);
-
-			m_suggested_teams_box->set_pos(
-						Point(m_suggested_teams_box->get_x(),
-								m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
-
-			m_ta_description.set_size(m_ta_description.get_w(),
-											  m_suggested_teams_box->get_y() - m_ta_description.get_y() - 3 * m_padding);
-		}
+		map_details_.update(*table_.get_map(), !cb_dont_localize_mapnames_->get_state());
 	}
 }
 
@@ -371,7 +194,7 @@ void FullscreenMenuMapSelect::entry_selected()
  * be taken to sort uncompressed maps (which look like and really are
  * directories) with the files.
  *
- * The search starts in \ref m_curdir ("..../maps") and there is no possibility
+ * The search starts in \ref curdir_ ("..../maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  *
@@ -380,40 +203,28 @@ void FullscreenMenuMapSelect::entry_selected()
  */
 void FullscreenMenuMapSelect::fill_table()
 {
-	uint8_t col_players = 0;
-	uint8_t col_name = 1;
-	uint8_t col_size = 2;
+	std::vector<MapData> maps_data;
+	table_.clear();
+	has_translated_mapname_ = false;
 
-	m_maps_data.clear();
-	m_table.clear();
-	m_has_translated_mapname = false;
-
-
-	if (m_settings->settings().maps.empty()) {
+	if (settings_->settings().maps.empty()) {
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		FilenameSet files = g_fs->list_directory(m_curdir);
+		FilenameSet files = g_fs->list_directory(curdir_);
 
 		//If we are not at the top of the map directory hierarchy (we're not talking
 		//about the absolute filesystem top!) we manually add ".."
-		if (m_curdir != m_basedir) {
+		if (curdir_ != basedir_) {
 			MapData mapdata;
 	#ifndef _WIN32
-			mapdata.filename = m_curdir.substr(0, m_curdir.rfind('/'));
+			mapdata.filename = curdir_.substr(0, curdir_.rfind('/'));
 	#else
-			mapdata.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
+			mapdata.filename = curdir_.substr(0, curdir_.rfind('\\'));
 	#endif
 			mapdata.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
-			m_maps_data.push_back(mapdata);
-			UI::Table<uintptr_t const>::EntryRecord & te =
-				m_table.add(m_maps_data.size() - 1);
-
-			te.set_string(col_players, "");
-			te.set_picture
-				(col_name,  g_gr->images().get("pics/ls_dir.png"),
-				mapdata.localized_name);
-			te.set_string(col_size, "");
+			mapdata.maptype = MapData::MapType::kDirectory;
+			maps_data.push_back(mapdata);
 		}
 
 		//Add subdirectories to the list (except for uncompressed maps)
@@ -437,13 +248,8 @@ void FullscreenMenuMapSelect::fill_table()
 			} else {
 				mapdata.localized_name = FileSystem::fs_filename(name);
 			}
-
-			m_maps_data.push_back(mapdata);
-			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
-
-			te.set_string(col_players, "");
-			te.set_picture(col_name, g_gr->images().get("pics/ls_dir.png"), mapdata.localized_name);
-			te.set_string(col_size, "");
+			mapdata.maptype = MapData::MapType::kDirectory;
+			maps_data.push_back(mapdata);
 		}
 
 		//Add map files(compressed maps) and directories(uncompressed)
@@ -473,45 +279,32 @@ void FullscreenMenuMapSelect::fill_table()
 					mapdata.nrplayers      = map.get_nrplayers();
 					mapdata.width          = map.get_width();
 					mapdata.height         = map.get_height();
-					mapdata.scenario       = map.scenario_types() & m_scenario_types
-													 || (m_is_editor && map.scenario_types() > 0);
 					mapdata.tags           = map.get_tags();
-					if (mapdata.scenario) {
-						mapdata.tags.insert("scenario");
-					}
 					mapdata.suggested_teams = map.get_suggested_teams();
 
-					m_has_translated_mapname =
-							m_has_translated_mapname || (mapdata.name != mapdata.localized_name);
+					if (map.scenario_types() & scenario_types_) {
+						mapdata.maptype = MapData::MapType::kScenario;
+						mapdata.tags.insert("scenario");
+					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+						mapdata.maptype = MapData::MapType::kNormal;
+					} else {
+						mapdata.maptype = MapData::MapType::kSettlers2;
+					}
+
+					has_translated_mapname_ =
+							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
 					if (!mapdata.width || !mapdata.height) {
 						continue;
 					}
 
 					bool has_all_tags = true;
-					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
-						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
+					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
 					if (!has_all_tags) {
 						continue;
 					}
-
-					m_maps_data.push_back(mapdata);
-					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
-
-					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
-
-					std::string map_displayname = mapdata.localized_name;
-					if (m_cb_dont_localize_mapnames->get_state()) {
-						map_displayname = mapdata.name;
-					}
-					te.set_picture
-						(col_name,  g_gr->images().get
-						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
-							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
-						"pics/ls_s2map.png"),
-						map_displayname);
-
-					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+					maps_data.push_back(mapdata);
 				} catch (const std::exception & e) {
 					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 				} catch (...) {
@@ -521,10 +314,10 @@ void FullscreenMenuMapSelect::fill_table()
 		}
 	} else {
 		//client changing maps on dedicated server
-		for (uint16_t i = 0; i < m_settings->settings().maps.size(); ++i) {
+		for (uint16_t i = 0; i < settings_->settings().maps.size(); ++i) {
 			Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
+			const DedicatedMapInfos & dmap = settings_->settings().maps.at(i);
 			const std::string& mapfilename = dmap.path;
 			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
 
@@ -546,9 +339,18 @@ void FullscreenMenuMapSelect::fill_table()
 				mapdata.nrplayers   = map.get_nrplayers();
 				mapdata.width       = map.get_width();
 				mapdata.height      = map.get_height();
-				mapdata.scenario    = map.scenario_types() & m_scenario_types;
 
-				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario) {
+				if (map.scenario_types() & scenario_types_) {
+					mapdata.maptype = MapData::MapType::kScenario;
+					mapdata.tags.insert("scenario");
+				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+					mapdata.maptype = MapData::MapType::kSettlers2;
+				} else {
+					mapdata.maptype = MapData::MapType::kNormal;
+				}
+
+				if (mapdata.nrplayers != dmap.players ||
+					 (mapdata.maptype == MapData::MapType::kScenario) != dmap.scenario) {
 					throw wexception("Mapselect: Number of players or scenario doesn't match");
 				}
 
@@ -557,16 +359,7 @@ void FullscreenMenuMapSelect::fill_table()
 				}
 
 				// Finally write the entry to the list
-				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
-
-				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
-				te.set_picture
-					(col_name,
-					 g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
-				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
-
+				maps_data.push_back(mapdata);
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
 
@@ -580,26 +373,22 @@ void FullscreenMenuMapSelect::fill_table()
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;
 				mapdata.height      = 0;
-				mapdata.scenario    = dmap.scenario;
+
+				if (dmap.scenario) {
+					mapdata.maptype = MapData::MapType::kScenario;
+					mapdata.tags.insert("scenario");
+				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+					mapdata.maptype = MapData::MapType::kSettlers2;
+				} else {
+					mapdata.maptype = MapData::MapType::kNormal;
+				}
 
 				// Finally write the entry to the list
-				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
-
-				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
-				te.set_picture
-					(col_name, g_gr->images().get
-					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
-				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+				maps_data.push_back(mapdata);
 			}
 		}
 	}
-	m_table.sort();
-
-	if (m_table.size()) {
-		m_table.select(0);
-	}
+	table_.fill(maps_data, !cb_dont_localize_mapnames_->get_state());
 	set_has_selection();
 }
 
@@ -609,8 +398,8 @@ void FullscreenMenuMapSelect::fill_table()
 UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 	(UI::Box * box, std::string tag, std::string displ_name)
 {
-	int32_t id = m_tags_ordered.size();
-	m_tags_ordered.push_back(tag);
+	int32_t id = tags_ordered_.size();
+	tags_ordered_.push_back(tag);
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
 	cb->changedto.connect
@@ -618,11 +407,11 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
-	box->add_space(m_padding);
+	box->add_space(padding_);
 	box->add(ta, UI::Box::AlignLeft);
-	box->add_space(m_checkbox_space);
+	box->add_space(checkbox_space_);
 
-	m_tags_checkboxes.push_back(cb);
+	tags_checkboxes_.push_back(cb);
 
 	return cb;
 }
@@ -633,23 +422,23 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
-			for (UI::Checkbox * checkbox : m_tags_checkboxes) {
+			for (UI::Checkbox * checkbox : tags_checkboxes_) {
 				checkbox->set_state(false);
 			}
 		}
 	} else { // Any tag
 		if (to) {
-			m_req_tags.insert(id);
+			req_tags_.insert(id);
 		}
 		else {
-			m_req_tags.erase(id);
+			req_tags_.erase(id);
 		}
 	}
-	if (m_req_tags.empty()) {
-		m_cb_show_all_maps->set_state(true);
+	if (req_tags_.empty()) {
+		cb_show_all_maps_->set_state(true);
 	}
 	else {
-		m_cb_show_all_maps->set_state(false);
+		cb_show_all_maps_->set_state(false);
 	}
 
 	fill_table();
