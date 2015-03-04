@@ -423,8 +423,7 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData authors;
-		authors.parse(map.get_author());
+		MapAuthorData authors(map.get_author());
 
 		m_ta_author.set_text(authors.get_names());
 		if (m_is_tutorial) {

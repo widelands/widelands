@@ -27,12 +27,10 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
-#include "ui_basic/box.h"
 
 using Widelands::WidelandsMapLoader;
 
@@ -56,8 +54,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	basedir_("maps"),
 	settings_(settings),
 	ctrl_(ctrl),
-	is_scenario_(false),
-	has_translated_mapname_(false)
+	has_translated_mapname_(false),
+	is_scenario_(false)
 {
 	curdir_ = basedir_,
 	title_.set_textstyle(UI::TextStyle::ui_big());
@@ -216,100 +214,58 @@ void FullscreenMenuMapSelect::fill_table()
 		//If we are not at the top of the map directory hierarchy (we're not talking
 		//about the absolute filesystem top!) we manually add ".."
 		if (curdir_ != basedir_) {
-			MapData mapdata;
-	#ifndef _WIN32
-			mapdata.filename = curdir_.substr(0, curdir_.rfind('/'));
-	#else
-			mapdata.filename = curdir_.substr(0, curdir_.rfind('\\'));
-	#endif
-			mapdata.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
-			mapdata.maptype = MapData::MapType::kDirectory;
-			maps_data.push_back(mapdata);
+			maps_data.push_back(MapData::create_parent_dir(curdir_));
 		}
 
-		//Add subdirectories to the list (except for uncompressed maps)
+		Widelands::Map map; //  MapLoader needs a place to put its preload data
+
 		for (const std::string& mapfilename : files) {
-			char const * const name = mapfilename.c_str();
-			if (!strcmp(FileSystem::fs_filename(name), "."))
-				continue;
-			// Upsy, appeared again. ignore
-			if (!strcmp(FileSystem::fs_filename(name), ".."))
-				continue;
-			if (!g_fs->is_directory(name))
-				continue;
-			if (WidelandsMapLoader::is_widelands_map(name))
-				continue;
 
-			MapData mapdata;
-			mapdata.filename = name;
-			if (strcmp (name, "maps/MP Scenarios") == 0) {
-				/** TRANSLATORS: Directory name for MP Scenarios in map selection */
-				mapdata.localized_name = _("Multiplayer Scenarios");
-			} else {
-				mapdata.localized_name = FileSystem::fs_filename(name);
-			}
-			mapdata.maptype = MapData::MapType::kDirectory;
-			maps_data.push_back(mapdata);
-		}
-
-		//Add map files(compressed maps) and directories(uncompressed)
-		{
-			Widelands::Map map; //  MapLoader needs a place to put its preload data
-
-			for (const std::string& mapfilename : files) {
-
+			// Add map file (compressed) or map directory (uncompressed)
+			if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-				if (!ml) {
+				if (ml.get() != nullptr) {
+					try {
+						map.set_filename(mapfilename);
+						ml->preload_map(true);
+
+						if (!map.get_width() || !map.get_height()) {
+							continue;
+						}
+
+						MapData::MapType maptype;
+						if (map.scenario_types() & scenario_types_) {
+							maptype = MapData::MapType::kScenario;
+						} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+							maptype = MapData::MapType::kNormal;
+						} else {
+							maptype = MapData::MapType::kSettlers2;
+						}
+
+						MapData mapdata(map, mapfilename, maptype);
+
+						has_translated_mapname_ =
+								has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+
+						bool has_all_tags = true;
+						for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+							has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+						if (!has_all_tags) {
+							continue;
+						}
+						maps_data.push_back(mapdata);
+					} catch (const std::exception & e) {
+						log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+					} catch (...) {
+						log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
+					}
+				}
+			} else if (g_fs->is_directory(mapfilename)) {
+				// Add subdirectory to the list
+				const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
+				if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
 					continue;
-				}
-
-				try {
-					map.set_filename(mapfilename);
-					ml->preload_map(true);
-
-					i18n::Textdomain td("maps");
-
-					MapData mapdata;
-					mapdata.filename       = mapfilename;
-					mapdata.name           = map.get_name();
-					mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
-					mapdata.authors.parse(map.get_author());
-					mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
-					mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
-					mapdata.nrplayers      = map.get_nrplayers();
-					mapdata.width          = map.get_width();
-					mapdata.height         = map.get_height();
-					mapdata.tags           = map.get_tags();
-					mapdata.suggested_teams = map.get_suggested_teams();
-
-					if (map.scenario_types() & scenario_types_) {
-						mapdata.maptype = MapData::MapType::kScenario;
-						mapdata.tags.insert("scenario");
-					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-						mapdata.maptype = MapData::MapType::kNormal;
-					} else {
-						mapdata.maptype = MapData::MapType::kSettlers2;
-					}
-
-					has_translated_mapname_ =
-							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-					if (!mapdata.width || !mapdata.height) {
-						continue;
-					}
-
-					bool has_all_tags = true;
-					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
-						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
-					if (!has_all_tags) {
-						continue;
-					}
-					maps_data.push_back(mapdata);
-				} catch (const std::exception & e) {
-					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-				} catch (...) {
-					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
-				}
+				maps_data.push_back(MapData::create_directory(mapfilename));
 			}
 		}
 	} else {
@@ -321,8 +277,6 @@ void FullscreenMenuMapSelect::fill_table()
 			const std::string& mapfilename = dmap.path;
 			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
 
-			i18n::Textdomain td("maps");
-			MapData mapdata;
 			try {
 				if (!ml) {
 					throw wexception("Mapselect: No MapLoader");
@@ -331,42 +285,38 @@ void FullscreenMenuMapSelect::fill_table()
 				map.set_filename(mapfilename);
 				ml->preload_map(true);
 
-				mapdata.filename    = mapfilename;
-				mapdata.name        = map.get_name();
-				mapdata.authors.parse(map.get_author());
-				mapdata.description = map.get_description();
-				mapdata.hint        = map.get_hint();
-				mapdata.nrplayers   = map.get_nrplayers();
-				mapdata.width       = map.get_width();
-				mapdata.height      = map.get_height();
-
-				if (map.scenario_types() & scenario_types_) {
-					mapdata.maptype = MapData::MapType::kScenario;
-					mapdata.tags.insert("scenario");
-				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-					mapdata.maptype = MapData::MapType::kSettlers2;
-				} else {
-					mapdata.maptype = MapData::MapType::kNormal;
+				if (!map.get_width() || !map.get_height()) {
+					throw wexception("Mapselect: Map has no size");
 				}
 
-				if (mapdata.nrplayers != dmap.players ||
-					 (mapdata.maptype == MapData::MapType::kScenario) != dmap.scenario) {
+				MapData::MapType maptype;
+
+				if (map.scenario_types() & scenario_types_) {
+					maptype = MapData::MapType::kScenario;
+				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+					maptype = MapData::MapType::kSettlers2;
+				} else {
+					maptype = MapData::MapType::kNormal;
+				}
+
+				if (map.get_nrplayers() != dmap.players ||
+					 (maptype == MapData::MapType::kScenario) != dmap.scenario) {
 					throw wexception("Mapselect: Number of players or scenario doesn't match");
 				}
 
-				if (!mapdata.width || !mapdata.height) {
-					throw wexception("Mapselect: Map has no size");
-				}
+				MapData mapdata(map, mapfilename, maptype);
 
 				// Finally write the entry to the list
 				maps_data.push_back(mapdata);
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
 
+				MapData mapdata;
+
 				// Fill in the data we got from the dedicated server
 				mapdata.filename    = mapfilename;
 				mapdata.name        = mapfilename.substr(5, mapfilename.size() - 1);
-				mapdata.authors.parse(_("Nobody"));
+				mapdata.authors     = MapAuthorData(_("Nobody"));
 				mapdata.description = _("This map file is not present in your filesystem."
 							" The data shown here was sent by the server.");
 				mapdata.hint        = "";

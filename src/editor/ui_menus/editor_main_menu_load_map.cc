@@ -153,85 +153,50 @@ void MainMenuLoadMap::fill_table() {
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
-		MapData mapdata;
-#ifndef _WIN32
-		mapdata.filename = curdir_.substr(0, curdir_.rfind('/'));
-#else
-		mapdata.filename = curdir_.substr(0, curdir_.rfind('\\'));
-#endif
-		mapdata.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
-		mapdata.maptype = MapData::MapType::kDirectory;
-		maps_data.push_back(mapdata);
+		maps_data.push_back(MapData::create_parent_dir(curdir_));
 	}
 
-	//Add subdirectories to the list (except for uncompressed maps)
-	for (const std::string& mapfilename : files) {
-		char const * const name = mapfilename.c_str();
-		if (!strcmp(FileSystem::fs_filename(name), "."))
-			continue;
-		// Upsy, appeared again. ignore
-		if (!strcmp(FileSystem::fs_filename(name), ".."))
-			continue;
-		if (!g_fs->is_directory(name))
-			continue;
-		if (Widelands::WidelandsMapLoader::is_widelands_map(name))
-			continue;
-
-		MapData mapdata;
-		mapdata.filename = name;
-		if (strcmp (name, "maps/MP Scenarios") == 0) {
-			/** TRANSLATORS: Directory name for MP Scenarios in map selection */
-			mapdata.localized_name = _("Multiplayer Scenarios");
-		} else {
-			mapdata.localized_name = FileSystem::fs_filename(name);
-		}
-		mapdata.maptype = MapData::MapType::kDirectory;
-		maps_data.push_back(mapdata);
-	}
-
-	//Add map files(compressed maps) and directories(uncompressed)
 	Widelands::Map map;
 
 	for (const std::string& mapfilename : files) {
-		char const * const name = mapfilename.c_str();
 
-		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
-		if (ml.get() != nullptr) {
-			try {
-				ml->preload_map(true);
+		// Add map file (compressed) or map directory (uncompressed)
+		if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+			if (ml.get() != nullptr) {
+				try {
+					ml->preload_map(true);
 
-				i18n::Textdomain td("maps");
+					if (!map.get_width() || !map.get_height()) {
+						continue;
+					}
 
-				MapData mapdata;
-				mapdata.filename       = mapfilename;
-				mapdata.name           = map.get_name();
-				mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
-				mapdata.authors.parse(map.get_author());
-				mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
-				mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
-				mapdata.nrplayers      = map.get_nrplayers();
-				mapdata.width          = map.get_width();
-				mapdata.height         = map.get_height();
-				mapdata.suggested_teams = map.get_suggested_teams();
+					MapData::MapType maptype;
 
-				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-					 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-					mapdata.maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
-					mapdata.maptype = MapData::MapType::kNormal;
-				} else {
-					mapdata.maptype = MapData::MapType::kSettlers2;
-				}
+					if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+						 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+						maptype = MapData::MapType::kScenario;
+						} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+						maptype = MapData::MapType::kNormal;
+					} else {
+						maptype = MapData::MapType::kSettlers2;
+					}
 
-				has_translated_mapname_ =
-						has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+					MapData mapdata(map, mapfilename, maptype);
 
-				if (!mapdata.width || !mapdata.height) {
-					continue;
-				}
-				maps_data.push_back(mapdata);
+					has_translated_mapname_ =
+							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-			} catch (const WException &) {} //  we simply skip illegal entries
+					maps_data.push_back(mapdata);
+
+				} catch (const WException &) {} //  we simply skip illegal entries
+			}
+		} else if (g_fs->is_directory(mapfilename)) {
+			// Add subdirectory to the list
+			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
+			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+				continue;
+			maps_data.push_back(MapData::create_directory(mapfilename));
 		}
 	}
 
