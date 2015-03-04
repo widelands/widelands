@@ -52,37 +52,12 @@ wl_library(wui_common
     maptable.h
     suggested_teams_box.cc
     suggested_teams_box.h
-  USES_SDL2
   DEPENDS
-    base_exceptions
-    base_geometry
     base_i18n
-    base_log
-    base_macros
-    base_time_string
-    game_io
-    graphic
-    graphic_color
-    graphic_game_renderer
-    graphic_minimap_renderer
-    graphic_surface
-    graphic_text
-    graphic_text_layout
-    io_fileread
     io_filesystem
     logic
-    logic_game_controller
-    logic_game_settings
-    logic_widelands_geometry
-    scripting_lua_interface
-    scripting_lua_table
-    sound
     ui_basic
-    widelands_ball_of_mud
-    wui_chat_ui
-    wui_mapview_pixelfunctions
-    wui_overlay_manager
-) # NOCOM clean up dependencies
+)
 
 wl_library(wui
   SRCS

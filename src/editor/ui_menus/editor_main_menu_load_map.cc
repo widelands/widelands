@@ -109,7 +109,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 void MainMenuLoadMap::clicked_ok() {
 	assert(table_.has_selection());
 	const MapData& mapdata = *table_.get_map();
-	if (g_fs->is_directory(mapdata.filename) && !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
+	if (g_fs->is_directory(mapdata.filename) &&
+		 !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {

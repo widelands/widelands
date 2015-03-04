@@ -24,7 +24,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
 #include "wui/mapdata.h"
 #include "wui/suggested_teams_box.h"
 

@@ -140,12 +140,16 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
 			main_box_.set_size(max_x_, max_y_);
-			descr_box_.set_size(descr_box_.get_w(), max_y_ - descr_label_.get_y() - descr_label_.get_h() - 2 * padding_);
+			descr_box_.set_size(
+						descr_box_.get_w(),
+						max_y_ - descr_label_.get_y() - descr_label_.get_h() - 2 * padding_);
 		} else {
 			suggested_teams_box_->show(mapdata.suggested_teams);
 			suggested_teams_box_->set_pos(Point(0, max_y_ - suggested_teams_box_->get_h()));
 			main_box_.set_size(max_x_, max_y_ - suggested_teams_box_->get_h());
-			descr_box_.set_size(descr_box_.get_w(), suggested_teams_box_->get_y() - descr_label_.get_y() - descr_label_.get_h() - 4 * padding_);
+			descr_box_.set_size(
+						descr_box_.get_w(),
+						suggested_teams_box_->get_y() - descr_label_.get_y() - descr_label_.get_h() - 4 * padding_);
 		}
 		descr_.set_size(descr_.get_w(), descr_box_.get_h());
 		descr_.scroll_to_top();

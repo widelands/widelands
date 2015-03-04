@@ -19,6 +19,7 @@
 #include "wui/maptable.h"
 
 #include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
