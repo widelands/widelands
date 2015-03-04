@@ -33,20 +33,19 @@ class MapTable : public UI::Table<uintptr_t> {
 public:
 	enum class Type {
 		kFilenames,
-		kMapnames
+		kMapnames,
+		kMapnamesLocalized
 	};
 
 	MapTable(UI::Panel * parent,
-				 int32_t x, int32_t y, uint32_t w, uint32_t h, MapTable::Type type,
+				 int32_t x, int32_t y, uint32_t w, uint32_t h,
 				 const bool descending);
 
 	/// Get the current selected map. Returns nullptr if there is nothing selected.
 	const MapData* get_map() const;
 
 	/// Fill the table with maps and directories.
-	/// If localize_map_names = true, map names will be localized.
-	/// Directory names are always localized.
-	void fill(std::vector<MapData> entries, bool localize_map_names);
+	void fill(const std::vector<MapData>& entries, MapTable::Type type);
 
 private:
 	bool compare_players(uint32_t, uint32_t);
@@ -54,7 +53,6 @@ private:
 	bool compare_size(uint32_t, uint32_t);
 
 	MapTable::Type type_;
-	bool localize_map_names_;
 	std::vector<MapData> maps_data_;
 };
 

@@ -28,38 +28,24 @@
 
 MapTable::MapTable
 		(UI::Panel * parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h, Type type,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const bool descending) :
 	UI::Table<uintptr_t>(parent, x, y, w, h, descending),
-	type_(type),
-	localize_map_names_(true) {
+	type_(MapTable::Type::kMapnamesLocalized) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	if (type_ == MapTable::Type::kFilenames) {
-		add_column(get_w() - 35 - 115, _("Filename"), _("The filename of the map or scenario"),
-					  UI::Align_Left);
-	} else {
-		add_column(get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"),
-					  UI::Align_Left);
-	}
+	add_column(get_w() - 35 - 115, "", _("The name of the map or scenario"), UI::Align_Left);
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
-	set_column_compare
-		(0,
-		 boost::bind(&MapTable::compare_players, this, _1, _2));
-	set_column_compare
-		(1,
-		 boost::bind(&MapTable::compare_mapnames, this, _1, _2));
-	set_column_compare
-		(2,
-		 boost::bind(&MapTable::compare_size, this, _1, _2));
+	set_column_compare(0, boost::bind(&MapTable::compare_players, this, _1, _2));
+	set_column_compare(1, boost::bind(&MapTable::compare_mapnames, this, _1, _2));
+	set_column_compare(2, boost::bind(&MapTable::compare_size, this, _1, _2));
 	set_sort_column(0);
 }
 
 // NOCOM fix column sorting
 
-bool MapTable::compare_players(uint32_t rowa, uint32_t rowb)
-{
+bool MapTable::compare_players(uint32_t rowa, uint32_t rowb) {
 	const MapData & r1 = maps_data_[rowa];
 	const MapData & r2 = maps_data_[rowb];
 
@@ -70,26 +56,30 @@ bool MapTable::compare_players(uint32_t rowa, uint32_t rowb)
 }
 
 
-bool MapTable::compare_mapnames(uint32_t rowa, uint32_t rowb)
-{
+bool MapTable::compare_mapnames(uint32_t rowa, uint32_t rowb) {
 	const MapData & r1 = maps_data_[rowa];
 	const MapData & r2 = maps_data_[rowb];
 
-	if (!r1.width && !r2.width) {
-		return r1.name < r2.name;
+	if (!r1.width && !r2.width) { // Directories take the localized name
+		return r1.localized_name < r2.localized_name;
 	} else if (!r1.width && r2.width) {
 		return true;
 	} else if (r1.width && !r2.width) {
 		return false;
-	} else if (!localize_map_names_) {
-		return r1.name < r2.name;
 	}
-	return r1.localized_name < r2.localized_name;
+
+	switch (type_) {
+		case MapTable::Type::kFilenames:
+			return r1.filename < r2.filename;
+		case MapTable::Type::kMapnames:
+			return r1.name < r2.name;
+		default:
+			return r1.localized_name < r2.localized_name;
+	}
 }
 
 
-bool MapTable::compare_size(uint32_t rowa, uint32_t rowb)
-{
+bool MapTable::compare_size(uint32_t rowa, uint32_t rowb) {
 	const MapData & r1 = maps_data_[rowa];
 	const MapData & r2 = maps_data_[rowb];
 
@@ -109,12 +99,8 @@ const MapData* MapTable::get_map() const {
 }
 
 
-void MapTable::fill(std::vector<MapData> entries, bool localize_map_names)
-{
-	localize_map_names_ = localize_map_names;
-	uint8_t col_players = 0;
-	uint8_t col_name = 1;
-	uint8_t col_size = 2;
+void MapTable::fill(const std::vector<MapData>& entries, MapTable::Type type) {
+	type_ = type;
 
 	maps_data_ = entries;
 	clear();
@@ -124,13 +110,11 @@ void MapTable::fill(std::vector<MapData> entries, bool localize_map_names)
 		UI::Table<uintptr_t const>::EntryRecord& te = add(i);
 
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
-			te.set_string(col_players, "");
-			te.set_picture
-				(col_name,  g_gr->images().get("pics/ls_dir.png"),
-				mapdata.localized_name);
-			te.set_string(col_size, "");
+			te.set_string(0, "");
+			te.set_picture(1,  g_gr->images().get("pics/ls_dir.png"), mapdata.localized_name);
+			te.set_string(2, "");
 		} else {
-			te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
+			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 
 			std::string picture = "pics/ls_wlmap.png";
 			if (mapdata.maptype == MapData::MapType::kScenario) {
@@ -139,19 +123,22 @@ void MapTable::fill(std::vector<MapData> entries, bool localize_map_names)
 				picture = "pics/ls_s2map.png";
 			}
 
-			if (type_ == MapTable::Type::kFilenames) {
+			if (type == MapTable::Type::kFilenames) {
+				set_column_title(1, _("Filename"));
 				te.set_picture(
-							col_name,
+							1,
 							g_gr->images().get(picture),
 							FileSystem::filename_without_ext(mapdata.filename.c_str()));
 			} else {
-				te.set_picture(
-							col_name,
-							g_gr->images().get(picture),
-							localize_map_names_ ? mapdata.localized_name : mapdata.name);
+				set_column_title(1, _("Map Name"));
+				if (type == MapTable::Type::kMapnames) {
+					te.set_picture(1, g_gr->images().get(picture), mapdata.name);
+				} else {
+					te.set_picture(1, g_gr->images().get(picture), mapdata.localized_name);
+				}
 			}
 
-			te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+			te.set_string(2, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 		}
 	}
 	sort();

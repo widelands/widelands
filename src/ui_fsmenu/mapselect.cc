@@ -46,7 +46,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 
-	table_(this, tablex_, tabley_, tablew_, tableh_, MapTable::Type::kMapnames, false),
+	table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	map_details_(this, right_column_x_, tabley_,
 					 get_right_column_w(right_column_x_ + indent_),
 					 tableh_ - buth_ - 4 * padding_),
@@ -202,7 +202,6 @@ void FullscreenMenuMapSelect::entry_selected()
 void FullscreenMenuMapSelect::fill_table()
 {
 	std::vector<MapData> maps_data;
-	table_.clear();
 	has_translated_mapname_ = false;
 
 	if (settings_->settings().maps.empty()) {
@@ -338,7 +337,11 @@ void FullscreenMenuMapSelect::fill_table()
 			}
 		}
 	}
-	table_.fill(maps_data, !cb_dont_localize_mapnames_->get_state());
+	if (cb_dont_localize_mapnames_->get_state()) {
+		table_.fill(maps_data, MapTable::Type::kMapnames);
+	} else {
+		table_.fill(maps_data, MapTable::Type::kMapnamesLocalized);
+	}
 	set_has_selection();
 }
 

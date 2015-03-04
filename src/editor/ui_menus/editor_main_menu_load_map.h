@@ -40,7 +40,7 @@ private:
 	void clicked_ok();
 	bool set_has_selection();
 	void entry_selected();
-
+	void toggle_mapnames();
 	void fill_table();
 
 	// UI coordinates and spacers
@@ -57,8 +57,10 @@ private:
 	const std::string basedir_;
 	std::string curdir_;
 
-	UI::Checkbox* cb_dont_localize_mapnames_;
 	bool has_translated_mapname_;
+	UI::Checkbox* cb_dont_localize_mapnames_;
+	bool showing_mapames_;
+	UI::Button* show_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

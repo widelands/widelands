@@ -59,7 +59,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
 	  tableh_(get_inner_h() - tabley_ - 2 * buth_ - 5 * padding_),
 	  right_column_x_(tablew_ + 2 * padding_),
-	  table_(this, tablex_, tabley_, tablew_, tableh_, MapTable::Type::kFilenames, false),
+	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	  map_details_(
 		  this, right_column_x_, tabley_,
 		  get_inner_w() - right_column_x_ - padding_,
@@ -85,8 +85,32 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	  editbox_label_(this, padding_, tabley_ + tableh_ + 2 * padding_,
 						  get_inner_w() - cancel_.get_x() - padding_, buth_,
 						  _("Filename:"), UI::Align::Align_Right),
-	  basedir_("maps") {
+	  basedir_("maps"),
+	  has_translated_mapname_(false),
+	  showing_mapames_(false) {
 	curdir_ = basedir_;
+
+	UI::Box* vbox = new UI::Box(this, tablex_, padding_,
+										 UI::Box::Horizontal, padding_, get_w());
+	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, butw_, buth_,
+												g_gr->images().get("pics/but1.png"),
+												_("Show Map Names"));
+	show_mapnames_->sigclicked.connect
+			(boost::bind(&MainMenuSaveMap::toggle_mapnames, boost::ref(*this)));
+	vbox->add(show_mapnames_, UI::Box::AlignLeft, true);
+
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	cb_dont_localize_mapnames_->set_state(false);
+	cb_dont_localize_mapnames_->changedto.connect
+			(boost::bind(&MainMenuSaveMap::fill_table, boost::ref(*this)));
+	vbox->add_space(2 * padding_);
+	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
+	vbox->add_space(padding_);
+	UI::Textarea * ta_dont_localize_mapnames =
+			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
+	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
+	vbox->set_size(get_inner_w(), buth_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
@@ -120,6 +144,11 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	MapData mapdata(map, "", maptype);
 
 	map_details_.update(mapdata, false);
+
+	// We don't need the unlocalizing option if there is nothing to unlocalize.
+	// We know this after the list is filled.
+	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
+	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
 
 	center_to_parent();
 	move_to_top();
@@ -198,13 +227,22 @@ void MainMenuSaveMap::double_clicked_item() {
 	}
 }
 
+void MainMenuSaveMap::toggle_mapnames() {
+	if (showing_mapames_) {
+		show_mapnames_->set_title(_("Show Map Names"));
+	} else {
+		show_mapnames_->set_title(_("Show Filenames"));
+	}
+	showing_mapames_ = !showing_mapames_;
+	fill_table();
+}
+
 
 /**
  * fill the file list
  */
 void MainMenuSaveMap::fill_table() {
 	std::vector<MapData> maps_data;
-	table_.clear();
 
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
@@ -243,6 +281,9 @@ void MainMenuSaveMap::fill_table() {
 
 					MapData mapdata(map, mapfilename, maptype);
 
+					has_translated_mapname_ =
+							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+
 					maps_data.push_back(mapdata);
 
 				} catch (const WException &) {} //  we simply skip illegal entries
@@ -255,8 +296,13 @@ void MainMenuSaveMap::fill_table() {
 			maps_data.push_back(MapData::create_directory(mapfilename));
 		}
 	}
-
-	table_.fill(maps_data, false);
+	if (!showing_mapames_) {
+		table_.fill(maps_data, MapTable::Type::kFilenames);
+	} else if (cb_dont_localize_mapnames_->get_state()) {
+		table_.fill(maps_data, MapTable::Type::kMapnames);
+	} else {
+		table_.fill(maps_data, MapTable::Type::kMapnamesLocalized);
+	}
 }
 
 /**

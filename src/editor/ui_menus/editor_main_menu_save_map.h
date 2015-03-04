@@ -44,7 +44,7 @@ private:
 	void edit_box_changed();
 
 	bool save_map(std::string, bool);
-
+	void toggle_mapnames();
 	void fill_table();
 
 	// UI coordinates and spacers
@@ -65,6 +65,9 @@ private:
 	std::string curdir_;
 
 	bool has_translated_mapname_;
+	UI::Checkbox* cb_dont_localize_mapnames_;
+	bool showing_mapames_;
+	UI::Button* show_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
