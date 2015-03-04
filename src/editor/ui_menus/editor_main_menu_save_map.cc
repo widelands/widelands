@@ -31,6 +31,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
+#include "editor/ui_menus/editor_main_menu_map_options.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -47,12 +48,12 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	: UI::Window(&parent, "save_map_menu",
-					 0, 0, parent.get_inner_w() - 80, parent.get_inner_h() - 80,
+					 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40,
 					 _("Save Map")),
 
 	  // Values for alignment and size
 	  padding_(4),
-	  butw_(get_inner_w() / 4 - 1.5 * padding_),
+	  butw_((get_inner_w() - 5 * padding_) / 4),
 	  buth_(20),
 	  tablex_(padding_),
 	  tabley_(buth_ + 2 * padding_),
@@ -66,13 +67,13 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		  tableh_),
 	  ok_(
 		  this, "ok",
-		  get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
+		  3 * butw_ + 4 * padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but0.png"),
 		  _("OK")),
 	  cancel_(
 		  this, "cancel",
-		  get_inner_w() - 2 * butw_ - 2 * padding_, get_inner_h() - padding_ - buth_,
+		  2 * butw_ + 3 * padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but1.png"),
 		  _("Cancel")),
@@ -80,8 +81,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		  this, "make_directory",
 		  padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
-		  g_gr->images().get("pics/but1.png"),
+		  g_gr->images().get("pics/but0.png"),
 		  _("Make Directory")),
+	  edit_options_(
+		  this, "edit_options",
+		  butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
+		  butw_, buth_,
+		  g_gr->images().get("pics/but0.png"),
+		  _("Map Options")),
 	  editbox_label_(this, padding_, tabley_ + tableh_ + 2 * padding_,
 						  get_inner_w() - cancel_.get_x() - padding_, buth_,
 						  _("Filename:"), UI::Align::Align_Right),
@@ -129,6 +136,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 	make_directory_.sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
+	edit_options_.sigclicked.connect
+		(boost::bind(&MainMenuSaveMap::clicked_edit_options, boost::ref(*this)));
 
 	// We always want the current map's data here
 	const Widelands::Map& map = parent.egbase().map();
@@ -197,6 +206,26 @@ void MainMenuSaveMap::clicked_make_directory() {
 		fullname            += md.get_dirname();
 		g_fs->make_directory(fullname);
 		fill_table();
+	}
+}
+
+void MainMenuSaveMap::clicked_edit_options() {
+	EditorInteractive& parent = dynamic_cast<EditorInteractive&>(*get_parent());
+	MainMenuMapOptions mo(parent, true);
+	if (mo.run()) {
+		const Widelands::Map& map = parent.egbase().map();
+		MapData::MapType maptype;
+
+		if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+			 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+			maptype = MapData::MapType::kScenario;
+		} else {
+			maptype = MapData::MapType::kNormal;
+		}
+
+		MapData mapdata(map, editbox_->text(), maptype);
+
+		map_details_.update(mapdata, false);
 	}
 }
 

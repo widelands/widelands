@@ -39,6 +39,7 @@ private:
 	EditorInteractive & eia();
 	void clicked_ok();
 	void clicked_make_directory();
+	void clicked_edit_options();
 	void clicked_item();
 	void double_clicked_item();
 	void edit_box_changed();
@@ -56,7 +57,7 @@ private:
 	MapTable table_;
 	MapDetails map_details_;
 
-	UI::Button ok_, cancel_, make_directory_;
+	UI::Button ok_, cancel_, make_directory_, edit_options_;
 
 	UI::Textarea editbox_label_;
 	UI::EditBox* editbox_;

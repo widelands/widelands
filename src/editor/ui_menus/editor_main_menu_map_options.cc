@@ -43,13 +43,28 @@ inline EditorInteractive & MainMenuMapOptions::eia() {
 /**
  * Create all the buttons etc...
 */
-MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 250, (parent.get_h() - 300) / 2, 305, 305,
-		 _("Map Options"))
-{
+		 20, 20, 350, parent.get_inner_h() - 80,
+		 _("Map Options")),
+	padding_(4),
+	butw_((get_inner_w() - 3 * padding_) / 2),
+	buth_(20),
+	ok_(
+		this, "ok",
+		padding_, get_inner_h() - padding_ - buth_,
+		butw_, buth_,
+		g_gr->images().get("pics/but0.png"),
+		_("OK")),
+	cancel_(
+		this, "cancel",
+		butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
+		butw_, buth_,
+		g_gr->images().get("pics/but1.png"),
+		_("Cancel")),
+	modal_(modal) {
 
 	int32_t const offsx   =  5;
 	int32_t const offsy   =  5;
@@ -64,7 +79,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 0));
+	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
@@ -82,30 +97,35 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 1));
+	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	posy += height + spacing;
 	m_descr =
 		new UI::MultilineEditbox
 			(this,
 			 posx, posy,
-			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
+			 get_inner_w() - spacing - posx, get_inner_h() - 4 * (padding_ + buth_) - posy,
 			 parent.egbase().map().get_description());
-	m_descr->changed.connect(boost::bind(&MainMenuMapOptions::editbox_changed, this));
+	m_descr->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 
 	UI::Button * btn =
 		new UI::Button
 			(this, "set_origin",
-			 5, get_inner_h() - 25, get_inner_w() - 10, 20,
+			 padding_, get_inner_h() - 3 * (padding_ + buth_),
+			 get_inner_w() - 2 * padding_, buth_,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Set origin"),
-			 _
-				("Set the position that will have the coordinates (0, 0). This will "
-				 "be the top-left corner of a generated minimap."));
+			 _("Set the position that will have the coordinates (0, 0). This will "
+				"be the top-left corner of a generated minimap."));
 	btn->sigclicked.connect
 		(boost::bind
 		 (&EditorInteractive::select_tool, &parent,
 		  boost::ref(parent.tools.set_origin), EditorTool::First));
 
+	ok_.sigclicked.connect
+		(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
+	ok_.set_enabled(false);
+	cancel_.sigclicked.connect
+		(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 	update();
 }
 
@@ -129,20 +149,27 @@ void MainMenuMapOptions::update() {
 /**
  * Called when one of the editboxes are changed
 */
-void MainMenuMapOptions::changed(int32_t const id) {
-	if        (id == 0) {
-		eia().egbase().map().set_name(m_name->text());
-	} else if (id == 1) {
-		eia().egbase().map().set_author(m_author->text());
-		g_options.pull_section("global").set_string
-			("realname", m_author->text());
-	}
-	update();
+void MainMenuMapOptions::changed() {
+	ok_.set_enabled(true);
 }
 
-/**
- * Called when the editbox has changed
- */
-void MainMenuMapOptions::editbox_changed() {
+void MainMenuMapOptions::clicked_ok() {
+	eia().egbase().map().set_name(m_name->text());
+	eia().egbase().map().set_author(m_author->text());
+	g_options.pull_section("global").set_string("realname", m_author->text());
 	eia().egbase().map().set_description(m_descr->get_text());
+	if (modal_) {
+		end_modal(1);
+	} else {
+		die();
+	}
 }
+
+void MainMenuMapOptions::clicked_cancel() {
+	if (modal_) {
+		end_modal(0);
+	} else {
+		die();
+	}
+}
+

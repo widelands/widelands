@@ -36,16 +36,26 @@ struct Textarea;
  * author, name and description
 */
 struct MainMenuMapOptions : public UI::Window {
-	MainMenuMapOptions(EditorInteractive &);
+	MainMenuMapOptions(EditorInteractive &, bool modal = false);
 
 private:
 	EditorInteractive & eia();
-	void changed(int32_t);
-	void editbox_changed();
+	void changed();
+	void update();
+	void clicked_ok();
+	void clicked_cancel();
+
+	int32_t const padding_;      // Common padding between panels
+	int32_t const butw_, buth_;  // Button dimensions
+
+	UI::Button ok_, cancel_;
+
+	bool modal_;
+
 	UI::MultilineEditbox * m_descr;
 	UI::Textarea * m_nrplayers, * m_size;
 	UI::EditBox * m_name, * m_author;
-	void update();
+
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H

@@ -41,12 +41,12 @@
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	: UI::Window(&parent, "load_map_menu",
-					 0, 0, parent.get_inner_w() - 80, parent.get_inner_h() - 80,
+					 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40,
 					 _("Load Map")),
 
 	  // Values for alignment and size
 	  padding_(4),
-	  butw_(get_inner_w() / 4 - 1.5 * padding_),
+	  butw_((get_inner_w() - 5 * padding_) / 4),
 	  buth_(20),
 	  tablex_(padding_),
 	  tabley_(buth_ + 2 * padding_),
