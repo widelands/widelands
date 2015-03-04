@@ -143,7 +143,7 @@ void MainMenuSaveMap::clicked_ok() {
 		fill_table();
 	} else { //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
-		if (map.get_name() != _("No Name")) {
+		if (map.get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
 				(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
@@ -177,8 +177,11 @@ void MainMenuSaveMap::clicked_make_directory() {
 void MainMenuSaveMap::clicked_item() {
 	// Only change editbox contents
 	if (table_.has_selection()) {
-		editbox_->set_text(FileSystem::fs_filename(table_.get_map()->filename.c_str()));
-		edit_box_changed();
+		const MapData& mapdata = *table_.get_map();
+		if (mapdata.maptype != MapData::MapType::kDirectory) {
+			editbox_->set_text(FileSystem::fs_filename(table_.get_map()->filename.c_str()));
+			edit_box_changed();
+		}
 	}
 }
 
@@ -271,7 +274,6 @@ void MainMenuSaveMap::edit_box_changed() {
  * should stay open
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
-	// NOCOM file name and map name are always identical
 	//  Make sure that the base directory exists.
 	g_fs->ensure_directory_exists(basedir_);
 
