@@ -78,8 +78,8 @@ struct DefaultAI : ComputerPlayer {
 		DEFENSIVE = 0,
 	};
 
-	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
-	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers};
+	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class ScheduleTasks : uint8_t {
 		kBFCheck,
 		kRoadCheck,
@@ -98,14 +98,13 @@ struct DefaultAI : ComputerPlayer {
 		kCheckMilitarysites,
 		kCheckTrainingsites
 	};
-	enum class MilitaryStrategy :  uint8_t {
+	enum class MilitaryStrategy : uint8_t {
 		kNoNewMilitary,
 		kDefenseOnly,
 		kResourcesOrDefense,
 		kExpansion,
 		kPushExpansion
 	};
-		
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -162,10 +161,12 @@ private:
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
 
-	void scheduler_review(int32_t* next_check_due_,
-	                      int32_t* oldestTaskTime,
-	                      ScheduleTasks* DueTask,
-	                      ScheduleTasks thisTask);
+	// void scheduler_review(int32_t* next_check_due_,
+	// int32_t* oldestTaskTime,
+	// ScheduleTasks* DueTask,
+	// ScheduleTasks thisTask);
+
+	ScheduleTasks get_oldest_task(int32_t);
 
 	bool construct_building(int32_t);
 
@@ -243,7 +244,8 @@ private:
 	// Variables of default AI
 	uint8_t type_;
 
-	uint32_t schedStat[20] = {0};  // NOCOM
+	// collect statistics on how many times which job was run
+	uint32_t schedStat[20] = {0};
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
@@ -269,26 +271,12 @@ private:
 	std::list<WarehouseSiteObserver> warehousesites;
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
+	std::map<ScheduleTasks, int32_t> taskDue;
 
 	std::vector<WareObserver> wares;
 
 	int32_t next_ai_think_;
-	int32_t next_road_due_;
-	int32_t next_stats_update_due_;
-	int32_t next_construction_due_;
 	int32_t next_mine_construction_due_;
-	int32_t next_productionsite_check_due_;
-	int32_t next_mine_check_due_;
-	int32_t next_militarysite_check_due_;
-	int32_t next_ship_check_due_;
-	int32_t next_economies_check_due_;
-	int32_t next_marine_decisions_due;
-	int32_t next_attack_consideration_due_;
-	int32_t next_trainingsites_check_due_;
-	int32_t next_bf_check_due_;
-	int32_t next_uf_check_due_;
-	int32_t next_wares_review_due_;
-	int32_t next_statistics_report_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
 	int32_t enemy_last_seen_;
@@ -320,7 +308,7 @@ private:
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 
-	enum {kReprioritize, kStopShipyard, kStapShipyard };
+	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
 	std::vector<int16_t> marineTaskQueue_;
 
