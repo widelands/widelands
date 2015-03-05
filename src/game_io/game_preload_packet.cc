@@ -24,6 +24,7 @@
 
 #include <boost/format.hpp>
 
+#include "build_info.h"
 #include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"
@@ -42,7 +43,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 5
+#define CURRENT_PACKET_VERSION 6
 #define PLAYERS_AMOUNT_KEY_V4 "player_amount"
 #define MINIMAP_FILENAME "minimap.png"
 
@@ -64,6 +65,8 @@ void GamePreloadPacket::read
 			m_player_nr = s.get_safe_int("player_nr");
 			m_win_condition = s.get_safe_string("win_condition");
 			m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
+			m_version= s.get_safe_string("widelands_version");
+
 			if (fs.file_exists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
@@ -108,6 +111,7 @@ void GamePreloadPacket::write
 		}
 	}
 	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());
+	s.set_string("widelands_version", build_id());
 
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
