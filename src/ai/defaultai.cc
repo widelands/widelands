@@ -79,8 +79,6 @@ DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
-     // m_buildable_changed(true),
-     // m_mineable_changed(true),
      player_(nullptr),
      tribe_(nullptr),
      num_constructionsites_(0),
@@ -91,7 +89,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
-     enemy_last_seen_(-2 * 60 * 1000),
+     enemy_last_seen_(0),
      numof_warehouses_(0),
      new_buildings_stop_(false),
      resource_necessity_territory_(255),
@@ -101,7 +99,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      resource_necessity_water_needed_(false),
      unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
-     military_last_build_(-60 * 1000),
+     military_last_build_(0),
 	last_attack_target_(
         std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
@@ -218,7 +216,7 @@ void DefaultAI::think() {
 		late_initialization();
 	}
 
-	const int32_t gametime = game().get_gametime();
+	const uint32_t gametime = static_cast<uint32_t>(game().get_gametime());
 
 	if (next_ai_think_ > gametime) {
 		return;
@@ -235,9 +233,9 @@ void DefaultAI::think() {
 	// (only one but some of them needs to run check_economies() to
 	// guarantee consistency)
 	// job names are selfexplanatory
-	if (DueTask == ScheduleTasks::kBFCheck) {
+	if (DueTask == ScheduleTasks::kBbuildableFieldsCheck) {
 		update_all_buildable_fields(gametime);
-		taskDue[ScheduleTasks::kBFCheck] = gametime + kMinBFCheckInterval;
+		taskDue[ScheduleTasks::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
 	} else if (DueTask == ScheduleTasks::kRoadCheck) {
 		if (check_economies()) {  // is a must
 			return;
@@ -288,7 +286,7 @@ void DefaultAI::think() {
 		}
 		taskDue[ScheduleTasks::kWareReview] = gametime + 15 * 60 * 1000;
 		review_wares_targets(gametime);
-	} else if (DueTask == ScheduleTasks::kprintStats) {
+	} else if (DueTask == ScheduleTasks::kPrintStats) {
 		if (check_economies()) {  // economies must be consistent
 			return;
 		}
@@ -548,10 +546,10 @@ void DefaultAI::late_initialization() {
 	taskDue[ScheduleTasks::KMarineDecisions] = 30 * 1000;
 	taskDue[ScheduleTasks::kConsiderAttack] = 300000;
 	taskDue[ScheduleTasks::kCheckTrainingsites] = 15 * 60 * 1000;
-	taskDue[ScheduleTasks::kBFCheck] = 1000;
+	taskDue[ScheduleTasks::kBbuildableFieldsCheck] = 1000;
 	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
 	taskDue[ScheduleTasks::kWareReview] = 15 * 60 * 1000;
-	taskDue[ScheduleTasks::kprintStats] = 30 * 60 * 1000;
+	taskDue[ScheduleTasks::kPrintStats] = 30 * 60 * 1000;
 }
 
 /**
@@ -560,7 +558,7 @@ void DefaultAI::late_initialization() {
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
+void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;
 
@@ -598,7 +596,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
+void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;  // counter, used to track # of checked fields
 
@@ -969,7 +967,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 }
 
 /// Updates the production and MINE sites statistics needed for construction decision.
-void DefaultAI::update_productionsite_stats(int32_t const gametime) {
+void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 	// Updating the stats every 10 seconds should be enough
 	taskDue[ScheduleTasks::kProductionsitesStats] = gametime + 10000;
 	uint16_t fishers_count = 0;  // used for atlanteans only
@@ -1051,7 +1049,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 // - there is an enemy
 //   Currently more military buildings are built then needed
 //   and "optimalization" (dismantling not needed buildings) is done afterwards
-bool DefaultAI::construct_building(int32_t gametime) {
+bool DefaultAI::construct_building(uint32_t gametime) {
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	bool field_blocked = false;
@@ -1159,7 +1157,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 	// Remove outdated fields from blocker list
 	for (std::list<BlockedField>::iterator i = blocked_fields.begin(); i != blocked_fields.end();)
-		if (i->blocked_until_ < game().get_gametime()) {
+		if (i->blocked_until_ < gametime) {
 			i = blocked_fields.erase(i);
 		} else {
 			++i;
@@ -1670,17 +1668,6 @@ bool DefaultAI::construct_building(int32_t gametime) {
 						continue;
 					};
 				}
-				//;  // we allow big buildings now
-				//} else if (bf->unowned_land_nearby_ &&
-				// bo.expansion_type_) {  // decreasing probability for big buidlings
-				// if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
-				// continue;
-				//}
-				// if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
-				// continue;
-				//}
-				//}
-				//// it is ok, go on
 				else {
 					continue;
 				}  // the building is not suitable for situation
@@ -2024,7 +2011,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 }
 
 // improves current road system
-bool DefaultAI::improve_roads(int32_t gametime) {
+bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	// first force a split on roads that are longer than 3 parts
 	// with exemption when there is too few building spots
@@ -2209,7 +2196,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
-                                     int16_t minred,
+                                     int16_t minReduction,
                                      int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
@@ -2285,7 +2272,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			checkradius += 2;
 		}
 
-		// and bon us for occupied military buildings:
+		// and bonus for occupied military buildings:
 		if (occupied_military_) {
 			checkradius += 4;
 		}
@@ -2447,7 +2434,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		NearFlag& nf = nearflags.at(i);
 
 		// terminating looping if reduction is too low (nearflags are sorted by reduction)
-		if ((nf.cost_ - nf.distance_) < minred) {
+		if ((nf.cost_ - nf.distance_) < minReduction) {
 			return false;
 		}
 
@@ -2455,7 +2442,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// usually we allow connecting only if both flags are closer then 'checkradius-2'
 		// with exeption the flag belongs to a small economy (typically a new building not connected
 		// yet)
-		if ((nf.cost_ - nf.distance_) >= minred && nf.distance_ >= 2 &&
+		if ((nf.cost_ - nf.distance_) >= minReduction && nf.distance_ >= 2 &&
 		    nf.distance_ < checkradius - 2) {
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
@@ -2472,7 +2459,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check);
 
 			if (pathcost >= 0) {
-				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minred) {
+				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minReduction) {
 					game().send_player_build_road(player_number(), path);
 					return true;
 				}
@@ -2542,7 +2529,7 @@ bool DefaultAI::check_economies() {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_productionsites(int32_t gametime) {
+bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (productionsites.empty()) {
 		return false;
 	}
@@ -2684,9 +2671,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Wells handling
 	if (site.bo->mines_water_) {
-		if (site.unoccupied_till_ + 6 * 60 * 1000 < game().get_gametime() &&
+		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
-			site.bo->last_dismantle_time_ = game().get_gametime();
+			site.bo->last_dismantle_time_ = gametime;
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 
@@ -2731,7 +2718,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			return true;
 		}
 
-		if (site.unoccupied_till_ + 6 * 60 * 1000 < game().get_gametime() &&
+		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
 			// it is possible that there are stones but quary is not able to mine them
 			site.bo->last_dismantle_time_ = game().get_gametime();
@@ -2749,7 +2736,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	    &&
 	    site.bo->production_hint_ == -1  // not a renewing building (forester...)
 	    &&
-	    site.unoccupied_till_ + 10 * 60 * 1000 < game().get_gametime()  // > 10 minutes old
+	    site.unoccupied_till_ + 10 * 60 * 1000 < gametime  // > 10 minutes old
 	    &&
 	    site.site->can_start_working()  // building is occupied
 	    &&
@@ -2848,13 +2835,13 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(int32_t const gametime) {
+bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	if (gametime < taskDue[ScheduleTasks::KMarineDecisions]) {
 		return false;
 	}
 
 	if (!seafaring_economy) {
-		taskDue[ScheduleTasks::KMarineDecisions] = std::numeric_limits<int32_t>::max();
+		taskDue[ScheduleTasks::KMarineDecisions] = std::numeric_limits<uint32_t>::max();
 		return false;
 	}
 
@@ -2960,7 +2947,7 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 }
 
 // This identifies ships that are waiting for command
-bool DefaultAI::check_ships(int32_t const gametime) {
+bool DefaultAI::check_ships(uint32_t const gametime) {
 	if (gametime < taskDue[ScheduleTasks::kCheckShips]) {
 		return false;
 	}
@@ -3044,7 +3031,7 @@ bool DefaultAI::check_ships(int32_t const gametime) {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_mines_(int32_t const gametime) {
+bool DefaultAI::check_mines_(uint32_t const gametime) {
 	if (mines_.empty()) {
 		return false;
 	}
@@ -3171,18 +3158,6 @@ void DefaultAI::check_ware_necessity(BuildingObserver& bo,
 	}
 }
 
-// very primitive function - it sets thisTask to dueTask, if its due time is
-// older then due time of current dueTask
-// void DefaultAI::scheduler_review(int32_t* next_check_due_,
-// int32_t* oldestTaskTime,
-// ScheduleTasks* dueTask,
-// ScheduleTasks thisTask) {
-// if (*next_check_due_ < *oldestTaskTime) {
-//*oldestTaskTime = *next_check_due_;
-//*dueTask = thisTask;
-//}
-//}
-
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
@@ -3239,7 +3214,7 @@ uint32_t DefaultAI::get_warehoused_stock(WareIndex wt) {
 
 // this function only manipulates with trainingsites' inputs priority
 // decreases it when too many unoccupied military buildings
-bool DefaultAI::check_trainingsites(int32_t gametime) {
+bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (taskDue[ScheduleTasks::kCheckTrainingsites] > gametime) {
 		return false;
 	}
@@ -3275,7 +3250,7 @@ bool DefaultAI::check_trainingsites(int32_t gametime) {
  *
  * \returns true if something was changed
  */
-bool DefaultAI::check_militarysites(int32_t gametime) {
+bool DefaultAI::check_militarysites(uint32_t gametime) {
 	if (taskDue[ScheduleTasks::kCheckMilitarysites] > gametime) {
 		return false;
 	}
@@ -4282,7 +4257,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 // This runs once in 15 minutes, and adjust wares targets based on number of
 // productionsites and ports
-void DefaultAI::review_wares_targets(int32_t const gametime) {
+void DefaultAI::review_wares_targets(uint32_t const gametime) {
 
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
@@ -4309,17 +4284,16 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 }
 
 // run over dueTasks map and returns task with lower duetime
-DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(int32_t const gametime) {
+DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(uint32_t const gametime) {
 
-	int32_t oldestTaskTime = gametime;             // we are looking for jobs due before now
+	uint32_t oldestTaskTime = gametime;             // we are looking for jobs due before now
 	ScheduleTasks DueTask = ScheduleTasks::kIdle;  // default
 	taskDue[ScheduleTasks::kIdle] = gametime;
 
-	for (std::map<ScheduleTasks, int32_t>::iterator it = taskDue.begin(); it != taskDue.end();
-	     ++it) {
-		if (it->second < oldestTaskTime) {
-			oldestTaskTime = it->second;
-			DueTask = it->first;
+	for (std::pair<ScheduleTasks, uint32_t> task : taskDue) {
+		if (task.second < oldestTaskTime) {
+			oldestTaskTime = task.second;
+			DueTask = task.first;
 		}
 	}
 	return DueTask;
@@ -4331,13 +4305,13 @@ DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(int32_t const gametime) {
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats(int32_t const gametime) {
+void DefaultAI::print_stats(uint32_t const gametime) {
 
 	if (!kPrintStats) {
-		taskDue[ScheduleTasks::kprintStats] = std::numeric_limits<int32_t>::max();
+		taskDue[ScheduleTasks::kPrintStats] = std::numeric_limits<int32_t>::max();
 		return;
 	}
-	taskDue[ScheduleTasks::kprintStats] = gametime + 30 * 60 * 1000;
+	taskDue[ScheduleTasks::kPrintStats] = gametime + 30 * 60 * 1000;
 
 	PlayerNumber const pn = player_number();
 
