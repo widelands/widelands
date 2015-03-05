@@ -53,45 +53,45 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 
 	  // Values for alignment and size
 	  padding_(4),
-	  butw_((get_inner_w() - 5 * padding_) / 4),
 	  buth_(20),
 	  tablex_(padding_),
 	  tabley_(buth_ + 2 * padding_),
-	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
-	  tableh_(get_inner_h() - tabley_ - 2 * buth_ - 5 * padding_),
+	  tablew_(get_inner_w() * 7 / 12),
+	  tableh_(get_inner_h() - tabley_ - 3 * buth_ - 2 * padding_),
 	  right_column_x_(tablew_ + 2 * padding_),
+	  butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	  map_details_(
 		  this, right_column_x_, tabley_,
 		  get_inner_w() - right_column_x_ - padding_,
-		  tableh_),
+		  tableh_ - buth_ - padding_),
 	  ok_(
 		  this, "ok",
-		  3 * butw_ + 4 * padding_, get_inner_h() - padding_ - buth_,
+		  get_inner_w() / 2  - butw_ - padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but0.png"),
 		  _("OK")),
 	  cancel_(
 		  this, "cancel",
-		  2 * butw_ + 3 * padding_, get_inner_h() - padding_ - buth_,
+		  get_inner_w() / 2  + padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but1.png"),
 		  _("Cancel")),
 	  make_directory_(
 		  this, "make_directory",
-		  padding_, get_inner_h() - padding_ - buth_,
-		  butw_, buth_,
-		  g_gr->images().get("pics/but0.png"),
+		  right_column_x_, tabley_ + tableh_ + 3 * padding_ - 1,
+		  get_inner_w() - right_column_x_ - padding_, buth_,
+		  g_gr->images().get("pics/but1.png"),
 		  _("Make Directory")),
 	  edit_options_(
 		  this, "edit_options",
-		  butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
-		  butw_, buth_,
+		  right_column_x_, tabley_ + tableh_ - buth_,
+		  get_inner_w() - right_column_x_ - padding_, buth_,
 		  g_gr->images().get("pics/but0.png"),
 		  _("Map Options")),
-	  editbox_label_(this, padding_, tabley_ + tableh_ + 2 * padding_,
-						  get_inner_w() - cancel_.get_x() - padding_, buth_,
-						  _("Filename:"), UI::Align::Align_Right),
+	  editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_,
+						  butw_, buth_,
+						  _("Filename:"), UI::Align::Align_Left),
 	  basedir_("maps"),
 	  has_translated_mapname_(false),
 	  showing_mapames_(false) {
@@ -124,9 +124,10 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	table_.focus();
 	fill_table();
 
-	editbox_ = new UI::EditBox(this, cancel_.get_x(), editbox_label_.get_y(),
-										get_inner_w() - cancel_.get_x() - padding_, buth_,
-										g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
+	editbox_ = new UI::EditBox(
+					  this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
+					  tablew_ - editbox_label_.get_w() - padding_ + 1, buth_,
+					  g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

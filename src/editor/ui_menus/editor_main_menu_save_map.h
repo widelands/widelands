@@ -50,9 +50,10 @@ private:
 
 	// UI coordinates and spacers
 	int32_t const padding_;      // Common padding between panels
-	int32_t const butw_, buth_;  // Button dimensions
+	int32_t const buth_;  // Button dimensions
 	int32_t const tablex_, tabley_, tablew_, tableh_;
 	int32_t const right_column_x_;
+	int32_t const butw_;  // Button dimensions
 
 	MapTable table_;
 	MapDetails map_details_;
