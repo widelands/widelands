@@ -25,6 +25,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
@@ -50,7 +51,11 @@ private:
 
 	UI::Button ok_, cancel_;
 
+	UI::Box tab_box_;
+	UI::TabPanel tabs_;
 	UI::Box main_box_;
+	UI::Box tags_box_;
+
 	UI::EditBox name_, author_;
 	UI::Textarea nrplayers_size_;
 	UI::MultilineEditbox* descr_;

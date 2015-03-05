@@ -47,7 +47,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 20, 20, 450, parent.get_inner_h() - 80,
+		 20, 20, 350, parent.get_inner_h() - 80,
 		 _("Map Options")),
 	padding_(4),
 	indent_(10),
@@ -68,8 +68,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		butw_, buth_,
 		g_gr->images().get("pics/but1.png"),
 		_("Cancel")),
+	tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+	tabs_(&tab_box_, 0, 0, nullptr),
 
-	main_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+	main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+	tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
 	name_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
 	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
@@ -77,8 +80,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	modal_(modal) {
 
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 4 * labelh_, "");
-	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 2 * labelh_, "");
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
+	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 3 * labelh_, "");
 
 	UI::Button * btn =
 		new UI::Button
@@ -90,13 +93,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 			 % _("Set the position that will have the coordinates (0, 0). This will "
 				"be the top-left corner of a generated minimap.")
 			  % _("This setting will take effect immediately.")).str());
-
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Minimap:")), UI::Box::AlignLeft);
-	main_box_.add(btn, UI::Box::AlignLeft);
-	main_box_.add_space(2 * indent_);
-
-	main_box_.add(&nrplayers_size_, UI::Box::AlignLeft);
-	main_box_.add_space(2 * indent_);
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Box::AlignLeft);
 	main_box_.add(&name_, UI::Box::AlignLeft);
@@ -110,40 +106,42 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(descr_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")), UI::Box::AlignLeft);
 	main_box_.add(hint_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
 
-	UI::Box* tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	add_tag_checkbox(tags_box, "official", _("Official"));
-	add_tag_checkbox(tags_box, "unbalanced", _("Unbalanced"));
-	add_tag_checkbox(tags_box, "seafaring", _("Seafaring"));
-	tags_box->set_size(max_w_, checkbox_space_);
-	main_box_.add(tags_box, UI::Box::AlignLeft);
-	main_box_.add_space(padding_);
 
-	tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	add_tag_checkbox(tags_box, "ffa", _("Free for all"));
-	add_tag_checkbox(tags_box, "1v1", _("1v1"));
-	tags_box->set_size(max_w_, checkbox_space_);
-	main_box_.add(tags_box, UI::Box::AlignLeft);
-	main_box_.add_space(padding_);
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Minimap:")), UI::Box::AlignLeft);
+	main_box_.add(btn, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
 
-	tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	add_tag_checkbox(tags_box, "2teams", _("Teams of 2"));
-	add_tag_checkbox(tags_box, "3teams", _("Teams of 3"));
-	add_tag_checkbox(tags_box, "4teams", _("Teams of 4")); // NOCOM needs more space
-	tags_box->set_size(max_w_, checkbox_space_);
-	main_box_.add(tags_box, UI::Box::AlignLeft);
+	main_box_.add(&nrplayers_size_, UI::Box::AlignLeft);
+	//main_box_.add_space(2 * indent_);
+
+	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
+
+	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
+	add_tag_checkbox(&tags_box_, "official", _("Official"));
+	add_tag_checkbox(&tags_box_, "unbalanced", _("Unbalanced"));
+	add_tag_checkbox(&tags_box_, "seafaring", _("Seafaring"));
+	add_tag_checkbox(&tags_box_, "ffa", _("Free for all"));
+	add_tag_checkbox(&tags_box_, "1v1", _("1v1"));
+	add_tag_checkbox(&tags_box_, "2teams", _("Teams of 2"));
+	add_tag_checkbox(&tags_box_, "3teams", _("Teams of 3"));
+	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4")); // NOCOM needs more space
+	tags_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	/* NOCOM Suggested teams
 	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 	 */
 
-	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
+	tab_box_.add(&tabs_, UI::Box::AlignLeft, true);
+	tabs_.add("main_map_options", g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
+	tabs_.add("map_tags", g_gr->images().get("pics/checkbox_checked.png"), &tags_box_, _("Tags"));
+	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
+	tab_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
+
 
 	btn->sigclicked.connect
 		(boost::bind
@@ -231,11 +229,14 @@ void MainMenuMapOptions::clicked_cancel() {
 /*
  * Add a tag to the checkboxes
  */
-void MainMenuMapOptions::add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name) {
+void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, std::string tag, std::string displ_name) {
+	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0));
 	box->add(cb, UI::Box::AlignLeft, true);
 	box->add_space(padding_);
 	box->add(new UI::Textarea(box, displ_name, UI::Align_CenterLeft), UI::Box::AlignLeft);
 	box->add_space(checkbox_space_);
+	parent->add(box, UI::Box::AlignLeft);
+	parent->add_space(padding_);
 	tags_checkboxes_.emplace(tag, cb);
 }
