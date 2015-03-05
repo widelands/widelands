@@ -22,6 +22,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/textarea.h"
@@ -43,17 +44,20 @@ private:
 	void update();
 	void clicked_ok();
 	void clicked_cancel();
+	void add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name);
 
-	const int padding_, indent_, labelh_, butw_, buth_, max_w_;
+	const int padding_, indent_, labelh_, checkbox_space_, butw_, buth_, max_w_;
 
 	UI::Button ok_, cancel_;
 
 	UI::Box main_box_;
 	UI::EditBox name_, author_;
-	UI::Textarea nrplayers_, size_;
+	UI::Textarea nrplayers_size_;
 	UI::MultilineEditbox* descr_;
 	UI::MultilineEditbox* hint_;
 
+	// Tag, Checkbox
+	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
 	bool modal_;
 };
 

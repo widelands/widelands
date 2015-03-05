@@ -47,11 +47,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 20, 20, 350, parent.get_inner_h() - 80,
+		 20, 20, 450, parent.get_inner_h() - 80,
 		 _("Map Options")),
 	padding_(4),
 	indent_(10),
 	labelh_(20),
+	checkbox_space_(25),
 	butw_((get_inner_w() - 3 * padding_) / 2),
 	buth_(20),
 	max_w_(get_inner_w() - 2 * padding_),
@@ -72,13 +73,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	name_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
 	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
-	nrplayers_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
-	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+	nrplayers_size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
 	modal_(modal) {
 
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
-	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 4 * labelh_, "");
+	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 2 * labelh_, "");
 
 	UI::Button * btn =
 		new UI::Button
@@ -95,9 +95,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(btn, UI::Box::AlignLeft);
 	main_box_.add_space(2 * indent_);
 
-	main_box_.add(&nrplayers_, UI::Box::AlignLeft);
-	main_box_.add_space(padding_);
-	main_box_.add(&size_, UI::Box::AlignLeft);
+	main_box_.add(&nrplayers_size_, UI::Box::AlignLeft);
 	main_box_.add_space(2 * indent_);
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Box::AlignLeft);
@@ -116,13 +114,36 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")), UI::Box::AlignLeft);
 	main_box_.add(hint_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
-	/* NOCOM
-	if (!map.get_background().empty())
-		s.set_string("background",  map.get_background ());
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
+
+	UI::Box* tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	add_tag_checkbox(tags_box, "official", _("Official"));
+	add_tag_checkbox(tags_box, "unbalanced", _("Unbalanced"));
+	add_tag_checkbox(tags_box, "seafaring", _("Seafaring"));
+	tags_box->set_size(max_w_, checkbox_space_);
+	main_box_.add(tags_box, UI::Box::AlignLeft);
+	main_box_.add_space(padding_);
+
+	tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	add_tag_checkbox(tags_box, "ffa", _("Free for all"));
+	add_tag_checkbox(tags_box, "1v1", _("1v1"));
+	tags_box->set_size(max_w_, checkbox_space_);
+	main_box_.add(tags_box, UI::Box::AlignLeft);
+	main_box_.add_space(padding_);
+
+	tags_box = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	add_tag_checkbox(tags_box, "2teams", _("Teams of 2"));
+	add_tag_checkbox(tags_box, "3teams", _("Teams of 3"));
+	add_tag_checkbox(tags_box, "4teams", _("Teams of 4")); // NOCOM needs more space
+	tags_box->set_size(max_w_, checkbox_space_);
+	main_box_.add(tags_box, UI::Box::AlignLeft);
+
+	/* NOCOM Suggested teams
 	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 	 */
 
-	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * buth_ - 3 * padding_);
+	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	btn->sigclicked.connect
 		(boost::bind
@@ -148,15 +169,25 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 */
 void MainMenuMapOptions::update() {
 	const Widelands::Map & map = eia().egbase().map();
-	size_.set_text((boost::format(_("Size: %1% x %2%"))
-						 % map.get_width()
-						 % map.get_height()).str());
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
-	nrplayers_.set_text((boost::format(_("Number of Players: %u"))
-								% static_cast<unsigned int>(map.get_nrplayers())).str());
+	unsigned int no_of_players = static_cast<unsigned int>(map.get_nrplayers());
+	std::string nr_players =
+			(boost::format(ngettext("%u Player", "%u Players", no_of_players))
+			 % no_of_players).str();
+	nrplayers_size_.set_text(
+				/** TRANSLATORS: %3% is e.g. '2 Players' */
+				(boost::format(_("Size: %1% x %2%, %3%"))
+				 % map.get_width()
+				 % map.get_height()
+				 % nr_players).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
+
+	std::set<std::string> tags = map.get_tags();
+	for (std::pair<std::string, UI::Checkbox*> tag : tags_checkboxes_) {
+		tag.second->set_state(tags.count(tag.first) > 0);
+	}
 }
 
 
@@ -173,6 +204,15 @@ void MainMenuMapOptions::clicked_ok() {
 	g_options.pull_section("global").set_string("realname", author_.text());
 	eia().egbase().map().set_description(descr_->get_text());
 	eia().egbase().map().set_hint(hint_->get_text());
+
+	eia().egbase().map().clear_tags();
+	for (std::pair<std::string, UI::Checkbox*> tag : tags_checkboxes_) {
+		if (tag.second->get_state()) {
+			eia().egbase().map().add_tag(tag.first);
+			log("NOCOM added tag: %s\n", tag.first.c_str());
+		}
+	}
+
 	if (modal_) {
 		end_modal(1);
 	} else {
@@ -188,3 +228,14 @@ void MainMenuMapOptions::clicked_cancel() {
 	}
 }
 
+/*
+ * Add a tag to the checkboxes
+ */
+void MainMenuMapOptions::add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name) {
+	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0));
+	box->add(cb, UI::Box::AlignLeft, true);
+	box->add_space(padding_);
+	box->add(new UI::Textarea(box, displ_name, UI::Align_CenterLeft), UI::Box::AlignLeft);
+	box->add_space(checkbox_space_);
+	tags_checkboxes_.emplace(tag, cb);
+}

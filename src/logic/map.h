@@ -216,6 +216,7 @@ public:
 
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
+	void clear_tags() {m_tags.clear();}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {return m_suggested_teams;}
