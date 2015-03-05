@@ -50,8 +50,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		 20, 20, 350, parent.get_inner_h() - 80,
 		 _("Map Options")),
 	padding_(4),
+	indent_(10),
+	labelh_(20),
 	butw_((get_inner_w() - 3 * padding_) / 2),
 	buth_(20),
+	max_w_(get_inner_w() - 2 * padding_),
 	ok_(
 		this, "ok",
 		padding_, get_inner_h() - padding_ - buth_,
@@ -64,68 +67,78 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		butw_, buth_,
 		g_gr->images().get("pics/but1.png"),
 		_("Cancel")),
+
+	main_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+
+	name_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
+	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
+	nrplayers_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+
 	modal_(modal) {
 
-	int32_t const offsx   =  5;
-	int32_t const offsy   =  5;
-	int32_t const spacing =  3;
-	int32_t const height  = 20;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
-	UI::Textarea * ta = new UI::Textarea(this, posx, posy - 2, _("Map Name:"));
-	m_name =
-		new UI::EditBox
-			(this,
-			 posx + ta->get_w() + spacing, posy,
-			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->images().get("pics/but1.png"));
-	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
-	m_size =
-		new UI::Textarea
-			(this, posx + ta->get_w() + spacing, posy - 2, "512x512");
-	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Nr Players:"));
-	m_nrplayers =
-		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
-	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Authors:"));
-	m_author =
-		new UI::EditBox
-			(this,
-			 posx + ta->get_w() + spacing, posy,
-			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->images().get("pics/but1.png"));
-	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	posy += height + spacing;
-	m_descr =
-		new UI::MultilineEditbox
-			(this,
-			 posx, posy,
-			 get_inner_w() - spacing - posx, get_inner_h() - 4 * (padding_ + buth_) - posy,
-			 parent.egbase().map().get_description());
-	m_descr->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
+	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
 
 	UI::Button * btn =
 		new UI::Button
-			(this, "set_origin",
-			 padding_, get_inner_h() - 3 * (padding_ + buth_),
-			 get_inner_w() - 2 * padding_, buth_,
+			(&main_box_, "set_origin",
+			 0, 0, max_w_, buth_,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Set origin"),
-			 _("Set the position that will have the coordinates (0, 0). This will "
-				"be the top-left corner of a generated minimap."));
+			 (boost::format("%s %s")
+			 % _("Set the position that will have the coordinates (0, 0). This will "
+				"be the top-left corner of a generated minimap.")
+			  % _("This setting will take effect immediately.")).str());
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Minimap:")), UI::Box::AlignLeft);
+	main_box_.add(btn, UI::Box::AlignLeft);
+	main_box_.add_space(2 * indent_);
+
+	main_box_.add(&nrplayers_, UI::Box::AlignLeft);
+	main_box_.add_space(padding_);
+	main_box_.add(&size_, UI::Box::AlignLeft);
+	main_box_.add_space(2 * indent_);
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Box::AlignLeft);
+	main_box_.add(&name_, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Authors:")), UI::Box::AlignLeft);
+	main_box_.add(&author_, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Description:")), UI::Box::AlignLeft);
+	main_box_.add(descr_, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
+
+
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")), UI::Box::AlignLeft);
+	main_box_.add(hint_, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
+	/* NOCOM
+	if (!map.get_background().empty())
+		s.set_string("background",  map.get_background ());
+	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+	 */
+
+	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * buth_ - 3 * padding_);
+
 	btn->sigclicked.connect
 		(boost::bind
 		 (&EditorInteractive::select_tool, &parent,
 		  boost::ref(parent.tools.set_origin), EditorTool::First));
+
+	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 
 	ok_.sigclicked.connect
 		(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
 	ok_.set_enabled(false);
 	cancel_.sigclicked.connect
 		(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
+
 	update();
 }
 
@@ -135,14 +148,15 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 */
 void MainMenuMapOptions::update() {
 	const Widelands::Map & map = eia().egbase().map();
-
-	m_size     ->set_text((boost::format(_("%1$ix%2$i"))
-								  % map.get_width()
-								  % map.get_height()).str());
-	m_author->set_text(map.get_author());
-	m_name  ->set_text(map.get_name());
-	m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
-	m_descr ->set_text(map.get_description());
+	size_.set_text((boost::format(_("Size: %1% x %2%"))
+						 % map.get_width()
+						 % map.get_height()).str());
+	author_.set_text(map.get_author());
+	name_.set_text(map.get_name());
+	nrplayers_.set_text((boost::format(_("Number of Players: %u"))
+								% static_cast<unsigned int>(map.get_nrplayers())).str());
+	descr_->set_text(map.get_description());
+	hint_->set_text(map.get_hint());
 }
 
 
@@ -154,10 +168,11 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().map().set_name(m_name->text());
-	eia().egbase().map().set_author(m_author->text());
-	g_options.pull_section("global").set_string("realname", m_author->text());
-	eia().egbase().map().set_description(m_descr->get_text());
+	eia().egbase().map().set_name(name_.text());
+	eia().egbase().map().set_author(author_.text());
+	g_options.pull_section("global").set_string("realname", author_.text());
+	eia().egbase().map().set_description(descr_->get_text());
+	eia().egbase().map().set_hint(hint_->get_text());
 	if (modal_) {
 		end_modal(1);
 	} else {

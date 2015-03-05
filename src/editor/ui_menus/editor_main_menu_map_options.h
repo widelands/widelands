@@ -20,15 +20,14 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
 struct EditorInteractive;
-namespace UI {
-struct EditBox;
-struct MultilineEditbox;
-struct Textarea;
-}
 
 /**
  * This is the Main Options Menu. Here, information
@@ -45,17 +44,17 @@ private:
 	void clicked_ok();
 	void clicked_cancel();
 
-	int32_t const padding_;      // Common padding between panels
-	int32_t const butw_, buth_;  // Button dimensions
+	const int padding_, indent_, labelh_, butw_, buth_, max_w_;
 
 	UI::Button ok_, cancel_;
 
+	UI::Box main_box_;
+	UI::EditBox name_, author_;
+	UI::Textarea nrplayers_, size_;
+	UI::MultilineEditbox* descr_;
+	UI::MultilineEditbox* hint_;
+
 	bool modal_;
-
-	UI::MultilineEditbox * m_descr;
-	UI::Textarea * m_nrplayers, * m_size;
-	UI::EditBox * m_name, * m_author;
-
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
