@@ -80,8 +80,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	modal_(modal) {
 
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 5 * labelh_, "");
-	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, 3 * labelh_, "");
+	descr_ = new UI::MultilineEditbox(
+					&main_box_, 0, 0, max_w_, 6 * labelh_, "", g_gr->images().get("pics/but1.png"));
+	hint_ = new UI::MultilineEditbox(
+				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("pics/but1.png"));
 
 	UI::Button * btn =
 		new UI::Button
