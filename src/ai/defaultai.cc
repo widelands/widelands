@@ -2196,7 +2196,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
-                                     int16_t minReduction,
+                                     int16_t min_reduction,
                                      int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
@@ -2434,7 +2434,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		NearFlag& nf = nearflags.at(i);
 
 		// terminating looping if reduction is too low (nearflags are sorted by reduction)
-		if ((nf.cost_ - nf.distance_) < minReduction) {
+		if ((nf.cost_ - nf.distance_) < min_reduction) {
 			return false;
 		}
 
@@ -2442,7 +2442,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// usually we allow connecting only if both flags are closer then 'checkradius-2'
 		// with exeption the flag belongs to a small economy (typically a new building not connected
 		// yet)
-		if ((nf.cost_ - nf.distance_) >= minReduction && nf.distance_ >= 2 &&
+		if ((nf.cost_ - nf.distance_) >= min_reduction && nf.distance_ >= 2 &&
 		    nf.distance_ < checkradius - 2) {
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
@@ -2459,7 +2459,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check);
 
 			if (pathcost >= 0) {
-				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minReduction) {
+				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > min_reduction) {
 					game().send_player_build_road(player_number(), path);
 					return true;
 				}
