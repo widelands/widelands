@@ -86,14 +86,14 @@ WLMessageBox::WLMessageBox
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("pics/but5.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_ok, boost::ref(*this)));
 	} else if (type == YESNO) {
 		UI::Button * yesbtn = new Button
 			(this, "yes",
 			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("pics/but5.png"),
 			 _("Yes"));
 		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_yes, boost::ref(*this)));
 		UI::Button * nobtn = new Button

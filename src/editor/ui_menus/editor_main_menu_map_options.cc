@@ -60,7 +60,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		this, "ok",
 		padding_, get_inner_h() - padding_ - buth_,
 		butw_, buth_,
-		g_gr->images().get("pics/but0.png"),
+		g_gr->images().get("pics/but5.png"),
 		_("OK")),
 	cancel_(
 		this, "cancel",
@@ -89,7 +89,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		new UI::Button
 			(&main_box_, "set_origin",
 			 0, 0, max_w_, buth_,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("pics/but5.png"),
 			 _("Set origin"),
 			 (boost::format("%s %s")
 			 % _("Set the position that will have the coordinates (0, 0). This will "

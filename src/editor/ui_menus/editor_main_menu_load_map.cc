@@ -63,7 +63,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		  this, "ok",
 		  get_inner_w() / 2  - butw_ - padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
-		  g_gr->images().get("pics/but0.png"),
+		  g_gr->images().get("pics/but5.png"),
 		  _("OK")),
 	  cancel_(
 		  this, "cancel",

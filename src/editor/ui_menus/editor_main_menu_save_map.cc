@@ -70,7 +70,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		  this, "ok",
 		  get_inner_w() / 2  - butw_ - padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
-		  g_gr->images().get("pics/but0.png"),
+		  g_gr->images().get("pics/but5.png"),
 		  _("OK")),
 	  cancel_(
 		  this, "cancel",
@@ -88,7 +88,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		  this, "edit_options",
 		  right_column_x_, tabley_ + tableh_ - buth_,
 		  get_inner_w() - right_column_x_ - padding_, buth_,
-		  g_gr->images().get("pics/but0.png"),
+		  g_gr->images().get("pics/but5.png"),
 		  _("Map Options")),
 	  editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_,
 						  butw_, buth_,
