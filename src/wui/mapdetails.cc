@@ -129,13 +129,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			name_.set_tooltip(_("The name of this map"));
 		}
 		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
-		author_.set_tooltip(ngettext("The designer of this map", "The designers of this map",
-													mapdata.authors.get_number()));
 		author_.set_text(mapdata.authors.get_names());
 		descr_label_.set_text(_("Description:"));
 		descr_.set_text(mapdata.description +
 										  (mapdata.hint.empty() ? "" : (std::string("\n\n") + mapdata.hint)));
-		descr_.set_tooltip(_("Story and hints"));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {

@@ -92,7 +92,6 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	m_ta_campname.set_tooltip(_("The name of this campaign"));
 	m_ta_tribename.set_tooltip(_("The tribe you will be playing"));
 	m_ta_difficulty.set_tooltip(_("The difficulty of this campaign"));
-	m_ta_description.set_tooltip(_("Story and hints"));
 
 	ok_.sigclicked.connect
 		(boost::bind
@@ -342,7 +341,6 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	} else {
 		ok_.set_tooltip(_("Play this scenario"));
 		m_ta_mapname.set_tooltip(_("The name of this scenario"));
-		m_ta_description.set_tooltip(_("Story and hints"));
 	}
 
 	ok_.sigclicked.connect
