@@ -46,13 +46,14 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 
 	  // Values for alignment and size
 	  padding_(4),
-	  butw_((get_inner_w() - 5 * padding_) / 4),
 	  buth_(20),
 	  tablex_(padding_),
 	  tabley_(buth_ + 2 * padding_),
-	  tablew_(get_inner_w() * 2 / 3 - 2 * padding_),
+	  tablew_(get_inner_w() * 7 / 12),
 	  tableh_(get_inner_h() - tabley_ - buth_ - 4 * padding_),
 	  right_column_x_(tablew_ + 2 * padding_),
+	  butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
+
 	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	  map_details_(
 		  this, right_column_x_, tabley_,
@@ -60,13 +61,13 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		  tableh_),
 	  ok_(
 		  this, "ok",
-		  get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
+		  get_inner_w() / 2  - butw_ - padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but0.png"),
 		  _("OK")),
 	  cancel_(
 		  this, "cancel",
-		  get_inner_w() - 2 * butw_ - 2 * padding_, get_inner_h() - padding_ - buth_,
+		  get_inner_w() / 2  + padding_, get_inner_h() - padding_ - buth_,
 		  butw_, buth_,
 		  g_gr->images().get("pics/but1.png"),
 		  _("Cancel")),
