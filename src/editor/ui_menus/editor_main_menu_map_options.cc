@@ -47,7 +47,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 20, 20, 350, parent.get_inner_h() - 80,
+		 0, 0, 350, 520,
 		 _("Map Options")),
 	padding_(4),
 	indent_(10),
@@ -73,22 +73,23 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 	tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+	teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
 	name_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
 	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
-	nrplayers_size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
 	modal_(modal) {
 
 	descr_ = new UI::MultilineEditbox(
-					&main_box_, 0, 0, max_w_, 6 * labelh_, "", g_gr->images().get("pics/but1.png"));
+					&main_box_, 0, 0, max_w_, 8 * labelh_, "", g_gr->images().get("pics/but1.png"));
 	hint_ = new UI::MultilineEditbox(
 				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("pics/but1.png"));
 
 	UI::Button * btn =
 		new UI::Button
 			(&main_box_, "set_origin",
-			 0, 0, max_w_, buth_,
+			 0, 0, butw_, buth_,
 			 g_gr->images().get("pics/but5.png"),
 			 _("Set origin"),
 			 (boost::format("%s %s")
@@ -112,14 +113,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(hint_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-
-
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Minimap:")), UI::Box::AlignLeft);
-	main_box_.add(btn, UI::Box::AlignLeft);
+	main_box_.add(&size_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(&nrplayers_size_, UI::Box::AlignLeft);
-	//main_box_.add_space(2 * indent_);
+	main_box_.add(btn, UI::Box::AlignLeft);
+	main_box_.add_space(indent_);
 
 	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
@@ -137,10 +135,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	/* NOCOM Suggested teams
 	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 	 */
+	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")), UI::Box::AlignLeft);
+
+	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
+	std::string players = (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
+	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players), UI::Box::AlignLeft);
+	teams_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	tab_box_.add(&tabs_, UI::Box::AlignLeft, true);
 	tabs_.add("main_map_options", g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("pics/checkbox_checked.png"), &tags_box_, _("Tags"));
+	tabs_.add("map_teams", g_gr->images().get("pics/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
 	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 	tab_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
@@ -161,6 +166,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
+	center_to_parent();
+	move_to_top();
 }
 
 /**
@@ -171,16 +178,9 @@ void MainMenuMapOptions::update() {
 	const Widelands::Map & map = eia().egbase().map();
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
-	unsigned int no_of_players = static_cast<unsigned int>(map.get_nrplayers());
-	std::string nr_players =
-			(boost::format(ngettext("%u Player", "%u Players", no_of_players))
-			 % no_of_players).str();
-	nrplayers_size_.set_text(
-				/** TRANSLATORS: %3% is e.g. '2 Players' */
-				(boost::format(_("Size: %1% x %2%, %3%"))
-				 % map.get_width()
-				 % map.get_height()
-				 % nr_players).str());
+	size_.set_text((boost::format(_("Size: %1% x %2%"))
+						 % map.get_width()
+						 % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
 

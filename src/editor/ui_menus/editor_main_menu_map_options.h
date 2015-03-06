@@ -55,9 +55,10 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box main_box_;
 	UI::Box tags_box_;
+	UI::Box teams_box_;
 
 	UI::EditBox name_, author_;
-	UI::Textarea nrplayers_size_;
+	UI::Textarea size_;
 	UI::MultilineEditbox* descr_;
 	UI::MultilineEditbox* hint_;
 
