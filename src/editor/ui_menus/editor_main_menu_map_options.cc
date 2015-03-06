@@ -122,7 +122,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
-	add_tag_checkbox(&tags_box_, "official", _("Official"));
 	add_tag_checkbox(&tags_box_, "unbalanced", _("Unbalanced"));
 	add_tag_checkbox(&tags_box_, "seafaring", _("Seafaring"));
 	add_tag_checkbox(&tags_box_, "ffa", _("Free for all"));
