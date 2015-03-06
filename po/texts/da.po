@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
+# Joe Hansen <joedalton2@yahoo.dk>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 11:20+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-03 17:50+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "LÆSMIG"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr "Et open-source-strategispil"
+msgstr "Et strategispil udviklet i åben kildekode"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme:7
 msgid "Introduction"
@@ -54,7 +55,7 @@ msgstr "Besøg Widelands' hjemmeside:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands er licenseret under GNU General Public License (GPL). For yderligere information, se filen »COPYING«."
 
 #: ../../txts/README.lua:37
 msgid "Status"
@@ -127,7 +128,7 @@ msgstr ""
 
 #: ../../txts/README.lua:67
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: skift statistik"
 
 #: ../../txts/README.lua:68
 msgid "I: toggles stock inventory"
@@ -135,7 +136,7 @@ msgstr ""
 
 #: ../../txts/README.lua:69
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: skift mål"
 
 #: ../../txts/README.lua:70
 msgid "F: toggles fullscreen (if supported by the OS)"
@@ -151,11 +152,11 @@ msgstr ""
 
 #: ../../txts/README.lua:73
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: går til den forrige placering"
 
 #: ../../txts/README.lua:74
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: går til den næste placering"
 
 #: ../../txts/README.lua:75
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -163,7 +164,7 @@ msgstr ""
 
 #: ../../txts/README.lua:76
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: afslutter spillet øjeblikkeligt"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+Leftclick: skips confirmation dialogs"
@@ -180,7 +181,7 @@ msgstr ""
 
 #: ../../txts/README.lua:82
 msgid "0: shows all messages"
-msgstr ""
+msgstr "0: viser alle beskeder"
 
 #: ../../txts/README.lua:83
 msgid "1: shows geologists' messages only"
@@ -305,7 +306,7 @@ msgstr ""
 
 #: ../../txts/developers:1
 msgid "Authors"
-msgstr ""
+msgstr "Forfattere"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -357,7 +358,7 @@ msgstr "Kort og Missioner"
 
 #: ../../txts/developers:169
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampagnehistorie"
 
 #: ../../txts/developers:172
 msgid "Barbarian"
@@ -369,7 +370,7 @@ msgstr ""
 
 #: ../../txts/developers:182
 msgid "Atlantean"
-msgstr ""
+msgstr "Alanteaner"
 
 #: ../../txts/developers:189
 msgid "Translators"
@@ -379,13 +380,13 @@ msgstr "Oversættere"
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
-msgstr ""
+msgstr "Bemærk: Denne liste indeholder folk som oversatte Widelands før vi flyttede til launchpad.net."
 
 #: ../../txts/developers:193
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
-msgstr ""
+msgstr "Se https://translations.launchpad.net/widelands for en liste over folk som hjalp med at oversætte Widelands via launchpad.net."
 
 #: ../../txts/developers:197
 msgid "Czech"
@@ -393,7 +394,7 @@ msgstr "Tjekkisk"
 
 #: ../../txts/developers:204
 msgid "Dansk"
-msgstr ""
+msgstr "Dansk"
 
 #: ../../txts/developers:210
 msgid "Dutch"
@@ -425,7 +426,7 @@ msgstr "Ungarsk"
 
 #: ../../txts/developers:257
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 #: ../../txts/developers:262
 msgid "Polish"
@@ -453,15 +454,15 @@ msgstr "Pakkere"
 
 #: ../../txts/developers:296
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Linuxdistributioner"
 
 #: ../../txts/developers:307
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Andre Unixdistributioner"
 
 #: ../../txts/developers:318
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Ikke Unixdistributioner"
 
 #: ../../txts/developers:330
 msgid "Homepage Coders"
@@ -469,7 +470,7 @@ msgstr ""
 
 #: ../../txts/developers:340
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumentation, hjælp og wiki"
 
 #: ../../txts/developers:355
 msgid "Former elders"
@@ -481,7 +482,7 @@ msgstr "Oversættelse"
 
 #: ../../txts/developers:385
 msgid "Other"
-msgstr ""
+msgstr "Andre"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
@@ -559,11 +560,11 @@ msgstr "Licens"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Licensinformation for Widelands"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr ""
+msgstr "Ophavsret 2002 - 2014 Widelands-udviklingsholdet."
 
 #: ../../txts/license:9
 msgid ""
@@ -753,7 +754,7 @@ msgstr ""
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr ""
+msgstr "Tryk Ctrl+(0-9) for at lagre vigtige placeringer, tryk så på 0-9 for at genfinde dem."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""

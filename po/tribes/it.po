@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 11:03+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-27 11:43+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +166,7 @@ msgstr "Edificio"
 
 #: ../../tribes/scripting/format_help.lua:485
 msgid "Mine plot"
-msgstr ""
+msgstr "Zona per una miniera"
 
 #: ../../tribes/scripting/format_help.lua:485
 #: ../../tribes/scripting/format_help.lua:487
@@ -179,19 +179,19 @@ msgstr "Spazio richiesto:"
 
 #: ../../tribes/scripting/format_help.lua:487
 msgid "Port plot"
-msgstr ""
+msgstr "Zona per un porto"
 
 #: ../../tribes/scripting/format_help.lua:490
 msgid "Small plot"
-msgstr ""
+msgstr "Zona piccola"
 
 #: ../../tribes/scripting/format_help.lua:492
 msgid "Medium plot"
-msgstr ""
+msgstr "Zona media"
 
 #: ../../tribes/scripting/format_help.lua:494
 msgid "Big plot"
-msgstr ""
+msgstr "Zona grande"
 
 #: ../../tribes/scripting/format_help.lua:496
 #: ../../tribes/scripting/format_help.lua:530
@@ -229,16 +229,16 @@ msgstr "Costo complessivo:"
 
 #: ../../tribes/scripting/format_help.lua:580
 msgid "If built directly, dismantle yields:"
-msgstr ""
+msgstr "Se costruito direttamente, lo smantellamento produce:"
 
 #: ../../tribes/scripting/format_help.lua:585
 msgid "If enhanced, dismantle yields:"
-msgstr ""
+msgstr "Se migliorato, lo smantellamento produce:"
 
 #: ../../tribes/scripting/format_help.lua:587
 #: ../../tribes/scripting/format_help.lua:628
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Lo smantellamento produce:"
 
 #: ../../tribes/scripting/format_help.lua:637
 msgid "Can be enhanced to:"

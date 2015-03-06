@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-20 13:00+0000\n"
-"Last-Translator: millimarg\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-02 08:34+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Willkommen zurück. In dieser Einführung lernst du die wichtigsten Sach
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Aber lasse mich dir zuerst einen Überblick über dein Territorium geben: Hier im Süden hast du eine vollständige Wirtschaft mit fast allem, was du brauchst."
+msgstr "Aber lasse mich dir zuerst einen Überblick über dein Gebiet geben: Hier im Süden hast du eine vollständige Wirtschaft mit fast allem, was du brauchst."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
@@ -83,7 +83,7 @@ msgid ""
 "tabs: wares and workers in the dock. They are waiting for a ship to "
 "transport them to another port. Currently, there are none because we have "
 "not yet built a second port. So let’s change this!"
-msgstr "Außerdem bieten Häfen die Möglichkeit, Waren mit Schiffen zu transportieren. Wenn du auf den Hafen, den du schon hast, klickst, siehst du zwei zusätzliche Kategorien: Waren und Arbeiter im Dock. Sie warten auf ein Schiff, das sie zu einem anderen Hafen bringen soll. Im Moment ist das Dock noch leer, weil wir noch keinen zweiten Hafen gebaut haben. Das wollen wir nun ändern!"
+msgstr "Außerdem bieten Häfen die Möglichkeit, Waren mit Schiffen zu transportieren. Wenn du auf den Hafen, den du schon hast, klickst, siehst du zwei zusätzliche Reiter: Waren und Arbeiter im Dock. Sie warten auf ein Schiff, das sie zu einem anderen Hafen bringen soll. Im Moment ist das Dock noch leer, weil wir noch keinen zweiten Hafen gebaut haben. Das wollen wir nun ändern!"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -298,7 +298,7 @@ msgstr "Expeditionen können in jedem Hafen gestartet werden. Alle benötigten W
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
-msgstr "Du kannst die benötigten Waren im fünften Tab (er taucht auf, sobald du die Expedition gestartet hast) deines Hafens einsehen."
+msgstr "Du kannst die benötigten Waren im fünften Reiter (er taucht auf, sobald du die Expedition gestartet hast) deines Hafens einsehen."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -320,7 +320,7 @@ msgstr "Starte eine Expedition."
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr "Klicke dazu in irgendeinem Hafen auf die Schaltfläche „Starte eine Expedition“. Ein neuer Tab, in dem du die benötigten Waren sehen kannst, taucht auf."
+msgstr "Klicke dazu in irgendeinem Hafen auf die Schaltfläche „Starte eine Expedition“. Ein neuer Reiter, in dem du die benötigten Waren sehen kannst, taucht auf."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
 msgid "Off to greener pastures"

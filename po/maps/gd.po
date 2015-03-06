@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-17 08:29+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-27 12:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +177,7 @@ msgstr "San oideachadh seo, ionnsaichidh tu mar a stiùiricheas tu rudan ann an 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr "Cogadh"
+msgstr "An cogadh"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""

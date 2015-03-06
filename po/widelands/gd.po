@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-17 07:17+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-06 15:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "dìonadach"
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr "%1$s ⁊ %2$s"
+msgstr "%1$s ┐%2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -391,7 +391,7 @@ msgstr "monadh"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
+msgid "impassable"
 msgstr "do-choiseach"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
@@ -1178,7 +1178,7 @@ msgstr[3] "Tha obraichean a dhìth"
 msgid "(stopped)"
 msgstr "(’na stad)"
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr "Cha deach stòras a lorg tuilleadh!"
 
@@ -1257,15 +1257,15 @@ msgstr "Cluicheadair %u"
 msgid "Logic error"
 msgstr "Mearachd na loidsig"
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
 msgstr "Chaidh port ùr a chur ris an eaconamaidh agad."
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr "Chaidh prìomh-àras ùr a chur ris an eaconamaidh agad."
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr "Chaidh taigh-stòrais ùr a chur ris an eaconamaidh agad."
 
