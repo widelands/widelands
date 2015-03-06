@@ -91,7 +91,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 			(&main_box_, "set_origin",
 			 0, 0, butw_, buth_,
 			 g_gr->images().get("pics/but5.png"),
-			 _("Set origin"),
+			 _("Set Origin"),
 			 (boost::format("%s %s")
 			 % _("Set the position that will have the coordinates (0, 0). This will "
 				"be the top-left corner of a generated minimap.")
