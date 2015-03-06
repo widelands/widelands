@@ -131,7 +131,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	add_tag_checkbox(&tags_box_, "1v1", _("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", _("Teams of 2"));
 	add_tag_checkbox(&tags_box_, "3teams", _("Teams of 3"));
-	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4")); // NOCOM needs more space
+	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4"));
 	tags_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	/* NOCOM Suggested teams
@@ -209,7 +209,6 @@ void MainMenuMapOptions::clicked_ok() {
 	for (std::pair<std::string, UI::Checkbox*> tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
 			eia().egbase().map().add_tag(tag.first);
-			log("NOCOM added tag: %s\n", tag.first.c_str());
 		}
 	}
 

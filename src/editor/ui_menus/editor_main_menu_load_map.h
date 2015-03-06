@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,46 +22,20 @@
 
 #include <string>
 
-#include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
-#include "ui_basic/window.h"
-#include "wui/mapdetails.h"
-#include "wui/maptable.h"
-
-struct EditorInteractive;
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/editor_main_menu_load_or_save_map.h"
 
 /**
  * Choose a filename and save your brand new created map
 */
-struct MainMenuLoadMap : public UI::Window {
-	MainMenuLoadMap(EditorInteractive &);
+struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
+	MainMenuLoadMap(EditorInteractive& parent);
+
+protected:
+	void clicked_ok() override;
 
 private:
-	void clicked_ok();
-	bool set_has_selection();
 	void entry_selected();
-	void toggle_mapnames();
-	void fill_table();
-
-	// UI coordinates and spacers
-	int32_t const padding_;      // Common padding between panels
-	int32_t const buth_;  // Button dimensions
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_x_;
-	int32_t const butw_;  // Button dimensions
-
-	MapTable table_;
-	MapDetails map_details_;
-
-	UI::Button ok_, cancel_;
-
-	const std::string basedir_;
-	std::string curdir_;
-
-	bool has_translated_mapname_;
-	UI::Checkbox* cb_dont_localize_mapnames_;
-	bool showing_mapames_;
-	UI::Button* show_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

@@ -20,24 +20,26 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 
-#include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/window.h"
-#include "wui/mapdetails.h"
-#include "wui/maptable.h"
+#include <string>
 
-struct EditorInteractive;
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/editor_main_menu_load_or_save_map.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
 
 /**
  * Choose a filename and save your brand new created map
 */
-struct MainMenuSaveMap : public UI::Window {
-	MainMenuSaveMap(EditorInteractive &);
+struct MainMenuSaveMap : public MainMenuLoadOrSaveMap {
+	MainMenuSaveMap(EditorInteractive& parent);
+
+protected:
+	void clicked_ok() override;
 
 private:
-	EditorInteractive & eia();
-	void clicked_ok();
+	EditorInteractive& eia();
+
 	void clicked_make_directory();
 	void clicked_edit_options();
 	void clicked_item();
@@ -45,31 +47,11 @@ private:
 	void edit_box_changed();
 
 	bool save_map(std::string, bool);
-	void toggle_mapnames();
-	void fill_table();
 
-	// UI coordinates and spacers
-	int32_t const padding_;      // Common padding between panels
-	int32_t const buth_;  // Button dimensions
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_x_;
-	int32_t const butw_;  // Button dimensions
-
-	MapTable table_;
-	MapDetails map_details_;
-
-	UI::Button ok_, cancel_, make_directory_, edit_options_;
+	UI::Button make_directory_, edit_options_;
 
 	UI::Textarea editbox_label_;
 	UI::EditBox* editbox_;
-
-	const std::string basedir_;
-	std::string curdir_;
-
-	bool has_translated_mapname_;
-	UI::Checkbox* cb_dont_localize_mapnames_;
-	bool showing_mapames_;
-	UI::Button* show_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
