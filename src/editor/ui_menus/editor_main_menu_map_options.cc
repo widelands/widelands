@@ -82,20 +82,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	modal_(modal) {
 
 	descr_ = new UI::MultilineEditbox(
-					&main_box_, 0, 0, max_w_, 8 * labelh_, "", g_gr->images().get("pics/but1.png"));
+					&main_box_, 0, 0, max_w_, 9 * labelh_, "", g_gr->images().get("pics/but1.png"));
 	hint_ = new UI::MultilineEditbox(
 				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("pics/but1.png"));
-
-	UI::Button * btn =
-		new UI::Button
-			(&main_box_, "set_origin",
-			 0, 0, butw_, buth_,
-			 g_gr->images().get("pics/but5.png"),
-			 _("Set Origin"),
-			 (boost::format("%s %s")
-			 % _("Set the position that will have the coordinates (0, 0). This will "
-				"be the top-left corner of a generated minimap.")
-			  % _("This setting will take effect immediately.")).str());
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Box::AlignLeft);
 	main_box_.add(&name_, UI::Box::AlignLeft);
@@ -114,9 +103,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add_space(indent_);
 
 	main_box_.add(&size_, UI::Box::AlignLeft);
-	main_box_.add_space(indent_);
-
-	main_box_.add(btn, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
 	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
@@ -147,12 +133,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	tabs_.add("map_teams", g_gr->images().get("pics/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
 	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 	tab_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
-
-
-	btn->sigclicked.connect
-		(boost::bind
-		 (&EditorInteractive::select_tool, &parent,
-		  boost::ref(parent.tools.set_origin), EditorTool::First));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
