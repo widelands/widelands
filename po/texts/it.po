@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-25 14:44+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-04 16:10+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr "Widelands è un gioco strategico in real time libero ed open source, con campagne\nper giocatore singolo ed una modalità multiplayer. Il gioco si ispira a Settelers II ma ha\ndecisamente più varietà e profondità. Nonostante ciò, è facile imparare a giocare\ntramite tutorial giocabili."
+msgstr "Widelands è un gioco strategico in real time libero ed open source, con campagne\nper giocatore singolo ed una modalità multiplayer. Il gioco si ispira a Settelers II, ma ha\ndecisamente più varietà e profondità. Nonostante ciò, è facile imparare a giocare\ntramite tutorial giocabili."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -47,7 +47,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr "In questa partita, cominci con un piccolo appezzamento di terra con solo poche\nrisorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\nLungo la strada verso questo obbiettivo, dovrai creare un'infrastruttura economica,\nesplorare il terreno intorno a te e fronteggiare tribù rivali."
+msgstr "In questa partita, cominci con un piccolo appezzamento di terra con solo poche\nrisorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\nLungo la strada verso questo obiettivo, dovrai creare un'infrastruttura economica,\nesplorare il terreno intorno a te e fronteggiare delle tribù rivali."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
@@ -70,7 +70,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr "Widelands è quasi compleato ed molto divertente giocare da solo, ed ancora\ndi più in multiplayer con gli altri. Rimane sempre comunque del lavoro da fare in\ntutti i settori. Se sei interessato a contribuire - ideando grafica,\nrisolvendo bug o aggiungendo nuove funzionalità, traducendo il gioco nella tua lingua o\ncreando nuove mappe - mettiti in contatto consultando la nostra homepage."
+msgstr "Widelands è quasi completo nelle sue funzioni ed molto divertente giocare da solo, ed ancora\ndi più in multiplayer con altri giocatori. Rimane sempre comunque del lavoro da fare in\ntutti i settori. Se sei interessato a contribuire – ideando elementi grafici,\ncorreggendo bug o aggiungendo nuove funzionalità, traducendo il gioco nella tua lingua o\ncreando nuove mappe – mettiti in contatto con noi consultando la nostra pagina web."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: ../../txts/README.lua:78
 msgid "CTRL+F11: takes a screenshot"
-msgstr ""
+msgstr "CTRL+F11: crea una schermata"
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -183,15 +183,15 @@ msgstr "Nella finestra del messaggio, sono disponibili i seguenti collegamenti a
 
 #: ../../txts/README.lua:82
 msgid "0: shows all messages"
-msgstr ""
+msgstr "0: mostra tutti i messaggi"
 
 #: ../../txts/README.lua:83
 msgid "1: shows geologists' messages only"
-msgstr ""
+msgstr "1: mostra solamente i messaggi dei geologi"
 
 #: ../../txts/README.lua:84
 msgid "2: shows economy messages only"
-msgstr ""
+msgstr "2: mostra solamente i messaggi relativi all'economia"
 
 #: ../../txts/README.lua:85
 msgid "3: shows seafaring messages only"
@@ -199,11 +199,11 @@ msgstr "3: mostra solamente i messaggi relativi alla navigazione in mare"
 
 #: ../../txts/README.lua:86
 msgid "4: shows warfare messages only"
-msgstr ""
+msgstr "4: mostra solamente i messaggi relativi alla guerra"
 
 #: ../../txts/README.lua:87
 msgid "5: shows scenario messages only"
-msgstr ""
+msgstr "5: mostra solamente i messaggi relativi allo scenario"
 
 #: ../../txts/README.lua:88
 msgid "G: jumps to the location corresponding to the current message"
@@ -211,7 +211,7 @@ msgstr "G: vai alla posizione collegata al messaggio corrente"
 
 #: ../../txts/README.lua:89
 msgid "DELETE: archives/restores the current message"
-msgstr ""
+msgstr "CANC: archivia/ripristina il messaggio corrente"
 
 #: ../../txts/README.lua:91
 msgid "Online Help"
@@ -632,7 +632,7 @@ msgstr "Alcune costruzioni, come le fattorie, hanno un'area di lavoro molto picc
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Bisogna sempre costruire la capanna del taglialegna e la capanna del pescatore, se tu non vuoi finire il legno e il cibo."
+msgstr "Bisogna sempre costruire una casa della guardia forestale e una casa dell'allevatore di pesci se non vuoi esaurire il legname e il cibo."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
@@ -687,11 +687,11 @@ msgstr "I tasti numerici (1-0) ti consentono di impostare direttamente l'area de
 msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Il tasto SPAZIO si comporta come in una partita normale. Attiva e disattiva la visualizzazione degli spazi di costruzione."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Costruisci sempre una casa della guardia forestale per non esaurire i tronchi."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""

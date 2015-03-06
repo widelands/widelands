@@ -5,14 +5,16 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
+# Kiba Gasteiz <kibafang@gmail.com>, 2015
+# Madkat Here <madcat182@gmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-17 10:42+0000\n"
-"Last-Translator: Kiba Gasteiz <kibafang@gmail.com>\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-03 22:41+0000\n"
+"Last-Translator: Madkat Here <madcat182@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -280,17 +282,17 @@ msgstr "Coordenadas: (%1$i, %2$i)"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid " small"
-msgstr ""
+msgstr "pequeño"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " medium"
-msgstr ""
+msgstr "mediano"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " big"
-msgstr ""
+msgstr "grande"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
@@ -390,8 +392,8 @@ msgstr "montañoso"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
-msgstr "intransitable"
+msgid "impassable"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
@@ -949,7 +951,7 @@ msgstr "Jugador 1"
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
-msgstr ""
+msgstr "Sin descripción definida"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
@@ -1149,7 +1151,7 @@ msgstr "¡No hay soldados para entrenar!"
 #: ../../src/logic/production_program.cc:1400
 #: ../../src/logic/production_program.cc:1485
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "No se han encontrado soldados para este nivel de entrenamiento!"
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(not occupied)"
@@ -1165,7 +1167,7 @@ msgstr[1] "Faltan trabajadores"
 msgid "(stopped)"
 msgstr "(detenido)"
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr "¡No se encuentran más recursos!"
 
@@ -1193,7 +1195,7 @@ msgstr "Partida guardada"
 
 #: ../../src/logic/ship.cc:451
 msgid "Port Space Found"
-msgstr ""
+msgstr "Se ha encontrado espacio para un puerto"
 
 #: ../../src/logic/ship.cc:452
 msgid "An expedition ship found a new port build space."
@@ -1226,7 +1228,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:819
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Expedición Lista"
 
 #: ../../src/logic/ship.cc:820
 msgid "An expedition ship is waiting for your commands."
@@ -1244,15 +1246,15 @@ msgstr "Jugador %u"
 msgid "Logic error"
 msgstr "Error lógico"
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Se ha añadido un nuevo puerto a tu economía"
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -1370,12 +1372,12 @@ msgstr "Tipo de mensaje no válido"
 #: ../../src/network/internet_gaming.cc:498
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "El juego %s está disponible ahora"
 
 #: ../../src/network/internet_gaming.cc:507
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "El juego %s ha sido cerrado"
 
 #: ../../src/network/internet_gaming.cc:542
 #, c-format
@@ -1394,7 +1396,7 @@ msgstr "El mensaje del chat no pudo ser enviado. "
 #: ../../src/network/internet_gaming.cc:599
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "ERROR: %s"
 
 #: ../../src/network/internet_gaming.cc:609
 #, c-format
@@ -1423,7 +1425,7 @@ msgstr ""
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "There is no user with the name %s logged in!"
-msgstr ""
+msgstr "Ningún usuario con el nombre %s ha iniciado sesión!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1272
@@ -1523,7 +1525,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:364 ../../src/network/nethost.cc:1204
 #: ../../src/network/nethost.cc:1215
 msgid "/help  -  Shows this help"
-msgstr ""
+msgstr "/help  -  Muestra esta ayuda"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:366
@@ -1543,7 +1545,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:372
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause - Forzar el juego a pausarse."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:374
@@ -1627,7 +1629,7 @@ msgstr "Orden no válida. Escribe /help para una lista de órdenes."
 msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
-msgstr ""
+msgstr "Este es un servidor dedicado. Envía \"@%s help\" para mostrar una lista de los comandos disponibles."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1206 ../../src/network/nethost.cc:1217
@@ -1687,7 +1689,7 @@ msgstr "¡Comando para servidor dedicado desconocido \"%s\"!"
 #: ../../src/network/nethost.cc:1993
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "IA %u"
 
 #: ../../src/network/nethost.cc:2058 ../../src/wui/game_summary.cc:95
 msgid "Player"
@@ -1704,8 +1706,8 @@ msgstr "Este servidor está protegido por contraseña. Puedes enviar la contrase
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%li segundo"
+msgstr[1] "%li segundos"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -1733,7 +1735,7 @@ msgstr "El servidor ha fallado e hizo un guardado de emergencia."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr ""
+msgstr "Conexión finalizada: no hubo respuesta en 10 minutos!"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -1757,7 +1759,7 @@ msgstr "Algo ha salido mal: %s"
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s ha dejado el juego (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -1905,7 +1907,7 @@ msgstr ""
 #. console
 #: ../../src/profile/profile.cc:53
 msgid "yes"
-msgstr ""
+msgstr "sí"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1926,7 +1928,7 @@ msgstr ""
 #. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2115,7 +2117,7 @@ msgstr "Tutorial:"
 #: ../../src/ui_fsmenu/campaign_select.cc:418
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
-msgstr ""
+msgstr "Ruta no válida a archivo en campaigns.conf: %s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:429
 msgid "The designer of this tutorial"
@@ -2138,12 +2140,12 @@ msgstr[1] "Autores:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr ""
+msgstr "Elije un tutorial de la lista, luego haz click en \"OK\"."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:461
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr ""
+msgstr "Puedes ver una descripción del tutorial seleccionado en la parte derecha."
 
 #: ../../src/ui_fsmenu/fileview.cc:76 ../../src/wui/watchwindow.cc:140
 msgid "Close"
@@ -2221,7 +2223,7 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
-msgstr ""
+msgstr "Widelands no pudo obtener la dirección IP del servidor.\nParece haber un error de red, ya sea de tu conexión o la conexión\ndel servidor.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:412
 msgid "Widelands was unable to connect to the host."
@@ -2301,7 +2303,7 @@ msgstr "Juego guardado"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:299
 msgid "The game is a saved game – the win condition was set before."
-msgstr ""
+msgstr "Este es un juego guardado – la condición de victoria ya fué establecida."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:399
 msgid "Saved game is directory"
@@ -2368,7 +2370,7 @@ msgstr[1] "%u jugadores"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:643
 msgid "Scenario mode selected"
-msgstr ""
+msgstr "Se ha seleccionado el modo escenario"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:664
 msgid "You are in the multiplayer launch game menu."
@@ -2441,7 +2443,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"
-msgstr ""
+msgstr "Detalles del mapa"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
@@ -2461,11 +2463,11 @@ msgstr "Iniciar juego"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Player’s name"
-msgstr ""
+msgstr "Nombre del jugador"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:97
 msgid "Player’s type"
-msgstr ""
+msgstr "Tipo de jugador"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
 #: ../../src/wui/multiplayersetupgroup.cc:459
@@ -2474,7 +2476,7 @@ msgstr "Equipo"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:105
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Tribu del jugador"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start type"
@@ -2521,7 +2523,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:149
 msgid "The number of players"
-msgstr ""
+msgstr "El número de jugadores"
 
 #: ../../src/ui_fsmenu/loadgame.cc:150
 msgid "The win condition that was set for this game"
@@ -2529,7 +2531,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:154
 msgid "Load this replay"
-msgstr ""
+msgstr "Cargar esta repetición"
 
 #: ../../src/ui_fsmenu/loadgame.cc:155
 msgid "The map that this replay is based on"

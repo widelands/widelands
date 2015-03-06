@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-23 20:33+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-02 12:04+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -274,11 +274,11 @@ msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
-msgstr "- Hast du ein gespeichertes Spiel oder eine Spielaufzeichnung, in dem der Fehler auftritt (zum Beispiel\nein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an.\nFür mehr Informationen schaue unter dem Abschnitt „Spielaufzeichnungen“ weiter unten nach."
+msgstr "- Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehler auftritt (zum Beispiel\nein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an.\nFür mehr Informationen schaue unter dem Abschnitt „Aufzeichnungen“ weiter unten nach."
 
 #: ../../txts/README.lua:124
 msgid "Replays"
-msgstr "Spielaufzeichnungen"
+msgstr "Aufzeichnungen"
 
 #: ../../txts/README.lua:126
 msgid ""
@@ -297,7 +297,7 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr "Mit der Option „Aufnahme abspielen“ im Hauptmenü wird ein früher gespieltes Spiel\ngenauso nochmals vorgespielt. Beachte aber, dass auch kleine Änderungen im\nSpieldatensatz oder der Widelands Ausführungsdatei (widelands.exe) ein\nWiederholungsspiel inkompatibel machen können oder „out of sync“ geht. Das\nist ähnlich wie bei Netzwerkspielen, die unter einem Zeitversatz leiden (laggen),\nwenn unterschiedliche Versionen gespielt werden."
+msgstr "Mit der Option „Aufzeichnung abspielen“ im Hauptmenü wird ein früher gespieltes Spiel\ngenauso nochmals vorgespielt. Beachte aber, dass auch kleine Änderungen im\nSpieldatensatz oder der Widelands Ausführungsdatei (widelands.exe) eine\nAufzeichnung inkompatibel machen können oder „out of sync“ geht. Das\nist ähnlich wie bei Netzwerkspielen, die unter einem Zeitversatz leiden (laggen),\nwenn unterschiedliche Versionen gespielt werden."
 
 #: ../../txts/README.lua:139
 msgid ""
@@ -305,7 +305,7 @@ msgid ""
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr "Aufnahmen sind ein sehr nützliches Werkzeug, um Fehler in der Spiellogik zu finden, daher\nkönnen sie als Anhang zu einer Fehlermeldung nützlich sein. Die Wiedergabedateien sind im\n~/.widelands/replays Verzeichnis auf Linux und Mac OS X gespeichert. Bei Windows befinden\nsie sich im „replays“-Unterverzeichnis deiner Widelands-Installation."
+msgstr "Aufzeichnungen sind ein sehr nützliches Werkzeug, um Fehler in der Spiellogik zu finden, daher\nkönnen sie als Anhang zu einer Fehlermeldung nützlich sein. Die Wiedergabedateien sind im\n~/.widelands/replays Verzeichnis auf Linux und Mac OS X gespeichert. Bei Windows befinden\nsie sich im „replays“-Unterverzeichnis deiner Widelands-Installation."
 
 #: ../../txts/developers:1
 msgid "Authors"
@@ -333,7 +333,7 @@ msgstr "Homepage"
 
 #: ../../txts/developers:28 ../../txts/developers:373
 msgid "Sound"
-msgstr "Geräusche"
+msgstr "Ton"
 
 #: ../../txts/developers:33
 msgid "Tongues"
@@ -361,7 +361,7 @@ msgstr "Karten und Missionen"
 
 #: ../../txts/developers:169
 msgid "Campaign Story"
-msgstr "Hintergrundgeschichte der Kampagne"
+msgstr "Kampagnen"
 
 #: ../../txts/developers:172
 msgid "Barbarian"
@@ -481,11 +481,11 @@ msgstr "Ehemalige Älteste"
 
 #: ../../txts/developers:378
 msgid "Translation"
-msgstr "Übersetzung"
+msgstr "Sprachen"
 
 #: ../../txts/developers:385
 msgid "Other"
-msgstr "Andere"
+msgstr "Anderes"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
@@ -710,7 +710,7 @@ msgstr "Sende erst einen Geologen zur Bodenerkundung aus, bevor du Minen oder Br
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
-msgstr "Dein Territorium kannst du durch Errichten verschiedener Militärgebäude wie Baracken, Wachstuben oder Festungen erweitern."
+msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie Baracken, Wachstuben oder Festungen vergrößern."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
