@@ -29,6 +29,7 @@
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "profile/profile.h"
@@ -59,8 +60,18 @@ InteractiveGameBase::InteractiveGameBase
 		(global_s.get_string("building_tooltip_format",      "%r")),
 	m_chatenabled(chatenabled),
 	m_multiplayer(multiplayer),
-	m_playertype(pt)
-{}
+	m_playertype(pt),
+
+#define INIT_BTN(picture, name, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
+ g_gr->images().get("pics/" picture ".png"),                      \
+ tooltip                                                                      \
+
+	m_toggle_buildhelp
+		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+{
+	m_toggle_buildhelp.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+}
 
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game * InteractiveGameBase::get_game() const
@@ -115,6 +126,36 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 						UI::Align_TopRight);
 		}
 	}
+}
+
+
+/**
+ * Called for every game after loading (from a savegame or just from a map
+ * during single/multiplayer/scenario).
+ */
+void InteractiveGameBase::postload() {
+	Widelands::Map & map = egbase().map();
+	OverlayManager & overlay_manager = map.overlay_manager();
+	overlay_manager.show_buildhelp(false);
+	overlay_manager.register_overlay_callback_function
+			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
+
+	// Connect buildhelp button to reflect build help state. Needs to be
+	// done here rather than in the constructor as the map is not present then.
+	// This code assumes that the InteractivePlayer object lives longer than
+	// the overlay_manager. Otherwise remove the hook in the deconstructor.
+	egbase().map().overlay_manager().onBuildHelpToggle =
+		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
+	m_toggle_buildhelp.set_perm_pressed(buildhelp());
+
+	// Recalc whole map for changed owner stuff
+	map.recalc_whole_map(egbase().world());
+
+	// Close game-relevant UI windows (but keep main menu open)
+	delete m_fieldaction.window;
+	m_fieldaction.window = nullptr;
+
+	hide_minimap();
 }
 
 

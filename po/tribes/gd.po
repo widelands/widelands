@@ -1,24 +1,23 @@
-# Gaelic; Scottish translation for widelands
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# GunChleoc, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-04 13:45+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 17:22+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
-"(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:51+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
 "Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../tribes/scripting/format_help.lua:150
 #: ../../tribes/scripting/format_help.lua:442
@@ -37,17 +36,20 @@ msgstr "%1$s no %2$s"
 msgid "%s and"
 msgstr "%s agus"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
 msgstr "Uidheamachd o"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
 msgstr "agus uidheamachd o"
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
 msgstr "no uidheamachd o"
@@ -77,7 +79,7 @@ msgstr "Slànachadh:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %s per second"
-msgstr "Thèid saighdearan san togalach seo a shlànachadh le %s gach diog"
+msgstr "Gheibh saighdearan a tha san togalach seo slànachadh le %s gach diog"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -93,13 +95,13 @@ msgstr "Uiread as motha de shaighdearan:"
 msgid "Training:"
 msgstr "Trèanadh:"
 
-#: TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-#: ../../tribes/scripting/format_help.lua:299
+#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#: numbers. ../../tribes/scripting/format_help.lua:299
 #: ../../tribes/scripting/format_help.lua:303
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
 msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Trèanaich ‘%1$s’ o %2$s gu ruige %3$s"
+msgstr "Trèanaich “%1$s” o %2$s gu ruige %3$s"
 
 #: ../../tribes/scripting/format_help.lua:300
 msgid "Attack"
@@ -137,14 +139,14 @@ msgstr "A-steach:"
 msgid "Collects:"
 msgstr "Cruinneachadh:"
 
-#: TRANSLATORS: This is a verb (The miner mines)
+#: TRANSLATORS This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid "Mines:"
 msgstr "Tochladh:"
 
 #: ../../tribes/scripting/format_help.lua:404
 msgid "Produces:"
-msgstr "Nì an togalach:"
+msgstr "Saothrachadh:"
 
 #: ../../tribes/scripting/format_help.lua:439
 msgid "Outgoing:"
@@ -154,7 +156,7 @@ msgstr "A-mach:"
 msgid "None"
 msgstr "Chan eil gin"
 
-#: TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
@@ -203,9 +205,7 @@ msgstr "Chan eil fhios"
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
-msgstr ""
-"Gabhaidh an togalach seo an dà chuid a thogail gu dìreach no a leasachadh o "
-"thogalach eile."
+msgstr "Gabhaidh an togalach seo an dà chuid a thogail gu dìreach no a leasachadh o thogalach eile."
 
 #: ../../tribes/scripting/format_help.lua:511
 msgid "Direct build cost:"
@@ -234,8 +234,7 @@ msgstr "Ma chaidh a thogail gu dìreach, bheir an toirt às a chèile dhut:"
 
 #: ../../tribes/scripting/format_help.lua:585
 msgid "If enhanced, dismantle yields:"
-msgstr ""
-"Ma chaidh a leasachadh o thogalach eile, bheir an toirt às a chèile dhut:"
+msgstr "Ma chaidh a leasachadh o thogalach eile, bheir an toirt às a chèile dhut:"
 
 #: ../../tribes/scripting/format_help.lua:587
 #: ../../tribes/scripting/format_help.lua:628

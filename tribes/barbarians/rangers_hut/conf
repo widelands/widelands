@@ -21,10 +21,14 @@ work=_planting trees
 sleep=16000
 worker=plant
 
-[idle]
-pics=rangers_hut_i_??.png  # ???
-hotspot=43 40
-
 [build]
-pics=rangers_hut_b_??.png  # ???
-hotspot=40 33
+pics=build_??.png  # ???
+hotspot=45 49
+
+[idle]
+pics=idle_??.png  # ???
+hotspot=45 49
+
+[unoccupied]
+pics=unoccupied_??.png  # ???
+hotspot=45 49

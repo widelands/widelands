@@ -24,9 +24,13 @@ sleep=52500
 worker=release
 
 [idle]
-pics=gamekeeper_i_??.png
-hotspot=44 41
+pics=idle_??.png
+hotspot=44 43
 
 [build]
-pics=gamekeeper_i_??.png
-hotspot=44 41
+pics=build_??.png
+hotspot=44 43
+
+[unoccupied]
+pics=unoccupied_??.png
+hotspot=44 43

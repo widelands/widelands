@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,5 @@
 #define UI_FONT_CLR_BAD_HEX       "bb0000"
 #define UI_FONT_CLR_OK_HEX        "ffe11e"
 #define UI_FONT_CLR_GOOD_HEX      "00bb00"
-#define UI_FONT_CLR_IDLE_HEX      "0090ff"
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_CONSTANTS_H

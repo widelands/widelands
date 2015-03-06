@@ -38,6 +38,14 @@ world:new_terrain_type{
    -- Type of terrain. Describes if the terrain is walkable, swimmable, if
    -- mines or buildings can be build on it, if flags can be build on it and so
    -- on.
+   --
+   -- The following properties are available:
+   -- "green": Allows building of normal buildings and roads
+   -- "mountain": Allows building of mines and roads
+   -- "dry": Allows building of roads only. Trees don't like this terrain.
+   -- "water": Nothing can be built here, but ships and aquatic animals can pass
+   -- "dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
+   -- "impassable": Nothing can be built here, and nothing can walk on it
    is = "green",
 
    -- The list resources that can be found in this terrain.
@@ -221,7 +229,7 @@ world:new_terrain_type{
    name = "sumpf",
    descname = _ "Swamp",
    editor_category = "green",
-   is = "unpassable",
+   is = "impassable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
@@ -267,7 +275,7 @@ world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
    editor_category = "green",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -482,7 +490,7 @@ world:new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -498,7 +506,7 @@ world:new_terrain_type{
    name = "lava-stone2",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "acid",
+   is = "dead",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,

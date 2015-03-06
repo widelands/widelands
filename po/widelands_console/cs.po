@@ -1,29 +1,30 @@
-# Widelands po/cs_CZ/widelands.po
-# Copyright (C) 2010 Widelands Development Team
-# Markus7cz <markus7cz@gmail.com>, 2008.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# GunChleoc, 2014
+# Markus7cz <markus7cz@gmail.com>, 2008
+# Matej Svrcek <mmatej@yahoo.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4888\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-10-18 05:10+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-23 01:18+0000\n"
+"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
-"X-Poedit-Language: Czech\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Toto je Widelands Build %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -35,211 +36,203 @@ msgstr "Volby:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr " --<config-entry-name>=hodnota přepíše jakékoli nastavení v configu"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
+msgstr " --logfile=FILENAME   Loguje výstup do FILENAME místo výstupu do terminálu"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
+msgstr " --datadir=DIRNAME    Použij určený adresář pro Widelands datové soubory"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
+msgstr " --homedir=DIRNAME   Použij určený adresář pro Widelands config, uložené hry a záznamy"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "Standardní je ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr " --coredump=[true|false]\n                      Generuje core dump při segfault chybě místo použití SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
+msgstr " --language=[de_DE|sv_SE|...] Použité nastavení locale"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
+msgstr " --remove_syncstreams=[true|false] Odstranit syncstream soubor při startu"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
+msgstr " --remove_replays=[...] Odstranit záznamy po uvedeném počtu dnů. Jestliže je 0, záznamy nejsou odstraněny."
+
+#: ../../src/wlapplication_messages.cc:71
+msgid " --autosave=[...]     Automatically save each n minutes"
+msgstr " --autosave=[...]  Automaticky ukládá každých n minut"
 
 #: ../../src/wlapplication_messages.cc:72
+msgid ""
+" --rolling_autosave=[...]\n"
+"                      Use this many files for rolling autosaves"
+msgstr " --rolling_autosave=[...] Použij uvedený počet souborů pro postupné autosave"
+
+#: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
 msgstr "Volby zvuku:"
 
-#: ../../src/wlapplication_messages.cc:73
+#: ../../src/wlapplication_messages.cc:76
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Spustí hru bez zvuku."
 
-#: ../../src/wlapplication_messages.cc:74
+#: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx         Vypne zvukové efekty."
 
-#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
 msgstr " --disable_music      Vypne hudbu."
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              Neukládat soubory jako binární zip archivy."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
-" --editor             Přímo spustí editor Widelands.\n"
-"                      Můžeš přidat =SOUBOR který přímo nahraje\n"
-"                      mapu SOUBOR do editoru."
-
-#: ../../src/wlapplication_messages.cc:80
-msgid ""
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map."
-msgstr ""
-" --scenario=SOUBOR    Přímo spustí mapu SOUBOR jako mapu\n"
-"                      scénáře."
-
-#: ../../src/wlapplication_messages.cc:82
-msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR."
+msgstr " --editor             Přímo spustí editor Widelands.\n                      Můžeš přidat =SOUBOR který přímo nahraje\n                      mapu SOUBOR do editoru."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
-" --script=FILENAME    Run the given Lua script after initialization.\n"
-"                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+"                      map."
+msgstr " --scenario=SOUBOR    Přímo spustí mapu SOUBOR jako mapu\n                      scénáře."
 
 #: ../../src/wlapplication_messages.cc:85
+msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
+msgstr " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR."
+
+#: ../../src/wlapplication_messages.cc:86
+msgid ""
+" --script=FILENAME    Run the given Lua script after initialization.\n"
+"                      Only valid with --scenario, --loadgame, or --editor."
+msgstr " --script=FILENAME    Spusti uvedený Lua skript po inicializaci. Platné pouze s volbami --scenario, --loadgame, nebo --editor."
+
+#: ../../src/wlapplication_messages.cc:88
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
-" --dedicated=NÁZEVSOUBORU Spustí dedikovaný server s mapou ze souboru "
-"NÁZEVSOUBORU"
+msgstr " --dedicated=NÁZEVSOUBORU Spustí dedikovaný server s mapou ze souboru NÁZEVSOUBORU"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:88
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:91
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false] Určení, zda spustit mód obnovy automaticky po umístění vlajky nenapojené na síť cest"
 
-#: ../../src/wlapplication_messages.cc:92
+#: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
-msgstr ""
+msgstr "Grafické volby:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:95
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false] Zda hru spustit ve fullscreenu"
 
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...] Šířka okna v pixelech"
 
-#: ../../src/wlapplication_messages.cc:99
+#: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...] Výška okna v pixelech"
 
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
 msgstr "Volby pro interního správce oken:"
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:107
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      Přichytit okno k okraji obrazovky jakmile\n"
-"                      se okraj okna dostane do této vzdálenosti\n"
-"                      od okraje obrazovky."
+msgstr " --border_snap_distance=[0 ...]\n                      Přichytit okno k okraji obrazovky jakmile\n                      se okraj okna dostane do této vzdálenosti\n                      od okraje obrazovky."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:110
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false] Zruší okraj okna na okraji obrazovky, když je okraj okna blízko okraji obrazovky"
 
-#: ../../src/wlapplication_messages.cc:114
+#: ../../src/wlapplication_messages.cc:117
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Přichytit okno k okraji panelu jakmile se\n"
-"                      okraj okna dostane do této vzdálenosti\n"
-"                      od okraje jiného panelu."
+msgstr " --panel_snap_distance=[0 ...]\n                      Přichytit okno k okraji panelu jakmile se\n                      okraj okna dostane do této vzdálenosti\n                      od okraje jiného panelu."
 
-#: ../../src/wlapplication_messages.cc:118
+#: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Přichytit okno k okraji panelu pouze\n"
-"                      pokud se okno a panel překrývají."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Přichytit okno k okraji panelu pouze\n                      pokud se okno a panel překrývají."
 
-#: ../../src/wlapplication_messages.cc:123
+#: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose povolí verbose ladící zprávy"
 
-#: ../../src/wlapplication_messages.cc:125
+#: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
 msgstr " --help               Zobrazí tuto nápovědu"
 
-#: ../../src/wlapplication_messages.cc:127
+#: ../../src/wlapplication_messages.cc:130
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
-"Nalezli jste nějaký herní bug? Máte nějaké návrhy? Navštivte stránky "
-"projektu:\n"
-"https://launchpad.net/widelands\n"
-"\n"
-"Doufáme, že si užívate naší hry!"
+msgstr "Nalezli jste nějaký herní bug? Máte nějaké návrhy? Navštivte stránky projektu:\nhttps://launchpad.net/widelands\n\nDoufáme, že si užívate naší hry!"

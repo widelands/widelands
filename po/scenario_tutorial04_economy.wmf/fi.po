@@ -1,24 +1,22 @@
-# Widelands po/fi_FI/worlds/desert.po
-# Copyright (C) 2008 Widelands Development Team
-# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Markus Hällfors <markus@hallfors.com>, 2015
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2010-06-06 22:34+0000\n"
-"Last-Translator: Markus Hallfors <destroyerko@gmail.com>\n"
-"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 22:48+0000\n"
+"Last-Translator: Markus Hällfors <markus@hallfors.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
-"X-Poedit-Country: FINLAND\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
@@ -26,7 +24,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
-msgstr ""
+msgstr "Talous"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
@@ -128,8 +126,8 @@ msgid ""
 "have."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the building statistics window
-#: TRANSLATORS: "it" refers to the stock menu window
+#: TRANSLATORS "it" refers to the building statistics window TRANSLATORS "it"
+#: refers to the stock menu window
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Open it. You can access it from the statistics menu."
@@ -231,8 +229,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid ""
-"The third tab shows you the wares that are stored in your headquarters, your "
-"warehouses and ports. They are not needed anywhere and are therefore your "
+"The third tab shows you the wares that are stored in your headquarters, your"
+" warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
 msgstr ""
 
@@ -267,8 +265,8 @@ msgid ""
 "tutorial at any time."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the stock menu window.
-#: TRANSLATORS: "it" refers to the ware statistics window.
+#: TRANSLATORS "it" refers to the stock menu window. TRANSLATORS "it" refers
+#: to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:296
 msgid "Otherwise, please reopen it and choose the third tab."
@@ -297,7 +295,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:167
 msgid "Build new taverns."
-msgstr ""
+msgstr "Rakenna uusia krouveja."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -359,8 +357,9 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
 "When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should "
-"be delivered to this building, maybe because it produces something important."
+"delivered less frequently. Green means that as many wares as possible should"
+" be delivered to this building, maybe because it produces something "
+"important."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:196
@@ -386,7 +385,7 @@ msgstr ""
 msgid "‘Ware statistics’ button."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the ware statistics button
+#: TRANSLATORS "it" refers to the ware statistics button
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid "Click on it."
 msgstr ""
@@ -426,8 +425,8 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:244
 msgid ""
 "In this tab, you can see the difference between production and consumption, "
-"called ‘economy health’. You can see at one glance which one of those two is "
-"higher for the selected ware, that means whether the amount increases or "
+"called ‘economy health’. You can see at one glance which one of those two is"
+" higher for the selected ware, that means whether the amount increases or "
 "decreases."
 msgstr ""
 
@@ -455,8 +454,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:263
 msgid ""
-"In the last tab, you can also see your absolute stock. It will increase when "
-"the economy health is positive, and decrease otherwise. Compare the two "
+"In the last tab, you can also see your absolute stock. It will increase when"
+" the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
 msgstr ""
 
@@ -491,8 +490,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
-"You have closed the ware statistics menu window, but I have not yet finished "
-"with my explanation. Would you please reopen it and choose the third tab?"
+"You have closed the ware statistics menu window, but I have not yet finished"
+" with my explanation. Would you please reopen it and choose the third tab?"
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
@@ -510,11 +509,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
 msgid ""
-"You have closed the ware statistics menu window, but I have not yet finished "
-"with my explanation. Would you please reopen it and choose the fourth tab?"
+"You have closed the ware statistics menu window, but I have not yet finished"
+" with my explanation. Would you please reopen it and choose the fourth tab?"
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the ware statistics window.
+#: TRANSLATORS "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:317
 msgid "Otherwise, please reopen it and choose the fourth tab."
 msgstr ""
@@ -527,14 +526,14 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
-"I’ve shown you our stock menu window, where you could see which wares are at "
-"the warehouses. You remember?"
+"I’ve shown you our stock menu window, where you could see which wares are at"
+" the warehouses. You remember?"
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
-"Now I’ll tell you how you can determine how many wares you want to have. The "
-"menu window for this purpose can be accessed via any flag and is called "
+"Now I’ll tell you how you can determine how many wares you want to have. The"
+" menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
 msgstr ""
 
@@ -557,8 +556,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:346
 msgid ""
-"This window looks similar to the stock window, but it has additional buttons "
-"at the bottom."
+"This window looks similar to the stock window, but it has additional buttons"
+" at the bottom."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:347
@@ -569,8 +568,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
 msgid ""
-"Most buildings will only produce something when when the stock level in your "
-"warehouses falls below the target quantity, so you should indicate the "
+"Most buildings will only produce something when when the stock level in your"
+" warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr ""
 
@@ -584,9 +583,9 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid ""
-"If you build two farms, only one of them will start working immediately. The "
-"second farm will have to wait for its worker, who will lack a scythe. If you "
-"had set the target quantity to 2 before, two scythes would have been "
+"If you build two farms, only one of them will start working immediately. The"
+" second farm will have to wait for its worker, who will lack a scythe. If "
+"you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
 msgstr ""
 
@@ -638,7 +637,8 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:371
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
-"window, you can decide how many wares of each type you wish to have in stock."
+"window, you can decide how many wares of each type you wish to have in "
+"stock."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
@@ -665,8 +665,8 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
-"mouse pointer over them, you will see tooltips that explain what the buttons "
-"do."
+"mouse pointer over them, you will see tooltips that explain what the buttons"
+" do."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
@@ -677,9 +677,9 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
-"To achieve this, you will have to do two things. First, set a preference for "
-"marble columns in the desired warehouse. All marble columns produced in the "
-"future will be brought there if possible."
+"To achieve this, you will have to do two things. First, set a preference for"
+" marble columns in the desired warehouse. All marble columns produced in the"
+" future will be brought there if possible."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:387
@@ -695,8 +695,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:392
 msgid ""
-"To decide where your wares get stored, you can use the preference buttons in "
-"the warehouses."
+"To decide where your wares get stored, you can use the preference buttons in"
+" the warehouses."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:400
@@ -709,15 +709,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
 msgid ""
-"Great. We now have enough marble columns so that in case of an aggressor, we "
-"can build up our fortifications. But I do not think that that will be "
+"Great. We now have enough marble columns so that in case of an aggressor, we"
+" can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
-"I hope I could teach you how you can control the economy in Widelands. There "
-"are many options and they can be confusing at first. Even if you’ve only "
+"I hope I could teach you how you can control the economy in Widelands. There"
+" are many options and they can be confusing at first. Even if you’ve only "
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
@@ -726,10 +726,10 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
-"everything I know. There are still secrets hidden in this world even I don’t "
-"know about. I will now search for a quiet place to spend my sunset years. If "
-"you have still questions, the Widelands community will surely help you. You "
-"can find it at:"
+"everything I know. There are still secrets hidden in this world even I don’t"
+" know about. I will now search for a quiet place to spend my sunset years. "
+"If you have still questions, the Widelands community will surely help you. "
+"You can find it at:"
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
@@ -739,5 +739,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"

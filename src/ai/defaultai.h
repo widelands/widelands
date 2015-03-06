@@ -22,11 +22,13 @@
 
 #include <map>
 #include <memory>
+#include <unordered_set>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "logic/immovable.h"
+#include "logic/ship.h"
 
 namespace Widelands {
 struct Road;
@@ -76,9 +78,13 @@ struct DefaultAI : ComputerPlayer {
 		DEFENSIVE = 0,
 	};
 
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
+	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
+
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
@@ -89,6 +95,7 @@ struct DefaultAI : ComputerPlayer {
 
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
@@ -99,6 +106,7 @@ struct DefaultAI : ComputerPlayer {
 
 	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			name = _("Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
@@ -130,27 +138,59 @@ private:
 
 	bool construct_building(int32_t);
 
+	uint32_t coords_hash(Widelands::Coords coords) {
+		uint32_t hash = coords.x << 16 | coords.y;
+		return hash;
+	}
+
+	Widelands::Coords coords_unhash(uint32_t hash) {
+		Widelands::Coords coords;
+		coords.x = hash >> 16;  // is cast needed here???
+		coords.y = hash;
+		return coords;
+	}
+
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
 	bool improve_roads(int32_t);
-	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
+	bool create_shortcut_road(const Widelands::Flag&,
+	                          uint16_t maxcheckradius,
+	                          uint16_t minred,
+	                          const int32_t gametime);
 	// trying to identify roads that might be removed
-	bool dispensable_road_test(const Widelands::Road&);
+	bool dispensable_road_test(Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
+	bool check_trainingsites(int32_t);
 	bool check_mines_(int32_t);
 	bool check_militarysites(int32_t);
+	bool marine_main_decisions(uint32_t);
+	bool check_ships(uint32_t);
+	void print_stats();
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
+	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
+	void review_wares_targets(int32_t);
+
+	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
+	// other player is accessible
+	// via walking
+	bool other_player_accessible(uint32_t max_distance,
+	                             int32_t* tested_fields,
+	                             uint16_t* mineable_fields_count,
+	                             const Widelands::Coords starting_spot,
+	                             const WalkSearch type);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 	int32_t calculate_need_for_ps(BuildingObserver&, int32_t);
 
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
+	// considering wood, stones, mines, water, fishes for candidate for colonization (new port)
+	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	BuildingObserver& get_building_observer(char const*);
@@ -159,6 +199,8 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
+	void gain_ship(Widelands::Ship&, NewShip);
+	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 
 	bool check_supply(const BuildingObserver&);
@@ -181,10 +223,12 @@ private:
 	uint32_t num_constructionsites_;
 	uint32_t num_milit_constructionsites;
 	uint32_t num_prod_constructionsites;
+	uint32_t num_ports;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
 	std::list<BlockedField> blocked_fields;
+	std::unordered_set<uint32_t> port_reserved_coords;
 	std::list<MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
 	std::list<Widelands::Coords> flags_to_be_removed;
@@ -193,6 +237,9 @@ private:
 	std::list<ProductionSiteObserver> productionsites;
 	std::list<ProductionSiteObserver> mines_;
 	std::list<MilitarySiteObserver> militarysites;
+	std::list<WarehouseSiteObserver> warehousesites;
+	std::list<TrainingSiteObserver> trainingsites;
+	std::list<ShipObserver> allships;
 
 	std::vector<WareObserver> wares;
 
@@ -203,9 +250,13 @@ private:
 	int32_t next_productionsite_check_due_;
 	int32_t next_mine_check_due_;
 	int32_t next_militarysite_check_due_;
+	uint32_t next_ship_check_due;
+	uint32_t next_marine_decisions_due;
 	int32_t next_attack_consideration_due_;
-	int32_t next_helpersites_check_due_;
+	int32_t next_trainingsites_check_due_;
 	int32_t next_bf_check_due_;
+	int32_t next_wares_review_due_;
+	int32_t next_statistics_report_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
 	int32_t enemy_last_seen_;
@@ -232,13 +283,21 @@ private:
 	Widelands::Coords
 	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
 	int32_t next_attack_waittime_;  // second till the next attack consideration
-	int32_t spots_;                 // sum of buildable fields
+	bool seafaring_economy;         // false by default, until first port space is found
+	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
+	// it decreases with failed scans
+	int32_t spots_;  // sum of buildable fields
+
+	enum {kReprioritize, kStopShipyard, kStapShipyard };
+
+	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteProductionSiteOutOfResources>>
 	   outofresource_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

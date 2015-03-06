@@ -43,13 +43,13 @@ namespace {
 using namespace Widelands;
 
 static const int32_t check[] = {
-	TerrainDescription::GREEN,                                 //  "green"
-	TerrainDescription::DRY,                                   //  "dry"
-	TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
-	TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
-	TerrainDescription::ACID | TerrainDescription::DRY |
-		TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
-	TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
+	TerrainDescription::Type::kGreen,                                 //  "green"
+	TerrainDescription::Type::kDry,                                   //  "dry"
+	TerrainDescription::Type::kDry | TerrainDescription::Type::kMountain,    //  "mountain"
+	TerrainDescription::Type::kDry | TerrainDescription::Type::kImpassable,  //  "impassable"
+	TerrainDescription::Type::kDead | TerrainDescription::Type::kDry |
+		TerrainDescription::Type::kImpassable,  //  "dead"
+	TerrainDescription::Type::kImpassable | TerrainDescription::Type::kDry | TerrainDescription::Type::kWater,
 	-1,  // end marker
 };
 
@@ -60,7 +60,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	const Image* water = g_gr->images().get("pics/terrain_water.png");
 	const Image* mountain = g_gr->images().get("pics/terrain_mountain.png");
 	const Image* dead = g_gr->images().get("pics/terrain_dead.png");
-	const Image* unpassable = g_gr->images().get("pics/terrain_unpassable.png");
+	const Image* impassable = g_gr->images().get("pics/terrain_impassable.png");
 	const Image* dry = g_gr->images().get("pics/terrain_dry.png");
 
 	constexpr int kSmallPicHeight = 20;
@@ -82,7 +82,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		              BlendMode::UseAlpha, texture);
 		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
-		if (ter_is == TerrainDescription::GREEN) {
+		if (ter_is == TerrainDescription::Type::kGreen) {
 			blit(Rect(pt.x, pt.y, green->width(), green->height()),
 			     *green,
 			     Rect(0, 0, green->width(), green->height()),
@@ -93,7 +93,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
 			tooltips.push_back(_("arable"));
 		} else {
-			if (ter_is & TerrainDescription::WATER) {
+			if (ter_is & TerrainDescription::Type::kWater) {
 				blit(Rect(pt.x, pt.y, water->width(), water->height()),
 				     *water,
 				     Rect(0, 0, water->width(), water->height()),
@@ -104,7 +104,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("aquatic"));
 			}
-			else if (ter_is & TerrainDescription::MOUNTAIN) {
+			else if (ter_is & TerrainDescription::Type::kMountain) {
 				blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
 				     *mountain,
 				     Rect(0, 0, mountain->width(), mountain->height()),
@@ -115,7 +115,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mountainous"));
 			}
-			if (ter_is & TerrainDescription::ACID) {
+			if (ter_is & TerrainDescription::Type::kDead) {
 				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
 				     *dead,
 				     Rect(0, 0, dead->width(), dead->height()),
@@ -126,18 +126,18 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("dead"));
 			}
-			if (ter_is & TerrainDescription::UNPASSABLE) {
-				blit(Rect(pt.x, pt.y, unpassable->width(), unpassable->height()),
-				     *unpassable,
-				     Rect(0, 0, unpassable->width(), unpassable->height()),
+			if (ter_is & TerrainDescription::Type::kImpassable) {
+				blit(Rect(pt.x, pt.y, impassable->width(), impassable->height()),
+				     *impassable,
+				     Rect(0, 0, impassable->width(), impassable->height()),
 				     1.,
 				     BlendMode::UseAlpha,
 				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("unpassable"));
+				tooltips.push_back(_("impassable"));
 			}
-			if (ter_is & TerrainDescription::DRY) {
+			if (ter_is & TerrainDescription::Type::kDry) {
 				blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
 				     *dry,
 				     Rect(0, 0, dry->width(), dry->height()),

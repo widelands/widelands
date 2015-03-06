@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-01-22 11:01+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -141,7 +141,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid ""
-"Destroy the barbarian tribe"
+"Destroy the Barbarian tribe"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
@@ -151,12 +151,12 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
-"As soon as you have enough soldiers, attack and completely destroy the barbarian buildings."
+"As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+"Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
@@ -374,7 +374,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
-"Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before."
+"Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, Barbarian tribes with whom we have had so many problems before."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:212
@@ -410,12 +410,12 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
-"There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country."
+"There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
-"You have established a working economy, trained new soldiers and driven the barbarians from the island."
+"You have established a working economy, trained new soldiers and driven the Barbarians from the island."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238

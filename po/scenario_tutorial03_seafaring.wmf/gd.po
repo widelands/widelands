@@ -1,28 +1,27 @@
-# Gaelic; Scottish translation for widelands
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2013-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-14 02:34+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-27 12:24+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
-"(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:50+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
 "Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr "Seòladaireachd"
+msgstr "An t-seòladaireachd"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
@@ -32,18 +31,13 @@ msgstr "Oideachadh na seòladaireachd"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
-"Fàilte air ais. San oideachadh seo, ionnsaichidh tu na tha as cudromaiche "
-"mun t-seòladaireachd, seo longan, puirt agus an triall."
+msgstr "Fàilte air ais. San oideachadh seo, ionnsaichidh tu na tha as cudromaiche mun t-seòladaireachd, seo longan, puirt agus an triall."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
-"Ach bheir mi foir-shealladh air an ranntair agad an toiseach: an-seo air "
-"ceann a deas, tha eaconamaidh slàn agad le cha mhòr a h-uile rud air a bheil "
-"feum."
+msgstr "Ach bheir mi foir-shealladh air an ranntair agad an toiseach: an-seo air ceann a deas, tha eaconamaidh slàn agad le cha mhòr a h-uile rud air a bheil feum."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
@@ -54,30 +48,21 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
-"An-seo air ceann a tuath, chan eil ach mèinn òir agus taigh-stòrais agad. "
-"Fad ’s a tha biadh a dh’fhòghnas aig na mèinnearan, chan eil dòigh ann gus "
-"a’ chlach-òir a chur dhan cheàrdach leaghadair ceann a deas."
+msgstr "An-seo air ceann a tuath, chan eil ach mèinn òir agus taigh-stòrais agad. Fad ’s a tha biadh a dh’fhòghnas aig na mèinnearan, chan eil dòigh ann gus a’ chlach-òir a chur dhan cheàrdach leaghadair ceann a deas."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
-"Dh’fheuch sinn ri rathad a thogail ach tha a’ bheinn ro leathann is cas. "
-"Chan eil dòigh ann mar-thà ach gun stèidhich sinn slighe-mhara eadar an dà "
-"sgìre."
+msgstr "Dh’fheuch sinn ri rathad a thogail ach tha a’ bheinn ro leathann is cas. Chan eil dòigh ann mar-thà ach gun stèidhich sinn slighe-mhara eadar an dà sgìre."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
-"Ach chan eil mi airson greas a chur ort: tha thu dìreach air tighinn agus b’ "
-"fhearr leat sùil a thoirt air an tuineachadh agad gu socair. Gabhaidh mi "
-"fhìn fois agus bi mi air ais an ceann greis."
+msgstr "Ach chan eil mi airson greas a chur ort: tha thu dìreach air tighinn agus b’ fhearr leat sùil a thoirt air an tuineachadh agad gu socair. Gabhaidh mi fhìn fois agus bi mi air ais an ceann greis."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
@@ -89,11 +74,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
-"Bidh feum agad air port air a’ chladach gus gnìomh sam bith a dhèanamh air "
-"a’ chuan. Tha puirt coltach ris a’ phrìomh-àras agad: ’s urrainn dhaibh "
-"bathar, obraichean agus saighdearan a ghlèidheadh. Thig na saighdearan ’na "
-"bhroinn a-mach gu fèin-obrachail nuair a bheir nàmhaid ionnsaigh air port."
+msgstr "Bidh feum agad air port air a’ chladach gus gnìomh sam bith a dhèanamh air a’ chuan. Tha puirt coltach ris a’ phrìomh-àras agad: ’s urrainn dhaibh bathar, obraichean agus saighdearan a ghlèidheadh. Thig na saighdearan ’na bhroinn a-mach gu fèin-obrachail nuair a bheir nàmhaid ionnsaigh air port."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid ""
@@ -102,12 +83,7 @@ msgid ""
 "tabs: wares and workers in the dock. They are waiting for a ship to "
 "transport them to another port. Currently, there are none because we have "
 "not yet built a second port. So let’s change this!"
-msgstr ""
-"A bharrachd air sin, bheir puirt an comas dhut gus bathar a ghiùlan air "
-"long. Nuair a nì thu briogadh air port a th’ agad mar-thà, mothaichidh tu do "
-"dhà thaba: bathar is obraichean san doca. Tha iad a’ feitheamh air long a "
-"bheireadh iad gu port eile. Chan eil gin ann an-dràsta air sgàth ’s nach eil "
-"sinn air port eile a thogail fhathast. Atharraichidh sinn seo a-nis!"
+msgstr "A bharrachd air sin, bheir puirt an comas dhut gus bathar a ghiùlan air long. Nuair a nì thu briogadh air port a th’ agad mar-thà, mothaichidh tu do dhà thaba: bathar is obraichean san doca. Tha iad a’ feitheamh air long a bheireadh iad gu port eile. Chan eil gin ann an-dràsta air sgàth ’s nach eil sinn air port eile a thogail fhathast. Atharraichidh sinn seo a-nis!"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -121,9 +97,7 @@ msgstr "Mar a thogas tu port"
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
-"’S e togalach mòr a th’ anns a’ phort ach feumaidh tu a thogail air ionad "
-"sònraichte a tha comharraichte le"
+msgstr "’S e togalach mòr a th’ anns a’ phort ach feumaidh tu a thogail air ionad sònraichte a tha comharraichte le"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid "blue port space icon."
@@ -134,18 +108,13 @@ msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
-"’S e dealbhaiche a’ mhapa a chuireas na raointean puirt ann, mar sin bidh "
-"iad ri fhaighinn air mapa no nach bi. Dh’fhaoidte gun deach am falach fo "
-"chraobhan no am bacadh le togalaichean faisg orra co-dhiù."
+msgstr "’S e dealbhaiche a’ mhapa a chuireas na raointean puirt ann, mar sin bidh iad ri fhaighinn air mapa no nach bi. Dh’fhaoidte gun deach am falach fo chraobhan no am bacadh le togalaichean faisg orra co-dhiù."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
-"’S dòcha gun do mhothaich tu mar-thà gu bheil ìomhaigheag dhen leithid ri "
-"taobh a’ chaisteil agad."
+msgstr "’S dòcha gun do mhothaich tu mar-thà gu bheil ìomhaigheag dhen leithid ri taobh a’ chaisteil agad."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
@@ -158,9 +127,7 @@ msgstr "Tog port"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
-"Bidh feum agad air port an-còmhnaidh ma tha thu airson bathar a ghiùlan le "
-"long."
+msgstr "Bidh feum agad air port an-còmhnaidh ma tha thu airson bathar a ghiùlan le long."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:73
 msgid "Build a port next to your castle, on the blue port space icon."
@@ -171,20 +138,13 @@ msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
-"Togaidh tu port mar a thogas tu togalach àbhaisteach sam bith ach cha bhi "
-"fear ri fhaighinn ach air raon puirt gorm. Cha leig thu leas ach briogadh "
-"air raon air a bheil an ìomhaigheag agus tairgidh an clàr-taice togail dhut "
-"gun tog thu port."
+msgstr "Togaidh tu port mar a thogas tu togalach àbhaisteach sam bith ach cha bhi fear ri fhaighinn ach air raon puirt gorm. Cha leig thu leas ach briogadh air raon air a bheil an ìomhaigheag agus tairgidh an clàr-taice togail dhut gun tog thu port."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
-"Ged a tha puirt ’nan taighean-stòrais, cha bu chòir dhut barrachd na tha "
-"feum agad orra a thogail: tha cosgaisean mòra ’nan lùib mar èiteag, "
-"daoimeanan agus òr."
+msgstr "Ged a tha puirt ’nan taighean-stòrais, cha bu chòir dhut barrachd na tha feum agad orra a thogail: tha cosgaisean mòra ’nan lùib mar èiteag, daoimeanan agus òr."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
@@ -197,44 +157,38 @@ msgstr "Togamaid longan"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Great. Your port has just been finished. Now we need some ships."
-msgstr ""
-"Taghta. Tha am port agad air a thogail. Bidh feum againn air longan a-nis."
+msgstr "Taghta. Tha am port agad air a thogail. Bidh feum againn air longan a-nis."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid ""
 "Ships are constructed in a shipyard by a shipwright. We have to build one "
 "somewhere close to the shore."
-msgstr ""
-"Thèid longan a thogail le saor-luinge ann an cala. Feumaidh sinn fear a "
-"thogail àiteigin faisg air an oirthir."
+msgstr "Thèid longan a thogail le saor-luinge ann an doca. Feumaidh sinn fear a thogail àiteigin faisg air an oirthir."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr "Tog cala faisg air an oirthir. ’S e togalach meadhanach a th’ ann."
+msgstr "Tog doca faisg air an oirthir. ’S e togalach meadhanach a th’ ann."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Build a shipyard"
-msgstr "Tog cala"
+msgstr "Tog doca"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:94
 msgid "Ships are produced in a shipyard."
-msgstr "Nì thu longan ann an cala."
+msgstr "Nì thu longan ann an doca."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Tog cala faisg air an oirthir air ceann a deas do ranntair."
+msgstr "Tog doca faisg air an oirthir air ceann a deas do ranntair."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
-"’S e togalach meadhanach a th’ anns a’ chala. Ged as urrainn dhut a thogail "
-"àite sam bith air a’ mhapa, cha dèan an saor-luinge obair ach ma bhios a’ "
-"mhuir faisg air agus mura bi craobhan no rathaidean ri taobh a’ chladaich."
+msgstr "’S e togalach meadhanach a th’ anns an doca. Ged as urrainn dhut a thogail àite sam bith air a’ mhapa, cha dèan an saor-luinge obair ach ma bhios a’ mhuir faisg air agus mura bi craobhan no rathaidean ri taobh a’ chladaich."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
 msgid "Waiting for the ships"
@@ -242,48 +196,34 @@ msgstr "A’ feitheamh air na longan"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid ""
-"Very good. Your shipyard is finished and your shipwright immediately started "
-"working. For the construction of ships, he needs logs, planks and "
+"Very good. Your shipyard is finished and your shipwright immediately started"
+" working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
-"Glè mhath. Tha an cala agad deiseil agus thòisich an saor-luinge agad air "
-"obair sa bhad. Gus longan a thogail, bi e feumach air fiodh, maidean agus "
-"clò damhain a thèid a giùlain dhan chala."
+msgstr "Glè mhath. Tha an doca agad deiseil agus thòisich an saor-luinge agad air obair sa bhad. Gus longan a thogail, bi e feumach air fiodh, maidean agus sìoda a thèid a giùlain dhan doca."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
-"and build a ship there. When the first ship is finished, it will launch onto "
-"the sea, and the shipwright will construct another one."
-msgstr ""
-"Bheir an saor-luinge am bathar air a bheil e feumach gu badeigin saor air a’ "
-"chladaich agus togaidh e long an-siud. Nuair a bhios a’ chiad long deiseil, "
-"thèid an long dhan mhuir agus togaidh an saor-luinge tè eile."
+"and build a ship there. When the first ship is finished, it will launch onto"
+" the sea, and the shipwright will construct another one."
+msgstr "Bheir an saor-luinge am bathar air a bheil e feumach gu badeigin saor air a’ chladaich agus togaidh e long an-siud. Nuair a bhios a’ chiad long deiseil, thèid an long dhan mhuir agus togaidh an saor-luinge tè eile."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
-msgid ""
-"We should wait until we have two ships. That should be enough for now."
-msgstr ""
-"Bu chòir dhuinn feitheamh gus am bi dà long againn. Foghnaidh seo aig an àm "
-"seo."
+msgid "We should wait until we have two ships. That should be enough for now."
+msgstr "Bu chòir dhuinn feitheamh gus am bi dà long againn. Foghnaidh seo aig an àm seo."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
-"Feumaidh tu an cala agad a chur ’na stad nuair a bhios longan gu leòr agad. "
-"Mura cuir, cleachdaidh an saor-luinge am fiodh agus clò damhain agad uile "
-"gus grunn mhòr longan a thogail."
+msgstr "Feumaidh tu an doca agad a chur ’na stad nuair a bhios longan gu leòr agad. Mura cuir, cleachdaidh an saor-luinge am fiodh agus sìoda agad uile gus grunn mhòr longan a thogail."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:112
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
-"Seo an ìomhaigheag gus an saothrachadh a chur ’na stad. Chì thu ann an "
-"uinneag an togalaich i."
+msgstr "Seo an ìomhaigheag gus an saothrachadh a chur ’na stad. Chì thu ann an uinneag an togalaich i."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:114
 msgid "Construct two ships"
@@ -293,9 +233,7 @@ msgstr "Tog dà long"
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
-"Thèid longan a thogail gu fèin-obrachail nuair a bhios an cala deiseil agus "
-"am bathar a dhìth air a thoirt dha."
+msgstr "Thèid longan a thogail gu fèin-obrachail nuair a bhios an doca deiseil agus am bathar a dhìth air a thoirt dha."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid "Wait until the shipwright has constructed two ships."
@@ -303,9 +241,7 @@ msgstr "Fuirich ort gus am bi an saor-luinge air dà long a thogail."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
-"Na dìochuimhnich gun cuir thu an cala ’na stad nuair a bhios longan gu leòr "
-"agad."
+msgstr "Na dìochuimhnich gun cuir thu an doca ’na stad nuair a bhios longan gu leòr agad."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
@@ -318,31 +254,23 @@ msgstr "Tha iarann a dhìth oirnn"
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
-"Dh’fhaoidte nach eil an dà long deiseil fhathast ach thàinig trioblaid "
-"èiginneach oirnn."
+msgstr "Dh’fhaoidte nach eil an dà long deiseil fhathast ach thàinig trioblaid èiginneach oirnn."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:129
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
-"Mar a mhothaich thu gun teagamh mar-thà, chan eil iarann sam bith sa mhonadh "
-"gu siar. Tha torr guail agus cloiche-òir againn ach chan urrainn dhuinn "
-"acainnean a dhèanamh às aonais clach-iarainn."
+msgstr "Mar a mhothaich thu gun teagamh mar-thà, chan eil iarann sam bith sa mhonadh gu siar. Tha torr guail agus cloiche-òir againn ach chan urrainn dhuinn acainnean a dhèanamh às aonais clach-iarainn."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:130
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
-"Ged a bheireadh e ùine mhòr agus a bhiodh cosgaisean agus cunnartan mòra "
-"romhainn – cò aige a tha fios dè na h-uile-bheistean a bhios sa chuan? – "
-"chan eil roghainn eile ann: feumaidh sinn dol air triall dhan aineol."
+msgstr "Ged a bheireadh e ùine mhòr agus a bhiodh cosgaisean agus cunnartan mòra romhainn – cò aige a tha fios dè na h-uile-bheistean a bhios sa chuan? – chan eil roghainn eile ann: feumaidh sinn dol air triall dhan aineol."
 
-#: TRANSLATORS: This shall be the beginning of a poem
+#: TRANSLATORS This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr "Nach tlachdmhor siubhal air cuan"
@@ -355,9 +283,7 @@ msgstr "Triallan"
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
-"Rè triall, cuiridh tu long ach an lorg i eileanan ùra agus is dòcha gun "
-"stèidhich thu tuineachadh ann."
+msgstr "Rè triall, cuiridh tu long ach an lorg i eileanan ùra agus is dòcha gun stèidhich thu tuineachadh ann."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:143
 msgid ""
@@ -366,21 +292,13 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
-"’S urrainn dhut triall a thòiseachadh ann am port sam bith. Thèid gach "
-"bathar air a bheil feum a ghiùlan dhan phort an uairsin. Tha am bathar air a "
-"bheil feum co-ionnann ris na chleachdas do threubh gus port a thogail (bidh "
-"fainear dhut port a thogail fad air falbh, mar sin chan eil sin annasach) "
-"agus bidh feum agad air fear-togail cuideachd. Nuair a bhios a h-uile rud "
-"ullamh, thig long gus a thogail."
+msgstr "’S urrainn dhut triall a thòiseachadh ann am port sam bith. Thèid gach bathar air a bheil feum a ghiùlan dhan phort an uairsin. Tha am bathar air a bheil feum co-ionnann ris na chleachdas do threubh gus port a thogail (bidh fainear dhut port a thogail fad air falbh, mar sin chan eil sin annasach) agus bidh feum agad air fear-togail cuideachd. Nuair a bhios a h-uile rud ullamh, thig long gus a thogail."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:144
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
-msgstr ""
-"’S urrainn dhut sùil a thoirt air a’ bhathar a tha a dhìth sa chòigeamh taba "
-"aig a’ phort agad (nochdaidh e nuair a bhios tu air triall a thòiseachadh)."
+msgstr "’S urrainn dhut sùil a thoirt air a’ bhathar a tha a dhìth sa chòigeamh taba aig a’ phort agad (nochdaidh e nuair a bhios tu air triall a thòiseachadh)."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -402,9 +320,7 @@ msgstr "Tòisich air triall."
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
-"Gus seo a dhèanamh, briog air a’ phutan “Tòisich air triall” ann am port sam "
-"bith. Nochdaidh taba ùr sam faic thu am bathar air a bhios feum."
+msgstr "Gus seo a dhèanamh, briog air a’ phutan “Tòisich air triall” ann am port sam bith. Nochdaidh taba ùr sam faic thu am bathar air a bhios feum."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
 msgid "Off to greener pastures"
@@ -418,48 +334,35 @@ msgstr "Tòisich air an triall agad"
 msgid ""
 "Your expedition should be ready about now. If not, please wait a bit – you "
 "will receive a message."
-msgstr ""
-"Bu chòir dhan triall agad a bhith ullamh a-nis. Mur eil, fuirich ort "
-"greiseag – gheibh thu teachdaireachd."
+msgstr "Bu chòir dhan triall agad a bhith ullamh a-nis. Mur eil, fuirich ort greiseag – gheibh thu teachdaireachd."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
-"Your ship will be waiting for your orders in front of your port. It won’t be "
-"transporting wares anymore. Use its buttons to send your ship in any of the "
-"six main directions of the Widelands map. When it has reached a coastline, "
+"Your ship will be waiting for your orders in front of your port. It won’t be"
+" transporting wares anymore. Use its buttons to send your ship in any of the"
+" six main directions of the Widelands map. When it has reached a coastline, "
 "you can make it travel around the coast, where it will look for suitable "
 "places for landing."
-msgstr ""
-"Bidh an long agad a’ feitheamh air òrduighean ri taobh a’ phuirt agad. Cha "
-"ghiùlain i bathar tuilleadh. Cleachd na putanan aice gus comhair na luinge a "
-"stiùireadh – tha roghainn de shia dhiubh air mapa Widelands. Nuair a bhios "
-"an long air oirthir a ruigsinn, ’s urrainn dhut toirt oirre siubhal "
-"timcheall air nuair a shireas i àiteachan iomchaidh gus dol air tìr."
+msgstr "Bidh an long agad a’ feitheamh air òrduighean ri taobh a’ phuirt agad. Cha ghiùlain i bathar tuilleadh. Cleachd na putanan aice gus comhair na luinge a stiùireadh – tha roghainn de shia dhiubh air mapa Widelands. Nuair a bhios an long air oirthir a ruigsinn, ’s urrainn dhut toirt oirre siubhal timcheall air nuair a shireas i àiteachan iomchaidh gus dol air tìr."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
-"Nuair a bhios tu air raon puirt a lorg, ’s urrainn dhut port ùr a thogail "
-"leis a’ phutan mheadhanach ann an uinneag stiùireadh na luinge."
+msgstr "Nuair a bhios tu air raon puirt a lorg, ’s urrainn dhut port ùr a thogail leis a’ phutan mheadhanach ann an uinneag stiùireadh na luinge."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
-"Thèid am bathar a thoirt air tìr agus tòisichidh an long air bathar a "
-"ghiùlan a-rithist. Tòisichidh am fear-togail air port a thogail."
+msgstr "Thèid am bathar a thoirt air tìr agus tòisichidh an long air bathar a ghiùlan a-rithist. Tòisichidh am fear-togail air port a thogail."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:169
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
-"Lorg eilean sa bheil beinn agus lorg raon puirt ann. Stèidhich tuineachadh "
-"san eilean."
+msgstr "Lorg eilean sa bheil beinn agus lorg raon puirt ann. Stèidhich tuineachadh san eilean."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:172
 msgid "Found a settlement"
@@ -473,9 +376,7 @@ msgstr "Stiùir an long agad gu eilean sa bheil clach-iarainn, ’s dòcha."
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
-"Nuair a nì thu briogadh air long an triall, nochdaidh uinneag san urrainn "
-"dhut an long a stiùireadh."
+msgstr "Nuair a nì thu briogadh air long an triall, nochdaidh uinneag san urrainn dhut an long a stiùireadh."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid "When you have found a suitable port space, build a port there."
@@ -494,47 +395,30 @@ msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
-"Tha thu air an triall a stiùireadh gu soirbheachail agus tuineachadh ùr a "
-"stèidheachadh. Chuir mi clach-eòlaichean an toir air cloiche-iarainn – "
-"fhuair mi an naidheachd mar-thà gun do lorg iad tè."
+msgstr "Tha thu air an triall a stiùireadh gu soirbheachail agus tuineachadh ùr a stèidheachadh. Chuir mi clach-eòlaichean an toir air cloiche-iarainn – fhuair mi an naidheachd mar-thà gun do lorg iad tè."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "In this scenario, you’ve learned everything about seafaring: how to build "
-"ports and ships and how to send out an expedition. Remember that expeditions "
-"are sometimes the fastest way to reach essential resources – and sometimes "
+"ports and ships and how to send out an expedition. Remember that expeditions"
+" are sometimes the fastest way to reach essential resources – and sometimes "
 "the only one."
-msgstr ""
-"Sa chnàmh-sgeul seo, dh’ionnsaich thu a h-uile rud mu sheòladaireachd: mar a "
-"thogas tu puirt is longan agus mar a chuireas tu triall an toir air talamh "
-"ùr. Thoir an aire gur e na triallan a th’ anns an rathad as luaithe gu tric "
-"gus stòrasan cudromach a ruigsinn – agus an aon rathad uaireannan."
+msgstr "Sa chnàmh-sgeul seo, dh’ionnsaich thu a h-uile rud mu sheòladaireachd: mar a thogas tu puirt is longan agus mar a chuireas tu triall an toir air talamh ùr. Thoir an aire gur e na triallan a th’ anns an rathad as luaithe gu tric gus stòrasan cudromach a ruigsinn – agus an aon rathad uaireannan."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
-"But I want to speak a word of warning. Ports are like headquarters: they can "
-"be attacked by a nearby enemy. While your headquarters has soldiers to "
+"But I want to speak a word of warning. Ports are like headquarters: they can"
+" be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
-"Ach bu chòir dhomh rabhadh a thoirt dhut. Tha port coltach ris a’ phrìomh-"
-"àras agad: ’s urrainn do  nàmhaid a tha faisg air ionnsaigh a thoirt air. "
-"Fad ’s a tha saighdearan aig a’ phrìomh-àras agad gus a dhìon, cha bhi aig "
-"port air ùr-thogail. Mar sin, feuch gun a bhith a’ togail fear faisg air "
-"nàmhaid."
+msgstr "Ach bu chòir dhomh rabhadh a thoirt dhut. Tha port coltach ris a’ phrìomh-àras agad: ’s urrainn do  nàmhaid a tha faisg air ionnsaigh a thoirt air. Fad ’s a tha saighdearan aig a’ phrìomh-àras agad gus a dhìon, cha bhi aig port air ùr-thogail. Mar sin, feuch gun a bhith a’ togail fear faisg air nàmhaid."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
-msgstr ""
-"Na biodh eagal ort o nach eil nàmhaid air a’ mhapa seo. Mar as àbhaist, ’s "
-"urrainn dhut leantainn air adhart a chluiche ma thogras tu agus coimhead air "
-"na longan fad ’s a chuireas iad bathar dhan eilean  ma thogas tu "
-"togalaichean an-siud. Tha eilean eile ann cuideachd far an urrainn dhut port "
-"a thogail."
+msgstr "Na biodh eagal ort o nach eil nàmhaid air a’ mhapa seo. Mar as àbhaist, ’s urrainn dhut leantainn air adhart a chluiche ma thogras tu agus coimhead air na longan fad ’s a chuireas iad bathar dhan eilean  ma thogas tu togalaichean an-siud. Tha eilean eile ann cuideachd far an urrainn dhut port a thogail."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

@@ -42,7 +42,7 @@ struct PlayerImmovable;
 class Soldier;
 class TrainingSite;
 struct Flag;
-struct TribeDescr;
+class TribeDescr;
 struct Road;
 struct AttackController;
 
@@ -246,14 +246,14 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const {return roads & Road_Mask;}
+		uint8_t road_e() const {return roads & RoadType::kMask;}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
 		uint8_t road_se() const {
-			return roads >> Road_SouthEast & Road_Mask;
+			return roads >> RoadType::kSouthEast & RoadType::kMask;
 		}
 
 		/// Whether there is a road between this node and the node to the
@@ -261,7 +261,7 @@ public:
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
 		uint8_t road_sw() const {
-			return roads >> Road_SouthWest & Road_Mask;
+			return roads >> RoadType::kSouthWest & RoadType::kMask;
 		}
 
 		/**

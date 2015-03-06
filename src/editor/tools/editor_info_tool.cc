@@ -104,23 +104,23 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
 	std::vector<std::string> terrain_is_strings;
 
-	if (terrain_is == Widelands::TerrainDescription::Type::GREEN) {
+	if (terrain_is == Widelands::TerrainDescription::Type::kGreen) {
 		terrain_is_strings.push_back(_("arable"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::DRY) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kDry) {
 		terrain_is_strings.push_back(_("treeless"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::WATER) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
 		terrain_is_strings.push_back(_("aquatic"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::ACID) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
 		terrain_is_strings.push_back(_("dead"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::MOUNTAIN) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
 		terrain_is_strings.push_back(_("mountainous"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::UNPASSABLE) {
-		terrain_is_strings.push_back(_("unpassable"));
+	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
+		terrain_is_strings.push_back(_("impassable"));
 	}
 	buf += "• " + (boost::format(_("Category: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";

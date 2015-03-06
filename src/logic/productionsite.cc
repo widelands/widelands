@@ -212,7 +212,7 @@ ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
 }
 
-void ProductionSite::load_finish(EditorGameBase & egbase){
+void ProductionSite::load_finish(EditorGameBase & egbase) {
 	Building::load_finish(egbase);
 	calc_statistics();
 }
@@ -311,9 +311,7 @@ void ProductionSite::calc_statistics()
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
-		color = UI_FONT_CLR_IDLE_HEX;
-	else if (percOk < 33)
+	if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;

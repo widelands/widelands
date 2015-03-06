@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-04 13:48+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2015-02-12 13:43+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:38+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-02-13 05:41+0000\n"
+"X-Generator: Launchpad (build 17336)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -851,7 +851,7 @@ msgstr "Feòil-rèiste"
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Spidercloth"
-msgstr "Clò damhain"
+msgstr "Sìoda"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Spideryarn"
@@ -975,7 +975,7 @@ msgstr "Gobha acainnean"
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Trainer"
-msgstr "Trèanair"
+msgstr "Maighstir"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Weaponsmith"
@@ -1901,9 +1901,9 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"Nì thu clò damhain à snàth damhain ann an taigh nam beart. Cleachdaidh a’ "
-"cheàrdach acainnean is an cala e. Feumaidh tu clò damhain cuideachd gus cuid "
-"a thogalaichean adhartach a thogail."
+"Nì thu sìoda à snàth damhain ann an taigh nam beart. Cleachdaidh a’ "
+"cheàrdach acainnean is an cala e. Bidh feum agad air sìoda cuideachd gus "
+"cuid a thogalaichean adhartach a thogail."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
@@ -1911,7 +1911,7 @@ msgid ""
 "processed into spidercloth in a weaving mill."
 msgstr ""
 "Saothraichidh damhain a thogas tu ann an tuathanasan dhamhan an snàth seo. "
-"Nì thu clò damhain às ann an taigh nam beart."
+"Nì thu sìoda às ann an taigh nam beart."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -2046,11 +2046,11 @@ msgstr "muirgheadh dhùbailte throm a dhèanamh"
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Nì e clò airson togalaichean, longan is saighdearan."
+msgstr "Nì e sìoda airson togalaichean, longan is saighdearan."
 
 #: ../../tribes/atlanteans/weaving-mill/conf:29
 msgid "weaving spidercloth"
-msgstr "clò damhain fhighe"
+msgstr "sìoda fhighe"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:31
 msgid "tailoring a tabard"

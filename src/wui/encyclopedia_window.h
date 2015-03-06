@@ -29,7 +29,7 @@
 
 namespace Widelands {
 struct WareDescr;
-struct TribeDescr;
+class TribeDescr;
 }
 
 class InteractivePlayer;
