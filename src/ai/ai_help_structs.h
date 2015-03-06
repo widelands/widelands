@@ -204,7 +204,7 @@ struct WalkableSpot {
 
 struct BlockedField {
 	Widelands::FCoords coords;
-	int32_t blocked_until_;
+	uint32_t blocked_until_;
 
 	BlockedField(Widelands::FCoords c, int32_t until) : coords(c), blocked_until_(until) {
 	}
@@ -213,7 +213,7 @@ struct BlockedField {
 struct BuildableField {
 	Widelands::FCoords coords;
 
-	int32_t next_update_due_;
+	uint32_t next_update_due_;
 
 	bool preferred_;
 	bool enemy_nearby_;
@@ -292,7 +292,7 @@ struct BuildableField {
 struct MineableField {
 	Widelands::FCoords coords;
 
-	int32_t next_update_due_;
+	uint32_t next_update_due_;
 
 	bool preferred_;
 
@@ -350,8 +350,8 @@ struct BuildingObserver {
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
 	bool mountain_conqueror_;  // military building built near mountains
-	int32_t prohibited_till_;  // do not build before (ms)
-	int32_t forced_after_;     // do not wait until ware is needed
+	uint32_t prohibited_till_;  // do not build before (ms)
+	uint32_t forced_after_;     // do not wait until ware is needed
 
 	bool unoccupied_;  //
 
@@ -385,8 +385,8 @@ struct BuildingObserver {
 
 struct ProductionSiteObserver {
 	Widelands::ProductionSite* site;
-	int32_t built_time_;
-	int32_t unoccupied_till_;
+	uint32_t built_time_;
+	uint32_t unoccupied_till_;
 	uint8_t stats_zero_;
 	uint8_t no_resources_count;
 	BuildingObserver* bo;
