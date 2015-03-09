@@ -831,6 +831,25 @@ void Ship::exp_scout_direction(Game&, uint8_t direction) {
 	m_expedition->island_exploration = false;
 }
 
+//Returns integer of direction, or 255 if query invalid
+//Intended for LUA scripting
+uint8_t Ship::get_scout_direction() { //NOCOM
+	if(!m_expedition) {
+		printf (" not in expedition\n");
+		return std::numeric_limits<uint8_t>::max();
+	}
+	if(m_ship_state != EXP_SCOUTING) {
+		printf (" not EXP_SCOUTING\n");
+		return std::numeric_limits<uint8_t>::max();
+	}
+	if(m_expedition->island_exploration == true) {
+		printf (" not in island exploration\n");
+		return std::numeric_limits<uint8_t>::max();
+	}
+	
+	return static_cast<uint8_t>(m_expedition->direction);
+}
+
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
@@ -849,6 +868,23 @@ void Ship::exp_explore_island(Game&, ScoutingDirection scouting_direction) {
 	m_expedition->direction = 0;
 	m_expedition->island_exploration = true;
 }
+
+//Returns integer of direction, or 255 if query invalid
+//Intended for LUA scripting
+uint8_t Ship::get_island_explore_direction() { //NOCOM
+	if(!m_expedition) {
+		return std::numeric_limits<uint8_t>::max();
+	}
+	if(m_ship_state != EXP_SCOUTING) {
+		return std::numeric_limits<uint8_t>::max();
+	}
+	if(m_expedition->island_exploration == false) {
+		return std::numeric_limits<uint8_t>::max();
+	}
+	
+	return static_cast<uint8_t>(m_expedition->scouting_direction);
+}
+
 
 /// Cancels a currently running expedition
 /// @note only called via player command

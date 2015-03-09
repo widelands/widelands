@@ -687,7 +687,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_portdock(lua_State* L);
+	int get_portdock(lua_State* L); //NOCOM
 
 	/*
 	 * Lua Methods
@@ -698,11 +698,14 @@ public:
 	int set_workers(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
+	int start_expedition(lua_State*);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse)
+	//static int start_expedition(lua_State* L, //NOCOM
+		//Widelands::EditorGameBase &);
 };
 
 
@@ -885,12 +888,17 @@ public:
 	int get_debug_economy(lua_State * L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
-
+	int get_status(lua_State* L);
+	int get_scout_direction(lua_State* L);	
+	int set_scout_direction(lua_State* L);
+	int get_island_scout_direction(lua_State* L);	
+	int set_island_scout_direction(lua_State* L);
 	/*
 	 * Lua methods
 	 */
 	int get_wares(lua_State* L);
 	int get_workers(lua_State* L);
+	int build_colonization_port(lua_State* L);
 
 	/*
 	 * C methods
