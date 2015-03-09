@@ -5,7 +5,7 @@ run(function()
 
    -- Start and immediately cancel an expedition.
    print("---- 1 -----")
-   start_expedition()
+   port:start_expedition()
    cancel_expedition_in_port()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
