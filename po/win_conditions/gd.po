@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 17:33+0000\n"
+"POT-Creation-Date: 2015-02-20 11:38+0000\n"
+"PO-Revision-Date: 2015-02-23 08:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr[3] "Cum e fad %i mionaid a bharrachd gus an geama a bhuannachd."
 
 #: ../../scripting/win_conditions/territorial_time.lua:14
 msgid "Territorial Time"
-msgstr "Àm na dùthcha"
+msgstr "Dùthaich ri àm"
 
 #: ../../scripting/win_conditions/territorial_time.lua:17
 msgid ""

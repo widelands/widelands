@@ -45,7 +45,7 @@ world:new_terrain_type{
    -- "dry": Allows building of roads only. Trees don't like this terrain.
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
    -- "dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
-   -- "unpassable": Nothing can be built here, and nothing can walk on it
+   -- "impassable": Nothing can be built here, and nothing can walk on it
    is = "green",
 
    -- The list resources that can be found in this terrain.
@@ -229,7 +229,7 @@ world:new_terrain_type{
    name = "sumpf",
    descname = _ "Swamp",
    editor_category = "green",
-   is = "unpassable",
+   is = "impassable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,

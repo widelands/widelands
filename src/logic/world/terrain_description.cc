@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,20 +47,20 @@ TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 	if (type == "water") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
 																	TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kUnpassable);
+																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "dead") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
 																	TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kUnpassable);
+																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "mountain") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
 																	TerrainDescription::Type::kMountain);
 	}
-	if (type == "unpassable") {
+	if (type == "impassable") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kUnpassable);
+																	TerrainDescription::Type::kImpassable);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }

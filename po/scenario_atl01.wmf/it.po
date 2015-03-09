@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-17 21:23+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-04 15:43+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr "Assicura la fornitura di beni da costruzione"
+msgstr "Assicura la fornitura di merci per la costruzione"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
@@ -49,7 +49,7 @@ msgstr "Costruisci due capanne del taglialegna"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr "Costruisci due case del guardiacaccia"
+msgstr "Costruisci due case della guardia forestale"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -88,7 +88,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Il cibo è molto importante per le miniere e per le aree di addestramento militare. Costruisci un ambiente alimentare ben funzionante costruendo almeno una fattoria, una fattoria di radice nera e un mulino. I due tipi di farina assieme a dell'acqua proveniente da un pozzo saranno cucinati in un forno per produrre del pane in un forno, quindi costruisci anche un forno e un forno."
+msgstr "Il cibo è molto importante per le miniere e per le aree di addestramento militare. Costruisci un ambiente alimentare ben funzionante costruendo almeno una fattoria, una fattoria di radice nera e un mulino. I due tipi di farina, assieme a dell'acqua proveniente da un pozzo, saranno cotti per produrre del pane in un forno, per cui costruisci anche un forno e un pozzo."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -106,7 +106,7 @@ msgstr "Costruisci una fattoria e una fattoria di radice nera."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr ""
+msgstr "Costruisci un mulino per produrre della farina di mais e della farina di radice nera"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -118,11 +118,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr "Costruisci una casa del cacciatore per ottenere carne cruda."
+msgstr "Costruisci una casa del cacciatore per ottenere della carne cruda."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "Costruisci una casa del pescatore per ottenere pesce crudo."
+msgstr "Costruisci una casa del pescatore per ottenere del pesce crudo."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
@@ -177,7 +177,7 @@ msgid ""
 "mine will dig for crystal, quartz and diamond – all of them are precious "
 "materials and very rarely found. It will produce a lot of stone while "
 "searching for them."
-msgstr "Il ferro grezzo, le pietre d'oro ed il carbone sono estratte nelle rispettive miniere. Dalle miniere di cristallo si estraggono cristalli, quarzi e diamanti - sono tutti materiali rari e trovati molto raramente. Mentre le si ricerca, vengono prodotte molte pietre."
+msgstr "Il ferro grezzo, l'oro grezzo e il carbone sono estratti nelle rispettive miniere. Dalle miniere di cristallo si estraggono cristalli, quarzi e diamanti - sono tutti materiali rari e trovati molto raramente. Mentre li si ricerca, vengono prodotte molte pietre."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -269,11 +269,11 @@ msgstr "Costruisci un cantiere navale vicino al lago per cominciare la costruzio
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
-msgstr "Orgoglioso fino alla morte"
+msgstr "Orgogliosi fino alla morte"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:137
 msgid "Favored by the God"
-msgstr "Favorito da dio"
+msgstr "Favoriti dal Dio"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:138
 msgid ""
@@ -296,11 +296,11 @@ msgstr "Questa storia si svolge durante il regno di Re Askandor, il 43esimo succ
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:143
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "Caduti in disgrazia al cospetto del Dio"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "The God’s Punishment"
-msgstr "La punizione di dio"
+msgstr "La punizione del Dio"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:146
 msgid ""
@@ -435,7 +435,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need stone, but there is plenty to the north-east of here; we just need to "
 "build a quarry, and my stonemasons will go to work promptly."
-msgstr "Possa Satul riscaldare te, Jundlina! La cosa più importante per costruire un insediamento sono i materiali da costruzione. Ci sono degli alberi qui, quindi dovremmo costruire degli alloggi per qualche taglialegna ed ovviamente anche per le guardie forestali, così da non rimanere senza alberi. Oh, e non dobbiamo dimenticare la segheria, perchè la maggior parte degli edifici non può essere costruita con solo tronchi. Gli edifici più robusti hanno anche bisogno di pietra, ma ve ne è abbondanza a nord-est di qui; dobbiamo solo costruire una cava ed i miei tagliapietre cominceranno prontamente a lavorare."
+msgstr "Possa Satul riscaldarti, Jundlina! La cosa più importante per costruire un insediamento sono i materiali da costruzione. Ci sono degli alberi qui, quindi dovremmo costruire degli alloggi per qualche taglialegna ed ovviamente anche per le guardie forestali, così da non rimanere senza alberi. Oh, e non dobbiamo dimenticare la segheria, perché la maggior parte degli edifici non può essere costruita con solo tronchi. Gli edifici più robusti hanno anche bisogno di pietra, ma ve ne è abbondanza a nord-est di qui; dobbiamo solo costruire una cava e i miei tagliapietre cominceranno prontamente a lavorare."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid "Sidolus Speaks"
@@ -645,7 +645,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Sono d'accordo con te e ho punito severamente i piantagrane. Ma è molto difficile mantenere calmi i miei uomini: sono annoiati e non hanno nulla da fare. Vorrei ravvivarli. Penso che un maggior ritmo nella loro vita li terrebbe occupati e concentrati sui loro doveri. Avrei bisogno di una segreta e di un labirinto per loro. Ho i piani pronti, ma immagino che non saranno economici."
+msgstr "Sono d'accordo con te e ho punito severamente i piantagrane. Ma è molto difficile mantenere calmi i miei uomini: sono annoiati e non hanno nulla da fare. Vorrei ravvivarli un po'. Penso che un maggior ritmo nella loro vita li terrebbe occupati e concentrati sui loro doveri. Avrei bisogno di una segreta e di un labirinto per loro. Ho i piani pronti, ma immagino che non saranno economici."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:290
 msgid ""

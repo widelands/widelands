@@ -50,12 +50,6 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 
-// Building of new military buildings can be restricted
-constexpr int kPushExpansion = 1;
-constexpr int kResourcesOrDefense = 2;
-constexpr int kDefenseOnly = 3;
-constexpr int kNoNewMilitary = 4;
-
 // following is in miliseconds (widelands counts time in ms)
 constexpr int kFieldUpdateInterval = 2000;
 constexpr int kIdleMineUpdateInterval = 22000;
@@ -65,7 +59,7 @@ constexpr int kBuildingMinInterval = 25 * 1000;
 constexpr int kMinBFCheckInterval = 5 * 1000;
 constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
-constexpr int kTrainingSitesCheckInterval = 30 * 1000;
+constexpr int kTrainingSitesCheckInterval = 5 * 60 * 1000;
 
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
@@ -85,31 +79,17 @@ DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
-     m_buildable_changed(true),
-     m_mineable_changed(true),
      player_(nullptr),
      tribe_(nullptr),
      num_constructionsites_(0),
      num_milit_constructionsites(0),
      num_prod_constructionsites(0),
      num_ports(0),
-     next_road_due_(2000),
-     next_stats_update_due_(30000),
-     next_construction_due_(1000),
+     next_ai_think_(0),
      next_mine_construction_due_(0),
-     next_productionsite_check_due_(0),
-     next_mine_check_due_(0),
-     next_militarysite_check_due_(0),
-     next_ship_check_due(30 * 1000),
-     next_marine_decisions_due(30 * 1000),
-     next_attack_consideration_due_(300000),
-     next_trainingsites_check_due_(15 * 60 * 1000),
-     next_bf_check_due_(1000),
-     next_wares_review_due_(15 * 60 * 1000),
-     next_statistics_report_(30 * 60 * 1000),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
-     enemy_last_seen_(-2 * 60 * 1000),
+     enemy_last_seen_(0),
      numof_warehouses_(0),
      new_buildings_stop_(false),
      resource_necessity_territory_(255),
@@ -119,7 +99,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      resource_necessity_water_needed_(false),
      unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
-     military_last_build_(-60 * 1000),
+     military_last_build_(0),
 	last_attack_target_(
         std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
@@ -202,7 +182,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 				   }
 			   }
 			   break;
-		   	default:
+		   default:
 				;
 		   }
 		});
@@ -236,113 +216,81 @@ void DefaultAI::think() {
 		late_initialization();
 	}
 
-	const int32_t gametime = game().get_gametime();
+	const uint32_t gametime = static_cast<uint32_t>(game().get_gametime());
 
-	if (m_buildable_changed || next_bf_check_due_ < gametime) {
-		// update statistics about buildable fields
-		update_all_buildable_fields(gametime);
-		next_bf_check_due_ = gametime + kMinBFCheckInterval;
+	if (next_ai_think_ > gametime) {
+		return;
 	}
 
-	m_buildable_changed = false;
+	// AI now thinks twice in a seccond, if the game engine allows this
+	// if too busy, the period can be many seconds.
+	next_ai_think_ = gametime + 500;
+	ScheduleTasks DueTask = ScheduleTasks::kIdle;
+	DueTask = get_oldest_task(gametime);
+	schedStat[static_cast<uint32_t>(DueTask)] += 1;
 
-	// perpetually tries to improve roads
-	if (next_road_due_ <= gametime) {
-		next_road_due_ = gametime + 1000;
-
-		if (improve_roads(gametime)) {
-			m_buildable_changed = true;
+	// now AI runs a job selected above to be performed in this turn
+	// (only one but some of them needs to run check_economies() to
+	// guarantee consistency)
+	// job names are selfexplanatory
+	if (DueTask == ScheduleTasks::kBbuildableFieldsCheck) {
+		update_all_buildable_fields(gametime);
+		taskDue[ScheduleTasks::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
+	} else if (DueTask == ScheduleTasks::kRoadCheck) {
+		if (check_economies()) {  // is a must
+			return;
+		};
+		taskDue[ScheduleTasks::kRoadCheck] = gametime + 400;
+		improve_roads(gametime);
+	} else if (DueTask == ScheduleTasks::kUnbuildableFCheck) {
+		taskDue[ScheduleTasks::kUnbuildableFCheck] = gametime + 4000;
+		update_all_not_buildable_fields();
+	} else if (DueTask == ScheduleTasks::kConsiderAttack) {
+		consider_attack(gametime);
+	} else if (DueTask == ScheduleTasks::kCheckEconomies) {
+		check_economies();
+		taskDue[ScheduleTasks::kCheckEconomies] = gametime + 8000;
+	} else if (DueTask == ScheduleTasks::kProductionsitesStats) {
+		update_productionsite_stats(gametime);
+	} else if (DueTask == ScheduleTasks::kConstructBuilding) {
+		if (check_economies()) {  // economies must be consistent
 			return;
 		}
-	} else {
-		// only go on, after defaultAI tried to improve roads.
-		return;
-	}
-
-	// NOTE Because of the check above, the following parts of think() are used
-	// NOTE only once every second at maximum. This increases performance and as
-	// NOTE human player_s can not even react that fast, it should not be a
-	// NOTE disadvantage for the defaultAI.
-	// This must be checked every time as changes of bobs in AI area aren't
-	// handled by the AI itself.
-	update_all_not_buildable_fields();
-
-	// considering attack
-	if (next_attack_consideration_due_ <= gametime) {
-		consider_attack(gametime);
-	}
-
-	// check if anything in the economies changed.
-	// This needs to be done before new buildings are placed, to ensure that no
-	// empty economy is left.
-	if (check_economies()) {
-		return;
-	}
-
-	// Before thinking about a new construction, update current stats, to have
-	// a better view on current economy.
-	if (next_stats_update_due_ <= gametime) {
-		update_productionsite_stats(gametime);
-	}
-
-	// Now try to build something if possible
-	if (next_construction_due_ <= gametime) {
-		next_construction_due_ = gametime + 2000;
-
+		taskDue[ScheduleTasks::kConstructBuilding] = gametime + 6000;
 		if (construct_building(gametime)) {
 			time_of_last_construction_ = gametime;
-			m_buildable_changed = true;
+		}
+	} else if (DueTask == ScheduleTasks::kCheckProductionsites) {
+		if (check_economies()) {  // economies must be consistent
 			return;
 		}
-	}
-
-	// verify that our production sites are doing well
-	if (check_productionsites(gametime)) {
-		return;
-	}
-
-	if (check_ships(gametime)) {
-		return;
-	}
-
-	if (marine_main_decisions(gametime)) {
-		return;
-	}
-
-	// Check the mines and consider upgrading or destroying one
-	if (check_mines_(gametime)) {
-		return;
-	}
-
-	// consider whether a change of the soldier capacity of some militarysites
-	// would make sense.
-	if (check_militarysites(gametime)) {
-		return;
-	}
-
-	if (check_trainingsites(gametime)) {
-		return;
-	}
-
-	// improve existing roads!
-	// main part of this improvment is creation 'shortcut roads'
-	// this includes also connection of new buildings
-	if (improve_roads(gametime)) {
-		m_buildable_changed = true;
-		m_mineable_changed = true;
-		return;
-	}
-
-	// once in 15 minutes we increase(or decrease) targets for wares
-	if (next_wares_review_due_ <= gametime) {
-		next_wares_review_due_ = gametime + 15 * 60 * 1000;
+		check_productionsites(gametime);
+		taskDue[ScheduleTasks::kCheckProductionsites] = gametime + 5000;
+	} else if (DueTask == ScheduleTasks::kCheckShips) {
+		check_ships(gametime);
+	} else if (DueTask == ScheduleTasks::KMarineDecisions) {
+		marine_main_decisions(gametime);
+	} else if (DueTask == ScheduleTasks::kCheckMines) {
+		if (check_economies()) {  // economies must be consistent
+			return;
+		}
+		taskDue[ScheduleTasks::kCheckMines] = gametime + 7000;  // 7 seconds is enough
+		check_mines_(gametime);
+	} else if (DueTask == ScheduleTasks::kCheckMilitarysites) {
+		check_militarysites(gametime);
+	} else if (DueTask == ScheduleTasks::kCheckTrainingsites) {
+		check_trainingsites(gametime);
+	} else if (DueTask == ScheduleTasks::kWareReview) {
+		if (check_economies()) {  // economies must be consistent
+			return;
+		}
+		taskDue[ScheduleTasks::kWareReview] = gametime + 15 * 60 * 1000;
 		review_wares_targets(gametime);
-	}
-
-	// print statistics
-	if (kPrintStats && next_statistics_report_ <= gametime) {
-		print_stats();
-		next_statistics_report_ += 60 * 60 * 1000;
+	} else if (DueTask == ScheduleTasks::kPrintStats) {
+		if (check_economies()) {  // economies must be consistent
+			return;
+		}
+		print_stats(gametime);
 	}
 }
 
@@ -500,13 +448,6 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	num_constructionsites_ = 0;
-	num_milit_constructionsites = 0;
-	num_prod_constructionsites = 0;
-	next_construction_due_ = 0;
-	next_road_due_ = 1000;
-	next_productionsite_check_due_ = 0;
-	inhibit_road_building_ = 0;
 	// atlanteans they consider water as a resource
 	// (together with mines, stones and wood)
 	if (tribe_->name() == "atlanteans") {
@@ -524,7 +465,7 @@ void DefaultAI::late_initialization() {
 				port_reserved_coords.insert(hash);
 		} while (mr.advance(map));
 
-		//the same for NW neighbour of a field
+		// the same for NW neighbour of a field
 		Coords c_nw;
 		map.get_tln(c, &c_nw);
 		MapRegion<Area<FCoords>> mr_nw(map, Area<FCoords>(map.get_fcoords(c_nw), 3));
@@ -593,6 +534,22 @@ void DefaultAI::late_initialization() {
 			} while (mr.advance(map));
 		}
 	}
+
+	taskDue[ScheduleTasks::kConstructBuilding] = 0;
+	taskDue[ScheduleTasks::kRoadCheck] = 1000;
+	taskDue[ScheduleTasks::kCheckProductionsites] = 15 * 1000;
+	taskDue[ScheduleTasks::kProductionsitesStats] = 30000;
+	taskDue[ScheduleTasks::kCheckMines] = 30 * 1000;
+	taskDue[ScheduleTasks::kCheckMilitarysites] = 0;
+	taskDue[ScheduleTasks::kCheckShips] = 30 * 1000;
+	taskDue[ScheduleTasks::kCheckEconomies] = 1000;
+	taskDue[ScheduleTasks::KMarineDecisions] = 30 * 1000;
+	taskDue[ScheduleTasks::kConsiderAttack] = 300000;
+	taskDue[ScheduleTasks::kCheckTrainingsites] = 15 * 60 * 1000;
+	taskDue[ScheduleTasks::kBbuildableFieldsCheck] = 1000;
+	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
+	taskDue[ScheduleTasks::kWareReview] = 15 * 60 * 1000;
+	taskDue[ScheduleTasks::kPrintStats] = 30 * 60 * 1000;
 }
 
 /**
@@ -601,12 +558,12 @@ void DefaultAI::late_initialization() {
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
+void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;
 
 	while (!buildable_fields.empty() && buildable_fields.front()->next_update_due_ <= gametime &&
-	       i < 25) {
+	       i < 40) {
 		BuildableField& bf = *buildable_fields.front();
 
 		//  check whether we lost ownership of the node
@@ -639,7 +596,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
+void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;  // counter, used to track # of checked fields
 
@@ -753,7 +710,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	//testing for near porspaces
+	// testing for near porspaces
 	if (field.portspace_nearby_ == Widelands::ExtendedBool::kUnset) {
 		field.portspace_nearby_ = ExtendedBool::kFalse;
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 2));
@@ -1010,9 +967,9 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 }
 
 /// Updates the production and MINE sites statistics needed for construction decision.
-void DefaultAI::update_productionsite_stats(int32_t const gametime) {
+void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 	// Updating the stats every 10 seconds should be enough
-	next_stats_update_due_ = gametime + 10000;
+	taskDue[ScheduleTasks::kProductionsitesStats] = gametime + 10000;
 	uint16_t fishers_count = 0;  // used for atlanteans only
 
 	// Reset statistics for all buildings
@@ -1092,7 +1049,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 // - there is an enemy
 //   Currently more military buildings are built then needed
 //   and "optimalization" (dismantling not needed buildings) is done afterwards
-bool DefaultAI::construct_building(int32_t gametime) {
+bool DefaultAI::construct_building(uint32_t gametime) {
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	bool field_blocked = false;
@@ -1115,7 +1072,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 	// here we possible stop building of new buildings
 	new_buildings_stop_ = false;
-	uint8_t expansion_mode = kResourcesOrDefense;
+	MilitaryStrategy expansion_mode = MilitaryStrategy::kResourcesOrDefense;
 
 	// there are many reasons why to stop building production buildings
 	// (note there are numerous exceptions)
@@ -1146,13 +1103,15 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	const uint32_t treshold = militarysites.size() / 40 + 2;
 
 	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold) {
-		expansion_mode = kNoNewMilitary;
+		expansion_mode = MilitaryStrategy::kNoNewMilitary;
 	} else if (unstationed_milit_buildings_ + num_milit_constructionsites > 2 * treshold) {
-		expansion_mode = kDefenseOnly;
+		expansion_mode = MilitaryStrategy::kDefenseOnly;
+	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= treshold - 1) {
+		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
 	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
-		expansion_mode = kResourcesOrDefense;
+		expansion_mode = MilitaryStrategy::kExpansion;
 	} else {
-		expansion_mode = kPushExpansion;
+		expansion_mode = MilitaryStrategy::kPushExpansion;
 	}
 
 	// we must consider need for mines
@@ -1163,9 +1122,9 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	if (virtual_mines <= 7) {
 		resource_necessity_mines_ = std::numeric_limits<uint8_t>::max();
 	} else if (virtual_mines > 19) {
-		resource_necessity_mines_ = 0;
+		resource_necessity_mines_ = 50;
 	} else {
-		const uint32_t tmp = ((18 - virtual_mines) * 255) / 12;
+		const uint32_t tmp = (24 - virtual_mines) * 10;
 		resource_necessity_mines_ = tmp;
 	}
 
@@ -1198,7 +1157,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 	// Remove outdated fields from blocker list
 	for (std::list<BlockedField>::iterator i = blocked_fields.begin(); i != blocked_fields.end();)
-		if (i->blocked_until_ < game().get_gametime()) {
+		if (i->blocked_until_ < gametime) {
 			i = blocked_fields.erase(i);
 		} else {
 			++i;
@@ -1246,7 +1205,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	     ++i) {
 		BuildableField* const bf = *i;
 
-		if (bf->next_update_due_ < gametime - 8000) {
+		if (bf->next_update_due_ < gametime - 10000) {
 			continue;
 		}
 
@@ -1518,7 +1477,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 						}
 						// we can go above target if there is shortage of logs on stock
 						else if (bo.total_count() >= bo.cnt_target_ &&
-						         bo.stocklevel_ > 40 + productionsites.size() * 5) {
+						         bo.stocklevel_ > 40 + productionsites.size() * 2) {
 							continue;
 						}
 
@@ -1679,11 +1638,18 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					continue;
 				}
 
-				if (expansion_mode == kNoNewMilitary) {
+				if (expansion_mode == MilitaryStrategy::kNoNewMilitary) {
 					continue;
 				}
 
-				if (expansion_mode == kDefenseOnly && !bf->enemy_nearby_) {
+				if (expansion_mode == MilitaryStrategy::kDefenseOnly && !bf->enemy_nearby_) {
+					continue;
+				}
+
+				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense &&
+				    !(bf->unowned_mines_pots_nearby_ || bf->stones_nearby_ || bf->water_nearby_ ||
+				      (bf->distant_water_ && resource_necessity_water_needed_) ||
+				      bf->enemy_nearby_)) {
 					continue;
 				}
 
@@ -1694,19 +1660,14 @@ bool DefaultAI::construct_building(int32_t gametime) {
 				         (bo.mountain_conqueror_ || bo.expansion_type_)) {
 					;
 				}  // it is ok, go on
-				else if (bf->unowned_land_nearby_ && bo.expansion_type_ &&
-				         num_milit_constructionsites <= 1) {
-					;  // we allow big buildings now
-				} else if (bf->unowned_land_nearby_ &&
-				           bo.expansion_type_) {  // decreasing probability for big buidlings
+				else if (bo.expansion_type_) {
 					if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
 						continue;
 					}
 					if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
 						continue;
-					}
+					};
 				}
-				// it is ok, go on
 				else {
 					continue;
 				}  // the building is not suitable for situation
@@ -1719,22 +1680,22 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 				// a boost to prevent an expansion halt
 				int32_t local_boost = 0;
-				if (expansion_mode == kPushExpansion) {
+				if (expansion_mode == MilitaryStrategy::kPushExpansion) {
 					local_boost = 200;
 				}
 
-				prio = (bf->unowned_land_nearby_ * 2 * resource_necessity_territory_ / 255 +
-				        bf->unowned_mines_pots_nearby_ * resource_necessity_mines_ / 255 +
+				prio = ((bf->unowned_land_nearby_ * 2 * resource_necessity_territory_) / 255 +
+				        (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 255 +
 				        bf->stones_nearby_ / 2 + bf->military_loneliness_ / 10 - 60 + local_boost +
-				        bf->water_nearby_ * resource_necessity_water_ / 255);
+				        (bf->water_nearby_ * resource_necessity_water_) / 255);
 
 				// special bonus due to remote water for atlanteans
 				if (resource_necessity_water_needed_)
-					prio += bf->distant_water_ * resource_necessity_water_ / 255;
+					prio += (bf->distant_water_ * resource_necessity_water_) / 255;
 
-				//special bonus if a portspace is close
+				// special bonus if a portspace is close
 				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
-					if (num_ports == 0){
+					if (num_ports == 0) {
 						prio += 25;
 					} else {
 						prio += 5;
@@ -2044,16 +2005,13 @@ bool DefaultAI::construct_building(int32_t gametime) {
 	// set the type of update that is needed
 	if (mine) {
 		next_mine_construction_due_ = gametime + kBusyMineUpdateInterval;
-
-	} else {
-		m_buildable_changed = true;
 	}
 
 	return true;
 }
 
 // improves current road system
-bool DefaultAI::improve_roads(int32_t gametime) {
+bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	// first force a split on roads that are longer than 3 parts
 	// with exemption when there is too few building spots
@@ -2093,7 +2051,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 		roads.pop_front();
 
 		// occasionaly we test if the road can be dismounted
-		if (gametime % 25 == 0) {
+		if (gametime % 5 == 0) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
@@ -2134,14 +2092,25 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 		return true;
 	}
 
-	// if this is end flag (or sole building) or just randomly
-	if (flag.nr_of_roads() <= 1 || gametime % 200 == 0) {
-		create_shortcut_road(flag, 13, 20, gametime);
-		inhibit_road_building_ = gametime + 800;
+	bool is_warehouse = false;
+	if (Building* b = flag.get_building()) {
+		BuildingObserver& bo = get_building_observer(b->descr().name().c_str());
+		if (bo.type == BuildingObserver::WAREHOUSE) {
+			is_warehouse = true;
+		}
 	}
-	// this is when a flag is full
-	else if (flag.current_wares() > 6 && gametime % 10 == 0) {
-		create_shortcut_road(flag, 9, 0, gametime);
+
+	// if this is end flag (or sole building) or just randomly
+	if (flag.nr_of_roads() <= 1 || gametime % 10 == 0) {
+		create_shortcut_road(flag, 11, 20, gametime);
+		inhibit_road_building_ = gametime + 800;
+		// a warehouse with 3 or less roads
+	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
+		create_shortcut_road(flag, 9, -1, gametime);
+		inhibit_road_building_ = gametime + 400;
+		// and when a flag is full with wares
+	} else if (flag.current_wares() > 5) {
+		create_shortcut_road(flag, 9, -2, gametime);
 		inhibit_road_building_ = gametime + 400;
 	}
 
@@ -2227,7 +2196,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
-                                     uint16_t minred,
+                                     int16_t min_reduction,
                                      int32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
@@ -2246,15 +2215,27 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// first we deal with situations when this is economy with no warehouses
 	// and this is a flag belonging to a building/constructionsite
+	// such economy must get dismantle grace time (if not set yet)
+	// end sometimes extended checkradius
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
+
+		// occupied military buildings get special treatment
+		//(extended grace time + longer radius)
+		bool occupied_military_ = false;
+		Building* b = flag.get_building();
+		if (upcast(MilitarySite, militb, b)) {
+			if (militb->stationed_soldiers().size() > 0) {
+				occupied_military_ = true;
+			}
+		}
 
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time_ > gametime &&
 		    eco->dismantle_grace_time_ != std::numeric_limits<int32_t>::max()) {
 			;
 
-		// if grace time is not set, this is probably first time without a warehouse and we must
-		// set it
+			// if grace time is not set, this is probably first time without a warehouse and we must
+			// set it
 		} else if (eco->dismantle_grace_time_ == std::numeric_limits<int32_t>::max()) {
 
 			// constructionsites
@@ -2267,27 +2248,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 					eco->dismantle_grace_time_ = gametime + 60 * 60 * 1000;  // one hour should be enough
 				} else {  // other constructionsites, usually new (standalone) constructionsites
 					eco->dismantle_grace_time_ =
-					   gametime + 30 * 1000 +  // very shot time is enough
+					   gametime + 30 * 1000 +            // very shot time is enough
 					   (eco->flags.size() * 30 * 1000);  // + 30 seconds for every flag in economy
 				}
 
-			// buildings
+				// buildings
 			} else {
-
-				//occupied military buildings get special treatment
-				//(extended grace time)
-				bool occupied_military_ = false;
-				Building* b = flag.get_building();
-				if (upcast(MilitarySite, militb, b)) {
-					if (militb->stationed_soldiers().size() > 0) {
-						occupied_military_ = true;
-					}
-				}
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time_ =
 					   (gametime + 20 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
-					checkradius += 3;
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time_ =
@@ -2298,9 +2268,17 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			// we have passed grace_time - it is time to dismantle
 		} else {
 			last_attempt_ = true;
-			//we increase a check radius in last attempt
+			// we increase a check radius in last attempt
 			checkradius += 2;
 		}
+
+		// and bonus for occupied military buildings:
+		if (occupied_military_) {
+			checkradius += 4;
+		}
+
+		// and generally increase radius for unconnected buildings
+		checkradius += 2;
 	}
 
 	Map& map = game().map();
@@ -2456,7 +2434,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		NearFlag& nf = nearflags.at(i);
 
 		// terminating looping if reduction is too low (nearflags are sorted by reduction)
-		if ((nf.cost_ - nf.distance_) < minred) {
+		if ((nf.cost_ - nf.distance_) < min_reduction) {
 			return false;
 		}
 
@@ -2464,7 +2442,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// usually we allow connecting only if both flags are closer then 'checkradius-2'
 		// with exeption the flag belongs to a small economy (typically a new building not connected
 		// yet)
-		if ((nf.cost_ - nf.distance_) >= minred && nf.distance_ >= 2 &&
+		if ((nf.cost_ - nf.distance_) >= min_reduction && nf.distance_ >= 2 &&
 		    nf.distance_ < checkradius - 2) {
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
@@ -2481,7 +2459,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check);
 
 			if (pathcost >= 0) {
-				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minred) {
+				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > min_reduction) {
 					game().send_player_build_road(player_number(), path);
 					return true;
 				}
@@ -2551,12 +2529,10 @@ bool DefaultAI::check_economies() {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_productionsites(int32_t gametime) {
-	if ((next_productionsite_check_due_ > gametime) || productionsites.empty()) {
+bool DefaultAI::check_productionsites(uint32_t gametime) {
+	if (productionsites.empty()) {
 		return false;
 	}
-
-	next_productionsite_check_due_ = gametime + 4000;
 
 	bool changed = false;
 	// Reorder and set new values; - better now because there are multiple returns in the function
@@ -2695,9 +2671,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Wells handling
 	if (site.bo->mines_water_) {
-		if (site.unoccupied_till_ + 6 * 60 * 1000 < game().get_gametime() &&
+		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
-			site.bo->last_dismantle_time_ = game().get_gametime();
+			site.bo->last_dismantle_time_ = gametime;
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 
@@ -2742,7 +2718,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			return true;
 		}
 
-		if (site.unoccupied_till_ + 6 * 60 * 1000 < game().get_gametime() &&
+		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
 			// it is possible that there are stones but quary is not able to mine them
 			site.bo->last_dismantle_time_ = game().get_gametime();
@@ -2760,7 +2736,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	    &&
 	    site.bo->production_hint_ == -1  // not a renewing building (forester...)
 	    &&
-	    site.unoccupied_till_ + 10 * 60 * 1000 < game().get_gametime()  // > 10 minutes old
+	    site.unoccupied_till_ + 10 * 60 * 1000 < gametime  // > 10 minutes old
 	    &&
 	    site.site->can_start_working()  // building is occupied
 	    &&
@@ -2831,7 +2807,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 		// logs can be stored also in productionsites, they are counted as on stock
 		// but are no available for random production site
-		int16_t score = site.bo->stocklevel_ - productionsites.size() * 5;
+		int16_t score = site.bo->stocklevel_ - productionsites.size() * 2;
 
 		if (score > 200 && site.bo->cnt_built_ > site.bo->cnt_target_) {
 
@@ -2860,14 +2836,16 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
-	if (gametime < next_marine_decisions_due) {
+	if (gametime < taskDue[ScheduleTasks::KMarineDecisions]) {
 		return false;
 	}
-	next_marine_decisions_due = gametime + kMarineDecisionInterval;
 
 	if (!seafaring_economy) {
+		taskDue[ScheduleTasks::KMarineDecisions] = std::numeric_limits<uint32_t>::max();
 		return false;
 	}
+
+	taskDue[ScheduleTasks::KMarineDecisions] = gametime + kMarineDecisionInterval;
 
 	// getting some base statistics
 	player_ = game().get_player(player_number());
@@ -2918,7 +2896,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 		}
 	}
 
-	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
+	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2};
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
@@ -2970,15 +2948,16 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(uint32_t const gametime) {
-	if (gametime < next_ship_check_due) {
+	if (gametime < taskDue[ScheduleTasks::kCheckShips]) {
 		return false;
 	}
-
-	next_ship_check_due = gametime + kShipCheckInterval;
 
 	if (!seafaring_economy) {
+		taskDue[ScheduleTasks::kCheckShips] = std::numeric_limits<int32_t>::max();
 		return false;
 	}
+
+	bool action_taken = false;
 
 	if (!allships.empty()) {
 		// iterating over ships and executing what is needed
@@ -3001,6 +2980,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// if ships is waiting for command
 			if (i->waiting_for_command_) {
 				expedition_management(*i);
+				action_taken = true;
 			}
 		}
 	}
@@ -3036,6 +3016,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		marineTaskQueue_.pop_back();
 	}
 
+	if (action_taken) {
+		taskDue[ScheduleTasks::kCheckShips] = gametime + kShipCheckInterval;
+	} else {
+		taskDue[ScheduleTasks::kCheckShips] = gametime + 3 * kShipCheckInterval;
+	}
+
 	return true;
 }
 
@@ -3045,11 +3031,11 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_mines_(int32_t const gametime) {
-	if ((next_mine_check_due_ > gametime) || mines_.empty())
+bool DefaultAI::check_mines_(uint32_t const gametime) {
+	if (mines_.empty()) {
 		return false;
+	}
 
-	next_mine_check_due_ = gametime + 7000;  // 7 seconds is enough
 	// Reorder and set new values; - due to returns within the function
 	mines_.push_back(mines_.front());
 	mines_.pop_front();
@@ -3228,14 +3214,14 @@ uint32_t DefaultAI::get_warehoused_stock(WareIndex wt) {
 
 // this function only manipulates with trainingsites' inputs priority
 // decreases it when too many unoccupied military buildings
-bool DefaultAI::check_trainingsites(int32_t gametime) {
-	if (next_trainingsites_check_due_ > gametime) {
+bool DefaultAI::check_trainingsites(uint32_t gametime) {
+	if (taskDue[ScheduleTasks::kCheckTrainingsites] > gametime) {
 		return false;
 	}
 	if (!trainingsites.empty()) {
-		next_trainingsites_check_due_ = gametime + kTrainingSitesCheckInterval;
+		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + kTrainingSitesCheckInterval;
 	} else {
-		next_trainingsites_check_due_ = gametime + 3 * kTrainingSitesCheckInterval;
+		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + 5 * kTrainingSitesCheckInterval;
 	}
 
 	uint8_t new_priority = DEFAULT_PRIORITY;
@@ -3264,13 +3250,13 @@ bool DefaultAI::check_trainingsites(int32_t gametime) {
  *
  * \returns true if something was changed
  */
-bool DefaultAI::check_militarysites(int32_t gametime) {
-	if (next_militarysite_check_due_ > gametime) {
+bool DefaultAI::check_militarysites(uint32_t gametime) {
+	if (taskDue[ScheduleTasks::kCheckMilitarysites] > gametime) {
 		return false;
 	}
 
 	// just to be sure the value is reset
-	next_militarysite_check_due_ = gametime + 4 * 1000;  // 4 seconds is really fine
+	taskDue[ScheduleTasks::kCheckMilitarysites] = gametime + 4 * 1000;  // 4 seconds is really fine
 	// even if there are no finished & attended military sites, probably there are ones just in
 	// construction
 	unstationed_milit_buildings_ = 0;
@@ -3385,7 +3371,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
-	next_militarysite_check_due_ = gametime + 5 * 1000;  // 10 seconds is really fine
+	taskDue[ScheduleTasks::kCheckMilitarysites] = gametime + 5 * 1000;  // 10 seconds is really fine
 	return changed;
 }
 
@@ -3833,7 +3819,7 @@ void DefaultAI::gain_building(Building& b) {
 		}
 
 		// Let defaultAI try to directly connect the constructionsite
-		next_road_due_ = game().get_gametime();
+		taskDue[ScheduleTasks::kRoadCheck] = game().get_gametime();
 	} else {
 		++bo.cnt_built_;
 
@@ -3989,9 +3975,6 @@ void DefaultAI::lose_building(const Building& b) {
 			}
 		}
 	}
-
-	m_buildable_changed = true;
-	m_mineable_changed = true;
 }
 
 // Checks that supply line exists for given building.
@@ -4043,7 +4026,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// Only useable, if it owns at least one militarysite
 	if (militarysites.empty()) {
-		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
 		return false;
 	}
 
@@ -4092,7 +4075,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	if (current_margin < needed_margin) {  // no attacking!
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
 		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
-		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
 		return false;
 	}
 
@@ -4131,7 +4114,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// if we cannot attack anybody, terminating...
 	if (!any_attackable) {
-		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
 		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
 		return false;
@@ -4245,7 +4228,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		game().send_player_enemyflagaction(best_wh_target->base_flag(), pn, attackers);
 		last_attack_target_ = best_wh_target->get_position();
-		next_attack_consideration_due_ = (gametime % 10 + 10) * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = (gametime % 10 + 10) * 1000 + gametime;
 		next_attack_waittime_ = 10;
 		return true;
 
@@ -4261,11 +4244,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		game().send_player_enemyflagaction(best_ms_target->base_flag(), pn, attackers);
 		last_attack_target_ = best_ms_target->get_position();
-		next_attack_consideration_due_ = (gametime % 10 + 10) * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = (gametime % 10 + 10) * 1000 + gametime;
 		next_attack_waittime_ = 10;
 		return true;
 	} else {
-		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
+		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
 		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
 		return false;
@@ -4274,7 +4257,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 // This runs once in 15 minutes, and adjust wares targets based on number of
 // productionsites and ports
-void DefaultAI::review_wares_targets(int32_t const gametime) {
+void DefaultAI::review_wares_targets(uint32_t const gametime) {
 
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
@@ -4300,13 +4283,35 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	}
 }
 
+// run over dueTasks map and returns task with lower duetime
+DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(uint32_t const gametime) {
+
+	uint32_t oldestTaskTime = gametime;             // we are looking for jobs due before now
+	ScheduleTasks DueTask = ScheduleTasks::kIdle;  // default
+	taskDue[ScheduleTasks::kIdle] = gametime;
+
+	for (std::pair<ScheduleTasks, uint32_t> task : taskDue) {
+		if (task.second < oldestTaskTime) {
+			oldestTaskTime = task.second;
+			DueTask = task.first;
+		}
+	}
+	return DueTask;
+}
+
 // This prints some basic statistics during a game to the command line -
 // missing materials and counts of different types of buildings.
 // The main purpose of this is when a game creator needs to finetune a map
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats() {
+void DefaultAI::print_stats(uint32_t const gametime) {
+
+	if (!kPrintStats) {
+		taskDue[ScheduleTasks::kPrintStats] = std::numeric_limits<int32_t>::max();
+		return;
+	}
+	taskDue[ScheduleTasks::kPrintStats] = gametime + 30 * 60 * 1000;
 
 	PlayerNumber const pn = player_number();
 
