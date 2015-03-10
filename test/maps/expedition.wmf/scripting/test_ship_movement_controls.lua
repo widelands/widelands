@@ -1,19 +1,22 @@
 run(function()
-   -- NOCOM
-    game.desired_speed = 15 * 1000
+    game.desired_speed = 30 * 1000
 	p1:place_bob("ship", map:get_field(10, 10))
 
 	port = map:get_field(16, 16).immovable
  	port:set_wares("log", 10) -- no sense to wait
 	port:set_wares("blackwood", 10) 
 	 
+   	--getting table with all our ships (single one only)
    	ships = p1:get_ships()
- 	
-   	--should contain 1 item (1 ship)
+
+	--veryfing that ship is indeed placed where should be :)
+	assert_equal(10,ships[1].field.x)
+	assert_equal(10,ships[1].field.y)
+		 	
+   	--ships table should contain 1 item (1 ship)
   	assert_equal(1, #ships)
 
   	--ship has no wares on it
-  	--(at the same time testing that that array really contains a ship)
   	assert_equal(0,ships[1]:get_wares())
   	
   	--no destination is set
@@ -22,12 +25,18 @@ run(function()
   	--ships in transport state (=0)
   	assert_equal(0,ships[1].status)
 
+	--the  warehouse is probably not in expedition status :)
+	assert(not map:get_field(8, 18).immovable.expedition_in_progress)
+
 	--starting prepartion for expedition
-   	port:start_expedition()	
+	assert(not port.expedition_in_progress)
+   	port:start_expedition()
+   	sleep (300)
+	assert(port.expedition_in_progress)   		
    	
 	--ships changes status when exp ready
    	while ships[1].status == 0 do sleep(2000) end
-
+   	
  	--sending NW and verifying
    	ships[1].scout_direction=6
    	sleep(3000)
@@ -37,7 +46,7 @@ run(function()
    		sleep (2000)
    	end
 
-	--now ships stops nearby coast, sending it back
+	--now ships stops nearby NW coast, so sending it back
 	ships[1].scout_direction=3
 	sleep(3000)
 	assert_equal(3, ships[1].scout_direction)
@@ -45,7 +54,7 @@ run(function()
 	--waiting till it stops (value=255)
 	while ships[1].scout_direction <255 do sleep(2000) end
 	
-	--sending scouting the island
+	--sending to scout the island
 	ships[1].island_scout_direction=1;
 	sleep(3000)	
 	assert_equal(1, ships[1].island_scout_direction)

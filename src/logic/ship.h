@@ -205,7 +205,7 @@ struct Ship : Bob {
 	void exp_scout_direction(Game &, uint8_t);
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, ScoutingDirection);
-	uint8_t get_scout_direction();//NOCOM
+	uint8_t get_scout_direction();
 	uint8_t get_island_explore_direction();
 
 	void exp_cancel (Game &);

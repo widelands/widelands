@@ -687,7 +687,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_portdock(lua_State* L); //NOCOM
+	int get_portdock(lua_State* L);
+	int get_expedition_in_progress(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -699,13 +700,12 @@ public:
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
 	int start_expedition(lua_State*);
+	int cancel_expedition(lua_State*);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse)
-	//static int start_expedition(lua_State* L, //NOCOM
-		//Widelands::EditorGameBase &);
 };
 
 
@@ -809,6 +809,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_field(lua_State *);
 	int has_caps(lua_State *);
 
 	/*
@@ -889,9 +890,9 @@ public:
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_status(lua_State* L);
-	int get_scout_direction(lua_State* L);	
+	int get_scout_direction(lua_State* L);
 	int set_scout_direction(lua_State* L);
-	int get_island_scout_direction(lua_State* L);	
+	int get_island_scout_direction(lua_State* L);
 	int set_island_scout_direction(lua_State* L);
 	/*
 	 * Lua methods

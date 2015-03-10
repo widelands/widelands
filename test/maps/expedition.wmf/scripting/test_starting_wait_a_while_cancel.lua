@@ -9,7 +9,7 @@ run(function()
    stable_save("cancel_in_port")
    assert_equal(1, p1:get_workers("builder"))
 
-   cancel_expedition_in_port()
+   port:cancel_expedition()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
