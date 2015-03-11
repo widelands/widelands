@@ -560,7 +560,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 				if (idx < 0) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
-				egbase.create_bob(Widelands::Coords(x, y), idx);
+				egbase.create_ship(Widelands::Coords(x, y), idx);
 			}
 		}
 	}

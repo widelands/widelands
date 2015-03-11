@@ -140,20 +140,16 @@ public:
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
 
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
-	Bob& create_bob(Coords,
-						 int,
-						 MapObjectDescr::OwnerType type = MapObjectDescr::OwnerType::kWorld,
-						 Player* owner = nullptr);
-	Bob& create_bob(Coords,
-	                const std::string& name,
-						 MapObjectDescr::OwnerType type = MapObjectDescr::OwnerType::kWorld,
-	                Player* owner = nullptr);
+	Bob& create_critter(Coords, int bob_type_idx, Player* owner = nullptr);
+	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
 										 uint32_t idx,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 	Immovable& create_immovable(Coords,
 										 const std::string& name,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	Bob& create_ship(Coords, int ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(Coords, const std::string& name, Player* owner = nullptr);
 
 	int32_t get_gametime() const {
 		return gametime_;

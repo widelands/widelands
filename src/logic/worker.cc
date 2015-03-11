@@ -887,11 +887,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
  */
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
-	game.create_bob
-		(get_position(), state.ivar2,
-		 state.svar1 == "world" ?
-			 MapObjectDescr::OwnerType::kWorld :
-			 MapObjectDescr::OwnerType::kTribe);
+	if (state.svar1 == "world")
+		game.create_critter(get_position(), state.ivar2);
+	else
+		game.create_ship(get_position(), state.ivar2);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;

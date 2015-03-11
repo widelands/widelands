@@ -892,7 +892,7 @@ void ImmovableProgram::ActTransform::execute
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
 		if (bob) {
-			game.create_bob(c, type_name, MapObjectDescr::OwnerType::kTribe, player);
+			game.create_ship(c, type_name, player);
 		} else {
 			Immovable & imm = game.create_immovable(c, type_name, owner_type);
 			if (player)

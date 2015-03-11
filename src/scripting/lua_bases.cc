@@ -559,9 +559,9 @@ int LuaPlayerBase::place_bob(lua_State * L) {
 	Player& player = get(L, egbase);
 	int ship_index = player.tribe().ship();
 	const ShipDescr* descr = egbase.tribes().get_ship_descr(ship_index);
-	Bob& bob = egbase.create_bob(c->coords(), descr->name(), MapObjectDescr::OwnerType::kTribe, &player);
+	Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
 
-	LuaMaps::upcasted_map_object_to_lua(L, &bob);
+	LuaMaps::upcasted_map_object_to_lua(L, &ship);
 
 	return 1;
 }

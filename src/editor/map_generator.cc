@@ -108,13 +108,10 @@ void MapGenerator::generate_bobs
 			 MapObjectDescr::OwnerType::kWorld);
 
 	if (set_moveable && (num = bobCategory->num_critters()))
-		egbase_.create_bob
-			(fc,
-			 egbase_.world().get_bob
-			 	(bobCategory->get_critter
-			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-			 	 .c_str()),
-			 MapObjectDescr::OwnerType::kWorld);
+		egbase_.create_critter(
+		   fc, egbase_.world().get_bob(
+		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
+		             .c_str()));
 }
 
 void MapGenerator::generate_resources(uint32_t const* const random1,

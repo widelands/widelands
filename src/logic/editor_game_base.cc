@@ -315,54 +315,29 @@ Building & EditorGameBase::warp_dismantlesite
 
 /**
  * Instantly create a bob at the given x/y location.
- *
- * idx is the bob type.
  */
 Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owner)
 {
 	return descr.create(*this, owner, c);
 }
 
+/**
+ * Instantly create a critter at the given x/y location.
+ *
+ * idx is the bob type.
+ */
 
-Bob & EditorGameBase::create_bob
-	(Coords const c,
-	 int const idx, MapObjectDescr::OwnerType type, Player * owner)
-{
-	// NOCOM(GunChleoc): split into critter and ship
-	if (type == MapObjectDescr::OwnerType::kWorld) {
-		const BobDescr& descr = *world().get_bob_descr(idx);
-		return create_bob(c, descr, owner);
-	} else {
-		const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(idx));
-		return create_bob(c, *descr, owner);
-	}
+Bob& EditorGameBase::create_critter(Coords const c, int const bob_type_idx, Player* owner) {
+	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
 }
 
-Bob & EditorGameBase::create_bob
-	(Coords c, const std::string & name, MapObjectDescr::OwnerType type,
-	 Player * owner)
-{
-	// NOCOM(GunChleoc): split into critter and ship
-	if (type == MapObjectDescr::OwnerType::kWorld) {
-		const BobDescr* descr = world().get_bob_descr(name);
-		if (descr == nullptr)
-			throw GameDataError
-				("create_bob(%i,%i,%s,%s): critter not found",
-				 c.x, c.y, name.c_str(), owner->get_name().c_str());
-		return create_bob(c, *descr, owner);
-	} else {
-		try {
-			int idx = tribes().safe_ship_index(name);
-			const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(idx));
-			return create_bob(c, *descr, owner);
-		} catch (const GameDataError& e) {
-			throw GameDataError
-				("create_bob(%i,%i,%s,%s): ship not found: %s",
-				 c.x, c.y, name.c_str(), owner->get_name().c_str(), e.what());
-		}
-	}
+Bob& EditorGameBase::create_critter(Coords c, const std::string& name, Player* owner) {
+	const BobDescr* descr = world().get_bob_descr(name);
+	if (descr == nullptr)
+		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
+		                    owner->get_name().c_str());
+	return create_bob(c, *descr, owner);
 }
-
 
 /*
 ===============
@@ -400,6 +375,27 @@ Immovable & EditorGameBase::create_immovable
 			 c.x, c.y, name.c_str(), (type == MapObjectDescr::OwnerType::kTribe) ? "tribes" : "world");
 
 	return create_immovable(c, idx, type);
+}
+
+/**
+ * Instantly create a ship at the given x/y location.
+ *
+ * idx is the bob type.
+ */
+
+Bob& EditorGameBase::create_ship(Coords const c, int const ship_type_idx, Player* owner) {
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
+	return create_bob(c, *descr, owner);
+}
+
+Bob& EditorGameBase::create_ship(Coords c, const std::string& name, Player* owner) {
+	try {
+		int idx = tribes().safe_ship_index(name);
+		return create_ship(c, idx, owner);
+	} catch (const GameDataError& e) {
+		throw GameDataError("create_ship(%i,%i,%s,%s): ship not found: %s", c.x, c.y, name.c_str(),
+		                    owner->get_name().c_str(), e.what());
+	}
 }
 
 /*
