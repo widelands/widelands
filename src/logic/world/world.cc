@@ -125,7 +125,7 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 	return *editor_immovable_categories_;
 }
 
-int32_t World::safe_resource_index(const char* const resourcename) const {
+ResourceIndex World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
@@ -158,19 +158,19 @@ int32_t World::get_nr_bobs() const {
 	return bobs_->get_nitems();
 }
 
-int32_t World::get_immovable_index(const std::string& name) const {
+WareIndex World::get_immovable_index(const std::string& name) const {
 	return immovables_->get_index(name);
 }
 
-int32_t World::get_nr_immovables() const {
+WareIndex World::get_nr_immovables() const {
 	return immovables_->get_nitems();
 }
 
-ImmovableDescr const* World::get_immovable_descr(int32_t const index) const {
+ImmovableDescr const* World::get_immovable_descr(WareIndex const index) const {
 	return immovables_->get(index);
 }
 
-int32_t World::get_resource(const char* const name) const {
+ResourceIndex World::get_resource(const char* const name) const {
 	return resources_->get_index(name);
 }
 
@@ -179,7 +179,7 @@ ResourceDescription const* World::get_resource(ResourceIndex const res) const {
 	return resources_->get(res);
 }
 
-int32_t World::get_nr_resources() const {
+ResourceIndex World::get_nr_resources() const {
 	return resources_->get_nitems();
 }
 

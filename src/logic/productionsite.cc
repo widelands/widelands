@@ -77,14 +77,14 @@ ProductionSiteDescr::ProductionSiteDescr
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
 				WareIndex idx = egbase.tribes().ware_index(output);
-				if (idx != -1) {
+				if (idx != INVALID_INDEX) {
 					if (m_output_ware_types.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
 					}
 					m_output_ware_types.insert(idx);
 				} else {
 					idx = egbase.tribes().worker_index(output);
-					if (idx != -1) {
+					if (idx != INVALID_INDEX) {
 						if (m_output_worker_types.count(idx)) {
 							throw wexception("this worker type has already been declared as an output");
 						}

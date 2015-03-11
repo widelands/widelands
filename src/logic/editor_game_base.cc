@@ -390,12 +390,10 @@ Immovable & EditorGameBase::create_immovable
 Immovable & EditorGameBase::create_immovable
 	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
-	const int32_t idx =
-		(type == MapObjectDescr::OwnerType::kTribe) ?
-		tribes().immovable_index(name.c_str())
-		:
-		world().get_immovable_index(name.c_str());
-	if (idx < 0)
+	const auto idx = (type == MapObjectDescr::OwnerType::kTribe) ?
+	                    tribes().immovable_index(name.c_str()) :
+	                    world().get_immovable_index(name.c_str());
+	if (idx == INVALID_INDEX)
 		throw wexception
 			("EditorGameBase::create_immovable(%i, %i): %s is not defined for "
 			 "%s",

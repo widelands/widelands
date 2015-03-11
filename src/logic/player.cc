@@ -1150,8 +1150,8 @@ void Player::sample_statistics()
 
 		for (Widelands::Warehouse * warehouse : warehouses)	{
 			const Widelands::WareList& wares = warehouse->get_wares();
-			for (uint32_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(WareIndex(static_cast<size_t>(id)));
+			for (size_t id = 0; id < stocks.size(); ++id) {
+				stocks[id] += wares.stock(WareIndex(id));
 			}
 		}
 	}

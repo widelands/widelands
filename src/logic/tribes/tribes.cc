@@ -206,7 +206,7 @@ BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const
 	return result;
 }
 
-int Tribes::safe_immovable_index(const std::string& immovablename) const {
+WareIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
 	const int result = immovable_index(immovablename);
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
@@ -214,7 +214,7 @@ int Tribes::safe_immovable_index(const std::string& immovablename) const {
 	return result;
 }
 
-int Tribes::safe_ship_index(const std::string& shipname) const {
+WareIndex Tribes::safe_ship_index(const std::string& shipname) const {
 	const int result = ship_index(shipname);
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
@@ -222,7 +222,7 @@ int Tribes::safe_ship_index(const std::string& shipname) const {
 	return result;
 }
 
-int Tribes::safe_tribe_index(const std::string& tribename) const {
+WareIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 	const int result = tribe_index(tribename);
 	if (!tribe_exists(result)) {
 		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
@@ -248,24 +248,18 @@ WareIndex Tribes::safe_worker_index(const std::string& workername) const {
 
 
 BuildingIndex Tribes::building_index(const std::string& buildingname) const {
-	// NOCOM(GunChleoc): We have a mix of data types here (BuildingIndex is unsigned, WareIndex is signed).
-	BuildingIndex result = INVALID_INDEX;
-	int32_t index = buildings_->get_index(buildingname);
-	if (index != -1) {
-		result = static_cast<BuildingIndex>(index);
-	}
-	return result;
+	return buildings_->get_index(buildingname);
 }
 
-int Tribes::immovable_index(const std::string& immovablename) const {
+WareIndex Tribes::immovable_index(const std::string& immovablename) const {
 	return immovables_->get_index(immovablename);
 }
 
-int Tribes::ship_index(const std::string& shipname) const {
+WareIndex Tribes::ship_index(const std::string& shipname) const {
 	return ships_->get_index(shipname);
 }
 
-int Tribes::tribe_index(const std::string& tribename) const {
+WareIndex Tribes::tribe_index(const std::string& tribename) const {
 	return tribes_->get_index(tribename);
 }
 
@@ -283,11 +277,11 @@ const BuildingDescr* Tribes::get_building_descr(BuildingIndex buildingindex) con
 	return buildings_->get_mutable(buildingindex);
 }
 
-const ImmovableDescr* Tribes::get_immovable_descr(int immovableindex) const {
+const ImmovableDescr* Tribes::get_immovable_descr(WareIndex immovableindex) const {
 	return immovables_->get_mutable(immovableindex);
 }
 
-const ShipDescr* Tribes::get_ship_descr(int shipindex) const {
+const ShipDescr* Tribes::get_ship_descr(WareIndex shipindex) const {
 	return ships_->get_mutable(shipindex);
 }
 
@@ -300,7 +294,7 @@ const WorkerDescr* Tribes::get_worker_descr(WareIndex workerindex) const {
 	return workers_->get_mutable(workerindex);
 }
 
-const TribeDescr* Tribes::get_tribe_descr(int tribeindex) const {
+const TribeDescr* Tribes::get_tribe_descr(WareIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
