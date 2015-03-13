@@ -3394,8 +3394,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
 /* RST //
 	.. attribute:: status
 
-		(RW) returns/sets one of statuses as defined in enum in ship.h
-		(integer)
+		(RW) returns/sets one of directions (e,w,ne,nw,se,sw) or nil
 
 */
 int LuaShip::get_status(lua_State* L) {
@@ -3408,7 +3407,29 @@ int LuaShip::get_scout_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 	if (upcast(Game, game, &get_egbase(L))) {
-		lua_pushuint32(L, static_cast<uint32_t>(ship->get_scout_direction()));
+		const uint8_t dir = ship->get_scout_direction();
+		switch (dir) {
+			case 1:
+				lua_pushstring(L, "ne");
+				break;
+			case 2:
+				lua_pushstring(L, "e");
+				break;
+			case 3:
+				lua_pushstring(L, "se");
+				break;
+			case 4:
+				lua_pushstring(L, "sw");
+				break;
+			case 5:
+				lua_pushstring(L, "w");
+				break;
+			case 6:
+				lua_pushstring(L, "nw");
+				break;
+			default:
+				return 0;
+			}
 		return 1;
 	}
 	return 0;
@@ -3416,11 +3437,29 @@ int LuaShip::get_scout_direction(lua_State* L) {
 
 int LuaShip::set_scout_direction(lua_State* L) {
 
-	uint8_t dir = static_cast<uint8_t>(luaL_checkuint32(L, -1));
 	Ship* ship =  get(L, get_egbase(L));
 
 	if (upcast(Game, game, &get_egbase(L))) {
-		game->send_player_ship_scout_direction(*ship, dir);
+		std::string dir = luaL_checkstring(L,3);
+		uint8_t dir_int=255;
+		
+		if ( dir == "ne") {
+			dir_int = 1;
+		}else if (dir == "e") {
+			dir_int = 2;
+		}else if (dir == "se") {			
+			dir_int = 3;
+		}else if (dir == "sw") {
+			dir_int = 4;
+		}else if (dir == "w") {
+			dir_int = 5;
+		}else if (dir == "nw") {
+			dir_int = 6;
+		} else {
+			return 0;
+		}
+		
+		 game->send_player_ship_scout_direction(*ship, dir_int);
 		return 1;
 	}
 	return 0;
@@ -3431,8 +3470,7 @@ int LuaShip::set_scout_direction(lua_State* L) {
 	.. attribute:: island_scout_direction
 
 		(RW) actual direction if the ship sails around an island.
-		Sets/returns int as defined in enum in logic/ship.h
-		now: CounterClockwise = 0, Clockwise = 1
+		Sets/returns cw, ccw or nil
 
 */
 // UNTESTED
@@ -3440,7 +3478,14 @@ int LuaShip::get_island_scout_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 	if (upcast(Game, game, &get_egbase(L))) {
-		lua_pushuint32(L, static_cast<uint32_t>(ship->get_island_explore_direction()));
+		const uint8_t dir = ship->get_island_explore_direction();
+		if (dir == 0){
+			lua_pushstring(L, "ccw");
+		} else if (dir == 1) {
+			lua_pushstring(L, "cw");
+		} else {
+			return 0;
+		}
 		return 1;
 	}
 	return 0;
@@ -3448,11 +3493,17 @@ int LuaShip::get_island_scout_direction(lua_State* L) {
 
 int LuaShip::set_island_scout_direction(lua_State* L) {
 
-	uint8_t dir = static_cast<uint8_t>(luaL_checkuint32(L, -1));
 	Ship* ship =  get(L, get_egbase(L));
 
 	if (upcast(Game, game, &get_egbase(L))) {
-		game->send_player_ship_explore_island(*ship, static_cast<Widelands::ScoutingDirection>(dir));
+		std::string dir = luaL_checkstring(L, 3);
+		if (dir == "ccw"){
+			 game->send_player_ship_explore_island(*ship,  ScoutingDirection::kCounterClockwise);
+		} else if (dir == "cw") {
+			 game->send_player_ship_explore_island(*ship, ScoutingDirection::kClockwise);
+		} else {
+			return 0;
+		}
 		return 1;
 	}
 	return 0;

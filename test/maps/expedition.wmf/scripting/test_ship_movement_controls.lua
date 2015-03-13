@@ -38,31 +38,31 @@ run(function()
    	while ships[1].status == 0 do sleep(2000) end
    	
  	--sending NW and verifying
-   	ships[1].scout_direction=6
-   	sleep(3000)
-  	assert_equal(6, ships[1].scout_direction)
-  	
-   	while ships[1].scout_direction == 6 do
+   	ships[1].scout_direction="nw"
+   	sleep(6000)
+  	assert_equal("nw", ships[1].scout_direction)
+   	
+   	while ships[1].scout_direction == "nw" do
    		sleep (2000)
    	end
 
 	--now ships stops nearby NW coast, so sending it back
-	ships[1].scout_direction=3
+	ships[1].scout_direction="se"
 	sleep(3000)
-	assert_equal(3, ships[1].scout_direction)
+	assert_equal("se", ships[1].scout_direction)
 	
-	--waiting till it stops (value=255)
-	while ships[1].scout_direction <255 do sleep(2000) end
+	--waiting till it stops (no direction/nil is returned)
+	while ships[1].scout_direction do sleep(2000) end
 	
 	--sending to scout the island
-	ships[1].island_scout_direction=1;
+	ships[1].island_scout_direction="ccw";
 	sleep(3000)	
-	assert_equal(1, ships[1].island_scout_direction)
+	assert_equal("ccw", ships[1].island_scout_direction)
 	
 	--fine, now change the direction
-	ships[1].island_scout_direction=0;
+	ships[1].island_scout_direction="cw";
 	sleep(3000)	
-	assert_equal(0, ships[1].island_scout_direction)
+	assert_equal("cw", ships[1].island_scout_direction)
 
     -- wait till it finds a port
     wait_for_message("Port Space Found")	
