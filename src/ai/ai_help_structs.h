@@ -352,6 +352,7 @@ struct BuildingObserver {
 	bool mountain_conqueror_;  // military building built near mountains
 	uint32_t prohibited_till_;  // do not build before (ms)
 	uint32_t forced_after_;     // do not wait until ware is needed
+	uint8_t ts_type_;
 
 	bool unoccupied_;  //
 
@@ -428,5 +429,22 @@ struct WareObserver {
 	uint8_t consumers_;
 	uint8_t preciousness_;
 };
+
+struct enemySiteObserver {
+	bool warehouse_;
+	uint8_t attack_soldiers;
+	uint8_t defenders;
+	uint8_t stationed_soldiers;
+	uint32_t last_time_attackable;
+	uint32_t last_tested;
+	int16_t score;
+	bool warehouse;	
+	Widelands::ExtendedBool mines_nearby;
+	int16_t no_attack_score;
+	
+	enemySiteObserver() : warehouse_(false), attack_soldiers(0), stationed_soldiers(0), last_time_attackable(std::numeric_limits<uint32_t>::max()), last_tested(0), score(0), mines_nearby(Widelands::ExtendedBool::kUnset), no_attack_score(0) {}
+};
+	
+	
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

@@ -93,6 +93,10 @@ struct BuildingHints {
 	uint8_t get_mines_percent() const {
 		return mines_percent_;
 	}
+	
+	uint8_t get_ts_type() const {
+		return ts_type_;
+	}
 
 private:
 	std::string renews_map_resource_;
@@ -109,6 +113,7 @@ private:
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	uint8_t mines_percent_;
+	uint8_t ts_type_;	
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

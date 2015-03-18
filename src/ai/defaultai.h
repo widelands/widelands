@@ -96,7 +96,9 @@ struct DefaultAI : ComputerPlayer {
 		kPrintStats,
 		kIdle,
 		kCheckMilitarysites,
-		kCheckTrainingsites
+		kCheckTrainingsites,
+		kCountMilitaryVacant,
+		kCheckEnemySites
 	};
 	enum class MilitaryStrategy : uint8_t {
 		kNoNewMilitary,
@@ -195,12 +197,14 @@ private:
 	bool check_militarysites(uint32_t);
 	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
+	bool check_enemy_sites(uint32_t);
 	void print_stats(uint32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
+	void count_military_vacant_positions();
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible
@@ -251,6 +255,10 @@ private:
 	uint32_t num_milit_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
+	
+	uint16_t last_attacked_player_;
+	//check ms in this interval - will auto-adjust
+	uint32_t enemysites_check_delay_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -268,6 +276,8 @@ private:
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
 	std::map<ScheduleTasks, uint32_t> taskDue;
+	std::map<uint32_t, enemySiteObserver> enemy_sites;
+	std::multimap<uint8_t, uint32_t> preffered_targets;
 
 	std::vector<WareObserver> wares;
 
@@ -284,10 +294,10 @@ private:
 	// when territory is expanded for every candidate field benefits are calculated
 	// but need for water, space, mines can vary
 	// so if 255 = resource is needed, 0 = not needed
-	uint8_t resource_necessity_territory_;
-	uint8_t resource_necessity_mines_;
-	uint8_t resource_necessity_stones_;
-	uint8_t resource_necessity_water_;
+	int32_t resource_necessity_territory_;
+	int32_t resource_necessity_mines_;
+	int32_t resource_necessity_stones_; //NOCOM
+	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
@@ -303,6 +313,12 @@ private:
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
+	int32_t vacant_mil_positions_; //sum of vacant positions in militarysites and training sites
+	uint8_t ts_type1_count_;
+	uint8_t ts_type1_const_count_;
+	uint8_t ts_type2_count_;
+	uint8_t ts_type2_const_count_;
+	uint8_t ts_without_trainers_;
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 

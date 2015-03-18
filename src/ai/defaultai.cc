@@ -62,7 +62,7 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 5 * 60 * 1000;
 
 // this is intended for map developers, by default should be off
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true; //NOCOM
 
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
@@ -85,6 +85,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      num_milit_constructionsites(0),
      num_prod_constructionsites(0),
      num_ports(0),
+     last_attacked_player_(std::numeric_limits<uint16_t>::max()),
+     enemysites_check_delay_(60),
      next_ai_think_(0),
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
@@ -92,9 +94,9 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      enemy_last_seen_(0),
      numof_warehouses_(0),
      new_buildings_stop_(false),
-     resource_necessity_territory_(255),
-     resource_necessity_mines_(255),
-     resource_necessity_stones_(255),
+     resource_necessity_territory_(100),
+     resource_necessity_mines_(100),
+     //resource_necessity_stones_(100), NOCOM
      resource_necessity_water_(0),
      resource_necessity_water_needed_(false),
      unstationed_milit_buildings_(0),
@@ -105,7 +107,13 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_attack_waittime_(10),
      seafaring_economy(false),
      colony_scan_area_(35),
-     spots_(0) {
+     spots_(0),
+     vacant_mil_positions_(0),
+     ts_type1_count_(0),
+     ts_type1_const_count_(0),
+     ts_type2_count_(0),
+     ts_type2_const_count_(0),
+     ts_without_trainers_(0) {
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
@@ -280,6 +288,9 @@ void DefaultAI::think() {
 		check_militarysites(gametime);
 	} else if (DueTask == ScheduleTasks::kCheckTrainingsites) {
 		check_trainingsites(gametime);
+	} else if (DueTask == ScheduleTasks::kCountMilitaryVacant) {
+		count_military_vacant_positions();
+		taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 90 * 1000;
 	} else if (DueTask == ScheduleTasks::kWareReview) {
 		if (check_economies()) {  // economies must be consistent
 			return;
@@ -291,6 +302,9 @@ void DefaultAI::think() {
 			return;
 		}
 		print_stats(gametime);
+	}  else if (DueTask == ScheduleTasks::kCheckEnemySites) {
+		check_enemy_sites(gametime);
+		taskDue[ScheduleTasks::kCheckEnemySites] = gametime + 19*1000;
 	}
 }
 
@@ -353,6 +367,8 @@ void DefaultAI::late_initialization() {
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
+		bo.ts_type_=bh.get_ts_type();
+		
 		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
 		}
@@ -439,6 +455,7 @@ void DefaultAI::late_initialization() {
 			for (const WareAmount& temp_input : train.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
+			bo.ts_type_ = bh.get_ts_type();
 			continue;
 		}
 
@@ -550,6 +567,8 @@ void DefaultAI::late_initialization() {
 	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
 	taskDue[ScheduleTasks::kWareReview] = 15 * 60 * 1000;
 	taskDue[ScheduleTasks::kPrintStats] = 30 * 60 * 1000;
+	taskDue[ScheduleTasks::kCountMilitaryVacant] = 10 * 60 * 1000;	
+	taskDue[ScheduleTasks::kCheckEnemySites] = 10 * 60 * 1000;
 }
 
 /**
@@ -672,6 +691,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bool military) {
 	// look if there is any unowned land nearby
 	Map& map = game().map();
+	const int32_t gametime = game().get_gametime();
 	FindNodeUnowned find_unowned(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
 	PlayerNumber const pn = player_->player_number();
@@ -687,17 +707,17 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	}
 
 	// to save some CPU
-	if ((mines_.size() > 8 && game().get_gametime() % 3 > 0) || field.unowned_land_nearby_ == 0) {
+	if ((mines_.size() > 8 && gametime % 3 > 0) || field.unowned_land_nearby_ == 0) {
 		field.unowned_mines_pots_nearby_ = 0;
 	} else {
 		uint32_t close_mines =
 		   map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_unowned_mines_pots);
 		uint32_t distant_mines =
-		   map.find_fields(Area<FCoords>(field.coords, (range + 6 < 12) ? 12 : range + 6),
+		   map.find_fields(Area<FCoords>(field.coords, (range + 6 < 14) ? 14 : range + 6),
 		                   nullptr,
 		                   find_unowned_mines_pots);
 		distant_mines = distant_mines - close_mines;
-		field.unowned_mines_pots_nearby_ = 3 * close_mines + distant_mines / 2;
+		field.unowned_mines_pots_nearby_ = 4 * close_mines + distant_mines / 2;
 		if (distant_mines > 0) {
 			field.unowned_mines_pots_nearby_ += 15;
 		}
@@ -773,7 +793,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		// counting fields with fish
 		if (field.water_nearby_ > 0 &&
-		    (field.fish_nearby_ == -1 || game().get_gametime() % 10 == 0)) {
+		    (field.fish_nearby_ == -1 || gametime % 10 == 0)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -782,7 +802,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		// counting fields with critters (game)
 		// not doing this always, this does not change fast
-		if (game().get_gametime() % 10 == 0) {
+		if (gametime % 10 == 0) {
 			map.find_bobs(Area<FCoords>(field.coords, 6), &critters_list, FindBobCritter());
 			field.critters_nearby_ = critters_list.size();
 		}
@@ -807,8 +827,14 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				if (player_immovable->owner().player_number() != pn) {
 					if (player_->is_hostile(player_immovable->owner())) {
 						field.enemy_nearby_ = true;
+						//if (upcast(MilitarySite const, bld, player_immovable)) { //NOCOM
+							//if (enemy_sites.count(coords_hash(bld->get_position()))==0) {
+								//enemy_sites[coords_hash(bld->get_position())]=enemySiteObserver();
+								//printf (" new enemysite found at %3dx %3d, sum: %3d\n",bld->get_position().x, bld->get_position().y, enemy_sites.size());
+							//}
+						//}
 					}
-					enemy_last_seen_ = game().get_gametime();
+					enemy_last_seen_ = gametime;
 
 					continue;
 				}
@@ -840,8 +866,8 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// stones are not renewable, we will count them only if previous state si nonzero
-		if (field.stones_nearby_ > 0) {
-
+		if (field.stones_nearby_ > 0 && gametime%3 == 0) {
+			
 			int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
 			field.stones_nearby_ = 0;
 
@@ -863,7 +889,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 	// we get immovables with higher radius
 	immovables.clear();
-	map.find_immovables(Area<FCoords>(field.coords, (range < 10) ? 10 : range), &immovables);
+	map.find_immovables(Area<FCoords>(field.coords, (range < 11) ? 11 : range), &immovables);
 	field.military_stationed_ = 0;
 	field.military_unstationed_ = 0;
 	field.military_in_constr_nearby_ = 0;
@@ -884,12 +910,22 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			if (player_immovable->owner().player_number() != pn) {
 				if (player_->is_hostile(player_immovable->owner())) {
 					field.enemy_nearby_ = true;
+					
+					//if (upcast(MilitarySite const, bld, player_immovable)) {
+						//if (enemy_sites.count(coords_hash(bld->get_position()))==0) {
+							//enemy_sites[coords_hash(bld->get_position())]=enemySiteObserver();
+							//printf (" %d: new enemysite found at %3dx %3d, sum: %3d\n",player_number(),bld->get_position().x, bld->get_position().y, enemy_sites.size());	
+						//}
+					//}				
+					
+					
 				}
 
 				continue;
 			}
 		}
 
+		//if we are here, immovable is ours
 		if (upcast(Building const, building, &base_immovable)) {
 			if (upcast(ConstructionSite const, constructionsite, building)) {
 				const BuildingDescr& target_descr = constructionsite->building();
@@ -1000,11 +1036,11 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 
 	if (resource_necessity_water_needed_) {
 		if (fishers_count == 0) {
-			resource_necessity_water_ = 255;
+			resource_necessity_water_ = 100;
 		} else if (fishers_count == 1) {
-			resource_necessity_water_ = 150;
+			resource_necessity_water_ = 50;
 		} else {
-			resource_necessity_water_ = 18;
+			resource_necessity_water_ = 10;
 		}
 	}
 
@@ -1100,56 +1136,52 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// sometimes there is too many military buildings in construction, so we must
 	// prevent initialization of further buildings start
-	const uint32_t treshold = militarysites.size() / 40 + 2;
-
-	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold) {
+	const int32_t vacant_plus_in_construction_minus_prod = vacant_mil_positions_ + 2 * num_milit_constructionsites - productionsites.size()/15;
+	if (vacant_plus_in_construction_minus_prod > 20) {
 		expansion_mode = MilitaryStrategy::kNoNewMilitary;
-	} else if (unstationed_milit_buildings_ + num_milit_constructionsites > 2 * treshold) {
+	} else if (vacant_plus_in_construction_minus_prod > 13) {
 		expansion_mode = MilitaryStrategy::kDefenseOnly;
-	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= treshold - 1) {
+	} else if (vacant_plus_in_construction_minus_prod > 6) {
 		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
-	} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
-		expansion_mode = MilitaryStrategy::kExpansion;
 	} else {
-		expansion_mode = MilitaryStrategy::kPushExpansion;
-	}
+		if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
+			expansion_mode = MilitaryStrategy::kExpansion;
+		} else {
+			expansion_mode = MilitaryStrategy::kPushExpansion;
+		}
+	}	
+
 
 	// we must consider need for mines
 	// set necessity for mines
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
-	const int32_t virtual_mines = mines_.size() + mineable_fields.size() / 15;
-	if (virtual_mines <= 7) {
-		resource_necessity_mines_ = std::numeric_limits<uint8_t>::max();
-	} else if (virtual_mines > 19) {
-		resource_necessity_mines_ = 50;
+	const int32_t virtual_mines = mines_.size() + mineable_fields.size() / 15 - productionsites.size() / 25 ;
+	resource_necessity_mines_ = 100 * (15-virtual_mines)/15;
+	resource_necessity_mines_ = (resource_necessity_mines_>100)?100:resource_necessity_mines_;
+	resource_necessity_mines_ = (resource_necessity_mines_<20)?10:resource_necessity_mines_;
+
+	if (spots_ ==0 ) {
+		resource_necessity_territory_ = 100;
 	} else {
-		const uint32_t tmp = (24 - virtual_mines) * 10;
-		resource_necessity_mines_ = tmp;
+		resource_necessity_territory_ = 100 * 5 * (productionsites.size() + 5) / spots_;
+		resource_necessity_territory_ = (resource_necessity_territory_>100)?100:resource_necessity_territory_;
+		resource_necessity_territory_ = (resource_necessity_territory_<10)?10:resource_necessity_territory_;
+		//alse we need at lest 4 big spots
+		if (spots_avail.at(BUILDCAPS_BIG) < 2){
+			resource_necessity_territory_ = 100;
+		}
+		if (spots_avail.at(BUILDCAPS_MEDIUM) <4) {
+			resource_necessity_territory_ = 100;
+		}
+			
 	}
 
-	// here we calculate a need for expansion and reduce necessity for new land
-	// the game has two stages:
-	// First: virtual mines<=5 - stage of building the economics
-	// Second: virtual mines>5 - teritorial expansion
-	if (virtual_mines <= 5) {
-		if (spots_avail.at(BUILDCAPS_BIG) <= 4) {
-			resource_necessity_territory_ = 255;
-		} else {
-			resource_necessity_territory_ = 0;
-		}
-	} else {  // or we have enough mines and regulate speed of expansion
-		if (spots_ == 0) {
-			resource_necessity_territory_ = 255;
-		} else {
-			const uint32_t tmp = 255 * 4 * productionsites.size() / spots_;
-			if (tmp > 255) {
-				resource_necessity_territory_ = 255;
-			} else {
-				resource_necessity_territory_ = tmp;
-			}
-		}
-	}
+	//if (gametime%10 ==0) printf (" %d: expansion mode: %d(score: %3d) (Vacant pos: %2d, MilitConstrS: %2d); Necessity Mi:%3d, Ter: %3d\n",
+	//player_number(),expansion_mode,vacant_plus_in_construction_minus_prod,
+	//vacant_mil_positions_,num_milit_constructionsites,
+	//resource_necessity_mines_,resource_necessity_territory_ );
+
 
 	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
@@ -1623,7 +1655,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
-
 				// we allow 1 exemption from big buildings prohibition
 				if (bo.build_material_shortage_ &&
 				    (bo.cnt_under_construction_ > 0 || !(bf->enemy_nearby_))) {
@@ -1631,6 +1662,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				if (!bf->unowned_land_nearby_) {
+					
 					continue;
 				}
 
@@ -1671,27 +1703,50 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				else {
 					continue;
 				}  // the building is not suitable for situation
-
 				// not to build so many military buildings nearby
 				if (!bf->enemy_nearby_ &&
 				    (bf->military_in_constr_nearby_ + bf->military_unstationed_) > 0) {
 					continue;
 				}
-
 				// a boost to prevent an expansion halt
 				int32_t local_boost = 0;
 				if (expansion_mode == MilitaryStrategy::kPushExpansion) {
 					local_boost = 200;
 				}
 
-				prio = ((bf->unowned_land_nearby_ * 2 * resource_necessity_territory_) / 255 +
-				        (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 255 +
-				        bf->stones_nearby_ / 2 + bf->military_loneliness_ / 10 - 60 + local_boost +
-				        (bf->water_nearby_ * resource_necessity_water_) / 255);
+				//priority based on basic resources
+				prio = ((bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
+				        bf->stones_nearby_ + bf->military_loneliness_ / 10 - 40 + local_boost +
+				        (bf->water_nearby_ * resource_necessity_water_) / 100);
 
+				//printf ("  Resource prio=  %3d (%3d) + St:%3d + Wa:%3d (%3d)\n",
+				//(bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100,
+				//resource_necessity_mines_,
+				//bf->stones_nearby_,
+				//(bf->water_nearby_ * resource_necessity_water_) / 100,
+				//resource_necessity_water_);
+
+				//Depending on wheter resource only are considered or no
+				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense) {
+					prio *= 2;
+					prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100 / 2;
+					//printf ("   Doubling prio as in kResourcesOrDefense and adding ULN score \n");
+				} else { //addding score for territory
+					prio += (bf->unowned_land_nearby_ * resource_necessity_territory_) / 100 *3 / 2;
+					//printf ("    adding score for teritory: %3d(%3d)\n",
+					//(bf->unowned_land_nearby_ * resource_necessity_territory_) / 100 *3 / 2,
+					//resource_necessity_territory_);
+				}
+
+				//adding score for distance to other military sites
+				prio += bf->military_loneliness_ / 10 - 40;
+		
+				
 				// special bonus due to remote water for atlanteans
-				if (resource_necessity_water_needed_)
-					prio += (bf->distant_water_ * resource_necessity_water_) / 255;
+				if (resource_necessity_water_needed_){
+					prio += (bf->distant_water_ * resource_necessity_water_) / 100 / 2;
+					}
+					
 
 				// special bonus if a portspace is close
 				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
@@ -1705,7 +1760,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				if (bo.desc->get_size() < maxsize) {
 					prio = prio - 5;
 				}  // penalty
-
+				
 				// we need to prefer military building near to borders
 				// with enemy
 				// Note: if we dont have enough mines, we cannot afford
@@ -1720,6 +1775,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				if (bf->enemy_nearby_ && bf->military_capacity_ > bottom_treshold + 4) {
 					prio -= (bf->military_capacity_ - (bottom_treshold + 4)) * 5;
 				}
+				
+				//printf ("  suggested militarysite priority: %4d\n",prio);
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 
@@ -1780,7 +1837,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// take care about and enemies
 				if (bf->enemy_nearby_) {
-					prio /= 2;
+					prio /= 4;
 				}
 
 				if (bf->unowned_land_nearby_ && !bo.is_port_) {
@@ -1789,24 +1846,41 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 
-				if (virtual_mines < 5) {
-					continue;
-				}
-
 				// exclude spots on border
 				if (bf->near_border_) {
 					continue;
 				}
 
-				if (virtual_mines < 3) {
+				//it is a bit difficult to get a new trainer.....
+				if (ts_without_trainers_) {
 					continue;
 				}
 
-				// build after 20 production sites and then after each 50 production site
-				if (static_cast<int32_t>((productionsites.size() + 40) / 60) > bo.total_count() &&
-				    bo.cnt_under_construction_ == 0) {
-					prio = 4 + kDefaultPrioBoost;
+				//target is only one for both types
+				if ((ts_type1_const_count_ +ts_type2_const_count_)  > 0) {
+					continue;
 				}
+				
+				//we build one training site for 100 militarysites
+				if (bo.ts_type_==1  && militarysites.size()/100 < static_cast<int32_t>(ts_type1_count_) ) {
+					continue;
+				}
+				//we build one training site for 100 militarysites
+				if (bo.ts_type_==2  && militarysites.size()/100 < static_cast<int32_t>(ts_type2_count_) ) {
+					continue;
+				}
+
+				//for type1 we need 15 productionsties
+				if (bo.ts_type_==1  && productionsites.size()<15) {
+					continue;
+				}
+
+				//for type2 we need 4 mines
+				if (bo.ts_type_==2  && virtual_mines < 4 ) {
+					continue;
+				}
+
+				prio = 4 + kDefaultPrioBoost;
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
@@ -2820,9 +2894,18 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (score > 120 && !site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
+			return true;
 		}
-
-		if (score < 80 && site.site->is_stopped()) {
+		const uint32_t trees_in_vicinity =
+			map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), 5),
+			nullptr,
+			FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+		
+		if( trees_in_vicinity > 25) {
+			if(!site.site->is_stopped()) {
+			 	game().send_player_start_stop_building(*site.site);
+			}
+		} else if (score < 80 && site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
 		}
@@ -3212,6 +3295,24 @@ uint32_t DefaultAI::get_warehoused_stock(WareIndex wt) {
 	return count;
 }
 
+//this just counts free positions in military and training sites
+void DefaultAI::count_military_vacant_positions(){
+	//counting vacant positions
+	vacant_mil_positions_ = 0;
+	for (TrainingSiteObserver tso : trainingsites) {
+		vacant_mil_positions_ += tso.site->soldier_capacity() - tso.site->stationed_soldiers().size();
+	}
+	for (MilitarySiteObserver mso : militarysites) {
+		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
+	}	
+	
+	//printf (" %d: vacant capacity: %3d, military sites: %3d (unfinished: %2d), training centers: %2d(%2d%2d%2d%2d), without tr.: %1d\n",
+		//player_number(),vacant_mil_positions_,militarysites.size(),num_milit_constructionsites,trainingsites.size(),
+		//ts_type1_count_,ts_type1_const_count_,ts_type2_count_,ts_type2_const_count_, ts_without_trainers_);	
+	
+}
+	
+
 // this function only manipulates with trainingsites' inputs priority
 // decreases it when too many unoccupied military buildings
 bool DefaultAI::check_trainingsites(uint32_t gametime) {
@@ -3221,24 +3322,62 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (!trainingsites.empty()) {
 		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + kTrainingSitesCheckInterval;
 	} else {
-		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + 5 * kTrainingSitesCheckInterval;
+		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + 2 * kTrainingSitesCheckInterval;
+		return false;
 	}
 
-	uint8_t new_priority = DEFAULT_PRIORITY;
-	if (unstationed_milit_buildings_ > 2) {
-		new_priority = LOW_PRIORITY;
-	} else {
-		new_priority = DEFAULT_PRIORITY;
+//NOCOM start
+	TrainingSite* ts = trainingsites.front().site;
+	TrainingSiteObserver& tso = trainingsites.front();
+	
+	const BuildingIndex enhancement = ts->descr().enhancement();
+	
+	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 &&
+	 mines_.size() >3 && (ts_type1_const_count_ + ts_type2_const_count_) == 0 &&
+	 ts_type2_count_ > 0) {
+		
+		if (player_->is_building_type_allowed(enhancement)) {
+
+			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			game().send_player_enhance_building(*tso.site, enhancement);
+			printf (" %1d: ENHANCING %s to %s\n",
+				player_number(),tso.bo->name,en_bo.name);
+			}
+	}	
+			
+	trainingsites.push_back(trainingsites.front());
+	trainingsites.pop_front();
+	
+	//changing capacity
+	 //uint32_t new_capacity=productionsites.size()/10;
+	 //uint32_t new_capacity = 2;
+	 if (tso.site->soldier_capacity() !=2 ){
+		printf (" %d: CHANGING ts capacity to: %2d\n", player_number(), 2 - tso.site->soldier_capacity());
+	 	game().send_player_change_soldier_capacity(*ts, 2 - tso.site->soldier_capacity());		 
 	}
+	 
+	
+//NOCOM end
+
+
+	//uint8_t new_priority = DEFAULT_PRIORITY;
+	//if (unstationed_milit_buildings_ > 2) {
+		//new_priority = LOW_PRIORITY;
+	//} else {
+		//new_priority = DEFAULT_PRIORITY;
+	//}
+	ts_without_trainers_ = 0; //zeroing
 	for (std::list<TrainingSiteObserver>::iterator site = trainingsites.begin();
 	     site != trainingsites.end();
 	     ++site) {
 
-		for (uint32_t k = 0; k < site->bo->inputs_.size(); ++k) {
-			game().send_player_set_ware_priority(
-			   *site->site, wwWARE, site->bo->inputs_.at(k), new_priority);
+		if ( !site->site->can_start_working()) {
+			ts_without_trainers_ +=1;
 		}
+
 	}
+	if (ts_without_trainers_) printf (" %d: ts without a trainer: %d\n", player_number(),ts_without_trainers_);
 	return true;
 }
 
@@ -3817,6 +3956,17 @@ void DefaultAI::gain_building(Building& b) {
 		if (target_bo.type == BuildingObserver::MILITARYSITE) {
 			++num_milit_constructionsites;
 		}
+		if (target_bo.type == BuildingObserver::TRAININGSITE) {	
+			if (target_bo.ts_type_==1){
+				ts_type1_const_count_ += 1;
+				printf(" %1d: starting to build trainingsite 1\n",player_number());
+			}
+			if (target_bo.ts_type_==2){
+				ts_type2_const_count_ += 1;
+				printf(" %1d: starting to build trainingsite 2\n",player_number());
+			}
+		}	
+
 
 		// Let defaultAI try to directly connect the constructionsite
 		taskDue[ScheduleTasks::kRoadCheck] = game().get_gametime();
@@ -3860,9 +4010,16 @@ void DefaultAI::gain_building(Building& b) {
 			militarysites.back().enemies_nearby_ = true;
 
 		} else if (bo.type == BuildingObserver::TRAININGSITE) {
+			ts_without_trainers_ += 1;
 			trainingsites.push_back(TrainingSiteObserver());
 			trainingsites.back().site = &dynamic_cast<TrainingSite&>(b);
 			trainingsites.back().bo = &bo;
+			if (bo.ts_type_==1){
+				ts_type1_count_ += 1;
+			}
+			if (bo.ts_type_==2){
+				ts_type2_count_ += 1;
+			}			
 
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
 			++numof_warehouses_;
@@ -3901,6 +4058,14 @@ void DefaultAI::lose_building(const Building& b) {
 		if (target_bo.type == BuildingObserver::MILITARYSITE) {
 			--num_milit_constructionsites;
 		}
+		if (target_bo.type == BuildingObserver::TRAININGSITE) {
+			if (target_bo.ts_type_==1){
+				ts_type1_const_count_ -= 1;
+			}
+			if (target_bo.ts_type_==2){
+				ts_type2_const_count_ -= 1;
+			}
+		}		
 
 	} else {
 		--bo.cnt_built_;
@@ -3955,6 +4120,12 @@ void DefaultAI::lose_building(const Building& b) {
 			     ++i) {
 				if (i->site == &b) {
 					trainingsites.erase(i);
+					if (bo.ts_type_==1){
+						ts_type1_count_ -= 1;
+					}
+					if (bo.ts_type_==2){
+						ts_type2_count_ -= 1;
+					}
 					break;
 				}
 			}
@@ -3999,6 +4170,296 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs_.size();
 }
 
+
+
+bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
+
+	Map& map = game().map();
+
+	//define which players are attackable
+	std::vector<bool> player_attackable;
+	PlayerNumber const nr_players = map.get_nrplayers();
+	player_attackable.resize(nr_players);
+	bool any_attackable=false; //needed?
+	uint32_t plr_in_game = 0;
+	uint16_t const pn = player_number();
+
+	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
+	
+	// receiving games statistics and parsing it (reading latest entry)
+	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
+
+	// defining treshold ratio of own_strenght/enemy's_strength
+	uint32_t treshold_ratio = 100;
+	if (type_ == AGGRESSIVE) {
+		treshold_ratio = 80;
+	}
+	if (type_ == DEFENSIVE) {
+		treshold_ratio = 120;
+	}
+
+	// now we test all players which one are 'attackable'
+	for (uint8_t j = 1; j <= plr_in_game; ++j) {
+		if (pn == j) { //its me
+			player_attackable[j - 1] = false;
+			continue;
+		}
+
+		try {
+			// It seems that under some circumstances genstats can be empty.
+			// So, to avoid crash, the AI tests its content first.
+			if (genstats.at(j - 1).miltary_strength.empty()) {
+				log("ComputerPlayer(%d): miltary_strength is empty\n", player_number());
+				player_attackable.at(j - 1) = false;
+				// Avoid division by zero
+			} else if (genstats.at(j - 1).miltary_strength.back() == 0) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+				// Check threshold
+			} else if ((genstats.at(pn - 1).miltary_strength.back() * 100 /
+			            genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+				//printf (" %d: %d attackable\n",pn, j);
+			} else {
+				player_attackable.at(j - 1) = false;
+				//printf (" %d: %d not attackable: me: %3d/ enemy: %3d\n",pn,j,genstats.at(pn - 1).miltary_strength.back(),genstats.at(j - 1).miltary_strength.back() );				
+			}
+		} catch (const std::out_of_range&) {
+			printf ("ComputerPlayer(%d): genstats entry missing\n",player_number());
+			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+			    player_number(),
+			    static_cast<unsigned int>(genstats.size()));
+			player_attackable.at(j - 1) = false;
+		}
+	}
+
+
+
+	//first we scan vicitnity of couple of militarysites to get new enemy sites
+	//militarysites rotate
+	int32_t i=0;
+	for (MilitarySiteObserver mso : militarysites) {
+		i+=1;
+		if (i%4 == 0 ) continue;
+		if (i > 20) continue;
+
+		MilitarySite* ms = mso.site;
+		uint32_t const vision = ms->descr().vision_range();
+		FCoords f = map.get_fcoords(ms->get_position());
+
+		// get list of immovable around this our military site
+		std::vector<ImmovableFound> immovables;
+		map.find_immovables(Area<FCoords>(f, (vision + 3<13)?13:vision + 3), &immovables, FindImmovableAttackable());
+
+		for (uint32_t j = 0; j < immovables.size(); ++j) {
+			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
+				if ( player_->is_hostile(bld->owner())){
+					if (enemy_sites.count(coords_hash(bld->get_position()))==0) {
+						enemy_sites[coords_hash(bld->get_position())]=enemySiteObserver();
+						//printf (" %d: new enemysite found at %3dx %3d, sum: %3d\n",player_number(),bld->get_position().x, bld->get_position().y, enemy_sites.size());	
+					}
+				}
+			}
+			if (upcast(Warehouse const, wh, immovables.at(j).object)) {
+				if ( player_->is_hostile(wh->owner())){
+					if (enemy_sites.count(coords_hash(wh->get_position()))==0) {
+						enemy_sites[coords_hash(wh->get_position())]=enemySiteObserver();
+						//printf (" %d: new warehouse found at %3dx %3d, sum: %3d\n",player_number(),wh->get_position().x, wh->get_position().y, enemy_sites.size());	
+					}
+				}
+			}			
+			
+		}	
+	}
+
+
+
+
+	//now we update some of them
+	preffered_targets.clear();
+	uint32_t count = 0;
+	
+	//printf (" %d: actual enemy sites: %3d\n", player_number(),enemy_sites.size());
+	//for  (std::pair<uint32_t, enemySiteObserver> site : enemy_sites) {
+	for (std::map<uint32_t, enemySiteObserver>::iterator site=enemy_sites.begin(); site!=enemy_sites.end(); ++site) {
+		
+		//we test max 12 sites and prefer ones tested more then 1 min ago
+		//printf ("    last tested: %d, now %d, %3d sec before\n",
+		//site->second.last_tested/1000, gametime/1000, (gametime-site->second.last_tested) / 1000 );
+		if ( ( (site->second.last_tested + (enemysites_check_delay_ * 1000) ) > gametime && count > 4) || count > 12) {
+			continue;
+		}
+		count+=1;
+
+		site->second.last_tested=gametime;
+		uint8_t defenders = 0;
+		bool is_warehouse=false;
+		bool is_attackable=false;
+		uint16_t onwer_number=100;
+		
+		
+		FCoords f = map.get_fcoords(coords_unhash(site->first));
+		//printf ("  Testing a field at: %3dx%3d\n", coords_unhash(site->first).x,coords_unhash(site->first).y);
+		uint32_t site_to_be_removed=std::numeric_limits<uint32_t>::max();
+		Flag* flag = nullptr;
+		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+			if ( player_->is_hostile(bld->owner())){
+					defenders=bld->present_soldiers().size();
+					flag=&bld->base_flag();
+					if (bld->can_attack()) {
+						is_attackable=true;}
+					onwer_number = bld->owner().player_number()	;
+			}
+		}
+		if (upcast(Warehouse, Wh, f.field->get_immovable())) {
+			if ( player_->is_hostile(Wh->owner())){
+					defenders=Wh->present_soldiers().size();
+					flag=&Wh->base_flag();
+					is_warehouse=true;
+					if (Wh->can_attack()) { 
+						is_attackable=true;}
+					onwer_number = Wh->owner().player_number()	;
+			}
+		}	
+		//if flag is defined it is a good taget	
+		if (flag){
+				//updating some info
+				//updating info on mines nearby if needed
+				if (site->second.mines_nearby == ExtendedBool::kUnset) {
+					 FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
+					const int32_t minescount =
+		   				map.find_fields(Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+					//printf ("  %d mines nearby this enemy site: %3dx%3d\n",
+					//minescount, coords_unhash(site->first).x, coords_unhash(site->first).y );
+		   			if (minescount>0) {
+						site->second.mines_nearby = ExtendedBool::kTrue;
+					} else {
+						site->second.mines_nearby = ExtendedBool::kFalse;
+					}
+				}						
+				
+				site->second.warehouse = is_warehouse;
+
+				//getting rid of default
+				if (site->second.last_time_attackable == std::numeric_limits<uint32_t>::max()) {
+					site->second.last_time_attackable = gametime;
+				}
+				
+				//can we attack:
+				if (is_attackable) {
+					site->second.attack_soldiers=player_->find_attack_soldiers(*flag);
+					if (site->second.attack_soldiers >15) {
+						printf ("  attack soldiers: %d for %3dx%3d\n",site->second.attack_soldiers,flag->get_position().x,flag->get_position().y);
+					}
+				} else {
+					site->second.attack_soldiers=0;
+				}
+				site->second.defenders = defenders;
+				//printf ("  attack soldiers: %2d\n",site->second.attack_soldiers);
+				if (site->second.attack_soldiers > 0 ){
+					site->second.score=site->second.attack_soldiers - site->second.defenders / 2;
+					if (!is_warehouse) site->second.score-=1;
+					if (type_ == NORMAL) {
+						site->second.score-=1;
+					}
+					if (type_ == DEFENSIVE) {
+						site->second.score-=2;
+					}
+					if (site->second.mines_nearby == ExtendedBool::kFalse) {
+						site->second.score-=1;
+					}
+					// we dont want to attack multiple players at the same time too eagerly
+					if ( onwer_number != last_attacked_player_) {
+						site->second.score-=3;
+					}
+					
+					//treating no attack score
+					if (site->second.no_attack_score<0) {
+						site->second.score=0;
+						site->second.no_attack_score+=1;
+					}
+					//if (site->second.attack_soldiers >15 or site->second.score > 15) {
+						//printf ("  attack soldiers: %d, score: %2d for %3dx%3d\n",
+						//site->second.attack_soldiers,site->second.score, flag->get_position().x,flag->get_position().y);
+					//}
+				} else {
+					site->second.score = 0;
+				} //or the score will remain 0
+				
+				if (site->second.score>0 && player_attackable[onwer_number-1]) {
+					preffered_targets.insert ( std::pair<char,int>(static_cast<uint8_t>(site->second.score),site->first) );
+				}
+
+				if (site->second.attack_soldiers>0) {
+					site->second.last_time_attackable = gametime;
+				}
+				if (site->second.last_time_attackable+20 * 60 * 1000<gametime){
+					//printf ("   ...not attackable for 20 minutes, removing (%3dx%3d)\n",
+					//coords_unhash(site->first).x, coords_unhash(site->first).y);
+					site_to_be_removed=site->first;
+				}
+		} else {
+			//printf ("   removing member from enemy_sites: %d\n", site->first);
+			site_to_be_removed=site->first;
+		}
+		
+		if (site_to_be_removed < std::numeric_limits<uint32_t>::max()){
+			//printf ("  removing %d\n", site_to_be_removed);
+			enemy_sites.erase(site_to_be_removed);
+			continue;
+		}
+
+	 }
+
+	if (count>=13 && enemysites_check_delay_< 180) {
+		enemysites_check_delay_ +=3;
+	}
+	if (count<10 && enemysites_check_delay_>45) {
+		enemysites_check_delay_ -=2;
+	}	
+	
+	if (preffered_targets.size() > 0 ) printf ("   %d:Got %2d possible target(s) (range %2d - %2d), tested sites: %3d/%3d, autodelay: %d\n",
+	player_number(),preffered_targets.size(),preffered_targets.begin()->first,preffered_targets.rbegin()->first,count,enemy_sites.size(),enemysites_check_delay_);
+	else { printf ("   %d: tested: %2d/%2d sites, autodelay: %d\n",player_number(),count,enemy_sites.size(),enemysites_check_delay_); //NOCOM
+	}
+	
+	if (preffered_targets.size() == 0) return false;
+	
+	//attacking
+	FCoords f = map.get_fcoords(coords_unhash(preffered_targets.rbegin()->second));
+	//setting no attack score HERE
+	enemy_sites[preffered_targets.rbegin()->second].no_attack_score = -4;
+	
+	
+	Flag* flag = nullptr; //flag of a building to be attacked
+	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+		flag = &bld->base_flag();
+	} else if (upcast(Warehouse, Wh, f.field->get_immovable())) {
+		flag = &Wh->base_flag();
+	} else {
+		printf ("  Upcasting failed???\n");
+		return false;
+	}
+		
+	//const Flag flag = bld->base_flag();
+	uint32_t attackers = player_->find_attack_soldiers(*flag);
+	//Just add some randomness
+	attackers -= gametime%3;
+	if (attackers<=0) {
+		return false;
+	}
+	//if (Wh->can_attack()
+	game().send_player_enemyflagaction(*flag, player_number(), attackers);
+	last_attacked_player_= flag->owner().player_number();
+	
+	printf (" %d: attacking player %d with %2d soldiers (instead of: %3d): %3dx%3d\n",
+	player_number(), flag->owner().player_number(),attackers,attackers+gametime%4, flag->get_position().x,flag->get_position().y  );
+	return true;
+
+	
+}
+
 /**
  * The defaultAi "considers" via this function whether to attack an
  * enemy, if opposing military buildings are in sight. In case of an attack it
@@ -4029,6 +4490,9 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
 		return false;
 	}
+
+	taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
+	return false; //DISABLING HERE
 
 	// First we iterate over all players and define which ones (if any)
 	// are attackable (comparing overal strength)
@@ -4064,15 +4528,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// military sites to be manned.
 	// If we have no mines yet, we need to preserve some soldiers for further
 	// expansion (if enemy allows this)
-	// TODO(sirver): this next line is completely unreadable and maybe even wrong given the
-	// precedence of ?: and +. Replace through some if/else.
-	int32_t needed_margin = (mines_.size() < 6) ?
-	                           ((6 - mines_.size()) * 3) :
-	                           0 + 2 + ((type_ == NORMAL) ? 4 : 0 + ((type_ == DEFENSIVE) ? 8 : 0));
-	const int32_t current_margin =
-	   genstats[pn - 1].miltary_strength.back() - militarysites.size() - num_milit_constructionsites;
-
-	if (current_margin < needed_margin) {  // no attacking!
+	if (vacant_mil_positions_ + 2 * num_milit_constructionsites > 15) {  // no attacking!
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
 		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
 		taskDue[ScheduleTasks::kConsiderAttack] = next_attack_waittime_ * 1000 + gametime;
@@ -4172,7 +4628,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 				if (bld->can_attack()) {
 
-					int32_t attack_soldiers = player_->find_attack_soldiers(bld->base_flag());
+					int32_t attack_soldiers =player_->find_attack_soldiers(bld->base_flag());
 					if (attack_soldiers < 1) {
 						continue;
 					}
