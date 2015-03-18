@@ -54,3 +54,6 @@ hotspot=81 82
 [build]
 pics=arena_b_??.png  # ???
 hotspot=82 83
+
+[aihints]
+ts_type=1

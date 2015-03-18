@@ -74,3 +74,6 @@ hotspot=110 72
 pics=battlearena_w_??.png  # ???
 hotspot=110 72
 fps=10
+
+[aihints]
+ts_type=1

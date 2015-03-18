@@ -99,4 +99,4 @@ pics=labyrinth_i_??.png  # ???
 hotspot=80 88
 
 [aihints]
-prohibited_till=2700
+ts_type=1
