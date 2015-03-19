@@ -354,7 +354,8 @@ struct BuildingObserver {
 	uint32_t forced_after_;     // do not wait until ware is needed
 	uint8_t ts_type_;
 
-	bool unoccupied_;  //
+	bool unoccupied_;  
+	uint16_t unconnected_;   //to any warehouse (count of such buildings)
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
@@ -440,9 +441,9 @@ struct enemySiteObserver {
 	int16_t score;
 	bool warehouse;	
 	Widelands::ExtendedBool mines_nearby;
-	int16_t no_attack_score;
+	int16_t no_attack_counter;
 	
-	enemySiteObserver() : warehouse_(false), attack_soldiers(0), stationed_soldiers(0), last_time_attackable(std::numeric_limits<uint32_t>::max()), last_tested(0), score(0), mines_nearby(Widelands::ExtendedBool::kUnset), no_attack_score(0) {}
+	enemySiteObserver() : warehouse_(false), attack_soldiers(0), stationed_soldiers(0), last_time_attackable(std::numeric_limits<uint32_t>::max()), last_tested(0), score(0), mines_nearby(Widelands::ExtendedBool::kUnset), no_attack_counter(0) {}
 };
 	
 	

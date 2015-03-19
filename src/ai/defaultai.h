@@ -84,7 +84,6 @@ struct DefaultAI : ComputerPlayer {
 		kBbuildableFieldsCheck,
 		kRoadCheck,
 		kUnbuildableFCheck,
-		kConsiderAttack,
 		kCheckEconomies,
 		kProductionsitesStats,
 		kConstructBuilding,
@@ -236,7 +235,7 @@ private:
 
 	bool check_supply(const BuildingObserver&);
 
-	bool consider_attack(int32_t);
+	//bool consider_attack(int32_t);
 
 	void print_land_stats();
 
@@ -277,7 +276,7 @@ private:
 	std::list<ShipObserver> allships;
 	std::map<ScheduleTasks, uint32_t> taskDue;
 	std::map<uint32_t, enemySiteObserver> enemy_sites;
-	std::multimap<uint8_t, uint32_t> preffered_targets;
+	//std::multimap<uint8_t, uint32_t> preffered_targets;
 
 	std::vector<WareObserver> wares;
 
