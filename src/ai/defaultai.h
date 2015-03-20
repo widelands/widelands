@@ -9,6 +9,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -82,6 +83,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class ScheduleTasks : uint8_t {
 		kBbuildableFieldsCheck,
+		kMineableFieldsCheck,
 		kRoadCheck,
 		kUnbuildableFCheck,
 		kCheckEconomies,
@@ -276,7 +278,9 @@ private:
 	std::list<ShipObserver> allships;
 	std::map<ScheduleTasks, uint32_t> taskDue;
 	std::map<uint32_t, enemySiteObserver> enemy_sites;
-	//std::multimap<uint8_t, uint32_t> preffered_targets;
+	//it will map mined material to observer
+	std::map<int32_t, mineTypesObserver> mines_per_type;	
+	
 
 	std::vector<WareObserver> wares;
 

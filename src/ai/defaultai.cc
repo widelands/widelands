@@ -51,12 +51,15 @@
 #include "profile/profile.h"
 
 // following is in miliseconds (widelands counts time in ms)
-constexpr int kFieldUpdateInterval = 2000;
-constexpr int kIdleMineUpdateInterval = 22000;
+//constexpr int kFieldUpdateInterval = 2000;
+constexpr int kFieldInfoExpiration = 12 * 1000;
+constexpr int kMineFieldInfoExpiration = 20 * 1000;
+constexpr int kNewMineConstInterval = 19000;
 constexpr int kBusyMineUpdateInterval = 2000;
 // building of the same building can be started after 25s at earliest
 constexpr int kBuildingMinInterval = 25 * 1000;
 constexpr int kMinBFCheckInterval = 5 * 1000;
+constexpr int kMinMFCheckInterval = 19 * 1000;
 constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 5 * 60 * 1000;
@@ -243,7 +246,10 @@ void DefaultAI::think() {
 	if (DueTask == ScheduleTasks::kBbuildableFieldsCheck) {
 		update_all_buildable_fields(gametime);
 		taskDue[ScheduleTasks::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
-	} else if (DueTask == ScheduleTasks::kRoadCheck) {
+	} else if (DueTask == ScheduleTasks::kMineableFieldsCheck) {
+		update_all_mineable_fields(gametime);
+		taskDue[ScheduleTasks::kMineableFieldsCheck] = gametime + kMinMFCheckInterval;
+	} if (DueTask == ScheduleTasks::kRoadCheck) {
 		if (check_economies()) {  // is a must
 			return;
 		};
@@ -398,6 +404,12 @@ void DefaultAI::late_initialization() {
 				}
 
 				bo.mines_percent_ = bh.get_mines_percent();
+				
+				//populating mines_per_type map
+				if (mines_per_type.count(bo.mines_) == 0){
+					mines_per_type[bo.mines_] = mineTypesObserver();
+				}
+				
 			}
 
 			// here we identify hunters
@@ -564,6 +576,7 @@ void DefaultAI::late_initialization() {
 	//taskDue[ScheduleTasks::kConsiderAttack] = 300000;
 	taskDue[ScheduleTasks::kCheckTrainingsites] = 15 * 60 * 1000;
 	taskDue[ScheduleTasks::kBbuildableFieldsCheck] = 1000;
+	taskDue[ScheduleTasks::kMineableFieldsCheck] = 1000;
 	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
 	taskDue[ScheduleTasks::kWareReview] = 15 * 60 * 1000;
 	taskDue[ScheduleTasks::kPrintStats] = 30 * 60 * 1000;
@@ -581,8 +594,10 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;
 
-	while (!buildable_fields.empty() && buildable_fields.front()->next_update_due_ <= gametime &&
-	       i < 40) {
+	//we test 40 fields that were update more than 1 seconds ago
+	while (!buildable_fields.empty() &&
+		(buildable_fields.front()->field_info_expiration_ - kFieldInfoExpiration + 1000) <= gametime &&
+	    i < 40) {
 		BuildableField& bf = *buildable_fields.front();
 
 		//  check whether we lost ownership of the node
@@ -601,12 +616,13 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		}
 
 		update_buildable_field(bf);
-		bf.next_update_due_ = gametime + kFieldUpdateInterval;
+		bf.field_info_expiration_ = gametime + kFieldInfoExpiration;
 		buildable_fields.push_back(&bf);
 		buildable_fields.pop_front();
 
 		i += 1;
 	}
+	//printf (" update_all_buildable_fields() - checked: %3d/%3d\n", i,buildable_fields.size());
 }
 
 /**
@@ -619,8 +635,10 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 
 	uint16_t i = 0;  // counter, used to track # of checked fields
 
-	while (!mineable_fields.empty() && mineable_fields.front()->next_update_due_ <= gametime &&
-	       i < 40) {
+	//we test 30 fields that were update more than 1 seconds ago
+	while (!mineable_fields.empty() &&
+		(mineable_fields.front()->field_info_expiration_ - kMineFieldInfoExpiration + 1000)  <= gametime &&
+	    i < 30) {
 		MineableField* mf = mineable_fields.front();
 
 		//  check whether we lost ownership of the node
@@ -639,12 +657,13 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 		}
 
 		update_mineable_field(*mf);
-		mf->next_update_due_ = gametime + kFieldUpdateInterval;  // in fact this has very small effect
+		mf->field_info_expiration_ = gametime + kMineFieldInfoExpiration;
 		mineable_fields.push_back(mf);
 		mineable_fields.pop_front();
 
 		i += 1;
 	}
+	//printf (" update_all_mineable_fields()  - checked: %3d/%3d\n", i,mineable_fields.size());	
 }
 
 /**
@@ -956,7 +975,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 	Map& map = game().map();
 	map.find_immovables(Area<FCoords>(field.coords, 5), &immovables);
 	field.preferred_ = false;
-	field.mines_nearby_ = 1;
+	field.mines_nearby_ = 0;
 	FCoords fse;
 	map.get_brn(field.coords, &fse);
 
@@ -970,10 +989,16 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 	for (const ImmovableFound& temp_immovable : immovables) {
 		if (upcast(Building const, bld, temp_immovable.object)) {
 			if (bld->descr().get_ismine()) {
-				++field.mines_nearby_;
+				if (get_building_observer(bld->descr().name().c_str()).mines_ ==
+					field.coords.field->get_resources()){
+						++field.mines_nearby_;
+					}
 			} else if (upcast(ConstructionSite const, cs, bld)) {
 				if (cs->building().get_ismine()) {
-					++field.mines_nearby_;
+					if (get_building_observer(cs->building().name().c_str()).mines_ ==
+					field.coords.field->get_resources()){
+						++field.mines_nearby_;
+					}
 				}
 			}
 		}
@@ -1020,7 +1045,7 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 			// Check whether this building is completely occupied
 			productionsites.front().bo->unoccupied_ |= !productionsites.front().site->can_start_working();
 		} else {
-			buildings_.at(i).unconnected_ +=1;
+			productionsites.front().bo->unconnected_ +=1;
 		}
 
 		// Now reorder the buildings
@@ -1229,6 +1254,23 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 	}
 
+	//just counting buildable fields with actual info //NOCOM
+	//uint32_t count_tmp2=0;
+	//for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
+	     //i != buildable_fields.end();
+	     //++i) {
+		//BuildableField* const bf = *i;
+
+		//if (bf->field_info_expiration_ >= gametime) {
+			//count_tmp2+=1;;
+		//}
+	//}
+	//printf ("  BF with actual info: %d\n", count_tmp2);
+	//end of NOCOM
+
+
+
+
 	// these are 3 helping variables
 	bool output_is_needed = false;
 	int16_t max_preciousness = 0;         // preciousness_ of most precious output
@@ -1240,7 +1282,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	     ++i) {
 		BuildableField* const bf = *i;
 
-		if (bf->next_update_due_ < gametime - 10000) {
+		if (bf->field_info_expiration_ < gametime) {
 			continue;
 		}
 
@@ -1922,10 +1964,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// then try all mines_ - as soon as basic economy is build up.
 	if (gametime > next_mine_construction_due_) {
 
-		update_all_mineable_fields(gametime);
-		next_mine_construction_due_ = gametime + kIdleMineUpdateInterval;
+		//not done here
+		//update_all_mineable_fields(gametime);
+		next_mine_construction_due_ = gametime + kNewMineConstInterval;
 
 		if (!mineable_fields.empty()) {
+			
+			
+			//just counting mineable fields with actual info //NOCOM
+			uint32_t count_tmp=0;
+			for (std::list<MineableField*>::iterator j = mineable_fields.begin();
+			     j != mineable_fields.end();
+			     ++j) {
+				if ((*j)-> field_info_expiration_>gametime) {
+					count_tmp+=1;
+				}
+			}
+			if (gametime%10 ==0 ) printf ("  %d: Mines with actual info: %3d/%3d\n", player_number(),count_tmp,mineable_fields.size());
+			
 
 			for (uint32_t i = 0; i < buildings_.size() && productionsites.size() > 8; ++i) {
 				BuildingObserver& bo = buildings_.at(i);
@@ -1965,37 +2021,66 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// this is penalty if there are existing mines too close
 				// it is treated as multiplicator for count of near mines
 				uint32_t nearness_penalty = 0;
-				if ((bo.cnt_built_ + bo.cnt_under_construction_) == 0) {
+				if ((mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 0) {
 					nearness_penalty = 0;
 				} else {
 					nearness_penalty = 10;
 				}
+
+				printf (" %d: considering mine for %2d: in constructions: %2d, finished: %2d\n",
+				player_number(),bo.mines_, mines_per_type[bo.mines_].in_construction, mines_per_type[bo.mines_].finished);
+				
+				//bonus score to prefer if too few mines
+				uint32_t bonus_score=0;
+				if ( (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 0){
+					bonus_score = 15;
+				} else if ( (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 1){
+					bonus_score = 5;
+				} 
+
 
 				// iterating over fields
 				for (std::list<MineableField*>::iterator j = mineable_fields.begin();
 				     j != mineable_fields.end();
 				     ++j) {
 
+					if ((*j)-> field_info_expiration_<=gametime) {
+						continue;
+					}
+
 					if ((*j)->coords.field->get_resources() != bo.mines_) {
 						continue;
 					}
 
-					int32_t prio = (*j)->coords.field->get_resources_amount();
-
-					// applying nearnes penalty
-					prio = prio - (*j)->mines_nearby_ * nearness_penalty;
+					int32_t prio = (*j)->coords.field->get_resources_amount() / 2;
 
 					// Only build mines_ on locations where some material can be mined
-					if (prio < 2) {
+					if (prio == 0) {
 						continue;
 					}
 
+					// applying nearnes penalty
+					prio = prio - (*j)->mines_nearby_ * nearness_penalty;
+					
+					//applying bonus score
+					prio += bonus_score;
+					
+					//applying max needed
+					prio += max_needed_preciousness * 2;
+					
 					// prefer mines in the middle of mine fields of the
 					// same type, so we add a small bonus here
 					// depending on count of same mines nearby,
 					// though this does not reflects how many resources
 					// are (left) in nearby mines
-					prio += (*j)->same_mine_fields_nearby_ / 3;
+					prio += (*j)->same_mine_fields_nearby_ ;
+
+					printf ("   this mine prio: %2d + %3d + %2d + %2d + %2d\n",
+					 (*j)->coords.field->get_resources_amount()/2,
+					 - (*j)->mines_nearby_ * nearness_penalty,
+					bonus_score,
+					max_needed_preciousness * 2,
+					(*j)->same_mine_fields_nearby_ );
 
 					// Continue if field is blocked at the moment
 					bool blocked = false;
@@ -3994,6 +4079,9 @@ void DefaultAI::gain_building(Building& b) {
 		if (target_bo.type == BuildingObserver::MILITARYSITE) {
 			++num_milit_constructionsites;
 		}
+		if (target_bo.type == BuildingObserver::MINE) {
+			mines_per_type[target_bo.mines_].in_construction += 1;
+		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {	
 			if (target_bo.ts_type_==1){
 				ts_type1_const_count_ += 1;
@@ -4040,6 +4128,9 @@ void DefaultAI::gain_building(Building& b) {
 
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
 				++wares.at(bo.inputs_.at(i)).consumers_;
+			
+			mines_per_type[bo.mines_].finished += 1;	
+				
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			militarysites.push_back(MilitarySiteObserver());
 			militarysites.back().site = &dynamic_cast<MilitarySite&>(b);
@@ -4096,6 +4187,9 @@ void DefaultAI::lose_building(const Building& b) {
 		if (target_bo.type == BuildingObserver::MILITARYSITE) {
 			--num_milit_constructionsites;
 		}
+		if (target_bo.type == BuildingObserver::MINE) {
+			mines_per_type[target_bo.mines_].in_construction -= 1;
+		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
 			if (target_bo.ts_type_==1){
 				ts_type1_const_count_ -= 1;
@@ -4141,6 +4235,9 @@ void DefaultAI::lose_building(const Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i) {
 				--wares.at(bo.inputs_.at(i)).consumers_;
 			}
+			
+			mines_per_type[bo.mines_].finished -= 1;
+			
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 
 			for (std::list<MilitarySiteObserver>::iterator i = militarysites.begin();
@@ -4459,10 +4556,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		enemysites_check_delay_ -=2;
 	}	
 	
-	if (best_target < std::numeric_limits<uint32_t>::max() ) printf ("   %d: tested sites: %3d/%3d, autodelay: %d - with best candidate\n", //NOCOM
-	player_number(), count,enemy_sites.size(),enemysites_check_delay_);
-	else { printf ("   %d: tested: %2d/%2d sites, autodelay: %d - no best candidate\n",player_number(),count,enemy_sites.size(),enemysites_check_delay_); //NOCOM
-	}
+	//if (best_target < std::numeric_limits<uint32_t>::max() ) printf ("   %d: tested sites: %3d/%3d, autodelay: %d - with best candidate\n", //NOCOM
+	//player_number(), count,enemy_sites.size(),enemysites_check_delay_);
+	//else { printf ("   %d: tested: %2d/%2d sites, autodelay: %d - no best candidate\n",player_number(),count,enemy_sites.size(),enemysites_check_delay_); //NOCOM
+	//}
 	
 	if (best_target == std::numeric_limits<uint32_t>::max() ) return false;
 	

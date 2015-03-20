@@ -213,7 +213,7 @@ struct BlockedField {
 struct BuildableField {
 	Widelands::FCoords coords;
 
-	uint32_t next_update_due_;
+	uint32_t field_info_expiration_;
 
 	bool preferred_;
 	bool enemy_nearby_;
@@ -256,7 +256,7 @@ struct BuildableField {
 
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
-	     next_update_due_(0),
+	     field_info_expiration_(20000),
 	     preferred_(false),
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
@@ -292,7 +292,7 @@ struct BuildableField {
 struct MineableField {
 	Widelands::FCoords coords;
 
-	uint32_t next_update_due_;
+	uint32_t field_info_expiration_;
 
 	bool preferred_;
 
@@ -302,7 +302,7 @@ struct MineableField {
 
 	MineableField(const Widelands::FCoords& fc)
 	   : coords(fc),
-	     next_update_due_(0),
+	     field_info_expiration_(20000),
 	     preferred_(false),
 	     mines_nearby_(0),
 	     same_mine_fields_nearby_(0) {
@@ -445,7 +445,15 @@ struct enemySiteObserver {
 	
 	enemySiteObserver() : warehouse_(false), attack_soldiers(0), stationed_soldiers(0), last_time_attackable(std::numeric_limits<uint32_t>::max()), last_tested(0), score(0), mines_nearby(Widelands::ExtendedBool::kUnset), no_attack_counter(0) {}
 };
+
+//as all mines have 3 levels, AI does not know total count of mines per mined material
+//so this observer will be used for this	
+struct mineTypesObserver {
+	uint16_t in_construction;
+	uint16_t finished;
 	
-	
+	mineTypesObserver(): in_construction(0),finished(0) {}
+};
+			
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H
