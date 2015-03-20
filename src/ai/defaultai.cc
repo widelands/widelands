@@ -988,6 +988,9 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 
 	for (const ImmovableFound& temp_immovable : immovables) {
 		if (upcast(Building const, bld, temp_immovable.object)) {
+			if (player_number() != bld->owner().player_number()){
+				continue;
+			}
 			if (bld->descr().get_ismine()) {
 				if (get_building_observer(bld->descr().name().c_str()).mines_ ==
 					field.coords.field->get_resources()){
@@ -3764,7 +3767,7 @@ BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
 		}
 	}
 
-	throw wexception("Help: I do not know what to do with a %s", name);
+	throw wexception("Help: I (player %d / tribe %s) do not know what to do with a %s", player_number(),tribe_->name().c_str(),name);
 }
 
 // this is called whenever we gain ownership of a PlayerImmovable
@@ -4066,6 +4069,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 // this is called whenever we gain a new building
 void DefaultAI::gain_building(Building& b) {
+	
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
@@ -4174,6 +4178,7 @@ void DefaultAI::gain_building(Building& b) {
 
 // this is called whenever we lose a building
 void DefaultAI::lose_building(const Building& b) {
+	
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
