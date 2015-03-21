@@ -101,7 +101,6 @@ return {
 	end)
 
 	-- Install statistics hook
-	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
 		name = wc_trees_owned,
 		pic = "pics/genstats_trees.png",
