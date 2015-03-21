@@ -162,7 +162,8 @@ return {
       name = wc_points,
       pic = "pics/genstats_points.png",
       calculator = function(p)
-         return _calc_points(p)
+         local pts = _calc_points(p)
+         return pts
       end,
    }
 
