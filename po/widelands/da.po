@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-06 14:29+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-07 10:05+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -2324,13 +2324,13 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr ""
+msgstr "Widelands forsøgte at starte et spil med en fil, som ikke kunne findes på den angivne sti.\nFilen var: %s\nHvis dette sker, så har værten måske valgt en fil, som du ikke ejer. Normalt skal sådan en fil sendes fra værten til dig, men måske er overførslen endnu ikke er færdig!?!"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:456
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr ""
+msgstr "Den valgte fil kan ikke findes. Hvis den ikke automatisk overføres til dig, så skriv venligst til værten om dette problem."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
@@ -2372,7 +2372,7 @@ msgstr "Scenarietilstand valgt"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:664
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Du er i menuen til start af spil for flere spillere"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:665
 msgid "Client settings"
@@ -2388,13 +2388,13 @@ msgstr "På den venstre side er en liste over alle klienter inklusive dig. Du ka
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Spilleren med flagets farve. Hvis mere end en klient valgte den samme farve, så deler de kontrol over spilleren (»delt kongedømmetilstand«)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
 msgid "Player settings"
@@ -2404,7 +2404,7 @@ msgstr "Spillerindstillinger"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "I midten er indstillingerne for spillerne. For at starte et spil, skal hver spiller være en af de følgende:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -2415,11 +2415,11 @@ msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Forbundet til en computerspiller (ansigtet i billedet samt teksten som fremgår når musen føres hen over indikerer styrken for den aktuelt valgte computerspiller)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Set som delt i startposition for en anden spiller."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:691
 msgid "Closed."
@@ -2431,13 +2431,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for »type-knappen« for en spiller. Værtsspillere kan også sætte initialiseringen af hver spiller (bygningssættet, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Hver klient forbundet til en spiller (sættet »rollespiller«) kan sætte stammen og holdet for den spiller"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"

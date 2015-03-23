@@ -7,12 +7,13 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-02 12:04+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-20 09:57+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +72,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr "Widelands ist ein beinahe fertig entwickeltes Echtzeit-Strategiespiel. Alleine\nmacht es viel Spaß, doch noch viel mehr zusammen mit anderen. Möchtest du\naber auch zur Entwicklung des Spieles etwas beitragen – sei es als Zeichner,\nProgrammierer, Übersetzer oder durch das Melden von Fehlern – kontaktiere\nuns auf unserer Website."
+msgstr "Widelands ist ein beinahe fertig entwickeltes Echtzeit-Strategiespiel. Alleine\nmacht es viel Spaß, doch noch viel mehr zusammen mit anderen. Möchtest du\naber auch zur Entwicklung des Spieles etwas beitragen – sei es als Zeichner,\nProgrammierer, Übersetzer oder durch das Melden von Fehlern – kontaktiere\nuns auf unserer Webseite."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
@@ -95,19 +96,19 @@ msgstr "Wenn du STRG drückst, während du eine Straße baust, werden automatisc
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
-msgstr "Du kannst die Bestätigungsfenster für nichtumkehrbare Aktionen (Abreißen, etc.), indem du STRG gedrückt hältst, während du auf das jeweiligen Aktionsfeld klickst."
+msgstr "Du kannst die Bestätigungsfenster für unumkehrbare Aktionen  wie Abreißen etc. umgehen, indem du STRG gedrückt hältst, während du auf das jeweiligen Aktionsfeld klickst."
 
 #: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
-msgstr "Tastaturbefehle (im Spiel)"
+msgstr "Tastaturbefehle im Spiel"
 
 #: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
-msgstr "Bild-auf: Erhöht die Spielgeschwindigkeit"
+msgstr "BILD AUF: Erhöht die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
-msgstr "Bild-ab: Verringert die Spielgeschwindigkeit"
+msgstr "BILD AB: Verringert die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
@@ -115,7 +116,7 @@ msgstr "PAUSE: Pausiert das Spiel"
 
 #: ../../txts/README.lua:63 ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr "Leertaste: Zeigt/versteckt die Bauhilfe"
+msgstr "Leertaste: Schaltet die Bauhilfe ein und aus"
 
 #: ../../txts/README.lua:64 ../../txts/editor_readme:29
 msgid "M: toggles minimap"
@@ -171,7 +172,7 @@ msgstr "STRG+F10: Beendet das Spiel sofort"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr "STRG+Linksklick: Überspringt den Bestätigungsdialog"
+msgstr "STRG+Linksklick: Überspringt das Bestätigungsfenster"
 
 #: ../../txts/README.lua:78
 msgid "CTRL+F11: takes a screenshot"
@@ -180,31 +181,31 @@ msgstr "STRG+F11: Macht einen Screenshot"
 #: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr "Im Nachrichtenfenster sind folgende zusätzliche Tastenkombinationen verfügbar:"
+msgstr "Im Nachrichtenfenster sind folgende zusätzliche Tastaturbefehle verfügbar:"
 
 #: ../../txts/README.lua:82
 msgid "0: shows all messages"
-msgstr "0: zeigt alle Nachrichten"
+msgstr "0: Zeigt alle Nachrichten"
 
 #: ../../txts/README.lua:83
 msgid "1: shows geologists' messages only"
-msgstr "1: zeigt nur Nachrichten vom Geologen"
+msgstr "1: Zeigt nur Nachrichten vom Geologen"
 
 #: ../../txts/README.lua:84
 msgid "2: shows economy messages only"
-msgstr "2: zeigt nur Wirtschaftsnachrichten"
+msgstr "2: Zeigt nur Wirtschaftsnachrichten"
 
 #: ../../txts/README.lua:85
 msgid "3: shows seafaring messages only"
-msgstr "3: zeigt nur Seefahrtsnachrichten"
+msgstr "3: Zeigt nur Seefahrtsnachrichten"
 
 #: ../../txts/README.lua:86
 msgid "4: shows warfare messages only"
-msgstr "4: zeigt nur Kriegsnachrichten"
+msgstr "4: Zeigt nur Militärnachrichten"
 
 #: ../../txts/README.lua:87
 msgid "5: shows scenario messages only"
-msgstr "5: zeigt nur Szenarionachrichten"
+msgstr "5: Zeigt nur Szenarionachrichten"
 
 #: ../../txts/README.lua:88
 msgid "G: jumps to the location corresponding to the current message"
@@ -212,7 +213,7 @@ msgstr "G: Wechselt auf der Karte zu der Position, auf die sich das Ereignis bez
 
 #: ../../txts/README.lua:89
 msgid "DELETE: archives/restores the current message"
-msgstr "Entfernen: archiviert die aktuelle Nachricht/stellt sie wieder her"
+msgstr "ENTF: Archiviert die aktuelle Nachricht/stellt sie wieder her"
 
 #: ../../txts/README.lua:91
 msgid "Online Help"
@@ -239,7 +240,7 @@ msgstr "Bitte schreibe alle wichtigen Informationen auf. Also:"
 
 #: ../../txts/README.lua:105
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr "- Wenn möglich eine detailierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
+msgstr "- Wenn möglich, eine detailierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
 
 #: ../../txts/README.lua:107
 msgid ""
@@ -251,13 +252,13 @@ msgstr "- Was du erwartet hast und was tatsächlich passiert ist."
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr "- Welche Version von Widelands benutzt du? (Zum Beispiel „build-18“ oder\n„bzr6841[trunk]“ falls du eine Entwicklungsversion benutzt.)"
+msgstr "- Welche Version von Widelands benutzt du? (Zum Beispiel „build-18“ oder\n„bzr7428[trunk]“, falls du eine Entwicklungsversion benutzt.)"
 
 #: ../../txts/README.lua:112
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
-msgstr "- Bitte gebe auch an, auf welchem Betriebssystem du Widelands verwendest.\nManche Fehler können vom Betriebssystem abhängen."
+msgstr "- Bitte gib auch an, auf welchem Betriebssystem du Widelands verwendest.\nManche Fehler können vom Betriebssystem abhängen."
 
 #: ../../txts/README.lua:115
 msgid "- Which map you were playing when the bug occurred."
@@ -274,7 +275,7 @@ msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
-msgstr "- Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehler auftritt (zum Beispiel\nein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an.\nFür mehr Informationen schaue unter dem Abschnitt „Aufzeichnungen“ weiter unten nach."
+msgstr "- Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehler auftritt (zum Beispiel\nein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an.\nFür weitere Informationen schaue unter dem Abschnitt „Aufzeichnungen“ weiter unten nach."
 
 #: ../../txts/README.lua:124
 msgid "Replays"
@@ -287,7 +288,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine dieser Dateien hat\ndie Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere Datei hat die\nEndung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben wurde, wie zum\nBeispiel eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des Dateinamen teilt dir\ndie Zeit, zu der du das Spiel gestartet hast, mit."
+msgstr "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine dieser Dateien hat\ndie Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere Datei hat die\nEndung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben wurde, wie zum\nBeispiel eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des Dateinamen teilt dir\ndie Zeit mit, an der du das Spiel gestartet hast."
 
 #: ../../txts/README.lua:132
 msgid ""
@@ -501,7 +502,7 @@ msgid ""
 "to use with Widelands.<br>As you can see, this Editor is heavy work in "
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
-msgstr "Der Editor ist für Spieler gedacht, die gerne ihre eigenen Karten erstellen und spielen würden.<br>Wie du sehen kannst, wird am Editor noch hart gearbeitet. Und so wird mit dem immer besser werdenden Editor auch dieser Text schon bald länger und länger werden."
+msgstr "Der Editor ist für Spieler gedacht, die gerne ihre eigenen Karten erstellen und spielen.<br>Wie du sehen kannst, wird am Editor noch hart gearbeitet. Und so wird mit dem immer besser werdenden Editor auch dieser Text schon bald länger und vollständiger werden."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
@@ -539,11 +540,11 @@ msgstr "I: Aktiviert das Informationswerkzeug"
 
 #: ../../txts/editor_readme:37
 msgid "CTRL+L: load map"
-msgstr "Strg+L: Eine Karte laden"
+msgstr "STRG+L: Karte laden"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+S: save map"
-msgstr "Strg+S: Die Karte speichern"
+msgstr "STRG+S: Karte speichern"
 
 #: ../../txts/editor_readme:41
 msgid "1-0: changes tool size"
@@ -551,11 +552,11 @@ msgstr "1-0: Ändert die Werkzeuggröße"
 
 #: ../../txts/editor_readme:43
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
-msgstr "Umschalt (gehalten): Wählt das erste alternative Werkzeug (solange die Tasten gedrückt gehalten werden)"
+msgstr "UMSCHALT: Wählt das erste alternative Werkzeug solange die Taste gedrückt gehalten wird"
 
 #: ../../txts/editor_readme:45
 msgid "ALT (Hold): Selects second alternative tool while pressed"
-msgstr "Alt (gehalten): Wählt das zweite alternative Werkzeug (solange die Tasten gedrückt gehalten werden)"
+msgstr "ALT: Wählt das zweite alternative Werkzeug, solange die Taste gedrückt gehalten wird"
 
 #: ../../txts/license:1
 msgid "License"
@@ -566,8 +567,8 @@ msgid "Licensing information for Widelands"
 msgstr "Lizenzinformationen für Widelands"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2014 durch das Widelands Development Team."
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2015 Widelands-Entwicklungsteam."
 
 #: ../../txts/license:9
 msgid ""
@@ -579,7 +580,7 @@ msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unte
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
-msgstr "Mehr Informationen zu FOSS und GPL findest du auf folgender Website: "
+msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Website: "
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
@@ -620,20 +621,20 @@ msgid ""
 "support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
 " questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
-msgstr "Dieses Spiel wird so, wie es ist, und ohne jegliche Garantie verbreitet. Für weitere Informationen und Support bezüglich Widelands exisiteren die folgenden Webseiten: http://wl.widelands.org (Website, Wiki, Forum für Fragen und allgemeinen Support) und https://launchpad.net/widelands (Bugtracker, Übersetzungen)."
+msgstr "Dieses Spiel wird so, wie es ist, und ohne jegliche Garantie verbreitet. Für weitere Informationen und Support bezüglich Widelands exisiteren die folgenden Webseiten: http://wl.widelands.org (Webseite, Wiki, Forum für Fragen und allgemeinen Support) und https://launchpad.net/widelands (Bugtracker)."
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Manche Gebäude wie zum Beispiel Bauernhöfe haben nur einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie von Straßen und/oder Bäumen eingekreist sind."
+msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie zu dicht von Straßen oder Bäumen umgeben sind."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Baue immer eine Förster- und eine Wildhüterhütte, damit du nie ohne Holz und Nahrung da stehst."
+msgstr "Baue immer ein Förster- und ein Fischzüchterhaus, damit du nie ohne Holz und Nahrung da stehst."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
@@ -651,27 +652,27 @@ msgstr "Baue immer eine Förster- und eine Wildhüterhütte, damit du nie ohne H
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr "Allgemeine Hilfe für den Editor, sowie ein kurzes Tutorial können in unserem Wiki auf www.widelands.org gefunden werden"
+msgstr "Allgemeine Hilfe für den Editor sowie eine kurze Einführung können in unserem Wiki auf www.widelands.org gefunden werden."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
 "You can select multiple animal types if you hold down CTRL during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Du kannst mehrere Tiere auswählen, wenn du Strg während der Auswahl gedrückt hältst. Wenn du dann auf die Karte klickst, wird eines der ausgewählten Tiere platziert."
+msgstr "Du kannst mehrere Tiere auswählen, wenn du STRG während der Auswahl gedrückt hältst. Wenn du dann auf die Karte klickst, wird eines der ausgewählten Tiere platziert."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with CTRL + mouse click."
-msgstr "Genauso wie bei Tieren kannst du auch mehrere unbewegliche Objekte oder Geländearten mit Strg + Mausklick auswählen."
+msgstr "Genauso wie bei Tieren kannst du auch mehrere unbewegliche Objekte oder Geländearten mit STRG+Mausklick auswählen."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down SHIFT switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Festhalten der Umschalttaste aktiviert das erste alternative Werkzeug. Dieses Werkzeug macht meistens das Gegenteil dessen, was das normale tut (beispielsweise das Entfernen eines Objektes anstatt des Platzierens)."
+msgstr "Festhalten der UMSCHALT-Taste aktiviert das erste alternative Werkzeug. Dieses Werkzeug macht meistens das Gegenteil dessen, was das normale tut (beispielsweise das Entfernen eines Objektes anstatt des Platzierens)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
@@ -682,7 +683,7 @@ msgstr "Wenn du ALT gedrückt hältst, wird das zweite alternative Werkzeug akti
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Die Zahlentasten (1 - 0) erlauben dir direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
+msgstr "Die Zahlentasten (1 - 0) erlauben dir, direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
@@ -692,13 +693,13 @@ msgstr "Die LEERTASTE verhält sich wie im normalen Spiel. Sie schaltet die Bauh
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Baue immer eine Forsthütte, damit dir nie das Holz ausgeht."
+msgstr "Baue immer ein Forsthaus, damit dir nie das Holz ausgeht."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr "Erst wenn eine Straße die Baustelle erreicht, wird mit dem Bau begonnen."
+msgstr "Erst wenn eine Straße die Baustelle erreicht, kann mit dem Bau begonnen werden."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
@@ -710,11 +711,11 @@ msgstr "Sende erst einen Geologen zur Bodenerkundung aus, bevor du Minen oder Br
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
-msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie Baracken, Wachstuben oder Festungen vergrößern."
+msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie Wachposten, Baracken oder Festungen vergrößern."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr "Bergarbeiter arbeiten nur, wenn sie mit genügend Verpflegung versorgt werden."
+msgstr "Bergarbeiter arbeiten nur, wenn sie mit genügend Nahrung versorgt werden."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -726,13 +727,13 @@ msgstr "Teile deine Straßen durch Flaggen in viele kleine Teile auf. Das wird d
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Irgendwelche Fragen? Du findest uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Gemeinschaftsforen."
+msgstr "Hast du weitere Fragen? Auf www.widelands.org findest du unsere FAQs, das Wiki und natürlich unsere Gemeinschaftsforen."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr "Benutze die Prioritätsschaltflächen im Fenster der Gebäude, um die Anlieferung von speziellen Waren zu steuern."
+msgstr "Benutze die Prioritätsschaltflächen in den Gebäudefenstern, um die Anlieferung von speziellen Waren zu steuern."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
@@ -745,41 +746,41 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Verwalte Deine Nachrichten effizienter: Drücke „N“ für News, um in das Nachrichten-Fenster zu gelangen, verwende dann „G“ für Go To und die Entf-Taste zum Archivieren von Nachrichten."
+msgstr "Verwalte deine Nachrichten effizienter: Drücke „N“ für News, um in das Nachrichten-Fenster zu gelangen, verwende dann „G“ für Go To und die ENTF-Taste zum Archivieren von Nachrichten."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr "Verwende Komma (,) und Punkt (.), um zwischen den zuletzt besuchten Orten in der Welt hin und her zu gehen."
+msgstr "Verwende Komma (,) und Punkt (.), um zwischen den zuletzt besuchten Orten in deiner Welt hin und her zu springen."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr "Drücke Strg + (0-9), um wichtige Orte zu speichern, drücke 0-9 um sie wieder aufzurufen."
+msgstr "Drücke STRG+(0-9), um wichtige Orte zu speichern, drücke dann 0-9, um sie wieder aufzurufen."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr "Durch das Drücken der Strg-Taste beim Entfernen einer Straße werden alle Fahnen bis zur nächsten Kreuzung entfernt."
+msgstr "Durch das Drücken der STRG-Taste beim Entfernen einer Straße werden alle Fahnen bis zur nächsten Kreuzung entfernt."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr "Neue Soldaten werden im Hauptquartier und in Lagerhäusern rekrutiert, wenn alle nötigen Waffen und Rüstungsgegenstände vorhanden sind. Trainingslager und Arenen dienen zu Verbesserung ihrer Fähigkeiten."
+msgstr "Neue Soldaten werden im Hauptquartier und in Lagerhäusern rekrutiert, wenn alle nötigen Waffen und Rüstungsgegenstände vorhanden sind. Trainingsgebäude verbessern ihre Fähigkeiten."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Drückst du STRG während du auf die Schaltfläche zum Ausbauen, Abreißen oder Zerstören eines Gebäudes klickst, wird die Bestätigungsfrage übersprungen."
+msgstr "Drückst du STRG, während du auf die Schaltfläche zum Ausbauen, Abreißen oder Zerstören eines Gebäudes klickst, wird das Bestätigungsfenster übersprungen."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Drücke 'I', um schnell die Lagerstandsübersicht zu öffnen."
+msgstr "Drücke „I“, um schnell das Lagerfenster zu öffnen."
 
 #: ../../txts/tips/general_game.tip:62
 msgid ""
@@ -791,7 +792,7 @@ msgstr "Eine Wirtschaft umfasst alle Gebäude und Flaggen, die durch Straßen ve
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Du kannst die Tasten „Bild hoch“ und „Bild runter“ verwenden, um die gewünschte Geschwindigkeit anzupassen – die wirkliche Geschwindigkeit wird im Mehrspielermodus aus den Einstellungen aller Spieler errechnet."
+msgstr "Du kannst die Tasten „BILD AUF“ und „BILD AB“ verwenden, um die gewünschte Geschwindigkeit anzupassen – die wirkliche Geschwindigkeit wird im Mehrspielermodus aus den Einstellungen aller Spieler errechnet."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""

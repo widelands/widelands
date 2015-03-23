@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-04 16:26+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-11 16:16+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
-msgstr ""
+msgstr "macinando del grano"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -1713,11 +1713,11 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr ""
+msgstr "estraendo della roccia"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr ""
+msgstr "estraendo del marmo"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1782,7 +1782,7 @@ msgstr "I tuoi soldati hanno occupato la tua guardiola."
 
 #: ../../tribes/empire/sheepfarm/conf:25
 msgid "breeding sheep"
-msgstr ""
+msgstr "allevando delle pecore"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
