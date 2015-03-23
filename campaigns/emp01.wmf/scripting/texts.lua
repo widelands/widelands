@@ -119,7 +119,7 @@ saledus_1 = {
 		.. paragraphdivider() ..
 		_([[Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in the forests – so that we can be sure to see any potential enemies before they can see us.]])
 		.. paragraphdivider() ..
-		_([[We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.]]))
+		_([[You really should build a barracks in the eastern portion of the forest. Then one of my men can keep watch in the darkness and keep us safe from these creatures.]]))
 		.. new_objectives(obj_build_barracks),
    w=400,
 }
@@ -130,7 +130,7 @@ saledus_2 = {
    body= saledus(_"Saledus speaks with a sigh of relief…",
 		_([[Sire, I saw that the construction of the barracks was completed, so I have assigned one of my best soldiers to it to keep watch on the desert.]])
 		.. paragraphdivider() ..
-	_([[This is a good step forward. Now we can feel a bit safer and can look forward to repairing our ship.]])),
+		_([[This is a good step forward. Now we can feel a bit safer and can look forward to repairing our ship.]])),
    w=400,
 }
 
@@ -139,9 +139,9 @@ amalea_1 = {
    body= amalea(_"Amalea smiles…",
 		_([[Hey Lutius, I just met Saledus outside.]])
 		.. paragraphdivider() ..
-		_([[He told me about the barracks. Well, I am not one of those girls who think we need more barracks – instead, we might concentrate on other things now.]])
+		_([[He told me about the barracks. Well, I don’t think we need more barracks – instead, we might concentrate on other things now.]])
 		.. paragraphdivider() ..
-		_([[It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack’s house, south of our provisional headquarters.]]))
+		_([[It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday to look for a nice place for a lumberjack’s house and found one right south of our provisional headquarters.]]))
 		.. new_objectives(obj_build_lumberjack),
    w=400,
 }
@@ -159,15 +159,15 @@ amalea_2 = {
 amalea_3 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea comes in…",
-		_([[Hi Lutius, I’ve got two important things to talk about… First the good news:]])
+		_([[Hey Lutius, I’ve got two important things to talk about… First the good news:]])
 		.. paragraphdivider() ..
 		_([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]])
 		.. paragraphdivider() ..
-		_([[But that’s just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an incredible speed. There are almost no trees left on this island.]])
+		_([[But the bad news is that our lumberjacks harvest at an incredible speed. There are almost no trees left on this island.]])
 		.. paragraphdivider() ..
-		_([[Lutius, these trees provide shelter from the sandstorms that sweep in from the desert and shade on the hot days, and they are the home of so many gentle animals. We shouldn’t leave this island a complete desert.]])
+		_([[These trees provide shelter from the sandstorms that sweep in from the desert and shade on the hot days, and they are the home of many gentle animals. We shouldn’t leave this island a complete desert.]])
 		.. paragraphdivider() ..
-		_([[Lutius, I beg you: find someone who takes care of planting new trees.]]))
+		_([[Lutius, please find someone who takes care of planting new trees.]]))
 		.. new_objectives(obj_build_forester),
    w=400,
 }
@@ -175,7 +175,7 @@ amalea_3 = {
 saledus_3 = {
    title=_"Thinking About the Future",
    body= saledus(_"Saledus notes…",
-		_([[Hey, my good old friend. I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful hard stones and beautiful marble.]])
+		_([[Sire, I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful hard stones and beautiful marble.]])
 		.. paragraphdivider() ..
 		_([[The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.]]))
 		.. new_objectives(obj_build_quarry),
@@ -184,8 +184,8 @@ saledus_3 = {
 
 saledus_4 = {
    title=_"A Step Forward",
-   body= saledus(_"Saledus looks promising…",
-		_([[Hey Lutius, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with stones and beautiful marble.]])
+   body= saledus(_"Saledus looks excited…",
+		_([[Sire, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with stones and beautiful marble.]])
 		.. paragraphdivider() ..
 		_([[Now we truly can look forward to settling down on another island.]])),
    w=400,
@@ -207,5 +207,5 @@ diary_page_4 = {
 safe_peninsula = {
    title=_"Safe Peninsula",
    body= saledus(_"Saledus speaks:",
-   _[[You have made this peninsula a very secure place. It is time to move on!]])
+		_[[Sire, you have made this peninsula a very secure place. Now it’s time to move on!]])
 }
