@@ -164,7 +164,6 @@ private:
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
 
-
 	ScheduleTasks get_oldest_task(uint32_t);
 
 	bool construct_building(uint32_t);
@@ -237,7 +236,7 @@ private:
 
 	bool check_supply(const BuildingObserver&);
 
-	//bool consider_attack(int32_t);
+	// bool consider_attack(int32_t);
 
 	void print_land_stats();
 
@@ -256,9 +255,9 @@ private:
 	uint32_t num_milit_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
-	
+
 	uint16_t last_attacked_player_;
-	//check ms in this interval - will auto-adjust
+	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
 
 	std::list<Widelands::FCoords> unusable_fields;
@@ -277,10 +276,9 @@ private:
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
 	std::map<ScheduleTasks, uint32_t> taskDue;
-	std::map<uint32_t, enemySiteObserver> enemy_sites;
-	//it will map mined material to observer
-	std::map<int32_t, mineTypesObserver> mines_per_type;	
-	
+	std::map<uint32_t, EnemySiteObserver> enemy_sites;
+	// it will map mined material to observer
+	std::map<int32_t, MineTypesObserver> mines_per_type;
 
 	std::vector<WareObserver> wares;
 
@@ -299,7 +297,7 @@ private:
 	// so if 255 = resource is needed, 0 = not needed
 	int32_t resource_necessity_territory_;
 	int32_t resource_necessity_mines_;
-	int32_t resource_necessity_stones_; //NOCOM
+	int32_t resource_necessity_stones_;  // NOCOM
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
@@ -308,15 +306,16 @@ private:
 	uint16_t military_under_constr_;
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
-	                               // building build
+	                                // building build
 	Widelands::Coords
-	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
+	   last_attack_target_;          // flag to abuilding (position) that was attacked last time
 	uint32_t next_attack_waittime_;  // second till the next attack consideration
-	bool seafaring_economy;         // false by default, until first port space is found
+	bool seafaring_economy;          // false by default, until first port space is found
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
-	int32_t vacant_mil_positions_; //sum of vacant positions in militarysites and training sites
+	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	//statistics for training sites per type
 	uint8_t ts_type1_count_;
 	uint8_t ts_type1_const_count_;
 	uint8_t ts_type2_count_;
