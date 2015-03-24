@@ -36,7 +36,7 @@ min_level=0
 max_level=4
 
 [aihints]
-ts_type=2
+ts_type=advanced
 
 [soldier hp]
 min_level=0

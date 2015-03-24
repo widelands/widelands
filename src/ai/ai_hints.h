@@ -24,8 +24,11 @@
 #include <string>
 
 #include "base/macros.h"
+#include "base/log.h"
 
 class Section;
+
+enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
@@ -94,7 +97,7 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	uint8_t get_ts_type() const {
+	TrainingSiteType get_ts_type() const {
 		return ts_type_;
 	}
 
@@ -113,7 +116,7 @@ private:
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	uint8_t mines_percent_;
-	uint8_t ts_type_;
+	TrainingSiteType ts_type_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

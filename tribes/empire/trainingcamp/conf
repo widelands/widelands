@@ -127,4 +127,4 @@ pics=trainingcamp_i_??.png  # ???
 hotspot=82 105
 
 [aihints]
-ts_type=2
+ts_type=advanced

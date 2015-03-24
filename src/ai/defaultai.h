@@ -297,7 +297,6 @@ private:
 	// so if 255 = resource is needed, 0 = not needed
 	int32_t resource_necessity_territory_;
 	int32_t resource_necessity_mines_;
-	int32_t resource_necessity_stones_;  // NOCOM
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
@@ -307,19 +306,17 @@ private:
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
-	Widelands::Coords
-	   last_attack_target_;          // flag to abuilding (position) that was attacked last time
-	uint32_t next_attack_waittime_;  // second till the next attack consideration
+
 	bool seafaring_economy;          // false by default, until first port space is found
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	//statistics for training sites per type
-	uint8_t ts_type1_count_;
-	uint8_t ts_type1_const_count_;
-	uint8_t ts_type2_count_;
-	uint8_t ts_type2_const_count_;
+	uint8_t ts_basic_count_;
+	uint8_t ts_basic_const_count_;
+	uint8_t ts_advanced_count_;
+	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};

@@ -23,6 +23,7 @@
 #include <list>
 #include <unordered_set>
 
+#include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/checkstep.h"
@@ -369,7 +370,7 @@ struct BuildingObserver {
 	bool mountain_conqueror_;   // military building built near mountains
 	uint32_t prohibited_till_;  // do not build before (ms)
 	uint32_t forced_after_;     // do not wait until ware is needed
-	uint8_t ts_type_;
+	TrainingSiteType ts_type_;
 
 	bool unoccupied_;
 	uint16_t unconnected_;  // to any warehouse (count of such buildings)

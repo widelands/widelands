@@ -56,4 +56,4 @@ pics=arena_b_??.png  # ???
 hotspot=82 83
 
 [aihints]
-ts_type=1
+ts_type=basic

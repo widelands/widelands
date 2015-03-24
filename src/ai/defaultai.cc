@@ -104,17 +104,14 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
      military_last_build_(0),
-	last_attack_target_(
-        std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
-     next_attack_waittime_(10),
      seafaring_economy(false),
      colony_scan_area_(35),
      spots_(0),
      vacant_mil_positions_(0),
-     ts_type1_count_(0),
-     ts_type1_const_count_(0),
-     ts_type2_count_(0),
-     ts_type2_const_count_(0),
+     ts_basic_count_(0),
+     ts_basic_const_count_(0),
+     ts_advanced_count_(0),
+     ts_advanced_const_count_(0),
      ts_without_trainers_(0) {
 
 	// Subscribe to NoteFieldPossession.
@@ -243,73 +240,94 @@ void DefaultAI::think() {
 	// (only one but some of them needs to run check_economies() to
 	// guarantee consistency)
 	// job names are selfexplanatory
-	if (DueTask == ScheduleTasks::kBbuildableFieldsCheck) {
-		update_all_buildable_fields(gametime);
-		taskDue[ScheduleTasks::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
-	} else if (DueTask == ScheduleTasks::kMineableFieldsCheck) {
-		update_all_mineable_fields(gametime);
-		taskDue[ScheduleTasks::kMineableFieldsCheck] = gametime + kMinMFCheckInterval;
-	}
-	if (DueTask == ScheduleTasks::kRoadCheck) {
-		if (check_economies()) {  // is a must
-			return;
-		};
-		taskDue[ScheduleTasks::kRoadCheck] = gametime + 400;
-		improve_roads(gametime);
-	} else if (DueTask == ScheduleTasks::kUnbuildableFCheck) {
-		taskDue[ScheduleTasks::kUnbuildableFCheck] = gametime + 4000;
-		update_all_not_buildable_fields();
-	} else if (DueTask == ScheduleTasks::kCheckEconomies) {
-		check_economies();
-		taskDue[ScheduleTasks::kCheckEconomies] = gametime + 8000;
-	} else if (DueTask == ScheduleTasks::kProductionsitesStats) {
-		update_productionsite_stats(gametime);
-	} else if (DueTask == ScheduleTasks::kConstructBuilding) {
-		if (check_economies()) {  // economies must be consistent
-			return;
+	switch (DueTask) {
+		case ScheduleTasks::kBbuildableFieldsCheck :
+			update_all_buildable_fields(gametime);
+			taskDue[ScheduleTasks::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
+			break;
+		case ScheduleTasks::kMineableFieldsCheck :
+			update_all_mineable_fields(gametime);
+			taskDue[ScheduleTasks::kMineableFieldsCheck] = gametime + kMinMFCheckInterval;
+			break;
+		case ScheduleTasks::kRoadCheck :
+			if (check_economies()) {  // is a must
+				return;
+			};
+			taskDue[ScheduleTasks::kRoadCheck] = gametime + 400;
+			improve_roads(gametime);
+			break;
+		case ScheduleTasks::kUnbuildableFCheck :
+			taskDue[ScheduleTasks::kUnbuildableFCheck] = gametime + 4000;
+			update_all_not_buildable_fields();
+			break;
+		case ScheduleTasks::kCheckEconomies :
+			check_economies();
+			taskDue[ScheduleTasks::kCheckEconomies] = gametime + 8000;
+			break;
+		case ScheduleTasks::kProductionsitesStats :
+			update_productionsite_stats(gametime);
+			break;
+		case ScheduleTasks::kConstructBuilding :
+			if (check_economies()) {  // economies must be consistent
+				return;
+			}
+			taskDue[ScheduleTasks::kConstructBuilding] = gametime + 6000;
+			if (construct_building(gametime)) {
+				time_of_last_construction_ = gametime;
+			}
+			break;
+		case ScheduleTasks::kCheckProductionsites :
+			if (check_economies()) {  // economies must be consistent
+				return;
+			}
+			check_productionsites(gametime);
+			taskDue[ScheduleTasks::kCheckProductionsites] = gametime + 5000;
+			break;
+		case ScheduleTasks::kCheckShips :
+			check_ships(gametime);
+			break;
+		case ScheduleTasks::KMarineDecisions :
+			marine_main_decisions(gametime);
+			break;
+		case ScheduleTasks::kCheckMines :
+			if (check_economies()) {  // economies must be consistent
+				return;
+			}
+			taskDue[ScheduleTasks::kCheckMines] = gametime + 7000;  // 7 seconds is enough
+			check_mines_(gametime);
+			break;
+		case ScheduleTasks::kCheckMilitarysites :
+			check_militarysites(gametime);
+			break;
+		case ScheduleTasks::kCheckTrainingsites :
+			check_trainingsites(gametime);
+			break;
+		case ScheduleTasks::kCountMilitaryVacant :
+			count_military_vacant_positions();
+			taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 90 * 1000;
+			break;
+		case ScheduleTasks::kWareReview :
+			if (check_economies()) {  // economies must be consistent
+				return;
+			}
+			taskDue[ScheduleTasks::kWareReview] = gametime + 15 * 60 * 1000;
+			review_wares_targets(gametime);
+			break;
+		case ScheduleTasks::kPrintStats :
+			if (check_economies()) {  // economies must be consistent
+				return;
+			}
+			print_stats(gametime);
+			break;
+		case ScheduleTasks::kCheckEnemySites :
+			check_enemy_sites(gametime);
+			taskDue[ScheduleTasks::kCheckEnemySites] = gametime + 19 * 1000;
+			break;
+		case ScheduleTasks::kIdle :
+			break;
+		default:
+			;
 		}
-		taskDue[ScheduleTasks::kConstructBuilding] = gametime + 6000;
-		if (construct_building(gametime)) {
-			time_of_last_construction_ = gametime;
-		}
-	} else if (DueTask == ScheduleTasks::kCheckProductionsites) {
-		if (check_economies()) {  // economies must be consistent
-			return;
-		}
-		check_productionsites(gametime);
-		taskDue[ScheduleTasks::kCheckProductionsites] = gametime + 5000;
-	} else if (DueTask == ScheduleTasks::kCheckShips) {
-		check_ships(gametime);
-	} else if (DueTask == ScheduleTasks::KMarineDecisions) {
-		marine_main_decisions(gametime);
-	} else if (DueTask == ScheduleTasks::kCheckMines) {
-		if (check_economies()) {  // economies must be consistent
-			return;
-		}
-		taskDue[ScheduleTasks::kCheckMines] = gametime + 7000;  // 7 seconds is enough
-		check_mines_(gametime);
-	} else if (DueTask == ScheduleTasks::kCheckMilitarysites) {
-		check_militarysites(gametime);
-	} else if (DueTask == ScheduleTasks::kCheckTrainingsites) {
-		check_trainingsites(gametime);
-	} else if (DueTask == ScheduleTasks::kCountMilitaryVacant) {
-		count_military_vacant_positions();
-		taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 90 * 1000;
-	} else if (DueTask == ScheduleTasks::kWareReview) {
-		if (check_economies()) {  // economies must be consistent
-			return;
-		}
-		taskDue[ScheduleTasks::kWareReview] = gametime + 15 * 60 * 1000;
-		review_wares_targets(gametime);
-	} else if (DueTask == ScheduleTasks::kPrintStats) {
-		if (check_economies()) {  // economies must be consistent
-			return;
-		}
-		print_stats(gametime);
-	} else if (DueTask == ScheduleTasks::kCheckEnemySites) {
-		check_enemy_sites(gametime);
-		taskDue[ScheduleTasks::kCheckEnemySites] = gametime + 19 * 1000;
-	}
 }
 
 /**
@@ -372,7 +390,7 @@ void DefaultAI::late_initialization() {
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
-		bo.ts_type_ = bh.get_ts_type();
+		bo.ts_type_ = TrainingSiteType::kNoTS;
 
 		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
@@ -466,6 +484,9 @@ void DefaultAI::late_initialization() {
 				bo.inputs_.push_back(temp_input.first);
 			}
 			bo.ts_type_ = bh.get_ts_type();
+			// it would behave badly if no type was set
+			// make sure all TS have its type set properly in conf files
+			assert(bo.ts_type_ != TrainingSiteType::kNoTS);
 			continue;
 		}
 
@@ -1672,12 +1693,19 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 					} else if (!bo.inputs_.empty()) {
-						if ((bo.total_count() == 0 - bo.unconnected_)) {
+						if ((bo.total_count() - bo.unconnected_ == 0)) {
 							prio += max_needed_preciousness + kDefaultPrioBoost;
 						}
-						if ((bo.cnt_built_ - bo.unconnected_) > 0 && bo.current_stats_ > 70) {
+						if ((bo.cnt_built_ - bo.unconnected_) > 0
+							&&
+							//due to very badly designed statistics and the way how
+							//productionsites are working we must distinguish how many
+							//outputs the site has.
+							((bo.outputs_.size() == 1 && bo.current_stats_ > 75)
+							||
+							(bo.outputs_.size() > 1 && bo.current_stats_ > 55))) {
 							prio += max_needed_preciousness + kDefaultPrioBoost - 3 +
-							        (bo.current_stats_ - 70) / 5;
+							        (bo.current_stats_ - 55) / 8;
 						}
 					}
 
@@ -1784,7 +1812,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				}
 
-				//special bonus for bigger buildings in enemy is nearby
+				//special bonus for bigger buildings if enemy is nearby
 				if (bf->enemy_nearby_) {
 					prio += (bo.desc->get_size() - 1) * 15;
 				}
@@ -1887,28 +1915,28 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// target is only one for both types
-				if ((ts_type1_const_count_ + ts_type2_const_count_) > 0) {
+				if ((ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
 					continue;
 				}
 
 				// we build one training site for 100 militarysites
-				if (bo.ts_type_ == 1 &&
-				    militarysites.size() / 100 < static_cast<int32_t>(ts_type1_count_)) {
+				if (bo.ts_type_ == TrainingSiteType::kBasic &&
+				    militarysites.size() / 100 < static_cast<int32_t>(ts_basic_count_)) {
 					continue;
 				}
 				// we build one training site for 100 militarysites
-				if (bo.ts_type_ == 2 &&
-				    militarysites.size() / 100 < static_cast<int32_t>(ts_type2_count_)) {
+				if (bo.ts_type_ == TrainingSiteType::kAdvanced &&
+				    militarysites.size() / 100 < static_cast<int32_t>(ts_advanced_count_)) {
 					continue;
 				}
 
 				// for type1 we need 15 productionsties
-				if (bo.ts_type_ == 1 && productionsites.size() < 15) {
+				if (bo.ts_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
 					continue;
 				}
 
 				// for type2 we need 4 mines
-				if (bo.ts_type_ == 2 && virtual_mines < 4) {
+				if (bo.ts_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
 					continue;
 				}
 
@@ -2859,7 +2887,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->need_stones_) {
 
 		if (map.find_immovables(
-		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		       Area<FCoords>(map.get_fcoords(site.site->get_position()), 6),
 		       nullptr,
 
 		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
@@ -3448,9 +3476,12 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	const BuildingIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
-	    (ts_type1_const_count_ + ts_type2_const_count_) == 0 && ts_type2_count_ > 0) {
+	    (ts_basic_const_count_ + ts_advanced_const_count_) == 0 && ts_advanced_count_ > 0) {
 
 		if (player_->is_building_type_allowed(enhancement)) {
+
+			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
@@ -4061,11 +4092,11 @@ void DefaultAI::gain_building(Building& b) {
 			mines_per_type[target_bo.mines_].in_construction += 1;
 		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
-			if (target_bo.ts_type_ == 1) {
-				ts_type1_const_count_ += 1;
+			if (target_bo.ts_type_ == TrainingSiteType::kBasic) {
+				ts_basic_const_count_ += 1;
 			}
-			if (target_bo.ts_type_ == 2) {
-				ts_type2_const_count_ += 1;
+			if (target_bo.ts_type_ == TrainingSiteType::kAdvanced) {
+				ts_advanced_const_count_ += 1;
 			}
 		}
 
@@ -4118,11 +4149,11 @@ void DefaultAI::gain_building(Building& b) {
 			trainingsites.push_back(TrainingSiteObserver());
 			trainingsites.back().site = &dynamic_cast<TrainingSite&>(b);
 			trainingsites.back().bo = &bo;
-			if (bo.ts_type_ == 1) {
-				ts_type1_count_ += 1;
+			if (bo.ts_type_ == TrainingSiteType::kBasic) {
+				ts_basic_count_ += 1;
 			}
-			if (bo.ts_type_ == 2) {
-				ts_type2_count_ += 1;
+			if (bo.ts_type_ == TrainingSiteType::kAdvanced) {
+				ts_advanced_count_ += 1;
 			}
 
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
@@ -4167,11 +4198,11 @@ void DefaultAI::lose_building(const Building& b) {
 			mines_per_type[target_bo.mines_].in_construction -= 1;
 		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
-			if (target_bo.ts_type_ == 1) {
-				ts_type1_const_count_ -= 1;
+			if (target_bo.ts_type_ == TrainingSiteType::kBasic) {
+				ts_basic_const_count_ -= 1;
 			}
-			if (target_bo.ts_type_ == 2) {
-				ts_type2_const_count_ -= 1;
+			if (target_bo.ts_type_ == TrainingSiteType::kAdvanced) {
+				ts_advanced_const_count_ -= 1;
 			}
 		}
 
@@ -4231,11 +4262,11 @@ void DefaultAI::lose_building(const Building& b) {
 			     ++i) {
 				if (i->site == &b) {
 					trainingsites.erase(i);
-					if (bo.ts_type_ == 1) {
-						ts_type1_count_ -= 1;
+					if (bo.ts_type_ == TrainingSiteType::kBasic) {
+						ts_basic_count_ -= 1;
 					}
-					if (bo.ts_type_ == 2) {
-						ts_type2_count_ -= 1;
+					if (bo.ts_type_ == TrainingSiteType::kAdvanced) {
+						ts_advanced_count_ -= 1;
 					}
 					break;
 				}
@@ -4483,7 +4514,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 2;
 				}
 				// also we should have at least some training sites
-				if ((ts_type1_count_ + ts_type2_count_) == 0) {
+				if ((ts_basic_count_ + ts_advanced_count_) == 0) {
 					site->second.score -= 2;
 				}
 				// treating no attack score
