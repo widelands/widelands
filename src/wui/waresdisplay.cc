@@ -120,7 +120,8 @@ bool AbstractWaresDisplay::handle_mousepress
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::WareIndex ware = ware_at_point(x, y);
-		if (ware == Widelands::INVALID_INDEX) {
+
+		if (!m_tribe.has_ware(ware) && !m_tribe.has_worker(ware)) {
 			return false;
 		}
 		if (!m_selectable) {

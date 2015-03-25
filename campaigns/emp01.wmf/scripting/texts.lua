@@ -151,7 +151,7 @@ amalea_2 = {
    body= amalea(_"Amalea recommends…",
 		_([[Hey Lutius, I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
 		.. paragraphdivider() ..
-		_([[But unfortunately the logs are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build a sawmill – as soon as we have enough space for this.]]))
+		_([[But unfortunately the logs are useless for repairing our ship – we need to turn them into planks, which are needed by every ship and every bigger building too. So we should build a sawmill – as soon as we have enough space for this.]]))
 		.. new_objectives(obj_build_sawmill_and_lumberjacks),
    w=400,
 }
