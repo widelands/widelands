@@ -79,4 +79,4 @@ pics=dungeon_i_??.png  # ???
 hotspot=47 48
 
 [aihints]
-ts_type=advanced
+trainingsite_type=advanced

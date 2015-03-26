@@ -62,4 +62,4 @@ pics=colosseum_i_??.png  # ???
 hotspot=81 106
 
 [aihints]
-ts_type=basic
+trainingsite_type=basic

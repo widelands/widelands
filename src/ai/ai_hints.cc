@@ -43,15 +43,15 @@ BuildingHints::BuildingHints(Section* const section)
 			mines_ = section->get_string("mines");
 	}
 	if (section) {
-		if (!section->has_val("ts_type")) {
-			ts_type_ =  TrainingSiteType::kNoTS;
+		if (!section->has_val("trainingsite_type")) {
+			trainingsite_type_ =  TrainingSiteType::kNoTS;
 		} else {
-			if (!strcmp(section ? section->get_string("ts_type", "basic") : "basic", "basic")) {
-				ts_type_ =  TrainingSiteType::kBasic;
-			} else if (!strcmp(section ? section->get_string("ts_type", "basic") : "basic", "advanced")) {
-				ts_type_ =  TrainingSiteType::kAdvanced;
+			if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "basic")) {
+				trainingsite_type_ =  TrainingSiteType::kBasic;
+			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "advanced")) {
+				trainingsite_type_ =  TrainingSiteType::kAdvanced;
 			} else {
-				ts_type_ = TrainingSiteType::kNoTS;
+				trainingsite_type_ = TrainingSiteType::kNoTS;
 			}
 		}
 	}

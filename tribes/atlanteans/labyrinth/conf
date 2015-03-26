@@ -99,4 +99,4 @@ pics=labyrinth_i_??.png  # ???
 hotspot=80 88
 
 [aihints]
-ts_type=basic
+trainingsite_type=basic

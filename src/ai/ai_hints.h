@@ -97,8 +97,8 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	TrainingSiteType get_ts_type() const {
-		return ts_type_;
+	TrainingSiteType get_trainingsite_type() const {
+		return trainingsite_type_;
 	}
 
 private:
@@ -116,7 +116,7 @@ private:
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	uint8_t mines_percent_;
-	TrainingSiteType ts_type_;
+	TrainingSiteType trainingsite_type_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

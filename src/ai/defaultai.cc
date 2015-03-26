@@ -390,7 +390,7 @@ void DefaultAI::late_initialization() {
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
-		bo.ts_type_ = TrainingSiteType::kNoTS;
+		bo.trainingsite_type_ = TrainingSiteType::kNoTS;
 
 		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
@@ -483,10 +483,10 @@ void DefaultAI::late_initialization() {
 			for (const WareAmount& temp_input : train.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			bo.ts_type_ = bh.get_ts_type();
+			bo.trainingsite_type_ = bh.get_trainingsite_type();
 			// it would behave badly if no type was set
 			// make sure all TS have its type set properly in conf files
-			assert(bo.ts_type_ != TrainingSiteType::kNoTS);
+			assert(bo.trainingsite_type_ != TrainingSiteType::kNoTS);
 			continue;
 		}
 
@@ -1920,23 +1920,23 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// we build one training site for 100 militarysites
-				if (bo.ts_type_ == TrainingSiteType::kBasic &&
+				if (bo.trainingsite_type_ == TrainingSiteType::kBasic &&
 				    militarysites.size() / 100 < static_cast<int32_t>(ts_basic_count_)) {
 					continue;
 				}
 				// we build one training site for 100 militarysites
-				if (bo.ts_type_ == TrainingSiteType::kAdvanced &&
+				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
 				    militarysites.size() / 100 < static_cast<int32_t>(ts_advanced_count_)) {
 					continue;
 				}
 
 				// for type1 we need 15 productionsties
-				if (bo.ts_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
+				if (bo.trainingsite_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
 					continue;
 				}
 
 				// for type2 we need 4 mines
-				if (bo.ts_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
+				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
 					continue;
 				}
 
@@ -4092,10 +4092,10 @@ void DefaultAI::gain_building(Building& b) {
 			mines_per_type[target_bo.mines_].in_construction += 1;
 		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
-			if (target_bo.ts_type_ == TrainingSiteType::kBasic) {
+			if (target_bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 				ts_basic_const_count_ += 1;
 			}
-			if (target_bo.ts_type_ == TrainingSiteType::kAdvanced) {
+			if (target_bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_const_count_ += 1;
 			}
 		}
@@ -4149,10 +4149,10 @@ void DefaultAI::gain_building(Building& b) {
 			trainingsites.push_back(TrainingSiteObserver());
 			trainingsites.back().site = &dynamic_cast<TrainingSite&>(b);
 			trainingsites.back().bo = &bo;
-			if (bo.ts_type_ == TrainingSiteType::kBasic) {
+			if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 				ts_basic_count_ += 1;
 			}
-			if (bo.ts_type_ == TrainingSiteType::kAdvanced) {
+			if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_count_ += 1;
 			}
 
@@ -4198,10 +4198,10 @@ void DefaultAI::lose_building(const Building& b) {
 			mines_per_type[target_bo.mines_].in_construction -= 1;
 		}
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
-			if (target_bo.ts_type_ == TrainingSiteType::kBasic) {
+			if (target_bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 				ts_basic_const_count_ -= 1;
 			}
-			if (target_bo.ts_type_ == TrainingSiteType::kAdvanced) {
+			if (target_bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_const_count_ -= 1;
 			}
 		}
@@ -4262,10 +4262,10 @@ void DefaultAI::lose_building(const Building& b) {
 			     ++i) {
 				if (i->site == &b) {
 					trainingsites.erase(i);
-					if (bo.ts_type_ == TrainingSiteType::kBasic) {
+					if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 						ts_basic_count_ -= 1;
 					}
-					if (bo.ts_type_ == TrainingSiteType::kAdvanced) {
+					if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 						ts_advanced_count_ -= 1;
 					}
 					break;

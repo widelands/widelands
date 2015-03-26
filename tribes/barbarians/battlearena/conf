@@ -76,4 +76,4 @@ hotspot=110 72
 fps=10
 
 [aihints]
-ts_type=basic
+trainingsite_type=basic
