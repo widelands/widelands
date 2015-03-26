@@ -82,11 +82,11 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
-	int32_t get_prohibited_till() const {
+	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
 
-	int32_t get_forced_after() const {
+	uint32_t get_forced_after() const {
 		return forced_after_;
 	}
 

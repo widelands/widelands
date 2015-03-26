@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-24 17:03+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-02 09:13+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr "Finalmente! Abbiamo compiuto il nostro primo passo verso la vittoria! La scorsa notte samo sbarcati sull'isola proibita ed abbiamo sconditto le poche guardie che controllavano la parte nord-ovest dell'isola. Sono abbastanza sicuro che nessuno degli altri signori della guerra si sia accorto di noi fino ad ora, quindi dobbiamo restare silenziosi e costruire le nostre infrastrutture. Presto saremo abbastanza forti da attaccare le loro posizioni."
+msgstr "Finalmente! Abbiamo compiuto il nostro primo passo verso la vittoria! La scorsa notte siamo sbarcati sull'isola proibita ed abbiamo sconfitto le poche guardie che controllavano la parte nord-ovest dell'isola. Sono abbastanza sicuro che nessuno degli altri signori della guerra si sia accorto di noi fino ad ora, quindi dobbiamo restare silenziosi e costruire le nostre infrastrutture. Presto saremo abbastanza forti da attaccare le loro posizioni."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:26
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
@@ -42,7 +42,7 @@ msgstr "Conquista l'antico castello"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Sconfiggi Lanissa e cattura il castello antico."
+msgstr "Sconfiggi Lanissa e cattura l'antico castello."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:35
 #: ../../maps/Plateau.wmf/scripting/texts.lua:37

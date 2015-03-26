@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-24 15:29+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-18 12:37+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -394,7 +394,7 @@ msgstr "bergig"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
+msgid "impassable"
 msgstr "unpassierbar"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
@@ -670,7 +670,7 @@ msgstr "Spieler: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:332
 msgid "Generate Map"
-msgstr "Erstelle Karte"
+msgstr "Erzeuge Karte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:513
 msgid "Generating random map..."
@@ -1175,13 +1175,13 @@ msgstr "Keine weiteren Rohstoffe gefunden!"
 
 #: ../../src/logic/replay_game_controller.cc:108
 msgid "End of replay"
-msgstr "Ende der Spielaufzeichnung"
+msgstr "Ende der Aufzeichnung"
 
 #: ../../src/logic/replay_game_controller.cc:109
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
-msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weiter zuschauen."
+msgstr "Das Ende der Aufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weiter zuschauen."
 
 #: ../../src/logic/save_handler.cc:102
 msgid "Saving game..."
@@ -1454,7 +1454,7 @@ msgstr "Deine Verbindung wurde geschlossen, da der Metaserver gerade neustartet.
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr "Die Verbindung wurde vom Benutzer normal beendet."
+msgstr "Die Verbindung wurde vom Client normal beendet."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -1498,7 +1498,7 @@ msgstr "Widelands konnte keine Verbindung zu der angegebenen Adresse\nerstellen.
 #: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
 #: ../../src/wlapplication.cc:1316
 msgid "Preparing game"
-msgstr "Das Spiel wird vorbereitet …"
+msgstr "Das Spiel wird vorbereitet"
 
 #: ../../src/network/netclient.cc:856
 msgid "/me 's file failed md5 checksumming."
@@ -1573,7 +1573,7 @@ msgstr "Warum willst du den dedizierten Server warnen?"
 #: ../../src/network/nethost.cc:410 ../../src/network/nethost.cc:436
 #, c-format
 msgid "The client %s could not be found."
-msgstr "Der Benutzer %s konnte nicht gefunden werden."
+msgstr "Der Client %s konnte nicht gefunden werden."
 
 #: ../../src/network/nethost.cc:421
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -1713,11 +1713,11 @@ msgstr[1] "%li Sekunden"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
-msgstr "Der Benutzer hat das Spiel verlassen."
+msgstr "Der Client hat das Spiel verlassen."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr "Der Benutzer ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
+msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
@@ -1737,11 +1737,11 @@ msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr "Die Verbindung zum Benutzer wurde geschlossen, da keine Antwort in den letzten 10 Minuten empfangen wurde!"
+msgstr "Die Verbindung zum Client wurde geschlossen, da keine Antwort in den letzten 10 Minuten empfangen wurde."
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
-msgstr "Benutzer und Host sind unsynchron geworden."
+msgstr "Client und Host sind unsynchron geworden."
 
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
@@ -1751,7 +1751,7 @@ msgstr "Vom Host rausgeschmissen: %s"
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr "Benutzer hat einen inkorrekten Befehl gesendet: %s"
+msgstr "Der Client hat einen inkorrekten Befehl gesendet: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -1799,15 +1799,15 @@ msgstr "Befehl Nummer %s wurde empfangen, welcher im derzeitigen Spielstatus nic
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
-msgstr "Der Benutzer hat dem Host eine Zeit genannt, die rückwärts läuft."
+msgstr "Der Client hat dem Host eine Zeit genannt, die rückwärts läuft."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr "Der Benutzer simuliert außerhalb der vom Server erlaubten Zeit."
+msgstr "Der Client simuliert außerhalb der vom Server erlaubten Zeit."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
-msgstr "Der Benutzer hat den Synchronisationsreport nicht rechtzeitig gesendet."
+msgstr "Der Client hat den Synchronisationsreport nicht rechtzeitig gesendet."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
@@ -1815,35 +1815,35 @@ msgstr "Das Spiel hat bereits begonnen."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player’s settings."
-msgstr "Benutzer hat keinen Zugriff auf die Einstellungen anderer Spieler."
+msgstr "Der Client hat keinen Zugriff auf die Einstellungen anderer Spieler."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr "Benutzer hat kein Zugriff auf die Server-Einstellungen."
+msgstr "Der Client hat kein Zugriff auf die Server-Einstellungen."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
-msgstr "Der Benutzer hat einen Start-Befehl gesendet, obwohl der Server noch nicht für einen Start bereit war."
+msgstr "Der Client hat einen Start-Befehl gesendet, obwohl der Server noch nicht für einen Start bereit war."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr "Der Benutzer hat einen TIME-Befehl gesendet, obwohl noch kein Spiel läuft."
+msgstr "Der Client hat einen TIME-Befehl gesendet, obwohl noch kein Spiel läuft."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr "Der Benutzer hat einen Spielerbefehl (PLAYERCOMMAND) für einen anderen Spieler gesendet."
+msgstr "Der Client hat einen Spielerbefehl (PLAYERCOMMAND) für einen anderen Spieler gesendet."
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent unexpected synchronization report."
-msgstr "Der Benutzer hat einen unerwarteten Synchronisationsreport geschickt."
+msgstr "Der Client hat unerwartet einen Synchronisationsreport geschickt."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
-msgstr "Client fraget eine Datei an, obwohl keine zum Senden vorhanden ist."
+msgstr "Der Client fragt eine Datei an, obwohl keine zum Senden vorhanden ist."
 
 #: ../../src/network/network_gaming_messages.cc:154
 msgid "Client requests file part that does not exist."
-msgstr "Der Benutzer fordert ein Dateienteilstück an, welches nicht existiert."
+msgstr "Der Client fordert ein Dateistück an, welches nicht existiert."
 
 #: ../../src/network/network_gaming_messages.cc:155
 #, c-format
@@ -1858,7 +1858,7 @@ msgstr "WARNING: %1$s verwendet Version %2$s, während der Host Version %3$s ver
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s hat das Spiel betreten."
+msgstr "%s hat das Spiel betreten"
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
@@ -1888,14 +1888,14 @@ msgstr "Der Spieler „%s“ wurde besiegt und ist nun Beobachter."
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr "Benutzer %1$s hat für mehr als %2$s nicht geantwortet."
+msgstr "Der Client %1$s hat für mehr als %2$s nicht geantwortet."
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid ""
 "Client %1$s will automatically be kicked, if no answer is received within "
 "%2$s."
-msgstr "Benutzer %1$s wird automatisch hinausgeworfen, wenn innerhalb %2$s keine Antwort empfangen wird."
+msgstr "Der Client %1$s wird automatisch hinausgeworfen, wenn innerhalb %2$s keine Antwort empfangen wird."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2032,7 +2032,7 @@ msgstr "Schw."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:108
 msgid "Difficulty"
-msgstr "Schwierigkeit"
+msgstr "Schwierigkeitsgrad"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 #: ../../src/wui/multiplayersetupgroup.cc:447
@@ -2057,7 +2057,7 @@ msgstr "Stamm:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 msgid "Difficulty:"
-msgstr "Schwierigkeit:"
+msgstr "Schwierigkeitsgrad:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a scenario"
@@ -2073,7 +2073,7 @@ msgstr "Spiele dieses Einführungsspiel"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this tutorial"
-msgstr "Der Name dieses Einführungsspiel"
+msgstr "Der Name dieses Einführungsspiels"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "What you will learn in this tutorial"
@@ -2097,11 +2097,11 @@ msgstr "Name des Einführungsspiels"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:363
 msgid "The number of this scenario in the campaign"
-msgstr "Die Anzahl der Szenarien in dieser Kampagne"
+msgstr "Die Nummer des Szenarios innerhalb dieser Kampagne"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:364
 msgid "Scenario Name"
-msgstr "Name des Szenarios"
+msgstr "Szenarienname"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:366
 msgid "#"
@@ -2124,14 +2124,14 @@ msgstr "Inkorrekter Pfad zur Datei in campaigns.conf: %s"
 #: ../../src/ui_fsmenu/campaign_select.cc:429
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
-msgstr[0] "Der Ersteller dieses Einführungsspiels"
-msgstr[1] "Die Ersteller dieses Einführungsspiels"
+msgstr[0] "Der Urheber dieses Einführungsspiels"
+msgstr[1] "Die Urheber dieses Einführungsspiels"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:432
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
-msgstr[0] "Der Ersteller dieses Szenarios"
-msgstr[1] "Der Ersteller dieses Szenarios"
+msgstr[0] "Der Urheber dieses Szenarios"
+msgstr[1] "Die Urheber dieses Szenarios"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:435
 #: ../../src/ui_fsmenu/mapselect.cc:317
@@ -2159,7 +2159,7 @@ msgstr "Metaserver-Lobby"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "Clients online:"
-msgstr "Benutzer online:"
+msgstr "Clients online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "List of games:"
@@ -2280,7 +2280,7 @@ msgstr "Mehrspielereinstellungen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:163
 msgid "Clients"
-msgstr "Benutzer"
+msgstr "Clients"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:175 ../../src/ui_fsmenu/launch_spg.cc:113
 msgid "Type of game"
@@ -2316,7 +2316,7 @@ msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "ACHTUNG:\nDer Spielstand, den du ausgewählt hast, ist ein Verzeichnis. Dies kann zum Beispiel passieren, wenn du die Option „nozip“ auf true gesetzt hast oder den Spielstand manuell entpackt hast.\nWidelands ist nicht in der Lage, Verzeichnisstrukturen zu anderen Mitspielern zu versenden. Bitte wähle entweder einen anderen Spielstand oder verpacke den Inhalt des Spielstand-Verzeichnisses in eine zip-Datei."
+msgstr "ACHTUNG:\nDer Spielstand, den du ausgewählt hast, ist ein Verzeichnis. Dies kann zum Beispiel passieren, wenn du die Option „nozip“ auf true gesetzt hast oder den Spielstand manuell entpackt hast.\nWidelands ist nicht in der Lage, Verzeichnisstrukturen zu anderen Clients zu versenden. Bitte wähle entweder einen anderen Spielstand oder verpacke den Inhalt des Spielstand-Verzeichnisses in eine zip-Datei."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:256
 msgid "File not found"
@@ -2355,7 +2355,7 @@ msgstr "geschlossen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Map details:"
-msgstr "Karten-Details:"
+msgstr "Kartendetails:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:638
 #, c-format
@@ -2372,27 +2372,27 @@ msgstr[1] "%u Spieler"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:643
 msgid "Scenario mode selected"
-msgstr "Szenariomodus gewählt"
+msgstr "Szenarienmodus gewählt"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:664
 msgid "You are in the multiplayer launch game menu."
-msgstr "Sie befinden sich in dem Mehrspieler-Start-Spielmenü."
+msgstr "Du befindest dich im Mehrspieler-Startmenü."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:665
 msgid "Client settings"
-msgstr "Benutzereinstellungen"
+msgstr "Client-Einstellungen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:668
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr "Auf der linken Seite befindet sich eine Liste aller Benutzer einschließlich dir. Du kannst deine Rolle mit den Schaltflächen hinter deinem Spielernamen festlegen. Verfügbare Rollen sind:"
+msgstr "Auf der linken Seite befindet sich eine Liste aller Clients einschließlich dir. Du kannst deine Rolle mit den Schaltflächen hinter deinem Spielernamen festlegen. Verfügbare Rollen sind:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:672
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Der Spieler mit der Farbe der Flagge. Falls mehrere Benutzer dieselbe Farbe ausgewählt haben, kontrollieren sie den Spieler zusammen („Gemeinsames Königreich“)."
+msgstr "Der Spieler mit der Farbe der Flagge. Falls mehrere Clients dieselbe Farbe ausgewählt haben, kontrollieren sie den Spieler zusammen („Gemeinsames Königreich“)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
@@ -2412,14 +2412,14 @@ msgstr "In der Mitte befindet sich der Einstellungsbereich für die Spieler. Um 
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Mit einem oder mehreren Benutzern verknüpft (siehe „Benutzereinstellungen“)."
+msgstr "Mit einem oder mehreren Clients verknüpft (siehe „Client-Einstellungen“)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr "Mit einem Computerspieler verknüpft (das Gesicht und der Hovertext deuten die Stärke des derzeitig ausgewählten Computer Spielers an)."
+msgstr "Mit einem Computerspieler verknüpft (das Gesicht und der Hovertext deuten die Stärke des derzeitig ausgewählten Computerspielers an)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
@@ -2441,11 +2441,11 @@ msgstr "Die letzten drei können nur durch den Host durch Klicken auf „Typ“ 
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe"
 " and the team for that player"
-msgstr "Jeder Benutzer, der mit einem Spieler verknüpft ist (also die „Rolle“ dieses Spielers hat), kann das Volk und das Team dieses Spielers einstellen"
+msgstr "Jeder Client, der mit einem Spieler verknüpft ist (also die „Rolle“ dieses Spielers hat), kann das Volk und das Team dieses Spielers einstellen."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"
-msgstr "Karten-Details"
+msgstr "Kartendetails"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
@@ -2461,7 +2461,7 @@ msgstr "Karte wählen"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:84
 msgid "Launch Game"
-msgstr "Starte Spiel"
+msgstr "Spiel starten"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Player’s name"
@@ -2508,7 +2508,7 @@ msgstr "Automatischer Spielstand %1%: %2%"
 
 #: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Choose a replay"
-msgstr "Wähle ein Replay"
+msgstr "Wähle eine Aufzeichnung"
 
 #: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Choose a saved game"
@@ -3034,7 +3034,7 @@ msgstr[1] "Tage"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Remove replays older than:"
-msgstr "Lösche Aufnahmen, die älter sind als"
+msgstr "Lösche Aufzeichnungen, die älter sind als"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:312
@@ -3080,7 +3080,7 @@ msgstr "Sound beim Eintreffen einer Nachricht abspielen."
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Packe die Daten (Karten, Spielaufzeichnungen und Speicherungen) nicht als zip-Dateien."
+msgstr "Packe die Daten (Karten, Aufzeichnungen und Speicherungen) nicht als zip-Dateien."
 
 #: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
@@ -3686,7 +3686,7 @@ msgstr "Geräusch-Lautstärke"
 
 #: ../../src/wui/game_summary.cc:43
 msgid "Game over"
-msgstr "Das Spiel ist aus"
+msgstr "Spiel beendet"
 
 #: ../../src/wui/game_summary.cc:59
 msgid "Elapsed time:"
@@ -3813,7 +3813,7 @@ msgstr[1] "%u neue Nachrichten"
 
 #: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
-msgstr "Wiedergabe beenden"
+msgstr "Aufzeichnung verlassen"
 
 #: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
@@ -3865,7 +3865,7 @@ msgstr "Leeres Passwort"
 
 #: ../../src/wui/login_box.cc:104
 msgid "Please enter your password!"
-msgstr "Bitte gib dein Passwort ein!"
+msgstr "Bitte Passwort eingeben!"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
@@ -3881,7 +3881,7 @@ msgstr "Flaggen"
 
 #: ../../src/wui/minimap.cc:164
 msgid "Roads"
-msgstr "Wege"
+msgstr "Straßen"
 
 #: ../../src/wui/minimap.cc:176
 msgid "Zoom"
@@ -3925,7 +3925,7 @@ msgstr "Mensch"
 
 #: ../../src/wui/multiplayersetupgroup.cc:411
 msgid "Client name"
-msgstr "Benutzername"
+msgstr "Client-Name"
 
 #: ../../src/wui/multiplayersetupgroup.cc:419
 msgid "Role"
@@ -3973,11 +3973,11 @@ msgstr "Erf"
 
 #: ../../src/wui/productionsitewindow.cc:85
 msgid "Next Level"
-msgstr "Nächste Ebene"
+msgstr "Nächste Stufe"
 
 #: ../../src/wui/productionsitewindow.cc:98
 msgid "Terminate the employment of the selected worker"
-msgstr "Beende die Beschäftigung für den gewählten Arbeiter"
+msgstr "Beende die Beschäftigung des gewählten Arbeiters"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
@@ -4003,7 +4003,7 @@ msgstr "Erkunde in Richtung Nord-Westen"
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island’s coast clockwise"
-msgstr "Erforsche die Insel im Uhrzeigersinn"
+msgstr "Erkunde die Insel im Uhrzeigersinn"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
@@ -4027,7 +4027,7 @@ msgstr "Erkunde in Richtung Süd-Westen"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island’s coast counter clockwise"
-msgstr "Erforsche die Insel gegen den Uhrzeigersinn"
+msgstr "Erkunde die Insel gegen den Uhrzeigersinn"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
@@ -4182,7 +4182,7 @@ msgstr "Erhöht die Anzahl von Waren, die hier gelagert werden."
 
 #: ../../src/wui/watchwindow.cc:109
 msgid "Follow"
-msgstr "Folge"
+msgstr "Folgen"
 
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"

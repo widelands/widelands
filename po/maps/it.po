@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-25 14:44+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-13 14:22+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Un luogo da chiamare casa"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "In questo scenario verranno introdotti gli edifici di produzione più avanzati, incluse le miniere."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
@@ -114,7 +114,7 @@ msgstr "Atlantidei"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Impegnativo. Introduce gli Atlantidei"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -127,11 +127,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Le spiagge di Malac’ Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Un avamposto per l'esilio"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
@@ -172,18 +172,18 @@ msgstr "Controlli di base"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "In questo tutorial imparerai a muoverti in Widelands e a costruire edifici e strade."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Guerra"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "In questo tutorial ti verranno insegnato i segreti della guerra: come creare soldati, come addestrarli e come mandarli in battaglia."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
@@ -194,7 +194,7 @@ msgstr "Viaggiare in mare"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "In questo tutorial imparerai a conoscere la navigazione in mare, ossia la gestione di navi e porti."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
@@ -224,7 +224,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "E' un piacere insediarsi nello splendore di questo paesaggio fratturato. Ma le strade per circondare questi estesi territori sono lunghe e serpeggianti, pertanto è facile sconfinare nei territori delle tribù straniere."
+msgstr "È un piacere insediarsi nello splendore di questo paesaggio fratturato. Ma le strade per circondare questi estesi territori sono lunghe e serpeggianti, pertanto è facile sconfinare nei territori delle tribù straniere."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -289,7 +289,7 @@ msgid ""
 " wonder that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of the remaining "
 "water."
-msgstr "E' passato tanto tempo dall'ultima volta che una goccia di pioggia toccò queste terre. Non c'è da stupirsi se non è rimasta molta acqua in questo fiume ormai essiccato. Tutti lo sanno: presto ci sarà una guerra. Una guerra per l'ultima acqua rimasta."
+msgstr "È passato tanto tempo dall'ultima volta che una goccia di pioggia toccò queste terre. Non c'è da stupirsi se non è rimasta molta acqua in questo fiume ormai essiccato. Tutti lo sanno: presto ci sarà una guerra. Una guerra per l'ultima acqua rimasta."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -499,7 +499,7 @@ msgstr "Labirinto mistico"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr "Ci sono due grandi domande: chi creò questo labirinto incredibilmente grande e cosa ci sarà all'interno?"
+msgstr "Ci sono due grandi domande nell'aria: chi creò questo labirinto incredibilmente grande? E cosa ci sarà al suo interno?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -746,7 +746,7 @@ msgstr "Due frontiere"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr "Una mappa di battaglia multi-giocatore su una piccola isola circolare."
+msgstr "Una mappa di battaglia multiplayer su una piccola isola circolare."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
@@ -769,7 +769,7 @@ msgid ""
 "It is said that even the sun and moon must find their way between the spires"
 " of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
-msgstr "Si dice che anche il sole e la luna devono trovare la propria strada tra le guglie di queste montagne. CONSIGLIO: i monoliti segnano i punti in cui si trovano minerali. Non è necessario l'invio di geologi altrove."
+msgstr "Si dice che anche il sole e la luna debbano trovare la propria strada tra le guglie di queste montagne. CONSIGLIO: i monoliti segnano i punti in cui si trovano minerali. Non è necessario l'invio di geologi altrove."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

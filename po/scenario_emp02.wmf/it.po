@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 11:13+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-03 20:44+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
-msgstr "Provvedi ai tuo minatori con il cibo"
+msgstr "Fornisci del cibo ai tuoi minatori"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
@@ -129,7 +129,7 @@ msgstr "Proteggi la tua frontiera orientale"
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr "Costruisci edifici militari più forti, come un avamposto, un fortino o una torre, sulla frontiera orientale."
+msgstr "Costruisci degli edifici militari più forti, come un avamposto, un fortino o una torre, sulla frontiera orientale."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
@@ -137,17 +137,17 @@ msgstr "Per guardare in profondità all'interno del territorio nemico, costruisc
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr "Distruggi la tribù dei barbari"
+msgstr "Distruggi la tribù dei Barbari"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
-msgstr "Distruggi la tribù barbara"
+msgstr "Distruggi la tribù dei Barbari"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Appena hai abbastanza soldati, attacca e distruggi completamente gli edifici barbari."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -185,7 +185,7 @@ msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr "Su questa isola, si avvia la nostra vita nuova. Noi costruiremo un avamposto per il nostro esilio, che forse diventerà una nuova, bellissima casa per ognuno di noi."
+msgstr "Su quest'isola inizieremo la nostra vita nuova. Costruiremo un avamposto per il nostro esilio, che forse diventerà una nuova, bellissima casa per ognuno di noi."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
@@ -209,7 +209,7 @@ msgstr "Ma fino a quel giorno, possono passare molti anni! Per ora, dobbiamo con
 msgid ""
 "But we shouldn’t forget to preserve this natural bounty. These forests "
 "should last forever, so we really should build a forester’s house too."
-msgstr "Ma non dobbiamo dimenticare di conservare questa grazia naturale. Queste foreste devono durare per sempre, quindi dovremmo davvero costruire anche una casa della forestale."
+msgstr "Ma non dobbiamo dimenticare di conservare questa grazia naturale. Queste foreste devono durare per sempre, quindi dovremmo davvero costruire anche una casa della guardia forestale."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -352,7 +352,7 @@ msgid ""
 "a more comfortable life, but the people working in the mines are unhappy "
 "with the current situation. They have to do hard work and have no time for "
 "making their own food."
-msgstr "E' bello, e naturalmente una buona idea, costruire miniere, che ci daranno una vita più comoda,<br> ma le persone che lavorano nelle miniere non sono soddisfatte della situazione attuale. Hanno da fare un duro lavoro e non hanno tempo per preparare il proprio cibo."
+msgstr "È bello, e naturalmente una buona idea, costruire miniere, che ci daranno una vita più comoda,<br> ma le persone che lavorano nelle miniere non sono soddisfatte della situazione attuale. Devono fare un duro lavoro, e non hanno tempo per preparare il proprio cibo."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:192
 msgid ""
@@ -372,24 +372,24 @@ msgstr "Amalea sorride"
 msgid ""
 "Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
 " they serve is really tasty. You really should have a drink there, too."
-msgstr "Saluti, amico mio, ho appena visitato la nostra nuova taverna  'Alle palme'. Servono una birra veramente gustosa. Anche tu dovresti veramente prendere un drink lì."
+msgstr "Saluti, amico mio, ho appena visitato la nostra nuova taverna  'Alle palme'. La birra che servono è veramente gustosa. Anche tu dovresti veramente prendere qualcosa da bere lì."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr "E' bello vedere che abbiamo ottenuto un più caldo e più rispettosi ambiente familiare sulla nostra isola.<br> Grazie, Lutius."
+msgstr "È bello vedere che abbiamo ottenuto un più caldo e più rispettoso ambiente familiare sulla nostra isola.<br> Grazie, Lutius."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
-msgstr "I barbari"
+msgstr "I Barbari"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr "Per gli Dei! Questo è assolutamente terribile. Sembra come se citrovassimo vicino a una prova - e sembra che Saledus abbia avuto ragione con le sue paure legate al naufragio che ha trovato."
+msgstr "Per gli Dei! Questo è assolutamente terribile. Sembra come se ci trovassimo vicino a una prova - e sembra che Saledus abbia avuto ragione con le sue paure legate al relitto che ha trovato."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
@@ -461,7 +461,7 @@ msgstr "Un messaggio"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr "Oggi un piccione è sbarcato sulla nostra isola. Ha portato un messaggio che mi riempie di pensieri scuri e riporta le mie paure."
+msgstr "Oggi un piccione è atterrato sulla nostra isola. Ha portato un messaggio che mi riempie di pensieri scuri e riporta le mie paure."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:250
 msgid ""

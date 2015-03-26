@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 11:06+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-13 14:34+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Costruisci un forno"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr "Costruisci una fattoria da bestiame"
+msgstr "Costruisci un allevamento di bovini"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
@@ -130,7 +130,7 @@ msgstr "Migliora la tua officina in una fabbrica d'asce per produrre armi e cost
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Costruisci una fucina di elmi ad est delle montagne per fornire ai tuoi soldati delle armature migliori."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91
@@ -159,7 +159,7 @@ msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "I siti di addestramento, come un campo di addestramento o un'arena di battaglia, vengono utilizzati per la formazione dei soldati nei loro diversi attributi. Questi attributi sono importanti negli scontri e migliore è un soldato maggiore sarà la possibilità di vincere una battaglia."
+msgstr "I siti di addestramento, come un campo di addestramento o un'arena di battaglia, vengono utilizzati per la formazione dei soldati nei loro diversi attributi. Questi attributi sono importanti negli scontri e migliore è un soldato, maggiore sarà la possibilità di vincere una battaglia."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."

@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
+# Madkat Here <madcat182@gmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 11:20+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-06 16:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -236,7 +237,7 @@ msgstr "Por favor, comunícanos suficiente información auxiliar. Dinos:"
 
 #: ../../txts/README.lua:105
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Pasos detallados para poder reproducir el error, si es posible."
 
 #: ../../txts/README.lua:107
 msgid ""
@@ -258,7 +259,7 @@ msgstr ""
 
 #: ../../txts/README.lua:115
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- En que mapa estabas jugando cuando ocurrió el error."
 
 #: ../../txts/README.lua:117
 msgid ""
@@ -560,23 +561,23 @@ msgstr "Licencia"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Información de licencia para Widelands"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2014 by the Widelands Development Team."
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
 msgstr ""
 
 #: ../../txts/license:9
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Este juego es Gratuito y de Código Abierto (FOSS), Licenciado bajo la Licencia Pública General de GNU (GPL) V2.0."
 
 #: ../../txts/license:11
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
-msgstr ""
+msgstr "Puedes encontrar mas información acerca de FOSS y GPL visitando el siguiente sitio web:"
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
@@ -794,7 +795,7 @@ msgstr ""
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "Puedes utilizar ‘/me’ al inicio de un mensaje de chat: ‘/me está cansado’ se mostrará como ‘-> Nickname está cansado’."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""

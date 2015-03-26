@@ -4,12 +4,13 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Venatrix, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-22 21:57+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 21:40+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +105,7 @@ msgstr "Regeln"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Willkommen zum Insel-Springen"
+msgstr "Willkommen zum Inselspringen"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
@@ -113,21 +114,21 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr "Inselspringen ist ein traditioneller Wettbewerb in der atlantischen Kultur. Die Regeln sind einfach: Du startest mit einem Hauptquartier auf einer Insel. Wenn du eine Burg im Zielgebiet der ersten Insel fertigstellst, bekommst du ein Hauptquartier auf der zweiten Insel, dass alle Waren enthält, die du auf der ersten Insel gesammelt hast."
+msgstr "Inselspringen ist ein traditioneller Wettbewerb in der atlantischen Kultur. Die Regeln sind einfach: Du startest mit einem Hauptquartier auf einer Insel. Wenn du eine Burg im Zielgebiet der ersten Insel fertigstellst, bekommst du ein Hauptquartier auf der zweiten Insel, das alle Waren enthält, die du auf der ersten Insel gesammelt hast."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "Wenn du eine Burg im Zielgebiet auf der zweiten Insel fertigstellst, bekommst du ein Hauptquartier auf der dritten Insel. Du musst eine Burg auf der dritten Insel fertigstellen und 20 Minuten halten, um das Spiel zu gewinnen."
+msgstr "Wenn du eine Burg im Zielgebiet auf der zweiten Insel fertigstellst, bekommst du ein Hauptquartier auf der dritten Insel. Du musst eine Burg auf der dritten Insel bauen und 20 Minuten halten, um das Spiel zu gewinnen."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr "Immer wenn Du ein Ziel auf der Insel erreichst, bekommst Du zusätzliche Waren; abhängig davon, wieviele Spieler vor Dir schon das Ziel erreicht haben. Je früher Du das Ziel erreichst, desto weniger Waren erhältst Du. Weiter unten erfährst Du die Details."
+msgstr "Immer wenn du ein Ziel auf der Insel erreichst, bekommst du zusätzliche Waren, abhängig davon, wieviele Spieler vor dir schon das Ziel erreicht haben. Je früher du das Ziel erreichst, desto weniger Waren erhältst du. Weiter unten erfährst du die Details."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
@@ -135,15 +136,15 @@ msgid ""
 "only meadows and resources. The economies you leave behind will continue to "
 "work for you, but you will only reap the benefits at the moment you reach a "
 "new island."
-msgstr "Der Trick ist, dass die erste Insel nur Holz und Stein bietet, die zweite nur Weideland und Bodenschätze. Die Wirtschaft, die Du zurück lässt, wird weiter für Dich arbeiten, aber du wirst die Erträge nur erhalten, wenn Du eine neue Insel erreichst."
+msgstr "Der Kniff ist, dass die erste Insel nur Holz und Stein bietet, die zweite nur Weideland und Bodenschätze. Die Wirtschaft, die du zurück lässt, wird weiter für dich arbeiten, aber du wirst die Erträge nur erhalten, wenn du eine neue Insel erreichst."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr "Schließlich: Sei vorsichtig und verschwende deine Bergkristalle und Diamanten nicht."
+msgstr "Sei vorsichtig und verschwende deine Bergkristalle und Diamanten nicht."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "Finish Rewards"
-msgstr "Zielbelohnung"
+msgstr "Abschlussprämie"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "First Island"
@@ -152,22 +153,22 @@ msgstr "Erste Insel"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
 msgid "1st to finish"
-msgstr "1. fertig"
+msgstr "1. Platz"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "2nd to finish"
-msgstr "2. fertig"
+msgstr "2. Platz"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
 msgid "3rd to finish"
-msgstr "3. fertig"
+msgstr "3. Platz"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
 msgid "4th to finish"
-msgstr "4. fertig"
+msgstr "4. Platz"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
 msgid "Second Island"
@@ -191,21 +192,21 @@ msgstr "%1$s war der Vierte, der Insel Nummer %2$i erreicht hat."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
-msgstr "Die Belohnung dafür ist:"
+msgstr "Die Prämie für diese Leistung beträgt:"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr "%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls ihm niemand vorher die Kontrolle über den Hügel nimmt."
+msgstr "%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls ihm niemand vorher die Herrschaft über den Hügel nimmt."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s lost control of the hill."
-msgstr "%s hat die Kontrolle über den Hügel verloren."
+msgstr "%s hat die Herrschaft über den Hügel verloren."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr "%1$s ist seit %2$s Hügelkönig!"
+msgstr "%1$s ist seit %2$s König des Hügels!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
 msgid "%s has won the game. Congratulations!"

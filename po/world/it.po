@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 11:43+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-04 16:09+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -227,7 +227,7 @@ msgstr "Ontano (alberello)"
 
 #: ../../world/immovables/trees/alder/init.lua:43
 msgid "Alder (Pole)"
-msgstr ""
+msgstr "Ontano (palo)"
 
 #: ../../world/immovables/trees/alder/init.lua:66
 msgid "Alder (Mature)"
@@ -360,7 +360,7 @@ msgstr "Acero (alberello)"
 
 #: ../../world/immovables/trees/maple/init.lua:35
 msgid "Maple (Pole)"
-msgstr ""
+msgstr "Acero (palo)"
 
 #: ../../world/immovables/trees/maple/init.lua:58
 msgid "Maple (Mature)"
@@ -378,7 +378,7 @@ msgstr "Albero a fungo scuro (alberello)"
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:37
 msgid "Dark Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Albero a fungo scuro (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:61
@@ -418,7 +418,7 @@ msgstr "Albero a fungo rosso (alberello)"
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:37
 msgid "Red Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Albero a fungo rosso (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:61
@@ -436,7 +436,7 @@ msgstr "Quercia (alberello)"
 
 #: ../../world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Quercia (palo)"
 
 #: ../../world/immovables/trees/oak/init.lua:58
 msgid "Oak (Mature)"
@@ -468,7 +468,7 @@ msgstr "Palma da cocco (alberello)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:35
 msgid "Coconut Palm (Pole)"
-msgstr ""
+msgstr "Palma da cocco (palo)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:58
 msgid "Coconut Palm (Mature)"
@@ -532,7 +532,7 @@ msgstr "Sorbo rosso (alberello)"
 
 #: ../../world/immovables/trees/rowan/init.lua:35
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Sorbo selvatico (palo)"
 
 #: ../../world/immovables/trees/rowan/init.lua:58
 msgid "Rowan (Mature)"
@@ -548,7 +548,7 @@ msgstr "Abete (alberello)"
 
 #: ../../world/immovables/trees/spruce/init.lua:35
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Abete (palo)"
 
 #: ../../world/immovables/trees/spruce/init.lua:58
 msgid "Spruce (Mature)"
@@ -581,42 +581,42 @@ msgstr ""
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Albero ad ombrello verde (alberello)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:37
 msgid "Green Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Albero ad ombrello verde (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:61
 msgid "Green Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Albero ad ombrello verde (maturo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:85
 msgid "Green Umbrella Tree (Old)"
-msgstr ""
+msgstr "Albero ad ombrello verde (vecchio)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Albero ad ombrello rosso (alberello)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:37
 msgid "Red Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Albero ad ombrello rosso (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:61
 msgid "Red Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Albero ad ombrello rosso (maturo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:88
 msgid "Red Umbrella Tree (Old)"
-msgstr ""
+msgstr "Albero ad ombrello rosso (vecchio)"
 
 #: ../../world/init.lua:11
 msgid "Miscellaneous"
@@ -702,7 +702,7 @@ msgstr "Deserto"
 #: ../../world/terrains/init.lua:95 ../../world/terrains/init.lua:110
 #: ../../world/terrains/init.lua:820
 msgid "Meadow"
-msgstr ""
+msgstr "Pascolo"
 
 #: ../../world/terrains/init.lua:125 ../../world/terrains/init.lua:805
 msgid "Steppe"
@@ -710,11 +710,11 @@ msgstr "Steppa"
 
 #: ../../world/terrains/init.lua:140
 msgid "Barren Steppe"
-msgstr ""
+msgstr "Steppa arida"
 
 #: ../../world/terrains/init.lua:155 ../../world/terrains/init.lua:835
 msgid "Mountain Meadow"
-msgstr ""
+msgstr "Pascolo di montagna"
 
 #: ../../world/terrains/init.lua:170 ../../world/terrains/init.lua:185
 #: ../../world/terrains/init.lua:200 ../../world/terrains/init.lua:215
@@ -780,7 +780,7 @@ msgstr "Ghiaccio"
 
 #: ../../world/terrains/init.lua:723 ../../world/terrains/init.lua:739
 msgid "Ice Floes"
-msgstr ""
+msgstr "Banchi di ghiaccio"
 
 #: ../../world/terrains/init.lua:790
 msgid "Dry Soil"
@@ -788,4 +788,4 @@ msgstr "Terreno essiccato"
 
 #: ../../world/terrains/init.lua:850
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Pascolo di alta montagna"
