@@ -103,7 +103,7 @@ UI::Textarea & AttackBox::add_text
 
 UI::Button & AttackBox::add_button
 	(UI::Box           & parent,
-	 char        const * const text,
+	 const std::string & text,
 	 void         (AttackBox::*fn)(),
 	 const std::string & tooltip_text)
 {
@@ -143,7 +143,7 @@ void AttackBox::update_attack() {
 }
 
 void AttackBox::init() {
-	char buf[10];
+
 	assert(m_node);
 
 	uint32_t max_attackers = get_max_attackers();
@@ -164,10 +164,11 @@ void AttackBox::init() {
 	UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox, UI::Box::AlignCenter);
 
-	sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
+	const std::string attack_string =
+			(boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
 	m_text_soldiers =
-		&add_text(columnbox, buf, UI::Box::AlignCenter,
+		&add_text(columnbox, attack_string, UI::Box::AlignCenter,
 					 UI::g_fh1->fontset().serif(),
 					 UI_FONT_SIZE_ULTRASMALL);
 
@@ -180,12 +181,10 @@ void AttackBox::init() {
 			 _("Number of soldiers"));
 
 	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
-
-	sprintf(buf, "%u", max_attackers);
 	m_add_soldiers =
 		&add_button
 			(linebox,
-			 buf,
+			 std::to_string(max_attackers),
 			 &AttackBox::send_more_soldiers,
 			 _("Send more soldiers"));
 
