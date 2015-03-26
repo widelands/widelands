@@ -75,9 +75,12 @@ LuaInterface::LuaInterface() {
 	// And helper methods.
 	LuaPath::luaopen_path(m_L);
 
-	// Also push the "wl" table.
+	// Also push the "wl" and the "hooks" table.
 	lua_newtable(m_L);
 	lua_setglobal(m_L, "wl");
+
+	lua_newtable(m_L);
+	lua_setglobal(m_L, "hooks");
 }
 
 LuaInterface::~LuaInterface() {

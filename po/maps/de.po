@@ -7,12 +7,13 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-28 21:23+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-18 12:02+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +50,7 @@ msgstr "Dieses Land ist unser Land"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Dieses Tutorial erklärt die Handhabung von Militärgebäuden und Ausbildungsstätten und führt in die Kriegsführung ein."
+msgstr "Dieses Einführungsspiel erklärt die Handhabung von Militärgebäuden und Ausbildungsstätten und führt in die Kriegsführung ein."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"

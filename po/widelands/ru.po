@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-02 22:15+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-08 08:02+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1450,7 +1450,7 @@ msgstr "Вы уже вошли!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr "You got disconnected, as you sent a superuser command without superuser permission. This incident will be logged and reported to the administrator.\nВы были отключены, так как вы использовали команду суперпользователя без разрешения суперпользователя. Этот инцидент будет зарегистрирован и доведен до сведения администратора."
+msgstr "Вы были отключены, так как вы использовали команду суперпользователя без разрешения суперпользователя. Этот инцидент будет зарегистрирован и доведен до сведения администратора."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -1470,7 +1470,7 @@ msgstr "Метасервер не отвечает"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
-msgstr "Ваша игра не может подключена через интернет"
+msgstr "Ваша игра не может быть подключена через интернет"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -1506,13 +1506,13 @@ msgstr "Подготовка игры"
 
 #: ../../src/network/netclient.cc:856
 msgid "/me 's file failed md5 checksumming."
-msgstr "/me некорректная проверка суммы md5."
+msgstr "/me проверка контрольной суммы md5 для файла не удалась."
 
 #: ../../src/network/netclient.cc:886
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me проверка полученного файл. Хотя проверка md5 суммы успешна, файл не доступен."
+msgstr "/me проверка полученного файла. Хотя проверка md5 суммы успешна, файл не доступен."
 
 #: ../../src/network/netclient.cc:1095
 msgid " An automatic savegame will be created."
@@ -1585,11 +1585,11 @@ msgstr "Некорректное использование, должно быт
 
 #: ../../src/network/nethost.cc:432
 msgid "You can not kick yourself!"
-msgstr "Вы не можете кикнуть себя!"
+msgstr "Вы не можете изгнать себя!"
 
 #: ../../src/network/nethost.cc:434
 msgid "You can not kick the dedicated server"
-msgstr "Вы не можете выпнуть выделенный сервер"
+msgstr "Вы не можете изгнать выделенный сервер"
 
 #: ../../src/network/nethost.cc:439
 #, c-format
@@ -1624,7 +1624,7 @@ msgstr "Пауза установлена принудительно - игра 
 
 #: ../../src/network/nethost.cc:482
 msgid "There is no forced pause - nothing to end."
-msgstr "Это не принудительная пауза - ничего не окончено."
+msgstr "Это не принудительная пауза - нечего отменять."
 
 #: ../../src/network/nethost.cc:493
 msgid "Invalid command! Type /help for a list of commands."
@@ -1722,11 +1722,11 @@ msgstr "Клиент отключился"
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr "Клиент разбился и осуществляется критическое сохрание."
+msgstr "Клиент \"упал\" и осуществляет аварийное сохранение."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr "Потеря связи"
+msgstr "Потеря соединения."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -1738,7 +1738,7 @@ msgstr "Игра началась сразу после того как вы п�
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
-msgstr "Сервер вышел из строя и выполняется чрезвычайное сохрание."
+msgstr "Сервер \"упал\" и осуществил аварийное сохранение.."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
@@ -3277,7 +3277,7 @@ msgstr "Разрушить"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Dismantle"
-msgstr "Демонтировать"
+msgstr "Разобрать"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Returns:"
@@ -4086,7 +4086,7 @@ msgstr "Щёлкните чтобы отозвать солдата"
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
-msgstr "ЗД: 8/8  АТ: 8/8  ЗЩ: 8/8  УК: 8/8_"
+msgstr "ЗД: 8/8  АТ: 8/8  ЗЩ: 8/8  ЛК: 8/8_"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
@@ -4099,7 +4099,7 @@ msgstr "Предпочитать героев"
 #: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
-msgstr "ЗД: %1$u/%2$u  АТ: %3$u/%4$u  ЗЩ: %5$u/%6$u  УК: %7$u/%8$u"
+msgstr "ЗД: %1$u/%2$u  АТ: %3$u/%4$u  ЗЩ: %5$u/%6$u  ЛК: %7$u/%8$u"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"

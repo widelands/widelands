@@ -99,7 +99,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
 
-			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s %s")
+			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s> %s")
 						  % message
 						  % chat_message.sender
 						  % chat_message.recipient

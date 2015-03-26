@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-06 12:51+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-12 08:33+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -306,31 +306,31 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Steine können in einer Granitmine gewonnen werden, aber eine einfachere Methode ist es, einen Steinbruch in der Nähe von Felsen zu errichten. Zufällig liegen eine ganze Menge davon genau westlich (links) deines Hauptquartiers. Ich werde dir zeigen, wie du den Sichtbereich dorthin verschiebst."
+msgstr "Steine können in einer Granitmine gewonnen werden, aber eine einfachere Methode ist es, einen Steinbruch in der Nähe von Felsen zu errichten. Zufällig liegen eine ganze Menge davon genau westlich (links) deines Hauptquartiers. Ich werde dir zeigen, wie du die Hauptansicht dorthin verschiebst."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr "Es gibt drei Möglichkeiten, die Ansicht zu verschieben. Die erste ist mittels der Pfeiltasten. Probier es aus."
+msgstr "Es gibt drei Möglichkeiten, die Hauptansicht zu verschieben. Die erste ist mittels der Pfeiltasten. Probier es aus."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr "Klicke auf „OK“ und bewege dann die Ansicht mittels der Pfeiltasten"
+msgstr "Klicke auf „OK“ und bewege dann die Hauptansicht mittels der Pfeiltasten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
-msgstr "Verschiebe den Sichtbereich mit den Pfeiltasten"
+msgstr "Verschiebe die Hauptansicht mit den Pfeiltasten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
-msgstr "Bewege die Ansicht"
+msgstr "Bewege die Hauptansicht"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr "Die Ansicht zu verschieben ist sehr wichtig, um den Überblick zu behalten. Es gibt drei Wege, dies zu tun."
+msgstr "Die Hauptansicht zu verschieben ist sehr wichtig, um den Überblick zu behalten. Es gibt drei Wege, dies zu tun."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -341,7 +341,7 @@ msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr "Der zweite ist der schnellere: Drücke und halte die rechte Maustaste irgendwo auf der Karte und bewege dann die Maus umher – du wirst sehen, wie sich die Ansicht bewegt."
+msgstr "Der zweite ist der schnellere: Drücke und halte die rechte Maustaste irgendwo auf der Karte und bewege dann die Maus umher – du wirst sehen, wie sich die Hauptansicht bewegt."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:196
 msgid ""
@@ -351,7 +351,7 @@ msgstr "Der dritte ist, die Minikarte zu verwenden. Das ist besonders nützlich,
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Other Ways to Move the View"
-msgstr "Andere Möglichkeiten, die Sicht zu verändern"
+msgstr "Andere Möglichkeiten, die Hauptansicht zu verändern"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
@@ -361,11 +361,11 @@ msgstr "Sehr gut. Nun gibt es aber auch eine schnellere Möglichkeit – mittels
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "Klicke und halte einfach die rechte Maustaste irgendwo auf der Karte, dann bewege die Maus und statt der Zeigers bewegt sich die Ansicht. Versuch es."
+msgstr "Klicke und halte einfach die rechte Maustaste irgendwo auf der Karte, dann bewege die Maus und statt der Zeigers bewegt sich die Hauptansicht. Versuch es."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
-msgstr "Verschiebe den Sichtbereich mit der Maus"
+msgstr "Verschiebe die Hauptansicht mit der Maus"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
