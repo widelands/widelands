@@ -3479,9 +3479,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	    (ts_basic_const_count_ + ts_advanced_const_count_) == 0 && ts_advanced_count_ > 0) {
 
 		if (player_->is_building_type_allowed(enhancement)) {
-
-			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
