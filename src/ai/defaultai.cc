@@ -1814,7 +1814,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				//special bonus for bigger buildings if enemy is nearby
 				if (bf->enemy_nearby_) {
-					prio += (bo.desc->get_size() - 1) * 15;
+					prio += (bo.desc->get_size() - 1) * 25;
 				}
 
 				if (bo.desc->get_size() < maxsize) {
