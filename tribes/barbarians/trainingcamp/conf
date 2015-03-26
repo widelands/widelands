@@ -36,7 +36,7 @@ min_level=0
 max_level=4
 
 [aihints]
-prohibited_till=2700
+trainingsite_type=advanced
 
 [soldier hp]
 min_level=0
