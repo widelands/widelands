@@ -152,21 +152,20 @@ void EditorInteractive::register_overlays() {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 			const Image* pic = g_gr->images().get(fname);
 			assert(pic);
-			map.overlay_manager().register_overlay
+			mutable_overlay_manager()->register_overlay
 				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	OverlayManager& overlay_manager = map.overlay_manager();
 	Widelands::Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->get_editor_pic(amount);
 			if (immname.size())
-				overlay_manager.register_overlay(fc, g_gr->images().get(immname), 4);
+				mutable_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
 }
@@ -224,7 +223,7 @@ void EditorInteractive::start() {
 	} catch (LuaScriptNotExistingError &) {
 		// do nothing.
 	}
-	egbase().map().overlay_manager().show_buildhelp(true);
+	mutable_overlay_manager()->show_buildhelp(true);
 }
 
 
@@ -302,11 +301,6 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	if (target_changed && m_left_mouse_button_is_down)
 		map_clicked(true);
 }
-
-void EditorInteractive::toggle_buildhelp() {
-	egbase().map().overlay_manager().toggle_buildhelp();
-}
-
 
 void EditorInteractive::tool_menu_btn() {
 	if (m_toolmenu.window)
@@ -502,7 +496,7 @@ void EditorInteractive::select_tool
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
-		map.overlay_manager().remove_overlay_callback_function();
+		mutable_overlay_manager()->remove_overlay_callback_function();
 		map.recalc_whole_map(egbase().world());
 	}
 	tools.current_pointer = &primary;

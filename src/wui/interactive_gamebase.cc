@@ -135,17 +135,18 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  */
 void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
-	overlay_manager.register_overlay_callback_function
+	auto* overlay_manager = mutable_overlay_manager();
+	overlay_manager->show_buildhelp(false);
+	overlay_manager->register_overlay_callback_function
 			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
 
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
 	// This code assumes that the InteractivePlayer object lives longer than
 	// the overlay_manager. Otherwise remove the hook in the deconstructor.
-	egbase().map().overlay_manager().onBuildHelpToggle =
+	overlay_manager->onBuildHelpToggle =
 		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
+	// NOCOM(#sirver): this needs updating!
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff

@@ -39,7 +39,7 @@ int32_t
 EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
                                                   Widelands::NodeAndTriangle<> const center,
-                                                  EditorInteractive& /* parent */,
+                                                  EditorInteractive& parent,
                                                   EditorActionArgs& args) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -63,7 +63,8 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 			    world.get_resource(res)->get_editor_pic
 			    (mr.location().field->get_resources_amount());
 			const Image* pic = g_gr->images().get(str);
-			map.overlay_manager().remove_overlay(mr.location(), pic);
+			auto overlay_manager = parent.mutable_overlay_manager();
+			overlay_manager->remove_overlay(mr.location(), pic);
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_initial_res_amount(0);
@@ -73,7 +74,7 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 				//  set new overlay
 				str = world.get_resource(args.cur_res)->get_editor_pic(amount);
 				pic = g_gr->images().get(str);
-				map.overlay_manager().register_overlay(mr.location(), pic, 4);
+				overlay_manager->register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area(
 				   world, Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}

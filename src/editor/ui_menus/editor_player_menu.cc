@@ -219,7 +219,8 @@ void EditorPlayerMenu::clicked_add_player() {
 
 
 void EditorPlayerMenu::clicked_remove_last_player() {
-	Widelands::Map & map = eia().egbase().map();
+	EditorInteractive& editor_interactive = eia();
+	Widelands::Map& map = editor_interactive.egbase().map();
 	Widelands::PlayerNumber const old_nr_players = map.get_nrplayers();
 	Widelands::PlayerNumber const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
@@ -230,8 +231,8 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->images().get(picsname));
+			editor_interactive.mutable_overlay_manager()->remove_overlay(
+			   sp, g_gr->images().get(picsname));
 		}
 	}
 	map.set_nrplayers(nr_players);
@@ -350,7 +351,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function(
+	menu.mutable_overlay_manager()->register_overlay_callback_function(
 	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
@@ -377,13 +378,12 @@ void EditorPlayerMenu::name_changed(int32_t m) {
  * Make infrastructure button clicked
  */
 void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
-	EditorInteractive & parent =
-		dynamic_cast<EditorInteractive &>(*get_parent());
+	EditorInteractive & parent = eia();
    // Check if starting position is valid (was checked before
    // so must be true)
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = *eia().mutable_overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 

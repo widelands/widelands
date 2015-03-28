@@ -646,7 +646,7 @@ MapObject::Loader * WareInstance::load
 		throw wexception("WareInstance: %s", e.what());
 	}
 
-	return nullptr; // Should never be reached
+	throw wexception("Unreachable code was reached. Please report a bug.");
 }
 
 }

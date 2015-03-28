@@ -86,12 +86,21 @@ void MapView::draw(RenderTarget & dst)
 			return;
 	}
 
-	egbase.map().overlay_manager().load_graphics();
+	int render_flags = GameRenderer::RenderFlags::RENDER_DEFAULT;
+	const InteractiveBase* iabase = &intbase();
+	if (iabase->buildhelp()) {
+		render_flags |= GameRenderer::RenderFlags::RENDER_BUILDHELP;
+	}
 
-	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		m_renderer->rendermap(dst, egbase, m_viewpoint, interactive_player->player());
+	if (upcast(InteractivePlayer const, interactive_player, iabase)) {
+		m_renderer->rendermap(dst,
+		                      static_cast<GameRenderer::RenderFlags>(render_flags),
+		                      egbase,
+		                      m_viewpoint,
+		                      interactive_player->player());
 	} else {
-		m_renderer->rendermap(dst, egbase, m_viewpoint);
+		m_renderer->rendermap(
+		   dst, static_cast<GameRenderer::RenderFlags>(render_flags), egbase, m_viewpoint);
 	}
 }
 

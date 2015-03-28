@@ -222,7 +222,7 @@ private:
 	UI::TabPanel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
-	OverlayManager::JobId m_workarea_preview_job_id;
+	OverlayId m_workarea_preview_job_id;
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
@@ -275,7 +275,7 @@ FieldActionWindow::FieldActionWindow
 	UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
 	m_plr(plr),
 	m_map(&ib->egbase().map()),
-	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_overlay_manager(*ib->mutable_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
 	m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	m_fastclick(true),

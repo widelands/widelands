@@ -403,16 +403,15 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 	Map              &       map             = egbase().map();
-	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
-	for (uint16_t y = 0; y < extent.h; ++y)
-		for (uint16_t x = 0; x < extent.w; ++x)
-			overlay_manager.recalc_field_overlays
-				(map.get_fcoords(Widelands::Coords(x, y)));
-	if
-		(UI::UniqueWindow * const building_statistics_window =
-		 	m_mainm_windows.building_stats.window)
-		dynamic_cast<BuildingStatisticsMenu&>
-			(*building_statistics_window)
-			.update();
+
+	for (uint16_t y = 0; y < extent.h; ++y) {
+		for (uint16_t x = 0; x < extent.w; ++x) {
+			mutable_overlay_manager()->recalc_field_overlays(map.get_fcoords(Widelands::Coords(x, y)));
+		}
+	}
+
+	if (UI::UniqueWindow* const building_statistics_window = m_mainm_windows.building_stats.window) {
+		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
+	}
 }

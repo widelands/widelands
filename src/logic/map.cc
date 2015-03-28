@@ -47,7 +47,6 @@
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
-#include "wui/overlay_manager.h"
 
 namespace Widelands {
 
@@ -114,7 +113,6 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	assert(area.y < m_height);
 	assert(m_fields.get() <= area.field);
 	assert            (area.field < m_fields.get() + max_index());
-	assert(m_overlay_manager);
 
 	{ //  First pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
@@ -130,11 +128,12 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 		do recalc_nodecaps_pass2(world, mr.location()); while (mr.advance(*this));
 	}
 
-	{ //  Now only recaluclate the overlays.
-		OverlayManager & om = overlay_manager();
-		MapRegion<Area<FCoords> > mr(*this, area);
-		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
-	}
+	// NOCOM(#sirver): bring that back?
+	// { //  Now only recaluclate the overlays.
+		// OverlayManager & om = overlay_manager();
+		// MapRegion<Area<FCoords> > mr(*this, area);
+		// do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
+	// }
 }
 
 
@@ -149,8 +148,6 @@ the overlays have completely changed.
 */
 void Map::recalc_whole_map(const World& world)
 {
-	assert(m_overlay_manager);
-
 	//  Post process the map in the necessary two passes to calculate
 	//  brightness and building caps
 	FCoords f;
@@ -171,10 +168,11 @@ void Map::recalc_whole_map(const World& world)
 			recalc_nodecaps_pass2(world, f);
 		}
 
+	// NOCOM(#sirver): bring this back?
 	//  Now only recaluclate the overlays.
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x)
-			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
+	// for (int16_t y = 0; y < m_height; ++y)
+		// for (int16_t x = 0; x < m_width; ++x)
+			// overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
 /*
@@ -303,7 +301,6 @@ void Map::cleanup() {
 	m_hint = std::string();
 	m_background = std::string();
 
-	m_overlay_manager.reset();
 	objectives_.clear();
 
 	m_port_spaces.clear();
@@ -411,8 +408,6 @@ void Map::set_origin(Coords const new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	m_port_spaces = new_port_spaces;
-
-	m_overlay_manager.reset(new OverlayManager());
 }
 
 
@@ -434,8 +429,6 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	memset(m_fields.get(), 0, sizeof(Field) * w * h);
 
 	m_pathfieldmgr->set_size(w * h);
-
-	m_overlay_manager.reset(new OverlayManager());
 }
 
 /*

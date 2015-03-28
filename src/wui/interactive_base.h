@@ -65,8 +65,8 @@ public:
 	virtual void reference_player_tribe(Widelands::PlayerNumber, const void * const) {}
 
 	bool m_show_workarea_preview;
-	OverlayManager::JobId show_work_area(const WorkareaInfo & workarea_info, Widelands::Coords coords);
-	void hide_work_area(OverlayManager::JobId job_id);
+	OverlayId show_work_area(const WorkareaInfo & workarea_info, Widelands::Coords coords);
+	void hide_work_area(OverlayId job_id);
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const = 0;
@@ -79,7 +79,7 @@ public:
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
-	bool buildhelp();
+	bool buildhelp() const;
 	void show_buildhelp(bool t);
 	void toggle_buildhelp ();
 
@@ -127,6 +127,17 @@ public:
 		log_message(std::string(message));
 	}
 
+	const OverlayManager& overlay_manager() const {
+		return *m_overlay_manager;
+	}
+	OverlayManager* mutable_overlay_manager() {
+		return m_overlay_manager.get();
+	}
+
+	const RoadOverlayManager& road_overlay_manager() const {
+		return *m_road_overlay_manager;
+	}
+
 protected:
 	void toggle_minimap();
 	void hide_minimap();
@@ -165,7 +176,7 @@ private:
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
 			 const Image* Pic                     = nullptr,
-			 const OverlayManager::JobId Jobid = 0)
+			 const OverlayId Jobid = 0)
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
 			pic(Pic), jobid(Jobid)
@@ -175,10 +186,14 @@ private:
 		Widelands::NodeAndTriangle<>     pos;
 		uint32_t              radius;
 		const Image* pic;
-		OverlayManager::JobId jobid;
+		OverlayId jobid;
 	} m_sel;
 
+	// NOCOM(#sirver): pull them into this file again.
 	std::unique_ptr<InteractiveBaseInternals> m;
+
+	std::unique_ptr<OverlayManager> m_overlay_manager;
+	std::unique_ptr<RoadOverlayManager> m_road_overlay_manager;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -188,8 +203,9 @@ private:
 	uint32_t          m_frametime;         //  in millseconds
 	uint32_t          m_avg_usframetime;   //  in microseconds!
 
-	OverlayManager::JobId m_jobid;
-	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
+	OverlayId m_jobid;
+	bool m_buildhelp;
+	OverlayId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::PlayerNumber m_road_build_player;
 

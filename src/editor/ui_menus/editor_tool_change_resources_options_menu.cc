@@ -218,10 +218,11 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Widelands::EditorGameBase& egbase = eia().egbase();
+	EditorInteractive& editor_interactive = eia();
+	Widelands::EditorGameBase& egbase = editor_interactive.egbase();
 	Widelands::Map & map = egbase.map();
-	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
+	editor_interactive.mutable_overlay_manager()->register_overlay_callback_function(boost::bind(
+	   &editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 

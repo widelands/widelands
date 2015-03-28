@@ -84,13 +84,12 @@ increase the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
-int32_t
-EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
-                                                  const Widelands::World& world,
-                                                  Widelands::NodeAndTriangle<> const center,
-                                                  EditorInteractive& /* parent */,
-                                                  EditorActionArgs& args) {
-	OverlayManager & overlay_manager = map.overlay_manager();
+int32_t EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
+                                                       const Widelands::World& world,
+                                                       Widelands::NodeAndTriangle<> const center,
+                                                       EditorInteractive& parent,
+                                                       EditorActionArgs& args) {
+	OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 			Widelands::Area<Widelands::FCoords>

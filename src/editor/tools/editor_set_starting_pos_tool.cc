@@ -63,10 +63,10 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
-                                                        const Widelands::World&,
-                                                        Widelands::NodeAndTriangle<> const center,
-                                                        EditorInteractive&,
-                                                        EditorActionArgs&) {
+                                                    const Widelands::World&,
+                                                    Widelands::NodeAndTriangle<> const center,
+                                                    EditorInteractive& parent,
+                                                    EditorActionArgs&) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -89,7 +89,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
-			OverlayManager & overlay_manager = map.overlay_manager();
+			OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);
 

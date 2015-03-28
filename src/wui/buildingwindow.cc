@@ -96,9 +96,9 @@ BuildingWindow::BuildingWindow
 
 BuildingWindow::~BuildingWindow()
 {
-	if (m_workarea_job_id)
-		igbase().egbase().map().overlay_manager().remove_overlay
-			(m_workarea_job_id);
+	if (m_workarea_job_id) {
+		igbase().mutable_overlay_manager()->remove_overlay(m_workarea_job_id);
+	}
 	m_registry = nullptr;
 }
 

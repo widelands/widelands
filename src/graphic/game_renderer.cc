@@ -29,6 +29,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/world.h"
+#include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
@@ -98,16 +99,43 @@ float field_brightness(const FCoords& fcoords,
 // but this is not the physically present road, but the one that should be
 // drawn (i.e. taking into account if there is fog of war involved or road
 // building overlays enabled).
-uint8_t field_roads(const FCoords& coords, const Map& map, const Player* const player) {
+uint8_t field_roads(const FCoords& coords,
+                    const Map& map,
+                    const RoadOverlayManager& road_overlay_manager,
+                    const Player* const player) {
 	uint8_t roads;
 	if (player && !player->see_all()) {
 		const Player::Field& pf = player->fields()[Map::get_index(coords, map.get_width())];
-		roads = pf.roads | map.overlay_manager().get_road_overlay(coords);
+		roads = pf.roads | road_overlay_manager.get_road_overlay(coords);
 	} else {
 		roads = coords.field->get_roads();
 	}
-	roads |= map.overlay_manager().get_road_overlay(coords);
+	roads |= road_overlay_manager.get_road_overlay(coords);
 	return roads;
+}
+
+// Overlay for build-help.
+const Image* get_buildhelp_overlay(const Widelands::NodeCaps caps) {
+	// NOCOM(#sirver): cache them once in game rendere.
+	if ((caps & Widelands::BUILDCAPS_MINE) == Widelands::BUILDCAPS_MINE) {
+		return g_gr->images().get("pics/mine.png");
+	}
+	if ((caps & Widelands::BUILDCAPS_PORT) == Widelands::BUILDCAPS_PORT) {
+		return g_gr->images().get("pics/port.png");
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		return g_gr->images().get("pics/big.png");
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
+		return g_gr->images().get("pics/medium.png");
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
+		return g_gr->images().get("pics/small.png");
+	}
+	if (caps & Widelands::BUILDCAPS_FLAG) {
+		return g_gr->images().get("pics/set_flag.png");
+	}
+	return nullptr;
 }
 
 }  // namespace
@@ -119,20 +147,23 @@ GameRenderer::~GameRenderer() {
 }
 
 void GameRenderer::rendermap(RenderTarget& dst,
+                             const RenderFlags render_flags,
                              const Widelands::EditorGameBase& egbase,
                              const Point& view_offset,
 
                              const Widelands::Player& player) {
-	draw(dst, egbase, view_offset, &player);
+	draw(dst, render_flags, egbase, view_offset, &player);
 }
 
 void GameRenderer::rendermap(RenderTarget& dst,
+                             const RenderFlags render_flags,
                              const Widelands::EditorGameBase& egbase,
                              const Point& view_offset) {
-	draw(dst, egbase, view_offset, nullptr);
+	draw(dst, render_flags, egbase, view_offset, nullptr);
 }
 
 void GameRenderer::draw(RenderTarget& dst,
+                        const RenderFlags render_flags,
                         const EditorGameBase& egbase,
                         const Point& view_offset,
                         const Player* player) {
@@ -163,6 +194,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	const int surface_height = surface->height();
 
 	Map& map = egbase.map();
+	const RoadOverlayManager& road_overlay_manager = egbase.get_ibase()->road_overlay_manager();
 	const uint32_t gametime = egbase.get_gametime();
 
 	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
@@ -200,7 +232,7 @@ void GameRenderer::draw(RenderTarget& dst,
 				f.road_textures = nullptr;
 			}
 
-			f.roads = field_roads(fcoords, map, player);
+			f.roads = field_roads(fcoords, map, road_overlay_manager, player);
 		}
 	}
 
@@ -229,10 +261,19 @@ void GameRenderer::draw(RenderTarget& dst,
 	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
+	draw_objects(dst,
+	             render_flags & RENDER_BUILDHELP,
+	             egbase,
+	             view_offset,
+	             player,
+	             minfx,
+	             maxfx,
+	             minfy,
+	             maxfy);
 }
 
 void GameRenderer::draw_objects(RenderTarget& dst,
+                                const bool draw_buildhelp,
                                 const EditorGameBase& egbase,
                                 const Point& view_offset,
                                 const Player* player,
@@ -380,59 +421,54 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 				}
 			}
 
+			const OverlayManager& overlay_manager = egbase.get_ibase()->overlay_manager();
+
+			if (draw_buildhelp) {
+				// NOCOM(#sirver): fill in
+				const Image* buildhelp = get_buildhelp_overlay(coords[F].field->nodecaps());
+				if (buildhelp != nullptr) {
+					// NOCOM(#sirver): this hotspot is wrong for flag
+					const Point hotspot(buildhelp->width() / 2, buildhelp->height() / 2);
+					dst.blit(pos[F] - hotspot, buildhelp);
+				}
+			}
+
 			{
 				// Render overlays on the node
 				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_NODE];
 
-				const OverlayManager::OverlayInfo * const end =
-					overlay_info
-					+
-					map.overlay_manager().get_overlays(coords[F], overlay_info);
+				const OverlayManager::OverlayInfo* const end =
+				   overlay_info + overlay_manager.get_overlays(coords[F], overlay_info);
 
-				for
-					(const OverlayManager::OverlayInfo * it = overlay_info;
-					 it < end;
-					 ++it)
+				for (const OverlayManager::OverlayInfo* it = overlay_info; it < end; ++it)
 					dst.blit(pos[F] - it->hotspot, it->pic);
 			}
 
 			{
 				// Render overlays on the R triangle
 				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::OverlayInfo const * end =
-					overlay_info
-					+
-					map.overlay_manager().get_overlays
-							 	(TCoords<>(coords[F], TCoords<>::R), overlay_info);
+				OverlayManager::OverlayInfo const* end =
+				   overlay_info +
+				   overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::R), overlay_info);
 
-				Point tripos
-					((pos[F].x + pos[R].x + pos[BR].x) / 3,
-					 (pos[F].y + pos[R].y + pos[BR].y) / 3);
+				Point tripos(
+				   (pos[F].x + pos[R].x + pos[BR].x) / 3, (pos[F].y + pos[R].y + pos[BR].y) / 3);
 
-				for
-					(OverlayManager::OverlayInfo const * it = overlay_info;
-					 it < end;
-					 ++it)
+				for (OverlayManager::OverlayInfo const* it = overlay_info; it < end; ++it)
 					dst.blit(tripos - it->hotspot, it->pic);
 			}
 
 			{
 				// Render overlays on the D triangle
 				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::OverlayInfo const * end =
-					overlay_info
-					+
-					map.overlay_manager().get_overlays
-							 	(TCoords<>(coords[F], TCoords<>::D), overlay_info);
+				OverlayManager::OverlayInfo const* end =
+				   overlay_info +
+				   overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::D), overlay_info);
 
-				Point tripos
-					((pos[F].x + pos[BL].x + pos[BR].x) / 3,
-					 (pos[F].y + pos[BL].y + pos[BR].y) / 3);
+				Point tripos(
+				   (pos[F].x + pos[BL].x + pos[BR].x) / 3, (pos[F].y + pos[BL].y + pos[BR].y) / 3);
 
-				for
-					(OverlayManager::OverlayInfo const * it = overlay_info;
-					 it < end;
-					 ++it)
+				for (OverlayManager::OverlayInfo const* it = overlay_info; it < end; ++it)
 					dst.blit(tripos - it->hotspot, it->pic);
 			}
 		}

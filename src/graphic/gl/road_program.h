@@ -39,7 +39,10 @@ public:
 
 	// Draws the roads. The dimensions of the renderbuffer are needed to convert from pixel to GL
 	// space.
-	void draw(int renderbuffer_width, int renderbuffer_height, const FieldsToDraw& fields_to_draw, float z_value);
+	void draw(int renderbuffer_width,
+	          int renderbuffer_height,
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value);
 
 private:
 	struct PerVertexData {
