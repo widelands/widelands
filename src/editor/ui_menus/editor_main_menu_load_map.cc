@@ -42,7 +42,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
 
 using Widelands::WidelandsMapLoader;
 

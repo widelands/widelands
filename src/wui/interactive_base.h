@@ -33,13 +33,15 @@
 #include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
+#include "wui/edge_overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
-#include "wui/overlay_manager.h"
 
 namespace Widelands {struct CoordPath;}
 
-struct InteractiveBaseInternals;
+class EdgeOverlayManager;
 class UniqueWindowHandler;
+struct InteractiveBaseInternals;
 
 /**
  * This is used to represent the code that InteractivePlayer and
@@ -65,8 +67,9 @@ public:
 	virtual void reference_player_tribe(Widelands::PlayerNumber, const void * const) {}
 
 	bool m_show_workarea_preview;
-	OverlayId show_work_area(const WorkareaInfo & workarea_info, Widelands::Coords coords);
-	void hide_work_area(OverlayId job_id);
+	FieldOverlayManager::OverlayId show_work_area(const WorkareaInfo& workarea_info,
+	                                              Widelands::Coords coords);
+	void hide_work_area(FieldOverlayManager::OverlayId overlay_id);
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const = 0;
@@ -129,15 +132,15 @@ public:
 		log_message(std::string(message));
 	}
 
-	const OverlayManager& overlay_manager() const {
-		return *m_overlay_manager;
+	const FieldOverlayManager& field_overlay_manager() const {
+		return *m_field_overlay_manager;
 	}
-	OverlayManager* mutable_overlay_manager() {
-		return m_overlay_manager.get();
+	FieldOverlayManager* mutable_field_overlay_manager() {
+		return m_field_overlay_manager.get();
 	}
 
-	const RoadOverlayManager& road_overlay_manager() const {
-		return *m_road_overlay_manager;
+	const EdgeOverlayManager& edge_overlay_manager() const {
+		return *m_edge_overlay_manager;
 	}
 
 protected:
@@ -182,7 +185,7 @@ private:
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
 			 const Image* Pic                     = nullptr,
-			 const OverlayId Jobid = 0)
+			 const FieldOverlayManager::OverlayId Jobid = 0)
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
 			pic(Pic), jobid(Jobid)
@@ -192,14 +195,13 @@ private:
 		Widelands::NodeAndTriangle<>     pos;
 		uint32_t              radius;
 		const Image* pic;
-		OverlayId jobid;
+		FieldOverlayManager::OverlayId jobid;
 	} m_sel;
 
-	// NOCOM(#sirver): pull them into this file again.
 	std::unique_ptr<InteractiveBaseInternals> m;
 
-	std::unique_ptr<OverlayManager> m_overlay_manager;
-	std::unique_ptr<RoadOverlayManager> m_road_overlay_manager;
+	std::unique_ptr<FieldOverlayManager> m_field_overlay_manager;
+	std::unique_ptr<EdgeOverlayManager> m_edge_overlay_manager;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -209,8 +211,8 @@ private:
 	uint32_t          m_frametime;         //  in millseconds
 	uint32_t          m_avg_usframetime;   //  in microseconds!
 
-	OverlayId m_jobid;
-	OverlayId m_road_buildhelp_overlay_jobid;
+	EdgeOverlayManager::OverlayId m_jobid;
+	FieldOverlayManager::OverlayId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::PlayerNumber m_road_build_player;
 

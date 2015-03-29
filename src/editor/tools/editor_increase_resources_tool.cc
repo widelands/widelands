@@ -26,7 +26,7 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 using Widelands::TCoords;
 
@@ -89,7 +89,7 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                        Widelands::NodeAndTriangle<> const center,
                                                        EditorInteractive& parent,
                                                        EditorActionArgs& args) {
-	OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
+	FieldOverlayManager& overlay_manager = *parent.mutable_field_overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 			Widelands::Area<Widelands::FCoords>

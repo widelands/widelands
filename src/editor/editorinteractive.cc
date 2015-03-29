@@ -49,9 +49,9 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
-#include "wui/overlay_manager.h"
 
 namespace {
 
@@ -152,7 +152,7 @@ void EditorInteractive::register_overlays() {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 			const Image* pic = g_gr->images().get(fname);
 			assert(pic);
-			mutable_overlay_manager()->register_overlay
+			mutable_field_overlay_manager()->register_overlay
 				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
@@ -165,7 +165,7 @@ void EditorInteractive::register_overlays() {
 			const std::string& immname =
 			   egbase().world().get_resource(fc.field->get_resources())->get_editor_pic(amount);
 			if (immname.size())
-				mutable_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
+				mutable_field_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
 }
@@ -496,7 +496,7 @@ void EditorInteractive::select_tool
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
-		mutable_overlay_manager()->remove_overlay_callback_function();
+		mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 		map.recalc_whole_map(egbase().world());
 	}
 	tools.current_pointer = &primary;

@@ -102,6 +102,6 @@ wl_library(editor
     ui_fsmenu
     widelands_ball_of_mud
     wui
+    wui_field_overlay_manager
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

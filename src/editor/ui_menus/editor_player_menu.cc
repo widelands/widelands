@@ -34,7 +34,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -231,7 +231,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
-			editor_interactive.mutable_overlay_manager()->remove_overlay(
+			editor_interactive.mutable_field_overlay_manager()->remove_overlay(
 			   sp, g_gr->images().get(picsname));
 		}
 	}
@@ -351,7 +351,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	menu.mutable_overlay_manager()->register_overlay_callback_function(
+	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
 	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
@@ -383,7 +383,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	OverlayManager & overlay_manager = *eia().mutable_overlay_manager();
+	FieldOverlayManager & overlay_manager = *eia().mutable_field_overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 

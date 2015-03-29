@@ -24,7 +24,6 @@
 #include "graphic/graphic.h"
 #include "logic/building.h"
 #include "logic/map.h"
-#include "wui/overlay_manager.h"
 
 // global variable to pass data from callback to class
 static int32_t m_current_player;
@@ -89,7 +88,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
-			OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
+			FieldOverlayManager& overlay_manager = *parent.mutable_field_overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);
 

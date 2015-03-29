@@ -135,7 +135,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  */
 void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
-	auto* overlay_manager = mutable_overlay_manager();
+	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 

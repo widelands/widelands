@@ -54,7 +54,6 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/overlay_manager.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -400,9 +399,6 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	DebugConsole::write(
 	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
-
-	mutable_overlay_manager()->register_overlay_callback_function(
-	   boost::bind(&InteractivePlayer::calculate_buildcaps, this, _1));
 
 	if (UI::UniqueWindow* const building_statistics_window = m_mainm_windows.building_stats.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();

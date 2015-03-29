@@ -17,15 +17,13 @@
  *
  */
 
-#ifndef WL_WUI_OVERLAY_MANAGER_H
-#define WL_WUI_OVERLAY_MANAGER_H
+#ifndef WL_WUI_FIELD_OVERLAY_MANAGER_H
+#define WL_WUI_FIELD_OVERLAY_MANAGER_H
 
+#include <functional>
 #include <map>
 #include <set>
-#include <unordered_map>
-
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
+#include <vector>
 
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
@@ -49,53 +47,61 @@ class Image;
  *     with the overlay_id can be called and all overlays created in the
  *     job are removed. This is useful for interactive road building.
  */
-#define MAX_OVERLAYS_PER_NODE 6
-#define MAX_OVERLAYS_PER_TRIANGLE 3
+constexpr int kLevelForBuildHelp = 5;
+struct FieldOverlayManager {
+	/// A unique id identifying a registered overlay.
+	using OverlayId = uint32_t;
 
-// A unique id identifying a registered field or road overlay.
-using OverlayId = uint32_t;
-
-struct OverlayManager {
+	/// A overlay as drawn onto the screen.
 	struct OverlayInfo {
+		OverlayInfo() = default;
+		OverlayInfo(const Image* init_pic, const Point& init_hotspot)
+		   : pic(init_pic), hotspot(init_hotspot) {
+		}
+
 		const Image* pic;
 		Point hotspot;
 	};
 
+	/// A function returning Field::nodecaps() for the build overlay. This can be
+	/// registered to hide or change some of the nodecaps during rendering.
 	using CallbackFn =
-		boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
+	   std::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
 
-	OverlayManager();
+	FieldOverlayManager();
 
-	// Returns true if the buildhelp is currently shown.
+	/// Returns true if the buildhelp is currently shown.
 	bool buildhelp() const;
 
-	// Defines if the buildhelp should be shown.
+	/// Defines if the buildhelp should be shown.
 	void show_buildhelp(bool t);
 
-	//  register callback function (see data below for description)
+	/// Register callback function.
 	void register_overlay_callback_function(CallbackFn function);
-	void remove_overlay_callback_function();
 
-	/// Get a unique, unused job id.
-	// NOCOM(#sirver): who uses this?
-	OverlayId get_a_job_id();
+	/// Get a unique, unused id that can be passed to register_overlay.
+	OverlayId next_overlay_id();
 
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
 	/// Point::invalid(), the center of the picture will be used as hotspot.
-	void register_overlay
-		(Widelands::TCoords<>,
-		 const Image* pic,
-		 int32_t level,
-		 Point   hotspot = Point::invalid(),
-		 OverlayId overlay_id = 0);
+	void register_overlay(const Widelands::TCoords<> coords,
+	                      const Image* pic,
+	                      int32_t level,
+	                      Point hotspot = Point::invalid(),
+	                      OverlayId overlay_id = 0);
 
-	// removes all overlays when pic is zero
+	/// removes all overlays when pic is nullptr.
 	void remove_overlay(Widelands::TCoords<>, const Image* pic);
+
+	/// remove all overlays with this overlay_id
 	void remove_overlay(OverlayId overlay_id);
 
-	uint8_t get_overlays(Widelands::FCoords c, OverlayInfo *) const;
-	uint8_t get_overlays(Widelands::TCoords<>, OverlayInfo *) const;
+	/// Returns the currently registered overlays and the buildhelp for a node.
+	void get_overlays(Widelands::FCoords c, std::vector<OverlayInfo>* result) const;
+
+	/// Returns the currently registered overlays for a triangle.
+	void get_overlays(Widelands::TCoords<>, std::vector<OverlayInfo>* result) const;
 
 private:
 	struct RegisteredOverlays {
@@ -116,7 +122,8 @@ private:
 	                                                      RegisteredOverlays,
 	                                                      Widelands::Coords::OrderingFunctor>;
 
-	// NOCOM(#sirver): this file is a mess. fix it
+	// Returns the index into m_buildhelp_infos for the correct fieldcaps for
+	// 'fc' according to the current 'm_callback'.
 	int get_buildhelp_overlay(const Widelands::FCoords& fc) const;
 
 	//  indexed by TCoords<>::TriangleIndex
@@ -127,38 +134,7 @@ private:
 
 	// this callback is used to define where overlays are drawn.
 	CallbackFn m_callback;
-	OverlayId m_current_job_id;
+	OverlayId m_current_overlay_id;
 };
 
-
-// NOCOM(#sirver): move into separate file
-// NOCOM(#sirver): rename OverlayManager to FieldOverlayManager
-// NOCOM(#sirver): maybe rename the other to edgeOverlayManager?
-class RoadOverlayManager {
-public:
-	RoadOverlayManager() = default;
-
-	//  Road overlays are registered like normal overlays and removed like
-	//  normal overlays but they use are handled internally completely
-	//  different. When a road overlay information is requested the same data a
-	//  s for a field is returned (a uint8_t which needs to be ANDed).
-	void register_road_overlay
-		(Widelands::Coords, uint8_t where, OverlayId overlay_id = 0);
-	void remove_road_overlay(Widelands::Coords);
-	void remove_road_overlay(OverlayId overlay_id);
-	uint8_t get_road_overlay(Widelands::Coords c) const;
-
-private:
-	struct RegisteredRoadOverlays {
-		OverlayId overlay_id;
-		uint8_t where;
-	};
-
-	using RegisteredRoadOverlaysMap =
-		std::map<const Widelands::Coords, RegisteredRoadOverlays, Widelands::Coords::OrderingFunctor>;
-	RegisteredRoadOverlaysMap m_road_overlays;
-
-	DISALLOW_COPY_AND_ASSIGN(RoadOverlayManager);
-};
-
-#endif  // end of include guard: WL_WUI_OVERLAY_MANAGER_H
+#endif  // end of include guard: WL_WUI_FIELD_OVERLAY_MANAGER_H

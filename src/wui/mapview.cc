@@ -29,7 +29,6 @@
 #include "wui/interactive_base.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
-#include "wui/overlay_manager.h"
 
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)

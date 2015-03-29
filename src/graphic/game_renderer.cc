@@ -29,12 +29,11 @@
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/world.h"
+#include "wui/edge_overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
-#include "wui/overlay_manager.h"
-
-// NOCOM(#sirver): big problem with the callback methods. How to handle that?
 
 // Explanation of how drawing works:
 // Schematic of triangle neighborhood:
@@ -103,16 +102,16 @@ float field_brightness(const FCoords& fcoords,
 // building overlays enabled).
 uint8_t field_roads(const FCoords& coords,
                     const Map& map,
-                    const RoadOverlayManager& road_overlay_manager,
+                    const EdgeOverlayManager& edge_overlay_manager,
                     const Player* const player) {
 	uint8_t roads;
 	if (player && !player->see_all()) {
 		const Player::Field& pf = player->fields()[Map::get_index(coords, map.get_width())];
-		roads = pf.roads | road_overlay_manager.get_road_overlay(coords);
+		roads = pf.roads | edge_overlay_manager.get_overlay(coords);
 	} else {
 		roads = coords.field->get_roads();
 	}
-	roads |= road_overlay_manager.get_road_overlay(coords);
+	roads |= edge_overlay_manager.get_overlay(coords);
 	return roads;
 }
 
@@ -169,7 +168,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	const int surface_height = surface->height();
 
 	Map& map = egbase.map();
-	const RoadOverlayManager& road_overlay_manager = egbase.get_ibase()->road_overlay_manager();
+	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 	const uint32_t gametime = egbase.get_gametime();
 
 	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
@@ -207,7 +206,7 @@ void GameRenderer::draw(RenderTarget& dst,
 				f.road_textures = nullptr;
 			}
 
-			f.roads = field_roads(fcoords, map, road_overlay_manager, player);
+			f.roads = field_roads(fcoords, map, edge_overlay_manager, player);
 		}
 	}
 
@@ -230,8 +229,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	// Enqueue the drawing of the dither layer.
 	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
 	i.blend_mode = BlendMode::UseAlpha;
-	// NOCOM(#sirver): maybe that is in the parent branch already not there.
-	// RenderQueue::instance().enqueue(i);
+	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
@@ -255,6 +253,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 	static const uint32_t BR = 3;
 	const Map & map = egbase.map();
 
+	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			Coords ncoords(fx, fy);
@@ -388,44 +387,37 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 				}
 			}
 
-			const OverlayManager& overlay_manager = egbase.get_ibase()->overlay_manager();
+			const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
 			{
-				// Render overlays on the node
-				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_NODE];
-
-				const OverlayManager::OverlayInfo* const end =
-				   overlay_info + overlay_manager.get_overlays(coords[F], overlay_info);
-
-				for (const OverlayManager::OverlayInfo* it = overlay_info; it < end; ++it)
-					dst.blit(pos[F] - it->hotspot, it->pic);
+				overlay_info.clear();
+				overlay_manager.get_overlays(coords[F], &overlay_info);
+				for (const auto& overlay : overlay_info) {
+					dst.blit(pos[F] - overlay.hotspot, overlay.pic);
+				}
 			}
 
 			{
 				// Render overlays on the R triangle
-				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::OverlayInfo const* end =
-				   overlay_info +
-				   overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::R), overlay_info);
+				overlay_info.clear();
+				overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::R), &overlay_info);
 
 				Point tripos(
 				   (pos[F].x + pos[R].x + pos[BR].x) / 3, (pos[F].y + pos[R].y + pos[BR].y) / 3);
-
-				for (OverlayManager::OverlayInfo const* it = overlay_info; it < end; ++it)
-					dst.blit(tripos - it->hotspot, it->pic);
+				for (const auto& overlay : overlay_info) {
+					dst.blit(tripos - overlay.hotspot, overlay.pic);
+				}
 			}
 
 			{
 				// Render overlays on the D triangle
-				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::OverlayInfo const* end =
-				   overlay_info +
-				   overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::D), overlay_info);
+				overlay_info.clear();
+				overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::D), &overlay_info);
 
 				Point tripos(
 				   (pos[F].x + pos[BL].x + pos[BR].x) / 3, (pos[F].y + pos[BL].y + pos[BR].y) / 3);
-
-				for (OverlayManager::OverlayInfo const* it = overlay_info; it < end; ++it)
-					dst.blit(tripos - it->hotspot, it->pic);
+				for (const auto& overlay : overlay_info) {
+					dst.blit(tripos - overlay.hotspot, overlay.pic);
+				}
 			}
 		}
 	}

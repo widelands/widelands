@@ -57,7 +57,7 @@ BuildingWindow::BuildingWindow
 		 b.descr().descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(0),
+	m_workarea_overlay_id(0),
 	m_avoid_fastclick(false)
 {
 	delete m_registry;
@@ -96,8 +96,8 @@ BuildingWindow::BuildingWindow
 
 BuildingWindow::~BuildingWindow()
 {
-	if (m_workarea_job_id) {
-		igbase().mutable_overlay_manager()->remove_overlay(m_workarea_job_id);
+	if (m_workarea_overlay_id) {
+		igbase().mutable_field_overlay_manager()->remove_overlay(m_workarea_overlay_id);
 	}
 	m_registry = nullptr;
 }
@@ -467,7 +467,7 @@ void BuildingWindow::act_debug()
  */
 void BuildingWindow::show_workarea()
 {
-	if (m_workarea_job_id) {
+	if (m_workarea_overlay_id) {
 		return; // already shown, nothing to be done
 	}
 	WorkareaInfo workarea_info;
@@ -479,7 +479,7 @@ void BuildingWindow::show_workarea()
 	if (workarea_info.empty()) {
 		return;
 	}
-	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());
+	m_workarea_overlay_id = igbase().show_work_area(workarea_info, m_building.get_position());
 
 	configure_workarea_button();
 }
@@ -489,9 +489,9 @@ void BuildingWindow::show_workarea()
  */
 void BuildingWindow::hide_workarea()
 {
-	if (m_workarea_job_id) {
-		igbase().hide_work_area(m_workarea_job_id);
-		m_workarea_job_id = 0;
+	if (m_workarea_overlay_id) {
+		igbase().hide_work_area(m_workarea_overlay_id);
+		m_workarea_overlay_id = 0;
 
 		configure_workarea_button();
 	}
@@ -503,7 +503,7 @@ void BuildingWindow::hide_workarea()
 void BuildingWindow::configure_workarea_button()
 {
 	if (m_toggle_workarea) {
-		if (m_workarea_job_id) {
+		if (m_workarea_overlay_id) {
 			m_toggle_workarea->set_tooltip(_("Hide work area"));
 			m_toggle_workarea->set_perm_pressed(true);
 		} else {
@@ -515,7 +515,7 @@ void BuildingWindow::configure_workarea_button()
 
 
 void BuildingWindow::toggle_workarea() {
-	if (m_workarea_job_id) {
+	if (m_workarea_overlay_id) {
 		hide_workarea();
 	} else {
 		show_workarea();

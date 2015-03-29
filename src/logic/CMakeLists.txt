@@ -261,5 +261,4 @@ wl_library(logic
     widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

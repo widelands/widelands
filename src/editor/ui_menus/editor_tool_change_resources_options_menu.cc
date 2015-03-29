@@ -32,7 +32,7 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/button.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
@@ -221,7 +221,7 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	EditorInteractive& editor_interactive = eia();
 	Widelands::EditorGameBase& egbase = editor_interactive.egbase();
 	Widelands::Map & map = egbase.map();
-	editor_interactive.mutable_overlay_manager()->register_overlay_callback_function(boost::bind(
+	editor_interactive.mutable_field_overlay_manager()->register_overlay_callback_function(boost::bind(
 	   &editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();

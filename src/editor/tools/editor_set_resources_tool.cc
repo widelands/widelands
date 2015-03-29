@@ -27,7 +27,7 @@
 #include "logic/mapregion.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 /**
  * Sets the resources of the current to a fixed value
@@ -37,7 +37,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
                                                      Widelands::NodeAndTriangle<> const center,
                                                      EditorInteractive& parent,
                                                      EditorActionArgs& args) {
-	OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
+	FieldOverlayManager& field_overlay_manager = *parent.mutable_field_overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	 Widelands::Area<Widelands::FCoords>
@@ -59,7 +59,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic = g_gr->images().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
-			overlay_manager.remove_overlay(mr.location(), pic);
+			field_overlay_manager.remove_overlay(mr.location(), pic);
 
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
@@ -70,7 +70,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
 				//  set new overlay
 				pic =
 				    g_gr->images().get(world.get_resource(args.cur_res)->get_editor_pic(amount));
-				overlay_manager.register_overlay(mr.location(), pic, 4);
+				field_overlay_manager.register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area(world, Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}
 		}
@@ -84,7 +84,7 @@ EditorSetResourcesTool::handle_undo_impl(Widelands::Map& map,
                                          Widelands::NodeAndTriangle<Widelands::Coords> center,
                                          EditorInteractive& parent,
                                          EditorActionArgs& args) {
-	OverlayManager& overlay_manager = *parent.mutable_overlay_manager();
+	FieldOverlayManager& overlay_manager = *parent.mutable_field_overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	 Widelands::Area<Widelands::FCoords>

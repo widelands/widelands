@@ -28,7 +28,7 @@
 #include "logic/widelands_geometry.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 
 /**
@@ -63,7 +63,7 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 			    world.get_resource(res)->get_editor_pic
 			    (mr.location().field->get_resources_amount());
 			const Image* pic = g_gr->images().get(str);
-			auto overlay_manager = parent.mutable_overlay_manager();
+			auto* overlay_manager = parent.mutable_field_overlay_manager();
 			overlay_manager->remove_overlay(mr.location(), pic);
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
