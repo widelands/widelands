@@ -79,9 +79,11 @@ public:
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
+	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
+
+	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
 	void show_buildhelp(bool t);
-	void toggle_buildhelp ();
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -139,6 +141,10 @@ public:
 	}
 
 protected:
+	// Will be called whenever the buildhelp is changed with the new 'value'.
+	virtual void on_buildhelp_changed(bool value);
+
+	void toggle_buildhelp();
 	void toggle_minimap();
 	void hide_minimap();
 	UI::UniqueWindow::Registry & minimap_registry();
@@ -204,7 +210,6 @@ private:
 	uint32_t          m_avg_usframetime;   //  in microseconds!
 
 	OverlayId m_jobid;
-	bool m_buildhelp;
 	OverlayId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::PlayerNumber m_road_build_player;

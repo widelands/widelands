@@ -34,6 +34,8 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
+// NOCOM(#sirver): big problem with the callback methods. How to handle that?
+
 // Explanation of how drawing works:
 // Schematic of triangle neighborhood:
 //
@@ -114,30 +116,6 @@ uint8_t field_roads(const FCoords& coords,
 	return roads;
 }
 
-// Overlay for build-help.
-const Image* get_buildhelp_overlay(const Widelands::NodeCaps caps) {
-	// NOCOM(#sirver): cache them once in game rendere.
-	if ((caps & Widelands::BUILDCAPS_MINE) == Widelands::BUILDCAPS_MINE) {
-		return g_gr->images().get("pics/mine.png");
-	}
-	if ((caps & Widelands::BUILDCAPS_PORT) == Widelands::BUILDCAPS_PORT) {
-		return g_gr->images().get("pics/port.png");
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
-		return g_gr->images().get("pics/big.png");
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
-		return g_gr->images().get("pics/medium.png");
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
-		return g_gr->images().get("pics/small.png");
-	}
-	if (caps & Widelands::BUILDCAPS_FLAG) {
-		return g_gr->images().get("pics/set_flag.png");
-	}
-	return nullptr;
-}
-
 }  // namespace
 
 GameRenderer::GameRenderer()  {
@@ -147,23 +125,20 @@ GameRenderer::~GameRenderer() {
 }
 
 void GameRenderer::rendermap(RenderTarget& dst,
-                             const RenderFlags render_flags,
                              const Widelands::EditorGameBase& egbase,
                              const Point& view_offset,
 
                              const Widelands::Player& player) {
-	draw(dst, render_flags, egbase, view_offset, &player);
+	draw(dst, egbase, view_offset, &player);
 }
 
 void GameRenderer::rendermap(RenderTarget& dst,
-                             const RenderFlags render_flags,
                              const Widelands::EditorGameBase& egbase,
                              const Point& view_offset) {
-	draw(dst, render_flags, egbase, view_offset, nullptr);
+	draw(dst, egbase, view_offset, nullptr);
 }
 
 void GameRenderer::draw(RenderTarget& dst,
-                        const RenderFlags render_flags,
                         const EditorGameBase& egbase,
                         const Point& view_offset,
                         const Player* player) {
@@ -255,25 +230,17 @@ void GameRenderer::draw(RenderTarget& dst,
 	// Enqueue the drawing of the dither layer.
 	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
 	i.blend_mode = BlendMode::UseAlpha;
+	// NOCOM(#sirver): maybe that is in the parent branch already not there.
 	// RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(dst,
-	             render_flags & RENDER_BUILDHELP,
-	             egbase,
-	             view_offset,
-	             player,
-	             minfx,
-	             maxfx,
-	             minfy,
-	             maxfy);
+	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
 }
 
 void GameRenderer::draw_objects(RenderTarget& dst,
-                                const bool draw_buildhelp,
                                 const EditorGameBase& egbase,
                                 const Point& view_offset,
                                 const Player* player,
@@ -422,17 +389,6 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			}
 
 			const OverlayManager& overlay_manager = egbase.get_ibase()->overlay_manager();
-
-			if (draw_buildhelp) {
-				// NOCOM(#sirver): fill in
-				const Image* buildhelp = get_buildhelp_overlay(coords[F].field->nodecaps());
-				if (buildhelp != nullptr) {
-					// NOCOM(#sirver): this hotspot is wrong for flag
-					const Point hotspot(buildhelp->width() / 2, buildhelp->height() / 2);
-					dst.blit(pos[F] - hotspot, buildhelp);
-				}
-			}
-
 			{
 				// Render overlays on the node
 				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_NODE];

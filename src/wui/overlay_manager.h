@@ -22,6 +22,7 @@
 
 #include <map>
 #include <set>
+#include <unordered_map>
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
@@ -37,15 +38,10 @@ class Image;
  * manages overlays in the following way:
  *   - When someone registered one (or more) special overlays
  *     for a field he draws them accordingly
- *   - If nothing was registered for this field, the Overlay Manager
- *     automatically returns
- *        - buildhelp (if activated)
  *
  *    about the level variable:
- *     the level describe when the overlay should be drawn
- *     buildhelp graphics have a level of 5, lower means the
- *     buildhelp will cover the old overlays, otherways the new
- *     overlay will cover the buildhelp.
+ *     the level describe when the overlay should be drawn, lower means drawn
+ *     earlier.
  *
  *    about overlay_id:
  *     the overlay_id can be given to the register function, whenever
@@ -70,6 +66,12 @@ struct OverlayManager {
 
 	OverlayManager();
 
+	// Returns true if the buildhelp is currently shown.
+	bool buildhelp() const;
+
+	// Defines if the buildhelp should be shown.
+	void show_buildhelp(bool t);
+
 	//  register callback function (see data below for description)
 	void register_overlay_callback_function(CallbackFn function);
 	void remove_overlay_callback_function();
@@ -77,8 +79,6 @@ struct OverlayManager {
 	/// Get a unique, unused job id.
 	// NOCOM(#sirver): who uses this?
 	OverlayId get_a_job_id();
-
-	void load_graphics();
 
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
@@ -97,13 +97,6 @@ struct OverlayManager {
 	uint8_t get_overlays(Widelands::FCoords c, OverlayInfo *) const;
 	uint8_t get_overlays(Widelands::TCoords<>, OverlayInfo *) const;
 
-	boost::function<void(bool)> onBuildHelpToggle;
-	bool buildhelp() const;
-	void show_buildhelp(bool t);
-	void toggle_buildhelp();
-
-	void recalc_field_overlays(Widelands::FCoords);
-
 private:
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
@@ -119,16 +112,18 @@ private:
 		int level;
 	};
 
+	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords,
+	                                                      RegisteredOverlays,
+	                                                      Widelands::Coords::OrderingFunctor>;
 
-	using RegisteredOverlaysMap =
-		std::multimap<const Widelands::Coords, RegisteredOverlays, Widelands::Coords::OrderingFunctor>;
+	// NOCOM(#sirver): this file is a mess. fix it
+	int get_buildhelp_overlay(const Widelands::FCoords& fc) const;
 
 	//  indexed by TCoords<>::TriangleIndex
 	RegisteredOverlaysMap m_overlays[3];
 
 	OverlayInfo m_buildhelp_infos[Widelands::Field::Buildhelp_None];
-	bool m_are_graphics_loaded;
-	bool m_showbuildhelp;
+	bool m_buildhelp;
 
 	// this callback is used to define where overlays are drawn.
 	CallbackFn m_callback;

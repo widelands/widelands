@@ -45,11 +45,6 @@ class RenderTarget;
  */
 class GameRenderer {
 public:
-	enum RenderFlags {
-		RENDER_DEFAULT = 0,
-		RENDER_BUILDHELP = 1,
-	};
-
 	GameRenderer();
 	~GameRenderer();
 
@@ -57,7 +52,6 @@ public:
 	// drawing window. 'view_offset' is the offset of the upper left
 	// corner of the window into the map, in pixels.
 	void rendermap(RenderTarget& dst,
-	               const RenderFlags render_flags,
 	               const Widelands::EditorGameBase& egbase,
 	               const Point& view_offset,
 	               const Widelands::Player& player);
@@ -65,7 +59,6 @@ public:
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
 	void rendermap(RenderTarget& dst,
-	               const RenderFlags render_flags,
 	               const Widelands::EditorGameBase& egbase,
 	               const Point& view_offset);
 
@@ -73,14 +66,12 @@ private:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
 	void draw(RenderTarget& dst,
-	          const RenderFlags render_flags,
 	          const Widelands::EditorGameBase& egbase,
 	          const Point& view_offset,
 	          const Widelands::Player* player);
 
 	// Draws the objects (animations & overlays).
 	void draw_objects(RenderTarget& dst,
-	                  bool draw_buildhelp,
 	                  const Widelands::EditorGameBase& egbase,
 	                  const Point& view_offset,
 	                  const Widelands::Player* player,

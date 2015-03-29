@@ -115,7 +115,6 @@ private:
 	BaseImmovable * immovable;
 
 	uint8_t caps                    : 7;
-	uint8_t buildhelp_overlay_index : 3;
 	uint8_t roads                   : 6;
 
 	Height height;
@@ -189,11 +188,6 @@ public:
 	void set_border(const bool b) {
 		owner_info_and_selections =
 			(owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
-	}
-
-	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(BuildhelpIndex const i) {
-		buildhelp_overlay_index = i;
 	}
 
 	int32_t get_roads() const {return roads;}

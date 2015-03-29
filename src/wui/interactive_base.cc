@@ -97,7 +97,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_frametime(0),
      m_avg_usframetime(0),
      m_jobid(0),
-	  m_buildhelp(false),
      m_road_buildhelp_overlay_jobid(0),
      m_buildroad(nullptr),
      m_road_build_player(0),
@@ -234,16 +233,20 @@ void InteractiveBase::unset_sel_picture() {
 	set_sel_picture("pics/fsel.png");
 }
 
-
-void InteractiveBase::toggle_buildhelp() {
-	m_buildhelp = !m_buildhelp;
-}
 bool InteractiveBase::buildhelp() const {
-	return m_buildhelp;
+	return m_overlay_manager->buildhelp();
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	m_buildhelp = t;
+	m_overlay_manager->show_buildhelp(t);
+	on_buildhelp_changed(t);
+}
+
+void InteractiveBase::toggle_buildhelp() {
+	m_overlay_manager->show_buildhelp(!m_overlay_manager->buildhelp());
+}
+
+void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated

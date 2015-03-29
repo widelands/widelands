@@ -26,30 +26,43 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-OverlayManager::OverlayManager() :
-	m_are_graphics_loaded(false), m_showbuildhelp(false), m_current_job_id(0) {
-}
+OverlayManager::OverlayManager() : m_current_job_id(0) {
 
+	OverlayInfo * buildhelp_info = m_buildhelp_infos;
+	const char * filenames[] = {
+		"pics/set_flag.png",
+		"pics/small.png",
+		"pics/medium.png",
+		"pics/big.png",
+		"pics/mine.png",
+		"pics/port.png"
+	};
+	const char * const * filename = filenames;
+
+	//  Special case for flag, which has a different formula for hotspot_y.
+	buildhelp_info->pic = g_gr->images().get(*filename);
+	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
+
+	const OverlayInfo * const buildhelp_infos_end =
+		buildhelp_info + Widelands::Field::Buildhelp_None;
+	for (;;) { // The other buildhelp overlays.
+		++buildhelp_info, ++filename;
+		if (buildhelp_info == buildhelp_infos_end)
+			break;
+		buildhelp_info->pic = g_gr->images().get(*filename);
+		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
+	}
+
+}
 
 bool OverlayManager::buildhelp() const {
-	return m_showbuildhelp;
+	return m_buildhelp;
 }
 
-void OverlayManager::show_buildhelp(const bool t) {
-	if (m_showbuildhelp != t) {
-		m_showbuildhelp = t;
-		if (onBuildHelpToggle) {
-			onBuildHelpToggle(m_showbuildhelp);
-		}
-	}
+void OverlayManager::show_buildhelp(const bool value) {
+	m_buildhelp = value;
 }
 
-void OverlayManager::toggle_buildhelp() {
-	m_showbuildhelp = !m_showbuildhelp;
-	if (onBuildHelpToggle) {
-		onBuildHelpToggle(m_showbuildhelp);
-	}
-}
 
 /**
  * \returns the currently registered overlays and the buildhelp for a node.
@@ -69,17 +82,16 @@ uint8_t OverlayManager::get_overlays
 			goto end;
 		++it;
 	}
-	// NOCOM(#sirver): always disabled for now.
-	if (m_showbuildhelp && false) {
-		// NOCOM(#sirver): kill buildhelp overlay index.
-		const uint8_t buildhelp_overlay_index =
-			c.field->get_buildhelp_overlay_index();
+
+	if (m_buildhelp) {
+		int buildhelp_overlay_index = get_buildhelp_overlay(c);
 		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
 			overlays[num_ret] = m_buildhelp_infos[buildhelp_overlay_index];
 			if (++num_ret == MAX_OVERLAYS_PER_NODE)
 				goto end;
 		}
 	}
+
 	while (it != overlay_map.end() && it->first == c) {
 		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
@@ -118,25 +130,22 @@ uint8_t OverlayManager::get_overlays
 	return num_ret;
 }
 
-/**
- * Recalculates all calculatable overlays for fields
- */
-void OverlayManager::recalc_field_overlays(const Widelands::FCoords fc) {
+int OverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) const {
 	Widelands::NodeCaps const caps =
 	   m_callback ? static_cast<Widelands::NodeCaps>(m_callback(fc)) : fc.field->nodecaps();
 
-	fc.field->set_buildhelp_overlay_index(
-	   caps & Widelands::BUILDCAPS_MINE ?
-	      Widelands::Field::Buildhelp_Mine :
-	      (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
-	      (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp_Port :
-	                                          Widelands::Field::Buildhelp_Big) :
-	      (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
-	      Widelands::Field::Buildhelp_Medium :
-	      (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL ?
-	      Widelands::Field::Buildhelp_Small :
-	      caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp_Flag :
-	                                         Widelands::Field::Buildhelp_None);
+	const int value = caps & Widelands::BUILDCAPS_MINE ?
+	               Widelands::Field::Buildhelp_Mine :
+	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
+	               (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp_Port :
+	                                                   Widelands::Field::Buildhelp_Big) :
+	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
+	               Widelands::Field::Buildhelp_Medium :
+	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL ?
+	               Widelands::Field::Buildhelp_Small :
+	               caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp_Flag :
+	                                                  Widelands::Field::Buildhelp_None;
+	return value;
 }
 
 /**
@@ -236,6 +245,21 @@ void OverlayManager::remove_overlay(const OverlayId overlay_id) {
 		}
 }
 
+void OverlayManager::register_overlay_callback_function(CallbackFn function) {
+	m_callback = function;
+}
+
+void OverlayManager::remove_overlay_callback_function() {
+	m_callback.clear();
+}
+
+OverlayId OverlayManager::get_a_job_id() {
+	++m_current_job_id;
+	if (m_current_job_id == 0)
+		++m_current_job_id;
+	return m_current_job_id;
+}
+
 /**
  * Register road overlays
  */
@@ -280,57 +304,4 @@ uint8_t RoadOverlayManager::get_road_overlay(const Widelands::Coords c) const {
 	if (it != m_road_overlays.end())
 		return it->second.where;
 	return 0;
-}
-
-/**
- * call cleanup and then, when graphic is reloaded
- * overlay_manager calls this for himself and everything should be fine
- *
- * Load all the needed graphics
- */
-void OverlayManager::load_graphics() {
-	if (m_are_graphics_loaded)
-		return;
-
-	OverlayInfo * buildhelp_info = m_buildhelp_infos;
-	static const char * filenames[] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png",
-		"pics/port.png"
-	};
-	const char * const * filename = filenames;
-
-	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->pic = g_gr->images().get(*filename);
-	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
-
-	const OverlayInfo * const buildhelp_infos_end =
-		buildhelp_info + Widelands::Field::Buildhelp_None;
-	for (;;) { // The other buildhelp overlays.
-		++buildhelp_info, ++filename;
-		if (buildhelp_info == buildhelp_infos_end)
-			break;
-		buildhelp_info->pic = g_gr->images().get(*filename);
-		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
-	}
-
-	m_are_graphics_loaded = true;
-}
-
-void OverlayManager::register_overlay_callback_function(CallbackFn function) {
-	m_callback = function;
-}
-
-void OverlayManager::remove_overlay_callback_function() {
-	m_callback.clear();
-}
-
-OverlayId OverlayManager::get_a_job_id() {
-	++m_current_job_id;
-	if (m_current_job_id == 0)
-		++m_current_job_id;
-	return m_current_job_id;
 }

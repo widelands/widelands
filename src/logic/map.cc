@@ -127,13 +127,6 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do recalc_nodecaps_pass2(world, mr.location()); while (mr.advance(*this));
 	}
-
-	// NOCOM(#sirver): bring that back?
-	// { //  Now only recaluclate the overlays.
-		// OverlayManager & om = overlay_manager();
-		// MapRegion<Area<FCoords> > mr(*this, area);
-		// do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
-	// }
 }
 
 
@@ -167,12 +160,6 @@ void Map::recalc_whole_map(const World& world)
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
-
-	// NOCOM(#sirver): bring this back?
-	//  Now only recaluclate the overlays.
-	// for (int16_t y = 0; y < m_height; ++y)
-		// for (int16_t x = 0; x < m_width; ++x)
-			// overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
 /*

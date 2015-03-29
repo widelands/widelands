@@ -21,6 +21,7 @@
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+#include <functional>
 #include <tuple>
 
 #include <stdint.h>
@@ -170,6 +171,20 @@ struct HeightInterval {
 
 	uint8_t min, max;
 };
+}
+
+// For use with unordered_map
+namespace std {
+
+template <> struct hash<Widelands::Coords> {
+	std::size_t operator()(const Widelands::Coords& k) const {
+		using std::size_t;
+		using std::hash;
+
+		return hash<uint32_t>()((static_cast<uint16_t>(k.y) << 16) | static_cast<uint16_t>(k.x));
+	}
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

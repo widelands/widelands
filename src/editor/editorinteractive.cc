@@ -223,7 +223,7 @@ void EditorInteractive::start() {
 	} catch (LuaScriptNotExistingError &) {
 		// do nothing.
 	}
-	mutable_overlay_manager()->show_buildhelp(true);
+	show_buildhelp(true);
 }
 
 
