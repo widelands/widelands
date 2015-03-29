@@ -223,7 +223,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	// Enqueue the drawing of the dither layer.
 	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
 	i.blend_mode = BlendMode::UseAlpha;
-	// RenderQueue::instance().enqueue(i);
+	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
