@@ -79,6 +79,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
 	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
+	teams_list_(&teams_box_, 0, 0, max_w_, 60, UI::Align_Left, true),
+
 	modal_(modal) {
 
 	descr_ = new UI::MultilineEditbox(
@@ -117,10 +119,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4"));
 	tags_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
-	/* NOCOM Suggested teams
-	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
-	 */
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")), UI::Box::AlignLeft);
+	teams_box_.add(&teams_list_, UI::Box::AlignLeft);
+	// TODO(GunChleoc): We need team images in the listselect here,
+	// so map editors will be able to delete entries.
+	// This is waiting for the new RT renderer.
+	teams_list_.add("Not implemented yet.", "", nullptr, false);
 
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
 	std::string players = (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();

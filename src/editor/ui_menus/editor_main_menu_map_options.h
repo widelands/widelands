@@ -24,6 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/listselect.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
@@ -61,6 +62,7 @@ private:
 	UI::Textarea size_;
 	UI::MultilineEditbox* descr_;
 	UI::MultilineEditbox* hint_;
+	UI::Listselect<std::string> teams_list_;
 
 	// Tag, Checkbox
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
