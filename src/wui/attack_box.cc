@@ -143,7 +143,6 @@ void AttackBox::update_attack() {
 }
 
 void AttackBox::init() {
-
 	assert(m_node);
 
 	uint32_t max_attackers = get_max_attackers();
