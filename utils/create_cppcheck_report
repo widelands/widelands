@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 FILE=cppcheck_report.html
 echo "<!doctype html>"                                                                 >  $FILE
 echo "<html>"                                                                          >> $FILE
