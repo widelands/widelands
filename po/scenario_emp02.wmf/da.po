@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Joe Hansen <joedalton2@yahoo.dk>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-22 12:24+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr "Opfør en træindustri"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Wood Economy"
-msgstr ""
+msgstr "Træøkonomi"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Byg tre skovhuggerbygninger, et skovfogedhus og et savværk."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
@@ -34,23 +35,23 @@ msgstr "Opfør et stenbrud"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
-msgstr ""
+msgstr "Stenbrud"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Byg et stenbrud syd for dit hovedkvarter."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
-msgstr "Beskyt din lejr"
+msgstr "Beskyt din koloni"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:48
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "Beskyt din koloni"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "Byg nogle barakker og vagttårne omkring kolonien."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -58,26 +59,26 @@ msgstr "Begynd marmorudvindingen"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:57
 msgid "Marble"
-msgstr ""
+msgstr "Marmor"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "Udvid mod øst, og start minedrift efter marmor fra bjerget."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
 msgid "Build a stonemason and mining infrastructure"
-msgstr "Byg en mure og mine infrastruktur"
+msgstr "Byg en stenhugger- og mineinfrastruktur"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Stonemason and Mining Infrastructure"
-msgstr ""
+msgstr "Stenhugger- og mineinfrastruktur"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
 "(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
 " armor smithy and smelting works)."
-msgstr ""
+msgstr "Byg et stenhuggeri og så en fuldstændig mine- og produktionsinfrastruktur (kulmine og/eller trækulsovn, jernmalmmine, værktøjssmedje, våbensmedje og smelteværker)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -85,34 +86,34 @@ msgstr "Forsyn dine minearbejdere med mad"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Mad til dine minearbejdere"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr ""
+msgstr "For at fremstille mad til vores minearbejdere, skal vi bruge et værtshus. For at give dem gode og stærke drikkevarer, skal vi bygge et bryggeri og en vingård."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Selvfølgelig betyder dette at vi skal bruge flere ressourcer til at forberede mad - såsom fisk, kød eller brød. For at fremskaffe disse fødevarer, skal du bygge et fiskerhus, et landbrug, en mølle og et bageri."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr ""
+msgstr "Måske skal du også bruge et jægerhus, en svinestald, en vingård og nogle brønde."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Det er op til dig hvad du ønsker at bygge. Men husk - kul- og jernmalmminer kræver øl, marmor- og guldminer kræver vin og alle miner kræver mindst fødevarer, som fremstilles fra brød ELLER kød ELLER fisk."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -120,42 +121,42 @@ msgstr "Beskyt din østlige grænse"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:87
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "Beskyt din østlige grænse"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:88
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr ""
+msgstr "Byg stærkere militære bygninger, såsom en forpost, en barriere eller et tårn, på den østlige grænse."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
-msgstr ""
+msgstr "For at kigge langt ind på fjendes territorium, så byg et tårn."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Knus barbarernes stamme"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Knus barbarernes stamme"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Så snart du har nok soldater, så angrib og knus fuldstændig barbarernes bygninger."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr ""
+msgstr "Til sidst bygges en fæstning på halvøen (nær ved hvor barbarernes hovedkvarter var), for at undgå nye bosættelser eller andre stammer i det område."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
-msgstr ""
+msgstr "En ny ø"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:109
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:118
@@ -175,18 +176,18 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr ""
+msgstr "Endelig! Denne ø ser ud til at være lavet til os, det er en gave fra guderne til mit folk og mig selv. Indtil nu har vi kun set en lille del af denne ø, men alene denne del bringer allerede solen frem i mit sind. Jeg har opfattelsen, at vi har fundet en uvurderlig skat, et paradisisk land."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:112
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr ""
+msgstr "På denne ø vil vi starte vores nye liv. Vi vil bygge en forpost for vores eksil, som måske vil blive et nyt, smukt hjem for os alle."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
-msgstr ""
+msgstr "De grønne skove"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:119
 msgid ""
@@ -227,7 +228,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Træ for kolonien"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
@@ -237,7 +238,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
-msgstr ""
+msgstr "Sten for kolonien"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:148
 msgid ""
@@ -359,7 +360,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Our New Tavern"
-msgstr ""
+msgstr "Vores nye værtshus"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid "Amalea smiles"
@@ -448,7 +449,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
-msgstr ""
+msgstr "7 dage senere ..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"
@@ -472,14 +473,14 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du har fuldført denne mission. Du kan fortsætte med at spille, hvis du ønsker det, eller gå til den næste mission."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

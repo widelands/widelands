@@ -45,7 +45,9 @@ tribes:new_trainingsite_type {
 		}
 	},
 
-	aihints = {},
+	aihints = {
+		trainingsite_type = "advanced"
+	},
 
 	working_positions = {
 		atlanteans_trainer = 1

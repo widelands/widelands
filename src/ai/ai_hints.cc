@@ -39,5 +39,14 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
 	  // 10 days default
 	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
-	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100)
-{}
+	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
+	  trainingsite_type_(TrainingSiteType::kNoTS) {
+
+	if (table->has_key("trainingsite_type")) {
+		if (table->get_string("trainingsite_type") == "basic") {
+			trainingsite_type_ =  TrainingSiteType::kBasic;
+		} else if (table->get_string("trainingsite_type") == "advanced") {
+			trainingsite_type_ =  TrainingSiteType::kAdvanced;
+		}
+	}
+}

@@ -43,7 +43,9 @@ tribes:new_trainingsite_type {
 		}
 	},
 
-	aihints = {},
+	aihints = {
+		trainingsite_type = "basic"
+	},
 
 	working_positions = {
 		empire_trainer = 1

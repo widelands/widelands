@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# abuyop <abuyop@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:16+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 12:16+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,41 +22,41 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Ini merupakan Widelands Binaan %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Penggunaan: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr ""
+msgstr "Pilihan:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr " --<config-entry-name>=value tulis-ganti mana-mana tetapan fail konfig"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
+msgstr " --logfile=FILENAME   Log output ke fail FILENAME selain dari \n                     output terminal "
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
+msgstr " --datadir=DIRNAME    Guna direktori yang dinyatakan untuk fail\n                      fail data widelands"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
+msgstr " --homedir=DIRNAME    Guna direktori yang dinyatakan untuk fail\n                      konfig, permainan tersimpan dan main semula"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      Lalai ialah ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -65,13 +66,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr " --coredump=[true|false]\n                      Jana longgok teras pada segfault\n                      selain dari menggunakan SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
+msgstr " --language=[ms_MY|sv_SE|...]\n                      Bahasa setempat yang digunakan."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -80,71 +81,71 @@ msgstr ""
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
+msgstr " --remove_syncstreams=[true|false]\n                      Buang fail syncstream ketika permulaan"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
+msgstr " --remove_replays=[...]\n                      Buang main semula selepas bilangan.\n                      Hari ini. Jika ia adalah 0, main semula tidak dipadam."
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr " --autosave=[...]     Simpan setiap n minit secara automatik"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr " --rolling_autosave=[...]\n                      Guna fail sebanyak ini untuk autosimpan gulungan"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
-msgstr ""
+msgstr "Pilihan bunyi:"
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Mula permainan tanpa bunyi."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx        Lumpuhkan kesan bunyi."
 
 #: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Lumpuhkan muzik."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              Jangan simpan fail sebagai arkib zip binari."
 
 #: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
+msgstr " --editor             Mula langsung penyunting Widelands.\n                      Anda boleh tambah =FILENAME untuk\n                      muat terus peta FILENAME dalam penyunting."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
+msgstr " --scenario=FILENAME  Mula terus peta FILENAME sebagai peta\n                      senario."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=FILENAME  Muat terus permainan tersimpan FILENAME."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr " --script=FILENAME    Jalankan skrip Lua yang diberi selepas diawalkan.\n                      Hanya sah dengan --scenario, --loadgame, ataupun --editor."
 
 #: ../../src/wlapplication_messages.cc:88
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
+msgstr " --dedicated=FILENAME Mulakan pelayan khusus dengan FILENAME sebagai peta"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -155,11 +156,11 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Sama ada masuk mod bina jalan secara\n                      automatik selepas meletak bendera yang\n                      tidak bersambung dengan jalan."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
-msgstr ""
+msgstr "Pilihan grafik:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -169,19 +170,19 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false]\n                      Sama ada hendak guna keseluruhan\n                      paparan untuk skrin permainan."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Lebar tetingkap dalam piksel."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Tinggi tetingkap dalam piksel."
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Pilihan untuk pengurus tetingkap dalaman:"
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
@@ -189,7 +190,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
+msgstr " --border_snap_distance=[0 ...]\n                      Alih tetingkap ke pinggir skrin bila\n                      pinggir tetingkap berada pada jarak\n                      ini dari pingir skrin."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -200,7 +201,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\n                      Buang sempadan tetingkap menghadap\n                      pinggir skrin bila pinggir tetingkap\n                      bersebelahan pinggir skrin."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
@@ -208,7 +209,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
+msgstr " --panel_snap_distance=[0 ...]\n                      Alih tetingkap ke pinggir panel bila\n                      pinggir tetingkap berada pada jarak\n                      ini dari pinggir panel."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -216,15 +217,15 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Hanya alih tetingkap ke pinggir panel\n                      jika tetingkap bertindih dengan panel."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Benarkan mesej nyahpepijat berjela"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Tunjuk bantuan ini"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid ""
@@ -232,4 +233,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Laporan pepijat? Cadangan? Pergi ke laman sesawang projek:\n        https://launchpad.net/widelands\n\nKami harap anda menyukai permainan ini!"

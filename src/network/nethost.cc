@@ -1046,6 +1046,7 @@ void NetHost::send(ChatMessage msg)
 				// is host the sender?
 				if (d->localplayername == msg.sender) {
 					ChatMessage err;
+					err.time = time(nullptr);
 					err.playern = -2; // System message
 					err.sender = "";
 					err.msg = fail;

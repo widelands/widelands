@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-18 09:11+0000\n"
-"Last-Translator: Thorbjørn Bruarøy\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-26 08:37+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/projects/p/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,8 +389,8 @@ msgstr "fjellrikt"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
-msgstr "upasserbar"
+msgid "impassable"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
@@ -1164,7 +1164,7 @@ msgstr[1] ""
 msgid "(stopped)"
 msgstr "(stoppa)"
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1243,15 +1243,15 @@ msgstr ""
 msgid "Logic error"
 msgstr "Logikkfeil"
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr ""
 

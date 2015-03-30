@@ -51,7 +51,7 @@ tribes:new_worker_type {
 			"findobject attrib:ripe_grapes radius:1",
 			"walk object",
 			"animation gather 10000",
-			"object harvestvine",
+			"object harvest",
 			"animation gather 2000",
 			"createware grape",
 			"return"

@@ -42,7 +42,9 @@ tribes:new_productionsite_type {
 		},
 	},
 
-	aihints = {},
+	aihints = {
+		forced_after = 9000
+	},
 
 	working_positions = {
 		empire_pigbreeder = 1

@@ -24,10 +24,13 @@
 #include <stdint.h>
 #include <string>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
 class Section;
+
+enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
@@ -89,16 +92,20 @@ struct BuildingHints {
 		return shipyard_;
 	}
 
-	int32_t get_prohibited_till() const {
+	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
 
-	int32_t get_forced_after() const {
+	uint32_t get_forced_after() const {
 		return forced_after_;
 	}
 
 	uint8_t get_mines_percent() const {
 		return mines_percent_;
+	}
+
+	TrainingSiteType get_trainingsite_type() const {
+		return trainingsite_type_;
 	}
 
 private:
@@ -117,6 +124,7 @@ private:
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	uint8_t mines_percent_;
+	TrainingSiteType trainingsite_type_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };
