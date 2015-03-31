@@ -75,7 +75,7 @@ tribes:new_productionsite_type {
 			descname = _"constructing a ship",
 			actions = {
 				"check_map=seafaring",
-				"construct=shipconstruction buildship 6",
+				"construct=shipconstruction_atlanteans buildship 6",
 				"return=completed"
 			}
 		},

@@ -141,13 +141,6 @@ tribes:new_tribe {
 			"barbarians_scout"
 		}
 	},
-	builder = "barbarians_builder",
-	carrier = "barbarians_carrier",
-	carrier2 = "barbarians_ox",
-	geologist = "barbarians_geologist",
-   soldier = "barbarians_soldier",
-
-   ship = "ship_barbarians",
 
    immovables = {
 		"ashes",
@@ -242,4 +235,13 @@ tribes:new_tribe {
 		"constructionsite",
 		"dismantlesite",
 	},
+
+	-- Special types
+	builder = "barbarians_builder",
+	carrier = "barbarians_carrier",
+	carrier2 = "barbarians_ox",
+	geologist = "barbarians_geologist",
+	soldier = "barbarians_soldier",
+	ship = "ship_barbarians",
+	port = "barbarians_port",
 }

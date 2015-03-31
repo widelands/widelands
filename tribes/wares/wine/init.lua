@@ -1,4 +1,6 @@
-tribes:new_ware_type{
+dirname = path.dirname(__file__)
+
+tribes:new_ware_type {
    name = "wine",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = _"Wine",

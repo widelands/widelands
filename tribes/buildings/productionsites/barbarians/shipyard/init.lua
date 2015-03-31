@@ -83,7 +83,7 @@ tribes:new_productionsite_type {
 			descname = _"constructing a ship",
 			actions = {
 				"check_map=seafaring", -- NOCOM(GunChleoc): We should make this check on game creation as well and remove it from the allowed buildings
-				"construct=shipconstruction buildship 6",
+				"construct=shipconstruction_barbarians buildship 6",
 				"animate=working 35000",
 				"return=completed"
 			}

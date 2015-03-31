@@ -8,7 +8,7 @@ tribes:new_immovable_type{
    programs = {
 		program = {
 			"construction=idle 5000 210000",
-			"transform=bob tribe:ship",
+			"transform=bob tribe:ship_empire",
       }
    },
    buildcost = {

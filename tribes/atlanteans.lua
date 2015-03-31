@@ -145,13 +145,6 @@ tribes:new_tribe {
 			"atlanteans_scout"
 		}
 	},
-	builder = "atlanteans_builder",
-	carrier = "atlanteans_carrier",
-	carrier2 = "atlanteans_horse",
-	geologist = "atlanteans_geologist",
-   soldier = "atlanteans_soldier",
-
-   ship = "ship_atlanteans",
 
    immovables = {
 		"ashes",
@@ -238,4 +231,13 @@ tribes:new_tribe {
 		"constructionsite",
 		"dismantlesite",
 	},
+
+	-- Special types
+	builder = "atlanteans_builder",
+	carrier = "atlanteans_carrier",
+	carrier2 = "atlanteans_horse",
+	geologist = "atlanteans_geologist",
+	soldier = "atlanteans_soldier",
+	ship = "ship_atlanteans",
+	port = "atlanteans_port",
 }

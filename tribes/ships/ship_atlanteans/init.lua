@@ -11,9 +11,8 @@ animations = {
 		hotspot = { 89, 86 },
 		fps = 7
 	}
-},
+}
 add_worker_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
-
 
 tribes:new_ship_type {
    name = "ship_atlanteans",

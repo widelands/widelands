@@ -6,7 +6,7 @@ animations = {
 		hotspot = { 115, 100 },
 		fps = 10
 	}
-},
+}
 add_worker_animations(animations, "sail", dirname, "sail", {115, 100}, 10)
 
 

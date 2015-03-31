@@ -147,13 +147,6 @@ tribes:new_tribe {
 			"empire_scout"
 		}
 	},
-	builder = "empire_builder",
-	carrier = "empire_carrier",
-	carrier2 = "empire_donkey",
-	geologist = "empire_geologist",
-   soldier = "empire_soldier",
-
-   ship = "ship_empire",
 
    immovables = {
 		"ashes",
@@ -250,4 +243,13 @@ tribes:new_tribe {
 		"constructionsite",
 		"dismantlesite",
 	},
+
+	-- Special types
+	builder = "empire_builder",
+	carrier = "empire_carrier",
+	carrier2 = "empire_donkey",
+	geologist = "empire_geologist",
+	soldier = "empire_soldier",
+	ship = "ship_empire",
+	port = "empire_port",
 }

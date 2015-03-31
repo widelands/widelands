@@ -100,6 +100,7 @@ public:
 	WareIndex geologist() const;
 	WareIndex soldier() const;
 	int ship() const;
+	BuildingIndex port() const;
 	const std::vector<WareIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
@@ -143,6 +144,8 @@ public:
 private:
 	// Helper function for adding a special worker type (carriers etc.)
 	WareIndex add_special_worker(const std::string& workername);
+	// Helper function for adding a special building type (port etc.)
+	BuildingIndex add_special_building(const std::string& buildingname);
 
 	const std::string name_;
 	const std::string descname_;
@@ -166,6 +169,7 @@ private:
 	WareIndex                   geologist_; // This tribe's geologist worker
 	WareIndex                   soldier_;  // The soldier that this tribe uses
 	int                         ship_;     // The ship that this tribe uses
+	BuildingIndex               port_;     // The port that this tribe uses
 	std::vector<WareIndex>      worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                  wares_order_;

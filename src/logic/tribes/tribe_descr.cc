@@ -55,6 +55,9 @@ TribeDescr::TribeDescr
 	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& init_egbase)
 	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase)
 {
+	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
+	// e.g. Barbarians have no wheat.
+	// Imperal sheep farms get no wheat
 
 	try {
 		m_initializations = info.initializations;
@@ -136,19 +139,6 @@ TribeDescr::TribeDescr
 			}
 		}
 
-		builder_ = add_special_worker(table.get_string("builder"));
-		carrier_ = add_special_worker(table.get_string("carrier"));
-		carrier2_ = add_special_worker(table.get_string("carrier2"));
-		geologist_ = add_special_worker(table.get_string("geologist"));
-		soldier_ = add_special_worker(table.get_string("soldier"));
-
-		const std::string shipname = table.get_string("ship");
-		try {
-			ship_ = egbase_.tribes().safe_ship_index(shipname);
-		} catch (const WException& e) {
-			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
-		}
-
 		std::vector<std::string> immovables = table.get_table("immovables")->array_entries<std::string>();
 		for (const std::string& immovablename : immovables) {
 			try {
@@ -186,6 +176,22 @@ TribeDescr::TribeDescr
 				throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 			}
 		}
+
+		// Special types
+		builder_ = add_special_worker(table.get_string("builder"));
+		carrier_ = add_special_worker(table.get_string("carrier"));
+		carrier2_ = add_special_worker(table.get_string("carrier2"));
+		geologist_ = add_special_worker(table.get_string("geologist"));
+		soldier_ = add_special_worker(table.get_string("soldier"));
+
+		const std::string shipname = table.get_string("ship");
+		try {
+			ship_ = egbase_.tribes().safe_ship_index(shipname);
+		} catch (const WException& e) {
+			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
+		}
+
+		port_ = add_special_building(table.get_string("port"));
 
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -314,6 +320,10 @@ int TribeDescr::ship() const {
 	assert(egbase_.tribes().ship_exists(ship_));
 	return ship_;
 }
+BuildingIndex TribeDescr::port() const {
+	assert(egbase_.tribes().building_exists(port_));
+	return port_;
+}
 const std::vector<WareIndex>& TribeDescr::worker_types_without_cost() const {
 	return worker_types_without_cost_;
 }
@@ -441,6 +451,18 @@ WareIndex TribeDescr::add_special_worker(const std::string& workername) {
 		return worker;
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding special worker '%s': %s", workername.c_str(), e.what());
+	}
+}
+
+BuildingIndex TribeDescr::add_special_building(const std::string& buildingname) {
+	try {
+		BuildingIndex building = egbase_.tribes().safe_building_index(buildingname);
+		if (!has_building(building)) {
+			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
+		}
+		return building;
+	} catch (const WException& e) {
+		throw GameDataError("Failed adding special building '%s': %s", buildingname.c_str(), e.what());
 	}
 }
 

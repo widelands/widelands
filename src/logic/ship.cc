@@ -55,8 +55,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	i18n::Textdomain td("tribes");
 
 	// Read the sailing animations
-	// NOCOM(GunChleoc): Fix this
-	//add_directional_animation(&m_sail_anims, "sail");
+	add_directional_animation(&m_sail_anims, "sail");
 
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
 	helptext_ = _(table.get_string("helptext"));
@@ -828,7 +827,7 @@ void Ship::exp_scout_direction(Game&, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
 	assert(m_expedition);
-	BuildingIndex port_idx = get_owner()->tribe().safe_building_index("port");
+	BuildingIndex port_idx = get_owner()->tribe().port();
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
