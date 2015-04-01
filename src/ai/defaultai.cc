@@ -964,7 +964,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					if (radius > dist) {
 						field.area_military_capacity_ +=
 						   target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-						field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
+						if (field.coords != immovables.at(i).coords) {
+							field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
+						}
 						field.military_in_constr_nearby_ += 1;
 					}
 				}
@@ -985,7 +987,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 						field.military_stationed_ += 1;
 					}
 
-					field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
+					if (field.coords != immovables.at(i).coords) {
+						field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
+					}
 				}
 			}
 		}
@@ -1196,9 +1200,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// sometimes there is too many military buildings in construction, so we must
 	// prevent initialization of further buildings start
 	const int32_t vacant_plus_in_construction_minus_prod =
-	   vacant_mil_positions_ + 2 * num_milit_constructionsites - productionsites.size() / 15;
+	   vacant_mil_positions_ + 2 * num_milit_constructionsites - productionsites.size() / 7;
+	if (vacant_plus_in_construction_minus_prod > 15)
+		printf(" %d: vacant_plus_in_construction_minus_prod = %d\n",
+		       player_number(),
+		       vacant_plus_in_construction_minus_prod);
 	if (vacant_plus_in_construction_minus_prod > 20) {
 		expansion_mode = MilitaryStrategy::kNoNewMilitary;
+		printf(" %d: no new military\n", player_number());
 	} else if (vacant_plus_in_construction_minus_prod > 13) {
 		expansion_mode = MilitaryStrategy::kDefenseOnly;
 	} else if (vacant_plus_in_construction_minus_prod > 6) {
@@ -1276,9 +1285,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 			// using default ware quantity, not the best solution but will do
-			if (get_warehoused_stock(wt) <
-			    tribe_->get_ware_descr(wt)->default_target_quantity() * 2 / 3) {
+			if (get_warehoused_stock(wt) < 2) {
 				bo.build_material_shortage_ = true;
+				// printf ( " %d: cannot build %15s\n", player_number(), bo.name);
 			}
 		}
 	}
@@ -1550,8 +1559,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 
-						// sometimes all area is blocked by trees so this is to prevent this
-						if (buildable_fields.size() < 4 && bo.total_count() > 0) {
+						// for small starting spots - to prevent crowding by rangers and trees
+						if (spots_ < (10 * bo.total_count()) && bo.total_count() > 0) {
 							continue;
 						}
 
@@ -1725,14 +1734,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
-				// we allow 1 exemption from big buildings prohibition
-				if (bo.build_material_shortage_ &&
-				    (bo.cnt_under_construction_ > 0 || !(bf->enemy_nearby_))) {
-					continue;
-				}
 
 				if (!bf->unowned_land_nearby_) {
-
 					continue;
 				}
 
@@ -1740,6 +1743,55 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
+				prio = 0;
+
+				// calculating some sub-scores, some of them are prohibitive
+				int32_t prio_for_mat_shortage = 0;
+				if (bf->enemy_nearby_) {
+					prio_for_mat_shortage =
+					   -bo.cnt_under_construction_ * bo.build_material_shortage_ * 50;
+				} else {
+					prio_for_mat_shortage = -bo.cnt_under_construction_ * bo.build_material_shortage_ *
+					                        1000;  // = prohibitive
+				}
+
+				int32_t prio_for_in_constr = 0;
+				prio_for_in_constr -= 700 *
+				                      (((static_cast<int32_t>(num_milit_constructionsites) - 2) < 0) ?
+				                          0 :
+				                          (num_milit_constructionsites - 2)) /
+				                      (militarysites.size() + 2);
+				if (!bf->enemy_nearby_) {
+					prio_for_in_constr *= 3;
+				}
+
+				int32_t prio_for_unmanned_nearby = 0;
+				if (bf->enemy_nearby_) {
+					prio_for_unmanned_nearby -=
+					   (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 20;
+				} else {
+					prio_for_unmanned_nearby -=
+					   (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 1000;
+				}
+
+				// not continuing if score too low
+				if (prio_for_in_constr + prio_for_mat_shortage + prio_for_unmanned_nearby <= -1000) {
+					if (bf->enemy_nearby_)
+						printf(" %d: too low scores: shortage: %5d, in constr: %5d, nearby: %5d (count: "
+						       "%2d,%2d) for %-15s at %3dx%3d\n",
+						       player_number(),
+						       prio_for_mat_shortage,
+						       prio_for_in_constr,
+						       prio_for_unmanned_nearby,
+						       bf->military_in_constr_nearby_,
+						       bf->military_unstationed_,
+						       bo.name,
+						       bf->coords.x,
+						       bf->coords.y);
+					continue;
+				}
+
+				// is the building suitable for the situation
 				if (expansion_mode == MilitaryStrategy::kNoNewMilitary) {
 					continue;
 				}
@@ -1771,37 +1823,58 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				} else {
 					continue;
 				}  // the building is not suitable for situation
-				// not to build so many military buildings nearby
-				if (!bf->enemy_nearby_ &&
-				    (bf->military_in_constr_nearby_ + bf->military_unstationed_) > 0) {
-					continue;
+
+				// calculating other sub scores
+				int32_t prio_for_resources = 0;
+				prio_for_resources +=
+				   2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
+				   bf->stones_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
+				// special bonus due to remote water for atlanteans
+				if (resource_necessity_water_needed_) {
+					prio_for_resources += (bf->distant_water_ * resource_necessity_water_) / 100 / 3;
 				}
-				// a boost to prevent an expansion halt
+				// reducing score if too little unowned land
+				if (bf->unowned_land_nearby_ < 10) {
+					prio_for_resources = prio_for_resources * bf->unowned_land_nearby_ / 10;
+				}
+				if (bf->enemy_nearby_) {  // not important when fighting enemies
+					prio_for_resources /= 5;
+				}
+
+				int32_t prio_for_unowned_land = 0;
+				if (expansion_mode == MilitaryStrategy::kExpansion ||
+				    expansion_mode == MilitaryStrategy::kPushExpansion) {
+					prio_for_unowned_land +=
+					   (bf->unowned_land_nearby_ * resource_necessity_territory_) / 100;
+				}
+
+				int32_t prio_for_loneliness = bf->military_loneliness_;
+				if (!bf->enemy_nearby_) {
+					prio_for_loneliness /= 10;
+				}
+
+				int32_t prio_for_size = 0;
+				if (bf->enemy_nearby_) {
+					prio_for_size += (bo.desc->get_size() - 1) * 30;
+				} else {
+					prio_for_size += (bo.desc->get_size() - 1) * 15;
+				}
+
+				int32_t prio_for_enemy = 0;
+				if (bf->enemy_nearby_) {
+					prio_for_enemy += 50;
+				}
+
+				//// a boost to prevent an expansion halt
 				int32_t local_boost = 0;
 				if (expansion_mode == MilitaryStrategy::kPushExpansion) {
 					local_boost = 200;
 				}
 
-				// priority based on basic resources
-				prio = ((bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
-				        bf->stones_nearby_ + bf->military_loneliness_ / 10 - 40 + local_boost +
-				        (bf->water_nearby_ * resource_necessity_water_) / 100);
-
-				// Depending on wheter resource only are considered or no
-				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense) {
-					prio *= 2;
-					prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100 / 2;
-				} else {  // addding score for territory
-					prio += (bf->unowned_land_nearby_ * resource_necessity_territory_) / 100 * 3 / 2;
-				}
-
-				// adding score for distance to other military sites
-				prio += bf->military_loneliness_ / 10 - 40;
-
-				// special bonus due to remote water for atlanteans
-				if (resource_necessity_water_needed_) {
-					prio += (bf->distant_water_ * resource_necessity_water_) / 100 / 2;
-				}
+				// summing
+				prio += prio_for_mat_shortage + prio_for_in_constr + prio_for_unmanned_nearby +
+				        prio_for_resources + prio_for_unowned_land + prio_for_loneliness +
+				        prio_for_size + local_boost + prio_for_enemy;
 
 				// special bonus if a portspace is close
 				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
@@ -1812,28 +1885,113 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				}
 
-				//special bonus for bigger buildings if enemy is nearby
-				if (bf->enemy_nearby_) {
-					prio += (bo.desc->get_size() - 1) * 25;
-				}
-
 				if (bo.desc->get_size() < maxsize) {
 					prio = prio - 5;
 				}  // penalty
 
-				// we need to prefer military building near to borders
-				// with enemy
-				// Note: if we dont have enough mines, we cannot afford
-				// full-power defense (we need to preserve material and soldiers
-				// for expansion)
-				const int16_t bottom_treshold =
-				   15 - ((virtual_mines <= 4) ? (5 - virtual_mines) * 2 : 0);
-				if (bf->enemy_nearby_ && bf->area_military_capacity_ < bottom_treshold) {
-					prio += 50 + (bottom_treshold - bf->area_military_capacity_) * 20;
+				// just generally prevent too many buildings
+				prio -= 40;
+
+				printf(" %d: scoring %14s at %3dx%3d, En:%s, mat:%5d, "
+				       "constr:%5d,unm.:%5d,res:%3d(min:%3d),land:%3d,lonel:%3d,size:%3d,en.:%2d, "
+				       "boost:%3d, T:%4d,time: %5d\n",
+				       player_number(),
+				       bo.name,
+				       bf->coords.x,
+				       bf->coords.y,
+				       (bf->enemy_nearby_) ? "Y" : "N",
+				       prio_for_mat_shortage,
+				       prio_for_in_constr,
+				       prio_for_unmanned_nearby,
+				       prio_for_resources,
+				       2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100,
+				       prio_for_unowned_land,
+				       prio_for_loneliness,
+				       prio_for_size,
+				       prio_for_enemy,
+				       local_boost,
+				       prio,
+				       gametime / 1000);
+
+				//// we need to prefer military building near to borders
+				//// with enemy
+				//// Note: if we dont have enough mines, we cannot afford
+				//// full-power defense (we need to preserve material and soldiers
+				//// for expansion)
+				// const int16_t bottom_treshold =
+				// 15 - ((virtual_mines <= 4) ? (5 - virtual_mines) * 2 : 0);
+				// if (bf->enemy_nearby_ && bf->area_military_capacity_ < bottom_treshold) {
+				// prio += 50 + (bottom_treshold - bf->area_military_capacity_) * 20;
+				//}
+
+				// if (bf->enemy_nearby_ && bf->area_military_capacity_ > bottom_treshold + 4) {
+				// prio -= (bf->area_military_capacity_ - (bottom_treshold + 4)) * 5;
+				//} ///NOCOM asi vynechame
+
+			} else if (bo.type == BuildingObserver::WAREHOUSE) {
+
+				// exclude spots on border
+				if (bf->near_border_ && !bo.is_port_) {
+					continue;
 				}
 
-				if (bf->enemy_nearby_ && bf->area_military_capacity_ > bottom_treshold + 4) {
-					prio -= (bf->area_military_capacity_ - (bottom_treshold + 4)) * 5;
+				if (!bf->is_portspace_ && bo.is_port_) {
+					continue;
+				}
+
+				if (bo.cnt_under_construction_ > 0) {
+					continue;
+				}
+
+				bool warehouse_needed = false;
+
+				//  Build one warehouse for ~every 35 productionsites and mines_.
+				//  Militarysites are slightly important as well, to have a bigger
+				//  chance for a warehouses (containing waiting soldiers or wares
+				//  needed for soldier training) near the frontier.
+				if ((static_cast<int32_t>(productionsites.size() + mines_.size()) + 20) / 35 >
+				       static_cast<int32_t>(numof_warehouses_) &&
+				    bo.cnt_under_construction_ == 0) {
+					prio = 20;
+					warehouse_needed = true;
+				}
+
+				// but generally we prefer ports
+				if (bo.is_port_) {
+					prio += 10;
+				}
+
+				// special boost for first port
+				if (bo.is_port_ && bo.total_count() == 0 && productionsites.size() > 5 &&
+				    !bf->enemy_nearby_ && bf->is_portspace_ && seafaring_economy) {
+					prio += kDefaultPrioBoost + productionsites.size();
+					warehouse_needed = true;
+				}
+
+				if (!warehouse_needed) {
+					continue;
+				}
+
+				// iterating over current warehouses and testing a distance
+				// getting distance to nearest warehouse and adding it to a score
+				uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
+				for (const WarehouseSiteObserver& wh_obs : warehousesites) {
+					const uint16_t actual_distance =
+					   map.calc_distance(bf->coords, wh_obs.site->get_position());
+					nearest_distance = std::min(nearest_distance, actual_distance);
+				}
+				// but limit to 15
+				const uint16_t max_distance_considered = 15;
+				nearest_distance = std::min(nearest_distance, max_distance_considered);
+				prio += nearest_distance;
+
+				// take care about and enemies
+				if (bf->enemy_nearby_) {
+					prio /= 4;
+				}
+
+				if (bf->unowned_land_nearby_ && !bo.is_port_) {
+					prio /= 2;
 				}
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
@@ -1953,7 +2111,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
-			prio -= bf->space_consumers_nearby_ * 10;
+			if (! (bo.type == BuildingObserver::MILITARYSITE || bo.space_consumer_)) {
+				prio -= bf->space_consumers_nearby_ * 10;
+			}
 
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0) {
@@ -2163,6 +2323,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if (!(best_building->type == BuildingObserver::MILITARYSITE)) {
 		best_building->construction_decision_time_ = gametime;
 	} else {  // very ugly hack here
+		printf(" %d: winner is %15s at %3dx%3d, prio: %3d\n",
+		       player_number(),
+		       best_building->name,
+		       proposed_coords.x,
+		       proposed_coords.y,
+		       proposed_priority);
 		military_last_build_ = gametime;
 		best_building->construction_decision_time_ = gametime - kBuildingMinInterval / 2;
 	}
@@ -3577,7 +3743,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 				int16_t score = 0;
 				score += (bf.area_military_capacity_ > 6);
-				score += (bf.area_military_capacity_ > 18);
+				score += (bf.area_military_capacity_ > 22);
 				score += (bf.area_military_presence_ > 4);
 				score += (bf.military_loneliness_ < 180);
 				score += (bf.military_stationed_ > 2);
@@ -3585,6 +3751,28 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 				score += ((bf.unowned_land_nearby_ + allyOwnedFields) < 10);
 
 				if (score >= 4) {
+
+					printf(" %d: dismantling %-12s at %3dx%3d, Score:%d, reasons: MS: %3d, MC+6: "
+					       "%s,MC18+: %s,MP:%2d/%s,ML: %3d/%s, Stationed: %2d/%s,Size: -%1d,unown: "
+					       "%3d/%s\n",
+					       player_number(),
+					       mso.bo->name,
+					       ms->get_position().x,
+					       ms->get_position().y,
+					       score,
+					       bf.area_military_capacity_,
+					       (bf.area_military_capacity_ > 6) ? "Y" : "N",
+					       (bf.area_military_capacity_ > 22) ? "Y" : "N",
+					       bf.area_military_presence_,
+					       (bf.area_military_presence_ > 4) ? "Y" : "N",
+					       bf.military_loneliness_,
+					       (bf.military_loneliness_ < 180) ? "Y" : "N",
+					       bf.military_stationed_,
+					       (bf.military_stationed_ > 2) ? "Y" : "N",
+					       size_penalty,
+					       bf.unowned_land_nearby_ + allyOwnedFields,
+					       ((bf.unowned_land_nearby_ + allyOwnedFields) < 10) ? "Y" : "N");
+					       
 					if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 						flags_to_be_removed.push_back(ms->base_flag().get_position());
 						game().send_player_dismantle(*ms);
