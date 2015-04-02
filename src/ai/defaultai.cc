@@ -1101,7 +1101,7 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 		assert(mines_.front().bo->cnt_built_ > 0);
 
 		const bool connected_to_wh =
-		   !productionsites.front().site->get_economy()->warehouses().empty();
+		   !mines_.front().site->get_economy()->warehouses().empty();
 
 		// unconnected mines are excluded from statistics review
 		if (connected_to_wh) {
