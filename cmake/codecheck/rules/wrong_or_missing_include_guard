@@ -16,7 +16,6 @@ def evaluate_matches(lines, fn):
     if not fn.endswith('.h'):
         return []
 
-    found_include_guard = False
     rel = find_relpath_to_base_dir(os.path.join(os.path.dirname(fn), fn))
     parts = ("WL",) + tuple(filter(len, rel.split(os.path.sep)))
     once = "_".join(a.replace(".", "_") for a in parts).upper()
