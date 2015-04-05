@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"_Cornfield (medium)",
    size = "small",
+   attributes = { "field" },
    programs = {
 		program = {
 			"animate=idle 50000",

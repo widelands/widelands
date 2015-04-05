@@ -1031,7 +1031,6 @@ bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
 			id_w = owner().tribe().worker_index(input_name);
 			if (owner().tribe().has_worker(id_w)) {
 				if (m_supply->stock_workers(id_w) < buildcost.second) {
-					//NOCOM(GunChleoc) This will fail for <tribe>_carrier as buildcost
 					return false;
 				}
 			} else

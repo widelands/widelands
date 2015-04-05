@@ -47,7 +47,7 @@ tribes:new_worker_type {
 			"return"
 		},
 		harvest = {
-			"findobject attrib:wheatfield radius:2",
+			"findobject attrib:ripe_wheat radius:2",
 			"walk object",
 			"playFX sound/farm/scythe 220",
 			"animation harvesting 10000",

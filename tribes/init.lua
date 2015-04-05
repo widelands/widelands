@@ -1,11 +1,14 @@
--- NOCOM(#GunChleoc): Double-check aihints befoer we merge
-
 -- Tribes initialization
-
+--
 -- First the units are loaded, then the tribe descriptions
-
+--
 -- All tribes also have some basic information for the load screens
 -- and the editor in preload.lua
+--
+-- Basic load order (first wares, then immovables etc.) is important,
+-- because checks will be made in C++.
+-- Also, enhanced/upgraded units need to come before their basic units.
+--
 
 set_textdomain("tribes")
 
@@ -101,6 +104,51 @@ include "tribes/wares/water/init.lua"
 include "tribes/wares/wheat/init.lua"
 include "tribes/wares/wine/init.lua"
 include "tribes/wares/wool/init.lua"
+
+
+-- ===================================
+--    Immovables
+-- ===================================
+
+print("Loading Immovables")
+include "tribes/immovables/ashes/init.lua"
+include "tribes/immovables/blackrootfield_harvested/init.lua"
+include "tribes/immovables/blackrootfield_medium/init.lua"
+include "tribes/immovables/blackrootfield_ripe/init.lua"
+include "tribes/immovables/blackrootfield_small/init.lua"
+include "tribes/immovables/blackrootfield_tiny/init.lua"
+include "tribes/immovables/cornfield_harvested/init.lua"
+include "tribes/immovables/cornfield_medium/init.lua"
+include "tribes/immovables/cornfield_ripe/init.lua"
+include "tribes/immovables/cornfield_small/init.lua"
+include "tribes/immovables/cornfield_tiny/init.lua"
+include "tribes/immovables/destroyed_building/init.lua"
+include "tribes/immovables/field_harvested/init.lua"
+include "tribes/immovables/field_medium/init.lua"
+include "tribes/immovables/field_ripe/init.lua"
+include "tribes/immovables/field_small/init.lua"
+include "tribes/immovables/field_tiny/init.lua"
+include "tribes/immovables/grapevine_medium/init.lua"
+include "tribes/immovables/grapevine_ripe/init.lua"
+include "tribes/immovables/grapevine_small/init.lua"
+include "tribes/immovables/grapevine_tiny/init.lua"
+include "tribes/immovables/reed_medium/init.lua"
+include "tribes/immovables/reed_ripe/init.lua"
+include "tribes/immovables/reed_small/init.lua"
+include "tribes/immovables/reed_tiny/init.lua"
+include "tribes/immovables/resi_coal1/init.lua"
+include "tribes/immovables/resi_coal2/init.lua"
+include "tribes/immovables/resi_gold1/init.lua"
+include "tribes/immovables/resi_gold2/init.lua"
+include "tribes/immovables/resi_iron1/init.lua"
+include "tribes/immovables/resi_iron2/init.lua"
+include "tribes/immovables/resi_none/init.lua"
+include "tribes/immovables/resi_stones1/init.lua"
+include "tribes/immovables/resi_stones2/init.lua"
+include "tribes/immovables/resi_water/init.lua"
+include "tribes/immovables/shipconstruction_atlanteans/init.lua"
+include "tribes/immovables/shipconstruction_barbarians/init.lua"
+include "tribes/immovables/shipconstruction_empire/init.lua"
 
 
 -- ===================================
@@ -236,51 +284,6 @@ print("Loading Ships")
 include "tribes/ships/ship_atlanteans/init.lua"
 include "tribes/ships/ship_barbarians/init.lua"
 include "tribes/ships/ship_empire/init.lua"
-
-
--- ===================================
---    Immovables
--- ===================================
-
-print("Loading Immovables")
-include "tribes/immovables/ashes/init.lua"
-include "tribes/immovables/blackrootfield_harvested/init.lua"
-include "tribes/immovables/blackrootfield_medium/init.lua"
-include "tribes/immovables/blackrootfield_ripe/init.lua"
-include "tribes/immovables/blackrootfield_small/init.lua"
-include "tribes/immovables/blackrootfield_tiny/init.lua"
-include "tribes/immovables/cornfield_harvested/init.lua"
-include "tribes/immovables/cornfield_medium/init.lua"
-include "tribes/immovables/cornfield_ripe/init.lua"
-include "tribes/immovables/cornfield_small/init.lua"
-include "tribes/immovables/cornfield_tiny/init.lua"
-include "tribes/immovables/destroyed_building/init.lua"
-include "tribes/immovables/field_harvested/init.lua"
-include "tribes/immovables/field_medium/init.lua"
-include "tribes/immovables/field_ripe/init.lua"
-include "tribes/immovables/field_small/init.lua"
-include "tribes/immovables/field_tiny/init.lua"
-include "tribes/immovables/grapevine_medium/init.lua"
-include "tribes/immovables/grapevine_ripe/init.lua"
-include "tribes/immovables/grapevine_small/init.lua"
-include "tribes/immovables/grapevine_tiny/init.lua"
-include "tribes/immovables/reed_medium/init.lua"
-include "tribes/immovables/reed_ripe/init.lua"
-include "tribes/immovables/reed_small/init.lua"
-include "tribes/immovables/reed_tiny/init.lua"
-include "tribes/immovables/resi_coal1/init.lua"
-include "tribes/immovables/resi_coal2/init.lua"
-include "tribes/immovables/resi_gold1/init.lua"
-include "tribes/immovables/resi_gold2/init.lua"
-include "tribes/immovables/resi_iron1/init.lua"
-include "tribes/immovables/resi_iron2/init.lua"
-include "tribes/immovables/resi_none/init.lua"
-include "tribes/immovables/resi_stones1/init.lua"
-include "tribes/immovables/resi_stones2/init.lua"
-include "tribes/immovables/resi_water/init.lua"
-include "tribes/immovables/shipconstruction_atlanteans/init.lua"
-include "tribes/immovables/shipconstruction_barbarians/init.lua"
-include "tribes/immovables/shipconstruction_empire/init.lua"
 
 
 -- ===================================

@@ -308,7 +308,7 @@ void MapObjectDescr::add_attribute(uint32_t const attr)
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
                                       const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute);
+		uint32_t const attrib = get_attribute_id(attribute, true);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
 				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
@@ -320,24 +320,28 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
- * before, we add it to the map.
+ * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-uint32_t MapObjectDescr::get_attribute_id(const std::string & name) {
+uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_not_exists) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
-	if (it != s_dyn_attribs.end())
+	if (it != s_dyn_attribs.end()) {
 		return it->second;
+	}
 
-	if      (name == "worker")
+	if (name == "worker") {
 		return MapObject::WORKER;
-	else if (name == "resi")
+	} else if (name == "resi") {
 		return MapObject::RESI;
+	}
 
-	++s_dyn_attribhigh;
-	s_dyn_attribs[name] = s_dyn_attribhigh;
-
+	if (!add_if_not_exists) {
+		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
+	} else {
+		++s_dyn_attribhigh;
+		s_dyn_attribs[name] = s_dyn_attribhigh;
+	}
 	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)
-
 	return s_dyn_attribhigh;
 }
 

@@ -5,7 +5,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Blackroot Field (ripe)",
    size = "small",
-   attributes = { "ripe_blackroot" },
+   attributes = { "ripe_blackroot", "field" },
    programs = {
 		program = {
 			"animate=idle 50000",

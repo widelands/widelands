@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Field (ripe)",
    size = "small",
+   attributes = { "ripe_wheat", "field" },
    programs = {
 		program = {
 			"animate=idle 500000",

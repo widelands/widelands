@@ -1043,9 +1043,9 @@ TribeDescription
 --------------------
 
 .. class:: TribeDescription
-NOCOM more documentation + tests
-	A static description of a tribe, so it can be used in help files.
-	This class contains information about which buildings a tribe uses etc.
+
+	A static description of a tribe.
+	This class contains information about which buildings, wares, workers etc. a tribe uses.
 */
 const char LuaTribeDescription::className[] = "TribeDescription";
 const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
@@ -1083,7 +1083,7 @@ void LuaTribeDescription::__unpersist(lua_State*) {
 /* RST
 	.. attribute:: buildings
 
-			(RO) an array of :class:`string` with the names of all the buildings that the tribe uses
+			(RO) an array of :class:`string` with the names of all the buildings that the tribe can use
 */
 
 int LuaTribeDescription::get_buildings(lua_State * L) {
@@ -1135,7 +1135,7 @@ int LuaTribeDescription::get_name(lua_State * L) {
 /* RST
 	.. attribute:: soldier
 
-			(RO) the :class:`string` internal name of the solder type that this tribe uses
+			(RO) the :class:`string` internal name of the soldier type that this tribe uses
 */
 
 int LuaTribeDescription::get_soldier(lua_State * L) {
@@ -1163,7 +1163,7 @@ int LuaTribeDescription::get_wares(lua_State * L) {
 /* RST
 	.. attribute:: workers
 
-			(RO) an array of :class:`string` with the names of all the workers that the tribe uses
+			(RO) an array of :class:`string` with the names of all the workers that the tribe can use
 */
 
 int LuaTribeDescription::get_workers(lua_State * L) {
@@ -1180,7 +1180,7 @@ int LuaTribeDescription::get_workers(lua_State * L) {
 /* RST
 	.. method:: has_building(buildingname)
 
-		Returns true if buildingname is a building and the tribe uses it.
+		Returns true if buildingname is a building and the tribe can use it.
 
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
@@ -1211,7 +1211,7 @@ int LuaTribeDescription::has_ware(lua_State * L) {
 /* RST
 	.. method:: has_worker(workername)
 
-		Returns true if workername is a worker and the tribe uses it.
+		Returns true if workername is a worker and the tribe can use it.
 
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
