@@ -175,7 +175,6 @@ size_t Tribes::nrworkers() const {
 	return workers_->size();
 }
 
-// NOCOM(GunChleoc): Use these instead of index comparisons
 bool Tribes::ware_exists(const WareIndex& index) const {
 	return wares_->get_mutable(index) != nullptr;
 }

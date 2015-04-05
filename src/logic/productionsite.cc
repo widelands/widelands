@@ -77,14 +77,14 @@ ProductionSiteDescr::ProductionSiteDescr
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
 				WareIndex idx = egbase.tribes().ware_index(output);
-				if (idx != INVALID_INDEX) {
+				if (egbase.tribes().ware_exists(idx)) {
 					if (m_output_ware_types.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
 					}
 					m_output_ware_types.insert(idx);
 				} else {
 					idx = egbase.tribes().worker_index(output);
-					if (idx != INVALID_INDEX) {
+					if (egbase.tribes().worker_exists(idx)) {
 						if (m_output_worker_types.count(idx)) {
 							throw wexception("this worker type has already been declared as an output");
 						}
@@ -108,7 +108,7 @@ ProductionSiteDescr::ProductionSiteDescr
 					throw wexception("count is out of range 1 .. 255");
 				}
 				WareIndex const idx = egbase.tribes().ware_index(ware_name);
-				if (idx != INVALID_INDEX) {
+				if (egbase.tribes().ware_exists(idx)) {
 					for (const WareAmount& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
@@ -137,7 +137,7 @@ ProductionSiteDescr::ProductionSiteDescr
 					throw wexception("count is out of range 1 .. 255");
 				}
 				WareIndex const woi = egbase.tribes().worker_index(worker_name);
-				if (woi != INVALID_INDEX) {
+				if (egbase.tribes().worker_exists(woi)) {
 					for (const WareAmount& wp : working_positions()) {
 						if (wp.first == woi) {
 							throw wexception("duplicated");

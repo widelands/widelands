@@ -4664,7 +4664,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
 		WareIndex const index = tribe_->ware_index(materials.at(j));
-		if (index == INVALID_INDEX) {
+		if (!tribe_->has_ware(index)) {
 			continue;
 		}
 		if (get_warehoused_stock(index) > 0) {

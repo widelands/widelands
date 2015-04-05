@@ -410,8 +410,8 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
       // place HQ
 		const Widelands::TribeDescr & tribe = p->tribe();
 		const Widelands::BuildingIndex idx =
-			tribe.building_index("headquarters");
-		if (idx == Widelands::INVALID_INDEX)
+			tribe.building_index("headquarters"); // NOCOM get the tribe's actual headquarters
+		if (!tribe.has_building(idx))
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
 		//         (egbase.warp_building(starting_pos, player_number, idx));

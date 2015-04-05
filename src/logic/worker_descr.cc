@@ -62,7 +62,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
 											  key.c_str());
 				}
-				// NOCOM(GunChleoc): Track down comparisons with INVALID_INDEX and -1 throughout the code and replace with tribes.<entity>_exists
 				if (!tribes.ware_exists(tribes.ware_index(key)) &&
 					 !tribes.worker_exists(tribes.worker_index(key))) {
 					throw GameDataError

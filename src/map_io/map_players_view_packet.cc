@@ -312,8 +312,9 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->c_string();
 	BuildingIndex const index = egbase.tribes().building_index(name);
-	if (index == INVALID_INDEX)
+	if (!egbase.tribes().building_exists(index)) {
 		throw BuildingNonexistent(name);
+	}
 	return *egbase.tribes().get_building_descr(index);
 }
 

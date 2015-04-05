@@ -1341,7 +1341,7 @@ WareIndex Worker::level(Game & game) {
 	WareIndex const old_index = t.worker_index(descr().name());
 	WareIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
-	assert(new_index != INVALID_INDEX);
+	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(old_index, 1);

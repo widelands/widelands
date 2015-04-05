@@ -1313,7 +1313,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 		for (uint16_t i = 0; i < nr_wares; ++i) {
 			std::string name = fr.c_string();
 			WareIndex idx = egbase().tribes().ware_index(name);
-			if (idx == INVALID_INDEX) {
+			if (!egbase().tribes().ware_exists(idx)) {
 				log
 					("Player %u statistics: unknown ware name %s",
 					 player_number(), name.c_str());
@@ -1337,7 +1337,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 			for (uint16_t i = 0; i < nr_wares; ++i) {
 				std::string name = fr.c_string();
 				WareIndex idx = egbase().tribes().ware_index(name);
-				if (idx == INVALID_INDEX) {
+				if (!egbase().tribes().ware_exists(idx)) {
 					log
 						("Player %u consumption statistics: unknown ware name %s",
 						player_number(), name.c_str());
@@ -1361,7 +1361,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 				for (uint16_t i = 0; i < nr_wares; ++i) {
 					std::string name = fr.c_string();
 					WareIndex idx = egbase().tribes().ware_index(name);
-					if (idx == INVALID_INDEX) {
+					if (!egbase().tribes().ware_exists(idx)) {
 						log
 							("Player %u stock statistics: unknown ware name %s",
 							player_number(), name.c_str());

@@ -159,7 +159,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	if (table.has_key("sound_effect")) {
-		// NOCOM(GunChleoc): this is broken. Used by builders and shipwrights only.
 		std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 
 		const std::string name = sound_effects->get_string("name");

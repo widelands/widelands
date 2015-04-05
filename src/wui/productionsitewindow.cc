@@ -172,7 +172,7 @@ void ProductionSiteWindow::update_worker_table()
 					&&
 				 worker->descr().get_needed_experience () != -1)
 			{
-				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
+				assert(worker->owner().tribe().has_worker(worker->descr().becomes()));
 
 				// Fill upgrade status
 				/** TRANSLATORS: %1% = the experience a worker has */

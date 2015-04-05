@@ -74,7 +74,7 @@ void MapBuildingPacket::read
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const TribeDescr & tribe = player->tribe();
 							const BuildingIndex index = tribe.building_index(name);
-							if (index == INVALID_INDEX) {
+							if (!tribe.has_building(index)) {
 								throw GameDataError
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);

@@ -809,7 +809,6 @@ ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) 
 		} else
 			priority = 127;
 
-		// NOCOM(GunChleoc): Check if this works
 		g_sound_handler.load_fx_if_needed(FileSystem::fs_dirname(name),
 													 FileSystem::fs_filename(name.c_str()),
 													 name);

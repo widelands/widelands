@@ -365,15 +365,22 @@ Immovable & EditorGameBase::create_immovable
 Immovable & EditorGameBase::create_immovable
 	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
-	const auto idx = (type == MapObjectDescr::OwnerType::kTribe) ?
-	                    tribes().immovable_index(name.c_str()) :
-	                    world().get_immovable_index(name.c_str());
-	if (idx == INVALID_INDEX)
-		throw wexception
-			("EditorGameBase::create_immovable(%i, %i): %s is not defined for "
-			 "%s",
-			 c.x, c.y, name.c_str(), (type == MapObjectDescr::OwnerType::kTribe) ? "tribes" : "world");
-
+	WareIndex idx;
+	if (type == MapObjectDescr::OwnerType::kTribe) {
+		idx = tribes().immovable_index(name.c_str());
+		if(!tribes().immovable_exists(idx)) {
+			throw wexception
+				("EditorGameBase::create_immovable(%i, %i): %s is not defined for the tribes",
+				 c.x, c.y, name.c_str());
+		}
+	} else {
+		idx =  world().get_immovable_index(name.c_str());
+		if (idx == INVALID_INDEX) {
+			throw wexception
+				("EditorGameBase::create_immovable(%i, %i): %s is not defined for the world",
+				 c.x, c.y, name.c_str());
+		}
+	}
 	return create_immovable(c, idx, type);
 }
 

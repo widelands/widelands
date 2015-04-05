@@ -292,12 +292,12 @@ Warehouse::~Warehouse()
  */
 bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 {
-	if (pw.index == INVALID_INDEX || !(pw.index < m_supply->get_workers().get_nrwareids()))
-		return false;
-
 	if (!owner().tribe().has_worker(pw.index)) {
 		return false;
 	}
+
+	if (!(pw.index < m_supply->get_workers().get_nrwareids()))
+		return false;
 
 	const WorkerDescr * w_desc = owner().tribe().get_worker_descr(pw.index);
 	const WorkerDescr::Buildcost & cost = w_desc->buildcost();
@@ -825,7 +825,7 @@ uint32_t Warehouse::count_workers
 		}
 
 		ware = owner().tribe().get_worker_descr(ware)->becomes();
-	} while (ware != INVALID_INDEX);
+	} while (owner().tribe().has_ware(ware));
 
 	return sum;
 }
@@ -881,7 +881,7 @@ Worker & Warehouse::launch_worker
 		} else {
 			ware = game.tribes().get_worker_descr(ware)->becomes();
 		}
-	} while (ware != INVALID_INDEX);
+	} while (owner().tribe().has_ware(ware));
 
 	throw wexception
 		("Warehouse::launch_worker: worker does not actually exist");
@@ -1023,21 +1023,24 @@ bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		WareIndex id_w = owner().tribe().ware_index(input_name);
-		if (id_w != INVALID_INDEX) {
+		if (owner().tribe().has_ware(id_w)) {
 			if (m_supply->stock_wares(id_w) < buildcost.second) {
 				return false;
 			}
-		} else if ((id_w = owner().tribe().worker_index(input_name)) != INVALID_INDEX) {
-			if (m_supply->stock_workers(id_w) < buildcost.second) {
-				//NOCOM(GunChleoc) This will fail for <tribe>_carrier as buildcost
-				return false;
-			}
-		} else
-			throw wexception
-				("worker type %s needs \"%s\" to be built but that is neither "
-				 "a ware type nor a worker type defined in the tribe %s",
-				 w_desc.descname().c_str(), input_name.c_str(),
-				 owner().tribe().name().c_str());
+		} else {
+			id_w = owner().tribe().worker_index(input_name);
+			if (owner().tribe().has_worker(id_w)) {
+				if (m_supply->stock_workers(id_w) < buildcost.second) {
+					//NOCOM(GunChleoc) This will fail for <tribe>_carrier as buildcost
+					return false;
+				}
+			} else
+				throw wexception
+					("worker type %s needs \"%s\" to be built but that is neither "
+					 "a ware type nor a worker type defined in the tribe %s",
+					 w_desc.descname().c_str(), input_name.c_str(),
+					 owner().tribe().name().c_str());
+		}
 	}
 	return true;
 }
@@ -1051,7 +1054,7 @@ void Warehouse::create_worker(Game & game, WareIndex const worker) {
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input = buildcost.first;
 		WareIndex const id_ware = owner().tribe().ware_index(input);
-		if (id_ware != INVALID_INDEX) {
+		if (owner().tribe().has_ware(id_ware)) {
 			remove_wares(id_ware, buildcost.second);
 			//update statistic accordingly
 			owner().ware_consumed(id_ware, buildcost.second);
@@ -1099,14 +1102,17 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		WareIndex id_w = owner().tribe().ware_index(input_name);
-		if (id_w != INVALID_INDEX) {
+		if (owner().tribe().has_ware(id_w)) {
 			available.push_back(get_wares().stock(id_w));
-		} else if ((id_w = owner().tribe().worker_index(input_name)) != INVALID_INDEX) {
-			available.push_back(get_workers().stock(id_w));
-		} else
-			throw wexception
-				("Economy::_create_requested_worker: buildcost inconsistency '%s'",
-				 input_name.c_str());
+		} else {
+			id_w = owner().tribe().worker_index(input_name);
+			if (owner().tribe().has_worker(id_w)) {
+				available.push_back(get_workers().stock(id_w));
+			} else
+				throw wexception
+					("Economy::_create_requested_worker: buildcost inconsistency '%s'",
+					 input_name.c_str());
+		}
 	}
 
 	for (const PlannedWorkers& pw : m_planned_workers) {
@@ -1152,17 +1158,20 @@ void Warehouse::plan_workers(Game & game, WareIndex index, uint32_t amount)
 			const std::string & input_name = buildcost.first;
 
 			WareIndex id_w = owner().tribe().ware_index(input_name);
-			if (id_w != INVALID_INDEX) {
+			if (owner().tribe().has_ware(id_w)) {
 				pw->requests.push_back
 					(new Request
 					 (*this, id_w, &Warehouse::request_cb, wwWARE));
-			} else if ((id_w = owner().tribe().worker_index(input_name)) != INVALID_INDEX) {
-				pw->requests.push_back
-					(new Request
-					 (*this, id_w, &Warehouse::request_cb, wwWORKER));
-			} else
-				throw wexception
-					("plan_workers: bad buildcost '%s'", input_name.c_str());
+			} else {
+				id_w = owner().tribe().worker_index(input_name);
+				if (owner().tribe().has_worker(id_w)) {
+					pw->requests.push_back
+						(new Request
+						 (*this, id_w, &Warehouse::request_cb, wwWORKER));
+				} else
+					throw wexception
+						("plan_workers: bad buildcost '%s'", input_name.c_str());
+			}
 		}
 	}
 
@@ -1190,14 +1199,16 @@ void Warehouse::_update_planned_workers
 		uint32_t supply;
 
 		WareIndex id_w = owner().tribe().ware_index(input_name);
-		if (id_w != INVALID_INDEX) {
+		if (owner().tribe().has_ware(id_w)) {
 			supply = m_supply->stock_wares(id_w);
-		} else if ((id_w = owner().tribe().worker_index(input_name)) != INVALID_INDEX) {
+		} else {
+			id_w = owner().tribe().worker_index(input_name);
+			if (owner().tribe().has_worker(id_w)) {
 			supply = m_supply->stock_workers(id_w);
-		} else
-			throw wexception
-				("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
-
+			} else
+				throw wexception
+					("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
+		}
 		if (supply >= pw.amount * buildcost.second)
 			pw.requests[idx]->set_count(0);
 		else

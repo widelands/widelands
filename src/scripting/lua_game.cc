@@ -719,7 +719,7 @@ int LuaPlayer::get_suitability(lua_State * L) {
 
 	const char * name = luaL_checkstring(L, 2);
 	BuildingIndex i = tribe.building_index(name);
-	if (i == INVALID_INDEX)
+	if (!tribe.has_building(i))
 		report_error(L, "Unknown building type: <%s>", name);
 
 	lua_pushint32
@@ -820,7 +820,7 @@ void LuaPlayer::m_parse_building_list
 		while (lua_next(L, -2) != 0) {
 			const char * name = luaL_checkstring(L, -1);
 			BuildingIndex i = tribe.building_index(name);
-			if (i == INVALID_INDEX)
+			if (!tribe.has_building(i))
 				report_error(L, "Unknown building type: '%s'", name);
 
 			rv.push_back(i);

@@ -475,14 +475,14 @@ void MapBuildingdataPacket::read_warehouse
 					Warehouse::StockPolicy policy =
 						static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 
-					if (id != INVALID_INDEX) {
+					if (game.tribes().ware_exists(id)) {
 						warehouse.insert_wares(id, amount);
 						warehouse.set_ware_policy(id, policy);
 					}
 				} else {
 					uint16_t amount = fr.unsigned_16();
 
-					if (id != INVALID_INDEX)
+					if (game.tribes().ware_exists(id))
 						warehouse.insert_wares(id, amount);
 				}
 			}
@@ -493,14 +493,14 @@ void MapBuildingdataPacket::read_warehouse
 					Warehouse::StockPolicy policy =
 						static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 
-					if (id != INVALID_INDEX) {
+					if (game.tribes().worker_exists(id)) {
 						warehouse.insert_workers(id, amount);
 						warehouse.set_worker_policy(id, policy);
 					}
 				} else {
 					uint16_t amount = fr.unsigned_16();
 
-					if (id != INVALID_INDEX)
+					if (game.tribes().worker_exists(id))
 						warehouse.insert_workers(id, amount);
 				}
 			}
@@ -552,7 +552,7 @@ void MapBuildingdataPacket::read_warehouse
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
 				uint32_t const next_spawn = fr.unsigned_32();
 				WareIndex const worker_index = tribe.carrier();
-				if (worker_index == INVALID_INDEX) {
+				if (!game.tribes().worker_exists(worker_index)) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
 						 "worker type \"%s\" set to %u, ignoring\n",
@@ -598,7 +598,7 @@ void MapBuildingdataPacket::read_warehouse
 					uint32_t     const next_spawn      = fr.unsigned_32();
 					WareIndex   const worker_index    =
 						tribe.safe_worker_index(worker_typename);
-					if (worker_index == INVALID_INDEX) {
+					if (!game.tribes().worker_exists(worker_index)) {
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
 							 "worker type \"%s\" set to %u, ignoring\n",
@@ -975,7 +975,7 @@ void MapBuildingdataPacket::read_productionsite
 				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
-				if (wq->get_ware() == INVALID_INDEX) {
+				if (!game.tribes().ware_exists(wq->get_ware())) {
 					delete wq;
 				} else {
 					productionsite.m_input_queues.push_back(wq);

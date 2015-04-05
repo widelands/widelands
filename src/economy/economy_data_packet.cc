@@ -46,7 +46,7 @@ void EconomyDataPacket::read(FileRead & fr)
 						if (version <= 2)
 							fr.unsigned_32();
 						WareIndex i = tribe.ware_index(type_name);
-						if (i != INVALID_INDEX) {
+						if (tribe.has_ware(i)) {
 							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) == kInvalidWare)
 								log("WARNING: target quantity configured for %s, "
 								    "which should not have target quantity, "
@@ -61,31 +61,34 @@ void EconomyDataPacket::read(FileRead & fr)
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
 							}
-						} else if ((i = tribe.worker_index(type_name)) != INVALID_INDEX) {
-							if
-								(tribe.get_worker_descr(i)->default_target_quantity()
-								 ==
-								 std::numeric_limits<uint32_t>::max())
+						} else {
+							i = tribe.worker_index(type_name);
+							if (tribe.has_worker(i)) {
+								if
+									(tribe.get_worker_descr(i)->default_target_quantity()
+									 ==
+									 std::numeric_limits<uint32_t>::max()) {
+									log
+										("WARNING: target quantity configured for %s, "
+										 "which should not have target quantity, "
+										 "ignoring\n",
+										 type_name);
+								} else {
+									Economy::TargetQuantity & tq =
+										m_eco->m_worker_target_quantities[i];
+									if (tq.last_modified)
+										throw GameDataError
+											("duplicated entry for %s", type_name);
+									tq.permanent         = permanent;
+									tq.last_modified     = last_modified;
+								}
+							} else
 								log
-									("WARNING: target quantity configured for %s, "
-									 "which should not have target quantity, "
-									 "ignoring\n",
-									 type_name);
-							else {
-								Economy::TargetQuantity & tq =
-									m_eco->m_worker_target_quantities[i];
-								if (tq.last_modified)
-									throw GameDataError
-										("duplicated entry for %s", type_name);
-								tq.permanent         = permanent;
-								tq.last_modified     = last_modified;
-							}
-						} else
-							log
-								("WARNING: target quantity configured for \"%s\", "
-								 "which is not a ware or worker type defined in tribe "
-								 "%s, ignoring\n",
-								 type_name, tribe.name().c_str());
+									("WARNING: target quantity configured for \"%s\", "
+									 "which is not a ware or worker type defined in tribe "
+									 "%s, ignoring\n",
+									 type_name, tribe.name().c_str());
+						}
 					}
 				} catch (const WException & e) {
 					throw GameDataError("target quantities: %s", e.what());

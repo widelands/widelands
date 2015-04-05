@@ -162,13 +162,13 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
-	const BuildingIndex building_index = egbase.tribes().building_index(building_name);
-	if (building_index == INVALID_INDEX) {
+	const BuildingIndex building_index = tribes.building_index(building_name);
+	if (!tribes.building_exists(building_index)) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const BuildingDescr* building_description = egbase.tribes().get_building_descr(building_index);
+	const BuildingDescr* building_description = tribes.get_building_descr(building_index);
 
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }
@@ -210,13 +210,13 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string ware_name = luaL_checkstring(L, 2);
-	WareIndex ware_index = egbase.tribes().ware_index(ware_name);
-	if (ware_index == INVALID_INDEX) {
+	WareIndex ware_index = tribes.ware_index(ware_name);
+	if (!tribes.ware_exists(ware_index)) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const WareDescr* ware_description = egbase.tribes().get_ware_descr(ware_index);
+	const WareDescr* ware_description = tribes.get_ware_descr(ware_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
@@ -234,13 +234,13 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
-	const WareIndex worker_index = egbase.tribes().worker_index(worker_name);
-	if (worker_index == INVALID_INDEX) {
+	const WareIndex worker_index = tribes.worker_index(worker_name);
+	if (!tribes.worker_exists(worker_index)) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const WorkerDescr* worker_description = egbase.tribes().get_worker_descr(worker_index);
+	const WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 

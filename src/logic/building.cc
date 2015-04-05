@@ -66,6 +66,7 @@ BuildingDescr::BuildingDescr
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
+	m_enhancement   (INVALID_INDEX),
 	m_enhanced_from (INVALID_INDEX),
 	m_enhanced_building(false),
 	m_hints         (table.get_table("aihints")),
@@ -98,7 +99,6 @@ BuildingDescr::BuildingDescr
 
 	// Parse build options
 	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
-	m_enhancement = INVALID_INDEX;
 
 	if (table.has_key("enhancement")) {
 		const std::string& enh = table.get_string("enhancement");
@@ -107,7 +107,7 @@ BuildingDescr::BuildingDescr
 			throw wexception("enhancement to same type");
 		}
 		BuildingIndex const en_i = egbase_.tribes().building_index(enh);
-		if (en_i != INVALID_INDEX) {
+		if (egbase_.tribes().building_exists(en_i)) {
 			m_enhancement = en_i;
 
 			//  Merge the enhancements workarea info into this building's

@@ -57,7 +57,7 @@ TribeDescr::TribeDescr
 {
 	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
 	// e.g. Barbarians have no wheat.
-	// Imperal sheep farms get no wheat
+	// Imperal sheep farms get no wheat - the farm reports out of fields, although it has plenty!.
 
 	try {
 		m_initializations = info.initializations;
