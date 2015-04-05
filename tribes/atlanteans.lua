@@ -239,5 +239,6 @@ tribes:new_tribe {
 	geologist = "atlanteans_geologist",
 	soldier = "atlanteans_soldier",
 	ship = "ship_atlanteans",
+	headquarters = "atlanteans_headquarters",
 	port = "atlanteans_port",
 }

@@ -191,6 +191,7 @@ TribeDescr::TribeDescr
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
 
+		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 
 	} catch (const GameDataError& e) {
@@ -319,6 +320,10 @@ WareIndex TribeDescr::soldier() const {
 int TribeDescr::ship() const {
 	assert(egbase_.tribes().ship_exists(ship_));
 	return ship_;
+}
+BuildingIndex TribeDescr::headquarters() const {
+	assert(egbase_.tribes().building_exists(headquarters_));
+	return headquarters_;
 }
 BuildingIndex TribeDescr::port() const {
 	assert(egbase_.tribes().building_exists(port_));

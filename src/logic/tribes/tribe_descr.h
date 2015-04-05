@@ -99,6 +99,7 @@ public:
 	WareIndex geologist() const;
 	WareIndex soldier() const;
 	int ship() const;
+	BuildingIndex headquarters() const;
 	BuildingIndex port() const;
 	const std::vector<WareIndex>& worker_types_without_cost() const;
 
@@ -168,6 +169,7 @@ private:
 	WareIndex                   geologist_; // This tribe's geologist worker
 	WareIndex                   soldier_;  // The soldier that this tribe uses
 	int                         ship_;     // The ship that this tribe uses
+	BuildingIndex               headquarters_; // The tribe's default headquarters, needed by the editor
 	BuildingIndex               port_;     // The port that this tribe uses
 	std::vector<WareIndex>      worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display

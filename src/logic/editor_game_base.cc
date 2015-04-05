@@ -245,10 +245,10 @@ void EditorGameBase::postload()
  * This function needs to be called once at startup when the graphics system is ready.
  * If the graphics system is to be replaced at runtime, the function must be called after that has happened.
  */
-void EditorGameBase::load_graphics(UI::ProgressWindow&)
+void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
 {
-	// NOCOM(GunChleoc): Remove UI::ProgressWindow if we won't use it
 	assert(tribes_);
+	loader_ui.stepf(_("Loading tribes"));
 	tribes_->load_graphics();
 }
 

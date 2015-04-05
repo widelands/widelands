@@ -60,7 +60,6 @@ using Widelands::Building;
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
 	loader_ui->stepf(_("Loading tribes"));
-	// NOCOM(GunChleoc): Do we need the full tribes in the editor, or just the TribeBasicInfo?
 	egbase->tribes();
 }
 

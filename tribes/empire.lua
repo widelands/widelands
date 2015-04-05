@@ -251,5 +251,6 @@ tribes:new_tribe {
 	geologist = "empire_geologist",
 	soldier = "empire_soldier",
 	ship = "ship_empire",
+	headquarters = "empire_headquarters",
 	port = "empire_port",
 }
