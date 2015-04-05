@@ -142,10 +142,10 @@ using SoldiersList = std::vector<Widelands::Soldier *>;
 // current wares. Returns a set with all WareIndexes that must be considered.
 #define GET_INDEX(type) \
 	WareIndex m_get_ ## type ## _index \
-		(lua_State * L, const Tribes& tribes,  const std::string & what) \
+		(lua_State * L, const TribeDescr& tribe,  const std::string & what) \
 	{ \
-		WareIndex idx = tribes. type ## _index(what); \
-		if (!tribes. type ## _exists(idx)) \
+		WareIndex idx = tribe. type ## _index(what); \
+		if (!tribe.has_ ## type (idx)) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}
@@ -155,7 +155,7 @@ GET_INDEX(worker)
 
 #define PARSERS(type, btype) \
 btype ##sSet m_parse_get_##type##s_arguments \
-		(lua_State * L, const Tribes& tribes, bool * return_number) \
+		(lua_State * L, const TribeDescr& tribe, bool * return_number) \
 { \
 	 /* takes either "all", a name or an array of names */ \
 	int32_t nargs = lua_gettop(L); \
@@ -166,12 +166,12 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (WareIndex i = 0; \
-					i < static_cast<int>(tribes.nr##type##s ()); ++i) \
+			for (const WareIndex& i : tribe.type##s()) { \
 				rv.insert(i); \
+			} \
 		} else { \
 			/* Only one item requested */ \
-			rv.insert(m_get_##type##_index(L, tribes, what)); \
+			rv.insert(m_get_##type##_index(L, tribe, what)); \
 			*return_number = true; \
 		} \
 	} else { \
@@ -179,7 +179,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 		luaL_checktype(L, 2, LUA_TTABLE); \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
-			rv.insert(m_get_##type##_index(L, tribes, luaL_checkstring(L, -1))); \
+			rv.insert(m_get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
 			lua_pop(L, 1); \
 		} \
 	} \
@@ -187,7 +187,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 } \
 \
 btype##sMap m_parse_set_##type##s_arguments \
-	(lua_State * L, const Tribes& tribes) \
+	(lua_State * L, const TribeDescr& tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
 	if (nargs != 2 && nargs != 3) \
@@ -196,7 +196,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 	if (nargs == 3) { \
 		/* name amount */ \
 		rv.insert(btype##Amount( \
-			m_get_##type##_index(L, tribes, luaL_checkstring(L, 2)), \
+			m_get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
 			luaL_checkuint32(L, 3) \
 		)); \
 	} else { \
@@ -205,7 +205,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
 			rv.insert(btype##Amount( \
-				m_get_##type##_index(L, tribes, luaL_checkstring(L, -2)), \
+				m_get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
 				luaL_checkuint32(L, -1) \
 			)); \
 			lua_pop(L, 1); \
@@ -272,7 +272,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	const Tribes& tribes = get_egbase(L).tribes();
 
 	bool return_number = false;
-	WorkersSet set = m_parse_get_workers_arguments(L, tribes, &return_number);
+	WorkersSet set = m_parse_get_workers_arguments(L, pi.owner().tribe(), &return_number);
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
@@ -317,7 +317,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
 
-	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribes);
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, pi->owner().tribe());
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
@@ -1725,9 +1725,9 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 int LuaProductionSiteDescription::get_inputs(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const WareAmount& ware_amount : get()->inputs()) {
+	for (const WareAmount& input_ware : get()->inputs()) {
 		lua_pushint32(L, index++);
-		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(ware_amount.first);
+		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2817,8 +2817,7 @@ int LuaFlag::set_wares(lua_State * L)
 	EditorGameBase & egbase = get_egbase(L);
 	Flag * f = get(L, egbase);
 	const Tribes& tribes = egbase.tribes();
-
-	WaresMap setpoints = m_parse_set_wares_arguments(L, tribes);
+	WaresMap setpoints = m_parse_set_wares_arguments(L, f->owner().tribe());
 	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
 
 	uint32_t nwares = 0;
@@ -2873,7 +2872,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	const Tribes& tribes = egbase.tribes();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, tribes, &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, get(L, egbase)->owner().tribe(), &return_number);
 
 	WaresMap wares = count_wares_on_flag_(*get(L, egbase), tribes);
 
@@ -3243,7 +3242,7 @@ int LuaWarehouse::get_portdock(lua_State * L) {
 #define WH_SET(type, btype) \
 int LuaWarehouse::set_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, get_egbase(L).tribes()); \
+	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, wh->owner().tribe()); \
  \
 	for (btype##sMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) { \
 		int32_t d = i->second - \
@@ -3267,7 +3266,7 @@ int LuaWarehouse::get_##type##s(lua_State * L) { \
 	const Tribes& tribes = get_egbase(L).tribes(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments \
-		(L, tribes, &return_number); \
+		(L, wh->owner().tribe(), &return_number); \
 	lua_newtable(L); \
 	if (return_number) \
 		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \
@@ -3342,7 +3341,7 @@ int LuaProductionSite::get_valid_wares(lua_State * L) {
 
 	lua_newtable(L);
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
-		const WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.second);
+		const WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
@@ -3365,9 +3364,7 @@ int LuaProductionSite::get_valid_workers(lua_State * L) {
 // documented in parent class
 int LuaProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
-	const Tribes& tribes = get_egbase(L).tribes();
-
-	WaresMap setpoints = m_parse_set_wares_arguments(L, tribes);
+	WaresMap setpoints = m_parse_set_wares_arguments(L, ps->owner().tribe());
 
 	WaresSet valid_wares;
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
@@ -3376,7 +3373,9 @@ int LuaProductionSite::set_wares(lua_State * L) {
 	for (const std::pair<Widelands::WareIndex, uint32_t>& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
-				L, "<%s> can't be stored here!", tribes.get_ware_descr(sp.first)->name().c_str());
+				L, "<%s> can't be stored in this building: %s!",
+						get_egbase(L).tribes().get_ware_descr(sp.first)->name().c_str(),
+						ps->descr().name().c_str());
 		}
 		WaresQueue & wq = ps->waresqueue(sp.first);
 		if (sp.second > wq.get_max_size()) {
@@ -3395,7 +3394,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	const Tribes& tribes = get_egbase(L).tribes();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, tribes, &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, ps->owner().tribe(), &return_number);
 
 	WaresSet valid_wares;
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
