@@ -73,7 +73,7 @@ return {
 
       place_building_in_region(plr, "empire_colosseum", sf:region(11), {
          wares = {
-            bread_empire = 8,
+            empire_bread = 8,
             fish = 4,
             meat = 4,
          },

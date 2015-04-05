@@ -38,7 +38,7 @@ function building_materials()
    local o_quarry = add_campaign_objective(obj_build_quarry)
    -- Check for completeness of the quarry
    run(function()
-      while not check_for_buildings(p1, {quarry=1}) do sleep(3423) end
+      while not check_for_buildings(p1, {empire_quarry=1}) do sleep(3423) end
       o_quarry.done = true
 
       campaign_message_box(diary_page_7)

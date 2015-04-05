@@ -116,8 +116,8 @@ function reveal_village()
             meat = 30
          }
       },
-      {"barbarians_inn", 55, 28, wares = {bread_barbarians = 4, meat = 4}},
-      {"barbarians_tavern", 57, 28, wares = {bread_barbarians = 4, meat = 4}},
+      {"barbarians_inn", 55, 28, wares = {barbarians_bread = 4, meat = 4}},
+      {"barbarians_tavern", 57, 28, wares = {barbarians_bread = 4, meat = 4}},
       {"barbarians_well", 52, 30},
       {"barbarians_farm", 54, 33},
       {"barbarians_bakery", 51, 35, wares = {wheat = 6, water = 6}},

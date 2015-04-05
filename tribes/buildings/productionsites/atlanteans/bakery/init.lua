@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
 		water = 8
 	},
    outputs = {
-		"bread_atlanteans"
+		"atlanteans_bread"
    },
 
 	programs = {
@@ -66,10 +66,10 @@ tribes:new_productionsite_type {
 			descname = _"baking bread",
 			actions = {
 				"sleep=35000",
-				"return=skipped unless economy needs bread_atlanteans",
+				"return=skipped unless economy needs atlanteans_bread",
 				"consume=water:2 blackroot_flour cornmeal",
 				"animate=working 30000",
-				"produce=bread_atlanteans:2"
+				"produce=atlanteans_bread:2"
 			}
 		},
 	},

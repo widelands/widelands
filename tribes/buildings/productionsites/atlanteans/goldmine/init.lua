@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
 	},
 
    inputs = {
-		bread_atlanteans = 10,
+		atlanteans_bread = 10,
 		smoked_fish = 10,
 		smoked_meat = 6
 	},
@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"sleep=45000",
 				"return=skipped unless economy needs gold_ore",
-				"consume=smoked_fish,smoked_meat:2 bread_atlanteans:2",
+				"consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
 				"animate=working 20000",
 				"mine=gold 4 100 5 2",
 				"produce=gold_ore",

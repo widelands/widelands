@@ -67,7 +67,7 @@ return {
 
       place_building_in_region(plr, "barbarians_battlearena", sf:region(12), {
          wares = {
-            bread_barbarians = 8,
+            barbarians_bread = 8,
             fish = 6,
             meat = 6,
          }

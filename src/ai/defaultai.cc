@@ -4646,20 +4646,21 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	// we test following materials
 	const std::vector<std::string> materials = {"coal",
 	                                            "log",
-	                                            "ironore",
+															  "iron_ore",
 	                                            "marble",
-	                                            "plank",
+															  "planks",
 	                                            "water",
-	                                            "goldore",
+															  "gold_ore",
 	                                            "granite",
 	                                            "fish",
 	                                            "diamond",
-	                                            "stone",
 	                                            "corn",
 	                                            "wheat",
 	                                            "grape",
 	                                            "quartz",
-	                                            "bread",
+															  "atlanteans_bread",
+															  "barbarians_bread",
+															  "empire_bread",
 	                                            "meat"};
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {

@@ -34,7 +34,7 @@ tribes:new_worker_type {
 	programs = {
 		buildship = {
 			"walk object-or-coords",
-			"plant tribe:shipconstruction_empire unless object",
+			"plant tribe:empire_shipconstruction unless object",
 			"playFX sound/sawmill/sawmill 230",
 			"animation work 500",
 			"construct",

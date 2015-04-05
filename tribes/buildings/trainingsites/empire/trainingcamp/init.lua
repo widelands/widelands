@@ -54,7 +54,7 @@ tribes:new_trainingsite_type {
 	},
 
 	inputs = {
-		bread_empire = 10,
+		empire_bread = 10,
 		fish = 6,
 		meat = 6,
 		spear = 2,
@@ -75,7 +75,7 @@ tribes:new_trainingsite_type {
 		max_level = 3,
 		food = {
 			{"fish", "meat"},
-			{"bread_empire"}
+			{"empire_bread"}
 		},
 		weapons = {
 			"spear",
@@ -89,7 +89,7 @@ tribes:new_trainingsite_type {
 		max_level = 3,
 		food = {
 			{"fish", "meat"},
-			{"bread_empire"}
+			{"empire_bread"}
 		},
 		weapons = {
 			"armor_helmet",
@@ -115,7 +115,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
 				"sleep=30000",
 				"check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
-				"consume=spear bread_empire fish,meat",
+				"consume=spear empire_bread fish,meat",
 				"train=soldier attack 0 1"
 			}
 		},
@@ -126,7 +126,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 1",
 				"sleep=30000",
 				"check_soldier=soldier attack 1",
-				"consume=spear_advanced bread_empire fish,meat",
+				"consume=spear_advanced empire_bread fish,meat",
 				"train=soldier attack 1 2"
 			}
 		},
@@ -137,7 +137,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 2",
 				"sleep=30000",
 				"check_soldier=soldier attack 2",
-				"consume=spear_heavy bread_empire fish,meat:2",
+				"consume=spear_heavy empire_bread fish,meat:2",
 				"train=soldier attack 2 3"
 			}
 		},
@@ -148,7 +148,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 3",
 				"sleep=30000",
 				"check_soldier=soldier attack 3",
-				"consume=spear_war bread_empire:2 fish,meat",
+				"consume=spear_war empire_bread:2 fish,meat",
 				"train=soldier attack 3 4"
 			}
 		},
@@ -159,7 +159,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 0",
 				"sleep=30000",
 				"check_soldier=soldier hp 0",
-				"consume=armor_helmet bread_empire,fish,meat",
+				"consume=armor_helmet empire_bread,fish,meat",
 				"train=soldier hp 0 1"
 			}
 		},
@@ -170,7 +170,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 1",
 				"sleep=30000",
 				"check_soldier=soldier hp 1",
-				"consume=armor bread_empire fish,meat",
+				"consume=armor empire_bread fish,meat",
 				"train=soldier hp 1 2"
 			}
 		},
@@ -181,7 +181,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 2",
 				"sleep=30000",
 				"check_soldier=soldier hp 2",
-				"consume=armor_chain bread_empire:2 fish,meat:2",
+				"consume=armor_chain empire_bread:2 fish,meat:2",
 				"train=soldier hp 2 3"
 			}
 		},
@@ -192,7 +192,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 3",
 				"sleep=30000",
 				"check_soldier=soldier hp 3",
-				"consume=armor_gilded bread_empire:2 fish,meat:2",
+				"consume=armor_gilded empire_bread:2 fish,meat:2",
 				"train=soldier hp 3 4"
 			}
 		},

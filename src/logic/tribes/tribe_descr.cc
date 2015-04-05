@@ -58,7 +58,6 @@ TribeDescr::TribeDescr
 	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
 	// e.g. Barbarians have no wheat.
 	// Carrier walk_load animation is empty
-	// NOCOM grep for sc00_headquarters.lua -> headquarters.lua
 
 	try {
 		m_initializations = info.initializations;

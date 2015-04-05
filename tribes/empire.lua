@@ -48,7 +48,7 @@ tribes:new_tribe {
 			"water",
 			"wheat",
 			"flour",
-			"bread_empire",
+			"empire_bread",
 			"beer",
 			"grape",
 			"wine",
@@ -170,7 +170,7 @@ tribes:new_tribe {
 		"resi_water",
 		"resi_stones1",
 		"resi_stones2",
-		"shipconstruction_empire",
+		"empire_shipconstruction",
 	},
 
 	-- The order here also determines the order in lists on screen.
@@ -250,7 +250,7 @@ tribes:new_tribe {
 	carrier2 = "empire_donkey",
 	geologist = "empire_geologist",
 	soldier = "empire_soldier",
-	ship = "ship_empire",
+	ship = "empire_ship",
 	headquarters = "empire_headquarters",
 	port = "empire_port",
 }

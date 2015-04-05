@@ -37,7 +37,7 @@ function introduction_thread()
    message_box_objective(plr, order_msg_ranger)
    local obj = add_campaign_objective(obj_build_rangers)
 
-   while not check_for_buildings(plr, {rangers_hut = 2}) do sleep(500) end
+   while not check_for_buildings(plr, {barbarians_rangers_hut = 2}) do sleep(500) end
    obj.done = true
 
    plr:allow_buildings{"barbarians_sentry", "barbarians_barrier"}
@@ -59,7 +59,7 @@ function introduction_thread()
 
    -- Now, wait till the quarry comes up
    local f = wl.Game().map:get_field(27,48):region(6)
-   while not check_for_buildings(plr, { quarry = 1 }, f) do
+   while not check_for_buildings(plr, { barbarians_quarry = 1 }, f) do
       sleep(5000)
    end
    obj.done = true
@@ -95,7 +95,7 @@ function mines_and_food_thread()
    message_box_objective(plr, story_msg2)
 
    -- Wait for completion
-   while not check_for_buildings(plr, {coalmine = 1, oremine = 1}) do
+   while not check_for_buildings(plr, {barbarians_coalmine = 1, barbarians_ironmine = 1}) do
       sleep(5000)
    end
    o.done = true
@@ -184,8 +184,8 @@ function mines_and_food_thread()
             break
          end
       end
-      for k,v in ipairs(mines.oremine) do
-         if v:get_workers("barbarians__miner_chief") > 0 then
+      for k,v in ipairs(mines.barbarians_ironmine) do
+         if v:get_workers("barbarians_miner_chief") > 0 then
             chiefminer_found = true
             break
          end
@@ -284,7 +284,7 @@ end
 -- Cattlefarm thread
 -- ==================
 function cattle_farm()
-   while not check_for_buildings(plr, { farm = 1, well = 1 }) do
+   while not check_for_buildings(plr, { barbarians_farm = 1, barbarians_well = 1 }) do
       sleep(7834)
    end
 

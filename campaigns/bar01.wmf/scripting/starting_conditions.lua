@@ -15,7 +15,7 @@ hq = plr:place_building("barbarians_headquarters_interim", sf, false, true)
 hq:set_wares{
    ax = 6,
    blackwood = 32,
-   bread_barbarians = 8,
+   barbarians_bread = 8,
    bread_paddle = 2,
    coal = 5,
    fire_tongs = 2,
@@ -24,7 +24,7 @@ hq:set_wares{
    grout = 4,
    hammer = 12,
    hunting_spear = 2,
-   ironore = 5,
+   iron_ore = 5,
    kitchen_tools = 4,
    log = 80,
    meal = 4,

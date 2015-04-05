@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
 
    inputs = {
 		fish = 4,
-		bread_barbarians = 4,
+		barbarians_bread = 4,
 		meat = 4
 	},
    outputs = {
@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"sleep=14000",
 				"return=skipped unless economy needs ration",
-				"consume=bread_barbarians,fish,meat",
+				"consume=barbarians_bread,fish,meat",
 				"animate=working 19000",
 				"produce=ration"
 			},

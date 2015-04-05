@@ -47,7 +47,7 @@ function init_player()
             helmet_mask = 20,
             helmet_warhelm = 20,
             stout = 50,
-            bread_barbarians = 200,
+            barbarians_bread = 200,
             meat = 200
          }
       },

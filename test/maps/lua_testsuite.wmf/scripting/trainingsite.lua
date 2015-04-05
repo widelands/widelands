@@ -84,7 +84,7 @@ function trainingsite_tests:test_houses_empty_at_creation()
    end
 end
 function trainingsite_tests:test_valid_wares()
-   assert_equal(10, self.camp.valid_wares.bread_barbarians)
+   assert_equal(10, self.camp.valid_wares.barbarians_bread)
    assert_equal(6, self.camp.valid_wares.fish)
    assert_equal(6, self.camp.valid_wares.meat)
    assert_equal(2, self.camp.valid_wares.ax_sharp)
@@ -147,7 +147,7 @@ end
 function trainingsite_tests:test_get_wares_all_arg()
    self.camp:set_wares{fish=3, meat=2}
    rv = self.camp:get_wares("all")
-   assert_equal(0, rv.bread_barbarians)
+   assert_equal(0, rv.barbarians_bread)
    assert_equal(0, rv.helmet)
    assert_equal(2, rv.meat)
    assert_equal(3, rv.fish)

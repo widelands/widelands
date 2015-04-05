@@ -54,7 +54,7 @@ tribes:new_trainingsite_type {
 	},
 
 	inputs = {
-		bread_atlanteans = 10,
+		atlanteans_bread = 10,
 		smoked_fish = 6,
 		smoked_meat = 6,
 		trident_long = 4,
@@ -71,7 +71,7 @@ tribes:new_trainingsite_type {
 		max_level = 3,
 		food = {
 			{"smoked_fish", "smoked_meat"},
-			{"bread_atlanteans"}
+			{"atlanteans_bread"}
 		},
 		weapons = {
 			"trident_long",
@@ -97,7 +97,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 0",
 				"sleep=30000",
 				"check_soldier=soldier attack 0",
-				"consume=bread_atlanteans smoked_fish,smoked_meat trident_long",
+				"consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
 				"train=soldier attack 0 1"
 			}
 		},
@@ -108,7 +108,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 1",
 				"sleep=30000",
 				"check_soldier=soldier attack 1",
-				"consume=bread_atlanteans smoked_fish,smoked_meat trident_steel",
+				"consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
 				"train=soldier attack 1 2"
 			}
 		},
@@ -119,7 +119,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 2",
 				"sleep=30000",
 				"check_soldier=soldier attack 2",
-				"consume=bread_atlanteans smoked_fish,smoked_meat trident_double",
+				"consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
 				"train=soldier attack 2 3"
 			}
 		},
@@ -130,7 +130,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 3",
 				"sleep=30000",
 				"check_soldier=soldier attack 3",
-				"consume=bread_atlanteans smoked_fish,smoked_meat trident_heavy_double",
+				"consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
 				"train=soldier attack 3 4"
 			}
 		},

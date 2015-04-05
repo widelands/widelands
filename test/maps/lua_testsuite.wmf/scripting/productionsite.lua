@@ -139,7 +139,7 @@ function productionsite_tests:test_valid_wares_correct_length()
    for n,count in pairs(inn) do c[#c+1] = n end
    assert_equal(5, #c)
    assert_equal(4, inn.fish)
-   assert_equal(4, inn.bread_barbarians)
+   assert_equal(4, inn.barbarians_bread)
    assert_equal(4, inn.meat)
    assert_equal(4, inn.beer)
    assert_equal(4, inn.stout)
@@ -204,7 +204,7 @@ end
 function productionsite_tests:test_get_wares_all_arg()
    self.inn:set_wares{fish=3, stout=2}
    rv = self.inn:get_wares("all")
-   assert_equal(0, rv.bread_barbarians)
+   assert_equal(0, rv.barbarians_bread)
    assert_equal(0, rv.meat)
    assert_equal(0, rv.beer)
    assert_equal(3, rv.fish)
@@ -213,7 +213,7 @@ function productionsite_tests:test_get_wares_all_arg()
 end
 function productionsite_tests:test_get_wares_string_arg()
    self.inn:set_wares{fish=3, stout=2}
-   assert_equal(0, self.inn:get_wares("bread_barbarians"))
+   assert_equal(0, self.inn:get_wares("barbarians_bread"))
    assert_equal(0, self.inn:get_wares("meat"))
    assert_equal(0, self.inn:get_wares("beer"))
    assert_equal(3, self.inn:get_wares("fish"))

@@ -47,7 +47,7 @@ function connected_road(p, start, cmd, g_create_carriers)
          r = p:place_road(start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
-            r:set_workers("carrier", 1)
+            r:set_workers(p.tribe.carrier, 1)
          end
          moves = {}
       end

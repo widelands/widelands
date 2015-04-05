@@ -82,7 +82,7 @@ function place_headquarters()
             meal = 4,
             meat = 6,
             pick = 14,
-            bread_barbarians = 8,
+            barbarians_bread = 8,
             ration = 12,
             granite = 40,
             scythe = 6,

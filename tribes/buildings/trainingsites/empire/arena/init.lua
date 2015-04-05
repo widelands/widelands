@@ -57,7 +57,7 @@ tribes:new_trainingsite_type {
 	},
 
 	inputs = {
-		bread_empire = 10,
+		empire_bread = 10,
 		fish = 6,
 		meat = 6
 	},
@@ -70,7 +70,7 @@ tribes:new_trainingsite_type {
 		max_level = 0,
 		food = {
 			{"fish", "meat"},
-			{"bread_empire"}
+			{"empire_bread"}
 		}
 	},
 
@@ -91,7 +91,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
 				"sleep=30000",
 				"check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
-				"consume=bread_empire:2 fish,meat",
+				"consume=empire_bread:2 fish,meat",
 				"train=soldier evade 0 1"
 			}
 		},

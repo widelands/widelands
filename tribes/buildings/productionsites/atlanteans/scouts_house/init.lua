@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
 
    inputs = {
 		smoked_fish = 2,
-		bread_atlanteans = 2
+		atlanteans_bread = 2
 	},
 
 	programs = {
@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
 				"consume=smoked_fish",
 				"worker=scout",
 				"sleep=30000",
-				"consume=bread_atlanteans",
+				"consume=atlanteans_bread",
 				"worker=scout"
 			}
 		},

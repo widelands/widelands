@@ -74,14 +74,14 @@ return {
 
       place_building_in_region(plr, "atlanteans_labyrinth", sf:region(11), {
          wares = {
-            bread_atlanteans = 4,
+            atlanteans_bread = 4,
             smoked_fish = 3,
             smoked_meat = 3,
          }
       })
 
       place_building_in_region(plr, "atlanteans_dungeon", sf:region(11), {
-         wares = {bread_atlanteans = 4, smoked_fish = 3, smoked_meat = 3}
+         wares = {atlanteans_bread = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
       place_building_in_region(plr, "atlanteans_armorsmithy", sf:region(11), {

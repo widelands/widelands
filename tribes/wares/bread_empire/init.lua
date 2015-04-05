@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 tribes:new_ware_type{
-   name = "bread_empire",
+   name = "empire_bread",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = _"Bread",
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'

@@ -25,7 +25,7 @@ return {
          felling_ax = 6,
          bread_paddle = 2,
          basket = 2,
-         bread_empire = 8,
+         empire_bread = 8,
          cloth = 5,
          coal = 12,
          fire_tongs = 2,

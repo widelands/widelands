@@ -51,7 +51,7 @@ tribes:new_tribe {
 			"cornmeal",
 			"blackroot",
 			"blackroot_flour",
-			"bread_atlanteans"
+			"atlanteans_bread"
 		},
 		{
 			-- Mining
@@ -169,7 +169,7 @@ tribes:new_tribe {
 		"resi_water",
 		"resi_stones1",
 		"resi_stones2",
-		"shipconstruction_atlanteans",
+		"atlanteans_shipconstruction",
 	},
 
 	-- The order here also determines the order in lists on screen.
@@ -238,7 +238,7 @@ tribes:new_tribe {
 	carrier2 = "atlanteans_horse",
 	geologist = "atlanteans_geologist",
 	soldier = "atlanteans_soldier",
-	ship = "ship_atlanteans",
+	ship = "atlanteans_ship",
 	headquarters = "atlanteans_headquarters",
 	port = "atlanteans_port",
 }

@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
 		water = 6
 	},
    outputs = {
-		"bread_barbarians"
+		"barbarians_bread"
    },
 
 	programs = {
@@ -69,12 +69,12 @@ tribes:new_productionsite_type {
 			descname = _"baking bread",
 			actions = {
 				"sleep=20000",
-				"return=skipped unless economy needs bread_barbarians",
+				"return=skipped unless economy needs barbarians_bread",
 				"consume=water:3 wheat:3",
 				"animate=working 20000",
-				"produce=bread_barbarians",
+				"produce=barbarians_bread",
 				"animate=working 20000",
-				"produce=bread_barbarians"
+				"produce=barbarians_bread"
 			}
 		},
 	},

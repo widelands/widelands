@@ -7,14 +7,14 @@
 -- ===============
 
 p1:allow_buildings("all")
-p1:forbid_buildings{"shipyard"}
+p1:forbid_buildings{"atlanteans_shipyard"}
 
 -- A default headquarters
-include "tribes/scripting/starting_conditions/atlanteans/sc00_headquarters.lua"
-init.func(p1) -- defined in sc00_headquarters
+include "tribes/scripting/starting_conditions/atlanteans/headquarters.lua"
+init.func(p1) -- defined in headquarters
 
 local hq = wl.Game().map.player_slots[1].starting_field.immovable
-hq:set_workers{shipwright=1}
+hq:set_workers{atlanteans_shipwright=1}
 
 -- Place some buildings
 prefilled_buildings(p1,

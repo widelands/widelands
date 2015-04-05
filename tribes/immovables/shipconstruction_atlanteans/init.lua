@@ -1,14 +1,14 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
-   name = "shipconstruction_atlanteans",
+   name = "atlanteans_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Ship Under Construction",
    size = "small",
    programs = {
 		program = {
 			"construction=idle 5000 210000",
-			"transform=bob tribe:ship_atlanteans",
+			"transform=bob tribe:atlanteans_ship",
       }
    },
    buildcost = {

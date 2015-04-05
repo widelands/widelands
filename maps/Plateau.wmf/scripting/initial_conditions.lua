@@ -6,7 +6,7 @@ p1:allow_buildings("all")
 prefilled_buildings(p1, { "barbarians_headquarters_interim", 65, 6,
    wares = {
       blackwood = 32,
-      bread_barbarians = 8,
+      barbarians_bread = 8,
       bread_paddle = 2,
       coal = 12,
       fire_tongs = 2,

@@ -11,7 +11,7 @@ function init_player()
          felling_ax = 6,
          bread_paddle = 2,
          basket = 2,
-         bread_empire = 28,
+         empire_bread = 28,
          cloth = 5,
          fire_tongs = 2,
          fish = 6,

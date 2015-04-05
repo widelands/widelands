@@ -54,7 +54,7 @@ tribes:new_trainingsite_type {
 	},
 
 	inputs = {
-		bread_atlanteans = 10,
+		atlanteans_bread = 10,
 		smoked_fish = 6,
 		smoked_meat = 6,
 		shield_steel = 4,
@@ -70,7 +70,7 @@ tribes:new_trainingsite_type {
 		max_level = 1,
 		food = {
 			{"smoked_fish", "smoked_meat"},
-			{"bread_atlanteans"}
+			{"atlanteans_bread"}
 		},
 		weapons = {
 			"shield_steel",
@@ -82,7 +82,7 @@ tribes:new_trainingsite_type {
 		max_level = 0,
 		food = {
 			{"smoked_fish", "smoked_meat"},
-			{"bread_atlanteans"}
+			{"atlanteans_bread"}
 		},
 		weapons = {
 			"tabard_golden"
@@ -112,7 +112,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
 				"sleep=30000",
 				"check_soldier=soldier defense 0", -- Because the soldier can be expulsed by the player
-				"consume=bread_atlanteans smoked_fish,smoked_meat shield_steel",
+				"consume=atlanteans_bread smoked_fish,smoked_meat shield_steel",
 				"train=soldier defense 0 1"
 			}
 		},
@@ -123,7 +123,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier defense 1", -- Fails when aren't any soldier of level 1 defense
 				"sleep=30000",
 				"check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
-				"consume=bread_atlanteans smoked_fish,smoked_meat shield_advanced",
+				"consume=atlanteans_bread smoked_fish,smoked_meat shield_advanced",
 				"train=soldier defense 1 2"
 			}
 		},
@@ -145,7 +145,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
 				"sleep=30000",
 				"check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
-				"consume=bread_atlanteans smoked_fish,smoked_meat:2",
+				"consume=atlanteans_bread smoked_fish,smoked_meat:2",
 				"train=soldier evade 0 1"
 			}
 		},
@@ -156,7 +156,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
 				"sleep=30000",
 				"check_soldier=soldier evade 1", -- Because the soldier can be expelled by the player
-				"consume=bread_atlanteans:2 smoked_fish,smoked_meat:2",
+				"consume=atlanteans_bread:2 smoked_fish,smoked_meat:2",
 				"train=soldier evade 1 2"
 			}
 		},

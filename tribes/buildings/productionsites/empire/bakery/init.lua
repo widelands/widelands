@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
 		water = 6
 	},
    outputs = {
-		"bread_empire"
+		"empire_bread"
    },
 
 	programs = {
@@ -68,10 +68,10 @@ tribes:new_productionsite_type {
 			descname = _"baking bread",
 			actions = {
 				"sleep=15000",
-				"return=skipped unless economy needs bread_empire",
+				"return=skipped unless economy needs empire_bread",
 				"consume=flour water",
 				"animate=working 15000",
-				"produce=bread_empire"
+				"produce=empire_bread"
 			}
 		},
 	},

@@ -102,7 +102,7 @@ function build_food_environment()
       atlanteans_bakery = 1,
       hunters_house = 1,
       atlanteans_fishers_house = 1,
-      atlanteans_fish_breeders_house = 1,
+      atlanteans_fishbreeders_house = 1,
       atlanteans_smokery = 2,
    }) do sleep(2789) end
    o.done = true
@@ -197,7 +197,7 @@ function check_for_ships()
          local bobs = f.bobs
          if #bobs then
             for idx, b in ipairs(bobs) do
-               if b.descr.type_name == "ship" then
+               if b.descr.type_name == "atlanteans_ship" then
                   nships = nships + 1
                end
             end

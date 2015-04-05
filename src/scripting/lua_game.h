@@ -65,6 +65,7 @@ public:
 	int get_defeated(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
+	int get_tribe(lua_State * L);
 	int set_team(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);

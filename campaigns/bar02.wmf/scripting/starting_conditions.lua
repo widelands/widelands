@@ -16,7 +16,7 @@ hq = p1:place_building("barbarians_headquarters", wl.Game().map:get_field(52, 33
 hq:set_wares{
    ax = 1,
    blackwood = 32,
-   bread_barbarians = 8,
+   barbarians_bread = 8,
    bread_paddle = 2,
    coal = 12,
    felling_ax = 5,

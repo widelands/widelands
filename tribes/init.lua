@@ -14,6 +14,43 @@ set_textdomain("tribes")
 
 tribes = wl.Tribes()
 
+
+-- Adds 6 animations for each walking direction into 'table'. The pictures are
+-- searched for in 'dirname'. All files should look like this
+-- 'basename'_(e|ne|se|sw|w|nw)_\d+.png.
+-- 'hotspot' is the hotspot for blitting.
+-- 'animationname' is the name of the animation, e.g. "walkload"
+-- 'fps' are the frames per second. Only use this if the animation has more than 1 frame.
+function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
+	if (fps ~= nil) then
+		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+			table[animationname .. "_" .. dir] = {
+				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				hotspot = hotspot,
+				fps = fps,
+			}
+		end
+	else
+		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+			table[animationname .. "_" .. dir] = {
+				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				hotspot = hotspot,
+			}
+		end
+   end
+end
+
+
+-- ===================================
+--    Ships
+-- ===================================
+
+print("Loading Ships")
+include "tribes/ships/atlanteans/init.lua"
+include "tribes/ships/barbarians/init.lua"
+include "tribes/ships/empire/init.lua"
+
+
 -- ===================================
 --    Wares
 -- ===================================
@@ -155,30 +192,6 @@ include "tribes/immovables/shipconstruction_empire/init.lua"
 --    Workers, Carriers & Soldiers
 -- ===================================
 
--- Adds 6 animations for each walking direction into 'table'. The pictures are
--- searched for in 'dirname'. All files should look like this
--- 'basename'_(e|ne|se|sw|w|nw)_\d+.png.
--- 'hotspot' is the hotspot for blitting.
--- 'animationname' is the name of the animation, e.g. "walkload"
--- 'fps' are the frames per second. Only use this if the animation has more than 1 frame.
-function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
-	if (fps ~= nil) then
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
-				hotspot = hotspot,
-				fps = fps,
-			}
-		end
-	else
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
-				hotspot = hotspot,
-			}
-		end
-   end
-end
 
 print("Loading Workers")
 include "tribes/workers/atlanteans/carrier/init.lua"
@@ -274,16 +287,6 @@ include "tribes/workers/empire/trainer/init.lua"
 include "tribes/workers/empire/vinefarmer/init.lua"
 include "tribes/workers/empire/weaponsmith/init.lua"
 include "tribes/workers/empire/weaver/init.lua"
-
-
--- ===================================
---    Ships
--- ===================================
-
-print("Loading Ships")
-include "tribes/ships/ship_atlanteans/init.lua"
-include "tribes/ships/ship_barbarians/init.lua"
-include "tribes/ships/ship_empire/init.lua"
 
 
 -- ===================================

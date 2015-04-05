@@ -110,6 +110,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 	PROP_RO(LuaPlayer, defeated),
 	PROP_RO(LuaPlayer, inbox),
 	PROP_RW(LuaPlayer, team),
+	PROP_RO(LuaPlayer, tribe),
 	PROP_RW(LuaPlayer, see_all),
 	{nullptr, nullptr, nullptr},
 };
@@ -229,6 +230,18 @@ int LuaPlayer::get_team(lua_State * L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
 	return 1;
 }
+
+/* RST
+	.. attribute:: tribe
+
+		Returns the player's tribe.
+
+		(RO) The :class:`~wl.Game.Tribe_description` for this player.
+*/
+int LuaPlayer::get_tribe(lua_State * L) {
+	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(&get(L, get_egbase(L)).tribe()));
+}
+
 
 
 /* RST

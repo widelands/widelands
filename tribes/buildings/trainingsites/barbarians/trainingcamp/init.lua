@@ -61,7 +61,7 @@ tribes:new_trainingsite_type {
 	},
 
 	inputs = {
-		bread_barbarians = 10,
+		barbarians_bread = 10,
 		fish = 6,
 		meat = 6,
 		ax_sharp = 2,
@@ -82,7 +82,7 @@ tribes:new_trainingsite_type {
 		max_level = 4,
 		food = {
 			{"fish", "meat"},
-			{"bread_barbarians"}
+			{"barbarians_bread"}
 		},
 		weapons = {
 			"ax_sharp",
@@ -97,7 +97,7 @@ tribes:new_trainingsite_type {
 		max_level = 2,
 		food = {
 			{"fish", "meat"},
-			{"bread_barbarians"}
+			{"barbarians_bread"}
 		},
 		weapons = {
 			"helmet",
@@ -122,7 +122,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
 				"sleep=30000",
 				"check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
-				"consume=ax_sharp fish,meat bread_barbarians",
+				"consume=ax_sharp fish,meat barbarians_bread",
 				"train=soldier attack 0 1"
 			}
 		},
@@ -133,7 +133,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 1",
 				"sleep=30000",
 				"check_soldier=soldier attack 1",
-				"consume=ax_broad fish,meat bread_barbarians",
+				"consume=ax_broad fish,meat barbarians_bread",
 				"train=soldier attack 1 2"
 			}
 		},
@@ -144,7 +144,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 2",
 				"sleep=30000",
 				"check_soldier=soldier attack 2",
-				"consume=ax_bronze fish,meat bread_barbarians",
+				"consume=ax_bronze fish,meat barbarians_bread",
 				"train=soldier attack 2 3"
 			}
 		},
@@ -155,7 +155,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 3",
 				"sleep=30000",
 				"check_soldier=soldier attack 3",
-				"consume=ax_battle fish,meat:2 bread_barbarians",
+				"consume=ax_battle fish,meat:2 barbarians_bread",
 				"train=soldier attack 3 4"
 			}
 		},
@@ -166,7 +166,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier attack 4",
 				"sleep=30000",
 				"check_soldier=soldier attack 4",
-				"consume=ax_warriors fish,meat bread_barbarians:2",
+				"consume=ax_warriors fish,meat barbarians_bread:2",
 				"train=soldier attack 4 5"
 			}
 		},
@@ -177,7 +177,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 0",
 				"sleep=30000",
 				"check_soldier=soldier hp 0",
-				"consume=helmet bread_barbarians,fish,meat",
+				"consume=helmet barbarians_bread,fish,meat",
 				"train=soldier hp 0 1"
 			}
 		},
@@ -188,7 +188,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 1",
 				"sleep=30000",
 				"check_soldier=soldier hp 1",
-				"consume=helmet_mask fish,meat bread_barbarians",
+				"consume=helmet_mask fish,meat barbarians_bread",
 				"train=soldier hp 1 2"
 			}
 		},
@@ -199,7 +199,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier hp 2",
 				"sleep=30000",
 				"check_soldier=soldier hp 2",
-				"consume=helmet_warhelm fish,meat:2 bread_barbarians",
+				"consume=helmet_warhelm fish,meat:2 barbarians_bread",
 				"train=soldier hp 2 3"
 			}
 		},

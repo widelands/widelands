@@ -45,7 +45,7 @@ tribes:new_tribe {
 			 "meat",
 			 "water",
 			 "wheat",
-			 "bread_barbarians",
+			 "barbarians_bread",
 			 "beer",
 			 "stout",
 			 "ration",
@@ -164,7 +164,7 @@ tribes:new_tribe {
 		"resi_water",
 		"resi_stones1",
 		"resi_stones2",
-		"shipconstruction_barbarians",
+		"barbarians_shipconstruction",
 	},
 
 	-- The order here also determines the order in lists on screen.
@@ -242,7 +242,7 @@ tribes:new_tribe {
 	carrier2 = "barbarians_ox",
 	geologist = "barbarians_geologist",
 	soldier = "barbarians_soldier",
-	ship = "ship_barbarians",
+	ship = "barbarians_ship",
 	headquarters = "barbarians_headquarters",
 	port = "barbarians_port",
 }

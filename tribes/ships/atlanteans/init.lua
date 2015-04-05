@@ -15,7 +15,7 @@ animations = {
 add_worker_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
 
 tribes:new_ship_type {
-   name = "ship_atlanteans",
+   name = "atlanteans_ship",
    -- TRANSLATORS: This is the ship's name used in lists of units
    descname = _"Ship",
    capacity = 30,

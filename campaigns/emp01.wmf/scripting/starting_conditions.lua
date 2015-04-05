@@ -7,7 +7,7 @@ hq = p1:place_building("empire_headquarters_shipwreck",
    wl.Game().map:get_field(6, 62), false, true)
 hq:set_wares {
    basket = 1,
-   bread_empire = 8,
+   empire_bread = 8,
    bread_paddle = 2,
    cloth = 5,
    coal = 12,
@@ -20,7 +20,7 @@ hq:set_wares {
    granite = 40,
    grape = 4,
    hammer = 12,
-   helmet = 4,
+   armor_helmet = 4,
    hunting_spear = 2,
    iron = 12,
    iron_ore = 5,
