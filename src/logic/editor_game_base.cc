@@ -131,6 +131,9 @@ const Tribes& EditorGameBase::tribes() const {
 
 Tribes* EditorGameBase::mutable_tribes() {
 	if (!tribes_) {
+		// We need to make sure that the world is loaded first for some attribute checks in the worker programs.
+		world();
+
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.

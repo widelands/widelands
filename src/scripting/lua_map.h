@@ -115,8 +115,13 @@ public:
 	 */
 	int get_buildings(lua_State *);
 	int get_carrier(lua_State *);
+	int get_carrier2(lua_State *);
 	int get_descname(lua_State *);
+	int get_headquarters(lua_State *);
+	int get_geologist(lua_State *);
 	int get_name(lua_State *);
+	int get_port(lua_State *);
+	int get_ship(lua_State *);
 	int get_soldier(lua_State *);
 	int get_wares(lua_State *);
 	int get_workers(lua_State *);

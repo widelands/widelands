@@ -57,7 +57,8 @@ TribeDescr::TribeDescr
 {
 	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
 	// e.g. Barbarians have no wheat.
-	// Imperal sheep farms get no wheat - the farm reports out of fields, although it has plenty!.
+	// Carrier walk_load animation is empty
+	// NOCOM grep for sc00_headquarters.lua -> headquarters.lua
 
 	try {
 		m_initializations = info.initializations;
@@ -67,22 +68,22 @@ TribeDescr::TribeDescr
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
-		std::vector<std::string> roads = items_table->get_table("busy")->array_entries<std::string>();
-		for (const std::string& filename : roads) {
-			if (g_fs->file_exists(filename)) {
-				busy_road_paths_.push_back(filename);
-			} else {
-				throw GameDataError("File '%s' for busy road texture doesn't exist", filename.c_str());
+		const auto load_roads = [&items_table, this](
+			const std::string& road_type, std::vector<std::string>* images) {
+			std::vector<std::string> roads = items_table->get_table(road_type)->array_entries<std::string>();
+			for (const std::string& filename : roads) {
+				if (g_fs->file_exists(filename)) {
+					images->push_back(filename);
+				} else {
+					throw GameDataError("File '%s' for %s road texture doesn't exist", filename.c_str(), road_type.c_str());
+				}
 			}
-		}
-		roads = items_table->get_table("normal")->array_entries<std::string>();
-		for (const std::string& filename : roads) {
-			if (g_fs->file_exists(filename)) {
-				normal_road_paths_.push_back(filename);
-			} else {
-				throw GameDataError("File '%s' for normal road texture doesn't exist", filename.c_str());
+			if (images->empty()) {
+				throw GameDataError("Tribe has no %s roads.", road_type.c_str());
 			}
-		}
+		};
+		load_roads("normal", &normal_road_paths_);
+		load_roads("busy", &busy_road_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(egbase_.tribes().nrwares());
@@ -108,7 +109,6 @@ TribeDescr::TribeDescr
 				++columnindex;
 			}
 		}
-
 
 		items_table = table.get_table("workers_order");
 		workers_order_coords_.resize(egbase_.tribes().nrworkers());
@@ -198,36 +198,6 @@ TribeDescr::TribeDescr
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
 }
-
-			/* NOCOM
-				Section road_s = root_conf.get_safe_section("roads");
-				const auto load_roads = [&road_s, this](
-					const std::string& prefix, std::vector<std::string>* images) {
-					for (int i = 0; i < 99; ++i) {
-						const char* img =
-							road_s.get_string((boost::format("%s_%02i") % prefix % i).str().c_str(), nullptr);
-						if (img == nullptr) {
-							break;
-						}
-						if (!g_fs->file_exists(img)) {
-							throw new GameDataError("File %s for roadtype %s in tribe %s does not exist",
-															img,
-															prefix.c_str(),
-															m_name.c_str());
-						}
-						images->emplace_back(img);
-					}
-					if (images->empty()) {
-						throw new GameDataError(
-							"No %s roads defined in tribe %s.", prefix.c_str(), m_name.c_str());
-					}
-				};
-				load_roads("normal", &m_normal_road_paths);
-				load_roads("busy", &m_busy_road_paths);
-			}
-			 */
-
-// NOCOM(GunChleoc): New, fix up!
 
 
 /**
@@ -371,6 +341,7 @@ uint32_t TribeDescr::get_resource_indicator
 {
 	if (!res || !amount) {
 		int32_t idx = immovable_index("resi_none");
+		// NOCOM(GunChleoc): use has_immovable
 		if (idx == -1)
 			throw GameDataError
 				("tribe %s does not declare a resource indicator resi_none!",
@@ -382,6 +353,7 @@ uint32_t TribeDescr::get_resource_indicator
 	int32_t num_indicators = 0;
 	for (;;) {
 		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
+		// NOCOM(GunChleoc): use has_immovable
 		if (immovable_index(resi_filename) == -1)
 			break;
 		++i;

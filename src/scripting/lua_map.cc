@@ -1041,7 +1041,7 @@ int LuaMap::recalculate(lua_State * L) {
 /* RST
 TribeDescription
 --------------------
-
+NOCOM(GunChleoc) write tests
 .. class:: TribeDescription
 
 	A static description of a tribe.
@@ -1057,8 +1057,13 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
 	PROP_RO(LuaTribeDescription, buildings),
 	PROP_RO(LuaTribeDescription, carrier),
+	PROP_RO(LuaTribeDescription, carrier2),
 	PROP_RO(LuaTribeDescription, descname),
+	PROP_RO(LuaTribeDescription, geologist),
+	PROP_RO(LuaTribeDescription, headquarters),
 	PROP_RO(LuaTribeDescription, name),
+	PROP_RO(LuaTribeDescription, port),
+	PROP_RO(LuaTribeDescription, ship),
 	PROP_RO(LuaTribeDescription, soldier),
 	PROP_RO(LuaTribeDescription, wares),
 	PROP_RO(LuaTribeDescription, workers),
@@ -1108,6 +1113,18 @@ int LuaTribeDescription::get_carrier(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: carrier2
+
+			(RO) the :class:`string` internal name of the carrier2 type that this tribe uses.
+				  e.g. 'atlanteans_horse'
+*/
+
+int LuaTribeDescription::get_carrier2(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier2())->name());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: descname
@@ -1120,6 +1137,27 @@ int LuaTribeDescription::get_descname(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: geologist
+
+			(RO) the :class:`string` internal name of the geologist type that this tribe uses
+*/
+
+int LuaTribeDescription::get_geologist(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->geologist())->name());
+	return 1;
+}
+
+/* RST
+	.. attribute:: headquarters
+
+			(RO) the :class:`string` internal name of the default headquarters type that this tribe uses
+*/
+
+int LuaTribeDescription::get_headquarters(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
+	return 1;
+}
 
 /* RST
 	.. attribute:: name
@@ -1131,6 +1169,31 @@ int LuaTribeDescription::get_name(lua_State * L) {
 	lua_pushstring(L, get()->name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: port
+
+			(RO) the :class:`string` internal name of the port type that this tribe uses
+*/
+
+int LuaTribeDescription::get_port(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->port())->name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: ship
+
+			(RO) the :class:`string` internal name of the ship type that this tribe uses
+*/
+
+int LuaTribeDescription::get_ship(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_ship_descr(get()->ship())->name());
+	return 1;
+}
+
+
 
 /* RST
 	.. attribute:: soldier
