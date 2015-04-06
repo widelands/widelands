@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-22 12:24+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-26 18:05+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -194,37 +194,37 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr ""
+msgstr "Da Saledus og jeg gik igennem disse vidunderlige skove i nord følte vi, at vores fremtid var begyndt. Dette land er så fredeligt og smukt, at jeg kunne blive her resten af livet."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
 "But until that day, may many years pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Men indtil den dag, kan mange år passere! For nu må vi koncentrere os om det nuværende, og opbygge et par skovhuggerhuse og et savværk for at fremstille nogle grundlæggende byggematerialer."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But we shouldn’t forget to preserve this natural bounty. These forests "
 "should last forever, so we really should build a forester’s house too."
-msgstr ""
+msgstr "Men vil skal ikke glemme at bevare denne naturlige skat. Disse skove bør holde for evigt, så vi bør også bygge et skovfogedhus."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
-msgstr ""
+msgstr "Stenene"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:131
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stone for our larger buildings."
-msgstr ""
+msgstr "Senere gik jeg ned mod stenene i syd og kiggede efter et sted, hvor vi kunne bygge et stenbrud til sten for vores større bygninger."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr ""
+msgstr "Igen følte jeg, at jeg var i paradis, da jeg bemærkede nogle marmorlignende sten blandt klipperne. Det ser ud til, at vi snart vil kunne bygge stærke, luksuøse bygninger, ligesom dem vi var vandt til i Fremil."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
@@ -234,7 +234,7 @@ msgstr "Træ for kolonien"
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr ""
+msgstr "Gode nyheder! I dag blev vores træøkonomi færdig. Nu er vi sikre på, at vi har nok træ til vores fremtidige byggeprojekter."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
@@ -244,11 +244,11 @@ msgstr "Sten for kolonien"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
-msgstr ""
+msgstr "Glimrende! I dag blev bygningen af stenbruddet færdig. Nu har vi nok sten til at konstruere større bygninger."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:152
 msgid "Dangerous Ship Parts"
-msgstr ""
+msgstr "Farlige skibsdele"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:154
 msgid "Saledus looks unhappy"

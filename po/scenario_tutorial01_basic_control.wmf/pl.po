@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-14 11:01+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-04-01 16:04+0000\n"
 "Last-Translator: Igor Kotrasiński <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -256,29 +256,29 @@ msgstr "Podzieliłeś właśnie drogę na dwie części, każdą z własnym trag
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "Teraz pozostaje nam tylko poczekać, aż chata zostanie zbudowana."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
-msgstr ""
+msgstr "Plac budowy"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
-msgstr ""
+msgstr "Sprawdźmy postępy"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
 "If you click on the construction site, a window opens. You can see the wares"
 " that are still missing grayed out. You can also see the progress of this "
 "construction site."
-msgstr ""
+msgstr "Kliknięcie na placu budowy przywołuje okno. Możesz na nim sprawdzić postęp prac oraz potrzebne towary - te jeszcze niedostarczone oznaczone są na szaro."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid ""
 "To close the window, simply right-click on it. All windows in Widelands can "
 "be closed that way, except the ones with instructions, like this one. Try it"
 " out!"
-msgstr ""
+msgstr "Aby zamknąć okno, kliknij na nim prawym przyciskiem myszy. Każde okno w Widelands może być w ten sposób zamknięte, pomijając okna z instrukcjami takie, jak to. Spróbuj sam!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
@@ -289,15 +289,15 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the raw stone."
-msgstr ""
+msgstr "Doskonale, chata drwala została zbudowana. Wprowadzi się teraz do niej drwal i zacznie ścinać drzewa, więc o kłody nie musimy się na razie martwić. Zajmijmy się teraz kamieniem."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Znaleziono skały"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "Konstrukcja kamieniołomu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -305,13 +305,13 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Kamienie można wydobywać w kopalniach granitu, lecz zdecydowanie prościej jest zbudować kamieniołom w pobliżu byle skupiska skał. Tak się składa, że takie skupisko możesz znaleźć na zachód (na lewo) od kwatery głównej. Pokażę ci, jak przesunąć tam widok."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr ""
+msgstr "Widok można przesuwać na trzy sposoby. Pierwszy to użycie strzałek na klawiaturze. Wypróbuj tę metodę."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
