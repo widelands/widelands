@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-18 08:15+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-30 21:45+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -425,17 +425,17 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:224
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "En person kommer til dig"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:225
 msgid "An old man says…"
-msgstr ""
+msgstr "En gammel mand siger ..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:226
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "Hil dig, kaptajn. Jeg er Khantrukh og jeg har levet igennem mange vintre. Lad mig hjælpe dig med råd igennem disse mørke tider."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:228
 msgid ""

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Ivan Bižaca <biza@malilosinj.info>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-06 16:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-04-04 13:57+0000\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,15 +19,15 @@ msgstr ""
 
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "README"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "strateška igra otvorenog koda"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme:7
 msgid "Introduction"
-msgstr ""
+msgstr "Uvod"
 
 #: ../../txts/README.lua:19
 msgid ""
@@ -34,7 +35,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr ""
+msgstr "Widelands je strateška igra u realnom vremenu. Otvorenog je koda i samim time \nbesplatna za igranje. Inspirirana je Setlersima II, ali je s godinama unapređivanja\nprestigla original u svim pogledima. Ipak i dalje je jednostavna za početnike\nzbog ugrađenih vodiča."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -43,21 +44,21 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "Igru započinjete kao malen zaseok s oskudnim resursima. S njima širite svoje \ngranice i stvarate carstvo. Da bi to postigli morate stvoriti ekonomiju, istražiti \nzemlju i suočiti se s neprijateljskim plemenima."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Pogledajte službene stranice projekta Widelands:"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands je licenciran pod GNU General Public License (GPL). Za više informacija\npogledajte datoteku ‘COPYING’."
 
 #: ../../txts/README.lua:37
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../txts/README.lua:39
 msgid ""
@@ -66,7 +67,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands je skoro gotova igra, jako je zabavna za igranje protiv kompjutera, kao\ni u mrežnom načinu protiv ljudi. Međutim, još uvijek ima puno posla koje se mora\nodraditi. Ako možete pomoći u prijevodu, izradi grafike, ispravkama grešaka ili\nu bilo čemu drugome molimo da nas posjetite na našoj web stranici."
 
 #: ../../txts/README.lua:45
 msgid "General game control"

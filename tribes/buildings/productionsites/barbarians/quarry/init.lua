@@ -58,6 +58,16 @@ tribes:new_productionsite_type {
 
 	programs = {
 		work = {
+			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
+			descname = _"working",
+			actions = {
+			  -- This order is on purpose so that the productivity
+			  -- drops fast once all rocks are gone.
+				"call=mine_stone",
+				"return=skipped"
+			},
+		},
+		mine_stone = {
 			-- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 			descname = _"quarrying granite",
 			actions = {

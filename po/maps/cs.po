@@ -4,12 +4,13 @@
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
+# Matej Svrcek <mmatej@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-25 08:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Od Nemesis po Genesis"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -30,17 +31,17 @@ msgstr "Po přistání na tajemném ostrově blízko Atlantidy se zbývající A
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Domove, sladký domove"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "V tomto scénáři si představíme pokročilé výrobní stavby včetně těžby surovin."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Tato země je naše země"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -50,15 +51,15 @@ msgstr "Tento trénink vysvětlí práci s vojenskými a tréninkovými budovami
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Druhé impérium"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbaři"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Snadný. Přestavuje Barbary"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -79,15 +80,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Měsíce v exilu"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Impérium"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Snadný. Přestavuje Impérium"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -105,15 +106,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Boj o oheň"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanťané"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Náročnější. Přestavuje Atlanťany"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -126,7 +127,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Úbočí Malac' Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -139,7 +140,7 @@ msgstr "Ještě nezavedeno"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Nikdo"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
@@ -165,18 +166,18 @@ msgstr "Konečně byla loď opravena, tak se Lutius i se svým lidem opět vydal
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Základní ovládání"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "V tomto tutoriálu se naučíš ovládat Widelands a stavět budovy a cesty"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Válečnictví"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -187,24 +188,24 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Námořní plavba"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "V tomto tutoriálu se seznámíš s námořní plavbou a jak ovládat lodě a přístavy."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Hospodářství"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "V tomto tutoriálu se seznámíš s volbami Widelands pro úpravu hospodářství. Doporučeno pro hráče s určitou zkušeností."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -481,12 +482,12 @@ msgstr "Speciální turnaj v atlantské kultuře je takzvaný \"Island Hopping\"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Pašeráci"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
 msgstr ""
 
@@ -628,12 +629,12 @@ msgstr "Obleva"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "Začíná další obleva. Zatímco řádila krutá zima, zůstávaly tři kmeny ve svých úkrytech v mohutných horách. Za slunovratu uposlechli bojovníci věštce a vydali se do války. Pouze ten, kdo přežije, bude moci obětovat na prastarém oltáři poklady svých nepřátel, postavit velkolepý hrad a vydobýt si tak uznání a přízeň bohů."
+msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
@@ -717,7 +718,7 @@ msgstr "Navrhované týmy: červený vs. zelený | (modrý, žlutý) vs. (zelen�
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Dvojtá laguna"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""

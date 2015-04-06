@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 FILE=cppcheck_report.html
 echo "<!doctype html>"                                                                 >  $FILE
 echo "<html>"                                                                          >> $FILE
@@ -8,7 +8,9 @@ echo "<h2>Issues found by "                                                     
 cppcheck --version                                                                     >> $FILE
 echo "</h2>"                                                                           >> $FILE
 echo "<div>"                                                                           >> $FILE
-cppcheck --force --quiet --verbose --enable=all -I src src 2>&1 | sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://bazaar.launchpad.net/%7Ewidelands-dev/widelands/trunk/annotate/head%3A/\1\?#L\2\">\1:\2</a>: \3<br/>@" >> $FILE
+cppcheck --force --quiet --verbose --enable=all -I src src 2>&1 \
+| grep -v "was not checked because its code equals another one" \
+| sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://bazaar.launchpad.net/%7Ewidelands-dev/widelands/trunk/annotate/head%3A/\1\?#L\2\">\1:\2</a>: \3<br/>@" >> $FILE
 echo "</div>"                                                                          >> $FILE
 echo "</body>"                                                                         >> $FILE
 echo "</html>"                                                                         >> $FILE
