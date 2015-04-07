@@ -23,6 +23,7 @@
 #include <list>
 #include <unordered_set>
 
+#include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/checkstep.h"
@@ -40,7 +41,7 @@ namespace Widelands {
 class ProductionSite;
 class MilitarySite;
 
-enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse };
+enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -110,6 +111,22 @@ struct FindNodeUnowned {
 	}
 };
 
+// Sometimes we need to know how many nodes our allies owns
+struct FindNodeAllyOwned {
+	bool accept(const Map&, const FCoords& fc) const {
+		return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
+		       (fc.field->get_owned_by() != pn) &&
+		       !player_->is_hostile(*game.get_player(fc.field->get_owned_by()));
+	}
+
+	Player* player_;
+	Game& game;
+	PlayerNumber pn;
+
+	FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n) : player_(p), game(g), pn(n) {
+	}
+};
+
 // When looking for unowned terrain to acquire, we must
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
@@ -148,8 +165,9 @@ struct FindNodeWater {
 
 	bool accept(const Map& /* map */, const FCoords& coord) const {
 		return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
-				  TerrainDescription::Type::kWater) ||
-				 (world_.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::Type::kWater);
+		        TerrainDescription::Type::kWater) ||
+		       (world_.terrain_descr(coord.field->terrain_r()).get_is() &
+		        TerrainDescription::Type::kWater);
 	}
 
 private:
@@ -213,7 +231,7 @@ struct BlockedField {
 struct BuildableField {
 	Widelands::FCoords coords;
 
-	uint32_t next_update_due_;
+	uint32_t field_info_expiration_;
 
 	bool preferred_;
 	bool enemy_nearby_;
@@ -232,7 +250,7 @@ struct BuildableField {
 	uint8_t space_consumers_nearby_;
 	// to manage the military better following variables exists:
 	// capacity of nearby buildings:
-	int16_t military_capacity_;
+	int16_t area_military_capacity_;
 	// distance to near buldings:
 	int16_t military_loneliness_;
 	// count of military buildings in construction
@@ -241,7 +259,7 @@ struct BuildableField {
 	// are construction sites that will change this once they are built
 	int16_t military_in_constr_nearby_;
 	// actual count of soldiers in nearby buldings
-	int16_t military_presence_;
+	int16_t area_military_presence_;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed_;
 	// stationed (manned) military buildings nearby
@@ -256,7 +274,7 @@ struct BuildableField {
 
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
-	     next_update_due_(0),
+	     field_info_expiration_(20000),
 	     preferred_(false),
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
@@ -277,10 +295,10 @@ struct BuildableField {
 	     critters_nearby_(-1),
 	     ground_water_(1),
 	     space_consumers_nearby_(0),
-	     military_capacity_(0),
+	     area_military_capacity_(0),
 	     military_loneliness_(1000),
 	     military_in_constr_nearby_(0),
-	     military_presence_(0),
+	     area_military_presence_(0),
 	     military_stationed_(0),
 	     military_unstationed_(0),
 	     is_portspace_(false),
@@ -292,7 +310,7 @@ struct BuildableField {
 struct MineableField {
 	Widelands::FCoords coords;
 
-	uint32_t next_update_due_;
+	uint32_t field_info_expiration_;
 
 	bool preferred_;
 
@@ -302,7 +320,7 @@ struct MineableField {
 
 	MineableField(const Widelands::FCoords& fc)
 	   : coords(fc),
-	     next_update_due_(0),
+	     field_info_expiration_(20000),
 	     preferred_(false),
 	     mines_nearby_(0),
 	     same_mine_fields_nearby_(0) {
@@ -346,14 +364,16 @@ struct BuildingObserver {
 	bool is_fisher_;    // need to identify fishers
 	bool is_port_;
 	bool is_shipyard_;
-	bool space_consumer_;      // farm, vineyard... = true
-	bool expansion_type_;      // military building used that can be used to control area
-	bool fighting_type_;       // military building built near enemies
-	bool mountain_conqueror_;  // military building built near mountains
+	bool space_consumer_;       // farm, vineyard... = true
+	bool expansion_type_;       // military building used that can be used to control area
+	bool fighting_type_;        // military building built near enemies
+	bool mountain_conqueror_;   // military building built near mountains
 	uint32_t prohibited_till_;  // do not build before (ms)
 	uint32_t forced_after_;     // do not wait until ware is needed
+	TrainingSiteType trainingsite_type_;
 
-	bool unoccupied_;  //
+	bool unoccupied_;
+	uint16_t unconnected_;  // to any warehouse (count of such buildings)
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
@@ -427,6 +447,46 @@ struct WareObserver {
 	uint8_t producers_;
 	uint8_t consumers_;
 	uint8_t preciousness_;
+};
+
+//Computer player does not get notification messages about enemy militarysites
+//and warehouses, so following is collected based on observation
+//It is conventient to have some information preserved, like nearby minefields,
+//when it was attacked, whether it is warehouse and so on
+//Also AI test more such targets when considering attack and calculated score is
+//is stored in the observer
+struct EnemySiteObserver {
+	bool warehouse_;
+	uint8_t attack_soldiers;
+	uint8_t defenders;
+	uint8_t stationed_soldiers;
+	uint32_t last_time_attackable;
+	uint32_t last_tested;
+	int16_t score;
+	bool warehouse;
+	Widelands::ExtendedBool mines_nearby;
+	int16_t no_attack_counter;
+
+	EnemySiteObserver()
+	   : warehouse_(false),
+	     attack_soldiers(0),
+	     stationed_soldiers(0),
+	     last_time_attackable(std::numeric_limits<uint32_t>::max()),
+	     last_tested(0),
+	     score(0),
+	     mines_nearby(Widelands::ExtendedBool::kUnset),
+	     no_attack_counter(0) {
+	}
+};
+
+// as all mines have 3 levels, AI does not know total count of mines per mined material
+// so this observer will be used for this
+struct MineTypesObserver {
+	uint16_t in_construction;
+	uint16_t finished;
+
+	MineTypesObserver() : in_construction(0), finished(0) {
+	}
 };
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

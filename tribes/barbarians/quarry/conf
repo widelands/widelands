@@ -15,12 +15,18 @@ log=2
 stonemason=1
 
 [programs]
+# TRANSLATORS: "Completed/Skipped/Did not start quarrying stone because ...
+mine_stone=_quarrying stone
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
+[mine_stone]
+worker=cut  # This order is on purpose so that the productivity
+sleep=25000       # drops fast once all stones are gone.
+
 [work]
-worker=cut   # This order is on purpose so that the productivity
-sleep=25000  # drops fast once all stones are gone.
+call=mine_stone
+return=skipped
 
 [out_of_resource_notification]
 title=_Out of Rocks

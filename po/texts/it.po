@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-04 16:10+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-24 17:05+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -565,8 +565,8 @@ msgid "Licensing information for Widelands"
 msgstr "Informazioni sulla licenza per Widelands"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2014 della Squadra di sviluppo di Widelands."
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2015 del team di sviluppo di Widelands."
 
 #: ../../txts/license:9
 msgid ""
