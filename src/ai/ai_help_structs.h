@@ -418,7 +418,7 @@ struct ShipObserver {
 
 	// a ship circumvents all islands in the same direction, the value
 	// is assigned only once
-	Widelands::ScoutingDirection island_circ_direction = Widelands::ScoutingDirection::kClockwise;
+	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
 	int32_t last_command_time = 0;
 };

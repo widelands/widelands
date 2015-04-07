@@ -3350,8 +3350,8 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, last_portdock),
 	PROP_RO(LuaShip, destination),
 	PROP_RO(LuaShip, status),
-	PROP_RW(LuaShip, scout_direction),
-	PROP_RW(LuaShip, island_scout_direction),
+	PROP_RW(LuaShip, scouting_direction),
+	PROP_RW(LuaShip, island_explore_direction),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3403,28 +3403,27 @@ int LuaShip::get_status(lua_State* L) {
 	return 1;
 }
 
-int LuaShip::get_scout_direction(lua_State* L) {
+int LuaShip::get_scouting_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 	if (upcast(Game, game, &get_egbase(L))) {
-		const uint8_t dir = ship->get_scout_direction();
-		switch (dir) {
-			case 1:
+		switch (ship->get_scouting_direction()) {
+			case WalkingDir::WALK_NE:
 				lua_pushstring(L, "ne");
 				break;
-			case 2:
+			case WalkingDir::WALK_E:
 				lua_pushstring(L, "e");
 				break;
-			case 3:
+			case WalkingDir::WALK_SE:
 				lua_pushstring(L, "se");
 				break;
-			case 4:
+			case WalkingDir::WALK_SW:
 				lua_pushstring(L, "sw");
 				break;
-			case 5:
+			case WalkingDir::WALK_W:
 				lua_pushstring(L, "w");
 				break;
-			case 6:
+			case WalkingDir::WALK_NW:
 				lua_pushstring(L, "nw");
 				break;
 			default:
@@ -3435,31 +3434,30 @@ int LuaShip::get_scout_direction(lua_State* L) {
 	return 0;
 }
 
-int LuaShip::set_scout_direction(lua_State* L) {
+int LuaShip::set_scouting_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 
 	if (upcast(Game, game, &get_egbase(L))) {
-		std::string dir = luaL_checkstring(L,3);
-		uint8_t dir_int=255;
-		
-		if ( dir == "ne") {
-			dir_int = 1;
-		}else if (dir == "e") {
-			dir_int = 2;
-		}else if (dir == "se") {			
-			dir_int = 3;
-		}else if (dir == "sw") {
-			dir_int = 4;
-		}else if (dir == "w") {
-			dir_int = 5;
-		}else if (dir == "nw") {
-			dir_int = 6;
+		std::string dirname = luaL_checkstring(L, 3);
+		WalkingDir dir = WalkingDir::IDLE;
+
+		if (dirname == "ne") {
+			dir = WalkingDir::WALK_NE;
+		} else if (dirname == "e") {
+			dir = WalkingDir::WALK_E;
+		} else if (dirname == "se") {
+			dir = WalkingDir::WALK_SE;
+		} else if (dirname == "sw") {
+			dir = WalkingDir::WALK_SW;
+		} else if (dirname == "w") {
+			dir = WalkingDir::WALK_W;
+		} else if (dirname == "nw") {
+			dir = WalkingDir::WALK_NW;
 		} else {
 			return 0;
 		}
-		
-		 game->send_player_ship_scout_direction(*ship, dir_int);
+		game->send_player_ship_scouting_direction(*ship, dir);
 		return 1;
 	}
 	return 0;
@@ -3467,40 +3465,42 @@ int LuaShip::set_scout_direction(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: island_scout_direction
+	.. attribute:: island_explore_direction
 
 		(RW) actual direction if the ship sails around an island.
 		Sets/returns cw, ccw or nil
 
 */
 // UNTESTED
-int LuaShip::get_island_scout_direction(lua_State* L) {
+int LuaShip::get_island_explore_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 	if (upcast(Game, game, &get_egbase(L))) {
-		const uint8_t dir = ship->get_island_explore_direction();
-		if (dir == 0){
-			lua_pushstring(L, "ccw");
-		} else if (dir == 1) {
-			lua_pushstring(L, "cw");
-		} else {
-			return 0;
+		switch (ship->get_island_explore_direction()) {
+			case IslandExploreDirection::kCounterClockwise:
+				lua_pushstring(L, "ccw");
+				break;
+			case IslandExploreDirection::kClockwise:
+				lua_pushstring(L, "cw");
+				break;
+			default:
+				return 0;
 		}
 		return 1;
 	}
 	return 0;
 }
 
-int LuaShip::set_island_scout_direction(lua_State* L) {
+int LuaShip::set_island_explore_direction(lua_State* L) {
 
 	Ship* ship =  get(L, get_egbase(L));
 
 	if (upcast(Game, game, &get_egbase(L))) {
 		std::string dir = luaL_checkstring(L, 3);
 		if (dir == "ccw"){
-			 game->send_player_ship_explore_island(*ship,  ScoutingDirection::kCounterClockwise);
+			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
 		} else if (dir == "cw") {
-			 game->send_player_ship_explore_island(*ship, ScoutingDirection::kClockwise);
+			 game->send_player_ship_explore_island(*ship, IslandExploreDirection::kClockwise);
 		} else {
 			return 0;
 		}
@@ -3576,7 +3576,7 @@ int LuaShip::get_workers(lua_State* L) {
 */
 int LuaShip::build_colonization_port(lua_State* L) {
 	Ship* ship =  get(L, get_egbase(L));
-	if (ship->get_ship_state() ==  3) { // I would prefer here EXP_FOUNDPORTSPACE
+	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
 		if (upcast(Game, game, &get_egbase(L))) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
 			return 1;

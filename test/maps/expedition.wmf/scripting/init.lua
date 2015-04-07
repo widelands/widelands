@@ -192,9 +192,9 @@ function test_cancel_started_expedition_underway()
    game.desired_speed = 10 * 1000
    sleep(10000)
 
-   first_ship.island_scout_direction="ccw"
+   first_ship.island_explore_direction="ccw"
    sleep(2000)
-   assert_equal("ccw",first_ship.island_scout_direction)
+   assert_equal("ccw",first_ship.island_explore_direction)
    sleep(6000)
 
    stable_save("sailing")
@@ -223,9 +223,9 @@ function test_cancel_when_port_space_was_reached()
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 
-   first_ship.island_scout_direction="ccw"
+   first_ship.island_explore_direction="ccw"
    sleep(2000)
-   assert_equal("ccw",first_ship.island_scout_direction)
+   assert_equal("ccw",first_ship.island_explore_direction)
    wait_for_message("Port Space Found")
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
@@ -258,9 +258,9 @@ function test_transporting_works()
 
    port:start_expedition()
    wait_for_message("Expedition Ready")
-   first_ship.island_scout_direction="ccw"
+   first_ship.island_explore_direction="ccw"
    sleep(2000)
-   assert_equal("ccw",first_ship.island_scout_direction)
+   assert_equal("ccw",first_ship.island_explore_direction)
    wait_for_message("Port Space Found")
    first_ship:build_colonization_port()
    sleep(500)

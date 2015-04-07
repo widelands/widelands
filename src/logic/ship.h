@@ -38,9 +38,10 @@ struct Fleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
-enum class ScoutingDirection {
+enum class IslandExploreDirection {
 	kCounterClockwise = 0, // This comes first for savegame compatibility (used to be = 0)
-	kClockwise = 1
+	kClockwise = 1,
+	kNotSet
 };
 
 struct NoteShipMessage {
@@ -202,11 +203,11 @@ struct Ship : Bob {
 		return m_expedition->seen_port_buildspaces.get();
 	}
 
-	void exp_scout_direction(Game &, uint8_t);
+	void exp_scouting_direction(Game &, WalkingDir);
 	void exp_construct_port (Game &, const Coords&);
-	void exp_explore_island (Game &, ScoutingDirection);
-	uint8_t get_scout_direction();
-	uint8_t get_island_explore_direction();
+	void exp_explore_island (Game &, IslandExploreDirection);
+	WalkingDir get_scouting_direction();
+	IslandExploreDirection get_island_explore_direction();
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
@@ -244,9 +245,9 @@ private:
 		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
-		uint8_t direction;
+		WalkingDir scouting_direction;
 		Coords exploration_start;
-		ScoutingDirection scouting_direction;
+		IslandExploreDirection island_explore_direction;
 		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;

@@ -4,24 +4,24 @@ run(function()
 
 	port = map:get_field(16, 16).immovable
  	port:set_wares("log", 10) -- no sense to wait
-	port:set_wares("blackwood", 10) 
-	 
+	port:set_wares("blackwood", 10)
+
    	--getting table with all our ships (single one only)
    	ships = p1:get_ships()
 
 	--veryfing that ship is indeed placed where should be :)
 	assert_equal(10,ships[1].field.x)
 	assert_equal(10,ships[1].field.y)
-		 	
+
    	--ships table should contain 1 item (1 ship)
   	assert_equal(1, #ships)
 
   	--ship has no wares on it
   	assert_equal(0,ships[1]:get_wares())
-  	
+
   	--no destination is set
   	assert(not ships[1].destination)
- 
+
   	--ships in transport state (=0)
   	assert_equal(0,ships[1].status)
 
@@ -32,40 +32,40 @@ run(function()
 	assert(not port.expedition_in_progress)
    	port:start_expedition()
    	sleep (300)
-	assert(port.expedition_in_progress)   		
-   	
+	assert(port.expedition_in_progress)
+
 	--ships changes status when exp ready
    	while ships[1].status == 0 do sleep(2000) end
-   	
+
  	--sending NW and verifying
-   	ships[1].scout_direction="nw"
+   	ships[1].scouting_direction="nw"
    	sleep(6000)
-  	assert_equal("nw", ships[1].scout_direction)
-   	
-   	while ships[1].scout_direction == "nw" do
+  	assert_equal("nw", ships[1].scouting_direction)
+
+   	while ships[1].scouting_direction == "nw" do
    		sleep (2000)
    	end
 
 	--now ships stops nearby NW coast, so sending it back
-	ships[1].scout_direction="se"
+	ships[1].scouting_direction="se"
 	sleep(3000)
-	assert_equal("se", ships[1].scout_direction)
-	
+	assert_equal("se", ships[1].scouting_direction)
+
 	--waiting till it stops (no direction/nil is returned)
-	while ships[1].scout_direction do sleep(2000) end
-	
+	while ships[1].scouting_direction do sleep(2000) end
+
 	--sending to scout the island
-	ships[1].island_scout_direction="ccw";
-	sleep(3000)	
-	assert_equal("ccw", ships[1].island_scout_direction)
-	
+	ships[1].island_explore_direction="ccw";
+	sleep(3000)
+	assert_equal("ccw", ships[1].island_explore_direction)
+
 	--fine, now change the direction
-	ships[1].island_scout_direction="cw";
-	sleep(3000)	
-	assert_equal("cw", ships[1].island_scout_direction)
+	ships[1].island_explore_direction="cw";
+	sleep(3000)
+	assert_equal("cw", ships[1].island_explore_direction)
 
     -- wait till it finds a port
-    wait_for_message("Port Space Found")	
+    wait_for_message("Port Space Found")
 	--starting colonization port here
 	assert(ships[1]:build_colonization_port())
 	sleep(15000)
@@ -76,10 +76,10 @@ run(function()
 	assert(new_port)
 	new_port:remove()
 	sleep(3000)
-	
+
 	--yes, the ships is back in transport mode
 	assert(0,ships[1].status)
-	
+
 	print("# All Tests passed.")
    	wl.ui.MapView():close()
 
