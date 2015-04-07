@@ -3795,9 +3795,9 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	allships.push_back(ShipObserver());
 	allships.back().ship = &ship;
 	if (game().get_gametime() % 2 == 0) {
-		allships.back().island_circ_direction = ScoutingDirection::kClockwise;
+		allships.back().island_circ_direction = IslandExploreDirection::kClockwise;
 	} else {
-		allships.back().island_circ_direction = ScoutingDirection::kCounterClockwise;
+		allships.back().island_circ_direction = IslandExploreDirection::kCounterClockwise;
 	}
 }
 
@@ -4058,10 +4058,10 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			so.waiting_for_command_ = false;
 			;
 		} else {
-			// 2.B Yes, pick one of avaiable directions
+			// 2.B Yes, pick one of avaliable directions
 			const Direction final_direction =
 			   possible_directions.at(gametime % possible_directions.size());
-			game().send_player_ship_scout_direction(*so.ship, final_direction);
+			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(final_direction));
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 		}
