@@ -45,10 +45,6 @@
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
-
-//#include "scripting/luna_impl.h" //
-//#include "economy/portdock.h"
-
 using namespace Widelands;
 
 namespace LuaMaps {
@@ -2845,10 +2841,10 @@ int LuaWarehouse::get_portdock(lua_State * L) {
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 
-	Warehouse* Wh = get(L, get_egbase(L));
+	Warehouse* wh = get(L, get_egbase(L));
 
 	if (upcast(Game, game, &get_egbase(L))) {
-		PortDock* pd = Wh->get_portdock();
+		PortDock* pd = wh->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()){
 				return 1;

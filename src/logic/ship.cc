@@ -831,8 +831,6 @@ void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
 	m_expedition->island_exploration = false;
 }
 
-//Returns integer of direction, or WalkingDir::IDLE if query invalid
-//Intended for LUA scripting
 WalkingDir Ship::get_scouting_direction() {
 	if (m_expedition && m_ship_state == EXP_SCOUTING && !m_expedition->island_exploration) {
 		return m_expedition->scouting_direction;
@@ -859,8 +857,6 @@ void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direc
 	m_expedition->island_exploration = true;
 }
 
-//Returns integer of direction, or 255 if query invalid
-//Intended for LUA scripting
 IslandExploreDirection Ship::get_island_explore_direction() {
 	if (m_expedition && m_ship_state == EXP_SCOUTING && m_expedition->island_exploration) {
 		return m_expedition->island_explore_direction;
