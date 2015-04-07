@@ -643,7 +643,6 @@ int LuaPlayer::reveal_campaign(lua_State * L) {
 		:returns: array of player's ships
 		:rtype: :class:`array` or :class:`table`
 */
-
 int LuaPlayer::get_ships(lua_State * L) {
 	EditorGameBase & egbase = get_egbase(L);
 	Map * map = egbase.get_map();
