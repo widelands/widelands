@@ -117,10 +117,10 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-		   	if (note.player != player_) {
+			if (note.player != player_) {
 			   return;
 		   }
-		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
@@ -350,9 +350,10 @@ void DefaultAI::late_initialization() {
 
 	// collect information about the different buildings our tribe can construct
 	const World& world = game().world();
-
-	for (const BuildingIndex& building_index : tribe_->buildings()) {
-		const BuildingDescr& bld = *game().tribes().get_building_descr(building_index);
+	// NOCOM(GunChleoc) we have all buildings now. Does this affect what the AI will build?
+	// At the moment, the AI doesn't build anything at all.
+	for (size_t building_index = 0; building_index < game().tribes().nrbuildings(); ++building_index) {
+		const BuildingDescr& bld = *game().tribes().get_building_descr(static_cast<BuildingIndex>(building_index));
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);

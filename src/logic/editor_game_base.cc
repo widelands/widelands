@@ -251,7 +251,7 @@ void EditorGameBase::postload()
 void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
 {
 	assert(tribes_);
-	loader_ui.stepf(_("Loading tribes"));
+	loader_ui.step(_("Loading graphics"));
 	tribes_->load_graphics();
 }
 

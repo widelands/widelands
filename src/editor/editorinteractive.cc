@@ -59,7 +59,7 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	loader_ui->stepf(_("Loading tribes"));
+	loader_ui->step(_("Loading tribes"));
 	egbase->tribes();
 }
 
@@ -204,7 +204,7 @@ void EditorInteractive::load(const std::string & filename) {
 	}
 
 	ml->load_map_complete(egbase(), true);
-	loader_ui.step(_("Loading graphics..."));
+
 	egbase().load_graphics(loader_ui);
 
 	register_overlays();
@@ -590,7 +590,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 				load_all_tribes(&editor, &loader_ui);
 
-				loader_ui.step(_("Loading graphics..."));
 				editor.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {

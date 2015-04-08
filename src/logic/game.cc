@@ -226,21 +226,21 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
-	loaderUI.step (_("Preloading a map"));
+	loaderUI.step (_("Preloading map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
 		loaderUI.set_background(background);
 	}
-	loaderUI.stepf(_("Loading world"));
+	loaderUI.step(_("Loading world"));
 	world();
-	loaderUI.stepf(_("Loading tribes"));
+	loaderUI.step(_("Loading tribes"));
 	tribes();
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf (_("Adding player %u"), p);
+		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -254,7 +254,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loaderUI.step (_("Loading a map"));
+	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, true);
 	maploader.reset();
 

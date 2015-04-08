@@ -58,6 +58,7 @@ TribeDescr::TribeDescr
 	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
 	// e.g. Barbarians have no wheat.
 	// Carrier walk_load animation is empty
+	// Trident of Fire MP scenario crashes on load.
 
 	try {
 		m_initializations = info.initializations;
