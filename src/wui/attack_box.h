@@ -72,7 +72,7 @@ struct AttackBox : public UI::Box {
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Button & add_button
 			(UI::Box           & parent,
-			 char const * picname,
+			 const std::string & text,
 			 void (AttackBox::*fn)(),
 			 const std::string & tooltip_text);
 

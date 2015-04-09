@@ -34,11 +34,25 @@ BuildingHints::BuildingHints(Section* const section)
      prohibited_till_(section ? section->get_natural("prohibited_till", 0) : 0),
      forced_after_(section ? section->get_natural("forced_after", 864000) : 0),  // 10 days default
      mines_percent_(section ? section->get_int("mines_percent", 100) : 0)
+
 {
 	if (section) {
 		if (section->has_val("renews_map_resource"))
 			renews_map_resource_ = section->get_string("renews_map_resource");
 		if (section->has_val("mines"))
 			mines_ = section->get_string("mines");
+	}
+	if (section) {
+		if (!section->has_val("trainingsite_type")) {
+			trainingsite_type_ =  TrainingSiteType::kNoTS;
+		} else {
+			if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "basic")) {
+				trainingsite_type_ =  TrainingSiteType::kBasic;
+			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "advanced")) {
+				trainingsite_type_ =  TrainingSiteType::kAdvanced;
+			} else {
+				trainingsite_type_ = TrainingSiteType::kNoTS;
+			}
+		}
 	}
 }

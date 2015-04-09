@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-23 10:41+0000\n"
+"POT-Creation-Date: 2015-04-06 09:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,17 +24,17 @@ msgid "None"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:113
+#: ../../src/ai/defaultai.h:116
 msgid "Aggressive"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:124
+#: ../../src/ai/defaultai.h:127
 msgid "Normal"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:135
+#: ../../src/ai/defaultai.h:138
 msgid "Defensive"
 msgstr ""
 
@@ -3125,15 +3125,15 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:138
+#: ../../src/wui/attack_box.cc:138 ../../src/wui/attack_box.cc:167
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:153
+#: ../../src/wui/attack_box.cc:152
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:161
+#: ../../src/wui/attack_box.cc:160
 msgid "Send less soldiers"
 msgstr ""
 
@@ -3141,7 +3141,7 @@ msgstr ""
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:190
+#: ../../src/wui/attack_box.cc:188
 msgid "Send more soldiers"
 msgstr ""
 
