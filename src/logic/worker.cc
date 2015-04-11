@@ -784,12 +784,12 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, uint32_t>> best_suited_immovables_index;
+	std::set<std::tuple<double, WareIndex>> best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-		const uint32_t index, const ImmovableDescr& immovable_description) {
+		const WareIndex index, const ImmovableDescr& immovable_description) {
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
@@ -827,7 +827,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	} else {
 		state.svar1 = "tribe";
 
-		uint32_t immovable_index = game.tribes().immovable_index(list[1]);
+		WareIndex immovable_index = game.tribes().immovable_index(list[1]);
 
 		if (game.tribes().immovable_exists(immovable_index)) {
 			const ImmovableDescr* imm = game.tribes().get_immovable_descr(immovable_index);

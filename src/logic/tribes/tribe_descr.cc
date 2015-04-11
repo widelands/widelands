@@ -53,8 +53,7 @@ namespace Widelands {
 
 TribeDescr::TribeDescr
 	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& init_egbase)
-	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase)
-{
+	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase) {
 	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
 	// e.g. Barbarians have no wheat.
 	// Carrier walk_load animation is empty
@@ -142,7 +141,7 @@ TribeDescr::TribeDescr
 		std::vector<std::string> immovables = table.get_table("immovables")->array_entries<std::string>();
 		for (const std::string& immovablename : immovables) {
 			try {
-				int index = egbase_.tribes().safe_immovable_index(immovablename);
+				WareIndex index = egbase_.tribes().safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
 					throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 				}
@@ -224,6 +223,9 @@ bool TribeDescr::has_ware(const WareIndex& index) const {
 bool TribeDescr::has_worker(const WareIndex& index) const {
 	return workers_.count(index) == 1;
 }
+bool TribeDescr::has_immovable(const int index) const {
+	return immovables_.count(index) == 1;
+}
 bool TribeDescr::is_construction_material(const WareIndex& index) const {
 	return construction_materials_.count(index) == 1;
 }
@@ -232,7 +234,7 @@ BuildingIndex TribeDescr::building_index(const std::string & buildingname) const
 	return egbase_.tribes().building_index(buildingname);
 }
 
-int TribeDescr::immovable_index(const std::string & immovablename) const {
+WareIndex TribeDescr::immovable_index(const std::string & immovablename) const {
 	return egbase_.tribes().immovable_index(immovablename);
 }
 WareIndex TribeDescr::ware_index(const std::string & warename) const {
@@ -287,7 +289,7 @@ WareIndex TribeDescr::soldier() const {
 	assert(egbase_.tribes().worker_exists(soldier_));
 	return soldier_;
 }
-int TribeDescr::ship() const {
+WareIndex TribeDescr::ship() const {
 	assert(egbase_.tribes().ship_exists(ship_));
 	return ship_;
 }
@@ -336,13 +338,11 @@ const RoadTextures& TribeDescr::road_textures() const {
 Find the best matching indicator for the given amount.
 ==============
 */
-uint32_t TribeDescr::get_resource_indicator
-	(ResourceDescription const * const res, uint32_t const amount) const
-{
+WareIndex TribeDescr::get_resource_indicator
+	(ResourceDescription const * const res, uint32_t const amount) const {
 	if (!res || !amount) {
-		int32_t idx = immovable_index("resi_none");
-		// NOCOM(GunChleoc): use has_immovable
-		if (idx == -1)
+		WareIndex idx = immovable_index("resi_none");
+		if (!has_immovable(idx))
 			throw GameDataError
 				("tribe %s does not declare a resource indicator resi_none!",
 				 name().c_str());
@@ -353,8 +353,7 @@ uint32_t TribeDescr::get_resource_indicator
 	int32_t num_indicators = 0;
 	for (;;) {
 		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		// NOCOM(GunChleoc): use has_immovable
-		if (immovable_index(resi_filename) == -1)
+		if (has_immovable(immovable_index(resi_filename)))
 			break;
 		++i;
 		++num_indicators;

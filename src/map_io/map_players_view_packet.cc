@@ -236,9 +236,8 @@ struct BuildingNonexistent : public FileRead::DataError {
 // name in the tribe.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->c_string();
-	int32_t const index = tribe.immovable_index(name);
-	// NOCOM(GunChleoc): use has_immovable
-	if (index == -1)
+	WareIndex const index = tribe.immovable_index(name);
+	if (!tribe.has_immovable(index))
 		throw TribeImmovableNonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
 }
@@ -287,7 +286,7 @@ TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& eg
 // name in the World.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
 	char const* const name = fr->c_string();
-	int32_t const index = world.get_immovable_index(name);
+	WareIndex const index = world.get_immovable_index(name);
 	if (index == -1)
 		throw WorldImmovableNonexistent(name);
 	return *world.get_immovable_descr(index);

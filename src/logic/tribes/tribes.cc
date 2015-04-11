@@ -187,7 +187,7 @@ bool Tribes::building_exists(const std::string& buildingname) const {
 bool Tribes::building_exists(const BuildingIndex& index) const {
 	return buildings_->get_mutable(index) != nullptr;
 }
-bool Tribes::immovable_exists(int index) const {
+bool Tribes::immovable_exists(WareIndex index) const {
 	return immovables_->get_mutable(index) != nullptr;
 }
 bool Tribes::ship_exists(int index) const {
@@ -206,7 +206,7 @@ BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const
 }
 
 WareIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const int result = immovable_index(immovablename);
+	const WareIndex result = immovable_index(immovablename);
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}

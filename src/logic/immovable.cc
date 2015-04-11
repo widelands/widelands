@@ -729,7 +729,7 @@ MapObject::Loader * Immovable::load
 
 			if (is_tribe_immovable) { // tribe immovable
 				try {
-					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
+					WareIndex const idx = egbase.tribes().safe_immovable_index(old_name);
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
 				} catch (const WException& e) {
 					throw GameDataError("Failed to load tribes immovable: %s", e.what());
@@ -737,7 +737,7 @@ MapObject::Loader * Immovable::load
 			} else { //  world immovable
 				const World & world = egbase.world();
 				const std::string new_name = lookup_table.lookup_immovable(old_name);
-				int32_t const idx = world.get_immovable_index(new_name.c_str());
+				WareIndex const idx = world.get_immovable_index(new_name.c_str());
 				if (idx == -1)
 					throw wexception
 						("world does not define immovable type \"%s\"", new_name.c_str());

@@ -74,10 +74,11 @@ public:
 	bool has_building(const BuildingIndex& index) const;
 	bool has_ware(const WareIndex& index) const;
 	bool has_worker(const WareIndex& index) const;
+	bool has_immovable(const int index) const;
 	bool is_construction_material(const WareIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;
-	int immovable_index(const std::string & immovablename) const;
+	WareIndex immovable_index(const std::string & immovablename) const;
 	WareIndex ware_index(const std::string & warename) const;
 	WareIndex worker_index(const std::string & workername) const;
 
@@ -98,7 +99,7 @@ public:
 	WareIndex carrier2() const;
 	WareIndex geologist() const;
 	WareIndex soldier() const;
-	int ship() const;
+	WareIndex ship() const;
 	BuildingIndex headquarters() const;
 	BuildingIndex port() const;
 	const std::vector<WareIndex>& worker_types_without_cost() const;
@@ -119,7 +120,7 @@ public:
 	// The road textures used for drawing roads.
 	const RoadTextures& road_textures() const;
 
-	uint32_t get_resource_indicator
+	WareIndex get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
@@ -157,8 +158,8 @@ private:
 	std::vector<std::string> busy_road_paths_;
 	RoadTextures road_textures_;
 
-	std::vector<BuildingIndex>     buildings_;
-	std::set<int>               immovables_;  // The player immovables
+	std::vector<BuildingIndex>  buildings_;
+	std::set<WareIndex>         immovables_;  // The player immovables
 	std::set<WareIndex>         workers_;
 	std::set<WareIndex>         wares_;
 	std::set<WareIndex>         construction_materials_; // The wares that are used by construction sites
@@ -168,7 +169,7 @@ private:
 	WareIndex                   carrier2_; // Additional carrier for busy roads
 	WareIndex                   geologist_; // This tribe's geologist worker
 	WareIndex                   soldier_;  // The soldier that this tribe uses
-	int                         ship_;     // The ship that this tribe uses
+	WareIndex                   ship_;     // The ship that this tribe uses
 	BuildingIndex               headquarters_; // The tribe's default headquarters, needed by the editor
 	BuildingIndex               port_;     // The port that this tribe uses
 	std::vector<WareIndex>      worker_types_without_cost_;

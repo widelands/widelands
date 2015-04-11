@@ -548,6 +548,7 @@ int LuaPlayerBase::place_building(lua_State * L) {
 		:returns: The created bob.
 */
 // UNTESTED
+// NOCOM(GunChleoc): Rename to place_ship and lose the attribute
 int LuaPlayerBase::place_bob(lua_State * L) {
 	const std::string name = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
@@ -557,8 +558,8 @@ int LuaPlayerBase::place_bob(lua_State * L) {
 
 	EditorGameBase & egbase = get_egbase(L);
 	Player& player = get(L, egbase);
-	int ship_index = player.tribe().ship();
-	const ShipDescr* descr = egbase.tribes().get_ship_descr(ship_index);
+
+	const ShipDescr* descr = egbase.tribes().get_ship_descr(player.tribe().ship());
 	Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);

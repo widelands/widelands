@@ -505,7 +505,7 @@ void WorkerProgram::parse_plant
 	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
-	 const Tribes&,
+	 const Tribes& tribes,
 	 const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
@@ -524,6 +524,22 @@ void WorkerProgram::parse_plant
 				throw GameDataError("plant: 'unless %s' not understood", cmd[i].c_str());
 
 			continue;
+		}
+
+		// Check if immovable type exists
+		std::vector<std::string> const list(split_string(cmd[i], ":"));
+		if (list.size() != 2) {
+			throw GameDataError("plant takes either tribe:<immovable> or attrib:<attribute>");
+		}
+
+		if (list[0] == "attrib") {
+			// This will throw a GameDataError if the attribute doesn't exist.
+			ImmovableDescr::get_attribute_id(list[1]);
+		} else {
+			WareIndex idx = tribes.safe_immovable_index(list[1]);
+			if (!tribes.immovable_exists(idx)) {
+				throw GameDataError("There is no tribe immovable %s for workers to plant.", list[1].c_str());
+			}
 		}
 		act->sparamv.push_back(cmd[i]);
 	}

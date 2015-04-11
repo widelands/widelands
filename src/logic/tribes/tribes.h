@@ -111,7 +111,7 @@ public:
 	bool worker_exists(const WareIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const BuildingIndex& index) const;
-	bool immovable_exists(int index) const;
+	bool immovable_exists(WareIndex index) const;
 	bool ship_exists(int index) const;
 	bool tribe_exists(int index) const;
 

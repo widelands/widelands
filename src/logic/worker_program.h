@@ -119,7 +119,7 @@ private:
 	void parse_plant
 		(WorkerDescr*,
 		 Worker::Action*,
-		 Parser*, const Tribes&,
+		 Parser*, const Tribes& tribes,
 		 const std::vector<std::string>& cmd);
 	void parse_create_bob
 		(WorkerDescr*,
