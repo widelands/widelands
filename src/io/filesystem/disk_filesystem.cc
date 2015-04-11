@@ -22,8 +22,8 @@
 #include <cassert>
 #include <cerrno>
 
+#include <boost/algorithm/string/replace.hpp>
 #include <sys/stat.h>
-
 #ifdef _WIN32
 #include <dos.h>
 #include <windows.h>
@@ -125,7 +125,10 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
 			continue;
 		}
 		const std::string filename = canonicalize_name(realpath + c_file.name);
-		const std::string result = filename.substr(m_root.size() + 1);
+		std::string result = filename.substr(m_root.size() + 1);
+
+		// Paths should not contain any windows line separators.
+		boost::replace_all(result, "\\", "/");
 		results.insert(result);
 	} while (_findnext(hFile, &c_file) == 0);
 
@@ -288,7 +291,7 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 	try {
 		std::string::size_type it = 0;
 		while (it < dirname.size()) {
-			it = dirname.find(m_filesep, it);
+			it = dirname.find(file_separator(), it);
 
 			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
 			if (fspath.m_exists && !fspath.m_isDirectory)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,13 @@
 
 // GLEW must be first. Do not include any other GL headers, it
 // should define all functions.
-#include <GL/glew.h>
+
+#ifdef USE_GLBINDING
+#   include <glbinding/gl/gl.h>
+#   include <glbinding/Binding.h>
+using namespace gl;
+#else
+#   include <GL/glew.h>
+#endif
 
 #endif  // end of include guard: WL_GRAPHIC_GL_SYSTEM_HEADERS_H

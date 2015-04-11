@@ -19,82 +19,234 @@
 
 #include "graphic/game_renderer.h"
 
-#include "base/macros.h"
+#include <memory>
+
+#include "graphic/gl/dither_program.h"
+#include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/road_program.h"
+#include "graphic/gl/terrain_program.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
+#include "logic/world/world.h"
+#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
+// Explanation of how drawing works:
+// Schematic of triangle neighborhood:
+//
+//               *
+//              / \
+//             / u \
+//         (f)/     \
+//    *------*------* (r)
+//     \  l / \  r / \
+//      \  /   \  /   \
+//       \/  d  \/ rr  \
+//       *------*------* (br)
+//        \ dd /
+//         \  /
+//          \/
+//          *
+//
+// Each field (f) owns two triangles: (r)ight & (d)own. When we look at the
+// field, we have to make sure to schedule drawing the triangles. This is done
+// by of these triangles is done by TerrainProgram.
+//
+// To draw dithered edges, we have to look at the neighboring triangles for the
+// two triangles too: If a neighboring triangle has another texture and our
+// dither layer is smaller, we have to draw a dithering triangle too - this lets the neighboring
+// texture
+// bleed into our triangle.
+//
+// The dither triangle is the triangle that should be partially (either r or
+// d). Example: if r and d have different textures and r.dither_layer >
+// d.dither_layer, then we will repaint d with the dither texture as mask.
+
+std::unique_ptr<TerrainProgram> GameRenderer::terrain_program_;
+std::unique_ptr<DitherProgram> GameRenderer::dither_program_;
+std::unique_ptr<RoadProgram> GameRenderer::road_program_;
+
+namespace {
+
 using namespace Widelands;
 
-GameRenderer::GameRenderer()
-{
+// Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
+// 'player' (which can be nullptr).
+float field_brightness(const FCoords& fcoords,
+                       const uint32_t gametime,
+                       const Map& map,
+                       const Player* const player) {
+	uint32_t brightness = 144 + fcoords.field->get_brightness();
+	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
+
+	if (player && !player->see_all()) {
+		const Player::Field& pf = player->fields()[Map::get_index(fcoords, map.get_width())];
+		if (pf.vision == 0) {
+			return 0.;
+		} else if (pf.vision == 1) {
+			static const uint32_t kDecayTimeInMs = 20000;
+			const Duration time_ago = gametime - pf.time_node_last_unseen;
+			if (time_ago < kDecayTimeInMs) {
+				brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+			} else {
+				brightness = brightness / 2;
+			}
+		}
+	}
+	return brightness / 255.;
 }
 
-GameRenderer::~GameRenderer()
-{
+// Returns the road that should be rendered here. The format is like in field,
+// but this is not the physically present road, but the one that should be
+// drawn (i.e. taking into account if there is fog of war involved or road
+// building overlays enabled).
+uint8_t field_roads(const FCoords& coords, const Map& map, const Player* const player) {
+	uint8_t roads;
+	if (player && !player->see_all()) {
+		const Player::Field& pf = player->fields()[Map::get_index(coords, map.get_width())];
+		roads = pf.roads | map.overlay_manager().get_road_overlay(coords);
+	} else {
+		roads = coords.field->get_roads();
+	}
+	roads |= map.overlay_manager().get_road_overlay(coords);
+	return roads;
 }
 
-void GameRenderer::rendermap
-	(RenderTarget & dst,
-	 const Widelands::EditorGameBase &       egbase,
-	 const Widelands::Player           &       player,
-	 const Point                       &       viewofs)
-{
-	m_dst = &dst;
-	m_dst_offset = -viewofs;
-	m_egbase = &egbase;
-	m_player = &player;
+}  // namespace
 
-	draw_wrapper();
+GameRenderer::GameRenderer()  {
 }
 
-void GameRenderer::rendermap
-	(RenderTarget & dst,
-	 const Widelands::EditorGameBase & egbase,
-	 const Point                       & viewofs)
-{
-	m_dst = &dst;
-	m_dst_offset = -viewofs;
-	m_egbase = &egbase;
-	m_player = nullptr;
-
-	draw_wrapper();
+GameRenderer::~GameRenderer() {
 }
 
-void GameRenderer::draw_wrapper()
-{
-	Point tl_map = m_dst->get_offset() - m_dst_offset;
+void GameRenderer::rendermap(RenderTarget& dst,
+                             const Widelands::EditorGameBase& egbase,
+                             const Point& view_offset,
+
+                             const Widelands::Player& player) {
+	draw(dst, egbase, view_offset, &player);
+}
+
+void GameRenderer::rendermap(RenderTarget& dst,
+                             const Widelands::EditorGameBase& egbase,
+                             const Point& view_offset) {
+	draw(dst, egbase, view_offset, nullptr);
+}
+
+void GameRenderer::draw(RenderTarget& dst,
+                        const EditorGameBase& egbase,
+                        const Point& view_offset,
+                        const Player* player) {
+	if (terrain_program_ == nullptr) {
+		terrain_program_.reset(new TerrainProgram());
+		dither_program_.reset(new DitherProgram());
+		road_program_.reset(new RoadProgram());
+	}
+
+	Point tl_map = dst.get_offset() + view_offset;
 
 	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
-	m_minfx = tl_map.x / TRIANGLE_WIDTH - 1;
-	m_minfy = tl_map.y / TRIANGLE_HEIGHT - 1;
-	m_maxfx = (tl_map.x + m_dst->get_rect().w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
-	m_maxfy = (tl_map.y + m_dst->get_rect().h) / TRIANGLE_HEIGHT;
+	int minfx = tl_map.x / TRIANGLE_WIDTH - 1;
+	int minfy = tl_map.y / TRIANGLE_HEIGHT - 1;
+	int maxfx = (tl_map.x + dst.get_rect().w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
+	int maxfy = (tl_map.y + dst.get_rect().h) / TRIANGLE_HEIGHT;
 
 	// fudge for triangle boundary effects and for height differences
-	m_minfx -= 1;
-	m_minfy -= 1;
-	m_maxfx += 1;
-	m_maxfy += 10;
+	minfx -= 1;
+	minfy -= 1;
+	maxfx += 1;
+	maxfy += 10;
 
-	draw();
+
+	Surface* surface = dst.get_surface();
+	if (!surface)
+		return;
+
+	const Rect& bounding_rect = dst.get_rect();
+	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
+
+	glScissor(bounding_rect.x,
+	          surface->height() - bounding_rect.y - bounding_rect.h,
+	          bounding_rect.w,
+	          bounding_rect.h);
+	glEnable(GL_SCISSOR_TEST);
+
+	Map& map = egbase.map();
+	const uint32_t gametime = egbase.get_gametime();
+
+	FieldsToDraw fields_to_draw(minfx, maxfx, minfy, maxfy);
+	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
+		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
+			FieldsToDraw::Field& f =
+			   *fields_to_draw.mutable_field(fields_to_draw.calculate_index(fx, fy));
+
+			f.fx = fx;
+			f.fy = fy;
+
+			Coords coords(fx, fy);
+			int x, y;
+			MapviewPixelFunctions::get_basepix(coords, x, y);
+
+			map.normalize_coords(coords);
+			const FCoords& fcoords = map.get_fcoords(coords);
+
+			f.texture_x = float(x) / kTextureSideLength;
+			f.texture_y = float(y) / kTextureSideLength;
+
+			f.gl_x = f.pixel_x = x + surface_offset.x;
+			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
+			surface->pixel_to_gl(&f.gl_x, &f.gl_y);
+
+			f.ter_d = fcoords.field->terrain_d();
+			f.ter_r = fcoords.field->terrain_r();
+
+			f.brightness = field_brightness(fcoords, gametime, map, player);
+
+			PlayerNumber owner_number = fcoords.field->get_owned_by();
+			if (owner_number > 0) {
+				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
+			} else {
+				f.road_textures = nullptr;
+			}
+
+			f.roads = field_roads(fcoords, map, player);
+		}
+	}
+
+	const World& world = egbase.world();
+	terrain_program_->draw(gametime, world.terrains(), fields_to_draw);
+	dither_program_->draw(gametime, world.terrains(), fields_to_draw);
+	road_program_->draw(*surface, fields_to_draw);
+
+	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
+
+	glDisable(GL_SCISSOR_TEST);
 }
 
-void GameRenderer::draw_objects()
-{
+void GameRenderer::draw_objects(RenderTarget& dst,
+                                const EditorGameBase& egbase,
+                                const Point& view_offset,
+                                const Player* player,
+                                int minfx,
+                                int maxfx,
+                                int minfy,
+                                int maxfy) {
+	// TODO(sirver): this should use FieldsToDraw. Would simplify this function a lot.
 	static const uint32_t F = 0;
 	static const uint32_t R = 1;
 	static const uint32_t BL = 2;
 	static const uint32_t BR = 3;
-	const Map & map = m_egbase->map();
+	const Map & map = egbase.map();
 
-	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
-		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
+		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			Coords ncoords(fx, fy);
 			map.normalize_coords(ncoords);
 			FCoords coords[4];
@@ -109,7 +261,7 @@ void GameRenderer::draw_objects()
 			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), pos[BR].x, pos[BR].y);
 			for (uint32_t d = 0; d < 4; ++d) {
 				pos[d].y -= coords[d].field->get_height() * HEIGHT_FACTOR;
-				pos[d] += m_dst_offset;
+				pos[d] -= view_offset;
 			}
 
 			PlayerNumber owner_number[4];
@@ -120,9 +272,9 @@ void GameRenderer::draw_objects()
 			for (uint32_t d = 0; d < 4; ++d)
 				isborder[d] = coords[d].field->is_border();
 
-			if (m_player && !m_player->see_all()) {
+			if (player && !player->see_all()) {
 				for (uint32_t d = 0; d < 4; ++d) {
-					const Player::Field & pf = m_player->fields()[map.get_index(coords[d], map.get_width())];
+					const Player::Field & pf = player->fields()[map.get_index(coords[d], map.get_width())];
 					vision[d] = pf.vision;
 					if (pf.vision == 1) {
 						owner_number[d] = pf.owner;
@@ -132,32 +284,32 @@ void GameRenderer::draw_objects()
 			}
 
 			if (isborder[F]) {
-				const Player & owner = m_egbase->player(owner_number[F]);
+				const Player & owner = egbase.player(owner_number[F]);
 				uint32_t const anim_idx = owner.tribe().frontier_animation();
 				if (vision[F])
-					m_dst->drawanim(pos[F], anim_idx, 0, &owner);
+					dst.drawanim(pos[F], anim_idx, 0, &owner);
 				for (uint32_t d = 1; d < 4; ++d) {
 					if
 						((vision[F] || vision[d]) &&
 						 isborder[d] &&
 						 (owner_number[d] == owner_number[F] || !owner_number[d]))
 					{
-						m_dst->drawanim(middle(pos[F], pos[d]), anim_idx, 0, &owner);
+						dst.drawanim(middle(pos[F], pos[d]), anim_idx, 0, &owner);
 					}
 				}
 			}
 
 			if (1 < vision[F]) { // Render stuff that belongs to the node.
 				if (BaseImmovable * const imm = coords[F].field->get_immovable())
-					imm->draw(*m_egbase, *m_dst, coords[F], pos[F]);
+					imm->draw(egbase, dst, coords[F], pos[F]);
 				for
 					(Bob * bob = coords[F].field->get_first_bob();
 					 bob;
 					 bob = bob->get_next_bob())
-					bob->draw(*m_egbase, *m_dst, pos[F]);
+					bob->draw(egbase, dst, pos[F]);
 			} else if (vision[F] == 1) {
-				const Player::Field & f_pl = m_player->fields()[map.get_index(coords[F], map.get_width())];
-				const Player * owner = owner_number[F] ? m_egbase->get_player(owner_number[F]) : nullptr;
+				const Player::Field & f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
+				const Player * owner = owner_number[F] ? egbase.get_player(owner_number[F]) : nullptr;
 				if
 					(const MapObjectDescr * const map_object_descr =
 						f_pl.map_object_descr[TCoords<>::None])
@@ -193,7 +345,7 @@ void GameRenderer::draw_objects()
 
 						if (cur_frame) // not the first frame
 							// draw the prev frame from top to where next image will be drawing
-							m_dst->drawanimrect
+							dst.drawanimrect
 								(pos[F], anim_idx, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
 						else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
@@ -204,11 +356,11 @@ void GameRenderer::draw_objects()
 							} catch (MapObjectDescr::AnimationNonexistent &) {
 								a = csinf.was->get_animation("idle");
 							}
-							m_dst->drawanimrect
+							dst.drawanimrect
 								(pos[F], a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
 						}
 						assert(lines <= h);
-						m_dst->drawanimrect(pos[F], anim_idx, tanim, owner, Rect(Point(0, h - lines), w, lines));
+						dst.drawanimrect(pos[F], anim_idx, tanim, owner, Rect(Point(0, h - lines), w, lines));
 					} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 						// this is a building therefore we either draw unoccupied or idle animation
 						uint32_t pic;
@@ -217,11 +369,11 @@ void GameRenderer::draw_objects()
 						} catch (MapObjectDescr::AnimationNonexistent &) {
 							pic = building->get_animation("idle");
 						}
-						m_dst->drawanim(pos[F], pic, 0, owner);
+						dst.drawanim(pos[F], pic, 0, owner);
 					} else if (const uint32_t pic = map_object_descr->main_animation()) {
-						m_dst->drawanim(pos[F], pic, 0, owner);
+						dst.drawanim(pos[F], pic, 0, owner);
 					} else if (map_object_descr->type() == MapObjectType::FLAG) {
-						m_dst->drawanim(pos[F], owner->tribe().flag_animation(), 0, owner);
+						dst.drawanim(pos[F], owner->tribe().flag_animation(), 0, owner);
 					}
 				}
 			}
@@ -239,7 +391,7 @@ void GameRenderer::draw_objects()
 					(const OverlayManager::OverlayInfo * it = overlay_info;
 					 it < end;
 					 ++it)
-					m_dst->blit(pos[F] - it->hotspot, it->pic);
+					dst.blit(pos[F] - it->hotspot, it->pic);
 			}
 
 			{
@@ -259,7 +411,7 @@ void GameRenderer::draw_objects()
 					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
-					m_dst->blit(tripos - it->hotspot, it->pic);
+					dst.blit(tripos - it->hotspot, it->pic);
 			}
 
 			{
@@ -279,7 +431,7 @@ void GameRenderer::draw_objects()
 					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
-					m_dst->blit(tripos - it->hotspot, it->pic);
+					dst.blit(tripos - it->hotspot, it->pic);
 			}
 		}
 	}

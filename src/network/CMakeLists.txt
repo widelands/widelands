@@ -23,7 +23,6 @@ wl_library(network
   USES_SDL2_NET
   DEPENDS
     ai
-    base_deprecated
     base_exceptions
     base_i18n
     base_log
@@ -42,7 +41,8 @@ wl_library(network
     logic_game_settings
     map_io_map_loader
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud

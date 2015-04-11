@@ -55,8 +55,12 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the entry with the given 'idx' or nullptr if 'idx' is out of
 	// bound. Ownership is retained.
+	// TODO(sirver): remove get() and use get_mutable
 	T* get(const int32_t idx) const {
 		return (idx >= 0 && idx < static_cast<int32_t>(items_.size())) ? items_[idx].get() : nullptr;
+	}
+	T* get_mutable(const int32_t idx) const {
+		return get(idx);
 	}
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is

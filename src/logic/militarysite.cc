@@ -248,7 +248,7 @@ int MilitarySite::incorporate_soldier(EditorGameBase & egbase, Soldier & s)
 		if (upcast(Game, game, &egbase)) {
 			send_message
 				(*game,
-				 "site_occupied",
+				 Message::Type::kEconomySiteOccupied,
 				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
@@ -335,7 +335,7 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		// Now I know that the new guy is worthy.
 		if (nullptr != kickoutCandidate)
 		{
-			Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+			Game & game = dynamic_cast<Game&>(owner().egbase());
 			kickoutCandidate->reset_tasks(game);
 			kickoutCandidate->start_task_leavebuilding(game, true);
 			return true;
@@ -355,7 +355,7 @@ MilitarySite::incorporate_upgraded_soldier(EditorGameBase & egbase, Soldier & s)
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
 	if (stationed_soldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
 	{
-		Game & game = ref_cast<Game, EditorGameBase>(egbase);
+		Game & game = dynamic_cast<Game&>(egbase);
 		s.set_location(this);
 		s.reset_tasks(game);
 		s.start_task_buildingwork(game);
@@ -376,8 +376,8 @@ void MilitarySite::request_soldier_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
-	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
+	MilitarySite& msite = dynamic_cast<MilitarySite&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
 
 	msite.incorporate_soldier(game, s);
 }
@@ -409,7 +409,7 @@ void MilitarySite::update_normal_soldier_request()
 	}
 
 	if (m_capacity < present.size()) {
-		Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+		Game & game = dynamic_cast<Game&>(owner().egbase());
 		for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
 			Soldier & soldier = *present[i];
 			soldier.reset_tasks(game);
@@ -716,7 +716,7 @@ void MilitarySite::set_soldier_capacity(uint32_t const capacity) {
 
 void MilitarySite::drop_soldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	if (!is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
@@ -754,7 +754,7 @@ bool MilitarySite::can_attack()
 
 void MilitarySite::aggressor(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -797,7 +797,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 bool MilitarySite::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	std::vector<Soldier *> present = present_soldiers();
 	Soldier * defender = nullptr;
@@ -845,7 +845,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		{
 			send_message
 				(game,
-				 "site_lost",
+				 Message::Type::kWarfareSiteLost,
 				 _("Militarysite lost!"),
 				 descr().m_defeated_enemy_str,
 				 false);
@@ -899,7 +899,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// Of course we should inform the victorious player as well
 		newsite->send_message
 			(game,
-			 "site_defeated",
+			 Message::Type::kWarfareSiteDefeated,
 			 _("Enemy at site defeated!"),
 			 newsite->descr().m_defeated_you_str,
 			 true);
@@ -949,7 +949,7 @@ void MilitarySite::notify_player(Game & game, bool const discovered)
 	// radius <= 5 near the current location in the last 60 seconds
 	send_message
 		(game,
-		 "under_attack",
+		 Message::Type::kWarfareUnderAttack,
 		 _("You are under attack"),
 		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,
@@ -992,7 +992,7 @@ void MilitarySite::send_attacker
 	m_soldierjobs.push_back(sj);
 
 	soldier.update_task_buildingwork
-		(ref_cast<Game, EditorGameBase>(owner().egbase()));
+		(dynamic_cast<Game&>(owner().egbase()));
 }
 
 

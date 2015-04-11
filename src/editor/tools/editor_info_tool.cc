@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/multilinetextarea.h"
@@ -99,7 +100,31 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += "• " + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
-	buf += "• " + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
+
+	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
+	std::vector<std::string> terrain_is_strings;
+
+	if (terrain_is == Widelands::TerrainDescription::Type::kGreen) {
+		terrain_is_strings.push_back(_("arable"));
+	}
+	if (terrain_is & Widelands::TerrainDescription::Type::kDry) {
+		terrain_is_strings.push_back(_("treeless"));
+	}
+	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
+		terrain_is_strings.push_back(_("aquatic"));
+	}
+	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
+		terrain_is_strings.push_back(_("dead"));
+	}
+	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
+		terrain_is_strings.push_back(_("mountainous"));
+	}
+	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
+		terrain_is_strings.push_back(_("impassable"));
+	}
+	buf += "• " + (boost::format(_("Category: %s"))
+						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
+	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";

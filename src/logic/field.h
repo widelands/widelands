@@ -124,7 +124,7 @@ private:
 	OwnerInfoAndSelectionsType owner_info_and_selections;
 
 	ResourceIndex m_resources; ///< Resource type on this field, if any
-	uint8_t m_starting_res_amount; ///< Initial amount of m_resources
+	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
 	uint8_t m_res_amount; ///< Current amount of m_resources
 
 	Terrains terrains;
@@ -198,10 +198,10 @@ public:
 
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t const dir) const {
-		return (roads >> dir) & Road_Mask;
+		return (roads >> dir) & RoadType::kMask;
 	}
 	void set_road(int32_t const dir, int32_t const type) {
-		roads &= ~(Road_Mask << dir);
+		roads &= ~(RoadType::kMask << dir);
 		roads |= type << dir;
 	}
 
@@ -214,11 +214,11 @@ public:
 	}
 
 	// TODO(unknown): This should take uint8_t
-	void set_starting_res_amount(int32_t const amount) {
-		m_starting_res_amount = amount;
+	void set_initial_res_amount(int32_t const amount) {
+		m_initial_res_amount = amount;
 	}
 	// TODO(unknown): This should return uint8_t
-	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
+	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not

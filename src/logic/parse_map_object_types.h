@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_PARSE_MAP_OBJECT_TYPES_H
 #define WL_LOGIC_PARSE_MAP_OBJECT_TYPES_H
 
+#include <cstring>
+
 #define PARSE_MAP_OBJECT_TYPES_BEGIN(kind)                                    \
    if (Section * const section = root_conf.get_section(kind " types")) {      \
       while (Section::Value const * const v = section->get_next_val()) {      \

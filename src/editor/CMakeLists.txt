@@ -63,8 +63,6 @@ wl_library(editor
     ui_menus/editor_main_menu_save_map_make_directory.h
     ui_menus/editor_player_menu.cc
     ui_menus/editor_player_menu.h
-    ui_menus/editor_player_menu_allowed_buildings_menu.cc
-    ui_menus/editor_player_menu_allowed_buildings_menu.h
     ui_menus/editor_tool_change_height_options_menu.cc
     ui_menus/editor_tool_change_height_options_menu.h
     ui_menus/editor_tool_change_resources_options_menu.cc
@@ -90,7 +88,6 @@ wl_library(editor
     base_macros
     base_scoped_timer
     graphic
-    graphic_image
     graphic_surface
     io_filesystem
     logic
@@ -99,9 +96,12 @@ wl_library(editor
     map_io_map_loader
     profile
     random
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

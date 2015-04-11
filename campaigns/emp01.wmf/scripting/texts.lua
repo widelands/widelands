@@ -77,15 +77,15 @@ obj_build_quarry = {
 diary_page_1 = {
    title =_ "A Dark Night",
    body=lutius(_"Diary of Lutius",
-		_([[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?]])
+		_([[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous Barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?]])
 		.. paragraphdivider() ..
-		_([[With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.]])
+		_([[With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a Barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.]])
 		.. paragraphdivider() ..
 		_([[But during our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land – and it would stay theirs until the ghosts took the last man of his folk!]])
 		.. paragraphdivider() ..
-		_([[Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the barbarians.]])
+		_([[Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the Barbarians.]])
 		.. paragraphdivider() ..
-		_([[Still, I saw no way that I could erase my shame without fighting against these barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.]])),
+		_([[Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.]])),
    w=500,
    posy=1,
 }

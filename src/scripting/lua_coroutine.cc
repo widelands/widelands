@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,9 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "scripting/c_utils.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
-#include "scripting/luna.h"
-#include "scripting/persistence.h"
 
 namespace {
 

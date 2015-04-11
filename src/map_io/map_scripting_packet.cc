@@ -33,7 +33,7 @@
 #include "logic/map.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
+#include "scripting/logic.h"
 
 namespace Widelands {
 

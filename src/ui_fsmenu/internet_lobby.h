@@ -35,16 +35,11 @@
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
 
-struct FullscreenMenuInternetLobby : public FullscreenMenuBase {
-
+class FullscreenMenuInternetLobby : public FullscreenMenuBase {
+public:
 	FullscreenMenuInternetLobby (const char *, const char *, bool);
 
 	void think() override;
-
-	/// \returns the maximum number of clients that may connect
-	int32_t get_maxclients() {
-		return maxclients.get_value();
-	}
 
 private:
 	uint32_t m_butx;
@@ -56,8 +51,6 @@ private:
 	std::string m_fn;
 	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;
-	UI::Textarea m_maxclients;
-	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
 	UI::Table<const InternetClient * const> clientsonline;

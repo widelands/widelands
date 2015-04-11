@@ -52,7 +52,6 @@
 #include "logic/warehouse.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
@@ -201,7 +200,7 @@ void Player::create_default_infrastructure() {
 		const TribeDescr::Initialization & initialization =
 			tribe().initialization(m_initialization_index);
 
-		Game & game = ref_cast<Game, EditorGameBase>(egbase());
+		Game & game = dynamic_cast<Game&>(egbase());
 
 		// Run the corresponding script
 		std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
@@ -292,15 +291,15 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const std::string & sender) {
-#define MAYBE_PLAY(a, b) if (sender == a) { \
-	g_sound_handler.play_fx(b, 200, PRIO_ALWAYS_PLAY); \
+void Player::play_message_sound(const Message::Type & msgtype) {
+#define MAYBE_PLAY(type, file) if (msgtype == type) { \
+	g_sound_handler.play_fx(file, 200, PRIO_ALWAYS_PLAY); \
 	return; \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY("site_occupied", "sound/military/site_occupied");
-		MAYBE_PLAY("under_attack", "sound/military/under_attack");
+		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "sound/military/site_occupied");
+		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "sound/military/under_attack");
 
 		g_sound_handler.play_fx("sound/message", 200, PRIO_ALWAYS_PLAY);
 	}
@@ -321,7 +320,7 @@ MessageId Player::add_message
 	// Sound & popup
 	if (InteractivePlayer * const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.sender());
+			play_message_sound(message.type());
 			if (popup)
 				iplayer->popup_message(id, message);
 		}
@@ -339,7 +338,7 @@ MessageId Player::add_message_with_timeout
 	Coords      const position = m   .position    ();
 	for (std::pair<MessageId, Message *>  tmp_message : messages()) {
 		if
-			(tmp_message.second->sender() == m.sender()      &&
+			(tmp_message.second->type() == m.type()      &&
 			 gametime < tmp_message.second->sent() + timeout &&
 			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
@@ -485,7 +484,7 @@ Road & Player::force_road(const Path & path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		ref_cast<Game, EditorGameBase>(egbase()).conquer_area_no_building
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building
 			(PlayerArea<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
@@ -774,11 +773,12 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag & flag)
 {
-	if (&flag.owner() == this) //  Additional security check.
+	if (&flag.owner() == this) { //  Additional security check.
 		flag.add_flag_job
-			(ref_cast<Game, EditorGameBase>(egbase()),
+			(dynamic_cast<Game&>(egbase()),
 			 tribe().worker_index("geologist"),
 			 "expedition");
+	}
 }
 
 
@@ -1054,8 +1054,8 @@ void Player::rediscover_node
 		Field & tr_field = m_fields[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
 			tr_field.terrains.d = tr.field->terrain_d();
-			tr_field.roads &= ~(Road_Mask << Road_SouthWest);
-			tr_field.roads |= Road_Mask << Road_SouthWest & tr.field->get_roads();
+			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
+			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
 		}
 	}
 	{ //  discover both triangles and the SE edge of the top left  neighbour
@@ -1063,8 +1063,8 @@ void Player::rediscover_node
 		Field & tl_field = m_fields[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
 			tl_field.terrains = tl.field->get_terrains();
-			tl_field.roads &= ~(Road_Mask << Road_SouthEast);
-			tl_field.roads |= Road_Mask << Road_SouthEast & tl.field->get_roads();
+			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
+			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
 		}
 	}
 	{ //  discover the R triangle and the  E edge of the     left  neighbour
@@ -1072,8 +1072,8 @@ void Player::rediscover_node
 		Field & l_field = m_fields[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
 			l_field.terrains.r = l.field->terrain_r();
-			l_field.roads &= ~(Road_Mask << Road_East);
-			l_field.roads |= Road_Mask << Road_East & l.field->get_roads();
+			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
+			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
 		}
 	}
 }
@@ -1237,6 +1237,16 @@ const std::vector<uint32_t> * Player::get_ware_stock_statistics
 	return &m_ware_stocks[ware];
 }
 
+const Player::BuildingStatsVector& Player::get_building_statistics(const BuildingIndex& i) const {
+	return *const_cast<Player*>(this)->get_mutable_building_statistics(i);
+}
+
+Player::BuildingStatsVector* Player::get_mutable_building_statistics(const BuildingIndex& i) {
+	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
+	if (m_building_stats.size() < nr_buildings)
+		m_building_stats.resize(nr_buildings);
+	return &m_building_stats[i];
+}
 
 /**
  * Add or remove the given building from building statistics.
@@ -1250,14 +1260,8 @@ void Player::update_building_statistics
 		constructionsite ?
 		constructionsite->building().name() : building.descr().name();
 
-	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
-
-	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
-
-	std::vector<BuildingStats> & stat =
-		m_building_stats[tribe().building_index(building_name.c_str())];
+	std::vector<BuildingStats>& stat =
+	   *get_mutable_building_statistics(tribe().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

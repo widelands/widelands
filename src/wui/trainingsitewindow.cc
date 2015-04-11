@@ -37,7 +37,7 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 		(InteractiveGameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
-		return ref_cast<TrainingSite, Widelands::Building>(building());
+		return dynamic_cast<TrainingSite&>(building());
 	}
 
 protected:

@@ -27,6 +27,7 @@
 #endif
 #endif
 
+#include <cassert>
 #include <cstring>
 #include <map>
 #include <stdexcept>
@@ -48,19 +49,19 @@ struct ParameterError : public std::runtime_error {
 	{}
 };
 
-// input
+// Callbacks input events to the UI. All functions return true when the event
+// was handled, false otherwise.
 struct InputCallback {
-	void (*mouse_press)
-	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
-	 int32_t x, int32_t y);      // The coordinates of the mouse at press time.
-	void (*mouse_release)
-	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
-	 int32_t x, int32_t y);      // The coordinates of the mouse at release time.
-	void (*mouse_move)
-	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	void (*key)        (bool down, SDL_Keysym code);
-	void (*textinput) (const std::string& text);
-	void (*mouse_wheel) (uint32_t which, int32_t x, int32_t y);
+	bool (*mouse_press)(const uint8_t button,  // Button number as #defined in SDL_mouse.h.
+	                    int32_t x,
+	                    int32_t y);              // The coordinates of the mouse at press time.
+	bool (*mouse_release)(const uint8_t button,  // Button number as #defined in SDL_mouse.h.
+	                      int32_t x,
+	                      int32_t y);  // The coordinates of the mouse at release time.
+	bool (*mouse_move)(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool (*key)(bool down, SDL_Keysym code);
+	bool (*textinput)(const std::string& text);
+	bool (*mouse_wheel)(uint32_t which, int32_t x, int32_t y);
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -168,6 +169,7 @@ struct WLApplication {
 	// Refresh the graphics settings with the latest options.
 	void refresh_graphics();
 
+	 // Pump SDL events and dispatch them.
 	void handle_input(InputCallback const *);
 
 	void mainmenu();
@@ -180,7 +182,6 @@ struct WLApplication {
 	bool load_game();
 	bool campaign_game();
 	void replay();
-
 	static void emergency_save(Widelands::Game &);
 
 private:
@@ -203,6 +204,10 @@ private:
 	void cleanup_replays();
 
 	bool redirect_output(std::string path = "");
+
+	// Handle the given pressed key. Returns true when key was
+	// handled.
+	bool handle_key(const SDL_Keycode& keycode, int modifiers);
 
 	/**
 	 * The commandline, conveniently repackaged.

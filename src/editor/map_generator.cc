@@ -29,8 +29,8 @@
 #include "logic/map.h"
 #include "logic/world/map_gen.h"
 #include "logic/world/world.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 
 constexpr uint32_t kAverageElevation = 0x80000000;
 constexpr uint32_t kMaxElevation = 0xffffffff;
@@ -138,7 +138,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		res_val /= 3;
 		if (editor_change_resource_tool_callback(fc, map_, world, res_idx)) {
 			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_starting_res_amount(res_val);
+			fc.field->set_initial_res_amount(res_val);
 		}
 	};
 

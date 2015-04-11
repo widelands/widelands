@@ -22,6 +22,7 @@
 #include "graphic/font_handler.h"
 
 #include <list>
+#include <memory>
 
 #include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
@@ -29,7 +30,6 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "graphic/wordwrap.h"
@@ -73,7 +73,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	const Image* image;
+	std::unique_ptr<const Image> image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -93,7 +93,6 @@ struct FontHandler::Data {
 
 	~Data() {
 		while (!linecache.empty()) {
-			delete linecache.back().image;
 			linecache.pop_back();
 		}
 	}
@@ -161,7 +160,6 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize) {
-		delete linecache.back().image;
 		linecache.pop_back();
 	}
 
@@ -197,7 +195,7 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.image = new_in_memory_image("dummy_hash", new Texture(text_surface));
+	lce.image.reset(new Texture(text_surface));
 	lce.width = lce.image->width();
 	lce.height = lce.image->height();
 }
@@ -221,7 +219,7 @@ void FontHandler::draw_text
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
-		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
+		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
 		draw_caret(dst, style, dstpoint, copytext, caret);
@@ -239,7 +237,7 @@ uint32_t FontHandler::draw_text_raw
 	const LineCacheEntry & lce = d->get_line(style, text);
 
 	if (lce.image)
-		dst.blit(dstpoint, lce.image);
+		dst.blit(dstpoint, lce.image.get());
 
 	return lce.width;
 }

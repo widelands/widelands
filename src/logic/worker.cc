@@ -235,7 +235,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		// In the future, we might want to support amount = 0 for
@@ -278,7 +278,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			continue;
 
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		pick -= 8 * amount;
@@ -288,7 +288,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			--amount;
 
 			mr.location().field->set_resources
-				(res, mr.location().field->get_starting_res_amount() - amount);
+				(res, mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -517,7 +517,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // will also allow blocking the shoreline if it is next to the worker's
 // location. Also, the gap of 2 nodes between 2 farms will be blocked,
 // because both are next to their farm. The only real solution that I can
-// think of for this kind of bugs is to only allow unpassable objects to
+// think of for this kind of bugs is to only allow impassable objects to
 // be placed on a node if ALL neighbouring nodes are passable. This must
 // of course be checked at the moment when the object is placed and not,
 // as in this case, only before a worker starts walking there to place an
@@ -618,7 +618,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
-	if (imm == &ref_cast<Building, PlayerImmovable>(*get_location(game))) {
+	if (imm == &dynamic_cast<Building&>(*get_location(game))) {
 		start_task_leavebuilding(game, false);
 		return true;
 	}
@@ -843,8 +843,27 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	}
 
 	// Randomly pick one of the immovables to be planted.
-	const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
-	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
+
+	// Each candidate is weighted by its probability to grow.
+	double total_weight = 0.0;
+	for (const auto& bsii : best_suited_immovables_index)
+	{
+		double weight = std::get<0>(bsii);
+		total_weight += weight * weight;
+	}
+
+	double choice = logic_rand_as_double(&game) * total_weight;
+
+	for (const auto& bsii : best_suited_immovables_index)
+	{
+		double weight = std::get<0>(bsii);
+		state.ivar2 = std::get<1>(bsii);
+		choice -= weight * weight;
+		if (0 > choice)
+		{
+			break;
+		}
+	}
 
 	Immovable& newimm =
 	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
@@ -901,9 +920,6 @@ bool Worker::run_removeobject(Game & game, State & state, const Action &)
  */
 bool Worker::run_geologist(Game & game, State & state, const Action & action)
 {
-	// assert that location is of the right type.
-	ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
-
 	molog
 		("  Start Geologist (%i attempts, %i radius -> %s)\n",
 		 action.iparam1, action.iparam2, action.sparam1.c_str());
@@ -937,16 +953,28 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// that might not be around forever.
 			const std::string message =
 					(boost::format("<rt image=world/resources/pics/%s4.png>"
-										"<p font-size=14 font-face=DejaVuSerif>%s</p></rt>")
+										"<p font-face=serif font-size=14>%s</p></rt>")
 					 % rdescr->name().c_str()
 					 % _("A geologist found resources.")).str();
+
+			Message::Type message_type = Message::Type::kGeologists;
+			if (rdescr->name() == "coal")
+				message_type = Message::Type::kGeologistsCoal;
+			else if (rdescr->name() == "gold")
+				message_type = Message::Type::kGeologistsGold;
+			else if (rdescr->name() == "granite")
+				message_type = Message::Type::kGeologistsGranite;
+			else if (rdescr->name() == "iron")
+				message_type = Message::Type::kGeologistsIron;
+			else if (rdescr->name() == "water")
+				message_type = Message::Type::kGeologistsWater;
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
 				(game,
 				 *new Message
-				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
+					(message_type,
 					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
@@ -1846,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 		owner().add_message
 			(game,
 			 *new Message
-			 	("game engine",
+				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 			 	 _("Worker got lost!"),
 				 message,
@@ -1902,8 +1930,7 @@ void Worker::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		const WorkerProgram & program =
-			ref_cast<WorkerProgram const, BobProgramBase const>(*state.program);
+		const WorkerProgram & program = dynamic_cast<const WorkerProgram&>(*state.program);
 
 		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
 			return pop_task(game);
@@ -2083,7 +2110,7 @@ void Worker::dropoff_update(Game & game, State &)
 	WareInstance * ware = get_carried_ware(game);
 	BaseImmovable * const location = game.map()[get_position()].get_immovable();
 #ifndef NDEBUG
-	Building & ploc = ref_cast<Building, PlayerImmovable>(*get_location(game));
+	Building & ploc = dynamic_cast<Building&>(*get_location(game));
 	assert(&ploc == location || &ploc.base_flag() == location);
 #endif
 
@@ -2205,11 +2232,9 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
-		if
-			(WareInstance * const ware =
-			 	ref_cast<Flag, PlayerImmovable>(*location).fetch_pending_ware
-			 		(game, employer))
+		if (WareInstance * const ware = dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
 			set_carried_ware(game, ware);
+		}
 
 		set_animation(game, descr().get_animation("idle"));
 		return schedule_act(game, 20);
@@ -2367,14 +2392,11 @@ const Bob::Task Worker::taskLeavebuilding = {
  */
 void Worker::start_task_leavebuilding(Game & game, bool const changelocation)
 {
-	Building & building =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
-
 	// Set the wait task
 	push_task(game, taskLeavebuilding);
 	State & state = top_state();
 	state.ivar1   = changelocation;
-	state.objvar1 = &building;
+	state.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
 
@@ -2437,8 +2459,9 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	//  The if-statement is needed because this is (unfortunately) also called
 	//  when the Worker is deallocated when shutting down the simulation. Then
 	//  the building might not exist any more.
-	if (MapObject * const building = state.objvar1.get(game))
-		ref_cast<Building, MapObject>(*building).leave_skip(game, *this);
+	if (MapObject * const building = state.objvar1.get(game)) {
+		dynamic_cast<Building&>(*building).leave_skip(game, *this);
+	}
 }
 
 
@@ -2544,7 +2567,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 		for (const ImmovableFound& tmp_flag : flags) {
 
-			Flag & flag = ref_cast<Flag, BaseImmovable>(*tmp_flag.object);
+			Flag & flag = dynamic_cast<Flag&>(*tmp_flag.object);
 
 			if (game.logic_rand() % 2 == 0)
 				continue;
@@ -2651,7 +2674,7 @@ void Worker::geologist_update(Game & game, State & state)
 	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
-		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
+		 	(dynamic_cast<Flag&>(*get_location(game)).get_position()),
 		 state.ivar2);
 
 	// Check if it's not time to go home
@@ -2685,11 +2708,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TerrainDescription::MOUNTAIN)
+				 TerrainDescription::Type::kMountain)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TerrainDescription::MOUNTAIN);
+				 TerrainDescription::Type::kMountain);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2702,11 +2725,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TerrainDescription::MOUNTAIN)
+					 TerrainDescription::Type::kMountain)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TerrainDescription::MOUNTAIN);
+					 TerrainDescription::Type::kMountain);
 				if (i == 0)
 					i = list.size();
 				--i;
@@ -2798,12 +2821,10 @@ void Worker::start_task_scout
 	state.ivar2   = game.get_gametime() + time;
 
 	// first get out
-	Building & building =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
 	push_task(game, taskLeavebuilding);
 	State & stateLeave = top_state();
 	stateLeave.ivar1 = false;
-	stateLeave.objvar1 = &building;
+	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
 
@@ -2956,14 +2977,13 @@ void Worker::Loader::load(FileRead & fr)
 			worker.m_current_exp = fr.signed_32();
 
 			if (fr.unsigned_8()) {
-				worker.m_transfer =
-					new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
+				worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.m_transfer->read(fr, m_transfer);
 			}
 		} else {
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
-	} catch (const std::exception & e) {
+	} catch (const std::exception& e) {
 		throw wexception("loading player immovable: %s", e.what());
 	}
 }

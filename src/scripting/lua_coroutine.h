@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 #include <stdint.h>
 
-#include "third_party/eris/lua.hpp"
+#include "scripting/lua.h"
 
 class FileRead;
 class FileWrite;

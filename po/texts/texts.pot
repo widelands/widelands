@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2014 Widelands Development Team
+# Copyright (C) 2005-2015 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -197,7 +197,7 @@ msgstr ""
 
 #: ../../txts/README.lua:78
 msgid ""
-"F11: takes a screenshot"
+"CTRL+F11: takes a screenshot"
 msgstr ""
 
 #: ../../txts/README.lua:80
@@ -207,87 +207,117 @@ msgstr ""
 
 #: ../../txts/README.lua:82
 msgid ""
-"G: jumps to the location corresponding to the current message"
+"0: shows all messages"
 msgstr ""
 
 #: ../../txts/README.lua:83
 msgid ""
-"DELETE: archives the current message"
+"1: shows geologists' messages only"
+msgstr ""
+
+#: ../../txts/README.lua:84
+msgid ""
+"2: shows economy messages only"
 msgstr ""
 
 #: ../../txts/README.lua:85
 msgid ""
-"Online Help"
+"3: shows seafaring messages only"
+msgstr ""
+
+#: ../../txts/README.lua:86
+msgid ""
+"4: shows warfare messages only"
 msgstr ""
 
 #: ../../txts/README.lua:87
+msgid ""
+"5: shows scenario messages only"
+msgstr ""
+
+#: ../../txts/README.lua:88
+msgid ""
+"G: jumps to the location corresponding to the current message"
+msgstr ""
+
+#: ../../txts/README.lua:89
+msgid ""
+"DELETE: archives/restores the current message"
+msgstr ""
+
+#: ../../txts/README.lua:91
+msgid ""
+"Online Help"
+msgstr ""
+
+#: ../../txts/README.lua:93
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:97
 msgid ""
 "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:99
 msgid ""
 "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:103
 msgid ""
 "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:105
 msgid ""
 "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:107
 msgid ""
 "- What you expected to happen when performing the steps and what actually happened."
 msgstr ""
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:109
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr ""
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:112
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:115
 msgid ""
 "- Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:117
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:120
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:124
 msgid ""
 "Replays"
 msgstr ""
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:126
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -296,7 +326,7 @@ msgid ""
 "you the time you started the game."
 msgstr ""
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:132
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -306,7 +336,7 @@ msgid ""
 "different version of the game."
 msgstr ""
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
@@ -316,7 +346,7 @@ msgstr ""
 
 #: ../../txts/developers:1
 msgid ""
-"Development"
+"Authors"
 msgstr ""
 
 #: ../../txts/developers:3
@@ -335,19 +365,19 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:18
-#: ../../txts/developers:368
+#: ../../txts/developers:366
 msgid ""
 "Graphics"
 msgstr ""
 
 #: ../../txts/developers:23
-#: ../../txts/developers:361
+#: ../../txts/developers:359
 msgid ""
 "Homepage"
 msgstr ""
 
 #: ../../txts/developers:28
-#: ../../txts/developers:375
+#: ../../txts/developers:373
 msgid ""
 "Sound"
 msgstr ""
@@ -362,182 +392,177 @@ msgid ""
 "Coders"
 msgstr ""
 
-#: ../../txts/developers:94
+#: ../../txts/developers:96
 msgid ""
 "Graphicians"
 msgstr ""
 
-#: ../../txts/developers:124
+#: ../../txts/developers:126
 msgid ""
 "Musicians"
 msgstr ""
 
-#: ../../txts/developers:136
+#: ../../txts/developers:138
 msgid ""
 "Sound Effects"
 msgstr ""
 
-#: ../../txts/developers:146
+#: ../../txts/developers:148
 msgid ""
 "Maps and Missions"
 msgstr ""
 
-#: ../../txts/developers:166
-msgid ""
-"Tutorials"
-msgstr ""
-
-#: ../../txts/developers:172
+#: ../../txts/developers:169
 msgid ""
 "Campaign Story"
 msgstr ""
 
-#: ../../txts/developers:175
+#: ../../txts/developers:172
 msgid ""
 "Barbarian"
 msgstr ""
 
-#: ../../txts/developers:181
+#: ../../txts/developers:178
 msgid ""
 "Empire"
 msgstr ""
 
-#: ../../txts/developers:185
+#: ../../txts/developers:182
 msgid ""
 "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid ""
 "Translators"
 msgstr ""
 
-#: ../../txts/developers:195
+#: ../../txts/developers:192
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to launchpad.net. "
 msgstr ""
 
-#: ../../txts/developers:196
+#: ../../txts/developers:193
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:200
+#: ../../txts/developers:197
 msgid ""
 "Czech"
 msgstr ""
 
-#: ../../txts/developers:207
+#: ../../txts/developers:204
 msgid ""
 "Dansk"
 msgstr ""
 
-#: ../../txts/developers:213
+#: ../../txts/developers:210
 msgid ""
 "Dutch"
 msgstr ""
 
-#: ../../txts/developers:220
+#: ../../txts/developers:217
 msgid ""
 "Finnish"
 msgstr ""
 
-#: ../../txts/developers:226
+#: ../../txts/developers:223
 msgid ""
 "French"
 msgstr ""
 
-#: ../../txts/developers:233
+#: ../../txts/developers:230
 msgid ""
 "Galician"
 msgstr ""
 
-#: ../../txts/developers:238
+#: ../../txts/developers:235
 msgid ""
 "German"
 msgstr ""
 
-#: ../../txts/developers:250
+#: ../../txts/developers:247
 msgid ""
 "Hebrew"
 msgstr ""
 
-#: ../../txts/developers:255
+#: ../../txts/developers:252
 msgid ""
 "Hungarian"
 msgstr ""
 
-#: ../../txts/developers:260
+#: ../../txts/developers:257
 msgid ""
 "Italian"
 msgstr ""
 
-#: ../../txts/developers:265
+#: ../../txts/developers:262
 msgid ""
 "Polish"
 msgstr ""
 
-#: ../../txts/developers:273
+#: ../../txts/developers:270
 msgid ""
 "Russian"
 msgstr ""
 
-#: ../../txts/developers:278
+#: ../../txts/developers:275
 msgid ""
 "Slovak"
 msgstr ""
 
-#: ../../txts/developers:283
+#: ../../txts/developers:280
 msgid ""
 "Spanish"
 msgstr ""
 
-#: ../../txts/developers:288
+#: ../../txts/developers:285
 msgid ""
 "Swedish"
 msgstr ""
 
-#: ../../txts/developers:295
+#: ../../txts/developers:292
 msgid ""
 "Packagers"
 msgstr ""
 
-#: ../../txts/developers:299
+#: ../../txts/developers:296
 msgid ""
 "Linux Distributions"
 msgstr ""
 
-#: ../../txts/developers:310
+#: ../../txts/developers:307
 msgid ""
 "Other Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:321
+#: ../../txts/developers:318
 msgid ""
 "Non Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:333
+#: ../../txts/developers:330
 msgid ""
 "Homepage Coders"
 msgstr ""
 
-#: ../../txts/developers:342
+#: ../../txts/developers:340
 msgid ""
 "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:357
+#: ../../txts/developers:355
 msgid ""
 "Former elders"
 msgstr ""
 
-#: ../../txts/developers:380
+#: ../../txts/developers:378
 msgid ""
 "Translation"
 msgstr ""
 
-#: ../../txts/developers:387
+#: ../../txts/developers:385
 msgid ""
 "Other"
 msgstr ""
@@ -634,7 +659,7 @@ msgstr ""
 
 #: ../../txts/license:7
 msgid ""
-"Copyright 2002 - 2014 by the Widelands Development Team."
+"Copyright 2002 - 2015 by the Widelands Development Team."
 msgstr ""
 
 #: ../../txts/license:9

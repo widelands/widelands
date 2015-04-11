@@ -36,6 +36,7 @@ struct EmptyAI : ComputerPlayer {
 	void think() override {}
 
 	struct EmptyAIImpl : Implementation {
+		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 		EmptyAIImpl() {name = _("None");}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override

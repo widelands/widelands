@@ -461,11 +461,11 @@ void MapPlayersViewPacket::read
 					{ //  edges
 						uint8_t mask = 0;
 						if (f_vision | bl_vision)
-							mask  = Road_Mask << Road_SouthWest;
+							mask  = RoadType::kMask << RoadType::kSouthWest;
 						if (f_vision | br_vision)
-							mask |= Road_Mask << Road_SouthEast;
+							mask |= RoadType::kMask << RoadType::kSouthEast;
 						if (f_vision |  r_vision)
-							mask |= Road_Mask << Road_East;
+							mask |= RoadType::kMask << RoadType::kEast;
 						f_player_field.roads = f.field->get_roads() & mask;
 					}
 
@@ -766,7 +766,7 @@ void MapPlayersViewPacket::read
 				{ //  edges
 					uint8_t mask = 0;
 					if (f_seen | bl_seen) {
-						mask  = Road_Mask << Road_SouthWest;
+						mask  = RoadType::kMask << RoadType::kSouthWest;
 					} else if (f_everseen | bl_everseen) {
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -777,7 +777,7 @@ void MapPlayersViewPacket::read
 						}
 					}
 					if (f_seen | br_seen) {
-						mask |= Road_Mask << Road_SouthEast;
+						mask |= RoadType::kMask << RoadType::kSouthEast;
 					} else if (f_everseen | br_everseen) {
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -788,7 +788,7 @@ void MapPlayersViewPacket::read
 						}
 					}
 					if (f_seen |  r_seen) {
-						mask |= Road_Mask << Road_East;
+						mask |= RoadType::kMask << RoadType::kEast;
 					} else if (f_everseen |  r_everseen) {
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.

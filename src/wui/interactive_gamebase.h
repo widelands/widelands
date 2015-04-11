@@ -82,8 +82,13 @@ public:
 	bool is_multiplayer() {return m_multiplayer;}
 
 	void show_game_summary();
+	void postload() override;
+	void start() override {}
 
 protected:
+	void draw_overlay(RenderTarget &) override;
+	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
+
 	GameMainMenuWindows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	std::string              m_building_census_format;
@@ -94,6 +99,8 @@ protected:
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_game_summary;
+
+	UI::Button m_toggle_buildhelp;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

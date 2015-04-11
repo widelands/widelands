@@ -26,131 +26,62 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/image.h"
 
 class Texture;
 
-/**
- * Interface to a basic surfaces that can be used as destination for blitting and drawing.
- * It also allows low level pixel access.
- */
-class Surface  {
+// Interface to a basic surfaces that can be used as destination for blitting
+// and drawing. It also allows low level pixel access.
+class Surface {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
 
 	/// Dimensions.
-	uint16_t width() const;
-	uint16_t height() const;
-
-	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&,
-	                  const Texture*,
-	                  const Rect& srcrc,
-	                  BlendMode blend_mode = BlendMode::UseAlpha);
-
-	/// Draws a filled rect to the surface. No blending takes place, the values
-	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
-	virtual void fill_rect(const Rect&, const RGBAColor&);
-
-	/// Draws a rect (frame only) to the surface.
-	virtual void draw_rect(const Rect&, const RGBColor&);
-
-	/// draw a line to the surface
-	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
-
-	/// makes a rectangle on the surface brighter (or darker).
-	/// @note this is slow in SDL mode. Use with care
-	virtual void brighten_rect(const Rect&, int32_t factor);
-
-	/// The functions below are for direct pixel access. This should be used
-	/// only very sparingly as / it is potentially expensive (especially for
-	/// OpenGL). At the moment, only the code inside graphic / is actually using
-	/// this.
-	enum LockMode {
-		/**
-		 * Normal mode preserves pre-existing pixel data so that it can
-		 * be read or modified.
-		 */
-		Lock_Normal = 0,
-
-		/**
-		 * Discard mode discards pre-existing pixel data. All pixels
-		 * will be undefined unless they are re-written.
-		 */
-		Lock_Discard
-	};
-
-	enum UnlockMode {
-		/**
-		 * Update mode will ensure that any changes in the pixel data
-		 * will appear in subsequent operations.
-		 */
-		Unlock_Update = 0,
-
-		/**
-		 * NoChange mode indicates that the caller changed no pixel data.
-		 *
-		 * \note If the caller did change pixel data but specifies NoChange
-		 * mode, the results are undefined.
-		 */
-		Unlock_NoChange
-	};
-
-	/// This returns the pixel format for direct pixel access.
-	const SDL_PixelFormat & format() const;
-
-	/**
-	 * \return Pitch of the raw pixel data, i.e. the number of bytes
-	 * contained in each image row. This can be strictly larger than
-	 * bytes per pixel times the width.
-	 */
-	uint16_t get_pitch() const;
-
-	/**
-	 * \return Pointer to the raw pixel data.
-	 *
-	 * \warning May only be called inside lock/unlock pairs.
-	 */
-	uint8_t * get_pixels() const;
-
-	/**
-	 * Lock/Unlock pairs must guard any of the direct pixel access using the
-	 * functions below.
-	 *
-	 * \note Lock/Unlock pairs cannot be nested.
-	 */
-	virtual void lock(LockMode) = 0;
-	virtual void unlock(UnlockMode) = 0;
-
-	uint32_t get_pixel(uint16_t x, uint16_t y);
-	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
+	virtual int width() const = 0;
+	virtual int height() const = 0;
 
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or not.
 	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
-protected:
-	// Convert the 'rect' in pixel space into opengl space.
-	enum class ConversionMode {
-		// Convert the rect as given.
-		kExact,
-
-		// Convert the rect so that the borders are in the center
-		// of the pixels.
-		kMidPoint,
-	};
-	FloatRect to_opengl(const Rect& rect, ConversionMode mode);
-
-	/// Logical width and height of the surface
-	uint16_t m_w, m_h;
-
-	/// Pixel data, while the texture is locked
-	std::unique_ptr<uint8_t[]> m_pixels;
+	// Setups OpenGL to render to this surface.
+	virtual void setup_gl() = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
+
+/// Draws a rect (frame only) to the surface.
+void draw_rect(const Rect&, const RGBColor&, Surface* destination);
+
+/// This draws a part of 'texture' to 'surface'.
+void blit
+	(const Rect& dst, const Image&, const Rect& srcrc, const float opacity,
+	 BlendMode blend_mode, Surface* destination);
+
+/// This draws a grayed out version. See MonochromeBlitProgram.
+void
+blit_monochrome
+	(const Rect& dst, const Image&, const Rect& srcrc,
+	 const RGBAColor& multiplier, Surface* destination);
+
+/// This draws a playercolor blended image. See BlendedBlitProgram.
+void blit_blended
+	(const Rect& dst, const Image& image, const Image& mask, const Rect&
+	 srcrc, const RGBColor& blend, Surface* destination);
+
+/// Draws a filled rect to the destination. No blending takes place, the values
+// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
+void fill_rect(const Rect&, const RGBAColor&, Surface* destination);
+
+/// draw a line to the destination
+void draw_line
+	(int x1, int y1, int x2, int y2, const RGBColor& color,
+	 int width, Surface* destination);
+
+/// makes a rectangle on the destination brighter (or darker).
+void brighten_rect(const Rect&, int factor, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

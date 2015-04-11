@@ -44,8 +44,8 @@
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication.h"
@@ -243,8 +243,6 @@ void EditorInteractive::think() {
 	frametime = m_realtime - lasttime;
 
 	egbase().get_gametime_pointer() += frametime;
-
-	g_gr->animate_maptextures(egbase().get_gametime());
 }
 
 
@@ -336,12 +334,14 @@ void EditorInteractive::toolsize_menu_btn() {
 }
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
-	if (tools.current().has_size_one())
+	if (tools.current().has_size_one()) {
 		return;
-	if (UI::UniqueWindow * const w = m_toolsizemenu.window)
-		ref_cast<EditorToolsizeMenu, UI::UniqueWindow>(*w).update(val);
-	else
+	}
+	if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
+		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
+	} else {
 		set_sel_radius(val);
+	}
 }
 
 
@@ -418,11 +418,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			set_display_flag
 			(InteractiveBase::dfShowCensus,
 			 !get_display_flag(InteractiveBase::dfShowCensus));
-			handled = true;
-			break;
-
-		case SDLK_f:
-			g_gr->set_fullscreen(!g_gr->fullscreen());
 			handled = true;
 			break;
 

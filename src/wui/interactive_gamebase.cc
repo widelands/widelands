@@ -19,13 +19,32 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
+#include "graphic/font_handler1.h"
+#include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
+
+namespace {
+
+std::string speed_string(int const speed) {
+	if (speed) {
+		return (boost::format("%u.%ux") % (speed / 1000) % (speed / 100 % 10)).str();
+	}
+	return _("PAUSE");
+}
+
+}  // namespace
 
 InteractiveGameBase::InteractiveGameBase
 	(Widelands::Game & _game, Section & global_s,
@@ -41,8 +60,18 @@ InteractiveGameBase::InteractiveGameBase
 		(global_s.get_string("building_tooltip_format",      "%r")),
 	m_chatenabled(chatenabled),
 	m_multiplayer(multiplayer),
-	m_playertype(pt)
-{}
+	m_playertype(pt),
+
+#define INIT_BTN(picture, name, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
+ g_gr->images().get("pics/" picture ".png"),                      \
+ tooltip                                                                      \
+
+	m_toggle_buildhelp
+		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+{
+	m_toggle_buildhelp.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+}
 
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game * InteractiveGameBase::get_game() const
@@ -53,7 +82,7 @@ Widelands::Game * InteractiveGameBase::get_game() const
 
 Widelands::Game & InteractiveGameBase::    game() const
 {
-	return ref_cast<Widelands::Game, Widelands::EditorGameBase>(egbase());
+	return dynamic_cast<Widelands::Game&>(egbase());
 }
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
@@ -68,6 +97,67 @@ ChatProvider * InteractiveGameBase::get_chat_provider()
 {
 	return m_chatProvider;
 }
+
+void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
+	InteractiveBase::draw_overlay(dst);
+
+	GameController* game_controller = game().game_controller();
+	// Display the gamespeed.
+	if (game_controller != nullptr) {
+		std::string game_speed;
+		uint32_t const real = game_controller->real_speed();
+		uint32_t const desired = game_controller->desired_speed();
+		if (real == desired) {
+			if (real != 1000) {
+				game_speed = as_uifont(speed_string(real), UI_FONT_SIZE_SMALL);
+			}
+		} else {
+			game_speed = as_uifont((boost::format
+											/** TRANSLATORS: actual_speed (desired_speed) */
+											(_("%1$s (%2$s)")) %
+											speed_string(real) % speed_string(desired)).str(),
+										  UI_FONT_SIZE_SMALL);
+		}
+
+		if (!game_speed.empty()) {
+			dst.blit(Point(get_w() - 5,  5),
+						UI::g_fh1->render(game_speed),
+						BlendMode::UseAlpha,
+						UI::Align_TopRight);
+		}
+	}
+}
+
+
+/**
+ * Called for every game after loading (from a savegame or just from a map
+ * during single/multiplayer/scenario).
+ */
+void InteractiveGameBase::postload() {
+	Widelands::Map & map = egbase().map();
+	OverlayManager & overlay_manager = map.overlay_manager();
+	overlay_manager.show_buildhelp(false);
+	overlay_manager.register_overlay_callback_function
+			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
+
+	// Connect buildhelp button to reflect build help state. Needs to be
+	// done here rather than in the constructor as the map is not present then.
+	// This code assumes that the InteractivePlayer object lives longer than
+	// the overlay_manager. Otherwise remove the hook in the deconstructor.
+	egbase().map().overlay_manager().onBuildHelpToggle =
+		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
+	m_toggle_buildhelp.set_perm_pressed(buildhelp());
+
+	// Recalc whole map for changed owner stuff
+	map.recalc_whole_map(egbase().world());
+
+	// Close game-relevant UI windows (but keep main menu open)
+	delete m_fieldaction.window;
+	m_fieldaction.window = nullptr;
+
+	hide_minimap();
+}
+
 
 /**
  * See if we can reasonably open a ship window at the current selection position.

@@ -23,11 +23,16 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/bob.h"
 #include "logic/description_maintainer.h"
+#include "logic/widelands.h"
+
+class LuaInterface;
+class LuaTable;
+class Texture;
 
 namespace Widelands {
 
+class BobDescr;
 class EditorCategory;
 class EditorGameBase;
 class ResourceDescription;
@@ -40,7 +45,7 @@ struct ImmovableDescr;
 class World {
 public:
 	World();
-	~World();  // Defined in .cc because all forward declarations are known then.
+	~World();
 
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
@@ -83,6 +88,10 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
+	// Load the graphics for the world. Animations are loaded on
+	// demand.
+	void load_graphics();
+
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
@@ -90,6 +99,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
+	std::unique_ptr<Texture> terrain_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(World);
 };

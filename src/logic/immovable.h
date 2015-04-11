@@ -44,7 +44,7 @@ class Worker;
 class World;
 struct Flag;
 struct PlayerImmovable;
-struct TribeDescr;
+class TribeDescr;
 
 struct NoteImmovable {
 	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)

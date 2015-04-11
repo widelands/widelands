@@ -23,12 +23,12 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
-
 
 using namespace std;
 
@@ -1080,56 +1080,66 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
-	if (!_g_allow_user_input)
-		return;
+bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
+	if (!_g_allow_user_input) {
+		return true;
+	}
 
-	if (Panel * const p = ui_trackmouse(x, y))
-		p->do_mousepress(button, x, y);
+	Panel * const p = ui_trackmouse(x, y);
+	if (p == nullptr) {
+		return false;
+	}
+	return p->do_mousepress(button, x, y);
 }
-void Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
-	if (!_g_allow_user_input)
-		return;
 
-	if (Panel * const p = ui_trackmouse(x, y))
-		p->do_mouserelease(button, x, y);
+bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
+	if (!_g_allow_user_input) {
+		return true;
+	}
+
+	Panel * const p = ui_trackmouse(x, y);
+	if (p == nullptr) {
+		return false;
+	}
+	return p->do_mouserelease(button, x, y);
 }
 
 /**
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-void Panel::ui_mousemove
+bool Panel::ui_mousemove
 	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
-	if (!_g_allow_user_input)
-		return;
+	if (!_g_allow_user_input) {
+		return true;
+	}
 
-	if (!xdiff && !ydiff)
-		return;
+	if (!xdiff && !ydiff) {
+		return true;
+	}
 
 	Panel * p;
-
 	g_gr->update();
 
 	p = ui_trackmouse(x, y);
 	if (!p)
-		return;
+		return false;
 
-	p->do_mousemove(state, x, y, xdiff, ydiff);
+	return p->do_mousemove(state, x, y, xdiff, ydiff);
 }
 
 /**
  * Input callback function. Pass the mousewheel event to the currently modal
  * panel.
 */
-void Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!_g_allow_user_input) {
-		return;
+		return true;
 	}
 	if (!x && !y) {
-		return;
+		return true;
 	}
 	Panel* p = nullptr;
 	if (_g_mousein) {
@@ -1137,32 +1147,34 @@ void Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	} else {
 		p = _g_mousegrab ? _g_mousegrab : _modal;
 	}
-	if (p) {
-		p->do_mousewheel(which, x, y);
+	if (!p) {
+		return false;
 	}
+	return p->do_mousewheel(which, x, y);
 }
 
 
 /**
  * Input callback function. Pass the key event to the currently modal panel
  */
-void Panel::ui_key(bool const down, SDL_Keysym const code)
+bool Panel::ui_key(bool const down, SDL_Keysym const code)
 {
-	if (!_g_allow_user_input)
-		return;
+	if (!_g_allow_user_input) {
+		return true;
+	}
 
-	_modal->do_key(down, code);
+	return _modal->do_key(down, code);
 }
 
 
 /**
  * Input callback function. Pass the textinput event to the currently modal panel
  */
-void Panel::ui_textinput(const std::string& text) {
+bool Panel::ui_textinput(const std::string& text) {
 	if (!_g_allow_user_input) {
-		return;
+		return true;
 	}
-	_modal->do_textinput(text);
+	return _modal->do_textinput(text);
 }
 
 /**
@@ -1203,21 +1215,16 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
-	std::string style
-		(g_options.pull_section("global").get_string
-		 	("ui_font", UI_FONT_NAME_SERIF));
-	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_SERIF;
-	if (style == "sans")
-		return UI_FONT_NAME_SANS;
-	if (g_fs->file_exists("fonts/" + style))
+	std::string style(UI::g_fh1->fontset().serif());
+	if (g_fs->file_exists("i18n/fonts/" + style)) {
 		return style;
+	}
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
 		 style.c_str());
-	return UI_FONT_NAME;
+	return UI::FontSet::kFallbackFont;
 }
 
 }

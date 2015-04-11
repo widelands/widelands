@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,13 @@
 
 #include "logic/world/terrain_description.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
+#include "graphic/texture.h"
 #include "logic/game_data_error.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/world.h"
@@ -35,30 +39,28 @@ namespace  {
 // Parse a terrain type from the giving string.
 TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 	if (type == "green") {
-		return TerrainDescription::GREEN;
+		return TerrainDescription::Type::kGreen;
 	}
 	if (type == "dry") {
-		return TerrainDescription::DRY;
+		return TerrainDescription::Type::kDry;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "acid") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
-		                                             TerrainDescription::MOUNTAIN);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
+																	TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(
-		   TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
+																	TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
-	if (type == "unpassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
-		                                             TerrainDescription::UNPASSABLE);
+	if (type == "mountain") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kMountain);
+	}
+	if (type == "impassable") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
+																	TerrainDescription::Type::kImpassable);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }
@@ -76,29 +78,28 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      fertility_(table.get_double("fertility")),
      humidity_(table.get_double("humidity")) {
 
-	if (!(0 <= fertility_ && fertility_ <= 1.)) {
-		throw GameDataError("%s: fertility is not in [0, 1].", name_.c_str());
+	if (!(0 < fertility_ && fertility_ < 1.)) {
+		throw GameDataError("%s: fertility is not in (0, 1).", name_.c_str());
 	}
-	if (!(0 <= humidity_ && humidity_ <= 1.)) {
-		throw GameDataError("%s: humidity is not in [0, 1].", name_.c_str());
+	if (!(0 < humidity_ && humidity_ < 1.)) {
+		throw GameDataError("%s: humidity is not in (0, 1).", name_.c_str());
 	}
 	if (temperature_ < 0) {
 		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());
 	}
 
-	const std::vector<std::string> textures =
+	 texture_paths_ =
 	   table.get_table("textures")->array_entries<std::string>();
-	int frame_length = FRAME_LENGTH;
-	if (textures.empty()) {
+	frame_length_ = FRAME_LENGTH;
+	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
-	} else if (textures.size() == 1) {
+	} else if (texture_paths_.size() == 1) {
 		if (table.has_key("fps")) {
 			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}
 	} else {
-		frame_length = 1000 / get_positive_int(table, "fps");
+		frame_length_ = 1000 / get_positive_int(table, "fps");
 	}
-	texture_ = g_gr->new_maptexture(textures, frame_length);
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
@@ -121,8 +122,19 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 TerrainDescription::~TerrainDescription() {
 }
 
-uint32_t TerrainDescription::get_texture() const {
-	return texture_;
+const Texture& TerrainDescription::get_texture(uint32_t gametime) const {
+	return *textures_.at((gametime / frame_length_) % textures_.size());
+}
+
+void TerrainDescription::add_texture(std::unique_ptr<Texture> texture) {
+	if (texture->width() != kTextureSideLength || texture->height() != kTextureSideLength) {
+		throw wexception("Tried to add a texture with wrong size.");
+	}
+	textures_.emplace_back(std::move(texture));
+}
+
+const std::vector<std::string>& TerrainDescription::texture_paths() const {
+	return texture_paths_;
 }
 
 TerrainDescription::Type TerrainDescription::get_is() const {
@@ -149,7 +161,7 @@ int TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
 }
 
-bool TerrainDescription::is_resource_valid(const int32_t res) const {
+bool TerrainDescription::is_resource_valid(const int res) const {
 	for (const uint8_t resource_index : valid_resources_) {
 		if (resource_index == res) {
 			return true;
@@ -158,15 +170,15 @@ bool TerrainDescription::is_resource_valid(const int32_t res) const {
 	return false;
 }
 
-int8_t TerrainDescription::get_default_resource() const {
+int TerrainDescription::get_default_resource() const {
 	return default_resource_index_;
 }
 
-int32_t TerrainDescription::get_default_resource_amount() const {
+int TerrainDescription::get_default_resource_amount() const {
 	return default_resource_amount_;
 }
 
-int32_t TerrainDescription::dither_layer() const {
+int TerrainDescription::dither_layer() const {
 	return dither_layer_;
 }
 
@@ -180,6 +192,21 @@ double TerrainDescription::humidity() const {
 
 double TerrainDescription::fertility() const {
 	return fertility_;
+}
+
+void TerrainDescription::set_minimap_color(const RGBColor& color) {
+	for (int i = -128; i < 128; i++) {
+		const int shade = 128 + i;
+		int new_r = std::min<int>((color.r * shade) >> 7, 255);
+		int new_g = std::min<int>((color.g * shade) >> 7, 255);
+		int new_b = std::min<int>((color.b * shade) >> 7, 255);
+		minimap_colors_[shade] = RGBColor(new_r, new_g, new_b);
+	}
+}
+
+const RGBColor& TerrainDescription::get_minimap_color(int shade) {
+	assert(-128 <= shade && shade <= 127);
+	return minimap_colors_[128 + shade];
 }
 
 }  // namespace Widelands

@@ -24,6 +24,7 @@
 #include "chat/chat.h"
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
+#include "logic/player.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -75,6 +76,7 @@ InteractiveSpectator::InteractiveSpectator
 		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
@@ -95,8 +97,6 @@ InteractiveSpectator::InteractiveSpectator
 
 	// Setup all screen elements
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
-
-	set_display_flag(dfSpeed, true);
 
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
@@ -142,17 +142,17 @@ Widelands::Player * InteractiveSpectator::get_player() const
 }
 
 
-/**
- * Called just before the game starts, after postload, init and gfxload
- */
-void InteractiveSpectator::start()
-{
-	Widelands::Map & map = game().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
+int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
+	const Widelands::PlayerNumber nr_players = game().map().get_nrplayers();
 
-	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(game().world());
+	iterate_players_existing(p, nr_players, game(), player) {
+		const Widelands::NodeCaps nc = player->get_buildcaps(c);
+		if (nc > Widelands::NodeCaps::CAPS_NONE) {
+			return nc;
+		}
+	}
+
+	return Widelands::NodeCaps::CAPS_NONE;
 }
 
 
@@ -247,6 +247,10 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down)
 		switch (code.sym) {
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
+
 		case SDLK_m:
 			toggle_minimap();
 			return true;
@@ -263,10 +267,6 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
-		case SDLK_f:
-			g_gr->set_fullscreen(!g_gr->fullscreen());
-			return true;
-
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
@@ -275,8 +275,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 			if (!m_chat.window)
 				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
-			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
-				.enter_chat_message();
+			dynamic_cast<GameChatMenu*>(m_chat.window)->enter_chat_message();
 			return true;
 
 		default:

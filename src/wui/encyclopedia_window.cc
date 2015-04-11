@@ -51,7 +51,7 @@ constexpr uint32_t wareColumnWidth = 250;
 using namespace Widelands;
 
 inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
-	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 
@@ -141,10 +141,8 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 	condTable.clear();
 	const TribeDescr & tribe = iaplayer().player().tribe();
 
-	const ProductionSiteDescr::Programs & programs =
-		ref_cast<ProductionSiteDescr const, BuildingDescr const>
-			(*tribe.get_building_descr(prodSites.get_selected()))
-		.programs();
+	upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prodSites.get_selected()));
+	const ProductionSiteDescr::Programs & programs = descr->programs();
 
 	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
 	//  the program name is not any of produce_iron, smelt_iron, prog_iron
@@ -188,7 +186,7 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 					no_of_wares = no_of_wares + ware_types.size();
 
 					std::string ware_type_names =
-							i18n::localize_item_list(ware_type_descnames, i18n::ConcatenateWith::OR);
+							i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.

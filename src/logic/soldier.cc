@@ -700,12 +700,8 @@ void Soldier::start_animation
 	 uint32_t const time)
 {
 	molog("[soldier] starting animation %s", animname);
-	return
-		start_task_idle
-			(ref_cast<Game, EditorGameBase>(egbase),
-			 descr().get_rand_anim
-			 	(ref_cast<Game, EditorGameBase>(egbase), animname),
-			 time);
+	Game& game = dynamic_cast<Game&>(egbase);
+	return start_task_idle(game, descr().get_rand_anim(game, animname), time);
 }
 
 
@@ -748,14 +744,16 @@ Battle * Soldier::get_battle()
  */
 bool Soldier::can_be_challenged()
 {
-	if (m_hp_current < 1)  //< Soldier is dead!
+	if (m_hp_current < 1) {  //< Soldier is dead!
 		return false;
-	if (!is_on_battlefield())
+	}
+	if (!is_on_battlefield()) {
 		return false;
-	if (!m_battle)
+	}
+	if (!m_battle) {
 		return true;
-	return
-		!m_battle->locked(ref_cast<Game, EditorGameBase>(owner().egbase()));
+	}
+	return !m_battle->locked(dynamic_cast<Game&>(owner().egbase()));
 }
 
 /**
@@ -1573,7 +1571,7 @@ void Soldier::battle_update(Game & game, State &)
 					owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 							 messagetext,
@@ -1582,7 +1580,7 @@ void Soldier::battle_update(Game & game, State &)
 					opponent.owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 							 messagetext,
@@ -1806,7 +1804,7 @@ void Soldier::send_space_signals(Game & game)
 
 		for (BaseImmovable * temp_attackable : attackables) {
 			if
-				(ref_cast<PlayerImmovable const, BaseImmovable const>(*temp_attackable)
+				(dynamic_cast<const PlayerImmovable&>(*temp_attackable)
 				 .get_owner()->player_number()
 				 ==
 				 land_owner) {

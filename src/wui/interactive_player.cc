@@ -61,18 +61,6 @@
 using Widelands::Building;
 using Widelands::Map;
 
-namespace  {
-
-// This function is the callback for recalculation of field overlays
-int32_t int_player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, InteractivePlayer& iap)
-{
-	assert(iap.get_player());
-	return iap.get_player()->get_buildcaps(c);
-}
-
-}  // namespace
-
 InteractivePlayer::InteractivePlayer
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
@@ -84,7 +72,6 @@ InteractivePlayer::InteractivePlayer
 	m_flag_to_connect(Widelands::Coords::null()),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
-// Buildhelp is different as it does not toggle a UniqueWindow
 // Minimap is different as it warps and stuff
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
@@ -114,9 +101,6 @@ m_toggle_objectives
 m_toggle_minimap
 	(INIT_BTN_this
 	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
-m_toggle_buildhelp
-	(INIT_BTN_this
-	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 m_toggle_message_menu
 	(INIT_BTN
 	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
@@ -135,8 +119,6 @@ m_toggle_help
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_objectives)));
 	m_toggle_minimap.sigclicked.connect
 		(boost::bind(&InteractivePlayer::toggle_minimap, this));
-	m_toggle_buildhelp.sigclicked.connect
-		(boost::bind(&InteractivePlayer::toggle_buildhelp, this));
 	m_toggle_message_menu.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_message_menu)));
 	m_toggle_help.sigclicked.connect
@@ -162,8 +144,6 @@ m_toggle_help
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
-
-	set_display_flag(dfSpeed, true);
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
@@ -208,17 +188,6 @@ InteractivePlayer::~InteractivePlayer() {
 	DEINIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 }
 
-
-/*
-===============
-Called just before the game starts, after postload, init and gfxload
-===============
-*/
-void InteractivePlayer::start()
-{
-	postload();
-}
-
 void InteractivePlayer::think()
 {
 	InteractiveBase::think();
@@ -256,7 +225,7 @@ void InteractivePlayer::think()
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
-			 	player().messages().nr_messages(Widelands::Message::New))
+				player().messages().nr_messages(Widelands::Message::Status::kNew))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
 			msg_tooltip =
@@ -269,42 +238,11 @@ void InteractivePlayer::think()
 }
 
 
-/**
- * Called for every game after loading (from a savegame or just from a map
- * during single/multiplayer/scenario).
- */
-void InteractivePlayer::postload()
-{
-	Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
-	overlay_manager.register_overlay_callback_function
-			(boost::bind(&int_player_overlay_callback_function, _1, boost::ref(*this)));
-
-	// Connect buildhelp button to reflect build help state. Needs to be
-	// done here rather than in the constructor as the map is not present then.
-	// This code assumes that the InteractivePlayer object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor.
-	egbase().map().overlay_manager().onBuildHelpToggle =
-		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
-	m_toggle_buildhelp.set_perm_pressed(buildhelp());
-
-	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(egbase().world());
-
-	// Close game-relevant UI windows (but keep main menu open)
-	delete m_fieldaction.window;
-	m_fieldaction.window = nullptr;
-
-	hide_minimap();
-}
-
-
 void InteractivePlayer::popup_message
 	(Widelands::MessageId const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
-	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
+	dynamic_cast<GameMessageMenu&>(*m_message_menu.window)
 	.show_new_message(id, message);
 }
 
@@ -328,6 +266,11 @@ bool InteractivePlayer::can_act(Widelands::PlayerNumber const p) const
 Widelands::PlayerNumber InteractivePlayer::player_number() const
 {
 	return m_player_number;
+}
+
+int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
+	assert(get_player());
+	return get_player()->get_buildcaps(c);
 }
 
 
@@ -401,10 +344,6 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
-		case SDLK_f:
-			g_gr->set_fullscreen(!g_gr->fullscreen());
-			return true;
-
 		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
@@ -473,7 +412,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	if
 		(UI::UniqueWindow * const building_statistics_window =
 		 	m_mainm_windows.building_stats.window)
-		ref_cast<BuildingStatisticsMenu, UI::UniqueWindow>
+		dynamic_cast<BuildingStatisticsMenu&>
 			(*building_statistics_window)
 			.update();
 }

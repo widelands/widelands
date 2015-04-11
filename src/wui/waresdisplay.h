@@ -32,7 +32,7 @@
 namespace UI {struct Textarea;}
 
 namespace Widelands {
-struct TribeDescr;
+class TribeDescr;
 struct WareList;
 }
 

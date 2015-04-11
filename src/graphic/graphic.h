@@ -20,25 +20,18 @@
 #ifndef WL_GRAPHIC_GRAPHIC_H
 #define WL_GRAPHIC_GRAPHIC_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include <SDL.h>
 
-#include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
 
-#define MAX_RECTS 20
-
 class AnimationManager;
 class RenderTarget;
-class Surface;
-class TextureCache;
+class Screen;
 class StreamWrite;
-struct TerrainTexture;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -77,19 +70,12 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	TextureCache& textures() const {return *texture_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
-	void save_png(const Image*, StreamWrite*) const;
-
-	// Creates a new TerrainTexture() with the given 'frametime' and using the given
-	// 'texture_files' as the images for it and returns it id.
-	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
-	void animate_maptextures(uint32_t time);
+	void save_png(Texture*, StreamWrite*) const;
 
 	void screenshot(const std::string& fname) const;
-	TerrainTexture * get_maptexture_data(uint32_t id);
 
 private:
 	// Called when the resolution (might) have changed.
@@ -101,7 +87,7 @@ private:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	std::unique_ptr<Surface> screen_;
+	std::unique_ptr<Screen> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
@@ -112,15 +98,11 @@ private:
 	/// This marks the complete screen for updating.
 	bool m_update;
 
-	/// Volatile cache of Hardware dependant textures.
-	std::unique_ptr<TextureCache> texture_cache_;
-	/// Non-volatile cache of hardware independent images. The use the
-	/// texture_cache_ to cache their pixel data.
+	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
+
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
-
-	std::vector<std::unique_ptr<TerrainTexture>> m_maptextures;
 };
 
 extern Graphic * g_gr;

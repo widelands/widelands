@@ -92,11 +92,11 @@ obj_build_bigger_military_buildings = {
 
 obj_remove_the_barbarians = {
    name = "remove_the_barbarians ",
-   title =_"Destroy the barbarian tribe",
+   title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
-      listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.]]) ..
-      listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
+      listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
+      listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
    ),
 }
 
@@ -207,7 +207,7 @@ diary_page_8 = {
    body= lutius(_"Diary of Lutius",
 		_([[By the Gods! This is absolutely terrible. It seems as if we stand close to a test – and it seems as if Saledus was right with his fear concerning the shipwreck he found.]])
 		.. paragraphdivider() ..
-		_([[Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.]])
+		_([[Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, Barbarian tribes with whom we have had so many problems before.]])
 		.. paragraphdivider() ..
 		_([[At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.]])
 		.. paragraphdivider() ..
@@ -229,9 +229,9 @@ diary_page_10 = {
    body= lutius(_"Diary of Lutius",
 		_([[Today is a proud day. We have fought for our new home and risen victorious.]])
 		.. paragraphdivider() ..
-		_([[There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
+		_([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
 		..  objective_text(_"Victory",
-		_[[You have established a working economy, trained new soldiers and driven the barbarians from the island.]])
+		_[[You have established a working economy, trained new soldiers and driven the Barbarians from the island.]])
 }
 
 seven_days_later = {

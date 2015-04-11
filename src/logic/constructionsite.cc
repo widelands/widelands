@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
@@ -38,7 +39,6 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -172,7 +172,7 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
-			builder->reset_tasks(ref_cast<Game, EditorGameBase>(egbase));
+			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
@@ -180,7 +180,7 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 			Point window_position = m_optionswindow->get_pos();
 			hide_options();
 			InteractiveGameBase & igbase =
-				ref_cast<InteractiveGameBase, InteractiveBase>(*egbase.get_ibase());
+				dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
 		}
 	}

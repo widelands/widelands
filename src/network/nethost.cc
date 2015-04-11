@@ -19,6 +19,7 @@
 
 #include "network/nethost.h"
 
+#include <algorithm>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -56,7 +57,8 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
@@ -66,11 +68,8 @@
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(nullptr), m_cur_wincondition(0) {}
-	~HostGameSettingsProvider() {
-		delete m_lua;
-		m_lua = nullptr;
-	}
+	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_cur_wincondition(0) {}
+	~HostGameSettingsProvider() {}
 
 	void set_scenario(bool is_scenario) override {h->set_scenario(is_scenario);}
 
@@ -293,14 +292,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	void next_win_condition() override {
-		if (m_win_condition_scripts.size() < 1) {
-			if (!m_lua)
-				m_lua = new LuaInterface();
-			std::set<std::string> win_conditions =
-				filter(g_fs->list_directory("scripting/win_conditions"),
-			          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-			m_win_condition_scripts.insert(
-			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
+		if (m_win_condition_scripts.empty()) {
+			m_win_condition_scripts = h->settings().win_condition_scripts;
 			m_cur_wincondition = -1;
 		}
 
@@ -313,7 +306,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 private:
 	NetHost                * h;
-	LuaInterface           * m_lua;
 	int16_t                  m_cur_wincondition;
 	std::vector<std::string> m_win_condition_scripts;
 };
@@ -1055,6 +1047,7 @@ void NetHost::send(ChatMessage msg)
 				// is host the sender?
 				if (d->localplayername == msg.sender) {
 					ChatMessage err;
+					err.time = time(nullptr);
 					err.playern = -2; // System message
 					err.sender = "";
 					err.msg = fail;

@@ -152,7 +152,7 @@ void MapFlagdataPacket::read
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
 								f.request->read
-									(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
+									(fr, dynamic_cast<Game&>(egbase), mol);
 							} else {
 								f.request = nullptr;
 							}
@@ -252,7 +252,7 @@ void MapFlagdataPacket::write
 				if (temp_job.request) {
 					fw.unsigned_8(1);
 					temp_job.request->write
-						(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
+						(fw, dynamic_cast<Game&>(egbase), mos);
 				} else
 					fw.unsigned_8(0);
 

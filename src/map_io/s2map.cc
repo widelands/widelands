@@ -38,7 +38,7 @@
 #include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-#include "scripting/scripting.h"
+#include "scripting/lua_interface.h"
 
 using std::cerr;
 using std::endl;
@@ -645,7 +645,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			const int32_t real_amount = static_cast<int32_t>
 				(2.86 * static_cast<float>(amount));
 			f->set_resources(nres, real_amount);
-			f->set_starting_res_amount(real_amount);
+			f->set_initial_res_amount(real_amount);
 		}
 
 

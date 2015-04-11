@@ -302,8 +302,7 @@ void Critter::program_update(Game & game, State & state)
 
 	for (;;) {
 		const CritterProgram & program =
-			ref_cast<CritterProgram const, BobProgramBase const>
-				(*state.program);
+			dynamic_cast<const CritterProgram&>(*state.program);
 
 		if (state.ivar1 >= program.get_size())
 			return pop_task(game);

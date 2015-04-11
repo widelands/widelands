@@ -20,8 +20,8 @@
 #ifndef WL_WUI_GAME_MESSAGE_MENU_H
 #define WL_WUI_GAME_MESSAGE_MENU_H
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
+#include "logic/message.h"
 #include "logic/message_queue.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -49,6 +49,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
+	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	InteractivePlayer & iplayer() const;
 	void selected(uint32_t);
@@ -60,6 +61,10 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
+	void filter_messages(Widelands::Message::Type);
+	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
+	void set_filter_messages_tooltips();
+	void set_display_message_type_label(Widelands::Message::Type);
 	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
@@ -68,6 +73,14 @@ private:
 	UI::Button * m_togglemodebtn;
 	UI::Button * m_centerviewbtn;
 	Mode mode;
+	// Buttons for message types
+	UI::Button * m_geologistsbtn;
+	UI::Button * m_economybtn;
+	UI::Button * m_seafaringbtn;
+	UI::Button * m_warfarebtn;
+	UI::Button * m_scenariobtn;
+	Widelands::Message::Type m_message_filter;
+	UI::MultilineTextarea * m_display_message_type_label;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H

@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2014 Widelands Development Team
+# Copyright (C) 2005-2015 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -109,12 +109,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 msgid ""
-"What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?"
+"What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous Barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?"
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid ""
-"With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons."
+"With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a Barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
@@ -124,12 +124,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:86
 msgid ""
-"Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the barbarians."
+"Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the Barbarians."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:88
 msgid ""
-"Still, I saw no way that I could erase my shame without fighting against these barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors."
+"Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:94

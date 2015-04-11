@@ -23,21 +23,21 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
 #include "logic/constants.h"
 #include "logic/game_controller.h"
+#include "logic/message.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "scripting/c_utils.h"
+#include "scripting/globals.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
-#include "scripting/scripting.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -97,6 +97,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
 	METHOD(LuaPlayer, hide_fields),
 	METHOD(LuaPlayer, reveal_scenario),
 	METHOD(LuaPlayer, reveal_campaign),
+	METHOD(LuaPlayer, get_ships),
 	METHOD(LuaPlayer, get_buildings),
 	METHOD(LuaPlayer, get_suitability),
 	METHOD(LuaPlayer, allow_workers),
@@ -125,7 +126,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 			(RO) The name of this Player.
 */
 int LuaPlayer::get_name(lua_State * L) {
-	Game & game = get_game(L);
+	Game& game = get_game(L);
 	Player & p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;
@@ -203,7 +204,7 @@ int LuaPlayer::get_inbox(lua_State * L) {
 	lua_newtable(L);
 	uint32_t cidx = 1;
 	for (const std::pair<MessageId, Message *>& temp_message : p.messages()) {
-		if (temp_message.second->status() == Message::Archived)
+		if (temp_message.second->status() == Message::Status::kArchived)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
@@ -277,9 +278,6 @@ int LuaPlayer::get_see_all(lua_State * const L) {
 			'archived'. Default: "new"
 		:type status: :class:`string`
 
-		:arg sender: sender name of this string. Default: "ScriptingEngine"
-		:type sender: :class:`string`
-
 		:arg popup: should the message window be opened for this message or not.
 			Default: :const:`false`
 		:type popup: :class:`boolean`
@@ -292,8 +290,7 @@ int LuaPlayer::send_message(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
 	Coords c = Coords::null();
-	Message::Status st = Message::New;
-	std::string sender = "ScriptingEngine";
+	Message::Status st = Message::Status::kNew;
 	bool popup = false;
 
 	if (n == 4) {
@@ -306,16 +303,11 @@ int LuaPlayer::send_message(lua_State * L) {
 		lua_getfield(L, 4, "status");
 		if (!lua_isnil(L, -1)) {
 			std::string s = luaL_checkstring(L, -1);
-			if (s == "new") st = Message::New;
-			else if (s == "read") st = Message::Read;
-			else if (s == "archived") st = Message::Archived;
+			if (s == "new") st = Message::Status::kNew;
+			else if (s == "read") st = Message::Status::kRead;
+			else if (s == "archived") st = Message::Status::kArchived;
 			else report_error(L, "Unknown message status: %s", s.c_str());
 		}
-		lua_pop(L, 1);
-
-		lua_getfield(L, 4, "sender");
-		if (!lua_isnil(L, -1))
-			sender = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "popup");
@@ -331,7 +323,7 @@ int LuaPlayer::send_message(lua_State * L) {
 		plr.add_message
 			(game,
 			 *new Message
-			 	(sender,
+				(Message::Type::kScenario,
 			 	 game.get_gametime(),
 			 	 title,
 			 	 body,
@@ -637,6 +629,7 @@ int LuaPlayer::reveal_scenario(lua_State * L) {
 int LuaPlayer::reveal_campaign(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
+		report_error(L, "Can only be called for interactive player!");
 
 	CampaignVisibilitySave cvs;
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
@@ -644,6 +637,41 @@ int LuaPlayer::reveal_campaign(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. method:: get_ships()
+
+		:returns: array of player's ships
+		:rtype: :class:`array` or :class:`table`
+*/
+int LuaPlayer::get_ships(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
+	Map * map = egbase.get_map();
+	PlayerNumber p = (get(L, egbase)).player_number();
+	lua_newtable(L);
+	uint32_t cidx = 1;
+
+	std::set<OPtr<Ship>> found_ships;
+	for (int16_t y = 0; y < map->get_height(); ++y) {
+		for (int16_t x = 0; x < map->get_width(); ++x) {
+			FCoords f = map->get_fcoords(Coords(x, y));
+			// there are too many bobs on the map so we investigate
+			// only bobs on water
+			if (f.field->nodecaps() & MOVECAPS_SWIM) {
+				for (Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
+					if (upcast(Ship, ship, bob)) {
+						if (ship->get_owner()->player_number() == p && !found_ships.count(ship)) {
+							found_ships.insert(ship);
+							lua_pushuint32(L, cidx++);
+							LuaMaps::upcasted_map_object_to_lua(L, ship);
+							lua_rawset(L, -3);
+						}
+					}
+				}
+			}
+		}
+	}
+	return 1;
+}
 
 /* RST
 	.. method:: get_buildings(which)
@@ -1049,7 +1077,6 @@ const MethodType<LuaMessage> LuaMessage::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
-	PROP_RO(LuaMessage, sender),
 	PROP_RO(LuaMessage, title),
 	PROP_RO(LuaMessage, body),
 	PROP_RO(LuaMessage, sent),
@@ -1079,15 +1106,7 @@ void LuaMessage::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: sender
 
-		(RO) The name of the sender of this message
-*/
-int LuaMessage::get_sender(lua_State * L) {
-	lua_pushstring(L, get(L, get_game(L)).sender());
-	return 1;
-}
 /* RST
 	.. attribute:: title
 
@@ -1141,19 +1160,19 @@ int LuaMessage::get_field(lua_State * L) {
 */
 int LuaMessage::get_status(lua_State * L) {
 	switch (get(L, get_game(L)).status()) {
-		case Message::New: lua_pushstring(L, "new"); break;
-		case Message::Read: lua_pushstring(L, "read"); break;
-		case Message::Archived: lua_pushstring(L, "archived"); break;
+		case Message::Status::kNew: lua_pushstring(L, "new"); break;
+		case Message::Status::kRead: lua_pushstring(L, "read"); break;
+		case Message::Status::kArchived: lua_pushstring(L, "archived"); break;
 		default: report_error(L, "Unknown Message status encountered!");
 	}
 	return 1;
 }
 int LuaMessage::set_status(lua_State * L) {
-	Message::Status status = Message::New;
+	Message::Status status = Message::Status::kNew;
 	std::string s = luaL_checkstring(L, -1);
-	if (s == "new") status = Message::New;
-	else if (s == "read") status = Message::Read;
-	else if (s == "archived") status = Message::Archived;
+	if (s == "new") status = Message::Status::kNew;
+	else if (s == "read") status = Message::Status::kRead;
+	else if (s == "archived") status = Message::Status::kArchived;
 	else report_error(L, "Invalid message status <%s>!", s.c_str());
 
 	get_plr(L, get_game(L)).messages().set_message_status(m_mid, status);

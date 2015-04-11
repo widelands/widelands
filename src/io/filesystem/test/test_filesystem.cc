@@ -34,16 +34,14 @@ static std::string Win32Path(std::string s)
 	if (!s.empty() && s[0] == '\\')
 	{
 		// Insert drive letter part from current working directory
-		std::string cwd = RealFSImpl("").get_working_directory();
+		std::string cwd = FileSystem::get_working_directory();
 		s.insert(0, cwd.substr(0, 2));
 	}
 	return s;
 }
 static int setenv(const char* envname, const char* envval, int overwrite)
 {
-	std::stringstream s;
-	s << envname << "=" << Win32Path(envval);
-	return _putenv(s.str().c_str());
+	return _putenv_s(envname, envval);
 }
 #else
 // BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
@@ -190,4 +188,3 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 }
 #endif
 BOOST_AUTO_TEST_SUITE_END()
-

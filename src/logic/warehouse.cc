@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -286,6 +285,7 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 		m_next_worker_without_cost_spawn[i] = never();
 	}
 	m_next_stock_remove_act = 0;
+	m_cleanup_in_progress = false;
 }
 
 
@@ -377,11 +377,9 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 			(owner().is_worker_type_allowed(worker_index) &&
 			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
 		{
-			if (next_spawn == static_cast<uint32_t>(never()))
-				next_spawn =
-					schedule_act
-						(ref_cast<Game, EditorGameBase>(egbase),
-						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			if (next_spawn == static_cast<uint32_t>(never())) {
+				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log
 				("WARNING: player %u is allowed to create worker type %s but his "
@@ -444,23 +442,35 @@ void Warehouse::init(EditorGameBase & egbase)
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
 		// conquer_radius thing
-		m_next_military_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 1000);
+		m_next_military_act = schedule_act(*game, 1000);
 
-		m_next_stock_remove_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 4000);
+		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		send_message
-			(ref_cast<Game, EditorGameBase>(egbase),
-			 "warehouse",
-			 descr().descname(),
-			 (boost::format(_("A new %s was added to your economy."))
-			  % descr().descname().c_str()).str(),
-			 true);
+
+		if (descr().name() == "port") {
+			send_message
+				(*game,
+				 Message::Type::kSeafaring,
+				 descr().descname(),
+				 _("A new port was added to your economy."),
+				 true);
+		} else if (descr().name() == "headquarters") {
+			send_message
+				(*game,
+				 Message::Type::kEconomy,
+				 descr().descname(),
+				 _("A new headquarters was added to your economy."),
+				 true);
+		} else {
+			send_message
+				(*game,
+				 Message::Type::kEconomy,
+				 descr().descname(),
+				 _("A new warehouse was added to your economy."),
+				 true);
 		}
+	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area
@@ -469,8 +479,20 @@ void Warehouse::init(EditorGameBase & egbase)
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-	if (descr().get_isport())
+	if (descr().get_isport()) {
 		init_portdock(egbase);
+		PortDock* pd = m_portdock;
+		// should help diagnose problems with marine
+		if (!pd->get_fleet()) {
+			log(" Warning: portdock without a fleet created (%3dx%3d)\n",
+			get_position().x,
+			get_position().y);
+		}
+	}
+
+	//this is default
+	m_cleanup_in_progress = false;
+
 }
 
 /**
@@ -484,7 +506,9 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 	Map & map = egbase.map();
 	std::vector<Coords> dock = map.find_portdock(get_position());
 	if (dock.empty()) {
-		log("Attempting to setup port without neighboring water.\n");
+		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
+		    get_position().x,
+		    get_position().y);
 		return;
 	}
 
@@ -500,6 +524,16 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 
 	if (get_economy() != nullptr)
 		m_portdock->set_economy(get_economy());
+
+	// this is just to indicate something wrong is going on
+	//(tiborb)
+	PortDock* pd_tmp = m_portdock;
+	if (!pd_tmp->get_fleet()) {
+		log (" portdock for port at %3dx%3d created but without a fleet!\n",
+		    get_position().x,
+		    get_position().y);
+	}
+
 }
 
 void Warehouse::destroy(EditorGameBase & egbase)
@@ -507,11 +541,36 @@ void Warehouse::destroy(EditorGameBase & egbase)
 	Building::destroy(egbase);
 }
 
+// if the port still exists and we are in game we first try to restore the portdock
+void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
+	Warehouse::init_portdock(egbase);
+	if (!m_portdock) {
+		log(" Portdock could not be restored, removing the port now (coords: %3dx%3d)\n",
+		    get_position().x,
+		    get_position().y);
+		Building::destroy(egbase);
+	} else {
+		molog ("Message: portdock restored\n");
+		PortDock* pd_tmp = m_portdock;
+		if (!pd_tmp->get_fleet()) {
+			log (" Portdock restored but without a fleet!\n");
+		}
+	}
+}
+
+
 /// Destroy the warehouse.
-void Warehouse::cleanup(EditorGameBase & egbase)
-{
+void Warehouse::cleanup(EditorGameBase& egbase) {
+
+	// if this is a port, it will remove also portdock.
+	// But portdock must know that it should not try to recreate itself
+	m_cleanup_in_progress = true;
+
 	if (egbase.objects().object_still_available(m_portdock)) {
 		m_portdock->remove(egbase);
+	}
+
+	if (!egbase.objects().object_still_available(m_portdock)) {
 		m_portdock = nullptr;
 	}
 
@@ -911,7 +970,7 @@ void Warehouse::request_cb
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
+	Warehouse & wh = dynamic_cast<Warehouse&>(target);
 
 	if (w) {
 		w->schedule_incorporate(game);
@@ -1198,7 +1257,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -1221,20 +1280,18 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!count_workers(game, soldier_index, noreq))
 		return;
 
-	Soldier & defender =
-		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+	Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 	defender.start_task_defense(game, false);
 }
 
 bool Warehouse::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender =
-			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+		Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;

@@ -37,6 +37,11 @@
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
 
+inline EditorInteractive & EditorToolChangeResourcesOptionsMenu::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
+}
+
+
 EditorToolChangeResourcesOptionsMenu::
 EditorToolChangeResourcesOptionsMenu
 		(EditorInteractive             & parent,
@@ -130,7 +135,7 @@ EditorToolChangeResourcesOptionsMenu
 	Widelands::ResourceIndex const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
-	uint16_t resource_pic_max_width = 0, resource_pic_max_height = 0;
+	int resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::ResourceIndex i = 0; i < nr_resources; ++i) {
 		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
@@ -213,7 +218,7 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Widelands::EditorGameBase& egbase = ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase();
+	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
 	   boost::bind(&editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
@@ -234,8 +239,7 @@ void EditorToolChangeResourcesOptionsMenu::update() {
 										static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())));
 
 	m_cur_selection.set_text
-		(ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase()
-		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
+		(eia().egbase().world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point
 		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));

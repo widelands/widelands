@@ -484,7 +484,7 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive & eia =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+		dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;

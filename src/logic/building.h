@@ -31,6 +31,7 @@
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
+#include "logic/message.h"
 #include "logic/soldier_counts.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
@@ -46,7 +47,7 @@ namespace Widelands {
 
 struct Flag;
 struct Message;
-struct TribeDescr;
+class TribeDescr;
 class WaresQueue;
 
 class Building;
@@ -259,7 +260,7 @@ public:
 
 	void send_message
 		(Game & game,
-		 const std::string & msgsender,
+		 const Message::Type msgtype,
 		 const std::string & title,
 		 const std::string & description,
 		 bool link_to_building_lifetime = true,

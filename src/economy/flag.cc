@@ -19,7 +19,6 @@
 
 #include "economy/flag.h"
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -204,7 +203,9 @@ void Flag::attach_building(EditorGameBase & egbase, Building & building)
 
 	const Map & map = egbase.map();
 	egbase.set_road
-		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
+		(map.get_fcoords(map.tl_n(m_position)),
+		 RoadType::kSouthEast,
+		 m_building->get_size() == BaseImmovable::SMALL? RoadType::kNormal : RoadType::kBusy);
 
 	building.set_economy(get_economy());
 }
@@ -220,7 +221,7 @@ void Flag::detach_building(EditorGameBase & egbase)
 
 	const Map & map = egbase.map();
 	egbase.set_road
-		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
+		(map.get_fcoords(map.tl_n(m_position)), RoadType::kSouthEast, RoadType::kNone);
 
 	m_building = nullptr;
 }
@@ -640,15 +641,16 @@ void Flag::call_carrier
 	}
 
 	// Deal with the normal (flag) case
-	ref_cast<Flag const, PlayerImmovable const>(*nextstep);
+	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road * const road = get_road(dir);
 		Flag *       other;
 		Road::FlagId flagid;
 
-		if (!road)
+		if (!road) {
 			continue;
+		}
 
 		if (&road->get_flag(Road::FlagStart) == this) {
 			flagid = Road::FlagStart;
@@ -658,12 +660,14 @@ void Flag::call_carrier
 			other = &road->get_flag(Road::FlagStart);
 		}
 
-		if (other != nextstep)
+		if (other != &nextflag) {
 			continue;
+		}
 
 		// Yes, this is the road we want; inform it
-		if (road->notify_ware(game, flagid))
+		if (road->notify_ware(game, flagid)) {
 			return;
+		}
 
 		// If the road doesn't react to the ware immediately, we try other roads:
 		// They might lead to the same flag!
@@ -791,7 +795,7 @@ void Flag::flag_job_request_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Flag & flag = ref_cast<Flag, PlayerImmovable>(target);
+	Flag & flag = dynamic_cast<Flag&>(target);
 
 	assert(w);
 

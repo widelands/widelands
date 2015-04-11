@@ -83,23 +83,27 @@ void Battle::init (EditorGameBase & egbase)
 
 	m_creationtime = egbase.get_gametime();
 
-	if (Battle* battle = m_first ->get_battle())
-		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_first);
-	m_first->set_battle(ref_cast<Game, EditorGameBase>(egbase), this);
-	if (Battle* battle = m_second->get_battle())
-		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_second);
-	m_second->set_battle(ref_cast<Game, EditorGameBase>(egbase), this);
+	Game& game = dynamic_cast<Game&>(egbase);
+
+	if (Battle* battle = m_first ->get_battle()) {
+		battle->cancel(game, *m_first);
+	}
+	m_first->set_battle(game, this);
+	if (Battle* battle = m_second->get_battle()) {
+		battle->cancel(game, *m_second);
+	}
+	m_second->set_battle(game, this);
 }
 
 
 void Battle::cleanup (EditorGameBase & egbase)
 {
 	if (m_first) {
-		m_first ->set_battle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
+		m_first ->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->set_battle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
+		m_second->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		m_second = nullptr;
 	}
 

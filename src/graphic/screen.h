@@ -19,24 +19,34 @@
 #ifndef WL_GRAPHIC_SCREEN_H
 #define WL_GRAPHIC_SCREEN_H
 
+#include <memory>
+
+#include "base/macros.h"
 #include "graphic/surface.h"
 
 /**
- * This surface represents the screen in OpenGL mode.
+ * The screen.
  */
 class Screen : public Surface {
 public:
-	Screen(uint16_t w, uint16_t h);
+	Screen(int w, int h);
 	virtual ~Screen() {}
 
-	/// Interface implementations
-	void lock(LockMode) override;
-	void unlock(UnlockMode) override;
-
-private:
+	// Implements Surface.
+	int width() const override;
+	int height() const override;
+	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
-	void swap_rows();
+	// Reads out the current pixels in the framebuffer and returns
+	// them as a texture for screenshots. This is a very slow process,
+	// so use with care.
+	std::unique_ptr<Texture> to_texture() const;
+
+private:
+	const int m_w, m_h;
+
+	DISALLOW_COPY_AND_ASSIGN(Screen);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_SCREEN_H

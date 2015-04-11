@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -242,6 +243,9 @@ public:
 	bool lock_audio_disabling_;
 
 protected:
+	// Prints an error and disables the sound system.
+	void initialization_error(const std::string& msg);
+
 	void load_one_fx(const char * filename, const std::string & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
@@ -265,11 +269,11 @@ protected:
 	bool random_order_;
 
 	/// A collection of songsets
-	using SongsetMap = std::map<std::string, Songset *>;
+	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
 	SongsetMap songs_;
 
 	/// A collection of effect sets
-	using FXsetMap = std::map<std::string, FXset *>;
+	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
 	FXsetMap fxs_;
 
 	/// List of currently playing effects, and the channel each one is on

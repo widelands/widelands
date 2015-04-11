@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-09-14 17:45+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
+"PO-Revision-Date: 2014-12-06 17:08+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:41+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:38+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -278,17 +278,17 @@ msgstr ""
 #: ../../tribes/barbarians/axfactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "forging an ax"
-msgstr ""
+msgstr "smir en øks"
 
 #: ../../tribes/barbarians/axfactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "forging a sharp ax"
-msgstr ""
+msgstr "smir en skarp øks"
 
 #: ../../tribes/barbarians/axfactory/conf:36
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "forging a broad ax"
-msgstr ""
+msgstr "smir en bred øks"
 
 #: ../../tribes/barbarians/axfactory/conf:38
 #: ../../tribes/barbarians/bakery/conf:27
@@ -497,11 +497,11 @@ msgstr "sover"
 
 #: ../../tribes/barbarians/battlearena/conf:36
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats unnvikelse fra nivå 0 til 1"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats unnvikelse fra nivå 1 til 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -515,23 +515,26 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Trener soldater i «Unnvikelse»."
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"«Unnvikelse» øker en soldats sjanse til å unnvike fiendtlige angrep og "
+"dermed ikke bli truffet."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
+#: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
-"level with which they came."
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
-msgstr ""
+msgstr "Unnvikelse trening:"
 
 #: ../../tribes/barbarians/battlearena/help.lua:38
 msgid ""
@@ -566,16 +569,16 @@ msgstr ""
 #: ../../tribes/barbarians/inn/conf:28
 #: ../../tribes/barbarians/tavern/conf:29
 msgid "preparing a ration"
-msgstr ""
+msgstr "tilbereder en rasjon"
 
 #: ../../tribes/barbarians/big_inn/conf:30
 #: ../../tribes/barbarians/inn/conf:30
 msgid "preparing a snack"
-msgstr ""
+msgstr "tilbereder en matbit"
 
 #: ../../tribes/barbarians/big_inn/conf:32
 msgid "preparing a meal"
-msgstr ""
+msgstr "tilbereder et måltid"
 
 #: ../../tribes/barbarians/big_inn/help.lua:29
 #: ../../tribes/barbarians/brewery/help.lua:29
@@ -701,7 +704,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
-msgstr ""
+msgstr "graver"
 
 #: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
@@ -730,7 +733,7 @@ msgstr ""
 #: ../../tribes/barbarians/deep_coalmine/help.lua:20
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:19
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver kull i fjellområder."
 
 #: ../../tribes/barbarians/coalmine/help.lua:19
 #: ../../tribes/barbarians/deep_coalmine/help.lua:21
@@ -1401,7 +1404,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:18
 #: ../../tribes/barbarians/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver gullmalm i fjellområder."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:19
 #: ../../tribes/barbarians/goldmine/help.lua:18
@@ -1444,12 +1447,14 @@ msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
 msgstr ""
+"«Jeg ser hvordan hakken min slites ned dag for dag og jeg innser hvor viktig "
+"arbeidet mitt er.»"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:18
 #: ../../tribes/barbarians/deeper_oremine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Graver jernmalm i fjellområder."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:19
 #: ../../tribes/barbarians/oremine/help.lua:18
@@ -1514,21 +1519,22 @@ msgstr "Soldatene har bemannet borgtårnet ditt."
 
 #: ../../tribes/barbarians/farm/conf:22
 msgid "planting wheat"
-msgstr ""
+msgstr "planter hvete"
 
 #: ../../tribes/barbarians/farm/conf:24
 msgid "harvesting wheat"
-msgstr ""
+msgstr "høster inn hvete"
 
-#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/farm/conf:45
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
-msgstr ""
+msgstr "Tom for åkre"
 
-#: ../../tribes/barbarians/farm/conf:44
+#: ../../tribes/barbarians/farm/conf:46
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Bonden som jobber på denne gården har ingen ledig plass til å så nye frø."
 
 #: ../../tribes/barbarians/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1565,17 +1571,19 @@ msgstr "Fanger fisk i sjøen."
 
 #: ../../tribes/barbarians/fishers_hut/conf:19
 msgid "fishing"
-msgstr ""
+msgstr "fisker"
 
 #: ../../tribes/barbarians/fishers_hut/conf:26
 msgid "Out of Fish"
-msgstr ""
+msgstr "Tom for fisk"
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his "
 "working radius."
 msgstr ""
+"Fiskeren i denne fiskerhytten klarte ikke finne fisk innenfor arbeidsområdet "
+"sitt."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1632,7 +1640,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/gardener/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Dyrker siv til taktekking."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1683,7 +1691,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
-msgstr ""
+msgstr "Skjærer ut grov stein fra berget i fjellområder."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
@@ -1727,7 +1735,7 @@ msgstr ""
 #: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:18
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Hovedkvarteret er den viktigste bygningen din."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -1742,15 +1750,15 @@ msgstr "Smir hjelmer til soldatene."
 
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid "forging a helm"
-msgstr ""
+msgstr "smir en hjelm"
 
 #: ../../tribes/barbarians/helmsmithy/conf:34
 msgid "forging a mask"
-msgstr ""
+msgstr "smir en maske"
 
 #: ../../tribes/barbarians/helmsmithy/conf:36
 msgid "forging a warhelm"
-msgstr ""
+msgstr "smir en krigshjelm"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1758,7 +1766,7 @@ msgstr "Jegeren bringer godt kjøtt til kolonistene."
 
 #: ../../tribes/barbarians/hunters_hut/conf:20
 msgid "hunting"
-msgstr ""
+msgstr "jakter"
 
 #: ../../tribes/barbarians/hunters_hut/conf:28
 msgid "Out of Game"
@@ -1811,6 +1819,9 @@ msgid ""
 "produce weapons and tools in the metal workshop, axfactory, war mill and in "
 "the helm smithy."
 msgstr ""
+"Jern blir utvunnet fra jernmalm i smelteverket. Det blir brukt til å "
+"produsere våpen og redskaper i metallverket, øksefabrikken, krigsmøllen og "
+"hjelmsmia."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
@@ -1940,41 +1951,43 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "making fire tongs"
-msgstr ""
+msgstr "lager en ildtang"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "making a fishing rod"
-msgstr ""
+msgstr "lager en fiskestang"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "making a hammer"
-msgstr ""
+msgstr "lager en hammer"
 
 #: ../../tribes/barbarians/metalworks/conf:49
 msgid "making a hunting spear"
-msgstr ""
+msgstr "lager et jaktspyd"
 
 #: ../../tribes/barbarians/metalworks/conf:51
 msgid "making kitchen tools"
-msgstr ""
+msgstr "lager kjøkkenredskaper"
 
 #: ../../tribes/barbarians/metalworks/conf:53
 msgid "making a pick"
-msgstr ""
+msgstr "lager en hakke"
 
 #: ../../tribes/barbarians/metalworks/conf:55
 msgid "making a scythe"
-msgstr ""
+msgstr "lager en ljå"
 
 #: ../../tribes/barbarians/metalworks/conf:57
 msgid "making a shovel"
-msgstr ""
+msgstr "lager en spade"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Inskripsjon på dørstokken til den nå forfalne Gamlesmia i Harradsheim, den "
+"eldste kjente smia."
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid "‘We make it work!’"
@@ -2045,21 +2058,23 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:26
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Tom for stein"
 
 #: ../../tribes/barbarians/quarry/conf:27
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
 msgstr ""
+"Steinhuggeren i dette steinbruddet klarte ikke finne steiner innenfor "
+"arbeidsområdet sitt."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
-msgstr ""
+msgstr "Hugger grove steiner ut av steiner i nærheten."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
+msgstr "Steinbruddet trenger steiner innenfor arbeidsområdet."
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
@@ -2071,7 +2086,7 @@ msgstr "Planter trær."
 
 #: ../../tribes/barbarians/rangers_hut/conf:18
 msgid "planting trees"
-msgstr ""
+msgstr "planter trær"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "Chat’Karuth in a conversation with a Ranger"
@@ -2087,13 +2102,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:18
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Planter trær i områdene rundt."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
 "The ranger’s hut needs free space within the working radius to plant the "
 "trees."
 msgstr ""
+"Skogvokterhytta trenger ledig plass innenfor arbeidsområdet til å plante "
+"trærne."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
 msgid ""
@@ -2118,11 +2135,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
-msgstr ""
+msgstr "planter siv"
 
 #: ../../tribes/barbarians/reed_yard/conf:23
 msgid "harvesting reed"
-msgstr ""
+msgstr "høster inn siv"
 
 #: ../../tribes/barbarians/reed_yard/conf:42
 msgid ""
@@ -2163,7 +2180,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/scouts_hut/conf:21
 msgid "scouting"
-msgstr ""
+msgstr "speider"
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
@@ -2209,7 +2226,7 @@ msgstr "Jobber på skipsverftet og lager nye skip."
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "constructing a ship"
-msgstr ""
+msgstr "bygger et skip"
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2225,15 +2242,15 @@ msgstr "Smelter jern."
 
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid "smelting iron"
-msgstr ""
+msgstr "smelter jern"
 
 #: ../../tribes/barbarians/smelting_works/conf:32
 msgid "smelting gold"
-msgstr ""
+msgstr "smelter gull"
 
 #: ../../tribes/barbarians/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr ""
+msgstr "Smelter jernmalm til jern og gullmalm til gull."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -2269,35 +2286,35 @@ msgstr "Trener soldatene."
 
 #: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 0 til 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 1 til 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 2 til 3"
 
 #: ../../tribes/barbarians/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 3 til 4"
 
 #: ../../tribes/barbarians/trainingcamp/conf:57
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "oppgraderer soldats angrep fra nivå 4 til 5"
 
 #: ../../tribes/barbarians/trainingcamp/conf:59
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 0 til 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:61
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 1 til 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:63
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "oppgraderer soldats liv fra nivå 2 til 3"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:15
 msgid "Chief Chat’Karuth in a speech to his army."
@@ -2311,21 +2328,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/help.lua:21
-msgid ""
-"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
-"initial level."
-msgstr ""
+msgstr "Trener soldater i «Angrep» og «Liv»."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Angrep trening:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Health Training:"
-msgstr ""
+msgstr "Liv trening:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:46
 msgid ""
@@ -2335,7 +2346,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
-msgstr ""
+msgstr "Varehus lagrer soldater, arbeidere og verktøy."
 
 #: ../../tribes/barbarians/warhelm/conf:1
 msgid ""
@@ -2346,20 +2357,20 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"
-msgstr ""
+msgstr "smir en bronsjeøks"
 
 #: ../../tribes/barbarians/warmill/conf:44
 msgid "forging a battle ax"
-msgstr ""
+msgstr "smir en stridsøks"
 
 #: ../../tribes/barbarians/warmill/conf:46
 msgid "forging a warrior’s ax"
-msgstr ""
+msgstr "smir en krigerøks"
 
 #: ../../tribes/barbarians/warmill/help.lua:17
 msgid ""
 "The war mill produces all the axes that the barbarians use for warfare."
-msgstr ""
+msgstr "Krigsmøllen produserer alle øksene barbarene bruker i strid."
 
 #: ../../tribes/barbarians/warmill/help.lua:18
 msgid ""
@@ -2400,7 +2411,7 @@ msgstr "Produserer vevet tøy til skip og soldater."
 
 #: ../../tribes/barbarians/weaving-mill/conf:24
 msgid "weaving"
-msgstr ""
+msgstr "vever"
 
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
@@ -2408,12 +2419,13 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/conf:28
 msgid "Out of Water"
-msgstr ""
+msgstr "Tom for vann"
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""
+"Bæreren ved denne brønnen klarte ikke finne vann innenfor arbeidsområdet sitt"
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
@@ -2429,7 +2441,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Heiser vann opp fra dypet."
 
 #: ../../tribes/barbarians/well/help.lua:30
 msgid "The carrier needs %s to get one bucket full of water."

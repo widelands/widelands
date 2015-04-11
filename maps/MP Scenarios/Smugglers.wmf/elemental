@@ -8,7 +8,7 @@ nr_players="4"
 world="greenland"
 name=_"Smugglers"
 author="Nasenbaer,SirVer"
-descr=_"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares?"
+descr=_"Your well established smuggling routes suddenly got busy: two other tribes have appeared and now a rivalry among smugglers has started. Which team will be the first to smuggle a certain number of wares?"
 tags="official"
 
 [teams00]

@@ -21,8 +21,8 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -32,13 +32,15 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "scripting/c_utils.h"
+#include "scripting/factory.h"
+#include "scripting/globals.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -219,7 +221,7 @@ WorkersMap get_valid_workers_for(const Road& r) {
 	WorkersMap valid_workers;
 	valid_workers.insert(WorkerAmount(r.owner().tribe().worker_index("carrier"), 1));
 
-	if (r.get_roadtype() == Road_Busy)
+	if (r.get_roadtype() == RoadType::kBusy)
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
 
 	return valid_workers;
@@ -444,7 +446,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			lua_rawset(L, -3);
 		}
 	} else {
-		const SoldierDescr& soldier_descr = ref_cast<SoldierDescr const, WorkerDescr const>
+		const SoldierDescr& soldier_descr = dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
 		// Only return the number of those requested
@@ -470,7 +472,7 @@ int do_set_soldiers
 
 	const TribeDescr& tribe = owner->tribe();
 	const SoldierDescr& soldier_descr =  //  soldiers
-		ref_cast<SoldierDescr const, WorkerDescr const>
+		dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
@@ -517,7 +519,7 @@ int do_set_soldiers
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				Soldier& soldier = ref_cast<Soldier, Worker>
+				Soldier& soldier = dynamic_cast<Soldier&>
 					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
@@ -1097,8 +1099,7 @@ int LuaMapObjectDescription::get_name(lua_State * L) {
 */
 int LuaMapObjectDescription::get_representative_image(lua_State * L) {
 	const std::string& filepath = g_gr->animations().get_animation
-		(get()->get_animation("idle")).representative_image_from_disk().hash();
-
+		(get()->get_animation("idle")).representative_image_from_disk_filename();
 	lua_pushstring(L, filepath);
 	return 1;
 }
@@ -2103,13 +2104,15 @@ int LuaMapObject::__eq(lua_State * L) {
 	MapObject * me = m_get_or_zero(egbase);
 	MapObject * you = other->m_get_or_zero(egbase);
 
-	// Both objects are destroyed: they are equal
-	if (me == you) lua_pushboolean(L, true);
-	else if (!me || !you) // One of the objects is destroyed: they are distinct
+	// Both objects are destroyed (nullptr) or equal: they are equal
+	if (me == you) {
+		lua_pushboolean(L, true);
+	} else if (me == nullptr || you == nullptr) { // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, false);
-	else // Compare them
+	} else { // Compare their serial number.
 		lua_pushboolean
 			(L, other->get(L, egbase)->serial() == get(L, egbase)->serial());
+	}
 
 	return 1;
 }
@@ -2343,6 +2346,8 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
+	PROP_RO(LuaFlag, roads),
+	PROP_RO(LuaFlag, building),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2352,7 +2357,52 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+	.. attribute:: roads
 
+		(RO) Array of roads leading to the flag. Directions
+		can be tr,r,br,bl,l and tl
+
+		:returns: The array of 'direction:road', if any
+*/
+int LuaFlag::get_roads(lua_State * L) {
+
+		const std::vector<std::string> directions = {"tr", "r", "br", "bl", "l", "tl"};
+
+		lua_newtable(L);
+
+		EditorGameBase & egbase = get_egbase(L);
+		Flag * f = get(L, egbase);
+
+		for (uint32_t i = 1; i <= 6; i++){
+ 	       if (f->get_road(i) != nullptr)  {
+				lua_pushstring(L, directions.at(i - 1));
+				upcasted_map_object_to_lua(L, f->get_road(i));
+				lua_rawset(L, -3);
+			}
+		}
+		return 1;
+}
+
+/* RST
+	.. attribute:: building
+
+		(RO) building belonging to the flag
+*/
+int LuaFlag::get_building(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
+
+	PlayerImmovable * building = f->get_building();
+	if (!building)  {
+		return 0;
+	} else {
+		upcasted_map_object_to_lua(L, building);
+	}
+	return 1;
+
+}
 /*
  ==========================================================
  LUA METHODS
@@ -2531,9 +2581,9 @@ int LuaRoad::get_end_flag(lua_State * L) {
 */
 int LuaRoad::get_road_type(lua_State * L) {
 	switch (get(L, get_egbase(L))->get_roadtype()) {
-		case Road_Normal:
+		case RoadType::kNormal:
 			lua_pushstring(L, "normal"); break;
-		case Road_Busy:
+		case RoadType::kBusy:
 			lua_pushstring(L, "busy"); break;
 		default:
 		   report_error(L, "Unknown Roadtype! This is a bug in widelands!");
@@ -2586,11 +2636,12 @@ int LuaRoad::create_new_worker
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wdes->create (egbase, r.owner(), &r, idle_position));
+	Carrier& carrier = dynamic_cast<Carrier&>
+		(wdes->create(egbase, r.owner(), &r, idle_position));
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
+	}
 
 	r.assign_carrier(carrier, 0);
 	return 0;
@@ -2631,12 +2682,12 @@ const PropertyType<LuaPortDock> LuaPortDock::Properties[] = {
  ==========================================================
  */
 
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 /* RST
 Building
@@ -2756,10 +2807,13 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
 	METHOD(LuaWarehouse, get_workers),
 	METHOD(LuaWarehouse, set_soldiers),
 	METHOD(LuaWarehouse, get_soldiers),
+	METHOD(LuaWarehouse, start_expedition),
+	METHOD(LuaWarehouse, cancel_expedition),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
 	PROP_RO(LuaWarehouse, portdock),
+	PROP_RO(LuaWarehouse, expedition_in_progress),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2779,6 +2833,26 @@ int LuaWarehouse::get_portdock(lua_State * L) {
 	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_portdock());
 }
 
+/* RST
+	.. attribute:: expedition_in_progress
+
+		(RO) If this Warehouse is a port, and an expedition is in
+		progress, returns true, otherwise nil
+*/
+int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
+
+	Warehouse* wh = get(L, get_egbase(L));
+
+	if (upcast(Game, game, &get_egbase(L))) {
+		PortDock* pd = wh->get_portdock();
+		if (pd) {
+			if (pd->expedition_started()){
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
 
 /*
  ==========================================================
@@ -2845,12 +2919,71 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 	return do_set_soldiers(L, wh->get_position(), wh, wh->get_owner());
 }
 
+/* RST
+	.. method:: start_expedition(port)
+
+		:arg port
+
+		Starts preparation for expedition
+
+*/
+int LuaWarehouse::start_expedition(lua_State* L) {
+
+	Warehouse* Wh = get(L, get_egbase(L));
+
+	if (!Wh) {
+		return 0;
+	}
+
+	if (upcast(Game, game, &get_egbase(L))) {
+		PortDock* pd = Wh->get_portdock();
+		if (!pd) {
+			return 0;
+		}
+		if (!pd->expedition_started()){
+			game->send_player_start_or_cancel_expedition(*Wh);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: cancel_expedition(port)
+
+		:arg port
+
+		Cancels an expedition if in progress
+
+*/
+int LuaWarehouse::cancel_expedition(lua_State* L) {
+
+	Warehouse* Wh = get(L, get_egbase(L));
+
+	if (!Wh) {
+		return 0;
+	}
+
+	if (upcast(Game, game, &get_egbase(L))) {
+		PortDock* pd = Wh->get_portdock();
+			if (!pd) {
+				return 0;
+			}
+		if (pd->expedition_started()){
+			game->send_player_start_or_cancel_expedition(*Wh);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 /* RST
 ProductionSite
@@ -3129,6 +3262,7 @@ const MethodType<LuaBob> LuaBob::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
+	PROP_RO(LuaBob, field),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3138,6 +3272,27 @@ const PropertyType<LuaBob> LuaBob::Properties[] = {
  ==========================================================
  */
 
+/* RST
+	.. attribute:: field //working here
+
+		(RO) The field the bob is located on
+*/
+// UNTESTED
+int LuaBob::get_field(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+
+	Coords coords = get(L, egbase)->get_position();
+
+	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(coords.x, coords.y));
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
 /* RST
 	.. method:: has_caps(capname)
 
@@ -3164,13 +3319,6 @@ int LuaBob::has_caps(lua_State * L) {
 	return 1;
 }
 
-
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-
 /*
  ==========================================================
  C METHODS
@@ -3190,12 +3338,16 @@ const char LuaShip::className[] = "Ship";
 const MethodType<LuaShip> LuaShip::Methods[] = {
 	METHOD(LuaShip, get_wares),
 	METHOD(LuaShip, get_workers),
+	METHOD(LuaShip, build_colonization_port),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, debug_economy),
 	PROP_RO(LuaShip, last_portdock),
 	PROP_RO(LuaShip, destination),
+	PROP_RO(LuaShip, state),
+	PROP_RW(LuaShip, scouting_direction),
+	PROP_RW(LuaShip, island_explore_direction),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3233,6 +3385,149 @@ int LuaShip::get_destination(lua_State* L) {
 int LuaShip::get_last_portdock(lua_State* L) {
 	EditorGameBase & egbase = get_egbase(L);
 	return upcasted_map_object_to_lua(L, get(L, egbase)->get_lastdock(egbase));
+}
+
+/* RST
+	.. attribute:: state
+
+	Query which state the ship is in:
+
+	- transport,
+	- exp_waiting, exp_scouting, exp_found_port_space, exp_colonizing,
+	- sink_request, sink_animation
+
+		(RW) returns the :class:`string` ship's state, or :const:`nil` if there is no valid state.
+
+
+*/
+// UNTESTED sink states
+int LuaShip::get_state(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_ship_state()) {
+			case Ship::TRANSPORT:
+				lua_pushstring(L, "transport");
+				break;
+			case Ship::EXP_WAITING:
+				lua_pushstring(L, "exp_waiting");
+				break;
+			case Ship::EXP_SCOUTING:
+				lua_pushstring(L, "exp_scouting");
+				break;
+			case Ship::EXP_FOUNDPORTSPACE:
+				lua_pushstring(L, "exp_found_port_space");
+				break;
+			case Ship::EXP_COLONIZING:
+				lua_pushstring(L, "exp_colonizing");
+				break;
+			case Ship::SINK_REQUEST:
+				lua_pushstring(L, "sink_request");
+				break;
+			case Ship::SINK_ANIMATION:
+				lua_pushstring(L, "sink_animation");
+				break;
+			default:
+				lua_pushnil(L);
+				return 0;
+			}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::get_scouting_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_scouting_direction()) {
+			case WalkingDir::WALK_NE:
+				lua_pushstring(L, "ne");
+				break;
+			case WalkingDir::WALK_E:
+				lua_pushstring(L, "e");
+				break;
+			case WalkingDir::WALK_SE:
+				lua_pushstring(L, "se");
+				break;
+			case WalkingDir::WALK_SW:
+				lua_pushstring(L, "sw");
+				break;
+			case WalkingDir::WALK_W:
+				lua_pushstring(L, "w");
+				break;
+			case WalkingDir::WALK_NW:
+				lua_pushstring(L, "nw");
+				break;
+			default:
+				return 0;
+			}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::set_scouting_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		std::string dirname = luaL_checkstring(L, 3);
+		WalkingDir dir = WalkingDir::IDLE;
+
+		if (dirname == "ne") {
+			dir = WalkingDir::WALK_NE;
+		} else if (dirname == "e") {
+			dir = WalkingDir::WALK_E;
+		} else if (dirname == "se") {
+			dir = WalkingDir::WALK_SE;
+		} else if (dirname == "sw") {
+			dir = WalkingDir::WALK_SW;
+		} else if (dirname == "w") {
+			dir = WalkingDir::WALK_W;
+		} else if (dirname == "nw") {
+			dir = WalkingDir::WALK_NW;
+		} else {
+			return 0;
+		}
+		game->send_player_ship_scouting_direction(*get(L, get_egbase(L)), dir);
+		return 1;
+	}
+	return 0;
+
+}
+
+/* RST
+	.. attribute:: island_explore_direction
+
+		(RW) actual direction if the ship sails around an island.
+		Sets/returns cw, ccw or nil
+
+*/
+int LuaShip::get_island_explore_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_island_explore_direction()) {
+			case IslandExploreDirection::kCounterClockwise:
+				lua_pushstring(L, "ccw");
+				break;
+			case IslandExploreDirection::kClockwise:
+				lua_pushstring(L, "cw");
+				break;
+			default:
+				return 0;
+		}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::set_island_explore_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		Ship* ship = get(L, get_egbase(L));
+		std::string dir = luaL_checkstring(L, 3);
+		if (dir == "ccw"){
+			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
+		} else if (dir == "cw") {
+			 game->send_player_ship_explore_island(*ship, IslandExploreDirection::kClockwise);
+		} else {
+			return 0;
+		}
+		return 1;
+	}
+	return 0;
 }
 
 /*
@@ -3289,6 +3584,25 @@ int LuaShip::get_workers(lua_State* L) {
 	}
 	lua_pushint32(L, nworkers);
 	return 1;
+}
+
+/* RST
+	.. method:: build_colonization_port()
+
+		Returns true if port space construction was started (ship was in adequate
+		status and a found portspace was nearby)
+
+		:returns: true/false
+*/
+int LuaShip::build_colonization_port(lua_State* L) {
+	Ship* ship =  get(L, get_egbase(L));
+	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+		if (upcast(Game, game, &get_egbase(L))) {
+			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
+			return 1;
+		}
+	}
+	return 0;
 }
 
 /*
@@ -3501,6 +3815,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
 	PROP_RO(LuaField, viewpoint_y),
 	PROP_RW(LuaField, resource),
 	PROP_RW(LuaField, resource_amount),
+	PROP_RO(LuaField, initial_resource_amount),
 	PROP_RO(LuaField, claimers),
 	PROP_RO(LuaField, owner),
 	{nullptr, nullptr, nullptr},
@@ -3660,10 +3975,26 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
+	//in editor, reset also initial amount
+	EditorGameBase & egbase = get_egbase(L);
+	upcast(Game, game, &egbase);
+	if (!game) {
+		field->set_initial_res_amount(amount);
+	}
 
 	return 0;
 }
+/* RST
+	.. attribute:: initial_resource_amount
 
+		(RO) Starting value of resource. It is set be resource_amount
+
+		:see also: :attr:`resource`
+*/
+int LuaField::get_initial_resource_amount(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
+	return 1;
+}
 /* RST
 	.. attribute:: immovable
 

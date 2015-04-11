@@ -61,6 +61,7 @@ void MapRoaddataPacket::read
 			while (! fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
+					Game& game = dynamic_cast<Game&>(egbase);
 					Road & road = mol.get<Road>(serial);
 					if (mol.is_object_loaded(road))
 						throw GameDataError("already loaded");
@@ -114,7 +115,7 @@ void MapRoaddataPacket::read
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road._link_into_flags(ref_cast<Game, EditorGameBase>(egbase));
+					road._link_into_flags(game);
 
 					road.m_idle_index      = fr.unsigned_32();
 
@@ -143,8 +144,8 @@ void MapRoaddataPacket::read
 							 		(road,
 							 		 0,
 							 		 Road::_request_carrier_callback,
-							 		 wwWORKER))
-							->read(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
+									 wwWORKER))
+							->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
 						}
@@ -165,9 +166,7 @@ void MapRoaddataPacket::read
 						} else {
 							delete carrier_request;
 							if (carrier) {
-								carrier->reset_tasks
-									(ref_cast<Game,
-									 EditorGameBase>(egbase));
+								carrier->reset_tasks(dynamic_cast<Game&>(egbase));
 							}
 						}
 					}
@@ -246,8 +245,7 @@ void MapRoaddataPacket::write
 
 					if (temp_slot.carrier_request) {
 						fw.unsigned_8(1);
-						temp_slot.carrier_request->write
-							(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
+						temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
 					} else {
 						fw.unsigned_8(0);
 					}

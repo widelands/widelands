@@ -19,20 +19,10 @@
 
 #include "ai/ai_hints.h"
 
-#include <cstdlib>
-#include <cstring>
-
 #include "profile/profile.h"
 
-BuildingHints::~BuildingHints() {
-	free(renews_map_resource);
-	free(mines_);
-}
-
 BuildingHints::BuildingHints(Section* const section)
-   : renews_map_resource(nullptr),
-     mines_(nullptr),
-     log_producer_(section ? section->get_bool("logproducer") : false),
+   : log_producer_(section ? section->get_bool("logproducer") : false),
      stone_producer_(section ? section->get_bool("stoneproducer") : false),
      needs_water_(section ? section->get_bool("needs_water") : false),
      mines_water_(section ? section->get_bool("mines_water") : false),
@@ -41,13 +31,28 @@ BuildingHints::BuildingHints(Section* const section)
      expansion_(section ? section->get_bool("expansion") : false),
      fighting_(section ? section->get_bool("fighting") : false),
      mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
-     prohibited_till_(section ? section->get_int("prohibited_till", 0) : 0),
-     forced_after_(section ? section->get_int("forced_after", 864000) : 0),  // 10 days default
-     mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
+     prohibited_till_(section ? section->get_natural("prohibited_till", 0) : 0),
+     forced_after_(section ? section->get_natural("forced_after", 864000) : 0),  // 10 days default
+     mines_percent_(section ? section->get_int("mines_percent", 100) : 0)
+
+{
 	if (section) {
-		if (char const* const s = section->get_string("renews_map_resource"))
-			renews_map_resource = strdup(s);
-		if (char const* const s = section->get_string("mines"))
-			mines_ = strdup(s);
+		if (section->has_val("renews_map_resource"))
+			renews_map_resource_ = section->get_string("renews_map_resource");
+		if (section->has_val("mines"))
+			mines_ = section->get_string("mines");
+	}
+	if (section) {
+		if (!section->has_val("trainingsite_type")) {
+			trainingsite_type_ =  TrainingSiteType::kNoTS;
+		} else {
+			if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "basic")) {
+				trainingsite_type_ =  TrainingSiteType::kBasic;
+			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "advanced")) {
+				trainingsite_type_ =  TrainingSiteType::kAdvanced;
+			} else {
+				trainingsite_type_ = TrainingSiteType::kNoTS;
+			}
+		}
 	}
 }

@@ -22,7 +22,7 @@
 #include <string>
 
 #include "graphic/align.h"
-#include "graphic/font.h"
+#include "graphic/text_layout.h"
 #include "base/point.h"
 
 class RenderTarget;

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"POT-Creation-Date: 2015-02-07 14:46+0000\n"
 "PO-Revision-Date: 2014-07-12 11:44+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:51+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: pt_BR\n"
 
 #: ../../world/critters/badger/init.lua:14
@@ -672,6 +672,9 @@ msgstr "Granito"
 
 #: ../../world/resources/init.lua:57
 #: ../../world/terrains/init.lua:284
+#: ../../world/terrains/init.lua:515
+#: ../../world/terrains/init.lua:747
+#: ../../world/terrains/init.lua:977
 msgid "Water"
 msgstr "Água"
 
@@ -692,26 +695,23 @@ msgid "Winter"
 msgstr ""
 
 #: ../../world/terrains/init.lua:19
+#: ../../world/terrains/init.lua:767
+#: ../../world/terrains/init.lua:917
+#: ../../world/terrains/init.lua:932
+#: ../../world/terrains/init.lua:947
 msgid "Desert"
 msgstr "Deserto"
 
 #: ../../world/terrains/init.lua:33
-msgid "Meadow 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:71
-msgid "Meadow 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:87
-msgid "Meadow 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:102
-msgid "Meadow 4"
+#: ../../world/terrains/init.lua:812
+msgid "Meadow"
 msgstr ""
 
 #: ../../world/terrains/init.lua:117
+#: ../../world/terrains/init.lua:797
 msgid "Steppe"
 msgstr ""
 
@@ -720,27 +720,27 @@ msgid "Barren Steppe"
 msgstr ""
 
 #: ../../world/terrains/init.lua:147
+#: ../../world/terrains/init.lua:827
 msgid "Mountain Meadow"
 msgstr ""
 
 #: ../../world/terrains/init.lua:162
-#: ../../world/terrains/init.lua:408
-msgid "Mountain 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:177
-#: ../../world/terrains/init.lua:423
-msgid "Mountain 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:192
-#: ../../world/terrains/init.lua:438
-msgid "Mountain 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:207
+#: ../../world/terrains/init.lua:408
+#: ../../world/terrains/init.lua:423
+#: ../../world/terrains/init.lua:438
 #: ../../world/terrains/init.lua:453
-msgid "Mountain 4"
+#: ../../world/terrains/init.lua:625
+#: ../../world/terrains/init.lua:640
+#: ../../world/terrains/init.lua:655
+#: ../../world/terrains/init.lua:670
+#: ../../world/terrains/init.lua:857
+#: ../../world/terrains/init.lua:872
+#: ../../world/terrains/init.lua:887
+#: ../../world/terrains/init.lua:902
+msgid "Mountain"
 msgstr ""
 
 #: ../../world/terrains/init.lua:222
@@ -748,11 +748,14 @@ msgid "Swamp"
 msgstr ""
 
 #: ../../world/terrains/init.lua:238
+#: ../../world/terrains/init.lua:468
+#: ../../world/terrains/init.lua:700
+#: ../../world/terrains/init.lua:962
 msgid "Beach"
 msgstr ""
 
 #: ../../world/terrains/init.lua:253
-#: ../../world/terrains/init.lua:608
+#: ../../world/terrains/init.lua:610
 msgid "Snow"
 msgstr ""
 
@@ -761,161 +764,53 @@ msgid "Lava"
 msgstr ""
 
 #: ../../world/terrains/init.lua:303
+#: ../../world/terrains/init.lua:318
 msgid "Ashes"
 msgstr ""
 
-#: ../../world/terrains/init.lua:318
-msgid "Ashes 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:333
-msgid "Hard Ground 1"
-msgstr ""
-
 #: ../../world/terrains/init.lua:348
-msgid "Hard Ground 2"
-msgstr ""
-
 #: ../../world/terrains/init.lua:363
-msgid "Hard Ground 3"
-msgstr ""
-
 #: ../../world/terrains/init.lua:378
-msgid "Hard Ground 4"
+msgid "Hard Ground"
 msgstr ""
 
 #: ../../world/terrains/init.lua:393
 msgid "Igneous Rocks"
 msgstr ""
 
-#: ../../world/terrains/init.lua:468
-msgid "Beach (Wasteland)"
-msgstr ""
-
 #: ../../world/terrains/init.lua:483
-msgid "Lava Rocks 1"
+#: ../../world/terrains/init.lua:499
+msgid "Lava Rocks"
 msgstr ""
 
-#: ../../world/terrains/init.lua:498
-msgid "Lava Rocks 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:513
-msgid "Water (Wasteland)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:533
+#: ../../world/terrains/init.lua:535
+#: ../../world/terrains/init.lua:550
+#: ../../world/terrains/init.lua:565
 msgid "Tundra"
 msgstr ""
 
-#: ../../world/terrains/init.lua:548
-msgid "Tundra 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:563
-msgid "Tundra 3"
-msgstr ""
-
-#: ../../world/terrains/init.lua:578
+#: ../../world/terrains/init.lua:580
 msgid "Tundra Taiga"
 msgstr ""
 
-#: ../../world/terrains/init.lua:593
+#: ../../world/terrains/init.lua:595
 msgid "Taiga"
 msgstr ""
 
-#: ../../world/terrains/init.lua:623
-msgid "Mountain 1 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:638
-msgid "Mountain 2 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:653
-msgid "Mountain 3 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:668
-msgid "Mountain 4 (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:683
+#: ../../world/terrains/init.lua:685
 msgid "Ice"
 msgstr ""
 
-#: ../../world/terrains/init.lua:698
-msgid "Beach (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:713
+#: ../../world/terrains/init.lua:715
+#: ../../world/terrains/init.lua:731
 msgid "Ice Floes"
 msgstr ""
 
-#: ../../world/terrains/init.lua:729
-msgid "Ice Floes 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:745
-msgid "Water (Winter)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:765
-msgid "Desert 4"
-msgstr ""
-
-#: ../../world/terrains/init.lua:780
+#: ../../world/terrains/init.lua:782
 msgid "Dry Soil"
 msgstr ""
 
-#: ../../world/terrains/init.lua:795
-msgid "Steppe (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:810
-msgid "Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:825
-msgid "Mountain Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:840
-msgid "High Mountain Meadow (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:855
-msgid "Mountain 1 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:870
-msgid "Mountain 2 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:885
-msgid "Mountain 3 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:900
-msgid "Mountain 4 (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:915
-msgid "Desert 1"
-msgstr ""
-
-#: ../../world/terrains/init.lua:930
-msgid "Desert 2"
-msgstr ""
-
-#: ../../world/terrains/init.lua:945
-msgid "Desert 3"
-msgstr ""
-
-#: ../../world/terrains/init.lua:960
-msgid "Beach (Desert)"
-msgstr ""
-
-#: ../../world/terrains/init.lua:975
-msgid "Water (Desert)"
+#: ../../world/terrains/init.lua:842
+msgid "High Mountain Meadow"
 msgstr ""

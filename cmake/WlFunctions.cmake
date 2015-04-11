@@ -10,7 +10,6 @@ macro(_parse_common_args ARGS)
     USES_OPENGL
     USES_PNG
     USES_SDL2
-    USES_SDL2_GFX
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
     USES_SDL2_NET
@@ -87,10 +86,17 @@ macro(_common_compile_tasks)
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
   # other.
   if(ARG_USES_OPENGL)
-    wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${GLEW_LIBRARY})
-    target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
+    if(OPTION_USE_GLBINDING)
+      wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
+      target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      add_definitions("-DUSE_GLBINDING")
+    else()
+      wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
+      target_link_libraries(${NAME} ${GLEW_LIBRARY})
+      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      add_definitions(${GLEW_EXTRA_DEFINITIONS})
+    endif()
   endif()
 
   if(ARG_USES_PNG)
@@ -116,11 +122,6 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL2_IMAGE)
     wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
-  endif()
-
-  if(ARG_USES_SDL2_GFX)
-    wl_include_system_directories(${NAME} ${SDL2GFX_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2GFX_LIBRARY})
   endif()
 
   if(ARG_USES_SDL2_TTF)

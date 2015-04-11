@@ -69,15 +69,6 @@
 static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
 #define INTERNET_GAMING_PORT 7395
 
-
-/// The maximum number of clients (players + spectators) per game
-#define INTERNET_GAMING_MAX_CLIENTS_PER_GAME 32
-
-
-
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CLIENT RIGHTS                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -86,10 +77,6 @@ static const std::string INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
 static const std::string INTERNET_CLIENT_REGISTERED   = "REGISTERED";
 static const std::string INTERNET_CLIENT_SUPERUSER    = "SUPERUSER";
 static const std::string INTERNET_CLIENT_BOT          = "BOT";
-
-
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * COMMUNICATION PROTOCOL BETWEEN CLIENT AND METASERVER                    *

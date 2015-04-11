@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010-2014 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,10 +66,10 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 			map.overlay_manager().remove_overlay(mr.location(), pic);
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
-				mr.location().field->set_starting_res_amount(0);
+				mr.location().field->set_initial_res_amount(0);
 			} else {
 				mr.location().field->set_resources(args.cur_res, amount);
-				mr.location().field->set_starting_res_amount(amount);
+				mr.location().field->set_initial_res_amount(amount);
 				//  set new overlay
 				str = world.get_resource(args.cur_res)->get_editor_pic(amount);
 				pic = g_gr->images().get(str);

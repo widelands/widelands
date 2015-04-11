@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/scripting.h"
 
 using namespace Widelands;
 
@@ -93,7 +92,7 @@ int main(int argc, char ** argv)
 		// Write minimap
 		{
 			FileWrite fw;
-			save_surface_to_png(minimap.get(), &fw);
+			save_to_png(minimap.get(), &fw, ColorType::RGBA);
 			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 

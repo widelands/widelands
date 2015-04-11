@@ -1,23 +1,22 @@
-# Czech translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# GunChleoc, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-05-31 21:24+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-11 21:48+0000\n"
+"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:50+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
 "Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:96
@@ -55,10 +54,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end. "
-msgstr ""
-"Pašeráci je vtipná mapa pro 4 hráče. Ty a tvůj partner začínáte diagonálně "
-"vůči sobě na přesně symetrickém ostrově. Je zde mnoho pašeráckých tunelů a "
-"každý má jeden konec pro přijetí a odeslání. "
+msgstr "Pašeráci je vtipná mapa pro 4 hráče. Ty a tvůj partner začínáte diagonálně vůči sobě na přesně symetrickém ostrově. Je zde mnoho pašeráckých tunelů a každý má jeden konec pro přijetí a odeslání. "
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
@@ -66,20 +62,14 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds. "
-msgstr ""
-"Pro vytvoření pašerácké stezky je potřeba postavit skladiště na "
-"příjmovém/odesílacím konci a tvůj týmový spoluhráč musí postavit své "
-"skladiště na príslušném odpovídajícím konci. Zboží je následně "
-"transportováno každých 10 vteřin. "
+msgstr "Pro vytvoření pašerácké stezky je potřeba postavit skladiště na příjmovém/odesílacím konci a tvůj týmový spoluhráč musí postavit své skladiště na príslušném odpovídajícím konci. Zboží je následně transportováno každých 10 vteřin. "
 
-#: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:10
+#: TRANSLATORS %s = '<number> points' ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
-"Za cesty, které je obtížné bránit, dostaneš 2 až 3 body za každé propašované "
-"zboží. První tým, který shromáždí %s vyhrává."
+msgstr "Za cesty, které je obtížné bránit, dostaneš 2 až 3 body za každé propašované zboží. První tým, který shromáždí %s vyhrává."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:11
 msgid "A sending spot"
@@ -91,67 +81,57 @@ msgstr "Východ z tunelu"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "Notes"
-msgstr ""
+msgstr "Poznámky"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
-"Nezapomeň, že mapa je středově souměrná: Pokud najdeš vchod do tunelu "
-"severozápadně od své základny, odpovídající východ bude ležet jihovýchodně "
-"od základny tvého spoluhráče."
+msgstr "Nezapomeň, že mapa je středově souměrná: Pokud najdeš vchod do tunelu severozápadně od své základny, odpovídající východ bude ležet jihovýchodně od základny tvého spoluhráče."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid ""
-"You can see the number of wares traded at any time in the general statistics "
-"menu. Good luck!"
-msgstr ""
-"Na stav přeneseného zboží se můžete kdykoli podívat v obecném menu "
-"statistik. Hodně štěstí!"
+"You can see the number of wares traded at any time in the general statistics"
+" menu. Good luck!"
+msgstr "Na stav přeneseného zboží se můžete kdykoli podívat v obecném menu statistik. Hodně štěstí!"
 
-#: TRANSLATORS: the first 2 parameters are player names, the last parameter is '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:19
+#: TRANSLATORS the first 2 parameters are player names, the last parameter is
+#: '<number> points' ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:19
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr ""
-"Nová pašerácká cesta z %1$s do %2$s byla vytvořena. Každé zboží propašované "
-"touto cestou bude mít hodnotu %3$s."
+msgstr "Nová pašerácká cesta z %1$s do %2$s byla vytvořena. Každé zboží propašované touto cestou bude mít hodnotu %3$s."
 
-#: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
+#: TRANSLATORS %s = '<number> points' ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:24
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
-"Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude odesílat. Každé "
-"zboží propašované touto cestou bude mít hodnotu %s."
+msgstr "Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude odesílat. Každé zboží propašované touto cestou bude mít hodnotu %s."
 
-#: TRANSLATORS: %s = '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
+#: TRANSLATORS %s = '<number> points' ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
-"Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude přijímat. Každé "
-"zboží propašované touto cestou bude mít hodnotu %s."
+msgstr "Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude přijímat. Každé zboží propašované touto cestou bude mít hodnotu %s."
 
-#: TRANSLATORS: the first parameter is '<number> points', the last 2 parameters are player names
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:34
+#: TRANSLATORS the first parameter is '<number> points', the last 2 parameters
+#: are player names ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr "Pašerácká cesta s hodnotou %1$s z %2$s do %3$s byla přerušena!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:38
 msgid "Game over!"
-msgstr ""
+msgstr "Konec hry!"
 
-#: TRANSLATORS: the first 4 parameters are player names, the last parameter is '<number> points'
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:40
+#: TRANSLATORS the first 4 parameters are player names, the last parameter is
+#: '<number> points' ../../maps/MP
+#: Scenarios/Smugglers.wmf/scripting/texts.lua:40
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr ""
-"Konec hry! %1$s a %2$s vyhráli hru! %3$s a %4$s zvládli nashromáždit pouze "
-"%5$s."
+msgstr "Konec hry! %1$s a %2$s vyhráli hru! %3$s a %4$s zvládli nashromáždit pouze %5$s."

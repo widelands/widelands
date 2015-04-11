@@ -131,7 +131,7 @@ void WaresQueue::request_callback
 	 PlayerImmovable & target)
 {
 	WaresQueue & wq =
-		ref_cast<Building, PlayerImmovable>(target).waresqueue(ware);
+		dynamic_cast<Building&>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
 	assert(wq.m_filled < wq.m_max_size);

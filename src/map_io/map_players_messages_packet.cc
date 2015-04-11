@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "logic/game_data_error.h"
+#include "logic/message.h"
 #include "logic/player.h"
 #include "map_io/coords_profile.h"
 #include "map_io/map_object_loader.h"
@@ -65,14 +66,14 @@ void MapPlayersMessagesPacket::read
 						 "added it to the queue. This is only allowed during "
 						 "simulation, not at load. The following messge will be "
 						 "removed when the queue is reset:\n"
-						 "\tsender  : %s\n"
+						 "\tstype   : %u\n"
 						 "\ttitle   : %s\n"
 						 "\tsent    : %u\n"
 						 "\tposition: (%i, %i)\n"
 						 "\tstatus  : %u\n"
 						 "\tbody    : %s\n",
 						 p,
-						 begin->second->sender  ().c_str(),
+						 begin->second->type    (),
 						 begin->second->title   ().c_str(),
 						 begin->second->sent    (),
 						 begin->second->position().x, begin->second->position().y,
@@ -99,13 +100,13 @@ void MapPlayersMessagesPacket::read
 							 "gametime is only %u",
 							 sent, gametime);
 
-					Message::Status status = Message::Archived; //  default status
+					Message::Status status = Message::Status::kArchived; //  default status
 					if (char const * const status_string = s->get_string("status")) {
 						try {
 							if      (!strcmp(status_string, "new"))
-								status = Message::New;
+								status = Message::Status::kNew;
 							else if (!strcmp(status_string, "read"))
-								status = Message::Read;
+								status = Message::Status::kRead;
 							else
 								throw GameDataError
 									("expected %s but found \"%s\"",
@@ -124,7 +125,7 @@ void MapPlayersMessagesPacket::read
 
 					messages.add_message
 						(*new Message
-						 	(s->get_string     ("sender", ""),
+							(static_cast<Message::Type>(s->get_natural("type")),
 						 	 sent,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
@@ -160,20 +161,19 @@ void MapPlayersMessagesPacket::write
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 
 			Section & s = prof.create_section_duplicate(message.title().c_str());
-			if (message.sender().size())
-				s.set_string("sender",    message.sender  ());
-			s.set_int      ("sent",      message.sent    ());
-			s.set_string   ("body",      message.body    ());
-			if (Coords const c =         message.position())
+			s.set_int    ("type",      static_cast<int32_t>(message.type()));
+			s.set_int    ("sent",      message.sent    ());
+			s.set_string ("body",      message.body    ());
+			if (Coords const c =       message.position())
 				set_coords("position",  c, &s);
 			switch (message.status()) {
-			case Message::New:
+			case Message::Status::kNew:
 				s.set_string("status",    "new");
 				break;
-			case Message::Read:
+			case Message::Status::kRead:
 				s.set_string("status",    "read");
 				break;
-			case Message::Archived: //  The default status. Do not write.
+			case Message::Status::kArchived: //  The default status. Do not write.
 				break;
 			default:
 				assert(false);

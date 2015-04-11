@@ -26,3 +26,7 @@ fps=10
 [build]
 pics=port_b_??.png  # 4 frames
 hotspot=74 70
+
+[aihints]
+prohibited_till=900
+

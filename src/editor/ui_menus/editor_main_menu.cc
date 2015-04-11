@@ -37,7 +37,7 @@
 #define vspacing 15
 
 inline EditorInteractive & EditorMainMenu::eia() {
-	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 /**

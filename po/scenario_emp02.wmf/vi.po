@@ -1,23 +1,22 @@
-# Vietnamese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-03-13 14:11+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-16 11:18+0000\n"
+"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/widelands/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:38+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
 "Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
@@ -78,8 +77,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, "
-"armor smithy and smelting works)."
+"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
+" armor smithy and smelting works)."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -93,8 +92,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
-"To supply them with some good and strong drinks, we could build up a brewery "
-"and a winery."
+"To supply them with some good and strong drinks, we could build up a brewery"
+" and a winery."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
@@ -113,8 +112,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least "
-"rations, which are produced out of bread OR meat OR fish."
+"mines need beer, marble and gold mines need wine and all mines need at least"
+" rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
@@ -129,17 +128,15 @@ msgstr "Bảo vệ phòng tuyến phía đông của bạn"
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr ""
-"Dựng các trạm quân đội mạnh hơn, như trạm tiền tiêu, trạm gác, tháp canh ở "
-"tiền tuyến phía đông."
+msgstr "Dựng các trạm quân đội mạnh hơn, như trạm tiền tiêu, trạm gác, tháp canh ở tiền tuyến phía đông."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
 msgstr "Để quan sát sâu vào trong lãnh thổ địch, hãy dựng một tháp canh."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
-msgid "Destroy the barbarian tribe"
-msgstr "Tiêu diệt bộ lạc mọi rợ"
+msgid "Destroy the Barbarian tribe"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -148,19 +145,15 @@ msgstr "Tiêu diệt bộ lạc mọi rợ"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
-"barbarian buildings."
+"Barbarian buildings."
 msgstr ""
-"Ngay khi có đủ quân lính, hãy tấn công và phá hủy hoàn toàn nhà của quân mọi "
-"rợ."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the barbarian "
-"headquarters stood before), to avoid new settlements of other tribes in that "
-"region."
+"Finally, build up a fortress on the peninsula (near where the Barbarian "
+"headquarters stood before), to avoid new settlements of other tribes in that"
+" region."
 msgstr ""
-"Cuối cùng, dựng một pháo đài trên bán đảo (gần chỗ tổng hành dinh của quân "
-"mọi rợ trước đó), để ngăn sự định cư của các bộ lạc khác trong vùng."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -180,8 +173,8 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
-"Finally! This island appears to have been made for us, it is a gift from the "
-"Gods to my people and myself. Until now, we have only seen a small part of "
+"Finally! This island appears to have been made for us, it is a gift from the"
+" Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
 msgstr ""
@@ -206,8 +199,8 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the "
-"present, and build a few lumberjack’s houses and a sawmill to produce some "
+"But until that day, may many years pass! For now, we must concentrate on the"
+" present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
 msgstr ""
 
@@ -242,10 +235,7 @@ msgstr "Gỗ dành cho thuộc địa"
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr ""
-"Có tin tốt lành! Hôm nay việc kinh doanh gỗ của chúng ta đã hoàn thành. Bây "
-"giờ chúng ta chắc chắn sẽ có đủ gỗ phục vụ cho mục đích xây dựng trong tương "
-"lai."
+msgstr "Có tin tốt lành! Hôm nay việc kinh doanh gỗ của chúng ta đã hoàn thành. Bây giờ chúng ta chắc chắn sẽ có đủ gỗ phục vụ cho mục đích xây dựng trong tương lai."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
@@ -255,9 +245,7 @@ msgstr "Đá dành cho thuộc địa"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
-msgstr ""
-"Tuyệt vời! Hôm nay việc xây dựng mỏ đá đã hoàn thành. Bây giờ chúng ta đã có "
-"đủ đá để xây những công trình lớn hơn."
+msgstr "Tuyệt vời! Hôm nay việc xây dựng mỏ đá đã hoàn thành. Bây giờ chúng ta đã có đủ đá để xây những công trình lớn hơn."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:152
 msgid "Dangerous Ship Parts"
@@ -269,8 +257,8 @@ msgstr "Saledus coi bộ không vui"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which "
-"gives me a sinking feeling in my stomach and spreads waves of fear in my "
+"Greetings Lutius, I don’t want to start a panic, but I found something which"
+" gives me a sinking feeling in my stomach and spreads waves of fear in my "
 "heart. As I walked down to the southern shore, I found the remains of "
 "another ship. I don’t know whether these parts are all that is left of that "
 "ship. In any case, these parts do not seem to be old."
@@ -299,8 +287,9 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am "
-"right – but I believe we could mine marble from some places on the mountain."
+"larger mountain. I am not absolutely sure – a geologist should check if I am"
+" right – but I believe we could mine marble from some places on the "
+"mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -327,8 +316,8 @@ msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
 "of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
-"smithies."
+"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
+" smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
@@ -380,19 +369,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
-"they serve is really tasty. You really should have a drink there, too."
-msgstr ""
-"Xin chào, người anh em, tôi vừa qua thăm quán rượu mới 'Cây cọ' của chúng "
-"ta. Bia ở đó ngon tuyệt. Anh cũng nên uống ở đó đi."
+"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
+" they serve is really tasty. You really should have a drink there, too."
+msgstr "Xin chào, người anh em, tôi vừa qua thăm quán rượu mới 'Cây cọ' của chúng ta. Bia ở đó ngon tuyệt. Anh cũng nên uống ở đó đi."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr ""
-"Thật tuyệt khi thấy được chúng ta đã có không khí nồng nhiệt và thân thiện "
-"trên hòn đảo này. Cám ơn, Lutius."
+msgstr "Thật tuyệt khi thấy được chúng ta đã có không khí nồng nhiệt và thân thiện trên hòn đảo này. Cám ơn, Lutius."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
@@ -400,15 +385,15 @@ msgstr "Người mọi rợ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
-"By the Gods! This is absolutely terrible. It seems as if we stand close to a "
-"test – and it seems as if Saledus was right with his fear concerning the "
+"By the Gods! This is absolutely terrible. It seems as if we stand close to a"
+" test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
-"of one of those hated, evil, barbarian tribes with whom we have had so many "
+"of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
 msgstr ""
 
@@ -434,10 +419,7 @@ msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
-"Rất tốt. Doanh trại lớn đầu tiên đã được hoàn thành và cơ sở hạ tầng khai "
-"thác mỏ dần được cải thiện. Bây giờ chúng ta nên nghĩ đến việc chuẩn bị sẵn "
-"sàng cho trận chiến."
+msgstr "Rất tốt. Doanh trại lớn đầu tiên đã được hoàn thành và cơ sở hạ tầng khai thác mỏ dần được cải thiện. Bây giờ chúng ta nên nghĩ đến việc chuẩn bị sẵn sàng cho trận chiến."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:227
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:233
@@ -451,15 +433,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
-"There are still a few barbarians hiding on our island, but I am sure that we "
-"will find them soon. Every barbarian who doesn’t attack us will be put in a "
-"boat with the other peaceful ones, and sent back to their country."
+"There are still a few Barbarians hiding on our island, but I am sure that we"
+" will find them soon. Every Barbarian who doesn’t attack us will be put in a"
+" boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
-"barbarians from the island."
+"Barbarians from the island."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238
@@ -502,4 +484,3 @@ msgstr ""
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
-msgstr[1] ""

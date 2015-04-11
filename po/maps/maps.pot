@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2014 Widelands Development Team
+# Copyright (C) 2005-2015 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
+#: ../../campaigns/campaigns.conf:95
 msgid ""
 "From Nemesis to Genesis"
 msgstr ""
@@ -25,6 +26,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/elemental:8
+#: ../../campaigns/campaigns.conf:67
 msgid ""
 "A Place to Call Home"
 msgstr ""
@@ -35,6 +37,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/elemental:7
+#: ../../campaigns/campaigns.conf:72
 msgid ""
 "This Land is Our Land"
 msgstr ""
@@ -44,6 +47,80 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings and will introduce fighting."
 msgstr ""
 
+#: ../../campaigns/campaigns.conf:27
+msgid ""
+"The Second Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:29
+msgid ""
+"Barbarians"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:31
+msgid ""
+"Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:32
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons, and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees, and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father’s spirit that he’d return to re-established order. While his brothers have raged blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:35
+msgid ""
+"The Months of Exile"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:37
+msgid ""
+"Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:39
+msgid ""
+"Easy. Introduces the Empire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:40
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few Barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 Barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:43
+msgid ""
+"The Run for the Fire"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:45
+msgid ""
+"Atlanteans"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:47
+msgid ""
+"Challenging. Introduces the Atlanteans"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:48
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:78
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid ""
+"The Strands of Malac’ Mor"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:83
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid ""
+"An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/campaigns.conf:88
+#: ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid ""
 "Not yet implemented"
@@ -59,19 +136,9 @@ msgid ""
 "Sorry, this map is not yet implemented."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid ""
-"The Strands of Malac’ Mor"
-msgstr ""
-
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
 "After losing an important battle against the barbarians which lead to the loss of a big part of the Empire’s territory, Lutius leaves Fremil to start a new life. But his destiny takes his ship into a heavy storm, which nearly destroys it. Only with a lot of luck he manages to beach his damaged ship on an unknown desert strand and save his people. For now."
-msgstr ""
-
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid ""
-"An Outpost for Exile"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:11
@@ -80,6 +147,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:15
 msgid ""
 "Basic Control"
 msgstr ""
@@ -90,6 +158,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:19
 msgid ""
 "Warfare"
 msgstr ""
@@ -100,6 +169,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:23
 msgid ""
 "Seafaring"
 msgstr ""
@@ -110,6 +180,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:27
 msgid ""
 "Economy"
 msgstr ""
@@ -377,7 +448,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares?"
+"Your well established smuggling routes suddenly got busy: two other tribes have appeared and now a rivalry among smugglers has started. Which team will be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
@@ -497,7 +568,7 @@ msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
+"Another thaw set in. Three tribes were sheltering from severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
 msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7

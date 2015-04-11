@@ -26,6 +26,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "random/random.h"
+#include "scripting/logic.h"
 
 namespace UI {struct ProgressWindow;}
 struct ComputerPlayer;
@@ -40,6 +41,8 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+enum class IslandExploreDirection;
+enum class ScoutingDirection;
 struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
@@ -106,6 +109,9 @@ public:
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
 	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
 	bool run(UI::ProgressWindow * loader_ui, StartGameType, const std::string& script_to_run, bool replay);
+
+	// Returns the upcasted lua interface.
+	LuaGameInterface& lua() override;
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
@@ -176,9 +182,9 @@ public:
 	void send_player_enemyflagaction
 		(const Flag &, PlayerNumber, uint32_t count);
 
-	void send_player_ship_scout_direction(Ship &, uint8_t);
+	void send_player_ship_scouting_direction(Ship &, WalkingDir);
 	void send_player_ship_construct_port(Ship &, Coords);
-	void send_player_ship_explore_island(Ship &, bool);
+	void send_player_ship_explore_island(Ship &, IslandExploreDirection);
 	void send_player_sink_ship(Ship &);
 	void send_player_cancel_expedition_ship(Ship &);
 

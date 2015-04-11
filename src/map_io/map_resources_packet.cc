@@ -86,7 +86,7 @@ void MapResourcesPacket::read
 					if (0xa < set_id)
 						throw "Unknown resource in map file. It is not in world!\n";
 					map[Coords(x, y)].set_resources(set_id, set_amount);
-					map[Coords(x, y)].set_starting_res_amount(set_start_amount);
+					map[Coords(x, y)].set_initial_res_amount(set_start_amount);
 				}
 			}
 		} else {
@@ -136,7 +136,7 @@ void MapResourcesPacket::write
 			const Field & f = map[Coords(x, y)];
 			int32_t       res          = f.get_resources          ();
 			int32_t const       amount = f.get_resources_amount   ();
-			int32_t const start_amount = f.get_starting_res_amount();
+			int32_t const start_amount = f.get_initial_res_amount();
 			if (!amount)
 				res = 0;
 			fw.unsigned_8(res);

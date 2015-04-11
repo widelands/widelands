@@ -60,7 +60,7 @@ struct MapAuthorData {
 	void parse(const std::string& author_list) {
 		std::vector<std::string> authors;
 		boost::split(authors, author_list, boost::is_any_of(","));
-		m_names = localize_item_list(authors, i18n::ConcatenateWith::AMPERSAND);
+		m_names = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		m_number = authors.size();
 	}
 
@@ -72,7 +72,8 @@ private:
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
+class FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
+public:
 	FullscreenMenuLoadMapOrGame(bool sortdesc = false);
 
 	bool handle_key(bool down, SDL_Keysym code) override;

@@ -15,7 +15,7 @@ wl_library(map_io_map_loader
     io_filesystem
     logic
     map_io
-    scripting
+    scripting_lua_interface
 )
 
 # TODO(sirver): separate map_object_loader/saver into
@@ -84,9 +84,7 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
-  USES_SDL2_IMAGE
   DEPENDS
-    base_deprecated
     base_exceptions
     base_log
     base_macros
@@ -95,6 +93,7 @@ wl_library(map_io
     economy
     graphic
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     helper
     io_fileread
@@ -102,6 +101,6 @@ wl_library(map_io
     logic
     logic_widelands_geometry
     profile
-    scripting
+    scripting_logic
     wui
 )

@@ -28,93 +28,96 @@
 #include "base/macros.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_line_program.h"
-#include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 
 
-uint16_t Surface::width() const {
-	return m_w;
-}
+namespace  {
 
-uint16_t Surface::height() const {
-	return m_h;
-}
+// Convert the 'rect' in pixel space into opengl space.
+enum class ConversionMode {
+	// Convert the rect as given.
+	kExact,
 
-uint8_t * Surface::get_pixels() const
-{
-	return m_pixels.get();
-}
+	// Convert the rect so that the borders are in the center
+	// of the pixels.
+	kMidPoint,
+};
 
-uint32_t Surface::get_pixel(uint16_t x, uint16_t y) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	return *(reinterpret_cast<uint32_t *>(data));
-}
-
-uint16_t Surface::get_pitch() const {
-	return 4 * m_w;
-}
-
-const SDL_PixelFormat & Surface::format() const {
-	return Gl::gl_rgba_format();
-}
-
-
-void Surface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	*(reinterpret_cast<uint32_t *>(data)) = clr;
-}
-
-FloatRect Surface::to_opengl(const Rect& rect, ConversionMode mode) {
+FloatRect to_opengl(const Surface& surface, const Rect& rect, ConversionMode mode) {
 	const float delta = mode == ConversionMode::kExact ? 0. : 0.5;
 	float x1 = rect.x + delta;
 	float y1 = rect.y + delta;
-	pixel_to_gl(&x1, &y1);
+	surface.pixel_to_gl(&x1, &y1);
 	float x2 = rect.x + rect.w - delta;
 	float y2 = rect.y + rect.h - delta;
-	pixel_to_gl(&x2, &y2);
-
+	surface.pixel_to_gl(&x2, &y2);
 	return FloatRect(x1, y1, x2 - x1, y2 - y1);
 }
 
-void Surface::draw_rect(const Rect& rc, const RGBColor& clr)
-{
-	glViewport(0, 0, width(), height());
-	DrawRectProgram::instance().draw(to_opengl(rc, ConversionMode::kMidPoint), clr);
+// Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
+inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
+	*x = (*x / width);
+	*y = (*y / height);
 }
 
-/**
- * Draws a filled rectangle
- */
-void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
-	glViewport(0, 0, width(), height());
+// Convert 'dst' and 'srcrc' from pixel space into opengl space, taking into
+// account that we might be a subtexture in a bigger texture.
+void src_and_dst_rect_to_gl(const Surface& surface,
+                            const Image& image,
+                            const Rect& dst_rect,
+                            const Rect& src_rect,
+                            FloatRect* gl_dst_rect,
+                            FloatRect* gl_src_rect) {
+	// Source Rectangle. We have to take into account that the texture might be
+	// a subtexture in another bigger texture. So we first figure out the pixel
+	// coordinates given it is a full texture (values between 0 and 1) and then
+	// adjust these for the texture coordinates in the parent texture.
+	const FloatRect& texture_coordinates = image.texture_coordinates();
+
+	float x1 = src_rect.x;
+	float y1 = src_rect.y;
+	pixel_to_gl_texture(image.width(), image.height(), &x1, &y1);
+	x1 = texture_coordinates.x + x1 * texture_coordinates.w;
+	y1 = texture_coordinates.y + y1 * texture_coordinates.h;
+
+	float x2 = src_rect.x + src_rect.w;
+	float y2 = src_rect.y + src_rect.h;
+	pixel_to_gl_texture(image.width(), image.height(), &x2, &y2);
+	x2 = texture_coordinates.x + x2 * texture_coordinates.w;
+	y2 = texture_coordinates.y + y2 * texture_coordinates.h;
+
+	gl_src_rect->x = x1;
+	gl_src_rect->y = y1;
+	gl_src_rect->w = x2 - x1;
+	gl_src_rect->h = y2 - y1;
+
+	*gl_dst_rect = to_opengl(surface, dst_rect, ConversionMode::kExact);
+}
+
+}  // namespace
+
+
+void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	glBlendFunc(GL_ONE, GL_ZERO);
 
-	FillRectProgram::instance().draw(to_opengl(rc, ConversionMode::kExact), clr);
+	FillRectProgram::instance().draw(to_opengl(*surface, rc, ConversionMode::kExact), clr);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-/**
- * Change the brightness of the given rectangle
- */
-void Surface::brighten_rect(const Rect& rc, const int32_t factor)
+void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 {
 	if (!factor)
 		return;
 
-	glViewport(0, 0, width(), height());
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
 	// src and target (or subtract them if factor is negative).
@@ -126,7 +129,7 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 
 	const int delta = std::abs(factor);
 	FillRectProgram::instance().draw(
-	   to_opengl(rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
+	   to_opengl(*surface, rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
 
 	if (factor < 0) {
 		glBlendEquation(GL_FUNC_ADD);
@@ -135,49 +138,85 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void Surface::draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
+void draw_line
+	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth, Surface * surface)
 {
-	glViewport(0, 0, width(), height());
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	float gl_x1 = x1 + 0.5;
 	float gl_y1 = y1 + 0.5;
-	pixel_to_gl(&gl_x1, &gl_y1);
+	surface->pixel_to_gl(&gl_x1, &gl_y1);
 
 	float gl_x2 = x2 + 0.5;
 	float gl_y2 = y2 + 0.5;
-	pixel_to_gl(&gl_x2, &gl_y2);
+	surface->pixel_to_gl(&gl_x2, &gl_y2);
 
 	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
 }
 
-// Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
-inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
-	*x = (*x / width);
-	*y = (*y / height);
+void blit_monochrome(const Rect& dst_rect,
+                     const Image& image,
+                     const Rect& src_rect,
+                     const RGBAColor& blend,
+                     Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
+
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	MonochromeBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), blend);
+
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void Surface::blit
-	(const Point& dst, const Texture* texture, const Rect& srcrc, BlendMode blend_mode)
-{
-	glViewport(0, 0, width(), height());
+void blit_blended(const Rect& dst_rect,
+                  const Image& image,
+                  const Image& mask,
+                  const Rect& src_rect,
+                  const RGBColor& blend,
+                  Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
-	// Source Rectangle.
-	FloatRect gl_src_rect;
-	{
-		float x1 = srcrc.x;
-		float y1 = srcrc.y;
-		pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
-		float x2 = srcrc.x + srcrc.w;
-		float y2 = srcrc.y + srcrc.h;
-		pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
-		gl_src_rect.x = x1;
-		gl_src_rect.y = y1;
-		gl_src_rect.w = x2 - x1;
-		gl_src_rect.h = y2 - y1;
-	}
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
-	const FloatRect gl_dst_rect = to_opengl(Rect(dst.x, dst.y, srcrc.w, srcrc.h), ConversionMode::kExact);
+	BlendedBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), mask.get_gl_texture(), blend);
 
-	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend_mode);
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
+	draw_line(rc.x, rc.y, rc.x + rc.w, rc.y, clr, 1, surface);
+	draw_line(rc.x + rc.w, rc.y, rc.x + rc.w, rc.y + rc.h, clr, 1, surface);
+	draw_line(rc.x + rc.w, rc.y + rc.h, rc.x, rc.y + rc.h, clr, 1, surface);
+	draw_line(rc.x, rc.y + rc.h, rc.x, rc.y, clr, 1, surface);
+}
+
+void blit(const Rect& dst_rect,
+          const Image& image,
+          const Rect& src_rect,
+          float opacity,
+          BlendMode blend_mode,
+          Surface* surface) {
+	glViewport(0, 0, surface->width(), surface->height());
+	surface->setup_gl();
+
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	VanillaBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), opacity, blend_mode);
+
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

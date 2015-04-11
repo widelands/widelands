@@ -20,15 +20,16 @@
 #include "sound/sound_handler.h"
 
 #include <cerrno>
+#include <memory>
 
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/regex.hpp>
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"
@@ -43,8 +44,17 @@
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define DEFAULT_MUSIC_VOLUME  64
-#define DEFAULT_FX_VOLUME    128
+namespace  {
+
+constexpr int kDefaultMusicVolume = 64;
+constexpr int kDefaultFxVolume = 128;
+
+void report_initalization_error(const char* msg) {
+	log("WARNING: Failed to initialize sound system: %s\n", msg);
+	return;
+}
+
+}  // namespace
 
 /** The global \ref SoundHandler object
  * The sound handler is a static object because otherwise it'd be quite
@@ -76,24 +86,9 @@ SoundHandler::SoundHandler():
 /// themselves.
 SoundHandler::~SoundHandler()
 {
-	for (const std::pair<std::string, FXset *> fx_pair : fxs_) {
-		delete fx_pair.second;
-	}
-
-	for (const std::pair<std::string, Songset *> song_pair : songs_) {
-		delete song_pair.second;
-	}
-
-	if (fx_lock_)
-	{
-		SDL_DestroyMutex(fx_lock_);
-		fx_lock_ = nullptr;
-	}
 }
 
 /** The real initialization for SoundHandler.
- *
- * \pre The locale must be known before calling this
  *
  * \see SoundHandler::SoundHandler()
 */
@@ -113,35 +108,48 @@ void SoundHandler::init()
 	const uint16_t bufsize = 1024;
 #endif
 
-	if (nosound_)
-	{
+	if (nosound_) {
 		set_disable_music(true);
 		set_disable_fx(true);
 		lock_audio_disabling_ = true;
 		return;
 	}
 
-	if
-		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
-		 ||
-		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)
-	{
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
-
-		set_disable_music(true);
-		set_disable_fx(true);
-		lock_audio_disabling_ = true;
+	if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
+		report_initalization_error(SDL_GetError());
 		return;
-	} else {
-		Mix_HookMusicFinished(SoundHandler::music_finished_callback);
-		Mix_ChannelFinished(SoundHandler::fx_finished_callback);
-		load_system_sounds();
-		Mix_VolumeMusic(music_volume_); //  can not do this before InitSubSystem
-
-		if (fx_lock_ == nullptr)
-			fx_lock_ = SDL_CreateMutex();
 	}
+
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) != 0) {
+		initialization_error(Mix_GetError());
+		return;
+	}
+
+	constexpr int kMixInitFlags = MIX_INIT_OGG;
+	int initted = Mix_Init(kMixInitFlags);
+	if ((initted & kMixInitFlags) != kMixInitFlags) {
+		initialization_error("No Ogg support in SDL_Mixer.");
+		return;
+	}
+
+	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
+	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
+	load_system_sounds();
+	Mix_VolumeMusic(music_volume_);  //  can not do this before InitSubSystem
+
+	if (fx_lock_ == nullptr)
+		fx_lock_ = SDL_CreateMutex();
+}
+
+void SoundHandler::initialization_error(const std::string& msg) {
+	log("WARNING: Failed to initialize sound system: %s\n", msg.c_str());
+
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+
+	set_disable_music(true);
+	set_disable_fx(true);
+	lock_audio_disabling_ = true;
+	return;
 }
 
 void SoundHandler::shutdown()
@@ -173,7 +181,6 @@ void SoundHandler::shutdown()
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
 	}
-	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 	if (fx_lock_)
 	{
@@ -181,11 +188,15 @@ void SoundHandler::shutdown()
 		fx_lock_ = nullptr;
 	}
 
+	songs_.clear();
+	fxs_.clear();
+
+	Mix_Quit();
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
 /** Read the main config file, load background music and systemwide sound fx
  *
- * \pre The locale must be known before calling this
  */
 void SoundHandler::read_config()
 {
@@ -197,8 +208,8 @@ void SoundHandler::read_config()
 	} else {
 		set_disable_music(s.get_bool("disable_music",      false));
 		set_disable_fx   (s.get_bool("disable_fx",         false));
-		music_volume_ =  s.get_int ("music_volume",       DEFAULT_MUSIC_VOLUME);
-		fx_volume_    =  s.get_int ("fx_volume",          DEFAULT_FX_VOLUME);
+		music_volume_ =  s.get_int ("music_volume",       kDefaultMusicVolume);
+		fx_volume_    =  s.get_int ("fx_volume",          kDefaultFxVolume);
 	}
 
 	random_order_    =  s.get_bool("sound_random_order", true);
@@ -246,7 +257,7 @@ void SoundHandler::load_fx_if_needed
 	if (nosound_ || fxs_.count(fx_name) > 0)
 		return;
 
-	fxs_[fx_name] = new FXset();
+	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
 	// filename can be relative to dir.
 	const std::string full_path = dir + "/" + filename;
@@ -524,7 +535,7 @@ void SoundHandler::register_song
 	for (const std::string& filename : files) {
 		assert(!g_fs->is_directory(filename));
 		if (songs_.count(basename) == 0) {
-			songs_[basename] = new Songset();
+			songs_.insert(std::make_pair(basename, std::unique_ptr<Songset>(new Songset())));
 		}
 		songs_[basename]->add_song(filename);
 	}

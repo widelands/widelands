@@ -21,7 +21,7 @@
 #define WL_UI_BASIC_TEXTAREA_H
 
 #include "graphic/align.h"
-#include "graphic/font.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -75,8 +75,8 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	void set_textstyle(const TextStyle & style);
-	const TextStyle & get_textstyle() const {return m_textstyle;}
+	void set_textstyle(const UI::TextStyle & style);
+	const UI::TextStyle & get_textstyle() const {return m_textstyle;}
 
 	void set_font(const std::string & name, int size, RGBColor clr);
 
@@ -98,7 +98,7 @@ private:
 	std::string m_text;
 	const Image* m_text_image;
 	Align m_align;
-	TextStyle m_textstyle;
+	UI::TextStyle m_textstyle;
 };
 
 }

@@ -26,20 +26,21 @@
 
 #include <SDL.h>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
+#include "base/log.h"
+#include "base/macros.h"
 #include "base/point.h"
 #include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/text/font_io.h"
+#include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
 #include "graphic/texture.h"
-
+#include "io/filesystem/filesystem_exceptions.h"
 
 using namespace std;
-using namespace boost;
 
 namespace RT {
 
@@ -62,6 +63,7 @@ struct Borders {
 };
 
 struct NodeStyle {
+	const UI::FontSet* const fontset;  // Not owned.
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
@@ -333,7 +335,12 @@ uint16_t TextNode::hotspot_y() {
 Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), BlendMode::Copy);
+	blit(Rect(0, 0, img.width(), img.height()),
+	     img,
+	     Rect(0, 0, img.width(), img.height()),
+	     1.,
+	     BlendMode::Copy,
+	     rv);
 	return rv;
 }
 
@@ -361,7 +368,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		rv->blit(Point(curx, 0), &t, srcrect, BlendMode::Copy);
+		blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy, rv);
 	}
 	return rv;
 }
@@ -378,7 +385,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
 			Texture* rv = new Texture(m_w, m_h);
-			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
+			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff), rv);
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -423,17 +430,17 @@ public:
 
 		// Draw background image (tiling)
 		if (m_bg) {
-			Point dst;
+			Rect dst;
 			Rect srcrect(Point(0, 0), 1, 1);
 			for (uint16_t curx = 0; curx < m_w; curx += m_bg->width()) {
 				dst.x = curx;
 				dst.y = 0;
-				srcrect.w = min<int>(m_bg->width(), m_w - curx);
-				srcrect.h = m_h;
-				rv->blit(dst, m_bg->texture(), srcrect, BlendMode::Copy);
+				srcrect.w = dst.w = min<int>(m_bg->width(), m_w - curx);
+				srcrect.h = dst.h = m_h;
+				blit(dst, *m_bg, srcrect, 1., BlendMode::Copy, rv);
 			}
 		} else {
-			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
+			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0), rv);
 		}
 		return rv;
 	}
@@ -470,27 +477,27 @@ public:
 	uint16_t hotspot_y() override {return height();}
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
-		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+		fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0), rv);
 
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (m_bg_clr_set) {
-			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
-			rv->fill_rect(fill_rect, m_bg_clr);
+			fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr, rv);
 			set_alpha = false;
 		}
 
 		// Draw background image (tiling)
 		if (m_bg_img) {
-			Point dst;
+			Rect dst;
 			Rect src(0, 0, 0, 0);
 
 			for (uint16_t cury = m_margin.top; cury < m_h + m_margin.top; cury += m_bg_img->height()) {
 				for (uint16_t curx = m_margin.left; curx < m_w + m_margin.left; curx += m_bg_img->width()) {
-					dst.x = curx; dst.y = cury;
-					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
-					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					rv->blit(dst, m_bg_img->texture(), src, BlendMode::Copy);
+					dst.x = curx;
+					dst.y = cury;
+					src.w = dst.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
+					src.h = dst.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
+					blit(dst, *m_bg_img, src, 1., BlendMode::Copy, rv);
 				}
 			}
 			set_alpha = false;
@@ -499,10 +506,13 @@ public:
 		for (RenderNode* n : m_nodes_to_render) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
-				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
+				Rect dst = Rect(n->x() + m_margin.left,
+				                n->y() + m_margin.top,
+				                node_texture->width(),
+				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				rv->blit(dst, node_texture, src, set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
+				blit(dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha, rv);
 				delete node_texture;
 			}
 			delete n;
@@ -553,7 +563,11 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(m_image.width(), m_image.height());
-	rv->blit(Point(0, 0), m_image.texture(), Rect(0, 0, m_image.width(), m_image.height()), BlendMode::Copy);
+	blit(Rect(0, 0, m_image.width(), m_image.height()),
+	         m_image,
+	         Rect(0, 0, m_image.width(), m_image.height()),
+				1.,
+	         BlendMode::Copy, rv);
 	return rv;
 }
 // End: Helper Stuff
@@ -563,13 +577,10 @@ Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
  */
 class FontCache {
 public:
-	virtual ~FontCache() {
-		for (FontMapPair& pair : m_fontmap)
-			delete pair.second;
-		m_fontmap.clear();
-	}
+	FontCache() = default;
+	~FontCache();
 
-	IFont& get_font(NodeStyle& style);
+	IFont& get_font(NodeStyle* style);
 
 private:
 	struct FontDescr {
@@ -581,30 +592,72 @@ private:
 		}
 	};
 	using FontMap = map<FontDescr, IFont*>;
-	using FontMapPair = pair<const FontDescr, IFont*>;
+	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
 
 	FontMap m_fontmap;
+
+	DISALLOW_COPY_AND_ASSIGN(FontCache);
 };
 
-IFont& FontCache::get_font(NodeStyle& ns) {
-	if (ns.font_style & IFont::BOLD) {
-		ns.font_face += "Bold";
-		ns.font_style &= ~IFont::BOLD;
+FontCache::~FontCache() {
+	for (FontMap::reference& entry : m_fontmap) {
+		delete entry.second;
 	}
-	if (ns.font_style & IFont::ITALIC) {
-		ns.font_face += "Italic";
-		ns.font_style &= ~IFont::ITALIC;
+}
+
+IFont& FontCache::get_font(NodeStyle* ns) {
+	const bool is_bold = ns->font_style & IFont::BOLD;
+	const bool is_italic = ns->font_style & IFont::ITALIC;
+	if (is_bold && is_italic) {
+		if (ns->font_face == ns->fontset->condensed() ||
+		    ns->font_face == ns->fontset->condensed_bold() ||
+		    ns->font_face == ns->fontset->condensed_italic()) {
+			ns->font_face = ns->fontset->condensed_bold_italic();
+		} else if (ns->font_face == ns->fontset->serif() ||
+		           ns->font_face == ns->fontset->serif_bold() ||
+		           ns->font_face == ns->fontset->serif_italic()) {
+			ns->font_face = ns->fontset->serif_bold_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_bold_italic();
+		}
+		ns->font_style &= ~IFont::ITALIC;
+		ns->font_style &= ~IFont::BOLD;
+	} else if (is_bold) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_bold();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_bold();
+		} else {
+			ns->font_face = ns->fontset->sans_bold();
+		}
+		ns->font_style &= ~IFont::BOLD;
+	} else if (is_italic) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_italic();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_italic();
+		}
+		ns->font_style &= ~IFont::ITALIC;
 	}
-	FontDescr fd = {ns.font_face, ns.font_size};
+
+	FontDescr fd = {ns->font_face, ns->font_size};
 	FontMap::iterator i = m_fontmap.find(fd);
 	if (i != m_fontmap.end())
 		return *i->second;
 
-	IFont* font = load_font(ns.font_face + ".ttf", ns.font_size);
-	m_fontmap[fd] = font;
-	return *font;
-}
+	std::unique_ptr<IFont> font;
+	try {
+		font.reset(load_font(ns->font_face, ns->font_size));
+	} catch (FileNotFoundError& e) {
+		log("Font file not found. Falling back to serif: %s\n%s\n", ns->font_face.c_str(), e.what());
+		font.reset(load_font(ns->fontset->serif(), ns->font_size));
+	}
+	assert(font != nullptr);
 
+	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
+}
 
 class TagHandler;
 TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache);
@@ -635,10 +688,10 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		size_t cpos = ts.pos();
 		ts.skip_ws();
 		if (ts.pos() != cpos)
-			nodes.push_back(new WordSpacerNode(font_cache_.get_font(ns), ns));
+			nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 		const string word = ts.till_any_or_end(" \t\n\r");
 		if (word.size())
-			nodes.push_back(new TextNode(font_cache_.get_font(ns), ns, word));
+			nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
 	}
 }
 
@@ -773,9 +826,9 @@ public:
 		RenderNode* rn = nullptr;
 		if (!m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
-				rn = new FillingTextNode(font_cache_.get_font(m_ns), m_ns, m_space, m_fill_text);
+				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, m_space, m_fill_text);
 			else
-				rn = new FillingTextNode(font_cache_.get_font(m_ns), m_ns, 0, m_fill_text, true);
+				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, 0, m_fill_text, true);
 		} else {
 			SpaceNode* sn;
 			if (m_space < INFINITE_WIDTH)
@@ -942,13 +995,14 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
 		throw RenderError
-			((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
+			((boost::format("No Tag handler for %s. This is a bug, please submit a report.")
+			  % tag.name()).str());
 	return i->second(tag, fc, ns, image_cache);
 }
 
-Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache) :
+Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache) {
+	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
 }
 
 Renderer::~Renderer() {
@@ -958,7 +1012,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		"DejaVuSerif", 16,
+		fontset_, fontset_->serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

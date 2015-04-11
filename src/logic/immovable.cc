@@ -20,18 +20,20 @@
 #include "logic/immovable.h"
 
 #include <cstdio>
+#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -55,8 +57,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_base.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 
@@ -231,21 +231,25 @@ ImmovableDescr::ImmovableDescr
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
-	if (char const * const string = global_s.get_string("size"))
+	using boost::iequals;
+
+	if (global_s.has_val("size")) {
+		const auto& size = global_s.get_string("size");
 		try {
-			if      (!strcasecmp(string, "small"))
+			if      (iequals(size, "small"))
 				m_size = BaseImmovable::SMALL;
-			else if (!strcasecmp(string, "medium"))
+			else if (iequals(size, "medium"))
 				m_size = BaseImmovable::MEDIUM;
-			else if (!strcasecmp(string, "big"))
+			else if (iequals(size, "big"))
 				m_size = BaseImmovable::BIG;
 			else
 				throw GameDataError
 					("expected %s but found \"%s\"",
-					 "{\"small\"|\"medium\"|\"big\"}", string);
+					 "{\"small\"|\"medium\"|\"big\"}", size);
 		} catch (const WException & e) {
 			throw GameDataError("size: %s", e.what());
 		}
+	}
 
 	// parse attributes
 	{
@@ -620,7 +624,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
+	Immovable & imm = dynamic_cast<Immovable&>(*get_object());
 
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();

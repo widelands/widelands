@@ -33,25 +33,36 @@
 
 namespace {
 
-// A helper function for save_surface_to_png. Writes the compressed data to
+// A helper function for save_to_png. Writes the compressed data to
 // the StreamWrite.
 void png_write_function(png_structp png_ptr, png_bytep png_data, png_size_t length) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->data(png_data, length);
 }
 
-// A helper function for save_surface_to_png.
+// A helper function for save_to_png.
 // Flush function to avoid crashes with default libpng flush function
 void png_flush_function(png_structp png_ptr) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
 
+inline void ensure_sdl_image_is_initialized() {
+	static bool is_initialized = false;
+	if (!is_initialized) {
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		is_initialized = true;
+	}
+}
+
+
 }  // namespace
 
-Texture* load_image(const std::string& fname, FileSystem* fs) {
-	return new Texture(load_image_as_sdl_surface(fname, fs));
+std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
+	return std::unique_ptr<Texture>(new Texture(load_image_as_sdl_surface(fname, fs)));
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
+	ensure_sdl_image_is_initialized();
+
 	FileRead fr;
 	bool found;
 	if (fs) {
@@ -71,23 +82,23 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 	return sdlsurf;
 }
 
-bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
+bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
 	if (!png_ptr)
-		throw wexception("save_surface_to_png: could not create png struct");
+		throw wexception("save_to_png: could not create png struct");
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 	if (!info_ptr) {
 		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
-		throw wexception("save_surface_to_png: could not create png info struct");
+		throw wexception("save_to_png: could not create png info struct");
 	}
 
 	// Set jump for error
 	if (setjmp(png_jmpbuf(png_ptr))) {
 		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("save_surface_to_png: Error writing PNG!");
+		throw wexception("save_to_png: Error writing PNG!");
 	}
 
 	//  Set another write function. This is potentially dangerouse because the
@@ -101,10 +112,10 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 	// Fill info struct
 	png_set_IHDR(png_ptr,
 	             info_ptr,
-	             surface->width(),
-	             surface->height(),
+	             texture->width(),
+	             texture->height(),
 	             8,
-	             PNG_COLOR_TYPE_RGB,
+	             (color_type == ColorType::RGB) ? PNG_COLOR_TYPE_RGB : PNG_COLOR_TYPE_RGBA,
 	             PNG_INTERLACE_NONE,
 	             PNG_COMPRESSION_TYPE_DEFAULT,
 	             PNG_FILTER_TYPE_DEFAULT);
@@ -112,32 +123,42 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
 	{
-		const uint16_t surf_w = surface->width();
-		const uint16_t surf_h = surface->height();
-		const uint32_t row_size = 3 * surf_w;
+		const uint16_t surf_w = texture->width();
+		const uint16_t surf_h = texture->height();
+		const uint32_t row_size = (color_type == ColorType::RGB) ? 3 * surf_w : 4 * surf_w;
 
 		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		// Write each row
-		const SDL_PixelFormat& fmt = surface->format();
-		surface->lock(Surface::Lock_Normal);
+		const SDL_PixelFormat& fmt = texture->format();
+		texture->lock();
 
 		// Write each row
-		for (uint32_t y = 0; y < surf_h; ++y) {
-			for (uint32_t x = 0; x < surf_w; ++x) {
-				RGBAColor color;
-				color.set(fmt, surface->get_pixel(x, y));
-				row[3 * x] = color.r;
-				row[3 * x + 1] = color.g;
-				row[3 * x + 2] = color.b;
+		RGBAColor color;
+		if (color_type == ColorType::RGB) {
+			for (uint32_t y = 0; y < surf_h; ++y) {
+				for (uint32_t x = 0; x < surf_w; ++x) {
+					color.set(fmt, texture->get_pixel(x, y));
+					row[3 * x] = color.r;
+					row[3 * x + 1] = color.g;
+					row[3 * x + 2] = color.b;
+				}
+				png_write_row(png_ptr, row.get());
 			}
-
-			png_write_row(png_ptr, row.get());
+		} else {
+			for (uint32_t y = 0; y < surf_h; ++y) {
+				for (uint32_t x = 0; x < surf_w; ++x) {
+					color.set(fmt, texture->get_pixel(x, y));
+					row[4 * x] = color.r;
+					row[4 * x + 1] = color.g;
+					row[4 * x + 2] = color.b;
+					row[4 * x + 3] = color.a;
+				}
+				png_write_row(png_ptr, row.get());
+			}
 		}
-
-		surface->unlock(Surface::Unlock_NoChange);
+		texture->unlock(Texture::Unlock_NoChange);
 	}
-
 	// End write
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);

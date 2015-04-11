@@ -220,7 +220,7 @@ void MapSaver::save() {
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(m_egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 		FileWrite fw;
-		save_surface_to_png(minimap.get(), &fw);
+		save_to_png(minimap.get(), &fw, ColorType::RGBA);
 		fw.write(m_fs, "minimap.png");
 	}
 }

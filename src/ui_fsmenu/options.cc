@@ -19,64 +19,73 @@
 
 #include "ui_fsmenu/options.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
+#include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/default_resolution.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/save_handler.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
 
-namespace  {
+namespace {
 
+// Data model for the entries in the language selection list.
 struct LanguageEntry {
-	LanguageEntry(const std::string& init_abbreviation, const std::string& init_descname) :
-		abbreviation(init_abbreviation),
-		descname(init_descname) {}
+	LanguageEntry(const std::string& init_localename,
+					  const std::string& init_descname,
+					  const std::string& init_sortname,
+					  const std::string& init_fontname) :
+		localename(init_localename),
+		descname(init_descname),
+		sortname(init_sortname),
+		fontname(init_fontname) {}
 
 	bool operator<(const LanguageEntry& other) const {
-		return descname < other.descname;
+		return sortname < other.sortname;
 	}
 
-	std::string abbreviation;
-	std::string descname;
+	std::string localename; // ISO code for the locale
+	std::string descname;   // Native language name
+	std::string sortname;   // ASCII Language name used for sorting
+	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
-void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-	Profile ln("txts/languages");
-	Section* s = &ln.pull_section("languages");
-	bool own_selected = "" == language || "en" == language;
-
-	// Add translation directories to the list.
-	std::vector<LanguageEntry> entries;
-	while (Section::Value* value = s->get_next_val()) {
-		const std::string abbreviation = value->get_name();
-		// Only lists languages that are actually found.
-		if (!g_fs->is_directory("locale/" + abbreviation)) {
-			continue;
+// Locale identifiers can look like this: ca_ES@valencia.UTF-8
+// The contents of 'selected_locale' will be changed to match the 'current_locale'
+void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
+	if (selected_locale->empty()) {
+		std::vector<std::string> parts;
+		boost::split(parts, current_locale, boost::is_any_of("."));
+		if (current_locale  == parts[0]) {
+			*selected_locale = current_locale;
+		} else {
+			boost::split(parts, parts[0], boost::is_any_of("@"));
+			if (current_locale  == parts[0]) {
+				*selected_locale = current_locale;
+			} else {
+				boost::split(parts, parts[0], boost::is_any_of("_"));
+				if (current_locale  == parts[0]) {
+					*selected_locale = current_locale;
+				}
+			}
 		}
-		entries.emplace_back(abbreviation, value->get_string());
-		own_selected |= abbreviation == language;
-	}
-
-	// Add currently used language manually
-	if (!own_selected) {
-		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
-	}
-	std::sort(entries.begin(), entries.end());
-
-	for (const LanguageEntry& entry : entries) {
-		list->add(entry.descname, entry.abbreviation, nullptr, entry.abbreviation == language);
 	}
 }
 
@@ -273,7 +282,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_dock_windows_to_edges.get_h(),
 		 _("Save game automatically every"), UI::Align_VCenter),
 
-
 	m_sb_remove_replays
 		(this,
 		 get_w() - m_hmargin - 240,
@@ -317,7 +325,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 					 boost::ref(*this)));
 	}
 
-	m_title           .set_textstyle(ts_big());
+	m_title           .set_textstyle(UI::TextStyle::ui_big());
 	m_fullscreen      .set_state(opt.fullscreen);
 	m_inputgrab       .set_state(opt.inputgrab);
 	m_music           .set_state(opt.music);
@@ -325,7 +333,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_fx              .set_state(opt.fx);
 	m_fx              .set_enabled(!g_sound_handler.lock_audio_disabling_);
 
-	m_label_game_options             .set_textstyle(ts_big());
+	m_label_game_options             .set_textstyle(UI::TextStyle::ui_big());
 	m_single_watchwin                .set_state(opt.single_watchwin);
 	m_auto_roadbuild_mode            .set_state(opt.auto_roadbuild_mode);
 	m_show_workarea_preview          .set_state(opt.show_warea);
@@ -372,17 +380,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		m_resolutions[entry].yres  = opt.yres;
 	}
 
-	// Fill language list
-	m_language_list.add
-		(_("Try system language"), "", // "try", as many translations are missing.
-		 nullptr, "" == opt.language);
-
-	m_language_list.add
-		("English", "en",
-		 nullptr, "en" == opt.language);
-
-	add_languages_to_list(&m_language_list, opt.language);
-
+	add_languages_to_list(opt.language);
 	m_language_list.focus();
 }
 
@@ -401,6 +399,68 @@ void FullscreenMenuOptions::advanced_options() {
 		end_modal(om_restart);
 	}
 }
+
+void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
+
+	// We want these two entries on top - the most likely user's choice and the default.
+	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
+	m_language_list.add("English", "en", nullptr, current_locale == "en");
+
+	// We start with the locale directory so we can pick up locales
+	// that don't have a configuration file yet.
+	FilenameSet files = g_fs->list_directory("locale");
+
+	// Add translation directories to the list
+	std::vector<LanguageEntry> entries;
+	std::string localename;
+	std::string selected_locale;
+
+	try {  // Begin read locales table
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
+
+		for (const std::string& filename : files) {  // Begin scan locales directory
+			char const* const path = filename.c_str();
+			if (!strcmp(FileSystem::fs_filename(path), ".") ||
+				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				continue;
+			}
+
+			try {  // Begin read locale from table
+				localename = g_fs->filename_without_ext(path);
+
+				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
+				table->do_not_warn_about_unaccessed_keys();
+
+				const std::string name = table->get_string("name");
+				const std::string sortname = table->get_string("sort_name");
+				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
+				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+
+				if (localename == current_locale) {
+					selected_locale = current_locale;
+				}
+
+			} catch (const WException&) {
+				log("Could not read locale for: %s\n", localename.c_str());
+				entries.push_back(LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
+			}  // End read locale from table
+		}  // End scan locales directory
+	} catch (const LuaError& err) {
+		log("Could not read locales information from file: %s\n", err.what());
+		return;  // Nothing more can be done now.
+	}  // End read locales table
+
+	find_selected_locale(&selected_locale, current_locale);
+
+	std::sort(entries.begin(), entries.end());
+	for (const LanguageEntry& entry : entries) {
+		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
+									entry.localename == selected_locale, "", entry.fontname);
+	}
+}
+
 
 bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
@@ -461,7 +521,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_hmargin (get_w() * 19 / 200),
 	m_padding (10),
 	m_space   (25),
-	m_offset_first_group (get_h() * 1417 / 10000),
 
 // Buttons
 	m_cancel
@@ -478,23 +537,13 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 // Title
 	m_title
 		(this,
-		 get_w() / 2, get_h() / 40,
+		 get_w() / 2, get_h() * 17 / 150,
 		 _("Advanced Options"), UI::Align_HCenter),
 
 // First options block
-	m_label_ui_font
-		(this,
-		 m_hmargin, m_offset_first_group,
-		 _("Main menu font:"), UI::Align_BottomLeft),
-	m_ui_font_list
-		(this,
-		 m_label_ui_font.get_x(), m_label_ui_font.get_y() + m_label_ui_font.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin, 134,
-		 UI::Align_Left, true),
-
 	m_label_snap_dis_panel
 		(this,
-		 m_hmargin, m_ui_font_list.get_y() + m_ui_font_list.get_h() + m_space + m_padding,
+		 m_hmargin, get_h() * 9 / 30,
 		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
 	m_label_snap_dis_border
 		(this,
@@ -582,55 +631,11 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_ok)));
 
-	m_title                .set_textstyle(ts_big());
+	m_title                .set_textstyle(UI::TextStyle::ui_big());
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_transparent_chat     .set_state(opt.transparent_chat);
-
-	// Fill the font list.
-	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
-		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
-		bool did_select_a_font = cmpbool;
-		m_ui_font_list.add
-			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
-		cmpbool = !strcmp("sans", opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("DejaVuSans", "sans", nullptr, cmpbool);
-		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
-		m_ui_font_list.focus();
-
-		// Fill with all left *.ttf files we find in fonts
-		FilenameSet files =
-		   filter(g_fs->list_directory("fonts"),
-		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
-
-		for
-			(FilenameSet::iterator pname = files.begin();
-			 pname != files.end();
-			 ++pname)
-		{
-			char const * const path = pname->c_str();
-			char const * const name = FileSystem::fs_filename(path);
-			if (!strcmp(name, UI_FONT_NAME_SERIF))
-				continue;
-			if (!strcmp(name, UI_FONT_NAME_SANS))
-				continue;
-			if (g_fs->is_directory(name))
-				continue;
-			cmpbool = !strcmp(name, opt.ui_font.c_str());
-			did_select_a_font |= cmpbool;
-			m_ui_font_list.add
-				(name, name, nullptr, cmpbool);
-		}
-
-		if (!did_select_a_font)
-			m_ui_font_list.select(0);
-	}
 }
 
 bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
@@ -660,12 +665,10 @@ void FullscreenMenuAdvancedOptions::update_sb_dis_border_unit() {
 	m_sb_dis_border.set_unit(ngettext("pixel", "pixels", m_sb_dis_border.get_value()));
 }
 
-
 OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
-	os.ui_font              = m_ui_font_list.get_selected();
 	os.panel_snap_distance  = m_sb_dis_panel.get_value();
 	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
@@ -715,11 +718,11 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.music = !m_opt_section.get_bool("disable_music", false);
 	opt.fx = !m_opt_section.get_bool("disable_fx", false);
 	opt.autosave = m_opt_section.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.rolling_autosave = m_opt_section.get_int("rolling_autosave", 5);
 	opt.maxfps = m_opt_section.get_int("maxfps", 25);
 
 	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
 	opt.nozip = m_opt_section.get_bool("nozip", false);
-	opt.ui_font = m_opt_section.get_string("ui_font", "serif");
 	opt.border_snap_distance = m_opt_section.get_int("border_snap_distance", 0);
 	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
 	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
@@ -745,11 +748,11 @@ void OptionsCtrl::save_options() {
 	m_opt_section.set_bool("disable_fx",           !opt.fx);
 	m_opt_section.set_string("language",            opt.language);
 	m_opt_section.set_int("autosave",               opt.autosave * 60);
+	m_opt_section.set_int("rolling_autosave",       opt.rolling_autosave);
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
 
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
-	m_opt_section.set_string("ui_font",             opt.ui_font);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
 	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
 
@@ -759,6 +762,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
+	UI::g_fh1->reinitialize_fontset();
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

@@ -37,7 +37,7 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 	if (!terrain.is_resource_valid(resource)) {
 		return -1;
 	}
-	if (terrain.get_is() & Widelands::TerrainDescription::UNPASSABLE) {
+	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
 		return 8;
 	}
 	return 1;
@@ -59,7 +59,7 @@ int32_t editor_change_resource_tool_callback
 	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
 	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
 
-	//  If one of the neighbours is unpassable, count its resource stronger.
+	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
 	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
@@ -121,10 +121,10 @@ EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
-				mr.location().field->set_starting_res_amount(0);
+				mr.location().field->set_initial_res_amount(0);
 			} else {
 				mr.location().field->set_resources(args.cur_res, amount);
-				mr.location().field->set_starting_res_amount(amount);
+				mr.location().field->set_initial_res_amount(amount);
 				//  set new overlay
 				pic = g_gr->images().get
 				        (world.get_resource(args.cur_res)->get_editor_pic(amount));

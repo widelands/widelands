@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,12 @@
 
 #include <vector>
 
+#include "base/point.h"
+#include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
 
-class FieldsToDraw;
 
 class TerrainProgram {
 public:
@@ -34,7 +35,7 @@ public:
 	TerrainProgram();
 
 	// Draws the terrain.
-	void draw(const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	void draw(uint32_t gametime, const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw);
 
 private:
@@ -44,35 +45,35 @@ private:
 		float brightness;
 		float texture_x;
 		float texture_y;
+		float texture_offset_x;
+		float texture_offset_y;
 	};
-	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
 
-	void gl_draw(int num_vertices,
-	             const DescriptionMaintainer<Widelands::TerrainDescription>& terrains);
+	void gl_draw(int gl_texture, float texture_w, float texture_h);
 
-	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_array_buffer_;
+	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
+	void add_vertex(const FieldsToDraw::Field& field, const FloatPoint& texture_coordinates);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
 
+	// The buffer that will contain 'vertices_' for rendering.
+	Gl::Buffer gl_array_buffer_;
+
 	// Attributes.
-	GLint attr_position_;
-	GLint attr_texture_position_;
 	GLint attr_brightness_;
+	GLint attr_position_;
+	GLint attr_texture_offset_;
+	GLint attr_texture_position_;
 
 	// Uniforms.
 	GLint u_terrain_texture_;
+	GLint u_texture_dimensions_;
 
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.
-
-	// All vertices that are going to get rendered this frame.
 	std::vector<PerVertexData> vertices_;
-
-	// A map from terrain index in world.terrains() to indices in 'vertices_'
-	// that have this terrain type.
-	std::vector<std::vector<uint16_t>> terrains_to_indices_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainProgram);
 };

@@ -108,7 +108,7 @@ void MapFlagPacket::read
 						mol.register_object<Flag>
 							(serial,
 							 *new Flag
-							 	(ref_cast<Game, EditorGameBase>(egbase),
+							 	(dynamic_cast<Game&>(egbase),
 							 	 egbase.player(owner),
 							 	 fc));
 					} catch (const WException & e) {

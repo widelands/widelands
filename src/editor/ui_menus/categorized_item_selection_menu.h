@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
@@ -122,15 +121,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-
-		const Image* category_picture = category.picture();
-		const int kCategoryImageSize = 24;
-		if (category_picture->width() > kCategoryImageSize ||
-		    category_picture->height() > kCategoryImageSize) {
-			category_picture =
-			   ImageTransformations::resize(category_picture, kCategoryImageSize, kCategoryImageSize);
-		}
-		tab_panel->add(category.name(), category_picture, vertical, category.descname());
+		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
 	}
 	add(&current_selection_names_, UI::Align_Center, true);
 }

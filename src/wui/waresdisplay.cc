@@ -25,16 +25,15 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "wui/text_layout.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 
@@ -100,7 +99,7 @@ bool AbstractWaresDisplay::handle_mousemove
 	                          m_tribe.get_worker_descr(index)->descname() :
 	                          m_tribe.get_ware_descr(index)->descname()) :
 	                      "");
-	if (m_selection_anchor) {
+	if (m_selection_anchor != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
 		if (state ^ SDL_BUTTON_LMASK) {

@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 
 namespace Widelands {
@@ -596,12 +596,14 @@ public:
 	/*
 	 * Properties
 	 */
-
+	int get_roads(lua_State * L);
+	int get_building(lua_State * L);
 	/*
 	 * Lua Methods
 	 */
 	int set_wares(lua_State *);
 	int get_wares(lua_State *);
+
 
 	/*
 	 * C Methods
@@ -686,6 +688,7 @@ public:
 	 * Properties
 	 */
 	int get_portdock(lua_State* L);
+	int get_expedition_in_progress(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -696,6 +699,8 @@ public:
 	int set_workers(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
+	int start_expedition(lua_State*);
+	int cancel_expedition(lua_State*);
 
 	/*
 	 * C Methods
@@ -804,6 +809,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_field(lua_State *);
 	int has_caps(lua_State *);
 
 	/*
@@ -883,12 +889,17 @@ public:
 	int get_debug_economy(lua_State * L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
-
+	int get_state(lua_State* L);
+	int get_scouting_direction(lua_State* L);
+	int set_scouting_direction(lua_State* L);
+	int get_island_explore_direction(lua_State* L);
+	int set_island_explore_direction(lua_State* L);
 	/*
 	 * Lua methods
 	 */
 	int get_wares(lua_State* L);
 	int get_workers(lua_State* L);
+	int build_colonization_port(lua_State* L);
 
 	/*
 	 * C methods
@@ -942,6 +953,7 @@ public:
 	int set_resource(lua_State *);
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
+	int get_initial_resource_amount(lua_State *);
 	int get_claimers(lua_State *);
 	int get_owner(lua_State *);
 

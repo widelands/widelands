@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"
@@ -32,8 +33,8 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
@@ -284,7 +285,7 @@ m_selected_information(0)
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	Game & game = ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game();
+	Game & game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;
@@ -321,7 +322,7 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id)
  */
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game()
+		dynamic_cast<InteractiveGameBase&>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

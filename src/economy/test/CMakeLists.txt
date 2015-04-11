@@ -4,7 +4,6 @@ wl_test(test_economy
     test_road.cc
     test_routing.cc
   DEPENDS
-    base_deprecated
     economy
     io_filesystem
     logic
