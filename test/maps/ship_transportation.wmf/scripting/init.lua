@@ -63,7 +63,7 @@ function farm()
    return map:get_field(18, 4).immovable
 end
 
-ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
+ship = p1:place_ship(map:get_field(10, 10))
 p1.see_all = true
 
 -- Save the game so that reloading does not skip

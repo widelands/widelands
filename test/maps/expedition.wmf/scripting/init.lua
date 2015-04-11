@@ -161,12 +161,12 @@ run(function()
 end)
 
 function create_one_ship()
-   first_ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
+   first_ship = p1:place_ship(map:get_field(10, 10))
 end
 
 function create_two_ships()
    create_one_ship()
-   second_ship = p1:place_bob("barbarians_ship", map:get_field(14, 10))
+   second_ship = p1:place_ship(map:get_field(14, 10))
 end
 
 function test_cancel_started_expedition_on_ship()

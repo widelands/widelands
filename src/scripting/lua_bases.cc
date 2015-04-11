@@ -267,10 +267,10 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
 	METHOD(LuaPlayerBase, conquer),
 	METHOD(LuaPlayerBase, get_wares),
 	METHOD(LuaPlayerBase, get_workers),
-	METHOD(LuaPlayerBase, place_bob),
 	METHOD(LuaPlayerBase, place_building),
 	METHOD(LuaPlayerBase, place_flag),
 	METHOD(LuaPlayerBase, place_road),
+	METHOD(LuaPlayerBase, place_ship),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
@@ -532,29 +532,19 @@ int LuaPlayerBase::place_building(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_bob(name, field)
+	.. method:: place_ship(field)
 
-		Places a bob that must be described by the tribe and will be
+		Places a ship for the player's tribe which will be
 		owned by the player.
 
-		TODO(sirver): name must be "ship" right now, everything else
-		is not implemented.
-
-		:arg name: name of the bob to place. Must be defined in the tribe of this player.
-		:type name: :class:`string`.
-		:arg field: where the bob should be placed.
+		:arg field: where the ship should be placed.
 		:type field: :class:`wl.map.Field`
 
-		:returns: The created bob.
+		:returns: The new ship that was created.
 */
 // UNTESTED
-// NOCOM(GunChleoc): Rename to place_ship and lose the attribute
-int LuaPlayerBase::place_bob(lua_State * L) {
-	const std::string name = luaL_checkstring(L, 2);
-	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
-
-	if (name != "ship")
-		report_error(L, "Can currently only place ships.");
+int LuaPlayerBase::place_ship(lua_State * L) {
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
 	EditorGameBase & egbase = get_egbase(L);
 	Player& player = get(L, egbase);
