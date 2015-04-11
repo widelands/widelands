@@ -1,5 +1,6 @@
 include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
 
 -- This is a test case for bug 1234058: there is constant demand for logs,
@@ -293,7 +294,7 @@ function test_transporting_works()
    while map:get_field(17, 1).immovable.descr.name ~= "barbarians_lumberjacks_hut" do
       sleep(3222)
    end
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    -- build a lumberjack and see if the builder gets transported
    p1:place_building("barbarians_lumberjacks_hut", map:get_field(12, 18), true)

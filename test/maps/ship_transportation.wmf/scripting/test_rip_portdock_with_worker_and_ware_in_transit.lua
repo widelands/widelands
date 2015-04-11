@@ -4,13 +4,13 @@ run(function()
 
    create_first_port()
    create_second_port()
-   
+
    --removing builder from port2
     port2():set_workers{
-      builder = 0,
-   }  
+      barbarians_builder = 0,
+   }
 
-   assert_equal(port2():get_workers("builder"), 0)
+   assert_equal(port2():get_workers("barbarians_builder"), 0)
 
    start_building_farm()
    port1():set_workers{
@@ -20,32 +20,32 @@ run(function()
       blackwood = 1,
    }
 
-   assert_equal(port1():get_workers("builder"), 1)
+   assert_equal(port1():get_workers("barbarians_builder"), 1)
    assert_equal(port1():get_wares("blackwood"), 1)
-   
+
    while ship:get_workers() == 0 or ship:get_wares() == 0  do
-      sleep(500) 
+      sleep(500)
    end
 
-   local flag_oversea = port2().flag   
+   local flag_oversea = port2().flag
 
  	stable_save("restored_port")
-   
+
    -- remove the portdock while the blackwood is in transit.
    portdock2():remove()
-   
+
    sleep(5000)
 
-   assert_equal(p1:get_workers("builder"), 1)
+   assert_equal(p1:get_workers("barbarians_builder"), 1)
    assert_equal(p1:get_wares("blackwood"), 1)
    assert_equal(ship.debug_economy, port1().debug_economy)
    assert_equal(ship.debug_economy, flag_oversea.debug_economy)
 
    sleep(5000)
-   
+
    --just wait till everything is gone to port2
    while ship:get_workers() > 0 or ship:get_wares() > 0 or
-    port1():get_workers("builder") > 0 or  port1():get_wares("blackwood") > 0 do
+    port1():get_workers("barbarians_builder") > 0 or  port1():get_wares("blackwood") > 0 do
       sleep(50)
    end
 

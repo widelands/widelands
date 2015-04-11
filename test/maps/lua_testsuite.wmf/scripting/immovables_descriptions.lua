@@ -60,7 +60,7 @@ function test_descr:test_conquers()
    assert_equal(0, egbase:get_building_description("barbarians_lumberjacks_hut").conquers)
    assert_equal(6, egbase:get_building_description("barbarians_sentry").conquers)
    assert_equal(9, egbase:get_building_description("barbarians_headquarters").conquers)
-   assert_equal(0, egbase:get_building_description("vcoalmine").conquers)
+   assert_equal(0, egbase:get_building_description("barbarians_coalmine").conquers)
 end
 
 function test_descr:test_destructible()
@@ -127,7 +127,7 @@ function test_descr:test_returned_wares_enhanced()
    end
    assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares_enhanced))
    assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares_enhanced))
-   assert_equal(10, total_cost(egbase:get_building_description("vcitadel").returned_wares_enhanced))
+   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares_enhanced))
 end
 
 function test_descr:test_size()

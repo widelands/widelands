@@ -10,7 +10,7 @@ run(function()
       barbarians_builder = 1,
    }
 
-   assert_equal(p1:get_workers(barbarians_"builder"), 1)
+   assert_equal(p1:get_workers("barbarians_builder"), 1)
    while ship:get_workers() == 0 do sleep(2000) end
    assert_equal(p1:get_workers("barbarians_builder"), 1)
 
