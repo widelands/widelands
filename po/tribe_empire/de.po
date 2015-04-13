@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-20 08:51+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-18 12:35+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -365,14 +365,14 @@ msgstr "Text benötigt"
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr "Trainiert Soldaten in \"Ausweichen\"."
+msgstr "Trainiert Soldaten in „Ausweichen“."
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "\"Ausweichen\" erhöht die Wahrscheinlichkeit, dass der Soldat nicht vom Gegner getroffen wird und daher keinen Schaden nimmt."
+msgstr "„Ausweichen“ erhöht die Wahrscheinlichkeit, dass der Soldat nicht vom Gegner getroffen wird und daher keinen Schaden nimmt."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -380,7 +380,7 @@ msgstr "\"Ausweichen\" erhöht die Wahrscheinlichkeit, dass der Soldat nicht vom
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
-msgstr "Imperiale Soldaten können nicht in \"Verteidigung\" trainiert werden und bleiben auf der niedrigsten Stufe."
+msgstr "Imperiale Soldaten können nicht in „Verteidigung“ trainiert werden und bleiben auf der niedrigsten Stufe."
 
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
@@ -459,7 +459,7 @@ msgstr "Das Schmieden eines Plattenharnischs"
 #: ../../tribes/empire/foresters_house/conf:21 ../../tribes/empire/inn/conf:30
 #: ../../tribes/empire/lumberjacks_house/conf:21
 #: ../../tribes/empire/marblemine/conf:32 ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:25 ../../tribes/empire/shipyard/conf:29
+#: ../../tribes/empire/sawmill/conf:25 ../../tribes/empire/shipyard/conf:30
 #: ../../tribes/empire/smelting_works/conf:31
 #: ../../tribes/empire/stonemasons_house/conf:26
 #: ../../tribes/empire/toolsmithy/conf:62 ../../tribes/empire/vineyard/conf:27
@@ -1047,7 +1047,7 @@ msgstr "Winzer"
 
 #: ../../tribes/empire/conf:140
 msgid "Scout"
-msgstr "Erkunder"
+msgstr "Kundschafter"
 
 #: ../../tribes/empire/conf:141
 msgid "Donkey Breeder"
@@ -1152,7 +1152,7 @@ msgstr "Brunnen"
 
 #: ../../tribes/empire/conf:178
 msgid "Scout’s House"
-msgstr "Erkunderhaus"
+msgstr "Kundschafterhaus"
 
 #: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
@@ -1232,7 +1232,7 @@ msgstr "Bauernhof"
 
 #: ../../tribes/empire/conf:198
 msgid "Weapon Smithy"
-msgstr "Waffenschmied"
+msgstr "Waffenschmiede"
 
 #: ../../tribes/empire/conf:199
 msgid "Deep Marble Mine"
@@ -1723,13 +1723,13 @@ msgstr "Das Abbauen von Marmor"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
-msgstr "Keine Steine"
+msgstr "Keine Felsen"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
-msgstr "Der Steinmetz in diesem Steinbruch kann keine Steine in seinem Arbeitsbereich finden."
+msgstr "Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem Arbeitsbereich finden."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1744,7 +1744,7 @@ msgid ""
 "A small bite to keep miners strong and working. Rations are also consumed by"
 " the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
-msgstr "Ein kleiner Happen um die Bergleute stark und arbeitsfähig zu halten. Rationen werden auch vom Kundschafter auf seinen Erkundungstouren verbraucht. Diese werden in Tavernen aus Brot, Fleisch oder Fisch zubereitet."
+msgstr "Ein kleiner Happen um die Bergleute stark und arbeitsfähig zu halten. Rationen werden auch vom Kundschafter auf seinen Erkundungsreisen verbraucht. Diese werden in Tavernen aus Brot, Fleisch oder Fisch zubereitet."
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
@@ -1798,7 +1798,7 @@ msgstr "Ein seetüchtiges Schiff"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 
-#: ../../tribes/empire/shipyard/conf:27
+#: ../../tribes/empire/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "Das Bauen eines Schiffs"
 
@@ -1826,7 +1826,7 @@ msgstr "Verhüttet Eisenerz zu Eisen und Golderz zu Gold."
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Verteidigt und Erobert!"
+msgstr "Verteidige und erobere!"
 
 #: ../../tribes/empire/stone/conf:1
 msgid ""
@@ -1932,7 +1932,7 @@ msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 3 auf 4"
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr "Trainiert Soldaten in \"Angriff\" und \"Lebenspunkte\"."
+msgstr "Trainiert Soldaten in „Angriff“ und „Lebenspunkte“."
 
 #: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"

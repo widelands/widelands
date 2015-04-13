@@ -158,7 +158,6 @@ return {
    end
 
    -- Instantiate the hook to calculate points
-   if hooks == nil then hooks = {} end
    hooks.custom_statistic = {
       name = wc_points,
       pic = "pics/genstats_points.png",

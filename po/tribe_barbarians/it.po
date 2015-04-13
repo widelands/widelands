@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-18 17:47+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,25 +39,25 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella caserma."
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr "La tua barriera ha scoperto un aggressore."
+msgstr "Il tuo fortino ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr "La tua barriera è sotto attacco"
+msgstr "Il tuo fortino è sotto attacco."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "Il nemico ha sconfitto i tuoi soldati nella barriera"
+msgstr "Il nemico ha sconfitto i tuoi soldati nel fortino."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "I tuoi soldati hanno sconfitto il nemico nella barriera."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel fortino."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -102,22 +102,22 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella cittadella."
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr "Il tuo dongione ha scoperto un aggressore."
+msgstr "Il tuo mastio ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr "Il tuo dongione è sotto attacco."
+msgstr "Il tuo mastio è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel dongione."
+msgstr "Il nemico ha sconfitto i tuoi soldati nel mastio."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel dongione."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel mastio."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
@@ -149,31 +149,31 @@ msgstr "Il tuo posto di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr "Il tuo posto di guardia è sotto attacco"
+msgstr "Il tuo posto di guardia è sotto attacco."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia"
+msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia"
+msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Il tuo posto di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Il tuo posto di guardia è sotto attacco."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
@@ -201,35 +201,35 @@ msgstr "Il tuo avamposto è sotto attacco"
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "Il nemico ha sconfitto i tuoi soldati nell' avamposto"
+msgstr "Il nemico ha sconfitto i tuoi soldati nell'avamposto."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "I tuoi soldati hanno sconfitto i nemici nell' avamposto"
+msgstr "I tuoi soldati hanno sconfitto i nemici nell'avamposto."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "La tua guardiola ha scoperto un aggressore."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "La tua guardiola è sotto attacco."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella guardiola."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella guardiola."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
@@ -241,11 +241,11 @@ msgstr "La tua torre piccola è sotto attacco."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella torre piccola."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella torre piccola."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
@@ -300,9 +300,9 @@ msgstr "sta forgiando un'ascia grande"
 #: ../../tribes/barbarians/lime_kiln/conf:23
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
-#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/quarry/conf:21
 #: ../../tribes/barbarians/reed_yard/conf:25
-#: ../../tribes/barbarians/shipyard/conf:29
+#: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
 #: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
@@ -380,7 +380,7 @@ msgstr "Tutte e tre le armi necessitano dello stesso tempo per essere prodotte, 
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Cuoce al forno pane per i lavoratori."
+msgstr "Cuoce al forno del pane per i lavoratori."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/barrier/help.lua:13
@@ -461,7 +461,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo fortino."
 
 #: ../../tribes/barbarians/barrier/help.lua:16
 #: ../../tribes/barbarians/citadel/help.lua:16
@@ -469,7 +469,7 @@ msgstr ""
 #: ../../tribes/barbarians/fortress/help.lua:16
 #: ../../tribes/barbarians/sentry/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Manda dei soldati ad occupare degli edifici militari per espandere il tuo territorio."
 
 #: ../../tribes/barbarians/barrier/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:17
@@ -489,11 +489,11 @@ msgstr "sta dormendo"
 
 #: ../../tribes/barbarians/battlearena/conf:36
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "avanzando l'evasione del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "avanzando l'evasione del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -609,7 +609,7 @@ msgstr "Produce le migliori birre per mantenere i guerrieri forti e felici duran
 #: ../../tribes/barbarians/brewery/conf:25
 #: ../../tribes/barbarians/micro-brewery/conf:28
 msgid "brewing"
-msgstr ""
+msgstr "producendo della birra"
 
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
@@ -639,7 +639,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
-msgstr ""
+msgstr "allevando del bestiame"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:17
 msgid "Breeds oxen for adding them to the transportation system."
@@ -668,7 +668,7 @@ msgstr "I tuoi soldati hanno occupato la tua cittadella"
 #: ../../tribes/barbarians/cloth/conf:1
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
-msgstr "Il tessuto è necessario per le navi barbare. E' prodotto dalla paglia di canne."
+msgstr "Il tessuto è necessario per le navi barbare. È prodotto partendo dalla paglia di canne."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -743,608 +743,608 @@ msgstr "Barbari"
 msgid "The mighty tribes of the east-lands!"
 msgstr "Le potenti tribù delle terre dell'est!"
 
-#: ../../tribes/barbarians/conf:34
+#: ../../tribes/barbarians/conf:35
 msgid "Ashes"
 msgstr "Ceneri"
 
-#: ../../tribes/barbarians/conf:35
+#: ../../tribes/barbarians/conf:36
 msgid "Destroyed building"
 msgstr "Edificio distrutto"
 
-#: ../../tribes/barbarians/conf:36
+#: ../../tribes/barbarians/conf:37
 msgid "Field (medium)"
 msgstr "Campo (medio)"
 
-#: ../../tribes/barbarians/conf:37
+#: ../../tribes/barbarians/conf:38
 msgid "Field (small)"
 msgstr "Campo (piccolo)"
 
-#: ../../tribes/barbarians/conf:38
+#: ../../tribes/barbarians/conf:39
 msgid "Field (tiny)"
 msgstr "Campo (minuscolo)"
 
-#: ../../tribes/barbarians/conf:39
+#: ../../tribes/barbarians/conf:40
 msgid "Field (ripe)"
 msgstr "Campo (maturo)"
 
-#: ../../tribes/barbarians/conf:40
+#: ../../tribes/barbarians/conf:41
 msgid "Field (harvested)"
 msgstr "Campo (coltivato)"
 
-#: ../../tribes/barbarians/conf:41
-msgid "Reed (medium)"
-msgstr ""
-
 #: ../../tribes/barbarians/conf:42
-msgid "Reed (small)"
-msgstr ""
+msgid "Reed (medium)"
+msgstr "Canna (media)"
 
 #: ../../tribes/barbarians/conf:43
-msgid "Reed (tiny)"
-msgstr ""
+msgid "Reed (small)"
+msgstr "Canna (piccola)"
 
 #: ../../tribes/barbarians/conf:44
-msgid "Reed (ripe)"
-msgstr ""
+msgid "Reed (tiny)"
+msgstr "Canna (minuscola)"
 
 #: ../../tribes/barbarians/conf:45
+msgid "Reed (ripe)"
+msgstr "Canna (matura)"
+
+#: ../../tribes/barbarians/conf:46
 msgid "Resource indicator: Coal (little)"
 msgstr "Indicatore della risorsa: carbone (poco)"
 
-#: ../../tribes/barbarians/conf:46
+#: ../../tribes/barbarians/conf:47
 msgid "Resource indicator: Coal (much)"
 msgstr "Indicatore della risorsa: carbone (molto)"
 
-#: ../../tribes/barbarians/conf:47
+#: ../../tribes/barbarians/conf:48
 msgid "Resource indicator: Gold (little)"
 msgstr "Indicatore della risorsa: oro (poco)"
 
-#: ../../tribes/barbarians/conf:48
+#: ../../tribes/barbarians/conf:49
 msgid "Resource indicator: Gold (much)"
 msgstr "L'indicatore di risorse segna tanto oro"
 
-#: ../../tribes/barbarians/conf:49
+#: ../../tribes/barbarians/conf:50
 msgid "Resource indicator: Granite (little)"
 msgstr "L'indicatore di risorse segna poco granito"
 
-#: ../../tribes/barbarians/conf:50
+#: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Granite (much)"
 msgstr "L'indicatore di risorse segna molto granito"
 
-#: ../../tribes/barbarians/conf:51
+#: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Iron (little)"
 msgstr "L'indicatore di risorse segna poco ferro"
 
-#: ../../tribes/barbarians/conf:52
+#: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Iron (much)"
 msgstr "L'indicatore di risorse segna tanto ferro"
 
-#: ../../tribes/barbarians/conf:53
+#: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: No resource"
 msgstr "L'indicatore di risorse segna nessuna risorsa"
 
-#: ../../tribes/barbarians/conf:54
+#: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Water"
 msgstr "L'indicatore di risorse segna acqua"
 
-#: ../../tribes/barbarians/conf:55
+#: ../../tribes/barbarians/conf:56
 msgid "Ship Construction Site"
 msgstr "Sito per la costruzione navale"
 
-#: ../../tribes/barbarians/conf:58
+#: ../../tribes/barbarians/conf:59
 msgid "Ax"
 msgstr "Ascia"
 
-#: ../../tribes/barbarians/conf:59
+#: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
 msgstr "Pala per il pane"
 
-#: ../../tribes/barbarians/conf:60
+#: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
 msgstr "Ascia da battaglia"
 
-#: ../../tribes/barbarians/conf:61
+#: ../../tribes/barbarians/conf:62
 msgid "Beer"
 msgstr "Birra"
 
-#: ../../tribes/barbarians/conf:62
+#: ../../tribes/barbarians/conf:63
 msgid "Blackwood"
 msgstr "Legno trattato"
 
-#: ../../tribes/barbarians/conf:63
+#: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
 msgstr "Ascia grande"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
 msgstr "Ascia di bronzo"
 
-#: ../../tribes/barbarians/conf:65
+#: ../../tribes/barbarians/conf:66
 msgid "Cloth"
 msgstr "Stoffa"
 
-#: ../../tribes/barbarians/conf:66
+#: ../../tribes/barbarians/conf:67
 msgid "Coal"
 msgstr "Carbone"
 
-#: ../../tribes/barbarians/conf:67
-msgid "Felling Ax"
-msgstr ""
-
 #: ../../tribes/barbarians/conf:68
+msgid "Felling Ax"
+msgstr "Ascia da abbattimento"
+
+#: ../../tribes/barbarians/conf:69
 msgid "Fire Tongs"
 msgstr "Pinze per il fuoco"
 
-#: ../../tribes/barbarians/conf:69
+#: ../../tribes/barbarians/conf:70
 msgid "Fish"
 msgstr "Pesce"
 
-#: ../../tribes/barbarians/conf:70
+#: ../../tribes/barbarians/conf:71
 msgid "Fishing Rod"
 msgstr "Canna da pesca"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:72
 msgid "Gold"
 msgstr "Oro"
 
-#: ../../tribes/barbarians/conf:72
-msgid "Gold Ore"
-msgstr "Le pietre d'oro"
-
 #: ../../tribes/barbarians/conf:73
+msgid "Gold Ore"
+msgstr "Oro grezzo"
+
+#: ../../tribes/barbarians/conf:74
 msgid "Grout"
 msgstr "Calce"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:75
 msgid "Hammer"
 msgstr "Martello"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:76
 msgid "Helmet"
 msgstr "Elmo"
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:77
 msgid "Hunting Spear"
 msgstr "Lancia da caccia"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:78
 msgid "Iron"
 msgstr "Ferro"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:79
 msgid "Iron Ore"
 msgstr "Ferro grezzo"
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:80
 msgid "Kitchen Tools"
 msgstr "Strumenti da cucina"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:81
 msgid "Mask"
 msgstr "Maschera"
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:82
 msgid "Meal"
 msgstr "Pasto"
 
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:83
 msgid "Meat"
 msgstr "Carne"
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:84
 msgid "Pick"
 msgstr "Piccone"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/conf:85
 msgid "Pitta Bread"
 msgstr "Pita"
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:86
 msgid "Ration"
 msgstr "Razione"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:87
 msgid "Raw Stone"
 msgstr "Pietra grezza"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:88
 msgid "Scythe"
 msgstr "Falce"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:89
 msgid "Sharp Ax"
 msgstr "Ascia di bronzo"
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:90
 msgid "Shovel"
 msgstr "Pala"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:91
 msgid "Snack"
 msgstr "Spuntino"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:92
 msgid "Strong Beer"
 msgstr "Birra forte"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:93
 msgid "Thatch Reed"
 msgstr "Paglia di canne"
 
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:94
 msgid "Log"
 msgstr "Tronco"
 
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
 msgstr "Elmo da guerra"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
 msgstr "Ascia del guerriero"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:97
 msgid "Water"
 msgstr "Acqua"
 
-#: ../../tribes/barbarians/conf:97
+#: ../../tribes/barbarians/conf:98
 msgid "Wheat"
 msgstr "Grano"
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:101
 msgid "Carrier"
 msgstr "Trasportatore"
 
-#: ../../tribes/barbarians/conf:101
+#: ../../tribes/barbarians/conf:102
 msgid "Ox"
 msgstr "Bue"
 
-#: ../../tribes/barbarians/conf:104
+#: ../../tribes/barbarians/conf:105
 msgid "Soldier"
 msgstr "Soldato"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:108
 msgid "Baker"
 msgstr "Fornaio"
 
-#: ../../tribes/barbarians/conf:108
+#: ../../tribes/barbarians/conf:109
 msgid "Master Blacksmith"
 msgstr "Mastro fabbro ferraio"
 
-#: ../../tribes/barbarians/conf:109
+#: ../../tribes/barbarians/conf:110
 msgid "Blacksmith"
 msgstr "Fabbro ferraio"
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:111
 msgid "Master Brewer"
 msgstr "Mastro birraio"
 
-#: ../../tribes/barbarians/conf:111
+#: ../../tribes/barbarians/conf:112
 msgid "Brewer"
 msgstr "Birraio"
 
-#: ../../tribes/barbarians/conf:112
+#: ../../tribes/barbarians/conf:113
 msgid "Builder"
 msgstr "Costruttore"
 
-#: ../../tribes/barbarians/conf:113
+#: ../../tribes/barbarians/conf:114
 msgid "Charcoal Burner"
 msgstr "Carbonaio"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:115
 msgid "Master Miner"
 msgstr "Mastro minatore"
 
-#: ../../tribes/barbarians/conf:115
+#: ../../tribes/barbarians/conf:116
 msgid "Chief Miner"
 msgstr "Capo minatore"
 
-#: ../../tribes/barbarians/conf:116
+#: ../../tribes/barbarians/conf:117
 msgid "Farmer"
 msgstr "Contadino"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:118
 msgid "Gardener"
 msgstr "Giardiniere"
 
-#: ../../tribes/barbarians/conf:118
+#: ../../tribes/barbarians/conf:119
 msgid "Fisher"
 msgstr "Pescatore"
 
-#: ../../tribes/barbarians/conf:119
+#: ../../tribes/barbarians/conf:120
 msgid "Gamekeeper"
 msgstr "Guardiacaccia"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:121
 msgid "Geologist"
 msgstr "Geologo"
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:122
 msgid "Helmsmith"
 msgstr "Fabbro d'elmi"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:123
 msgid "Hunter"
 msgstr "Cacciatore"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:124
 msgid "Innkeeper"
 msgstr "Locandiere"
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:125
 msgid "Lime-Burner"
 msgstr "Operaio della calchera"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:126
 msgid "Lumberjack"
 msgstr "Taglialegna"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:127
 msgid "Miner"
 msgstr "Minatore"
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:128
 msgid "Ranger"
 msgstr "Guardia forestale"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
 msgstr "Maestro d'ascia"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:130
 msgid "Smelter"
 msgstr "Fonditore"
 
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:131
 msgid "Stonemason"
 msgstr "Tagliapietre"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:132
 msgid "Trainer"
 msgstr "Istruttore"
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:133
 msgid "Weaver"
 msgstr "Tessitore"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:134
 msgid "Scout"
 msgstr "Esploratore"
 
-#: ../../tribes/barbarians/conf:134
+#: ../../tribes/barbarians/conf:135
 msgid "Cattle Breeder"
 msgstr "Allevatore di bovini"
 
-#: ../../tribes/barbarians/conf:137
+#: ../../tribes/barbarians/conf:138
 msgid "Ship"
 msgstr "Nave"
 
-#: ../../tribes/barbarians/conf:140
+#: ../../tribes/barbarians/conf:141
 msgid "Construction Site"
 msgstr "Cantiere"
 
-#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
 msgstr "Smantella il sito"
 
-#: ../../tribes/barbarians/conf:146 ../../tribes/barbarians/conf:155
+#: ../../tribes/barbarians/conf:147 ../../tribes/barbarians/conf:156
 msgid "Castle"
 msgstr "Castello"
 
-#: ../../tribes/barbarians/conf:147
-msgid "Guardhall"
-msgstr "Guardia ingresso"
-
 #: ../../tribes/barbarians/conf:148
-msgid "Guardhouse"
+msgid "Guardhall"
 msgstr "Posto di guardia"
 
 #: ../../tribes/barbarians/conf:149
+msgid "Guardhouse"
+msgstr "Posto di guardia"
+
+#: ../../tribes/barbarians/conf:150
 msgid "High Tower"
 msgstr "Torre alta"
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:151
 msgid "Small Tower"
 msgstr "Torre piccola"
 
-#: ../../tribes/barbarians/conf:151 ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:152 ../../tribes/barbarians/conf:159
 msgid "Tower"
 msgstr "Torre"
 
-#: ../../tribes/barbarians/conf:152 ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:153 ../../tribes/barbarians/conf:208
 msgid "Sentry"
 msgstr "Guardiola"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:154
 msgid "Barracks"
 msgstr "Caserma"
 
-#: ../../tribes/barbarians/conf:154 ../../tribes/barbarians/conf:206
+#: ../../tribes/barbarians/conf:155 ../../tribes/barbarians/conf:207
 msgid "Barrier"
 msgstr "Fortino"
 
-#: ../../tribes/barbarians/conf:156 ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:157 ../../tribes/barbarians/conf:210
 msgid "Fortress"
 msgstr "Fortezza"
 
-#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:158
 msgid "Outpost"
 msgstr "Avamposto"
 
-#: ../../tribes/barbarians/conf:161 ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:162 ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Quartier generale"
 
-#: ../../tribes/barbarians/conf:163
+#: ../../tribes/barbarians/conf:164
 msgid "Warehouse"
 msgstr "Magazzino"
 
-#: ../../tribes/barbarians/conf:164
+#: ../../tribes/barbarians/conf:165
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:168
 msgid "Quarry"
 msgstr "Cava"
 
-#: ../../tribes/barbarians/conf:168
+#: ../../tribes/barbarians/conf:169
 msgid "Lumberjack’s Hut"
 msgstr "Capanna del taglialegna"
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:170
 msgid "Ranger’s Hut"
 msgstr "Capanna del guardiacaccia"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:171
 msgid "Fisher’s Hut"
 msgstr "Capanna del pescatore"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:172
 msgid "Hunter’s Hut"
 msgstr "Capanna del cacciatore"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:173
 msgid "Gamekeeper’s Hut"
 msgstr "Capanna del guardiacaccia"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:174
 msgid "Well"
 msgstr "Pozzo"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:175
 msgid "Scout’s Hut"
 msgstr "Capanna dell'esploratore"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:176
 msgid "Wood Hardener"
 msgstr "Trattamento del legno"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:177
 msgid "Lime Kiln"
 msgstr "Calchera"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:178
 msgid "Reed Yard"
 msgstr "Serra per le felci"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:179
 msgid "Bakery"
 msgstr "Forno"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:180
 msgid "Brewery"
 msgstr "Birreria"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:181
 msgid "Micro Brewery"
 msgstr "Piccola birreria"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:182
 msgid "Big Inn"
 msgstr "Grande locanda"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:183
 msgid "Inn"
 msgstr "Locanda"
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:184
 msgid "Tavern"
 msgstr "Taverna"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:185
 msgid "Charcoal Kiln"
 msgstr "Carbonaia"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:186
 msgid "Smelting Works"
 msgstr "Fonderia"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:187
 msgid "Shipyard"
 msgstr "Cantiere navale"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:188
 msgid "War Mill"
 msgstr "Fucina da guerra"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:189
 msgid "Axfactory"
 msgstr "Fabbrica di asce"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:190
 msgid "Metal Workshop"
 msgstr "Officina siderurgica"
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:191
 msgid "Cattle Farm"
 msgstr "Allevamento di bovini"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:192
 msgid "Weaving Mill"
 msgstr "Mulino di tessitura"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:193
 msgid "Farm"
 msgstr "Fattoria"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:194
 msgid "Helm Smithy"
 msgstr "Fucina di elmi"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
 msgstr "Miniera di granito"
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:196
 msgid "Deeper Coal Mine"
 msgstr "Miniera di carbone molto profonda"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:197
 msgid "Deep Coal Mine"
 msgstr "Miniera di carbone profonda"
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:198
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:199
 msgid "Deeper Iron Ore Mine"
 msgstr "Miniera di ferro molto profonda"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:200
 msgid "Deep Iron Ore Mine"
 msgstr "Miniera di ferro profonda"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:201
 msgid "Iron Ore Mine"
 msgstr "Miniera di ferro"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:202
 msgid "Deeper Gold Mine"
 msgstr "Miniera d'oro molto profonda"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:203
 msgid "Deep Gold Mine"
 msgstr "Miniera d'oro profonda"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:204
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:209
 msgid "Citadel"
 msgstr "Cittadella"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:211
 msgid "Donjon"
 msgstr "Mastio"
 
-#: ../../tribes/barbarians/conf:213
+#: ../../tribes/barbarians/conf:214
 msgid "Battle Arena"
 msgstr "Arena di battaglia"
 
-#: ../../tribes/barbarians/conf:214
+#: ../../tribes/barbarians/conf:215
 msgid "Training Camp"
 msgstr "Campo di addestramento"
 
@@ -1366,7 +1366,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:13
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr ""
+msgstr "Estratto da \"I nostri tesori nel sottosuolo\",<br> una canzone tradizionale barbara."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1758,7 +1758,7 @@ msgstr "Caccia degli animali per produrre carne."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
 msgid "The hunter’s hut needs animals to hunt within the working radius."
-msgstr ""
+msgstr "La capanna del cacciatore ha bisogno di animali da cacciare nel suo raggio di lavoro."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
@@ -1809,7 +1809,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "'Formare della nuova pietra partendo dalla vecchia con fuoco e acqua.'"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:17
 msgid ""
@@ -1870,7 +1870,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "The lumberjack’s hut needs trees to fell within the working radius."
-msgstr ""
+msgstr "La casa del taglialegna ha bisogno di alberi da abbattere nel suo raggio di lavoro."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""
@@ -1901,43 +1901,43 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "making a bread paddle"
-msgstr ""
+msgstr "producendo una pala per il pane"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "making a felling ax"
-msgstr ""
+msgstr "producendo un'ascia da disboscamento"
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "making fire tongs"
-msgstr ""
+msgstr "producendo delle pinze per il fuoco"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "making a fishing rod"
-msgstr ""
+msgstr "producendo una canna da pesca"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "making a hammer"
-msgstr ""
+msgstr "producendo un martello"
 
 #: ../../tribes/barbarians/metalworks/conf:49
 msgid "making a hunting spear"
-msgstr ""
+msgstr "producendo una lancia da caccia"
 
 #: ../../tribes/barbarians/metalworks/conf:51
 msgid "making kitchen tools"
-msgstr ""
+msgstr "producendo degli utensili da cucina"
 
 #: ../../tribes/barbarians/metalworks/conf:53
 msgid "making a pick"
-msgstr ""
+msgstr "producendo un piccone"
 
 #: ../../tribes/barbarians/metalworks/conf:55
 msgid "making a scythe"
-msgstr ""
+msgstr "producendo una falce"
 
 #: ../../tribes/barbarians/metalworks/conf:57
 msgid "making a shovel"
-msgstr ""
+msgstr "producendo una pala"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -2012,11 +2012,15 @@ msgid ""
 " It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:26
+#: ../../tribes/barbarians/quarry/conf:19
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
 msgstr "Rocce esaurite"
 
-#: ../../tribes/barbarians/quarry/conf:27
+#: ../../tribes/barbarians/quarry/conf:33
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
@@ -2032,7 +2036,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
-msgstr ""
+msgstr "Il tagliapietre fa una pausa di %s prima di ritornare al lavoro."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -2152,7 +2156,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato la tua guardiola."
 
 #: ../../tribes/barbarians/sharpax/conf:1
 msgid ""
@@ -2170,7 +2174,7 @@ msgstr "Una valida nave"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Lavora al cantiere navale e costruisce navi."
 
-#: ../../tribes/barbarians/shipyard/conf:27
+#: ../../tribes/barbarians/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "sta costruendo una nave"
 
@@ -2232,35 +2236,35 @@ msgstr "Allena i soldati."
 
 #: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "avanzando l'attacco del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "avanzando l'attacco del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "avanzando l'attacco del soldato dal livello 2 al livello 3"
 
 #: ../../tribes/barbarians/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "avanzando l'attacco del soldato dal livello 3 al livello 4"
 
 #: ../../tribes/barbarians/trainingcamp/conf:57
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "avanzando l'attacco del soldato dal livello 4 al livello 5"
 
 #: ../../tribes/barbarians/trainingcamp/conf:59
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "avanzando la salute del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:61
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "avanzando la salute del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:63
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "avanzando la salute del soldato dal livello 2 al livello 3"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:15
 msgid "Chief Chat’Karuth in a speech to his army."
@@ -2317,7 +2321,7 @@ msgstr "sta forgiando un'ascia da guerriero"
 #: ../../tribes/barbarians/warmill/help.lua:17
 msgid ""
 "The war mill produces all the axes that the barbarians use for warfare."
-msgstr ""
+msgstr "La fucina da guerra produce tutte le asce che utilizzano i Barbari per la guerra."
 
 #: ../../tribes/barbarians/warmill/help.lua:18
 msgid ""

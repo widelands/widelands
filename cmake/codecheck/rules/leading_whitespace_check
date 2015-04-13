@@ -30,7 +30,6 @@ class EvalMatches( object ):
 
         errors = []
         
-        curline = 1
         in_macro = False
         allowed_indent = "\t"*100
         required_indent = ""

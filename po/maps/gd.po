@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-17 08:29+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-13 09:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "An dàrna impireachd"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr "Na Tùsanaich"
+msgstr "Tùsanaich"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
@@ -84,7 +84,7 @@ msgstr "Mìosan an fhògraidh"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr "An Impireachd"
+msgstr "Impireachd"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
@@ -110,7 +110,7 @@ msgstr "An toir air an teine"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Na h-Atlantaich"
+msgstr "Atlantaich"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
@@ -486,10 +486,10 @@ msgstr "Cùiltearachd"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Dh’fhàs na slighean cùiltearachd  stèidhichte agad trang gu h-obann: Nochd dà threubh eile ’s tha còmhstri am measg an luchd-cùiltearachd air a tòiseachadh: Cò an sgioba a mhalairteas uiread de bhathar ro chàch?"
+msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -629,12 +629,12 @@ msgstr "An leaghadh"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "Bha e ag aiteamh a-rithist. Fhuair trì treubhan fasgadh on droch gheamhradh am measg bheanntan mòra. Dh’èist iad ris an tairgre air Oidhche nan Seachd Suipearan is thòisich iad air cogadh ri chèile. Bheir an aonan a mhaireas beò ulaidh a nàimhdean dhan leac-ìobairt àrsaidh is togaidh e caisteal àlainn ann gus deagh-ghean is suim nan diathan a bhuannachd."
+msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"

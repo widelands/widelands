@@ -5,13 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Venatrix, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-19 10:32+0000\n"
-"Last-Translator: millimarg\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-20 08:51+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,11 +40,11 @@ msgstr "Endlich! Der erste Schritt zum Sieg ist vollbracht! In der letzten Nacht
 #: ../../maps/Plateau.wmf/scripting/texts.lua:26
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr "Erobere die historische Burg"
+msgstr "Erobere die fremdartige Burg"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Besiege Lanissa und erobere die historische Burg."
+msgstr "Besiege Lanissa und erobere die fremdartige Burg."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:35
 #: ../../maps/Plateau.wmf/scripting/texts.lua:37
@@ -76,7 +77,7 @@ msgstr "Zweite Beratung"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
-msgstr "Eine historische Burg"
+msgstr "Eine fremdartige Burg"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:79
 msgid ""
@@ -84,7 +85,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr "Bei den Göttern! Einer unserer Späher entdeckte eine mächtige Burg in der Mitte des alten Plateaus. Die Festung muss sehr alt sein und es scheint, als sei sie in einem fremden Baustil errichtet. Es ist sicher, dass dies nicht von Barbarenhand geschah."
+msgstr "Bei den Göttern! Einer unserer Kundschafter entdeckte eine mächtige Burg in der Mitte des alten Plateaus. Die Festung muss sehr alt sein und es scheint, als sei sie in einem fremden Baustil errichtet. Es ist sicher, dass dies nicht von Barbarenhand geschah."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:80
 msgid ""
@@ -96,13 +97,13 @@ msgstr "̣Lasst uns hoffen, dass Lanissa – die Herrin dieser Burg – uns nich
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
-msgstr "Die historische Burg wurde eingenommen"
+msgstr "Die fremdartige Burg wurde eingenommen"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr "Wunderbar! Unsere Truppen haben endlich Lanissa und ihre Soldaten besiegt. Die uralte Burg ist unser!"
+msgstr "Wunderbar! Unsere Truppen haben endlich Lanissa und ihre Soldaten besiegt. Die fremdartige Burg ist unser!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:91
 msgid ""
