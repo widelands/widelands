@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 13:38+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-09 16:10+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Divokoza"
 
 #: ../../world/critters/deer/init.lua:14
 msgid "Deer"
-msgstr "Jelen"
+msgstr "Košuta"
 
 #: ../../world/critters/duck/init.lua:18
 msgid "Duck"
@@ -67,7 +67,7 @@ msgstr "Ovca"
 
 #: ../../world/critters/stag/init.lua:14
 msgid "Stag"
-msgstr ""
+msgstr "Jelen"
 
 #: ../../world/critters/wildboar/init.lua:14
 msgid "Wild boar"
@@ -178,7 +178,7 @@ msgstr "Grota"
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
 msgid "Stones 1"
-msgstr ""
+msgstr "Grote 1"
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
@@ -218,7 +218,7 @@ msgstr ""
 #: TRANSLATORS This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid "Track"
-msgstr ""
+msgstr "Tragovi"
 
 #: ../../world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-03 22:55+0000\n"
+"POT-Creation-Date: 2015-04-06 09:00+0100\n"
+"PO-Revision-Date: 2015-04-09 21:20+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -26,17 +26,17 @@ msgid "None"
 msgstr "Отсутствует"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:113
+#: ../../src/ai/defaultai.h:116
 msgid "Aggressive"
 msgstr "Агрессивный"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:124
+#: ../../src/ai/defaultai.h:127
 msgid "Normal"
 msgstr "Обычный"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:135
+#: ../../src/ai/defaultai.h:138
 msgid "Defensive"
 msgstr "Оборонительный"
 
@@ -1287,7 +1287,7 @@ msgstr "Ваш %s не может найти дорогу домой и, пох�
 
 #: ../../src/logic/worker.cc:1879
 msgid "Worker got lost!"
-msgstr "Рабочий потерялся!"
+msgstr "Рабочий потерян!"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -3175,15 +3175,15 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr "Вы хотите отменить текущую экспедицию?"
 
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:138
+#: ../../src/wui/attack_box.cc:138 ../../src/wui/attack_box.cc:167
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/wui/attack_box.cc:153
+#: ../../src/wui/attack_box.cc:152
 msgid "Soldiers:"
 msgstr "Солдаты:"
 
-#: ../../src/wui/attack_box.cc:161
+#: ../../src/wui/attack_box.cc:160
 msgid "Send less soldiers"
 msgstr "Послать меньше солдат"
 
@@ -3191,7 +3191,7 @@ msgstr "Послать меньше солдат"
 msgid "Number of soldiers"
 msgstr "Количество солдат"
 
-#: ../../src/wui/attack_box.cc:190
+#: ../../src/wui/attack_box.cc:188
 msgid "Send more soldiers"
 msgstr "Послать больше солдат"
 
@@ -3633,7 +3633,7 @@ msgstr "Восстановить выбранные сообщения"
 
 #: ../../src/wui/game_message_menu.cc:614
 msgid "Show Inbox"
-msgstr "Входящие"
+msgstr "Показать \"входящее\""
 
 #: ../../src/wui/game_objectives_menu.cc:45
 #: ../../src/wui/interactive_player.cc:100

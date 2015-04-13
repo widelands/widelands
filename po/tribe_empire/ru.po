@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 16:49+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 23:29+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -620,7 +620,7 @@ msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal kiln out of logs."
-msgstr "Пищей для огня, который имперцы поддерживают в  литейной, бронной и оружейной, служит уголь. Этот уголь добывают в угольных шахтах, или выжигают из бревен в печи углежога."
+msgstr "Для поддержания огня в литейной, бронной и оружейной, имперцы используют уголь. Этот уголь добывают в угольных шахтах, или выжигают из бревен в печи углежога."
 
 #: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
@@ -1700,7 +1700,7 @@ msgstr "Кирка используется каменщиками и шахтё
 msgid "Breeds pigs."
 msgstr "Разводит свиней."
 
-#: ../../tribes/empire/piggery/conf:25
+#: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
 msgstr "выращивает свиней"
 
