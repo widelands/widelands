@@ -1,11 +1,12 @@
-# Automatically created by Widelands bzr5243[lua] (Debug)
+# Automatically created by Widelands bzr7436[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="64"
 map_h="80"
 nr_players="3"
-world="greenland"
-name="00Test"
+name="lua_testsuite"
 author="Unknown"
 descr="no description defined"
+hint=
+tags=

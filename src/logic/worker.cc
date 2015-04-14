@@ -2984,7 +2984,7 @@ void Worker::Loader::load(FileRead & fr)
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
-		throw wexception("loading player immovable: %s", e.what());
+		throw wexception("loading worker: %s", e.what());
 	}
 }
 
