@@ -23,7 +23,7 @@ tribes:new_ware_type{
 		-- TRANSLATORS: Helptext for a ware: Hammer
 		atlanteans = _"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.",
 		-- TRANSLATORS: Helptext for a ware: Hammer
-		barbarians = _"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop, (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
+		barbarians = _"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
 		-- TRANSLATORS: Helptext for a ware: Hammer
 		empire = _"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith."
    },
