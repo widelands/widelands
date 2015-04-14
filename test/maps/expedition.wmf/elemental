@@ -1,12 +1,11 @@
-# Automatically created by Widelands bzr6699[regression_testing] (RelWithDebug)
+# Automatically created by Widelands bzr7443[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="64"
 map_h="64"
 nr_players="1"
-world="greenland"
-name="test_expedition"
+name="expedition"
 author="SirVer"
 descr="no description defined"
 hint=
