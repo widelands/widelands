@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GameClassPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -35,8 +35,7 @@ void GameClassPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion) {
-			fr.signed_16(); // This used to be game speed
+		if (packet_version == kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
@@ -55,10 +54,6 @@ void GameClassPacket::write
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
-
-	// State is running, we do not need to save this
-	// Save speed
-	fw.signed_16(1000); // NOCOM(#codereview): remove this too? we ignore it on load it seems.
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else

@@ -1335,9 +1335,7 @@ void CmdSetWareTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// Supporting older versions for map loading
-		// NOCOM(#codereview): this should also not be needed. Only savegames contain commands, maps never do.
-		if (1 <= packet_version && packet_version  <= kCurrentPacketVersionSetWareTargetQuantity) {
+		if (packet_version == kCurrentPacketVersionSetWareTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
 		} else {

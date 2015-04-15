@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 // constants to handle special building types
 constexpr uint8_t kTypeBuilding = 0;
@@ -55,10 +55,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		// NOCOM(#codereview): scenarios shuold not contain building information. All buildings are placed via
-		// lua scripting after the scenario starts up.
-		// Supporting older versions for scenario loading
-		if (2 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			uint16_t const width  = map.get_width ();
 			uint16_t const height = map.get_height();

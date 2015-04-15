@@ -169,9 +169,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// NOCOM(#codereview): I do not understand this. ShippingItems should not be in maps. Where did this make trouble?
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			m_serial = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
