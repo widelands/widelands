@@ -231,7 +231,7 @@ function test_cancel_when_port_space_was_reached()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
-   stable_save("reached_port_space") -- // NOCOM Ship disappears when port space reached and game saved
+   stable_save("reached_port_space")
    sleep(5000)
    ships = p1:get_ships()
    --ships table should contain 1-2 items (1-2 ships)

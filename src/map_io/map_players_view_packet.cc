@@ -382,11 +382,11 @@ void MapPlayersViewPacket::read
 		Player::Field * const player_fields = player->m_fields;
 		uint32_t const gametime = egbase.get_gametime();
 
-		const char* unseen_times_filename =
-				(boost::format(UNSEEN_TIMES_FILENAME_TEMPLATE)
-				 % static_cast<unsigned int>(plnum)
-				 % static_cast<unsigned int>(kCurrentPacketVersionUnseenTimes)).str().c_str();
-
+		char unseen_times_filename[FILENAME_SIZE];
+		snprintf
+			(unseen_times_filename, sizeof(unseen_times_filename),
+			 UNSEEN_TIMES_FILENAME_TEMPLATE,
+			 plnum, kCurrentPacketVersionUnseenTimes);
 		FileRead unseen_times_file;
 		struct NotFound {};
 
@@ -483,11 +483,10 @@ void MapPlayersViewPacket::read
 		bool have_vision = false;
 
 		try {
-			const char* fname =
-					(boost::format(VISION_FILENAME_TEMPLATE)
-					 % static_cast<unsigned int>(plnum)
-					 % static_cast<unsigned int>(kCurrentPacketVersionVision)).str().c_str();
-
+			char fname[FILENAME_SIZE];
+			snprintf
+				(fname, sizeof(fname),
+				 VISION_FILENAME_TEMPLATE, plnum, kCurrentPacketVersionVision);
 			vision_file.open(fs, fname);
 			have_vision = true;
 		} catch (...) {}
@@ -949,10 +948,9 @@ inline static void write_unseen_immovable
 	immovable_kinds_file.unsigned_8(immovable_kind);
 }
 
-#define WRITE(file, filename_template, version)       \
-	file.write(fs, (boost::format(filename_template)   \
-						 % static_cast<unsigned int>(plnum) \
-						 % version).str().c_str());         \
+#define WRITE(file, filename_template, version)                               \
+   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
+	(file).write(fs, filename);                                                \
 
 void MapPlayersViewPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
@@ -1087,6 +1085,8 @@ void MapPlayersViewPacket::write
 					}
 				} while (r.x);
 			}
+
+			char filename[FILENAME_SIZE];
 
 			fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
 											  % static_cast<unsigned int>(plnum)).str());

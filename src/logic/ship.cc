@@ -991,8 +991,6 @@ void Ship::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
-	// NOCOM Ship disappears when port space reached and game saved
-
 	// The state the ship is in
 	m_ship_state = fr.unsigned_8();
 
