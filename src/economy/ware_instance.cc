@@ -544,7 +544,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -599,7 +599,7 @@ void WareInstance::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWareInstance);
-	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().tribe().name());
 	fw.c_string(descr().name());
 
@@ -620,7 +620,7 @@ MapObject::Loader * WareInstance::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
-		uint16_t packet_version = fr.unsigned_16();
+		uint8_t packet_version = fr.unsigned_8();
 
 		if (packet_version == kCurrentPacketVersion) {
 

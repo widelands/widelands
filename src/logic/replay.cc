@@ -105,12 +105,9 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 				("%s apparently not a valid replay file", filename.c_str());
 
 		const uint8_t packet_version = m_cmdlog->unsigned_8();
-		if (packet_version < kCurrentPacketVersion)
-			throw wexception
-				("Replay of version %u is known to have desync problems", packet_version);
-		if (packet_version != kCurrentPacketVersion)
+		if (packet_version != kCurrentPacketVersion) {
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
-
+		}
 		game.rng().read_state(*m_cmdlog);
 	}
 	catch (...) {

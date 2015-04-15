@@ -473,8 +473,7 @@ void MapBuildingdataPacket::read_warehouse
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
 					if (warehouse.m_portdock->expedition_started()) {
-						warehouse.m_portdock->expedition_bootstrap()->load
-								(packet_version, warehouse, fr, game, mol);
+						warehouse.m_portdock->expedition_bootstrap()->load(warehouse, fr, game, mol);
 					}
 				}
 			}

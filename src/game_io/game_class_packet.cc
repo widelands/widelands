@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 void GameClassPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -34,7 +34,7 @@ void GameClassPacket::read
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
-		uint16_t const packet_version = fr.unsigned_16();
+		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
 		} else {
@@ -53,7 +53,7 @@ void GameClassPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else
