@@ -527,8 +527,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 		// The header has been peeled away by the caller
 
 		uint8_t const packet_version = fr.unsigned_8();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {

@@ -991,6 +991,8 @@ void Ship::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
+	// NOCOM Ship disappears when port space reached and game saved
+
 	// The state the ship is in
 	m_ship_state = fr.unsigned_8();
 
@@ -1014,6 +1016,8 @@ void Ship::Loader::load(FileRead & fr)
 		m_expedition->exploration_start = read_coords_32(&fr);
 		// Whether the exploration is done clockwise or counter clockwise
 		m_expedition->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
+	} else {
+		m_ship_state = TRANSPORT;
 	}
 
 	m_lastdock = fr.unsigned_32();
@@ -1072,7 +1076,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version  == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			std::string owner = fr.c_string();
 			std::string name = fr.c_string();
 			const ShipDescr* descr = nullptr;

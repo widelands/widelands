@@ -757,7 +757,7 @@ MapObject::Loader * Fleet::load
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError

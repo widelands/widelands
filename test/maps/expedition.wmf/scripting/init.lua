@@ -231,15 +231,15 @@ function test_cancel_when_port_space_was_reached()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
-   stable_save("reached_port_space") -- NOCOM ship missing from savegame when reloading
+   stable_save("reached_port_space") -- // NOCOM Ship disappears when port space reached and game saved
    sleep(5000)
    ships = p1:get_ships()
-	--ships table should contain 1 item (1 ship)
-	assert_true(#ships >= 1)
-	assert_true(#ships <= 2)
-  	assert_equal("exp_found_port_space", first_ship.state)
+   --ships table should contain 1-2 items (1-2 ships)
+   assert_true(#ships >= 1)
+   assert_true(#ships <= 2)
+   assert_equal("exp_found_port_space", first_ship.state)
    assert_equal(1, p1:get_workers("builder"))
-  	print("Now cancelling") -- NOCOM
+
    cancel_expedition_in_shipwindow(first_ship)
    sleep(20000)
    assert_equal(1, p1:get_workers("builder"))

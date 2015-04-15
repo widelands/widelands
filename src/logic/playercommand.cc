@@ -1455,8 +1455,7 @@ void CmdSetWorkerTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version  <= kCurrentPacketVersionSetWorkerTargetQuantity) {
+		if (packet_version == kCurrentPacketVersionSetWorkerTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
 		} else {

@@ -323,26 +323,19 @@ end
 -- 	:returns: :const:`true` if a button was clicked
 --
 function click_button(name)
-print("Click button " .. name) -- NOCOM remove extra output
    for button_name, button in pairs(wl.ui.MapView().buttons) do
-   print("Click button searching 1 " .. name)
       if button_name == name then
-      print("Click button 1 " .. name)
          button:click()
-         print("Clicked button 1 " .. name)
          return true
       end
    end
-print("Click button trying windows ")
+
    for window_name, window in pairs(wl.ui.MapView().windows) do
-   print("Click button searching 2 " .. name)
       for button_name, button in pairs(window.buttons) do
       print(window_name, button_name)
          if button_name == name then
-         print("Click button 2 " .. name)
             print(window_name, button_name)
             button:click()
-            print("Clicked button 2 " .. name)
             return true
          end
       end
