@@ -227,12 +227,18 @@ function test_cancel_when_port_space_was_reached()
    sleep(2000)
    assert_equal("ccw",first_ship.island_explore_direction)
    wait_for_message("Port Space Found")
+   assert_equal("exp_found_port_space", first_ship.state)
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
-   stable_save("reached_port_space")
+   stable_save("reached_port_space") -- NOCOM ship missing from savegame when reloading
+   sleep(5000)
+   ships = p1:get_ships()
+	--ships table should contain 1 item (1 ship)
+  	assert_equal(1, #ships) -- NOCOM
+  	assert_equal("exp_found_port_space", first_ship.state)
    assert_equal(1, p1:get_workers("builder"))
-
+  	print("Now cancelling") -- NOCOM
    cancel_expedition_in_shipwindow(first_ship)
    sleep(20000)
    assert_equal(1, p1:get_workers("builder"))
