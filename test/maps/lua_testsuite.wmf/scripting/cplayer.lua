@@ -53,7 +53,7 @@ end
 
 function player_tests:test_create_flag2()
    local f = map:get_field(20,10)
-   local k = wl.Game().players[2]:place_flag(f, true)
+   local k = egbase.players[2]:place_flag(f, true)
    assert_equal(k.owner.number, 2)
    k:remove()
 end
