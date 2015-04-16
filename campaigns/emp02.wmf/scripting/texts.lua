@@ -174,7 +174,7 @@ saledus_2 = {
 saledus_3 = {
    title =_ "Further Mountains",
    body= saledus(_"Saledus is excited",
-		_([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advice you to immediately  build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
+		_([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
 		.. paragraphdivider() ..
 		_([[However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a stonemason, who will cut columns from marble.]])
 		.. paragraphdivider() ..
@@ -190,7 +190,7 @@ amalea_1 = {
 		_([[It’s nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
 		.. paragraphdivider() ..
 		_([[What do you think about helping them out? I can’t tell you what we need exactly… but here are my recommendations:]]))
-		.. new_objectives(obj_build_Food_infrastructure)
+		.. new_objectives(obj_build_food_infrastructure)
 }
 
 amalea_2 = {
