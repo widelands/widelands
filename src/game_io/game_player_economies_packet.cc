@@ -64,11 +64,18 @@ void GamePlayerEconomiesPacket::read
 
 							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
-								if (upcast(Ship const, ship, bob)) {
-									assert(ship->get_economy());
-									EconomyDataPacket d(ship->get_economy());
-									d.read(fr);
-									read_this_economy = true;
+								if (upcast(Ship, ship, bob)) {
+									// ships in transport state are part of economy with other flags
+									// while ones in expedition are economy by themselves.
+									// Moreover ships in transportation mode can remain without
+									// economy (if player was completely defeated) that makes
+									// the game throw an exemption on game load
+									if (ship->state_is_expedition()){
+										assert(ship->get_economy());
+										EconomyDataPacket d(ship->get_economy());
+										d.read(fr);
+										read_this_economy = true;
+									}
 								}
 								bob = bob->get_next_bob();
 							}
@@ -128,15 +135,17 @@ void GamePlayerEconomiesPacket::write
 			for (Field const* field = &field_0; field < &map[map.max_index()]; ++field) {
 					Bob* bob = field->get_first_bob();
 					while (bob) {
-						if (upcast(Ship const, ship, bob)) {
-							if (ship->get_economy() == temp_economy) {
-								// TODO(sirver): the 0xffffffff is ugly and fragile.
-								fw.unsigned_32(0xffffffff); // Sentinel value.
-								fw.unsigned_32(field - &field_0);
-
-								EconomyDataPacket d(ship->get_economy());
-								d.write(fw);
-								wrote_this_economy = true;
+						if (upcast(Ship, ship, bob)) {
+							if (ship->state_is_expedition()){
+								if (ship->get_economy() == temp_economy) {
+									// TODO(sirver): the 0xffffffff is ugly and fragile.
+									fw.unsigned_32(0xffffffff); // Sentinel value.
+									fw.unsigned_32(field - &field_0);
+	
+									EconomyDataPacket d(ship->get_economy());
+									d.write(fw);
+									wrote_this_economy = true;
+								}
 							}
 						}
 						bob = bob->get_next_bob();
