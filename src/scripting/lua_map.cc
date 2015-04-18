@@ -2843,7 +2843,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 
 	Warehouse* wh = get(L, get_egbase(L));
 
-	if (upcast(Game, game, &get_egbase(L))) {
+	if (is_a(Game, &get_egbase(L))) {
 		PortDock* pd = wh->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()){
@@ -3402,7 +3402,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
 */
 // UNTESTED sink states
 int LuaShip::get_state(lua_State* L) {
-	if (upcast(Game, game, &get_egbase(L))) {
+	if (is_a(Game, &get_egbase(L))) {
 		switch (get(L, get_egbase(L))->get_ship_state()) {
 			case Ship::TRANSPORT:
 				lua_pushstring(L, "transport");
@@ -3435,7 +3435,7 @@ int LuaShip::get_state(lua_State* L) {
 }
 
 int LuaShip::get_scouting_direction(lua_State* L) {
-	if (upcast(Game, game, &get_egbase(L))) {
+	if (is_a(Game, &get_egbase(L))) {
 		switch (get(L, get_egbase(L))->get_scouting_direction()) {
 			case WalkingDir::WALK_NE:
 				lua_pushstring(L, "ne");
@@ -3498,7 +3498,7 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
-	if (upcast(Game, game, &get_egbase(L))) {
+	if (is_a(Game, &get_egbase(L))) {
 		switch (get(L, get_egbase(L))->get_island_explore_direction()) {
 			case IslandExploreDirection::kCounterClockwise:
 				lua_pushstring(L, "ccw");
