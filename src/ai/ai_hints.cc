@@ -48,7 +48,8 @@ BuildingHints::BuildingHints(Section* const section)
 		} else {
 			if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "basic")) {
 				trainingsite_type_ =  TrainingSiteType::kBasic;
-			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "advanced")) {
+			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic",
+			                   "advanced")) {
 				trainingsite_type_ =  TrainingSiteType::kAdvanced;
 			} else {
 				trainingsite_type_ = TrainingSiteType::kNoTS;
