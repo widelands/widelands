@@ -73,7 +73,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     echo "for instructions on how to adjust options and build with CMake."
 
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug
+      cmake -G "CodeBlocks - Ninja" .. -DCMAKE_BUILD_TYPE=Debug
     else
       cmake .. -DCMAKE_BUILD_TYPE=Debug
     fi

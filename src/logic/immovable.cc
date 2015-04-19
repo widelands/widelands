@@ -602,7 +602,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 5
+#define IMMOVABLE_SAVEGAME_VERSION 6
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -675,9 +675,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-	//TODO(daAlx1): reserved_by_worker is already dealt with in MapObject,
-	//so storing / loading twice is redundant but I keep it for compatability
-	if (version >= 3)
+	if (version >= 3 && version <=5)
 	imm.m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
@@ -740,12 +738,8 @@ void Immovable::save
 	fw.unsigned_32(m_program_ptr);
 	fw.signed_32(m_program_step);
 
-	//TODO(daAlx1):  reserved_by_worker is already dealt with in MapObject,
-	//so storing / loading twice is redundant, I keep it for compatability
-	fw.unsigned_8(m_reserved_by_worker);
-
-	if (m_action_data) {
-		fw.c_string(m_action_data->name());
+    if (m_action_data) {
+        fw.c_string(m_action_data->name());
 		m_action_data->save(fw, *this);
 	} else {
 		fw.c_string("");

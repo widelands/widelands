@@ -459,8 +459,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				}
 				return true;
 			}
-			//Todo(DaAlx1): Check whether this else branch is a copy and paste error?
-			else {
+            else {
 				if (upcast(ProductionSite, productionsite, get_location(game)))
 					productionsite->unnotify_player();
 			}
@@ -473,8 +472,8 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 						(area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
-				if (upcast(MapObject, bop, list[idx])) {
-					if (bop->is_reserved_by_worker()) {
+				if (upcast(MapObject, bob, list[idx])) {
+					if (bob->is_reserved_by_worker()) {
 						found_reserved = true;
 						list.erase(list.begin() + idx);
 					}
@@ -1968,13 +1967,13 @@ void Worker::set_program_objvar(Game & game, State & state, MapObject * obj)
 	assert(state.task == &taskProgram);
 
 
-	if (state.objvar1.get(game)) {
+	if (state.objvar1.get(game) != nullptr) {
 		(state.objvar1.get(game))->set_reserved_by_worker(false);
 	}
 
 	state.objvar1 = obj;
 
-	if (obj) {
+	if (obj != nullptr) {
 		obj->set_reserved_by_worker(true);
 	}
 }
