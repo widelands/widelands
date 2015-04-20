@@ -134,17 +134,14 @@ void GamePlayerEconomiesPacket::write
 					Bob* bob = field->get_first_bob();
 					while (bob) {
 						if (upcast(Ship, ship, bob)) {
-							if (ship->state_is_expedition()){
-								if (ship->get_economy() == temp_economy) {
-									// TODO(sirver): the 0xffffffff is ugly and fragile.
-									fw.unsigned_32(0xffffffff); // Sentinel value.
-									fw.unsigned_32(field - &field_0);
-	
-									EconomyDataPacket d(ship->get_economy());
-									d.write(fw);
-									wrote_this_economy = true;
-									break;
-								}
+							if (ship->get_economy() == temp_economy) {
+								// TODO(sirver): the 0xffffffff is ugly and fragile.
+								fw.unsigned_32(0xffffffff); // Sentinel value.
+								fw.unsigned_32(field - &field_0);
+								EconomyDataPacket d(ship->get_economy());
+								d.write(fw);
+								wrote_this_economy = true;
+								break;
 							}
 						}
 						bob = bob->get_next_bob();
