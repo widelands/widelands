@@ -64,7 +64,7 @@ void GamePlayerEconomiesPacket::read
 
 							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
-								if (upcast(Ship, ship, bob)) {
+								if (upcast(Ship const, ship, bob)) {
 
 									//We are interested only in curent player's ships
 									if (ship->get_owner() == player) {
@@ -133,7 +133,7 @@ void GamePlayerEconomiesPacket::write
 			for (Field const* field = &field_0; field < &map[map.max_index()]; ++field) {
 					Bob* bob = field->get_first_bob();
 					while (bob) {
-						if (upcast(Ship, ship, bob)) {
+						if (upcast(Ship const, ship, bob)) {
 							if (ship->get_economy() == temp_economy) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.unsigned_32(0xffffffff); // Sentinel value.
