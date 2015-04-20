@@ -459,9 +459,9 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				}
 				return true;
 			}
-            else {
-				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->unnotify_player();
+			else{
+			        if (upcast(ProductionSite, productionsite, get_location(game)))
+				  productionsite->unnotify_player();
 			}
 			std::vector<Bob *> list;
 			if (action.iparam2 < 0)

@@ -675,7 +675,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-	if (version >= 3 && version <=5)
+	if (version >= 3 && version <= 5)
 	imm.m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
@@ -738,9 +738,9 @@ void Immovable::save
 	fw.unsigned_32(m_program_ptr);
 	fw.signed_32(m_program_step);
 
-    if (m_action_data) {
-        fw.c_string(m_action_data->name());
-		m_action_data->save(fw, *this);
+	if (m_action_data) {
+	  fw.c_string(m_action_data->name());
+	  m_action_data->save(fw, *this);
 	} else {
 		fw.c_string("");
 	}
