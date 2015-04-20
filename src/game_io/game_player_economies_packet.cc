@@ -65,16 +65,14 @@ void GamePlayerEconomiesPacket::read
 							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship, ship, bob)) {
-									// ships in transport state are part of economy with other flags
-									// while ones in expedition are economy by themselves.
-									// Moreover ships in transportation mode can remain without
-									// economy (if player was completely defeated) that makes
-									// the game throw an exemption on game load
-									if (ship->state_is_expedition()){
+
+									//We are interested only in curent player's ships
+									if (ship->get_owner() == player) {
 										assert(ship->get_economy());
 										EconomyDataPacket d(ship->get_economy());
 										d.read(fr);
 										read_this_economy = true;
+										break;
 									}
 								}
 								bob = bob->get_next_bob();
@@ -145,6 +143,7 @@ void GamePlayerEconomiesPacket::write
 									EconomyDataPacket d(ship->get_economy());
 									d.write(fw);
 									wrote_this_economy = true;
+									break;
 								}
 							}
 						}
