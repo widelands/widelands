@@ -1625,14 +1625,39 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 
 	// No object found, look for a field where we can build
 	std::vector<Coords> fields;
+	Map  & map = g.map();
 	FindNodeAnd fna;
 	fna.add(FindNodeShore());
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
 	if
-		(g.map().find_reachable_fields
+		(map.find_reachable_fields
 			(area, &fields, cstep, fna))
 	{
-		state.coord = fields[0];
+		//testing received fields to get one with less immovables
+		//nearby
+		Coords best_coords = fields.back(); //just to initialize it
+		uint32_t best_score = std::numeric_limits<uint32_t>::max();
+		while (!fields.empty()) {
+			Coords coords = fields.back();
+
+			//counting immovables nearby
+			std::vector<ImmovableFound> found_immovables;
+			const uint32_t imm_count =
+				map.find_immovables(Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
+			if (best_score > imm_count){
+				best_score = imm_count;
+				best_coords = coords;
+			}
+
+			//no need to go on, it cannot be better
+			if (imm_count == 0) {
+				break;
+				}
+
+			fields.pop_back();
+		}
+
+		state.coord = best_coords;
 
 		psite.m_working_positions[0].worker->update_task_buildingwork(g);
 		return;
