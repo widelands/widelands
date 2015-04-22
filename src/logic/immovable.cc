@@ -675,9 +675,9 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-	if (version >= 3 && version <= 5)
-	imm.m_reserved_by_worker = fr.unsigned_8();
-
+	if (version >= 3 && version <= 5){
+	        imm.m_reserved_by_worker = fr.unsigned_8();
+	}
 	if (version >= 4) {
 		std::string dataname = fr.c_string();
 		if (!dataname.empty()) {
