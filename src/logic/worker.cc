@@ -396,9 +396,8 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
 	bool found_reserved = false;
 
-	if (action.sparam1 == "immovable") {
-
-		for (;; ++area.radius) {
+	for (;; ++area.radius) {
+		if (action.sparam1 == "immovable") {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
@@ -443,9 +442,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 						(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
-		}
-	} else {
-		for (;; ++area.radius) {
+		} else {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
