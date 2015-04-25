@@ -397,20 +397,20 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 	bool found_reserved = false;
 
 	for (;; ++area.radius) {
-		if (action.sparam1 == "immovable") {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))) {
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
+		if (action.iparam1 < area.radius) {
+			send_signal(game, "fail"); //  no object found, cannot run program
+			pop_task(game);
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				if (!found_reserved) {
+					productionsite->notify_player(game, 30);
 				}
-				return true;
+				else {
+					productionsite->unnotify_player();
+				}
 			}
+			return true;
+		}
+		if (action.sparam1 == "immovable") {
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables
@@ -443,22 +443,8 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				break;
 			}
 		} else {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))){
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
-				}
-				return true;
-			}
-			else {
-			  if ( upcast(ProductionSite, productionsite, get_location(game)))
-				        productionsite->unnotify_player();
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
 			}
 			std::vector<Bob *> list;
 			if (action.iparam2 < 0)
