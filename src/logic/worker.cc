@@ -396,22 +396,21 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
 	bool found_reserved = false;
 
-	if (action.sparam1 == "immovable") {
-
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))) {
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
+	for (;; ++area.radius) {
+		if (action.iparam1 < area.radius) {
+			send_signal(game, "fail"); //  no object found, cannot run program
+			pop_task(game);
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				if (!found_reserved) {
+					productionsite->notify_player(game, 30);
 				}
-				return true;
+				else {
+					productionsite->unnotify_player();
+				}
 			}
+			return true;
+		}
+		if (action.sparam1 == "immovable") {
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables
@@ -443,25 +442,9 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 						(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
-		}
-	} else {
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))){
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
-				}
-				return true;
-			}
-			else {
-			  if ( upcast(ProductionSite, productionsite, get_location(game)))
-				        productionsite->unnotify_player();
+		} else {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
 			}
 			std::vector<Bob *> list;
 			if (action.iparam2 < 0)
