@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# henrique terto de souza <henrique.terto.new@gmail.com>, 2015
 # Patrick de Castro <raybackpc@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-15 19:29+0000\n"
+"POT-Creation-Date: 2015-04-13 11:32+0000\n"
+"PO-Revision-Date: 2015-04-17 02:01+0000\n"
 "Last-Translator: Patrick de Castro <raybackpc@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +85,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr "Pelos deuses! Um dos nossos batedores encontrou um castelo poderoso no centro da velha plateau. O castelo deve ser bem antigo e parece ter sido num estilo estrangeiro.  É bem óbvio que isto não é um feito bárbaro."
+msgstr "Pelos deuses! Um dos nossos batedores encontrou um castelo poderoso no centro da velha plateau. O castelo deve ser bem antigo e parece ter sido edificado em um estilo estrangeiro.  É bem óbvio que isto não é um feito bárbaro."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:80
 msgid ""

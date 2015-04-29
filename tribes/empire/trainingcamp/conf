@@ -127,4 +127,4 @@ pics=trainingcamp_i_??.png  # ???
 hotspot=82 105
 
 [aihints]
-prohibited_till=2700
+trainingsite_type=advanced

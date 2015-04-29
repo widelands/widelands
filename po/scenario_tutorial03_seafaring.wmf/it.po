@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-25 14:44+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-13 14:24+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Ma non voglio metterti fretta: sei appena arrivato qui, e probabilmente vorresti dare un'occhiata più da vicino al tuo accampamento. Farò anche una breve pausa e sarò presto di ritorno."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
@@ -113,7 +113,7 @@ msgstr ""
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "Potresti esserti già accorto di avere un'icona del genere accanto al tuo castello."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
@@ -126,11 +126,11 @@ msgstr "Costruisci un porto"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Ti serve sempre un porto quando vuoi trasportare delle merci con una nave."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:73
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Costruisci un porto accanto al tuo castello, sull'icona blu per lo spazio di costruzione di un porto."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid ""
@@ -143,7 +143,7 @@ msgstr ""
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "Anche se i porti agiscono da magazzini, non dovresti costruirne più del necessario: essi richiedono quarzo, diamanti e oro, il che li rende piuttosto costosi."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
@@ -156,7 +156,7 @@ msgstr "Costruiamo delle navi"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Great. Your port has just been finished. Now we need some ships."
-msgstr ""
+msgstr "Ottimo. Il tuo porto è appena stato completato. Ora abbiamo bisogno di qualche nave."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid ""
@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr ""
+msgstr "Costruisci un cantiere navale vicino alla costa. È un edificio medio."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
@@ -180,7 +180,7 @@ msgstr "Le navi vengono prodotte in un cantiere navale."
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Costruisci un cantiere navale vicino alla costa nella parte meridionale del tuo territorio."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
@@ -240,7 +240,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "Non dimenticare di interrompere le attività del tuo cantiere navale quando hai navi a sufficienza."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
@@ -253,7 +253,7 @@ msgstr "Ci manca il ferro"
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "La seconda nave potrebbe non essere ancora completata, però abbiamo un problema urgente."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:129
 msgid ""
@@ -272,7 +272,7 @@ msgstr ""
 #: TRANSLATORS This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "Un viaggio via mare, che divertimento può essere"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"
@@ -305,7 +305,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "Avvia una spedizione in uno qualunque dei tuoi porti."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"

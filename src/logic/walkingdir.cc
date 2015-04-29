@@ -22,61 +22,61 @@
 namespace Widelands {
 
 /// \returns the neighbour direction in clockwise
-uint8_t get_cw_neighbour(uint8_t dir) {
+WalkingDir get_cw_neighbour(WalkingDir dir) {
 	switch (dir) {
-		case WALK_NE:
-			return WALK_E;
-		case WALK_E:
-			return WALK_SE;
-		case WALK_SE:
-			return WALK_SW;
-		case WALK_SW:
-			return WALK_W;
-		case WALK_W:
-			return WALK_NW;
-		case WALK_NW:
-			return WALK_NE;
+		case WalkingDir::WALK_NE:
+			return WalkingDir::WALK_E;
+		case WalkingDir::WALK_E:
+			return WalkingDir::WALK_SE;
+		case WalkingDir::WALK_SE:
+			return WalkingDir::WALK_SW;
+		case WalkingDir::WALK_SW:
+			return WalkingDir::WALK_W;
+		case WalkingDir::WALK_W:
+			return WalkingDir::WALK_NW;
+		case WalkingDir::WALK_NW:
+			return WalkingDir::WALK_NE;
 		default:
-			return 0;
+			return WalkingDir::IDLE;
 	}
 }
 
 /// \returns the neighbour direction in counterclockwise
-uint8_t get_ccw_neighbour(uint8_t dir) {
+WalkingDir get_ccw_neighbour(WalkingDir dir) {
 	switch (dir) {
-		case WALK_E:
-			return WALK_NE;
-		case WALK_NE:
-			return WALK_NW;
-		case WALK_NW:
-			return WALK_W;
-		case WALK_W:
-			return WALK_SW;
-		case WALK_SW:
-			return WALK_SE;
-		case WALK_SE:
-			return WALK_E;
+		case WalkingDir::WALK_E:
+			return WalkingDir::WALK_NE;
+		case WalkingDir::WALK_NE:
+			return WalkingDir::WALK_NW;
+		case WalkingDir::WALK_NW:
+			return WalkingDir::WALK_W;
+		case WalkingDir::WALK_W:
+			return WalkingDir::WALK_SW;
+		case WalkingDir::WALK_SW:
+			return WalkingDir::WALK_SE;
+		case WalkingDir::WALK_SE:
+			return WalkingDir::WALK_E;
 		default:
-			return 0;
+			return WalkingDir::IDLE;
 	}
 }
 
-uint8_t get_backward_dir(uint8_t dir) {
+WalkingDir get_backward_dir(WalkingDir dir) {
 	switch (dir) {
-		case WALK_E:
-			return WALK_W;
-		case WALK_NE:
-			return WALK_SW;
-		case WALK_NW:
-			return WALK_SE;
-		case WALK_W:
-			return WALK_E;
-		case WALK_SW:
-			return WALK_NE;
-		case WALK_SE:
-			return WALK_NW;
+		case WalkingDir::WALK_E:
+			return WalkingDir::WALK_W;
+		case WalkingDir::WALK_NE:
+			return WalkingDir::WALK_SW;
+		case WalkingDir::WALK_NW:
+			return WalkingDir::WALK_SE;
+		case WalkingDir::WALK_W:
+			return WalkingDir::WALK_E;
+		case WalkingDir::WALK_SW:
+			return WalkingDir::WALK_NE;
+		case WalkingDir::WALK_SE:
+			return WalkingDir::WALK_NW;
 		default:
-			return 0;
+			return WalkingDir::IDLE;
 	}
 }
 

@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# henrique terto de souza <henrique.terto.new@gmail.com>, 2015
 # Patrick de Castro <raybackpc@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 21:57+0000\n"
+"POT-Creation-Date: 2015-04-13 11:32+0000\n"
+"PO-Revision-Date: 2015-04-17 01:39+0000\n"
 "Last-Translator: Patrick de Castro <raybackpc@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -524,7 +525,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "Oooh e ainda mais importante: a defumação do peixe e da carne para purificá-las e apurar seus sabores é terrível. Minha casa está cheia de fumaça fédita faz semanas. Não acha que isto pode ser feito em um local apropriado onde os efeitos colaterais não importariam? Eu acho que essas duas coisas seriam aceitas pelas pessoas e reduziriam o tempo de cocção sem substituir o ritual."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:217
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:218
@@ -557,7 +558,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr ""
+msgstr "Que Satul te aqueça, Jundlina. Meu nome é Opol, e eu sou o maior tecelão da guilda a abandonar Atlantis e Lutas com você. Eu trago más notícias, entretanto. Nós não temos mais tecidos. Nem ao menos uma peça pôde ser achada em nossos armazéns. Não poderia você ajudar os tecelões recuperando a tecelagem e a fazenda de aranhas? As aranhas produzem a mais refinada seda e iremos produzir os melhores tecidos com elas."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:238
 msgid ""
@@ -572,7 +573,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "Que Satul te aqueça também, Opol. Eu queria adiar a produção de tecido, mas eu entendo sua urgência. Sua sugestão soa justa para mim, eu irei construir sua tecelagem e a fazenda de aranhas. Eu irei também construir seu engenho de fios de ouro para que seus tabardos de ouro não tenham ouro apenas no nome."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:250
 msgid "Opol Seeks Out Jundlina"
@@ -584,7 +585,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "Que Satul te aqueça, Jundlina! A tecelagem, o engenho de fios ouro e a fazenda de aranhas estão completas e começarão a funcionar imediatamente. A guilda é muito grata por sua ajuda e manterá sua palavra lhe entregando o primeiro tabardo em breve."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
@@ -615,7 +616,7 @@ msgstr "Jundlina acena"
 msgid ""
 "I have considered this, Sidolus. I think  it is about time. We will make "
 "this a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Eu estive considerando isso, Sidolus. Eu acho que já é hora. Vamos fazer disso uma prioridade. Você deve conseguir sua indústria logo!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:278
 msgid "Jundlina Summons Sidolus"
@@ -666,7 +667,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr ""
+msgstr "Eu recebi um convite de Sidolus. O primeiro dia de treinamento no recém terminado labirinto será amanhã. A masmorra está pronta e começará a funcionar logo. Eu estou ansioso por amanhã; Eu me interesso muito em como nossos soldados são treinados e me pergunto se o trabalho extra vai fazê-los parar de incomodar os civis."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Considers the Economy"
@@ -806,7 +807,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Imadiatemente, precisamos de uma casa para Ostur perto do lago e precisamos de tábuas, troncos e tecido de teia para a construção lá. Esqueça todo o resto, precisamos destes bens no topo da montanha antes que nossos armazéns seja engolidos pelo mar."
+msgstr "Imediatemente, precisamos de uma casa para Ostur perto do lago e precisamos de tábuas, troncos e tecido de teia para a construção lá. Esqueça todo o resto, precisamos destes bens no topo da montanha antes que nossos armazéns seja engolidos pelo mar."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "Jundlina is Relieved"
@@ -819,7 +820,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away..."
-msgstr ""
+msgstr "Vivas a Satul! Ostur, o jovem construtor de barcos conseguiu. Nós temos três embarcações - eu nunca vi mais magníficas - com espaço o bastante para carregar a nós todos e algumas mercadorías também. E essa ajuda veio bem a tempo: Lutas está prestes a dizimar o resto da ílha, o mar está agitado no momento. Porém havemos de conseguir escapar e recomeçar em alguma terra bem longe daqui."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:401
 msgid ""

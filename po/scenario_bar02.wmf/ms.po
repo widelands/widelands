@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# abuyop <abuyop@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:16+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-06 10:17+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,99 +20,99 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Bina ekonomi penghasilan makanan berskala kecil"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Bina ekonomi penjanaan makanan asas untuk membekalkan makanan kepada rakyat anda."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Bina pondok nelayan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Bina pondok pemburu"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a well"
-msgstr ""
+msgstr "Bina telaga"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a farm"
-msgstr ""
+msgstr "Bina ladang"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a bakery"
-msgstr ""
+msgstr "Bina kedai roti"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Bina ladang ternak lembu"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Ingat perlu bina ladang ternak lembu"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Oleh kerana jalan anda semakin panjang dan ekonomi anda semakin membesar, anda patut guna lembu jantan anda untuk membantu mengangkut barangan dengan lebih pantas."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a donjon"
-msgstr ""
+msgstr "Bina donjon"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a donjon at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Bina sebuah donjon disempadan timur laut wilayah anda untuk memperoleh julat penglihatan lebih luas dan untuk melindungi rakyat anda daripada serangan mengejut pihak musuh."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
 msgid "Explore further"
-msgstr ""
+msgstr "Jelajah lebih jauh"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:57
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Bina lagi bangunan ketenteraan untuk menjelajah kawasan sekitar markas dan untuk memastikan keselamatan rakyat anda."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:62
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:64
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Bina kemudahan perlombongan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:65
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Luaskan wilayah anda sehingga ke kawasan pergunungan, hantar ahli geologi untuk mencari bijih dan arang batu serta bina ekonomi perlombongan dengan lombong, rumah penginapan, bengkel peleburan dan logam."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
 msgid "Build a fortress"
-msgstr ""
+msgstr "Bina kubu"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Bina kubu di bahagian timur kawasan pergunungan."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:78
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:80
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Bina kemudahan latihan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Bina arena lawan dan kem latihan di bahagian barat kawasan pergunungan."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
@@ -120,23 +121,23 @@ msgid ""
 " build up a second metal workshop to ensure the production of tools. When "
 "the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr ""
+msgstr "Naik taraf bengkel logam anda kepada bengkel senjata untuk menghasilkan senjata, dan bina bengkel logam kedua untuk memastikan kesinambungan pengeluaran alatan. Apabila tukang besi mencapai tahap kemahiran berikutnya (pakar besi), anda boleh menaik taraf bengkel senjata menjadi kilang senjata, yang dapat mengeluarkan pelbagai senjata tambahan."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Bina topi cerucuk di bahagian barat kawasan pergunungan untuk membekalkan askar anda dengan perisai yang lebih baik."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bina gudang"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Bina gudang di bahagian barat kawasan pergunungan."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
@@ -144,42 +145,42 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Gudang adalah serupa dengan markas anda, cuma berbeza dari segi pertahanan kerana ia tidak dilindungi oleh askar anda. Adalah lebih bijak membina gudang bila wilayah anda semakin membesar dan laluan ke markas anda semakin jauh."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:100
 msgid "Build training sites"
-msgstr ""
+msgstr "Bina tapak latihan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:102
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr ""
+msgstr "Tapak latihan adalah seperti kem latihan atau arena lawan yang digunakan untuk melatih askar yang berlainan atribut. Atribut ini penting ketika bertempur dan semakin cekap tentera, semakin tinggi peluang untuk memenangi pertempuran."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Atribut adalah: kesihatan, serangan, pertahanan dan elak diri."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:111
 msgid "Build weapons production"
-msgstr ""
+msgstr "Bina pengeluaran senjata"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:117
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Bina bengkel topi cerucuk"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:125
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Kalahkan tentera Kalitath"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:128
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Kalahkan tentera Kalitath dan luaskan wilayah anda ke arah timur."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:129
 msgid ""
@@ -187,40 +188,40 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Untuk menyerang pihak lawan, anda mesti klik pintu bangunan ketenteraan pihak musuh. Satu menu akan timbul yang membolehkan anda memilih jumlah tentera yang akan menyerang. Bila anda sudah sedia, klik simbol silang ('Mula Menyerang')."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Serangan tentera terhadap Al’thunran"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "Musnakan semua angkatan tentera kedua-dua adik beradik Thron untuk membebaskan singahsana-bundar."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:145
 msgid "Close to Home"
-msgstr ""
+msgstr "Hampir dengan Wilayah"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:146
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:155
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:290
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron kelihatan risau..."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "Pada hari-hari terakhir, kita semakin hampir dengan ibu negeri. Ramai orang menyertai perjalanan kami dan menyerah nasib kepada saya. Walaubagaimanapun, saya masih risau kerana kekuatan kami masih belum kuat untuk memerangi abang kandung saya."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:149
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "Buat masa ini, kita berhenti rehat di sempadan hutan purba dan bersedia pada hari-hari akan datang."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:154
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:175
@@ -267,7 +268,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:240
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:280
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldreth berkata:"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:170
 msgid ""
@@ -312,7 +313,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:188
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Rakan Setia Anda"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:189
 msgid "Boldreth shouts out!"
@@ -358,7 +359,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:209
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Musim Sejuk Akan Bermula"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:211
 msgid ""
@@ -367,15 +368,15 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Pagi ini, Saya dapati muka Thron seakan menghadapi masalah. Dia baru sahaja pulang dari rondaan malam tadi dan bersandar dipohon, termenung ke arah kawasan perkemahan. Kelihatan suara perbalahan dan bunyi pergaduhan yan semakin kuat kedengaran, musim sejuk akan datang menjadikan hari-hari akan datang semakin sukar. Kita perlu mengumpul makanan untuk menghadapi musim sejuk akan datang yang lama!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:216
 msgid "The Advisor"
-msgstr ""
+msgstr "Penasihat"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Khantrukh juga setuju."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:218
 msgid ""
@@ -384,21 +385,21 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Kata-kata Boldreth ada kebenarannya! Kita perlukan makanan untuk menghadapi musim sejuk yang lama ini. Kita perlu bina telaga, pondok nelayan dan pondok pemburu. Dan jika kita temui tanah rata, kita juga perlu bina ladang dan tempat membuat roti! Ada dikalangan petani kita sangat bijak, beliau ada benih tanaman yang dapat bertahan hidup dengan tanah sejuk ini."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:224
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Ekonomi Pengeluaran Makanan Selesai"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:226
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "Khantrukh baru sahaja memberitahu saya iaitu ekonomi pengeluaran makanan asas kita telah berjaya dibina. Akhirnya, kita tidak perlu risau dengan masalah kelaparan dan kebuluran lagi."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Tracks"
-msgstr ""
+msgstr "Jejak"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:233
 msgid ""
@@ -406,11 +407,11 @@ msgid ""
 "settlement. He has instructed us to build a donjon, to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron memberitahu saya, beliau menemui jejak bersalji di bahagian timur laut penempatan kita. Beliau mencadangkan kita membina donjon, supaya pemantauan kita sekitar dewan kita lebih jauh dan dapat melindungi orang kita daripada serangan hendap."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "Further Exploration"
-msgstr ""
+msgstr "Penjelajahan Lanjut"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:241
 msgid ""
@@ -421,7 +422,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Pembinaan kubu yang diarah oleh Thron telah selesai. Buat masa ini, beliau hanya mengarah beberapa orang yang dipercayai mengawal tempat baru kita yang dinamakan 'Ondun', ataupun maksudnya 'orang yang sanggup menunggu' dalam baharu lama kita. Sebaliknya Thron masih belum puashati - Saya faham kerisauan beliau kerana hutan purba ini sangat luas, dan kita berhampiran dengan Al’thunran. Saya pasti terdapat banyak risiko bahaya di sana berbanding jejak-jejak yang tidak diketahui ini."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:243
 msgid ""
@@ -433,7 +434,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:249
 msgid "Mountains Found"
-msgstr ""
+msgstr "Kawasan Pergunungan Ditemui"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
@@ -446,18 +447,18 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Ekonomi Perlombongan Selesai"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:259
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "Saya baru sahaja dimaklumkan ekonomi perlombongan kita telahpun bermula. Berita ini menggembirakan walaupun ada lagi masalah lain yang perlu diselesaikan. Kini tukang besi kita berusaha menghasilkan alatan yang memudahkan kerja seharian kita."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:264
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Kubu Diperlukan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:266
 msgid ""
@@ -471,7 +472,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:272
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Kubu Pertahan Telah Selesai"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:274
 msgid ""
@@ -479,18 +480,18 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and donjons at the passages,"
 " but for now we can take a deep breath."
-msgstr ""
+msgstr "Akhirnya! Kubu kita telah selesai dibina, jalan masuk ke penempatan kita buat masa ini lebih selamat. Pada masa akan datang, kita perlu tambah lagi beberapa lagi kubu pertahanan seperti perisai sawar dan donjon di laluan tersebut, tetapi kita boleh menarik nafas lega kerana sudah ada pertahanan."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:279
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Naik Taraf Ekonomi dan Latihan"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:281
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Ekonomi perlombongan kita bergerak maju sepertimana yang diharapkan. Bagaimanapun, masih ramai orang kita yang tidak bekerja, oleh itu mereka boleh membantu tentera kita membuat persediaan perang yang akan datang."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid ""
@@ -501,7 +502,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Pakar geologi kita telah menemui mendapan bijih besi, arang batu dan juga emas. Kita perlu tingkatkan pengeluaran lombong kita kerana pelombong kita sudah berpengalaman. Kita patut bina lagi lombong baharu, kemudahan pengeluaran makanan lebih besar untuk menyediakan bekalan makanan kepada pekerja kita dan mempertingkatkan ekonomi pengeluaran kita. Selain itu, kebanyakan tentera kita kurang pengalaman dan muda, mereka memerlukan senjata dan latihan yang lebih baik. Kita perlu bina tapak latihan untuk melatih mereka menjadi tentera yang berpengalaman dan terlatih."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:291
 msgid ""
@@ -523,24 +524,24 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:294
 msgid "Victory"
-msgstr ""
+msgstr "Kemenangan Mutlak!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Anda telah berjaya menyelesaikan misi terakhir kempen tutorial Puak Gasar. Anda boleh terus bermain jika mahu, ataupun beralih ke kempen berikutnya."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Military Assault"
-msgstr ""
+msgstr "Serangan Tentera"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:302
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Baiklah, jeneral sudah pun bertindak dan mengurus pergerakan tentera saya, dan Boldreth sendiri akan memulakan serangan. Saya akan berada di sisi beliau, untuk membebaskan Al’thunran dari malapetaka peperangan dan kembalikan keamanan ibu negeri kami."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:304
 msgid ""
@@ -548,32 +549,32 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Bila matahari berada tegak diatas pokok pagi esok, Saya akan arahkan serangan. Bila senja menjelma, Saya akan meraikan kemenangan kita di dewan ketua kayu hulubalang dan korbankan seekor anak biri-biri baru lahir untuk menghormati mendiang ayah saya, kerana memilih saya hari ini."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:306
 msgid "So be it!"
-msgstr ""
+msgstr "Baiklah!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:311
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Pengangkutan Lebih Pantas"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh berkata:"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:313
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Ketua, kesian kepada tukang angkut: Jalan kita semakin panjang dan ia membebankan bahu mereka. Kita perlu guna lembu jantan untuk meringankan kerja mereka dan pengangkutan kita lebih cekap."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
+msgstr[0] "Objektif Baharu"

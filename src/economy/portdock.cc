@@ -213,12 +213,11 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	PlayerImmovable::cleanup(egbase);
 
-	//now let attempt to recreate the portdock
+	// Now let's attempt to recreate the portdock.
 	if (wh) {
 		if (!wh->m_cleanup_in_progress){
 			if (upcast(Game, game, &egbase)) {
 				if (game->is_loaded()) { //do not attempt when shutting down
-					Player& player = owner();
 					wh->restore_portdock_or_destroy(egbase);
 				}
 			}

@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
+# Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-04-04 07:37+0000\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,37 +20,37 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "От конца к началу"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "После высадки на расположенном неподалеку от Атлантиды таинственном острове, уцелевшие атланты пытаются построить для себя новый дом."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Назовем это место домом"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "В этом сценарии, вы познакомитесь с важными производственными зданиями, включая шахты."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Эта земля - наша"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Этот обучающий курс объясняет как создать войска, построить тренировочные центры, и, знакомит вас с основами боя."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Вторая империя"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
@@ -74,11 +75,11 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Чат'Карут скончался стариком, отцом трех сильных и амбициозных сыновей, и предводителем армии, способной противостоять любому врагу, решившемуся нарушить покой древних лесов. Хотя в конце своего славного царствования, Чат'Карут избрал своего старшего сына, Трона, в качестве наследника и военачальника, это решение оставило его братьев неудовлетворенными. Старый военачальник знал это. Следуя воле своего отца Трон покинул столицу — Аль'Тунран, дом Трона среди Древ, и привел свои войска к высоким холмам, где и похоронил тело своего отца. Там он поклялся богам и духу своего отца, вернуться и восстановить порядок. Не смотря на то, что его братья развязали нелепую войну против Трона и поставленных им  для охраны Аль'Тунрана малочисленных подразделений, молодой военачальник стремится воссоединить своих амбициозных братьев и принудить племена вновь встать под общее знамя."
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Месяцы изгнания"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
@@ -100,11 +101,11 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Шесть месяцев назад, Люциус — молодой имперский генерал — был послан с 150 солдатами на границу за северными лесами, где варварские племена кочевали по землям подконтрольным империи. Его задачей было защитить землю Империи. Сперва все было спокойно. Он даже общался с детьми варваров и думал о мирной жизни бок о бок с этим примитивным народом. Он почувствовал себя в безопасности, а его солдаты ослабили наблюдение за потенциальным противником. Это было фатальной ошибкой. В одну из мартовских ночей его армия была атакована сотней варварских воинов и полностью рассеяна. Люциусу и горстке солдат едва удалось сохранить свои жизни."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Бег огня"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
@@ -112,7 +113,7 @@ msgstr "Атланты"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Испытание. Знакомство с атлантами."
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -121,15 +122,15 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Когда Бог атлантов разочаровался в своем народе и потопил их остров, началась ставшая легендой борьба одной женщины за справедливость и второй шанс для своего народа. Джандлина стала самым могущественным человеком своей эпохи: она повела уцелевших атлантов к новому будущему в новом мире, но расплатится за это ей пришлось своей человечностью и душой."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Берега Малак' Мора"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Аванпост изгнанников"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
@@ -138,7 +139,7 @@ msgstr "Еще не внедрена"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Никого"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
@@ -151,7 +152,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Потерпев поражение в важной битве с варварами, которое привело к потере значительной части территории Империи, Люциус покидает Фремил, чтобы начать новую жизнь. Но, по прихоти судьбы, его корабль попадает в сильный шторм, едва избежав гибели. Лишь благодаря невероятному везению ему удается довести свой поврежденный корабль до неизвестного пустынного берега. Люциус, и его люди почувствовали себя в безопасности. По-крайней мере, пока."
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -159,18 +160,18 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr ""
+msgstr "Наконец корабль был отремонтирован, и Люциус со своими людьми продолжил путешествие в поисках места, где можно было бы обосноваться и начать новую жизнь. Только несколько дней спустя, они пристали к зеленому средиземноморскому острову, похожему на рай. В приподнятом настроении они отправились исследовать свое новое место жительства."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Основы управления"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "В этом обучающем курсе, вы узнаете, как ориентироваться в Widelands и как строить здания и дороги."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
@@ -181,7 +182,7 @@ msgstr "Война"
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "В этом обучающем курсе, вы узнаете секреты ведения войны: как набрать солдат, как тренировать их и как руководить ими в бою."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
@@ -192,7 +193,7 @@ msgstr "Мореплавание"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "В этом обучающем курсе вы научитесь мореплаванию и узнаете как обращаться с кораблями и гаванями."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
@@ -203,7 +204,7 @@ msgstr "Экономика"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "В этом обучающем курсе вы узнаете, какими параметрами экономики Widelands вы сможете управлять. Рекомендуется для игроков с опытом."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -215,14 +216,14 @@ msgstr "Кто будет настоящим королем большого а�
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Кальвиссон"
 
 #: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "Приятно поселиться в сельской местности, наслаждаясь её красотами. Но пути для охвата этих огромных территорий длинны и извилисты, поэтому легко ошибиться и вторгнутся во владения враждебных кланов."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -233,7 +234,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr ""
+msgstr "Что это — игра природы, или создание помешанного на играх бога? Это безумное поле боя ждет двух противников для нового столкновения."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -246,7 +247,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr ""
+msgstr "В нескольких милях напротив побережья Гериона находится небольшой безымянный остров. До сих пор вы не видели никаких причин, чтобы плыть туда, но вчера с небес пришел большой огненный шар, и ударил в центр острова. Что это — знак богов? Поверив в это, вы надеетесь, что ваше племя найти на этом острове сокровище, прежде чем спохватятся другие племена."
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
@@ -275,7 +276,7 @@ msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "Четыре племени бороться с их ближайшим соседом, чтобы первыми добраться до превосходящей всякое воображение горы золота. Но сумеют ли двое уцелевших мудро распорядиться ресурсами?"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -287,7 +288,7 @@ msgid ""
 " wonder that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of the remaining "
 "water."
-msgstr ""
+msgstr "Уже долгое время, ни одна капля дождя не орошала эти земли. Неудивительно, что в этом высохшем русле реки, почти не осталось воды. Всем известно: скоро будет война. Война за последнюю воду."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -297,7 +298,7 @@ msgstr "Леса эльфов"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "Захватывающая дух красота этих изумрудных земель заставила уже не одно племя попытаться захватить их."
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -308,14 +309,14 @@ msgid ""
 "Coal is hard to find – learn to make it efficiently. Starting positions are "
 "similar, so the map should be fair. There is plenty of gold near the "
 "starting point – Do you see it?"
-msgstr ""
+msgstr "Уголь трудно найти — этому нужно научиться. Стартовые позиции схожи, так что, карта должна быть справедливой. Вблизи стартовой позиции много золота  - видите?"
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
 "This map is best suited for two or three human players, with game speed "
 "somewhat above the normal value. The AI performed badly at the time of "
 "writing (2013)."
-msgstr ""
+msgstr "Эта карта больше всего подходит для двух-трех игроков-людей, со скоростью игры несколько выше нормального значения. Во время написания этой заметки ИИ был еще плох (2013)."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -325,7 +326,7 @@ msgstr "Финские озера"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "Это прекрасный финский край; край озер, рек, древних лесов и гор. И все это для вас, чтобы найти путь через эти земли."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -337,7 +338,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "Почему вы и ваше племя пробудились на этом острове, посреди пламени и лавы? Что это, ниспосланное Богами испытание, или чей-то злобный план? До сих пор казалось, что вы здесь одни, но кто знает, что может произойти, если вам встретиться враждебное племя?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -347,7 +348,7 @@ msgstr "Четыре замка"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
-msgstr "Хорошо защищенные в своих крепостях, четыре жадных до власти князя заканчивают планирование захвата этих земель..."
+msgstr "Хорошо защищенные в своих могучих крепостях, четыре жадных до власти военачальника заканчивают приготовления к захвату этих земель..."
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
@@ -359,7 +360,7 @@ msgid ""
 "them and claim the resources for his own tribe? Hint I: Water can be found "
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
-msgstr ""
+msgstr "Каждое племя окружено четырьмя могучими горами. Кто первым захватит их и застолбит ресурсы за своим племенем? Подсказка I: Воду можно найти вдоль реки. Подсказка II: Снеговики отмечают дополнительные источники воды. Подсказка III: Каждая гора содержит только один ресурс."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -371,7 +372,7 @@ msgid ""
 "one disturbed you and the resources were enough for your whole tribe, but a "
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure that there is only enough space for one tribe."
-msgstr ""
+msgstr "Долгое время ваше племя обитало на этом красивом и уединенном ледниковом озере. Никто не тревожил вас и ресурсов были достаточно для вашего племени, но несколько месяцев назад другое племя пришло из-за гор и поселилось здесь. Вы убеждены, что места хватит только для одного племени."
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
@@ -387,7 +388,7 @@ msgstr "Ледяные войны"
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "За осенью приходит зима. Замерзло многое, но не война."
 
 #: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
 #: fire.wmf/elemental:12
@@ -407,14 +408,14 @@ msgstr "После столкновения с астероидом и след�
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "Острова войны"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "На протяжении веков, вы жили мирно бок о бок с другим племенем на соседнем острове. Но, похоже, этот мир подходит к концу — ваш сосед задумал расширить свои владения."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -425,7 +426,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many, and will the prophecy come true?"
-msgstr ""
+msgstr "Старая легенда гласит, что семь процветавших в течение веков в достатке королевств, когда-нибудь погрязнут в разрушительной войне. Не превысила ли последняя измена чашу терпения, не сбывается ли пророчество?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -436,7 +437,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores..."
-msgstr ""
+msgstr "Это озеро, в глубине самых древних лесов, издавна славится своей красотой и безмятежностью. Тем не менее, теперь, когда две враждебных племени объявились на его берегах, святость озера была нарушена..."
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
@@ -454,7 +455,7 @@ msgid ""
 "– only two opposite paths lead. But remember, be careful... this last living"
 " space is also a hard and small place to live. Don’t forget to take care of "
 "your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Капризные Боги не отвечает на наши молитвы. Вместо этого, возросший солнечный жар нагрел Землю и вызвал таяние ледников; людей поглотила бездна. Но двум оставшимся в живых племенам удалось укрыться на последнем клочке земли, высоко в величественных горах. И хотя Боги смилостивились, и климат стал прохладнее, вода продолжала прибывать. К последнему безопасному месту — самому высокому горному массиву, где золота и пространства хватит только для одного племени — ведут два противоположных пути. Но помните, будьте осторожны ... это последнее жизненное пространство, оно невелико и выживать здесь трудно. Позаботьтесь о воспроизводстве древесины, она вам понадобиться."
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
@@ -464,11 +465,11 @@ msgstr "Долгий путь"
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
 "long, long way to conquer all the islands. Good luck!"
-msgstr ""
+msgstr ">- Будьте любезны, номер вашей планеты? - 013 в тентуре. - Вот тут она, вот тут где-то рядом. Вот. - Налево от Большой Медведицы.< [Кин-ДзаДза] Вы должны пройти долгий, долгий путь, чтобы завоевать все острова. Удачи!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr "Покорение острова"
+msgstr "Захват островов"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -476,18 +477,18 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "«Захват островов» это особое соревнование характерное для культуры Атлантов, в которой две или более групп пытаются добраться до центра острова как можно быстрее, чтобы первым возвести замок на вершине центральной горы."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Контрабандисты"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Ваши проверенные контрабандные маршруты перекрыты: появились два других племени, что привело к соперничеству между контрабандистами. Какая команда первой переправит определенное количество товаров?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -509,7 +510,7 @@ msgid ""
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
-msgstr ""
+msgstr "Вы стоите на острове, увенчанном могучими горами, в сердцевине которых скрыто удивительное и могущественное сокровище — Зеленое Плато, которое трудно захватить, но легко потерять. Так что, если хотите заполучить его, опасайтесь других кланов."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -535,7 +536,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr ""
+msgstr "У каждого из игроков есть различные затруднения препятствующие расширению, преодолеть которые можно различными способами. Хотя одолеть ИИ можно не построив ни одного корабля, игроки советуют строить гавани и верфи — экспедиции во всех отношениях выгодны, и являются самым быстрым способом найти месторождения золота."
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -549,7 +550,7 @@ msgstr "Загадочная страна с разнообразными лан
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr "Древнее Солнце огня"
+msgstr "Древнее огненное Солнце"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -557,7 +558,7 @@ msgid ""
 "human ever ventured to set a foot on it. But now that a tribe had finally "
 "been barefaced enough to settle on the coast of that island, a lot of others"
 " followed in its wake."
-msgstr ""
+msgstr "На протяжении сотен лет этот остров служил святилищем богов. Ни один человек не ступал сюда. Но теперь, когда одно из племён не скрывая своих намерений высадилось на берегу этого острова, других последуют его примеру."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -568,7 +569,7 @@ msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr ""
+msgstr "Это пахнет болотом, выглядит как болото, да это и есть болото. Но это место, где вы родились и прожили жизнь. Если вы не хотите лишиться его, готовьтесь к бою!"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
@@ -578,7 +579,7 @@ msgstr "Болотные монахи"
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr ""
+msgstr "Говорят, что старые боевые монахи, живущие в древних болотах — ключ к контролю над всем островом."
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -608,7 +609,7 @@ msgstr "Нил"
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "Река всегда была источником пищи и транспортной артерией. И вот теперь, восемь империй сразятся за контроль над этой землёй."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -619,7 +620,7 @@ msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr ""
+msgstr "Есть что-то таинственное в серой атмосфере окутывающей эти три оазиса, о которых никто ничего не знает. Возможно, вы будете первым, кто откроет их тайны, но остерегайтесь других, которые ищут того же!"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -627,12 +628,12 @@ msgstr "Оттепель"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Еще одна оттепель. Три племена укрывались от суровой зимы среди величественных гор. Во время зимнего солнцестояния они услышали пророчество и начали войну. Единственный оставшийся в живых принесет сокровища своих врагов на древний алтарь, построит там роскошный замок и получит благословение и расположение Богов."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
@@ -646,7 +647,7 @@ msgid ""
 " grew and grew. Until one day, when the whole fire mountain exploded. "
 "Nowadays only this ring is left from that mighty fire mountain. Do you think"
 " that it is big enough for more than one tribe?"
-msgstr ""
+msgstr "Этот остров когда-то появился из глубин моря. В те дни, огонь поднялся из соленой морской воды и выбросил пепел, камни и почву на поверхность. Огонь поднимался все выше и ближе к солнцу, а гора росла и росла. До тех пор, пока вся огненная гора не взорвалась. В настоящее время только это кольцо осталось от могучей огненной горы. Достаточно ли здесь места для более чем одного племени?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
@@ -656,7 +657,7 @@ msgstr "Длинный путь"
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr ""
+msgstr "Очередное странное испытание богов. Похоже, добраться до другой стороны, можно только заняв землю ваших врагов."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
@@ -666,7 +667,7 @@ msgstr "Горный перевал"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
+msgstr "В этом горном районе обосновались двое князей. Теперь они расширяют свою территорию, не подозревая о соседстве!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -694,7 +695,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long..."
-msgstr ""
+msgstr "Четыре могучих гавани островов Кроу веками обменивались товарами друг с другом. Все они нуждаются в ресурсах, которые не могут добыть на своей территории и обменивают свои ресурсы на те, в которых нуждаются. Таким образом, обитателей островов Кроу и их четыре гавани связывала дружественная и взаимовыгодная торговля. Однако недавно, две гавани объединились, и сформировали особый торговый союз, вынуждая двух других сделать то же самое. Похоже, начало войны между портами — это вопрос ближайшего времени, и мирная жизнь, которая длилась так долго, развеется как дым..."
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
@@ -706,13 +707,13 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
+msgstr "Шесть прекрасных островов, расположенные вблизи от трех вулканов,  привлекают поселенцев, чтобы начать новую жизнь. Вам откроются пустыни и быстрорастущие леса. Но победить в конкурентной борьбе сможет только то племя, которое утвердит свое господство на море."
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
 " black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr ""
+msgstr "Предлагаемые команды: красный против зеленого | (синий, желтый) против (зеленый, оранжевый) | (синий, черный) против (зеленый, красный) | (синий, черный, желтый) против (зеленый, красный, оранжевый)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
@@ -726,7 +727,7 @@ msgid ""
 "wars would end up in this forgotten place at the same time and for the same "
 "well-known reason. Defend your transport lines or use ships to bypass the "
 "opponent. Then remove all enemy activity."
-msgstr ""
+msgstr "Когда работа ветра сформировала первые дюны в этих двух заброшенных лагунах, никто не ожидал, что два племени, находящиеся в отчаянном поиске ресурсов, поглощаемых их бесконечно продолжающимися войнами, встретятся в этом месте в одно и то же время и по одной и той же причине. Защитите ваши транспортные магистрали или используйте корабли, чтобы обойти соперника. Затем парализуйте всю вражескую активность."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -744,11 +745,11 @@ msgstr "Две границы"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr ""
+msgstr "Многопользовательская карта для сражения на небольшом круглом острове."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr "Вулкангическая зима."
+msgstr "Вулканическая зима."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:11
 msgid ""
@@ -756,7 +757,7 @@ msgid ""
 "Suddenly, the sun seemed to be gone and the only light and heat sources left"
 " were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr ""
+msgstr "В середине лета, серия извержений вулканов привели к возвращению зимы. Казалось, что солнце исчезло, и единственными источниками тепла и света служили те, которые были ответственны за эту резкую перемену. Континенты, океаны и моря замерзли. Похоже, только вулканические острова остались обитаемой землей."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -767,7 +768,7 @@ msgid ""
 "It is said that even the sun and moon must find their way between the spires"
 " of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
-msgstr ""
+msgstr "Говорят, что даже солнцу и луне приходится протискиваться между вершинами этих гор. Подсказка: монолиты отмечают месторождения руд. Нет смысла отправлять геологов куда-либо еще."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -779,4 +780,4 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr ""
+msgstr "Кажется от начала дней эта магическое долина была заселена зубрами. Когда ваше племя объявилось здесь, вы были уверены, что места для мирной жизни тут достаточно. Но сможет ли ваше племя жить в мире с соседями?"

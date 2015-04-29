@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"POT-Creation-Date: 2015-04-22 16:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -246,8 +246,8 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/win_conditions/wood_gnome.lua:89
-#: ../../scripting/win_conditions/wood_gnome.lua:141
-#: ../../scripting/win_conditions/wood_gnome.lua:145
+#: ../../scripting/win_conditions/wood_gnome.lua:140
+#: ../../scripting/win_conditions/wood_gnome.lua:144
 msgid ""
 "%i tree"
 msgid_plural ""
@@ -260,12 +260,12 @@ msgid ""
 "%1$s has %2$s at the moment."
 msgstr ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:142
+#: ../../scripting/win_conditions/wood_gnome.lua:141
 msgid ""
 "%1$s had %2$s."
 msgstr ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:147
+#: ../../scripting/win_conditions/wood_gnome.lua:146
 msgid ""
 "The winner is %1$s with %2$s."
 msgstr ""

@@ -4,6 +4,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 # Teppo Mäenpää <teppo@runbox.com>, 2015
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 15:21+0000\n"
+"Last-Translator: Markus Hällfors <markus@hallfors.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -391,8 +392,8 @@ msgstr "vuoristoista"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
-msgstr "läpäisemätön"
+msgid "impassable"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
@@ -503,7 +504,7 @@ msgstr "Nimi:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Authors:"
-msgstr ""
+msgstr "Tekijät:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
@@ -1166,7 +1167,7 @@ msgstr[1] "Työläisiä puuttuu"
 msgid "(stopped)"
 msgstr "(pysäytetty)"
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr "Resurssit lopussa!"
 
@@ -1245,15 +1246,15 @@ msgstr "Pelaaja %u"
 msgid "Logic error"
 msgstr "Logiikkavirhe"
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -1985,7 +1986,7 @@ msgstr "Pienennä arvoa 10:llä"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 msgid "Choose a campaign"
-msgstr ""
+msgstr "Valitse kampanja"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:79
 #: ../../src/ui_fsmenu/campaign_select.cc:163
@@ -1998,7 +1999,7 @@ msgstr "Kuvaus:"
 #: ../../src/ui_fsmenu/campaign_select.cc:335
 #: ../../src/ui_fsmenu/loadgame.cc:153
 msgid "Return to the main menu"
-msgstr ""
+msgstr "Palaa päävalikkoon"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:90
 msgid "Play this campaign"
@@ -2029,7 +2030,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:108
 msgid "Difficulty"
-msgstr ""
+msgstr "Vaikeustaso"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 #: ../../src/wui/multiplayersetupgroup.cc:447
@@ -2038,19 +2039,19 @@ msgstr "Heimo"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 msgid "Tribe Name"
-msgstr ""
+msgstr "Heimon nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:110
 msgid "Campaign Name"
-msgstr ""
+msgstr "Kampanjan nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:160
 msgid "Campaign Name:"
-msgstr ""
+msgstr "Kampanjan nimi:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:161
 msgid "Tribe:"
-msgstr ""
+msgstr "Heimo:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 msgid "Difficulty:"
@@ -2058,11 +2059,11 @@ msgstr "Vaikeustaso:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a scenario"
-msgstr ""
+msgstr "Valitse skenaario"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a tutorial"
-msgstr ""
+msgstr "Valitse opetuspeli"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this tutorial"
@@ -2074,7 +2075,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "What you will learn in this tutorial"
-msgstr ""
+msgstr "Mitä opit tässä opetuspelissä"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:341
 msgid "Play this scenario"
@@ -2098,7 +2099,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:364
 msgid "Scenario Name"
-msgstr ""
+msgstr "Skenaarion nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:366
 msgid "#"
@@ -2107,7 +2108,7 @@ msgstr "#"
 #: ../../src/ui_fsmenu/campaign_select.cc:402
 #: ../../src/ui_fsmenu/mapselect.cc:291
 msgid "Scenario:"
-msgstr ""
+msgstr "Skenaario:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:402
 msgid "Tutorial:"
@@ -2134,12 +2135,12 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/mapselect.cc:317
 msgid "Author:"
 msgid_plural "Authors:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tekijä:"
+msgstr[1] "Tekijät:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr ""
+msgstr "Valitse opetuspeli listalta ja paina sitten \"OK\"."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:461
 msgid ""
@@ -2336,7 +2337,7 @@ msgstr "Valittua tiedostoa ei löydy. Jollei se siirry automaattisesti sinulle, 
 #: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
 msgid "You are Player %i."
-msgstr ""
+msgstr "Olet pelaaja %i."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:488
 msgid "You are a spectator."
@@ -2509,7 +2510,7 @@ msgstr "Valitse toistettava peli"
 
 #: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Choose a saved game"
-msgstr ""
+msgstr "Valitse tallennettu peli"
 
 #: ../../src/ui_fsmenu/loadgame.cc:126
 #: ../../src/wui/game_main_menu_save_game.cc:110
@@ -2522,7 +2523,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:149
 msgid "The number of players"
-msgstr ""
+msgstr "Pelaajien määrä"
 
 #: ../../src/ui_fsmenu/loadgame.cc:150
 msgid "The win condition that was set for this game"
@@ -2585,7 +2586,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:203
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
 #: ../../src/ui_fsmenu/loadgame.cc:204
 msgid ""
@@ -2599,7 +2600,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:266 ../../src/ui_fsmenu/loadgame.cc:384
 msgid "Filename:"
-msgstr ""
+msgstr "Tiedoston nimi:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:270
 msgid "Do you really want to delete this replay?"
@@ -2607,7 +2608,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:273
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Oletko varma, että haluat poistaa tämän pelin?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:277
 msgid "Confirm deleting file"
@@ -2723,7 +2724,7 @@ msgstr "Tekijät"
 
 #: ../../src/ui_fsmenu/main.cc:64
 msgid "Exit Widelands"
-msgstr ""
+msgstr "Sulje Widelands"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
 #: ../../src/ui_fsmenu/main.cc:70
@@ -2754,7 +2755,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Number of players"
-msgstr ""
+msgstr "Pelaajien määrä"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:104
@@ -2771,7 +2772,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
-msgstr ""
+msgstr "Koko"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
@@ -2789,7 +2790,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Official"
-msgstr ""
+msgstr "Virallinen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Unbalanced"
@@ -2798,7 +2799,7 @@ msgstr "Epätasapainossa"
 #. * TRANSLATORS: This is a message's type
 #: ../../src/ui_fsmenu/mapselect.cc:153 ../../src/wui/game_message_menu.cc:553
 msgid "Seafaring"
-msgstr ""
+msgstr "Merenkäynti"
 
 #: ../../src/ui_fsmenu/mapselect.cc:160
 msgid "Free for all"
@@ -2873,7 +2874,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:582
 msgid "Nobody"
-msgstr ""
+msgstr "Ei kukaan"
 
 #: ../../src/ui_fsmenu/mapselect.cc:583
 msgid ""
@@ -3014,8 +3015,8 @@ msgstr "Kytke ikkunat ruudun laitoihin"
 #: ../../src/ui_fsmenu/options.cc:275 ../../src/ui_fsmenu/options.cc:388
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuutti"
+msgstr[1] "minuuttia"
 
 #: ../../src/ui_fsmenu/options.cc:283
 msgid "Save game automatically every"
@@ -3098,7 +3099,7 @@ msgstr "Lataa peli"
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/ui_fsmenu/suggested_teams_box.cc:87
 msgid "Suggested Teams:"
-msgstr ""
+msgstr "Ehdotetut joukkueet:"
 
 #: ../../src/wlapplication.cc:1102
 msgid "Game data error"
@@ -3545,12 +3546,12 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:502
 msgid "Show all messages"
-msgstr ""
+msgstr "Näytä kaikki viestit"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:513
 msgid "Show geologists' messages only"
-msgstr ""
+msgstr "Näytä vain geologien viestit"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:517
@@ -3560,32 +3561,32 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:521
 msgid "Show seafaring messages only"
-msgstr ""
+msgstr "Näytä vain merenkäynnin viestit"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:525
 msgid "Show warfare messages only"
-msgstr ""
+msgstr "Näytä vain sotimisen viestit"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
 msgid "Show scenario messages only"
-msgstr ""
+msgstr "Näytä vain skenaarion viestit"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:543
 msgid "Geologists"
-msgstr ""
+msgstr "Geologit"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:548
 msgid "Economy"
-msgstr ""
+msgstr "Talous"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:558
 msgid "Warfare"
-msgstr ""
+msgstr "Sodankäynti"
 
 #. * TRANSLATORS: This show up instead of a message's type when there are no
 #. messages found
@@ -3596,7 +3597,7 @@ msgstr ""
 #. * TRANSLATORS: This is the default message type
 #: ../../src/wui/game_message_menu.cc:572
 msgid "General"
-msgstr ""
+msgstr "Yleistä"
 
 #. * TRANSLATORS: %s is a message's type
 #: ../../src/wui/game_message_menu.cc:578
@@ -3629,7 +3630,7 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:41
 msgid "Are you sure you wish to exit this game?"
-msgstr ""
+msgstr "Oletko varma että haluat poistua tästä pelistä?"
 
 #: ../../src/wui/game_options_menu.cc:79
 msgid "README"

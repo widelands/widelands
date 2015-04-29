@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 13:33+0000\n"
+"POT-Creation-Date: 2015-04-13 11:32+0000\n"
+"PO-Revision-Date: 2015-04-21 09:25+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr ""
+msgstr "Mi dispiace, ma devo distruggere questo di nuovo. Potremmo avere bisogno di questo spazio più tardi. Se sono troppo lento per te, potresti voler giocare una partita reale e scoprire tutto per conto tuo. Altrimenti, cerca di sopportarmi, per favore. Non sono più la persona più giovane e più rapida che ci sia."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -688,7 +688,7 @@ msgstr "Lascia che ti abiliti velocemente entrambi al posto tuo. Ricordati: i ta
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:372
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr ""
+msgstr "Ora sappiamo cosa sta succedendo. Aspettiamo che le cave finiscano."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid "Introducing Messages"
@@ -832,13 +832,13 @@ msgstr ""
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr ""
+msgstr "Dato che le nostre cave sono inutili adesso, puoi distruggerle e ri-utilizzare lo spazio più tardi."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr ""
+msgstr "Ci sono due modi diversi di distruggere un edificio: abbatterlo e smantellarlo. Provali entrambi con le tue cave."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
@@ -885,7 +885,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "Proviamolo ora: costruisci un edificio militare vicino al tuo confine."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""

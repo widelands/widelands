@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 09:51+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-13 14:39+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Economia"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Bentornato. In questo tutorial, ti dirò che cosa si può fare per controllare come funziona la tua economia."
+msgstr "Bentornato. In questo tutorial ti dirò che cosa si può fare per controllare come funziona la tua economia."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
@@ -124,7 +124,7 @@ msgstr "Ricerca il numero delle tue taverne nella finestra delle statistiche sug
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "La finestra delle statistiche degli edifici ti dà una visione d'insieme degli edifici che hai."
 
 #: TRANSLATORS "it" refers to the building statistics window TRANSLATORS "it"
 #: refers to the stock menu window
@@ -142,7 +142,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid "Look up how many taverns you have (in the column ‘Owned’)"
-msgstr ""
+msgstr "Guarda quante taverne hai (nella colonna \"Posseduto\")"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
@@ -206,11 +206,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 msgid "Now have a look at these two tabs. When you click on the"
-msgstr ""
+msgstr "Adesso dai un'occhiata a queste due schede. Quando clicchi sulla"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:110
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
-msgstr ""
+msgstr "terza scheda (\"Merci nei magazzini\"), continuerò."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Switch to the third tab in the stock menu window."
@@ -225,7 +225,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:119
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "When you have seen enough, switch to the third tab."
-msgstr ""
+msgstr "Quando hai visto abbastanza, passa alla terza scheda."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid ""
@@ -414,7 +414,7 @@ msgstr "terza scheda ('Salute dell'economia')."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid "Switch to the third tab in the ware statistics menu window."
-msgstr ""
+msgstr "Passa alla terza scheda nella finestra del menù delle statistiche delle merci."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
@@ -440,7 +440,7 @@ msgstr "Clicca sull'ultima scheda quando dovrei continuare."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "Switch to the last tab in the ware statistics menu window."
-msgstr ""
+msgstr "Passa all'ultima scheda nella finestra del menù delle statistiche delle merci."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid ""
