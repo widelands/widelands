@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-09 14:17+0000\n"
+"POT-Creation-Date: 2015-04-22 16:43+0000\n"
+"PO-Revision-Date: 2015-04-23 21:02+0000\n"
 "Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "V této hře začneš na malém kousku světa jen s trochou základních \nsurovin. Pomocí těch pak postupně vybuduješ impérium čítající tisíce \nobyvatel. Na tvé cestě k tomuto cíli vybuduješ hospodářskou \ninfrastrukturu, objevíš nové země kolem sebe a postavíš se konkurenčním \nklanům."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
@@ -69,7 +69,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands je po stránce vlastností skoro hotový a s jeho hraním je spousta \nzábavy, při multiplayeru pak ještě více. I tak ale zbývá spousta práce\nv mnoha směrech. Pokud by si měl zájem se zapojit do jeho tvorby -\nať už tvorbou grafiky, opravou chyb nebo přidáváním vlastností,\npřekládáním do svého jazyka\nnebo vytvářením nových map - spoj se s námi na naší homepage."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
@@ -80,7 +80,7 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, click\n"
 "on the title bar of that window either with the middle mouse button or with the left\n"
 "mouse button while holding down CTRL."
-msgstr ""
+msgstr "Otevřené okno lze zavřít pravým kliknutím. Minimalizovat/maximalizovat okno je možné kliknutím na horní pruh okna prostředním tlačítkem myši nebo levým tlačítkem při současném držení Ctrl."
 
 #: ../../txts/README.lua:51
 msgid ""
@@ -221,7 +221,7 @@ msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
-msgstr ""
+msgstr "Pokud potřebuješ dokumentaci nebo pomoc s Widelands nebo Widelands \nEditorem, navštiv naši webovou stránku. Tam najdeš aktuální nápovědu v naší wiki a detailní popis hospodářství klanů v naší online encyklopedii."
 
 #: ../../txts/README.lua:97
 msgid "Reporting Bugs"
@@ -285,7 +285,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr ""
+msgstr "Widelands zaznamenává každou hru, kterou hraješ, do dvou souborů. První\nz nich má příponu .wrpl.wgf a obsahuje původní uloženou hru. Druhý pak má\npříponu .wrpl a obsahuje všechny příkazy, které byly vydány všemi hráči, \njako stavba cest nebo útok na nepřítele. Zbytek názvů souborů odkazuje \nna čas, kdy si začal hru hrát."
 
 #: ../../txts/README.lua:132
 msgid ""
@@ -295,7 +295,7 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr ""
+msgstr "Při volbě Sleduj záznam v hlavním menu bude odehraná hra přesně rekonstruovaná \npro sledování. Upozorňujeme však, že i velmi malá změna v datech hry nebo \nWidelands programu může vést k tomu, že záznam nebude kompatibilní \na dojde k desynchronizaci, pokud některý z hráčů bude mít odlišnou verzi hry."
 
 #: ../../txts/README.lua:139
 msgid ""
@@ -303,7 +303,7 @@ msgid ""
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Záznamy jsou velmi dobrým nástrojem pro odhalení problémů v logice \nhry a lze je použít jako přílohu k hlášení chyb. Soubory záznamů jsou ukládány \ndo adresáře ~/.widelands/replays na Linuxu a Max OS X. V systému Windows jsou \nv adresáři ‘replays’ tvojí Widelands instalace."
 
 #: ../../txts/developers:1
 msgid "Authors"
@@ -587,30 +587,30 @@ msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Najdeš tam úplný text licence i další informace o filozofii a právních záležitostech."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Dále připojujeme GPL jako textový dokument i k Widelands."
 
 #: ../../txts/license:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
-msgstr ""
+msgstr "V Linuxu lze soubor COPYING najít v hlavním adresáři zdrojového kódu nebo samostatného binárního balíčku, nebo v instalačním adresáři (např. /usr/share/games/widelands)."
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "Ve Windows lze soubor COPYING.txt najít v instalačním adresáři a v položce Widelands v nabídce Start je odkaz na tento soubor."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "V Mac OS X lze najít soubor COPYING v archívu, který si stáhl ze stránky."
 
 #: ../../txts/license:22
 msgid ""
@@ -618,7 +618,7 @@ msgid ""
 "support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
 " questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
-msgstr ""
+msgstr "Tato hra je poskytována tak-jak-je a bez jakékoli záruky. Pro více informací a podporu se na nás obrať na stránkách http://wl.widelands.org (stránka, wiki, fórum pro otázky nebo obecnou podporu) nebo https://launchpad.net/widelands (hlášení chyb, překlady)"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
@@ -631,19 +631,19 @@ msgstr "Některé budovy, jako například statek, mají velmi malou pracovní o
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr ""
+msgstr "Nikdy nezapomeň postavit domek lesníka nebo porybného, aby ti nedošlo dřevo nebo jídlo."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop fishing."
-msgstr ""
+msgstr "Pozorně sleduj své rybáře. Když se vyčerpají zásoby ryb v jejich oblasti, přestanou rybařit."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr ""
+msgstr "Nikdy nezapomeň postavit domek lesníka nebo hajného, aby ti nedošlo dřevo nebo jídlo."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -656,13 +656,13 @@ msgid ""
 "You can select multiple animal types if you hold down CTRL during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Můžeš vybrat vícero druhů zvířat tak, že při výběru budeš držet Ctrl. Jestliže pak klikneš na mapu, umístíš tak jeden ze zvolených druhů zvířat."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with CTRL + mouse click."
-msgstr ""
+msgstr "Stejně jak u zvířat, můžeš také vybrat vícero útvarů nebo povrchových textur pomocí Ctrl+klik"
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -680,17 +680,17 @@ msgstr "Držení klávesy ALT aktivuje druhý alternativní nástroj (pokud exis
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Pomocí kláves čísel (1-0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Mezerník funguje stejně jako v normální hře. Přepíná, zda jsou vidět místa ke stavění."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Nikdy nezapomeň postavit domek lesníka , aby ti nedošlo dřevo."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -736,7 +736,7 @@ msgstr "Pro nastavení přepravy specifického zboží lze použít tlačítka p
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Pro úpravu cílového množství surovit použit volbu \"konfigurace hospodářství\" v menu. Menu je přístupné přes menu vlajky."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -767,13 +767,13 @@ msgstr "Odebráním cesty se stisknutým Ctrl můžeš odebrat všechny vlajky a
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr ""
+msgstr "Noví vojáci jsou rekrutováni na velitelství nebo ve skladě, pokud jsou dostupné všechny potřebné nástroje. Výcviková střediska zvyšují jejich schopnosti."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "Jestli miluješ nebezpečí, přidržení Ctrl při kliknutí na vylepšení, rozebrání nebo znišení stavby přeskočí potvrzovací dialog."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -783,7 +783,7 @@ msgstr "Stikni klávesu I pro rychlé přepnutí zobrazení obsahu zásob."
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
+msgstr "Hospodářství se skládá ze staveb a vlajek pospojovaných cestama. Zásoby a požadavky budov jsou zajištěny v jejich hospodářství."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
