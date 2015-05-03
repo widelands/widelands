@@ -483,27 +483,27 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 		else
 		{
-			for (const Upgrade& it: m_upgrades)
+			for (const Upgrade& upgrade: m_upgrades)
 			if  (! this_soldier_is_safe)
 			{
 				// Soldier is safe, if he:
 				//  - is below maximum, and
 				//  - is not in a stalled state
 				// Check done separately for each art.
-				int32_t level = m_soldiers[i]->get_level(it.attribute);
+				int32_t level = m_soldiers[i]->get_level(upgrade.attribute);
 
 				 // Below maximum -check
-				if (level > it.max)
+				if (level > upgrade.max)
 				{
 					continue;
 				}
 
-				TypeAndLevel train_tl(it.attribute, level);
+				TypeAndLevel train_tl(upgrade.attribute, level);
 				TrainFailCount::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
-						log("training step %d,%d not found in this school!\n", it.attribute, level);
+						log("training step %d,%d not found in this school!\n", upgrade.attribute, level);
 						break;
 					}
 
