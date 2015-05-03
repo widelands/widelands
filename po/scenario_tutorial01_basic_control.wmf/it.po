@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-04 16:14+0000\n"
+"POT-Creation-Date: 2015-04-13 11:32+0000\n"
+"PO-Revision-Date: 2015-04-21 09:25+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -688,7 +688,7 @@ msgstr "Lascia che ti abiliti velocemente entrambi al posto tuo. Ricordati: i ta
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:372
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr ""
+msgstr "Ora sappiamo cosa sta succedendo. Aspettiamo che le cave finiscano."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid "Introducing Messages"
@@ -885,7 +885,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "Proviamolo ora: costruisci un edificio militare vicino al tuo confine."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""
