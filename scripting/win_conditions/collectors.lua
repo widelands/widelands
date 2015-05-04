@@ -93,7 +93,7 @@ return {
    local function _calc_points(plr)
       set_textdomain("win_conditions")
       local bs = array_combine(
-         plr:get_buildings("headquarters"), plr:get_buildings("warehouse")
+         plr:get_buildings("headquarters"), plr:get_buildings("warehouse"), plr:get_buildings("port")
       )
 
       local points = 0
