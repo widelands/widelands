@@ -206,7 +206,7 @@ struct Ship : Bob {
 	void exp_scouting_direction(Game &, WalkingDir);
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, IslandExploreDirection);
-	
+
 	//Returns integer of direction, or WalkingDir::IDLE if query invalid
 	//Intended for LUA scripting
 	WalkingDir get_scouting_direction();
