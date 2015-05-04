@@ -66,7 +66,7 @@ void GamePlayerEconomiesPacket::read
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
 
-									//We are interested only in curent player's ships
+									// We are interested only in current player's ships
 									if (ship->get_owner() == player) {
 										assert(ship->get_economy());
 										EconomyDataPacket d(ship->get_economy());
