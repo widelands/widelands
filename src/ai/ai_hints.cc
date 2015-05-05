@@ -33,7 +33,8 @@ BuildingHints::BuildingHints(Section* const section)
      mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
      prohibited_till_(section ? section->get_natural("prohibited_till", 0) : 0),
      forced_after_(section ? section->get_natural("forced_after", 864000) : 0),  // 10 days default
-     mines_percent_(section ? section->get_int("mines_percent", 100) : 0)
+     mines_percent_(section ? section->get_int("mines_percent", 100) : 0),
+     trainingsite_type_(TrainingSiteType::kNoTS)
 
 {
 	if (section) {
@@ -46,13 +47,10 @@ BuildingHints::BuildingHints(Section* const section)
 		if (!section->has_val("trainingsite_type")) {
 			trainingsite_type_ =  TrainingSiteType::kNoTS;
 		} else {
-			if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic", "basic")) {
+			if (!strcmp(section->get_string("trainingsite_type", "basic"), "basic")) {
 				trainingsite_type_ =  TrainingSiteType::kBasic;
-			} else if (!strcmp(section ? section->get_string("trainingsite_type", "basic") : "basic",
-			                   "advanced")) {
-				trainingsite_type_ =  TrainingSiteType::kAdvanced;
 			} else {
-				trainingsite_type_ = TrainingSiteType::kNoTS;
+				trainingsite_type_ =  TrainingSiteType::kAdvanced;
 			}
 		}
 	}

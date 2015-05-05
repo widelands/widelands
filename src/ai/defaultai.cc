@@ -4467,7 +4467,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 			}
 
-			site->second.warehouse = is_warehouse;
+			site->second.warehouse_ = is_warehouse;
 
 			// getting rid of default
 			if (site->second.last_time_attackable == std::numeric_limits<uint32_t>::max()) {
