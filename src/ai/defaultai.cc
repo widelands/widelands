@@ -1740,7 +1740,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// calculating some sub-scores, some of them are prohibitive
 				// decreasing score if some critical materials are missing
 				// (relevant for medium and big buildings)
-				int32_t prio_for_mat_shortage = 0 - bo.cnt_under_construction_ * bo.build_material_shortage_;
+				int32_t prio_for_mat_shortage = 0;
+				prio_for_mat_shortage -= bo.cnt_under_construction_ * bo.build_material_shortage_;
 				if (bf->enemy_nearby_) {
 					prio_for_mat_shortage *= 50;
 				} else {
@@ -1749,8 +1750,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// decreasing score if other militarysites constuctions
 				// are nearby
-				int32_t prio_for_in_constr =
-						-700 * (((static_cast<int32_t>(num_milit_constructionsites) - 2) < 0) ?
+				int32_t prio_for_in_constr = 0;
+				prio_for_in_constr -= 700 * (((static_cast<int32_t>(num_milit_constructionsites) - 2) < 0) ?
 									  0 :
 									  (num_milit_constructionsites - 2)) /
 						(militarysites.size() + 2);
@@ -1759,7 +1760,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// similarly if unmanned militarysites are nearby
-				int32_t prio_for_unmanned_nearby = 0 - bf->military_in_constr_nearby_ - bf->military_unstationed_;
+				int32_t prio_for_unmanned_nearby = 0;
+				prio_for_unmanned_nearby -= bf->military_in_constr_nearby_ + bf->military_unstationed_;
 				if (bf->enemy_nearby_) {
 					prio_for_unmanned_nearby *= 20;
 				} else {
@@ -1807,8 +1809,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// calculating other sub scores
 				// for resources (mines, water, stones)
-				int32_t prio_for_resources =
-						2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
+				int32_t prio_for_resources = 0;
+				prio_for_resources += 2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
 						bf->stones_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
 				// special bonus due to remote water for atlanteans
 				if (resource_necessity_water_needed_) {
@@ -3905,9 +3907,9 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	allships.push_back(ShipObserver());
 	allships.back().ship = &ship;
 	if (game().get_gametime() % 2 == 0) {
-		allships.back().island_circ_direction = ScoutingDirection::kClockwise;
+		allships.back().island_circ_direction = IslandExploreDirection::kClockwise;
 	} else {
-		allships.back().island_circ_direction = ScoutingDirection::kCounterClockwise;
+		allships.back().island_circ_direction = IslandExploreDirection::kCounterClockwise;
 	}
 }
 
@@ -4168,10 +4170,10 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			so.waiting_for_command_ = false;
 			;
 		} else {
-			// 2.B Yes, pick one of avaiable directions
+			// 2.B Yes, pick one of avaliable directions
 			const Direction final_direction =
 			   possible_directions.at(gametime % possible_directions.size());
-			game().send_player_ship_scout_direction(*so.ship, final_direction);
+			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(final_direction));
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 		}
@@ -4789,7 +4791,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
-	log(" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
+	log(" %1d: Buildings: Pr:%3lu, Ml:%3lu, Mi:%2lu, Wh:%2lu, Po:%2u. Missing: %s\n",
 	    pn,
 	    productionsites.size(),
 	    militarysites.size(),

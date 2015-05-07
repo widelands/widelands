@@ -777,7 +777,7 @@ CmdShipScoutDirection::CmdShipScoutDirection (StreamRead& des) :
 	PlayerCommand (0, des.unsigned_8())
 {
 	serial = des.unsigned_32();
-	dir    = des.unsigned_8();
+	dir    = static_cast<WalkingDir>(des.unsigned_8());
 }
 
 void CmdShipScoutDirection::execute (Game & game)
@@ -796,7 +796,7 @@ void CmdShipScoutDirection::execute (Game & game)
 				(ship->state_is_expedition())?"Y":"N");
 			return;
 		}
-		ship->exp_scout_direction(game, dir);
+		ship->exp_scouting_direction(game, dir);
 	}
 }
 
@@ -805,7 +805,7 @@ void CmdShipScoutDirection::serialize (StreamWrite & ser)
 	ser.unsigned_8 (PLCMD_SHIP_SCOUT);
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_8 (dir);
+	ser.unsigned_8 (static_cast<uint8_t>(dir));
 }
 
 #define PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION 1
@@ -818,7 +818,7 @@ void CmdShipScoutDirection::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			// direction
-			dir = fr.unsigned_8();
+			dir = static_cast<WalkingDir>(fr.unsigned_8());
 		} else
 			throw GameDataError("unknown/unhandled version %u", packet_version);
 	} catch (const WException & e) {
@@ -837,7 +837,7 @@ void CmdShipScoutDirection::write
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
 	// direction
-	fw.unsigned_8(dir);
+	fw.unsigned_8(static_cast<uint8_t>(dir));
 }
 
 
@@ -912,7 +912,7 @@ CmdShipExploreIsland::CmdShipExploreIsland (StreamRead& des) :
 	PlayerCommand (0, des.unsigned_8())
 {
 	serial = des.unsigned_32();
-	scouting_direction = static_cast<ScoutingDirection>(des.unsigned_8());
+	island_explore_direction = static_cast<IslandExploreDirection>(des.unsigned_8());
 }
 
 void CmdShipExploreIsland::execute (Game & game)
@@ -931,7 +931,7 @@ void CmdShipExploreIsland::execute (Game & game)
 				(ship->state_is_expedition())?"Y":"N");
 			return;
 		}
-		ship->exp_explore_island(game, scouting_direction);
+		ship->exp_explore_island(game, island_explore_direction);
 	}
 }
 
@@ -940,7 +940,7 @@ void CmdShipExploreIsland::serialize (StreamWrite & ser)
 	ser.unsigned_8 (PLCMD_SHIP_EXPLORE);
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_8 (static_cast<uint8_t>(scouting_direction));
+	ser.unsigned_8 (static_cast<uint8_t>(island_explore_direction));
 }
 
 #define PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION 1
@@ -952,7 +952,7 @@ void CmdShipExploreIsland::read
 		if (packet_version == PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-			scouting_direction = static_cast<ScoutingDirection>(fr.unsigned_8());
+			island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
 		} else
 			throw GameDataError("unknown/unhandled version %u", packet_version);
 	} catch (const WException & e) {
@@ -971,7 +971,7 @@ void CmdShipExploreIsland::write
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
 	// Direction of exploration
-	fw.unsigned_8(static_cast<uint8_t>(scouting_direction));
+	fw.unsigned_8(static_cast<uint8_t>(island_explore_direction));
 }
 
 

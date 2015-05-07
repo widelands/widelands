@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-20 17:03+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 23:31+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -295,7 +295,7 @@ msgstr "куёт улучшенный щит"
 #: ../../tribes/atlanteans/farm/conf:30
 #: ../../tribes/atlanteans/fish_breeders_house/conf:21
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
-#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:22
 #: ../../tribes/atlanteans/sawmill/conf:24
 #: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
@@ -348,7 +348,7 @@ msgstr "работает"
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Source needed"
-msgstr "Нужен источник"
+msgstr "Необходим источник"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:13
 #: ../../tribes/atlanteans/armorsmithy/help.lua:17
@@ -405,7 +405,7 @@ msgstr "Нужен источник"
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Text needed"
-msgstr "Нужен текст"
+msgstr "Необходим текст"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:29
 #: ../../tribes/atlanteans/bakery/help.lua:30
@@ -439,7 +439,7 @@ msgstr "Нужен текст"
 #: ../../tribes/atlanteans/well/help.lua:30
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:29
 msgid "Calculation needed"
-msgstr "Нужно посчитать"
+msgstr "Необходим расчет"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
@@ -450,7 +450,7 @@ msgid ""
 "Blackroots are a special kind of root produced in blackroot farms and "
 "processed in mills. The Atlanteans like their strong taste and use their "
 "flour for making bread."
-msgstr "Козелец – особый вид растений, выращиваемый на козельцовых фермах, корни которого идут на производство муки. Атланты обожают его острый вкус и используют козельцовую муку в хлебопечении."
+msgstr "Козелец — особый вид растений, выращиваемый на козельцовых фермах, корни которого идут на производство муки. Атланты обожают его острый вкус и используют козельцовую муку в хлебопечении."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "planting blackroot"
@@ -477,7 +477,7 @@ msgstr "Сеет и убирает козелец."
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr "Сажает козелец и собирает его урожай."
+msgstr "сажает и убирает козелец"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -490,21 +490,21 @@ msgid ""
 "This tasty bread is made in bakeries out of cornflour, blackroot flour and "
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Этот вкусный хлеб выпекается в пекарне из муки, козельцовой муки и воды. Хлеб расценивается как основной продукт питания для шахтеров, разведчиков и солдат в тренировочных лагерях (лабиринт и подземелье)."
+msgstr "Этот вкусный хлеб выпекается в пекарне из муки, козельцовой муки и воды. Хлеб расценивается как основной продукт питания для шахтеров, разведчиков и солдат в тренировочных центрах (лабиринт и темница)."
 
 #: ../../tribes/atlanteans/bread_paddle/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr "Лопата для выпечки - это инструмент, который нужен каждому пекарю. Её изготавливают в мастерской."
+msgstr "Лопата для выпечки — это орудие пекаря, у каждого пекаря должна быть такая. Её изготавливают в мастерской."
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr "Большие вёдря для рыбовода. Изготавливаются в мастерской."
+msgstr "Большие вёдра для рыбовода. Изготавливаются в мастерской."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr "Работает на стройке, возводя новые здания."
+msgstr "Работает на строительных площадках, возводя новые здания."
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -544,7 +544,7 @@ msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal. This coal is mined in coal mines or produced out of logs "
 "by a charcoal kiln."
-msgstr "Пищей для угля, который атланты поддерживают в литейной, бронной и оружейной, служит уголь. Этот уголь добывают в угольных шахтах, или выжигают из бревен в плечи углежога."
+msgstr "Для поддержания огня в литейной, бронной и оружейной атланты используют уголь. Этот уголь добывают в угольных шахтах, или выжигают из бревен в плечи углежога."
 
 #: ../../tribes/atlanteans/coalmine/conf:27
 #: ../../tribes/atlanteans/crystalmine/conf:35
@@ -647,11 +647,11 @@ msgstr "Указатель ресурса: Золото (много)"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Granite (little)"
-msgstr "Указатель ресурса: Гранит (мало)"
+msgstr "Указатель ресурса: Строительный камень (мало)"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: Granite (much)"
-msgstr "Указатель ресурса: Гранит (много)"
+msgstr "Указатель ресурса: Строительный камень (много)"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Iron (little)"
@@ -719,7 +719,7 @@ msgstr "Двойной трезубец"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Fire Tongs"
-msgstr "Щипцы"
+msgstr "Клещи"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Fishing Net"
@@ -743,7 +743,7 @@ msgstr "Золото"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Gold Yarn"
-msgstr "Золотая нить"
+msgstr "Золотая пряжа"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hammer"
@@ -759,7 +759,7 @@ msgstr "Багор"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Hunting Bow"
-msgstr "Лук охотника"
+msgstr "Охотничий лук"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Iron Ore"
@@ -835,7 +835,7 @@ msgstr "Стальной трезубец"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Stone"
-msgstr "Камень"
+msgstr "Строительный камень"
 
 #: ../../tribes/atlanteans/conf:102
 msgid "Tabard"
@@ -935,7 +935,7 @@ msgstr "Пауковод"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Stonecutter"
-msgstr "Камнетёс"
+msgstr "Каменотёс"
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Toolsmith"
@@ -967,7 +967,7 @@ msgstr "Коневод"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Ship"
-msgstr "Корабль"
+msgstr "Судно"
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Construction Site"
@@ -1124,7 +1124,7 @@ msgstr "Козельцовая ферма"
 
 #: ../../tribes/atlanteans/conf:194
 msgid "Crystal Mine"
-msgstr "Алмазная шахта"
+msgstr "Кристальная шахта"
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Coal Mine"
@@ -1156,7 +1156,7 @@ msgstr "Малая башня"
 
 #: ../../tribes/atlanteans/conf:210
 msgid "Dungeon"
-msgstr "Подземелье"
+msgstr "Темница"
 
 #: ../../tribes/atlanteans/conf:211
 msgid "Labyrinth"
@@ -1177,7 +1177,7 @@ msgstr "Кукурузнная мука производится на мельн
 
 #: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "mining stone"
-msgstr "добывает камень"
+msgstr "добывает строительный камень"
 
 #: ../../tribes/atlanteans/crystalmine/conf:31
 msgid "mining quartz"
@@ -1199,7 +1199,7 @@ msgstr "Главная жила этой кристальной шахты ис�
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
-msgstr "Добывает драгоценные камни в горной местности."
+msgstr "Добывает драгоценные камни из горных месторождений."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1212,7 +1212,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "Двойной трезубец - один из лучших видов оружия атлантов. Прозводиться в оружейной. В подземелье солдаты увеличивают свою силу с 2 до 3 при помощи этого трезубца и еды."
+msgstr "Двойной трезубец — один из лучших видов оружия атлантов. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 2 до 3 при помощи этого трезубца и еды."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid "Sleep"
@@ -1267,14 +1267,14 @@ msgstr "Засевает поля."
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
-msgstr "Щипцы - инструмент литейщика, который работает в литейной. Они производятся в мастерской."
+msgstr "Клещи — инструмент литейщика, который работает в литейной. Они производятся в мастерской."
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Рыба является одним из главных источников пищи для атлантов. Прежде чем доставлять её в шахты, тренировочные лагеря и разведчикам, её следует закоптить."
+msgstr "Рыба является одним из главных источников пищи для атлантов. Прежде чем доставлять её в шахты, тренировочные центры и разведчикам, её следует закоптить."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1348,7 +1348,7 @@ msgid ""
 "Gold is one of the most valuable materials. It is produced out of gold ore "
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the gold spinning mill."
-msgstr "Золото - один из самых ценных материалов. Его получают из золотой руды в литейной. В золоте нуждается бронная, оружейная и прядильная фабрика."
+msgstr "Золото — один из самых ценных материалов. Его получают из золотой руды в литейной. В золоте нуждается бронная, оружейная и прядильная фабрика."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -1397,7 +1397,7 @@ msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr "Молоток - важный инструмен. Он нужен и геологу, и строителю, и оружейнику, и броннику. Вам всегда следует держать немного про запас! Производится в кузнице."
+msgstr "Молоток — важный инструмент. Он нужен и геологу, и строителю, и оружейнику, и броннику. Вам всегда следует держать немного про запас! Производится в кузнице."
 
 #: ../../tribes/atlanteans/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
@@ -1405,7 +1405,7 @@ msgstr "Жилье для ваших людей. Также хранит ваш�
 
 #: ../../tribes/atlanteans/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr "Штаб - это ваше главное здание."
+msgstr "Штаб — это ваше главное здание."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1445,7 +1445,7 @@ msgstr "Выращивает лошадей для усовершенствов�
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr "Охотник добывает атлантийцам свежее мясо."
+msgstr "Охотник добывает атлантам свежее мясо."
 
 #: ../../tribes/atlanteans/hunters_house/conf:20
 msgid "hunting"
@@ -1472,7 +1472,7 @@ msgstr "Для охоты нужно чтобы в рабочей области
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr "Этот лук используется охотниками атлантийцев. Он производится в мастерской."
+msgstr "Этот лук используется охотниками атлантов. Он производится в мастерской."
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid ""
@@ -1545,7 +1545,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "Базовое оружие солдат атлантийцев. Наряду с накидкой является базовым снаряжением новобранцев. Лёгкие трезубцы, как и все прочие трезубцы, производятся в оружейной."
+msgstr "Базовое оружие солдат атлантов. Наряду с накидкой является базовым снаряжением новобранцев. Лёгкие трезубцы, как и все прочие трезубцы, производятся в оружейной."
 
 #: ../../tribes/atlanteans/log/conf:1
 msgid ""
@@ -1559,14 +1559,14 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "Длинный трезубец - первое оружие, которым учатся владеть солдаты. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 0 до 1 с помощью этого трезубца и еды."
+msgstr "Длинный трезубец — первое оружие, которым учатся владеть солдаты. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 0 до 1 с помощью этого трезубца и еды."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
 "Meat is one food resource of the Atlanteans. It is obtained from wild game "
 "taken by the hunter and has to be smoked in a smokery before being delivered"
 " to mines and training sites (dungeon and labyrinth)."
-msgstr "Мясо - один из источников пищи атлантийцев. Охотники добывают мясо, охотясь на диких животных, после чего его коптят и доставляют в шахты, подземелья и лабиринты."
+msgstr "Мясо — один из источников пищи атлантов. Охотники добывают мясо, охотясь на диких животных, после чего его коптят в коптильне и доставляют в шахты и тренировочные центры (темницы и лабиринты)."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
@@ -1596,38 +1596,42 @@ msgstr "Работает глубоко в шахтах, добывая угол
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr "Кирки используются камнетёсами и шахтёрами. Изготавливаются в мастерской."
+msgstr "Кирки используются каменотёсами и шахтёрами. Изготавливаются в мастерской."
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
 "Planks are an important building material of the Atlanteans. They are "
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also"
 " use planks to produce the different tridents and mighty ships."
-msgstr "Доски - важный стройматериал для атлантийцев. Лесопилка делает их из брёвен. Используется для производства всяческого оружия и могучих кораблей."
+msgstr "Доски — важный стройматериал для атлантов. Лесопилка делает их из брёвен. Оружейная и верфь используют доски для производства всяческих трезубцев и могучих судов."
 
-#: ../../tribes/atlanteans/quarry/conf:27
+#: ../../tribes/atlanteans/quarry/conf:20
+msgid "quarrying stone"
+msgstr "добывает камень"
+
+#: ../../tribes/atlanteans/quarry/conf:33
 msgid "Out of Rocks"
 msgstr "Нет больше камня"
 
-#: ../../tribes/atlanteans/quarry/conf:28
+#: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his working "
 "radius."
-msgstr "Каменотес из этой каменоломни больше не может найти камней в своей рабочей области."
+msgstr "Каменотес из этой каменоломни больше не может найти месторождений камня в своей рабочей области."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
-msgstr "Добывает камни из окружающих скал."
+msgstr "Добывает строительный камень из скальных месторождений."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr "Для работы каменоломни нужны камни в рабочей области."
+msgstr "Для работы каменоломни в рабочей области должны быть камни."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
-msgstr "Эти прозрачные кристаллы кварца используются при строительстве особых зданий. Они добываются в алмазной шахте."
+msgstr "Эти прозрачные кристаллы кварца используются при строительстве особых зданий. Они добываются в кристальной шахте."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1642,7 +1646,7 @@ msgstr "Пилит брёвна на доски."
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "Разведчики, такие как разведчик Скотти, разведывательно разведывают неразведанные земли."
+msgstr "Разведчики, такие как первопроходец Ерофей Павлович Хабаров, разведывательно разведывают неразведанные земли."
 
 #: ../../tribes/atlanteans/scouts_house/conf:21
 msgid "scouting"
@@ -1661,16 +1665,16 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "Не хватило места для постройки некоторых ваших стартовых сданий. Вы находитесь в невыгодном положении; можете начать карту заново, чтобы стартовать на более равных условиях."
+msgstr "Не хватило места для постройки некоторых ваших стартовых зданий. Вы находитесь в невыгодном положении; можете начать карту заново, чтобы стартовать на более справедливых условиях."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Коса - инструмент фермеров. Изготавливается в мастерской."
+msgstr "Коса — инструмент фермеров. Изготавливается в мастерской."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr "Годный для плавания корабль"
+msgstr "Морское судно"
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
@@ -1718,7 +1722,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Копчёное мясо изготавливается в коптильнях из мяса. Оно доставляется в шахты и тренировочные лагеря (лабиринт и подземелье), где шахтеры и солдаты готовят себе из него сытный обед."
+msgstr "Копчёное мясо изготавливается в коптильнях из мяса. Оно доставляется в шахты и тренировочные центры (лабиринт и темницу), где шахтеры и солдаты готовят себе из него сытный обед."
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
@@ -1734,7 +1738,7 @@ msgstr "коптит рыбу"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Защищать и завоёвывать!"
+msgstr "Защищать и покорять!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -1770,17 +1774,17 @@ msgstr "Средний трезубец. Производится в оруже�
 msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry"
 " or a crystal mine."
-msgstr "Камень - главный стройматериал атлантийцев. Его добывают в каменоломне и алмазной шахте."
+msgstr "Строительный камень — основной строительный материал атлантов. Его добывают в каменоломне и кристальной шахте."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr "Вырезает камень из валунов."
+msgstr "Высекает строительный камень из скал."
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "Накидка и легкий трезубец - это основное снаряжение новобранцев. Накидки делают на ткацкой фабрике."
+msgstr "Накидка и легкий трезубец — это основное снаряжение новобранцев. Накидки делают на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1846,7 +1850,7 @@ msgstr "На складах хранят товары, инструменты и
 msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
-msgstr "Вода - источник жизни! Используется в пекарне и на фермах."
+msgstr "Вода — источник жизни! Используется в пекарне и на фермах."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."

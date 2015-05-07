@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"POT-Creation-Date: 2015-05-02 10:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,17 +24,17 @@ msgid "None"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:113
+#: ../../src/ai/defaultai.h:116
 msgid "Aggressive"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:124
+#: ../../src/ai/defaultai.h:127
 msgid "Normal"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:135
+#: ../../src/ai/defaultai.h:138
 msgid "Defensive"
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:384 ../../src/ui_basic/helpwindow.cc:86
+#: ../../src/scripting/lua_game.cc:385 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
@@ -852,7 +852,7 @@ msgstr ""
 msgid "Big"
 msgstr ""
 
-#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:574
+#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:573
 #, c-format
 msgid "%i%% built"
 msgstr ""
@@ -1245,16 +1245,16 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:958
+#: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1871
+#: ../../src/logic/worker.cc:1869
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1879
+#: ../../src/logic/worker.cc:1877
 msgid "Worker got lost!"
 msgstr ""
 
@@ -1906,7 +1906,7 @@ msgstr ""
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/scripting/lua_game.cc:978 ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:73
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -3125,15 +3125,15 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:138
+#: ../../src/wui/attack_box.cc:138 ../../src/wui/attack_box.cc:167
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:153
+#: ../../src/wui/attack_box.cc:152
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:161
+#: ../../src/wui/attack_box.cc:160
 msgid "Send less soldiers"
 msgstr ""
 
@@ -3141,7 +3141,7 @@ msgstr ""
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:190
+#: ../../src/wui/attack_box.cc:188
 msgid "Send more soldiers"
 msgstr ""
 

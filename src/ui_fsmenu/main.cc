@@ -31,7 +31,7 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	// Buttons
 	// This box needs to be a bit higher than in the other menus, because we have a lot of buttons
 	vbox(this, m_box_x, m_box_y - m_buth, UI::Box::Vertical,
-		  m_butw, get_h() - vbox.get_y(), m_padding),
+		  m_butw, get_h() - (m_box_y - m_buth), m_padding),
 	playtutorial
 		(&vbox, "play_tutorial", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Play Tutorial"), "", true, false),
