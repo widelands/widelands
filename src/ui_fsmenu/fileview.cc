@@ -49,60 +49,6 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 	return true;
 }
 
-bool read_authors(std::string* title, std::string* content) {
-	bool result = read_text("txts/AUTHORS.lua", title, content);
-	const std::string userlocale = i18n::get_locale();
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
-
-		// Sort the locales for their sort_name
-		std::map<std::string, std::string> sorted_locales;
-		{
-			i18n::Textdomain td("texts");
-			for (const std::string code : all_locales->keys<std::string>()) {
-				std::unique_ptr<LuaTable> locale = all_locales->get_table(code);
-				locale->do_not_warn_about_unaccessed_keys();
-				sorted_locales.emplace(_(locale->get_string("localized_name")), code);
-			}
-		}
-
-		i18n::Textdomain td("translator_credits");
-		std::string translators;
-		for (const std::pair<std::string, std::string>& locale_pair : sorted_locales) {
-			std::unique_ptr<LuaTable> locale = all_locales->get_table(locale_pair.second);
-			locale->do_not_warn_about_unaccessed_keys();
-			i18n::set_locale(locale_pair.second);
-			const std::string locale_translators = _("Translator Credits");
-			if (!boost::iequals(locale_translators, "Translator Credits")) { // Do not list empty credits
-				// Display language name
-				translators =
-						(boost::format("%s<rt><p font-size=14 font-weight=bold font-color=D1D1D1>%s<br></p></rt>")
-						 % translators.c_str()
-						 % locale_pair.first.c_str()).str();
-				// Display the translators list
-				std::vector<std::string> lines;
-				boost::split(lines, locale_translators, boost::is_any_of("\n"));
-				for (const std::string locale_translator : lines) {
-					translators =
-							(boost::format("%s<rt image=pics/fsel_editor_set_height.png"
-												" image-align=left text-align=left><p font-size=12>%s</p></rt>")
-							 % translators.c_str()
-							 % locale_translator.c_str()).str();
-				}
-			}
-		}
-		*content = (boost::format(*content) % translators.c_str()).str();
-	} catch (LuaError & err) {
-		i18n::set_locale(userlocale);
-		*content = err.what();
-		*title = "Lua error";
-		return false;
-	}
-	i18n::set_locale(userlocale);
-	return result;
-}
-
 }  // namespace
 
 FullscreenMenuTextView::FullscreenMenuTextView
@@ -147,15 +93,6 @@ FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
 {
 	std::string content, title_text;
 	read_text(filename, &title_text, &content);
-	set_text(content);
-	set_title(title_text);
-}
-
-FullscreenMenuAuthorsView::FullscreenMenuAuthorsView(const std::string&)
-: FullscreenMenuTextView()
-{
-	std::string content, title_text;
-	read_authors(&title_text, &content);
 	set_text(content);
 	set_title(title_text);
 }
@@ -212,21 +149,6 @@ FileViewWindow::FileViewWindow
 }
 
 
-struct AuthorsWindow : public TextViewWindow {
-	AuthorsWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg);
-};
-
-AuthorsWindow::AuthorsWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg)
-	:
-	TextViewWindow(parent, reg)
-{
-	std::string title_text, content;
-	read_authors(&title_text, &content);
-	set_text(content);
-	set_title(title_text);
-}
-
-
 /**
  * Display the contents of a text file in a scrollable window.
 */
@@ -236,12 +158,4 @@ void fileview_window
 	 const std::string          & filename)
 {
 	new FileViewWindow(parent, reg, filename);
-}
-
-
-/**
- * Display the contents of the authors file in a scrollable window.
-*/
-void authors_window(UI::Panel& parent, UI::UniqueWindow::Registry& reg) {
-	new AuthorsWindow(parent, reg);
 }

@@ -1,4 +1,5 @@
 include "scripting/formatting.lua"
+include "txts/translators/translators.lua"
 
 set_textdomain("texts")
 
@@ -359,6 +360,10 @@ function former_elder(text)
 	return "<rt image=pics/genstats_enable_plr_04.png text-align=left image-align=left><p font-size=12>" .. text .. "</p></rt>"
 end
 
+function translator(text)
+	return "<rt image=pics/fsel_editor_set_height.png text-align=left image-align=left><p font-size=12>" .. text .. "</p></rt>"
+end
+
 function others(text)
 	return "<rt image=pics/genstats_landsize.png image-align=left text-align=left><p font-size=12>" .. text .. "</p></rt>"
 end
@@ -417,7 +422,7 @@ return {
 		list_people_with_header(campaign_authors, h2, campaigns) ..
 
 		h1_authors(_"Translators") ..
-		"%s" .. -- Place holder to insert translators list, which is parsed in C++.
+		list_people_with_header(translators, h2, translator) ..
 
 		h1_authors(_"Packagers") ..
 		h2(_"Linux Distributions") ..
