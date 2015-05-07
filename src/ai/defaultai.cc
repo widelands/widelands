@@ -901,7 +901,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			}
 		}
 
-		// stones are not renewable, we will count them only if previous state si nonzero
+		// stones are not renewable, we will count them only if previous state is nonzero
 		if (field.stones_nearby_ > 0 && gametime % 3 == 0) {
 
 			field.stones_nearby_ =
@@ -909,12 +909,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					nullptr,
 		            FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite")));
 
-			//adding 10 if stones found
+			// adding 10 if stones found
 			field.stones_nearby_ = (field.stones_nearby_ > 0) ? field.stones_nearby_ + 10:0;
 		}
 
 		// ground water is not renewable and its amount can only fall, we will count them only if
-		// previous state si nonzero
+		// previous state is nonzero
 		if (field.ground_water_ > 0) {
 			field.ground_water_ = field.coords.field->get_resources_amount();
 		}
@@ -1278,7 +1278,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
-			// shortage = less then 1 items in warehouses
+			// shortage = less then 3 items in warehouses
 			if (get_warehoused_stock(wt) < 3) {
 				bo.build_material_shortage_ = true;
 			}
@@ -1668,7 +1668,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// we attempt to cluster space consumers together
 						if (bo.space_consumer_) {  // need to consider trees nearby
 							prio += bf->space_consumers_nearby_ * 10;
-							prio += (bf->space_consumers_nearby_ > 2)?2:bf->space_consumers_nearby_ * 2;
+							prio += (bf->space_consumers_nearby_ > 2) ? 2 : bf->space_consumers_nearby_ * 2;
 						}
 
 						if (bo.space_consumer_ && !bf->water_nearby_) {  // not close to water
@@ -1740,35 +1740,30 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// calculating some sub-scores, some of them are prohibitive
 				// decreasing score if some critical materials are missing
 				// (relevant for medium and big buildings)
-				int32_t prio_for_mat_shortage = 0;
+				int32_t prio_for_mat_shortage = 0 - bo.cnt_under_construction_ * bo.build_material_shortage_;
 				if (bf->enemy_nearby_) {
-					prio_for_mat_shortage =
-					   -bo.cnt_under_construction_ * bo.build_material_shortage_ * 50;
+					prio_for_mat_shortage *= 50;
 				} else {
-					prio_for_mat_shortage = -bo.cnt_under_construction_ * bo.build_material_shortage_ *
-					                        1000;  // = prohibitive
+					prio_for_mat_shortage *= 1000;  // = prohibitive
 				}
 
 				// decreasing score if other militarysites constuctions
 				// are nearby
-				int32_t prio_for_in_constr = 0;
-				prio_for_in_constr -= 700 *
-				                      (((static_cast<int32_t>(num_milit_constructionsites) - 2) < 0) ?
-				                          0 :
-				                          (num_milit_constructionsites - 2)) /
-				                      (militarysites.size() + 2);
+				int32_t prio_for_in_constr =
+						-700 * (((static_cast<int32_t>(num_milit_constructionsites) - 2) < 0) ?
+									  0 :
+									  (num_milit_constructionsites - 2)) /
+						(militarysites.size() + 2);
 				if (!bf->enemy_nearby_) {
 					prio_for_in_constr *= 3;
 				}
 
 				// similarly if unmanned militarysites are nearby
-				int32_t prio_for_unmanned_nearby = 0;
+				int32_t prio_for_unmanned_nearby = 0 - bf->military_in_constr_nearby_ - bf->military_unstationed_;
 				if (bf->enemy_nearby_) {
-					prio_for_unmanned_nearby -=
-					   (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 20;
+					prio_for_unmanned_nearby *= 20;
 				} else {
-					prio_for_unmanned_nearby -=
-					   (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 1000;
+					prio_for_unmanned_nearby *= 1000;
 				}
 
 				// not continuing if score too low
@@ -1812,10 +1807,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// calculating other sub scores
 				// for resources (mines, water, stones)
-				int32_t prio_for_resources = 0;
-				prio_for_resources +=
-				   2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
-				   bf->stones_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
+				int32_t prio_for_resources =
+						2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
+						bf->stones_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
 				// special bonus due to remote water for atlanteans
 				if (resource_necessity_water_needed_) {
 					prio_for_resources += (bf->distant_water_ * resource_necessity_water_) / 100 / 3;
@@ -1828,7 +1822,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio_for_resources /= 5;
 				}
 
-				//for unowned land nearby
+				// for unowned land nearby
 				int32_t prio_for_unowned_land = 0;
 				if (expansion_mode == MilitaryStrategy::kExpansion ||
 				    expansion_mode == MilitaryStrategy::kPushExpansion) {
@@ -1836,21 +1830,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					   (bf->unowned_land_nearby_ * resource_necessity_territory_) / 100;
 				}
 
-				//for distance to nearest military sites
+				// for distance to nearest military sites
 				int32_t prio_for_loneliness = bf->military_loneliness_;
 				if (!bf->enemy_nearby_) {
 					prio_for_loneliness /= 10;
 				}
 
-				//additional score for bigger buildings
-				int32_t prio_for_size = 0;
+				// additional score for bigger buildings
+				int32_t prio_for_size = bo.desc->get_size() - 1;
 				if (bf->enemy_nearby_) {
-					prio_for_size += (bo.desc->get_size() - 1) * 30;
+					prio_for_size *= 30;
 				} else {
-					prio_for_size += (bo.desc->get_size() - 1) * 15;
+					prio_for_size *= 15;
 				}
 
-				//additional score if enemy is nearby
+				// additional score if enemy is nearby
 				int32_t prio_for_enemy = 0;
 				if (bf->enemy_nearby_) {
 					prio_for_enemy += 50;
@@ -1876,7 +1870,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				}
 
-				// penalty if we build lesser then possible building
+				// penalty if we build lesser than possible building
 				if (bo.desc->get_size() < maxsize) {
 					prio = prio - 5;
 				}
