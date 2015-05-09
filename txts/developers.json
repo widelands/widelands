@@ -192,7 +192,8 @@
 						"fk",
 						"Einstein13",
 						"Jenia",
-						"Robnick"
+						"Robnick",
+						"wl-zocker"
 					]
 				}
 			]
@@ -201,12 +202,6 @@
 			"heading": "Campaign Story",
 			"image": "pics/ls_wlmap.png",
 			"entries":[
-				{
-					"subheading": "Tutorials",
-					"members":[
-						"wl-zocker"
-					]
-				},
 				{
 					"subheading": "Barbarian",
 					"members":[
