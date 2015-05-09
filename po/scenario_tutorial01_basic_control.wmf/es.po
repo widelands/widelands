@@ -3,13 +3,15 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Kiba Gasteiz <kibafang@gmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-04-01 22:59+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "Agradable y fácil lo hace todo el tiempo"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
@@ -27,34 +29,34 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr ""
+msgstr "Lo siento, pero voy a tener que bajar la velocidad de nuevo. Es posible que necesitemos el espacio aquí más adelante. Si soy demasiado lento, es posible que desees jugar a un juego real y aprender todo por ti mismo. De lo contrario, por favor ten paciencia conmigo, yo no soy tan joven y rápido como antes."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Bienvenido al tutorial de Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr "Bienvenido a Widelands!"
+msgstr "¡Bienvenido a Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr ""
+msgstr "Widelands es un juego de estrategia de ritmo lento, con énfasis en la construcción en lugar de la destrucción. Este tutorial te guiará a través de los fundamentos del juego."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
-msgstr ""
+msgstr "Cierra esta ventana haciendo clic izquierdo en el botón de abajo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "Buceando"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "Vamos a bucear!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -62,7 +64,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr ""
+msgstr "Hay tres tribus diferentes en Widelands: los Bárbaros, el Imperio y los Atlantes. Todas las tribus tienen una economía diferente, puntos fuertes y débiles, pero el juego en general es el mismo para todos. Vamos a jugar con los Bárbaros por ahora."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -74,7 +76,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and raw stone. Let’s make sure that we do not run out of logs. For "
 "this, we need a lumberjack and a hut for him to stay in."
-msgstr ""
+msgstr "Por lo general, inicias el juego con una sede. Es el gran edificio con la bandera azul en frente. La sede es una bodega que almacena mercancías, trabajadores y soldados. Se necesitan algunas mercancías para la construcción de casas, otros para hacer otros productos. Obviamente, las mercancías en las oficinas centrales no durarán para siempre, por lo que debes asegurarse de que seguirte abasteciendo. Las mercancías más importantes al principio del juego son las mercancías básicas de construcción: troncos y piedra en bruto. Vamos a asegurarnos de que no nos quedemos sin recursos. Para esto, necesitamos un leñador y una cabaña para que se quede ahí."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -83,36 +85,36 @@ msgid ""
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the SPACE key"
 " to toggle it."
-msgstr ""
+msgstr "Tenemos que encontrar un lugar agradable para la cabaña del leñador. Para hacer esto más fácil, podemos activar 'Mostrar Espacios para Construcción'. Hay dos maneras para poder hacer esto, ya sea haciendo clic en el botón 'Mostrar Espacios para Construcción' en la parte inferior de la pantalla, que es el cuarto desde la izquierda. O puede utilizar la BARRA ESPACIADORA para activarlo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
+msgstr "Haga clic izquierdo en el botón 'Aceptar' para cerrar esta ventana y poder probarlo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "Muestra los espacios disponibles para la construcción"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Mostrar Espacios de Construcción"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr ""
+msgstr "Es más fácil entender qué tipo de edificios se pueden construir de acuerdo a los símbolos que aparecen en el espacio disponible para la construcción."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "Do so now, either by pressing SPACE or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr ""
+msgstr "Hazlo ahora, ya sea presionando ESPACIO o haciendo clic en el cuarto botón desde la izquierda en la parte inferior de la pantalla. Haz clic derecho en la ventana y luego dale una prueba."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "Punto de leñador"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 msgid ""
@@ -121,11 +123,11 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr ""
+msgstr "Aquí vas. Voy a explicarte acerca de todos esos símbolos en un minuto. Primero, déjame mostrarte cómo hacer la cabaña de un leñador y cómo conectarla con una carretera. Hay un buen punto para un leñador justo al lado de esos árboles. Voy a describir los pasos que voy a realizar y luego te pediré que hagas clic en el botón 'OK' para hacer la demostración."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "Construyendo la cabaña del leñador"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 msgid ""
@@ -135,18 +137,18 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "En primer lugar, voy a hacer clic izquierdo en el símbolo donde quiero construir la cabaña del leñador. Aparecerá una ventana donde puedes elegir entre los edificios. Por  hacer clic en un símbolo de casa amarilla - lo que significa que su campo puede albergar edificios medianos y pequeños - se me presentan todos los edificios medianos que puedo construir. La cabaña del leñador es un edificio pequeño, así que voy a seleccionar la pestaña edificios pequeños. Y luego voy a elegir la cabaña del leñador."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr ""
+msgstr "Haz clic en el botón 'Aceptar' para que me veas. Voy a ir muy despacio: Voy a hacer clic - luego seleccionaré la pestaña - y finalmente, voy a elegir el edificio."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Construyendo una carretera conectada"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:84
 msgid ""
@@ -154,7 +156,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Eso no va a pasar aún. Todavía necesito conectar la cabaña del leñador con el resto de mi red de carreteras. Después de ordenar la construcción de la obra, me colocaron automáticamente en modo de construcción de carreteras, por lo que todo lo que tengo que hacer es hacer clic en la bandera azul delante de mi cuartel general."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -164,35 +166,35 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Eso no va a pasar aún. Todavía necesito conectar la cabaña del leñador con el resto de mi red de carreteras. Has deshabilitado la opción \"Iniciar la construcción de carretera después de colocar una bandera '(para cambiar eso, selecciona 'Opciones' en el menú principal de Widelands). Por lo tanto, he entrado en el modo de construcción de carreteras de forma manual. Te diré más adelante cómo hacerlo. Para construir la carretera, todo lo que tengo que hacer ahora es hacer clic en la bandera azul delante de mi cuartel general."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "Esperando a que se termine de construir la cabaña de leñador"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr ""
+msgstr "Ahora mira de cerca, mientras que un constructor deja la sede y se dirige al sitio de construcción. Además, un transportista se hará cargo entre las dos banderas azules y llevará mercancías de una bandera azul a la otra."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "Ubicando otra bandera"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:116
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
-msgstr ""
+msgstr "Que bien están trabajando, ¿no es así? Pero el pobre portador tiene un largo camino por recorrer. Podemos hacer que sea más fácil para él (y más eficiente para nosotros) mediante la ubicación de otra bandera azul en el camino."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
-msgstr ""
+msgstr "Intentalo tu esta vez: haz clic en el símbolo de la bandera amarilla en medio de las dos banderas azules que acabas de colocar y luego haz clic en el"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:120
 msgid "build flag symbol."
@@ -204,28 +206,28 @@ msgstr "Construye una bandera para dividir el camino hacia el leñador"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Construir una Bandera en el Camino"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
+msgstr "Entre más cortos sean tus segmentos de carretera, más rápido serán transportadas tus mercancías. Por tanto, debes asegurarse que tus caminos tengan tantas banderas como sea posible."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:129
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
+msgstr "Construye ahora una bandera azul en medio de la carretera que conecta tus oficinas centrales a la cabaña de tu leñador."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
-msgstr ""
+msgstr "Esperando a que se termine la cabaña"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:137
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "Bien hecho! Esperemos hasta que la cabaña sea terminada."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
@@ -233,69 +235,69 @@ msgid ""
 "If you want things to go faster, simply use the PAGE UP key on your keyboard"
 " to increase the game speed. You can use PAGE DOWN to make the game slower "
 "again."
-msgstr ""
+msgstr "Si quieres que las cosas vayan más rápido, simplemente usa la tecla AV PAG del teclado para aumentar la velocidad del juego. Puedes utilizar RE PAG para hacer el juego más lento otra vez."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
-msgstr ""
+msgstr "Esperando que la cabaña sea terminada"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr ""
+msgstr "Quería enseñarte cómo construir nuevas banderas, pero parece que ya lo has descubierto por tu cuenta. Bien hecho!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
 msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr ""
+msgstr "Ahora se ha dividido la carretera en dos partes con un cargador en cada una. Esto significa menos trabajo para él y una mayor eficiencia para nosotros. Por lo tanto deberías colocar tantas banderas como sea posible en sus caminos."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "Ahora solo debemos esperar hasta que la cabaña sea terminada."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
-msgstr ""
+msgstr "El Sitio de Construcción"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
-msgstr ""
+msgstr "Veamos el progreso"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
 "If you click on the construction site, a window opens. You can see the wares"
 " that are still missing grayed out. You can also see the progress of this "
 "construction site."
-msgstr ""
+msgstr "Si haces clic en el sitio de construcción, se abre una ventana. Puedes ver los enseres que aún faltan en gris. También puedes ver el progreso de esta obra."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid ""
 "To close the window, simply right-click on it. All windows in Widelands can "
 "be closed that way, except the ones with instructions, like this one. Try it"
 " out!"
-msgstr ""
+msgstr "Para cerrar la ventana, simplemente haz clic en ella. Todas las ventanas de Widelands se pueden cerrar de esa manera, excepto las instrucciones, como esta. Pruébalo!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
-msgstr ""
+msgstr "La cabaña de leñador está lista"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the raw stone."
-msgstr ""
+msgstr "Excelente. La cabaña del leñador está lista. Un leñador se moverá ahora y empezar a cortar árboles, por lo que nuestro registro de ingresos está asegurado por ahora. Ahora, a la piedra en bruto."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Se Encontraron Algunas Rocas"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "Conseguir una cantera"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -303,17 +305,17 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Las piedras pueden ser extraídas en las minas de granito, pero la forma más fácil es construir una cantera junto a unas rocas por ahí. Como suele suceder, hay un montón de ellas justo al oeste (izquierda) de su sede. Te enseñaré ahora cómo mover tu punto de vista por allí."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr ""
+msgstr "Hay tres maneras de mover tu punto de vista. El primero de ellos es utilizando las flechas del teclado. Adelante, pruebalo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr ""
+msgstr "Haz click en el botón 'Aceptar' y luego mueve la vista utilizando las flechas del teclado"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -321,44 +323,44 @@ msgstr "Mueve tu vista con las flechas del teclado"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
-msgstr ""
+msgstr "Moviendo tu vista"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "Mover tu vista es esencial para tener una visión completa de tu economía total. Hay tres formas de mover tu vista en Widelands."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "La primera es utilizar las flechas de tu teclado."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:195
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr ""
+msgstr "La segunda es la más común y más rápida: pulsar y mantener pulsado el botón derecho del ratón en cualquier lugar en el mapa, a continuación, mueve el ratón y verás el desplazamiento de la vista."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:196
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr ""
+msgstr "La tercera es utilizar el minimapa. Es especialmente útil para viajar en grandes distancias."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Other Ways to Move the View"
-msgstr ""
+msgstr "Otras maneras de mover la vista"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr ""
+msgstr "Excelente. Ahora hay una manera más rápida de moverse, con el ratón en su lugar:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr ""
+msgstr "Simplemente haz clic y mantenlo pulsado en cualquier punto del mapa y arrastra el ratón y en lugar del cursor, se moverá la vista. Pruébalo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
@@ -366,51 +368,51 @@ msgstr "Mueve tu vista con el mouse"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
-msgstr ""
+msgstr "Utiliza el minimapa"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr ""
+msgstr "Muy bien. Y ahora sobre el minimapa. Puedes abrirlo haciendo clic en el"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr ""
+msgstr "botón minimapa en la parte inferior de la pantalla o simplemente usando el atajo de teclado 'm'."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr ""
+msgstr "El minimapa muestra el mapa completo en miniatura. Puedes saltar directamente a cualquier lugar haciendo clic izquierdo sobre él. También puedes alternar los edificios, las carreteras, las banderas y los indicadores de jugador dentro del minimapa."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid ""
 "Try it out. Open the minimap, click on a few buttons and try moving around. "
 "Close it when you have experimented enough."
-msgstr ""
+msgstr "Pruebalo. Abre el minimapa, haz clic en unos cuantos botones y trata de moverte. Cierralo cuando hayas experimentado lo suficiente."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "Aprende a utilizar el minimapa"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr ""
+msgstr "Abre el minimapa utilizando el tercer botón desde la izquierda en la parte inferior de la pantalla o pulsando la tecla 'm'."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "Juega un poco con las diferentes superposiciones (carreteras, banderas, etc.)"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr ""
+msgstr "Cierra el minimapa cuando estés listo para continuar utilizando el mismo botón o 'm' de nuevo. Por supuesto, un clic derecho también funciona."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
@@ -759,7 +761,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:426
 msgid "Closing Windows"
-msgstr ""
+msgstr "Cerrando ventanas"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:407
 msgid ""
@@ -780,7 +782,7 @@ msgstr "Cierra la ventana de mensajes"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "Cerrar la ventana de mensajes"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
@@ -803,7 +805,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "Tienes mensajes nuevos!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
@@ -853,7 +855,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "Expandiendo tu territorio!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 msgid ""
@@ -894,11 +896,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid "Expand your territory"
-msgstr ""
+msgstr "Expande tu territorio"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid "Make your territory grow"
-msgstr ""
+msgstr "Haz crecer tu territorio"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
@@ -924,17 +926,17 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid "Military Site Occupied"
-msgstr ""
+msgstr "Edificio militar ocupado"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "Tu territorio acaba de crecer"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr ""
+msgstr "Genial. Has visto como ha crecido tu territorio desde que tus soldados ocuparon el nuevo edificio militar?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
@@ -962,23 +964,23 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "To leave this game and return to the main menu, click on the"
-msgstr ""
+msgstr "Para abandonar este juego y volver al menu principal, haz click en el"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
-msgstr ""
+msgstr "botón 'Ociones' en el extremo izquierdo en la parte inferior de la pantalla. Luego haz click en"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
 msgid "‘Exit Game’ button."
-msgstr ""
+msgstr "el botón 'Salir del juego'."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:498
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr ""
+msgstr "Gracias por utilizar este tutorial. Disfruta Widelands y recuerda visitarnos en"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
@@ -987,5 +989,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuevos objetivos"
+msgstr[1] "Nuevos objetivos"

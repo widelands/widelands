@@ -4,12 +4,12 @@ run(function()
 
    -- Start an expedition, but let them carry some wares into it. This also
    -- gives the builder enough time to walk over.
-   start_expedition()
+   port:start_expedition()
    sleep(50000)
    stable_save("cancel_in_port")
    assert_equal(1, p1:get_workers("builder"))
 
-   cancel_expedition_in_port()
+   port:cancel_expedition()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 

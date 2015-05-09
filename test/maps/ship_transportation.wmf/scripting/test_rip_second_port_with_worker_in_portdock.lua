@@ -5,6 +5,13 @@ run(function()
    create_first_port()
    create_second_port()
 
+   --removing portdock first
+   portdock_fields=port2().portdock.fields
+   portdock_fields[1].immovable:remove()
+   sleep(100)
+   --portdock should be back, as port is still there
+   assert (portdock_fields[1].immovable) 
+   
    start_building_farm()
    port1():set_workers{
       builder = 1,
@@ -16,7 +23,12 @@ run(function()
    assert_equal(p1:get_workers("builder"), 1)
    assert_equal(port1():get_workers("builder"), 0)
 
+   portdock_fields=port2().portdock.fields
    port2():remove()
+   sleep(100)
+   --verify that also portdock was removed
+   assert (not portdock_fields[1].immovable)
+   
    sleep(100)
 
    stable_save("worker_in_portdock")

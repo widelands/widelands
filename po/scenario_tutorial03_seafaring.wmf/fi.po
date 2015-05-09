@@ -1,26 +1,26 @@
-# Finnish translation for widelands
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# Markus Hällfors <markus@hallfors.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2013-08-03 10:40+0000\n"
-"Last-Translator: Markus Hallfors <destroyerko@gmail.com>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 15:27+0000\n"
+"Last-Translator: Markus Hällfors <markus@hallfors.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr ""
+msgstr "Merenkäynti"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
@@ -66,7 +66,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
 msgid "Ports"
-msgstr ""
+msgstr "Satamat"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid "Build a port"
-msgstr ""
+msgstr "Rakenna satama"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
@@ -195,21 +195,20 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid ""
-"Very good. Your shipyard is finished and your shipwright immediately started "
-"working. For the construction of ships, he needs logs, planks and "
+"Very good. Your shipyard is finished and your shipwright immediately started"
+" working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
-"and build a ship there. When the first ship is finished, it will launch onto "
-"the sea, and the shipwright will construct another one."
+"and build a ship there. When the first ship is finished, it will launch onto"
+" the sea, and the shipwright will construct another one."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
-msgid ""
-"We should wait until we have two ships. That should be enough for now."
+msgid "We should wait until we have two ships. That should be enough for now."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
@@ -270,7 +269,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr ""
 
-#: TRANSLATORS: This shall be the beginning of a poem
+#: TRANSLATORS This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr ""
@@ -338,9 +337,9 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
-"Your ship will be waiting for your orders in front of your port. It won’t be "
-"transporting wares anymore. Use its buttons to send your ship in any of the "
-"six main directions of the Widelands map. When it has reached a coastline, "
+"Your ship will be waiting for your orders in front of your port. It won’t be"
+" transporting wares anymore. Use its buttons to send your ship in any of the"
+" six main directions of the Widelands map. When it has reached a coastline, "
 "you can make it travel around the coast, where it will look for suitable "
 "places for landing."
 msgstr ""
@@ -388,7 +387,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid "Congratulations"
-msgstr ""
+msgstr "Onneksi olkoon"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -400,15 +399,15 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "In this scenario, you’ve learned everything about seafaring: how to build "
-"ports and ships and how to send out an expedition. Remember that expeditions "
-"are sometimes the fastest way to reach essential resources – and sometimes "
+"ports and ships and how to send out an expedition. Remember that expeditions"
+" are sometimes the fastest way to reach essential resources – and sometimes "
 "the only one."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
-"But I want to speak a word of warning. Ports are like headquarters: they can "
-"be attacked by a nearby enemy. While your headquarters has soldiers to "
+"But I want to speak a word of warning. Ports are like headquarters: they can"
+" be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
 msgstr ""
@@ -427,5 +426,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"

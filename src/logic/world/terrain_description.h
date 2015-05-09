@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ public:
 		kWater =  2,
 		kDead = 4,
 		kMountain = 8,
-		kUnpassable = 16,
+		kImpassable = 16,
 	};
 
 	TerrainDescription(const LuaTable& table, const World&);

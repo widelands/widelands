@@ -3,13 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-13 04:22+0000\n"
+"Last-Translator: zone <z-one@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +27,7 @@ msgstr "Pusztulásból teremtésbe"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atlantisz közelében, új otthon építésén fáradoznak."
+msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atlantisz közelében, nagy küzdelmek árán új otthont építenek maguknak."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -35,7 +37,7 @@ msgstr "Egy hely, amit otthonnak hívunk"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "Ebben a szcenárióban a magasabb szintű termelő épületek kerülnek bemutatásra."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
@@ -100,7 +102,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – százötven katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább figyelmen kívül hagyták a lehetséges ellenséget. Ezt lett a vesztük. Egy márciusi éjszakán száz barbár gyalogos megtámadta a felkészületlen sereget, mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája menekült meg."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -138,7 +140,7 @@ msgstr "Még nem készült el"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Senki"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
@@ -387,7 +389,7 @@ msgstr "Jégháborúk"
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "Az ősz télbe váltott. Néhány dolog megfagyott, de a háború nem."
 
 #: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
 #: fire.wmf/elemental:12
@@ -484,10 +486,10 @@ msgstr "Csempészek"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Jólszervezett csempészútvonalaid hirtelen mozgalmasabbá váltak: két másik törzs jelent meg, így versengés indult a csempészek között: melyik csapat csempészik át hamarabb egy bizonyos mennyiségű árut?"
+msgstr "A régóta működő csempészútvonalaidon hirtelen nagy lett a forgalom: két másik törzs jelent meg, és versengés indult a csempészek között. Melyik csapat csempészik át hamarabb egy bizonyos mennyiségű árut?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -627,12 +629,12 @@ msgstr "Az olvadás"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "Egy újabb olvadás köszöntött be. Három törzs keresett oltalmat a kemény tél elől a magas hegyek között. A napéjegyenlőségkor meghallgatták az orákulumot, és háborúzni kezdtek. Az egyetlen túlélő feláldozza ellenségei kincseit a Szent oltárnál, és azon a helyen épít egy ragyogó palotát, ezzel elnyerve az Istenek támogatását és tiszteletét."
+msgstr "Egy újabb olvadás köszöntött be. Három törzs keresett oltalmat a kemény tél elől a magas hegyek között. A napéjegyenlőségkor meghallgatták az orákulumot, és háborúzni kezdtek. Az egyetlen túlélő fel fogja áldozni ellenségei kincseit az ősi oltáron, épít ott egy ragyogó palotát, ezzel elnyerve az istenek kegyét és tiszteletét."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"

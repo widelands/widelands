@@ -32,6 +32,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
@@ -2681,12 +2682,12 @@ const PropertyType<LuaPortDock> LuaPortDock::Properties[] = {
  ==========================================================
  */
 
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 /* RST
 Building
@@ -2806,10 +2807,13 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
 	METHOD(LuaWarehouse, get_workers),
 	METHOD(LuaWarehouse, set_soldiers),
 	METHOD(LuaWarehouse, get_soldiers),
+	METHOD(LuaWarehouse, start_expedition),
+	METHOD(LuaWarehouse, cancel_expedition),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
 	PROP_RO(LuaWarehouse, portdock),
+	PROP_RO(LuaWarehouse, expedition_in_progress),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2829,6 +2833,26 @@ int LuaWarehouse::get_portdock(lua_State * L) {
 	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_portdock());
 }
 
+/* RST
+	.. attribute:: expedition_in_progress
+
+		(RO) If this Warehouse is a port, and an expedition is in
+		progress, returns true, otherwise nil
+*/
+int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
+
+	Warehouse* wh = get(L, get_egbase(L));
+
+	if (is_a(Game, &get_egbase(L))) {
+		PortDock* pd = wh->get_portdock();
+		if (pd) {
+			if (pd->expedition_started()){
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
 
 /*
  ==========================================================
@@ -2895,12 +2919,71 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 	return do_set_soldiers(L, wh->get_position(), wh, wh->get_owner());
 }
 
+/* RST
+	.. method:: start_expedition(port)
+
+		:arg port
+
+		Starts preparation for expedition
+
+*/
+int LuaWarehouse::start_expedition(lua_State* L) {
+
+	Warehouse* Wh = get(L, get_egbase(L));
+
+	if (!Wh) {
+		return 0;
+	}
+
+	if (upcast(Game, game, &get_egbase(L))) {
+		PortDock* pd = Wh->get_portdock();
+		if (!pd) {
+			return 0;
+		}
+		if (!pd->expedition_started()){
+			game->send_player_start_or_cancel_expedition(*Wh);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: cancel_expedition(port)
+
+		:arg port
+
+		Cancels an expedition if in progress
+
+*/
+int LuaWarehouse::cancel_expedition(lua_State* L) {
+
+	Warehouse* Wh = get(L, get_egbase(L));
+
+	if (!Wh) {
+		return 0;
+	}
+
+	if (upcast(Game, game, &get_egbase(L))) {
+		PortDock* pd = Wh->get_portdock();
+			if (!pd) {
+				return 0;
+			}
+		if (pd->expedition_started()){
+			game->send_player_start_or_cancel_expedition(*Wh);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 /* RST
 ProductionSite
@@ -3179,6 +3262,7 @@ const MethodType<LuaBob> LuaBob::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
+	PROP_RO(LuaBob, field),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3188,6 +3272,27 @@ const PropertyType<LuaBob> LuaBob::Properties[] = {
  ==========================================================
  */
 
+/* RST
+	.. attribute:: field //working here
+
+		(RO) The field the bob is located on
+*/
+// UNTESTED
+int LuaBob::get_field(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+
+	Coords coords = get(L, egbase)->get_position();
+
+	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(coords.x, coords.y));
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
 /* RST
 	.. method:: has_caps(capname)
 
@@ -3214,13 +3319,6 @@ int LuaBob::has_caps(lua_State * L) {
 	return 1;
 }
 
-
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-
 /*
  ==========================================================
  C METHODS
@@ -3240,12 +3338,16 @@ const char LuaShip::className[] = "Ship";
 const MethodType<LuaShip> LuaShip::Methods[] = {
 	METHOD(LuaShip, get_wares),
 	METHOD(LuaShip, get_workers),
+	METHOD(LuaShip, build_colonization_port),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, debug_economy),
 	PROP_RO(LuaShip, last_portdock),
 	PROP_RO(LuaShip, destination),
+	PROP_RO(LuaShip, state),
+	PROP_RW(LuaShip, scouting_direction),
+	PROP_RW(LuaShip, island_explore_direction),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3283,6 +3385,149 @@ int LuaShip::get_destination(lua_State* L) {
 int LuaShip::get_last_portdock(lua_State* L) {
 	EditorGameBase & egbase = get_egbase(L);
 	return upcasted_map_object_to_lua(L, get(L, egbase)->get_lastdock(egbase));
+}
+
+/* RST
+	.. attribute:: state
+
+	Query which state the ship is in:
+
+	- transport,
+	- exp_waiting, exp_scouting, exp_found_port_space, exp_colonizing,
+	- sink_request, sink_animation
+
+		(RW) returns the :class:`string` ship's state, or :const:`nil` if there is no valid state.
+
+
+*/
+// UNTESTED sink states
+int LuaShip::get_state(lua_State* L) {
+	if (is_a(Game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_ship_state()) {
+			case Ship::TRANSPORT:
+				lua_pushstring(L, "transport");
+				break;
+			case Ship::EXP_WAITING:
+				lua_pushstring(L, "exp_waiting");
+				break;
+			case Ship::EXP_SCOUTING:
+				lua_pushstring(L, "exp_scouting");
+				break;
+			case Ship::EXP_FOUNDPORTSPACE:
+				lua_pushstring(L, "exp_found_port_space");
+				break;
+			case Ship::EXP_COLONIZING:
+				lua_pushstring(L, "exp_colonizing");
+				break;
+			case Ship::SINK_REQUEST:
+				lua_pushstring(L, "sink_request");
+				break;
+			case Ship::SINK_ANIMATION:
+				lua_pushstring(L, "sink_animation");
+				break;
+			default:
+				lua_pushnil(L);
+				return 0;
+			}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::get_scouting_direction(lua_State* L) {
+	if (is_a(Game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_scouting_direction()) {
+			case WalkingDir::WALK_NE:
+				lua_pushstring(L, "ne");
+				break;
+			case WalkingDir::WALK_E:
+				lua_pushstring(L, "e");
+				break;
+			case WalkingDir::WALK_SE:
+				lua_pushstring(L, "se");
+				break;
+			case WalkingDir::WALK_SW:
+				lua_pushstring(L, "sw");
+				break;
+			case WalkingDir::WALK_W:
+				lua_pushstring(L, "w");
+				break;
+			case WalkingDir::WALK_NW:
+				lua_pushstring(L, "nw");
+				break;
+			default:
+				return 0;
+			}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::set_scouting_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		std::string dirname = luaL_checkstring(L, 3);
+		WalkingDir dir = WalkingDir::IDLE;
+
+		if (dirname == "ne") {
+			dir = WalkingDir::WALK_NE;
+		} else if (dirname == "e") {
+			dir = WalkingDir::WALK_E;
+		} else if (dirname == "se") {
+			dir = WalkingDir::WALK_SE;
+		} else if (dirname == "sw") {
+			dir = WalkingDir::WALK_SW;
+		} else if (dirname == "w") {
+			dir = WalkingDir::WALK_W;
+		} else if (dirname == "nw") {
+			dir = WalkingDir::WALK_NW;
+		} else {
+			return 0;
+		}
+		game->send_player_ship_scouting_direction(*get(L, get_egbase(L)), dir);
+		return 1;
+	}
+	return 0;
+
+}
+
+/* RST
+	.. attribute:: island_explore_direction
+
+		(RW) actual direction if the ship sails around an island.
+		Sets/returns cw, ccw or nil
+
+*/
+int LuaShip::get_island_explore_direction(lua_State* L) {
+	if (is_a(Game, &get_egbase(L))) {
+		switch (get(L, get_egbase(L))->get_island_explore_direction()) {
+			case IslandExploreDirection::kCounterClockwise:
+				lua_pushstring(L, "ccw");
+				break;
+			case IslandExploreDirection::kClockwise:
+				lua_pushstring(L, "cw");
+				break;
+			default:
+				return 0;
+		}
+		return 1;
+	}
+	return 0;
+}
+
+int LuaShip::set_island_explore_direction(lua_State* L) {
+	if (upcast(Game, game, &get_egbase(L))) {
+		Ship* ship = get(L, get_egbase(L));
+		std::string dir = luaL_checkstring(L, 3);
+		if (dir == "ccw"){
+			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
+		} else if (dir == "cw") {
+			 game->send_player_ship_explore_island(*ship, IslandExploreDirection::kClockwise);
+		} else {
+			return 0;
+		}
+		return 1;
+	}
+	return 0;
 }
 
 /*
@@ -3339,6 +3584,25 @@ int LuaShip::get_workers(lua_State* L) {
 	}
 	lua_pushint32(L, nworkers);
 	return 1;
+}
+
+/* RST
+	.. method:: build_colonization_port()
+
+		Returns true if port space construction was started (ship was in adequate
+		status and a found portspace was nearby)
+
+		:returns: true/false
+*/
+int LuaShip::build_colonization_port(lua_State* L) {
+	Ship* ship =  get(L, get_egbase(L));
+	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+		if (upcast(Game, game, &get_egbase(L))) {
+			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
+			return 1;
+		}
+	}
+	return 0;
 }
 
 /*

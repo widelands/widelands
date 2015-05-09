@@ -3,12 +3,13 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Volkan Gezer <volkangezer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 11:20+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-06 16:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,15 +20,15 @@ msgstr ""
 
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "BENİOKU"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "açık kaynak strateji oyunu"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme:7
 msgid "Introduction"
-msgstr ""
+msgstr "Giriş"
 
 #: ../../txts/README.lua:19
 msgid ""
@@ -562,7 +563,7 @@ msgid "Licensing information for Widelands"
 msgstr ""
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2014 by the Widelands Development Team."
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
 msgstr ""
 
 #: ../../txts/license:9
