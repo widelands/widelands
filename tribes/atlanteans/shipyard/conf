@@ -38,6 +38,7 @@ return=skipped
 [ship]
 check_map=seafaring
 construct=shipconstruction buildship 6
+animate=working 35000
 return=completed
 
 [idle]
@@ -48,10 +49,10 @@ hotspot=53 66
 pics=shipyard_b_??.png
 hotspot=53 66
 
-#[working]
-#pics=shipyard_i_??.png
-#hotspot=53 66
-#
-#[outofhouse]
-#pics=shipyard_i_??.png
-#hotspot=53 66
+[working]
+pics=shipyard_i_??.png
+hotspot=53 66
+
+[unoccupied]
+pics=shipyard_i_??.png
+hotspot=53 66
