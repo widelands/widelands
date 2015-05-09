@@ -2,10 +2,7 @@ return {
    -- Locales are identified by their ISO code.
 	ar =  {
       -- Used to display the locale in the Options menu.
-		native_name = "العربية",
-
-		-- Used to display the locale in the translators list.
-		localized_name = _"Arabic",
+		name = "العربية",
 
       -- Defines the language's position on the list in the Options
       -- menu.
@@ -17,155 +14,133 @@ return {
 	},
 
 	ast = {
-		native_name = "Asturianu",
-		localized_name = _"Asturian",
+		name = "Asturianu",
 		sort_name = "Asturianu",
 		font = "default"
 	},
 
 	bg = {
-		native_name = "Български език",
-		localized_name = _"Bulgarian",
+		name = "Български език",
 		sort_name = "Balgarski",
 		font = "default"
 	},
 
 	ca = {
-		native_name = "Català",
-		localized_name = _"Catalan",
+		name = "Català",
 		sort_name = "Catala",
 		font = "default"
 	},
 
 	cs = {
-		native_name = "Čeština",
-		localized_name = _"Czech",
+		name = "Čeština",
 		sort_name = "Cestina",
 		font = "default"
 	},
 
 	da = {
-		native_name = "Dansk",
-		localized_name = _"Danish",
+		name = "Dansk",
 		sort_name = "Dansk",
 		font = "default"
 	},
 
 	de = {
-		native_name = "Deutsch",
-		localized_name = _"German",
+		name = "Deutsch",
 		sort_name = "Deutsch",
 		font = "default"
 	},
 
 	el = {
-		native_name = "Ελληνικά",
-		localized_name = _"Greek",
+		name = "Ελληνικά",
 		sort_name = "Ellinika",
 		font = "default"
 	},
 
-	en = {
-		native_name = "English",
-		localized_name = _"English",
-		sort_name = "English",
-		font = "default"
-	},
-
 	en_AU = {
-		native_name = "Australian English",
-		localized_name = _"English (Australia)",
+		name = "Australian English",
 		sort_name = "English (Australia)",
 		font = "default"
 	},
 
 	en_CA = {
-		native_name = "Canadian English",
-		localized_name = _"English (Canada)",
+		name = "Canadian English",
 		sort_name = "English (Canada)",
 		font = "default"
 	},
 
 	en_GB = {
-		native_name = "British English",
-		localized_name = _"English (Great Britain)",
+		name = "British English",
 		sort_name = "English (Great Britain)",
 		font = "default"
 	},
 
+	en = {
+		name = "English",
+		sort_name = "English",
+		font = "default"
+	},
+
 	en_US = {
-		native_name = "US American English",
-		localized_name = _"English (United States)",
+		name = "US American English",
 		sort_name = "English (USA)",
 		font = "default"
 	},
 
 	eo = {
-		native_name = "Esperanto",
-		localized_name = _"Esperanto",
+		name = "Esperanto",
 		sort_name = "Esperanto",
 		font = "default"
 	},
 
 	es = {
-		native_name = "Español",
-		localized_name = _"Spanish",
+		name = "Español",
 		sort_name = "Espanol",
 		font = "default"
 	},
 
 	et = {
-		native_name = "Eesti keel",
-		localized_name = _"Estonian",
+		name = "Eesti keel",
 		sort_name = "Eesti keel",
 		font = "default"
 	},
 
 	eu = {
-		native_name = "Euskara",
-		localized_name = _"Basque",
+		name = "Euskara",
 		sort_name = "Euskara",
 		font = "default"
 	},
 
 	fa = {
-		native_name = "فارسی",
-		localized_name = _"Persian",
+		name = "فارسی",
 		sort_name = "Farsi",
 		font = "arabic"
 	},
 
 	fi = {
-		native_name = "Suomi",
-		localized_name = _"Finnish",
+		name = "Suomi",
 		sort_name = "Suomi",
 		font = "default"
 	},
 
 	fr = {
-		native_name = "Français",
-		localized_name = _"French",
+		name = "Français",
 		sort_name = "Francais",
 		font = "default"
 	},
 
 	gd = {
-		native_name = "Gàidhlig",
-		localized_name = _"Scottish Gaelic",
+		name = "Gàidhlig",
 		sort_name = "Gaidhlig",
 		font = "default"
 	},
 
 	gl = {
-		native_name = "Galego",
-		localized_name = _"Galician",
+		name = "Galego",
 		sort_name = "Galego",
 		font = "default"
 	},
 
 	he = {
-		native_name = "עברית",
-		localized_name = _"Hebrew",
+		name = "עברית",
 		sort_name = "Ivrit",
 		font = "hebrew"
 	},
@@ -177,247 +152,211 @@ return {
 	},
 
 	hr = {
-		native_name = "Hrvatski",
-		localized_name = _"Croatian",
+		name = "Hrvatski",
 		sort_name = "Hrvatski",
 		font = "default"
 	},
 
 	hu = {
-		native_name = "Magyar",
-		localized_name = _"Hungarian",
+		name = "Magyar",
 		sort_name = "Magyar",
 		font = "default"
 	},
 
 	ia = {
-		native_name = "Interlingua",
-		localized_name = _"Interlingua",
+		name = "Interlingua",
 		sort_name = "Interlingua",
 		font = "default"
 	},
 
 	id = {
-		native_name = "Bahasa Indonesia",
-		localized_name = _"Indonesian",
+		name = "Bahasa Indonesia",
 		sort_name = "Indonesia",
 		font = "default"
 	},
 
 	it = {
-		native_name = "Italiano",
-		localized_name = _"Italian",
+		name = "Italiano",
 		sort_name = "Italiano",
 		font = "default"
 	},
 
 	ja = {
-		native_name = "日本語",
-		localized_name = _"Japanese",
+		name = "日本語",
 		sort_name = "Nihongo",
 		font = "cjk"
 	},
 
 	jv = {
-		native_name = "Basa jawa",
-		localized_name = _"Javanese",
+		name = "Basa jawa",
 		sort_name = "Jawa",
 		font = "default"
 	},
 
 	ka = {
-		native_name = "ქართული",
-		localized_name = _"Georgian",
+		name = "ქართული",
 		sort_name = "Kartuli",
 		font = "default"
 	},
 
 	ko = {
-		native_name = "한국어",
-		localized_name = _"Korean",
+		name = "한국어",
 		sort_name = "Hangug-eo",
 		font = "cjk"
 	},
 
 	la = {
-		native_name = "Lingua latīna",
-		localized_name = _"Latin",
+		name = "Lingua latīna",
 		sort_name = "Latina",
 		font = "default"
 	},
 
 	lt = {
-		native_name = "Lietuvių",
-		localized_name = _"Lithuanian",
+		name = "Lietuvių",
 		sort_name = "Lietuviu",
 		font = "default"
 	},
 
 	mr = {
-		native_name = "मराठी",
-		localized_name = _"Marathi",
+		name = "मराठी",
 		sort_name = "Marathi",
 		font = "devanagari"
 	},
 
 	ms = {
-		native_name = "بهاس ملايو",
-		localized_name = _"Malay",
+		name = "بهاس ملايو",
 		sort_name = "Melayu",
 		font = "arabic"
 	},
 
 	my = {
-		native_name = "မြန်မာစ",
-		localized_name = _"Burmese",
+		name = "မြန်မာစ",
 		sort_name = "Myanma",
 		font = "myanmar"
 	},
 
 	nb = {
-		native_name = "Norsk (Bokmål)",
-		localized_name = _"Norwegian (Bokmål)",
+		name = "Norsk (Bokmål)",
 		sort_name = "Norsk (Bokmal)",
 		font = "default"
 	},
 
 	nds = {
-		native_name = "Plattdütsch",
-		localized_name = _"Low German",
+		name = "Plattdütsch",
 		sort_name = "Plattdutsch",
 		font = "default"
 	},
 
 	nl = {
-		native_name = "Nederlands",
-		localized_name = _"Dutch",
+		name = "Nederlands",
 		sort_name = "Nederlands",
 		font = "default"
 	},
 
 	nn = {
-		native_name = "Nynorsk",
-		localized_name = _"Norwegian (Nynorsk)",
+		name = "Nynorsk",
 		sort_name = "Nynorsk",
 		font = "default"
 	},
 
 	oc = {
-		native_name = "Occitan",
-		localized_name = _"Occitan",
+		name = "Occitan",
 		sort_name = "Occitan",
 		font = "default"
 	},
 
 	pl = {
-		native_name = "Polski",
-		localized_name = _"Polish",
+		name = "Polski",
 		sort_name = "Polski",
 		font = "default"
 	},
 
-	pt = {
-		native_name = "Português",
-		localized_name = _"Portuguese",
-		sort_name = "Portugues",
-		font = "default"
-	},
-
 	pt_BR = {
-		native_name = "Português do Brasil",
-		localized_name = _"Portuguese (Brasil)",
+		name = "Português do Brasil",
 		sort_name = "Portugues (Brasil)",
 		font = "default"
 	},
 
+	pt = {
+		name = "Português",
+		sort_name = "Portugues",
+		font = "default"
+	},
 
 	ro = {
-		native_name = "Română",
-		localized_name = _"Romanian",
+		name = "Română",
 		sort_name = "Romana",
 		font = "default"
 	},
 
 	ru = {
-		native_name = "Русский",
-		localized_name = _"Russian",
+		name = "Русский",
 		sort_name = "Russky",
 		font = "default"
 	},
 
 	rw = {
-		native_name = "Kinyarwanda",
-		localized_name = _"Kinyarwanda",
+		name = "Kinyarwanda",
 		sort_name = "Kinyarwanda",
 		font = "default"
 	},
 
 	si = {
-		native_name = "සිංහල",
-		localized_name = _"Sinhala",
+		name = "සිංහල",
 		sort_name = "Simhala",
 		font = "sinhala"
 	},
 
 	sk = {
-		native_name = "Slovenský jazyk",
-		localized_name = _"Slovak",
+		name = "Slovenský jazyk",
 		sort_name = "Slovensky",
 		font = "default"
 	},
 
 	sl = {
-		native_name = "Slovenski jezik",
-		localized_name = _"Slovenian",
+		name = "Slovenski jezik",
 		sort_name = "Slovenski",
 		font = "default"
 	},
 
 	sr = {
-		native_name = "Srpski",
-		localized_name = _"Serbian",
+		name = "Srpski",
 		sort_name = "Srpski",
 		font = "default"
 	},
 
 	sv = {
-		native_name = "Svenska",
-		localized_name = _"Swedish",
+		name = "Svenska",
 		sort_name = "Svenska",
 		font = "default"
 	},
 
 	tr = {
-		native_name = "Türkçe",
-		localized_name = _"Turkish",
+		name = "Türkçe",
 		sort_name = "Turkce",
 		font = "default"
 	},
 
 	uk = {
-		native_name = "українська мова",
-		localized_name = _"Ukrainian",
+		name = "українська мова",
 		sort_name = "Ukrayinska",
 		font = "default"
 	},
 
 	vi = {
-		native_name = "Tiếng Việt",
-		localized_name = _"Vietnamese",
+		name = "Tiếng Việt",
 		sort_name = "Viet",
 		font = "default"
 	},
 
 	zh_CN = {
-		native_name = "简体中文",
-		localized_name = _"Chinese (China)",
+		name = "简体中文",
 		sort_name = "Jianti Zhongwen",
 		font = "cjk"
 	},
 
 	zh_TW = {
-		native_name = "繁體中文",
-		localized_name = _"Chinese (Taiwan)",
+		name = "繁體中文",
 		sort_name = "Fanti Zhongwen",
 		font = "cjk"
 	}
