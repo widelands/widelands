@@ -898,8 +898,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 			TribeBasicInfo info = Widelands::Tribes::tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
-			// NOCOM(GunChleoc): Is this really necessary to use the packet stuff here?
-			// If not, we can just get it from tribes/preload.lua
 			LuaInterface lua;
 			info.initializations.clear();
 			for (uint8_t j = packet.unsigned_8(); j; --j) {

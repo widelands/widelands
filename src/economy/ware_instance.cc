@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -190,7 +191,9 @@ m_economy    (nullptr),
 m_descr_index(i),
 m_supply     (nullptr),
 m_transfer   (nullptr)
-{}
+{
+	log("NOCOM i = %d, wareinstance = %s\n", i, ware_descr->name().c_str());
+}
 
 WareInstance::~WareInstance()
 {

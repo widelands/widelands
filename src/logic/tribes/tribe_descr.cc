@@ -54,8 +54,11 @@ namespace Widelands {
 TribeDescr::TribeDescr
 	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& init_egbase)
 	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase) {
-	// NOCOM(GunChleoc): Ware types listed in headquarters depend on starting conditions.
-	// e.g. Barbarians have no wheat.
+	// NOCOM(GunChleoc): Some ware types listed in headquarters are gaping holes:
+	// - Barbarians: stout
+	// - Empire: wool, water, wood lance
+	// - Atlanteans: water, steel trident
+	// Automatic resizing of warehouse window for small screens is broken.
 	// Carrier walk_load animation is empty
 	// Trident of Fire MP scenario crashes on load.
 
