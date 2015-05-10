@@ -7,12 +7,13 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-28 21:23+0000\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-25 08:51+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +50,7 @@ msgstr "Dieses Land ist unser Land"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Dieses Tutorial erklärt die Handhabung von Militärgebäuden und Ausbildungsstätten und führt in die Kriegsführung ein."
+msgstr "Dieses Einführungsspiel erklärt die Handhabung von Militärgebäuden und Ausbildungsstätten und führt in die Kriegsführung ein."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
@@ -488,10 +489,10 @@ msgstr "Schmuggler"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Deine gut funktionierenden Schmuggelrouten sind plötzlich gestört: Zwei weitere Stämme sind aufgetaucht und machen dir deine Position streitig: Welches Team wird zuerst eine bestimmte Anzahl an Waren schmuggeln können?"
+msgstr "Deine gut funktionierenden Schmuggelrouten sind plötzlich gestört: Zwei weitere Stämme sind aufgetaucht und machen dir die Macht streitig. Welches Team wird zuerst eine bestimmte Anzahl an Waren schmuggeln können?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -631,7 +632,7 @@ msgstr "Die Schneeschmelze"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "

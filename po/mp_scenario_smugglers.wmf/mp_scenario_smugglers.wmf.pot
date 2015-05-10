@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"POT-Creation-Date: 2015-05-02 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -22,13 +22,13 @@ msgid ""
 "Game Status"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:118
 msgid ""
 "Wares Smuggled"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:141
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:55
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:90
@@ -39,7 +39,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid ""
 "Rules"

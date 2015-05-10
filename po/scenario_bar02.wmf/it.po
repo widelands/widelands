@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-27 12:50+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-13 14:34+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgstr "Migliora la tua officina in una fabbrica d'asce per produrre armi e cost
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Costruisci una fucina di elmi ad est delle montagne per fornire ai tuoi soldati delle armature migliori."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91

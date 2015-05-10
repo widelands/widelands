@@ -55,7 +55,7 @@ protected:
 	void draw(RenderTarget &) override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
-	bool handle_textinput(const std::string& text);
+	bool handle_textinput(const std::string& text) override;
 
 private:
 	void scrollpos_changed(int32_t);

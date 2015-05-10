@@ -688,6 +688,7 @@ public:
 	 * Properties
 	 */
 	int get_portdock(lua_State* L);
+	int get_expedition_in_progress(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -698,6 +699,8 @@ public:
 	int set_workers(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
+	int start_expedition(lua_State*);
+	int cancel_expedition(lua_State*);
 
 	/*
 	 * C Methods
@@ -806,6 +809,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_field(lua_State *);
 	int has_caps(lua_State *);
 
 	/*
@@ -885,12 +889,17 @@ public:
 	int get_debug_economy(lua_State * L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
-
+	int get_state(lua_State* L);
+	int get_scouting_direction(lua_State* L);
+	int set_scouting_direction(lua_State* L);
+	int get_island_explore_direction(lua_State* L);
+	int set_island_explore_direction(lua_State* L);
 	/*
 	 * Lua methods
 	 */
 	int get_wares(lua_State* L);
 	int get_workers(lua_State* L);
+	int build_colonization_port(lua_State* L);
 
 	/*
 	 * C methods

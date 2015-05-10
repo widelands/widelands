@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-22 08:29+0000\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-06 16:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -564,8 +564,8 @@ msgid "Licensing information for Widelands"
 msgstr "Fiosrachadh ceadachais airson Widelands"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr "Còir-lethbhreac 2002 - 2014 leis an sgioba leasachaidh Widelands."
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr ""
 
 #: ../../txts/license:9
 msgid ""

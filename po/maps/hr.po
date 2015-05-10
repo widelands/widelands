@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Ivan Bižaca <biza@malilosinj.info>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-07 19:01+0000\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,45 +20,45 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Iz propasti do nastanka"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Nakon pristajanja na mistični otok u blizini Atlantide, ostatak Atlantiđana se muči stvoriniti novi dom."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Mjesto koje želimo zvati dom"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "U ovom scenariju upoznajemo napredne proizvodne građevine i rudarenje."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Ova zemlja je naša zemlja"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Ovaj vodič objašnjava rukovanje vojnicima i treniranje vojske. Također, uvodi i borbu. "
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Novo carstvo"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Lagano. Upoznavanje s Barbarima"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -78,15 +79,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Mjeseci progonstva"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Carstvo"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Lagano. Upoznavanje s Carstvom"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -104,15 +105,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Trka za vatru"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiđani"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Teško. Upoznavanje s Atlantiđanima"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -138,11 +139,11 @@ msgstr "Nije još implementirano"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Nitko"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Oprostite, ovaj zemljovid još nije implementiran."
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -164,40 +165,40 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Osnove upravljanja"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "Ovaj vodič će Vam pokazati osnove Widelandsa i kako da sagradite građevine i ceste."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Ratovanje"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "U ovom vodiču ćete naučiti tajne ratovanja: kako napraviti vojnike, kako ih trenirati i povesti u bitku."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Pomorstvo"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "U ovom vodiču ćete upoznati pomorstvo i naučiti kako upravljati brodovima i lukama."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomija"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -211,7 +212,7 @@ msgstr "Atol"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Tko će biti pravi kralj velikog atola?"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -484,8 +485,8 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"have appeared and now a rivalry among smugglers has started: Which team will"
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
 msgstr ""
 
@@ -627,7 +628,7 @@ msgstr "Otapanje"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
+"Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "

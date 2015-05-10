@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-06 10:53+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 23:31+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr "Ваша казарма обнаружена врагом."
+msgstr "В окрестностях вашей казармы обнаружено вторжение."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
@@ -31,12 +31,12 @@ msgstr "Враг нанес поражение защитникам вашей �
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr "Гарнизон казармы отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у казармы."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 msgid "Your barrier discovered an aggressor."
-msgstr "Ваш форпост обнаружен врагом."
+msgstr "В окрестностях вашего форпоста обнаружено вторжение."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
@@ -51,13 +51,13 @@ msgstr "Враг нанес поражение защитникам вашего
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Гарнизон форпоста отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у форпоста."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your castle discovered an aggressor."
-msgstr "Ваш замок обнаружен врагом."
+msgstr "В окрестностях вашего замка обнаружено вторжение."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
@@ -75,11 +75,11 @@ msgstr "Враг нанес поражение защитникам вашего
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Гарнизон замка отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у замка."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your citadel discovered an aggressor."
-msgstr "Ваша цитадель обнаружена врагом."
+msgstr "В окрестностях вашей цитадели обнаружено вторжение."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your citadel is under attack."
@@ -91,11 +91,11 @@ msgstr "Враг нанес поражение защитникам вашей �
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Гарнизон цитадели отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у цитадели."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your donjon discovered an aggressor."
-msgstr "Ваш донжон обнаружен врагом."
+msgstr "В окрестностях вашего донжона обнаружено вторжение."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your donjon is under attack."
@@ -107,12 +107,12 @@ msgstr "Враг нанес поражение защитникам вашего
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr "Гарнизон донжона отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у донжона."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr "Ваша крепость обнаружена врагом."
+msgstr "В окрестностях вашей крепости обнаружено вторжение."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
@@ -127,12 +127,12 @@ msgstr "Враг нанес поражение защитникам вашей �
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Гарнизон крепости отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у крепости."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
 msgid "Your guardhall discovered an aggressor."
-msgstr "Ваш форт обнаружен врагом."
+msgstr "В окрестностях вашего форта обнаружено вторжение."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
@@ -147,12 +147,12 @@ msgstr "Враг нанес поражение защитникам вашего
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "Гарнизон форта отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у форта."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
 msgid "Your guardhouse discovered an aggressor."
-msgstr "Ваша караульная обнаружена врагом."
+msgstr "В окрестностях вашей караульной обнаружено вторжение."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
@@ -167,12 +167,12 @@ msgstr "Враг нанес поражение защитникам вашей �
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr "Гарнизон караульной отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у караульной."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your high tower discovered an aggressor."
-msgstr "Ваша дозорная башня обнаружена врагом."
+msgstr "В окрестностях вашей дозорной башни обнаружено вторжение."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
@@ -191,7 +191,7 @@ msgstr "Гарнизон дозорной башни отбил атаку пр�
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr "Ваша застава обнаружена врагом."
+msgstr "В окрестностях вашей заставы обнаружено вторжение."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
@@ -208,7 +208,7 @@ msgstr "Гарнизон заставы отбил атаку противник
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your sentry discovered an aggressor."
-msgstr "Ваша караульная обнаружена врагом."
+msgstr "В окрестностях вашей караульной обнаружено вторжение."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
@@ -223,12 +223,12 @@ msgstr "Враг нанес поражение защитникам вашей �
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Гарнизон караульной отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у караульной."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your small tower discovered an aggressor."
-msgstr "Ваша малая башня обнаружена врагом."
+msgstr "В окрестностях вашей малой башни обнаружено вторжение."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
@@ -243,13 +243,13 @@ msgstr "Враг нанес поражение защитникам вашей �
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr "Гарнизон малой башни отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у малой башни."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr "Ваша башня обнаружена врагом."
+msgstr "В окрестностях вашей башни обнаружено вторжение."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
@@ -267,14 +267,14 @@ msgstr "Враг нанес поражение защитникам вашей �
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Гарнизон башни отбил атаку противника."
+msgstr "Ваши солдаты разбили врага у башни."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from Defense level 1 to level 2."
-msgstr "Этими улучшенными щитами пользуются достойнейшие из воинов атлантов. Они изготавливаются в бронной. В лабиринте эти щиты – а также еда – используются для повышения навыка защиты солдат с 1-го уровня до 2-го."
+msgstr "Этими улучшенными щитами пользуются достойнейшие из воинов атлантов. Они изготавливаются в бронной. В лабиринте солдаты увеличивают свой навык защиты с 1 до 2 при помощи этих щитов и еды."
 
 #: ../../tribes/atlanteans/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -282,11 +282,11 @@ msgstr "Производит доспехи для солдат."
 
 #: ../../tribes/atlanteans/armorsmithy/conf:29
 msgid "forging a steel shield"
-msgstr ""
+msgstr "куёт стальной щит"
 
 #: ../../tribes/atlanteans/armorsmithy/conf:31
 msgid "forging an advanced shield"
-msgstr ""
+msgstr "куёт улучшенный щит"
 
 #: ../../tribes/atlanteans/armorsmithy/conf:33
 #: ../../tribes/atlanteans/bakery/conf:27
@@ -295,7 +295,7 @@ msgstr ""
 #: ../../tribes/atlanteans/farm/conf:30
 #: ../../tribes/atlanteans/fish_breeders_house/conf:21
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
-#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:22
 #: ../../tribes/atlanteans/sawmill/conf:24
 #: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
@@ -348,7 +348,7 @@ msgstr "работает"
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Необходим источник"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:13
 #: ../../tribes/atlanteans/armorsmithy/help.lua:17
@@ -405,7 +405,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Text needed"
-msgstr ""
+msgstr "Необходим текст"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:29
 #: ../../tribes/atlanteans/bakery/help.lua:30
@@ -439,7 +439,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/help.lua:30
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:29
 msgid "Calculation needed"
-msgstr ""
+msgstr "Необходим расчет"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
@@ -450,34 +450,34 @@ msgid ""
 "Blackroots are a special kind of root produced in blackroot farms and "
 "processed in mills. The Atlanteans like their strong taste and use their "
 "flour for making bread."
-msgstr "Козелец – особый вид растений, выращиваемый на козельцовых фермах, корни которого идут на производство муки. Атланты обожают его острый вкус и используют козельцовую муку в хлебопечении."
+msgstr "Козелец — особый вид растений, выращиваемый на козельцовых фермах, корни которого идут на производство муки. Атланты обожают его острый вкус и используют козельцовую муку в хлебопечении."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "planting blackroot"
-msgstr ""
+msgstr "Сажает козелец"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:25
 msgid "harvesting blackroot"
-msgstr ""
+msgstr "Убирает козелец"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:43
 #: ../../tribes/atlanteans/farm/conf:47
 msgid "Out of Fields"
-msgstr ""
+msgstr "Нет полей"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
 "The farmer working at this blackroot farm has no cleared soil to plant his "
 "seeds."
-msgstr ""
+msgstr "У фермера с этой козельцовой фермы нет почвы пригодной для посева."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
-msgstr ""
+msgstr "Сеет и убирает козелец."
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr "Сажает козелец и собирает его урожай."
+msgstr "сажает и убирает козелец"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -490,21 +490,21 @@ msgid ""
 "This tasty bread is made in bakeries out of cornflour, blackroot flour and "
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Этот вкусный хлеб выпекается в пекарне из муки, козельцовой муки и воды. Хлеб расценивается как основной продукт питания для шахтеров, разведчиков и солдат в тренировочных лагерях (лабиринт и подземелье)."
+msgstr "Этот вкусный хлеб выпекается в пекарне из муки, козельцовой муки и воды. Хлеб расценивается как основной продукт питания для шахтеров, разведчиков и солдат в тренировочных центрах (лабиринт и темница)."
 
 #: ../../tribes/atlanteans/bread_paddle/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr "Лопата для выпечки - это инструмент, который нужен каждому пекарю. Её изготавливают в мастерской."
+msgstr "Лопата для выпечки — это орудие пекаря, у каждого пекаря должна быть такая. Её изготавливают в мастерской."
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr "Большие вёдря для рыбовода. Изготавливаются в мастерской."
+msgstr "Большие вёдра для рыбовода. Изготавливаются в мастерской."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr "Работает на стройке, возводя новые здания."
+msgstr "Работает на строительных площадках, возводя новые здания."
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -512,7 +512,7 @@ msgstr "Переносит грузы по Вашим дорогам."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Ваши солдаты заняли замок."
 
 #: ../../tribes/atlanteans/castle/help.lua:16
 #: ../../tribes/atlanteans/guardhall/help.lua:16
@@ -521,7 +521,7 @@ msgstr ""
 #: ../../tribes/atlanteans/small_tower/help.lua:16
 #: ../../tribes/atlanteans/tower/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Используйте солдат, для того чтобы расширить вашу территорию."
 
 #: ../../tribes/atlanteans/castle/help.lua:17
 #: ../../tribes/atlanteans/guardhall/help.lua:17
@@ -533,7 +533,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Если у вас не достаточно солдат для контроля военных зданий, используйте стрелку, направленную вниз, чтобы уменьшить численность солдат в гарнизоне. Кроме того, можно просто выгнать солдата щелчком мыши."
 
 #: ../../tribes/atlanteans/charcoal_burner/conf:1
 msgid "Burns coal."
@@ -544,28 +544,28 @@ msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal. This coal is mined in coal mines or produced out of logs "
 "by a charcoal kiln."
-msgstr ""
+msgstr "Для поддержания огня в литейной, бронной и оружейной атланты используют уголь. Этот уголь добывают в угольных шахтах, или выжигают из бревен в плечи углежога."
 
 #: ../../tribes/atlanteans/coalmine/conf:27
 #: ../../tribes/atlanteans/crystalmine/conf:35
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
-msgstr ""
+msgstr "добывает"
 
 #: ../../tribes/atlanteans/coalmine/conf:44
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Главная угольная жила истощена"
 
 #: ../../tribes/atlanteans/coalmine/conf:45
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить эту шахту, или разобрать её."
 
 #: ../../tribes/atlanteans/coalmine/help.lua:17
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает уголь из-под земли, в горной местности."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -647,27 +647,27 @@ msgstr "Указатель ресурса: Золото (много)"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Granite (little)"
-msgstr "Указатель ресурса: Гранит (мало)"
+msgstr "Указатель ресурса: Строительный камень (мало)"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: Granite (much)"
-msgstr "Указатель ресурса: Гранит (много)"
+msgstr "Указатель ресурса: Строительный камень (много)"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Iron (little)"
-msgstr "Маркер ресурсов: Железо (мало)"
+msgstr "Указатель ресурса: Железо (мало)"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator: Iron (much)"
-msgstr "Маркер ресурсов: Железо (много)"
+msgstr "Указатель ресурса: Железо (много)"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator: No resource"
-msgstr "Маркер ресурсов: Пусто"
+msgstr "Указатель ресурса: Пусто"
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator: Water"
-msgstr "Маркер ресурсов: Вода"
+msgstr "Указатель ресурса: Вода"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Ship Construction Site"
@@ -719,7 +719,7 @@ msgstr "Двойной трезубец"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Fire Tongs"
-msgstr "Щипцы"
+msgstr "Клещи"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Fishing Net"
@@ -743,7 +743,7 @@ msgstr "Золото"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Gold Yarn"
-msgstr "Золотая нить"
+msgstr "Золотая пряжа"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hammer"
@@ -759,7 +759,7 @@ msgstr "Багор"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Hunting Bow"
-msgstr "Лук охотника"
+msgstr "Охотничий лук"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Iron Ore"
@@ -835,7 +835,7 @@ msgstr "Стальной трезубец"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Stone"
-msgstr "Камень"
+msgstr "Строительный камень"
 
 #: ../../tribes/atlanteans/conf:102
 msgid "Tabard"
@@ -879,7 +879,7 @@ msgstr "Строитель"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Углежог"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Shipwright"
@@ -935,7 +935,7 @@ msgstr "Пауковод"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Stonecutter"
-msgstr "Камнетёс"
+msgstr "Каменотёс"
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Toolsmith"
@@ -967,7 +967,7 @@ msgstr "Коневод"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Ship"
-msgstr "Корабль"
+msgstr "Судно"
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Construction Site"
@@ -1040,7 +1040,7 @@ msgstr "Домик лесника"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Gold Spinning Mill"
-msgstr ""
+msgstr "Прядильная фабрика"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Fisher’s House"
@@ -1084,7 +1084,7 @@ msgstr "Пекарня"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Печь углежога"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Smelting Works"
@@ -1112,7 +1112,7 @@ msgstr "Паучья ферма"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Ткацкая фабрика"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Farm"
@@ -1124,7 +1124,7 @@ msgstr "Козельцовая ферма"
 
 #: ../../tribes/atlanteans/conf:194
 msgid "Crystal Mine"
-msgstr "Алмазная шахта"
+msgstr "Кристальная шахта"
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Coal Mine"
@@ -1156,7 +1156,7 @@ msgstr "Малая башня"
 
 #: ../../tribes/atlanteans/conf:210
 msgid "Dungeon"
-msgstr "Подземелье"
+msgstr "Темница"
 
 #: ../../tribes/atlanteans/conf:211
 msgid "Labyrinth"
@@ -1177,29 +1177,29 @@ msgstr "Кукурузнная мука производится на мельн
 
 #: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "mining stone"
-msgstr ""
+msgstr "добывает строительный камень"
 
 #: ../../tribes/atlanteans/crystalmine/conf:31
 msgid "mining quartz"
-msgstr ""
+msgstr "добывает кварц"
 
 #: ../../tribes/atlanteans/crystalmine/conf:33
 msgid "mining diamonds"
-msgstr ""
+msgstr "добывает алмазы"
 
 #: ../../tribes/atlanteans/crystalmine/conf:89
 msgid "Main Crystal Vein Exhausted"
-msgstr ""
+msgstr "Главная кристальная жила истощена"
 
 #: ../../tribes/atlanteans/crystalmine/conf:90
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Главная жила этой кристальной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить эту шахту, или разобрать её."
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Добывает драгоценные камни из горных месторождений."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1212,7 +1212,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "Двойной трезубец - одно из лучших оружий атлантийцев. Прозводится в оружейной. В подземелье солдаты увеличивают свою силу с 2 до 3 при помощи этого трезубца и еды."
+msgstr "Двойной трезубец — один из лучших видов оружия атлантов. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 2 до 3 при помощи этого трезубца и еды."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid "Sleep"
@@ -1236,28 +1236,28 @@ msgstr "Увеличить силу солдата с 3 до 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
-msgstr ""
+msgstr "Улучшает силу солдат."
 
 #: ../../tribes/atlanteans/dungeon/help.lua:28
 msgid "Attack Training:"
-msgstr ""
+msgstr "Тренировка Силы:"
 
 #: ../../tribes/atlanteans/farm/conf:26
 msgid "planting corn"
-msgstr ""
+msgstr "сажает кукурузу"
 
 #: ../../tribes/atlanteans/farm/conf:28
 msgid "harvesting corn"
-msgstr ""
+msgstr "Убирает кукурузу"
 
 #: ../../tribes/atlanteans/farm/conf:48
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "У фермера с этой фермы нет почвы пригодной для посева."
 
 #: ../../tribes/atlanteans/farm/help.lua:17
 msgid "Sow and harvest corn."
-msgstr ""
+msgstr "Сеет и убирает кукурузу."
 
 #: ../../tribes/atlanteans/farmer/conf:1
 msgid "Plants fields."
@@ -1267,14 +1267,14 @@ msgstr "Засевает поля."
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
-msgstr "Щипцы - инструмент литейщика, который работает в литейной. Они производятся в мастерской."
+msgstr "Клещи — инструмент литейщика, который работает в литейной. Они производятся в мастерской."
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Рыба является одним из главных источников пищи для атлантов. Прежде чем доставлять её в шахты, тренировочные лагеря и разведчикам, её следует закоптить."
+msgstr "Рыба является одним из главных источников пищи для атлантов. Прежде чем доставлять её в шахты, тренировочные центры и разведчикам, её следует закоптить."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1286,32 +1286,32 @@ msgstr "Рыболов ловит вкусную рыбу."
 
 #: ../../tribes/atlanteans/fishers_house/conf:20
 msgid "fishing"
-msgstr ""
+msgstr "рыбалка"
 
 #: ../../tribes/atlanteans/fishers_house/conf:27
 msgid "Out of Fish"
-msgstr ""
+msgstr "нет больше рыбы"
 
 #: ../../tribes/atlanteans/fishers_house/conf:28
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "working radius. Remember that you can increase the number of existing fish "
 "by building a fishbreeder’s house."
-msgstr ""
+msgstr "Рыболов не может найти рыбу в рабочей области вокруг этого домика рыболова. Не забывайте, что поголовье рыбы можно увеличить, если построить домик рыбовода."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
-msgstr ""
+msgstr "Ловит рыбу с берега недалеко от своего домика."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid ""
 "Build a fisher breeder’s house close to the fisher’s house to make sure that"
 " you don’t run out of fish."
-msgstr ""
+msgstr "Постройте домик рыбовода рядом с домиком рыбака, чтобы убедиться, что он не выловит всю рыбу"
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid "The fisher’s house needs water full of fish within the working radius."
-msgstr ""
+msgstr "Строить домика рыболова надо с таким расчетом, чтобы в его рабочую область входил водоем, полный рыбы."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1323,17 +1323,17 @@ msgstr "Сажает деревья."
 
 #: ../../tribes/atlanteans/foresters_house/conf:22
 msgid "planting trees"
-msgstr ""
+msgstr "Сажает деревья."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:17
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Сажает деревья в ближайших окрестностях."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
-msgstr ""
+msgstr "Строить домика лесника надо с таким расчетом, чтобы в его рабочую область входило свободное пространство, пригодное для выращивания деревьев."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1341,35 +1341,35 @@ msgstr "Находит месторождения полезных ископа�
 
 #: ../../tribes/atlanteans/gold-spinning-mill/help.lua:17
 msgid "Spins goldyarn out of gold."
-msgstr ""
+msgstr "Прядёт золотую пряжу из золота."
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
 "Gold is one of the most valuable materials. It is produced out of gold ore "
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the gold spinning mill."
-msgstr ""
+msgstr "Золото — один из самых ценных материалов. Его получают из золотой руды в литейной. В золоте нуждается бронная, оружейная и прядильная фабрика."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr ""
+msgstr "Золотые накидки производятся на ткацких фабрик атлантов из золотой пряжи. В лабиринте солдаты увеличивают свое здоровье с 0 до 1 при помощи этих накидок и еды."
 
 #: ../../tribes/atlanteans/goldmine/conf:44
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Главная золотая жила истощена"
 
 #: ../../tribes/atlanteans/goldmine/conf:45
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить эту шахту, или разобрать её."
 
 #: ../../tribes/atlanteans/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает золотую руду из-под земли, в горной местности."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1382,30 +1382,30 @@ msgstr "Золотая руда добывается в золотой шахт�
 msgid ""
 "This yarn, made of gold by the gold spinning mill, is used for weaving the "
 "exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Эта пряжа, изготовленная из золота на прядильной фабрике, поступает на ткацкую фабрику, где из неё ткут изысканные золотые накидки."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Ваши солдаты заняли ваш форт."
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Ваши солдаты заняли вашу караульную."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr "Молоток - важный инструмен. Он нужен и геологу, и строителю, и оружейнику, и броннику. Вам всегда следует держать немного про запас! Производится в кузнице."
+msgstr "Молоток — важный инструмент. Он нужен и геологу, и строителю, и оружейнику, и броннику. Вам всегда следует держать немного про запас! Производится в кузнице."
 
 #: ../../tribes/atlanteans/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
-msgstr ""
+msgstr "Жилье для ваших людей. Также хранит ваши товары и инструменты."
 
 #: ../../tribes/atlanteans/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Штаб — это ваше главное здание."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1413,11 +1413,11 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr "Это самое мощное оружие войск атлантийцев. Только лучшие из лучших способны совладать с ним. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 3 до 4 с помощью этого трезубца и еды."
+msgstr "Это самое мощное оружие воинов атлантов. Только лучшие из лучших способны совладать с ним. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 3 до 4 с помощью этого трезубца и еды."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Ваши солдаты заняли вашу дозорную башню."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1429,50 +1429,50 @@ msgstr "Багор нужен коптильщику, чтобы подвеши�
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse "
 "farm."
-msgstr ""
+msgstr "Лошади помогают перетаскивать вещи по загруженным дорогам. Их разводят на конном заводе."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr "Разводит сильных лошадей атлантийцев."
+msgstr "Разводит сильных лошадей атлантов."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
-msgstr ""
+msgstr "выращивает лошадей"
 
 #: ../../tribes/atlanteans/horsefarm/help.lua:17
 msgid "Breeds horses for adding them to the transportation system."
-msgstr ""
+msgstr "Выращивает лошадей для усовершенствования транспортной системы."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr "Охотник добывает атлантийцам свежее мясо."
+msgstr "Охотник добывает атлантам свежее мясо."
 
 #: ../../tribes/atlanteans/hunters_house/conf:20
 msgid "hunting"
-msgstr ""
+msgstr "охотится"
 
 #: ../../tribes/atlanteans/hunters_house/conf:28
 msgid "Out of Game"
-msgstr ""
+msgstr "Нет дичи"
 
 #: ../../tribes/atlanteans/hunters_house/conf:29
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
-msgstr ""
+msgstr "Охотник не может найти дичь в рабочей области вокруг своего домика охотника."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Охотится на зверей, с целью получения мяса."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the working radius."
-msgstr ""
+msgstr "Для охоты нужно чтобы в рабочей области вокруг домика охотника обитали животные."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr "Этот лук используется охотниками атлантийцев. Он производится в мастерской."
+msgstr "Этот лук используется охотниками атлантов. Он производится в мастерской."
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid ""
@@ -1482,17 +1482,17 @@ msgstr "Железо выплавляют из руды в литейной. О�
 
 #: ../../tribes/atlanteans/ironmine/conf:44
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Главная железорудная жила истощена"
 
 #: ../../tribes/atlanteans/ironmine/conf:45
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Главная жила этого рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Быть может, вам стоит разрушить этот рудник, или разобрать его."
 
 #: ../../tribes/atlanteans/ironmine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает железную руду из-под земли, в горной местности."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
@@ -1502,71 +1502,71 @@ msgstr "Железная руда добывается в рудниках. Из
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "sleeping"
-msgstr ""
+msgstr "спит"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Повышение защиты солдата с 0 до 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Повышение защиты солдата с 1до 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Повышение здоровья солдата с 0 до 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:54
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Повышение ловкости солдата с 0 до 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:56
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Повышение ловкости солдата с 1 до 2"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:19
 msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-msgstr ""
+msgstr "Тренирует Защиту, Ловкость и Здоровье солдат."
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:28
 msgid "Defense Training:"
-msgstr ""
+msgstr "Тренировка Защиты:"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:33
 msgid "Evade Training:"
-msgstr ""
+msgstr "Тренировка ловкости:"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:36
 msgid "Health Training:"
-msgstr ""
+msgstr "Тренировка здоровья:"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "Базовое оружие солдат атлантийцев. Наряду с накидкой является базовым снаряжением новобранцев. Лёгкие трезубцы, как и все прочие трезубцы, производятся в оружейной."
+msgstr "Базовое оружие солдат атлантов. Наряду с накидкой является базовым снаряжением новобранцев. Лёгкие трезубцы, как и все прочие трезубцы, производятся в оружейной."
 
 #: ../../tribes/atlanteans/log/conf:1
 msgid ""
 "Logs are the base for planks, which are used in nearly every building of the"
 " Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the "
 "smokery also need logs for their work."
-msgstr ""
+msgstr "Из бревен делают доски, которые нужны для строительства почти каждого здания атлантов. Кроме того, бревна нужны для бесперебойной работы лесопилки, мастерской, коптильни и печи углежога."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "Длинный трезубец - первое оружие, которым учатся владеть солдаты. Прозводится в оружейной. В подземелье солдаты увеличивают свою силу с 0 до 1 с помощью этого трезубца и еды."
+msgstr "Длинный трезубец — первое оружие, которым учатся владеть солдаты. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 0 до 1 с помощью этого трезубца и еды."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
 "Meat is one food resource of the Atlanteans. It is obtained from wild game "
 "taken by the hunter and has to be smoked in a smokery before being delivered"
 " to mines and training sites (dungeon and labyrinth)."
-msgstr "Мясо - один из источников пищи атлантийцев. Охотники добывают мясо, охотясь на диких животных, после чего его коптят и доставляют в шахты, подземелья и лабиринты."
+msgstr "Мясо — один из источников пищи атлантов. Охотники добывают мясо, охотясь на диких животных, после чего его коптят в коптильне и доставляют в шахты и тренировочные центры (темницы и лабиринты)."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
@@ -1576,11 +1576,11 @@ msgstr "Доильные щипцы нужны пауководу для дой�
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "grinding corn"
-msgstr ""
+msgstr "размалывает кукурузу"
 
 #: ../../tribes/atlanteans/mill/conf:29
 msgid "grinding blackroot"
-msgstr ""
+msgstr "размалывает козелец"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
@@ -1596,38 +1596,42 @@ msgstr "Работает глубоко в шахтах, добывая угол
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr "Кирки используются камнетёсами и шахтёрами. Изготавливаются в мастерской."
+msgstr "Кирки используются каменотёсами и шахтёрами. Изготавливаются в мастерской."
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
 "Planks are an important building material of the Atlanteans. They are "
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also"
 " use planks to produce the different tridents and mighty ships."
-msgstr "Доски - важный стройматериал для атлантийцев. Лесопилка делает их из брёвен. Используется для производства всяческого оружия и могучих кораблей."
+msgstr "Доски — важный стройматериал для атлантов. Лесопилка делает их из брёвен. Оружейная и верфь используют доски для производства всяческих трезубцев и могучих судов."
 
-#: ../../tribes/atlanteans/quarry/conf:27
+#: ../../tribes/atlanteans/quarry/conf:20
+msgid "quarrying stone"
+msgstr "добывает камень"
+
+#: ../../tribes/atlanteans/quarry/conf:33
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Нет больше камня"
 
-#: ../../tribes/atlanteans/quarry/conf:28
+#: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his working "
 "radius."
-msgstr ""
+msgstr "Каменотес из этой каменоломни больше не может найти месторождений камня в своей рабочей области."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
-msgstr ""
+msgstr "Добывает строительный камень из скальных месторождений."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
+msgstr "Для работы каменоломни в рабочей области должны быть камни."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
-msgstr "Эти прозрачные кристаллы кварца используются при строительстве особых зданий. Они добываются в алмазной шахте."
+msgstr "Эти прозрачные кристаллы кварца используются при строительстве особых зданий. Они добываются в кристальной шахте."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1642,15 +1646,15 @@ msgstr "Пилит брёвна на доски."
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "Разведчики, такие как разведчик Скотти, разведывательно разведывают неразведанные земли."
+msgstr "Разведчики, такие как первопроходец Ерофей Павлович Хабаров, разведывательно разведывают неразведанные земли."
 
 #: ../../tribes/atlanteans/scouts_house/conf:21
 msgid "scouting"
-msgstr ""
+msgstr "разведывает"
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Укрепленная деревня"
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:101
 msgid "Not enough space"
@@ -1661,16 +1665,16 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "Не хватило места для постройки некоторых ваших стартовых сданий. Вы находитесь в невыгодном положении; можете начать карту заново, чтобы стартовать на более равных условиях."
+msgstr "Не хватило места для постройки некоторых ваших стартовых зданий. Вы находитесь в невыгодном положении; можете начать карту заново, чтобы стартовать на более справедливых условиях."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Коса - инструмент фермеров. Изготавливается в мастерской."
+msgstr "Коса — инструмент фермеров. Изготавливается в мастерской."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr "Годный для плавания корабль"
+msgstr "Морское судно"
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
@@ -1678,7 +1682,7 @@ msgstr "Работает на верфи и строит новые суда."
 
 #: ../../tribes/atlanteans/shipyard/conf:29
 msgid "constructing a ship"
-msgstr ""
+msgstr "Строим судно"
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
@@ -1689,7 +1693,7 @@ msgstr "Лопаты нужны для правильного окучивани
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Ваши солдаты заняли вашу малую башню."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1697,15 +1701,15 @@ msgstr "Выплавляет железо."
 
 #: ../../tribes/atlanteans/smelting_works/conf:27
 msgid "smelting iron"
-msgstr ""
+msgstr "выплавляет железо"
 
 #: ../../tribes/atlanteans/smelting_works/conf:29
 msgid "smelting gold"
-msgstr ""
+msgstr "выплавляет золото"
 
 #: ../../tribes/atlanteans/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr ""
+msgstr "Выплавляет железо из железной руды и золото из золотой."
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -1718,7 +1722,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Копчёное мясо изготавливается в коптильнях из мяса. Оно доставляется в шахты и тренировочные лагеря (лабиринт и подземелье), где шахтеры и солдаты готовят себе из него сытный обед."
+msgstr "Копчёное мясо изготавливается в коптильнях из мяса. Оно доставляется в шахты и тренировочные центры (лабиринт и темницу), где шахтеры и солдаты готовят себе из него сытный обед."
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
@@ -1726,15 +1730,15 @@ msgstr "Коптит мясо и рыбу."
 
 #: ../../tribes/atlanteans/smokery/conf:28
 msgid "smoking meat"
-msgstr ""
+msgstr "коптит мясо"
 
 #: ../../tribes/atlanteans/smokery/conf:30
 msgid "smoking fish"
-msgstr ""
+msgstr "коптит рыбу"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Защищать и завоёвывать!"
+msgstr "Защищать и покорять!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -1745,13 +1749,13 @@ msgid ""
 "Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "Шёлк делают на ткацкой фабрике из шелковой пряжи. Шелк используют в мастерской и на верфи. Кроме того, шёлк используется при строительстве некоторых зданий."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "Эту пряжу дают пауки, которых разводят на паучьих фермах. Затем из неё делают шёлк на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1764,23 +1768,23 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
-msgstr "Средний трезубец. Производится в оружейной и используется более опытными солдатами в темнице для увеличения силы с 1 до 2 (совместно с пищей.)"
+msgstr "Средний трезубец. Производится в оружейной. В темнице опытные солдаты увеличивают свою силу с 1 до 2 при помощи этого трезубца и еды."
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry"
 " or a crystal mine."
-msgstr "Камень - главный стройматериал атлантийцев. Его добывают в каменоломне и алмазной шахте."
+msgstr "Строительный камень — основной строительный материал атлантов. Его добывают в каменоломне и кристальной шахте."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr "Вырезает камень из валунов."
+msgstr "Высекает строительный камень из скал."
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr ""
+msgstr "Накидка и легкий трезубец — это основное снаряжение новобранцев. Накидки делают на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1788,51 +1792,51 @@ msgstr "Производит инструменты для рабочих."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "making a bread paddle"
-msgstr ""
+msgstr "делает лопату для выпечки"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "making a bucket"
-msgstr ""
+msgstr "делает ведро"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:45
 msgid "making a fishing net"
-msgstr ""
+msgstr "делает сеть"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:47
 msgid "making a hammer"
-msgstr ""
+msgstr "делает молоток"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:49
 msgid "making a hook pole"
-msgstr ""
+msgstr "делает багор"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:51
 msgid "making a bow"
-msgstr ""
+msgstr "делает лук"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:53
 msgid "making milking tongs"
-msgstr ""
+msgstr "делает доильные щипцы"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:55
 msgid "making a pick"
-msgstr ""
+msgstr "делает кирку"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:57
 msgid "making a saw"
-msgstr ""
+msgstr "делает пилу"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:59
 msgid "making a scythe"
-msgstr ""
+msgstr "делает косу"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:61
 msgid "making a shovel"
-msgstr ""
+msgstr "делает лопату"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Ваши солдаты заняли вашу башню."
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1840,13 +1844,13 @@ msgstr "Обучает солдат."
 
 #: ../../tribes/atlanteans/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
-msgstr ""
+msgstr "На складах хранят товары, инструменты и солдат."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
-msgstr "Вода - источник жизни! Используется в пекарне и на фермах."
+msgstr "Вода — источник жизни! Используется в пекарне и на фермах."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -1854,23 +1858,23 @@ msgstr "Производит оружие для солдат."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "forging a light trident"
-msgstr ""
+msgstr "куёт легкий трезубец"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:36
 msgid "forging a long trident"
-msgstr ""
+msgstr "кует длинный трезубец"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:38
 msgid "forging a steel trident"
-msgstr ""
+msgstr "кует стальной трезубец"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:40
 msgid "forging a double trident"
-msgstr ""
+msgstr "кует двойной трезубец"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:42
 msgid "forging a heavy double trident"
-msgstr ""
+msgstr "кует тяжёлый двойной трезубец"
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
@@ -1878,28 +1882,28 @@ msgstr "Производит шёлк для зданий, кораблей и �
 
 #: ../../tribes/atlanteans/weaving-mill/conf:29
 msgid "weaving spidercloth"
-msgstr ""
+msgstr "Ткет шёлк"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:31
 msgid "tailoring a tabard"
-msgstr ""
+msgstr "Шьёт накидку"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:33
 msgid "tailoring a golden tabard"
-msgstr ""
+msgstr "шьёт золотую накидку"
 
 #: ../../tribes/atlanteans/well/conf:32
 msgid "Out of Water"
-msgstr ""
+msgstr "Воды больше нет"
 
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
-msgstr ""
+msgstr "Носильщик, работающий на этом колодце, больше не может найти воду в своей рабочей области."
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Поднимает воду из глубин"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
@@ -1907,19 +1911,19 @@ msgstr "Валит деревья."
 
 #: ../../tribes/atlanteans/woodcutters_house/conf:28
 msgid "Out of Trees"
-msgstr ""
+msgstr "Больше нет деревьев"
 
 #: ../../tribes/atlanteans/woodcutters_house/conf:29
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his working radius. You should consider dismantling or destroying the "
 "building or building a forester’s house."
-msgstr ""
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого домика лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
-msgstr ""
+msgstr "Валит деревья поблизости и перерабатывает их в брёвна."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
 msgid "The woodcutter's house needs trees to fell within the working radius."
-msgstr ""
+msgstr "В рабочей области вокруг домика лесоруба должны быть деревья."

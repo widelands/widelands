@@ -76,7 +76,7 @@ public:
 
 	const std::string & filename() {return m_filename;}
 
-	void think();
+	void think() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 

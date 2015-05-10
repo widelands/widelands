@@ -874,7 +874,7 @@ void Game::send_player_enemyflagaction
 }
 
 
-void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
+void Game::send_player_ship_scouting_direction(Ship & ship, WalkingDir direction)
 {
 	send_player_command
 		(*new CmdShipScoutDirection
@@ -888,7 +888,7 @@ void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship & ship, ScoutingDirection direction)
+void Game::send_player_ship_explore_island(Ship & ship, IslandExploreDirection direction)
 {
 	send_player_command
 		(*new CmdShipExploreIsland
