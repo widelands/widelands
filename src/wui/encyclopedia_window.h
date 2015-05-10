@@ -22,6 +22,7 @@
 
 #include "logic/building.h"
 #include "logic/ware_descr.h"
+#include "logic/worker_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -31,9 +32,10 @@
 #include "ui_basic/window.h"
 
 namespace Widelands {
-struct WareDescr;
 struct BuildingDescr;
 class TribeDescr;
+struct WareDescr;
+class WorkerDescr;
 }
 
 class InteractivePlayer;
@@ -41,20 +43,6 @@ class InteractivePlayer;
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
 private:
-	struct Ware {
-		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
-			:
-			index_(i),
-			descr_(descr)
-			{}
-		Widelands::WareIndex index_;
-		const Widelands::WareDescr * descr_;
-
-		bool operator<(const Ware o) const {
-			return descr_->descname() < o.descr_->descname();
-		}
-	};
-
 	struct Building {
 		Building(Widelands::BuildingIndex i, const Widelands::BuildingDescr * descr)
 			:
@@ -69,8 +57,46 @@ private:
 		}
 	};
 
+	struct Ware {
+		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
+			:
+			index_(i),
+			descr_(descr)
+			{}
+		Widelands::WareIndex index_;
+		const Widelands::WareDescr * descr_;
+
+		bool operator<(const Ware o) const {
+			return descr_->descname() < o.descr_->descname();
+		}
+	};
+
+	struct Worker {
+		Worker(Widelands::WareIndex i, const Widelands::WorkerDescr * descr)
+			:
+			index_(i),
+			descr_(descr)
+			{}
+		Widelands::WareIndex index_;
+		const Widelands::WorkerDescr * descr_;
+
+		bool operator<(const Worker o) const {
+			return descr_->descname() < o.descr_->descname();
+		}
+	};
+
+
 	InteractivePlayer & iaplayer() const;
 	UI::TabPanel tabs_;
+
+	// Buildings
+	UI::Box buildings_tab_box_;  // Wrapper box so we can add some padding
+	UI::Box buildings_box_;      // Main contents box for Buildings tab
+	UI::Listselect<Widelands::BuildingIndex> buildings_;
+	UI::MultilineTextarea building_text_;
+	void fill_buildings();
+	void building_selected(uint32_t);
+
 	// Wares
 	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
 	UI::Box wares_box_;          // Main contents box for Wares tab
@@ -83,13 +109,14 @@ private:
 	void fill_wares();
 	void ware_selected(uint32_t);
 	void prod_site_selected(uint32_t);
-	// Buildings
-	UI::Box buildings_tab_box_;  // Wrapper box so we can add some padding
-	UI::Box buildings_box_;      // Main contents box for Buildings tab
-	UI::Listselect<Widelands::BuildingIndex> buildings_;
-	UI::MultilineTextarea building_text_;
-	void fill_buildings();
-	void building_selected(uint32_t);
+
+	// Workers
+	UI::Box workers_tab_box_;  // Wrapper box so we can add some padding
+	UI::Box workers_box_;      // Main contents box for Workers tab
+	UI::Listselect<Widelands::WareIndex> workers_;
+	UI::MultilineTextarea worker_text_;
+	void fill_workers();
+	void worker_selected(uint32_t);
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

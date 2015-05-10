@@ -1871,8 +1871,10 @@ const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildable),
 	PROP_RO(LuaWorkerDescription, buildcost),
+	PROP_RO(LuaWorkerDescription, helptext),
 	PROP_RO(LuaWorkerDescription, icon_name),
 	PROP_RO(LuaWorkerDescription, needed_experience),
+	PROP_RO(LuaWorkerDescription, tribename),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1944,6 +1946,16 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: helptext
+
+			(RO) the helptext for this worker.
+*/
+int LuaWorkerDescription::get_helptext(lua_State * L) {
+	lua_pushstring(L, get()->helptext());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: icon_name
@@ -1965,6 +1977,17 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_needed_experience());
 	return 1;
 }
+
+/* RST
+	.. attribute:: tribename
+
+			(RO) the name of the worker's tribe.
+*/
+int LuaWorkerDescription::get_tribename(lua_State * L) {
+	lua_pushstring(L, get()->tribe().name());
+	return 1;
+}
+
 
 
 /*
