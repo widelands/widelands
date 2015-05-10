@@ -65,10 +65,15 @@ void GamePlayerEconomiesPacket::read
 							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
-									assert(ship->get_economy());
-									EconomyDataPacket d(ship->get_economy());
-									d.read(fr);
-									read_this_economy = true;
+
+									// We are interested only in current player's ships
+									if (ship->get_owner() == player) {
+										assert(ship->get_economy());
+										EconomyDataPacket d(ship->get_economy());
+										d.read(fr);
+										read_this_economy = true;
+										break;
+									}
 								}
 								bob = bob->get_next_bob();
 							}
@@ -133,10 +138,10 @@ void GamePlayerEconomiesPacket::write
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.unsigned_32(0xffffffff); // Sentinel value.
 								fw.unsigned_32(field - &field_0);
-
 								EconomyDataPacket d(ship->get_economy());
 								d.write(fw);
 								wrote_this_economy = true;
+								break;
 							}
 						}
 						bob = bob->get_next_bob();

@@ -302,7 +302,6 @@ private:
 
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
-	uint16_t military_under_constr_;
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
