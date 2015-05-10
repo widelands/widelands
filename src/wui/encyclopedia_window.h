@@ -21,9 +21,11 @@
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
 #include "logic/ware_descr.h"
+#include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
 
@@ -40,23 +42,27 @@ private:
 	struct Ware {
 		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
 			:
-			m_i(i),
-			m_descr(descr)
+			index_(i),
+			descr_(descr)
 			{}
-		Widelands::WareIndex m_i;
-		const Widelands::WareDescr * m_descr;
+		Widelands::WareIndex index_;
+		const Widelands::WareDescr * descr_;
 
 		bool operator<(const Ware o) const {
-			return m_descr->descname() < o.m_descr->descname();
+			return descr_->descname() < o.descr_->descname();
 		}
 	};
 
 	InteractivePlayer & iaplayer() const;
-	UI::Listselect<Widelands::WareIndex> wares;
-	UI::Listselect<Widelands::BuildingIndex> prodSites;
-	UI::Table     <uintptr_t>                 condTable;
-	UI::MultilineTextarea    descrTxt;
-	Widelands::WareDescr const * selectedWare;
+	UI::TabPanel tabs_;
+	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
+	UI::Box wares_box_;          // Main contents box for Wares tab
+	UI::Box wares_details_box_;  // Horizontal alignment for prod_sites_ and cond_table_
+	UI::Listselect<Widelands::WareIndex> wares_;
+	UI::MultilineTextarea    descr_txt_;
+	UI::Listselect<Widelands::BuildingIndex> prod_sites_;
+	UI::Table     <uintptr_t>                 cond_table_;
+	Widelands::WareDescr const * selected_ware_;
 	void fill_wares();
 	void ware_selected(uint32_t);
 	void prod_site_selected(uint32_t);
