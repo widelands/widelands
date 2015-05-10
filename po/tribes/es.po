@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Kiba Gasteiz <kibafang@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-28 21:42+0000\n"
+"Last-Translator: Kiba Gasteiz <kibafang@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,15 +24,15 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:150
 msgid "Soldiers:"
-msgstr ""
+msgstr "Soldados:"
 
 #: ../../tribes/scripting/format_help.lua:181
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s o %2$s"
 
 #: ../../tribes/scripting/format_help.lua:188
 msgid "%s and"
-msgstr ""
+msgstr "%s y"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
@@ -62,7 +63,7 @@ msgstr ""
 #: ../../tribes/scripting/format_help.lua:277
 #: ../../tribes/scripting/format_help.lua:504
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #: ../../tribes/scripting/format_help.lua:281
 msgid "Working radius:"
@@ -86,11 +87,11 @@ msgstr ""
 #: ../../tribes/scripting/format_help.lua:292
 #: ../../tribes/scripting/format_help.lua:314
 msgid "Capacity:"
-msgstr ""
+msgstr "Capacidad:"
 
 #: ../../tribes/scripting/format_help.lua:296
 msgid "Training:"
-msgstr ""
+msgstr "Entrenamiento:"
 
 #: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #: numbers. ../../tribes/scripting/format_help.lua:299
@@ -102,23 +103,23 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:300
 msgid "Attack"
-msgstr ""
+msgstr "Ataque"
 
 #: ../../tribes/scripting/format_help.lua:304
 msgid "Defense"
-msgstr ""
+msgstr "Defensa"
 
 #: ../../tribes/scripting/format_help.lua:308
 msgid "Evade"
-msgstr ""
+msgstr "Evasión"
 
 #: ../../tribes/scripting/format_help.lua:312
 msgid "Health"
-msgstr ""
+msgstr "Salud"
 
 #: ../../tribes/scripting/format_help.lua:316
 msgid "Vision range:"
-msgstr ""
+msgstr "Rango de visión:"
 
 #: ../../tribes/scripting/format_help.lua:333
 msgid "Lore"
@@ -139,7 +140,7 @@ msgstr ""
 #: TRANSLATORS This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid "Mines:"
-msgstr ""
+msgstr "Minas:"
 
 #: ../../tribes/scripting/format_help.lua:404
 msgid "Produces:"
@@ -160,7 +161,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:481
 msgid "Building"
-msgstr ""
+msgstr "Edificio"
 
 #: ../../tribes/scripting/format_help.lua:485
 msgid "Mine plot"
@@ -210,7 +211,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:513
 msgid "Build cost:"
-msgstr ""
+msgstr "Coste de construcción:"
 
 #: ../../tribes/scripting/format_help.lua:525
 msgid "Or enhanced from:"
@@ -248,7 +249,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:665
 msgid "Workers"
-msgstr ""
+msgstr "Trabajadores"
 
 #: ../../tribes/scripting/format_help.lua:688
 msgid "%s or better"
@@ -256,7 +257,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:701
 msgid "Experience levels:"
-msgstr ""
+msgstr "Niveles de experiencia:"
 
 #: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/format_help.lua:711
@@ -275,4 +276,4 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:754
 msgid "Production"
-msgstr ""
+msgstr "Producción"

@@ -155,27 +155,22 @@ void draw_diagram
 	UNIT unit = get_suggested_unit(time_ms);
 	max_x = ms_to_unit(unit, time_ms);
 
-	// Find a nice division of max_x
-	if (max_x % 5 == 0) {
-		if (max_x <= 10) {
-			how_many_ticks = 5;
-		} else {
-			how_many_ticks = max_x / 5;
-			while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
-				how_many_ticks /= 2;
-			}
-			while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
-				how_many_ticks /= 3;
-			}
-			while (how_many_ticks > 7 && how_many_ticks % 5 == 0) {
-				how_many_ticks /= 5;
-			}
-			while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
-				how_many_ticks /= 7;
-			}
-		}
-	} else {
-		how_many_ticks = 4;
+	// Try to find a nice division of max_x (some number between 3 and 7 so data on graph are
+	// readable) - to get correct data on graph, how_many_ticks has to be a divisor of max_x. Now
+	// dividing by 5 is first and we get more readable intervals.
+	how_many_ticks = max_x;
+
+	while (how_many_ticks > 10 && how_many_ticks % 5 == 0) {
+		how_many_ticks /= 5;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
+		how_many_ticks /= 2;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
+		how_many_ticks /= 3;
+	}
+	while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
+		how_many_ticks /= 7;
 	}
 
 	// first, tile the background

@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
+# Matej Svrcek <mmatej@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-25 07:59+0000\n"
+"PO-Revision-Date: 2015-03-26 00:28+0000\n"
+"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +80,7 @@ msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
 "(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
 " armor smithy and smelting works)."
-msgstr ""
+msgstr "Postav kameníka a pak dokonči infrastrukturu pro těžbu a produkci (uhelný důl a/nebo milíř na uhlí, důl na železnou rudu, kováře, zbrojíře, platnéře a slévárnu)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -136,7 +137,7 @@ msgstr "Pro rozsáhlejší prozkoumání nepřátelského území postav věž."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Znič kmen Barbarů"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -146,14 +147,14 @@ msgstr "Znič barbarský kmen"
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Jen co budeš mít dostatek vojáků, zaútoč a znič stavby Barbarů"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr ""
+msgstr "Nakonec postav pevnost na poloostrově (nedaleko místa, kde stál hlavní stan Barbarů) aby si ostatním kmenům v oblasti se zde usadit."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -318,7 +319,7 @@ msgid ""
 "of iron ore. We should immediately start to build iron ore and coal mines "
 "(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
 " smithies."
-msgstr ""
+msgstr "Bohové, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a ta druhá pak železné rudy. Měli bychom bezodkladně zahájit stavbu dolů na uhlí a železnou rudu (nebo alespoň milířů), slévárny, kovárny, platnéřsví a zbrojařství."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
@@ -337,7 +338,7 @@ msgstr "Jídlo pro horníky"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Vchází Amalea..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid ""
@@ -357,7 +358,7 @@ msgstr "Vybudovat doly a začít těžit suroviny je chvályhodné a určitě je
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Co si myslíš o tom, že bychom jim pomohli? Ndokážu říci přesně, co všechno potřebujeme... ale tady jsou aspoň má doporučení:"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Our New Tavern"
@@ -395,7 +396,7 @@ msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr ""
+msgstr "Při mé dnešní procházece na východním pobřeží jsem zažil šok. Zahlédl jsem tam jeden z těch nenáviděných, zatracených, barbarských kmenů, se kterými jsme se už tolikrát potýkali."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
@@ -436,13 +437,13 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Na ostrově se ještě určitě nějací Barbaři ukrývají, ale určitě je brzy najdeme a zlikvidujeme. Každý Barbar, který na nás nezaúčtočí, bude poslán lodí spolu s ostatními mírumilovnými Barbary zpět do jejich země."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
-msgstr ""
+msgstr "Vystavěl si fungující hospodářství, vycvičil nové vojáky a vyhnal Barbary z ostrova."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238
 msgid "As Time is Running By"
@@ -450,7 +451,7 @@ msgstr "Jak plyne čas"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
-msgstr ""
+msgstr "O 7 dní později..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"
@@ -468,7 +469,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
+msgstr "Zpráva byla určena pro mně, prosila mě o návrat do Fremilu. Impérium je prý ve válce s Barbary. Byli napadeni ze severu kmenem, na který jsem nesměl zaútočit. Vím, co musím udělat..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:252
 msgid ""

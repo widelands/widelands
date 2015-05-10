@@ -35,7 +35,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
-		  m_butw, get_h() - vbox.get_y(), m_padding),
+		  m_butw, get_h() - m_box_y, m_padding),
 	metaserver
 		(&vbox, "metaserver", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Internet game"), "", true, false),

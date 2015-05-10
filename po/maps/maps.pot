@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"POT-Creation-Date: 2015-05-02 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -448,7 +448,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes have appeared and now a rivalry among smugglers has started: Which team will be the first to smuggle a certain number of wares?"
+"Your well established smuggling routes suddenly got busy: two other tribes have appeared and now a rivalry among smugglers has started. Which team will be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
@@ -568,7 +568,7 @@ msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
+"Another thaw set in. Three tribes were sheltering from severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
 msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7

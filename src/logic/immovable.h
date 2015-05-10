@@ -197,8 +197,6 @@ public:
 	bool construct_ware(Game & game, WareIndex index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
-	bool is_reserved_by_worker() const;
-	void set_reserved_by_worker(bool reserve);
 
 	void set_action_data(ImmovableActionData * data);
 	template<typename T>
@@ -248,14 +246,7 @@ protected:
 	 */
 	std::unique_ptr<ImmovableActionData> m_action_data;
 
-	/**
-	 * Immovables like trees are reserved by a worker that is walking
-	 * towards them, so that e.g. two lumberjacks don't attempt to
-	 * work on the same tree simultaneously.
-	 */
-	bool m_reserved_by_worker;
-
-	// Load/save support
+        // Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
 		void load(FileRead &, uint8_t version);

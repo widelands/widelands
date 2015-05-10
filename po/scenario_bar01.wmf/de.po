@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-24 14:40+0000\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-04 20:17+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -41,17 +41,17 @@ msgstr "Stoße nach Nordosten vor und baue einen Steinbruch."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr "Stoße nach Nordosten zu den Steinen vor."
+msgstr "Stoße nach Nordosten zu den Felsen vor."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Baue Militärgebäude (wie Wachposten oder Barrieren), um dein Territorium zu erweitern."
+msgstr "Baue Militärgebäude (wie Wachposten oder Barrieren), um dein Gebiet zu erweitern."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Gelange zu den Steinen nordöstlich von dir und baue dort einen Steinbruch."
+msgstr "Gelange zu den Felsen nordöstlich von dir und baue dort einen Steinbruch."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -77,43 +77,43 @@ msgstr "Platziere dazu eine Flagge auf dem Berg im Osten (nicht auf der Bergwies
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
-msgstr "Ein wenig Kohle"
+msgstr " wenig Kohle"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of coal"
-msgstr "Eine Menge Kohle"
+msgstr " viel Kohle"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "a bit of iron"
-msgstr "Ein wenig Eisen"
+msgstr " wenig Eisen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of iron"
-msgstr "Eine Menge Eisen"
+msgstr " viel Eisen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "a bit of gold"
-msgstr "Ein wenig Gold"
+msgstr " wenig Gold"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "a lot of gold"
-msgstr "Eine Menge Gold"
+msgstr " viel Gold"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:54
 msgid "a bit of granite"
-msgstr "Ein wenig Granit"
+msgstr " wenig Granit"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:55
 msgid "a lot of granite"
-msgstr "Eine Menge Granit"
+msgstr " viel Granit"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:56
 msgid "water"
-msgstr "Wasser"
+msgstr " Wasser"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr "hier wurde nichts gefunden"
+msgstr " hier wurde nichts gefunden"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -123,22 +123,22 @@ msgstr "Minen können nur auf bergigem Gelände gebaut werden. Geeignete Plätze
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
-msgstr "Versorge deine Bergarbeiter mit Nahrung"
+msgstr "Versorge deine Bergleute mit Nahrung"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Erbaue eine Jägerhütte, eine Wildhüterhütte und eine Taverne"
+msgstr "Baue eine Jägerhütte, eine Wildhüterhütte und eine Taverne"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
-msgstr "Um arbeiten zu können, müssen deine Bergleute mit Essen versorgt werden."
+msgstr "Um arbeiten zu können, brauchen deine Bergleute Nahrung."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:68
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Jäger jagen Tiere, während ein Wildhüter dafür sorgt, dass sie nicht aussterben. Das Fleisch wird dann in den Tavernen zu Essen für die Bergleute verarbeitet."
+msgstr "Jäger jagen Tiere, während ein Wildhüter dafür sorgt, dass sie nicht aussterben. Das Fleisch wird dann in den Tavernen zu Nahrung für die Bergleute verarbeitet."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
@@ -160,7 +160,7 @@ msgid ""
 "hunters. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "Andere Möglichkeiten, Nahrung herzustellen – andere Arten von Nahrung – sind Fischer und Jäger. Der Weizen der Höfe muss zuerst zusammen mit Wasser in der Bäckerei verarbeitet werden, bevor er essbar wird. Wasser kann durch den Bau eines Brunnens über einer von Geologen entdeckten Wasserader gewonnen werden."
+msgstr "Andere Möglichkeiten, Nahrung herzustellen – andere Grundnahrungsmittel – sind Bauernhöfe und Bäckereien. Der Weizen der Höfe muss zuerst zusammen mit Wasser in der Bäckerei verarbeitet werden, bevor er essbar wird. Wasser kann durch den Bau eines Brunnens über einer von Geologen entdeckten Wasserader gewonnen werden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
@@ -174,25 +174,25 @@ msgstr "Baue einen Hochofen"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Das Eisenerz, das die Bergleute schürfen, ist noch nicht zu gebrauchen – es muss zuerst zu Eisen geschmolzen werden."
+msgstr "Das Eisenerz, das deine Bergleute schürfen, ist noch nicht zu gebrauchen – es muss zuerst zu Eisen geschmolzen werden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Baue Gebäude aus und errichte eine Kleinbrauerei"
+msgstr "Erweitere Gebäude und baue eine Kleinbrauerei"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Baue eine Mine und die Taverne aus und errichte eine Kleinbrauerei."
+msgstr "Erweitere eine Mine und die Taverne und errichte eine Kleinbrauerei."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Erweitere die Kohle- oder Eisenerzmine zu einer tiefen Mine und baue die Taverne zu einem Wirtshaus."
+msgstr "Erweitere die Kohle- oder Eisenerzmine zu einer Tiefen Mine und die Taverne zu einem Wirtshaus."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr "Baue auch eine Kleinbrauerei."
+msgstr "Baue zusätzlich eine Kleinbrauerei."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -238,11 +238,11 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Größere und bessere Gebäude – sowie alle Militärgebäude – benötigen bessere Baumaterialien. Sie können nicht aus einfachen Stämmen errichtet werden – das Holz muss zuvor vom Holzhärter gehärtet werden. Bedenke stets, einen Holzhärter zu errichten, bevor dir das Hartholz ausgeht, da du dein Gebiet sonst nicht erweitern kannst."
+msgstr "Größere und bessere Gebäude – sowie alle Militärgebäude – benötigen bessere Baumaterialien. Sie können nicht aus einfachen Stämmen errichtet werden – das Holz muss zuvor von einem Holzhärter gehärtet werden. Bedenke stets, einen Holzhärter zu errichten, bevor dir das Hartholz ausgeht, da du dein Gebiet sonst nicht erweitern kannst."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Baue einen Kalkbrenner und Kohlewirtschaft"
+msgstr "Baue eine Kalkbrennerei und Kohlewirtschaft"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
@@ -254,14 +254,14 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of raw stone, water "
 "and coal by a lime-burner."
-msgstr "Bessere Gebäude können zusätzlich andere verarbeitete Materialien als Hartholz benötigen. Eine davon ist Mörtel, der aus rohem Stein, Wasser und Kohle in einer Kalkbrennerei hergestellt wird."
+msgstr "Bessere Gebäude können zusätzlich andere verarbeitete Materialien als Hartholz benötigen. Eine davon ist Mörtel, der aus Felsbrocken, Wasser und Kohle von einem Kalkbrenner hergestellt wird."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr "Du erhältst Wasser, indem du einen Brunnen auf eine Wasserquelle baust. Deine Geologen können solche Quellen finden, wenn du sie zu einer Flagge, die nicht auf einem Berg ist, sendest."
+msgstr "Du erhältst Wasser, indem du einen Brunnen auf eine Wasserquelle baust. Deine Geologen können solche Quellen finden, wenn du sie zu einer Flagge sendest, die nicht auf einem Berg ist."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
@@ -294,7 +294,7 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Das dritte Material, das für die besseren Gebäude notwendig ist, ist Reet, der für die Dächer verwendet wird. Er wird auf einem Reethof angebaut."
+msgstr "Das dritte Material, das für die besseren Gebäude notwendig ist, ist Reet, der für die Dächer verwendet wird. Er wird auf einem von einem Reetbauern um seinen Reethof herum angebaut."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
@@ -308,7 +308,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "Die Straßen sind seit einer langen Zeit schwerer Last ausgesetzt und ein Träger reicht gewöhnlich nicht aus, um die Güter zügig zu transportieren. Warenstau ist die Folge davon. Diese Straßen benötigen daher einen zweiten Träger: Einen Ochsen, der hilft, die Waren zu befördern, was die Transportkapazität verdoppelt."
+msgstr "Die Straßen sind seit einer langen Zeit schwerer Last ausgesetzt und ein Träger reicht gewöhnlich nicht aus, um die Güter zügig zu transportieren. Warenstau ist die Folge. Diese Straßen benötigen daher einen zweiten Träger: Einen Ochsen, der hilft, die Waren zu befördern, was die Transportkapazität verdoppelt."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -349,7 +349,7 @@ msgstr "Nach wie vor können wir alle die gespenstisch aufschlagenden Flammen se
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr "Die roten Lichter blitzen in der Dunkelheit und tanzen zum Rhythmus der Kriegstrommeln, die mich bis in meine Albträume verfolgen."
+msgstr "Die roten Lichter leuchten in der Dunkelheit und tanzen zum Rhythmus der Kriegstrommeln, die mich bis in meine Albträume verfolgen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:180
 msgid ""
@@ -524,7 +524,7 @@ msgstr "Es fühlte sich beinahe wie ein Abschied an. Zum ersten Mal fragte ich m
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:269
 msgid "The Other Day"
-msgstr "Am nächsten Tag"
+msgstr "Neulich"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:270
 msgid "Thron says thoughtfully…"
@@ -686,7 +686,7 @@ msgstr "Es scheinen sich ziemlich viele Tiere hier in den Wäldern aufzuhalten �
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "The elder jumps into the air…"
-msgstr "Der Alte hüpft vor Freude …"
+msgstr "Der Alte springt auf …"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:356
 msgid "Wisdom commands to seek variety."
@@ -701,7 +701,7 @@ msgstr "Nördlich des großen Berges befindet sich eine weite Ebene – warum nu
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth cheers up…"
-msgstr "Boldreth ruft freudig …"
+msgstr "Boldreth wird fröhlich …"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:365
 msgid "Our hunters are out in the forests, Thron."
@@ -711,7 +711,7 @@ msgstr "Unsere Jäger sind in den Wäldern, Thron."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Ich verspreche dir, bevor die Sonne heute aufgeht, werden wir dir ein Mahl vorsetzten, das einem Häuptling alle Ehre macht!"
+msgstr "Ich verspreche dir, bevor die Sonne heute untergeht, werden wir dir ein Mahl vorsetzten, das einem Häuptling alle Ehre macht!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:372
 msgid "Khantrukh gazes over the plains…"
@@ -722,11 +722,11 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr "Ist er nicht wunderbar, dieser Blick über die hell leuchtenden Felder, die dort so friedlich wachsen und wie Wellen im sanften Wind tanzen? Und dort kommt gerade unser Bäcker, um das beste seiner feinen Brote unserem Anführer zu überreichen!"
+msgstr "Ist er nicht wunderbar, dieser Blick über die goldenen Felder, die dort so friedlich wachsen und wie Wellen im sanften Wind tanzen? Und dort kommt gerade unser Bäcker, um unserem Häuptling das beste seiner feinen Brote zu überreichen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:377
 msgid "A Beautiful Morning"
-msgstr "Ein wunderschöner Morgen"
+msgstr "Ein schöner Morgen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:378
 msgid "Thron recognizes…"
@@ -851,7 +851,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr "Sie sind beeindruckende Tiere: Der Ochse ist so schnell wie ein Mensch, wenngleich viel stärker und sehr genügsam. Alles, was wir benötigen, um welche zu züchten, ist Wasser und Weizen und bald werden sie treu und verlässlich auf unseren Straßen arbeiten."
+msgstr "Es sind beeindruckende Tiere: Der Ochse ist so schnell wie ein Mensch, wenngleich viel stärker und sehr genügsam. Alles, was wir benötigen, um welche zu züchten, ist Wasser und Weizen und bald werden sie treu und verlässlich auf unseren Straßen arbeiten."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:443
 msgid "Mission Complete"

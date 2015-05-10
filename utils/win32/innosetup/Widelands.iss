@@ -26,7 +26,7 @@
 #define Name "Widelands"
 #define VerName "Widelands Build18"
 #define VerNumber "0.18.0.1"
-#define Copyright "Widelands Development Team 2001-2014"
+#define Copyright "Widelands Development Team 2001-2015"
 #define SetupFileName "Widelands-Build18-win32"
 
 ;General String

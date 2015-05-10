@@ -213,7 +213,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	PlayerImmovable::cleanup(egbase);
 
-	//now let attempt to recreate the portdock
+	// Now let's attempt to recreate the portdock.
 	if (wh) {
 		if (!wh->m_cleanup_in_progress){
 			if (upcast(Game, game, &egbase)) {
@@ -440,13 +440,18 @@ void PortDock::cancel_expedition(Game& game) {
 void PortDock::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	if (!m_warehouse) {
+	if (m_warehouse) {
 		Coords pos(m_warehouse->get_position());
 		molog("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
-		      m_warehouse ? m_warehouse->serial() : 0,
+		     m_warehouse->serial(),
 		      pos.x,
 		      pos.y,
 		      m_fleet ? m_fleet->serial() : 0,
+		      m_need_ship ? "true" : "false",
+		      m_waiting.size());
+	} else {
+		molog("PortDock without a warehouse in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
+			 m_fleet ? m_fleet->serial() : 0,
 		      m_need_ship ? "true" : "false",
 		      m_waiting.size());
 	}

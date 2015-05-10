@@ -93,7 +93,7 @@ return {
    local function _calc_points(plr)
       set_textdomain("win_conditions")
       local bs = array_combine(
-         plr:get_buildings("headquarters"), plr:get_buildings("warehouse")
+         plr:get_buildings("headquarters"), plr:get_buildings("warehouse"), plr:get_buildings("port")
       )
 
       local points = 0
@@ -106,9 +106,10 @@ return {
          end
          local lpoints = count * value
          points = points + lpoints
+         local warename = wl.Game():get_ware_description(plr.tribe_name, ware).descname
          -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
          descr[#descr+1] = [[• ]] .. (_"  %1$s (%2$i P) x %3$i = %4$i P"):bformat(
-            ware, value, count, lpoints
+            warename, value, count, lpoints
          ) .. "<br>"
       end
       descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
@@ -158,7 +159,6 @@ return {
    end
 
    -- Instantiate the hook to calculate points
-   if hooks == nil then hooks = {} end
    hooks.custom_statistic = {
       name = wc_points,
       pic = "images/wui/stats/genstats_points.png",

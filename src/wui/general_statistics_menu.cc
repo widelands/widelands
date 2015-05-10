@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"

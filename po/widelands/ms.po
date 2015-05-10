@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# abuyop <abuyop@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 10:36+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-02-27 15:35+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,36 +22,36 @@ msgstr ""
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
 msgid "None"
-msgstr ""
+msgstr "Tiada"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:88
 msgid "Aggressive"
-msgstr ""
+msgstr "Agresif"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:99
 msgid "Normal"
-msgstr ""
+msgstr "Biasa"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:110
 msgid "Defensive"
-msgstr ""
+msgstr "Bertahan"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr ""
+msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s atau %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with a comma.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -59,14 +60,14 @@ msgstr ""
 #: ../../src/base/i18n.cc:339 ../../src/base/i18n.cc:349
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:343
 #, c-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s dan %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -75,7 +76,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -84,7 +85,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -93,7 +94,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
 msgid "Mar"
-msgstr ""
+msgstr "Mac"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -102,7 +103,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -111,7 +112,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -120,7 +121,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -129,7 +130,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -138,7 +139,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
 msgid "Aug"
-msgstr ""
+msgstr "Ogo"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -147,7 +148,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -156,7 +157,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:149
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -165,7 +166,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:155
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -173,37 +174,37 @@ msgstr ""
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
-msgstr ""
+msgstr "Dis"
 
 #: ../../src/editor/editorinteractive.cc:64
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Memuatkan suku kaum: %s"
 
 #: ../../src/editor/editorinteractive.cc:85
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: ../../src/editor/editorinteractive.cc:88
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tools"
-msgstr ""
+msgstr "Alatan"
 
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
 msgid "Tool Size"
-msgstr ""
+msgstr "Saiz Alat"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:103
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Minimap"
-msgstr ""
+msgstr "Peta Mini"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Tunjuk Kawasan Bangunan (hidup/mati)"
 
 #: ../../src/editor/editorinteractive.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:167
@@ -212,39 +213,39 @@ msgstr "Pemain"
 
 #: ../../src/editor/editorinteractive.cc:104
 msgid "Undo"
-msgstr ""
+msgstr "Buat Asal"
 
 #: ../../src/editor/editorinteractive.cc:107
 msgid "Redo"
-msgstr ""
+msgstr "Buat Semula"
 
 #: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
-msgstr ""
+msgstr "Format tidak disokong"
 
 #: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
+msgstr "Widelands tidak dapat memuatkan fail \"%s\". Format fail kelihatan tidak serasi."
 
 #: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
-msgstr ""
+msgstr "Mencipta pemain"
 
 #: ../../src/editor/editorinteractive.cc:210
 #: ../../src/editor/editorinteractive.cc:596
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Memuatkan grafik..."
 
 #: ../../src/editor/editorinteractive.cc:257
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Peta Tidak Disimpan"
 
 #: ../../src/editor/editorinteractive.cc:258
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Peta belum lagi disimpan, anda pasti mahu keluar?"
 
 #: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
@@ -252,7 +253,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
 #: ../../src/logic/map.h:180
 msgid "No Name"
-msgstr ""
+msgstr "Tanpa Nama"
 
 #: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
@@ -260,60 +261,60 @@ msgstr ""
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:191
 #: ../../src/wui/game_summary.cc:175
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak Diketahui"
 
 #: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
-msgstr ""
+msgstr "Maklumat Medan"
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
-msgstr ""
+msgstr "Nod:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Koordinat: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid " small"
-msgstr ""
+msgstr "kecil"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " medium"
-msgstr ""
+msgstr "sederhana"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " big"
-msgstr ""
+msgstr "besar"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " flag"
-msgstr ""
+msgstr "bendera"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk
 #: ../../src/editor/tools/editor_info_tool.cc:71
 msgid " mine"
-msgstr ""
+msgstr "lombong"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
 msgid " port"
-msgstr ""
+msgstr "pelabuhan"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:75
 msgid " walk"
-msgstr ""
+msgstr "berjalan"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: swim
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid " swim"
-msgstr ""
+msgstr "berenang"
 
 #: ../../src/editor/tools/editor_info_tool.cc:79
 #, c-format
@@ -323,200 +324,200 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Milik: Pemain %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 msgid "Owned by: —"
-msgstr ""
+msgstr "Milik: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
-msgstr ""
+msgstr "Mempunyai pangkalan kekal"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "No base immovable"
-msgstr ""
+msgstr "Tiada pangkalan kekal"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has animals"
-msgstr ""
+msgstr "Memiliki haiwan"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No animals"
-msgstr ""
+msgstr "Tiada haiwan"
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Rupa Bumi:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #: ../../src/editor/tools/editor_info_tool.cc:147
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nama: %s"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "arable"
-msgstr ""
+msgstr "suai tani"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:111
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:148
 msgid "treeless"
-msgstr ""
+msgstr "tanpa pokok"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:105
 msgid "aquatic"
-msgstr ""
+msgstr "akuatik"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:117
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:127
 msgid "dead"
-msgstr ""
+msgstr "gersang"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:120
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
 msgid "mountainous"
-msgstr ""
+msgstr "bergunung-ganang"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "unpassable"
-msgstr ""
+msgid "impassable"
+msgstr "tidak boleh dilalui"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategori: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:127
 #, c-format
 msgid "Editor Category: %s"
-msgstr ""
+msgstr "Kategori Penyunting: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
-msgstr ""
+msgstr "Sumber:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Nama sumber: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Amaun sumber: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:142
 msgid "No resources"
-msgstr ""
+msgstr "Tiada sumber"
 
 #: ../../src/editor/tools/editor_info_tool.cc:146
 #: ../../src/ui_fsmenu/mapselect.cc:293
 msgid "Map:"
-msgstr ""
+msgstr "Peta:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:148
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Saiz: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "Pemain: %d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:156
 msgid "Players: -"
-msgstr ""
+msgstr "Pemain: -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:159
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Pengarang: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:160
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Ktrgn: %s"
 
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:163
 msgid "Current:"
-msgstr ""
+msgstr "Semasa:"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Utama"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
 msgid "New Map"
-msgstr ""
+msgstr "Peta Baharu"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:53
 msgid "New Random Map"
-msgstr ""
+msgstr "Peta Rawak Baharu"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:53
 msgid "Load Map"
-msgstr ""
+msgstr "Muat Peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
-msgstr ""
+msgstr "Simpan Peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:51
 msgid "Map Options"
-msgstr ""
+msgstr "Pilihan Peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "View Readme"
-msgstr ""
+msgstr "Lihat Baca Saya"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr ""
+msgstr "Tutup Penyunting"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name:"
-msgstr ""
+msgstr "Nama:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:79
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Authors:"
-msgstr ""
+msgstr "Pengarang:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size:"
-msgstr ""
+msgstr "Saiz:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 #: ../../src/ui_fsmenu/loadgame.cc:310
 msgid "Players:"
-msgstr ""
+msgstr "Pemain:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
 msgid "Descr:"
-msgstr ""
+msgstr "Ktrgn:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
@@ -526,7 +527,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -535,41 +536,41 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:530
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
 #, c-format
 msgid "%1$ix%2$i"
-msgstr ""
+msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
-msgstr ""
+msgstr "induk"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
 #: ../../src/ui_fsmenu/loadgame.cc:308
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
-msgstr ""
+msgstr "Nama Peta:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
 msgid "Nr Players:"
-msgstr ""
+msgstr "Bil Pemain:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:100
 msgid "Set origin"
-msgstr ""
+msgstr "Tetapkan titik asal"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr ""
+msgstr "Tetapkan kedudukan yang mana bermula dengan koordinat (0, 0). Ia akan berada di bucu kiri-atas peta mini yang dijana."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -577,7 +578,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:427
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Lebar: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
@@ -585,63 +586,63 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Tinggi: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:109
 msgid "Create Map"
-msgstr ""
+msgstr "Cipta Peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
 msgid "Summer"
-msgstr ""
+msgstr "Musim Panas"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
 msgid "Winter"
-msgstr ""
+msgstr "Musim Sejuk"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
 msgid "Desert"
-msgstr ""
+msgstr "Padang Pasir"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Black"
-msgstr ""
+msgstr "Hitam"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:78
 msgid "Random Number:"
-msgstr ""
+msgstr "Nombor Rawak:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:174
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Air: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:199
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:430
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Daratan: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Tanah Tandus: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:233
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Tanah Tinggi: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
-msgstr ""
+msgstr "Mod pulau:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
-msgstr ""
+msgstr "Rendah"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
 #: ../../src/logic/building.cc:537
@@ -650,62 +651,62 @@ msgstr "Sederhana"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:258
 msgid "High"
-msgstr ""
+msgstr "Tinggi"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:284
 msgid "Map ID:"
-msgstr ""
+msgstr "ID Peta:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:319
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:433
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Pemain: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:332
 msgid "Generate Map"
-msgstr ""
+msgstr "Jana Peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:513
 msgid "Generating random map..."
-msgstr ""
+msgstr "Menjana peta rawak..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 msgid "Descr: "
-msgstr ""
+msgstr "Ktrgn:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
-msgstr ""
+msgstr "Buat Direktori"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
 msgid "unnamed"
-msgstr ""
+msgstr "tidak bernama"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Direktori: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
-msgstr ""
+msgstr "direktori"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
 msgid "Not a map file"
-msgstr ""
+msgstr "Bukan fail peta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Fail dengan nama '%s' sudah wujud. Tulis-ganti ia?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Ralat Menyimpan Peta!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
 msgid ""
@@ -713,132 +714,132 @@ msgid ""
 "Saved map file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""
+msgstr "Ralat Menyimpan Peta!\nFail peta tersimpan mungkin rosak!\n\nSebabnya:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Masukkan Nama Direktori:"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:49
 msgid "Player Options"
-msgstr ""
+msgstr "Pilihan Pemain"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:55
 msgid "Add player"
-msgstr ""
+msgstr "Tambah pemain"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:62
 msgid "Remove last player"
-msgstr ""
+msgstr "Buang pemain terakhir"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:77
 msgid "Number of Players"
-msgstr ""
+msgstr "Bilangan Pemain"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Pemain %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:323
 msgid "Error!"
-msgstr ""
+msgstr "Ralat!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:325
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
-msgstr ""
+msgstr "Tidak dapat buang pemain. Ia telah dirujuk ditempat lain. Buang semua bangunan dan haiwan yang bergantung kepada pemain ini dan cuba lagi."
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
-msgstr ""
+msgstr "Pilihan Alat Ketinggian"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:56
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Tingkat/Rendahkan Nilai"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:87
 msgid "Set Value"
-msgstr ""
+msgstr "Tetapkan Nilai"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:52
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Sumber"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
 msgid "Current Selection"
-msgstr ""
+msgstr "Pemilihan Semasa"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr ""
+msgstr "Ubah tinggi"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr ""
+msgstr "Tinggi hingar"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:146
 msgid "Terrain"
-msgstr ""
+msgstr "Rupa Bumi"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Kekal"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Animals"
-msgstr ""
+msgstr "Haiwan"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "Tetapkan kawasan pelabuhan"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
 msgid "Noise Height Options"
-msgstr ""
+msgstr "Pilihan Tinggi Hingar"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "Minimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "Maksimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
 #, c-format
 msgid "Set value: %u"
-msgstr ""
+msgstr "Tetapkan nilai: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:58
 msgid "Immovable Select"
-msgstr ""
+msgstr "Kekal Dipilih"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:171
 msgid "Terrain Select"
-msgstr ""
+msgstr "Rupa Bumi Dipilih"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:76
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Saiz Semasa: %u"
 
 #: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:847
 msgid "unknown"
-msgstr ""
+msgstr "tidak diketahui"
 
 #: ../../src/logic/building.cc:530
 msgid "mine"
-msgstr "tambang"
+msgstr "periuk api"
 
 #: ../../src/logic/building.cc:531
 msgid "small"
@@ -867,7 +868,7 @@ msgstr "Besar"
 #: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:574
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% dibina"
 
 #: ../../src/logic/dismantlesite.cc:99
 #, c-format
@@ -876,25 +877,25 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:281
 msgid "Loading world data"
-msgstr ""
+msgstr "Memuatkan data dunia"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Memuatkan suku kaum"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:143
 msgid "Not set"
-msgstr ""
+msgstr "Tidak ditetapkan"
 
 #: ../../src/logic/game.cc:229
 msgid "Preloading a map"
-msgstr ""
+msgstr "Mempra-muatkan peta"
 
 #: ../../src/logic/game.cc:239
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "Menambah pemain %u"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
@@ -902,7 +903,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:154 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
-msgstr ""
+msgstr "Senario"
 
 #: ../../src/logic/game.cc:253
 msgid "Loading a map"
@@ -1157,7 +1158,7 @@ msgstr[0] ""
 msgid "(stopped)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:925
+#: ../../src/logic/productionsite.cc:923
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1236,15 +1237,15 @@ msgstr ""
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:456
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:463
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:470
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -1282,7 +1283,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:115
 #: ../../src/ui_fsmenu/internet_lobby.cc:411
 msgid "Connection problem"
-msgstr "Masalah Sambungan"
+msgstr "Masalah sambungan"
 
 #: ../../src/network/internet_gaming.cc:115
 msgid "Widelands could not connect to the metaserver."

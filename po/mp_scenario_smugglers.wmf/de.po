@@ -5,13 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Venatrix, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-20 12:55+0000\n"
-"Last-Translator: millimarg\n"
+"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"PO-Revision-Date: 2015-03-02 12:25+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end. "
-msgstr "Schmuggler ist eine Spaß-Karte für 4 Spieler. Du und dein Partner starten diagonal gegenüber auf einer punktsymmetrischen Insel. Es gibt viele Schmuggel-Tunnels auf dieser Insel, jeder mit einem Sende- und einem Empfangs-Ende. "
+msgstr "Schmuggler ist eine unterhaltsame Karte für 4 Spieler. Du und dein Partner starten diagonal gegenüber auf einer punktsymmetrischen Insel. Es gibt viele Schmugglertunnel auf dieser Insel, jeder mit einem sendenden und einem empfangenden Lagerhaus. "
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
@@ -62,7 +63,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds. "
-msgstr "Um eine Schmuggel-Route einzurichten, musst du ein Lagerhaus auf einem Sende- bzw. Empfangs-Punkt errichten, während dein Teampartner am anderen Ende des Tunnel ebenfalls ein Lagerhaus errichtet. Nun wird alle 10 Sekunden eine Ware geschmuggelt. "
+msgstr "Um eine Schmuggelroute einzurichten, musst du ein Lagerhaus auf einem Sende- bzw. Empfangs-Punkt errichten, während dein Teampartner am anderen Ende des Tunnel ebenfalls ein Lagerhaus errichtet. Nun wird alle 10 Sekunden eine Ware geschmuggelt. "
 
 #: TRANSLATORS %s = '<number> points' ../../maps/MP
 #: Scenarios/Smugglers.wmf/scripting/texts.lua:10
@@ -94,7 +95,7 @@ msgstr "Vergiss nicht, dass die Karte punktsymmetrisch ist: Wenn du einen Punkt 
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr "Du kannst die Anzahl der geschmuggelten Waren zu jedem Zeitpunkt im allgemeinen Statistikmenü nachschauen. Viel Erfolg!"
+msgstr "Du kannst die Anzahl der geschmuggelten Waren zu jedem Zeitpunkt im Menü „Allgemeinen Statistiken“ nachschauen. Viel Erfolg!"
 
 #: TRANSLATORS the first 2 parameters are player names, the last parameter is
 #: '<number> points' ../../maps/MP
@@ -109,14 +110,14 @@ msgstr "Eine neue Schmuggelroute von %1$s zu %2$s wurde eingerichtet! Jede Ware,
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Dein Team hat eine neue Schmuggel-Route unter seine Kontrolle gebracht. Du besitzt das sendende Warenhaus. Jede über diese Route geschmuggelte Ware bringt %s Punkte."
+msgstr "Dein Team hat eine neue Schmuggelroute unter seine Kontrolle gebracht. Du besitzt das sendende Lagerhaus. Jede über diese Route geschmuggelte Ware bringt %s."
 
 #: TRANSLATORS %s = '<number> points' ../../maps/MP
 #: Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Dein Team hat eine neue Schmuggel-Route unter seine Kontrolle gebracht. Du besitzt das empfangende Warenhaus. Jede über diese Route geschmuggelte Ware bringt %s Punkte."
+msgstr "Dein Team hat eine neue Schmuggelroute unter seine Kontrolle gebracht. Du besitzt das empfangende Lagerhaus. Jede über diese Route geschmuggelte Ware bringt %s."
 
 #: TRANSLATORS the first parameter is '<number> points', the last 2 parameters
 #: are player names ../../maps/MP
@@ -126,7 +127,7 @@ msgstr "Die Schmuggelroute im Wert von %1$s von %2$s zu %3$s wurde unterbrochen!
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:38
 msgid "Game over!"
-msgstr "Spiel vorbei!"
+msgstr "Spiel beendet!"
 
 #: TRANSLATORS the first 4 parameters are player names, the last parameter is
 #: '<number> points' ../../maps/MP
@@ -134,4 +135,4 @@ msgstr "Spiel vorbei!"
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr "Game Over! %1$s und %2$s haben das Spiel gewonnen! %3$s und %4$s haben nur %5$s Punkte erreicht."
+msgstr "Spiel beendet! %1$s und %2$s haben das Spiel gewonnen! %3$s und %4$s haben nur %5$s erreicht."

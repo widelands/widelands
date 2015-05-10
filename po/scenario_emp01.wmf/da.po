@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Joe Hansen <joedalton2@yahoo.dk>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-03-06 16:48+0000\n"
+"PO-Revision-Date: 2015-03-20 10:00+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,54 +23,54 @@ msgstr "Byg en barrak"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Barakker"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
 "Build a barracks at the red house symbol on the east side of the forests, to"
 " the right of your provisional headquarters."
-msgstr ""
+msgstr "Byg en barak ved det røde hus symbol på østsiden af skovene, til højre for dit midlertidige hovedkvarter."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Byge en skovhuggerbygning"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Skovhuggerbygning"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "Byg en skovhuggerbygning ved det røde hus symbol, syd for dit midlertidige hovedkvarter."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Byg 2 skovhuggerbygninger og et savværk"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "To skovhuggerbygninger og et savværk"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr ""
+msgstr "Byg to yderligere skovhuggerbygninger og et savværk så snart der er nok plads til dem."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Byg et skovfogedhus"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "Skovfogedhus"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "Byg et skovfogedhus for at bevare træressourcerne på denne ø."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
@@ -77,20 +78,20 @@ msgstr "Opfør et stenbrud"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr ""
+msgstr "Stenbrud"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some stones and marble out of the rocks."
-msgstr ""
+msgstr "Byg et stenbrud mod syd for at hugge sten og marmor ud af undergrunden."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Disse kan bruges til fremtidige bygninger."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:78
 msgid "A Dark Night"
-msgstr ""
+msgstr "En mørk nat"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:79
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:95
@@ -104,7 +105,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Hvad er der sket med vores imperium? Jeg stiller dette spørgsmål - hvorfor forbød min konge mig at kæmpe mod den modbydelige barbarstamme, som først spillede ven og så angreb min hær i ly af mørket?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid ""
@@ -113,7 +114,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their kids came to us, to admire our "
 "clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Med en hær på 150 mænd, blev jeg tildelt opgaven med at patruljere vores nordlige grænse, som ligger nær Galdinbjergene i en stor, smuk og gammel skov. Snart mødte vi en barbarstamme, som først virkede venlige. Nogle få af mine mænd handlede med dem og deres børn kom til os, for at beundre vores rene og ordentlige uniformer og våben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -165,7 +166,7 @@ msgstr "Overlever"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Endelig, guderne var med os!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:108
 msgid ""
@@ -238,7 +239,7 @@ msgstr "Unge Amalea"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea smiler ..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Hey Lutius, I just met Saledus outside."
@@ -372,7 +373,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Victory"
-msgstr ""
+msgstr "Sejr"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:203
 msgid ""
@@ -391,14 +392,14 @@ msgstr "Saledus taler:"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:210
 msgid ""
 "You have made this peninsula a very secure place. It is time to move on!"
-msgstr ""
+msgstr "Du har gjort denne halvø til et meget sikker sted. Det er på tide at fortsætte!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

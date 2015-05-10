@@ -1,6 +1,6 @@
 #!/usr/bin/python -tt
 
-import os, re
+import re
 
 __RE = re.compile(r"""virtual[^;]*override""", re.MULTILINE)
 def evaluate_matches(lines, fn):
