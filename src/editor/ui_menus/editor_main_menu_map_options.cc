@@ -100,7 +100,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(descr_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")), UI::Box::AlignLeft);
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")),
+					  UI::Box::AlignLeft);
 	main_box_.add(hint_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
@@ -119,7 +120,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4"));
 	tags_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
-	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")), UI::Box::AlignLeft);
+	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")),
+						UI::Box::AlignLeft);
 	teams_box_.add(&teams_list_, UI::Box::AlignLeft);
 	// TODO(GunChleoc): We need team images in the listselect here,
 	// so map editors will be able to delete entries.
@@ -132,7 +134,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	teams_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	tab_box_.add(&tabs_, UI::Box::AlignLeft, true);
-	tabs_.add("main_map_options", g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
+	tabs_.add("main_map_options",
+				 g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("pics/checkbox_checked.png"), &tags_box_, _("Tags"));
 	tabs_.add("map_teams", g_gr->images().get("pics/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
 	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
