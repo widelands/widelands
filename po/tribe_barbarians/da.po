@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-31 21:18+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-09 20:43+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -299,7 +299,7 @@ msgstr "former en bred økse"
 #: ../../tribes/barbarians/lime_kiln/conf:23
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
-#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/quarry/conf:21
 #: ../../tribes/barbarians/reed_yard/conf:25
 #: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
@@ -1808,7 +1808,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "»Danner nye sten fra gamle med ild og vand.«"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:17
 msgid ""
@@ -1904,7 +1904,7 @@ msgstr "laver en brødpadle"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "making a felling ax"
-msgstr ""
+msgstr "laver en skovøkse"
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "making fire tongs"
@@ -1942,7 +1942,7 @@ msgstr "laver en skovl"
 msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
-msgstr ""
+msgstr "Inskription på tærsklen på den gamle ruin Olde Forge ved Harradsheim, den ældste kendte smedje."
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid "‘We make it work!’"
@@ -2011,11 +2011,15 @@ msgid ""
 " It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:26
+#: ../../tribes/barbarians/quarry/conf:19
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
 msgstr "Ikke flere sten"
 
-#: ../../tribes/barbarians/quarry/conf:27
+#: ../../tribes/barbarians/quarry/conf:33
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
@@ -2299,7 +2303,7 @@ msgid ""
 "A warhelm is an enhanced armor for barbarian warriors. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "En krigshjelm er en udvidet rustning for barbarkrigere. Den fremstilles i hjelmsmedjen og bruges i en træningslejr - sammen med mad - til at træne soldater fra helbredsniveau 1 til niveau 2."
 
 #: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"
@@ -2316,25 +2320,25 @@ msgstr "smedning af en krigsøkse"
 #: ../../tribes/barbarians/warmill/help.lua:17
 msgid ""
 "The war mill produces all the axes that the barbarians use for warfare."
-msgstr ""
+msgstr "Krigsmøllen fremstiller alle de økser som barbarerne bruger i krig."
 
 #: ../../tribes/barbarians/warmill/help.lua:18
 msgid ""
 "The barbarian war mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an axfactory."
-msgstr ""
+msgstr "Barbarernes krigsmølle er deres mest avanceret produktionssted for våben. Som sådan kræver den en opgradering fra en øksefabrik."
 
 #: ../../tribes/barbarians/warmill/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce each ax"
 " in about %s on average."
-msgstr ""
+msgstr "Hvis alle krævede varer leveres i tide, så kan denne bygning fremstille hver øksetype med omkring %s i gennemsnit."
 
 #: ../../tribes/barbarians/warmill/help.lua:33
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr ""
+msgstr "Alle våben kræver den samme fremstillingstid, men forbruget af de samme råmaterialer stiger fra trin til trin. De sidste to kræver guld."
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
@@ -2342,14 +2346,14 @@ msgid ""
 " warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr ""
+msgstr "Krigerens økse er den mest farlige af alle barbarernes våben. Kun nogle få krigere har været i stand til at håndtere disse store og kraftige økser. De fremstilles i en krigsmølle og bruges - sammen med mad - i en træningslejr til at træne soldater fra angrebsniveau 4 til niveau 5."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
 "Water is the essence of life! It is used in the bakery, the micro brewery "
 "and the brewery. The lime kiln and the cattle farm also need to be supplied "
 "with water."
-msgstr ""
+msgstr "Vand er essentiel for liv! Det bruges i bageriet , mikrobryggeriet og bryggeriet. Kalkovnen og kvægbruget kræver også vand."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
@@ -2361,7 +2365,7 @@ msgstr "Væveri"
 
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
-msgstr ""
+msgstr "Væver klæde fra strå."
 
 #: ../../tribes/barbarians/well/conf:28
 msgid "Out of Water"

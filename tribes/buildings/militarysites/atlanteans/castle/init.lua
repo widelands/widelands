@@ -45,7 +45,7 @@ tribes:new_militarysite_type {
 		expansion = true,
 		fighting = true,
 		mountain_conqueror = true,
-		prohibited_till = 1800
+		prohibited_till = 1500
    },
 
 	outputs = {

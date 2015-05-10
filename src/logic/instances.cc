@@ -306,7 +306,7 @@ void MapObjectDescr::add_attribute(uint32_t const attr)
 }
 
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
-                                      const std::set<uint32_t>& allowed_special) {
+									  const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute, true);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
@@ -372,7 +372,10 @@ MapObject IMPLEMENTATION
  * Zero-initialize a map object
  */
 MapObject::MapObject(const MapObjectDescr * const the_descr) :
-m_descr(the_descr), m_serial(0), m_logsink(nullptr)
+m_descr(the_descr),
+m_serial(0),
+m_logsink(nullptr),
+m_reserved_by_worker(false)
 {}
 
 
@@ -498,7 +501,18 @@ void MapObject::molog(char const * fmt, ...) const
 }
 
 
-#define CURRENT_SAVEGAME_VERSION 1
+bool MapObject::is_reserved_by_worker() const
+{
+	return m_reserved_by_worker;
+}
+
+void MapObject::set_reserved_by_worker(bool reserve)
+{
+	m_reserved_by_worker = reserve;
+}
+
+
+#define CURRENT_SAVEGAME_VERSION 2
 
 /**
  * Load the entire data package from the given file.
@@ -518,7 +532,7 @@ void MapObject::Loader::load(FileRead & fr)
 				("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const version = fr.unsigned_8();
-		if (version != CURRENT_SAVEGAME_VERSION)
+		if (version <= 0 || version > CURRENT_SAVEGAME_VERSION)
 			throw GameDataError("unknown/unhandled version %u", version);
 
 		Serial const serial = fr.unsigned_32();
@@ -527,6 +541,9 @@ void MapObject::Loader::load(FileRead & fr)
 		} catch (const WException & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
+
+		if (version == CURRENT_SAVEGAME_VERSION)
+			get_object()->m_reserved_by_worker = fr.unsigned_8();
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
@@ -568,6 +585,7 @@ void MapObject::save
 	fw.unsigned_8(CURRENT_SAVEGAME_VERSION);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
+	fw.unsigned_8(m_reserved_by_worker);
 }
 
 std::string to_string(const MapObjectType type) {

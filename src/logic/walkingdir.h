@@ -37,9 +37,9 @@ enum WalkingDir {
 	LAST_DIRECTION  = 6,
 };
 
-uint8_t get_cw_neighbour(uint8_t dir);
-uint8_t get_ccw_neighbour(uint8_t dir);
-uint8_t get_backward_dir(uint8_t dir);
+WalkingDir get_cw_neighbour(WalkingDir dir);
+WalkingDir get_ccw_neighbour(WalkingDir dir);
+WalkingDir get_backward_dir(WalkingDir dir);
 
 }
 

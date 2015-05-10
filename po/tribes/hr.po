@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 15:57+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-07 16:24+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -24,46 +24,46 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:150
 msgid "Soldiers:"
-msgstr ""
+msgstr "Vojnici:"
 
 #: ../../tribes/scripting/format_help.lua:181
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s ili %2$s"
 
 #: ../../tribes/scripting/format_help.lua:188
 msgid "%s and"
-msgstr ""
+msgstr "%s i"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
-msgstr ""
+msgstr "Oprema iz"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
-msgstr ""
+msgstr "i oprema iz"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
-msgstr ""
+msgstr "ili oprema iz"
 
 #: ../../tribes/scripting/format_help.lua:270
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../../tribes/scripting/format_help.lua:271
 msgid "Purpose:"
-msgstr ""
+msgstr "Svrha:"
 
 #: ../../tribes/scripting/format_help.lua:277
 #: ../../tribes/scripting/format_help.lua:504
 msgid "Note:"
-msgstr ""
+msgstr "Napomena:"
 
 #: ../../tribes/scripting/format_help.lua:281
 msgid "Working radius:"
@@ -72,12 +72,12 @@ msgstr "Radno područje:"
 #: ../../tribes/scripting/format_help.lua:285
 #: ../../tribes/scripting/format_help.lua:290
 msgid "Healing:"
-msgstr ""
+msgstr "Liječenje:"
 
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %s per second"
-msgstr ""
+msgstr "Vojnici u uporištu se liječe %s u sekundi"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -87,7 +87,7 @@ msgstr ""
 #: ../../tribes/scripting/format_help.lua:292
 #: ../../tribes/scripting/format_help.lua:314
 msgid "Capacity:"
-msgstr ""
+msgstr "Kapacitet:"
 
 #: ../../tribes/scripting/format_help.lua:296
 msgid "Training:"
@@ -103,35 +103,35 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:300
 msgid "Attack"
-msgstr ""
+msgstr "Napad"
 
 #: ../../tribes/scripting/format_help.lua:304
 msgid "Defense"
-msgstr ""
+msgstr "Obrana"
 
 #: ../../tribes/scripting/format_help.lua:308
 msgid "Evade"
-msgstr ""
+msgstr "Izbjegavanje"
 
 #: ../../tribes/scripting/format_help.lua:312
 msgid "Health"
-msgstr ""
+msgstr "Zdravlje"
 
 #: ../../tribes/scripting/format_help.lua:316
 msgid "Vision range:"
-msgstr ""
+msgstr "Vidokrug:"
 
 #: ../../tribes/scripting/format_help.lua:333
 msgid "Lore"
-msgstr ""
+msgstr "Znanje"
 
 #: ../../tribes/scripting/format_help.lua:361
 msgid "%1$s from: %2$s"
-msgstr ""
+msgstr "%1$s iz: %2$s"
 
 #: ../../tribes/scripting/format_help.lua:366
 msgid "Incoming:"
-msgstr ""
+msgstr "U dolasku:"
 
 #: ../../tribes/scripting/format_help.lua:370
 msgid "Collects:"
@@ -161,7 +161,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:481
 msgid "Building"
-msgstr ""
+msgstr "Građevina"
 
 #: ../../tribes/scripting/format_help.lua:485
 msgid "Mine plot"
@@ -197,7 +197,7 @@ msgstr ""
 #: ../../tribes/scripting/format_help.lua:575
 #: ../../tribes/scripting/format_help.lua:623
 msgid "Unknown"
-msgstr ""
+msgstr "Nepoznato"
 
 #: ../../tribes/scripting/format_help.lua:505
 msgid ""
@@ -211,7 +211,7 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:513
 msgid "Build cost:"
-msgstr ""
+msgstr "Cijena izgradnje:"
 
 #: ../../tribes/scripting/format_help.lua:525
 msgid "Or enhanced from:"
@@ -253,7 +253,7 @@ msgstr "Radnici"
 
 #: ../../tribes/scripting/format_help.lua:688
 msgid "%s or better"
-msgstr ""
+msgstr "%s ili bolje"
 
 #: ../../tribes/scripting/format_help.lua:701
 msgid "Experience levels:"
@@ -277,4 +277,4 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:754
 msgid "Production"
-msgstr ""
+msgstr "Proizvodnja"

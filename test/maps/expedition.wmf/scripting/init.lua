@@ -94,24 +94,6 @@ function check_wares_in_port_are_all_there(args)
    assert_equal(1, port:get_workers("barbarians_builder"))
 end
 
-function start_expedition()
-   assert_true(click_building(p1, "barbarians_port"))
-   sleep(100)
-   assert_true(click_button("start_expedition"))
-   sleep(100)
-   close_windows()
-   sleep(100)
-end
-
-function cancel_expedition_in_port()
-   assert_true(click_building(p1, "barbarians_port"))
-   sleep(100)
-   assert_true(click_button("cancel_expedition"))
-   sleep(100)
-   close_windows()
-   sleep(100)
-end
-
 function cancel_expedition_in_shipwindow(which_ship)
    click_on_ship(which_ship or first_ship)
    assert_true(click_button("cancel_expedition"))
@@ -175,7 +157,7 @@ function test_cancel_started_expedition_on_ship()
    game.desired_speed = 10 * 1000
 
    -- Start a new expedition.
-   start_expedition()
+   port:start_expedition()
    wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
@@ -206,14 +188,15 @@ function test_cancel_started_expedition_underway()
    game.desired_speed = 10 * 1000
 
    -- Start a new expedition.
-   start_expedition()
+   port:start_expedition()
    wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
-   click_on_ship(first_ship)
-   assert_true(click_button("expccw"))
-   sleep(8000)
+   first_ship.island_explore_direction="ccw"
+   sleep(2000)
+   assert_equal("ccw",first_ship.island_explore_direction)
+   sleep(6000)
 
    stable_save("sailing")
    assert_equal(1, p1:get_workers("barbarians_builder"))
@@ -236,13 +219,14 @@ function test_cancel_when_port_space_was_reached()
    game.desired_speed = 10 * 1000
 
    -- Send expedition to port space.
-   start_expedition()
+   port:start_expedition()
    wait_for_message("Expedition Ready")
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
 
-   click_on_ship(first_ship)
-   assert_true(click_button("expccw"))
+   first_ship.island_explore_direction="ccw"
+   sleep(2000)
+   assert_equal("ccw",first_ship.island_explore_direction)
    wait_for_message("Port Space Found")
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
@@ -273,12 +257,13 @@ function test_transporting_works()
    port:set_wares("blackwood", 100)
 
 
-   start_expedition()
+   port:start_expedition()
    wait_for_message("Expedition Ready")
-   click_on_ship(first_ship)
-   assert_true(click_button("expccw"))
+   first_ship.island_explore_direction="ccw"
+   sleep(2000)
+   assert_equal("ccw",first_ship.island_explore_direction)
    wait_for_message("Port Space Found")
-   assert_true(click_button("buildport"))
+   first_ship:build_colonization_port()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    wait_for_message("Port")
