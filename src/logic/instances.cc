@@ -295,7 +295,7 @@ void MapObjectDescr::add_attribute(uint32_t const attr)
 }
 
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
-                                      const std::set<uint32_t>& allowed_special) {
+									  const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
@@ -357,7 +357,10 @@ MapObject IMPLEMENTATION
  * Zero-initialize a map object
  */
 MapObject::MapObject(const MapObjectDescr * const the_descr) :
-m_descr(the_descr), m_serial(0), m_logsink(nullptr)
+m_descr(the_descr),
+m_serial(0),
+m_logsink(nullptr),
+m_reserved_by_worker(false)
 {}
 
 
@@ -482,7 +485,18 @@ void MapObject::molog(char const * fmt, ...) const
 	log("MO(%u,%s): %s", m_serial, descr().name().c_str(), buffer);
 }
 
-constexpr uint8_t kCurrentPacketVersionMapObject = 1;
+bool MapObject::is_reserved_by_worker() const
+{
+	return m_reserved_by_worker;
+}
+
+void MapObject::set_reserved_by_worker(bool reserve)
+{
+	m_reserved_by_worker = reserve;
+}
+
+
+constexpr uint8_t kCurrentPacketVersionMapObject = 2;
 
 /**
  * Load the entire data package from the given file.
@@ -502,16 +516,19 @@ void MapObject::Loader::load(FileRead & fr)
 				("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionMapObject) {
-
-			Serial const serial = fr.unsigned_32();
-			try {
-				mol().register_object<MapObject>(serial, *get_object());
-			} catch (const WException & e) {
-				throw wexception("%u: %s", serial, e.what());
-			}
-		} else {
+		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError(packet_version, kCurrentPacketVersionMapObject);
+		}
+
+		Serial const serial = fr.unsigned_32();
+		try {
+			mol().register_object<MapObject>(serial, *get_object());
+		} catch (const WException & e) {
+			throw wexception("%u: %s", serial, e.what());
+		}
+
+		if (packet_version == kCurrentPacketVersionMapObject) {
+			get_object()->m_reserved_by_worker = fr.unsigned_8();
 		}
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
@@ -554,6 +571,7 @@ void MapObject::save
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
+	fw.unsigned_8(m_reserved_by_worker);
 }
 
 std::string to_string(const MapObjectType type) {

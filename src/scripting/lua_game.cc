@@ -627,9 +627,9 @@ int LuaPlayer::reveal_scenario(lua_State * L) {
 */
 // UNTESTED
 int LuaPlayer::reveal_campaign(lua_State * L) {
-	if (get_game(L).get_ipl()->player_number() != player_number())
+	if (get_game(L).get_ipl()->player_number() != player_number()) {
 		report_error(L, "Can only be called for interactive player!");
-		report_error(L, "Can only be called for interactive player!");
+	}
 
 	CampaignVisibilitySave cvs;
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);

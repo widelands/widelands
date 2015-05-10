@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-25 08:01+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-13 09:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "An dàrna impireachd"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr "Na Tùsanaich"
+msgstr "Tùsanaich"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
@@ -84,7 +84,7 @@ msgstr "Mìosan an fhògraidh"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr "An Impireachd"
+msgstr "Impireachd"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
@@ -110,7 +110,7 @@ msgstr "An toir air an teine"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Na h-Atlantaich"
+msgstr "Atlantaich"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
@@ -177,7 +177,7 @@ msgstr "San oideachadh seo, ionnsaichidh tu mar a stiùiricheas tu rudan ann an 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr "An cogadh"
+msgstr "Cogadh"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""

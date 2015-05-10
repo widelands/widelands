@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 18:01+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-13 09:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -382,7 +382,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
-msgstr "Na borbairean"
+msgstr "Na Tùsanaich"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
