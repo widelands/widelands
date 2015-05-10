@@ -37,6 +37,8 @@
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
@@ -48,6 +50,7 @@ constexpr uint32_t quantityColumnWidth = 100;
 constexpr uint32_t wareColumnWidth = 250;
 #define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - wareColumnWidth - quantityColumnWidth - 10)
 constexpr int kPadding = 5;
+constexpr int kTabHeight = 35;
 
 using namespace Widelands;
 
@@ -69,30 +72,50 @@ EncyclopediaWindow::EncyclopediaWindow
 	wares_box_(&wares_tab_box_, 0, 0, UI::Box::Vertical),
 	wares_details_box_(&wares_box_, 0, 0, UI::Box::Horizontal),
 	wares_            (&wares_box_, 0, 0, WINDOW_WIDTH - 2 * kPadding, WINDOW_HEIGHT - 270 - 2 * kPadding),
-	descr_txt_         (&wares_box_, 0, 0, WINDOW_WIDTH - 2 * kPadding, 80, ""),
-	prod_sites_        (&wares_details_box_, 0, 0, PRODSITE_GROUPS_WIDTH, 145),
+	ware_text_        (&wares_box_, 0, 0, WINDOW_WIDTH - 2 * kPadding, 80, ""),
+	prod_sites_       (&wares_details_box_, 0, 0, PRODSITE_GROUPS_WIDTH, 145),
 	cond_table_
 		(&wares_details_box_,
-		 0, 0, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 2 * kPadding, 145)
+		 0, 0, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 2 * kPadding, 145),
+	buildings_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
+	buildings_box_(&buildings_tab_box_, 0, 0, UI::Box::Horizontal),
+	buildings_    (&buildings_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
+	building_text_(&buildings_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding)
 {
+
+	// Wares
 	wares_details_box_.add(&prod_sites_, UI::Align_Left);
 	wares_details_box_.add(&cond_table_, UI::Align_Left);
 	wares_details_box_.set_size(WINDOW_WIDTH,
-										 tabs_.get_inner_h() - wares_.get_h() - descr_txt_.get_h() - 4 * kPadding);
+										 tabs_.get_inner_h() - wares_.get_h() - ware_text_.get_h() - 4 * kPadding);
 
 	wares_box_.add(&wares_, UI::Align_Left);
 	wares_box_.add_space(kPadding);
-	wares_box_.add(&descr_txt_, UI::Align_Left);
+	wares_box_.add(&ware_text_, UI::Align_Left);
 	wares_box_.add_space(kPadding);
 	wares_box_.add(&wares_details_box_, UI::Align_Left);
-	wares_box_.set_size(WINDOW_WIDTH, wares_.get_h() + descr_txt_.get_h() + 2 * kPadding);
+	wares_box_.set_size(WINDOW_WIDTH, wares_.get_h() + ware_text_.get_h() + 2 * kPadding);
 
 	wares_tab_box_.add_space(kPadding);
 	wares_tab_box_.add(&wares_box_, UI::Align_Left);
 
-	tabs_.add("wares", g_gr->images().get("pics/genstats_nrwares.png"), &wares_tab_box_, _("Wares"));
+	// Buildings
+	buildings_box_.add(&buildings_, UI::Align_Left);
+	buildings_box_.add_space(kPadding);
+	buildings_box_.add(&building_text_, UI::Align_Left);
+
+	buildings_tab_box_.add_space(kPadding);
+	buildings_tab_box_.add(&buildings_box_, UI::Align_Left);
+
+	tabs_.add("encyclopedia_wares", g_gr->images().get("pics/genstats_nrwares.png"),
+				 &wares_tab_box_, _("Wares"));
+	tabs_.add("encyclopedia_buildings", g_gr->images().get("pics/genstats_nrbuildings.png"),
+				 &buildings_tab_box_, _("Buildings"));
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+	// Content
 	wares_.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
 	prod_sites_.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
 	cond_table_.add_column
@@ -101,7 +124,11 @@ EncyclopediaWindow::EncyclopediaWindow
 	cond_table_.add_column (quantityColumnWidth, _("Quantity"));
 	cond_table_.focus();
 
+	buildings_.selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
+
 	fill_wares();
+
+	fill_buildings();
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -130,7 +157,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	selected_ware_ = tribe.get_ware_descr(wares_.get_selected());
 
-	descr_txt_.set_text(selected_ware_->helptext());
+	ware_text_.set_text(selected_ware_->helptext());
 
 	prod_sites_.clear();
 	cond_table_.clear();
@@ -227,4 +254,50 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 		}
 	}
 	cond_table_.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
+}
+
+void EncyclopediaWindow::fill_buildings() {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	std::vector<Building> building_vec;
+
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
+		BuildingDescr const * building = tribe.get_building_descr(i);
+		Building b(i, building);
+		// We can't access helptexts for global militarysites
+		// TODO(GunChleoc): Add global militarysites in the one_tribe branch
+		if (!building->global()) {
+			building_vec.push_back(b);
+		}
+	}
+
+	std::sort(building_vec.begin(), building_vec.end());
+
+	for (uint32_t i = 0; i < building_vec.size(); i++) {
+		Building cur = building_vec[i];
+		buildings_.add(cur.descr_->descname(), cur.index_, cur.descr_->get_icon());
+	}
+}
+
+
+void EncyclopediaWindow::building_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(buildings_.get_selected());
+
+	if (selected_building.has_help_text()) {
+		try {
+			std::unique_ptr<LuaTable> t(
+				iaplayer().egbase().lua().run_script(selected_building.helptext_script()));
+			std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+			cr->push_arg(&selected_building);
+			cr->resume();
+			const std::string help_text = cr->pop_string();
+			building_text_.set_text(help_text);
+		} catch (LuaError& err) {
+			building_text_.set_text(err.what());
+		}
+	} else {
+		building_text_.set_text(_("There is no help available for this building."));
+	}
+	building_text_.scroll_to_top();
 }

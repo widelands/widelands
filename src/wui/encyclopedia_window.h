@@ -20,6 +20,7 @@
 #ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
+#include "logic/building.h"
 #include "logic/ware_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
@@ -31,6 +32,7 @@
 
 namespace Widelands {
 struct WareDescr;
+struct BuildingDescr;
 class TribeDescr;
 }
 
@@ -53,19 +55,41 @@ private:
 		}
 	};
 
+	struct Building {
+		Building(Widelands::BuildingIndex i, const Widelands::BuildingDescr * descr)
+			:
+			index_(i),
+			descr_(descr)
+			{}
+		Widelands::BuildingIndex index_;
+		const Widelands::BuildingDescr * descr_;
+
+		bool operator<(const Building o) const {
+			return descr_->descname() < o.descr_->descname();
+		}
+	};
+
 	InteractivePlayer & iaplayer() const;
 	UI::TabPanel tabs_;
+	// Wares
 	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
 	UI::Box wares_box_;          // Main contents box for Wares tab
 	UI::Box wares_details_box_;  // Horizontal alignment for prod_sites_ and cond_table_
 	UI::Listselect<Widelands::WareIndex> wares_;
-	UI::MultilineTextarea    descr_txt_;
+	UI::MultilineTextarea    ware_text_;
 	UI::Listselect<Widelands::BuildingIndex> prod_sites_;
 	UI::Table     <uintptr_t>                 cond_table_;
 	Widelands::WareDescr const * selected_ware_;
 	void fill_wares();
 	void ware_selected(uint32_t);
 	void prod_site_selected(uint32_t);
+	// Buildings
+	UI::Box buildings_tab_box_;  // Wrapper box so we can add some padding
+	UI::Box buildings_box_;      // Main contents box for Buildings tab
+	UI::Listselect<Widelands::BuildingIndex> buildings_;
+	UI::MultilineTextarea building_text_;
+	void fill_buildings();
+	void building_selected(uint32_t);
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H
