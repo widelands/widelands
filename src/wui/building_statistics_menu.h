@@ -53,9 +53,14 @@ private:
 	};
 
 	UI::TabPanel tabs_;
-	UI::Box old_design_;
+	UI::Box small_tab_;
+	UI::Box medium_tab_;
+	UI::Box big_tab_;
+	UI::Box mines_tab_;
+	UI::Box ports_tab_;
 
 	// Old table
+	UI::Box old_design_;
 	UI::Table<uintptr_t const> m_table;
 	UI::ProgressBar          m_progbar;
 	UI::Textarea              m_total_productivity_label;

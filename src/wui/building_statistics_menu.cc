@@ -79,6 +79,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Building Statistics")),
 	tabs_(this, 0, 0, nullptr),
+	small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+	medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+	big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+	mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+	ports_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+
+
 	old_design_(&tabs_, 0, 0, UI::Box::Vertical),
 	m_table
 		(&old_design_, HMARGIN, VMARGIN, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT),
@@ -94,6 +101,18 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	m_last_building_index(0),
 	m_last_table_index   (0)
 {
+	tabs_.add("building_stats_small", g_gr->images().get("pics/menu_tab_buildsmall.png"),
+				 &small_tab_, _("Small Buildings"));
+	tabs_.add("building_stats_medium", g_gr->images().get("pics/menu_tab_buildmedium.png"),
+				 &medium_tab_, _("Medium Buildings"));
+	tabs_.add("building_stats_big", g_gr->images().get("pics/menu_tab_buildbig.png"),
+				 &big_tab_, _("Big Buildings"));
+	tabs_.add("building_stats_mines", g_gr->images().get("pics/menu_tab_buildmine.png"),
+				 &mines_tab_, _("Mines"));
+	tabs_.add("building_stats_ports", g_gr->images().get("pics/menu_tab_buildport.png"),
+				 &ports_tab_, _("Ports"));
+	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
+
 	//  building list
 	m_table.add_column(310, _("Name"));
 	m_table.add_column (70, _("Type"), "",     UI::Align_HCenter);
