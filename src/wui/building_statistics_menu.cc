@@ -43,7 +43,7 @@ constexpr int kBuildGridCellSize = 50;
 constexpr int kColumns = 5;
 
 #define WINDOW_WIDTH         625
-#define WINDOW_HEIGHT        440
+#define WINDOW_HEIGHT        500
 #define VMARGIN                5
 #define HMARGIN                5
 #define VSPACING               5
@@ -113,7 +113,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 				 &mines_tab_, _("Mines"));
 	tabs_.add("building_stats_ports", g_gr->images().get("pics/menu_tab_buildport.png"),
 				 &ports_tab_, _("Ports"));
-	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
+	tabs_.set_size(WINDOW_WIDTH, 485);
 
 	//  building list
 	m_table.add_column(310, _("Name"));
@@ -233,7 +233,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 
 	tabs_.add("building_stats_old", g_gr->images().get("pics/genstats_nrbuildings.png"),
 					 &old_design_, "Old Design");
-	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	m_btn[PrevOwned]->sigclicked.connect
 		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevOwned));
@@ -357,20 +356,33 @@ void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& d
 								descr.descname(), true, true);
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
+	std::string buttonlabel;
+	if (!descr.global() && (descr.is_buildable() || descr.is_enhanced())) {
+		/** TRANSLATORS Buildings: owned / under construction */
+		buttonlabel = (boost::format(_("%1% / %2%")) % 0 % 0).str();
+	} else {
+		buttonlabel = (boost::format(_("%1% / %2%")) % 0 % "–").str();
+	}
 	owned_buttons_[id] =
-			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
+			new UI::Button(button_box, (boost::format("owned_button%s") % id).str(), 0, 0,
 								kBuildGridCellSize, 20,
 								g_gr->images().get("pics/but1.png"),
-								/** TRANSLATORS Buildings: owned / under construction */
-								(boost::format(_("%1% / %2%")) % 0 % 0).str(),
+								buttonlabel,
 								_("Owned / Under Construction"), true, true);
 	button_box->add(owned_buttons_[id], UI::Align_Left);
 
+	if (descr.type() == MapObjectType::PRODUCTIONSITE &&
+		 descr.type() != MapObjectType::MILITARYSITE &&
+		 descr.type() != MapObjectType::WAREHOUSE) {
+		buttonlabel =  "–";
+	} else {
+		buttonlabel = " ";
+	}
 	productivity_buttons_[id] =
 			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
 								kBuildGridCellSize, 20,
 								g_gr->images().get("pics/but1.png"),
-								"–",
+								buttonlabel,
 								_("Productivity"), true, true);
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
@@ -550,7 +562,6 @@ void BuildingStatisticsMenu::update() {
 
 	for(BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr& building = *tribe.get_building_descr(i);
-		// NOCOM decide how to handle enhanced and glocal sites
 		if(!(building.is_buildable() || building.is_enhanced() || building.global())) {
 			continue;
 		}
@@ -574,18 +585,27 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		if (productionsite && nr_owned) {
-			int const percent =
-				static_cast<int>
-					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			productivity_buttons_[i]->set_title((boost::format("%i%%") % percent).str());
+		if (building.type() == MapObjectType::PRODUCTIONSITE &&
+			 building.type() != MapObjectType::MILITARYSITE &&
+			 building.type() != MapObjectType::WAREHOUSE) {
+			if (nr_owned) {
+				int const percent =
+					static_cast<int>
+						(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
+				productivity_buttons_[i]->set_title((boost::format("%i%%") % percent).str());
+			} else {
+				productivity_buttons_[i]->set_title("–");
+			}
 		} else {
-			productivity_buttons_[i]->set_title("–");
+			productivity_buttons_[i]->set_title(" ");
 		}
 
-		/** TRANSLATORS Buildings: owned / under construction */
-		owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % nr_build).str());
-
+		if (!building.global() && (building.is_buildable() || building.is_enhanced())) {
+			/** TRANSLATORS Buildings: owned / under construction */
+			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % nr_build).str());
+		} else {
+			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned %  "–").str());
+		}
 	}
 
 
