@@ -261,7 +261,9 @@ void BuildingStatisticsMenu::init() {
 	const TribeDescr& tribe = iplayer().player().tribe();
 
 	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
-	buttons_ = std::vector<UI::Button*>(nr_buildings);
+	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
+	owned_buttons_ = std::vector<UI::Button*>(nr_buildings);
+	productivity_buttons_ = std::vector<UI::Button*>(nr_buildings);
 
 	int small_column = 0;
 	int medium_column = 0;
@@ -345,14 +347,32 @@ void BuildingStatisticsMenu::init() {
 }
 
 void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
-	buttons_[id] = new UI::Button(&tab, (boost::format("button%s") % id).str(), 0, 0,
+	UI::Box* button_box = new UI::Box(&tab, 0, 0, UI::Box::Vertical);
+	building_buttons_[id] = new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
 											kBuildGridCellSize, kBuildGridCellSize,
 											g_gr->images().get("pics/but1.png"),
 											&g_gr->animations()
 												 .get_animation(descr.get_animation("idle"))
 												 .representative_image_from_disk(),
 											descr.descname(), true, true);
-	tab.add(buttons_[id], UI::Align_Left);
+	button_box->add(building_buttons_[id], UI::Align_Left);
+
+	owned_buttons_[id] = new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
+															kBuildGridCellSize, 20,
+															g_gr->images().get("pics/but1.png"),
+													/** TRANSLATORS Buildings: owned / under construction */
+															(boost::format(_("%1% / %2%")) % 0 % 0).str(),
+															_("Owned / Under Construction"), true, true);
+	button_box->add(owned_buttons_[id], UI::Align_Left);
+
+	productivity_buttons_[id] = new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
+															kBuildGridCellSize, 20,
+															g_gr->images().get("pics/but1.png"),
+															"-",
+															_("Productivity"), true, true);
+	button_box->add(productivity_buttons_[id], UI::Align_Left);
+
+	tab.add(button_box, UI::Align_Left);
 }
 
 

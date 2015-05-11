@@ -66,7 +66,9 @@ private:
 	std::vector<BuildingIndex> big_buildings_;
 	std::vector<BuildingIndex> mines_;
 	std::vector<BuildingIndex> ports_;
-	std::vector<UI::Button*> buttons_;
+	std::vector<UI::Button*> building_buttons_;
+	std::vector<UI::Button*> owned_buttons_;
+	std::vector<UI::Button*> productivity_buttons_;
 
 	// Old table
 	UI::Box old_design_;
