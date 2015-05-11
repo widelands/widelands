@@ -80,6 +80,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Building Statistics")),
+	is_shift_pressed_(false),
 	tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
 	medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
@@ -114,6 +115,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	tabs_.add("building_stats_ports", g_gr->images().get("pics/menu_tab_buildport.png"),
 				 &ports_tab_, _("Ports"));
 	tabs_.set_size(WINDOW_WIDTH, 485);
+
+	log("NOCOM window width: %d\n", get_h() - get_inner_h());
 
 	//  building list
 	m_table.add_column(310, _("Name"));
@@ -390,7 +393,151 @@ void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& d
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
 	tab.add(button_box, UI::Align_Left);
+
+	building_buttons_[id]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::jump_building, boost::ref(*this), id));
+	owned_buttons_[id]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::jump_constructionsite, boost::ref(*this), id));
+	productivity_buttons_[id]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::jump_unproductive, boost::ref(*this), id));
+
+
 }
+
+bool BuildingStatisticsMenu::handle_key(bool const down, SDL_Keysym const code) {
+	if (down) {
+		// only on down events
+		switch (code.sym) {
+			case SDLK_LSHIFT:
+			case SDLK_RSHIFT:
+				is_shift_pressed_ = true;
+				break;
+			default:
+				break;
+		}
+	} else {
+		switch (code.sym) {
+			case SDLK_LSHIFT:
+			case SDLK_RSHIFT:
+				is_shift_pressed_ = false;
+				break;
+			default:
+				break;
+		}
+	}
+	return false;
+}
+
+void BuildingStatisticsMenu::jump_building(BuildingIndex id) {
+	if (last_building_type_ != id) {
+		last_building_index_ = 0;
+	}
+	last_building_type_ = id;
+
+	const std::vector<Player::BuildingStats>& stats_vector =
+		iplayer().get_player()->get_building_statistics(id);
+
+	if (is_shift_pressed_) {
+		--last_building_index_;
+	} else {
+		++last_building_index_;
+	}
+
+	validate_pointer(&last_building_index_, stats_vector.size());
+	iplayer().move_view_to(stats_vector[last_building_index_].pos);
+}
+
+
+void BuildingStatisticsMenu::jump_constructionsite(BuildingIndex id) {
+	if (last_building_type_ != id) {
+		last_building_index_ = 0;
+	}
+	last_building_type_ = id;
+
+	const std::vector<Player::BuildingStats>& stats_vector =
+		iplayer().get_player()->get_building_statistics(id);
+
+	int32_t const curindex = last_building_index_;
+
+	if (is_shift_pressed_) {
+		while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
+			if (stats_vector[last_building_index_].is_constructionsite) {
+				break;
+			}
+		}
+	} else {
+		while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
+			if (stats_vector[last_building_index_].is_constructionsite) {
+				break;
+			}
+		}
+	}
+
+	validate_pointer(&last_building_index_, stats_vector.size());
+	iplayer().move_view_to(stats_vector[last_building_index_].pos);
+}
+
+void BuildingStatisticsMenu::jump_unproductive(BuildingIndex id) {
+	if (last_building_type_ != id) {
+		last_building_index_ = 0;
+	}
+	last_building_type_ = id;
+
+	const std::vector<Player::BuildingStats>& stats_vector =
+		iplayer().get_player()->get_building_statistics(id);
+
+	const Map & map = iplayer().egbase().map();
+
+	int32_t const curindex = last_building_index_;
+	bool found = false;
+
+	if (is_shift_pressed_) {
+		while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
+			if (!stats_vector[last_building_index_].is_constructionsite) {
+				if
+					(upcast
+						(ProductionSite,
+						 productionsite,
+						 map[stats_vector[last_building_index_].pos].get_immovable())) {
+					if (productionsite->get_statistics_percent() < LOW_PROD) {
+						found = true;
+						break;
+					}
+				}
+			}
+		}
+	} else {
+		while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
+			if (!stats_vector[last_building_index_].is_constructionsite) {
+				if
+					(upcast
+						(ProductionSite,
+						 productionsite,
+						 map[stats_vector[last_building_index_].pos].get_immovable())) {
+					if (productionsite->get_statistics_percent() < LOW_PROD) {
+						found = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+	if (!found) { // Now look at the old
+		if
+			(upcast
+				(ProductionSite,
+				 productionsite,
+				 map[stats_vector[last_building_index_].pos].get_immovable())) {
+			if (productionsite->get_statistics_percent() < LOW_PROD) {
+				found = true;
+			}
+		}
+	}
+
+	validate_pointer(&last_building_index_, stats_vector.size());
+	iplayer().move_view_to(stats_vector[last_building_index_].pos);
+}
+
 
 
 /*

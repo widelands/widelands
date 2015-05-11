@@ -40,19 +40,19 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 	void think() override;
 	void update();
+	bool handle_key(bool const down, SDL_Keysym const code) override;
 
 private:
 	void init();
 	void add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
-
-	bool compare_building_size(uint32_t rowa, uint32_t rowb);
+	void jump_building(BuildingIndex id);
+	void jump_constructionsite(BuildingIndex id);
+	void jump_unproductive(BuildingIndex id);
+	int32_t validate_pointer(int32_t *, int32_t);
 
 	InteractivePlayer & iplayer() const;
-	enum JumpTargets {
-		PrevOwned,        NextOwned,
-		PrevConstruction, NextConstruction,
-		PrevUnproductive, NextUnproductive
-	};
+
+	bool is_shift_pressed_;
 
 	UI::TabPanel tabs_;
 	UI::Box small_tab_;
@@ -69,6 +69,8 @@ private:
 	std::vector<UI::Button*> building_buttons_;
 	std::vector<UI::Button*> owned_buttons_;
 	std::vector<UI::Button*> productivity_buttons_;
+	int32_t last_building_index_;
+	BuildingIndex last_building_type_;
 
 	// Old table
 	UI::Box old_design_;
@@ -86,10 +88,15 @@ private:
 	int32_t                   m_last_building_index;
 	uint32_t                  m_last_table_index;
 
+	enum JumpTargets {
+		PrevOwned,        NextOwned,
+		PrevConstruction, NextConstruction,
+		PrevUnproductive, NextUnproductive
+	};
 	void clicked_help();
 	void clicked_jump(JumpTargets);
 	void table_changed(uint32_t);
-	int32_t validate_pointer(int32_t *, int32_t);
+	bool compare_building_size(uint32_t rowa, uint32_t rowb);
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
