@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -38,6 +39,8 @@
 #include "wui/plot_area.h"
 
 constexpr int kTabHeight = 35;
+constexpr int kBuildGridCellSize = 50;
+constexpr int kColumns = 5;
 
 #define WINDOW_WIDTH         625
 #define WINDOW_HEIGHT        440
@@ -249,6 +252,107 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 
 	m_btn[NextUnproductive]->sigclicked.connect
 		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextUnproductive));
+
+	init();
+}
+
+
+void BuildingStatisticsMenu::init() {
+	const TribeDescr& tribe = iplayer().player().tribe();
+
+	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
+	buttons_ = std::vector<UI::Button*>(nr_buildings);
+
+	int small_column = 0;
+	int medium_column = 0;
+	int big_column = 0;
+	int mines_column = 0;
+	int ports_column = 0;
+
+	UI::Box* mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
+	UI::Box* ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
+	UI::Box* big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
+	UI::Box* medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
+	UI::Box* small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
+
+
+	for(BuildingIndex id = 0; id < nr_buildings; ++id) {
+		const BuildingDescr& descr = *tribe.get_building_descr(id);
+
+		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
+			 descr.type() != MapObjectType::DISMANTLESITE) {
+			if (descr.get_ismine()) {
+				mines_.push_back(id);
+				add_button(id, descr, *mines_row);
+				++mines_column;
+				if (mines_column == kColumns) {
+					mines_tab_.add(mines_row, UI::Align_Left);
+					mines_column = 0;
+					mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
+				}
+			} else if (descr.get_isport()) {
+				ports_.push_back(id);
+				add_button(id, descr, *ports_row);
+				++ports_column;
+				if (ports_column == kColumns) {
+					ports_tab_.add(ports_row, UI::Align_Left);
+					ports_column = 0;
+					ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
+				}
+			} else {
+				switch (descr.get_size()) {
+					case BaseImmovable::SMALL:
+						small_buildings_.push_back(id);
+						add_button(id, descr, *small_row);
+						++small_column;
+						if (small_column == kColumns) {
+							small_tab_.add(small_row, UI::Align_Left);
+							small_column = 0;
+							small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
+						}
+						break;
+					case BaseImmovable::MEDIUM:
+						medium_buildings_.push_back(id);
+						add_button(id, descr, *medium_row);
+						++medium_column;
+						if (medium_column == kColumns) {
+							medium_tab_.add(medium_row, UI::Align_Left);
+							medium_column = 0;
+							medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
+						}
+						break;
+					case BaseImmovable::BIG:
+						big_buildings_.push_back(id);
+						add_button(id, descr, *big_row);
+						++big_column;
+						if (big_column == kColumns) {
+							big_tab_.add(big_row, UI::Align_Left);
+							big_column = 0;
+							big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
+						}
+						break;
+					default:
+						throw wexception("Building statictics: Found building without a size: %s", descr.name().c_str());
+				}
+			}
+		}
+	}
+	mines_tab_.add(mines_row, UI::Align_Left);
+	ports_tab_.add(ports_row, UI::Align_Left);
+	small_tab_.add(small_row, UI::Align_Left);
+	medium_tab_.add(medium_row, UI::Align_Left);
+	big_tab_.add(big_row, UI::Align_Left);
+}
+
+void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
+	buttons_[id] = new UI::Button(&tab, (boost::format("button%s") % id).str(), 0, 0,
+											kBuildGridCellSize, kBuildGridCellSize,
+											g_gr->images().get("pics/but1.png"),
+											&g_gr->animations()
+												 .get_animation(descr.get_animation("idle"))
+												 .representative_image_from_disk(),
+											descr.descname(), true, true);
+	tab.add(buttons_[id], UI::Align_Left);
 }
 
 
@@ -256,7 +360,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
  * Update this statistic
  */
 void BuildingStatisticsMenu::think() {
-	const Widelands::Game & game = iplayer().game();
+	const Game & game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
 	if ((gametime - m_lastupdate) > UPDATE_TIME) {
@@ -285,11 +389,11 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 	if (m_last_table_index != m_table.selection_index())
 		m_last_building_index = 0;
 	m_last_table_index = m_table.selection_index();
-	const std::vector<Widelands::Player::BuildingStats> & vec =
+	const std::vector<Player::BuildingStats> & vec =
 		iplayer().get_player()->get_building_statistics
-			(Widelands::BuildingIndex
+			(BuildingIndex
 				(static_cast<size_t>(m_table.get_selected())));
-	const Widelands::Map & map = iplayer().egbase().map();
+	const Map & map = iplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
 
@@ -323,7 +427,7 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 			if (!vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 	(Widelands::ProductionSite,
+						(ProductionSite,
 					 	 productionsite,
 					 	 map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
@@ -334,7 +438,7 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 		if (!found) // Now look at the old
 			if
 				(upcast
-				 	(Widelands::ProductionSite,
+					(ProductionSite,
 				 	 productionsite,
 				 	 map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
@@ -349,7 +453,7 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 			if (!vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
-					 	(Widelands::ProductionSite,
+						(ProductionSite,
 					 	 productionsite,
 					 	 map[vec[m_last_building_index].pos].get_immovable()))
 					if (productionsite->get_statistics_percent() < LOW_PROD) {
@@ -360,7 +464,7 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 		if (!found) // Now look at the old
 			if
 				(upcast
-				 	(Widelands::ProductionSite,
+					(ProductionSite,
 				 	 productionsite,
 				 	 map[vec[m_last_building_index].pos].get_immovable()))
 				if (productionsite->get_statistics_percent() < LOW_PROD)
@@ -389,11 +493,11 @@ void BuildingStatisticsMenu::table_changed(uint32_t) {update();}
 bool BuildingStatisticsMenu::compare_building_size
 	(uint32_t const rowa, uint32_t const rowb)
 {
-	const Widelands::TribeDescr & tribe = iplayer().player().tribe();
-	Widelands::BuildingIndex a = Widelands::BuildingIndex(m_table[rowa]);
-	Widelands::BuildingIndex b = Widelands::BuildingIndex(m_table[rowb]);
-	const Widelands::BuildingDescr * descra = tribe.get_building_descr(a);
-	const Widelands::BuildingDescr * descrb = tribe.get_building_descr(b);
+	const TribeDescr & tribe = iplayer().player().tribe();
+	BuildingIndex a = BuildingIndex(m_table[rowa]);
+	BuildingIndex b = BuildingIndex(m_table[rowb]);
+	const BuildingDescr * descra = tribe.get_building_descr(a);
+	const BuildingDescr * descrb = tribe.get_building_descr(b);
 
 	if (!descra || !descrb)
 		return false; // shouldn't happen, but be defensive
@@ -417,16 +521,16 @@ void BuildingStatisticsMenu::update() {
 	m_in_build->set_text("");
 	m_progbar .set_state(0);
 
-	const Widelands::Player      & player = iplayer().player();
-	const Widelands::TribeDescr & tribe  = player.tribe();
-	const Widelands::Map         & map   = iplayer().game().map();
-	Widelands::BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
+	const Player      & player = iplayer().player();
+	const TribeDescr & tribe  = player.tribe();
+	const Map         & map   = iplayer().game().map();
+	BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::BuildingIndex i = 0;
+		(BuildingIndex i = 0;
 		 i < nr_buildings;
 		 ++i)
 	{
-		const Widelands::BuildingDescr & building =
+		const BuildingDescr & building =
 			*tribe.get_building_descr(i);
 		if
 			(!(building.is_buildable()
@@ -434,7 +538,7 @@ void BuildingStatisticsMenu::update() {
 			 || building.global()))
 			continue;
 
-		const std::vector<Widelands::Player::BuildingStats> & vec =
+		const std::vector<Player::BuildingStats> & vec =
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
@@ -458,7 +562,7 @@ void BuildingStatisticsMenu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionSiteDescr const, productionsite, &building);
+		upcast(ProductionSiteDescr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;
@@ -466,7 +570,7 @@ void BuildingStatisticsMenu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						dynamic_cast<Widelands::ProductionSite&>
+						dynamic_cast<ProductionSite&>
 							(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
@@ -494,13 +598,13 @@ void BuildingStatisticsMenu::update() {
 				pic = "pics/menu_tab_buildport.png";
 			}
 			else switch (building.get_size()) {
-			case Widelands::BaseImmovable::SMALL:
+			case BaseImmovable::SMALL:
 				pic = "pics/menu_tab_buildsmall.png";
 				break;
-			case Widelands::BaseImmovable::MEDIUM:
+			case BaseImmovable::MEDIUM:
 				pic = "pics/menu_tab_buildmedium.png";
 				break;
-			case Widelands::BaseImmovable::BIG:
+			case BaseImmovable::BIG:
 				pic = "pics/menu_tab_buildbig.png";
 				break;
 			default:

@@ -20,20 +20,19 @@
 #ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
+#include "logic/building.h"
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-namespace Widelands {struct BuildingDescr;}
+using namespace Widelands;
+
 class InteractivePlayer;
-namespace UI {
-struct Button;
-struct ProgressBar;
-struct Textarea;
-}
 
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	BuildingStatisticsMenu
@@ -43,6 +42,9 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	void update();
 
 private:
+	void init();
+	void add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
+
 	bool compare_building_size(uint32_t rowa, uint32_t rowb);
 
 	InteractivePlayer & iplayer() const;
@@ -58,6 +60,13 @@ private:
 	UI::Box big_tab_;
 	UI::Box mines_tab_;
 	UI::Box ports_tab_;
+
+	std::vector<BuildingIndex> small_buildings_;
+	std::vector<BuildingIndex> medium_buildings_;
+	std::vector<BuildingIndex> big_buildings_;
+	std::vector<BuildingIndex> mines_;
+	std::vector<BuildingIndex> ports_;
+	std::vector<UI::Button*> buttons_;
 
 	// Old table
 	UI::Box old_design_;
