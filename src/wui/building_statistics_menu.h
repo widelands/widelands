@@ -20,8 +20,10 @@
 #ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/table.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
@@ -38,7 +40,6 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 		(InteractivePlayer &, UI::UniqueWindow::Registry &);
 
 	void think() override;
-	void draw(RenderTarget &) override;
 	void update();
 
 private:
@@ -51,15 +52,18 @@ private:
 		PrevUnproductive, NextUnproductive
 	};
 
+	UI::TabPanel tabs_;
+	UI::Box old_design_;
+
+	// Old table
 	UI::Table<uintptr_t const> m_table;
 	UI::ProgressBar          m_progbar;
 	UI::Textarea              m_total_productivity_label;
-	UI::Textarea              m_owned_label;
-	UI::Textarea              m_owned;
-	UI::Textarea              m_in_build_label;
-	UI::Textarea              m_in_build;
-	UI::Textarea              m_unproductive_label;
-	uint32_t                  m_anim;
+	UI::Textarea*              m_owned_label;
+	UI::Textarea*              m_owned;
+	UI::Textarea*              m_in_build_label;
+	UI::Textarea*              m_in_build;
+	UI::Textarea*              m_unproductive_label;
 	uint32_t                  m_lastupdate;
 	uint32_t                  m_end_of_table_y;
 	UI::Button * m_btn[6];

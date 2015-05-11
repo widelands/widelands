@@ -37,6 +37,8 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/plot_area.h"
 
+constexpr int kTabHeight = 35;
+
 #define WINDOW_WIDTH         625
 #define WINDOW_HEIGHT        440
 #define VMARGIN                5
@@ -76,33 +78,18 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Building Statistics")),
+	tabs_(this, 0, 0, nullptr),
+	old_design_(&tabs_, 0, 0, UI::Box::Vertical),
 	m_table
-		(this, HMARGIN, VMARGIN, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT),
+		(&old_design_, HMARGIN, VMARGIN, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT),
 	m_progbar
-		(this,
+		(&old_design_,
 		 LABEL_X, PROGRESS_BAR_Y, WINDOW_WIDTH - LABEL_X - HMARGIN, 20,
 		 UI::ProgressBar::Horizontal),
 	m_total_productivity_label
-		(this,
+		(&old_design_,
 		 LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
 		 _("Total Productivity:"), UI::Align_CenterLeft),
-	m_owned_label
-		(this,
-		 LABEL_X, OWNED_Y, LABEL_WIDTH, 24,
-		 _("Owned:"), UI::Align_CenterLeft),
-	m_owned
-		(this, VALUE_X, OWNED_Y, 100, 24, UI::Align_CenterLeft),
-	m_in_build_label
-		(this,
-		 LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
-		 _("Being built:"), UI::Align_CenterLeft),
-	m_in_build
-		(this, VALUE_X, IN_BUILD_Y, 100, 24, UI::Align_CenterLeft),
-	m_unproductive_label
-		(this,
-		 LABEL_X, UNPRODUCTIVE_Y, LABEL_WIDTH, 24,
-		 _("Jump to unproductive"), UI::Align_CenterLeft),
-	m_anim               (0),
 	m_lastupdate         (0),
 	m_last_building_index(0),
 	m_last_table_index   (0)
@@ -123,69 +110,124 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	//  toggle when to run button
 	m_progbar.set_total(100);
 
+	old_design_.add(&m_table, UI::Align_Left);
+	old_design_.add(&m_total_productivity_label, UI::Align_Left);
+	old_design_.add(&m_progbar, UI::Align_Left);
+
+	UI::Box* old_bottom = new UI::Box(&old_design_, 0, 0, UI::Box::Horizontal);
+
+	m_owned_label = new UI::Textarea
+		(old_bottom,
+		 LABEL_X, OWNED_Y, LABEL_WIDTH, 24,
+		 _("Owned:"), UI::Align_CenterLeft);
+	m_owned = new UI::Textarea
+		(old_bottom, VALUE_X, OWNED_Y, 100, 24, UI::Align_CenterLeft);
+
 	m_btn[PrevOwned] =
 		new UI::Button
-			(this, "previous_owned",
+			(old_bottom, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[PrevOwned]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevOwned));
 
 	m_btn[NextOwned] =
 		new UI::Button
-			(this, "next_owned",
+			(old_bottom, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[NextOwned]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextOwned));
+
+	old_bottom->add(m_owned_label, UI::Align_Left);
+	old_bottom->add(m_owned, UI::Align_Left);
+	old_bottom->add(m_btn[PrevOwned], UI::Align_Left);
+	old_bottom->add(m_btn[NextOwned], UI::Align_Left);
+	old_design_.add(old_bottom, UI::Align_Left);
+
+	old_bottom = new UI::Box(&old_design_, 0, 0, UI::Box::Horizontal);
+
+	m_in_build_label = new UI::Textarea
+		(old_bottom,
+		 LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
+		 _("Being built:"), UI::Align_CenterLeft);
+	m_in_build = new UI::Textarea
+		(old_bottom, VALUE_X, IN_BUILD_Y, 100, 24, UI::Align_CenterLeft);
 
 	m_btn[PrevConstruction] =
 		new UI::Button
-			(this, "previous_constructed",
+			(old_bottom, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[PrevConstruction]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevConstruction));
 
 	m_btn[NextConstruction] =
 		new UI::Button
-			(this, "next_constructed",
+			(old_bottom, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[NextConstruction]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextConstruction));
+
+	old_bottom->add(m_in_build_label, UI::Align_Left);
+	old_bottom->add(m_in_build, UI::Align_Left);
+	old_bottom->add(m_btn[PrevConstruction], UI::Align_Left);
+	old_bottom->add(m_btn[NextConstruction], UI::Align_Left);
+	old_design_.add(old_bottom, UI::Align_Left);
+
+	old_bottom = new UI::Box(&old_design_, 0, 0, UI::Box::Horizontal);
+
+	m_unproductive_label = new UI::Textarea
+		(old_bottom,
+		 LABEL_X, UNPRODUCTIVE_Y, LABEL_WIDTH + 100, 24,
+		 _("Jump to unproductive"), UI::Align_CenterLeft);
 
 	m_btn[PrevUnproductive] =
 		new UI::Button
-			(this, "previous_unproductive",
+			(old_bottom, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[PrevUnproductive]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevUnproductive));
 
 	m_btn[NextUnproductive] =
 		new UI::Button
-			(this, "next_unproductive",
+			(old_bottom, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
+
+	old_bottom->add(m_unproductive_label, UI::Align_Left);
+	old_bottom->add(m_btn[PrevUnproductive], UI::Align_Left);
+	old_bottom->add(m_btn[NextUnproductive], UI::Align_Left);
+	old_design_.add(old_bottom, UI::Align_Left);
+
+	tabs_.add("building_stats_old", g_gr->images().get("pics/genstats_nrbuildings.png"),
+					 &old_design_, "Old Design");
+	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	m_btn[PrevOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevOwned));
+
+	m_btn[NextOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextOwned));
+
+	m_btn[PrevConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevConstruction));
+
+	m_btn[NextConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextConstruction));
+	m_btn[PrevUnproductive]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevUnproductive));
+
 	m_btn[NextUnproductive]->sigclicked.connect
 		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextUnproductive));
 }
@@ -202,21 +244,6 @@ void BuildingStatisticsMenu::think() {
 		update();
 		m_lastupdate = gametime;
 	}
-}
-
-/*
- * draw()
- *
- * Draw this window
- */
-void BuildingStatisticsMenu::draw(RenderTarget & dst) {
-	UI::Window::draw(dst);
-
-	const Widelands::Player & player = iplayer().player();
-	if (m_anim)
-		dst.drawanim
-			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
-			 m_anim, 0, &player);
 }
 
 /*
@@ -367,8 +394,8 @@ bool BuildingStatisticsMenu::compare_building_size
  * Update table
  */
 void BuildingStatisticsMenu::update() {
-	m_owned   .set_text("");
-	m_in_build.set_text("");
+	m_owned   ->set_text("");
+	m_in_build->set_text("");
 	m_progbar .set_state(0);
 
 	const Widelands::Player      & player = iplayer().player();
@@ -430,7 +457,6 @@ void BuildingStatisticsMenu::update() {
 			m_table.has_selection() && m_table.get_selected() == i;
 
 		if (is_selected) {
-			m_anim = building.get_ui_anim();
 			m_btn[PrevOwned]       ->set_enabled(nr_owned);
 			m_btn[NextOwned]       ->set_enabled(nr_owned);
 			m_btn[PrevConstruction]->set_enabled(nr_build);
@@ -488,7 +514,7 @@ void BuildingStatisticsMenu::update() {
 		   (boost::format("%3u") % nr_owned).str();  //  space-pad for sort
 		te->set_string(Columns::Owned, owned_string);
 		if (is_selected) {
-			m_owned.set_text(owned_string);
+			m_owned->set_text(owned_string);
 		}
 
 		//  number of these buildings currently being built
@@ -496,7 +522,7 @@ void BuildingStatisticsMenu::update() {
 		   (boost::format("%3u") % nr_build).str();  //  space-pad for sort
 		te->set_string(Columns::Build, build_string);
 		if (is_selected) {
-			m_in_build.set_text(build_string);
+			m_in_build->set_text(build_string);
 		}
 	}
 
