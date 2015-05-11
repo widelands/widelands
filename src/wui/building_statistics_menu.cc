@@ -60,7 +60,6 @@ constexpr int kColumns = 5;
 #define OWNED_Y              (PROGRESS_BAR_Y       + 24)
 #define IN_BUILD_Y           (OWNED_Y              + 24)
 #define UNPRODUCTIVE_Y       (IN_BUILD_Y           + 24)
-#define FLAG_POINT           Point(125, WINDOW_HEIGHT - 8)
 
 #define LOW_PROD 33
 
@@ -81,7 +80,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Building Statistics")),
-	tabs_(this, 0, 0, nullptr),
+	tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
 	medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
 	big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
@@ -348,28 +347,31 @@ void BuildingStatisticsMenu::init() {
 
 void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
 	UI::Box* button_box = new UI::Box(&tab, 0, 0, UI::Box::Vertical);
-	building_buttons_[id] = new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
-											kBuildGridCellSize, kBuildGridCellSize,
-											g_gr->images().get("pics/but1.png"),
-											&g_gr->animations()
-												 .get_animation(descr.get_animation("idle"))
-												 .representative_image_from_disk(),
-											descr.descname(), true, true);
+	building_buttons_[id] =
+			new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
+								kBuildGridCellSize, kBuildGridCellSize,
+								g_gr->images().get("pics/but1.png"),
+								&g_gr->animations()
+								.get_animation(descr.get_animation("idle"))
+								.representative_image_from_disk(),
+								descr.descname(), true, true);
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
-	owned_buttons_[id] = new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
-															kBuildGridCellSize, 20,
-															g_gr->images().get("pics/but1.png"),
-													/** TRANSLATORS Buildings: owned / under construction */
-															(boost::format(_("%1% / %2%")) % 0 % 0).str(),
-															_("Owned / Under Construction"), true, true);
+	owned_buttons_[id] =
+			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
+								kBuildGridCellSize, 20,
+								g_gr->images().get("pics/but1.png"),
+								/** TRANSLATORS Buildings: owned / under construction */
+								(boost::format(_("%1% / %2%")) % 0 % 0).str(),
+								_("Owned / Under Construction"), true, true);
 	button_box->add(owned_buttons_[id], UI::Align_Left);
 
-	productivity_buttons_[id] = new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
-															kBuildGridCellSize, 20,
-															g_gr->images().get("pics/but1.png"),
-															"-",
-															_("Productivity"), true, true);
+	productivity_buttons_[id] =
+			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
+								kBuildGridCellSize, 20,
+								g_gr->images().get("pics/but1.png"),
+								"–",
+								_("Productivity"), true, true);
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
 	tab.add(button_box, UI::Align_Left);
@@ -545,6 +547,49 @@ void BuildingStatisticsMenu::update() {
 	const TribeDescr & tribe  = player.tribe();
 	const Map         & map   = iplayer().game().map();
 	BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
+
+	for(BuildingIndex i = 0; i < nr_buildings; ++i) {
+		const BuildingDescr& building = *tribe.get_building_descr(i);
+		// NOCOM decide how to handle enhanced and glocal sites
+		if(!(building.is_buildable() || building.is_enhanced() || building.global())) {
+			continue;
+		}
+
+		const std::vector<Player::BuildingStats>& stats_vector = player.get_building_statistics(i);
+
+		uint32_t nr_owned   = 0;
+		uint32_t nr_build   = 0;
+		uint32_t total_prod = 0;
+		upcast(ProductionSiteDescr const, productionsite, &building);
+		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
+			if (stats_vector[l].is_constructionsite)
+				++nr_build;
+			else {
+				++nr_owned;
+				if (productionsite)
+					total_prod +=
+						dynamic_cast<ProductionSite&>
+							(*map[stats_vector[l].pos].get_immovable())
+						.get_statistics_percent();
+			}
+		}
+
+		if (productionsite && nr_owned) {
+			int const percent =
+				static_cast<int>
+					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
+			productivity_buttons_[i]->set_title((boost::format("%i%%") % percent).str());
+		} else {
+			productivity_buttons_[i]->set_title("–");
+		}
+
+		/** TRANSLATORS Buildings: owned / under construction */
+		owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % nr_build).str());
+
+	}
+
+
+	// NOCOM Old code
 	for
 		(BuildingIndex i = 0;
 		 i < nr_buildings;
