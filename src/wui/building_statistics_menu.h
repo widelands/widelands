@@ -24,10 +24,8 @@
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/progressbar.h"
-#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 
 using namespace Widelands;
@@ -43,16 +41,20 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	bool handle_key(bool const down, SDL_Keysym const code) override;
 
 private:
-	void init();
+	enum class JumpTarget {
+		Owned,
+		Construction,
+		Unproductive
+	};
+
 	void add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
-	void jump_building(BuildingIndex id);
-	void jump_constructionsite(BuildingIndex id);
-	void jump_unproductive(BuildingIndex id);
+	void jump_building(BuildingIndex id, JumpTarget target);
 	int32_t validate_pointer(int32_t *, int32_t);
 
-	InteractivePlayer & iplayer() const;
+	InteractivePlayer& iplayer() const;
 
 	bool is_shift_pressed_;
+	UI::MultilineTextarea helptext_;
 
 	UI::TabPanel tabs_;
 	UI::Box small_tab_;
@@ -71,32 +73,7 @@ private:
 	std::vector<UI::Button*> productivity_buttons_;
 	int32_t last_building_index_;
 	BuildingIndex last_building_type_;
-
-	// Old table
-	UI::Box old_design_;
-	UI::Table<uintptr_t const> m_table;
-	UI::ProgressBar          m_progbar;
-	UI::Textarea              m_total_productivity_label;
-	UI::Textarea*              m_owned_label;
-	UI::Textarea*              m_owned;
-	UI::Textarea*              m_in_build_label;
-	UI::Textarea*              m_in_build;
-	UI::Textarea*              m_unproductive_label;
-	uint32_t                  m_lastupdate;
-	uint32_t                  m_end_of_table_y;
-	UI::Button * m_btn[6];
-	int32_t                   m_last_building_index;
-	uint32_t                  m_last_table_index;
-
-	enum JumpTargets {
-		PrevOwned,        NextOwned,
-		PrevConstruction, NextConstruction,
-		PrevUnproductive, NextUnproductive
-	};
-	void clicked_help();
-	void clicked_jump(JumpTargets);
-	void table_changed(uint32_t);
-	bool compare_building_size(uint32_t rowa, uint32_t rowb);
+	uint32_t lastupdate_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
