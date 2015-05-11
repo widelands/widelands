@@ -135,12 +135,16 @@ void GameSummaryScreen::fill_data()
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
 	InteractivePlayer* ipl = m_game.get_ipl();
+	//this defines a row to be selected, current player,
+	//if not then the first line
+	uint32_t current_player_position = 0;
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
+			current_player_position = i;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord & te = m_players_table->add(i);
@@ -199,7 +203,7 @@ void GameSummaryScreen::fill_data()
 	}
 	m_players_table->update();
 	if (!players_status.empty()) {
-		m_players_table->select(players_status.at(0).player);
+		m_players_table->select(current_player_position);
 	}
 	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
 }
