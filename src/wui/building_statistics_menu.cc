@@ -353,7 +353,7 @@ void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& d
 								&g_gr->animations()
 								.get_animation(descr.get_animation("idle"))
 								.representative_image_from_disk(),
-								descr.descname(), true, true);
+								descr.descname(), false, true);
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
 	std::string buttonlabel;
@@ -368,22 +368,25 @@ void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& d
 								kBuildGridCellSize, 20,
 								g_gr->images().get("pics/but1.png"),
 								buttonlabel,
-								_("Owned / Under Construction"), true, true);
+								_("Owned / Under Construction"), false, true);
 	button_box->add(owned_buttons_[id], UI::Align_Left);
 
+	std::string productivity_tooltip;
 	if (descr.type() == MapObjectType::PRODUCTIONSITE &&
 		 descr.type() != MapObjectType::MILITARYSITE &&
 		 descr.type() != MapObjectType::WAREHOUSE) {
 		buttonlabel =  "–";
+		productivity_tooltip = _("Productivity");
 	} else {
 		buttonlabel = " ";
+		productivity_tooltip = "";
 	}
 	productivity_buttons_[id] =
 			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
 								kBuildGridCellSize, 20,
 								g_gr->images().get("pics/but1.png"),
 								buttonlabel,
-								_("Productivity"), true, true);
+								productivity_tooltip, false, true);
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
 	tab.add(button_box, UI::Align_Left);
@@ -593,19 +596,25 @@ void BuildingStatisticsMenu::update() {
 					static_cast<int>
 						(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 				productivity_buttons_[i]->set_title((boost::format("%i%%") % percent).str());
+				productivity_buttons_[i]->set_enabled(true);
 			} else {
 				productivity_buttons_[i]->set_title("–");
+				productivity_buttons_[i]->set_enabled(false);
 			}
 		} else {
 			productivity_buttons_[i]->set_title(" ");
+			productivity_buttons_[i]->set_enabled(false);
 		}
 
 		if (!building.global() && (building.is_buildable() || building.is_enhanced())) {
 			/** TRANSLATORS Buildings: owned / under construction */
 			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % nr_build).str());
+			owned_buttons_[i]->set_enabled((nr_owned + nr_build) > 0);
 		} else {
 			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned %  "–").str());
+			owned_buttons_[i]->set_enabled(false);
 		}
+		building_buttons_[i]->set_enabled((nr_owned + nr_build) > 0);
 	}
 
 
