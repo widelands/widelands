@@ -36,13 +36,33 @@
 constexpr int kTabHeight = 35;
 constexpr int kBuildGridCellSize = 50;
 constexpr int kColumns = 5;
-constexpr int kTabsHeight = 485;
-constexpr int kHelptextHeight = 40;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
-constexpr int32_t kWindowHeight =  kTabsHeight + kHelptextHeight + kTabHeight;
+constexpr int32_t kWindowHeight =  485;
 
 constexpr uint8_t kLowProduction = 33;
 constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
+
+namespace {
+// Formats a main text + help text for a tooltip and adds a hint for the shift button.
+const std::string format_tooltip(const std::string& title, const std::string& helptext) {
+	const std::string color = (boost::format("%02x%02x%02x")
+								% int(UI_FONT_TOOLTIP_CLR.r)
+								% int(UI_FONT_TOOLTIP_CLR.g)
+								% int(UI_FONT_TOOLTIP_CLR.b)).str();
+
+	const std::string tooltip_format("<rt><p><font face=serif size=%i bold=1 color=%s>%s"
+										"<br><font size=%i>%s<br>%s</font></font></p></rt>");
+
+	return (boost::format(tooltip_format)
+			  % UI_FONT_SIZE_SMALL
+			  % color
+			  % title
+			  % 11
+			  % helptext
+			  % _("Hold down SHIFT to step through the buildings from back to front.")).str();
+}
+
+} // namespace
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -57,7 +77,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		 kWindowWidth, kWindowHeight,
 		 _("Building Statistics")),
 	is_shift_pressed_(false),
-	helptext_(this, 0, kTabsHeight, get_inner_w(), kHelptextHeight, "NOCOM helptext goes here"),
 	tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
 	medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
@@ -74,7 +93,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 				 &mines_tab_, _("Mines"));
 	tabs_.add("building_stats_ports", g_gr->images().get("pics/menu_tab_buildport.png"),
 				 &ports_tab_, _("Ports"));
-	tabs_.set_size(kWindowWidth, kTabsHeight);
+	tabs_.set_size(kWindowWidth, kWindowHeight);
 
 	const TribeDescr& tribe = iplayer().player().tribe();
 
@@ -101,7 +120,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
 			 descr.type() != MapObjectType::DISMANTLESITE) {
 			if (descr.get_ismine()) {
-				mines_.push_back(id);
 				add_button(id, descr, *mines_row);
 				++mines_column;
 				if (mines_column == kColumns) {
@@ -110,7 +128,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 					mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
 				}
 			} else if (descr.get_isport()) {
-				ports_.push_back(id);
 				add_button(id, descr, *ports_row);
 				++ports_column;
 				if (ports_column == kColumns) {
@@ -121,7 +138,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 			} else {
 				switch (descr.get_size()) {
 					case BaseImmovable::SMALL:
-						small_buildings_.push_back(id);
 						add_button(id, descr, *small_row);
 						++small_column;
 						if (small_column == kColumns) {
@@ -131,7 +147,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 						}
 						break;
 					case BaseImmovable::MEDIUM:
-						medium_buildings_.push_back(id);
 						add_button(id, descr, *medium_row);
 						++medium_column;
 						if (medium_column == kColumns) {
@@ -141,7 +156,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 						}
 						break;
 					case BaseImmovable::BIG:
-						big_buildings_.push_back(id);
 						add_button(id, descr, *big_row);
 						++big_column;
 						if (big_column == kColumns) {
@@ -161,13 +175,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	small_tab_.add(small_row, UI::Align_Left);
 	medium_tab_.add(medium_row, UI::Align_Left);
 	big_tab_.add(big_row, UI::Align_Left);
-
-	std::string helptext = (boost::format("<rt><p>%s<br>%s<br>%s<br>%s<br></p></tr>")
-								  % "line 1"
-								  % "line 2"
-								  % "line 3"
-								  % "line 4").str();
-	// NOCOM helptext_.set_text(helptext);
 }
 
 // Adds 3 buttons per building type:
@@ -387,6 +394,7 @@ void BuildingStatisticsMenu::update() {
 	const TribeDescr& tribe  = player.tribe();
 	const Map& map = iplayer().game().map();
 	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
+	std::string button_tooltip;
 
 	for(BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr& building = *tribe.get_building_descr(i);
@@ -426,6 +434,14 @@ void BuildingStatisticsMenu::update() {
 				productivity_buttons_[i]->set_title("–");
 				productivity_buttons_[i]->set_enabled(false);
 			}
+			button_tooltip = _("Productivity");
+			if (productivity_buttons_[i]->enabled()) {
+				button_tooltip =
+						format_tooltip(
+							button_tooltip,
+							_("Click to step through buildings with low productivity and stopped buildings."));
+			}
+			productivity_buttons_[i]->set_tooltip(button_tooltip);
 		} else {
 			productivity_buttons_[i]->set_title(" ");
 			productivity_buttons_[i]->set_enabled(false);
@@ -440,5 +456,19 @@ void BuildingStatisticsMenu::update() {
 			owned_buttons_[i]->set_enabled(false);
 		}
 		building_buttons_[i]->set_enabled((nr_owned + nr_build) > 0);
+
+		button_tooltip = building.descname();
+		if (building_buttons_[i]->enabled()) {
+			button_tooltip =
+					format_tooltip(button_tooltip, _("Click to step through all buildings of this type."));
+		}
+		building_buttons_[i]->set_tooltip(button_tooltip);
+
+		button_tooltip = _("Owned / Under Construction");
+		if (owned_buttons_[i]->enabled()) {
+			button_tooltip =
+					format_tooltip(button_tooltip, _("Click to step through buildings under construction."));
+		}
+		owned_buttons_[i]->set_tooltip(button_tooltip);
 	}
 }

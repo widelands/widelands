@@ -25,7 +25,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 
 using namespace Widelands;
@@ -41,21 +40,28 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	bool handle_key(bool const down, SDL_Keysym const code) override;
 
 private:
+	/// Which building state to jump through
 	enum class JumpTarget {
 		Owned,
 		Construction,
 		Unproductive
 	};
 
+	/// Adds a button for the building type belonging to the id and descr to the tab.
 	void add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
+
+	/// Jumps to the next / previous appropriate building
 	void jump_building(BuildingIndex id, JumpTarget target);
+
+	/// Helper function for jump_building to go round robin
 	int32_t validate_pointer(int32_t *, int32_t);
 
 	InteractivePlayer& iplayer() const;
 
+	/// Reverses the direction that buildings get jumped through
 	bool is_shift_pressed_;
-	UI::MultilineTextarea helptext_;
 
+	/// UI tabs
 	UI::TabPanel tabs_;
 	UI::Box small_tab_;
 	UI::Box medium_tab_;
@@ -63,16 +69,17 @@ private:
 	UI::Box mines_tab_;
 	UI::Box ports_tab_;
 
-	std::vector<BuildingIndex> small_buildings_;
-	std::vector<BuildingIndex> medium_buildings_;
-	std::vector<BuildingIndex> big_buildings_;
-	std::vector<BuildingIndex> mines_;
-	std::vector<BuildingIndex> ports_;
+	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
+	/// Button with owned / under construction buildings
 	std::vector<UI::Button*> owned_buttons_;
+	/// Button with buildings' productivity
 	std::vector<UI::Button*> productivity_buttons_;
+	/// The last building that was jumped to
 	int32_t last_building_index_;
+	/// The type of last building that was jumped to
 	BuildingIndex last_building_type_;
+	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;
 };
 
