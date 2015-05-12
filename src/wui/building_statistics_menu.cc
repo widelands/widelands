@@ -26,7 +26,6 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
-#include "wui/interactive_player.h"
 
 constexpr int kTabHeight = 35;
 constexpr int kBuildGridCellSize = 50;
@@ -71,6 +70,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      ports_tab_(&tabs_, 0, 0, UI::Box::Vertical) {
+	set_pos(Point(0, 50));  // Shift below the Gametime + FPS display
 	tabs_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
 	          &small_tab_,
