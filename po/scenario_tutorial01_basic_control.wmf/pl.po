@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-01 16:04+0000\n"
+"POT-Creation-Date: 2015-05-02 09:49+0000\n"
+"PO-Revision-Date: 2015-05-09 15:12+0000\n"
 "Last-Translator: Igor Kotrasiński <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -329,7 +329,7 @@ msgstr "Przesuwanie widoku"
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "Bez przesuwania widoku nie sposób uzyskać pełny obraz posiadanej ekonomii. Widok w Widelands można przesuwać na trzy sposoby."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -346,7 +346,7 @@ msgstr "Drugi jest popularniejszy i łatwiejszy: naciśnij i przytrzymaj prawy p
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr ""
+msgstr "Trzeci wykorzystuje minimapę. Jest szczególnie przydatny do przemieszczania się na dużą odległość."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Other Ways to Move the View"
@@ -368,18 +368,18 @@ msgstr "Przesuwaj widok za pomocą myszki"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
-msgstr ""
+msgstr "Użyj minimapy"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr ""
+msgstr "Doskonale. Teraz zajmijmy się minimapą. Możesz ją otworzyć klikając na"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr ""
+msgstr "przycisku minimapy na dole ekranu lub używając skrótu klawiszowego \"m\"."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
@@ -392,27 +392,27 @@ msgstr "Minimapa pokazuje całą mapę w pomniejszeniu. Możesz przeskoczyć do 
 msgid ""
 "Try it out. Open the minimap, click on a few buttons and try moving around. "
 "Close it when you have experimented enough."
-msgstr ""
+msgstr "Spróbuj. Otwórz minimapę, kliknij parę przycisków i poprzesuwaj widok. Zamknij ją, gdy skończysz testowanie."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "Naucz się użycia minimapy"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr ""
+msgstr "Otwórz minimapę klikając na trzecim przycisku od lewej na dole ekranu lub naciskając klawisz \"m\"."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "Poeksperymentuj z różnymi nakładkami (dróg, flag itd.)"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr ""
+msgstr "Zamknij minimapę, gdy będziesz chciał kontynuować tym samym przyciskiem lub klawiszem. Oczywiście zadziała również kliknięcie prawym przyciskiem myszy."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
@@ -420,7 +420,7 @@ msgstr "Przejdźmy do kamieniołomu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "Świetnie. Teraz jeśli chodzi o kamieniołom..."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
@@ -429,7 +429,7 @@ msgstr "Jak wybudować kamieniołom"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "Zbuduj kamieniołom obok tych skał. Pamiętasz, jak robiliśmy to wcześniej?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -437,7 +437,7 @@ msgid ""
 "space were you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr ""
+msgstr "Upewnij się, że włączyłeś pokazywanie miejsc na budowę, po czym kliknij na miejscu, gdzie chcesz umieścić budynek i wybierz go z okna. To pewnie dobry moment, by wyjaśnić znaczenie symboli budowy."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
 msgid ""
