@@ -20,20 +20,22 @@
 #ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
+#include <vector>
+
 #include "logic/building.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 
-class InteractivePlayer;
-
+/// This window shows statistics for all the buildings that the player owns.
+/// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
-	BuildingStatisticsMenu
-		(InteractivePlayer &, UI::UniqueWindow::Registry &);
+	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 	void update();
@@ -41,11 +43,7 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 private:
 	/// Which building state to jump through
-	enum class JumpTarget {
-		Owned,
-		Construction,
-		Unproductive
-	};
+	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	void add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
@@ -54,7 +52,7 @@ private:
 	void jump_building(BuildingIndex id, JumpTarget target);
 
 	/// Helper function for jump_building to go round robin
-	int32_t validate_pointer(int32_t *, int32_t);
+	int32_t validate_pointer(int32_t*, int32_t);
 
 	InteractivePlayer& iplayer() const;
 

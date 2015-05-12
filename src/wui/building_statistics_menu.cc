@@ -19,13 +19,10 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <vector>
-
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
@@ -35,7 +32,7 @@ constexpr int kTabHeight = 35;
 constexpr int kBuildGridCellSize = 50;
 constexpr int kColumns = 5;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
-constexpr int32_t kWindowHeight =  485;
+constexpr int32_t kWindowHeight = 485;
 
 constexpr uint8_t kLowProduction = 33;
 constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
@@ -43,54 +40,57 @@ constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
 namespace {
 // Formats a main text + help text for a tooltip and adds a hint for the shift button.
 const std::string format_tooltip(const std::string& title, const std::string& helptext) {
-	const std::string color = (boost::format("%02x%02x%02x")
-								% int(UI_FONT_TOOLTIP_CLR.r)
-								% int(UI_FONT_TOOLTIP_CLR.g)
-								% int(UI_FONT_TOOLTIP_CLR.b)).str();
+	const std::string color = (boost::format("%02x%02x%02x") % int(UI_FONT_TOOLTIP_CLR.r) %
+	                           int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b)).str();
 
 	const std::string tooltip_format("<rt><p><font face=serif size=%i bold=1 color=%s>%s"
-										"<br><font size=%i>%s<br>%s</font></font></p></rt>");
+	                                 "<br><font size=%i>%s<br>%s</font></font></p></rt>");
 
-	return (boost::format(tooltip_format)
-			  % UI_FONT_SIZE_SMALL
-			  % color
-			  % title
-			  % 11
-			  % helptext
-			  % _("Hold down SHIFT to step through the buildings from back to front.")).str();
+	return (boost::format(tooltip_format) % UI_FONT_SIZE_SMALL % color % title % 11 % helptext %
+	        _("Hold down SHIFT to step through the buildings from back to front.")).str();
 }
 
-} // namespace
+}  // namespace
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
-BuildingStatisticsMenu::BuildingStatisticsMenu
-	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
-:
-	UI::UniqueWindow
-		(&parent, "building_statistics",
-		 &registry,
-		 kWindowWidth, kWindowHeight,
-		 _("Building Statistics")),
-	is_shift_pressed_(false),
-	tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
-	small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-	medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-	big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-	mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-	ports_tab_(&tabs_, 0, 0, UI::Box::Vertical) {
-	tabs_.add("building_stats_small", g_gr->images().get("pics/menu_tab_buildsmall.png"),
-				 &small_tab_, _("Small Buildings"));
-	tabs_.add("building_stats_medium", g_gr->images().get("pics/menu_tab_buildmedium.png"),
-				 &medium_tab_, _("Medium Buildings"));
-	tabs_.add("building_stats_big", g_gr->images().get("pics/menu_tab_buildbig.png"),
-				 &big_tab_, _("Big Buildings"));
-	tabs_.add("building_stats_mines", g_gr->images().get("pics/menu_tab_buildmine.png"),
-				 &mines_tab_, _("Mines"));
-	tabs_.add("building_stats_ports", g_gr->images().get("pics/menu_tab_buildport.png"),
-				 &ports_tab_, _("Ports"));
+BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
+                                               UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent,
+                      "building_statistics",
+                      &registry,
+                      kWindowWidth,
+                      kWindowHeight,
+                      _("Building Statistics")),
+     is_shift_pressed_(false),
+     tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
+     small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+     medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+     big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+     mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+     ports_tab_(&tabs_, 0, 0, UI::Box::Vertical) {
+	tabs_.add("building_stats_small",
+	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
+	          &small_tab_,
+	          _("Small Buildings"));
+	tabs_.add("building_stats_medium",
+	          g_gr->images().get("pics/menu_tab_buildmedium.png"),
+	          &medium_tab_,
+	          _("Medium Buildings"));
+	tabs_.add("building_stats_big",
+	          g_gr->images().get("pics/menu_tab_buildbig.png"),
+	          &big_tab_,
+	          _("Big Buildings"));
+	tabs_.add("building_stats_mines",
+	          g_gr->images().get("pics/menu_tab_buildmine.png"),
+	          &mines_tab_,
+	          _("Mines"));
+	tabs_.add("building_stats_ports",
+	          g_gr->images().get("pics/menu_tab_buildport.png"),
+	          &ports_tab_,
+	          _("Ports"));
 	tabs_.set_size(kWindowWidth, kWindowHeight);
 
 	const TribeDescr& tribe = iplayer().player().tribe();
@@ -112,11 +112,11 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	UI::Box* medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
 	UI::Box* small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
 
-	for(BuildingIndex id = 0; id < nr_buildings; ++id) {
+	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
 
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
-			 descr.type() != MapObjectType::DISMANTLESITE) {
+		    descr.type() != MapObjectType::DISMANTLESITE) {
 			if (descr.get_ismine()) {
 				add_button(id, descr, *mines_row);
 				++mines_column;
@@ -135,35 +135,36 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 				}
 			} else {
 				switch (descr.get_size()) {
-					case BaseImmovable::SMALL:
-						add_button(id, descr, *small_row);
-						++small_column;
-						if (small_column == kColumns) {
-							small_tab_.add(small_row, UI::Align_Left);
-							small_column = 0;
-							small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
-						}
-						break;
-					case BaseImmovable::MEDIUM:
-						add_button(id, descr, *medium_row);
-						++medium_column;
-						if (medium_column == kColumns) {
-							medium_tab_.add(medium_row, UI::Align_Left);
-							medium_column = 0;
-							medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
-						}
-						break;
-					case BaseImmovable::BIG:
-						add_button(id, descr, *big_row);
-						++big_column;
-						if (big_column == kColumns) {
-							big_tab_.add(big_row, UI::Align_Left);
-							big_column = 0;
-							big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
-						}
-						break;
-					default:
-						throw wexception("Building statictics: Found building without a size: %s", descr.name().c_str());
+				case BaseImmovable::SMALL:
+					add_button(id, descr, *small_row);
+					++small_column;
+					if (small_column == kColumns) {
+						small_tab_.add(small_row, UI::Align_Left);
+						small_column = 0;
+						small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				case BaseImmovable::MEDIUM:
+					add_button(id, descr, *medium_row);
+					++medium_column;
+					if (medium_column == kColumns) {
+						medium_tab_.add(medium_row, UI::Align_Left);
+						medium_column = 0;
+						medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				case BaseImmovable::BIG:
+					add_button(id, descr, *big_row);
+					++big_column;
+					if (big_column == kColumns) {
+						big_tab_.add(big_row, UI::Align_Left);
+						big_column = 0;
+						big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				default:
+					throw wexception(
+					   "Building statictics: Found building without a size: %s", descr.name().c_str());
 				}
 			}
 		}
@@ -179,16 +180,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 // - Building image, steps through all buildings of the type
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity
-void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
+void
+BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
 	UI::Box* button_box = new UI::Box(&tab, 0, 0, UI::Box::Vertical);
-	building_buttons_[id] =
-			new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
-								kBuildGridCellSize, kBuildGridCellSize,
-								g_gr->images().get("pics/but1.png"),
-								&g_gr->animations()
-								.get_animation(descr.get_animation("idle"))
-								.representative_image_from_disk(),
-								descr.descname(), false, true);
+	building_buttons_[id] = new UI::Button(button_box,
+	                                       (boost::format("building_button%s") % id).str(),
+	                                       0,
+	                                       0,
+	                                       kBuildGridCellSize,
+	                                       kBuildGridCellSize,
+	                                       g_gr->images().get("pics/but1.png"),
+	                                       &g_gr->animations()
+	                                           .get_animation(descr.get_animation("idle"))
+	                                           .representative_image_from_disk(),
+	                                       descr.descname(),
+	                                       false,
+	                                       true);
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
 	std::string buttonlabel;
@@ -198,61 +205,70 @@ void BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& d
 	} else {
 		buttonlabel = (boost::format(_("%1% / %2%")) % 0 % "–").str();
 	}
-	owned_buttons_[id] =
-			new UI::Button(button_box, (boost::format("owned_button%s") % id).str(), 0, 0,
-								kBuildGridCellSize, 20,
-								g_gr->images().get("pics/but1.png"),
-								buttonlabel,
-								_("Owned / Under Construction"), false, true);
+	owned_buttons_[id] = new UI::Button(button_box,
+	                                    (boost::format("owned_button%s") % id).str(),
+	                                    0,
+	                                    0,
+	                                    kBuildGridCellSize,
+	                                    20,
+	                                    g_gr->images().get("pics/but1.png"),
+	                                    buttonlabel,
+	                                    _("Owned / Under Construction"),
+	                                    false,
+	                                    true);
 	button_box->add(owned_buttons_[id], UI::Align_Left);
 
 	std::string productivity_tooltip;
 	if (descr.type() == MapObjectType::PRODUCTIONSITE &&
-		 descr.type() != MapObjectType::MILITARYSITE &&
-		 descr.type() != MapObjectType::WAREHOUSE) {
-		buttonlabel =  "–";
+	    descr.type() != MapObjectType::MILITARYSITE && descr.type() != MapObjectType::WAREHOUSE) {
+		buttonlabel = "–";
 		productivity_tooltip = _("Productivity");
 	} else {
 		buttonlabel = " ";
 		productivity_tooltip = "";
 	}
-	productivity_buttons_[id] =
-			new UI::Button(button_box, (boost::format("prod_button%s") % id).str(), 0, 0,
-								kBuildGridCellSize, 20,
-								g_gr->images().get("pics/but1.png"),
-								buttonlabel,
-								productivity_tooltip, false, true);
+	productivity_buttons_[id] = new UI::Button(button_box,
+	                                           (boost::format("prod_button%s") % id).str(),
+	                                           0,
+	                                           0,
+	                                           kBuildGridCellSize,
+	                                           20,
+	                                           g_gr->images().get("pics/but1.png"),
+	                                           buttonlabel,
+	                                           productivity_tooltip,
+	                                           false,
+	                                           true);
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
 	tab.add(button_box, UI::Align_Left);
 
-	building_buttons_[id]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::Owned));
-	owned_buttons_[id]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::Construction));
-	productivity_buttons_[id]->sigclicked.connect
-		(boost::bind(&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::Unproductive));
+	building_buttons_[id]->sigclicked.connect(boost::bind(
+		&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kOwned));
+	owned_buttons_[id]->sigclicked.connect(boost::bind(
+		&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kConstruction));
+	productivity_buttons_[id]->sigclicked.connect(boost::bind(
+		&BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kUnproductive));
 }
 
 bool BuildingStatisticsMenu::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		// only on down events
 		switch (code.sym) {
-			case SDLK_LSHIFT:
-			case SDLK_RSHIFT:
-				is_shift_pressed_ = true;
-				break;
-			default:
-				break;
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+			is_shift_pressed_ = true;
+			break;
+		default:
+			break;
 		}
 	} else {
 		switch (code.sym) {
-			case SDLK_LSHIFT:
-			case SDLK_RSHIFT:
-				is_shift_pressed_ = false;
-				break;
-			default:
-				break;
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+			is_shift_pressed_ = false;
+			break;
+		default:
+			break;
 		}
 	}
 	return false;
@@ -265,94 +281,90 @@ void BuildingStatisticsMenu::jump_building(BuildingIndex id, JumpTarget target) 
 	last_building_type_ = id;
 
 	const std::vector<Player::BuildingStats>& stats_vector =
-		iplayer().get_player()->get_building_statistics(id);
+	   iplayer().get_player()->get_building_statistics(id);
 
 	switch (target) {
-		case JumpTarget::Owned: {
-			if (is_shift_pressed_) {
-				--last_building_index_;
-			} else {
-				++last_building_index_;
-			}
-			break;
+	case JumpTarget::kOwned: {
+		if (is_shift_pressed_) {
+			--last_building_index_;
+		} else {
+			++last_building_index_;
 		}
-		case JumpTarget::Construction: {
-			int32_t const curindex = last_building_index_;
+		break;
+	}
+	case JumpTarget::kConstruction: {
+		int32_t const curindex = last_building_index_;
 
-			if (is_shift_pressed_) {
-				while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
-					if (stats_vector[last_building_index_].is_constructionsite) {
-						break;
-					}
-				}
-			} else {
-				while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
-					if (stats_vector[last_building_index_].is_constructionsite) {
-						break;
-					}
+		if (is_shift_pressed_) {
+			while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
+				if (stats_vector[last_building_index_].is_constructionsite) {
+					break;
 				}
 			}
-			break;
-		}
-		case JumpTarget::Unproductive: {
-			const Map & map = iplayer().egbase().map();
-
-			int32_t const curindex = last_building_index_;
-			bool found = false;
-
-			if (is_shift_pressed_) {
-				while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
-					if (!stats_vector[last_building_index_].is_constructionsite) {
-						if
-							(upcast
-								(ProductionSite,
-								 productionsite,
-								 map[stats_vector[last_building_index_].pos].get_immovable())) {
-							if (productionsite->is_stopped() || productionsite->get_statistics_percent() < kLowProduction) {
-								found = true;
-								break;
-							}
-						}
-					}
+		} else {
+			while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
+				if (stats_vector[last_building_index_].is_constructionsite) {
+					break;
 				}
-			} else {
-				while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
-					if (!stats_vector[last_building_index_].is_constructionsite) {
-						if
-							(upcast
-								(ProductionSite,
-								 productionsite,
-								 map[stats_vector[last_building_index_].pos].get_immovable())) {
-							if (productionsite->is_stopped() || productionsite->get_statistics_percent() < kLowProduction) {
-								found = true;
-								break;
-							}
+			}
+		}
+		break;
+	}
+	case JumpTarget::kUnproductive: {
+		const Map& map = iplayer().egbase().map();
+
+		int32_t const curindex = last_building_index_;
+		bool found = false;
+
+		if (is_shift_pressed_) {
+			while (validate_pointer(&(--last_building_index_), stats_vector.size()) != curindex) {
+				if (!stats_vector[last_building_index_].is_constructionsite) {
+					if (upcast(ProductionSite,
+					           productionsite,
+					           map[stats_vector[last_building_index_].pos].get_immovable())) {
+						if (productionsite->is_stopped() ||
+						    productionsite->get_statistics_percent() < kLowProduction) {
+							found = true;
+							break;
 						}
 					}
 				}
 			}
-			if (!found) { // Now look at the old
-				if
-					(upcast
-						(ProductionSite,
-						 productionsite,
-						 map[stats_vector[last_building_index_].pos].get_immovable())) {
-					if (productionsite->is_stopped() ||productionsite->get_statistics_percent() < kLowProduction) {
-						found = true;
+		} else {
+			while (validate_pointer(&(++last_building_index_), stats_vector.size()) != curindex) {
+				if (!stats_vector[last_building_index_].is_constructionsite) {
+					if (upcast(ProductionSite,
+					           productionsite,
+					           map[stats_vector[last_building_index_].pos].get_immovable())) {
+						if (productionsite->is_stopped() ||
+						    productionsite->get_statistics_percent() < kLowProduction) {
+							found = true;
+							break;
+						}
 					}
 				}
 			}
-			break;
 		}
-		default:
-			assert(false);
-			break;
+		if (!found) {  // Now look at the old
+			if (upcast(ProductionSite,
+			           productionsite,
+			           map[stats_vector[last_building_index_].pos].get_immovable())) {
+				if (productionsite->is_stopped() ||
+				    productionsite->get_statistics_percent() < kLowProduction) {
+					found = true;
+				}
+			}
+		}
+		break;
+	}
+	default:
+		assert(false);
+		break;
 	}
 
 	validate_pointer(&last_building_index_, stats_vector.size());
 	iplayer().move_view_to(stats_vector[last_building_index_].pos);
 }
-
 
 /*
  * Update this statistic
@@ -370,9 +382,7 @@ void BuildingStatisticsMenu::think() {
 /*
  * validate if this pointer is ok
  */
-int32_t BuildingStatisticsMenu::validate_pointer
-	(int32_t * const id, int32_t const size)
-{
+int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t const size) {
 	if (*id < 0) {
 		*id = size - 1;
 	}
@@ -383,27 +393,26 @@ int32_t BuildingStatisticsMenu::validate_pointer
 	return *id;
 }
 
-
 /*
  * Update Buttons
  */
 void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
-	const TribeDescr& tribe  = player.tribe();
+	const TribeDescr& tribe = player.tribe();
 	const Map& map = iplayer().game().map();
 	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
 	std::string button_tooltip;
 
-	for(BuildingIndex i = 0; i < nr_buildings; ++i) {
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr& building = *tribe.get_building_descr(i);
-		if(!(building.is_buildable() || building.is_enhanced() || building.global())) {
+		if (!(building.is_buildable() || building.is_enhanced() || building.global())) {
 			continue;
 		}
 
 		const std::vector<Player::BuildingStats>& stats_vector = player.get_building_statistics(i);
 
-		uint32_t nr_owned   = 0;
-		uint32_t nr_build   = 0;
+		uint32_t nr_owned = 0;
+		uint32_t nr_build = 0;
 		uint32_t total_prod = 0;
 		upcast(ProductionSiteDescr const, productionsite, &building);
 		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
@@ -412,20 +421,17 @@ void BuildingStatisticsMenu::update() {
 			else {
 				++nr_owned;
 				if (productionsite)
-					total_prod +=
-						dynamic_cast<ProductionSite&>
-							(*map[stats_vector[l].pos].get_immovable())
-						.get_statistics_percent();
+					total_prod += dynamic_cast<ProductionSite&>(
+					                 *map[stats_vector[l].pos].get_immovable()).get_statistics_percent();
 			}
 		}
 
 		if (building.type() == MapObjectType::PRODUCTIONSITE &&
-			 building.type() != MapObjectType::MILITARYSITE &&
-			 building.type() != MapObjectType::WAREHOUSE) {
+		    building.type() != MapObjectType::MILITARYSITE &&
+		    building.type() != MapObjectType::WAREHOUSE) {
 			if (nr_owned) {
 				int const percent =
-					static_cast<int>
-						(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
+				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 				productivity_buttons_[i]->set_title((boost::format("%i%%") % percent).str());
 				productivity_buttons_[i]->set_enabled(true);
 			} else {
@@ -434,10 +440,9 @@ void BuildingStatisticsMenu::update() {
 			}
 			button_tooltip = _("Productivity");
 			if (productivity_buttons_[i]->enabled()) {
-				button_tooltip =
-						format_tooltip(
-							button_tooltip,
-							_("Click to step through buildings with low productivity and stopped buildings."));
+				button_tooltip = format_tooltip(
+				   button_tooltip,
+				   _("Click to step through buildings with low productivity and stopped buildings."));
 			}
 			productivity_buttons_[i]->set_tooltip(button_tooltip);
 		} else {
@@ -450,7 +455,7 @@ void BuildingStatisticsMenu::update() {
 			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % nr_build).str());
 			owned_buttons_[i]->set_enabled((nr_owned + nr_build) > 0);
 		} else {
-			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned %  "–").str());
+			owned_buttons_[i]->set_title((boost::format(_("%1% / %2%")) % nr_owned % "–").str());
 			owned_buttons_[i]->set_enabled(false);
 		}
 		building_buttons_[i]->set_enabled((nr_owned + nr_build) > 0);
@@ -458,14 +463,14 @@ void BuildingStatisticsMenu::update() {
 		button_tooltip = building.descname();
 		if (building_buttons_[i]->enabled()) {
 			button_tooltip =
-					format_tooltip(button_tooltip, _("Click to step through all buildings of this type."));
+			   format_tooltip(button_tooltip, _("Click to step through all buildings of this type."));
 		}
 		building_buttons_[i]->set_tooltip(button_tooltip);
 
 		button_tooltip = _("Owned / Under Construction");
 		if (owned_buttons_[i]->enabled()) {
-			button_tooltip =
-					format_tooltip(button_tooltip, _("Click to step through buildings under construction."));
+			button_tooltip = format_tooltip(
+			   button_tooltip, _("Click to step through buildings under construction."));
 		}
 		owned_buttons_[i]->set_tooltip(button_tooltip);
 	}
