@@ -31,8 +31,6 @@
 #include "logic/tribe.h"
 #include "wui/interactive_player.h"
 
-// NOCOM wishlist: toggle this window with b.
-
 constexpr int kTabHeight = 35;
 constexpr int kBuildGridCellSize = 50;
 constexpr int kColumns = 5;
