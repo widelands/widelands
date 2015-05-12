@@ -100,6 +100,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	owned_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	productivity_buttons_ = std::vector<UI::Button*>(nr_buildings);
 
+	// Column counters
 	int small_column = 0;
 	int medium_column = 0;
 	int big_column = 0;
@@ -118,53 +119,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
 		    descr.type() != MapObjectType::DISMANTLESITE) {
 			if (descr.get_ismine()) {
-				if (add_button(id, descr, *mines_row)) {
-					++mines_column;
-					if (mines_column == kColumns) {
-						mines_tab_.add(mines_row, UI::Align_Left);
-						mines_column = 0;
-						mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
-					}
+				if (add_button(id, descr, mines_tab_, *mines_row, &mines_column)) {
+					mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
 				}
 			} else if (descr.get_isport()) {
-				if (add_button(id, descr, *ports_row)) {
-					++ports_column;
-					if (ports_column == kColumns) {
-						ports_tab_.add(ports_row, UI::Align_Left);
-						ports_column = 0;
-						ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
-					}
+				if (add_button(id, descr, ports_tab_, *ports_row, &ports_column)) {
+					ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
 				}
 			} else {
 				switch (descr.get_size()) {
 				case BaseImmovable::SMALL:
-					if (add_button(id, descr, *small_row)) {
-						++small_column;
-						if (small_column == kColumns) {
-							small_tab_.add(small_row, UI::Align_Left);
-							small_column = 0;
-							small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
-						}
+					if (add_button(id, descr, small_tab_, *small_row, &small_column)) {
+						small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, *medium_row)) {
-						++medium_column;
-						if (medium_column == kColumns) {
-							medium_tab_.add(medium_row, UI::Align_Left);
-							medium_column = 0;
-							medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
-						}
+					if (add_button(id, descr, medium_tab_, *medium_row, &medium_column)) {
+						medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::BIG:
-					if (add_button(id, descr, *big_row)) {
-						++big_column;
-						if (big_column == kColumns) {
-							big_tab_.add(big_row, UI::Align_Left);
-							big_column = 0;
-							big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
-						}
+					if (add_button(id, descr, big_tab_, *big_row, &big_column)) {
+						big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				default:
@@ -186,15 +162,15 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 // - Building image, steps through all buildings of the type
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity and stopped buildings
-bool
-BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab) {
+bool BuildingStatisticsMenu::add_button(
+   BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column) {
 	// Only add headquarter types that are owned by player.
 	if (!(descr.is_buildable() || descr.is_enhanced() || descr.global()) &&
 	    iplayer().get_player()->get_building_statistics(id).empty()) {
 		return false;
 	}
 
-	UI::Box* button_box = new UI::Box(&tab, 0, 0, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
 	                                       (boost::format("building_button%s") % id).str(),
 	                                       0,
@@ -236,7 +212,7 @@ BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr,
 	                                           true);
 	button_box->add(productivity_buttons_[id], UI::Align_Left);
 
-	tab.add(button_box, UI::Align_Left);
+	row.add(button_box, UI::Align_Left);
 
 	building_buttons_[id]->sigclicked.connect(boost::bind(
 	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kOwned));
@@ -244,7 +220,15 @@ BuildingStatisticsMenu::add_button(BuildingIndex id, const BuildingDescr& descr,
 	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kConstruction));
 	productivity_buttons_[id]->sigclicked.connect(boost::bind(
 	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), id, JumpTarget::kUnproductive));
-	return true;
+
+	// Check if the row is full
+	++*column;
+	if (*column == kColumns) {
+		tab.add(&row, UI::Align_Left);
+		*column = 0;
+		return true;
+	}
+	return false;
 }
 
 bool BuildingStatisticsMenu::handle_key(bool const down, SDL_Keysym const code) {

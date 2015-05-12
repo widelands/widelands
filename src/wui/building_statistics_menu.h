@@ -46,8 +46,9 @@ private:
 	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
-	/// Returns true when a button was added.
-	bool add_button(BuildingIndex id, const BuildingDescr& descr, UI::Box& tab);
+	/// Returns true when a new row needs to be created.
+	bool add_button(
+	   BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(BuildingIndex id, JumpTarget target);
