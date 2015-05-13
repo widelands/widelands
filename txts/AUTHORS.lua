@@ -10,7 +10,7 @@ function h1_authors(text)
 end
 
 function h2_authors(text)
-	return "<rt><p font-size=6> <br></p>" .. h2(text) .. "</rt>"
+	return "<rt><p font-size=4> <br></p>" .. h2(text) .. "</rt>"
 end
 
 function p_authors(person, image)

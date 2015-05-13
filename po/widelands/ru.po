@@ -5,20 +5,21 @@
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015
+# dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 09:00+0100\n"
-"PO-Revision-Date: 2015-04-09 21:20+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
+"POT-Creation-Date: 2015-05-02 10:49+0100\n"
+"PO-Revision-Date: 2015-05-04 07:48+0000\n"
+"Last-Translator: dr&mx <dronmax@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
@@ -523,7 +524,7 @@ msgstr "Описание:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:384 ../../src/ui_basic/helpwindow.cc:86
+#: ../../src/scripting/lua_game.cc:385 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
@@ -607,7 +608,7 @@ msgstr "Пустыня"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Black"
-msgstr "Черный"
+msgstr "Чёрный"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:78
 msgid "Random Number:"
@@ -866,7 +867,7 @@ msgstr "Малая"
 msgid "Big"
 msgstr "Большая"
 
-#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:574
+#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:573
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% построено"
@@ -959,6 +960,7 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% солдат (+%2%)"
 msgstr[1] "%1% солдата (+%2%)"
 msgstr[2] "%1% солдат (+%2%)"
+msgstr[3] "%1% солдат (+%2%)"
 
 #: ../../src/logic/militarysite.cc:130
 #, c-format
@@ -967,6 +969,7 @@ msgid_plural "%u soldiers"
 msgstr[0] "%u солдат"
 msgstr[1] "%u солдата"
 msgstr[2] "%u солдат"
+msgstr[3] "%u солдат"
 
 #: ../../src/logic/militarysite.cc:139
 msgid "%1%(+%2%) soldier (+%3%)"
@@ -974,6 +977,7 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) солдат (+%3%)"
 msgstr[1] "%1%(+%2%) солдата (+%3%)"
 msgstr[2] "%1%(+%2%) солдат (+%3%)"
+msgstr[3] "%1%(+%2%) солдат (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
@@ -983,6 +987,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) солдат"
 msgstr[1] "%1%(+%2%) солдата"
 msgstr[2] "%1%(+%2%) солдат"
+msgstr[3] "%1%(+%2%) солдат"
 
 #: ../../src/logic/militarysite.cc:849
 msgid "Militarysite lost!"
@@ -1127,6 +1132,7 @@ msgid_plural "%s are missing"
 msgstr[0] "%s отсутствует"
 msgstr[1] "%s отсутствуют"
 msgstr[2] "%s отсутствуют"
+msgstr[3] "%s отсутствуют"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:1073
@@ -1166,6 +1172,7 @@ msgid_plural "Workers missing"
 msgstr[0] "Нет работника"
 msgstr[1] "Не хватает работников"
 msgstr[2] "Не хватает работников"
+msgstr[3] "Не хватает работников"
 
 #: ../../src/logic/productionsite.cc:243
 msgid "(stopped)"
@@ -1276,16 +1283,16 @@ msgid ""
 "compatible with world"
 msgstr "должен разводитить %s, которого нет в этом мире; племя не совместимо с этим миром"
 
-#: ../../src/logic/worker.cc:958
+#: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
 msgstr "Геолог нашел полезные ископаемые."
 
-#: ../../src/logic/worker.cc:1871
+#: ../../src/logic/worker.cc:1869
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Ваш %s не может найти дорогу домой и, похоже, умрет."
 
-#: ../../src/logic/worker.cc:1879
+#: ../../src/logic/worker.cc:1877
 msgid "Worker got lost!"
 msgstr "Рабочий потерян!"
 
@@ -1357,6 +1364,7 @@ msgid_plural "InternetGaming: Server time offset is %u seconds."
 msgstr[0] "InternetGaming: Время на сервере смещено на %u секунду."
 msgstr[1] "InternetGaming: Время на сервере смещено на %u секунды."
 msgstr[2] "InternetGaming: Время на сервере смещено на %u секунд."
+msgstr[3] "InternetGaming: Время на сервере смещено на %u секунд."
 
 #: ../../src/network/internet_gaming.cc:439
 #, c-format
@@ -1365,6 +1373,7 @@ msgid_plural "Server time offset is %u seconds."
 msgstr[0] "Время на сервере смещено на %u секунду."
 msgstr[1] "Время на сервере смещено на %u секунды."
 msgstr[2] "Время на сервере смещено на %u секунд."
+msgstr[3] "Время на сервере смещено на %u секунд."
 
 #: ../../src/network/internet_gaming.cc:462
 #, c-format
@@ -1715,6 +1724,7 @@ msgid_plural "%li seconds"
 msgstr[0] "%li секунда"
 msgstr[1] "%li секунды"
 msgstr[2] "%li секунд"
+msgstr[3] "%li секунд"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -1947,7 +1957,7 @@ msgstr "выкл"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/scripting/lua_game.cc:978 ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:73
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -2132,6 +2142,7 @@ msgid_plural "The designers of this tutorial"
 msgstr[0] "Создатель этого обучения"
 msgstr[1] "Создатели этого обучения"
 msgstr[2] "Создатели этого обучения"
+msgstr[3] "Создатели этого обучения"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:432
 msgid "The designer of this scenario"
@@ -2139,6 +2150,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "Создатель этого сценария"
 msgstr[1] "Создатели этого сценария"
 msgstr[2] "Создатели этого сценария"
+msgstr[3] "Создатели этого сценария"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:435
 #: ../../src/ui_fsmenu/mapselect.cc:317
@@ -2147,6 +2159,7 @@ msgid_plural "Authors:"
 msgstr[0] "Автор"
 msgstr[1] "Авторы"
 msgstr[2] "Авторы"
+msgstr[3] "Авторы"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
@@ -2378,6 +2391,7 @@ msgid_plural "%u Players"
 msgstr[0] "%u игрок"
 msgstr[1] "%u игрока"
 msgstr[2] "%u игроков"
+msgstr[3] "%u игроков"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:643
 msgid "Scenario mode selected"
@@ -2858,6 +2872,7 @@ msgid_plural "The designers of this map"
 msgstr[0] "Разработчик этой карты"
 msgstr[1] "Разработчики этой карты"
 msgstr[2] "Разработчики этой карты"
+msgstr[3] "Разработчики этой карты"
 
 #: ../../src/ui_fsmenu/mapselect.cc:328
 msgid "Edit this map"
@@ -3030,6 +3045,7 @@ msgid_plural "minutes"
 msgstr[0] "минута"
 msgstr[1] "минуты"
 msgstr[2] "минут"
+msgstr[3] "минут"
 
 #: ../../src/ui_fsmenu/options.cc:283
 msgid "Save game automatically every"
@@ -3043,6 +3059,7 @@ msgid_plural "days"
 msgstr[0] "день"
 msgstr[1] "дня"
 msgstr[2] "дней"
+msgstr[3] "дней"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Remove replays older than:"
@@ -3082,6 +3099,7 @@ msgid_plural "pixels"
 msgstr[0] "пиксель"
 msgstr[1] "пикселя"
 msgstr[2] "пикселей"
+msgstr[3] "пикселей"
 
 #: ../../src/ui_fsmenu/options.cc:575
 msgid "Show in-game chat with transparent background"
@@ -3321,6 +3339,7 @@ msgid_plural "Consumed Ware Types"
 msgstr[0] "Расходуемый тип товара"
 msgstr[1] "Расходуемые типы товаров"
 msgstr[2] "Расходуемые типы товаров"
+msgstr[3] "Расходуемые типы товаров"
 
 #: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
@@ -3468,6 +3487,7 @@ msgid_plural "%i players"
 msgstr[0] "%i игрок"
 msgstr[1] "%i игрока"
 msgstr[2] "%i игроков"
+msgstr[3] "%i игроков"
 
 #: ../../src/wui/game_main_menu_save_game.cc:241
 msgid ""
@@ -3826,6 +3846,7 @@ msgid_plural "%u new messages"
 msgstr[0] "%u новое сообщение"
 msgstr[1] "%u новых сообщения"
 msgstr[2] "%u новых сообщений"
+msgstr[3] "%u новых сообщений"
 
 #: ../../src/wui/interactive_spectator.cc:54
 msgid "Exit Replay"
@@ -3983,6 +4004,7 @@ msgid_plural "Workers"
 msgstr[0] "Рабочий"
 msgstr[1] "Рабочих"
 msgstr[2] "Рабочих"
+msgstr[3] "Рабочих"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Joonas Tamminen <hippimunqqi@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-05-02 09:49+0000\n"
+"PO-Revision-Date: 2015-05-05 21:08+0000\n"
+"Last-Translator: Joonas Tamminen <hippimunqqi@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Ei vielä toteutettu"
 
 #: ../../campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Anteeksi, tätä karttaa ei ole vielä toteutettu."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
@@ -31,5 +32,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"
