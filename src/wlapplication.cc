@@ -550,6 +550,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
+		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
 			bool handled = false;
 			if (cb && cb->key) {

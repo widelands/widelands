@@ -41,6 +41,14 @@ tribes:new_productionsite_type {
 		build = {
 			pictures = path.list_directory(dirname, "build_\\d+.png"),
 			hotspot = { 53, 66 },
+		},
+		working = {
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			hotspot = { 53, 66 },
+		},
+		unoccupied = {
+			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			hotspot = { 53, 66 },
 		}
 	},
 
@@ -76,6 +84,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"check_map=seafaring",
 				"construct=atlanteans_shipconstruction buildship 6",
+				"animate=working 35000",
 				"return=completed"
 			}
 		},

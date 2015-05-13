@@ -990,6 +990,7 @@ int LuaMap::place_immovable(lua_State * const L) {
 		}
 	} else {
 		WareIndex const imm_idx = egbase.world().get_immovable_index(objname);
+		// NOCOM(GunChleoc): comparison is always false due to limited range of data type
 		if (imm_idx < 0)
 			report_error(L, "Unknown immovable <%s>", objname.c_str());
 
@@ -2286,6 +2287,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
+	PROP_RO(LuaWorkerDescription, helptext),
 	PROP_RO(LuaWorkerDescription, icon_name),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
@@ -2345,6 +2347,16 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: helptext
+
+			(RO) the helptext for this worker.
+*/
+int LuaWorkerDescription::get_helptext(lua_State * L) {
+	lua_pushstring(L, get()->helptext());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: icon_name
@@ -2366,6 +2378,7 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_needed_experience());
 	return 1;
 }
+
 
 
 /*

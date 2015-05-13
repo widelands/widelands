@@ -684,7 +684,10 @@ void ProductionSite::program_act(Game & game)
 {
 	State & state = top_state();
 
-	if (m_is_stopped) {
+	// 'Stop' of building is considered only when starting
+	// new productions cycle. Otherwise it can lead to consumption
+	// of input wares without producing anything
+	if (m_is_stopped && state.ip == 0) {
 		program_end(game, Failed);
 		m_program_timer = true;
 		m_program_time = schedule_act(game, 20000);

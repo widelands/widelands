@@ -106,7 +106,7 @@ m_toggle_message_menu
 	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Ware Encyclopedia")))
+	 ("menu_help", "help", _("Tribal Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
