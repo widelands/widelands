@@ -70,7 +70,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      ports_tab_(&tabs_, 0, 0, UI::Box::Vertical) {
-	set_pos(Point(0, 50));  // Shift below the Gametime + FPS display
+	set_pos(Point(0, 40));  // Shift below the Gametime + FPS display
 	tabs_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
 	          &small_tab_,
