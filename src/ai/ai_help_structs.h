@@ -463,13 +463,13 @@ struct EnemySiteObserver {
 	uint32_t last_time_attackable;
 	uint32_t last_tested;
 	int16_t score;
-	bool warehouse;
 	Widelands::ExtendedBool mines_nearby;
 	int16_t no_attack_counter;
 
 	EnemySiteObserver()
 	   : warehouse_(false),
 	     attack_soldiers(0),
+	     defenders(0),
 	     stationed_soldiers(0),
 	     last_time_attackable(std::numeric_limits<uint32_t>::max()),
 	     last_tested(0),
