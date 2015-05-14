@@ -920,8 +920,8 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
-	if ((m_last_stat_percent <= descr().out_of_resource_productivity_threshold() && trend_ == Trend::kFalling)
-		 || m_last_stat_percent == 0) {
+	if ((m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
+		  && trend_ == Trend::kFalling)) {
 		if (descr().out_of_resource_title().empty())
 		{
 			set_production_result(_("Can’t find any more resources!"));
