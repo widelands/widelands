@@ -409,9 +409,7 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		if (building.type() == MapObjectType::PRODUCTIONSITE &&
-		    building.type() != MapObjectType::MILITARYSITE &&
-		    building.type() != MapObjectType::WAREHOUSE) {
+		if (building.type() == MapObjectType::PRODUCTIONSITE) {
 			if (nr_owned) {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
