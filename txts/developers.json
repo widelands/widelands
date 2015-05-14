@@ -226,6 +226,11 @@
 			]
 		},
 		{
+			"heading": "Translators",
+			"image": "pics/fsel_editor_set_height.png",
+			"entries":[]
+		},
+		{
 			"heading": "Packagers",
 			"image": "pics/genstats_productivity.png",
 			"entries":[
