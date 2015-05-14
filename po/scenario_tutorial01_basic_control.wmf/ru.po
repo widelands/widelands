@@ -3,24 +3,25 @@
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
+# dr&mx <dronmax@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-05-02 09:49+0000\n"
+"PO-Revision-Date: 2015-05-04 09:45+0000\n"
+"Last-Translator: dr&mx <dronmax@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "Легко и приятно всё время"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
@@ -28,22 +29,22 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr ""
+msgstr "Прошу прощения, но мне придётся разрушить тут всё. Нам ещё потребуется свободное место позже. Если я по-вашему слишком медленный, можете поиграть в реальной игре и разобраться самостоятельно. В противном случае, пожалуйста, потерпите меня — я больше не молод и не быстр."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Добро пожаловать на учебный курс Widelands!"
+msgstr "Добро пожаловать на учебный курс «Widelands»!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr "Добро пожаловать в Widelands!"
+msgstr "Добро пожаловать в «Widelands»!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr ""
+msgstr "В «Widelands» неторопливая накопительная стратегия игры с акцентом на строительство, а не на разрушение. Этот учебник ознакомит Вас с основами игры."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -63,7 +64,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr ""
+msgstr "В «Widelands» существуют три вида племён: варвары, имперцы и атланты. Все племена имеют различные экономики, сильные и слабые стороны, но в общем геймплей одинаков для всех. Сейчас мы будем играть за варваров."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -75,7 +76,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and raw stone. Let’s make sure that we do not run out of logs. For "
 "this, we need a lumberjack and a hut for him to stay in."
-msgstr "Как правило, Вы начинаете игру с одним лишь штабом. Это большое здание с синим флажком перед ним. В штабе находятся рабочие и солдаты, а также хранятся товары. Одни товары нужны для строительства зданий, другие - для производства других товаров. Очевидно, что запас товаров в штабе не бесконечен, так что Вы должны наладить их производство. Самые нужные товары в начале игры - это основные строительные материалы: брёвна и камни. Давайте позаботимся о том, чтобы у нас не закончились брёвна. Для этого нам нужен дровосек и хижина для него."
+msgstr "Обычно игра начинается лишь с одним штабом. Это большое здание с синим флажком перед ним. В штабе находятся рабочие и солдаты, а также хранятся товары. Некоторые ресурсы нужны для строительства зданий, другие — для производства  товаров. Очевидно, что запас ресурсов в штабе не бесконечен, так что необходимо наладить их производство. Самые нужные ресурсы в начале игры — основные строительные материалы: брёвна и камни. Давайте позаботимся о том, чтобы у нас не закончились брёвна. Для этого нам нужен дровосек и его хижина."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -84,11 +85,11 @@ msgid ""
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the SPACE key"
 " to toggle it."
-msgstr "Нам нужно найти хорошее место для хижины дровосека. Чтобы упростить задачу, мы можем включить отображение значков подсказок по типам строений. Это можно сделать двумя способами: нажатием четвёртой слева кнопки внизу экрана или клавишей ПРОБЕЛ на клавиатуре."
+msgstr "Нам нужно найти подходящее место для хижины дровосека. Чтобы упростить задачу, мы можем включить отображение значков-подсказок по типам строений. Это можно сделать двумя способами: нажатием четвёртой слева кнопки внизу экрана или клавишей ПРОБЕЛ на клавиатуре."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr "Нажмите кнопку \"ОК\", чтобы закрыть это окно, затем попробуйте сделать это."
+msgstr "Нажмите кнопку «ОК», чтобы закрыть окно, затем попробуйте выполнить задачу."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
@@ -102,14 +103,14 @@ msgstr "Показать места для зданий"
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr "Когда включен показ иконок зданий, легче понять какой тип зданий может быть построен на участке земли."
+msgstr "Когда включен показ иконок зданий, легче понять какой тип зданий может быть построен на конкретном участке земли."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "Do so now, either by pressing SPACE or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr ""
+msgstr "Сделайте так ПРОБЕЛом или нажав четвертую кнопка слева в самом низу экрана. Щелкните правой кнопкой мыши на этом окне, а затем попробуйте."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -122,7 +123,7 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "Вот вы где. Давайте я объясню вам значение этих иконок. Для начала, давайте рассмотрим как создать хижину лесоруба и присоединить ее к дороге. Возле этих деревьев, как раз, хорошее место для лесоруба. Далее я опишу шаги, которые необходимо выполнить, и попрошу закрыть это окно для демонстрации."
+msgstr "Вот вы где. Давайте я объясню вам значение этих иконок. Для начала давайте рассмотрим как создать хижину лесоруба и присоединить её к дороге. Возле этих деревьев как раз есть хорошее место для лесоруба. Далее я опишу шаги, которые необходимо выполнить, и попрошу закрыть это окно для демонстрации."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
@@ -136,13 +137,13 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr "Только что, я нажал левой кнопкой мыши на иконке где я хотел расположить хижину лесоруба. Далее появится окно, где я смогу выбрать здание. Так как я нажал на желтый дом, который обозначает возможность построения здания малых и средний размеров, мне показаны все строения малых и средних размеров. Но хижина лесоруба - это здание малых размеров, поэтому я перейду на вкладку малых зданий, после чего выберу хижину."
+msgstr "В первую очередь я кликну на предполагаемое место строительства. Далее появится окно где я смогу выбрать здание. Так как я нажал на жёлтый дом, который обозначает возможность построения здания малых и средний размеров, мне показали все строения малых и средних размеров. Но хижина лесоруба — это здание малых размеров, поэтому я перейду на вкладку малых зданий, после чего выберу хижину."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr "Нажмите \"ОК\" для продолжения. Я покажу все медленно: кликну, потом выберу вкладку и выберу строение."
+msgstr "Нажмите «ОК» для продолжения. Я покажу все медленно: кликну, потом выберу вкладку и выберу строение."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -155,7 +156,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "Лесоруб не приступит к работе. Я все еще должен присоединить хижину к сети дорог. После приведения в порядок места строительства, я автоматически войду в режим построение дорог, поэтому, все что мне надо сделать это нажать на синий флаг штаба."
+msgstr "Строительство не начнётся. Мне нужно присоединить хижину дровосека к сети дорог. После указания места строительства, я автоматически попадаю в дорожно-строительный режим, так что всё, что я должен сделать, это нажать на синий флаг перед моей штаб-квартирой."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -991,3 +992,4 @@ msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
