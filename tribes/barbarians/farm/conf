@@ -28,7 +28,7 @@ work=_working
 [plant_wheat]
 sleep=14000  #orig 20000
 worker=plant
-# animate=working  10000 
+# animate=working  10000
 
 [harvest_wheat]
 sleep=4000  #orig 5000
@@ -44,7 +44,7 @@ return=skipped
 [out_of_resource_notification]
 title=_Out of Fields
 message=_The farmer working at this farm has no cleared soil to plant his seeds.
-delay_attempts=10
+productivity_threshold=33
 
 [build]
 pics=build_??.png  # ???

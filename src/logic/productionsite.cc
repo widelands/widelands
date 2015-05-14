@@ -65,13 +65,13 @@ ProductionSiteDescr::ProductionSiteDescr
 	{
 		m_out_of_resource_title = section->get_string("title", "");
 		m_out_of_resource_message = section->get_string("message", "");
-		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
+		out_of_resource_productivity_threshold_ = section->get_natural("productivity_threshold", 0);
 	}
 	else
 	{
 		m_out_of_resource_title = "";
 		m_out_of_resource_message = "";
-		m_out_of_resource_delay_attempts = 0;
+		out_of_resource_productivity_threshold_ = 100;
 	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
@@ -202,8 +202,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
-	m_production_result (""),
-	m_out_of_resource_delay_counter(0)
+	m_production_result ("")
 {
 	calc_statistics();
 }
@@ -322,12 +321,15 @@ void ProductionSite::calc_statistics()
 
 	std::string trend;
 	if (lastPercOk > percOk) {
+		trend_ = Trend::kRising;
 		color = UI_FONT_CLR_GOOD_HEX;
 		trend = "+";
 	} else if (lastPercOk < percOk) {
+		trend_ = Trend::kFalling;
 		color = UI_FONT_CLR_BAD_HEX;
 		trend = "-";
 	} else {
+		trend_ = Trend::kUnchanged;
 		color = UI_FONT_CLR_BRIGHT_HEX;
 		trend = "=";
 	}
@@ -918,9 +920,8 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
-
-	if (m_out_of_resource_delay_counter >=
-		 descr().out_of_resource_delay_attempts()) {
+	if ((m_last_stat_percent <= descr().out_of_resource_productivity_threshold() && trend_ == Trend::kFalling)
+		 || m_last_stat_percent == 0) {
 		if (descr().out_of_resource_title().empty())
 		{
 			set_production_result(_("Can’t find any more resources!"));
@@ -941,10 +942,6 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 		// used as a information for dismantling and upgrading mines
 		if (descr().get_ismine())
 			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
-	}
-	if (m_out_of_resource_delay_counter++ >=
-		 descr().out_of_resource_delay_attempts()) {
-		m_out_of_resource_delay_counter = 0;
 	}
 }
 

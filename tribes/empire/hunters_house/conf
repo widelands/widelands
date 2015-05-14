@@ -26,7 +26,7 @@ worker=hunt
 # TRANSLATORS: "Game" means animals that you can hunt
 title=_Out of Game
 message=_The hunter working out of this hunter’s house can’t find any game in his working radius.
-delay_attempts=10
+productivity_threshold=33
 
 [idle]
 pics=hunters_house_i_??.png
