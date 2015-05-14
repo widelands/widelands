@@ -30,8 +30,9 @@
 constexpr int kTabHeight = 35;
 constexpr int kBuildGridCellSize = 50;
 constexpr int kColumns = 5;
+constexpr int kSpace = 6; // Space between rows
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
-constexpr int32_t kWindowHeight = 485;
+constexpr int32_t kWindowHeight = 485 + 4 * kSpace;
 
 constexpr uint8_t kLowProduction = 33;
 constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
@@ -70,7 +71,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      ports_tab_(&tabs_, 0, 0, UI::Box::Vertical) {
-	set_pos(Point(0, 40));  // Shift below the Gametime + FPS display
+	set_pos(Point(0, 4));  // Shift to fit with Gametime display
 	tabs_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
 	          &small_tab_,
@@ -225,6 +226,7 @@ bool BuildingStatisticsMenu::add_button(
 	++*column;
 	if (*column == kColumns) {
 		tab.add(&row, UI::Align_Left);
+		tab.add_space(kSpace);
 		*column = 0;
 		return true;
 	}
