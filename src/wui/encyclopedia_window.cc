@@ -169,10 +169,10 @@ EncyclopediaWindow::EncyclopediaWindow
 
 void EncyclopediaWindow::fill_buildings() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
 	std::vector<Building> building_vec;
 
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
+	// NOCOM(GunChleoc): add global military sites.
+	for (const BuildingIndex& i : tribe.buildings()) {
 		BuildingDescr const * building = tribe.get_building_descr(i);
 		Building b(i, building);
 		building_vec.push_back(b);
@@ -320,10 +320,9 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 
 void EncyclopediaWindow::fill_workers() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	WareIndex const nr_workers = tribe.get_nrworkers();
 	std::vector<Worker> worker_vec;
 
-	for (WareIndex i = 0; i < nr_workers; ++i) {
+	for (const WareIndex& i: tribe.workers()) {
 		WorkerDescr const * worker = tribe.get_worker_descr(i);
 		Worker w(i, worker);
 		worker_vec.push_back(w);
