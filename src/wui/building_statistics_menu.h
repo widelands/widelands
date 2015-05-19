@@ -27,6 +27,8 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
 
@@ -39,11 +41,18 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 	void think() override;
 	void update();
-	bool handle_key(bool const down, SDL_Keysym const code) override;
 
 private:
 	/// Which building state to jump through
 	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
+	enum NavigationButton {
+		PrevOwned,
+		NextOwned,
+		PrevConstruction,
+		NextConstruction,
+		PrevUnproductive,
+		NextUnproductive
+	};
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
@@ -51,15 +60,15 @@ private:
 	   BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
-	void jump_building(BuildingIndex id, JumpTarget target);
+	void jump_building(JumpTarget target, bool reverse);
+
+	/// Sets the current building type for the bottom navigation
+	void set_current_building_type(BuildingIndex id);
 
 	/// Helper function for jump_building to go round robin
 	int32_t validate_pointer(int32_t*, int32_t);
 
 	InteractivePlayer& iplayer() const;
-
-	/// Reverses the direction that buildings get jumped through
-	bool is_shift_pressed_;
 
 	/// UI tabs
 	UI::TabPanel tabs_;
@@ -71,10 +80,24 @@ private:
 
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
-	/// Button with owned / under construction buildings
-	std::vector<UI::Button*> owned_buttons_;
-	/// Button with buildings' productivity
-	std::vector<UI::Button*> productivity_buttons_;
+	/// Labels with owned / under construction buildings
+	std::vector<UI::Textarea*> owned_labels_;
+	/// Labels with buildings' productivity
+	// TODO(GunChleoc): These need to be multiline, so we can give them a color.
+	// Turn into normal textareas in fh1 branch.
+	std::vector<UI::MultilineTextarea*> productivity_labels_;
+
+	/// The buttons for stepping through buildings
+	UI::Button* navigation_buttons_[6];
+	UI::Textarea owned_label_;
+	UI::Textarea construction_label_;
+	UI::Textarea unproductive_label_;
+	UI::Textarea no_owned_label_;
+	UI::Textarea no_construction_label_;
+	UI::Textarea no_unproductive_label_;
+
+	/// The building type we are currently navigating
+	BuildingIndex current_building_type_;
 	/// The last building that was jumped to
 	int32_t last_building_index_;
 	/// The type of last building that was jumped to
