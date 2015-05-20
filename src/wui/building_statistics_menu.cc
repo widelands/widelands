@@ -25,35 +25,30 @@
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
 #include "logic/player.h"
+#include "logic/militarysite.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 
 constexpr int kBuildGridCellSize = 50;
 constexpr int kMargin = 5;
 constexpr int kColumns = 5;
-constexpr int kSpace = 3;  // Space between rows
+constexpr int kSpace = 0;  // Space between rows NOCOM
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int kLabelFontSize = 12;
 constexpr int kTabHeight = 35 + 5 * (kBuildGridCellSize + kSpace + kLabelHeight + kLabelHeight);
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
-constexpr int32_t kWindowHeight = kTabHeight + kMargin + 3 * kButtonRowHeight;
+constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
-constexpr uint8_t kLowProduction = 33;
 constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
 
 namespace {
-// Formats a main text + help text for a tooltip and adds a hint for the shift button.
-const std::string format_tooltip(const std::string& title, const std::string& helptext) {
-	const std::string color = (boost::format("%02x%02x%02x") % int(UI_FONT_TOOLTIP_CLR.r) %
-	                           int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b)).str();
-
-	const std::string tooltip_format("<rt><p><font face=serif size=%i bold=1 color=%s>%s"
-	                                 "<br><font size=%i>%s<br>%s</font></font></p></rt>");
-
-	return (boost::format(tooltip_format) % UI_FONT_SIZE_SMALL % color % title % 11 % helptext %
-	        _("Hold down SHIFT to step through the buildings from back to front.")).str();
+void set_label_font(UI::Textarea* label) {
+	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+}
+void set_editbox_font(UI::EditBox* editbox) {
+	editbox->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
 }
 
 }  // namespace
@@ -76,6 +71,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
      ports_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+     building_name_(this,
+                    kMargin,
+                    get_inner_h() - 4 * kButtonRowHeight,
+                    0,
+                    kButtonHeight,
+                    "",
+                    UI::Align_CenterLeft),
      owned_label_(this,
                   kMargin,
                   get_inner_h() - 3 * kButtonRowHeight,
@@ -90,13 +92,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                          kButtonHeight,
                          _("Under Construction:"),
                          UI::Align_CenterLeft),
-     unproductive_label_(this,
-                         kMargin,
-                         get_inner_h() - kButtonRowHeight,
-                         0,
-                         kButtonHeight,
-                         _("Unproductive:"),
-                         UI::Align_CenterLeft),
+     unproductive_box_(this, kMargin, get_inner_h() - kButtonRowHeight, UI::Box::Horizontal),
+     // TODO(GunChleoc): use pgettext when we have it available.
+     unproductive_label_(
+        &unproductive_box_,
+        /** TRANSLATORS: This is the first part of productivity with input field */
+        /** TRANSLATORS: Building statistics window -  "Low Production: <input>%" */
+        _("Low Production: "),
+        UI::Align_BottomLeft),
+     unproductive_percent_(
+        &unproductive_box_, 0, 0, 35, kButtonHeight, g_gr->images().get("pics/but1.png")),
+     unproductive_label2_(
+        &unproductive_box_,
+        /** TRANSLATORS: This is the second part of productivity with input field */
+        /** TRANSLATORS: Building statistics window -  "Low Production: <input>%" */
+        _("%"),
+        UI::Align_BottomLeft),
      no_owned_label_(this,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
                      get_inner_h() - 3 * kButtonRowHeight,
@@ -117,7 +128,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             0,
                             kButtonHeight,
                             "",
-                            UI::Align_CenterRight) {
+                            UI::Align_CenterRight),
+     low_production_(33) {
 	tabs_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
 	          &small_tab_,
@@ -138,7 +150,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	          g_gr->images().get("pics/menu_tab_buildport.png"),
 	          &ports_tab_,
 	          _("Ports"));
-	tabs_.set_size(kWindowWidth, kWindowHeight);
+	tabs_.set_size(kWindowWidth, kTabHeight);
 
 	const TribeDescr& tribe = iplayer().player().tribe();
 
@@ -202,6 +214,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	small_tab_.add(small_row, UI::Align_Left);
 	medium_tab_.add(medium_row, UI::Align_Left);
 	big_tab_.add(big_row, UI::Align_Left);
+
+	set_label_font(&owned_label_);
+	set_label_font(&construction_label_);
+	set_label_font(&unproductive_label_);
+	set_editbox_font(&unproductive_percent_);
+	set_label_font(&unproductive_label2_);
+	set_label_font(&no_owned_label_);
+	set_label_font(&no_construction_label_);
+	set_label_font(&no_unproductive_label_);
+
+	// NOCOM Align these labels
+	unproductive_label_.set_size(unproductive_label_.get_w(), kButtonRowHeight);
+	unproductive_percent_.set_text(std::to_string(low_production_));
+	unproductive_percent_.set_max_length(4);
+	unproductive_label2_.set_size(unproductive_label2_.get_w(), kButtonRowHeight);
+	unproductive_box_.add(&unproductive_label_, UI::Align_Left);
+	unproductive_box_.add(&unproductive_percent_, UI::Align_Left);
+	unproductive_box_.add(&unproductive_label2_, UI::Align_Left);
+	unproductive_box_.set_pos(Point(kMargin, get_inner_h() - kButtonRowHeight));
+	unproductive_box_.set_size(
+	   unproductive_label_.get_w() + unproductive_percent_.get_w() + unproductive_label2_.get_w(),
+	   kButtonRowHeight);
 
 	navigation_buttons_[NavigationButton::PrevOwned] =
 	   new UI::Button(this,
@@ -288,6 +322,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect(boost::bind(
 	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kUnproductive, false));
 
+	unproductive_percent_.changed.connect(
+	   boost::bind(&BuildingStatisticsMenu::low_production_changed, boost::ref(*this)));
+	unproductive_percent_.ok.connect(
+	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
+	unproductive_percent_.cancel.connect(
+	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
+
 	update();
 }
 
@@ -321,7 +362,7 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellSize, kLabelHeight, " ", UI::Align_Left);
-	owned_labels_[id]->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+	set_label_font(owned_labels_[id]);
 	button_box->add(owned_labels_[id], UI::Align_Left);
 
 	productivity_labels_[id] =
@@ -400,7 +441,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 					           productionsite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
 						if (productionsite->is_stopped() ||
-						    productionsite->get_statistics_percent() < kLowProduction) {
+						    productionsite->get_statistics_percent() < low_production_) {
 							found = true;
 							break;
 						}
@@ -414,7 +455,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 					           productionsite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
 						if (productionsite->is_stopped() ||
-						    productionsite->get_statistics_percent() < kLowProduction) {
+						    productionsite->get_statistics_percent() < low_production_) {
 							found = true;
 							break;
 						}
@@ -427,7 +468,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 			           productionsite,
 			           map[stats_vector[last_building_index_].pos].get_immovable())) {
 				if (productionsite->is_stopped() ||
-				    productionsite->get_statistics_percent() < kLowProduction) {
+				    productionsite->get_statistics_percent() < low_production_) {
 					found = true;
 				}
 			}
@@ -443,6 +484,8 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		validate_pointer(&last_building_index_, stats_vector.size());
 		iplayer().move_view_to(stats_vector[last_building_index_].pos);
 	}
+	low_production_reset_focus();
+	update();
 }
 
 /*
@@ -495,35 +538,52 @@ void BuildingStatisticsMenu::update() {
 		uint32_t nr_build = 0;
 		uint32_t total_prod = 0;
 		uint32_t nr_unproductive = 0;
-		upcast(ProductionSiteDescr const, productionsite_descr, &building);
+
 		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
 			if (stats_vector[l].is_constructionsite)
 				++nr_build;
 			else {
 				++nr_owned;
-				if (productionsite_descr) {
-					ProductionSite& productionsite =
-					   dynamic_cast<ProductionSite&>(*map[stats_vector[l].pos].get_immovable());
-					uint32_t percent = productionsite.get_statistics_percent();
+				BaseImmovable& immovable = *map[stats_vector[l].pos].get_immovable();
+				if (building.type() == MapObjectType::PRODUCTIONSITE ||
+				    building.type() == MapObjectType::TRAININGSITE) {
+					ProductionSite& productionsite = dynamic_cast<ProductionSite&>(immovable);
+					int percent = productionsite.get_statistics_percent();
 					total_prod += percent;
 
-					if (percent < 33 || productionsite.is_stopped()) {
+					if (percent < low_production_ || productionsite.is_stopped()) {
+						++nr_unproductive;
+					}
+				} else if (building.type() == MapObjectType::MILITARYSITE) {
+					MilitarySite& militarysite = dynamic_cast<MilitarySite&>(immovable);
+					int percent = 0;
+					if (!militarysite.stationed_soldiers().empty()) {
+						percent = militarysite.stationed_soldiers().size() * 100 /
+						          militarysite.soldier_capacity();
+						total_prod += percent;
+					}
+					if (percent < low_production_) {
 						++nr_unproductive;
 					}
 				}
 			}
 		}
 
-		bool show_productivity = building.type() == MapObjectType::PRODUCTIONSITE && nr_owned;
+		bool show_productivity = (building.type() == MapObjectType::PRODUCTIONSITE ||
+		                          building.type() == MapObjectType::TRAININGSITE ||
+		                          building.type() == MapObjectType::MILITARYSITE) &&
+		                         nr_owned;
 
 		if (show_productivity) {
 			int const percent =
 			   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
 			std::string color;
-			if (percent < 33) {
+			if (percent < low_production_) {
 				color = UI_FONT_CLR_BAD_HEX;
-			} else if (percent < 66) {
+			} else if (percent < ((low_production_ < 50) ?
+			                         2 * low_production_ :
+			                         low_production_ + ((100 - low_production_) / 2))) {
 				color = UI_FONT_CLR_OK_HEX;
 			} else {
 				color = UI_FONT_CLR_GOOD_HEX;
@@ -533,8 +593,6 @@ void BuildingStatisticsMenu::update() {
 			                              kLabelFontSize % color % percent).str();
 			productivity_labels_[id]->set_text(perc_str);
 			productivity_labels_[id]->set_visible(true);
-			productivity_labels_[id]->set_tooltip(_("Average Productivity"));
-
 		} else {
 			productivity_labels_[id]->set_text(" ");
 		}
@@ -553,8 +611,6 @@ void BuildingStatisticsMenu::update() {
 			owned_labels_[id]->set_text((boost::format(_("%1% / %2%")) % nr_owned % "–").str());
 		}
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
-		// NOCOM the tooltip doesn't show.
-		owned_labels_[id]->set_tooltip(_("Owned / Under Construction"));
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
 		if (id == current_building_type_) {
@@ -578,5 +634,24 @@ void BuildingStatisticsMenu::set_current_building_type(BuildingIndex id) {
 		}
 	}
 	building_buttons_[current_building_type_]->set_flat(false);
+	building_buttons_[current_building_type_]->set_perm_pressed(true);
+	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
+	low_production_reset_focus();
 	update();
+}
+
+void BuildingStatisticsMenu::low_production_changed() {
+	const std::string cutoff = unproductive_percent_.text();
+	int number = std::atoi(cutoff.c_str());
+
+	// Make sure that the user specified a correct number
+	if (std::to_string(number) == cutoff && 0 <= number && number <= 100) {
+		low_production_ = number;
+		update();
+	}
+}
+
+void BuildingStatisticsMenu::low_production_reset_focus() {
+	unproductive_percent_.set_can_focus(false);
+	unproductive_percent_.set_can_focus(true);
 }

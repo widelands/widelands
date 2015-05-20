@@ -26,6 +26,7 @@
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -65,6 +66,11 @@ private:
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(BuildingIndex id);
 
+	/// Change the percentage where buildings are deemed unproductive
+	void low_production_changed();
+	/// Unfocuses the editbox to free the keyboard input
+	void low_production_reset_focus();
+
 	/// Helper function for jump_building to go round robin
 	int32_t validate_pointer(int32_t*, int32_t);
 
@@ -89,9 +95,13 @@ private:
 
 	/// The buttons for stepping through buildings
 	UI::Button* navigation_buttons_[6];
+	UI::Textarea building_name_;
 	UI::Textarea owned_label_;
 	UI::Textarea construction_label_;
+	UI::Box unproductive_box_;
 	UI::Textarea unproductive_label_;
+	UI::EditBox unproductive_percent_;
+	UI::Textarea unproductive_label2_;
 	UI::Textarea no_owned_label_;
 	UI::Textarea no_construction_label_;
 	UI::Textarea no_unproductive_label_;
@@ -104,6 +114,9 @@ private:
 	BuildingIndex last_building_type_;
 	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;
+
+	/// At which percent to deem buildings as unproductive
+	int low_production_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
