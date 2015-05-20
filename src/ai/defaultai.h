@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
+#include "logic/trainingsite.h"
 
 namespace Widelands {
 struct Road;
@@ -233,6 +234,7 @@ private:
 	void gain_ship(Widelands::Ship&, NewShip);
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
+	void soldier_trained(const Widelands::TrainingSite&);
 
 	bool check_supply(const BuildingObserver&);
 
@@ -318,6 +320,13 @@ private:
 	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
 
+	//this is bunch of patterns that have to identify weapons and armors for input queues of traininsites
+	std::vector<std::string> const armors_and_weapons =
+		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
+	//some buildings can be upgraded even when they are only one
+	//usually outputs of upgrade includes all outputs or the building
+	const char* preffered_upgrade[2] = {"micro-brewery", "axfactory"};
+
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
 	std::vector<int16_t> marineTaskQueue_;
@@ -327,6 +336,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteProductionSiteOutOfResources>>
 	   outofresource_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTrainingSiteSoldierTrained>>
+	   soldiertrained_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
 };
 

@@ -62,7 +62,7 @@ constexpr int kMinBFCheckInterval = 5 * 1000;
 constexpr int kMinMFCheckInterval = 19 * 1000;
 constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
-constexpr int kTrainingSitesCheckInterval = 5 * 60 * 1000;
+constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
@@ -151,6 +151,18 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 		   out_of_resources_site(*note.ps);
 
 		});
+
+	// Subscribe to TrainingSiteSoldierTrained.
+	soldiertrained_subscriber_ = Notifications::subscribe<NoteTrainingSiteSoldierTrained>(
+	   [this](const NoteTrainingSiteSoldierTrained& note) {
+		   	if (note.ts->owner().player_number() != player_->player_number()) {
+			   return;
+		   }
+
+		   soldier_trained(*note.ts);
+
+		});
+
 
 	// Subscribe to ShipNotes.
 	shipnotes_subscriber_ =
@@ -482,7 +494,16 @@ void DefaultAI::late_initialization() {
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
 			for (const WareAmount& temp_input : train.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
+
+				//collecting subsitutes
+				if (tribe_->ware_index("meat") == temp_input.first ||
+				    tribe_->ware_index("fish") == temp_input.first ||
+				    tribe_->ware_index("smoked_meat") == temp_input.first ||
+				    tribe_->ware_index("smoked_fish") == temp_input.first) {
+					bo.substitute_inputs_.insert(temp_input.first);
+				}
 			}
+
 			bo.trainingsite_type_ = bh.get_trainingsite_type();
 			// it would behave badly if no type was set
 			// make sure all TS have its type set properly in conf files
@@ -592,7 +613,7 @@ void DefaultAI::late_initialization() {
 	taskDue[ScheduleTasks::kCheckShips] = 30 * 1000;
 	taskDue[ScheduleTasks::kCheckEconomies] = 1000;
 	taskDue[ScheduleTasks::KMarineDecisions] = 30 * 1000;
-	taskDue[ScheduleTasks::kCheckTrainingsites] = 15 * 60 * 1000;
+	taskDue[ScheduleTasks::kCheckTrainingsites] = 2 * 60 * 1000;
 	taskDue[ScheduleTasks::kBbuildableFieldsCheck] = 1000;
 	taskDue[ScheduleTasks::kMineableFieldsCheck] = 1000;
 	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
@@ -2850,14 +2871,27 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// available, one is to be enhanced
 	// b) if there are two buildings
 	// statistics percents are decisive
+	// c) yet there are buildings that might be upgraded, even when
+	// there is no second buiding of the kind (now only MicroBrewery)
+	bool push_upgrade = false;
+	for (const char* pb : preffered_upgrade) {
+		if (strcmp(site.bo->desc->name().c_str(), pb) == 0) {
+			push_upgrade = true;
+			//printf (" pushing upgrade for: %s (%3dx%3d)\n",
+			//site.bo->desc->name().c_str(),
+			//site.site->get_position().x,site.site->get_position().y);
+		}
+	}
+
 	const BuildingIndex enhancement = site.site->descr().enhancement();
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
-	    (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
+	    ((site.bo->cnt_built_ - site.bo->unoccupied_) > 1 ||
+	    push_upgrade)) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
 
 		// Only enhance buildings that are allowed (scenario mode)
-		// do not do decisions to fast
+		// do not do decisions too fast
 		if (player_->is_building_type_allowed(enhancement)) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
@@ -2869,9 +2903,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 				// don't upgrade without workers
 				if (site.site->has_workers(enhancement, game())) {
+					
+					//if (push_upgrade) printf ("   has workers\n");
 
 					// forcing first upgrade
-					if (en_bo.cnt_built_ == 0 && !mines_.empty()) {
+					if (en_bo.cnt_built_ == 0) {
 						enbld = enhancement;
 						bestbld = &en_bo;
 					}
@@ -3562,15 +3598,15 @@ void DefaultAI::count_military_vacant_positions() {
 	// counting vacant positions
 	vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
-		vacant_mil_positions_ += tso.site->soldier_capacity() - tso.site->stationed_soldiers().size();
+		vacant_mil_positions_ += 10 * (tso.site->soldier_capacity() - tso.site->stationed_soldiers().size());
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
 	}
 }
 
-// this function only manipulates with trainingsites' inputs priority
-// decreases it when too many unoccupied military buildings
+// this function only check with trainingsites
+// manipulates input queues and soldier capacity
 bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (taskDue[ScheduleTasks::kCheckTrainingsites] > gametime) {
 		return false;
@@ -3581,6 +3617,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		taskDue[ScheduleTasks::kCheckTrainingsites] = gametime + 2 * kTrainingSitesCheckInterval;
 		return false;
 	}
+
+	trainingsites.push_back(trainingsites.front());
+	trainingsites.pop_front();
 
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
@@ -3595,12 +3634,78 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
-	trainingsites.push_back(trainingsites.front());
-	trainingsites.pop_front();
+	// changing capacity to 0 - this will happen only once.....
+	if (tso.site->soldier_capacity() > 1) {
+		game().send_player_change_soldier_capacity(*ts, - tso.site->soldier_capacity());
+		return true;
+	}
 
-	// changing capacity
-	if (tso.site->soldier_capacity() != 2) {
-		game().send_player_change_soldier_capacity(*ts, 2 - tso.site->soldier_capacity());
+	//reducing ware quees
+	// - for armours and weapons to 1
+	// - for others to 6
+	std::vector<WaresQueue*> const warequeues1 = tso.site->warequeues();
+	size_t nr_warequeues = warequeues1.size();
+	for (size_t i = 0; i < nr_warequeues; ++i) {
+
+		//if it was decreased yet
+		if (warequeues1[i]->get_max_fill() <= 1) {
+			continue;}
+
+		//even for food 8 is enough (I think)
+		if (warequeues1[i]->get_max_fill() > 8) {
+			game().send_player_set_ware_max_fill(*ts, warequeues1[i]->get_ware(), 8);
+			continue;
+		}
+
+		//now modifying max_fill of armors and weapons
+		for (std::string pattern : armors_and_weapons) {
+
+			if (tribe_->get_ware_descr(warequeues1[i]->get_ware())->name().find(pattern) != std::string::npos) {
+				if (warequeues1[i]->get_max_fill() > 1) {
+					game().send_player_set_ware_max_fill(*ts, warequeues1[i]->get_ware(), 1);
+					continue;
+				}
+			}
+		}
+	}
+
+	//if soldier capacity is set to 0, we need to find out if the site is
+	//suplied enough to incrase the capacity to 1
+	if (tso.site->soldier_capacity() == 0){
+
+		//First subsitute wares
+		int32_t capacity = 0;
+		int32_t filled = 0;
+		bool supplied_enough = true;
+		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
+		nr_warequeues = warequeues2.size();
+		for (size_t i = 0; i < nr_warequeues; ++i) {
+			if (tso.bo->substitute_inputs_.count(warequeues2[i]->get_ware()) > 0){
+				filled += warequeues2[i]->get_filled();
+				capacity += warequeues2[i]->get_max_fill();
+			}
+		}
+		if (filled * 2 < capacity) {
+			supplied_enough = false;
+		}
+
+		//checking non subsitutes
+		for (size_t i = 0; i < nr_warequeues; ++i) {
+			if (tso.bo->substitute_inputs_.count(warequeues2[i]->get_ware()) == 0){
+				if (warequeues2[i]->get_filled() < warequeues2[i]->get_max_fill()) {
+					supplied_enough = false;
+				}
+			}
+		}
+
+		if (supplied_enough) {
+			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (%s)\n",  //NOCOM
+				player_number(),
+				tso.site->get_position().x,
+				tso.site->get_position().y,
+				tso.bo->desc->name().c_str());
+			game().send_player_change_soldier_capacity(*ts, 1);
+		}
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
@@ -3950,6 +4055,22 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 			i->no_resources_count += 1;
 			break;
 		}
+}
+
+//this is called when soldier left the trainingsite
+//the purpose is to set soldier capacity to 0
+// (AI will then wait till training site is stocked)
+void DefaultAI::soldier_trained(const TrainingSite& site) {
+
+	// we must identify particular training site
+	for (std::list<TrainingSiteObserver>::iterator i = trainingsites.begin(); i != trainingsites.end(); ++i)
+		if (i->site == &site) {
+			if (i->site->soldier_capacity() > 0) {
+				game().send_player_change_soldier_capacity(*i->site, - i->site->soldier_capacity());
+			}
+			return;
+		}
+	printf (" Failed to find the training site????\n");//NOCOM
 }
 
 // walk and search for teritorry controlled by other player
@@ -4437,6 +4558,27 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
+	//summing team power, creating team_power std::map of team_number:strength
+	std::map<TeamNumber, uint32_t> team_power;
+	for (uint8_t j = 1; j <= plr_in_game; ++j) {
+		TeamNumber const tm = game().get_player(j)->team_number();
+		if (tm == 0) {
+			continue;
+		}
+		//for case this is new team
+		if (team_power.count(tm) == 0) {
+			//adding this team (number) to vector
+			team_power[tm] = 0;
+		}
+		try {
+			team_power[tm] += genstats.at(j - 1).miltary_strength.back();
+		} catch (const std::out_of_range&) {
+			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+			    player_number(),
+			    static_cast<unsigned int>(genstats.size()));
+		}
+	}
+
 	// defining treshold ratio of own_strenght/enemy's_strength
 	uint32_t treshold_ratio = 100;
 	if (type_ == AGGRESSIVE) {
@@ -4446,25 +4588,49 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		treshold_ratio = 120;
 	}
 
-	// now we test all players which one are 'attackable'
+	uint32_t my_power = 0;
+	try {
+		my_power = genstats.at(pn - 1).miltary_strength.back();
+	} catch (const std::out_of_range&) {
+		log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+		    player_number(),
+		    static_cast<unsigned int>(genstats.size()));
+	}
+	//adding power of team (minus my power) divided by 2
+	//(if I am a part of a team of course)
+	if (game().get_player(pn)->team_number() > 0) {
+		my_power += (team_power[game().get_player(pn)->team_number()] - my_power) / 2;
+	}
+
+	// now we test all players to identify 'attackable' ones
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		if (pn == j) {  // its me
+		//if it's me
+		if (pn == j) {
+			player_attackable[j - 1] = false;
+			continue;
+		}
+		//if we are the same team
+		if (game().get_player(pn)->team_number() > 0 &&
+		game().get_player(pn)->team_number() == game().get_player(j)->team_number()) {
 			player_attackable[j - 1] = false;
 			continue;
 		}
 
+		//now we compare strength
 		try {
-			// It seems that under some circumstances genstats can be empty.
-			// So, to avoid crash, the AI tests its content first.
-			if (genstats.at(j - 1).miltary_strength.empty()) {
-				log("ComputerPlayer(%d): miltary_strength is empty\n", player_number());
-				player_attackable.at(j - 1) = false;
-				// Avoid division by zero
-			} else if (genstats.at(j - 1).miltary_strength.back() == 0) {
+			//strength of the other player
+			uint32_t players_power = 0;
+			if (!genstats.at(j - 1).miltary_strength.empty()) {
+				players_power += genstats.at(j - 1).miltary_strength.back();
+			}
+			//+power of team (if member of a team)
+			if (game().get_player(j)->team_number() > 0) {
+				players_power += (team_power[game().get_player(j)->team_number()] - players_power) / 2;
+			}
+
+			if (players_power == 0){
 				player_attackable.at(j - 1) = true;
-				// Check threshold
-			} else if ((genstats.at(pn - 1).miltary_strength.back() * 100 /
-			            genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
+			} else if (my_power * 100 / players_power > treshold_ratio) {
 				player_attackable.at(j - 1) = true;
 			} else {
 				player_attackable.at(j - 1) = false;
@@ -4791,7 +4957,8 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
-	log(" %1d: Buildings: Pr:%3lu, Ml:%3lu, Mi:%2lu, Wh:%2lu, Po:%2u. Missing: %s\n",
+
+	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
 	    pn,
 	    productionsites.size(),
 	    militarysites.size(),

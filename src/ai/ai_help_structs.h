@@ -382,6 +382,13 @@ struct BuildingObserver {
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
 	std::vector<Widelands::WareIndex> critical_built_mat_;
+
+	//it seems that fish and meat are subsitutes (for trainingsites), so
+	// when testing ifa trainingsite is supplied enough
+	// we count the wares together
+	std::unordered_set<Widelands::WareIndex> substitute_inputs_;
+	int32_t substitutes_count_;
+
 	int16_t production_hint_;
 
 	int32_t cnt_built_;
