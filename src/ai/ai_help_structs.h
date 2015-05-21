@@ -383,6 +383,8 @@ struct BuildingObserver {
 	std::vector<int16_t> outputs_;
 	std::vector<Widelands::WareIndex> critical_built_mat_;
 
+	bool upgrade_substitutes_;
+
 	//it seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing ifa trainingsite is supplied enough
 	// we count the wares together

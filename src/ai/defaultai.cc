@@ -90,6 +90,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      num_ports(0),
      last_attacked_player_(std::numeric_limits<uint16_t>::max()),
      enemysites_check_delay_(60),
+     wood_policy_(WoodPolicy::kStartRangers),
      next_ai_think_(0),
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
@@ -112,7 +113,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      ts_basic_const_count_(0),
      ts_advanced_count_(0),
      ts_advanced_const_count_(0),
-     ts_without_trainers_(0) {
+     ts_without_trainers_(0),
+     scheduler_delay_counter_(0) {
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
@@ -403,6 +405,7 @@ void DefaultAI::late_initialization() {
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
 		bo.trainingsite_type_ = TrainingSiteType::kNoTS;
+		bo.upgrade_substitutes_ = false;
 
 		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
@@ -458,6 +461,38 @@ void DefaultAI::late_initialization() {
 				bo.is_shipyard_ = true;
 			} else {
 				bo.is_shipyard_ = false;
+			}
+
+			// now we find out if the upgrade of the building is a full substitution
+			// (produces all wares as current one)
+			const BuildingIndex enhancement = bld.enhancement();
+			if (enhancement != INVALID_INDEX && bo.type == BuildingObserver::PRODUCTIONSITE) {
+				std::unordered_set<WareIndex> enh_outputs;
+				const ProductionSiteDescr& enh_prod
+					=
+					dynamic_cast<const ProductionSiteDescr&>(*tribe_->get_building_descr(enhancement));
+
+				// collecting wares that are produced in enhanced building
+				for (const WareIndex& ware : enh_prod.output_ware_types()) {
+					enh_outputs.insert(ware);
+				}
+				//now testing outputs of current building
+				//and comparing
+				bo.upgrade_substitutes_ = true;
+				for (WareIndex ware : bo.outputs_) {
+					if (enh_outputs.count(ware) == 0){
+						bo.upgrade_substitutes_ = false;
+						break;
+					}
+				}
+			}
+
+			// plus some manually picked buildings,
+			// see preffered_upgrade list
+			for (const char* pb : preffered_upgrade) {
+				if (strcmp(bld.name().c_str(), pb) == 0) {
+					bo.upgrade_substitutes_ = true;
+				}
 			}
 
 			continue;
@@ -516,6 +551,8 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 	}
+
+
 
 	// atlanteans they consider water as a resource
 	// (together with mines, stones and wood)
@@ -1192,6 +1229,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// here we possible stop building of new buildings
 	new_buildings_stop_ = false;
 	MilitaryStrategy expansion_mode = MilitaryStrategy::kResourcesOrDefense;
+	
+	// helper variable - we need some proportion of free spots vs productionsites
+	// the proportion depends on size of economy
+	// this proportion defines how dense the teritorry will be
+	int32_t needed_spots = 0;
+	if (productionsites.size() < 50) {
+		needed_spots = productionsites.size();
+	} else if (productionsites.size() < 100) {
+		needed_spots = 50 + (productionsites.size() - 50) * 2;
+	} else {
+		needed_spots = 150 +  (productionsites.size() - 100) * 5;
+	}
 
 	// there are many reasons why to stop building production buildings
 	// (note there are numerous exceptions)
@@ -1200,7 +1249,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		new_buildings_stop_ = true;
 	}
 	// 2. to not exhaust all free spots
-	if (spots_ * 3 / 2 + 5 < static_cast<int32_t>(productionsites.size())) {
+	if (spots_ < needed_spots) {
 		new_buildings_stop_ = true;
 	}
 	// 3. too keep some proportions production sites vs military sites
@@ -1233,6 +1282,22 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else {
 			expansion_mode = MilitaryStrategy::kPushExpansion;
 		}
+	}
+
+	//we must calculate wood policy
+	const WareIndex wood_index = tribe_->safe_ware_index("log");
+	// the name of variable is not 100% proper
+	const int32_t stocked_wood = get_warehoused_stock(wood_index) -
+		productionsites.size() * 2 -
+		num_prod_constructionsites;
+	if (stocked_wood > 80) {
+		wood_policy_ = WoodPolicy::kDismantleRangers;
+	} else if  (stocked_wood > 25) {
+		wood_policy_ = WoodPolicy::kStopRangers;
+	} else if  (stocked_wood > 10) {
+		wood_policy_ = WoodPolicy::kStartRangers;
+	} else {
+		wood_policy_ = WoodPolicy::kBuildRangers;
 	}
 
 	// we must consider need for mines
@@ -1580,12 +1645,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 
-						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-							bo.stocklevel_ =
-							   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
-							bo.stocklevel_time = game().get_gametime();
-						}
-
 						if (bo.total_count() == 0) {
 							prio = 200;
 						}
@@ -1593,9 +1652,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 						// we can go above target if there is shortage of logs on stock
-						else if (bo.total_count() >= bo.cnt_target_ &&
-						         bo.stocklevel_ > 40 + productionsites.size() * 2) {
+						else if (bo.total_count() >= bo.cnt_target_) {
+							if (wood_policy_ != WoodPolicy::kBuildRangers) {
 							continue;
+							}
 						}
 
 						// considering near trees and producers
@@ -1674,9 +1734,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += kDefaultPrioBoost;
 					} else if ((bo.cnt_built_ - bo.unconnected_) > 1 && bo.current_stats_ > 97) {
 						prio -= kDefaultPrioBoost * (new_buildings_stop_);
-					} else if (new_buildings_stop_)
+					} else if (new_buildings_stop_){
 						continue;
-
+					}
 					// we check separatelly buildings with no inputs and some inputs
 					if (bo.inputs_.empty()) {
 
@@ -1704,7 +1764,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						if (!bo.space_consumer_) {
 							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
 						}  // leave some free space between them
-
 					}
 
 					else if (bo.is_shipyard_) {
@@ -2052,12 +2111,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// we build one training site for 100 militarysites
 				if (bo.trainingsite_type_ == TrainingSiteType::kBasic &&
-				    militarysites.size() / 100 < static_cast<int32_t>(ts_basic_count_)) {
+				    militarysites.size() / 75 < static_cast<int32_t>(ts_basic_count_)) {
 					continue;
 				}
 				// we build one training site for 100 militarysites
 				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
-				    militarysites.size() / 100 < static_cast<int32_t>(ts_advanced_count_)) {
+				    militarysites.size() / 75 < static_cast<int32_t>(ts_advanced_count_)) {
 					continue;
 				}
 
@@ -2872,21 +2931,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// b) if there are two buildings
 	// statistics percents are decisive
 	// c) yet there are buildings that might be upgraded, even when
-	// there is no second buiding of the kind (now only MicroBrewery)
-	bool push_upgrade = false;
-	for (const char* pb : preffered_upgrade) {
-		if (strcmp(site.bo->desc->name().c_str(), pb) == 0) {
-			push_upgrade = true;
-			//printf (" pushing upgrade for: %s (%3dx%3d)\n",
-			//site.bo->desc->name().c_str(),
-			//site.site->get_position().x,site.site->get_position().y);
-		}
-	}
+	// there is no second buiding of the kind (flag upgrade_substitutes_)
 
 	const BuildingIndex enhancement = site.site->descr().enhancement();
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
 	    ((site.bo->cnt_built_ - site.bo->unoccupied_) > 1 ||
-	    push_upgrade)) {
+	    site.bo->upgrade_substitutes_)) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
 
@@ -2903,8 +2953,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 				// don't upgrade without workers
 				if (site.site->has_workers(enhancement, game())) {
-					
-					//if (push_upgrade) printf ("   has workers\n");
 
 					// forcing first upgrade
 					if (en_bo.cnt_built_ == 0) {
@@ -3153,16 +3201,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// stop/start them based on stock avaiable
 	if (site.bo->production_hint_ >= 0) {
 
-		if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
-			site.bo->stocklevel_ = get_stocklevel_by_hint(site.bo->production_hint_);
-			site.bo->stocklevel_time = game().get_gametime();
-		}
-
-		// logs can be stored also in productionsites, they are counted as on stock
-		// but are no available for random production site
-		int16_t score = site.bo->stocklevel_ - productionsites.size() * 2;
-
-		if (score > 200 && site.bo->cnt_built_ > site.bo->cnt_target_) {
+		//dismantling the rangers hut, but only if we have them above a target
+		if (wood_policy_ == WoodPolicy::kDismantleRangers && site.bo->cnt_built_ > site.bo->cnt_target_) {
 
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
@@ -3174,23 +3214,34 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return true;
 		}
 
-		if (score > 120 && !site.site->is_stopped()) {
+		// stopping a ranger (sometimes the policy can be kDismantleRangers,
+		// but we still preserve some rangers for sure)
+		if ((wood_policy_ == WoodPolicy::kStopRangers
+			||
+			wood_policy_ == WoodPolicy::kDismantleRangers)
+			&&
+			!site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
 			return true;
 		}
+
 		const uint32_t trees_in_vicinity =
 		   map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), 5),
 		                       nullptr,
 		                       FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
 
+		//stop ranger if enough trees around regardless of policy
 		if (trees_in_vicinity > 25) {
 			if (!site.site->is_stopped()) {
 				game().send_player_start_stop_building(*site.site);
 			}
-		} else if (score < 80 && site.site->is_stopped()) {
-
-			game().send_player_start_stop_building(*site.site);
+		//if not enough trees nearby, we can start them if required
+		} else if ((wood_policy_ == WoodPolicy::kStartRangers ||
+		 	wood_policy_ == WoodPolicy::kBuildRangers)
+		 	&&
+		 	site.site->is_stopped()) {
+				game().send_player_start_stop_building(*site.site);
 		}
 	}
 
@@ -3699,10 +3750,11 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		if (supplied_enough) {
-			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (%s)\n",  //NOCOM
+			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (t: %5d, %s)\n",  //NOCOM
 				player_number(),
 				tso.site->get_position().x,
 				tso.site->get_position().y,
+				gametime / 60 / 100,
 				tso.bo->desc->name().c_str());
 			game().send_player_change_soldier_capacity(*ts, 1);
 		}
@@ -4909,6 +4961,19 @@ DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(uint32_t const gametime) {
 			DueTask = task.first;
 		}
 	}
+	if ((gametime - oldestTaskTime) > 5000){
+		scheduler_delay_counter_ += 1;
+	} else {
+		scheduler_delay_counter_ = 0;
+	}
+
+	if (scheduler_delay_counter_ > 10){
+		printf(" %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
+		player_number(),
+		static_cast<int32_t>((gametime - oldestTaskTime) / 1000));
+		scheduler_delay_counter_ = 0;
+	}
+
 	return DueTask;
 }
 

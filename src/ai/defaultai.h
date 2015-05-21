@@ -81,6 +81,7 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers};
+	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class ScheduleTasks : uint8_t {
 		kBbuildableFieldsCheck,
@@ -262,6 +263,8 @@ private:
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
 
+	WoodPolicy wood_policy_;
+
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
 	std::list<BlockedField> blocked_fields;
@@ -320,12 +323,16 @@ private:
 	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
 
+	//this is helping counter to track how many scheduler tasks are too delayed
+	// the purpose is to print out a warning that the game is pacing too fast
+	int32_t scheduler_delay_counter_;
+
 	//this is bunch of patterns that have to identify weapons and armors for input queues of traininsites
 	std::vector<std::string> const armors_and_weapons =
 		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
 	//some buildings can be upgraded even when they are only one
-	//usually outputs of upgrade includes all outputs or the building
-	const char* preffered_upgrade[2] = {"micro-brewery", "axfactory"};
+	//now only microbrewery get this special treatment
+	const char* preffered_upgrade[1] = {"micro-brewery"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
