@@ -928,7 +928,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					if (player_->is_hostile(player_immovable->owner())) {
 						field.enemy_nearby_ = true;
 					}
-					enemy_last_seen_ = gametime;
+					//enemy_last_seen_ = gametime; //HERE
 
 					continue;
 				}
@@ -1238,8 +1238,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		needed_spots = productionsites.size();
 	} else if (productionsites.size() < 100) {
 		needed_spots = 50 + (productionsites.size() - 50) * 2;
-	} else {
+	} else if (productionsites.size() < 200) {
 		needed_spots = 150 +  (productionsites.size() - 100) * 5;
+	} else {
+		needed_spots = 650 +  (productionsites.size() - 100) * 10;
 	}
 
 	// there are many reasons why to stop building production buildings
@@ -1262,7 +1264,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		new_buildings_stop_ = true;
 	}
 	// BUT if enemy is nearby, we cancel above stop
-	if (new_buildings_stop_ && enemy_last_seen_ + 2 * 60 * 1000 > gametime) {
+	if (new_buildings_stop_ && enemy_last_seen_ + 5 * 60 * 1000 > gametime) {
 		new_buildings_stop_ = false;
 	}
 
@@ -3870,7 +3872,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		int32_t unused1 = 0;
 		uint16_t unused2 = 0;
 
-		mso.enemies_nearby_ = true;
+		mso.enemies_nearby_ = false;
 
 		// yes enemy is nearby, but still we must distinguish whether
 		// he is accessible (over the land)
@@ -3889,6 +3891,10 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 				   *ms, MilitarySite::kPrefersHeroes);
 				changed = true;
 			}
+			
+			mso.enemies_nearby_ = true;
+			//HERE
+			enemy_last_seen_ = gametime; 
 		} else {  // otherwise decrease soldiers
 			uint32_t const j = ms->soldier_capacity();
 
@@ -4167,7 +4173,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// we must ignore own teritory, of course
 		if (f->get_owned_by() > 0) {
 			if (type == WalkSearch::kAnyPlayer ||
-			    (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn)) {
+			    (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn)) {//NOCOM add logic for enemies
 				*tested_fields = done.size();
 				return true;
 			}
@@ -4205,7 +4211,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	                                                  &tested_fields,
 	                                                  &mineable_fields_count,
 	                                                  candidate_spot,
-	                                                  WalkSearch::kAnyPlayer);
+	                                                  WalkSearch::kAnyPlayer); //NOCOM enemy here
 
 	// if we run into other player
 	// (maybe we should check for enemies, rather?)
@@ -5025,10 +5031,10 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 
 	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
 	    pn,
-	    productionsites.size(),
-	    militarysites.size(),
-	    mines_.size(),
-	    warehousesites.size() - num_ports,
+	    static_cast<uint32_t>(productionsites.size()),
+	    static_cast<uint32_t>(militarysites.size()),
+	    static_cast<uint32_t>(mines_.size()),
+	    static_cast<uint32_t>(warehousesites.size() - num_ports),
 	    num_ports,
 	    summary.c_str());
 }
