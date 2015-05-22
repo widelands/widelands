@@ -80,7 +80,7 @@ struct DefaultAI : ComputerPlayer {
 		DEFENSIVE = 0,
 	};
 
-	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers};
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class ScheduleTasks : uint8_t {

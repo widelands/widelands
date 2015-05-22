@@ -928,7 +928,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					if (player_->is_hostile(player_immovable->owner())) {
 						field.enemy_nearby_ = true;
 					}
-					//enemy_last_seen_ = gametime; //HERE
 
 					continue;
 				}
@@ -1229,19 +1228,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// here we possible stop building of new buildings
 	new_buildings_stop_ = false;
 	MilitaryStrategy expansion_mode = MilitaryStrategy::kResourcesOrDefense;
-	
+
 	// helper variable - we need some proportion of free spots vs productionsites
 	// the proportion depends on size of economy
-	// this proportion defines how dense the teritorry will be
+	// this proportion defines how dense the buildings will be
+	// it is degressive (allows high density on the beginning)
 	int32_t needed_spots = 0;
 	if (productionsites.size() < 50) {
 		needed_spots = productionsites.size();
 	} else if (productionsites.size() < 100) {
-		needed_spots = 50 + (productionsites.size() - 50) * 2;
+		needed_spots =   50 + (productionsites.size() -  50) *  5;
 	} else if (productionsites.size() < 200) {
-		needed_spots = 150 +  (productionsites.size() - 100) * 5;
+		needed_spots =  300 + (productionsites.size() - 100) * 10;
 	} else {
-		needed_spots = 650 +  (productionsites.size() - 100) * 10;
+		needed_spots = 1300 + (productionsites.size() - 200) * 20;
 	}
 
 	// there are many reasons why to stop building production buildings
@@ -1256,7 +1256,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 	// 3. too keep some proportions production sites vs military sites
 	if ((num_prod_constructionsites + productionsites.size()) >
-	    (num_milit_constructionsites + militarysites.size()) * 3) {
+	    (num_milit_constructionsites + militarysites.size()) * 5) {
 		new_buildings_stop_ = true;
 	}
 	// 4. if we do not have 3 mines at least
@@ -1264,9 +1264,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		new_buildings_stop_ = true;
 	}
 	// BUT if enemy is nearby, we cancel above stop
-	if (new_buildings_stop_ && enemy_last_seen_ + 5 * 60 * 1000 > gametime) {
+	if (new_buildings_stop_ && enemy_last_seen_ + 10 * 60 * 1000 > gametime) {
 		new_buildings_stop_ = false;
 	}
+
+	if (gametime%25 == 0)
+		printf (" %d: spots: %6d, required: %4d vs productionsites: %4d%s%s\n",
+		player_number(), spots_, needed_spots, productionsites.size(),
+		(spots_ > needed_spots)?"":", not enough spots",
+		((num_prod_constructionsites + productionsites.size()) >
+	    (num_milit_constructionsites + militarysites.size()) * 5)?", stopped due to ratio PS vs MS":"");
 
 	// sometimes there is too many military buildings in construction, so we must
 	// prevent initialization of further buildings start
@@ -3877,7 +3884,10 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		// yes enemy is nearby, but still we must distinguish whether
 		// he is accessible (over the land)
 		if (other_player_accessible(
-		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kOtherPlayers)) {
+		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
+
+			if (gametime%20 == 0) printf (" %d: enemy seen from pos: %3dx%3d\n",
+			player_number(), ms->get_position().x, ms->get_position().y);
 
 			uint32_t const total_capacity = ms->max_soldier_capacity();
 			uint32_t const target_capacity = ms->soldier_capacity();
@@ -3891,10 +3901,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 				   *ms, MilitarySite::kPrefersHeroes);
 				changed = true;
 			}
-			
+
 			mso.enemies_nearby_ = true;
-			//HERE
-			enemy_last_seen_ = gametime; 
+			enemy_last_seen_ = gametime;
 		} else {  // otherwise decrease soldiers
 			uint32_t const j = ms->soldier_capacity();
 
@@ -4172,10 +4181,35 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// a port location), but when testing (starting from) own military building
 		// we must ignore own teritory, of course
 		if (f->get_owned_by() > 0) {
-			if (type == WalkSearch::kAnyPlayer ||
-			    (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn)) {//NOCOM add logic for enemies
+
+			//if field is owned by anybody
+			if (type == WalkSearch::kAnyPlayer){
 				*tested_fields = done.size();
 				return true;
+				}
+
+			//if anybody but not me
+			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn){
+				*tested_fields = done.size();
+				return true;
+				}
+
+			//if owned by enemy
+			if  (type == WalkSearch::kEnemy && f->get_owned_by() != pn){
+				//for case I am not member of a team
+				if (player_->team_number() == 0) {
+					*tested_fields = done.size();
+					return true;
+				}
+				//if I am in team, testing if the same team
+				if (player_->team_number() > 0
+				&&
+				player_->team_number()
+				!=
+				game().get_player(f->get_owned_by())->team_number()) {
+					*tested_fields = done.size();
+					return true;
+				}
 			}
 		}
 
@@ -4211,7 +4245,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	                                                  &tested_fields,
 	                                                  &mineable_fields_count,
 	                                                  candidate_spot,
-	                                                  WalkSearch::kAnyPlayer); //NOCOM enemy here
+	                                                  WalkSearch::kAnyPlayer);
 
 	// if we run into other player
 	// (maybe we should check for enemies, rather?)
