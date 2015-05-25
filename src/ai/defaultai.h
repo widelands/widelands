@@ -83,6 +83,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
+	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
 	enum class ScheduleTasks : uint8_t {
 		kBbuildableFieldsCheck,
 		kMineableFieldsCheck,
@@ -236,6 +237,9 @@ private:
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
+	bool is_productionsite_needed(int32_t outputs,
+										int32_t performance,
+										PerfEvaluation purpose);
 
 	bool check_supply(const BuildingObserver&);
 

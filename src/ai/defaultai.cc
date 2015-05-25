@@ -65,7 +65,7 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 
 // this is intended for map developers, by default should be off
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true; //NOCOM
 
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
@@ -267,8 +267,16 @@ void DefaultAI::think() {
 			if (check_economies()) {  // is a must
 				return;
 			};
-			taskDue[ScheduleTasks::kRoadCheck] = gametime + 400;
-			improve_roads(gametime);
+			taskDue[ScheduleTasks::kRoadCheck] = gametime + 1000;
+			//testing 5 roads
+			{int32_t roads_to_check = (roads.size()+1<5)?roads.size()+1:5;
+			for (int i = 0;i < roads_to_check; i +=1){
+				if (improve_roads(gametime)){
+					//if significant change takes place do not go on
+					break;
+					};
+				}
+			}			
 			break;
 		case ScheduleTasks::kUnbuildableFCheck :
 			taskDue[ScheduleTasks::kUnbuildableFCheck] = gametime + 4000;
@@ -294,8 +302,15 @@ void DefaultAI::think() {
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			check_productionsites(gametime);
-			taskDue[ScheduleTasks::kCheckProductionsites] = gametime + 5000;
+			{int32_t ps_to_check = (productionsites.size()<5)?productionsites.size():5;
+			for (int i = 0;i < ps_to_check; i +=1){
+				if (check_productionsites(gametime)){
+					//if significant change takes place do not go on
+					break;
+					};
+				}
+			}
+			taskDue[ScheduleTasks::kCheckProductionsites] = gametime + 15000;
 			break;
 		case ScheduleTasks::kCheckShips :
 			check_ships(gametime);
@@ -307,8 +322,16 @@ void DefaultAI::think() {
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			taskDue[ScheduleTasks::kCheckMines] = gametime + 7000;  // 7 seconds is enough
-			check_mines_(gametime);
+			taskDue[ScheduleTasks::kCheckMines] = gametime + 15000; 
+			//checking 3 mines if possible
+			{int32_t mines_to_check = (mines_.size()<5)?mines_.size():5;
+			for(int i = 0;i < mines_to_check; i +=1){
+				if (check_mines_(gametime)){
+					//if significant change takes place do not go on
+					break;
+					};
+				}
+			}
 			break;
 		case ScheduleTasks::kCheckMilitarysites :
 			check_militarysites(gametime);
@@ -318,7 +341,7 @@ void DefaultAI::think() {
 			break;
 		case ScheduleTasks::kCountMilitaryVacant :
 			count_military_vacant_positions();
-			taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 90 * 1000;
+			taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 60 * 1000;
 			break;
 		case ScheduleTasks::kWareReview :
 			if (check_economies()) {  // economies must be consistent
@@ -1268,13 +1291,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		new_buildings_stop_ = false;
 	}
 
-	if (gametime%25 == 0)
-		printf (" %d: spots: %6d, required: %4d vs productionsites: %4d%s%s\n",
-		player_number(), spots_, needed_spots, productionsites.size(),
-		(spots_ > needed_spots)?"":", not enough spots",
-		((num_prod_constructionsites + productionsites.size()) >
-	    (num_milit_constructionsites + militarysites.size()) * 5)?", stopped due to ratio PS vs MS":"");
-
 	// sometimes there is too many military buildings in construction, so we must
 	// prevent initialization of further buildings start
 	const int32_t vacant_plus_in_construction_minus_prod =
@@ -1722,9 +1738,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0) {
-						continue;
-					}
+					// generally we allow 1 building in construction, but if 
+					// preciousness of missing ware is >=10 and it is farm-like building
+					// we allow 2 in construction
+					if (max_needed_preciousness >= 10
+						&& bo.inputs_.empty()
+						&& gametime > 30 * 60 * 1000) {
+						if ((bo.cnt_under_construction_ + bo.unoccupied_) > 1) {
+							continue;
+						}
+					} else {
+						if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0) {
+							continue;
+						}
+					}	
 
 					if (bo.forced_after_ < gametime && (bo.total_count() - bo.unconnected_) == 0) {
 						prio += 150;
@@ -1788,12 +1815,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 						if ((bo.cnt_built_ - bo.unconnected_) > 0
 							&&
-							//due to very badly designed statistics and the way how
-							//productionsites are working we must distinguish how many
-							//outputs the site has.
-							((bo.outputs_.size() == 1 && bo.current_stats_ > 75)
-							||
-							(bo.outputs_.size() > 1 && bo.current_stats_ > 55))) {
+							is_productionsite_needed(bo.outputs_.size(),
+													bo.current_stats_,
+													PerfEvaluation::kForConstruction)) {
 							prio += max_needed_preciousness + kDefaultPrioBoost - 3 +
 							        (bo.current_stats_ - 55) / 8;
 						}
@@ -1802,6 +1826,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (prio <= 0) {
 						continue;
 					}
+				
+					//bonus for big buildings if shortage of big fields
+					if (spots_avail.at(BUILDCAPS_BIG) <=5 && bo.desc->get_size() == 3) {
+						prio += 10;
+						}
+
+					if (spots_avail.at(BUILDCAPS_MEDIUM) <=5 && bo.desc->get_size() == 2) {
+						prio += 5;
+						}
 
 					//+1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
@@ -1812,6 +1845,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (consumers_nearby_count > 0) {
 						prio += 1;
 					}
+
 				}
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
@@ -1967,7 +2001,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// just generally prevent too many buildings
-				prio -= 40;
+				prio -= 40; //NOCOM ???
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 
@@ -2169,10 +2203,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}
 
 			// Prefer road side fields
-			prio += bf->preferred_ ? 1 : 0;
+			prio += bf->preferred_ ? 5 : 0;
 			// don't waste good land for small huts
-			prio -= (maxsize - bo.desc->get_size()) * 5;
-
+			prio -= (maxsize - bo.desc->get_size()) * 20;
+			
 			// prefer vicinity of ports (with exemption of warehouses)
 			if (bf->port_nearby_ && bo.type == BuildingObserver::MILITARYSITE) {
 				prio *= 2;
@@ -2427,12 +2461,13 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	}
 
 	if (inhibit_road_building_ >= gametime) {
-		return false;
+		return true;
 	}
 
 	// now we rotate economies and flags to get one flag to go on with
 	if (economies.empty()) {
-		return check_economies();
+		check_economies();
+		return false;
 	}
 
 	if (economies.size() >= 2) {  // rotating economies
@@ -2442,7 +2477,8 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	EconomyObserver* eco = economies.front();
 	if (eco->flags.empty()) {
-		return check_economies();
+		check_economies();
+		return false;
 	}
 	if (eco->flags.size() > 1) {
 		eco->flags.push_back(eco->flags.front());
@@ -2478,9 +2514,11 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	} else if (flag.current_wares() > 5) {
 		create_shortcut_road(flag, 9, -2, gametime);
 		inhibit_road_building_ = gametime + 400;
+	} else {
+		return false;
 	}
 
-	return false;
+	return true;
 }
 
 // the function takes a road (road is smallest section of roads with two flags on the ends)
@@ -2557,6 +2595,32 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	}
 	return false;
 }
+
+//is productionsite needed
+//used for building new buildings or dismantle of old, intended for ones
+//that have inputs
+bool DefaultAI::is_productionsite_needed(int32_t outputs,
+										int32_t performance,
+										PerfEvaluation purpose) {
+	int32_t expected_performance = 0;
+	if (outputs > 0) {
+		expected_performance = 10 + 70 / outputs;
+	} else {
+		expected_performance = 80;
+	}
+	if (purpose == PerfEvaluation::kForDismantle) {
+		expected_performance /=2;
+	}
+	if (performance > expected_performance) {
+		return true;
+	}
+	return false;
+}
+	
+	
+
+
+
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
@@ -2900,7 +2964,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		return false;
 	}
 
-	bool changed = false;
+	//bool changed = false; //NOCOM
 	// Reorder and set new values; - better now because there are multiple returns in the function
 	productionsites.push_back(productionsites.front());
 	productionsites.pop_front();
@@ -3172,9 +3236,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// buildings with inputs_, checking if we can a dismantle some due to low performance
-	if (!site.bo->inputs_.empty() && (site.bo->cnt_built_ - site.bo->unoccupied_) >= 3 &&
+	if (!site.bo->inputs_.empty() &&
+		(site.bo->cnt_built_ - site.bo->unoccupied_) >= 3 &&
 	    site.site->can_start_working() &&
-	    site.site->get_statistics_percent() < 20 &&  // statistics for the building
+	    !is_productionsite_needed(site.bo->outputs_.size(), site.site->get_statistics_percent(),PerfEvaluation::kForDismantle) &&
 	    site.bo->current_stats_ < 30 &&              // overall statistics
 	    (game().get_gametime() - site.unoccupied_till_) > 10 * 60 * 1000) {
 
@@ -3232,7 +3297,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			!site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
-			return true;
+			return false;
 		}
 
 		const uint32_t trees_in_vicinity =
@@ -3254,7 +3319,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		}
 	}
 
-	return changed;
+	return false;
 }
 
 // This function scans current situation with shipyards, ports, ships, ongoing expeditions
@@ -3885,9 +3950,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		// he is accessible (over the land)
 		if (other_player_accessible(
 		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
-
-			if (gametime%20 == 0) printf (" %d: enemy seen from pos: %3dx%3d\n",
-			player_number(), ms->get_position().x, ms->get_position().y);
 
 			uint32_t const total_capacity = ms->max_soldier_capacity();
 			uint32_t const target_capacity = ms->soldier_capacity();
@@ -5037,6 +5099,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	const std::vector<std::string> materials = {"coal",
 	                                            "log",
 	                                            "ironore",
+	                                            "iron",
 	                                            "marble",
 	                                            "plank",
 	                                            "water",
@@ -5063,7 +5126,8 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		summary = summary + materials.at(j) + ", ";
 	}
 
-	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
+	//log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
+	printf(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n", //NOCOM
 	    pn,
 	    static_cast<uint32_t>(productionsites.size()),
 	    static_cast<uint32_t>(militarysites.size()),
