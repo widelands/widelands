@@ -44,6 +44,7 @@
 #include "logic/playercommand.h"
 #include "logic/productionsite.h"
 #include "logic/ship.h"
+#include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
@@ -269,14 +270,14 @@ void DefaultAI::think() {
 			};
 			taskDue[ScheduleTasks::kRoadCheck] = gametime + 1000;
 			//testing 5 roads
-			{int32_t roads_to_check = (roads.size()+1<5)?roads.size()+1:5;
-			for (int i = 0;i < roads_to_check; i +=1){
+			{int32_t roads_to_check = (roads.size() + 1 < 5) ? roads.size() + 1:5;
+			for (int i = 0; i < roads_to_check; i += 1){
 				if (improve_roads(gametime)){
 					//if significant change takes place do not go on
 					break;
 					};
 				}
-			}			
+			}
 			break;
 		case ScheduleTasks::kUnbuildableFCheck :
 			taskDue[ScheduleTasks::kUnbuildableFCheck] = gametime + 4000;
@@ -303,7 +304,7 @@ void DefaultAI::think() {
 				return;
 			}
 			{int32_t ps_to_check = (productionsites.size()<5)?productionsites.size():5;
-			for (int i = 0;i < ps_to_check; i +=1){
+			for (int i = 0; i < ps_to_check; i += 1){
 				if (check_productionsites(gametime)){
 					//if significant change takes place do not go on
 					break;
@@ -322,10 +323,10 @@ void DefaultAI::think() {
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			taskDue[ScheduleTasks::kCheckMines] = gametime + 15000; 
+			taskDue[ScheduleTasks::kCheckMines] = gametime + 15000;
 			//checking 3 mines if possible
 			{int32_t mines_to_check = (mines_.size()<5)?mines_.size():5;
-			for(int i = 0;i < mines_to_check; i +=1){
+			for (int i = 0; i < mines_to_check; i += 1){
 				if (check_mines_(gametime)){
 					//if significant change takes place do not go on
 					break;
@@ -1738,7 +1739,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					// generally we allow 1 building in construction, but if 
+					// generally we allow 1 building in construction, but if
 					// preciousness of missing ware is >=10 and it is farm-like building
 					// we allow 2 in construction
 					if (max_needed_preciousness >= 10
@@ -1751,7 +1752,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0) {
 							continue;
 						}
-					}	
+					}
 
 					if (bo.forced_after_ < gametime && (bo.total_count() - bo.unconnected_) == 0) {
 						prio += 150;
@@ -1826,13 +1827,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (prio <= 0) {
 						continue;
 					}
-				
+
 					//bonus for big buildings if shortage of big fields
-					if (spots_avail.at(BUILDCAPS_BIG) <=5 && bo.desc->get_size() == 3) {
+					if (spots_avail.at(BUILDCAPS_BIG) <= 5 && bo.desc->get_size() == 3) {
 						prio += 10;
 						}
 
-					if (spots_avail.at(BUILDCAPS_MEDIUM) <=5 && bo.desc->get_size() == 2) {
+					if (spots_avail.at(BUILDCAPS_MEDIUM) <= 5 && bo.desc->get_size() == 2) {
 						prio += 5;
 						}
 
@@ -2001,7 +2002,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// just generally prevent too many buildings
-				prio -= 40; //NOCOM ???
+				prio -= 40;
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 
@@ -2152,12 +2153,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				// we build one training site for 100 militarysites
+				// we build one basic training site for 50 militarysites
 				if (bo.trainingsite_type_ == TrainingSiteType::kBasic &&
-				    militarysites.size() / 75 < static_cast<int32_t>(ts_basic_count_)) {
+				    militarysites.size() / 50 < static_cast<int32_t>(ts_basic_count_)) {
 					continue;
 				}
-				// we build one training site for 100 militarysites
+				// we build one advanced training site for 75 militarysites
 				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
 				    militarysites.size() / 75 < static_cast<int32_t>(ts_advanced_count_)) {
 					continue;
@@ -2206,7 +2207,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			prio += bf->preferred_ ? 5 : 0;
 			// don't waste good land for small huts
 			prio -= (maxsize - bo.desc->get_size()) * 20;
-			
+
 			// prefer vicinity of ports (with exemption of warehouses)
 			if (bf->port_nearby_ && bo.type == BuildingObserver::MILITARYSITE) {
 				prio *= 2;
@@ -2271,7 +2272,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				    0) {
 					nearness_penalty = 0;
 				} else {
-					nearness_penalty = 30;
+					nearness_penalty = 40;
 				}
 
 				// bonus score to prefer if too few mines
@@ -2609,18 +2610,13 @@ bool DefaultAI::is_productionsite_needed(int32_t outputs,
 		expected_performance = 80;
 	}
 	if (purpose == PerfEvaluation::kForDismantle) {
-		expected_performance /=2;
+		expected_performance /= 2;
 	}
 	if (performance > expected_performance) {
 		return true;
 	}
 	return false;
 }
-	
-	
-
-
-
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
@@ -2964,7 +2960,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		return false;
 	}
 
-	//bool changed = false; //NOCOM
 	// Reorder and set new values; - better now because there are multiple returns in the function
 	productionsites.push_back(productionsites.front());
 	productionsites.pop_front();
@@ -3239,7 +3234,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (!site.bo->inputs_.empty() &&
 		(site.bo->cnt_built_ - site.bo->unoccupied_) >= 3 &&
 	    site.site->can_start_working() &&
-	    !is_productionsite_needed(site.bo->outputs_.size(), site.site->get_statistics_percent(),PerfEvaluation::kForDismantle) &&
+	    !is_productionsite_needed(site.bo->outputs_.size(),
+	    							site.site->get_statistics_percent(),
+	    							PerfEvaluation::kForDismantle) &&
 	    site.bo->current_stats_ < 30 &&              // overall statistics
 	    (game().get_gametime() - site.unoccupied_till_) > 10 * 60 * 1000) {
 
@@ -3776,12 +3773,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		if (warequeues1[i]->get_max_fill() <= 1) {
 			continue;}
 
-		//even for food 8 is enough (I think)
-		if (warequeues1[i]->get_max_fill() > 8) {
-			game().send_player_set_ware_max_fill(*ts, warequeues1[i]->get_ware(), 8);
-			continue;
-		}
-
 		//now modifying max_fill of armors and weapons
 		for (std::string pattern : armors_and_weapons) {
 
@@ -3794,12 +3785,20 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
+	//changing priority if basic
+	if (tso.bo->trainingsite_type_ == TrainingSiteType::kBasic) {
+		for (uint32_t k = 0; k < tso.bo->inputs_.size(); ++k) {
+			game().send_player_set_ware_priority(
+			   *ts, wwWARE, tso.bo->inputs_.at(k), HIGH_PRIORITY);
+		}
+	}
+
 	//if soldier capacity is set to 0, we need to find out if the site is
 	//suplied enough to incrase the capacity to 1
 	if (tso.site->soldier_capacity() == 0){
 
 		//First subsitute wares
-		int32_t capacity = 0;
+		//int32_t capacity = 0;
 		int32_t filled = 0;
 		bool supplied_enough = true;
 		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
@@ -3807,29 +3806,33 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		for (size_t i = 0; i < nr_warequeues; ++i) {
 			if (tso.bo->substitute_inputs_.count(warequeues2[i]->get_ware()) > 0){
 				filled += warequeues2[i]->get_filled();
-				capacity += warequeues2[i]->get_max_fill();
+				//capacity += warequeues2[i]->get_max_fill();
 			}
 		}
-		if (filled * 2 < capacity) {
+		if (filled < 5) {
 			supplied_enough = false;
 		}
 
 		//checking non subsitutes
 		for (size_t i = 0; i < nr_warequeues; ++i) {
 			if (tso.bo->substitute_inputs_.count(warequeues2[i]->get_ware()) == 0){
-				if (warequeues2[i]->get_filled() < warequeues2[i]->get_max_fill()) {
+				const uint32_t required_amount
+				 =
+				 (warequeues2[i]->get_max_fill()<5) ? warequeues2[i]->get_max_fill() : 5;
+				if (warequeues2[i]->get_filled() < required_amount) {
 					supplied_enough = false;
 				}
 			}
 		}
 
 		if (supplied_enough) {
-			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (t: %5d, %s)\n",  //NOCOM
+			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (t: %5d, %s  (%s))\n",  //NOCOM
 				player_number(),
 				tso.site->get_position().x,
 				tso.site->get_position().y,
 				gametime / 60 / 100,
-				tso.bo->desc->name().c_str());
+				tso.bo->desc->name().c_str(),
+				(tso.bo->trainingsite_type_ == TrainingSiteType::kBasic) ? "Basic" : "Advanced");
 			game().send_player_change_soldier_capacity(*ts, 1);
 		}
 	}
@@ -4199,7 +4202,8 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 			}
 			return;
 		}
-	printf (" Failed to find the training site????\n");//NOCOM
+	log (" %d: Computer player error - trainingsite not found\n",
+	player_number());
 }
 
 // walk and search for teritorry controlled by other player
@@ -4696,6 +4700,22 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs_.size();
 }
 
+//This calculates strength of vector of soldiers, f.e. soldiers in building or
+//onew ready to attack
+int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> soldiers){
+	int32_t soldier_strength = 0;
+
+	for (Soldier * soldier : soldiers) {
+		soldier_strength += 1;
+		soldier_strength += soldier->get_hp_level();
+		soldier_strength += soldier->get_attack_level();
+		soldier_strength += soldier->get_defense_level();
+		soldier_strength += soldier->get_evade_level();
+	}
+
+	return soldier_strength;
+}
+
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	Map& map = game().map();
@@ -4852,7 +4872,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		count += 1;
 
 		site->second.last_tested = gametime;
-		uint8_t defenders = 0;
+		uint8_t defenders_strength = 0;
 		bool is_warehouse = false;
 		bool is_attackable = false;
 		uint16_t onwer_number = 100;
@@ -4864,7 +4884,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		Flag* flag = nullptr;
 		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
 			if (player_->is_hostile(bld->owner())) {
-				defenders = bld->present_soldiers().size();
+				std::vector<Soldier *> defenders;
+				defenders = bld->present_soldiers();
+				defenders_strength = calculate_strength(defenders);
+
 				flag = &bld->base_flag();
 				if (bld->can_attack()) {
 					is_attackable = true;
@@ -4874,7 +4897,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 		if (upcast(Warehouse, Wh, f.field->get_immovable())) {
 			if (player_->is_hostile(Wh->owner())) {
-				defenders = Wh->present_soldiers().size();
+
+				std::vector<Soldier *> defenders;
+				defenders = Wh->present_soldiers();
+				defenders_strength = calculate_strength(defenders);
+
 				flag = &Wh->base_flag();
 				is_warehouse = true;
 				if (Wh->can_attack()) {
@@ -4908,31 +4935,40 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			// can we attack:
 			if (is_attackable) {
-				site->second.attack_soldiers = player_->find_attack_soldiers(*flag);
+				std::vector<Soldier *> attackers;
+				player_->find_attack_soldiers(*flag, &attackers);
+				int32_t strength = calculate_strength(attackers);
+
+				site->second.attack_soldiers_strength = strength;
 			} else {
-				site->second.attack_soldiers = 0;
+				site->second.attack_soldiers_strength = 0;
 			}
 
-			site->second.defenders = defenders;
+			site->second.defenders_strength = defenders_strength;
 
-			if (site->second.attack_soldiers > 0) {
-				site->second.score = site->second.attack_soldiers - site->second.defenders / 2;
+			if (site->second.attack_soldiers_strength > 0
+				&&
+				player_attackable[onwer_number - 1]) {
+				site->second.score = site->second.attack_soldiers_strength - site->second.defenders_strength / 2;
 
-				if (!is_warehouse)
-					site->second.score -= 1;
+				if (is_warehouse) {
+					site->second.score += 2;
+				} else {
+					site->second.score -= 2;
+				}
 
 				// here is some differentiation based on "character" of a player
 				if (type_ == NORMAL) {
-					site->second.score -= 1;
-					site->second.score -= vacant_mil_positions_ / 10;
+					site->second.score -= 3;
+					site->second.score -= vacant_mil_positions_ / 8;
 				} else if (type_ == DEFENSIVE) {
-					site->second.score -= 2;
-					site->second.score -= vacant_mil_positions_ / 5;
+					site->second.score -= 6;
+					site->second.score -= vacant_mil_positions_ / 4;
 				} else {  //=AGRESSIVE
-					site->second.score -= vacant_mil_positions_ / 15;
+					site->second.score -= vacant_mil_positions_ / 16;
 				}
 				if (site->second.mines_nearby == ExtendedBool::kFalse) {
-					site->second.score -= 1;
+					site->second.score -= 3;
 				}
 				// we dont want to attack multiple players at the same time too eagerly
 				if (onwer_number != last_attacked_player_) {
@@ -4940,29 +4976,39 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 				// if we dont have mines yet
 				if (mines_.size() <= 2) {
-					site->second.score -= 2;
+					site->second.score -= 6;
 				}
 				// also we should have at least some training sites
 				if ((ts_basic_count_ + ts_advanced_count_) == 0) {
-					site->second.score -= 2;
+					site->second.score -= 4;
 				}
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {
 					site->second.score = 0;
-					site->second.no_attack_counter += 1;
+					site->second.no_attack_counter += 5;
 				}
+
+				printf (" %d: enemy at %3dx%3d, score: %3d, attackers strength: %2d, defenders: %2d\n",
+				player_number(),
+				coords_unhash(site->first).x,
+				coords_unhash(site->first).y,
+				site->second.score,
+				site->second.attack_soldiers_strength,
+				site->second.defenders_strength);
+
 			} else {
 				site->second.score = 0;
 			}  // or the score will remain 0
 
-			if (site->second.score > 0 && player_attackable[onwer_number - 1]) {
+			if (site->second.score > 0) {
 				if (site->second.score > best_score) {
 					best_score = site->second.score;
 					best_target = site->first;
+					printf ("  this is (new) candidate\n");
 				}
 			}
 
-			if (site->second.attack_soldiers > 0) {
+			if (site->second.attack_soldiers_strength > 0) {
 				site->second.last_time_attackable = gametime;
 			}
 			if (site->second.last_time_attackable + 20 * 60 * 1000 < gametime) {
@@ -5005,6 +5051,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	} else if (upcast(Warehouse, Wh, f.field->get_immovable())) {
 		flag = &Wh->base_flag();
 	} else {
+		printf ("  this should not happen\n");
 		return false;  // this should not happen
 	}
 
@@ -5013,8 +5060,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Just add some randomness
 	attackers -= gametime % 3;
 	if (attackers <= 0) {
+		printf ("  attackers <= 0\n");
 		return false;
 	}
+
+	printf (" %d: attacking %3dx%3d\n",
+	player_number(),
+	flag->get_position().x, flag->get_position().y);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attackers);
 	last_attacked_player_ = flag->owner().player_number();

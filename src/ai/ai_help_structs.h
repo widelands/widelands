@@ -466,8 +466,8 @@ struct WareObserver {
 //is stored in the observer
 struct EnemySiteObserver {
 	bool warehouse_;
-	uint8_t attack_soldiers;
-	uint8_t defenders;
+	uint8_t attack_soldiers_strength;
+	uint8_t defenders_strength;
 	uint8_t stationed_soldiers;
 	uint32_t last_time_attackable;
 	uint32_t last_tested;
@@ -477,8 +477,8 @@ struct EnemySiteObserver {
 
 	EnemySiteObserver()
 	   : warehouse_(false),
-	     attack_soldiers(0),
-	     defenders(0),
+	     attack_soldiers_strength(0),
+	     defenders_strength(0),
 	     stationed_soldiers(0),
 	     last_time_attackable(std::numeric_limits<uint32_t>::max()),
 	     last_tested(0),

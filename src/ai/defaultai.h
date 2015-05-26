@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
+#include "logic/soldier.h"
 #include "logic/trainingsite.h"
 
 namespace Widelands {
@@ -202,6 +203,8 @@ private:
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);
 	void print_stats(uint32_t);
+	//return single number of strength of vector of soldiers
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
