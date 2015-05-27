@@ -466,8 +466,8 @@ struct WareObserver {
 //is stored in the observer
 struct EnemySiteObserver {
 	bool warehouse_;
-	uint8_t attack_soldiers_strength;
-	uint8_t defenders_strength;
+	int32_t attack_soldiers_strength;
+	int32_t defenders_strength;
 	uint8_t stationed_soldiers;
 	uint32_t last_time_attackable;
 	uint32_t last_tested;

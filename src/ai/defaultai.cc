@@ -1292,24 +1292,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		new_buildings_stop_ = false;
 	}
 
-	// sometimes there is too many military buildings in construction, so we must
-	// prevent initialization of further buildings start
-	const int32_t vacant_plus_in_construction_minus_prod =
-	   vacant_mil_positions_ + 2 * num_milit_constructionsites - productionsites.size() / 7;
-	if (vacant_plus_in_construction_minus_prod > 20) {
-		expansion_mode = MilitaryStrategy::kNoNewMilitary;
-	} else if (vacant_plus_in_construction_minus_prod > 13) {
-		expansion_mode = MilitaryStrategy::kDefenseOnly;
-	} else if (vacant_plus_in_construction_minus_prod > 6) {
-		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
-	} else {
-		if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
-			expansion_mode = MilitaryStrategy::kExpansion;
-		} else {
-			expansion_mode = MilitaryStrategy::kPushExpansion;
-		}
-	}
-
 	//we must calculate wood policy
 	const WareIndex wood_index = tribe_->safe_ware_index("log");
 	// the name of variable is not 100% proper
@@ -1352,6 +1334,29 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 		if (spots_avail.at(BUILDCAPS_MEDIUM) < 4) {
 			resource_necessity_territory_ = 100;
+		}
+	}
+
+	// this controls a speed and willingness to expand the teritorry
+	const int32_t vacant_plus_in_construction_minus_prod =
+	   vacant_mil_positions_ + 2 * num_milit_constructionsites - productionsites.size() / 7;
+	if (vacant_plus_in_construction_minus_prod > 20) {
+		expansion_mode = MilitaryStrategy::kNoNewMilitary;
+	} else if (vacant_plus_in_construction_minus_prod > 13) {
+		expansion_mode = MilitaryStrategy::kDefenseOnly;
+	} else if (vacant_plus_in_construction_minus_prod > 6) {
+		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
+	} else {
+		//this is intended for initial phase of game when the player has enough soldiers yet
+		//but we still want to force it to follow resources instead for plain expansion
+		if (virtual_mines <= 2 && (unstationed_milit_buildings_ + num_milit_constructionsites) > 2) {
+			expansion_mode = MilitaryStrategy::kResourcesOrDefense;
+			printf (" %d: forcing resource expansion (%3d, %3d)\n",
+			player_number(), virtual_mines, unstationed_milit_buildings_ + num_milit_constructionsites);
+		} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
+			expansion_mode = MilitaryStrategy::kExpansion;
+		} else {
+			expansion_mode = MilitaryStrategy::kPushExpansion;
 		}
 	}
 
@@ -4700,20 +4705,63 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs_.size();
 }
 
-//This calculates strength of vector of soldiers, f.e. soldiers in building or
-//onew ready to attack
+//This calculates strength of vector of soldiers, f.e. soldiers in a building or
+//ones ready to attack
 int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> soldiers){
-	int32_t soldier_strength = 0;
 
-	for (Soldier * soldier : soldiers) {
-		soldier_strength += 1;
-		soldier_strength += soldier->get_hp_level();
-		soldier_strength += soldier->get_attack_level();
-		soldier_strength += soldier->get_defense_level();
-		soldier_strength += soldier->get_evade_level();
+	if (soldiers.empty()) {
+		return 0;
 	}
 
-	return soldier_strength;
+	enum {BARBARIANS, ATLANTEANS, EMPIRE};
+	uint8_t tribe = std::numeric_limits<uint8_t>::max();
+
+	if (soldiers.at(0)->get_owner()->tribe().name() == "atlanteans"){
+		tribe = ATLANTEANS;
+	} else if (soldiers.at(0)->get_owner()->tribe().name() == "barbarians"){
+		tribe = BARBARIANS;
+	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire"){
+		tribe = EMPIRE;
+	} else {
+		throw wexception("AI warning: Unable to calculate strenght for player of tribe %s",
+			soldiers.at(0)->get_owner()->tribe().name().c_str());
+	}
+
+	float hp = 0;
+	float al = 0;
+	float dl = 0;
+	float el = 0;
+	float final = 0;
+
+	for (Soldier * soldier : soldiers) {
+		switch (tribe) {
+			case (ATLANTEANS):
+				hp = 135 + 40 * soldier->get_hp_level();
+				al =  14 +  8 * soldier->get_attack_level();
+				dl = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
+				el = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
+				break;
+			case (BARBARIANS):
+				hp += 130 + 28 * soldier->get_hp_level();
+				al +=  14 +  7 * soldier->get_attack_level();
+				dl += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
+				el += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
+				break;
+			case (EMPIRE):
+				hp += 130 + 21 * soldier->get_hp_level();
+				al +=  14 +  8 * soldier->get_attack_level();
+				dl += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
+				el += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
+				break;
+			default:
+				assert (false);
+		}
+
+		final += (al * hp) / (dl * el);
+	}
+
+	//2500 is aproximate strength of one unpromoted soldier
+	return static_cast<int32_t>(final / 2500);
 }
 
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
@@ -4968,7 +5016,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= vacant_mil_positions_ / 16;
 				}
 				if (site->second.mines_nearby == ExtendedBool::kFalse) {
-					site->second.score -= 3;
+					site->second.score -= 1;
+				} else {
+					site->second.score += 1;
 				}
 				// we dont want to attack multiple players at the same time too eagerly
 				if (onwer_number != last_attacked_player_) {
@@ -4976,7 +5026,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 				// if we dont have mines yet
 				if (mines_.size() <= 2) {
-					site->second.score -= 6;
+					site->second.score -= 8;
 				}
 				// also we should have at least some training sites
 				if ((ts_basic_count_ + ts_advanced_count_) == 0) {
@@ -4984,8 +5034,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {
+					//we cannot attack yet
 					site->second.score = 0;
-					site->second.no_attack_counter += 5;
+					//but increase the counter by 1
+					site->second.no_attack_counter += 1;
 				}
 
 				printf (" %d: enemy at %3dx%3d, score: %3d, attackers strength: %2d, defenders: %2d\n",
@@ -4994,7 +5046,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				coords_unhash(site->first).y,
 				site->second.score,
 				site->second.attack_soldiers_strength,
-				site->second.defenders_strength);
+				site->second.defenders_strength
+				);
 
 			} else {
 				site->second.score = 0;
@@ -5004,7 +5057,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (site->second.score > best_score) {
 					best_score = site->second.score;
 					best_target = site->first;
-					printf ("  this is (new) candidate\n");
 				}
 			}
 
@@ -5051,7 +5103,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	} else if (upcast(Warehouse, Wh, f.field->get_immovable())) {
 		flag = &Wh->base_flag();
 	} else {
-		printf ("  this should not happen\n");
+		printf (" AI warning: enemy site at %3dx%3d has dissapeared?\n",
+		coords_unhash(best_target).x,
+		coords_unhash(best_target).y);
 		return false;  // this should not happen
 	}
 
@@ -5060,7 +5114,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Just add some randomness
 	attackers -= gametime % 3;
 	if (attackers <= 0) {
-		printf ("  attackers <= 0\n");
 		return false;
 	}
 
