@@ -66,7 +66,7 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 
 // this is intended for map developers, by default should be off
-constexpr bool kPrintStats = true; //NOCOM
+constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
@@ -1351,8 +1351,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		//but we still want to force it to follow resources instead for plain expansion
 		if (virtual_mines <= 2 && (unstationed_milit_buildings_ + num_milit_constructionsites) > 2) {
 			expansion_mode = MilitaryStrategy::kResourcesOrDefense;
-			printf (" %d: forcing resource expansion (%3d, %3d)\n",
-			player_number(), virtual_mines, unstationed_milit_buildings_ + num_milit_constructionsites);
 		} else if (unstationed_milit_buildings_ + num_milit_constructionsites >= 1) {
 			expansion_mode = MilitaryStrategy::kExpansion;
 		} else {
@@ -3831,13 +3829,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		if (supplied_enough) {
-			printf ("    %d: increasing capacity to 1 soldier at %3dx%3d (t: %5d, %s  (%s))\n",  //NOCOM
-				player_number(),
-				tso.site->get_position().x,
-				tso.site->get_position().y,
-				gametime / 60 / 100,
-				tso.bo->desc->name().c_str(),
-				(tso.bo->trainingsite_type_ == TrainingSiteType::kBasic) ? "Basic" : "Advanced");
 			game().send_player_change_soldier_capacity(*ts, 1);
 		}
 	}
@@ -5040,15 +5031,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.no_attack_counter += 1;
 				}
 
-				printf (" %d: enemy at %3dx%3d, score: %3d, attackers strength: %2d, defenders: %2d\n",
-				player_number(),
-				coords_unhash(site->first).x,
-				coords_unhash(site->first).y,
-				site->second.score,
-				site->second.attack_soldiers_strength,
-				site->second.defenders_strength
-				);
-
 			} else {
 				site->second.score = 0;
 			}  // or the score will remain 0
@@ -5103,9 +5085,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	} else if (upcast(Warehouse, Wh, f.field->get_immovable())) {
 		flag = &Wh->base_flag();
 	} else {
-		printf (" AI warning: enemy site at %3dx%3d has dissapeared?\n",
-		coords_unhash(best_target).x,
-		coords_unhash(best_target).y);
 		return false;  // this should not happen
 	}
 
@@ -5116,10 +5095,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	if (attackers <= 0) {
 		return false;
 	}
-
-	printf (" %d: attacking %3dx%3d\n",
-	player_number(),
-	flag->get_position().x, flag->get_position().y);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attackers);
 	last_attacked_player_ = flag->owner().player_number();
@@ -5175,7 +5150,7 @@ DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(uint32_t const gametime) {
 	}
 
 	if (scheduler_delay_counter_ > 10){
-		printf(" %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
+		log(" %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
 		player_number(),
 		static_cast<int32_t>((gametime - oldestTaskTime) / 1000));
 		scheduler_delay_counter_ = 0;
@@ -5231,8 +5206,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		summary = summary + materials.at(j) + ", ";
 	}
 
-	//log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
-	printf(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n", //NOCOM
+	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
 	    pn,
 	    static_cast<uint32_t>(productionsites.size()),
 	    static_cast<uint32_t>(militarysites.size()),
