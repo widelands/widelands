@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
@@ -63,6 +64,11 @@ private:
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
+	/// Sets the label for id type to text in the chosen color with dynamic font size
+	void set_labeltext_autosize(UI::MultilineTextarea* textarea,
+	                            const std::string& text,
+	                            const RGBColor& color);
+
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(BuildingIndex id);
 
@@ -87,7 +93,7 @@ private:
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
 	/// Labels with owned / under construction buildings
-	std::vector<UI::Textarea*> owned_labels_;
+	std::vector<UI::MultilineTextarea*> owned_labels_;
 	/// Labels with buildings' productivity
 	// TODO(GunChleoc): These need to be multiline, so we can give them a color.
 	// Turn into normal textareas in fh1 branch.
