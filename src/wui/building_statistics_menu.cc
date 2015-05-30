@@ -129,7 +129,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             kButtonHeight,
                             "",
                             UI::Align_CenterRight),
-     low_production_(33) {
+     low_production_(33),
+     has_selection_(false) {
 	tabs_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
 	          &small_tab_,
@@ -619,7 +620,7 @@ void BuildingStatisticsMenu::update() {
 				const std::string perc_str = (boost::format("%i%%") % percent).str();
 				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
 			}
-			if (id == current_building_type_) {
+			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(nr_unproductive >
@@ -648,7 +649,7 @@ void BuildingStatisticsMenu::update() {
 				                              total_soldier_capacity).str();
 				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
 			}
-			if (id == current_building_type_) {
+			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(
@@ -677,7 +678,7 @@ void BuildingStatisticsMenu::update() {
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
-		if (id == current_building_type_) {
+		if (has_selection_ && id == current_building_type_) {
 			no_owned_label_.set_text(nr_owned > 0 ? std::to_string(nr_owned) : "");
 			navigation_buttons_[NavigationButton::NextOwned]->set_enabled(nr_owned > 0);
 			navigation_buttons_[NavigationButton::PrevOwned]->set_enabled(nr_owned > 0);
@@ -723,6 +724,7 @@ void BuildingStatisticsMenu::set_current_building_type(BuildingIndex id) {
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	low_production_reset_focus();
+	has_selection_ = true;
 	update();
 }
 

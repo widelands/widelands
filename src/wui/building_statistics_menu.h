@@ -123,6 +123,9 @@ private:
 
 	/// At which percent to deem buildings as unproductive
 	int low_production_;
+
+	/// Whether a building has been selected
+	bool has_selection_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
