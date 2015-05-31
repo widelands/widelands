@@ -36,8 +36,10 @@ function build_ships()
 
    local o = message_box_objective(plr, tell_about_ships)
 
-   -- we cannot check for ships yet (see https://bugs.launchpad.net/widelands/+bug/1380287), so we just wait some time and hope for the best
-   sleep(25*60*1000) -- 25 minutes
+   -- we only wait for one ship and a bit longer because it takes long enough
+   while #plr:get_ships() < 1 do sleep(30*1000) end
+   sleep(5*60*1000)
+
    o.done = true
 
    expedition()
@@ -48,8 +50,14 @@ function expedition()
    message_box_objective(plr, expedition1)
    local o = message_box_objective(plr, expedition2)
 
-   -- again, we can only wait. Better a bit too long than too short
-   sleep(3*60*1000) -- 3 minutes
+   local function _ship_ready_for_expedition()
+      for k,v in ipairs(plr:get_ships()) do
+         if v.state == "exp_waiting" then return k end
+      end
+      return nil
+   end
+
+   while not _ship_ready_for_expedition() do sleep(1000) end
    o.done = true
 
    local o2 = message_box_objective(plr, expedition3)
