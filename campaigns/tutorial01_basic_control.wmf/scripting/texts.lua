@@ -347,6 +347,15 @@ quarry_not_connected = {
    h = 250
 }
 
+quarry_illegally_destroyed = {
+   title = _"You Destroyed the Construction Site!",
+   body = rt(
+      p(_[[It seems you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, the are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+   ),
+   w = 350,
+   h = 250
+}
+
 build_second_quarry = {
    position = "topright",
    title = _"Build a second quarry",

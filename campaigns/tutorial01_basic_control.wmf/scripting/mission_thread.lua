@@ -224,12 +224,12 @@ function build_a_quarry()
       else return false end
    end
 
-   -- Wait till the constructionsite is connected to the headquarters
+   -- Wait till the construction site is connected to the headquarters
    sleep(20*1000)
    while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
-      while not (first_quarry_field.brn.immovable and first_quarry_field.brn.immovable.descr.type_name == "flag") do sleep(5000) end
+      if not first_quarry_field.brn.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
    end
 
    second_quarry()
@@ -237,7 +237,7 @@ function build_a_quarry()
    -- Interludium: talk about census and statistics
    census_and_statistics()
 
-   while #plr:get_buildings("quarry") < 1 do sleep(1400) end
+   while #plr:get_buildings("quarry") < 2 do sleep(1400) end
    o.done = true
 
    messages()
@@ -268,7 +268,7 @@ function second_quarry()
    while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
-      while not (second_quarry_field.brn.immovable and second_quarry_field.brn.immovable.descr.type_name == "flag") do sleep(5000) end
+      if not second_quarry_field.brn.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
    end
 
    o.done = true
