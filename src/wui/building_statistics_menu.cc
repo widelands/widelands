@@ -658,7 +658,8 @@ void BuildingStatisticsMenu::update() {
 				   total_soldier_capacity > total_stationed_soldiers);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Missing soldiers:"));
+				/** TRANSLATORS Label for number of buildings that are waiting for soldiers */
+				unproductive_label_.set_text(_("Lacking Soldiers:"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
 			}
