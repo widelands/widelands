@@ -339,9 +339,9 @@ talk_about_roadbuilding_02 = {
 }
 
 quarry_not_connected = {
-   title = _"Quarry not connected",
+   title = _"Quarry not Connected",
    body = rt(
-      p(_[[Your workers do not like to walk across country. You have to build a road from your headquartes to the construction site for that carriers can transport wares. The simplest way is to click on the flag of the construction site, choose ‘Build road’, and then click on the destination flag (the one in front of your headquarters), just like I’ve demonstrated.]])
+      p(_[[Your workers do not like to walk across country. You have to build a road from your headquarters to the construction site so that carriers can transport wares. The simplest way is to click on the construction site’s flag, choose ‘Build road’, and then click on the destination flag (the one in front of your headquarters), just like I’ve demonstrated.]])
    ),
    w = 350,
    h = 250

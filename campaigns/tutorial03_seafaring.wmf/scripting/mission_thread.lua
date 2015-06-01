@@ -51,10 +51,10 @@ function expedition()
    local o = message_box_objective(plr, expedition2)
 
    local function _ship_ready_for_expedition()
-      for k,v in ipairs(plr:get_ships()) do
-         if v.state == "exp_waiting" then return k end
+      for k,ship in ipairs(plr:get_ships()) do
+         if ship.state == "exp_waiting" then return true end
       end
-      return nil
+      return false
    end
 
    while not _ship_ready_for_expedition() do sleep(1000) end

@@ -229,7 +229,7 @@ function build_a_quarry()
    while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
-      if not first_quarry_field.brn.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+      if not first_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
    end
 
    second_quarry()
@@ -268,7 +268,7 @@ function second_quarry()
    while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
-      if not second_quarry_field.brn.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+      if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
    end
 
    o.done = true
