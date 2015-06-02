@@ -58,6 +58,7 @@ struct SavegameData {
 
 	uint32_t gametime;
 	uint32_t nrplayers;
+	std::string version;
 	time_t savetimestamp;
 	GameController::GameType gametype;
 
@@ -76,7 +77,7 @@ public:
 
 	const std::string & filename() {return m_filename;}
 
-	void think();
+	void think() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -100,6 +101,8 @@ private:
 	UI::MultilineTextarea         m_ta_gametime; // Multiline because we want tooltips
 	UI::Textarea                  m_label_players;
 	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_version;
+	UI::Textarea                  m_ta_version;
 	UI::Textarea                  m_label_win_condition;
 	UI::MultilineTextarea         m_ta_win_condition;
 

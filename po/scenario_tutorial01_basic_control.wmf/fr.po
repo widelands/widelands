@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Renaud Bouchard, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-23 22:20+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2015-04-13 11:32+0000\n"
+"PO-Revision-Date: 2015-04-21 08:54+0000\n"
+"Last-Translator: xXxLolimixXx <e.osmaaane@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,7 +257,7 @@ msgstr "Maintenant que vous avez segmenté la route en deux parties avec un port
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "Maintenant nous devons seulement attendre que la cabane soit finie."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
@@ -813,45 +814,45 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr ""
+msgstr "Vous avez reçu quelques messages. Vous voyez comment le bouton en-bas de l'écran a changé d'apparence ? Vous pouvez détruire les carrières maintenant comme elles ne sont plus d'aucune utilité à part pour bloquer l'espace. Pour faire ainsi, il y a deux possibilités :"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "Combustion de la carrière : c'est la façon la plus rapide de dégager l'espace. Tant que le travailleur abandonne la construction, les marchandises seront perdues. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "Démantèlement de la carrière : un constructeur marchera des quartiers généraux pour démonter la carrière pièce par pièce. Ainsi, vous regagnez une partie des ressources que vous avez utilisées pour la construction."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr ""
+msgstr "Puisque nos carrières n'ont plus d'utilités maintenant, vous pouvez les détruire et réutiliser cet espace plus tard."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr ""
+msgstr "Il y a deux façons de détruire une construction : la combustion de la carrière ou le démantèlement de la carrière. Essayez-les toutes les deux sur vos carrières."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "Combustion de la carrière : C'est la façon la plus rapide de dégager l'espace. Tant que le travailleur abandonne la construction, les marchandises seront perdues."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "Démantèlement de la carrière : un constructeur marchera des quartiers généraux pour démonter la carrière pièce par pièce. Ainsi, regagnez une partie des ressources que vous avez utilisées pour la construction."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
 msgid "Expanding Your Territory!"
@@ -875,24 +876,24 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "L'expansion de votre territoire est aussi simple que la construction d'un bâtiment militaire aux limites de votre territoire. Les Barbares ont une sélection de construction militaire différente : des factionnaires, des barrières, des donjons, des forteresses et des citadelles. Plus grand est la construction, plus cher sera sa construction, mais plus il y a de terres conquises autour de lui, plus de soldats pourront être placés ici. Les bâtiments varient aussi dans leur champ de vision : les bâtiments avec une tour voient plus loin que les autres."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
-msgstr ""
+msgstr "Aussitôt qu'un bâtiment d'armée militaire est équipé, il étendra vos terres. J'en dirais plus sur les constructions militaires dans d'autres tutoriels."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "Essayons-le maintenant : construisez un bâtiment d'armée militaire aux limites de votre territoire."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
-msgstr ""
+msgstr "La guérite est le seul site militaire qui va sur un petit terrain à bâtir. Si votre bûcheron a dégagé assez d'espace, vous pouvez construire un autre bâtiment militaire."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid "Expand your territory"
@@ -907,14 +908,14 @@ msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr ""
+msgstr "Dans Widelands, il est nécessaire de construire baucoup de constructions, qui prennent beaucoup d'espace. Pour étendre votre territoire, vous devez construire des constructions aux limites de vos terres. Chaque tribu a plusieurs bâtiments militaires."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the donjon (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr ""
+msgstr "Les Barbares ont 4 bâtiments militaires différents que vous pouvez construire : la guérite(petite), la barrière et le donjon(moyens) et la forteresse (grande). Choisissez juste celui que vous aimez le plus."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid ""
@@ -922,7 +923,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr ""
+msgstr "Rappelez-vous que les grands bâtiments (icône verte) ne peuvent être construites sur des petits terrains à bâtir (rouges) ou moyens(jaunes), mais ces bâtiments peuvent être construits sur un terrain à bâtir qui fournit plus d'espace. Vous devriez toujours garder ceci à l'esprit quand vous cherchez un endroit approprié."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid "Military Site Occupied"

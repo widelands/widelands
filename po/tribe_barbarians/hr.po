@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 15:47+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-07 16:58+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -298,7 +298,7 @@ msgstr ""
 #: ../../tribes/barbarians/lime_kiln/conf:23
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
-#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/quarry/conf:21
 #: ../../tribes/barbarians/reed_yard/conf:25
 #: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
@@ -379,7 +379,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Peče kruh za radnike."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/barrier/help.lua:13
@@ -534,9 +534,9 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minutu"
+msgstr[1] "%d minute"
+msgstr[2] "%d minuta"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -653,7 +653,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/charcoal_burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Spaljuje ugljen."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -688,7 +688,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
-msgstr ""
+msgstr "rudarenje"
 
 #: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
@@ -745,31 +745,31 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:35
 msgid "Ashes"
-msgstr ""
+msgstr "Pepeo"
 
 #: ../../tribes/barbarians/conf:36
 msgid "Destroyed building"
-msgstr ""
+msgstr "Uništena građevina"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Field (medium)"
-msgstr ""
+msgstr "Polje(srednje)"
 
 #: ../../tribes/barbarians/conf:38
 msgid "Field (small)"
-msgstr ""
+msgstr "Polje(malo)"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Polje(sitno)"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Polje(zrelo)"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Polje(ubrano)"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Reed (medium)"
@@ -833,7 +833,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Sjekira"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
@@ -841,11 +841,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "Borbena sjekira"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Beer"
-msgstr ""
+msgstr "Pivo"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Blackwood"
@@ -885,7 +885,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:72
 msgid "Gold"
-msgstr ""
+msgstr "Zlato"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Gold Ore"
@@ -901,7 +901,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:76
 msgid "Helmet"
-msgstr ""
+msgstr "Kaciga"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Hunting Spear"
@@ -909,11 +909,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:78
 msgid "Iron"
-msgstr ""
+msgstr "Željezo"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Iron Ore"
-msgstr ""
+msgstr "Željezna ruda"
 
 #: ../../tribes/barbarians/conf:80
 msgid "Kitchen Tools"
@@ -929,7 +929,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:83
 msgid "Meat"
-msgstr ""
+msgstr "Meso"
 
 #: ../../tribes/barbarians/conf:84
 msgid "Pick"
@@ -985,7 +985,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:97
 msgid "Water"
-msgstr ""
+msgstr "Voda"
 
 #: ../../tribes/barbarians/conf:98
 msgid "Wheat"
@@ -997,15 +997,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:102
 msgid "Ox"
-msgstr ""
+msgstr "Vol"
 
 #: ../../tribes/barbarians/conf:105
 msgid "Soldier"
-msgstr ""
+msgstr "Vojnik"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Baker"
-msgstr ""
+msgstr "Pekar"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Master Blacksmith"
@@ -1021,11 +1021,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:112
 msgid "Brewer"
-msgstr ""
+msgstr "Pivar"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Builder"
-msgstr ""
+msgstr "Graditelj"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Charcoal Burner"
@@ -1041,15 +1041,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:117
 msgid "Farmer"
-msgstr ""
+msgstr "Uzgajivač"
 
 #: ../../tribes/barbarians/conf:118
 msgid "Gardener"
-msgstr ""
+msgstr "Vrtlar"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Fisher"
-msgstr ""
+msgstr "Ribar"
 
 #: ../../tribes/barbarians/conf:120
 msgid "Gamekeeper"
@@ -1057,7 +1057,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:121
 msgid "Geologist"
-msgstr ""
+msgstr "Geolog"
 
 #: ../../tribes/barbarians/conf:122
 msgid "Helmsmith"
@@ -1065,7 +1065,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:123
 msgid "Hunter"
-msgstr ""
+msgstr "Lovac"
 
 #: ../../tribes/barbarians/conf:124
 msgid "Innkeeper"
@@ -1077,11 +1077,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:126
 msgid "Lumberjack"
-msgstr ""
+msgstr "Drvosječa"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Miner"
-msgstr ""
+msgstr "Rudar"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Ranger"
@@ -1089,15 +1089,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
-msgstr ""
+msgstr "Brodograditelj"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Smelter"
-msgstr ""
+msgstr "Ljevac"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Stonemason"
-msgstr ""
+msgstr "Klesar"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Trainer"
@@ -1117,11 +1117,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:138
 msgid "Ship"
-msgstr ""
+msgstr "Brod"
 
 #: ../../tribes/barbarians/conf:141
 msgid "Construction Site"
-msgstr ""
+msgstr "Gradilište"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
@@ -1129,7 +1129,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:147 ../../tribes/barbarians/conf:156
 msgid "Castle"
-msgstr ""
+msgstr "Dvorac"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Guardhall"
@@ -1149,7 +1149,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:152 ../../tribes/barbarians/conf:159
 msgid "Tower"
-msgstr ""
+msgstr "Toranj"
 
 #: ../../tribes/barbarians/conf:153 ../../tribes/barbarians/conf:208
 msgid "Sentry"
@@ -1157,7 +1157,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:154
 msgid "Barracks"
-msgstr ""
+msgstr "Vojarne"
 
 #: ../../tribes/barbarians/conf:155 ../../tribes/barbarians/conf:207
 msgid "Barrier"
@@ -1165,7 +1165,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:157 ../../tribes/barbarians/conf:210
 msgid "Fortress"
-msgstr ""
+msgstr "Tvrđava"
 
 #: ../../tribes/barbarians/conf:158
 msgid "Outpost"
@@ -1174,7 +1174,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:162 ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
-msgstr ""
+msgstr "Sjedište"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Warehouse"
@@ -1698,7 +1698,7 @@ msgstr ""
 #: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:18
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Sjedište je osnovna građevina"
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -2012,11 +2012,15 @@ msgid ""
 " It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:26
+#: ../../tribes/barbarians/quarry/conf:19
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:27
+#: ../../tribes/barbarians/quarry/conf:33
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."

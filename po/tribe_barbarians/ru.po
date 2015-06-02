@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 16:52+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 23:25+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -299,7 +299,7 @@ msgstr "кует секиру"
 #: ../../tribes/barbarians/lime_kiln/conf:23
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
-#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/quarry/conf:21
 #: ../../tribes/barbarians/reed_yard/conf:25
 #: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
@@ -710,7 +710,7 @@ msgstr "Главная жила этой угольной шахты истощ�
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>\n"
 "Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal."
-msgstr "Давным-давно, варвары научились выкапывать в горах этот черный материал, которым кормят свои печи. <br>\nДревесину удобно использовать для приготовления пищи обогрева жилья, но когда дело доходит до работы с железом и золотом, уголь ничем не заменить."
+msgstr "Давным-давно, варвары научились выкапывать в горах этот черный материал, которым топят свои печи. <br>\nДревесину удобно использовать для приготовления пищи обогрева жилья, но когда дело доходит до работы с железом и золотом, уголь ничем не заменить."
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:20
@@ -2013,11 +2013,15 @@ msgid ""
 " It is also consumed at training sites (training camp and battle arena)."
 msgstr "У пекарей варваров лучше всех получается выпекать эти тонкие и вкусные лепёшки. Их делают из пшеницы и воды по секретному рецепту. Лепёшки используются в тавернах, на постоялых дворах и в гостиницах для приготовления пайков, закусок и обедов. Их также поставляют в тренировочные центры (тренировочный лагерь и арена поединков)."
 
-#: ../../tribes/barbarians/quarry/conf:26
+#: ../../tribes/barbarians/quarry/conf:19
+msgid "quarrying stone"
+msgstr "добывает камень"
+
+#: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
 msgstr "Нет больше камня"
 
-#: ../../tribes/barbarians/quarry/conf:27
+#: ../../tribes/barbarians/quarry/conf:33
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."

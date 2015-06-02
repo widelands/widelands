@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-04-04 15:47+0000\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-09 15:53+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -464,7 +464,7 @@ msgstr ""
 #: ../../tribes/empire/weaponsmithy/conf:44 ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
-msgstr "gradnja"
+msgstr "proizvodnja"
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
@@ -629,7 +629,7 @@ msgstr ""
 #: ../../tribes/empire/deep_oremine/conf:27
 #: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr ""
+msgstr "rudarenje"
 
 #: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -937,7 +937,7 @@ msgstr "Magarac"
 
 #: ../../tribes/empire/conf:111
 msgid "Soldier"
-msgstr ""
+msgstr "Vojnik"
 
 #: ../../tribes/empire/conf:114
 msgid "Armorsmith"
@@ -1110,7 +1110,7 @@ msgstr ""
 #: ../../tribes/empire/conf:166
 #: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
-msgstr "Zapovjedništvo"
+msgstr "Sjedište"
 
 #: ../../tribes/empire/conf:167
 msgid "Headquarters Shipwreck"
@@ -1637,11 +1637,11 @@ msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
-msgstr ""
+msgstr "rudarenje mramora"
 
 #: ../../tribes/empire/marblemine/conf:30
 msgid "mining stone"
-msgstr ""
+msgstr "Rudarenje kamena"
 
 #: ../../tribes/empire/marblemine/conf:58
 msgid ""
@@ -1700,7 +1700,7 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Uzgaja svinje."
 
-#: ../../tribes/empire/piggery/conf:25
+#: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
 msgstr ""
 

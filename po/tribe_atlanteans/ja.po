@@ -1,21 +1,21 @@
-# Japanese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-09-08 00:37+0000\n"
-"Last-Translator: Midori <midori.tj@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-04-06 08:00+0000\n"
+"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:36+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -271,12 +271,10 @@ msgstr "あなたの兵士が監視塔で敵を討伐しました。"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
-"These advanced shields are used by the best soldiers of the Atlanteans. They "
-"are produced in the armor smithy and used in the labyrinth – together with "
+"These advanced shields are used by the best soldiers of the Atlanteans. They"
+" are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from Defense level 1 to level 2."
-msgstr ""
-"この強化された盾は、最高のアトランティス兵士が使用します。\n"
-"　防具工房で製造され、迷宮で兵士を防御レベル１からレベル２に訓練するために――食物とともに――使用されます。"
+msgstr "この強化された盾は、最高のアトランティス兵士が使用します。\n　防具工房で製造され、迷宮で兵士を防御レベル１からレベル２に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -297,10 +295,9 @@ msgstr ""
 #: ../../tribes/atlanteans/farm/conf:30
 #: ../../tribes/atlanteans/fish_breeders_house/conf:21
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
-#: ../../tribes/atlanteans/mill/conf:31
-#: ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:22
 #: ../../tribes/atlanteans/sawmill/conf:24
-#: ../../tribes/atlanteans/shipyard/conf:30
+#: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
 #: ../../tribes/atlanteans/smokery/conf:32
 #: ../../tribes/atlanteans/spiderfarm/conf:22
@@ -493,17 +490,13 @@ msgid ""
 "This tasty bread is made in bakeries out of cornflour, blackroot flour and "
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr ""
-"この美味しいパンは、トウモロコシ粉、甘草粉、水を使用して生産されます。\n"
-"　鉱夫、偵察兵、訓練施設（アリーナ、コロッセオ、訓練場）の兵士のための基本食として認識されています。"
+msgstr "この美味しいパンは、トウモロコシ粉、甘草粉、水を使用して生産されます。\n　鉱夫、偵察兵、訓練施設（アリーナ、コロッセオ、訓練場）の兵士のための基本食として認識されています。"
 
 #: ../../tribes/atlanteans/bread_paddle/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr ""
-"パンパドルは、パン職人の道具であり、それぞれのパン職人が自分専用のものをもちます。\n"
-"　道具工房で製造されます。"
+msgstr "パンパドルは、パン職人の道具であり、それぞれのパン職人が自分専用のものをもちます。\n　道具工房で製造されます。"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
@@ -519,9 +512,7 @@ msgstr "道路にそってアイテムを運びます。"
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your castle."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの城郭を占拠しました。"
+msgstr "あなたの兵士が\nあなたの城郭を占拠しました。"
 
 #: ../../tribes/atlanteans/castle/help.lua:16
 #: ../../tribes/atlanteans/guardhall/help.lua:16
@@ -588,594 +579,586 @@ msgstr "アトランティス"
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
-"この部族は、\n"
-"最古の物語で知られている、\n"
-"アトラスの息子と娘たちです。"
+msgstr "この部族は、\n最古の物語で知られている、\nアトラスの息子と娘たちです。"
 
-#: ../../tribes/atlanteans/conf:29
+#: ../../tribes/atlanteans/conf:36
 msgid "Ashes"
 msgstr "焼け跡"
 
-#: ../../tribes/atlanteans/conf:30
+#: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field"
 msgstr "甘草畑"
 
-#: ../../tribes/atlanteans/conf:31
+#: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (harvested)"
 msgstr "甘草畑(刈入)"
 
-#: ../../tribes/atlanteans/conf:32
+#: ../../tribes/atlanteans/conf:39
 msgid "Blackroot Field (medium)"
 msgstr "甘草畑(中)"
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:40
 msgid "Blackroot Field (small)"
 msgstr "甘草畑(小)"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:41
 msgid "Blackroot Field (tiny)"
 msgstr "甘草畑(幼)"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:42
 msgid "Cornfield"
 msgstr "トウモロコシ畑"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (harvested)"
 msgstr "トウモロコシ畑(刈入)"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:44
 msgid "Cornfield (medium)"
 msgstr "トウモロコシ畑(中)"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:45
 msgid "Cornfield (small)"
 msgstr "トウモロコシ畑(小)"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:46
 msgid "Cornfield (tiny)"
 msgstr "トウモロコシ畑(幼)"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:47
 msgid "Destroyed Building"
 msgstr "破壊された建物"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Coal (little)"
 msgstr "資源指標 石炭(少)"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Coal (much)"
 msgstr "資源指標 石炭(多)"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Gold (little)"
 msgstr "資源指標 金(少)"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Gold (much)"
 msgstr "資源指標 金(多)"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Granite (little)"
 msgstr "資源指標 花崗岩(少)"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: Granite (much)"
 msgstr "資源指標 花崗岩(多)"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Iron (little)"
 msgstr "資源指標 鉄(少)"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator: Iron (much)"
 msgstr "資源指標 鉄(多)"
 
-#: ../../tribes/atlanteans/conf:49
+#: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator: No resource"
 msgstr "資源指標 資源なし"
 
-#: ../../tribes/atlanteans/conf:50
+#: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator: Water"
 msgstr "資源指標 水"
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:58
 msgid "Ship Construction Site"
 msgstr "造船地"
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:61
 msgid "Advanced Shield"
 msgstr "アドバンストシールド"
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:62
 msgid "Bread Paddle"
 msgstr "パンパドル"
 
-#: ../../tribes/atlanteans/conf:56
+#: ../../tribes/atlanteans/conf:63
 msgid "Blackroot Flour"
 msgstr "甘草粉"
 
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:64
 msgid "Blackroot"
 msgstr "甘草"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:65
 msgid "Bread"
 msgstr "パン"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:66
 msgid "Buckets"
 msgstr "バケツ"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:67
 msgid "Coal"
 msgstr "石炭"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:68
 msgid "Cornflour"
 msgstr "トウモロコシ粉"
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:69
 msgid "Corn"
 msgstr "トウモロコシ"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:70
 msgid "Diamond"
 msgstr "ダイヤモンド"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:71
 msgid "Double Trident"
 msgstr "ダブルトライデント"
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:72
 msgid "Fire Tongs"
 msgstr "火ばさみ"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:73
 msgid "Fishing Net"
 msgstr "漁網"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:74
 msgid "Fish"
 msgstr "魚"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:75
 msgid "Golden Tabard"
 msgstr "ゴールデンタバード"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:76
 msgid "Gold Ore"
 msgstr "金鉱石"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:77
 msgid "Gold"
 msgstr "金"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:78
 msgid "Gold Yarn"
 msgstr "金糸"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:79
 msgid "Hammer"
 msgstr "ハンマー"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:80
 msgid "Heavy Double Trident"
 msgstr "ヘビーダブルトライデント"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:81
 msgid "Hook pole"
 msgstr "かぎ棒"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:82
 msgid "Hunting Bow"
 msgstr "狩猟弓"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:83
 msgid "Iron Ore"
 msgstr "鉄鉱石"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:84
 msgid "Iron"
 msgstr "鉄"
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:85
 msgid "Light Trident"
 msgstr "ライトトライデント"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:86
 msgid "Long Trident"
 msgstr "ロングトライデント"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:87
 msgid "Meat"
 msgstr "肉"
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:88
 msgid "Milking Tongs"
 msgstr "糸ばさみ"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:89
 msgid "Quartz"
 msgstr "水晶"
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:90
 msgid "Pick"
 msgstr "ツルハシ"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:91
 msgid "Planks"
 msgstr "板材"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:92
 msgid "Saw"
 msgstr "ノコギリ"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:93
 msgid "Scythe"
 msgstr "大鎌"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:94
 msgid "Shovel"
 msgstr "シャベル"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:95
 msgid "Smoked Fish"
 msgstr "魚の燻製"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:96
 msgid "Smoked Meat"
 msgstr "燻製肉"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:97
 msgid "Spidercloth"
 msgstr "蜘蛛布"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:98
 msgid "Spideryarn"
 msgstr "蜘蛛糸"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:99
 msgid "Steel Shield"
 msgstr "スチールシールド"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:100
 msgid "Steel Trident"
 msgstr "スチールトライデント"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:101
 msgid "Stone"
 msgstr "石材"
 
-#: ../../tribes/atlanteans/conf:95
+#: ../../tribes/atlanteans/conf:102
 msgid "Tabard"
 msgstr "タバード"
 
-#: ../../tribes/atlanteans/conf:96
+#: ../../tribes/atlanteans/conf:103
 msgid "Log"
 msgstr "丸太"
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:104
 msgid "Water"
 msgstr "水"
 
-#: ../../tribes/atlanteans/conf:100
+#: ../../tribes/atlanteans/conf:107
 msgid "Carrier"
 msgstr "運搬人"
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:108
 msgid "Horse"
 msgstr "馬"
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:111
 msgid "Soldier"
 msgstr "兵士"
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:114
 msgid "Armorsmith"
 msgstr "防具職人"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:115
 msgid "Baker"
 msgstr "パン職人"
 
-#: ../../tribes/atlanteans/conf:109
+#: ../../tribes/atlanteans/conf:116
 msgid "Blackroot Farmer"
 msgstr "甘草農夫"
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:117
 msgid "Builder"
 msgstr "建築人"
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:118
 msgid "Charcoal Burner"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:119
 msgid "Shipwright"
 msgstr "船大工"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:120
 msgid "Farmer"
 msgstr "農夫"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:121
 msgid "Fish Breeder"
 msgstr "養魚番"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:122
 msgid "Fisher"
 msgstr "漁師"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:123
 msgid "Forester"
 msgstr "植樹番"
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:124
 msgid "Geologist"
 msgstr "地質学者"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:125
 msgid "Hunter"
 msgstr "狩人"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:126
 msgid "Miller"
 msgstr "製粉人"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:127
 msgid "Miner"
 msgstr "鉱夫"
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:128
 msgid "Sawyer"
 msgstr "製材人"
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:129
 msgid "Smelter"
 msgstr "製錬人"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:130
 msgid "Smoker"
 msgstr "燻製職人"
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:131
 msgid "Spider Breeder"
 msgstr "蜘蛛園主"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:132
 msgid "Stonecutter"
 msgstr "石工"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:133
 msgid "Toolsmith"
 msgstr "道具職人"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:134
 msgid "Trainer"
 msgstr "教官"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:135
 msgid "Weaponsmith"
 msgstr "武器職人"
 
-#: ../../tribes/atlanteans/conf:129
+#: ../../tribes/atlanteans/conf:136
 msgid "Weaver"
 msgstr "機織職人"
 
-#: ../../tribes/atlanteans/conf:130
+#: ../../tribes/atlanteans/conf:137
 msgid "Woodcutter"
 msgstr "製材人"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:138
 msgid "Scout"
 msgstr "偵察兵"
 
-#: ../../tribes/atlanteans/conf:132
+#: ../../tribes/atlanteans/conf:139
 msgid "Horse Breeder"
 msgstr "馬飼い"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:142
 msgid "Ship"
 msgstr "船"
 
-#: ../../tribes/atlanteans/conf:138
+#: ../../tribes/atlanteans/conf:145
 msgid "Construction Site"
 msgstr "建設地"
 
-#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:148
 msgid "Dismantle Site"
 msgstr "解体地"
 
-#: ../../tribes/atlanteans/conf:144
-#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:151 ../../tribes/atlanteans/conf:158
 msgid "Barrier"
 msgstr "関所"
 
-#: ../../tribes/atlanteans/conf:145
+#: ../../tribes/atlanteans/conf:152
 msgid "Citadel"
 msgstr "城塞"
 
-#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:153
 msgid "Donjon"
 msgstr "物見塔"
 
-#: ../../tribes/atlanteans/conf:147
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:154 ../../tribes/atlanteans/conf:160
 msgid "Fortress"
 msgstr "要塞"
 
-#: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:155 ../../tribes/atlanteans/conf:156
 msgid "Sentry"
 msgstr "歩哨所"
 
-#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:157
 msgid "Barracks"
 msgstr "兵舎"
 
-#: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:159 ../../tribes/atlanteans/conf:206
 msgid "Castle"
 msgstr "城郭"
 
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:161
 msgid "Outpost"
 msgstr "前哨基地"
 
-#: ../../tribes/atlanteans/conf:155
-#: ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:162 ../../tribes/atlanteans/conf:205
 msgid "Tower"
 msgstr "監視塔"
 
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:165
 #: ../../tribes/atlanteans/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "本拠地"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:166
 msgid "Warehouse"
 msgstr "倉庫"
 
-#: ../../tribes/atlanteans/conf:160
+#: ../../tribes/atlanteans/conf:167
 msgid "Port"
 msgstr "港"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:170
 msgid "Quarry"
 msgstr "採石場"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:171
 msgid "Woodcutter’s House"
 msgstr "製材所"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:172
 msgid "Forester’s House"
 msgstr "植樹番小屋"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:173
 msgid "Gold Spinning Mill"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:174
 msgid "Fisher’s House"
 msgstr "漁師小屋"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:175
 msgid "Fish Breeder’s House"
 msgstr "養魚番小屋"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:176
 msgid "Hunter’s House"
 msgstr "狩人小屋"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:177
 msgid "Well"
 msgstr "井戸"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:178
 msgid "Scout’s House"
 msgstr "偵察小屋"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:179
 msgid "Sawmill"
 msgstr "製材所"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:180
 msgid "Smokery"
 msgstr "燻製工房"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:181
 msgid "Mill"
 msgstr "製粉所"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:182
 msgid "Shipyard"
 msgstr "造船所"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:183
 msgid "Bakery"
 msgstr "パン工房"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:184
 msgid "Charcoal Kiln"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:185
 msgid "Smelting Works"
 msgstr "製錬所"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:186
 msgid "Toolsmithy"
 msgstr "道具工房"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:187
 msgid "Weapon Smithy"
 msgstr "武器工房"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:188
 msgid "Armor Smithy"
 msgstr "防具工房"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:189
 msgid "Horse Farm"
 msgstr "馬牧場"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:190
 msgid "Spider Farm"
 msgstr "蜘蛛園"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:191
 msgid "Weaving Mill"
 msgstr "機織所"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:192
 msgid "Farm"
 msgstr "農場"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:193
 msgid "Blackroot Farm"
 msgstr "甘草園"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:194
 msgid "Crystal Mine"
 msgstr "水晶鉱山"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:195
 msgid "Coal Mine"
 msgstr "炭鉱"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:196
 msgid "Iron Mine"
 msgstr "鉄鉱山"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:197
 msgid "Gold Mine"
 msgstr "金鉱山"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:201
 msgid "Guardhouse"
 msgstr "警備小屋"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:202
 msgid "Guardhall"
 msgstr "警備所"
 
-#: ../../tribes/atlanteans/conf:196
+#: ../../tribes/atlanteans/conf:203
 msgid "High Tower"
 msgstr "高監視塔"
 
-#: ../../tribes/atlanteans/conf:197
+#: ../../tribes/atlanteans/conf:204
 msgid "Small Tower"
 msgstr "小監視塔"
 
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:210
 msgid "Dungeon"
 msgstr "ダンジョンタワー"
 
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:211
 msgid "Labyrinth"
 msgstr "迷宮"
 
@@ -1184,14 +1167,12 @@ msgid ""
 "This corn is processed in the mill into fine cornflour that every Atlantean "
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
-msgstr ""
-"このトウモロコシは、製粉所で、アトラスのすべてのパン職人がおいしいパンをつくるために必要とする、トウモロコシ粉に破砕するために消費されます。また馬牧場と蜘"
-"蛛園もトウモロコシの供給を必要とします。"
+msgstr "このトウモロコシは、製粉所で、アトラスのすべてのパン職人がおいしいパンをつくるために必要とする、トウモロコシ粉に破砕するために消費されます。また馬牧場と蜘蛛園もトウモロコシの供給を必要とします。"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
-"Cornflour is produced in a mill out of corn and is one of three parts of the "
-"Atlantean bread produced in bakeries."
+"Cornflour is produced in a mill out of corn and is one of three parts of the"
+" Atlantean bread produced in bakeries."
 msgstr "トウモロコシ粉は製粉所で生産されます。これはパン工房で生産されるアトラスのパンをつくる三つの材料のうちの一つです。"
 
 #: ../../tribes/atlanteans/crystalmine/conf:29
@@ -1224,18 +1205,14 @@ msgstr ""
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
-msgstr ""
-"この素晴らしいダイヤモンドは、いくつかの高級な建物を建設するために使用されます。\n"
-"　水晶鉱山で採掘されます。"
+msgstr "この素晴らしいダイヤモンドは、いくつかの高級な建物を建設するために使用されます。\n　水晶鉱山で採掘されます。"
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr ""
-"ダブルトライデントは、アトラスの武器工房でつくられる最高の槍です。\n"
-"　ダンジョンタワーで、兵士の攻撃レベル２からレベル３へ訓練するために――食物とともに――使用されます。"
+msgstr "ダブルトライデントは、アトラスの武器工房でつくられる最高の槍です。\n　ダンジョンタワーで、兵士の攻撃レベル２からレベル３へ訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid "Sleep"
@@ -1328,20 +1305,17 @@ msgstr ""
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid ""
-"Build a fisher breeder’s house close to the fisher’s house to make sure that "
-"you don’t run out of fish."
+"Build a fisher breeder’s house close to the fisher’s house to make sure that"
+" you don’t run out of fish."
 msgstr ""
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
-msgid ""
-"The fisher’s house needs water full of fish within the working radius."
+msgid "The fisher’s house needs water full of fish within the working radius."
 msgstr ""
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
-"魚網は漁師が使用します。\n"
-"　道具工房で製造されます。"
+msgstr "魚網は漁師が使用します。\n　道具工房で製造されます。"
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
@@ -1379,11 +1353,9 @@ msgstr ""
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
-"They are used in the labyrinth – together with food – to train soldiers from "
-"health level 0 to level 1."
-msgstr ""
-"ゴールデンタバードは、アトラスの機織所で金糸を使用して製造されます。訓練場で兵士の体力レベル０からレベル１に訓練するために――食物とともに――使用されます"
-"。"
+"They are used in the labyrinth – together with food – to train soldiers from"
+" health level 0 to level 1."
+msgstr "ゴールデンタバードは、アトラスの機織所で金糸を使用して製造されます。訓練場で兵士の体力レベル０からレベル１に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/goldmine/conf:44
 msgid "Main Gold Vein Exhausted"
@@ -1404,9 +1376,7 @@ msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr ""
-"金鉱石は金鉱山で採掘されます。\n"
-"　製錬所で製錬されて金になります。金は、武器や鎧を製造するための貴重な建築材料として使用されます。"
+msgstr "金鉱石は金鉱山で採掘されます。\n　製錬所で製錬されて金になります。金は、武器や鎧を製造するための貴重な建築材料として使用されます。"
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1416,24 +1386,18 @@ msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの警備所を占拠しました。"
+msgstr "あなたの兵士が\nあなたの警備所を占拠しました。"
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの小屋を占拠しました。"
+msgstr "あなたの兵士が\nあなたの小屋を占拠しました。"
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr ""
-"ハンマーは、必要不可欠の道具です。それは地質学者、建築人、武器職人、防具職人が必要とします。常に予備をいくつか持つようにしてください！\n"
-"　道具工房で製造されます。"
+msgstr "ハンマーは、必要不可欠の道具です。それは地質学者、建築人、武器職人、防具職人が必要とします。常に予備をいくつか持つようにしてください！\n　道具工房で製造されます。"
 
 #: ../../tribes/atlanteans/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
@@ -1449,27 +1413,22 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr ""
-"これは、アトランティス軍のもっとも危険な武器です。最強中の最強の兵士のみが使用します。\n"
-"　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル３からレベル４に訓練するために――食物とともに――使用されます。"
+msgstr "これは、アトランティス軍のもっとも危険な武器です。最強中の最強の兵士のみが使用します。\n　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル３からレベル４に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの高監視塔を占拠しました。"
+msgstr "あなたの兵士が\nあなたの高監視塔を占拠しました。"
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
-msgstr ""
-"このかぎ棒は、燻製職人が燻製工房の上の棚に、肉や魚を吊り下げるために使用されます。\n"
-"　道具職人によって製造されます。"
+msgstr "このかぎ棒は、燻製職人が燻製工房の上の棚に、肉や魚を吊り下げるために使用されます。\n　道具職人によって製造されます。"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
-"Horses help to carry items along busy roads. They are reared in a horse farm."
+"Horses help to carry items along busy roads. They are reared in a horse "
+"farm."
 msgstr "馬は交通の激しい道路でアイテムを運ぶのを助けます。馬は馬牧場で育てられます。"
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
@@ -1513,9 +1472,7 @@ msgstr ""
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr ""
-"この狩猟弓は、アトラスの狩人が使用します。\n"
-"　道具職人が製造します。"
+msgstr "この狩猟弓は、アトラスの狩人が使用します。\n　道具職人が製造します。"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid ""
@@ -1541,9 +1498,7 @@ msgstr ""
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
-msgstr ""
-"鉄鉱石は鉄鉱山で採掘されます。\n"
-"　製錬所で鉄に加工されます。"
+msgstr "鉄鉱石は鉄鉱山で採掘されます。\n　製錬所で鉄に加工されます。"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "sleeping"
@@ -1590,41 +1545,34 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr ""
-"これは、アトランティス兵士の基本の武器です。タバードとともに、若い兵士が着用するための装備です。ライトトライデントは、ほかのすべての槍をつくる武器工房で製"
-"造されます。"
+msgstr "これは、アトランティス兵士の基本の武器です。タバードとともに、若い兵士が着用するための装備です。ライトトライデントは、ほかのすべての槍をつくる武器工房で製造されます。"
 
 #: ../../tribes/atlanteans/log/conf:1
 msgid ""
-"Logs are the base for planks, which are used in nearly every building of the "
-"Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the "
+"Logs are the base for planks, which are used in nearly every building of the"
+" Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
-"produced in the weapon smithy and used in the dungeon – together with food – "
-"to train soldiers from attack level 0 to level 1."
-msgstr ""
-"ロングトライデントは、兵士が訓練する一つめの槍です。\n"
-"　武器工房で製造され、ダンジョンタワーで、兵士を攻撃レベル０からレベル１に訓練するために――食物とともに――使用されます。"
+"produced in the weapon smithy and used in the dungeon – together with food –"
+" to train soldiers from attack level 0 to level 1."
+msgstr "ロングトライデントは、兵士が訓練する一つめの槍です。\n　武器工房で製造され、ダンジョンタワーで、兵士を攻撃レベル０からレベル１に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
 "Meat is one food resource of the Atlanteans. It is obtained from wild game "
-"taken by the hunter and has to be smoked in a smokery before being delivered "
-"to mines and training sites (dungeon and labyrinth)."
-msgstr ""
-"肉はアトラスの食料の一つです。狩人が捕獲した動物から得て、鉱山や訓練施設（ダンジョンタワーや迷宮）に運ばれる前に、燻製工房で燻製にされます。"
+"taken by the hunter and has to be smoked in a smokery before being delivered"
+" to mines and training sites (dungeon and labyrinth)."
+msgstr "肉はアトラスの食料の一つです。狩人が捕獲した動物から得て、鉱山や訓練施設（ダンジョンタワーや迷宮）に運ばれる前に、燻製工房で燻製にされます。"
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr ""
-"糸ばさみは、蜘蛛園主が蜘蛛糸を搾り取るために使用されます。\n"
-"　道具職人が製造します。"
+msgstr "糸ばさみは、蜘蛛園主が蜘蛛糸を搾り取るために使用されます。\n　道具職人が製造します。"
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "grinding corn"
@@ -1638,10 +1586,7 @@ msgstr ""
 msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
-msgstr ""
-"甘草粉とトウモロコシ粉をつくるために、\n"
-"甘草とトウモロコシをそれぞれ\n"
-"粉挽きします。"
+msgstr "甘草粉とトウモロコシ粉をつくるために、\n甘草とトウモロコシをそれぞれ\n粉挽きします。"
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -1651,24 +1596,24 @@ msgstr "石炭、鉄、金を得るために、地下の鉱山で働きます。
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr ""
-"ツルハシは石工や鉱夫が使用します。\n"
-"　道具工房で製造されます。"
+msgstr "ツルハシは石工や鉱夫が使用します。\n　道具工房で製造されます。"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
 "Planks are an important building material of the Atlanteans. They are "
-"produced out of logs by the sawmill. The weapon smithy and the shipyard also "
-"use planks to produce the different tridents and mighty ships."
-msgstr ""
-"板材はアトラスの重要な建築材料です。\n"
-"　製材所で丸太を使用して製造されます。また武器工房と造船所は、様々な槍と強力な船をつくるために、板材を使用します。"
+"produced out of logs by the sawmill. The weapon smithy and the shipyard also"
+" use planks to produce the different tridents and mighty ships."
+msgstr "板材はアトラスの重要な建築材料です。\n　製材所で丸太を使用して製造されます。また武器工房と造船所は、様々な槍と強力な船をつくるために、板材を使用します。"
 
-#: ../../tribes/atlanteans/quarry/conf:27
+#: ../../tribes/atlanteans/quarry/conf:20
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/atlanteans/quarry/conf:33
 msgid "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/atlanteans/quarry/conf:28
+#: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his working "
 "radius."
@@ -1686,17 +1631,13 @@ msgstr ""
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
-msgstr ""
-"この透明な水晶は、いくつかの高級な建物を建設するために使用されます。\n"
-"　水晶鉱山で生産されます。"
+msgstr "この透明な水晶は、いくつかの高級な建物を建設するために使用されます。\n　水晶鉱山で生産されます。"
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
-"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
-"toolsmith."
-msgstr ""
-"ノコギリは、製材人と道具職人が必要とします。\n"
-"　道具工房で生産されます。"
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the"
+" toolsmith."
+msgstr "ノコギリは、製材人と道具職人が必要とします。\n　道具工房で生産されます。"
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
@@ -1724,9 +1665,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
-"開始時のいくつかの建物は、十分なスペースがないために建設されませんでした。\n"
-"これによって不利な状態になります。公平な開始状態にするには、このマップの再スタートを検討してください。"
+msgstr "開始時のいくつかの建物は、十分なスペースがないために建設されませんでした。\nこれによって不利な状態になります。公平な開始状態にするには、このマップの再スタートを検討してください。"
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1741,23 +1680,20 @@ msgstr "航海に適した船"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "新しい船を造り上げる造船所で働きます。"
 
-#: ../../tribes/atlanteans/shipyard/conf:28
+#: ../../tribes/atlanteans/shipyard/conf:29
 msgid "constructing a ship"
 msgstr ""
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
-"Shovels are needed for the proper handling of plants. Therefore the forester "
-"and the blackroot farmer are using them. They are produced by the toolsmith."
-msgstr ""
-"シャベルは、植物の適切な取扱いに必要です。したがって、植樹番と甘草農夫がそれを使用します。\n"
-"　道具工房で製造されます。"
+"Shovels are needed for the proper handling of plants. Therefore the forester"
+" and the blackroot farmer are using them. They are produced by the "
+"toolsmith."
+msgstr "シャベルは、植物の適切な取扱いに必要です。したがって、植樹番と甘草農夫がそれを使用します。\n　道具工房で製造されます。"
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの小監視塔を占拠しました。"
+msgstr "あなたの兵士が\nあなたの小監視塔を占拠しました。"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1786,9 +1722,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr ""
-"燻製肉は、燻製工房で肉を使用して生産されます。\n"
-"　鉱夫と兵士が自分の手で栄養価の高い弁当をとるために、鉱山や訓練施設（迷宮、ダンジョンタワー）に運ばれます。"
+msgstr "燻製肉は、燻製工房で肉を使用して生産されます。\n　鉱夫と兵士が自分の手で栄養価の高い弁当をとるために、鉱山や訓練施設（迷宮、ダンジョンタワー）に運ばれます。"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
@@ -1815,17 +1749,13 @@ msgid ""
 "Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
-"蜘蛛布は、機織所で蜘蛛糸を使用して生産されます。\n"
-"　道具工房と造船所で使用されます。またいくつかの高度に開発された建物が、その建設のために蜘蛛布を必要とします。"
+msgstr "蜘蛛布は、機織所で蜘蛛糸を使用して生産されます。\n　道具工房と造船所で使用されます。またいくつかの高度に開発された建物が、その建設のために蜘蛛布を必要とします。"
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
-"この糸は、蜘蛛園で飼育された蜘蛛から、生産されます。\n"
-"　機織所で蜘蛛布をつくるために消費されます。"
+msgstr "この糸は、蜘蛛園で飼育された蜘蛛から、生産されます。\n　機織所で蜘蛛布をつくるために消費されます。"
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1838,14 +1768,12 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
-msgstr ""
-"これは中級の槍です。\n"
-"　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル１からレベル２に訓練するために――食物とともに――使用されます。"
+msgstr "これは中級の槍です。\n　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル１からレベル２に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid ""
-"Stone is a basic building ware of the Atlanteans. It is produced in a quarry "
-"or a crystal mine."
+"Stone is a basic building ware of the Atlanteans. It is produced in a quarry"
+" or a crystal mine."
 msgstr "石材はアトラスの標準的な建築材料です。これは採石場か水晶鉱山で生産されます。"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
@@ -1908,9 +1836,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your tower."
-msgstr ""
-"あなたの兵士が\n"
-"あなたの監視塔を占拠しました。"
+msgstr "あなたの兵士が\nあなたの監視塔を占拠しました。"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1924,9 +1850,7 @@ msgstr ""
 msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
-msgstr ""
-"水は生命に不可欠です！\n"
-"　パン工房、馬牧場、蜘蛛園に使用されます。"
+msgstr "水は生命に不可欠です！\n　パン工房、馬牧場、蜘蛛園に使用されます。"
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
