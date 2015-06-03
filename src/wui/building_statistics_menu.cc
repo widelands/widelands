@@ -245,7 +245,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-	                  _("Show previous"),
+							_("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextOwned] =
@@ -257,7 +257,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-	                  _("Show next"),
+							_("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevConstruction] =
@@ -269,7 +269,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-	                  _("Show previous"),
+							_("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextConstruction] =
@@ -281,7 +281,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-	                  _("Show next"),
+							_("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] =
@@ -293,7 +293,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-	                  _("Show previous"),
+							_("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextUnproductive] =
@@ -305,7 +305,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-	                  _("Show next"),
+							_("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
