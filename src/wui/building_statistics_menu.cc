@@ -144,10 +144,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	               g_gr->images().get("pics/menu_tab_buildmine.png"),
 	               tabs_[BuildingTab::Mines],
 	               _("Mines"));
-	tab_panel_.add("building_stats_ports",
-	               g_gr->images().get("pics/menu_tab_buildport.png"),
-	               tabs_[BuildingTab::Ports],
-	               _("Ports"));
+
+	// Hide the ports tab for non-seafaring maps
+	if (iplayer().game().map().get_port_spaces().size() > 1) {
+		tab_panel_.add("building_stats_ports",
+		               g_gr->images().get("pics/menu_tab_buildport.png"),
+		               tabs_[BuildingTab::Ports],
+		               _("Ports"));
+	}
 
 	const TribeDescr& tribe = iplayer().player().tribe();
 
