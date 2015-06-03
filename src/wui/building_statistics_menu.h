@@ -46,8 +46,19 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	void update();
 
 private:
+	/// Array indices for the tabs
+	enum BuildingTab {
+		Small,
+		Medium,
+		Big,
+		Mines,
+		Ports
+	};
+
 	/// Which building state to jump through
 	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
+
+	/// Array indices for the navigation buttons
 	enum NavigationButton {
 		PrevOwned,
 		NextOwned,
@@ -60,7 +71,7 @@ private:
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(
-	   BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column);
+		BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
@@ -84,12 +95,8 @@ private:
 	InteractivePlayer& iplayer() const;
 
 	/// UI tabs
-	UI::TabPanel tabs_;
-	UI::Box small_tab_;
-	UI::Box medium_tab_;
-	UI::Box big_tab_;
-	UI::Box mines_tab_;
-	UI::Box ports_tab_;
+	UI::TabPanel tab_panel_;
+	UI::Box* tabs_[5];
 
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;

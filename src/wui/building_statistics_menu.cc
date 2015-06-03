@@ -66,12 +66,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
-     tabs_(this, 0, 0, g_gr->images().get("pics/but1.png")),
-     small_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-     medium_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-     big_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-     mines_tab_(&tabs_, 0, 0, UI::Box::Vertical),
-     ports_tab_(&tabs_, 0, 0, UI::Box::Vertical),
+	  tab_panel_(this, 0, 0, g_gr->images().get("pics/but1.png")),
      building_name_(this,
                     get_inner_w() / 2,
                     get_inner_h() - 4 * kButtonRowHeight,
@@ -131,27 +126,34 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             UI::Align_CenterRight),
      low_production_(33),
      has_selection_(false) {
-	tabs_.add("building_stats_small",
+
+	tabs_[BuildingTab::Small] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	tabs_[BuildingTab::Medium] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	tabs_[BuildingTab::Big] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	tabs_[BuildingTab::Ports] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	tabs_[BuildingTab::Mines] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+
+	tab_panel_.add("building_stats_small",
 	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
-	          &small_tab_,
+				 tabs_[BuildingTab::Small],
 	          _("Small Buildings"));
-	tabs_.add("building_stats_medium",
+	tab_panel_.add("building_stats_medium",
 	          g_gr->images().get("pics/menu_tab_buildmedium.png"),
-	          &medium_tab_,
+				 tabs_[BuildingTab::Medium],
 	          _("Medium Buildings"));
-	tabs_.add("building_stats_big",
+	tab_panel_.add("building_stats_big",
 	          g_gr->images().get("pics/menu_tab_buildbig.png"),
-	          &big_tab_,
+				 tabs_[BuildingTab::Big],
 	          _("Big Buildings"));
-	tabs_.add("building_stats_mines",
+	tab_panel_.add("building_stats_mines",
 	          g_gr->images().get("pics/menu_tab_buildmine.png"),
-	          &mines_tab_,
+				 tabs_[BuildingTab::Mines],
 	          _("Mines"));
-	tabs_.add("building_stats_ports",
+	tab_panel_.add("building_stats_ports",
 	          g_gr->images().get("pics/menu_tab_buildport.png"),
-	          &ports_tab_,
+				 tabs_[BuildingTab::Ports],
 	          _("Ports"));
-	tabs_.set_size(kWindowWidth, kTabHeight);
+	tab_panel_.set_size(kWindowWidth, kTabHeight);
 
 	const TribeDescr& tribe = iplayer().player().tribe();
 
@@ -161,17 +163,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	productivity_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
 
 	// Column counters
-	int small_column = 0;
-	int medium_column = 0;
-	int big_column = 0;
-	int mines_column = 0;
-	int ports_column = 0;
+	int columns[5] = {0, 0, 0, 0, 0};
 
-	UI::Box* mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
-	UI::Box* ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
-	UI::Box* big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
-	UI::Box* medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
-	UI::Box* small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
+	UI::Box* rows[5];
+	rows[BuildingTab::Small] = new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
+	rows[BuildingTab::Medium] = new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
+	rows[BuildingTab::Big] = new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
+	rows[BuildingTab::Mines] = new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
+	rows[BuildingTab::Ports] = new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
 
 	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
@@ -179,28 +178,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
 		    descr.type() != MapObjectType::DISMANTLESITE) {
 			if (descr.get_ismine()) {
-				if (add_button(id, descr, mines_tab_, *mines_row, &mines_column)) {
-					mines_row = new UI::Box(&mines_tab_, 0, 0, UI::Box::Horizontal);
+				if (add_button(id, descr, *tabs_[BuildingTab::Mines], *rows[BuildingTab::Mines], &columns[BuildingTab::Mines])) {
+					rows[BuildingTab::Mines] = new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
 				}
 			} else if (descr.get_isport()) {
-				if (add_button(id, descr, ports_tab_, *ports_row, &ports_column)) {
-					ports_row = new UI::Box(&ports_tab_, 0, 0, UI::Box::Horizontal);
+				if (add_button(id, descr, *tabs_[BuildingTab::Ports], *rows[BuildingTab::Ports], &columns[BuildingTab::Ports])) {
+					rows[BuildingTab::Ports] = new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
 				}
 			} else {
 				switch (descr.get_size()) {
 				case BaseImmovable::SMALL:
-					if (add_button(id, descr, small_tab_, *small_row, &small_column)) {
-						small_row = new UI::Box(&small_tab_, 0, 0, UI::Box::Horizontal);
+					if (add_button(id, descr, *tabs_[BuildingTab::Small], *rows[BuildingTab::Small], &columns[BuildingTab::Small])) {
+						rows[BuildingTab::Small] = new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, medium_tab_, *medium_row, &medium_column)) {
-						medium_row = new UI::Box(&medium_tab_, 0, 0, UI::Box::Horizontal);
+					if (add_button(id, descr, *tabs_[BuildingTab::Medium], *rows[BuildingTab::Medium], &columns[BuildingTab::Medium])) {
+						rows[BuildingTab::Medium] = new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::BIG:
-					if (add_button(id, descr, big_tab_, *big_row, &big_column)) {
-						big_row = new UI::Box(&big_tab_, 0, 0, UI::Box::Horizontal);
+					if (add_button(id, descr, *tabs_[BuildingTab::Big], *rows[BuildingTab::Big], &columns[BuildingTab::Big])) {
+						rows[BuildingTab::Big] = new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				default:
@@ -210,11 +209,11 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			}
 		}
 	}
-	mines_tab_.add(mines_row, UI::Align_Left);
-	ports_tab_.add(ports_row, UI::Align_Left);
-	small_tab_.add(small_row, UI::Align_Left);
-	medium_tab_.add(medium_row, UI::Align_Left);
-	big_tab_.add(big_row, UI::Align_Left);
+	tabs_[BuildingTab::Small]->add(rows[BuildingTab::Small], UI::Align_Left);
+	tabs_[BuildingTab::Medium]->add(rows[BuildingTab::Medium], UI::Align_Left);
+	tabs_[BuildingTab::Big]->add(rows[BuildingTab::Big], UI::Align_Left);
+	tabs_[BuildingTab::Mines]->add(rows[BuildingTab::Mines], UI::Align_Left);
+	tabs_[BuildingTab::Ports]->add(rows[BuildingTab::Ports], UI::Align_Left);
 
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
@@ -343,7 +342,8 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
-   BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column) {
+	BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column) {
+
 	// Only add headquarter types that are owned by player.
 	if (!(descr.is_buildable() || descr.is_enhanced() || descr.global()) &&
 	    iplayer().get_player()->get_building_statistics(id).empty()) {
