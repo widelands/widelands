@@ -36,6 +36,12 @@
 
 using namespace Widelands;
 
+namespace {
+
+constexpr int kNoOfBuildingTabs = 5;
+
+}  // namespace
+
 /// This window shows statistics for all the buildings that the player owns.
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
@@ -47,13 +53,7 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 private:
 	/// Array indices for the tabs
-	enum BuildingTab {
-		Small,
-		Medium,
-		Big,
-		Mines,
-		Ports
-	};
+	enum BuildingTab {Small, Medium, Big, Mines, Ports};
 
 	/// Which building state to jump through
 	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
@@ -71,7 +71,7 @@ private:
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(
-		BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column);
+	   BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
@@ -96,7 +96,8 @@ private:
 
 	/// UI tabs
 	UI::TabPanel tab_panel_;
-	UI::Box* tabs_[5];
+	UI::Box* tabs_[kNoOfBuildingTabs];
+	int row_counters_[kNoOfBuildingTabs];
 
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
@@ -108,6 +109,7 @@ private:
 	std::vector<UI::MultilineTextarea*> productivity_labels_;
 
 	/// The buttons for stepping through buildings
+	UI::Panel navigation_panel_;
 	UI::Button* navigation_buttons_[6];
 	UI::Textarea building_name_;
 	UI::Textarea owned_label_;

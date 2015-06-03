@@ -66,29 +66,25 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
-	  tab_panel_(this, 0, 0, g_gr->images().get("pics/but1.png")),
-     building_name_(this,
-                    get_inner_w() / 2,
-                    get_inner_h() - 4 * kButtonRowHeight,
-                    0,
-                    kButtonHeight,
-                    "",
-                    UI::Align_Center),
-     owned_label_(this,
+     tab_panel_(this, 0, 0, g_gr->images().get("pics/but1.png")),
+     navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
+     building_name_(
+        &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align_Center),
+     owned_label_(&navigation_panel_,
                   kMargin,
-                  get_inner_h() - 3 * kButtonRowHeight,
+                  kButtonRowHeight,
                   0,
                   kButtonHeight,
                   _("Owned:"),
                   UI::Align_CenterLeft),
-     construction_label_(this,
+     construction_label_(&navigation_panel_,
                          kMargin,
-                         get_inner_h() - 2 * kButtonRowHeight,
+                         2 * kButtonRowHeight,
                          0,
                          kButtonHeight,
                          _("Under Construction:"),
                          UI::Align_CenterLeft),
-     unproductive_box_(this, kMargin, get_inner_h() - kButtonRowHeight + 3, UI::Box::Horizontal),
+     unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
      unproductive_label_(
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
@@ -103,23 +99,23 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         /** TRANSLATORS: Building statistics window -  'Low Production: <input>%' */
         _("%"),
         UI::Align_BottomLeft),
-     no_owned_label_(this,
+     no_owned_label_(&navigation_panel_,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                     get_inner_h() - 3 * kButtonRowHeight,
+                     kButtonRowHeight,
                      0,
                      kButtonHeight,
                      "",
                      UI::Align_CenterRight),
-     no_construction_label_(this,
+     no_construction_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                            get_inner_h() - 2 * kButtonRowHeight,
+                            2 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
                             UI::Align_CenterRight),
-     no_unproductive_label_(this,
+     no_unproductive_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                            get_inner_h() - kButtonRowHeight,
+                            3 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
@@ -127,33 +123,31 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      low_production_(33),
      has_selection_(false) {
 
-	tabs_[BuildingTab::Small] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	tabs_[BuildingTab::Medium] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	tabs_[BuildingTab::Big] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	tabs_[BuildingTab::Ports] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	tabs_[BuildingTab::Mines] =  new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
+		row_counters_[i] = 0;
+		tabs_[i] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+	}
 
 	tab_panel_.add("building_stats_small",
-	          g_gr->images().get("pics/menu_tab_buildsmall.png"),
-				 tabs_[BuildingTab::Small],
-	          _("Small Buildings"));
+	               g_gr->images().get("pics/menu_tab_buildsmall.png"),
+	               tabs_[BuildingTab::Small],
+	               _("Small Buildings"));
 	tab_panel_.add("building_stats_medium",
-	          g_gr->images().get("pics/menu_tab_buildmedium.png"),
-				 tabs_[BuildingTab::Medium],
-	          _("Medium Buildings"));
+	               g_gr->images().get("pics/menu_tab_buildmedium.png"),
+	               tabs_[BuildingTab::Medium],
+	               _("Medium Buildings"));
 	tab_panel_.add("building_stats_big",
-	          g_gr->images().get("pics/menu_tab_buildbig.png"),
-				 tabs_[BuildingTab::Big],
-	          _("Big Buildings"));
+	               g_gr->images().get("pics/menu_tab_buildbig.png"),
+	               tabs_[BuildingTab::Big],
+	               _("Big Buildings"));
 	tab_panel_.add("building_stats_mines",
-	          g_gr->images().get("pics/menu_tab_buildmine.png"),
-				 tabs_[BuildingTab::Mines],
-	          _("Mines"));
+	               g_gr->images().get("pics/menu_tab_buildmine.png"),
+	               tabs_[BuildingTab::Mines],
+	               _("Mines"));
 	tab_panel_.add("building_stats_ports",
-	          g_gr->images().get("pics/menu_tab_buildport.png"),
-				 tabs_[BuildingTab::Ports],
-	          _("Ports"));
-	tab_panel_.set_size(kWindowWidth, kTabHeight);
+	               g_gr->images().get("pics/menu_tab_buildport.png"),
+	               tabs_[BuildingTab::Ports],
+	               _("Ports"));
 
 	const TribeDescr& tribe = iplayer().player().tribe();
 
@@ -163,14 +157,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	productivity_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
 
 	// Column counters
-	int columns[5] = {0, 0, 0, 0, 0};
+	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
 
-	UI::Box* rows[5];
-	rows[BuildingTab::Small] = new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
-	rows[BuildingTab::Medium] = new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
-	rows[BuildingTab::Big] = new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
-	rows[BuildingTab::Mines] = new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
-	rows[BuildingTab::Ports] = new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
+	// Row containers
+	UI::Box* rows[kNoOfBuildingTabs];
+	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
+		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
+	}
 
 	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
@@ -178,28 +171,53 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
 		    descr.type() != MapObjectType::DISMANTLESITE) {
 			if (descr.get_ismine()) {
-				if (add_button(id, descr, *tabs_[BuildingTab::Mines], *rows[BuildingTab::Mines], &columns[BuildingTab::Mines])) {
-					rows[BuildingTab::Mines] = new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
+				if (add_button(id,
+				               descr,
+				               BuildingTab::Mines,
+				               *rows[BuildingTab::Mines],
+				               &columns[BuildingTab::Mines])) {
+					rows[BuildingTab::Mines] =
+					   new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
 				}
 			} else if (descr.get_isport()) {
-				if (add_button(id, descr, *tabs_[BuildingTab::Ports], *rows[BuildingTab::Ports], &columns[BuildingTab::Ports])) {
-					rows[BuildingTab::Ports] = new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
+				if (add_button(id,
+				               descr,
+				               BuildingTab::Ports,
+				               *rows[BuildingTab::Ports],
+				               &columns[BuildingTab::Ports])) {
+					rows[BuildingTab::Ports] =
+					   new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
 				}
 			} else {
 				switch (descr.get_size()) {
 				case BaseImmovable::SMALL:
-					if (add_button(id, descr, *tabs_[BuildingTab::Small], *rows[BuildingTab::Small], &columns[BuildingTab::Small])) {
-						rows[BuildingTab::Small] = new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
+					if (add_button(id,
+					               descr,
+					               BuildingTab::Small,
+					               *rows[BuildingTab::Small],
+					               &columns[BuildingTab::Small])) {
+						rows[BuildingTab::Small] =
+						   new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, *tabs_[BuildingTab::Medium], *rows[BuildingTab::Medium], &columns[BuildingTab::Medium])) {
-						rows[BuildingTab::Medium] = new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
+					if (add_button(id,
+					               descr,
+					               BuildingTab::Medium,
+					               *rows[BuildingTab::Medium],
+					               &columns[BuildingTab::Medium])) {
+						rows[BuildingTab::Medium] =
+						   new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				case BaseImmovable::BIG:
-					if (add_button(id, descr, *tabs_[BuildingTab::Big], *rows[BuildingTab::Big], &columns[BuildingTab::Big])) {
-						rows[BuildingTab::Big] = new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
+					if (add_button(id,
+					               descr,
+					               BuildingTab::Big,
+					               *rows[BuildingTab::Big],
+					               &columns[BuildingTab::Big])) {
+						rows[BuildingTab::Big] =
+						   new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
 					}
 					break;
 				default:
@@ -209,11 +227,10 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			}
 		}
 	}
-	tabs_[BuildingTab::Small]->add(rows[BuildingTab::Small], UI::Align_Left);
-	tabs_[BuildingTab::Medium]->add(rows[BuildingTab::Medium], UI::Align_Left);
-	tabs_[BuildingTab::Big]->add(rows[BuildingTab::Big], UI::Align_Left);
-	tabs_[BuildingTab::Mines]->add(rows[BuildingTab::Mines], UI::Align_Left);
-	tabs_[BuildingTab::Ports]->add(rows[BuildingTab::Ports], UI::Align_Left);
+
+	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
+		tabs_[i]->add(rows[i], UI::Align_Left);
+	}
 
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
@@ -236,75 +253,75 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	   kButtonRowHeight);
 
 	navigation_buttons_[NavigationButton::PrevOwned] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "previous_owned",
 	                  get_inner_w() - 2 * kButtonRowHeight,
-	                  get_inner_h() - 3 * kButtonRowHeight,
+	                  kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-							_("Show previous building"),
+	                  _("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextOwned] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "next_owned",
 	                  get_inner_w() - kButtonRowHeight,
-	                  get_inner_h() - 3 * kButtonRowHeight,
+	                  kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-							_("Show next building"),
+	                  _("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevConstruction] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "previous_constructed",
 	                  get_inner_w() - 2 * kButtonRowHeight,
-	                  get_inner_h() - 2 * kButtonRowHeight,
+	                  2 * kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-							_("Show previous building"),
+	                  _("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextConstruction] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "next_constructed",
 	                  get_inner_w() - kButtonRowHeight,
-	                  get_inner_h() - 2 * kButtonRowHeight,
+	                  2 * kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-							_("Show next building"),
+	                  _("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "previous_unproductive",
 	                  get_inner_w() - 2 * kButtonRowHeight,
-	                  get_inner_h() - kButtonRowHeight,
+	                  3 * kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_left.png"),
-							_("Show previous building"),
+	                  _("Show previous building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::NextUnproductive] =
-	   new UI::Button(this,
+	   new UI::Button(&navigation_panel_,
 	                  "next_unproductive",
 	                  get_inner_w() - kButtonRowHeight,
-	                  get_inner_h() - kButtonRowHeight,
+	                  3 * kButtonRowHeight,
 	                  kButtonHeight,
 	                  kButtonHeight,
 	                  g_gr->images().get("pics/but4.png"),
 	                  g_gr->images().get("pics/scrollbar_right.png"),
-							_("Show next building"),
+	                  _("Show next building"),
 	                  false);
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
@@ -336,14 +353,12 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	productivity_labels_.clear();
 }
 
-
 // Adds 3 buttons per building type:
 // - Building image, steps through all buildings of the type
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
-	BuildingIndex id, const BuildingDescr& descr, UI::Box& tab, UI::Box& row, int* column) {
-
+   BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 	// Only add headquarter types that are owned by player.
 	if (!(descr.is_buildable() || descr.is_enhanced() || descr.global()) &&
 	    iplayer().get_player()->get_building_statistics(id).empty()) {
@@ -379,10 +394,15 @@ bool BuildingStatisticsMenu::add_button(
 	building_buttons_[id]->sigclicked.connect(
 	   boost::bind(&BuildingStatisticsMenu::set_current_building_type, boost::ref(*this), id));
 
+	// For dynamic window height
+	if (*column == 0) {
+		++row_counters_[tab_index];
+	}
+
 	// Check if the row is full
 	++*column;
 	if (*column == kColumns) {
-		tab.add(&row, UI::Align_Left);
+		tabs_[tab_index]->add(&row, UI::Align_Left);
 		*column = 0;
 		return true;
 	}
@@ -518,6 +538,14 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  * Update this statistic
  */
 void BuildingStatisticsMenu::think() {
+	// Adjust height to current tab
+	int tab_height =
+	   35 + row_counters_[tab_panel_.active()] * (kBuildGridCellSize + kLabelHeight + kLabelHeight);
+	tab_panel_.set_size(kWindowWidth, tab_height);
+	set_size(get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
+	navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+
+	// Update statistics
 	const Game& game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
