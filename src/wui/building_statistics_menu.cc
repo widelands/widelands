@@ -331,6 +331,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	update();
 }
 
+BuildingStatisticsMenu::~BuildingStatisticsMenu() {
+	building_buttons_.clear();
+	owned_labels_.clear();
+	productivity_labels_.clear();
+}
+
+
 // Adds 3 buttons per building type:
 // - Building image, steps through all buildings of the type
 // - Buildings owned, steps through constructionsites

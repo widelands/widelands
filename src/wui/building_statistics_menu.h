@@ -40,6 +40,7 @@ using namespace Widelands;
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
+	~BuildingStatisticsMenu();
 
 	void think() override;
 	void update();
