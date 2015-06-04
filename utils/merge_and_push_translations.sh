@@ -2,6 +2,7 @@
 
 ## This script will pull new translations from Transifex into local trunk
 ## and fix the line breaks.
+## It then updates the developers/authors file.
 ## Afterwards, the catalogs will be updated and the result pushed to
 ## trunk on Launchpad.
 
@@ -34,6 +35,16 @@ set -x
 bzr pull
 tx pull -a
 bzr add po/*/*.po || true
+
+# Update authors file
+utils/update_authors.py
+if [ $? -eq 0 ]
+then
+  echo "Updated authors";
+else
+  echo "Failed updating authors";
+  exit 1;
+fi
 
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.
