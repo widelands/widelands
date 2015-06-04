@@ -594,6 +594,7 @@ void BuildingStatisticsMenu::update() {
 	unproductive_label_.set_visible(false);
 	unproductive_percent_.set_visible(false);
 	unproductive_label2_.set_visible(false);
+	no_unproductive_label_.set_visible(false);
 	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
 	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
@@ -640,6 +641,9 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
+		productivity_labels_[id]->set_text(" ");
+		productivity_labels_[id]->set_visible(false);
+
 		if (building.type() == MapObjectType::PRODUCTIONSITE ||
 		    building.type() == MapObjectType::TRAININGSITE) {
 			if (nr_owned) {
@@ -673,6 +677,7 @@ void BuildingStatisticsMenu::update() {
 				unproductive_label_.set_visible(true);
 				unproductive_percent_.set_visible(true);
 				unproductive_label2_.set_visible(true);
+				no_unproductive_label_.set_visible(true);
 			}
 		} else if (building.type() == MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
@@ -701,10 +706,8 @@ void BuildingStatisticsMenu::update() {
 				unproductive_label_.set_text(_("Lacking Soldiers:"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
+				no_unproductive_label_.set_visible(true);
 			}
-		} else {
-			productivity_labels_[id]->set_text(" ");
-			productivity_labels_[id]->set_visible(false);
 		}
 
 		std::string owned_text = "";
