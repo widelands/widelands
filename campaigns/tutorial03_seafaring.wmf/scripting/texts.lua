@@ -161,8 +161,7 @@ expedition3 = {
    title = _"Off to greener pastures",
    body = rt(
       h1(_"Start your expedition") ..
-      p(_[[Your expedition should be ready about now. If not, please wait a bit – you will receive a message.]]) ..
-		p(_[[Your ship will be waiting for your orders in front of your port. It won’t be transporting wares anymore. Use its buttons to send your ship in any of the six main directions of the Widelands map. When it has reached a coastline, you can make it travel around the coast, where it will look for suitable places for landing.]] .. " " ..
+		p(_[[Your expedition ship is ready. It is waiting for your orders in front of your port. It isn’t transporting wares anymore. Use its buttons to send your ship in any of the six main directions of the Widelands map. When it has reached a coastline, you can make it travel around the coast, where it will look for suitable places for landing.]] .. " " ..
 		_[[Once a port space has been found, you can construct a new port with the button in the center of the ship’s control window.]]) ..
       p(_[[The wares will then be unloaded, and the ship will take up the task of transporting wares once again. The builder will start his work and build a port.]]) ..
       paragraphdivider() ..
