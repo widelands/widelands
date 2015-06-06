@@ -3,7 +3,7 @@
 -- ================
 
 function intro()
-   sleep(200)
+   sleep(1000)
    message_box_objective(plr, introduction)
 
    training()

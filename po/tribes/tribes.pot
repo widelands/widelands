@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-05-02 09:49+0000\n"
+"POT-Creation-Date: 2015-05-21 07:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -138,6 +138,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
 msgid ""
 "Lore"
 msgstr ""
@@ -300,17 +301,21 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
 msgid ""
 "Experience levels:"
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
 msgid ""
 "%s to %s (%s EP)"
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
 msgid ""
 "Worker uses:"
 msgid_plural ""

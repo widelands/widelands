@@ -207,7 +207,7 @@ private:
 
 	// Handle the given pressed key. Returns true when key was
 	// handled.
-	bool handle_key(const SDL_Keycode& keycode, int modifiers);
+	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
 
 	/**
 	 * The commandline, conveniently repackaged.
