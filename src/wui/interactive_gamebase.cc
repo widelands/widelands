@@ -93,6 +93,13 @@ void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 	m_chatenabled = true;
 }
 
+void InteractiveGameBase::delete_chat_provider() {
+	m_chatProvider = nullptr;
+	m_chatOverlay->delete_chat_provider();
+
+	m_chatenabled = false;
+}
+
 ChatProvider * InteractiveGameBase::get_chat_provider()
 {
 	return m_chatProvider;
