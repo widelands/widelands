@@ -342,7 +342,6 @@ void FullscreenMenuMapSelect::fill_table()
 	} else {
 		table_.fill(maps_data, MapTable::Type::kMapnamesLocalized);
 	}
-	set_has_selection();
 }
 
 /*

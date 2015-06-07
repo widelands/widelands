@@ -120,7 +120,7 @@ function dependencies_resi(tribename, resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
+	local string = "image=tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end

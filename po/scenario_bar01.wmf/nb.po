@@ -1,37 +1,37 @@
-# Norwegian Bokmal translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Bjørnar Moen Marthinsen <thebmm@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-12-04 20:37+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-05-12 18:01+0000\n"
+"PO-Revision-Date: 2015-05-16 02:53+0000\n"
+"Last-Translator: Bjørnar Moen Marthinsen <thebmm@gmail.com>\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:35+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Bygg to skogvokterhytter"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Bygg en skogvokterhytte ved siden av begge tømmerhuggerne"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Trær vokser naturligvis sakte. Bygg skogvokterhytter for å forsikre deg om at du har nok tømmer. "
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -39,7 +39,7 @@ msgstr "Utvid nord-øst og bygg et steinbrudd"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Utvid nord-øst til steinene"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Kom deg til steinene nord-øst for deg og bygg et steinbrudd der."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -61,16 +61,16 @@ msgstr "Bygg kull- og jernmalmgruver"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron ore mine."
-msgstr ""
+msgstr "Bygg en kullgruve og en jerngruve."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
 "To do so, place a flag up on the mountain’s flank to the east (on mountain "
 "terrain though, not mountain meadow). When you click on the new flag, you "
-"can send geologists there. Because the flag is on a mountain, the geologists "
-"will search for ores; otherwise, they would search for water. Then build a "
-"mine for both kinds of resources that he will find, choosing the appropriate "
-"mine to be built:"
+"can send geologists there. Because the flag is on a mountain, the geologists"
+" will search for ores; otherwise, they would search for water. Then build a "
+"mine for both kinds of resources that he will find, choosing the appropriate"
+" mine to be built:"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
@@ -170,8 +170,8 @@ msgstr "Bygg et smelteverk"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:85
 msgid ""
-"The iron ore your miners dig up is not usable yet – it has to be melted into "
-"iron first."
+"The iron ore your miners dig up is not usable yet – it has to be melted into"
+" iron first."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
@@ -204,15 +204,15 @@ msgstr ""
 msgid ""
 "Workers gain experience by successful work. With enough experience, they "
 "become more advanced workers, who are necessary to operate the enhanced "
-"buildings. Do not enhance a building before you have enough advanced workers "
-"to operate the advanced building!"
+"buildings. Do not enhance a building before you have enough advanced workers"
+" to operate the advanced building!"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
 "Such buildings usually have greater demands than the basic kind of that "
-"building – for instance, deep mines need snacks instead of rations. You will "
-"have to enhance your tavern to an inn in order to produce snacks out of "
+"building – for instance, deep mines need snacks instead of rations. You will"
+" have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
 msgstr ""
 
@@ -328,39 +328,32 @@ msgstr "Thron sukker…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:158
 msgid ""
-"It’s been months, and we are still hiding where the forests are old and dark."
-msgstr ""
-"Det har gått måneder, og vi skjuler oss fortsatt her hvor skogene er gamle "
-"og mørke."
+"It’s been months, and we are still hiding where the forests are old and "
+"dark."
+msgstr "Det har gått måneder, og vi skjuler oss fortsatt her hvor skogene er gamle og mørke."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:160
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
-"Krigerne mine jakter om dagen og ligger våkne om natten – lyttende til "
-"ekkoene av den grusomme nedslaktingen langt borte fra mellom de eldgamle "
-"trærne."
+msgstr "Krigerne mine jakter om dagen og ligger våkne om natten – lyttende til ekkoene av den grusomme nedslaktingen langt borte fra mellom de eldgamle trærne."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:168
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
-"Vi kan se de herjende flammene som svelger Al'thunran herfra, milevis unna."
+msgstr "Vi kan se de herjende flammene som svelger Al'thunran herfra, milevis unna."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:170
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
-"De røde lysene flakker i mørket og danser til rytmene fra krigstrommene som "
-"hjemsøker meg selv i marerittene."
+msgstr "De røde lysene flakker i mørket og danser til rytmene fra krigstrommene som hjemsøker meg selv i marerittene."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:180
 msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
-"senseless spilling of blood that had arisen amongst us. It pains me that his "
-"peace only endured for one generation."
+"senseless spilling of blood that had arisen amongst us. It pains me that his"
+" peace only endured for one generation."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:182
@@ -369,10 +362,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
-"Boldreth, min trofaste kompanjong og venn er en god støtte å ha i disse "
-"mørke tider. Han holder motet mitt oppe og soldatene mine årvåkne slik at "
-"ikke grådighet eller desperasjon ødelegger båndene mellom oss også."
+msgstr "Boldreth, min trofaste kompanjong og venn er en god støtte å ha i disse mørke tider. Han holder motet mitt oppe og soldatene mine årvåkne slik at ikke grådighet eller desperasjon ødelegger båndene mellom oss også."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:191
 msgid ""
@@ -393,11 +383,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:200
 msgid ""
-"The stories they tell about the deeds of our kin are sad to hear. I’ve spent "
-"nights lying awake, restless, more tired than I ever believed one could be. "
-"Yet whenever I close my eyes, I see the fortress my father built consumed by "
-"flames. The Throne Among the Trees, the symbol of unity and peace among our "
-"kin, became the wedge that drives us apart."
+"The stories they tell about the deeds of our kin are sad to hear. I’ve spent"
+" nights lying awake, restless, more tired than I ever believed one could be."
+" Yet whenever I close my eyes, I see the fortress my father built consumed "
+"by flames. The Throne Among the Trees, the symbol of unity and peace among "
+"our kin, became the wedge that drives us apart."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:208
@@ -406,8 +396,8 @@ msgid ""
 "hidden out in the forests, trying to escape the war, hate and revenge that "
 "rage among the tribes fighting each other like in olden times, when we were "
 "no more but wild beasts driven and controlled by instincts. None of my "
-"brothers will ever gain and hold control over the wooden throne, none of the "
-"tribes will be strong enough to subdue the other. There will be no end to "
+"brothers will ever gain and hold control over the wooden throne, none of the"
+" tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
 msgstr ""
 
@@ -428,8 +418,8 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:219
 msgid ""
-"Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps "
-"it’s time to give those who still live and think united a new home, "
+"Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps"
+" it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
 msgstr ""
@@ -446,9 +436,7 @@ msgstr ""
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
-"Vær hilset, høvding. Jeg er Khantrukh og har sett mange vintre. Tillat meg å "
-"bistå deg med mine råd i disse mørke tider."
+msgstr "Vær hilset, høvding. Jeg er Khantrukh og har sett mange vintre. Tillat meg å bistå deg med mine råd i disse mørke tider."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:228
 msgid ""
@@ -485,10 +473,7 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr ""
-"Men vi må aldri glemme, at disse skogene er vår arv, som vi har blitt "
-"tiltrodd av våre forfedre. Vi må alltid respektere og ta vare på dem. Det vi "
-"tar, må vi også gi tilbake."
+msgstr "Men vi må aldri glemme, at disse skogene er vår arv, som vi har blitt tiltrodd av våre forfedre. Vi må alltid respektere og ta vare på dem. Det vi tar, må vi også gi tilbake."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:239
 msgid ""
@@ -508,8 +493,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:247
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
-"north. The fires are still burning, satisfying their hunger upon my father’s "
-"legacy."
+"north. The fires are still burning, satisfying their hunger upon my father’s"
+" legacy."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:249
@@ -545,16 +530,16 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:271
 msgid ""
-"Some time ago, Boldreth came to me. His advice was to move to a place closer "
-"to home – to strike at the first sign of my brothers’ forces wavering."
+"Some time ago, Boldreth came to me. His advice was to move to a place closer"
+" to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:273
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
-"sky. I know – it is too early yet, and what he hopes for will not happen any "
-"time soon. He might still be right, but I fear the bloodshed that returning "
-"too fast would cause on both sides…"
+"sky. I know – it is too early yet, and what he hopes for will not happen any"
+" time soon. He might still be right, but I fear the bloodshed that returning"
+" too fast would cause on both sides…"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
@@ -574,9 +559,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:282
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr ""
-"Jeg fornyer herved eden min – Jeg vil stoppe denne galskapen, koste hva det "
-"koste vil!"
+msgstr "Jeg fornyer herved eden min – Jeg vil stoppe denne galskapen, koste hva det koste vil!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:287
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:300
@@ -596,10 +579,10 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:289
 msgid ""
-"So you want to prepare us for a longer stay in these forests, Thron? Well, I "
-"see the wisdom in doing so, yet my heart is yearning for a glorious return "
-"to Al’thunran. Too long have we waited while our brethren have fought on the "
-"battlefield, and our axes and swords have turned rusty over time."
+"So you want to prepare us for a longer stay in these forests, Thron? Well, I"
+" see the wisdom in doing so, yet my heart is yearning for a glorious return "
+"to Al’thunran. Too long have we waited while our brethren have fought on the"
+" battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
@@ -619,10 +602,10 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:303
 msgid ""
-"While it is certainly no worthy task for a warrior, at least it is something "
-"to do! Thron, what would you say about my taking a few of our most restless "
-"warriors and venturing somewhat closer to the great mountain of Kal’mavrath "
-"– maybe we will find some more big rocks to please the old man?"
+"While it is certainly no worthy task for a warrior, at least it is something"
+" to do! Thron, what would you say about my taking a few of our most restless"
+" warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
+" – maybe we will find some more big rocks to please the old man?"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:310
@@ -678,10 +661,10 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:340
 msgid ""
-"While this is true, we should consider it later, for now other obstacles are "
-"at hand. The miners will definitely demand greater rations for working high "
-"up on the mountain in this bitter cold, and providing these supplies may not "
-"be easy."
+"While this is true, we should consider it later, for now other obstacles are"
+" at hand. The miners will definitely demand greater rations for working high"
+" up on the mountain in this bitter cold, and providing these supplies may "
+"not be easy."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:346
@@ -797,8 +780,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:403
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
-"warriors into some crumbling huts, and even less so in times as dangerous as "
-"ours!"
+"warriors into some crumbling huts, and even less so in times as dangerous as"
+" ours!"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:405
@@ -856,8 +839,8 @@ msgstr "Vi trenger okser!"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:436
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
-"overwhelming. Our poor carriers are no longer able to transport the goods as "
-"fast as we need them to. I suggest we give them some support by breeding "
+"overwhelming. Our poor carriers are no longer able to transport the goods as"
+" fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
 msgstr ""
 
@@ -886,9 +869,9 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:447
 msgid ""
-"When I looked around, I saw faithful faces, trusting that I could guide them "
-"through these dark days. Yet before I could speak any words of gratitude or "
-"encouragement, one of my warriors ran into the inn. He had been far out in "
+"When I looked around, I saw faithful faces, trusting that I could guide them"
+" through these dark days. Yet before I could speak any words of gratitude or"
+" encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
 msgstr ""
 
@@ -904,9 +887,7 @@ msgstr "Seier"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
-"Du har fullført dette oppdraget. Du kan fortsette å spille hvis du vil, "
-"eller gå videre til neste oppdrag."
+msgstr "Du har fullført dette oppdraget. Du kan fortsette å spille hvis du vil, eller gå videre til neste oppdrag."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "One Full Moon Night"
@@ -921,8 +902,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:459
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
-"distance. It is incredible with how much passion my brethren fight this war. "
-"I fear the moment I will see Al’thunran again – will there be anything but "
+"distance. It is incredible with how much passion my brethren fight this war."
+" I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
 
@@ -959,9 +940,7 @@ msgstr "En vennligsinnet landsby har sluttet seg til oss!"
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
-"Vi har funnet en landsby med vennlige og arbeidsomme folk, som ble imponert "
-"over våre ressurser, teknologi og styrke."
+msgstr "Vi har funnet en landsby med vennlige og arbeidsomme folk, som ble imponert over våre ressurser, teknologi og styrke."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:477
 msgid ""

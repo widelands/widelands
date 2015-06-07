@@ -111,8 +111,15 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 m_right_column_tab, m_label_players.get_y(),
 					 get_right_column_w(m_right_column_tab), m_label_height),
 
+	m_label_version
+		(this, right_column_x_, get_y_from_preceding(m_ta_players),
+		 "",
+		 UI::Align_Left),
+	m_ta_version(this,
+					 m_right_column_tab, m_label_version.get_y(), "", UI::Align_Left),
+
 	m_label_win_condition
-		(this, right_column_x_, get_y_from_preceding(m_ta_players) + 3 * padding_,
+		(this, right_column_x_, get_y_from_preceding(m_ta_version) + 3 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_win_condition(this,
@@ -148,6 +155,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
+	m_ta_version.set_tooltip(_("The version of Widelands that this game was played under"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 
 	if (m_is_replay) {
@@ -296,11 +304,13 @@ bool FullscreenMenuLoadGame::set_has_selection()
 		m_label_mapname .set_text(std::string());
 		m_label_gametime.set_text(std::string());
 		m_label_players.set_text(std::string());
+		m_label_version.set_text(std::string());
 		m_label_win_condition.set_text(std::string());
 
 		m_ta_mapname .set_text(std::string());
 		m_ta_gametime.set_text(std::string());
 		m_ta_players.set_text(std::string());
+		m_ta_version.set_text(std::string());
 		m_ta_win_condition.set_text(std::string());
 		m_minimap_icon.set_icon(nullptr);
 		m_minimap_icon.set_visible(false);
@@ -334,6 +344,14 @@ void FullscreenMenuLoadGame::entry_selected()
 			} else {
 				m_label_players.set_text("");
 				m_ta_players.set_text("");
+			}
+
+			if (gamedata.version.empty()) {
+				m_label_version.set_text("");
+				m_ta_version.set_text("");
+			} else {
+				m_label_version.set_text(_("Widelands Version:"));
+				m_ta_version.set_text(gamedata.version);
 			}
 
 			m_ta_win_condition.set_text(gamedata.wincondition);
@@ -389,6 +407,8 @@ void FullscreenMenuLoadGame::entry_selected()
 			m_ta_gametime.set_text("");
 			m_label_players.set_text("");
 			m_ta_players.set_text("");
+			m_label_version.set_text("");
+			m_ta_version.set_text("");
 			m_label_win_condition.set_text("");
 			m_ta_win_condition.set_text("");
 
@@ -472,6 +492,7 @@ void FullscreenMenuLoadGame::fill_table() {
 				gamedata->mapname = gpdp.get_mapname();
 				gamedata->gametime = gpdp.get_gametime();
 				gamedata->nrplayers = gpdp.get_number_of_players();
+				gamedata->version = gpdp.get_version();
 
 				gamedata->savetimestamp = gpdp.get_savetimestamp();
 				time_t t;
@@ -600,7 +621,6 @@ void FullscreenMenuLoadGame::fill_table() {
 	if (m_table.size()) {
 		m_table.select(0);
 	}
-	set_has_selection();
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code)

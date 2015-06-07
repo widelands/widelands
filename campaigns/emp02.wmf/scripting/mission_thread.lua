@@ -5,7 +5,7 @@
 include "scripting/messages.lua"
 
 function building_materials()
-   sleep(200)
+   sleep(1000)
    campaign_message_box(diary_page_5)
 
    local map = wl.Game().map
