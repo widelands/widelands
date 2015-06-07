@@ -1688,6 +1688,7 @@ const PropertyType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Pro
 	{nullptr, nullptr, nullptr},
 };
 
+
 /* RST
 ProductionSiteDescription
 -------------------------
@@ -2476,34 +2477,30 @@ int LuaMapObject::get_serial(lua_State * L) {
 /* RST
     .. attribute:: descr
 
-        (RO) The description object for this immovable, e.g. BuildingDescription.
+		  (RO) The description object for this immovable, e.g. BuildingDescription.
 */
 int LuaMapObject::get_descr(lua_State * L) {
 	const MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 
-	if (is_a(MilitarySiteDescr, desc)) {
-		return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
+	switch (desc->type()) {
+		case (MapObjectType::BUILDING):
+			return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
+		case (MapObjectType::CONSTRUCTIONSITE):
+			return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
+		case (MapObjectType::DISMANTLESITE):
+			return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
+		case (MapObjectType::PRODUCTIONSITE):
+			return CAST_TO_LUA(ProductionSiteDescr, LuaProductionSiteDescription);
+		case (MapObjectType::MILITARYSITE):
+			return CAST_TO_LUA(MilitarySiteDescr, LuaMilitarySiteDescription);
+		case (MapObjectType::TRAININGSITE):
+			return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
+		case (MapObjectType::WAREHOUSE):
+			return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
+		default:
+			return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
-	else if (is_a(TrainingSiteDescr, desc)) {
-		return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
-	}
-	else if (is_a(ProductionSiteDescr, desc)) {
-		return CAST_TO_LUA(ProductionSiteDescr, LuaProductionSiteDescription);
-	}
-	else if (is_a(WarehouseDescr, desc)) {
-		return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
-	}
-	else if (is_a(ConstructionSiteDescr, desc)) {
-		return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
-	}
-	else if (is_a(DismantleSiteDescr, desc)) {
-		return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
-	}
-	else if (is_a(BuildingDescr, desc)) {
-		return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
-	}
-	return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 }
 
 #undef CAST_TO_LUA

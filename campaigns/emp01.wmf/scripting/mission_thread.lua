@@ -1,10 +1,10 @@
 include "scripting/messages.lua"
 
 function mission_thread()
-   sleep(100) -- This is needed for yet unknown reasons
+   sleep(1000)
 
    -- Initial messages
-   local sea = wl.Game().map:get_field(47,25)
+   local sea = wl.Game().map:get_field(50,25)
    scroll_smoothly_to(sea,0)
 
    campaign_message_box(diary_page_1)
@@ -12,15 +12,17 @@ function mission_thread()
 
    -- Show the sea
    p1:reveal_fields(sea:region(6))
+   local ship = p1:place_bob("ship",sea)
    sleep(200)
    campaign_message_box(diary_page_2)
    -- Hide the sea after 5 seconds
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
 
    -- Back home
+   include "map:scripting/starting_conditions.lua"
    scroll_smoothly_to(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
-
+   ship:remove()
 
    sleep(400)
 

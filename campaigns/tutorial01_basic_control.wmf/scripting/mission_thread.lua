@@ -6,7 +6,7 @@ function starting_infos()
    map:place_immovable("debris00",second_quarry_field)
    -- so that the player cannot build anything here
 
-   sleep(100)
+   sleep(1000)
 
    message_box_objective(plr, initial_message_01)
    sleep(500)
@@ -56,7 +56,7 @@ function build_lumberjack()
    end
    sleep(500)
 
-   click_on_field(map.player_slots[1].starting_field.brn)
+   click_on_field(sf.brn)
 
    message_box_objective(plr, lumberjack_message_04)
 
@@ -206,7 +206,7 @@ function build_a_quarry()
    -- Showoff direct roadbuilding
    click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
-   click_on_field(map.player_slots[1].starting_field.brn)
+   click_on_field(sf.brn)
 
    sleep(3000)
 
@@ -224,21 +224,20 @@ function build_a_quarry()
       else return false end
    end
 
-   -- Give the player some time to build the road
-   -- It is not possible to check for the road. See https://bugs.launchpad.net/widelands/+bug/1380286
+   -- Wait till the construction site is connected to the headquarters
    sleep(20*1000)
+   while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+      message_box_objective(plr,quarry_not_connected)
+      sleep(60*1000)
+      if not first_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+   end
 
    second_quarry()
-
-   -- Wait a while
-   sleep(60*1000)
-   -- When the said bug is fixed, check every 30 seconds if the second quarry is connected. Inform the player if not.
-   -- When that is finally done (and 30 seconds have passed), go on
 
    -- Interludium: talk about census and statistics
    census_and_statistics()
 
-   while #plr:get_buildings("barbarians_quarry") < 1 do sleep(1400) end
+   while #plr:get_buildings("barbarians_quarry") < 2 do sleep(1400) end
    o.done = true
 
    messages()
@@ -264,6 +263,13 @@ function second_quarry()
 
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
+
+   sleep(60*1000)
+   while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+      message_box_objective(plr,quarry_not_connected)
+      sleep(60*1000)
+      if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+   end
 
    o.done = true
    register_immovable_as_allowed(cs)

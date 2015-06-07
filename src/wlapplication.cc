@@ -501,46 +501,48 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	return true;
 }
 
-bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
-	const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
-	switch (keycode) {
-	case SDLK_F10:
-		// exits the game.
-		if (ctrl) {
-			m_should_die = true;
-		}
-		return true;
-
-	case SDLK_F11:
-		// Takes a screenshot.
-		if (ctrl) {
-			if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-				log("Omitting screenshot because diskspace is lower than %luMB\n",
-				    MINIMUM_DISK_SPACE / (1000 * 1000));
-				break;
+bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifiers) {
+	if (down) {
+		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
+		switch (keycode) {
+		case SDLK_F10:
+			// exits the game.
+			if (ctrl) {
+				m_should_die = true;
 			}
-			g_fs->ensure_directory_exists(SCREENSHOT_DIR);
-			for (uint32_t nr = 0; nr < 10000; ++nr) {
-				const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
-				if (g_fs->file_exists(filename)) {
-					continue;
+			return true;
+
+		case SDLK_F11:
+			// Takes a screenshot.
+			if (ctrl) {
+				if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+					log("Omitting screenshot because diskspace is lower than %luMB\n",
+						 MINIMUM_DISK_SPACE / (1000 * 1000));
+					break;
 				}
-				g_gr->screenshot(filename);
-				break;
+				g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+				for (uint32_t nr = 0; nr < 10000; ++nr) {
+					const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+					if (g_fs->file_exists(filename)) {
+						continue;
+					}
+					g_gr->screenshot(filename);
+					break;
+				}
 			}
+			return true;
+
+		case SDLK_f: {
+			// toggle fullscreen
+			bool value = !g_gr->fullscreen();
+			g_gr->set_fullscreen(value);
+			g_options.pull_section("global").set_bool("fullscreen", value);
+			return true;
 		}
-		return true;
 
-	case SDLK_f: {
-		// toggle fullscreen
-		bool value = !g_gr->fullscreen();
-		g_gr->set_fullscreen(value);
-		g_options.pull_section("global").set_bool("fullscreen", value);
-		return true;
-	}
-
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 	return false;
 }
@@ -557,7 +559,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			if (!handled) {
-				handle_key(ev.key.keysym.sym, ev.key.keysym.mod);
+				handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 			}
 		} break;
 

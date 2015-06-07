@@ -3,7 +3,7 @@
 -- ===============
 
 function introduction()
-   sleep(500)
+   sleep(1000)
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
 

@@ -20,7 +20,7 @@ tribes:new_ware_type{
    animations = {
       idle = {
          pictures = { dirname .. "idle.png" },
-         hotspot = { 5, 11 },
+         hotspot = { 6, 6 },
       },
    }
 }

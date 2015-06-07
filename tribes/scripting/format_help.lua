@@ -121,7 +121,7 @@ function dependencies_resi(resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/immovables/" .. resource  .. "/idle_00.png"
+	local string = "image=tribes/immovables/" .. resource  .. "/idle_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
