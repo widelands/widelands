@@ -4358,7 +4358,7 @@ int LuaField::set_resource(lua_State * L) {
 	int32_t res = get_egbase(L).world().get_resource
 		(luaL_checkstring(L, -1));
 
-	if (res == -1)
+	if (res == Widelands::INVALID_INDEX)
 		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
 
 	field->set_resources(res, field->get_resources_amount());

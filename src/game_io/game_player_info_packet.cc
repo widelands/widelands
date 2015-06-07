@@ -30,6 +30,7 @@
 
 namespace Widelands {
 
+// NOCOM(GunChleoc): Increase packet version when we're done.
 #define CURRENT_PACKET_VERSION 15
 
 

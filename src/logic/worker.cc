@@ -113,7 +113,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
+	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
 			(_
 				("should mine resource %s, which does not exist in world; tribe "
@@ -218,7 +218,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
+	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
 			(_
 				("should breed resource type %s, which does not exist in world; "
@@ -815,8 +815,8 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
 
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
-		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
-			ImmovableDescr& immovable_descr = immovables.get_unmutable(i);
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			ImmovableDescr& immovable_descr = immovables.get(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}

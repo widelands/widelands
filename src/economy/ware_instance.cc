@@ -228,7 +228,6 @@ void WareInstance::cleanup(EditorGameBase & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	// NOCOM(GunCleoc): Double check for now, because we sometimes have -1, sometimes INVALID_INDEX
 	if (m_descr_index == INVALID_INDEX || m_economy == e)
 		return;
 

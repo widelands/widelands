@@ -228,7 +228,7 @@ void WorkerProgram::parse_setbobdescription
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject
-	(WorkerDescr* worker,
+	(WorkerDescr*,
 	 Worker::Action* act,
 	 Parser*,
 	 const Tribes&,

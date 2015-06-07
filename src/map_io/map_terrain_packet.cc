@@ -94,7 +94,7 @@ void MapTerrainPacket::write
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
 	const World & world = egbase.world();
-	TerrainIndex const nr_terrains = world.terrains().get_nitems();
+	TerrainIndex const nr_terrains = world.terrains().size();
 	fw.unsigned_16(nr_terrains);
 
 	std::map<const char * const, TerrainIndex> smap;

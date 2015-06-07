@@ -250,11 +250,11 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable&
 
 	int editor_category_index =
 			world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index < 0) {
+	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError("Unknown editor_category: %s\n",
 							  table.get_string("editor_category").c_str());
 	}
-	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
+	editor_category_ = world.editor_immovable_categories().get_mutable(editor_category_index);
 }
 
 /**
@@ -721,7 +721,7 @@ MapObject::Loader * Immovable::load
 				const World & world = egbase.world();
 				const std::string new_name = lookup_table.lookup_immovable(old_name);
 				WareIndex const idx = world.get_immovable_index(new_name.c_str());
-				if (idx == -1)
+				if (idx == Widelands::INVALID_INDEX)
 					throw wexception
 						("world does not define immovable type \"%s\"", new_name.c_str());
 

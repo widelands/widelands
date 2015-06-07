@@ -134,12 +134,12 @@ ResourceIndex World::safe_resource_index(const char* const resourcename) const {
 }
 
 TerrainDescription& World::terrain_descr(TerrainIndex const i) const {
-	return *terrains_->get(i);
+	return *terrains_->get_mutable(i);
 }
 
 TerrainDescription const* World::get_ter(char const* const name) const {
 	int32_t const i = terrains_->get_index(name);
-	return i != INVALID_INDEX ? terrains_->get(i) : nullptr;
+	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
 
 int32_t World::get_bob(char const* const l) const {
@@ -147,7 +147,7 @@ int32_t World::get_bob(char const* const l) const {
 }
 
 BobDescr const* World::get_bob_descr(uint16_t const index) const {
-	return bobs_->get(index);
+	return bobs_->get_mutable(index);
 }
 
 BobDescr const* World::get_bob_descr(const std::string& name) const {
@@ -155,7 +155,7 @@ BobDescr const* World::get_bob_descr(const std::string& name) const {
 }
 
 int32_t World::get_nr_bobs() const {
-	return bobs_->get_nitems();
+	return bobs_->size();
 }
 
 WareIndex World::get_immovable_index(const std::string& name) const {
@@ -163,11 +163,11 @@ WareIndex World::get_immovable_index(const std::string& name) const {
 }
 
 WareIndex World::get_nr_immovables() const {
-	return immovables_->get_nitems();
+	return immovables_->size();
 }
 
 ImmovableDescr const* World::get_immovable_descr(WareIndex const index) const {
-	return immovables_->get(index);
+	return immovables_->get_mutable(index);
 }
 
 ResourceIndex World::get_resource(const char* const name) const {
@@ -175,12 +175,12 @@ ResourceIndex World::get_resource(const char* const name) const {
 }
 
 ResourceDescription const* World::get_resource(ResourceIndex const res) const {
-	assert(res < resources_->get_nitems());
-	return resources_->get(res);
+	assert(res < resources_->size());
+	return resources_->get_mutable(res);
 }
 
 ResourceIndex World::get_nr_resources() const {
-	return resources_->get_nitems();
+	return resources_->size();
 }
 
 }  // namespace Widelands

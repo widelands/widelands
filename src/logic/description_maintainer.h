@@ -36,37 +36,30 @@ template <typename T> struct DescriptionMaintainer {
 	Widelands::WareIndex add(T* entry);
 
 	// Returns the number of entries in the container.
-	Widelands::WareIndex get_nitems() const {return items_.size();}
-	// TODO(sirver): Remove get_nitems().
-
 	Widelands::WareIndex size() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
 
-	// Returns the index of the entry with the given 'name' or -1 if the entry
+	// Returns the index of the entry with the given 'name' or INVALID_INDEX if the entry
 	// is not in the container.
 	Widelands::WareIndex get_index(const std::string& name) const {
 		NameToIndexMap::const_iterator i = name_to_index_.find(name);
-		if (i == name_to_index_.end())
+		if (i == name_to_index_.end()) {
 			return Widelands::INVALID_INDEX;
+		}
 		return i->second;
 	}
 
 	// Returns the entry with the given 'idx' or nullptr if 'idx' is out of
-	// bound. Ownership is retained.
-	// TODO(sirver): remove get() and use get_mutable
-	T* get(const Widelands::WareIndex idx) const {
-		return (idx < items_.size()) ? items_[idx].get() : nullptr;
-	}
+	// bounds. Ownership is retained.
 	T* get_mutable(const Widelands::WareIndex idx) const {
-		return get(idx);
+		return (idx < items_.size()) ? items_[idx].get() : nullptr;
 	}
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
 	// undefined.
-	// TODO(sirver): this should be called get and the other should be called get_mutable.
-	T& get_unmutable(const Widelands::WareIndex index) const {
+	T& get(const Widelands::WareIndex index) const {
 		assert(index < items_.size());
 		return *items_.at(index);
 	}

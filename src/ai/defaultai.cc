@@ -4787,12 +4787,12 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
-	log(" %1d: Buildings: Pr:%3lu, Ml:%3lu, Mi:%2lu, Wh:%2lu, Po:%2u. Missing: %s\n",
+	log(" %1d: Buildings: Pr:%3lu, Ml:%3lu, Mi:%2lu, Wh:%2lu, Po:%2lu. Missing: %s\n",
 	    pn,
-		 static_cast<unsigned int>(productionsites.size()),
-		 static_cast<unsigned int>(militarysites.size()),
-		 static_cast<unsigned int>(mines_.size()),
-		 static_cast<unsigned int>(warehousesites.size()) - num_ports,
-	    num_ports,
+		 static_cast<long unsigned int>(productionsites.size()),
+		 static_cast<long unsigned int>(militarysites.size()),
+		 static_cast<long unsigned int>(mines_.size()),
+		 static_cast<long unsigned int>(warehousesites.size()) - num_ports,
+		 static_cast<long unsigned int>(num_ports),
 	    summary.c_str());
 }

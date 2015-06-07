@@ -58,7 +58,7 @@ void MapResourcesPacket::read
 			uint8_t const id = fr.unsigned_16();
 			const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
 			int32_t const res = world.get_resource(resource_name.c_str());
-			if (res == -1)
+			if (res == Widelands::INVALID_INDEX)
 				throw GameDataError
 					("resource '%s' exists in map but not in world", resource_name.c_str());
 			smap[id] = res;

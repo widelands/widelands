@@ -557,7 +557,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 			if (!bobname.empty()) {
 				int32_t const idx = world.get_bob(bobname.c_str());
-				if (idx < 0) {
+				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
 				egbase.create_ship(Widelands::Coords(x, y), idx);
@@ -637,7 +637,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			int32_t nres = 0;
 			if (*res) {
 				nres = world.get_resource(res);
-				if (nres == -1)
+				if (nres == Widelands::INVALID_INDEX)
 					throw wexception
 						("world does not define resource type %s, you can not "
 						 "play settler maps here",
@@ -686,7 +686,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		Widelands::WareIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
-		if (idx < 0) {
+		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
 		egbase.create_immovable(location, idx, Widelands::MapObjectDescr::OwnerType::kWorld);

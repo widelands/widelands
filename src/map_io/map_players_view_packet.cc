@@ -287,7 +287,7 @@ TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& eg
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
 	char const* const name = fr->c_string();
 	WareIndex const index = world.get_immovable_index(name);
-	if (index == -1)
+	if (index == Widelands::INVALID_INDEX)
 		throw WorldImmovableNonexistent(name);
 	return *world.get_immovable_descr(index);
 }
