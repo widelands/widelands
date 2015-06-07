@@ -990,8 +990,7 @@ int LuaMap::place_immovable(lua_State * const L) {
 		}
 	} else {
 		WareIndex const imm_idx = egbase.world().get_immovable_index(objname);
-		// NOCOM(GunChleoc): comparison is always false due to limited range of data type
-		if (imm_idx < 0)
+		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown immovable <%s>", objname.c_str());
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);

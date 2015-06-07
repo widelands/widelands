@@ -171,11 +171,13 @@ void EncyclopediaWindow::fill_buildings() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<Building> building_vec;
 
-	// NOCOM(GunChleoc): add global military sites.
-	for (const BuildingIndex& i : tribe.buildings()) {
-		BuildingDescr const * building = tribe.get_building_descr(i);
-		Building b(i, building);
-		building_vec.push_back(b);
+	const Tribes& tribes = iaplayer().egbase().tribes();
+	for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+		const BuildingDescr* building = tribes.get_building_descr(i);
+		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
+			Building b(i, building);
+			building_vec.push_back(b);
+		}
 	}
 
 	std::sort(building_vec.begin(), building_vec.end());
@@ -190,7 +192,8 @@ void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(buildings_.get_selected());
 
-	assert(tribe.has_building(tribe.building_index(selected_building.name())));
+	assert(tribe.has_building(tribe.building_index(selected_building.name())) ||
+			 selected_building.type() == MapObjectType::MILITARYSITE);
 	try {
 		std::unique_ptr<LuaTable> t(
 				iaplayer().egbase().lua().run_script("tribes/scripting/format_help.lua"));
