@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-05-21 08:11+0100\n"
+"POT-Creation-Date: 2015-06-07 10:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -910,7 +910,7 @@ msgid "Loading map"
 msgstr ""
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1427
+#: ../../src/wlapplication.cc:1429
 msgid "Loading..."
 msgstr ""
 
@@ -1466,7 +1466,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/netclient.cc:195 ../../src/network/nethost.cc:838
-#: ../../src/wlapplication.cc:1317
+#: ../../src/wlapplication.cc:1319
 msgid "Preparing game"
 msgstr ""
 
@@ -3071,11 +3071,11 @@ msgstr ""
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1103
+#: ../../src/wlapplication.cc:1105
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1113
+#: ../../src/wlapplication.cc:1115
 #, c-format
 msgid ""
 "\n"
@@ -3085,7 +3085,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1120
+#: ../../src/wlapplication.cc:1122
 msgid ""
 "Please add this information to your report.\n"
 "\n"
