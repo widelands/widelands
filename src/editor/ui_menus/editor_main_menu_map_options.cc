@@ -112,7 +112,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
 	add_tag_checkbox(&tags_box_, "unbalanced", _("Unbalanced"));
-	add_tag_checkbox(&tags_box_, "seafaring", _("Seafaring"));
 	add_tag_checkbox(&tags_box_, "ffa", _("Free for all"));
 	add_tag_checkbox(&tags_box_, "1v1", _("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", _("Teams of 2"));

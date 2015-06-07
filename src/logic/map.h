@@ -200,6 +200,7 @@ public:
 	void set_hint       (const std::string& hint);
 	void set_background (const std::string& image_path);
 	void add_tag        (const std::string& tag);
+	void delete_tag     (const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
@@ -217,7 +218,7 @@ public:
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
 	void clear_tags() {m_tags.clear();}
-	bool has_tag(std::string & s) const {return m_tags.count(s);}
+	bool has_tag(const std::string& s) const {return m_tags.count(s);}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {return m_suggested_teams;}
 
@@ -384,10 +385,11 @@ public:
 	void set_origin(Coords);
 
 	/// Port space specific functions
-	bool is_port_space(const Coords& c);
+	bool is_port_space(const Coords& c) const;
 	void set_port_space(Coords c, bool allowed);
-	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
+	const PortSpacesSet& get_port_spaces() const {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	bool allows_seafaring() const;
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);

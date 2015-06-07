@@ -249,6 +249,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	   g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::MapSaver wms(*fs, eia().egbase());
 	try {
+
+		// Recompute seafaring tag
+		if (eia().egbase().map().allows_seafaring()) {
+			eia().egbase().map().add_tag("seafaring");
+		} else {
+			eia().egbase().map().delete_tag("seafaring");
+		}
+
 		wms.save();
 		eia().set_need_save(false);
 	} catch (const std::exception& e) {

@@ -580,6 +580,12 @@ void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
+void Map::delete_tag(const std::string& tag) {
+	if (has_tag(tag)) {
+		m_tags.erase(m_tags.find(tag));
+	}
+}
+
 NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
 	NodeCaps caps = _calc_nodecaps_pass1(world, fc, false);
 	caps = _calc_nodecaps_pass2(world, fc, false, caps);
@@ -1377,7 +1383,7 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 }
 
 /// \returns true, if Coordinates are in port space list
-bool Map::is_port_space(const Coords& c) {
+bool Map::is_port_space(const Coords& c) const {
 	return m_port_spaces.count(c);
 }
 
@@ -1388,6 +1394,10 @@ void Map::set_port_space(Coords c, bool allowed) {
 	} else {
 		m_port_spaces.erase(c);
 	}
+}
+
+bool Map::allows_seafaring() const {
+	return get_port_spaces().size() > 1;
 }
 
 

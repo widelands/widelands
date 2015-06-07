@@ -811,7 +811,7 @@ void ProductionProgram::ActCheckMap::execute(Game & game, ProductionSite & ps) c
 {
 	switch (m_feature) {
 		case SEAFARING: {
-			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
+			if (game.map().allows_seafaring())
 				return ps.program_step(game, 0);
 			else {
 				ps.set_production_result("No use for ships on this map!");
