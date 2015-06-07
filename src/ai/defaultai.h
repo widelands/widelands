@@ -203,7 +203,7 @@ private:
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);
 	void print_stats(uint32_t);
-	//return single number of strength of vector of soldiers
+	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
@@ -330,16 +330,16 @@ private:
 	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
 
-	//this is helping counter to track how many scheduler tasks are too delayed
+	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	//this is bunch of patterns that have to identify weapons and armors for input queues of traininsites
+	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =
 		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
-	//some buildings can be upgraded even when they are only one
-	//now only microbrewery get this special treatment
-	const char* preffered_upgrade[1] = {"micro-brewery"};
+	// some buildings can be upgraded even when they are only one
+	// now only microbrewery get this special treatment
+	const char* preferred_upgrade[1] = {"micro-brewery"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 

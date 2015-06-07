@@ -385,8 +385,8 @@ struct BuildingObserver {
 
 	bool upgrade_substitutes_;
 
-	//it seems that fish and meat are subsitutes (for trainingsites), so
-	// when testing ifa trainingsite is supplied enough
+	// It seems that fish and meat are subsitutes (for trainingsites), so
+	// when testing if a trainingsite is supplied enough
 	// we count the wares together
 	std::unordered_set<Widelands::WareIndex> substitute_inputs_;
 	int32_t substitutes_count_;
