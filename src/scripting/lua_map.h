@@ -26,6 +26,7 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "logic/game.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
@@ -204,21 +205,27 @@ public:
 	LuaConstructionSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
-	/*
-	 * Properties
-	 */
-
-	/*
-	 * Lua methods
-	 */
-
-	/*
-	 * C methods
-	 */
-
 private:
 	CASTED_GET_DESCRIPTION(ConstructionSiteDescr)
 };
+
+class LuaDismantleSiteDescription : public LuaBuildingDescription {
+public:
+	LUNA_CLASS_HEAD(LuaDismantleSiteDescription);
+
+	virtual ~LuaDismantleSiteDescription() {}
+
+	LuaDismantleSiteDescription() {}
+	LuaDismantleSiteDescription(const Widelands::DismantleSiteDescr* const dismantlesitedescr)
+		: LuaBuildingDescription(dismantlesitedescr) {
+	}
+	LuaDismantleSiteDescription(lua_State* L) : LuaBuildingDescription(L) {
+	}
+
+private:
+	CASTED_GET_DESCRIPTION(DismantleSiteDescr)
+};
+
 
 
 class LuaProductionSiteDescription : public LuaBuildingDescription {
