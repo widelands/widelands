@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_COLOR_H
 #define WL_GRAPHIC_COLOR_H
 
+#include <string>
+
 #include <SDL.h>
 
 struct RGBColor {
@@ -27,6 +29,9 @@ struct RGBColor {
 
 	// Initializes the color to black.
 	RGBColor();
+
+	// Returns this color in hex format.
+	std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
 	uint32_t map(const SDL_PixelFormat& fmt) const;
@@ -48,6 +53,9 @@ struct RGBAColor {
 
 	// Initializes to opaque color.
 	RGBAColor(const RGBColor& c);
+
+	// Returns this color in hex format.
+	std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
 	uint32_t map(const SDL_PixelFormat& fmt) const;

@@ -570,7 +570,7 @@ void Immovable::draw_construction
 		unsigned int percent = (100 * done / total);
 		m_construct_string =
 			(boost::format("<font color=%s>%s</font>")
-			 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
+			 % UI_FONT_CLR_DARK.hex_value() % (boost::format(_("%i%% built")) % percent).str())
 			 .str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48),
