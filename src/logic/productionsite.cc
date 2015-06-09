@@ -65,7 +65,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	{
 		m_out_of_resource_title = section->get_string("title", "");
 		m_out_of_resource_message = section->get_string("message", "");
-		out_of_resource_productivity_threshold_ = section->get_natural("productivity_threshold", 0);
+		out_of_resource_productivity_threshold_ = section->get_natural("productivity_threshold", 100);
 	}
 	else
 	{
@@ -920,7 +920,8 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
-	if ((m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
+	if (m_last_stat_percent == 0 ||
+		 (m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
 		  && trend_ == Trend::kFalling)) {
 		if (descr().out_of_resource_title().empty())
 		{
@@ -938,8 +939,8 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 				 true,
 				 minutes * 60000, 0);
 		}
-		// following sends "out of resources" messages to be picked up by AI
-		// used as a information for dismantling and upgrading mines
+		// The following sends "out of resources" messages to be picked up by AI
+		// used as information for dismantling and upgrading mines
 		if (descr().get_ismine())
 			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
 	}
