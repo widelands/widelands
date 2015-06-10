@@ -53,27 +53,74 @@ building_stat = {
    title = _"Building statistics",
    body = rt(
       h1(_[[Check out your taverns]]) ..
-      p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a list where you can easily check this.]])
+      p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a window where you can easily check this.]])
    ) ..
    rt("image=pics/menu_toggle_menu.png",p(_[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]])) ..
    rt("image=pics/menu_building_stats.png",p(_[[Afterwards, choose the ‘Building statistics’.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Open the building statistics window.]]) ..
-      listitem_bullet(_[[When you have looked up the number of taverns, close it.]])
+      listitem_arrow(_[[You can also use the hotkey ‘b’.]])
    ),
    h = 350,
    obj_name = "open_building_stat",
-   obj_title = _"Look up your number of taverns in the building statistics window.",
+   obj_title = _"Open the building statistics window.",
    obj_body =
       rt("image=pics/menu_building_stats.png", p(_[[The building statistics window gives you an overview over the buildings you have.]])) ..
    rt(
       paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the building statistics window
       listitem_bullet(_[[Open it. You can access it from the statistics menu.]]) ..
-      listitem_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several windows that give you information about the game.]]) ..
-      listitem_bullet(_[[Look up how many taverns you have (in the column ‘Owned’)]]) ..
+      listitem_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several windows that give you information about the game.]])
+   )
+}
+
+explain_building_stat = {
+   title = "Building statistics",
+   body = rt(
+      p(_[[This is the building statistics window. It shows you all buildings you can own, sorted by their size.]]) ..
+      p(_[[Let me now explain what all those numbers mean:]]) ..
+      paragraphdivider() ..
+      listitem_bullet(_[[‘2/1’ below the quarry: This means that you have two quarries, plus another one which is under construction.]]) ..
+      listitem_bullet(_[[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has worked yet, but they are going to start working soon.]]) ..
+      listitem_bullet(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions—we really need more soldiers.]]) ..
+      listitem_arrow(_[[In both cases, the color (green - yellow - red) signals you how good the value is.]]) ..
+      listitem_bullet(_[[If you click on a building, you have the possibility to scroll through the buildings of the selected type.]]) ..
+      listitem_bullet(_[[Buildings you are currently not possessing are shown greyed out.]])
+   ) ..
+   rt(
+      h2(_[[Now it’s your turn]]) ..
+      p(_[[Enough of the explanation. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
+   ),
+   obj_name = "check_taverns",
+   obj_title = _"Look up your number of taverns in the building statistics window.",
+   obj_body = rt(
+      listitem_bullet(_[[Choose the ‘Medium Buildings’ tab in the building statistics window.]]) ..
+      listitem_bullet(_[[Look up how many taverns you have.]]) ..
+      listitem_arrow(_[[Below every building, there are two lines. The first one shows the number of buildings you own and how many are under construction. The second line shows the average productivity if it is a civil building, or the stationed and desired soldiers in military buildings.]]) ..
       listitem_bullet(_[[Close the building statistics window when you are done.]])
    )
+}
+
+reopen_building_stat = {
+   title = _"You closed the building statistics window!",
+   body = rt(
+      p(_[[You have closed the building statistics window. I didn’t notice that you switched to the medium buildings to look up the number of taverns. Would you please be so nice and show it to me?]])
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
+}
+
+reopen_building_stat_obj = {
+   obj_name = "open_building_stat_again",
+   obj_title = _"Open the building statistics window again.",
+   obj_body = rt(
+      p(_[[You closed the building statistics window, although you have not yet looked up the number of taverns.]]) ..
+      paragraphdivider() ..
+      -- TRANSLATORS: "it" refers to the building statistics window.
+      listitem_bullet(_[[Please reopen it and choose the second tab (medium buildings).]])
+   ),
+   h = 250
 }
 
 inventory1 = {
