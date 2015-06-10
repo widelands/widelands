@@ -97,7 +97,6 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
-		// NOCOM(GunChleoc): Do we need all workers for all tribes here?
 		for (const WareIndex& worker_index : tribe.workers()) {
 			if (!player->is_worker_type_allowed(worker_index)) {
 				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);

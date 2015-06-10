@@ -61,6 +61,7 @@ TribeDescr::TribeDescr
 	// Automatic resizing of warehouse window for small screens is broken.
 	// Carrier walk_load animation is empty
 	// Trident of Fire MP scenario crashes on load.
+	// Double-check statistics
 
 	try {
 		m_initializations = info.initializations;
