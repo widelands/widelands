@@ -313,7 +313,7 @@ private:
  */
 // A note we're using to notify the AI
 struct NoteProductionSiteOutOfResources {
-	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+	CAN_BE_SENT_AS_NOTE(NoteId::ProductionSiteOutOfResources)
 
 	// The production site that is out of resources.
 	ProductionSite* ps;

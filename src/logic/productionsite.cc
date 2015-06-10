@@ -940,9 +940,8 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 				 minutes * 60000, 0);
 		}
 		// The following sends "out of resources" messages to be picked up by AI
-		// used as information for dismantling and upgrading mines
-		if (descr().get_ismine())
-			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
+		// used as information for dismantling and upgrading buildings
+		Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
 	}
 }
 
