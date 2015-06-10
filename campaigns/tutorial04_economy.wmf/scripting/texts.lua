@@ -75,28 +75,28 @@ building_stat = {
 }
 
 explain_building_stat = {
-   title = "Building statistics",
+   title = _"Building Statistics",
    body = rt(
       p(_[[This is the building statistics window. It shows you all buildings you can own, sorted by their size.]]) ..
       p(_[[Let me now explain what all those numbers mean:]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[‘2/1’ below the quarry: This means that you have two quarries, plus another one which is under construction.]]) ..
-      listitem_bullet(_[[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has worked yet, but they are going to start working soon.]]) ..
-      listitem_bullet(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions—we really need more soldiers.]]) ..
+      listitem_bullet(_[[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has done any work yet, but they are going to start working soon.]]) ..
+      listitem_bullet(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions — we really need more soldiers.]]) ..
       listitem_arrow(_[[In both cases, the color (green - yellow - red) signals you how good the value is.]]) ..
-      listitem_bullet(_[[If you click on a building, you have the possibility to scroll through the buildings of the selected type.]]) ..
-      listitem_bullet(_[[Buildings you are currently not possessing are shown greyed out.]])
+      listitem_bullet(_[[If you click on a building, you can scroll through the buildings of the selected type.]]) ..
+      listitem_bullet(_[[If you don’t have any building of a particular building type, it will be shown greyed out.]])
    ) ..
    rt(
       h2(_[[Now it’s your turn]]) ..
-      p(_[[Enough of the explanation. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
+      p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
    ),
    obj_name = "check_taverns",
    obj_title = _"Look up your number of taverns in the building statistics window.",
    obj_body = rt(
       listitem_bullet(_[[Choose the ‘Medium Buildings’ tab in the building statistics window.]]) ..
       listitem_bullet(_[[Look up how many taverns you have.]]) ..
-      listitem_arrow(_[[Below every building, there are two lines. The first one shows the number of buildings you own and how many are under construction. The second line shows the average productivity if it is a civil building, or the stationed and desired soldiers in military buildings.]]) ..
+      listitem_arrow(_[[Below every building, there are two lines. The first one shows the number of buildings you own and how many are under construction. The second line shows the average productivity if it is a production site or training site, or the stationed and desired soldiers in military buildings.]]) ..
       listitem_bullet(_[[Close the building statistics window when you are done.]])
    )
 }
