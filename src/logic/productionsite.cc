@@ -227,19 +227,19 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)"))
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() % _("(not occupied)"))
 		        .str();
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
 		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
 		return;
 	}
 
 	if (m_is_stopped) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)"))
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() % _("(stopped)"))
 		        .str();
 		return;
 	}
@@ -311,26 +311,26 @@ void ProductionSite::calc_statistics()
 
 	std::string color;
 	if (percOk < 33)
-		color = UI_FONT_CLR_BAD_HEX;
+		color = UI_FONT_CLR_BAD.hex_value();
 	else if (percOk < 66)
-		color = UI_FONT_CLR_OK_HEX;
+		color = UI_FONT_CLR_OK.hex_value();
 	else
-		color = UI_FONT_CLR_GOOD_HEX;
+		color = UI_FONT_CLR_GOOD.hex_value();
 	const std::string perc_str =
 		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
 		trend_ = Trend::kRising;
-		color = UI_FONT_CLR_GOOD_HEX;
+		color = UI_FONT_CLR_GOOD.hex_value();
 		trend = "+";
 	} else if (lastPercOk < percOk) {
 		trend_ = Trend::kFalling;
-		color = UI_FONT_CLR_BAD_HEX;
+		color = UI_FONT_CLR_BAD.hex_value();
 		trend = "-";
 	} else {
 		trend_ = Trend::kUnchanged;
-		color = UI_FONT_CLR_BRIGHT_HEX;
+		color = UI_FONT_CLR_BRIGHT.hex_value();
 		trend = "=";
 	}
 	const std::string trend_str =
