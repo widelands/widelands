@@ -27,7 +27,7 @@ worker=hunt
 # TRANSLATORS: "Game" means animals that you can hunt
 title=_Out of Game
 message=_The hunter working out of this hunter’s hut can’t find any game in his working radius. Remember that you can build a gamekeeper’s hut to release more game into the wild.
-delay_attempts=10
+productivity_threshold=33
 
 [build]
 pics=build_??.png
