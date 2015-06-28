@@ -188,6 +188,13 @@ void MainMenuSaveMap::clicked_ok() {
 				  filename.substr(0, filename_size - 4) : filename)
 				 .c_str());
 		}
+
+		// set seafaring tag only if map has at least two port spaces
+		if (map.get_port_spaces().size() >= 2)
+			map.add_tag("seafaring");
+		else
+			map.remove_tag("seafaring");
+
 		if
 			(save_map
 			 	(filename,

@@ -580,6 +580,10 @@ void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
+void Map::remove_tag(const std::string& tag) {
+	m_tags.erase(tag);
+}
+
 NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
 	NodeCaps caps = _calc_nodecaps_pass1(world, fc, false);
 	caps = _calc_nodecaps_pass2(world, fc, false, caps);

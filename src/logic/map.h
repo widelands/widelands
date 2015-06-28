@@ -200,6 +200,7 @@ public:
 	void set_hint       (const std::string& hint);
 	void set_background (const std::string& image_path);
 	void add_tag        (const std::string& tag);
+	void remove_tag     (const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
