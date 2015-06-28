@@ -65,13 +65,13 @@ ProductionSiteDescr::ProductionSiteDescr
 	{
 		m_out_of_resource_title = section->get_string("title", "");
 		m_out_of_resource_message = section->get_string("message", "");
-		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
+		out_of_resource_productivity_threshold_ = section->get_natural("productivity_threshold", 100);
 	}
 	else
 	{
 		m_out_of_resource_title = "";
 		m_out_of_resource_message = "";
-		m_out_of_resource_delay_attempts = 0;
+		out_of_resource_productivity_threshold_ = 100;
 	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
@@ -202,8 +202,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
-	m_production_result (""),
-	m_out_of_resource_delay_counter(0)
+	m_production_result ("")
 {
 	calc_statistics();
 }
@@ -228,19 +227,19 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)"))
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() % _("(not occupied)"))
 		        .str();
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
 		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
 		return;
 	}
 
 	if (m_is_stopped) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)"))
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() % _("(stopped)"))
 		        .str();
 		return;
 	}
@@ -312,23 +311,26 @@ void ProductionSite::calc_statistics()
 
 	std::string color;
 	if (percOk < 33)
-		color = UI_FONT_CLR_BAD_HEX;
+		color = UI_FONT_CLR_BAD.hex_value();
 	else if (percOk < 66)
-		color = UI_FONT_CLR_OK_HEX;
+		color = UI_FONT_CLR_OK.hex_value();
 	else
-		color = UI_FONT_CLR_GOOD_HEX;
+		color = UI_FONT_CLR_GOOD.hex_value();
 	const std::string perc_str =
 		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
-		color = UI_FONT_CLR_GOOD_HEX;
+		trend_ = Trend::kRising;
+		color = UI_FONT_CLR_GOOD.hex_value();
 		trend = "+";
 	} else if (lastPercOk < percOk) {
-		color = UI_FONT_CLR_BAD_HEX;
+		trend_ = Trend::kFalling;
+		color = UI_FONT_CLR_BAD.hex_value();
 		trend = "-";
 	} else {
-		color = UI_FONT_CLR_BRIGHT_HEX;
+		trend_ = Trend::kUnchanged;
+		color = UI_FONT_CLR_BRIGHT.hex_value();
 		trend = "=";
 	}
 	const std::string trend_str =
@@ -918,9 +920,9 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
-
-	if (m_out_of_resource_delay_counter >=
-		 descr().out_of_resource_delay_attempts()) {
+	if (m_last_stat_percent == 0 ||
+		 (m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
+		  && trend_ == Trend::kFalling)) {
 		if (descr().out_of_resource_title().empty())
 		{
 			set_production_result(_("Can’t find any more resources!"));
@@ -937,14 +939,11 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 				 true,
 				 minutes * 60000, 0);
 		}
-		// following sends "out of resources" messages to be picked up by AI
-		// used as a information for dismantling and upgrading mines
-		if (descr().get_ismine())
+		// The following sends "out of resources" messages to be picked up by AI
+		// used as information for dismantling and upgrading buildings
+		if (descr().get_ismine()) {
 			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
-	}
-	if (m_out_of_resource_delay_counter++ >=
-		 descr().out_of_resource_delay_attempts()) {
-		m_out_of_resource_delay_counter = 0;
+		}
 	}
 }
 
