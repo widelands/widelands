@@ -45,7 +45,7 @@ enum class IslandExploreDirection {
 };
 
 struct NoteShipMessage {
-	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
 
 	Ship* ship;
 

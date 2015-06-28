@@ -2,7 +2,7 @@
 -- Initialization
 -- ===============
 
-plr:forbid_buildings{"scouts_house"} -- otherwise, player could scout and attack the enemy when he should not
+plr:forbid_buildings{"scouts_house"} -- otherwise, player could scout the wasteland
 
 function init_player()
    -- a headquarters without helms, lances, ores and coal
@@ -138,6 +138,8 @@ function init_player()
       {"fortress",71,66},
       {"fortress",75,72}
    )
+   plr:place_building("quarry", map:get_field(87,36), true, true) -- a construction site
+
    plr:conquer(map:get_field(111,34),3) -- some remaining fields inside
 
    connected_road(plr,map:get_field(97,54).immovable,"tr,tr|tr,tl")
