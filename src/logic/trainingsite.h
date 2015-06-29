@@ -223,7 +223,7 @@ private:
  */
 // A note we're using to notify the AI
 struct NoteTrainingSiteSoldierTrained {
-	CAN_BE_SEND_AS_NOTE(NoteId::TrainingSiteSoldierTrained)
+	CAN_BE_SENT_AS_NOTE(NoteId::TrainingSiteSoldierTrained)
 
 	// The trainingsite from where soldier is leaving.
 	TrainingSite* ts;

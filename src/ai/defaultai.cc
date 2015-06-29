@@ -1738,8 +1738,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// this will depend on number of mines_ and productionsites
 					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
 					       bo.total_count() &&
-					    bo.cnt_under_construction_ == 0)
-						prio = 4 + kDefaultPrioBoost;
+					    (bo.cnt_under_construction_ + bo.unoccupied_) == 0 &&
+					    //but only if current buildings are utilized enouth
+					    (bo.total_count() == 0 || bo.current_stats_ > 60)) {
+							prio = 4 + kDefaultPrioBoost;
+						}
 				} else {  // finally normal productionsites
 					if (bo.production_hint_ >= 0) {
 						continue;
@@ -1853,6 +1856,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 1;
 					}
 				}
+
+				//consider borders (for medium + big buildings and ones with input)
+				//=>decreasing the score
+				//but only if we have enough free spots to built on
+				//otherwise it will slow down the expansion - small buildings would be preffered
+				if (spots_avail.at(BUILDCAPS_MEDIUM) > 40//HERE TRANSFER
+					&&
+					spots_avail.at(BUILDCAPS_BIG) > 20
+					&&
+					(bo.desc->get_size() == 2 ||
+					 bo.desc->get_size() == 3 ||
+					 !bo.inputs_.empty())) {
+						prio = recalc_with_border_range(*bf, prio);
+					}
+
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
 
@@ -2030,19 +2048,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				//  Militarysites are slightly important as well, to have a bigger
 				//  chance for a warehouses (containing waiting soldiers or wares
 				//  needed for soldier training) near the frontier.
-				if ((static_cast<int32_t>(productionsites.size() + mines_.size()) + 20) / 35 >
-				       static_cast<int32_t>(numof_warehouses_) &&
-				    bo.cnt_under_construction_ == 0) {
-					prio = 20;
+				prio = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20
+				-
+				35 * static_cast<int32_t>(numof_warehouses_);
+				if (prio > 0) {
 					warehouse_needed = true;
+				} else {
+					prio = 0;
 				}
 
-				// but generally we prefer ports
-				if (bo.is_port_) {
-					prio += 10;
-				}
-
-				// special boost for first port
+				// But we still can built a port if it is first one
 				if (bo.is_port_ && bo.total_count() == 0 && productionsites.size() > 5 &&
 				    !bf->enemy_nearby_ && bf->is_portspace_ && seafaring_economy) {
 					prio += kDefaultPrioBoost + productionsites.size();
@@ -2053,72 +2068,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				// iterating over current warehouses and testing a distance
-				// getting distance to nearest warehouse and adding it to a score
-				uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
-				for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-					const uint16_t actual_distance =
-					   map.calc_distance(bf->coords, wh_obs.site->get_position());
-					nearest_distance = std::min(nearest_distance, actual_distance);
-				}
-				// but limit to 15
-				const uint16_t max_distance_considered = 15;
-				nearest_distance = std::min(nearest_distance, max_distance_considered);
-				prio += nearest_distance;
-
-				// take care about and enemies
-				if (bf->enemy_nearby_) {
-					prio /= 4;
-				}
-
-				if (bf->unowned_land_nearby_ && !bo.is_port_) {
-					prio /= 2;
-				}
-
-			} else if (bo.type == BuildingObserver::WAREHOUSE) {
-
-				// exclude spots on border
-				if (bf->near_border_ && !bo.is_port_) {
-					continue;
-				}
-
-				if (!bf->is_portspace_ && bo.is_port_) {
-					continue;
-				}
-
-				if (bo.cnt_under_construction_ > 0) {
-					continue;
-				}
-
-				bool warehouse_needed = false;
-
-				//  Build one warehouse for ~every 35 productionsites and mines_.
-				//  Militarysites are slightly important as well, to have a bigger
-				//  chance for a warehouses (containing waiting soldiers or wares
-				//  needed for soldier training) near the frontier.
-				if ((static_cast<int32_t>(productionsites.size() + mines_.size()) + 20) / 35 >
-				       static_cast<int32_t>(numof_warehouses_) &&
-				    bo.cnt_under_construction_ == 0) {
-					prio = 20;
-					warehouse_needed = true;
-				}
-
-				// but generally we prefer ports
+				// we prefer ports to a normal warehouse
 				if (bo.is_port_) {
+					prio += 15;
+				}
+
+				// it is good to have more then 1 warehouse
+				if (numof_warehouses_ == 1) {
 					prio += 10;
 				}
 
-				// special boost for first port
-				if (bo.is_port_ && bo.total_count() == 0 && productionsites.size() > 5 &&
-				    !bf->enemy_nearby_ && bf->is_portspace_ && seafaring_economy) {
-					prio += kDefaultPrioBoost + productionsites.size();
-					warehouse_needed = true;
-				}
-
-				if (!warehouse_needed) {
-					continue;
-				}
-
 				// iterating over current warehouses and testing a distance
 				// getting distance to nearest warehouse and adding it to a score
 				uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
@@ -2127,18 +2086,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					   map.calc_distance(bf->coords, wh_obs.site->get_position());
 					nearest_distance = std::min(nearest_distance, actual_distance);
 				}
-				// but limit to 15
-				const uint16_t max_distance_considered = 15;
+				// but limit to 30
+				const uint16_t max_distance_considered = 30;
 				nearest_distance = std::min(nearest_distance, max_distance_considered);
-				prio += nearest_distance;
+				prio += nearest_distance - 10;
 
-				// take care about and enemies
-				if (bf->enemy_nearby_) {
-					prio /= 4;
+				// dont be close to enemies
+				if (bf->enemy_nearby_){
+					if (bo.is_port_) {
+						prio -= 10;
+					} else {
+						prio -= 40;
+					}
 				}
 
-				if (bf->unowned_land_nearby_ && !bo.is_port_) {
+				//being too close to a border is not good either
+				if (bf->unowned_land_nearby_ && !bo.is_port_ && prio > 0) {
 					prio /= 2;
+					prio -= 10;
 				}
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
@@ -3986,8 +3951,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 /**
  * This function takes care about the unowned and opposing territory and
- * recalculates the priority for none military buildings depending on the
- * initialisation type of a defaultAI
+ * recalculates the priority for non-military buildings
+ * The goal is to minimine losses when teritory is lost
  *
  * \arg bf   = BuildableField to be checked
  * \arg prio = priority until now.
@@ -3995,18 +3960,26 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
  * \returns the recalculated priority
  */
 int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t prio) {
-	// Prefer building space in the inner land.
 
-	if (bf.unowned_land_nearby_ > 15) {
-		prio -= (bf.unowned_land_nearby_ - 15);
+	//no change when priority is not positive number
+	if (prio <= 0) {
+		return prio;
 	}
 
-	// Especially places near the frontier to the enemies are unlikely
-	//  NOTE take care about the type of computer player_. The more
-	//  NOTE aggressive a computer player_ is, the more important is
-	//  NOTE this check. So we add \var type as bonus.
-	if (bf.enemy_nearby_ && prio > 0) {
-		prio /= (3 + type_);
+	//in uýnowned teritory, decreasing to 2/3
+	if (bf.unowned_land_nearby_ > 15) {
+		prio *= 2;
+		prio /= 3;
+	}
+
+	//to preserve positive score
+	if (prio == 0) {
+		prio = 1;
+	}
+
+	//Further decrease the score if enemy nearby
+	if (bf.enemy_nearby_) {
+		prio /= 2;
 	}
 
 	return prio;
