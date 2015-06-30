@@ -388,6 +388,7 @@ public:
 	void set_port_space(Coords c, bool allowed);
 	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	bool check_seafaring();
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);

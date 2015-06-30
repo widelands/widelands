@@ -1996,6 +1996,61 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 }
 
 
+/*
+===========
+Map::check_check_seafaring()
+
+This function checks if there are two ports that are reachable
+for each other - then the map is seafaring.
+=============
+*/
+bool Map::check_seafaring() {
+	Map::PortSpacesSet port_spaces = get_port_spaces();
+	std::vector<Coords> portdocks;
+	std::set<Coords, Coords::OrderingFunctor> swim_coords;
+
+	for (const Coords& c : port_spaces) {
+		std::queue<Coords> q_positions;
+		std::set<Coords, Coords::OrderingFunctor> visited_positions;
+		FCoords fc = get_fcoords(c);
+		portdocks = find_portdock(fc);
+
+		/* remove the port space if it is not longer valid port space */
+		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()){
+			set_port_space(c, false);
+			continue;
+		}
+
+		for (const Coords& portdock: portdocks){
+			visited_positions.insert(portdock);
+			q_positions.push(portdock);
+		}
+
+		while (!q_positions.empty()){
+			const Coords& swim_coord = q_positions.front();
+			q_positions.pop();
+			for (uint8_t i = 1; i <= 6; ++i) {
+				FCoords neighbour;
+				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
+				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM){
+					if (visited_positions.count(neighbour) == 0){
+						visited_positions.insert(neighbour);
+						q_positions.push(neighbour);
+					}
+				}
+			}
+		}
+
+		for (const Coords& swim_coord: visited_positions)
+			if (swim_coords.count(swim_coord) == 0)
+				swim_coords.insert(swim_coord);
+			else
+				return true;
+	}
+	return false;
+}
+
+
 #define MAX_RADIUS 32
 MilitaryInfluence Map::calc_influence
 	(Coords const a, Area<> const area) const

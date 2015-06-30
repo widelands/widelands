@@ -189,8 +189,8 @@ void MainMenuSaveMap::clicked_ok() {
 				 .c_str());
 		}
 
-		// set seafaring tag only if map has at least two port spaces
-		if (map.get_port_spaces().size() >= 2)
+		// check if map has at least two port spaces that are reachable for each other
+		if (map.check_seafaring())
 			map.add_tag("seafaring");
 		else
 			map.remove_tag("seafaring");
