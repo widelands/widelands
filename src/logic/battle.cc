@@ -157,17 +157,20 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 
 	assert(m_first->get_battle() == this || m_second->get_battle() == this);
 
-	//  Created this three 'states' of the battle:
+	//  Created this four 'states' of the battle:
 	// *First time entered, one enters :
 	//    oneReadyToFight, mark m_readyflags as he is ready to fight
 	// *Next time, the opponent enters:
 	//    bothReadyToFight, mark m_readyflags as 3 (round fighted)
 	// *Next time, the first enters again:
 	//    roundFighted, reset m_readyflags
+	// *Opponent not on field yet, so one enters :
+	//    waitingForOpponent, if others are false
 	bool const oneReadyToFight  = (m_readyflags == 0);
 	bool const roundFighted     = (m_readyflags == 3);
 	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) &&
 		(!roundFighted);
+	bool const waitingForOpponent = !(oneReadyToFight||roundFighted||bothReadyToFight);
 	std::string what_anim;
 
 	// Apply pending damage
@@ -192,7 +195,14 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 
 	if (!m_first || !m_second)
 		return soldier.skip_act();
-
+	
+	//Here is a timeout to prevent battle freezes
+	if (waitingForOpponent && (game.get_gametime() - m_creationtime) > 90 * 1000) {
+		molog("[battle] soldier %u waiting for opponent %u too long ( more then %5d sec), cancelling battle...\n",soldier.serial(),opponent(soldier)->serial(), (game.get_gametime() - m_creationtime)/1000);
+		cancel(game, soldier);
+		return;
+	}
+		
 	// So both soldiers are alive; are we ready to trade the next blow?
 	//
 	//  This code choses one of 3 codepaths:
