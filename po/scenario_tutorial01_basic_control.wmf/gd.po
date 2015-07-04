@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
+"POT-Creation-Date: 2015-06-07 09:16+0000\n"
+"PO-Revision-Date: 2015-06-07 09:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -627,7 +627,7 @@ msgstr "Gus rathad ùr a thogail, cha leig thu leas ach briogadh air a’ bhrata
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "Cha deach an coireall a cheangal"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -636,11 +636,11 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr ""
+msgstr "Cha toil leis na h-obraichean agad coiseachd a’ bhlàir. Feumaidh tu rathad a thogail on phrìomh-àras agad dhan làrach togail ach an urrainn dha na giùlanairean bathar a thogail dha. Seo ann dòigh as fhasa gus rathad a thogail: briog air bratach an làraich thogail, tagh “Tog rathad” is an uairsin briog air bratach a’ chinn-uidhe (seo an tè air beulaibh a’ phrìomh-àrais agad) mar a sheall mi dhut."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Mhill thu an làrach togail!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
@@ -649,7 +649,7 @@ msgid ""
 "savegame. Luckily, the are created from time to time. To do so, you have to "
 "go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And "
 "please be a bit more careful next time."
-msgstr ""
+msgstr "Na mhill thu làrach togail a’ choirill a bha sinn airson togail? On a tha sinn feumach air na clachan, mholainn gun luchdaich thu an geama às ùr o gheama air a shàbhaladh. Gu fortanach, cruthaichidh sinn fear dhut o àm gu àm. Gus geama a luchdadh, till dhan phrìomh chlàr-taice agus tagh “Aon chluicheadair” → “Luchdaich geama”. Agus nach bi thu nas fhaiceallaiche an ath thuras?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"

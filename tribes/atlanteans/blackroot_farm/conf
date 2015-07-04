@@ -42,7 +42,7 @@ return=skipped
 [out_of_resource_notification]
 title=_Out of Fields
 message=_The farmer working at this blackroot farm has no cleared soil to plant his seeds.
-delay_attempts=10
+productivity_threshold=30
 
 [idle]
 pics=blackroot_farm_i_??.png  # ???
