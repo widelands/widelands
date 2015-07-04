@@ -6,8 +6,6 @@ import json
 import os.path
 import sys
 
-# NOCOM(GunChleoc): Add to merge_translations and update Transifex stuff before merging.
-
 # This script collects translator credits from the JSON files in
 # ../txts/translators.
 # It then collects all other contributors from ../txts/developers.json,
@@ -36,7 +34,8 @@ for source_filename in source_files:
 		translators = json.load(source_file)
 		# Make sure we don't pick up untranslated stuff
 		if translators["locale-translators"]["translator-list"] != 'translator-credits':
-			print("- Adding translators for " + translators["locale-translators"]["your-language-name"])
+                        msg = "- Adding translators for " + translators["locale-translators"]["your-language-name"]
+			print(msg.encode('ascii', errors='xmlcharrefreplace'))
 			lua_translators += '{' # entry
 			lua_translators += 'subheading = "' + translators["locale-translators"]["your-language-name"] + '",'
 
