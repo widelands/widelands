@@ -45,7 +45,7 @@ private:
 	void stop_clicked();
 	void continue_clicked();
 	void player_selected(uint32_t idx);
-	std::string parse_player_info(std::string & info);
+	std::string parse_player_info(std::string info);
 
 	Widelands::Game & m_game;
 	UI::Textarea *  m_title_area;

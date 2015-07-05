@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,17 @@
 
 #include "graphic/color.h"
 
+#include <boost/format.hpp>
+
 RGBColor::RGBColor() {
 }
 
 RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :
 	r(R), g(G), b(B) {}
+
+std::string RGBColor::hex_value() const {
+	return (boost::format ("%02x%02x%02x") % int(r) % int(g) % int(b)).str();
+}
 
 uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
 	return SDL_MapRGB(&const_cast<SDL_PixelFormat&>(fmt), r, g, b);
@@ -51,6 +57,10 @@ RGBAColor::RGBAColor(const RGBColor& c) {
 	g = c.g;
 	b = c.b;
 	a = 255;
+}
+
+std::string RGBAColor::hex_value() const {
+	return (boost::format ("%02x%02x%02x%02x>") % int(r) % int(g) % int(b) % int(a)).str();
 }
 
 uint32_t RGBAColor::map(const SDL_PixelFormat& fmt) const {

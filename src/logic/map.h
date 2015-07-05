@@ -70,7 +70,7 @@ struct Path;
 class Immovable;
 
 struct NoteFieldTransformed {
-	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldTransformed)
 
 	FCoords fc;
 	MapIndex map_index;

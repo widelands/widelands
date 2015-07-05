@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@ namespace Widelands {
 class Player;
 struct BuildingDescr;
 struct Coords;
+struct WorkerDescr;
 }  // namespace Widelands
 
 // Easy handling of function objects and coroutines.
@@ -61,6 +62,7 @@ public:
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const Widelands::BuildingDescr*);
+	void push_arg(const Widelands::WorkerDescr*);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();

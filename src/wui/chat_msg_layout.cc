@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,7 +99,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
 
-			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s %s")
+			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s> %s")
 						  % message
 						  % chat_message.sender
 						  % chat_message.recipient

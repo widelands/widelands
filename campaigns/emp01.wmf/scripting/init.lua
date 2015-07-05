@@ -11,6 +11,5 @@ include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
 
-include "map:scripting/starting_conditions.lua"
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

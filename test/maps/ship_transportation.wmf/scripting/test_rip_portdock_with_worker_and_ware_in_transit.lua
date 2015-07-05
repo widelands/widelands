@@ -32,7 +32,9 @@ run(function()
  	stable_save("restored_port")
    
    -- remove the portdock while the blackwood is in transit.
-   portdock2():remove()
+   port2_portdock=port2().portdock
+   assert(port2_portdock)
+   port2_portdock:remove()
    
    sleep(5000)
 

@@ -113,6 +113,8 @@ m_game(parent->game())
 	set_can_focus(true);
 	focus();
 	fill_data();
+
+	set_thinks(false);
 }
 
 bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my)
@@ -133,16 +135,19 @@ void GameSummaryScreen::fill_data()
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
 	InteractivePlayer* ipl = m_game.get_ipl();
+	//this defines a row to be selected, current player,
+	//if not then the first line
+	uint32_t current_player_position = 0;
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
+			current_player_position = i;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
-		UI::Table<uintptr_t const>::EntryRecord & te
-			= m_players_table->add(i);
+		UI::Table<uintptr_t const>::EntryRecord & te = m_players_table->add(i);
 		// Player name & pic
 		std::string pic_path =
 			(boost::format("pics/genstats_enable_plr_0%|1$u|.png")
@@ -199,7 +204,7 @@ void GameSummaryScreen::fill_data()
 	}
 	m_players_table->update();
 	if (!players_status.empty()) {
-		m_players_table->select(players_status.at(0).player);
+		m_players_table->select(current_player_position);
 	}
 	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
 }
@@ -214,31 +219,27 @@ void GameSummaryScreen::stop_clicked()
 	m_game.get_ibase()->end_modal(0);
 }
 
-void GameSummaryScreen::player_selected(uint32_t idx)
+void GameSummaryScreen::player_selected(uint32_t entry_index)
 {
-	const std::vector <Widelands::PlayerEndStatus >& players_status
-		= m_game.player_manager()->get_players_end_status();
-	for (uintptr_t i = 0; i < players_status.size(); i++) {
-		Widelands::PlayerEndStatus pes = players_status.at(i);
-		if (pes.player == idx) {
-			std::string info_str = parse_player_info(pes.info);
-			m_info_area->set_text(info_str);
-			layout();
-			break;
-		}
-	}
+	const uintptr_t selected_player_index = (*m_players_table)[entry_index];
+	const Widelands::PlayerEndStatus& player_status =
+	   m_game.player_manager()->get_players_end_status()[selected_player_index];
+
+	std::string info_str = parse_player_info(player_status.info);
+	m_info_area->set_text(info_str);
+	layout();
 }
 
-std::string GameSummaryScreen::parse_player_info(std::string& info)
+std::string GameSummaryScreen::parse_player_info(std::string info)
 {
 	using StringSplitIterator = boost::split_iterator<std::string::iterator>;
-	std::string info_str;
 	if (info.empty()) {
-		return info_str;
+		return info;
 	}
 	// Iterate through all key=value pairs
 	StringSplitIterator substring_it = boost::make_split_iterator
 		(info, boost::first_finder(";", boost::is_equal()));
+	std::string info_str;
 	while (substring_it != StringSplitIterator()) {
 		std::string substring = boost::copy_range<std::string>(*substring_it);
 		std::vector<std::string> pair;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "notifications/notifications.h"
 
 struct SimpleNote {
-	CAN_BE_SEND_AS_NOTE(100)
+	CAN_BE_SENT_AS_NOTE(100)
 
 	SimpleNote(const std::string& init_text) : text(init_text) {}
 

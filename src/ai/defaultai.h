@@ -9,6 +9,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -78,8 +79,35 @@ struct DefaultAI : ComputerPlayer {
 		DEFENSIVE = 0,
 	};
 
-	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
-	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers};
+	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
+	enum class ScheduleTasks : uint8_t {
+		kBbuildableFieldsCheck,
+		kMineableFieldsCheck,
+		kRoadCheck,
+		kUnbuildableFCheck,
+		kCheckEconomies,
+		kProductionsitesStats,
+		kConstructBuilding,
+		kCheckProductionsites,
+		kCheckShips,
+		KMarineDecisions,
+		kCheckMines,
+		kWareReview,
+		kPrintStats,
+		kIdle,
+		kCheckMilitarysites,
+		kCheckTrainingsites,
+		kCountMilitaryVacant,
+		kCheckEnemySites
+	};
+	enum class MilitaryStrategy : uint8_t {
+		kNoNewMilitary,
+		kDefenseOnly,
+		kResourcesOrDefense,
+		kExpansion,
+		kPushExpansion
+	};
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -122,21 +150,23 @@ struct DefaultAI : ComputerPlayer {
 private:
 	void late_initialization();
 
-	void update_all_buildable_fields(int32_t);
-	void update_all_mineable_fields(int32_t);
+	void update_all_buildable_fields(uint32_t);
+	void update_all_mineable_fields(uint32_t);
 	void update_all_not_buildable_fields();
 
 	void update_buildable_field(BuildableField&, uint16_t = 6, bool = false);
 	void update_mineable_field(MineableField&);
 
-	void update_productionsite_stats(int32_t);
+	void update_productionsite_stats(uint32_t);
 
 	void check_ware_necessity(BuildingObserver& bo,
 	                          bool* output_is_needed,
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
 
-	bool construct_building(int32_t);
+	ScheduleTasks get_oldest_task(uint32_t);
+
+	bool construct_building(uint32_t);
 
 	uint32_t coords_hash(Widelands::Coords coords) {
 		uint32_t hash = coords.x << 16 | coords.y;
@@ -153,27 +183,28 @@ private:
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
-	bool improve_roads(int32_t);
+	bool improve_roads(uint32_t);
 	bool create_shortcut_road(const Widelands::Flag&,
 	                          uint16_t maxcheckradius,
-	                          uint16_t minred,
+	                          int16_t minReduction,
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(Widelands::Road&);
 	bool check_economies();
-	bool check_productionsites(int32_t);
-	bool check_trainingsites(int32_t);
-	bool check_mines_(int32_t);
-	bool check_militarysites(int32_t);
+	bool check_productionsites(uint32_t);
+	bool check_trainingsites(uint32_t);
+	bool check_mines_(uint32_t);
+	bool check_militarysites(uint32_t);
 	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
-	void print_stats();
+	bool check_enemy_sites(uint32_t);
+	void print_stats(uint32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
-	void check_helpersites(int32_t);
-	void review_wares_targets(int32_t);
+	void review_wares_targets(uint32_t);
+	void count_military_vacant_positions();
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible
@@ -205,7 +236,7 @@ private:
 
 	bool check_supply(const BuildingObserver&);
 
-	bool consider_attack(int32_t);
+	// bool consider_attack(int32_t);
 
 	void print_land_stats();
 
@@ -213,8 +244,8 @@ private:
 	// Variables of default AI
 	uint8_t type_;
 
-	bool m_buildable_changed;
-	bool m_mineable_changed;
+	// collect statistics on how many times which job was run
+	uint32_t schedStat[20] = {0};
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
@@ -224,6 +255,10 @@ private:
 	uint32_t num_milit_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
+
+	uint16_t last_attacked_player_;
+	// check ms in this interval - will auto-adjust
+	uint32_t enemysites_check_delay_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -240,26 +275,18 @@ private:
 	std::list<WarehouseSiteObserver> warehousesites;
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
+	std::map<ScheduleTasks, uint32_t> taskDue;
+	std::map<uint32_t, EnemySiteObserver> enemy_sites;
+	// it will map mined material to observer
+	std::map<int32_t, MineTypesObserver> mines_per_type;
 
 	std::vector<WareObserver> wares;
 
-	int32_t next_road_due_;
-	int32_t next_stats_update_due_;
-	int32_t next_construction_due_;
-	int32_t next_mine_construction_due_;
-	int32_t next_productionsite_check_due_;
-	int32_t next_mine_check_due_;
-	int32_t next_militarysite_check_due_;
-	uint32_t next_ship_check_due;
-	uint32_t next_marine_decisions_due;
-	int32_t next_attack_consideration_due_;
-	int32_t next_trainingsites_check_due_;
-	int32_t next_bf_check_due_;
-	int32_t next_wares_review_due_;
-	int32_t next_statistics_report_;
-	int32_t inhibit_road_building_;
-	int32_t time_of_last_construction_;
-	int32_t enemy_last_seen_;
+	uint32_t next_ai_think_;
+	uint32_t next_mine_construction_due_;
+	uint32_t inhibit_road_building_;
+	uint32_t time_of_last_construction_;
+	uint32_t enemy_last_seen_;
 
 	uint16_t numof_warehouses_;
 
@@ -268,27 +295,30 @@ private:
 	// when territory is expanded for every candidate field benefits are calculated
 	// but need for water, space, mines can vary
 	// so if 255 = resource is needed, 0 = not needed
-	uint8_t resource_necessity_territory_;
-	uint8_t resource_necessity_mines_;
-	uint8_t resource_necessity_stones_;
-	uint8_t resource_necessity_water_;
+	int32_t resource_necessity_territory_;
+	int32_t resource_necessity_mines_;
+	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
-	uint16_t military_under_constr_;
 	uint16_t military_last_dismantle_;
-	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
-	                               // building build
-	Widelands::Coords
-	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
-	int32_t next_attack_waittime_;  // second till the next attack consideration
-	bool seafaring_economy;         // false by default, until first port space is found
+	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
+	                                // building build
+
+	bool seafaring_economy;          // false by default, until first port space is found
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
+	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	//statistics for training sites per type
+	uint8_t ts_basic_count_;
+	uint8_t ts_basic_const_count_;
+	uint8_t ts_advanced_count_;
+	uint8_t ts_advanced_const_count_;
+	uint8_t ts_without_trainers_;
 
-	enum {kReprioritize, kStopShipyard, kStapShipyard };
+	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
 	std::vector<int16_t> marineTaskQueue_;
 

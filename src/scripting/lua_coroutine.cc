@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,6 +102,12 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	assert(building_descr != nullptr);
 	to_lua<LuaMaps::LuaBuildingDescription>(m_L, new LuaMaps::LuaBuildingDescription(building_descr));
+	++m_ninput_args;
+}
+
+void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
+	assert(worker_descr != nullptr);
+	to_lua<LuaMaps::LuaWorkerDescription>(m_L, new LuaMaps::LuaWorkerDescription(worker_descr));
 	++m_ninput_args;
 }
 
