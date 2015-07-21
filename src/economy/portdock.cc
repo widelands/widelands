@@ -408,6 +408,13 @@ uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex) {
 	return count;
 }
 
+/**
+ * Return the number of wares or workers waiting at the dock.
+ */
+uint32_t PortDock::count_waiting() {
+	return m_waiting.size();
+}
+
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() {
 	return (m_expedition_bootstrap.get() != nullptr) || m_expedition_ready;

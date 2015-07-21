@@ -608,73 +608,216 @@ void Fleet::update(EditorGameBase & egbase)
 void Fleet::act(Game & game, uint32_t /* data */)
 {
 	m_act_pending = false;
+
+	printf("Fleet::act() - player %d, gametime: %8d sec.\n",
+	m_owner.player_number(), game.get_gametime() / 1000);
+
 	if (!active()) {
 		// If we are here, most likely act() was called by a port with waiting wares or an expedition ready
 		// although there are still no ships. We can't handle it now, so we reschedule the act()
-		schedule_act(game, 5000); // retry in the next time
+		schedule_act(game, 15000); // retry in the next time
 		m_act_pending = true;
+		printf ("  fleet inactive - no ships or ports( %d/%d)\n", m_ships.size(), m_ports.size());
 		return;
 	}
 
 	molog("Fleet::act\n");
 
-	for (Ship * temp_ship : m_ships) {
-		Ship & ship = *temp_ship;
-		if (ship.get_nritems() > 0 && !ship.get_destination(game)) {
-			molog("Ship %u has items\n", ship.serial());
-			bool found_dst = false;
-			for (ShippingItem& temp_item : ship.m_items) {
-				PortDock * dst = temp_item.get_destination(game);
-				if (dst) {
-					molog("... sending to portdock %u\n", dst->serial());
-					ship.set_destination(game, *dst);
-					found_dst = true;
-					break;
+	//We are scoring pairs ship:port....
+	//for evere piece of ware onboard +1, +8 for first item (prioritization)
+	//if port has wares waiting for ship +1 or +3, + wares there / 3
+	//for distance +8 - distance/50; 0 at least
+	//the purpose is to create all possible pairs ship-ports,
+	//assign a score to these pairs and pick one (or more) depending on the score
+
+	//creating a map that stores the scores, format: <<ship,port>,score>
+	//for simplicity using number (positions in m_ports and m_ships) instead of objects
+	//to allow better (native) hashing in std::map
+	std::map<std::pair<uint16_t, uint16_t>, uint16_t> scores;
+	//at the end we must know if requrests of ports asking for ship were addressed
+	//if any unsatisfied, we must schedule new run of this function
+	std::list<uint16_t> waiting_ports;
+	//this is to be first member of scores map
+	std::pair<uint16_t, uint16_t> mapping; //ship number, port number
+
+	for (uint16_t s = 0; s < m_ships.size(); s += 1){
+		if (m_ships[s]->get_destination(game)) {
+			printf (" ship (%d/%d) at %3dx%3d with destination\n",
+			s, m_ships.size(), m_ships[s]->get_position().x, m_ships[s]->get_position().y);
+			continue;
+		}
+		if (m_ships[s]->get_ship_state() != Ship::TRANSPORT) {
+			printf (" ship (%d/%d) at %3dx%3d not in transportation mode\n",
+			s, m_ships.size(), m_ships[s]->get_position().x, m_ships[s]->get_position().y);
+			continue; //in expedition obviously
+		}
+
+		//finding possible destinations - iterating over ware
+		printf (" ship (%d/%d) at %3dx%3d without destination (wares count: %d)\n",
+			s, m_ships.size(),
+			m_ships[s]->get_position().x, m_ships[s]->get_position().y,
+			m_ships[s]->get_nritems());
+
+		for (uint16_t i = 0; i < m_ships[s]->get_nritems(); i += 1){
+			PortDock * dst = m_ships[s]->m_items[i].get_destination(game);
+			if (!dst) {
+				printf (" a ware without destination on this shipd\n");
+				continue;
+			}
+			bool destination_found = false; //debug only
+			for (uint16_t p = 0; p < m_ports.size(); p += 1){
+				if (m_ports[p] ==  m_ships[s]->m_items[i].get_destination(game)){
+					mapping.first = s;
+					mapping.second = p;
+					scores[mapping] += (i == 0)?8:1;
+					destination_found = true;
 				}
 			}
-			// If we end here, we just send the ship to the first port - maybe the old port got destroyed
-			if (!found_dst) {
-				assert(!m_ports.empty());
-				ship.set_destination(game, *m_ports[0]);
+			if (!destination_found){
+				printf (" no coresponding port found for this ware, looking for %u\n", dst->serial());
+				for (uint16_t p = 0; p < m_ports.size(); p += 1){
+					printf ("  port No. %d: %u\n", p, m_ports[p]->serial());
+				}
 			}
 		}
 	}
 
-	for (uint32_t i = 0; i < m_ports.size(); ++i) {
-		PortDock & pd = *m_ports[i];
-
-		if (pd.get_need_ship()) {
-			molog("Port %u needs ship\n", pd.serial());
-
-			bool success = false;
-			for (Ship * temp_ship : m_ships) {
-				Ship & ship = *temp_ship;
-				// Check whether ship is in TRANSPORT state
-				if (ship.get_ship_state() != Ship::TRANSPORT)
-					continue;
-
-				PortDock * dst = ship.get_destination(game);
-				// Check if ship has currently a different destination
-				if (dst && dst != &pd)
-					continue;
-				if (ship.get_nritems() >= ship.descr().get_capacity())
-					continue;
-
-				molog("... ship %u takes care of it\n", ship.serial());
-
-				if (!dst)
-					ship.set_destination(game, pd);
-
-				success = true;
-				break;
-			}
-
-			if (!success) {
-				schedule_act(game, 5000); // retry in the next time
-				m_act_pending = true;
-				break;
+	//now we go over ports, testing which ones needs a ship and adding score for all combinations
+	for (uint16_t p = 0; p < m_ports.size(); p += 1){
+		PortDock & pd = *m_ports[p];
+		if (!pd.get_need_ship()){
+			continue;
+		}
+		printf (" pd (%d/%d) at %3dx%3d needs a ship, wares&workers waiting: %d\n",
+			p, m_ports.size(), pd.get_positions(game)[0].x,
+			pd.get_positions(game)[0].y, m_ports[p]->count_waiting());
+		bool any_ship_on_way = false;
+		for (uint16_t s = 0; s < m_ships.size(); s += 1){
+			if (m_ships[s]->get_destination(game) == &pd){
+				any_ship_on_way = true;
+				printf("    ship %d on the way there yet\n", s);
 			}
 		}
+		if (any_ship_on_way) {
+			continue;
+		}
+
+		waiting_ports.push_back(p);
+		//adding score for all possbile combinations of ships
+		for (uint16_t s = 0; s < m_ships.size(); s += 1){
+			if (m_ships[s]->get_destination(game)) {
+				continue; //already has destination
+			}
+			if (m_ships[s]->get_ship_state() != Ship::TRANSPORT) {
+				printf ("  ship %d in expedition\n", s);
+				continue; //in expedition obviously
+			}
+			if (m_ships[s]->get_position().field->get_immovable() == &pd) {
+				printf ("   ship %d in this portdock\n", s);
+				continue; //waiting at this very same port
+			}
+
+			printf("    ship %d available, increasing score by: %2d, to port: %d\n",
+			s,
+			((m_ships[s]->get_nritems() > 15)?1:3) + m_ports[p]->count_waiting() / 3,
+			p);
+
+			mapping.first = s;
+			mapping.second = p;
+			scores[mapping] += ((m_ships[s]->get_nritems() > 15)?1:3) +  m_ports[p]->count_waiting() / 3;
+		}
+	}
+
+	//now adding score for distance
+	for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> ship_port_relation : scores) {
+		int16_t score_for_distance =
+		8
+		-
+		m_ships[ship_port_relation.first.first]->calculate_sea_route
+		(game, *m_ports[ship_port_relation.first.second]) / 50;
+		score_for_distance = (score_for_distance < 0)?0:score_for_distance;
+		scores[ship_port_relation.first] += score_for_distance;
+	}
+
+	if (!scores.empty()) {
+		printf (" considering following ship-port routes:\n");
+		for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> score : scores){
+			printf ("   %d -> %d: %d\n",
+			score.first.first,
+			score.first.second,
+			score.second);
+		}
+	} else {
+		printf (" no possible routes ship-port generated\n");
+	}
+
+	//looking for best scores and sending ships accordingly
+	uint16_t best_ship = 0;
+	uint16_t best_port = 0;
+	uint16_t best_score;
+	while (!scores.empty()){
+		best_score = 0;
+		for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> combination : scores) {
+			if (combination.second > best_score){
+				best_score = combination.second;
+				best_ship = combination.first.first;
+				best_port = combination.first.second;
+			}
+		}
+		if (best_score == 0){
+			throw wexception("No port-destination pair selected or its score is zero");
+		}
+
+		//now actualle setting destination for "best ship"
+		m_ships[best_ship]->set_destination(game, *m_ports[best_port]);
+		molog("... ship %u sent to port %u, wares onboard: %2d, port requesting ship: %s\n",
+		m_ships[best_ship]->serial(),
+		m_ports[best_port]->serial(),
+		m_ships[best_ship]->get_nritems(),
+		(m_ports[best_port]->get_need_ship())?"yes":"no");
+		printf (" SENDING ship at %3dx%3d: %d to %d, score: %d\n",
+		m_ships[best_ship]->get_position().x,
+		m_ships[best_ship]->get_position().y,
+		best_ship, best_port, best_score);
+
+		//pruning the scores table
+		//the ship that was just sent somewhere cannot be send elsewhere
+		bool something_deleted = false; //for testing only //NOCOM
+		for (auto it = scores.cbegin(); it != scores.cend();){
+
+			//decreasing score for target port as there was a ship just sent there
+			if (it->first.second == best_port) {
+				mapping.first = it->first.first;
+				mapping.second = it->first.second;
+				scores[mapping] /= 2;
+				//just make sure it is nonzero
+				scores[mapping] = (scores[mapping] == 0)?1:scores[mapping];
+			}
+
+			//but removing all pairs where best ship is participating as it is not available anymore
+			//(was sent to "best port")
+			if (it->first.first == best_ship) {
+				scores.erase(it++);
+				something_deleted = true;
+			} else {
+				++it;
+			}
+		}
+
+		if (!something_deleted) {
+			printf (" ERROR - no member deleted\n");
+			break;
+		}
+
+		//also removing the port from waiting_ports
+		waiting_ports.remove(best_port);
+	}
+
+	if (!waiting_ports.empty()) {
+		printf (" not satisfied port(s): %d\n", waiting_ports.size());
+		molog("... no ships avaible to be sent to %d ports requesting ships\n", waiting_ports.size() );
+		schedule_act(game, 10000); // retry in the next time
+		m_act_pending = true;
 	}
 }
 

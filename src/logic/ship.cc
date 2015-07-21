@@ -755,9 +755,9 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 }
 
 /**
- * Find a path to the dock @p pd and follow it without using precomputed paths.
+ * Find a path to the dock @p pd, returns it length, and the path optionally.
  */
-void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.m_swim = true;
@@ -774,13 +774,56 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		if (cur.field->get_immovable() == &pd) {
 			Path path;
 			astar.pathto(cur, path);
-			start_task_movepath(game, path, descr().get_sail_anims());
-			return;
+			//printf ("    path calculated from %3dx%3d to %3dx%3d: %3d\n",
+			//get_position().x,
+			//get_position().y,
+			//pd.get_positions(game)[0].x,
+			//pd.get_positions(game)[0].y,
+			//path.get_nsteps());
+			if (finalpath){
+				//pathto is called second time
+				//but I found no way how to avoid it
+				astar.pathto(cur, *finalpath);
+			}
+			return path.get_nsteps();
 		}
 	}
 
-	molog("start_task_movedock: Failed to find path!\n");
-	start_task_idle(game, descr().main_animation(), 5000);
+	printf ("   failed to calculate path from %3dx%3d to %3dx%3d\n",
+	get_position().x,
+	get_position().y,
+	pd.get_positions(game)[0].x,
+	pd.get_positions(game)[0].y);
+	molog("   calculate_sea_distance: Failed to find path!\n");
+	return std::numeric_limits<uint32_t>::max();
+
+}
+
+/**
+ * Find a path to the dock @p pd and follow it without using precomputed paths.
+ */
+void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+	Map& map = game.map();
+	Path path;
+	uint32_t const distance = calculate_sea_route(game, pd, &path);
+	if (distance < std::numeric_limits<uint32_t>::max()) {
+		printf (" RECEIVED path of size: %d\n", path.get_nsteps());
+		start_task_movepath(game, path, descr().get_sail_anims());
+		return;
+	} else {
+		printf (" RECEIVED no path; start_task_movedock: Failed to find path!\n");
+		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		get_position().x,
+		get_position().y,
+		pd.get_positions(game)[0].x,
+		pd.get_positions(game)[0].y);
+		//this should not happen, but in theory there could be some inconstinency
+		//the portdock could be not valid anymore, so we set new portdock
+		PortDock* other_dock = m_fleet->get_arbitrary_dock();
+		set_destination(game, *other_dock);
+		start_task_idle(game, descr().main_animation(), 5000);
+	}
+
 }
 
 /// Prepare everything for the coming exploration
