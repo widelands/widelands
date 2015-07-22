@@ -609,17 +609,17 @@ void Fleet::act(Game & game, uint32_t /* data */)
 {
 	m_act_pending = false;
 
-	printf("Fleet::act() - player %d, gametime: %8d sec.\n",
-	m_owner.player_number(), game.get_gametime() / 1000);
-
 	if (!active()) {
 		// If we are here, most likely act() was called by a port with waiting wares or an expedition ready
 		// although there are still no ships. We can't handle it now, so we reschedule the act()
 		schedule_act(game, 15000); // retry in the next time
 		m_act_pending = true;
-		printf ("  fleet inactive - no ships or ports( %d/%d)\n", m_ships.size(), m_ports.size());
+		//printf ("  fleet inactive - no ships or ports( %d/%d)\n", m_ships.size(), m_ports.size());
 		return;
 	}
+
+	printf("Fleet::act() - player %d, gametime: %8d sec., fleet serial: %u\n",
+	m_owner.player_number(), game.get_gametime() / 1000, serial());
 
 	molog("Fleet::act\n");
 
@@ -642,8 +642,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 	for (uint16_t s = 0; s < m_ships.size(); s += 1){
 		if (m_ships[s]->get_destination(game)) {
-			printf (" ship (%d/%d) at %3dx%3d with destination\n",
-			s, m_ships.size(), m_ships[s]->get_position().x, m_ships[s]->get_position().y);
+			printf (" ship (%d/%d) at %3dx%3d with destination (wares onboard: %2d)\n",
+			s, m_ships.size(), m_ships[s]->get_position().x, m_ships[s]->get_position().y, m_ships[s]->m_items.size());
 			continue;
 		}
 		if (m_ships[s]->get_ship_state() != Ship::TRANSPORT) {
@@ -652,7 +652,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			continue; //in expedition obviously
 		}
 
-		//finding possible destinations - iterating over ware
+		//iterating over wares, adding score for each piece to particular mapping ship-port
 		printf (" ship (%d/%d) at %3dx%3d without destination (wares count: %d)\n",
 			s, m_ships.size(),
 			m_ships[s]->get_position().x, m_ships[s]->get_position().y,
@@ -661,10 +661,10 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		for (uint16_t i = 0; i < m_ships[s]->get_nritems(); i += 1){
 			PortDock * dst = m_ships[s]->m_items[i].get_destination(game);
 			if (!dst) {
-				printf (" a ware without destination on this shipd\n");
-				continue;
+				continue; //ware with no destination, OK for us / no scoring
 			}
-			bool destination_found = false; //debug only
+			
+			bool destination_found = false; //just a functional check
 			for (uint16_t p = 0; p < m_ports.size(); p += 1){
 				if (m_ports[p] ==  m_ships[s]->m_items[i].get_destination(game)){
 					mapping.first = s;
@@ -674,10 +674,13 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				}
 			}
 			if (!destination_found){
-				printf (" no coresponding port found for this ware, looking for %u\n", dst->serial());
+				printf (" no coresponding port found for this ware, looking for port %u, our ports:\n", dst->serial());
 				for (uint16_t p = 0; p < m_ports.size(); p += 1){
 					printf ("  port No. %d: %u\n", p, m_ports[p]->serial());
 				}
+				//NOCOM - is not this throw here too strong action?
+				//we can still remove it before stable release if it proves too much
+				throw wexception("A ware with destination that does not match any of our ports");
 			}
 		}
 	}
@@ -716,15 +719,19 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				printf ("   ship %d in this portdock\n", s);
 				continue; //waiting at this very same port
 			}
-
-			printf("    ship %d available, increasing score by: %2d, to port: %d\n",
+			
+			printf("    ship %d available, increasing score by: %2d, to port: %d, free cap: %2d, wares waiting %2d\n",
 			s,
-			((m_ships[s]->get_nritems() > 15)?1:3) + m_ports[p]->count_waiting() / 3,
-			p);
+			((m_ships[s]->get_nritems() > 15)?1:3) + std::min(m_ships[s]->descr().get_capacity()-m_ships[s]->get_nritems(), m_ports[p]->count_waiting()) / 3,
+			p,
+			m_ships[s]->descr().get_capacity()-m_ships[s]->get_nritems(),
+			m_ports[p]->count_waiting());
 
 			mapping.first = s;
 			mapping.second = p;
-			scores[mapping] += ((m_ships[s]->get_nritems() > 15)?1:3) +  m_ports[p]->count_waiting() / 3;
+			scores[mapping] += ((m_ships[s]->get_nritems() > 15)?1:3)
+			+
+			std::min(m_ships[s]->descr().get_capacity()-m_ships[s]->get_nritems(), m_ports[p]->count_waiting()) / 3;
 		}
 	}
 
@@ -765,10 +772,11 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			}
 		}
 		if (best_score == 0){
-			throw wexception("No port-destination pair selected or its score is zero");
+			//this is check of correctnes of this algorithm, this should not happen
+			throw wexception("Fleet::act(): No port-destination pair selected or its score is zero");
 		}
 
-		//now actualle setting destination for "best ship"
+		//now actual setting destination for "best ship"
 		m_ships[best_ship]->set_destination(game, *m_ports[best_port]);
 		molog("... ship %u sent to port %u, wares onboard: %2d, port requesting ship: %s\n",
 		m_ships[best_ship]->serial(),
@@ -781,8 +789,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		best_ship, best_port, best_score);
 
 		//pruning the scores table
-		//the ship that was just sent somewhere cannot be send elsewhere
-		bool something_deleted = false; //for testing only //NOCOM
+		//the ship that was just sent somewhere cannot be send elsewhere :)
+		bool something_deleted = false; //for testing only? //NOCOM
 		for (auto it = scores.cbegin(); it != scores.cend();){
 
 			//decreasing score for target port as there was a ship just sent there
@@ -805,7 +813,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		}
 
 		if (!something_deleted) {
-			printf (" ERROR - no member deleted\n");
+			throw ("Fleet::act(): ERROR - no scores member deleted (internal inconsistency found)\n"); //NOCOM consider this
 			break;
 		}
 
@@ -815,7 +823,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 	if (!waiting_ports.empty()) {
 		printf (" not satisfied port(s): %d\n", waiting_ports.size());
-		molog("... no ships avaible to be sent to %d ports requesting ships\n", waiting_ports.size() );
+		molog("... no ships avaible to be sent to %d waiting ports\n", waiting_ports.size() );
 		schedule_act(game, 10000); // retry in the next time
 		m_act_pending = true;
 	}

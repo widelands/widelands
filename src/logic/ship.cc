@@ -807,7 +807,6 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	Path path;
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
 	if (distance < std::numeric_limits<uint32_t>::max()) {
-		printf (" RECEIVED path of size: %d\n", path.get_nsteps());
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
@@ -819,6 +818,7 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		pd.get_positions(game)[0].y);
 		//this should not happen, but in theory there could be some inconstinency
 		//the portdock could be not valid anymore, so we set new portdock
+		//or would a assert() or throw() be more appropriate here?
 		PortDock* other_dock = m_fleet->get_arbitrary_dock();
 		set_destination(game, *other_dock);
 		start_task_idle(game, descr().main_animation(), 5000);
