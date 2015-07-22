@@ -698,7 +698,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		for (uint16_t s = 0; s < m_ships.size(); s += 1){
 			if (m_ships[s]->get_destination(game) == &pd){
 				any_ship_on_way = true;
-				printf("    ship %d on the way there yet\n", s);
+				//printf("    ship %d on the way there yet\n", s);
 			}
 		}
 		if (any_ship_on_way) {
@@ -783,9 +783,11 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		m_ports[best_port]->serial(),
 		m_ships[best_ship]->get_nritems(),
 		(m_ports[best_port]->get_need_ship())?"yes":"no");
-		printf (" SENDING ship at %3dx%3d: %d to %d, score: %d\n",
+		printf (" %d: SENDING ship %u at %3dx%3d: %d to %d, score: %d\n",
+		m_owner.player_number(),
 		m_ships[best_ship]->get_position().x,
 		m_ships[best_ship]->get_position().y,
+		m_ships[best_ship]->serial(),
 		best_ship, best_port, best_score);
 
 		//pruning the scores table
@@ -822,7 +824,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 
 	if (!waiting_ports.empty()) {
-		printf (" not satisfied port(s): %d\n", waiting_ports.size());
+		//printf (" not satisfied port(s): %d\n", waiting_ports.size());
 		molog("... no ships avaible to be sent to %d waiting ports\n", waiting_ports.size() );
 		schedule_act(game, 10000); // retry in the next time
 		m_act_pending = true;

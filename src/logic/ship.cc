@@ -242,19 +242,34 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		molog("ship_update: No destination anymore.\n");
-		if (m_items.empty())
-			return false;
-		molog("but it has wares....\n");
-		pop_task(game);
-		PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		// TODO(sirver): What happens if there is no port anymore?
-		if (other_dock) {
-			set_destination(game, *other_dock);
-		} else {
-			start_task_idle(game, descr().main_animation(), 2000);
-		}
+		printf (" %d: Ship %u at %.3dx%3d ship_update_transport() - NO DST, wares: %2d, gametime: %6d <---------\n",
+		get_owner()->player_number(),
+		serial(),
+		get_position().x,
+		get_position().y,
+		get_nritems(),
+		game.get_gametime() / 1000);	
+		m_fleet->update(game);//???????
+		start_task_idle(game, descr().main_animation(), 10000);
 		return true;
+		
+		//NOCOM - using set_destination() does wrong thing here, 
+		//m_fleet->update() is more inteligent
+		
+		
+		//molog("ship_update: No destination anymore.\n");
+		//if (m_items.empty())
+			//return false;
+		//molog("but it has wares....\n");
+		//pop_task(game);
+		//PortDock* other_dock = m_fleet->get_arbitrary_dock();
+		//// TODO(sirver): What happens if there is no port anymore?
+		//if (other_dock) {
+			//set_destination(game, *other_dock);
+		//} else {
+			//start_task_idle(game, descr().main_animation(), 2000);
+		//}
+		//return true;
 	}
 
 	FCoords position = map.get_fcoords(get_position());
@@ -803,7 +818,7 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
  * Find a path to the dock @p pd and follow it without using precomputed paths.
  */
 void Ship::start_task_movetodock(Game& game, PortDock& pd) {
-	Map& map = game.map();
+	//Map& map = game.map(); NOCOM
 	Path path;
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
 	if (distance < std::numeric_limits<uint32_t>::max()) {
@@ -821,6 +836,7 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		//or would a assert() or throw() be more appropriate here?
 		PortDock* other_dock = m_fleet->get_arbitrary_dock();
 		set_destination(game, *other_dock);
+		//Fleet::update() ???????? instead of set_destination
 		start_task_idle(game, descr().main_animation(), 5000);
 	}
 
