@@ -242,34 +242,17 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		printf (" %d: Ship %u at %.3dx%3d ship_update_transport() - NO DST, wares: %2d, gametime: %6d <---------\n",
-		get_owner()->player_number(),
-		serial(),
-		get_position().x,
-		get_position().y,
-		get_nritems(),
-		game.get_gametime() / 1000);	
-		m_fleet->update(game);//???????
+		printf (" %d:  ship with no destination at %3dx%3d, items: %d??? \n",
+		get_owner()->player_number(),get_position().x,get_position().y, m_items.size()); //NOCOM
+		//if (m_items.empty()){
+			////m_fleet->update(game); //NOCOM needed here?
+			//return false;
+		//}
+		pop_task(game);
+		//just make sure fleet is aware of it and takes care of it
+		//m_fleet->update(game);
 		start_task_idle(game, descr().main_animation(), 10000);
 		return true;
-		
-		//NOCOM - using set_destination() does wrong thing here, 
-		//m_fleet->update() is more inteligent
-		
-		
-		//molog("ship_update: No destination anymore.\n");
-		//if (m_items.empty())
-			//return false;
-		//molog("but it has wares....\n");
-		//pop_task(game);
-		//PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		//// TODO(sirver): What happens if there is no port anymore?
-		//if (other_dock) {
-			//set_destination(game, *other_dock);
-		//} else {
-			//start_task_idle(game, descr().main_animation(), 2000);
-		//}
-		//return true;
 	}
 
 	FCoords position = map.get_fcoords(get_position());
@@ -278,6 +261,10 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 		m_lastdock = dst;
 		m_destination = nullptr;
 		dst->ship_arrived(game, *this);
+		//just make sure fleet is aware of it and takes care of it
+		//NOCOM m_fleet->update(game) segfaults here
+		//printf (" ship_update: ARRIVED at dock\n");
+		//get_fleet()->update(game); ship_arrived should take care of it
 		start_task_idle(game, descr().main_animation(), 250);
 		return true;
 	}
@@ -744,6 +731,7 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
+	printf (" %d: SETTING destination for ship %u, gametime: %6d\n", get_owner()->player_number(),serial(), game.get_gametime()/1000);
 	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
@@ -818,14 +806,13 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
  * Find a path to the dock @p pd and follow it without using precomputed paths.
  */
 void Ship::start_task_movetodock(Game& game, PortDock& pd) {
-	//Map& map = game.map(); NOCOM
 	Path path;
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
 	if (distance < std::numeric_limits<uint32_t>::max()) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
-		printf (" RECEIVED no path; start_task_movedock: Failed to find path!\n");
+		printf (" RECEIVED no path; start_task_movedock: Failed to find path!\n"); //
 		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 		get_position().x,
 		get_position().y,
@@ -834,9 +821,9 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		//this should not happen, but in theory there could be some inconstinency
 		//the portdock could be not valid anymore, so we set new portdock
 		//or would a assert() or throw() be more appropriate here?
-		PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		set_destination(game, *other_dock);
-		//Fleet::update() ???????? instead of set_destination
+		//PortDock* other_dock = m_fleet->get_arbitrary_dock();
+		//set_destination(game, *other_dock);
+		get_fleet()->update(game);// ???????? instead of set_destination NOCOM
 		start_task_idle(game, descr().main_animation(), 5000);
 	}
 

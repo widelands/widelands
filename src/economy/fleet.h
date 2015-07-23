@@ -97,6 +97,11 @@ struct Fleet : MapObject {
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
+	
+	uint32_t count_ships();
+	uint32_t count_ports();
+	bool get_act_pending();
+	
 
 protected:
 	void act(Game &, uint32_t data) override;
