@@ -242,15 +242,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		printf (" %d:  ship with no destination at %3dx%3d, items: %d??? \n",
-		get_owner()->player_number(),get_position().x,get_position().y, m_items.size()); //NOCOM
-		//if (m_items.empty()){
-			////m_fleet->update(game); //NOCOM needed here?
-			//return false;
-		//}
-		pop_task(game);
-		//just make sure fleet is aware of it and takes care of it
-		//m_fleet->update(game);
+		//here we just do nothing, this is usually OK
 		start_task_idle(game, descr().main_animation(), 10000);
 		return true;
 	}
@@ -261,10 +253,6 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 		m_lastdock = dst;
 		m_destination = nullptr;
 		dst->ship_arrived(game, *this);
-		//just make sure fleet is aware of it and takes care of it
-		//NOCOM m_fleet->update(game) segfaults here
-		//printf (" ship_update: ARRIVED at dock\n");
-		//get_fleet()->update(game); ship_arrived should take care of it
 		start_task_idle(game, descr().main_animation(), 250);
 		return true;
 	}
@@ -731,7 +719,6 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	printf (" %d: SETTING destination for ship %u, gametime: %6d\n", get_owner()->player_number(),serial(), game.get_gametime()/1000);
 	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
@@ -775,20 +762,14 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (cur.field->get_immovable() == &pd) {
-			Path path;
-			astar.pathto(cur, path);
-			//printf ("    path calculated from %3dx%3d to %3dx%3d: %3d\n",
-			//get_position().x,
-			//get_position().y,
-			//pd.get_positions(game)[0].x,
-			//pd.get_positions(game)[0].y,
-			//path.get_nsteps());
 			if (finalpath){
-				//pathto is called second time
-				//but I found no way how to avoid it
 				astar.pathto(cur, *finalpath);
+				return finalpath->get_nsteps();
+			} else {
+				Path path;
+				astar.pathto(cur, path);
+				return path.get_nsteps();
 			}
-			return path.get_nsteps();
 		}
 	}
 
@@ -812,18 +793,15 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
-		printf (" RECEIVED no path; start_task_movedock: Failed to find path!\n"); //
 		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 		get_position().x,
 		get_position().y,
 		pd.get_positions(game)[0].x,
 		pd.get_positions(game)[0].y);
 		//this should not happen, but in theory there could be some inconstinency
-		//the portdock could be not valid anymore, so we set new portdock
-		//or would a assert() or throw() be more appropriate here?
-		//PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		//set_destination(game, *other_dock);
-		get_fleet()->update(game);// ???????? instead of set_destination NOCOM
+		//I (tiborb) failed to invoke this situation when testing so
+		//I am not sure if following line behaves allright
+		get_fleet()->update(game);
 		start_task_idle(game, descr().main_animation(), 5000);
 	}
 

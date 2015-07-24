@@ -341,6 +341,18 @@ uint32_t Fleet::count_ships(){
 	return m_ships.size();
 }
 
+uint32_t Fleet::count_ships_heading_here(EditorGameBase & egbase, PortDock * port){
+	uint32_t ships_on_way = 0;
+	if (upcast(Game, game, &owner().egbase())) {
+		for (uint16_t s = 0; s < m_ships.size(); s += 1){
+			if (m_ships[s]->get_destination(egbase) == port){
+				ships_on_way += 1;
+			}
+		}
+	}
+	return ships_on_way;
+}
+
 uint32_t Fleet::count_ports(){
 	return m_ports.size();
 }
@@ -602,15 +614,11 @@ PortDock * Fleet::get_arbitrary_dock() const
 void Fleet::update(EditorGameBase & egbase)
 {
 	if (m_act_pending){
-		if (upcast(Game, game, &egbase)) {
-			printf (" %d: scheduling Fleet::act ... skipped (gt: %6d)\n", get_owner()->player_number(),game->get_gametime());
-		}
 		return;
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		printf (" %d: scheduling Fleet::act + 1000 ms (gt: %6d)\n", get_owner()->player_number(),game->get_gametime());
-		schedule_act(*game, 1000); //NOCOM return to 100
+		schedule_act(*game, 1000);
 		m_act_pending = true;
 	}
 }
@@ -633,7 +641,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		return;
 	}
 
-	printf(" %d: Fleet::act(), gametime: %8d sec., fleet serial: %u\n",
+	printf(" %d: Fleet::act(), gametime: %8d sec., fleet serial: %u\n", //NOCOM
 	m_owner.player_number(), game.get_gametime() / 1000, serial());
 
 	molog("Fleet::act\n");
@@ -669,7 +677,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			if (!dst) {
 				continue; //ware with no destination, OK for us / no scoring
 			}
-			
+
 			bool destination_found = false; //just a functional check
 			for (uint16_t p = 0; p < m_ports.size(); p += 1){
 				if (m_ports[p] ==  m_ships[s]->m_items[i].get_destination(game)){
@@ -680,14 +688,12 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				}
 			}
 			if (!destination_found){
-				printf (" no coresponding port found for this ware, looking for port %u, our ports:\n", dst->serial());
-				for (uint16_t p = 0; p < m_ports.size(); p += 1){
-					printf ("  port No. %d: %u\n", p, m_ports[p]->serial());
-				}
-				//NOCOM - is not this throw here too strong action?
+				//Perhaps the throw here is too strong
 				//we can still remove it before stable release if it proves too much
-				throw wexception("A ware with destination that does not match any of our ports"
-				", ship %u", serial());
+				throw wexception("A ware with destination that does not match any of player's"
+				" ports, ship %u, ware's destination: %u",
+				m_ships[s]->serial(),
+				m_ships[s]->m_items[i].get_destination(game)->serial());
 			}
 		}
 	}
@@ -699,13 +705,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			continue;
 		}
 
-		bool any_ship_on_way = false;
-		for (uint16_t s = 0; s < m_ships.size(); s += 1){
-			if (m_ships[s]->get_destination(game) == &pd){
-				any_ship_on_way = true;
-			}
-		}
-		if (any_ship_on_way) {
+		if (count_ships_heading_here(game, &pd) * 25 > pd.count_waiting()) {
 			//we dont need to seek for other available ship to satisfy this port
 			continue;
 		}
@@ -719,25 +719,31 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			if (m_ships[s]->get_ship_state() != Ship::TRANSPORT) {
 				continue; //in expedition obviously
 			}
-			if (m_ships[s]->get_position().field->get_immovable() == &pd) {
-				continue; //waiting at this very same port
-			}
-			
+			//if (m_ships[s]->get_position().field->get_immovable() == &pd) { //NOCOM - consider this
+				//continue; //waiting at this very same port
+			//}
+
 			mapping.first = s;
 			mapping.second = p;
 			scores[mapping] += ((m_ships[s]->get_nritems() > 15)?1:3)
 			+
-			std::min(m_ships[s]->descr().get_capacity()-m_ships[s]->get_nritems(), m_ports[p]->count_waiting()) / 3;
+			std::min(
+				m_ships[s]->descr().get_capacity() - m_ships[s]->get_nritems(),
+				m_ports[p]->count_waiting()) / 3;
 		}
 	}
 
 	//now adding score for distance
 	for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> ship_port_relation : scores) {
-		int16_t score_for_distance =
-		8
-		-
-		m_ships[ship_port_relation.first.first]->calculate_sea_route
-		(game, *m_ports[ship_port_relation.first.second]) / 50;
+		const int16_t route_length = m_ships[ship_port_relation.first.first]->calculate_sea_route
+		(game, *m_ports[ship_port_relation.first.second]);
+		int16_t score_for_distance = 0;
+		if (route_length < 3) { //ship in current portdock
+			score_for_distance = 10;
+		} else {
+			score_for_distance = 8 - route_length / 50;
+		}
+		//must not be negative
 		score_for_distance = (score_for_distance < 0)?0:score_for_distance;
 		scores[ship_port_relation.first] += score_for_distance;
 	}
@@ -762,7 +768,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 		//making sure the winner has no destination set
 		assert(!m_ships[best_ship]->get_destination(game));
-		
+
 		//now actual setting destination for "best ship"
 		m_ships[best_ship]->set_destination(game, *m_ports[best_port]);
 		molog("... ship %u sent to port %u, wares onboard: %2d, is the port demanding a ship: %s\n",
@@ -804,7 +810,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 
 	if (!waiting_ports.empty()) {
-		molog("... there are %lu ports requesting ship(s) we cannot satisfy yet\n", waiting_ports.size() );
+		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports.size() );
 		schedule_act(game, 5000); // retry in the next time
 		m_act_pending = true;
 	}

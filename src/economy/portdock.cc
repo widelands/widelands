@@ -366,11 +366,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 
 		if (m_waiting.empty()){
 			set_need_ship(game, false);
-			//printf ("  all wares LOADED to ship\n"); //NOCOM
-		} //else {
-		//	printf ("  ship full / failed to LOAD all wares (%d left)\n",
-		//	m_waiting.size() );
-		//}
+		}
 	}
 
 	m_fleet->update(game);
