@@ -12,7 +12,7 @@ return {
 
 		-- The font set used, including the script's direction. See i18n/fonts.lua
 		font = "default"
-		},
+	},
 
 	ar = {
 		name = "العربية",

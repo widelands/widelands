@@ -40,7 +40,7 @@ lua_locales += "\t\t-- Defines the language's position on the list in the Option
 lua_locales += '\t\tsort_name = "English",\n\n'
 lua_locales += "\t\t-- The font set used, including the script's direction. See i18n/fonts.lua\n"
 lua_locales += '\t\tfont = "default"\n'
-lua_locales += '\t\t},\n'
+lua_locales += '\t},\n'
 
 for source_filename in source_files:
 	# Only json files, and not the template file please
