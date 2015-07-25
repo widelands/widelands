@@ -185,7 +185,7 @@ saledus_3 = {
 amalea_1 = {
    title =_ "Food for the Miners",
    body= amalea(_"Amalea enters…",
-		_([[Hail, Lutius! Don’t you think you forgot something important?]])
+		_([[Lutius, don’t you think you forgot something important?]])
 		.. paragraphdivider() ..
 		_([[It’s nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
 		.. paragraphdivider() ..
