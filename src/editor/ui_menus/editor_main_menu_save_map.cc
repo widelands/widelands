@@ -190,10 +190,10 @@ void MainMenuSaveMap::clicked_ok() {
 		}
 
 		// check if map has at least two port spaces that are reachable for each other
-		if (map.check_seafaring())
+		if (map.allows_seafaring())
 			map.add_tag("seafaring");
 		else
-			map.remove_tag("seafaring");
+			map.delete_tag("seafaring");
 
 		if
 			(save_map

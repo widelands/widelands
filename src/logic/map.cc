@@ -580,8 +580,10 @@ void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
-void Map::remove_tag(const std::string& tag) {
-	m_tags.erase(tag);
+void Map::delete_tag(const std::string& tag) {
+	if (has_tag(tag)) {
+		m_tags.erase(m_tags.find(tag));
+	}
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
@@ -1995,16 +1997,15 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 			check_neighbour_heights(n[i], area);
 }
 
-
 /*
 ===========
-Map::check_check_seafaring()
+Map::allows_seafaring()
 
 This function checks if there are two ports that are reachable
 for each other - then the map is seafaring.
 =============
 */
-bool Map::check_seafaring() {
+bool Map::allows_seafaring() {
 	Map::PortSpacesSet port_spaces = get_port_spaces();
 	std::vector<Coords> portdocks;
 	std::set<Coords, Coords::OrderingFunctor> swim_coords;
@@ -2016,24 +2017,24 @@ bool Map::check_seafaring() {
 		portdocks = find_portdock(fc);
 
 		/* remove the port space if it is not longer valid port space */
-		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()){
+		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()) {
 			set_port_space(c, false);
 			continue;
 		}
 
-		for (const Coords& portdock: portdocks){
+		for (const Coords& portdock: portdocks) {
 			visited_positions.insert(portdock);
 			q_positions.push(portdock);
 		}
 
-		while (!q_positions.empty()){
+		while (!q_positions.empty()) {
 			const Coords& swim_coord = q_positions.front();
 			q_positions.pop();
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
-				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM){
-					if (visited_positions.count(neighbour) == 0){
+				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
+					if (visited_positions.count(neighbour) == 0) {
 						visited_positions.insert(neighbour);
 						q_positions.push(neighbour);
 					}
