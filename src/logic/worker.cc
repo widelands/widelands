@@ -117,8 +117,8 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw GameDataError
 			(_
-			 	("should mine resource %s, which does not exist in world; tribe "
-			 	 "is not compatible with world"),
+				("should mine resource %s, which does not exist in world; tribe "
+				 "is not compatible with world"),
 			 action.sparam1.c_str());
 
 	// Select one of the fields randomly
@@ -222,8 +222,8 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw GameDataError
 			(_
-			 	("should breed resource type %s, which does not exist in world; "
-			 	 "tribe is not compatible with world"),
+				("should breed resource type %s, which does not exist in world; "
+				 "tribe is not compatible with world"),
 			 action.sparam1.c_str());
 
 	// Select one of the fields randomly
@@ -394,30 +394,30 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 
 	Map & map = game.map();
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
-	if (action.sparam1 == "immovable") {
-		bool found_reserved = false;
+	bool found_reserved = false;
 
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game))) {
-					if (!found_reserved) {
-						productionsite->notify_player(game, 30);
-					}
-					else {
-						productionsite->unnotify_player();
-					}
+	for (;; ++area.radius) {
+		if (action.iparam1 < area.radius) {
+			send_signal(game, "fail"); //  no object found, cannot run program
+			pop_task(game);
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				if (!found_reserved) {
+					productionsite->notify_player(game, 30);
 				}
-				return true;
+				else {
+					productionsite->unnotify_player();
+				}
 			}
+			return true;
+		}
+		if (action.sparam1 == "immovable") {
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables
-					(area, &list, cstep);
+						(area, &list, cstep);
 			else
 				map.find_reachable_immovables
-					(area, &list, cstep, FindImmovableAttribute(action.iparam2));
+						(area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
 				if (upcast(Immovable, imm, list[idx].object)) {
@@ -439,39 +439,37 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 
 			if (!list.empty()) {
 				set_program_objvar
-					(game, state, list[game.logic_rand() % list.size()].object);
+						(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
-		}
-	} else {
-		for (;; ++area.radius) {
-			if (action.iparam1 < area.radius) {
-				send_signal(game, "fail"); //  no object found, cannot run program
-				pop_task(game);
-				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->notify_player(game, 30);
-				return true;
-			}
-			else {
-				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->unnotify_player();
+		} else {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
 			}
 			std::vector<Bob *> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_bobs
-					(area, &list, cstep);
+						(area, &list, cstep);
 			else
 				map.find_reachable_bobs
-					(area, &list, cstep, FindBobAttribute(action.iparam2));
+						(area, &list, cstep, FindBobAttribute(action.iparam2));
 
+			for (int idx = list.size() - 1; idx >= 0; idx--) {
+				if (upcast(MapObject, bob, list[idx])) {
+					if (bob->is_reserved_by_worker()) {
+						found_reserved = true;
+						list.erase(list.begin() + idx);
+					}
+				}
+			}
 			if (!list.empty()) {
 				set_program_objvar
-					(game, state, list[game.logic_rand() % list.size()]);
+						(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
+
 		}
 	}
-
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -565,7 +563,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		if (action.iparam4)
 			functor.add
 				(FindNodeResourceBreedable
-				 	(world.get_resource(action.sparam1.c_str())));
+					(world.get_resource(action.sparam1.c_str())));
 		else
 			functor.add
 				(FindNodeResource(world.get_resource(action.sparam1.c_str())));
@@ -662,11 +660,11 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 	if
 		(!
 		 start_task_movepath
-		 	(game,
-		 	 dest,
-		 	 10,
-		 	 descr().get_right_walk_anims(does_carry_ware()),
-		 	 forceonlast, max_steps))
+			(game,
+			 dest,
+			 10,
+			 descr().get_right_walk_anims(does_carry_ware()),
+			 forceonlast, max_steps))
 	{
 		molog("  could not find path\n");
 		send_signal(game, "fail");
@@ -945,7 +943,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		//NoLog("  Field is no longer empty\n");
 	} else if
 		(const ResourceDescription * const rdescr =
-		 	world.get_resource(position.field->get_resources()))
+			world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
@@ -976,9 +974,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 *new Message
 					(message_type,
 					 game.get_gametime(),
-				 	 rdescr->descname(),
-				 	 message,
-				 	 position,
+					 rdescr->descname(),
+					 message,
+					 position,
 					 m_serial
 					),
 				 300000, 8);
@@ -988,9 +986,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
-			 	(rdescr,
-			 	 rdescr->detectable() ?
-			 	 position.field->get_resources_amount() : 0),
+				(rdescr,
+				 rdescr->detectable() ?
+				 position.field->get_resources_amount() : 0),
 			 &t);
 	}
 
@@ -1314,8 +1312,8 @@ void Worker::create_needed_experience(Game & /* game */)
  */
 WareIndex Worker::gain_experience(Game & game) {
 	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
-	          INVALID_INDEX :
-	          level(game);
+			  INVALID_INDEX :
+			  level(game);
 }
 
 
@@ -1548,10 +1546,10 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 			if (index >= 0) {
 				if
 					(start_task_movepath
-					 	(game,
-					 	 path,
-					 	 index,
-					 	 descr().get_right_walk_anims(does_carry_ware())))
+						(game,
+						 path,
+						 index,
+						 descr().get_right_walk_anims(does_carry_ware())))
 				{
 					molog
 						("[transfer]: from road %u to flag %u\n",
@@ -1861,10 +1859,10 @@ void Worker::return_update(Game & game, State & state)
 	if
 		(!
 		 start_task_movepath
-		 	(game,
-		 	 location->base_flag().get_position(),
-		 	 15,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
+			(game,
+			 location->base_flag().get_position(),
+			 15,
+			 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
 		const std::string message =
@@ -1876,9 +1874,9 @@ void Worker::return_update(Game & game, State & state)
 			 *new Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
-			 	 _("Worker got lost!"),
+				 _("Worker got lost!"),
 				 message,
-			 	 get_position()),
+				 get_position()),
 				 m_serial);
 		set_location(nullptr);
 		return pop_task(game);
@@ -1951,14 +1949,15 @@ void Worker::set_program_objvar(Game & game, State & state, MapObject * obj)
 {
 	assert(state.task == &taskProgram);
 
-	if (upcast(Immovable, imm, state.objvar1.get(game))) {
-		imm->set_reserved_by_worker(false);
+
+	if (state.objvar1.get(game) != nullptr) {
+		(state.objvar1.get(game))->set_reserved_by_worker(false);
 	}
 
 	state.objvar1 = obj;
 
-	if (upcast(Immovable, imm, obj)) {
-		imm->set_reserved_by_worker(true);
+	if (obj != nullptr) {
+		obj->set_reserved_by_worker(true);
 	}
 }
 
@@ -2558,8 +2557,8 @@ void Worker::fugitive_update(Game & game, State & state)
 	int32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
-		 	(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
-		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
+			(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
+			 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
 		Flag *  best     =  nullptr;
@@ -2596,12 +2595,12 @@ void Worker::fugitive_update(Game & game, State & state)
 			// perhaps find a closer flag.
 			if
 				(start_task_movepath
-				 	(game,
-				 	 best->get_position(),
-				 	 0,
-				 	 descr().get_right_walk_anims(does_carry_ware()),
-				 	 false,
-				 	 4))
+					(game,
+					 best->get_position(),
+					 0,
+					 descr().get_right_walk_anims(does_carry_ware()),
+					 false,
+					 4))
 				return;
 		}
 	}
@@ -2615,10 +2614,10 @@ void Worker::fugitive_update(Game & game, State & state)
 
 	if
 		(start_task_movepath
-		 	(game,
-		 	 game.random_location(get_position(), descr().vision_range()),
-		 	 4,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
+			(game,
+			 game.random_location(get_position(), descr().vision_range()),
+			 4,
+			 descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
 	return start_task_idle(game, descr().get_animation("idle"), 50);
@@ -2674,7 +2673,7 @@ void Worker::geologist_update(Game & game, State & state)
 	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
-		 	(dynamic_cast<Flag&>(*get_location(game)).get_position()),
+			(dynamic_cast<Flag&>(*get_location(game)).get_position()),
 		 state.ivar2);
 
 	// Check if it's not time to go home
@@ -2744,10 +2743,10 @@ void Worker::geologist_update(Game & game, State & state)
 				if
 					(!
 					 start_task_movepath
-					 	(game,
-					 	 target,
-					 	 0,
-					 	 descr().get_right_walk_anims(does_carry_ware())))
+						(game,
+						 target,
+						 0,
+						 descr().get_right_walk_anims(does_carry_ware())))
 				{
 
 					molog("[geologist]: Bug: could not find path\n");
@@ -2767,7 +2766,7 @@ void Worker::geologist_update(Game & game, State & state)
 	if
 		(!
 		 start_task_movepath
-		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
+			(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[geologist]: could not find path home\n");
 		send_signal(game, "fail");

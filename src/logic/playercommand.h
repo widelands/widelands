@@ -313,7 +313,7 @@ private:
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0) {} // For savegame loading
 	CmdShipScoutDirection
-		(int32_t const t, PlayerNumber const p, Serial s, uint8_t direction)
+		(int32_t const t, PlayerNumber const p, Serial s, WalkingDir direction)
 		: PlayerCommand(t, p), serial(s), dir(direction)
 	{}
 
@@ -329,7 +329,7 @@ struct CmdShipScoutDirection : public PlayerCommand {
 
 private:
 	Serial serial;
-	uint8_t dir;
+	WalkingDir dir;
 };
 
 struct CmdShipConstructPort : public PlayerCommand {
@@ -357,8 +357,8 @@ private:
 struct CmdShipExploreIsland : public PlayerCommand {
 	CmdShipExploreIsland() : PlayerCommand(), serial(0) {} // For savegame loading
 	CmdShipExploreIsland
-		(int32_t const t, PlayerNumber const p, Serial s, ScoutingDirection direction)
-		: PlayerCommand(t, p), serial(s), scouting_direction(direction)
+		(int32_t const t, PlayerNumber const p, Serial s, IslandExploreDirection direction)
+		: PlayerCommand(t, p), serial(s), island_explore_direction(direction)
 	{}
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -373,7 +373,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 
 private:
 	Serial serial;
-	ScoutingDirection scouting_direction;
+	IslandExploreDirection island_explore_direction;
 };
 
 struct CmdShipSink : public PlayerCommand {

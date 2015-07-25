@@ -98,8 +98,6 @@ public:
 	void move_view_to(Widelands::Coords);
 	void move_view_to_point(Point pos);
 
-	virtual void start() = 0;
-
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);

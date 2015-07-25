@@ -438,7 +438,7 @@ struct ShipObserver {
 
 	// a ship circumvents all islands in the same direction, the value
 	// is assigned only once
-	Widelands::ScoutingDirection island_circ_direction = Widelands::ScoutingDirection::kClockwise;
+	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
 	int32_t last_command_time = 0;
 };
@@ -463,13 +463,13 @@ struct EnemySiteObserver {
 	uint32_t last_time_attackable;
 	uint32_t last_tested;
 	int16_t score;
-	bool warehouse;
 	Widelands::ExtendedBool mines_nearby;
 	int16_t no_attack_counter;
 
 	EnemySiteObserver()
 	   : warehouse_(false),
 	     attack_soldiers(0),
+	     defenders(0),
 	     stationed_soldiers(0),
 	     last_time_attackable(std::numeric_limits<uint32_t>::max()),
 	     last_tested(0),

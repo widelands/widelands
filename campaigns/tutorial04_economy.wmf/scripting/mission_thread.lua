@@ -3,7 +3,7 @@
 -- ===============
 
 function introduction()
-   sleep(500)
+   sleep(1000)
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
 
@@ -19,9 +19,25 @@ function burn_tavern_down()
    message_box_objective(plr, tavern_burnt_down)
    sleep(2000)
    local o = message_box_objective(plr, building_stat)
-   -- wait for the window to open and close
    while not mv.windows.building_statistics do sleep(100) end
-   -- we cannot check whether the user scrolled, so let's hope he does it
+   sleep(500)
+   o.done = true
+
+   o = message_box_objective(plr,explain_building_stat)
+   -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
+   local o2 = add_campaign_objective(reopen_building_stat_obj)
+   o2.visible = false
+   local medium_tab_active = false
+   while not medium_tab_active do
+      if not mv.windows.building_statistics then
+         o2.visible = true
+         message_box_objective(plr, reopen_building_stat)
+         while not mv.windows.building_statistics do sleep(200) end
+         o2.visible = false
+      end
+      if mv.windows.building_statistics.tabs["building_stats_medium"].active then medium_tab_active = true end
+      sleep(200)
+   end
    while mv.windows.building_statistics do sleep(100) end
    o.done = true
 
@@ -32,7 +48,7 @@ function burn_tavern_down()
 
    o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
-   local o2 = add_campaign_objective(reopen_stock_menu_obj)
+   o2 = add_campaign_objective(reopen_stock_menu_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.stock_menu then

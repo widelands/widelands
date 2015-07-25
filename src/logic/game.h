@@ -41,6 +41,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+enum class IslandExploreDirection;
 enum class ScoutingDirection;
 struct Ship;
 struct PlayerEndStatus;
@@ -181,9 +182,9 @@ public:
 	void send_player_enemyflagaction
 		(const Flag &, PlayerNumber, uint32_t count);
 
-	void send_player_ship_scout_direction(Ship &, uint8_t);
+	void send_player_ship_scouting_direction(Ship &, WalkingDir);
 	void send_player_ship_construct_port(Ship &, Coords);
-	void send_player_ship_explore_island(Ship &, ScoutingDirection);
+	void send_player_ship_explore_island(Ship &, IslandExploreDirection);
 	void send_player_sink_ship(Ship &);
 	void send_player_cancel_expedition_ship(Ship &);
 

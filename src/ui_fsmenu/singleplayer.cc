@@ -34,7 +34,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
-		  m_butw, get_h() - vbox.get_y(), m_padding),
+		  m_butw, get_h() - m_box_y, m_padding),
 	new_game
 		(&vbox, "new_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("New Game"), "", true, false),

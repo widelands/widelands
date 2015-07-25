@@ -48,7 +48,7 @@ end
 --
 --    :returns: A paragraph with s formatted as heading.
 function h2(s)
-   return "<p font-size=14 font-weight=bold font-color=D1D1D1>"
+   return "<p font-size=2> <br></p><p font-size=14 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 

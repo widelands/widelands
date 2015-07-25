@@ -106,7 +106,7 @@ m_toggle_message_menu
 	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Ware Encyclopedia")))
+	 ("menu_help", "help", _("Tribal Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
@@ -334,6 +334,14 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+			return true;
+
+		case SDLK_b:
+			if (m_mainm_windows.building_stats.window == nullptr) {
+				new BuildingStatisticsMenu(*this, m_mainm_windows.building_stats);
+			} else {
+				m_mainm_windows.building_stats.toggle();
+			}
 			return true;
 
 		case SDLK_s:

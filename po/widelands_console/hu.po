@@ -1,21 +1,23 @@
-# Widelands po/hu_HU/widelands.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# GunChleoc, 2014
+# zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-10-18 05:17+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-04-06 09:00+0100\n"
+"PO-Revision-Date: 2015-04-08 05:25+0000\n"
+"Last-Translator: zone <z-one@freemail.hu>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
@@ -33,39 +35,33 @@ msgstr "Beállítások:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
-" --<beállítás-neve>=érték felülbírálja bármelyik beállítást a beállítási "
-"fájlból"
+msgstr " --<beállítás-neve>=érték felülbírálja bármelyik beállítást a beállítási fájlból"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
-" --logfile=FÁJLNÉV A naplót fájlba mentse a szabványos kimenet helyett"
+msgstr " --logfile=FÁJLNÉV A naplót fájlba mentse a szabványos kimenet helyett"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
-" --datadir=KÖNYVTÁRNÉV A megadott könyvtárban találhatóak a Widelands"
+msgstr " --datadir=KÖNYVTÁRNÉV A megadott könyvtárban találhatóak a Widelands"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
-" --homedir=KÖNYVTÁRNÉV A megadott könyvtár használata Widelands beállítási\n"
-"                        fájlok, mentett játékok és visszajátszások "
-"tárolására."
+msgstr " --homedir=KÖNYVTÁRNÉV A megadott könyvtár használata Widelands beállítási\n                        fájlok, mentett játékok és visszajátszások tárolására."
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
 msgstr "                      ~/.widelands az alapértelmezett"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
@@ -77,35 +73,27 @@ msgstr ""
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
-" --language=[de_DE|hu_HU]\n"
-"                        Lokalizáció beállítása."
+msgstr " --language=[de_DE|hu_HU]\n                        Lokalizáció beállítása."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
-" --remove_syncstreams=[true|false]\n"
-"                        A syncstream fáűjlok eltávolítása indításkor."
+msgstr " --remove_syncstreams=[true|false]\n                        A syncstream fáűjlok eltávolítása indításkor."
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
-" --remove_replays=[...]\n"
-"                        Visszajátszások eltávolítása a megadott számú nap "
-"leteltével.\n"
-"                        Ha ez a szám 0 a visszajátszások nem kerülnek "
-"törlésre."
+msgstr " --remove_replays=[...]\n                        Visszajátszások eltávolítása a megadott számú nap leteltével.\n                        Ha ez a szám 0 a visszajátszások nem kerülnek törlésre."
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr "--autosave=[...] Automatikus mentés n percenként"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid ""
@@ -131,30 +119,24 @@ msgstr " --disable_music      Zene kikapcsolása."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
-" --nozip              A mentéseket ne tömörített zip formátumban tárolja."
+msgstr " --nozip              A mentéseket ne tömörített zip formátumban tárolja."
 
 #: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
-" --editor             Egyből a Widelands pályaszerkesztőt indítsa el.\n"
-"                      Hozzáírva a =FILENAME szöveget betölti a\n"
-"                      FILENAME néven mentett térképet a szerkesztőbe."
+msgstr " --editor             Egyből a Widelands pályaszerkesztőt indítsa el.\n                      Hozzáírva a =FILENAME szöveget betölti a\n                      FILENAME néven mentett térképet a szerkesztőbe."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
-" --scenario=FILENAME  Közvetlenül a FILENAME térképet indítja scenarioként."
+msgstr " --scenario=FILENAME  Közvetlenül a FILENAME térképet indítja scenarioként."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
-" --loadgame=FILENAME  Közvetlenül betölti a FILENAME néven mentett állást."
+msgstr " --loadgame=FILENAME  Közvetlenül betölti a FILENAME néven mentett állást."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
@@ -167,7 +149,8 @@ msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
@@ -181,7 +164,8 @@ msgid "Graphic options:"
 msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --fullscreen=[true|false]\n"
@@ -191,11 +175,11 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr "--xres=[...] Ablak szélessége pixelekkel megadva."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr "--yres=[...] Ablak magassága pixelekkel megadva."
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
@@ -207,21 +191,18 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      Az ablak ragadjon a képernyő széléhez,\n"
-"                      ha az ablak széle ilyen távolságon belülre\n"
-"                      kerül a képernyő széléhez képest."
+msgstr " --border_snap_distance=[0 ...]\n                      Az ablak ragadjon a képernyő széléhez,\n                      ha az ablak széle ilyen távolságon belülre\n                      kerül a képernyő széléhez képest."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr "--dock_windows_to_edges=[true|false]\nHa egy ablak oldala a képernyő szélénél\nvan, az ablakkeret azon az oldalon ne\nlátszódjon."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
@@ -229,11 +210,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Az ablak ragadjon a panel széléhez,\n"
-"                      ha az ablak széle ilyen távolságon belülre\n"
-"                      kerül a panel széléhez képest."
+msgstr " --panel_snap_distance=[0 ...]\n                      Az ablak ragadjon a panel széléhez,\n                      ha az ablak széle ilyen távolságon belülre\n                      kerül a panel széléhez képest."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -241,10 +218,7 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Csak akkor mozgasson egy ablakot a panel széléhez\n"
-"                      ha az ablak túlnyúl a panelen."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Csak akkor mozgasson egy ablakot a panel széléhez\n                      ha az ablak túlnyúl a panelen."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
@@ -260,8 +234,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
-"Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Reméljük, hogy tetszett a játék!"
+msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://launchpad.net/widelands\n\nReméljük, hogy tetszett a játék!"
