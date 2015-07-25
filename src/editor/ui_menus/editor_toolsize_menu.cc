@@ -70,6 +70,9 @@ EditorToolsizeMenu::EditorToolsizeMenu
 
 
 void EditorToolsizeMenu::update(uint32_t const val) {
+	if (eia().tools.current().has_size_one()) {
+		return;
+	}
 	eia().set_sel_radius(val);
 	m_decrease.set_enabled(0 < val);
 	m_increase.set_enabled    (val < MAX_TOOL_AREA);
