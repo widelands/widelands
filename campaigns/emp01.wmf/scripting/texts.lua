@@ -137,7 +137,7 @@ saledus_2 = {
 amalea_1 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea smiles…",
-		_([[Hey Lutius, I just met Saledus outside.]])
+		_([[Greetings, Lutius! I just met Saledus outside.]])
 		.. paragraphdivider() ..
 		_([[He told me about the barracks. Well, I don’t think we need more barracks – instead, we might concentrate on other things now.]])
 		.. paragraphdivider() ..
@@ -149,7 +149,7 @@ amalea_1 = {
 amalea_2 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea recommends…",
-		_([[Hey Lutius, I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
+		_([[I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
 		.. paragraphdivider() ..
 		_([[But unfortunately the logs are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build a sawmill – as soon as we have enough space for this.]]))
 		.. new_objectives(obj_build_sawmill_and_lumberjacks),
@@ -159,7 +159,7 @@ amalea_2 = {
 amalea_3 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea comes in…",
-		_([[Hey Lutius, I’ve got two important things to talk about… First the good news:]])
+		_([[I’ve got two important things to talk about… First the good news:]])
 		.. paragraphdivider() ..
 		_([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]])
 		.. paragraphdivider() ..
