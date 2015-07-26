@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# GunChleoc, 2013-2014
+# GunChleoc, 2015
+# GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 18:00+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-25 15:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -217,13 +218,13 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "Theann sinn air a’ chathair-bhaile againn sna làithean a dh’fhalbh. Thàinig iomadh daoine còmhla rinn air an slighe mar-thà ’s làn dòchais. Co-dhiù no co-dheth, ’s eagal leam nach bi sinn treun gu leòr gus an latha a bhuannachd an aghaidh mo bhràithrean."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:149
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "Tha sinn a’ gabhail fois an-dràsta aig crìochan na seann-choille agus ag ullachadh airson na làithean a tha romhainn."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:154
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:175
@@ -239,7 +240,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "Thàinig cuairteachain thugam le droch-naidheachd. Tha na brathadairean againn aig innse dhuinn gu bheil na treubhan a’ dol a-mach ar a chèile fhathast ach tha cuid dhe na saighdearan nas sine is ceannardan nan treubhan a’ fàs seachd searbh sgìth dhen chogadh gun chiall seo. Is Kalitath MacKuin a’ chiad cheannard cogaidh a dh’fhàg Al’tùnran agus tha a thaobh lag is so-leònta a-nis. A-rèir na dh’innis na brathadairean rium, thàinig e gun talamh ìosal timcheall air a’ chathair-bhaile, a’ dìon cearcallan a-muigh an daingneachaidh."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:161
 msgid "Doubts"
@@ -257,7 +258,7 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "Tha Tron airson creidsinn gu bheil Kalitath sgìth dhen t-sabaid agus gun gabhadh e rinn nuair a thèid sinn gu Al’tùnran gus an lagh is rian a thoirt dhi a-rithist. Ach cha chreid mise. Is am mac aig on dhe na cheannardan as cumhachdaiche an fheachd againn a th’ ann an Kalitath agus cha robh a theaghlach toilichte a-riamh a’ lùbadh le bratach Cat’Charud. Carson a thigeadh e gu taobh mac Cat’Charuid ach an gabhadh esan oighreachd is a’ chathair?"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:182
@@ -277,7 +278,7 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Chan èist Tron ri mo theagamhan co-dhiù. Tha e airson an daingneachadh againn a leudachadh gu crìochan ranntair Khalitaith agus an dà fheachd aontachadh. Feumaidh mi sùil gheur a thoirt a-mach air a h-uile rud a thachras an-seo."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Thron is speaking confidently."

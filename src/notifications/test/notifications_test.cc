@@ -26,7 +26,7 @@
 #include "notifications/notifications.h"
 
 struct SimpleNote {
-	CAN_BE_SEND_AS_NOTE(100)
+	CAN_BE_SENT_AS_NOTE(100)
 
 	SimpleNote(const std::string& init_text) : text(init_text) {}
 

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-02 11:30+0000\n"
-"Last-Translator: Gilles Aubert <Hellsprings@gmail.com>\n"
+"POT-Creation-Date: 2015-06-07 09:12+0000\n"
+"PO-Revision-Date: 2015-06-07 09:13+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/projects/p/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -331,72 +331,66 @@ msgstr "Lancez votre expédition"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
 msgid ""
-"Your expedition should be ready about now. If not, please wait a bit – you "
-"will receive a message."
-msgstr "Votre expédition devrait être prête maintenant. Si non, attendez un peu s'il vous plaît - vous recevrez un message."
+"Your expedition ship is ready. It is waiting for your orders in front of "
+"your port. It isn’t transporting wares anymore. Use its buttons to send your"
+" ship in any of the six main directions of the Widelands map. When it has "
+"reached a coastline, you can make it travel around the coast, where it will "
+"look for suitable places for landing."
+msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
-msgid ""
-"Your ship will be waiting for your orders in front of your port. It won’t be"
-" transporting wares anymore. Use its buttons to send your ship in any of the"
-" six main directions of the Widelands map. When it has reached a coastline, "
-"you can make it travel around the coast, where it will look for suitable "
-"places for landing."
-msgstr "Votre navire attendra vos ordres en face de votre port. Il ne transportera pas plus de marchandises. Utilisez les boutons pour envoyer votre vaisseau dans l'une des six directions principales de la carte Widelands. Quand il aura atteint une côte, vous pourrez le faire voyager autour de la côte, où il va chercher des endroits appropriés pour le débarquement."
-
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
 msgstr "Une fois qu'un endroit approprié pour le port a été trouvée, vous pourrez construire un nouveau port avec le bouton au centre de la fenêtre de contrôle du navire."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
 msgstr "Les marchandises seront ensuite déchargés, et le navire aura la tâche de transporter des marchandises une fois de plus. Le constructeur commencera son travail et construira un port."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:169
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:168
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
 msgstr "Rechercher une île avec une montagne, ainsi qu'un espace pour le port. Coloniser l'île."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:172
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
 msgid "Found a settlement"
 msgstr "Trouvez un campement"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr "Dirigez votre navire vers une île qui pourrait contenir du minerai de fer."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
 msgstr "Lorsque vous cliquez sur le navire d'expédition, une fenêtre s'ouvre où vous pouvez contrôler votre vaisseau."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "When you have found a suitable port space, build a port there."
 msgstr "Lorsque vous avez trouvé un emplacement pour le port, construisez le."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:184
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Conclusion"
 msgstr "Conclusion"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Congratulations"
 msgstr "Félicitations"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
 msgstr "Vous avez menez l'expédition avec succès et vous avez fondé une nouvelle colonie. J'ai envoyé quelques géologues - ils déclarent déjà qu'ils ont trouvé du minerai de fer."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
 "In this scenario, you’ve learned everything about seafaring: how to build "
 "ports and ships and how to send out an expedition. Remember that expeditions"
@@ -404,7 +398,7 @@ msgid ""
 "the only one."
 msgstr "Dans ce scénario, vous avez appris tous ce qu'il faut savoir sur la navigation: comment construire des ports et des navires, comment envoyer une expédition: Rappelez-vous que les expéditions sont souvent le moyen le plus rapide pour atteindre des ressources essentielles - et parfois le seul."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "But I want to speak a word of warning. Ports are like headquarters: they can"
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
@@ -412,7 +406,7 @@ msgid ""
 "next to an enemy."
 msgstr "Mais j'aimerais vous dire un mot d'avertissement. Les ports sont comme des quartiers-généraux: ils peuvent être attaqués par un ennemi proche. Bien que votre quartier-général a des soldats pour la défendre, votre nouveau port n'en aura pas. Vous devez donc éviter de vous installer à côté d'un ennemi proche."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "

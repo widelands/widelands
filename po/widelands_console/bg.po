@@ -1,32 +1,34 @@
-# Bulgarian translation for widelands
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# GunChleoc, 2014
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-10-18 05:14+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-07-04 16:22+0200\n"
+"PO-Revision-Date: 2015-07-08 13:44+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
+"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Това е Widelands компилация %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Използване: widelands <опция0>=<значение0> ... <опцияN>=<значениеN>"
+msgstr "Използване: widelands <опция0>=<стойност0> ... <опцияN>=<стойностN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -34,69 +36,71 @@ msgstr "Опции:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr " --<config-entry-name>=стойност презаписва всяка настройка\n                      в конфигурационния файл"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
+msgstr " --logfile=ФАЙЛ   Извеждане на журнала във ФАЙЛ, вместо\n                      в терминала"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
+msgstr " --datadir=ДИРЕКТОРИЯ    Използване на зададената директория\n                      за файловете с данни на Widelands"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
+msgstr " --homedir=ДИРЕКТОРИЯ    Използване на зададената директория\n                      за конфигурационните файлове, запазените\n                      игри и повторенията на Widelands"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr "                      По подразбиране ~/.widelands"
+msgstr "                      По подразбиране това е ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr " --coredump=[true|false]\n                      Създава „core dump“ при нарушения на\n                      разделянето, вместо да се използва SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
+msgstr " --language=[de_DE|bg_BG|...]\n                      Езикът, който да се ползва."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
+msgstr " --remove_syncstreams=[true|false]\n                      Премахване на syncstream файловете при стартиране"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
+msgstr " --remove_replays=[...]\n                      Премахване на повторенията след толкова дни.\n                      Ако е 0, повторенията не се изтриват."
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr " --autosave=[...]     Автоматично запазване на всеки х минути"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr " --rolling_autosave=[...]\n                      Използване на толкова файлове за\n                      непрекъснати автоматични запазвания"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
@@ -123,65 +127,64 @@ msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
-" --editor             Запустить редактор карт Widelands.\n"
-"                      Вы можете добавить =FILENAME для открытия\n"
-"                      карты FILENAME в редакторе."
+msgstr " --editor             Направо стартира редактора на Widelands.\n                      Можете да добавите =ФАЙЛ, за да заредите\n                      направи картата ФАЙЛ в редактора."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr " --scenario=FILENAME  Запустить игру на карте FILENAME."
+msgstr " --scenario=ФАЙЛ  Стартира играта направи с картата ФАЙЛ\n                      като сценарий."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILENAME  Загрузить игру из сохранения FILENAME."
+msgstr " --loadgame=ФАЙЛ  Направо зарежда запазената игра ФАЙЛ."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr " --script=ФАЙЛ    Изпълнява посочения Lua скрипт след стартиране.\n                      Валидно само със --scenario, --loadgame или --editor."
 
 #: ../../src/wlapplication_messages.cc:88
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=FILENAME Стартира dedicated сървър с карта  FILENAME"
+msgstr " --dedicated=ФАЙЛ Стартира специализиран сървър с картата ФАЙЛ"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Дали автоматично да се влиза в режим\n                      на строене на пътища след поставяне на\n                      флаг, който не е свързан с път."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
-msgstr ""
+msgstr "Графични настройки:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false]\n                      Дали да се използва целия екран за играта."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Ширина на прозореца в пиксели."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Височина на прозореца в пиксели."
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
-msgstr "Параметри на вътрешния мениджър на прозореца:"
+msgstr "Параметри на вътрешния мениджър на прозорци:"
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
@@ -189,21 +192,18 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      Придвижва прозореца към края на екрана в случай,\n"
-"                      че края на прозореца се окаже в указаната дистанция\n"
-"                      от края на екрана."
+msgstr " --border_snap_distance=[0 ...]\n                      Придвижва прозореца към края на екрана в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на екрана."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\n                      Премахва рамката на прозорец, която е\n                      откъм ръба на екрана, когато ръба на\n                      този прозорец е до ръба на екрана."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
@@ -211,11 +211,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Придвижва прозореца към края на панела в случай,\n"
-"                      че края на прозореца се окаже в указаната дистанция\n"
-"                      от края на панела."
+msgstr " --panel_snap_distance=[0 ...]\n                      Придвижва прозореца към края на панела в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на панела."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -223,14 +219,11 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Придвижва прозореца в края на панела,\n"
-"                      само ако прозореца се припокрива с панела."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Придвижва прозореца в края на панела,\n                      само ако прозореца се припокрива с панела."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose Включва подробни дебъг съобщения"
+msgstr " --verbose Включва подробни съобщения за остраняване на грешките"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
@@ -242,8 +235,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
-"Докладване за грешки? Предложения? Посетете сайта на проекта:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Надяваме се играта да ви хареса!"
+msgstr "Докладване за грешки? Предложения? Посетете сайта на проекта:\n        https://launchpad.net/widelands\n\nНадяваме се играта да ви хареса!"

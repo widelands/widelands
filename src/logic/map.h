@@ -70,7 +70,7 @@ struct Path;
 class Immovable;
 
 struct NoteFieldTransformed {
-	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldTransformed)
 
 	FCoords fc;
 	MapIndex map_index;
@@ -389,7 +389,7 @@ public:
 	void set_port_space(Coords c, bool allowed);
 	const PortSpacesSet& get_port_spaces() const {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring() const;
+	bool allows_seafaring();
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
