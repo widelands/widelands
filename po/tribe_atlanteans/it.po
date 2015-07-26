@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-13 11:32+0000\n"
-"PO-Revision-Date: 2015-04-21 09:38+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-25 13:58+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -506,7 +506,7 @@ msgstr "Grandi secchi per l'allevatore di pesci - prodotti dal fabbro."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr "Lavori nei cantieri per creare un nuovo edificio."
+msgstr "Lavora nei cantieri per creare dei nuovi edifici."
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -673,7 +673,7 @@ msgstr "L'indicatore di risorse segna acqua"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Ship Construction Site"
-msgstr "Sito di costruzione navi"
+msgstr "Cantiere navale"
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Advanced Shield"
@@ -973,7 +973,7 @@ msgstr "Nave"
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Construction Site"
-msgstr "Luogo della costruzione"
+msgstr "Cantiere"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Dismantle Site"
@@ -1528,7 +1528,7 @@ msgstr "avanzando l'evasione del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:19
 msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-msgstr ""
+msgstr "Addestra i soldati in 'Difesa', 'Evasione' e 'Salute'."
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:28
 msgid "Defense Training:"
@@ -1627,7 +1627,7 @@ msgstr "Taglia delle pietre dalle rocce nelle vicinanze."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
+msgstr "La cava richiede delle pietre da tagliare all'interno del suo raggio di lavoro."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1905,7 +1905,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Estrae dell'acqua dalle profondità."
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."

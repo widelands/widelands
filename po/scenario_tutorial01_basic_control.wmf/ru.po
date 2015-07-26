@@ -5,13 +5,14 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-17 06:11+0000\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,11 +94,11 @@ msgstr "Нажмите кнопку «ОК», чтобы закрыть окно
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
-msgstr "Включить показ мест для построек"
+msgstr "Включить подсказки по типам строений"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr "Показывет места для построек"
+msgstr "Подсказки по типам строений"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
@@ -282,7 +283,7 @@ msgstr "Чтобы закрыть окно, просто кликни на нё�
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
-msgstr "Лесопилка готова"
+msgstr "Хижина дровосека готова"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -311,7 +312,7 @@ msgstr "Камни можно добыть в гранитной шахте, н�
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr "Существует три способа перемещения вида. Первый — с помощью курсорных клавиш. Давай, попробуй."
+msgstr "Существует три способа перемещения вида. Первый — с помощью стрелок на клавиатуре. Давай, попробуй."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
@@ -319,7 +320,7 @@ msgstr "Нажми кнопку «ОК» и передвинь вид с пом�
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
-msgstr "Перемести вид курсорными клавишами"
+msgstr "Перемести вид стрелками"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
@@ -416,20 +417,20 @@ msgstr "Закрой миникарту когда закончишь повто
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
-msgstr "Вперёд, к карьеру"
+msgstr "Вперёд, к каменоломне"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
-msgstr "Отлично. Теперь о карьерах…"
+msgstr "Отлично. Теперь о каменоломне…"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
-msgstr "Как построить карьер"
+msgstr "Как построить каменоломню"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "Построй каменоломню у этих скал. Помнишь как я это делал?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -448,12 +449,12 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid "Everything can be built on the green house symbol."
-msgstr "Любые строения могут быть построены на месте значка зелёного домика."
+msgstr "Любые строения могут быть возведены на месте значка зелёного домика."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:254
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr "Любые строения, за исключением больших, могут быть построены на месте жёлтого домика."
+msgstr "Любые строения, кроме больших, могут быть возведены на месте жёлтого домика."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:255
 msgid "Red building symbols can only hold small buildings and flags."
@@ -686,7 +687,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:380
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:389
 msgid "Census and Statistics"
-msgstr ""
+msgstr "Численность населения и статистика"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""
@@ -952,7 +953,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid "Military Site Occupied"
-msgstr "Военное строение захвачено!"
+msgstr "Военное строение занято!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:498
 msgid "Your territory has just grown!"
@@ -1015,7 +1016,7 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Новое задание"
+msgstr[1] "Новые задания"
+msgstr[2] "Новые задания"
+msgstr[3] "Новые задания"
