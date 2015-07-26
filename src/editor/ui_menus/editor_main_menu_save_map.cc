@@ -188,6 +188,13 @@ void MainMenuSaveMap::clicked_ok() {
 				  filename.substr(0, filename_size - 4) : filename)
 				 .c_str());
 		}
+
+		// check if map has at least two port spaces that are reachable for each other
+		if (map.allows_seafaring())
+			map.add_tag("seafaring");
+		else
+			map.delete_tag("seafaring");
+
 		if
 			(save_map
 			 	(filename,

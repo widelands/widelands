@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-16 08:29+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +156,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "Non funzionerà ancora. Ho ancora bisogno di collegare la capanna del boscaiolo al resto della mia rete stradale. Dopo aver istituito un cantiere, sono stato automaticamente inserito nella modalità di costruzione delle strade, quindi tutto quello che devo fare è cliccare sulla bandiera blu di fronte al mio quartier generale."
+msgstr "Non funzionerà ancora. Ho ancora bisogno di collegare la capanna del boscaiolo al resto della mia rete stradale. Dopo avere istituito un cantiere, sono stato automaticamente inserito nella modalità di costruzione delle strade, quindi tutto quello che devo fare è cliccare sulla bandiera blu di fronte al mio quartier generale."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -609,7 +609,7 @@ msgstr "Collega la cava al quartier generale"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid "Connect Your Construction Site"
-msgstr "Connetti il tuo cantiere"
+msgstr "Collega il tuo cantiere"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:335
 msgid ""
@@ -627,7 +627,7 @@ msgstr "Per costruire una strada completamente nuova basta cliccare sulla bandie
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "Cava non collegata"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -640,7 +640,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Hai distrutto il cantiere!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""

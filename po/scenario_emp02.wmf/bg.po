@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-29 08:07+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,15 +31,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
-msgstr ""
+msgstr "Постройте кариера"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
-msgstr ""
+msgstr "Кариера"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Постройте кариера южно от щаба си."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -92,7 +93,7 @@ msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr ""
+msgstr "За да произведем храна за нашите миньори, можем да построим механа. За да им осигурим добри и силни напитки, можем да построим пивоварна и винарна."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
@@ -112,7 +113,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "От Вас зависи какво искате да построите. Но помнете – мините за въглища и желязна руда се нуждаят от бира, мините за мрамор и злато се нуждаят от вино, а всички мини като цяло се нуждаят от хранителни дажби, които се произвеждат от хляб ИЛИ месо ИЛИ риба."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -481,5 +482,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Нова задача"
+msgstr[1] "Нови задачи"
