@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-24 18:00+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-16 07:50+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -275,7 +275,7 @@ msgstr "Betulla (alberello)"
 
 #: ../../world/immovables/trees/birch/init.lua:35
 msgid "Birch (Pole)"
-msgstr "Palo di betulla"
+msgstr "Betulla (palo)"
 
 #: ../../world/immovables/trees/birch/init.lua:58
 msgid "Birch (Mature)"
@@ -288,17 +288,17 @@ msgstr "Betulla (vecchia)"
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr "Alberello di cirro"
+msgstr "Albero di cirro (Alberello)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr "Palo di cirro"
+msgstr "Albero di cirro (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr "Albero di cirro"
+msgstr "Albero di cirro (Maturo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:85
@@ -324,7 +324,7 @@ msgstr "Larice (alberello)"
 
 #: ../../world/immovables/trees/larch/init.lua:35
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Larice (palo)"
 
 #: ../../world/immovables/trees/larch/init.lua:58
 msgid "Larch (Mature)"
@@ -342,7 +342,7 @@ msgstr "Albero a liana (alberello)"
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:37
 msgid "Liana Tree (Pole)"
-msgstr ""
+msgstr "Albero a liana (palo)"
 
 #: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:61
@@ -448,19 +448,19 @@ msgstr "Quercia (vecchia)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
-msgstr ""
+msgstr "Borassus (alberello)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:35
 msgid "Borassus Palm (Pole)"
-msgstr ""
+msgstr "Borassus (palo)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:58
 msgid "Borassus Palm (Mature)"
-msgstr ""
+msgstr "Borassus (matura)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:81
 msgid "Borassus Palm (Old)"
-msgstr ""
+msgstr "Borassus (vecchia)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -500,7 +500,7 @@ msgstr "Palma da olio (alberello)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:35
 msgid "Oil Palm (Pole)"
-msgstr ""
+msgstr "Palma da olio (palo)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:58
 msgid "Oil Palm (Mature)"
@@ -751,7 +751,7 @@ msgstr "Ceneri"
 #: ../../world/terrains/init.lua:341 ../../world/terrains/init.lua:356
 #: ../../world/terrains/init.lua:371 ../../world/terrains/init.lua:386
 msgid "Hard Ground"
-msgstr ""
+msgstr "Terreno duro"
 
 #: ../../world/terrains/init.lua:401
 msgid "Igneous Rocks"

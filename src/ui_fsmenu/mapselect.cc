@@ -606,7 +606,6 @@ void FullscreenMenuMapSelect::fill_table()
 	if (m_table.size()) {
 		m_table.select(0);
 	}
-	set_has_selection();
 }
 
 /*

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-20 21:41+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-07-02 15:52+0000\n"
 "Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,7 @@ msgid "Vision range:"
 msgstr "Dohled"
 
 #: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
 msgid "Lore"
 msgstr "Vyznání"
 
@@ -256,15 +257,19 @@ msgid "%s or better"
 msgstr "%s nebo lepší"
 
 #: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
 msgid "Experience levels:"
 msgstr "Úrovně zkušeností:"
 
 #: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
 msgid "%s to %s (%s EP)"
-msgstr "%s do %s (%s EP)"
+msgstr "%s do %s (%s ZB)"
 
 #: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Dělník využívá"

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:07+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-10 13:19+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -625,7 +625,7 @@ msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
 "warriors can use it. It is produced at the war mill and used in the training"
 " camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr "Die Bronzeaxt ist als schwer zu führende Waffe bekannt. Nur begabte Krieger nutzen sie erfolgreich. Die Bronzeaxt wird in der Waffenschmiede hergestellt. Im Ausbildungslager trainiert sie die Angriffsstärke eines Soldaten– bei entsprechender Verpflegung – von Stufe 2 zu Stufe 3."
+msgstr "Die Bronzeaxt ist als schwer zu führende Waffe bekannt. Nur begabte Krieger nutzen sie erfolgreich. Die Bronzeaxt wird in der Waffenschmiede hergestellt. Im Ausbildungslager trainiert sie die Angriffsstärke eines Soldaten – bei entsprechender Verpflegung – von Stufe 2 zu Stufe 3."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -633,7 +633,7 @@ msgstr "Arbeitet auf Baustellen, um Gebäude zu bauen."
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr "Transportiert Gegenstände auf den Wegen."
+msgstr "Transportiert Gegenstände auf den Straßen."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
@@ -1595,7 +1595,7 @@ msgstr "Der Wildhüter sorgt dafür, dass die Population der Wildtiere stabil bl
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "\t\t\tas we love to cook and eat them.’"
-msgstr "'Er mag Tiere und sie zu züchten,<br>\n\t\t\tso wie wir es mögen, sie zu kochen und zu essen.'"
+msgstr "„Er mag Tiere und sie zu züchten,<br>\n\t\t\tso wie wir es mögen, sie zu kochen und zu essen.“"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Barbarian nursery rhyme"
@@ -2128,7 +2128,7 @@ msgstr "Ein Reethof kann ein Bündel Reet in durchschnittlich %s herstellen."
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "Erkunder wie Erkundigunde, der Erkunder, erkunden das unerkundete Gebiet auf erkundliche Weise."
+msgstr "Kunderschafter wie Kundigunde, der Erkunder, erkunden das unerkundete Gebiet auf erkundliche Weise."
 
 #: ../../tribes/barbarians/scouts_hut/conf:21
 msgid "scouting"
