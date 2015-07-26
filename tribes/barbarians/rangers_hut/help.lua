@@ -16,7 +16,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description,
 		_"Plants trees in the surrounding area.",
-		_"The ranger’s hut needs free space within the working radius to plant the trees.") ..
+		_"The ranger’s hut needs free space within the work area to plant the trees.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..
