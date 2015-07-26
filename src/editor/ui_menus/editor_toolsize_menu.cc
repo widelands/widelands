@@ -56,7 +56,7 @@ EditorToolsizeMenu::EditorToolsizeMenu
 		 g_gr->images().get("pics/scrollbar_down.png"),
 		 std::string(),
 		 0 < parent.get_sel_radius()),
-	value_(1)
+	value_(0)
 {
 	m_increase.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
 	m_decrease.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
@@ -75,10 +75,10 @@ EditorToolsizeMenu::EditorToolsizeMenu
 
 
 void EditorToolsizeMenu::update(uint32_t const val) {
-		value_ = val;
-		eia().set_sel_radius(val);
-		set_buttons_enabled(true);
-		m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
+	value_ = val;
+	eia().set_sel_radius(val);
+	set_buttons_enabled(true);
+	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
