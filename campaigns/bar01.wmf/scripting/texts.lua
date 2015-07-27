@@ -151,9 +151,9 @@ obj_build_cattlefarm = {
 -- =======================================================================
 --                     Texts for the Main Mission Thread
 -- =======================================================================
--- NOCOM pgettext examples. We want 2 separate entries for these in the .pot, as well as an entry for the remaining ones without pgettext.
+
 briefing_msg_01 = {
-   title = pgettext("one","The Story Begins"),
+   title = _"The Story Begins",
    body = thron(_"Thron sighs…",
       _[[It’s been months, and we are still hiding where the forests are old and dark.]]
       .. paragraphdivider() ..
@@ -161,9 +161,9 @@ briefing_msg_01 = {
    )
 }
 
--- NOCOM pgettext examples.
+
 briefing_msg_02 = {
-   title = pgettext("two", "The Story Begins"),
+   title = _"The Story Begins",
    body = thron(
       _[[We can see the raging flames that swallow Al’thunran from here, miles away.]]
       .. paragraphdivider() ..
