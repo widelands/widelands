@@ -113,8 +113,10 @@ void Slider::layout() {
  */
 void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
-	if (m_max_value != new_max)
+	if (m_max_value != new_max) {
+		calc_cursor_pos();
 		update();
+	}
 	m_max_value = new_max;
 	set_value(m_value);
 }
@@ -126,8 +128,10 @@ void Slider::set_max_value(int32_t new_max) {
  */
 void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
-	if (m_min_value != new_min)
+	if (m_min_value != new_min) {
+		calc_cursor_pos();
 		update();
+	}
 	m_min_value = new_min;
 	set_value(m_value);
 }

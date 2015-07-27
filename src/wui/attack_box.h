@@ -76,6 +76,7 @@ struct AttackBox : public UI::Box {
 			 void (AttackBox::*fn)(),
 			 const std::string & tooltip_text);
 
+		void think() override;
 		void update_attack();
 		void send_less_soldiers();
 		void send_more_soldiers();
@@ -90,6 +91,9 @@ struct AttackBox : public UI::Box {
 
 		UI::Button * m_less_soldiers;
 		UI::Button * m_add_soldiers;
+
+		/// The last time the information in this Panel got updated
+		uint32_t lastupdate_;
 };
 
 #endif  // end of include guard: WL_WUI_ATTACK_BOX_H

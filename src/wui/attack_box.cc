@@ -30,6 +30,8 @@
 #include "graphic/text_constants.h"
 #include "logic/soldier.h"
 
+constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
+
 AttackBox::AttackBox
 	(UI::Panel              * parent,
 	 Widelands::Player      * player,
@@ -44,7 +46,9 @@ AttackBox::AttackBox
 	m_node(target),
 	m_slider_soldiers(nullptr),
 	m_text_soldiers(nullptr),
-	m_add_soldiers(nullptr)
+	m_less_soldiers(nullptr),
+	m_add_soldiers(nullptr),
+	lastupdate_(0)
 {
 	init();
 }
@@ -52,6 +56,7 @@ AttackBox::AttackBox
 AttackBox::~AttackBox() {
 	delete m_slider_soldiers;
 	delete m_text_soldiers;
+	delete m_less_soldiers;
 	delete m_add_soldiers;
 }
 
@@ -119,6 +124,17 @@ UI::Button & AttackBox::add_button
 	return *button;
 }
 
+/*
+ * Update available soldiers
+ */
+void AttackBox::think() {
+	int32_t const gametime = m_pl->egbase().get_gametime();
+	if ((gametime - lastupdate_) > kUpdateTime) {
+		update_attack();
+		lastupdate_ = gametime;
+	}
+}
+
 void AttackBox::update_attack() {
 	assert(m_slider_soldiers);
 	assert(m_text_soldiers);
@@ -127,8 +143,9 @@ void AttackBox::update_attack() {
 
 	int32_t max_attackers = get_max_attackers();
 
-	if (m_slider_soldiers->get_max_value() != max_attackers)
+	if (m_slider_soldiers->get_max_value() != max_attackers) {
 		m_slider_soldiers->set_max_value(max_attackers);
+	}
 
 	m_slider_soldiers->set_enabled(max_attackers > 0);
 	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
