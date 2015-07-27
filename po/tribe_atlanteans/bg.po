@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-16 06:47+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-27 09:11+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -490,7 +490,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornflour, blackroot flour and "
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Този вкусен хляб се прави в пекарна от царевично брашно, брашно от черен корен и вода. Той се използва като основна храна от миньори, разузнавачи и войници в местата за обучение (лабиринта и тъмницата). "
+msgstr "Този вкусен хляб се прави в пекарна от царевично брашно, брашно от черен корен и вода. Той се използва като основна храна от миньори, разузнавачи и войници в тренировъчните сгради (лабиринта и тъмницата)."
 
 #: ../../tribes/atlanteans/bread_paddle/conf:1
 msgid ""
@@ -943,7 +943,7 @@ msgstr "Ковач на инструменти"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Trainer"
-msgstr "Обучител"
+msgstr "Треньор"
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Weaponsmith"
@@ -1274,7 +1274,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Рибата е една от най-важните храни за атлантидците. Тя трябва да бъде опушена в пушилна, преди да бъде доставена до мините, местата за обучение и разузнавачите."
+msgstr "Рибата е една от най-важните храни за атлантидците. Тя трябва да бъде опушена в пушилна, преди да бъде доставена до мините, тренировъчните сгради и разузнавачите."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1566,7 +1566,7 @@ msgid ""
 "Meat is one food resource of the Atlanteans. It is obtained from wild game "
 "taken by the hunter and has to be smoked in a smokery before being delivered"
 " to mines and training sites (dungeon and labyrinth)."
-msgstr "Месото е една от храните на атлантидците. То се получава от диви животни, донесени от ловеца и трябва да бъде опушено в пушилна, преди да бъде доставено до мините и местата за обучение (тъмницата и лабиринта)."
+msgstr "Месото е една от храните на атлантидците. То се получава от диви животни, донесени от ловеца и трябва да бъде опушено в пушилна, преди да бъде доставено до мините и тренировъчните сгради (тъмницата и лабиринта)."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
@@ -1722,7 +1722,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Пушеното месо се прави от месо в пушилна. То се доставя до мините и местата за обучение (лабиринта и тъмницата), където с него миньорите и войниците си приготвят питателен обяд."
+msgstr "Пушеното месо се прави от месо в пушилна. То се доставя до мините и тренировъчните сгради (лабиринта и тъмницата), където с него миньорите и войниците си приготвят питателен обяд."
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."

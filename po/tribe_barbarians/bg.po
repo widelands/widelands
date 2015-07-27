@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-21 10:51+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-27 09:11+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -495,7 +495,7 @@ msgstr "подобрява ловкостта на войник от ниво 1 
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "Твърди се, че това е казано от Нейдхард, известният обучител."
+msgstr "Твърди се, че това е казано от Нейдхард, известният треньор."
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid ""
@@ -542,7 +542,7 @@ msgid ""
 "produced in the ax factory. Only trained warriors are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
-msgstr "Това е едно от опасните оръжия, които варварите произвеждат. То се произвежда във фабриката за брадви. Само обучените войни могат да носят подобно оръжие. То се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 3 на 4."
+msgstr "Това е едно от опасните оръжия, които варварите произвеждат. То се произвежда във фабриката за брадви. Само обучените войни могат да носят подобно оръжие. То се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 3 на 4."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
@@ -614,14 +614,14 @@ msgid ""
 "The broad ax is produced by the axfactory and the war mill. It is used in "
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge (from attack level 1 to attack level 2)."
-msgstr "Широката брадва се произвежда от фабриката за брадви и оръжейната. Тя се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците в основните похвати при битка (повишаване на нивото им на Атака от 1 на 2)."
+msgstr "Широката брадва се произвежда от фабриката за брадви и оръжейната. Тя се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците в основните похвати при битка (повишаване на нивото им на Атака от 1 на 2)."
 
 #: ../../tribes/barbarians/bronzeax/conf:1
 msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
 "warriors can use it. It is produced at the war mill and used in the training"
 " camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr "Бронзовата брадва се смята за оръжие, с което е трудно да се борави. Само умелите войни могат да го използват. Тя се произвежда в оръжейната и се използва в лагера за обучение (където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 2 на 3)."
+msgstr "Бронзовата брадва се смята за оръжие, с което е трудно да се борави. Само умелите войни могат да го използват. Тя се произвежда в оръжейната и се използва в тренировъчния лагер (където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 2 на 3)."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -1099,7 +1099,7 @@ msgstr "Каменоделец"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Trainer"
-msgstr "Обучител"
+msgstr "Треньор"
 
 #: ../../tribes/barbarians/conf:133
 msgid "Weaver"
@@ -1344,7 +1344,7 @@ msgstr "Бойна арена"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Training Camp"
-msgstr "Лагер за обучение"
+msgstr "Тренировъчен лагер"
 
 #: ../../tribes/barbarians/deep_goldmine/conf:42
 #: ../../tribes/barbarians/deeper_goldmine/conf:41
@@ -1534,7 +1534,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "Освен питките и месото, рибата също е ценна храна за варварите. Тя се използва в механите, хановете и големите ханове, както и в местата за обучение (лагера за обучение и бойната арена)."
+msgstr "Освен питките и месото, рибата също е ценна храна за варварите. Тя се използва в механите, хановете и големите ханове, както и в тренировъчните сгради (тренировъчния лагер и бойната арена)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1703,7 +1703,7 @@ msgid ""
 "A helmet is a basic tool to protect warriors. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr "Шлемът е основна екипировка за защита на бойците. Той се произвежда в ковачницата за шлемове и се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 0 на 1."
+msgstr "Шлемът е основна екипировка за защита на бойците. Той се произвежда в ковачницата за шлемове и се използва в тренировъчния лагер където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 0 на 1."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -1881,7 +1881,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr "Това е най-добрата броня на варварите. Тя се произвежда в ковачницата за шлемове и се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 2 на 3."
+msgstr "Това е най-добрата броня на варварите. Тя се произвежда в ковачницата за шлемове и се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 2 на 3."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -1895,7 +1895,7 @@ msgid ""
 "taverns, inns and big inns to prepare rations, snacks and meals for the "
 "miners. It is also consumed in the training sites (training camp and battle "
 "arena)."
-msgstr "Месото съдържа много енергия. То се произвежда от ловците и се използва в механите, хановете и големите ханове за приготвяне на дажби, закуски и ястия за миньорите. То се консумира и в местата за обучение (лагера за обучение и бойната арена)."
+msgstr "Месото съдържа много енергия. То се произвежда от ловците и се използва в механите, хановете и големите ханове за приготвяне на дажби, закуски и ястия за миньорите. То се консумира и в тренировъчните сгради (тренировъчния лагер и бойната арена)."
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "making a bread paddle"
@@ -2008,7 +2008,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Пекарите на варварите са най-добрите в направата на този вид плоска и вкусна питка. Тя се прави от пшеница и вода по тайна рецепта. Питките се използват в механите, хановете и големите ханове за приготвяне на дажби, закуски и ястия. Тя се консумира и в местата за обучение (лагера за обучение и бойната арена)."
+msgstr "Пекарите на варварите са най-добрите в направата на този вид плоска и вкусна питка. Тя се прави от пшеница и вода по тайна рецепта. Питките се използват в механите, хановете и големите ханове за приготвяне на дажби, закуски и ястия. Тя се консумира и в тренировъчните сгради (тренировъчния лагер и бойната арена)."
 
 #: ../../tribes/barbarians/quarry/conf:19
 msgid "quarrying stone"
@@ -2162,7 +2162,7 @@ msgid ""
 "heavier and sharper than the ordinary ax. It is produced in axfactories and "
 "war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr "Новобранците имат честта да се учат да боравят с това мощно оръжие. То е по-тежко и остро от обикновената брадва. Произвежда се във фабриките за брадви и оръжейните. Използва се в лагерите за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 0 на 1."
+msgstr "Новобранците имат честта да се учат да боравят с това мощно оръжие. То е по-тежко и остро от обикновената брадва. Произвежда се във фабриките за брадви и оръжейните. Използва се в тренировъчните лагери, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 0 на 1."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -2291,7 +2291,7 @@ msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %1$s and %2$s on "
 "average."
-msgstr "Ако всички нужни стоки се доставят навреме, лагерът за обучение може да тренира атаката и здравето на един войник и да ги повиши до най-високото ниво средно за %1$s и %2$s."
+msgstr "Ако всички нужни стоки се доставят навреме, тренировъчният лагер може да тренира атаката и здравето на един войник и да ги повиши до най-високото ниво средно за %1$s и %2$s."
 
 #: ../../tribes/barbarians/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
@@ -2302,7 +2302,7 @@ msgid ""
 "A warhelm is an enhanced armor for barbarian warriors. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr "Бойният шлем е подобрена броня за бойците на варварите. Тя се произвежда в ковачницата за шлемове и се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 1 на 2."
+msgstr "Бойният шлем е подобрена броня за бойците на варварите. Тя се произвежда в ковачницата за шлемове и се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Здраве от 1 на 2."
 
 #: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"
@@ -2345,7 +2345,7 @@ msgid ""
 " warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr "Военната брадва е най-опасното оръжие на варварите. Само няколко войни изобщо са успявали да боравят с тази огромна и могъща брадва. Тя се произвежда в оръжейна и се използва в лагера за обучение, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 4 на 5."
+msgstr "Военната брадва е най-опасното оръжие на варварите. Само няколко войни изобщо са успявали да боравят с тази огромна и могъща брадва. Тя се произвежда в оръжейна и се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 4 на 5."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""

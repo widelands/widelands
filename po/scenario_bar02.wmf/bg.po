@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-21 10:42+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-27 09:12+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -107,12 +107,12 @@ msgstr "Постройте крепост на изток от планинит�
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:78
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:80
 msgid "Build a training infrastructure"
-msgstr "Изградете условия за обучаване"
+msgstr "Изградете условия за трениране"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Постройте бойна арена и лагер за обучение западно от планините."
+msgstr "Постройте бойна арена и тренировъчен лагер западно от планините."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
@@ -150,14 +150,14 @@ msgstr "Складовете приличат на щаба, като единс
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:100
 msgid "Build training sites"
-msgstr "Постройте места за обучение"
+msgstr "Постройте тренировъчни сгради"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:102
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "Местата за обучение, като лагера за обучение или бойната арена, се използват за трениране на качествата на войниците. Тези качества имат значение в битките и колкото по-добър е един войник, толкова по-голям е шансът за да спечелите битката."
+msgstr "Тренировъчните сгради, като тренировъчния лагер и бойната арена, се използват за трениране на качествата на войниците. Тези качества имат значение в битките и колкото по-добър е един войник, толкова по-голям е шансът за да спечелите битката."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
