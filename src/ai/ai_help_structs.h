@@ -458,12 +458,12 @@ struct WareObserver {
 	uint8_t preciousness_;
 };
 
-//Computer player does not get notification messages about enemy militarysites
-//and warehouses, so following is collected based on observation
-//It is conventient to have some information preserved, like nearby minefields,
-//when it was attacked, whether it is warehouse and so on
-//Also AI test more such targets when considering attack and calculated score is
-//is stored in the observer
+// Computer player does not get notification messages about enemy militarysites
+// and warehouses, so following is collected based on observation
+// It is conventient to have some information preserved, like nearby minefields,
+// when it was attacked, whether it is warehouse and so on
+// Also AI test more such targets when considering attack and calculated score is
+// is stored in the observer
 struct EnemySiteObserver {
 	bool warehouse_;
 	int32_t attack_soldiers_strength;

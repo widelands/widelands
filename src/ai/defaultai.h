@@ -112,6 +112,12 @@ struct DefaultAI : ComputerPlayer {
 		kExpansion,
 		kPushExpansion
 	};
+	enum class Tribes : uint8_t {
+		kNone,
+		kBarbarians,
+		kAtlanteans,
+		kEmpire
+	};
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -323,7 +329,7 @@ private:
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
-	//statistics for training sites per type
+	// statistics for training sites per type
 	uint8_t ts_basic_count_;
 	uint8_t ts_basic_const_count_;
 	uint8_t ts_advanced_count_;

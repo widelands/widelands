@@ -271,8 +271,9 @@ void DefaultAI::think() {
 			taskDue[ScheduleTasks::kRoadCheck] = gametime + 1000;
 			// testing 5 roads
 			{
-				int32_t roads_to_check = (roads.size() + 1 < 5) ? roads.size() + 1 : 5;
+				const int32_t roads_to_check = (roads.size() + 1 < 5) ? roads.size() + 1 : 5;
 				for (int i = 0; i < roads_to_check; i += 1) {
+					// improve_roads function will test one road and rotate roads vector
 					if (improve_roads(gametime)) {
 						// if significant change takes place do not go on
 						break;
@@ -305,8 +306,10 @@ void DefaultAI::think() {
 				return;
 			}
 			{
+				// testing 5 productionsites (if there are 5 of them)
 				int32_t ps_to_check = (productionsites.size() < 5) ? productionsites.size() : 5;
 				for (int i = 0; i < ps_to_check; i += 1) {
+					// one productionsite per one check_productionsites() call
 					if (check_productionsites(gametime)) {
 						// if significant change takes place do not go on
 						break;
@@ -330,6 +333,7 @@ void DefaultAI::think() {
 			{
 				int32_t mines_to_check = (mines_.size() < 5) ? mines_.size() : 5;
 				for (int i = 0; i < mines_to_check; i += 1) {
+					// every run of check_mines_() checks one mine
 					if (check_mines_(gametime)) {
 						// if significant change takes place do not go on
 						break;
@@ -1297,15 +1301,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// we must calculate wood policy
 	const WareIndex wood_index = tribe_->safe_ware_index("log");
-	// the name of variable is not 100% proper
-	const int32_t stocked_wood = get_warehoused_stock(wood_index) -
+	// stocked wood is to be in some propotion to productionsites and
+	// constructionsites (this proportion is bit artifical, or we can say
+	// it is proportion to the size of economy). Plus some positive 'margin'
+	const int32_t stocked_wood_margin = get_warehoused_stock(wood_index) -
 		productionsites.size() * 2 -
 		num_prod_constructionsites;
-	if (stocked_wood > 80) {
+	if (stocked_wood_margin > 80) {
 		wood_policy_ = WoodPolicy::kDismantleRangers;
-	} else if  (stocked_wood > 25) {
+	} else if  (stocked_wood_margin > 25) {
 		wood_policy_ = WoodPolicy::kStopRangers;
-	} else if  (stocked_wood > 10) {
+	} else if  (stocked_wood_margin > 10) {
 		wood_policy_ = WoodPolicy::kStartRangers;
 	} else {
 		wood_policy_ = WoodPolicy::kBuildRangers;
@@ -1350,7 +1356,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	} else if (vacant_plus_in_construction_minus_prod > 6) {
 		expansion_mode = MilitaryStrategy::kResourcesOrDefense;
 	} else {
-		// this is intended for initial phase of game when the player has enough soldiers yet
+		// this is intended for initial phase of game when the player still has enough soldiers
 		// but we still want to force it to follow resources instead for plain expansion
 		if (virtual_mines <= 2 && (unstationed_milit_buildings_ + num_milit_constructionsites) > 2) {
 			expansion_mode = MilitaryStrategy::kResourcesOrDefense;
@@ -1686,7 +1692,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// we can go above target if there is shortage of logs on stock
 						else if (bo.total_count() >= bo.cnt_target_) {
 							if (wood_policy_ != WoodPolicy::kBuildRangers) {
-							continue;
+								continue;
 							}
 						}
 
@@ -1739,7 +1745,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
 					       bo.total_count() &&
 					    (bo.cnt_under_construction_ + bo.unoccupied_) == 0 &&
-					    //but only if current buildings are utilized enouth
+					    // but only if current buildings are utilized enough
 					    (bo.total_count() == 0 || bo.current_stats_ > 60)) {
 							prio = 4 + kDefaultPrioBoost;
 						}
@@ -1857,11 +1863,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				}
 
-				//consider borders (for medium + big buildings and ones with input)
-				//=>decreasing the score
-				//but only if we have enough free spots to built on
-				//otherwise it will slow down the expansion - small buildings would be preffered
-				if (spots_avail.at(BUILDCAPS_MEDIUM) > 40//HERE TRANSFER
+				// consider borders (for medium + big buildings and ones with input)
+				// =>decreasing the score
+				// but only if we have enough free spots to built on
+				// otherwise it will slow down the expansion - small buildings would be preferred
+				if (spots_avail.at(BUILDCAPS_MEDIUM) > 40
 					&&
 					spots_avail.at(BUILDCAPS_BIG) > 20
 					&&
@@ -2100,7 +2106,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				}
 
-				//being too close to a border is not good either
+				// being too close to a border is not good either
 				if (bf->unowned_land_nearby_ && !bo.is_port_ && prio > 0) {
 					prio /= 2;
 					prio -= 10;
@@ -3786,7 +3792,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			if (tso.bo->substitute_inputs_.count(warequeues2[i]->get_ware()) == 0) {
 				const uint32_t required_amount
 				 =
-				 (warequeues2[i]->get_max_fill()<5) ? warequeues2[i]->get_max_fill() : 5;
+				 (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
 				if (warequeues2[i]->get_filled() < required_amount) {
 					supplied_enough = false;
 				}
@@ -3952,7 +3958,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 /**
  * This function takes care about the unowned and opposing territory and
  * recalculates the priority for non-military buildings
- * The goal is to minimine losses when teritory is lost
+ * The goal is to minimize losses when teritory is lost
  *
  * \arg bf   = BuildableField to be checked
  * \arg prio = priority until now.
@@ -3961,23 +3967,23 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
  */
 int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t prio) {
 
-	//no change when priority is not positive number
+	// no change when priority is not positive number
 	if (prio <= 0) {
 		return prio;
 	}
 
-	//in uýnowned teritory, decreasing to 2/3
+	// in unowned teritory, decreasing to 2/3
 	if (bf.unowned_land_nearby_ > 15) {
 		prio *= 2;
 		prio /= 3;
 	}
 
-	//to preserve positive score
+	// to preserve positive score
 	if (prio == 0) {
 		prio = 1;
 	}
 
-	//Further decrease the score if enemy nearby
+	// Further decrease the score if enemy nearby
 	if (bf.enemy_nearby_) {
 		prio /= 2;
 	}
@@ -4163,14 +4169,16 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 // (AI will then wait till training site is stocked)
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
-	// we must identify particular training site
-	for (std::list<TrainingSiteObserver>::iterator i = trainingsites.begin(); i != trainingsites.end(); ++i)
-		if (i->site == &site) {
-			if (i->site->soldier_capacity() > 0) {
-				game().send_player_change_soldier_capacity(*i->site, - i->site->soldier_capacity());
+	for (TrainingSiteObserver & trainingsite_obs : trainingsites) {
+		if (trainingsite_obs.site == &site) {
+			if (trainingsite_obs.site->soldier_capacity() > 0) {
+				game().send_player_change_soldier_capacity(*trainingsite_obs.site,
+				- trainingsite_obs.site->soldier_capacity());
 			}
 			return;
 		}
+	}
+
 	log (" %d: Computer player error - trainingsite not found\n",
 	player_number());
 }
@@ -4221,13 +4229,13 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 			if (type == WalkSearch::kAnyPlayer) {
 				*tested_fields = done.size();
 				return true;
-				}
+			}
 
 			// if anybody but not me
 			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
 				*tested_fields = done.size();
 				return true;
-				}
+			}
 
 			// if owned by enemy
 			if  (type == WalkSearch::kEnemy && f->get_owned_by() != pn) {
@@ -4235,9 +4243,8 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 				if (player_->team_number() == 0) {
 					*tested_fields = done.size();
 					return true;
-				}
 				// if I am in team, testing if the same team
-				if (player_->team_number() > 0
+				} else if (player_->team_number() > 0
 				&&
 				player_->team_number()
 				!=
@@ -4677,15 +4684,14 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 		return 0;
 	}
 
-	enum {BARBARIANS, ATLANTEANS, EMPIRE};
-	uint8_t tribe = std::numeric_limits<uint8_t>::max();
+	Tribes tribe = Tribes::kNone;
 
 	if (soldiers.at(0)->get_owner()->tribe().name() == "atlanteans") {
-		tribe = ATLANTEANS;
+		tribe = Tribes::kAtlanteans;
 	} else if (soldiers.at(0)->get_owner()->tribe().name() == "barbarians") {
-		tribe = BARBARIANS;
+		tribe = Tribes::kBarbarians;
 	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire") {
-		tribe = EMPIRE;
+		tribe = Tribes::kEmpire;
 	} else {
 		throw wexception("AI warning: Unable to calculate strenght for player of tribe %s",
 			soldiers.at(0)->get_owner()->tribe().name().c_str());
@@ -4699,19 +4705,19 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 
 	for (Soldier * soldier : soldiers) {
 		switch (tribe) {
-			case (ATLANTEANS):
+			case (Tribes::kAtlanteans):
 				hp = 135 + 40 * soldier->get_hp_level();
 				al =  14 +  8 * soldier->get_attack_level();
 				dl = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
 				el = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
 				break;
-			case (BARBARIANS):
+			case (Tribes::kBarbarians):
 				hp += 130 + 28 * soldier->get_hp_level();
 				al +=  14 +  7 * soldier->get_attack_level();
 				dl += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
 				el += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
 				break;
-			case (EMPIRE):
+			case (Tribes::kEmpire):
 				hp += 130 + 21 * soldier->get_hp_level();
 				al +=  14 +  8 * soldier->get_attack_level();
 				dl += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
@@ -4887,7 +4893,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		uint8_t defenders_strength = 0;
 		bool is_warehouse = false;
 		bool is_attackable = false;
-		uint16_t onwer_number = 100;
+		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
 		// if we dont get a flag, we remove the building from observers list
@@ -4904,7 +4910,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (bld->can_attack()) {
 					is_attackable = true;
 				}
-				onwer_number = bld->owner().player_number();
+				owner_number = bld->owner().player_number();
 			}
 		}
 		if (upcast(Warehouse, Wh, f.field->get_immovable())) {
@@ -4919,7 +4925,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (Wh->can_attack()) {
 					is_attackable = true;
 				}
-				onwer_number = Wh->owner().player_number();
+				owner_number = Wh->owner().player_number();
 			}
 		}
 
@@ -4960,7 +4966,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			if (site->second.attack_soldiers_strength > 0
 				&&
-				player_attackable[onwer_number - 1]) {
+				player_attackable[owner_number - 1]) {
 				site->second.score = site->second.attack_soldiers_strength - site->second.defenders_strength / 2;
 
 				if (is_warehouse) {
@@ -4985,7 +4991,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score += 1;
 				}
 				// we dont want to attack multiple players at the same time too eagerly
-				if (onwer_number != last_attacked_player_) {
+				if (owner_number != last_attacked_player_) {
 					site->second.score -= 3;
 				}
 				// if we dont have mines yet
