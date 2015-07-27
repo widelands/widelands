@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-18 12:35+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-25 06:59+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1489,7 +1489,7 @@ msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr "Der Hamme ist ein unverzichtbares Werkzeug. Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er wird vom Werkzeugmacher produziert."
+msgstr "Der Hammer ist ein unverzichtbares Werkzeug. Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er wird vom Werkzeugmacher produziert."
 
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
@@ -1702,7 +1702,7 @@ msgstr "Die Spitzhacke wird vo Steinmetzen und Bergleuten benutzt. Sie wird vom 
 msgid "Breeds pigs."
 msgstr "Züchtet Schweine."
 
-#: ../../tribes/empire/piggery/conf:25
+#: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
 msgstr "Das Aufziehen von Schweinen"
 
@@ -1753,7 +1753,7 @@ msgstr "Diese Sägen werden Sägewerkern benötigt. Sie werden in Werkzeugschmie
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "Erkunder wie Erkundigunde, der Erkunder, erkunden das unerkundete Gebiet auf erkundliche Weise."
+msgstr "Kunderschafter wie Kundigunde, der Erkunder, erkunden das unerkundete Gebiet auf erkundliche Weise."
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"

@@ -74,7 +74,7 @@ obj_begin_farming = {
    title = _"Bake bread",
    number = 3,
    body = objective_text(_"Build a well, a farm and a bakery",
-      _([[Other ways to produce food – different kinds of food – are fishers and hunters. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well on a spot where your geologists have found a water source.]]))
+      _([[Other ways to produce food – different kinds of food – are fishers and farms. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well on a spot where your geologists have found a water source.]]))
 }
 
 obj_refine_ores = {

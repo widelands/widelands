@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -199,12 +199,12 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack’s houses and a sawmill to produce some basic building materials."
+"But until that day, many years may pass! For now, we must concentrate on the present, and build a few lumberjack’s houses and a sawmill to produce some basic building materials."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests should last forever, so we really should build a forester’s house too."
+"But we mustn’t forget to preserve this natural bounty. These forests should last forever, so we really have to build a forester’s house too."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
@@ -254,7 +254,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore, I found the remains of another ship. I don’t know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old."
+"Sire, I don’t want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore, I found the remains of another ship. I don’t know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
@@ -279,7 +279,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a larger mountain. I am not absolutely sure – a geologist should check if I am right – but I believe we could mine marble from some places on the mountain."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger mountain. I am not absolutely sure – a geologist should check if I am right – but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -289,7 +289,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid ""
-"Let us expand to that mountain and start mining marble."
+"Please, expand to that mountain and start mining marble."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
@@ -299,17 +299,17 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid ""
-"Saledus is amazed"
+"Saledus is excited"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
-"By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies."
+"By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
-"However: for all these bigger buildings, we need better and more elegant building materials. So, let’s build a stonemason, who will cut columns from marble."
+"However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a stonemason, who will cut columns from marble."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
@@ -329,7 +329,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you forgot something."
+"Lutius, don’t you think you forgot something important?"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
@@ -354,7 +354,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer they serve is really tasty. You really should have a drink there, too."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really tasty. You really should have a drink there, too."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
@@ -379,7 +379,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
-"At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness."
+"At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214

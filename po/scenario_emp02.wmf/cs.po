@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-26 00:28+0000\n"
-"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 07:30+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -200,16 +200,16 @@ msgstr "Když jsme se Saledus a já procházeli nádhernými lesy na severu, cí
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the"
+"But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Ale do té doby nechť uplyne ještě mnoho let! Protože teď se musíme soustředit na přítomnost a vybudovat nějaké domky pro dřevorubce a pilu, abychom získali základní stavební materiál."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests "
-"should last forever, so we really should build a forester’s house too."
-msgstr "Ale nesmíme zapomenout na uchování tohoto přírodního bohatství. Tyto lesy musí přetrvat navždy, proto bychom určitě měli postavit i domek pro lesníka."
+"But we mustn’t forget to preserve this natural bounty. These forests should "
+"last forever, so we really have to build a forester’s house too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -258,12 +258,12 @@ msgstr "Saledus je znepokojen"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which"
-" gives me a sinking feeling in my stomach and spreads waves of fear in my "
-"heart. As I walked down to the southern shore, I found the remains of "
-"another ship. I don’t know whether these parts are all that is left of that "
-"ship. In any case, these parts do not seem to be old."
-msgstr "Buď pozdraven Lucie, nechci vyvolat paniku, ale objevil jsem něco, z čeho se svírá mi žaludek a v mém srdci klíčí strach. Při procházce po jižním pobřeží jsem narazil na vrak další lodě. Nevím, jestli je to vše, co z té druhé lodě zbylo. V každém případě ten vrak není nijak starý."
+"Sire, I don’t want to start a panic, but I found something which gives me a "
+"sinking feeling in my stomach and spreads waves of fear in my heart. As I "
+"walked down to the southern shore, I found the remains of another ship. I "
+"don’t know whether these parts are all that is left of that ship. In any "
+"case, these parts do not seem to be old."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
@@ -287,11 +287,10 @@ msgstr "Saledus se usmívá"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am"
-" right – but I believe we could mine marble from some places on the "
-"mountain."
-msgstr "Lutiusi, mám pro tebe novinky: Cestou na východ jsem našel velkou horu. Nejsem si jistý - geolog by měl potvrdit zda se nepletu - ale věřím, že bychom mohli těžit mramor z ložisek na té hoře."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger "
+"mountain. I am not absolutely sure – a geologist should check if I am right "
+"– but I believe we could mine marble from some places on the mountain."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid ""
@@ -301,32 +300,32 @@ msgid ""
 msgstr "Byl by to dobrý zdroj kvalitního mramoru. Několikanásobně větší množství, než jsme schopni získat z lomu. Zřejmě jsi měl pravdu, když jsi tento ostrov nazval rájem."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
-msgid "Let us expand to that mountain and start mining marble."
-msgstr "Když rozšíříme své území k hoře, můžeme začít s těžbou."
+msgid "Please, expand to that mountain and start mining marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
 msgstr "Další pohoří"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
-msgid "Saledus is amazed"
-msgstr "Saledus je ohromen"
+msgid "Saledus is excited"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
-" smithies."
-msgstr "Bohové, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a ta druhá pak železné rudy. Měli bychom bezodkladně zahájit stavbu dolů na uhlí a železnou rudu (nebo alespoň milířů), slévárny, kovárny, platnéřsví a zbrojařství."
+"of iron ore. I advise you to immediately build iron ore and coal mines (or "
+"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"smithies."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So, let’s build a stonemason, who will cut columns from "
-"marble."
-msgstr "Ale na všechny tyto velké budovy budeme potřebovat kvalitnější a elegantnejší stavební materiály. Například takový kameník může vyrobit z mramoru sloupy."
+"building materials. So you have to build a stonemason, who will cut columns "
+"from marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -341,10 +340,8 @@ msgid "Amalea enters…"
 msgstr "Vchází Amalea..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
-msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
-"forgot something."
-msgstr "Ahoj Lucie, doufám, že mi promineš kritiku, ale zdá se mi jako bys na něco zapomněl."
+msgid "Lutius, don’t you think you forgot something important?"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -370,9 +367,9 @@ msgstr "Amalea se usmívá"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
-" they serve is really tasty. You really should have a drink there, too."
-msgstr "Zdravím tě, příteli. Právě jsem navštívila náš nový hostinec 'Pod palmami'. Točí tam opravdu dobré pivo. Určitě bys tam měl taky někdy zajít."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really "
+"tasty. You really should have a drink there, too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -402,9 +399,9 @@ msgstr "Při mé dnešní procházece na východním pobřeží jsem zažil šok
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that I was able to flee and hide "
+"throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr "Nejprve jsem naivně doufal, že jde o mírumilovný kmen, ale jakmile mě jeden z nich uviděl, rozeběhli se na mne a okamžitě zaútočili svými vrhacími oštěpy. Děkuji Bohům, že<br> se mi podařilo utéct a skrýt se a potom večer pod příkrovem tmy dorazit zpět do bezpečí našeho tábora."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
