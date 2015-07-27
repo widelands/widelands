@@ -207,7 +207,7 @@ void EditorPlayerMenu::clicked_add_player() {
 			number += '0' + nr_players_10;
 		number += '0' + nr_players % 10;
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
-		const std::string name = (boost::format(_("Player %u")) % nr_players).str();
+		const std::string name = (boost::format(_("Player %u")) % static_cast<unsigned int>(nr_players)).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);

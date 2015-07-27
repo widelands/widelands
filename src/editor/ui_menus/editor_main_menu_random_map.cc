@@ -505,12 +505,12 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	MapGenerator gen(map, mapInfo, egbase);
 	map.create_empty_map(
-				egbase.world(),
-				mapInfo.w,
-				mapInfo.h,
-				_("No Name"),
-				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
-				sstrm.str().c_str());
+		egbase.world(),
+		mapInfo.w,
+		mapInfo.h,
+		_("No Name"),
+		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
+		sstrm.str().c_str());
 	loader.step(_("Generating random map..."));
 	gen.create_random_map();
 
