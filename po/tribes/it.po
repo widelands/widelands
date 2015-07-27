@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-27 11:43+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-25 11:47+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -123,6 +123,7 @@ msgid "Vision range:"
 msgstr "Raggio di visione:"
 
 #: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
 msgid "Lore"
 msgstr "Conoscenza"
 
@@ -204,7 +205,7 @@ msgstr "Sconosciuto"
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
-msgstr ""
+msgstr "Questo edificio può essere costruito direttamente oppure ottenuto migliorando un altro edificio."
 
 #: ../../tribes/scripting/format_help.lua:511
 msgid "Direct build cost:"
@@ -257,15 +258,19 @@ msgid "%s or better"
 msgstr "%s o migliore"
 
 #: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
 msgid "Experience levels:"
 msgstr "Livelli di esperienza:"
 
 #: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
 msgid "%s to %s (%s EP)"
 msgstr "%s a %s (%s EP)"
 
 #: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Il lavoratore utilizza:"

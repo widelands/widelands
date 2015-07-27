@@ -3,14 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# MiroslavR <miroslavr256@gmail.com>, 2015
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-26 14:46+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +53,7 @@ msgstr "Postavte dva drevorubačské domy a pílu"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Postavte dva drevorubačské domy a pílu"
+msgstr "Dva drevorubačské domy a píla"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
@@ -99,7 +100,7 @@ msgstr "Temná noc"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:105
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:196
 msgid "Diary of Lutius"
-msgstr "Denník Lucia"
+msgstr "Lutiov denník"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 msgid ""
@@ -189,7 +190,7 @@ msgstr "Predtucha"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus sa nervózne rozhliadne…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:118
 msgid ""
@@ -218,7 +219,7 @@ msgstr "Zatiaľ v bezpečí"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:130
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus s výdychom úľavy prehovorí…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid ""
@@ -240,7 +241,7 @@ msgstr "Mladá Amalea"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea sa usmeje…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Hey Lutius, I just met Saledus outside."
@@ -402,6 +403,6 @@ msgstr "„%s“"
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nová úloha"
+msgstr[1] "Nové úlohy"
+msgstr[2] "Nové úlohy"

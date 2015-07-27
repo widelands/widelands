@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-13 11:32+0000\n"
-"PO-Revision-Date: 2015-04-21 09:40+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-25 14:00+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -749,7 +749,7 @@ msgstr "Vigna (matura)"
 
 #: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
-msgstr "Sito per la costruzione navale"
+msgstr "Cantiere navale"
 
 #: ../../tribes/empire/conf:61
 msgid "Advanced Lance"
@@ -1731,7 +1731,7 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
-msgstr ""
+msgstr "Estrae del marmo e delle pietre dalle rocce nelle vicinanze."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
