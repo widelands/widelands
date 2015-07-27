@@ -36,6 +36,8 @@ struct EditorInfoTool : public EditorTool {
 	char const* get_sel_impl() const override {
 		return "pics/fsel_editor_info.png";
 	}
+
+	bool has_size_one() const override {return true;}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H

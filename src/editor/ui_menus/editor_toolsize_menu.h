@@ -32,6 +32,8 @@ struct EditorInteractive;
 struct EditorToolsizeMenu : public UI::UniqueWindow {
 	EditorToolsizeMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
 	void update(uint32_t);
+	void set_buttons_enabled(bool enable);
+	uint32_t value() {return value_;}
 
 private:
 	EditorInteractive & eia();
@@ -40,6 +42,7 @@ private:
 
 	UI::Textarea                                   m_textarea;
 	UI::Button m_increase, m_decrease;
+	uint32_t value_;
 };
 
 

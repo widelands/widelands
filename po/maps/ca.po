@@ -3,13 +3,15 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Juanjo, 2015
+# Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-25 08:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 19:02+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,45 +21,45 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "De la Nèmesi al Gènesi"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Després d'arribar a una estranya illa propera a l'Atlàntida, els atlants supervivents lluiten per formar una nova llar."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Un nou lloc al que dir llar"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "En aquest escenari, es presentaran els edificis de producció elevada, incloent-hi la mineria."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Aquesta terra és la nostra terra"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Aquest tutorial explica com gestionar l'entrenament i els edificis de la milícia i els conceptes bàsics de la lluita."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "El segon imperi"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Bàrbars"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fàcil. Presenta el clan bàrbar"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -78,15 +80,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Els mesos de l'exili"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Imperi"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fàcil. Presenta el clan Imperi"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -104,15 +106,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "La cursa pel foc"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlants"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiador. Presenta als atlants"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -125,24 +127,24 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Les costes de Malac' Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Un post avançat per l'exili"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr "Encara no implementat"
+msgstr "Encara no s'ha implementat"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Ningú"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Aquest mapa encara no s'ha implementat"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -164,46 +166,46 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Control bàsic"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "En aquest tutorial, aprendreu a moure-us pel Widelands i com construir edificis i camins."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "L'art de la guerra"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "En aquest tutorial, us ensenyarem els secrets de l'art de la guerra: com crear soldats, com entrenar-los i com conduir-los a la batalla."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Navegació"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "En aquest tutorial, aprendreu a navegar i gestionar vaixells i ports."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Economia"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "En aquest tutorial, aprendreu quines opcions us ofereix el Widelands per controlar la teva economia. És recomanable per a jugadors amb una mica d'experiència."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -211,18 +213,18 @@ msgstr "Atol"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Qui serà el rei del gran atol?"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Cauviçon"
 
 #: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "És un plaer descansar en la bellesa d'aquest camp esquerdat. Però aquest extens territori és tan complex que serà fàcil creuar-se amb altres tribus."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -233,11 +235,11 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr ""
+msgstr "Si és una de les característiques més estranyes de la natura o la creació d'un déu boig (i amb ganes de jugar), aquest terreny de batalla espera dos oponents per a una altra confrontació."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Illa del cometa"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -256,30 +258,30 @@ msgstr "Cràter"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "Molt després que un meteorit xoqués contra un parell de muntanyes, la vida al cràter floreix. Dues tribus lluiten ara pels rics recursos."
+msgstr "Molt després que un meteorit xoqués contra un parell de muntanyes, la vida al cràter floreix. Dos clans lluiten ara pels preuats recursos."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Creuant l'horitzó"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Tripuleu l'embarcació i navegueu fins l'horitzó."
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr "Torneig del Desert"
+msgstr "Torneig del desert"
 
 #: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "Quatre tribus lluiten amb els seu veí més proper per ser el primer en arribar a la muntanya d'or que promet riqueses inimaginables. Però podran els dos que quedin repartir-se els recursos sàviament?"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr "Llit de Riu Sec"
+msgstr "Llit de riu sec"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -291,45 +293,45 @@ msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr "Boscs Èlfics"
+msgstr "Boscs èlfics"
 
 #: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "La impressionant bellesa d'aquesta terra maragda ha portat molts clans a intentar quedar-se-la per a ells."
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Comunitats"
 
 #: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
 "Coal is hard to find – learn to make it efficiently. Starting positions are "
 "similar, so the map should be fair. There is plenty of gold near the "
 "starting point – Do you see it?"
-msgstr ""
+msgstr "El carbó és difícil de trobar. Apreneu a obtenir-ne eficientment. Les posicions d'inici són similars; o sigui que la partida serà justa i equilibrada. Hi ha molt d'or prop de la posició d'inici. El veieu?"
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
 "This map is best suited for two or three human players, with game speed "
 "somewhat above the normal value. The AI performed badly at the time of "
 "writing (2013)."
-msgstr ""
+msgstr "Aquest mapa és apropiat per dos o tres jugadors humans amb velocitat de la partida una mica superior al valor normal. La IA va cometre erros estrepitosos quan es va acabar aquest mapa (2013)."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr "Llacs Finesos"
+msgstr "Llacs finesos"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "Aquests són les precioses terres fineses de llacs, rius i antics boscos i muntanyes. Depèn de vosaltres trobar un camí a través d'aquestes terres."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr ""
+msgstr "Jocs de foc"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -341,17 +343,17 @@ msgstr ""
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr "Quatre Castells"
+msgstr "Quatre castells"
 
 #: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
-msgstr ""
+msgstr "Ben protegits en les seves grans fortaleses, quatre senyors de la guerra amb set de poder estan completant els seus plans per dominar aquestes terres..."
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr "Quatre Muntanyes"
+msgstr "Quatre muntanyes"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -359,11 +361,11 @@ msgid ""
 "them and claim the resources for his own tribe? Hint I: Water can be found "
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
-msgstr ""
+msgstr "Cada clan està envoltat per quatre imponents muntanyes. Quin serà el primer a conquerir-les i reclamar els seus recursos per al seu clan? Pista I: Es pot trobar aigua al llarg del riu. Pista II: Els ninots de neu marquen reserves addicionals d'aigua. Pista III: Cada muntanya conté només un recurs."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
-msgstr "El Llac Glaciar"
+msgstr "El llac glacial"
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -371,11 +373,11 @@ msgid ""
 "one disturbed you and the resources were enough for your whole tribe, but a "
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure that there is only enough space for one tribe."
-msgstr ""
+msgstr "Fa molt temps, el vostre clan arribà a aquest preciós i solitari llac glacial. Ningú us molestava i els béns eren abundants per a les necessitats de la vostra gent. Però fa uns mesos, un altre clan va arribar per les muntanyes i s'hi va instal·lar. I sabeu del cert que només hi ha espai suficient per a un dels dos."
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr "La Península Daurada"
+msgstr "La península daurada"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
@@ -383,16 +385,16 @@ msgstr "Dos imperis competeixen pels tresors d'una península llegendària..."
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Guerres de gel"
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "La tardor es va convertir en hivern. Algunes coses estan congelades, però no la guerra."
 
 #: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
 #: fire.wmf/elemental:12
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Les posicions inicials van en sentit horari"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -403,44 +405,44 @@ msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr "Després de l'impacte d'un asteroide i el  dur hivern consegüent, tres illes es connecten per gel i pedra, posant fi a la pacífica coexistència de tres tribus."
+msgstr "Després de l'impacte d'un asteroide i el  dur hivern consegüent, tres illes es connecten per gel i pedra, posant fi a la pacífica coexistència del tres clans."
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "Illes en guerra"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "Durant segles, heu conviscut pacíficament amb el clan de l'illa veïna. Aquesta pau sembla que s'acaba: el vostre veí comença a conquerir territoris."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Reis i reines"
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many, and will the prophecy come true?"
-msgstr ""
+msgstr "Una antiga llegenda parla de set regnes, que han viscut amb prosperitat molts anys, que cauran en una guerra devastadora. Ha sigut massa aquest últim acte de traïció cap al vostre clan i es complirà la profecia?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr "El Llac de la Tranquilitat"
+msgstr "El llac de la tranquil·litat"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores..."
-msgstr ""
+msgstr "Aquest llac, ben amagat entre els boscos més antics, és conegut per la seva bellesa i pau idíl·lica. Però la seva santedat s'ha vist pertorbada quan dos clans hostils arriben als marges del llac..."
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr "L'Últim Bastió"
+msgstr "L'últim bastió"
 
 #: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
@@ -458,17 +460,17 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Un llarg, llarg camí"
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
 "long, long way to conquer all the islands. Good luck!"
-msgstr ""
+msgstr ">Where dat? A thousand miles from here.< [Porgy and Bess] Heu de recórrer un camí molt llarg per conquerir totes les illes. Bona sort!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Saltant d'illa en illa"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -476,32 +478,32 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "Un torneig especial de la cultura atlant és l'anomenat «Saltant d'illa en illa», on dos o més grups proven d'arribar a l'illa del centre tan ràpid com sigui possible, per ser els primers d'erigir un castell al cim de la muntanya central."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Contrabandistes"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Se'ls gira feina a les vostres rutes de contraban: han aparegut dues tribus més i ha començat la rivalitat entre contrabandistes. Quin equip serà el primer en passar de contraban el nombre determinat de béns?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr "El Laberint Místic"
+msgstr "El laberint místic"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr ""
+msgstr "Hi ha dues preguntes a l'aire: qui ha creat aquest increïble laberint i què s'hi pot trobar a dins?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
-msgstr "L'altiplà verd"
+msgstr "El verd altiplà"
 
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
@@ -526,7 +528,7 @@ msgstr ""
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Exploradors de rius"
 
 #: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
@@ -539,7 +541,7 @@ msgstr ""
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
-msgstr "Les Terres del Riu"
+msgstr "Les terres del riu"
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
@@ -549,7 +551,7 @@ msgstr "Una terra mística, plena de diferents paisatges, tots creuats per un gr
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "L'antic Sol de foc"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -561,28 +563,28 @@ msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
-msgstr "L'Illa del Pantà"
+msgstr "L'illa del pantà"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
 msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr ""
+msgstr "Fa olor a pantà, pareix un pantà i és un pantà. Però és el lloc on vas néixer i has decidit viure-hi per sempre. Si no vols perdre'l, defensa'l!"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr "Els Monjos del Pantà"
+msgstr "Els monjos del pantà"
 
 #: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr ""
+msgstr "Es diu que els vells monjos de guerra, que vivien en l'encara més antic pantà, seran la clau per controlar l'illa sencera."
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
-msgstr "El Nord Llunyà"
+msgstr "El nord llunyà"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -602,24 +604,24 @@ msgstr ""
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "El Nil"
 
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "El riu sempre ha proveït menjar i comunicació. Aquest cop, vuit tribus lluitaran pel control d'aquestes terres."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "El triangle d'oasis"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr ""
+msgstr "Hi ha alguna cosa mística com una atmosfera gris al voltant d'aquestos tres oasis que encara ningú ha trobat. Potser ho fareu vosaltres, però aneu amb compte dels altres competidors!"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -632,11 +634,11 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Ha començat el desgel. Tres clans s'estaven resguardant del sever hivern entre esplendoroses muntanyes. Cap a l'època del solstici, van escoltar l'oracle, que els va conduir a la guerra. L'únic supervivent sacrificarà a l'antic altar els tresors dels seus enemics , hi construirà un castell esplèndid i guanyarà la benevolència i respecte dels déus."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "El gran llac"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -650,38 +652,38 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
-msgstr ""
+msgstr "El llarg camí"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr ""
+msgstr "Una altra prova estranya dels déus. Per arribar a l'altre costat sembla que no hi ha altre camí que ocupar el territori dels vostres enemics."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "El pas estret de les muntanyes"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
+msgstr "En aquesta àrea muntanyosa s'hi han assentat dos prínceps. Ara estan expandint els seus territoris, sense saber que no estan sols."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
-msgstr "Tres Guerrers"
+msgstr "Tres guerrers"
 
 #: ../../maps/Three Warriors.wmf/elemental:11
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
-msgstr ""
+msgstr "Muntanyes enormes divideixen aquesta terra en tres valls fèrtils. Però un camí els connecta i per això la lluita sembla inevitable! Pista: podreu trobar aigua al voltant dels llacs."
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Junts som forts"
 
 #: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""
@@ -698,7 +700,7 @@ msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Trident de foc"
 
 #: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
@@ -706,17 +708,17 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
+msgstr "Al voltant de tres grans volcans, sis illes inviten els colons a començar-hi una nova vida. Els deserts i un bosc que creix ràpidament esperen per ser explorats. Però només podreu aconseguir prou recursos per competir amb els oponents si la vostra tribu es converteix en una potència naval."
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
 " black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr ""
+msgstr "Equips recomanats: roig contra verd o bé blau+groc contra verd+taronja o bé blau+negre contra verd+roig o bé blau+negre+groc contra verd+vermell+taronja."
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Llacs bessons"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""
@@ -730,7 +732,7 @@ msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
-msgstr "Ones Centellejants"
+msgstr "Ones centellejants"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -740,15 +742,15 @@ msgstr "Moltes precioses illes verdes esperen els prou valents per a creuar les 
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
-msgstr "Dues Fronteres"
+msgstr "Dues fronteres"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr ""
+msgstr "Un mapa per a guerres amb múltiples jugadors en una petita illa amb forma de cercle."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Hivern volcànic"
 
 #: ../../maps/Volcanic Winter.wmf/elemental:11
 msgid ""
@@ -756,22 +758,22 @@ msgid ""
 "Suddenly, the sun seemed to be gone and the only light and heat sources left"
 " were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr ""
+msgstr "Durant l'estiu, una sèrie d'erupcions volcàniques han fet tornar aviat l'hivern. De sobte, el Sol marxa del cel i les úniques fonts de llum i calor que queden són les que van provocar aquest canvi dramàtic. Els continents, oceans i mars estan glaçats i l'únic terreny habitable que queda són les illes volcàniques."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
-msgstr "La Guerra de les Valls"
+msgstr "La guerra de les valls"
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
 "It is said that even the sun and moon must find their way between the spires"
 " of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
-msgstr ""
+msgstr "Es diu que fins i tot el sol i la lluna han de trobar el camí entre els cims escarpats d'aquestes muntanyes. Pista: els monòlits marquen els dipòsits de minerals. No us preocupeu d'enviar geòlegs enlloc més."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr "La Vall dels Bisonts Europeus"
+msgstr "La vall dels bisons europeus"
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -779,4 +781,4 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr ""
+msgstr "Sembla com si aquesta vall màgica ha estat habitada des del principi dels dies. Quan la vostra tribu va arribar-hi, sabíeu que hi havia prou lloc per viure-hi. Però podrà la vostra tribu viure en pau amb els vostres veïns?"

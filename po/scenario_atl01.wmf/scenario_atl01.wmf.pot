@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
-"Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for crystal, quartz and diamond – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them."
+"Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89

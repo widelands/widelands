@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-03 20:44+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 07:30+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -200,16 +200,16 @@ msgstr "Saledus ed io abbiamo camminato attraverso queste meravigliose foreste d
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the"
+"But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Ma fino a quel giorno, possono passare molti anni! Per ora, dobbiamo concentrarci sul presente e costruire un po di case dei taglialegna e una segheria per la produzione di alcuni materiali di base degli edifici."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests "
-"should last forever, so we really should build a forester’s house too."
-msgstr "Ma non dobbiamo dimenticare di conservare questa grazia naturale. Queste foreste devono durare per sempre, quindi dovremmo davvero costruire anche una casa della guardia forestale."
+"But we mustn’t forget to preserve this natural bounty. These forests should "
+"last forever, so we really have to build a forester’s house too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -258,12 +258,12 @@ msgstr "Saledus con sguardo infelice"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which"
-" gives me a sinking feeling in my stomach and spreads waves of fear in my "
-"heart. As I walked down to the southern shore, I found the remains of "
-"another ship. I don’t know whether these parts are all that is left of that "
-"ship. In any case, these parts do not seem to be old."
-msgstr "Saluti Lutius, non voglio fomentare il panico, ma ho trovato qualcosa che mi dà una sensazione di vuoto allo stomaco e diffonde ondate di paura nel mio cuore. Mentre camminavo giù ai confini a sud ho trovato i resti di un'altra nave. Non so se queste parti sono tutti ciò che è rimasto di quella nave. In ogni caso: queste parti non sembrano essere vecchie."
+"Sire, I don’t want to start a panic, but I found something which gives me a "
+"sinking feeling in my stomach and spreads waves of fear in my heart. As I "
+"walked down to the southern shore, I found the remains of another ship. I "
+"don’t know whether these parts are all that is left of that ship. In any "
+"case, these parts do not seem to be old."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
@@ -287,10 +287,9 @@ msgstr "Saledus sorride"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am"
-" right – but I believe we could mine marble from some places on the "
-"mountain."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger "
+"mountain. I am not absolutely sure – a geologist should check if I am right "
+"– but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -301,32 +300,32 @@ msgid ""
 msgstr "Sarebbe una buona fonte per rafforzare la nostra offerta di marmo di qualità, al di là della scarsa quantità disponibile dalla cava. Forse avevi ragione quando ha detto che questa isola è il paradiso."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
-msgid "Let us expand to that mountain and start mining marble."
-msgstr "Cerchiamo di espanderci fino a quella montagna di marmo e di iniziare l'estrazione del marmo."
+msgid "Please, expand to that mountain and start mining marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
 msgstr "Altre montagne"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
-msgid "Saledus is amazed"
-msgstr "Saledus è stupito"
+msgid "Saledus is excited"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
-" smithies."
+"of iron ore. I advise you to immediately build iron ore and coal mines (or "
+"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So, let’s build a stonemason, who will cut columns from "
-"marble."
-msgstr "Tuttavia: per tutti questi edifici più grandi, abbiamo bisogno di migliori e maggiori materiali da costruzione eleganti. Quindi, costruiamo un tagliapietre, per tagliare le colonne dal marmo."
+"building materials. So you have to build a stonemason, who will cut columns "
+"from marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -341,10 +340,8 @@ msgid "Amalea enters…"
 msgstr "Amalea entra..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
-msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
-"forgot something."
-msgstr "Salve Lutius, spero perdonerete la mia critica, ma mi sembra che abbiate dimenticato qualcosa."
+msgid "Lutius, don’t you think you forgot something important?"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -370,9 +367,9 @@ msgstr "Amalea sorride"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
-" they serve is really tasty. You really should have a drink there, too."
-msgstr "Saluti, amico mio, ho appena visitato la nostra nuova taverna  'Alle palme'. La birra che servono è veramente gustosa. Anche tu dovresti veramente prendere qualcosa da bere lì."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really "
+"tasty. You really should have a drink there, too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -402,9 +399,9 @@ msgstr ""
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that I was able to flee and hide "
+"throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr "In un primo momento, sono stato ingenuo e speravo che fossero pacifici, ma appena uno di loro mi ha visto si è rivolto verso di me ed hanno cominciato ad attaccarmi lanciando le loro lance. Grazie agli Dei sono stato in grado di fuggire e nascondermi, prima di ritirarmi di nuovo nella nostra colonia col favore delle tenebre."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
