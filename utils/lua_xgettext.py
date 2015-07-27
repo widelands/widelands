@@ -13,7 +13,7 @@ Token = namedtuple('Token', ['type', 'data'])
 def _escape_pot_string(string):
     return string.replace('\\', '\\\\').replace('"', '\\"')
 
-def _format_msgid(tag, string):
+def _format_msgid(tag, string, output):
     # there was a bug in this code that would never output single line
     # msg_ids. I decided not to fix it, since that wuold change a ton
     # of pot files and maybe msg_ids.
@@ -21,10 +21,11 @@ def _format_msgid(tag, string):
         # s += 'msgid "%s"\n' % string
     # else:
     string = _escape_pot_string(string)
-    output = '%s ""\n' % tag
+    output.append('%s ""' % tag)
     lines = string.split('\n')
-    output += ''.join('"%s\\n"\n' % l for l in lines[:-1])
-    output += '"%s"\n' % lines[-1]
+    for line in lines[:-1]:
+        output.append('"%s\\n"' % line)
+    output.append('"%s"' % lines[-1])
     return output
 
 class ParsingNode(list):
@@ -272,6 +273,44 @@ class LuaParser(object):
             self.in_comment = True
 
 
+def emit_comments_and_line_numbers(occurences, lines):
+    comments = sorted(
+        set(f['translator_comment'] for f in occurences if 'translator_comment' in f))
+    for comment in comments:
+        lines.append('#: %s' % (comment))
+    for occurence in occurences:
+        lines.append('#: %s:%i' % (os.path.normpath(occurence['filename']),
+                             occurence['line']))
+
+def emit_gettext(occurences, lines):
+    emit_comments_and_line_numbers(occurences, lines)
+    occurence = occurences[0]
+    _format_msgid('msgid', occurence['msgid'], lines)
+    lines.extend(['msgstr ""', ''])
+
+def emit_ngettext(occurences, lines):
+    emit_comments_and_line_numbers(occurences, lines)
+    occurence = occurences[0]
+    _format_msgid('msgid', occurence['msgid'], lines)
+    _format_msgid('msgid_plural', occurence['msgid_plural'], lines)
+    lines.append('msgstr[0] ""')
+    lines.extend(['msgstr[1] ""', ''])
+
+def emit_pgettext(occurences, lines):
+    for context, ctx_occurences in itertools.groupby(occurences, key=lambda a: a['msgctxt']):
+        ctx_occurences = list(ctx_occurences)
+        emit_comments_and_line_numbers(ctx_occurences, lines)
+        occurence = ctx_occurences[0]
+        lines.append('msgctxt "%s"' % _escape_pot_string(occurence['msgctxt']))
+        _format_msgid('msgid', occurence['msgid'], lines)
+        lines.extend(['msgstr ""', ''])
+
+EMIT_FUNCTIONS = {
+    'gettext': emit_gettext,
+    'ngettext': emit_ngettext,
+    'pgettext': emit_pgettext,
+}
+
 class Lua_GetText(object):
 
     def __init__(self):
@@ -302,7 +341,7 @@ class Lua_GetText(object):
                     })
 
     def __str__(self):
-        s = head
+        lines = []
 
         sort_func = lambda i: [i.get(v, None) for v in (
             'filename', 'line', 'msgid', 'msgid_plural', 'translator_comment')]
@@ -321,33 +360,11 @@ class Lua_GetText(object):
             considered_msgids.add(translatable_item['msgid'])
 
             occurences = self.translatable_items[translatable_item['msgid']]
-
-
             occurences.sort(key=sort_func)
             for type, type_occurences in itertools.groupby(occurences, key=lambda a: a['type']):
-                type_occurences = list(type_occurences)
-                comments = sorted(
-                    set(f['translator_comment'] for f in type_occurences if 'translator_comment' in f))
-                for comment in comments:
-                    s += '#: %s\n' % (comment)
-
-                for occurence in type_occurences:
-                    s += '#: %s:%i\n' % (os.path.normpath(occurence['filename']),
-                                         occurence['line'])
-
-                if type == 'ngettext':
-                    s += _format_msgid('msgid', occurence['msgid'])
-                    s += _format_msgid('msgid_plural', occurence['msgid_plural'])
-                    s += 'msgstr[0] ""\n'
-                    s += 'msgstr[1] ""\n\n'
-                elif type == 'pgettext':
-                    s += 'msgctxt "%s"\n' % _escape_pot_string(occurence['msgctxt'])
-                    s += _format_msgid('msgid', occurence['msgid'])
-                    s += 'msgstr ""\n\n'
-                else:
-                    s += _format_msgid('msgid', occurence['msgid'])
-                    s += 'msgstr ""\n\n'
-        return s
+                emit_function = EMIT_FUNCTIONS[type]
+                emit_function(list(type_occurences), lines)
+        return head + "\n".join(lines)
 
 
 def gettext(text, filename):
