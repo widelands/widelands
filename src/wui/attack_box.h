@@ -21,6 +21,7 @@
 #define WL_WUI_ATTACK_BOX_H
 
 #include <list>
+#include <memory>
 
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -49,7 +50,6 @@ struct AttackBox : public UI::Box {
 		 Widelands::FCoords     * target,
 		 uint32_t  const              x,
 		 uint32_t  const              y);
-	~AttackBox();
 
 	void init();
 
@@ -82,15 +82,15 @@ struct AttackBox : public UI::Box {
 		void send_more_soldiers();
 
 	private:
-		Widelands::Player     * m_pl;
-		Widelands::Map        * m_map;
-		Widelands::FCoords    * m_node;
+		Widelands::Player     * player_;
+		Widelands::Map        * map_;
+		Widelands::FCoords    * node_coordinates_;
 
-		UI::Slider            * m_slider_soldiers;
-		UI::Textarea          * m_text_soldiers;
+		std::unique_ptr<UI::Slider> soldiers_slider_;
+		std::unique_ptr<UI::Textarea> soldiers_text_;
 
-		UI::Button * m_less_soldiers;
-		UI::Button * m_add_soldiers;
+		std::unique_ptr<UI::Button> less_soldiers_;
+		std::unique_ptr<UI::Button> more_soldiers_;
 
 		/// The last time the information in this Panel got updated
 		uint32_t lastupdate_;

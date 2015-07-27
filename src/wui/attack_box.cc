@@ -30,7 +30,7 @@
 #include "graphic/text_constants.h"
 #include "logic/soldier.h"
 
-constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
+constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,
@@ -41,31 +41,20 @@ AttackBox::AttackBox
 :
 	UI::Box
 		(parent, x, y, UI::Box::Vertical),
-	m_pl(player),
-	m_map(&m_pl->egbase().map()),
-	m_node(target),
-	m_slider_soldiers(nullptr),
-	m_text_soldiers(nullptr),
-	m_less_soldiers(nullptr),
-	m_add_soldiers(nullptr),
+	player_(player),
+	map_(&player_->egbase().map()),
+	node_coordinates_(target),
 	lastupdate_(0)
 {
 	init();
 }
 
-AttackBox::~AttackBox() {
-	delete m_slider_soldiers;
-	delete m_text_soldiers;
-	delete m_less_soldiers;
-	delete m_add_soldiers;
-}
-
 uint32_t AttackBox::get_max_attackers() {
-	assert(m_map);
-	assert(m_pl);
+	assert(map_);
+	assert(player_);
 
-	if (upcast(Building, building, m_map->get_immovable(*m_node)))
-		return m_pl->find_attack_soldiers(building->base_flag());
+	if (upcast(Building, building, map_->get_immovable(*node_coordinates_)))
+		return player_->find_attack_soldiers(building->base_flag());
 	return 0;
 }
 
@@ -128,39 +117,39 @@ UI::Button & AttackBox::add_button
  * Update available soldiers
  */
 void AttackBox::think() {
-	int32_t const gametime = m_pl->egbase().get_gametime();
-	if ((gametime - lastupdate_) > kUpdateTime) {
+	int32_t gametime = player_->egbase().get_gametime();
+	if ((gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_attack();
 		lastupdate_ = gametime;
 	}
 }
 
 void AttackBox::update_attack() {
-	assert(m_slider_soldiers);
-	assert(m_text_soldiers);
-	assert(m_less_soldiers);
-	assert(m_add_soldiers);
+	assert(soldiers_slider_.get());
+	assert(soldiers_text_.get());
+	assert(less_soldiers_.get());
+	assert(more_soldiers_.get());
 
 	int32_t max_attackers = get_max_attackers();
 
-	if (m_slider_soldiers->get_max_value() != max_attackers) {
-		m_slider_soldiers->set_max_value(max_attackers);
+	if (soldiers_slider_->get_max_value() != max_attackers) {
+		soldiers_slider_->set_max_value(max_attackers);
 	}
 
-	m_slider_soldiers->set_enabled(max_attackers > 0);
-	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
-	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
+	soldiers_slider_->set_enabled(max_attackers > 0);
+	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
+	less_soldiers_  ->set_enabled(soldiers_slider_->get_value() > 0);
 
 	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
-	m_text_soldiers->set_text((boost::format(_("%1% / %2%"))
-									  % m_slider_soldiers->get_value()
+	soldiers_text_->set_text((boost::format(_("%1% / %2%"))
+									  % soldiers_slider_->get_value()
 									  % max_attackers).str());
 
-	m_add_soldiers->set_title(std::to_string(max_attackers));
+	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
 void AttackBox::init() {
-	assert(m_node);
+	assert(node_coordinates_);
 
 	uint32_t max_attackers = get_max_attackers();
 
@@ -169,12 +158,12 @@ void AttackBox::init() {
 	add_text(linebox, _("Soldiers:"));
 	linebox.add_space(8);
 
-	m_less_soldiers =
+	less_soldiers_.reset(
 		&add_button
 			(linebox,
 			 "0",
 			 &AttackBox::send_less_soldiers,
-			 _("Send less soldiers"));
+			 _("Send less soldiers")));
 
 	//  Spliter of soldiers
 	UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
@@ -183,42 +172,42 @@ void AttackBox::init() {
 	const std::string attack_string =
 			(boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
-	m_text_soldiers =
+	soldiers_text_.reset(
 		&add_text(columnbox, attack_string, UI::Box::AlignCenter,
 					 UI::g_fh1->fontset().serif(),
-					 UI_FONT_SIZE_ULTRASMALL);
+					 UI_FONT_SIZE_ULTRASMALL));
 
-	m_slider_soldiers =
+	soldiers_slider_.reset(
 		&add_slider
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
 			 "pics/but2.png",
-			 _("Number of soldiers"));
+			 _("Number of soldiers")));
 
-	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
-	m_add_soldiers =
+	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));
+	more_soldiers_.reset(
 		&add_button
 			(linebox,
 			 std::to_string(max_attackers),
 			 &AttackBox::send_more_soldiers,
-			 _("Send more soldiers"));
+			 _("Send more soldiers")));
 
-	m_slider_soldiers->set_enabled(max_attackers > 0);
-	m_add_soldiers   ->set_enabled(max_attackers > 0);
-	m_less_soldiers  ->set_enabled(max_attackers > 0);
+	soldiers_slider_->set_enabled(max_attackers > 0);
+	more_soldiers_   ->set_enabled(max_attackers > 0);
+	less_soldiers_  ->set_enabled(max_attackers > 0);
 }
 
 void AttackBox::send_less_soldiers() {
-	assert(m_slider_soldiers);
-	m_slider_soldiers->set_value(m_slider_soldiers->get_value() - 1);
+	assert(soldiers_slider_.get());
+	soldiers_slider_->set_value(soldiers_slider_->get_value() - 1);
 }
 
 void AttackBox::send_more_soldiers() {
-	m_slider_soldiers->set_value(m_slider_soldiers->get_value() + 1);
+	soldiers_slider_->set_value(soldiers_slider_->get_value() + 1);
 }
 
 uint32_t AttackBox::soldiers() const {
-	assert(m_slider_soldiers);
-	return m_slider_soldiers->get_value();
+	assert(soldiers_slider_.get());
+	return soldiers_slider_->get_value();
 }

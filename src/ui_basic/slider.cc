@@ -71,7 +71,7 @@ Slider::Slider
 	m_cursor_size (cursor_size)
 {
 	set_thinks(false);
-	calc_cursor_pos();
+	calculate_cursor_position();
 }
 
 void Slider::set_value(int32_t new_value)
@@ -80,13 +80,13 @@ void Slider::set_value(int32_t new_value)
 
 	if (new_value != m_value) {
 		m_value = new_value;
-		calc_cursor_pos();
+		calculate_cursor_position();
 		send_value_changed();
 		update();
 	}
 }
 
-void Slider::calc_cursor_pos() {
+void Slider::calculate_cursor_position() {
 	if (m_max_value == m_min_value) {
 		m_cursor_pos = m_min_value;
 	} else if (m_value == m_min_value) {
@@ -103,7 +103,7 @@ void Slider::calc_cursor_pos() {
 
 void Slider::layout() {
 	Panel::layout();
-	calc_cursor_pos();
+	calculate_cursor_position();
 }
 
 /**
@@ -114,7 +114,7 @@ void Slider::layout() {
 void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
 	if (m_max_value != new_max) {
-		calc_cursor_pos();
+		calculate_cursor_position();
 		update();
 	}
 	m_max_value = new_max;
@@ -129,7 +129,7 @@ void Slider::set_max_value(int32_t new_max) {
 void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
 	if (m_min_value != new_min) {
-		calc_cursor_pos();
+		calculate_cursor_position();
 		update();
 	}
 	m_min_value = new_min;
@@ -259,7 +259,7 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		m_pressed = false;
 
 		//  cursor position: align to integer value
-		calc_cursor_pos();
+		calculate_cursor_position();
 
 		update();
 	}
