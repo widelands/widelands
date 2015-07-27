@@ -2,8 +2,9 @@
 # encoding: utf-8
 
 from collections import defaultdict, namedtuple
-import re
+import itertools
 import os
+import re
 
 from confgettext import head
 
@@ -306,7 +307,7 @@ class Lua_GetText(object):
         sort_func = lambda i: [i.get(v, None) for v in (
             'filename', 'line', 'msgid', 'msgid_plural', 'translator_comment')]
 
-        # Now output translatable_items sorted by filename, line number. But
+        # Now output translatable_items sorted by filename, line number, type. But
         # each msg_id must only be outputted exactly once.
         all_translatable_items = []
         for msgid in self.translatable_items:
@@ -321,28 +322,31 @@ class Lua_GetText(object):
 
             occurences = self.translatable_items[translatable_item['msgid']]
 
+
             occurences.sort(key=sort_func)
-            comments = sorted(
-                set(f['translator_comment'] for f in occurences if 'translator_comment' in f))
-            for comment in comments:
-                s += '#: %s\n' % (comment)
+            for type, type_occurences in itertools.groupby(occurences, key=lambda a: a['type']):
+                type_occurences = list(type_occurences)
+                comments = sorted(
+                    set(f['translator_comment'] for f in type_occurences if 'translator_comment' in f))
+                for comment in comments:
+                    s += '#: %s\n' % (comment)
 
-            for occurence in occurences:
-                s += '#: %s:%i\n' % (os.path.normpath(occurence['filename']),
-                                     occurence['line'])
+                for occurence in type_occurences:
+                    s += '#: %s:%i\n' % (os.path.normpath(occurence['filename']),
+                                         occurence['line'])
 
-            if occurence['type'] == 'ngettext':
-                s += _format_msgid('msgid', occurence['msgid'])
-                s += _format_msgid('msgid_plural', occurence['msgid_plural'])
-                s += 'msgstr[0] ""\n'
-                s += 'msgstr[1] ""\n\n'
-            elif occurence['type'] == 'pgettext':
-                s += 'msgctxt "%s"\n' % _escape_pot_string(occurence['msgctxt'])
-                s += _format_msgid('msgid', occurence['msgid'])
-                s += 'msgstr ""\n\n'
-            else:
-                s += _format_msgid('msgid', occurence['msgid'])
-                s += 'msgstr ""\n\n'
+                if type == 'ngettext':
+                    s += _format_msgid('msgid', occurence['msgid'])
+                    s += _format_msgid('msgid_plural', occurence['msgid_plural'])
+                    s += 'msgstr[0] ""\n'
+                    s += 'msgstr[1] ""\n\n'
+                elif type == 'pgettext':
+                    s += 'msgctxt "%s"\n' % _escape_pot_string(occurence['msgctxt'])
+                    s += _format_msgid('msgid', occurence['msgid'])
+                    s += 'msgstr ""\n\n'
+                else:
+                    s += _format_msgid('msgid', occurence['msgid'])
+                    s += 'msgstr ""\n\n'
         return s
 
 
