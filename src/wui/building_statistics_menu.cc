@@ -551,7 +551,7 @@ void BuildingStatisticsMenu::think() {
 
 	// Update statistics
 	const Game& game = iplayer().game();
-	int32_t gametime = game.get_gametime();
+	const int32_t gametime = game.get_gametime();
 
 	if ((gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update();

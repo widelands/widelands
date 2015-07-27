@@ -57,20 +57,20 @@ struct AttackBox : public UI::Box {
 
 	private:
 		uint32_t get_max_attackers();
-		UI::Slider & add_slider
-			(UI::Box    & parent,
+		std::unique_ptr<UI::HorizontalSlider> add_slider(UI::Box    & parent,
 			 uint32_t      width,
 			 uint32_t      height,
 			 uint32_t      min, uint32_t max, uint32_t initial,
 			 char const  * picname,
 			 char const  * hint);
+		// TODO(GunChleoc): This should also return a unique_ptr
 		UI::Textarea & add_text
 			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
 			 const std::string & fontname = UI::g_fh1->fontset().serif(),
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
-		UI::Button & add_button
+		std::unique_ptr<UI::Button> add_button
 			(UI::Box           & parent,
 			 const std::string & text,
 			 void (AttackBox::*fn)(),

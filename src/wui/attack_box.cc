@@ -58,23 +58,22 @@ uint32_t AttackBox::get_max_attackers() {
 	return 0;
 }
 
-UI::Slider & AttackBox::add_slider
-	(UI::Box         & parent,
+std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box         & parent,
 	 uint32_t          width,
 	 uint32_t          height,
 	 uint32_t          min, uint32_t max, uint32_t initial,
 	 char      const * picname,
 	 char      const * hint)
 {
-	UI::HorizontalSlider & result =
-		*new UI::HorizontalSlider
+	std::unique_ptr<UI::HorizontalSlider> result(
+		new UI::HorizontalSlider
 			(&parent,
 			 0, 0,
 			 width, height,
 			 min, max, initial,
 			 g_gr->images().get(picname),
-			 hint);
-	parent.add(&result, UI::Box::AlignCenter);
+			 hint));
+	parent.add(result.get(), UI::Box::AlignCenter);
 	return result;
 }
 
@@ -95,29 +94,29 @@ UI::Textarea & AttackBox::add_text
 	return result;
 }
 
-UI::Button & AttackBox::add_button
+std::unique_ptr<UI::Button> AttackBox::add_button
 	(UI::Box           & parent,
 	 const std::string & text,
 	 void         (AttackBox::*fn)(),
 	 const std::string & tooltip_text)
 {
-	UI::Button * button =
+	std::unique_ptr<UI::Button> button(
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->images().get("pics/but2.png"),
 			 text,
-			 tooltip_text);
-	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
-	parent.add(button, Box::AlignCenter);
-	return *button;
+			 tooltip_text));
+	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	parent.add(button.get(), Box::AlignCenter);
+	return button;
 }
 
 /*
  * Update available soldiers
  */
 void AttackBox::think() {
-	int32_t gametime = player_->egbase().get_gametime();
+	const int32_t gametime = player_->egbase().get_gametime();
 	if ((gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_attack();
 		lastupdate_ = gametime;
@@ -158,12 +157,12 @@ void AttackBox::init() {
 	add_text(linebox, _("Soldiers:"));
 	linebox.add_space(8);
 
-	less_soldiers_.reset(
-		&add_button
+	less_soldiers_ =
+		add_button
 			(linebox,
 			 "0",
 			 &AttackBox::send_less_soldiers,
-			 _("Send less soldiers")));
+			 _("Send less soldiers"));
 
 	//  Spliter of soldiers
 	UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
@@ -177,21 +176,21 @@ void AttackBox::init() {
 					 UI::g_fh1->fontset().serif(),
 					 UI_FONT_SIZE_ULTRASMALL));
 
-	soldiers_slider_.reset(
-		&add_slider
+	soldiers_slider_ =
+		add_slider
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
 			 "pics/but2.png",
-			 _("Number of soldiers")));
+			 _("Number of soldiers"));
 
 	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));
-	more_soldiers_.reset(
-		&add_button
+	more_soldiers_ =
+		add_button
 			(linebox,
 			 std::to_string(max_attackers),
 			 &AttackBox::send_more_soldiers,
-			 _("Send more soldiers")));
+			 _("Send more soldiers"));
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_   ->set_enabled(max_attackers > 0);
