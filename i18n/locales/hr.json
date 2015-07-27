@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Hrvatski",
-        "your-language-name-in-english": "Croatian",
-        "language-sort-name": "Hrvatski",
-        "font-set": "default",
-        "translator-list": "Mario Dautović"
-    }
+	  "your-language-name": "Hrvatski",
+	  "your-language-name-in-english": "Croatian",
+	  "language-sort-name": "Hrvatski",
+	  "font-set": "default",
+	  "translator-list": "Mario Dautović"
 }

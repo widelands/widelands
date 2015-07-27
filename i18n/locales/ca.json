@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Català",
-        "your-language-name-in-english": "Catalan",
-        "language-sort-name": "Catala",
-        "font-set": "default",
-        "translator-list": "Guybrush88\nJuanjo Navarro\nOriol"
-    }
+	  "your-language-name": "Català",
+	  "your-language-name-in-english": "Catalan",
+	  "language-sort-name": "Catala",
+	  "font-set": "default",
+	  "translator-list": "Guybrush88\nJuanjo Navarro\nOriol"
 }

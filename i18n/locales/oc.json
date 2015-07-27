@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Occitan",
-        "your-language-name-in-english": "Occitan",
-        "language-sort-name": "Occitan",
-        "font-set": "default",
-        "translator-list": "Cédric VALMARY (Tot en òc)"
-    }
+	  "your-language-name": "Occitan",
+	  "your-language-name-in-english": "Occitan",
+	  "language-sort-name": "Occitan",
+	  "font-set": "default",
+	  "translator-list": "Cédric VALMARY (Tot en òc)"
 }

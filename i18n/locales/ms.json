@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "بهاس ملايو",
-        "your-language-name-in-english": "Malay",
-        "language-sort-name": "Melayu",
-        "font-set": "arabic",
-        "translator-list": "abuyop"
-    }
+	  "your-language-name": "بهاس ملايو",
+	  "your-language-name-in-english": "Malay",
+	  "language-sort-name": "Melayu",
+	  "font-set": "arabic",
+	  "translator-list": "abuyop"
 }

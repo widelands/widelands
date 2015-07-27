@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Gàidhlig",
-        "your-language-name-in-english": "Scottish Gaelic",
-        "language-sort-name": "Gaidhlig",
-        "font-set": "default",
-        "translator-list": "GunChleoc"
-    }
+	  "your-language-name": "Gàidhlig",
+	  "your-language-name-in-english": "Scottish Gaelic",
+	  "language-sort-name": "Gaidhlig",
+	  "font-set": "default",
+	  "translator-list": "GunChleoc"
 }

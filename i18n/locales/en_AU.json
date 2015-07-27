@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Australian English",
-        "your-language-name-in-english": "Australian English",
-        "language-sort-name": "English (Australia)",
-        "font-set": "default",
-        "translator-list": "translator-credits"
-    }
+	  "your-language-name": "Australian English",
+	  "your-language-name-in-english": "Australian English",
+	  "language-sort-name": "English (Australia)",
+	  "font-set": "default",
+	  "translator-list": "translator-credits"
 }

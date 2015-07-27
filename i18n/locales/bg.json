@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Български език",
-        "your-language-name-in-english": "Bulgarian",
-        "language-sort-name": "Balgarski",
-        "font-set": "default",
-        "translator-list": "А. Ташев\nЛюбомир Василев"
-    }
+	  "your-language-name": "Български език",
+	  "your-language-name-in-english": "Bulgarian",
+	  "language-sort-name": "Balgarski",
+	  "font-set": "default",
+	  "translator-list": "А. Ташев\nЛюбомир Василев"
 }

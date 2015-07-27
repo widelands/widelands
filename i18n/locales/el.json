@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Ελληνικά",
-        "your-language-name-in-english": "Greek",
-        "language-sort-name": "Ellinika",
-        "font-set": "default",
-        "translator-list": "ptr\nΓιάννης Ανθυμίδης"
-    }
+	  "your-language-name": "Ελληνικά",
+	  "your-language-name-in-english": "Greek",
+	  "language-sort-name": "Ellinika",
+	  "font-set": "default",
+	  "translator-list": "ptr\nΓιάννης Ανθυμίδης"
 }

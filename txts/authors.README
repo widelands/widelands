@@ -14,7 +14,7 @@ The translator credits and locale info for each locale are located in a separate
 JSON file. Editing and generating these files is handled through Transifex.
 
 The Transifex source file for these is i18n/locales/locales_translators.json.
-For files where "translator-list": "translator-credits", these haven't
+For files where "translator-list" = "translator-credits", these haven't
 been translated (= no credits are listed), so these files should be ignored
 for the credits file.
 

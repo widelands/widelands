@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Basa jawa",
-        "your-language-name-in-english": "Javanese",
-        "language-sort-name": "Jawa",
-        "font-set": "default",
-        "translator-list": "zaenal arifin"
-    }
+	  "your-language-name": "Basa jawa",
+	  "your-language-name-in-english": "Javanese",
+	  "language-sort-name": "Jawa",
+	  "font-set": "default",
+	  "translator-list": "zaenal arifin"
 }

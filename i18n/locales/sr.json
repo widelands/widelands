@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Srpski",
-        "your-language-name-in-english": "Serbian",
-        "language-sort-name": "Srpski",
-        "font-set": "default",
-        "translator-list": "Никола Павловић"
-    }
+	  "your-language-name": "Srpski",
+	  "your-language-name-in-english": "Serbian",
+	  "language-sort-name": "Srpski",
+	  "font-set": "default",
+	  "translator-list": "Никола Павловић"
 }

@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Lietuvių",
-        "your-language-name-in-english": "Lithuanian",
-        "language-sort-name": "Lietuviu",
-        "font-set": "default",
-        "translator-list": "Mantas Kriaučiūnas"
-    }
+	  "your-language-name": "Lietuvių",
+	  "your-language-name-in-english": "Lithuanian",
+	  "language-sort-name": "Lietuviu",
+	  "font-set": "default",
+	  "translator-list": "Mantas Kriaučiūnas"
 }

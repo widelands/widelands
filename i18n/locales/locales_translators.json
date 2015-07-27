@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "English",
-        "your-language-name-in-english": "English",
-        "language-sort-name": "English",
-        "font-set": "default",
-        "translator-list": "translator-credits"
-    }
+	  "your-language-name": "English",
+	  "your-language-name-in-english": "English",
+	  "language-sort-name": "English",
+	  "font-set": "default",
+	  "translator-list": "translator-credits"
 }

@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Lingua latīna",
-        "your-language-name-in-english": "Latin",
-        "language-sort-name": "Latina",
-        "font-set": "default",
-        "translator-list": "alms21\nlopho\nSonnrain\nStephan Lenk\nThorsten"
-    }
+	  "your-language-name": "Lingua latīna",
+	  "your-language-name-in-english": "Latin",
+	  "language-sort-name": "Latina",
+	  "font-set": "default",
+	  "translator-list": "alms21\nlopho\nSonnrain\nStephan Lenk\nThorsten"
 }

@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "मराठी",
-        "your-language-name-in-english": "Marathi",
-        "language-sort-name": "Marathi",
-        "font-set": "devanagari",
-        "translator-list": "Amod Ajit Karmarkar"
-    }
+	  "your-language-name": "मराठी",
+	  "your-language-name-in-english": "Marathi",
+	  "language-sort-name": "Marathi",
+	  "font-set": "devanagari",
+	  "translator-list": "Amod Ajit Karmarkar"
 }

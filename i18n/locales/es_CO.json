@@ -1,9 +1,7 @@
 {
-    "locale-translators": {
-        "your-language-name": "Español colombiano",
-        "your-language-name-in-english": "Colombian Spanish",
-        "language-sort-name": "Espanol colombiano",
-        "font-set": "default",
-        "translator-list": "translator-credits"
-    }
+	  "your-language-name": "Español colombiano",
+	  "your-language-name-in-english": "Colombian Spanish",
+	  "language-sort-name": "Espanol colombiano",
+	  "font-set": "default",
+	  "translator-list": "translator-credits"
 }

@@ -51,16 +51,16 @@ for source_filename in source_files:
 
 		# Parsing translator credits
 		# Make sure we don't pick up untranslated stuff
-		if translators["locale-translators"]["translator-list"] != 'translator-credits':
+		if translators["translator-list"] != 'translator-credits':
 			locale_message += " translators and"
 			lua_translators += '{' # entry
-			lua_translators += 'subheading = "' + translators["locale-translators"]["your-language-name"]
-			if translators["locale-translators"]["your-language-name-in-english"] != 'English' and translators["locale-translators"]["your-language-name-in-english"] != translators["locale-translators"]["your-language-name"] :
-				lua_translators += ' (' + translators["locale-translators"]["your-language-name-in-english"] + ')'
+			lua_translators += 'subheading = "' + translators["your-language-name"]
+			if translators["your-language-name-in-english"] != 'English' and translators["your-language-name-in-english"] != translators["your-language-name"] :
+				lua_translators += ' (' + translators["your-language-name-in-english"] + ')'
 			lua_translators += '",'
 
 			lua_translators += 'members = {' # members
-			for transl_name in translators["locale-translators"]["translator-list"].split("\n"):
+			for transl_name in translators["translator-list"].split("\n"):
 				lua_translators += '"' + transl_name + '",'
 			lua_translators += "}," # members
 			lua_translators += "}," # entry
@@ -71,17 +71,17 @@ for source_filename in source_files:
 		locale_message += " locale info for " + locale_code
 		lua_locales += '\n\t' + locale_code + ' = {\n' # entry with locale code
 
-		if translators["locale-translators"]["your-language-name"] != 'English' or locale_code == 'en':
-			lua_locales += '\t\tname = "' + translators["locale-translators"]["your-language-name"] + '",\n'
+		if translators["your-language-name"] != 'English' or locale_code == 'en':
+			lua_locales += '\t\tname = "' + translators["your-language-name"] + '",\n'
 		else:
 			lua_locales += '\t\tname = "' + locale_code + '",\n'
 
-		if translators["locale-translators"]["language-sort-name"] != 'English' or locale_code == 'en':
-			lua_locales += '\t\tsort_name = "' + translators["locale-translators"]["language-sort-name"] + '",\n'
+		if translators["language-sort-name"] != 'English' or locale_code == 'en':
+			lua_locales += '\t\tsort_name = "' + translators["language-sort-name"] + '",\n'
 		else:
 			lua_locales += '\t\tsort_name = "' + locale_code + '",\n'
 
-		lua_locales += '\t\tfont = "' + translators["locale-translators"]["font-set"] + '"\n'
+		lua_locales += '\t\tfont = "' + translators["font-set"] + '"\n'
 		lua_locales += "\t},\n" # entry
 		print(locale_message)
 lua_locales += "}\n"
