@@ -44,6 +44,8 @@ constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
 constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
 
+using namespace Widelands;
+
 namespace {
 void set_label_font(UI::Textarea* label) {
 	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
