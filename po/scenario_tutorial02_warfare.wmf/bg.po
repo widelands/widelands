@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-21 12:11+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-27 09:12+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -122,13 +122,13 @@ msgstr "Бойната арена"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr "Досега говорех за обучение и нива. Нека да ги развия повече подробности."
+msgstr "Досега говорех за трениране и нива. Нека да ги развия повече подробности."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "Новосъздаден войник няма никакъв опит и не е много добър в боя. За да го направите по-силен, можете да построите места за обучение."
+msgstr "Новосъздаден войник няма никакъв опит и не е много добър в боя. За да го направите по-силен, можете да построите тренировъчни сгради."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
 msgid ""
@@ -136,7 +136,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strongbeer. In a"
 " real game, you should have a good infrastructure before you build it."
-msgstr "Едно от тях е бойната арена. Тя е голяма и скъпа сграда, която тренира ловкостта на войниците. Тъй като войниците огладняват много по време на обучението, тази сграда се нуждае от много храна и силна бира. В една истинска игра, би трябвало да имате добра инфраструктура, преди да можете да я построите."
+msgstr "Една от тези тренировъчни сгради е бойната арена. Тя е голяма и скъпа сграда, която тренира ловкостта на войниците. Тъй като войниците огладняват много по време на обучението, тази сграда се нуждае от много храна и силна бира. В една истинска игра, би трябвало да имате добра инфраструктура, преди да можете да я построите."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
@@ -214,36 +214,36 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Това е второто място за обучение: тренировъчният лагер. Той също е голяма сграда и за да допълни бойната арена, той тренира атаката и здравето (както може би помните, войниците на варварите не могат да тренират защита)."
+msgstr "Това е втората тренировъчна сграда: тренировъчният лагер. Той също е голяма сграда и за да допълни бойната арена, той тренира атаката и здравето (както може би помните, войниците на варварите не могат да тренират защита)."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 msgid "Build a training camp."
-msgstr "Постройте лагер за обучение."
+msgstr "Постройте тренировъчен лагер."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid "Build a training camp"
-msgstr "Постройте лагер за обучение"
+msgstr "Постройте тренировъчен лагер"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Бойната арена обучава тренира само ловкостта на войниците. За да създадете най-силния възможен войник, трябва да построите и лагер за обучение, който тренира атаката и здравето им."
+msgstr "Бойната арена тренира само ловкостта на войниците. За да създадете най-силния възможен войник, трябва да построите и тренировъчен лагер, който тренира атаката и здравето им."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "Чудесно, нашият лагер за обучение също е готов. Сега нищо не може да не спре да имаме най-силните войници, които светът някога е виждал."
+msgstr "Чудесно, нашият тренировъчен лагер също е готов. Сега нищо не може да ни спре да създадем най-силните войници, които светът някога е виждал."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strongbeer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "За да тренират в лагера за обучение, войниците се нуждаят от храна, също както в бойната арена, но нямат нужда от силна бира. Вместо това, им трябват различни видове брадви за трениране на атаката и шлемове за трениране на здравето."
+msgstr "За да тренират в тренировъчния лагер, войниците се нуждаят от храна, също както в бойната арена, но нямат нужда от силна бира. Вместо това, им трябват различни видове брадви за трениране на атаката и шлемове за трениране на здравето."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid ""

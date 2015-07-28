@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-25 23:42+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 21:01+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -179,31 +179,31 @@ msgstr ""
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr "Ďalšie informácie nájdete v okne Pomoc, prístupnom pomocou otáznika v okne každej budovy."
+msgstr "Ďalšie informácie nájdete v okne Pomoc, prístupnom kliknutím na otáznik v okne každej budovy."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "Pomocou ikon nad vojakmi sa môžete dozvedieť, ako ďaleko pokročili vo výcviku. Pokrok je určený červenými bodkami:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "Žiadne červené bodky znamenajú, že vojak nie je vôbec vycvičený, čiže je na úrovni 0. Takto sú označení všetci nováčikovia."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "Vojak zosilnie s každým úspešným krokom výcviku, čo je znázornené červenou bodkou. Tento vojak je na úrovni 1 vo výcviku uhýbania."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Dosiahnutie najvyššej možnej úrovne (v tomto prípade úrovne 2) sa znázorňuje bielou farbou pozadia."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86

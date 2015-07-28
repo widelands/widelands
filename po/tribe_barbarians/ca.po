@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-25 13:52+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 19:16+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -597,7 +597,7 @@ msgid ""
 "produced in the metal works like all other tools (but it ceases to be "
 "produced by the building if the metal works is enhanced to an axfactory and "
 "war mill)."
-msgstr ""
+msgstr "U pala de forner és l'eina que necessita el flequer. Es produeix al taller de metall com totes les altres eines (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
@@ -615,14 +615,14 @@ msgid ""
 "The broad ax is produced by the axfactory and the war mill. It is used in "
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge (from attack level 1 to attack level 2)."
-msgstr ""
+msgstr "La destral ampla es produeix a la fàbrica de destrals i al taller de guerra. S'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell d'atac dels guerrers de nivell 1 a nivell 2."
 
 #: ../../tribes/barbarians/bronzeax/conf:1
 msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
 "warriors can use it. It is produced at the war mill and used in the training"
 " camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr ""
+msgstr "La destral de bronze és difícil de brandar. Només els guerrers més hàbils poden emprar-la. Es produeix al taller d'armes i s'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell d'atac dels soldats de nivell 2 a nivell 3."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -674,7 +674,7 @@ msgid ""
 "The fires of the barbarians are usually fed with coal. It is produced in "
 "coal mines or out of logs in a charcoal kiln. Consumers are several "
 "buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
-msgstr ""
+msgstr "Els focs dels bàrbars s'alimenten de carbó. El carbó es pot obtenir de les mines de carbó o a partir de troncs en kilns. El consumeixen diferents edificis: el forn de calç, el forn de metalls, la fàbrica de destrals, el taller de guerra i el taller de cascos."
 
 #: ../../tribes/barbarians/coalmine/conf:26
 #: ../../tribes/barbarians/deep_coalmine/conf:28
@@ -721,7 +721,7 @@ msgstr "Extreu carbó del terra en terreny muntanyós."
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr ""
+msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar carbó."
 
 #: ../../tribes/barbarians/coalmine/help.lua:31
 #: ../../tribes/barbarians/deep_coalmine/help.lua:33
@@ -1386,7 +1386,7 @@ msgstr "Extreu mineral d'or del terra en terreny muntanyós."
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr ""
+msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar mineral d'or."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:31
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:31
@@ -1434,7 +1434,7 @@ msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr ""
+msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar mineral de ferro."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:31
 #: ../../tribes/barbarians/deeper_oremine/help.lua:31
@@ -1456,7 +1456,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr ""
+msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar carbó és del %s."
 
 #: ../../tribes/barbarians/deeper_goldmine/conf:42
 msgid ""
@@ -1470,7 +1470,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr ""
+msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral d'or és del %s."
 
 #: ../../tribes/barbarians/deeper_oremine/conf:45
 msgid ""
@@ -1484,7 +1484,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr ""
+msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral de ferro és del %s."
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your donjon."
@@ -1535,7 +1535,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "A banda de la pita i de la carn, el peix és un altre aliment bàsic dels bàrbars. Els peixos s'usen a les tavernes, hostals normals i grans i llocs d'entrenament (camp d'entrenament i palestra d'entrenament)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1576,7 +1576,7 @@ msgid ""
 "Fishing rods are needed by barbarian fishers for fishing. They are one of "
 "the basic tools produced in a metal workshop (but they cease to be produced "
 "by the building if it is enhanced to an axfactory and war mill)."
-msgstr ""
+msgstr "La canya de pescar l'usen els pescadors bàrbars. És una de les eines bàsiques que es produeixen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1666,7 +1666,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "raw stone."
-msgstr ""
+msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar pedra en brut és del %s."
 
 #: ../../tribes/barbarians/granitemine/help.lua:30
 msgid ""
@@ -1983,7 +1983,7 @@ msgid ""
 "The micro brewery produces Beer of the lower grade. This beer is a vital "
 "component of the snacks that inns and big inns prepare for miners in deep "
 "mines."
-msgstr ""
+msgstr "La cerveseria petita produeix cervesa de baixa graduació. La cervesa és un component vital dels aperitius que els hostals normals i grans preparen per als miners de les mines profundes."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:29
 msgid ""
@@ -2009,7 +2009,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr ""
+msgstr "Els flequers bàrbars fan pita plana i molt gustosa amb farina de blat i aigua, seguint una recepta secreta. S'usa a les tavernes i hostals normals i grans per preparar racions, aperitius i àpats. La pita també s'usa als llocs d'entrenament (palestra, coliseu i camp d'entrenament)."
 
 #: ../../tribes/barbarians/quarry/conf:19
 msgid "quarrying stone"
@@ -2205,7 +2205,7 @@ msgstr "Redueix els minerals de ferro i d'or i n'obté, respectivament, ferro i 
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "Una ració de menjar més contundent per als miners que treballen en mines més profundes. Es prepara als hostals normals i grans a partir de cervesa, pita i peix o carn."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -2380,13 +2380,13 @@ msgstr "El treballador d'aquest pou no pot trobar-hi aigua."
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Cançó escrita per en Sigurd el bard <br>quan la primera pluja caigué després de la gran sequera durant el 21è any de regnat d'en Chat'Karuth's."
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr ""
+msgstr "«Oh! Dolça font de la vida, <br> que véns del cel <br> i deixes que begui la terra»."
 
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Draws water out of the deep."

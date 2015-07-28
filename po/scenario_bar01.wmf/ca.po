@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-24 14:19+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 18:59+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -555,7 +555,7 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr ""
+msgstr "Avui, els meus guerrers han trobat un home vell que vagava ferit pel fosc bosc. Hem escoltat horroritzats mentre ens explicava les atrocitats que havia vist que passaven a l'Al'thunran."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:282
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
@@ -905,7 +905,7 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "Quan vaig mirar a l'horitzó, encara hi veia els llums carmesí. És increïble amb quanta passió els meus germans lluiten en aquesta guerra. Temo el moment en què torni a veure l'Al'thunran: quan hi arribem, hi quedarà alguna cosa més a banda de cendres i ruïnes on abans estava la preciosa capital?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Another Cold Day"
@@ -946,13 +946,13 @@ msgstr "Hem trobat una aldea amb gent amistosa i productiva, impressionats per l
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Han viscut senzillament i de forma despreocupada, caçant i conreant aliments. Però fins ara no s'ha involucrat en conflictes i no estan preparats per lluitar."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva fi. Per això han decidit unir-se a nosaltres, amb la intenció de que ens puguem ajudar els uns als altres."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

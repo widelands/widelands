@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-02 15:19+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 08:55+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +368,7 @@ msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobi
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] "%d sekunda"
+msgstr[0] "%d sekundu"
 msgstr[1] "%d sekundy"
 msgstr[2] "%d sekúnd"
 
@@ -535,7 +535,7 @@ msgstr "Ak sa všetok potrebný tovar dodá načas, zápasnícka aréna dokáže
 #: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "%d minúta"
+msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
 msgstr[2] "%d minút"
 
