@@ -382,6 +382,15 @@ struct BuildingObserver {
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
 	std::vector<Widelands::WareIndex> critical_built_mat_;
+
+	bool upgrade_substitutes_;
+
+	// It seems that fish and meat are subsitutes (for trainingsites), so
+	// when testing if a trainingsite is supplied enough
+	// we count the wares together
+	std::unordered_set<Widelands::WareIndex> substitute_inputs_;
+	int32_t substitutes_count_;
+
 	int16_t production_hint_;
 
 	int32_t cnt_built_;
@@ -449,16 +458,16 @@ struct WareObserver {
 	uint8_t preciousness_;
 };
 
-//Computer player does not get notification messages about enemy militarysites
-//and warehouses, so following is collected based on observation
-//It is conventient to have some information preserved, like nearby minefields,
-//when it was attacked, whether it is warehouse and so on
-//Also AI test more such targets when considering attack and calculated score is
-//is stored in the observer
+// Computer player does not get notification messages about enemy militarysites
+// and warehouses, so following is collected based on observation
+// It is conventient to have some information preserved, like nearby minefields,
+// when it was attacked, whether it is warehouse and so on
+// Also AI test more such targets when considering attack and calculated score is
+// is stored in the observer
 struct EnemySiteObserver {
 	bool warehouse_;
-	uint8_t attack_soldiers;
-	uint8_t defenders;
+	int32_t attack_soldiers_strength;
+	int32_t defenders_strength;
 	uint8_t stationed_soldiers;
 	uint32_t last_time_attackable;
 	uint32_t last_tested;
@@ -468,8 +477,8 @@ struct EnemySiteObserver {
 
 	EnemySiteObserver()
 	   : warehouse_(false),
-	     attack_soldiers(0),
-	     defenders(0),
+	     attack_soldiers_strength(0),
+	     defenders_strength(0),
 	     stationed_soldiers(0),
 	     last_time_attackable(std::numeric_limits<uint32_t>::max()),
 	     last_tested(0),

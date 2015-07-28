@@ -118,9 +118,9 @@ diary_page_5_1 = {
    body= lutius(_"Diary of Lutius",
 		_([[As Saledus and I walked through these wonderful forests in the north, we felt that our future had just begun. This land is so peaceful, good and beautiful, I could stay here until the end of my life.]])
 		.. paragraphdivider() ..
-		_([[But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack’s houses and a sawmill to produce some basic building materials.]])
+		_([[But until that day, many years may pass! For now, we must concentrate on the present, and build a few lumberjack’s houses and a sawmill to produce some basic building materials.]])
 		.. paragraphdivider() ..
-		_([[But we shouldn’t forget to preserve this natural bounty. These forests should last forever, so we really should build a forester’s house too.]]))
+		_([[But we mustn’t forget to preserve this natural bounty. These forests should last forever, so we really have to build a forester’s house too.]]))
 		.. new_objectives(obj_build_woodeconomy)
 }
 
@@ -145,14 +145,14 @@ diary_page_7 = {
    title =_ "Stone for the Colony",
    posy=1,
    body= lutius(_"Diary of Lutius",
-_[[Great! Today the building of the quarry was completed. Now we will get enough stone to construct larger buildings.]]),
+		_[[Great! Today the building of the quarry was completed. Now we will get enough stone to construct larger buildings.]]),
 }
 
 saledus_1 = {
    title =_ "Dangerous Ship Parts",
    posy = 1,
    body= saledus(_"Saledus looks unhappy",
-		_([[Greetings Lutius, I don’t want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore, I found the remains of another ship. I don’t know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.]])
+		_([[Sire, I don’t want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore, I found the remains of another ship. I don’t know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.]])
 		.. paragraphdivider() ..
 		_([[Perhaps the people aboard that ship were caught in the same storm which brought us to Malac’ Mor – and were brought to this island.]])
 		.. paragraphdivider() ..
@@ -163,20 +163,20 @@ saledus_1 = {
 saledus_2 = {
    title =_ "Marble on the Mountain",
    body= saledus(_"Saledus smiles",
-		_([[Lutius, I’ve got good news for you: As I walked to the east, I found a larger mountain. I am not absolutely sure – a geologist should check if I am right – but I believe we could mine marble from some places on the mountain.]])
+		_([[Sire, I’ve got good news for you: As I walked to the east, I found a larger mountain. I am not absolutely sure – a geologist should check if I am right – but I believe we could mine marble from some places on the mountain.]])
 		.. paragraphdivider() ..
 		_([[It would be a good source for bolstering our supply of quality marble, beyond the meager quantities available from the quarry. Perhaps you were right when you said that this island was like paradise.]])
 		.. paragraphdivider() ..
-		_([[Let us expand to that mountain and start mining marble.]]))
+		_([[Please, expand to that mountain and start mining marble.]]))
 		.. new_objectives(obj_build_marblemine)
 }
 
 saledus_3 = {
    title =_ "Further Mountains",
-   body= saledus(_"Saledus is amazed",
-		_([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
+   body= saledus(_"Saledus is excited",
+		_([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
 		.. paragraphdivider() ..
-		_([[However: for all these bigger buildings, we need better and more elegant building materials. So, let’s build a stonemason, who will cut columns from marble.]])
+		_([[However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a stonemason, who will cut columns from marble.]])
 		.. paragraphdivider() ..
 		_([[After everything, we can now begin to live like we did in Fremil.]]))
 		.. new_objectives(obj_build_mining_infrastructure)
@@ -185,18 +185,18 @@ saledus_3 = {
 amalea_1 = {
    title =_ "Food for the Miners",
    body= amalea(_"Amalea enters…",
-		_([[Hi Lutius, I hope you forgive my criticism, but it seems to me as if you forgot something.]])
+		_([[Lutius, don’t you think you forgot something important?]])
 		.. paragraphdivider() ..
 		_([[It’s nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
 		.. paragraphdivider() ..
 		_([[What do you think about helping them out? I can’t tell you what we need exactly… but here are my recommendations:]]))
-		.. new_objectives(obj_build_Food_infrastructure)
+		.. new_objectives(obj_build_food_infrastructure)
 }
 
 amalea_2 = {
    title =_ "Our New Tavern",
    body= amalea(_"Amalea smiles",
-		_([[Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer they serve is really tasty. You really should have a drink there, too.]])
+		_([[I just visited our new tavern ‘At the palms’. The beer they serve is really tasty. You really should have a drink there, too.]])
 		.. paragraphdivider() ..
 		_([[It is good to see that we have now got a warmer and more familiar environment on our island. Thank you, Lutius.]]))
 }
@@ -209,7 +209,7 @@ diary_page_8 = {
 		.. paragraphdivider() ..
 		_([[Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, Barbarian tribes with whom we have had so many problems before.]])
 		.. paragraphdivider() ..
-		_([[At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.]])
+		_([[At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.]])
 		.. paragraphdivider() ..
 		_([[Anyway, we must build up stronger military buildings as soon as possible.]]))
 		.. new_objectives(obj_build_bigger_military_buildings)

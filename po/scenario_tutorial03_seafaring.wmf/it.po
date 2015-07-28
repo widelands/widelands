@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-16 07:48+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "Dovremmo aspettare finché non abbiamo due navi. Dovrebbe essere sufficiente per ora."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
 msgid ""

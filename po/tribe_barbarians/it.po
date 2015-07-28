@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-05-12 18:01+0000\n"
-"PO-Revision-Date: 2015-05-19 15:49+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-16 08:54+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -627,7 +627,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr "Lavori nei cantieri per creare un nuovo edificio."
+msgstr "Lavora nei cantieri per costruire dei nuovi edifici."
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
@@ -829,7 +829,7 @@ msgstr "L'indicatore di risorse segna acqua"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Ship Construction Site"
-msgstr "Sito per la costruzione navale"
+msgstr "Cantiere"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
@@ -1656,7 +1656,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
-msgstr ""
+msgstr "Estrai della pietra grezza dalle rocce nel terreno montuoso."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."

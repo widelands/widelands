@@ -166,7 +166,7 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 	//    roundFought, reset m_readyflags
 	// *Opponent not on field yet, so one enters :
 	//    waitingForOpponent, if others are false
-	
+
 	bool const oneReadyToFight  = (m_readyflags == 0);
 	bool const roundFought      = (m_readyflags == 3);
 	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) &&

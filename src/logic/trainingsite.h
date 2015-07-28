@@ -218,6 +218,24 @@ private:
 
 };
 
+/**
+ * Note to be published when a soldier is leaving the training center
+ */
+// A note we're using to notify the AI
+struct NoteTrainingSiteSoldierTrained {
+	CAN_BE_SENT_AS_NOTE(NoteId::TrainingSiteSoldierTrained)
+
+	// The trainingsite from where soldier is leaving.
+	TrainingSite* ts;
+
+	// The player that owns the ttraining site.
+	Player * player;
+
+	NoteTrainingSiteSoldierTrained(TrainingSite* const init_ts, Player* init_player)
+		: ts(init_ts), player(init_player) {
+	}
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_TRAININGSITE_H

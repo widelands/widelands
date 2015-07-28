@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-06 19:02+0000\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-11 07:25+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -90,7 +90,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Nahrung ist für Minen und Ausbildungsstätten sehr wichtig. Errichte eine gut arbeitende Nahrungsproduktion, indem du mindestens einen Bauernhof, eine Schwarzwurzelfarm und eine Mühle baust. Die beiden Mehlsorten werden zusammen mit Wasser aus einem Brunnen in der Bäckerei zu Brot verarbeitet, also baue auch eine Bäckerei und einen Brunnen."
+msgstr "Nahrung ist für Minen und Ausbildungsstätten sehr wichtig. Errichte eine gut arbeitende Nahrungsproduktion, indem du mindestens einen Bauernhof, eine Duneklrübenfarm und eine Mühle baust. Die beiden Mehlsorten werden zusammen mit Wasser aus einem Brunnen in der Bäckerei zu Brot verarbeitet, also baue auch eine Bäckerei und einen Brunnen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -104,11 +104,11 @@ msgstr "Die anderen beiden wichtigen Grundnahrungsmittel sind Räucherfisch und 
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr "Baue einen Bauernhof und eine Schwarzwurzel-Farm"
+msgstr "Baue einen Bauernhof und eine Dunkelrübenfarm"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr "Baue eine Mühle, um Maismehl und Schwarzwurzelmehl herzustellen"
+msgstr "Baue eine Mühle, um Maismehl und Dunkelrübenmehl herzustellen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -116,7 +116,7 @@ msgstr "Baue einen Brunnen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr "Baue eine Bäckerei, um Brot aus Maismehl, Schwarzwurzelmehl und Wasser zu backen"
+msgstr "Baue eine Bäckerei, um Brot aus Maismehl, Dunkelrübenmehl und Wasser zu backen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -284,7 +284,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Auf der einst versteckt gelegenen und nun verlorenen Insel Atlantis lebte seit langer Zeit ein stolzer Stamm. Regiert von der Blutlinie des Königs Ajanthul – der als erster Mensch vom Meeresgott Lutas die Macht bekam, oberhalb der Meereslinie zu atmen – und den Klerikern, die die Verbindung zu Lutas schlossen, entwickelten sie sich und erstellten ihre eigene Zivilisation."
+msgstr "Auf der einst versteckt gelegenen und nun verlorenen Insel Atlantis lebte seit langer Zeit ein stolzer Stamm. Regiert von der Blutlinie des Königs Ajanthul – der als erster Mensch vom Meeresgott Lutas die Macht bekam, oberhalb der Meereslinie zu atmen – und den Priestern, die die Verbindung zu Lutas schlossen, wuchs das Volk und wurde eine eigene Zivilisation."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:139
 msgid ""
@@ -516,7 +516,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Doch wir könnten zu einem Kompromiss gelangen: für mich ist das Brotbacken eine mühevolle Aufgabe. Die Schwarzwurzeln und den Mais zu Mehl zu mahlen und dann das Brot zu backen ist lästig und langweilig. Ich denke, eine eher gewerbliche Herangehensweise wäre hier hilfreich. Ich für meinen Teil würde es lieben, wenn mir frisches Brot jeden Tag ins Haus geliefert würde."
+msgstr "Doch wir könnten zu einem Kompromiss gelangen: für mich ist das Brotbacken eine mühevolle Aufgabe. Die Dunkelrüben und den Mais zu Mehl zu mahlen und dann das Brot zu backen ist lästig und langweilig. Ich denke, eine eher gewerbliche Herangehensweise wäre hier hilfreich. Ich für meinen Teil würde es lieben, wenn mir frisches Brot jeden Tag ins Haus geliefert würde."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:214
 msgid ""

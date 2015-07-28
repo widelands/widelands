@@ -15,7 +15,7 @@ return {
 	--General Section
 	building_help_general_string("empire", building_description,
 		_"Hunts animals to produce meat.",
-		_"The hunter’s house needs animals to hunt within the working radius.") ..
+		_"The hunter’s house needs animals to hunt within the work area.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

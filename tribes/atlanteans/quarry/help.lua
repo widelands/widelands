@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("atlanteans", building_description,
-		_"Carves stones out of rocks in the vicinity.", _"The quarry needs stones to cut within the working radius.") ..
+		_"Carves stones out of rocks in the vicinity.", _"The quarry needs stones to cut within the work area.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description, true) ..
