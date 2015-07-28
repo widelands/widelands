@@ -320,8 +320,9 @@ void TrainingSite::update_soldier_request() {
 		delete m_soldier_request;
 		m_soldier_request = nullptr;
 
-		while (m_soldiers.size() > m_capacity)
+		while (m_soldiers.size() > m_capacity) {
 			drop_soldier(**m_soldiers.rbegin());
+		}
 	}
 }
 
@@ -432,6 +433,7 @@ void TrainingSite::drop_soldier(Soldier & soldier)
 
 	// Schedule, so that we can call new soldiers on next act()
 	schedule_act(game, 100);
+	Notifications::publish(NoteTrainingSiteSoldierTrained(this, get_owner()));
 }
 
 
