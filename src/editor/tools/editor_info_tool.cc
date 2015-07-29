@@ -150,7 +150,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	if (map.get_nrplayers() > 0) {
 		buf += "• " +
-		       (boost::format(_("Players: %d")) % static_cast<int>(map.get_nrplayers())).str() + "\n";
+				 (boost::format(_("Players: %u")) % static_cast<unsigned int>(map.get_nrplayers())).str() + "\n";
 	}
 	else {
 		buf += "• " + std::string(_("Players: -")) + "\n";
