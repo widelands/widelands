@@ -719,7 +719,7 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
+	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -745,7 +745,7 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 }
 
 /**
- * Find a path to the dock @p pd, returns it length, and the path optionally.
+ * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
 uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	Map& map = game.map();
@@ -773,11 +773,6 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 		}
 	}
 
-	printf ("   failed to calculate path from %3dx%3d to %3dx%3d\n",
-	get_position().x,
-	get_position().y,
-	pd.get_positions(game)[0].x,
-	pd.get_positions(game)[0].y);
 	molog("   calculate_sea_distance: Failed to find path!\n");
 	return std::numeric_limits<uint32_t>::max();
 
@@ -788,7 +783,10 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
  */
 void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	Path path;
+
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
+
+	// if we get a meaningfull result
 	if (distance < std::numeric_limits<uint32_t>::max()) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
