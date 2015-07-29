@@ -73,7 +73,8 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
 			 g_gr->images().get("pics/but0.png"),
-			 _("Saved game"), _("Select a saved game"), true, false);
+			 /** Translators: This is a button to select a savegame */
+			 _("Saved Game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2));
@@ -294,7 +295,8 @@ void FullscreenMenuLaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else if (m_settings->settings().savegame) {
-		m_wincondition.set_title(_("Savegame"));
+		/** Translators: This is a game type */
+		m_wincondition.set_title(_("Saved Game"));
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
