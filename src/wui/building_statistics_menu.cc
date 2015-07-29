@@ -42,7 +42,7 @@ constexpr int kTabHeight = 35 + 5 * (kBuildGridCellSize + kLabelHeight + kLabelH
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
 constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
-constexpr int32_t kUpdateTime = 1000;  //  1 second, gametime
+constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 
 namespace {
 void set_label_font(UI::Textarea* label) {
@@ -551,9 +551,9 @@ void BuildingStatisticsMenu::think() {
 
 	// Update statistics
 	const Game& game = iplayer().game();
-	int32_t const gametime = game.get_gametime();
+	const int32_t gametime = game.get_gametime();
 
-	if ((gametime - lastupdate_) > kUpdateTime) {
+	if ((gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update();
 		lastupdate_ = gametime;
 	}
