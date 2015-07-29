@@ -10,7 +10,10 @@ set_textdomain("win_conditions")
 
 include "scripting/win_condition_texts.lua"
 
-local wc_name = _ "Wood Gnome"
+local wc_name = "Wood Gnome"
+-- This needs to be exactly like wc_name, but localized, because wc_name
+-- will be used as the key to fetch the translation in C++
+local wc_descname = _("Wood Gnome")
 local wc_version = 2
 local wc_desc = _(
 [[As wood gnome you like big forests, so your task is to have more trees on ]] ..
@@ -24,7 +27,7 @@ return {
    local plrs = wl.Game().players
 
    -- set the objective with the game type for all players
-   broadcast_objective("win_condition", wc_name, wc_desc)
+   broadcast_objective("win_condition", wc_descname, wc_desc)
 
 	local remaining_time = 4 * 60 -- 4 hours
 
@@ -97,7 +100,7 @@ return {
 	-- Start a new coroutine that checks for defeated players
 	run(function()
 		sleep(5000)
-		check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
+		check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
 	end)
 
 	-- Install statistics hook
@@ -150,12 +153,12 @@ return {
 		privmsg = lost_game_over.title
 		privmsg = privmsg .. msg
 		points[i][1]:send_message(lost_game_over.body, privmsg)
-		wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_name, wc_version, {score=points[i][2]}))
+		wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
 	end
 	privmsg = won_game_over.title
 	privmsg = privmsg .. msg
 	points[#points][1]:send_message(won_game_over.body, privmsg)
    wl.game.report_result(points[#points][1], 1,
-      make_extra_data(points[#points][1], wc_name, wc_version, {score=points[#points][2]}))
+      make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
 end
 }
