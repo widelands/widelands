@@ -429,12 +429,13 @@ void FullscreenMenuLaunchMPG::start_clicked()
 		throw WLWarning
 			(_("File not found"),
 			 _
-			 	("Widelands tried to start a game with a file that could not be "
-			 	 "found at the given path.\n"
-			 	 "The file was: %s\n"
-			 	 "If this happens, the host might have selected a file that you do "
-			 	 "not own. Normally, such a file should be sent from the host to "
-			 	 "you, but perhaps the transfer was not yet finished!?!"),
+			 ("Widelands tried to start a game with a file that could not be "
+			  "found at the given path.\n"
+			  "The file was: %s\n"
+			  "If this happens in a network game, the host might have selected "
+			  "a file that you do not own. Normally, such a file should be sent "
+			  "from the host to you, but perhaps the transfer was not yet "
+			  "finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->can_launch())
 		end_modal(1);
