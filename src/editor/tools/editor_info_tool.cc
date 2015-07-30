@@ -20,6 +20,7 @@
 #include "editor/tools/editor_info_tool.h"
 
 #include <cstdio>
+#include <vector>
 
 #include <boost/format.hpp>
 
@@ -54,29 +55,33 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	buf += "• " + (boost::format(_("Coordinates: (%1$i, %2$i)"))
 					 % center.node.x % center.node.y).str() + "\n";
 
-	std::string temp = "";
+
+	std::vector<std::string> caps_strings;
 	Widelands::NodeCaps const caps = f.nodecaps();
 	switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
-		/** TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk */
-		case Widelands::BUILDCAPS_SMALL:  temp += _(" small");  break;
-		/** TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk */
-		case Widelands::BUILDCAPS_MEDIUM: temp += _(" medium"); break;
-		/** TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk */
-		case Widelands::BUILDCAPS_BIG:    temp += _(" big");    break;
+		/** TRANSLATORS: Editor terrain property: small building plot */
+		case Widelands::BUILDCAPS_SMALL:  caps_strings.push_back(_("small"));  break;
+		/** TRANSLATORS: Editor terrain property: medium building plot */
+		case Widelands::BUILDCAPS_MEDIUM: caps_strings.push_back(_("medium")); break;
+		/** TRANSLATORS: Editor terrain property: big building plot */
+		case Widelands::BUILDCAPS_BIG:    caps_strings.push_back(_("big"));    break;
 		default: break;
 	};
-	/** TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk */
-	if (caps & Widelands::BUILDCAPS_FLAG) temp += _(" flag");
-	/** TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk */
-	if (caps & Widelands::BUILDCAPS_MINE) temp += _(" mine");
-	/** TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk */
-	if (caps & Widelands::BUILDCAPS_PORT) temp += _(" port");
-	/** TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk */
-	if (caps & Widelands::MOVECAPS_WALK)  temp += _(" walk");
-	/** TRANSLATORS: This is part of a list, e.g. Caps: swim */
-	if (caps & Widelands::MOVECAPS_SWIM)  temp += _(" swim");
+	/** TRANSLATORS: Editor terrain property: space for a flag */
+	if (caps & Widelands::BUILDCAPS_FLAG) caps_strings.push_back(_("flag"));
+	/** TRANSLATORS: Editor terrain property: mine building plot */
+	if (caps & Widelands::BUILDCAPS_MINE) caps_strings.push_back(_("mine"));
+	/** TRANSLATORS: Editor terrain property: port space */
+	if (caps & Widelands::BUILDCAPS_PORT) caps_strings.push_back(_("port"));
+	/** TRANSLATORS: Editor terrain property: units can walk on this terrain */
+	if (caps & Widelands::MOVECAPS_WALK)  caps_strings.push_back(_("walkable"));
+	/** TRANSLATORS: Editor terrain property: units can swim on this terrain (fish, ships) */
+	if (caps & Widelands::MOVECAPS_SWIM)  caps_strings.push_back(_("swimmable"));
 
-	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
+	buf += std::string("• ")
+			 + (boost::format(_("Caps: %s"))
+				 % i18n::localize_list(caps_strings, i18n::ConcatenateWith::COMMA)).str()
+			 + "\n";
 
 	if (f.get_owned_by() > 0) {
 		buf += std::string("• ") +
@@ -86,6 +91,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 		buf += std::string("• ") + _("Owned by: —") + "\n";
 	}
 
+	std::string temp = "";
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
 	buf += "• " + temp + "\n";
 

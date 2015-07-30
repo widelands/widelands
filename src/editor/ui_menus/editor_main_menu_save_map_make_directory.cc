@@ -35,7 +35,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	int32_t const offsy   = 30;
 	int32_t       posy    = offsy;
 
-	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
+	new UI::Textarea(this, spacing, posy, _("Enter Directory Name:"));
 	posy += 20 + spacing;
 
 	m_edit =

@@ -5,6 +5,7 @@
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
 include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 include "scripting/table.lua"
 include "scripting/win_condition_functions.lua"
 
@@ -108,9 +109,9 @@ return {
          points = points + lpoints
          local warename = wl.Game():get_ware_description(plr.tribe_name, ware).descname
          -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-         descr[#descr+1] = [[• ]] .. (_"  %1$s (%2$i P) x %3$i = %4$i P"):bformat(
+         descr[#descr+1] = listitem_bullet(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
             warename, value, count, lpoints
-         ) .. "<br>"
+         )
       end
       descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
               .. "<p line-spacing=3 font-size=12>"
