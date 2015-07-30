@@ -15,7 +15,7 @@ return {
 	--General Section
 	building_help_general_string("empire", building_description,
 		_"Plants trees in the surrounding area.",
-		_"The foresters’s house needs free space within the work area to plant the trees.") ..
+		_"The forester’s house needs free space within the work area to plant the trees.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..
