@@ -278,7 +278,7 @@ function building_help_general_string(tribename, building_description, purpose, 
 
 	if(building_description.type_name == "productionsite") then
 		if(building_description.workarea_radius and building_description.workarea_radius > 0) then
-			result = result .. text_line(_"Work area:", building_description.workarea_radius)
+			result = result .. text_line(_"Work area radius:", building_description.workarea_radius)
 		end
 
 	elseif(building_description.type_name == "warehouse") then
