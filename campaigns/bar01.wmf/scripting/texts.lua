@@ -43,7 +43,7 @@ obj_build_mines = {
    number = 2,
    body = objective_text(_"Build coal and iron ore mines",
       listitem_bullet(_"Build a coal mine and an iron ore mine.") ..
-      listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that he will find, choosing the appropriate mine to be built:") ..
+      listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
 		"</rt>" ..
 		rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_"a bit of coal")) ..
 		rt("image=tribes/barbarians/resi_coal2/resi_00.png", p(_"a lot of coal")) ..
