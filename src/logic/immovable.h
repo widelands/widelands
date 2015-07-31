@@ -49,7 +49,7 @@ struct PlayerImmovable;
 class TribeDescr;
 
 struct NoteImmovable {
-	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)
+	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)
 
 	PlayerImmovable* pi;
 

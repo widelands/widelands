@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 10:16+0100\n"
+"POT-Creation-Date: 2015-07-27 10:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -527,14 +527,14 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:301
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr ""
@@ -667,35 +667,35 @@ msgstr ""
 msgid "Make Directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:210
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 #, c-format
 msgid "Directory: %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:260
 msgid "Not a map file"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -729,11 +729,11 @@ msgstr ""
 msgid "Player %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:323
+#: ../../src/editor/ui_menus/editor_player_menu.cc:327
 msgid "Error!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:325
+#: ../../src/editor/ui_menus/editor_player_menu.cc:329
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -1127,21 +1127,21 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:231
+#: ../../src/logic/productionsite.cc:230
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:238
+#: ../../src/logic/productionsite.cc:237
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/productionsite.cc:243
+#: ../../src/logic/productionsite.cc:242
 msgid "(stopped)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:926
+#: ../../src/logic/productionsite.cc:928
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -2112,7 +2112,7 @@ msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr ""
 
-#: ../../src/ui_fsmenu/fileview.cc:76 ../../src/wui/watchwindow.cc:140
+#: ../../src/ui_fsmenu/fileview.cc:70 ../../src/wui/watchwindow.cc:140
 msgid "Close"
 msgstr ""
 
@@ -2167,7 +2167,6 @@ msgid "Unregistered"
 msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:153
-#: ../../src/wui/building_statistics_menu.cc:111
 msgid "Name"
 msgstr ""
 
@@ -3153,54 +3152,77 @@ msgstr ""
 msgid "Send more soldiers"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:68
 #: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:88
-msgid "Total Productivity:"
-msgstr ""
-
-#: ../../src/wui/building_statistics_menu.cc:92
+#: ../../src/wui/building_statistics_menu.cc:78
 msgid "Owned:"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:98
-msgid "Being built:"
+#: ../../src/wui/building_statistics_menu.cc:85
+msgid "Under Construction:"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:104
-msgid "Jump to unproductive"
+#. * TRANSLATORS: This is the first part of productivity with input field
+#. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
+#: ../../src/wui/building_statistics_menu.cc:92
+#: ../../src/wui/building_statistics_menu.cc:675
+msgid "Low Production: "
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:112
-#: ../../src/wui/multiplayersetupgroup.cc:439
-msgid "Type"
+#. * TRANSLATORS: This is the second part of productivity with input field
+#. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
+#: ../../src/wui/building_statistics_menu.cc:100
+msgid "%"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:113
-msgid "Prod"
+#: ../../src/wui/building_statistics_menu.cc:134
+msgid "Small Buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:114
-msgid "Owned"
+#: ../../src/wui/building_statistics_menu.cc:138
+msgid "Medium Buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:115
-msgid "Build"
+#: ../../src/wui/building_statistics_menu.cc:142
+msgid "Big Buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:132
-#: ../../src/wui/building_statistics_menu.cc:154
-#: ../../src/wui/building_statistics_menu.cc:176
-msgid "Show previous"
+#: ../../src/wui/building_statistics_menu.cc:146
+msgid "Mines"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:143
-#: ../../src/wui/building_statistics_menu.cc:165
-#: ../../src/wui/building_statistics_menu.cc:187
-msgid "Show next"
+#: ../../src/wui/building_statistics_menu.cc:153
+msgid "Ports"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:268
+#: ../../src/wui/building_statistics_menu.cc:292
+#: ../../src/wui/building_statistics_menu.cc:316
+msgid "Show previous building"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:280
+#: ../../src/wui/building_statistics_menu.cc:304
+#: ../../src/wui/building_statistics_menu.cc:328
+msgid "Show next building"
+msgstr ""
+
+#. * TRANSLATORS: %1% = the experience a worker has
+#. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS Buildings: owned / under construction
+#: ../../src/wui/building_statistics_menu.cc:692
+#: ../../src/wui/building_statistics_menu.cc:716
+#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/productionsitewindow.cc:180
+msgid "%1%/%2%"
+msgstr ""
+
+#. * TRANSLATORS Label for number of buildings that are waiting for soldiers
+#: ../../src/wui/building_statistics_menu.cc:706
+msgid "Lacking Soldiers:"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:188
@@ -3908,6 +3930,10 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
+#: ../../src/wui/multiplayersetupgroup.cc:439
+msgid "Type"
+msgstr ""
+
 #: ../../src/wui/multiplayersetupgroup.cc:455
 #: ../../src/wui/playerdescrgroup.cc:100
 msgid "Initialization"
@@ -3950,12 +3976,6 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:98
 msgid "Terminate the employment of the selected worker"
-msgstr ""
-
-#. * TRANSLATORS: %1% = the experience a worker has
-#. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/productionsitewindow.cc:180
-msgid "%1%/%2%"
 msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:196

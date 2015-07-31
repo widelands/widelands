@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-27 09:12+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,99 +20,99 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Изградете малка хранителна икономика"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Изградете малка хранителна икономика, за да осигурите храна на хората си."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Постройте рибарска колиба"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Постройте ловджийска колиба"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a well"
-msgstr ""
+msgstr "Постройте кладенец"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a farm"
-msgstr ""
+msgstr "Постройте ферма"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a bakery"
-msgstr ""
+msgstr "Постройте пекарна"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Постройте ферма за говеда"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Не забравяйте да построите ферма за говеда"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "С нарастването на мрежата Ви от пътища и икономиката Ви, трябва да използвате воловете си, за да пренасяте стоките по-бързо."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a donjon"
-msgstr ""
+msgstr "Постройте донжон"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a donjon at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Постройте донжон на североизточната граница на територията си, за да имате по-голям обхват на видимост и да можете да защитите хората си от внезапни вражески нападения."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
 msgid "Explore further"
-msgstr ""
+msgstr "Изследвайте по-далеч"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:57
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Постройте още военни сгради, за да изследвате територията около щаба и да осигурите сигурността на хората си."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:62
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:64
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Постройте минна инфраструктура"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:65
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Разширете територията си до планините, изпратете геолози да търсят руда и въглища и изградете минна икономика с мини, механи, топилни и работилница за метали."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
 msgid "Build a fortress"
-msgstr ""
+msgstr "Постройте крепост"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Постройте крепост на изток от планините."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:78
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:80
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Изградете условия за трениране"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Постройте бойна арена и тренировъчен лагер западно от планините."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
@@ -120,23 +121,23 @@ msgid ""
 " build up a second metal workshop to ensure the production of tools. When "
 "the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr ""
+msgstr "Надградете работилницата си за метали до фабрика за брадви, за да можете да произвеждате оръжия и постройте втора работилница за метали, за да подсигурите производството на инструменти. Когато ковачът достигне следващото си ниво (главен ковач), ще можете дори да подобрите фабриката за брадви до оръжейна, която произвежда допълнителни оръжия."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Постройте ковачница за шлемове западно от планините, за да осигурите на войниците си по-добра броня."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Постройте склад"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Постройте склад западно от планините."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
@@ -144,19 +145,19 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Складовете приличат на щаба, като единствената разлика е, че те не се защитават от войници. Добра практика е да построите склад когато територията Ви се разраства и пътищата до щаба стават все по-дълги."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:100
 msgid "Build training sites"
-msgstr ""
+msgstr "Постройте тренировъчни сгради"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:102
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr ""
+msgstr "Тренировъчните сгради, като тренировъчния лагер и бойната арена, се използват за трениране на качествата на войниците. Тези качества имат значение в битките и колкото по-добър е един войник, толкова по-голям е шансът за да спечелите битката."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
@@ -406,7 +407,7 @@ msgid ""
 "settlement. He has instructed us to build a donjon, to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Трон ми каза, че е забелязал следи в снега в североизточния край на селището. Той ни нареди да построим донжон, за да имаме по-голям обхват на видимост върху територията около залата ни, така че да защитим хората си от внезапни нападения."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "Further Exploration"
@@ -479,7 +480,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and donjons at the passages,"
 " but for now we can take a deep breath."
-msgstr ""
+msgstr "Най-после! Крепостта беше завършена току-що, така че входът към селището ни е трябва да е защитен засега. За бъдеще, може да помислим за построяване на още укрепления, като прегради и донжони при проходите, но засега можем да си отдъхнем."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:279
 msgid "Enhanced Economy and Training"
@@ -576,5 +577,5 @@ msgstr ""
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Нова задача"
+msgstr[1] "Нови задачи"

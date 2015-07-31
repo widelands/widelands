@@ -22,7 +22,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Cuts raw pieces of granite out of rocks in the vicinity.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The quarry needs rocks to cut within the working radius.",
+		note = _"The quarry needs rocks to cut within the work area.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The stonemason pauses %s before going back to work again.":bformat(
 		ngettext("%d second", "%d seconds", 65):bformat(65))
@@ -80,7 +80,6 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Rocks",
-		message = _"The stonemason working at this quarry can’t find any rocks in his working radius.",
-		delay_attempts = 0
+		message = _"The stonemason working at this quarry can’t find any rocks in his work area.",
 	},
 }

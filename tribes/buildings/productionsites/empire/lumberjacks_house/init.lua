@@ -24,7 +24,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Fells trees in the surrounding area and processes them into logs.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The lumberjack's house needs trees to fell within the working radius.",
+		note = _"The lumberjack's house needs trees to fell within the work area.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
    },
@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Trees",
-		message = _"The lumberjack working at this lumberjack’s house can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a forester’s house.",
-		delay_attempts = 60
+		message = _"The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house.",
+		productivity_threshold = 66
 	},
 }

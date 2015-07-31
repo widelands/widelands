@@ -23,7 +23,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Fishes on the coast near the house.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The fisher’s house needs water full of fish within the working radius." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.",
+		note = _"The fisher’s house needs water full of fish within the work area." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
    },
@@ -61,7 +61,6 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Fish",
-		message = _"The fisher working out of this fisher’s house can’t find any fish in his working radius." .. " " .. _"Remember that you can increase the number of existing fish by building a fishbreeder’s house.",
-		delay_attempts = 10
+		message = _"The fisher working out of this fisher’s house can’t find any fish in his work area." .. " " .. _"Remember that you can increase the number of existing fish by building a fishbreeder’s house.",
 	},
 }

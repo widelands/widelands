@@ -85,7 +85,7 @@ obj_make_heavy_industry_and_mining = {
    title = _"Build industry and mines",
    number = 5,
    body = objective_text(_"Industry and Mines",
-		_[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for crystal, quartz and diamond – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them.]] .. paragraphdivider() ..
+		_[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them.]] .. paragraphdivider() ..
       listitem_bullet(_[[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. paragraphdivider() ..
       listitem_bullet(_[[Build a mine of each type. Make sure to send geologists to the mountain first.]]) ..
       listitem_bullet(_[[Build a smelting works]]) ..

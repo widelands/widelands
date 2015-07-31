@@ -25,7 +25,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Plants trees in the surrounding area.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The forester’s house needs free space within the working radius to plant the trees.",
+		note = _"The forester’s house needs free space within the work area to plant the trees.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"Calculation needed"
    },

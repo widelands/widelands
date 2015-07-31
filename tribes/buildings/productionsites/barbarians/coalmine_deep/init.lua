@@ -90,6 +90,5 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 			_"This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
 			_"You should consider enhancing, dismantling or destroying it.",
-		delay_attempts = 0
 	},
 }

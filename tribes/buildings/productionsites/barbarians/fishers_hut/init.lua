@@ -22,7 +22,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Fishes on the coast near the hut.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The fisher’s hut needs water full of fish within the working radius.",
+		note = _"The fisher’s hut needs water full of fish within the work area.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The fisher pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 18):bformat(18))
    },
@@ -67,7 +67,6 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Fish",
-		message = _"The fisher working out of this fisher’s hut can’t find any fish in his working radius.",
-		delay_attempts = 0
+		message = _"The fisher working out of this fisher’s hut can’t find any fish in his work area.",
 	},
 }

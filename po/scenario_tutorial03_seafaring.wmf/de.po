@@ -5,13 +5,14 @@
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-06-07 09:16+0000\n"
+"PO-Revision-Date: 2015-06-09 09:23+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "Aber ich will dich nicht drängen: Du bist gerade erst angekommen und möchtest dich in deine Siedlung sicherlich erst einmal umschauen. Ich werde ebenfalls eine kurze Pause machen und bald zurück sein."
+msgstr "Aber ich will dich nicht drängen: Du bist gerade erst angekommen und möchtest dich in deiner Siedlung sicherlich erst einmal umschauen. Ich werde ebenfalls eine kurze Pause machen und bald zurück sein."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
@@ -337,7 +338,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Dein Expeditionsschiff ist bereit. Es wartet vor deinem Hafen auf deine Befehle. Es transportiert nun keine Waren mehr. Benutze die Schaltflächen, um dein Schiff in eine der sechs Hauptrichtungen in Widelands zu schicken. Wenn es eine Küste erreicht hat, kannst du es entlang der Küste segeln lassen, wo es einen geeigneten Platz zum Anlegen sucht."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""

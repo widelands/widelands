@@ -11,11 +11,11 @@ tribes:new_ware_type{
 		atlanteans = 20
 	},
    preciousness = {
-		atlanteans = 5
+		atlanteans = 7
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Spidercloth
-		atlanteans = _"Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction."
+		atlanteans = _"Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction."
    },
    animations = {
       idle = {

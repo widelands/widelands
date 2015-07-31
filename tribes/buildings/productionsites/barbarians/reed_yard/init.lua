@@ -79,6 +79,6 @@ tribes:new_productionsite_type {
 	out_of_resource_notification = {
 		title = _"Out of Fields",
 		message = _"The gardener working at this reed yard has no cleared soil to plant his seeds.",
-		delay_attempts = 10
+		productivity_threshold = 20
 	},
 }

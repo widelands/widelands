@@ -97,8 +97,8 @@ public:
 	const std::string& out_of_resource_message() const {
 		return m_out_of_resource_message;
 	}
-	uint32_t out_of_resource_delay_attempts() const {
-		return m_out_of_resource_delay_attempts;
+	uint32_t out_of_resource_productivity_threshold() const {
+		return out_of_resource_productivity_threshold_;
 	}
 
 private:
@@ -109,7 +109,7 @@ private:
 	Programs m_programs;
 	std::string m_out_of_resource_title;
 	std::string m_out_of_resource_message;
-	uint32_t    m_out_of_resource_delay_attempts;
+	int         out_of_resource_productivity_threshold_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -284,9 +284,10 @@ protected:  // TrainingSite must have access to this stuff
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
+	enum class Trend {kUnchanged, kRising, kFalling};
+	Trend                    trend_;
 	std::string              m_statistics_string_on_changed_statistics;
 	std::string              m_production_result; // hover tooltip text
-	uint32_t                 m_out_of_resource_delay_counter;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -315,7 +316,7 @@ private:
  */
 // A note we're using to notify the AI
 struct NoteProductionSiteOutOfResources {
-	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+	CAN_BE_SENT_AS_NOTE(NoteId::ProductionSiteOutOfResources)
 
 	// The production site that is out of resources.
 	ProductionSite* ps;

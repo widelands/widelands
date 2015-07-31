@@ -126,11 +126,16 @@ function wait_for_message(title)
    local old_speed = game.desired_speed
    game.desired_speed = 100 * 1000
    sleep(5000)
-   while #p1.inbox == 0 do
-      sleep(313)
+   while true do
+      while #p1.inbox == 0 do
+         sleep(313)
+      end
+      local message_title = p1.inbox[1].title
+      archive_messages()
+      if title == message_title then
+         break
+      end
    end
-   assert_equal(title, p1.inbox[1].title)
-   archive_messages()
    game.desired_speed = old_speed
    sleep(5000)
 end

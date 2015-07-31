@@ -22,7 +22,7 @@ run(function()
 
    sleep(360000)
 
-   assert_equal(6, #p1.inbox)
+   assert_true(#p1.inbox >= 6)
    mv.buttons.messages:click()
 
    for t=0,6 do

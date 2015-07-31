@@ -73,7 +73,7 @@ m_builder_idle      (false)
 void ConstructionSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK_HEX %
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	      (boost::format(_("%i%% built")) % percent).str()).str();
 }
 

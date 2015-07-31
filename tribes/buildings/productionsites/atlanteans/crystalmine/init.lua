@@ -140,6 +140,5 @@ tribes:new_productionsite_type {
 			_"This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
 			_"You should consider dismantling or destroying it.",
-		delay_attempts = 0
 	},
 }

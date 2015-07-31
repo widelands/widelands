@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
 		},
 		harvest_vine = {
 			-- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
-			descname = _"harvesting grapevines",
+			descname = _"harvesting grapes",
 			actions = {
 				"sleep=5000",
 				"worker=harvestvine"
@@ -81,6 +81,6 @@ tribes:new_productionsite_type {
 	out_of_resource_notification = {
 		title = _"Out of Fields",
 		message = _"The vine farmer working at this vineyard has no cleared soil to plant his grapevines.",
-		delay_attempts = 10
+		productivity_threshold = 30
 	},
 }

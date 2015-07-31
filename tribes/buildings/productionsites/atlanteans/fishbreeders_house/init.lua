@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    aihints = {
 		needs_water = true,
 		renews_map_resource = "fish",
-		prohibited_till = 900
+		prohibited_till = 300
    },
 
 	working_positions = {

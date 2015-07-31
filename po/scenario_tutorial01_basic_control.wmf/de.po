@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-06-15 17:54+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -225,7 +225,7 @@ msgstr "Setzte nun eine blaue Flagge in die Mitte der Straße vom Hauptquartier 
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
-msgstr "Warte, bis die Hütte fertig ist"
+msgstr "Auf die Fertigstellung der Hütte warten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:137
 msgid "Well done! Let’s wait till the hut is finished."
@@ -241,7 +241,7 @@ msgstr "Wenn du willst, dass die Zeit schneller vergeht, drücke einfach BILD AU
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
-msgstr "Warte, bis die Hütte fertig ist"
+msgstr "Auf die Fertigstellung der Hütte warten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
@@ -325,13 +325,13 @@ msgstr "Verschiebe die Hauptansicht mit den Pfeiltasten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
-msgstr "Bewege die Hauptansicht"
+msgstr "Die Hauptansicht verschieben"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr "Die Hauptansicht zu verschieben ist sehr wichtig, um den Überblick zu behalten. Es gibt drei Wege, dies zu tun."
+msgstr "Die Hauptansicht zu verschieben ist sehr wichtig, um den Überblick zu behalten. Es gibt drei Möglichkeiten, dies zu tun."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -362,7 +362,7 @@ msgstr "Sehr gut. Nun gibt es aber auch eine schnellere Möglichkeit – mittels
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "Klicke und halte einfach die rechte Maustaste irgendwo auf der Karte, dann bewege die Maus und statt der Zeigers bewegt sich die Hauptansicht. Versuch es."
+msgstr "Klicke und halte einfach die rechte Maustaste irgendwo auf der Karte, dann bewege die Maus und statt des Zeigers bewegt sich die Hauptansicht. Versuch es."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
@@ -381,14 +381,14 @@ msgstr "Sehr gut. Und nun zur Minikarte: Du kannst sie öffnen, indem du auf die
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr "Minikarten-Schlatfläche unten auf deinem Bildschirm klickst oder einfach mit dem Tastenkürzel „m“."
+msgstr "Minikarten-Schlatfläche unten auf deinem Bildschirm klickst. Oder du nutzt einfach das Tastenkürzel „m“."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr "Die Minikarte zeigt dir die komplette Karte in klein. Du kannst direkt zu jedem Feld springen, indem du darauf linksklickst. Außerdem kannst du Gebäude-, Straßen-, Flaggen-, und Spielerindikatoren auf der Minikarte zu- und wegschalten."
+msgstr "Die Minikarte zeigt dir die komplette Karte in klein. Du kannst direkt zu jedem Feld springen, indem du darauf klickst. Außerdem kannst du Gebäude-, Straßen-, Flaggen-, und Spielerindikatoren auf der Minikarte zu- und wegschalten."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid ""
@@ -431,7 +431,7 @@ msgstr "Wie man einen Steinbruch baut"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "Baue einen Steinbruch nahe den Felsen hier. Weißt du noch, wie ich es vorher gemacht habe?"
+msgstr "Baue einen Steinbruch bei den Felsen hier. Weißt du noch, wie ich das vorhin gemacht habe?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -439,7 +439,7 @@ msgid ""
 "space were you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Stelle sicher, dass du die Bauhilfe eingeschaltet hast und klicke dann auf das Haussymbol, wo du das Gebäude bauen willst und wähle es anschließend im nun erscheinenden Fenster aus. Vielleicht ist jetzt eine gute Gelegenheit, um alle die Bausymbole zu erklären."
+msgstr "Stelle sicher, dass du die Bauhilfe eingeschaltet hast und klicke dann dort auf das Haussymbol, wo du das Gebäude bauen willst und wähle es anschließend im nun erscheinenden Fenster aus. Vielleicht ist jetzt eine gute Gelegenheit, um alle die Bausymbole zu erklären."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
 msgid ""
@@ -476,7 +476,7 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Also los, versuch es. Der Steinbruch ist ein kleines Gebäude, wenn du auf ein mittleres oder großes Häusersymbol klickst, musst du zuerst den Reiter „kleine Gebäude“ auswählen, um ihn zu finden. Na los, probier es aus!"
+msgstr "Also los, versuch es. Der Steinbruch ist ein kleines Gebäude. Wenn du auf ein mittleres oder großes Häusersymbol klickst, musst du zuerst den Reiter „kleine Gebäude“ auswählen, um ihn zu finden. Na los, probier es aus!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
@@ -542,13 +542,13 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Also, wegen dieser Straße … Erinnere dich: Wir befinden uns bereits im Straßenbaumodus, da du gerade den Steinbruch in Auftrag gegeben hast. Du kannst die Straße entweder Feld für Feld verlängern, indem du mehrere Male mit links auf die benachbarten Felder klickst. Dies gewährt dir absolute Kontrolle über die Route, welcher die Straße folgen soll. Etwa so:"
+msgstr "Also, wegen dieser Straße … Erinnere dich: Wir befinden uns bereits im Straßenbaumodus, da du gerade den Steinbruch in Auftrag gegeben hast. Du kannst die Straße nun Feld für Feld verlängern, indem du mehrere Male mit links auf die benachbarten Felder klickst. Dies gewährt dir absolute Kontrolle über die Route, welcher die Straße folgen soll. Etwa so:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid ""
 "Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select"
-msgstr "Ausgezeichnet! Um in den Straßenbaumodus für eine beliebige Flagge kommst du, indem du sie mit links anklickst und"
+msgstr "Ausgezeichnet! In den Straßenbaumodus für eine beliebige Flagge kommst du, indem du sie mit links anklickst und"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:299
 msgid ""
@@ -567,7 +567,7 @@ msgstr "Also, wegen dieser Straße … Ich werde in den Straßenbaumodus wechsel
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr "Oder du klickst direkt auf die Zielflagge, so:"
+msgstr "Oder du klickst direkt auf die Zielflagge. Etwa so:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid ""
@@ -599,7 +599,7 @@ msgid ""
 " many flags as you can on road segments to share the load better. If you "
 "hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Achte beim Straßenbau auf das Gefälle und verwende es zu deinem Nutzen. Versuche auch die Straßen so kurz wie möglich zu halten und setze so viele Flaggen wie möglich auf die Straßen, da die Last so besser verteilt wird. Wenn du Strg oder Shift+Strg gedrück hältst, während du die Straße fertigstellst, werden automatisch Flaggen platziert."
+msgstr "Achte beim Straßenbau auf das Gefälle und verwende es zu deinem Nutzen. Versuche auch die Straßen so kurz wie möglich zu halten und setze so viele Flaggen wie möglich auf die Straßen, da die Last so besser verteilt wird. Wenn du Strg oder Strg+Shift gedrück hältst, während du die Straße fertigstellst, werden automatisch Flaggen platziert."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Now please rebuild the road between your quarry and your headquarters."
@@ -618,7 +618,7 @@ msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr "Verbinde deine Baustelle des Steinbruchs durch eine Straße mit deinem Hauptquartier. Du befindest dich sofort im Straßenbaumodus, wenn du eine neue Baustelle angelegt hast. Nun aber ist dies nicht der Fall."
+msgstr "Verbinde die Steinbruchbaustelle durch eine Straße mit deinem Hauptquartier. Du befindest dich sofort im Straßenbaumodus, wenn du eine neue Baustelle angelegt hast. Nun aber ist dies nicht der Fall."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:337
 msgid ""
@@ -629,7 +629,7 @@ msgstr "Um eine völlig neue Straße zu erbauen, klicke auf die Flagge vor deine
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "Steinbruch nicht verbunden"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -638,11 +638,11 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr ""
+msgstr "Deine Arbeiter laufen nicht gerne querfeldein. Du musst eine Straße von deinem Hauptquartier zur Baustelle bauen, damit die Träger die Waren transportieren können. Der einfachste Weg ist, auf die Flagge vor der Baustelle zu klicken, „Baue Straße“ auszuwählen und dann auf die Zielflagge (die vor deinem Hauptquartier) zu klicken, genau so, wie ich es dir eben gezeigt habe."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Du hast die Baustelle zerstört!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
@@ -651,7 +651,7 @@ msgid ""
 "savegame. Luckily, the are created from time to time. To do so, you have to "
 "go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And "
 "please be a bit more careful next time."
-msgstr ""
+msgstr "Du hast anscheinend die Baustelle für den Steinbruch, den wir bauen wollten, zerstört. Da wir die Steine brauche, schlage ich vor, dass du das Spiel von einem früheren Spielstand aus neu lädst. Diese werden glücklicherweise von Zeit zu Zeit angelegt. Gehe dazu zurück ins Hauptmenü und wähle „Einzelspieler“ → „Spiel laden“. Und bitte sei das nächste Mal ein wenig vorsichtiger."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -720,7 +720,7 @@ msgstr "Nun wissen wir, was hier geschieht. Warten wir also die Fertigstellung d
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:397
 msgid "Introducing Messages"
-msgstr "Nachrichtenvorstellung"
+msgstr "Vorführen von Nachrichten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:399
 msgid "Messages"
@@ -758,11 +758,11 @@ msgstr "Schaltfläche „Entf: Ausgewählte Nachrichten archivieren“, um Nachr
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
-msgstr "Archiviere alle Nachrichten, auch diese."
+msgstr "Archiviere alle Nachrichten in deinem Posteingang, auch diese."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid "Archive all messages in your inbox"
-msgstr "Verschiebe alle erhaltenen Nachrichten ins Archiv."
+msgstr "Verschiebe alle erhaltenen Nachrichten ins Archiv"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid "Archive Your Inbox Messages"
@@ -806,7 +806,7 @@ msgstr "Schließe zuerst dieses Fenster mit der Schaltfläche unterhalb des Text
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:432
 msgid "Close the messages window"
-msgstr "Schließe das Nachrichtenfenster."
+msgstr "Schließe das Nachrichtenfenster"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:434
 msgid "Close the Messages Window"
@@ -841,13 +841,13 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr "Du hast einige Nachrichten erhalten. Siehst du, wie die Schaltfläche unten am Bildschirm sein Aussehen geändert hat? Du kannst die Steinbrüche jetzt zerstören, weil wir sie nicht mehr brauchen und sie uns nur Platz wegnehmen. Um das zu tun, gibt es zwei Möglichkeiten:"
+msgstr "Du hast einige Nachrichten erhalten. Siehst du, wie die Schaltfläche unten am Bildschirm ihr Aussehen geändert hat? Du kannst die Steinbrüche jetzt zerstören, weil wir sie nicht mehr brauchen und sie uns nur Platz wegnehmen. Um das zu tun, gibt es zwei Möglichkeiten:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu können. Der Arbeiter verlässt das Gebäude, aber die Waren sind verloren."
+msgstr "Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu können. Der Arbeiter verlässt das Gebäude, aber alle Waren sind verloren."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
@@ -872,7 +872,7 @@ msgstr "Es gibt zwei Möglichkeiten, ein Gebäude zu zerstören: es niederzubren
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu können. Der Arbeiter verlässt das Gebäude, aber die Waren sind verloren."
+msgstr "Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu können. Der Arbeiter verlässt das Gebäude, aber alle Waren sind verloren."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
@@ -883,7 +883,7 @@ msgstr "Den Steinbruch abreißen: Ein Bauarbeiter kommt von deinem Hauptquartier
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 msgid "Expanding Your Territory!"
-msgstr "Vergrößere dein Giebet!"
+msgstr "Vergrößere dein Gebiet!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid ""
@@ -892,7 +892,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Es gibt eine Sache, die ich dir jetzt beibringen möchte: Dein Gebiet zu erweitern. Der Platz um unser Hauptquartier herum, mit dem wir beginnen, reicht kaum für eine grundlegende Infrastruktur aus und wir haben keinen Zugang zu Bergen, den wir benötigen, um Mineralien und Kohle abzubauen. Daher müssen wir unser Gebiet vergrößern."
+msgstr "Es gibt eine Sache, die ich dir jetzt beibringen möchte: Dein Gebiet zu erweitern. Der Platz um unser Hauptquartier herum, mit dem wir beginnen, reicht kaum für eine grundlegende Infrastruktur aus und wir haben keinen Zugang zu Bergen, den wir benötigen, um Erze und Kohle abzubauen. Daher müssen wir unser Gebiet vergrößern."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid ""

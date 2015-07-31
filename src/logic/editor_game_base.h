@@ -55,7 +55,7 @@ struct Flag;
 struct AttackController;
 
 struct NoteFieldPossession {
-	CAN_BE_SEND_AS_NOTE(NoteId::FieldPossession)
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldPossession)
 
 	// Has this been lost or gained?
 	enum class Ownership {LOST, GAINED};

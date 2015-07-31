@@ -24,7 +24,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Hunts animals to produce meat.",
 		-- TRANSLATORS: Note helptext for a building
-		note = _"The hunter’s hut needs animals to hunt within the working radius.",
+		note = _"The hunter’s hut needs animals to hunt within the work area.",
 		-- TRANSLATORS: Performance helptext for a building
 		performance = _"The hunter pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
    },
@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: "Game" means animals that you can hunt
 		title = _"Out of Game",
 		-- TRANSLATORS: "game" means animals that you can hunt
-		message = _"The hunter working out of this hunter’s hut can’t find any game in his working radius. Remember that you can build a gamekeeper’s hut to release more game into the wild.",
-		delay_attempts = 10
+		message = _"The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild.",
+		productivity_threshold = 33
 	},
 }

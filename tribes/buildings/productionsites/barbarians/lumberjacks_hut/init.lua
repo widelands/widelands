@@ -22,7 +22,7 @@ tribes:new_productionsite_type {
 		-- #TRANSLATORS: Purpose helptext for a building
 		purpose = _"Fells trees in the surrounding area and processes them into logs.",
 		-- #TRANSLATORS: Note helptext for a building
-		note = _"The lumberjack’s hut needs trees to fell within the working radius.",
+		note = _"The lumberjack’s hut needs trees to fell within the work area.",
 		-- #TRANSLATORS: Performance helptext for a building
 		performance = _"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
    },
@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Trees",
-		message = _"The lumberjack working at this lumberjack’s hut can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a ranger’s hut.",
-		delay_attempts = 60
+		message = _"The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut.",
+		productivity_threshold = 66
 	},
 }

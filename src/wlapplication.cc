@@ -1082,12 +1082,12 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kLicense: {
-				FullscreenMenuFileView ff("txts/license");
+				FullscreenMenuFileView ff("txts/LICENSE.lua");
 				ff.run();
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kAuthors: {
-				FullscreenMenuFileView ff("txts/developers");
+				FullscreenMenuFileView ff("txts/AUTHORS.lua");
 				ff.run();
 				break;
 			}
