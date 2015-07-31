@@ -23,6 +23,7 @@ function burn_tavern_down()
    sleep(500)
    o.done = true
 
+   sleep(1000) -- The building statistics window needs some time to build up
    o = message_box_objective(plr,explain_building_stat)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
    local o2 = add_campaign_objective(reopen_building_stat_obj)
