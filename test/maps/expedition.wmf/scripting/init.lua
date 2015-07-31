@@ -266,7 +266,6 @@ function test_cancel_started_expedition_underway()
    wl.ui.MapView():close()
 end
 
---NOCOM needed?
 function test_cancel_when_port_space_was_reached()
    sleep(100)
    game.desired_speed = 10 * 1000
