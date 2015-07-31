@@ -343,13 +343,12 @@ uint32_t Fleet::count_ships(){
 
 uint32_t Fleet::count_ships_heading_here(EditorGameBase & egbase, PortDock * port){
 	uint32_t ships_on_way = 0;
-	//if (upcast(Game, game, &owner().egbase())) { //NOCOM is upcast needed?
-		for (uint16_t s = 0; s < m_ships.size(); s += 1){
-			if (m_ships[s]->get_destination(egbase) == port){
-				ships_on_way += 1;
-			}
+	for (uint16_t s = 0; s < m_ships.size(); s += 1){
+		if (m_ships[s]->get_destination(egbase) == port){
+			ships_on_way += 1;
 		}
-	//}
+	}
+
 	return ships_on_way;
 }
 
@@ -749,9 +748,6 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 		// scoring and entering the pair into scores (or increasing existing
 		// score if the pair is already there)
-		// following is to prohibit sending more then one empty ship to
-		// this port (no big harm, but regression tests does not like it) change the comment NOCOM
-		//uint16_t empty_ships_sent_here = 0;
 		for (uint16_t s = 0; s < m_ships.size(); s += 1){
 
 			if (m_ships[s]->get_destination(game)) {
