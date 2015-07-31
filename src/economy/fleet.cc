@@ -699,7 +699,9 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		for (uint16_t i = 0; i < m_ships[s]->get_nritems(); i += 1){
 			PortDock * dst = m_ships[s]->m_items[i].get_destination(game);
 			if (!dst) {
-				//every port is OK here //NOCOM review this
+				// if wares without destination on ship without destination
+				// such ship can be send to any port, and should be sent
+				// to some port, so we add 1 point to score for each port
 				for (uint16_t p = 0; p < m_ports.size(); p += 1){
 					mapping.first = s;
 					mapping.second = p;
@@ -707,15 +709,6 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				}
 				continue;
 			}
-				
-				
-				// a ware without destination (on ship without destination)
-				// NOCOM - add comments here
-				//mapping.first = s;
-				//mapping.second = 0;
-				//scores[mapping] += 1;
-				//continue;
-			//}
 
 			bool destination_found = false; //just a functional check
 			for (uint16_t p = 0; p < m_ports.size(); p += 1){
@@ -768,13 +761,6 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			if (m_ships[s]->get_ship_state() != Ship::TRANSPORT) {
 				continue; // in expedition obviously
 			}
-
-			//if (empty_ships_sent_here > 0 && m_ships[s]->get_nritems() == 0) {
-				//continue; // do not allow second emtpy ship
-			//}
-			//if (m_ships[s]->get_nritems() == 0) {
-				//empty_ships_sent_here += 1;
-			//}
 
 			mapping.first = s;
 			mapping.second = p;
@@ -891,7 +877,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 
 	if (!waiting_ports.empty()) {
-		molog("... there are %lu ports requesting ship(s) we cannot satisfy yet\n", waiting_ports.size() );
+		molog("... there are %" PRIuS " ports requesting ship(s) we cannot satisfy yet\n",
+		waiting_ports.size());
 		schedule_act(game, 5000); // retry next time
 		m_act_pending = true;
 	}

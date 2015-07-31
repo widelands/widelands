@@ -17,7 +17,6 @@ run(function()
    elseif second_ship.state=="exp_waiting" then
       expedition_ship=second_ship
    else
-      print("false")
       assert(false)
    end
 
