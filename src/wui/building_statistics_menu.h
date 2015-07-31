@@ -69,7 +69,8 @@ private:
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(
-		Widelands::BuildingIndex id, const Widelands::BuildingDescr& descr, int tab_index, UI::Box& row, int* column);
+		Widelands::BuildingIndex id, const Widelands::BuildingDescr& descr, int tab_index,
+		UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
