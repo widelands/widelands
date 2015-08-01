@@ -1,3 +1,6 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/global_helptexts.lua"
+
 dirname = path.dirname(__file__)
 
 tribes:new_constructionsite_type {
@@ -8,16 +11,16 @@ tribes:new_constructionsite_type {
    vision_range = 2,
 
    helptexts = {
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _"Text needed",
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Source needed",
+		-- #TRANSLATORS: Lore helptext for a building
+		lore = no_lore_text_yet(),
+		-- #TRANSLATORS: Lore author helptext for a building
+		lore_author = no_lore_author_text_yet(),
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"A new building is being built at this construction site.",
 		-- #TRANSLATORS: Note helptext for a building
 		note = "",
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"Calculation needed"
+		-- #TRANSLATORS: Performance helptext for a building
+		performance = no_performance_text_yet()
    },
 
    animations = {

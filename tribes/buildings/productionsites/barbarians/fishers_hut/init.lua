@@ -17,8 +17,8 @@ tribes:new_productionsite_type {
    helptexts = {
 		-- TRANSLATORS: Lore helptext for a building
 		lore = _"‘What do you mean, my fish ain’t fresh?!’",
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Source needed",
+		-- #TRANSLATORS: Lore author helptext for a building
+		lore_author = "",
 		-- TRANSLATORS: Purpose helptext for a building
 		purpose = _"Fishes on the coast near the hut.",
 		-- TRANSLATORS: Note helptext for a building
