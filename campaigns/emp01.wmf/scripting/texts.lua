@@ -85,6 +85,7 @@ diary_page_1 = {
 		.. paragraphdivider() ..
 		_([[Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the Barbarians.]])
 		.. paragraphdivider() ..
+		-- TRANSLATORS: perl-gulf is a place name.
 		_([[Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.]])),
    w=500,
    posy=1,

@@ -221,6 +221,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_single_watchwin.get_x() + m_single_watchwin.get_w() + m_padding,
 		 m_offset_second_group,
 		 get_w() - 2 * m_hmargin - m_single_watchwin.get_w(), m_single_watchwin.get_h(),
+		 /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
+		 /** TRANSLATORS: and it also lets you jump to it on the map. */
 		 _("Use single watchwindow mode"), UI::Align_VCenter),
 
 	m_auto_roadbuild_mode (this, Point(m_single_watchwin.get_x(),

@@ -124,13 +124,21 @@ return {
       set_textdomain("win_conditions")
       local h = math.floor(remaining_time / 60)
       local m = remaining_time % 60
+      -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
       local time = ""
+      if m > 0 then
+			time = (ngettext("%i minute", "%i minutes", m)):format(m)
+		end
       if h > 0 then
-         -- TRANSLATORS: Context: 'The game will end in %s.'
-         time = (_"%1$ih%2$02im"):bformat(h,m)
-      else
-         time = (ngettext("%i minute", "%i minutes", m)):format(m)
+			if m > 0 then
+				-- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+				time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
+			else
+				-- TRANSLATORS: Context: 'The game will end in 2 hours.'
+				time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+			end
       end
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
       local msg = p(_"The game will end in %s."):format(time)
       msg = msg .. "\n\n"
 
