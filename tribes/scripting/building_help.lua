@@ -233,6 +233,7 @@ end
 --
 function building_help_general_string(building_description)
 	local helptexts = building_description.helptexts
+	-- TRANSLATORS: Heading for a flavour text in the building help.
 	local result = rt(h2(_"Lore")) ..
 		rt("image=" .. building_description.representative_image, p(helptexts["lore"]))
 	if (helptexts["lore_author"] ~= "") then
@@ -322,6 +323,7 @@ function building_help_dependencies_production(tribe, building_description)
 		end
 	end
 	if (hasinput) then
+		-- TRANSLATORS: Heading in the building help for wares that a building accepts (e.g. wheat for a mill).
 		result =  rt(h3(_"Incoming:")) .. result
 	end
 
@@ -616,6 +618,7 @@ function building_help_building_section(building_description)
 				end
 				result = result .. rt(h3(_"If enhanced, dismantle yields:"))
 			else
+				-- TRANSLATORS: This is a heading for the resources that you will get back when you dismantle a building of this type. What dismantling will give you.
 				result = result .. rt(h3(_"Dismantle yields:"))
 			end
 			local warescost = {}
@@ -715,6 +718,7 @@ function building_help_crew_string(tribe, building_description)
 
 			if(becomes_description) then
 				result = result .. image_line(worker_description.icon_name, 1,
+					-- TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 					p(_"%s or better":bformat(worker_description.descname)))
 			else
 				result = result .. image_line(worker_description.icon_name, 1,
@@ -727,6 +731,7 @@ function building_help_crew_string(tribe, building_description)
 		if(becomes_description) then
 
 			result = result .. rt(h3(_"Experience levels:"))
+			-- TRANSLATORS: EP = Experience Points
 			local exp_string = _"%s to %s (%s EP)":format(
 					worker_description.descname,
 					becomes_description.descname,
