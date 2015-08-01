@@ -2,14 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-29 13:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/widelands/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +50,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Dựng hai kho chứa gỗ và một xưởng cưa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
@@ -62,7 +64,7 @@ msgstr "Dựng thêm hai nhà chứa gỗ và một xưởng cưa ngay khi có �
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Dựng một trại kiểm lâm"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
@@ -185,11 +187,11 @@ msgstr "Thật sự như thể chúng tôi đã dừng chân dưới một cây 
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:116
 msgid "A Foreboding"
-msgstr ""
+msgstr "Có cảm giác thấy điềm không lành"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus nhìn quanh một cách lo lắng…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:118
 msgid ""
@@ -218,7 +220,7 @@ msgstr "Bây giờ đã an toàn"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:130
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus nói cùng với tiếng thở phào nhẹ nhõm…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid ""
@@ -240,7 +242,7 @@ msgstr "Amalea trẻ tuổi"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea mỉm cười…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Greetings, Lutius! I just met Saledus outside."
@@ -261,7 +263,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea đề nghị…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:152
 msgid ""
@@ -280,7 +282,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:161
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea bước vào…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "I’ve got two important things to talk about… First the good news:"
@@ -315,7 +317,7 @@ msgstr "Nghĩ về tương lai"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Saledus notes…"
-msgstr ""
+msgstr "Saledus lưu ý…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:178
 msgid ""

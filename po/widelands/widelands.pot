@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 10:40+0100\n"
+"POT-Creation-Date: 2015-08-01 06:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,17 +24,17 @@ msgid "None"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:116
+#: ../../src/ai/defaultai.h:126
 msgid "Aggressive"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:127
+#: ../../src/ai/defaultai.h:137
 msgid "Normal"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:138
+#: ../../src/ai/defaultai.h:148
 msgid "Defensive"
 msgstr ""
 
@@ -222,7 +222,7 @@ msgid "Creating players"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:210
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
 msgstr ""
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:591
+#: ../../src/editor/editorinteractive.cc:602
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
@@ -242,7 +242,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:592
+#: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:191
@@ -815,7 +815,7 @@ msgstr ""
 msgid "Terrain Select"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:76
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:81
 #, c-format
 msgid "Current Size: %u"
 msgstr ""
@@ -3131,24 +3131,23 @@ msgstr ""
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
-#. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:138 ../../src/wui/attack_box.cc:167
+#: ../../src/wui/attack_box.cc:127 ../../src/wui/attack_box.cc:150
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:152
+#: ../../src/wui/attack_box.cc:139
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:160
+#: ../../src/wui/attack_box.cc:143
 msgid "Send less soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:180
+#: ../../src/wui/attack_box.cc:165
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:188
+#: ../../src/wui/attack_box.cc:171
 msgid "Send more soldiers"
 msgstr ""
 

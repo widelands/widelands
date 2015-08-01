@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-25 13:26+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-28 14:14+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -169,9 +169,8 @@ msgstr "Molt bé! La nostra palestra d'entrenament s'ha completat i els soldats 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer. Most steps additionally require either fish or "
-"meat."
-msgstr "També s'han de subministrar altres béns necessaris. Per a un entrenament amb èxit es necessita pita i cervesa negra. La majoria de les millores requereixen també peix o carn."
+" pitta bread and strongbeer, as well as either fish or meat."
+msgstr "S'enviaran automàticament els béns necessaris. Per a un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid ""
@@ -259,7 +258,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier with evade level 0 "
 "has a 30% chance of evading, while a Barbarian soldier at the same level "
 "only has a 25% chance."
-msgstr "També heu de tenir en compte que cadascun dels tres clans del Widelands té la seva manera pròpia d'entrenar. Així que els edificis i béns són diferents per cada cultura. Tampoc es poden comparar els nivells: un soldat imperial amb nivell d'evasió 0 té un 30% de probabilitat d'esquivar, mentre que un soldat bàrbar amb el mateix nivell d'evasió només en té un 25%."
+msgstr "També heu de tenir en compte que cadascuna de les tres cultures del Widelands té la seva manera pròpia d'entrenar, així com els edifics i béns, que també són diferents per cada cultura. Tampoc es poden comparar els nivells: un soldat imperial amb nivell d'evasió 0 té un 30% de probabilitat d'esquivar, mentre que un soldat bàrbar amb el mateix nivell d'evasió només en té un 25%."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
@@ -396,7 +395,7 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr "Podeu controlar el nombre de soldats guarnint un edifici militar amb els botons amb fletxes. Si voleu treure l'últim soldat, haureu de destruir l'edifici, desmantellant-lo o cremant-lo. No obstant, l'edifici ja no controlarà més el territori, de manera que el perdreu si a prop hi ha forces de clans diferents al vostre."
+msgstr "Podeu controlar el nombre de soldats guarnint un edifici militar amb els botons amb fletxes. Si voleu treure l'últim soldat, haureu de destruir l'edifici, desmantellant-lo o cremant-lo. No obstant, l'edifici ja no controlarà més el territori, de manera que el perdreu si a prop hi ha forces d'altres clans."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid "Dismantle your sentry in the north-west, next to the barrier."

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-25 08:01+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-28 10:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Asturian (http://www.transifex.com/projects/p/widelands/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "De Némesis a Xénesis"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -29,7 +30,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Un Sitiu pa nomar Llar"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -39,7 +40,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Esta ye la Tierra de Nueso"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -49,7 +50,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "El segundu Imperiu"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
@@ -57,7 +58,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fácil. Introduz los bárbaros"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -78,7 +79,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Los Meses del Exiliu"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
@@ -86,7 +87,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fácil. Introduz l'Imperiu"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -104,7 +105,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "La Gueta del Fueu"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
@@ -112,7 +113,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Esixente. Introduz a los Atlantes"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -125,11 +126,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Los Filos of Malac' Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Avanzada pal Exiliu"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
@@ -246,7 +247,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr ""
+msgstr "A delles milles de la Costa de Xerion hai una pequeña islla ensin nome. De momentu, nun tuvisti motivu pa navegar allí, pero ayeri una gran bola de fueu llegó del cielu y aterrizó nel so centru. ¿Ye una señal de los Dioses? Asina lo crees, y esperes que la to tribu alcuentre'l tesoru de la islla enantes de qu'aporten otres tribus."
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
@@ -371,7 +372,7 @@ msgid ""
 "one disturbed you and the resources were enough for your whole tribe, but a "
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure that there is only enough space for one tribe."
-msgstr ""
+msgstr "La to tribu lleva viviendo dende hai bien de tiempu nesti guapu y solitariu llagu glaciar. Naide vos molestó, y los recursos yeren abondo pa tola tribu, pero hai dellos meses otra tribu aportó dende los montes y s'estableció. Y tas seguru de que hai sitiu namái pa una tribu."
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
@@ -414,7 +415,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "Por sieglos vivisti en paz cola otra tribu de la islla vecina. Agora paez que la paz llega al so fin - los vecinos principien la espansión."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -632,7 +633,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Llegó otra primavera. Trés tribus taben en abrigamientu del fuerte iviernu ente maxestosos montes. Nel solsticiu consultaron el oráculu y fueron a la guerra. L'únicu sobreviviente sacrificará los tesoros de los enemigos nel antiguu altar, construirá un castiellu espléndidu y ganará la bona voluntá y respetu de los Dioses."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
@@ -656,7 +657,7 @@ msgstr ""
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr ""
+msgstr "Otra estraña prueba de los Dioses. P'aportar al otru llau, paez que nun hai otra manera que ocupar la tierra de los tos enemigos."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
@@ -666,7 +667,7 @@ msgstr ""
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
+msgstr "Nesti área de montes s'establecieron dos príncipes. Agora espanden los territorios ensin saber que nun tan solos."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -744,7 +745,7 @@ msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr ""
+msgstr "Mapa de batalla multixugador nuna pequeña islla circular."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"

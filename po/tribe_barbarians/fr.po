@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 09:58+0000\n"
-"Last-Translator: Tubuntu <tubuntu@testimonium.be>\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/projects/p/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1552,9 +1552,9 @@ msgstr "Plus de poisson"
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his "
-"working radius."
-msgstr "Le pêcheur besognant hors de sa cabane n'a pas trouvé de poisson dans son périmètre de travail."
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
+msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1565,8 +1565,8 @@ msgid "Fishes on the coast near the hut."
 msgstr "Pêche sur la côte proche de la cabane."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
-msgid "The fisher’s hut needs water full of fish within the working radius."
-msgstr "La cabane du pêcheur  à besoin d'eau poissonneuse dans son périmètre de travail"
+msgid "The fisher’s hut needs water full of fish within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
 msgid "The fisher pauses %s before going to work again."
@@ -1737,10 +1737,10 @@ msgstr "Hors du Jeu"
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his "
-"working radius. Remember that you can build a gamekeeper’s hut to release "
-"more game into the wild."
-msgstr "Le chasseur besognant hors de sa cabane ne peut trouver de gibier dans son périmètre de travail. Souvenez vous que vous pouvez construire une cabane de garde-chasse pour lâcher plus de gibier dans la nature."
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
+msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid ""
@@ -1757,8 +1757,8 @@ msgid "Hunts animals to produce meat."
 msgstr "Chassez les animaux pour produire de la viande."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
-msgid "The hunter’s hut needs animals to hunt within the working radius."
-msgstr "La cabane du chasseur à besoin d'animaux à chasser dans son périmètre de travail"
+msgid "The hunter’s hut needs animals to hunt within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
@@ -1849,9 +1849,9 @@ msgstr "Plus d'arbres."
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
-"working radius. You should consider dismantling or destroying the building "
-"or building a rangers’s hut."
-msgstr "Le bûcheron qui travaille à sa cabane ne peut trouver d'arbres dans son périmètre de travail. Vous devriez penser à démanteler ou détruire le bâtiment ou construire une cabane de sylviculteur."
+"work area. You should consider dismantling or destroying the building or "
+"building a rangers’s hut."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
@@ -1869,8 +1869,8 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Abattez les arbres dans les alentours et transformez les en troncs."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack’s hut needs trees to fell within the working radius."
-msgstr "La cabane de bûcheron a besoin d'arbres à abattre dans son périmètre de travail."
+msgid "The lumberjack’s hut needs trees to fell within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""
@@ -2022,17 +2022,16 @@ msgstr "Plus de roches"
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
-msgstr "Le tailleur de pierre besognant dans cette clairière ne trouve plus de roches dans sont périmètre de travail."
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
 msgstr "Taillez des pierres dans les rochers aux alentours."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
-msgstr "La carrière à besoin de roches à tailler dans son périmètre de travail."
+msgid "The quarry needs stones to cut within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
@@ -2062,9 +2061,8 @@ msgstr "Plante des arbres dans les environs."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the "
-"trees."
-msgstr "La cabane de sylviculteur à besoin d'espace libre dans son périmètre de travail pour planter des arbres."
+"The ranger’s hut needs free space within the work area to plant the trees."
+msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
 msgid ""
@@ -2374,8 +2372,8 @@ msgstr "Plus d'eau"
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
-msgstr "Le porteur qui travaille à ce puits ne trouve plus d'eau dans son périmètre de travail."
+"The carrier working at this well can’t find any water in his work area."
+msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""

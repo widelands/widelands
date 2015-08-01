@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-27 09:11+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-31 11:48+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -143,35 +143,35 @@ msgstr "Войниците Ви победиха врага при крепос�
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Вашата голяма стражарница откри нападател."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Вашата голяма стражарница е нападната."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Врагът победи войниците Ви при голямата стражарница."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Войниците Ви победиха врага при голямата стражарница."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Вашата стражарница откри нападател."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Вашата стражарница е нападната."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Врагът победи войниците Ви при стражарницата."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Войниците Ви победиха врага при стражарницата."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
@@ -357,7 +357,7 @@ msgstr "подобрява ловкостта на войник от ниво 0 
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr ""
+msgstr "Няма текст"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -422,7 +422,7 @@ msgstr "Трениране на ловкостта:"
 #: ../../tribes/empire/weaving-mill/help.lua:29
 #: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr "Нужно е изчисление"
+msgstr "Не е изчислено"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -506,7 +506,7 @@ msgstr "работи"
 #: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Няма източник"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
@@ -619,7 +619,7 @@ msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal kiln out of logs."
-msgstr "Огньове в имперските топилни, ковачниците за брони и оръжия, обикновено изгарят въглища. Тези въглища се изкопават от мини за въглища или се произвеждат от дървени трупи в пещ за въглища."
+msgstr "Огньове в имперските топилни, ковачниците за брони и оръжия, обикновено изгарят въглища. Тези въглища се добиват от мини за въглища или се произвеждат от дървени трупи в пещ за въглища."
 
 #: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
@@ -628,7 +628,7 @@ msgstr "Огньове в имперските топилни, ковачниц�
 #: ../../tribes/empire/deep_oremine/conf:27
 #: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr "копае"
+msgstr "добива"
 
 #: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -644,7 +644,7 @@ msgstr "Основният въглищен запас на тази мина е
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr "Изкопава въглища от земята на планинските терени."
+msgstr "Добива въглища от земята на планинските терени."
 
 #: ../../tribes/empire/colosseum/conf:40
 msgid "upgrading soldier evade from level 1 to level 2"
@@ -1060,7 +1060,7 @@ msgstr "Строителна площадка"
 
 #: ../../tribes/empire/conf:150
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Демонтажна площадка"
 
 #: ../../tribes/empire/conf:153 ../../tribes/empire/conf:215
 msgid "Castle"
@@ -1068,11 +1068,11 @@ msgstr "Замък"
 
 #: ../../tribes/empire/conf:154
 msgid "Guardhall"
-msgstr ""
+msgstr "Голяма стражарница"
 
 #: ../../tribes/empire/conf:155
 msgid "Guardhouse"
-msgstr ""
+msgstr "Стражарница"
 
 #: ../../tribes/empire/conf:156
 msgid "High Tower"
@@ -1305,7 +1305,7 @@ msgstr "Основната златна жилка в тази мина е из�
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr "Изкопава злато от земята на планинските терени."
+msgstr "Добива злато от земята на планинските терени."
 
 #: ../../tribes/empire/deep_marblemine/conf:42
 #: ../../tribes/empire/marblemine/conf:57
@@ -1321,7 +1321,7 @@ msgstr "Основният мраморен запас на тази мина е
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
-msgstr "Изкопава мрамор и камъни от земята на планинските терени."
+msgstr "Добива мрамор и камъни от земята на планинските терени."
 
 #: ../../tribes/empire/deep_oremine/conf:41
 #: ../../tribes/empire/oremine/conf:41
@@ -1338,7 +1338,7 @@ msgstr "Основният запас на желязо в тази мина е 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr "Изкопава желязна руда от земята на планинските терени."
+msgstr "Добива желязна руда от земята на планинските терени."
 
 #: ../../tribes/empire/donkey/conf:1
 msgid ""
@@ -1409,17 +1409,17 @@ msgstr "Няма повече риба"
 
 #: ../../tribes/empire/fishers_house/conf:29
 msgid ""
-"The fisher working in this fisher’s house can’t find any fish in his working"
-" radius."
-msgstr "Рибарят, който работи около тази рибарска къща, не може да открие никаква риба в работния си обхват."
+"The fisher working in this fisher’s house can’t find any fish in his work "
+"area."
+msgstr "Рибарят, който работи около тази рибарска къща, не може да открие никаква риба в работната си област."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
 msgstr "Лови риба на брега близо до къщата си."
 
 #: ../../tribes/empire/fishers_house/help.lua:18
-msgid "The fisher’s house needs water full of fish within the working radius."
-msgstr "Рибарската къща се нуждае от вода, пълна с риба, в работния обхват."
+msgid "The fisher’s house needs water full of fish within the work area."
+msgstr "Рибарската къща се нуждае от вода, пълна с риба, в работната област."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1443,9 +1443,9 @@ msgstr "Сади дървета в околността."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the working radius to plant "
-"the trees."
-msgstr "Лесничейската къща се нуждае от свободно пространство в работния обхват, където да сади дървета."
+"The foresters’s house needs free space within the work area to plant the "
+"trees."
+msgstr "Лесничейската къща се нуждае от свободно пространство в работната област, където да сади дървета."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1453,7 +1453,7 @@ msgstr "Войниците Ви окупираха крепостта."
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Открива ресурси за изкопаване."
+msgstr "Открива ресурси за добив."
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -1473,7 +1473,7 @@ msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr "Златната руда се копае в златна мина. След претопяване в топилна, тя се превръща в злато, което се използва като ценен строителен материал, както и в производството на оръжия и брони."
+msgstr "Златната руда се добива в златна мина. След претопяване в топилна, тя се превръща в злато, което се използва като ценен строителен материал, както и в производството на оръжия и брони."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1536,16 +1536,16 @@ msgstr "Няма повече дивеч"
 #: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
-"working radius."
-msgstr "Ловецът, който работи около тази ловджийска къща, не може да открие никакъв дивеч в работния си обхват."
+"work area."
+msgstr "Ловецът, който работи около тази ловджийска къща, не може да открие никакъв дивеч в работната си област."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
 msgstr "Ловува животни за производство на месо."
 
 #: ../../tribes/empire/hunters_house/help.lua:18
-msgid "The hunter’s house needs animals to hunt within the working radius."
-msgstr "Ловджийската къща се нуждае от животни за ловуване в работния обхват."
+msgid "The hunter’s house needs animals to hunt within the work area."
+msgstr "Ловджийската къща се нуждае от животни за ловуване в работната си област."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1608,17 +1608,17 @@ msgstr "Няма повече дървета"
 #: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his working radius. You should consider dismantling or destroying the "
-"building or building a forester’s house."
-msgstr "Дърварят, работещ в тази дърварска къща, не намира дървета в работния си обхват. Помислете за демонтаж или разрушаване на сградата или постройте лесничейска къща."
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Дърварят, работещ в тази дърварска къща, не намира дървета в работната си област. Помислете за демонтаж или разрушаване на сградата или постройте лесничейска къща."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Сече дървета в околността и ги прави на дървени трупи."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
-msgid "The lumberjack's house needs trees to fell within the working radius."
-msgstr "Дърварската къща се нуждае от дървета за сеч в работния обхват."
+msgid "The lumberjack's house needs trees to fell within the work area."
+msgstr "Дърварската къща се нуждае от дървета за сеч в работната област."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -1636,11 +1636,11 @@ msgstr "Мраморните колони представят културат�
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
-msgstr "копае мрамор"
+msgstr "добива мрамор"
 
 #: ../../tribes/empire/marblemine/conf:30
 msgid "mining stone"
-msgstr "копае камъни"
+msgstr "добива камъни"
 
 #: ../../tribes/empire/marblemine/conf:58
 msgid ""
@@ -1651,11 +1651,11 @@ msgstr "Основният мраморен запас на тази мина е
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
-msgstr "Изкопава мрамор и камъни от скалите на планинските терени."
+msgstr "Добива мрамор и камъни от скалите на планинските терени."
 
 #: ../../tribes/empire/master-miner/conf:1 ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Работи дълбоко в мините, за да изкопае въглища, желязо или злато."
+msgstr "Работи дълбоко в мините, за да добива въглища, желязо или злато."
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -1712,11 +1712,11 @@ msgstr "Доспехите са най-здравата броня на импе
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr "копае камъни"
+msgstr "добива камъни"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr "копае мрамор"
+msgstr "добива мрамор"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1724,17 +1724,16 @@ msgstr "Няма повече скали"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
-msgstr "Каменоделецът, който работи в тази кариера, не може да открие никакви скали в работния си обхват."
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Каменоделецът, който работи в тази кариера, не може да открие никакви скали в работната си област."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
-msgstr "Изкопава мрамор и камъни от скалите в околността."
+msgstr "Добива мрамор и камъни от скалите в околността."
 
 #: ../../tribes/empire/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
-msgstr "Криерата се нуждае от камъни за копаене в работния обхват."
+msgid "The quarry needs stones to cut within the work area."
+msgstr "Кариерата се нуждае от камъни за копаене в работната област."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1833,7 +1832,7 @@ msgstr "Камъните са основен строителен материа
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
-msgstr "Копае груби парчета гранит и мрамор от скалите."
+msgstr "Добива груби парчета гранит и мрамор от скалите."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -2020,8 +2019,8 @@ msgstr "Няма повече вода"
 
 #: ../../tribes/empire/well/conf:32
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
-msgstr "Носачът, работещ на този кладенец, не може да намери никаква вода в работния си обхват."
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Носачът, работещ на този кладенец, не може да намери никаква вода в работната си област."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."

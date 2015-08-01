@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-06-10 07:08+0000\n"
+"POT-Creation-Date: 2015-07-27 10:40+0100\n"
+"PO-Revision-Date: 2015-07-28 15:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -278,12 +279,12 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid " small"
-msgstr ""
+msgstr " 작음"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " medium"
-msgstr ""
+msgstr " 중간"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
@@ -353,7 +354,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:147
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "이름: %s"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:108
@@ -433,21 +434,21 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "플레이어: %d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:156
 msgid "Players: -"
-msgstr ""
+msgstr "플레이어: -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:159
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "제작자: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:160
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "설명: %s"
 
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:163
 msgid "Current:"
@@ -500,7 +501,7 @@ msgstr "이름:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Authors:"
-msgstr ""
+msgstr "제작자:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
@@ -539,14 +540,14 @@ msgstr "취소"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:301
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr ""
@@ -660,7 +661,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:433
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "플레이어: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:332
 msgid "Generate Map"
@@ -679,35 +680,35 @@ msgstr "설명: "
 msgid "Make Directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:210
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 #, c-format
 msgid "Directory: %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:260
 msgid "Not a map file"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -739,7 +740,7 @@ msgstr "플레이어 수"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "플레이어 %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:327
 msgid "Error!"
@@ -834,7 +835,7 @@ msgstr "현재 크기: %u"
 
 #: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:847
 msgid "unknown"
-msgstr ""
+msgstr "알 수 없음"
 
 #: ../../src/logic/building.cc:530
 msgid "mine"
@@ -850,7 +851,7 @@ msgstr ""
 
 #: ../../src/logic/building.cc:532
 msgid "medium"
-msgstr ""
+msgstr "중간"
 
 #: ../../src/logic/building.cc:535
 msgid "Mine"
@@ -947,7 +948,7 @@ msgstr ""
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
-msgstr ""
+msgstr "정의된 설명이 없음"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
@@ -1230,7 +1231,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:294
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "플레이어 %u"
 
 #: ../../src/logic/soldier.cc:1576 ../../src/logic/soldier.cc:1585
 msgid "Logic error"
@@ -2017,7 +2018,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:108
 msgid "Difficulty"
-msgstr ""
+msgstr "난이도"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 #: ../../src/wui/multiplayersetupgroup.cc:447
@@ -2120,7 +2121,7 @@ msgstr[0] ""
 #: ../../src/ui_fsmenu/mapselect.cc:317
 msgid "Author:"
 msgid_plural "Authors:"
-msgstr[0] ""
+msgstr[0] "제작자:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:458
 msgid "Pick a tutorial from the list, then hit \"OK\"."
@@ -2332,7 +2333,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:565
 msgid "closed"
-msgstr ""
+msgstr "닫힘"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Map details:"
@@ -2445,11 +2446,11 @@ msgstr "게임 실행"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Player’s name"
-msgstr ""
+msgstr "플레이어 이름"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:97
 msgid "Player’s type"
-msgstr ""
+msgstr "플레이어 종류"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
 #: ../../src/wui/multiplayersetupgroup.cc:459
@@ -2458,7 +2459,7 @@ msgstr "팀"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:105
 msgid "Player’s tribe"
-msgstr ""
+msgstr "플레이어 부족"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start type"
@@ -2572,7 +2573,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:211
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
 #: ../../src/ui_fsmenu/loadgame.cc:212
 msgid ""
@@ -2688,7 +2689,7 @@ msgstr "단일 플레이어"
 
 #: ../../src/ui_fsmenu/main.cc:43
 msgid "Multiplayer"
-msgstr ""
+msgstr "멀티 플레이어"
 
 #: ../../src/ui_fsmenu/main.cc:46
 msgid "Watch Replay"
@@ -2745,7 +2746,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Number of players"
-msgstr ""
+msgstr "플레이어 수"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:104
@@ -2754,7 +2755,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Map Name"
-msgstr ""
+msgstr "지도 이름"
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "The name of the map or scenario"
@@ -2762,7 +2763,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
@@ -3015,11 +3016,11 @@ msgstr "다음 시간마다 자동으로 게임 저장"
 #: ../../src/ui_fsmenu/options.cc:292 ../../src/ui_fsmenu/options.cc:392
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "일"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Remove replays older than:"
-msgstr ""
+msgstr "다음보다 오래된 리플레이 지우기:"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:312
@@ -3224,9 +3225,9 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
-#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:692
 #: ../../src/wui/building_statistics_menu.cc:716
 #: ../../src/wui/building_statistics_menu.cc:718
@@ -3338,15 +3339,15 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:240
 msgid "Build small building"
-msgstr ""
+msgstr "민간 건물 파괴"
 
 #: ../../src/wui/fieldaction.cc:241
 msgid "Build medium building"
-msgstr ""
+msgstr "중간 건물 건설"
 
 #: ../../src/wui/fieldaction.cc:242
 msgid "Build large building"
-msgstr ""
+msgstr "대형 건물 건설"
 
 #: ../../src/wui/fieldaction.cc:243
 msgid "Build port building"
@@ -3465,7 +3466,7 @@ msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Game Time:"
-msgstr ""
+msgstr "게임 시간:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:75
 msgid "Win condition:"
@@ -3488,7 +3489,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:245
 #: ../../src/wui/game_main_menu_save_game.cc:257
 msgid "Save Game Error!"
-msgstr ""
+msgstr "게임 저장 오류!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "File deletion"
@@ -3975,7 +3976,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:109
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
+msgstr[0] "근로자"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

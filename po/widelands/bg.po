@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-07-25 19:23+0000\n"
+"POT-Creation-Date: 2015-07-27 10:40+0100\n"
+"PO-Revision-Date: 2015-07-31 11:55+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -543,14 +543,14 @@ msgstr "Отказ"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
 msgstr "%1$iх%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:301
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr "нагоре"
@@ -683,35 +683,35 @@ msgstr "Опис.:"
 msgid "Make Directory"
 msgstr "Създаване на папка"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:210
 msgid "unnamed"
 msgstr "без име"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 #, c-format
 msgid "Directory: %s"
 msgstr "Папка: %s"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "directory"
 msgstr "папка"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:260
 msgid "Not a map file"
 msgstr "Файлът не е карта"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Вече съществува файл с името „%s“. Презаписване?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
 msgstr "Грешка при запазването на картата!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1129,20 +1129,20 @@ msgstr[1] "%s липсват"
 #: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Произведе %s"
 
 #. * TRANSLATORS: %s is a list of workers
 #: ../../src/logic/production_program.cc:1168
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "Набра %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name,
 #. %3$s = resource
 #: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr "%1$s %2$s – копае %3$s"
+msgstr "%1$s %2$s – добива %3$s"
 
 #: ../../src/logic/production_program.cc:1392
 msgid "No soldier to train!"
@@ -1263,7 +1263,7 @@ msgstr "Към икономиката Ви беше добавен нов скл
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "трябва да копае за ресурса %s, който не е наличен в света; племето не е съвместимо със света"
+msgstr "трябва да добива ресурса %s, който не е наличен в света; племето не е съвместимо със света"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
@@ -3245,9 +3245,9 @@ msgstr "Показване на пред. сграда"
 msgid "Show next building"
 msgstr "Показване на следв. сграда"
 
-#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:692
 #: ../../src/wui/building_statistics_menu.cc:716
 #: ../../src/wui/building_statistics_menu.cc:718
@@ -3300,7 +3300,7 @@ msgstr "Връща:"
 
 #: ../../src/wui/buildingwindow.cc:316 ../../src/wui/buildingwindow.cc:507
 msgid "Hide work area"
-msgstr "Скриване на работната площ"
+msgstr "Скриване на работната област"
 
 #: ../../src/wui/buildingwindow.cc:331
 msgid "Debug"
@@ -3316,7 +3316,7 @@ msgstr "Помощ"
 
 #: ../../src/wui/buildingwindow.cc:510
 msgid "Show work area"
-msgstr "Показване на работната площ"
+msgstr "Показване на работната област"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -4098,7 +4098,7 @@ msgstr "Кликнете за да освободите войника"
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
-msgstr ""
+msgstr "ТЗ: 8/8  АТ: 8/8  ЗА: 8/8  ЛО: 8/8_"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
@@ -4111,7 +4111,7 @@ msgstr "Предпочитане на герои"
 #: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
-msgstr ""
+msgstr "ТЗ: %1$u/%2$u  АТ: %3$u/%4$u  ЗА: %5$u/%6$u  ЛО: %7$u/%8$u"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"

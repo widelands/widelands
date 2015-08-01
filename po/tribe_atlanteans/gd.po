@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-27 11:14+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1297,8 +1297,8 @@ msgstr "Chan eil iasg ann"
 #: ../../tribes/atlanteans/fishers_house/conf:28
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
-"working radius. Remember that you can increase the number of existing fish "
-"by building a fishbreeder’s house."
+"work area. Remember that you can increase the number of existing fish by "
+"building a fish breeder’s house."
 msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn dhut cur ris na tha ann de dh’èisg ma thogas tu taigh tàrmachair iasg."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
@@ -1312,8 +1312,8 @@ msgid ""
 msgstr "Tog taigh tàrmachair iasg faisg air an taigh-iasgair gus dèanamh cinnteach nach ruith an t-iasg ort."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
-msgid "The fisher’s house needs water full of fish within the working radius."
-msgstr "Bidh an taigh-iasgair feumach air uisge làin iasg am broinn an raoin obrach aige."
+msgid "The fisher’s house needs water full of fish within the work area."
+msgstr "Bidh an taigh-iasgair feumach air uisge làin iasg am broinn an raoin-obrach aige."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1333,9 +1333,9 @@ msgstr "Cuiridh e craobhan mu thimcheall."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the working radius to plant "
-"the trees."
-msgstr "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin obrach aige gus na craobhan a chur ann."
+"The foresters’s house needs free space within the work area to plant the "
+"trees."
+msgstr "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin-obrach aige gus na craobhan a chur ann."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1460,7 +1460,7 @@ msgstr "Chan eil sitheann ann"
 #: ../../tribes/atlanteans/hunters_house/conf:29
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
-"working radius."
+"work area."
 msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-sealgair seo sitheann taobh a-staigh a raoin-obrach tuilleadh."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
@@ -1468,8 +1468,8 @@ msgid "Hunts animals to produce meat."
 msgstr "Sealgaidh e beathaichean gus feòil a dhèanamh."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
-msgid "The hunter’s house needs animals to hunt within the working radius."
-msgstr "Bidh an taigh-sealgair feumach air beathaichean ri ’n sealg am broinn an raoin obrach aige."
+msgid "The hunter’s house needs animals to hunt within the work area."
+msgstr "Bidh an taigh-sealgair feumach air beathaichean ri ’n sealg am broinn an raoin-obrach aige."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
@@ -1609,7 +1609,7 @@ msgstr "’S e stuth togail cudromach do na h-Atlantaich a th’ anns na maidean
 
 #: ../../tribes/atlanteans/quarry/conf:20
 msgid "quarrying stone"
-msgstr ""
+msgstr "clach a thochladh"
 
 #: ../../tribes/atlanteans/quarry/conf:33
 msgid "Out of Rocks"
@@ -1617,8 +1617,8 @@ msgstr "Chan eil creagan ann"
 
 #: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
-"The stonecutter working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonecutter working at this quarry can’t find any rocks in his work "
+"area."
 msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a’ choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
@@ -1626,8 +1626,8 @@ msgid "Carves stones out of rocks in the vicinity."
 msgstr "Tochlaidh e clachan à creagan am fagas."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
-msgstr "Bidh an coireal feumach air creagan ri ’n tochladh am broinn an raoin obrach aige."
+msgid "The quarry needs stones to cut within the work area."
+msgstr "Bidh an coireal feumach air creagan ri ’n tochladh am broinn an raoin-obrach aige."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1900,7 +1900,7 @@ msgstr "Chan eil uisge ann"
 
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/atlanteans/well/help.lua:18
@@ -1918,8 +1918,8 @@ msgstr "Chan eil craobhan ann"
 #: ../../tribes/atlanteans/woodcutters_house/conf:29
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his working radius. You should consider dismantling or destroying the "
-"building or building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
 msgstr "Cha do lorg am buaineadair-fiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
@@ -1927,5 +1927,5 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Leag craobhan am fagas is nì fiodh dhiubh."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
-msgid "The woodcutter's house needs trees to fell within the working radius."
-msgstr "Bidh an taigh buaineadair-fhiodha feumach air craobhan ri ’n leagail am broinn an raoin obrach aige."
+msgid "The woodcutter's house needs trees to fell within the work area."
+msgstr "Bidh an taigh buaineadair-fhiodha feumach air craobhan ri ’n leagail am broinn an raoin-obrach aige."
