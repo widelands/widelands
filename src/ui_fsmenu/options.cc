@@ -206,7 +206,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_label_language.get_x() + m_fx.get_w() + m_padding,
 		 m_label_music.get_y() + m_label_music.get_h() + m_padding,
 		 m_language_list.get_w(), m_fx.get_h(),
-		 _("Enable Sound"), UI::Align_VCenter),
+		 _("Enable Sound Effects"), UI::Align_VCenter),
 
 	// Second options block 'In-game options'
 	// Title 2
