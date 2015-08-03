@@ -4926,7 +4926,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				flag = &Wh->base_flag();
 				is_warehouse = true;
-				if (Wh->can_attack() && is_visible) {
+				if (is_visible && Wh->can_attack()) {
 					is_attackable = true;
 				}
 				owner_number = Wh->owner().player_number();
