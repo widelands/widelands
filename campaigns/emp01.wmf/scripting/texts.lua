@@ -85,8 +85,8 @@ diary_page_1 = {
 		.. paragraphdivider() ..
 		_([[Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the Barbarians.]])
 		.. paragraphdivider() ..
-		-- TRANSLATORS: Gulf of Pearl is a place name.
-		_([[Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the Gulf of Pearl with my family, some of my friends and a few of my best warriors.]])),
+		-- TRANSLATORS: Gulf of Perl is a place name.
+		_([[Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the Gulf of Perl with my family, some of my friends and a few of my best warriors.]])),
    w=500,
    posy=1,
 }
@@ -94,7 +94,7 @@ diary_page_1 = {
 diary_page_2 = {
    title=_"The Rough Sea",
    body= lutius(_"Diary of Lutius",
-		_([[It seems as if sailing on the Gulf of Pearl was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don’t know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.]])
+		_([[It seems as if sailing on the Gulf of Perl was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don’t know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.]])
 		.. paragraphdivider() ..
 		_([[Our ship is badly damaged and is taking in more and more water. We can thank the Gods if we survive this black night with our lives.]])),
    w=400,
