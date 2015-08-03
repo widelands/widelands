@@ -4893,6 +4893,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		uint8_t defenders_strength = 0;
 		bool is_warehouse = false;
 		bool is_attackable = false;
+		// we cannot attack unvisible site and there is no other way to find out
+		const bool is_visible = (1 < player_->vision
+			 	(Map::get_index(coords_unhash(site->first), map.get_width())));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
@@ -4900,6 +4903,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		FCoords f = map.get_fcoords(coords_unhash(site->first));
 		uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
 		Flag* flag = nullptr;
+
 		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
 			if (player_->is_hostile(bld->owner())) {
 				std::vector<Soldier *> defenders;
@@ -4907,7 +4911,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				defenders_strength = calculate_strength(defenders);
 
 				flag = &bld->base_flag();
-				if (bld->can_attack()) {
+				if (bld->can_attack() && is_visible) {
 					is_attackable = true;
 				}
 				owner_number = bld->owner().player_number();
@@ -4922,7 +4926,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				flag = &Wh->base_flag();
 				is_warehouse = true;
-				if (Wh->can_attack()) {
+				if (Wh->can_attack() && is_visible) {
 					is_attackable = true;
 				}
 				owner_number = Wh->owner().player_number();
@@ -5054,9 +5058,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// attacking
 	FCoords f = map.get_fcoords(coords_unhash(best_target));
 	// setting no attack counter here
-	// this gauranties that it will not be attacked in next 4
+	// this gauranties that it will not be attacked in next 3
 	// turns
-	enemy_sites[best_target].no_attack_counter = -4;
+	enemy_sites[best_target].no_attack_counter = -3;
 
 	Flag* flag = nullptr;  // flag of a building to be attacked
 	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -5069,8 +5073,19 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// how many attack soldiers we can send?
 	uint32_t attackers = player_->find_attack_soldiers(*flag);
-	// Just add some randomness
-	attackers -= gametime % 3;
+
+	// Of course not all of them:
+	// reduce by 0-3 for attackers below 10
+	// but for soldiers in range 10-40 reduce by much more.
+	// Soldiers above 40 are ignored for calculation
+
+	// Number of soldiers in the range 10-40, random portion of
+	// them will be used
+	uint32_t above_ten = (attackers > 10)? attackers - 10 : 0;
+	above_ten = (above_ten > 30) ? 30 : above_ten;
+
+	attackers = attackers - (gametime % 3) - ((above_ten > 0) ? gametime % above_ten : 0);
+
 	if (attackers <= 0) {
 		return false;
 	}
