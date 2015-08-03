@@ -4911,7 +4911,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				defenders_strength = calculate_strength(defenders);
 
 				flag = &bld->base_flag();
-				if (bld->can_attack() && is_visible) {
+				if (is_visible && bld->can_attack()) {
 					is_attackable = true;
 				}
 				owner_number = bld->owner().player_number();
