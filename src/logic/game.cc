@@ -487,7 +487,7 @@ bool Game::run
 					 	 "no starting position.\n"
 					 	 "You can manually add a starting position with the Widelands "
 					 	 "Editor to fix this problem."),
-					 p);
+					 static_cast<unsigned int>(p));
 			}
 		}
 

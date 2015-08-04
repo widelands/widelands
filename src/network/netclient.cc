@@ -1091,8 +1091,10 @@ void NetClient::disconnect
 		else
 			msg = NetworkGamingMessages::get_message(reason, arg);
 
-		if (trysave)
-			msg += _(" An automatic savegame will be created.");
+		if (trysave) {
+			/** TRANSLATORS: %s contains an error message. */
+			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
+		}
 
 		UI::WLMessageBox mmb
 			(d->modal,

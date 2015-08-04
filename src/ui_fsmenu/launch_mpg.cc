@@ -73,7 +73,8 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
 			 g_gr->images().get("pics/but0.png"),
-			 _("Saved game"), _("Select a saved game"), true, false);
+			 /** Translators: This is a button to select a savegame */
+			 _("Saved Game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2));
@@ -294,7 +295,8 @@ void FullscreenMenuLaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else if (m_settings->settings().savegame) {
-		m_wincondition.set_title(_("Savegame"));
+		/** Translators: This is a game type */
+		m_wincondition.set_title(_("Saved Game"));
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
@@ -429,12 +431,13 @@ void FullscreenMenuLaunchMPG::start_clicked()
 		throw WLWarning
 			(_("File not found"),
 			 _
-			 	("Widelands tried to start a game with a file that could not be "
-			 	 "found at the given path.\n"
-			 	 "The file was: %s\n"
-			 	 "If this happens, the host might have selected a file that you do "
-			 	 "not own. Normally, such a file should be sent from the host to "
-			 	 "you, but perhaps the transfer was not yet finished!?!"),
+			 ("Widelands tried to start a game with a file that could not be "
+			  "found at the given path.\n"
+			  "The file was: %s\n"
+			  "If this happens in a network game, the host might have selected "
+			  "a file that you do not own. Normally, such a file should be sent "
+			  "from the host to you, but perhaps the transfer was not yet "
+			  "finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->can_launch())
 		end_modal(1);

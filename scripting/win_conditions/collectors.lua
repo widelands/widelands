@@ -5,6 +5,7 @@
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
 include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 include "scripting/table.lua"
 include "scripting/win_condition_functions.lua"
 
@@ -108,9 +109,9 @@ return {
          points = points + lpoints
          local warename = wl.Game():get_ware_description(plr.tribe_name, ware).descname
          -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-         descr[#descr+1] = [[• ]] .. (_"  %1$s (%2$i P) x %3$i = %4$i P"):bformat(
+         descr[#descr+1] = listitem_bullet(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
             warename, value, count, lpoints
-         ) .. "<br>"
+         )
       end
       descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
               .. "<p line-spacing=3 font-size=12>"
@@ -123,13 +124,21 @@ return {
       set_textdomain("win_conditions")
       local h = math.floor(remaining_time / 60)
       local m = remaining_time % 60
+      -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
       local time = ""
+      if m > 0 then
+			time = (ngettext("%i minute", "%i minutes", m)):format(m)
+		end
       if h > 0 then
-         -- TRANSLATORS: Context: 'The game will end in %s.'
-         time = (_"%1$ih%2$02im"):bformat(h,m)
-      else
-         time = (ngettext("%i minute", "%i minutes", m)):format(m)
+			if m > 0 then
+				-- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+				time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
+			else
+				-- TRANSLATORS: Context: 'The game will end in 2 hours.'
+				time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+			end
       end
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
       local msg = p(_"The game will end in %s."):format(time)
       msg = msg .. "\n\n"
 

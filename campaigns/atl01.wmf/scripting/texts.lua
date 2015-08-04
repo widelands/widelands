@@ -263,7 +263,7 @@ heavy_industry_story = {
    {
       title = _"Sidolus Seeks Out Jundlina",
       body = sidolus(
-			_([[May Satul warm you, Jundlina. Have you considered mining for resources in the mountains around us? We are running short of quartz, crystal and diamonds for our buildings. Also we could use more iron, gold and especially coal. If we find an ample supply of those commodities, we could start producing weapons and tools; this would help enormously. Of course, we would need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe even more.]]))
+			_([[May Satul warm you, Jundlina. Have you considered mining for resources in the mountains around us? We are running short of quartz and diamonds for our buildings. Also, we could use more iron, gold and especially coal. If we find an ample supply of those commodities, we could start producing weapons and tools; this would help enormously. Of course, we would need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe even more.]]))
    },
    {
       title = _"Jundlina Replies",

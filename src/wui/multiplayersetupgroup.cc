@@ -358,7 +358,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (settings.scenario)
 			init->set_title(_("Scenario"));
 		else if (settings.savegame)
-			init->set_title(_("Savegame"));
+			/** Translators: This is a game type */
+			init->set_title(_("Saved Game"));
 		else {
 			std::string tribepath("tribes/" + player_setting.tribe);
 			i18n::Textdomain td(tribepath); // for translated initialisation
