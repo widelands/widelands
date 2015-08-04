@@ -88,6 +88,25 @@ void FullscreenMenuTextView::set_title(const std::string& text)
 	title.set_text(text);
 }
 
+bool FullscreenMenuTextView::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+			case SDLK_ESCAPE:
+				end_modal(0);
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+	return FullscreenMenuBase::handle_key(down, code);
+}
+
+
+
+
 FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
 : FullscreenMenuTextView()
 {

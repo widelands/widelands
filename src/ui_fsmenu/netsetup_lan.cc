@@ -164,6 +164,29 @@ const std::string & FullscreenMenuNetSetupLAN::get_playername()
 	return playername.text();
 }
 
+bool FullscreenMenuNetSetupLAN::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				if (hostname.text().empty()) {
+					end_modal(static_cast<int32_t>(HOSTGAME));
+				} else {
+					end_modal(static_cast<int32_t>(JOINGAME));
+				}
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(CANCEL));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return FullscreenMenuBase::handle_key(down, code);
+}
+
 
 void FullscreenMenuNetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {

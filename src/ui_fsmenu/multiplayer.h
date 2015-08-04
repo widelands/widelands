@@ -46,6 +46,9 @@ public:
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}
 
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 private:
 	UI::Textarea title;
 	UI::Box      vbox;

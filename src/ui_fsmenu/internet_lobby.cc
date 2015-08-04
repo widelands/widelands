@@ -159,9 +159,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
-		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames   .double_clicked.connect
-		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this));
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
@@ -191,6 +191,30 @@ void FullscreenMenuInternetLobby::think ()
 	if (InternetGaming::ref().update_for_games())
 		fill_games_list(InternetGaming::ref().games());
 }
+
+bool FullscreenMenuInternetLobby::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				if (joingame.enabled()) {
+					server_doubleclicked();
+				} else {
+					clicked_hostgame();
+				}
+				return true;
+			case SDLK_ESCAPE:
+				clicked_back();
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return FullscreenMenuBase::handle_key(down, code);
+}
+
 
 
 /// connects Widelands with the metaserver
@@ -326,7 +350,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 
 
 /// called when an entry of the server list was selected
-void FullscreenMenuInternetLobby::server_selected (uint32_t)
+void FullscreenMenuInternetLobby::server_selected()
 {
 	if (opengames.has_selection()) {
 		const InternetGame * game = &opengames.get_selected();
@@ -339,7 +363,7 @@ void FullscreenMenuInternetLobby::server_selected (uint32_t)
 
 
 /// called when an entry of the server list was doubleclicked
-void FullscreenMenuInternetLobby::server_doubleclicked (uint32_t)
+void FullscreenMenuInternetLobby::server_doubleclicked()
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {

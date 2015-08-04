@@ -130,3 +130,22 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
 	}
 }
+
+bool FullscreenMenuMultiPlayer::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(MenuTarget::kBack));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return FullscreenMenuMainMenu::handle_key(down, code);
+}

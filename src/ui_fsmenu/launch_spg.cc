@@ -264,7 +264,7 @@ void FullscreenMenuLaunchSPG::start_clicked()
 			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->can_launch()) {
-		end_modal(1 + m_is_scenario);
+		end_modal(static_cast<int>(MenuTarget::kNormalGame) + m_is_scenario);
 	}
 }
 
@@ -317,6 +317,25 @@ void FullscreenMenuLaunchSPG::refresh()
 	win_condition_update();
 }
 
+bool FullscreenMenuLaunchSPG::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				start_clicked();
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int>(MenuTarget::kBack));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return FullscreenMenuBase::handle_key(down, code);
+}
+
 
 /**
  * Select a map and send all information to the user interface.
@@ -335,7 +354,7 @@ void FullscreenMenuLaunchSPG::select_map()
 		return;  // back was pressed
 	}
 
-	m_is_scenario = code == 2;
+	m_is_scenario = code == static_cast<int>(MenuTarget::kScenarioGame);
 	m_settings->set_scenario(m_is_scenario);
 
 	const MapData & mapdata = *msm.get_map();

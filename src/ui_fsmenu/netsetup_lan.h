@@ -59,6 +59,9 @@ public:
 	 */
 	const std::string & get_playername();
 
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 private:
 	uint32_t m_butx;
 	uint32_t m_butw;

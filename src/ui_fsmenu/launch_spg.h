@@ -44,10 +44,6 @@ class LuaInterface;
  *    UI::Button m_select_map  - only shown if the player has the right to
  *                               change the map.
  *
- * The return values of run() are:
- *    0  - back was pressed
- *    1  - normal game (either single or multi player)
- *    2  - scenario game (at the moment only single player)
  */
 class FullscreenMenuLaunchSPG : public FullscreenMenuBase {
 public:
@@ -55,10 +51,25 @@ public:
 		(GameSettingsProvider *, GameController * = nullptr, bool autolaunch = false);
 	~FullscreenMenuLaunchSPG();
 
+	/**
+	 * The return values of run() are:
+	 *    0  - back was pressed
+	 *    1  - normal game (either single or multi player)
+	 *    2  - scenario game (at the moment only single player)
+	 */
+	enum class MenuTarget {
+		kBack,
+		kNormalGame,
+		kScenarioGame
+	};
+
 	void start() override;
 	void think() override;
 
 	void refresh();
+
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	LuaInterface * m_lua;
