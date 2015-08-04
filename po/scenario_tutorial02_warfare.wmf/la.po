@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 17:23+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -408,7 +409,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "Aedificia augenda"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid ""
@@ -459,11 +460,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Hostem vince"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Hostem vince"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid ""
@@ -500,7 +501,7 @@ msgstr "Gentem hostilem vince"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Hostem vince"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid "Defeat the nearby enemy."

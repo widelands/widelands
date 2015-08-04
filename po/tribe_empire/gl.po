@@ -4,14 +4,15 @@
 # Translators:
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# GunChleoc, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 13:14+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Galician (http://www.transifex.com/projects/p/widelands/language/gl/)\n"
+"Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -434,7 +435,7 @@ msgstr ""
 
 #: ../../tribes/empire/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Produce armaduras para os soldados."
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
@@ -512,7 +513,7 @@ msgstr ""
 #: ../../tribes/empire/ax/conf:1
 msgid ""
 "The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
+msgstr "A hacha é a ferramenta do leñador. Prodúcea o ferreiro."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -584,7 +585,7 @@ msgstr ""
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Traballa en obras para construír novos edificios."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
@@ -661,7 +662,7 @@ msgstr "Imperio"
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Esta é a cultura do Imperio Romano."
 
 #: ../../tribes/empire/conf:37
 msgid "Ashes"
@@ -669,83 +670,83 @@ msgstr "Cinzas"
 
 #: ../../tribes/empire/conf:38
 msgid "Field (medium)"
-msgstr ""
+msgstr "Campo (medio)"
 
 #: ../../tribes/empire/conf:39
 msgid "Field (small)"
-msgstr ""
+msgstr "Campo (pequeno)"
 
 #: ../../tribes/empire/conf:40
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Campo (anano)"
 
 #: ../../tribes/empire/conf:41
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Campo (preparado)"
 
 #: ../../tribes/empire/conf:42
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Campo (recollido)"
 
 #: ../../tribes/empire/conf:43
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Edificio destruído"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Indicador de recursos: Carbón (baixo)"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Indicador de recursos: Carbón (alto)"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Indicador de recursos: Ouro (baixo)"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Indicador de recursos: Ouro (alto)"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Indicador de recursos: Granito (baixo)"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Indicador de recursos: Granito (alto)"
 
 #: ../../tribes/empire/conf:50
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Indicador de recursos: Ferro (baixo)"
 
 #: ../../tribes/empire/conf:51
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Indicador de recursos: Ferro (alto)"
 
 #: ../../tribes/empire/conf:52
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Indicador de recursos: Baleiro"
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Indicador de recursos: Auga"
 
 #: ../../tribes/empire/conf:54
 msgid "Vine (medium)"
-msgstr ""
+msgstr "Vide (media)"
 
 #: ../../tribes/empire/conf:55
 msgid "Vine (small)"
-msgstr ""
+msgstr "Vide (pequena)"
 
 #: ../../tribes/empire/conf:56
 msgid "Vine (tiny)"
-msgstr ""
+msgstr "Vide (anana)"
 
 #: ../../tribes/empire/conf:57
 msgid "Vine (ripe)"
-msgstr ""
+msgstr "Vide (lista)"
 
 #: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
@@ -757,11 +758,11 @@ msgstr "Lanza mellorada"
 
 #: ../../tribes/empire/conf:62
 msgid "Armor"
-msgstr ""
+msgstr "Armadura"
 
 #: ../../tribes/empire/conf:63
 msgid "Ax"
-msgstr ""
+msgstr "Machado"
 
 #: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
@@ -781,7 +782,7 @@ msgstr "Pan"
 
 #: ../../tribes/empire/conf:68
 msgid "Chain Armor"
-msgstr ""
+msgstr "Cota de malla"
 
 #: ../../tribes/empire/conf:69
 msgid "Cloth"
@@ -813,7 +814,7 @@ msgstr "Ouro"
 
 #: ../../tribes/empire/conf:76
 msgid "Gold Ore"
-msgstr ""
+msgstr "Mineral de ouro"
 
 #: ../../tribes/empire/conf:77
 msgid "Grape"
@@ -873,7 +874,7 @@ msgstr "Pico"
 
 #: ../../tribes/empire/conf:91
 msgid "Plate Armor"
-msgstr ""
+msgstr "Couraza"
 
 #: ../../tribes/empire/conf:92
 msgid "Ration"
@@ -941,7 +942,7 @@ msgstr "Soldado"
 
 #: ../../tribes/empire/conf:114
 msgid "Armorsmith"
-msgstr ""
+msgstr "Ferreiro de armaduras"
 
 #: ../../tribes/empire/conf:115
 msgid "Baker"
@@ -1114,7 +1115,7 @@ msgstr "Cuartel xeral"
 
 #: ../../tribes/empire/conf:167
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Naufraxio do cuartel xeral"
 
 #: ../../tribes/empire/conf:168
 msgid "Warehouse"
@@ -1130,19 +1131,19 @@ msgstr "Canteira"
 
 #: ../../tribes/empire/conf:173
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa do leñador"
 
 #: ../../tribes/empire/conf:174
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa do forestal"
 
 #: ../../tribes/empire/conf:175
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Casa do pescador"
 
 #: ../../tribes/empire/conf:176
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Casa do cazador"
 
 #: ../../tribes/empire/conf:177
 msgid "Well"
@@ -1150,11 +1151,11 @@ msgstr "Pozo"
 
 #: ../../tribes/empire/conf:178
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa do explorador"
 
 #: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
-msgstr ""
+msgstr "Casa do canteiro"
 
 #: ../../tribes/empire/conf:180
 msgid "Sawmill"
@@ -1206,15 +1207,15 @@ msgstr "Ferrería"
 
 #: ../../tribes/empire/conf:192
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Ferrería de armaduras"
 
 #: ../../tribes/empire/conf:193
 msgid "Donkey Farm"
-msgstr ""
+msgstr "Granxa de burros"
 
 #: ../../tribes/empire/conf:194
 msgid "Sheep Farm"
-msgstr ""
+msgstr "Curro"
 
 #: ../../tribes/empire/conf:195
 msgid "Weaving Mill"
@@ -1282,7 +1283,7 @@ msgstr "Campo de batalla"
 
 #: ../../tribes/empire/conf:222
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo de adestramento"
 
 #: ../../tribes/empire/deep_coalmine/conf:42
 msgid ""
@@ -1361,11 +1362,11 @@ msgstr ""
 
 #: ../../tribes/empire/farm/conf:25
 msgid "planting wheat"
-msgstr ""
+msgstr "sementar trigo"
 
 #: ../../tribes/empire/farm/conf:27
 msgid "harvesting wheat"
-msgstr ""
+msgstr "recoller trigo"
 
 #: ../../tribes/empire/farm/conf:46 ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
@@ -1552,7 +1553,7 @@ msgstr ""
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal"
 " in one blow. It is only used by hunters."
-msgstr ""
+msgstr "Esta lanza é lixeira abondo para ser lanzada, e pesada abondo para matar calquera animal dun golpe. Só a usan os cazadores."
 
 #: ../../tribes/empire/inn/conf:26 ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
@@ -1750,7 +1751,7 @@ msgstr ""
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Os exploradores ollan zonas descoñecidas."
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
@@ -1773,7 +1774,7 @@ msgstr ""
 
 #: ../../tribes/empire/scythe/conf:1
 msgid "The Scythe is the tool of the farmer. It is produced by the toolsmith."
-msgstr ""
+msgstr "A gadaña é a ferramenta dos granxeiros. Prodúcea o ferreiro."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your sentry."
@@ -1833,7 +1834,7 @@ msgstr ""
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
-msgstr ""
+msgstr "Extrae granito en bruto das rochas."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."

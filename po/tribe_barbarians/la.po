@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 17:46+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -269,7 +270,7 @@ msgstr ""
 msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "Asciae arma simplicia Barbara sunt. Omnes iuvenes milites eas accipiunt."
 
 #: ../../tribes/barbarians/axfactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
@@ -290,7 +291,7 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -633,7 +634,7 @@ msgstr "Res per vias portat."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr ""
+msgstr "Boves alit, qui ad res portandas adiuvant."
 
 #: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
@@ -657,7 +658,7 @@ msgstr "Carbo e ligno facit."
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "In altissimis metallis laborans et carbonem et ferrum et aurum obtinet."
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
@@ -751,15 +752,15 @@ msgstr "Aedificium destructum"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Field (medium)"
-msgstr ""
+msgstr "Ager mediocris"
 
 #: ../../tribes/barbarians/conf:38
 msgid "Field (small)"
-msgstr ""
+msgstr "Ager parvus"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Ager parvulus"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Field (ripe)"
@@ -767,19 +768,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Ager messus"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Cannae mediocres"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Reed (small)"
-msgstr ""
+msgstr "Cannae parvae"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Cannae sertae"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Reed (ripe)"
@@ -787,51 +788,51 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Est indicatum hic carbonem paucum situm"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Est indicatum hic carbonem multum situm"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Est indicatum hic aurum paucum situm"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Est indicatum hic granitum multum situm"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Est indicatum hic ferrum paucum situm"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Est indicatum hic ferrum multum situm"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Est indicatum hic nihil situm"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Est indicatum hic aqua sita"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Locus navium construendarum"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Ascia"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
@@ -839,7 +840,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "Ascia bellandi"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Beer"
@@ -851,11 +852,11 @@ msgstr "lignum durum"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
-msgstr ""
+msgstr "Ascia lata"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Ascia aeraria"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Cloth"
@@ -867,7 +868,7 @@ msgstr "Carbo"
 
 #: ../../tribes/barbarians/conf:68
 msgid "Felling Ax"
-msgstr ""
+msgstr "Ascia cadendi"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Fire Tongs"
@@ -975,7 +976,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
-msgstr ""
+msgstr "Galea bellica"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
@@ -1027,7 +1028,7 @@ msgstr "Architectus"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carbonarius"
 
 #: ../../tribes/barbarians/conf:115
 msgid "Master Miner"
@@ -1087,7 +1088,7 @@ msgstr "Saltuarius"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
-msgstr ""
+msgstr "Navifex"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Smelter"
@@ -1099,7 +1100,7 @@ msgstr "Camentarius"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Trainer"
-msgstr ""
+msgstr "Exercitor"
 
 #: ../../tribes/barbarians/conf:133
 msgid "Weaver"
@@ -1115,7 +1116,7 @@ msgstr "Bubulcus"
 
 #: ../../tribes/barbarians/conf:138
 msgid "Ship"
-msgstr ""
+msgstr "Navis"
 
 #: ../../tribes/barbarians/conf:141
 msgid "Construction Site"
@@ -1188,19 +1189,19 @@ msgstr "Lapidicina"
 
 #: ../../tribes/barbarians/conf:169
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Casa saltuarius"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Casa piscaria"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Casa venatoris"
 
 #: ../../tribes/barbarians/conf:173
 msgid "Gamekeeper’s Hut"
@@ -1212,7 +1213,7 @@ msgstr "Fons"
 
 #: ../../tribes/barbarians/conf:175
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Casa exploratoris"
 
 #: ../../tribes/barbarians/conf:176
 msgid "Wood Hardener"
@@ -1260,7 +1261,7 @@ msgstr "Officina aeraria"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Navale"
 
 #: ../../tribes/barbarians/conf:188
 msgid "War Mill"
@@ -1268,11 +1269,11 @@ msgstr "Fabrica armorum"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Axfactory"
-msgstr ""
+msgstr "Fabrica axiarum"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Fabrica ferraria"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Cattle Farm"
@@ -1280,7 +1281,7 @@ msgstr "Bubile"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Textrinum"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Farm"
@@ -1288,7 +1289,7 @@ msgstr "Fundus"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Helm Smithy"
-msgstr ""
+msgstr "Galearum fabrica"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -1304,7 +1305,7 @@ msgstr "Metallum altius carbonis"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal Mine"
-msgstr ""
+msgstr "Metallum carbonis"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Deeper Iron Ore Mine"
@@ -1344,7 +1345,7 @@ msgstr "Arena bellandi"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Training Camp"
-msgstr ""
+msgstr "Castra exercendi"
 
 #: ../../tribes/barbarians/deep_goldmine/conf:42
 #: ../../tribes/barbarians/deeper_goldmine/conf:41
@@ -1489,20 +1490,20 @@ msgstr ""
 msgid "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
-msgstr ""
+msgstr "triticum serit"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
-msgstr ""
+msgstr "triticum metit"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1607,7 +1608,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/gardener/conf:1
 msgid "Grows thatch reed."
-msgstr "cannas metit"
+msgstr "Cannas metit."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1703,7 +1704,7 @@ msgid ""
 "A helmet is a basic tool to protect warriors. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -1748,7 +1749,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "Ars venandi"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1887,7 +1888,7 @@ msgstr ""
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
-msgstr ""
+msgstr "Cena in caupone fit e pita, e cervisia bona, e pane vel pisce. Ea ab operarii altissimorum metallorum amatur!"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -2122,7 +2123,7 @@ msgstr ""
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Exploratores, sicut Explorus explorans explorator, regiones inexploratas exploraverunt modo explorante."
 
 #: ../../tribes/barbarians/scouts_hut/conf:21
 msgid "scouting"
@@ -2134,7 +2135,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:94
 msgid "Not enough space"
-msgstr "spatium non satis est"
+msgstr "Spatium non satis est"
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:95
 msgid ""
@@ -2168,11 +2169,11 @@ msgstr "Salipotens navis"
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "In navale laborat ad construendas novas naves."
 
 #: ../../tribes/barbarians/shipyard/conf:28
 msgid "constructing a ship"
-msgstr ""
+msgstr "navem faciens"
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2278,7 +2279,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Exercitio impetus:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Health Training:"
@@ -2300,7 +2301,7 @@ msgid ""
 "A warhelm is an enhanced armor for barbarian warriors. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
 
 #: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"

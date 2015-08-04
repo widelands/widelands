@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 17:37+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -429,11 +430,11 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
+msgstr "Prima lorica Imperialibus militibus est. Utimur ea in fabrica loricarum facta cum alimentis in exercendi locis, ut milites a primo ad secundum salutatis gradum exerceant."
 
 #: ../../tribes/empire/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Loricas militium facit."
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
@@ -612,7 +613,7 @@ msgstr "Carbo e ligno facit."
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
 " smithy."
-msgstr ""
+msgstr "Texto utimur ad nonnulla aedificia construenda et ad loricas quasdam faciendas."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -660,7 +661,7 @@ msgstr "Imperium"
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Hoc est Imperium Romanum."
 
 #: ../../tribes/empire/conf:37
 msgid "Ashes"
@@ -668,67 +669,67 @@ msgstr "Cinis"
 
 #: ../../tribes/empire/conf:38
 msgid "Field (medium)"
-msgstr ""
+msgstr "Ager mediocris"
 
 #: ../../tribes/empire/conf:39
 msgid "Field (small)"
-msgstr ""
+msgstr "Ager parvus"
 
 #: ../../tribes/empire/conf:40
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Ager parvulus"
 
 #: ../../tribes/empire/conf:41
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Ager parvulus"
 
 #: ../../tribes/empire/conf:42
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Ager messus"
 
 #: ../../tribes/empire/conf:43
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Aedificium destructum"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Est indicatum hic carbonem paucum situm"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Est indicatum hic carbonem multum situm"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Est indicatum hic aurum paucum situm"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Est indicatum hic granitum multum situm"
 
 #: ../../tribes/empire/conf:50
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Est indicatum hic ferrum paucum situm"
 
 #: ../../tribes/empire/conf:51
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Est indicatum hic ferrum multum situm"
 
 #: ../../tribes/empire/conf:52
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Est indicatum hic nihil situm"
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Est indicatum hic aqua sita"
 
 #: ../../tribes/empire/conf:54
 msgid "Vine (medium)"
@@ -748,7 +749,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Locus navium construendarum"
 
 #: ../../tribes/empire/conf:61
 msgid "Advanced Lance"
@@ -756,11 +757,11 @@ msgstr "Hasta melior"
 
 #: ../../tribes/empire/conf:62
 msgid "Armor"
-msgstr ""
+msgstr "Lorica"
 
 #: ../../tribes/empire/conf:63
 msgid "Ax"
-msgstr ""
+msgstr "Ascia"
 
 #: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
@@ -780,7 +781,7 @@ msgstr "Panis"
 
 #: ../../tribes/empire/conf:68
 msgid "Chain Armor"
-msgstr ""
+msgstr "Lorica serta"
 
 #: ../../tribes/empire/conf:69
 msgid "Cloth"
@@ -812,7 +813,7 @@ msgstr "Aurum"
 
 #: ../../tribes/empire/conf:76
 msgid "Gold Ore"
-msgstr ""
+msgstr "Aes aureum"
 
 #: ../../tribes/empire/conf:77
 msgid "Grape"
@@ -940,7 +941,7 @@ msgstr "Miles"
 
 #: ../../tribes/empire/conf:114
 msgid "Armorsmith"
-msgstr ""
+msgstr "Loricarum faber"
 
 #: ../../tribes/empire/conf:115
 msgid "Baker"
@@ -1129,19 +1130,19 @@ msgstr "Lapidicina"
 
 #: ../../tribes/empire/conf:173
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../tribes/empire/conf:174
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa saltuarii"
 
 #: ../../tribes/empire/conf:175
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Casa pistoria"
 
 #: ../../tribes/empire/conf:176
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Casa venatoris"
 
 #: ../../tribes/empire/conf:177
 msgid "Well"
@@ -1149,7 +1150,7 @@ msgstr "Fons"
 
 #: ../../tribes/empire/conf:178
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa exploratoris"
 
 #: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
@@ -1205,15 +1206,15 @@ msgstr "Fabrica fabri instrumentorum"
 
 #: ../../tribes/empire/conf:192
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Fabrica loricarum"
 
 #: ../../tribes/empire/conf:193
 msgid "Donkey Farm"
-msgstr ""
+msgstr "Nutritor asinorum"
 
 #: ../../tribes/empire/conf:194
 msgid "Sheep Farm"
-msgstr ""
+msgstr "Ovile"
 
 #: ../../tribes/empire/conf:195
 msgid "Weaving Mill"
@@ -1281,7 +1282,7 @@ msgstr "Arena"
 
 #: ../../tribes/empire/conf:222
 msgid "Training Camp"
-msgstr ""
+msgstr "Castra exercendi"
 
 #: ../../tribes/empire/deep_coalmine/conf:42
 msgid ""
@@ -1360,11 +1361,11 @@ msgstr ""
 
 #: ../../tribes/empire/farm/conf:25
 msgid "planting wheat"
-msgstr ""
+msgstr "triticum serit"
 
 #: ../../tribes/empire/farm/conf:27
 msgid "harvesting wheat"
-msgstr ""
+msgstr "triticum metit"
 
 #: ../../tribes/empire/farm/conf:46 ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
@@ -1393,7 +1394,7 @@ msgstr ""
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Praeter panis, caro in Imperio et pisces alimenta sunt. Pisces in tabernis, cauponis, locis exercendis (arenis, colosseis, exercendi castris) consumptuntur."
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1655,7 +1656,7 @@ msgstr ""
 
 #: ../../tribes/empire/master-miner/conf:1 ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "In altissimis metallis laborans et carbonem et ferrum et aurum obtinet."
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -1749,7 +1750,7 @@ msgstr ""
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Exploratores, sicut Explorus explorans explorator, regiones inexploratas exploraverunt modo explorante."
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
@@ -1772,7 +1773,7 @@ msgstr ""
 
 #: ../../tribes/empire/scythe/conf:1
 msgid "The Scythe is the tool of the farmer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Falx instrumentum agricolae est. Quae a fabre facitur."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your sentry."
@@ -1796,7 +1797,7 @@ msgstr "In navale laborat ad construendas novas naves."
 
 #: ../../tribes/empire/shipyard/conf:28
 msgid "constructing a ship"
-msgstr ""
+msgstr "navem faciens"
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1932,7 +1933,7 @@ msgstr ""
 
 #: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Exercitio impetus:"
 
 #: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"

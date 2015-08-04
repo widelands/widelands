@@ -6,14 +6,15 @@
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 15:12+0000\n"
+"Last-Translator: wl-zocker\n"
+"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,7 +118,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Mit einer Armee von 150 Mann wurde ich beauftragt, die Nordgrenze, welche nahe dem Galdin-Gebirge in einem großen, schönen und uralten Walde verläuft, zu bewachen. Schon bald trafen wir auf einen Barbarenstamm, welcher sich zunächst freundlich zeigte. Einige unserer Männer trieben sogar Handel mit ihm und die Stammeskinder kamen in unser Lager, um unsere glänzenden Uniformen und Waffen zu bewundern."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -127,7 +128,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Aber während der fünften Nacht in dieser Region griffen sie uns aus heiterem Himmel an. Ich verlor Dutzende guter Männer und fand mich selbst gefangen vor ihrem Stammesfürsten wieder. Er spuckte auf mich, verspottete mich und befahl mir, das Land für immer zu verlassen. Er wollte weder neues noch unser Land, doch er sagte, dass DIESER Wald ihr Gebiet sei – und er sollte es bleiben, bis die Geister den Letzten seines Volkes zu sich gerufen hätten!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:86
 msgid ""
@@ -212,7 +213,7 @@ msgid ""
 "You really should build a barracks in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Du solltest wirklich im Osten des Waldes eine Baracke errichten. Dann kann einer von meinen Männern auf die Dunkelheit im Wald achten und uns vor diesen Kreaturen warnen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:129
 msgid "Safe For Now"
@@ -246,20 +247,20 @@ msgstr "Amalea lächelt …"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Sei gegrüßt, Lutius! Ich habe gerade Saledus draußen getroffen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "He told me about the barracks. Well, I don’t think we need more barracks – "
 "instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Er sprach mit mir über die Baracken. Nun, ich denke nicht, dass wir weitere Baracken brauchen – stattdessen sollten wir uns auf andere Dinge konzentrieren."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "Es ist offensichtlich, dass wir Holz für die Reparatur unseres Schiffes benötigen. Also ging ich gestern durch den Wald, um nach einem schönen Platz für ein Holzfällerhaus zu suchen, und habe einen direkt südlich unseres Hauptquartiers gefunden."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea recommends…"
@@ -271,7 +272,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he cleans enough space for "
 "constructing two more lumberjack’s houses, so that we can harvest the logs "
 "faster."
-msgstr ""
+msgstr "Ich bekam die Nachricht, dass unser erster Holzfäller seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee, zu warten, bis er genug Platz für zwei weitere Holzfällerhäuser geschaffen hat, sodass wir schneller genug Stämme haben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 msgid ""
@@ -286,7 +287,7 @@ msgstr "Amalea kommt herein …"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Ich muss mit dir über zwei wichtige Dinge reden … Zuerst die gute Nachricht:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid ""
@@ -298,18 +299,18 @@ msgstr "Ich sah, dass der Bau des Sägewerks beendet ist, also können wir begin
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Aber die schlechte Nachricht ist, dass unsere Holzfäller unglaublich schnell arbeiten. Es gibt fast keine Bäume mehr auf der Insel."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Diese Bäume geben uns Schutz vor den Sandstürmen aus der Wüste und spenden uns an heißen Tagen Schatten. Außerdem sind sie die Heimat von so vielen Tieren. Wir sollten diese Insel nicht als reine Wüste zurücklassen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:170
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "Lutius, bitte finde jemanden, der neue Bäume pflanzt."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Thinking About the Future"
@@ -337,7 +338,7 @@ msgstr "Ein Schritt vorwärts"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:187
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus sieht aufgeregt aus …"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:188
 msgid ""

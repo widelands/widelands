@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 14:05+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Hebrew (http://www.transifex.com/projects/p/widelands/language/he/)\n"
+"Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -289,7 +290,7 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -830,7 +831,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "גרזן"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
@@ -838,7 +839,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "גרזן קרב"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Beer"
@@ -850,11 +851,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
-msgstr ""
+msgstr "גרזן רחב"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
-msgstr ""
+msgstr "גרזן ארד"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Cloth"
@@ -1118,7 +1119,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:141
 msgid "Construction Site"
-msgstr ""
+msgstr "אתר בנייה"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
@@ -1299,11 +1300,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:197
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "מכרה פחם עמוק"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal Mine"
-msgstr ""
+msgstr "מכרה פחם"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Deeper Iron Ore Mine"
@@ -1311,7 +1312,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:200
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "מכרה מחצבי ברזל עמוק"
 
 #: ../../tribes/barbarians/conf:201
 msgid "Iron Ore Mine"
@@ -1323,7 +1324,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:203
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "מכרה זהב עמוק"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Gold Mine"
@@ -1488,20 +1489,20 @@ msgstr ""
 msgid "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""

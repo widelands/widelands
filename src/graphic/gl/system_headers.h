@@ -38,6 +38,7 @@
 #ifdef USE_GLBINDING
 #   include <glbinding/gl/gl.h>
 #   include <glbinding/Binding.h>
+// This fakes that most other gl bindings define gl functions in the public namespace.
 using namespace gl;
 #else
 #   include <GL/glew.h>

@@ -27,7 +27,7 @@ return {
 	},
 
 	bg = {
-		name = "Български език",
+		name = "Български",
 		sort_name = "Balgarski",
 		font = "default"
 	},
@@ -53,7 +53,7 @@ return {
 	de = {
 		name = "Deutsch",
 		sort_name = "Deutsch",
-		font = "default"
+		font = "Standard"
 	},
 
 	el = {
@@ -315,8 +315,8 @@ return {
 	},
 
 	sk = {
-		name = "Slovenský jazyk",
-		sort_name = "Slovensky",
+		name = "Slovenčina",
+		sort_name = "Slovencina",
 		font = "default"
 	},
 
@@ -327,7 +327,7 @@ return {
 	},
 
 	sr = {
-		name = "Srpski",
+		name = "српски",
 		sort_name = "Srpski",
 		font = "default"
 	},

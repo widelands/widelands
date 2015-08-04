@@ -2,16 +2,18 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 15:43+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/widelands/language/uk/)\n"
+"Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +26,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Казарма"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -38,7 +40,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Будиночок лісоруба"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
@@ -66,7 +68,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "Будиночок лісника"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
@@ -79,7 +81,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr ""
+msgstr "Кар’єр"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
@@ -269,7 +271,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he cleans enough space for "
 "constructing two more lumberjack’s houses, so that we can harvest the logs "
 "faster."
-msgstr ""
+msgstr "я отримав повідомлення, що наш перший лісоруб почав сьогодні роботу. Можливо це буде гарною ідеєю, зачекати поки він розчистить трошки місця, достатього для розміщення двох Хатинок Лісоруба, і ми зможемо заготовити колоди швидше."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 msgid ""
@@ -284,7 +286,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "в мене два важливих новини для тебе… Перша, гарна:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid ""
@@ -296,18 +298,18 @@ msgstr "я побачив, що будівництво лісопилки зав
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Погана новина, полягає в тому, що наші лісоруби працюють з неймовірною швидкістю і на цьому острові практично не залишилось лісу."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Ці дерева є єдиним захистом від піщаних бурь, надають тінь в жаркі дні, а також на них проживає безліч тварин. Ми не можемо допустити, щоб цей острів перетворивсь на пустелю."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:170
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "Лютиус, я прошу тебе: найди когось хто б зайнявся вирощуванням нових дерев."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Thinking About the Future"
@@ -321,7 +323,7 @@ msgstr ""
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful hard stones and beautiful marble."
-msgstr ""
+msgstr "Пане, Я тут подумав про скелі, на південному березі цього острова. Може нам варто розбити невелику кількість валунів та декоративного мармуру."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:180
 msgid ""
@@ -342,7 +344,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with stones and beautiful "
 "marble."
-msgstr ""
+msgstr "Пане, сьогодні ми трошки ближче до нашого нового замку. Каменоломня вже працює і скоро забезпечить нас будівельним каменем та мармуром."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:190
 msgid "Now we truly can look forward to settling down on another island."
@@ -371,7 +373,7 @@ msgstr "Чи побачу я колись Фремил?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Victory"
-msgstr ""
+msgstr "Перемога"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:203
 msgid ""

@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 16:23+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Sinhala (http://www.transifex.com/projects/p/widelands/language/si/)\n"
+"Language-Team: Sinhala (http://www.transifex.com/widelands/widelands/language/si/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -627,7 +628,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Destroyed Building"
-msgstr ""
+msgstr "විනාශ කල ගොඩනෑගිල්ල"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Coal (little)"

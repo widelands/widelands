@@ -7,14 +7,15 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Venatrix, 2015
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 15:14+0000\n"
+"Last-Translator: wl-zocker\n"
+"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -205,13 +206,13 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Aber bis zu diesem Tag können viele Jahre vergehen! Für jetzt müssen mir uns auf die Gegenwart konzentrieren und einige Holzfällerhäuser und ein Sägewerk errichten, um einige grundlegende Baumaterialien herzustellen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Aber wir müssen uns diese Gabe der Natur bewahren. Wenn diese Wälder noch lange erhalten bleiben sollen, müssen wir auch ein Forsthaus bauen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -303,7 +304,7 @@ msgstr "Es wäre eine gute Quelle, um die Zufuhr an gutem Marmor zu stützen, na
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Bitte expandiere zu diesem Berg und beginne mit dem Marmorabbau."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
@@ -311,7 +312,7 @@ msgstr "Weitere Berge"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Saledus ist aufgeregt"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
@@ -320,14 +321,14 @@ msgid ""
 "of iron ore. I advise you to immediately build iron ore and coal mines (or "
 "at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Bei den Göttern, das ist ein unglaublicher Glückstreffer! Dort sind zwei weitere Berge, und es scheint, einer enthielte eine große Menge an Kohle und der andere an Eisenerz. Ich rate euch, sofort damit anfangen, Eisenerzminen und Kohleminen (oder zumindest Köhlereien), Hochöfen, Werkzeugmacher sowie Waffen- und Rüstungsschmieden zu bauen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a stonemason, who will cut columns "
 "from marble."
-msgstr ""
+msgstr "Wie auch immer: Für all diese größeren Gebäude benötigen wir bessere Baumaterialien. Du musst also einen Steinmetz bauen, der Marmorsäulen herstellen kann."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -343,7 +344,7 @@ msgstr "Amalea tritt ein …"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutius, denkst du nicht, dass du etwas Wichtiges vergessen hast?"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -371,7 +372,7 @@ msgstr "Amalea lächelt"
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Gerade besuchte ich unsere neue Taverne „Zu den Palmen“. Das Bier, das sie servieren, ist wunderbar. Du solltest wirklich auch einmal hingehen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -403,7 +404,7 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Zuerst war ich naiv und hoffte, sie seien friedlich, aber sobald sie mich entdeckten, griffen sie mich an und warfen ihre Speere nach mir. Ich danke den Göttern, das ich fliehen, mich verstecken und im Schutze der Dunkelheit zu unserer Kolonie zurückkehren konnte."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""

@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 17:13+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +24,7 @@ msgstr "Casam militarem aedifica."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Casa militaris"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -33,11 +34,11 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Casam lignatoris aedifica"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
@@ -65,7 +66,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa saltuarii"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
@@ -78,7 +79,7 @@ msgstr "Lapidicinas aedifica"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr ""
+msgstr "Lapidicina"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
@@ -91,7 +92,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:78
 msgid "A Dark Night"
-msgstr ""
+msgstr "Nox obscura"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:79
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:95
@@ -144,7 +145,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:94
 msgid "The Rough Sea"
-msgstr ""
+msgstr "Salum asperum"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:96
 msgid ""
@@ -166,21 +167,21 @@ msgstr "Superstites"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Tandem dei pro nobis erant!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:108
 msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "Ignoto litore navem appulso sub palmis ibi stantibus bene resquiescebamus. Sed hoc est solum bonum. Dicam veritatem: Hodie surgens circa nobis nihl quam saburram vidi."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:110
 msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "Nullae palmae praeter eas, apud quas appuleremus, in hac arensentia esse videntur. Metuo, ne adiuvantes ad naves reficiendas non inveniamus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:116
 msgid "A Foreboding"
@@ -243,20 +244,20 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Salve Luti! Recente Saledum foris vidi."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "He told me about the barracks. Well, I don’t think we need more barracks – "
 "instead, we might concentrate on other things now."
-msgstr ""
+msgstr "De militaris casis mi renuntiavit. Non sum una ex feminis, quae nos plus casas militaris egere putant, immo vero de aliis rebus cogitandum est!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "Est apertissimum nos lignum egere, ut naves reficere possumus. Ergo heri per silvas ambulans locum casae lignatoris idoneum inveni. Quae est meridiana principiorum."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea recommends…"
@@ -268,7 +269,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he cleans enough space for "
 "constructing two more lumberjack’s houses, so that we can harvest the logs "
 "faster."
-msgstr ""
+msgstr "Nuntiatum est primum lignatorem hodie laborem incepisse. Forsan bonum si expectemus, dum locus ad aedificia facienda liberatur. Tum duas lignatoris casas aedificemus, ut lignum citius habeamus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 msgid ""
@@ -279,7 +280,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:161
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea intrat..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "I’ve got two important things to talk about… First the good news:"
@@ -289,7 +290,7 @@ msgstr ""
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr ""
+msgstr "Sed male ligna trabalia ad naves restituendas non uti possumus! Omnes naves et maiora aedificia ligna tabularia indigent. Aedificemus serrarum domum, cum primum campus satis magnus sit."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:166
 msgid ""
@@ -310,7 +311,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "De futuris cogere"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Saledus notes…"
@@ -330,7 +331,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:186
 msgid "A Step Forward"
-msgstr ""
+msgstr "Progressus"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:187
 msgid "Saledus looks excited…"
@@ -341,11 +342,11 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with stones and beautiful "
 "marble."
-msgstr ""
+msgstr "Salve, Luti! Hodie ad primum castellum admovimus. Labore in lapicidinis meridianis hodie incepto saxa et marmorem pulchrum mox habemus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:190
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "Nunc vere insulam aliam colendam expectemus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:195
 msgid "Mission Complete"
@@ -370,7 +371,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Victory"
-msgstr ""
+msgstr "Victoria"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:203
 msgid ""
@@ -390,7 +391,7 @@ msgstr "Saledus dicit:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "Hanc peninsulam tutissimam fecisti. Nunc progredaris!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

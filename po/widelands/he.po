@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# GunChleoc, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-06-10 07:08+0000\n"
+"POT-Creation-Date: 2015-08-01 06:39+0100\n"
+"PO-Revision-Date: 2015-08-01 14:30+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Hebrew (http://www.transifex.com/projects/p/widelands/language/he/)\n"
+"Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,17 +24,17 @@ msgid "None"
 msgstr "ללא"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:116
+#: ../../src/ai/defaultai.h:126
 msgid "Aggressive"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:127
+#: ../../src/ai/defaultai.h:137
 msgid "Normal"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:138
+#: ../../src/ai/defaultai.h:148
 msgid "Defensive"
 msgstr ""
 
@@ -233,7 +234,7 @@ msgid "Creating players"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:210
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
 msgstr ""
 
@@ -245,7 +246,7 @@ msgstr ""
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:591
+#: ../../src/editor/editorinteractive.cc:602
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
@@ -253,7 +254,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:592
+#: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:191
@@ -493,7 +494,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name:"
-msgstr ""
+msgstr "שם:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:79
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
@@ -505,7 +506,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size:"
-msgstr ""
+msgstr "גודל:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
@@ -538,14 +539,14 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:301
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr ""
@@ -678,35 +679,35 @@ msgstr ""
 msgid "Make Directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:210
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 #, c-format
 msgid "Directory: %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:260
 msgid "Not a map file"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -826,7 +827,7 @@ msgstr ""
 msgid "Terrain Select"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:76
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:81
 #, c-format
 msgid "Current Size: %u"
 msgstr ""
@@ -841,7 +842,7 @@ msgstr "שלי"
 
 #: ../../src/logic/building.cc:531
 msgid "small"
-msgstr ""
+msgstr "קטן"
 
 #: ../../src/logic/building.cc:532
 msgid "big"
@@ -849,7 +850,7 @@ msgstr ""
 
 #: ../../src/logic/building.cc:532
 msgid "medium"
-msgstr ""
+msgstr "בינוני"
 
 #: ../../src/logic/building.cc:535
 msgid "Mine"
@@ -2774,7 +2775,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
@@ -3161,24 +3162,23 @@ msgstr ""
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
-#. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:138 ../../src/wui/attack_box.cc:167
+#: ../../src/wui/attack_box.cc:127 ../../src/wui/attack_box.cc:150
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:152
+#: ../../src/wui/attack_box.cc:139
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:160
+#: ../../src/wui/attack_box.cc:143
 msgid "Send less soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:180
+#: ../../src/wui/attack_box.cc:165
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:188
+#: ../../src/wui/attack_box.cc:171
 msgid "Send more soldiers"
 msgstr ""
 
@@ -3240,9 +3240,9 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
-#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:692
 #: ../../src/wui/building_statistics_menu.cc:716
 #: ../../src/wui/building_statistics_menu.cc:718

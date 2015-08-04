@@ -2,15 +2,17 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-25 08:01+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 18:08+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/widelands/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,27 +21,27 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Da Nemésis ao Génesis"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Depois de amararem numa ilha misteriosa perto da Atlântida, o que resta do povo Atlântica luta para tornar o novo lugar a sua nova casa."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Um lugar ao qual chamar de Lar"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "Neste cenário serão apresentados os edifícios com maiores níveis de produção, incluindo as minas."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Esta é a nossa terra"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -53,11 +55,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fácil. Introduz os Bárbaros"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -74,7 +76,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Quando Chat'Karuth morreu, era já um homem muito velho, pai de três fortes e ambiciosos filhos e senhor de um exercito que podia confrontar qualquer inimigo disposto a marchar contra as florestas antigas. No final do seu glorioso reinado, Chat'Karuth escolheu o seu  filho mais velho Thron para o suceder no trono como soberano da tribo, decisão que deixou os dois irmãos insatisfeitos. Por saber que isso iria acontecer, o antigo soberano deixou instruções para que o novo Rei Thron deixasse a capital Al'thuran, onde estava o Trono-entre-as-árvores, e recuasse com as suas forças para as montanhas. Nelas enterrou o corpo do seu pai e sobre a sua campa jurou aos Deuses que voltaria para restabelecer a ordem. Enquanto os seus irmãos continuaram a guerra cega contra Thron e as pequenas forças que deixara a defender as fronteiras de Al'thuran, o jovem guerreiro procurou reunir os seus ambiciosos irmãos e forçá-los às suas tribos a de novo voltarem a marchar unidos sobre a mesma bandeira."
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -82,11 +84,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Império"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fácil. Introduz o Império"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -100,7 +102,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Seis meses atrás, Lutius - um jovem general do Império - fora enviado com 150 soltados para a fronteira que fica para além das florestas do Norte, onde tribos bárbaras e as terras do Império se cruzam. O sua tarefa era a de defender o território do Império. Primeiro, tudo estava calmo, e até brincou com as crianças bárbaras que os visitavam. Já sonhava com uma vida tranquila lado a lado com esta gente arcaica. Ele e o seu exército começaram a sentir-se seguro demais e a menosprezar o potencial inimigo. Isto fora a sua perdição. Numa noite em Março, o seu exército foi apanhado desprevenido por 100 guerreiros bárbaros que os atacaram e os obrigaram a dispersar. Só ele e uma mão cheia dos seus soldados sobreviveram e por pouco!"
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -108,11 +110,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlânticas"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiador. Introduz os Atlântas."
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -121,15 +123,15 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Quando o Deus perdeu a fé nos Atlânticas e submergiu-lhes a ilha, uma valente mulher que lutava pela justiça e por uma segunda oportunidade para o seu povo, tornou-se numa lenda. Liderando o que restava do povo da Atlântida em direcção a um novo futuro numa nova terra, Jundlina tornou-se a mais poderosa humana do seu tempo. Mas pagou um alto preço: entregou a sua humanidade e a sua alma."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "As Praias de Malac' Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Um Posto Avançado para o Exílio"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
@@ -138,11 +140,11 @@ msgstr "Ainda não implementado"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Ninguém"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Desculpe, este mapa ainda não existe."
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -151,7 +153,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Depois de perder uma importante batalha contra os Bárbaros que resultou na perda de grande parte do território do Império, Lutius deixou Fremil para começar uma nova vida. Mas o destino quis que o seu navio entrasse numa forte tempestade que quase o destruiu. Só com muita sorte consegue encalhar já o muito danificado navio uma praia deserta e salvar a sua gente. Por ora!"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -487,7 +489,7 @@ msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "As tuas lucrativas rotas de contrabando subitamente são interrompidas: Duas outras tribos começaram a rivalizar com as tuas. Qual equipa poderá contrabandear primeiro um certo número de mercadorias?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -632,7 +634,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Outra campanha começa. Três tribos refugiaram-se do inverno severo nas majestosas montanhas. Durante o solstício consultaram o Oráculo e partiram para a guerra. O único sobrevivente sacrificará os tesouros dos seus inimigos no antigo altar, construirá ali um magnifico castelo para assim ganhar o favor e o respeito dos Deuses."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"

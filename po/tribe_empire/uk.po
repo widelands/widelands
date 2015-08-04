@@ -2,16 +2,18 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 15:55+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/widelands/language/uk/)\n"
+"Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -749,7 +751,7 @@ msgstr "Стиглий виноград"
 
 #: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Будівельний майданчик"
 
 #: ../../tribes/empire/conf:61
 msgid "Advanced Lance"
@@ -761,7 +763,7 @@ msgstr "Збруя"
 
 #: ../../tribes/empire/conf:63
 msgid "Ax"
-msgstr ""
+msgstr "Сокира"
 
 #: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
@@ -813,7 +815,7 @@ msgstr "Золото"
 
 #: ../../tribes/empire/conf:76
 msgid "Gold Ore"
-msgstr ""
+msgstr "Золота руда"
 
 #: ../../tribes/empire/conf:77
 msgid "Grape"
@@ -1361,11 +1363,11 @@ msgstr ""
 
 #: ../../tribes/empire/farm/conf:25
 msgid "planting wheat"
-msgstr ""
+msgstr "сіяти пшеницю"
 
 #: ../../tribes/empire/farm/conf:27
 msgid "harvesting wheat"
-msgstr ""
+msgstr "збирає пшеницю"
 
 #: ../../tribes/empire/farm/conf:46 ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"

@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 09:58+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Galician (http://www.transifex.com/projects/p/widelands/language/gl/)\n"
+"Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -90,7 +91,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~14 points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains 7 damage points."
-msgstr ""
+msgstr "A cantidade de dano que inflixe un soldado cada vez que lle acada a un inimigo. Os soldados bárbaros de nivel cero en ataque inflixen ao redor de 14 puntos de dano ao atinarlle a un inimigo. Este dano aumenta en 7 por cada nivel de ataque adicional."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Defense:"
@@ -114,12 +115,12 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a 25% chance to evade an attack, and this increases in steps "
 "of 15% for each level."
-msgstr ""
+msgstr "Os soldados teñen unha certa probabilidade de esquivar os ataques. No nivel cero é do 25% para os bárbaros, e aumenta un 15% por cada nivel."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Arena de batalla"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Now I have talked about training and levels. Let me elaborate on that."
@@ -405,11 +406,11 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Mellora a fortaleza"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "Mellorar edificios"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid ""
@@ -429,7 +430,7 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "As cidadelas non se poden construír directamente. Hai que construír unha fortaleza primeiro e logo convertela nunha cidadela. Para iso, preme na fortaleza e logo no botón para convertela nunha cidadela."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid ""
@@ -448,7 +449,7 @@ msgstr "Converte a fortaleza nunha cidadela"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "Converte a túa fortaleza nunha resistente cidadela."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid ""
@@ -456,7 +457,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
+msgstr "Unha cidadela pode albergar unha ducia de soldados e trátase da instalación militar máis grande dos bárbaros. Os seus custos son elevados, e construíla leva un tempo ademais. Cómpre construíla en zonas de especial importancia estratexia como puntos estreitos ou montañas."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid "Defeat your Enemy"
@@ -464,7 +465,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Derrota o inimigo"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid ""
@@ -480,20 +481,20 @@ msgstr ""
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "Para atacar un edificio, preme nas portas, escolle a cantidade de soldados para atacalo, e logo preme no botón de atacar para envialos."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Os teus soldados sairán das instalacións militares das proximidades. Do mesmo xeito, das instalacións militares inimigas dos arredores sairán defensores que se enfrontarán ás túas forzas."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "Ataca e conquista todas as instalacións militares do inimigo e destrúe os seus cuarteis."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
 msgid "Defeat the enemy tribe"
@@ -536,10 +537,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "«%s»"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Novo obxectivo"
+msgstr[1] "Novos obxectivos"

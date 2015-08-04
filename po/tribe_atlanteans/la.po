@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-01 17:30+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -278,7 +279,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Loricas militium facit."
 
 #: ../../tribes/atlanteans/armorsmithy/conf:29
 msgid "forging a steel shield"
@@ -454,11 +455,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "planting blackroot"
-msgstr ""
+msgstr "radices nigras serit"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:25
 msgid "harvesting blackroot"
-msgstr ""
+msgstr "radices nigras metit"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:43
 #: ../../tribes/atlanteans/farm/conf:47
@@ -500,7 +501,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr ""
+msgstr "Situlae magnae ad pisces alendos a fabre fabricatur."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -587,23 +588,23 @@ msgstr "Cinis"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field"
-msgstr ""
+msgstr "Ager nigrarum radicium"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Ager nigrarum radicium messus"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Ager nigrarum radicium mediocris"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Ager nigrarum radicium parvus"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Ager nigrarum radicium parvulus"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield"
@@ -611,67 +612,67 @@ msgstr "Ager maizi"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Ager maizi messus"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Ager maizi mediocris"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Ager maizi parvus"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Ager maizi parvulus"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Aedificium destructum"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Est indicatum hic carbonem paucum situm"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Est indicatum hic carbonem multum situm"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Est indicatum hic aurum paucum situm"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Est indicatum hic granitum multum situm"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Est indicatum hic ferrum paucum situm"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Est indicatum hic ferrum multum situm"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Est indicatum hic nihil situm"
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Est indicatum hic aqua sita"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Locus navium construendarum"
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Advanced Shield"
@@ -771,7 +772,7 @@ msgstr "Ferrum"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Light Trident"
-msgstr ""
+msgstr "Tridens levis"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Long Trident"
@@ -811,11 +812,11 @@ msgstr "Rutila"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Piscis fumosus"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Smoked Meat"
-msgstr ""
+msgstr "Caro fumosus"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Spidercloth"
@@ -863,7 +864,7 @@ msgstr "Miles"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Armorsmith"
-msgstr ""
+msgstr "Loricarum faber"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Baker"
@@ -871,7 +872,7 @@ msgstr "Pistor"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Blackroot Farmer"
-msgstr ""
+msgstr "Agricola nigrarum radicium"
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Builder"
@@ -1032,11 +1033,11 @@ msgstr "Lapidicina"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa saltuarii"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Gold Spinning Mill"
@@ -1044,15 +1045,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Casa pistoria"
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Fish Breeder’s House"
-msgstr ""
+msgstr "Casa operarii qui pisces alit"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Casa venatoris"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Well"
@@ -1060,7 +1061,7 @@ msgstr "Fons"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa exploratoris"
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Sawmill"
@@ -1100,7 +1101,7 @@ msgstr "Fabrica armorum"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Fabrica loricarum"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Horse Farm"
@@ -1108,11 +1109,11 @@ msgstr "Equile"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Spider Farm"
-msgstr ""
+msgstr "Fundus araneus"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Textrinum"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Farm"
@@ -1240,7 +1241,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/help.lua:28
 msgid "Attack Training:"
-msgstr ""
+msgstr "Exercitio impetus:"
 
 #: ../../tribes/atlanteans/farm/conf:26
 msgid "planting corn"
@@ -1248,7 +1249,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farm/conf:28
 msgid "harvesting corn"
-msgstr ""
+msgstr "maizum metit"
 
 #: ../../tribes/atlanteans/farm/conf:48
 msgid ""
@@ -1572,7 +1573,7 @@ msgstr ""
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr ""
+msgstr "Forceps lacteus ad araneas lactandas necesse est. Qui fabricatur in fabrica."
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "grinding corn"
@@ -1641,12 +1642,12 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Lignum ad tabularia ligna facienda serrat."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Exploratores, sicut Explorus explorans explorator, regiones inexploratas exploraverunt modo explorante."
 
 #: ../../tribes/atlanteans/scouts_house/conf:21
 msgid "scouting"
@@ -1682,7 +1683,7 @@ msgstr "In navale laborat ad construendas novas naves."
 
 #: ../../tribes/atlanteans/shipyard/conf:29
 msgid "constructing a ship"
-msgstr ""
+msgstr "navem faciens"
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
@@ -1784,7 +1785,7 @@ msgstr ""
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr ""
+msgstr "Tunica et tridens levis sunt elementaria ferramenta iuvenium militum. Tunicae in textrinum fiunt."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."

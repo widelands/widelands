@@ -2,15 +2,18 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
+# GunChleoc, 2015
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"PO-Revision-Date: 2015-08-03 19:22+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/widelands/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +28,7 @@ msgstr ""
 #: ../../global/militarysites/barracks.empire/conf:9
 #: ../../tribes/empire/barracks/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "O teu quartel está sob ataque."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 #: ../../tribes/empire/barracks/conf:10
@@ -47,7 +50,7 @@ msgstr ""
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/empire/barrier/conf:9
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "O teu quartel está sob ataque."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
@@ -71,7 +74,7 @@ msgstr ""
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/empire/castle/conf:10
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "O teu castelo está sob ataque."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
@@ -91,7 +94,7 @@ msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "A tua Cidadela está sob ataque."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the citadel."
@@ -107,7 +110,7 @@ msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "A tua Torre de Menagem está sob ataque."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the donjon."
@@ -127,7 +130,7 @@ msgstr ""
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/empire/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "A tua Fortaleza está sob ataque."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
@@ -147,7 +150,7 @@ msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "O teu Posto da Guarda está sob ataque."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
@@ -163,7 +166,7 @@ msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "A tua Casa da Guarda está sob ataque."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
@@ -179,7 +182,7 @@ msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "A tua Torre Alta está sob ataque."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
@@ -197,7 +200,7 @@ msgstr ""
 #: ../../global/militarysites/outpost.empire/conf:9
 #: ../../tribes/empire/outpost/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "O teu Posto Avançado está sob ataque."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 #: ../../tribes/empire/outpost/conf:10
@@ -219,7 +222,7 @@ msgstr ""
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/empire/sentry/conf:9
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "A tua Sentinela está sob ataque."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
@@ -239,7 +242,7 @@ msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "O teu Torreão está sob ataque."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
@@ -259,7 +262,7 @@ msgstr ""
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/empire/tower/conf:9
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "A tua Torre está sob ataque."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
@@ -283,7 +286,7 @@ msgstr "Esta é uma lança avançada, com uma ponta de aço. É produzida pelo f
 #: ../../tribes/empire/arena/conf:30 ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "a dormir"
 
 #: ../../tribes/empire/arena/conf:32 ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
@@ -382,7 +385,7 @@ msgstr ""
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
-msgstr ""
+msgstr "Treino de Evasão:"
 
 #: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
@@ -429,7 +432,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
+msgstr "Armadura básica para os soldados do Império. É produzida no ferreiro de armaduras e usada no campo de treino - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 1 para o nível 2."
 
 #: ../../tribes/empire/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -571,7 +574,7 @@ msgstr "Os padeiros do Império produzem deliciosos pães com farinha e água. O
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "A pá do pão é a ferramenta do padeiro, cada padeiro precisa da sua própria. É produzido pelo ferreiro de ferramentas."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -583,7 +586,7 @@ msgstr ""
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Trabalha nas obras de construção para construir as novas construções."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
@@ -602,7 +605,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr ""
+msgstr "A armadura de corrente é uma armadura média dos soldados do Império. É produzido num ferreiro de armas e usada no campo de treino - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 2 para o nível 3."
 
 #: ../../tribes/empire/charcoal_burner/conf:1
 msgid "Burns coal."
@@ -619,7 +622,7 @@ msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal kiln out of logs."
-msgstr ""
+msgstr "As fogueiras das fundições Imperiais, ferreiros de armaduras e de armas são usualmente alimentadas com carvão, que é escavado das minas de carvão ou produzido ao queimar troncos de árvores nas carvoarias."
 
 #: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
@@ -740,7 +743,7 @@ msgstr "Vinha pequena"
 
 #: ../../tribes/empire/conf:56
 msgid "Vine (tiny)"
-msgstr ""
+msgstr "Vinha pequena"
 
 #: ../../tribes/empire/conf:57
 msgid "Vine (ripe)"
@@ -760,7 +763,7 @@ msgstr "Armadura"
 
 #: ../../tribes/empire/conf:63
 msgid "Ax"
-msgstr ""
+msgstr "Machado"
 
 #: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
@@ -956,7 +959,7 @@ msgstr "Construtor"
 
 #: ../../tribes/empire/conf:118
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carvoeiro"
 
 #: ../../tribes/empire/conf:119
 msgid "Carpenter"
@@ -1068,7 +1071,7 @@ msgstr "Castelo"
 
 #: ../../tribes/empire/conf:154
 msgid "Guardhall"
-msgstr "Guarda"
+msgstr "Posto da guarda"
 
 #: ../../tribes/empire/conf:155
 msgid "Guardhouse"
@@ -1076,11 +1079,11 @@ msgstr "Casa da Guarda"
 
 #: ../../tribes/empire/conf:156
 msgid "High Tower"
-msgstr "Torre elevada"
+msgstr "Torre Alta"
 
 #: ../../tribes/empire/conf:157
 msgid "Small Tower"
-msgstr "Torre de vigia"
+msgstr "Torreão"
 
 #: ../../tribes/empire/conf:158 ../../tribes/empire/conf:214
 msgid "Tower"
@@ -1269,7 +1272,7 @@ msgstr "Quartel"
 
 #: ../../tribes/empire/conf:213
 msgid "Outpost"
-msgstr "Posto de vigia"
+msgstr "Posto Avançado"
 
 #: ../../tribes/empire/conf:220
 msgid "Colosseum"
@@ -1377,7 +1380,7 @@ msgstr ""
 
 #: ../../tribes/empire/farm/help.lua:17
 msgid "Sow and harvest wheat."
-msgstr ""
+msgstr "Semeia e colhe trigo."
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
@@ -1486,7 +1489,7 @@ msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr ""
+msgstr "O martelo é uma ferramenta essencial. É necessária para o geólogo, construtor e para os ferreiros de armas e armaduras. Garanta que sempre haja alguns de reserva! É produzido pelo ferreiro."
 
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
@@ -1519,7 +1522,7 @@ msgid ""
 "smithy. In combination with a wood lance, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "O elmo é a defesa básica de um guerreiro. É produzida no ferreiro de armaduras. Junto com a lança de madeira é um equipamento para os jovens soldados. Elmos são usados em campos de treinos - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 0 para o nível 1."
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1595,7 +1598,7 @@ msgid ""
 "Logs are an important building material for the Empire. The lumberjacks fell"
 " the trees; foresters care for the supply of trees. Logs are also used by "
 "the charcoal kiln, the toolsmithy and the sawmill."
-msgstr ""
+msgstr "Troncos de árvore são um material de construção importante no Império. Os lenhadores cortam as árvores e os florestais fazem a reposição. Os troncos são utilizadas na carvoaria, ferraria e serraria."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -1708,7 +1711,7 @@ msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
+msgstr "A armadura de placas é a mais forte entre as armaduras existentes no Império. É produzida no ferreiro de armaduras e usada no campo de treinos - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 3 para o nível 4."
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
@@ -1768,7 +1771,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Alguns dos teus edifícios iniciais não foram construídos por não haver espaço suficiente para os construir, por isso estás em desvantagem. Re-iniciar o mapa para poderes começar em melhores condições."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid "The Scythe is the tool of the farmer. It is produced by the toolsmith."
@@ -1932,7 +1935,7 @@ msgstr ""
 
 #: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Treino de ataque:"
 
 #: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"

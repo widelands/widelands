@@ -180,7 +180,8 @@ void GameSummaryScreen::fill_data()
 				 stat_str = _("Resigned");
 				 break;
 			default:
-				/** TRANSLATORS: This is shown in the game summary when we don't know if the player has lost or won. */
+				/** TRANSLATORS: This is shown in the game summary when we don't know */
+				/** TRANSLATORS: if the player has lost or won. */
 				stat_str = _("Unknown");
 		}
 		te.set_string(2, stat_str);

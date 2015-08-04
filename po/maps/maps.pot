@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -629,11 +629,6 @@ msgstr ""
 #: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
-msgstr ""
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
