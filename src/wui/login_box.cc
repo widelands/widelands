@@ -65,13 +65,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		 200, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Login"));
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_login, boost::ref(*this)));
+	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_cancel, boost::ref(*this)));
+	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
@@ -81,7 +81,7 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 
 
 /// called, if "login" is pressed
-void LoginBox::pressed_login()
+void LoginBox::clicked_ok()
 {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {
@@ -106,12 +106,11 @@ void LoginBox::pressed_login()
 		mb.run();
 		return;
 	}
-	end_modal(1);
+	end_modal(UI::Panel::ok_code);
 }
 
 
 /// Called if "cancel" was pressed
-void LoginBox::pressed_cancel()
-{
-	end_modal(0);
+void LoginBox::clicked_back() {
+	end_modal(UI::Panel::dying_code);
 }

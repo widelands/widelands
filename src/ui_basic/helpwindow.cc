@@ -84,7 +84,7 @@ HelpWindow::HelpWindow
 		 in_width / 3, but_height,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
-	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
+	btn->sigclicked.connect(boost::bind(&HelpWindow::clicked_ok, boost::ref(*this)));
 	btn->set_font(Font::get((UI::g_fh1->fontset()).serif(),
 									(fontsize < 12 ? 12 : fontsize)));
 
@@ -157,7 +157,7 @@ bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		pressed_ok();
+		clicked_ok();
 	}
 	return true;
 }
@@ -167,10 +167,10 @@ bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 	return true;
 }
 
-void HelpWindow::pressed_ok()
+void HelpWindow::clicked_ok()
 {
 	if (is_modal())
-		end_modal(0);
+		end_modal(UI::Panel::dying_code);
 	else {
 		// do not call die() here - could lead to broken pointers.
 		// the window should get deleted with the parent anyways.

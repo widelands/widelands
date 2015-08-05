@@ -679,7 +679,7 @@ bool Panel::handle_tooltip()
  * Default is enabled. Note that when mouse handling is disabled, child panels
  * don't receive mouse events either.
  *
- * \param yes rue if the panel should receive mouse events
+ * \param yes true if the panel should receive mouse events
  */
 void Panel::set_handle_mouse(bool const yes)
 {

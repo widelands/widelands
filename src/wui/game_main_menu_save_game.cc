@@ -266,14 +266,14 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	}
 
 
-	void pressed_yes() override
+	void clicked_ok() override
 	{
 		g_fs->fs_unlink(m_filename);
 		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
-	void pressed_no() override
+	void clicked_back() override
 	{
 		die();
 	}
@@ -325,14 +325,14 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 		m_filename(filename)
 	{}
 
-	void pressed_yes() override
+	void clicked_ok() override
 	{
 		g_fs->fs_unlink(m_filename);
 		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_list();
 		die();
 	}
 
-	void pressed_no() override
+	void clicked_back() override
 	{
 		die();
 	}

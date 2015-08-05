@@ -67,7 +67,7 @@ struct HelpWindow : public Window {
 	void add_picture_li(std::string text, std::string picpath);
 
 protected:
-	virtual void pressed_ok();
+	void clicked_ok();
 
 private:
 	enum State {
