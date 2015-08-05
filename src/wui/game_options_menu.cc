@@ -39,7 +39,7 @@ public:
 								 /** TRANSLATORS: Window label when "Exit game" has been pressed */
 								 _("Exit Game Confirmation"),
 								 _("Are you sure you wish to exit this game?"),
-								 YESNO),
+								 MBoxType::kOkCancel),
 		  m_gb(gb) {
 	}
 

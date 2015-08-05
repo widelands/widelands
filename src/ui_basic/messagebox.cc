@@ -83,14 +83,14 @@ WLMessageBox::WLMessageBox
 
 	d->textarea->set_size(width - 10, height - 50);
 
-	if (type == OK) {
+	if (type == MBoxType::kOk) {
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
-	} else if (type == YESNO) {
+	} else if (type == MBoxType::kOkCancel) {
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
@@ -105,6 +105,7 @@ WLMessageBox::WLMessageBox
 			 _("Cancel"));
 		cancelbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}
+	focus();
 }
 
 WLMessageBox::~WLMessageBox()
@@ -121,10 +122,11 @@ bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		if (d->type == OK)
+		if (d->type == MBoxType::kOk) {
 			clicked_ok();
-		else
+		} else {
 			clicked_back();
+		}
 	}
 	return true;
 }

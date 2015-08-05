@@ -256,7 +256,7 @@ void EditorInteractive::exit() {
 			(this,
 			 _("Unsaved Map"),
 			 _("The map has not been saved, do you really want to quit?"),
-			 UI::WLMessageBox::YESNO);
+			 UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run() == UI::Panel::dying_code)
 				return;
 		}

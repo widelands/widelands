@@ -89,6 +89,7 @@ HelpWindow::HelpWindow
 									(fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
+	focus();
 }
 
 
@@ -166,6 +167,22 @@ bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return true;
 }
+
+bool HelpWindow::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			default:
+				return true; // handled
+		}
+	}
+	return true;
+}
+
 
 void HelpWindow::clicked_ok()
 {

@@ -282,7 +282,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 	}
 
 	UI::WLMessageBox confirmationBox
-		(this, _("Confirm deleting file"), message, UI::WLMessageBox::YESNO);
+		(this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
 	if (confirmationBox.run()) {
 		g_fs->fs_unlink(gamedata.filename);
 		if (m_is_replay) {

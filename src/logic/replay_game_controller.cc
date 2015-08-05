@@ -109,7 +109,7 @@ void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
 		 _("The end of the replay has been reached and the game has "
 			"been paused. You may unpause the game and continue watching "
 			"if you want to."),
-		 UI::WLMessageBox::OK);
+		 UI::WLMessageBox::MBoxType::kOk);
 	mmb.run();
 }
 

@@ -1102,7 +1102,7 @@ void NetClient::disconnect
 			(d->modal,
 			 _("Disconnected from Host"),
 			 msg,
-			 UI::WLMessageBox::OK);
+			 UI::WLMessageBox::MBoxType::kOk);
 		mmb.run();
 	}
 

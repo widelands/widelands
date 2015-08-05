@@ -1049,7 +1049,7 @@ void WLApplication::mainmenu()
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::WLMessageBox::OK,
+				 UI::WLMessageBox::MBoxType::kOk,
 				 UI::Align_Left);
 			mmb.run();
 

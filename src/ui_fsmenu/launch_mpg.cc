@@ -408,7 +408,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 					"true or manually unzipped the saved game.\n"
 					"Widelands is not able to transfer directory structures to the clients,"
 					" please select another saved game or zip the directories’ content."),
-				UI::WLMessageBox::OK);
+				UI::WLMessageBox::MBoxType::kOk);
 			warning.run();
 		}
 	} else {

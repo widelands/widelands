@@ -242,7 +242,7 @@ static void dosave
 			 "Reason given:\n");
 		s += error;
 		UI::WLMessageBox mbox
-			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::OK);
+			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run();
 	}
 	game.save_handler().set_current_filename(complete_filename);
@@ -257,7 +257,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 			 _("Save Game Error!"),
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
 				% FileSystem::fs_filename(filename.c_str())).str(),
-			 YESNO),
+			 MBoxType::kOkCancel),
 		m_filename(filename)
 	{}
 
@@ -321,7 +321,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 			 str
 				 (boost::format(_("Do you really want to delete the file %s?")) %
 				  FileSystem::fs_filename(filename.c_str())),
-			 YESNO),
+			 MBoxType::kOkCancel),
 		m_filename(filename)
 	{}
 

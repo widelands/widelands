@@ -387,7 +387,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 						("Widelands was unable to get the IP address of the server in time.\n"
 						 "There seems to be a network problem, either on your side or on the side\n"
 						 "of the server.\n"));
-				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
+				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
 				mmb.run();
 				return InternetGaming::ref().set_error();
 			}
@@ -413,7 +413,7 @@ DIAG_ON("-Wold-style-cast")
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
+			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
 			mmb.run();
 		}
 		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);

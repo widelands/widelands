@@ -96,3 +96,18 @@ bool StoryMessageBox::handle_mousepress
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }
+
+bool StoryMessageBox::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
+}

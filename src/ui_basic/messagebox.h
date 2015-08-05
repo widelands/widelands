@@ -51,9 +51,9 @@ struct WLMessageBoxImpl;
  *       not work.
 */
 struct WLMessageBox : public Window {
-	enum MBoxType {
-		OK,
-		YESNO
+	enum class MBoxType {
+		kOk,
+		kOkCancel
 	};
 	WLMessageBox
 		(Panel * parent,
