@@ -584,7 +584,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		(this,
 		 m_hmargin + m_message_sound.get_w() + m_padding, m_message_sound.get_y(),
 		 get_w() - 2 * m_hmargin - m_message_sound.get_w() - m_padding, 40,
-		 _("Play a sound at message arrival."),
+		 _("Play a sound at message arrival"),
 		 UI::Align_VCenter),
 
 	m_nozip (this, Point(m_hmargin,
@@ -594,7 +594,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		(this,
 		 m_hmargin + m_nozip.get_w() + m_padding, m_nozip.get_y(),
 		 get_w() - 2 * m_hmargin - m_nozip.get_w() - m_padding, 40,
-		 _("Do not zip widelands data files (maps, replays and savegames)."),
+		 _("Do not zip widelands data files (maps, replays and savegames)"),
 		 UI::Align_VCenter),
 
 	m_remove_syncstreams (this, Point(m_hmargin,
