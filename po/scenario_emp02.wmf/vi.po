@@ -2,14 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-29 13:57+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/widelands/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -28,11 +30,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Dựng ba kho chứa gỗ, một trạm kiểm lâm và một xưởng cưa."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
-msgstr ""
+msgstr "Dựng một mỏ đá"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
@@ -40,7 +42,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Dựng một xưởng khai thác đá phía nam của tổng hành dinh chúng ta."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -87,7 +89,7 @@ msgstr "Cung cấp lương thực cho thợ mỏ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Thức ăn cho những người thợ mỏ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
@@ -136,7 +138,7 @@ msgstr "Để quan sát sâu vào trong lãnh thổ địch, hãy dựng một t
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Tiêu diệt bộ lạc mọi rợ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -146,14 +148,14 @@ msgstr "Tiêu diệt bộ lạc mọi rợ"
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Ngay khi có đủ quân lính, hãy tấn công và phá hủy hoàn toàn nhà của quân mọi rợ."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr ""
+msgstr "Cuối cùng, dựng một pháo đài trên bán đảo (gần chỗ tổng hành dinh của quân mọi rợ trước đó), để ngăn sự định cư của các bộ lạc khác trong vùng."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -169,7 +171,7 @@ msgstr "Một hòn đảo mới"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:229
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:247
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Nhật kí của Lutius"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
@@ -199,15 +201,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the"
+"But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests "
-"should last forever, so we really should build a forester’s house too."
+"But we mustn’t forget to preserve this natural bounty. These forests should "
+"last forever, so we really have to build a forester’s house too."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
@@ -257,11 +259,11 @@ msgstr "Saledus coi bộ không vui"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which"
-" gives me a sinking feeling in my stomach and spreads waves of fear in my "
-"heart. As I walked down to the southern shore, I found the remains of "
-"another ship. I don’t know whether these parts are all that is left of that "
-"ship. In any case, these parts do not seem to be old."
+"Sire, I don’t want to start a panic, but I found something which gives me a "
+"sinking feeling in my stomach and spreads waves of fear in my heart. As I "
+"walked down to the southern shore, I found the remains of another ship. I "
+"don’t know whether these parts are all that is left of that ship. In any "
+"case, these parts do not seem to be old."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
@@ -286,10 +288,9 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am"
-" right – but I believe we could mine marble from some places on the "
-"mountain."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger "
+"mountain. I am not absolutely sure – a geologist should check if I am right "
+"– but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -300,7 +301,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
-msgid "Let us expand to that mountain and start mining marble."
+msgid "Please, expand to that mountain and start mining marble."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
@@ -308,23 +309,23 @@ msgid "Further Mountains"
 msgstr "Những ngọn núi phía xa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
-msgid "Saledus is amazed"
-msgstr "Saledus ngạc nhiên"
+msgid "Saledus is excited"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
-" smithies."
+"of iron ore. I advise you to immediately build iron ore and coal mines (or "
+"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So, let’s build a stonemason, who will cut columns from "
-"marble."
+"building materials. So you have to build a stonemason, who will cut columns "
+"from marble."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
@@ -340,9 +341,7 @@ msgid "Amalea enters…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
-msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
-"forgot something."
+msgid "Lutius, don’t you think you forgot something important?"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
@@ -365,13 +364,13 @@ msgstr "Quán rượu mới của chúng ta"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea mỉm cười…"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
-" they serve is really tasty. You really should have a drink there, too."
-msgstr "Xin chào, người anh em, tôi vừa qua thăm quán rượu mới 'Cây cọ' của chúng ta. Bia ở đó ngon tuyệt. Anh cũng nên uống ở đó đi."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really "
+"tasty. You really should have a drink there, too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -401,7 +400,7 @@ msgstr ""
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that I was able to flee and hide "
+"throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
 msgstr ""
 
@@ -450,7 +449,7 @@ msgstr "Thời gian trôi đi,"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
-msgstr ""
+msgstr "7 ngày sau…"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"

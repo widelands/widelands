@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-27 09:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Marathi (http://www.transifex.com/projects/p/widelands/language/mr/)\n"
 "MIME-Version: 1.0\n"
@@ -1294,8 +1294,8 @@ msgstr ""
 #: ../../tribes/atlanteans/fishers_house/conf:28
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
-"working radius. Remember that you can increase the number of existing fish "
-"by building a fishbreeder’s house."
+"work area. Remember that you can increase the number of existing fish by "
+"building a fish breeder’s house."
 msgstr ""
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
@@ -1309,7 +1309,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
-msgid "The fisher’s house needs water full of fish within the working radius."
+msgid "The fisher’s house needs water full of fish within the work area."
 msgstr ""
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
@@ -1330,8 +1330,8 @@ msgstr ""
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the working radius to plant "
-"the trees."
+"The foresters’s house needs free space within the work area to plant the "
+"trees."
 msgstr ""
 
 #: ../../tribes/atlanteans/geologist/conf:1
@@ -1457,7 +1457,7 @@ msgstr ""
 #: ../../tribes/atlanteans/hunters_house/conf:29
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
-"working radius."
+"work area."
 msgstr ""
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
@@ -1465,7 +1465,7 @@ msgid "Hunts animals to produce meat."
 msgstr ""
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
-msgid "The hunter’s house needs animals to hunt within the working radius."
+msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr ""
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
@@ -1614,8 +1614,8 @@ msgstr ""
 
 #: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
-"The stonecutter working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonecutter working at this quarry can’t find any rocks in his work "
+"area."
 msgstr ""
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
@@ -1623,7 +1623,7 @@ msgid "Carves stones out of rocks in the vicinity."
 msgstr ""
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
+msgid "The quarry needs stones to cut within the work area."
 msgstr ""
 
 #: ../../tribes/atlanteans/quartz/conf:1
@@ -1897,7 +1897,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr ""
 
 #: ../../tribes/atlanteans/well/help.lua:18
@@ -1915,8 +1915,8 @@ msgstr ""
 #: ../../tribes/atlanteans/woodcutters_house/conf:29
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his working radius. You should consider dismantling or destroying the "
-"building or building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
 msgstr ""
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
@@ -1924,5 +1924,5 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr ""
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
-msgid "The woodcutter's house needs trees to fell within the working radius."
+msgid "The woodcutter's house needs trees to fell within the work area."
 msgstr ""

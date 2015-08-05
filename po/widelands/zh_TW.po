@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# GunChleoc, 2015
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-06-10 07:08+0000\n"
+"POT-Creation-Date: 2015-07-27 10:40+0100\n"
+"PO-Revision-Date: 2015-07-29 07:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/widelands/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +61,7 @@ msgstr ""
 #: ../../src/base/i18n.cc:339 ../../src/base/i18n.cc:349
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s、%2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -208,7 +210,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:167
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: ../../src/editor/editorinteractive.cc:104
 msgid "Undo"
@@ -278,17 +280,17 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid " small"
-msgstr ""
+msgstr " 小"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " medium"
-msgstr ""
+msgstr " 中"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " big"
-msgstr ""
+msgstr " 大"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
@@ -347,13 +349,13 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "地形:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #: ../../src/editor/tools/editor_info_tool.cc:147
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "名稱: %s"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:108
@@ -423,7 +425,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:146
 #: ../../src/ui_fsmenu/mapselect.cc:293
 msgid "Map:"
-msgstr ""
+msgstr "地圖:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:148
 #, c-format
@@ -437,12 +439,12 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:156
 msgid "Players: -"
-msgstr ""
+msgstr "玩家: -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:159
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "作者: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:160
 #, c-format
@@ -500,7 +502,7 @@ msgstr "名稱:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Authors:"
-msgstr ""
+msgstr "作者:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
@@ -512,7 +514,7 @@ msgstr "尺寸:"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 #: ../../src/ui_fsmenu/loadgame.cc:320
 msgid "Players:"
-msgstr ""
+msgstr "玩家:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
 msgid "Descr:"
@@ -539,14 +541,14 @@ msgstr "取消"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:240
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:294
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:301
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr ""
@@ -660,7 +662,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:433
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "玩家: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:332
 msgid "Generate Map"
@@ -679,35 +681,35 @@ msgstr ""
 msgid "Make Directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:203
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:210
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 #, c-format
 msgid "Directory: %s"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "directory"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:260
 msgid "Not a map file"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:373
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:396
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -739,7 +741,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "玩家 %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:327
 msgid "Error!"
@@ -834,11 +836,11 @@ msgstr ""
 
 #: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:847
 msgid "unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../../src/logic/building.cc:530
 msgid "mine"
-msgstr ""
+msgstr "公里"
 
 #: ../../src/logic/building.cc:531
 msgid "small"
@@ -924,7 +926,7 @@ msgstr ""
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
 #: ../../src/wlapplication.cc:1429
 msgid "Loading..."
-msgstr "正在載入..."
+msgstr "正在載入……"
 
 #: ../../src/logic/game.cc:471
 msgid "Creating player infrastructure"
@@ -1230,7 +1232,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:294
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "玩家 %u"
 
 #: ../../src/logic/soldier.cc:1576 ../../src/logic/soldier.cc:1585
 msgid "Logic error"
@@ -1915,7 +1917,7 @@ msgstr ""
 #. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
-msgstr ""
+msgstr "沒有"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1934,7 +1936,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:50 ../../src/ui_basic/helpwindow.cc:194
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "幫助： %s"
 
 #: ../../src/ui_basic/messagebox.cc:97
 msgid "Yes"
@@ -2038,7 +2040,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:161
 msgid "Tribe:"
-msgstr ""
+msgstr "部落:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 msgid "Difficulty:"
@@ -2095,7 +2097,7 @@ msgstr "#"
 #: ../../src/ui_fsmenu/campaign_select.cc:401
 #: ../../src/ui_fsmenu/mapselect.cc:291
 msgid "Scenario:"
-msgstr ""
+msgstr "方案:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:401
 msgid "Tutorial:"
@@ -2120,7 +2122,7 @@ msgstr[0] ""
 #: ../../src/ui_fsmenu/mapselect.cc:317
 msgid "Author:"
 msgid_plural "Authors:"
-msgstr[0] ""
+msgstr[0] "作者:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:458
 msgid "Pick a tutorial from the list, then hit \"OK\"."
@@ -2191,7 +2193,7 @@ msgstr "名稱"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:154
 msgid "Points"
-msgstr ""
+msgstr "分數"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:155
 msgid "Game"
@@ -2210,7 +2212,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:412
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "遊戲無法連到伺服器。"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2702,7 +2704,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:94
 #: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
-msgstr ""
+msgstr "建議"
 
 #: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:88
 msgid "License"
@@ -2710,7 +2712,7 @@ msgstr "許可證"
 
 #: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:97
 msgid "Authors"
-msgstr ""
+msgstr "作者"
 
 #: ../../src/ui_fsmenu/main.cc:64
 msgid "Exit Widelands"
@@ -2762,7 +2764,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
@@ -2863,7 +2865,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:582
 msgid "Nobody"
-msgstr ""
+msgstr "沒有人"
 
 #: ../../src/ui_fsmenu/mapselect.cc:583
 msgid ""
@@ -3152,7 +3154,7 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:152
 msgid "Soldiers:"
-msgstr ""
+msgstr "士兵:"
 
 #: ../../src/wui/attack_box.cc:160
 msgid "Send less soldiers"
@@ -3206,7 +3208,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:146
 msgid "Mines"
-msgstr ""
+msgstr "公里"
 
 #: ../../src/wui/building_statistics_menu.cc:153
 msgid "Ports"
@@ -3224,9 +3226,9 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
-#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:692
 #: ../../src/wui/building_statistics_menu.cc:716
 #: ../../src/wui/building_statistics_menu.cc:718
@@ -3318,7 +3320,7 @@ msgstr ""
 #: ../../src/wui/general_statistics_menu.cc:186
 #: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:211
 msgid "Workers"
-msgstr ""
+msgstr "工人"
 
 #: ../../src/wui/encyclopedia_window.cc:142
 #: ../../src/wui/general_statistics_menu.cc:194 ../../src/wui/minimap.cc:170
@@ -3741,11 +3743,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:189
 msgid "You won!"
-msgstr ""
+msgstr "你贏了!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "You lost."
-msgstr ""
+msgstr "你輸了。"
 
 #: ../../src/wui/game_summary.cc:197
 #, c-format
@@ -3975,7 +3977,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:109
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
+msgstr[0] "工人"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

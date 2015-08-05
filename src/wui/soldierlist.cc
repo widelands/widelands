@@ -410,8 +410,7 @@ m_infotext(this, _("Click soldier to send away"))
 				  % 8 % 8
 				  % 8 % 8
 				  % 8 % 8
-				  % 8 % 8
-				  )).str()));
+				  % 8 % 8)).str()));
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);

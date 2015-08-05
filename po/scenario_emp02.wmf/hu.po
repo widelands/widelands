@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"PO-Revision-Date: 2015-07-26 07:30+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -198,16 +198,16 @@ msgstr "Ahogy Saledusszal bejártuk ezeket a csodálatos északi erdőket, úgy 
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the"
+"But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "De addig a napig még sok év teljen el! Most a jelenre kell összpontosítanunk, és építenünk kell pár favágóházat és egy fűrészmalmot, némi alapvető építőanyag termeléséhez."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests "
-"should last forever, so we really should build a forester’s house too."
-msgstr "De nem feledkezhetünk meg ennek az édenkertnek a megőrzéséről sem. Ezek az erdők örökké kell, hogy tartsanak, szóval igazán építenünk kell egy erdészházat is."
+"But we mustn’t forget to preserve this natural bounty. These forests should "
+"last forever, so we really have to build a forester’s house too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -256,12 +256,12 @@ msgstr "Saledus borúsnak tűnik"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which"
-" gives me a sinking feeling in my stomach and spreads waves of fear in my "
-"heart. As I walked down to the southern shore, I found the remains of "
-"another ship. I don’t know whether these parts are all that is left of that "
-"ship. In any case, these parts do not seem to be old."
-msgstr "Üdvözöllek, Lutius. Nem akarok riadalmat kelteni, de találtam valamit, amitől elszorul a gyomrom, és ami félelmet kelt bennem. Amint a déli parton sétáltam, egy másik hajó maradványaira bukkantam. Nem tudom, vajon csak ennyi maradt-e abból a hajóból. Mindenesetre a maradványok nem tűnnek réginek."
+"Sire, I don’t want to start a panic, but I found something which gives me a "
+"sinking feeling in my stomach and spreads waves of fear in my heart. As I "
+"walked down to the southern shore, I found the remains of another ship. I "
+"don’t know whether these parts are all that is left of that ship. In any "
+"case, these parts do not seem to be old."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
@@ -285,10 +285,9 @@ msgstr "Saledus mosolyog"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am"
-" right – but I believe we could mine marble from some places on the "
-"mountain."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger "
+"mountain. I am not absolutely sure – a geologist should check if I am right "
+"– but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -299,32 +298,32 @@ msgid ""
 msgstr "Ez megerősítené ellátásunkat minőségi márványból, túl a kőfejtő adta szűkös mennyiségen. Valószínűleg igazad volt, mikor ezt a szigetet paradicsominak nevezted."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
-msgid "Let us expand to that mountain and start mining marble."
-msgstr "Terjeszkedjünk hát ki addig a hegyig, és kezdjünk márványt bányászni."
+msgid "Please, expand to that mountain and start mining marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
 msgstr "A többi hegy"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
-msgid "Saledus is amazed"
-msgstr "Saledus le van nyűgözve"
+msgid "Saledus is excited"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
-" smithies."
+"of iron ore. I advise you to immediately build iron ore and coal mines (or "
+"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So, let’s build a stonemason, who will cut columns from "
-"marble."
-msgstr "Ugyanakkor ezekhez a nagyobb épületekhez jobb és mutatósabb építőanyagokra lesz szükségünk. Úgyhogy építsünk is<br> egy kőfaragóházat, ahol oszlopokat faragnak a márványból."
+"building materials. So you have to build a stonemason, who will cut columns "
+"from marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -339,10 +338,8 @@ msgid "Amalea enters…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
-msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
-"forgot something."
-msgstr "Üdv, Lutius, remélem, megbocsátod bírálatomat, de úgy látom, megfeledkeztél valamiről."
+msgid "Lutius, don’t you think you forgot something important?"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -368,9 +365,9 @@ msgstr "Amalea mosolyog"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
-" they serve is really tasty. You really should have a drink there, too."
-msgstr "Üdvözöllek, barátom, épp most látogattam meg az új »Pálmákalja« kocsmát. Nagyon finom sört kapni ott. Igazán elmehetnél te is inni egyet."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really "
+"tasty. You really should have a drink there, too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -400,9 +397,9 @@ msgstr ""
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that I was able to flee and hide "
+"throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr "Kezdetben jóhiszeműen azt reméltem, békések, de amint megláttak, elkezdtek üldözni és támadni dobólándzsáikkal. Hála az isteneknek, sikerült megmenekülnöm és elrejtőznöm, míg a sötét éjszaka oltalmában vissza nem térhettem gyarmatunkra."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""

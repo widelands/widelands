@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-24 14:19+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-30 18:38+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that he will find, choosing the appropriate"
 " mine to be built:"
-msgstr ""
+msgstr "Per fer-ho, situeu una bandera al vessant est de la muntanya (en terreny muntanyós, no escolliu un prat). Cliqueu la bandera i envieu-hi geòlegs. Com que la bandera està en una muntanya, els geòlegs buscaran minerals; si no, buscarien aigua. Llavors, construïu una mina per als dos tipus de recursos que hi trobin, escollint la mina corresponent:"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
@@ -155,10 +155,10 @@ msgstr "Construïu un pou, una granja i una fleca"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
-"hunters. The wheat of the farms has to be processed with water in a bakery "
+"farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "Altres formes d'obtenir menjar són els pescadors i caçadors. El blat de les granges s'ha de processar amb aigua en una fleca abans de ser comestibles. Per obtenir aigua, necessiteu enviar un geòleg a buscar aigua en algun lloc i, si trobeu aigua, construir-hi un pou."
+msgstr "Altres formes d'obtenir menjar són els pescadors i les granges. El blat de les granges s'ha de processar amb aigua en una fleca abans de ser comestibles. Per obtenir aigua, necessiteu enviar un geòleg a buscar aigua en algun lloc i, si trobeu aigua, construir-hi un pou."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
@@ -198,7 +198,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Una mina normal només pot explotar un terç dels recursos que té. Llavors, cal millorar-la a una mina profunda per mantenir-ne la productivitat. Per millorar l'edifici, obriu la finestra de l'edifici i busqueu el botó corresponent."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -206,7 +206,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "Els treballadors guanyen experiència quan treballen. Amb prou experiència, esdevenen treballadors avançats, que són necessaris per operar els edificis millorats. No milloreu l'edifici fins que tingueu prou treballadors avançats!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -214,14 +214,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Aquests edificis tenen una demanda major que els bàsics. Per exemple, les mines profundes necessiten aperitius en lloc de racions. Haureu de millorar la taverna a un hostal. Llavors es podrà produir aperitius, que es fan de pita, cervesa i un tercer ingredient que pot ser carn o peix."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "També podeu millorar totes les mines instantàniament si teniu prou treballadors: les mines més grans treballen una mica més ràpid, però les mines més petites consumeixen aliments més fàcils de produir. Podeu escollir l'estratègia que preferiu."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:105
@@ -236,7 +236,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Els edificis més grans i millors, incloent els edificis militars, requereixen millors materials de construcció. No es poden fer amb simples troncs: la fusta ha de passar per l'enduridor de fusta. Recordeu construir sempre un enduridor abans que us quedeu sense fusta endurida, ja que sense ell no podreu expandir-vos."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -306,7 +306,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Quan els camins suporten una càrrega gran durant un temps determinat, el transportista potser no pot mantenir el ritme de treball. Això pot portar a l'embús del camí. Per això, necessiten un segon empleat: un bou que ajuda a transportar béns. Així es dobla la capacitat de transport."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -362,7 +362,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "En Boldreth, el meu lleial company i amic, és una font de serenitat i confort en aquests dies foscos. Ens anima a mi i als meus guerrers, allunyant la desesperació i avarícia que podria trencar els lligams que hi ha entre nosaltres."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:191
 msgid ""
@@ -388,7 +388,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Les històries parlen de fets que fan posar tristos els nostres familiars. He passat nits despert, sense descansar... Cada cop que tanco els ulls, veig la fortalesa que el meu pare construí engolida per les flames. El Tron Entre es Arbres, el símbol de la unitat i pau entre les nostres famílies s'ha convertit en allò que ens separa."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:208
 msgid ""
@@ -399,7 +399,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Avui els caçadors m'han portat homes, dones i infants davant meu. S'amagaven als boscos, intentant escapar de la guerra, odi i venjances que hi ha entre les tribus que lluiten entre elles com en temps passats, quan només érem bèsties salvatges controlats per instints. Cap dels meus germans aconseguirà controlar el tron de fusta, cap de les tribus serà prou forta per guanyar a l'altra. Aquesta carnisseria no acabarà mai, a no ser que... tal com em va dir el meu pare..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:210
 msgid ""
@@ -414,7 +414,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Cada dia que passa, en Boldreth sembla cada cop més indecís. Els ànims de la meva gent no estan bé i l'hivern s'apropa. I encara estem aquí, vivint en cabanes i barraques. No volia quedar-me aquí tant de temps, però tampoc hagués pensat mai que els meus germans s'embolicarien amb batalles durant tant de temps."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:219
 msgid ""
@@ -422,7 +422,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Potser és hora d'acomodar-nos una mica. Els que quedem vius i estem units ens mereixem una nova llar, que reemplaci tot el que vam perdre. Fins que puguem tornar al lloc que abans anomenàvem llar..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:224
 msgid "Somebody Comes up to You"
@@ -540,7 +540,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Però quan miro per damunt del bosc només veig fum alçant-se al cel. Ja ho sé: és massa aviat i ara mateix no tenim cap oportunitat. Potser té raó, però temo el vessament de sang si tornem ara..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "The Oath"
@@ -555,7 +555,7 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr ""
+msgstr "Avui, els meus guerrers han trobat un home vell que vagava ferit pel fosc bosc. Hem escoltat horroritzats mentre ens explicava les atrocitats que havia vist que passaven a l'Al'thunran."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:282
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
@@ -583,7 +583,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Així que ens voleu preparar per quedar-nos més temps en aquests boscos, Thron? Bé, és una sàvia decisió, encara que jo voldria tornar a Al'thunran. Massa temps hem esperat mentre els nostres germans lluiten en batalles inacabables i les nostres espases i destrals s'han rovellat amb el pas del temps."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "Khantrukh joins in…"
@@ -594,7 +594,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "Perdoneu, si us plau, però tinc un cas urgent que discutir amb vós. Les roques del nostre camp s'esgoten ràpid amb les eines dels nostres treballadors. S'acabaran molt aviat."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "Boldreth jumps up…"
@@ -606,7 +606,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Tot i que no és una tasca per a un guerrer, almenys és alguna cosa per fer! Thron, crec que hauria d'agafar els guerrers més inquiets i aventurar-nos més prop de la gran muntanya del Kal'mavrath. Potser hi trobarem roques més grans per tranquil·litzar el pedrer."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:310
 msgid "Khantrukh grumbles…"
@@ -665,7 +665,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr ""
+msgstr "Encara que tens raó, ho haurem de tenir en compte després, perquè ara tenim altres problemes. Els miners volen racions més grans per treballar a les fredes mines de la muntanya i proveir el que necessiten no serà fàcil."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:346
 msgid "Boldreth nods…"
@@ -771,7 +771,7 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr ""
+msgstr "Com no, és fosc i fa fred en aquestes profunditats. Poques persones s'atreveixen voluntàriament a anar-hi. Els hauríem de recompensar amb racions més grans. I una pinta de cervesa o dues per animar-los."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:402
 msgid "Boldreth seems concerned…"
@@ -803,7 +803,7 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "Tot i això, no aniria malament acumular lletades de calç per a altres campanyes: amb reserves suficients, si calgués, podríem construir una fortalesa com el món no n'ha vist cap fins avui!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:420
 msgid "Khantrukh steps in…"
@@ -816,7 +816,7 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "Cap! És una desgràcia! Podem fer lletades de calç per a les fortificacions i edificis grans, però això no evita que les teulades tinguin goteres! Potser als més joves els agrada passar les nits sota la pluja, però jo no puc dormir amb gotes d'aigua caient-me a la cara!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
 msgid "Now this is a problem we should do something about!"
@@ -873,7 +873,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "Quan he mirat al voltant, he vist cares esperançades. Confien en mi per guiar-los en aquests foscos dies. Abans que pogués dir res per agrair-los-hi o encoratjar-los, un dels soldats ha entrat corrent a l'hostal. Havia estat patrullant el bosc els últims dies i vèiem que estava cansat."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:449
 msgid "The news he brought changed everything…"
@@ -905,7 +905,7 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "Quan vaig mirar a l'horitzó, encara hi veia els llums carmesí. És increïble amb quanta passió els meus germans lluiten en aquesta guerra. Temo el moment en què torni a veure l'Al'thunran: quan hi arribem, hi quedarà alguna cosa més a banda de cendres i ruïnes on abans estava la preciosa capital?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Another Cold Day"
@@ -946,13 +946,13 @@ msgstr "Hem trobat una aldea amb gent amistosa i productiva, impressionats per l
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Han viscut senzillament i de forma despreocupada, caçant i conreant aliments. Però fins ara no s'ha involucrat en conflictes i no estan preparats per lluitar."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva fi. Per això han decidit unir-se a nosaltres, amb la intenció de que ens puguem ajudar els uns als altres."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

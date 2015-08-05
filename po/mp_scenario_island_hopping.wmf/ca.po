@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-14 19:51+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-27 09:52+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -131,82 +131,82 @@ msgstr "Quan acabeu una illa, rebreu béns com a recompensa, depenent de quants 
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
-"The clue is that the first island only provides stones and wood, the second "
-"only meadows and resources. The economies you leave behind will continue to "
-"work for you, but you will only reap the benefits at the moment you reach a "
-"new island."
-msgstr "La pista és que la primera illa només subministra roca i fusta, la segona només té prats i subministraments. Les economies que deixeu enrere continuaran funcionant, però només recol·lectareu els beneficis en el moment d'arribar a una nova illa."
+"The point is that the first island only provides stones and wood, the second"
+" only meadows and resources. The economies you leave behind will continue to"
+" work for you, but you will only reap the benefits at the moment you reach a"
+" new island."
+msgstr "Cal tenir en compte que la primera illa només subministra roca i fusta, la segona només té prats i subministraments. Les economies que deixeu enrere continuaran funcionant, però només recol·lectareu els beneficis en el moment d'arribar a una nova illa."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."
 msgstr "Una última cosa: sigueu curosos en no malgastar el quars i els diamants."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finish Rewards"
 msgstr "Recompenses finals"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
 msgid "First Island"
 msgstr "Primera illa"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
 msgid "1st to finish"
 msgstr "1r en acabar"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
 msgid "2nd to finish"
 msgstr "2n en acabar"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
 msgid "3rd to finish"
 msgstr "3r en acabar"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "4th to finish"
 msgstr "4t en acabar"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
 msgid "Second Island"
 msgstr "Segona illa"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "El primer a arribar a l'illa número %2$i va ser el jugador %1$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "El segon a arribar a l'illa número %2$i va ser el jugador %1$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "El tercer a arribar a l'illa número %2$i va ser el jugador %1$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "El quart a arribar a l'illa número %2$i va ser el jugador %1$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
 msgid "The reward for this feat amounts to:"
 msgstr "La recompensa per aquesta proesa és:"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "El rei del turó és %s i guanyarà la partida en 20 minuts si ningú recupera el turó abans."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:54
 msgid "%s lost control of the hill."
 msgstr "%s ha perdut el control del turó."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "El rei del turó ha estat %1$s durant %2$s!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:57
 msgid "%s has won the game. Congratulations!"
 msgstr "%s ha guanyat aquesta partida. Enhorabona!"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-24 13:33+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-31 11:35+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -642,7 +642,7 @@ msgstr "избира втория алтернативен инструмент,
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Някои сгради, като например фермата, имат много малък обхват на работа. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
+msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -654,7 +654,7 @@ msgstr "Винаги стройте лесничейска и рибовъдск
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop fishing."
-msgstr "Наглеждайте рибарите си. След като рибните ресурси в работния им обхват се изчерпат, те ще спрат да работят."
+msgstr "Наглеждайте рибарите си. След като рибните ресурси в работната им област се изчерпат, те ще спрат да работят."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -784,7 +784,7 @@ msgstr "Ако премахнете път, докато натискате Ctrl
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr "Новите войници се появяват в щаба или в някой склад, ако всички нужни инструменти са налични. Местата за обучение служат за подобряване на уменията им."
+msgstr "Новите войници се появяват в щаба или в някой склад, ако всички нужни инструменти са налични. Тренировъчните сгради служат за подобряване на уменията им."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
