@@ -1140,7 +1140,7 @@ void WLApplication::mainmenu_tutorial()
 		//  Start UI for the tutorials.
 		FullscreenMenuCampaignMapSelect select_campaignmap(true);
 		select_campaignmap.set_campaign(0);
-		if (select_campaignmap.run() > 0) {
+		if (select_campaignmap.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk)) {
 			filename = select_campaignmap.get_map();
 		}
 	try {
@@ -1347,7 +1347,7 @@ bool WLApplication::load_game()
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
 
-	if (ssg.run() > 0)
+	if (ssg.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk))
 		filename = ssg.filename();
 	else
 		return false;
@@ -1379,7 +1379,7 @@ bool WLApplication::campaign_game()
 		int32_t campaign;
 		{ //  First start UI for selecting the campaign.
 			FullscreenMenuCampaignSelect select_campaign;
-			if (select_campaign.run() > 0)
+			if (select_campaign.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk))
 				campaign = select_campaign.get_campaign();
 			else { //  back was pressed
 				filename = "";
@@ -1389,7 +1389,7 @@ bool WLApplication::campaign_game()
 		//  Then start UI for the selected campaign.
 		FullscreenMenuCampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run() > 0) {
+		if (select_campaignmap.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk)) {
 			filename = select_campaignmap.get_map();
 			break;
 		}
@@ -1415,7 +1415,7 @@ void WLApplication::replay()
 	if (m_filename.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
-		if (rm.run() <= 0)
+		if (rm.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack))
 			return;
 
 		m_filename = rm.filename();
