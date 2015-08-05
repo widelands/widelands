@@ -1058,44 +1058,44 @@ void WLApplication::mainmenu()
 		}
 
 		try {
-			switch (static_cast<FullscreenMenuMain::MenuTarget>(mm.run())) {
-			case FullscreenMenuMain::MenuTarget::kTutorial:
+			switch (static_cast<FullscreenMenuBase::MenuTarget>(mm.run())) {
+			case FullscreenMenuBase::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuMain::MenuTarget::kSinglePlayer:
+			case FullscreenMenuBase::MenuTarget::kSinglePlayer:
 				mainmenu_singleplayer();
 				break;
-			case FullscreenMenuMain::MenuTarget::kMultiplayer:
+			case FullscreenMenuBase::MenuTarget::kMultiplayer:
 				mainmenu_multiplayer();
 				break;
-			case FullscreenMenuMain::MenuTarget::kReplay:
+			case FullscreenMenuBase::MenuTarget::kReplay:
 				replay();
 				break;
-			case FullscreenMenuMain::MenuTarget::kOptions: {
+			case FullscreenMenuBase::MenuTarget::kOptions: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kReadme: {
+			case FullscreenMenuBase::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kLicense: {
+			case FullscreenMenuBase::MenuTarget::kLicense: {
 				FullscreenMenuFileView ff("txts/LICENSE.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kAuthors: {
+			case FullscreenMenuBase::MenuTarget::kAuthors: {
 				FullscreenMenuFileView ff("txts/AUTHORS.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kEditor:
+			case FullscreenMenuBase::MenuTarget::kEditor:
 				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
-			case FullscreenMenuMain::MenuTarget::kExit:
+			case FullscreenMenuBase::MenuTarget::kExit:
 				return;
 			}
 		} catch (const WLWarning & e) {
@@ -1164,23 +1164,23 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack) == UI::Panel::dying_code,
+		(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kBack) == UI::Panel::dying_code,
 		 "Panel should be dying.");
 
 	for (;;) {
 		FullscreenMenuSinglePlayer single_player_menu;
-		switch (static_cast<FullscreenMenuSinglePlayer::MenuTarget>(single_player_menu.run())) {
-		case FullscreenMenuSinglePlayer::MenuTarget::kBack:
+		switch (static_cast<FullscreenMenuBase::MenuTarget>(single_player_menu.run())) {
+		case FullscreenMenuBase::MenuTarget::kBack:
 			return;
-		case FullscreenMenuSinglePlayer::MenuTarget::kNewGame:
+		case FullscreenMenuBase::MenuTarget::kNewGame:
 			if (new_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::MenuTarget::kLoadGame:
+		case FullscreenMenuBase::MenuTarget::kLoadGame:
 			if (load_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::MenuTarget::kCampaign:
+		case FullscreenMenuBase::MenuTarget::kCampaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1197,17 +1197,17 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-	int32_t menu_result = FullscreenMenuNetSetupLAN::JOINGAME; // dummy init;
+	FullscreenMenuBase::MenuTarget menu_result = FullscreenMenuBase::MenuTarget::kJoingame; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (static_cast<FullscreenMenuMultiPlayer::MenuTarget>(mp.run())) {
-			case FullscreenMenuMultiPlayer::MenuTarget::kBack:
+		switch (static_cast<FullscreenMenuBase::MenuTarget>(mp.run())) {
+			case FullscreenMenuBase::MenuTarget::kBack:
 				return;
-			case FullscreenMenuMultiPlayer::MenuTarget::kMetaserver:
+			case FullscreenMenuBase::MenuTarget::kMetaserver:
 				internet = true;
 				break;
-			case FullscreenMenuMultiPlayer::MenuTarget::kLan:
+			case FullscreenMenuBase::MenuTarget::kLan:
 				break;
 			default:
 				assert(false);
@@ -1238,19 +1238,19 @@ void WLApplication::mainmenu_multiplayer()
 		} else {
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuNetSetupLAN ns;
-			menu_result = ns.run();
+			menu_result = static_cast<FullscreenMenuBase::MenuTarget>(ns.run());
 			std::string playername = ns.get_playername();
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
-				case FullscreenMenuNetSetupLAN::HOSTGAME: {
+				case FullscreenMenuBase::MenuTarget::kHostgame: {
 					NetHost netgame(playername);
 					netgame.run();
 					break;
 				}
-				case FullscreenMenuNetSetupLAN::JOINGAME: {
+				case FullscreenMenuBase::MenuTarget::kJoingame: {
 					IPaddress peer;
 
 					if (!host_address)
@@ -1286,9 +1286,10 @@ bool WLApplication::new_game()
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
-	if (code <= 0)
+	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 		return false;
-	if (code == 2) { // scenario
+	}
+	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame)) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
 		} catch (const std::exception & e) {

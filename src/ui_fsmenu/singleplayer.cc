@@ -52,22 +52,22 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 		(boost::bind
 			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kNewGame)));
+			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kNewGame)));
 	campaign.sigclicked.connect
 		(boost::bind
 			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kCampaign)));
+			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kCampaign)));
 	load_game.sigclicked.connect
 		(boost::bind
 			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kLoadGame)));
+			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kLoadGame)));
 	back.sigclicked.connect
 		(boost::bind
 			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kBack)));
+			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -85,21 +85,6 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }
 
-bool FullscreenMenuSinglePlayer::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(MenuTarget::kNewGame));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(MenuTarget::kBack));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuMainMenu::handle_key(down, code);
+void FullscreenMenuSinglePlayer::clicked_ok() {
+	end_modal(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kNewGame));
 }

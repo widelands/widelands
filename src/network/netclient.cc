@@ -157,7 +157,8 @@ void NetClient::run ()
 		d->modal = &lgm;
 		int32_t code = lgm.run();
 		d->modal = nullptr;
-		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
+		 // Only possible if server is dedicated - client pressed "start game" button
+		if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame)) {
 			SendPacket subs;
 			subs.unsigned_8(NETCMD_LAUNCH);
 			subs.send(d->sock);
@@ -167,7 +168,7 @@ void NetClient::run ()
 			code = lgm.run();
 			d->modal = nullptr;
 		}
-		if (code <= 0) {
+		if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
 				InternetGaming::ref().set_game_done();
@@ -945,9 +946,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_LAUNCH: {
-		if (!d->modal || d->game)
+		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
-		d->modal->end_modal(2);
+		}
+		d->modal->end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kOk));
 		break;
 	}
 	case NETCMD_SETSPEED:
@@ -1108,7 +1110,7 @@ void NetClient::disconnect
 		WLApplication::emergency_save(*d->game);
 
 	if (d->modal) {
-		d->modal->end_modal(0);
+		d->modal->end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack));
 		d->modal = nullptr;
 	}
 }

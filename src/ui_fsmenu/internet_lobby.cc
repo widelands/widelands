@@ -110,18 +110,11 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	password(pwd),
 	reg(registered)
 {
-	joingame.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_joingame,
-			  boost::ref(*this)));
-	hostgame.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_hostgame,
-			  boost::ref(*this)));
-	back.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_back,
-			  boost::ref(*this)));
+	joingame.sigclicked.connect(
+				boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
+	hostgame.sigclicked.connect(
+				boost::bind(&FullscreenMenuInternetLobby::clicked_hostgame, boost::ref(*this)));
+	back.sigclicked.connect(boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
 
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -192,27 +185,13 @@ void FullscreenMenuInternetLobby::think ()
 		fill_games_list(InternetGaming::ref().games());
 }
 
-bool FullscreenMenuInternetLobby::handle_key(bool down, SDL_Keysym code)
+void FullscreenMenuInternetLobby::clicked_ok()
 {
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				if (joingame.enabled()) {
-					server_doubleclicked();
-				} else {
-					clicked_hostgame();
-				}
-				return true;
-			case SDLK_ESCAPE:
-				clicked_back();
-				return true;
-			default:
-				break; // not handled
-		}
+	if (joingame.enabled()) {
+		server_doubleclicked();
+	} else {
+		clicked_hostgame();
 	}
-
-	return FullscreenMenuBase::handle_key(down, code);
 }
 
 
@@ -458,12 +437,4 @@ void FullscreenMenuInternetLobby::clicked_hostgame()
 	// Start the game
 	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
 	netgame.run();
-}
-
-
-/// called when the 'back' button was clicked
-void FullscreenMenuInternetLobby::clicked_back()
-{
-	// Close the lobby UI
-	end_modal(0);
 }

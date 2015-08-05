@@ -781,7 +781,7 @@ void NetHost::run(bool const autorun)
 		FullscreenMenuLaunchMPG lm(&d->hp, this);
 		lm.set_chat_provider(d->chat);
 		const int32_t code = lm.run();
-		if (code <= 0) {
+		if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
 				InternetGaming::ref().set_game_done();

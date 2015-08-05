@@ -47,30 +47,15 @@ public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
 	~FullscreenMenuLaunchMPG();
 
-	/**
-	 * The return values of run() are:
-	 *    0  - back was pressed
-	 *    1  - normal game
-	 *    2  - scenario game
-	 *    3  - multi player savegame
-	 *    4  - multi player scenario savegame <- not yet implemented
-	 */
-	enum class MenuTarget {
-		kBack,
-		kNormalGame,
-		kScenarioGame,
-		kMultiPlayerSavegame,
-		kMultiPLayerScenarioSavegame
-	};
-
 	void set_chat_provider(ChatProvider &);
 
 	void think() override;
 
 	void refresh();
 
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
+protected:
+	void clicked_ok() override;
+	void clicked_back() override;
 
 private:
 	LuaInterface * m_lua;
@@ -78,8 +63,6 @@ private:
 	void change_map_or_save();
 	void select_map();
 	void select_saved_game();
-	void back_clicked();
-	void start_clicked();
 	void win_condition_clicked();
 	void win_condition_update();
 	void set_scenario_values();

@@ -41,8 +41,8 @@ public:
 
 	void think() override;
 
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
+protected:
+	void clicked_ok() override;
 
 private:
 	uint32_t m_butx;
@@ -77,7 +77,6 @@ private:
 	void change_servername();
 	void clicked_joingame();
 	void clicked_hostgame();
-	void clicked_back();
 
 	uint8_t convert_clienttype(const std::string &);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);

@@ -33,15 +33,8 @@ class FullscreenMenuSinglePlayer : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuSinglePlayer();
 
-	enum class MenuTarget: int32_t {
-		kBack = UI::Panel::dying_code,
-		kNewGame,
-		kCampaign,
-		kLoadGame
-	};
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
+protected:
+	void clicked_ok() override;
 
 private:
 	UI::Textarea title;

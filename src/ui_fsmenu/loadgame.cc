@@ -244,7 +244,7 @@ void FullscreenMenuLoadGame::clicked_ok()
 	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 	if (gamedata.errormessage.empty()) {
 		m_filename = gamedata.filename;
-		end_modal(1);
+		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kOk));
 	}
 }
 

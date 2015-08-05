@@ -88,7 +88,8 @@ public:
 	void free_children();
 
 	// Modal
-	static const int32_t dying_code = -1;
+	static const int dying_code = 0;
+	static const int ok_code = 1;
 	int32_t run();
 	void end_modal(int32_t code);
 	bool is_modal();

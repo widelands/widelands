@@ -67,26 +67,6 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}
 
-bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_Keysym code) {
-
-	if (!down)
-		return false;
-
-	switch (code.sym)
-	{
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
-			clicked_ok();
-			return true;
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
-		default:
-			break; // not handled
-	}
-	return FullscreenMenuBase::handle_key(down, code);
-}
-
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();
 }

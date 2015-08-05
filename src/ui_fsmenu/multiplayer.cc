@@ -51,12 +51,12 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	lan.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kLan)));
+			  static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kLan)));
 
 	back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kBack)));
+			  static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -114,7 +114,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
 		m_register = s.get_bool("registered", false);
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+		end_modal(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kMetaserver));
 		return;
 	}
 
@@ -127,25 +127,10 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		s.set_bool("registered", lb.registered());
 		s.set_bool("auto_log", lb.set_automaticlog());
 
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+		end_modal(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kMetaserver));
 	}
 }
 
-bool FullscreenMenuMultiPlayer::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(MenuTarget::kBack));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuMainMenu::handle_key(down, code);
+void FullscreenMenuMultiPlayer::clicked_ok() {
+	internet_login();
 }

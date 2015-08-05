@@ -51,32 +51,19 @@ public:
 		(GameSettingsProvider *, GameController * = nullptr, bool autolaunch = false);
 	~FullscreenMenuLaunchSPG();
 
-	/**
-	 * The return values of run() are:
-	 *    0  - back was pressed
-	 *    1  - normal game (either single or multi player)
-	 *    2  - scenario game (at the moment only single player)
-	 */
-	enum class MenuTarget {
-		kBack,
-		kNormalGame,
-		kScenarioGame
-	};
-
 	void start() override;
 	void think() override;
 
 	void refresh();
 
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
+protected:
+	void clicked_ok() override;
+	void clicked_back() override;
 
 private:
 	LuaInterface * m_lua;
 
 	void select_map();
-	void back_clicked();
-	void start_clicked();
 	void win_condition_clicked();
 	void win_condition_update();
 	void set_scenario_values();

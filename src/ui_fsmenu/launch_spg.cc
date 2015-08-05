@@ -122,10 +122,10 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::win_condition_clicked,
 			  boost::ref(*this)));
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::back_clicked, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuLaunchSPG::start_clicked, boost::ref(*this)));
+			 (&FullscreenMenuLaunchSPG::clicked_ok, boost::ref(*this)));
 
 	m_lua = new LuaInterface();
 	m_win_condition_scripts = m_settings->settings().win_condition_scripts;
@@ -178,8 +178,9 @@ FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 void FullscreenMenuLaunchSPG::start()
 {
 	select_map();
-	if (m_settings->settings().mapname.empty())
-		end_modal(0); // back was pressed
+	if (m_settings->settings().mapname.empty()) {
+		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)); // back was pressed
+	}
 }
 
 
@@ -195,7 +196,7 @@ void FullscreenMenuLaunchSPG::think()
 /**
  * back-button has been pressed
  */
-void FullscreenMenuLaunchSPG::back_clicked()
+void FullscreenMenuLaunchSPG::clicked_back()
 {
 	//  The following behaviour might look strange at first view, but for the
 	//  user it seems as if the launchgame-menu is a child of mapselect and
@@ -204,7 +205,7 @@ void FullscreenMenuLaunchSPG::back_clicked()
 	m_settings->set_map(std::string(), std::string(), 0);
 	select_map();
 	if (m_settings->settings().mapname.empty())
-		return end_modal(0);
+		return end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack));
 	refresh();
 }
 
@@ -249,7 +250,7 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
 /**
  * start-button has been pressed
  */
-void FullscreenMenuLaunchSPG::start_clicked()
+void FullscreenMenuLaunchSPG::clicked_ok()
 {
 	if (!g_fs->file_exists(m_filename))
 		throw WLWarning
@@ -264,7 +265,11 @@ void FullscreenMenuLaunchSPG::start_clicked()
 			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->can_launch()) {
-		end_modal(static_cast<int>(MenuTarget::kNormalGame) + m_is_scenario);
+		if (m_is_scenario) {
+			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame));
+		} else {
+			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame));
+		}
 	}
 }
 
@@ -317,25 +322,6 @@ void FullscreenMenuLaunchSPG::refresh()
 	win_condition_update();
 }
 
-bool FullscreenMenuLaunchSPG::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				start_clicked();
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int>(MenuTarget::kBack));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
-}
-
 
 /**
  * Select a map and send all information to the user interface.
@@ -348,13 +334,13 @@ void FullscreenMenuLaunchSPG::select_map()
 	FullscreenMenuMapSelect msm(m_settings, nullptr);
 	int code = msm.run();
 
-	if (code <= 0) {
+	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		m_settings->set_scenario(false);
 		return;  // back was pressed
 	}
 
-	m_is_scenario = code == static_cast<int>(MenuTarget::kScenarioGame);
+	m_is_scenario = code == static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 	m_settings->set_scenario(m_is_scenario);
 
 	const MapData & mapdata = *msm.get_map();

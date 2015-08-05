@@ -68,7 +68,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this),
-				  FullscreenMenuLaunchMPG::MenuTarget::kNormalGame));
+				  FullscreenMenuBase::MenuTarget::kNormalGame));
 
 		btn = new UI::Button
 			(this, "saved_game",
@@ -79,7 +79,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this),
-				  FullscreenMenuLaunchMPG::MenuTarget::kScenarioGame));
+				  FullscreenMenuBase::MenuTarget::kScenarioGame));
 
 		btn = new UI::Button
 			(this, "cancel",
@@ -89,7 +89,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->sigclicked.connect
 			(boost::bind
 				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this),
-				  FullscreenMenuLaunchMPG::MenuTarget::kBack));
+				  FullscreenMenuBase::MenuTarget::kBack));
 	}
 
 
@@ -98,7 +98,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 			m_ctrl->think();
 	}
 
-	void pressedButton(FullscreenMenuLaunchMPG::MenuTarget i) {
+	void pressedButton(FullscreenMenuBase::MenuTarget i) {
 		end_modal(static_cast<int>(i));
 	}
 	private:
@@ -190,10 +190,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
-	m_ok.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuLaunchMPG::start_clicked, boost::ref(*this)));
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::back_clicked, boost::ref(*this)));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::clicked_ok, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchMPG::clicked_back, boost::ref(*this)));
 	m_wincondition.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLaunchMPG::win_condition_clicked,
@@ -275,9 +273,9 @@ void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider & chat)
 /**
  * back-button has been pressed
  */
-void FullscreenMenuLaunchMPG::back_clicked()
+void FullscreenMenuLaunchMPG::clicked_back()
 {
-	end_modal(static_cast<int>(MenuTarget::kBack));
+	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack));
 }
 
 /**
@@ -324,10 +322,10 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_ctrl, get_w() / 3, get_h() / 4);
 	switch (selection_window.run()) {
-		case static_cast<int>(FullscreenMenuLaunchMPG::MenuTarget::kNormalGame):
+		case static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame):
 			select_map();
 			break;
-		case static_cast<int>(FullscreenMenuLaunchMPG::MenuTarget::kScenarioGame):
+		case static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame):
 			select_saved_game();
 			break;
 		default:
@@ -345,13 +343,13 @@ void FullscreenMenuLaunchMPG::select_map() {
 	FullscreenMenuMapSelect msm(m_settings, m_ctrl);
 	int code = msm.run();
 
-	if (code <= 0) {
+	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		m_settings->set_scenario(false);
 		return;  // back was pressed
 	}
 
-	m_settings->set_scenario(code == static_cast<int>(FullscreenMenuLaunchMPG::MenuTarget::kScenarioGame));
+	m_settings->set_scenario(code == static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame));
 
 	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
@@ -377,8 +375,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 	FullscreenMenuLoadGame lsgm(game, m_settings, m_ctrl);
 	int code = lsgm.run();
 
-	if (code <= 0)
+	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
 		return; // back was pressed
+	}
 
 	// Saved game was selected - therefore not a scenario
 	m_settings->set_scenario(false);
@@ -428,7 +427,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 /**
  * start-button has been pressed
  */
-void FullscreenMenuLaunchMPG::start_clicked()
+void FullscreenMenuLaunchMPG::clicked_ok()
 {
 	if (!g_fs->file_exists(m_settings->settings().mapfilename))
 		throw WLWarning
@@ -443,7 +442,7 @@ void FullscreenMenuLaunchMPG::start_clicked()
 			  "finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->can_launch())
-		end_modal(static_cast<int>(FullscreenMenuLaunchMPG::MenuTarget::kNormalGame));
+		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame));
 }
 
 
@@ -508,26 +507,6 @@ void FullscreenMenuLaunchMPG::refresh()
 	// Update the multi player setup group
 	m_mpsg->refresh();
 }
-
-bool FullscreenMenuLaunchMPG::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				start_clicked();
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(MenuTarget::kBack));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
-}
-
 
 /**
  * if map was selected to be loaded as scenario, set all values like

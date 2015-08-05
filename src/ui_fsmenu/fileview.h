@@ -42,9 +42,6 @@ class FullscreenMenuTextView : public FullscreenMenuBase {
 public:
 	FullscreenMenuTextView();
 
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
-
 protected:
 	void set_title(const std::string& title);
 	void set_text(const std::string& text);

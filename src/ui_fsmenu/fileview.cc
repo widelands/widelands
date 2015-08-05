@@ -69,7 +69,10 @@ FullscreenMenuTextView::FullscreenMenuTextView
 		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
-	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
+	close_button.sigclicked.connect(
+				boost::bind(&FullscreenMenuTextView::end_modal,
+								boost::ref(*this),
+								static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
@@ -87,25 +90,6 @@ void FullscreenMenuTextView::set_title(const std::string& text)
 {
 	title.set_text(text);
 }
-
-bool FullscreenMenuTextView::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-			case SDLK_ESCAPE:
-				end_modal(0);
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-	return FullscreenMenuBase::handle_key(down, code);
-}
-
-
-
 
 FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
 : FullscreenMenuTextView()
