@@ -9,8 +9,11 @@ set_textdomain("win_conditions")
 
 include "scripting/win_condition_texts.lua"
 
-local wc_name    = _ "Endless Game (no fog)"
-local wc_desc    = _ "This is an endless game without rules. Fog of war is disabled."
+local wc_name = "Endless Game (no fog)"
+-- This needs to be exactly like wc_name, but localized, because wc_name
+-- will be used as the key to fetch the translation in C++
+local wc_descname = _("Endless Game (no fog)")
+local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
 local wc_version = 1
 return {
 	name = wc_name,
@@ -19,7 +22,7 @@ return {
 		local plrs = wl.Game().players
 
 		-- set the objective with the game type for all players
-		broadcast_objective("win_condition", wc_name, wc_desc)
+		broadcast_objective("win_condition", wc_descname, wc_desc)
 
 		-- reveal the whole map for every player
 		local game = wl.Game()
@@ -40,7 +43,7 @@ return {
 		-- from the list, send him a defeated message and give him full vision
 		repeat
 			sleep(5000)
-			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
+			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
 		until count_factions(plrs) < 1
 
 	end

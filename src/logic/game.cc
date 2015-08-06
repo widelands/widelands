@@ -394,6 +394,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
+		m_win_condition_displayname = gpdp.get_win_condition();
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase

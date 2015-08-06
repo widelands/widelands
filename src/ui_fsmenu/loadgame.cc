@@ -352,7 +352,10 @@ void FullscreenMenuLoadGame::entry_selected()
 				m_ta_version.set_text(gamedata.version);
 			}
 
-			m_ta_win_condition.set_text(gamedata.wincondition);
+			{
+				i18n::Textdomain td("win_conditions");
+				m_ta_win_condition.set_text(_(gamedata.wincondition));
+			}
 
 			std::string minimap_path = gamedata.minimap_path;
 			// Delete former image

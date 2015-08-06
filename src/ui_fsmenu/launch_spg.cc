@@ -237,7 +237,10 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
 			t->do_not_warn_about_unaccessed_keys();
 			const std::string name = t->get_string("name");
 			const std::string descr = t->get_string("description");
-			m_wincondition.set_title(name);
+			{
+				i18n::Textdomain td("win_conditions");
+				m_wincondition.set_title(_(name));
+			}
 			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
