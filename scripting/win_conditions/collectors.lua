@@ -13,7 +13,10 @@ set_textdomain("win_conditions")
 
 include "scripting/win_condition_texts.lua"
 
-local wc_name = _ "Collectors"
+local wc_name = "Collectors"
+-- This needs to be exactly like wc_name, but localized, because wc_name
+-- will be used as the key to fetch the translation in C++
+local wc_descname = _("Collectors")
 local wc_version = 2
 local wc_desc = _ (
 	"You get points for precious wares in your warehouses. The player with " ..
@@ -26,7 +29,7 @@ return {
 	func = function()
 
    -- set the objective with the game type for all players
-   broadcast_objective("win_condition", wc_name, wc_desc)
+   broadcast_objective("win_condition", wc_descname, wc_desc)
 
    -- Simple flowing text. One Paragraph
    local function p(s)
@@ -161,10 +164,10 @@ return {
       table.sort(points, function(a,b) return a[2] < b[2] end)
       for i=1,#points-1 do
          points[i][1]:send_message(lost_game_over.title, lost_game_over.body)
-         wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_name, wc_version, {score=points[i][2]}))
+         wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
       end
       points[#points][1]:send_message(won_game_over.title, won_game_over.body)
-      wl.game.report_result(points[#points][1], 1, make_extra_data(points[#points][1], wc_name, wc_version, {score=points[#points][2]}))
+      wl.game.report_result(points[#points][1], 1, make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
    end
 
    -- Instantiate the hook to calculate points
@@ -194,7 +197,7 @@ return {
       local runs = 0
       repeat
          sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
+         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
          runs = runs + 1
       until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 minutes
       remaining_time = remaining_time - 10

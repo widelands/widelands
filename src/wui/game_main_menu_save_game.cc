@@ -134,7 +134,10 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		int player_nr = parent.game().player_manager()->get_number_of_players();
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
-		m_win_condition.set_text(parent.game().get_win_condition_displayname());
+		{
+			i18n::Textdomain td("win_conditions");
+			m_win_condition.set_text(_(parent.game().get_win_condition_displayname()));
+		}
 	}
 
 	m_editbox->focus();
