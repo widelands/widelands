@@ -179,7 +179,7 @@ void FullscreenMenuLaunchSPG::start()
 {
 	select_map();
 	if (m_settings->settings().mapname.empty()) {
-		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)); // back was pressed
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	}
 }
 
@@ -205,7 +205,7 @@ void FullscreenMenuLaunchSPG::clicked_back()
 	m_settings->set_map(std::string(), std::string(), 0);
 	select_map();
 	if (m_settings->settings().mapname.empty())
-		return end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack));
+		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	refresh();
 }
 
@@ -266,9 +266,9 @@ void FullscreenMenuLaunchSPG::clicked_ok()
 			 m_filename.c_str());
 	if (m_settings->can_launch()) {
 		if (m_is_scenario) {
-			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame));
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
-			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame));
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 		}
 	}
 }
@@ -332,15 +332,15 @@ void FullscreenMenuLaunchSPG::select_map()
 		return;
 
 	FullscreenMenuMapSelect msm(m_settings, nullptr);
-	int code = msm.run();
+	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
 
-	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
+	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		m_settings->set_scenario(false);
 		return;  // back was pressed
 	}
 
-	m_is_scenario = code == static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+	m_is_scenario = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
 	m_settings->set_scenario(m_is_scenario);
 
 	const MapData & mapdata = *msm.get_map();

@@ -394,9 +394,9 @@ void FullscreenMenuOptions::update_sb_remove_replays_unit() {
 
 void FullscreenMenuOptions::advanced_options() {
 	FullscreenMenuAdvancedOptions aom(os);
-	if (aom.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk)) {
+	if (aom.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 		os = aom.get_values();
-		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kRestart));
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kRestart);
 	}
 }
 
@@ -646,7 +646,7 @@ OptionsCtrl::~OptionsCtrl() {
 
 void OptionsCtrl::handle_menu()
 {
-	FullscreenMenuBase::MenuTarget i = static_cast<FullscreenMenuBase::MenuTarget>(m_opt_dialog->run());
+	FullscreenMenuBase::MenuTarget i = m_opt_dialog->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
 	if (i == FullscreenMenuBase::MenuTarget::kRestart) {

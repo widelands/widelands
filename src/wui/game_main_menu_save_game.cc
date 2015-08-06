@@ -243,7 +243,7 @@ static void dosave
 		s += error;
 		UI::WLMessageBox mbox
 			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run();
+		mbox.run<UI::Panel::Returncodes>();
 	}
 	game.save_handler().set_current_filename(complete_filename);
 }

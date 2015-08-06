@@ -70,9 +70,9 @@ FullscreenMenuTextView::FullscreenMenuTextView
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(
-				boost::bind(&FullscreenMenuTextView::end_modal,
+				boost::bind(&FullscreenMenuTextView::end_modal<FullscreenMenuBase::MenuTarget>,
 								boost::ref(*this),
-								static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)));
+								FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos

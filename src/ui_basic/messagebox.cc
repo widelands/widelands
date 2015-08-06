@@ -159,14 +159,14 @@ void WLMessageBox::clicked_ok()
 {
 	ok();
 	if (is_modal())
-		end_modal(UI::Panel::ok_code);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 void WLMessageBox::clicked_back()
 {
 	cancel();
 	if (is_modal())
-		end_modal(UI::Panel::dying_code);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 

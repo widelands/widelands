@@ -44,7 +44,7 @@ public:
 	}
 
 	void clicked_ok() override {
-		m_gb.end_modal(UI::Panel::dying_code);
+		m_gb.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 
 	void clicked_back() override {
@@ -183,7 +183,7 @@ void GameOptionsMenu::clicked_save_game() {
 
 void GameOptionsMenu::clicked_exit_game() {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-		m_gb.end_modal(UI::Panel::dying_code);
+		m_gb.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 	else {
 		new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);

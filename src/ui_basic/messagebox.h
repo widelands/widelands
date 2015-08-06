@@ -37,7 +37,7 @@ struct WLMessageBoxImpl;
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Caption", "Text", OK);
- *     int32_t code = mb.run();
+ *     UI::Panel::Returncodes code = mb.run<UI::Panel::Returncodes>();
  * The return code is ok_code if the "OK" button has been pressed in a \ref YESNO
  * dialog box. Otherwise, it is dying_code (or negative, if the modal messagebox has
  * been interrupted in an unusual way).

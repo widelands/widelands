@@ -98,8 +98,8 @@ bool FullscreenMenuBase::handle_key(bool down, SDL_Keysym code)
 
 
 void FullscreenMenuBase::clicked_back() {
-	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 }
 void FullscreenMenuBase::clicked_ok() {
-	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kOk));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }

@@ -88,7 +88,7 @@ void LoginBox::clicked_ok()
 		UI::WLMessageBox mb
 			(this, _("Empty Nickname"), _("Please enter a nickname!"),
 			 UI::WLMessageBox::MBoxType::kOk);
-		mb.run();
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
 	if (eb_nickname->text().find(' ') <= eb_nickname->text().size()) {
@@ -96,23 +96,23 @@ void LoginBox::clicked_ok()
 			(this, _("Space in Nickname"),
 			 _("Sorry, but spaces are not allowed in nicknames!"),
 			 UI::WLMessageBox::MBoxType::kOk);
-		mb.run();
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		UI::WLMessageBox mb
 			(this, _("Empty Password"), _("Please enter your password!"),
 			 UI::WLMessageBox::MBoxType::kOk);
-		mb.run();
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
-	end_modal(UI::Panel::ok_code);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 
 /// Called if "cancel" was pressed
 void LoginBox::clicked_back() {
-	end_modal(UI::Panel::dying_code);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code)

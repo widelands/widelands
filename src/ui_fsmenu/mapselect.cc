@@ -257,9 +257,9 @@ void FullscreenMenuMapSelect::clicked_ok()
 		fill_table();
 	} else {
 		if (is_scenario()) {
-			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame));
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
-			end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kNormalGame));
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 		}
 	}
 }

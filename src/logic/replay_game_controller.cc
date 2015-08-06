@@ -110,7 +110,7 @@ void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
 			"been paused. You may unpause the game and continue watching "
 			"if you want to."),
 		 UI::WLMessageBox::MBoxType::kOk);
-	mmb.run();
+	mmb.run<UI::Panel::Returncodes>();
 }
 
 uint8_t ReplayGameController::CmdReplayEnd::id() const {

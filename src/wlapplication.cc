@@ -449,7 +449,7 @@ void WLApplication::run()
 
 		{
 			FullscreenMenuIntro intro;
-			intro.run();
+			intro.run<FullscreenMenuBase::MenuTarget>();
 		}
 
 		g_sound_handler.change_music("menu", 1000);
@@ -1051,14 +1051,14 @@ void WLApplication::mainmenu()
 				 message,
 				 UI::WLMessageBox::MBoxType::kOk,
 				 UI::Align_Left);
-			mmb.run();
+			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();
 			messagetitle.clear();
 		}
 
 		try {
-			switch (static_cast<FullscreenMenuBase::MenuTarget>(mm.run())) {
+			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
 			case FullscreenMenuBase::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
@@ -1078,17 +1078,17 @@ void WLApplication::mainmenu()
 			}
 			case FullscreenMenuBase::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
-				ff.run();
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kLicense: {
 				FullscreenMenuFileView ff("txts/LICENSE.lua");
-				ff.run();
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kAuthors: {
 				FullscreenMenuFileView ff("txts/AUTHORS.lua");
-				ff.run();
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
@@ -1140,7 +1140,7 @@ void WLApplication::mainmenu_tutorial()
 		//  Start UI for the tutorials.
 		FullscreenMenuCampaignMapSelect select_campaignmap(true);
 		select_campaignmap.set_campaign(0);
-		if (select_campaignmap.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk)) {
+		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 		}
 	try {
@@ -1161,15 +1161,16 @@ void WLApplication::mainmenu_tutorial()
  */
 void WLApplication::mainmenu_singleplayer()
 {
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
+	//  This is the code returned by UI::Panel::run<Returncode>() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kBack) == UI::Panel::dying_code,
+		(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)
+		 == static_cast<int>(UI::Panel::Returncodes::kBack),
 		 "Panel should be dying.");
 
 	for (;;) {
 		FullscreenMenuSinglePlayer single_player_menu;
-		switch (static_cast<FullscreenMenuBase::MenuTarget>(single_player_menu.run())) {
+		switch (single_player_menu.run<FullscreenMenuBase::MenuTarget>()) {
 		case FullscreenMenuBase::MenuTarget::kBack:
 			return;
 		case FullscreenMenuBase::MenuTarget::kNewGame:
@@ -1201,7 +1202,7 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (static_cast<FullscreenMenuBase::MenuTarget>(mp.run())) {
+		switch (mp.run<FullscreenMenuBase::MenuTarget>()) {
 			case FullscreenMenuBase::MenuTarget::kBack:
 				return;
 			case FullscreenMenuBase::MenuTarget::kMetaserver:
@@ -1227,7 +1228,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
-			ns.run();
+			ns.run<FullscreenMenuBase::MenuTarget>();
 
 			if (InternetGaming::ref().logged_in())
 				// logout of the metaserver
@@ -1238,7 +1239,7 @@ void WLApplication::mainmenu_multiplayer()
 		} else {
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuNetSetupLAN ns;
-			menu_result = static_cast<FullscreenMenuBase::MenuTarget>(ns.run());
+			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
 			uint32_t addr;
 			uint16_t port;
@@ -1283,13 +1284,13 @@ bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLaunchSPG lgm(&sp);
-	const int32_t code = lgm.run();
+	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 	Widelands::Game game;
 
-	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)) {
+	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		return false;
 	}
-	if (code == static_cast<int>(FullscreenMenuBase::MenuTarget::kScenarioGame)) { // scenario
+	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
 		} catch (const std::exception & e) {
@@ -1347,7 +1348,7 @@ bool WLApplication::load_game()
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
 
-	if (ssg.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk))
+	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
 	else
 		return false;
@@ -1379,7 +1380,7 @@ bool WLApplication::campaign_game()
 		int32_t campaign;
 		{ //  First start UI for selecting the campaign.
 			FullscreenMenuCampaignSelect select_campaign;
-			if (select_campaign.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk))
+			if (select_campaign.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 				campaign = select_campaign.get_campaign();
 			else { //  back was pressed
 				filename = "";
@@ -1389,7 +1390,7 @@ bool WLApplication::campaign_game()
 		//  Then start UI for the selected campaign.
 		FullscreenMenuCampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kOk)) {
+		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 			break;
 		}
@@ -1415,7 +1416,7 @@ void WLApplication::replay()
 	if (m_filename.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
-		if (rm.run() == static_cast<int>(FullscreenMenuBase::MenuTarget::kBack))
+		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 
 		m_filename = rm.filename();

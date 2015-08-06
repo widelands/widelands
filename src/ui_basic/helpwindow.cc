@@ -187,7 +187,7 @@ bool HelpWindow::handle_key(bool down, SDL_Keysym code)
 void HelpWindow::clicked_ok()
 {
 	if (is_modal())
-		end_modal(UI::Panel::dying_code);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	else {
 		// do not call die() here - could lead to broken pointers.
 		// the window should get deleted with the parent anyways.

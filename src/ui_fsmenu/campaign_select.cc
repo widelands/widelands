@@ -117,7 +117,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 void FullscreenMenuCampaignSelect::clicked_ok()
 {
 	get_campaign();
-	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kOk));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
 int32_t FullscreenMenuCampaignSelect::get_campaign()

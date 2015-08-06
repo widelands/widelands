@@ -41,8 +41,8 @@ class Image;
 class FullscreenMenuBase : public UI::Panel {
 public:
 	enum class MenuTarget {
-		kBack = UI::Panel::dying_code,
-		kOk = UI::Panel::ok_code,
+		kBack = UI::Panel::Returncodes::kBack,
+		kOk = UI::Panel::Returncodes::kOk,
 
 		// Options
 		kRestart,

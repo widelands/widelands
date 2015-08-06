@@ -244,7 +244,7 @@ void FullscreenMenuLoadGame::clicked_ok()
 	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 	if (gamedata.errormessage.empty()) {
 		m_filename = gamedata.filename;
-		end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kOk));
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 	}
 }
 
@@ -283,7 +283,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 
 	UI::WLMessageBox confirmationBox
 		(this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
-	if (confirmationBox.run()) {
+	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->fs_unlink(gamedata.filename);
 		if (m_is_replay) {
 			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);

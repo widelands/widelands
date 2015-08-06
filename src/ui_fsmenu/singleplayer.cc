@@ -50,24 +50,24 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 {
 	new_game.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kNewGame)));
+			 FullscreenMenuBase::MenuTarget::kNewGame));
 	campaign.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kCampaign)));
+			 FullscreenMenuBase::MenuTarget::kCampaign));
 	load_game.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kLoadGame)));
+			 FullscreenMenuBase::MenuTarget::kLoadGame));
 	back.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kBack)));
+			 FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -86,5 +86,5 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 }
 
 void FullscreenMenuSinglePlayer::clicked_ok() {
-	end_modal(static_cast<int32_t>(FullscreenMenuBase::MenuTarget::kNewGame));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
 }

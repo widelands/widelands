@@ -295,7 +295,7 @@ called when a button is clicked
 //                 //                 ("Cannot remove player. It is referenced in some place. Remove all"
 //                 //                  " buildings and bobs that depend on this player and try again."),
 //                 //          UI::WLMessageBox::OK);
-//                 // mmb.run();
+//                 // mmb.run<UI::Panel::Returncodes>();
 //         }
 // }
 
@@ -325,7 +325,7 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 			 	("Cannot remove player. It is referenced someplace. Remove all"
 			 	 " buildings and animals that depend on this player and try again."),
 			 UI::WLMessageBox::MBoxType::kOk);
-		mmb.run();
+		mmb.run<UI::Panel::Returncodes>();
 	}
 	update();
 }

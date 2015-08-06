@@ -82,7 +82,7 @@ StoryMessageBox::StoryMessageBox
  * Clicked
  */
 void StoryMessageBox::clicked_ok() {
-	end_modal(UI::Panel::ok_code);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 /*

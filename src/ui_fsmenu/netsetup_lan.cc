@@ -249,11 +249,11 @@ void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	g_options.pull_section("global").set_string("lasthost", hostname.text());
 
-	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kJoingame));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_hostgame() {
-	end_modal(static_cast<int>(FullscreenMenuBase::MenuTarget::kHostgame));
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kHostgame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
