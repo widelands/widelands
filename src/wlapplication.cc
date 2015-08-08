@@ -901,10 +901,6 @@ void WLApplication::parse_commandline
 */
 void WLApplication::handle_commandline_parameters()
 {
-	if (m_commandline.count("help") || m_commandline.count("version")) {
-		init_language();
-		throw ParameterError(); //no message on purpose
-	}
 	if (m_commandline.count("logfile")) {
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
@@ -1024,6 +1020,11 @@ void WLApplication::handle_commandline_parameters()
 
 		g_options.pull_section("global").create_val
 			(it->first.c_str(), it->second.c_str());
+	}
+
+	if (m_commandline.count("help") || m_commandline.count("version")) {
+		init_language();
+		throw ParameterError(); //no message on purpose
 	}
 }
 
