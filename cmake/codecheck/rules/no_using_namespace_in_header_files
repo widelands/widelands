@@ -5,7 +5,7 @@ def does_include_using_namespace(lines, fn):
     if "system_headers.h" in fn:
         return []
     if not fn.endswith(".h"):
-		 return []
+        return []
     for lineno, line in enumerate(lines, 1):
         if "using namespace" in line:
             return [ (fn, lineno,
