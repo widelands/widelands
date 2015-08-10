@@ -346,7 +346,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run() takes care about this difference.
+ * run<Returncode>() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -564,7 +564,7 @@ bool Game::run
 
 		m_state = gs_running;
 
-		get_ibase()->run();
+		get_ibase()->run<UI::Panel::Returncodes>();
 
 		m_state = gs_ending;
 

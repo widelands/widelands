@@ -110,18 +110,11 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	password(pwd),
 	reg(registered)
 {
-	joingame.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_joingame,
-			  boost::ref(*this)));
-	hostgame.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_hostgame,
-			  boost::ref(*this)));
-	back.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuInternetLobby::clicked_back,
-			  boost::ref(*this)));
+	joingame.sigclicked.connect(
+				boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
+	hostgame.sigclicked.connect(
+				boost::bind(&FullscreenMenuInternetLobby::clicked_hostgame, boost::ref(*this)));
+	back.sigclicked.connect(boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
 
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -159,9 +152,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
-		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames   .double_clicked.connect
-		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this));
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
@@ -191,6 +184,16 @@ void FullscreenMenuInternetLobby::think ()
 	if (InternetGaming::ref().update_for_games())
 		fill_games_list(InternetGaming::ref().games());
 }
+
+void FullscreenMenuInternetLobby::clicked_ok()
+{
+	if (joingame.enabled()) {
+		server_doubleclicked();
+	} else {
+		clicked_hostgame();
+	}
+}
+
 
 
 /// connects Widelands with the metaserver
@@ -326,7 +329,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 
 
 /// called when an entry of the server list was selected
-void FullscreenMenuInternetLobby::server_selected (uint32_t)
+void FullscreenMenuInternetLobby::server_selected()
 {
 	if (opengames.has_selection()) {
 		const InternetGame * game = &opengames.get_selected();
@@ -339,7 +342,7 @@ void FullscreenMenuInternetLobby::server_selected (uint32_t)
 
 
 /// called when an entry of the server list was doubleclicked
-void FullscreenMenuInternetLobby::server_doubleclicked (uint32_t)
+void FullscreenMenuInternetLobby::server_doubleclicked()
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {
@@ -378,14 +381,17 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 			 // give some time for the answer + for a relogin, if a problem occurs.
 			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
 				// Show a popup warning message
-				std::string warningheader(_("Connection timed out"));
-				std::string warning
+				const std::string warning
 					(_
 						("Widelands was unable to get the IP address of the server in time.\n"
 						 "There seems to be a network problem, either on your side or on the side\n"
 						 "of the server.\n"));
-				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
-				mmb.run();
+				UI::WLMessageBox mmb(this,
+											_("Connection timed out"),
+											warning,
+											UI::WLMessageBox::MBoxType::kOk,
+											UI::Align_Left);
+				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
 			}
 		}
@@ -410,8 +416,8 @@ DIAG_ON("-Wold-style-cast")
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
-			mmb.run();
+			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
+			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
 
@@ -434,12 +440,4 @@ void FullscreenMenuInternetLobby::clicked_hostgame()
 	// Start the game
 	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
 	netgame.run();
-}
-
-
-/// called when the 'back' button was clicked
-void FullscreenMenuInternetLobby::clicked_back()
-{
-	// Close the lobby UI
-	end_modal(0);
 }

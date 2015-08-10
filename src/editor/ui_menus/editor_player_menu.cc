@@ -242,63 +242,6 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	// TODO(SirVer): currently possible in the editor though.
 }
 
-/*
-==============
-EditorPlayerMenu::clicked_up_down()
-
-called when a button is clicked
-==============
-*/
-// void EditorPlayerMenu::clicked_up_down(int8_t change) {
-//         EditorInteractive & parent =
-//                 dynamic_cast<EditorInteractive &>(*get_parent());
-//         Widelands::Map & map = parent.egbase().map();
-//         Widelands::PlayerNumber nr_players = map.get_nrplayers();
-//    // Up down button
-//         nr_players += change;
-//    if (nr_players<1) nr_players=1;
-//    if (nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
-//         if (nr_players > map.get_nrplayers()) {
-//       // register new default name for this players
-//       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
-//       char c2= (nr_players%10) + 0x30;
-//       std::string name=_("Player ");
-//       if (c1) name.append(1,c1);
-//       name.append(1,c2);
-//
-//                 map.set_nrplayers(nr_players);
-//                 map.set_scenario_player_name(nr_players, name);   //  ???
-//                 // TODO(SirVer): next lines were commented without a clue
-//                 // map.set_scenario_player_tribe(nr_players, tribe); //  ???
-//                 // menu.set_need_save(true);
-//                 m_add_player        .set_enabled(true);
-//                 m_remove_last_player.set_enabled(1 < nr_players);
-//                 // TODO(SirVer): next lines were commented without a clue
-//                 // if
-//                 //         (&menu.tools.current() == &menu.tools.set_starting_pos
-//                 //          and
-//                 //          menu.tools.set_starting_pos.get_current_player() == old_nr_players)
-//                 //         //  The starting position tool is the currently active editor tool and
-//                 //         //  the sel picture is the one with the color of
-//                 //         //  the player that is being removed. Make sure that it is fixed in
-//                 //         //  that case by by switching the tool to the previous player and
-//                 //         //  reselecting the tool.
-//                 //         set_starting_pos_clicked(nr_players); //  This calls update().
-//                 // else
-//                         update();
-//         } else {
-//                 // TODO(SirVer): this error was commented without a clue
-//                 // UI::WLMessageBox mmb
-//                 //         (&menu,
-//                 //          _("Error!"),
-//                 //          _
-//                 //                 ("Cannot remove player. It is referenced in some place. Remove all"
-//                 //                  " buildings and bobs that depend on this player and try again."),
-//                 //          UI::WLMessageBox::OK);
-//                 // mmb.run();
-//         }
-// }
-
 
 /**
  * Player Tribe Button clicked
@@ -324,8 +267,8 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 			 _
 			 	("Cannot remove player. It is referenced someplace. Remove all"
 			 	 " buildings and animals that depend on this player and try again."),
-			 UI::WLMessageBox::OK);
-		mmb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mmb.run<UI::Panel::Returncodes>();
 	}
 	update();
 }

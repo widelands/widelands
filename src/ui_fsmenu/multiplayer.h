@@ -34,17 +34,14 @@ class FullscreenMenuMultiPlayer : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuMultiPlayer();
 
-	enum class MenuTarget: int32_t {
-		kBack = UI::Panel::dying_code,
-		kMetaserver,
-		kLan
-	};
-
 	void show_internet_login();
 	void internet_login();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}
+
+protected:
+	void clicked_ok() override;
 
 private:
 	UI::Textarea title;

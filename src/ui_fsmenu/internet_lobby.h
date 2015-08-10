@@ -41,6 +41,9 @@ public:
 
 	void think() override;
 
+protected:
+	void clicked_ok() override;
+
 private:
 	uint32_t m_butx;
 	uint32_t m_butw;
@@ -68,13 +71,12 @@ private:
 	void connect_to_metaserver();
 
 	void client_doubleclicked (uint32_t);
-	void server_selected (uint32_t);
-	void server_doubleclicked (uint32_t);
+	void server_selected();
+	void server_doubleclicked();
 
 	void change_servername();
 	void clicked_joingame();
 	void clicked_hostgame();
-	void clicked_back();
 
 	uint8_t convert_clienttype(const std::string &);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);

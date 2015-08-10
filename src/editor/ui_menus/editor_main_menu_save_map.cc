@@ -208,7 +208,7 @@ void MainMenuSaveMap::clicked_ok() {
  */
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
-	if (md.run()) {
+	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(m_basedir);
 		//  create directory
 		std::string fullname = m_curdir;
@@ -380,8 +380,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
 				% FileSystem::fs_filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
-			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
-		if (!mbox.run())
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 			return false;
 
 		g_fs->fs_unlink(complete_filename);
@@ -400,8 +400,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			 "given:\n");
 		s += e.what();
 		UI::WLMessageBox  mbox
-			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::OK);
-		mbox.run();
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
 	}
 	die();
 

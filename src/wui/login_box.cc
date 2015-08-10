@@ -65,13 +65,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		 200, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Login"));
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_login, boost::ref(*this)));
+	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_cancel, boost::ref(*this)));
+	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
@@ -81,37 +81,54 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 
 
 /// called, if "login" is pressed
-void LoginBox::pressed_login()
+void LoginBox::clicked_ok()
 {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {
 		UI::WLMessageBox mb
 			(this, _("Empty Nickname"), _("Please enter a nickname!"),
-			 UI::WLMessageBox::OK);
-		mb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
 	if (eb_nickname->text().find(' ') <= eb_nickname->text().size()) {
 		UI::WLMessageBox mb
 			(this, _("Space in Nickname"),
 			 _("Sorry, but spaces are not allowed in nicknames!"),
-			 UI::WLMessageBox::OK);
-		mb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		UI::WLMessageBox mb
 			(this, _("Empty Password"), _("Please enter your password!"),
-			 UI::WLMessageBox::OK);
-		mb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mb.run<UI::Panel::Returncodes>();
 		return;
 	}
-	end_modal(1);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 
 /// Called if "cancel" was pressed
-void LoginBox::pressed_cancel()
+void LoginBox::clicked_back() {
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
+
+bool LoginBox::handle_key(bool down, SDL_Keysym code)
 {
-	end_modal(0);
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			case SDLK_ESCAPE:
+				clicked_back();
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
 }
