@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-30 13:30+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:12+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,18 +66,18 @@ msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Разширете територията си на изток, за да започнете до добивате мрамор от планината."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
-msgstr "Постройте каменоделска къща и минна промишленост"
+msgid "Build a stonemason’s house and mining infrastructure"
+msgstr "Постройте каменоделска къща и минна инфраструктура"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
-msgstr "Каменоделска къща и минна промишленост"
+msgid "Stonemason’s house and Mining Infrastructure"
+msgstr "Каменоделска къща и минна инфраструктера"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
 msgstr "Постройте каменоделска къща и след това цялостна минна и производствена промишлености (мина за въглища и/или пещ за въглища, мина за желязна руда, ковачница за инструменти, ковачница за брони и топилна)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -321,9 +321,9 @@ msgstr "Слава на боговете, това е невероятен къ�
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So you have to build a stonemason, who will cut columns "
-"from marble."
-msgstr "Само че, за всички тези по-големи сгради ще имаме нужда от по-изтънчени строителни материали. Трябва да се сдобиете с каменоделец, който да изсича колони от мрамор."
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr "Само че, за всички тези по-големи сгради ще имаме нужда от по-изтънчени строителни материали. Трябва да построите къща за каменоделеца, който да изсича колони от мрамор."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."

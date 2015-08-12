@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 10:26+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -468,8 +468,8 @@ msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
 msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
@@ -1216,23 +1216,24 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "Durmir"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
+msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
+msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
+msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
+msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
@@ -1332,7 +1333,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
 
@@ -1433,8 +1434,8 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
-msgstr "Cría os fortes cabalos atlánticos"
+msgid "Breeds the strong Atlantean horses"
+msgstr ""
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1499,10 +1500,6 @@ msgstr ""
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
 msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:48

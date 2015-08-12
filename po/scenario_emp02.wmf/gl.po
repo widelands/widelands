@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 08:44+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -68,19 +68,19 @@ msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Expándete cara o leste, para comezar a extracción de mármore da montaña."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
-msgstr "Constrúe unha infraestrutura canteira e mineira"
+msgid "Build a stonemason’s house and mining infrastructure"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
+msgid "Stonemason’s house and Mining Infrastructure"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
-msgstr "Constrúe unha canteira e a continuación unha infraestrutura completa de minería e produción (mina de carbón e/ou produtor de carbón vexetal, mina de mineral de ferro, forxa e ferrarías de todo tipo)."
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -323,9 +323,9 @@ msgstr "Por todos os deuses, isto si que é sorte! Hai outras dúas montañas, e
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So you have to build a stonemason, who will cut columns "
-"from marble."
-msgstr "Aínda así, para estes edificios máis grandes necesitamos mellores materiais. Así que hai que construír unha canteira, cun canteiro que extraia as columnas de mármore."
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 15:20+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 09:06+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1447,7 +1447,7 @@ msgstr "Pflanzt Bäume in der Umgebung."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Das Forsthaus braucht freien Raum innerhalb seines Arbeitsbereichs, um Bäume zu pflanzen."
 
@@ -1956,8 +1956,9 @@ msgstr "Das Ernten von Weintrauben"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
-msgstr "Der Winzer in diesem Weinberg hat keinen freien Platz, um Wein anzubauen."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Der Winzer in diesem Weinberg hat keinen freien Platz, um Weinreben zu pflanzen."
 
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Plant grapevines and harvest grapes."

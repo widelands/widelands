@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 11:14+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:11+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -469,9 +469,9 @@ msgstr "Chan eil achadh ann"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas fhreumhagan seo sìol."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach fhreumhagan a tha ag obair aig an tuathanas fhreumhagan seo sìol."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -1217,24 +1217,25 @@ msgid ""
 msgstr "’S e aon dhe na muirgheadhan as fhearr a nì ceàrdach arm nan Atlantach a th’ anns a mhuirgheadh dhùbailte. Thèid a cleachdadh san toll-dubh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "’Na chadal"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr "cadal"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 0 gu leibheil 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 1 gu leibheil 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 2 gu leibheil 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 2 gu leibheil 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 3 gu leibheil 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 3 gu leibheil 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1333,7 +1334,7 @@ msgstr "Cuiridh e craobhan mu thimcheall."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin-obrach aige gus na craobhan a chur ann."
 
@@ -1434,7 +1435,7 @@ msgid ""
 msgstr "Cuidichidh eich le giùlan nan nithean air rathaidean a tha trang. Togaidh tu ann an tuathanas each iad."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
+msgid "Breeds the strong Atlantean horses"
 msgstr "Tàrmaichidh e na h-eich Atlantach làidir."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
@@ -1501,10 +1502,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "Tochlaidh tu clach-iarainn ann am mèinnean iarainn. Bheir seo iarainn dhut ma leaghas tu i ann an ceàrdach leaghadair."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr "cadal"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"

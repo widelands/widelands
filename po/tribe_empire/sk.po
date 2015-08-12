@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 12:30+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-05 14:52+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -359,7 +359,7 @@ msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr "Potrebný text"
+msgstr "Chýba text"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -424,7 +424,7 @@ msgstr "Výcvik uhýbania:"
 #: ../../tribes/empire/weaving-mill/help.lua:29
 #: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr "Potrebná kalkulácia"
+msgstr "Chýba výpočet"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -451,7 +451,7 @@ msgstr "kutie krúžkovej zbroje"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr ""
+msgstr "kutie plátovej zbroje"
 
 #: ../../tribes/empire/armorsmithy/conf:40 ../../tribes/empire/bakery/conf:25
 #: ../../tribes/empire/charcoal_kiln/conf:25 ../../tribes/empire/farm/conf:29
@@ -508,7 +508,7 @@ msgstr "pracovanie"
 #: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
-msgstr "Potrebný zdroj"
+msgstr "Chýba zdroj"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
@@ -1445,7 +1445,7 @@ msgstr "Sadí stromy na okolitom území."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Horáreň potrebuje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
 
@@ -1496,17 +1496,17 @@ msgstr "Poskytuje ubytovanie pre obyvateľov a skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Základňa predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
+msgstr "Napriek tomu, že táto loď stroskotala, vašim obyvateľom naďalej poskytuje ubytovanie. Zároveň skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
-msgstr ""
+msgstr "Základňa vo vraku predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1714,11 +1714,11 @@ msgstr "Plechová zbroj je najsilnejším brnením, aké môže vojak impéria m
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr ""
+msgstr "lámanie kameňa"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr ""
+msgstr "lámanie mramoru"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1954,8 +1954,9 @@ msgstr "oberanie hrozna"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
-msgstr "Vinohradník pracujúci v tomto vinohrade nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Vinohradník pracujúci v tomto vinohrade nemá k dispozícii čistú pôdu, na ktorej by mohol sadiť vinič."
 
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Plant grapevines and harvest grapes."

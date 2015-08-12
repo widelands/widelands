@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 15:20+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:16+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -471,9 +471,9 @@ msgstr "Keine Felder"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
-msgstr "Der Bauer dieser Dunkelrübenfarm hat keinen freien Platz, um Dunkelrüben zu säen."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
+msgstr "Der Dunkelrübenbauer dieser Dunkelrübenfarm hat keinen freien Platz, um Dunkelrüben zu säen."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -1219,24 +1219,25 @@ msgid ""
 msgstr "Der Doppel-Dreizack ist einer der besten Dreizacke, der in der atlantischen Waffenschmiede produziert wird. Er wird in einem Verlies – zusammen mit Nahrung – verwendet, um Soldaten von der Angriffsstufe 2 auf 3 zu trainieren."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "Schläft"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr "Das Schlafen"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Verbessert Angriff des Soldaten von Stufe 0 auf 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 0 auf 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Verbessert Angriff des Soldaten von Stufe 1 auf 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 1 auf 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Verbessert Angriff des Soldaten von Stufe 2 auf 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 2 auf 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Verbessert Angriff des Soldaten von Stufe 3 auf 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 3 auf 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1335,7 +1336,7 @@ msgstr "Pflanzt Bäume in der Umgebung."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Das Forsthaus braucht freien Raum innerhalb seines Arbeitsbereichs, um Bäume zu pflanzen."
 
@@ -1436,7 +1437,7 @@ msgid ""
 msgstr "Pferde helfen dabei, Gegenstände entlang ausgelasteter Straßen zu transportieren. Sie werden in einer Pferdezucht aufgezogen."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
+msgid "Breeds the strong Atlantean horses"
 msgstr "Züchtet die starken atlantischen Pferde"
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
@@ -1503,10 +1504,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "Eisenerz wird in Eisenerzminen abgebaut. Es wird in Hochöfen geschmolzen, um Eisen zu erhalten."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr "Das Schlafen"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"

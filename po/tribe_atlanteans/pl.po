@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
+"Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -469,9 +469,9 @@ msgstr "Brak pól"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
-msgstr "Farmer pracujący na tej farmie czarnych korzeni nie ma terenu do obsadzenia."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
+msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -1217,24 +1217,25 @@ msgid ""
 msgstr "Podwójny trójząb to jeden z najlepszych trójzębów produkowanych przez atlantydzkich zbrojmistrzów. Wykorzystywany jest w podziemiach - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do poziomu 3."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
 msgstr "spanie"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "szkolenie ataku żołnierza z poziomu 0 do poziomu 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "szkolenie ataku żołnierza z poziomu 1 do poziomu 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "szkolenie ataku żołnierza z poziomu 2 do poziomu 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "szkolenie ataku żołnierza z poziomu 3 do poziomu 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1333,7 +1334,7 @@ msgstr "Sadzi drzewa w okolicy."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
 
@@ -1434,8 +1435,8 @@ msgid ""
 msgstr "Konie pomagają przenosić towary na często używanych drogach. Hodowane są w stadninach."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
-msgstr "Hoduje potężne atlantydzkie konie."
+msgid "Breeds the strong Atlantean horses"
+msgstr ""
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1501,10 +1502,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "Ruda żelaza wydobywana jest w kopalniach żelaza. Wytapia się ją w hucie celem uzyskania żelaza."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr "spanie"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
