@@ -160,8 +160,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
-	owned_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
-	productivity_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
+	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
+	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 
 	// Column counters
 	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
@@ -389,11 +389,11 @@ bool BuildingStatisticsMenu::add_button(
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
 	owned_labels_[id] =
-		new UI::MultilineTextarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight);
+		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align_Center);
 	button_box->add(owned_labels_[id], UI::Align_Left);
 
 	productivity_labels_[id] =
-		new UI::MultilineTextarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight);
+		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align_Center);
 	button_box->add(productivity_labels_[id], UI::Align_Left);
 
 	row.add(button_box, UI::Align_Left);
@@ -747,15 +747,22 @@ void BuildingStatisticsMenu::update() {
 	}
 }
 
-void BuildingStatisticsMenu::set_labeltext_autosize(UI::MultilineTextarea* textarea,
+void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-	const std::string formatted_str =
-		(boost::format("<rt><p font-face=condensed font-weight=bold "
-							"font-size=%i font-color=%s>%s</p></rt>") %
-		 (text.length() > 5 ? kLabelFontSize - floor(text.length() / 2) : kLabelFontSize) %
-		 color.hex_value() % text).str();
-	textarea->set_text(formatted_str);
+	int fontsize = text.length() > 7 ? kLabelFontSize - floor(text.length() / 3) : kLabelFontSize;
+
+	UI::TextStyle style;
+	if (text.length() > 5) {
+		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
+	} else {
+		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
+	}
+	style.fg = color;
+	style.bold = true;
+
+	textarea->set_textstyle(style);
+	textarea->set_text(text);
 	textarea->set_visible(true);
 }
 

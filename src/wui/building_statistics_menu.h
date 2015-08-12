@@ -29,7 +29,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
@@ -76,7 +75,7 @@ private:
 	void jump_building(JumpTarget target, bool reverse);
 
 	/// Sets the label for id type to text in the chosen color with dynamic font size
-	void set_labeltext_autosize(UI::MultilineTextarea* textarea,
+	void set_labeltext_autosize(UI::Textarea* textarea,
 	                            const std::string& text,
 	                            const RGBColor& color);
 
@@ -101,11 +100,9 @@ private:
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
 	/// Labels with owned / under construction buildings
-	std::vector<UI::MultilineTextarea*> owned_labels_;
+	std::vector<UI::Textarea*> owned_labels_;
 	/// Labels with buildings' productivity
-	// TODO(GunChleoc): These need to be multiline, so we can give them a color.
-	// Turn into normal textareas in fh1 branch.
-	std::vector<UI::MultilineTextarea*> productivity_labels_;
+	std::vector<UI::Textarea*> productivity_labels_;
 
 	/// The buttons for stepping through buildings
 	UI::Panel navigation_panel_;
