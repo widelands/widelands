@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   -- In Kelvin.
+   -- Temperature is in arbitrary units.
    preferred_temperature = 125,
 
    -- In percent (1 being very wet).

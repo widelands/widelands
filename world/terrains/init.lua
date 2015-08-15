@@ -64,7 +64,7 @@ world:new_terrain_type{
    dither_layer = 340,
 
    -- Terrain affinity constants. This is used to model how well plants grow on this terrain.
-   -- Temperature are in Kelvin.
+   -- Temperature is in arbitrary units.
    temperature = 100,
 
    -- Humidity is in percent (1 being very wet).
