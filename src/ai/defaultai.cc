@@ -2236,9 +2236,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				//// testing if building's output is needed
-				//check_ware_necessity(
-				   //bo, &output_is_needed, &max_preciousness, &max_needed_preciousness_);
 				if (bo.output_needed_ == ExtendedBool::kUnset) {
 					check_building_necessity(bo);
 				}
