@@ -1201,7 +1201,7 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 			// Check whether this building is completely occupied
 			mines_.front().bo->unoccupied_ |= !mines_.front().site->can_start_working();
 		} else {
-			buildings_.at(i).unconnected_ += 1;
+			mines_.front().bo->unconnected_ += 1;
 		}
 
 		// Now reorder the buildings
