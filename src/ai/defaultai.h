@@ -169,10 +169,7 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
-	void check_ware_necessity(BuildingObserver& bo,
-	                          bool* output_is_needed,
-	                          int16_t* max_preciousness,
-	                          int16_t* max_needed_preciousness);
+	void check_building_necessity(BuildingObserver& bo);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
