@@ -35,7 +35,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	int32_t const offsy   = 30;
 	int32_t       posy    = offsy;
 
-	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
+	new UI::Textarea(this, spacing, posy, _("Enter Directory Name:"));
 	posy += 20 + spacing;
 
 	m_edit =
@@ -57,7 +57,9 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		 std::string(),
 		 m_dirname.size());
 	m_ok_button->sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 1));
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+						 boost::ref(*this),
+						 UI::Panel::Returncodes::kOk));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
@@ -65,7 +67,9 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 0));
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+						 boost::ref(*this),
+						 UI::Panel::Returncodes::kBack));
 
 	center_to_parent();
 }

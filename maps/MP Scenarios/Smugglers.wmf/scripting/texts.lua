@@ -4,10 +4,10 @@
 welcome_msg = rt(
    h1(_"Smugglers") ..
    h2(_"Rules") ..
-   p(_([[Smugglers is a fun map for 4 players. You and your partner start diagonally from each other on a point symmetric island. There are plenty of smuggling tunnels on this island, each consisting of a receiving and a sending end. ]]) ..
-   _([[To establish a smuggling route, you need to build a warehouse on a sending/receiving spot while your team mate has to build one on the corresponding receiving/sending spot. A ware is then transported every 10 seconds. ]]) ..
+   p(_([[Smugglers is a fun map for 4 players. You and your partner start diagonally from each other on a point symmetric island. There are plenty of smuggling tunnels on this island, each consisting of a receiving and a sending end.]])) ..
+   p(_([[To establish a smuggling route, you need to build a warehouse on a sending/receiving spot while your team mate has to build one on the corresponding receiving/sending spot. A ware is then transported every 10 seconds.]])) ..
 -- TRANSLATORS: %s = '<number> points'
-	_([[For harder to defend smuggling routes, you get 2 or 3 points per ware smuggled. The first team to collect %s wins.]])) ..
+	p(_([[For harder to defend smuggling routes, you get 2 or 3 points per ware smuggled. The first team to collect %s wins.]])) ..
 	rt(h2(_"A sending spot")) .. rt("image=map:send_spot.png", p(" ")) ..
 	rt(h2(_"A receiving spot")) .. rt("image=map:recv_spot.png", p(" ")) ..
 	rt(h2(_"Notes") ..

@@ -20,6 +20,7 @@
 #include "ui_basic/messagebox.h"
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
@@ -82,28 +83,29 @@ WLMessageBox::WLMessageBox
 
 	d->textarea->set_size(width - 10, height - 50);
 
-	if (type == OK) {
+	if (type == MBoxType::kOk) {
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("OK"));
-		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_ok, boost::ref(*this)));
-	} else if (type == YESNO) {
-		UI::Button * yesbtn = new Button
-			(this, "yes",
+		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
+	} else if (type == MBoxType::kOkCancel) {
+		UI::Button * okbtn = new Button
+			(this, "ok",
 			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
-			 _("Yes"));
-		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_yes, boost::ref(*this)));
-		UI::Button * nobtn = new Button
+			 _("OK"));
+		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
+		UI::Button * cancelbtn = new Button
 			(this, "no",
 			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 120, 20,
 			 g_gr->images().get("pics/but1.png"),
-			 _("No"));
-		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_no, boost::ref(*this)));
+			 _("Cancel"));
+		cancelbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}
+	focus();
 }
 
 WLMessageBox::~WLMessageBox()
@@ -120,10 +122,11 @@ bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		if (d->type == OK)
-			pressed_ok();
-		else
-			pressed_no();
+		if (d->type == MBoxType::kOk) {
+			clicked_ok();
+		} else {
+			clicked_back();
+		}
 	}
 	return true;
 }
@@ -135,45 +138,35 @@ bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
 
 bool WLMessageBox::handle_key(bool down, SDL_Keysym code)
 {
-	if (!down) {
-		return false;
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			case SDLK_ESCAPE:
+				clicked_back();
+				return true;
+			default:
+				break; // not handled
+		}
 	}
-
-	switch (code.sym) {
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
-			pressed_yes();
-			pressed_ok();
-			return true;
-		case SDLK_ESCAPE:
-			pressed_no();
-			pressed_ok();
-			return true;
-		default:
-			return false;
-	}
-
+	return UI::Panel::handle_key(down, code);
 }
 
-void WLMessageBox::pressed_ok()
+
+void WLMessageBox::clicked_ok()
 {
 	ok();
 	if (is_modal())
-		end_modal(0);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
-void WLMessageBox::pressed_yes()
+void WLMessageBox::clicked_back()
 {
-	yes();
+	cancel();
 	if (is_modal())
-		end_modal(1);
-}
-
-void WLMessageBox::pressed_no()
-{
-	no();
-	if (is_modal())
-		end_modal(0);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 

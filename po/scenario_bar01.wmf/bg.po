@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-21 10:48+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:10+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,8 +68,8 @@ msgid ""
 "terrain though, not mountain meadow). When you click on the new flag, you "
 "can send geologists there. Because the flag is on a mountain, the geologists"
 " will search for ores; otherwise, they would search for water. Then build a "
-"mine for both kinds of resources that he will find, choosing the appropriate"
-" mine to be built:"
+"mine for both kinds of resources that they will find, choosing the "
+"appropriate mine to be built:"
 msgstr "За да направите това, поставете флаг на източния склон на планината (върху планински терен, а не поляна). Когато натиснете върху новия флаг, можете да изпратите геолози там. Тъй като флагът е върху планина, геолозите ще търсят руди; иначе те биха търсили вода. След това постройте мина за всеки от двата вида ресурси, които те открият, избирайки правилния вид мина:"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
@@ -154,14 +154,14 @@ msgstr "Постройте кладенец, ферма и пекарна"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
-"hunters. The wheat of the farms has to be processed with water in a bakery "
+"farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "Други начини да произведете храна – различни видове храна – са рибарите и ловците. Пшеницата от фермите трябва да бъде смесена с вода в пекарна, преди да стане ядлива. Можете да се снабдите с вода, ако построите кладенец на място, където геолозите Ви са открили наличност на вода."
+msgstr "Други начини да произведете храна – различни видове храна – са рибарите и фермите. Пшеницата от фермите трябва да бъде смесена с вода в пекарна, преди да стане ядлива. Можете да се снабдите с вода, ако построите кладенец на място, където геолозите Ви са открили наличност на вода."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Обработете изкопаните си ресурси"
+msgstr "Обработете добитите си ресурси"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
@@ -171,7 +171,7 @@ msgstr "Постройте топилна"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Желязната руда, която миньорите Ви изкопават, все още не може да се използва – първо трябва да бъде превърната в желязо."
+msgstr "Желязната руда, която миньорите Ви добиват, все още не може да се използва – първо трябва да бъде превърната в желязо."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
@@ -197,7 +197,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Обикновената мина може да изкопае само една трета от всички ресурси, които се крият в земята. След това тя трябва да бъде надградена до дълбока мина, за да продължи да работи както трябва. За да надградите сграда, я изберете и натиснете бутона за това в прозореца, който ще се появи."
+msgstr "Обикновената мина може да добие само една трета от всички ресурси, които се крият в земята. След това тя трябва да бъде надградена до дълбока мина, за да продължи да работи както трябва. За да надградите сграда, я изберете и натиснете бутона за това в прозореца, който ще се появи."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -226,7 +226,7 @@ msgstr "Разбира се, можете да надградите всички
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:105
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Постройте дървовтвърдителница"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
@@ -235,11 +235,11 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "По-големите и добри сгради – включително всички военни такива – изискват по-добри строителни материали. Те не могат да бъдат построени от обикновени дървени трупи – дървото първо трябва да бъде преработено в черно дърво от дървовтвърдителница. Запомнете, че трябва да построите дървовтвърдителница преди да изчерпате черните си дърва, тъй като без тях не можете да разширявате териториите си."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Постройте варджийница и изградете въглищна икономика"
+msgstr "Постройте варджийница и изградете въглищна промишленост"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
@@ -251,7 +251,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of raw stone, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "По-добрите сгради може да изискват и други подобрени материали, освен черното дърво. Един от тях е варта, която се произвежда от необработени камъни, вода и въглища от варджия."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
@@ -511,7 +511,7 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Още веднъж, отидох до гробницата на баща ми, в свещена гора в подножието на великата кула на Кал'маврат. Просто стоях там и не усещах как часовете се нижеха, нито студения дъжд, изливащ се от потъмнялото небе..."
+msgstr "Още веднъж, отидох до гробницата на баща ми, в свещена гора в подножието на великата планина Кал'маврат. Просто стоях там и не усещах как часовете се нижеха, нито студения дъжд, изливащ се от потъмнялото небе..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:261
 msgid ""
@@ -752,7 +752,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "След като вече имаме мини и храна да ги поддържаме, трябва да превърнем това, което миньорите изкопават, в нещо полезно. Желязната руда трябва да бъде претопена в желязо, така че да е готова да се превърне в това, което ни трябва. А въглищата ни трябват, за да поддържаме огъня в пещите на топиларя."
+msgstr "След като вече имаме мини и храна да ги поддържаме, трябва да превърнем това, което миньорите добиват, в нещо полезно. Желязната руда трябва да бъде претопена в желязо, така че да е готова да се превърне в това, което ни трябва. А въглищата ни трябват, за да поддържаме огъня в пещите на топиларя."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:435
@@ -763,7 +763,7 @@ msgstr "Кхантрук проговаря..."
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr "Миньорите ни изкопават все по-малко всеки ден! Трябва да копаем по-дълбоко, по-близо до ядрото на планината, ако искаме още от богатствата ѝ!"
+msgstr "Миньорите ни добиват все по-малко всеки ден! Трябва да копаем по-дълбоко, по-близо до ядрото на планината, ако искаме още от богатствата ѝ!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:396
 msgid ""
@@ -781,32 +781,32 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr ""
+msgstr "Както разбрах току-що, запасите ни от черно дърво са на привършване! Не можем да държим войниците си в някакви разпадащи се бараки, особено в тези опасни времена!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:405
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Трябва ни дървовтвърдителница, и то веднага!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:411
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Болдрет се усмихва..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr ""
+msgstr "Е, стари приятелю, така би трябвало да сме сигурни, че укрепленията ни няма да се сринат при първия боен вик на враговете ни! Сега можем да разширяваме територията си спокойно!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "Все пак няма да е лошо да се запасим с вар. Така можем, ако ни се наложи, да построим крепост, каквато светът не е виждал досега!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:420
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Кхантрук се включва..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:421
 msgid ""
@@ -815,25 +815,25 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "Вожде, това е срамота! Добре е, че вече можем да произвеждаме вар за могъщи укрепления и величествени сгради – но това не спира покривите ни да текат! Може би младите харесват да прекарват нощите си под дъжда, но аз не мога да спя, когато капе по лицето ми."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "Ето това е проблем, с който трябва да се заемем!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:429
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Кхантрук изглежда облекчен..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:430
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr ""
+msgstr "Чудесно! покривите ни вече не текат и имаме достатъчно материали, за да построим... е... каквато и да е величествена сграда!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:434
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Трябват ни волове!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:436
 msgid ""
@@ -841,30 +841,30 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "Тъй като територията ни се разширява все повече, пътищата започват да стават претъпкани. Бедните ни носачи вече не могат да пренасят стоките толкова бързо, колкото имаме нужда. Предлагам да им помогнем като започнем да развъждаме волове."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:438
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "Воловете са удивителни животни: те са бързи като човек, но много по-силни и икономични. За да ги развъждаме ни трябват само пшеница и вода, и след това те ще вършат работата си по пътищата надеждно и предано."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:443
 msgid "Mission Complete"
-msgstr ""
+msgstr "Мисията е завършена"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:444
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:456
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Трон проговаря..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:445
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr ""
+msgstr "Онзи ден Болдрет ме помоли да го придружа в новия хан. Каза, че щяло да ме ободри."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:447
 msgid ""
@@ -872,31 +872,31 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "Когато се огледах, видях лица, изпълнени с преданост, вярващи, че мога да ги преведа през мрака. Но преди да мога да кажа няколко думи, за да им благодаря и да ги окуража, един от воините ми нахлу в хана. Последните няколко дни той беше прекарал далеч в гората и личеше, че е много изтощен."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:449
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Новините, които донесе, промениха всичко..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Victory"
-msgstr ""
+msgstr "Победа"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:451
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Вие завършихте тази мисия. Ако искате, можете да продължите да играете, или да преминете на следващата мисия."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Нощ с пълнолуние"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:457
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
-msgstr ""
+msgstr "Една нощ, когато Луната светеше ярко, аз се изкачих на върха на Кал'маврат."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:459
 msgid ""
@@ -904,58 +904,58 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "Когато се взрях в хоризонта, видях пурпурни светлини да мигат в далечината. Невероятно е с каква страст братята ми водят тази война. Страхувам се от момента, когато ще видя Ал'тунран отново – дали от нашата красива столица ще е останало нещо друго освен пепел и развалини, когато стигнем там?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Още един студен ден"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:464
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Трон изглежда притеснен..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:465
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Зима е. Много от нас едва издържат на студа, но трябва да сме силни. Денят, когато ще се върнем, не може да е твърде далеч... не трябва да е е много далеч."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:467
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "Молех се да стане по-топло, както и за това войната най-сетне да свърши."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:469
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Изглежда засега нито една от молбите ми не е чута."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:473
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Едно приятелско село се присъедини към нас!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:475
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "Открихме село с приятелски настроени и работливи хора, впечатлени от нашите богатства, технологии и сила."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:477
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Те живеят просто, дори безгрижно, изхранвайки се с лов и земеделие. Досега не са участвали във война, така че не са готови за битка."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Но се страхуват, че войната около Ал'тунран ще сложи край на мирния им живот. Затова бяха решили да се присъединят към нас, надявайки се, че можем да си помогнем взаимно."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "„%s“"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

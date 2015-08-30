@@ -1,21 +1,24 @@
 The data in developers.lua is generated from developers.json
-and the files in the translators directory.
+and the files in the i18n/locales directory.
 
 The script to generate developers.lua from these files is located in
 utils/update_authors.py
 
 ===================================
 |                                 |
-|   translators/<iso-code>.json   |
+|   i18n/locales/<iso-code>.json  |
 |                                 |
 ===================================
 
-The translator credits for each locale are located in a separate JSON
-file. Editing and generating these files is handled through Transifex.
+The translator credits and locale info for each locale are located in a separate
+JSON file. Editing and generating these files is handled through Transifex.
 
-The Transifex source file for these is translators/translators.json.
-For files where "translator-list": "translator-credits", these haven't
-been translated (= no credits are listed), so these files hsould be ignored.
+The Transifex source file for these is i18n/locales/locales_translators.json.
+For files where "translator-list" = "translator-credits", these haven't
+been translated (= no credits are listed), so these files should be ignored
+for the credits file.
+
+These JSON files are also used to generate the locale data in i18n/locales.lua.
 
 
 ===================================

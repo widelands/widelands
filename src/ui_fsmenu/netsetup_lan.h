@@ -36,12 +36,6 @@ struct NetGameInfo;
 
 class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
 public:
-	enum {
-		CANCEL = 0,
-		HOSTGAME,
-		JOINGAME,
-	};
-
 	FullscreenMenuNetSetupLAN ();
 
 	void think() override;
@@ -58,6 +52,9 @@ public:
 	 * \return the name chosen by the player
 	 */
 	const std::string & get_playername();
+
+protected:
+	void clicked_ok() override;
 
 private:
 	uint32_t m_butx;

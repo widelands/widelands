@@ -30,10 +30,14 @@ namespace Widelands {
 
 // A Map (or scenario) objective is an objective that has to be fulfilled to
 // end a scenario successfully.
-class Objective  {
+class Objective {
 public:
 	Objective(const std::string& init_name)
-	   : m_name(init_name), m_descname(init_name), m_descr(_("no descr")), m_visible(true), m_done(false) {
+	   : m_name(init_name),
+	     m_descname(init_name),
+	     m_descr(_("This objective has no description.")),
+	     m_visible(true),
+	     m_done(false) {
 	}
 
 	// Unique internal name of the objective.
@@ -78,10 +82,9 @@ private:
 	const std::string m_name;
 	std::string m_descname;
 	std::string m_descr;
-	bool        m_visible;
-	bool        m_done;
+	bool m_visible;
+	bool m_done;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_OBJECTIVE_H

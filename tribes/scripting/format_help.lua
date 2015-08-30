@@ -278,17 +278,17 @@ function building_help_general_string(tribename, building_description, purpose, 
 
 	if(building_description.type_name == "productionsite") then
 		if(building_description.workarea_radius and building_description.workarea_radius > 0) then
-			result = result .. text_line(_"Work area:", building_description.workarea_radius)
+			result = result .. text_line(_"Work area radius:", building_description.workarea_radius)
 		end
 
 	elseif(building_description.type_name == "warehouse") then
 		result = result .. rt(h3(_"Healing:")
-			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
+			.. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %s health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 
 	elseif(building_description.type_name == "militarysite") then
 		result = result .. rt(h3(_"Healing:")
-			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
+			.. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %s health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 

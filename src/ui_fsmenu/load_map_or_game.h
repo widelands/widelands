@@ -76,12 +76,7 @@ class FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 public:
 	FullscreenMenuLoadMapOrGame(bool sortdesc = false);
 
-	bool handle_key(bool down, SDL_Keysym code) override;
-
 protected:
-	virtual void clicked_ok() {end_modal(1);}
-	void clicked_back() {end_modal(0);}
-
 	// Updates the information display on the right-hand side.
 	// Call this function when a different entry in the table gets selected.
 	virtual void entry_selected() {}

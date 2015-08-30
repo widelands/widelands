@@ -163,9 +163,11 @@ void GameSummaryScreen::fill_data()
 		std::string stat_str;
 		switch (pes.result) {
 			case Widelands::PlayerEndResult::PLAYER_LOST:
+				/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 				stat_str = _("Lost");
 				break;
 			case Widelands::PlayerEndResult::PLAYER_WON:
+				/** TRANSLATORS: This is shown in the game summary for the players who have won. */
 				stat_str = _("Won");
 				if (!single_won) {
 					single_won = p;
@@ -174,9 +176,12 @@ void GameSummaryScreen::fill_data()
 				}
 				break;
 			case Widelands::PlayerEndResult::PLAYER_RESIGNED:
+				/** TRANSLATORS: This is shown in the game summary for the players who have resigned. */
 				 stat_str = _("Resigned");
 				 break;
 			default:
+				/** TRANSLATORS: This is shown in the game summary when we don't know */
+				/** TRANSLATORS: if the player has lost or won. */
 				stat_str = _("Unknown");
 		}
 		te.set_string(2, stat_str);
@@ -215,7 +220,7 @@ void GameSummaryScreen::continue_clicked()
 
 void GameSummaryScreen::stop_clicked()
 {
-	m_game.get_ibase()->end_modal(0);
+	m_game.get_ibase()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void GameSummaryScreen::player_selected(uint32_t entry_index)

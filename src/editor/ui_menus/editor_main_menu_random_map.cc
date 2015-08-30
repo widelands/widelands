@@ -57,7 +57,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		{"greenland", _("Summer")},
 		{"winterland", _("Winter")},
 		{"desert", _("Desert")},
-		{"blackland", _("Black")},
+		{"blackland", _("Wasteland")},
 	}),
 	m_current_world(0) {
 	int32_t const offsx   =  5;

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
-"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that he will find, choosing the appropriate mine to be built:"
+"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48

@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-11 20:29+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,40 +19,40 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "Ekonomika a jej nastavenie"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomika"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr ""
+msgstr "Vitajte späť. V tomto tutoriáli sa dozviete, akými spôsobmi môžete zistiť funkčnosť vašej ekonomiky."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "Budovanie ekonomiky a zabezpečovanie jej správnej funkčnosti a rastu predstavuje jadro celej hry. Pracovníkov však nemožno ovládať priamo – riadia sa všeobecnými podmienkami, ktoré nastavíte. "
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "V tomto tutoriáli mám za cieľ ukázať vám, aké činnosti vedú k definovaniu tých podmienok."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "Pokojná krajina"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "Niekoľko slov k mape: usadili ste sa v peknej doline medzi dvoma horami, bohatými na mramor, železnú rudu a uhlie. Každý dúfal v pokojný život."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -60,108 +60,108 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three castles."
-msgstr ""
+msgstr "Jedného dňa ste však na východe objavili holú pustatinu s opustenými budovami. Vyžarovala odtiaľ akási zvláštna aura a nik sa tam neodvážil vkročiť. Aby hranica neostala bez ochrany, postavili ste tri hrady."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr ""
+msgstr "Na vojnu ste sa nepripravovali a teraz musíte bleskovo vybudovať vojsko."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "Krčma je v plameňoch!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"
-msgstr ""
+msgstr "Nehoda"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:45
 msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "Ach, nie, horí nám krčma! Naša hostinská v tom veľkom zhone nedopatrením pustila fakľu na zem. Je v poriadku, ale požiar sa nám nepodarilo včas uhasiť."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
-msgstr ""
+msgstr "Štatistika budov"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
-msgstr ""
+msgstr "Skontrolujte svoje krčmy"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Najprv treba zistiť, koľko krčiem momentálne máme. Widelands na to ponúka okno, kde sa to dá jednoducho skontrolovať."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid ""
 "First, you will have to open the statistics menu (you can find the "
 "corresponding button at the bottom). We will need this menu several times."
-msgstr ""
+msgstr "Najskôr musíte otvoriť štatistické menu (príslušné tlačidlo nájdete naspodku obrazovky). Budeme ho niekoľkokrát potrebovať."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "Afterwards, choose the ‘Building statistics’."
-msgstr ""
+msgstr "Následne kliknite na tlačidlo „Štatistika budov“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
 msgid "Open the building statistics window."
-msgstr ""
+msgstr "Otvorte okno Štatistika budov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "You can also use the hotkey ‘b’."
-msgstr ""
+msgstr "Možno použiť aj klávesovú skratku „b“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Okno Štatistika budov poskytuje prehľad o budovách, ktoré vlastníte."
 
 #: TRANSLATORS "it" refers to the building statistics window TRANSLATORS "it"
 #: refers to the stock menu window
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid "Open it. You can access it from the statistics menu."
-msgstr ""
+msgstr "Otvorte ho. Možno k nemu získať prístup zo štatistického menu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
-msgstr ""
+msgstr "Štatistické menu možno otvoriť pomocou druhého tlačidla naspodku obrazovky. Ponúka niekoľko okien poskytujúcich informácie o hre."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
-msgstr ""
+msgstr "Štatistika budov"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr ""
+msgstr "Nachádzate sa v okne Štatistika budov. Zobrazujú sa tu všetky budovy, ktoré môžete vlastniť, utriedené podľa veľkosti."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:81
 msgid "Let me now explain what all those numbers mean:"
-msgstr ""
+msgstr "Dovoľte mi objasniť význam všetkých tých čísel:"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "„2/1“ pod kameňolomom: Znamená to, že máte postavené dva kameňolomy a jeden ďalší je vo výstavbe."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "„0 %“: Ukazuje priemernú produktivitu všetkých budov tohto typu. Keďže ste začali hru len pred chvíľou, žiadna budova sa ešte nedostala k práci, ale onedlho by mali začať pracovať."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
@@ -169,7 +169,7 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions — we really need more soldiers."
-msgstr ""
+msgstr "„2/4“ pod strážnicou: Pri vojenských budovách sa namiesto produktivity zobrazuje počet vnútri umiestnených vojakov. V strážniciach by ste mali mať spolu štyroch vojakov, ale posádku tohto druhu budovy momentálne tvoria len dvaja vojaci. Dve pozície teda zostávajú voľné – potrebujeme viac vojakov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
@@ -181,36 +181,36 @@ msgstr ""
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "Po kliknutí na budovu sa budete môcť presúvať medzi budovami vybraného typu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "Ak nemáte žiadne budovy nejakého typu, zobrazí sa v odtieňoch sivej."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "Now it’s your turn"
-msgstr ""
+msgstr "Teraz ste na rade vy"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium Buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr ""
+msgstr "Takéto vysvetlenie zatiaľ postačí. Teraz si to vyskúšajte samostatne. Chceme zistiť, či ešte máme krčmy, takže musíte vybrať kartu „Stredné budovy“. Následne zavrite okno Štatistika budov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 msgid "Look up your number of taverns in the building statistics window."
-msgstr ""
+msgstr "V okne Štatistika budov zistite počet krčiem."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "V okne Štatistika budov kliknite na kartu „Stredné budovy“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Zistite, koľko krčiem máte."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -218,169 +218,169 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr ""
+msgstr "Pod každou budovou sú dva riadky. Prvý ukazuje počet budov, ktoré vlastníte, a koľko ich je vo výstavbe. Druhý riadok ukazuje priemernú produktivitu, ak ide o produkčnú alebo výcvikovú budovu, alebo počet umiestnených a žiadaný počet vojakov pri vojenských budovách."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid "Close the building statistics window when you are done."
-msgstr ""
+msgstr "Keď skončíte, zavrite okno Štatistika budov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:105
 msgid "You closed the building statistics window!"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika budov!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika budov. Nevšimol som si, že by ste vybrali kartu pre stredné budovy a zistili počet krčiem. Mohli by ste mi ho, prosím, ukázať?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:116
 msgid "Open the building statistics window again."
-msgstr ""
+msgstr "Znovu otvorte okno Štatistika budov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:118
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr ""
+msgstr "Zavreli ste okno Štatistika budov, ale ešte ste nezistili počet krčiem."
 
 #: TRANSLATORS "it" refers to the building statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr ""
+msgstr "Znovu ho otvorte a kliknite na druhú kartu (stredné budovy)."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:128
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:171
 msgid "Stock"
-msgstr ""
+msgstr "Zásoby"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:130
 msgid "Check for rations"
-msgstr ""
+msgstr "Skontrolujte prídely"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr ""
+msgstr "V poriadku. Ako ste si mohli všimnúť zo zoznamu, už nemáte žiadne krčmy alebo hostince. Následkom toho neprebieha žiadna výroba prídelov. Pozrime sa však, čo máme uschované v zásobe."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
-msgstr ""
+msgstr "Kliknite na tlačidlo „Zásoby“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
-msgstr ""
+msgstr "Do tohto okna sa ďalej možno rýchlo dostať pomocou klávesovej skratky „i“ (znamená „inventár“)."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."
-msgstr ""
+msgstr "Otvore okno Zásoby."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 msgid ""
 "The stock menu window gives you an overview over the wares you currently "
 "have."
-msgstr ""
+msgstr "Okno Zásoby ponúka prehľad o výrobkoch, ktoré momentálne máte."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:153
 msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr ""
+msgstr "V okne Zásoby sú štyri karty. Na prvej (a zároveň aktuálne vybratej) sa zobrazujú všetky vaše výrobky v danom momente vrátane tých na cestách, vlajkách a tých, ktoré čakajú na spracovanie vnútri budov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr ""
+msgstr "Keď sa pozrieme na prídely, vidno, že momentálne je ich spolu iba päť a pravdepodobne sa niekam prenášajú. S ekonomikou takýchto rozmerov je päť prídelov málo."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr ""
+msgstr "Na druhej karte sa zobrazujú všetci vaši pracovníci, opäť vrátane tých na cestách aj v budovách."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid "Now have a look at these two tabs. When you click on the"
-msgstr ""
+msgstr "Teraz si obe karty prezrite. Budem pokračovať, keď kliknete na"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
-msgstr ""
+msgstr "tretiu kartu („Výrobky v skladoch“)."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid "Switch to the third tab in the stock menu window."
-msgstr ""
+msgstr "Kliknite na tretiu kartu v okne Zásoby."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:164
 msgid ""
 "Have a look at the first two tabs in the stock menu window. They show all "
 "the wares and workers you have."
-msgstr ""
+msgstr "Prezrite si prvé dve karty v okne Zásoby. Zobrazujú všetky výrobky a pracovníkov, ktorých máte."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:166
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid "When you have seen enough, switch to the third tab."
-msgstr ""
+msgstr "Keď si ich prezriete, kliknite na tretiu kartu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:173
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr ""
+msgstr "Na tretej karte sa zobrazujú výrobky uskladnené v základni, skladoch a prístavoch. Nie sú nikde potrebné, a preto predstavujú rezervu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:174
 msgid "The fourth tab shows the same thing for workers."
-msgstr ""
+msgstr "Na štvrtej karte sa rovnakým spôsobom zobrazujú pracovníci."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:175
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr ""
+msgstr "Na tretej karte vidno, že v základni nie sú k dispozícii už žiadne prídely – to nie je dobré."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Zavreli ste okno Zásoby!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:184
 msgid ""
 "You have closed the stock menu window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zavreli ste okno Zásoby, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na tretiu kartu?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 msgid "Open the stock window again."
-msgstr ""
+msgstr "Znovu otvorte okno Zásoby."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
 "You closed the stock menu window before I finished telling you everything "
 "about it. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Zavreli ste okno Zásoby ešte skôr, ako som vám o ňom stihol všetko povedať. Ak už je vám všetko jasné, tento tutoriál môžete kedykoľvek ukončiť."
 
 #: TRANSLATORS "it" refers to the stock menu window. TRANSLATORS "it" refers
 #: to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "V opačnom prípade ho znovu otvorte a kliknite na tretiu kartu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "New taverns"
-msgstr ""
+msgstr "Nové krčmy"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "We need new taverns"
-msgstr ""
+msgstr "Potrebujeme nové krčmy"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
@@ -388,73 +388,73 @@ msgid ""
 "than one tavern – two or three are better. Remember: as long as we don’t "
 "produce rations, our miners won’t dig for ore. And without iron, we cannot "
 "forge a single helm."
-msgstr ""
+msgstr "Keďže teraz už máte prehľad, mali by ste konať. Podľa môjho názoru by sme mali postaviť viac ako jednu krčmu – radšej dva alebo tri. Nezabúdajte: kým nebudeme vyrábať prídely, naši baníci nebudú dolovať rudy. A bez železa neukováme ani jednu helmu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
-msgstr ""
+msgstr "Postavte aspoň dve krčmy."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
-msgstr ""
+msgstr "Postavte nové krčmy."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
-msgstr ""
+msgstr "Na prevádzkovanie baní potrebujeme opäť prídely – čím viac, tým lepšie."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 msgid "Ware Encyclopedia"
-msgstr ""
+msgstr "Encyklopédia výrobkov"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid ""
 "I am not sure if you could follow my remarks. Why do we need rations to get "
 "soldiers?"
-msgstr ""
+msgstr "Nie som si istý, či chápete, čo som sa snažil poznamenať. Prečo treba prídely na získavanie vojakov?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid ""
 "When you’ve played a lot, you will know such things by heart. But when "
 "you’re unsure what this tribe needs for a special ware, you can easily look "
 "it up in your tribe’s ware encyclopedia."
-msgstr ""
+msgstr "Po dlhšom hraní takéto veci budete vedieť naspamäť. Ak však nemáte istotu, čo všetko je potrebné pre nejaký výrobok, môžete to jednoducho zistiť v encyklopédii výrobkov svojho kmeňa."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "This encyclopedia can be accessed via"
-msgstr ""
+msgstr "Táto encyklopédia je prístupná prostredníctvom"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
-msgstr ""
+msgstr "príslušného tlačidla naspodku obrazovky. Pre každý výrobok vášho kmeňa zobrazuje krátky popis, zoznam budov, ktoré daný výrobok vyrábajú, a potrebné výrobky."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
 "If you want, you can try it out. A soldier needs a wood lance and a helm – "
 "from there on out, you can search backwards."
-msgstr ""
+msgstr "Ak chcete, môžete si to vyskúšať. Vojak potrebuje drevenú kopiju a helmu – odtiaľ možno hľadať spätne."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
-msgstr ""
+msgstr "Nastavenie priority"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:239
 msgid "Send the wares where they’re needed"
-msgstr ""
+msgstr "Rozošlite výrobky na správne miesta"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:240
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr ""
+msgstr "Skvele. Krčmy sa dostavali a odteraz nás zásobujú prídelmi."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:241
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr ""
+msgstr "V tejto chvíli sú prídelmi zásobované všetky bane. Ak chcete uprednostniť nejakú baňu, jednoducho otvorte jej okno. Na karte Výrobky si môžete za každým výrobkom všimnúť „semafory“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid ""
@@ -462,7 +462,7 @@ msgid ""
 "delivered less frequently. Green means that as many wares as possible should"
 " be delivered to this building, maybe because it produces something "
 "important."
-msgstr ""
+msgstr "Keď kliknete na červenú bodku (nízka priorita), príslušný výrobok sa bude donášať menej často. Zelená značí, že do budovy sa bude donášať čo najviac výrobkov, napríklad preto, že vyrába niečo dôležité."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 msgid ""
@@ -470,59 +470,59 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr ""
+msgstr "Vzhľadom na našu situáciu môže byť žiaduce, aby pekárne pracovali čo najrýchlejšie, pretože zásobujú naše krčmy. Zásobovaniu pekární vodou by ste preto mohli predeliť najvyššiu prioritu. Ostatné budovy (napríklad oslia farma) by dostávali menej vody, zato pekárne by pracovali rýchlejšie."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:289
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Štatistika výrobkov"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "In the statistics menu, there is also a"
-msgstr ""
+msgstr "V štatistickom menu sa nachádza aj"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
-msgstr ""
+msgstr "tlačidlo „Štatistika výrobkov“."
 
 #: TRANSLATORS "it" refers to the ware statistics button
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid "Click on it."
-msgstr ""
+msgstr "Kliknite naň."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:262
 msgid "Open the ware statistics window."
-msgstr ""
+msgstr "Otvorte okno Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
-msgstr ""
+msgstr "Otvorte okno Štatistika výrobkov, ku ktorému sa možno dostať zo štatistického menu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "In this menu window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "V tomto okne možno výberom výrobkov zistiť, ako sa postupom času menila ich výroba alebo spotreba. Vyskúšajte si to na nejakých výrobkoch."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "I’ll continue as soon as you click on the"
-msgstr ""
+msgstr "Budem pokračovať, keď kliknete na"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
 msgid "third tab (‘Economy Health’)."
-msgstr ""
+msgstr "tretiu kartu („Stav ekonomiky“)."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
-msgstr ""
+msgstr "Kliknite na tretiu kartu v okne Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr ""
+msgstr "Na prvých dvoch kartách sa zobrazuje výroba a spotreba vybraných výrobkov. Výrobok vyberiete, ak naň jednoducho kliknete."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
 msgid ""
@@ -530,50 +530,50 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr ""
+msgstr "Na tejto karte možno pozorovať rozdiel medzi výrobou a spotrebou, tzv. „stav ekonomiky“. Jediným pohľadom možno zistiť, či prevažuje výroba alebo spotreba – to znamená, či hodnota stúpa alebo klesá."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:292
 msgid "Now try this out. You can also compare it with the two previous tabs."
-msgstr ""
+msgstr "Teraz si to vyskúšajte. Tento rozdiel ďalej môžete porovnať s predošlými dvoma kartami."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "Click on the last tab when I should continue."
-msgstr ""
+msgstr "Keď mám pokračovať, kliknite na poslednú kartu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Switch to the last tab in the ware statistics menu window."
-msgstr ""
+msgstr "Kliknite na poslednú kartu v okne Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr ""
+msgstr "Na tretej karte sa zobrazuje stav ekonomiky nejakého výrobku. Ak je hodnota kladná, znamená to, že zásoba rastie."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
 msgid "When you have seen enough, switch to the fourth tab."
-msgstr ""
+msgstr "Keď si ju prezriete, kliknite na štvrtú kartu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr ""
+msgstr "Na poslednej karte možno sledovať absolútne zásoby. Zvyšujú sa, ak je stav ekonomiky kladný, inak sa znižujú. Obe grafy porovnajte!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr ""
+msgstr "Posledné dve karty sú dobrými ukazovateľmi toho, či majú nastať nedostatky. Nezabúdajte ich pravidelne kontrolovať!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Close this window when you’re done."
-msgstr ""
+msgstr "Keď skončíte, toto okno zatvorte."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Close the ware statistics window."
-msgstr ""
+msgstr "Zatvorte okno Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
@@ -583,23 +583,23 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "Keď skončíte, zavrite okno Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:327
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:329
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na tretiu kartu?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 msgid "Open the ware statistics window again."
-msgstr ""
+msgstr "Znovu otvorte okno Štatistika výrobkov."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:340
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
@@ -607,50 +607,50 @@ msgid ""
 "You closed the ware statistics menu window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov ešte skôr, ako som vám o ňom stihol všetko povedať. Ak už je vám všetko jasné, tento tutoriál môžete kedykoľvek ukončiť."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov, no nedovolili ste mi ho celé vysvetliť. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na štvrtú kartu?"
 
 #: TRANSLATORS "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr ""
+msgstr "V opačnom prípade ho znovu otvorte a kliknite na štvrtú kartu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
 msgid "Economy options"
-msgstr ""
+msgstr "Možnosti ekonomiky"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid ""
 "I’ve shown you our stock menu window, where you could see which wares are at"
 " the warehouses. You remember?"
-msgstr ""
+msgstr "Ukazoval som vám okno Zásoby, ktoré vám umožnilo zistiť, aké výrobky sú v skladoch. Spomínate si?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Teraz vám poviem, ako sa dá určiť, koľko výrobkov chcete mať. Okno slúžiace na tento účel je prístupné cez akúkoľvek vlajku a volá sa „Nastaviť ekonomiku“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "This is the icon."
-msgstr ""
+msgstr "Má takúto ikonu."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
 msgid "Open this window."
-msgstr ""
+msgstr "Toto okno otvorte."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:382
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "Otvorte okno „Nastaviť ekonomiku“."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "The window can be accessed by clicking on any flag you own."
@@ -807,7 +807,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:449
 msgid "We’re safe now"
-msgstr ""
+msgstr "Teraz sme už v bezpečí"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
 msgid ""

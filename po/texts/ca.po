@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-24 14:04+0000\n"
+"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"PO-Revision-Date: 2015-07-28 14:23+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -49,13 +49,13 @@ msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), dist
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web: %s"
+msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web (en anglès): %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Podeu trobar-hi el text complet de la llicència així com més informació sobre la filosofia i les condicions legals."
+msgstr "Podeu trobar-hi el text complet de la llicència, així com més informació sobre la filosofia i les condicions legals."
 
 #: ../../txts/LICENSE.lua:29
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -65,26 +65,26 @@ msgstr "També distribuïm la GPL com a un document de text junt amb el Wideland
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Sota Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
+msgstr "En Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "Sota Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació i el menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
+msgstr "En Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
 
 #: ../../txts/LICENSE.lua:32
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "Sota MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
+msgstr "En MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
 
 #: ../../txts/LICENSE.lua:34
 msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Aquest joc es presenta sense cap garantia. Per més informació i suport ens podeu trobar a %1% (lloc web, wiki i fòrum per preguntes o suport general), %2% (seguiment d'errors) i %3% (traduccions)."
+msgstr "Aquest joc es presenta sense cap garantia. Per més informació i suport ens podeu trobar a (en anglès):\n%1% (lloc web, wiki i fòrum per preguntes o suport general)\n%2% (seguiment d'errors)\n%3% (traduccions)"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -92,7 +92,7 @@ msgstr "LLEGEIX-ME"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr "un joc d'estratègia de codi obert"
+msgstr "Un joc d'estratègia de codi obert"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme.lua:14
 msgid "Introduction"
@@ -117,13 +117,13 @@ msgstr "En aquesta partida, comenceu amb un petit tros de terra amb\npocs recurs
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr "Visita la pàgina principal del Widelands:"
+msgstr "Visita la pàgina principal del Widelands (en anglès):"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més\ninformació, vegeu l'arxiu «COPYING»."
+msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més\ninformació, llegiu l'arxiu «COPYING»."
 
 #: ../../txts/README.lua:37
 msgid "Status"
@@ -136,7 +136,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr "El Widelands té acabades pràcticament totes les funcions, és més divertit\njugar-hi sol i encara més en mode multijugador. Encara hi ha feina per fer en\ntotes les àrees. Si esteu interessat en contribuir-hi, sigui fent gràfics, fixant errors,\nafegint-hi noves funcions, traduint el joc o bé creant nous mapes, poseu-vos en\ncontacte al nostre lloc web."
+msgstr "El Widelands té acabades pràcticament totes les funcions, és entretingut\njugar-hi sol i encara més en mode multijugador. Encara hi ha feina per fer en\ntotes les àrees. Si esteu interessat en contribuir-hi, sigui fent gràfics, corregint errors,\nafegint-hi noves funcions, traduint el joc o bé creant nous mapes, poseu-vos en\ncontacte al nostre lloc web."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
@@ -212,7 +212,7 @@ msgstr "B: commuta les estadístiques d'edificis"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr "F: commuta el mode pantalla completa (si el SO ho permet)"
+msgstr "F: commuta el mode pantalla completa (si el sistema operatiu ho permet)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -220,15 +220,15 @@ msgstr "Inici: centra la vista del mapa en la posició inicial"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(Ctrl+) 0-9: Recorda i vés a les posicions recordades anteriorment"
+msgstr "0-9: vés a les posicions recordades anteriorment (pulsant un número i mantenint Ctrl premuda, recorda la posició)"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ",: vés a la posició anterior"
+msgstr ", (coma): vés a la posició anterior"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ".: vés a la posició següent"
+msgstr ". (punt): vés a la posició següent"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -300,11 +300,11 @@ msgstr "Com comunicar errors"
 
 #: ../../txts/README.lua:100
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Si trobes un error, per favor comunica-ho al nostre registre d'errors:"
+msgstr "Si trobeu un error, per favor comunica-ho al nostre registre d'errors (en anglès):"
 
 #: ../../txts/README.lua:104
 msgid "Please provide enough background information. Tell us:"
-msgstr "Si us plau, comuniqueu-nos prou informació addicional. Digueu-nos:"
+msgstr "Si us plau, doneu-nos prou informació del context, com ara:"
 
 #: ../../txts/README.lua:106
 msgid "- Detailed steps on how to trigger the bug, if possible."
@@ -320,7 +320,7 @@ msgstr "- Què esperàveu que passés quan feu els passos i què va passar realm
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr "- Quina versió del Widelands esteu usant (és a dir, el número de versió o\nel número de revisió que esteu emprant si feu servir una versió de\ndesenvolupament o un muntatge diari)."
+msgstr "- Quina versió del Widelands esteu usant (és a dir, el número de versió o\nel número de revisió que esteu emprant si feu servir una versió de\ndesenvolupament o un muntatge diari). Normalment, podreu trobar la versió al menú inicial."
 
 #: ../../txts/README.lua:113
 msgid ""
@@ -356,7 +356,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr "El Widelands grava totes les partides que jugueu en dos arxius. El que té\nextensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl\nconté totes les ordres executades pels jugadors, com ara construcció de\ncamins i edificis o atacs a l'enemic. La resta dels noms d'arxiu us poden ajudar\na saber quan es va començar la partida."
+msgstr "El Widelands grava totes les partides que jugueu en dos arxius. El que té\nextensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl\nconté totes les ordres executades pels jugadors, com ara construcció de\ncamins i edificis o atacs a l'enemic. La resta del nom dels arxius us pot ajudar\na saber quan es va començar la partida."
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -366,7 +366,7 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr "Usant l'opció de veure la repetició del menú principal, podreu reconstruir i veure\nperfectament una partida jugada anteriorment. Cal tenir en compte que els petits\ncanvis en el codi del Widelands poden fer que partides desades amb altres versions\nsiguin incompatibles i es dessincronitzin. Això també passa amb partides\nmultijugador quan els jugadors tenen diferents versions del joc."
+msgstr "Usant l'opció de veure la repetició del menú principal podreu reconstruir i veure\nperfectament una partida jugada anteriorment. Cal tenir en compte que els petits\ncanvis en el codi del Widelands poden fer que partides desades amb altres versions\nsiguin incompatibles i es dessincronitzin. Això també passa amb partides\nmultijugador quan els jugadors tenen diferents versions del joc."
 
 #: ../../txts/README.lua:140
 msgid ""
@@ -374,19 +374,19 @@ msgid ""
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr "Les repeticions són una eina útil per trobar errors del programa,\naixí que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X,\nels arxius de repetició es desen en el directori «~/.widelands/replays» .\nEn Windows, al directori «replays» on està instal·lat el Widelands."
+msgstr "Les repeticions són una eina útil per trobar errors del programa,\naixí que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X,\nels arxius de repetició es desen al directori «~/.widelands/replays» .\nEn Windows, al directori «replays» on està instal·lat el Widelands."
 
 #: ../../txts/developers.lua:3
 msgid "Atlantean"
-msgstr "Els atlants"
+msgstr "Atlant"
 
 #: ../../txts/developers.lua:3
 msgid "Barbarian"
-msgstr "Bàrbar"
+msgstr "Els bàrbars"
 
 #: ../../txts/developers.lua:3
 msgid "Campaign Story"
-msgstr "Història de la campanya"
+msgstr "Històries de les campanyes"
 
 #: ../../txts/developers.lua:3
 msgid "Chieftain"
@@ -410,7 +410,7 @@ msgstr "Ancians"
 
 #: ../../txts/developers.lua:3
 msgid "Empire"
-msgstr "Imperi"
+msgstr "L'Imperi"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
@@ -743,7 +743,7 @@ msgstr "Dividiu els camins en seccions més curtes plantant-hi algunes banderes.
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Tens algun dubte? Podeu trobar les nostres PMF, la wiki i el fòrum de la comunitat en www.widelands.org (en anglès)."
+msgstr "Teniu algun dubte? Podeu trobar les nostres PMF, la wiki i el fòrum de la comunitat en www.widelands.org (en anglès)."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""

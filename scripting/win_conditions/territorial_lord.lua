@@ -11,7 +11,10 @@ set_textdomain("win_conditions")
 
 include "scripting/win_condition_texts.lua"
 
-local wc_name = _ "Territorial Lord"
+local wc_name = "Territorial Lord"
+-- This needs to be exactly like wc_name, but localized, because wc_name
+-- will be used as the key to fetch the translation in C++
+local wc_descname = _("Territorial Lord")
 local wc_version = 2
 local wc_desc = _ (
 	"Each player or team tries to obtain more than half of the map’s " ..
@@ -25,7 +28,7 @@ return {
 		local plrs = wl.Game().players
 
 		-- set the objective with the game type for all players
-		broadcast_objective("win_condition", wc_name, wc_desc)
+		broadcast_objective("win_condition", wc_descname, wc_desc)
 
 		-- Get all valueable fields of the map
 		local fields = {}
@@ -178,7 +181,7 @@ return {
 		-- Start a new coroutine that checks for defeated players
 		run(function()
 			sleep(5000)
-			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
+			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
 		end)
 
 		-- here is the main loop!!!
@@ -196,10 +199,10 @@ return {
 					if candidateisteam and currentcandidate == p.team
 						or not candidateisteam and currentcandidate == p.name then
 						p:send_message(won_game_over.title, won_game_over.body)
-						wl.game.report_result(p, 1, make_extra_data(p, wc_name, wc_version, {score=_landsizes[p.number]}))
+						wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
 					else
 						p:send_message(lost_game_over.title, lost_game_over.body)
-						wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_version, {score=_landsizes[p.number]}))
+						wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
 					end
 				end
 				break

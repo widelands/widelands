@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1690,7 +1690,7 @@ msgstr ""
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the trees."
+"The forester’s house needs free space within the work area to plant the trees."
 msgstr ""
 
 #: ../../tribes/empire/fortress/conf:7
@@ -2232,7 +2232,7 @@ msgstr ""
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
+"The vine farmer working at this vineyard has no cleared soil to plant his grapevines."
 msgstr ""
 
 #: ../../tribes/empire/vineyard/help.lua:17

@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-24 14:55+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 09:19+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -288,7 +288,7 @@ msgstr "dormint"
 
 #: ../../tribes/empire/arena/conf:32 ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "promovent l'evasió del soldat de nivell 0 a nivell 1"
+msgstr "promoure l'evasió del soldat de nivell 0 a nivell 1"
 
 #: ../../tribes/empire/arena/help.lua:15
 #: ../../tribes/empire/armorsmithy/help.lua:13
@@ -370,7 +370,7 @@ msgstr "Entrena soldats en evasió."
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "Com més alt sigui el nivell d'«Evasió», major és la probabilitat d'esquivar els atacs enemics."
+msgstr "Com més alt sigui el nivell d'evasió, major és la probabilitat d'esquivar els atacs enemics."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -438,19 +438,19 @@ msgstr "Produeix armadures per als soldats."
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
-msgstr "forjant un casc"
+msgstr "forjar un casc"
 
 #: ../../tribes/empire/armorsmithy/conf:34
 msgid "forging an armor"
-msgstr "forjant una armadura"
+msgstr "forjar una armadura"
 
 #: ../../tribes/empire/armorsmithy/conf:36
 msgid "forging a chain armor"
-msgstr "forjant una cota de malla"
+msgstr "forjar una cota de malla"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr "forjant una cuirassa"
+msgstr "forjar una cuirassa"
 
 #: ../../tribes/empire/armorsmithy/conf:40 ../../tribes/empire/bakery/conf:25
 #: ../../tribes/empire/charcoal_kiln/conf:25 ../../tribes/empire/farm/conf:29
@@ -464,7 +464,7 @@ msgstr "forjant una cuirassa"
 #: ../../tribes/empire/weaponsmithy/conf:44 ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
-msgstr "treballant"
+msgstr "treballar"
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
@@ -580,7 +580,7 @@ msgstr "Produeix cervesa o vi."
 
 #: ../../tribes/empire/brewery/conf:26
 msgid "brewing"
-msgstr "preparant la cervesa"
+msgstr "preparar la cervesa"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -629,7 +629,7 @@ msgstr "Els focs dels forns de metall, tallers d'armes i d'armadures s'alimenten
 #: ../../tribes/empire/deep_oremine/conf:27
 #: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr "extraient de la mina"
+msgstr "extreure de la mina"
 
 #: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -649,7 +649,7 @@ msgstr "Extreu carbó del terra en terreny muntanyós."
 
 #: ../../tribes/empire/colosseum/conf:40
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "promovent l'evasió del soldat de nivell 1 a nivell 2"
+msgstr "promoure l'evasió del soldat de nivell 1 a nivell 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -845,7 +845,7 @@ msgstr "Mineral de ferro"
 
 #: ../../tribes/empire/conf:84
 msgid "Kitchen Tools"
-msgstr "Eines de cuina"
+msgstr "Estris de cuina"
 
 #: ../../tribes/empire/conf:85
 msgid "Lance"
@@ -1353,7 +1353,7 @@ msgstr "Cria ases graciosos i útils"
 
 #: ../../tribes/empire/donkeyfarm/conf:25
 msgid "rearing donkeys"
-msgstr "criant ases"
+msgstr "criar ases"
 
 #: ../../tribes/empire/donkeyfarm/help.lua:17
 msgid "Breeds donkeys for adding them to the transportation system."
@@ -1402,7 +1402,7 @@ msgstr "Obté peix de les aigües properes."
 
 #: ../../tribes/empire/fishers_house/conf:21
 msgid "fishing"
-msgstr "pescant"
+msgstr "pescar"
 
 #: ../../tribes/empire/fishers_house/conf:28
 msgid "Out of Fish"
@@ -1410,8 +1410,8 @@ msgstr "No queden peixos"
 
 #: ../../tribes/empire/fishers_house/conf:29
 msgid ""
-"The fisher working in this fisher’s house can’t find any fish in his working"
-" radius."
+"The fisher working in this fisher’s house can’t find any fish in his work "
+"area."
 msgstr "El pescador que viu en aquesta casa no pot trobar peixos dins la seva àrea de treball."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
@@ -1419,8 +1419,8 @@ msgid "Fishes on the coast near the house."
 msgstr "Va a pescar a la costa del voltant de la casa."
 
 #: ../../tribes/empire/fishers_house/help.lua:18
-msgid "The fisher’s house needs water full of fish within the working radius."
-msgstr "La casa del pescador necessita accés a aigua amb peixos dins de l'àrea de treball."
+msgid "The fisher’s house needs water full of fish within the work area."
+msgstr "La casa del pescador necessita accés a aigua amb peixos dins la seva àrea de treball."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1444,8 +1444,8 @@ msgstr "Planta arbres a l'àrea de treball."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the working radius to plant "
-"the trees."
+"The forester’s house needs free space within the work area to plant the "
+"trees."
 msgstr "La casa del guarda forestal necessita espais lliures dins l'àrea de treball per plantar-hi arbres."
 
 #: ../../tribes/empire/fortress/conf:7
@@ -1528,7 +1528,7 @@ msgstr "El caçador aconsegueix carn per als colons."
 
 #: ../../tribes/empire/hunters_house/conf:19
 msgid "hunting"
-msgstr "caçant"
+msgstr "caçar"
 
 #: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
@@ -1537,15 +1537,15 @@ msgstr "No queden peces de caça"
 #: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
-"working radius."
-msgstr "El caçador que viu en aquesta cabana no pot trobar preses dins la seva àrea de treball."
+"work area."
+msgstr "El caçador que viu en aquesta casa no pot trobar preses dins la seva àrea de treball."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
 msgstr "Caça animals per produir carn."
 
 #: ../../tribes/empire/hunters_house/help.lua:18
-msgid "The hunter’s house needs animals to hunt within the working radius."
+msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "El caçador que viu en aquesta casa necessita animals per caçar dins la seva àrea de treball."
 
 #: ../../tribes/empire/hunting_spear/conf:1
@@ -1556,11 +1556,11 @@ msgstr "Aquesta llança és ideal per a la caça. Només l'usen els caçadors."
 
 #: ../../tribes/empire/inn/conf:26 ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
-msgstr "preparant una ració"
+msgstr "preparar una ració"
 
 #: ../../tribes/empire/inn/conf:28
 msgid "preparing a meal"
-msgstr "preparant un àpat"
+msgstr "preparar un àpat"
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1609,8 +1609,8 @@ msgstr "No queden arbres"
 #: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his working radius. You should consider dismantling or destroying the "
-"building or building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
 msgstr "El llenyataire que viu en aquesta casa no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
@@ -1618,8 +1618,8 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
-msgid "The lumberjack's house needs trees to fell within the working radius."
-msgstr "El llenyataire que viu en aquesta casa necessita arbres per tallar dins la seva àrea de treball."
+msgid "The lumberjack's house needs trees to fell within the work area."
+msgstr "El llenyataire que viu en aquesta casa necessita arbres per talar dins la seva àrea de treball."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -1637,11 +1637,11 @@ msgstr "Les columnes de marbre representen l'elevada cultura de l'Imperi i es ne
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
-msgstr "extraient marbre"
+msgstr "extraure marbre"
 
 #: ../../tribes/empire/marblemine/conf:30
 msgid "mining stone"
-msgstr "extraient pedra"
+msgstr "extraure pedra"
 
 #: ../../tribes/empire/marblemine/conf:58
 msgid ""
@@ -1674,7 +1674,7 @@ msgstr "La carn conté molta energia. S'empra als hostals i tavernes per prepara
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
-msgstr "molent el blat"
+msgstr "moldre el blat"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -1702,7 +1702,7 @@ msgstr "Cria porcs."
 
 #: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
-msgstr "criant porcs"
+msgstr "criar porcs"
 
 #: ../../tribes/empire/plate_armor/conf:1
 msgid ""
@@ -1713,11 +1713,11 @@ msgstr "La cuirassa és l'armadura més forta que pot portar un soldat de l'Impe
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr "extraient pedra"
+msgstr "tallar pedra"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr "extraient marbre"
+msgstr "tallar marbre"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1725,8 +1725,7 @@ msgstr "No queden roques"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr "El treballador d'aquesta pedrera no pot trobar més roques dins la seva àrea de treball."
 
 #: ../../tribes/empire/quarry/help.lua:17
@@ -1734,7 +1733,7 @@ msgid "Carves marble and stone out of rocks in the vicinity."
 msgstr "Talla marbre i pedres de les roques del voltant."
 
 #: ../../tribes/empire/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
+msgid "The quarry needs stones to cut within the work area."
 msgstr "La pedrera necessita roques per tallar dins la seva àrea de treball."
 
 #: ../../tribes/empire/ration/conf:1
@@ -1782,7 +1781,7 @@ msgstr "Els soldats han ocupat la vostra guarda sentinella."
 
 #: ../../tribes/empire/sheepfarm/conf:25
 msgid "breeding sheep"
-msgstr "criant ovelles"
+msgstr "criar ovelles"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
@@ -1798,7 +1797,7 @@ msgstr "Treballa a la drassana i construeix vaixells."
 
 #: ../../tribes/empire/shipyard/conf:28
 msgid "constructing a ship"
-msgstr "construint un vaixell"
+msgstr "construir un vaixell"
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1812,11 +1811,11 @@ msgstr "Redueix el mineral de ferro i n'obté ferro."
 
 #: ../../tribes/empire/smelting_works/conf:27
 msgid "smelting iron"
-msgstr "reduint el mineral de ferro"
+msgstr "reduir el mineral de ferro"
 
 #: ../../tribes/empire/smelting_works/conf:29
 msgid "smelting gold"
-msgstr "reduint el mineral d'or"
+msgstr "reduir el mineral d'or"
 
 #: ../../tribes/empire/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1850,43 +1849,43 @@ msgstr "fent un cistell"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "making a bread paddle"
-msgstr "fabricant una pala de forner"
+msgstr "fabricar una pala de forner"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "making fire tongs"
-msgstr "fabricant unes tenalles"
+msgstr "fabricar unes tenalles"
 
 #: ../../tribes/empire/toolsmithy/conf:46
 msgid "making a fishing rod"
-msgstr "fabricant una canya de pescar"
+msgstr "fabricar una canya de pescar"
 
 #: ../../tribes/empire/toolsmithy/conf:48
 msgid "making a hammer"
-msgstr "fabricant un martell"
+msgstr "fabricar un martell"
 
 #: ../../tribes/empire/toolsmithy/conf:50
 msgid "making a hunting spear"
-msgstr "fabricant una llança de caçar"
+msgstr "fabricar una llança de caçar"
 
 #: ../../tribes/empire/toolsmithy/conf:52
 msgid "making kitchen tools"
-msgstr "fabricant eines de cuina"
+msgstr "fabricar estris de cuina"
 
 #: ../../tribes/empire/toolsmithy/conf:54
 msgid "making a pick"
-msgstr "fabricant un pic"
+msgstr "fabricar un pic"
 
 #: ../../tribes/empire/toolsmithy/conf:56
 msgid "making a saw"
-msgstr "fabricant una serra"
+msgstr "fabricar una serra"
 
 #: ../../tribes/empire/toolsmithy/conf:58
 msgid "making a scythe"
-msgstr "fabricant una dalla"
+msgstr "fabricar una dalla"
 
 #: ../../tribes/empire/toolsmithy/conf:60
 msgid "making a shovel"
-msgstr "fabricant una pala"
+msgstr "fabricar una pala"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your tower."
@@ -1898,35 +1897,35 @@ msgstr "Entrena els soldats."
 
 #: ../../tribes/empire/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "promovent l'atac del soldat de nivell 0 a nivell 1"
+msgstr "promoure l'atac del soldat de nivell 0 a nivell 1"
 
 #: ../../tribes/empire/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "promovent l'atac del soldat de nivell 1 a nivell 2"
+msgstr "promoure l'atac del soldat de nivell 1 a nivell 2"
 
 #: ../../tribes/empire/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "promovent l'atac del soldat de nivell 2 a nivell 3"
+msgstr "promoure l'atac del soldat de nivell 2 a nivell 3"
 
 #: ../../tribes/empire/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "promovent l'atac del soldat de nivell 3 a nivell 4"
+msgstr "promoure l'atac del soldat de nivell 3 a nivell 4"
 
 #: ../../tribes/empire/trainingcamp/conf:57
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "promovent la salut del soldat de nivell 0 a nivell 1"
+msgstr "promoure la salut del soldat de nivell 0 a nivell 1"
 
 #: ../../tribes/empire/trainingcamp/conf:59
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "promovent la salut del soldat de nivell 1 a nivell 2"
+msgstr "promoure la salut del soldat de nivell 1 a nivell 2"
 
 #: ../../tribes/empire/trainingcamp/conf:61
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "promovent la salut del soldat de nivell 2 a nivell 3"
+msgstr "promoure la salut del soldat de nivell 2 a nivell 3"
 
 #: ../../tribes/empire/trainingcamp/conf:63
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "promovent la salut del soldat de nivell 3 a nivell 4"
+msgstr "promoure la salut del soldat de nivell 3 a nivell 4"
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
@@ -1954,7 +1953,8 @@ msgstr "veremant"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
 msgstr "El vinyater que treballa en aquesta vinya no té terreny lliure on plantar els ceps."
 
 #: ../../tribes/empire/vineyard/help.lua:17
@@ -1985,23 +1985,23 @@ msgstr "Produeix armes per als soldats."
 
 #: ../../tribes/empire/weaponsmithy/conf:34
 msgid "forging a wood lance"
-msgstr "fabricant una llança de fusta"
+msgstr "fabricar una llança de fusta"
 
 #: ../../tribes/empire/weaponsmithy/conf:36
 msgid "forging a lance"
-msgstr "forjant una llança"
+msgstr "forjar una llança"
 
 #: ../../tribes/empire/weaponsmithy/conf:38
 msgid "forging an advanced lance"
-msgstr "forjant una llança avançada"
+msgstr "forjar una llança avançada"
 
 #: ../../tribes/empire/weaponsmithy/conf:40
 msgid "forging a heavy lance"
-msgstr "forjant una llança pesada"
+msgstr "forjar una llança pesada"
 
 #: ../../tribes/empire/weaponsmithy/conf:42
 msgid "forging a war lance"
-msgstr "forjant una llança de guerra"
+msgstr "forjar una llança de guerra"
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
@@ -2009,7 +2009,7 @@ msgstr "Fabrica teles per a vaixells i soldats."
 
 #: ../../tribes/empire/weaving-mill/conf:21
 msgid "weaving"
-msgstr "teixint"
+msgstr "teixir"
 
 #: ../../tribes/empire/weaving-mill/help.lua:17
 msgid "Weaves cloth out of wool."
@@ -2021,7 +2021,7 @@ msgstr "No hi ha aigua"
 
 #: ../../tribes/empire/well/conf:32
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr "El treballador d'aquest pou no pot trobar-hi aigua."
 
 #: ../../tribes/empire/well/help.lua:18

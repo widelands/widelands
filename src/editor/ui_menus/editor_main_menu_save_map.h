@@ -40,7 +40,7 @@ struct MainMenuSaveMap : public UI::Window {
 
 private:
 	EditorInteractive & eia();
-	void clicked_ok            ();
+	void clicked_ok();
 	void clicked_make_directory();
 	void        clicked_item(uint32_t);
 	void double_clicked_item(uint32_t);

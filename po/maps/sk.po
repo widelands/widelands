@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-21 01:58+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-08 11:26+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "Od záhuby k zrodu"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Po vylodení na tajuplnom ostrove neďaleko Atlantídy, zostávajúci Atlantíďania sa pre seba snažia vytvoriť domov."
+msgstr "Po vylodení na tajuplnom ostrove neďaleko Atlantídy, zostávajúci Atlantíďania sa zo všetkých síl usilujú pre seba vytvoriť nový domov."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -36,7 +36,7 @@ msgstr "Miesto, ktoré možno nazvať domovom"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "V tomto scenári sa oboznámite s vyššími produkčnými budovami vrátane baní."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
@@ -58,7 +58,7 @@ msgstr "Barbari"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "Ľahká. Predstaví barbarov."
+msgstr "Ľahká. Predstavuje Barbarov."
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -87,7 +87,7 @@ msgstr "Impérium"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr "Ľahká. Predstaví impérium."
+msgstr "Ľahká. Predstavuje Impérium."
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -113,7 +113,7 @@ msgstr "Atlantíďania"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Ťažká. Predstaví Atlantíďanov."
+msgstr "Ťažká. Predstavuje Atlantíďanov."
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -165,7 +165,7 @@ msgstr "Po opravení lode sa Lutius a jeho ľud vrátili k pátraniu po vhodnom 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Základy ovládania"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
@@ -176,7 +176,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Vedenie vojny"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -187,7 +187,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Moreplavba"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -198,7 +198,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomika"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -404,7 +404,7 @@ msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr "Po dopade asteroidu a následnej krutej zime tri ostrovy sú spojené ľadom a kameňom, čím sa končí pokojné spolunažívanie troch kmeňov."
+msgstr "Po dopade asteroidu a následnej krutej zime, ľad a kamene spojili tri ostrovy, narušiac tak pokojné spolunažívanie troch kmeňov."
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
@@ -708,12 +708,6 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
 msgstr "V blízkosti troch veľkých sopiek šesť nádherných ostrovov pozýva osadníkov, aby začali nový život. Púšte a rýchlo rastúci les čakajú na svoje objavenie. Váš kmeň bude schopný preskúmať dostatok zdrojov na to, aby mohol súperiť so svojimi protivníkmi, len ak sa stane námornou veľmocou."
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
-" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr "Navrhované tímy: červený vs zelený | (modrý, žltý) vs (zelený, oranžový) | (modrý, čierny) vs (zelený, červený) | (modrý, čierny, žltý) vs (zelený, červený, oranžový)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"

@@ -1,7 +1,7 @@
 help=_These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.
 
 default_target_quantity=20 # currently not used
-preciousness=9
+preciousness=10
 
 [idle]
 pics=grape_idle.png
