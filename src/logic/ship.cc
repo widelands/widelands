@@ -719,7 +719,8 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd.serial(), m_items.size());
+	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n",
+	pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
