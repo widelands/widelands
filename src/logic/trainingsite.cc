@@ -442,6 +442,7 @@ void TrainingSite::drop_soldier(Soldier & soldier)
  */
 void TrainingSite::drop_unupgradable_soldiers(Game &)
 {
+
 	std::vector<Soldier *> droplist;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
@@ -469,6 +470,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
+
 	Soldier * soldier_to_drop = nullptr;
 	uint32_t highest_soldier_level_seen = 0;
 
@@ -551,21 +553,34 @@ void TrainingSite::act(Game & game, uint32_t const data)
 
 void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
+
 	m_result = result;
 	ProductionSite::program_end(game, result);
+	// For unknown reasons sometimes there is a fully upgraded soldier
+	// that failed to be send away, so at the end of this function
+	// we test for such soldiers, unless another drop_soldiers
+	// function were run
+	bool leftover_soldiers_check = true;
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
 			drop_unupgradable_soldiers(game);
+			leftover_soldiers_check = false;
 			m_current_upgrade->lastsuccess = true;
 			m_current_upgrade->failures = 0;
 		}
 		else {
 			m_current_upgrade->failures++;
 			drop_stalled_soldiers(game);
+			leftover_soldiers_check = false;
 		}
 		m_current_upgrade = nullptr;
 	}
+
+	if (leftover_soldiers_check) {
+		drop_unupgradable_soldiers(game);
+	}
+
 	training_done();
 }
 
@@ -579,6 +594,7 @@ void TrainingSite::program_end(Game & game, ProgramResult const result)
  */
 void TrainingSite::find_and_start_next_program(Game & game)
 {
+
 	for (;;) {
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
@@ -595,8 +611,9 @@ void TrainingSite::find_and_start_next_program(Game & game)
 				maxcredit  = upgrade.credit;
 		}
 
-		if (maxprio == 0)
+		if (maxprio == 0) {
 			return program_start(game, "sleep");
+		}
 
 		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
 
