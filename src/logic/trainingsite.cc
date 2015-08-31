@@ -442,7 +442,6 @@ void TrainingSite::drop_soldier(Soldier & soldier)
  */
 void TrainingSite::drop_unupgradable_soldiers(Game &)
 {
-
 	std::vector<Soldier *> droplist;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
@@ -470,7 +469,6 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
-
 	Soldier * soldier_to_drop = nullptr;
 	uint32_t highest_soldier_level_seen = 0;
 
