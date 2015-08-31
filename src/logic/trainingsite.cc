@@ -553,7 +553,6 @@ void TrainingSite::act(Game & game, uint32_t const data)
 
 void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
-
 	m_result = result;
 	ProductionSite::program_end(game, result);
 	// For unknown reasons sometimes there is a fully upgraded soldier
@@ -594,7 +593,6 @@ void TrainingSite::program_end(Game & game, ProgramResult const result)
  */
 void TrainingSite::find_and_start_next_program(Game & game)
 {
-
 	for (;;) {
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
