@@ -31,15 +31,16 @@
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 
-constexpr int kBuildGridCellSize = 50;
+constexpr int kBuildGridCellHeight = 50;
+constexpr int kBuildGridCellWidth = 55;
 constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int kLabelFontSize = 12;
-constexpr int kTabHeight = 35 + 5 * (kBuildGridCellSize + kLabelHeight + kLabelHeight);
-constexpr int32_t kWindowWidth = kColumns * kBuildGridCellSize;
+constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
+constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
@@ -159,8 +160,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
-	owned_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
-	productivity_labels_ = std::vector<UI::MultilineTextarea*>(nr_buildings);
+	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
+	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 
 	// Column counters
 	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
@@ -376,8 +377,8 @@ bool BuildingStatisticsMenu::add_button(
 														(boost::format("building_button%s") % id).str(),
 														0,
 														0,
-														kBuildGridCellSize,
-														kBuildGridCellSize,
+														kBuildGridCellWidth,
+														kBuildGridCellHeight,
 														g_gr->images().get("pics/but1.png"),
 														&g_gr->animations()
 															 .get_animation(descr.get_animation("idle"))
@@ -388,11 +389,11 @@ bool BuildingStatisticsMenu::add_button(
 	button_box->add(building_buttons_[id], UI::Align_Left);
 
 	owned_labels_[id] =
-		new UI::MultilineTextarea(button_box, 0, 0, kBuildGridCellSize, kLabelHeight);
+		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align_Center);
 	button_box->add(owned_labels_[id], UI::Align_Left);
 
 	productivity_labels_[id] =
-		new UI::MultilineTextarea(button_box, 0, 0, kBuildGridCellSize, kLabelHeight);
+		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align_Center);
 	button_box->add(productivity_labels_[id], UI::Align_Left);
 
 	row.add(button_box, UI::Align_Left);
@@ -546,7 +547,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 void BuildingStatisticsMenu::think() {
 	// Adjust height to current tab
 	int tab_height =
-		35 + row_counters_[tab_panel_.active()] * (kBuildGridCellSize + kLabelHeight + kLabelHeight);
+		35 + row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
 	tab_panel_.set_size(kWindowWidth, tab_height);
 	set_size(get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
 	navigation_panel_.set_pos(Point(0, tab_height + kMargin));
@@ -662,7 +663,8 @@ void BuildingStatisticsMenu::update() {
 				} else {
 					color = UI_FONT_CLR_GOOD;
 				}
-				const std::string perc_str = (boost::format("%i%%") % percent).str();
+				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
+				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
 				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -745,15 +747,22 @@ void BuildingStatisticsMenu::update() {
 	}
 }
 
-void BuildingStatisticsMenu::set_labeltext_autosize(UI::MultilineTextarea* textarea,
+void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-	const std::string formatted_str =
-		(boost::format("<rt><p font-face=condensed font-weight=bold "
-							"font-size=%i font-color=%s>%s</p></rt>") %
-		 (text.length() > 5 ? kLabelFontSize - floor(text.length() / 2) : kLabelFontSize) %
-		 color.hex_value() % text).str();
-	textarea->set_text(formatted_str);
+	int fontsize = text.length() > 7 ? kLabelFontSize - floor(text.length() / 3) : kLabelFontSize;
+
+	UI::TextStyle style;
+	if (text.length() > 5) {
+		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
+	} else {
+		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
+	}
+	style.fg = color;
+	style.bold = true;
+
+	textarea->set_textstyle(style);
+	textarea->set_text(text);
 	textarea->set_visible(true);
 }
 
