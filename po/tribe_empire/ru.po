@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
+# Anton Khabarov <2233009@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-29 10:29+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1412,7 +1413,7 @@ msgstr "нет больше рыбы"
 msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his work "
 "area."
-msgstr ""
+msgstr "Рыболов, работающий в этом Домике рыболова не может найти рыбу в рабочей области вокруг здания."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1420,7 +1421,7 @@ msgstr "Ловит рыбу с берега недалеко от своего �
 
 #: ../../tribes/empire/fishers_house/help.lua:18
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Строить Домик рыболова надо с таким расчетом, чтобы в его рабочую область входил водоем, полный рыбы."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1444,9 +1445,9 @@ msgstr "Сажает деревья в ближайших окрестностя
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Строить Домик лесника надо с таким расчетом, чтобы в его рабочую область входило свободное пространство, пригодное для выращивания деревьев."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1538,7 +1539,7 @@ msgstr "Нет дичи"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Домика охотника."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1546,7 +1547,7 @@ msgstr "Охотится на зверей, с целью получения м�
 
 #: ../../tribes/empire/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Для охоты нужно чтобы в рабочей области вокруг Домика охотника обитали животные."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1611,7 +1612,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого домика дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1619,7 +1620,7 @@ msgstr "Валит деревья поблизости и обрабатывае
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
 msgid "The lumberjack's house needs trees to fell within the work area."
-msgstr ""
+msgstr "В рабочей области вокруг домика дровосека должны быть деревья."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -1726,7 +1727,7 @@ msgstr "Нет больше камня"
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "Каменщик из этой каменоломни больше не может найти камня в своей рабочей области."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1734,7 +1735,7 @@ msgstr "Добывает мрамор и строительный камень �
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the work area."
-msgstr ""
+msgstr "Для работы каменоломни нужны камни в рабочей области."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1953,8 +1954,9 @@ msgstr "собирает виноград"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
-msgstr "У фермера с этого виноградника нет почвы пригодной для посева."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "У фермера с этого виноградника нет почвы пригодной для выращивания винограда"
 
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Plant grapevines and harvest grapes."
@@ -2021,7 +2023,7 @@ msgstr "Воды больше нет"
 #: ../../tribes/empire/well/conf:32
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "Носильщик, работающий на этом колодце, не может найти воду в своей рабочей области."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."

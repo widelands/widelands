@@ -220,7 +220,7 @@ void GameSummaryScreen::continue_clicked()
 
 void GameSummaryScreen::stop_clicked()
 {
-	m_game.get_ibase()->end_modal(0);
+	m_game.get_ibase()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void GameSummaryScreen::player_selected(uint32_t entry_index)

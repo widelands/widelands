@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 06:36+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -708,12 +708,6 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
-" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9

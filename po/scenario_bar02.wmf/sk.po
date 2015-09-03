@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-23 11:24+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-29 10:01+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -94,7 +94,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Rozšírte si územie smerom k horám, pošlite geológov hľadať rudy a uhlie a vybudujte banskú ekonomiku skladajúcu sa z baní, krčiem, taviarne a kovodielne."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
@@ -122,7 +122,7 @@ msgid ""
 " build up a second metal workshop to ensure the production of tools. When "
 "the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr "Vylepšite kovodielňu na továreň na sekery, aby sa začali vyrábať zbrane, a postavte druhú kovodielňu na zaistenie produkcie nástrojov. Keď kováč dosiahne ďalšiu úroveň (majster kováč), továreň na sekery budete môcť vylepšiť až na vojenský závod, v ktorom sa vyrábajú dodatočné zbrane."
+msgstr "Vylepšením kovodielne na továreň na sekery zabezpečte výrobu zbraní a postavte druhú kovodielňu na zaistenie výroby nástrojov. Keď kováč dosiahne nasledujúcu úroveň (kováčsky majster), továreň na sekery budete môcť vylepšiť až na vojenský závod, v ktorom sa vyrábajú ďalšie zbrane."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -189,7 +189,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Aby ste zaútočili na nepriateľa, musíte kliknúť na dvere nepriateľskej vojenskej budovy. Zjaví sa menu, ktoré vám umožní vybrať počet vojakov, ktorí majú zaútočiť. Keď už máte vybratý počet, kliknite na symbol kríža ('Začať útok')."
+msgstr "Na nepriateľa zautočíte kliknutím na dvere nepriateľskej vojenskej budovy. Zobrazí sa menu, ktoré vám umožní vybrať počet vojakov, ktorí majú zaútočiť. Po nastavení počtu kliknite na symbol kríža („Začať útok“)."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
@@ -238,7 +238,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "Novinky, ktoré priniesla hliadka, neznejú dobre. Naši špióni hlásia, že v bitke stále zúria bojovné kmene, ale niektorí zo starších vojakov a vodcov kmeňov sa zdajú byť unavení z tejto nezmyselnej vojny. Kalitath, Kunov syn, je prvým vojenským vodcom, ktorý opustil Al’thunran a nechal tak svoju stranu napospas osudu. Ako hlásia moji prieskumníci, vkročil do nížin okolo hlavného mesta, chrániac prstence vonkajšieho opevnenia."
+msgstr "Správa, ktorú priniesla hliadka, neznie dobre. Naši špióni hlásia, že v bitke stále zúria bojovné kmene, no zdá sa, že niektorí starší vojaci a vodcovia kmeňov sú unavení z tejto nezmyselnej vojny. Kalitath, Kunov syn, je prvým vojenským vodcom, ktorý opustil Al’thunran a zanechal tak svoju stranu napospas osudu. Podľa hlásení mojich prieskumníkov vkročil do nížin okolo hlavného mesta, chrániac prstence vonkajšieho opevnenia."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:161
 msgid "Doubts"
@@ -431,7 +431,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr "Mali by sme ďalej preskúmať oblasť okolo nás, zostaviť viac strážcov a prieskumníkov na sledovanie hranice a dať si pozor na vojny zúriace vo svojom okolí. Len tak budeme pripravení, keď v našich lesoch zavládne nepokoj."
+msgstr "Mali by sme naďalej preskúmavať oblasti okolo základne a zostaviť viac strážcov a prieskumníkov, ktorí budú strážiť hranice a dávať pozor na vojny zúriace nablízku. Až potom budeme pripravení, keď v našich lesoch zavládne nepokoj."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:249
 msgid "Mountains Found"
@@ -444,7 +444,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Práve som sa rozprával s veliteľom našej hliadky. Na východ a severovýchod od nášho územia vraj objavili niekoľko hôr. S trochou šťastia to otvára novú príležitosť vyzbrojiť naše vojsko, lebo, ak sa dobre pamätám, väčšina hôr západne od Al’thunranu ponúka uhlie a rudy niektorých kovov."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Mining Economy Completed"
@@ -521,7 +521,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Nič nezostalo z toho prekrásneho mestečka, na ktoré si pamätám, iba zrúcaniny. Napĺňa ma to smútkom, ale zároveň pociťujem úľavu. Nikdy som nedúfal, že Al’thunran znovu uvidím v jeho starej kráse – len pred niekoľkými mesiacmi som bol zvedavý, či tam ešte niekedy vôbec budem môcť vkročiť. Staré mesto je teraz v mojich rukách a bez váhania ho prestaviam za pomoci svojho ľudu. Nemôžem sa dočkať, kedy sa opäť zaskvie vo svojej starej kráse."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:294
 msgid "Victory"
@@ -542,7 +542,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr "Nech je tak, generáli zostavujú moje jednotky a sám Boldreth povedie prvý útok. Budem jazdiť po jeho boku a oslobodíme Al'thunran od vojny a do hlavného mesta opäť prinesieme mier."
+msgstr "Nech je tak. Generáli práve zostavujú moje vojsko a sám Boldreth povedie prvý útok. Budem bojovať po jeho boku a spoločne oslobodíme Al’thunran od vojny a do hlavného mesta opäť prinesieme mier."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:304
 msgid ""

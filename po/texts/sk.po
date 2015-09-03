@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 03:20+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-15 11:53+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -506,23 +506,23 @@ msgid ""
 "to use with Widelands. As you can see, this Editor is heavy work in progress"
 " and as the Editor becomes better and better, this text will also get longer"
 " and more complete."
-msgstr ""
+msgstr "Editor je určený pre hráčov, ktorí si chcú navrhnúť vlastnú mapu do hry. Ako si môžete všimnúť, na editore sa stále vo veľkom pracuje a s jeho zdokonaľovaním sa tento text bude predlžovať a dopĺňať."
 
 #: ../../txts/editor_readme.lua:17
 msgid ""
 "This Editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Editor je určený pre hráčov, ktorí si chcú navrhnúť vlastnú mapu do hry."
 
 #: ../../txts/editor_readme.lua:18
 msgid ""
 "As you can see, this Editor is heavy work in progress and as the Editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Ako si môžete všimnúť, na editore sa stále vo veľkom pracuje a s jeho zdokonaľovaním sa tento text bude predlžovať a dopĺňať."
 
 #: ../../txts/editor_readme.lua:19
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Prosím, prečítajte si používateľské manuály na našej wiki na tejto stránke: %s"
 
 #: ../../txts/editor_readme.lua:20
 msgid ""
@@ -580,7 +580,7 @@ msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "prepne menu hráčov"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
 msgid "T:"
@@ -588,7 +588,7 @@ msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "prepne menu nástrojov"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
 msgid "I:"
@@ -624,19 +624,19 @@ msgstr "menia veľkosť nástroja"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
-msgstr ""
+msgstr "SHIFT (pri podržaní):"
 
 #: ../../txts/editor_readme.lua:48
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "počas toho, ako ho držíte stlačený, vyberie sa prvý alternatívny nástroj"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
-msgstr ""
+msgstr "ALT (pri podržaní):"
 
 #: ../../txts/editor_readme.lua:50
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "počas toho, ako ho držíte stlačený, vyberie sa druhý alternatívny nástroj"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
@@ -655,7 +655,7 @@ msgstr "Nezabudnite vždy postaviť horáreň a rybnikársky dom, aby vám nedo�
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop fishing."
-msgstr ""
+msgstr "Dozrite na svojich rybárov. Keď sa v ich pracovnej oblasti minú zdroje rýb, prestanú chytať ryby."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -674,13 +674,13 @@ msgid ""
 "You can select multiple animal types if you hold down CTRL during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Podržaním klávesu CTRL počas výberu môžete vybrať viacero typov zvierat naraz. Ak potom kliknete na mapu, umiestni sa inštancia jedného z vybraných typov zvierat."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with CTRL + mouse click."
-msgstr ""
+msgstr "Stlačením klávesu CTRL a kliknutím možno vybrať okrem zvierat aj viacero nehybných objektov alebo textúr zeme."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""

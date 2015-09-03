@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 03:16+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -291,7 +291,7 @@ msgstr "kutie širokej sekery"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -408,7 +408,7 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/barbarians/warehouse/help.lua:13
 #: ../../tribes/barbarians/weaving-mill/help.lua:13
 msgid "Source needed"
-msgstr "Potrebný zdroj"
+msgstr "Chýba zdroj"
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/barrier/help.lua:13
@@ -447,7 +447,7 @@ msgstr "Potrebný zdroj"
 #: ../../tribes/barbarians/warehouse/help.lua:13
 #: ../../tribes/barbarians/weaving-mill/help.lua:13
 msgid "Text needed"
-msgstr "Potrebný text"
+msgstr "Chýba text"
 
 #: ../../tribes/barbarians/bakery/help.lua:17
 msgid "Bakes pitta bread for soldiers and miners alike."
@@ -580,7 +580,7 @@ msgstr "pripravovanie obedu"
 #: ../../tribes/barbarians/tavern/help.lua:29
 #: ../../tribes/barbarians/weaving-mill/help.lua:29
 msgid "Calculation needed"
-msgstr "Potrebná kalkulácia"
+msgstr "Chýba výpočet"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -636,7 +636,7 @@ msgstr "Nosí predmety po cestách."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr "Chová silné voly, ktoré pomáhajú prevážať výrobky."
+msgstr "Chová silné voly, ktoré pomáhajú prenášať výrobky."
 
 #: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
@@ -1126,7 +1126,7 @@ msgstr "Stavenisko"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
 #: ../../tribes/barbarians/conf:147 ../../tribes/barbarians/conf:156
 msgid "Castle"
@@ -1295,7 +1295,7 @@ msgstr "Vyhňa na helmy"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
-msgstr "Žulový lom"
+msgstr "Žulová baňa"
 
 #: ../../tribes/barbarians/conf:196
 msgid "Deeper Coal Mine"
@@ -1492,20 +1492,20 @@ msgstr "Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj p
 msgid "Your soldiers have occupied your donjon."
 msgstr "Vaši vojaci obsadili váš donžon."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "sadenie pšenice"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "zbieranie pšenice"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Došli polia"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
@@ -1640,7 +1640,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Hlavná žila tohto žulového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Lom už nemožno ďalej vylepšovať, takže zvážte jeho rozobratie alebo zničenie."
+msgstr "Hlavná žila tejto žulovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže zvážte jej rozobratie alebo zničenie."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -1806,7 +1806,7 @@ msgstr "Spaľuje vápno vo vápenke."
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr "Odpoveď Ragnalda Detského na otázku, čo robí v tej špine. Jeho „nový kameň“ je teraz dôležitým stavebným materiálom."
+msgstr "Odpoveď Ragnalda Detského na otázku, čo robí v tej hline. Jeho „nový kameň“ je teraz dôležitým stavebným materiálom."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
@@ -2015,7 +2015,7 @@ msgstr "Barbarskí pekári vynikajú v tvorbe tohto plochého a chutného chleba
 
 #: ../../tribes/barbarians/quarry/conf:19
 msgid "quarrying stone"
-msgstr ""
+msgstr "lámanie kameňa"
 
 #: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
@@ -2082,7 +2082,7 @@ msgstr "Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci. Príd
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
-msgstr "Surové kamene sú základným stavebným materiálom barbarov. Ťažia sa v kameňolomoch a žulových lomoch."
+msgstr "Surové kamene sú základným stavebným materiálom Barbarov. Ťažia sa v kameňolomoch a žulových baniach."
 
 #: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
@@ -2116,7 +2116,7 @@ msgstr "Trstinová záhrada pestuje trstinu, ktorá slúži kmeňu barbarov na d
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr "Trstina je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne trvanlivá látka, z ktorej vyrábajú lodné plachty."
+msgstr "Trstina je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne trvanlivá látka, z ktorej sa vyrábajú lodné plachty."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
@@ -2342,11 +2342,11 @@ msgstr "Výroba všetkých zbraní trvá rovnako dlho, ale spotreba tých istýc
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr "Bojovnícka sekera je najnebezpečnejšou zbraňou barbarov. Len niekoľko vojakov v histórii dokázalo zaobchádzať s týmito obrovskými a silnými sekerami. Vyrába sa vo vojenskom závode a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v útoku z úrovne 4 na úroveň 5."
+msgstr "Bojovnícka sekera je najnebezpečnejšia zbraň, akú Barbari vedia vyrobiť. S týmito obrovskými a silnými sekerami dokázalo zaobchádzať len niekoľko vojakov v celej histórii. Vyrába sa vo vojenskom závode a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v útoku z úrovne 4 na úroveň 5."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""

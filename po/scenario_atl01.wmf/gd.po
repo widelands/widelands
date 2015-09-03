@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:05+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -153,15 +153,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "Tog taigh nam beart"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr ""
+msgstr "Tog tuathanas dhamhan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Tog ceàrdach snìomhadair òir"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -169,7 +169,7 @@ msgstr "Tog gnìomhachasan is mèinnean"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Industry and Mines"
-msgstr ""
+msgstr "Gnìomhachasan is mèinnean"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -198,19 +198,19 @@ msgstr "Tog ceàrdach leaghadair"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Tog ceàrdach armachd is ceàrdach arm"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "Tog ceàrdach acainnean"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Tog làraichean trèanaidh dha na saighdearan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Làraichean trèanaidh nan saighdearan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -222,15 +222,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "Tog toll-dubh is cuartan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Tog taigh-stòrais is tuathanas each"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Taigh-stòrais is tuathanas each"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -242,11 +242,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Tog taigh-stòrais"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Tog tuathanas each"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
@@ -599,12 +599,11 @@ msgstr "Tha Sidolus airson bruidhinn ri Jundlina"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for resources in "
-"the mountains around us? We are running short of quartz, crystal and "
-"diamonds for our buildings. Also we could use more iron, gold and especially"
-" coal. If we find an ample supply of those commodities, we could start "
-"producing weapons and tools; this would help enormously. Of course, we would"
-" need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe"
-" even more."
+"the mountains around us? We are running short of quartz and diamonds for our"
+" buildings. Also, we could use more iron, gold and especially coal. If we "
+"find an ample supply of those commodities, we could start producing weapons "
+"and tools; this would help enormously. Of course, we would need smelters, a "
+"weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:270

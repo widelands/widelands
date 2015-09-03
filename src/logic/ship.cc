@@ -242,18 +242,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		molog("ship_update: No destination anymore.\n");
-		if (m_items.empty())
-			return false;
-		molog("but it has wares....\n");
-		pop_task(game);
-		PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		// TODO(sirver): What happens if there is no port anymore?
-		if (other_dock) {
-			set_destination(game, *other_dock);
-		} else {
-			start_task_idle(game, descr().main_animation(), 2000);
-		}
+		//here we just do nothing, this is usually OK
+		start_task_idle(game, descr().main_animation(), 10000);
 		return true;
 	}
 
@@ -729,7 +719,8 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
+	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n",
+	pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -755,9 +746,9 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 }
 
 /**
- * Find a path to the dock @p pd and follow it without using precomputed paths.
+ * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.m_swim = true;
@@ -772,15 +763,47 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (cur.field->get_immovable() == &pd) {
-			Path path;
-			astar.pathto(cur, path);
-			start_task_movepath(game, path, descr().get_sail_anims());
-			return;
+			if (finalpath){
+				astar.pathto(cur, *finalpath);
+				return finalpath->get_nsteps();
+			} else {
+				Path path;
+				astar.pathto(cur, path);
+				return path.get_nsteps();
+			}
 		}
 	}
 
-	molog("start_task_movedock: Failed to find path!\n");
-	start_task_idle(game, descr().main_animation(), 5000);
+	molog("   calculate_sea_distance: Failed to find path!\n");
+	return std::numeric_limits<uint32_t>::max();
+
+}
+
+/**
+ * Find a path to the dock @p pd and follow it without using precomputed paths.
+ */
+void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+	Path path;
+
+	uint32_t const distance = calculate_sea_route(game, pd, &path);
+
+	// if we get a meaningfull result
+	if (distance < std::numeric_limits<uint32_t>::max()) {
+		start_task_movepath(game, path, descr().get_sail_anims());
+		return;
+	} else {
+		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		get_position().x,
+		get_position().y,
+		pd.get_positions(game)[0].x,
+		pd.get_positions(game)[0].y);
+		//this should not happen, but in theory there could be some inconstinency
+		//I (tiborb) failed to invoke this situation when testing so
+		//I am not sure if following line behaves allright
+		get_fleet()->update(game);
+		start_task_idle(game, descr().main_animation(), 5000);
+	}
+
 }
 
 /// Prepare everything for the coming exploration

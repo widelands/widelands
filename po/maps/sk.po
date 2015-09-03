@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 18:52+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-30 23:31+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Od záhuby k zrodu"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Po vylodení na tajuplnom ostrove neďaleko Atlantídy, zostávajúci Atlantíďania sa pre seba snažia vytvoriť domov."
+msgstr "Po vylodení na tajuplnom ostrove neďaleko Atlantídy, zostávajúci Atlantíďania sa zo všetkých síl usilujú pre seba vytvoriť nový domov."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -36,7 +36,7 @@ msgstr "Miesto, ktoré možno nazvať domovom"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "V tomto scenári sa oboznámite s vyššími produkčnými budovami vrátane baní."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
@@ -101,7 +101,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Pred šiestimi mesiacmi bol Lutius – mladý generál Impéria – vyslaný so 150 vojakmi k hranici za severnými lesmi, kadiaľ prechádzali barbarské kmene na územie patriace Impériu. Jeho úlohou bolo brániť územie Impéria. Spočiatku prevládal pokoj. Dokonca sa rozprával s niekoľkými barbarskými deťmi a myslel na pokojný život – bok po boku s týmto prastarým ľudom. Začal sa cítiť čoraz viac v bezpečí a jeho vojsko znižovalo pozornosť na prípadného nepriateľa. To znamenalo ich skazu. Jednu noc v marci zaútočilo na jeho nepripravenú armádu 100 barbarských pešiakov a úplne ju rozprášilo. Prežil len on a hŕstka jeho vojakov."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -122,7 +122,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Keď boh stratil dôveru k Atlantíďanom a potopil ich ostrov, boj jednej ženy za spravodlivosť a druhú šancu pre jej ľud sa stal základom mnohých legiend. Vedúc zostávajúcich Atlantíďanov v ústrety novej budúcnosti v novej časti sveta, Jundlína sa stala najsilnejším človekom svojej doby, ale za vysokú cenu: jej ľudskosť a dušu."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -171,7 +171,7 @@ msgstr "Základy ovládania"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "V tomto tutoriáli sa naučíte navigovať v hre a stavať budovy a cesty."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
@@ -182,7 +182,7 @@ msgstr "Vedenie vojny"
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "V tomto tutoriáli sa dozviete tajomstvá vojny: ako vytvárať vojakov, ako ich cvičiť a ako ich viesť do boja."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
@@ -193,7 +193,7 @@ msgstr "Moreplavba"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "V tomto tutoriáli sa dozviete o moreplavbe, t. j. ako narábať s loďami a prístavmi."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
@@ -204,7 +204,7 @@ msgstr "Ekonomika"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "V tomto tutoriáli sa dozviete, aké možnosti Widelands ponúka na prispôsobenie ekonomiky. Odporúča sa hráčom, ktorí majú už nejaké skúsenosti."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -481,14 +481,14 @@ msgstr "Špeciálnym turnajom v atlantídskej kultúre je tzv. „Skákanie po o
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Pašeráci"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Na vašich osvedčených pašeráckych cestách je odrazu rušno: objavili sa ďalšie dva kmene a medzi pašerákmi nastalo súperenie. Ktorému tímu sa ako prvému podarí prepašovať určité množstvo výrobkov?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -633,7 +633,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Nastal ďalší odmäk. Tri kmene sa ukrývali pred prudkou zimou v majestátnych horách. Počas slnovratu počúvli vešťbu a šli do vojny. Ten, čo prežije, obetuje bohatstvo svojich nepriateľov na starobylom oltári, postaví tam veľkolepý hrad a získa dobrú vôľu a rešpekt bohov."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
@@ -708,12 +708,6 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
 msgstr "V blízkosti troch veľkých sopiek šesť nádherných ostrovov pozýva osadníkov, aby začali nový život. Púšte a rýchlo rastúci les čakajú na svoje objavenie. Váš kmeň bude schopný preskúmať dostatok zdrojov na to, aby mohol súperiť so svojimi protivníkmi, len ak sa stane námornou veľmocou."
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
-" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr "Navrhované tímy: červený vs zelený | (modrý, žltý) vs (zelený, oranžový) | (modrý, čierny) vs (zelený, červený) | (modrý, čierny, žltý) vs (zelený, červený, oranžový)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"

@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 12:37+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-13 12:43+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -177,7 +177,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Železná ruda, zlatá ruda a uhlie sa ťažia v príslušných baniach. Kryštálová baňa ťaží kremene a diamanty – sú to vzácne materiály, ktoré možno nájsť len zriedka. Počas toho, ako ich hľadá, vyťaží aj množstvo kameňa."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -206,11 +206,11 @@ msgstr "Postavte vyhňu na nástroje"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Postavte vojakom výcvikové budovy"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Stanovištia na výcvik vojakov"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -218,7 +218,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "Atlantíďania, rovnako ako ostatné kmene, dokážu tiež cvičiť vojakov: v kobke sa cvičí útok – hlavná vlastnosť Atlantíďanov – a v labyrinte uhýbanie, zdravie a obrana. V oboch výcvikových budovách sa na výcvik lepších vojakov používajú priemyselne vyrobené predmety."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
@@ -333,7 +333,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail..."
-msgstr "S výčitkami svedomia, kráľ spáchal samovraždu. Bez panovníka sa ľudia obrátili na duchovných, ale tí im nevedeli značne pomôcť. Väčšina ľudí prijala svoj osud, zatiaľ čo ostatní sa pokúšali zmeniť mienku boha tým, že mu v chráme ponúkli zvieratá. Ale bez úspechu..."
+msgstr "Kráľ s výčitkami svedomia spáchal samovraždu. Bez panovníka sa ľudia obrátili na duchovných, ale tí im nevedeli značne pomôcť. Väčšina ľudí prijala svoj osud, zatiaľ čo ostatní sa pokúšali zmeniť mienku boha tým, že mu v chráme ponúkli zvieratá. Ale bez úspechu..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:155
 msgid ""
@@ -599,13 +599,12 @@ msgstr "Sidolus vyhľadá Jundlínu"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for resources in "
-"the mountains around us? We are running short of quartz, crystal and "
-"diamonds for our buildings. Also we could use more iron, gold and especially"
-" coal. If we find an ample supply of those commodities, we could start "
-"producing weapons and tools; this would help enormously. Of course, we would"
-" need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe"
-" even more."
-msgstr "Nech vás hreje Satul, Jundlína. Zvážili ste ťažbu v okolitých horách? Dochádza nám kremeň a diamanty na stavbu našich budov. Zišlo by sa tiež viac železa, zlata a obzvlášť uhlia. Ak sa nám podarí nájsť hojné zásoby týchto surovín, mohli by sme začať výrobu zbraní a nástrojov; nesmierne by nám to pomohlo. Samozrejme, potrebovali by sme tavičov, vyhňu na zbrane a vyhňu na nástroje. Ba možno aj viac."
+"the mountains around us? We are running short of quartz and diamonds for our"
+" buildings. Also, we could use more iron, gold and especially coal. If we "
+"find an ample supply of those commodities, we could start producing weapons "
+"and tools; this would help enormously. Of course, we would need smelters, a "
+"weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
+msgstr "Nech vás hreje Satul, Jundlína! Premýšľali ste nad ťažbou v okolitých horách? Míňajú sa nám zásoby kremeňa a diamantov, bez ktorých nemôžete stavať budovy. Zišlo by sa aj viac železa, zlata a obzvlášť uhlia. Ak sa nám podarí nájsť hojné zásoby týchto surovín, mohli by sme začať výrobu zbraní a nástrojov; nesmierne by nám to pomohlo. Samozrejme, potrebovali by sme tavičov, vyhňu na zbrane, vyhňu na zbroje a vyhňu na nástroje. Ba možno aj viac."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:270
 msgid "Jundlina Nods"

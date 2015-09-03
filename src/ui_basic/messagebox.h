@@ -37,23 +37,23 @@ struct WLMessageBoxImpl;
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Caption", "Text", OK);
- *     int32_t code = mb.run();
- * The return code is 1 if the "Yes" button has been pressed in a \ref YESNO
- * dialog box. Otherwise, it is 0 (or negative, if the modal messagebox has
+ *     UI::Panel::Returncodes code = mb.run<UI::Panel::Returncodes>();
+ * The return code is ok_code if the "OK" button has been pressed in a \ref YESNO
+ * dialog box. Otherwise, it is dying_code (or negative, if the modal messagebox has
  * been interrupted in an unusual way).
  *
  * Using it as a non-modal dialog box is slightly more complicated. You have
  * to add this dialog box as a child to the current fullscreen panel, and
- * connect the signals \ref yes and \ref no or \ref ok, depending on the
+ * connect the signals \ref ok and \ref no or \ref ok, depending on the
  * messagebox type, to a function that deletes the message box.
  * \note this function is named "WLMessageBox" instead of simply "MessageBox"
  *       because else linking on Windows (even with #undef MessageBox) will
  *       not work.
 */
 struct WLMessageBox : public Window {
-	enum MBoxType {
-		OK,
-		YESNO
+	enum class MBoxType {
+		kOk,
+		kOkCancel
 	};
 	WLMessageBox
 		(Panel * parent,
@@ -64,17 +64,17 @@ struct WLMessageBox : public Window {
 	~WLMessageBox();
 
 	boost::signals2::signal<void ()> ok;
-	boost::signals2::signal<void ()> yes;
-	boost::signals2::signal<void ()> no;
+	boost::signals2::signal<void ()> cancel;
 
 	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
+
+	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
-	virtual void pressed_ok();
-	virtual void pressed_yes();
-	virtual void pressed_no();
+	virtual void clicked_ok();
+	virtual void clicked_back();
 
 private:
 	std::unique_ptr<WLMessageBoxImpl> d;

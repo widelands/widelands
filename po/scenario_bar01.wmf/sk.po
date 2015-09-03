@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-14 08:36+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,8 +69,8 @@ msgid ""
 "terrain though, not mountain meadow). When you click on the new flag, you "
 "can send geologists there. Because the flag is on a mountain, the geologists"
 " will search for ores; otherwise, they would search for water. Then build a "
-"mine for both kinds of resources that he will find, choosing the appropriate"
-" mine to be built:"
+"mine for both kinds of resources that they will find, choosing the "
+"appropriate mine to be built:"
 msgstr "Umiestnite vlajku na úbočí hory na východe (na horskom teréne, nie horskej lúke). Keď kliknete na novú vlajku, budete mať možnosť vyslať tam geológov. Pretože sa vlajka nachádza na hore, geológovia budú hľadať rudy; inak by hľadali vodu. Potom pre obe druhy nájdených zdrojov postavte príslušné bane podľa týchto značiek:"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
@@ -158,7 +158,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr ""
+msgstr "Ďalšie spôsoby výroby jedla – iných druhov jedla – sú rybolov a pestovanie pšenice. Pšenica z fariem sa najprv musí spracovať s vodou v pekárni, až potom sa bude dať jesť. Vodu možno získať zo studne postavenej na mieste, kde geológovia našli zdroj vody."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
@@ -347,7 +347,7 @@ msgstr "Odtiaľto, na míle ďaleko, vidno zúrivé plamene, ktoré hltajú Al't
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr "Červené svetlá iskria v tme a tancujú do rytmu vojnových bubnov, ktoré ma prenasledujú i v mojich nočných morách."
+msgstr "Červené svetlá iskria v tme a tancujú do rytmu vojnových bubnov, ktoré ma prenasledujú i v nočných morách."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:180
 msgid ""
@@ -575,7 +575,7 @@ msgstr "Váš verný spoločník"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "Brave Boldreth steps to your side…"
-msgstr "Statočný Boldreth prikročí k vám…"
+msgstr "Prikročí k vám statočný Boldreth…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:289
 msgid ""
@@ -952,7 +952,7 @@ msgstr "Žijú si jednoduchým, ale bezstarostným životom ako lovci a roľníc
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr "Majú však strach, že vojna v Al’thunrane bude mať dopad na ich pokojný život. Rozhodli sa k nám preto pripojiť, dúfajúc, že si môžeme navzájom pomôcť."
+msgstr "Majú však strach, že vojna v Al’thunrane bude mať dopad na ich pokojný život. Rozhodli sa k nám preto pripojiť dúfajúc, že si môžeme navzájom pomôcť."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

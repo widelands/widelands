@@ -393,6 +393,13 @@ struct BuildingObserver {
 
 	int16_t production_hint_;
 
+	// information needed for decision on new building construction
+	// these should be calculated only once during one run of construct_building()
+	// function
+	Widelands::ExtendedBool output_needed_;
+	int16_t max_preciousness;
+	int16_t max_needed_preciousness_;
+
 	int32_t cnt_built_;
 	int32_t cnt_under_construction_;
 	int32_t cnt_target_;  // number of buildings as target

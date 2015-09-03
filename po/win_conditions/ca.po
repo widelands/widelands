@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-28 14:28+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 09:16+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,47 +61,58 @@ msgstr "Estat"
 msgid "Player overview:"
 msgstr "Resum del jugador:"
 
-#: ../../scripting/win_conditions/collectors.lua:15
+#: ../../scripting/win_conditions/collectors.lua:16
 msgid "Collectors"
 msgstr "Col·leccionistes"
 
-#: ../../scripting/win_conditions/collectors.lua:18
+#: ../../scripting/win_conditions/collectors.lua:19
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr "Aconseguireu punts per béns valuosos en els teus magatzems. Guanyarà el jugador que tingui el major nombre de béns al cap de 4 hores de partida."
 
-#: ../../scripting/win_conditions/collectors.lua:21
+#: ../../scripting/win_conditions/collectors.lua:22
 msgid "Points"
 msgstr "Punts"
 
-#: ../../scripting/win_conditions/collectors.lua:100
+#: ../../scripting/win_conditions/collectors.lua:101
 msgid "Status for %s"
 msgstr "Estat del %s"
 
 #: TRANSLATORS For example 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:111
-msgid "  %1$s (%2$i P) x %3$i = %4$i P"
+#: ../../scripting/win_conditions/collectors.lua:112
+msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "  %1$s:\t%2$i punts/unitat x %3$i unitats =\t%4$i punts"
 
-#: ../../scripting/win_conditions/collectors.lua:115
+#: ../../scripting/win_conditions/collectors.lua:116
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Total: %i punt"
 msgstr[1] "Total: %i punts"
 
-#: TRANSLATORS Context 'The game will end in %s.'
-#: ../../scripting/win_conditions/collectors.lua:129
-msgid "%1$ih%2$02im"
-msgstr "%1$i h %2$02i m"
-
-#: ../../scripting/win_conditions/collectors.lua:131
+#: TRANSLATORS Context 'The game will end in (2 hours and) 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:130
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minut"
 msgstr[1] "%i minuts"
 
-#: ../../scripting/win_conditions/collectors.lua:133
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:135
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] "%1% hora i %2%"
+msgstr[1] "%1% hores i %2%"
+
+#: TRANSLATORS Context 'The game will end in 2 hours.'
+#: ../../scripting/win_conditions/collectors.lua:138
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% hora"
+msgstr[1] "%1% hores"
+
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:142
 msgid "The game will end in %s."
 msgstr "La partida acabarà en %s."
 

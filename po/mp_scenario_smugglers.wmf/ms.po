@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-01 00:31+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-16 06:51+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>\n"
-"Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
+"Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,12 +24,12 @@ msgstr ""
 msgid "Game Status"
 msgstr "Status Permainan"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:118
 msgid "Wares Smuggled"
 msgstr "Barangan Diseludup"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:141
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:55
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:90
@@ -37,7 +37,7 @@ msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i mata"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Peraturan"
@@ -50,7 +50,7 @@ msgstr "Penyeludup"
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
-"tunnels on this island, each consisting of a receiving and a sending end. "
+"tunnels on this island, each consisting of a receiving and a sending end."
 msgstr "Penyeludup ialah peta yang menyeronokkan untuk 4 orang pemain. Anda dan rakan anda bermula secara bertentangan dikedua-dua penjuru pulau simetri. Terdapat banyak terowong penyeludupan di dalam pulau ini, setiap terowong tersebut mempunyai hujung penerimaan dan penghantaran. "
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
@@ -58,8 +58,8 @@ msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
-"seconds. "
-msgstr "Untuk menubuhkan laluan penyeludupan, anda perlu bina gudang pada tempat penghantaran/penerimaan manakala rakan pasukan anda juga membinanya pada tempat penghantaran/penerimaan berkaitan. Barangan akan diangkut setiap 10 saat. "
+"seconds."
+msgstr "Untuk membentuk laluan penyeludupan, anda perlu bina gudang pada tempat penghantaran/penerimaan manakala rakan pasukan anda juga membinanya pada tempat penghantaran/penerimaan berkaitan. Barangan akan diangkut setiap 10 saat. "
 
 #: TRANSLATORS %s = '<number> points' ../../maps/MP
 #: Scenarios/Smugglers.wmf/scripting/texts.lua:10

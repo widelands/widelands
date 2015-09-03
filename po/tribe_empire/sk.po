@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 12:30+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -359,7 +359,7 @@ msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr "Potrebný text"
+msgstr "Chýba text"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -424,7 +424,7 @@ msgstr "Výcvik uhýbania:"
 #: ../../tribes/empire/weaving-mill/help.lua:29
 #: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr "Potrebná kalkulácia"
+msgstr "Chýba výpočet"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -451,7 +451,7 @@ msgstr "kutie krúžkovej zbroje"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr ""
+msgstr "kutie plátovej zbroje"
 
 #: ../../tribes/empire/armorsmithy/conf:40 ../../tribes/empire/bakery/conf:25
 #: ../../tribes/empire/charcoal_kiln/conf:25 ../../tribes/empire/farm/conf:29
@@ -508,7 +508,7 @@ msgstr "pracovanie"
 #: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
-msgstr "Potrebný zdroj"
+msgstr "Chýba zdroj"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
@@ -1062,7 +1062,7 @@ msgstr "Stavenisko"
 
 #: ../../tribes/empire/conf:150
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
 #: ../../tribes/empire/conf:153 ../../tribes/empire/conf:215
 msgid "Castle"
@@ -1235,11 +1235,11 @@ msgstr "Vyhňa na zbrane"
 
 #: ../../tribes/empire/conf:199
 msgid "Deep Marble Mine"
-msgstr "Hlbinný mramorový lom"
+msgstr "Hlbinná mramorová baňa"
 
 #: ../../tribes/empire/conf:200
 msgid "Marble Mine"
-msgstr "Mramorový lom"
+msgstr "Mramorová baňa"
 
 #: ../../tribes/empire/conf:201
 msgid "Deep Coal Mine"
@@ -1319,7 +1319,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Hlavná žila tohto mramorového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Lom už nemožno ďalej vylepšovať, takže by ste ho mali rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste mali zvážiť jej rozobratie alebo zničenie."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1445,7 +1445,7 @@ msgstr "Sadí stromy na okolitom území."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Horáreň potrebuje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
 
@@ -1496,17 +1496,17 @@ msgstr "Poskytuje ubytovanie pre obyvateľov a skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Základňa predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
+msgstr "Napriek tomu, že táto loď stroskotala, vašim obyvateľom naďalej poskytuje ubytovanie. Zároveň skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
-msgstr ""
+msgstr "Základňa vo vraku predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1649,7 +1649,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "Hlavná žila tohto mramorového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste vylepšiť, rozobrať alebo zničiť lom."
+msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste popremýšľať nad jej vylepšením, rozobratím alebo zničením."
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
@@ -1714,11 +1714,11 @@ msgstr "Plechová zbroj je najsilnejším brnením, aké môže vojak impéria m
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr ""
+msgstr "lámanie kameňa"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr ""
+msgstr "lámanie mramoru"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1830,7 +1830,7 @@ msgstr "Obraňuj a panuj!"
 msgid ""
 "Stones are a basic building material of the Empire. They are produced in "
 "quarries and marble mines."
-msgstr "Kamene sú základným stavebným materiálom impéria. Získavajú sa v kameňolomoch a mramorových lomoch."
+msgstr "Kamene sú základným stavebným materiálom Impéria. Ťažia sa v kameňolomoch a mramorových baniach."
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
@@ -1954,8 +1954,9 @@ msgstr "oberanie hrozna"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
-msgstr "Vinohradník pracujúci v tomto vinohrade nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Vinohradník pracujúci v tomto vinohrade nemá k dispozícii čistú pôdu, na ktorej by mohol sadiť vinič."
 
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Plant grapevines and harvest grapes."
@@ -2039,7 +2040,7 @@ msgstr "Pšenica je dôležitá na prežitie. Pestuje sa na farmách a spotrebú
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr "Toto chutné víno sa spotrebúva v zlatých baniach a mramorových lomoch. Vyrába sa vo vinárenskom závode."
+msgstr "Toto chutné víno pijú baníci pracujúci v zlatých a mramorových baniach. Vyrába sa vo vinárenskom závode."
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""

@@ -2,16 +2,17 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-01 11:58+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,8 +68,8 @@ msgid "Note:"
 msgstr "примечание:"
 
 #: ../../tribes/scripting/format_help.lua:281
-msgid "Work area:"
-msgstr ""
+msgid "Work area radius:"
+msgstr "рабочая область:"
 
 #: ../../tribes/scripting/format_help.lua:285
 #: ../../tribes/scripting/format_help.lua:290
@@ -77,8 +78,12 @@ msgstr "лечение:"
 
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
-msgid "Garrisoned soldiers heal %s per second"
-msgstr "Размещенные здесь солдаты лечатся на %s за секунду"
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] "Размещенные здесь солдаты лечатся на %s очко здоровья за секунду"
+msgstr[1] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+msgstr[2] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+msgstr[3] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

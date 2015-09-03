@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
+# Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # Ivan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
@@ -10,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-01 11:36+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +51,7 @@ msgstr "Это свободная игра с открытым исходным 
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Вы узнаете больше о FOSS и GPL посетив следующую веб-страницу: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -66,7 +67,7 @@ msgstr "Мы также включаем документ с текстом GPL 
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "В Linux, вы найдете файл с именем COPYING в корне каталога, содержащего исходные файлы или исполняемый пакет, либо в каталоге установки (например, ‘%1%’)."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
@@ -85,7 +86,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Игра поставляется «как есть», без каких-либо гарантий. Для получения дополнительной информации и поддержки вы можете найти нас по адресу %1% (веб-сайт, вики и форум для вопросов или общей поддержки), %2% (багтрекер) или %3% (переводы)."
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -399,7 +400,7 @@ msgstr "Программисты"
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -415,15 +416,15 @@ msgstr "Империя"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Первые старейшины"
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
@@ -444,11 +445,11 @@ msgstr "Домашняя страница разработчиков"
 
 #: ../../txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
@@ -488,11 +489,11 @@ msgstr "Переводчики"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:10
 msgid "README for the Widelands Editor"
@@ -500,7 +501,7 @@ msgstr "ПАМЯТКА для редактора «Wideland»"
 
 #: ../../txts/editor_readme.lua:12
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Редактор карт Widelands"
 
 #: ../../txts/editor_readme.lua:16
 msgid ""
@@ -508,23 +509,23 @@ msgid ""
 "to use with Widelands. As you can see, this Editor is heavy work in progress"
 " and as the Editor becomes better and better, this text will also get longer"
 " and more complete."
-msgstr ""
+msgstr "Этот редактор карт предназначен для игроков, которые хотели бы разрабатывать свои собственные карты для «Widelands». Редактор всё ещё совершенствуется и становится лучше и лучше, а этот текст становится всё длиннее и полнее."
 
 #: ../../txts/editor_readme.lua:17
 msgid ""
 "This Editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Этот редактор карт предназначен для игроков, которые хотели бы разрабатывать свои собственные карты для «Widelands»."
 
 #: ../../txts/editor_readme.lua:18
 msgid ""
 "As you can see, this Editor is heavy work in progress and as the Editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Редактор всё ещё совершенствуется и становится лучше и лучше, а этот текст становится всё длиннее и полнее."
 
 #: ../../txts/editor_readme.lua:19
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Пожалуйста, ознакомьтесь с руководством пользователя на страницах вики по адресу: %s"
 
 #: ../../txts/editor_readme.lua:20
 msgid ""
@@ -538,107 +539,107 @@ msgstr "Горячие клавиши"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
 msgid "SPACE:"
-msgstr ""
+msgstr "ПРОБЕЛ:"
 
 #: ../../txts/editor_readme.lua:26
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "включить/выключить обозначение мест для строительства"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
 msgid "C:"
-msgstr ""
+msgstr "C:"
 
 #: ../../txts/editor_readme.lua:28
 msgid "toggles census"
-msgstr ""
+msgstr "показывать наименования"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
 msgid "F:"
-msgstr ""
+msgstr "F:"
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "полноэкранный режим"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
 msgid "H:"
-msgstr ""
+msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "показать главное меню"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
 msgid "M:"
-msgstr ""
+msgstr "M:"
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "переключить миникарту"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "показать меню игрока"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
 msgid "T:"
-msgstr ""
+msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "показать меню инструментов"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
 msgid "I:"
-msgstr ""
+msgstr "I:"
 
 #: ../../txts/editor_readme.lua:40
 msgid "activates information tool"
-msgstr ""
+msgstr "активировать окно информации"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
-msgstr ""
+msgstr "CTRL+L:"
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "Загрузить карту"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
-msgstr ""
+msgstr "CTRL+S:"
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "Сохранить Карту"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
 msgid "1-0:"
-msgstr ""
+msgstr "1-0:"
 
 #: ../../txts/editor_readme.lua:46
 msgid "changes tool size"
-msgstr ""
+msgstr "изменить размер инструмента"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
-msgstr ""
+msgstr "SHIFT (удерживая):"
 
 #: ../../txts/editor_readme.lua:48
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "выбирает первый альтернативный инструмент"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
-msgstr ""
+msgstr "ALT (удерживая):"
 
 #: ../../txts/editor_readme.lua:50
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "выбирает второй альтернативный инструмент"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2

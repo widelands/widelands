@@ -250,18 +250,18 @@ void EditorInteractive::think() {
 void EditorInteractive::exit() {
 	if (m_need_save) {
 		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-			end_modal(0);
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb
 			(this,
 			 _("Unsaved Map"),
 			 _("The map has not been saved, do you really want to quit?"),
-			 UI::WLMessageBox::YESNO);
-			if (mmb.run() == 0)
+			 UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 				return;
 		}
 	}
-	end_modal(0);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void EditorInteractive::toggle_mainmenu() {
@@ -621,7 +621,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
-	eia.run();
+	eia.run<UI::Panel::Returncodes>();
 
 	editor.cleanup_objects();
 }

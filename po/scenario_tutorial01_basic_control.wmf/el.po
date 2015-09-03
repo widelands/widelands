@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Elias Delakovias, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/widelands/language/el/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-31 12:39+0000\n"
+"Last-Translator: Elias Delakovias\n"
+"Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "Κάτι εύκολο και ωραίο για αρχή"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
@@ -27,34 +28,34 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr ""
+msgstr "Λυπάμαι αλλά θα πρέπει να το γκρεμίσω ξανά. Ίσως χρειαστούμε τον χώρο εδώ αργότερα. Αν με θεωρείτε πολύ αργό, ίσως προτιμάτε να παίξετε ένα κανονικό παιχνίδι και να ανακαλύψετε τα πάντα μόνοι σας. Διαφορετικά, κάντε υπομονή, δεν είμαι τόσο νέος και γρήγορος πλέον."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Καλώς ήλθατε στη Εισαγωγή του Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Καλώς Ήλθατε στο Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr ""
+msgstr "Το Widelands είναι ένα αργό παιχνίδι στρατηγικής ανάπτυξης με έμφαση στην κατασκευή παρά στην καταστροφή. Η Εισαγωγή σκοπό έχει να σας διδάξει τους βασικούς κανόνες του παιχνιδιού."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
-msgstr ""
+msgstr "Κλείστε αυτό το κουτί κάνοντας αριστερό κλικ στο κουμπί από κάτω."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "Τα πρώτα βήματα"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "Ας ξεκινήσουμε αμέσως!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -62,7 +63,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr ""
+msgstr "Υπάρχουν τρεις διαφορετικές φυλές στο Widelands: οι Βάρβαροι, η Αυτοκρατορία και οι Ατλαντιανοί. Όλες οι φυλές έχουν διαφορετική οικονομία, δύναμη και αδυναμίες, αλλά ο τρόπος παιξίματος παραμένει κοινός. Για αρχή θα παίξουμε ως Βάρβαροι."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -74,7 +75,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and raw stone. Let’s make sure that we do not run out of logs. For "
 "this, we need a lumberjack and a hut for him to stay in."
-msgstr ""
+msgstr "Συνήθως ξεκινώντας το παιχνίδι έχετε ένα αρχηγείο. Αυτό είναι το μεγάλο κτίριο με την μπλε σημαία μπροστά του. Το αρχηγείο είναι αποθήκη αγαθών και το σπίτι εργατών και στρατιωτών. Κάποια αγαθά χρειάζονται για το χτίσιμο σπιτιών, άλλα για τη δημιουργία περεταίρω αγαθών. Προφανώς τα αγαθά στο αρχηγείο δεν πρόκειται να κρατήσουν για πάντα, οπότε θα πρέπει να βρείτε τρόπο να τα αναπληρώστε. Τα σημαντικότερα αγαθά στην αρχή του παιχνιδιού είναι τα βασικά δομικά υλικά: Ξύλο και Πέτρα. Ας σιγουρέψουμε πρώτα την παραγωγή ξυλείας. Για να το καταφέρουμε αυτό, χρειαζόμαστε έναν ξυλοκόπο και μια καλύβα για να μένει."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -83,25 +84,25 @@ msgid ""
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the SPACE key"
 " to toggle it."
-msgstr ""
+msgstr "Πρέπει να βρούμε ένα ωραίο μέρος για την καλύβα του ξυλοκόπου. Για να το κάνουμε ευκολότερο, ας ενεργοποιήσουμε τη λειτουργεία \"Εμφάνιση Χώρων Κτισίματος\". Αυτό γίνεται με δύο τρόπους, είτε κάνοντας κλικ στο ομώνυμο κουμπί στο κάτω μέρος της οθόνης, το τέταρτο από αριστερά, είτε πιέζοντας το SPACE για να την ενεργοποιήσουμε/απενεργοποιήσουμε. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
+msgstr "Κάντε αριστερό κλικ στο κουμπί 'ΟΚ' για να κλείστε το κουμπί και δοκιμάστε το."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "Ενεργοποίηση εμφάνισης χώρων κτισίματος"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Εμφάνιση Χώρων Κτισίματος"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr ""
+msgstr "Είναι ευκολότερο να καταλάβει κανείς τι τύπου κτίρια μπορούν να χτιστούν σε κάθε χώρο όταν τα σύμβολα για τους χώρους κτισίματος είναι ενεργοποιημένα."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -607,7 +608,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid "Connect Your Construction Site"
-msgstr ""
+msgstr "Συνδέστε τον Χώρο Κατασκευής"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:335
 msgid ""
@@ -625,7 +626,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "Ασύνδετο Λατομείο"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -768,7 +769,7 @@ msgstr ""
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
-"straight, you should try to keep the inbox empty. "
+"straight, you should try to keep the inbox empty."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415

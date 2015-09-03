@@ -3,15 +3,16 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor@sahtor.net>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-22 19:15+0000\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +37,7 @@ msgstr "Pelin lisenssi:"
 
 #: ../../txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2015 Widelands-kehittäjätiimi"
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
@@ -48,7 +49,7 @@ msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public Licens
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Lisätietoa vapaista ohjelmistoista ja GPL-lisenssistä osoitteesta %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -207,7 +208,7 @@ msgstr "kirjain O: näytä tavoitteet."
 
 #: ../../txts/README.lua:70
 msgid "B: toggles building statistics"
-msgstr ""
+msgstr "rakennusten tilastot päälle/pois"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
@@ -498,7 +499,7 @@ msgstr "Ohje Widelandsin karttamuokkaimelle"
 
 #: ../../txts/editor_readme.lua:12
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Widelandsin karttamuokkain"
 
 #: ../../txts/editor_readme.lua:16
 msgid ""
@@ -506,7 +507,7 @@ msgid ""
 "to use with Widelands. As you can see, this Editor is heavy work in progress"
 " and as the Editor becomes better and better, this text will also get longer"
 " and more complete."
-msgstr ""
+msgstr "Tämä muokkain on tarkoitettu käyttäjille, jotka haluavat suunnitella omia karttojaan Widelandsissa käytettäväksi. Kuten näkyy, muokkain on vielä varsin keskeneräinen, ja sen kehittyessä tämäkin teksti paranee."
 
 #: ../../txts/editor_readme.lua:17
 msgid ""
@@ -522,7 +523,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:19
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Katso myös loppukäyttäjien ohjekirjoja wiki-sivuillamme osoitteessa %s"
 
 #: ../../txts/editor_readme.lua:20
 msgid ""
@@ -556,7 +557,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "vaihtaa kokonäyttötilaan"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
 msgid "H:"
@@ -564,7 +565,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "päävalikko päälle/pois"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
 msgid "M:"
@@ -572,7 +573,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "minikartta päälle/pois"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
 msgid "P:"
@@ -580,7 +581,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "pelaajavalikko päälle/pois"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
 msgid "T:"
@@ -588,7 +589,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "työkaluvalikko päälle/pois"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
 msgid "I:"
@@ -596,7 +597,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:40
 msgid "activates information tool"
-msgstr ""
+msgstr "aktivoi tietotyökalun"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
@@ -604,7 +605,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "lataa kartta"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
@@ -612,7 +613,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "tallenna kartta"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
 msgid "1-0:"
@@ -620,7 +621,7 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:46
 msgid "changes tool size"
-msgstr ""
+msgstr "vaihtaa työkalun kokoa"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"

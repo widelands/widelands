@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-29 13:06+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -469,8 +469,8 @@ msgstr "Došli polia"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
 msgstr "Pestovateľ čierneho koreňa pracujúci na tejto čiernokoreňovej farme nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
@@ -977,7 +977,7 @@ msgstr "Stavenisko"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
 #: ../../tribes/atlanteans/conf:151 ../../tribes/atlanteans/conf:158
 msgid "Barrier"
@@ -1197,7 +1197,7 @@ msgstr "Hlavná kryštálová žila vyčerpaná"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "Hlavná žila tohto kryštálového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste rozobrať alebo zničiť lom."
+msgstr "Hlavná žila tejto kryštálovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste popremýšľať nad rozobratím alebo zničením bane."
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
@@ -1207,7 +1207,7 @@ msgstr "Vysekáva drahokamy zo skaly na horskom teréne."
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
-msgstr "Tieto obdivuhodné diamanty sa používajú na stavbu niektorých exkluzívnych budov. Ťažia sa v kryštálovom lome."
+msgstr "Tieto obdivuhodné diamanty sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálových baniach."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1217,24 +1217,25 @@ msgid ""
 msgstr "Dvojitý trojzubec je jedným z najlepších trojzubcov, ktoré sa vyrábajú vo vyhni na zbrane. Používa sa v kobke – spolu s jedlom – na výcvik vojakov v útoku z úrovne 2 na úroveň 3."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "Spať"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Vylepšiť útok vojakov z úrovne 0 na úroveň 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Vylepšiť útok vojakov z úrovne 1 na úroveň 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Vylepšiť útok vojakov z úrovne 2 na úroveň 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Vylepšiť útok vojakov z úrovne 3 na úroveň 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1333,9 +1334,9 @@ msgstr "Sadí stromy na okolitom území."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "Horáreň vyžaduje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
+msgstr "Horáreň potrebuje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1434,7 +1435,7 @@ msgid ""
 msgstr "Kone pomáhajú nosiť predmety po rušných cestách. Chovajú sa v stajni."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
+msgid "Breeds the strong Atlantean horses"
 msgstr "Chová silné atlantídske kone"
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
@@ -1501,10 +1502,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "Železná ruda sa ťaží v železnorudných baniach. V taviarni sa taví na železo."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
@@ -1609,7 +1606,7 @@ msgstr "Dosky sú dôležitým stavebným materiálom Atlantíďanov. Vyrábajú
 
 #: ../../tribes/atlanteans/quarry/conf:20
 msgid "quarrying stone"
-msgstr ""
+msgstr "lámanie kameňa"
 
 #: ../../tribes/atlanteans/quarry/conf:33
 msgid "Out of Rocks"
@@ -1633,7 +1630,7 @@ msgstr "Kameňolom potrebuje vo svojej pracovnej oblasti kamene."
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
-msgstr "Tieto prehľadné kremene sa používajú na stavbu niektorých exkluzívnych budov. Ťažia sa v kryštálovom lome."
+msgstr "Tieto prehľadné kremene sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálovej bani."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""

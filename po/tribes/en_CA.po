@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: English (Canada) (http://www.transifex.com/projects/p/widelands/language/en_CA/)\n"
+"Language-Team: English (Canada) (http://www.transifex.com/widelands/widelands/language/en_CA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgid "Note:"
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:281
-msgid "Work area:"
+msgid "Work area radius:"
 msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:285
@@ -75,8 +75,10 @@ msgstr ""
 
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
-msgid "Garrisoned soldiers heal %s per second"
-msgstr ""
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

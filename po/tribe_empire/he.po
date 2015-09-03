@@ -3,13 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2015
+# maor reuben <maor309@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 14:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-28 21:13+0000\n"
+"Last-Translator: maor reuben <maor309@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,22 +21,22 @@ msgstr ""
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "צריף החיילים שלך גילה פולש"
 
 #: ../../global/militarysites/barracks.empire/conf:9
 #: ../../tribes/empire/barracks/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "צריף החיילים שלך תחת מתקפה"
 
 #: ../../global/militarysites/barracks.empire/conf:10
 #: ../../tribes/empire/barracks/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "האויב הביס את חיילך בצריף שלהם"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 #: ../../tribes/empire/barracks/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "החיילים שלך הביסו את האויב בצריף"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
@@ -1443,7 +1444,7 @@ msgstr ""
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
 
@@ -1952,7 +1953,8 @@ msgstr ""
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
 msgstr ""
 
 #: ../../tribes/empire/vineyard/help.lua:17

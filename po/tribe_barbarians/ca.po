@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-28 17:15+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 19:27+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -291,7 +291,7 @@ msgstr "forjar una destral ampla"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -687,7 +687,7 @@ msgstr "Els focs dels bàrbars s'alimenten de carbó. El carbó es pot obtenir d
 #: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
-msgstr "extreure de la mina"
+msgstr "extreure minerals"
 
 #: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
@@ -1088,7 +1088,7 @@ msgstr "Guarda forestal"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
-msgstr "Fuster de vaixells"
+msgstr "Mestre d'aixa"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Smelter"
@@ -1096,7 +1096,7 @@ msgstr "Fonedor"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Stonemason"
-msgstr "Pedrer"
+msgstr "Picapedrer"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Trainer"
@@ -1490,20 +1490,20 @@ msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral de fer
 msgid "Your soldiers have occupied your donjon."
 msgstr "Els vostres soldats han ocupat la torrassa."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "plantant blat"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "recol·lectant el blat"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "No hi ha camps disponibles"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "El granger que viu en aquesta granja no té terreny lliure per sembrar-hi llavors."
@@ -2001,7 +2001,7 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal workshop (but it ceases to be produced by the building if it is "
 "enhanced to an axfactory and war mill)."
-msgstr "El pic s'usa pels miners i els pedrers. Es fabrica al taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
+msgstr "El pic l'usen els miners, els pedrers i els picapedrers. Es fabrica al taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
@@ -2340,8 +2340,8 @@ msgstr "Tots els tipus d'armes tarden el mateix temps a fabricar-se, però les m
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
 msgstr "La destral del guerrer és l'arma perillosa que els bàrbars són capaços de produir. Només els soldats entrenats són capaços d'empunyar aquestes destrals enormes i poderoses. Es produeix al taller de guerra i s'usa, juntament amb menjar, en el camp d'entrenament per millorar el nivell d'atac dels soldats de nivell 4 a nivell 5."

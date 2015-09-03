@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-02 09:46+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-12 18:13+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -305,7 +305,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Kamene možno ťažiť v žulových lomoch, ale ľahšie je postaviť kameňolom pri skalách ležiacich nablízku. Čírou náhodou je ich tu hromada na západ (vľavo) od základne. Teraz vás naučím, ako tam presunúť pohľad."
+msgstr "Kamene možno ťažiť v žulových baniach, ale ľahšie je postaviť kameňolom pri skalách ležiacich nablízku. Čírou náhodou je ich tu hromada na západ (vľavo) od základne. Teraz vás naučím, ako tam presunúť pohľad."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -364,7 +364,7 @@ msgstr "Jednoducho podržte pravé tlačidlo myši hocikde na mape, potom potiah
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
-msgstr "Presuňte svoj pohľad s myšou"
+msgstr "Presuňte pohľad pomocou myši"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
@@ -770,8 +770,8 @@ msgstr "Archivujte prijaté správy"
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
-"straight, you should try to keep the inbox empty. "
-msgstr "Okno so správami je kľúčom k plnej kontrole nad osudom vášho kmeňa. V skutočnej hre však dostávate množstvo správ. Aby ste si zachovali jasnú hlavu, mali by ste sa snažiť udržiavať schránku prázdnu. "
+"straight, you should try to keep the inbox empty."
+msgstr "Okno so správami je kľúčom k plnej kontrole nad osudom vášho kmeňa. V skutočnej hre však budete dostávať množstvo správ. Aby ste si zachovali jasnú hlavu, snažte sa udržiavať schránku prázdnu."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
 msgid "Archive all your messages in your inbox now."

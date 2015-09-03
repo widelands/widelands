@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-28 17:15+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 18:59+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -468,8 +468,8 @@ msgstr "No hi ha camps disponibles"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
 msgstr "El granger que viu en aquesta granja de negrarrel no té terreny lliure per sembrar-hi llavors."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
@@ -552,7 +552,7 @@ msgstr "Els focs de les forges atlants i els tallers d'armes i armadures s'alime
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
-msgstr "extreure de la mina"
+msgstr "extreure minerals"
 
 #: ../../tribes/atlanteans/coalmine/conf:44
 msgid "Main Coal Vein Exhausted"
@@ -884,7 +884,7 @@ msgstr "Carboner"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Shipwright"
-msgstr "Fuster de vaixells"
+msgstr "Mestre d'aixa"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Farmer"
@@ -1216,24 +1216,25 @@ msgid ""
 msgstr "El trident doble és un dels millors tridents produïts pel taller d'armes atlant. S'usa a la masmorra, juntament amb menjar, per entrenar el nivell d'atac dels soldats de nivell 2 a nivell 3. "
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "Descansant"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr "dormint"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Promou l'atac del soldat de nivell 0 a nivell 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "promoure l'atac del soldat de nivell 0 a nivell 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Promou l'atac del soldat de nivell 1 a nivell 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "promoure l'atac del soldat de nivell 1 a nivell 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Promou l'atac del soldat de nivell 2 a nivell 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "promoure l'atac del soldat de nivell 2 a nivell 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Promou l'atac del soldat de nivell 3 a nivell 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "promoure l'atac del soldat de nivell 3 a nivell 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1332,7 +1333,7 @@ msgstr "Planta arbres a l'àrea de treball."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "La casa del guarda forestal necessita espais lliures dins l'àrea de treball per plantar-hi arbres."
 
@@ -1433,7 +1434,7 @@ msgid ""
 msgstr "Els cavalls ajuden a transportar béns en camins molt transitats. Es crien en granges de cavalls."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
+msgid "Breeds the strong Atlantean horses"
 msgstr "Cria els forts cavalls atlants"
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
@@ -1500,10 +1501,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "El mineral de ferro s'extreu de les mines de ferro. Es transforma en ferro quan es redueix al forn de metalls."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr "dormint"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
@@ -1577,11 +1574,11 @@ msgstr "Les pinces de munyir les utilitza el criador d'aranyes per munyir-les. L
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "grinding corn"
-msgstr "moldre el panís"
+msgstr "moldre panís"
 
 #: ../../tribes/atlanteans/mill/conf:29
 msgid "grinding blackroot"
-msgstr "moldre la negrarrel"
+msgstr "moldre negrarrel"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""

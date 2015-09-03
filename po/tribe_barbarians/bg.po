@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-31 11:48+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 08:23+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -290,7 +290,7 @@ msgstr "кове широка брадва"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -1489,20 +1489,20 @@ msgstr "Тази мина оползотворява всички ресурси
 msgid "Your soldiers have occupied your donjon."
 msgstr "Войниците Ви влязоха в донжона."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "сади пшеница"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "жъне пшеница"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Няма повече ниви"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Фермерът, работещ в тази ферма, няма изчистена почва, върху която да сади семената си."
@@ -2339,8 +2339,8 @@ msgstr "Всички видове оръжия отнемат едно и същ
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
 msgstr "Военната брадва е най-опасното оръжие на варварите. Само няколко войни изобщо са успявали да боравят с тази огромна и могъща брадва. Тя се произвежда в оръжейна и се използва в тренировъчния лагер, където заедно с храна се използва за обучаване на войниците и повишаване на нивото им на Атака от 4 на 5."

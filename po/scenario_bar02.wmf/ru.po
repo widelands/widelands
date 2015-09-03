@@ -1,22 +1,21 @@
-# Widelands po/ru_RU/campaigns/t03.wmf.po
-# Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-06-11 12:48+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-29 08:35+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:35+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
@@ -25,7 +24,7 @@ msgstr "Создайте малую пищевую экономику"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Выстройте начальную цепь поставки еды "
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a fisher’s hut"
@@ -112,17 +111,16 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
-msgid ""
-"Build a battle arena and a training camp to the west of the mountains."
+msgid "Build a battle arena and a training camp to the west of the mountains."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and "
-"build up a second metal workshop to ensure the production of tools. When the "
-"blacksmith reaches his next level (master blacksmith), you can even enhance "
-"the axfactory to a war mill, which will produce additional weapons."
+"Enhance your metal workshop to an axfactory in order to produce weapons, and"
+" build up a second metal workshop to ensure the production of tools. When "
+"the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the axfactory to a war mill, which will produce additional weapons."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
@@ -144,9 +142,9 @@ msgstr "Постройте склад западнее гор."
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
-"they aren’t defended by soldiers. It is often wise to build a warehouse when "
-"your territory is growing and the paths to your headquarters get longer and "
-"longer."
+"they aren’t defended by soldiers. It is often wise to build a warehouse when"
+" your territory is growing and the paths to your headquarters get longer and"
+" longer."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
@@ -188,8 +186,8 @@ msgstr ""
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
-"that should attack. When you are ready with setting the number, click on the "
-"cross (‘Start Attack’)."
+"that should attack. When you are ready with setting the number, click on the"
+" cross (‘Start Attack’)."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
@@ -235,10 +233,10 @@ msgstr ""
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
-"tribe leaders seem to grow tired of this senseless war. Kalitath, son of Kun "
-"is the first war leader to leave Al’thunran, thus leaving his side weak and "
-"vulnerable. As my scouts report, he has set foot on the lower grounds around "
-"the capital, securing the outer fortification rings."
+"tribe leaders seem to grow tired of this senseless war. Kalitath, son of Kun"
+" is the first war leader to leave Al’thunran, thus leaving his side weak and"
+" vulnerable. As my scouts report, he has set foot on the lower grounds "
+"around the capital, securing the outer fortification rings."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:161
@@ -274,8 +272,8 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:170
 msgid ""
-"However, Thron is not willing to listen to my doubts. He seeks to expand our "
-"fortifications to the borders of Kalitath’s territory and to reunite with "
+"However, Thron is not willing to listen to my doubts. He seeks to expand our"
+" fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr ""
 
@@ -289,8 +287,8 @@ msgid ""
 "have a long and cold winter and so many miles behind us. The fortification "
 "that we erected around Ondun will guarantee us a fast supply of men and "
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
-"a good and defensible infrastructure. Still, I hope I will not walk alone on "
-"this mission, I hope Kalitath son of Kun will follow my call."
+"a good and defensible infrastructure. Still, I hope I will not walk alone on"
+" this mission, I hope Kalitath son of Kun will follow my call."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:183
@@ -305,8 +303,8 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:184
 msgid ""
-"I have sent men to meet with Kalitath in his fortress. He has barricaded the "
-"former main entrance to the capital and is trying to set up a siege ring "
+"I have sent men to meet with Kalitath in his fortress. He has barricaded the"
+" former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
@@ -323,8 +321,8 @@ msgstr "Болдреф выкрикивает!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:190
 msgid ""
-"The BASTARD! Only one man of our frontier patrol came back alive. He carried "
-"a message from Kalitath, telling us that he will punish every move of our "
+"The BASTARD! Only one man of our frontier patrol came back alive. He carried"
+" a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
 msgstr ""
@@ -382,8 +380,8 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:218
 msgid ""
-"Boldreth is right! We don’t have enough food to survive a long, cold winter. "
-"We should start building a well, a fisher’s and a hunter’s hut. And if we "
+"Boldreth is right! We don’t have enough food to survive a long, cold winter."
+" We should start building a well, a fisher’s and a hunter’s hut. And if we "
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
@@ -406,8 +404,8 @@ msgstr "Пути"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:233
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a donjon, to have a greater visual "
-"range over the area around our hall to protect our people from sudden "
+"settlement. He has instructed us to build a donjon, to have a greater visual"
+" range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr ""
 
@@ -419,19 +417,19 @@ msgstr ""
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
-"walls of our new habitat that we named ‘Ondun’, which means ‘those who wait’ "
-"in the old tongue. But Thron is not yet satisfied – and I fully understand "
+"walls of our new habitat that we named ‘Ondun’, which means ‘those who wait’"
+" in the old tongue. But Thron is not yet satisfied – and I fully understand "
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
-"am sure that there are a thousand greater dangers out there than the unknown "
-"tracks."
+"am sure that there are a thousand greater dangers out there than the unknown"
+" tracks."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:243
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
-"set up more guards and scouts to observe the frontier and keep an eye on the "
-"raging wars on our doorstep. THEN we will be prepared once trouble seeks to "
-"capture our woods."
+"set up more guards and scouts to observe the frontier and keep an eye on the"
+" raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
+" capture our woods."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:249
@@ -454,8 +452,8 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:259
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
-"brought a smile to my face – even if the hardest part is still waiting to be "
-"done, now that our smiths will give their best to further ease our lives."
+"brought a smile to my face – even if the hardest part is still waiting to be"
+" done, now that our smiths will give their best to further ease our lives."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:264
@@ -468,8 +466,8 @@ msgid ""
 "strategic problem of that area seems to be that there are two bigger "
 "passages – one north and one south of the central mountain. Those passages "
 "are quite hard to control, and so it seems to me like we have only one "
-"chance to secure the mountains from enemy hands: we must build a fortress to "
-"the east of the mountains!"
+"chance to secure the mountains from enemy hands: we must build a fortress to"
+" the east of the mountains!"
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:272
@@ -480,8 +478,8 @@ msgstr ""
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
-"building some more fortifications like barriers and donjons at the passages, "
-"but for now we can take a deep breath."
+"building some more fortifications like barriers and donjons at the passages,"
+" but for now we can take a deep breath."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:279
@@ -491,34 +489,34 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:281
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
-"there are still a lot of men and women waiting in our hall to get a task, so "
-"they can help our soldiers to prepare for the war to come."
+"there are still a lot of men and women waiting in our hall to get a task, so"
+" they can help our soldiers to prepare for the war to come."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid ""
-"Our geologists found a lot more deposits of iron ore, coal and even gold. We "
-"should enhance our current mines as soon as our miners are more experienced. "
-"We should build up some more mines, a bigger food infrastructure to always "
-"supply our men with sufficient food and a further processing economy. But "
-"that’s still not everything – most of our soldiers are quite young and "
-"neither have a good weapon nor are they well trained. We should build up "
-"training sites to prepare them for their future tasks."
+"Our geologists found a lot more deposits of iron ore, coal and even gold. We"
+" should enhance our current mines as soon as our miners are more "
+"experienced. We should build up some more mines, a bigger food "
+"infrastructure to always supply our men with sufficient food and a further "
+"processing economy. But that’s still not everything – most of our soldiers "
+"are quite young and neither have a good weapon nor are they well trained. We"
+" should build up training sites to prepare them for their future tasks."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:291
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
-"behind. In none of all the ruins could I find any man or woman of the normal "
-"folk, and so I just may hope that they fled from this cruel battleground and "
-"started a better life somewhere else."
+"behind. In none of all the ruins could I find any man or woman of the normal"
+" folk, and so I just may hope that they fled from this cruel battleground "
+"and started a better life somewhere else."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:293
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
-"capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s "
-"old beauty again – it was only a few months ago that I wondered whether I "
+"capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
+" old beauty again – it was only a few months ago that I wondered whether I "
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
@@ -581,3 +579,5 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Elias Delakovias, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/widelands/language/el/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-31 10:14+0000\n"
+"Last-Translator: Elias Delakovias\n"
+"Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,82 +19,82 @@ msgstr ""
 
 #: ../../txts/AUTHORS.lua:40
 msgid "Authors"
-msgstr ""
+msgstr "Συντάκτες"
 
 #: ../../txts/AUTHORS.lua:42
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Η ομάδα ανάπτυξης του Widelands"
 
 #: ../../txts/LICENSE.lua:18
 msgid "License"
-msgstr ""
+msgstr "Άδεια"
 
 #: ../../txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Πληροφορίες για την άδεια του Widelands"
 
 #: ../../txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr ""
+msgstr "Πνευματικά δικαιώματα 2002-2015, ομάδα ανάπτυξης του Widelands."
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Αυτό το παιχνίδι είναι Δωρεάν και Ανοικτού Κώδικα (FOSS) και παρέχεται υπό την άδεια GNU General Public License (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Μπορείτε να βρείτε περισσότερες πληροφορίες όσον αφορά το FOSS και την GPL με μια επίσκεψη στην ακόλουθη σελίδα:  %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Εκεί μπορείτε να βρείτε ολόκληρο το κείμενο της άδειας καθώς επίσης και περεταίρω πληροφορίες γύρω από τη φιλοσοφία της και τις νομικές επιπτώσεις αυτής."
 
 #: ../../txts/LICENSE.lua:29
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Επιπλέον η GPL παρέχεται ως αρχείο κειμένου μαζί με το Widelands."
 
 #: ../../txts/LICENSE.lua:30
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Στα Linux, μπορείτε να βρείτε το αρχείο COPYING στη ρίζα του πηγαίου κώδικα ή του ανεξάρτητου εκτελέσιμου πακέτου, ή στο φάκελο εγκατάστασης (π.χ. ‘%1%’)."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "Στα Windows, μπορείτε να βρείτε το αρχείο COPYING.txt στον φάκελο εγκατάστασης, και στο μενού έναρξης, στην καταχώριση του Widelands, υπάρχει σύνδεσμος για το αρχείο."
 
 #: ../../txts/LICENSE.lua:32
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "Σε λειτουργικό σύστημα Mac, μπορείτε να βρείτε το αρχείο ονόματι COPYING μέσα στο αρχείο το οποίο κατεβάσατε από την ιστοσελίδα."
 
 #: ../../txts/LICENSE.lua:34
 msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Το παιχνίδι παρέχεται \"ως έχει\" και χωρίς εγγύηση. Για περεταίρω πληροφορίες και υποστήριξη μπορείτε να μας βρείτε στα: %1% (Ιστοσελίδα, Βίκι, Φόρουμ για ερωτήσεις και γενική υποστήριξη), %2% (Σφάλματα κώδικα), και %3% (Μεταφράσεις)."
 
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "README"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "ένα παιχνίδι στρατηγικής ανοικτού κώδικα"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme.lua:14
 msgid "Introduction"
-msgstr ""
+msgstr "Εισαγωγή"
 
 #: ../../txts/README.lua:19
 msgid ""
@@ -101,7 +102,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr ""
+msgstr "Το Widelands είναι ένα δωρεάν, ανοικτού κώδικα παιχνίδι στρατηγικής \nπραγματικού χρόνου, με εκστρατείες για έναν παίκτη καθώς επίσης και για\nπολλούς. Το παιχνίδι είναι εμπνευσμένο από το Settlers II αλλά παρουσιάζει\nπερισσότερη ποικιλία και βάθος. Παρ' όλα αυτά, είναι εύκολο να ξεκινήσει \nκανείς μέσω των εισαγωγικών χαρτών."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -110,21 +111,21 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "Σε αυτό το παιχνίδι, ξεκινάς σε ένα μικρό κομμάτι γης με λιγοστούς\nπόρους. Χρησιμοποιώντας τους, θα δημιουργήσεις μια αυτοκρατορία\nπου θα αριθμεί χιλιάδες κάτοικους. Στην πορεία σου για αυτόν τον\nστόχο, θα πρέπει να εγκαθιδρύσεις μια οικονομική υποδομή, να\nεξερευνήσεις τον κόσμο και να αναμετρηθείς με αντίπαλες φυλές."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Επισκεφθείτε την αρχική σελίδα του Widelands:"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Το Widelands εκδίδεται υπό την άδεια GNU General Public License (GPL). Για\nπερισσότερες πληροφορίες, ανατρέξτε στο αρχείο 'COPYING'."
 
 #: ../../txts/README.lua:37
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: ../../txts/README.lua:39
 msgid ""
@@ -133,25 +134,25 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Το Widelands είναι σχεδόν ολοκληρωμένο και πολύ διασκεδαστικό είτε μόνος\nείτε με παρέα. Παρ' όλα αυτά, υπάρχει ακόμα αρκετή δουλειά σε ορισμένους\nτομείς. Αν είστε διατεθειμένοι να συνεισφέρετε - με τη δημιουργία γραφικών, διορθώνοντας προβλήματα στον κώδικα, προσθέτοντας νέες δυνατότητες,\nμεταφράζοντας στη μητρική σας γλώσσα, ή δημιουργώντας νέους χάρτες -\nελάτε σε επαφή μαζί μας μέσω της αρχικής μας σελίδας."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
-msgstr ""
+msgstr "Γενικός χειρισμός παιχνιδιού"
 
 #: ../../txts/README.lua:47
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, click\n"
 "on the title bar of that window either with the middle mouse button or with the left\n"
 "mouse button while holding down CTRL."
-msgstr ""
+msgstr "Για να κλείστε ένα ανοικτό παράθυρο, κάντε δεξί κλικ πάνω του. Για να\nελαχιστοποιήστε/μεγιστοποιήστε, κάντε μεσαίο κλικ - ή αριστερό κρατώντας\nπατημένο το πλήκτρο CTRL - στην μπάρα τίτλου του παραθύρου."
 
 #: ../../txts/README.lua:51
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Αν κρατήστε πατημένο το CTRL ενώ χτίζετε έναν δρόμο, οι σημαίες θα \nτοποθετηθούν αυτόματα. Αν κρατήστε πατημένο το CTRL ενώ αφαιρείτε \nέναν δρόμο, οι σημαίες έως την πρώτη διασταύρωση θα αφαιρεθούν."
 
 #: ../../txts/README.lua:55
 msgid ""

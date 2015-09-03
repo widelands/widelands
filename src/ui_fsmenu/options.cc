@@ -305,10 +305,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 {
 	m_advanced_options.sigclicked.connect
 		(boost::bind(&FullscreenMenuOptions::advanced_options, boost::ref(*this)));
-	m_cancel.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
@@ -396,9 +394,9 @@ void FullscreenMenuOptions::update_sb_remove_replays_unit() {
 
 void FullscreenMenuOptions::advanced_options() {
 	FullscreenMenuAdvancedOptions aom(os);
-	if (aom.run() == FullscreenMenuAdvancedOptions::om_ok) {
+	if (aom.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 		os = aom.get_values();
-		end_modal(om_restart);
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kRestart);
 	}
 }
 
@@ -463,25 +461,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	}
 }
 
-
-bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
-}
 
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -622,41 +601,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 					 boost::ref(*this)));
 	}
 
-	m_cancel.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_back, boost::ref(*this)));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_ok, boost::ref(*this)));
 
 	m_title                .set_textstyle(UI::TextStyle::ui_big());
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_transparent_chat     .set_state(opt.transparent_chat);
-}
-
-bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
 }
 
 void FullscreenMenuAdvancedOptions::update_sb_dis_panel_unit() {
@@ -694,10 +646,10 @@ OptionsCtrl::~OptionsCtrl() {
 
 void OptionsCtrl::handle_menu()
 {
-	int32_t i = m_opt_dialog->run();
-	if (i != FullscreenMenuOptions::om_cancel)
+	FullscreenMenuBase::MenuTarget i = m_opt_dialog->run<FullscreenMenuBase::MenuTarget>();
+	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
-	if (i == FullscreenMenuOptions::om_restart) {
+	if (i == FullscreenMenuBase::MenuTarget::kRestart) {
 		delete m_opt_dialog;
 		m_opt_dialog = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu

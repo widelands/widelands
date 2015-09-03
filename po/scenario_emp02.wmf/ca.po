@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-28 10:45+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 19:24+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,18 +66,18 @@ msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Expandiu-vos a l'est, per començar a extreure marbre de la muntanya."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
-msgstr "Construïu *una pedrera/un taller de la pedra* i una infraestructura minera"
+msgid "Build a stonemason’s house and mining infrastructure"
+msgstr "Construïu un taller de la pedra i una infraestructura minera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
-msgstr "*Pedrera/Taller de la pedra* i infraestructura minera"
+msgid "Stonemason’s house and Mining Infrastructure"
+msgstr "Taller de la pedra i infraestructura minera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
 msgstr "Construïu un taller de la pedra. Després podreu completar la infraestructura de mineria i producció (mina de carbó i/o kiln de carbó vegetal, mina de ferro, forn de metalls i tallers d'eines, armes i armadures)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -321,9 +321,9 @@ msgstr "Pels déus! Un increïble cop de sort! Hi ha dues muntanyes més i sembl
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So you have to build a stonemason, who will cut columns "
-"from marble."
-msgstr "No obstant, per tots aquests edificis més grans, necessitem materials més elegants. Així que, cal que construïu un taller de la pedra, que tallarà columnes de marbre."
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr "No obstant, per tots aquests edificis més grans, necessitem materials més elegants. Així que, cal que construïu un taller de la pedra per al picapedrer, que tallarà columnes a partir del marbre."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."

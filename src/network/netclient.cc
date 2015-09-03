@@ -155,19 +155,20 @@ void NetClient::run ()
 		FullscreenMenuLaunchMPG lgm(this, this);
 		lgm.set_chat_provider(*this);
 		d->modal = &lgm;
-		int32_t code = lgm.run();
+		FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 		d->modal = nullptr;
-		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
+		 // Only possible if server is dedicated - client pressed "start game" button
+		if (code == FullscreenMenuBase::MenuTarget::kNormalGame) {
 			SendPacket subs;
 			subs.unsigned_8(NETCMD_LAUNCH);
 			subs.send(d->sock);
 
 			// Reopen the menu - perhaps the start is denied or other problems occur
 			d->modal = &lgm;
-			code = lgm.run();
+			code = lgm.run<FullscreenMenuBase::MenuTarget>();
 			d->modal = nullptr;
 		}
-		if (code <= 0) {
+		if (code == FullscreenMenuBase::MenuTarget::kBack) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
 				InternetGaming::ref().set_game_done();
@@ -945,9 +946,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_LAUNCH: {
-		if (!d->modal || d->game)
+		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
-		d->modal->end_modal(2);
+		}
+		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 		break;
 	}
 	case NETCMD_SETSPEED:
@@ -1100,15 +1102,15 @@ void NetClient::disconnect
 			(d->modal,
 			 _("Disconnected from Host"),
 			 msg,
-			 UI::WLMessageBox::OK);
-		mmb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mmb.run<UI::Panel::Returncodes>();
 	}
 
 	if (trysave)
 		WLApplication::emergency_save(*d->game);
 
 	if (d->modal) {
-		d->modal->end_modal(0);
+		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 		d->modal = nullptr;
 	}
 }

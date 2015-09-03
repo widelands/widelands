@@ -437,6 +437,9 @@ void DefaultAI::late_initialization() {
 		bo.is_port_ = bld.get_isport();
 		bo.trainingsite_type_ = TrainingSiteType::kNoTS;
 		bo.upgrade_substitutes_ = false;
+		bo.output_needed_ = ExtendedBool::kUnset;
+		bo.max_preciousness = 0;
+		bo.max_needed_preciousness_ = 0;
 
 		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
@@ -1198,7 +1201,7 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 			// Check whether this building is completely occupied
 			mines_.front().bo->unoccupied_ |= !mines_.front().site->can_start_working();
 		} else {
-			buildings_.at(i).unconnected_ += 1;
+			mines_.front().bo->unconnected_ += 1;
 		}
 
 		// Now reorder the buildings
@@ -1409,10 +1412,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 	}
 
-	// these are 3 helping variables
-	bool output_is_needed = false;
-	int16_t max_preciousness = 0;         // preciousness_ of most precious output
-	int16_t max_needed_preciousness = 0;  // preciousness_ of most precious NEEDED output
+	//Resetting output_needed_ in building observer
+	for (uint32_t j = 0; j < buildings_.size(); ++j) {
+		BuildingObserver& bo = buildings_.at(j);
+		if (bo.type == BuildingObserver::PRODUCTIONSITE || bo.type == BuildingObserver::MINE){
+			bo.output_needed_ = ExtendedBool::kUnset;
+		}
+	}
 
 	// first scan all buildable fields for regular buildings
 	for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
@@ -1488,10 +1494,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				continue;
 			}
 
-			// so we are going to seriously evaluate this building on this field,
-			// first some base info - is its output needed at all?
-			check_ware_necessity(bo, &output_is_needed, &max_preciousness, &max_needed_preciousness);
-
 			int32_t prio = 0;  // score of a bulding on a field
 
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -1499,6 +1501,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// exclude spots on border
 				if (bf->near_border_ && !bo.need_trees_ && !bo.need_stones_ && !bo.is_fisher_) {
 					continue;
+				}
+
+				// this just indicates that values must be recalculated - if this building
+				// is to be considered later on in this function
+				if (bo.output_needed_ == ExtendedBool::kUnset) {
+					check_building_necessity(bo);
 				}
 
 				// this can be only a well (as by now)
@@ -1624,7 +1632,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				} else if (bo.is_fisher_) {  // fisher
 
 					// ~are fishes needed?
-					if (max_needed_preciousness == 0) {
+					if (bo.max_needed_preciousness_ == 0) {
 						continue;
 					}
 
@@ -1638,7 +1646,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					// we use preciousness to allow atlanteans to build the fishers huts
 					// atlanteans have preciousness 4, other tribes 3
-					if (max_needed_preciousness < 4 && new_buildings_stop_) {
+					if (bo.max_needed_preciousness_ < 4 && new_buildings_stop_) {
 						continue;
 					}
 
@@ -1757,7 +1765,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// generally we allow 1 building in construction, but if
 					// preciousness of missing ware is >=10 and it is farm-like building
 					// we allow 2 in construction
-					if (max_needed_preciousness >= 10
+					if (bo.max_needed_preciousness_ >= 10
 						&& bo.inputs_.empty()
 						&& gametime > 30 * 60 * 1000) {
 						if ((bo.cnt_under_construction_ + bo.unoccupied_) > 1) {
@@ -1779,7 +1787,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						if (!seafaring_economy) {
 							continue;
 						}
-					} else if (!output_is_needed) {
+					} else if (bo.output_needed_ == ExtendedBool::kFalse) {
 						continue;
 					} else if ((bo.cnt_built_ - bo.unconnected_) == 0 &&
 					           game().get_gametime() > 40 * 60 * 1000) {
@@ -1792,7 +1800,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// we check separatelly buildings with no inputs and some inputs
 					if (bo.inputs_.empty()) {
 
-						prio += max_needed_preciousness + kDefaultPrioBoost;
+						prio += bo.max_needed_preciousness_ + kDefaultPrioBoost;
 
 						if (bo.space_consumer_) {  // need to consider trees nearby
 							prio += 20 - (bf->trees_nearby_ / 3);
@@ -1827,14 +1835,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					} else if (!bo.inputs_.empty()) {
 						if ((bo.total_count() - bo.unconnected_ == 0)) {
-							prio += max_needed_preciousness + kDefaultPrioBoost;
+							prio += bo.max_needed_preciousness_ + kDefaultPrioBoost;
 						}
 						if ((bo.cnt_built_ - bo.unconnected_) > 0
 							&&
 							is_productionsite_needed(bo.outputs_.size(),
 													bo.current_stats_,
 													PerfEvaluation::kForConstruction)) {
-							prio += max_needed_preciousness + kDefaultPrioBoost - 3 +
+							prio += bo.max_needed_preciousness_ + kDefaultPrioBoost - 3 +
 							        (bo.current_stats_ - 55) / 8;
 						}
 					}
@@ -2228,12 +2236,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				// testing if building's output is needed
-				check_ware_necessity(
-				   bo, &output_is_needed, &max_preciousness, &max_needed_preciousness);
+				if (bo.output_needed_ == ExtendedBool::kUnset) {
+					check_building_necessity(bo);
+				}
 
-				if (!output_is_needed && (bo.total_count() - bo.unconnected_) > 0) {
-					continue;
+				if (bo.output_needed_ == ExtendedBool::kFalse
+					&&
+				 	(bo.total_count() - bo.unconnected_) > 0) {
+						continue;
 				}
 
 				// if current one(s) are performing badly
@@ -2298,7 +2308,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += bonus_score;
 
 					// applying max needed
-					prio += max_needed_preciousness * 3;
+					prio += bo.max_needed_preciousness_ * 3;
 
 					// prefer mines in the middle of mine fields of the
 					// same type, so we add a small bonus here
@@ -3538,14 +3548,11 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		return true;
 	}
 
-	// updating statistics if needed
-	if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
-		site.bo->stocklevel_ = get_stocklevel_by_hint(site.bo->production_hint_);
-		site.bo->stocklevel_time = game().get_gametime();
-	}
+	// is output needed (compare stocked materials vs target values)
+	check_building_necessity(*site.bo);
 
-	// if we have enough of mined resources on stock - do not upgrade
-	if (site.bo->stocklevel_ > 150) {
+	// if we have enough of mined materials on stock - do not upgrade (yet)
+	if (site.bo->output_needed_ == ExtendedBool::kFalse) {
 		return false;
 	}
 
@@ -3601,39 +3608,39 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	return count;
 }
 
-// calculating how much an output is needed
-// 'max' is because the building can have more outputs
-void DefaultAI::check_ware_necessity(BuildingObserver& bo,
-                                     bool* output_is_needed,
-                                     int16_t* max_preciousness,
-                                     int16_t* max_needed_preciousness) {
+// goes over all outputs of a building and compare stocked material with
+// target values. The result is yes/no and some scores
+void DefaultAI::check_building_necessity(BuildingObserver& bo) {
+	// iterate over outputs of building, counts warehoused stock
+	// and deciding if enough
+	bo.max_preciousness = 0;
+	bo.max_needed_preciousness_ = 0;
 
-	// resetting values
-	*output_is_needed = false;
-	*max_preciousness = 0;
-	*max_needed_preciousness = 0;
+	for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
+		WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 
-	for (EconomyObserver* observer : economies) {
-		// Don't check if the economy has no warehouse.
-		if (observer->economy.warehouses().empty()) {
-			continue;
-		}
+		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity() / 3;
+		// at least  1
+		target = std::max<uint16_t>(target, 1);
 
-		for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-			WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
+		uint16_t preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
 
-			if (observer->economy.needs_ware(wt)) {
-				*output_is_needed = true;
-
-				if (wares.at(bo.outputs_.at(m)).preciousness_ > *max_needed_preciousness) {
-					*max_needed_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
-				}
-			}
-
-			if (wares.at(bo.outputs_.at(m)).preciousness_ > *max_preciousness) {
-				*max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+		if (get_warehoused_stock(wt) < target) {
+			if (bo.max_needed_preciousness_ < preciousness) {
+				bo.max_needed_preciousness_ = preciousness;
 			}
 		}
+
+		if (bo.max_preciousness < preciousness) {
+			bo.max_preciousness = preciousness;
+		}
+	}
+
+	// here we decide if the building is needed
+	if (bo.max_needed_preciousness_ > 0) {
+		bo.output_needed_ = ExtendedBool::kTrue;
+	} else {
+		bo.output_needed_ = ExtendedBool::kFalse;
 	}
 }
 

@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
+"Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,7 +292,7 @@ msgstr "wykuwanie szerokiego topora"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -1493,20 +1493,20 @@ msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokład�
 msgid "Your soldiers have occupied your donjon."
 msgstr "Twoi żołnierze zajęli miejsce w twoim stołpie."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "sadzenie pszenicy"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "żęcie pszenicy"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Brak pól"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
@@ -2343,11 +2343,11 @@ msgstr "Wszystkie trzy bronie produkowane są tak samo szybko, ale lepsze bronie
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr "Topór wojownika to najgroźniejsza ze wszystkich barbarzyńskich broni. Nieliczni są w stanie posługiwać się tymi wielkimi, potężnymi toporami. Produkowane są w kuźni i wykorzystywane w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 4 do poziomu 5."
+msgstr ""
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""

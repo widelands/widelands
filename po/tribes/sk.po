@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-31 15:39+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:23+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,19 +38,19 @@ msgstr "%s a"
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
-msgstr ""
+msgstr "Výstroj, ktorú poskytuje"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
-msgstr ""
+msgstr "a výstroj, ktorú poskytuje"
 
 #: TRANSLATORS This is a headline, you can see it in the building help for
 #: trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
-msgstr ""
+msgstr "alebo výstroj, ktorú poskytuje"
 
 #: ../../tribes/scripting/format_help.lua:270
 msgid "General"
@@ -66,7 +66,7 @@ msgid "Note:"
 msgstr "Poznámka:"
 
 #: ../../tribes/scripting/format_help.lua:281
-msgid "Work area:"
+msgid "Work area radius:"
 msgstr "Pracovná oblasť:"
 
 #: ../../tribes/scripting/format_help.lua:285
@@ -76,8 +76,11 @@ msgstr "Liečenie:"
 
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
-msgid "Garrisoned soldiers heal %s per second"
-msgstr ""
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bod zdravia za sekundu."
+msgstr[1] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d body zdravia za sekundu."
+msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -162,7 +165,7 @@ msgstr "%1$dx %2$s"
 
 #: ../../tribes/scripting/format_help.lua:481
 msgid "Building"
-msgstr ""
+msgstr "Budova"
 
 #: ../../tribes/scripting/format_help.lua:485
 msgid "Mine plot"
@@ -198,17 +201,17 @@ msgstr "Veľká parcela"
 #: ../../tribes/scripting/format_help.lua:575
 #: ../../tribes/scripting/format_help.lua:623
 msgid "Unknown"
-msgstr ""
+msgstr "Neznáme"
 
 #: ../../tribes/scripting/format_help.lua:505
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
-msgstr ""
+msgstr "Túto budovu možno buď postaviť priamo, alebo získať vylepšením inej budovy."
 
 #: ../../tribes/scripting/format_help.lua:511
 msgid "Direct build cost:"
-msgstr ""
+msgstr "Priame náklady na stavbu:"
 
 #: ../../tribes/scripting/format_help.lua:513
 msgid "Build cost:"
@@ -216,12 +219,12 @@ msgstr "Náklady na stavbu:"
 
 #: ../../tribes/scripting/format_help.lua:525
 msgid "Or enhanced from:"
-msgstr ""
+msgstr "Alebo vylepšená z:"
 
 #: ../../tribes/scripting/format_help.lua:527
 #: ../../tribes/scripting/format_help.lua:530
 msgid "Enhanced from:"
-msgstr ""
+msgstr "Vylepšená z:"
 
 #: ../../tribes/scripting/format_help.lua:539
 msgid "Cumulative cost:"

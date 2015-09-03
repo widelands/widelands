@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-02 07:40+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -467,8 +468,8 @@ msgstr "Нет полей"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
-"The farmer working at this blackroot farm has no cleared soil to plant his "
-"seeds."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
 msgstr "У фермера с этой козельцовой фермы нет почвы пригодной для посева."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
@@ -1215,24 +1216,25 @@ msgid ""
 msgstr "Двойной трезубец — один из лучших видов оружия атлантов. Производится в оружейной. В подземелье солдаты увеличивают свою силу с 2 до 3 при помощи этого трезубца и еды."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Sleep"
-msgstr "Сон"
+#: ../../tribes/atlanteans/labyrinth/conf:46
+msgid "sleeping"
+msgstr "спит"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Увеличить силу солдата с 0 до 1"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "Повышение силы солдата с 0 до 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Увеличить силу солдата с 1 до 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "Повышение силы солдата с 1 до 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Увеличить силу солдата с 2 до 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "Повышение силы солдата с 2 до 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Увеличить силу солдата с 3 до 4"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "Повышение силы солдата с 3 до 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1297,7 +1299,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr ""
+msgstr "Рыболов не может найти рыбу в рабочей области вокруг этого домика рыболова. Не забывайте, что поголовье рыбы можно увеличить, если построить домик рыбовода."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1311,7 +1313,7 @@ msgstr "Постройте домик рыбовода рядом с домик�
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Строить Домик рыболова надо с таким расчетом, чтобы в его рабочую область входил водоем, полный рыбы."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1331,9 +1333,9 @@ msgstr "Сажает деревья в ближайших окрестностя
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the work area to plant the "
+"The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Строить Домик лесника надо с таким расчетом, чтобы в его рабочую область входило свободное пространство, пригодное для выращивания деревьев."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1432,8 +1434,8 @@ msgid ""
 msgstr "Лошади помогают перетаскивать вещи по загруженным дорогам. Их разводят на конном заводе."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong atlantean horses"
-msgstr "Разводит сильных лошадей атлантов."
+msgid "Breeds the strong Atlantean horses"
+msgstr "Разводит сильных Атлантских лошадей."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1459,7 +1461,7 @@ msgstr "Нет дичи"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Домика охотника."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1467,7 +1469,7 @@ msgstr "Охотится на зверей, с целью получения м�
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Для охоты нужно чтобы в рабочей области вокруг Домика охотника обитали животные."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
@@ -1499,10 +1501,6 @@ msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr "Железная руда добывается в рудниках. Из неё в литейной выплавляют железо."
-
-#: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "sleeping"
-msgstr "спит"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
@@ -1617,7 +1615,7 @@ msgstr "Нет больше камня"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr ""
+msgstr "Камнетёс из этой каменоломни больше не может найти месторождений камня в своей рабочей области."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
@@ -1625,7 +1623,7 @@ msgstr "Добывает строительный камень из скальн
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the work area."
-msgstr ""
+msgstr "Для работы каменоломни нужны камни в рабочей области."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1899,7 +1897,7 @@ msgstr "Воды больше нет"
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "Носильщик, работающий на этом колодце, не может найти воду в своей рабочей области."
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -1918,7 +1916,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого домика лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1926,4 +1924,4 @@ msgstr "Валит деревья поблизости и перерабатыв
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
 msgid "The woodcutter's house needs trees to fell within the work area."
-msgstr ""
+msgstr "В рабочей области вокруг домика лесоруба должны быть деревья."

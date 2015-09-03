@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -10,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-27 09:41+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-01 11:48+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -178,7 +179,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Железная, золотая руда и уголь добываются в соответствующих шахтах. В кристальной шахте добываются кристаллы: кварц и алмазы – они очень редко встречаются. Во время их поиска добывается много камня."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -262,7 +263,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "Существует озеро в верхней части острова. Постойте 3 корабля в этих водах и вы сможете спасти свой народ, прежде чем остров будет поглощен океаном."
+msgstr "В верхней части острова есть озеро . Постойте 3 корабля в этих водах и вы сможете спасти свой народ, прежде чем остров будет поглощен океаном."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a shipyard close to the lake to start building ships"
@@ -354,7 +355,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Но даже это не изменило мнение бога. Вода продолжала прибывать. Свихнувшись от вины, боли и гнева, Джандлина стала еретиком: тайно она собрала простой народ, который не разделял мнение священников принять божью волю. С ними вместе она основала храм огня и украла корабль, чтобы избежать последствий гнева бога Атлантиды. Эта маленькая группа начала молиться Сатулу, богу огня и злейшему врагу Лютаса."
+msgstr "Но даже это не изменило мнение бога. Вода продолжала прибывать. Обезумев от вины, боли и гнева, Джандлина впала в ересь: тайно она собрала простой народ, который не готов был последовать за  священниками принять \"божью волю\". С ними вместе она основала храм огня и угнала корабль, чтобы избежать последствий гнева бога Атлантиды. Эта маленькая группа начала молиться Сатулу, богу огня и злейшему врагу Лютаса."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:157
 msgid ""
@@ -377,7 +378,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr "Мы оставили Атлантиду и поплыли на восток. Мы вошли в запрещенное море на шестой день, не замечая никаких преследователей из Атлантиды; и корабль наш не был разрушен Лютасом. Теперь мы вне его досягаемости. На следующий день, мы увидели остров, на котором, кажется, были одни из этих шипящих огнем гор. Я счел это знаком от бога огня, и мы высадились на его берегу."
+msgstr "Мы оставили Атлантиду и поплыли на восток. Мы вошли в запрещенное море на шестой день, не замечая никаких преследователей из Атлантиды; и корабль наш не был разрушен Лютасом. Теперь мы вне его досягаемости. На следующий день, мы увидели остров, на котором, кажется, были одни из этих шипящих огнем гор. Я сочла это знаком от бога огня, и мы высадились на его берегу."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:168
 msgid ""
@@ -421,7 +422,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Да согреет Сатул вас обоих! Лофтомор, вы были наиболее известным архитектором острова. Сидолус, вы опытный воин и стратег. Я призвала вас ради совета: что следует предпринять, чтобы сделать это место нашим новым домом?"
+msgstr "Да согреет Сатул вас обоих! Лофтомор, ты был наиболее известным архитектором острова. Сидолус, ты опытный воин и стратег. Я призвала вас ради совета: что следует предпринять, чтобы сделать это место нашим новым домом?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178
 msgid "Loftomor Speaks"
@@ -534,7 +535,7 @@ msgstr "Согласие Джандлины"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:219
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr "Ваши слова звучат разумно, Колиондер. Да будет так!"
+msgstr "Твои слова звучат разумно, Колиондер. Да будет так!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:227
 msgid "Jundlina is Reviewing the Reports"
@@ -600,12 +601,11 @@ msgstr "Сидолюс ищет Джандлину"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for resources in "
-"the mountains around us? We are running short of quartz, crystal and "
-"diamonds for our buildings. Also we could use more iron, gold and especially"
-" coal. If we find an ample supply of those commodities, we could start "
-"producing weapons and tools; this would help enormously. Of course, we would"
-" need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe"
-" even more."
+"the mountains around us? We are running short of quartz and diamonds for our"
+" buildings. Also, we could use more iron, gold and especially coal. If we "
+"find an ample supply of those commodities, we could start producing weapons "
+"and tools; this would help enormously. Of course, we would need smelters, a "
+"weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
 msgstr "Да согреет тебя Сатул, Джандлина! Не пора ли начать добычу ископаемых в окружающих горах? У нас все меньше кварца и алмазов для наших зданий. Кроме того, мы нуждаемся в железе, золоте и, особенно, угле. Если мы откроем богатые месторождения этих ископаемых, то сможем наладить производство оружия и инструментов; это было бы бесценно. Конечно, нам понадобятся литейщики, оружейная, бронная и мастерская. И, быть может, не только это."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:270

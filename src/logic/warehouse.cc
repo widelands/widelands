@@ -28,6 +28,7 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
@@ -1427,8 +1428,25 @@ void Warehouse::log_general_info(const EditorGameBase & egbase)
 {
 	Building::log_general_info(egbase);
 
-	if (descr().get_isport())
-		molog("Port dock: %u\n", m_portdock ? m_portdock->serial() : 0);
+	if (descr().get_isport()){
+		PortDock* pd_tmp = m_portdock;
+		if (pd_tmp){
+			molog("Port dock: %u\n", pd_tmp->serial());
+			molog("port needs ship: %s\n", (pd_tmp->get_need_ship())?"true":"false");
+			molog("wares and workers waiting: %u\n", pd_tmp->count_waiting());
+			molog("exped. in progr.: %s\n", (pd_tmp->expedition_started())?"true":"false");
+			Fleet* fleet = pd_tmp->get_fleet();
+			if (fleet) {
+				molog("* fleet: %u\n", fleet->serial());
+				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());
+				molog("  m_act_pending: %s\n", (fleet->get_act_pending())?"true":"false");
+			} else {
+				molog("No fleet?!\n");
+			}
+		} else {
+			molog ("No port dock!?\n");
+		}
+	}
 }
 
 

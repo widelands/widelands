@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-12 15:23+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 18:59+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -162,7 +162,7 @@ msgstr "Genial. S'acaba de construir el port. Ara necessitarem alguns vaixells."
 msgid ""
 "Ships are constructed in a shipyard by a shipwright. We have to build one "
 "somewhere close to the shore."
-msgstr "Els vaixells són construïts en una drassana pel fuster de vaixells. Haurem de construir-ne un en algun lloc proper de la costa."
+msgstr "Els vaixells són construïts en una drassana pel mestre d'aixa. Haurem de construir-ne un en algun lloc proper de la costa."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard close to the coast. It is a medium building."
@@ -187,7 +187,7 @@ msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "La drassana és un edifici mitjà. Encara que pot construir-se en qualsevol lloc del mapa, el fuster de vaixells només treballarà prop de la costa, on no hi hagi arbres o camins que el molestin."
+msgstr "La drassana és un edifici mitjà. Encara que pot construir-se en qualsevol lloc del mapa, el mestre d'aixa només treballarà prop de la costa, on no hi hagi arbres o camins que el molestin."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
 msgid "Waiting for the ships"
@@ -198,14 +198,14 @@ msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr "Molt bé. S'ha completat la drassana i el fuster de vaixells ja ha començat a treballar. Per construir vaixells, necessitarà arbres, taulons i teles de seda d'aranya, que es transportaran a la drassana."
+msgstr "Molt bé. S'ha completat la drassana i el mestre d'aixa ja ha començat a treballar. Per construir vaixells, necessitarà arbres, taulons i teles de seda d'aranya, que es transportaran a la drassana."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr "El fuster de vaixells portarà els béns que necessita a un lloc lliure de la costa i hi construirà el vaixell allí. Quan el nostre primer vaixell estigui acabat, el baixarà fins a dins del mar i en començarà a construir un altre."
+msgstr "El mestre d'aixa portarà els béns que necessita a un lloc lliure de la costa i hi construirà el vaixell allí. Quan el nostre primer vaixell estigui acabat, el baixarà fins a dins del mar i en començarà a construir un altre."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "We should wait until we have two ships. That should be enough for now."
@@ -216,7 +216,7 @@ msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr "Heu de parar la drassana quan tingueu suficients vaixells. Si no, la drassana continuarà consumint béns, produint vaixells que potser no us seran útils."
+msgstr "Heu de parar la drassana quan tingueu suficients vaixells. Si no, el mestre d'aixa continuarà consumint béns, produint vaixells que potser no us seran útils."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:112
 msgid ""
@@ -236,7 +236,7 @@ msgstr "Els vaixells es construeixen automàticament quan la drassana estigui ac
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid "Wait until the shipwright has constructed two ships."
-msgstr "Espereu fins que el fuster de vaixells hagi construït dos vaixells."
+msgstr "Espereu fins que el mestre d'aixa hagi construït dos vaixells."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Do not forget to stop your shipyard when you have enough ships."

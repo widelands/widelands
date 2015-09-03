@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 15:14+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 19:50+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,18 +71,18 @@ msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Expandiere nach Osten, um dort im Berg Marmor abzubauen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
+msgid "Build a stonemason’s house and mining infrastructure"
 msgstr "Baue einen Steinmetz und die Mineninfrastruktur"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
+msgid "Stonemason’s house and Mining Infrastructure"
 msgstr "Steinmetz und Mineninfrastruktur"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
 msgstr "Baue einen Steinmetz und vervollständige dann die Minen- und erzverarbeitende Infrastuktur (Kohlemine und/oder Köhlerei, Eisenerzmine, Hochofen, Werkzeugmacher, Waffen- und Rüstungsschmiede)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -266,7 +266,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Herr, ich will Euch nicht erschrecken, aber ich fand etwas, das mir ein sehr ungutes Gefühl im Bauch gibt und Wellen der Angst in meinem Herzen hervorbrechen lässt. Als ich zur Südküste spazierte, fand ich die Reste eines anderen Schiffs. Ich weiß nicht, ob diese Teile alles sind, was übrig geblieben ist; auf jeden Fall scheinen mir diese Reste nicht alt zu sein."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
@@ -278,7 +278,7 @@ msgstr "Vielleicht wurden die Leute auf diesem Schiff vom selben Sturm überrasc
 msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
-msgstr "Ich bitte dich vorsichtig zu sein und einige Baracken und Wachposten rund um unsere Kolonie zu errichten."
+msgstr "Ich bitte Euch, vorsichtig zu sein und einige Baracken und Wachposten rund um unsere Kolonie zu errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Marble on the Mountain"
@@ -293,18 +293,18 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Herr, ich habe gute Neuigkeiten für Euch: Als ich nach Osten wanderte, fand ich einen größeren Berg. Ich bin mir nicht ganz sicher – ein Geologe sollte überprüfen, ob ich recht habe – aber ich glaube, wir könnten an einigen Stellen auf dem Berg Marmor abbauen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr "Es wäre eine gute Quelle, um die Zufuhr an gutem Marmor zu stützen, nachdem die mageren Erträge unseres Steinbruchs ausgebeutet sind. Vielleicht hattest du Recht, als du sagtest, diese Insel sei wie das Paradies."
+msgstr "Es wäre eine gute Quelle, um die Zufuhr an gutem Marmor zu stützen, nachdem die mageren Erträge unseres Steinbruchs ausgebeutet sind. Vielleicht hattet Ihr Recht, als Ihr sagtet, diese Insel sei wie das Paradies."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid "Please, expand to that mountain and start mining marble."
-msgstr "Bitte expandiere zu diesem Berg und beginne mit dem Marmorabbau."
+msgstr "Bitte expandiert zu diesem Berg und beginnt mit dem Marmorabbau."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
@@ -321,14 +321,14 @@ msgid ""
 "of iron ore. I advise you to immediately build iron ore and coal mines (or "
 "at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Bei den Göttern, das ist ein unglaublicher Glückstreffer! Dort sind zwei weitere Berge, und es scheint, einer enthielte eine große Menge an Kohle und der andere an Eisenerz. Ich rate euch, sofort damit anfangen, Eisenerzminen und Kohleminen (oder zumindest Köhlereien), Hochöfen, Werkzeugmacher sowie Waffen- und Rüstungsschmieden zu bauen."
+msgstr "Bei den Göttern, das ist ein unglaublicher Glückstreffer! Dort sind zwei weitere Berge, und es scheint, einer enthielte eine große Menge an Kohle und der andere an Eisenerz. Ich rate Euch, sofort damit zu beginnen, Eisenerzminen und Kohleminen (oder zumindest Köhlereien), Hochöfen, Werkzeugmacher sowie Waffen- und Rüstungsschmieden zu bauen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So you have to build a stonemason, who will cut columns "
-"from marble."
-msgstr "Wie auch immer: Für all diese größeren Gebäude benötigen wir bessere Baumaterialien. Du musst also einen Steinmetz bauen, der Marmorsäulen herstellen kann."
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr "Wie auch immer: Für all diese größeren Gebäude benötigen wir bessere Baumaterialien. Ihr müsst also einen Steinmetz bauen, der Marmorsäulen herstellen kann."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
