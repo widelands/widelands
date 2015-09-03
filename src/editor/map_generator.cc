@@ -792,7 +792,7 @@ void MapGenerator::create_random_map()
 
 	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
-		map_.set_scenario_player_name(n, "Random Player");
+		map_.set_scenario_player_name(n, _("Random Player"));
 		map_.set_scenario_player_tribe(n, tribe);
 		map_.set_scenario_player_ai(n, ai);
 		map_.set_scenario_player_closeable(n, false);
