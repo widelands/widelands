@@ -662,7 +662,9 @@ void BuildingStatisticsMenu::update() {
 				} else {
 					color = UI_FONT_CLR_GOOD;
 				}
-				const std::string perc_str = (boost::format("%i%%") % percent).str();
+				/** TRANSLATORS: %i is a number, %% the percent sign.*/
+				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
+				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
 				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
