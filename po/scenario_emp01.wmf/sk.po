@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-09 10:27+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-01 20:45+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Čo sa stalo s naším Impériom? Naozaj si kladiem túto otázku – prečo mi kráľ zakázal bojovať proti tomu príšernému barbarskému kmeňu, ktorý sa sprvu tváril priateľsky a potom počas najtemnejšej noci zaútočil na moje vojsko?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid ""
@@ -116,7 +116,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "S armádou 150 mužov ma poslali strážiť severnú hranicu Impéria, ležiacu neďaleko pohoria Galdin vo veľkom, prekrásnom a prastarom lese. Krátko nato sme narazili na barbarský kmeň, ktorý spočiatku pôsobil priateľským dojmom. Niekoľko mojich mužov s nimi dokonca aj obchodovalo a ich deti k nám chodili obdivovať naše čisté, slušné uniformy a zbrane."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -126,7 +126,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Počas piatej noci, ktorú sme strávili v tej oblasti, na nás však bez príčiny zaútočili. Prišiel som o tucty dobrých mužov a mňa uväznili a priviedli k náčelníkovi. Pľuvol na mňa, vysmial ma a prikázal mi, aby som túto zem navždy opustil. Nechcel novú zem ani tú našu, no povedal mi, že TENTO les patrí iba im – a aj naďalej bude, kým si duchovia neodvedú posledného človeka z jeho ľudu."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:86
 msgid ""
@@ -134,7 +134,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "O tri týždne neskôr som sa vrátil do Fremilu, aby som mohol všetko vyrozprávať nášmu kráľovi. Hoci zúril na Barbarov, napriek tomu zakázal na tieto kmene útočiť. Podľa neho je naše vojsko na boj s Barbarmi prislabé."
 
 #: TRANSLATORS Gulf of Perl is a place name.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:89
@@ -143,7 +143,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "Bez boja proti Barbarom by som však tú potupu nedokázal prekonať. Opustil som preto loďou Fremil a vydal sa hľadať pre seba nový svet a nový život, kdesi na juhu. Teraz sa, spolu s rodinou, niektorými mojimi priateľmi a najlepšími bojovníkmi, plavím po Perlskom zálive."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:95
 msgid "The Rough Sea"
@@ -317,7 +317,7 @@ msgstr "Plánovanie do budúcnosti"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Saledus notes…"
-msgstr ""
+msgstr "Saledus poznamená…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:179
 msgid ""

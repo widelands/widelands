@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-21 14:54+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Caserma"
 msgid ""
 "Build a barracks at the red house symbol on the east side of the forests, to"
 " the right of your provisional headquarters."
-msgstr "Costruisci una caserma nel simbolo della casa rossa a est delle foreste, alla destra del tuo quartier generale provvisorio"
+msgstr "Costruisci una caserma nel simbolo della casa rossa ad est delle foreste, alla destra del tuo quartier generale provvisorio"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
@@ -89,11 +89,11 @@ msgstr "Costruisci una cava a sud per tagliare alcune pietre e marmo dalle rocce
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
-msgstr "Queste potrebbero essere utilizzate per le costruzioni future."
+msgstr "Queste potrebbero essere utilizzate per gli edifici futuri."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:78
 msgid "A Dark Night"
-msgstr "Una scura notte"
+msgstr "Una notte oscura"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:79
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:96
@@ -246,7 +246,7 @@ msgstr "Amalea sorride..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Saluti, Lutius! Ho appena incontrato Saledus qua fuori."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:143
 msgid ""
@@ -286,7 +286,7 @@ msgstr "Amalea entra..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Ho due cose importanti di cui parlare... Prima le buone notizie:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:165
 msgid ""
@@ -337,7 +337,7 @@ msgstr "Un passo avanti"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:188
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus sembra emozionato..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:189
 msgid ""

@@ -53,7 +53,7 @@ return {
 	de = {
 		name = "Deutsch",
 		sort_name = "Deutsch",
-		font = "Standard"
+		font = "default"
 	},
 
 	el = {

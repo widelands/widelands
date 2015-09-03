@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 07:27+0100\n"
+"POT-Creation-Date: 2015-09-03 07:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1133,43 +1133,43 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/logic/ship.cc:451
+#: ../../src/logic/ship.cc:441
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:452
+#: ../../src/logic/ship.cc:442
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:567
+#: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:558
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:628
+#: ../../src/logic/ship.cc:618
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:630
+#: ../../src/logic/ship.cc:620
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:674
+#: ../../src/logic/ship.cc:664
 msgid "New port constructionsite is gone"
 msgstr ""
 
-#: ../../src/logic/ship.cc:675
+#: ../../src/logic/ship.cc:665
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
-#: ../../src/logic/ship.cc:819
+#: ../../src/logic/ship.cc:842
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:820
+#: ../../src/logic/ship.cc:843
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -1177,15 +1177,15 @@ msgstr ""
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:456
+#: ../../src/logic/warehouse.cc:457
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:463
+#: ../../src/logic/warehouse.cc:464
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/warehouse.cc:470
+#: ../../src/logic/warehouse.cc:471
 msgid "A new warehouse was added to your economy."
 msgstr ""
 

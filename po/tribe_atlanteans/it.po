@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-21 14:57+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1223,19 +1223,19 @@ msgstr "sta dormendo"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "avanzando l'attacco del soldato da livello 0 a livello 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "avanzando l'attacco del soldato da livello 1 a livello 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "avanzando l'attacco del soldato da livello 2 a livello 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "avanzando l'attacco del soldato da livello 3 a livello 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1773,7 +1773,7 @@ msgstr "Questo è un tridente intermedio. È prodotto nella fucina delle armi ed
 msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry"
 " or a crystal mine."
-msgstr "La pietra è una materiale base per la costruzioni degli Atlantidei. È prodotta in una cava o in una miniera di cristallo."
+msgstr "La pietra è una materiale base per la costruzione degli Atlantidei. È prodotta in una cava o in una miniera di cristallo."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
@@ -1877,7 +1877,7 @@ msgstr "sta forgiando un tridente doppio pesante"
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Produce stoffa costruzioni, navi e soldati."
+msgstr "Produce stoffa per edifici, navi e soldati."
 
 #: ../../tribes/atlanteans/weaving-mill/conf:29
 msgid "weaving spidercloth"

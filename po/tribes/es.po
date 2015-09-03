@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Javier Mora <morehash@gmail.com>, 2015
+# Thadah <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-20 23:05+0000\n"
+"Last-Translator: Thadah <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +69,7 @@ msgstr "Nota:"
 
 #: ../../tribes/scripting/format_help.lua:281
 msgid "Work area radius:"
-msgstr ""
+msgstr "Radio de Área de trabajo:"
 
 #: ../../tribes/scripting/format_help.lua:285
 #: ../../tribes/scripting/format_help.lua:290
@@ -79,8 +80,8 @@ msgstr "Curación:"
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
 msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Los soldados guarnecidos se curan %d punto de vida por segundo"
+msgstr[1] "Los soldados guarnecidos se curan %s puntos de vida por segundo"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -161,7 +162,7 @@ msgstr "Nada"
 #: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #: ../../tribes/scripting/format_help.lua:481
 msgid "Building"
@@ -269,7 +270,7 @@ msgstr "Niveles de experiencia:"
 #: ../../tribes/scripting/worker_help.lua:68
 #: ../../tribes/scripting/worker_help.lua:77
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s para %s (%s PE)"
 
 #: ../../tribes/scripting/format_help.lua:736
 #: ../../tribes/scripting/worker_help.lua:99

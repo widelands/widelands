@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 09:20+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 19:27+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -687,7 +687,7 @@ msgstr "Els focs dels bàrbars s'alimenten de carbó. El carbó es pot obtenir d
 #: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
-msgstr "extreure de la mina"
+msgstr "extreure minerals"
 
 #: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
@@ -1088,7 +1088,7 @@ msgstr "Guarda forestal"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
-msgstr "Fuster de vaixells"
+msgstr "Mestre d'aixa"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Smelter"
@@ -1096,7 +1096,7 @@ msgstr "Fonedor"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Stonemason"
-msgstr "Pedrer"
+msgstr "Picapedrer"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Trainer"
@@ -2001,7 +2001,7 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal workshop (but it ceases to be produced by the building if it is "
 "enhanced to an axfactory and war mill)."
-msgstr "El pic s'usa pels miners i els pedrers. Es fabrica al taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
+msgstr "El pic l'usen els miners, els pedrers i els picapedrers. Es fabrica al taller de metall (però no se'n faran més a l'edifici si es millora aquest a fàbrica de destrals o al taller de guerra)."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""

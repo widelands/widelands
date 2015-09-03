@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 10:16+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -977,7 +977,7 @@ msgstr "Stavenisko"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
 #: ../../tribes/atlanteans/conf:151 ../../tribes/atlanteans/conf:158
 msgid "Barrier"
@@ -1197,7 +1197,7 @@ msgstr "Hlavná kryštálová žila vyčerpaná"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "Hlavná žila tohto kryštálového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste rozobrať alebo zničiť lom."
+msgstr "Hlavná žila tejto kryštálovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste popremýšľať nad rozobratím alebo zničením bane."
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
@@ -1207,7 +1207,7 @@ msgstr "Vysekáva drahokamy zo skaly na horskom teréne."
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
-msgstr "Tieto obdivuhodné diamanty sa používajú na stavbu niektorých exkluzívnych budov. Ťažia sa v kryštálovom lome."
+msgstr "Tieto obdivuhodné diamanty sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálových baniach."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1630,7 +1630,7 @@ msgstr "Kameňolom potrebuje vo svojej pracovnej oblasti kamene."
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
-msgstr "Tieto prehľadné kremene sa používajú na stavbu niektorých exkluzívnych budov. Ťažia sa v kryštálovom lome."
+msgstr "Tieto prehľadné kremene sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálovej bani."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
