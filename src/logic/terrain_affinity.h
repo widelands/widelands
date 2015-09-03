@@ -41,7 +41,7 @@ class TerrainAffinity {
 public:
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
-	// Preferred temperature in Kelvin.
+	// Preferred temperature is in arbitrary units.
 	double preferred_temperature() const;
 
 	// Preferred fertility in percent [0, 1].
