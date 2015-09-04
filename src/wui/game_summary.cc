@@ -182,7 +182,7 @@ void GameSummaryScreen::fill_data()
 			default:
 				/** TRANSLATORS: This is shown in the game summary when we don't know */
 				/** TRANSLATORS: if the player has lost or won. */
-				stat_str = _("Unknown");
+				stat_str = pgettext("player_won", "Unknown");
 		}
 		te.set_string(2, stat_str);
 		// Time
