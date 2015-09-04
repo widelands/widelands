@@ -5,15 +5,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Markus Hällfors <markus@hallfors.com>, 2015
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-28 15:31+0000\n"
-"Last-Translator: Markus Hällfors <markus@hallfors.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-22 19:19+0000\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,119 +63,130 @@ msgstr "Tila"
 msgid "Player overview:"
 msgstr "Pelaajan yleistilanne"
 
-#: ../../scripting/win_conditions/collectors.lua:15
+#: ../../scripting/win_conditions/collectors.lua:19
 msgid "Collectors"
 msgstr "Kerääjät"
 
-#: ../../scripting/win_conditions/collectors.lua:18
+#: ../../scripting/win_conditions/collectors.lua:22
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr "Saat pisteitä arvokkaista tuotteista varastoissasi. Se peljaaja, jolla on eniten tuotteita 4 tunnin jälkeen, voittaa pelin."
 
-#: ../../scripting/win_conditions/collectors.lua:21
+#: ../../scripting/win_conditions/collectors.lua:25
 msgid "Points"
 msgstr "Pisteet"
 
-#: ../../scripting/win_conditions/collectors.lua:100
+#: ../../scripting/win_conditions/collectors.lua:104
 msgid "Status for %s"
 msgstr "%s:n tila"
 
 #: TRANSLATORS For example 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:110
-msgid "  %1$s (%2$i P) x %3$i = %4$i P"
+#: ../../scripting/win_conditions/collectors.lua:115
+msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/collectors.lua:114
+#: ../../scripting/win_conditions/collectors.lua:119
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Yhteensä: %i piste"
+msgstr[1] "Yhteensä: %i pistettä"
 
-#: TRANSLATORS Context 'The game will end in %s.'
-#: ../../scripting/win_conditions/collectors.lua:128
-msgid "%1$ih%2$02im"
-msgstr ""
-
-#: ../../scripting/win_conditions/collectors.lua:130
+#: TRANSLATORS Context 'The game will end in (2 hours and) 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:133
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuutin"
 msgstr[1] "%i minuutin"
 
-#: ../../scripting/win_conditions/collectors.lua:132
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:138
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] ""
+msgstr[1] ""
+
+#: TRANSLATORS Context 'The game will end in 2 hours.'
+#: ../../scripting/win_conditions/collectors.lua:141
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% tunti"
+msgstr[1] "%1% tuntia"
+
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:145
 msgid "The game will end in %s."
 msgstr "Peli päättyy %s kuluttua."
 
-#: ../../scripting/win_conditions/defeat_all.lua:12
+#: ../../scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
 msgstr "Yksinvaltias"
 
-#: ../../scripting/win_conditions/defeat_all.lua:14
+#: ../../scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Heimo tai joukkue, joka kukistaa kaikki muuta, voitaa pelin!"
 
-#: ../../scripting/win_conditions/endless_game.lua:12
+#: ../../scripting/win_conditions/endless_game.lua:15
 msgid "Endless Game"
 msgstr "Loputon peli"
 
-#: ../../scripting/win_conditions/endless_game.lua:14
+#: ../../scripting/win_conditions/endless_game.lua:17
 msgid "This is an endless game without rules."
 msgstr "Tämä on loppumaton peli."
 
-#: ../../scripting/win_conditions/endless_game_fogless.lua:12
+#: ../../scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
 msgstr "Päättymätön peli (ei hämyä)"
 
-#: ../../scripting/win_conditions/endless_game_fogless.lua:13
+#: ../../scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "Tämä on loppumaton peli ilman sääntöjä. Sotasumu on poissa päältä."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:14
+#: ../../scripting/win_conditions/territorial_lord.lua:17
 msgid "Territorial Lord"
 msgstr "Alueen valtias"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:17
+#: ../../scripting/win_conditions/territorial_lord.lua:20
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Jokainen pelaaja tai joukkue yrittää saada haltuunsa yli puolet kartanalueesta. Voittaja on se pelaaja tai joukkue, joka pitää tuon alueen hallussaan vähintään 20 minuuttia."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:152
-#: ../../scripting/win_conditions/territorial_time.lua:24
+#: ../../scripting/win_conditions/territorial_lord.lua:155
+#: ../../scripting/win_conditions/territorial_time.lua:27
 msgid "Team %i"
 msgstr "Joukkue %i"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:154
-#: ../../scripting/win_conditions/territorial_time.lua:198
+#: ../../scripting/win_conditions/territorial_lord.lua:157
+#: ../../scripting/win_conditions/territorial_time.lua:201
 msgid "%s owns more than half of the map’s area."
 msgstr "%s hallitsee yli puolta kartan maa-alasta"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:156
-#: ../../scripting/win_conditions/territorial_time.lua:200
+#: ../../scripting/win_conditions/territorial_lord.lua:159
+#: ../../scripting/win_conditions/territorial_time.lua:203
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/territorial_lord.lua:161
-#: ../../scripting/win_conditions/territorial_time.lua:205
+#: ../../scripting/win_conditions/territorial_lord.lua:164
+#: ../../scripting/win_conditions/territorial_time.lua:208
 msgid "You own more than half of the map’s area."
 msgstr "Hallitset yli puolta maa-alasta."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:163
-#: ../../scripting/win_conditions/territorial_time.lua:207
+#: ../../scripting/win_conditions/territorial_lord.lua:166
+#: ../../scripting/win_conditions/territorial_time.lua:210
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/territorial_time.lua:14
+#: ../../scripting/win_conditions/territorial_time.lua:17
 msgid "Territorial Time"
 msgstr "Aikarajoitteinen pinta-alan haalinta"
 
-#: ../../scripting/win_conditions/territorial_time.lua:17
+#: ../../scripting/win_conditions/territorial_time.lua:20
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -182,58 +194,58 @@ msgid ""
 "whichever comes first."
 msgstr "Ensimmäinen pelaaja, joka pitää yli puolta pelialueesta hallussaan kahdenkymmenen minuutin ajan, voittaa. Jos peli ei ole päättynyt neljässä tunnissa, suurin maa-ala voittaa."
 
-#: ../../scripting/win_conditions/territorial_time.lua:22
+#: ../../scripting/win_conditions/territorial_time.lua:25
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/territorial_time.lua:23
+#: ../../scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/territorial_time.lua:221
+#: ../../scripting/win_conditions/territorial_time.lua:224
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Muulloin peli päättyy %i minuutin kuluttua."
+msgstr[1] "Muulloin peli päättyy %i minuutin kuluttua."
 
-#: ../../scripting/win_conditions/territorial_time.lua:226
-#: ../../scripting/win_conditions/wood_gnome.lua:83
+#: ../../scripting/win_conditions/territorial_time.lua:229
+#: ../../scripting/win_conditions/wood_gnome.lua:86
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Peli päättyy %i minuutin kuluttua."
 msgstr[1] "Peli päättyy %i minuutin kuluttua."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:13
+#: ../../scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
 msgstr "Metsäläinen"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:16
+#: ../../scripting/win_conditions/wood_gnome.lua:19
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr "Metsäläisenä pidät suurista metsistä, joten tehtävänäsi on omistaa enemmän puita alueellasti kuin kellään muulla pelaajaalla. Peli loppuu 4 pelitunnin jälkeen. Se jolla on eniten puita sillä hetkellä, voittaa pelin."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:19
+#: ../../scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
 msgstr "Puita hallinnasa"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:89
-#: ../../scripting/win_conditions/wood_gnome.lua:141
-#: ../../scripting/win_conditions/wood_gnome.lua:145
+#: ../../scripting/win_conditions/wood_gnome.lua:92
+#: ../../scripting/win_conditions/wood_gnome.lua:143
+#: ../../scripting/win_conditions/wood_gnome.lua:147
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i puu"
 msgstr[1] "%i puuta"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:91
+#: ../../scripting/win_conditions/wood_gnome.lua:94
 msgid "%1$s has %2$s at the moment."
 msgstr ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:142
+#: ../../scripting/win_conditions/wood_gnome.lua:144
 msgid "%1$s had %2$s."
 msgstr ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:147
+#: ../../scripting/win_conditions/wood_gnome.lua:149
 msgid "The winner is %1$s with %2$s."
 msgstr "Voittaja on %1$s, meriitti %2$s."

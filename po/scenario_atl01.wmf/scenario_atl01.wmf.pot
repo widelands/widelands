@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"POT-Creation-Date: 2015-09-04 06:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -539,7 +539,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
-"May Satul warm you, Jundlina. Have you considered mining for resources in the mountains around us? We are running short of quartz, crystal and diamonds for our buildings. Also we could use more iron, gold and especially coal. If we find an ample supply of those commodities, we could start producing weapons and tools; this would help enormously. Of course, we would need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
+"May Satul warm you, Jundlina. Have you considered mining for resources in the mountains around us? We are running short of quartz and diamonds for our buildings. Also, we could use more iron, gold and especially coal. If we find an ample supply of those commodities, we could start producing weapons and tools; this would help enormously. Of course, we would need smelters, a weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:270
@@ -740,4 +740,3 @@ msgid_plural ""
 "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-

@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-06-23 15:34+0000\n"
+"POT-Creation-Date: 2015-08-12 07:27+0100\n"
+"PO-Revision-Date: 2015-08-12 13:32+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
-"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,7 +42,7 @@ msgstr " --<názov-konfiguračnej-položky>=hodnota prepíše ktorékoľvek nast
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr " --logfile=NÁZOV_SÚBORU\n                      Zapisovať výstup do súboru NÁZOV_SÚBORU namiesto"
+msgstr " --logfile=NÁZOV_SÚBORU\n                      Zapisovať výstup do súboru NÁZOV_SÚBORU namiesto\n                      terminálu."
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
@@ -68,13 +68,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr " --coredump=[true|false]\n                      Pri chybách segmentácie namiesto použitia SDL\n                      vygenerovať výpis pamäte"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      Používaná lokalizácia."
+msgstr " --language=[de_DE|sv_SE|...]\n                      Lokalizácia, ktorá sa bude používať."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -100,7 +100,7 @@ msgstr " --autosave=[...]     Automaticky ukladať každých n minút"
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr " --rolling_autosave=[...]\n                      Na postupné samoukladanie používať stanovený\n                      počet súborov"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
@@ -112,11 +112,11 @@ msgstr " --nosound            Spustí hru bez zvuku."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Deaktivuje zvukové efekty."
+msgstr " --disable_fx         Zakázať zvukové efekty."
 
 #: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
-msgstr " --disable_music      Deaktivuje hudbu."
+msgstr " --disable_music      Zakázať hudbu."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
@@ -158,7 +158,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Určuje, či sa má po umiestnení vlajky, ktorá\n                      nie je pripojená k ceste, automaticky zapnúť\n                      režim stavania ciest."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
@@ -172,7 +172,7 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false]\n                      Určuje, či sa na zobrazenie hry použije\n                      celá obrazovka."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
@@ -184,7 +184,7 @@ msgstr " --yres=[...]         Výška okna v pixeloch."
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
-msgstr "Voľby pre vnútorného správcu okien:"
+msgstr "Možnosti vnútorného správcu okien:"
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
@@ -203,7 +203,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\n                      Odstráni rám okna smerom k okraju obrazovky,\n                      keď je okraj okna vedľa okraja obrazovky."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
@@ -223,11 +223,11 @@ msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Pr
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Zapnúť podrobné ladiace výpisy"
+msgstr " --verbose            Zapne podrobné ladiace výpisy"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
-msgstr " --help               Zobraziť túto pomoc"
+msgstr " --help               Zobrazí túto pomoc"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid ""

@@ -2,15 +2,18 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
+# GunChleoc, 2015
+# GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/widelands/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +26,7 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "O teu quartel está sob ataque."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
@@ -43,7 +46,7 @@ msgstr ""
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "O teu quartel está sob ataque."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
@@ -65,7 +68,7 @@ msgstr ""
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "O teu castelo está sob ataque."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
@@ -85,7 +88,7 @@ msgstr ""
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "A tua Cidadela está sob ataque."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
@@ -105,7 +108,7 @@ msgstr ""
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "A tua Torre de Menagem está sob ataque."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
@@ -127,7 +130,7 @@ msgstr ""
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "A tua Fortaleza está sob ataque."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
@@ -147,7 +150,7 @@ msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "O teu Posto da Guarda está sob ataque."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
@@ -163,7 +166,7 @@ msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "A tua Casa da Guarda está sob ataque."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
@@ -179,7 +182,7 @@ msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "A tua Torre Alta está sob ataque."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
@@ -195,7 +198,7 @@ msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "O teu Posto Avançado está sob ataque."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
@@ -215,7 +218,7 @@ msgstr ""
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "A tua Sentinela está sob ataque."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
@@ -235,7 +238,7 @@ msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "O teu Torreão está sob ataque."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
@@ -253,7 +256,7 @@ msgstr ""
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "A tua Torre está sob ataque."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
@@ -269,7 +272,7 @@ msgstr ""
 msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "O Machado é a arma básica dos Bárbaros. Todos os jovens soldados estão equipados com um."
 
 #: ../../tribes/barbarians/axfactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
@@ -290,7 +293,7 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -305,7 +308,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
 msgid "working"
-msgstr ""
+msgstr "trabalhar"
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -367,8 +370,8 @@ msgstr ""
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d segundo"
+msgstr[1] "%d segundos"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 msgid ""
@@ -445,7 +448,7 @@ msgstr ""
 #: ../../tribes/barbarians/warehouse/help.lua:13
 #: ../../tribes/barbarians/weaving-mill/help.lua:13
 msgid "Text needed"
-msgstr ""
+msgstr "Falta texto"
 
 #: ../../tribes/barbarians/bakery/help.lua:17
 msgid "Bakes pitta bread for soldiers and miners alike."
@@ -483,7 +486,7 @@ msgstr ""
 #: ../../tribes/barbarians/battlearena/conf:34
 #: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "a dormir"
 
 #: ../../tribes/barbarians/battlearena/conf:36
 msgid "upgrading soldier evade from level 0 to level 1"
@@ -533,8 +536,8 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -607,7 +610,7 @@ msgstr "Produs a melhor cerveja para manter os guerreiros fortes e felizes no tr
 #: ../../tribes/barbarians/brewery/conf:25
 #: ../../tribes/barbarians/micro-brewery/conf:28
 msgid "brewing"
-msgstr ""
+msgstr "fermentar"
 
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
@@ -633,7 +636,7 @@ msgstr "Carrega itens pelas estradas."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr ""
+msgstr "Cria os bois de carga que ajudam no transporte das mercadorias."
 
 #: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
@@ -641,7 +644,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:17
 msgid "Breeds oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Cria os bois de carga que ajudam no transporte das mercadorias."
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:29
 msgid ""
@@ -751,39 +754,39 @@ msgstr "Edifício destruído"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Field (medium)"
-msgstr ""
+msgstr "Campo médio"
 
 #: ../../tribes/barbarians/conf:38
 msgid "Field (small)"
-msgstr ""
+msgstr "Campo pequeno"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Campo muito pequeno"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Campo maduro"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Campo colhido"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Colmo médio"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Reed (small)"
-msgstr ""
+msgstr "Colmo pequeno"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Colmo muito pequeno"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Colmo maduro"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator: Coal (little)"
@@ -831,7 +834,7 @@ msgstr "Construção do Navio"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Machado"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
@@ -839,7 +842,7 @@ msgstr "Asse pão"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "Machado de guerra"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Beer"
@@ -851,11 +854,11 @@ msgstr "Madeira queimada"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
-msgstr ""
+msgstr "Machado largo"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Machado de bronze"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Cloth"
@@ -867,7 +870,7 @@ msgstr "Carvão"
 
 #: ../../tribes/barbarians/conf:68
 msgid "Felling Ax"
-msgstr ""
+msgstr "Machado de Lenhador"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Fire Tongs"
@@ -951,7 +954,7 @@ msgstr "Foice"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Machado afiado"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Shovel"
@@ -975,11 +978,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
-msgstr ""
+msgstr "Elmo de guerra"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Machado de guerreiro"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Water"
@@ -1027,7 +1030,7 @@ msgstr "Construtor"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carvoeiro"
 
 #: ../../tribes/barbarians/conf:115
 msgid "Master Miner"
@@ -1131,7 +1134,7 @@ msgstr "Castelo"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Guardhall"
-msgstr "Guarda"
+msgstr "Posto da guarda"
 
 #: ../../tribes/barbarians/conf:149
 msgid "Guardhouse"
@@ -1139,11 +1142,11 @@ msgstr "Casa da Guarda"
 
 #: ../../tribes/barbarians/conf:150
 msgid "High Tower"
-msgstr "Torre elevada"
+msgstr "Torre Alta"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Small Tower"
-msgstr "Pequena torre"
+msgstr "Torreão"
 
 #: ../../tribes/barbarians/conf:152 ../../tribes/barbarians/conf:159
 msgid "Tower"
@@ -1155,7 +1158,7 @@ msgstr "Sentinela"
 
 #: ../../tribes/barbarians/conf:154
 msgid "Barracks"
-msgstr "Casernas"
+msgstr "Quartel"
 
 #: ../../tribes/barbarians/conf:155 ../../tribes/barbarians/conf:207
 msgid "Barrier"
@@ -1188,23 +1191,23 @@ msgstr "Pedreira"
 
 #: ../../tribes/barbarians/conf:169
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Cabana do lenhador"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Cabana do Silvicultor"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Cabana do pescador"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Cabana do caçador"
 
 #: ../../tribes/barbarians/conf:173
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Coutada"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Well"
@@ -1212,7 +1215,7 @@ msgstr "Poço"
 
 #: ../../tribes/barbarians/conf:175
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Cabana do explorador"
 
 #: ../../tribes/barbarians/conf:176
 msgid "Wood Hardener"
@@ -1268,11 +1271,11 @@ msgstr "Fábrica de guerra"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Axfactory"
-msgstr ""
+msgstr "Fábrica de machados"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Loja do Ferreiro"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Cattle Farm"
@@ -1280,7 +1283,7 @@ msgstr "Criação de Bois"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Tecelagem"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Farm"
@@ -1336,7 +1339,7 @@ msgstr "Cidadela"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Donjon"
-msgstr "Torre de Menagem"
+msgstr "Torre de menagem"
 
 #: ../../tribes/barbarians/conf:214
 msgid "Battle Arena"
@@ -1344,7 +1347,7 @@ msgstr "Arena de combate"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo de treinos"
 
 #: ../../tribes/barbarians/deep_goldmine/conf:42
 #: ../../tribes/barbarians/deeper_goldmine/conf:41
@@ -1489,27 +1492,27 @@ msgstr ""
 msgid "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #: ../../tribes/barbarians/farm/help.lua:17
 msgid "Sow and harvest wheat."
-msgstr ""
+msgstr "Semeia e colhe trigo."
 
 #: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
@@ -1542,7 +1545,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/conf:19
 msgid "fishing"
-msgstr ""
+msgstr "pescar"
 
 #: ../../tribes/barbarians/fishers_hut/conf:26
 msgid "Out of Fish"
@@ -1550,8 +1553,8 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his "
-"working radius."
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
@@ -1563,7 +1566,7 @@ msgid "Fishes on the coast near the hut."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
-msgid "The fisher’s hut needs water full of fish within the working radius."
+msgid "The fisher’s hut needs water full of fish within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
@@ -1658,7 +1661,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
-msgstr ""
+msgstr "Não pode ser melhorado."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid ""
@@ -1727,7 +1730,7 @@ msgstr "O caçador traz carne para os colonos."
 
 #: ../../tribes/barbarians/hunters_hut/conf:20
 msgid "hunting"
-msgstr ""
+msgstr "caçar"
 
 #: ../../tribes/barbarians/hunters_hut/conf:28
 msgid "Out of Game"
@@ -1735,9 +1738,9 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his "
-"working radius. Remember that you can build a gamekeeper’s hut to release "
-"more game into the wild."
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
@@ -1755,7 +1758,7 @@ msgid "Hunts animals to produce meat."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
-msgid "The hunter’s hut needs animals to hunt within the working radius."
+msgid "The hunter’s hut needs animals to hunt within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
@@ -1847,8 +1850,8 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
-"working radius. You should consider dismantling or destroying the building "
-"or building a rangers’s hut."
+"work area. You should consider dismantling or destroying the building or "
+"building a rangers’s hut."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
@@ -1867,7 +1870,7 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack’s hut needs trees to fell within the working radius."
+msgid "The lumberjack’s hut needs trees to fell within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
@@ -2020,8 +2023,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
@@ -2029,7 +2031,7 @@ msgid "Carves raw stone out of rocks in the vicinity."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
+msgid "The quarry needs stones to cut within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
@@ -2060,8 +2062,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the "
-"trees."
+"The ranger’s hut needs free space within the work area to plant the trees."
 msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
@@ -2143,7 +2144,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Alguns dos teus edifícios iniciais não foram construídos por não haver espaço suficiente para os construir, por isso estás em desvantagem. Re-iniciar o mapa para poderes começar em melhores condições."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -2280,7 +2281,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Treino de ataque:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Health Training:"
@@ -2341,8 +2342,8 @@ msgstr ""
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
 msgstr ""
@@ -2360,7 +2361,7 @@ msgstr "Produz tecido para barcos e guerreiros"
 
 #: ../../tribes/barbarians/weaving-mill/conf:24
 msgid "weaving"
-msgstr ""
+msgstr "tecer"
 
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
@@ -2372,7 +2373,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# abuyop <abuyop@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-16 13:27+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,82 +19,82 @@ msgstr ""
 
 #: ../../txts/AUTHORS.lua:40
 msgid "Authors"
-msgstr ""
+msgstr "Pengarang"
 
 #: ../../txts/AUTHORS.lua:42
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Pasukan Pembangunan Widelands"
 
 #: ../../txts/LICENSE.lua:18
 msgid "License"
-msgstr ""
+msgstr "Lesen"
 
 #: ../../txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Maklumat pelesenan untuk Widelands"
 
 #: ../../txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr ""
+msgstr "Hakcipta 2002 - 2015 oleh Pasukan Pembangunan Widelands."
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Permainan ini adalah Percuma dan Bersumber Terbuka (FOSS), dilesenkan di bawah Lesen Awam Am GNU (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Anda boleh temui lagi maklumat mengenai FOSS dan GPL dengan melawati laman sesawang berikut: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Anda boleh cari teks lengkap lesen di sini dan juga maklumat lanjut mengenai filosofi dan implikasi perundanganya."
 
 #: ../../txts/LICENSE.lua:29
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Kami juga menyertakan GPL dalam bentuk dokumen teks di dalam Widelands."
 
 #: ../../txts/LICENSE.lua:30
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Dalam Linux, anda boleh cari fail bernama COPYING dalam pakej sumber root atau binari berdiri-sendiri, atau dalam direktori pemasangan (seperti '%1%')."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "Dalam Windows, anda boleh cari fail bernama COPYING.txt dalam folder pemasangan, dan masukan menu Mula Widelands juga menyediakan pautan kepada fail ini."
 
 #: ../../txts/LICENSE.lua:32
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "Pada MacOS, anda boleh cari fail bernama COPYING dalam arkib yang anda telah muat turun dari laman sesawang."
 
 #: ../../txts/LICENSE.lua:34
 msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Permainan ini tidak disertakan dengan sebatang jaminan. Untuk maklumat lanjut dan sokongan anda boleh temui kami di %1% (Laman sesawang, Wiki, Forum untuk persoalan atau sokongan am), %2% (Penjejak pepijat), dan %3% (Terjemahan)."
 
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "BACASAYA"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "merupakan permainan strategi bersumber terbuka"
 
 #: ../../txts/README.lua:17 ../../txts/editor_readme.lua:14
 msgid "Introduction"
-msgstr ""
+msgstr "Pengenalan"
 
 #: ../../txts/README.lua:19
 msgid ""
@@ -101,7 +102,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr ""
+msgstr "Widelands merupaakn permainan strategi masa-nyata percuma dan bersumber\nterbuka untuk kempen seorang pemain dan juga mod pemain-berbilang.\nPermainan ini diilham daripada Settlers II tetapi ia lebih banyak variasi dan juga\nmendalam permainannya. Walaubagaimanapun, permainan ini boleh dimulakan\ndengan tutorial-tutorial yang seronok dimainkan."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -110,21 +111,21 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "Dalam permainan ini, anda mula dengan sebidang tanah yang kecil dengan\nsedikit sumber. Dengan sumber ini, anda akan bina empayar yang terdiri\ndaripada beribu-ribu orang penduduknya. Untuk mencapai matlamat ini, anda\nakan menubuhkan infastruktur ekonomi, jelajahi tanah disekitar anda dan\njuga menghadapi puak-puak yang memusuhi anda."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Periksa laman sesawang rumah projek Widelands:"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Wideland dilesenkan di bawah Lesen Awam Am GNU (GPL). Untuk maklumat\nlanjut, sila rujuk fail 'COPYING'."
 
 #: ../../txts/README.lua:37
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../txts/README.lua:39
 msgid ""
@@ -133,218 +134,218 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands merupakan permainan berfitur hampir lengkap dan seronok dimainkan\nsecara berseorangan dan lagi menyeronokkan jika bermain secara beramai-ramai\ndengan rakan-rakan. Walaubagaimanapun, masih terdapat beberapa kerja-kerja\npermbangunan yang perlu dibuat dalam semua bahagian. Jika anda berminat\nmemberi sumbangan - sama ada membuat grafik, membaiki pepijat atau menambah\nfitur baharu, menterjemah permainan ke dalam bahasa ibunda anda atau mencipta\npeta baharu - sila-silakan menghubungi kami."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
-msgstr ""
+msgstr "Kawalan permainan umum"
 
 #: ../../txts/README.lua:47
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, click\n"
 "on the title bar of that window either with the middle mouse button or with the left\n"
 "mouse button while holding down CTRL."
-msgstr ""
+msgstr "Untuk menutup tetingkap terbuka, klik-kanan padanya. Untuk meminimumkan\natau memaksimumkan tetingkap, klik pada palang tajuk tetingkap sama ada dengan\nbutang tetikus tengah atau butang tetikus kiri ketika menahan kekunci CTRL."
 
 #: ../../txts/README.lua:51
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Jika anda tahan kekunci CTRL ketika membina jalan, bendera akan diganti\nsecara automatik. Jika anda tahan kekunci CTRL ketika membuang jalan,\nsemua bendera sehingga simpang pertama akan dibuang."
 
 #: ../../txts/README.lua:55
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Anda boleh langkau tetingkap pengesahan bagi tindakan tidak boleh kembali\njika anda menahan kekunci CTRL ketika mengklik butang tindakan."
 
 #: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Pintasan papan kekunci (dalam-permainan)"
 
 #: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: tingkatkan kelajuan permainan"
 
 #: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: kurangkan kelajuan permainan"
 
 #: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: jedakan permainan"
 
 #: ../../txts/README.lua:63
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: togol jika ruang bangunan ditunjukkan"
 
 #: ../../txts/README.lua:64
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: togol peta mini"
 
 #: ../../txts/README.lua:65
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: togol mesej (‘berita’)"
 
 #: ../../txts/README.lua:66
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: togol bancian"
 
 #: ../../txts/README.lua:67
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: togol statistik"
 
 #: ../../txts/README.lua:68
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: togol inventori stok"
 
 #: ../../txts/README.lua:69
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: togol objektif"
 
 #: ../../txts/README.lua:70
 msgid "B: toggles building statistics"
-msgstr ""
+msgstr "B: togol statistik bangunan"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: togol skrin penuh (jika disokong oleh OS)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: tengahkan paparan peta utama pada lokasi permulaan"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Ingat dan pergi ke lokasi diingati sebelum ini"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: pergi ke lokasi terdahulu"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: pergi ke lokasi berikutnya"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: tunjuk konsol nyahpepijat (hanya dalam debug-builds)"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: keluar dari permainan serta-merta"
 
 #: ../../txts/README.lua:78
 msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr ""
+msgstr "CTRL+Klik kiri: langkau dialog pengesahan"
 
 #: ../../txts/README.lua:79
 msgid "CTRL+F11: takes a screenshot"
-msgstr ""
+msgstr "CTRL+F11: ambil cekupan skrin"
 
 #: ../../txts/README.lua:81
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "Dalam tetingkap mesej, pintasan tambahan berikut tersedia:"
 
 #: ../../txts/README.lua:83
 msgid "0: shows all messages"
-msgstr ""
+msgstr "0: tunjuk semua mesej all messages"
 
 #: ../../txts/README.lua:84
 msgid "1: shows geologists' messages only"
-msgstr ""
+msgstr "1: tunjuk mesej ahli geologi sahaja"
 
 #: ../../txts/README.lua:85
 msgid "2: shows economy messages only"
-msgstr ""
+msgstr "2: tunjuk mesej ekonomi sahaja"
 
 #: ../../txts/README.lua:86
 msgid "3: shows seafaring messages only"
-msgstr ""
+msgstr "3: tunjuk mesej pelautan sahaja"
 
 #: ../../txts/README.lua:87
 msgid "4: shows warfare messages only"
-msgstr ""
+msgstr "4: tunjuk mesej perperangan sahaja"
 
 #: ../../txts/README.lua:88
 msgid "5: shows scenario messages only"
-msgstr ""
+msgstr "5: tunjuk mesej senario sahaja"
 
 #: ../../txts/README.lua:89
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: lompat ke lokasi berkenaan dengan mesej semasa"
 
 #: ../../txts/README.lua:90
 msgid "DELETE: archives/restores the current message"
-msgstr ""
+msgstr "DELETE: arkib/pulihkan mesej semasa"
 
 #: ../../txts/README.lua:92
 msgid "Online Help"
-msgstr ""
+msgstr "Bantuan Atas Talian"
 
 #: ../../txts/README.lua:94
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
-msgstr ""
+msgstr "Jika anda perlukan dokumentasi atau bantuan berkenaan Widelands ataupun\npenyunting Widelands, pastikan anda melayari laman sesawang kami. Anda\nboleh temui bantuan atas-talian yang terkini di dalam Wiki kami dan juga\nketerangan terperinci ekonomi puak di dalam ensiklopedia atas-talian kami."
 
 #: ../../txts/README.lua:98
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Melaporkan Pepijat"
 
 #: ../../txts/README.lua:100
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Jika anda menghadapi pepijat, sila laporkannya di dalam penjejak pepijat kami:"
 
 #: ../../txts/README.lua:104
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Sila sediakan maklumat latar belakang yang mencukupi. Beritahu kami:"
 
 #: ../../txts/README.lua:106
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Langkah terperinci bagaimana pepijat dapat dipicu, jika boleh."
 
 #: ../../txts/README.lua:108
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "- Apa yang anda jangkakan berlaku bila melakukan langkah tersebut dan apakah yang sebenarnya berlaku."
 
 #: ../../txts/README.lua:110
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr ""
+msgstr "- Versi Widelands yang manakah anda mai (iaitu sama ada nombor binaan\natau nombor revisi jika menjalankan versi pembangunan atau binaan harian.)"
 
 #: ../../txts/README.lua:113
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
-msgstr ""
+msgstr "- Sila sertakan sistem pengoperasian yang anda jalan kan Widelands di dalamnya\nkerana sesetengah pepijat boleh jadi spesifik platform."
 
 #: ../../txts/README.lua:116
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Peta yang manakah anda main ketika pepijat berlaku."
 
 #: ../../txts/README.lua:118
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "- Jika pepijat berkenaan sesuatu yang tidak dipaparkan dengan baik atau jika\nia dapat demonstrasikan masalah tersebut, sila sertakan satu atau lebih cekupan\nskrin itu."
 
 #: ../../txts/README.lua:121
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "- Jika anda telah menyimpan permainan atau demonstrasi semula masalah\n(seperti kerosakan yang sukar diberitahui apakah puncanya), sila sertakannya\njuga. Untuk maklumat lanjut, sila rujuk seksyen Main Semula di bawah."
 
 #: ../../txts/README.lua:125
 msgid "Replays"
-msgstr ""
+msgstr "Main Semula"
 
 #: ../../txts/README.lua:127
 msgid ""
@@ -353,7 +354,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr ""
+msgstr "Widelands merekod setiap permainan yang anda main kepada dua fail. Salah\nsatu dari fail ini memiliki sambungan .wrpl.wgf dan mengandungi \npermainansimpan awalan. Fail kedua mempunyai sambungan.wrpl dan \nmengandungi semua perintah yang telah dibuat oleh semua pemain, seperti \nmembina jalan atau menyerang musuh. Nama fail selebihnya memberitahu anda\nmasa anda memulakan permainan."
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -363,7 +364,7 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr ""
+msgstr "Penggunaan pilihan Tonton Main Semula dalam menu utama, permainan sebelum\nini yang telah dimainkan akan dijalankan semula untuk tontonan anda. Kadangkala,\nsedikit perubahan dalam fail data permainan atau bolehlaku Widelands boleh\nmenyebabkan main semula menjadi tidak serasi dan 'terkeluar dari penyegerakan'.\nIa seakan dengan permainan rangkaian yang mengalami masalah penyahgerakan\njika salah seorang pemain mempunyai versi permainan yang berlainan."
 
 #: ../../txts/README.lua:140
 msgid ""
@@ -371,132 +372,132 @@ msgid ""
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Main semula adalah alat yang sangat berguna untuk mencari pepijat dalam logik permainan, supaya diberguna sebagai lampiran dalam laporan pepijat. Fail main semula disimpan dalam direktori ~/.widelands/replays directory pada Linux dan Mac OS X. Manakala, dalam Windows,\nia berada dalam subdirektori ‘replays’ di dalam pemasangan Widelands anda."
 
 #: ../../txts/developers.lua:3
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlanta"
 
 #: ../../txts/developers.lua:3
 msgid "Barbarian"
-msgstr ""
+msgstr "Gasar"
 
 #: ../../txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "Cerita Kempen"
 
 #: ../../txts/developers.lua:3
 msgid "Chieftain"
-msgstr ""
+msgstr "Ketua Puak"
 
 #: ../../txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "Pengekod"
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Linux Debian"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumentasi, Bantuan dan Wiki"
 
 #: ../../txts/developers.lua:3
 msgid "Elders"
-msgstr ""
+msgstr "Orang-Orang Tua"
 
 #: ../../txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "Empayar"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Linux Fedora"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Mantan Orang-Orang Tua"
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
-msgstr ""
+msgstr "Ahli Grafik"
 
 #: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "Grafik"
 
 #: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "Laman Sesawang"
 
 #: ../../txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Pengekod Laman Sesawang"
 
 #: ../../txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Linux Mandriva"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Peta dan Misi"
 
 #: ../../txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "Ahli Muzik"
 
 #: ../../txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "Lain-lain"
 
 #: ../../txts/developers.lua:3
 msgid "Packagers"
-msgstr ""
+msgstr "Pembuat Pakej"
 
 #: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "Bunyi"
 
 #: ../../txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "Kesan Bunyi"
 
 #: ../../txts/developers.lua:3
 msgid "Tongues"
-msgstr ""
+msgstr "Suara"
 
 #: ../../txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "Terjemahan"
 
 #: ../../txts/developers.lua:3
 msgid "Translators"
-msgstr ""
+msgstr "Penterjemah"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:10
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "BACASAYA untuk Penyunting Widelands"
 
 #: ../../txts/editor_readme.lua:12
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Penyunting Widelands"
 
 #: ../../txts/editor_readme.lua:16
 msgid ""
@@ -504,323 +505,323 @@ msgid ""
 "to use with Widelands. As you can see, this Editor is heavy work in progress"
 " and as the Editor becomes better and better, this text will also get longer"
 " and more complete."
-msgstr ""
+msgstr "Penyunting ini dikhaskan unutk pemain yang mahu mereka sendiri peta untuk kegunaan Widelands. Sepertimana yang anda lihat, Penyunting ini masih lagi dalam pembangunan dan Penyunting menjadi semakin lama semakin baik, teks ini juga akan menjadi semakin banyak dan lebih kompleks."
 
 #: ../../txts/editor_readme.lua:17
 msgid ""
 "This Editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Penyunting digunakan oleh pemain yang mahu mereka peta sendiri yang dapat digunakan dengan Widelands."
 
 #: ../../txts/editor_readme.lua:18
 msgid ""
 "As you can see, this Editor is heavy work in progress and as the Editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Sepertimana yang anda lihat, Penyunting ini masih lagi dalam pembangunan dan Penyunting menjadi semakin lama semakin baik, teks ini juga akan menjadi semakin banyak dan lebih kompleks."
 
 #: ../../txts/editor_readme.lua:19
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Sila rujuk panduan pengguna akhri pada halaman wiki kami di: %s"
 
 #: ../../txts/editor_readme.lua:20
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
-msgstr ""
+msgstr "Halaman tersebut lebih lengkap dan terkemaskini berbanding fail ini, dan anda juga dapat mencari tutorial pendek mengenai pembinaan peta di sana."
 
 #: ../../txts/editor_readme.lua:22
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Pintasan papan kekunci"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
 msgid "SPACE:"
-msgstr ""
+msgstr "SPACE:"
 
 #: ../../txts/editor_readme.lua:26
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "togol jika ruang bangunan ditunjukkan"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
 msgid "C:"
-msgstr ""
+msgstr "C:"
 
 #: ../../txts/editor_readme.lua:28
 msgid "toggles census"
-msgstr ""
+msgstr "togol bancian"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
 msgid "F:"
-msgstr ""
+msgstr "F:"
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "togol skrin penuh"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
 msgid "H:"
-msgstr ""
+msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "togol menu utama"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
 msgid "M:"
-msgstr ""
+msgstr "M:"
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "togol peta mini"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "togol menu pemain"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
 msgid "T:"
-msgstr ""
+msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "togol menu alatan"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
 msgid "I:"
-msgstr ""
+msgstr "I:"
 
 #: ../../txts/editor_readme.lua:40
 msgid "activates information tool"
-msgstr ""
+msgstr "aktifkan alat maklumat"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
-msgstr ""
+msgstr "CTRL+L:"
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "muat peta"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
-msgstr ""
+msgstr "CTRL+S:"
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "simpan peta"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
 msgid "1-0:"
-msgstr ""
+msgstr "1-0:"
 
 #: ../../txts/editor_readme.lua:46
 msgid "changes tool size"
-msgstr ""
+msgstr "ubah saiz alat"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
-msgstr ""
+msgstr "SHIFT (Tahan):"
 
 #: ../../txts/editor_readme.lua:48
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "pilih alat alternatif pertama ketika ditekan"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
-msgstr ""
+msgstr "ALT (Tahan):"
 
 #: ../../txts/editor_readme.lua:50
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "pilih alat alternatif kedua ketika ditekan"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Sesetengah bangunan, seperti ladang, mempunyai kawasan kerja yang sangat kecil. Jika bandungan dikelilingi pokok atau jalan, pengeluaran akan terhenti."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr ""
+msgstr "Sentiasa bina rumah tukang kayu dan rumah penternak ikan, supaya anda tidak kehabisan kayu balak atau makanan."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop fishing."
-msgstr ""
+msgstr "Sentiasa memantau penangkap ikan anda. Selepas sumber ikan kehabisan di dalam kawasan kerja mereka, mereka akan berhenti menangkap ikan."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr ""
+msgstr "Sentiasa bina pondok renjer dan pondok penjerat, supaya anda tidak kehabisan kayu balak atau makanan."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr ""
+msgstr "Anda boleh mencari bantuan am untuk penyunting dan juga tutorial pendek dalam wiki kami di www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
 "You can select multiple animal types if you hold down CTRL during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Anda boleh memilih pelbagai jenis haiwan jika anda tahan CTRL ketika pemilihan. Jika kemudiannya anda klik pada peta, haiwan terpilih itu akan diletakkan."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with CTRL + mouse click."
-msgstr ""
+msgstr "Seperti juga haiwan, anda juga boleh memilih pelbagai objek tak gerak atau tekstur tanah dengan CTRL + klik tetikus."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down SHIFT switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Menahan SHIFT akan tukar alat alternatif pertama anda. Alat ini dalam kebanyakan situasi berlawanan dengan alat biasa (sebagai contoh pemadaman objek berbanding meletak yang baharu)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Menahan kekunci akan tukar kepada alat alternatif kedua (jika ia wujud)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Kekunci nombor (1 - 0) membolehkan anda tetapkan saiz kawasan terpilih secara terus disekitar kursor tetikus anda."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Kekunci SPACE bertindak seperti dalam permainan biasa. Ia tukarkan jika ruang bangunan ditunjukkan atau sebaliknya."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Sentiasa bina rumah tukang kayu supaya anda tidak kehabisan kayu balak."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "Proses pembinaan akan bermula selepas jalan dibina ke tapak pembinaan."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "Pastikan anda menghantar ahli geologi ke tapak tinjauan sebelum membina perigi atau lombong."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
-msgstr ""
+msgstr "Wilayah anda boleh diperluaskan dengan membina pelbagai jenis bangunan ketenteraan - Sentri, Kota Kara, Berek dan lain-lain."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Pelombing hanya akan berkerja jika mendapat bekalan makanan."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "Pisah jalan anda menjadi bahagian lebih pendek dengan menanam beberapa bendera. Ia akan melajukan penghantaran barangan anda."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr ""
+msgstr "Apa jua persoalan lanjut? FAQ, wiki dan juga forum komuniti kami boleh ditemui di www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr ""
+msgstr "Guna butang keutamaan dalam tetingkap bangunan melaras penghantaran barang tertentu."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Guna menu 'konfigur ekonomi' untuk melaras kuantiti sasaran barangan. Ia boleh dicapai melalui menu bendera."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr ""
+msgstr "Urus mesej anda lebih efisyen: tekan 'N' untuk Berita mencapai tetingkap mesej. kemudian guna 'G' atau Pergi Ke, dan kekunci Delete untuk arkibkan mesej."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr ""
+msgstr "Guna kekunci ',' (koma) dan '.' (titik noktah) untuk pergi dan kembali diantara tempat yang kerap dilawati."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr ""
+msgstr "Tekan kekunci Ctrl+(0-9) untuk menyimpan lokasi penting, kemudian tekan 0-9 untuk memanggilnya semula."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "Membuang jalan ketika menahan kekunci Ctrl akan membuang semua bendera anda sehingga ke simpang pertama."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr ""
+msgstr "Askar baharu dilatih dalam ibu pejabat atau gudang jika semua alatan yang diperlukan tersedia. Tapak latihan adalah untuk menambahbaik keupayaan mereka."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "Jika anda suka bermain dengan risiko, menekan Ctrl ketika mengklik butang naik taraf, robohkan atau musnahkan bangunan akan melangkau pengesahan."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Tekan I untuk togol secara pantas paparan inventori stok anda."
 
 #: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
+msgstr "Ekonomi mengandungi semua bangunan dan bendera yang bersambung dengan jalan. Bekalan dan permintaan bangunan dikendali dalam ekonominya."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "Anda boleh guna kekunci ’Page up’ dan ‘Page down’ untuk melaras kelajuan mengikut kehendak anda – kelajuan sebenar kemudiannya ditetapkan secara demokrasi."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "Guna ‘/me’ pada permulaan mesej sembang: '/me berasa penat' akan dicetak sebagai '_> Gelaran berasa penat'."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "Guna ‘@nama’ pada permulaan mesej sembang untuk menghantar hanya kepada seorang pemain."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr ""
+msgstr "Pemain komputer kami dah jadi membosankan? Cuba lawati laman sesawang kami di www.widelands.org dan ajak pemain lain bermain secara atas-talian."

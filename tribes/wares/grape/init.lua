@@ -11,7 +11,7 @@ tribes:new_ware_type{
 		empire = 20
 	},
    preciousness = {
-		empire = 9
+		empire = 10
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Grape

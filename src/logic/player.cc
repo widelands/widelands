@@ -222,11 +222,11 @@ void Player::create_default_infrastructure() {
 		throw WLWarning
 			(_("Missing starting position"),
 			 _
-			 	("Widelands could not start the game, because player %u has no "
-			 	 "starting position.\n"
-			 	 "You can manually add a starting position with Widelands Editor, "
-			 	 "to fix this problem."),
-			 m_plnum);
+				("Widelands could not start the game, because player %u has "
+				 "no starting position.\n"
+				 "You can manually add a starting position with the Widelands "
+				 "Editor to fix this problem."),
+			 static_cast<unsigned int>(m_plnum));
 }
 
 

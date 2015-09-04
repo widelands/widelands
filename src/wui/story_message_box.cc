@@ -82,8 +82,7 @@ StoryMessageBox::StoryMessageBox
  * Clicked
  */
 void StoryMessageBox::clicked_ok() {
-	end_modal(0);
-	return;
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 /*
@@ -96,4 +95,19 @@ bool StoryMessageBox::handle_mousepress
 		return true;
 
 	return UI::Window::handle_mousepress(btn, mx, my);
+}
+
+bool StoryMessageBox::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
 }

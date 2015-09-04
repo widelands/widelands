@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"POT-Creation-Date: 2015-09-04 06:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -76,17 +76,17 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
-"Build a stonemason and mining infrastructure"
+"Build a stonemason’s house and mining infrastructure"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid ""
-"Stonemason and Mining Infrastructure"
+"Stonemason’s house and Mining Infrastructure"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works)."
+"Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works)."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -309,7 +309,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
-"However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a stonemason, who will cut columns from marble."
+"However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a house for the stonemason, who will cut columns from marble."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
@@ -460,4 +460,3 @@ msgid_plural ""
 "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-

@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Salve ad Widelands ludi tutorialem!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
@@ -87,7 +88,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
+msgstr "Sinistra crepe globulum \"Fac ita\" dicentem, ut fenestram claudas, et id explora."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
@@ -125,7 +126,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "De casam lignatoris aedificando"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 msgid ""
@@ -146,7 +147,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Fac viam coniungentem!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:84
 msgid ""
@@ -154,7 +155,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Non satis est. Casa lignatoris cum aliis viis coniungere debeo. Cum area facta statim aedificandi modus inceperit, solum caeruleum pro principiis insigne crepere possum."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -168,7 +169,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "Lignatori praestolari"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid ""
@@ -179,7 +180,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "Insigne alium deponere"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:116
 msgid ""
@@ -204,7 +205,7 @@ msgstr "Pone insigne, ut viam ad lignatorem ducentem dividas."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Pone insigne in viam"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
@@ -221,7 +222,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
-msgstr ""
+msgstr "Casam factam praestolari"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:137
 msgid "Well done! Let’s wait till the hut is finished."
@@ -237,7 +238,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
-msgstr ""
+msgstr "Casam factam praestolari"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
@@ -287,7 +288,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the raw stone."
-msgstr ""
+msgstr "Bene! Casa lignatoris facta! Lignator ibi immgraverit et arbores cadere inceperit, satis ligna trabalia habebimus. Nunc ad saxa."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -295,7 +296,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "De lapidicinarum aedificando"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -414,7 +415,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
-msgstr ""
+msgstr "Ad lapidicinas"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
@@ -422,7 +423,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "Quomodo lapidicinas aedifices"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
@@ -459,7 +460,7 @@ msgstr "Sola parvae casae insigneque super rubas domus imagines aedificari potes
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "Et ultimum: Flavum insignis signum solum insignia ibi ponere posse indicit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -476,11 +477,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Prope saxa lapidicinas aedifica"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
-msgstr ""
+msgstr "Lapidicinas aedifica"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 msgid ""
@@ -506,7 +507,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:310
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid "Road Building"
-msgstr ""
+msgstr "Viam facere"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid ""
@@ -599,7 +600,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr ""
+msgstr "Nunc iterum fac viam inter lapidicinas principiaque."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
 msgid "Connect the quarry to the headquarters"
@@ -607,7 +608,7 @@ msgstr "Lapidicinas cum principiis coniunge"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid "Connect Your Construction Site"
-msgstr ""
+msgstr "Aream coniunge"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:335
 msgid ""
@@ -642,11 +643,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
-"It seems you destroyed a construction site for a quarry we wanted to build. "
-"Since we need the stones, I suggest you reload the game from a previous "
-"savegame. Luckily, the are created from time to time. To do so, you have to "
-"go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And "
-"please be a bit more careful next time."
+"It seems like you destroyed a construction site for a quarry we wanted to "
+"build. Since we need the stones, I suggest you reload the game from a "
+"previous savegame. Luckily, these are created from time to time. To do so, "
+"you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
+"Game’. And please be a bit more careful next time."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
@@ -684,7 +685,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:380
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:389
 msgid "Census and Statistics"
-msgstr ""
+msgstr "Aedificiorum nomina censusque"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""
@@ -768,7 +769,7 @@ msgstr ""
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
-"straight, you should try to keep the inbox empty. "
+"straight, you should try to keep the inbox empty."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
@@ -785,7 +786,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:423
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:444
 msgid "Closing Windows"
-msgstr ""
+msgstr "De fenestras claudendo"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:425
 msgid ""
@@ -806,7 +807,7 @@ msgstr "Nuntiorum fenestram claude"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:434
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "Nuntiorum fenestram claude"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid ""
@@ -829,7 +830,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "Nuntius advenit!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
 msgid ""
@@ -879,7 +880,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "Territorium auge!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid ""
@@ -998,7 +999,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid "‘Exit Game’ button."
-msgstr ""
+msgstr "globulum ludi finiendi."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid ""

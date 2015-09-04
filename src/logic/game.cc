@@ -361,7 +361,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run() takes care about this difference.
+ * run<Returncode>() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -409,6 +409,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
+		m_win_condition_displayname = gpdp.get_win_condition();
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
@@ -502,7 +503,7 @@ bool Game::run
 					 	 "no starting position.\n"
 					 	 "You can manually add a starting position with the Widelands "
 					 	 "Editor to fix this problem."),
-					 p);
+					 static_cast<unsigned int>(p));
 			}
 		}
 
@@ -578,7 +579,7 @@ bool Game::run
 
 		m_state = gs_running;
 
-		get_ibase()->run();
+		get_ibase()->run<UI::Panel::Returncodes>();
 
 		m_state = gs_ending;
 

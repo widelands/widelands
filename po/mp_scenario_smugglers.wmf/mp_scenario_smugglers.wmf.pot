@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
+"POT-Creation-Date: 2015-09-04 06:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -52,12 +52,12 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:7
 msgid ""
-"Smugglers is a fun map for 4 players. You and your partner start diagonally from each other on a point symmetric island. There are plenty of smuggling tunnels on this island, each consisting of a receiving and a sending end. "
+"Smugglers is a fun map for 4 players. You and your partner start diagonally from each other on a point symmetric island. There are plenty of smuggling tunnels on this island, each consisting of a receiving and a sending end."
 msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
-"To establish a smuggling route, you need to build a warehouse on a sending/receiving spot while your team mate has to build one on the corresponding receiving/sending spot. A ware is then transported every 10 seconds. "
+"To establish a smuggling route, you need to build a warehouse on a sending/receiving spot while your team mate has to build one on the corresponding receiving/sending spot. A ware is then transported every 10 seconds."
 msgstr ""
 
 #: TRANSLATORS: %s = '<number> points'
@@ -125,4 +125,3 @@ msgstr ""
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to collect %5$s."
 msgstr ""
-

@@ -400,11 +400,17 @@ m_infotext(this, _("Click soldier to send away"))
 	m_soldierpanel.set_click(boost::bind(&SoldierList::eject, this, _1));
 
 	const UI::TextStyle & style = UI::TextStyle::ui_small();
-	// Note the extra character in the HP: string below to fix bug 724169
+	// We don't want translators to translate this twice, so it's a bit involved.
 	uint32_t maxtextwidth = std::max
 		(style.calc_bare_width(_("Click soldier to send away")),
-		 /** TRANSLATORS: Health, Attack, Defense, Evade */
-		 style.calc_bare_width(_("HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_")));
+		 style.calc_bare_width(
+			 (boost::format("%s ") // We need some extra space to fix bug 724169
+			  /** TRANSLATORS: Health, Attack, Defense, Evade */
+			  % (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
+				  % 8 % 8
+				  % 8 % 8
+				  % 8 % 8
+				  % 8 % 8)).str()));
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);

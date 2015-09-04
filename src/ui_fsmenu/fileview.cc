@@ -69,7 +69,10 @@ FullscreenMenuTextView::FullscreenMenuTextView
 		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
-	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
+	close_button.sigclicked.connect(
+				boost::bind(&FullscreenMenuTextView::end_modal<FullscreenMenuBase::MenuTarget>,
+								boost::ref(*this),
+								FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos

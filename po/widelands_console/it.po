@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-02 09:13+0000\n"
+"POT-Creation-Date: 2015-08-12 07:27+0100\n"
+"PO-Revision-Date: 2015-08-20 11:35+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,7 +58,7 @@ msgstr " --homedir=NOMECARTELLA    Usa la cartella specificata per i\n          
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr "                      Predefinito è ~/.widelands"
+msgstr "                      Il predefinito è ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -74,7 +74,7 @@ msgstr ""
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      la lingua da utilizzare."
+msgstr " --language=[de_DE|sv_SE|...]\n                      La lingua da utilizzare."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -90,7 +90,7 @@ msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr " --remove_replays=[...]\n                      Rimuove i replay dopo questo numero di giorni\n                      Se 0 i replay non verranno rimossi"
+msgstr " --remove_replays=[...]\n                      Rimuove i replay dopo questo numero di giorni\n                      Se 0, i replay non verranno rimossi"
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -100,7 +100,7 @@ msgstr "--autosave=[...] Salva automaticamente ogni n minuti"
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr "--rolling_autosave=[...]\nUtilizza tutti questi file per dei salvataggi automatici continui"
+msgstr "--rolling_autosave=[...]\nUtilizza tutti questi file per avere dei salvataggi automatici continui"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"

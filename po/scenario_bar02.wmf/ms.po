@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-03-06 10:17+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-16 08:17+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>\n"
-"Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
+"Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -227,7 +227,7 @@ msgstr "Buat masa ini, kita berhenti rehat di sempadan hutan purba dan bersedia 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:175
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:289
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Suatu Hari Yang Sejuk"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:156
 msgid ""
@@ -325,7 +325,7 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "KURANG AJAR! Hanya seorang peronta perbatasan kita yang masih hidup. Dia telah menyampaikan mesej daripada Kalitath, beliau akan hukum pasukan kita yang ditemui dengan darah mereka sendiri! Kita tidak boleh menerima sikap kurang ajar beliau. Mulai sekarang, kita lancarkan perperangan dengan Kalitath!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:198
 msgid "Renegade Fortification"
@@ -347,7 +347,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "Lagipun, lebih baik bila beliau melarikan diri: kerana sepanjang tahun, Kalitath sibuk dengan perperangan dan tidak kisah dengan keperluan menyimpan bekalan makanan untuk tentera beliau. Sekarang beliau telah melarikan diri, kelaparan yang melanda pengikut muda beliau menyebabkan mereka meninggalkan Kalitath. Kumpulan inilah yang kuat mempertahankan ketumbukan utama beliau."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:204
 msgid ""
@@ -355,7 +355,7 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "Ada lagi berita terbaharu: Askar peninjau kita telah melaporkan terdapat dua puak dalam penguasaan abang saya sedang bertelagah dan mungkin sesuai menyerang mereka dalam keadaan ini. Saya mereka tidak peduli kerana dikuasai oleh nafsu kemarahan dan kebencian, maka tiada siapa akan mempercayainya."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:209
 msgid "Winter Ahead"
@@ -443,7 +443,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Saya baru sahaja berbincang dengan ketua askar peninjau kita, Beliau memberitahu telah menemui beberapa buah gunung di timur laut dan timur wilayah kita. Dengan bantuan pergunungan ini kita dapat mempertahankan diri dan melengkapkan senjata mereka. Kerana kebanyakan gunung di barat Al'thunran mengandungi bijih besi dan arang batu."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Mining Economy Completed"
@@ -510,7 +510,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Abang saya dan tenteranya telah mati dan yang tinggal hanyalah kemusnahan dan kebakaran. Di situ tiada siapa yang masih hidup sama ada lelaki atau perempuan atau orang kebanyakan, jadi saya harap mereka dapat melarikan diri daripada pertempuran tersebut dan memulakan hidup baru ditempat lain yang lebih selamat."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:293
 msgid ""
@@ -520,7 +520,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Tiada apa-apa lagi kecantikan yang saya ingati, hanyalah sisa-sisa tinggalan ibu kota lama. Saya rasa sedih tetapi juga berasa lega. Saya harap dapat melihat kecantikan bandar Al'thunran sekali lagi - ia hanya beberapa bulan yang lalu dan saya harap dapat menjejak kaki di bandar ini lagi. Sekarang, bandar ini telah menjadi milik saya, saya akan membinanya semula dengan segala kekuatan yang ada. Di harap kecantikan bandar ini akan menyerlah kembali."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:294
 msgid "Victory"

@@ -61,10 +61,10 @@ obj_build_marblemine = {
 
 obj_build_mining_infrastructure = {
    name = "build_mining_infrastructure ",
-   title =_"Build a stonemason and mining infrastructure",
+   title =_"Build a stonemason’s house and mining infrastructure",
    number = 7,
-   body = objective_text(_"Stonemason and Mining Infrastructure",
-      listitem_bullet(_[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
+   body = objective_text(_"Stonemason’s house and Mining Infrastructure",
+      listitem_bullet(_[[Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
    ),
 }
 
@@ -176,7 +176,7 @@ saledus_3 = {
    body= saledus(_"Saledus is excited",
 		_([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
 		.. paragraphdivider() ..
-		_([[However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a stonemason, who will cut columns from marble.]])
+		_([[However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a house for the stonemason, who will cut columns from marble.]])
 		.. paragraphdivider() ..
 		_([[After everything, we can now begin to live like we did in Fremil.]]))
 		.. new_objectives(obj_build_mining_infrastructure)

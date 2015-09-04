@@ -183,7 +183,7 @@ void PlayerDescriptionGroup::refresh()
 				m_tribenames[player.tribe] = info.descname;
 			}
 			if (player.random_tribe) {
-				d->btnPlayerTribe->set_title(_("Random"));
+				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
 			} else {
 				i18n::Textdomain td("tribes");
 				d->btnPlayerTribe->set_title(_(m_tribenames[player.tribe]));

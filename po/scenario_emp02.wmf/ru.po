@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
+# Anton Khabarov <2233009@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 07:30+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/widelands/language/ru/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-09-02 07:12+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,11 +24,11 @@ msgstr "Наладить поставку древесины"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Wood Economy"
-msgstr ""
+msgstr "Экономика древесины"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Построй три хижины дровосеков, домик лесника и лесопилку"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
@@ -35,23 +36,23 @@ msgstr "Построить каменоломню"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
-msgstr ""
+msgstr "Каменоломня"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Постройте каменоломню к югу от штаба"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
-msgstr "Защитить свою колонию"
+msgstr "Защитить свое поселение"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:48
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "Защитите свое поселение"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "Постройте несколько Казарм и Караульных на границах поселения"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -59,26 +60,26 @@ msgstr "Начать добычу мрамора"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:57
 msgid "Marble"
-msgstr ""
+msgstr "Мрамор"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "Расширяйте владения на восток и начните добывать мрамор в горах"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
-msgstr "Построить дом каменщика и горнорудную инфраструктуру"
+msgid "Build a stonemason’s house and mining infrastructure"
+msgstr "Постройте дом каменщика и горнорудную инфраструктуру"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
-msgstr ""
+msgid "Stonemason’s house and Mining Infrastructure"
+msgstr "Дом каменщика и горнорудная инфраструктура"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
-msgstr ""
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
+msgstr "Постройте Домик каменщика, а затем выстройте добывающую и производственную инфраструктуру (Угольную шахту и/или Домик углежога, Шахту железной руды, Мастерскую, Оружейную, Бронную и Литейную) "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -86,34 +87,34 @@ msgstr "Обеспечить шахтеров едой"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Еда для шахтеров"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr ""
+msgstr "Чтобы собирать пайки для наших шахтеров, нам нужно построить таверну. Для снабжения их горячительными напитками, мы должны построить Пивоварню и Винодельню."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Конечно, это означает, что нам потребуется больше ресурсов для того, чтобы приготовить эту пищу – это рыба, мясо или хлеб. Чтобы обеспечить таверну этим продовольствием, Вы должны построить Домик рыболова, Ферму, Мельницу и Пекарню."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr ""
+msgstr "Возможно, Вам также будут нужны Домик охотника, Свиноферма, Виноградник и несколько Колодцев."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Вам решать, что Вы хотите построить. Но помните – угольным шахтам и железным рудникам нужно пиво, мраморным и золотым рудникам нужно вино, и всем шахтам нужны, по крайней мере, пайки, которые произведены из хлеба ИЛИ мяса ИЛИ рыбы."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -121,42 +122,42 @@ msgstr "Защитить восточную границу"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:87
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "Защитите восточную границу"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:88
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
-msgstr ""
+msgstr "Постройте более прочные военные здания, такие как Застава, Форпост или Башня, на восточной границе."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
-msgstr ""
+msgstr "Чтобы залянуть вглубь вражеской территории, постройте Башню."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Уничтожить племя варваров"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Уничтожьте племя варваров"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Как только у Вас будет достаточно солдат - нападайте. И полностью разрушайте Варварские здания."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr ""
+msgstr "Наконец, постройте Крепость на полуострове (рядом с местом, где стоял варварский штаб), чтобы избежать новых поселений других племен в этом регионе."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
-msgstr ""
+msgstr "Новый остров."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:109
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:118
@@ -168,7 +169,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:229
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:247
 msgid "Diary of Lutius"
-msgstr "Дневник Лютиуса"
+msgstr "Дневник Люциуса"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
@@ -176,79 +177,79 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr ""
+msgstr "Наконец-то! Этот остров как будто был создан специально для нас, это - подарок Богов моему народу! До сих пор мы видели только небольшую часть этого острова, но даже она приносит радость! Я чувствую, что мы нашли бесценное сокровище, рай на земле!"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:112
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr ""
+msgstr "На этом острове мы начнем нашу новую жизнь. Мы построим поселение, которое, возможно, станет новым, красивым домом для каждого из нас."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
-msgstr ""
+msgstr "Зеленые леса"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:119
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr ""
+msgstr "Когда мы вместе с Саледусом шли через эти замечательные леса на севере, мы чувствовали, что наше будущее только что началось. Эта земля настолько мирная и красивая, что я мог бы остаться здесь до конца своей жизни."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Но до этого дня, может пройти много лет! На данный момент мы должны сконцентрироваться на настоящем и построить несколько Домиков дровосеков и Лесопилку, чтобы начать производить основные строительные материалы."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Но мы не должны забывать эту щедрость природы. Необходимо сохранить эти прекрасные леса, так что нам нужно также построить Домик лесника."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
-msgstr ""
+msgstr "Скалы"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:131
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stone for our larger buildings."
-msgstr ""
+msgstr "Позже, я спустился к скалам на юге и искал место, где мы могли бы построить каменоломню, чтобы получить камень для построки более прочных зданий."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr ""
+msgstr "Также я заметил, что среди скал попадается мрамор. Похоже, что в ближайшее время мы сможем строить роскошные здания, как те, к которым мы привыкли во Фремиле."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Дерево для поселения"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr ""
+msgstr "Хорошие новости! Сегодня наше деревообрабатывающее хозяйство было выстроено. Теперь мы можем быть уверены, что у нас будет достаточно леса для наших будущих строительных проектов."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
-msgstr ""
+msgstr "Камень для поселения"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:148
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
-msgstr ""
+msgstr "Отлично! Сегодня строительство каменоломни было закончено. Теперь мы получим достаточно камня для строительства зданий."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:152
 msgid "Dangerous Ship Parts"
-msgstr ""
+msgstr "Останки корабля"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:154
 msgid "Saledus looks unhappy"
@@ -261,23 +262,23 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Сир, я не хочу поднимать панику, но я нашел кое что, что распространяет волны страха в моем сердце. Когда я спустился к южному берегу, я нашел остатки другого судна. Я не знаю, все ли это, что осталось от него. В любом случае эти останки корабля, похоже, здесь не так давно."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
-msgstr ""
+msgstr "Возможно, люди с того судна побывали в том же шторме, который принес нас на берега Малак'Мора."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:159
 msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
-msgstr ""
+msgstr "Я прошу Вас быть осторожным и построить несколько Казарм или Караульных башен вокруг нашего поселения."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Marble on the Mountain"
-msgstr ""
+msgstr "Мрамор в горах"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:165
 msgid "Saledus smiles"
@@ -288,26 +289,26 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Сир, у меня есть хорошие новости для Вас: Когда я ходил на восток, я нашел более крупную гору. Я не абсолютно уверен – геолог должен проверить, прав ли я – но я полагаю, что мы могли бы добывать мрамор в некоторых местах на горе."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr ""
+msgstr "Это было бы хорошее подспорье для наших скудных поставок качественного мрамора из каменоломни. Похоже, Вы были правы, когда назвали этот остров раем на земле."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Пожалуйста, расширьте владения на восток и начните добывать мрамор в горах"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
-msgstr ""
+msgstr "Отдаленные горы"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Саледус взволнован"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
@@ -316,30 +317,30 @@ msgid ""
 "of iron ore. I advise you to immediately build iron ore and coal mines (or "
 "at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Слава Боам! Это просто подарок судьбы! Есть еще две горы, и похоже, что в одной есть большие залежи угля, а в друой - железной руды. Я советую Вам немедленно построить Железный рудник и Угольную шахту (или, по крайней мере, Печь углежога), Литейную, Мастерскую, Бронную и Оружейную."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So you have to build a stonemason, who will cut columns "
-"from marble."
-msgstr ""
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr "Однако: для всех этих зданий нам нужны более изящные строительные материалы. Таким образом, Вы должны построить Домик каменщика, который будет вырезать колонны из мрамора."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
-msgstr ""
+msgstr "После всего произошедшего, мы наконец можем начать жить, как в родном Фремиле"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:186
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Еда для шахтеров"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid "Amalea enters…"
-msgstr ""
+msgstr "входит Амалия..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Люциус, тебе не кажется, что ты забыл что-то важное?!"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -347,17 +348,17 @@ msgid ""
 "a more comfortable life, but the people working in the mines are unhappy "
 "with the current situation. They have to do hard work and have no time for "
 "making their own food."
-msgstr ""
+msgstr "Это, конечно, была хорошая идея - построить шахты, которые позволят нам устроить комфортную жизнь, но люди, работающие в шахтах, недовольны текущей ситуацией. Они должны делать свою тяжелую работу и у них совсем нет времени на то, чтобы готовить себе еду."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:192
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Что ты думаешь на счет того, чтобы помочь им? Я не моу точно сказать, что нам нужно, но вот что я посоветую:"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Our New Tavern"
-msgstr ""
+msgstr "Наша новая таверна"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid "Amalea smiles"
@@ -367,13 +368,13 @@ msgstr "Амалия улыбается"
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Я только что был в нашей новой таверне \"Под пальмами\". Они подают очень вкусное пиво! Тебе обязательно нужно попробовать!"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr ""
+msgstr "Приятно видеть, как наше поселение становится теплым и уютным. Спасибо тебе, Люциус."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
@@ -384,14 +385,14 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
+msgstr "О, Боги! Это просто ужасно! Видимо, страхи Саледуса относительно кораблекрушения, были оправданы."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr ""
+msgstr "Сегодня, когда я спустился к восточному берегу, я был в шоке! Я заметил одно из тех ненавистных, злых, Варварских племен, с которыми у нас было столько проблем."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
@@ -399,23 +400,23 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Сначала, я был наивен и надеялся, что они будут мирными, но как только один из них увидел меня - они погнались за мной и начали нападать, бросая копья. Слава Богам, что я смог убежать и скрыться, прежде, чем отступить назад к нашему поселению под покровом темноты."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
-msgstr ""
+msgstr "Так или иначе, мы должны построить более прочные военные здания как можно скорее."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Command to Attack"
-msgstr ""
+msgstr "Командуйте атаковать!"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:222
 msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
+msgstr "Очень хорошо. Первое большое военное здание построено, и добывающая инфраструктура становится мощнее. Теперь мы должны думать о подготовке к сражению."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:227
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:233
@@ -425,28 +426,28 @@ msgstr "Победа"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:230
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
-msgstr ""
+msgstr "Сегодня знаменательный день! Мы боролись за наш новый дом и вышли победителями!"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Есть все еще несколько Варваров, скрывающихся на нашем острове, но я уверен, что мы скоро найдем их. Каждый Варвар, который не будет нападать на нас, будет посажен в лодку с другими мирными и отослан назад в их страну."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
-msgstr ""
+msgstr "Вы выстроили эффективную экономику, обучили новобранцев и выгнали Варваров с острова."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:238
 msgid "As Time is Running By"
-msgstr ""
+msgstr "Поскольку Время Бежит"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
-msgstr ""
+msgstr "7 дней спустя"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"
@@ -456,7 +457,7 @@ msgstr "Послание"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr ""
+msgstr "Сегодня голубь приземлился на наш остров. Он принес сообщение, которое наполняет меня темными мыслями и возвращает мои страхи."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:250
 msgid ""
@@ -464,22 +465,22 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
+msgstr "Сообщение было адресовано мне, в нем была просьба вернуться домой, во Фремил. Говорилось, что Империя находится в состоянии войны с Варварами. Они подверглись нападению с севера племенем, на которое мне запретили напасть. Что ж, мне совершенно ясно, что я должен сделать! …"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:252
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Вы закончили эту миссию. Вы можете продолжить играть или перети к следующей миссии."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Новое задание"
+msgstr[1] "Новые задания"
+msgstr[2] "Новые задания"
+msgstr[3] "Новые задания"

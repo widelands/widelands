@@ -84,14 +84,6 @@ class FullscreenMenuOptions : public FullscreenMenuBase {
 public:
 	FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
-	enum {
-		om_cancel  = 0,
-		om_ok      = 1,
-		om_restart = 2
-	};
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	uint32_t const              m_vbutw;
@@ -166,13 +158,6 @@ class FullscreenMenuAdvancedOptions : public FullscreenMenuBase {
 public:
 	FullscreenMenuAdvancedOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
-	enum {
-		om_cancel =   0,
-		om_ok     =   1
-	};
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void update_sb_dis_panel_unit();

@@ -1223,8 +1223,7 @@ ProductionProgram::ActMine::ActMine(
 					 "percentage", parameters);
 		}
 		std::string description =
-			/** TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource */
-			(boost::format(_("%1$s %2$s mine %3$s")) % descr->descname() % production_program_name
+			(boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name
 				% world.get_resource(m_resource)->descname())
 				.str();
 

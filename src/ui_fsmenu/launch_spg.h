@@ -44,10 +44,6 @@ class LuaInterface;
  *    UI::Button m_select_map  - only shown if the player has the right to
  *                               change the map.
  *
- * The return values of run() are:
- *    0  - back was pressed
- *    1  - normal game (either single or multi player)
- *    2  - scenario game (at the moment only single player)
  */
 class FullscreenMenuLaunchSPG : public FullscreenMenuBase {
 public:
@@ -60,12 +56,14 @@ public:
 
 	void refresh();
 
+protected:
+	void clicked_ok() override;
+	void clicked_back() override;
+
 private:
 	LuaInterface * m_lua;
 
 	void select_map();
-	void back_clicked();
-	void start_clicked();
 	void win_condition_clicked();
 	void win_condition_update();
 	void set_scenario_values();

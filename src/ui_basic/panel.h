@@ -88,9 +88,26 @@ public:
 	void free_children();
 
 	// Modal
-	static const int32_t dying_code = -1;
-	int32_t run();
-	void end_modal(int32_t code);
+	enum class Returncodes {
+		kBack,
+		kOk
+	};
+
+	template<typename Returncode>
+	Returncode run() {
+		return static_cast<Returncode>(do_run());
+	}
+	int do_run();
+
+	/**
+	 * Cause run() to return as soon as possible, with the given return code
+	 */
+	template<typename Returncode>
+	void end_modal(const Returncode& code) {
+		_running = false;
+		_retcode = static_cast<int>(code);
+	}
+
 	bool is_modal();
 
 	virtual void start();
@@ -310,7 +327,7 @@ private:
 	uint32_t _desired_w, _desired_h;
 
 	bool _running;
-	int32_t _retcode;
+	int _retcode;
 
 	std::string _tooltip;
 	static Panel * _modal;

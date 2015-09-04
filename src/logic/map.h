@@ -178,7 +178,7 @@ public:
 	    uint32_t w = 64,
 	    uint32_t h = 64,
 		 const std::string& name = _("No Name"),
-		 const std::string& author = _("Unknown"),
+		 const std::string& author = pgettext("author_name", "Unknown"),
 		 const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
