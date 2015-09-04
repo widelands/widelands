@@ -424,7 +424,6 @@ void FullscreenMenuLoadGame::entry_selected()
 	}
 }
 
-
 /**
  * Fill the file list
  */

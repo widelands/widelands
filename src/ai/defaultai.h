@@ -123,7 +123,7 @@ struct DefaultAI : ComputerPlayer {
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Aggressive");
+			name = pgettext("ai_name", "Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -134,7 +134,7 @@ struct DefaultAI : ComputerPlayer {
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Normal");
+			name = pgettext("ai_name", "Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -145,7 +145,7 @@ struct DefaultAI : ComputerPlayer {
 	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Defensive");
+			name = pgettext("ai_name", "Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {

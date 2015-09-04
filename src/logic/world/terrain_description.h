@@ -101,7 +101,7 @@ public:
 	const EditorCategory& editor_category() const;
 
 	/// Parameters for terrain affinity of immovables.
-	/// Temperature in Kelvin.
+	/// Temperature is in arbitrary units.
 	double temperature() const;
 
 	/// Humidity in percent [0, 1].
