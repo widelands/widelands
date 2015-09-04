@@ -301,7 +301,7 @@ class Lua_GetText(object):
             occurences.sort() # Sort by filename and lines
             comments = sorted(set(f.translator_comment for f in occurences if f.translator_comment))
             for comment in comments:
-                s += "#: %s\n" % (comment)
+                s += "#. %s\n" % (comment)
 
             for occurence in occurences:
                 s += "#: %s:%i\n" % (os.path.normpath(occurence.filename), occurence.lineno)
