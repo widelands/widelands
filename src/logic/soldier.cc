@@ -73,10 +73,10 @@ void remove_spaces(std::string& s) {
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierDescr::SoldierDescr(const std::string& init_descname, const std::string& init_genericname,
+SoldierDescr::SoldierDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
 									const LuaTable& table,
 									const EditorGameBase& egbase) :
-	WorkerDescr(init_descname, init_genericname, MapObjectType::SOLDIER, table, egbase)
+	WorkerDescr(msgctxt, init_descname, init_genericname, MapObjectType::SOLDIER, table, egbase)
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
 

@@ -12,11 +12,12 @@ add_worker_animations(animations, "walkload", dirname, "walk", {14, 25}, 10) -- 
 
 
 tribes:new_carrier_type {
+   msgctxt = "empire_worker",
    name = "empire_donkey",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Donkey",
+   descname = pgettext("empire_worker", "Donkey"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"donkeys",
+   genericname = pgettext("empire_worker", "donkeys"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,6 +25,6 @@ tribes:new_carrier_type {
    ware_hotspot =  { -2, 8 },
 
 	-- TRANSLATORS: Helptext for a worker: Donkey
-   helptext = _"Donkeys help to carry items along busy roads. They are reared in a donkey farm.",
+   helptext = pgettext("empire_worker", "Donkeys help to carry items along busy roads. They are reared in a donkey farm."),
    animations = animations,
 }

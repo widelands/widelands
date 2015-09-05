@@ -45,9 +45,9 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+	WorkerDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
 					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+	WorkerDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
 					const LuaTable& t, const EditorGameBase& egbase);
 	~WorkerDescr() override;
 

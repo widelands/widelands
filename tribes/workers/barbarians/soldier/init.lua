@@ -61,9 +61,10 @@ add_worker_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
 
 
 tribes:new_soldier_type {
+   msgctxt = "barbarians_worker",
    name = "barbarians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Soldier",
+   descname = pgettext("barbarians_worker", "Soldier"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -73,7 +74,7 @@ tribes:new_soldier_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Soldier
-   helptext = _"Defend and Conquer!",
+   helptext = pgettext("barbarians_worker", "Defend and Conquer!"),
    animations = animations,
 
 	max_hp_level = 3,

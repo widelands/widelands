@@ -12,13 +12,15 @@ add_worker_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 
 
 tribes:new_carrier_type {
+   msgctxt = "atlanteans_worker",
+	--msgctxt = msgctxt,
    name = "atlanteans_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Carrier",
+   descname = pgettext("atlanteans_worker", "Carrier"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
 	-- TRANSLATORS: Helptext for a worker: Carrier
-   helptext = _"Carries items along your roads.",
+   helptext = pgettext("atlanteans_worker", "Carries items along your roads."),
    animations = animations,
 }

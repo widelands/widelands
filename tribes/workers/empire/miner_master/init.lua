@@ -11,13 +11,14 @@ add_worker_animations(animations, "walkload", dirname, "walkload", {10, 22}, 10)
 
 
 tribes:new_worker_type {
+   msgctxt = "empire_worker",
    name = "empire_miner_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Master Miner",
+   descname = pgettext("empire_worker", "Master Miner"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
 	-- TRANSLATORS: Helptext for a worker: Master Miner
-   helptext = _"Works deep in the mines to obtain coal, iron, gold or marble.",
+   helptext = pgettext("empire_worker", "Works deep in the mines to obtain coal, iron, gold or marble."),
    animations = animations,
 }

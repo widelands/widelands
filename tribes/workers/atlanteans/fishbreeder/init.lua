@@ -14,9 +14,10 @@ animations = {
 add_worker_animations(animations, "walk", dirname, "walk", {11, 23}, 20)
 
 tribes:new_worker_type {
+   msgctxt = "atlanteans_worker",
    name = "atlanteans_fishbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Fish Breeder",
+   descname = pgettext("atlanteans_worker", "Fish Breeder"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -36,6 +37,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Fish Breeder
-   helptext = _"Breeds fish.",
+   helptext = pgettext("atlanteans_worker", "Breeds fish."),
    animations = animations,
 }

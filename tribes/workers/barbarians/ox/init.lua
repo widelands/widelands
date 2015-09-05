@@ -11,12 +11,14 @@ animations = {
 add_worker_animations(animations, "walk", dirname, "walk", {21, 31}, 20)
 add_worker_animations(animations, "walkload", dirname, "walk", {21, 31}, 10)
 
+
 tribes:new_carrier_type {
+   msgctxt = "barbarians_worker",
    name = "barbarians_ox",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Ox",
+   descname = pgettext("barbarians_worker", "Ox"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"oxen",
+   genericname = pgettext("barbarians_worker", "oxen"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,6 +26,6 @@ tribes:new_carrier_type {
    ware_hotspot = { -2, 13 },
 
 	-- TRANSLATORS: Helptext for a worker: Ox
-   helptext = _"Oxen help to carry items along busy roads. They are reared in a cattle farm.",
+   helptext = pgettext("barbarians_worker", "Oxen help to carry items along busy roads. They are reared in a cattle farm."),
    animations = animations,
 }

@@ -11,9 +11,10 @@ add_worker_animations(animations, "walkload", dirname, "walkload", {7, 21}, 10)
 
 
 tribes:new_worker_type {
+   msgctxt = "barbarians_worker",
    name = "barbarians_helmsmith",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Helmsmith",
+   descname = pgettext("barbarians_worker", "Helmsmith"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -23,6 +24,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Helmsmith
-   helptext = _"Forges helmets for soldiers.",
+   helptext = pgettext("barbarians_worker", "Forges helmets for soldiers."),
    animations = animations,
 }

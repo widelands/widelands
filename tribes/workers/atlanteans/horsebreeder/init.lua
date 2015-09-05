@@ -9,9 +9,10 @@ animations = {
 add_worker_animations(animations, "walk", dirname, "walk", {35, 28}, 10)
 
 tribes:new_worker_type {
+   msgctxt = "atlanteans_worker",
    name = "atlanteans_horsebreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Horse Breeder",
+   descname = pgettext("atlanteans_worker", "Horse Breeder"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -20,6 +21,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Horse Breeder
-   helptext = _"Breeds the strong Atlantean horses for adding them to the transportation system.",
+   helptext = pgettext("atlanteans_worker", "Breeds the strong Atlantean horses for adding them to the transportation system."),
    animations = animations,
 }
