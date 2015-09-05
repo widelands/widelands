@@ -69,7 +69,7 @@ ProductionSiteDescr::ProductionSiteDescr
 		items_table = table.get_table("out_of_resource_notification");
 		m_out_of_resource_title = _(items_table->get_string("title"));
 		m_out_of_resource_message = _(items_table->get_string("message"));
-		if (table.has_key("productivity_threshold")) {
+		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
 	}
