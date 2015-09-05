@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -60,7 +60,7 @@ msgid ""
 "To establish a smuggling route, you need to build a warehouse on a sending/receiving spot while your team mate has to build one on the corresponding receiving/sending spot. A ware is then transported every 10 seconds."
 msgstr ""
 
-#: TRANSLATORS: %s = '<number> points'
+#. TRANSLATORS: %s = '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware smuggled. The first team to collect %s wins."
@@ -91,25 +91,25 @@ msgid ""
 "You can see the number of wares traded at any time in the general statistics menu. Good luck!"
 msgstr ""
 
-#: TRANSLATORS: the first 2 parameters are player names, the last parameter is '<number> points'
+#. TRANSLATORS: the first 2 parameters are player names, the last parameter is '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:19
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware they smuggle there is worth %3$s."
 msgstr ""
 
-#: TRANSLATORS: %s = '<number> points'
+#. TRANSLATORS: %s = '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
 msgid ""
 "Your team has established a new smuggling route. You have the sending warehouse. Every ware smuggled here is worth %s."
 msgstr ""
 
-#: TRANSLATORS: %s = '<number> points'
+#. TRANSLATORS: %s = '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
 "Your team has established a new smuggling route. You have the receiving warehouse. Every ware smuggled here is worth %s."
 msgstr ""
 
-#: TRANSLATORS: the first parameter is '<number> points', the last 2 parameters are player names
+#. TRANSLATORS: the first parameter is '<number> points', the last 2 parameters are player names
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid ""
 "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
@@ -120,7 +120,7 @@ msgid ""
 "Game over!"
 msgstr ""
 
-#: TRANSLATORS: the first 4 parameters are player names, the last parameter is '<number> points'
+#. TRANSLATORS: the first 4 parameters are player names, the last parameter is '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:40
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to collect %5$s."

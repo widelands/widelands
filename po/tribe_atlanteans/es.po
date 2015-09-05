@@ -5,14 +5,15 @@
 # Javier Mora <morehash@gmail.com>, 2015
 # Thadah <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
+# Madkat Here, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-20 23:09+0000\n"
-"Last-Translator: Thadah <juchuf@gmail.com>\n"
+"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"PO-Revision-Date: 2015-09-04 15:38+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -472,7 +473,7 @@ msgstr "Sin Parcelas"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr ""
+msgstr "El granjero que trabaja en esta granja de raíces negras no ha limpiado tierra para plantar sus semillas."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -1301,7 +1302,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr ""
+msgstr "El pescador que trabaja desde esta cabaña de pescador no puede encontrar pescado en su zona de trabajo. Recuerda que puedes aumentar la cantidad de pescado construyendo una piscifactoría."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1315,7 +1316,7 @@ msgstr "Construye una piscifactoría junto a la cabaña de pescador para asegura
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "La cabaña de pescador necesita aguas llenas de pescado dentro de su zona de trabajo."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1337,7 +1338,7 @@ msgstr "Planta árboles en la zona circundante."
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "La cabaña de silvicultor necesita espacio libre en su zona de trabajo para plantar los árboles."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1463,7 +1464,7 @@ msgstr "Sin caza"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "El cazador que trabaja desde esta cabaña de cazador no puede encontrar caza en su zona de trabajo."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1471,7 +1472,7 @@ msgstr "Caza animales para producir carne."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "La cabaña de cazador necesita animales para cazar en su zona de trabajo."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
@@ -1617,7 +1618,7 @@ msgstr "Sin rocas"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr ""
+msgstr "El cantero que trabaja en esta cantera no puede encontrar rocas en su zona de trabajo."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
@@ -1625,7 +1626,7 @@ msgstr "Talla piedras a partir de rocas cercanas."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the work area."
-msgstr ""
+msgstr "La cantera necesita rocas para tallar en la zona de trabajo."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1899,7 +1900,7 @@ msgstr "Sin Agua"
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "El transportista que trabaja en este pozo no puede encontrar agua en su zona de trabajo."
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -1918,7 +1919,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "El leñador que trabaja en esta cabaña de leñador no puede encontrar árboles en su zona de trabajo. Deberías considerar desmantelar o destruir el edificio o construir una casa del silvicultor."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."

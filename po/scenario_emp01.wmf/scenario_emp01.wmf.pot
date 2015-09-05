@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -127,7 +127,7 @@ msgid ""
 "Three weeks later, I returned to Fremil to speak with our king. He was furious at the Barbarians, yet forbade any attack on these tribes. He believed that our army was too weak to survive in a war against the Barbarians."
 msgstr ""
 
-#: TRANSLATORS: Gulf of Perl is a place name.
+#. TRANSLATORS: Gulf of Perl is a place name.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:89
 msgid ""
 "Still, I saw no way that I could erase my shame without fighting against these Barbarians. So, I left Fremil by boat to find a new world and a new life for myself, somewhere in the south. Now I am sailing on the Gulf of Perl with my family, some of my friends and a few of my best warriors."
