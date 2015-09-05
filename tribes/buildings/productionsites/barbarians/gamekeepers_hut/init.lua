@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_gamekeepers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Gamekeeper’s Hut",
+   descname = pgettext("barbarians_building", "Gamekeeper’s Hut"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -15,20 +17,6 @@ tribes:new_productionsite_type {
 		log = 1,
 		granite = 1
 	},
-
-   helptexts = {
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _[[‘He loves the animals and to breed them<br>
-			as we love to cook and eat them.’]],
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Barbarian nursery rhyme",
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Releases animals into the wild to steady the meat production.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = "",
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"The gamekeeper pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 52.5):bformat(52.5))
-   },
 
    animations = {
 		idle = {

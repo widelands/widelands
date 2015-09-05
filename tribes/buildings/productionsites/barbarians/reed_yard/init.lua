@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_reed_yard",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Reed Yard",
+   descname = pgettext("barbarians_building", "Reed Yard"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -15,19 +17,6 @@ tribes:new_productionsite_type {
 		log = 2,
 		granite = 1
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = _"‘We grow roofs’",
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Slogan of the Guild of Gardeners",
-		-- #TRANSLATORS: Purpose helptext for a building
-		purpose = _"The reed yard cultivates reed that serves two different purposes for the Barbarian tribe.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = _"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = _"A reed yard can produce a sheaf of thatch reed in about %s on average.":bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
-   },
 
    animations = {
 		idle = {

@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_coalmine_deeper",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Deeper Coal Mine",
+   descname = pgettext("barbarians_building", "Deeper Coal Mine"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -15,20 +17,6 @@ tribes:new_productionsite_type {
 		log = 2,
 		granite = 1
 	},
-
-   helptexts = {
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
-Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]],
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = "",
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Digs coal out of the ground in mountain terrain.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal.":bformat("10%"),
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"If the food supply is steady, this mine can produce coal in %s on average.":bformat(ngettext("%d second", "%d seconds", 14.4):bformat(14.4))
-   },
 
    animations = {
 		idle = {

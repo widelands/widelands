@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_micro_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Micro Brewery",
+   descname = pgettext("barbarians_building", "Micro Brewery"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "barbarians_brewery",
@@ -19,19 +21,6 @@ tribes:new_productionsite_type {
 		blackwood = 1,
 		granite = 2
 	},
-
-   helptexts = {
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _"‘Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it’s time for the next shift!’",
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Widespread toast among Miners",
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"The micro brewery produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = "",
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"If all needed wares are delivered in time, this building can produce beer in about %s on average.":bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
-   },
 
    animations = {
 		idle = {

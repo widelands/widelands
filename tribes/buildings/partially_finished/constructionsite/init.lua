@@ -4,24 +4,13 @@ include "tribes/scripting/global_helptexts.lua"
 dirname = path.dirname(__file__)
 
 tribes:new_constructionsite_type {
+   msgctxt = "building",
    name = "constructionsite",
    -- TRANSLATORS: This is a name used in lists of buildings for buildings under construction
-   descname = _"Construction Site",
+   descname = pgettext("building", "Construction Site"),
+   directory = dirname,
    size = "small", -- Dummy; overridden by building size
    vision_range = 2,
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = no_lore_text_yet(),
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = no_lore_author_text_yet(),
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"A new building is being built at this construction site.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = "",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = no_performance_text_yet()
-   },
 
    animations = {
 		-- The constructionsite is a mess. Not nice and clean, but rather some

@@ -83,84 +83,120 @@ bool Tribes::tribe_exists(const std::string& tribename) {
 	return false;
 }
 
-void Tribes::add_constructionsite_type(const LuaTable& t) {
+void Tribes::add_constructionsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new ConstructionSiteDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new ConstructionSiteDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_dismantlesite_type(const LuaTable& t) {
+void Tribes::add_dismantlesite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new DismantleSiteDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new DismantleSiteDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_militarysite_type(const LuaTable& t) {
+void Tribes::add_militarysite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new MilitarySiteDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new MilitarySiteDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_productionsite_type(const LuaTable& t) {
+void Tribes::add_productionsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new ProductionSiteDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new ProductionSiteDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_trainingsite_type(const LuaTable& t) {
+void Tribes::add_trainingsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new TrainingSiteDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new TrainingSiteDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_warehouse_type(const LuaTable& t) {
+void Tribes::add_warehouse_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new WarehouseDescr(_(t.get_string("descname")), t, egbase_));
+	buildings_->add(
+				new WarehouseDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					egbase_));
 }
 
-void Tribes::add_immovable_type(const LuaTable& t) {
+void Tribes::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	immovables_->add(new ImmovableDescr(_(t.get_string("descname")), t, *this));
+	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
 }
 
-void Tribes::add_ship_type(const LuaTable& t) {
+void Tribes::add_ship_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	ships_->add(new ShipDescr(_(t.get_string("descname")), t));
+	ships_->add(new ShipDescr(_(table.get_string("descname")), table));
 }
 
-void Tribes::add_ware_type(const LuaTable& t) {
+void Tribes::add_ware_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	wares_->add(new WareDescr(pgettext_expr("ware", t.get_string("descname").c_str()),
-									  pgettext_expr("ware", t.get_string("genericname").c_str()), t));
+	wares_->add(new WareDescr(pgettext_expr("ware", table.get_string("descname").c_str()),
+									  pgettext_expr("ware", table.get_string("genericname").c_str()),
+									  table));
 }
 
-void Tribes::add_carrier_type(const LuaTable& t) {
+void Tribes::add_carrier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = t.get_string("msgctxt").c_str();
+	const char* msgctxt = table.get_string("msgctxt").c_str();
 	// Workers only need to have a generic name if the worker type has a demand check.
 	// At the moment, this is only carrier2.
-	const std::string& genericname = t.has_key("genericname") ? pgettext_expr(msgctxt, t.get_string("genericname").c_str()) : "";
-	workers_->add(new CarrierDescr(msgctxt, pgettext_expr(msgctxt, t.get_string("descname").c_str()),
-											 genericname, t, egbase_));
+	const std::string& genericname = table.has_key("genericname") ?
+													pgettext_expr(msgctxt, table.get_string("genericname").c_str()) :
+													"";
+	workers_->add(new CarrierDescr(msgctxt,
+											 pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+											 genericname,
+											 table,
+											 egbase_));
 }
 
-void Tribes::add_soldier_type(const LuaTable& t) {
+void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = t.get_string("msgctxt").c_str();
+	const char* msgctxt = table.get_string("msgctxt").c_str();
 	// Workers only need to have a generic name if the worker type has a demand check.
 	// At the moment, this is only carrier2.
-	workers_->add(new SoldierDescr(msgctxt, pgettext_expr(msgctxt, t.get_string("descname").c_str()),
-											 "", t, egbase_));
+	workers_->add(new SoldierDescr(msgctxt,
+											 pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+											 "",
+											 table,
+											 egbase_));
 }
 
-void Tribes::add_worker_type(const LuaTable& t) {
+void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = t.get_string("msgctxt").c_str();
+	const char* msgctxt = table.get_string("msgctxt").c_str();
 	// Workers only need to have a generic name if the worker type has a demand check.
 	// At the moment, this is only carrier2.
-	workers_->add(new WorkerDescr(msgctxt, pgettext_expr(msgctxt, t.get_string("descname").c_str()),
-											"", t, egbase_));
+	workers_->add(new WorkerDescr(msgctxt,
+											pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+											"",
+											table,
+											egbase_));
 }
 
-void Tribes::add_tribe(const LuaTable& t) {
-	const std::string name = t.get_string("name");
+void Tribes::add_tribe(const LuaTable& table) {
+	const std::string name = table.get_string("name");
 	if (tribe_exists(name)) {
-		tribes_->add(new TribeDescr(t, Tribes::tribeinfo(name), egbase_));
+		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase_));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}

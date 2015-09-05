@@ -153,6 +153,8 @@ BuildingDescr::BuildingDescr
 		}
 	}
 
+	directory_ = table.get_string("directory");
+
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_icon_fname = table.get_string("icon");
@@ -165,28 +167,6 @@ BuildingDescr::BuildingDescr
 
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
-	}
-
-	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
-	std::string helptext = items_table->get_string("lore");
-	if(!helptext.empty()) {
-		helptexts_.lore_ = _(helptext);
-	}
-	helptext = items_table->get_string("lore_author");
-	if(!helptext.empty()) {
-		helptexts_.lore_author_ = _(helptext);
-	}
-	helptext = items_table->get_string("purpose");
-	if(!helptext.empty()) {
-		helptexts_.purpose_ = _(helptext);
-	}
-	helptext = items_table->get_string("note");
-	if(!helptext.empty()) {
-		helptexts_.note_ = _(helptext);
-	}
-	helptext = items_table->get_string("performance");
-	if(!helptext.empty()) {
-		helptexts_.performance_ = _(helptext);
 	}
 	assert(is_animation_known("idle"));
 }

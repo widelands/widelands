@@ -223,7 +223,7 @@ end
 
 
 -- RST
--- .. function building_help_general_string(building_description, resourcename, purpose[, note])
+-- .. function building_help_general_string(building_description)
 --
 --    Creates the string for the general section in building help
 --
@@ -232,14 +232,13 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(building_description)
-	local helptexts = building_description.helptexts
 	-- TRANSLATORS: Heading for a flavour text in the building help.
 	local result = rt(h2(_"Lore")) ..
-		rt("image=" .. building_description.representative_image, p(helptexts["lore"]))
-	if (helptexts["lore_author"] ~= "") then
+		rt("image=" .. building_description.representative_image, p(building_helptext_lore()))
+	if (building_helptext_lore_author() ~= "") then
 		result = result .. rt("text-align=right",
 		                      p("font-size=10 font-style=italic",
-		                        helptexts["lore_author"]))
+		                        building_helptext_lore_author()))
 	end
 
 	result = result .. rt(h2(_"General"))
@@ -264,13 +263,13 @@ function building_help_general_string(building_description)
 	end
 
 	if(representative_resource) then
-		result = result .. image_line(representative_resource.icon_name, 1, p(helptexts.purpose))
+		result = result .. image_line(representative_resource.icon_name, 1, p(building_helptext_purpose()))
 	else
-		result = result .. rt(p(helptexts.purpose))
+		result = result .. rt(p(building_helptext_purpose()))
 	end
 
-	if (helptexts.note ~= "") then
-		result = result .. rt(h3(_"Note:")) .. rt(p(helptexts.note))
+	if (building_helptext_note() ~= "") then
+		result = result .. rt(h3(_"Note:")) .. rt(p(building_helptext_note()))
 	end
 
 	if(building_description.type_name == "productionsite") then
@@ -782,18 +781,16 @@ function building_help_tool_string(tribe, toolnames, no_of_workers)
 end
 
 -- RST
--- .. building_help_production_section(building_description)
+-- .. building_help_production_section()
 --
 --    Displays the production/performance section with a headline
 --
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
---                               that we are displaying this help for.
 --    :returns: rt for the production section
 --
-function building_help_production_section(building_description)
-	if (building_description.helptexts.performance ~= "") then
+function building_help_production_section()
+	if (building_helptext_performance() ~= "") then
 		return rt(h2(_"Production")) ..
-		  text_line(_"Performance:", building_description.helptexts.performance)
+		  text_line(_"Performance:", building_helptext_performance())
 	else
 		return ""
 	end
@@ -801,7 +798,7 @@ end
 
 
 -- RST
--- .. function building_help(building_description, tribename)
+-- .. function building_help(tribe, building_description)
 --
 --    Main function to create a building help string.
 --
@@ -811,13 +808,14 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help(tribe, building_description)
+	include(building_description.directory .. "helptexts.lua")
 
 	if (building_description.type_name == "productionsite") then
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_production(tribe, building_description) ..
 			building_help_crew_string(tribe, building_description) ..
 			building_help_building_section(building_description) ..
-			building_help_production_section(building_description)
+			building_help_production_section()
 	elseif (building_description.type_name == "militarysite") then
 		return building_help_general_string(building_description) ..
 			building_help_building_section(building_description)
@@ -826,7 +824,7 @@ function building_help(tribe, building_description)
 			return building_help_general_string(building_description) ..
 				-- TODO(GunChleoc) expedition costs here?
 				building_help_building_section(building_description) ..
-				building_help_production_section(building_description)
+				building_help_production_section()
 		else
 			return building_help_general_string(building_description) ..
 				building_help_building_section(building_description)
@@ -835,7 +833,7 @@ function building_help(tribe, building_description)
 		return building_help_general_string(building_description) ..
 			building_help_dependencies_training(tribe, building_description) ..
 			building_help_crew_string(tribe, building_description) ..
-			building_help_building_section(building_description) ..building_help_production_section(building_description)
+			building_help_building_section(building_description) ..building_help_production_section()
 	elseif (building_description.type_name == "constructionsite" or
 				building_description.type_name == "dismantlesite") then
 				-- TODO(GunChleoc) Get them a crew string for the builder

@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_lumberjacks_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Lumberjack’s Hut",
+   descname = pgettext("barbarians_building", "Lumberjack’s Hut"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -13,19 +15,6 @@ tribes:new_productionsite_type {
 	return_on_dismantle = {
 		log = 2
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = _"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’",
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Krumta, carpenter of Chat’Karuth",
-		-- #TRANSLATORS: Purpose helptext for a building
-		purpose = _"Fells trees in the surrounding area and processes them into logs.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = _"The lumberjack’s hut needs trees to fell within the work area.",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = _"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
-   },
 
    animations = {
 		idle = {

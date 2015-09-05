@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_goldmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Deep Gold Mine",
+   descname = pgettext("barbarians_building", "Deep Gold Mine"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "mine",
    enhancement = "barbarians_goldmine_deeper",
@@ -16,19 +18,6 @@ tribes:new_productionsite_type {
 		log = 2,
 		granite = 1
 	},
-
-   helptexts = {
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _[[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]],
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _[[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]],
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Digs gold ore out of the ground in mountain terrain.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore.":bformat("2/3"),
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"If the food supply is steady, this mine can produce gold ore in %s on average.":bformat(ngettext("%d second", "%d seconds", 19.5):bformat(19.5))
-   },
 
    animations = {
 		idle = {

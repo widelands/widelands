@@ -1,12 +1,11 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/global_helptexts.lua"
-
 dirname = path.dirname(__file__)
 
 tribes:new_militarysite_type {
+   msgctxt = "atlanteans_building",
    name = "atlanteans_castle",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Castle",
+   descname = pgettext("atlanteans_building", "Castle"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -23,19 +22,6 @@ tribes:new_militarysite_type {
 		granite = 5,
 		log = 2
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = no_lore_text_yet(),
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = no_lore_author_text_yet(),
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Garrisons soldiers to expand your territory.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = ""
-   },
 
    animations = {
 		idle = {

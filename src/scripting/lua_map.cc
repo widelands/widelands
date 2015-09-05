@@ -1401,11 +1401,11 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, buildable),
 	PROP_RO(LuaBuildingDescription, conquers),
 	PROP_RO(LuaBuildingDescription, destructible),
+	PROP_RO(LuaBuildingDescription, directory),
 	PROP_RO(LuaBuildingDescription, enhanced),
 	PROP_RO(LuaBuildingDescription, enhanced_from),
 	PROP_RO(LuaBuildingDescription, enhancement_cost),
 	PROP_RO(LuaBuildingDescription, enhancement),
-	PROP_RO(LuaBuildingDescription, helptexts),
 	PROP_RO(LuaBuildingDescription, icon_name),
 	PROP_RO(LuaBuildingDescription, is_mine),
 	PROP_RO(LuaBuildingDescription, is_port),
@@ -1487,6 +1487,17 @@ int LuaBuildingDescription::get_destructible(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: directory
+
+			(RO) The file path of the directory where the init files are located.
+*/
+int LuaBuildingDescription::get_directory(lua_State * L) {
+	lua_pushstring(L, get()->directory());
+	return 1;
+}
+
+
+/* RST
 	.. attribute:: enhanced
 
 			(RO) true if the building is enhanced from another building.
@@ -1535,38 +1546,6 @@ int LuaBuildingDescription::get_enhancement(lua_State * L) {
 	return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhancement));
 }
 
-/* RST
-	.. attribute:: helptexts
-
-			(RO) the helptexts for this building type.
-*/
-// NOCOM(GunChleoc): write test
-int LuaBuildingDescription::get_helptexts(lua_State * L) {
-	const BuildingDescr::HelpTexts& helptexts = get()->helptexts();
-	lua_newtable(L);
-
-	lua_pushstring(L, "lore");
-	lua_pushstring(L, helptexts.lore_);
-	lua_settable(L, -3);
-
-	lua_pushstring(L, "lore_author");
-	lua_pushstring(L, helptexts.lore_author_);
-	lua_settable(L, -3);
-
-	lua_pushstring(L, "purpose");
-	lua_pushstring(L, helptexts.purpose_);
-	lua_settable(L, -3);
-
-	lua_pushstring(L, "note");
-	lua_pushstring(L, helptexts.note_);
-	lua_settable(L, -3);
-
-	lua_pushstring(L, "performance");
-	lua_pushstring(L, helptexts.performance_);
-	lua_settable(L, -3);
-
-	return 1;
-}
 
 /* RST
 	.. attribute:: icon_name

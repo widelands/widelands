@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_rangers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Ranger’s Hut",
+   descname = pgettext("barbarians_building", "Ranger’s Hut"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -13,20 +15,6 @@ tribes:new_productionsite_type {
 	return_on_dismantle = {
 		log = 3
 	},
-
-   helptexts = {
-		--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
-		-- TRANSLATORS: Lore helptext for a building
-		lore = _"‘He who can grow two trees where normally only one will grow exceeds the most important general!’",
-		-- TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Chat’Karuth in a conversation with a Ranger",
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Plants trees in the surrounding area.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"The ranger’s hut needs free space within the work area to plant the trees.",
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 5):bformat(5))
-   },
 
    animations = {
 		idle = {

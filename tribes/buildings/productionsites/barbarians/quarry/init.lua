@@ -1,12 +1,11 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/global_helptexts.lua"
-
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Quarry",
+   descname = pgettext("barbarians_building", "Quarry"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -16,20 +15,6 @@ tribes:new_productionsite_type {
 	return_on_dismantle = {
 		log = 2
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = no_lore_text_yet(),
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = no_lore_author_text_yet(),
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Cuts raw pieces of granite out of rocks in the vicinity.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"The quarry needs rocks to cut within the work area.",
-		-- TRANSLATORS: Performance helptext for a building
-		performance = _"The stonemason pauses %s before going back to work again.":bformat(
-		ngettext("%d second", "%d seconds", 65):bformat(65))
-   },
 
    animations = {
 		idle = {

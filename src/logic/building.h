@@ -63,13 +63,6 @@ class Building;
 class BuildingDescr : public MapObjectDescr {
 public:
 	using FormerBuildings = std::vector<BuildingIndex>;
-	struct HelpTexts {
-		std::string lore_;
-		std::string lore_author_;
-		std::string purpose_;
-		std::string note_;
-		std::string performance_;
-	};
 
 	BuildingDescr(const std::string& init_descname, MapObjectType type,
 					  const LuaTable& t, const EditorGameBase& egbase);
@@ -99,7 +92,7 @@ public:
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
 
-	const HelpTexts& helptexts() const {return helptexts_;}
+	std::string directory() const {return directory_;}
 	const Image* get_icon() const {return m_icon;}
 	std::string icon_name() const {return m_icon_fname;}
 	int32_t get_size() const {return m_size;}
@@ -152,6 +145,7 @@ private:
 	Buildcost     m_return_dismantle; // Returned wares on dismantle
 	Buildcost     m_enhance_cost;     // cost for enhancing
 	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
+	std::string   directory_;         // The directory where the init files are located
 	const Image*     m_icon;       // if buildable: picture in the build dialog
 	std::string   m_icon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
@@ -161,7 +155,6 @@ private:
 	BuildingIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
-	HelpTexts     helptexts_;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;

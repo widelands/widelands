@@ -1,12 +1,11 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/global_helptexts.lua"
-
 dirname = path.dirname(__file__)
 
 tribes:new_trainingsite_type {
+   msgctxt = "empire_building",
    name = "empire_trainingcamp",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Training Camp",
+   descname = pgettext("empire_building", "Training Camp"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -26,19 +25,6 @@ tribes:new_trainingsite_type {
 		gold = 2,
 		marble_column = 1
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = no_lore_text_yet(),
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = no_lore_author_text_yet(),
-		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Trains soldiers in ‘Attack’ and in ‘Health’." .. " " .."Equips the soldiers with all necessary weapons and armor parts.",
-		-- TRANSLATORS: Note helptext for a building
-		note = _"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = no_performance_text_yet()
-   },
 
    animations = {
 		idle = {

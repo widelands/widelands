@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Well",
+   descname = pgettext("barbarians_building", "Well"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -13,20 +15,6 @@ tribes:new_productionsite_type {
 	return_on_dismantle = {
 		log = 2
 	},
-
-   helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = _[[‘Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink.’]],
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = _[[Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat’Karuth’s reign.]],
-		-- #TRANSLATORS: Purpose helptext for a building
-		purpose = _"Draws water out of the deep.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = _"",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = _"The carrier needs %s to get one bucket full of water.":bformat(
-		ngettext("%d second", "%d seconds", 40):bformat(40))
-   },
 
    animations = {
 		idle = {

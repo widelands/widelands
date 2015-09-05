@@ -1,9 +1,11 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
+   msgctxt = "barbarians_building",
    name = "barbarians_metal_workshop",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Metal Workshop",
+   descname = pgettext("barbarians_building", "Metal Workshop"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "barbarians_axfactory",
@@ -20,19 +22,6 @@ tribes:new_productionsite_type {
 		granite = 1,
 		grout = 1
 	},
-
-	helptexts = {
-		-- #TRANSLATORS: Lore helptext for a building
-		lore = _"‘We make it work!’",
-		-- #TRANSLATORS: Lore author helptext for a building
-		lore_author = _"Inscription on the threshold of the now ruined Olde Forge at Harradsheim, the eldest known smithy.",
-		-- #TRANSLATORS: Purpose helptext for a building
-		purpose = _"The barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels.",
-		-- #TRANSLATORS: Note helptext for a building
-		note = _"The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.",
-		-- #TRANSLATORS: Performance helptext for a building
-		performance = _"If all needed wares are delivered in time, this building can produce each tool in about %s on average.":bformat(ngettext("%d second", "%d seconds", 67):bformat(67))
-   },
 
    animations = {
 		idle = {
