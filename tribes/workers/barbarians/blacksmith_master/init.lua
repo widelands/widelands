@@ -15,10 +15,9 @@ tribes:new_worker_type {
    name = "barbarians_blacksmith_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Master Blacksmith"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-	-- TRANSLATORS: Helptext for a worker: Master Blacksmith
-   helptext = pgettext("barbarians_worker", "Produces weapons for soldiers and tools for workers."),
    animations = animations,
 }

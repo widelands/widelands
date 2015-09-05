@@ -23,7 +23,8 @@ tribes:new_worker_type {
    msgctxt = "empire_worker",
    name = "empire_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("empire_worker", "Shipyard"),
+   descname = pgettext("empire_worker", "Shipwright"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -44,7 +45,5 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Shipyard
-   helptext = pgettext("empire_worker", "Works at the shipyard and constructs new ships."),
    animations = animations,
 }

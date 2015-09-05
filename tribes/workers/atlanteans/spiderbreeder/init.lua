@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "atlanteans_spiderbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Spider Breeder"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -23,7 +24,5 @@ tribes:new_worker_type {
 		milking_tongs = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Spider Breeder
-   helptext = pgettext("atlanteans_worker", "Breeds spiders for silk."),
    animations = animations,
 }

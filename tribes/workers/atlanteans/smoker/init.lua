@@ -13,6 +13,7 @@ tribes:new_worker_type {
    name = "atlanteans_smoker",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Smoker"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -21,7 +22,5 @@ tribes:new_worker_type {
 		hook_pole = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Smoker
-   helptext = pgettext("atlanteans_worker", "Smokes meat and fish."),
    animations = animations,
 }

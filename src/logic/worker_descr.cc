@@ -36,8 +36,7 @@
 
 namespace Widelands {
 
-WorkerDescr::WorkerDescr(const char* msgctxt,
-								 const std::string& init_descname,
+WorkerDescr::WorkerDescr(const std::string& init_descname,
 								 const std::string& init_genericname,
 								 MapObjectType init_type,
 								 const LuaTable& table,
@@ -83,7 +82,7 @@ WorkerDescr::WorkerDescr(const char* msgctxt,
 		}
 	}
 
-	helptext_ = pgettext_expr(msgctxt, table.get_string("helptext").c_str());
+	directory_ = table.get_string("directory");
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");
@@ -142,9 +141,9 @@ WorkerDescr::WorkerDescr(const char* msgctxt,
 	}
 }
 
-WorkerDescr::WorkerDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
+WorkerDescr::WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
 								 const LuaTable& table, const EditorGameBase& egbase) :
-	WorkerDescr(msgctxt, init_descname, init_genericname, MapObjectType::WORKER, table, egbase)
+	WorkerDescr(init_descname, init_genericname, MapObjectType::WORKER, table, egbase)
 {}
 
 

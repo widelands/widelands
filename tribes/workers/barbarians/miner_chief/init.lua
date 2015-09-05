@@ -15,13 +15,12 @@ tribes:new_worker_type {
    name = "barbarians_miner_chief",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Chief Miner"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
 	experience = 28,
 	becomes = "barbarians_miner_master",
 
-	-- TRANSLATORS: Helptext for a worker: Chief Miner
-   helptext = pgettext("barbarians_worker", "Works deep in the mines to obtain coal, iron, gold or granite."),
    animations = animations,
 }

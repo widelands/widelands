@@ -21,6 +21,7 @@ tribes:new_worker_type {
    name = "empire_stonemason",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Stonemason"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -50,7 +51,5 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Stonemason
-   helptext = pgettext("empire_worker", "Cuts blocks of granite and marble out of rocks in the vicinity."),
    animations = animations,
 }

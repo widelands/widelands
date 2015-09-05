@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "barbarians_cattlebreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Cattle Breeder"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -22,7 +23,5 @@ tribes:new_worker_type {
 		barbarians_carrier = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Cattle Breeder
-   helptext = pgettext("barbarians_worker", "Breeds strong oxen for adding them to the transportation system."),
    animations = animations,
 }

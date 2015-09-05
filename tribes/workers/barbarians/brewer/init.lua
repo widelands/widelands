@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "barbarians_brewer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Brewer"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -25,7 +26,5 @@ tribes:new_worker_type {
 	experience = 19,
 	becomes = "barbarians_brewer_master",
 
-	-- TRANSLATORS: Helptext for a worker: Brewer
-   helptext = pgettext("barbarians_worker", "Produces the finest ales to keep warriors strong and happy in training."),
    animations = animations,
 }

@@ -45,9 +45,9 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
+	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
 					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
-	WorkerDescr(const char* msgctxt, const std::string& init_descname, const std::string& init_genericname,
+	WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
 					const LuaTable& t, const EditorGameBase& egbase);
 	~WorkerDescr() override;
 
@@ -63,7 +63,6 @@ public:
 		return buildcost_;
 	}
 
-	std::string helptext() const {return helptext_;}
 	Point get_ware_hotspot() const {return ware_hotspot_;}
 
 	/// How much of the worker type that an economy should store in warehouses.
@@ -83,6 +82,8 @@ public:
 		if (default_target_quantity_ == std::numeric_limits<uint32_t>::max())
 			default_target_quantity_ = 1;
 	}
+
+	std::string directory() const {return directory_;}
 
 	const Image* icon() const {return icon_;}
 	std::string icon_name() const {return icon_fname_;}
@@ -107,10 +108,9 @@ public:
 	const Programs & programs() const {return programs_;}
 
 protected:
-
-	std::string       helptext_;   ///< Short (tooltip-like) help text
 	Point             ware_hotspot_;
 	uint32_t          default_target_quantity_;
+	std::string       directory_;  /// The directory where the init files are located
 	std::string const icon_fname_; ///< Filename of worker's icon
 	const Image     * icon_;       ///< Pointer to icon into picture stack
 	DirAnimations     walk_anims_;

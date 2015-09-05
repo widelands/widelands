@@ -491,7 +491,7 @@ public:
 	 */
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
-	int get_helptext(lua_State*);
+	int get_directory(lua_State*);
 	int get_icon_name(lua_State*);
 	int get_needed_experience(lua_State*);
 

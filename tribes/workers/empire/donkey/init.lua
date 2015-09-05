@@ -18,13 +18,12 @@ tribes:new_carrier_type {
    descname = pgettext("empire_worker", "Donkey"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
    genericname = pgettext("empire_worker", "donkeys"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    default_target_quantity = 10,
    ware_hotspot =  { -2, 8 },
 
-	-- TRANSLATORS: Helptext for a worker: Donkey
-   helptext = pgettext("empire_worker", "Donkeys help to carry items along busy roads. They are reared in a donkey farm."),
    animations = animations,
 }

@@ -162,8 +162,7 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 	const std::string& genericname = table.has_key("genericname") ?
 													pgettext_expr(msgctxt, table.get_string("genericname").c_str()) :
 													"";
-	workers_->add(new CarrierDescr(msgctxt,
-											 pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+	workers_->add(new CarrierDescr(pgettext_expr(msgctxt, table.get_string("descname").c_str()),
 											 genericname,
 											 table,
 											 egbase_));
@@ -171,26 +170,26 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 
 void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = table.get_string("msgctxt").c_str();
 	// Workers only need to have a generic name if the worker type has a demand check.
 	// At the moment, this is only carrier2.
-	workers_->add(new SoldierDescr(msgctxt,
-											 pgettext_expr(msgctxt, table.get_string("descname").c_str()),
-											 "",
-											 table,
-											 egbase_));
+	workers_->add(
+				new SoldierDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					"",
+					table,
+					egbase_));
 }
 
 void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = table.get_string("msgctxt").c_str();
 	// Workers only need to have a generic name if the worker type has a demand check.
 	// At the moment, this is only carrier2.
-	workers_->add(new WorkerDescr(msgctxt,
-											pgettext_expr(msgctxt, table.get_string("descname").c_str()),
-											"",
-											table,
-											egbase_));
+	workers_->add(
+				new WorkerDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					"",
+					table,
+					egbase_));
 }
 
 void Tribes::add_tribe(const LuaTable& table) {

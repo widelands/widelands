@@ -13,6 +13,7 @@ tribes:new_worker_type {
    name = "atlanteans_horsebreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Horse Breeder"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -20,7 +21,5 @@ tribes:new_worker_type {
 		atlanteans_carrier = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Horse Breeder
-   helptext = pgettext("atlanteans_worker", "Breeds the strong Atlantean horses for adding them to the transportation system."),
    animations = animations,
 }

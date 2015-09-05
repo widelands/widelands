@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "atlanteans_trainer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Trainer"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,7 +25,5 @@ tribes:new_worker_type {
 		tabard = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Trainer
-   helptext = pgettext("atlanteans_worker", "Trains the soldiers."),
    animations = animations,
 }

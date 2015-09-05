@@ -2266,7 +2266,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
-	PROP_RO(LuaWorkerDescription, helptext),
+	PROP_RO(LuaWorkerDescription, directory),
 	PROP_RO(LuaWorkerDescription, icon_name),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
@@ -2327,12 +2327,12 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: helptext
+	.. attribute:: directory
 
-			(RO) the helptext for this worker.
+			(RO) The directory where the init files are located.
 */
-int LuaWorkerDescription::get_helptext(lua_State * L) {
-	lua_pushstring(L, get()->helptext());
+int LuaWorkerDescription::get_directory(lua_State * L) {
+	lua_pushstring(L, get()->directory());
 	return 1;
 }
 

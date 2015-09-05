@@ -25,6 +25,7 @@ tribes:new_worker_type {
    name = "barbarians_gamekeeper",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Gamekeeper"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -44,7 +45,5 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Gamekeeper
-   helptext = pgettext("barbarians_worker", "The gamekeeper makes sure that the natural population of animals never drops too low."),
    animations = animations,
 }

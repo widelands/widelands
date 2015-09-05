@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "atlanteans_miller",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Miller"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -22,7 +23,5 @@ tribes:new_worker_type {
 		atlanteans_carrier = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Miller
-   helptext = pgettext("atlanteans_worker", "Mills blackroot and corn to produce blackroot flour and corn flour, respectively."),
    animations = animations,
 }

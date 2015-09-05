@@ -16,6 +16,7 @@ tribes:new_worker_type {
    name = "empire_hunter",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Hunter"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -34,7 +35,5 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Hunter
-   helptext = pgettext("empire_worker", "The hunter brings fresh, raw meat to the colonists."),
    animations = animations,
 }

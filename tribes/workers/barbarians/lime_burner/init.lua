@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "barbarians_lime_burner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Lime-Burner"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -22,7 +23,5 @@ tribes:new_worker_type {
 		barbarians_carrier = 1
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Lime-Burner
-   helptext = pgettext("barbarians_worker", "Burns lime in the lime kiln."),
    animations = animations,
 }
