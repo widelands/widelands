@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "ax_sharp",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Sharp Ax",
+   descname = pgettext("ware", "Sharp Ax"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"sharp axes",
+   genericname = pgettext("ware", "sharp axes"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Sharp Ax
-		barbarians = _"Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in axfactories and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
+		barbarians = pgettext("barbarians_ware", "Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in axfactories and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1.")
    },
    animations = {
       idle = {

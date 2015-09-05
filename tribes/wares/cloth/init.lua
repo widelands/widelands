@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "cloth",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Cloth",
+   descname = pgettext("ware", "Cloth"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"cloth",
+   genericname = pgettext("ware", "cloth"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 10,
@@ -17,9 +17,9 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Cloth
-		barbarians = _"Cloth is needed for Barbarian ships. It is produced out of thatch reed.",
+		barbarians = pgettext("barbarians_ware", "Cloth is needed for Barbarian ships. It is produced out of thatch reed."),
 		-- TRANSLATORS: Helptext for a ware: Cloth
-		empire = _"Cloth is needed to build several buildings. It is also consumed in the armor smithy."
+		empire = pgettext("empire_ware", "Cloth is needed to build several buildings. It is also consumed in the armor smithy.")
    },
    animations = {
       idle = {

@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "wool",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Wool",
+   descname = pgettext("ware", "Wool"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"wool",
+   genericname = pgettext("ware", "wool"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		empire = 10
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Wool
-		empire = _"Wool is the hair of sheep. Weaving mills use it to make cloth."
+		empire = pgettext("empire_ware", "Wool is the hair of sheep. Weaving mills use it to make cloth.")
    },
    animations = {
       idle = {

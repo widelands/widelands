@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "iron_ore",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Iron Ore",
+   descname = pgettext("ware", "Iron Ore"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"iron ore",
+   genericname = pgettext("ware", "iron ore"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 15,
@@ -19,7 +19,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Iron Ore
-		default = _"Iron ore is mined in iron mines. It is smelted in a smelting works to retrieve the iron."
+		default = pgettext("default_ware", "Iron ore is mined in iron mines. It is smelted in a smelting works to retrieve the iron.")
    },
    animations = {
       idle = {

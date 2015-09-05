@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "blackroot",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Blackroot",
+   descname = pgettext("ware", "Blackroot"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"blackroots",
+   genericname = pgettext("ware", "blackroots"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Blackroot
-		atlanteans = _"Blackroots are a special kind of root produced at blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread."
+		atlanteans = pgettext("atlanteans_ware", "Blackroots are a special kind of root produced at blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread.")
    },
    animations = {
       idle = {

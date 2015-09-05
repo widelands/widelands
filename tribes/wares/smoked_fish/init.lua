@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "smoked_fish",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Smoked Fish",
+   descname = pgettext("ware", "Smoked Fish"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"smoked fish",
+   genericname = pgettext("ware", "smoked fish"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 30
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Smoked Fish
-		atlanteans = _"As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible."
+		atlanteans = pgettext("atlanteans_ware", "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible.")
    },
    animations = {
       idle = {

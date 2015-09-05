@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "gold_ore",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Gold Ore",
+   descname = pgettext("ware", "Gold Ore"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"gold ore",
+   genericname = pgettext("ware", "gold ore"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 15,
@@ -19,7 +19,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Gold Ore
-		default = _"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor."
+		default = pgettext("default_ware", "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
    },
    animations = {
       idle = {

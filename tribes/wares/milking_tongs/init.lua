@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "milking_tongs",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Milking Tongs",
+   descname = pgettext("ware", "Milking Tongs"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"milking tongs",
+   genericname = pgettext("ware", "milking tongs"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 1
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Milking Tongs
-		atlanteans = _"Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith."
+		atlanteans = pgettext("atlanteans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
    },
    animations = {
       idle = {

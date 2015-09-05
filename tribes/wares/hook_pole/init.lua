@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "hook_pole",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Hook Pole",
+   descname = pgettext("ware", "Hook Pole"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"hook poles",
+   genericname = pgettext("ware", "hook poles"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 1
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Hook Pole
-		atlanteans = _"This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith."
+		atlanteans = pgettext("atlanteans_ware", "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith.")
    },
    animations = {
       idle = {

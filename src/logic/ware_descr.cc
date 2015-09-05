@@ -53,7 +53,9 @@ WareDescr::WareDescr(const std::string& init_descname,
 
 	items_table = table.get_table("helptext");
 	for (const std::string& key : items_table->keys<std::string>()) {
-		helptexts_.emplace(key, _(items_table->get_string(key)));
+		helptexts_.emplace(key,
+								 pgettext_expr((boost::format("%s_ware") % key).str().c_str(),
+													items_table->get_string(key).c_str()));
 	}
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));

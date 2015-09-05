@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "smoked_meat",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Smoked Meat",
+   descname = pgettext("ware", "Smoked Meat"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"smoked meat",
+   genericname = pgettext("ware", "smoked meat"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Smoked Meat
-		atlanteans = _"Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves."
+		atlanteans = pgettext("atlanteans_ware", "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves.")
    },
    animations = {
       idle = {

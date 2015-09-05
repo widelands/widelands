@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "granite",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Granite",
+   descname = pgettext("ware", "Granite"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"granite",
+   genericname = pgettext("ware", "granite"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20,
@@ -19,13 +19,13 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Granite
-		default = _"Granite is a basic building material.",
+		default = pgettext("default_ware", "Granite is a basic building material."),
 		-- TRANSLATORS: Helptext for a ware: Granite
-		atlanteans = _"The Atlanteans produce granite blocks in quarries and crystal mines.",
+		atlanteans = pgettext("atlanteans_ware", "The Atlanteans produce granite blocks in quarries and crystal mines."),
 		-- TRANSLATORS: Helptext for a ware: Granite
-		barbarians = _"The Barbarians produce granite blocks in quarries and granite mines.",
+		barbarians = pgettext("barbarians_ware", "The Barbarians produce granite blocks in quarries and granite mines."),
 		-- TRANSLATORS: Helptext for a ware: Granite
-		empire = _"The Empire produces granite blocks in quarries and marble mines."
+		empire = pgettext("empire_ware", "The Empire produces granite blocks in quarries and marble mines.")
    },
    animations = {
       idle = {

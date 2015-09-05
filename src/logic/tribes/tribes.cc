@@ -125,7 +125,8 @@ void Tribes::add_ship_type(const LuaTable& t) {
 
 void Tribes::add_ware_type(const LuaTable& t) {
 	i18n::Textdomain td("tribes");
-	wares_->add(new WareDescr(_(t.get_string("descname")), _(t.get_string("genericname")), t));
+	wares_->add(new WareDescr(pgettext_expr("ware", t.get_string("descname").c_str()),
+									  pgettext_expr("ware", t.get_string("genericname").c_str()), t));
 }
 
 void Tribes::add_carrier_type(const LuaTable& t) {

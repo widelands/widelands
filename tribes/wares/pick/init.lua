@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "pick",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Pick",
+   descname = pgettext("ware", "Pick"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"picks",
+   genericname = pgettext("ware", "picks"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 3,
@@ -19,11 +19,11 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Pick
-		atlanteans = _"Picks are used by stonecutters and miners. They are produced by the toolsmith.",
+		atlanteans = pgettext("atlanteans_ware", "Picks are used by stonecutters and miners. They are produced by the toolsmith."),
 		-- TRANSLATORS: Helptext for a ware: Pick
-		barbarians = _"Picks are used by stonemasons and miners. They are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
+		barbarians = pgettext("barbarians_ware", "Picks are used by stonemasons and miners. They are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill)."),
 		-- TRANSLATORS: Helptext for a ware: Pick
-		empire = _"Picks are used by stonemasons and miners. They are produced by the toolsmith."
+		empire = pgettext("empire_ware", "Picks are used by stonemasons and miners. They are produced by the toolsmith.")
    },
    animations = {
       idle = {

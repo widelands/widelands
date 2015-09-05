@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "gold_thread",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Gold Thread",
+   descname = pgettext("ware", "Gold Thread"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"gold thread",
+   genericname = pgettext("ware", "gold thread"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 5
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Gold Thread
-		atlanteans = _"This thread, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill."
+		atlanteans = pgettext("atlanteans_ware", "This thread, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill.")
    },
    animations = {
       idle = {

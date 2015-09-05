@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "blackwood",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Blackwood",
+   descname = pgettext("ware", "Blackwood"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"blackwood",
+   genericname = pgettext("ware", "blackwood"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 40
@@ -15,7 +15,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Blackwood
-		barbarians = _"This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener."
+		barbarians = pgettext("barbarians_ware", "This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener.")
    },
    animations = {
       idle = {

@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 tribes:new_ware_type{
    name = "shovel",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = _"Shovel",
+   descname = pgettext("ware", "Shovel"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = _"shovels",
+   genericname = pgettext("ware", "shovels"),
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 2,
@@ -19,13 +19,13 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Shovel
-		default = _"Shovels are needed for the proper handling of plants.",
+		default = pgettext("default_ware", "Shovels are needed for the proper handling of plants."),
 		-- TRANSLATORS: Helptext for a ware: Shovel
-		atlanteans = _"Therefore the forester and the blackroot farmer use them. They are produced by the toolsmith.",
+		atlanteans = pgettext("atlanteans_ware", "Therefore the forester and the blackroot farmer use them. They are produced by the toolsmith."),
 		-- TRANSLATORS: Helptext for a ware: Shovel
-		barbarians = _"Therefore the gardener and the ranger use them. Produced at the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
+		barbarians = pgettext("barbarians_ware", "Therefore the gardener and the ranger use them. Produced at the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill)."),
 		-- TRANSLATORS: Helptext for a ware: Shovel
-		empire = _"Therefore the forester and the vinefarmer use them. They are produced by the toolsmith."
+		empire = pgettext("empire_ware", "Therefore the forester and the vinefarmer use them. They are produced by the toolsmith.")
    },
    animations = {
       idle = {
