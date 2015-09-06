@@ -178,6 +178,7 @@ public:
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}
 	uint32_t get_evade_level  () const {return m_evade_level;}
+	uint32_t get_sumed_level () const {return m_hp_level + m_attack_level + m_defense_level + m_evade_level;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
