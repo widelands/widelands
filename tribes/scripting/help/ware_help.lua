@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 --  =======================================================
 --  *************** Basic helper functions ****************
 --  =======================================================
@@ -64,6 +62,7 @@ end
 
 return {
    func = function(tribe, ware_description)
-	return ware_help_string(tribe, ware_description)
-  end
+      set_textdomain("help")
+	   return ware_help_string(tribe, ware_description)
+   end
 }

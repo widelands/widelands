@@ -1,7 +1,5 @@
 -- TODO(GunChleoc): get resi_00.png from C++
 
-set_textdomain("tribes")
-
 include "scripting/formatting.lua"
 
 --  =======================================================
@@ -846,6 +844,7 @@ end
 -- The main function call
 return {
    func = function(tribename, buildingname)
+      set_textdomain("help")
 		local tribe = wl.Game():get_tribe_description(tribename)
 		local building_description = wl.Game():get_building_description(buildingname)
 		return building_help(tribe, building_description)

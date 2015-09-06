@@ -196,7 +196,7 @@ void EncyclopediaWindow::building_selected(uint32_t) {
 			 selected_building.type() == MapObjectType::MILITARYSITE);
 	try {
 		std::unique_ptr<LuaTable> t(
-				iaplayer().egbase().lua().run_script("tribes/scripting/building_help.lua"));
+				iaplayer().egbase().lua().run_script("tribes/scripting/help/building_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->push_arg(selected_building.name());
@@ -233,7 +233,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 
 	try {
 		std::unique_ptr<LuaTable> t(
-			iaplayer().egbase().lua().run_script("tribes/scripting/ware_help.lua"));
+			iaplayer().egbase().lua().run_script("tribes/scripting/help/ware_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->push_arg(selected_ware_);
@@ -358,7 +358,7 @@ void EncyclopediaWindow::worker_selected(uint32_t) {
 
 	try {
 		std::unique_ptr<LuaTable> t(
-			iaplayer().egbase().lua().run_script("tribes/scripting/worker_help.lua"));
+			iaplayer().egbase().lua().run_script("tribes/scripting/help/worker_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(&selected_worker);
 		cr->resume();

@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 --  =======================================================
 --  *************** Basic helper functions ****************
 --  =======================================================
@@ -109,6 +107,7 @@ end
 
 return {
    func = function(worker_description)
-	return worker_help_string(worker_description)
-  end
+      set_textdomain("help")
+      return worker_help_string(worker_description)
+   end
 }

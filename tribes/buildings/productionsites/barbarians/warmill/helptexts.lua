@@ -1,5 +1,5 @@
 -- This include can be removed when all help texts have been defined.
-include "tribes/scripting/global_helptexts.lua"
+include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
 	-- TRANSLATORS: Lore helptext for a building

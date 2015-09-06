@@ -58,12 +58,22 @@ MAINPOTS = [
     ]),
     # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
     ("tribes/tribes", [
+        "../../tribes/scripting/starting_conditions/*/*.lua"
         "../../tribes/*.lua",
-        "../../tribes/*/*.lua",
-        "../../tribes/*/*/*.lua",
-        "../../tribes/*/*/*/*.lua",
-        "../../tribes/*/*/*/*/*.lua",
-        "../../tribes/*/*/*/*/*/*.lua",
+        "../../tribes/*/init.lua",
+        "../../tribes/*/*/init.lua",
+        "../../tribes/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/*/init.lua",
+    ]),
+    # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
+    ("help/help", [
+        "../../tribes/scripting/help/*.lua",
+        "../../tribes/*/helptexts.lua",
+        "../../tribes/*/*/helptexts.lua",
+        "../../tribes/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
