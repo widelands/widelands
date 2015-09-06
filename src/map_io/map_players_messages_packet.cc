@@ -31,7 +31,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
 
@@ -127,6 +127,7 @@ void MapPlayersMessagesPacket::read
 							(static_cast<Message::Type>(s->get_natural("type")),
 						 	 sent,
 						 	 s->get_name       (),
+							 s->get_safe_string("icon"),
 						 	 s->get_safe_string("body"),
 							 get_coords("position", extent, Coords::null(), s),
 							 serial,
@@ -161,6 +162,7 @@ void MapPlayersMessagesPacket::write
 
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			s.set_int    ("type",      static_cast<int32_t>(message.type()));
+			s.set_string ("icon",      message.icon_filename());
 			s.set_int    ("sent",      message.sent    ());
 			s.set_string ("body",      message.body    ());
 			if (Coords const c =       message.position())

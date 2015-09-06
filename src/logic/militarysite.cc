@@ -250,6 +250,7 @@ int MilitarySite::incorporate_soldier(EditorGameBase & egbase, Soldier & s)
 				(*game,
 				 Message::Type::kEconomySiteOccupied,
 				 descr().descname(),
+				 descr().icon_name(),
 				 descr().m_occupied_str,
 				 true);
 		}
@@ -847,6 +848,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 Message::Type::kWarfareSiteLost,
 				 _("Militarysite lost!"),
+				 "tribes/atlanteans/destroyed_building/menu.png",
 				 descr().m_defeated_enemy_str,
 				 false);
 		}
@@ -901,6 +903,7 @@ bool MilitarySite::attack(Soldier & enemy)
 			(game,
 			 Message::Type::kWarfareSiteDefeated,
 			 _("Enemy at site defeated!"),
+			 "pics/genstats_militarystrength.png",
 			 newsite->descr().m_defeated_you_str,
 			 true);
 
@@ -951,6 +954,7 @@ void MilitarySite::notify_player(Game & game, bool const discovered)
 		(game,
 		 Message::Type::kWarfareUnderAttack,
 		 _("You are under attack"),
+		 "pics/menu_attack.png",
 		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,
 		 60 * 1000, 5);

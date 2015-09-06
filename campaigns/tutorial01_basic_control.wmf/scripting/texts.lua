@@ -399,6 +399,7 @@ teaching_about_messages = {
       h1(_"Messages") ..
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
+      -- NOCOM(GunChleoc): Adjust texts to new message window
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
    ) ..
    rt("image=pics/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..

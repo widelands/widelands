@@ -48,7 +48,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
+	enum Cols {ColType, ColStatus, ColTitle, ColTimeSent};
 	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	InteractivePlayer & iplayer() const;
@@ -56,14 +56,13 @@ private:
 	void double_clicked(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
-	void do_clear_selection();
-	void do_invert_selection();
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
 	void filter_messages(Widelands::Message::Type);
 	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
+	std::string display_message_type_icon(Widelands::Message::Type);
 	void set_display_message_type_label(Widelands::Message::Type);
 	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
 

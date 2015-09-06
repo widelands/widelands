@@ -1320,7 +1320,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 			WareIndex idx = tribe().ware_index(name);
 			if (idx == INVALID_INDEX) {
 				log
-					("Player %u statistics: unknown ware name %s",
+					("Player %u statistics: unknown ware name %s\n",
 					 player_number(), name.c_str());
 				continue;
 			}
@@ -1344,7 +1344,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 				WareIndex idx = tribe().ware_index(name);
 				if (idx == INVALID_INDEX) {
 					log
-						("Player %u consumption statistics: unknown ware name %s",
+						("Player %u consumption statistics: unknown ware name %s\n",
 						player_number(), name.c_str());
 					continue;
 				}
@@ -1368,7 +1368,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 					WareIndex idx = tribe().ware_index(name);
 					if (idx == INVALID_INDEX) {
 						log
-							("Player %u stock statistics: unknown ware name %s",
+							("Player %u stock statistics: unknown ware name %s\n",
 							player_number(), name.c_str());
 						continue;
 					}

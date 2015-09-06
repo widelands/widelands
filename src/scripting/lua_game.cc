@@ -326,6 +326,7 @@ int LuaPlayer::send_message(lua_State * L) {
 				(Message::Type::kScenario,
 			 	 game.get_gametime(),
 			 	 title,
+				 "pics/menu_toggle_objectives_menu.png",
 			 	 body,
 				 c,
 				 0,

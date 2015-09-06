@@ -1574,6 +1574,7 @@ void Soldier::battle_update(Game & game, State &)
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
+							 "pics/menu_help.png",
 							 messagetext,
 						 	 get_position(),
 							 m_serial));
@@ -1583,6 +1584,7 @@ void Soldier::battle_update(Game & game, State &)
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
+							 "pics/menu_help.png",
 							 messagetext,
 						 	 opponent.get_position(),
 							 m_serial));

@@ -54,7 +54,7 @@ GameMessageMenu::GameMessageMenu
 	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 110, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
+	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
@@ -119,26 +119,6 @@ GameMessageMenu::GameMessageMenu
 	m_message_filter = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
-
-	UI::Button * clearselectionbtn =
-		new UI::Button
-			(this, "clear_selection",
-			 5 * 5 + 6 * 34 + 17, 5, 34, 34,
-			 g_gr->images().get("pics/but2.png"),
-			 g_gr->images().get("pics/message_clear_selection.png"),
-			 _("Clear selection"));
-	clearselectionbtn->sigclicked.connect
-		(boost::bind(&GameMessageMenu::do_clear_selection, this));
-
-	UI::Button * invertselectionbtn =
-		new UI::Button
-			(this, "invert_selection",
-			 6 * 5 + 7 * 34 + 17, 5, 34, 34,
-			 g_gr->images().get("pics/but2.png"),
-			 g_gr->images().get("pics/message_selection_invert.png"),
-			 _("Invert selection"));
-	invertselectionbtn->sigclicked.connect
-		(boost::bind(&GameMessageMenu::do_invert_selection, this));
 
 	m_archivebtn =
 		new UI::Button
@@ -292,10 +272,11 @@ void GameMessageMenu::update_record
 	(UI::Table<uintptr_t>::EntryRecord & er,
 	 const Widelands::Message & message)
 {
+	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message.type())));
 	er.set_picture
 		(ColStatus,
 		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
-	er.set_string(ColTitle, message.title());
+	er.set_picture(ColTitle, message.icon());
 
 	const uint32_t time = message.sent();
 	er.set_string(ColTimeSent, gamestring_with_leading_zeros(time));
@@ -318,7 +299,13 @@ void GameMessageMenu::selected(uint32_t const t) {
 					 	(game.get_gametime(), player.player_number(), id));
 			}
 			m_centerviewbtn->set_enabled(message->position());
-			message_body.set_text(message->body    ());
+
+			message_body.set_text(
+						(boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
+											"<p font-size=8> <br></p></rt>%s")
+						 % message->title()
+						 % message->body()).str());
+
 			set_display_message_type_label(message->message_type_category());
 			return;
 		}
@@ -390,17 +377,7 @@ void GameMessageMenu::archive_or_restore()
 
 	switch (mode) {
 	case Inbox:
-		//archive selected messages
-		for (size_t i = 0; i < list->size(); ++i)
-			if (list->get_record(i).is_checked(ColSelect))
-			{
-				work_done = true;
-				game.send_player_command
-					(*new Widelands::CmdMessageSetStatusArchived
-					 	(gametime, plnum, MessageId((*list)[i])));
-			}
-
-		//archive highlighted message, if nothing was selected
+		//archive highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -410,17 +387,7 @@ void GameMessageMenu::archive_or_restore()
 		}
 		break;
 	case Archive:
-		//restore selected messages
-		for (size_t i = 0; i < list->size(); ++i)
-			if (list->get_record(i).is_checked(ColSelect))
-			{
-				work_done = true;
-				game.send_player_command
-					(*new Widelands::CmdMessageSetStatusRead
-					 	(gametime, plnum, MessageId((*list)[i])));
-			}
-
-		//restore highlighted message, if nothing was selected
+		//restore highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -530,38 +497,57 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 										 % "5").str());
 }
 
+
+/**
+ * Get the filename for a message category's icon
+ */
+std::string GameMessageMenu::display_message_type_icon(Widelands::Message::Type msgtype) {
+	switch (msgtype) {
+		case Widelands::Message::Type::kGeologists:
+			return "pics/menu_geologist.png";
+		case Widelands::Message::Type::kEconomy:
+			return "pics/menu_build_flag.png";
+		case Widelands::Message::Type::kSeafaring:
+			return "pics/start_expedition.png";
+		case Widelands::Message::Type::kWarfare:
+			return "pics/messages_warfare.png";
+		case Widelands::Message::Type::kScenario:
+			return "pics/menu_objectives.png";
+		default:
+			return "pics/message_new.png";
+	}
+}
+
+
+
 /**
  * Update image and tooltip for message category label
  */
 void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type msgtype) {
 	std::string message_type_tooltip = "";
-	std::string message_type_image = "";
+	const std::string message_type_image =
+			(boost::format("<rt image=%s></rt>") % display_message_type_icon(msgtype)).str();
 
 	switch (msgtype) {
 		case Widelands::Message::Type::kGeologists:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Geologists");
-			message_type_image =  "<rt image=pics/menu_geologist.png></rt>";
 			break;
 		case Widelands::Message::Type::kEconomy:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Economy");
-			message_type_image =  "<rt image=pics/menu_build_flag.png></rt>";
 			break;
 		case Widelands::Message::Type::kSeafaring:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Seafaring");
-			message_type_image =  "<rt image=pics/start_expedition.png></rt>";
 			break;
 		case Widelands::Message::Type::kWarfare:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Warfare");
-			message_type_image =  "<rt image=pics/messages_warfare.png></rt>";
 			break;
 		case Widelands::Message::Type::kScenario:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Scenario");
-			message_type_image =  "<rt image=pics/menu_objectives.png></rt>";
 			break;
 		case Widelands::Message::Type::kNoMessages:
 			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
@@ -570,7 +556,6 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 		default:
 			/** TRANSLATORS: This is the default message type */
 			message_type_tooltip = _("General");
-			message_type_image =  "<rt image=pics/message_new.png></rt>";
 	}
 
 	m_display_message_type_label->set_tooltip(
@@ -581,22 +566,6 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 	m_display_message_type_label->set_text(message_type_image);
 }
 
-
-/**
- * Clear the current selection of messages.
- */
-void GameMessageMenu::do_clear_selection()
-{
-	for (size_t i = 0; i < list->size(); ++i)
-		list->get_record(i).set_checked
-			(ColSelect, false);
-}
-
-void GameMessageMenu::do_invert_selection()
-{
-	for (size_t i = 0; i < list->size(); ++i)
-		list->get_record(i).toggle(ColSelect);
-}
 
 void GameMessageMenu::toggle_mode()
 {

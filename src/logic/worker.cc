@@ -945,6 +945,15 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		(const ResourceDescription * const rdescr =
 			world.get_resource(position.field->get_resources()))
 	{
+		const TribeDescr & t = descr().tribe();
+		Immovable& ri = game.create_immovable
+			(position,
+			 t.get_resource_indicator
+				(rdescr,
+				 rdescr->detectable() ?
+				 position.field->get_resources_amount() : 0),
+			 &t);
+
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
 			// TODO(sirver): this is very wrong: It assumes a directory layout
@@ -967,6 +976,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			else if (rdescr->name() == "water")
 				message_type = Message::Type::kGeologistsWater;
 
+			const std::string& img = g_gr->animations().get_animation
+											 (ri.descr().main_animation()).representative_image_from_disk_filename();
+
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
@@ -975,21 +987,13 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(message_type,
 					 game.get_gametime(),
 					 rdescr->descname(),
+					 img,
 					 message,
 					 position,
 					 m_serial
 					),
 				 300000, 8);
 		}
-
-		const TribeDescr & t = descr().tribe();
-		game.create_immovable
-			(position,
-			 t.get_resource_indicator
-				(rdescr,
-				 rdescr->detectable() ?
-				 position.field->get_resources_amount() : 0),
-			 &t);
 	}
 
 	++state.ivar1;
@@ -1875,6 +1879,7 @@ void Worker::return_update(Game & game, State & state)
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 				 _("Worker got lost!"),
+				 "pics/menu_help.png",
 				 message,
 				 get_position()),
 				 m_serial);

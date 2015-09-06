@@ -931,10 +931,12 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			set_production_result(descr().out_of_resource_title());
 
 			assert(!descr().out_of_resource_message().empty());
+			const WareIndex& resource_id = *descr().output_ware_types().begin();
 			send_message
 				(game,
 				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
+				 descr().icon_name(),
 				 descr().out_of_resource_message(),
 				 true,
 				 minutes * 60000, 0);

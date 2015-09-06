@@ -131,11 +131,12 @@ BuildingDescr::BuildingDescr
 
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
-	if (m_buildable || m_enhanced_building) {
-		//  get build icon
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
 
+	//  get build icon
+	m_icon_fname  = directory;
+	m_icon_fname += "/menu.png";
+
+	if (m_buildable || m_enhanced_building) {
 		//  build animation
 		if (Section * const build_s = prof.get_section("build")) {
 			if (build_s->get_int("fps", -1) != -1)
@@ -886,6 +887,7 @@ void Building::send_message
 	(Game & game,
 	 const Message::Type msgtype,
 	 const std::string & title,
+	 const std::string & icon_filename,
 	 const std::string & description,
 	 bool link_to_building_lifetime,
 	 uint32_t throttle_time,
@@ -914,7 +916,7 @@ void Building::send_message
 			% rt_description % description).str();
 
 	Message * msg = new Message
-		(msgtype, game.get_gametime(), title, rt_description,
+		(msgtype, game.get_gametime(), title, icon_filename, rt_description,
 		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)

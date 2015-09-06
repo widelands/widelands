@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -440,7 +442,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			// Send a message to the player, that a new port space was found
 			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, msg_head, msg_body, "port.png");
+			send_message(game, msg_head, msg_body, "fsel_editor_set_port_space.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
@@ -618,7 +620,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			std::string msg_head = _("Coast Reached");
 			std::string msg_body =
 			   _("An expedition ship reached a coast and is waiting for further commands.");
-			send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
+			send_message(game, msg_head, msg_body, "ship_scout_ne.png");
 
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -663,7 +665,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			// Send a message to the player, that a port constructionsite is gone
 			std::string msg_head = _("New port construction site is gone");
 			std::string msg_body = _("Unloading of wares failed, expedition is cancelled now.");
-			send_message(game, msg_head, msg_body, "port.png");
+			send_message(game, msg_head, msg_body, "menu_ship_cancel_expedition.png");
 			send_signal(game, "cancel_expedition");
 		}
 
@@ -984,6 +986,7 @@ void Ship::send_message(Game& game,
 	Message* msg = new Message(Message::Type::kSeafaring,
 	                           game.get_gametime(),
 	                           title,
+										(boost::format("pics/%s") % picture).str(),
 	                           rt_description,
 	                           get_position(),
 	                           m_serial);
