@@ -1,11 +1,13 @@
 dirname = path.dirname(__file__)
 
-tribes:new_ware_type{
+tribes:new_ware_type {
+   msgctxt = "barbarians_ware",
    name = "helmet",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Helmet"),
+   descname = pgettext("barbarians_ware", "Helmet"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = pgettext("ware", "helmets"),
+   genericname = pgettext("barbarians_ware", "helmets"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		barbarians = 1
@@ -13,10 +15,7 @@ tribes:new_ware_type{
    preciousness = {
 		barbarians = 1
 	},
-   helptext = {
-		-- TRANSLATORS: Helptext for a ware: Helmet
-		barbarians = pgettext("barbarians_ware", "A helmet is a basic tool to protect warriors. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1.")
-   },
+
    animations = {
       idle = {
          pictures = { dirname .. "idle.png" },

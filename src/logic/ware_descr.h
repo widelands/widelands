@@ -65,9 +65,7 @@ public:
   ///  and should not be configurable.
 	WareIndex default_target_quantity(const std::string& tribename) const;
 
-	/// \return ware's localized descriptive text
-	/// Prepends the default helptext to the 'tribename''s specific text if there is any.
-	std::string helptext(const std::string& tribename) const;
+	std::string directory() const {return directory_;}
 
 	/// \return index to ware's icon inside picture stack
 	const Image* icon() const {return icon_;}
@@ -99,13 +97,12 @@ private:
 	std::unordered_map<std::string, int> default_target_quantities_;
 	// tribename, preciousness. No default.
 	std::unordered_map<std::string, int> preciousnesses_;
-	// tribename or "default", helptext
-	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
 
 	std::set<BuildingIndex> consumers_; // Buildings that consume this ware
 	std::set<BuildingIndex> producers_; // Buildings that produce this ware
 
-	std::string icon_fname_; ///< Filename of ware's main picture
+	std::string  directory_;  /// The directory where the init files are located
+	std::string  icon_fname_; ///< Filename of ware's main picture
 	const Image* icon_;       ///< Index of ware's picture in picture stack
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };

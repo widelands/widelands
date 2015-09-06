@@ -33,7 +33,8 @@ namespace Widelands {
 class Player;
 class BuildingDescr;
 struct Coords;
-struct WorkerDescr;
+class WareDescr;
+class WorkerDescr;
 }  // namespace Widelands
 
 // Easy handling of function objects and coroutines.
@@ -62,6 +63,7 @@ public:
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const Widelands::BuildingDescr*);
+	void push_arg(const Widelands::WareDescr*);
 	void push_arg(const Widelands::WorkerDescr*);
 	void push_arg(const std::string&);
 

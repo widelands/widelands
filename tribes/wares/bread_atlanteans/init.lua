@@ -1,11 +1,13 @@
 dirname = path.dirname(__file__)
 
-tribes:new_ware_type{
+tribes:new_ware_type {
+   msgctxt = "atlanteans_ware",
    name = "atlanteans_bread",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Bread"),
+   descname = pgettext("atlanteans_ware", "Bread"),
    -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = pgettext("ware", "bread"),
+   genericname = pgettext("atlanteans_ware", "bread"),
+   directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		atlanteans = 20
@@ -13,10 +15,7 @@ tribes:new_ware_type{
    preciousness = {
 		atlanteans = 5
 	},
-   helptext = {
-		-- TRANSLATORS: Helptext for a ware: Bread
-		atlanteans = pgettext("atlanteans_ware", "This tasty bread is made in bakeries out of cornmeal, blackroot flour and water. It is appreciated as basic food by miners, scouts and soldiers in training sites (labyrinth and dungeon).")
-		},
+
    animations = {
       idle = {
          pictures = { dirname .. "idle.png" },

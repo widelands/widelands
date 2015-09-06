@@ -2154,6 +2154,7 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
+	PROP_RO(LuaWareDescription, directory),
 	PROP_RO(LuaWareDescription, icon_name),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
@@ -2195,6 +2196,17 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 	}
 	return 1;
 }
+
+/* RST
+	.. attribute:: directory
+
+			(RO) The directory where the init files are located.
+*/
+int LuaWareDescription::get_directory(lua_State * L) {
+	lua_pushstring(L, get()->directory());
+	return 1;
+}
+
 
 
 /* RST

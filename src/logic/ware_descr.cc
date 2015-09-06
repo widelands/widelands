@@ -41,6 +41,8 @@ WareDescr::WareDescr(const std::string& init_descname,
 	assert(!generic_name_.empty());
 	i18n::Textdomain td("tribes");
 
+	directory_ = table.get_string("directory");
+
 	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
 	for (const std::string& key : items_table->keys<std::string>()) {
 		default_target_quantities_.emplace(key, items_table->get_int(key));
@@ -49,13 +51,6 @@ WareDescr::WareDescr(const std::string& init_descname,
 	items_table = table.get_table("preciousness");
 	for (const std::string& key : items_table->keys<std::string>()) {
 		preciousnesses_.emplace(key, items_table->get_int(key));
-	}
-
-	items_table = table.get_table("helptext");
-	for (const std::string& key : items_table->keys<std::string>()) {
-		helptexts_.emplace(key,
-								 pgettext_expr((boost::format("%s_ware") % key).str().c_str(),
-													items_table->get_string(key).c_str()));
 	}
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
@@ -82,24 +77,6 @@ WareIndex WareDescr::default_target_quantity(const std::string& tribename) const
 		return default_target_quantities_.at(tribename);
 	}
 	return kInvalidWare;
-}
-
-std::string WareDescr::helptext(const std::string& tribename) const {
-	if (helptexts_.count(tribename) > 0) {
-		i18n::Textdomain td("tribes");
-		if (helptexts_.count("default") > 0) {
-			return (boost::format("%s %s")
-					  % _(helptexts_.at("default"))
-					  % _(helptexts_.at(tribename))).str();
-		} else {
-			return _(helptexts_.at(tribename));
-		}
-	} else if (helptexts_.count("default") > 0) {
-		i18n::Textdomain td("tribes");
-		return _(helptexts_.at("default"));
-	} else {
-		return _("This ware has no help text yet.");
-	}
 }
 
 

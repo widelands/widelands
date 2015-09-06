@@ -453,6 +453,7 @@ public:
 	 * Properties
 	 */
 	int get_consumers(lua_State *);
+	int get_directory(lua_State*);
 	int get_icon_name(lua_State*);
 	int get_producers(lua_State *);
 

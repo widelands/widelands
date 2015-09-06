@@ -149,8 +149,9 @@ void Tribes::add_ship_type(const LuaTable& table) {
 
 void Tribes::add_ware_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	wares_->add(new WareDescr(pgettext_expr("ware", table.get_string("descname").c_str()),
-									  pgettext_expr("ware", table.get_string("genericname").c_str()),
+	const char* msgctxt = table.get_string("msgctxt").c_str();
+	wares_->add(new WareDescr(pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+									  pgettext_expr(msgctxt, table.get_string("genericname").c_str()),
 									  table));
 }
 

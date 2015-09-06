@@ -231,7 +231,20 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	selected_ware_ = tribe.get_ware_descr(wares_.get_selected());
 
-	ware_text_.set_text(selected_ware_->helptext(tribe.name()));
+	try {
+		std::unique_ptr<LuaTable> t(
+			iaplayer().egbase().lua().run_script("tribes/scripting/ware_help.lua"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->push_arg(selected_ware_);
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		ware_text_.set_text(help_text);
+	} catch (LuaError& err) {
+		ware_text_.set_text(err.what());
+	}
+
+	ware_text_.scroll_to_top();
 
 	prod_sites_.clear();
 	cond_table_.clear();
