@@ -139,7 +139,11 @@ void Tribes::add_warehouse_type(const LuaTable& table) {
 
 void Tribes::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
+	immovables_->add(
+				new ImmovableDescr(
+					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					table,
+					*this));
 }
 
 void Tribes::add_ship_type(const LuaTable& table) {

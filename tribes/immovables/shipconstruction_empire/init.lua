@@ -1,9 +1,10 @@
 dirname = path.dirname(__file__)
 
-tribes:new_immovable_type{
+tribes:new_immovable_type {
+   msgctxt = "immovable",
    name = "empire_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = _"Ship Under Construction",
+   descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
    programs = {
 		program = {
@@ -16,9 +17,7 @@ tribes:new_immovable_type{
       log = 2,
       cloth = 4
    },
-   helptext = {
-		default = ""
-   },
+
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "build_\\d+.png"),

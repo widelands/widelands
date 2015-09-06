@@ -152,9 +152,6 @@ protected:
 	/// \see ActConstruction
 	Buildcost m_buildcost;
 
-	// tribename or "default", helptext
-	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
-
 private:
 	 // Common constructor functions for tribes and world.
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, MapObjectDescr::OwnerType type);

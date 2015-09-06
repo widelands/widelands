@@ -363,6 +363,7 @@ WareIndex TribeDescr::get_resource_indicator
 		++num_indicators;
 	}
 
+	// NOCOM(GunChleoc): this error is raised for Barbarian coal.
 	if (!num_indicators)
 		throw GameDataError
 			("tribe %s does not declare a resource indicator for resource %s",

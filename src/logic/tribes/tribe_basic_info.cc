@@ -31,7 +31,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		name = table->get_string("name");
 		author = _(table->get_string("author"));
 		descname = _(table->get_string("descname"));
-		helptext = _(table->get_string("helptext"));
+		tooltip = _(table->get_string("tooltip"));
 		icon = table->get_string("icon");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;

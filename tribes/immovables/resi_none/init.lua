@@ -1,9 +1,10 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
+   msgctxt = "immovable",
    name = "resi_none",
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = _"No Resources",
+   descname = pgettext("immovable", "No Resources"),
    attributes = { "resi" },
    programs = {
 		program = {
@@ -11,10 +12,7 @@ tribes:new_immovable_type {
 			"remove="
       }
    },
-   helptext = {
-		-- TRANSLATORS: Helptext for a resource: No resources
-		default = _"There are no resources in the ground here."
-   },
+
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),

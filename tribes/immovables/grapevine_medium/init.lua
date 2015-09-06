@@ -1,9 +1,10 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
+   msgctxt = "immovable",
    name = "grapevine_medium",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = _"Grapevine (medium)",
+   descname = pgettext("immovable", "Grapevine (medium)"),
    size = "medium",
    attributes = { "field" },
    programs = {
@@ -12,9 +13,7 @@ tribes:new_immovable_type {
 			"transform=grapevine_ripe",
       }
    },
-   helptext = {
-		default = ""
-   },
+
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),

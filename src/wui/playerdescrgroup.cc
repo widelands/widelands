@@ -177,16 +177,19 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Human");
 			}
 			d->btnPlayerType->set_title(title);
+
+			TribeBasicInfo info = Widelands::Tribes::tribeinfo(player.tribe);
 			if (!m_tribenames[player.tribe].size()) {
 				// Tribe's localized name
-				TribeBasicInfo info = Widelands::Tribes::tribeinfo(player.tribe);
 				m_tribenames[player.tribe] = info.descname;
 			}
 			if (player.random_tribe) {
 				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
+				d->btnPlayerTribe->set_tooltip(_("The tribe will be set at random."));
 			} else {
 				i18n::Textdomain td("tribes");
 				d->btnPlayerTribe->set_title(_(m_tribenames[player.tribe]));
+				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
 			{
@@ -259,6 +262,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	const PlayerSettings & player = settings.players.at(d->plnum);
 	const std::string & currenttribe = player.tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
+
 	bool random_tribe = false;
 	uint32_t num_tribes = settings.tribes.size();
 

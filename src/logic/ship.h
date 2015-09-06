@@ -68,12 +68,10 @@ public:
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const {return m_capacity;}
-	std::string helptext() const {return helptext_;}
 
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
-	std::string       helptext_;   ///< Short (tooltip-like) help text
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 

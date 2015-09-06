@@ -265,11 +265,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable&
 	if (table.has_key("buildcost")) {
 		m_buildcost = ImmovableDescr::parse_buildcost(table.get_table("buildcost"), tribes);
 	}
-
-	std::unique_ptr<LuaTable> helptexts_table = table.get_table("helptext");
-	for (const std::string& key : helptexts_table->keys<std::string>()) {
-		helptexts_.emplace(key, helptexts_table->get_string(key));
-	}
 }
 
 const EditorCategory& ImmovableDescr::editor_category() const {

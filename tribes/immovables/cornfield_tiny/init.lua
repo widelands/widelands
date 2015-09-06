@@ -1,9 +1,10 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
+   msgctxt = "immovable",
    name = "cornfield_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = _"_Cornfield (tiny)",
+   descname = pgettext("immovable", "Cornfield (tiny)"),
    size = "small",
    attributes = { "field" },
    programs = {
@@ -12,9 +13,7 @@ tribes:new_immovable_type {
 			"transform=cornfield_small",
       }
    },
-   helptext = {
-		default = ""
-   },
+
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),

@@ -50,7 +50,7 @@ struct TribeBasicInfo {
 	/// Name to present to the user
 	std::string descname;
 	/// Basic information about this tribe
-	std::string helptext;
+	std::string tooltip;
 	/// Filepath of the tribe's icon
 	std::string icon;
 

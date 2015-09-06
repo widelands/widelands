@@ -1,9 +1,10 @@
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
+   msgctxt = "immovable",
    name = "resi_iron1",
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = _"Iron Vein",
+   descname = pgettext("immovable", "Iron Vein"),
    attributes = { "resi" },
    programs = {
 		program = {
@@ -11,10 +12,7 @@ tribes:new_immovable_type {
 			"remove="
       }
    },
-   helptext = {
-		-- TRANSLATORS: Helptext for a resource: Iron
-		default = _"Iron veins contain iron ore that can be dug up by iron mines." .. " " .. _"There is only a little bit of iron here."
-   },
+
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),

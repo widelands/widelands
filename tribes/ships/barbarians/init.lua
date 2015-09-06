@@ -16,9 +16,5 @@ tribes:new_ship_type {
    descname = _"Ship",
    capacity = 30,
    vision_range = 4,
-
-	-- TRANSLATORS: Helptext for a ship
-   helptext = "A ocean-going ship", -- TODO(GunChleoc): Localize when we have help for ships?
-
    animations = animations,
 }

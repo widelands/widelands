@@ -58,7 +58,6 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	add_directional_animation(&m_sail_anims, "sail");
 
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
-	helptext_ = _(table.get_string("helptext"));
 }
 
 

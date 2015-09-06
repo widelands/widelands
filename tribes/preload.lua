@@ -9,7 +9,7 @@ return {
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Barbarians",
-		helptext = _"The mighty tribes of the east-lands.",
+		tooltip = _"The mighty tribes of the east-lands.",
 		icon = dirname .. "images/barbarians/icon.png",
 
 		starting_conditions = {
@@ -24,7 +24,7 @@ return {
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Empire",
-		helptext = _"This is the culture of the Roman Empire.",
+		tooltip = _"This is the culture of the Roman Empire.",
 		icon = dirname .. "images/empire/icon.png",
 
 		starting_conditions = {
@@ -39,7 +39,7 @@ return {
 		author = _"The Widelands Development Team",
 		-- TRANSLATORS: This is a tribe name
 		descname = _"Atlanteans",
-		helptext = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
+		tooltip = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
 		icon = dirname .. "images/atlanteans/icon.png",
 
 		starting_conditions = {
