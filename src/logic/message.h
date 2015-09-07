@@ -68,6 +68,7 @@ struct Message {
 		 uint32_t                  sent_time,
 		 const std::string&        init_title,
 		 const std::string&        init_icon_filename,
+		 const std::string&        init_heading,
 		 const std::string&        init_body,
 		 Widelands::Coords   const c = Coords::null(),
 		 Widelands::Serial         ser = 0,
@@ -77,6 +78,7 @@ struct Message {
 		title_   (init_title),
 		icon_filename_(init_icon_filename),
 		icon_    (g_gr->images().get(init_icon_filename)),
+		heading_ (init_heading),
 		body_    (init_body),
 		sent_    (sent_time),
 		position_(c),
@@ -89,6 +91,7 @@ struct Message {
 	const std::string &   title   () const   {return title_;}
 	const std::string& icon_filename() const {return icon_filename_;}
 	const Image*          icon    () const   {return icon_;}
+	const std::string &   heading () const   {return heading_;}
 	const std::string &   body    () const   {return body_;}
 	Widelands::Coords     position() const   {return position_;}
 	Widelands::Serial     serial  () const   {return serial_;}
@@ -114,10 +117,11 @@ struct Message {
 
 private:
 	Message::Type     type_;
-	std::string       title_;
+	const std::string title_;
 	const std::string icon_filename_;
 	const Image     * icon_;   // Pointer to icon into picture stack
-	std::string       body_;
+	const std::string heading_;
+	const std::string body_;
 	uint32_t          sent_;
 	Widelands::Coords position_;
 	Widelands::Serial serial_; // serial to map object

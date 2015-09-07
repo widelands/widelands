@@ -24,7 +24,8 @@ sleep=16000
 worker=fish
 
 [out_of_resource_notification]
-title=_Out of Fish
+title=_Fish
+heading=_Out of Fish
 message=_The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fish breeder’s house.
 
 [idle]

@@ -54,7 +54,8 @@ mine=granite 2 50 5 17
 produce=stone:2
 
 [out_of_resource_notification]
-title=_Main Marble Vein Exhausted
+title=_Marble
+heading=_Main Marble Vein Exhausted
 message=_This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
 [work]

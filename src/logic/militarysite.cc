@@ -251,6 +251,7 @@ int MilitarySite::incorporate_soldier(EditorGameBase & egbase, Soldier & s)
 				 Message::Type::kEconomySiteOccupied,
 				 descr().descname(),
 				 descr().icon_name(),
+				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
 		}
@@ -847,8 +848,10 @@ bool MilitarySite::attack(Soldier & enemy)
 			send_message
 				(game,
 				 Message::Type::kWarfareSiteLost,
+				 /** TRANSLATORS: Militarysite lost (taken/destroyed by enemy) */
+				 pgettext("building", "Lost!"),
+				 descr().icon_name(),
 				 _("Militarysite lost!"),
-				 "tribes/atlanteans/destroyed_building/menu.png",
 				 descr().m_defeated_enemy_str,
 				 false);
 		}
@@ -902,8 +905,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		newsite->send_message
 			(game,
 			 Message::Type::kWarfareSiteDefeated,
+			 /** TRANSLATORS: Message title. */
+			 /** TRANSLATORS: If you run out of space, you can also translate this as "Success!" */
+			 _("Enemy defeated!"),
+			 newsite->descr().icon_name(),
 			 _("Enemy at site defeated!"),
-			 "pics/genstats_militarystrength.png",
 			 newsite->descr().m_defeated_you_str,
 			 true);
 
@@ -953,8 +959,10 @@ void MilitarySite::notify_player(Game & game, bool const discovered)
 	send_message
 		(game,
 		 Message::Type::kWarfareUnderAttack,
+		 /** TRANSLATORS: Militarysite is being attacked */
+		 pgettext("building", "Attack!"),
+		 descr().icon_name(),
 		 _("You are under attack"),
-		 "pics/menu_attack.png",
 		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,
 		 60 * 1000, 5);

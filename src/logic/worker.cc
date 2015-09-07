@@ -956,12 +956,10 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			// TODO(sirver): this is very wrong: It assumes a directory layout
-			// that might not be around forever.
 			const std::string message =
-					(boost::format("<rt image=world/resources/pics/%s4.png>"
+					(boost::format("<rt image=%s>"
 										"<p font-face=serif font-size=14>%s</p></rt>")
-					 % rdescr->name().c_str()
+					 % rdescr->get_editor_pic(rdescr->max_amount())
 					 % _("A geologist found resources.")).str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -988,6 +986,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					 game.get_gametime(),
 					 rdescr->descname(),
 					 img,
+					 rdescr->descname(),
 					 message,
 					 position,
 					 m_serial
@@ -1878,8 +1877,9 @@ void Worker::return_update(Game & game, State & state)
 			 *new Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
-				 _("Worker got lost!"),
+				 _("Worker"),
 				 "pics/menu_help.png",
+				 _("Worker got lost!"),
 				 message,
 				 get_position()),
 				 m_serial);

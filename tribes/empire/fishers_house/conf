@@ -25,7 +25,8 @@ sleep=17000
 worker=fish
 
 [out_of_resource_notification]
-title=_Out of Fish
+title=_Fish
+heading=_Out of Fish
 message=_The fisher working in this fisher’s house can’t find any fish in his work area.
 
 [idle]

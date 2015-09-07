@@ -121,13 +121,14 @@ void MapPlayersMessagesPacket::read
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
-
+					// NOCOM(GunChleoc): Test saveloading!
 					messages.add_message
 						(*new Message
 							(static_cast<Message::Type>(s->get_natural("type")),
 						 	 sent,
 						 	 s->get_name       (),
 							 s->get_safe_string("icon"),
+							 s->get_safe_string("heading"),
 						 	 s->get_safe_string("body"),
 							 get_coords("position", extent, Coords::null(), s),
 							 serial,
@@ -162,6 +163,7 @@ void MapPlayersMessagesPacket::write
 
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			s.set_int    ("type",      static_cast<int32_t>(message.type()));
+			s.set_string ("heading",   message.heading());
 			s.set_string ("icon",      message.icon_filename());
 			s.set_int    ("sent",      message.sent    ());
 			s.set_string ("body",      message.body    ());

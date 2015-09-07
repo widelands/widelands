@@ -239,7 +239,7 @@ private:
 	void init_fleet(EditorGameBase &);
 	void set_fleet(Fleet * fleet);
 
-	void send_message(Game &, const std::string &, const std::string &, const std::string &);
+	void send_message(Game &, const std::string &, const std::string& heading, const std::string &, const std::string &);
 
 	UI::Window * m_window;
 

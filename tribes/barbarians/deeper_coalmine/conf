@@ -38,7 +38,8 @@ mine=coal 2 100 10 2
 produce=coal:3
 
 [out_of_resource_notification]
-title=_Main Coal Vein Exhausted
+title=_Coal
+heading=_Main Coal Vein Exhausted
 message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it.
 
 [idle]

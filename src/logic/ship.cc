@@ -440,9 +440,12 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
 			// Send a message to the player, that a new port space was found
-			std::string msg_head = _("Port Space Found");
-			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, msg_head, msg_body, "fsel_editor_set_port_space.png");
+			send_message(
+						game,
+						_("Port Space"),
+						_("Port Space Found"),
+						_("An expedition ship found a new port build space."),
+						"fsel_editor_set_port_space.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
@@ -556,10 +559,13 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				} else {
 					// Check whether the island was completely surrounded
 					if (get_position() == m_expedition->exploration_start) {
-						std::string msg_head = _("Island Circumnavigated");
-						std::string msg_body = _("An expedition ship sailed around its"
-						                         " island without any events.");
-						send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
+						send_message(
+									game,
+									/** TRANSLATORS: A ship has circumnavigated an island and is waiting for orders */
+									pgettext("ship", "Waiting"),
+									_("Island Circumnavigated"),
+									_("An expedition ship sailed around its island without any events."),
+									"ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 
 						Notifications::publish(
@@ -617,10 +623,13 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			m_ship_state = EXP_WAITING;
 			start_task_idle(game, descr().main_animation(), 1500);
 			// Send a message to the player, that a new coast was reached
-			std::string msg_head = _("Coast Reached");
-			std::string msg_body =
-			   _("An expedition ship reached a coast and is waiting for further commands.");
-			send_message(game, msg_head, msg_body, "ship_scout_ne.png");
+			send_message(
+						game,
+						/** TRANSLATORS: A ship has discovered land */
+						_("Land ahoy!"),
+						_("Coast Reached"),
+						_("An expedition ship reached a coast and is waiting for further commands."),
+						"ship_scout_ne.png");
 
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -663,9 +672,12 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 		} else {  // it seems that port constructionsite has dissapeared
 			// Send a message to the player, that a port constructionsite is gone
-			std::string msg_head = _("New port construction site is gone");
-			std::string msg_body = _("Unloading of wares failed, expedition is cancelled now.");
-			send_message(game, msg_head, msg_body, "menu_ship_cancel_expedition.png");
+			send_message(
+						game,
+						_("Port Lost!"),
+						_("New port construction site is gone"),
+						_("Unloading of wares failed, expedition is cancelled now."),
+						"menu_ship_cancel_expedition.png");
 			send_signal(game, "cancel_expedition");
 		}
 
@@ -841,9 +853,13 @@ void Ship::start_task_expedition(Game& game) {
 	}
 
 	// Send a message to the player, that an expedition is ready to go
-	const std::string msg_head = _("Expedition Ready");
-	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, msg_head, msg_body, "start_expedition.png");
+	send_message(
+				game,
+				/** TRANSLATORS: Ship expedition ready */
+				pgettext("ship", "Ready"),
+				_("Expedition Ready"),
+				_("An expedition ship is waiting for your commands."),
+				"start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
@@ -970,7 +986,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param picture picture name relative to the pics directory
  */
 void Ship::send_message(Game& game,
-                        const std::string& title,
+								const std::string& title,
+								const std::string& heading,
                         const std::string& description,
                         const std::string& picture) {
 	std::string rt_description;
@@ -987,6 +1004,7 @@ void Ship::send_message(Game& game,
 	                           game.get_gametime(),
 	                           title,
 										(boost::format("pics/%s") % picture).str(),
+										heading,
 	                           rt_description,
 	                           get_position(),
 	                           m_serial);

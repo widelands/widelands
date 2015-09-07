@@ -455,6 +455,7 @@ void Warehouse::init(EditorGameBase & egbase)
 				 Message::Type::kSeafaring,
 				 descr().descname(),
 				 descr().icon_name(),
+				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
 		} else if (descr().name() == "headquarters") {
@@ -463,6 +464,7 @@ void Warehouse::init(EditorGameBase & egbase)
 				 Message::Type::kEconomy,
 				 descr().descname(),
 				 descr().icon_name(),
+				 descr().descname(),
 				 _("A new headquarters was added to your economy."),
 				 true);
 		} else {
@@ -471,6 +473,7 @@ void Warehouse::init(EditorGameBase & egbase)
 				 Message::Type::kEconomy,
 				 descr().descname(),
 				 descr().icon_name(),
+				 descr().descname(),
 				 _("A new warehouse was added to your economy."),
 				 true);
 		}

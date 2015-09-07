@@ -50,7 +50,11 @@ void CmdLuaCoroutine::execute (Game & game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message & msg =
 				*new Widelands::Message
-				(Message::Type::kGameLogic, game.get_gametime(), "pics/menu_help.png", "Lua Coroutine Failed",
+				(Message::Type::kGameLogic,
+				 game.get_gametime(),
+				 "pics/menu_help.png",
+				 "Coroutine",
+				 "Lua Coroutine Failed",
 				 e.what());
 			game.player(i).add_message(game, msg, true);
 		}

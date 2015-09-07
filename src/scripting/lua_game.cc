@@ -319,6 +319,8 @@ int LuaPlayer::send_message(lua_State * L) {
 	Game & game = get_game(L);
 	Player & plr = get(L, game);
 
+	// NOCOM(GunChleoc): Go through the Lua usages to make these all look good.
+
 	MessageId const message =
 		plr.add_message
 			(game,
@@ -327,6 +329,7 @@ int LuaPlayer::send_message(lua_State * L) {
 			 	 game.get_gametime(),
 			 	 title,
 				 "pics/menu_toggle_objectives_menu.png",
+				 title,
 			 	 body,
 				 c,
 				 0,

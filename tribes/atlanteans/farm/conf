@@ -44,7 +44,8 @@ playFX=../../../sound/farm/farm_animal 192
 return=skipped
 
 [out_of_resource_notification]
-title=_Out of Fields
+title=_Fields
+heading=_Out of Fields
 message=_The farmer working at this farm has no cleared soil to plant his seeds.
 productivity_threshold=30
 

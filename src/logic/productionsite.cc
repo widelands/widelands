@@ -64,12 +64,14 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (section != nullptr)
 	{
 		m_out_of_resource_title = section->get_string("title", "");
+		m_out_of_resource_heading = section->get_string("heading", "");
 		m_out_of_resource_message = section->get_string("message", "");
 		out_of_resource_productivity_threshold_ = section->get_natural("productivity_threshold", 100);
 	}
 	else
 	{
 		m_out_of_resource_title = "";
+		m_out_of_resource_heading = "";
 		m_out_of_resource_message = "";
 		out_of_resource_productivity_threshold_ = 100;
 	}
@@ -931,12 +933,12 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			set_production_result(descr().out_of_resource_title());
 
 			assert(!descr().out_of_resource_message().empty());
-			const WareIndex& resource_id = *descr().output_ware_types().begin();
 			send_message
 				(game,
 				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
 				 descr().icon_name(),
+				 descr().out_of_resource_heading(),
 				 descr().out_of_resource_message(),
 				 true,
 				 minutes * 60000, 0);

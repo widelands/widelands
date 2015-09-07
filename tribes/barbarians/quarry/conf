@@ -29,7 +29,8 @@ call=mine_stone
 return=skipped
 
 [out_of_resource_notification]
-title=_Out of Rocks
+title=_Rocks
+heading=_Out of Rocks
 message=_The stonemason working at this quarry can’t find any rocks in his work area.
 
 [idle]

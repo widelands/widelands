@@ -39,7 +39,8 @@ mine=gold 2 66 5 17
 produce=goldore:2
 
 [out_of_resource_notification]
-title=_Main Gold Vein Exhausted
+title=_Gold
+heading=_Main Gold Vein Exhausted
 message=_This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
 [idle]

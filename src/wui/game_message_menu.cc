@@ -77,7 +77,7 @@ GameMessageMenu::GameMessageMenu
 				(this, "filter_economy_messages",
 				 2 * 5 + 34, 5, 34, 34,
 				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_build_flag.png"),
+				 g_gr->images().get("pics/genstats_nrwares.png"),
 				 "",
 				 true);
 	m_economybtn->sigclicked.connect
@@ -276,7 +276,7 @@ void GameMessageMenu::update_record
 	er.set_picture
 		(ColStatus,
 		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
-	er.set_picture(ColTitle, message.icon());
+	er.set_picture(ColTitle, message.icon(), message.title());
 
 	const uint32_t time = message.sent();
 	er.set_string(ColTimeSent, gamestring_with_leading_zeros(time));
@@ -303,7 +303,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 			message_body.set_text(
 						(boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
 											"<p font-size=8> <br></p></rt>%s")
-						 % message->title()
+						 % message->heading()
 						 % message->body()).str());
 
 			set_display_message_type_label(message->message_type_category());
@@ -506,13 +506,15 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message::Type 
 		case Widelands::Message::Type::kGeologists:
 			return "pics/menu_geologist.png";
 		case Widelands::Message::Type::kEconomy:
-			return "pics/menu_build_flag.png";
+			return "pics/genstats_nrwares.png";
 		case Widelands::Message::Type::kSeafaring:
 			return "pics/start_expedition.png";
 		case Widelands::Message::Type::kWarfare:
 			return "pics/messages_warfare.png";
 		case Widelands::Message::Type::kScenario:
 			return "pics/menu_objectives.png";
+		case Widelands::Message::Type::kGameLogic:
+			return "pics/menu_help.png";
 		default:
 			return "pics/message_new.png";
 	}
