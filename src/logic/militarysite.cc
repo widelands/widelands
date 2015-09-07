@@ -582,19 +582,21 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	if (m_nexthealtime <= timeofgame) {
 		uint32_t total_heal = descr().get_heal_per_second();
 		std::vector<Soldier *> soldiers = present_soldiers();
-		uint32_t max_sumed_level = 0;
+		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier * soldier_to_heal = 0;
 
 		for (uint32_t i = 0; i < soldiers.size(); ++i) {
 			Soldier * s = soldiers[i];
 
-			// The healing algorithm is totally arbitrary
+			// The healing algorithm is:
+			// * heal soldier with highest total level
+			// * heal healthiest if multiple of same total level exist
 			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
-				if (0 == soldier_to_heal || s->get_sumed_level() > max_sumed_level ||
-						(s->get_sumed_level() == max_sumed_level &&
+				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
+						(s->get_total_level() == max_total_level &&
 								s->get_current_hitpoints() / s->get_max_hitpoints() > max_health)) {
-					max_sumed_level = s->get_sumed_level();
+					max_total_level = s->get_total_level();
 					max_health = s->get_current_hitpoints() / s->get_max_hitpoints();
 					soldier_to_heal = s;
 				}
