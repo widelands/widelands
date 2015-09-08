@@ -357,7 +357,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (get_display_flag(dfDebug) || !is_game) {
 		std::string node_text;
 		if (is_game) {
-			const std::string gametime(gametimestring(egbase().get_gametime()));
+			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
 			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align_TopLeft);
 

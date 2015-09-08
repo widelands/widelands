@@ -290,7 +290,8 @@ void GameMessageMenu::update_record
 	er.set_picture(ColTitle, message.icon(), message.title());
 
 	const uint32_t time = message.sent();
-	er.set_string(ColTimeSent, gamestring_with_leading_zeros(time));
+	// NOCOM(GunChleoc): Make data model for table, so these get sorted properly again.
+	er.set_string(ColTimeSent, gametimestring(time));
 }
 
 /*

@@ -177,15 +177,24 @@ char * gamestring_with_leading_zeros(uint32_t gametime)
 	return gamestringbuffer;
 }
 
-std::string gametimestring(uint32_t gametime)
+std::string gametimestring(uint32_t gametime, bool show_seconds)
 {
 	// update buffer
 	std::string result = gamestring_with_leading_zeros(gametime);
+	if (!show_seconds) {
+		result = result.substr(0, result.size() - 3);
+	}
 
 	// remove leading 0s
 	int i = 0;
 	while (result.at(i) == '0') ++i;
-	if (result.at(i) == ':') ++i;
+	if (result.at(i) == ':') {
+		if (show_seconds) {
+			++i;
+		} else {
+			--i;
+		}
+	}
 
 	return result.substr(i);
 }
