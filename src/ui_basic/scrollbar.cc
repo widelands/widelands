@@ -83,6 +83,10 @@ void Scrollbar::set_steps(int32_t steps)
 }
 
 
+bool Scrollbar::is_enabled() const {
+	return m_steps != 1 || m_force_draw;
+}
+
 /**
  * \return the number of steps
  */
@@ -309,8 +313,9 @@ void Scrollbar::draw(RenderTarget & dst)
 	uint32_t knobpos = get_knob_pos();
 	uint32_t knobsize = get_knob_size();
 
-	if (m_steps == 1 && !m_force_draw)
-		return; // don't draw a not doing scrollbar
+	if (!is_enabled()) {
+		return; // Don't draw a scrollbar that doesn't do anything
+	}
 
 	if (m_horizontal) {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {

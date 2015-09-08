@@ -316,7 +316,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				continue;
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
-			uint16_t text_width = entry_text_im->width();
+
 			if (alignment & Align_Right) {
 				point.x += curw - picw;
 			} else if (alignment & Align_HCenter) {
@@ -325,6 +325,12 @@ void Table<void *>::draw(RenderTarget & dst)
 			// Adjust y for text if image is higher than text
 			if (lineheight > entry_text_im->height()) {
 				point.y = point.y + (lineheight - entry_text_im->height()) / 2;
+			}
+
+			// Add an offset for rightmost column when the scrollbar is shown.
+			uint16_t text_width = entry_text_im->width();
+			if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+				text_width = text_width + m_scrollbar->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 			// Crop to column width
