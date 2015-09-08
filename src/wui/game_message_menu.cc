@@ -38,25 +38,40 @@ inline InteractivePlayer & GameMessageMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
+constexpr int kWindowWidth = 400;
+constexpr int kWindowHeight = 375;
+constexpr int kTableHeight = 125;
+constexpr int kPadding = 5;
+constexpr int kButtonSize = 34;
+constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
+
 
 GameMessageMenu::GameMessageMenu
 	(InteractivePlayer & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
+		(&plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
 	message_body
 		(this,
-		 5, 154, 570, 216 - 5 - 34, // Subtracting height for message type icon
+		 kPadding,
+		 kMessageBodyY,
+		 kWindowWidth - 2 * kPadding,
+		 get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
 
-	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 110, 570, 110);
+	list = new UI::Table<uintptr_t>(
+				 this,
+				 kPadding,
+				 kButtonSize + 2 * kPadding,
+				 kWindowWidth - 2 * kPadding,
+				 kTableHeight);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
+	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 120, _("Title"));
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
-	list->add_column(330, _("Title"));
+	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
 	list->add_column(120, _("Time sent"));
 	list->focus();
 
@@ -64,7 +79,7 @@ GameMessageMenu::GameMessageMenu
 	m_geologistsbtn =
 			new UI::Button
 				(this, "filter_geologists_messages",
-				 5, 5, 34, 34,
+				 kPadding, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("pics/but0.png"),
 				 g_gr->images().get("pics/menu_geologist.png"),
 				 "",
@@ -75,7 +90,7 @@ GameMessageMenu::GameMessageMenu
 	m_economybtn =
 			new UI::Button
 				(this, "filter_economy_messages",
-				 2 * 5 + 34, 5, 34, 34,
+				 2 * kPadding + kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("pics/but0.png"),
 				 g_gr->images().get("pics/genstats_nrwares.png"),
 				 "",
@@ -86,7 +101,7 @@ GameMessageMenu::GameMessageMenu
 	m_seafaringbtn =
 			new UI::Button
 				(this, "filter_seafaring_messages",
-				 3 * 5 + 2 * 34, 5, 34, 34,
+				 3 * kPadding + 2 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("pics/but0.png"),
 				 g_gr->images().get("pics/start_expedition.png"),
 				 "",
@@ -97,7 +112,7 @@ GameMessageMenu::GameMessageMenu
 	m_warfarebtn =
 			new UI::Button
 				(this, "filter_warfare_messages",
-				 4 * 5 + 3 * 34, 5, 34, 34,
+				 4 * kPadding + 3 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("pics/but0.png"),
 				 g_gr->images().get("pics/messages_warfare.png"),
 				 "",
@@ -108,7 +123,7 @@ GameMessageMenu::GameMessageMenu
 	m_scenariobtn =
 			new UI::Button
 				(this, "filter_scenario_messages",
-				 5 * 5 + 4 * 34, 5, 34, 34,
+				 5 * kPadding + 4 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("pics/but0.png"),
 				 g_gr->images().get("pics/menu_objectives.png"),
 				 "",
@@ -123,7 +138,7 @@ GameMessageMenu::GameMessageMenu
 	m_archivebtn =
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
-			 6 * 5 + 9 * 34 + 34, 5, 34, 34,
+			 kPadding, kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archive.png"),
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
@@ -136,7 +151,10 @@ GameMessageMenu::GameMessageMenu
 	m_togglemodebtn =
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
-			 7 * 5 + 10 * 34 + 34, 5, 34, 34,
+			 m_archivebtn->get_x() + m_archivebtn->get_w() + kPadding,
+			 m_archivebtn->get_y(),
+			 kButtonSize,
+			 kButtonSize,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archived.png"),
 			 _("Show Archive"));
@@ -146,7 +164,7 @@ GameMessageMenu::GameMessageMenu
 	m_centerviewbtn =
 		new UI::Button
 			(this, "center_main_mapview_on_location",
-			 580 - 5 - 34, 5, 34, 34,
+			 kWindowWidth - kPadding - kButtonSize, m_archivebtn->get_y(), kButtonSize, kButtonSize,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
 			 /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
@@ -155,14 +173,6 @@ GameMessageMenu::GameMessageMenu
 			  % _("Center main mapview on location")).str(),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
-
-
-	m_display_message_type_label =
-		new UI::MultilineTextarea
-			(this,
-			 5, 375 - 5 - 34, 5 * 34, 40,
-			 "<rt image=pics/message_new.png></rt>",
-			 UI::Align::Align_BottomLeft, false);
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -559,13 +569,6 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 			/** TRANSLATORS: This is the default message type */
 			message_type_tooltip = _("General");
 	}
-
-	m_display_message_type_label->set_tooltip(
-				 /** TRANSLATORS: %s is a message's type */
-				 (boost::format(_("Type of this message: %s"))
-				  /** TRANSLATORS: Tooltip in the messages window */
-				  % message_type_tooltip).str());
-	m_display_message_type_label->set_text(message_type_image);
 }
 
 

@@ -48,7 +48,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	enum Cols {ColType, ColStatus, ColTitle, ColTimeSent};
+	enum Cols {ColTitle, ColStatus, ColType, ColTimeSent};
 	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	InteractivePlayer & iplayer() const;
@@ -79,7 +79,6 @@ private:
 	UI::Button * m_warfarebtn;
 	UI::Button * m_scenariobtn;
 	Widelands::Message::Type m_message_filter;
-	UI::MultilineTextarea * m_display_message_type_label;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H
