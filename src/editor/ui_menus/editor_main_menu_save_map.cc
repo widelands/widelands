@@ -374,26 +374,66 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	complete_filename            += "/";
 	complete_filename            += filename;
 
+	std::string tmpName = "";
+
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
 		std::string s =
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
 				% FileSystem::fs_filename(filename.c_str())).str();
-		UI::WLMessageBox mbox
-			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
-		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
-			return false;
+		{
+			UI::WLMessageBox mbox
+				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+				return false;
+		}
 
-		g_fs->fs_unlink(complete_filename);
+		// save to a tmp file/dir first, rename later
+		// (important to keep script files in the script directory)
+		tmpName = complete_filename + ".tmp";
+		if (g_fs->file_exists(tmpName)) {
+			s = (boost::format(_
+					("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
+						% FileSystem::fs_filename(filename.c_str())).str();
+			UI::WLMessageBox mbox
+				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+			mbox.run<UI::Panel::Returncodes>();
+			return false;
+		}
+
+		// for discussion: if the directory to write to already exists
+		// keep the script files of that direcoty?
+		// though decision, I would vote: no
+		// I vote for: keep the script files of the source directory
+		// (which may be none if its a new map)
+		// compromise might be: keep target scripts if a new map, keep source scripts if source exists
+		/*
+		std::unique_ptr<FileSystem> fs_tmp
+			(g_fs->create_sub_file_system(complete_filename, FileSystem::DIR));
+		eia().egbase.map().swap_filesystem(fs_tmp);
+		*/
 	}
 
 	std::unique_ptr<FileSystem> fs
-			(g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+		(g_fs->create_sub_file_system(tmpName.empty() ? complete_filename : tmpName,
+			binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::MapSaver wms(*fs, eia().egbase());
 	try {
 		wms.save();
 		eia().set_need_save(false);
+
+		// if saved to a tmp file earlier, rename now
+		if (!tmpName.empty()) {
+			g_fs->fs_unlink(complete_filename);
+			g_fs->fs_rename(tmpName, complete_filename);
+			fs.reset(g_fs->make_sub_file_system(complete_filename));
+		}
+
+		eia().egbase().map().swap_filesystem(fs);
 	} catch (const std::exception & e) {
+		if (!tmpName.empty()) {
+			g_fs->fs_unlink(tmpName);
+		}
 		std::string s =
 			_
 			("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "

@@ -308,6 +308,8 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	m_port_spaces.clear();
+
+	//filesystem_.reset(nullptr);
 }
 
 /*
@@ -472,6 +474,11 @@ bool Map::get_scenario_player_closeable(const PlayerNumber p) const
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_closeables[p - 1];
+}
+
+void Map::swap_filesystem(std::unique_ptr<FileSystem>& fs)
+{
+	filesystem_.swap(fs);
 }
 
 FileSystem* Map::filesystem() const {
