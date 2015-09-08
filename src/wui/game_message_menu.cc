@@ -30,7 +30,6 @@
 #include "logic/playercommand.h"
 #include "wui/interactive_player.h"
 
-// NOCOM(GunChleoc): Fix table row height (overlapping icons)
 // NOCOM(GunChleoc): Data model for table to reduce game time width
 // NOCOM(GunChleoc): Box layout
 

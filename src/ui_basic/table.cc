@@ -251,6 +251,18 @@ void Table<void *>::clear()
 */
 void Table<void *>::draw(RenderTarget & dst)
 {
+	// Adjust line height for pictures
+	m_lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
+	for (EntryRecord* er : m_entry_records) {
+		Columns::size_type const nr_columns = m_columns.size();
+		for (uint32_t i = 0; i < nr_columns; ++i) {
+			const Image* entry_picture = er->get_picture(i);
+			if (entry_picture) {
+				m_lineheight = std::max(m_lineheight, entry_picture->height());
+			}
+		}
+	}
+
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
@@ -309,6 +321,10 @@ void Table<void *>::draw(RenderTarget & dst)
 				point.x += curw - picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
+			}
+			// Adjust y for text if image is higher than text
+			if (lineheight > entry_text_im->height()) {
+				point.y = point.y + (lineheight - entry_text_im->height()) / 2;
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 			// Crop to column width
@@ -468,7 +484,6 @@ void Table<void *>::select(const uint32_t i)
 Table<void *>::EntryRecord & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
-	// NOCOM(GunChleoc): Adjust this for images
 	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
