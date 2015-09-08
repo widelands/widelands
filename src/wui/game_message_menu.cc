@@ -41,7 +41,7 @@ inline InteractivePlayer & GameMessageMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
-constexpr int kWindowWidth = 400;
+constexpr int kWindowWidth = 355;
 constexpr int kWindowHeight = 375;
 constexpr int kTableHeight = 125;
 constexpr int kPadding = 5;
@@ -72,10 +72,13 @@ GameMessageMenu::GameMessageMenu
 				 kTableHeight);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 120, _("Title"));
+	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
-	list->add_column(120, _("Time sent"));
+	/** TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time Sent" */
+	/** TRANSLATORS: This is used in the game messages menu - please open an issue if you need more space. */
+	// NOCOM(GunChleoc): Scrollbar overlays the messages. Fix this in the table class.
+	list->add_column(75, pgettext("message", "Sent"), "", UI::Align_Right);
 	list->focus();
 
 	// Buttons for message types
