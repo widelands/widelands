@@ -30,6 +30,10 @@
 #include "logic/playercommand.h"
 #include "wui/interactive_player.h"
 
+// NOCOM(GunChleoc): Fix table row height (overlapping icons)
+// NOCOM(GunChleoc): Data model for table to reduce game time width
+// NOCOM(GunChleoc): Box layout
+
 using Widelands::Message;
 using Widelands::MessageId;
 using Widelands::MessageQueue;
@@ -254,7 +258,6 @@ void GameMessageMenu::think()
 
 	// Filter message type
 	if (m_message_filter != Message::Type::kAllMessages) {
-		set_display_message_type_label(m_message_filter);
 		for (uint32_t j = list->size(); j; --j) {
 			MessageId m_id((*list)[j - 1]);
 			if (Message const * const message = mq[m_id]) {
@@ -274,7 +277,6 @@ void GameMessageMenu::think()
 	} else {
 		m_centerviewbtn->set_enabled(false);
 		message_body.set_text(std::string());
-		set_display_message_type_label(Widelands::Message::Type::kNoMessages);
 	}
 }
 
@@ -282,7 +284,7 @@ void GameMessageMenu::update_record
 	(UI::Table<uintptr_t>::EntryRecord & er,
 	 const Widelands::Message & message)
 {
-	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message.type())));
+	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message)));
 	er.set_picture
 		(ColStatus,
 		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
@@ -315,8 +317,6 @@ void GameMessageMenu::selected(uint32_t const t) {
 											"<p font-size=8> <br></p></rt>%s")
 						 % message->heading()
 						 % message->body()).str());
-
-			set_display_message_type_label(message->message_type_category());
 			return;
 		}
 	}
@@ -511,8 +511,8 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 /**
  * Get the filename for a message category's icon
  */
-std::string GameMessageMenu::display_message_type_icon(Widelands::Message::Type msgtype) {
-	switch (msgtype) {
+std::string GameMessageMenu::display_message_type_icon(Widelands::Message message) {
+	switch (message.message_type_category()) {
 		case Widelands::Message::Type::kGeologists:
 			return "pics/menu_geologist.png";
 		case Widelands::Message::Type::kEconomy:
@@ -527,47 +527,6 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message::Type 
 			return "pics/menu_help.png";
 		default:
 			return "pics/message_new.png";
-	}
-}
-
-
-
-/**
- * Update image and tooltip for message category label
- */
-void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type msgtype) {
-	std::string message_type_tooltip = "";
-	const std::string message_type_image =
-			(boost::format("<rt image=%s></rt>") % display_message_type_icon(msgtype)).str();
-
-	switch (msgtype) {
-		case Widelands::Message::Type::kGeologists:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Geologists");
-			break;
-		case Widelands::Message::Type::kEconomy:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Economy");
-			break;
-		case Widelands::Message::Type::kSeafaring:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Seafaring");
-			break;
-		case Widelands::Message::Type::kWarfare:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Warfare");
-			break;
-		case Widelands::Message::Type::kScenario:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Scenario");
-			break;
-		case Widelands::Message::Type::kNoMessages:
-			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
-			message_type_tooltip =  _("No message found");
-			break;
-		default:
-			/** TRANSLATORS: This is the default message type */
-			message_type_tooltip = _("General");
 	}
 }
 

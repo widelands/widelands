@@ -468,6 +468,7 @@ void Table<void *>::select(const uint32_t i)
 Table<void *>::EntryRecord & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
+	// NOCOM(GunChleoc): Adjust this for images
 	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
