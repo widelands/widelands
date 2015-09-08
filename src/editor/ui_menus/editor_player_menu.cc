@@ -80,7 +80,7 @@ EditorPlayerMenu::EditorPlayerMenu
 		Section & global = prof.get_safe_section("tribe");
 		const char* descname = global.get_safe_string("name");
 		m_tribenames.push_back(tribename);
-		m_tribe_descnames.emplace(tribename, descname);
+		m_tribe_descnames.insert(std::make_pair(tribename, descname));
 	}
 
 	set_inner_size(375, 135);
