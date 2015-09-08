@@ -251,18 +251,6 @@ void Table<void *>::clear()
 */
 void Table<void *>::draw(RenderTarget & dst)
 {
-	// Adjust line height for pictures
-	m_lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
-	for (EntryRecord* er : m_entry_records) {
-		Columns::size_type const nr_columns = m_columns.size();
-		for (uint32_t i = 0; i < nr_columns; ++i) {
-			const Image* entry_picture = er->get_picture(i);
-			if (entry_picture) {
-				m_lineheight = std::max(m_lineheight, entry_picture->height());
-			}
-		}
-	}
-
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
@@ -290,24 +278,31 @@ void Table<void *>::draw(RenderTarget & dst)
 			Align    const alignment = column.alignment;
 
 			const Image* entry_picture = er.get_picture(i);
-			const std::string &       entry_string  = er.get_string (i);
-			uint32_t picw = 0;
-			uint32_t pich = 0;
+			const std::string& entry_string = er.get_string(i);
+
+			Point point(curx, y);
+			int picw = 0;
+			int pich = 0;
 
 			if (entry_picture) {
 				picw = entry_picture->width();
 				pich = entry_picture->height();
-			}
-			Point point(curx, y);
-			if (entry_picture) {
-				dst.blit
-					(point +
-					 Point
-					 	(0,
-					 	 (static_cast<int32_t>(lineheight) -
-					 	  static_cast<int32_t>(pich))
-					 	 / 2),
-					 entry_picture);
+
+				if (pich > 0 && pich > lineheight) {
+					// Scale image to fit lineheight
+					double image_scale = static_cast<double>(lineheight) / pich;
+					int blit_width = image_scale * picw;
+
+					dst.blitrect_scale(
+								Rect(point.x, point.y, blit_width, lineheight),
+								entry_picture,
+								Rect(0, 0, picw, pich),
+								1.,
+								BlendMode::UseAlpha);
+					picw = blit_width;
+				} else {
+					dst.blit(Point(point.x, point.y + (lineheight - pich) / 2), entry_picture);
+				}
 				point.x += picw;
 			}
 
@@ -321,10 +316,6 @@ void Table<void *>::draw(RenderTarget & dst)
 				point.x += curw - picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
-			}
-			// Adjust y for text if image is higher than text
-			if (lineheight > entry_text_im->height()) {
-				point.y = point.y + (lineheight - entry_text_im->height()) / 2;
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
