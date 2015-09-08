@@ -294,14 +294,21 @@ void Table<void *>::draw(RenderTarget & dst)
 					int blit_width = image_scale * picw;
 
 					dst.blitrect_scale(
-								Rect(point.x, point.y, blit_width, lineheight),
+								// Center align if text is empty
+								Rect(entry_string.empty() ? point.x + (curw - blit_width) / 2 : point.x,
+									  point.y,
+									  blit_width,
+									  lineheight),
 								entry_picture,
 								Rect(0, 0, picw, pich),
 								1.,
 								BlendMode::UseAlpha);
 					picw = blit_width;
 				} else {
-					dst.blit(Point(point.x, point.y + (lineheight - pich) / 2), entry_picture);
+					// Center align if text is empty
+					dst.blit(Point(entry_string.empty() ? point.x + (curw - picw / 2) : point.x,
+										point.y + (lineheight - pich) / 2),
+								entry_picture);
 				}
 				point.x += picw;
 			}
