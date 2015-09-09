@@ -395,6 +395,7 @@ census_and_statistics_01 = {
 teaching_about_messages = {
    popup = true,
    title = _"Messages",
+   heading = _"Introducing Messages",
    body = rt(
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..

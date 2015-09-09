@@ -306,7 +306,7 @@ function messages()
    -- Teach the player about receiving messages
    sleep(10)
 
-   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages)
+   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
    local o = add_campaign_objective(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end

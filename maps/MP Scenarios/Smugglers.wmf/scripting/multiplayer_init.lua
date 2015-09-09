@@ -38,9 +38,13 @@ points = { 0, 0 }
 -- =================
 -- Utility functions
 -- =================
-function send_to_all(text)
+function send_to_all(text, long_title)
    for idx,plr in ipairs(game.players) do
-      plr:send_message(_ "Game Status", text, {popup=true})
+      if (long_title ~= nil and long_title ~= "") then
+         send_message(plr, _"Status", text, {popup=true, heading=long_title})
+      else
+         send_message(plr, _"Status", text, {popup=true})
+      end
    end
 end
 
@@ -138,10 +142,10 @@ function initialize()
       end
    end
 
-   send_to_all(welcome_msg:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
+   send_to_all(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)), welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implementes
-   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
+   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
 
    for idx,descr in ipairs(route_descrs) do
       run(wait_for_established_route, descr)
