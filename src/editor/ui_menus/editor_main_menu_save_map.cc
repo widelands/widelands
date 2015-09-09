@@ -165,10 +165,8 @@ void MainMenuSaveMap::clicked_ok() {
 	if (filename == "") //  Maybe a directory is selected.
 		filename = m_ls->get_selected();
 
-	if
-		(g_fs->is_directory(filename.c_str())
-		 &&
-		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
+	if (g_fs->is_directory(filename.c_str())
+		&& !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
 		m_curdir = g_fs->canonicalize_name(filename);
 		m_ls->clear();
@@ -400,49 +398,47 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			mbox.run<UI::Panel::Returncodes>();
 			return false;
 		}
-
-		// for discussion: if the directory to write to already exists
-		// keep the script files of that direcoty?
-		// though decision, I would vote: no
-		// I vote for: keep the script files of the source directory
-		// (which may be none if its a new map)
-		// compromise might be: keep target scripts if a new map, keep source scripts if source exists
-		/*
-		std::unique_ptr<FileSystem> fs_tmp
-			(g_fs->create_sub_file_system(complete_filename, FileSystem::DIR));
-		eia().egbase.map().swap_filesystem(fs_tmp);
-		*/
 	}
 
-	std::unique_ptr<FileSystem> fs
-		(g_fs->create_sub_file_system(tmpName.empty() ? complete_filename : tmpName,
-			binary ? FileSystem::ZIP : FileSystem::DIR));
-	Widelands::MapSaver wms(*fs, eia().egbase());
-	try {
-		wms.save();
-		eia().set_need_save(false);
+	{ // fs scope
+		std::unique_ptr<FileSystem> fs
+			(g_fs->create_sub_file_system(tmpName.empty() ? complete_filename : tmpName,
+				binary ? FileSystem::ZIP : FileSystem::DIR));
+		Widelands::MapSaver wms(*fs, eia().egbase());
 
-		// if saved to a tmp file earlier, rename now
-		if (!tmpName.empty()) {
-			g_fs->fs_unlink(complete_filename);
-			g_fs->fs_rename(tmpName, complete_filename);
-			fs.reset(g_fs->make_sub_file_system(complete_filename));
-		}
+		try {
+			wms.save();
+			eia().set_need_save(false);
 
-		eia().egbase().map().swap_filesystem(fs);
-	} catch (const std::exception & e) {
-		if (!tmpName.empty()) {
-			g_fs->fs_unlink(tmpName);
+			// if saved to a tmp file earlier, rename now
+			if (!tmpName.empty()) {
+				g_fs->fs_unlink(complete_filename);
+				g_fs->fs_rename(tmpName, complete_filename);
+				// also change fs, as we assign it to the map below
+				fs.reset(g_fs->make_sub_file_system(complete_filename));
+			}
+
+			// set the filesystem of the map to the current save file / directory
+			eia().egbase().map().swap_filesystem(fs);
+			// DONT use fs as of here, its garbage now!
+
+		} catch (const std::exception & e) {
+			std::string s =
+				_
+				("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
+				 "given:\n");
+			s += e.what();
+			UI::WLMessageBox  mbox
+				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+			mbox.run<UI::Panel::Returncodes>();
+
+			// cleanup tmp file if it was created
+			if (!tmpName.empty()) {
+				g_fs->fs_unlink(tmpName);
+			}
 		}
-		std::string s =
-			_
-			("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-			 "given:\n");
-		s += e.what();
-		UI::WLMessageBox  mbox
-			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
-	}
+	} // end fs scope, dont use it
+
 	die();
 
 	return true;

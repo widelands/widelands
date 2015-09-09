@@ -309,6 +309,9 @@ void Map::cleanup() {
 
 	m_port_spaces.clear();
 
+	// should be done here ... but WidelandsMapLoader::preload_map calls this cleanup
+	// AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
+	// ... so we can't do it here :/
 	//filesystem_.reset(nullptr);
 }
 
@@ -349,6 +352,8 @@ void Map::create_empty_map
 		}
 	}
 	recalc_whole_map(world);
+
+	filesystem_.reset(nullptr);
 }
 
 
