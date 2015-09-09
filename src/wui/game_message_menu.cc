@@ -30,7 +30,6 @@
 #include "logic/playercommand.h"
 #include "wui/interactive_player.h"
 
-// NOCOM(GunChleoc): Data model for table to reduce game time width
 // NOCOM(GunChleoc): Box layout
 
 using Widelands::Message;
@@ -77,7 +76,6 @@ GameMessageMenu::GameMessageMenu
 	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
 	/** TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time Sent" */
 	/** TRANSLATORS: This is used in the game messages menu - please open an issue if you need more space. */
-	// NOCOM(GunChleoc): Scrollbar overlays the messages. Fix this in the table class.
 	list->add_column(75, pgettext("message", "Sent"), "", UI::Align_Right);
 	list->focus();
 
@@ -184,28 +182,96 @@ GameMessageMenu::GameMessageMenu
 		center_to_parent();
 
 	list->set_column_compare
-		(ColStatus, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+		(ColTitle, boost::bind(&GameMessageMenu::compare_title, this, _1, _2));
+	list->set_column_compare
+		(ColStatus, boost::bind(&GameMessageMenu::compare_status, this, _1, _2));
+	list->set_column_compare
+		(ColType,
+		 boost::bind(&GameMessageMenu::compare_type, this, _1, _2));
+	list->set_column_compare
+		(ColTimeSent,
+		 boost::bind(&GameMessageMenu::compare_time_sent, this, _1, _2));
+
 	list->set_sort_column(ColTimeSent);
-	list->set_sort_descending(true);
 
 	set_can_focus(true);
 	focus();
 }
 
 /**
- * When comparing messages by status, new messages come before others.
+ * When comparing messages by title, order is alphabetical.
+ * If both are identical, sort by time sent.
  */
-bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
+bool GameMessageMenu::compare_title(uint32_t a, uint32_t b)
 {
 	MessageQueue & mq = iplayer().player().messages();
 	const Message * msga = mq[MessageId((*list)[a])];
 	const Message * msgb = mq[MessageId((*list)[b])];
 
 	if (msga && msgb) {
+		if (msga->title() == msgb->title()) {
+			return compare_time_sent(a, b);
+		}
+		return msga->title() < msgb->title();
+	}
+	return false; // shouldn't happen
+}
+
+/**
+ * When comparing messages by status, new messages come before others.
+ * If both are identical, sort by time sent.
+ */
+bool GameMessageMenu::compare_status(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		if (msga->status() == msgb->status()) {
+			return compare_time_sent(a, b);
+		}
 		return msga->status() == Message::Status::kNew && msgb->status() != Message::Status::kNew;
 	}
 	return false; // shouldn't happen
 }
+
+/**
+ * When comparing messages by type, order is the same as in the enum class.
+ * If both are identical, sort by time sent.
+ */
+bool GameMessageMenu::compare_type(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		const Widelands::Message::Type cat_a = msga->message_type_category();
+		const Widelands::Message::Type cat_b = msgb->message_type_category();
+		if (cat_a == cat_b) {
+			return compare_time_sent(a, b);
+		}
+		return static_cast<int>(cat_a) < static_cast<int>(cat_b);
+	}
+	return false; // shouldn't happen
+}
+
+/**
+ * When comparing messages by time sent, older messages come before others.
+ */
+bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		return msga->sent() > msgb->sent();
+	}
+	return false; // shouldn't happen
+}
+
 
 static char const * const status_picture_filename[] = {
 	"pics/message_new.png",
@@ -223,6 +289,7 @@ void GameMessageMenu::show_new_message
 		toggle_mode();
 	UI::Table<uintptr_t>::EntryRecord & te = list->add(id.value(), true);
 	update_record(te, message);
+	list->sort();
 }
 
 void GameMessageMenu::think()
@@ -282,9 +349,7 @@ void GameMessageMenu::think()
 	}
 }
 
-void GameMessageMenu::update_record
-	(UI::Table<uintptr_t>::EntryRecord & er,
-	 const Widelands::Message & message)
+void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message& message)
 {
 	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message)));
 	er.set_picture
@@ -293,7 +358,6 @@ void GameMessageMenu::update_record
 	er.set_picture(ColTitle, message.icon(), message.title());
 
 	const uint32_t time = message.sent();
-	// NOCOM(GunChleoc): Make data model for table, so these get sorted properly again.
 	er.set_string(ColTimeSent, gametimestring(time));
 }
 

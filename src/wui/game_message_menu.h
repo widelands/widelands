@@ -55,7 +55,10 @@ private:
 	void selected(uint32_t);
 	void double_clicked(uint32_t);
 
-	bool status_compare(uint32_t a, uint32_t b);
+	bool compare_title(uint32_t a, uint32_t b);
+	bool compare_status(uint32_t a, uint32_t b);
+	bool compare_type(uint32_t a, uint32_t b);
+	bool compare_time_sent(uint32_t a, uint32_t b);
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();

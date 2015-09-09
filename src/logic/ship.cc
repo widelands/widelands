@@ -626,7 +626,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_message(
 						game,
 						/** TRANSLATORS: A ship has discovered land */
-						_("Land ahoy!"),
+						_("Land Ahoy!"),
 						_("Coast Reached"),
 						_("An expedition ship reached a coast and is waiting for further commands."),
 						"ship_scout_ne.png");
