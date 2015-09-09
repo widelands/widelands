@@ -121,7 +121,7 @@ void MapPlayersMessagesPacket::read
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
-					// NOCOM(GunChleoc): Test saveloading!
+
 					messages.add_message
 						(*new Message
 							(static_cast<Message::Type>(s->get_natural("type")),

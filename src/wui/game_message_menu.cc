@@ -30,8 +30,6 @@
 #include "logic/playercommand.h"
 #include "wui/interactive_player.h"
 
-// NOCOM(GunChleoc): Box layout
-
 using Widelands::Message;
 using Widelands::MessageId;
 using Widelands::MessageQueue;
@@ -148,7 +146,7 @@ GameMessageMenu::GameMessageMenu
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 			 (boost::format(_("Del: %s"))
 			  /** TRANSLATORS: Tooltip in the messages window */
-			  % _("Archive selected messages")).str());
+			  % _("Archive selected message")).str());
 	m_archivebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
 
@@ -609,7 +607,7 @@ void GameMessageMenu::toggle_mode()
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
-											% _("Restore selected messages")).str());
+											% _("Restore selected message")).str());
 		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_new.png"));
 		m_togglemodebtn->set_tooltip(_("Show Inbox"));
 		break;
@@ -620,7 +618,7 @@ void GameMessageMenu::toggle_mode()
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
-											% _("Archive selected messages")).str());
+											% _("Archive selected message")).str());
 		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_archived.png"));
 		m_togglemodebtn->set_tooltip(_("Show Archive"));
 		break;

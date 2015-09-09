@@ -118,9 +118,9 @@ function bad_boy_sentry()
                -- Give the callback a chance to veto the deletion. Maybe
                -- we expect the player to build something at the moment
                if not immovable_is_legal(f.immovable) then
-                  -- scould the player
+                  -- scold the player
                   if not sent_msg then
-                     message_box_objective(plr, scould_player)
+                     message_box_objective(plr, scold_player)
                      sent_msg = true
                   end
 
