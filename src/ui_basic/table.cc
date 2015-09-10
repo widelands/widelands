@@ -288,14 +288,24 @@ void Table<void *>::draw(RenderTarget & dst)
 				picw = entry_picture->width();
 				pich = entry_picture->height();
 
+				int draw_x = point.x;
+
 				if (pich > 0 && pich > lineheight) {
 					// Scale image to fit lineheight
 					double image_scale = static_cast<double>(lineheight) / pich;
 					int blit_width = image_scale * picw;
 
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - blit_width - m_scrollbar->get_w()) / 2 ;
+						} else {
+							draw_x = point.x + (curw - blit_width) / 2 ;
+						}
+					}
+
 					dst.blitrect_scale(
 								// Center align if text is empty
-								Rect(entry_string.empty() ? point.x + (curw - blit_width) / 2 : point.x,
+								Rect(draw_x,
 									  point.y,
 									  blit_width,
 									  lineheight),
@@ -305,10 +315,14 @@ void Table<void *>::draw(RenderTarget & dst)
 								BlendMode::UseAlpha);
 					picw = blit_width;
 				} else {
-					// Center align if text is empty
-					dst.blit(Point(entry_string.empty() ? point.x + (curw - picw / 2) : point.x,
-										point.y + (lineheight - pich) / 2),
-								entry_picture);
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - picw - m_scrollbar->get_w()) / 2 ;
+						} else {
+							draw_x = point.x + (curw - picw) / 2 ;
+						}
+					}
+					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}
