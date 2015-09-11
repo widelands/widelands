@@ -184,6 +184,24 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 	}
 }
 
+void RenderTarget::blit_monochrome(const Point& dst,
+									  const Image* image,
+									  const RGBAColor& blend_mode, UI::Align align) {
+	Point destination_point(dst);
+
+	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+
+	Rect srcrc(Point(0, 0), image->width(), image->height());
+
+	if (to_surface_geometry(&destination_point, &srcrc)) {
+		::blit_monochrome(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+			  *image,
+			  srcrc,
+			  blend_mode,
+			  m_surface);
+	}
+}
+
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
@@ -235,7 +253,7 @@ void RenderTarget::blitrect_scale_monochrome(const Rect& destination_rect,
 	Point destination_point(destination_rect.x, destination_rect.y);
 	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
-		blit_monochrome(
+		::blit_monochrome(
 		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
 		   *image,
 		   source_rect,
