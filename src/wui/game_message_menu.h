@@ -48,7 +48,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	enum Cols {ColTitle, ColStatus, ColType, ColTimeSent};
+	enum Cols {ColTitle, ColType, ColStatus, ColTimeSent};
 	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	InteractivePlayer & iplayer() const;

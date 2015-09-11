@@ -70,8 +70,8 @@ GameMessageMenu::GameMessageMenu
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
-	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
+	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	/** TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time Sent" */
 	/** TRANSLATORS: This is used in the game messages menu - please open an issue if you need more space. */
 	list->add_column(75, pgettext("message", "Sent"), "", UI::Align_Right);
