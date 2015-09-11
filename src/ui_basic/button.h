@@ -45,6 +45,7 @@ struct Button : public NamedPanel {
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
+	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const std::string & name,
