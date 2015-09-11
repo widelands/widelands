@@ -1110,6 +1110,8 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
 	PROP_RO(LuaMessage, sent),
 	PROP_RO(LuaMessage, field),
 	PROP_RW(LuaMessage, status),
+	PROP_RO(LuaMessage, heading),
+	PROP_RO(LuaMessage, icon_name),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1207,6 +1209,28 @@ int LuaMessage::set_status(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. attribute:: heading
+
+		(RO) The long heading of this message that is shown in the body
+*/
+int LuaMessage::get_heading(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).heading());
+	return 1;
+}
+
+/* RST
+	.. attribute:: icon_name
+
+		(RO) The filename for the icon that is shown with the message title
+*/
+int LuaMessage::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).icon_filename());
+	return 1;
+}
+
+
 
 /*
  ==========================================================

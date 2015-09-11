@@ -111,7 +111,7 @@ end
 	--else
 		--assert(false)
 		--end
-		
+
    --click_on_ship(ship_to_click)
    --if click_button("cancel_expedition") then
 		--sleep(100)
@@ -127,9 +127,9 @@ end
 		--assert_true(click_button("ok"))
 		--sleep(100)
 		--close_windows()
-		--sleep(100) 
+		--sleep(100)
 		--print (" DEBUG ship sunk")
-   --end   
+   --end
 --end
 
 
@@ -196,13 +196,13 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
-   
+   wait_for_message("Ready")
+
    --if current test requires second ship...
    if needs_second_ship then
       create_second_ship()
    end
-   
+
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -233,7 +233,7 @@ function test_cancel_started_expedition_underway()
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -272,14 +272,14 @@ function test_cancel_when_port_space_was_reached()
 
    -- Send expedition to port space.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Ready")
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 
    first_ship.island_explore_direction="ccw"
    sleep(2000)
    assert_equal("ccw",first_ship.island_explore_direction)
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
@@ -310,20 +310,20 @@ function test_transporting_works()
 
 
    port:start_expedition()
-   wait_for_message("Expedition Ready")
-   
+   wait_for_message("Ready")
+
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship
    elseif second_ship.state=="exp_waiting" then
       expedition_ship=second_ship
    else
       assert(false)
-   end   
-   
+   end
+
    expedition_ship.island_explore_direction="ccw"
    sleep(2000)
    assert_equal("ccw",expedition_ship.island_explore_direction)
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
    expedition_ship:build_colonization_port()
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
