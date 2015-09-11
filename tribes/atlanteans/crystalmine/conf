@@ -86,7 +86,8 @@ call=mine_diamond
 return=skipped
 
 [out_of_resource_notification]
-title=_Crystal
+# Translators: Short for "Out of ..." for a resource
+title=_No Crystal
 heading=_Main Crystal Vein Exhausted
 message=_This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
 

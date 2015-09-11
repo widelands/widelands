@@ -23,7 +23,8 @@ sleep=18000
 worker=fish
 
 [out_of_resource_notification]
-title=_Fish
+# Translators: Short for "Out of ..." for a resource
+title=_No Fish
 heading=_Out of Fish
 message=_The fisher working out of this fisher’s hut can’t find any fish in his work area.
 

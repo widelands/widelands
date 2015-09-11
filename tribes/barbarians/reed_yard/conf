@@ -38,7 +38,8 @@ call=harvest_reed
 return=skipped
 
 [out_of_resource_notification]
-title=_Fields
+# Translators: Short for "Out of ..." for a resource
+title=_NO Fields
 heading=_Out of Fields
 message=_The gardener working at this reed yard has no cleared soil to plant his seeds.
 productivity_threshold=20

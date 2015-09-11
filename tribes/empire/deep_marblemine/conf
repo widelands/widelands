@@ -39,7 +39,8 @@ mine=granite 2 100 5 2
 produce=marble stone:2
 
 [out_of_resource_notification]
-title=_Marble
+# Translators: Short for "Out of ..." for a resource
+title=_No Marble
 heading=_Main Marble Vein Exhausted
 message=_This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it.
 

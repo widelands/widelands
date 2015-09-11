@@ -23,7 +23,8 @@ sleep=25000 # sleeps shorter than any other tribes
 worker=chop
 
 [out_of_resource_notification]
-title=_Trees
+# Translators: Short for "Out of ..." for a resource
+title=_No Trees
 heading=_Out of Trees
 message=_The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a rangers’s hut.
 productivity_threshold=66

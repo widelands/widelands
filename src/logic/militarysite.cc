@@ -907,7 +907,7 @@ bool MilitarySite::attack(Soldier & enemy)
 			 Message::Type::kWarfareSiteDefeated,
 			 /** TRANSLATORS: Message title. */
 			 /** TRANSLATORS: If you run out of space, you can also translate this as "Success!" */
-			 _("Enemy defeated!"),
+			 _("Enemy Defeated!"),
 			 newsite->descr().icon_name(),
 			 _("Enemy at site defeated!"),
 			 newsite->descr().m_defeated_you_str,
