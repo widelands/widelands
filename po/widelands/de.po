@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 07:27+0100\n"
-"PO-Revision-Date: 2015-08-17 20:48+0000\n"
-"Last-Translator: gamag\n"
+"POT-Creation-Date: 2015-09-04 07:55+0100\n"
+"PO-Revision-Date: 2015-09-04 15:09+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,21 +27,25 @@ msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
+msgctxt "ai_name"
 msgid "None"
 msgstr "Keine"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
+msgctxt "ai_name"
 msgid "Aggressive"
 msgstr "Aggressiv"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:137
+msgctxt "ai_name"
 msgid "Normal"
 msgstr "Normal"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:148
+msgctxt "ai_name"
 msgid "Defensive"
 msgstr "Defensiv"
 
@@ -241,7 +245,7 @@ msgid "Creating players"
 msgstr "Spieler erstellen"
 
 #: ../../src/editor/editorinteractive.cc:210
-#: ../../src/editor/editorinteractive.cc:607
+#: ../../src/editor/editorinteractive.cc:608
 msgid "Loading graphics..."
 msgstr "Lade Grafiken …"
 
@@ -253,21 +257,19 @@ msgstr "Ungespeicherte Karte"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
-#: ../../src/editor/editorinteractive.cc:602
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
+#. * TRANSLATORS: Default name for new map
+#: ../../src/editor/editorinteractive.cc:603
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Kein Name"
 
-#. * TRANSLATORS: This is shown in the game summary when we don't know
-#. * TRANSLATORS: if the player has lost or won.
-#: ../../src/editor/editorinteractive.cc:603
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:197
-#: ../../src/wui/game_summary.cc:185
+#: ../../src/editor/editorinteractive.cc:604
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:149
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:512
+msgctxt "map_name"
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -364,8 +366,8 @@ msgid "Terrain:"
 msgstr "Gelände:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
-#: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
+msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr "Name: %s"
 
@@ -438,6 +440,12 @@ msgstr "Keine Rohstoffe"
 #: ../../src/ui_fsmenu/mapselect.cc:297
 msgid "Map:"
 msgstr "Karte:"
+
+#: ../../src/editor/tools/editor_info_tool.cc:153
+#, c-format
+msgctxt "map_name"
+msgid "Name: %s"
+msgstr "Name: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:154
 #, c-format
@@ -677,7 +685,7 @@ msgstr "Karten-ID:"
 msgid "Generate Map"
 msgstr "Erzeuge Karte"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:513
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:514
 msgid "Generating random map..."
 msgstr "Erstelle Zufallskarte …"
 
@@ -934,6 +942,11 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keinen Startpunkt besitzt.\nDu kannst manuell mit dem Widelands-Editor einen Startpunkt setzen, um das Problem zu lösen."
 
+#: ../../src/logic/map.h:181
+msgctxt "author_name"
+msgid "Unknown"
+msgstr "Unbekannt"
+
 #: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr "Keine Beschreibung vorhanden"
@@ -1164,44 +1177,44 @@ msgstr "Speichern fehlgeschlagen!"
 msgid "Game saved"
 msgstr "Spiel gespeichert"
 
-#: ../../src/logic/ship.cc:451
+#: ../../src/logic/ship.cc:441
 msgid "Port Space Found"
 msgstr "Hafen-Bauplatz gefunden"
 
-#: ../../src/logic/ship.cc:452
+#: ../../src/logic/ship.cc:442
 msgid "An expedition ship found a new port build space."
 msgstr "Ein Expeditionsschiff hat einen geeigneten Platz für den Hafenbau gefunden."
 
-#: ../../src/logic/ship.cc:567
+#: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
 msgstr "Insel umrundet"
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:558
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Ein Expeditionsschiff hat eine Insel ohne besondere Vorfälle umrundet."
 
-#: ../../src/logic/ship.cc:628
+#: ../../src/logic/ship.cc:618
 msgid "Coast Reached"
 msgstr "Küste erreicht"
 
-#: ../../src/logic/ship.cc:630
+#: ../../src/logic/ship.cc:620
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ein Expeditionsschiff hat eine Küste erreicht und wartet nun auf weitere Befehle."
 
-#: ../../src/logic/ship.cc:674
+#: ../../src/logic/ship.cc:664
 msgid "New port constructionsite is gone"
 msgstr "Neue Hafenbaustelle ist verschwunden"
 
-#: ../../src/logic/ship.cc:675
+#: ../../src/logic/ship.cc:665
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Warenentladung ist fehlgeschlagen, die Expedition ist jetzt abgebrochen worden."
 
-#: ../../src/logic/ship.cc:819
+#: ../../src/logic/ship.cc:842
 msgid "Expedition Ready"
 msgstr "Expedition bereit"
 
-#: ../../src/logic/ship.cc:820
+#: ../../src/logic/ship.cc:843
 msgid "An expedition ship is waiting for your commands."
 msgstr "Ein Expeditionsschiff ist bereit und wartet auf seine Befehle."
 
@@ -1209,15 +1222,15 @@ msgstr "Ein Expeditionsschiff ist bereit und wartet auf seine Befehle."
 msgid "Logic error"
 msgstr "Logikfehler"
 
-#: ../../src/logic/warehouse.cc:456
+#: ../../src/logic/warehouse.cc:457
 msgid "A new port was added to your economy."
 msgstr "Ein neuer Hafen wurde deiner Wirtschaft hinzugefügt."
 
-#: ../../src/logic/warehouse.cc:463
+#: ../../src/logic/warehouse.cc:464
 msgid "A new headquarters was added to your economy."
 msgstr "Ein neues Hauptquartier wurde deiner Wirtschaft hinzugefügt."
 
-#: ../../src/logic/warehouse.cc:470
+#: ../../src/logic/warehouse.cc:471
 msgid "A new warehouse was added to your economy."
 msgstr "Ein neues Lagerhaus wurde deiner Wirtschaft hinzugefügt."
 
@@ -1253,7 +1266,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar vorhanden!"
 
 #: ../../src/network/internet_gaming.cc:115
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:418
 msgid "Connection problem"
 msgstr "Verbindungsproblem"
 
@@ -2159,30 +2172,32 @@ msgstr "Administrator"
 msgid "Unregistered"
 msgstr "Nicht registriert"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:146
+#. * TRANSLATORS: Player Name
+#: ../../src/ui_fsmenu/internet_lobby.cc:147
+msgctxt "player"
 msgid "Name"
 msgstr "Name"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:147
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Points"
 msgstr "Punkte"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:148
+#: ../../src/ui_fsmenu/internet_lobby.cc:149
 msgid "Game"
 msgstr "Spiel"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:386
+#: ../../src/ui_fsmenu/internet_lobby.cc:387
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands konnte die IP-Adresse des Servers nicht rechtzeitig beziehen.\nOffensichtlich besteht ein Netzwerkproblem, entweder auf deiner\noder der Seite des Servers.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:390
+#: ../../src/ui_fsmenu/internet_lobby.cc:391
 msgid "Connection timed out"
 msgstr "Verbindungsabbruch wegen Zeitüberschreitung"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:418
+#: ../../src/ui_fsmenu/internet_lobby.cc:419
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands konnte keine Verbindung zum Host erstellen."
 
@@ -2577,19 +2592,19 @@ msgstr "Widelands-Version:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:519
+#: ../../src/ui_fsmenu/loadgame.cc:518
 msgid "Today, %1%:%2%"
 msgstr "Heute, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:532
+#: ../../src/ui_fsmenu/loadgame.cc:531
 msgid "Yesterday, %1%:%2%"
 msgstr "Gestern, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:538
+#: ../../src/ui_fsmenu/loadgame.cc:537
 msgid "%2% %1%, %3%"
 msgstr "%1%. %2% %3%"
 
@@ -2598,7 +2613,7 @@ msgstr "%1%. %2% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:564
+#: ../../src/ui_fsmenu/loadgame.cc:563
 msgid "SP"
 msgstr "ES"
 
@@ -2608,7 +2623,7 @@ msgstr "ES"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:572
+#: ../../src/ui_fsmenu/loadgame.cc:571
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2618,25 +2633,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:581
+#: ../../src/ui_fsmenu/loadgame.cc:580
 msgid "MP (%1%)"
 msgstr "MS (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:597
+#: ../../src/ui_fsmenu/loadgame.cc:596
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Die angegebene Datei hat das falsche Format und kann nicht geladen werden. Möglicherweise wurde sie mit einer älteren Version von Widelands erstellt."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:600
+#: ../../src/ui_fsmenu/loadgame.cc:599
 msgid "Error message:"
 msgstr "Fehlermeldung:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:613 ../../src/ui_fsmenu/loadgame.cc:615
+#: ../../src/ui_fsmenu/loadgame.cc:612 ../../src/ui_fsmenu/loadgame.cc:614
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Inkompatibel: %s"
@@ -2899,6 +2914,12 @@ msgstr "Offen"
 msgid "Closed"
 msgstr "Geschlossen"
 
+#. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
+#: ../../src/ui_fsmenu/netsetup_lan.cc:198
+msgctxt "game_state"
+msgid "Unknown"
+msgstr "Unbekannt"
+
 #: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:522
 msgid "Advanced Options"
 msgstr "Erweiterte Optionen"
@@ -3137,76 +3158,82 @@ msgstr "Anzahl der Soldaten"
 msgid "Send more soldiers"
 msgstr "Sende mehr Soldaten"
 
-#: ../../src/wui/building_statistics_menu.cc:70
+#: ../../src/wui/building_statistics_menu.cc:71
 #: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
 msgstr "Gebäudestatistik"
 
-#: ../../src/wui/building_statistics_menu.cc:80
+#: ../../src/wui/building_statistics_menu.cc:81
 msgid "Owned:"
 msgstr "Im Besitz:"
 
-#: ../../src/wui/building_statistics_menu.cc:87
+#: ../../src/wui/building_statistics_menu.cc:88
 msgid "Under Construction:"
 msgstr "Im Bau:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
-#: ../../src/wui/building_statistics_menu.cc:94
-#: ../../src/wui/building_statistics_menu.cc:677
+#: ../../src/wui/building_statistics_menu.cc:95
+#: ../../src/wui/building_statistics_menu.cc:679
 msgid "Low Production: "
 msgstr "Geringe Produktion:"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
-#: ../../src/wui/building_statistics_menu.cc:102
+#: ../../src/wui/building_statistics_menu.cc:103
 msgid "%"
 msgstr "%"
 
-#: ../../src/wui/building_statistics_menu.cc:136
+#: ../../src/wui/building_statistics_menu.cc:137
 msgid "Small Buildings"
 msgstr "Kleine Gebäude"
 
-#: ../../src/wui/building_statistics_menu.cc:140
+#: ../../src/wui/building_statistics_menu.cc:141
 msgid "Medium Buildings"
 msgstr "Mittlere Gebäude"
 
-#: ../../src/wui/building_statistics_menu.cc:144
+#: ../../src/wui/building_statistics_menu.cc:145
 msgid "Big Buildings"
 msgstr "Große Gebäude"
 
-#: ../../src/wui/building_statistics_menu.cc:148
+#: ../../src/wui/building_statistics_menu.cc:149
 msgid "Mines"
 msgstr "Minen"
 
-#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:156
 msgid "Ports"
 msgstr "Häfen"
 
-#: ../../src/wui/building_statistics_menu.cc:270
-#: ../../src/wui/building_statistics_menu.cc:294
-#: ../../src/wui/building_statistics_menu.cc:318
+#: ../../src/wui/building_statistics_menu.cc:271
+#: ../../src/wui/building_statistics_menu.cc:295
+#: ../../src/wui/building_statistics_menu.cc:319
 msgid "Show previous building"
 msgstr "Zeige voriges Gebäude"
 
-#: ../../src/wui/building_statistics_menu.cc:282
-#: ../../src/wui/building_statistics_menu.cc:306
-#: ../../src/wui/building_statistics_menu.cc:330
+#: ../../src/wui/building_statistics_menu.cc:283
+#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:331
 msgid "Show next building"
 msgstr "Zeige nächstes Gebäude"
+
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#: ../../src/wui/building_statistics_menu.cc:667
+#, c-format
+msgid "%i%%"
+msgstr "%i%%"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:694
-#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:696
 #: ../../src/wui/building_statistics_menu.cc:720
+#: ../../src/wui/building_statistics_menu.cc:722
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:708
+#: ../../src/wui/building_statistics_menu.cc:710
 msgid "Lacking Soldiers:"
 msgstr "Benötigen Soldaten:"
 
@@ -3710,6 +3737,13 @@ msgstr "Gewonnen"
 msgid "Resigned"
 msgstr "Aufgegeben"
 
+#. * TRANSLATORS: This is shown in the game summary when we don't know
+#. * TRANSLATORS: if the player has lost or won.
+#: ../../src/wui/game_summary.cc:185
+msgctxt "player_won"
+msgid "Unknown"
+msgstr "Unbekannt"
+
 #: ../../src/wui/game_summary.cc:194
 msgid "You won!"
 msgstr "Du hast gewonnen!"
@@ -3892,8 +3926,7 @@ msgid "AI: %s"
 msgstr "KI: %s"
 
 #: ../../src/wui/multiplayersetupgroup.cc:311
-#: ../../src/wui/multiplayersetupgroup.cc:325
-#: ../../src/wui/playerdescrgroup.cc:190
+msgctxt "ai_name"
 msgid "Random"
 msgstr "Zufällig"
 
@@ -3901,6 +3934,12 @@ msgstr "Zufällig"
 #: ../../src/wui/playerdescrgroup.cc:178
 msgid "Human"
 msgstr "Mensch"
+
+#: ../../src/wui/multiplayersetupgroup.cc:325
+#: ../../src/wui/playerdescrgroup.cc:190
+msgctxt "tribe"
+msgid "Random"
+msgstr "Zufällig"
 
 #: ../../src/wui/multiplayersetupgroup.cc:412
 msgid "Client name"

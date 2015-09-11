@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -245,7 +245,7 @@ msgid ""
 "Stones 6"
 msgstr ""
 
-#: TRANSLATORS: This track is made of footprints in the snow
+#. TRANSLATORS: This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid ""
 "Track"
@@ -331,25 +331,25 @@ msgid ""
 "Birch (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid ""
 "Cirrus Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:37
 msgid ""
 "Cirrus Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:61
 msgid ""
 "Cirrus Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:85
 msgid ""
 "Cirrus Tree (Old)"
@@ -390,25 +390,25 @@ msgid ""
 "Larch (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:13
 msgid ""
 "Liana Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:37
 msgid ""
 "Liana Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:61
 msgid ""
 "Liana Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:88
 msgid ""
 "Liana Tree (Old)"
@@ -434,73 +434,73 @@ msgid ""
 "Maple (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:13
 msgid ""
 "Dark Mushroom Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:37
 msgid ""
 "Dark Mushroom Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:61
 msgid ""
 "Dark Mushroom Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:85
 msgid ""
 "Dark Mushroom Tree (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:13
 msgid ""
 "Green Mushroom Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:37
 msgid ""
 "Green Mushroom Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:61
 msgid ""
 "Green Mushroom Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:85
 msgid ""
 "Green Mushroom Tree (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:13
 msgid ""
 "Red Mushroom Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:37
 msgid ""
 "Red Mushroom Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:61
 msgid ""
 "Red Mushroom Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:88
 msgid ""
 "Red Mushroom Tree (Old)"
@@ -666,73 +666,73 @@ msgid ""
 "Spruce (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:13
 msgid ""
 "Twine Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:37
 msgid ""
 "Twine Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:61
 msgid ""
 "Twine Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:85
 msgid ""
 "Twine Tree (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:13
 msgid ""
 "Green Umbrella Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:37
 msgid ""
 "Green Umbrella Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:61
 msgid ""
 "Green Umbrella Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:85
 msgid ""
 "Green Umbrella Tree (Old)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:13
 msgid ""
 "Red Umbrella Tree (Sapling)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:37
 msgid ""
 "Red Umbrella Tree (Pole)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:61
 msgid ""
 "Red Umbrella Tree (Mature)"
 msgstr ""
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:88
 msgid ""
 "Red Umbrella Tree (Old)"
