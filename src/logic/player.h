@@ -33,6 +33,9 @@
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 
+// size of array for AI data
+constexpr int kAIDataSize = 10;
+
 class Node;
 namespace Widelands {
 
@@ -517,6 +520,14 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
+	void set_ai_data(int32_t value, uint32_t position);
+	void set_ai_data(uint32_t value, uint32_t position);
+	void set_ai_data(int16_t value, uint32_t position);
+	int32_t get_ai_data_int32(uint32_t position);
+	uint32_t get_ai_data_uint32(uint32_t position);
+	int16_t get_ai_data_int16(uint32_t position);
+
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
@@ -585,6 +596,14 @@ private:
 	 * m_ware_stocks[ware_id][time_index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
+
+
+	/**
+	 * AI internal data. These will be ignored by human player
+	 */
+	int32_t m_ai_data_int32 [kAIDataSize];
+	uint32_t m_ai_data_uint32 [kAIDataSize];
+	int16_t m_ai_data_int16 [kAIDataSize];
 
 	PlayerBuildingStats m_building_stats;
 

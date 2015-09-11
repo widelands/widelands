@@ -119,6 +119,7 @@ struct DefaultAI : ComputerPlayer {
 		kEmpire
 	};
 
+
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
@@ -169,7 +170,7 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
-	void check_building_necessity(BuildingObserver& bo);
+	Widelands::BuildingNecessity check_building_necessity(BuildingObserver& bo, const PerfEvaluation purpose, const uint32_t);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
@@ -243,9 +244,6 @@ private:
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
-	bool is_productionsite_needed(int32_t outputs,
-										int32_t performance,
-										PerfEvaluation purpose);
 
 	bool check_supply(const BuildingObserver&);
 
@@ -270,6 +268,7 @@ private:
 	uint32_t num_ports;
 
 	uint16_t last_attacked_player_;
+	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
 
@@ -337,12 +336,15 @@ private:
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
+	int16_t ai_personality_military_loneliness_;
+	uint32_t ai_personality_attack_margin_;
+	int32_t ai_personality_wood_difference_;
+	int32_t ai_personality_rangers_ratio_;
+	uint32_t ai_productionsites_ratio_;
+
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =
 		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
-	// some buildings can be upgraded even when they are only one
-	// now only microbrewery get this special treatment
-	const char* preferred_upgrade[1] = {"micro-brewery"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 

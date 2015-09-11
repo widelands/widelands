@@ -42,7 +42,8 @@ class ProductionSite;
 class MilitarySite;
 
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
-
+enum class BuildingNecessity : uint8_t {kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed};
+	
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
 	   : player_(pl), movecaps_(mc), open_end_(oe) {
@@ -268,6 +269,7 @@ struct BuildableField {
 	bool port_nearby_;  // to increase priority if a port is nearby,
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby_;  // prefer military buildings closer to the portspace
+	int32_t max_buildcap_nearby_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -303,7 +305,8 @@ struct BuildableField {
 	     military_unstationed_(0),
 	     is_portspace_(false),
 	     port_nearby_(false),
-	     portspace_nearby_(Widelands::ExtendedBool::kUnset) {
+	     portspace_nearby_(Widelands::ExtendedBool::kUnset),
+	     max_buildcap_nearby_(0) {
 	}
 };
 
@@ -352,9 +355,10 @@ struct BuildingObserver {
 		MINE
 	} type;
 
-	bool prod_build_material_;
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
+	Widelands::BuildingNecessity new_building_;
+	uint32_t new_building_overdue_;
 	bool is_buildable_;
 	bool need_trees_;   // lumberjack = true
 	bool need_stones_;  // quarry = true
@@ -382,8 +386,14 @@ struct BuildingObserver {
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
 	std::vector<Widelands::WareIndex> critical_built_mat_;
+	
+	bool built_mat_producer_;
 
+	// an enhancement to this building
+	// produces all wares as current building, and perhaps more
 	bool upgrade_substitutes_;
+	//	produces some additional wares
+	bool upgrade_extends_;
 
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
@@ -394,10 +404,7 @@ struct BuildingObserver {
 	int16_t production_hint_;
 
 	// information needed for decision on new building construction
-	// these should be calculated only once during one run of construct_building()
-	// function
-	Widelands::ExtendedBool output_needed_;
-	int16_t max_preciousness;
+	int16_t max_preciousness_;
 	int16_t max_needed_preciousness_;
 
 	int32_t cnt_built_;
