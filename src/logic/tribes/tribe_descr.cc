@@ -59,7 +59,6 @@ TribeDescr::TribeDescr
 	// - Empire: wool, water, wood lance
 	// - Atlanteans: water, steel trident
 	// Automatic resizing of warehouse window for small screens is broken.
-	// Carrier walk_load animation is empty
 	// Trident of Fire MP scenario crashes on load.
 	// Double-check statistics
 
