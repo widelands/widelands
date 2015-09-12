@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-06 10:57+0000\n"
+"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "De Némesis a Génesis"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -29,7 +30,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Un lugar para llamar a casa "
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -39,7 +40,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Esta tierra es nuestra tierra"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -49,11 +50,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "El segundo Imperio "
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
@@ -78,11 +79,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Los meses de exilio"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Imperio"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
@@ -108,7 +109,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantes"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
@@ -129,7 +130,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Un Puesto de avanzada para el exilio"
 
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
@@ -138,11 +139,11 @@ msgstr "Todavía no implementado"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Nadie"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Lo siento, este mapa no está todavía implementado."
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -164,7 +165,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Control básico "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
@@ -175,7 +176,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Guerra"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -186,7 +187,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Marítimo"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -197,7 +198,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Economía"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -211,7 +212,7 @@ msgstr "El Atolón"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "¿Quién será el rey verdadero del gran atolón?"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -260,7 +261,7 @@ msgstr "Mucho tiempo después de que un meteorito se estrellase en un par de mon
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Cruzando el horizonte"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -407,7 +408,7 @@ msgstr "Después del impacto de un asteroide y el duro invierno siguiente, tres 
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "Islas en guerra"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -549,7 +550,7 @@ msgstr "Una tierra mística, repleta de diferentes paisajes, todos atravesados p
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "El antiguo Sol de fuego "
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -636,7 +637,7 @@ msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "El Gran lago"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -660,7 +661,7 @@ msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "El paso a través de las montañas "
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -681,7 +682,7 @@ msgstr "Poderosas montañas dividen esta tierra en tres fértiles valles. Pero u
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Juntos somos fuertes"
 
 #: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""

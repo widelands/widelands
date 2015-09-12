@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 09:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -1433,7 +1433,7 @@ msgid ""
 msgstr "Paarden helpen met het vervoeren van goederen over drukke wegen. Ze worden gefokt in een paardenboerderij."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
+msgid "Breeds the strong Atlantean horses."
 msgstr ""
 
 #: ../../tribes/atlanteans/horsefarm/conf:25

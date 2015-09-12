@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 07:55+0100\n"
-"PO-Revision-Date: 2015-09-04 15:09+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-09-05 10:36+0100\n"
+"PO-Revision-Date: 2015-09-11 11:12+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,6 +272,10 @@ msgstr "Kein Name"
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Unbekannt"
+
+#: ../../src/editor/map_generator.cc:795
+msgid "Random Player"
+msgstr "Zufälliger Spieler"
 
 #: ../../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
@@ -734,24 +738,24 @@ msgstr "Fehler beim Speichern der Karte!\nDie gespeicherte Karte ist evtl. besch
 msgid "Enter Directory Name:"
 msgstr "Ordnernamen eingeben: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:49
+#: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Player Options"
 msgstr "Spieleroptionen"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:55
+#: ../../src/editor/ui_menus/editor_player_menu.cc:56
 msgid "Add player"
 msgstr "Füge Spieler hinzu"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:62
+#: ../../src/editor/ui_menus/editor_player_menu.cc:63
 msgid "Remove last player"
 msgstr "Entferne untersten Spieler"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:77
+#: ../../src/editor/ui_menus/editor_player_menu.cc:88
 msgid "Number of Players"
 msgstr "Anzahl der Spieler"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/editor_player_menu.cc:206
+#: ../../src/editor/ui_menus/editor_player_menu.cc:219
 #: ../../src/logic/map.cc:334
 #: ../../src/logic/single_player_game_settings_provider.cc:87
 #: ../../src/network/nethost.cc:2065 ../../src/ui_fsmenu/launch_mpg.cc:569
@@ -761,11 +765,11 @@ msgstr "Anzahl der Spieler"
 msgid "Player %u"
 msgstr "Spieler %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:266
+#: ../../src/editor/ui_menus/editor_player_menu.cc:278
 msgid "Error!"
 msgstr "Fehler!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:268
+#: ../../src/editor/ui_menus/editor_player_menu.cc:280
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -1151,6 +1155,14 @@ msgstr[1] "Arbeiter fehlen"
 msgid "(stopped)"
 msgstr "(gestoppt)"
 
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
+#: ../../src/logic/productionsite.cc:320
+#: ../../src/wui/building_statistics_menu.cc:668
+#, c-format
+msgid "%i%%"
+msgstr "%i%%"
+
 #: ../../src/logic/productionsite.cc:928
 msgid "Can’t find any more resources!"
 msgstr "Keine weiteren Rohstoffe gefunden!"
@@ -1203,7 +1215,7 @@ msgid ""
 msgstr "Ein Expeditionsschiff hat eine Küste erreicht und wartet nun auf weitere Befehle."
 
 #: ../../src/logic/ship.cc:664
-msgid "New port constructionsite is gone"
+msgid "New port construction site is gone"
 msgstr "Neue Hafenbaustelle ist verschwunden"
 
 #: ../../src/logic/ship.cc:665
@@ -1440,7 +1452,7 @@ msgstr "Der Metaserver hat nicht geantwortet"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
-msgstr "Dein Spiel ist nicht vom Internet erreichbar"
+msgstr "Dein Spiel ist vom Internet nicht erreichbar"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -1705,7 +1717,7 @@ msgstr "Der Server hat das Spiel verlassen."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "The game has started just after you tried to connect."
-msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
+msgstr "Das Spiel wurde, kurz, nachdem du dich verbinden wolltest, gestartet."
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
@@ -2191,7 +2203,7 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
-msgstr "Widelands konnte die IP-Adresse des Servers nicht rechtzeitig beziehen.\nOffensichtlich besteht ein Netzwerkproblem, entweder auf deiner\noder der Seite des Servers.\n"
+msgstr "Widelands konnte die IP-Adresse des Servers nicht rechtzeitig beziehen.\nOffensichtlich besteht ein Netzwerkproblem, entweder auf deiner Seite\noder der des Servers.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:391
 msgid "Connection timed out"
@@ -2263,7 +2275,7 @@ msgstr "(keine Karte)"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:218
 msgid "The host has not yet selected a map or saved game."
-msgstr "Der Host hat noch keine Karte oder gespeichertes Spiel gewählt."
+msgstr "Der Host hat bisher weder eine Karte noch ein gespeichertes Spiel gewählt."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:297 ../../src/ui_fsmenu/launch_spg.cc:233
 msgid "Win condition is set through the scenario"
@@ -2364,7 +2376,7 @@ msgstr "Der Spieler mit der Farbe der Flagge. Falls mehrere Clients dieselbe Far
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Beobachter-Modus bedeutet, dass du alles sehen kannst, aber nicht einen Spieler lenkst"
+msgstr "Beobachter-Modus bedeutet, dass du alles sehen kannst, aber keinen Spieler steuerst"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:685
 msgid "Player settings"
@@ -2374,7 +2386,7 @@ msgstr "Spielereinstellungen"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr "In der Mitte befindet sich der Einstellungsbereich für die Spieler. Um das Spiel starten zu können muss jeder Spieler in einem der folgenden Zustände sein:"
+msgstr "In der Mitte befindet sich der Einstellungsbereich für die Spieler. Um das Spiel starten zu können, muss jeder Spieler in einem der folgenden Zustände sein:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:691
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -2435,7 +2447,7 @@ msgstr "Spielername"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:97
 msgid "Player’s type"
-msgstr "Spieler-Art"
+msgstr "Spielerart"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
 #: ../../src/wui/multiplayersetupgroup.cc:460
@@ -2444,7 +2456,7 @@ msgstr "Team"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:105
 msgid "Player’s tribe"
-msgstr "Volk"
+msgstr "Stamm"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start type"
@@ -2528,6 +2540,27 @@ msgstr "Speicherdatum"
 #: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "The date this game was saved"
 msgstr "Das Datum, an dem dieses Spiel gespeichert wurde"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:185
+msgid "SP = Single Player"
+msgstr "ES = Einzelspieler"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:189
+msgid "MP = Multiplayer"
+msgstr "MS = Mehrspieler"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:192
+msgid "H = Multiplayer (Host)"
+msgstr "H = Mehrspieler (Host)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -2670,7 +2703,7 @@ msgstr "Mehrspieler"
 
 #: ../../src/ui_fsmenu/main.cc:46
 msgid "Watch Replay"
-msgstr "Aufnahme abspielen"
+msgstr "Aufzeichnung wiedergeben"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Editor"
@@ -3034,7 +3067,7 @@ msgstr "Systemsprache"
 
 #: ../../src/ui_fsmenu/options.cc:528
 msgid "Distance for windows to snap to other panels:"
-msgstr "Abstand der Fenster, um an anderen Fenster anzudocken:"
+msgstr "Abstand der Fenster, um an anderen Fenstern anzudocken:"
 
 #: ../../src/ui_fsmenu/options.cc:532
 msgid "Distance for windows to snap to borders:"
@@ -3052,12 +3085,12 @@ msgid "Show in-game chat with transparent background"
 msgstr "Zeige den Chat im Spiel mit transparentem Hintergrund"
 
 #: ../../src/ui_fsmenu/options.cc:566
-msgid "Play a sound at message arrival."
-msgstr "Einen Ton beim Eintreffen einer Nachricht abspielen."
+msgid "Play a sound at message arrival"
+msgstr "Spiele einen Ton beim Eintreffen einer Nachricht ab"
 
 #: ../../src/ui_fsmenu/options.cc:576
-msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Packe die Daten (Karten, Aufzeichnungen und Speicherungen) nicht als zip-Dateien."
+msgid "Do not zip widelands data files (maps, replays and savegames)"
+msgstr "Packe die Daten (Karten, Aufzeichnungen und Speicherungen) nicht als zip-Dateien"
 
 #: ../../src/ui_fsmenu/options.cc:586
 msgid "Remove Syncstream dumps on startup"
@@ -3090,14 +3123,14 @@ msgid ""
 "\n"
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
-msgstr "\n\nBitte das aufgetretene Problem melden, damit Widelands entsprechend verbessert werden kann. Weitere Informationen sind in der Standardausgabe (stdout.txt unter Windows). Benutzte Build-Version %1$s (%2$s). "
+msgstr "\n\nBitte das aufgetretene Problem melden, damit Widelands entsprechend verbessert werden kann. Weitere Informationen stehen in der Standardausgabe (stdout.txt unter Windows). Benutzte Build-Version: %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1123
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing.\n"
-msgstr "Bitte füge der Meldung diese Informationen bei.\n\nWidelands versucht einen Spielstand zu schreiben, wenn im Spielverlauf ein Fehler auftrat. Es ist oft - wenn auch nicht immer - möglich, das Spiel wieder zu laden und weiterzuspielen.\n"
+msgstr "Bitte füge der Meldung diese Informationen bei.\n\nWidelands versucht einen Spielstand zu schreiben, wenn im Spielverlauf ein Fehler auftrat. Es ist oft – wenn auch nicht immer – möglich, das Spiel wieder zu laden und weiterzuspielen.\n"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Destroy building?"
@@ -3174,7 +3207,7 @@ msgstr "Im Bau:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
 #: ../../src/wui/building_statistics_menu.cc:95
-#: ../../src/wui/building_statistics_menu.cc:679
+#: ../../src/wui/building_statistics_menu.cc:680
 msgid "Low Production: "
 msgstr "Geringe Produktion:"
 
@@ -3216,24 +3249,18 @@ msgstr "Zeige voriges Gebäude"
 msgid "Show next building"
 msgstr "Zeige nächstes Gebäude"
 
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#: ../../src/wui/building_statistics_menu.cc:667
-#, c-format
-msgid "%i%%"
-msgstr "%i%%"
-
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:696
-#: ../../src/wui/building_statistics_menu.cc:720
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:697
+#: ../../src/wui/building_statistics_menu.cc:721
+#: ../../src/wui/building_statistics_menu.cc:723
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:710
+#: ../../src/wui/building_statistics_menu.cc:711
 msgid "Lacking Soldiers:"
 msgstr "Benötigen Soldaten:"
 
@@ -3298,7 +3325,7 @@ msgstr "Zeige Arbeitsbereich"
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
-msgstr "Konstruktionsmaterial"
+msgstr "Baumaterial"
 
 #: ../../src/wui/encyclopedia_window.cc:79
 #: ../../src/wui/interactive_player.cc:109
@@ -3377,11 +3404,11 @@ msgstr "Setze eine Flagge"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Destroy a road"
-msgstr "Weg zerstören"
+msgstr "Straße zerstören"
 
 #: ../../src/wui/fieldaction.cc:429
 msgid "Watch field in a separate window"
-msgstr "Zeige das Feld in einem seperaten Fenster"
+msgstr "Beobachte das Feld in einem seperaten Fenster"
 
 #: ../../src/wui/fieldaction.cc:434
 msgid "Toggle building statistics display"
@@ -3405,7 +3432,7 @@ msgstr "Angriff starten"
 
 #: ../../src/wui/fieldaction.cc:482
 msgid "Attack"
-msgstr "Attacke"
+msgstr "Angriff"
 
 #: ../../src/wui/fieldaction.cc:566
 msgid "Build mines"
@@ -3417,7 +3444,7 @@ msgstr "Setze Flagge"
 
 #: ../../src/wui/fieldaction.cc:586
 msgid "Cancel road"
-msgstr "Weg abbrechen"
+msgstr "Straßenbau abbrechen"
 
 #: ../../src/wui/fieldaction.cc:589
 msgid "Build roads"
@@ -3483,7 +3510,7 @@ msgid ""
 "Saved game file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr "Speicher-Fehler!\nDer Spielstand ist eventuell fehlerhaft!\n\nGrund:\n"
+msgstr "Speicherfehler!\nDer Spielstand ist eventuell fehlerhaft!\n\nGrund:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 #: ../../src/wui/game_main_menu_save_game.cc:260
@@ -3492,12 +3519,12 @@ msgstr "Speicherfehler!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "File deletion"
-msgstr "löschen der Datei"
+msgstr "Löschen der Datei"
 
 #: ../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr "Möchten Sie die Datei %s wirklich löschen?"
+msgstr "Möchtest du die Datei %s wirklich löschen?"
 
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:618
@@ -3664,7 +3691,7 @@ msgstr "Liesmich"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:81
 msgid "Show general information about Widelands and keyboard shortcuts"
-msgstr "Zeige allgemeine Informationen über Widelands und Tastenkürzel"
+msgstr "Zeige allgemeine Informationen über Widelands und die Tastenkürzel"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:90
@@ -4051,11 +4078,11 @@ msgstr "Erkunde in Richtung Süd-Osten"
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
-msgstr "gehe zum Schiff"
+msgstr "Gehe zum Schiff"
 
 #: ../../src/wui/shipwindow.cc:181
 msgid "Go to destination"
-msgstr "gehe zum Ziel"
+msgstr "Gehe zum Ziel"
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
@@ -4080,7 +4107,7 @@ msgstr "Kapazität"
 #: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
 #: ../../src/wui/soldierlist.cc:479
 msgid "Click soldier to send away"
-msgstr "Klicke auf Soldaten um wegzuschicken"
+msgstr "Klicke auf einen Soldaten, um ihn wegzuschicken"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:484
@@ -4114,7 +4141,7 @@ msgstr "Arbeiter in Lagerhäusern"
 
 #: ../../src/wui/trainingsitewindow.cc:58
 msgid "Soldiers in training"
-msgstr "trainierende Soldaten"
+msgstr "Trainierende Soldaten"
 
 #: ../../src/wui/transport_ui.cc:52
 msgid "Economy options"

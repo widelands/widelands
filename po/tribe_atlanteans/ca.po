@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-24 18:59+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 11:29+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1434,8 +1434,8 @@ msgid ""
 msgstr "Els cavalls ajuden a transportar béns en camins molt transitats. Es crien en granges de cavalls."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
-msgstr "Cria els forts cavalls atlants"
+msgid "Breeds the strong Atlantean horses."
+msgstr "Cria els forts cavalls atlants."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
