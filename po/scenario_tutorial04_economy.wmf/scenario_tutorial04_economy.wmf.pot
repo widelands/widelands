@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -115,8 +115,8 @@ msgid ""
 "The building statistics window gives you an overview over the buildings you have."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the building statistics window
-#: TRANSLATORS: "it" refers to the stock menu window
+#. TRANSLATORS: "it" refers to the building statistics window
+#. TRANSLATORS: "it" refers to the stock menu window
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
-"‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions — we really need more soldiers."
+"‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions – we really need more soldiers."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
@@ -229,7 +229,7 @@ msgid ""
 "You closed the building statistics window, although you have not yet looked up the number of taverns."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the building statistics window.
+#. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid ""
 "Please reopen it and choose the second tab (medium buildings)."
@@ -348,8 +348,8 @@ msgid ""
 "You closed the stock menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the stock menu window.
-#: TRANSLATORS: "it" refers to the ware statistics window.
+#. TRANSLATORS: "it" refers to the stock menu window.
+#. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid ""
@@ -465,7 +465,7 @@ msgid ""
 "‘Ware statistics’ button."
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the ware statistics button
+#. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Click on it."
@@ -594,7 +594,7 @@ msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished with my explanation. Would you please reopen it and choose the fourth tab?"
 msgstr ""
 
-#: TRANSLATORS: "it" refers to the ware statistics window.
+#. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
 msgid ""
 "Otherwise, please reopen it and choose the fourth tab."
@@ -650,7 +650,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid ""
-"Most buildings will only produce something when when the stock level in your warehouses falls below the target quantity, so you should indicate the reserve you want to stockpile."
+"Most buildings will only produce something when the stock level in your warehouses falls below the target quantity, so you should indicate the reserve you want to stockpile."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:396
@@ -715,7 +715,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
 msgid ""
-"It is great that we are producing marble columns, but it would be great if they were stored where we need them."
+"The production of marble columns is working fine now, but it would be great if they were stored where we need them."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:429

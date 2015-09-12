@@ -31,6 +31,7 @@
 #include "logic/player.h"
 #include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
+#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
@@ -60,7 +61,8 @@ EditorPlayerMenu::EditorPlayerMenu
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
 		 _("Remove last player"),
-		 1 < parent.egbase().map().get_nrplayers())
+		 1 < parent.egbase().map().get_nrplayers()),
+	m_tribenames(eia().egbase().tribes().get_all_tribenames())
 {
 	m_add_player.sigclicked.connect(boost::bind(&EditorPlayerMenu::clicked_add_player, boost::ref(*this)));
 	m_remove_last_player.sigclicked.connect
@@ -69,8 +71,6 @@ EditorPlayerMenu::EditorPlayerMenu
 	int32_t const spacing = 5;
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
-
-	m_tribes = Widelands::Tribes::get_all_tribenames();
 
 	set_inner_size(375, 135);
 
@@ -162,13 +162,15 @@ void EditorPlayerMenu::update() {
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
 		}
-		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME)
-			m_plr_set_tribes_buts[p - 1]->set_title
-				(map.get_scenario_player_tribe(p).c_str());
-		else {
-			m_plr_set_tribes_buts[p - 1]->set_title(m_tribes[0].c_str());
-			map.set_scenario_player_tribe(p, m_tribes[0]);
+
+		// Get/Set (localized) tribe names
+		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME) {
+			m_selected_tribes[p] = map.get_scenario_player_tribe(p);
+		} else {
+			m_selected_tribes[p] = m_tribenames[0];
+			map.set_scenario_player_tribe(p, m_selected_tribes[p]);
 		}
+		m_plr_set_tribes_buts[p - 1]->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -206,7 +208,7 @@ void EditorPlayerMenu::clicked_add_player() {
 		const std::string name = (boost::format(_("Player %u")) % static_cast<unsigned int>(nr_players)).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
-	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
+	map.set_scenario_player_tribe(nr_players, m_tribenames[0]);
 	eia().set_need_save(true);
 	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(true);
@@ -248,17 +250,19 @@ void EditorPlayerMenu::clicked_remove_last_player() {
  */
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
-		if (!menu.is_player_tribe_referenced(n + 1)) {
-		std::string t = m_plr_set_tribes_buts[n]->get_title();
-		if (!Widelands::Tribes::tribe_exists(t))
+	if (!menu.is_player_tribe_referenced(n + 1)) {
+		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n + 1])) {
 			throw wexception
-				("Map defines tribe %s, but it does not exist!", t.c_str());
+				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n + 1].c_str());
+		}
 		uint32_t i;
-		for (i = 0; i < m_tribes.size(); ++i)
-			if (m_tribes[i] == t)
+		for (i = 0; i < m_tribenames.size(); ++i) {
+			if (m_tribenames[i] == m_selected_tribes[n + 1]) {
 				break;
-		t = i == m_tribes.size() - 1 ? m_tribes[0] : m_tribes[++i];
-		menu.egbase().map().set_scenario_player_tribe(n + 1, t);
+			}
+		}
+		m_selected_tribes[n + 1] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
+		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n + 1]);
 		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb
@@ -337,7 +341,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// so that this tribe can not be changed
 		egbase.add_player
 			(n, 0, // TODO(SirVer): initialization index makes no sense here
-			 m_plr_set_tribes_buts[n - 1]->get_title(),
+			 eia().egbase().tribes().tribeinfo(m_selected_tribes[n]).descname,
 			 m_plr_names[n - 1]->text());
 
 		p = egbase.get_player(n);

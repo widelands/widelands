@@ -32,13 +32,13 @@ struct IconGridButton : public Button {
 		(IconGrid         & parent,
 		 const std::string & name,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const Image* background_pictute_id,
+		 const Image* background_picture_id,
 		 const Image* foreground_picture_id,
 		 uint32_t callback_argument_id,
 		 const std::string & tooltip_text)
 		:
 		Button
-			(&parent, name, x, y, w, h, background_pictute_id,
+			(&parent, name, x, y, w, h, background_picture_id,
 			 foreground_picture_id,
 			 tooltip_text, true, true),
 			 m_icongrid(parent),

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -35,19 +35,19 @@ msgid ""
 "%s and"
 msgstr ""
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid ""
 "Equipment from"
 msgstr ""
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid ""
 "and equipment from"
 msgstr ""
 
-#: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid ""
 "or equipment from"
@@ -106,7 +106,7 @@ msgid ""
 "Training:"
 msgstr ""
 
-#: TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
 #: ../../tribes/scripting/format_help.lua:299
 #: ../../tribes/scripting/format_help.lua:303
 #: ../../tribes/scripting/format_help.lua:307
@@ -161,7 +161,7 @@ msgid ""
 "Collects:"
 msgstr ""
 
-#: TRANSLATORS: This is a verb (The miner mines)
+#. TRANSLATORS: This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid ""
 "Mines:"
@@ -182,13 +182,13 @@ msgid ""
 "None"
 msgstr ""
 
-#: TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid ""
 "%1$dx %2$s"
 msgstr ""
 
-#: TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
+#. TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
 #: ../../tribes/scripting/format_help.lua:482
 msgid ""
 "Building"

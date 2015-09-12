@@ -82,7 +82,7 @@ explain_building_stat = {
       paragraphdivider() ..
       listitem_bullet(_[[‘2/1’ below the quarry: This means that you have two quarries, plus another one which is under construction.]]) ..
       listitem_bullet(_[[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has done any work yet, but they are going to start working soon.]]) ..
-      listitem_bullet(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions — we really need more soldiers.]]) ..
+      listitem_bullet(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions – we really need more soldiers.]]) ..
       listitem_arrow(_[[In both cases, the color (green - yellow - red) signals you how good the value is.]]) ..
       listitem_bullet(_[[If you click on a building, you can scroll through the buildings of the selected type.]]) ..
       listitem_bullet(_[[If you don’t have any building of a particular building type, it will be shown greyed out.]])
@@ -392,7 +392,7 @@ economy_settings2 = {
    body = rt(
       p(_[[This window looks similar to the stock window, but it has additional buttons at the bottom.]]) ..
       p(_[[You first have to select one or more wares (you can also left-click and drag). Then you can set the desired target quantity for the selected wares.]]) ..
-      p(_[[Most buildings will only produce something when when the stock level in your warehouses falls below the target quantity, so you should indicate the reserve you want to stockpile.]]) ..
+      p(_[[Most buildings will only produce something when the stock level in your warehouses falls below the target quantity, so you should indicate the reserve you want to stockpile.]]) ..
       p(_[[An example: the default value for scythes is 1. If you build a farm, a carrier will take a scythe and become a farmer. Then there will be no scythes left, but the target quantity is 1, therefore your toolsmith will start producing another one.]]) ..
       p(_[[If you build two farms, only one of them will start working immediately. The second farm will have to wait for its worker, who will lack a scythe. If you had set the target quantity to 2 before, two scythes would have been available and both farms would have been able to start working right away.]])
    ),
@@ -425,7 +425,7 @@ warehouse_preference_settings = {
    title = _"Warehouse Preferences",
    body = rt(
       h1(_[[Bring the marble columns to the front line]]) ..
-      p(_[[It is great that we are producing marble columns, but it would be great if they were stored where we need them.]]) ..
+      p(_[[The production of marble columns is working fine now, but it would be great if they were stored where we need them.]]) ..
       p(_[[Normally, produced wares are brought to the closest warehouse if they are not needed elsewhere. In this case, this means our headquarters. But we would like to have them in the warehouse near our fortresses.]]) ..
       p(_[[Every warehouse has four buttons to set the preference. If you move your mouse pointer over them, you will see tooltips that explain what the buttons do.]]) ..
       paragraphdivider() ..

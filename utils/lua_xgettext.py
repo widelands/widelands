@@ -277,7 +277,7 @@ def emit_comments_and_line_numbers(occurences, lines):
     comments = sorted(
         set(f['translator_comment'] for f in occurences if 'translator_comment' in f))
     for comment in comments:
-        lines.append('#: %s' % (comment))
+        lines.append('#. %s' % (comment))
     for occurence in occurences:
         lines.append('#: %s:%i' % (os.path.normpath(occurence['filename']),
                              occurence['line']))

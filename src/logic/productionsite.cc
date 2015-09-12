@@ -352,7 +352,7 @@ void ProductionSite::calc_statistics()
 	else
 		color = UI_FONT_CLR_GOOD.hex_value();
 	const std::string perc_str =
-		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
+		(boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk)).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {

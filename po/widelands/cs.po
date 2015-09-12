@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 07:27+0100\n"
-"PO-Revision-Date: 2015-08-12 06:28+0000\n"
+"POT-Creation-Date: 2015-09-04 07:55+0100\n"
+"PO-Revision-Date: 2015-09-04 06:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -22,23 +22,27 @@ msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
+msgctxt "ai_name"
 msgid "None"
-msgstr "Není"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
+msgctxt "ai_name"
 msgid "Aggressive"
-msgstr "Agresivní"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:137
+msgctxt "ai_name"
 msgid "Normal"
-msgstr "Normální"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:148
+msgctxt "ai_name"
 msgid "Defensive"
-msgstr "Obranná"
+msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -236,7 +240,7 @@ msgid "Creating players"
 msgstr "Vytvoř hráče"
 
 #: ../../src/editor/editorinteractive.cc:210
-#: ../../src/editor/editorinteractive.cc:607
+#: ../../src/editor/editorinteractive.cc:608
 msgid "Loading graphics..."
 msgstr "Nahrávání grafiky..."
 
@@ -248,23 +252,21 @@ msgstr "Neuložená mapa"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nebyla uložena, opravdu chcete hru vypnout?"
 
-#: ../../src/editor/editorinteractive.cc:602
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
+#. * TRANSLATORS: Default name for new map
+#: ../../src/editor/editorinteractive.cc:603
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Beze jména"
 
-#. * TRANSLATORS: This is shown in the game summary when we don't know
-#. * TRANSLATORS: if the player has lost or won.
-#: ../../src/editor/editorinteractive.cc:603
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:197
-#: ../../src/wui/game_summary.cc:185
+#: ../../src/editor/editorinteractive.cc:604
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:149
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:512
+msgctxt "map_name"
 msgid "Unknown"
-msgstr "Neznámý"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
@@ -359,10 +361,10 @@ msgid "Terrain:"
 msgstr "Terén:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
-#: ../../src/editor/tools/editor_info_tool.cc:153
 #, c-format
+msgctxt "terrain_name"
 msgid "Name: %s"
-msgstr "Jméno: %s"
+msgstr ""
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:114
@@ -433,6 +435,12 @@ msgstr "Došly zdroje"
 #: ../../src/ui_fsmenu/mapselect.cc:297
 msgid "Map:"
 msgstr "Mapa:"
+
+#: ../../src/editor/tools/editor_info_tool.cc:153
+#, c-format
+msgctxt "map_name"
+msgid "Name: %s"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:154
 #, c-format
@@ -672,7 +680,7 @@ msgstr "ID mapy:"
 msgid "Generate Map"
 msgstr "Vytvořit mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:513
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:514
 msgid "Generating random map..."
 msgstr "Generování náhodné mapy..."
 
@@ -929,6 +937,11 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands nemůže zahájit hru, protože hráč %u nemá startovací pozici.\nPro vyřešení problému můžete ručně přidat startovací pozici v editoru Widelands."
 
+#: ../../src/logic/map.h:181
+msgctxt "author_name"
+msgid "Unknown"
+msgstr ""
+
 #: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr "Bez popisu"
@@ -1165,44 +1178,44 @@ msgstr "Ukládání selhalo!"
 msgid "Game saved"
 msgstr "Hra uložena"
 
-#: ../../src/logic/ship.cc:451
+#: ../../src/logic/ship.cc:441
 msgid "Port Space Found"
 msgstr "Nalezeno místo pro přístav"
 
-#: ../../src/logic/ship.cc:452
+#: ../../src/logic/ship.cc:442
 msgid "An expedition ship found a new port build space."
 msgstr "Loď výpravy nalezla nové místo pro stavbu přístavu."
 
-#: ../../src/logic/ship.cc:567
+#: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
 msgstr "Ostrov obeplut"
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:558
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Loď výpravy obeplula ostrov bez jakýchkoliv problémů."
 
-#: ../../src/logic/ship.cc:628
+#: ../../src/logic/ship.cc:618
 msgid "Coast Reached"
 msgstr "Pobřeží dosaženo"
 
-#: ../../src/logic/ship.cc:630
+#: ../../src/logic/ship.cc:620
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Loď výpravy dosáhla přístavu a čeká na další rozkazy."
 
-#: ../../src/logic/ship.cc:674
+#: ../../src/logic/ship.cc:664
 msgid "New port constructionsite is gone"
 msgstr "Stavební místo pro nový přístav je ztraceno"
 
-#: ../../src/logic/ship.cc:675
+#: ../../src/logic/ship.cc:665
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Vykládání surovin selhalo, výprava je zrušena"
 
-#: ../../src/logic/ship.cc:819
+#: ../../src/logic/ship.cc:842
 msgid "Expedition Ready"
 msgstr "Výprava je připravena"
 
-#: ../../src/logic/ship.cc:820
+#: ../../src/logic/ship.cc:843
 msgid "An expedition ship is waiting for your commands."
 msgstr "Loď výpravy čeká na tvé rozkazy."
 
@@ -1210,15 +1223,15 @@ msgstr "Loď výpravy čeká na tvé rozkazy."
 msgid "Logic error"
 msgstr "Logická chyba"
 
-#: ../../src/logic/warehouse.cc:456
+#: ../../src/logic/warehouse.cc:457
 msgid "A new port was added to your economy."
 msgstr "Nový přístav byl přidán k tvému hospodářství."
 
-#: ../../src/logic/warehouse.cc:463
+#: ../../src/logic/warehouse.cc:464
 msgid "A new headquarters was added to your economy."
 msgstr "Nové velitelství bylo přidáno k tvému hospodářství."
 
-#: ../../src/logic/warehouse.cc:470
+#: ../../src/logic/warehouse.cc:471
 msgid "A new warehouse was added to your economy."
 msgstr "Nový sklad byl přidán k tvému hospodářství."
 
@@ -1254,7 +1267,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II Map. Komentář není definován!"
 
 #: ../../src/network/internet_gaming.cc:115
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:418
 msgid "Connection problem"
 msgstr "Problém při připojení"
 
@@ -2166,30 +2179,32 @@ msgstr "Administrátor"
 msgid "Unregistered"
 msgstr "Neregistrován"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:146
-msgid "Name"
-msgstr "Jméno"
-
+#. * TRANSLATORS: Player Name
 #: ../../src/ui_fsmenu/internet_lobby.cc:147
+msgctxt "player"
+msgid "Name"
+msgstr ""
+
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Points"
 msgstr "Body"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:148
+#: ../../src/ui_fsmenu/internet_lobby.cc:149
 msgid "Game"
 msgstr "Hra"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:386
+#: ../../src/ui_fsmenu/internet_lobby.cc:387
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands nebyly schopné získat včas IP adresu serveru.\nVypadá to na problém v síti a to buď na tvé straně, nebo na straně\nserveru.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:390
+#: ../../src/ui_fsmenu/internet_lobby.cc:391
 msgid "Connection timed out"
 msgstr "Čas spojení vypršel"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:418
+#: ../../src/ui_fsmenu/internet_lobby.cc:419
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands se nepodařilo připojit k hostiteli."
 
@@ -2585,19 +2600,19 @@ msgstr "Verze Widelands"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:519
+#: ../../src/ui_fsmenu/loadgame.cc:518
 msgid "Today, %1%:%2%"
 msgstr "Dnes, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:532
+#: ../../src/ui_fsmenu/loadgame.cc:531
 msgid "Yesterday, %1%:%2%"
 msgstr "Včera, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:538
+#: ../../src/ui_fsmenu/loadgame.cc:537
 msgid "%2% %1%, %3%"
 msgstr "%2% %1%, %3%"
 
@@ -2606,7 +2621,7 @@ msgstr "%2% %1%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:564
+#: ../../src/ui_fsmenu/loadgame.cc:563
 msgid "SP"
 msgstr "SP"
 
@@ -2616,7 +2631,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:572
+#: ../../src/ui_fsmenu/loadgame.cc:571
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2626,25 +2641,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:581
+#: ../../src/ui_fsmenu/loadgame.cc:580
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:597
+#: ../../src/ui_fsmenu/loadgame.cc:596
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Tento soubor má špatný formát a nemůže být nahraný. Možná byl vytvořen starší verzí Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:600
+#: ../../src/ui_fsmenu/loadgame.cc:599
 msgid "Error message:"
 msgstr "Chybová zpráva:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:613 ../../src/ui_fsmenu/loadgame.cc:615
+#: ../../src/ui_fsmenu/loadgame.cc:612 ../../src/ui_fsmenu/loadgame.cc:614
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Nekompatibilní: %s"
@@ -2908,6 +2923,12 @@ msgstr "Otevřené"
 msgid "Closed"
 msgstr "Zavřené"
 
+#. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
+#: ../../src/ui_fsmenu/netsetup_lan.cc:198
+msgctxt "game_state"
+msgid "Unknown"
+msgstr ""
+
 #: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:522
 msgid "Advanced Options"
 msgstr "Pokročilé volby"
@@ -3149,76 +3170,82 @@ msgstr "Počet vojáků"
 msgid "Send more soldiers"
 msgstr "Poslat více vojáků"
 
-#: ../../src/wui/building_statistics_menu.cc:70
+#: ../../src/wui/building_statistics_menu.cc:71
 #: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
 msgstr "Statistika budov"
 
-#: ../../src/wui/building_statistics_menu.cc:80
+#: ../../src/wui/building_statistics_menu.cc:81
 msgid "Owned:"
 msgstr "Vlastněno:"
 
-#: ../../src/wui/building_statistics_menu.cc:87
+#: ../../src/wui/building_statistics_menu.cc:88
 msgid "Under Construction:"
 msgstr "Ve výstavbě:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
-#: ../../src/wui/building_statistics_menu.cc:94
-#: ../../src/wui/building_statistics_menu.cc:677
+#: ../../src/wui/building_statistics_menu.cc:95
+#: ../../src/wui/building_statistics_menu.cc:679
 msgid "Low Production: "
 msgstr "Nízká produkce:"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
-#: ../../src/wui/building_statistics_menu.cc:102
+#: ../../src/wui/building_statistics_menu.cc:103
 msgid "%"
 msgstr "%"
 
-#: ../../src/wui/building_statistics_menu.cc:136
+#: ../../src/wui/building_statistics_menu.cc:137
 msgid "Small Buildings"
 msgstr "Malé stavby"
 
-#: ../../src/wui/building_statistics_menu.cc:140
+#: ../../src/wui/building_statistics_menu.cc:141
 msgid "Medium Buildings"
 msgstr "Střední stavby"
 
-#: ../../src/wui/building_statistics_menu.cc:144
+#: ../../src/wui/building_statistics_menu.cc:145
 msgid "Big Buildings"
 msgstr "Velké stavby"
 
-#: ../../src/wui/building_statistics_menu.cc:148
+#: ../../src/wui/building_statistics_menu.cc:149
 msgid "Mines"
 msgstr "Doly"
 
-#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:156
 msgid "Ports"
 msgstr "Přístavy"
 
-#: ../../src/wui/building_statistics_menu.cc:270
-#: ../../src/wui/building_statistics_menu.cc:294
-#: ../../src/wui/building_statistics_menu.cc:318
+#: ../../src/wui/building_statistics_menu.cc:271
+#: ../../src/wui/building_statistics_menu.cc:295
+#: ../../src/wui/building_statistics_menu.cc:319
 msgid "Show previous building"
 msgstr "Zobraz předchozí stavbu"
 
-#: ../../src/wui/building_statistics_menu.cc:282
-#: ../../src/wui/building_statistics_menu.cc:306
-#: ../../src/wui/building_statistics_menu.cc:330
+#: ../../src/wui/building_statistics_menu.cc:283
+#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:331
 msgid "Show next building"
 msgstr "Zobraz následující stavbu"
+
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#: ../../src/wui/building_statistics_menu.cc:667
+#, c-format
+msgid "%i%%"
+msgstr ""
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:694
-#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:696
 #: ../../src/wui/building_statistics_menu.cc:720
+#: ../../src/wui/building_statistics_menu.cc:722
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:708
+#: ../../src/wui/building_statistics_menu.cc:710
 msgid "Lacking Soldiers:"
 msgstr "Chybějící vojáci:"
 
@@ -3724,6 +3751,13 @@ msgstr "Vyhráno"
 msgid "Resigned"
 msgstr "Vzdáno"
 
+#. * TRANSLATORS: This is shown in the game summary when we don't know
+#. * TRANSLATORS: if the player has lost or won.
+#: ../../src/wui/game_summary.cc:185
+msgctxt "player_won"
+msgid "Unknown"
+msgstr ""
+
 #: ../../src/wui/game_summary.cc:194
 msgid "You won!"
 msgstr "Vyhrál si!"
@@ -3907,15 +3941,20 @@ msgid "AI: %s"
 msgstr "AI: %s"
 
 #: ../../src/wui/multiplayersetupgroup.cc:311
-#: ../../src/wui/multiplayersetupgroup.cc:325
-#: ../../src/wui/playerdescrgroup.cc:190
+msgctxt "ai_name"
 msgid "Random"
-msgstr "Náhodný"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/wui/playerdescrgroup.cc:178
 msgid "Human"
 msgstr "Člověk"
+
+#: ../../src/wui/multiplayersetupgroup.cc:325
+#: ../../src/wui/playerdescrgroup.cc:190
+msgctxt "tribe"
+msgid "Random"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:412
 msgid "Client name"
