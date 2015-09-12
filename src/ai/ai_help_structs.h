@@ -359,6 +359,7 @@ struct BuildingObserver {
 	bool recruitment_;  // is "producing" workers?
 	Widelands::BuildingNecessity new_building_;
 	uint32_t new_building_overdue_;
+	int32_t primary_priority_;
 	bool is_buildable_;
 	bool need_trees_;   // lumberjack = true
 	bool need_stones_;  // quarry = true

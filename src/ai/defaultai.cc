@@ -87,7 +87,7 @@ constexpr int kCampaignDuration = 15 * 60 * 1000;
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
 // compensate
-constexpr int32_t kDefaultPrioBoost = 12;
+constexpr int32_t kDefaultPrioBoost = 0; //NOCOM needed???
 
 using namespace Widelands;
 
@@ -449,6 +449,7 @@ void DefaultAI::late_initialization() {
 		bo.unoccupied_ = false;
 		bo.unconnected_ = 0;
 		bo.new_building_overdue_ = 0;
+		bo.primary_priority_ = 0;
 		bo.is_buildable_ = bld.is_buildable();
 		bo.need_trees_ = bh.is_logproducer();
 		bo.need_stones_ = bh.is_stoneproducer();
@@ -554,7 +555,7 @@ void DefaultAI::late_initialization() {
 						cur_outputs.insert(ware);
 					}
 				bo.upgrade_extends_ = false;
-				printf (" comparing wares %d vs %d\n", cur_outputs.size(), enh_outputs.size());
+				printf (" comparing wares %lu vs %lu\n", cur_outputs.size(), enh_outputs.size());
 				for (WareIndex ware : enh_outputs) {
 					if (cur_outputs.count(ware) == 0) {
 						bo.upgrade_extends_ = true;
@@ -1410,8 +1411,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// there are many reasons why to stop building production buildings
 	// (note there are numerous exceptions)
 	// 1. to not have too many constructionsites
-	if (num_prod_constructionsites > productionsites.size() / ai_productionsites_ratio_ + 2) {
-		new_buildings_stop_ = true;
+	if ((num_prod_constructionsites + mines_in_constr()) 
+		>
+		(productionsites.size() +mines_built())
+		/
+		ai_productionsites_ratio_ + 2) {
+			new_buildings_stop_ = true;
 		//printf (" %d: new_buildings_stop: %2d > %2d / %d + 2\n",
 		//player_number(), num_prod_constructionsites, productionsites.size(), ai_productionsites_ratio_);
 	}
@@ -1553,18 +1558,29 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::PRODUCTIONSITE || bo.type == BuildingObserver::MINE) {
 
 			bo.new_building_ = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+
+			// calculating primary_priority_, basically it is max_needed_preciousness +
+			// some bonus for being late
+			bo.primary_priority_ = bo.max_preciousness_ +
+			bo.max_preciousness_ * bo.new_building_overdue_ / 100 + 
+			bo.new_building_overdue_ / 20;
+			
+			
 			
 			if (bo.new_building_ == BuildingNecessity::kNeeded || bo.new_building_ == BuildingNecessity::kForced) {// NOCOM
-				printf (" %d:  %-20s new building policy: %u, max_preciousness_:%2d, existing: %d, overdue: %4u \n",
+				assert (bo.primary_priority_>0);
+				printf (" %d:  %-20s new building policy: %u, max_preciousness_:%2d->prio: %2d, existing: %d, overdue: %4u \n",
 				player_number(),
 				bo.name, static_cast<uint32_t>(bo.new_building_),
 				bo.max_preciousness_,
+				bo.primary_priority_,
 				bo.total_count(),
 				bo.new_building_overdue_);
 			}		
 		
 		} else {
 			bo.new_building_ = BuildingNecessity::kAllowed;
+			bo.primary_priority_ = 0;
 		}
 	}
 
@@ -1649,24 +1665,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// this can be only a well (as by now)
 				if (bo.mines_water_) {
 					
-					//printf (" %d , %d, %d\n",
-					//static_cast<int32_t>(bo.new_building_),
-					//bo.new_building_overdue_,
-					//bo.total_count());
 					assert(bo.new_building_ == BuildingNecessity::kForced
 					||
 					(bo.new_building_ == BuildingNecessity::kNeeded
 					&&
 					bo.new_building_overdue_ > 0));
+
+					if (bo.new_building_ == BuildingNecessity::kForced) {
+						assert ( bo.total_count() == 0);
+					}
 					
 					if (bf->ground_water_ < 2) {
 						continue;
 					}
 
-					prio = bo.new_building_overdue_ / 5;
+					prio = bo.primary_priority_;
 					
 					// one well is forced
-					if (bo.total_count() == 0 || bo.new_building_ == BuildingNecessity::kForced) {
+					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio += 200;
 					} 
 
@@ -1753,9 +1769,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio += 20;
 					}					
-					
+
 					//overdue priority here
-					prio += bo.new_building_overdue_ / 5;
+					prio += bo.primary_priority_;
 
 					
 					prio +=
@@ -1775,7 +1791,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 					
 					//overdue priority here
-					prio += bo.new_building_overdue_ / 5;
+					prio += bo.primary_priority_;
 
 					if (bf->producers_nearby_.at(bo.outputs_.at(0)) >= 1) {
 						continue;
@@ -1886,12 +1902,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 					
 					//overdue priority here
-					prio += bo.new_building_overdue_ / 5;
+					prio += bo.primary_priority_;
 					
 					// we check separatelly buildings with no inputs and some inputs
 					if (bo.inputs_.empty()) {
-
-						prio += bo.max_needed_preciousness_;
 
 						if (bo.space_consumer_) {  // need to consider trees nearby
 							prio += 20 - (bf->trees_nearby_ / 3);
@@ -1924,9 +1938,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							prio += productionsites.size() * 5 + bf->water_nearby_;
 						}
 
-					} else if (!bo.inputs_.empty()) {
-							prio += bo.max_needed_preciousness_;
-					}
+					} 
+					//else if (!bo.inputs_.empty()) {
+							//; //do nothing
+					//}
 
 					if (prio <= 0) {
 						continue;
@@ -1973,6 +1988,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
+				// postpone medium and big buildings by 4 and 8 minutes
+				if (static_cast<uint32_t>(bo.desc->get_size()-1) * 4 * 60 *1000 > gametime) {
+					continue;
+				}
+				
 				prio = 0;
 
 				// calculating some sub-scores, some of them are prohibitive
@@ -2037,7 +2057,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
 						continue;
 					}
-					if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
+					if (bo.desc->get_size() == 3 && gametime % 4 >= 1) {
 						continue;
 					};
 				} else {
@@ -2312,12 +2332,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				// skip if a mine is not allowed (~needed)
-				if (bo.new_building_ != BuildingNecessity::kAllowed) {
-					assert (bo.new_building_ == BuildingNecessity::kNotNeeded);
-					continue;
-				}
-
+				assert(bo.new_building_ != BuildingNecessity::kAllowed);
+				
+				// skip if a mine is not required
+				if (!(bo.new_building_ == BuildingNecessity::kNeeded ||
+					bo.new_building_ == BuildingNecessity::kForced)) {
+						continue;
+					}
+				
 				// this is penalty if there are existing mines too close
 				// it is treated as multiplicator for count of near mines
 				uint32_t nearness_penalty = 0;
@@ -2402,6 +2424,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					// Prefer road side fields
 					prio += mf->preferred_ ? 1 : 0;
+
+					prio += bo.primary_priority_;
 
 					if (prio > proposed_priority) {
 						best_building = &bo;
@@ -3040,7 +3064,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
 	    (site.bo->cnt_built_ - site.bo->unoccupied_ > 1 ||
 	    ((site.bo->upgrade_substitutes_ || site.bo->upgrade_extends_ ) &&
-	    gametime > 45 * 60 * 1000))) {
+	    gametime > 45 * 60 * 1000 &&
+	    gametime > site.built_time_ + 20 * 60 * 1000))) { //NOCOM - built_time here?
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
 
@@ -3763,13 +3788,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNotNeeded;
 		} else if (bo.type == BuildingObserver::MINE) {
 			if ((mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 0) {
-				return BuildingNecessity::kAllowed;
+				return BuildingNecessity::kNeeded;
+			} else if (new_buildings_stop_) {
+				return BuildingNecessity::kNotNeeded;			
 			} else if (bo.max_needed_preciousness_ > 0
 				&&
 				(bo.total_count() - bo.unconnected_) >= 1 && bo.current_stats_ < 40) {
 					return BuildingNecessity::kNotNeeded;
 			} else if (bo.max_needed_preciousness_ > 0) {
-				return BuildingNecessity::kAllowed;
+				return BuildingNecessity::kNeeded;
 			} else {
 				return BuildingNecessity::kNotNeeded;
 			}
@@ -5372,6 +5399,22 @@ DefaultAI::ScheduleTasks DefaultAI::get_oldest_task(uint32_t const gametime) {
 
 	return DueTask;
 }
+
+uint32_t DefaultAI::mines_in_constr() const {
+	uint32_t count=0;
+	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+		count += m.second.in_construction;
+	}
+	return count;
+}
+uint32_t DefaultAI::mines_built() const{
+	uint32_t count=0;
+	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+		count += m.second.finished;
+	}
+	return count;
+}
+
 
 // This prints some basic statistics during a game to the command line -
 // missing materials and counts of different types of buildings.

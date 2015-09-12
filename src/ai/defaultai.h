@@ -264,6 +264,7 @@ private:
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;
 	uint32_t num_milit_constructionsites;
+	uint32_t num_mine_constructionsites;	
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
@@ -293,6 +294,8 @@ private:
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, MineTypesObserver> mines_per_type;
+	uint32_t mines_in_constr() const;
+	uint32_t mines_built() const;
 
 	std::vector<WareObserver> wares;
 
