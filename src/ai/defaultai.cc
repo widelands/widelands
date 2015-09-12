@@ -394,11 +394,8 @@ void DefaultAI::late_initialization() {
 	}
 
 	// collect information about the different buildings our tribe can construct
-	const World& world = game().world();
-	// NOCOM(GunChleoc) we have all buildings now. Does this affect what the AI will build?
-	// At the moment, the AI doesn't build anything at all.
-	for (size_t building_index = 0; building_index < game().tribes().nrbuildings(); ++building_index) {
-		const BuildingDescr& bld = *game().tribes().get_building_descr(static_cast<BuildingIndex>(building_index));
+	for (const BuildingIndex& building_index : tribe_->buildings()) {
+		const BuildingDescr& bld = *game().tribes().get_building_descr(building_index);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
@@ -465,7 +462,7 @@ void DefaultAI::late_initialization() {
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
 				if (bh.get_mines()) {
-					bo.mines_ = world.get_resource(bh.get_mines());
+					bo.mines_ = game().world().get_resource(bh.get_mines());
 				}
 
 				bo.mines_percent_ = bh.get_mines_percent();
@@ -1134,10 +1131,10 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 	uint16_t fishers_count = 0;  // used for atlanteans only
 
 	// Reset statistics for all buildings
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		buildings_.at(i).current_stats_ = 0;
-		buildings_.at(i).unoccupied_ = false;
-		buildings_.at(i).unconnected_ = 0;
+	for (BuildingObserver& bo : buildings_) {
+		bo.current_stats_ = 0;
+		bo.unoccupied_ = false;
+		bo.unconnected_ = 0;
 	}
 
 	// Check all available productionsites
@@ -1204,10 +1201,10 @@ void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 	}
 
 	// Scale statistics down
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		if ((buildings_.at(i).cnt_built_ - buildings_.at(i).unconnected_) > 0) {
-			buildings_.at(i).current_stats_ /=
-			   (buildings_.at(i).cnt_built_ - buildings_.at(i).unconnected_);
+	for (BuildingObserver& bo : buildings_) {
+		if ((bo.cnt_built_ - bo.unconnected_) > 0) {
+			bo.current_stats_ /=
+				(bo.cnt_built_ - bo.unconnected_);
 		}
 	}
 }
@@ -1379,9 +1376,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// testing big military buildings, whether critical construction
 	// material is available (at least in amount of
 	// 2/3 of default target amount)
-	for (uint32_t j = 0; j < buildings_.size(); ++j) {
-
-		BuildingObserver& bo = buildings_.at(j);
+	for (BuildingObserver& bo : buildings_) {
 		if (!bo.buildable(*player_)) {
 			continue;
 		}
@@ -1408,8 +1403,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	//Resetting output_needed_ in building observer
-	for (uint32_t j = 0; j < buildings_.size(); ++j) {
-		BuildingObserver& bo = buildings_.at(j);
+	for (BuildingObserver& bo : buildings_) {
 		if (bo.type == BuildingObserver::PRODUCTIONSITE || bo.type == BuildingObserver::MINE){
 			bo.output_needed_ = ExtendedBool::kUnset;
 		}
@@ -1444,9 +1438,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		int32_t const maxsize = player_->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
 		// For every field test all buildings
-		for (uint32_t j = 0; j < buildings_.size(); ++j) {
-			BuildingObserver& bo = buildings_.at(j);
-
+		for (BuildingObserver& bo : buildings_) {
 			if (!bo.buildable(*player_)) {
 				continue;
 			}
@@ -2209,8 +2201,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		if (!mineable_fields.empty()) {
 
-			for (uint32_t i = 0; i < buildings_.size() && productionsites.size() > 8; ++i) {
-				BuildingObserver& bo = buildings_.at(i);
+			for (BuildingObserver& bo : buildings_) {
+				if (productionsites.size() <= 8) break;
 
 				if (!bo.buildable(*player_) || bo.type != BuildingObserver::MINE) {
 					continue;
@@ -4087,9 +4079,9 @@ BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
 		late_initialization();
 	}
 
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		if (!strcmp(buildings_.at(i).name, name)) {
-			return buildings_.at(i);
+	for (BuildingObserver& bo : buildings_) {
+		if (!strcmp(bo.name, name)) {
+			return bo;
 		}
 	}
 

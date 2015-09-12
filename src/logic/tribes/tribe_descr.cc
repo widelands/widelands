@@ -61,6 +61,7 @@ TribeDescr::TribeDescr
 	// Automatic resizing of warehouse window for small screens is broken.
 	// Trident of Fire MP scenario crashes on load.
 	// Double-check statistics
+	// Loading workers is slow
 
 	try {
 		m_initializations = info.initializations;
