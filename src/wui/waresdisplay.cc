@@ -294,7 +294,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 		}
 	} else {
 		for (const Widelands::WareIndex& ware_index : m_tribe.wares()) {
-			log("NOCOM Drawing ware: %s %d\n", m_tribe.get_ware_descr(ware_index)->name().c_str(),m_hidden[ware_index]);
+			// log("NOCOM Drawing ware: %s %d\n", m_tribe.get_ware_descr(ware_index)->name().c_str(),m_hidden[ware_index]);
 			if (m_hidden[ware_index]) continue;
 			draw_ware(dst, ware_index);
 		}

@@ -202,7 +202,7 @@ tribes:new_tribe {
 		"empire_inn",
 		"empire_charcoal_kiln",
 		"empire_smelting_works",
-		"empire_shipvard",
+		"empire_shipyard",
 		"empire_toolsmithy",
 		"empire_armorsmithy",
 

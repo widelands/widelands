@@ -166,7 +166,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 		prefilled_buildings(player,
 			{ "empire_port", f_hq.x, f_hq.y,
 			   wares = {
-				 helmet = 4,
+				 armor_helmet = 4,
 				 spear_wooden = 5,
 				 felling_ax = 6,
 				 bread_paddle = 2,
@@ -238,7 +238,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 diamond = 7,
 			 iron_ore = 5,
 			 quartz = 9,
-			 stone = 50,
+			 granite = 50,
 			 spider_silk = 9,
 			 log = 100,
 			 coal = 12,
