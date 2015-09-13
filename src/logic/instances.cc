@@ -230,30 +230,27 @@ uint32_t MapObjectDescr::s_dyn_attribhigh =
 	MapObject::HIGHEST_FIXED_ATTRIBUTE;
 MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
 
+
+bool MapObjectDescr::is_animation_known(const std::string & animname) const {
+	return (m_anims.count(animname) == 1);
+}
+
 /**
  * Add this animation for this map object under this name
  */
-bool MapObjectDescr::is_animation_known(const std::string & animname) const {
-	for (const std::pair<std::string, uint32_t>& anim : m_anims) {
-		if (anim.first == animname) {
-			return true;
-		}
-	}
-	return false;
-}
-
 void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
+	if (is_animation_known(animname)) {
 #ifndef NDEBUG
-	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
-		if (temp_anim.first == animname) {
-			throw wexception
-				("adding already existing animation \"%s\"", animname.c_str());
-		}
-	}
+		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
+#else
+		throw GameDataError
+			("Tried to add already existing animation \"%s\"", animname.c_str());
 #endif
-	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
+	} else {
+		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
+	}
 }
 
 void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
