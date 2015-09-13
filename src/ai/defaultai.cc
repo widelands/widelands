@@ -393,9 +393,16 @@ void DefaultAI::late_initialization() {
 		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
 	}
 
-	// collect information about the different buildings our tribe can construct
-	for (const BuildingIndex& building_index : tribe_->buildings()) {
-		const BuildingDescr& bld = *game().tribes().get_building_descr(building_index);
+	const BuildingIndex& nr_buildings = game().tribes().nrbuildings();
+
+
+	// Collect information about the different buildings that our tribe can have
+	for (BuildingIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+		const BuildingDescr& bld = *tribe_->get_building_descr(building_index);
+		if (!tribe_->has_building(building_index) && bld.type() != MapObjectType::MILITARYSITE) {
+			continue;
+		}
+
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
