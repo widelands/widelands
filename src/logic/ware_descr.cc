@@ -30,15 +30,11 @@
 
 namespace Widelands {
 
-WareDescr::WareDescr(const std::string& init_descname,
-							const std::string& init_genericname,
-							const LuaTable& table) :
+WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
 	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname),
-	generic_name_(init_genericname),
 	icon_fname_(table.get_string("icon")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
-	assert(!generic_name_.empty());
 	i18n::Textdomain td("tribes");
 
 	directory_ = table.get_string("directory");
@@ -58,10 +54,6 @@ WareDescr::WareDescr(const std::string& init_descname,
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 	assert(is_animation_known("idle"));
-}
-
-const std::string& WareDescr::genericname() const {
-	return generic_name_;
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {

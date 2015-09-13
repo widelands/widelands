@@ -5,8 +5,6 @@ tribes:new_ware_type {
    name = "fire_tongs",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Fire Tongs"),
-   -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = pgettext("ware", "fire tongs"),
    directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {

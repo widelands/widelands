@@ -16,8 +16,6 @@ tribes:new_carrier_type {
    name = "atlanteans_horse",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Horse"),
-   -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = pgettext("atlanteans_worker", "horses"),
    directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,

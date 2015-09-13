@@ -50,11 +50,8 @@ class TribeDescr;
 */
 class WareDescr : public MapObjectDescr {
 public:
-	WareDescr(const std::string& init_descname, const std::string& init_genericname, const LuaTable& t);
+	WareDescr(const std::string& init_descname, const LuaTable& t);
 	~WareDescr() override {}
-
-	/// Returns the ware's generic mass name. Needed in the production programs.
-	const std::string& genericname() const;
 
 	/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
 	/// It is used by the computer player.
@@ -91,8 +88,6 @@ public:
 	const std::set<BuildingIndex>& producers() const;
 
 private:
-	// Used by production programs for economy conditions.
-	const std::string generic_name_;
 	// tribename, quantity. No default.
 	std::unordered_map<std::string, int> default_target_quantities_;
 	// tribename, preciousness. No default.

@@ -37,7 +37,6 @@
 namespace Widelands {
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
-								 const std::string& init_genericname,
 								 MapObjectType init_type,
 								 const LuaTable& table,
 								 const EditorGameBase& egbase) :
@@ -47,7 +46,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	icon_              (nullptr),
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX),
-	generic_name_      (init_genericname),
 	egbase_            (egbase)
 {
 	i18n::Textdomain td("tribes");
@@ -141,9 +139,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	}
 }
 
-WorkerDescr::WorkerDescr(const std::string& init_descname, const std::string& init_genericname,
+WorkerDescr::WorkerDescr(const std::string& init_descname,
 								 const LuaTable& table, const EditorGameBase& egbase) :
-	WorkerDescr(init_descname, init_genericname, MapObjectType::WORKER, table, egbase)
+	WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase)
 {}
 
 
@@ -162,10 +160,6 @@ WorkerDescr::~WorkerDescr()
 void WorkerDescr::load_graphics()
 {
 	icon_ = g_gr->images().get(icon_fname_);
-}
-
-const std::string& WorkerDescr::genericname() const {
-	return generic_name_.empty() ? descname() : generic_name_;
 }
 
 

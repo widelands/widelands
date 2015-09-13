@@ -148,9 +148,6 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 						const TribeDescr* tribe_descr = tribes.get_tribe_descr(i);
 						if (tribe_descr->has_worker(workerindex)) {
 							tribes.set_worker_type_has_demand_check(workerindex);
-							if (tribes.get_worker_descr(workerindex)->genericname().empty()) {
-								throw GameDataError("Worker '%s' needs a genericname in the init.lua", type_name);
-							}
 						}
 					}
 					return
@@ -330,19 +327,17 @@ bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description
 	(const Tribes& tribes) const
 {
-	/** TRANSLATORS: %s is a ware or worker's generic mass name, e.g. "suits of armor" for the ware "Armor". */
-	/** TRANSLATORS: Completed/Skipped/Did not start ... because the economy needs suits of armor */
-	std::string result =  (boost::format(_("the economy needs %s"))
-			  % tribes.get_ware_descr(ware_type)->genericname()).str();
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
+	std::string result =  (boost::format(_("the economy needs the ware ‘%s’"))
+			  % tribes.get_ware_descr(ware_type)->descname()).str();
 	return result;
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 	(const Tribes& tribes) const
 {
-	/** TRANSLATORS: %s is a ware or worker's generic mass name, e.g. "suits of armor" for the ware "Armor". */
-	/** TRANSLATORS: Completed/Skipped/Did not start ... because the economy doesn’t need suits of armor */
-	std::string result = (boost::format(_("the economy doesn’t need %s"))
-			  % tribes.get_ware_descr(ware_type)->genericname()).str();
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
+	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’"))
+			  % tribes.get_ware_descr(ware_type)->descname()).str();
 	return result;
 }
 
@@ -354,15 +349,18 @@ bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description
 	(const Tribes& tribes) const
 {
-	std::string result = (boost::format(_("the economy needs %s"))
-			  % tribes.get_worker_descr(worker_type)->genericname()).str();
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
+	std::string result = (boost::format(_("the economy needs the worker ‘%s’"))
+			  % tribes.get_worker_descr(worker_type)->descname()).str();
 	return result;
 }
 
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation
 	(const Tribes& tribes) const
 {
-	std::string result = (boost::format(_("the economy doesn’t need %s"))
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
+	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’"))
 			  % tribes.get_worker_descr(worker_type)->descname()).str();
 	return result;
 }

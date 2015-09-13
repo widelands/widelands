@@ -5,8 +5,6 @@ tribes:new_ware_type {
    name = "blackroot_flour",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Blackroot Flour"),
-   -- TRANSLATORS: mass description, e.g. 'The economy needs ...'
-   genericname = pgettext("ware", "blackroot flour"),
    directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {
