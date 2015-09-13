@@ -74,7 +74,7 @@ public:
 	bool has_building(const BuildingIndex& index) const;
 	bool has_ware(const WareIndex& index) const;
 	bool has_worker(const WareIndex& index) const;
-	bool has_immovable(const int index) const;
+	bool has_immovable(int index) const;
 	bool is_construction_material(const WareIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;

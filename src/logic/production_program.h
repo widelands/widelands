@@ -187,7 +187,7 @@ struct ProductionProgram {
 		/// wares, combining from any of the types specified, in its input
 		/// queues.
 		struct SiteHas : public Condition {
-			SiteHas(char*& parameters, const ProductionSiteDescr&, const Tribes& tribes);
+			SiteHas(char* & parameters, const ProductionSiteDescr&, const Tribes& tribes);
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;

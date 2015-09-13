@@ -240,7 +240,9 @@ int LuaPlayer::get_team(lua_State * L) {
 		(RO) The :class:`~wl.Game.Tribe_description` for this player.
 */
 int LuaPlayer::get_tribe(lua_State * L) {
-	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(&get(L, get_egbase(L)).tribe()));
+	return to_lua<LuaMaps::LuaTribeDescription>(
+				L,
+				new LuaMaps::LuaTribeDescription(&get(L, get_egbase(L)).tribe()));
 }
 
 

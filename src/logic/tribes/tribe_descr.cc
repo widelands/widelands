@@ -77,7 +77,9 @@ TribeDescr::TribeDescr
 				if (g_fs->file_exists(filename)) {
 					images->push_back(filename);
 				} else {
-					throw GameDataError("File '%s' for %s road texture doesn't exist", filename.c_str(), road_type.c_str());
+					throw GameDataError("File '%s' for %s road texture doesn't exist",
+											  filename.c_str(),
+											  road_type.c_str());
 				}
 			}
 			if (images->empty()) {
@@ -226,7 +228,7 @@ bool TribeDescr::has_ware(const WareIndex& index) const {
 bool TribeDescr::has_worker(const WareIndex& index) const {
 	return workers_.count(index) == 1;
 }
-bool TribeDescr::has_immovable(const int index) const {
+bool TribeDescr::has_immovable(int index) const {
 	return immovables_.count(index) == 1;
 }
 bool TribeDescr::is_construction_material(const WareIndex& index) const {

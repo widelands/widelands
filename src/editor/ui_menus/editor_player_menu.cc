@@ -170,7 +170,8 @@ void EditorPlayerMenu::update() {
 			m_selected_tribes[p] = m_tribenames[0];
 			map.set_scenario_player_tribe(p, m_selected_tribes[p]);
 		}
-		m_plr_set_tribes_buts[p - 1]->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p]).descname);
+		m_plr_set_tribes_buts[p - 1]
+				->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");

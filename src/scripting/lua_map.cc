@@ -91,9 +91,9 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 		for (const std::string& foodname : foodlist) {
 			lua_pushnumber(L, ++counter2);
 			lua_pushstring(L, foodname);
-			lua_settable(L,-3);
+			lua_settable(L, -3);
 		}
-		lua_settable(L,-3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }

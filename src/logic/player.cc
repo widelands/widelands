@@ -1148,7 +1148,7 @@ void Player::sample_statistics()
 		const std::vector<Widelands::Warehouse *> & warehouses =
 			get_economy_by_number(i)->warehouses();
 
-		for (Widelands::Warehouse * warehouse : warehouses)	{
+		for (Widelands::Warehouse * warehouse : warehouses) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += wares.stock(WareIndex(id));

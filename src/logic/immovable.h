@@ -116,8 +116,10 @@ public:
 
 	static Buildcost parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
 
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world); // World immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes); // Tribes immovable
+	/// World immovable
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
+	/// Tribes immovable
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}

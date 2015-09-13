@@ -371,7 +371,7 @@ Immovable & EditorGameBase::create_immovable
 	WareIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
-		if(!tribes().immovable_exists(idx)) {
+		if (!tribes().immovable_exists(idx)) {
 			throw wexception
 				("EditorGameBase::create_immovable(%i, %i): %s is not defined for the tribes",
 				 c.x, c.y, name.c_str());

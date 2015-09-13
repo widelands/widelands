@@ -205,7 +205,9 @@ Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const
 /**
  * Parse a common immovable functions from init file.
  */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, MapObjectDescr::OwnerType input_type) :
+ImmovableDescr::ImmovableDescr(const std::string& init_descname,
+										 const LuaTable& table,
+										 MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname),
 	m_size(BaseImmovable::NONE),
@@ -260,7 +262,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable&
 /**
  * Parse a tribes immovable from its init file.
  */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes) :
+ImmovableDescr::ImmovableDescr(const std::string& init_descname,
+										 const LuaTable& table,
+										 const Tribes& tribes) :
 	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
 	if (table.has_key("buildcost")) {
 		m_buildcost = ImmovableDescr::parse_buildcost(table.get_table("buildcost"), tribes);
