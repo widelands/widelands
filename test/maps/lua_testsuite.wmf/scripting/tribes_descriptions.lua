@@ -1,11 +1,6 @@
 set_textdomain("tribes")
 
 test_descr = lunit.TestCase("Tribes descriptions test")
-function test_descr:test_instantiation_forbidden()
-   assert_error("Cannot instantiate", function()
-      wl.map.TribeDescription()
-   end)
-end
 
 --  =======================================================
 --  ****************** TribeDescription *******************
@@ -13,7 +8,8 @@ end
 
 function test_descr:test_tribe_descr()
    assert_error("Wrong tribe", function() egbase:get_tribe_description("XXX") end)
-   assert_error("Wrong number of parameters: 2", function() egbase:get_tribe_description("XXX","YYY",) end)
+   assert_error("Wrong number of parameters: 2", function() egbase:get_tribe_description("XXX", "YYY") end)
+   assert_error("Wrong number of parameters: 3", function() egbase:get_tribe_description("XXX", "YYY", "ZZZ") end)
 end
 
 function test_descr:test_descname()

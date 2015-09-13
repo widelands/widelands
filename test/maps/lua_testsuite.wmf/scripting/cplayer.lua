@@ -142,7 +142,7 @@ function place_building_tests:test_place_building_no_cs()
    local k = player1:place_building("barbarians_warehouse", self.f)
    self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
-   assert_equal("barbarians_warehouse", k.descr.type_name)
+   assert_equal("warehouse", k.descr.type_name)
 end
 
 function place_building_tests:test_something_in_the_way_no_cs()

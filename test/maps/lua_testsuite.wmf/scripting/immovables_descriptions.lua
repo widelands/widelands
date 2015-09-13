@@ -19,8 +19,10 @@ end
 
 function test_descr:test_building_descr()
    assert_error("Wrong building", function() egbase:get_building_description("XXX") end)
-   assert_error("Wrong number of parameters: 2", function() egbase:get_building_description("XXX","YYY",) end)
+   assert_error("Wrong number of parameters: 2", function() egbase:get_building_description("XXX", "YYY") end)
+   assert_error("Wrong number of parameters: 3", function() egbase:get_building_description("XXX","YYY","ZZZ") end)
 end
+
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
