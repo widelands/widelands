@@ -26,6 +26,7 @@
 
 class FileSystem;
 class OneWorldLegacyLookupTable;
+class OneTribeLegacyLookupTable;
 
 namespace Widelands {
 
@@ -56,7 +57,8 @@ struct MapObjectPacket {
 
 	void read
 		(FileSystem &, EditorGameBase &, MapObjectLoader &,
-		 const OneWorldLegacyLookupTable& lookup_table);
+		 const OneWorldLegacyLookupTable& world_lookup_table,
+		 const OneTribeLegacyLookupTable& tribe_lookup_table);
 
 	void load_finish();
 

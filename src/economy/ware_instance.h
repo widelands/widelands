@@ -24,6 +24,7 @@
 #include "logic/instances.h"
 #include "logic/ware_descr.h"
 #include "logic/widelands.h"
+#include "map_io/one_tribe_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -124,7 +125,8 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&,
+											 const OneTribeLegacyLookupTable& lookup_table);
 };
 }
 

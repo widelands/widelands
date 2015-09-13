@@ -60,6 +60,7 @@
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/one_tribe_legacy_lookup_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -3055,11 +3056,16 @@ Worker::Loader * Worker::create_loader()
  * the appropriate actual load functions are called.
  */
 MapObject::Loader * Worker::load
-	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const OneTribeLegacyLookupTable& lookup_table, uint8_t packet_version)
 {
 	try {
 		// header has already been read by caller
 		std::string name = fr.c_string();
+		// Some maps contain worker info, so we need compatibility here.
+		if (packet_version == 1) {
+			name = lookup_table.lookup_worker(name, fr.c_string());
+		}
 
 		const WorkerDescr * descr =
 			egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));

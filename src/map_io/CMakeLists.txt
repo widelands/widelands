@@ -24,6 +24,8 @@ wl_library(map_io
   SRCS
     coords_profile.cc
     coords_profile.h
+    one_tribe_legacy_lookup_table.cc
+    one_tribe_legacy_lookup_table.h
     one_world_legacy_lookup_table.cc
     one_world_legacy_lookup_table.h
     map_allowed_building_types_packet.cc

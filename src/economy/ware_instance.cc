@@ -619,15 +619,19 @@ void WareInstance::save
 }
 
 MapObject::Loader * WareInstance::load
-	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const OneTribeLegacyLookupTable& lookup_table)
 {
 	try {
 		uint8_t version = fr.unsigned_8();
 
-		if (version != WAREINSTANCE_SAVEGAME_VERSION)
+		if (!(1 <= version && version <= WAREINSTANCE_SAVEGAME_VERSION))
 			throw wexception("unknown/unhandled version %i", version);
-
-		const std::string warename = fr.c_string();
+		std::string warename = fr.c_string();
+		// Some maps may contain ware info, so we need compatibility here.
+		if (version == 1) {
+			warename = lookup_table.lookup_ware(warename, fr.c_string());
+		}
 
 		WareIndex wareindex = egbase.tribes().ware_index(warename);
 		const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);

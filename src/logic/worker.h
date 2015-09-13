@@ -26,6 +26,7 @@
 #include "economy/ware_instance.h"
 #include "logic/productionsite.h"
 #include "logic/worker_descr.h"
+#include "map_io/one_tribe_legacy_lookup_table.h"
 
 namespace Widelands {
 class Building;
@@ -277,7 +278,8 @@ public:
 		(EditorGameBase &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &, const OneTribeLegacyLookupTable& lookup_table,
+		 uint8_t packet_version);
 };
 
 }

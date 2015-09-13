@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 MapObjectPacket::~MapObjectPacket() {
@@ -49,14 +49,15 @@ MapObjectPacket::~MapObjectPacket() {
 
 void MapObjectPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
-	 const OneWorldLegacyLookupTable& lookup_table)
+	 const OneWorldLegacyLookupTable& world_lookup_table,
+	 const OneTribeLegacyLookupTable& tribe_lookup_table)
 {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version != CURRENT_PACKET_VERSION)
+		if (!(1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION))
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
 
@@ -66,7 +67,7 @@ void MapObjectPacket::read
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr, world_lookup_table));
 				break;
 
 			case MapObject::HeaderBattle:
@@ -74,15 +75,15 @@ void MapObjectPacket::read
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter::load(egbase, mol, fr, lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
 				break;
 
 			case MapObject::HeaderWorker:
-				loaders.insert(Worker::load(egbase, mol, fr));
+				loaders.insert(Worker::load(egbase, mol, fr, tribe_lookup_table, packet_version));
 				break;
 
 			case MapObject::HeaderWareInstance:
-				loaders.insert(WareInstance::load(egbase, mol, fr));
+				loaders.insert(WareInstance::load(egbase, mol, fr, tribe_lookup_table));
 				break;
 
 			case MapObject::HeaderShip:
