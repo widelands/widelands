@@ -19,8 +19,8 @@ function introduction_thread()
 
    message_box_objective(plr, briefing_msg_01)
    -- these buildings are still burning, but only for a while
-   map:place_immovable("destroyed_building",map:get_field(7,41),"barbarians")
-   map:place_immovable("destroyed_building",map:get_field(5,52),"barbarians")
+   map:place_immovable("destroyed_building",map:get_field(7,41),"tribes")
+   map:place_immovable("destroyed_building",map:get_field(5,52),"tribes")
    plr:reveal_fields(al_thunran:region(8))
    message_box_objective(plr, briefing_msg_02) -- Al'thunran
    plr:reveal_fields(grave:region(4))

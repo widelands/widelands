@@ -25,8 +25,8 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("spruce_summer_old", field)
-   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
+   tree = map:place_immovable("spruce_summer_old", field, "world")
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34), "world")
    removed_tree:remove()
 
    building_descr = game:get_building_description("barbarians_lumberjacks_hut")

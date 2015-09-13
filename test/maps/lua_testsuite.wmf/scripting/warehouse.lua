@@ -14,7 +14,7 @@ function warehouse_tests:test_name()
    assert_equal("barbarians_warehouse", self.w.descr.name)
 end
 function warehouse_tests:test_type()
-   assert_equal("barbarians_warehouse", self.w.descr.type_name)
+   assert_equal("warehouse", self.w.descr.type_name)
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()
@@ -100,11 +100,11 @@ function warehouse_tests:test_set_get_workers_string_arg()
    assert_equal(190, self.w:get_workers("barbarians_builder"))
 end
 function warehouse_tests:test_set_get_workers_table_arg()
-   k = self.w:get_workers{"barbarians_builder", "lumberjack"}
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(0, k.barbarians_builder)
    assert_equal(0, k.barbarians_lumberjack)
    self.w:set_workers{barbarians_builder=190, barbarians_lumberjack=170}
-   k = self.w:get_workers{"barbarians_builder", "lumberjack"}
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(190, k.barbarians_builder)
    assert_equal(170, k.barbarians_lumberjack)
 end

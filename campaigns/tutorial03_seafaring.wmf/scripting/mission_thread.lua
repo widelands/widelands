@@ -73,7 +73,7 @@ function expedition()
          local idx = math.random(#fields)
          f = fields[idx]
          if ((f.resource == "iron") and not f.immovable) then
-            map:place_immovable("resi_iron2",f,"atlanteans")
+            map:place_immovable("resi_iron2",f,"tribes")
             successful = true
          end
          table.remove(fields,idx)

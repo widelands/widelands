@@ -71,7 +71,7 @@ function player_allow_buildings_tests:teardown()
    player1:allow_buildings "all"
 end
 function player_allow_buildings_tests:test_property()
-   assert_equal(true, player1.allowed_buildings.lumberjacks_hut)
+   assert_equal(true, player1.allowed_buildings.barbarians_lumberjacks_hut)
    assert_equal(true, player1.allowed_buildings["barbarians_quarry"])
 end
 function player_allow_buildings_tests:test_forbid_all_buildings()
@@ -140,7 +140,7 @@ function player_building_access:test_access()
    self.bs = { b1, b2, b3 }
    rv = player1:get_buildings{"barbarians_lumberjacks_hut", "barbarians_quarry"}
 
-   assert_equal(b3, rv.quarry[1])
+   assert_equal(b3, rv.barbarians_quarry[1])
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end

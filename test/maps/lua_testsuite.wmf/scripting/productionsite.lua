@@ -51,10 +51,10 @@ function productionsite_tests:test_no_workers_initially()
 end
 function productionsite_tests:test_valid_workers()
    assert_equal(2, _cnt(self.inn.valid_workers))
-   assert_equal(2, self.inn.valid_workers.innkeeper)
+   assert_equal(2, self.inn.valid_workers.barbarians_innkeeper)
    assert_equal(2, _cnt(self.warmill.valid_workers))
-   assert_equal(1, self.warmill.valid_workers.blacksmith)
-   assert_equal(1, self.warmill.valid_workers.blacksmith_master)
+   assert_equal(1, self.warmill.valid_workers.barbarians_blacksmith)
+   assert_equal(1, self.warmill.valid_workers.barbarians_blacksmith_master)
 end
 function productionsite_tests:test_set_workers()
    self.inn:set_workers("barbarians_innkeeper", 1)

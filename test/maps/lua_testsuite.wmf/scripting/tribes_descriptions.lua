@@ -36,42 +36,42 @@ function test_descr:test_get_buildings()
    tribe = egbase:get_tribe_description("barbarians")
    assert_equal(50, nobuildings(tribe.buildings))
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(52, nobuildings(tribe.buildings))
+   assert_equal(51, nobuildings(tribe.buildings))
 end
 
 function test_descr:test_get_carrier()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_carrier", tribe.carrier.name)
+   assert_equal("atlanteans_carrier", tribe.carrier)
 end
 
 function test_descr:test_get_carrier2()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_horse", tribe.carrier2.name)
+   assert_equal("atlanteans_horse", tribe.carrier2)
 end
 
 function test_descr:test_get_headquarters()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_headquarters", tribe.headquarters.name)
+   assert_equal("atlanteans_headquarters", tribe.headquarters)
 end
 
 function test_descr:test_get_geologist()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_geologist", tribe.geologist.name)
+   assert_equal("atlanteans_geologist", tribe.geologist)
 end
 
 function test_descr:test_get_port()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_port", tribe.port.name)
+   assert_equal("atlanteans_port", tribe.port)
 end
 
 function test_descr:test_get_ship()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("ship", tribe.ship.name)
+   assert_equal("atlanteans_ship", tribe.ship)
 end
 
 function test_descr:test_get_soldier()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_soldier", tribe.soldier.name)
+   assert_equal("atlanteans_soldier", tribe.soldier)
 end
 
 function test_descr:test_get_wares()

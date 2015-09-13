@@ -148,7 +148,7 @@ end
 -- ===================
 function flag_tests:roads_and_buildings_test()
    local field = map:get_field(4,14)
-   self.w = player1:place_building("warehouse", field)
+   self.w = player1:place_building("barbarians_warehouse", field)
    self.f1 = self.w.flag
    local road = player1:place_road(self.f1, "br", "br", "br")
    self.f2 = self.f1.fields[1].brn.brn.brn.immovable

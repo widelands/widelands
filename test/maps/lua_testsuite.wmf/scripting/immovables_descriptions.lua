@@ -88,7 +88,7 @@ function test_descr:test_enhancement_cost()
 end
 
 function test_descr:test_enhancement()
-	assert_equal("inn", egbase:get_building_description("barbarians_tavern").enhancement.name)
+	assert_equal("barbarians_inn", egbase:get_building_description("barbarians_tavern").enhancement.name)
 	assert_equal(nil, egbase:get_building_description("barbarians_lumberjacks_hut").enhancement)
 end
 
@@ -167,8 +167,8 @@ end
 
 function test_descr:test_inputs()
 	local building_description = egbase:get_building_description("barbarians_bakery")
-	assert_equal("wheat", building_description.inputs[1].name)
-	assert_equal("water", building_description.inputs[2].name)
+	assert_equal("water", building_description.inputs[1].name)
+	assert_equal("wheat", building_description.inputs[2].name)
 	building_description = egbase:get_building_description("barbarians_lumberjacks_hut")
 	assert_equal(nil, building_description.inputs[1])
 end
@@ -192,10 +192,10 @@ function test_descr:test_type()
 end
 
 function test_descr:test_working_positions()
-	local building_description = egbase:get_building_description("barbarians_deeper_coalmine")
-	assert_equal("barbarians_miner_master", building_description.working_positions[1].name)
+	local building_description = egbase:get_building_description("barbarians_coalmine_deeper")
+	assert_equal("barbarians_miner", building_description.working_positions[1].name)
 	assert_equal("barbarians_miner_chief", building_description.working_positions[2].name)
-	assert_equal("barbarians_miner", building_description.working_positions[3].name)
+	assert_equal("barbarians_miner_master", building_description.working_positions[3].name)
 	building_description = egbase:get_building_description("barbarians_big_inn")
 	assert_equal("barbarians_innkeeper", building_description.working_positions[1].name)
 	assert_equal("barbarians_innkeeper", building_description.working_positions[2].name)
@@ -253,7 +253,7 @@ end
 function test_descr:test_max_defense()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_defense)
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").max_defense)
-   assert_equal(1, egbase:get_building_description("atlanteans","atlanteans_labyrinth").max_defense)
+   assert_equal(1, egbase:get_building_description("atlanteans_labyrinth").max_defense)
 end
 
 function test_descr:test_max_evade()
@@ -274,7 +274,7 @@ end
 function test_descr:test_min_defense()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_defense)
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").min_defense)
-   assert_equal(0, egbase:get_building_description("atlanteans","atlanteans_labyrinth").min_defense)
+   assert_equal(0, egbase:get_building_description("atlanteans_labyrinth").min_defense)
 end
 
 function test_descr:test_min_evade()
@@ -336,12 +336,24 @@ function test_descr:test_name()
 end
 
 function test_descr:test_consumers()
+   local find_building = function(findme, t)
+      local found = false
+      for ids, ware_description in pairs(t) do
+			if (ware_description.name == findme) then
+				found = true
+			end
+      end
+      return found
+   end
+
 	local ware_description = egbase:get_ware_description("coal")
-   assert_equal("barbarians_lime_kiln", ware_description.consumers[1].name)
-   assert_equal("barbarians_smelting_works", ware_description.consumers[2].name)
-   assert_equal("barbarians_warmill", ware_description.consumers[3].name)
-   assert_equal("barbarians_axfactory", ware_description.consumers[4].name)
-   assert_equal("barbarians_helmsmithy", ware_description.consumers[5].name)
+   assert_equal(true, find_building("barbarians_lime_kiln", ware_description.consumers))
+   assert_equal(true, find_building("empire_smelting_works", ware_description.consumers))
+   assert_equal(true, find_building("atlanteans_smelting_works", ware_description.consumers))
+   assert_equal(true, find_building("barbarians_warmill", ware_description.consumers))
+   assert_equal(true, find_building("barbarians_axfactory", ware_description.consumers))
+   assert_equal(true, find_building("barbarians_helmsmithy", ware_description.consumers))
+   assert_equal(false, find_building("atlanteans_crystalmine", ware_description.producers))
 end
 
 function test_descr:test_icon_name()
@@ -349,11 +361,22 @@ function test_descr:test_icon_name()
 end
 
 function test_descr:test_producers()
+   local find_building = function(findme, t)
+      local found = false
+      for ids, ware_description in pairs(t) do
+			if (ware_description.name == findme) then
+				found = true
+			end
+      end
+      return found
+   end
+
 	local ware_description = egbase:get_ware_description("coal")
-	assert_equal("barbarians_charcoal_kiln", ware_description.producers[1].name)
-	assert_equal("barbarians_deeper_coalmine", ware_description.producers[2].name)
-	assert_equal("barbarians_deep_coalmine", ware_description.producers[3].name)
-	assert_equal("barbarians_coalmine", ware_description.producers[4].name)
+	assert_equal(true, find_building("empire_charcoal_kiln", ware_description.producers))
+	assert_equal(true, find_building("barbarians_coalmine_deeper", ware_description.producers))
+	assert_equal(true, find_building("barbarians_coalmine_deep", ware_description.producers))
+	assert_equal(true, find_building("atlanteans_coalmine", ware_description.producers))
+	assert_equal(false, find_building("atlanteans_crystalmine", ware_description.producers))
 end
 
 function test_descr:is_construction_material()

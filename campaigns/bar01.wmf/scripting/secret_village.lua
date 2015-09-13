@@ -48,7 +48,7 @@ function reveal_village()
          if f.immovable then
             pcall(f.immovable.remove, f.immovable)
          end
-         map:place_immovable(id[1], f, id[4])
+         map:place_immovable(id[1], f, id[4], "world")
       end
    end
 

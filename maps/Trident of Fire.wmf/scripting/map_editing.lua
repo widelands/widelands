@@ -7,9 +7,9 @@ local region_to_forest = map:get_field(0,0):region(23)
 			if not _fully_flooded(map:get_field(field.x,field.y)) then
 				if map:get_field(field.x,field.y).immovable == 	nil then
 					if (field.x + field.y) % 2 == 0 then
-						map:place_immovable("aspen_summer_sapling", map:get_field(field.x,field.y))
+						map:place_immovable("aspen_summer_sapling", map:get_field(field.x,field.y), "world")
 					else
-						map:place_immovable("oak_summer_sapling", map:get_field(field.x,field.y))
+						map:place_immovable("oak_summer_sapling", map:get_field(field.x,field.y), "world")
 					end
 					sleep(750)
 				end

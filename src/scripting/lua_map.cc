@@ -948,7 +948,7 @@ int LuaMap::get_player_slots(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. method:: place_immovable(name, field[, from_where = "world"])
+	.. method:: place_immovable(name, field, from_where)
 
 		Creates an immovable that is defined by the world (e.g. trees, stones...)
 		or a tribe (field) on a given field. If there is already an immovable on
@@ -958,14 +958,14 @@ int LuaMap::get_player_slots(lua_State * L) {
 		:type name: :class:`string`
 		:arg field: The immovable is created on this field.
 		:type field: :class:`wl.map.Field`
-		:arg from_where: a tribe name or "world" that defines where the immovable
-			is defined
+		:arg from_where: "world" if the immovable	is defined in the world,
+			"tribes" if it is defined in the tribes.
 		:type from_where: :class:`string`
 
 		:returns: The created immovable.
 */
 int LuaMap::place_immovable(lua_State * const L) {
-	std::string from_where = "world";
+	std::string from_where = "";
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField * c = *get_user_class<LuaMaps::LuaField>(L, 3);
@@ -981,19 +981,21 @@ int LuaMap::place_immovable(lua_State * const L) {
 	EditorGameBase & egbase = get_egbase(L);
 
 	BaseImmovable * m = nullptr;
-	if (from_where != "world") {
-		try {
-			WareIndex const imm_idx = egbase.tribes().safe_immovable_index(objname);
-			m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
-		} catch (GameDataError& e) {
-			report_error(L, "Problem loading immovable <%s>. Maybe not existent? %s", objname.c_str(), e.what());
-		}
-	} else {
+	if (from_where == "world") {
 		WareIndex const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
-			report_error(L, "Unknown immovable <%s>", objname.c_str());
+			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
+	} else if (from_where == "tribes") {
+
+		WareIndex const imm_idx = egbase.tribes().immovable_index(objname);
+		if (imm_idx == Widelands::INVALID_INDEX)
+			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
+
+		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
+	} else {
+		report_error(L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
 	}
 
 	return LuaMaps::upcasted_map_object_to_lua(L, m);
@@ -1214,6 +1216,7 @@ int LuaTribeDescription::get_soldier(lua_State * L) {
 */
 
 int LuaTribeDescription::get_wares(lua_State * L) {
+	lua_newtable(L);
 	int counter = 0;
 	for (WareIndex ware : get()->wares()) {
 		lua_pushinteger(L, ++counter);
@@ -1230,6 +1233,7 @@ int LuaTribeDescription::get_wares(lua_State * L) {
 */
 
 int LuaTribeDescription::get_workers(lua_State * L) {
+	lua_newtable(L);
 	int counter = 0;
 	for (WareIndex worker : get()->workers()) {
 		lua_pushinteger(L, ++counter);
