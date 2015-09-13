@@ -206,6 +206,8 @@ public:
 	// Allows access to the filesystem of the map to access auxiliary files.
 	// This can be nullptr if this file is new.
 	FileSystem* filesystem() const;
+	// swap the filesystem after load / save
+	void swap_filesystem(std::unique_ptr<FileSystem>& fs);
 
 	// informational functions
 	const std::string& get_filename()    const {return m_filename;}
