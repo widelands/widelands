@@ -309,8 +309,8 @@ void Map::cleanup() {
 
 	m_port_spaces.clear();
 
-	// should be done here ... but WidelandsMapLoader::preload_map calls this cleanup
-	// AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
+	// TODO (meitis) should be done here ... but WidelandsMapLoader::preload_map calls
+	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
 	// ... so we can't do it here :/
 	//filesystem_.reset(nullptr);
 }
