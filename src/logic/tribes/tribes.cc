@@ -21,8 +21,8 @@
 
 #include <memory>
 
-#include "graphic/texture_atlas.h"
 #include "graphic/image_io.h"
+#include "graphic/texture_atlas.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 

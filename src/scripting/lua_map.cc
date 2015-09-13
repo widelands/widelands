@@ -1042,7 +1042,6 @@ int LuaMap::recalculate(lua_State * L) {
 /* RST
 TribeDescription
 --------------------
-NOCOM(GunChleoc) write tests
 .. class:: TribeDescription
 
 	A static description of a tribe.
@@ -2227,7 +2226,6 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 
 		(RO) A bool that is true if this ware is used by the tribe's construction sites.
 */
-// NOCOM(GunChleoc): Write test
 int LuaWareDescription::is_construction_material(lua_State * L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Tribes& tribes = get_egbase(L).tribes();

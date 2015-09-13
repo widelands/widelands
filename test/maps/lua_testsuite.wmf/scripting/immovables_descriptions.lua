@@ -354,6 +354,17 @@ function test_descr:test_producers()
 	assert_equal("barbarians_coalmine", ware_description.producers[4].name)
 end
 
+function test_descr:is_construction_material()
+	local ware_description = egbase:get_ware_description("coal")
+	assert_equal(false, ware_description.is_construction_material("barbarians"))
+	ware_description = egbase:get_ware_description("log")
+	assert_equal(true, ware_description.is_construction_material("atlanteans"))
+	ware_description = egbase:get_ware_description("planks")
+	assert_equal(false, ware_description.is_construction_material("barbarians"))
+	ware_description = egbase:get_ware_description("planks")
+	assert_equal(true, ware_description.is_construction_material("atlanteans"))
+end
+
 --  =======================================================
 --  ****************** WorkerDescription ******************
 --  =======================================================
@@ -376,9 +387,9 @@ end
 function test_descr:test_becomes()
 	local worker_descr = egbase:get_worker_description("barbarians_miner").becomes
    assert_equal("barbarians_miner_chief", worker_descr.name)
-	worker_descr = egbase:get_worker_description("barbarians__miner_chief").becomes
-   assert_equal("barbarians__miner_master", worker_descr.name)
-	worker_descr = egbase:get_worker_description("barbarians__miner_master").becomes
+	worker_descr = egbase:get_worker_description("barbarians_miner_chief").becomes
+   assert_equal("barbarians_miner_master", worker_descr.name)
+	worker_descr = egbase:get_worker_description("barbarians_miner_master").becomes
    assert_equal(nil, worker_descr)
 end
 

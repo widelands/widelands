@@ -60,7 +60,6 @@ TribeDescr::TribeDescr
 	// - Atlanteans: water, steel trident
 	// Automatic resizing of warehouse window for small screens is broken.
 	// Double-check statistics
-	// Loading workers is slow
 
 	try {
 		m_initializations = info.initializations;

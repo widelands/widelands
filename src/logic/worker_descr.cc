@@ -117,6 +117,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				parser.table = items_table.get();
 
 				program = new WorkerProgram(program_name);
+
+				// NOCOM parsing is a lot slower than in trunk
 				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
 				programs_[program_name.c_str()] = program;
 			}
