@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 19:46+0000\n"
+"POT-Creation-Date: 2015-09-12 10:50+0000\n"
+"PO-Revision-Date: 2015-09-12 19:10+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgid ""
 "Barbarians."
 msgstr "Drei Wochen später kehrte ich nach Fremil zurück, um mit unserem König zu sprechen. Er war zornig auf die Barbaren, doch verbot er mir jeden Angriff. Er glaubte, dass unsere Armee zu schwach sein würde, um in einem Kampf gegen die Barbaren zu bestehen."
 
-#: TRANSLATORS Gulf of Perl is a place name.
+#. TRANSLATORS: Gulf of Perl is a place name.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:89
 msgid ""
 "Still, I saw no way that I could erase my shame without fighting against "
@@ -200,7 +200,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "Herr, ich fürchte, wir sind nicht sicher in diesem fremden Land. Wer weiß, welch schreckliche Kreaturen uns hinter diesem Wald erwarten werden, in dieser mächtigen Wüste? Was, wenn diese Kreaturen den Wald betreten und sich bereit gemacht haben, uns zu überfallen?"
+msgstr "Herr, ich fürchte, wir sind nicht sicher in diesem fremden Land. Wer weiß, welch schreckliche Kreaturen jenseits dieses Wald in dieser mächtigen Wüste leben? Was, wenn diese Kreaturen den Wald betreten und auf einen günstigen Zeitpunkt warten, uns zu überfallen?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:121
 msgid ""
@@ -254,7 +254,7 @@ msgstr "Sei gegrüßt, Lutius! Ich habe gerade Saledus draußen getroffen."
 msgid ""
 "He told me about the barracks. Well, I don’t think we need more barracks – "
 "instead, we might concentrate on other things now."
-msgstr "Er sprach mit mir über die Baracken. Nun, ich denke nicht, dass wir weitere Baracken brauchen – stattdessen sollten wir uns auf andere Dinge konzentrieren."
+msgstr "Er sprach mit mir über die Baracken. Nun, ich denke nicht, dass wir weitere Baracken brauchen – stattdessen sollten wir uns nun auf andere Dinge konzentrieren."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
@@ -307,7 +307,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Diese Bäume geben uns Schutz vor den Sandstürmen aus der Wüste und spenden uns an heißen Tagen Schatten. Außerdem sind sie die Heimat von so vielen Tieren. Wir sollten diese Insel nicht als reine Wüste zurücklassen."
+msgstr "Diese Bäume geben uns Schutz vor den Sandstürmen aus der Wüste und spenden uns an heißen Tagen Schatten. Außerdem sind sie die Heimat von vielen Tieren. Wir sollten diese Insel nicht als reine Wüste zurücklassen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:171
 msgid "Lutius, please find someone who will take care of planting new trees."
