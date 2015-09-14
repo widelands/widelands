@@ -861,8 +861,15 @@ void LuaPlayer::m_parse_building_list
 		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
-		for (const BuildingIndex& building_index : tribe.buildings()) {
+		// Only act on buildings that the tribe has or could conquer
+		const TribeDescr& tribe = get(L, get_egbase(L)).tribe();
+		const Tribes& tribes = get_egbase(L).tribes();
+		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
+			const BuildingIndex& building_index = static_cast<BuildingIndex>(i);
+			const BuildingDescr& descr = *tribe.get_building_descr(building_index);
+			if (tribe.has_building(building_index) || descr.type() == MapObjectType::MILITARYSITE) {
 				rv.push_back(building_index);
+			}
 		}
 	} else {
 		// array of strings argument

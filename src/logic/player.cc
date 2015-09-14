@@ -166,6 +166,23 @@ Player::Player
 {
 	set_name(name);
 
+	// Disallow workers that the player's tribe doesn't have.
+	for (size_t worker_index = 0; worker_index < m_allowed_worker_types.size(); ++worker_index) {
+		if (!tribe().has_worker(static_cast<WareIndex>(worker_index))) {
+			m_allowed_worker_types[worker_index] = false;
+		}
+	}
+
+	// Disallow buildings that the player's tribe doesn't have and
+	// that aren't militarysites that the tribe could conquer.
+	for (size_t i = 0; i < m_allowed_building_types.size(); ++i) {
+		const BuildingIndex& building_index = static_cast<BuildingIndex>(i);
+		const BuildingDescr& descr = *tribe().get_building_descr(building_index);
+		if (!tribe().has_building(building_index) && descr.type() != MapObjectType::MILITARYSITE) {
+			m_allowed_building_types[i] = false;
+		}
+	}
+
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {

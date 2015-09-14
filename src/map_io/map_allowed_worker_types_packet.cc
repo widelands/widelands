@@ -41,9 +41,10 @@ void MapAllowedWorkerTypesPacket::read
 	if (skip)
 		return;
 
-	// Worker types are allowed by default - this is to make sure that old maps
-	// remain playable without change even if new worker types are introduced. If
-	// our file is not there, there is nothing to be done.
+	// Worker types that the tribe has are allowed by default - this is to make sure that old maps
+	// remain playable without change even if new worker types are introduced.
+	// Worker types that the tribe doesn't have are always disallowed.
+	// If our file is not there, there is nothing to be done.
 	Profile prof;
 	try {
 		prof.read("allowed_worker_types", nullptr, fs);
@@ -63,9 +64,15 @@ void MapAllowedWorkerTypesPacket::read
 					if (s == nullptr)
 						continue;
 
-					for (const WareIndex& worker_index : tribe.workers()) {
-						const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
-						player->allow_worker_type(worker_index, s->get_bool(worker_descr->name().c_str(), true));
+					// Only allow workers that the player's tribe has.
+					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
+						const WareIndex& worker_index = static_cast<WareIndex>(i);
+						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
+						if (player->tribe().has_worker(worker_index)) {
+							player->allow_worker_type(worker_index, s->get_bool(worker_descr.name().c_str(), true));
+						} else {
+							player->allow_worker_type(worker_index, false);
+						}
 					}
 
 				} catch (const WException & e) {
