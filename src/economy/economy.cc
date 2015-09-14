@@ -518,7 +518,7 @@ bool Economy::needs_ware(WareIndex const ware_type) const {
 		{
 			// TODO(meitis): guess we should set a supply here already
 			// otherwise multiple productionsites can start to fullfill the same request
-			if(ware_type == m_requests[i]->get_index() && m_request[i]->is_open())
+			if (ware_type == m_requests[i]->get_index() && m_requests[i]->is_open())
 				return true;
 		}
 		return false;
@@ -545,7 +545,7 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 		{
 			// TODO(meitis): guess we should set a supply here already
 			// otherwise multiple "productionsites" can start to fullfill the same request
-			if(worker_type == m_requests[i]->get_type() && m_request[i]->is_open())
+			if (worker_type == m_requests[i]->get_type() && m_requests[i]->is_open())
 				return true;
 		}
 		return false;
