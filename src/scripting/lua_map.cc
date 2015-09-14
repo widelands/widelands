@@ -285,7 +285,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == static_cast<size_t>(tribes.nrworkers())) {  // Wants all returned
+	if (set.size() == pi.owner().tribe().get_nrworkers()) {  // Wants all returned
 		set.clear();
 		for (const WorkersMap::value_type& v : valid_workers) {
 			set.insert(v.first);
@@ -2873,13 +2873,14 @@ int LuaFlag::set_wares(lua_State * L)
 int LuaFlag::get_wares(lua_State * L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
+	Flag * flag = get(L, egbase);
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, get(L, egbase)->owner().tribe(), &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, flag->owner().tribe(), &return_number);
 
-	WaresMap wares = count_wares_on_flag_(*get(L, egbase), tribes);
+	WaresMap wares = count_wares_on_flag_(*flag, tribes);
 
-	if (wares_set.size() == static_cast<size_t>(tribes.nrwares())) { // Want all returned
+	if (wares_set.size() == flag->owner().tribe().get_nrwares()) { // Want all returned
 		wares_set.clear();
 
 		for (const std::pair<Widelands::WareIndex, uint32_t>& ware : wares) {
@@ -3486,7 +3487,8 @@ int LuaProductionSite::get_wares(lua_State * L) {
 		valid_wares.insert(input_ware.first);
 	}
 
-	if (wares_set.size() == static_cast<size_t>(tribes.nrwares())) // Want all returned
+
+	if (wares_set.size() == ps->owner().tribe().get_nrwares()) // Want all returned
 		wares_set = valid_wares;
 
 	if (!return_number)
