@@ -32,6 +32,7 @@
 #include "notifications/notifications.h"
 
 class LuaTable;
+class OneTribeLegacyLookupTable;
 class OneWorldLegacyLookupTable;
 class Profile;
 
@@ -267,7 +268,7 @@ public:
 	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
 		(EditorGameBase &, MapObjectLoader &, FileRead &,
-		 const OneWorldLegacyLookupTable& lookup_table);
+		 const OneWorldLegacyLookupTable& world_lookup_table, const OneTribeLegacyLookupTable& tribes_lookup_table);
 
 private:
 	void increment_program_pointer();

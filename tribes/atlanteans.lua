@@ -166,9 +166,9 @@ tribes:new_tribe {
 		"resi_iron1",
 		"resi_iron2",
 		"resi_none",
-		"resi_water",
-		"resi_stones1",
-		"resi_stones2",
+		"resi_water1",
+		"resi_granite1",
+		"resi_granite2",
 		"atlanteans_shipconstruction",
 	},
 

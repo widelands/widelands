@@ -35,9 +35,15 @@ public:
 	/// Looks up the new name for the 'ware'.
 	std::string lookup_ware(const std::string& tribe, const std::string& ware) const;
 
+	/// Looks up the new name for the 'immovable'.
+	std::string lookup_immovable(const std::string& tribe, const std::string& immovable) const;
+
+
 private:
+	/// {tribe name, {old name, new name}}
 	const std::map<std::string, std::map<std::string, std::string>> workers_;
 	const std::map<std::string, std::map<std::string, std::string>> wares_;
+	const std::map<std::string, std::map<std::string, std::string>> immovables_;
 
 	DISALLOW_COPY_AND_ASSIGN(OneTribeLegacyLookupTable);
 };

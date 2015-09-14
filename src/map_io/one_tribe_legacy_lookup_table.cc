@@ -187,10 +187,55 @@ OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
 			 {"wood_lance", "spear_wooden"},
 			 {"wood", "planks"},
 		 }),
+	 },
+	// Immovables
+	immovables_
+	{std::make_pair(
+		"atlanteans", std::map<std::string, std::string>
+		{
+			 {"blackrootfield_b", "blackrootfield_ripe"},
+			 {"blackrootfield_m", "blackrootfield_medium"},
+			 {"blackrootfield_s", "blackrootfield_small"},
+			 {"blackrootfield_t", "blackrootfield_tiny"},
+			 {"cornfield_b", "cornfield_ripe"},
+			 {"cornfield_m", "cornfield_medium"},
+			 {"cornfield_s", "cornfield_small"},
+			 {"cornfield_t", "cornfield_tiny"},
+			 {"shipconstruction", "atlanteans_shipconstruction"},
+		 }),
+	  std::make_pair(
+		  "barbarians", std::map<std::string, std::string>
+		  {
+			 {"field0", "field_medium"},
+			 {"field0s", "field_small"},
+			 {"field0t", "field_tiny"},
+			 {"field1", "field_ripe"},
+			 {"field2", "field_harvested"},
+			 {"reed0", "reed_medium"},
+			 {"reed0s", "reed_small"},
+			 {"reed0t", "reed_tiny"},
+			 {"reed1", "reed_ripe"},
+			 {"shipconstruction", "barbarians_shipconstruction"},
+		 }),
+	 std::make_pair(
+		 "empire", std::map<std::string, std::string>
+		 {
+			 {"field0", "field_medium"},
+			 {"field0s", "field_small"},
+			 {"field0t", "field_tiny"},
+			 {"field1", "field_ripe"},
+			 {"field2", "field_harvested"},
+			 {"wine0", "grapevine_medium"},
+			 {"wine0s", "grapevine_small"},
+			 {"wine0t", "grapevine_tiny"},
+			 {"wine1", "grapevine_ripe"},
+			 {"shipconstruction", "empire_shipconstruction"},
+		 }),
 	 }
 {}
 
-std::string OneTribeLegacyLookupTable::lookup_worker(const std::string& tribe, const std::string& worker) const {
+std::string OneTribeLegacyLookupTable::lookup_worker(const std::string& tribe,
+																	  const std::string& worker) const {
 	if (workers_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_workers = workers_.at(tribe);
 		const auto& i = tribe_workers.find(worker);
@@ -210,4 +255,16 @@ std::string OneTribeLegacyLookupTable::lookup_ware(const std::string& tribe, con
 		}
 	}
 	return ware;
+}
+
+std::string OneTribeLegacyLookupTable::lookup_immovable(const std::string& tribe,
+																		  const std::string& immovable) const {
+	if (immovables_.count(tribe)) {
+		const std::map<std::string, std::string>& tribe_immovables = immovables_.at(tribe);
+		const auto& i = tribe_immovables.find(immovable);
+		if (i != tribe_immovables.end()) {
+			return i->second;
+		}
+	}
+	return immovable;
 }

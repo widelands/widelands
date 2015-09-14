@@ -68,7 +68,7 @@ void MapObjectPacket::read
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(Immovable::load(egbase, mol, fr, world_lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr, world_lookup_table, tribe_lookup_table));
 				break;
 
 			case MapObject::HeaderBattle:

@@ -51,6 +51,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
+#include "map_io/one_tribe_legacy_lookup_table.h"
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
@@ -547,7 +548,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 6
+#define IMMOVABLE_SAVEGAME_VERSION 7
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -657,7 +658,11 @@ void Immovable::save
 	fw.unsigned_8(HeaderImmovable);
 	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
 
-	fw.unsigned_8(static_cast<uint8_t>(descr().owner_type()));
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
+		fw.string(get_owner()->tribe().name());
+	} else {
+		fw.c_string("world");
+	}
 
 	fw.string(descr().name());
 
@@ -689,8 +694,9 @@ void Immovable::save
 }
 
 MapObject::Loader * Immovable::load
-	(EditorGameBase & egbase, MapObjectLoader & mol,
-	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const OneWorldLegacyLookupTable& world_lookup_table,
+	 const OneTribeLegacyLookupTable& tribes_lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -698,31 +704,35 @@ MapObject::Loader * Immovable::load
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
-			bool is_tribe_immovable;
-			if (version <= 5) {  // This compatibility code is needed for the maps
-				is_tribe_immovable = !boost::equals(fr.c_string(), "world");
-			} else {
-				is_tribe_immovable = (static_cast<MapObjectDescr::OwnerType>(fr.unsigned_8())
-											 == MapObjectDescr::OwnerType::kTribe);
-			}
-
-			const std::string old_name = fr.c_string();
+			const std::string owner_name = fr.c_string();
+			std::string name = fr.c_string();
 			Immovable * imm = nullptr;
 
-			if (is_tribe_immovable) { // tribe immovable
-				try {
-					WareIndex const idx = egbase.tribes().safe_immovable_index(old_name);
-					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
-				} catch (const WException& e) {
-					throw GameDataError("Failed to load tribes immovable: %s", e.what());
+			if (owner_name != "world") { //  It is a tribe immovable.
+				// Needed for map compatibility
+				if (version < 7) {
+					name = tribes_lookup_table.lookup_immovable(owner_name, name);
 				}
+				if (egbase.tribes().tribe_exists(owner_name)) {
+					const WareIndex& tribe_index = egbase.tribes().tribe_index(owner_name);
+					const TribeDescr& tribe = *egbase.tribes().get_tribe_descr(tribe_index);
+					int32_t const idx = tribe.immovable_index(name);
+					if (idx != Widelands::INVALID_INDEX) {
+						imm = new Immovable(*tribe.get_immovable_descr(idx));
+					} else {
+						throw GameDataError
+							("tribe %s does not define immovable type \"%s\"",
+							 owner_name.c_str(), name.c_str());
+					}
+				} else
+					throw GameDataError("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.world();
-				const std::string new_name = lookup_table.lookup_immovable(old_name);
-				WareIndex const idx = world.get_immovable_index(new_name.c_str());
+				name = world_lookup_table.lookup_immovable(name);
+				int32_t const idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX)
-					throw wexception
-						("world does not define immovable type \"%s\"", new_name.c_str());
+					throw GameDataError
+						("world does not define immovable type \"%s\"", name.c_str());
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}

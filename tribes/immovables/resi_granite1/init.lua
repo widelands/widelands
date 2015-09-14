@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "resi_stones2",
+   name = "resi_granite1", -- This is named "granite" for compatibility with World.
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = pgettext("immovable", "A Lot of Stones"),
+   descname = pgettext("immovable", "Some Stones"),
    attributes = { "resi" },
    programs = {
 		program = {

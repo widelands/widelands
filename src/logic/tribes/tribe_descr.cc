@@ -52,8 +52,8 @@
 namespace Widelands {
 
 TribeDescr::TribeDescr
-	(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& init_egbase)
-	: name_(table.get_string("name")), descname_(info.descname), egbase_(init_egbase) {
+	(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
+	: name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 	// NOCOM(GunChleoc): Some ware types listed in headquarters are gaping holes:
 	// - Barbarians: stout
 	// - Empire: wool, water, wood lance
@@ -90,14 +90,14 @@ TribeDescr::TribeDescr
 		load_roads("busy", &busy_road_paths_);
 
 		items_table = table.get_table("wares_order");
-		wares_order_coords_.resize(egbase_.tribes().nrwares());
+		wares_order_coords_.resize(tribes_.nrwares());
 		int columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<WareIndex> column;
 			std::vector<std::string> warenames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
 				try {
-					WareIndex wareindex = egbase_.tribes().safe_ware_index(warenames[rowindex]);
+					WareIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
 					if (has_ware(wareindex)) {
 						throw GameDataError("Duplicate definition of ware '%s'", warenames[rowindex].c_str());
 					}
@@ -115,14 +115,14 @@ TribeDescr::TribeDescr
 		}
 
 		items_table = table.get_table("workers_order");
-		workers_order_coords_.resize(egbase_.tribes().nrworkers());
+		workers_order_coords_.resize(tribes_.nrworkers());
 		columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<WareIndex> column;
 			std::vector<std::string> workernames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
 				try {
-					WareIndex workerindex = egbase_.tribes().safe_worker_index(workernames[rowindex]);
+					WareIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
 					if (has_worker(workerindex)) {
 						throw GameDataError("Duplicate definition of worker '%s'", workernames[rowindex].c_str());
 					}
@@ -130,7 +130,7 @@ TribeDescr::TribeDescr
 					column.push_back(workerindex);
 					workers_order_coords_[workerindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
 
-					if (egbase_.tribes().get_worker_descr(workerindex)->buildcost().size() < 1) {
+					if (tribes_.get_worker_descr(workerindex)->buildcost().size() < 1) {
 						worker_types_without_cost_.push_back(workerindex);
 					}
 				} catch (const WException& e) {
@@ -146,7 +146,7 @@ TribeDescr::TribeDescr
 		std::vector<std::string> immovables = table.get_table("immovables")->array_entries<std::string>();
 		for (const std::string& immovablename : immovables) {
 			try {
-				WareIndex index = egbase_.tribes().safe_immovable_index(immovablename);
+				WareIndex index = tribes_.safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
 					throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 				}
@@ -158,7 +158,7 @@ TribeDescr::TribeDescr
 
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
-				BuildingIndex index = egbase_.tribes().safe_building_index(buildingname);
+				BuildingIndex index = tribes_.safe_building_index(buildingname);
 				if (has_building(index)) {
 					throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 				}
@@ -190,7 +190,7 @@ TribeDescr::TribeDescr
 
 		const std::string shipname = table.get_string("ship");
 		try {
-			ship_ = egbase_.tribes().safe_ship_index(shipname);
+			ship_ = tribes_.safe_ship_index(shipname);
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
@@ -236,74 +236,74 @@ bool TribeDescr::is_construction_material(const WareIndex& index) const {
 }
 
 BuildingIndex TribeDescr::building_index(const std::string & buildingname) const {
-	return egbase_.tribes().building_index(buildingname);
+	return tribes_.building_index(buildingname);
 }
 
 WareIndex TribeDescr::immovable_index(const std::string & immovablename) const {
-	return egbase_.tribes().immovable_index(immovablename);
+	return tribes_.immovable_index(immovablename);
 }
 WareIndex TribeDescr::ware_index(const std::string & warename) const {
-	return egbase_.tribes().ware_index(warename);
+	return tribes_.ware_index(warename);
 }
 WareIndex TribeDescr::worker_index(const std::string & workername) const {
-	return egbase_.tribes().worker_index(workername);
+	return tribes_.worker_index(workername);
 }
 
 BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
-	return egbase_.tribes().safe_building_index(buildingname);
+	return tribes_.safe_building_index(buildingname);
 }
 
 WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
-	return egbase_.tribes().safe_ware_index(warename);
+	return tribes_.safe_ware_index(warename);
 }
 WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
-	return egbase_.tribes().safe_worker_index(workername);
+	return tribes_.safe_worker_index(workername);
 }
 
 WareDescr const * TribeDescr::get_ware_descr(const WareIndex& index) const {
-	return egbase_.tribes().get_ware_descr(index);
+	return tribes_.get_ware_descr(index);
 }
 WorkerDescr const* TribeDescr::get_worker_descr(const WareIndex& index) const {
-	return egbase_.tribes().get_worker_descr(index);
+	return tribes_.get_worker_descr(index);
 }
 
 BuildingDescr const * TribeDescr::get_building_descr(const BuildingIndex& index) const {
-	return egbase_.tribes().get_building_descr(index);
+	return tribes_.get_building_descr(index);
 }
 ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
-	return egbase_.tribes().get_immovable_descr(index);
+	return tribes_.get_immovable_descr(index);
 }
 
 WareIndex TribeDescr::builder() const {
-	assert(egbase_.tribes().worker_exists(builder_));
+	assert(tribes_.worker_exists(builder_));
 	return builder_;
 }
 WareIndex TribeDescr::carrier() const {
-	assert(egbase_.tribes().worker_exists(carrier_));
+	assert(tribes_.worker_exists(carrier_));
 	return carrier_;
 }
 WareIndex TribeDescr::carrier2() const {
-	assert(egbase_.tribes().worker_exists(carrier2_));
+	assert(tribes_.worker_exists(carrier2_));
 	return carrier2_;
 }
 WareIndex TribeDescr::geologist() const {
-	assert(egbase_.tribes().worker_exists(geologist_));
+	assert(tribes_.worker_exists(geologist_));
 	return geologist_;
 }
 WareIndex TribeDescr::soldier() const {
-	assert(egbase_.tribes().worker_exists(soldier_));
+	assert(tribes_.worker_exists(soldier_));
 	return soldier_;
 }
 WareIndex TribeDescr::ship() const {
-	assert(egbase_.tribes().ship_exists(ship_));
+	assert(tribes_.ship_exists(ship_));
 	return ship_;
 }
 BuildingIndex TribeDescr::headquarters() const {
-	assert(egbase_.tribes().building_exists(headquarters_));
+	assert(tribes_.building_exists(headquarters_));
 	return headquarters_;
 }
 BuildingIndex TribeDescr::port() const {
-	assert(egbase_.tribes().building_exists(port_));
+	assert(tribes_.building_exists(port_));
 	return port_;
 }
 const std::vector<WareIndex>& TribeDescr::worker_types_without_cost() const {
@@ -347,10 +347,9 @@ WareIndex TribeDescr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const {
 	if (!res || !amount) {
 		WareIndex idx = immovable_index("resi_none");
-		if (!has_immovable(idx))
-			throw GameDataError
-				("tribe %s does not declare a resource indicator resi_none!",
-				 name().c_str());
+		if (!has_immovable(idx)) {
+			throw GameDataError("There is no resource indicator for resi_none!");
+		}
 		return idx;
 	}
 
@@ -358,32 +357,32 @@ WareIndex TribeDescr::get_resource_indicator
 	int32_t num_indicators = 0;
 	for (;;) {
 		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		if (has_immovable(immovable_index(resi_filename)))
+		if (!has_immovable(immovable_index(resi_filename))) {
 			break;
+		}
 		++i;
 		++num_indicators;
 	}
 
-	// NOCOM(GunChleoc): this error is raised for Barbarian coal.
-	if (!num_indicators)
-		throw GameDataError
-			("tribe %s does not declare a resource indicator for resource %s",
-			 name().c_str(),
-			 res->name().c_str());
+	if (!num_indicators) {
+		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
+	}
 
 	int32_t bestmatch =
 		static_cast<int32_t>
 			((static_cast<float>(amount) / res->max_amount())
 			 *
 			 num_indicators);
-	if (bestmatch > num_indicators)
+	if (bestmatch > num_indicators) {
 		throw GameDataError
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
 			 res->max_amount());
-	if (static_cast<int32_t>(amount) < res->max_amount())
+	}
+	if (static_cast<int32_t>(amount) < res->max_amount()) {
 		bestmatch += 1; // Resi start with 1, not 0
+	}
 
 	return immovable_index((boost::format("resi_%s%i")
 										 % res->name().c_str()
@@ -426,7 +425,7 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 
 WareIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
-		WareIndex worker = egbase_.tribes().safe_worker_index(workername);
+		WareIndex worker = tribes_.safe_worker_index(workername);
 		if (!has_worker(worker)) {
 			throw GameDataError("This tribe doesn't have the worker '%s'", workername.c_str());
 		}
@@ -438,7 +437,7 @@ WareIndex TribeDescr::add_special_worker(const std::string& workername) {
 
 BuildingIndex TribeDescr::add_special_building(const std::string& buildingname) {
 	try {
-		BuildingIndex building = egbase_.tribes().safe_building_index(buildingname);
+		BuildingIndex building = tribes_.safe_building_index(buildingname);
 		if (!has_building(building)) {
 			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
 		}

@@ -58,7 +58,7 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, EditorGameBase& egbase);
+	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -150,7 +150,7 @@ private:
 
 	const std::string name_;
 	const std::string descname_;
-	EditorGameBase& egbase_;
+	const Tribes& tribes_;
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;

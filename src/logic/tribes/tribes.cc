@@ -187,7 +187,7 @@ void Tribes::add_worker_type(const LuaTable& table) {
 void Tribes::add_tribe(const LuaTable& table) {
 	const std::string name = table.get_string("name");
 	if (tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase_));
+		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase_.tribes()));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
