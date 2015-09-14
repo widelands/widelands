@@ -57,6 +57,7 @@ void MapObjectPacket::read
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
+		// Some maps contain ware/worker info, so we need compatibility here.
 		if (!(1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION))
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -79,6 +80,8 @@ void MapObjectPacket::read
 				break;
 
 			case MapObject::HeaderWorker:
+				// We can't use the worker's savegame version, because some stuff is loaded before that
+				// packet version, and we removed the tribe name.
 				loaders.insert(Worker::load(egbase, mol, fr, tribe_lookup_table, packet_version));
 				break;
 

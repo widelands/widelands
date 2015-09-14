@@ -2961,7 +2961,7 @@ Load/save support
 ==============================
 */
 
-#define WORKER_SAVEGAME_VERSION 3
+#define WORKER_SAVEGAME_VERSION 2
 
 Worker::Loader::Loader() :
 	m_location(0),

@@ -147,7 +147,7 @@ int32_t WidelandsMapLoader::load_map_complete
 
 	std::unique_ptr<OneWorldLegacyLookupTable> world_lookup_table
 		(create_one_world_legacy_lookup_table(m_old_world_name));
-	std::unique_ptr<OneTribeLegacyLookupTable> tribe_lookup_table;
+	std::unique_ptr<OneTribeLegacyLookupTable> tribe_lookup_table(new OneTribeLegacyLookupTable());
 	log("Reading Terrain Data ... ");
 	{MapTerrainPacket p; p.read(*m_fs, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());

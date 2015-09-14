@@ -625,10 +625,10 @@ MapObject::Loader * WareInstance::load
 	try {
 		uint8_t version = fr.unsigned_8();
 
+		// Some maps may contain ware info, so we need compatibility here.
 		if (!(1 <= version && version <= WAREINSTANCE_SAVEGAME_VERSION))
 			throw wexception("unknown/unhandled version %i", version);
 		std::string warename = fr.c_string();
-		// Some maps may contain ware info, so we need compatibility here.
 		if (version == 1) {
 			warename = lookup_table.lookup_ware(warename, fr.c_string());
 		}
