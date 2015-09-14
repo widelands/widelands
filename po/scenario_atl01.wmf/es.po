@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-07 11:14+0000\n"
+"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,39 +24,39 @@ msgstr "¡Edificio perdido!"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:73
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "¡Hemos perdido un edificio en el océano!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr ""
+msgstr "Garantiza el suministro de artículos de construcción"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "Suministro de artículos de construcción"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Suministro de material de construcción básico para tu economía:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construye una cantera"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Construye dos casas de leñadores"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Construye dos casas de guardabosques"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Construye un aserradero"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "Expande tu territorio y explora"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
@@ -66,11 +67,11 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "La isla es enorme y siempre cuando no estemos seguros de que estamos solos aquí, no podemos relajarnos. Explora y conquístalo, es la única forma de protegernos de las amenazas de la isla y de los atlantes. "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Constuye lugares militares para expandir tu territorio"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
@@ -78,7 +79,7 @@ msgstr "Establece una solida producción de comida"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr ""
+msgstr "Producción de comida"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -100,45 +101,45 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "Construye una granja y una granja de raíces negras"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr ""
+msgstr "Construye un molino para hacer harina de maíz y harina de raíz negra"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr ""
+msgstr "Construye un pozo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr ""
+msgstr "Construye una panadería para hornear pan con harina de maíz, harina de raíz negra y agua."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Construye una casa de cazador para obtener la carne cruda"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Construye una casa de pescador con agua para obtener el pescado crudo."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "Construye una casa de piscicultor para el pescador para asegurarte de que el pescado no muere. "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Construye dos ahumadores para ahumar carne y pescado crudo."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Construye una granja de arañas y un telar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Producción de tela de araña"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
@@ -151,15 +152,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "Construye un telar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr ""
+msgstr "Construye una granja de arañas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Construye un tejedor de hilo de oro"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -167,7 +168,7 @@ msgstr "Construye industrias y minas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Industry and Mines"
-msgstr ""
+msgstr "Industria y minas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -188,27 +189,27 @@ msgstr ""
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "Construye una mina de cada tipo. Asegúrate de enviar primero a los geologistas a la montaña. "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Construye una forja"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Construye un taller de armaduras y una armería"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "Construye un taller de herramientas"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Construye zona de entrenamiento para soldados"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Zonas de entrenamiento para soldados"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -220,15 +221,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "Construye un calabozo y un laberinto"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Construye un almacén y un establo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Almacén y establo "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -240,11 +241,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Construye un almacén"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Construye un establo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
@@ -252,7 +253,7 @@ msgstr "Construye tres barcos para escapar de la isla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Escape From the Island"
-msgstr ""
+msgstr "Escapa de la isla "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:123
 msgid ""
@@ -267,11 +268,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
-msgstr ""
+msgstr "Orgulloso de la Muerte "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:137
 msgid "Favored by the God"
-msgstr ""
+msgstr "Favorecido por el Dios"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:138
 msgid ""
@@ -294,11 +295,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:143
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "Desgracia antes del Dios"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "Castigo del Dios"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:146
 msgid ""
@@ -319,11 +320,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:151
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "Alboroto y confusión"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:153
 msgid "Emerging Chaos..."
-msgstr ""
+msgstr "Caos emergente"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:154
 msgid ""
@@ -361,11 +362,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "The Princess’ Memoir"
-msgstr ""
+msgstr "Memorias de la princesa"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:165
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "Jundlina anota sus memorias"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
@@ -396,7 +397,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:173
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "Loftomor y Sidolus vuelven"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:174
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:204
@@ -422,7 +423,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "Loftomor habla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:180
 msgid ""
@@ -437,7 +438,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "Sidolus habla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:186
 msgid ""
@@ -451,11 +452,11 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina is Satisfied"
-msgstr ""
+msgstr "Jundlina está satisfecha"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:194
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "Memorias de Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid ""
@@ -467,7 +468,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:198
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "Colionder regresa"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:200
 msgid ""
@@ -482,7 +483,7 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:368
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:386
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "Jundlina responde"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:205
 msgid ""
@@ -527,7 +528,7 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:217
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:218
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "Jundlina está de acuerdo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:219
 msgid "Your words sound wise to me, Colionder. So be it then."
@@ -535,7 +536,7 @@ msgstr "Tus palabras son sabias para mí, Colionder. Que así sea entonces."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:227
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "Jundlina está revisando los informes"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:228
 msgid ""
@@ -545,7 +546,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:234
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "Un hombre va a Jundlina "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:236
 msgid ""
@@ -592,7 +593,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:264
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "Sidolus busca a Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
@@ -606,7 +607,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:270
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "Jundlina asiente"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:271
 msgid ""
@@ -616,11 +617,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:278
 msgid "Jundlina Summons Sidolus"
-msgstr ""
+msgstr "Jundlina cita a Sidolus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:279
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "Jundlina está enfadada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:280
 msgid ""
@@ -654,7 +655,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:297
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "Jundlina recibe una carta "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:299
 msgid ""
@@ -667,7 +668,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Considers the Economy"
-msgstr ""
+msgstr "Jundlina considera la Economía"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
@@ -685,7 +686,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:321
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "Un peligroso descubrimiento"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:322
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:346
@@ -719,11 +720,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid "Another Building"
-msgstr ""
+msgstr "Otro edificio"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "Jundlina está preocupada "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:337
 msgid ""
@@ -736,7 +737,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid "One More Building"
-msgstr ""
+msgstr "Un edificio más "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:347
 msgid ""
@@ -750,7 +751,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:358
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "¡El Agua está aumentando!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:360
 msgid ""
@@ -807,7 +808,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "Jundlina is Relieved"
-msgstr ""
+msgstr "Jundlina está aliviada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid ""
@@ -836,10 +837,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Objetivo nuevo "
+msgstr[1] "Objetivos nuevos "

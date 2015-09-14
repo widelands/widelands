@@ -4,13 +4,14 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
+# Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-10 09:16+0000\n"
+"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr "Cantera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Construye una candera al sur de tu sede."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -52,7 +53,7 @@ msgstr "Protege tu colonia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "Construye fortínes y centinelas alrededor de la colonia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -68,11 +69,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr ""
+msgstr "Construye una mampostería y una infraestructura minera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr ""
+msgstr "Mampostería e infraestructura minera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
@@ -107,7 +108,7 @@ msgstr ""
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr ""
+msgstr "Quizás necesites una casa de cazador, una granja porcina, y un viñedo y algunos pozos."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
@@ -122,7 +123,7 @@ msgstr "Proteja su frontera este"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:87
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "Protege tu frontera este"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:88
 msgid ""
@@ -136,17 +137,17 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Destruye a la tribu bárbara"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Destruye a la tribu bárbara"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Tan pronto como tengas soldados suficientes, ataca y destruye completamente los edificios bárbaros."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -157,7 +158,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
-msgstr ""
+msgstr "Una nueva isla "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:109
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:118
@@ -188,7 +189,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
-msgstr ""
+msgstr "Los bosques verdes "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:119
 msgid ""
@@ -212,7 +213,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
-msgstr ""
+msgstr "Las rocas"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:131
 msgid ""
@@ -336,7 +337,7 @@ msgstr "Comida para los mineros"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Amalea entra..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Lutius, don’t you think you forgot something important?"
@@ -358,7 +359,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Our New Tavern"
-msgstr ""
+msgstr "Nuestra nueva taberna"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid "Amalea smiles"
@@ -409,7 +410,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Command to Attack"
-msgstr ""
+msgstr "Orden de ataque"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:222
 msgid ""
@@ -480,5 +481,5 @@ msgstr "“%s”"
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuevo objetivo"
+msgstr[1] "Nuevos objetivos"

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-09-02 07:40+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-06 13:49+0000\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1434,8 +1434,8 @@ msgid ""
 msgstr "Лошади помогают перетаскивать вещи по загруженным дорогам. Их разводят на конном заводе."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
-msgstr "Разводит сильных Атлантских лошадей."
+msgid "Breeds the strong Atlantean horses."
+msgstr "Разводит сильных лошадей атлантов."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"

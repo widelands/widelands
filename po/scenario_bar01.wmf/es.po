@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-11 13:27+0000\n"
+"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +21,11 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Construye dos cabañas de guardabosques"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Construye una cabaña de guardabosques al lado de cada cabaña de leñador."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
@@ -38,13 +39,13 @@ msgstr "Expandete al noreste y construye una cantera"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Expandete al noreste y construye en las rocas"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Construye edificios militares (como centilas o muros) para expandir tu territorio."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
@@ -60,7 +61,7 @@ msgstr "Construye minas de carbón y mineral de hierro"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron ore mine."
-msgstr ""
+msgstr "Construye minas de carbón y mineral de hierro."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -128,7 +129,7 @@ msgstr "Construye un cazador, un guardabosques y una taberna"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Para trabajar, tus mineros necesitan comida."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:68
 msgid ""
@@ -189,7 +190,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "También construye una micro cervecería"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -284,7 +285,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:135
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Construye una plantación de caña"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:133
 msgid ""
@@ -297,7 +298,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construye una granja de bueyes"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -319,11 +320,11 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:206
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:215
 msgid "The Story Begins"
-msgstr ""
+msgstr "La historia comienza"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron suspira..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:158
 msgid ""
@@ -372,7 +373,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:197
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron está sacudiendo su cabeza..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:198
 msgid ""
@@ -429,7 +430,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:225
 msgid "An old man says…"
-msgstr ""
+msgstr "Un viejo dice..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:226
 msgid ""
@@ -482,12 +483,12 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:245
 msgid "In the Night"
-msgstr ""
+msgstr "En la noche"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:246
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:258
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron dice..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:247
 msgid ""
@@ -504,7 +505,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:257
 msgid "At the Tomb"
-msgstr ""
+msgstr "En la tumba"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:259
 msgid ""
@@ -521,11 +522,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:269
 msgid "The Other Day"
-msgstr ""
+msgstr "El otro día"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:270
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron dice pensativamente..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:271
 msgid ""
@@ -543,11 +544,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "The Oath"
-msgstr ""
+msgstr "El juramento"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:279
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thron parece furioso..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
@@ -613,7 +614,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:311
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "¿Viejo? ¡Joven irrespetuoso!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Khantrukh nods satisfied…"
@@ -625,7 +626,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldreth exclama..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:323
 msgid ""
@@ -642,7 +643,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:331
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldreth ríe..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid ""
@@ -656,7 +657,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukh interrumpe..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:340
 msgid ""
@@ -702,7 +703,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:365
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Nuestros cazadores están fuera en los bosques, Thron."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:367
 msgid ""
@@ -723,7 +724,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:377
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Una mañana hermosa"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:378
 msgid "Thron recognizes…"
@@ -757,7 +758,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:435
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh habla..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:394
 msgid ""
@@ -789,7 +790,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:411
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth sonríe..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
@@ -833,7 +834,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:434
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "¡Necesitamos bueyes!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:436
 msgid ""
@@ -858,7 +859,7 @@ msgstr "Misión completa"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:456
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron habla..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:445
 msgid ""
@@ -890,7 +891,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Una noche de luna llena"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:457
 msgid ""
@@ -908,11 +909,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Otro día frío"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:464
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron parece preocupado..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:465
 msgid ""
@@ -933,7 +934,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:473
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "¡Un pueblo amigo se ha unido a nosotros!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:475
 msgid ""
@@ -955,10 +956,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuevo objetivo "
+msgstr[1] "Nuevos objetivos"
