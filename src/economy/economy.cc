@@ -501,25 +501,55 @@ void Economy::remove_supply(Supply & supply)
 
 bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
-	uint32_t quantity = 0;
-	for (const Warehouse * wh : m_warehouses) {
-		quantity += wh->get_wares().stock(ware_type);
-		if (t <= quantity)
-			return false;
+
+	// we have a target quantity set
+	if (t > 0) {
+		uint32_t quantity = 0;
+		for (const Warehouse * wh : m_warehouses) {
+			quantity += wh->get_wares().stock(ware_type);
+			if (t <= quantity)
+				return false;
+		}
+		return true;
+
+	// we have target quantity set to 0, we need to check if there is an open request
+	} else {
+		for (size_t i = 0; i < m_requests.size(); ++i)
+		{
+			// TODO(meitis): guess we should set a supply here already
+			// otherwise multiple productionsites can start to fullfill the same request
+			if(ware_type == m_requests[i]->get_index() && m_request[i]->is_open())
+				return true;
+		}
+		return false;
 	}
-	return true;
 }
 
 
 bool Economy::needs_worker(WareIndex const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
-	uint32_t quantity = 0;
-	for (const Warehouse * wh : m_warehouses) {
-		quantity += wh->get_workers().stock(worker_type);
-		if (t <= quantity)
-			return false;
+
+	// we have a target quantity set
+	if (t > 0) {
+		uint32_t quantity = 0;
+		for (const Warehouse * wh : m_warehouses) {
+			quantity += wh->get_workers().stock(worker_type);
+			if (t <= quantity)
+				return false;
+		}
+		return true;
+
+	// we have target quantity set to 0, we need to check if there is an open request
+	} else {
+		for (size_t i = 0; i < m_requests.size(); ++i)
+		{
+			// TODO(meitis): guess we should set a supply here already
+			// otherwise multiple "productionsites" can start to fullfill the same request
+			if(worker_type == m_requests[i]->get_type() && m_request[i]->is_open())
+				return true;
+		}
+		return false;
 	}
-	return true;
 }
 
 
