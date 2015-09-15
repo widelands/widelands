@@ -427,7 +427,7 @@ void DefaultAI::late_initialization() {
 		bo.unconnected_ = 0;
 		bo.is_buildable_ = bld.is_buildable();
 		bo.need_trees_ = bh.is_logproducer();
-		bo.need_stones_ = bh.is_stoneproducer();
+		bo.need_rocks_ = bh.is_graniteproducer();
 		bo.need_water_ = bh.get_needs_water();
 		bo.mines_water_ = bh.mines_water();
 		bo.recruitment_ = bh.for_recruitment();
@@ -542,8 +542,7 @@ void DefaultAI::late_initialization() {
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
 				    tribe_->ware_index("planks") == temp_buildcosts.first ||
 				    tribe_->ware_index("wood") == temp_buildcosts.first ||
-				    tribe_->ware_index("raw_stone") == temp_buildcosts.first ||
-				    tribe_->ware_index("stone") == temp_buildcosts.first)
+					 tribe_->ware_index("granite") == temp_buildcosts.first)
 					continue;
 
 				bo.critical_built_mat_.push_back(temp_buildcosts.first);
@@ -587,7 +586,7 @@ void DefaultAI::late_initialization() {
 
 
 	// atlanteans they consider water as a resource
-	// (together with mines, stones and wood)
+	// (together with mines, rocks and wood)
 	if (tribe_->name() == "atlanteans") {
 		resource_necessity_water_needed_ = true;
 	}
@@ -990,16 +989,16 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			}
 		}
 
-		// stones are not renewable, we will count them only if previous state is nonzero
-		if (field.stones_nearby_ > 0 && gametime % 3 == 0) {
+		// Rocks are not renewable, we will count them only if previous state is nonzero
+		if (field.rocks_nearby_ > 0 && gametime % 3 == 0) {
 
-			field.stones_nearby_ =
+			field.rocks_nearby_ =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), 6),
 					nullptr,
-		            FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite")));
+						FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 
-			// adding 10 if stones found
-			field.stones_nearby_ = (field.stones_nearby_ > 0) ? field.stones_nearby_ + 10:0;
+			// adding 10 if rocks found
+			field.rocks_nearby_ = (field.rocks_nearby_ > 0) ? field.rocks_nearby_ + 10:0;
 		}
 
 		// ground water is not renewable and its amount can only fall, we will count them only if
@@ -1493,7 +1492,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 
 				// exclude spots on border
-				if (bf->near_border_ && !bo.need_trees_ && !bo.need_stones_ && !bo.is_fisher_) {
+				if (bf->near_border_ && !bo.need_trees_ && !bo.need_rocks_ && !bo.is_fisher_) {
 					continue;
 				}
 
@@ -1572,15 +1571,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 					}
 
-				} else if (bo.need_stones_) {
+				} else if (bo.need_rocks_) {
 
-					// quaries are generally to be built everywhere where stones are
-					// no matter the need for stones, as stones are considered an obstacle
+					// Quarries are generally to be built everywhere where rocks are
+					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
 					if (bo.cnt_under_construction_ > 0) {
 						continue;
 					}
-					prio = bf->stones_nearby_;
+					prio = bf->rocks_nearby_;
 
 					// value is initialized with 1 but minimal value that can be
 					// calculated is 11
@@ -1938,7 +1937,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense &&
-				    !(bf->unowned_mines_pots_nearby_ || bf->stones_nearby_ || bf->water_nearby_ ||
+					 !(bf->unowned_mines_pots_nearby_ || bf->rocks_nearby_ || bf->water_nearby_ ||
 				      (bf->distant_water_ && resource_necessity_water_needed_) || bf->enemy_nearby_)) {
 					continue;
 				}
@@ -1963,10 +1962,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 
 				// calculating other sub scores
-				// for resources (mines, water, stones)
+				// for resources (mines, water, rocks)
 				int32_t prio_for_resources = 0;
 				prio_for_resources += 2 * (bf->unowned_mines_pots_nearby_ * resource_necessity_mines_) / 100 +
-						bf->stones_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
+						bf->rocks_nearby_ + (bf->water_nearby_ * resource_necessity_water_) / 100;
 				// special bonus due to remote water for atlanteans
 				if (resource_necessity_water_needed_) {
 					prio_for_resources += (bf->distant_water_ * resource_necessity_water_) / 100 / 3;
@@ -3129,13 +3128,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// Quarry handling
-	if (site.bo->need_stones_) {
+	if (site.bo->need_rocks_) {
 
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), 6),
 		       nullptr,
 
-		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
+				 FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -3150,7 +3149,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
-			// it is possible that there are stones but quary is not able to mine them
+			// it is possible that there are rocks but quarry is not able to mine them
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
@@ -4309,25 +4308,25 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 		score += 1;
 	}
 
-	// here we check for surface stones + trees
+	// here we check for surface rocks + trees
 	std::vector<ImmovableFound> immovables;
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
-	int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
-	uint16_t stones = 0;
+	int32_t const rocks_attr = MapObjectDescr::get_attribute_id("rocks");
+	uint16_t rocks = 0;
 	int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
 	for (uint32_t j = 0; j < immovables.size(); ++j) {
-		if (immovables.at(j).object->has_attribute(stone_attr)) {
-			++stones;
+		if (immovables.at(j).object->has_attribute(rocks_attr)) {
+			++rocks;
 		}
 		if (immovables.at(j).object->has_attribute(tree_attr)) {
 			++trees;
 		}
 	}
-	if (stones > 1) {
+	if (rocks > 1) {
 		score += 1;
 	}
 	if (trees > 1) {

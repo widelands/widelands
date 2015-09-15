@@ -59,8 +59,8 @@ struct BuildingHints {
 		return log_producer_;
 	}
 
-	bool is_stoneproducer() const {
-		return stone_producer_;
+	bool is_graniteproducer() const {
+		return granite_producer_;
 	}
 
 	bool mines_water() const {
@@ -112,7 +112,7 @@ private:
 	std::string renews_map_resource_;
 	std::string mines_;
 	bool log_producer_;
-	bool stone_producer_;
+	bool granite_producer_;
 	bool needs_water_;
 	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers

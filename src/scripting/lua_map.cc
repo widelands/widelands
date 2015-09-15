@@ -950,7 +950,7 @@ int LuaMap::get_player_slots(lua_State * L) {
 /* RST
 	.. method:: place_immovable(name, field, from_where)
 
-		Creates an immovable that is defined by the world (e.g. trees, stones...)
+		Creates an immovable that is defined by the world (e.g. trees, rocks...)
 		or a tribe (field) on a given field. If there is already an immovable on
 		the field, an error is reported.
 
@@ -2627,7 +2627,7 @@ const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
 			something else is build on this field.
 		* :const:`small` -- Example: trees or flags
 		* :const:`medium` -- Example: Medium sized buildings
-		* :const:`big` -- Example: Big sized buildings or stones
+		* :const:`big` -- Example: Big sized buildings or rocks
 */
 int LuaBaseImmovable::get_size(lua_State * L) {
 	BaseImmovable * o = get(L, get_egbase(L));

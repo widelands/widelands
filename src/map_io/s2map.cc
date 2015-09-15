@@ -702,12 +702,13 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			std::string bobname;
 			if (buildings[index] == 0x78) {
 				switch (c) {
-				case BOB_STONE1:        bobname = "stones1"; break;
-				case BOB_STONE2:        bobname = "stones2"; break;
-				case BOB_STONE3:        bobname = "stones3"; break;
-				case BOB_STONE4:        bobname = "stones4"; break;
-				case BOB_STONE5:        bobname = "stones5"; break;
-				case BOB_STONE6:        bobname = "stones6"; break;
+					// NOCOM(GunChleoc): Need somebody to test an S2 map.
+				case BOB_STONE1:        bobname = "rocks1"; break;
+				case BOB_STONE2:        bobname = "rocks2"; break;
+				case BOB_STONE3:        bobname = "rocks3"; break;
+				case BOB_STONE4:        bobname = "rocks4"; break;
+				case BOB_STONE5:        bobname = "rocks5"; break;
+				case BOB_STONE6:        bobname = "rocks6"; break;
 				default:
 					break;
 				}

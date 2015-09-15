@@ -109,7 +109,7 @@ struct ImmovableAction;
 struct ImmovableActionData;
 
 /**
- * Immovable represents a standard immovable such as trees or stones.
+ * Immovable represents a standard immovable such as trees or rocks.
  */
 class ImmovableDescr : public MapObjectDescr {
 public:

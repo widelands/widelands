@@ -36,14 +36,42 @@ public:
 	std::string lookup_critter(const std::string& critter) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 private:
+	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> resources_;
 };
 
 OneTribeOneWorldLegacyLookupTable::OneTribeOneWorldLegacyLookupTable() :
-	resources_
-	{
-		{"granite", "stones"},
-	}
+immovables_
+{
+	{"blackland_stones1", "blackland_rocks1"},
+	{"blackland_stones2", "blackland_rocks2"},
+	{"blackland_stones3", "blackland_rocks3"},
+	{"blackland_stones4", "blackland_rocks4"},
+	{"blackland_stones5", "blackland_rocks5"},
+	{"blackland_stones6", "blackland_rocks6"},
+	{"desert_stones1", "desert_rocks1"},
+	{"desert_stones2", "desert_rocks2"},
+	{"desert_stones3", "desert_rocks3"},
+	{"desert_stones4", "desert_rocks4"},
+	{"desert_stones5", "desert_rocks5"},
+	{"desert_stones6", "desert_rocks6"},
+	{"winterland_stones1", "winterland_rocks1"},
+	{"winterland_stones2", "winterland_rocks2"},
+	{"winterland_stones3", "winterland_rocks3"},
+	{"winterland_stones4", "winterland_rocks4"},
+	{"winterland_stones5", "winterland_rocks5"},
+	{"winterland_stones6", "winterland_rocks6"},
+	{"greenland_stones1", "greenland_rocks1"},
+	{"greenland_stones2", "greenland_rocks2"},
+	{"greenland_stones3", "greenland_rocks3"},
+	{"greenland_stones4", "greenland_rocks4"},
+	{"greenland_stones5", "greenland_rocks5"},
+	{"greenland_stones6", "greenland_rocks6"},
+},
+resources_
+{
+	{"granite", "stones"},
+}
 {}
 
 std::string
@@ -65,7 +93,11 @@ std::string OneTribeOneWorldLegacyLookupTable::lookup_critter(const std::string&
 
 std::string
 OneTribeOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
-	return immovable;
+	const auto& i = immovables_.find(immovable);
+	if (i == immovables_.end()) {
+		return immovable;
+	}
+	return i->second;
 }
 
 class RealOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
@@ -162,12 +194,12 @@ immovables_
 {std::make_pair(
 	"blackland", std::map<std::string, std::string>
 	{
-		{"stones1", "blackland_stones1"},
-		{"stones2", "blackland_stones2"},
-		{"stones3", "blackland_stones3"},
-		{"stones4", "blackland_stones4"},
-		{"stones5", "blackland_stones5"},
-		{"stones6", "blackland_stones6"},
+		{"stones1", "blackland_rocks1"},
+		{"stones2", "blackland_rocks2"},
+		{"stones3", "blackland_rocks3"},
+		{"stones4", "blackland_rocks4"},
+		{"stones5", "blackland_rocks5"},
+		{"stones6", "blackland_rocks6"},
 		{"sstones1", "standing_stone1_wasteland"},
 		{"sstones2", "standing_stone2_wasteland"},
 		{"sstones3", "standing_stone3_wasteland"},
@@ -220,12 +252,12 @@ std::make_pair(
 		{"sstones5", "standing_stone5_desert"},
 		{"sstones6", "standing_stone6"},
 		{"sstones7", "standing_stone7"},
-		{"stones1", "desert_stones1"},
-		{"stones2", "desert_stones2"},
-		{"stones3", "desert_stones3"},
-		{"stones4", "desert_stones4"},
-		{"stones5", "desert_stones5"},
-		{"stones6", "desert_stones6"},
+		{"stones1", "desert_rocks1"},
+		{"stones2", "desert_rocks2"},
+		{"stones3", "desert_rocks3"},
+		{"stones4", "desert_rocks4"},
+		{"stones5", "desert_rocks5"},
+		{"stones6", "desert_rocks6"},
 		{"tree1", "palm_date_desert_old"},
 		{"tree1_m", "palm_date_desert_mature"},
 		{"tree1_s", "palm_date_desert_pole"},
@@ -269,12 +301,12 @@ std::make_pair(
 		{"sstones5", "standing_stone5_summer"},
 		{"sstones6", "standing_stone6"},
 		{"sstones7", "standing_stone7"},
-		{"stones1", "greenland_stones1"},
-		{"stones2", "greenland_stones2"},
-		{"stones3", "greenland_stones3"},
-		{"stones4", "greenland_stones4"},
-		{"stones5", "greenland_stones5"},
-		{"stones6", "greenland_stones6"},
+		{"stones1", "greenland_rocks1"},
+		{"stones2", "greenland_rocks2"},
+		{"stones3", "greenland_rocks3"},
+		{"stones4", "greenland_rocks4"},
+		{"stones5", "greenland_rocks5"},
+		{"stones6", "greenland_rocks6"},
 		{"tree1", "aspen_summer_old"},
 		{"tree1_m", "aspen_summer_mature"},
 		{"tree1_s", "aspen_summer_pole"},
@@ -318,12 +350,12 @@ std::make_pair(
 		{"sstones5", "standing_stone5_winter"},
 		{"sstones6", "standing_stone6"},
 		{"sstones7", "standing_stone7"},
-		{"stones1", "winterland_stones1"},
-		{"stones2", "winterland_stones2"},
-		{"stones3", "winterland_stones3"},
-		{"stones4", "winterland_stones4"},
-		{"stones5", "winterland_stones5"},
-		{"stones6", "winterland_stones6"},
+		{"stones1", "winterland_rocks1"},
+		{"stones2", "winterland_rocks2"},
+		{"stones3", "winterland_rocks3"},
+		{"stones4", "winterland_rocks4"},
+		{"stones5", "winterland_rocks5"},
+		{"stones6", "winterland_rocks6"},
 		{"track", "track_winter"},
 		{"tree1", "aspen_summer_old"},
 		{"tree1_m", "aspen_summer_mature"},

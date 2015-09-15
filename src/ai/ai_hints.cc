@@ -26,7 +26,7 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 									  table->get_string("renews_map_resource") : ""),
 	  mines_(table->has_key("mines") ? table->get_string("mines") : ""),
 	  log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
-	  stone_producer_(table->has_key("stoneproducer") ? table->get_bool("stoneproducer") : false),
+	  granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") : false),
 	  needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
 	  mines_water_(table->has_key("mines_water") ? table->get_bool("mines_water") : false),
 	  recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),

@@ -521,7 +521,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // as in this case, only before a worker starts walking there to place an
 // object. But that would make it very difficult to find space for things
 // like farm fileds. So our only option seems to be to keep all farm
-// fields, trees, stones and such on triangles and keep the nodes
+// fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable * const ignoreimm)

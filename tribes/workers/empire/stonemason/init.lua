@@ -32,7 +32,7 @@ tribes:new_worker_type {
 
 	programs = {
 		cut_granite = {
-			"findobject attrib:granite radius:6",
+			"findobject attrib:rocks radius:6",
 			"walk object",
 			"playFX sound/stonecutting/stonecutter 220",
 			"animation hacking 10000",
@@ -41,7 +41,7 @@ tribes:new_worker_type {
 			"return"
 		},
 		cut_marble = {
-			"findobject attrib:granite radius:6",
+			"findobject attrib:rocks radius:6",
 			"walk object",
 			"playFX sound/stonecutting/stonecutter 220",
 			"animation hacking 10000",
