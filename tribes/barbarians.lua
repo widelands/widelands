@@ -162,8 +162,8 @@ tribes:new_tribe {
 		"resi_iron2",
 		"resi_none",
 		"resi_water1",
-		"resi_granite1",
-		"resi_granite2",
+		"resi_stones1",
+		"resi_stones2",
 		"barbarians_shipconstruction",
 	},
 

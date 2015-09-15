@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		mines = "granite",
+		mines = "stones",
 		prohibited_till = 600
    },
 
@@ -73,16 +73,16 @@ tribes:new_productionsite_type {
 				"sleep=45000",
 				"consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=quartz"
 			}
 		},
@@ -94,13 +94,13 @@ tribes:new_productionsite_type {
 				"sleep=45000",
 				"consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite quartz",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=quartz:2"
 			}
 		},
@@ -112,13 +112,13 @@ tribes:new_productionsite_type {
 				"sleep=45000",
 				"consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=diamond",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=diamond",
 				"animate=working 20000",
-				"mine=granite 4 100 5 2",
+				"mine=stones 4 100 5 2",
 				"produce=granite"
 			}
 		},

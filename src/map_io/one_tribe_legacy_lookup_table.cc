@@ -201,6 +201,8 @@ OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
 			 {"cornfield_m", "cornfield_medium"},
 			 {"cornfield_s", "cornfield_small"},
 			 {"cornfield_t", "cornfield_tiny"},
+			 {"resi_granite1", "resi_stones1"},
+			 {"resi_granite2", "resi_stones2"},
 			 {"shipconstruction", "atlanteans_shipconstruction"},
 		 }),
 	  std::make_pair(
@@ -215,6 +217,8 @@ OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
 			 {"reed0s", "reed_small"},
 			 {"reed0t", "reed_tiny"},
 			 {"reed1", "reed_ripe"},
+			 {"resi_granite1", "resi_stones1"},
+			 {"resi_granite2", "resi_stones2"},
 			 {"shipconstruction", "barbarians_shipconstruction"},
 		 }),
 	 std::make_pair(
@@ -229,6 +233,8 @@ OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
 			 {"wine0s", "grapevine_small"},
 			 {"wine0t", "grapevine_tiny"},
 			 {"wine1", "grapevine_ripe"},
+			 {"resi_granite1", "resi_stones1"},
+			 {"resi_granite2", "resi_stones2"},
 			 {"shipconstruction", "empire_shipconstruction"},
 		 }),
 	 }

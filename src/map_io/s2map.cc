@@ -630,7 +630,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			case 0x40: res = "coal";   amount = c & 7; break;
 			case 0x48: res = "iron";   amount = c & 7; break;
 			case 0x50: res = "gold";   amount = c & 7; break;
-			case 0x59: res = "granite"; amount = c & 7; break;
+			case 0x59: res = "stones"; amount = c & 7; break;
 			default:   res = "";       amount = 0; break;
 			};
 

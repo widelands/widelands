@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		mines = "granite",
+		mines = "stones",
 		mines_percent = 50,
 		prohibited_till = 450
    },
@@ -72,10 +72,10 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs marble or economy needs granite",
 				"consume=wine ration",
 				"animate=working 20000",
-				"mine=granite 2 50 5 17",
+				"mine=stones 2 50 5 17",
 				"produce=marble:2",
 				"animate=working 20000",
-				"mine=granite 2 50 5 17",
+				"mine=stones 2 50 5 17",
 				"produce=marble granite"
 			}
 		},
@@ -87,10 +87,10 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs marble or economy needs granite",
 				"consume=ration wine",
 				"animate=working 20000",
-				"mine=granite 2 50 5 17",
+				"mine=stones 2 50 5 17",
 				"produce=granite marble",
 				"animate=working 20000",
-				"mine=granite 2 50 5 17",
+				"mine=stones 2 50 5 17",
 				"produce=granite:2"
 			}
 		},

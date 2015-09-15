@@ -966,8 +966,8 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				message_type = Message::Type::kGeologistsCoal;
 			else if (rdescr->name() == "gold")
 				message_type = Message::Type::kGeologistsGold;
-			else if (rdescr->name() == "granite")
-				message_type = Message::Type::kGeologistsGranite;
+			else if (rdescr->name() == "stones")
+				message_type = Message::Type::kGeologistsStones;
 			else if (rdescr->name() == "iron")
 				message_type = Message::Type::kGeologistsIron;
 			else if (rdescr->name() == "water")

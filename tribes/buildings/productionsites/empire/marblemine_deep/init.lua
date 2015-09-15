@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		mines = "granite"
+		mines = "stones"
    },
 
 	working_positions = {
@@ -61,10 +61,10 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs marble or economy needs granite",
 				"consume=meal wine",
 				"animate=working 18000",
-				"mine=granite 2 100 5 2",
+				"mine=stones 2 100 5 2",
 				"produce=marble:2",
 				"animate=working 18000",
-				"mine=granite 2 100 5 2",
+				"mine=stones 2 100 5 2",
 				"produce=marble granite:2"
 			}
 		},

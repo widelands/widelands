@@ -24,31 +24,47 @@
 namespace  {
 
 /// If the map is newish and there is no old world to convert names from, we use
-/// this one that simply returns the looked up values.
-class PassthroughOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
+/// this one that simply returns the looked up values, except for some renaming
+/// introduced through the merging of the tribes, which are handled here.
+class OneTribeOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
 public:
+	OneTribeOneWorldLegacyLookupTable();
+
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
 	std::string lookup_critter(const std::string& critter) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
+private:
+	const std::map<std::string, std::string> resources_;
 };
 
+OneTribeOneWorldLegacyLookupTable::OneTribeOneWorldLegacyLookupTable() :
+	resources_
+	{
+		{"granite", "stones"},
+	}
+{}
+
 std::string
-PassthroughOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
-	return resource;
+OneTribeOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
+	const auto& i = resources_.find(resource);
+	if (i == resources_.end()) {
+		return resource;
+	}
+	return i->second;
 }
 
-std::string PassthroughOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
+std::string OneTribeOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
 	return terrain;
 }
 
-std::string PassthroughOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+std::string OneTribeOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
 	return critter;
 }
 
 std::string
-PassthroughOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
+OneTribeOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
 	return immovable;
 }
 
@@ -76,7 +92,7 @@ old_world_name_(old_world_name),
 // RESOURCES - They were all the same for all worlds.
 resources_
 {
-	{"granit", "granite"},
+	{"granit", "stones"},
 },
 
 // TERRAINS
@@ -389,7 +405,7 @@ OneWorldLegacyLookupTable::~OneWorldLegacyLookupTable() {
 std::unique_ptr<OneWorldLegacyLookupTable>
 create_one_world_legacy_lookup_table(const std::string& old_world_name) {
 	if (old_world_name.empty()) {
-		return std::unique_ptr<OneWorldLegacyLookupTable>(new PassthroughOneWorldLegacyLookupTable());
+		return std::unique_ptr<OneWorldLegacyLookupTable>(new OneTribeOneWorldLegacyLookupTable());
 	}
 	return std::unique_ptr<OneWorldLegacyLookupTable>(new RealOneWorldLegacyLookupTable(old_world_name));
 }

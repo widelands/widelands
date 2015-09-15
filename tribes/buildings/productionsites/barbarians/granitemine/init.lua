@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		mines = "granite",
+		mines = "stones",
 		prohibited_till = 900
    },
 
@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs granite",
 				"consume=ration",
 				"animate=working 20000",
-				"mine=granite 2 100 5 17",
+				"mine=stones 2 100 5 17",
 				"produce=granite:2"
 			}
 		},

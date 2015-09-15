@@ -37,7 +37,7 @@ struct Message {
 		kGeologists,
 		kGeologistsCoal,
 		kGeologistsGold,
-		kGeologistsGranite,
+		kGeologistsStones,
 		kGeologistsIron,
 		kGeologistsWater,
 		kScenario,
