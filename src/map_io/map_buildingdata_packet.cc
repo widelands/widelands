@@ -339,7 +339,6 @@ void MapBuildingdataPacket::read_constructionsite
 
 		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
-
 			const TribeDescr & tribe = constructionsite.owner().tribe();
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
@@ -459,17 +458,12 @@ void MapBuildingdataPacket::read_warehouse
 			(1 <= packet_version &&
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
-			WareIndex const nr_wares = game.tribes().nrwares();
-			WareIndex const nr_workers = game.tribes().nrworkers();
-			warehouse.m_supply->set_nrwares(nr_wares);
-			warehouse.m_supply->set_nrworkers(nr_workers);
-			warehouse.m_ware_policy.resize(nr_wares, Warehouse::SP_Normal);
-			warehouse.m_worker_policy.resize(nr_workers, Warehouse::SP_Normal);
-			//log("Reading warehouse stuff for %p\n", &warehouse);
-			//  supply
-			const TribeDescr & tribe = warehouse.owner().tribe();
+			Player& player = warehouse.owner();
+			warehouse.init_containers(player);
+			const TribeDescr& tribe = player.tribe();
+
 			while (fr.unsigned_8()) {
-				WareIndex const id = tribe.ware_index(fr.c_string());
+				const WareIndex& id = tribe.ware_index(fr.c_string());
 				if (packet_version >= 5) {
 					uint32_t amount = fr.unsigned_32();
 					Warehouse::StockPolicy policy =
@@ -487,7 +481,7 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 			while (fr.unsigned_8()) {
-				WareIndex const id = tribe.worker_index(fr.c_string());
+				const WareIndex& id = tribe.worker_index(fr.c_string());
 				if (packet_version >= 5) {
 					uint32_t amount = fr.unsigned_32();
 					Warehouse::StockPolicy policy =
@@ -534,7 +528,7 @@ void MapBuildingdataPacket::read_warehouse
 									("expected %s but found \"%s\"",
 									 worker.descr().name().c_str(), name);
 						}
-						WareIndex worker_index = tribe.worker_index(worker.descr().name().c_str());
+						const WareIndex& worker_index = tribe.worker_index(worker.descr().name().c_str());
 						if (!warehouse.m_incorporated_workers.count(worker_index))
 							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
@@ -546,12 +540,11 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 
-			const std::vector<WareIndex> & worker_types_without_cost =
-				tribe.worker_types_without_cost();
+			const std::vector<WareIndex>& worker_types_without_cost = tribe.worker_types_without_cost();
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
-				uint32_t const next_spawn = fr.unsigned_32();
-				WareIndex const worker_index = tribe.carrier();
+				const Time& next_spawn = static_cast<Time>(fr.unsigned_32());
+				const WareIndex& worker_index = tribe.carrier();
 				if (!game.tribes().worker_exists(worker_index)) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
@@ -568,36 +561,30 @@ void MapBuildingdataPacket::read_warehouse
 						 warehouse.descr().descname().c_str(), warehouse.serial(),
 						 "carrier", next_spawn);
 				} else
+					assert(worker_types_without_cost.size() ==
+							 warehouse.m_next_worker_without_cost_spawn.size());
 					for (uint8_t i = 0;; ++i) {
 						assert(i < worker_types_without_cost.size());
 						if (worker_types_without_cost.at(i) == worker_index) {
-							if
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 !=
-								 static_cast<uint32_t>(never()))
-							{
+							if (warehouse.m_next_worker_without_cost_spawn[i] != never()) {
 								warehouse.molog
 									("read_warehouse: "
 									 "m_next_worker_without_cost_spawn[%u] = %u\n",
 									 i, warehouse.m_next_worker_without_cost_spawn[i]);
 							}
-							assert
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 ==
-								 static_cast<uint32_t>(never()));
-							warehouse.m_next_worker_without_cost_spawn[i] =
-								next_spawn;
+							assert(warehouse.m_next_worker_without_cost_spawn[i] == never());
+							warehouse.m_next_worker_without_cost_spawn[i] = next_spawn;
 							break;
 						}
 					}
-			} else
+			} else {
 				for (;;) {
 					char const * const worker_typename = fr.c_string   ();
-					if (!*worker_typename) //  encountered the terminator ("")
+					if (!*worker_typename) { //  encountered the terminator ("")
 						break;
-					uint32_t     const next_spawn      = fr.unsigned_32();
-					WareIndex   const worker_index    =
-						tribe.safe_worker_index(worker_typename);
+					}
+					const Time& next_spawn = static_cast<Time>(fr.unsigned_32());
+					const WareIndex& worker_index = tribe.safe_worker_index(worker_typename);
 					if (!game.tribes().worker_exists(worker_index)) {
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
@@ -615,13 +602,14 @@ void MapBuildingdataPacket::read_warehouse
 							 worker_typename, next_spawn);
 						continue;
 					}
+
+					assert(worker_types_without_cost.size() ==
+							 warehouse.m_next_worker_without_cost_spawn.size());
 					for (uint8_t i = 0;; ++i) {
 						assert(i < worker_types_without_cost.size());
+
 						if (worker_types_without_cost.at(i) == worker_index) {
-							if
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 !=
-								 static_cast<uint32_t>(never()))
+							if(warehouse.m_next_worker_without_cost_spawn[i] != never()) {
 								throw GameDataError
 									(
 									 "%s %u has a next_spawn time for worker type "
@@ -630,15 +618,16 @@ void MapBuildingdataPacket::read_warehouse
 									 warehouse.descr().descname().c_str(), warehouse.serial(),
 									 worker_typename, next_spawn,
 									 warehouse.m_next_worker_without_cost_spawn[i]);
-							warehouse.m_next_worker_without_cost_spawn[i] =
-								next_spawn;
+							}
+							warehouse.m_next_worker_without_cost_spawn[i] = next_spawn;
 							break;
 						}
 					}
 				}
-				//  The checks that the warehouse has a next_spawn time for each
-				//  worker type that the player is allowed to spawn, is in
-				//  Warehouse::load_finish.
+			}
+			//  The checks that the warehouse has a next_spawn time for each
+			//  worker type that the player is allowed to spawn, is in
+			//  Warehouse::load_finish.
 
 			if (packet_version >= 3) {
 				// Read planned worker data
@@ -665,8 +654,9 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 
-			if (packet_version >= 5)
+			if (packet_version >= 5) {
 				warehouse.m_next_stock_remove_act = fr.unsigned_32();
+			}
 
 			if (packet_version >= 6) {
 				if (warehouse.descr().get_isport()) {
@@ -690,8 +680,7 @@ void MapBuildingdataPacket::read_warehouse
 				Area<FCoords> a
 					(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field & first_map_field = map[0];
-				Player::Field * const player_fields =
-					warehouse.owner().m_fields;
+				Player::Field * const player_fields = player.m_fields;
 				MapRegion<Area<FCoords> > mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field]
@@ -699,7 +688,7 @@ void MapBuildingdataPacket::read_warehouse
 						+= map.calc_influence(mr.location(), Area<>(a, a.radius));
 				while (mr.advance(map));
 			}
-			warehouse.owner().see_area
+			player.see_area
 				(Area<FCoords>
 				 (game.map().get_fcoords(warehouse.get_position()),
 				  warehouse.descr().vision_range()));
@@ -845,7 +834,7 @@ void MapBuildingdataPacket::read_productionsite
 						 ProductionSite::request_worker_callback,
 						 wwWORKER);
 				req.read(fr, game, mol);
-				WareIndex const worker_index = req.get_index();
+				const WareIndex& worker_index = req.get_index();
 
 				//  Find a working position that matches this request.
 				ProductionSite::WorkingPosition * wp = &wp_begin;
@@ -1307,10 +1296,11 @@ void MapBuildingdataPacket::write_warehouse
 	{
 		const std::vector<WareIndex> & worker_types_without_cost =
 			tribe.worker_types_without_cost();
+		assert(worker_types_without_cost.size() ==
+				 warehouse.m_next_worker_without_cost_spawn.size());
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
-			uint32_t const next_spawn =
-				warehouse.m_next_worker_without_cost_spawn[--i];
-			if (next_spawn != static_cast<uint32_t>(never())) {
+			const Time& next_spawn = warehouse.m_next_worker_without_cost_spawn[--i];
+			if (next_spawn != never()) {
 				fw.string
 					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
 					 ->name());

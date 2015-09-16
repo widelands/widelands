@@ -223,6 +223,8 @@ public:
 	void log_general_info(const EditorGameBase &) override;
 
 protected:
+	/// Initializes the container sizes for the owner's tribe.
+	void init_containers(Player& owner);
 	/// Create the warehouse information window.
 	virtual void create_options_window
 		(InteractiveGameBase &, UI::Window * & registry) override;
@@ -265,9 +267,9 @@ private:
 	using WorkerList = std::vector<Worker *>;
 	using IncorporatedWorkers = std::map<WareIndex, WorkerList>;
 	IncorporatedWorkers        m_incorporated_workers;
-	uint32_t                 * m_next_worker_without_cost_spawn;
-	uint32_t                   m_next_military_act;
-	uint32_t m_next_stock_remove_act;
+	std::vector<Time>          m_next_worker_without_cost_spawn;
+	Time                       m_next_military_act;
+	Time                       m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
 

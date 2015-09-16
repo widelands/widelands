@@ -284,7 +284,6 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 Warehouse::~Warehouse()
 {
 	delete m_supply;
-	delete[] m_next_worker_without_cost_spawn;
 }
 
 /**
@@ -365,16 +364,16 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 void Warehouse::load_finish(EditorGameBase & egbase) {
 	Building::load_finish(egbase);
 
-	uint32_t next_spawn = never();
+	Time next_spawn = never();
 	const std::vector<WareIndex> & worker_types_without_cost =
 		owner().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		WareIndex const worker_index = worker_types_without_cost.at(--i);
 		if
 			(owner().is_worker_type_allowed(worker_index) &&
-			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
+			 m_next_worker_without_cost_spawn[i] == never())
 		{
-			if (next_spawn == static_cast<uint32_t>(never())) {
+			if (next_spawn == never()) {
 				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
@@ -407,22 +406,9 @@ void Warehouse::init(EditorGameBase & egbase)
 {
 	Building::init(egbase);
 
-	WareIndex const nr_wares = egbase.tribes().nrwares();
-	WareIndex const nr_workers = egbase.tribes().nrworkers();
-	m_supply->set_nrwares(nr_wares);
-	m_supply->set_nrworkers(nr_workers);
-
-	m_ware_policy.resize(nr_wares, SP_Normal);
-	m_worker_policy.resize(nr_workers, SP_Normal);
-
 	Player & player = owner();
-	uint8_t nr_worker_types_without_cost =
-		player.tribe().worker_types_without_cost().size();
-	m_next_worker_without_cost_spawn =
-		new uint32_t[nr_worker_types_without_cost];
-	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
-		m_next_worker_without_cost_spawn[i] = never();
-	}
+
+	init_containers(player);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -499,6 +485,19 @@ void Warehouse::init(EditorGameBase & egbase)
 	//this is default
 	m_cleanup_in_progress = false;
 
+}
+
+void Warehouse::init_containers(Player& player) {
+	WareIndex const nr_wares = player.egbase().tribes().nrwares();
+	WareIndex const nr_workers = player.egbase().tribes().nrworkers();
+	m_supply->set_nrwares(nr_wares);
+	m_supply->set_nrworkers(nr_workers);
+
+	m_ware_policy.resize(nr_wares, SP_Normal);
+	m_worker_policy.resize(nr_workers, SP_Normal);
+
+	uint8_t nr_worker_types_without_cost = player.tribe().worker_types_without_cost().size();
+	m_next_worker_without_cost_spawn.resize(nr_worker_types_without_cost, never());
 }
 
 /**
@@ -625,7 +624,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 /// at night ;-)
 void Warehouse::act(Game & game, uint32_t const data)
 {
-	uint32_t const gametime = game.get_gametime();
+	const int32_t gametime = game.get_gametime();
 	{
 		const std::vector<WareIndex> & worker_types_without_cost =
 			owner().tribe().worker_types_without_cost();
@@ -1248,19 +1247,13 @@ void Warehouse::_update_all_planned_workers(Game & game)
 void Warehouse::enable_spawn
 	(Game & game, uint8_t const worker_types_without_cost_index)
 {
-	assert
-		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
-		 ==
-		 static_cast<uint32_t>(never()));
+	assert(m_next_worker_without_cost_spawn[worker_types_without_cost_index] == never());
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
 		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
 void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
 {
-	assert
-		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
-		 !=
-		 static_cast<uint32_t>(never()));
+	assert(m_next_worker_without_cost_spawn[worker_types_without_cost_index] != never());
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = never();
 }
 
