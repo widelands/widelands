@@ -82,7 +82,7 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
-	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
+	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
 	enum class ScheduleTasks : uint8_t {
@@ -104,13 +104,6 @@ struct DefaultAI : ComputerPlayer {
 		kCheckTrainingsites,
 		kCountMilitaryVacant,
 		kCheckEnemySites
-	};
-	enum class MilitaryStrategy : uint8_t {
-		kNoNewMilitary,
-		kDefenseOnly,
-		kResourcesOrDefense,
-		kExpansion,
-		kPushExpansion
 	};
 	enum class Tribes : uint8_t {
 		kNone,
@@ -272,6 +265,9 @@ private:
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
+	
+	int32_t target_military_score_;
+	int32_t least_military_score_;
 
 	WoodPolicy wood_policy_;
 
@@ -316,6 +312,8 @@ private:
 	int32_t resource_necessity_mines_;
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
+	
+	uint32_t trees_around_cutters_;
 
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
