@@ -453,14 +453,15 @@ void Warehouse::init(EditorGameBase & egbase)
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 
-		if (descr().name() == owner().tribe().get_building_descr(owner().tribe().port())->name()) {
+		if (descr().get_isport()) {
 			send_message
 				(*game,
 				 Message::Type::kSeafaring,
 				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
-		} else if (descr().name() == "headquarters") {
+// NOCOM(GunChleoc): what about headquarters_shipwreck and headquarters_interim?
+		} else if (descr().name() == owner().tribe().get_building_descr(owner().tribe().headquarters())->name()) {
 			send_message
 				(*game,
 				 Message::Type::kEconomy,

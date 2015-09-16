@@ -548,7 +548,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 7
+#define IMMOVABLE_SAVEGAME_VERSION 6
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {

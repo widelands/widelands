@@ -349,11 +349,11 @@ bool Worker::run_setbobdescription
 		bob = list[1];
 	}
 
-	if (state.svar1 == "world") {
-		state.ivar2 = game.world().get_bob(bob.c_str());
-	} else {
-		state.ivar2 = game.tribes().ship_index(bob.c_str());
-	}
+	state.ivar2 =
+		state.svar1 == "world" ?
+		game.world().get_bob(bob.c_str())
+		:
+		game.tribes().ship_index(bob.c_str());
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action.sparamv[idx].c_str());
@@ -825,7 +825,6 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		}
 	} else {
 		state.svar1 = "tribe";
-
 		WareIndex immovable_index = game.tribes().immovable_index(list[1]);
 
 		if (game.tribes().immovable_exists(immovable_index)) {
@@ -886,10 +885,11 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
  */
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
-	if (state.svar1 == "world")
+	if (state.svar1 == "world") {
 		game.create_critter(get_position(), state.ivar2);
-	else
+	} else {
 		game.create_ship(get_position(), state.ivar2);
+	}
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -2974,7 +2974,7 @@ void Worker::Loader::load(FileRead & fr)
 	Bob::Loader::load(fr);
 
 	uint8_t version = fr.unsigned_8();
-	if (version != WORKER_SAVEGAME_VERSION)
+	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
@@ -2982,9 +2982,11 @@ void Worker::Loader::load(FileRead & fr)
 	m_carried_ware = fr.unsigned_32();
 	worker.m_current_exp = fr.signed_32();
 
-	if (fr.unsigned_8()) {
-		worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
-		worker.m_transfer->read(fr, m_transfer);
+	if (version >= 2) {
+		if (fr.unsigned_8()) {
+			worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
+			worker.m_transfer->read(fr, m_transfer);
+		}
 	}
 }
 
@@ -3064,6 +3066,9 @@ MapObject::Loader * Worker::load
 		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
+			if (!(egbase.tribes().tribe_exists(name))) {
+				throw GameDataError("unknown tribe '%s'", name.c_str());
+			}
 			name = lookup_table.lookup_worker(name, fr.c_string());
 		}
 

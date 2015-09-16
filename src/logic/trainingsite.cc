@@ -98,7 +98,6 @@ TrainingSiteDescr::TrainingSiteDescr
 	}
 }
 
-
 /**
  * Create a new training site
  * \return  the new training site

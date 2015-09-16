@@ -60,7 +60,6 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
-
 uint32_t ShipDescr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
@@ -1002,17 +1001,16 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t version) {
-	try {
-		if (version == SHIP_SAVEGAME_VERSION) {
-			Bob::Loader::load(fr);
+	Bob::Loader::load(fr);
 
-			// The state the ship is in
+	if (version >= 2) {
+		// The state the ship is in
+		if (version >= 3) {
 			m_ship_state = fr.unsigned_8();
 
 			// Expedition specific data
 			if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
-				 m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
-
+			    m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
 				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
@@ -1032,10 +1030,16 @@ void Ship::Loader::load(FileRead& fr, uint8_t version) {
 				m_expedition->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
 			}
 		} else {
-			throw GameDataError("unknown/unhandled version %u", version);
+			m_ship_state = TRANSPORT;
 		}
-	} catch (const std::exception& e) {
-		throw wexception("loading ship: %s", e.what());
+
+		m_lastdock = fr.unsigned_32();
+		m_destination = fr.unsigned_32();
+
+		m_items.resize(fr.unsigned_32());
+		for (ShippingItem::Loader& item_loader : m_items) {
+			item_loader.load(fr);
+		}
 	}
 }
 
@@ -1085,21 +1089,30 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 	try {
 		// The header has been peeled away by the caller
-
 		uint8_t const version = fr.unsigned_8();
-		if (version == SHIP_SAVEGAME_VERSION) {
-			std::string name = fr.c_string();
-			const ShipDescr* descr = nullptr;
-
+		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			try {
-				int32_t const idx = egbase.tribes().safe_ship_index(name);
-				descr = egbase.tribes().get_ship_descr(idx);
+				const ShipDescr* descr = nullptr;
+				// Removing this will break the test suite
+				if (version < 5) {
+					std::string tribe_name = fr.c_string();
+					fr.c_string(); // This used to be the ship's name, which we don't need any more.
+					if(!(egbase.tribes().tribe_exists(tribe_name))) {
+						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
+					}
+					const WareIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
+					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
+					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
+				} else {
+					std::string name = fr.c_string();
+					const WareIndex& ship_index = egbase.tribes().safe_ship_index(name);
+					descr = egbase.tribes().get_ship_descr(ship_index);
+				}
+				loader->init(egbase, mol, descr->create_object());
+				loader->load(fr, version);
 			} catch (const WException& e) {
 				throw GameDataError("Failed to load ship: %s", e.what());
 			}
-
-			loader->init(egbase, mol, descr->create_object());
-			loader->load(fr, version);
 		} else
 			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception& e) {

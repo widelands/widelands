@@ -356,8 +356,10 @@ void Critter::save
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(CRITTER_SAVEGAME_VERSION);
 
-	std::string owner =
-		descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ? "tribe" : "world";
+	const std::string owner =
+		descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
+				"" : // Tribes don't have critters
+				"world";
 	fw.c_string(owner);
 	fw.c_string(descr().name());
 
