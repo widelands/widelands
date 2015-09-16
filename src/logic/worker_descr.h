@@ -55,7 +55,9 @@ public:
 
 	virtual void load_graphics();
 
+	bool is_buildable() const {return buildable_;}
 	const Buildcost & buildcost() const {
+		assert(is_buildable());
 		return buildcost_;
 	}
 
@@ -111,6 +113,7 @@ protected:
 	const Image     * icon_;       ///< Pointer to icon into picture stack
 	DirAnimations     walk_anims_;
 	DirAnimations     walkload_anims_;
+	bool              buildable_;
 	Buildcost         buildcost_;
 
 	/**

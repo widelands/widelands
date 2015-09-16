@@ -796,7 +796,7 @@ void Player::flagaction(Flag & flag)
 
 void Player::allow_worker_type(WareIndex const i, bool const allow) {
 	assert(i < static_cast<int>(m_allowed_worker_types.size()));
-	assert(!allow || tribe().has_worker(i));
+	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
 	m_allowed_worker_types[i] = allow;
 }
 

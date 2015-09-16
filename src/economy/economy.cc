@@ -937,7 +937,8 @@ void Economy::_create_requested_workers(Game & game)
 		return;
 
 	for (const WareIndex& worker_index : owner().tribe().workers()) {
-		if (owner().is_worker_type_allowed(worker_index)) {
+		if (owner().is_worker_type_allowed(worker_index) &&
+			 owner().tribe().get_worker_descr(worker_index)->is_buildable()) {
 			_create_requested_worker(game, worker_index);
 		}
 	}

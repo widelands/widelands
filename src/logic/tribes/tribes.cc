@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h" // NOCOM
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -177,11 +178,14 @@ void Tribes::add_soldier_type(const LuaTable& table) {
 
 void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
+	// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
+	log("NOCOM adding worker description\n");
 	workers_->add(
 				new WorkerDescr(
 					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
 					table,
 					egbase_));
+	log("NOCOM adding worker description - done\n");
 }
 
 void Tribes::add_tribe(const LuaTable& table) {

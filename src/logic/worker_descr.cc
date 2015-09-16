@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/point.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -44,12 +45,16 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	ware_hotspot_      (Point(0, 15)),
 	icon_fname_        (table.get_string("icon")),
 	icon_              (nullptr),
-	needed_experience_ (-1),
+	buildable_         (false),
+	needed_experience_ (INVALID_INDEX),
 	becomes_           (INVALID_INDEX),
 	egbase_            (egbase)
 {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
+	if (table.has_key("buildable")) {
+		buildable_ = table.get_bool("buildable");
+	}
 	if (table.has_key("buildcost")) {
 		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
@@ -100,6 +105,17 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 	// Read programs
 	if (table.has_key("programs")) {
+		/*
+		 * NOCOM empire_vinefarmer - start parser - end -start parser - end -done!
+*** Error in `./widelands': realloc(): invalid next size: 0x000000000623ed30 ***
+Aborted (core dumped)
+
+NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
+*** Error in `./widelands': double free or corruption (!prev): 0x0000000003d79f50 ***
+
+		 * */
+		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
+		log("%s ", name().c_str());
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
 			std::transform
@@ -119,7 +135,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				program = new WorkerProgram(program_name);
 
 				// NOCOM parsing is a lot slower than in trunk
+				log("start parser-");
 				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
+				log("end-");
 				programs_[program_name.c_str()] = program;
 			}
 
@@ -128,17 +146,20 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
+		log("done!\n");
 	}
-
+	log("default_target_quantity");
 	if (table.has_key("default_target_quantity")) {
 		default_target_quantity_ = table.get_int("default_target_quantity");
 	} else {
 		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
 	}
+	log(" done - ware_hotspot");
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
 		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
 	}
+	log(" done\n");
 }
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,

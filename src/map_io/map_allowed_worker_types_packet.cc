@@ -68,7 +68,7 @@ void MapAllowedWorkerTypesPacket::read
 					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
 						const WareIndex& worker_index = static_cast<WareIndex>(i);
 						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
-						if (player->tribe().has_worker(worker_index)) {
+						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
 							player->allow_worker_type(worker_index, s->get_bool(worker_descr.name().c_str(), true));
 						} else {
 							player->allow_worker_type(worker_index, false);

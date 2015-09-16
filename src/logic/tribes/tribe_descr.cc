@@ -131,7 +131,8 @@ TribeDescr::TribeDescr
 					column.push_back(workerindex);
 					workers_order_coords_[workerindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
 
-					if (tribes_.get_worker_descr(workerindex)->buildcost().size() < 1) {
+					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
+					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
 						worker_types_without_cost_.push_back(workerindex);
 					}
 				} catch (const WException& e) {

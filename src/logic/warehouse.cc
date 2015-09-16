@@ -292,14 +292,22 @@ Warehouse::~Warehouse()
  */
 bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 {
-	if (!owner().tribe().has_worker(pw.index)) {
+	const TribeDescr& tribe = owner().tribe();
+
+	if (pw.index == INVALID_INDEX || !(pw.index < m_supply->get_workers().get_nrwareids())) {
 		return false;
 	}
 
-	if (!(pw.index < m_supply->get_workers().get_nrwareids()))
-		return false;
+	const WorkerDescr * w_desc = tribe.get_worker_descr(pw.index);
 
-	const WorkerDescr * w_desc = owner().tribe().get_worker_descr(pw.index);
+	if (!(tribe.has_worker(pw.index) && w_desc->is_buildable())) {
+		return false;
+	}
+
+	if (!(pw.index < m_supply->get_workers().get_nrwareids())) {
+		return false;
+	}
+
 	const WorkerDescr::Buildcost & cost = w_desc->buildcost();
 	uint32_t idx = 0;
 
@@ -1019,6 +1027,10 @@ bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
 			 worker, m_supply->get_workers().get_nrwareids());
 
 	const WorkerDescr& w_desc = *owner().tribe().get_worker_descr(worker);
+	assert(&w_desc);
+	if (!w_desc.is_buildable()) {
+		return false;
+	}
 
 	//  see if we have the resources
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {

@@ -20,6 +20,7 @@ tribes:new_carrier_type {
    directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
+   buildable = true,
 
    animations = animations,
 }

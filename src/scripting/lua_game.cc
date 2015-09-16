@@ -803,8 +803,11 @@ int LuaPlayer::allow_workers(lua_State * L) {
 		tribe.worker_types_without_cost();
 
 	for (const WareIndex& worker_index : tribe.workers()) {
-		player.allow_worker_type(worker_index, true);
 		const WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
+		if (!worker_descr->is_buildable()) {
+			continue;
+		}
+		player.allow_worker_type(worker_index, true);
 
 		if (worker_descr->buildcost().empty()) {
 			//  Workers of this type can be spawned in warehouses. Start it.
@@ -862,12 +865,12 @@ void LuaPlayer::m_parse_building_list
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
 		// Only act on buildings that the tribe has or could conquer
-		const TribeDescr& tribe = get(L, get_egbase(L)).tribe();
+		const TribeDescr& tribe_descr = get(L, get_egbase(L)).tribe();
 		const Tribes& tribes = get_egbase(L).tribes();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
 			const BuildingIndex& building_index = static_cast<BuildingIndex>(i);
-			const BuildingDescr& descr = *tribe.get_building_descr(building_index);
-			if (tribe.has_building(building_index) || descr.type() == MapObjectType::MILITARYSITE) {
+			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
+			if (tribe_descr.has_building(building_index) || descr.type() == MapObjectType::MILITARYSITE) {
 				rv.push_back(building_index);
 			}
 		}
