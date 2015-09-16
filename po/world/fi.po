@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Markus Hällfors <markus@hallfors.com>, 2015
-# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
-"PO-Revision-Date: 2015-02-28 23:08+0000\n"
-"Last-Translator: Markus Hällfors <markus@hallfors.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-22 19:21+0000\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,13 +113,13 @@ msgstr "Ruohoa"
 #: ../../world/immovables/ruin4/init.lua:5
 #: ../../world/immovables/ruin5/init.lua:5
 msgid "Ruin"
-msgstr ""
+msgstr "Raunio"
 
 #: ../../world/immovables/manmade/debris00/init.lua:5
 #: ../../world/immovables/manmade/debris01/init.lua:5
 #: ../../world/immovables/manmade/debris02/init.lua:5
 msgid "Debris"
-msgstr ""
+msgstr "Roskaa"
 
 #: ../../world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
@@ -620,7 +620,7 @@ msgstr ""
 
 #: ../../world/init.lua:11
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Muuta"
 
 #: ../../world/init.lua:17
 msgid "Plants"
@@ -776,7 +776,7 @@ msgstr ""
 
 #: ../../world/terrains/init.lua:693
 msgid "Ice"
-msgstr ""
+msgstr "Jää"
 
 #: ../../world/terrains/init.lua:723 ../../world/terrains/init.lua:739
 msgid "Ice Floes"
@@ -784,7 +784,7 @@ msgstr ""
 
 #: ../../world/terrains/init.lua:790
 msgid "Dry Soil"
-msgstr ""
+msgstr "Kuiva maaperä"
 
 #: ../../world/terrains/init.lua:850
 msgid "High Mountain Meadow"

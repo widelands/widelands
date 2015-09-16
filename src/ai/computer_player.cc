@@ -37,7 +37,7 @@ struct EmptyAI : ComputerPlayer {
 
 	struct EmptyAIImpl : Implementation {
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		EmptyAIImpl() {name = _("None");}
+		EmptyAIImpl() {name = pgettext("ai_name", "None");}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
 		{

@@ -661,7 +661,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 		} else {  // it seems that port constructionsite has dissapeared
 			// Send a message to the player, that a port constructionsite is gone
-			std::string msg_head = _("New port constructionsite is gone");
+			std::string msg_head = _("New port construction site is gone");
 			std::string msg_body = _("Unloading of wares failed, expedition is cancelled now.");
 			send_message(game, msg_head, msg_body, "port.png");
 			send_signal(game, "cancel_expedition");

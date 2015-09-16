@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-28 09:20+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -451,7 +451,7 @@ msgstr "Testo necessario"
 
 #: ../../tribes/barbarians/bakery/help.lua:17
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr ""
+msgstr "Produce del pane arabo per soldati e minatori."
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 msgid ""
@@ -937,7 +937,7 @@ msgstr "Piccone"
 
 #: ../../tribes/barbarians/conf:85
 msgid "Pitta Bread"
-msgstr "Pita"
+msgstr "Pane arabo"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Ration"
@@ -2075,13 +2075,13 @@ msgid ""
 "A small bite to keep miners strong and working. Also the scout consumes "
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a"
 " big inn out of fish or meat or pitta bread."
-msgstr "Un piccolo boccone per mantenere i minatori forti ed al lavoro. Anche gli esploratori consumano razioni nei viaggi di esplorazione. Le razioni sono prodotte in una taverna, una locanda o una grande locanda usando pesce, carne o pita."
+msgstr "Un piccolo boccone per mantenere i minatori forti ed al lavoro. Anche gli esploratori consumano razioni nei viaggi di esplorazione. Le razioni sono prodotte in una taverna, una locanda o una grande locanda usando pesce, carne o pane arabo."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
-msgstr "Le pietre grezze sono un materiale di costruzione di base dei barbari. Sono prodotte in cave e miniere di granito."
+msgstr "Le pietre grezze sono un materiale di costruzione di base dei Barbari. Sono prodotte in cave e miniere di granito."
 
 #: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
@@ -2204,7 +2204,7 @@ msgstr ""
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr "Un boccone più grande della razione da fornire ai minatori nelle miniere profonde. È prodotto in una locanda o in una grande locanda a partire da pesce/carne, pita e birra."
+msgstr "Un boccone più grande della razione da fornire ai minatori nelle miniere profonde. È prodotto in una locanda o in una grande locanda a partire da pesce/carne, pane arabo e birra."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"

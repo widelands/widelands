@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 09:19+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-24 19:27+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -629,7 +629,7 @@ msgstr "Els focs dels forns de metall, tallers d'armes i d'armadures s'alimenten
 #: ../../tribes/empire/deep_oremine/conf:27
 #: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr "extreure de la mina"
+msgstr "extreure minerals"
 
 #: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -1013,7 +1013,7 @@ msgstr "Pastor"
 
 #: ../../tribes/empire/conf:132
 msgid "Shipwright"
-msgstr "Fuster de vaixells"
+msgstr "Mestre d'aixa"
 
 #: ../../tribes/empire/conf:133
 msgid "Smelter"
@@ -1021,7 +1021,7 @@ msgstr "Fonedor"
 
 #: ../../tribes/empire/conf:134
 msgid "Stonemason"
-msgstr "Pedrer"
+msgstr "Picapedrer"
 
 #: ../../tribes/empire/conf:135
 msgid "Toolsmith"
@@ -1154,7 +1154,7 @@ msgstr "Casa de l'explorador"
 
 #: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
-msgstr "Pedrer"
+msgstr "Picapedrer"
 
 #: ../../tribes/empire/conf:180
 msgid "Sawmill"
@@ -1674,7 +1674,7 @@ msgstr "La carn conté molta energia. S'empra als hostals i tavernes per prepara
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
-msgstr "moldre el blat"
+msgstr "moldre blat"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -1694,7 +1694,7 @@ msgstr "Els soldats han ocupat el vostre post avançat."
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
-msgstr "El pic l'usen els miners i els pedrers. Es fabrica al taller d'eines."
+msgstr "El pic l'usen els miners, els pedrers i els picapedrers. Es fabrica al taller d'eines."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."

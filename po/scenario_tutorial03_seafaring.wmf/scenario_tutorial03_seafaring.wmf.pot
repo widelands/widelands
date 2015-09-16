@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -253,7 +253,7 @@ msgid ""
 "Although it might take long and be expensive and not without dangers – who knows what monsters live in the sea? – I see no other possibility: we will have to undertake an expedition to the unknown seas."
 msgstr ""
 
-#: TRANSLATORS: This shall be the beginning of a poem
+#. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid ""
 "A trip by the sea, what fun it can be"
@@ -396,4 +396,3 @@ msgid_plural ""
 "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-

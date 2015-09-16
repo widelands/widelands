@@ -182,14 +182,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		if (m_is_replay) {
 			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-			modes.push_back("SP = Single Player");
+			modes.push_back(_("SP = Single Player"));
 		}
 		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		modes.push_back("MP = Multiplayer");
+		modes.push_back(_("MP = Multiplayer"));
 		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		modes.push_back("H = Multiplayer (Host)");
+		modes.push_back(_("H = Multiplayer (Host)"));
 		const std::string mode_tooltip_1 =
 				/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 				/** TRANSLATORS: %s is a list of game modes. */
@@ -423,7 +423,6 @@ void FullscreenMenuLoadGame::entry_selected()
 		}
 	}
 }
-
 
 /**
  * Fill the file list

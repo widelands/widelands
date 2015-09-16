@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-08 11:27+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 00:12+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +114,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr "Je na vás, čo postavíte. Ale pamätajte si - uhoľné a železnorudné bane potrebujú pivo, mramorový lom a zlaté bane víno a každá baňa potrebuje prinajmenšom prídely, ktoré sa vyrábajú z chleba ALEBO mäsa ALEBO rýb."
+msgstr "Je na vás, čo chcete postaviť. Ale pamätajte si – uhoľné a železnorudné bane potrebujú pivo, mramorové a zlaté bane víno a každá baňa potrebuje prinajmenšom prídely, ktoré sa vyrábajú z chleba ALEBO mäsa ALEBO rýb."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -136,7 +136,7 @@ msgstr "Na pohľad do hĺbky nepriateľského územia postavte vežu."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Zničte kmeň Barbarov"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"

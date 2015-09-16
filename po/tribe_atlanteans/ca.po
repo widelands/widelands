@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 09:19+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 11:29+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -552,7 +552,7 @@ msgstr "Els focs de les forges atlants i els tallers d'armes i armadures s'alime
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
-msgstr "extreure de la mina"
+msgstr "extreure minerals"
 
 #: ../../tribes/atlanteans/coalmine/conf:44
 msgid "Main Coal Vein Exhausted"
@@ -884,7 +884,7 @@ msgstr "Carboner"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Shipwright"
-msgstr "Fuster de vaixells"
+msgstr "Mestre d'aixa"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Farmer"
@@ -1434,8 +1434,8 @@ msgid ""
 msgstr "Els cavalls ajuden a transportar béns en camins molt transitats. Es crien en granges de cavalls."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
-msgstr "Cria els forts cavalls atlants"
+msgid "Breeds the strong Atlantean horses."
+msgstr "Cria els forts cavalls atlants."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1574,11 +1574,11 @@ msgstr "Les pinces de munyir les utilitza el criador d'aranyes per munyir-les. L
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "grinding corn"
-msgstr "moldre el panís"
+msgstr "moldre panís"
 
 #: ../../tribes/atlanteans/mill/conf:29
 msgid "grinding blackroot"
-msgstr "moldre la negrarrel"
+msgstr "moldre negrarrel"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""

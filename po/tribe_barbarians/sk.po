@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-08 07:33+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -1126,7 +1126,7 @@ msgstr "Stavenisko"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
 #: ../../tribes/barbarians/conf:147 ../../tribes/barbarians/conf:156
 msgid "Castle"
@@ -1295,7 +1295,7 @@ msgstr "Vyhňa na helmy"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
-msgstr "Žulový lom"
+msgstr "Žulová baňa"
 
 #: ../../tribes/barbarians/conf:196
 msgid "Deeper Coal Mine"
@@ -1640,7 +1640,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Hlavná žila tohto žulového lomu je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Lom už nemožno ďalej vylepšovať, takže zvážte jeho rozobratie alebo zničenie."
+msgstr "Hlavná žila tejto žulovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže zvážte jej rozobratie alebo zničenie."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -1806,7 +1806,7 @@ msgstr "Spaľuje vápno vo vápenke."
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr "Odpoveď Ragnalda Detského na otázku, čo robí v tej špine. Jeho „nový kameň“ je teraz dôležitým stavebným materiálom."
+msgstr "Odpoveď Ragnalda Detského na otázku, čo robí v tej hline. Jeho „nový kameň“ je teraz dôležitým stavebným materiálom."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid "‘Forming new stone from old with fire and water.’"
@@ -2082,7 +2082,7 @@ msgstr "Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci. Príd
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
-msgstr "Surové kamene sú základným stavebným materiálom barbarov. Ťažia sa v kameňolomoch a žulových lomoch."
+msgstr "Surové kamene sú základným stavebným materiálom Barbarov. Ťažia sa v kameňolomoch a žulových baniach."
 
 #: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
@@ -2116,7 +2116,7 @@ msgstr "Trstinová záhrada pestuje trstinu, ktorá slúži kmeňu barbarov na d
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr "Trstina je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne trvanlivá látka, z ktorej vyrábajú lodné plachty."
+msgstr "Trstina je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne trvanlivá látka, z ktorej sa vyrábajú lodné plachty."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."

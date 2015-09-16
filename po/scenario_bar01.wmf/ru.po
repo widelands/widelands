@@ -2,15 +2,18 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Alexander <7986337@gmail.com>, 2015
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
+# Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-12 10:50+0000\n"
+"PO-Revision-Date: 2015-09-13 17:02+0000\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,21 +24,21 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Постройте две Хижины лесничего"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Постройте рядом с каждой хижиной дровосека хижину лесничего."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Сами по себе, деревья растут очень медленно. Чтобы обеспечить себя древесиной, обязательно постройте лесничих."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr "Расширяйтесь к северо-востоку и стройте каменоломню"
+msgstr "Расширяйтесь к северо-востоку и постройте каменоломню"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -45,11 +48,11 @@ msgstr "Расширяйтесь к скалам на северо-восток"
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Стройте военные сооружения (такие, как караульные башни и заставы) чтобы расширить свою территорию."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Доберитесь до скал на северо-востоке и постройте там каменоломню."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -61,7 +64,7 @@ msgstr "Построить угольную шахту и рудник."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron ore mine."
-msgstr ""
+msgstr "Постройте шахту по добыче угля и шахту по добыче железа."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -111,17 +114,17 @@ msgstr "вода"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr "ничего не найдено здесь"
+msgstr "ничего не найдено"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Шахты могут быть построены только на горной местности. Подходящие места для шахт обозначены оранжевыми символами шахт."
+msgstr "Шахты можно строить только в горной местности. Места, пригодные для сооружения шахт обозначены оранжевыми символами."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
-msgstr "Обеспечить шахтеров едой"
+msgstr "Обеспечьте ваши шахты провизией"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -142,11 +145,11 @@ msgstr "Охотник отлавливает животных, тогда ка�
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "Это только один пример товара, который должен пройти переработку в особом здании перед использованием: за ним последуют и другие."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
-msgstr "Печь хлеб"
+msgstr "Испеките хлеб"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
@@ -162,35 +165,35 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Переплавить добытые ресурсы"
+msgstr "Переработайте добытые ресурсы"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
-msgstr "Построить плавильню."
+msgstr "Постройте плавильню."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:85
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "Железная руда, добытая шахтёрами, не может использоваться в сыром виде - сначала её необходиом переплавить в железо."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Улучшить строения и построить малую пивоварню"
+msgstr "Улучшите строения и постройте малую пивоварню"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Улучшите шахту и таверну и постройте малую пивоварню"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Улучшите шахту по добыче угля или шахту по добыче железа до глубокой шахты, а таверну улучшите до гостиницы"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Постройте также малую пивоварню."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -227,7 +230,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:105
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a wood hardener"
-msgstr "Построить лесопилку"
+msgstr "Постройте балочную мастерскую."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
@@ -245,7 +248,7 @@ msgstr "Построить цементную печь и угольное хо�
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Построй цементную печь, которую снабдят сырьем колодец и печь углежога (или угольная шахта)."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
@@ -259,7 +262,7 @@ msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Воду можно добыть из колодца, который строят над водным источником; обнаружить его могут ваши геологи, если послать их к любому флагу, кроме тех, что расположены в горной местности."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
@@ -279,13 +282,13 @@ msgstr ""
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Построй цементную печь и колодец. Кроме того, построй печь углежога или угольную шахту для получения угля."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:130
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:135
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Постройте оранжерею"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:133
 msgid ""
@@ -298,7 +301,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Постройте скотный двор"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -964,4 +967,4 @@ msgid_plural "New Objectives"
 msgstr[0] "Новое задание"
 msgstr[1] "Новых задания"
 msgstr[2] "Новых заданий"
-msgstr[3] "Новых заданий"
+msgstr[3] "Новые задания"

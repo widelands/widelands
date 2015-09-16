@@ -20,7 +20,6 @@
 #include "ui_basic/messagebox.h"
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"

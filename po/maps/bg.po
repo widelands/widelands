@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-11 21:02+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr "От края към началото"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "След като акостират на тайнствен остров близо до Атлантида, останалите атлантидци се борят да си създадат нов дом."
+msgstr "След като акостират на тайнствен остров близо до Атлантида, останалите атландци се борят да си създадат нов дом."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -108,11 +108,11 @@ msgstr "Надпреварата за огъня"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Атлантидци"
+msgstr "Атландци"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Предизвикателно. Представя атлантидците"
+msgstr "Предизвикателно. Представя атландците"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -121,7 +121,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Когато богът на атлантидците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атлантидците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
+msgstr "Когато богът на атландците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атландците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -476,7 +476,7 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "В атлантидската култура има един специален турнир, наричан „Островни скокове“, при който две или повече групи се опитват да достигнат централния остров колкото се може, така че да бъдат първите, издигнали замък на върха на централната планина."
+msgstr "В атландската култура има един специален турнир, наричан „Островни скокове“, при който две или повече групи се опитват да достигнат централния остров колкото се може, така че да бъдат първите, издигнали замък на върха на централната планина."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
