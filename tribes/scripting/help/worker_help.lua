@@ -107,7 +107,7 @@ end
 
 return {
    func = function(worker_description)
-      set_textdomain("help")
+      set_textdomain("tribes_encyclopedia")
       return worker_help_string(worker_description)
    end
 }

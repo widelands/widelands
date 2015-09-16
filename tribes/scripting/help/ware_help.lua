@@ -62,7 +62,7 @@ end
 
 return {
    func = function(tribe, ware_description)
-      set_textdomain("help")
+      set_textdomain("tribes_encyclopedia")
 	   return ware_help_string(tribe, ware_description)
    end
 }

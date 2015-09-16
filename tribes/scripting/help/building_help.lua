@@ -844,7 +844,7 @@ end
 -- The main function call
 return {
    func = function(tribename, buildingname)
-      set_textdomain("help")
+      set_textdomain("tribes_encyclopedia")
 		local tribe = wl.Game():get_tribe_description(tribename)
 		local building_description = wl.Game():get_building_description(buildingname)
 		return building_help(tribe, building_description)

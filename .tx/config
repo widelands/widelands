@@ -79,9 +79,9 @@ source_file = po/tribes/tribes.pot
 source_lang = en
 type = PO
 
-[widelands.help]
-file_filter = po/help/<lang>.po
-source_file = po/help/help.pot
+[widelands.tribes_encyclopedia]
+file_filter = po/tribes_encyclopedia/<lang>.po
+source_file = po/tribes_encyclopedia/tribes_encyclopedia.pot
 source_lang = en
 type = PO
 

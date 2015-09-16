@@ -67,7 +67,7 @@ MAINPOTS = [
         "../../tribes/*/*/*/*/*/init.lua",
     ]),
     # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
-    ("help/help", [
+    ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../tribes/scripting/help/*.lua",
         "../../tribes/*/helptexts.lua",
         "../../tribes/*/*/helptexts.lua",
