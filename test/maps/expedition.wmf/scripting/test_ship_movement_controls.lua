@@ -1,6 +1,6 @@
 run(function()
    game.desired_speed = 30 * 1000
-	p1:place_bob("ship", map:get_field(10, 10))
+	p1:place_ship(map:get_field(10, 10))
 
 	port = map:get_field(16, 16).immovable
  	port:set_wares("log", 10) -- no sense to wait

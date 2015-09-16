@@ -14,7 +14,7 @@ run(function()
 
    start_building_farm()
    port1():set_workers{
-      builder = 1,
+      barbarians_builder = 1,
    }
    port1():set_wares{
       blackwood = 1,

@@ -183,7 +183,7 @@ function create_one_ship()
 end
 
 function create_second_ship()
-   second_ship = p1:place_bob("ship", map:get_field(14, 10))
+   second_ship = p1:place_ship(map:get_field(14, 10))
 end
 
 function create_two_ships()
