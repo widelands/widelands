@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h" // NOCOM
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
 #include "io/filesystem/layered_filesystem.h"

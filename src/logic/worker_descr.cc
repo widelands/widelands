@@ -104,24 +104,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 	// Read programs
 	if (table.has_key("programs")) {
-		/*
-		 * NOCOM empire_vinefarmer - start parser - end -start parser - end -done!
-*** Error in `./widelands': realloc(): invalid next size: 0x000000000623ed30 ***
-Aborted (core dumped)
-
-NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
-*** Error in `./widelands': double free or corruption (!prev): 0x0000000003d79f50 ***
-
-empire_farmer start parser-end-start parser-end-done!
-default_target_quantity done - ware_hotspot done
-NOCOM adding worker description - done
-*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
-Aborted (core dumped)
-bratzbert@museum:~/sources/widelands/one_tribe$
-
-
-		 * */
 		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
+		//*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
 		log("%s ", name().c_str());
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
@@ -142,9 +126,7 @@ bratzbert@museum:~/sources/widelands/one_tribe$
 				program = new WorkerProgram(program_name);
 
 				// NOCOM parsing is a lot slower than in trunk
-				log("start parser-");
 				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
-				log("end - ");
 				programs_[program_name.c_str()] = program;
 			}
 
@@ -153,20 +135,16 @@ bratzbert@museum:~/sources/widelands/one_tribe$
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
-		log("done! ");
 	}
-	log("default_target_quantity");
 	if (table.has_key("default_target_quantity")) {
 		default_target_quantity_ = table.get_int("default_target_quantity");
 	} else {
 		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
 	}
-	log(" done - ware_hotspot");
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
 		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
 	}
-	log(" done");
 }
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
