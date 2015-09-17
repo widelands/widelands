@@ -514,11 +514,12 @@ bool Economy::needs_ware(WareIndex const ware_type) const {
 
 	// we have target quantity set to 0, we need to check if there is an open request
 	} else {
-		for (size_t i = 0; i < m_requests.size(); ++i)
-		{
+		for (const Request * temp_req : m_requests) {
+			const Request & req = *temp_req;
+
 			// TODO(meitis): guess we should set a supply here already
 			// otherwise multiple productionsites can start to fullfill the same request
-			if (ware_type == m_requests[i]->get_index() && m_requests[i]->is_open())
+			if (req.get_type() == wwWARE && req.get_index() == ware_type)
 				return true;
 		}
 		return false;
@@ -541,11 +542,12 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 
 	// we have target quantity set to 0, we need to check if there is an open request
 	} else {
-		for (size_t i = 0; i < m_requests.size(); ++i)
-		{
+		for (const Request * temp_req : m_requests) {
+			const Request & req = *temp_req;
+
 			// TODO(meitis): guess we should set a supply here already
-			// otherwise multiple "productionsites" can start to fullfill the same request
-			if (worker_type == m_requests[i]->get_type() && m_requests[i]->is_open())
+			// otherwise multiple productionsites can start to fullfill the same request
+			if (req.get_type() == wwWORKER && req.get_index() == worker_type)
 				return true;
 		}
 		return false;
@@ -915,31 +917,56 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 	uint32_t can_create = std::numeric_limits<uint32_t>::max();
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
+	bool planAtLeastOne = false;
 	for (const std::pair<std::string, uint8_t>& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;
 			can_create = cc;
 		}
+
+		// if the target quantity of a resource is set to 0
+		// plan at least one worker, so a request for that resource is triggered
+		WareIndex id_w = tribe.ware_index(bc.first);
+		if (0 == ware_target_quantity(id_w).permanent)
+			planAtLeastOne = true;
 		idx++;
 	}
 
-	if (total_planned > can_create) {
+	if (total_planned > can_create && (!planAtLeastOne || total_planned > 1)) {
 		// Eliminate some excessive plans, to make sure we never request more than
 		// there are supplies for (otherwise, cyclic transportation might happen)
+		// except in case of planAtLeastOne we continue to plan at least one
 		// Note that supplies might suddenly disappear outside our control because
 		// of loss of land or silly player actions.
+		Warehouse * wh_with_plan = 0;
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
 
 			uint32_t planned = wh->get_planned_workers(game, index);
 			uint32_t reduce = std::min(planned, total_planned - can_create);
+
+			if (planAtLeastOne && planned > 0) {
+				wh_with_plan = wh;
+			}
 			wh->plan_workers(game, index, planned - reduce);
 			total_planned -= reduce;
 		}
+
+		// in case of planAtLeastOne undo a set to zero
+		if (0 != wh_with_plan && 0 == total_planned)
+			wh_with_plan->plan_workers(game, index, 1);
+
 	} else if (total_planned < demand) {
 		uint32_t plan_goal = std::min(can_create, demand);
 
+		// plan at least one if required
+		if (planAtLeastOne && 0 == plan_goal && 0 == total_planned)
+			plan_goal = 1;
+
+		// TODO(meitis): if planAtLeastOne then find nearest warehouse
+		// and plan there. Possibly after this for, if total_planned still is 0
+		// then search wh nearest to request, plan there.
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
 			uint32_t supply =
@@ -947,6 +974,8 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 
 			total_planned -= wh->get_planned_workers(game, index);
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
+			if (planAtLeastOne && 0 == plan && 0 == total_planned)
+				plan = 1;
 			wh->plan_workers(game, index, plan);
 			total_planned += plan;
 		}
