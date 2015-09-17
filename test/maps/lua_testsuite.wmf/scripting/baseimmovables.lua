@@ -101,7 +101,7 @@ function immovable_property_tests:setup()
    self.medium = player1:place_building(
       "barbarians_charcoal_kiln", map:get_field(10,10), false, true
    )
-   self.big = map:place_immovable("greenland_stones4", map:get_field(20, 10), "world")
+   self.big = map:place_immovable("greenland_rocks4", map:get_field(20, 10), "world")
    self.big_building = player1:place_building(
       "barbarians_fortress", map:get_field(15,11), false, true
    )
@@ -139,8 +139,8 @@ end
 function immovable_property_tests:test_name_charcoal_kiln()
    assert_equal("barbarians_charcoal_kiln", self.medium.descr.name)
 end
-function immovable_property_tests:test_name_stone()
-   assert_equal("greenland_stones4", self.big.descr.name)
+function immovable_property_tests:test_name_rock()
+   assert_equal("greenland_rocks4", self.big.descr.name)
 end
 function immovable_property_tests:test_name_fortress()
    assert_equal("barbarians_fortress", self.big_building.descr.name)
