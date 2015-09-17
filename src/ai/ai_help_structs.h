@@ -43,7 +43,7 @@ class MilitarySite;
 
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 enum class BuildingNecessity : uint8_t {kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed};
-	
+
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
 	   : player_(pl), movecaps_(mc), open_end_(oe) {
@@ -387,13 +387,13 @@ struct BuildingObserver {
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
 	std::vector<Widelands::WareIndex> critical_built_mat_;
-	
+
 	bool built_mat_producer_;
 
-	// an enhancement to this building
+	// an enhancement to this building:
 	// produces all wares as current building, and perhaps more
 	bool upgrade_substitutes_;
-	//	produces some additional wares
+	// produces some additional wares
 	bool upgrade_extends_;
 
 	// It seems that fish and meat are subsitutes (for trainingsites), so

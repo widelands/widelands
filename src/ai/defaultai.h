@@ -163,7 +163,8 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
-	Widelands::BuildingNecessity check_building_necessity(BuildingObserver& bo, const PerfEvaluation purpose, const uint32_t);
+	Widelands::BuildingNecessity check_building_necessity
+		(BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
@@ -257,7 +258,7 @@ private:
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;
 	uint32_t num_milit_constructionsites;
-	uint32_t num_mine_constructionsites;	
+	uint32_t num_mine_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
@@ -265,7 +266,8 @@ private:
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
-	
+
+	// helping scores for building new military sites
 	int32_t target_military_score_;
 	int32_t least_military_score_;
 
@@ -290,6 +292,7 @@ private:
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, MineTypesObserver> mines_per_type;
+	// returns count of mines of the same type (output)
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 
@@ -312,7 +315,8 @@ private:
 	int32_t resource_necessity_mines_;
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
-	
+
+	// average count of trees around cutters
 	uint32_t trees_around_cutters_;
 
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier

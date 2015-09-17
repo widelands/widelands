@@ -34,7 +34,8 @@
 #include "logic/widelands.h"
 
 // size of array for AI data
-constexpr int kAIDataSize = 10;
+// look below for m_ai_data_* arrays
+constexpr int kAIDataSize = 8;
 
 class Node;
 namespace Widelands {
@@ -520,6 +521,7 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
+	// set of functions to be used by AI to save and read own data within this class
 	void set_ai_data(int32_t value, uint32_t position);
 	void set_ai_data(uint32_t value, uint32_t position);
 	void set_ai_data(int16_t value, uint32_t position);
@@ -600,6 +602,7 @@ private:
 
 	/**
 	 * AI internal data. These will be ignored by human player
+	 * AI is managing the content of these arrays
 	 */
 	int32_t m_ai_data_int32 [kAIDataSize];
 	uint32_t m_ai_data_uint32 [kAIDataSize];
