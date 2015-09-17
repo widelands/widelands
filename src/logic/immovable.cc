@@ -659,8 +659,10 @@ void Immovable::save
 	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
-		fw.string(get_owner()->tribe().name());
+		if (get_owner() == nullptr) log(" Tribe immovable has no owner!! ");
+		fw.c_string("tribes");
 	} else {
+		log(" World immovable ");
 		fw.c_string("world");
 	}
 
@@ -704,36 +706,30 @@ MapObject::Loader * Immovable::load
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
-			const std::string owner_name = fr.c_string();
+			const std::string owner_type = fr.c_string();
 			std::string name = fr.c_string();
 			Immovable * imm = nullptr;
 
-			if (owner_name != "world") { //  It is a tribe immovable.
+			if (owner_type != "world") { //  It is a tribe immovable.
 				// Needed for map compatibility
 				if (version < 7) {
-					name = tribes_lookup_table.lookup_immovable(owner_name, name);
+					name = tribes_lookup_table.lookup_immovable(owner_type, name);
 				}
-				if (egbase.tribes().tribe_exists(owner_name)) {
-					const WareIndex& tribe_index = egbase.tribes().tribe_index(owner_name);
-					const TribeDescr& tribe = *egbase.tribes().get_tribe_descr(tribe_index);
-					int32_t const idx = tribe.immovable_index(name);
-					if (idx != Widelands::INVALID_INDEX) {
-						imm = new Immovable(*tribe.get_immovable_descr(idx));
-					} else {
-						throw GameDataError
-							("tribe %s does not define immovable type \"%s\"",
-							 owner_name.c_str(), name.c_str());
-					}
-				} else
-					throw GameDataError("unknown tribe %s", owner_name.c_str());
+				const WareIndex idx = egbase.tribes().immovable_index(name);
+				if (idx != Widelands::INVALID_INDEX) {
+					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
+				} else {
+					throw GameDataError
+						("tribes do not define immovable type \"%s\"", name.c_str());
+				}
 			} else { //  world immovable
 				const World & world = egbase.world();
 				name = world_lookup_table.lookup_immovable(name);
-				int32_t const idx = world.get_immovable_index(name.c_str());
-				if (idx == Widelands::INVALID_INDEX)
+				const WareIndex idx = world.get_immovable_index(name.c_str());
+				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError
 						("world does not define immovable type \"%s\"", name.c_str());
-
+				}
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}
 
