@@ -12,7 +12,7 @@ function mission_thread()
 
    -- Show the sea
    p1:reveal_fields(sea:region(6))
-   local ship = p1:place_bob("ship",sea)
+   local ship = p1:place_ship(sea)
    sleep(200)
    campaign_message_box(diary_page_2)
    -- Hide the sea after 5 seconds

@@ -454,8 +454,7 @@ void Warehouse::init(EditorGameBase & egbase)
 				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
-// NOCOM(GunChleoc): what about headquarters_shipwreck and headquarters_interim?
-		} else if (descr().name() == owner().tribe().get_building_descr(owner().tribe().headquarters())->name()) {
+		} else if (!descr().is_buildable()) {
 			send_message
 				(*game,
 				 Message::Type::kEconomy,
