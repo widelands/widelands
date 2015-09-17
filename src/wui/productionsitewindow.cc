@@ -167,11 +167,10 @@ void ProductionSiteWindow::update_worker_table()
 		if (worker) {
 			er.set_picture(0, worker->descr().icon(), worker->descr().descname());
 
-			if
-				(worker->get_current_experience() != -1
+			if (worker->get_current_experience() != Widelands::INVALID_INDEX
 					&&
-				 worker->descr().get_needed_experience () != -1)
-			{
+				 worker->descr().get_needed_experience () != Widelands::INVALID_INDEX) {
+				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
 				assert(worker->owner().tribe().has_worker(worker->descr().becomes()));
 
 				// Fill upgrade status

@@ -1300,8 +1300,8 @@ void Worker::incorporate(Game & game)
  */
 void Worker::create_needed_experience(Game & /* game */)
 {
-	if (descr().get_needed_experience() == -1) {
-		m_current_exp = -1;
+	if (descr().get_needed_experience() == INVALID_INDEX) {
+		m_current_exp = INVALID_INDEX;
 		return;
 	}
 
@@ -1317,9 +1317,12 @@ void Worker::create_needed_experience(Game & /* game */)
  * needed_experience he levels
  */
 WareIndex Worker::gain_experience(Game & game) {
-	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
-			  INVALID_INDEX :
-			  level(game);
+	if (descr().get_needed_experience() == INVALID_INDEX) {
+		return INVALID_INDEX;
+	} else if (++m_current_exp < descr().get_needed_experience()) {
+		return level(game);
+	}
+	return INVALID_INDEX;
 }
 
 
@@ -1335,7 +1338,7 @@ WareIndex Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(descr().becomes());
+	assert(descr().becomes() != INVALID_INDEX);
 	const TribeDescr & t = owner().tribe();
 	WareIndex const old_index = t.worker_index(descr().name());
 	WareIndex const new_index = descr().becomes();

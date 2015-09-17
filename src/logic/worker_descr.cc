@@ -52,10 +52,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
-	if (table.has_key("buildable")) {
-		buildable_ = table.get_bool("buildable");
-	}
+
 	if (table.has_key("buildcost")) {
+		buildable_ = true;
 		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
@@ -113,6 +112,14 @@ Aborted (core dumped)
 NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
 *** Error in `./widelands': double free or corruption (!prev): 0x0000000003d79f50 ***
 
+empire_farmer start parser-end-start parser-end-done!
+default_target_quantity done - ware_hotspot done
+NOCOM adding worker description - done
+*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
+Aborted (core dumped)
+bratzbert@museum:~/sources/widelands/one_tribe$
+
+
 		 * */
 		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
 		log("%s ", name().c_str());
@@ -137,7 +144,7 @@ NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
 				// NOCOM parsing is a lot slower than in trunk
 				log("start parser-");
 				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
-				log("end-");
+				log("end - ");
 				programs_[program_name.c_str()] = program;
 			}
 
@@ -146,7 +153,7 @@ NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
-		log("done!\n");
+		log("done! ");
 	}
 	log("default_target_quantity");
 	if (table.has_key("default_target_quantity")) {
@@ -159,7 +166,7 @@ NOCOM atlanteans_farmer - start parser - end -start parser - end -done!
 		items_table = table.get_table("ware_hotspot");
 		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
 	}
-	log(" done\n");
+	log(" done");
 }
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
