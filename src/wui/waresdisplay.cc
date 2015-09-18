@@ -58,20 +58,20 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
 
-	m_selected
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-									  : m_tribe.get_nrwares(), false),
-	m_hidden
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-									  : m_tribe.get_nrwares(), false),
-	m_in_selection
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-									  : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
 	m_selection_anchor(Widelands::INVALID_INDEX),
 	m_callback_function(callback_function)
 {
+	const std::set<Widelands::WareIndex> indices =
+			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
+
+	for (const Widelands::WareIndex& index : indices) {
+		m_selected.insert(std::make_pair(index, false));
+		m_hidden.insert(std::make_pair(index, false));
+		m_in_selection.insert(std::make_pair(index, false));
+	}
+
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
@@ -149,33 +149,24 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 
 	bool to_be_selected = !ware_selected(m_selection_anchor);
 
-	if (m_type == Widelands::wwWORKER) {
-		for (const Widelands::WareIndex& worker_index : m_tribe.workers()) {
-			if (!m_in_selection[worker_index]) {
-				continue;
-			}
+	const std::set<Widelands::WareIndex> indices =
+			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
+
+	for (const Widelands::WareIndex& index : indices) {
+		if (m_in_selection[index]) {
 			if (to_be_selected) {
-				select_ware(worker_index);
+				select_ware(index);
 			} else {
-				unselect_ware(worker_index);
-			}
-		}
-	} else {
-		for (const Widelands::WareIndex& ware_index : m_tribe.wares()) {
-			if (!m_in_selection[ware_index]) {
-				continue;
-			}
-			if (to_be_selected) {
-				select_ware(ware_index);
-			} else {
-				unselect_ware(ware_index);
+				unselect_ware(index);
 			}
 		}
 	}
 
 	// Release anchor, empty selection
 	m_selection_anchor = Widelands::INVALID_INDEX;
-	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	for (std::pair<const Widelands::WareIndex&, bool> resetme : m_in_selection) {
+		m_in_selection[resetme.first] = false;
+	}
 	return true;
 }
 
@@ -198,8 +189,9 @@ Widelands::WareIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) c
 		j = s;
 	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
-		Widelands::WareIndex ware = icons_order()[i][j];
-		if (!m_hidden[ware]) {
+		const Widelands::WareIndex& ware = icons_order()[i][j];
+		assert(m_hidden.count(ware) == 1);
+		if (!(m_hidden.find(ware)->second)) {
 			return ware;
 		}
 	}
@@ -217,7 +209,10 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		return;
 	}
 
-	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	for (std::pair<const Widelands::WareIndex&, bool> resetme : m_in_selection) {
+		m_in_selection[resetme.first] = false;
+	}
+
 	Point anchor_pos = ware_position(m_selection_anchor);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
@@ -251,18 +246,15 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	}
 
 	for (unsigned int cur_ware_x = left_ware_idx; cur_ware_x <= right_ware_idx; cur_ware_x++) {
-		if (cur_ware_x >= icons_order().size()) {
-			continue;
-		}
-		for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
-			if (cur_ware_y >= icons_order()[cur_ware_x].size()) {
-				continue;
+		if (cur_ware_x < icons_order().size()) {
+			for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
+				if (cur_ware_y < icons_order()[cur_ware_x].size()) {
+					Widelands::WareIndex ware = icons_order()[cur_ware_x][cur_ware_y];
+					if (!m_hidden[ware]) {
+						m_in_selection[ware] = true;
+					}
+				}
 			}
-			Widelands::WareIndex ware = icons_order()[cur_ware_x][cur_ware_y];
-			if (m_hidden[ware]) {
-				continue;
-			}
-			m_in_selection[ware] = true;
 		}
 	}
 	update();
@@ -287,17 +279,12 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	if (m_type == Widelands::wwWORKER) {
-		for (const Widelands::WareIndex& worker_index : m_tribe.workers()) {
-			if (m_hidden[worker_index]) continue;
-			draw_ware(dst, worker_index);
-		}
-	} else {
-		for (const Widelands::WareIndex& ware_index : m_tribe.wares()) {
-			//log("NOCOM Drawing ware: %s %d\n",
-				// m_tribe.get_ware_descr(ware_index)->name().c_str(),m_hidden[ware_index]);
-			if (m_hidden[ware_index]) continue;
-			draw_ware(dst, ware_index);
+	const std::set<Widelands::WareIndex> indices =
+			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
+
+	for (const Widelands::WareIndex& index : indices) {
+		if (!m_hidden[index]) {
+			draw_ware(dst, index);
 		}
 	}
 }

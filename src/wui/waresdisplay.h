@@ -88,7 +88,7 @@ protected:
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList *>;
-	using WareListSelectionType = std::vector<bool>;
+	using WareListSelectionType = std::map<const Widelands::WareIndex, bool>;
 
 	/**
 	 * Update the anchored selection. When first mouse button is pressed on a

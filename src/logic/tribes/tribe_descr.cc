@@ -54,11 +54,7 @@ namespace Widelands {
 TribeDescr::TribeDescr
 	(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
 	: name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
-	// NOCOM(GunChleoc): Some ware types listed in headquarters are gaping holes:
-	// - Barbarians: stout
-	// - Empire: wool, water, wood lance
-	// - Atlanteans: water, steel trident
-	// Automatic resizing of warehouse window for small screens is broken.
+	// NOCOM(GunChleoc): Automatic resizing of warehouse window for small screens is broken.
 	// NOCOM(GunChleoc): Double-check statistics
 
 	try {
