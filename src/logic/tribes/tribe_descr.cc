@@ -60,7 +60,6 @@ TribeDescr::TribeDescr
 	// - Atlanteans: water, steel trident
 	// Automatic resizing of warehouse window for small screens is broken.
 	// NOCOM(GunChleoc): Double-check statistics
-	// NOCOM(GunChleoc): Double-check global militarysites.
 
 	try {
 		m_initializations = info.initializations;

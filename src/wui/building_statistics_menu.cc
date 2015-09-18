@@ -170,9 +170,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
 	}
 
+	// We want to add player tribe's buildings in correct order
 	const TribeDescr& tribe = iplayer().player().tribe();
+	std::vector<BuildingIndex> buildings_to_add;
+	for (BuildingIndex index: tribe.buildings()) {
+		buildings_to_add.push_back(index);
+	}
 
-	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
+	// We want to add other tribes' militarysites on the bottom
+	for (BuildingIndex index = 0; index < nr_buildings; ++index) {
+		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
+		if ((!tribe.has_building(index)) && descr.type() == MapObjectType::MILITARYSITE) {
+			buildings_to_add.push_back(index);
+		}
+	}
+
+	for (BuildingIndex id : buildings_to_add) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
 
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
@@ -367,17 +380,13 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 bool BuildingStatisticsMenu::add_button(
 	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 
-	// NOCOM make sure that global military buildings go on the bottom.
-
-	const Widelands::Player& player = iplayer().player();
-
 	// Only add headquarter types that are owned by player.
+	const Widelands::Player& player = iplayer().player();
 	if ((!((player.tribe().has_building(id) && (descr.is_buildable() || descr.is_enhanced())) ||
 		  descr.type() == MapObjectType::MILITARYSITE)) &&
 		 player.get_building_statistics(id).empty()) {
 		return false;
 	}
-
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
