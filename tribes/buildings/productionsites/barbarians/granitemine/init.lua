@@ -70,8 +70,6 @@ tribes:new_productionsite_type {
 	out_of_resource_notification = {
 		title = _"Main Granite Vein Exhausted",
 		message =
-			_"This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
-			-- TRANSLATORS: "it" is a mine.
-			_" This mine can’t be enhanced any further, so you should consider dismantling or destroying it.",
+			pgettext("barbarians_building", "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
 	},
 }

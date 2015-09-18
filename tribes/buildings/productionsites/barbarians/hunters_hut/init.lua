@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
 		-- TRANSLATORS: "Game" means animals that you can hunt
 		title = _"Out of Game",
 		-- TRANSLATORS: "game" means animals that you can hunt
-		message = _"The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild.",
+		message = pgettext("barbarians_building", "The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."),
 		productivity_threshold = 33
 	},
 }

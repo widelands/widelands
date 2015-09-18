@@ -44,7 +44,7 @@ TrainingSiteDescr::TrainingSiteDescr
 	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(init_descname, MapObjectType::TRAININGSITE, table, egbase),
+		(init_descname, "", MapObjectType::TRAININGSITE, table, egbase),
 	m_num_soldiers      (table.get_int("soldier_capacity")),
 	m_max_stall         (table.get_int("trainer_patience")),
 

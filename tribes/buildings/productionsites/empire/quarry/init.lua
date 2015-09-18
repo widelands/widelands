@@ -76,6 +76,6 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Rocks",
-		message = _"The stonemason working at this quarry can’t find any rocks in his work area.",
+		message = pgettext("empire_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
 	},
 }

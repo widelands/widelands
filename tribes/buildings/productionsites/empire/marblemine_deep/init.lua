@@ -72,8 +72,6 @@ tribes:new_productionsite_type {
 	out_of_resource_notification = {
 		title = _"Main Marble Vein Exhausted",
 		message =
-			_"This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
-			-- TRANSLATORS: "it" is a mine.
-			_"This mine can’t be enhanced any further, so you should consider dismantling or destroying it.",
+			pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
 	},
 }

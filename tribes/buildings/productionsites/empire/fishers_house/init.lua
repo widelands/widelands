@@ -50,6 +50,6 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Fish",
-		message = _"The fisher working out of this fisher’s house can’t find any fish in his work area.",
+		message = pgettext("empire_building", "The fisher working out of this fisher’s house can’t find any fish in his work area."),
 	},
 }

@@ -55,7 +55,7 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, MapObjectType _type,
+	(const std::string& init_descname, const char* msgctxt, MapObjectType _type,
 	 const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(init_descname, _type, table, egbase),
 	  m_out_of_resource_title(""),
@@ -68,7 +68,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
 		m_out_of_resource_title = _(items_table->get_string("title"));
-		m_out_of_resource_message = _(items_table->get_string("message"));
+		m_out_of_resource_message = pgettext_expr(msgctxt, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -182,8 +182,8 @@ ProductionSiteDescr::ProductionSiteDescr
 }
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
-	: ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, egbase)
+	(const std::string& init_descname, const char* msgctxt, const LuaTable& table, const EditorGameBase& egbase)
+	: ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase)
 {}
 
 

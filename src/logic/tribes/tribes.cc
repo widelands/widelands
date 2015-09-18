@@ -112,9 +112,11 @@ void Tribes::add_militarysite_type(const LuaTable& table) {
 
 void Tribes::add_productionsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
+	const char* msgctxt = table.get_string("msgctxt").c_str();
 	buildings_->add(
 				new ProductionSiteDescr(
-					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+					pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+					msgctxt,
 					table,
 					egbase_));
 }
@@ -153,17 +155,17 @@ void Tribes::add_ship_type(const LuaTable& table) {
 
 void Tribes::add_ware_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = table.get_string("msgctxt").c_str();
-	wares_->add(new WareDescr(pgettext_expr(msgctxt, table.get_string("descname").c_str()),
-									  table));
+	wares_->add(new WareDescr(
+						pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+						table));
 }
 
 void Tribes::add_carrier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = table.get_string("msgctxt").c_str();
-	workers_->add(new CarrierDescr(pgettext_expr(msgctxt, table.get_string("descname").c_str()),
-											 table,
-											 egbase_));
+	workers_->add(new CarrierDescr(
+						  pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+						  table,
+						  egbase_));
 }
 
 void Tribes::add_soldier_type(const LuaTable& table) {

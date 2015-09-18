@@ -47,7 +47,7 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 												 const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+		(init_descname, "", MapObjectType::MILITARYSITE, table, egbase),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)

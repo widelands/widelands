@@ -57,9 +57,9 @@ class ProductionSiteDescr : public BuildingDescr {
 public:
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr(const std::string& init_descname, MapObjectType type,
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt, MapObjectType type,
 							  const LuaTable& t, const EditorGameBase& egbase);
-	ProductionSiteDescr(const std::string& init_descname,
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt,
 							  const LuaTable& t, const EditorGameBase& egbase);
 
 	~ProductionSiteDescr() override;

@@ -75,8 +75,6 @@ tribes:new_productionsite_type {
 	out_of_resource_notification = {
 		title = _"Main Iron Vein Exhausted",
 		message =
-			_"This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
-			-- TRANSLATORS: "it" is a mine.
-			_"You should consider dismantling or destroying it.",
+			pgettext("atlanteans_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
 	},
 }

@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Fields",
-		message = _"The farmer working at this farm has no cleared soil to plant his seeds.",
+		message = pgettext("empire_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
 		productivity_threshold = 30
 	},
 }
