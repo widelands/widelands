@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
 	-- TRANSLATORS: Note helptext for a building
-	return pgettext("atlanteans_building", "The woodcutter's house needs trees to fell within the work area.")
+	return pgettext("atlanteans_building", "The woodcutter’s house needs trees to fell within the work area.")
 end
 
 function building_helptext_performance()

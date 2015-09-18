@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
-"PO-Revision-Date: 2015-07-26 14:33+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-12 07:33+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -196,7 +196,7 @@ msgstr "Feumaidh tu briogadh air doras togalach an airm gus ionnsaigh a thoirt a
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
 msgid "Military assault on Al’thunran"
-msgstr "Ionnsaigh an airm air Al’thunran"
+msgstr "Ionnsaigh an airm air Al’tùnran"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
 msgid ""
@@ -371,7 +371,7 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Sa mhadainn an-diugh, mhothaich mi gun robh an t-iomagan air Tron. Thill e anmoch on chuairt a-raoir is shuidh e ri craobh, a’ coimhead air a’ champachadh. Tha an trod ’s an connsachadh a’ dol am miosad agus tha sinn fo bhuaidh a’ gheamhraidh chruaidh. u chòir dhuinn stòras bìdh a chruinneachadh ach am mair sinn beò tron gheamhradh fhada fhuar!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:216
 msgid "The Advisor"
@@ -388,7 +388,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Tha Boldrad ceart! Chan eil biadh gu leòr ann airson geamhraidh fhada fhuair. Bu chòir dhuinn tòiseachadh air tobar, bothan-iasgair is bothan-sealgair a thogail. Agus ma tha rum gu leòr againn, bu chòir dhuinn tuathanas is taigh-fuine a thogail cuideachd! Tha coltas gu bheil aon dhe na tuathanaich againn glè sheòlta – chaidh leis barr-bìdh a thogail san talamh fhuar seo mar-thà."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:224
 msgid "Food Economy Completed"
@@ -398,7 +398,7 @@ msgstr "Chaidh an t-eaconamaidh bìdh a choileanadh"
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "Tha Kantrach air innse dhomh gun deach leinn eaconamaidh bìdh bunasach a thogail. Chan eil eagal oirnn tuilleadh gum bàsaicheamaid leis an acras."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Tracks"
@@ -410,7 +410,7 @@ msgid ""
 "settlement. He has instructed us to build a donjon, to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Dh’innis Tron dhomh gun do mhothaich e dha lorgan san t-sneachd gu ear-thuath air an tuineachadh againn. Iarr e oirnn tùr-faire a thogail ach am faiceamaid na b’ fhaide mun cuairt air an talla againn is ach an dìonamaid ar muinntir o dh’ionnsaighean obann."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "Further Exploration"
@@ -425,7 +425,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Tha sinn dìreach air crìoch a chur air a’ chiad daingneachadh a dh’iarr Tron oirnn. Tha e a’ feuchainn an fheadhainn a bhrosnachadh ’s earbsadh a tha a’ fuireach taobh thall ballachan an tuineachaidh ùir againn air an do chuir sinn “Ondun”, is “an fheadhainn a tha a’ fuireach” an ciall dha seo san t-seann theanga. Ach chan eil Tron toilichte fhathast – agus tha mi a’ làn-thuigsinn carson a tha an t-eagal air: tha a’ choille mòr agus crìoch Al’tùnrain faisg oirnn. Tha mi cinnteach gu bheil mìle cunnart nas miosa ann na na lorgan nach b’ aithne dhuinn."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:243
 msgid ""
@@ -433,7 +433,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Ach am faiceamaid barrachd mun cuairt an talla againn, bu chòir dhuinn barrachd tìre a rùrachadh is barrachd freiceadain is rabhadairean fhastadh ach an cumadh iad sùil air a’ chrìoch is air bruaillean nan cogaidhean a tha faisg oirnn. ’S ann mar sin gum bi sinn ullamh ma thig an cunnart oirnn gun rachadh na coilltean againn a cheannsachadh."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:249
 msgid "Mountains Found"
@@ -446,7 +446,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Tha mi air bruidhinn ri ceannard a’ chuairteachain againn. Dh’innis e dhomh gun do lorg iad beanntan gu ear-thuath is gu ear air an ranntair againn. Ma thèid leinn, seo seans ùr gus airm ùr a thoirt dh’ ar muinntir on a tha gual is clach-mhèinnir sna mhòrchuid dhe na beanntan gu iar air Al’tùnran mas math mo chuimhne."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Mining Economy Completed"
@@ -457,7 +457,7 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "Tha mi dìreach air cluinntinn gun do thòisich eaconamaidh nam mèinnean againn ag obair. Thug an naidheachd seo fiamh a’ ghàire orm – ged a tha cruaidh-chàs romhainn fhathast, nì na goibhnean nas urrainn dhaibh gus ar beatha fhaothachadh."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:264
 msgid "Fortress Needed"
@@ -471,7 +471,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Tha mi air an sgìre timcheall air na trì beanntan a rùrachadh còmhla ri Boldrad. Tha duilgheadas a thaobh ro-innleachd aig an sgìre seo agus ’s e seo gu bheil dà shlighe mhòir ann – an dàrna tè gu tuath is an tè eile gu deas air a’ bheann mheadhanaich. Bidh e doirbh smachd a cumail air an dà shlighe seo, mar sin saoilidh mi nach eil ach aon fhuasgladh ann gus na beanntan a chumail sàbhailte on nàmhaid: feumaidh sinn dùn a thogail gu ear air na beanntan!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:272
 msgid "Fortress Completed"
@@ -483,7 +483,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and donjons at the passages,"
 " but for now we can take a deep breath."
-msgstr ""
+msgstr "Mu dheireadh thall! Tha sinn air an dùn a thogail, mar sin bu chòir dhan t-slighe a-steach dhan tuineachadh againn a bhith sàbhailte an-dràsta. San àm ri teachd, bu chòir dhuinn beachdachadh air barrachd daingneachaidh a togail, can taighean-faire is tùir-fhaire aig na slighean a-steach. ’S urrainn dhuinn ar n-anail a ghabhail greis co-dhiù."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:279
 msgid "Enhanced Economy and Training"
@@ -494,7 +494,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Tha coltas gu bheil eaconamaidh nam mèinnean againn ag obair mar bu chòir, seo deagh naidheachd mar-thà! Co-dhiù no co-dheth, tha mòran fhireannaich is bhoireannaich a’ feitheamh san talla againn gus dleastanas a ghabhail os làimh ach an cuidicheadh iad leis an ullachadh airson a’ chogaidh a tha romhainn."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid ""
@@ -505,7 +505,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Tha na clach-eòlaichean againn air barrachd stòrais dhe chlach-iarainn, gual is òr a lorg. Bu chòir dhuinn na mèinnean a th’ againn a leasachadh cho luath ’s a bhios barrachd eòlais air na mèinnearan againn. Bu chòir dhuinn barrachd mhèinnean a thogail agus bun-structar bìdh nas motha ach am biodh gu leòr ri ithe ann an-còmhnaidh, cho math ri eaconamaidh giullachd nas motha. Ach chan e seo a h-uile rud a tha a dhìth – tha a’ mhòrchuid dhe na saighdearan againn caran òg is chan eil arm math aca ’s cha d’ fhuair iad trèanadh. Bu chòir dhuinn làraichean trèanaidh a thogail gus an ullachadh airson na h-obrach tha romhpa."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:291
 msgid ""
@@ -513,7 +513,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Fhuair mo bhràithrean agus na saighdearan aca bàs agus cha do dh’fhàg iad ach teintean is milleadh againn. Cha do lorg mi duine cumanta beò am measg nam fuigheall. Tha mi ’n dòchas gun do theich iad on bhlàr chruaidh seo is gun do thòisich iad beatha na b’ fhearr àiteigin eile."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:293
 msgid ""
@@ -523,7 +523,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Chan eil dad air fhàgail dhen bhòidhchead a tha nam chuimhne. Chan eil ach fuighill air fhàgail dhen t-seann chathair-bhaile. Tha mi brònach ach fhuair mi faochadh cuideachd. Tha robh mi ’n dùil gum faicinn seann bhòidhchead Al’tùnrain a-rithist - ’s ann beagan mhìosan air ais a bha mi a’ cnuasadh air an rachadh leam tilleadh ann gu bràth gus nach rachadh. Nise, tha an t-seann bhaile fo mo làmh a-rithist agus dha dèan mi maille gus a thogail às ùr leis a h-uile neart a tha aig mo mhuinntir. Tha mi airson fhaicinn cho bòidheach ’s mar a bha e."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:294
 msgid "Victory"

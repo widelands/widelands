@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-29 07:52+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 09:37+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,11 +108,7 @@ msgstr[1] "Золотая руда: %s"
 msgstr[2] "Золотая руда: %s"
 msgstr[3] "Золотая руда: %s"
 
-#: TRANSLATORS number + resource name, e.g. '1 stone' ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:134
-msgid "%1$i %2$s"
-msgstr "%1$i %2$s"
-
+#. TRANSLATORS: number + resource name, e.g. '1 stone'
 #: ../../maps/MP Scenarios/Island
 #: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6

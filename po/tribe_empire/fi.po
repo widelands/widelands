@@ -3,6 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 # Teppo Mäenpää <teppo@runbox.com>, 2015
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-07 19:50+0000\n"
+"Last-Translator: Max\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,7 +361,7 @@ msgstr "Kouluttaa sotilaan väistötasolta 0 tasolle 1"
 #: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr ""
+msgstr "Teksti tarvittu"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -372,7 +373,7 @@ msgstr "Kouluttaa sotilaille väistelytaitoa."
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr ""
+msgstr "‘Väistä’ lisää sotilaan mahdollisuutta olla osumattomana vihollisen toimesta ja niin jää kokonaan välittömäksi."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -425,7 +426,7 @@ msgstr "Väistelykoulutus"
 #: ../../tribes/empire/weaving-mill/help.lua:29
 #: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr ""
+msgstr "Laskenta tarvitaan"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -532,7 +533,7 @@ msgstr "Sotilaasi asuttivat rajalinnasi."
 #: ../../tribes/empire/sentry/help.lua:16
 #: ../../tribes/empire/tower/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Varuskuntasotilaat laajentavat aluettasi."
 
 #: ../../tribes/empire/barracks/help.lua:17
 #: ../../tribes/empire/barrier/help.lua:17

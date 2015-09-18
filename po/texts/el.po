@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Elias Delakovias, 2015
+# MasterWord, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-31 10:14+0000\n"
-"Last-Translator: Elias Delakovias\n"
+"POT-Creation-Date: 2015-09-12 10:50+0000\n"
+"PO-Revision-Date: 2015-09-13 16:13+0000\n"
+"Last-Translator: MasterWord\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,19 +163,19 @@ msgstr ""
 
 #: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Συντομεύσεις πληκτρολογίου (εντός παιχνιδιού)"
 
 #: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: αυξάνει την ταχύτητα του παιχνιδιού"
 
 #: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: μειώνει την ταχύτητα του παιχνιδιού"
 
 #: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: παγώνει το παιχνίδι"
 
 #: ../../txts/README.lua:63
 msgid "SPACE: toggles if building spaces are shown"
@@ -283,7 +284,7 @@ msgstr ""
 
 #: ../../txts/README.lua:92
 msgid "Online Help"
-msgstr ""
+msgstr "Ηλεκτρονική Βοήθεια"
 
 #: ../../txts/README.lua:94
 msgid ""
@@ -294,7 +295,7 @@ msgstr ""
 
 #: ../../txts/README.lua:98
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Αναφορά Σφαλμάτων"
 
 #: ../../txts/README.lua:100
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -396,11 +397,11 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Τεκμηρίωση, Βοήθεια και Wiki"
 
 #: ../../txts/developers.lua:3
 msgid "Elders"
@@ -408,11 +409,11 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "Αυτοκρατορία"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
@@ -420,7 +421,7 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
@@ -428,12 +429,12 @@ msgstr ""
 
 #: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "Γραφικά"
 
 #: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "Αρχική σελίδα"
 
 #: ../../txts/developers.lua:3
 msgid "Homepage Coders"
@@ -445,15 +446,15 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Χάρτες και Αποστολές"
 
 #: ../../txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "Μουσικοί"
 
 #: ../../txts/developers.lua:3
 msgid "Other"
@@ -469,27 +470,27 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "Ηχητικά Εφέ"
 
 #: ../../txts/developers.lua:3
 msgid "Tongues"
-msgstr ""
+msgstr "Γλώσσες"
 
 #: ../../txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "Μετάφραση"
 
 #: ../../txts/developers.lua:3
 msgid "Translators"
-msgstr ""
+msgstr "Μεταφραστές"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:10
 msgid "README for the Widelands Editor"
@@ -531,9 +532,10 @@ msgstr ""
 
 #: ../../txts/editor_readme.lua:22
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr ""
 
@@ -541,7 +543,8 @@ msgstr ""
 msgid "toggles if building spaces are shown"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr ""
 
@@ -549,7 +552,8 @@ msgstr ""
 msgid "toggles census"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr ""
 
@@ -557,7 +561,8 @@ msgstr ""
 msgid "toggles fullscreen"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr ""
 
@@ -565,7 +570,8 @@ msgstr ""
 msgid "toggles main menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr ""
 
@@ -573,7 +579,8 @@ msgstr ""
 msgid "toggles minimap"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr ""
 
@@ -581,7 +588,8 @@ msgstr ""
 msgid "toggles player menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr ""
 
@@ -589,7 +597,8 @@ msgstr ""
 msgid "toggles tools menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr ""
 
@@ -597,23 +606,26 @@ msgstr ""
 msgid "activates information tool"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "Φόρτωση χάρτη"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "Αποθήκευση χάρτη"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr ""
 
@@ -621,7 +633,8 @@ msgstr ""
 msgid "changes tool size"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr ""
 
@@ -629,7 +642,8 @@ msgstr ""
 msgid "selects first alternative tool while pressed"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr ""
 

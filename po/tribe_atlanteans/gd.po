@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 08:11+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 09:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1435,7 +1435,7 @@ msgid ""
 msgstr "Cuidichidh eich le giùlan nan nithean air rathaidean a tha trang. Togaidh tu ann an tuathanas each iad."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
+msgid "Breeds the strong Atlantean horses."
 msgstr "Tàrmaichidh e na h-eich Atlantach làidir."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25

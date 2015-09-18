@@ -5,6 +5,7 @@
 # Translators:
 # GunChleoc, 2014
 # Markus Hällfors <markus@hallfors.com>, 2015
+# Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 # Teppo Mäenpää <teppo@runbox.com>, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 07:55+0100\n"
-"PO-Revision-Date: 2015-09-04 06:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-05 10:36+0100\n"
+"PO-Revision-Date: 2015-09-07 20:25+0000\n"
+"Last-Translator: Max\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,25 +27,25 @@ msgstr ""
 #: ../../src/ai/computer_player.cc:40
 msgctxt "ai_name"
 msgid "None"
-msgstr ""
+msgstr "Ei mikään"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
 msgctxt "ai_name"
 msgid "Aggressive"
-msgstr ""
+msgstr "Aggressiivinen"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:137
 msgctxt "ai_name"
 msgid "Normal"
-msgstr ""
+msgstr "Normaali"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:148
 msgctxt "ai_name"
 msgid "Defensive"
-msgstr ""
+msgstr "Puolustava"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -268,7 +269,11 @@ msgstr "Ei nimeä"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:512
 msgctxt "map_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
+
+#: ../../src/editor/map_generator.cc:795
+msgid "Random Player"
+msgstr "Satunnainen pelaaja"
 
 #: ../../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
@@ -320,13 +325,13 @@ msgstr " satama"
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "walkable"
-msgstr ""
+msgstr "kävelykelpoinen"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
 #: ../../src/editor/tools/editor_info_tool.cc:79
 msgid "swimmable"
-msgstr ""
+msgstr "uimakelpoinen"
 
 #: ../../src/editor/tools/editor_info_tool.cc:82
 #, c-format
@@ -336,7 +341,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Omistettu: Player %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "Owned by: —"
@@ -344,15 +349,15 @@ msgstr "Omistaja: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 msgid "Has base immovable"
-msgstr ""
+msgstr "On liikuteltamaton tukikohta"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 msgid "No base immovable"
-msgstr ""
+msgstr "Ei liikuteltamatonta tukikohta"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 msgid "Has animals"
-msgstr ""
+msgstr "Olla eläimiä"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 msgid "No animals"
@@ -366,7 +371,7 @@ msgstr "Maasto:"
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Nimi: %s"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:114
@@ -402,7 +407,7 @@ msgstr "vuoristoista"
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
 msgid "impassable"
-msgstr ""
+msgstr "Kulkukelvoton"
 
 #: ../../src/editor/tools/editor_info_tool.cc:131
 #, c-format
@@ -412,7 +417,7 @@ msgstr "Ryhmä: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #, c-format
 msgid "Editor Category: %s"
-msgstr ""
+msgstr "Muokkauksen kategoria: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
@@ -442,7 +447,7 @@ msgstr "Kartta:"
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Nimi: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:154
 #, c-format
@@ -564,7 +569,7 @@ msgstr "Peruuta"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:247
 #, c-format
 msgid "%1$ix%2$i"
-msgstr ""
+msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
@@ -637,25 +642,25 @@ msgstr "Satunnaistusluku:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Vesi: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:199
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:430
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Maa: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Joutomaa: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:233
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Vuoristso: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
@@ -731,24 +736,24 @@ msgstr "Virhe tallennettaessa karttaa!\nTallennettu karttatiedosto voi olla rikk
 msgid "Enter Directory Name:"
 msgstr "Anna hakemiston nimi: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:49
+#: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Player Options"
 msgstr "Pelaaja-asetukset"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:55
+#: ../../src/editor/ui_menus/editor_player_menu.cc:56
 msgid "Add player"
 msgstr "Lisää pelaaja"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:62
+#: ../../src/editor/ui_menus/editor_player_menu.cc:63
 msgid "Remove last player"
 msgstr "Poista viimeinen pelaaja"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:77
+#: ../../src/editor/ui_menus/editor_player_menu.cc:88
 msgid "Number of Players"
 msgstr "Pelaajien määrä"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/editor_player_menu.cc:206
+#: ../../src/editor/ui_menus/editor_player_menu.cc:219
 #: ../../src/logic/map.cc:334
 #: ../../src/logic/single_player_game_settings_provider.cc:87
 #: ../../src/network/nethost.cc:2065 ../../src/ui_fsmenu/launch_mpg.cc:569
@@ -758,11 +763,11 @@ msgstr "Pelaajien määrä"
 msgid "Player %u"
 msgstr "Pelaaja %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:266
+#: ../../src/editor/ui_menus/editor_player_menu.cc:278
 msgid "Error!"
 msgstr "Virhe!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:268
+#: ../../src/editor/ui_menus/editor_player_menu.cc:280
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -942,7 +947,7 @@ msgstr "Widelands ei voinut aloittaa peliä, koska pelaajalla %u ei ole aloituss
 #: ../../src/logic/map.h:181
 msgctxt "author_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
@@ -953,8 +958,8 @@ msgstr "Kuvausta ei määritelty"
 #: ../../src/logic/militarysite.cc:125
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaita (+%2%)"
 
 #: ../../src/logic/militarysite.cc:130
 #, c-format
@@ -966,16 +971,16 @@ msgstr[1] "%u sotilasta"
 #: ../../src/logic/militarysite.cc:139
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaita (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/militarysite.cc:144
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaita"
 
 #: ../../src/logic/militarysite.cc:849
 msgid "Militarysite lost!"
@@ -991,35 +996,35 @@ msgstr "Olet hyökkäyksen alla"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
-msgstr ""
+msgstr "Tällä kohteella ei ole kuvailua"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "ekonomia tarvitsee kauppatavaraa ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "ekonomia ei tarvitse kauppatavaraa ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "ekonomia tarvitsee työntekijää ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/production_program.cc:367
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "ekonomia ei tarvitse työntekijää ‘%s’"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$s = "3"
@@ -1046,31 +1051,31 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1159
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:417
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "rakennuksella on seuraavaa kauppatavaraa: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:439
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "rakennuksella ei ole seuraavaa kauppatavaraa: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
 #: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
-msgstr ""
+msgstr "työntekijä tarvitsee kokemusta"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
-msgstr ""
+msgstr "työntekijät eivät tarvitse kokemusta"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1088,19 +1093,19 @@ msgstr ""
 #: ../../src/logic/production_program.cc:969
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "Ei alkanut %1$s, koska %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/production_program.cc:585
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "Valmistui %1$s, koska %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/production_program.cc:592
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "Väliin jätetty %1$s, koska %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1110,8 +1115,8 @@ msgstr ""
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s on kadoksissa"
+msgstr[1] "%s ovat kadoksissa"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:1073
@@ -1147,6 +1152,14 @@ msgstr[1] "Työläisiä puuttuu"
 #: ../../src/logic/productionsite.cc:242
 msgid "(stopped)"
 msgstr "(pysäytetty)"
+
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
+#: ../../src/logic/productionsite.cc:320
+#: ../../src/wui/building_statistics_menu.cc:668
+#, c-format
+msgid "%i%%"
+msgstr "%i%%"
 
 #: ../../src/logic/productionsite.cc:928
 msgid "Can’t find any more resources!"
@@ -1200,12 +1213,12 @@ msgid ""
 msgstr "Tutkimusalus saapui rannikolle; odottaa ohjeitasi"
 
 #: ../../src/logic/ship.cc:664
-msgid "New port constructionsite is gone"
-msgstr "Uuden sataman työmaa-alue ei ole enää olemassa"
+msgid "New port construction site is gone"
+msgstr "Uusi satamatyöalue on poissa"
 
 #: ../../src/logic/ship.cc:665
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Kauppatavaroiden purkaminen epäonnistui, retkikunta on peruutettu nyt."
 
 #: ../../src/logic/ship.cc:842
 msgid "Expedition Ready"
@@ -1221,15 +1234,15 @@ msgstr "Logiikkavirhe"
 
 #: ../../src/logic/warehouse.cc:457
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Uusi satama on lisätty ekonomiaasi"
 
 #: ../../src/logic/warehouse.cc:464
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Uusi päämaja on lisätty ekonomiaasi"
 
 #: ../../src/logic/warehouse.cc:471
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Uusi varastorakennus on lisätty ekonomiaasi"
 
 #: ../../src/logic/worker.cc:120
 #, c-format
@@ -1252,7 +1265,7 @@ msgstr "Geologi llöysi resursseja"
 #: ../../src/logic/worker.cc:1869
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Sinun %s eivät löydä reittiä kotiin ja todennäköisesti kuolee."
 
 #: ../../src/logic/worker.cc:1877
 msgid "Worker got lost!"
@@ -1364,7 +1377,7 @@ msgstr "%s poistui"
 
 #: ../../src/network/internet_gaming.cc:585
 msgid "Chat message could not be sent."
-msgstr ""
+msgstr "Keskustelu viestiäsi ei voitu lähettää."
 
 #: ../../src/network/internet_gaming.cc:601
 #, c-format
@@ -1485,7 +1498,7 @@ msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-
 #: ../../src/network/netclient.cc:1098
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr ""
+msgstr "%s Automaattinen tallennuspeli aiotaan luoda."
 
 #: ../../src/network/netclient.cc:1103
 msgid "Disconnected from Host"
@@ -1917,7 +1930,7 @@ msgstr "pois"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:73
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/helpwindow.cc:50 ../../src/ui_basic/helpwindow.cc:211
 #, c-format
@@ -1934,7 +1947,7 @@ msgstr "Valmistelen..."
 #: ../../src/ui_basic/spinbox.cc:361
 #, c-format
 msgid "%1$i %2$s"
-msgstr ""
+msgstr "%1$i %2$s"
 
 #: ../../src/ui_basic/spinbox.cc:138
 msgid "Increase the value"
@@ -1975,21 +1988,21 @@ msgstr "Pelaa tämä kampanja"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:91
 msgid "The name of this campaign"
-msgstr ""
+msgstr "Tämän kampanjan nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "The tribe you will be playing"
-msgstr ""
+msgstr "Heimo, jolla tahdot pelata"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The difficulty of this campaign"
-msgstr ""
+msgstr "Tämän kampanjan vaikeustaso"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:94
 #: ../../src/ui_fsmenu/campaign_select.cc:336
 #: ../../src/ui_fsmenu/mapselect.cc:96
 msgid "Story and hints"
-msgstr ""
+msgstr "Tarina ja vinkit"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:102
@@ -2039,7 +2052,7 @@ msgstr "Pelaa tämä opetuspeli"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:331
 msgid "The name of this tutorial"
-msgstr ""
+msgstr "Tämän tutoriaalin nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:332
 msgid "What you will learn in this tutorial"
@@ -2047,23 +2060,23 @@ msgstr "Mitä opit tässä opetuspelissä"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:334
 msgid "Play this scenario"
-msgstr ""
+msgstr "Pelaa tämä skenaario"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:335
 msgid "The name of this scenario"
-msgstr ""
+msgstr "Tämän skenaarion nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:353
 msgid "The order in which the tutorials should be played"
-msgstr ""
+msgstr "Järjestys, missä tutoriaalit pitäisi pelata"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:354
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Tutoriaalin nimi"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:356
 msgid "The number of this scenario in the campaign"
-msgstr ""
+msgstr "Skenaarioiden määrä tässä kampanjassa"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 msgid "Scenario Name"
@@ -2090,14 +2103,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:422
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tämän tutoriaalin suunnittelija"
+msgstr[1] "Tämän tutoriaalin suunnittelijat"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:425
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tämän skenaarion suunnittelija"
+msgstr[1] "Tämän skenaarion suunnittelijat"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:428
 #: ../../src/ui_fsmenu/mapselect.cc:321
@@ -2113,7 +2126,7 @@ msgstr "Valitse opetuspeli listalta ja paina sitten \"OK\"."
 #: ../../src/ui_fsmenu/campaign_select.cc:454
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr ""
+msgstr "Voit nähdä kuvailun tällä hetkellä valitusta tutoriaalista oikealla"
 
 #: ../../src/ui_fsmenu/fileview.cc:70 ../../src/wui/watchwindow.cc:140
 msgid "Close"
@@ -2173,7 +2186,7 @@ msgstr "Rekisteröitymätön"
 #: ../../src/ui_fsmenu/internet_lobby.cc:147
 msgctxt "player"
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Points"
@@ -2306,7 +2319,7 @@ msgstr "Olet pelaaja %i."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:496
 msgid "You are a spectator."
-msgstr ""
+msgstr "Olet sivustakatsoja."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:555
 msgid "Saved players are:"
@@ -2476,7 +2489,7 @@ msgstr "Poista"
 
 #: ../../src/ui_fsmenu/loadgame.cc:155
 msgid "The time that elapsed inside this game"
-msgstr ""
+msgstr "Vierähtänyt aika tämän pelin aikana"
 
 #: ../../src/ui_fsmenu/loadgame.cc:156
 msgid "The number of players"
@@ -2484,11 +2497,11 @@ msgstr "Pelaajien määrä"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157
 msgid "The version of Widelands that this game was played under"
-msgstr ""
+msgstr "Versio Widelandista, jona tätä peliä pelattiin"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158
 msgid "The win condition that was set for this game"
-msgstr ""
+msgstr "Voittovaatimus, joka oli asetettu tätä peliä varten"
 
 #: ../../src/ui_fsmenu/loadgame.cc:162
 msgid "Load this replay"
@@ -2496,7 +2509,7 @@ msgstr "Lataa pelin toisto"
 
 #: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "The map that this replay is based on"
-msgstr ""
+msgstr "Kartta, jossa tätä toistoa on pelattu "
 
 #: ../../src/ui_fsmenu/loadgame.cc:164
 msgid "Delete this replay"
@@ -2504,7 +2517,7 @@ msgstr "Poista pelin toisto"
 
 #: ../../src/ui_fsmenu/loadgame.cc:166 ../../src/ui_fsmenu/mapselect.cc:93
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "Palaa yksinpelivalikkoon"
 
 #: ../../src/ui_fsmenu/loadgame.cc:167
 msgid "Load this game"
@@ -2520,11 +2533,32 @@ msgstr "Poista tämä peli"
 
 #: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "Save Date"
-msgstr ""
+msgstr "Tallennuspäivämäärä"
 
 #: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "The date this game was saved"
-msgstr ""
+msgstr "Päivämäärä, jona tämä peli tallennettiin"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:185
+msgid "SP = Single Player"
+msgstr "YP = yksinpeli"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:189
+msgid "MP = Multiplayer"
+msgstr "MP = moninpeli"
+
+#. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
+#. load.
+#. * TRANSLATORS: Make sure that you keep consistency in your translation.
+#: ../../src/ui_fsmenu/loadgame.cc:192
+msgid "H = Multiplayer (Host)"
+msgstr "I = Moninpeli (Isäntä)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -2532,11 +2566,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:196
 #, c-format
 msgid "Game Mode: %s."
-msgstr ""
+msgstr "Pelimuoto: %s"
 
 #: ../../src/ui_fsmenu/loadgame.cc:199
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "Numerot ovat pelaajien numeroita"
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
@@ -2557,7 +2591,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:265
 msgid "Save Date:"
-msgstr ""
+msgstr "Tallennuspäivämäärä"
 
 #: ../../src/ui_fsmenu/loadgame.cc:274 ../../src/ui_fsmenu/loadgame.cc:405
 msgid "Filename:"
@@ -2565,7 +2599,7 @@ msgstr "Tiedoston nimi:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:278
 msgid "Do you really want to delete this replay?"
-msgstr ""
+msgstr "Haluatko oikeasti poistaa tämän toiston?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:281
 msgid "Do you really want to delete this game?"
@@ -2573,7 +2607,7 @@ msgstr "Oletko varma, että haluat poistaa tämän pelin?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:285
 msgid "Confirm deleting file"
-msgstr ""
+msgstr "Varmista tiedostonpoisto"
 
 #: ../../src/ui_fsmenu/loadgame.cc:319
 msgid "Gametime:"
@@ -2585,7 +2619,7 @@ msgstr "Tavoite:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:351
 msgid "Widelands Version:"
-msgstr ""
+msgstr "Widelands versio:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
@@ -2603,7 +2637,7 @@ msgstr "Eilen, %1%:%2%"
 #. * TRANSLATORS: month day, year
 #: ../../src/ui_fsmenu/loadgame.cc:537
 msgid "%2% %1%, %3%"
-msgstr ""
+msgstr "%2% %1%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -2612,7 +2646,7 @@ msgstr ""
 #. tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:563
 msgid "SP"
-msgstr ""
+msgstr "YP"
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2622,7 +2656,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:571
 msgid "H (%1%)"
-msgstr ""
+msgstr "I (%1%)"
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2632,7 +2666,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:580
 msgid "MP (%1%)"
-msgstr ""
+msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -2700,7 +2734,7 @@ msgstr "Versio %1$s (%2$s)"
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:75
 msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr ""
+msgstr "(C) %1%-%2% Widelands Development Team toimesta"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Licensed under the GNU General Public License V2.0"
@@ -2712,11 +2746,11 @@ msgstr "Valitse kartta"
 
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Return to the editor menu"
-msgstr ""
+msgstr "Palaa suunnitteluvalikkoon"
 
 #: ../../src/ui_fsmenu/mapselect.cc:91
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "Palaa moninpelin peliasetuksiin"
 
 #: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Number of players"
@@ -2733,7 +2767,7 @@ msgstr "Kartan nimi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "Kartan tai skenaarion nimi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
@@ -2741,7 +2775,7 @@ msgstr "Koko"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "Kartan koko (Leveys x Korkeus)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:135
 msgid "Show all maps"
@@ -2792,7 +2826,7 @@ msgstr "Neljän pelaajan joukkueet"
 #: ../../src/ui_fsmenu/mapselect.cc:309
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr ""
+msgstr "Tämän kartan nimi äidinkielelläsi: %s"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
@@ -2809,8 +2843,8 @@ msgstr "Tämän kartan nimi"
 #: ../../src/ui_fsmenu/mapselect.cc:322
 msgid "The designer of this map"
 msgid_plural "The designers of this map"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tämän kartan suunnittelija"
+msgstr[1] "Tämän kartan suunnittelijat"
 
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "Edit this map"
@@ -2830,12 +2864,12 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:343
 msgid "Open this directory"
-msgstr ""
+msgstr "Avaa tämä hakemisto"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/ui_fsmenu/mapselect.cc:444
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Moninpeliskenaarioita"
 
 #: ../../src/ui_fsmenu/mapselect.cc:586
 msgid "Nobody"
@@ -2915,7 +2949,7 @@ msgstr "Suljettu"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:198
 msgctxt "game_state"
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 #: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:522
 msgid "Advanced Options"
@@ -2957,7 +2991,7 @@ msgstr "Soita taustamusiikkia"
 #: ../../src/ui_fsmenu/options.cc:209
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Enable Sound Effects"
-msgstr ""
+msgstr "Laita päälle ääniefektit"
 
 #: ../../src/ui_fsmenu/options.cc:216
 msgid "In-game Options"
@@ -2968,7 +3002,7 @@ msgstr "Peliasetukset"
 #. * TRANSLATORS: and it also lets you jump to it on the map.
 #: ../../src/ui_fsmenu/options.cc:226
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Käytä yhtä katso-ikkuna muotoa"
 
 #: ../../src/ui_fsmenu/options.cc:236
 msgid "Start building road after placing a flag"
@@ -3008,7 +3042,7 @@ msgstr[1] "päivää"
 
 #: ../../src/ui_fsmenu/options.cc:302
 msgid "Remove replays older than:"
-msgstr ""
+msgstr "Poista vanhemmat toistot kuin:"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:312
@@ -3023,7 +3057,7 @@ msgstr "Ei koskaan"
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:367 ../../src/ui_fsmenu/options.cc:373
 msgid "%1% x %2%"
-msgstr ""
+msgstr "%1% x %2%"
 
 #: ../../src/ui_fsmenu/options.cc:406
 msgid "Try system language"
@@ -3049,12 +3083,12 @@ msgid "Show in-game chat with transparent background"
 msgstr "Käytä läpinäkyvää taustaa pelin chat-keskusteluissa"
 
 #: ../../src/ui_fsmenu/options.cc:566
-msgid "Play a sound at message arrival."
-msgstr "Soita ääni viesti saapuessa."
+msgid "Play a sound at message arrival"
+msgstr "Soita ääni viestin saapuessa"
 
 #: ../../src/ui_fsmenu/options.cc:576
-msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Älä paketoi Widelands-datatiedostoja (karttoja, pelin toistoja ja tallenuksia)."
+msgid "Do not zip widelands data files (maps, replays and savegames)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:586
 msgid "Remove Syncstream dumps on startup"
@@ -3137,7 +3171,7 @@ msgstr "Haluatko perua meneilläänolevan tutkimusmatkan?"
 
 #: ../../src/wui/attack_box.cc:127 ../../src/wui/attack_box.cc:150
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/wui/attack_box.cc:139
 msgid "Soldiers:"
@@ -3171,27 +3205,27 @@ msgstr "Työn alla:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
 #: ../../src/wui/building_statistics_menu.cc:95
-#: ../../src/wui/building_statistics_menu.cc:679
+#: ../../src/wui/building_statistics_menu.cc:680
 msgid "Low Production: "
-msgstr ""
+msgstr "Alhainen tuotanto:"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: ../../src/wui/building_statistics_menu.cc:137
 msgid "Small Buildings"
-msgstr ""
+msgstr "Pienet rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 msgid "Medium Buildings"
-msgstr ""
+msgstr "Keskinkertaiset rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:145
 msgid "Big Buildings"
-msgstr ""
+msgstr "Isot rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:149
 msgid "Mines"
@@ -3213,24 +3247,18 @@ msgstr "Näytä edellinen rakennus"
 msgid "Show next building"
 msgstr "Näytä seuraava rakennus"
 
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#: ../../src/wui/building_statistics_menu.cc:667
-#, c-format
-msgid "%i%%"
-msgstr ""
-
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:696
-#: ../../src/wui/building_statistics_menu.cc:720
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:697
+#: ../../src/wui/building_statistics_menu.cc:721
+#: ../../src/wui/building_statistics_menu.cc:723
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
-msgstr ""
+msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:710
+#: ../../src/wui/building_statistics_menu.cc:711
 msgid "Lacking Soldiers:"
 msgstr "Puuttuu sotilaita:"
 
@@ -3325,8 +3353,8 @@ msgstr "Rakennukset"
 #: ../../src/wui/encyclopedia_window.cc:334
 msgid "Consumed Ware Type"
 msgid_plural "Consumed Ware Types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Käytetty kauppatavaratyyppi"
+msgstr[1] "Käytetyt kauppatavaratyypit"
 
 #: ../../src/wui/encyclopedia_window.cc:153
 msgid "Quantity"
@@ -3625,7 +3653,7 @@ msgstr "Yleistä"
 #: ../../src/wui/game_message_menu.cc:578
 #, c-format
 msgid "Type of this message: %s"
-msgstr ""
+msgstr "Viestin tyyppi: %s"
 
 #: ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Archive"
@@ -3681,7 +3709,7 @@ msgstr "Ääniasetukset"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:108
 msgid "Set sound effect and music options"
-msgstr ""
+msgstr "Aseta ääniefekti- ja musiikkivalinnat"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:127 ../../src/wui/game_summary.cc:87
@@ -3690,11 +3718,11 @@ msgstr "Poistu pelistä"
 
 #: ../../src/wui/game_options_sound_menu.cc:44
 msgid "Music Volume"
-msgstr ""
+msgstr "Musiikin voimakkuus"
 
 #: ../../src/wui/game_options_sound_menu.cc:58
 msgid "Sound Effects Volume"
-msgstr ""
+msgstr "Ääniefektien voimakkuus"
 
 #: ../../src/wui/game_summary.cc:43
 msgid "Game over"
@@ -3706,7 +3734,7 @@ msgstr "Käytetty aika:"
 
 #: ../../src/wui/game_summary.cc:64
 msgid "Player info:"
-msgstr ""
+msgstr "Pelaaja info:"
 
 #: ../../src/wui/game_summary.cc:79
 msgid "Continue playing"
@@ -3739,7 +3767,7 @@ msgstr "Antautui"
 #: ../../src/wui/game_summary.cc:185
 msgctxt "player_won"
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 #: ../../src/wui/game_summary.cc:194
 msgid "You won!"
@@ -3920,12 +3948,12 @@ msgstr "Tekoäly"
 #: ../../src/wui/playerdescrgroup.cc:174
 #, c-format
 msgid "AI: %s"
-msgstr ""
+msgstr "Tekoäly: %s"
 
 #: ../../src/wui/multiplayersetupgroup.cc:311
 msgctxt "ai_name"
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/wui/playerdescrgroup.cc:178
@@ -3936,7 +3964,7 @@ msgstr "Ihminen"
 #: ../../src/wui/playerdescrgroup.cc:190
 msgctxt "tribe"
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:412
 msgid "Client name"
@@ -3961,19 +3989,19 @@ msgstr "Valmistelu"
 
 #: ../../src/wui/playerdescrgroup.cc:171
 msgid "AI: Random"
-msgstr ""
+msgstr "Tekoäly: Satunnainen"
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"
-msgstr ""
+msgstr "%1% d"
 
 #: ../../src/wui/plot_area.cc:109
 msgid "%1% h"
-msgstr ""
+msgstr "%1% h"
 
 #: ../../src/wui/plot_area.cc:111
 msgid "%1% min"
-msgstr ""
+msgstr "%1% min"
 
 #: ../../src/wui/plot_area.cc:275
 msgid "game"
@@ -4083,7 +4111,7 @@ msgstr "Lähetä sotilas pois napsauttamalla sotilasta"
 #: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:484
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
-msgstr ""
+msgstr "HP: %1$u/%2$u AT: %3$u/%4$u DE: %5$u/%6$u EV: %7$u/%8$u"
 
 #: ../../src/wui/soldierlist.cc:421
 msgid "Prefer Rookies"

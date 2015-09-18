@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-04 06:55+0000\n"
-"PO-Revision-Date: 2015-09-05 09:35+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 09:38+0000\n"
 "Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -997,11 +997,11 @@ msgstr "Чтобы выйти из этой игры в главное меню,
 msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
-msgstr ""
+msgstr "Кнопку \"Настройки\" на панели внизу экрана. А потом щелкните "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid "‘Exit Game’ button."
-msgstr ""
+msgstr "по кнопке \"Выход из игры\""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid ""

@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-31 11:35+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-11 21:02+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -376,7 +376,7 @@ msgstr "Повторенията са много полезно средство
 
 #: ../../txts/developers.lua:3
 msgid "Atlantean"
-msgstr "Атлантидци"
+msgstr "Атландци"
 
 #: ../../txts/developers.lua:3
 msgid "Barbarian"
@@ -533,7 +533,8 @@ msgstr "Тези страници може да са по-завършени и 
 msgid "Keyboard shortcuts"
 msgstr "Клавиши и комбинации"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr "ИНТЕРВАЛ:"
 
@@ -541,7 +542,8 @@ msgstr "ИНТЕРВАЛ:"
 msgid "toggles if building spaces are shown"
 msgstr "превключва показването на местата за строеж"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr "C:"
 
@@ -549,7 +551,8 @@ msgstr "C:"
 msgid "toggles census"
 msgstr "превключва преброяването"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr "F:"
 
@@ -557,7 +560,8 @@ msgstr "F:"
 msgid "toggles fullscreen"
 msgstr "превключва режима на цял екран"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr "H:"
 
@@ -565,7 +569,8 @@ msgstr "H:"
 msgid "toggles main menu"
 msgstr "превключва главното меню"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr "M:"
 
@@ -573,7 +578,8 @@ msgstr "M:"
 msgid "toggles minimap"
 msgstr "превключва миникартата"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr "P:"
 
@@ -581,7 +587,8 @@ msgstr "P:"
 msgid "toggles player menu"
 msgstr "превключва менюто за играча"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr "T:"
 
@@ -589,7 +596,8 @@ msgstr "T:"
 msgid "toggles tools menu"
 msgstr "превключва менюто за инструменти"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr "I:"
 
@@ -597,7 +605,8 @@ msgstr "I:"
 msgid "activates information tool"
 msgstr "включва инструмента за информация"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr "CTRL+L:"
 
@@ -605,7 +614,8 @@ msgstr "CTRL+L:"
 msgid "load map"
 msgstr "зарежда карта"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr "CTRL+S:"
 
@@ -613,7 +623,8 @@ msgstr "CTRL+S:"
 msgid "save map"
 msgstr "запазва картата"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr "1-0:"
 
@@ -621,7 +632,8 @@ msgstr "1-0:"
 msgid "changes tool size"
 msgstr "променя размера на инструмента"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr "SHIFT (задържан):"
 
@@ -629,7 +641,8 @@ msgstr "SHIFT (задържан):"
 msgid "selects first alternative tool while pressed"
 msgstr "избира първия алтернативен инструмент, докато е задържан"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr "ALT (задържан):"
 
