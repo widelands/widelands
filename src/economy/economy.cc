@@ -499,6 +499,11 @@ void Economy::remove_supply(Supply & supply)
 }
 
 
+// TODO(meitis): most (all?) production programs execute the condition and on success
+// they sleep before producing the ware. This makes it much more likely for two or more
+// productions sites to start a production though only 1 ware would need to be produced
+// the actually to do would be to change all(?) production programs to sleep after
+// producing the ware, instead before
 bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 
@@ -517,8 +522,6 @@ bool Economy::needs_ware(WareIndex const ware_type) const {
 		for (const Request * temp_req : m_requests) {
 			const Request & req = *temp_req;
 
-			// TODO(meitis): guess we should set a supply here already
-			// otherwise multiple productionsites can start to fullfill the same request
 			if (req.get_type() == wwWARE && req.get_index() == ware_type)
 				return true;
 		}
@@ -545,8 +548,6 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 		for (const Request * temp_req : m_requests) {
 			const Request & req = *temp_req;
 
-			// TODO(meitis): guess we should set a supply here already
-			// otherwise multiple productionsites can start to fullfill the same request
 			if (req.get_type() == wwWORKER && req.get_index() == worker_type)
 				return true;
 		}
@@ -838,11 +839,12 @@ std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal inva
  */
 void Economy::_create_requested_worker(Game & game, WareIndex index)
 {
-	unsigned demand = 0;
+	uint32_t demand = 0;
 
 	bool soldier_level_check;
 	const TribeDescr & tribe = owner().tribe();
 	const WorkerDescr & w_desc = *tribe.get_worker_descr(index);
+	Request * open_request = nullptr;
 
 	// Make a dummy soldier, which should never be assigned to any economy
 	// Minimal invasive fix of bug 1236538: never create a rookie for a request
@@ -857,8 +859,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		soldier_level_check = false;
 	}
 
-
-	for (const Request * temp_req : m_requests) {
+	for (Request * temp_req : m_requests) {
 		const Request & req = *temp_req;
 
 		if (req.get_type() != wwWORKER || req.get_index() != index)
@@ -876,7 +877,11 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 				continue;
 		}
 
-		demand += req.get_open_count();
+		uint32_t current_demand = req.get_open_count();
+		demand += current_demand;
+		if (current_demand > 0) {
+			open_request = temp_req;
+		}
 	}
 
 	if (!demand)
@@ -939,7 +944,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		// except in case of planAtLeastOne we continue to plan at least one
 		// Note that supplies might suddenly disappear outside our control because
 		// of loss of land or silly player actions.
-		Warehouse * wh_with_plan = 0;
+		Warehouse * wh_with_plan = nullptr;
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
 
@@ -954,19 +959,12 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		}
 
 		// in case of planAtLeastOne undo a set to zero
-		if (0 != wh_with_plan && 0 == total_planned)
+		if (nullptr != wh_with_plan && 0 == total_planned)
 			wh_with_plan->plan_workers(game, index, 1);
 
 	} else if (total_planned < demand) {
 		uint32_t plan_goal = std::min(can_create, demand);
 
-		// plan at least one if required
-		if (planAtLeastOne && 0 == plan_goal && 0 == total_planned)
-			plan_goal = 1;
-
-		// TODO(meitis): if planAtLeastOne then find nearest warehouse
-		// and plan there. Possibly after this for, if total_planned still is 0
-		// then search wh nearest to request, plan there.
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
 			uint32_t supply =
@@ -974,10 +972,18 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 
 			total_planned -= wh->get_planned_workers(game, index);
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
-			if (planAtLeastOne && 0 == plan && 0 == total_planned)
-				plan = 1;
 			wh->plan_workers(game, index, plan);
 			total_planned += plan;
+		}
+
+		// plan at least one if required and if we haven't done already
+		// we are going to ignore stock policies of all warehouses here completely
+		// the worker we are making is not going to be stocked, there is a request for him
+		if (planAtLeastOne && 0 == total_planned) {
+			Warehouse * wh = find_closest_warehouse(open_request->target_flag());
+			if (nullptr == wh)
+				wh = m_warehouses[0];
+			wh->plan_workers(game, index, 1);
 		}
 	}
 }
