@@ -54,8 +54,6 @@ namespace Widelands {
 TribeDescr::TribeDescr
 	(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
 	: name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
-	// NOCOM(GunChleoc): Automatic resizing of warehouse window for small screens is broken.
-	// NOCOM(GunChleoc): Double-check statistics
 
 	try {
 		m_initializations = info.initializations;

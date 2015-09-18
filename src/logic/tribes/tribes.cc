@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -407,6 +408,11 @@ void Tribes::postload() {
 		if (building_exists(enhancement)) {
 			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}
+	}
+	// Resize the configuration of our wares if they won't fit in the current window (12 = info label size)
+	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+	for (WareIndex i = 0; i < tribes_->size(); ++i) {
+		tribes_->get_mutable(i)->resize_ware_orders(number);
 	}
 }
 
