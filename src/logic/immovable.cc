@@ -51,8 +51,8 @@
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
-#include "map_io/one_tribe_legacy_lookup_table.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -697,8 +697,8 @@ void Immovable::save
 
 MapObject::Loader * Immovable::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
-	 const OneWorldLegacyLookupTable& world_lookup_table,
-	 const OneTribeLegacyLookupTable& tribes_lookup_table)
+	 const WorldLegacyLookupTable& world_lookup_table,
+	 const TribesLegacyLookupTable& tribes_lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 

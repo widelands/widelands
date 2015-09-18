@@ -37,7 +37,7 @@
 #include "logic/game_data_error.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -314,7 +314,7 @@ const BobProgramBase * Critter::Loader::get_program
 MapObject::Loader* Critter::load(EditorGameBase& egbase,
 												  MapObjectLoader& mol,
                                       FileRead& fr,
-                                      const OneWorldLegacyLookupTable& lookup_table) {
+												  const WorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {

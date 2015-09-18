@@ -182,7 +182,10 @@ ProductionSiteDescr::ProductionSiteDescr
 }
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, const char* msgctxt, const LuaTable& table, const EditorGameBase& egbase)
+	(const std::string& init_descname,
+	 const char* msgctxt,
+	 const LuaTable& table,
+	 const EditorGameBase& egbase)
 	: ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase)
 {}
 

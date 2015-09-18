@@ -49,8 +49,8 @@ MapObjectPacket::~MapObjectPacket() {
 
 void MapObjectPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
-	 const OneWorldLegacyLookupTable& world_lookup_table,
-	 const OneTribeLegacyLookupTable& tribe_lookup_table)
+	 const WorldLegacyLookupTable& world_lookup_table,
+	 const TribesLegacyLookupTable& tribe_lookup_table)
 {
 	try {
 		FileRead fr;

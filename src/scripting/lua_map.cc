@@ -958,7 +958,7 @@ int LuaMap::get_player_slots(lua_State * L) {
 		:type name: :class:`string`
 		:arg field: The immovable is created on this field.
 		:type field: :class:`wl.map.Field`
-		:arg from_where: "world" if the immovable	is defined in the world,
+		:arg from_where: "world" if the immovable is defined in the world,
 			"tribes" if it is defined in the tribes.
 		:type from_where: :class:`string`
 

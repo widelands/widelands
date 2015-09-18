@@ -617,7 +617,7 @@ void WareInstance::save
 
 MapObject::Loader * WareInstance::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
-	 const OneTribeLegacyLookupTable& lookup_table)
+	 const TribesLegacyLookupTable& lookup_table)
 {
 	try {
 		uint8_t version = fr.unsigned_8();

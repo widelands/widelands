@@ -27,7 +27,7 @@
 #include "logic/map.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -35,7 +35,7 @@ namespace Widelands {
 
 
 void MapResourcesPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
+	(FileSystem & fs, EditorGameBase & egbase, const WorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
 	fr.open(fs, "binary/resource");

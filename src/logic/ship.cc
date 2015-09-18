@@ -1097,7 +1097,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				if (version < 5) {
 					std::string tribe_name = fr.c_string();
 					fr.c_string(); // This used to be the ship's name, which we don't need any more.
-					if(!(egbase.tribes().tribe_exists(tribe_name))) {
+					if (!(egbase.tribes().tribe_exists(tribe_name))) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
 					}
 					const WareIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);

@@ -17,7 +17,7 @@
  *
  */
 
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 #include <memory>
 
@@ -26,9 +26,9 @@ namespace  {
 /// If the map is newish and there is no old world to convert names from, we use
 /// this one that simply returns the looked up values, except for some renaming
 /// introduced through the merging of the tribes, which are handled here.
-class OneTribeOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
+class PostOneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
-	OneTribeOneWorldLegacyLookupTable();
+	PostOneWorldLegacyLookupTable();
 
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
@@ -40,7 +40,7 @@ private:
 	const std::map<std::string, std::string> resources_;
 };
 
-OneTribeOneWorldLegacyLookupTable::OneTribeOneWorldLegacyLookupTable() :
+PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
 immovables_
 {
 	{"blackland_stones1", "blackland_rocks1"},
@@ -75,7 +75,7 @@ resources_
 {}
 
 std::string
-OneTribeOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
+PostOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
 	const auto& i = resources_.find(resource);
 	if (i == resources_.end()) {
 		return resource;
@@ -83,16 +83,16 @@ OneTribeOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) 
 	return i->second;
 }
 
-std::string OneTribeOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
+std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
 	return terrain;
 }
 
-std::string OneTribeOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
 	return critter;
 }
 
 std::string
-OneTribeOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
+PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
 	const auto& i = immovables_.find(immovable);
 	if (i == immovables_.end()) {
 		return immovable;
@@ -100,9 +100,9 @@ OneTribeOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable
 	return i->second;
 }
 
-class RealOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
+class OneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
-	RealOneWorldLegacyLookupTable(const std::string& old_world_name);
+	OneWorldLegacyLookupTable(const std::string& old_world_name);
 
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
@@ -119,7 +119,7 @@ private:
 };
 
 
-RealOneWorldLegacyLookupTable::RealOneWorldLegacyLookupTable(const std::string& old_world_name) :
+OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name) :
 old_world_name_(old_world_name),
 // RESOURCES - They were all the same for all worlds.
 resources_
@@ -394,7 +394,7 @@ std::make_pair(
 
 {}
 
-std::string RealOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
+std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
 	const auto& i = resources_.find(resource);
 	if (i == resources_.end()) {
 		return resource;
@@ -402,7 +402,7 @@ std::string RealOneWorldLegacyLookupTable::lookup_resource(const std::string& re
 	return i->second;
 }
 
-std::string RealOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
+std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
 	const std::map<std::string, std::string>& world_terrains = terrains_.at(old_world_name_);
 	const auto& i = world_terrains.find(terrain);
 	if (i != world_terrains.end()) {
@@ -411,7 +411,7 @@ std::string RealOneWorldLegacyLookupTable::lookup_terrain(const std::string& ter
 	return terrain;
 }
 
-std::string RealOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
 	const std::map<std::string, std::string>& world_critters = critters_.at(old_world_name_);
 	const auto& i = world_critters.find(critter);
 	if (i != world_critters.end()) {
@@ -420,7 +420,7 @@ std::string RealOneWorldLegacyLookupTable::lookup_critter(const std::string& cri
 	return critter;
 }
 
-std::string RealOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
+std::string OneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
 	const std::map<std::string, std::string>& world_immovables = immovables_.at(old_world_name_);
 	const auto& i = world_immovables.find(immovable);
 	if (i != world_immovables.end()) {
@@ -431,13 +431,13 @@ std::string RealOneWorldLegacyLookupTable::lookup_immovable(const std::string& i
 
 }  // namespace
 
-OneWorldLegacyLookupTable::~OneWorldLegacyLookupTable() {
+WorldLegacyLookupTable::~WorldLegacyLookupTable() {
 }
 
-std::unique_ptr<OneWorldLegacyLookupTable>
-create_one_world_legacy_lookup_table(const std::string& old_world_name) {
+std::unique_ptr<WorldLegacyLookupTable>
+create_world_legacy_lookup_table(const std::string& old_world_name) {
 	if (old_world_name.empty()) {
-		return std::unique_ptr<OneWorldLegacyLookupTable>(new OneTribeOneWorldLegacyLookupTable());
+		return std::unique_ptr<WorldLegacyLookupTable>(new PostOneWorldLegacyLookupTable());
 	}
-	return std::unique_ptr<OneWorldLegacyLookupTable>(new RealOneWorldLegacyLookupTable(old_world_name));
+	return std::unique_ptr<WorldLegacyLookupTable>(new OneWorldLegacyLookupTable(old_world_name));
 }

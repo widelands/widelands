@@ -22,13 +22,13 @@
 
 #include "map_io/map_data_packet.h"
 
-class OneWorldLegacyLookupTable;
+class WorldLegacyLookupTable;
 
 namespace Widelands {
 
 class MapResourcesPacket {
 public:
-	void read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable&);
+	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable&);
 	void write(FileSystem&, EditorGameBase&);
 };
 

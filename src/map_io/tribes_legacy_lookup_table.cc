@@ -17,9 +17,9 @@
  *
  */
 
-#include "map_io/one_tribe_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
-OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
+TribesLegacyLookupTable::TribesLegacyLookupTable() :
 	// Workers
 	workers_
 	{std::make_pair(
@@ -240,7 +240,7 @@ OneTribeLegacyLookupTable::OneTribeLegacyLookupTable() :
 	 }
 {}
 
-std::string OneTribeLegacyLookupTable::lookup_worker(const std::string& tribe,
+std::string TribesLegacyLookupTable::lookup_worker(const std::string& tribe,
 																	  const std::string& worker) const {
 	if (workers_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_workers = workers_.at(tribe);
@@ -252,7 +252,7 @@ std::string OneTribeLegacyLookupTable::lookup_worker(const std::string& tribe,
 	return worker;
 }
 
-std::string OneTribeLegacyLookupTable::lookup_ware(const std::string& tribe, const std::string& ware) const {
+std::string TribesLegacyLookupTable::lookup_ware(const std::string& tribe, const std::string& ware) const {
 	if (wares_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_wares = wares_.at(tribe);
 		const auto& i = tribe_wares.find(ware);
@@ -263,7 +263,7 @@ std::string OneTribeLegacyLookupTable::lookup_ware(const std::string& tribe, con
 	return ware;
 }
 
-std::string OneTribeLegacyLookupTable::lookup_immovable(const std::string& tribe,
+std::string TribesLegacyLookupTable::lookup_immovable(const std::string& tribe,
 																		  const std::string& immovable) const {
 	if (immovables_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_immovables = immovables_.at(tribe);

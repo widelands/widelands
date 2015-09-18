@@ -24,7 +24,7 @@
 
 class FileRead;
 class FileSystem;
-class OneWorldLegacyLookupTable;
+class WorldLegacyLookupTable;
 
 namespace Widelands {
 
@@ -37,14 +37,14 @@ struct MapBobPacket {
 	void read(FileSystem&,
 	          EditorGameBase&,
 				 MapObjectLoader&,
-	          const OneWorldLegacyLookupTable& lookup_table);
+	          const WorldLegacyLookupTable& lookup_table);
 
 private:
 	void read_bob(FileRead&,
 	             EditorGameBase&,
 					 MapObjectLoader&,
 	             Coords,
-	             const OneWorldLegacyLookupTable& lookup_table);
+	             const WorldLegacyLookupTable& lookup_table);
 };
 }
 

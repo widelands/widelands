@@ -26,10 +26,10 @@
 
 #include "base/macros.h"
 
-class OneWorldLegacyLookupTable {
+class WorldLegacyLookupTable {
 public:
-	OneWorldLegacyLookupTable() = default;
-	virtual ~OneWorldLegacyLookupTable();
+	WorldLegacyLookupTable() = default;
+	virtual ~WorldLegacyLookupTable();
 
 	/// Looks up the new name for the 'resource'.
 	virtual std::string lookup_resource(const std::string& resource) const = 0;
@@ -44,10 +44,10 @@ public:
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(OneWorldLegacyLookupTable);
+	DISALLOW_COPY_AND_ASSIGN(WorldLegacyLookupTable);
 };
 
-std::unique_ptr<OneWorldLegacyLookupTable>
-create_one_world_legacy_lookup_table(const std::string& old_world);
+std::unique_ptr<WorldLegacyLookupTable>
+create_world_legacy_lookup_table(const std::string& old_world);
 
 #endif  // end of include guard: WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H

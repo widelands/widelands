@@ -25,9 +25,9 @@
 
 #include "base/macros.h"
 
-class OneTribeLegacyLookupTable {
+class TribesLegacyLookupTable {
 public:
-	OneTribeLegacyLookupTable();
+	TribesLegacyLookupTable();
 
 	/// Looks up the new name for the 'worker'.
 	std::string lookup_worker(const std::string& tribe, const std::string& worker) const;
@@ -45,7 +45,7 @@ private:
 	const std::map<std::string, std::map<std::string, std::string>> wares_;
 	const std::map<std::string, std::map<std::string, std::string>> immovables_;
 
-	DISALLOW_COPY_AND_ASSIGN(OneTribeLegacyLookupTable);
+	DISALLOW_COPY_AND_ASSIGN(TribesLegacyLookupTable);
 };
 
 #endif  // end of include guard: WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H

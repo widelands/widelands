@@ -55,8 +55,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
-#include "map_io/one_tribe_legacy_lookup_table.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -145,9 +145,9 @@ int32_t WidelandsMapLoader::load_map_complete
 	{MapHeightsPacket        p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	std::unique_ptr<OneWorldLegacyLookupTable> world_lookup_table
-		(create_one_world_legacy_lookup_table(m_old_world_name));
-	std::unique_ptr<OneTribeLegacyLookupTable> tribe_lookup_table(new OneTribeLegacyLookupTable());
+	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table
+		(create_world_legacy_lookup_table(m_old_world_name));
+	std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
 	{MapTerrainPacket p; p.read(*m_fs, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());

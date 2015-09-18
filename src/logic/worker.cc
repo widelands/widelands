@@ -60,7 +60,7 @@
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "map_io/one_tribe_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -3062,7 +3062,7 @@ Worker::Loader * Worker::create_loader()
  */
 MapObject::Loader * Worker::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
-	 const OneTribeLegacyLookupTable& lookup_table, uint8_t packet_version)
+	 const TribesLegacyLookupTable& lookup_table, uint8_t packet_version)
 {
 	try {
 		// header has already been read by caller

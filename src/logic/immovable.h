@@ -32,8 +32,8 @@
 #include "notifications/notifications.h"
 
 class LuaTable;
-class OneTribeLegacyLookupTable;
-class OneWorldLegacyLookupTable;
+class TribesLegacyLookupTable;
+class WorldLegacyLookupTable;
 class Profile;
 
 namespace Widelands {
@@ -268,7 +268,8 @@ public:
 	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
 		(EditorGameBase &, MapObjectLoader &, FileRead &,
-		 const OneWorldLegacyLookupTable& world_lookup_table, const OneTribeLegacyLookupTable& tribes_lookup_table);
+		 const WorldLegacyLookupTable& world_lookup_table,
+		 const TribesLegacyLookupTable& tribes_lookup_table);
 
 private:
 	void increment_program_pointer();

@@ -38,7 +38,7 @@
 #include "logic/mapregion.h"
 #include "logic/world/world.h"
 #include "map_io/map_loader.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_interface.h"
 
 using std::cerr;
@@ -232,11 +232,11 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 /// terrain.
 class TerrainConverter {
 public:
-	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
+	TerrainConverter(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table);
 	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
+	const WorldLegacyLookupTable& one_world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
@@ -245,7 +245,7 @@ private:
 };
 
 TerrainConverter::TerrainConverter
-		(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table) :
+		(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table) :
 	one_world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_
@@ -443,8 +443,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 2 (Terrain 1) not found");
 
-	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table(
-	   create_one_world_legacy_lookup_table(get_world_name(m_worldtype)));
+	std::unique_ptr<WorldLegacyLookupTable> lookup_table(
+	   create_world_legacy_lookup_table(get_world_name(m_worldtype)));
 
 	const Widelands::World& world = egbase.world();
 	TerrainConverter terrain_converter(world, *lookup_table);
