@@ -33,9 +33,10 @@
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 
-// size of array for AI data
-// look below for m_ai_data_* arrays
-constexpr int kAIDataSize = 8;
+//there are three arrays to be used by AI
+// their size is defined here
+// (all are of the same size)
+constexpr int kAIDataSize = 6;
 
 class Node;
 namespace Widelands {

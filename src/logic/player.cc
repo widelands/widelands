@@ -170,7 +170,7 @@ Player::Player
 	m_ai_data_int32          (),
 	m_ai_data_uint32         (),
 	m_ai_data_int16          ()
-	
+
 {
 	set_name(name);
 

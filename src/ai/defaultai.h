@@ -344,7 +344,6 @@ private:
 	int16_t ai_personality_military_loneliness_;
 	uint32_t ai_personality_attack_margin_;
 	int32_t ai_personality_wood_difference_;
-	int32_t ai_personality_rangers_ratio_;
 	uint32_t ai_productionsites_ratio_;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites

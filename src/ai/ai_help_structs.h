@@ -377,8 +377,7 @@ struct BuildingObserver {
 	uint32_t forced_after_;     // do not wait until ware is needed
 	TrainingSiteType trainingsite_type_;
 
-	bool unoccupied_;
-	uint16_t unconnected_;  // to any warehouse (count of such buildings)
+	uint16_t unconnected_count_;  // to any warehouse (count of such buildings)
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
@@ -417,6 +416,9 @@ struct BuildingObserver {
 	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	int32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
+	
+	uint32_t unoccupied_count_;
+	
 	bool build_material_shortage_;
 
 	int32_t total_count() const {
