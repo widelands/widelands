@@ -145,27 +145,19 @@ WarehouseWaresPanel::WarehouseWaresPanel
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-		if (m_type == Widelands::wwWORKER) {
-			for (const Widelands::WareIndex& worker_index :  m_wh.owner().tribe().workers()) {
-				if (m_display.ware_selected(worker_index)) {
-					m_gb.game().send_player_command
-						(*new Widelands::CmdSetStockPolicy
-							(m_gb.game().get_gametime(),
-							 m_wh.owner().player_number(),
-							 m_wh, true,
-							 worker_index, newpolicy));
-				}
-			}
-		} else {
-			for (const Widelands::WareIndex& ware_index : m_wh.owner().tribe().wares()) {
-				if (m_display.ware_selected(ware_index)) {
-					m_gb.game().send_player_command
-						(*new Widelands::CmdSetStockPolicy
-							(m_gb.game().get_gametime(),
-							 m_wh.owner().player_number(),
-							 m_wh, false,
-							 ware_index, newpolicy));
-				}
+
+		bool is_workers = m_type == Widelands::wwWORKER;
+		const std::set<Widelands::WareIndex> indices =
+				is_workers ? m_wh.owner().tribe().workers() : m_wh.owner().tribe().wares();
+
+		for (const Widelands::WareIndex& index : indices) {
+			if (m_display.ware_selected(index)) {
+				m_gb.game().send_player_command
+					(*new Widelands::CmdSetStockPolicy
+						(m_gb.game().get_gametime(),
+						 m_wh.owner().player_number(),
+						 m_wh, is_workers,
+						 index, newpolicy));
 			}
 		}
 	}
