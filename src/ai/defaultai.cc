@@ -1107,25 +1107,25 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				}
 			}
 
-			if (upcast(Building const, building, &base_immovable)) {
-				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const BuildingDescr& target_descr = constructionsite->building();
+			//if (upcast(Building const, building, &base_immovable)) {
+				//if (upcast(ConstructionSite const, constructionsite, building)) {
+					//const BuildingDescr& target_descr = constructionsite->building();
 
-					if (dynamic_cast<ProductionSiteDescr const*>(&target_descr)) {
-						consider_productionsite_influence(
-						   field,
-						   immovables.at(i).coords,
-						   get_building_observer(constructionsite->descr().name().c_str()));
-					}
-				}
+					//if (dynamic_cast<ProductionSiteDescr const*>(&target_descr)) {
+						//consider_productionsite_influence(
+						   //field,
+						   //immovables.at(i).coords,
+						   //get_building_observer(constructionsite->descr().name().c_str()));
+					//}
+				//}
 
-				if (dynamic_cast<const ProductionSite*>(building)) {
-					consider_productionsite_influence(
-					   field,
-					   immovables.at(i).coords,
-					   get_building_observer(building->descr().name().c_str()));
-				}
-			}
+				////if (dynamic_cast<const ProductionSite*>(building)) { NOCOM
+					////consider_productionsite_influence(
+					   ////field,
+					   ////immovables.at(i).coords,
+					   ////get_building_observer(building->descr().name().c_str()));
+				////}
+			//}
 
 			if (immovables.at(i).object->has_attribute(tree_attr)) {
 				++field.trees_nearby_;
@@ -2198,7 +2198,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				prio = 4;
+				prio = 10;
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
@@ -2206,7 +2206,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				if (bf->unowned_land_nearby_) {
-					prio /= 2;
+					prio -= bf->unowned_land_nearby_ / 10;
 				}
 			}
 
@@ -4154,100 +4154,102 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 		return prio;
 	}
 
-	// in unowned teritory, decreasing to 2/3
-	if (bf.unowned_land_nearby_ > 15) {
-		prio *= 2;
-		prio /= 3;
-	}
-
-	// Further decrease the score if enemy nearby
-	if (bf.enemy_nearby_) {
+	if (bf.enemy_nearby_ || bf.near_border_) {
 		prio /= 2;
 	}
 
+	// if unowned teritory nearby
+	prio -= bf.unowned_land_nearby_/ 4;
+
+	// further decrease the score if enemy nearby
+	if (bf.enemy_nearby_) {
+		prio -= 10;
+	}
+
+	// and if close (up to 2 fields away) from border
 	if (bf.near_border_) {
-		prio -= 40;
+		prio -= 10;
 	}
 
 	return prio;
 }
 
-/**
- * calculates how much a productionsite of type \arg bo is needed inside it's
- * economy. \arg prio is initial value for this calculation
- *
- * \returns the calculated priority
- */
-int32_t DefaultAI::calculate_need_for_ps(BuildingObserver& bo, int32_t prio) {
-	// some randomness to avoid that defaultAI is building always
-	// the same (always == another game but same map with
-	// defaultAI on same coords)
-	prio += time(nullptr) % 3 - 1;
+///**
+ //* calculates how much a productionsite of type \arg bo is needed inside it's
+ //* economy. \arg prio is initial value for this calculation
+ //*
+ //* \returns the calculated priority
+ //*/
+//int32_t DefaultAI::calculate_need_for_ps(BuildingObserver& bo, int32_t prio) {
+	//// some randomness to avoid that defaultAI is building always
+	//// the same (always == another game but same map with
+	//// defaultAI on same coords)
+	//prio += time(nullptr) % 3 - 1;
 
-	// check if current economy can supply enough material for
-	// production.
-	for (uint32_t k = 0; k < bo.inputs_.size(); ++k) {
-		prio += 2 * wares.at(bo.inputs_.at(k)).producers_;
-		prio -= wares.at(bo.inputs_.at(k)).consumers_;
-	}
+	//// check if current economy can supply enough material for
+	//// production.
+	//for (uint32_t k = 0; k < bo.inputs_.size(); ++k) {
+		//prio += 2 * wares.at(bo.inputs_.at(k)).producers_;
+		//prio -= wares.at(bo.inputs_.at(k)).consumers_;
+	//}
 
-	if (bo.inputs_.empty()) {
-		prio += 4;
-	}
+	//if (bo.inputs_.empty()) {
+		//prio += 4;
+	//}
 
-	int32_t output_prio = 0;
+	//int32_t output_prio = 0;
 
-	for (uint32_t k = 0; k < bo.outputs_.size(); ++k) {
-		WareObserver& wo = wares.at(bo.outputs_.at(k));
+	//for (uint32_t k = 0; k < bo.outputs_.size(); ++k) {
+		//WareObserver& wo = wares.at(bo.outputs_.at(k));
 
-		if (wo.consumers_ > 0) {
-			output_prio += wo.preciousness_;
-			output_prio += wo.consumers_ * 2;
-			output_prio -= wo.producers_ * 2;
+		//if (wo.consumers_ > 0) {
+			//output_prio += wo.preciousness_;
+			//output_prio += wo.consumers_ * 2;
+			//output_prio -= wo.producers_ * 2;
 
-			if (bo.total_count() == 0) {
-				output_prio += 10;  // add a big bonus
-			}
-		}
-	}
+			//if (bo.total_count() == 0) {
+				//output_prio += 10;  // add a big bonus
+			//}
+		//}
+	//}
 
-	if (bo.outputs_.size() > 1) {
-		output_prio =
-		   static_cast<int32_t>(ceil(output_prio / sqrt(static_cast<double>(bo.outputs_.size()))));
-	}
+	//if (bo.outputs_.size() > 1) {
+		//output_prio =
+		   //static_cast<int32_t>(ceil(output_prio / sqrt(static_cast<double>(bo.outputs_.size()))));
+	//}
 
-	prio += 2 * output_prio;
+	//prio += 2 * output_prio;
 
-	// If building consumes some wares, multiply with current statistics of all
-	// other buildings of this type to avoid constructing buildings where already
-	// some are running on low resources.
-	// Else at least add a part of the stats t the calculation.
-	if (!bo.inputs_.empty()) {
-		prio *= bo.current_stats_;
-		prio /= 100;
-	} else {
-		prio = ((prio * bo.current_stats_) / 100) + (prio / 2);
-	}
+	//// If building consumes some wares, multiply with current statistics of all
+	//// other buildings of this type to avoid constructing buildings where already
+	//// some are running on low resources.
+	//// Else at least add a part of the stats t the calculation.
+	//if (!bo.inputs_.empty()) {
+		//prio *= bo.current_stats_;
+		//prio /= 100;
+	//} else {
+		//prio = ((prio * bo.current_stats_) / 100) + (prio / 2);
+	//}
 
-	return prio;
-}
+	//return prio;
+//}
 
-void DefaultAI::consider_productionsite_influence(BuildableField& field,
-                                                  Coords coords,
-                                                  const BuildingObserver& bo) {
-	if (bo.space_consumer_ && !bo.plants_trees_ &&
-	    game().map().calc_distance(coords, field.coords) < 8) {
-		++field.space_consumers_nearby_;
-	}
+//void DefaultAI::consider_productionsite_influence(BuildableField& field,
+                                                  //Coords coords,
+                                                  //const BuildingObserver& bo) {
+	//if (bo.space_consumer_ && !bo.plants_trees_ &&
+	    //game().map().calc_distance(coords, field.coords) < 8) {
+		//++field.space_consumers_nearby_;
+	//}
 
-	for (size_t i = 0; i < bo.inputs_.size(); ++i) {
-		++field.consumers_nearby_.at(bo.inputs_.at(i));
-	}
+	//for (size_t i = 0; i < bo.inputs_.size(); ++i) {
+		//++field.consumers_nearby_.at(bo.inputs_.at(i));
+	//}
 
-	for (size_t i = 0; i < bo.outputs_.size(); ++i) {
-		++field.producers_nearby_.at(bo.outputs_.at(i));
-	}
-}
+	//for (size_t i = 0; i < bo.outputs_.size(); ++i) {
+		//++field.producers_nearby_.at(bo.outputs_.at(i));
+	//}
+//}
 
 /// \returns the economy observer containing \arg economy
 EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
