@@ -697,7 +697,8 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	TextStream ts(txt);
 	std::string word;
 
-	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
+	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
+		 && has_nonenglish_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = nodes.begin();
 		std::vector<WordSpacerNode*> spacer_nodes;

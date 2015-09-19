@@ -19,20 +19,23 @@
 
 #include "graphic/richtext.h"
 
+#include "base/log.h" // NOCOM
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h" // Needed for fontset's direction
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
+#include "graphic/text/bidi.h"
 
 namespace UI {
 
 namespace {
 int32_t const h_space = 3;
-}
+} // namespace
 
 /**
  * Layouted rich text is essentially a bunch of drawable elements, each with a
@@ -72,21 +75,62 @@ struct TextlineElement : Element {
 
 	void draw(RenderTarget & dst) override
 	{
-		// NOCOM Implement
+		// NOCOM alignment?
 		assert(words.size());
-		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
+		uint32_t spacewidth = style.calc_bare_width(" ");
+		bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
-		std::vector<std::string>::const_iterator it = words.begin() + 1;
-		if (it != words.end()) {
-			uint32_t spacewidth = style.calc_bare_width(" ");
+		// Reorder words for BiDi
+		if (is_rtl && has_nonenglish_character(words)) {
+			std::vector<std::string> reordered_words;
+			std::string previous_word;
+			std::vector<std::string>::iterator it = reordered_words.begin();
+			//log("NOCOM parsing RTL\n");
 
-			do {
-				if (style.underline)
-					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
-				else
-					x += spacewidth;
-				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
-			} while (it != words.end());
+			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
+				const std::string& word = *source_it;
+				if (source_it != words.end()) {
+					if (has_nonenglish_character(word.c_str()) || has_nonenglish_character(previous_word.c_str())) {
+						// NOCOM log("Insert at front: %s\n", word.c_str());
+						it = reordered_words.insert(reordered_words.begin(), word);
+					} else { // Sequences of Latin words go to the right from current position
+						if (it < reordered_words.end()) {
+							++it;
+						}
+						// NOCOM log("Insert at iterator: %s\n", word.c_str());
+						it = reordered_words.insert(it, word);
+					}
+					previous_word = word;
+				}
+			}
+			// Now render
+			uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), reordered_words[0]);
+
+			it = reordered_words.begin() + 1;
+			if (it != reordered_words.end()) {
+				do {
+					if (style.underline)
+						x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+					else
+						x += spacewidth;
+					x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
+				} while (it != reordered_words.end());
+			}
+
+		} else {
+			// Render LTR
+			uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
+
+			std::vector<std::string>::const_iterator it = words.begin() + 1;
+			if (it != words.end()) {
+				do {
+					if (style.underline)
+						x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+					else
+						x += spacewidth;
+					x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
+				} while (it != words.end());
+			}
 		}
 	}
 

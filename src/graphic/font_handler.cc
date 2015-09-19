@@ -179,7 +179,8 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string text;
-	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
+	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft
+		 && has_nonenglish_character(lce.text.c_str())) {
 		std::vector<std::string> words;
 		boost::split(words, lce.text, boost::is_any_of(" "));
 		for (const std::string& word: words) {
