@@ -20,8 +20,12 @@
 #ifndef WL_GRAPHIC_TEXT_BIDI_H
 #define WL_GRAPHIC_TEXT_BIDI_H
 
+#include <string>
+#include <vector>
+
 // BiDi support for RTL languages
 std::string string2bidi(const char* input);
 bool has_nonenglish_character(const char* input);
+bool has_nonenglish_character(std::vector<std::string> input);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_BIDI_H

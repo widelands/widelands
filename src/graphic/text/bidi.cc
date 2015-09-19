@@ -22,24 +22,43 @@
 #include <map>
 #include <string>
 
-#include <unicode/unistr.h>
 #include <unicode/uchar.h>
+#include <unicode/unistr.h>
 
 #include "base/log.h"
 
 namespace {
 
+// Need to mirror () etc. for LTR languages, so we're sticking them in a map.
+const std::map<UChar, UChar> kSymmetricChars = {
+	{0x0028, 0x0029}, // ()
+	{0x0029, 0x0028}, // )(
+	{0x003C, 0x003E}, // <>
+	{0x003E, 0x003C}, // ><
+	{0x005B, 0x005D}, // []
+	{0x005D, 0x005B}, // ][
+	{0x007B, 0x007D}, // {}
+	{0x007D, 0x007B}, // }{
+	{0x201C, 0x201D}, // “”
+	{0x201D, 0x201C}, // ”“
+	{0x2018, 0x2019}, // ‘’
+	{0x2019, 0x2018}, // ’‘
+};
+
 bool is_symmetric_char(UChar c) {
-	return c == 0x0028 || c == 0x0029 ||  // ()
-			 c == 0x003C || c == 0x003E ||  // <>
-			 c == 0x005B || c == 0x005D ||  // []
-			 c == 0x007B || c == 0x007D;    // {}
+	return kSymmetricChars.count(c) == 1;
+}
+
+UChar mirror_symmetric_char(UChar c) {
+	if (kSymmetricChars.count(c) == 1) {
+		c = kSymmetricChars.at(c);
+	}
+	return c;
 }
 
 bool is_numeric_char(UChar c) {
 	return 0x0030 <= c && c <= 0x0039;  // 0-9
 }
-
 
 bool is_latin_char(UChar c) {
 	return (0x0061 <= c && c <= 0x007a) ||  // a-z
@@ -51,9 +70,12 @@ bool is_punctuation_char(UChar c) {
 			 c == 0x002C ||  // ,
 			 c == 0x002D ||  // -
 			 c == 0x002E ||  // .
+			 c == 0x002F ||  // /
 			 c == 0x003A ||  // :
 			 c == 0x003B ||  // ;
 			 c == 0x003F ||  // ?
+			 c == 0x005C ||  // backslash
+			 c == 0x2018 ||  // ‘
 			 c == 0x2019 ||  // ’
 			 (c >= 0x2010 && c <= 0x2015); // en-dash, em-dash etc.
 }
@@ -298,6 +320,34 @@ const char* icuchar2char(UChar convertme) {
 
 } // namespace
 
+
+// True if a string does not contain English characters
+bool has_nonenglish_character(const char* input) {
+	bool result = false;
+	const icu::UnicodeString parseme(input);
+	for (int32_t i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!is_symmetric_char(c) && !is_numeric_char(c) && !is_latin_char(c) && !is_punctuation_char(c)) {
+			result = true;
+			break;
+		}
+	}
+	return result;
+}
+
+// True if the strings do not contain English characters
+bool has_nonenglish_character(std::vector<std::string> input) {
+	bool result = false;
+	for (const std::string& string: input) {
+		if (has_nonenglish_character(string.c_str())) {
+			result = true;
+			break;
+		}
+	}
+	return result;
+}
+
+
 // BiDi support for RTL languages
 std::string string2bidi(const char* input) {
 	const icu::UnicodeString parseme(input);
@@ -319,6 +369,9 @@ std::string string2bidi(const char* input) {
 				 is_latin_char(c) ||
 				 is_symmetric_char(c) ||
 				 ((is_latin_char(previous) || is_punctuation_char(previous) ) && is_punctuation_char(c)))) {
+			if (is_symmetric_char(c)) {
+				c = mirror_symmetric_char(c);
+			}
 			temp_stack += c;
 			c = parseme.charAt(--i);
 			if (i > 0) {
@@ -357,7 +410,7 @@ std::string string2bidi(const char* input) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				assert(false);
 			}
-		} else if (kArabicFinalChars.count(c) == 1) {
+		} else if (kArabicFinalChars.count(c) == 1) { // All Arabic characters have a final form
 			try {
 				// Skip diacritics for position analysis
 				for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
@@ -416,27 +469,17 @@ std::string string2bidi(const char* input) {
 				assert(false);
 			}
 		}
-		// Add the current RTL character
-		stack += c;
+
+		// TODO(GunChleoc): We sometimes get "Not a Character" - find out why.
+		if (c != 0xFFFF) {
+			// Add the current RTL character
+			stack += c;
+		}
 	}
 
 	std::string result;
 	stack.toUTF8String(result);
+	//log("NOCOM BiDI result: %s\n", result.c_str());
 
-	return result;
-}
-
-
-// True if a string only contains English characters
-bool has_nonenglish_character(const char* input) {
-	bool result = false;
-	const icu::UnicodeString parseme(input);
-	for (int32_t i = 0; i < parseme.length(); ++i) {
-		UChar c = parseme.charAt(i);
-		if (!is_symmetric_char(c) && !is_numeric_char(c) && !is_latin_char(c) && !is_punctuation_char(c)) {
-			result = true;
-			break;
-		}
-	}
 	return result;
 }
