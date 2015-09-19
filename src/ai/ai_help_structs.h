@@ -434,7 +434,7 @@ struct ProductionSiteObserver {
 	uint32_t built_time_;
 	uint32_t unoccupied_till_;
 	uint8_t stats_zero_;
-	uint8_t no_resources_count;
+	uint32_t no_resources_since_;
 	BuildingObserver* bo;
 };
 

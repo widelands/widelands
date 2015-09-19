@@ -1973,9 +1973,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							prio += productionsites.size() * 5 + bf->water_nearby_;
 						}
 					}
-					//else if (!bo.inputs_.empty()) {
-							//; //do nothing
-					//}
 
 					if (prio <= 0) {
 						continue;
@@ -2053,7 +2050,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					temp_prio += 100;
 					temp_prio += bf->military_loneliness_ / 5;
 					if (bf->area_military_capacity_ < 22) {
-						temp_prio += (20 - bf->area_military_capacity_) * 35;
+						temp_prio += (22 - bf->area_military_capacity_) * 35;
 					}
 				} else if (bf->near_border_) {
 					temp_prio += 50;
@@ -3569,13 +3566,13 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		return true;
 	}
 
-	// doing nothing when failed count is too low
-	if (site.no_resources_count < 4) {
+	// to avoid problems with uint underflow, we discourage considerations below
+	if (gametime < 10 * 60 * 1000) {
 		return false;
 	}
 
-	// dismantling when the failed count is too high
-	if (site.no_resources_count > 12) {
+	// if the mine had not been upgraded within 8 min, it is dismantled
+	if (site.no_resources_since_ < gametime - 8 * 60 * 1000) {
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site);
@@ -4342,10 +4339,14 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 // this is called when a mine reports "out of resources"
 void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 
+	const uint32_t gametime = game().get_gametime();
+
 	// we must identify which mine matches the productionsite a note reffers to
 	for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i)
 		if (i->site == &site) {
-			i->no_resources_count += 1;
+			if (i->no_resources_since_ > gametime) {
+				i->no_resources_since_ = gametime;
+			}
 			break;
 		}
 }
@@ -4664,7 +4665,7 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
 			productionsites.back().stats_zero_ = 0;
-			productionsites.back().no_resources_count = 0;
+			productionsites.back().no_resources_since_ =  std::numeric_limits<uint32_t>::max();			
 			productionsites.back().bo->unoccupied_count_ += 1;
 			if (bo.is_shipyard_) {
 				marineTaskQueue_.push_back(kStopShipyard);
@@ -4681,6 +4682,7 @@ void DefaultAI::gain_building(Building& b) {
 			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time_ = game().get_gametime();
+			mines_.back().no_resources_since_ =  std::numeric_limits<uint32_t>::max();	
 			mines_.back().bo->unoccupied_count_ += 1;
 
 			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
