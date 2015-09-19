@@ -196,7 +196,7 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Ready")
+   wait_for_message("Expedition")
 
    --if current test requires second ship...
    if needs_second_ship then
@@ -233,7 +233,7 @@ function test_cancel_started_expedition_underway()
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Ready")
+   wait_for_message("Expedition")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -272,7 +272,7 @@ function test_cancel_when_port_space_was_reached()
 
    -- Send expedition to port space.
    port:start_expedition()
-   wait_for_message("Ready")
+   wait_for_message("Expedition")
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 
@@ -310,7 +310,7 @@ function test_transporting_works()
 
 
    port:start_expedition()
-   wait_for_message("Ready")
+   wait_for_message("Expedition")
 
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship

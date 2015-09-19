@@ -7,7 +7,7 @@ run(function()
 
    -- Send expedition to port space.
    port:start_expedition()
-   wait_for_message("Ready")
+   wait_for_message("Expedition")
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 

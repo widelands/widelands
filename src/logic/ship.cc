@@ -856,7 +856,7 @@ void Ship::start_task_expedition(Game& game) {
 	send_message(
 				game,
 				/** TRANSLATORS: Ship expedition ready */
-				pgettext("ship", "Ready"),
+				pgettext("ship", "Expedition"),
 				_("Expedition Ready"),
 				_("An expedition ship is waiting for your commands."),
 				"start_expedition.png");
