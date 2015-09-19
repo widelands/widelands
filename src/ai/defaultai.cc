@@ -2045,12 +2045,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}  // the building is not suitable for situation
 
+				// score here is a compound of various input values
+				// usually resources in vicinity, but when enemy is nearby
+				// additional bonus is added
 				int32_t temp_prio = 0;
 				if (bf->enemy_nearby_) {
 					temp_prio += 100;
 					temp_prio += bf->military_loneliness_ / 5;
-					if (bf->area_military_capacity_ < 20) {
-						temp_prio += (20 - bf->area_military_capacity_) * 30;
+					if (bf->area_military_capacity_ < 22) {
+						temp_prio += (20 - bf->area_military_capacity_) * 35;
 					}
 				} else if (bf->near_border_) {
 					temp_prio += 50;
@@ -2069,11 +2072,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// additional score for bigger buildings
 				int32_t prio_for_size = bo.desc->get_size() - 1;
 				if (bf->enemy_nearby_) {
-					prio_for_size *= 15;
+					prio_for_size *= 20;
 				} else {
 					prio_for_size *= 5;
 				}
-				temp_prio +=  prio_for_size;
+				temp_prio += prio_for_size;
 
 				// if place+building is good enough
 				if (temp_prio > target_military_score_) {
