@@ -26,12 +26,15 @@
 
 #include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h" // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
+#include "graphic/text/bidi.h"
 #include "graphic/wordwrap.h"
 
 namespace UI {
@@ -172,13 +175,33 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  */
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
+	//log("\nNOCOM **** Rendering with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
+	std::string text;
+	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
+		std::vector<std::string> words;
+		boost::split(words, lce.text, boost::is_any_of(" "));
+		for (const std::string& word: words) {
+			if (has_nonenglish_character(word.c_str())) {
+				text = (boost::format("%s %s") % string2bidi(word.c_str()) % text).str();
+			} else { // If a string only contains English characters, we render LTR anyway
+				text = (boost::format("%s %s") % text % word).str();
+			}
+		}
+		if (!text.empty()) { // Check in case an empty string was passed to the function
+			// Peel away the initial whitespace
+			if (text.front() == ' ') text = text.substr(1);
+			else if (text.back() == ' ') text = text.substr(0, text.size() - 1);
+		}
+	} else {
+		text = lce.text;
+	}
 
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
 	int width = 0;
-	if (TTF_SizeUTF8(font, lce.text.c_str(), &width, nullptr) < 0 || !width) {
+	if (TTF_SizeUTF8(font, text.c_str(), &width, nullptr) < 0 || !width) {
 		lce.width = 0;
 		lce.height = TTF_FontHeight(font);
 		return;
@@ -186,12 +209,12 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("FontHandler::render_line, an error : %s\n",
 			 TTF_GetError());
-		log("Text was: '%s'\n", lce.text.c_str());
+		log("Text was: '%s'\n", text.c_str());
 		return;
 	}
 

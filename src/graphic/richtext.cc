@@ -72,6 +72,7 @@ struct TextlineElement : Element {
 
 	void draw(RenderTarget & dst) override
 	{
+		// NOCOM Implement
 		assert(words.size());
 		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
 

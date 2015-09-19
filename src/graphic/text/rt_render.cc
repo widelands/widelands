@@ -33,6 +33,7 @@
 #include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
@@ -68,6 +69,7 @@ struct NodeStyle {
 	uint16_t font_size;
 	RGBColor font_color;
 	int font_style;
+	UI::FontSet::Direction direction;
 
 	uint8_t spacing;
 	HAlign halign;
@@ -333,6 +335,16 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Texture* TextNode::render(TextureCache* texture_cache) {
+	std:: string temp_txt = m_txt;
+	m_s.direction = m_s.fontset->direction();
+	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
+		if (has_nonenglish_character(m_txt.c_str())) {
+			temp_txt = string2bidi(m_txt.c_str());
+		} else { // If a string only contains English characters, we render LTR anyway
+			m_s.direction = UI::FontSet::Direction::kLeftToRight;
+		}
+	}
+
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	blit(Rect(0, 0, img.width(), img.height()),
@@ -683,15 +695,59 @@ protected:
 
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
 	TextStream ts(txt);
+	std::string word;
 
-	while (ts.pos() < txt.size()) {
-		size_t cpos = ts.pos();
-		ts.skip_ws();
-		if (ts.pos() != cpos)
-			nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
-		const string word = ts.till_any_or_end(" \t\n\r");
-		if (word.size())
-			nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
+		std::string previous_word;
+		std::vector<RenderNode*>::iterator it = nodes.begin();
+		std::vector<WordSpacerNode*> spacer_nodes;
+
+		while (ts.pos() < txt.size()) {
+			std::size_t cpos = ts.pos();
+			ts.skip_ws();
+			spacer_nodes.clear();
+
+			// We only know if the spacer goes to the left or right after having a look at the current word.
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+			}
+
+			word = ts.till_any_or_end(" \t\n\r");
+			if (!word.empty()) {
+				if (has_nonenglish_character(word.c_str()) || has_nonenglish_character(previous_word.c_str())) {
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						log("Insert at front: %s\n", word.c_str());
+						it = nodes.insert(nodes.begin(), spacer);
+					}
+					it = nodes.insert(nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word));
+				} else { // Sequences of Latin words go to the right from current position
+					if (it < nodes.end()) {
+						++it;
+					}
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						it = nodes.insert(it, spacer);
+						if (it < nodes.end()) {
+							++it;
+						}
+					}
+					log("Insert at iterator: %s\n", word.c_str());
+					it = nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
+				}
+			}
+			previous_word = word;
+		}
+	} else {  // LTR
+		while (ts.pos() < txt.size()) {
+			std::size_t cpos = ts.pos();
+			ts.skip_ws();
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+			}
+			word = ts.till_any_or_end(" \t\n\r");
+			if (!word.empty()) {
+				nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+			}
+		}
 	}
 }
 
@@ -734,10 +790,22 @@ public:
 		const AttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
 		if (a.has("align")) {
-			const string align = a["align"].get_string();
-			if (align == "left") m_ns.halign = HALIGN_LEFT;
-			else if (align == "right") m_ns.halign = HALIGN_RIGHT;
-			else if (align == "center" || align == "middle") m_ns.halign = HALIGN_CENTER;
+			const std::string align = a["align"].get_string();
+			if (align == "right") {
+				if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+					m_ns.halign = HALIGN_RIGHT;
+				} else {
+					m_ns.halign = HALIGN_LEFT;
+				}
+			} else if (align == "center" || align == "middle") {
+				m_ns.halign = HALIGN_CENTER;
+			} else {
+				if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+					m_ns.halign = HALIGN_LEFT;
+				} else {
+					m_ns.halign = HALIGN_RIGHT;
+				}
+			}
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
@@ -1003,6 +1071,10 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
 	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
+
+	// NOCOM testing BIDI
+	string2bidi("1 العربية - حاله اللعبه2\n23Català,456\n.עברית:789日本語12\n3ქართული4"
+					"\n56한국어78\n9मराठी12\n3Lietuvių4\n56မြန်မာ7\n89Русский123සිංහල45\n6Tiếng Việt789");
 }
 
 Renderer::~Renderer() {
@@ -1013,7 +1085,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 
 	NodeStyle default_style = {
 		fontset_, fontset_->serif(), 16,
-		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
+		RGBColor(0, 0, 0), IFont::DEFAULT, fontset_->direction(), 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};
 
