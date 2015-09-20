@@ -1107,26 +1107,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				}
 			}
 
-			//if (upcast(Building const, building, &base_immovable)) {
-				//if (upcast(ConstructionSite const, constructionsite, building)) {
-					//const BuildingDescr& target_descr = constructionsite->building();
-
-					//if (dynamic_cast<ProductionSiteDescr const*>(&target_descr)) {
-						//consider_productionsite_influence(
-						   //field,
-						   //immovables.at(i).coords,
-						   //get_building_observer(constructionsite->descr().name().c_str()));
-					//}
-				//}
-
-				////if (dynamic_cast<const ProductionSite*>(building)) { NOCOM
-					////consider_productionsite_influence(
-					   ////field,
-					   ////immovables.at(i).coords,
-					   ////get_building_observer(building->descr().name().c_str()));
-				////}
-			//}
-
 			if (immovables.at(i).object->has_attribute(tree_attr)) {
 				++field.trees_nearby_;
 			}
@@ -2045,41 +2025,38 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// score here is a compound of various input values
 				// usually resources in vicinity, but when enemy is nearby
 				// additional bonus is added
-				int32_t temp_prio = 0;
 				if (bf->enemy_nearby_) {
-					temp_prio += 100;
-					temp_prio += bf->military_loneliness_ / 5;
-					if (bf->area_military_capacity_ < 22) {
-						temp_prio += (22 - bf->area_military_capacity_) * 35;
-					}
+					//prio += 50;
+					prio += bf->military_loneliness_ / 3;
+					prio += (20 - bf->area_military_capacity_) * 25;
+					prio -= bo.build_material_shortage_  * 50;
+					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 50;
 				} else if (bf->near_border_) {
-					temp_prio += 50;
+					prio += 50;
+					prio -= bo.build_material_shortage_  * 100;
+					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 100;
 				}
-				temp_prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100;
-				temp_prio -= bo.build_material_shortage_  * 100;
-				temp_prio += bf->unowned_mines_pots_nearby_;
-				temp_prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 100;
-				temp_prio += bf->stones_nearby_ / 2;
-				temp_prio += bf->water_nearby_;
-				temp_prio += bf->distant_water_ * resource_necessity_water_needed_ / 100;
-				temp_prio += bf->military_loneliness_ / 10;
-				temp_prio += bf->trees_nearby_ / 3;
-				if (bf->portspace_nearby_ == ExtendedBool::kTrue) temp_prio += 25;
+				prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100;
+				prio += bf->unowned_mines_pots_nearby_;
+				prio += bf->stones_nearby_ / 2;
+				prio += bf->water_nearby_;
+				prio += bf->distant_water_ * resource_necessity_water_needed_ / 100;
+				prio += bf->military_loneliness_ / 10;
+				prio += bf->trees_nearby_ / 3;
+				if (bf->portspace_nearby_ == ExtendedBool::kTrue) prio += 25;
 
 				// additional score for bigger buildings
 				int32_t prio_for_size = bo.desc->get_size() - 1;
 				if (bf->enemy_nearby_) {
-					prio_for_size *= 20;
+					prio_for_size *= 30;
 				} else {
 					prio_for_size *= 5;
 				}
-				temp_prio += prio_for_size;
+				prio += prio_for_size;
 
-				// if place+building is good enough
-				if (temp_prio > target_military_score_) {
-					prio = temp_prio;
-				} else {
-					prio = 0;
+				// if place+building is not good enough
+				if (prio <= target_military_score_) {
+					continue;
 				}
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 
@@ -4782,6 +4759,17 @@ void DefaultAI::lose_building(const Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i) {
 				--wares.at(bo.inputs_.at(i)).consumers_;
 			}
+			// we are not able to reliable identify if lost building is counted in
+			// unconnected or unoccupied count, but we must adjust the value to
+			// avoid inconsistency
+			const uint32_t tc = bo.total_count();
+			if (bo.unconnected_count_ > tc) {
+				bo.unconnected_count_ = tc;
+			}
+			if (bo.unoccupied_count_ > tc) {
+				bo.unoccupied_count_ = tc;
+			}
+			
 		} else if (bo.type == BuildingObserver::MINE) {
 			for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end();
 			     ++i) {
@@ -4800,6 +4788,17 @@ void DefaultAI::lose_building(const Building& b) {
 			}
 
 			mines_per_type[bo.mines_].finished -= 1;
+
+			// we are not able to reliable identify if lost building is counted in
+			// unconnected or unoccupied count, but we must adjust the value to
+			// avoid inconsistency
+			const uint32_t tc = bo.total_count();
+			if (bo.unconnected_count_ > tc) {
+				bo.unconnected_count_ = tc;
+			}
+			if (bo.unoccupied_count_ > tc) {
+				bo.unoccupied_count_ = tc;
+			}
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 
