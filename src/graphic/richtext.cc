@@ -19,7 +19,6 @@
 
 #include "graphic/richtext.h"
 
-#include "base/log.h" // NOCOM
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -75,7 +74,6 @@ struct TextlineElement : Element {
 
 	void draw(RenderTarget & dst) override
 	{
-		// NOCOM alignment?
 		assert(words.size());
 		uint32_t spacewidth = style.calc_bare_width(" ");
 		bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
@@ -85,19 +83,16 @@ struct TextlineElement : Element {
 			std::vector<std::string> reordered_words;
 			std::string previous_word;
 			std::vector<std::string>::iterator it = reordered_words.begin();
-			//log("NOCOM parsing RTL\n");
 
 			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
 				const std::string& word = *source_it;
 				if (source_it != words.end()) {
 					if (has_nonenglish_character(word.c_str()) || has_nonenglish_character(previous_word.c_str())) {
-						// NOCOM log("Insert at front: %s\n", word.c_str());
 						it = reordered_words.insert(reordered_words.begin(), word);
 					} else { // Sequences of Latin words go to the right from current position
 						if (it < reordered_words.end()) {
 							++it;
 						}
-						// NOCOM log("Insert at iterator: %s\n", word.c_str());
 						it = reordered_words.insert(it, word);
 					}
 					previous_word = word;
@@ -305,14 +300,23 @@ struct TextBuilder {
 		} else {
 			int32_t alignref_left = 0;
 			int32_t alignref_right = rti.width;
+			bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
 			if (text_y < rti.height + images_height) {
 				if ((richtext->get_image_align() & Align_Horizontal) == Align_Right) {
-					alignref_right -= images_width + h_space;
+					if (is_rtl) {
+						alignref_right += images_width + h_space;
+					} else {
+						alignref_right -= images_width + h_space;
+					}
 				} else {
 					// Note: center image alignment with text is not properly supported
 					// It is unclear what the semantics should be.
-					alignref_left += images_width + h_space;
+					if (is_rtl) {
+						alignref_left -= images_width + h_space;
+					} else {
+						alignref_left += images_width + h_space;
+					}
 				}
 			}
 
@@ -320,13 +324,21 @@ struct TextBuilder {
 
 			switch (richtext->get_text_align() & Align_Horizontal) {
 			case Align_Right:
-				textleft = alignref_right - int32_t(linewidth);
+				if (is_rtl) {
+					textleft = alignref_left;
+				} else {
+					textleft = alignref_right - int32_t(linewidth);
+				}
 				break;
 			case Align_HCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
 			default:
-				textleft = alignref_left;
+				if (is_rtl) {
+					textleft = alignref_right - int32_t(linewidth);
+				} else {
+					textleft = alignref_left;
+				}
 				break;
 			}
 

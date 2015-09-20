@@ -26,6 +26,7 @@
 
 #include "base/utf8.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
@@ -99,7 +100,12 @@ uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	setup();
-	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
+	if (g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
+		// We need to parse the ligatures in order to get the actual characters in the text.
+		TTF_SizeUTF8(font->get_ttf_font(), string2bidi(text.c_str()).c_str(), &w, &h);
+	} else {
+		TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
+	}
 	return w;
 }
 

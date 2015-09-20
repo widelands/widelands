@@ -28,6 +28,8 @@
 #include "base/log.h"
 
 namespace {
+// TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
+// NOCOM(GunChleoc): Turn this into a proper class
 
 // Need to mirror () etc. for LTR languages, so we're sticking them in a map.
 const std::map<UChar, UChar> kSymmetricChars = {
