@@ -24,6 +24,7 @@
 
 #include <unicode/uchar.h>
 #include <unicode/unistr.h>
+#include <unicode/utypes.h>
 
 #include "base/log.h"
 
@@ -68,7 +69,8 @@ bool is_latin_char(UChar c) {
 }
 
 bool is_punctuation_char(UChar c) {
-	return c == 0x0021 ||  // !
+	return c == 0x0020 ||  // blank space
+			 c == 0x0021 ||  // !
 			 c == 0x002C ||  // ,
 			 c == 0x002D ||  // -
 			 c == 0x002E ||  // .
@@ -77,9 +79,7 @@ bool is_punctuation_char(UChar c) {
 			 c == 0x003B ||  // ;
 			 c == 0x003F ||  // ?
 			 c == 0x005C ||  // backslash
-			 c == 0x2018 ||  // ‘
-			 c == 0x2019 ||  // ’
-			 (c >= 0x2010 && c <= 0x2015); // en-dash, em-dash etc.
+			 (c >= 0x2000 && c <= 0x206F); // en-dash, em-dash etc.
 }
 
 
@@ -320,18 +320,50 @@ const char* icuchar2char(UChar convertme) {
 	return icustring2char(temp);
 }
 
+// Map no longer used Arabic presentation forms to standard forms
+const std::map<std::string, std::set<UBlockCode>> kCodeBlocks = {
+	{"latin", {
+		 UBlockCode::UBLOCK_BASIC_LATIN,
+		 UBlockCode::UBLOCK_BASIC_LATIN,
+		 UBlockCode::UBLOCK_LATIN_1_SUPPLEMENT,
+		 UBLOCK_LATIN_EXTENDED_A,
+		 UBLOCK_LATIN_EXTENDED_B,
+		 UBLOCK_LATIN_EXTENDED_C,
+		 UBLOCK_LATIN_EXTENDED_D,
+		 UBlockCode::UBLOCK_COMBINING_DIACRITICAL_MARKS,
+		 UBlockCode::UBLOCK_GENERAL_PUNCTUATION,
+		 UBlockCode::UBLOCK_SUPERSCRIPTS_AND_SUBSCRIPTS,
+		 UBlockCode::UBLOCK_CURRENCY_SYMBOLS,
+		 UBlockCode::UBLOCK_LATIN_EXTENDED_ADDITIONAL,
+		 UBlockCode::UBLOCK_GENERAL_PUNCTUATION,
+		 UBlockCode::UBLOCK_ARROWS,
+		 UBlockCode::UBLOCK_MATHEMATICAL_OPERATORS,
+	 }},
+};
+
+
+
+
+// http://unicode.org/faq/blocks_ranges.html
+// TODO(GunChleoc): We might need some more here - let's see how this goes.
+bool is_latin_character(UChar32 c) {
+	UBlockCode code = ublock_getCode(c);
+	assert(kCodeBlocks.count("latin") == 1);
+	return (kCodeBlocks.at("latin").count(code) == 1);
+}
+
 } // namespace
 
 namespace i18n {
 
 
-// True if a string does not contain English characters
-bool has_nonenglish_character(const char* input) {
+// True if a string does not contain Latin characters
+bool has_nonlatin_character(const char* input) {
 	bool result = false;
 	const icu::UnicodeString parseme(input);
 	for (int32_t i = 0; i < parseme.length(); ++i) {
-		UChar c = parseme.charAt(i);
-		if (!is_symmetric_char(c) && !is_numeric_char(c) && !is_latin_char(c) && !is_punctuation_char(c)) {
+		if (!is_latin_character(parseme.char32At(i))) {
+			//log("NOCOM has nonlatin: %s\n", icuchar2char(parseme.char32At(i)));
 			result = true;
 			break;
 		}
@@ -339,11 +371,11 @@ bool has_nonenglish_character(const char* input) {
 	return result;
 }
 
-// True if the strings do not contain English characters
-bool has_nonenglish_character(std::vector<std::string> input) {
+// True if the strings do not contain Latin characters
+bool has_nonlatin_character(std::vector<std::string> input) {
 	bool result = false;
 	for (const std::string& string: input) {
-		if (has_nonenglish_character(string.c_str())) {
+		if (has_nonlatin_character(string.c_str())) {
 			result = true;
 			break;
 		}

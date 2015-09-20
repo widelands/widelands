@@ -338,7 +338,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 	std:: string temp_txt = m_txt;
 	m_s.direction = m_s.fontset->direction();
 	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
-		if (i18n::has_nonenglish_character(m_txt.c_str())) {
+		if (i18n::has_nonlatin_character(m_txt.c_str())) {
 			temp_txt = i18n::string2bidi(i18n::make_ligatures(m_txt.c_str()));
 		} else { // If a string only contains English characters, we render LTR anyway
 			m_s.direction = UI::FontSet::Direction::kLeftToRight;
@@ -698,7 +698,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	std::string word;
 
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
-		 && i18n::has_nonenglish_character(txt.c_str())) {
+		 && i18n::has_nonlatin_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = nodes.begin();
 		std::vector<WordSpacerNode*> spacer_nodes;
@@ -715,7 +715,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
-				if (i18n::has_nonenglish_character(word.c_str()) || i18n::has_nonenglish_character(previous_word.c_str())) {
+				if (i18n::has_nonlatin_character(word.c_str()) || i18n::has_nonlatin_character(previous_word.c_str())) {
 					for (WordSpacerNode* spacer: spacer_nodes) {
 						log("Insert at front: %s\n", word.c_str());
 						it = nodes.insert(nodes.begin(), spacer);

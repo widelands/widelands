@@ -145,7 +145,6 @@ uint32_t FontHandler::get_fontheight
  */
 const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, const std::string & text)
 {
-	// NOCOM(GunChleoc): BiDI needs to be done here!
 	for (LineCache::iterator it = linecache.begin(); it != linecache.end(); ++it) {
 		if (it->style != style || it->text != text)
 			continue;
@@ -176,34 +175,23 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  */
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
-	//log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
+	log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
-	std::string text;
+	std::string renderme;
+
 	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft
-		 && i18n::has_nonenglish_character(lce.text.c_str())) {
-		std::vector<std::string> words;
-		boost::split(words, lce.text, boost::is_any_of(" "));
-		for (const std::string& word: words) {
-			if (i18n::has_nonenglish_character(word.c_str())) {
-				text = (boost::format("%s %s") % i18n::string2bidi(i18n::make_ligatures(word.c_str())) % text).str();
-			} else { // If a string only contains English characters, we render LTR anyway
-				text = (boost::format("%s %s") % text % word).str();
-			}
-		}
-		if (!text.empty()) { // Check in case an empty string was passed to the function
-			// Peel away the initial whitespace
-			if (text.front() == ' ') text = text.substr(1);
-			else if (text.back() == ' ') text = text.substr(0, text.size() - 1);
-		}
+		 && i18n::has_nonlatin_character(lce.text.c_str())) {
+		log("NOCOM bidi !\n");
+		renderme = i18n::string2bidi(i18n::make_ligatures(lce.text.c_str()));
 	} else {
-		text = lce.text;
+		renderme = i18n::make_ligatures(lce.text.c_str());
 	}
 
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
 	int width = 0;
-	if (TTF_SizeUTF8(font, text.c_str(), &width, nullptr) < 0 || !width) {
+	if (TTF_SizeUTF8(font, renderme.c_str(), &width, nullptr) < 0 || !width) {
 		lce.width = 0;
 		lce.height = TTF_FontHeight(font);
 		return;
@@ -211,12 +199,12 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, text.c_str(), sdl_fg);
+	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, renderme.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("FontHandler::render_line, an error : %s\n",
 			 TTF_GetError());
-		log("Text was: '%s'\n", text.c_str());
+		log("Text was: '%s'\n", renderme.c_str());
 		return;
 	}
 
@@ -241,7 +229,6 @@ void FontHandler::draw_text
 	boost::replace_all(copytext, "\\>", ">");
 	const LineCacheEntry & lce = d->get_line(style, copytext);
 
-	// NOCOM handle BiDi
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
