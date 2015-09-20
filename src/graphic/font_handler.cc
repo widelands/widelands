@@ -145,6 +145,7 @@ uint32_t FontHandler::get_fontheight
  */
 const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, const std::string & text)
 {
+	// NOCOM(GunChleoc): BiDI needs to be done here!
 	for (LineCache::iterator it = linecache.begin(); it != linecache.end(); ++it) {
 		if (it->style != style || it->text != text)
 			continue;
@@ -175,17 +176,17 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  */
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
-	//log("\nNOCOM **** Rendering with fh!! - %s\n", lce.text.c_str());
+	//log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string text;
 	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft
-		 && has_nonenglish_character(lce.text.c_str())) {
+		 && i18n::has_nonenglish_character(lce.text.c_str())) {
 		std::vector<std::string> words;
 		boost::split(words, lce.text, boost::is_any_of(" "));
 		for (const std::string& word: words) {
-			if (has_nonenglish_character(word.c_str())) {
-				text = (boost::format("%s %s") % string2bidi(word.c_str()) % text).str();
+			if (i18n::has_nonenglish_character(word.c_str())) {
+				text = (boost::format("%s %s") % i18n::string2bidi(i18n::make_ligatures(word.c_str())) % text).str();
 			} else { // If a string only contains English characters, we render LTR anyway
 				text = (boost::format("%s %s") % text % word).str();
 			}
@@ -240,6 +241,7 @@ void FontHandler::draw_text
 	boost::replace_all(copytext, "\\>", ">");
 	const LineCacheEntry & lce = d->get_line(style, copytext);
 
+	// NOCOM handle BiDi
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)

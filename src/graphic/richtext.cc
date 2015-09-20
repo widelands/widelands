@@ -79,7 +79,7 @@ struct TextlineElement : Element {
 		bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
 		// Reorder words for BiDi
-		if (is_rtl && has_nonenglish_character(words)) {
+		if (is_rtl && i18n::has_nonenglish_character(words)) {
 			std::vector<std::string> reordered_words;
 			std::string previous_word;
 			std::vector<std::string>::iterator it = reordered_words.begin();
@@ -87,7 +87,7 @@ struct TextlineElement : Element {
 			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
 				const std::string& word = *source_it;
 				if (source_it != words.end()) {
-					if (has_nonenglish_character(word.c_str()) || has_nonenglish_character(previous_word.c_str())) {
+					if (i18n::has_nonenglish_character(word.c_str()) || i18n::has_nonenglish_character(previous_word.c_str())) {
 						it = reordered_words.insert(reordered_words.begin(), word);
 					} else { // Sequences of Latin words go to the right from current position
 						if (it < reordered_words.end()) {

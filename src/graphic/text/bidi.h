@@ -23,9 +23,15 @@
 #include <string>
 #include <vector>
 
+#include "graphic/text/font_set.h"
+
 // BiDi support for RTL languages
-std::string string2bidi(const char* input);
-bool has_nonenglish_character(const char* input);
-bool has_nonenglish_character(std::vector<std::string> input);
+namespace i18n {
+	const char* make_ligatures(const char* input);
+	std::string string2bidi(const char* input);
+	bool has_nonenglish_character(const char* input);
+	bool has_nonenglish_character(std::vector<std::string> input);
+
+} // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_BIDI_H

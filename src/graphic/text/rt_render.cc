@@ -338,8 +338,8 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 	std:: string temp_txt = m_txt;
 	m_s.direction = m_s.fontset->direction();
 	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
-		if (has_nonenglish_character(m_txt.c_str())) {
-			temp_txt = string2bidi(m_txt.c_str());
+		if (i18n::has_nonenglish_character(m_txt.c_str())) {
+			temp_txt = i18n::string2bidi(i18n::make_ligatures(m_txt.c_str()));
 		} else { // If a string only contains English characters, we render LTR anyway
 			m_s.direction = UI::FontSet::Direction::kLeftToRight;
 		}
@@ -698,7 +698,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	std::string word;
 
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
-		 && has_nonenglish_character(txt.c_str())) {
+		 && i18n::has_nonenglish_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = nodes.begin();
 		std::vector<WordSpacerNode*> spacer_nodes;
@@ -715,7 +715,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
-				if (has_nonenglish_character(word.c_str()) || has_nonenglish_character(previous_word.c_str())) {
+				if (i18n::has_nonenglish_character(word.c_str()) || i18n::has_nonenglish_character(previous_word.c_str())) {
 					for (WordSpacerNode* spacer: spacer_nodes) {
 						log("Insert at front: %s\n", word.c_str());
 						it = nodes.insert(nodes.begin(), spacer);
@@ -731,7 +731,6 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 							++it;
 						}
 					}
-					log("Insert at iterator: %s\n", word.c_str());
 					it = nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
 				}
 			}
@@ -1074,8 +1073,8 @@ Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::Fon
 	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
 
 	// NOCOM testing BIDI
-	string2bidi("1 العربية - حاله اللعبه2\n23Català,456\n.עברית:789日本語12\n3ქართული4"
-					"\n56한국어78\n9मराठी12\n3Lietuvių4\n56မြန်မာ7\n89Русский123සිංහල45\n6Tiếng Việt789");
+	//i18n::string2bidi(i18n::make_ligatures("1 العربية - حاله اللعبه2\n23Català,456\n.עברית:789日本語12\n3ქართული4"
+	//				"\n56한국어78\n9मराठी12\n3Lietuvių4\n56မြန်မာ7\n89Русский123සිංහල45\n6Tiếng Việt789"));
 }
 
 Renderer::~Renderer() {

@@ -322,6 +322,8 @@ const char* icuchar2char(UChar convertme) {
 
 } // namespace
 
+namespace i18n {
+
 
 // True if a string does not contain English characters
 bool has_nonenglish_character(const char* input) {
@@ -349,40 +351,16 @@ bool has_nonenglish_character(std::vector<std::string> input) {
 	return result;
 }
 
-
 // BiDi support for RTL languages
-std::string string2bidi(const char* input) {
+// Contracts glyphs into their ligatures
+const char* make_ligatures(const char* input) {
 	const icu::UnicodeString parseme(input);
-	icu::UnicodeString stack;
-	icu::UnicodeString temp_stack;
+	icu::UnicodeString queue;
 	UChar zero = 0x0030; // 0 to initialize with something non-Latin
 	UChar next = zero; // 0 to initialize with something non-Latin
 	UChar previous = zero; // 0 to initialize with something non-Latin
-	for (int i = parseme.length() - 1; i >= 0; --i) {
+	for (int i = 0; i < parseme.length(); ++i) {
 		UChar c = parseme.charAt(i);
-		if (i > 0) {
-			previous = parseme.charAt(i - 1);
-		}
-		// LTR characters need to be turned around in a temp stack,
-		// because we will reverse everything on the bottom for RTL
-		temp_stack = "";
-		while (i >= 0 &&
-				(is_numeric_char(c) ||
-				 is_latin_char(c) ||
-				 is_symmetric_char(c) ||
-				 ((is_latin_char(previous) || is_punctuation_char(previous) ) && is_punctuation_char(c)))) {
-			if (is_symmetric_char(c)) {
-				c = mirror_symmetric_char(c);
-			}
-			temp_stack += c;
-			c = parseme.charAt(--i);
-			if (i > 0) {
-				previous = parseme.charAt(i - 1);
-			}
-		}
-		for (int32_t j = temp_stack.length() - 1; j >= 0; --j) {
-			stack += temp_stack.charAt(j);
-		}
 
 		// Substitution for Arabic characters
 		previous = (i > 0) ? parseme.charAt(i - 1) : zero;
@@ -405,7 +383,7 @@ std::string string2bidi(const char* input) {
 				if (kArabicLigatures.count({previous , c}) == 1) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
-					--i;
+					++i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : zero;
 				}
 			} catch (std::out_of_range e) {
@@ -426,7 +404,7 @@ std::string string2bidi(const char* input) {
 				if (kArabicLigatures.count({previous , c}) == 1) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
-					--i;
+					++i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : zero;
 					// Skip diacritics for position analysis
 					for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
@@ -475,6 +453,55 @@ std::string string2bidi(const char* input) {
 		// TODO(GunChleoc): We sometimes get "Not a Character" - find out why.
 		if (c != 0xFFFF) {
 			// Add the current RTL character
+			queue += c;
+		}
+	}
+
+	std::string result;
+	queue.toUTF8String(result);
+	//log("NOCOM Ligatures result: %s\n", result.c_str());
+
+	return result.c_str();
+}
+
+
+// BiDi support for RTL languages
+// This turns the logical order of the glyphs into the display order.
+std::string string2bidi(const char* input) {
+	const icu::UnicodeString parseme(input);
+	icu::UnicodeString stack;
+	icu::UnicodeString temp_stack;
+	UChar zero = 0x0030; // 0 to initialize with something non-Latin
+	UChar previous = zero; // 0 to initialize with something non-Latin
+	for (int i = parseme.length() - 1; i >= 0; --i) {
+		UChar c = parseme.charAt(i);
+		if (i > 0) {
+			previous = parseme.charAt(i - 1);
+		}
+		// LTR characters need to be turned around in a temp stack,
+		// because we will reverse everything on the bottom for RTL
+		temp_stack = "";
+		while (i >= 0 &&
+				(is_numeric_char(c) ||
+				 is_latin_char(c) ||
+				 is_symmetric_char(c) ||
+				 ((is_latin_char(previous) || is_punctuation_char(previous) ) && is_punctuation_char(c)))) {
+			if (is_symmetric_char(c)) {
+				c = mirror_symmetric_char(c);
+			}
+			temp_stack += c;
+			c = parseme.charAt(--i);
+			if (i > 0) {
+				previous = parseme.charAt(i - 1);
+			}
+		}
+		for (int32_t j = temp_stack.length() - 1; j >= 0; --j) {
+			stack += temp_stack.charAt(j);
+		}
+
+		// TODO(GunChleoc): We sometimes get "Not a Character" - find out why.
+		if (c != 0xFFFF) {
+			// Add the current RTL character
 			stack += c;
 		}
 	}
@@ -485,3 +512,5 @@ std::string string2bidi(const char* input) {
 
 	return result;
 }
+
+} // namespace UI
