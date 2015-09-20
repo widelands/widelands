@@ -335,17 +335,17 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Texture* TextNode::render(TextureCache* texture_cache) {
-	std:: string temp_txt = m_txt;
+	std::string temp_txt = i18n::make_ligatures(m_txt.c_str());
 	m_s.direction = m_s.fontset->direction();
 	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
-		if (i18n::has_nonlatin_character(m_txt.c_str())) {
-			temp_txt = i18n::string2bidi(i18n::make_ligatures(m_txt.c_str()));
+		if (i18n::has_nonlatin_character(temp_txt.c_str())) {
+			temp_txt = i18n::string2bidi(temp_txt.c_str());
 		} else { // If a string only contains English characters, we render LTR anyway
 			m_s.direction = UI::FontSet::Direction::kLeftToRight;
 		}
 	}
 
-	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& img = m_font.render(temp_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	blit(Rect(0, 0, img.width(), img.height()),
 	     img,
@@ -696,37 +696,36 @@ protected:
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
 	TextStream ts(txt);
 	std::string word;
+	//log("Rendering %s\n", txt.c_str()); // NOCOM
 
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
 		 && i18n::has_nonlatin_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = nodes.begin();
-		std::vector<WordSpacerNode*> spacer_nodes;
 
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-			spacer_nodes.clear();
 
 			// We only know if the spacer goes to the left or right after having a look at the current word.
-			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
-			}
+			bool add_spacer = ts.pos() != cpos;
 
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
-				if (i18n::has_nonlatin_character(word.c_str()) || i18n::has_nonlatin_character(previous_word.c_str())) {
-					for (WordSpacerNode* spacer: spacer_nodes) {
-						log("Insert at front: %s\n", word.c_str());
-						it = nodes.insert(nodes.begin(), spacer);
+				if (i18n::has_nonlatin_character(word.c_str()) ||
+					 i18n::has_nonlatin_character(previous_word.c_str())) {
+					if (add_spacer) {
+						//log("Insert spacer at front: %s\n", word.c_str()); // NOCOM
+						it = nodes.insert(nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
 					}
 					it = nodes.insert(nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < nodes.end()) {
 						++it;
 					}
-					for (WordSpacerNode* spacer: spacer_nodes) {
-						it = nodes.insert(it, spacer);
+					if (add_spacer) {
+						//log("Insert spacer at back: %s\n", word.c_str()); // NOCOM
+						it = nodes.insert(it, new WordSpacerNode(font_cache_.get_font(&ns), ns));
 						if (it < nodes.end()) {
 							++it;
 						}
@@ -740,7 +739,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+			if (ts.pos() != cpos) {
 				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
