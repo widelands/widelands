@@ -78,54 +78,43 @@ struct TextlineElement : Element {
 		uint32_t spacewidth = style.calc_bare_width(" ");
 		bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
+		std::vector<std::string> result_words;
+		std::vector<std::string>::iterator it = result_words.begin();
+
 		// Reorder words for BiDi
 		if (is_rtl && i18n::has_nonenglish_character(words)) {
-			std::vector<std::string> reordered_words;
 			std::string previous_word;
-			std::vector<std::string>::iterator it = reordered_words.begin();
-
 			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
-				const std::string& word = *source_it;
+				const std::string& word = i18n::make_ligatures((*source_it).c_str());
 				if (source_it != words.end()) {
 					if (i18n::has_nonenglish_character(word.c_str()) || i18n::has_nonenglish_character(previous_word.c_str())) {
-						it = reordered_words.insert(reordered_words.begin(), word);
+						it = result_words.insert(result_words.begin(), word);
 					} else { // Sequences of Latin words go to the right from current position
-						if (it < reordered_words.end()) {
+						if (it < result_words.end()) {
 							++it;
 						}
-						it = reordered_words.insert(it, word);
+						it = result_words.insert(it, word);
 					}
 					previous_word = word;
 				}
 			}
-			// Now render
-			uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), reordered_words[0]);
-
-			it = reordered_words.begin() + 1;
-			if (it != reordered_words.end()) {
-				do {
-					if (style.underline)
-						x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
-					else
-						x += spacewidth;
-					x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
-				} while (it != reordered_words.end());
-			}
-
 		} else {
-			// Render LTR
-			uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
-
-			std::vector<std::string>::const_iterator it = words.begin() + 1;
-			if (it != words.end()) {
-				do {
-					if (style.underline)
-						x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
-					else
-						x += spacewidth;
-					x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
-				} while (it != words.end());
+			for (const std::string& word: words) {
+				result_words.push_back(i18n::make_ligatures(word.c_str()));
 			}
+		}
+		// Now render
+		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), result_words[0]);
+
+		it = result_words.begin() + 1;
+		if (it != result_words.end()) {
+			do {
+				if (style.underline)
+					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+				else
+					x += spacewidth;
+				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
+			} while (it != result_words.end());
 		}
 	}
 

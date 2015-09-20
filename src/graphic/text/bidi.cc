@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/text/rt_render.h"
+#include "graphic/text/bidi.h"
 
 #include <map>
 #include <string>
