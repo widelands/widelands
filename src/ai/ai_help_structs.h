@@ -308,6 +308,10 @@ struct BuildableField {
 	     portspace_nearby_(Widelands::ExtendedBool::kUnset),
 	     max_buildcap_nearby_(0) {
 	}
+
+	int32_t own_military_sites_nearby_(){
+		return military_stationed_ + military_unstationed_;
+	}
 };
 
 struct MineableField {
@@ -416,9 +420,9 @@ struct BuildingObserver {
 	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	int32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
-	
+
 	uint32_t unoccupied_count_;
-	
+
 	bool build_material_shortage_;
 
 	int32_t total_count() const {
