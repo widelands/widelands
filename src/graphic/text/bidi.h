@@ -27,10 +27,10 @@
 
 // BiDi support for RTL languages
 namespace i18n {
-	const char* make_ligatures(const char* input);
+	std::string make_ligatures(const char* input);
 	std::string string2bidi(const char* input);
-	bool has_nonlatin_character(const char* input);
-	bool has_nonlatin_character(std::vector<std::string> input);
+	bool has_rtl_character(const char* input);
+	bool has_rtl_character(std::vector<std::string> input);
 
 } // namespace UI
 

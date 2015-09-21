@@ -26,6 +26,7 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h" // NOCOM
 
 namespace UI {
 
@@ -284,7 +285,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			continue;
 
 		g_fh->draw_text
-			(dst, m_style, where, m_lines[line].text, Align(align & Align_Horizontal),
+			(dst, m_style, where, i18n::make_ligatures(m_lines[line].text.c_str()), Align(align & Align_Horizontal),
 			 line == caretline ? caretpos : std::numeric_limits<uint32_t>::max());
 	}
 }

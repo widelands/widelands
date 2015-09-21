@@ -100,12 +100,9 @@ uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	setup();
-	if (g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
-		// We need to parse the ligatures in order to get the actual characters in the text.
-		TTF_SizeUTF8(font->get_ttf_font(), i18n::string2bidi(i18n::make_ligatures(text.c_str())).c_str(), &w, &h);
-	} else {
-		TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
-	}
+	// We need to parse the ligatures in order to get the actual characters in the text.
+	// NOCOM TTF_SizeUTF8(font->get_ttf_font(), i18n::make_ligatures(text.c_str()), &w, &h);
+	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
 }
 

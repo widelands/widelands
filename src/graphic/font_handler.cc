@@ -175,15 +175,15 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  */
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
-	log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
+	//log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string renderme;
 
 	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft
-		 && i18n::has_nonlatin_character(lce.text.c_str())) {
-		log("NOCOM bidi !\n");
-		renderme = i18n::string2bidi(i18n::make_ligatures(lce.text.c_str()));
+		 && i18n::has_rtl_character(lce.text.c_str())) {
+		//log("NOCOM bidi !\n");
+		renderme = i18n::string2bidi(i18n::make_ligatures(lce.text.c_str()).c_str());
 	} else {
 		renderme = i18n::make_ligatures(lce.text.c_str());
 	}
@@ -227,6 +227,7 @@ void FontHandler::draw_text
 	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
 	boost::replace_all(copytext, "\\>", ">");
+	copytext = i18n::make_ligatures(copytext.c_str()); // NOCOM
 	const LineCacheEntry & lce = d->get_line(style, copytext);
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);

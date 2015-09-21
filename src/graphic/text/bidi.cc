@@ -72,7 +72,7 @@ bool is_punctuation_char(UChar c) {
 	return c == 0x0020 ||  // blank space
 			 c == 0x0021 ||  // !
 			 c == 0x002C ||  // ,
-			 c == 0x002D ||  // -
+			 c == 0x002D ||  // - // NOCOM " - " becomes "-  "
 			 c == 0x002E ||  // .
 			 c == 0x002F ||  // /
 			 c == 0x003A ||  // :
@@ -320,37 +320,57 @@ const char* icuchar2char(UChar convertme) {
 	return icustring2char(temp);
 }
 
-// Map no longer used Arabic presentation forms to standard forms
-const std::map<std::string, std::set<UBlockCode>> kCodeBlocks = {
-	{"latin", {
-		 UBlockCode::UBLOCK_BASIC_LATIN,
-		 UBlockCode::UBLOCK_BASIC_LATIN,
-		 UBlockCode::UBLOCK_LATIN_1_SUPPLEMENT,
-		 UBLOCK_LATIN_EXTENDED_A,
-		 UBLOCK_LATIN_EXTENDED_B,
-		 UBLOCK_LATIN_EXTENDED_C,
-		 UBLOCK_LATIN_EXTENDED_D,
-		 UBlockCode::UBLOCK_COMBINING_DIACRITICAL_MARKS,
-		 UBlockCode::UBLOCK_GENERAL_PUNCTUATION,
-		 UBlockCode::UBLOCK_SUPERSCRIPTS_AND_SUBSCRIPTS,
-		 UBlockCode::UBLOCK_CURRENCY_SYMBOLS,
-		 UBlockCode::UBLOCK_LATIN_EXTENDED_ADDITIONAL,
-		 UBlockCode::UBLOCK_GENERAL_PUNCTUATION,
-		 UBlockCode::UBLOCK_ARROWS,
-		 UBlockCode::UBLOCK_MATHEMATICAL_OPERATORS,
+const std::set<std::string> kRTLScripts = {
+	{"arabic", "devanagari", "hebrew", "mandaic", "nko", "samaritan", "syriac", "thaana"},
+};
+
+// http://unicode.org/faq/blocks_ranges.html
+// http://unicode-table.com/en/blocks/
+// TODO(GunChleoc): We might need some more here - let's see how this goes.
+const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
+	{"arabic", {
+		 UBlockCode::UBLOCK_ARABIC,
+		 UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+		 UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
+		 UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+		 UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
+		 UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
+	 }},
+	{"devanagari", {
+		 UBlockCode::UBLOCK_DEVANAGARI,
+		 UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+	 }},
+	{"hebrew", {
+		 UBlockCode::UBLOCK_HEBREW,
+	 }},
+	{"mandaic", {
+		 UBlockCode::UBLOCK_MANDAIC,
+	 }},
+	{"nko", {
+		 UBlockCode::UBLOCK_NKO,
+	 }},
+	{"samaritan", {
+		 UBlockCode::UBLOCK_SAMARITAN,
+	 }},
+	{"syriac", {
+		 UBlockCode::UBLOCK_SYRIAC,
+	 }},
+	{"thaana", {
+		 UBlockCode::UBLOCK_THAANA,
 	 }},
 };
 
-
-
-
-// http://unicode.org/faq/blocks_ranges.html
-// TODO(GunChleoc): We might need some more here - let's see how this goes.
-bool is_latin_character(UChar32 c) {
+bool is_rtl_character(UChar32 c) {
 	UBlockCode code = ublock_getCode(c);
-	assert(kCodeBlocks.count("latin") == 1);
-	return (kCodeBlocks.at("latin").count(code) == 1);
+	for (std::string script : kRTLScripts) {
+		assert(kRTLCodeBlocks.count(script) == 1);
+		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
+			return true;
+		}
+	}
+	return false;
 }
+
 
 } // namespace
 
@@ -358,12 +378,11 @@ namespace i18n {
 
 
 // True if a string does not contain Latin characters
-bool has_nonlatin_character(const char* input) {
+bool has_rtl_character(const char* input) {
 	bool result = false;
 	const icu::UnicodeString parseme(input);
 	for (int32_t i = 0; i < parseme.length(); ++i) {
-		if (!is_latin_character(parseme.char32At(i))) {
-			//log("NOCOM has nonlatin: %s\n", icuchar2char(parseme.char32At(i)));
+		if (is_rtl_character(parseme.char32At(i))) {
 			result = true;
 			break;
 		}
@@ -372,10 +391,10 @@ bool has_nonlatin_character(const char* input) {
 }
 
 // True if the strings do not contain Latin characters
-bool has_nonlatin_character(std::vector<std::string> input) {
+bool has_rtl_character(std::vector<std::string> input) {
 	bool result = false;
 	for (const std::string& string: input) {
-		if (has_nonlatin_character(string.c_str())) {
+		if (has_rtl_character(string.c_str())) {
 			result = true;
 			break;
 		}
@@ -385,18 +404,18 @@ bool has_nonlatin_character(std::vector<std::string> input) {
 
 // BiDi support for RTL languages
 // Contracts glyphs into their ligatures
-const char* make_ligatures(const char* input) {
+std::string make_ligatures(const char* input) {
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString queue;
-	UChar zero = 0x0030; // 0 to initialize with something non-Latin
-	UChar next = zero; // 0 to initialize with something non-Latin
-	UChar previous = zero; // 0 to initialize with something non-Latin
+	UChar not_a_character = 0xFFFF;
+	UChar next = not_a_character;
+	UChar previous = not_a_character;
 	for (int i = 0; i < parseme.length(); ++i) {
 		UChar c = parseme.charAt(i);
 
 		// Substitution for Arabic characters
-		previous = (i > 0) ? parseme.charAt(i - 1) : zero;
-		next = (i < (parseme.length() - 1)) ? parseme.charAt(i + 1) : zero;
+		previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
+		next = (i < (parseme.length() - 1)) ? parseme.charAt(i + 1) : not_a_character;
 
 		if (kArabicDiacritics.count(c) == 1) {
 			try {
@@ -416,7 +435,7 @@ const char* make_ligatures(const char* input) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					++i;
-					previous = (i > 0) ? parseme.charAt(i - 1) : zero;
+					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
@@ -437,7 +456,7 @@ const char* make_ligatures(const char* input) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					++i;
-					previous = (i > 0) ? parseme.charAt(i - 1) : zero;
+					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 					// Skip diacritics for position analysis
 					for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
 						previous = parseme.charAt(k);
@@ -493,7 +512,7 @@ const char* make_ligatures(const char* input) {
 	queue.toUTF8String(result);
 	//log("NOCOM Ligatures result: %s\n", result.c_str());
 
-	return result.c_str();
+	return result;
 }
 
 
@@ -503,8 +522,8 @@ std::string string2bidi(const char* input) {
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString stack;
 	icu::UnicodeString temp_stack;
-	UChar zero = 0x0030; // 0 to initialize with something non-Latin
-	UChar previous = zero; // 0 to initialize with something non-Latin
+	UChar not_a_character = 0xFFFF;
+	UChar previous = not_a_character;
 	for (int i = parseme.length() - 1; i >= 0; --i) {
 		UChar c = parseme.charAt(i);
 		if (i > 0) {

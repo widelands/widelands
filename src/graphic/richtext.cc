@@ -82,12 +82,12 @@ struct TextlineElement : Element {
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (is_rtl && i18n::has_nonlatin_character(words)) {
+		if (is_rtl && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
 				const std::string& word = i18n::make_ligatures((*source_it).c_str());
 				if (source_it != words.end()) {
-					if (i18n::has_nonlatin_character(word.c_str()) || i18n::has_nonlatin_character(previous_word.c_str())) {
+					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
 					} else { // Sequences of Latin words go to the right from current position
 						if (it < result_words.end()) {
@@ -458,7 +458,8 @@ void RichText::parse(const std::string & rtext)
 				bbox.h = text.style.font->height();
 
 				do {
-					uint32_t wordwidth = text.style.calc_bare_width(words[word_cnt + nrwords]);
+					uint32_t wordwidth =
+							text.style.calc_bare_width(i18n::make_ligatures(words[word_cnt + nrwords].c_str()));
 
 					if (nrwords)
 						wordwidth += text.spacewidth;
