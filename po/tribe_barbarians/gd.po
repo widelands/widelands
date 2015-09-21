@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 08:12+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
+"PO-Revision-Date: 2015-09-15 11:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -482,7 +482,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr "Mur urrainn dhut còmhnaidh a ghabhail ann an togalaichean ùra an airm on a tha na saighdearan air ruith ort, cleachd putan na saighde sìos gus àitichean-fuirich a thoirt air falbh on togalach seo. Cuideachd, ’s urrainn dhut briogadh air saighdear ach an tig e a-mach."
+msgstr "Mur urrainn dhut còmhnaidh a ghabhail ann an togalaichean ùra an airm on a tha na saighdearan air ruith ort, cleachd putan na saighde sìos gus àitichean-fuirich a thoirt air falbh on togalach seo. Cuideachd, ’s urrainn dhut briogadh air saighdear ach an dig e a-mach."
 
 #: ../../tribes/barbarians/battlearena/conf:34
 #: ../../tribes/barbarians/trainingcamp/conf:47
@@ -1652,7 +1652,7 @@ msgid ""
 "Stonford in the year of the great flood. <br> The same man had all the 244 "
 "granite blocks ready only a week later, and they still fortify the city’s "
 "levee."
-msgstr "Seo an fhreagairt a thug am mèinnear Rimbert – air a chuireadh Rimbert aonarain an uairsin – nuair a chaidh iarraidh dha gun a bhith a’ seasamh aig coinneamh èiginneach ann an Stonford ann am bliadhna na tuile mòire.<br>Cha tug e ach seachdain gus an robh an 244 bloca graineil deiseil aig an dearbh dhuine is tha iad fhathast a’ neartachadh banca-tuile a’ bhaile."
+msgstr "Seo an fhreagairt a thug am mèinnear Rimbert – air a chuireadh Rimbert aonarain an uairsin – nuair a chaidh iarraidh dha gun a bhith a’ seasamh aig coinneamh èiginneach ann an Stonford ann am bliadhna na tuile mòire.<br>Cha dug e ach seachdain gus an robh an 244 bloca graineil deiseil aig an dearbh dhuine is tha iad fhathast a’ neartachadh banca-tuile a’ bhaile."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
