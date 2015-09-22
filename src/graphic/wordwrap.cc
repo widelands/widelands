@@ -129,7 +129,8 @@ void WordWrap::compute_end_of_line
 	}
 
 	// Optimism: perhaps the entire line fits?
-	if (m_style.calc_bare_width(text.substr(line_start, orig_end - line_start)) <= m_wrapwidth) {
+	// NOCOM(GunChleoc): Multiple calls of make_ligatures are inefficient.
+	if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str())) <= m_wrapwidth) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -146,7 +147,7 @@ void WordWrap::compute_end_of_line
 	while (end_upper - end_lower > 4) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(text.substr(line_start, mid - line_start)) <= m_wrapwidth) {
+		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str())) <= m_wrapwidth) {
 			end_lower = mid;
 		} else {
 			end_upper = mid - 1;
@@ -166,7 +167,7 @@ void WordWrap::compute_end_of_line
 			break; // we already know that this cannot possibly fit
 
 		// check whether the next word still fits
-		if (m_style.calc_bare_width(text.substr(line_start, nextspace - line_start)) > m_wrapwidth)
+		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str())) > m_wrapwidth)
 			break;
 
 		space = nextspace;
@@ -183,7 +184,7 @@ void WordWrap::compute_end_of_line
 	while (end_upper > end_lower) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(text.substr(line_start, mid - line_start)) <= m_wrapwidth)
+		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str())) <= m_wrapwidth)
 			end_lower = mid;
 		else
 			end_upper = mid - 1;
