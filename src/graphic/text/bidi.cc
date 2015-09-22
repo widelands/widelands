@@ -371,6 +371,43 @@ bool is_rtl_character(UChar32 c) {
 	return false;
 }
 
+// Helper function for make_ligatures.
+// Arabic word characters have 4 forms to connect to each other:
+// Isolated, Initial, Medial, and Final.
+// - Isolated forms are the "canonical" forms and have no connection.
+// - Initial forms have a connection to the following letter.
+// - Medial forms have connections to both sides.
+// - Final forms have a connection to the preceding letter.
+// - All characters have an Isolated and a Final form.
+// - All characters that have a Medial form also have a Initial form and vice versa.
+// If a letter is in the middle of a word and the preceding letter has no connection pointing
+// towards it, pick the Initial or Isolated form (depending on if it is followed by another
+// letter) etc.
+UChar find_arabic_letter_form(UChar c, UChar previous, UChar next) {
+	if (kArabicFinalChars.count(previous) == 0) {  // Start of word
+		if (kArabicInitialChars.count(c) == 1) {  // Link to next if character available
+			c = kArabicInitialChars.at(c);
+		}
+	} else if (kArabicFinalChars.count(next) == 0) {  // End of word
+		if (kArabicMedialChars.count(previous) == 1) {  // Link to previous if possible
+			c = kArabicFinalChars.at(c);
+		}
+	} else { // Middle of word
+		if (kArabicMedialChars.count(previous) == 1) {  // Link to previous if possible
+			if (kArabicMedialChars.count(c) == 1) {
+				c = kArabicMedialChars.at(c);
+			} else {
+				c = kArabicFinalChars.at(c);
+			}
+		} else {  // Link to next if character available
+			if (kArabicInitialChars.count(c) == 1) {
+				c = kArabicInitialChars.at(c);
+			}
+		}
+	}
+	return c;
+}
+
 
 } // namespace
 
@@ -404,14 +441,16 @@ bool has_rtl_character(std::vector<std::string> input) {
 
 // BiDi support for RTL languages
 // Contracts glyphs into their ligatures
-// NOCOM(GunChleoc): nūn (end) = FEE6, general = 0646, isolated = FEE5 is missing! cf. description for "The pass through the Mountains"
+// NOCOM(GunChleoc): Description for "The pass through the Mountains"
+// (Not OK in fh1) Ligature missing kāf after lām (lam is final instead of medial) // بمملكتيهما // displayed as // بممل كتيهما
+
 std::string make_ligatures(const char* input) {
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString queue;
 	UChar not_a_character = 0xFFFF;
 	UChar next = not_a_character;
 	UChar previous = not_a_character;
-	for (int i = 0; i < parseme.length(); ++i) {
+	for (int i = parseme.length() - 1; i >= 0; --i) {
 		UChar c = parseme.charAt(i);
 
 		// Substitution for Arabic characters
@@ -435,7 +474,7 @@ std::string make_ligatures(const char* input) {
 				if (kArabicLigatures.count({previous , c}) == 1) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
-					++i;
+					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
 			} catch (std::out_of_range e) {
@@ -456,46 +495,14 @@ std::string make_ligatures(const char* input) {
 				if (kArabicLigatures.count({previous , c}) == 1) {
 					c = kArabicLigatures.at({previous , c});
 					// Now skip 1 letter, since we have just combined 2 letters
-					++i;
+					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 					// Skip diacritics for position analysis
 					for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
 						previous = parseme.charAt(k);
 					}
 				}
-
-				// Arabic word characters have 4 forms to connect to each other:
-				// Isolated, Initial, Medial, and Final.
-				// - Isolated forms are the "canonical" forms and have no connection.
-				// - Initial forms have a connection to the following letter.
-				// - Medial forms have connections to both sides.
-				// - Final forms have a connection to the preceding letter.
-				// - All characters have an Isolated and a Final form.
-				// - All characters that have a Medial form also have a Initial form and vice versa.
-				// If a letter is in the middle of a word and the preceding letter has no connection pointing
-				// towards it, pick the Initial or Isolated form (depending on if it is followed by another
-				// letter) etc.
-				if (kArabicFinalChars.count(previous) == 0) {  // Start of word
-					if (kArabicInitialChars.count(c) == 1) {  // Link to next if character available
-						c = kArabicInitialChars.at(c);
-					}
-				} else if (kArabicFinalChars.count(next) == 0) {  // End of word
-					if (kArabicMedialChars.count(previous) == 1) {  // Link to previous if possible
-						c = kArabicFinalChars.at(c);
-					}
-				} else { // Middle of word
-					if (kArabicMedialChars.count(previous) == 1) {  // Link to previous if possible
-						if (kArabicMedialChars.count(c) == 1) {
-							c = kArabicMedialChars.at(c);
-						} else {
-							c = kArabicFinalChars.at(c);
-						}
-					} else {  // Link to next if character available
-						if (kArabicInitialChars.count(c) == 1) {
-							c = kArabicInitialChars.at(c);
-						}
-					}
-				}
+				c = find_arabic_letter_form(c, previous, next);
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
 				assert(false);
@@ -505,7 +512,7 @@ std::string make_ligatures(const char* input) {
 		// TODO(GunChleoc): We sometimes get "Not a Character" - find out why.
 		if (c != 0xFFFF) {
 			// Add the current RTL character
-			queue += c;
+			queue.insert(0, c);
 		}
 	}
 
