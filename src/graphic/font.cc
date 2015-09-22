@@ -66,7 +66,7 @@ Font::Font(const std::string & name, int size)
 	if (!ops)
 		throw wexception("could not load font!: RWops Pointer invalid");
 
-	m_font = TTF_OpenFontIndexRW(ops, 1, size + UI::g_fh1->fontset().size_offset(), 0);
+	m_font = TTF_OpenFontIndexRW(ops, 1, size, 0);
 	if (!m_font)
 		throw wexception("could not load font!: %s", TTF_GetError());
 
@@ -130,6 +130,7 @@ uint32_t Font::lineskip() const
  */
 Font * Font::get(const std::string & name, int size)
 {
+	size += UI::g_fh1->fontset().size_offset();
 	FontDescr descr;
 	descr.name = name;
 	descr.size = size;

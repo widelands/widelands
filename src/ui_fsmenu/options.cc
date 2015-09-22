@@ -439,8 +439,11 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
 
 				// We have to do the BiDi thing explicitly here, because of the multiple languages.
-				if (fontset->direction() != UI::g_fh1->fontset().direction()) {
+				if (fontset->direction() == UI::FontSet::Direction::kRightToLeft &&
+					 fontset->direction() != UI::g_fh1->fontset().direction()) {
 					name = i18n::string2bidi(i18n::make_ligatures(name.c_str()).c_str());
+				} else {
+					name = i18n::make_ligatures(name.c_str());
 				}
 				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
 
