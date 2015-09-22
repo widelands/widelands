@@ -61,6 +61,7 @@ const std::string& FontSet::condensed() const {return condensed_;}
 const std::string& FontSet::condensed_bold() const {return condensed_bold_;}
 const std::string& FontSet::condensed_italic() const {return condensed_italic_;}
 const std::string& FontSet::condensed_bold_italic() const {return condensed_bold_italic_;}
+uint16_t FontSet::size_offset() const {return size_offset_;}
 const FontSet::Direction& FontSet::direction() const {return direction_;}
 
 // Loads font info from config files, depending on the localename
@@ -68,6 +69,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 	std::string fontsetname = "default";
 	std::string actual_localename = localename;
 	std::string direction_string;
+	size_offset_ = 0;
 	LuaInterface lua;
 
 	// Read default fontset. It defines the fallback fonts and needs to always be there and complete.
@@ -79,6 +81,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 
 	set_fonts(*default_font_table, kFallbackFont);
 	direction_string = default_font_table->get_string("direction");
+	size_offset_ = default_font_table->get_int("size_offset");
 
 	// Now try to get the fontset for the actual locale.
 	try  {
@@ -121,6 +124,9 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 
 					set_fonts(*font_set_table, serif_);
 					direction_string = get_string_with_default(*font_set_table, "direction", "ltr");
+					if (font_set_table->has_key("size_offset")) {
+						size_offset_ = font_set_table->get_int("size_offset");
+					}
 				} catch (LuaError& err) {
 					log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
 				}

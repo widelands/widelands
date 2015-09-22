@@ -22,6 +22,7 @@
 #include <map>
 
 #include "base/utf8.h"
+#include "graphic/font_handler1.h" // We need the fontset for the size offset
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -65,7 +66,7 @@ Font::Font(const std::string & name, int size)
 	if (!ops)
 		throw wexception("could not load font!: RWops Pointer invalid");
 
-	m_font = TTF_OpenFontIndexRW(ops, 1, size, 0);
+	m_font = TTF_OpenFontIndexRW(ops, 1, size + UI::g_fh1->fontset().size_offset(), 0);
 	if (!m_font)
 		throw wexception("could not load font!: %s", TTF_GetError());
 

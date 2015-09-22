@@ -654,17 +654,19 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 		ns->font_style &= ~IFont::ITALIC;
 	}
 
-	FontDescr fd = {ns->font_face, ns->font_size};
+	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
+
+	FontDescr fd = {ns->font_face, font_size};
 	FontMap::iterator i = m_fontmap.find(fd);
 	if (i != m_fontmap.end())
 		return *i->second;
 
 	std::unique_ptr<IFont> font;
 	try {
-		font.reset(load_font(ns->font_face, ns->font_size));
+		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
 		log("Font file not found. Falling back to serif: %s\n%s\n", ns->font_face.c_str(), e.what());
-		font.reset(load_font(ns->fontset->serif(), ns->font_size));
+		font.reset(load_font(ns->fontset->serif(), font_size));
 	}
 	assert(font != nullptr);
 

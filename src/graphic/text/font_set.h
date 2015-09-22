@@ -54,6 +54,7 @@ struct FontSet {
 	const std::string& condensed_bold() const;
 	const std::string& condensed_italic() const;
 	const std::string& condensed_bold_italic() const;
+	uint16_t size_offset() const;
 	const FontSet::Direction& direction() const;
 
 private:
@@ -82,6 +83,7 @@ private:
 	std::string condensed_bold_;
 	std::string condensed_italic_;
 	std::string condensed_bold_italic_;
+	uint16_t    size_offset_;
 	FontSet::Direction direction_;
 };
 

@@ -457,6 +457,7 @@ void RichText::parse(const std::string & rtext)
 				bbox.w = 0;
 				bbox.h = text.style.font->height();
 
+				// NOCOM(GunChleoc): width calculation for alignment is broken (Arabic)
 				do {
 					uint32_t wordwidth =
 							text.style.calc_bare_width(i18n::make_ligatures(words[word_cnt + nrwords].c_str()));

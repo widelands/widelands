@@ -28,6 +28,7 @@ return {
 		-- If the diection isn't defined, your font set will default to "ltr" = left-to-right.
 		-- For right-to-left or bidirectional (BiDi) languages, use "rtl".
 		direction = "ltr",
+		size_offset = 0
 	},
 
 	arabic = {
@@ -36,7 +37,7 @@ return {
 		serif_italic = "amiri/amiri-slanted.ttf",
 		serif_bold_italic = "amiri/amiri-boldslanted.ttf",
 		direction = "rtl",
-		size_offset = 14
+		size_offset = 4
 	},
 
 	cjk = {
