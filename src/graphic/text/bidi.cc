@@ -179,7 +179,7 @@ const std::map<UChar, UChar> kArabicMedialChars = {
 	{0x063A, 0xFED0}, // ġayn
 	{0x0641, 0xFED4}, // fāʾ
 	{0x0642, 0xFED8}, // qāf
-	{0x0643, 0xFEDB}, // kāf
+	{0x0643, 0xFEDC}, // kāf
 	{0x0644, 0xFEE0}, // lām
 	{0x0645, 0xFEE4}, // mīm
 	{0x0646, 0xFEE8}, // nūn
@@ -371,6 +371,27 @@ bool is_rtl_character(UChar32 c) {
 	return false;
 }
 
+bool is_arabic_character(UChar32 c) {
+	UBlockCode code = ublock_getCode(c);
+	assert(kRTLCodeBlocks.count("arabic") == 1);
+	return (kRTLCodeBlocks.at("arabic").count(code) == 1);
+}
+
+
+// True if a string does not contain Latin characters
+bool has_arabic_character(const char* input) {
+	bool result = false;
+	const icu::UnicodeString parseme(input);
+	for (int32_t i = 0; i < parseme.length(); ++i) {
+		if (is_arabic_character(parseme.char32At(i))) {
+			result = true;
+			break;
+		}
+	}
+	return result;
+}
+
+
 // Helper function for make_ligatures.
 // Arabic word characters have 4 forms to connect to each other:
 // Isolated, Initial, Medial, and Final.
@@ -439,12 +460,13 @@ bool has_rtl_character(std::vector<std::string> input) {
 	return result;
 }
 
-// BiDi support for RTL languages
-// Contracts glyphs into their ligatures
-// NOCOM(GunChleoc): Description for "The pass through the Mountains"
-// (Not OK in fh1) Ligature missing kāf after lām (lam is final instead of medial) // بمملكتيهما // displayed as // بممل كتيهما
 
+// Contracts glyphs into their ligatures
 std::string make_ligatures(const char* input) {
+	// We only have defined ligatures for Arabic at the moment.
+	if (!has_arabic_character(input)) {
+		return input;
+	}
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString queue;
 	UChar not_a_character = 0xFFFF;
