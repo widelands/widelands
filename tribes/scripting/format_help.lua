@@ -1,4 +1,5 @@
 -- TODO(GunChleoc): get resi_00.png from C++
+-- NOCOM(GunChleoc): Alignment broken for Arabic
 
 set_textdomain("tribes")
 

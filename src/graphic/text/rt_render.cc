@@ -699,6 +699,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	TextStream ts(txt);
 	std::string word;
 	//log("Rendering %s\n", txt.c_str()); // NOCOM
+	// NOCOM(GunChleoc): Too much space between text nodes.
 
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
 		 && i18n::has_rtl_character(txt.c_str())) {

@@ -404,6 +404,7 @@ bool has_rtl_character(std::vector<std::string> input) {
 
 // BiDi support for RTL languages
 // Contracts glyphs into their ligatures
+// NOCOM(GunChleoc): nūn (end) = FEE6, general = 0646, isolated = FEE5 is missing! cf. description for "The pass through the Mountains"
 std::string make_ligatures(const char* input) {
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString queue;

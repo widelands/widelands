@@ -1,3 +1,4 @@
+-- NOCOM(GunChleoc): Alignment broken for Arabic
 set_textdomain("tribes")
 
 --  =======================================================

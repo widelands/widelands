@@ -36,6 +36,8 @@
 #define vmargin margin
 #define vspacing 15
 
+// NOCOM(GunChleoc): buttons need more height for Arabic.
+
 inline EditorInteractive & EditorMainMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }

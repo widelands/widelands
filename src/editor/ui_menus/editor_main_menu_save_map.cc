@@ -50,6 +50,7 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
+// NOCOM(GunChleoc): Make directory dialog: buttons need more height for Arabic.
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 330, _("Save Map"))
