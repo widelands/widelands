@@ -339,7 +339,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 	m_s.direction = m_s.fontset->direction();
 	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
 		if (i18n::has_rtl_character(temp_txt.c_str())) {
-			temp_txt = i18n::string2bidi(temp_txt.c_str());
+			temp_txt = i18n::make_ligatures(temp_txt.c_str());
 		} else { // If a string only contains English characters, we render LTR anyway
 			m_s.direction = UI::FontSet::Direction::kLeftToRight;
 		}
@@ -698,46 +698,43 @@ protected:
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
 	TextStream ts(txt);
 	std::string word;
-	//log("Rendering %s\n", txt.c_str()); // NOCOM
+	std::vector<RenderNode*> text_nodes;
+
 	// NOCOM(GunChleoc): Too much space between text nodes.
 
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
 		 && i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
-		std::vector<RenderNode*>::iterator it = nodes.begin();
+		std::vector<RenderNode*>::iterator it = text_nodes.begin();
 
+		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
-			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-
-			// We only know if the spacer goes to the left or right after having a look at the current word.
-			bool add_spacer = ts.pos() != cpos;
-
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
 				if (i18n::has_rtl_character(word.c_str()) ||
 					 i18n::has_rtl_character(previous_word.c_str())) {
-					if (add_spacer) {
-						//log("Insert spacer at front: %s\n", word.c_str()); // NOCOM
-						it = nodes.insert(nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
+					if (!previous_word.empty()) {
+						text_nodes.insert(text_nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
 					}
-					it = nodes.insert(nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word));
+					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word));
 				} else { // Sequences of Latin words go to the right from current position
-					if (it < nodes.end()) {
+					if (it < text_nodes.end()) {
 						++it;
 					}
-					if (add_spacer) {
-						//log("Insert spacer at back: %s\n", word.c_str()); // NOCOM
-						it = nodes.insert(it, new WordSpacerNode(font_cache_.get_font(&ns), ns));
-						if (it < nodes.end()) {
-							++it;
-						}
+					if (!previous_word.empty()) {
+						it = text_nodes.insert(it, new WordSpacerNode(font_cache_.get_font(&ns), ns));
 					}
-					it = nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
+					it = text_nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
 				}
 			}
 			previous_word = word;
 		}
+		// Add the nodes to the end of the previously existing nodes.
+		for (RenderNode* node : text_nodes) {
+			nodes.push_back(node);
+		}
+
 	} else {  // LTR
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();

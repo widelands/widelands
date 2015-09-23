@@ -99,7 +99,6 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 	// TODO(sirver): change this to take a Button subclass instead of
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
-	// NOCOM(GunChleoc): Newline is missing in Arabic
 	UI::IconGrid::add(descr.name(),
 	                  &g_gr->animations()
 	                      .get_animation(descr.get_animation("idle"))
