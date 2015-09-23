@@ -2,7 +2,8 @@ size=medium
 output=blackwood
 
 [aihints]
-forced_after=0
+forced_after=250
+prohibited_till=250
 
 [buildcost]
 log=3

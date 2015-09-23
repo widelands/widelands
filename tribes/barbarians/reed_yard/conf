@@ -3,7 +3,8 @@ output=thatchreed
 
 [aihints]
 space_consumer=true
-forced_after=0
+forced_after=250
+prohibited_till=250
 
 [buildcost]
 log=5

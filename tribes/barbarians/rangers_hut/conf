@@ -3,6 +3,7 @@ size=small
 [aihints]
 renews_map_resource=log
 space_consumer=true
+prohibited_till=200
 
 [buildcost]
 log=4

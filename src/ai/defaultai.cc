@@ -1118,7 +1118,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					continue;
 				}
 				if (upcast(ProductionSite const, productionsite, player_immovable)) {
-					BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+					BuildingObserver& bo = get_building_observer(productionsite->descr().name().c_str());
 					consider_productionsite_influence(field, immovables.at(i).coords, bo);
 				}
 			}
@@ -1449,7 +1449,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 	}
 	//this is effective score, falling down very quickly
-	target_military_score_ = 9 * target_military_score_ / 10;
+	if (target_military_score_ > 300) {
+		target_military_score_ = 8 * target_military_score_ / 10;
+	} else {
+		target_military_score_ = 9 * target_military_score_ / 10;
+	}		
 	if (target_military_score_ < least_military_score_){
 		target_military_score_ = least_military_score_;
 	}
@@ -1864,13 +1868,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.total_count() == 0) {
 							prio = 200;
+						} else {
+							prio = 50 / bo.total_count();
 						}
 
 						// considering producers
 						prio += bf->producers_nearby_.at(bo.production_hint_) * 5 -
 						        new_buildings_stop_ * 15 -
-						       	bf->space_consumers_nearby_ * 10  -
-						        bf->stones_nearby_;
+						       	bf->space_consumers_nearby_ * 5  -
+						        bf->stones_nearby_ / 3 +
+						        bf->trees_nearby_ / 3 +
+						        bf->supporters_nearby_.at(bo.production_hint_) * 3;
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
 
@@ -1940,14 +1948,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.space_consumer_) {
 							// we dont like trees nearby
-							prio -= bf->trees_nearby_ / 3;
+							prio -= bf->trees_nearby_ / 10;
 							// we attempt to cluster space consumers together
-							prio += bf->space_consumers_nearby_ * 3;
+							prio += bf->space_consumers_nearby_ * 2;
 							// and be far from rangers
-							prio -= bf->rangers_nearby_ * 5;
+							prio -= bf->rangers_nearby_ * 2;
 						} else {
 							// leave some free space between them
-							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
+							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 5;
 						}
 
 						if (bo.space_consumer_ && !bf->water_nearby_) {  // not close to water
