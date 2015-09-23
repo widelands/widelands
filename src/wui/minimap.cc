@@ -30,7 +30,6 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
 
-// NOCOM(GunChleoc): Minimap button tooltips have extra preceding spaces in Arabic
 MiniMap::View::View
 	(UI::Panel & parent, MiniMapLayer * flags,
 	 int32_t const x, int32_t const y, uint32_t const, uint32_t const,

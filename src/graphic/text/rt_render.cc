@@ -335,17 +335,7 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Texture* TextNode::render(TextureCache* texture_cache) {
-	std::string temp_txt = i18n::make_ligatures(m_txt.c_str());
-	m_s.direction = m_s.fontset->direction();
-	if (m_s.fontset->direction() == UI::FontSet::Direction::kRightToLeft) {
-		if (i18n::has_rtl_character(temp_txt.c_str())) {
-			temp_txt = i18n::make_ligatures(temp_txt.c_str());
-		} else { // If a string only contains English characters, we render LTR anyway
-			m_s.direction = UI::FontSet::Direction::kLeftToRight;
-		}
-	}
-
-	const Texture& img = m_font.render(temp_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	blit(Rect(0, 0, img.width(), img.height()),
 	     img,
@@ -700,8 +690,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	std::string word;
 	std::vector<RenderNode*> text_nodes;
 
-	// NOCOM(GunChleoc): Too much space between text nodes.
-
+	// Bidirectional text (Arabic etc.)
 	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
 		 && i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
@@ -712,12 +701,13 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			ts.skip_ws();
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_rtl_character(word.c_str()) ||
 					 i18n::has_rtl_character(previous_word.c_str())) {
 					if (!previous_word.empty()) {
 						text_nodes.insert(text_nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
 					}
-					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word));
+					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, i18n::string2bidi(word.c_str())));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -744,7 +734,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
-				nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+				nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, i18n::make_ligatures(word.c_str())));
 			}
 		}
 	}
