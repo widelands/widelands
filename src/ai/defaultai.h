@@ -221,6 +221,8 @@ private:
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 
+	void
+	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
 	// considering wood, stones, mines, water, fishes for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 

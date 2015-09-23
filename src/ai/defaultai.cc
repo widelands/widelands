@@ -946,7 +946,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bool military) {
 	// look if there is any unowned land nearby
 	Map& map = game().map();
-	const int32_t gametime = game().get_gametime();
+	const uint32_t gametime = game().get_gametime();
 	FindNodeUnowned find_unowned(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
 	PlayerNumber const pn = player_->player_number();
@@ -966,8 +966,18 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
+
+	// are we going to count resources now?
+	bool resource_count_now = false;
+	//testing in first 10 seconds or if last testing was more then 60 sec ago
+	if (field.last_resources_check_time_ < 10000 ||
+		field.last_resources_check_time_ - gametime > 60 * 1000) {
+			resource_count_now = true;
+			field.last_resources_check_time_ = gametime;
+	}
+
 	// to save some CPU
-	if ((mines_.size() > 8 && gametime % 3 > 0) || field.unowned_land_nearby_ == 0) {
+	if (mines_.size() > 8 && !resource_count_now) {
 		field.unowned_mines_pots_nearby_ = 0;
 	} else {
 		uint32_t close_mines =
@@ -1045,10 +1055,13 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		field.military_stationed_ = 0;
 		field.trees_nearby_ = 0;
 		field.space_consumers_nearby_ = 0;
+		field.rangers_nearby_ = 0;
 		field.producers_nearby_.clear();
 		field.producers_nearby_.resize(wares.size());
 		field.consumers_nearby_.clear();
 		field.consumers_nearby_.resize(wares.size());
+		field.supporters_nearby_.clear();
+		field.supporters_nearby_.resize(wares.size());
 		std::vector<Coords> water_list;
 		std::vector<Coords> resource_list;
 		std::vector<Bob*> critters_list;
@@ -1066,7 +1079,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && (field.fish_nearby_ == -1 || gametime % 10 == 0)) {
+		if (field.water_nearby_ > 0 && (field.fish_nearby_ == -1 || resource_count_now)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -1075,7 +1088,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		// counting fields with critters (game)
 		// not doing this always, this does not change fast
-		if (gametime % 10 == 0) {
+		if (resource_count_now) {
 			map.find_bobs(Area<FCoords>(field.coords, 6), &critters_list, FindBobCritter());
 			field.critters_nearby_ = critters_list.size();
 		}
@@ -1104,6 +1117,10 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 					continue;
 				}
+				if (upcast(ProductionSite const, productionsite, player_immovable)) {
+					BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+					consider_productionsite_influence(field, immovables.at(i).coords, bo);
+				}
 			}
 
 			if (immovables.at(i).object->has_attribute(tree_attr)) {
@@ -1112,7 +1129,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// stones are not renewable, we will count them only if previous state is nonzero
-		if (field.stones_nearby_ > 0 && gametime % 3 == 0) {
+		if (field.stones_nearby_ > 0 && resource_count_now) {
 
 			field.stones_nearby_ =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), 6),
@@ -1742,13 +1759,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio *= 2;
-					} else if (bf->trees_nearby_ < 2) {
+					} else if (bf->trees_nearby_ < 2 && bf->supporters_nearby_.at(bo.outputs_.at(0) == 0)) {
 						continue;
 					}
 
-					if (bf->producers_nearby_.at(bo.outputs_.at(0)) > 1) {
-						prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 30;
-					}
+					// if there are other cutters nearby
+					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 10;
+					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 10;
 
 					prio += 2 * bf->trees_nearby_;
 
@@ -1770,7 +1787,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-						bo.stocklevel_ = get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
+						bo.stocklevel_ = get_stocklevel(static_cast<size_t>(bo.production_hint_));
 						bo.stocklevel_time = game().get_gametime();
 					}
 
@@ -1797,6 +1814,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					//overdue priority here
 					prio += bo.primary_priority_;
 
+					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 5;
+
 					prio +=
 					   (bf->critters_nearby_ * 3) - 8 - 5 * bf->producers_nearby_.at(bo.outputs_.at(0));
 
@@ -1816,9 +1835,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					//overdue priority here
 					prio += bo.primary_priority_;
 
-					if (bf->producers_nearby_.at(bo.outputs_.at(0)) >= 1) {
-						continue;
-					}
+					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 10;
+					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 10;
 
 					prio += bf->fish_nearby_;
 
@@ -1848,10 +1866,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							prio = 200;
 						}
 
-						// considering near trees and producers
-						prio += (30 - bf->trees_nearby_) * 2 +
-						        bf->producers_nearby_.at(bo.production_hint_) * 5 -
+						// considering producers
+						prio += bf->producers_nearby_.at(bo.production_hint_) * 5 -
 						        new_buildings_stop_ * 15 -
+						       	bf->space_consumers_nearby_ * 10  -
 						        bf->stones_nearby_;
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
@@ -1920,14 +1938,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// we check separatelly buildings with no inputs and some inputs
 					if (bo.inputs_.empty()) {
 
-						if (bo.space_consumer_) {  // need to consider trees nearby
-							prio += 20 - (bf->trees_nearby_ / 3);
-						}
-
-						// we attempt to cluster space consumers together
-						if (bo.space_consumer_) {  // need to consider trees nearby
-							prio += bf->space_consumers_nearby_ * 10;
-							prio += (bf->space_consumers_nearby_ > 2) ? 2 : bf->space_consumers_nearby_ * 2;
+						if (bo.space_consumer_) {
+							// we dont like trees nearby
+							prio -= bf->trees_nearby_ / 3;
+							// we attempt to cluster space consumers together
+							prio += bf->space_consumers_nearby_ * 3;
+							// and be far from rangers
+							prio -= bf->rangers_nearby_ * 5;
+						} else {
+							// leave some free space between them
+							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
 						}
 
 						if (bo.space_consumer_ && !bf->water_nearby_) {  // not close to water
@@ -1938,10 +1958,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    !bf->unowned_mines_pots_nearby_) {  // not close to mountains
 							prio += 1;
 						}
-
-						if (!bo.space_consumer_) {
-							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
-						}  // leave some free space between them
 					}
 
 					else if (bo.is_shipyard_) {
@@ -4145,6 +4161,31 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	}
 
 	return prio;
+}
+// for buildable field, it consider effect of building of type bo on position coords
+void DefaultAI::consider_productionsite_influence(BuildableField& field,
+                                                  Coords coords,
+                                                  const BuildingObserver& bo) {
+	if (bo.space_consumer_ && !bo.plants_trees_ &&
+	    game().map().calc_distance(coords, field.coords) < 8) {
+		++field.space_consumers_nearby_;
+	}
+
+	for (size_t i = 0; i < bo.inputs_.size(); ++i) {
+		++field.consumers_nearby_.at(bo.inputs_.at(i));
+	}
+
+	for (size_t i = 0; i < bo.outputs_.size(); ++i) {
+		++field.producers_nearby_.at(bo.outputs_.at(i));
+	}
+
+	if (bo.production_hint_ >= 0) {
+		++field.supporters_nearby_.at(bo.production_hint_);
+	}
+
+	if (bo.plants_trees_ >= 0) {
+		++field.rangers_nearby_;
+	}
 }
 
 /// \returns the economy observer containing \arg economy

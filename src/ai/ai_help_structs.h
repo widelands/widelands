@@ -249,6 +249,7 @@ struct BuildableField {
 	int8_t critters_nearby_;
 	int8_t ground_water_;  // used by wells
 	uint8_t space_consumers_nearby_;
+	uint8_t rangers_nearby_;
 	// to manage the military better following variables exists:
 	// capacity of nearby buildings:
 	int16_t area_military_capacity_;
@@ -270,9 +271,14 @@ struct BuildableField {
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby_;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby_;
+	// it is not necessary to check resources (stones, fish...) too frequently as they do not change fast
+	// this store time of last check
+	uint32_t last_resources_check_time_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
+	// and for rangers, fichbreeders:
+	std::vector<uint8_t> supporters_nearby_;
 
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
@@ -297,6 +303,7 @@ struct BuildableField {
 	     critters_nearby_(-1),
 	     ground_water_(1),
 	     space_consumers_nearby_(0),
+	     rangers_nearby_(0),
 	     area_military_capacity_(0),
 	     military_loneliness_(1000),
 	     military_in_constr_nearby_(0),
@@ -306,7 +313,8 @@ struct BuildableField {
 	     is_portspace_(false),
 	     port_nearby_(false),
 	     portspace_nearby_(Widelands::ExtendedBool::kUnset),
-	     max_buildcap_nearby_(0) {
+	     max_buildcap_nearby_(0),
+	     last_resources_check_time_(0) {
 	}
 
 	int32_t own_military_sites_nearby_(){
