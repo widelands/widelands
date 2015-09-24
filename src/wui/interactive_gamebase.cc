@@ -104,7 +104,6 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	GameController* game_controller = game().game_controller();
 	// Display the gamespeed.
 	if (game_controller != nullptr) {
-		// NOCOM(GunChleoc): This is being blitted outside the window for Arabic.
 		std::string game_speed;
 		uint32_t const real = game_controller->real_speed();
 		uint32_t const desired = game_controller->desired_speed();
