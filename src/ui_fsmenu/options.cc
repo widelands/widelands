@@ -47,6 +47,8 @@
 
 namespace {
 
+// NOCOM(GunChleoc): Changing languages messes up table font size.
+
 // Data model for the entries in the language selection list.
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,

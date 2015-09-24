@@ -144,7 +144,7 @@ public:
 	virtual ~Layout() {}
 
 	uint16_t height() {return m_h;}
-	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p);
+	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
@@ -160,7 +160,7 @@ private:
 		}
 	};
 
-	uint16_t m_fit_line(uint16_t w, const Borders&, vector<RenderNode*>* rv);
+	uint16_t m_fit_line(uint16_t w, const Borders&, vector<RenderNode*>* rv, bool shrink_to_fit);
 
 	uint16_t m_h;
 	size_t m_idx;
@@ -168,7 +168,7 @@ private:
 	priority_queue<ConstraintChange> m_constraint_changes;
 };
 
-uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv) {
+uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shrink_to_fit) {
 	assert(rv->empty());
 
 	while (m_idx < m_all_nodes.size() && m_all_nodes[m_idx]->is_non_mandatory_space()) {
@@ -211,7 +211,7 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
+		if (!shrink_to_fit &&!rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
 			if ((*rv->rbegin())->halign() == HALIGN_CENTER) {
 				rem_space /= 2;  // Otherwise, we align right
 			}
@@ -233,7 +233,7 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
-uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
+uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit) {
 	assert(rv.empty());
 	m_h = p.top;
 
@@ -241,7 +241,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 	while (m_idx < m_all_nodes.size()) {
 		vector<RenderNode*> nodes_in_line;
 		size_t m_idx_before_iteration = m_idx;
-		uint16_t biggest_hotspot = m_fit_line(w, p, &nodes_in_line);
+		uint16_t biggest_hotspot = m_fit_line(w, p, &nodes_in_line, shrink_to_fit);
 
 		int line_height = 0;
 		for (RenderNode* n : nodes_in_line) {
@@ -778,6 +778,7 @@ public:
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
+		// NOCOM(GunChleoc): align switching doesn't seem to work here. Investigate.
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
@@ -794,6 +795,12 @@ public:
 				} else {
 					m_ns.halign = HALIGN_RIGHT;
 				}
+			}
+		} else {
+			if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+				m_ns.halign = HALIGN_LEFT;
+			} else {
+				m_ns.halign = HALIGN_RIGHT;
 			}
 		}
 		if (a.has("valign")) {
@@ -922,7 +929,7 @@ class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
 		(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-		 uint16_t max_w = 0, bool shrink_to_fit = false)
+		 uint16_t max_w = 0, bool shrink_to_fit = true)
 		:
 			TagHandler(tag, fc, ns, image_cache),
 			shrink_to_fit_(shrink_to_fit),
@@ -972,7 +979,8 @@ public:
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		vector<RenderNode*> nodes_to_render;
-		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
+		// layout.fit_nodes has side effect, so keep it outside of the if (shrink_to_fit_) block.
+		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding, shrink_to_fit_);
 		if (shrink_to_fit_) {
 			m_w = min(m_w, max_line_width);
 		}

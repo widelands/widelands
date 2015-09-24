@@ -275,7 +275,33 @@ void Table<void *>::draw(RenderTarget & dst)
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column & column    = m_columns[i];
 			uint32_t const curw      = column.width;
-			Align    const alignment = column.alignment;
+			Align alignment = column.alignment;
+
+			// Horizontal Align NOCOM(GunChleoc): put this somewhere central?
+			if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
+				switch (alignment) {
+					case Align::Align_BottomLeft:
+						alignment = Align::Align_BottomRight;
+						break;
+					case Align::Align_BottomRight:
+						alignment = Align::Align_BottomLeft;
+						break;
+					case Align::Align_CenterLeft:
+						alignment = Align::Align_CenterRight;
+						break;
+					case Align::Align_CenterRight:
+						alignment = Align::Align_CenterLeft;
+						break;
+					case Align::Align_TopLeft:
+						alignment = Align::Align_TopRight;
+						break;
+					case Align::Align_TopRight:
+						alignment = Align::Align_TopLeft;
+						break;
+					default:
+						break;
+				}
+			}
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string &       entry_string  = er.get_string (i);
