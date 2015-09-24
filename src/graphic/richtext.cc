@@ -76,13 +76,12 @@ struct TextlineElement : Element {
 	{
 		assert(words.size());
 		uint32_t spacewidth = style.calc_bare_width(" ");
-		bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
 		std::vector<std::string> result_words;
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (is_rtl && i18n::has_rtl_character(words)) {
+		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
 				const std::string& word = i18n::make_ligatures((*source_it).c_str());
@@ -289,11 +288,10 @@ struct TextBuilder {
 		} else {
 			int32_t alignref_left = 0;
 			int32_t alignref_right = rti.width;
-			bool is_rtl = UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft;
 
 			if (text_y < rti.height + images_height) {
 				if ((richtext->get_image_align() & Align_Horizontal) == Align_Right) {
-					if (is_rtl) {
+					if (UI::g_fh1->fontset().is_rtl()) {
 						alignref_right += images_width + h_space;
 					} else {
 						alignref_right -= images_width + h_space;
@@ -301,7 +299,7 @@ struct TextBuilder {
 				} else {
 					// Note: center image alignment with text is not properly supported
 					// It is unclear what the semantics should be.
-					if (is_rtl) {
+					if (UI::g_fh1->fontset().is_rtl()) {
 						alignref_left -= images_width + h_space;
 					} else {
 						alignref_left += images_width + h_space;
@@ -313,7 +311,7 @@ struct TextBuilder {
 
 			switch (richtext->get_text_align() & Align_Horizontal) {
 			case Align_Right:
-				if (is_rtl) {
+				if (UI::g_fh1->fontset().is_rtl()) {
 					textleft = alignref_left;
 				} else {
 					textleft = alignref_right - int32_t(linewidth);
@@ -323,7 +321,7 @@ struct TextBuilder {
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
 			default:
-				if (is_rtl) {
+				if (UI::g_fh1->fontset().is_rtl()) {
 					textleft = alignref_right - int32_t(linewidth);
 				} else {
 					textleft = alignref_left;

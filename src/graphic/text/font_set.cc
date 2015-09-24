@@ -62,7 +62,8 @@ const std::string& FontSet::condensed_bold() const {return condensed_bold_;}
 const std::string& FontSet::condensed_italic() const {return condensed_italic_;}
 const std::string& FontSet::condensed_bold_italic() const {return condensed_bold_italic_;}
 uint16_t FontSet::size_offset() const {return size_offset_;}
-const FontSet::Direction& FontSet::direction() const {return direction_;}
+bool FontSet::is_rtl() const {return is_rtl_;}
+
 
 // Loads font info from config files, depending on the localename
 void FontSet::parse_font_for_locale(const std::string& localename) {
@@ -138,13 +139,11 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 		log("Could not read locales information from file: %s\n", err.what());
 	}
 
-	if (direction_string == "ltr") {
-		direction_ = FontSet::Direction::kLeftToRight;
-	} else if (direction_string == "rtl") {
-		direction_ = FontSet::Direction::kRightToLeft;
-	} else {
+	is_rtl_ = false;
+	if (direction_string == "rtl") {
+		is_rtl_ = true;
+	} else if (direction_string != "ltr") {
 		log("Unknown script direction '%s'. Using to left-to-right rendering.\n", direction_string.c_str());
-		direction_ = FontSet::Direction::kLeftToRight;
 	}
 }
 

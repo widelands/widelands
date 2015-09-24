@@ -69,7 +69,7 @@ struct NodeStyle {
 	uint16_t font_size;
 	RGBColor font_color;
 	int font_style;
-	UI::FontSet::Direction direction;
+	bool is_rtl;
 
 	uint8_t spacing;
 	HAlign halign;
@@ -691,8 +691,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	std::vector<RenderNode*> text_nodes;
 
 	// Bidirectional text (Arabic etc.)
-	if (ns.fontset->direction() == UI::FontSet::Direction::kRightToLeft
-		 && i18n::has_rtl_character(txt.c_str())) {
+	if (ns.fontset->is_rtl() && i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = text_nodes.begin();
 
@@ -782,7 +781,7 @@ public:
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
-				if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+				if (!m_ns.is_rtl) {
 					m_ns.halign = HALIGN_RIGHT;
 				} else {
 					m_ns.halign = HALIGN_LEFT;
@@ -790,14 +789,14 @@ public:
 			} else if (align == "center" || align == "middle") {
 				m_ns.halign = HALIGN_CENTER;
 			} else {
-				if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+				if (!m_ns.is_rtl) {
 					m_ns.halign = HALIGN_LEFT;
 				} else {
 					m_ns.halign = HALIGN_RIGHT;
 				}
 			}
 		} else {
-			if (m_ns.direction == UI::FontSet::Direction::kLeftToRight) {
+			if (!m_ns.is_rtl) {
 				m_ns.halign = HALIGN_LEFT;
 			} else {
 				m_ns.halign = HALIGN_RIGHT;
@@ -1082,7 +1081,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 
 	NodeStyle default_style = {
 		fontset_, fontset_->serif(), 16,
-		RGBColor(0, 0, 0), IFont::DEFAULT, fontset_->direction(), 0, HALIGN_LEFT, VALIGN_BOTTOM,
+		RGBColor(0, 0, 0), IFont::DEFAULT, fontset_->is_rtl(), 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};
 

@@ -180,9 +180,7 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string renderme;
 
-	if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft
-		 && i18n::has_rtl_character(lce.text.c_str())) {
-		//log("NOCOM bidi !\n");
+	if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(lce.text.c_str())) {
 		renderme = i18n::string2bidi(i18n::make_ligatures(lce.text.c_str()).c_str());
 	} else {
 		renderme = i18n::make_ligatures(lce.text.c_str());

@@ -278,7 +278,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			Align alignment = column.alignment;
 
 			// Horizontal Align NOCOM(GunChleoc): put this somewhere central?
-			if (UI::g_fh1->fontset().direction() == UI::FontSet::Direction::kRightToLeft) {
+			if (UI::g_fh1->fontset().is_rtl()) {
 				switch (alignment) {
 					case Align::Align_BottomLeft:
 						alignment = Align::Align_BottomRight;
