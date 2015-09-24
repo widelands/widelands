@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-24 18:59+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
+"PO-Revision-Date: 2015-09-14 15:48+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1434,8 +1434,8 @@ msgid ""
 msgstr "Els cavalls ajuden a transportar béns en camins molt transitats. Es crien en granges de cavalls."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
-msgid "Breeds the strong Atlantean horses"
-msgstr "Cria els forts cavalls atlants"
+msgid "Breeds the strong Atlantean horses."
+msgstr "Cria els forts cavalls atlants."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1923,5 +1923,5 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
-msgid "The woodcutter's house needs trees to fell within the work area."
+msgid "The woodcutter’s house needs trees to fell within the work area."
 msgstr "El llenyataire que viu en aquesta casa necessita arbres per talar dins la seva àrea de treball."

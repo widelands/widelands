@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-01 18:38+0000\n"
+"POT-Creation-Date: 2015-09-12 10:50+0000\n"
+"PO-Revision-Date: 2015-09-12 18:46+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -92,11 +92,7 @@ msgid_plural "%s Gold Ore"
 msgstr[0] "%s Golderz"
 msgstr[1] "%s Golderz"
 
-#: TRANSLATORS number + resource name, e.g. '1 stone' ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:134
-msgid "%1$i %2$s"
-msgstr "%1$i %2$s"
-
+#. TRANSLATORS: number + resource name, e.g. '1 stone'
 #: ../../maps/MP Scenarios/Island
 #: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
@@ -136,7 +132,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Der springende Punkt ist, dass die erste Insel nur Holz und Stein bietet, die zweite nur Weideland und Bodenschätze. Die Wirtschaft, die du zurück lässt, wird weiter für dich arbeiten, aber du wirst die Erträge nur erhalten, wenn du eine neue Insel erreichst."
+msgstr "Der springende Punkt ist, dass die erste Insel nur Holz und Stein bietet, die zweite nur Weideland und Bodenschätze. Die Wirtschaft, die du zurück lässt, wird weiter für dich arbeiten, aber du wirst die Erträge erst erhalten, wenn du eine neue Insel erreichst."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."
