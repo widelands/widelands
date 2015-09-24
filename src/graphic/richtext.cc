@@ -290,42 +290,26 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((richtext->get_image_align() & Align_Horizontal) == Align_Right) {
-					if (UI::g_fh1->fontset().is_rtl()) {
-						alignref_right += images_width + h_space;
-					} else {
-						alignref_right -= images_width + h_space;
-					}
+				if ((mirror_alignment(richtext->get_image_align()) & Align_Horizontal) == Align_Right) {
+					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
 					// It is unclear what the semantics should be.
-					if (UI::g_fh1->fontset().is_rtl()) {
-						alignref_left -= images_width + h_space;
-					} else {
-						alignref_left += images_width + h_space;
-					}
+					alignref_left += images_width + h_space;
 				}
 			}
 
 			int32_t textleft;
 
-			switch (richtext->get_text_align() & Align_Horizontal) {
+			switch (mirror_alignment(richtext->get_text_align()) & Align_Horizontal) {
 			case Align_Right:
-				if (UI::g_fh1->fontset().is_rtl()) {
-					textleft = alignref_left;
-				} else {
-					textleft = alignref_right - int32_t(linewidth);
-				}
+				textleft = alignref_right - int32_t(linewidth);
 				break;
 			case Align_HCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
 			default:
-				if (UI::g_fh1->fontset().is_rtl()) {
-					textleft = alignref_right - int32_t(linewidth);
-				} else {
-					textleft = alignref_left;
-				}
+				textleft = alignref_left;
 				break;
 			}
 
@@ -403,7 +387,7 @@ void RichText::parse(const std::string & rtext)
 
 		if ((text.richtext->get_image_align() & Align_Horizontal) == Align_HCenter)
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		else if ((text.richtext->get_image_align() & Align_Horizontal) == Align_Right)
+		else if ((mirror_alignment(text.richtext->get_image_align()) & Align_Horizontal) == Align_Right)
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)

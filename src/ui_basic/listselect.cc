@@ -358,6 +358,8 @@ void BaseListselect::draw(RenderTarget & dst)
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
+	// NOCOM fix alignment
+
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {

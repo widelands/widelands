@@ -285,8 +285,9 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
+		// NOCOM fix alignment
 		g_fh->draw_text
-			(dst, m_style, where, i18n::make_ligatures(m_lines[line].text.c_str()), Align(align & Align_Horizontal),
+			(dst, m_style, where, m_lines[line].text.c_str(), Align(align & Align_Horizontal),
 			 line == caretline ? caretpos : std::numeric_limits<uint32_t>::max());
 	}
 }

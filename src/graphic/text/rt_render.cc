@@ -211,7 +211,8 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!shrink_to_fit &&!rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
+		// NOCOM(GunChleoc): !shrink_to_fit && breaks right aligment. Needs fixing.
+		if (!shrink_to_fit && !rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
 			if ((*rv->rbegin())->halign() == HALIGN_CENTER) {
 				rem_space /= 2;  // Otherwise, we align right
 			}
@@ -777,7 +778,8 @@ public:
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
-		// NOCOM(GunChleoc): align switching doesn't seem to work here. Investigate.
+		// NOCOM(GunChleoc): right align doesn't work.
+		// This bug is visible in the tooltips, e.g. buildingwindow.cc
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
