@@ -163,8 +163,12 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
+	// for productionsites
 	Widelands::BuildingNecessity check_building_necessity
 		(BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
+	// for militarysites (overloading the function)
+	Widelands::BuildingNecessity check_building_necessity
+		(uint8_t, uint32_t);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
@@ -294,6 +298,10 @@ private:
 	// returns count of mines of the same type (output)
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
+	std::map<int32_t, MSiteSizeObserver> msites_per_size;
+	// returns count of mines of the same type (output)
+	uint32_t msites_in_constr() const;
+	uint32_t msites_built() const;
 
 	std::vector<WareObserver> wares;
 

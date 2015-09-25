@@ -527,4 +527,15 @@ struct MineTypesObserver {
 	}
 };
 
+// this is used to count militarysites by their size
+struct MSiteSizeObserver {
+	uint16_t in_construction;
+	uint16_t finished;
+
+	MSiteSizeObserver() : in_construction(0), finished(0) {
+	}
+};
+
+
+
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

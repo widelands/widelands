@@ -100,3 +100,4 @@ hotspot=80 88
 
 [aihints]
 trainingsite_type=basic
+prohibited_till=900
