@@ -161,14 +161,21 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 void MainMenuSaveMap::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();
+	std::string complete_filename;
 
 	if (filename == "") //  Maybe a directory is selected.
-		filename = m_ls->get_selected();
-
-	if (g_fs->is_directory(filename.c_str())
-		&& !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
-		m_curdir = g_fs->canonicalize_name(filename);
+		complete_filename = filename = m_ls->get_selected();
+	} else {
+		complete_filename = m_curdir + "/" + filename;
+	}
+
+	if
+		(g_fs->is_directory(complete_filename.c_str())
+		 &&
+		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename))
+	{
+		m_curdir = complete_filename;
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -207,7 +214,7 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		g_fs->ensure_directory_exists(m_basedir);
+		g_fs->ensure_directory_exists(m_curdir);
 		//  create directory
 		std::string fullname = m_curdir;
 		fullname            += "/";
@@ -360,8 +367,8 @@ void MainMenuSaveMap::edit_box_changed() {
  * should stay open
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
-	//  Make sure that the base directory exists.
-	g_fs->ensure_directory_exists(m_basedir);
+	//  Make sure that the current directory exists and is writeable.
+	g_fs->ensure_directory_exists(m_curdir);
 
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
