@@ -3,6 +3,7 @@ output=bread
 
 [aihints]
 prohibited_till=600
+forced_after=700
 
 [buildcost]
 log=2

@@ -3,7 +3,7 @@ output=wheat
 
 [aihints]
 space_consumer=true
-forced_after=900
+forced_after=600
 
 [buildcost]
 log=4

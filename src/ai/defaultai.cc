@@ -108,7 +108,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
-     enemy_last_seen_(0),
+     enemy_last_seen_(std::numeric_limits<uint32_t>::max()),
      numof_warehouses_(0),
      new_buildings_stop_(false),
      resource_necessity_territory_(100),
@@ -1121,6 +1121,13 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					BuildingObserver& bo = get_building_observer(productionsite->descr().name().c_str());
 					consider_productionsite_influence(field, immovables.at(i).coords, bo);
 				}
+				//NOCOM1
+				// the same for constructionsite
+				if (upcast(ConstructionSite const, constructionsite, player_immovable)) {
+					const BuildingDescr& target_descr = constructionsite->building();
+					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+					consider_productionsite_influence(field, immovables.at(i).coords, bo);
+				}
 			}
 
 			if (immovables.at(i).object->has_attribute(tree_attr)) {
@@ -1767,7 +1774,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					// if there are other cutters nearby
+					// consider cutters and rangers nearby
 					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 10;
 					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 10;
 
@@ -1839,10 +1846,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					//overdue priority here
 					prio += bo.primary_priority_;
 
-					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 10;
+					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
 					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 10;
 
-					prio += bf->fish_nearby_;
+					prio += -5 + bf->fish_nearby_;
 
 				} else if (bo.production_hint_ >= 0) {
 					if (bo.plants_trees_) {
@@ -1873,21 +1880,22 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						// considering producers
-						prio += bf->producers_nearby_.at(bo.production_hint_) * 5 -
+						prio += std::min<uint8_t>(bf->producers_nearby_.at(bo.production_hint_), 4) * 5 -
 						        new_buildings_stop_ * 15 -
 						       	bf->space_consumers_nearby_ * 5  -
 						        bf->stones_nearby_ / 3 +
-						        bf->trees_nearby_ / 3 +
-						        bf->supporters_nearby_.at(bo.production_hint_) * 3;
+						        bf->trees_nearby_ / 2 +
+						        std::min<uint8_t>(bf->supporters_nearby_.at(bo.production_hint_), 4) * 3;
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
 
 						// especially for fish breeders
-						if (bo.need_water_ && bf->water_nearby_ < 6) {
+						if (bo.need_water_ && (bf->water_nearby_ < 6 || bf->fish_nearby_ < 6)) {
 							continue;
 						}
 						if (bo.need_water_) {
-							prio += bf->water_nearby_ / 5;
+							prio += (-6 + bf->water_nearby_) / 3;
+							prio += (-6 + bf->fish_nearby_ ) / 3;
 						}
 
 						if ((bo.total_count() - bo.unconnected_count_) > bo.cnt_target_) {
@@ -1903,17 +1911,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 
-						if (bo.total_count() == 0 && gametime > 45 * 1000) {
-							prio += 100 + bf->producers_nearby_.at(bo.production_hint_) * 10;
-						} else if (bf->producers_nearby_.at(bo.production_hint_) == 0) {
-							continue;
-						} else {
-							prio += bf->producers_nearby_.at(bo.production_hint_) * 10;
+						if (bo.total_count() == 0) {
+							prio += 100;
+						} else  if (!bo.need_water_) {
+							prio += 10 / bo.total_count();
 						}
 
+						prio += bf->producers_nearby_.at(bo.production_hint_) * 10;
+						prio -= bf->supporters_nearby_.at(bo.production_hint_) * 5;
+
 						if (bf->enemy_nearby_) {
-							prio -= 10;
+							prio -= 5;
 						}
+						printf (" %d: %-15s: producers nearby: %2d, primary priority: %2d, overall: %3d, total count: %d\n", 
+						player_number(), bo.name, bf->producers_nearby_.at(bo.production_hint_), bo.primary_priority_, prio, bo.total_count());
 					}
 
 				} else if (bo.recruitment_ && !new_buildings_stop_) {
@@ -1952,7 +1963,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby_ * 2;
 							// and be far from rangers
-							prio -= bf->rangers_nearby_ * 2;
+							prio -= bf->rangers_nearby_ * 5;
 						} else {
 							// leave some free space between them
 							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 5;
@@ -2020,11 +2031,47 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				// postpone medium and big buildings by 4 and 8 minutes
-				if (static_cast<uint32_t>(bo.desc->get_size() - 1) * 4 * 60 * 1000 > gametime) {
-					continue;
+				//NOCOM3
+				// this is to limit building in the early stage of game
+				// not used when AI had seen an enemy
+				if (gametime < enemy_last_seen_) {
+					if (bo.desc->get_size() == 2) {
+						if (gametime <  3 * 60 * 1000) {
+							continue;
+						} else if (gametime < 6 * 60 * 1000) {
+								if (num_milit_constructionsites == 0 || gametime % 20 == 0) {
+								;
+							} else {
+								continue;
+							}
+						} else if (gametime < 12 * 60 * 1000) {
+							if (num_milit_constructionsites <= 1 || gametime % 10 == 0) {
+								;
+							} else {
+								continue;
+							}
+						}
+					} 
+					if (bo.desc->get_size() == 3) {
+						if (gametime <  4 * 60 * 1000) {
+							continue;
+						} else if (gametime < 8 * 60 * 1000) {
+								if (num_milit_constructionsites == 0 || gametime % 20 == 0) {
+								;
+							} else {
+								continue;
+							}
+						} else if (gametime < 20 * 60 * 1000) {
+							if (num_milit_constructionsites <= 1 || gametime % 10 == 0) {
+								;
+							} else {
+								continue;
+							}
+						}
+					} 
 				}
 
+				//prohibition per type and situation - permanently
 				if (bf->enemy_nearby_ && bo.fighting_type_) {
 					;
 				}  // it is ok, go on
@@ -3678,9 +3725,30 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		bo.new_building_overdue_ = 0;
 	}
 
+
+	//NOCOM2
+	// this is to be used when buildig is forced. AI will not built a building when 
+	// a substitution exists. F.e. mines or pairs like tavern-inn
+	// So we calculate this only if we have 0 count of the building
+	bool has_substitution_building = false;
+	if (bo.total_count()==0 && bo.upgrade_substitutes_ && bo.type == BuildingObserver::PRODUCTIONSITE) {
+		//const BuildingDescr& bld = *bo.desc;
+		//const BuildingIndex enhancement = bld.enhancement();
+		const BuildingIndex enhancement = bo.desc->enhancement();
+		BuildingObserver& en_bo = get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
+		if (en_bo.total_count() > 0) {
+			has_substitution_building = true;
+		}
+	}
+	if (bo.total_count()==0 && bo.type == BuildingObserver::MINE) {
+		if (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished > 0) {
+			has_substitution_building = true;
+		}
+	}
+	
 	//first deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
-		if (bo.forced_after_ < gametime && bo.total_count() == 0) {
+		if (bo.forced_after_ < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			return BuildingNecessity::kForced;
 		} else if (bo.prohibited_till_ > gametime) {
 			return BuildingNecessity::kNotNeeded;
@@ -3700,7 +3768,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNotNeeded;
 			}
 			bo.cnt_target_ =
-					   3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 15;
+					   3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
 			if (bo.total_count() < bo.cnt_target_) {
 				return BuildingNecessity::kNeeded;
 			} else {
@@ -3709,14 +3777,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.plants_trees_) {
 
 			bo.cnt_target_ =
-				   1 +
-				   static_cast<int32_t>(mines_.size() + productionsites.size()) / 15;
+				   2 +
+				   static_cast<int32_t>(mines_.size() + productionsites.size()) / 40;
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kNotNeeded;
 			}
 			// 150 corresponds to 15 trees
 			if (trees_around_cutters_ < 150) {
-				bo.cnt_target_ *= 5;
+				bo.cnt_target_ *= 4;
 			}
 			if (bo.total_count() > 1 && (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0)) {
 				return BuildingNecessity::kNotNeeded;
