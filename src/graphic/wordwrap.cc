@@ -129,9 +129,11 @@ void WordWrap::compute_end_of_line
 		return;
 	}
 
+
 	// Optimism: perhaps the entire line fits?
-	// NOCOM(GunChleoc): Multiple calls of make_ligatures are inefficient.
-	if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str())) <= m_wrapwidth) {
+	// TODO(GunChleoc): Arabic Multiple calls of make_ligatures are inefficient.
+	if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
+		 <= m_wrapwidth) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -148,7 +150,8 @@ void WordWrap::compute_end_of_line
 	while (end_upper - end_lower > 4) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str())) <= m_wrapwidth) {
+		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
+			 <= m_wrapwidth) {
 			end_lower = mid;
 		} else {
 			end_upper = mid - 1;
@@ -168,7 +171,9 @@ void WordWrap::compute_end_of_line
 			break; // we already know that this cannot possibly fit
 
 		// check whether the next word still fits
-		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str())) > m_wrapwidth)
+		if (m_style.calc_bare_width(
+				 i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()))
+			 > m_wrapwidth)
 			break;
 
 		space = nextspace;
@@ -185,10 +190,12 @@ void WordWrap::compute_end_of_line
 	while (end_upper > end_lower) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str())) <= m_wrapwidth)
+		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
+			 <= m_wrapwidth) {
 			end_lower = mid;
-		else
+		} else {
 			end_upper = mid - 1;
+		}
 	}
 
 	next_line_start = line_end = end_lower;
@@ -287,7 +294,8 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			continue;
 
 		// Right-align text for RTL languages
-		// NOCOM(GunChleoc) we have a ragged edge here for Arabic, just like in richtext.cc - bug in TTF_SizeUTF8?
+		// NOCOM(GunChleoc) we have a ragged edge here for Arabic,
+		// just like in richtext.cc - bug in TTF_SizeUTF8?
 		Point drawpos(UI::g_fh1->fontset().is_rtl() ?
 							  where.x + m_wrapwidth
 							  - m_style.calc_bare_width(i18n::make_ligatures(m_lines[line].text.c_str())) - 2 :

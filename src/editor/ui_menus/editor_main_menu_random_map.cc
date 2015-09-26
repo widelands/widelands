@@ -42,7 +42,7 @@
 #include "ui_basic/window.h"
 
 using namespace Widelands;
-// NOCOM(GunChleoc): buttons need more height for Arabic.
+// TODO(GunChleoc): Arabic buttons need more height for Arabic.
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Window(&parent,
 				  "random_map_menu",

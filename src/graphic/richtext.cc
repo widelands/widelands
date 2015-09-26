@@ -26,9 +26,9 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
-#include "graphic/text/bidi.h"
 
 namespace UI {
 
@@ -83,7 +83,8 @@ struct TextlineElement : Element {
 		// Reorder words for BiDi
 		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
-			for (std::vector<std::string>::iterator source_it = words.begin(); source_it != words.end(); ++source_it) {
+			for (std::vector<std::string>::iterator source_it = words.begin();
+				  source_it != words.end(); ++source_it) {
 				const std::string& word = *source_it;
 				if (source_it != words.end()) {
 					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
@@ -439,7 +440,7 @@ void RichText::parse(const std::string & rtext)
 				bbox.w = 0;
 				bbox.h = text.style.font->height();
 
-				// NOCOM(GunChleoc): width calculation for alignment is broken (Arabic)
+				// TODO(GunChleoc): Arabic width calculation for alignment is broken (Arabic)
 				do {
 					uint32_t wordwidth = text.style.calc_bare_width(words[word_cnt + nrwords]);
 

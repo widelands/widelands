@@ -34,7 +34,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
 
-// NOCOM(GunChleoc): line height broken for descriptions for Arabic.
+// TODO(GunChleoc): Arabic line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
 
 using Widelands::WidelandsMapLoader;

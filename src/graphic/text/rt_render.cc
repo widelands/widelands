@@ -726,7 +726,8 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word.c_str()));
+					it = text_nodes.insert(text_nodes.begin(),
+												  new TextNode(font_cache_.get_font(&ns), ns, word.c_str()));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;

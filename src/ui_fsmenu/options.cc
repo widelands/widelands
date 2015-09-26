@@ -92,7 +92,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-// NOCOM(GunChleoc): This doesn't fit the window in Arabic.
+// TODO(GunChleoc): Arabic This doesn't fit the window in Arabic.
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:

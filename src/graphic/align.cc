@@ -19,8 +19,8 @@
 
 #include "graphic/align.h"
 
-#include "graphic/text/font_set.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
 
 namespace UI {
 

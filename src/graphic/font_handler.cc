@@ -33,8 +33,8 @@
 #include "graphic/font_handler1.h" // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/texture.h"
 #include "graphic/text/bidi.h"
+#include "graphic/texture.h"
 #include "graphic/wordwrap.h"
 
 namespace UI {
@@ -175,7 +175,6 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
  */
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
-	//log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 	std::string renderme = i18n::make_ligatures(lce.text.c_str());
@@ -225,8 +224,6 @@ void FontHandler::draw_text
 	boost::replace_all(copytext, "\\>", ">");
 	copytext = i18n::make_ligatures(copytext.c_str());
 	const LineCacheEntry & lce = d->get_line(style, copytext);
-
-	// NOCOM adjust where.x for right/leftalign.
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 

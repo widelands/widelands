@@ -30,7 +30,7 @@
 
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
-// NOCOM(GunChleoc): Turn this into a proper class
+// TODO(GunChleoc): Arabic Turn this into a proper class
 
 // Need to mirror () etc. for LTR languages, so we're sticking them in a map.
 const std::map<UChar, UChar> kSymmetricChars = {
@@ -493,8 +493,8 @@ std::string make_ligatures(const char* input) {
 				}
 
 				// Special ligature forms combine 2 letters.
-				if (kArabicLigatures.count({previous , c}) == 1) {
-					c = kArabicLigatures.at({previous , c});
+				if (kArabicLigatures.count({previous, c}) == 1) {
+					c = kArabicLigatures.at({previous, c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
@@ -514,8 +514,8 @@ std::string make_ligatures(const char* input) {
 				}
 
 				// Special ligature forms combine 2 letters.
-				if (kArabicLigatures.count({previous , c}) == 1) {
-					c = kArabicLigatures.at({previous , c});
+				if (kArabicLigatures.count({previous, c}) == 1) {
+					c = kArabicLigatures.at({previous, c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
@@ -540,8 +540,6 @@ std::string make_ligatures(const char* input) {
 
 	std::string result;
 	queue.toUTF8String(result);
-	//log("NOCOM Ligatures result: %s\n", result.c_str());
-
 	return result;
 }
 
@@ -566,7 +564,7 @@ std::string line2bidi(const char* input) {
 				(is_numeric_char(c) ||
 				 is_latin_char(c) ||
 				 is_symmetric_char(c) ||
-				 ((is_latin_char(previous) || is_punctuation_char(previous) ) && is_punctuation_char(c)))) {
+				 ((is_latin_char(previous) || is_punctuation_char(previous)) && is_punctuation_char(c)))) {
 			if (is_symmetric_char(c)) {
 				c = mirror_symmetric_char(c);
 			}
@@ -589,8 +587,6 @@ std::string line2bidi(const char* input) {
 
 	std::string result;
 	stack.toUTF8String(result);
-	//log("NOCOM BiDI result: %s\n", result.c_str());
-
 	return result;
 }
 
