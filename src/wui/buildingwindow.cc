@@ -41,8 +41,6 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
-// NOCOM(GunChleoc): Arabic needs more height in workers' table header
-
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
 static const char * pic_debug              = "pics/menu_debug.png";

@@ -61,7 +61,6 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height = m_textstyle.font->height() + 4;
-		set_size(w, new_height);
 		set_desired_size(w, new_height);
 	}
 	set_thinks(false);

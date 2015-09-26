@@ -28,6 +28,8 @@
 #include "graphic/wordwrap.h"
 #include "ui_basic/scrollbar.h"
 
+// NOCOM Fix positioning for Arabic
+
 namespace UI {
 
 static const int32_t ms_darken_value = -20;

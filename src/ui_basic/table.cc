@@ -52,7 +52,7 @@ Table<void *>::Table
 	m_total_width     (0),
 	m_fontname        (UI::g_fh1->fontset().serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
+	m_headerheight    (g_fh->get_fontheight(m_fontname, m_fontsize) + 4),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
@@ -244,6 +244,18 @@ void Table<void *>::clear()
 	m_selection = no_selection_index();
 	m_last_click_time = -10000;
 	m_last_selection = no_selection_index();
+}
+
+
+void Table<void *>::fit_height(uint32_t entries) {
+	if (entries == 0) {
+		entries = size();
+	}
+	uint32_t tablewidth;
+	uint32_t tableheight;
+	get_desired_size(tablewidth, tableheight);
+	tableheight = m_headerheight + 2 + get_lineheight() * entries;
+	set_desired_size(tablewidth, tableheight);
 }
 
 /**
