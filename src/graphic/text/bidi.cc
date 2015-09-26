@@ -548,7 +548,7 @@ std::string make_ligatures(const char* input) {
 
 // BiDi support for RTL languages
 // This turns the logical order of the glyphs into the display order.
-std::string string2bidi(const char* input) {
+std::string line2bidi(const char* input) {
 	const icu::UnicodeString parseme(input);
 	icu::UnicodeString stack;
 	icu::UnicodeString temp_stack;

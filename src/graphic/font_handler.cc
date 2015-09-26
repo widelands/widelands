@@ -178,12 +178,10 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 	//log("\nNOCOM **** Rendering line with fh!! - %s\n", lce.text.c_str());
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
-	std::string renderme;
+	std::string renderme = i18n::make_ligatures(lce.text.c_str());
 
-	if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(lce.text.c_str())) {
-		renderme = i18n::string2bidi(i18n::make_ligatures(lce.text.c_str()).c_str());
-	} else {
-		renderme = i18n::make_ligatures(lce.text.c_str());
+	if (i18n::has_rtl_character(lce.text.c_str())) {
+		renderme = i18n::line2bidi(renderme.c_str());
 	}
 
 	// Work around an Issue in SDL_TTF that dies when the surface
@@ -225,8 +223,10 @@ void FontHandler::draw_text
 	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
 	boost::replace_all(copytext, "\\>", ">");
-	copytext = i18n::make_ligatures(copytext.c_str()); // NOCOM
+	copytext = i18n::make_ligatures(copytext.c_str());
 	const LineCacheEntry & lce = d->get_line(style, copytext);
+
+	// NOCOM adjust where.x for right/leftalign.
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 

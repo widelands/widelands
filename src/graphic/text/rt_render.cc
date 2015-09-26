@@ -692,7 +692,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	std::vector<RenderNode*> text_nodes;
 
 	// Bidirectional text (Arabic etc.)
-	if (ns.fontset->is_rtl() && i18n::has_rtl_character(txt.c_str())) {
+	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = text_nodes.begin();
 
@@ -701,13 +701,16 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			ts.skip_ws();
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
-				if (i18n::has_rtl_character(word.c_str()) ||
-					 i18n::has_rtl_character(previous_word.c_str())) {
+				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
 					if (!previous_word.empty()) {
 						text_nodes.insert(text_nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
 					}
-					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, i18n::string2bidi(word.c_str())));
+					if (word_is_bidi) {
+						word = i18n::line2bidi(word.c_str());
+					}
+					it = text_nodes.insert(text_nodes.begin(), new TextNode(font_cache_.get_font(&ns), ns, word.c_str()));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -1069,10 +1072,6 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
 	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
-
-	// NOCOM testing BIDI
-	//i18n::string2bidi(i18n::make_ligatures("1 العربية - حاله اللعبه2\n23Català,456\n.עברית:789日本語12\n3ქართული4"
-	//				"\n56한국어78\n9मराठी12\n3Lietuvių4\n56မြန်မာ7\n89Русский123සිංහල45\n6Tiếng Việt789"));
 }
 
 Renderer::~Renderer() {

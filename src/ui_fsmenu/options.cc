@@ -47,8 +47,6 @@
 
 namespace {
 
-// NOCOM(GunChleoc): Changing languages messes up table font size.
-
 // Data model for the entries in the language selection list.
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
@@ -437,16 +435,10 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
 
-				std::string name = table->get_string("name");
+				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
 				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
 
-				// We have to do the BiDi thing explicitly here, because of the multiple languages.
-				if (fontset->is_rtl() && fontset->is_rtl() != UI::g_fh1->fontset().is_rtl()) {
-					name = i18n::string2bidi(i18n::make_ligatures(name.c_str()).c_str());
-				} else {
-					name = i18n::make_ligatures(name.c_str());
-				}
 				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
 
 				if (localename == current_locale) {
