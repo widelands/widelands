@@ -61,7 +61,6 @@ private:
 	InteractiveGameBase& igb_;
 };
 
-// NOCOM(GunChleoc): Window title needs to be made smaller for Arabic.
 GameOptionsMenu::GameOptionsMenu
 	(InteractiveGameBase                      & gb,
 	 UI::UniqueWindow::Registry               & registry,

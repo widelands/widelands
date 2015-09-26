@@ -19,12 +19,14 @@
 
 #include "graphic/text/rt_render.h"
 
+#include <cmath>
 #include <memory>
 #include <queue>
 #include <string>
 #include <vector>
 
 #include <SDL.h>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -171,30 +173,45 @@ private:
 uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shrink_to_fit) {
 	assert(rv->empty());
 
-	while (m_idx < m_all_nodes.size() && m_all_nodes[m_idx]->is_non_mandatory_space()) {
-		delete m_all_nodes[m_idx++];
+	// Remove leading spaces
+	while (m_idx < m_all_nodes.size()
+		&& m_all_nodes[m_idx]->is_non_mandatory_space()
+		&& shrink_to_fit) {
+			delete m_all_nodes[m_idx++];
 	}
 
 	uint16_t x = p.left;
+	std::size_t first_m_idx = m_idx;
+
+	// Calc fitting nodes
 	while (m_idx < m_all_nodes.size()) {
 		RenderNode* n = m_all_nodes[m_idx];
-		const uint16_t nw = n->width();
-		if (x + nw + p.right > w || n->get_floating()) {
-			break;
+		uint16_t nw = n->width();
+		if (x + nw + p.right > w || n->get_floating() != RenderNode::NO_FLOAT) {
+			if (m_idx == first_m_idx) {
+				nw = w - p.right - x;
+			} else {
+				break;
+			}
 		}
 		n->set_x(x); x += nw;
 		rv->push_back(n);
 		++m_idx;
 	}
-
-	if (!rv->empty() && rv->back()->is_non_mandatory_space()) {
+	// Remove trailing spaces
+	while (!rv->empty()
+			&& rv->back()->is_non_mandatory_space()
+			&& shrink_to_fit) {
 		x -= rv->back()->width();
 		delete rv->back();
 		rv->pop_back();
 	}
 
 	// Remaining space in this line
-	uint16_t rem_space = w - p.right - x;
+	uint16_t rem_space = 0;
+	if (w < INFINITE_WIDTH) {
+		rem_space = w - p.right - x;
+	}
 
 	// Find expanding nodes
 	vector<size_t> expanding_nodes;
@@ -211,8 +228,7 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		// NOCOM(GunChleoc): !shrink_to_fit && breaks right aligment. Needs fixing.
-		if (!shrink_to_fit && !rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
+		if (!rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
 			if ((*rv->rbegin())->halign() == HALIGN_CENTER) {
 				rem_space /= 2;  // Otherwise, we align right
 			}
@@ -245,10 +261,15 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		uint16_t biggest_hotspot = m_fit_line(w, p, &nodes_in_line, shrink_to_fit);
 
 		int line_height = 0;
+		int line_start = INFINITE_WIDTH;
+		// Compute real line height and width, taking into account alignement
 		for (RenderNode* n : nodes_in_line) {
 			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(m_h + biggest_hotspot - n->hotspot_y());
-			max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
+			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
+				line_start = n->x() - p.left;
+			}
+			max_line_width = std::max<int>(max_line_width, n->x() + n->width() + p.right - line_start);
 		}
 
 		// Go over again and adjust position for VALIGN
@@ -665,12 +686,15 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 }
 
 class TagHandler;
-TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache);
+TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
+										RendererStyle& renderer_style);
 
 class TagHandler {
 public:
-	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		m_tag(tag), font_cache_(fc), m_ns(ns), image_cache_(image_cache) {}
+	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+				  RendererStyle& renderer_style_) :
+		m_tag(tag), font_cache_(fc), m_ns(ns), image_cache_(image_cache),
+		renderer_style(renderer_style_) {}
 	virtual ~TagHandler() {}
 
 	virtual void enter() {}
@@ -684,6 +708,7 @@ protected:
 	FontCache& font_cache_;
 	NodeStyle m_ns;
 	ImageCache* image_cache_;  // Not owned
+	RendererStyle& renderer_style; // Reference to global renderer style in the renderer
 };
 
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
@@ -746,7 +771,8 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 void TagHandler::emit(vector<RenderNode*>& nodes) {
 	for (Child* c : m_tag.childs()) {
 		if (c->tag) {
-			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, font_cache_, m_ns, image_cache_));
+			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, font_cache_, m_ns, image_cache_,
+																			 renderer_style));
 			th->enter();
 			th->emit(nodes);
 		} else
@@ -756,8 +782,9 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
-		: TagHandler(tag, fc, ns, image_cache) {}
+	FontTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+						RendererStyle& init_renderer_style)
+		: TagHandler(tag, fc, ns, image_cache, init_renderer_style) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -774,15 +801,14 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
-		: TagHandler(tag, fc, ns, image_cache), m_indent(0) {
+	PTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+					RendererStyle& init_renderer_style)
+		: TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_indent(0) {
 	}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
-		// NOCOM(GunChleoc): right align doesn't work.
-		// This bug is visible in the tooltips, e.g. buildingwindow.cc
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
@@ -800,29 +826,29 @@ public:
 					m_ns.halign = HALIGN_RIGHT;
 				}
 			}
-		} else {
-			if (!m_ns.is_rtl) {
-				m_ns.halign = HALIGN_LEFT;
-			} else {
-				m_ns.halign = HALIGN_RIGHT;
-			}
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
-			if (align == "top") m_ns.valign = VALIGN_TOP;
-			else if (align == "bottom") m_ns.valign = VALIGN_BOTTOM;
-			else if (align == "center" || align == "middle") m_ns.valign = VALIGN_CENTER;
+			if (align == "bottom") {
+				m_ns.valign = VALIGN_BOTTOM;
+			} else if (align == "center" || align == "middle") {
+				m_ns.valign = VALIGN_CENTER;
+			} else {
+				m_ns.valign = VALIGN_TOP;
+			}
 		}
 		if (a.has("spacing"))
 			m_ns.spacing = a["spacing"].get_int();
 	}
 	void emit(vector<RenderNode*>& nodes) override {
+		// Put a newline if this is not the first paragraph
+		if (!nodes.empty()) {
+			nodes.push_back(new NewlineNode(m_ns));
+		}
 		if (m_indent) {
 			nodes.push_back(new SpaceNode(m_ns, m_indent));
 		}
 		TagHandler::emit(nodes);
-
-		nodes.push_back(new NewlineNode(m_ns));
 	}
 
 private:
@@ -831,8 +857,9 @@ private:
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache), m_rn(nullptr) {
+	ImgTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+					  RendererStyle& init_renderer_style) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_rn(nullptr) {
 	}
 
 	void enter() override {
@@ -849,8 +876,9 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache), m_space(0) {}
+	VspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+						  RendererStyle& init_renderer_style) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_space(0) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -868,8 +896,9 @@ private:
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache), m_bg(nullptr), m_space(0) {}
+	HspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+						  RendererStyle& init_renderer_style) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_bg(nullptr), m_space(0) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -919,8 +948,9 @@ private:
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache) {
+	BrTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+					 RendererStyle& init_renderer_style) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style) {
 	}
 
 	void emit(vector<RenderNode*>& nodes) override {
@@ -933,9 +963,10 @@ class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
 		(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+		 RendererStyle& init_renderer_style,
 		 uint16_t max_w = 0, bool shrink_to_fit = true)
 		:
-			TagHandler(tag, fc, ns, image_cache),
+			TagHandler(tag, fc, ns, image_cache, init_renderer_style),
 			shrink_to_fit_(shrink_to_fit),
 			m_w(max_w),
 			m_rn(new SubTagRenderNode(ns))
@@ -983,18 +1014,34 @@ public:
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		vector<RenderNode*> nodes_to_render;
-		// layout.fit_nodes has side effect, so keep it outside of the if (shrink_to_fit_) block.
 		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding, shrink_to_fit_);
-		if (shrink_to_fit_) {
-			m_w = min(m_w, max_line_width);
+		uint16_t m_extra_width = 0;
+		if (m_w < INFINITE_WIDTH && m_w > max_line_width) {
+			m_extra_width = m_w - max_line_width;
 		}
 
 		// Collect all tags from children
 		for (RenderNode* rn : nodes_to_render) {
 			for (const Reference& r : rn->get_references()) {
-			m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
+				m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
+			}
+			if (shrink_to_fit_) {
+				if (rn->halign() == HAlign::HALIGN_CENTER) {
+					rn->set_x(rn->x() - m_extra_width / 2);
+				} else if (rn->halign() == HAlign::HALIGN_RIGHT) {
+					rn->set_x(rn->x() - m_extra_width);
+				}
+			}
 		}
-	}
+		if (shrink_to_fit_ || m_w >= INFINITE_WIDTH) {
+			m_w = max_line_width;
+		}
+
+		if (renderer_style.remaining_width >= m_w) {
+			renderer_style.remaining_width -= m_w;
+		} else {
+			renderer_style.remaining_width = renderer_style.overall_width;
+		}
 
 		m_rn->set_dimensions(m_w, layout.height(), margin);
 		m_rn->set_nodes_to_render(nodes_to_render);
@@ -1007,7 +1054,17 @@ public:
 	virtual void handle_unique_attributes() {
 		const AttrMap& a = m_tag.attrs();
 		if (a.has("width")) {
-			m_w = a["width"].get_int();
+			std::string width_string = a["width"].get_string();
+			if (width_string == "*") {
+				m_w = renderer_style.remaining_width;
+			} else if (boost::algorithm::ends_with(width_string, "%")) {
+				width_string = width_string.substr(0, width_string.length() - 1);
+				uint8_t new_width_percent = strtol(width_string.c_str(), nullptr, 10);
+				m_w = floor(renderer_style.overall_width * new_width_percent / 100);
+				m_w = std::min(m_w, renderer_style.remaining_width);
+			} else {
+				m_w = a["width"].get_int();
+			}
 			shrink_to_fit_ = false;
 		}
 		if (a.has("float")) {
@@ -1022,7 +1079,6 @@ public:
 			else if (align == "center" || align == "middle") m_rn->set_valign(VALIGN_CENTER);
 		}
 	}
-
 private:
 	bool shrink_to_fit_;
 	uint16_t m_w;
@@ -1031,8 +1087,9 @@ private:
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache, uint16_t w) :
-		SubTagHandler(tag, fc, ns, image_cache, w, true) {
+	RTTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+					 RendererStyle& init_renderer_style, uint16_t w) :
+		SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in sub.
@@ -1043,14 +1100,17 @@ public:
 };
 
 template<typename T> TagHandler* create_taghandler
-	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)
+	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
+	 RendererStyle& renderer_style)
 {
-	return new T(tag, fc, ns, image_cache);
+	return new T(tag, fc, ns, image_cache, renderer_style);
 }
 using TagHandlerMap = map<const string, TagHandler* (*)
-	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)>;
+	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
+	 RendererStyle& renderer_style)>;
 
-TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache) {
+TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
+										RendererStyle& renderer_style) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -1066,12 +1126,15 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 		throw RenderError
 			((boost::format("No Tag handler for %s. This is a bug, please submit a report.")
 			  % tag.name()).str());
-	return i->second(tag, fc, ns, image_cache);
+	return i->second(tag, fc, ns, image_cache, renderer_style);
 }
 
 Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
+	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset),
+	renderer_style_(fontset->serif(), 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	TextureCache* render
+		(const std::string&, uint16_t, const TagSet&);
 }
 
 Renderer::~Renderer() {
@@ -1080,16 +1143,21 @@ Renderer::~Renderer() {
 RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
+	if (!width) {
+		width = INFINITE_WIDTH;
+	}
+
+	renderer_style_.remaining_width = width;
+	renderer_style_.overall_width = width;
+
 	NodeStyle default_style = {
-		fontset_, fontset_->serif(), 16,
-		RGBColor(0, 0, 0), IFont::DEFAULT, fontset_->is_rtl(), 0, HALIGN_LEFT, VALIGN_BOTTOM,
+		fontset_,
+		renderer_style_.font_face, renderer_style_.font_size,
+		RGBColor(255, 255, 0), IFont::DEFAULT, fontset_->is_rtl(), 0, fontset_->is_rtl()? HALIGN_RIGHT : HALIGN_LEFT, VALIGN_TOP,
 		""
 	};
 
-	if (!width)
-		width = INFINITE_WIDTH;
-
-	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, width);
+	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, renderer_style_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
