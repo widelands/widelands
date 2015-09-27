@@ -614,8 +614,10 @@ void DefaultAI::late_initialization() {
 				}
 
 				for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : train.buildcost()) {
-					// we are interested only in spidrcloth (atlanteans)
-					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first) {
+					// critical wares for trainingsites
+					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
+						tribe_->ware_index("gold") == temp_buildcosts.first ||
+						tribe_->ware_index("grout") == temp_buildcosts.first) {
 						bo.critical_built_mat_.push_back(temp_buildcosts.first);
 					}
 				}
@@ -1597,12 +1599,31 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				bo.new_building_overdue_ = 0;
 			}
 
-			//sometimes a building is required though the ware is not needed
-			if ((bo.new_building_ == BuildingNecessity::kNeeded
-				|| bo.new_building_ == BuildingNecessity::kForced)
-				&& bo.max_needed_preciousness_ == 0) {
-					bo.max_needed_preciousness_ = bo.max_preciousness_;
+			//new:
+			// sometimes a forced building has zero max_needed_preciousness, fixing it here
+			if (bo.new_building_ == BuildingNecessity::kForced && bo.max_needed_preciousness_ == 0) {
+				bo.max_needed_preciousness_ = bo.max_preciousness_;
 			}
+			//now verifying that all 'buildable' buildings has positive max_needed_preciousness_
+			// if they have outputs, all other must have zero max_needed_preciousness_
+			if ((bo.new_building_ == BuildingNecessity::kNeeded
+				|| bo.new_building_ == BuildingNecessity::kForced
+				|| bo.new_building_ == BuildingNecessity::kAllowed) && !bo.outputs_.empty()) {
+					assert (bo.max_needed_preciousness_ > 0);
+			} else {
+				//for other situation we set  bo.max_needed_preciousness_ to zero
+				bo.max_needed_preciousness_ = 0;
+			}
+
+
+
+			//NOCOM delete
+			//sometimes a building is required though the ware is not needed
+			//if ((bo.new_building_ == BuildingNecessity::kNeeded
+				//|| bo.new_building_ == BuildingNecessity::kForced)
+				//&& bo.max_needed_preciousness_ == 0) {
+					//bo.max_needed_preciousness_ = bo.max_preciousness_;
+			//}
 
 			// Exemptions bellow has to guarantee that no further building is going to be built
 			// if there is any in construction of unoccupied building.
@@ -1625,25 +1646,52 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 			}
 
+			// here we consider a time how long is a building needed
+			// bo.new_building_overdue_ increases bo.primary_priority_
+			// but only for forced and needed buildings
+			if (bo.max_needed_preciousness_ > 0) {
+				if (bo.new_building_ == BuildingNecessity::kAllowed){
+					bo.primary_priority_ = bo.max_needed_preciousness_;
+				} else {
+					bo.primary_priority_ = bo.max_needed_preciousness_ +
+					bo.max_needed_preciousness_ * bo.new_building_overdue_ / 100 +
+					bo.new_building_overdue_ / 20;
+				}
+			} else {
+				bo.primary_priority_ = 0;
+			}				
+
 			// calculating primary_priority_, basically it is max_needed_preciousness +
 			// some bonus for being late
-			bo.primary_priority_ = bo.max_needed_preciousness_ +
-			bo.max_needed_preciousness_ * bo.new_building_overdue_ / 100 +
-			bo.new_building_overdue_ / 20;
+			//if (bo.new_building_ == BuildingNecessity::kNeeded ||
+				//bo.new_building_ == BuildingNecessity::kForced) {
+				//bo.primary_priority_ = bo.max_needed_preciousness_ +
+				//bo.max_needed_preciousness_ * bo.new_building_overdue_ / 100 +
+				//bo.new_building_overdue_ / 20;
+			//} else {
+				//bo.primary_priority_ = 0;
+			//}
 
-			//another set of tests to guarantee consistency
-			if (bo.new_building_ == BuildingNecessity::kNeeded ||
-				bo.new_building_ == BuildingNecessity::kForced ||
-				bo.new_building_ == BuildingNecessity::kAllowed) {
+			//another set of tests to guarantee consistency NOCOM delete?
+			//if (bo.new_building_ == BuildingNecessity::kNeeded ||
+				//bo.new_building_ == BuildingNecessity::kForced ||
+				//bo.new_building_ == BuildingNecessity::kAllowed) {
 
-				if (bo.new_building_ == BuildingNecessity::kAllowed) {
-					assert (bo.new_building_overdue_ == 0);
-				} else if (bo.outputs_.empty()) {
-					assert (bo.primary_priority_ == 0);
-				} else if (bo.new_building_ == BuildingNecessity::kNeeded){
-					assert (bo.primary_priority_ > 0);
-				}
-			}
+				//if (bo.outputs_.empty()) {
+					//assert (bo.primary_priority_ == 0);
+				//} else if (bo.new_building_ == BuildingNecessity::kNeeded){
+					//assert (bo.primary_priority_ > 0);
+				//}
+			//}
+			
+			//if (bo.primary_priority_ == 0) {
+				//assert (bo.max_needed_preciousness_ == 0);
+			//} else  { 
+				//assert (bo.max_needed_preciousness_ > 0);
+			//}
+			
+			
+				
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
 		} else if  (bo.type == BuildingObserver::TRAININGSITE && bo.build_material_shortage_) {
@@ -1740,6 +1788,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					(bo.new_building_ == BuildingNecessity::kNeeded
 					&&
 					bo.new_building_overdue_ > 0));
+					
+					assert(bo.primary_priority_ > 0);
 
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						assert (bo.total_count() - bo.unconnected_count_ == 0);
@@ -1751,27 +1801,32 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					prio = bo.primary_priority_;
 
+					// keep wells more distant //NOCOM - OK?
+					if (bf->producers_nearby_.at(bo.outputs_.at(0)) > 2) {
+						continue;
+					}
+
 					// one well is forced
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio += 200;
 					}
 
-					bo.cnt_target_ = 1 + productionsites.size() / 50;
+					//bo.cnt_target_ = 1 + productionsites.size() / 50; NOCOM
 
-					if (bo.stocklevel_time < game().get_gametime() - 30 * 1000) {
-						bo.stocklevel_ = get_stocklevel(bo);
-						bo.stocklevel_time = game().get_gametime();
-					}
-					if (bo.stocklevel_ > 50 + productionsites.size() * 5) {
-						continue;
-					}
+					//if (bo.stocklevel_time < game().get_gametime() - 30 * 1000) {
+						//bo.stocklevel_ = get_stocklevel(bo);
+						//bo.stocklevel_time = game().get_gametime();
+					//}
+					//if (bo.stocklevel_ > 50 + productionsites.size() * 5) {
+						//continue;
+					//}
 					prio += bf->ground_water_ - 2;
 
 				} else if (bo.need_trees_) {  // LUMBERJACS
 
 					prio = bo.primary_priority_;
 
-					prio += 200 / (bo.total_count() + 1);
+					prio += -20 + 200 / (bo.total_count() + 1);
 
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio *= 2;
@@ -1780,8 +1835,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// consider cutters and rangers nearby
-					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 10;
-					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 10;
+					prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 20;
+					prio += bf->supporters_nearby_.at(bo.outputs_.at(0)) * 5;
 
 					prio += 2 * bf->trees_nearby_;
 
@@ -1861,8 +1916,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert (bo.cnt_target_ > 0);
 					} else {
 						bo.cnt_target_ =
-						   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 30;
+						   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 50;
 					}
+
+					//they have no own primary priority
+					assert(bo.primary_priority_ == 0);
 
 					if (bo.plants_trees_) {  // RANGERS
 
@@ -1923,7 +1981,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						prio += bf->producers_nearby_.at(bo.production_hint_) * 10;
-						prio -= bf->supporters_nearby_.at(bo.production_hint_) * 5;
+						prio -= bf->supporters_nearby_.at(bo.production_hint_) * 20;
 
 						if (bf->enemy_nearby_) {
 							prio -= 5;
@@ -2159,11 +2217,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// dont be close to enemies
 				if (bf->enemy_nearby_){
-					if (bo.is_port_) {
-						prio -= 10;
-					} else {
-						prio -= 40;
-					}
+					prio -= 40;
 				}
 
 				// being too close to a border is not good either
@@ -3694,9 +3748,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		bo.new_building_overdue_ = 0;
 	}
 
-	// This flag is to be used when buildig is forced. AI will not built a building when
+	// This flag is to be used when buildig is forced. AI will not build another building when
 	// a substitution exists. F.e. mines or pairs like tavern-inn
-	// To skip unnecessary calculation, we calculate this only if we have 0 count of the building
+	// To skip unnecessary calculation, we calculate this only if we have 0 count of the buildings
 	bool has_substitution_building = false;
 	if (bo.total_count() == 0 && bo.upgrade_substitutes_ && bo.type == BuildingObserver::PRODUCTIONSITE) {
 		//const BuildingDescr& bld = *bo.desc;
