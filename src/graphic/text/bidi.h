@@ -36,6 +36,8 @@ namespace i18n {
 	bool has_rtl_character(std::vector<std::string> input);
 	std::string icustring2string(const UnicodeString& convertme);
 	std::string icuchar2string(const UChar& convertme);
+	bool can_start_line(const UChar& c);
+	bool can_end_line(const UChar& c);
 
 } // namespace UI
 

@@ -302,6 +302,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 			++m_idx;
 		}
 		if (m_idx == m_idx_before_iteration) {
+			// NOCOM(GunChleoc): Japanese linebreaks
 			throw WidthTooSmall("Could not fit a single render node in line. Width of an Element is too small!");
 		}
 	}

@@ -156,12 +156,11 @@ std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>*
 		linewidth += text_width + space_width;
 	}
 	// If the first word didn't fit the line, split it.
-	// NOCOM(GunChleoc): Implement line break rules for Japanese etc.
 	if (!found_fitting && !words_to_fit->empty()) {
 		// Make sure we won't break ligatures and use Unicode chars for multibyte chars
 		word = i18n::make_ligatures(word.c_str());
 		const icu::UnicodeString unicode_word(word.c_str());
-		size_t end = 0;
+		int32_t end = 0;
 		text_width = 0;
 		// We just do linear search ahead until we hit the max
 		// Operating on single glyphs will keep the texture cache small.
@@ -169,6 +168,13 @@ std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>*
 			UChar c = unicode_word.charAt(end);
 			text_width += UI::g_fh1->render(as_uifont(i18n::icuchar2string(c)))->width();
 			++end;
+		}
+		// Make sure that diacritics stay with their base letters, and that
+		// start/end line rules are being followed. Leave an arbitrary minimum of 5 chars.
+		while (end > 5 &&
+				 !(i18n::can_start_line(unicode_word.charAt(end)) &&
+					i18n::can_end_line(unicode_word.charAt(end - 1)))) {
+			--end;
 		}
 		// Now split the string
 		result.push_back(i18n::icustring2string(unicode_word.tempSubString(0, end)));
