@@ -22,6 +22,7 @@
 #include <string>
 
 #include "graphic/align.h"
+#include "graphic/font_handler1.h"
 #include "graphic/text_layout.h"
 #include "base/point.h"
 
@@ -58,21 +59,18 @@ private:
 	struct LineData {
 		/// Textual content of the line
 		std::string text;
-
 		/// Starting offset of this line within the original un-wrapped text
-		uint32_t start;
+		size_t start;
+		size_t end;
 	};
 
-	void compute_end_of_line
-		(const std::string & text,
-		 std::string::size_type line_start,
-		 std::string::size_type & line_end,
-		 std::string::size_type & next_line_start);
+	std::vector<std::string> compute_end_of_line(std::vector<std::string>* words_to_fit);
 
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
 
 	std::vector<LineData> m_lines;
+	std::vector<std::string> m_words;
 };
 
 } // namespace UI

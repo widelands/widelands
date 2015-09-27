@@ -117,27 +117,34 @@ void MultilineTextarea::recompute()
 {
 	uint32_t height;
 
-	if (m_text.compare(0, 3, "<rt")) {
-		m->isrichtext = false;
-		m->ww.set_wrapwidth(get_eff_w());
-		m->ww.wrap(m_text);
-		height = m->ww.height();
-	} else {
-		m->isrichtext = true;
-		m->rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
-		m->rt.parse(m_text);
-		height = m->rt.height() + 2 * RICHTEXT_MARGIN;
+	// Rewrap the text if there is a scrollbar. We need to do this for text that is not left aligned.
+	for (int i = 0; i < 2; ++i) {
+		if (m_text.compare(0, 3, "<rt")) {
+			m->isrichtext = false;
+			m->ww.set_wrapwidth(get_eff_w());
+			m->ww.wrap(m_text);
+			height = m->ww.height();
+		} else {
+			m->isrichtext = true;
+			m->rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
+			m->rt.parse(m_text);
+			height = m->rt.height() + 2 * RICHTEXT_MARGIN;
+		}
+
+		bool setbottom = false;
+
+		if (m_scrollmode == ScrollLog)
+			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
+				setbottom = true;
+
+		m_scrollbar.set_steps(height - get_h());
+		if (setbottom)
+			m_scrollbar.set_scrollpos(height - get_h());
+
+		if (!m_scrollbar.is_enabled()) {
+			break;
+		}
 	}
-
-	bool setbottom = false;
-
-	if (m_scrollmode == ScrollLog)
-		if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
-			setbottom = true;
-
-	m_scrollbar.set_steps(height - get_h());
-	if (setbottom)
-		m_scrollbar.set_scrollpos(height - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
 }

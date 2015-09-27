@@ -34,6 +34,11 @@ inline bool is_richtext(const std::string& text) {
 }
 
 /**
+ * Escapes reserved characters for Richtext.
+ */
+std::string richtext_escape(const std::string& given_text);
+
+/**
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
  */

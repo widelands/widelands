@@ -16,12 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-/*
- * The original version of the word wrapping algorithm was taken
- * from Wesnoth -- http://www.wesnoth.org
- */
-
 #include "graphic/wordwrap.h"
+
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"
@@ -84,25 +82,37 @@ uint32_t WordWrap::wrapwidth() const
  */
 void WordWrap::wrap(const std::string & text)
 {
-	//static int count = 0;
-	//log("word_wrap_text(%u): %i\n", m_wrapwidth, ++count);
-
 	m_lines.clear();
+	m_words.clear();
 
-	std::string::size_type line_start = 0;
+	if (text.empty()) return;
 
-	while (line_start <= text.size()) {
-		std::string::size_type next_line_start;
-		std::string::size_type line_end;
+	std::vector<std::string> words;
+	boost::split(words, text, boost::is_any_of(" "));
+	for (const std::string& word : words) {
+		m_words.push_back(word);
+	}
 
-		compute_end_of_line(text, line_start, line_end, next_line_start);
+	std::vector<std::string> words_to_fit = m_words;
 
+	size_t line_start = 0;
+	size_t line_end = line_start;
+
+	while (!words_to_fit.empty()) {
+		std::vector<std::string> line_words = compute_end_of_line(&words_to_fit);
+		assert(!line_words.empty());
+
+		std::string line;
+		for (std::string line_word : line_words) {
+			line += line_word;
+		}
+		line_end += line.size();
 		LineData ld;
 		ld.start = line_start;
-		ld.text = text.substr(line_start, line_end - line_start);
+		ld.end = line_end;
+		ld.text = line;
 		m_lines.push_back(ld);
-
-		line_start = next_line_start;
+		line_start = line_end;
 	}
 }
 
@@ -111,94 +121,68 @@ void WordWrap::wrap(const std::string & text)
  * Compute the position where the line that starts at \p line_start
  * ends.
  */
-void WordWrap::compute_end_of_line
-	(const std::string & text,
-	 std::string::size_type line_start,
-	 std::string::size_type & line_end,
-	 std::string::size_type & next_line_start)
-{
-	std::string::size_type orig_end = text.find('\n', line_start);
-	if (orig_end == std::string::npos)
-		orig_end = text.size();
-
-	if (m_wrapwidth == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= 1) {
-		// Special fast path when wrapping is disabled or
-		// original text line contains at most one character
-		line_end = orig_end;
-		next_line_start = orig_end + 1;
-		return;
+// NOCOM add length to linedata?
+std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>* words_to_fit) {
+	uint32_t margin = 4;
+	assert(m_wrapwidth > margin);
+	assert(!words_to_fit->empty());
+	std::vector<std::string> result;
+	uint32_t linewidth = 0;
+	bool found_fitting = false;
+	// We need the dots to prevent trimming of the whitespace.
+	uint32_t space_width = UI::g_fh1->render(as_uifont(". ."))->width() -
+								  UI::g_fh1->render(as_uifont(".."))->width();
+	std::string word = words_to_fit->front();
+	uint32_t text_width = UI::g_fh1->render(as_uifont(word))->width();
+	// First word gets no blank space
+	if ((linewidth + text_width) <= m_wrapwidth - margin) {
+		found_fitting = true;
+		result.push_back(word);
+		words_to_fit->erase(words_to_fit->begin());
+		linewidth += text_width;
 	}
 
-
-	// Optimism: perhaps the entire line fits?
-	// TODO(GunChleoc): Arabic Multiple calls of make_ligatures are inefficient.
-	if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
-		 <= m_wrapwidth) {
-		line_end = orig_end;
-		next_line_start = orig_end + 1;
-		return;
-	}
-
-	// Okay, we really do need to wrap; get a first rough estimate using binary search
-	// Invariant: [line_start, end_lower) fits,
-	// but everything strictly longer than [line_start, end_upper) does not fit
-	// We force the lower bound to allow at least one character,
-	// otherwise the word wrap might get into an infinite loop.
-	std::string::size_type end_upper = orig_end - 1;
-	std::string::size_type end_lower = line_start + 1;
-
-	while (end_upper - end_lower > 4) {
-		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
-
-		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
-			 <= m_wrapwidth) {
-			end_lower = mid;
-		} else {
-			end_upper = mid - 1;
-		}
-	}
-
-	// Narrow it down to a word break
-	// Invariant: space points to a space character such that [line_start, space) fits
-	std::string::size_type space = end_lower;
-
-	while (space > line_start && text[space] != ' ')
-		--space;
-
-	for (;;) {
-		std::string::size_type nextspace = text.find(' ', space + 1);
-		if (nextspace > end_upper)
-			break; // we already know that this cannot possibly fit
-
-		// check whether the next word still fits
-		if (m_style.calc_bare_width(
-				 i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()))
-			 > m_wrapwidth)
+	while (!words_to_fit->empty()) {
+		word = words_to_fit->front();
+		text_width = UI::g_fh1->render(as_uifont(word))->width();
+		if ((linewidth + text_width + space_width) > m_wrapwidth - margin) {
 			break;
-
-		space = nextspace;
-	}
-
-	if (space > line_start) {
-		line_end = space;
-		next_line_start = space + 1;
-		return;
-	}
-
-	// Nasty special case: the line starts with a single word that is too big to fit
-	// Continue the binary search until we narrowed down exactly how many characters fit
-	while (end_upper > end_lower) {
-		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
-
-		if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
-			 <= m_wrapwidth) {
-			end_lower = mid;
-		} else {
-			end_upper = mid - 1;
 		}
+		found_fitting = true;
+		result.push_back(" " + word);
+		words_to_fit->erase(words_to_fit->begin());
+		linewidth += text_width + space_width;
 	}
+	// If the first word didn't fit the line, split it.
+	// NOCOM(GunChleoc): Implement line break rules for Japanese etc.
+	// NOCOM(GunChleoc): Japanese needs icu Char for proper segmentation
+	if (!found_fitting && !words_to_fit->empty()) {
+		log("Word doesn't fit the line: %s\n", word.c_str());
+		size_t end = word.size() - 1;
+		// Poor man's binary search: We cut the string in half until it fits.
+		while (!found_fitting && end > 0) {
+			end = floor(end / 2);
+			text_width = UI::g_fh1->render(as_uifont(word.substr(0, end)))->width();
+			if (text_width <= m_wrapwidth - margin) {
+				found_fitting = true;
+			}
+		}
+		// Now we do linear search ahead until we hit the max
+		if (end > 0) {
+			size_t word_size = word.size();
+			while (text_width < m_wrapwidth - margin && (end < word_size - 1)) {
+				++end;
+				text_width = UI::g_fh1->render(as_uifont(word.substr(0, end)))->width();
+			}
+			// Now split the string
+			std::string word1 = word.substr(0, end);
+			std::string word2 = word.substr(end, word_size - 1);
+			result.push_back(word1);
+			words_to_fit->at(0) = word2;
+		}
 
-	next_line_start = line_end = end_lower;
+	}
+	return result;
 }
 
 
@@ -225,10 +209,12 @@ uint32_t WordWrap::width() const
  */
 uint32_t WordWrap::height() const
 {
-	uint16_t fontheight = m_style.font->height();
-	uint32_t lineskip = m_style.font->lineskip();
+	uint16_t fontheight = 0;
+	if (!m_lines.empty()) {
+		fontheight = UI::g_fh1->render(as_uifont(m_lines[0].text))->height();
+	}
 
-	return fontheight + (m_lines.size() - 1) * lineskip;
+	return fontheight * (m_lines.size());
 }
 
 /**
@@ -237,6 +223,7 @@ uint32_t WordWrap::height() const
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const
 {
+	/* NOCOM
 	assert(m_lines.size());
 	assert(m_lines[0].start == 0);
 
@@ -256,6 +243,7 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos)
 
 	line = min;
 	pos = caret - m_lines[min].start;
+	*/
 }
 
 /**
@@ -263,7 +251,8 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos)
  */
 uint32_t WordWrap::line_offset(uint32_t line) const
 {
-	return m_lines[line].start;
+	// NOCOM return m_lines[line].start;
+	return 0;
 }
 
 /**
@@ -273,8 +262,8 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
-	uint16_t fontheight = m_style.font->height();
-	uint32_t lineskip = m_style.font->lineskip();
+	if (m_lines.empty()) return;
+
 	uint32_t caretline, caretpos;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
@@ -287,24 +276,29 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		else
 			where.y -= h;
 	}
-
 	++where.y;
-	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += lineskip) {
+
+	Align alignment = mirror_alignment(align);
+
+	// Since this will eventually be used in edit boxes only, we always have standard font size here.
+	uint16_t fontheight = UI::g_fh1->render(as_uifont(m_lines[0].text))->height();
+	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
-		// Right-align text for RTL languages
-		// NOCOM(GunChleoc) we have a ragged edge here for Arabic,
-		// just like in richtext.cc - bug in TTF_SizeUTF8?
-		Point drawpos(UI::g_fh1->fontset().is_rtl() ?
-							  where.x + m_wrapwidth
-							  - m_style.calc_bare_width(i18n::make_ligatures(m_lines[line].text.c_str())) - 2 :
-							  where.x,
-						  where.y);
+		Point point(where.x, where.y);
 
-		g_fh->draw_text
-			(dst, m_style, drawpos, m_lines[line].text.c_str(), Align(align & Align_Horizontal),
-			 line == caretline ? caretpos : std::numeric_limits<uint32_t>::max());
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(m_lines[line].text));
+		uint16_t text_width = entry_text_im->width();
+
+		if (alignment & Align_Right) {
+			point.x += m_wrapwidth;
+		} else if (alignment & Align_HCenter) {
+			point.x += m_wrapwidth / 2;
+		}
+
+		UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
+		dst.blit(point, UI::g_fh1->render(as_uifont(m_lines[line].text)));
 	}
 }
 
