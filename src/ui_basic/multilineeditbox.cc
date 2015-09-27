@@ -433,6 +433,7 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
 	return true;
 }
 
+
 /**
  * Grab the focus and redraw.
  */
@@ -450,6 +451,8 @@ void MultilineEditbox::draw(RenderTarget & dst)
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	d->refresh_ww();
+
+	d->ww.set_draw_caret(has_focus());
 
 	d->ww.draw
 		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), Align_Left,

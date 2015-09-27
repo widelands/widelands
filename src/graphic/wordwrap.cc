@@ -26,6 +26,7 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 
@@ -36,12 +37,12 @@ namespace UI {
  * and a default-constructed text style.
  */
 WordWrap::WordWrap() :
-	m_wrapwidth(std::numeric_limits<uint32_t>::max())
+	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false)
 {
 }
 
 WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
-	m_style(style)
+	m_style(style), m_draw_caret(false)
 {
 	m_wrapwidth = gwrapwidth;
 
@@ -85,18 +86,16 @@ uint32_t WordWrap::wrapwidth() const
 void WordWrap::wrap(const std::string & text)
 {
 	m_lines.clear();
-	m_words.clear();
+	std::vector<std::string> words_to_fit;
 
 	if (text.empty()) return;
 
 	std::vector<std::string> words;
 	boost::split(words, text, boost::is_any_of(" "));
 	for (const std::string& word : words) {
-		m_words.push_back(word);
+		// NOCOM(GunChleoc): This means that ligatures can't be broken apart while editing.
+		words_to_fit.push_back(i18n::make_ligatures(word.c_str()));
 	}
-
-	std::vector<std::string> words_to_fit = m_words;
-
 	size_t line_start = 0;
 	size_t line_end = line_start;
 
@@ -111,7 +110,6 @@ void WordWrap::wrap(const std::string & text)
 		line_end += line.size();
 		LineData ld;
 		ld.start = line_start;
-		ld.end = line_end;
 		ld.text = line;
 		m_lines.push_back(ld);
 		line_start = line_end;
@@ -135,30 +133,20 @@ std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>*
 	uint32_t space_width = UI::g_fh1->render(as_uifont(". ."))->width() -
 								  UI::g_fh1->render(as_uifont(".."))->width();
 	std::string word = words_to_fit->front();
-	uint32_t text_width = UI::g_fh1->render(as_uifont(word))->width();
-	// First word gets no blank space
-	if ((linewidth + text_width) <= m_wrapwidth - margin) {
-		found_fitting = true;
-		result.push_back(word);
-		words_to_fit->erase(words_to_fit->begin());
-		linewidth += text_width;
-	}
-
+	uint32_t text_width = 0;
 	while (!words_to_fit->empty()) {
-		word = words_to_fit->front();
 		text_width = UI::g_fh1->render(as_uifont(word))->width();
 		if ((linewidth + text_width + space_width) > m_wrapwidth - margin) {
 			break;
 		}
 		found_fitting = true;
-		result.push_back(" " + word);
+		result.push_back(word + " ");
 		words_to_fit->erase(words_to_fit->begin());
+		word = words_to_fit->front();
 		linewidth += text_width + space_width;
 	}
 	// If the first word didn't fit the line, split it.
 	if (!found_fitting && !words_to_fit->empty()) {
-		// Make sure we won't break ligatures and use Unicode chars for multibyte chars
-		word = i18n::make_ligatures(word.c_str());
 		const icu::UnicodeString unicode_word(word.c_str());
 		int32_t end = 0;
 		text_width = 0;
@@ -221,7 +209,6 @@ uint32_t WordWrap::height() const
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const
 {
-	/* NOCOM
 	assert(m_lines.size());
 	assert(m_lines[0].start == 0);
 
@@ -241,7 +228,6 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos)
 
 	line = min;
 	pos = caret - m_lines[min].start;
-	*/
 }
 
 /**
@@ -249,8 +235,7 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos)
  */
 uint32_t WordWrap::line_offset(uint32_t line) const
 {
-	// NOCOM return m_lines[line].start;
-	return 0;
+	return m_lines[line].start;
 }
 
 /**
@@ -296,7 +281,16 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		}
 
 		UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
-		dst.blit(point, UI::g_fh1->render(as_uifont(m_lines[line].text)));
+		dst.blit(point, entry_text_im);
+
+		if (m_draw_caret && line == caretline) {
+			int caret_x = UI::g_fh1->render(as_uifont(m_lines[line].text.substr(0, caretpos)))->width();
+			const Image* caret_image = g_gr->images().get("pics/caret.png");
+			Point caretpt;
+			caretpt.x = point.x + caret_x - caret_image->width() + 1;
+			caretpt.y = point.y + (entry_text_im->height() - caret_image->height()) / 2;
+			dst.blit(caretpt, caret_image);
+		}
 	}
 }
 

@@ -22,7 +22,6 @@
 #include <string>
 
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
 #include "graphic/text_layout.h"
 #include "base/point.h"
 
@@ -46,6 +45,7 @@ struct WordWrap {
 
 	uint32_t width() const;
 	uint32_t height() const;
+	void set_draw_caret(bool draw_it) {m_draw_caret = draw_it;}
 
 	void draw
 		(RenderTarget & dst, Point where, Align align = Align_Left,
@@ -59,18 +59,18 @@ private:
 	struct LineData {
 		/// Textual content of the line
 		std::string text;
+
 		/// Starting offset of this line within the original un-wrapped text
 		size_t start;
-		size_t end;
 	};
 
 	std::vector<std::string> compute_end_of_line(std::vector<std::string>* words_to_fit);
 
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
+	bool m_draw_caret;
 
 	std::vector<LineData> m_lines;
-	std::vector<std::string> m_words;
 };
 
 } // namespace UI
