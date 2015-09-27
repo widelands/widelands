@@ -22,8 +22,6 @@
 #include <map>
 #include <string>
 
-#include <unicode/uchar.h>
-#include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
 #include "base/log.h"
@@ -309,17 +307,6 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 };
 
 
-// Helper to printf ICU strings for testing
-const char* icustring2char(icu::UnicodeString convertme) {
-	std::string result;
-	convertme.toUTF8String(result);
-	return result.c_str();
-}
-const char* icuchar2char(UChar convertme) {
-	icu::UnicodeString temp(convertme);
-	return icustring2char(temp);
-}
-
 const std::set<std::string> kRTLScripts = {
 	{"arabic", "devanagari", "hebrew", "mandaic", "nko", "samaritan", "syriac", "thaana"},
 };
@@ -588,6 +575,17 @@ std::string line2bidi(const char* input) {
 	std::string result;
 	stack.toUTF8String(result);
 	return result;
+}
+
+// Helper to convert ICU strings to C++ strings
+std::string icustring2string(const icu::UnicodeString& convertme) {
+	std::string result;
+	convertme.toUTF8String(result);
+	return result;
+}
+std::string icuchar2string(const UChar& convertme) {
+	const icu::UnicodeString temp(convertme);
+	return icustring2string(temp);
 }
 
 } // namespace UI

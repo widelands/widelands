@@ -20,6 +20,8 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
+#include <unicode/uchar.h>
+#include <unicode/unistr.h>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"
@@ -155,32 +157,22 @@ std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>*
 	}
 	// If the first word didn't fit the line, split it.
 	// NOCOM(GunChleoc): Implement line break rules for Japanese etc.
-	// NOCOM(GunChleoc): Japanese needs icu Char for proper segmentation
 	if (!found_fitting && !words_to_fit->empty()) {
-		log("Word doesn't fit the line: %s\n", word.c_str());
-		size_t end = word.size() - 1;
-		// Poor man's binary search: We cut the string in half until it fits.
-		while (!found_fitting && end > 0) {
-			end = floor(end / 2);
-			text_width = UI::g_fh1->render(as_uifont(word.substr(0, end)))->width();
-			if (text_width <= m_wrapwidth - margin) {
-				found_fitting = true;
-			}
+		// Make sure we won't break ligatures and use Unicode chars for multibyte chars
+		word = i18n::make_ligatures(word.c_str());
+		const icu::UnicodeString unicode_word(word.c_str());
+		size_t end = 0;
+		text_width = 0;
+		// We just do linear search ahead until we hit the max
+		// Operating on single glyphs will keep the texture cache small.
+		while (text_width < m_wrapwidth - margin && (end < unicode_word.length() - 1)) {
+			UChar c = unicode_word.charAt(end);
+			text_width += UI::g_fh1->render(as_uifont(i18n::icuchar2string(c)))->width();
+			++end;
 		}
-		// Now we do linear search ahead until we hit the max
-		if (end > 0) {
-			size_t word_size = word.size();
-			while (text_width < m_wrapwidth - margin && (end < word_size - 1)) {
-				++end;
-				text_width = UI::g_fh1->render(as_uifont(word.substr(0, end)))->width();
-			}
-			// Now split the string
-			std::string word1 = word.substr(0, end);
-			std::string word2 = word.substr(end, word_size - 1);
-			result.push_back(word1);
-			words_to_fit->at(0) = word2;
-		}
-
+		// Now split the string
+		result.push_back(i18n::icustring2string(unicode_word.tempSubString(0, end)));
+		words_to_fit->at(0) = i18n::icustring2string(unicode_word.tempSubString(end));
 	}
 	return result;
 }

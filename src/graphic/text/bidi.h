@@ -23,6 +23,9 @@
 #include <string>
 #include <vector>
 
+#include <unicode/uchar.h>
+#include <unicode/unistr.h>
+
 #include "graphic/text/font_set.h"
 
 // BiDi support for RTL languages
@@ -31,6 +34,8 @@ namespace i18n {
 	std::string line2bidi(const char* input);
 	bool has_rtl_character(const char* input);
 	bool has_rtl_character(std::vector<std::string> input);
+	std::string icustring2string(const UnicodeString& convertme);
+	std::string icuchar2string(const UChar& convertme);
 
 } // namespace UI
 
