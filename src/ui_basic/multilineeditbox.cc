@@ -216,6 +216,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor)
 
 	do {
 		--cursor;
+		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -467,6 +468,12 @@ void MultilineEditbox::draw(RenderTarget & dst)
  */
 void MultilineEditbox::Data::insert(uint32_t where, const std::string & s)
 {
+	if (s == " ") {
+		// Block whitespace at start of text and consecutive whitespaces
+		if (where <= 0 || text.substr(where, 1) == " " || (text.substr(where - 1, 1) == " ")) {
+			return;
+		}
+	}
 	text.insert(where, s);
 	update();
 

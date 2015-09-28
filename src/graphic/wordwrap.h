@@ -64,8 +64,6 @@ private:
 		size_t start;
 	};
 
-	std::vector<std::string> compute_end_of_line(std::vector<std::string>* words_to_fit);
-
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
 	bool m_draw_caret;

@@ -16,6 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/*
+ * The original version of the word wrapping algorithm was taken
+ * from Wesnoth -- http://www.wesnoth.org
+ */
+
 #include "graphic/wordwrap.h"
 
 #include <boost/algorithm/string.hpp>
@@ -29,6 +34,14 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
+
+namespace {
+
+// We need the dots to prevent trimming of the whitespace.
+uint32_t space_width() {
+	return UI::g_fh1->render(as_uifont(". ."))->width() - UI::g_fh1->render(as_uifont(".."))->width();
+}
+} // namespace
 
 namespace UI {
 
@@ -86,27 +99,73 @@ uint32_t WordWrap::wrapwidth() const
 void WordWrap::wrap(const std::string & text)
 {
 	m_lines.clear();
-	std::vector<std::string> words_to_fit;
-
 	if (text.empty()) return;
 
-	std::vector<std::string> words;
-	boost::split(words, text, boost::is_any_of(" "));
-	for (const std::string& word : words) {
-		// NOCOM(GunChleoc): This means that ligatures can't be broken apart while editing.
-		words_to_fit.push_back(i18n::make_ligatures(word.c_str()));
-	}
+	// NOCOM(GunChleoc): This means that ligatures can't be broken apart while editing.
+	std::string text_to_fit = i18n::make_ligatures(text.c_str());
+
 	size_t line_start = 0;
 	size_t line_end = line_start;
+	uint32_t margin = 2 * LINE_MARGIN;
+	int32_t minimum_chars = 5; // So we won't get empty lines
+	assert(m_wrapwidth > margin);
 
-	while (!words_to_fit.empty()) {
-		std::vector<std::string> line_words = compute_end_of_line(&words_to_fit);
-		assert(!line_words.empty());
-
-		std::string line;
-		for (std::string line_word : line_words) {
-			line += line_word;
+	while (!text_to_fit.empty()) {
+		// Does the line fit as a whole? If so, it's the last line and we're done.
+		uint32_t line_width = UI::g_fh1->render(as_uifont(text_to_fit))->width();
+		if (line_width <= m_wrapwidth - margin) {
+			line_end += text_to_fit.size();
+			LineData ld;
+			ld.start = line_start;
+			ld.text = text_to_fit;
+			m_lines.push_back(ld);
+			return;
 		}
+		// Compute the end of the current line
+		std::string line;
+		const icu::UnicodeString unicode_word(text_to_fit.c_str());
+		line_width = 0;
+		int32_t end = -1;
+		icu::UnicodeString unicode_line;
+		// We just do linear search ahead until we hit the max
+		// Operating on single glyphs will keep the texture cache small.
+		while ((line_width < (m_wrapwidth - margin)) && (end < unicode_word.length())) {
+			++end;
+			UChar c = unicode_word.charAt(end);
+			if (c == 0x0020) {
+				line_width += space_width();
+			} else {
+				line_width += UI::g_fh1->render(as_uifont(i18n::icuchar2string(c)))->width();
+			}
+			unicode_line += c;
+		}
+		if (end != unicode_word.length() - 1) {
+			int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
+			if (last_space > minimum_chars) {
+				unicode_line = unicode_word.tempSubString(0, last_space);
+				line = i18n::icustring2string(unicode_line);
+				end = last_space;
+			}
+		}
+		// Make sure that diacritics stay with their base letters, and that
+		// start/end line rules are being followed. Leave an arbitrary minimum of chars.
+		while (end > minimum_chars &&
+				 !(i18n::can_start_line(unicode_line.charAt(end)) &&
+					i18n::can_end_line(unicode_line.charAt(end - 1)))) {
+			--end;
+		}
+		// Now split the string
+		line = i18n::icustring2string(unicode_word.tempSubString(0, end));
+		text_to_fit = i18n::icustring2string(unicode_word.tempSubString(end));
+
+		assert(!line.empty());
+		// We get Unicode 0xFFFF at end of text
+		if (line.empty()) {
+			log("NOCOM Line empty - remaining = %s\n", text_to_fit.c_str());
+			break;
+		}
+
+		// Now add the line
 		line_end += line.size();
 		LineData ld;
 		ld.start = line_start;
@@ -114,61 +173,6 @@ void WordWrap::wrap(const std::string & text)
 		m_lines.push_back(ld);
 		line_start = line_end;
 	}
-}
-
-
-/**
- * Compute the position where the line that starts at \p line_start
- * ends.
- */
-// NOCOM add length to linedata?
-std::vector<std::string> WordWrap::compute_end_of_line(std::vector<std::string>* words_to_fit) {
-	uint32_t margin = 4;
-	assert(m_wrapwidth > margin);
-	assert(!words_to_fit->empty());
-	std::vector<std::string> result;
-	uint32_t linewidth = 0;
-	bool found_fitting = false;
-	// We need the dots to prevent trimming of the whitespace.
-	uint32_t space_width = UI::g_fh1->render(as_uifont(". ."))->width() -
-								  UI::g_fh1->render(as_uifont(".."))->width();
-	std::string word = words_to_fit->front();
-	uint32_t text_width = 0;
-	while (!words_to_fit->empty()) {
-		text_width = UI::g_fh1->render(as_uifont(word))->width();
-		if ((linewidth + text_width + space_width) > m_wrapwidth - margin) {
-			break;
-		}
-		found_fitting = true;
-		result.push_back(word + " ");
-		words_to_fit->erase(words_to_fit->begin());
-		word = words_to_fit->front();
-		linewidth += text_width + space_width;
-	}
-	// If the first word didn't fit the line, split it.
-	if (!found_fitting && !words_to_fit->empty()) {
-		const icu::UnicodeString unicode_word(word.c_str());
-		int32_t end = 0;
-		text_width = 0;
-		// We just do linear search ahead until we hit the max
-		// Operating on single glyphs will keep the texture cache small.
-		while (text_width < m_wrapwidth - margin && (end < unicode_word.length() - 1)) {
-			UChar c = unicode_word.charAt(end);
-			text_width += UI::g_fh1->render(as_uifont(i18n::icuchar2string(c)))->width();
-			++end;
-		}
-		// Make sure that diacritics stay with their base letters, and that
-		// start/end line rules are being followed. Leave an arbitrary minimum of 5 chars.
-		while (end > 5 &&
-				 !(i18n::can_start_line(unicode_word.charAt(end)) &&
-					i18n::can_end_line(unicode_word.charAt(end - 1)))) {
-			--end;
-		}
-		// Now split the string
-		result.push_back(i18n::icustring2string(unicode_word.tempSubString(0, end)));
-		words_to_fit->at(0) = i18n::icustring2string(unicode_word.tempSubString(end));
-	}
-	return result;
 }
 
 
@@ -200,7 +204,7 @@ uint32_t WordWrap::height() const
 		fontheight = UI::g_fh1->render(as_uifont(m_lines[0].text))->height();
 	}
 
-	return fontheight * (m_lines.size());
+	return fontheight * (m_lines.size()) + 2 * LINE_MARGIN;
 }
 
 /**
@@ -284,10 +288,16 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		dst.blit(point, entry_text_im);
 
 		if (m_draw_caret && line == caretline) {
-			int caret_x = UI::g_fh1->render(as_uifont(m_lines[line].text.substr(0, caretpos)))->width();
+			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
+			int caret_x = UI::g_fh1->render(as_uifont(line_to_caret))->width();
+
+			// Add space for trailing whitespaces before caret
+			for (int i = line_to_caret.size() - 1; i >= 0 && line_to_caret.substr(i) == " "; --i) {
+				caret_x += space_width();
+			}
 			const Image* caret_image = g_gr->images().get("pics/caret.png");
 			Point caretpt;
-			caretpt.x = point.x + caret_x - caret_image->width() + 1;
+			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
 			caretpt.y = point.y + (entry_text_im->height() - caret_image->height()) / 2;
 			dst.blit(caretpt, caret_image);
 		}
