@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:50+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
+"PO-Revision-Date: 2015-09-15 11:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Stadastaireachd nan togalach"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
-msgstr "Toir sùil air na taighean-tàirn agad"
+msgstr "Thoir sùil air na taighean-tàirn agad"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
@@ -246,7 +246,7 @@ msgstr "Fosgail uinneag stadastaireachd nan togalach a-rithist."
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh ged nach tug thu sùil air uiread nan taighean-tàirn fhathast."
+msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh ged nach dug thu sùil air uiread nan taighean-tàirn fhathast."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
@@ -568,7 +568,7 @@ msgstr "San taba mu dheireadh, chì thu an dearbh stòras agad. Thèid e am meud
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr "Innsidh an dà thaba mu dheireadh dhut ma tha gainnead gu bhith tighinn ort. Cum ’nad aire gun toir thu sùil orra gu reusanta cunbhalach!"
+msgstr "Innsidh an dà thaba mu dheireadh dhut ma tha gainnead gu bhith tighinn ort. Cum ’nad aire gun doir thu sùil orra gu reusanta cunbhalach!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Close this window when you’re done."

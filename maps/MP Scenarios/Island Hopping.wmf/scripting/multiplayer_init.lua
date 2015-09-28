@@ -52,7 +52,6 @@ _finish_areas = {
    }
 }
 
--- if you add a new resource type here, make sure it is also listed in getplural(count, resource) below
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
@@ -104,37 +103,12 @@ end
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
-      rv[#rv + 1] = getplural(count, name) .. "<br>\n"
+		local ware_description = wl.Game():get_ware_description("atlanteans", name)
+		-- TRANSLATORS: number + resource name, e.g. '1x Log'
+      rv[#rv + 1] = _"%1$dx %2$s":bformat(count, ware_description.descname) .. "<br>\n"
    end
    return table.concat(rv)
 end
-
-
--- This function gets the translated text according to each language's plural rules
--- for the resources in _finish_rewards
-function getplural(count, resource)
-   if  resource == "log" then
-      return ngettext("%s Log","%s Logs",count):bformat(count)
-   elseif  resource == "planks" then
-      return ngettext("%s Plank","%s Planks",count):bformat(count)
-   elseif  resource == "stone" then
-      return ngettext("%s Stone","%s Stones",count):bformat(count)
-   elseif  resource == "spidercloth" then
-      return ngettext("%s Spidercloth","%s Spidercloths",count):bformat(count)
-   elseif  resource == "corn" then
-      return ngettext("%s Corn","%s Corn",count):bformat(count)
-   elseif  resource == "coal" then
-      return ngettext("%s Coal","%s Coal",count):bformat(count)
-   elseif  resource == "ironore" then
-      return ngettext("%s Iron Ore","%s Iron Ore",count):bformat(count)
-   elseif  resource == "goldore" then
-      return ngettext("%s Gold Ore","%s Gold Ore",count):bformat(count)
-   else
-      -- TRANSLATORS: number + resource name, e.g. '1 stone'
-      return ("%1$i %2$s"):bformat(count, resource)
-   end
-end
-
 
 include "map:scripting/texts.lua"
 include "map:scripting/hop_island.lua"

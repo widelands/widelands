@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-20 11:25+0000\n"
+"POT-Creation-Date: 2015-09-21 19:04+0000\n"
+"PO-Revision-Date: 2015-09-24 21:20+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -35,20 +35,20 @@ msgstr "%1$s o %2$s"
 msgid "%s and"
 msgstr "%s e"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
 msgstr "Attrezzatura da"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
 msgstr "e attrezzature da"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
 msgstr "o attrezzature da"
@@ -62,7 +62,7 @@ msgid "Purpose:"
 msgstr "Scopo:"
 
 #: ../../tribes/scripting/format_help.lua:277
-#: ../../tribes/scripting/format_help.lua:504
+#: ../../tribes/scripting/format_help.lua:505
 msgid "Note:"
 msgstr "Nota:"
 
@@ -96,8 +96,9 @@ msgstr "Capacità:"
 msgid "Training:"
 msgstr "Addestramento:"
 
-#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#: numbers. ../../tribes/scripting/format_help.lua:299
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/format_help.lua:299
 #: ../../tribes/scripting/format_help.lua:303
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
@@ -141,7 +142,7 @@ msgstr "In entrata:"
 msgid "Collects:"
 msgstr "Raccoglie:"
 
-#: TRANSLATORS This is a verb (The miner mines)
+#. TRANSLATORS: This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid "Mines:"
 msgstr "Mina:"
@@ -158,130 +159,132 @@ msgstr "In uscita:"
 msgid "None"
 msgstr "Niente"
 
-#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../tribes/scripting/format_help.lua:481
+#. TRANSLATORS: This is the header for the "Building" section in the building
+#. help, containing size info, buildcost etc.
+#: ../../tribes/scripting/format_help.lua:482
 msgid "Building"
 msgstr "Edificio"
 
-#: ../../tribes/scripting/format_help.lua:485
+#: ../../tribes/scripting/format_help.lua:486
 msgid "Mine plot"
 msgstr "Zona per una miniera"
 
-#: ../../tribes/scripting/format_help.lua:485
-#: ../../tribes/scripting/format_help.lua:487
-#: ../../tribes/scripting/format_help.lua:490
-#: ../../tribes/scripting/format_help.lua:492
-#: ../../tribes/scripting/format_help.lua:494
-#: ../../tribes/scripting/format_help.lua:496
+#: ../../tribes/scripting/format_help.lua:486
+#: ../../tribes/scripting/format_help.lua:488
+#: ../../tribes/scripting/format_help.lua:491
+#: ../../tribes/scripting/format_help.lua:493
+#: ../../tribes/scripting/format_help.lua:495
+#: ../../tribes/scripting/format_help.lua:497
 msgid "Space required:"
 msgstr "Spazio richiesto:"
 
-#: ../../tribes/scripting/format_help.lua:487
+#: ../../tribes/scripting/format_help.lua:488
 msgid "Port plot"
 msgstr "Zona per un porto"
 
-#: ../../tribes/scripting/format_help.lua:490
+#: ../../tribes/scripting/format_help.lua:491
 msgid "Small plot"
 msgstr "Zona piccola"
 
-#: ../../tribes/scripting/format_help.lua:492
+#: ../../tribes/scripting/format_help.lua:493
 msgid "Medium plot"
 msgstr "Zona media"
 
-#: ../../tribes/scripting/format_help.lua:494
+#: ../../tribes/scripting/format_help.lua:495
 msgid "Big plot"
 msgstr "Zona grande"
 
-#: ../../tribes/scripting/format_help.lua:496
-#: ../../tribes/scripting/format_help.lua:530
-#: ../../tribes/scripting/format_help.lua:575
-#: ../../tribes/scripting/format_help.lua:623
+#: ../../tribes/scripting/format_help.lua:497
+#: ../../tribes/scripting/format_help.lua:531
+#: ../../tribes/scripting/format_help.lua:576
+#: ../../tribes/scripting/format_help.lua:624
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: ../../tribes/scripting/format_help.lua:505
+#: ../../tribes/scripting/format_help.lua:506
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Questo edificio può essere costruito direttamente oppure ottenuto migliorando un altro edificio."
 
-#: ../../tribes/scripting/format_help.lua:511
+#: ../../tribes/scripting/format_help.lua:512
 msgid "Direct build cost:"
 msgstr "Costo di costruzione diretta:"
 
-#: ../../tribes/scripting/format_help.lua:513
+#: ../../tribes/scripting/format_help.lua:514
 msgid "Build cost:"
 msgstr "Costo di costruzione:"
 
-#: ../../tribes/scripting/format_help.lua:525
+#: ../../tribes/scripting/format_help.lua:526
 msgid "Or enhanced from:"
 msgstr "O migliorato a partire da:"
 
-#: ../../tribes/scripting/format_help.lua:527
-#: ../../tribes/scripting/format_help.lua:530
+#: ../../tribes/scripting/format_help.lua:528
+#: ../../tribes/scripting/format_help.lua:531
 msgid "Enhanced from:"
 msgstr "Migliorato a partire da:"
 
-#: ../../tribes/scripting/format_help.lua:539
+#: ../../tribes/scripting/format_help.lua:540
 msgid "Cumulative cost:"
 msgstr "Costo complessivo:"
 
-#: ../../tribes/scripting/format_help.lua:580
+#: ../../tribes/scripting/format_help.lua:581
 msgid "If built directly, dismantle yields:"
 msgstr "Se costruito direttamente, lo smantellamento produce:"
 
-#: ../../tribes/scripting/format_help.lua:585
+#: ../../tribes/scripting/format_help.lua:586
 msgid "If enhanced, dismantle yields:"
 msgstr "Se migliorato, lo smantellamento produce:"
 
-#: ../../tribes/scripting/format_help.lua:587
-#: ../../tribes/scripting/format_help.lua:628
+#: ../../tribes/scripting/format_help.lua:588
+#: ../../tribes/scripting/format_help.lua:629
 msgid "Dismantle yields:"
 msgstr "Lo smantellamento produce:"
 
-#: ../../tribes/scripting/format_help.lua:637
+#: ../../tribes/scripting/format_help.lua:638
 msgid "Can be enhanced to:"
 msgstr "Può essere aumentato a:"
 
-#: ../../tribes/scripting/format_help.lua:665
+#: ../../tribes/scripting/format_help.lua:666
 msgid "Crew required:"
 msgstr "Equipaggio richiesto:"
 
-#: ../../tribes/scripting/format_help.lua:665
+#: ../../tribes/scripting/format_help.lua:666
 msgid "Workers"
 msgstr "Lavoratori"
 
-#: ../../tribes/scripting/format_help.lua:688
+#: ../../tribes/scripting/format_help.lua:689
 msgid "%s or better"
 msgstr "%s o migliore"
 
-#: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/worker_help.lua:67
 msgid "Experience levels:"
 msgstr "Livelli di esperienza:"
 
-#: ../../tribes/scripting/format_help.lua:702
-#: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/format_help.lua:703
+#: ../../tribes/scripting/format_help.lua:712
 #: ../../tribes/scripting/worker_help.lua:68
 #: ../../tribes/scripting/worker_help.lua:77
 msgid "%s to %s (%s EP)"
 msgstr "%s a %s (%s EP)"
 
-#: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/format_help.lua:737
 #: ../../tribes/scripting/worker_help.lua:99
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Il lavoratore utilizza:"
 msgstr[1] "I lavoratori utilizzano:"
 
-#: ../../tribes/scripting/format_help.lua:754
+#: ../../tribes/scripting/format_help.lua:755
 msgid "Performance:"
 msgstr "Prestazione:"
 
-#: ../../tribes/scripting/format_help.lua:754
+#: ../../tribes/scripting/format_help.lua:755
 msgid "Production"
 msgstr "Produzione"
