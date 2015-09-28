@@ -259,9 +259,6 @@ private:
 	Widelands::TribeDescr const* tribe_;
 
 	std::vector<BuildingObserver> buildings_;
-	uint32_t num_constructionsites_;
-	uint32_t num_milit_constructionsites;
-	uint32_t num_mine_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
@@ -299,7 +296,7 @@ private:
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 	std::map<int32_t, MSiteSizeObserver> msites_per_size;
-	// returns count of mines of the same type (output)
+	// returns count of militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
 
@@ -326,7 +323,7 @@ private:
 	// average count of trees around cutters
 	uint32_t trees_around_cutters_;
 
-	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
+	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier NOCOM
 	                                        // is belogning to)
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
