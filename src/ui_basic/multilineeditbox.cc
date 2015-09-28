@@ -28,7 +28,7 @@
 #include "graphic/wordwrap.h"
 #include "ui_basic/scrollbar.h"
 
-// NOCOM Fix positioning for Arabic
+// TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
 

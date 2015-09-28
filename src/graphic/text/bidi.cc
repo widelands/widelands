@@ -30,7 +30,7 @@
 
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
-// TODO(GunChleoc): Arabic Turn this into a proper class
+// TODO(GunChleoc): Arabic: Turn this into a proper class
 
 // Need to mirror () etc. for LTR languages, so we're sticking them in a map.
 const std::map<UChar, UChar> kSymmetricChars = {
@@ -72,7 +72,7 @@ bool is_punctuation_char(UChar c) {
 	return c == 0x0020 ||  // blank space
 			 c == 0x0021 ||  // !
 			 c == 0x002C ||  // ,
-			 c == 0x002D ||  // - // NOCOM " - " becomes "-  "
+			 c == 0x002D ||  // -
 			 c == 0x002E ||  // .
 			 c == 0x002F ||  // /
 			 c == 0x003A ||  // :

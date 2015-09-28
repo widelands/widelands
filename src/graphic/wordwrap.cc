@@ -131,7 +131,7 @@ void WordWrap::compute_end_of_line
 
 
 	// Optimism: perhaps the entire line fits?
-	// TODO(GunChleoc): Arabic Multiple calls of make_ligatures are inefficient.
+	// TODO(GunChleoc): Arabic: Multiple calls of make_ligatures are inefficient.
 	if (m_style.calc_bare_width(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
 		 <= m_wrapwidth) {
 		line_end = orig_end;
@@ -294,7 +294,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			continue;
 
 		// Right-align text for RTL languages
-		// NOCOM(GunChleoc) we have a ragged edge here for Arabic,
+		// TODO(GunChleoc): Arabic: we have a ragged edge here for Arabic,
 		// just like in richtext.cc - bug in TTF_SizeUTF8?
 		Point drawpos(UI::g_fh1->fontset().is_rtl() ?
 							  where.x + m_wrapwidth

@@ -440,7 +440,7 @@ void RichText::parse(const std::string & rtext)
 				bbox.w = 0;
 				bbox.h = text.style.font->height();
 
-				// TODO(GunChleoc): Arabic width calculation for alignment is broken (Arabic)
+				// TODO(GunChleoc): Arabic: width calculation for alignment is broken (Arabic)
 				do {
 					uint32_t wordwidth = text.style.calc_bare_width(words[word_cnt + nrwords]);
 
