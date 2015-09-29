@@ -114,7 +114,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      resource_necessity_water_(0),
      resource_necessity_water_needed_(false),
      trees_around_cutters_(0),
-     unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
      military_last_build_(0),
      seafaring_economy(false),
@@ -567,8 +566,7 @@ void DefaultAI::late_initialization() {
 						bo.built_mat_producer_ = true;
 				}
 			}
-
-			continue;
+		continue;
 		}
 
 		// now for every military building, we fill critical_built_mat_ vector
@@ -578,13 +576,11 @@ void DefaultAI::late_initialization() {
 			bo.type = BuildingObserver::MILITARYSITE;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
-				// bellow are non-critical wares
+				// bellow are non-critical wares (well, various types of wood)
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
 				    tribe_->ware_index("planks") == temp_buildcosts.first ||
-				    tribe_->ware_index("wood") == temp_buildcosts.first ||
-				    tribe_->ware_index("raw_stone") == temp_buildcosts.first ||
-				    tribe_->ware_index("stone") == temp_buildcosts.first)
+				    tribe_->ware_index("wood") == temp_buildcosts.first)
 					continue;
 
 				bo.critical_built_mat_.push_back(temp_buildcosts.first);
@@ -1488,8 +1484,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	    (msites_in_constr() + militarysites.size()) * 5) {
 		new_buildings_stop_ = true;
 	}
-	// 4. if we do not have 3 mines at least
-	if (mines_.size() < 3) {
+	// 4. if we do not have 2 mines at least
+	if (mines_.size() < 2) {
 		new_buildings_stop_ = true;
 	}
 
@@ -1601,7 +1597,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// if they have outputs, all other must have zero max_needed_preciousness_
 			if ((bo.new_building_ == BuildingNecessity::kNeeded
 				|| bo.new_building_ == BuildingNecessity::kForced
-				|| bo.new_building_ == BuildingNecessity::kAllowed) && !bo.outputs_.empty()) {
+				|| bo.new_building_ == BuildingNecessity::kAllowed
+				|| bo.new_building_ == BuildingNecessity::kNeededPending) && !bo.outputs_.empty()) {
 					assert (bo.max_needed_preciousness_ > 0);
 			} else {
 				//for other situation we set max_needed_preciousness_ to zero
@@ -1614,7 +1611,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// it is basically max_needed_preciousness_ plus some 'bonus' for due time
 			// Following scenarios are possible:
 			// a) building is needed or forced: primary_priority_ grows with time
-			// b) building is allowed: primary_priority_ = max_needed_preciousness_
+			// b) building is allowed: primary_priority_ = max_needed_preciousness_ (no time consideration)
 			// c) all other cases: primary_priority_ = 0;
 			if (bo.max_needed_preciousness_ > 0) {
 				if (bo.new_building_ == BuildingNecessity::kAllowed){
@@ -1623,7 +1620,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					bo.primary_priority_ = bo.max_needed_preciousness_ +
 					bo.max_needed_preciousness_ * bo.new_building_overdue_ / 100 +
 					bo.new_building_overdue_ / 20;
-					printf (" %d: %-20s primary priority: %d\n", player_number(), bo.name, bo.primary_priority_);
 				}
 			} else {
 				bo.primary_priority_ = 0;
@@ -1635,7 +1631,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// inconstinancy in AI data
 			if (bo.new_building_ == BuildingNecessity::kNeeded
 				|| bo.new_building_ == BuildingNecessity::kForced
-				|| bo.new_building_ == BuildingNecessity::kAllowed) {
+				|| bo.new_building_ == BuildingNecessity::kAllowed
+				|| bo.new_building_ == BuildingNecessity::kNeededPending) {
 				if (bo.plants_trees_ || bo.need_trees_ || bo.max_needed_preciousness_ >= 10) {
 					if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 1) {
 					throw wexception("AI inconsistency:  %s: total_count %d > 1, unoccupied: %d",
@@ -1695,7 +1692,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				continue;
 			}
 
-			if (bo.new_building_ == BuildingNecessity::kNotNeeded) {
+			if (bo.new_building_ == BuildingNecessity::kNotNeeded ||
+				bo.new_building_ == BuildingNecessity::kNeededPending) {
 				continue;
 				}
 
@@ -1968,11 +1966,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.space_consumer_) {
 							// we dont like trees nearby
-							prio -= bf->trees_nearby_ / 10;
+							prio += 1 - bf->trees_nearby_ / 15;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby_ * 2;
 							// and be far from rangers
-							prio -= bf->rangers_nearby_ * 5;
+							prio += 1 - bf->rangers_nearby_ * 3;
 						} else {
 							// leave some free space between them
 							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) * 5;
@@ -3723,7 +3721,47 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 	}
 
-	//first deal with construction of new sites
+	// This function is going to say if a building is needed. But there is a 'new_buildings_stop_'
+	// flag that should be obbeyed, but sometimes can be ignored.
+	// So we can have two types of needed: kNeeded and KNeededPending
+	// below we define which one will be returned if building is 'needed'
+	BuildingNecessity needed_type = BuildingNecessity::kNeeded;
+	if (new_buildings_stop_) {
+		needed_type = BuildingNecessity::kNeededPending;
+		if (gametime < 15 * 60 * 1000) {
+			; //no exemption here within first 15 minutes
+		} else if (gametime < 25 * 60 * 1000) { //exemption after 15 minutes - 1 building allowed
+
+			if (bo.type == BuildingObserver::MINE) {
+				if (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished == 0) {
+					needed_type = BuildingNecessity::kNeeded;
+				}
+			}
+			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
+				if (bo.built_mat_producer_ || bo.max_needed_preciousness_ >= 10) {
+					if (bo.total_count() == 0) {
+						needed_type = BuildingNecessity::kNeeded;
+					}
+				}
+			}
+		} else { //exemption after 25 minutes - 2 buildings allowed
+			if (bo.type == BuildingObserver::MINE) {
+				if (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished <= 1) {
+					needed_type = BuildingNecessity::kNeeded;
+				}
+			}
+			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
+				if (bo.built_mat_producer_ || bo.max_needed_preciousness_ >= 10) {
+					if (bo.total_count() <= 1) {
+						needed_type = BuildingNecessity::kNeeded;
+					}
+				}
+			}
+		}
+	}
+
+	// And finnaly the 'core' of this function
+	// First deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
 		if (bo.forced_after_ < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			bo.max_needed_preciousness_ = bo.max_preciousness_;
@@ -3787,44 +3825,23 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNotNeeded; // for preciousness>=10 and after 30 min
 		} else if (bo.type == BuildingObserver::MINE) {
 			if ((mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 0) {
-				//unless a mine si prohibited, we want to have at least one of the kind
+				////unless a mine si prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness_ = bo.max_preciousness_;
 				return BuildingNecessity::kNeeded;
 			} else if (((mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished)
 				==
 				1) && bo.built_mat_producer_) {
+					bo.max_needed_preciousness_ = bo.max_preciousness_;
 					return BuildingNecessity::kNeeded;
-			} else if (new_buildings_stop_) {
-				return BuildingNecessity::kNotNeeded;
-			} else if (bo.max_needed_preciousness_ > 0
-				&&
-				(bo.total_count() - bo.unconnected_count_) >= 1 && bo.current_stats_ < 40) {
-					return BuildingNecessity::kNotNeeded;
-			} else if (bo.max_needed_preciousness_ > 0) {
-				return BuildingNecessity::kNeeded;
-			} else {
+			}
+			if (bo.max_needed_preciousness_ == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-		// new_buildings_stop_ is obbeyed if sooner than 25 min of game
-		} else if (new_buildings_stop_ && (gametime < 25 * 60 * 1000)) {
-			return BuildingNecessity::kNotNeeded;
-		// or if there is one building of a type (with exemption of building material producers)
-		} else if (new_buildings_stop_ && !bo.built_mat_producer_ && bo.total_count() > 0) {
-			return BuildingNecessity::kNotNeeded;
-		//and for building material producers if there are two of kind
-		} else if (new_buildings_stop_ && bo.built_mat_producer_ && bo.total_count() > 1) {
-			return BuildingNecessity::kNotNeeded;
+			if (bo.total_count() - bo.unconnected_count_ >= 1 || bo.current_stats_ < 40) {
+				return BuildingNecessity::kNotNeeded;
+			}
+			return needed_type;
 		} if (bo.max_needed_preciousness_ > 0) {
-
-			// couple of asserts to make sure no unexpected situation gets here
-			if (new_buildings_stop_) {
-				assert (gametime >= 25 * 60 * 1000);
-				if (bo.built_mat_producer_) {
-					assert(bo.total_count() <= 1);
-				} else {
-					assert(bo.total_count() == 0);
-				}
-			}
 			if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0) {
 				assert (bo.cnt_under_construction_ + bo.unoccupied_count_ == 1);
 				assert (bo.max_needed_preciousness_ >= 10 || bo.built_mat_producer_);
@@ -3833,13 +3850,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// First 'if' is special support for hardwood producers (to have 2 of them)
 			if (bo.built_mat_producer_ && bo.total_count() <= 1 && bo.current_stats_ > 10) {
-				return BuildingNecessity::kNeeded;
+				return needed_type;
 			} else if (bo.inputs_.empty()) {
-				return BuildingNecessity::kNeeded;
+				return needed_type;
 			} else if (bo.total_count() == 0) {
-				return BuildingNecessity::kNeeded;
+				return needed_type;
 			} else if (bo.current_stats_ > 10 + 70 / bo.outputs_.size()) {
-				return BuildingNecessity::kNeeded;
+				return needed_type;
 			} else {
 				return BuildingNecessity::kNotNeeded;
 			}
@@ -3870,7 +3887,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
 // exhaust AI resources on the beginning of the game
-// We count bigger buildings, medium one gets 1 points, big ones 2 points
+// We count bigger buildings, medium ones get 1 points, big ones 2 points
 // and we force some proportion to the number of military sites
 // sidenote: function can return kNotNeeded, but it means 'not allowed'
 BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
@@ -3886,39 +3903,34 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 		+ msites_per_size[3].in_construction * 2
 		+ msites_per_size[3].finished * 2;
 
+	const uint32_t msites_total = msites_built() + msites_in_constr();
+
+	// thisis final proportion of big_buildings_score / msites_total
+	// two exemptions:
+	// if enemy nearby - can be higher
+	// for early game - must be lower
+	uint32_t limit = (msites_built() + msites_in_constr()) * 2 / 3;
+
 	// exemption first
 	if (militarysites.size() > 3 && vacant_mil_positions_ == 0 && msites_in_constr() == 0) {
+		printf (" %d: expansion stuck - allowing all\n", player_number());
 		return BuildingNecessity::kAllowed; //it seems the expansion has stuck so we allow big buildings
-	} else if (gametime > enemy_last_seen_ && mines_.size() > 2) { // enemies are nearby
-		//we allow generous ratio
-		if (big_buildings_score * 3 / 2 > (msites_built() + msites_in_constr())){
-			return BuildingNecessity::kNotNeeded;
-		} else {
-			return BuildingNecessity::kAllowed;
-		}
+	} else if (gametime > enemy_last_seen_ && mines_.size() > 2) { // if enemies are nearby
+		//we allow more big buidings
+		limit *= 2;
+	} else if (msites_total < 30){ // for the begining of the game (first 30 military sites)
+		limit = limit * msites_total / 30;
+		printf (" %d: setting limit to: %2d, current score: %2d, all msites: %3d, time: %d/%d\n",
+		player_number(), limit, big_buildings_score, msites_total,
+		enemy_last_seen_, gametime);
 	}
 
-	// to simplify the code, here are pairs of time vs sum of biggest buildings
-	// that means that before 13-th minute we can have big buildings with score up to 2
-	// = two medium buildings, or one big building
-	std::vector<std::pair<uint32_t, uint32_t>> limits = {{3, 0}, {8, 1}, {13, 2}, {18, 4}, {25, 6}};
-
-	for (std::pair<uint32_t, uint32_t> limit : limits) {
-		if (gametime <  limit.first * 60 * 1000) {
-			if (size + big_buildings_score > limit.second + 1) {
-				return BuildingNecessity::kNotNeeded;
-			} else {
-				return BuildingNecessity::kAllowed;
-			}
-		}
-	}
-
-	// afterwareds we are to follow a general rule:
-	if (size > 1 && big_buildings_score * 6 > (msites_built() + msites_in_constr())) {
+	if (big_buildings_score + size - 1  > limit){
 		return BuildingNecessity::kNotNeeded;
+	} else {
+		return BuildingNecessity::kAllowed;
 	}
 
-	return BuildingNecessity::kAllowed;
 }
 
 // counts produced output on stock
@@ -4115,17 +4127,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	// just to be sure the value is reset
 	taskDue[ScheduleTasks::kCheckMilitarysites] = gametime + 4 * 1000;  // 4 seconds is really fine
-	// even if there are no finished & attended military sites, probably there are ones just in
-	// construction
-	//unstationed_milit_buildings_ = 0; /NOCOM
-
-	//for (std::list<MilitarySiteObserver>::iterator it = militarysites.begin();
-	     //it != militarysites.end();
-	     //++it) {
-		//if (it->site->stationed_soldiers().size() == 0) {
-			//unstationed_milit_buildings_ += 1;
-		//}
-	//}
 
 	// Only useable, if defaultAI owns at least one militarysite
 	if (militarysites.empty()) {
@@ -4749,6 +4750,7 @@ void DefaultAI::gain_building(Building& b) {
 			militarysites.back().checks = bo.desc->get_size();
 			militarysites.back().enemies_nearby_ = true;
 			msites_per_size[bo.desc->get_size()].finished += 1;
+			vacant_mil_positions_ += 1; // at least some indication that there are vacant positions
 
 		} else if (bo.type == BuildingObserver::TRAININGSITE) {
 			ts_without_trainers_ += 1;

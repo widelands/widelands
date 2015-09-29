@@ -42,7 +42,8 @@ class ProductionSite;
 class MilitarySite;
 
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
-enum class BuildingNecessity : uint8_t {kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed};
+enum class BuildingNecessity : uint8_t
+	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending};
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)

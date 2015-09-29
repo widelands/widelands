@@ -323,8 +323,6 @@ private:
 	// average count of trees around cutters
 	uint32_t trees_around_cutters_;
 
-	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier NOCOM
-	                                        // is belogning to)
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
