@@ -347,6 +347,7 @@ private:
 	uint32_t ai_personality_attack_margin_;
 	int32_t ai_personality_wood_difference_;
 	uint32_t ai_productionsites_ratio_;
+	uint32_t ai_personality_early_msites;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =

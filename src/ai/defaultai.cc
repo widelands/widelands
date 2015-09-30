@@ -67,17 +67,18 @@ constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
-constexpr int kPersData     = 0; //uint16_t
-constexpr int kMilitLonel   = 1;
-constexpr int kAttacker     = 2;
-constexpr int kAttackMargin = 0; //uint32_t
-constexpr int kLastAttack   = 1;
-constexpr int kProdRatio    = 2;
-constexpr int kColonyScan   = 3;
-constexpr int kTreesAround  = 4;
-constexpr int kWoodDiff     = 0; //int32_t
-constexpr int kTargetMilit  = 1;
-constexpr int kLeastMilit   = 2;
+constexpr int kPersData      = 0; //uint16_t
+constexpr int kMilitLonel    = 1;
+constexpr int kAttacker      = 2;
+constexpr int kAttackMargin  = 0; //uint32_t
+constexpr int kLastAttack    = 1;
+constexpr int kProdRatio     = 2;
+constexpr int kColonyScan    = 3;
+constexpr int kTreesAround   = 4;
+constexpr int kEarlyMilitary = 5;
+constexpr int kWoodDiff      = 0; //int32_t
+constexpr int kTargetMilit   = 1;
+constexpr int kLeastMilit    = 2;
 
 //duration of military campaig
 constexpr int kCampaignDuration = 15 * 60 * 1000;
@@ -129,7 +130,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      ai_personality_military_loneliness_(0),
      ai_personality_attack_margin_(0),
      ai_personality_wood_difference_(0),
-     ai_productionsites_ratio_(0) {
+     ai_productionsites_ratio_(0),
+     ai_personality_early_msites(0) {
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
@@ -757,6 +759,9 @@ void DefaultAI::late_initialization() {
 		ai_productionsites_ratio_ = std::rand() % 5 + 7;
 		player_->set_ai_data(ai_productionsites_ratio_, kProdRatio);
 
+		ai_personality_early_msites = std::rand() % 20 + 20;
+		player_->set_ai_data(ai_personality_early_msites, kEarlyMilitary);
+
 	} else {
 		log (" %d: restoring saved AI data...\n", player_number());
 
@@ -786,6 +791,11 @@ void DefaultAI::late_initialization() {
 			player_number(), ai_productionsites_ratio_);
 		}
 
+		ai_personality_early_msites = player_->get_ai_data_uint32(kEarlyMilitary);
+		if (ai_personality_early_msites< 20 || ai_personality_early_msites > 40) {
+			log(" %d: unexpected value for ai_personality_early_msites: %d\n",
+			player_number(), ai_personality_early_msites);
+		}
 
 		//now some runtime values that are generated and saved during course of game
 		last_attack_time_ = player_->get_ai_data_uint32(kLastAttack);
@@ -3582,8 +3592,31 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		return false;
 	}
 
-	// if the mine had not been upgraded within 8 min, it is dismantled
-	if (site.no_resources_since_ < gametime - 8 * 60 * 1000) {
+	//if mine is working, doing nothing
+	if (site.no_resources_since_ > gametime - 5 * 60 * 1000) {
+		return false;
+	}
+
+	// Check whether building is enhanceable. If yes consider an upgrade.
+	const BuildingIndex enhancement = site.site->descr().enhancement();
+	bool has_upgrade=false;
+	if (enhancement != INVALID_INDEX) {
+		if (player_->is_building_type_allowed(enhancement)) {
+			has_upgrade = true;
+		}
+	}
+
+	// is it sole mine of the same output?
+	// (we will not dismantle even if there are no mineable resources left for this level of mine)
+	bool forcing_upgrade = false;
+	if (has_upgrade &&
+		mines_per_type[site.bo->mines_].in_construction + mines_per_type[site.bo->mines_].finished == 1) {
+		forcing_upgrade = true;
+	}
+
+
+	// dismantling a mine
+	if (!has_upgrade) { //if no upgrade, now
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site);
@@ -3592,45 +3625,65 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		}
 		site.bo->construction_decision_time_ = gametime;
 		return true;
+	// if having an upgrade, after half hour
+	} else if (site.no_resources_since_ < gametime - 30 * 60 * 1000 && !forcing_upgrade) {
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
+		if (connected_to_wh) {
+			game().send_player_dismantle(*site.site);
+		} else {
+			game().send_player_bulldoze(*site.site);
+		}
+		printf (" %d: dismantling upgradable mine: %s, total: %2d, max needed: %2d\n",
+		player_number(), site.bo->name,
+		mines_per_type[site.bo->mines_].in_construction + mines_per_type[site.bo->mines_].finished,
+		site.bo->max_needed_preciousness_ == 0);
+		site.bo->construction_decision_time_ = gametime;
+		return true;
 	}
 
-	// if we dont need this building
-	if (site.bo->max_needed_preciousness_ == 0) {
+	//if we are here, a mine is upgradeable
+
+	// if we dont need the output, and we have other buildings of the same type, the function returns
+	// and building will be dismantled later
+	if (site.bo->max_needed_preciousness_ == 0 && !forcing_upgrade) {
 		return false;
 	}
 
-	// Check whether building is enhanceable. If yes consider an upgrade.
-	const BuildingIndex enhancement = site.site->descr().enhancement();
-
-	// if no enhancement is possible
-	if (enhancement == INVALID_INDEX) {
-		// will be destroyed when no_resource_count will overflow
-		return false;
-	}
-
+	// again similarly, no upgrading if not connected, other parts of AI will dismantle it,
+	// or connect to a warehouse
 	if (!connected_to_wh) {
-		// no enhancement possible
+		return false;
+	}
+
+	//dont upgrade now if other mines of the same type are right now in construction
+	if (mines_per_type[site.bo->mines_].in_construction > 0) {
 		return false;
 	}
 
 	bool changed = false;
-	if (player_->is_building_type_allowed(enhancement)) {
-		// first exclude possibility there are enhancements in construction or unoccupied_count_
-		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
-		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-		// if it is too soon for enhancement and making sure there are no unoccupied mines
-		if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
-		    en_bo.unoccupied_count_ + en_bo.cnt_under_construction_ == 0) {
+	// first exclude possibility there are enhancements in construction or unoccupied_count_
+	const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+	BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			// now verify that there are enough workers
-			if (site.site->has_workers(enhancement, game())) {  // enhancing
-				game().send_player_enhance_building(*site.site, enhancement);
-				en_bo.construction_decision_time_ = gametime;
-				changed = true;
+	// if it is too soon for enhancement
+	if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
+
+		// now verify that there are enough workers
+		if (site.site->has_workers(enhancement, game())) {  // enhancing
+			game().send_player_enhance_building(*site.site, enhancement);
+			if (site.bo->max_needed_preciousness_ == 0) {
+				printf (" %d: output of %s not needed, but upgrading it\n",
+				player_number(), site.bo->name);
+				assert(mines_per_type[site.bo->mines_].in_construction
+					+ mines_per_type[site.bo->mines_].finished == 1);
 			}
+
+			en_bo.construction_decision_time_ = gametime;
+			changed = true;
 		}
 	}
+
 
 	return changed;
 }
@@ -3837,9 +3890,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.max_needed_preciousness_ == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			if (bo.total_count() - bo.unconnected_count_ >= 1 || bo.current_stats_ < 40) {
+			if (bo.total_count() - bo.unconnected_count_ >= 1 || bo.current_stats_ < 20) {
 				return BuildingNecessity::kNotNeeded;
 			}
+			printf (" %d: %s needed, current count: %d\n",
+			player_number(), bo.name,
+			(mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished));
 			return needed_type;
 		} if (bo.max_needed_preciousness_ > 0) {
 			if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0) {
@@ -3850,7 +3906,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// First 'if' is special support for hardwood producers (to have 2 of them)
 			if (bo.built_mat_producer_ && bo.total_count() <= 1 && bo.current_stats_ > 10) {
-				return needed_type;
+				return BuildingNecessity::kNeeded;
 			} else if (bo.inputs_.empty()) {
 				return needed_type;
 			} else if (bo.total_count() == 0) {
@@ -3913,16 +3969,19 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 
 	// exemption first
 	if (militarysites.size() > 3 && vacant_mil_positions_ == 0 && msites_in_constr() == 0) {
-		printf (" %d: expansion stuck - allowing all\n", player_number());
+		//printf (" %d: expansion stuck - allowing all\n", player_number());
 		return BuildingNecessity::kAllowed; //it seems the expansion has stuck so we allow big buildings
-	} else if (gametime > enemy_last_seen_ && mines_.size() > 2) { // if enemies are nearby
-		//we allow more big buidings
-		limit *= 2;
-	} else if (msites_total < 30){ // for the begining of the game (first 30 military sites)
-		limit = limit * msites_total / 30;
-		printf (" %d: setting limit to: %2d, current score: %2d, all msites: %3d, time: %d/%d\n",
-		player_number(), limit, big_buildings_score, msites_total,
-		enemy_last_seen_, gametime);
+	} else if (gametime > enemy_last_seen_ &&
+		gametime < enemy_last_seen_ + 30 * 60 * 1000 &&
+		mines_.size() > 2) { // if enemies were nearby in last 30 minutes
+			//we allow more big buidings
+			limit *= 2;
+	} else if (msites_total < ai_personality_early_msites){
+		// for the begining of the game (first 30 military sites)
+		limit = limit * msites_total / ai_personality_early_msites;
+		//printf (" %d: setting limit to: %2d, current score: %2d, all msites: %3d, time: %d/%d\n",
+		//player_number(), limit, big_buildings_score, msites_total,
+		//enemy_last_seen_, gametime);
 	}
 
 	if (big_buildings_score + size - 1  > limit){
@@ -3930,7 +3989,6 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 	} else {
 		return BuildingNecessity::kAllowed;
 	}
-
 }
 
 // counts produced output on stock
