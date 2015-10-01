@@ -3,7 +3,7 @@ output=blackroot
 
 [aihints]
 prohibited_till=600
-forced_after=700
+forced_after=800
 space_consumer=true
 
 [buildcost]

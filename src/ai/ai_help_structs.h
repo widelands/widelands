@@ -524,6 +524,10 @@ struct MineTypesObserver {
 	uint16_t in_construction;
 	uint16_t finished;
 
+	uint16_t total_count() const {
+		return in_construction + finished;
+	}
+
 	MineTypesObserver() : in_construction(0), finished(0) {
 	}
 };

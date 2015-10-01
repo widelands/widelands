@@ -369,7 +369,7 @@ void DefaultAI::think() {
 			break;
 		case ScheduleTasks::kCountMilitaryVacant :
 			count_military_vacant_positions();
-			taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 60 * 1000;
+			taskDue[ScheduleTasks::kCountMilitaryVacant] = gametime + 45 * 1000;
 			break;
 		case ScheduleTasks::kWareReview :
 			if (check_economies()) {  // economies must be consistent
@@ -733,7 +733,7 @@ void DefaultAI::late_initialization() {
 	taskDue[ScheduleTasks::kUnbuildableFCheck] = 1000;
 	taskDue[ScheduleTasks::kWareReview] = 15 * 60 * 1000;
 	taskDue[ScheduleTasks::kPrintStats] = 30 * 60 * 1000;
-	taskDue[ScheduleTasks::kCountMilitaryVacant] = 10 * 60 * 1000;
+	taskDue[ScheduleTasks::kCountMilitaryVacant] = 1 * 60 * 1000;
 	taskDue[ScheduleTasks::kCheckEnemySites] = 10 * 60 * 1000;
 
 	// Here the AI persistent data either exists - then they are read
@@ -1447,21 +1447,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		((msites_in_constr() * msites_in_constr()) > militarysites.size());
 	const bool too_many_vacant_mil =
 		(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
+	const int32_t kUpperLimit = 275;
+	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score_, down if more military sites are needed and vice verse
 	if (too_many_ms_constructionsites || too_many_vacant_mil) {
-		if (least_military_score_ < 200){ //no sense to let it grow too hight
+		if (least_military_score_ < kUpperLimit){ //no sense to let it grow too hight
 			least_military_score_ += 2;
 		}
 	} else {
 		least_military_score_ -= 4;
 		// do not get bellow 100 if there is at least one ms in construction
-		if ((msites_in_constr() > 0 || too_many_vacant_mil) && least_military_score_ < 100){
-			least_military_score_ = 100;
+		if ((msites_in_constr() > 0 || too_many_vacant_mil) && least_military_score_ < kBottomLimit){
+			least_military_score_ = kBottomLimit;
 		}
 		if (least_military_score_ < 0){
 			least_military_score_ = 0;
 		}
 	}
+
 	//this is effective score, falling down very quickly
 	if (target_military_score_ > 350) {
 		target_military_score_ = 8 * target_military_score_ / 10;
@@ -1523,7 +1526,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
 	const int32_t virtual_mines =
-	   mines_.size() + mineable_fields.size() / 15 - productionsites.size() / 25;
+	   mines_.size() + mineable_fields.size() / 25;
 	resource_necessity_mines_ = 100 * (15 - virtual_mines) / 15;
 	resource_necessity_mines_ = (resource_necessity_mines_ > 100) ? 100 : resource_necessity_mines_;
 	resource_necessity_mines_ = (resource_necessity_mines_ < 20) ? 10 : resource_necessity_mines_;
@@ -2083,10 +2086,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio -= bo.build_material_shortage_ * 500; //prohibitive
 					}
 					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 150;
-					prio += (4 - bf->own_military_sites_nearby_()) * 15;
+					prio += (5 - bf->own_military_sites_nearby_()) * 15;
 				}
 				prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100;
-				prio += bf->unowned_mines_pots_nearby_;
+				prio += bf->unowned_mines_pots_nearby_ * resource_necessity_mines_ / 100;
+				prio += ((bf->unowned_mines_pots_nearby_ > 0) ? 20 : 0) *
+						resource_necessity_mines_ / 100;
 				prio += bf->stones_nearby_ / 2;
 				prio += bf->water_nearby_;
 				prio += bf->distant_water_ * resource_necessity_water_needed_ / 100;
@@ -3599,7 +3604,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
 	const BuildingIndex enhancement = site.site->descr().enhancement();
-	bool has_upgrade=false;
+	bool has_upgrade = false;
 	if (enhancement != INVALID_INDEX) {
 		if (player_->is_building_type_allowed(enhancement)) {
 			has_upgrade = true;
@@ -3609,8 +3614,9 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// is it sole mine of the same output?
 	// (we will not dismantle even if there are no mineable resources left for this level of mine)
 	bool forcing_upgrade = false;
+	const uint16_t minimal_mines_count = (site.bo->built_mat_producer_)?2:1;
 	if (has_upgrade &&
-		mines_per_type[site.bo->mines_].in_construction + mines_per_type[site.bo->mines_].finished == 1) {
+		mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count) {
 		forcing_upgrade = true;
 	}
 
@@ -3633,10 +3639,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		} else {
 			game().send_player_bulldoze(*site.site);
 		}
-		printf (" %d: dismantling upgradable mine: %s, total: %2d, max needed: %2d\n",
-		player_number(), site.bo->name,
-		mines_per_type[site.bo->mines_].in_construction + mines_per_type[site.bo->mines_].finished,
-		site.bo->max_needed_preciousness_ == 0);
 		site.bo->construction_decision_time_ = gametime;
 		return true;
 	}
@@ -3644,7 +3646,8 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	//if we are here, a mine is upgradeable
 
 	// if we dont need the output, and we have other buildings of the same type, the function returns
-	// and building will be dismantled later
+	// and building will be dismantled later.
+	check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime);
 	if (site.bo->max_needed_preciousness_ == 0 && !forcing_upgrade) {
 		return false;
 	}
@@ -3675,8 +3678,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 			if (site.bo->max_needed_preciousness_ == 0) {
 				printf (" %d: output of %s not needed, but upgrading it\n",
 				player_number(), site.bo->name);
-				assert(mines_per_type[site.bo->mines_].in_construction
-					+ mines_per_type[site.bo->mines_].finished == 1);
+				assert (mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count);
 			}
 
 			en_bo.construction_decision_time_ = gametime;
@@ -3969,7 +3971,6 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 
 	// exemption first
 	if (militarysites.size() > 3 && vacant_mil_positions_ == 0 && msites_in_constr() == 0) {
-		//printf (" %d: expansion stuck - allowing all\n", player_number());
 		return BuildingNecessity::kAllowed; //it seems the expansion has stuck so we allow big buildings
 	} else if (gametime > enemy_last_seen_ &&
 		gametime < enemy_last_seen_ + 30 * 60 * 1000 &&
@@ -3979,9 +3980,6 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 	} else if (msites_total < ai_personality_early_msites){
 		// for the begining of the game (first 30 military sites)
 		limit = limit * msites_total / ai_personality_early_msites;
-		//printf (" %d: setting limit to: %2d, current score: %2d, all msites: %3d, time: %d/%d\n",
-		//player_number(), limit, big_buildings_score, msites_total,
-		//enemy_last_seen_, gametime);
 	}
 
 	if (big_buildings_score + size - 1  > limit){
@@ -4808,7 +4806,7 @@ void DefaultAI::gain_building(Building& b) {
 			militarysites.back().checks = bo.desc->get_size();
 			militarysites.back().enemies_nearby_ = true;
 			msites_per_size[bo.desc->get_size()].finished += 1;
-			vacant_mil_positions_ += 1; // at least some indication that there are vacant positions
+			vacant_mil_positions_ += 2; // at least some indication that there are vacant positions
 
 		} else if (bo.type == BuildingObserver::TRAININGSITE) {
 			ts_without_trainers_ += 1;
@@ -4821,6 +4819,7 @@ void DefaultAI::gain_building(Building& b) {
 			if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_count_ += 1;
 			}
+			vacant_mil_positions_ += 8; // at least some indication that there are vacant positions
 
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
 			++numof_warehouses_;
