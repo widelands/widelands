@@ -950,7 +950,6 @@ bool Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 	// Create a carrier
 	WareIndex const carrierid = descr().tribe().worker_index("carrier");
 
-	// Yup, this is cheating.
 	if (!m_supply->stock_workers(carrierid))
 	{
 		if (can_create_worker(game, carrierid))
