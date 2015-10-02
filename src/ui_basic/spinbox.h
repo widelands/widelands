@@ -42,8 +42,7 @@ struct SpinBox : public Panel {
 		 const std::string & unit             = std::string(),
 		 const Image* buttonbackground =
 		 	g_gr->images().get("pics/but2.png"),
-		 bool big = false,
-		 Align align = Align_Center);
+		 bool big = false);
 	~SpinBox();
 
 	void set_value(int32_t);
@@ -51,10 +50,6 @@ struct SpinBox : public Panel {
 	void set_unit(const std::string &);
 	int32_t get_value();
 	std::string get_unit();
-	Align align() const;
-	void set_align(Align);
-	void set_font(const std::string &, int32_t, RGBColor);
-	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t);

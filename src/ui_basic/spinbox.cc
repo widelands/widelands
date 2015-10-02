@@ -55,9 +55,6 @@ struct SpinBoxImpl {
 	/// Background tile style of buttons.
 	const Image* background;
 
-	/// Alignment of the text. Vertical alignment is always centered.
-	Align align;
-
 	/// Special names for specific Values
 	std::vector<IntValueTextReplacement> valrep;
 
@@ -82,8 +79,7 @@ SpinBox::SpinBox
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
 	 const std::string &       unit,
 	 const Image* background,
-	 bool                const big,
-	 Align               const alignm)
+	 bool                const big)
 	:
 	Panel(parent, x, y, w, h),
 	m_big(big),
@@ -95,7 +91,6 @@ SpinBox::SpinBox
 	sbi->unit  = unit;
 
 	sbi->background = background;
-	sbi->align      = alignm;
 
 	if (w < 20)
 		throw wexception("Not enough space to draw spinbox");
@@ -173,8 +168,6 @@ SpinBox::SpinBox
 
 	m_buttons.push_back(sbi->butMinus);
 	m_buttons.push_back(sbi->butPlus);
-
-	set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 SpinBox::~SpinBox() {
@@ -271,53 +264,6 @@ int32_t SpinBox::get_value()
 std::string SpinBox::get_unit()
 {
 	return sbi->unit;
-}
-
-
-/**
- * \returns the text alignment
- */
-Align SpinBox::align() const
-{
-	return sbi->align;
-}
-
-
-/**
- * Set a new alignment.
- */
-void SpinBox::set_align(Align alignm)
-{
-	if (alignm != sbi->align) {
-		sbi->align = alignm;
-		update();
-	}
-}
-
-
-/**
- * Sets the font of all UI elements
- *
- * @deprecated, see set_textstyle
- */
-void SpinBox::set_font(const std::string & name, int32_t size, RGBColor color)
-{
-	set_textstyle(TextStyle::makebold(Font::get(name, size), color));
-}
-
-/**
- * Sets the font and textstyle of all UI elements
- */
-void SpinBox::set_textstyle(const TextStyle & textstyle)
-{
-	sbi->text->set_textstyle(textstyle);
-	sbi->butPlus->set_font(textstyle.font);
-	sbi->butMinus->set_font(textstyle.font);
-	if (m_big) {
-		sbi->butTenPlus->set_font(textstyle.font);
-		sbi->butTenMinus->set_font(textstyle.font);
-	}
-	update();
 }
 
 
