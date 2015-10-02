@@ -124,48 +124,62 @@ SpinBox::SpinBox
 
 	sbi_->text = new UI::Textarea
 		(this, text_x, 0, textw, h, unit_text, Align_Center);
-
-	sbi_->button_plus =
-		new Button
-			(this, "+",
-			 but_plus_x, 0, butw, butw,
-			 sbi_->background,
-			 "+", _("Increase the value"),
-			 true, false);
-	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
-	sbi_->button_minus =
-		new Button
-			(this, "-",
-			 but_minus_x, 0, butw, butw,
-			 sbi_->background,
-			 "-", _("Decrease the value"),
-			 true, false);
-	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
-	sbi_->button_plus->set_repeating(true);
-	sbi_->button_minus->set_repeating(true);
 	if (big_) {
+		sbi_->button_plus =
+			new Button
+				(this, "+",
+				 but_plus_x, 0, butw, butw,
+				 sbi_->background,
+				 g_gr->images().get("pics/scrollbar_right.png"),
+				 _("Increase the value"));
+		sbi_->button_minus =
+			new Button
+				(this, "-",
+				 but_minus_x, 0, butw, butw,
+				 sbi_->background,
+				 g_gr->images().get("pics/scrollbar_left.png"),
+				 _("Decrease the value"));
 		sbi_->button_ten_plus_ =
 			new Button
 				(this, "++",
 				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi_->background,
-				 "++", _("Increase the value by 10"),
-				 true, false);
+				 g_gr->images().get("pics/scrollbar_right_fast.png"),
+				 _("Increase the value by 10"));
 		sbi_->button_ten_plus_->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
 		sbi_->button_ten_minus =
 			new Button
 				(this, "--",
 				 0, 0, butw * 2, butw,
 				 sbi_->background,
-				 "--", _("Decrease the value by 10"),
-				 true, false);
+				 g_gr->images().get("pics/scrollbar_left_fast.png"),
+				 _("Decrease the value by 10"));
 		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
 		sbi_->button_ten_plus_->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus_);
+	} else {
+		sbi_->button_plus =
+			new Button
+				(this, "+",
+				 but_plus_x, 0, butw, butw,
+				 sbi_->background,
+				 g_gr->images().get("pics/scrollbar_up.png"),
+				 _("Increase the value"));
+		sbi_->button_minus =
+			new Button
+				(this, "-",
+				 but_minus_x, 0, butw, butw,
+				 sbi_->background,
+				 g_gr->images().get("pics/scrollbar_down.png"),
+				 _("Decrease the value"));
 	}
 
+	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
+	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
+	sbi_->button_plus->set_repeating(true);
+	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 }
