@@ -1697,6 +1697,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		assert(player_);
 		int32_t const maxsize = player_->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
+
 		// For every field test all buildings
 		for (uint32_t j = 0; j < buildings_.size(); ++j) {
 			BuildingObserver& bo = buildings_.at(j);
@@ -1750,14 +1751,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// this can be only a well (as by now)
 				if (bo.mines_water_) {
-
-					assert(bo.new_building_ == BuildingNecessity::kForced
-					||
-					(bo.new_building_ == BuildingNecessity::kNeeded
-					&&
-					bo.new_building_overdue_ > 0));
-
-					assert(bo.primary_priority_ > 0);
 
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						assert (bo.total_count() - bo.unconnected_count_ == 0);
@@ -1830,9 +1823,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				} else if (bo.is_hunter_) {
 
-					assert (bo.new_building_ == BuildingNecessity::kNeeded ||
-					bo.new_building_ == BuildingNecessity::kForced);
-
 					if (bf->critters_nearby_ < 5) {
 						continue;
 					}
@@ -1850,9 +1840,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					   (bf->critters_nearby_ * 3) - 8 - 5 * bf->producers_nearby_.at(bo.outputs_.at(0));
 
 				} else if (bo.is_fisher_) {  // fisher
-
-					assert (bo.new_building_ == BuildingNecessity::kNeeded ||
-					bo.new_building_ == BuildingNecessity::kForced);
 
 					if (bf->water_nearby_ < 2 || bf->fish_nearby_ < 2) {
 						continue;
@@ -1958,7 +1945,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 				} else {  // finally normal productionsites
 					assert (bo.production_hint_ < 0);
-					assert (bo.cnt_under_construction_ + bo.unoccupied_count_ <= 1);
 
 					if (bo.new_building_ == BuildingNecessity::kForced) {
 						prio += 150;
@@ -3611,8 +3597,9 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		}
 	}
 
-	// is it sole mine of the same output?
-	// (we will not dismantle even if there are no mineable resources left for this level of mine)
+	// every type of mine has minimal number of mines that are to be preserved
+	// (we will not dismantle even if there are no mineable resources left for this level of mine
+	// and output is not needed)
 	bool forcing_upgrade = false;
 	const uint16_t minimal_mines_count = (site.bo->built_mat_producer_)?2:1;
 	if (has_upgrade &&
@@ -3671,21 +3658,19 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// if it is too soon for enhancement
 	if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
-
 		// now verify that there are enough workers
 		if (site.site->has_workers(enhancement, game())) {  // enhancing
 			game().send_player_enhance_building(*site.site, enhancement);
 			if (site.bo->max_needed_preciousness_ == 0) {
-				printf (" %d: output of %s not needed, but upgrading it\n",
-				player_number(), site.bo->name);
 				assert (mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count);
 			}
-
+			if (mines_per_type[site.bo->mines_].total_count() > minimal_mines_count) {
+				assert(site.bo->max_needed_preciousness_ > 0);
+			}
 			en_bo.construction_decision_time_ = gametime;
 			changed = true;
 		}
 	}
-
 
 	return changed;
 }
@@ -3895,9 +3880,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.total_count() - bo.unconnected_count_ >= 1 || bo.current_stats_ < 20) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			printf (" %d: %s needed, current count: %d\n",
-			player_number(), bo.name,
-			(mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished));
 			return needed_type;
 		} if (bo.max_needed_preciousness_ > 0) {
 			if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0) {
@@ -3954,6 +3936,10 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 	assert (militarysites.size() ==  msites_built());
 	// logically size of militerysite must in between 1 and 3 (including)
 	assert (size >= 1 && size <= 3);
+
+	if (size == 1) { // this function is intended for medium and bigger sites
+		return BuildingNecessity::kAllowed;
+	}
 
 	uint32_t const big_buildings_score
 		= msites_per_size[2].in_construction
@@ -4832,7 +4818,7 @@ void DefaultAI::gain_building(Building& b) {
 				// unblock nearby fields, might be used for other buildings...
 				Map& map = game().map();
 				MapRegion<Area<FCoords>> mr(
-				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 4));
+				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
 				do {
 					const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
 					if (port_reserved_coords.count(hash) > 0)
