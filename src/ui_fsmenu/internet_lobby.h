@@ -30,7 +30,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
-#include "ui_basic/spinbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"

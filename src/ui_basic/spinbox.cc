@@ -60,10 +60,10 @@ struct SpinBoxImpl {
 
 	/// The UI parts
 	Textarea * text;
-	Button * butPlus;
-	Button * butMinus;
-	Button * butTenPlus;
-	Button * butTenMinus;
+	Button * button_plus;
+	Button * button_minus;
+	Button * button_ten_plus_;
+	Button * button_ten_minus;
 };
 
 /**
@@ -77,20 +77,20 @@ SpinBox::SpinBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
-	 const std::string &       unit,
+	 const std::string& unit,
 	 const Image* background,
-	 bool                const big)
+	 bool const big)
 	:
 	Panel(parent, x, y, w, h),
-	m_big(big),
-	sbi(new SpinBoxImpl)
+	big_(big),
+	sbi_(new SpinBoxImpl)
 {
-	sbi->value = startval;
-	sbi->min   = minval;
-	sbi->max   = maxval;
-	sbi->unit  = unit;
+	sbi_->value = startval;
+	sbi_->min   = minval;
+	sbi_->max   = maxval;
+	sbi_->unit  = unit;
 
-	sbi->background = background;
+	sbi_->background = background;
 
 	if (w < 20)
 		throw wexception("Not enough space to draw spinbox");
@@ -101,7 +101,7 @@ SpinBox::SpinBox
 	int32_t but_minus_x;
 	int32_t text_x;
 
-	if (m_big) {
+	if (big_) {
 		but_plus_x = w - butw * 31 / 10;
 		but_minus_x = butw * 21 / 10;
 
@@ -116,63 +116,63 @@ SpinBox::SpinBox
 	}
 	text_x = (w - textw) / 2;
 
-	std::string unit_text = std::to_string(sbi->value);
-	if (! sbi->unit.empty()) {
+	std::string unit_text = std::to_string(sbi_->value);
+	if (! sbi_->unit.empty()) {
 		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-		unit_text = (boost::format(_("%1$i %2$s")) % sbi->value % sbi->unit.c_str()).str();
+		unit_text = (boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str();
 	}
 
-	sbi->text = new UI::Textarea
+	sbi_->text = new UI::Textarea
 		(this, text_x, 0, textw, h, unit_text, Align_Center);
 
-	sbi->butPlus =
+	sbi_->button_plus =
 		new Button
 			(this, "+",
 			 but_plus_x, 0, butw, butw,
-			 sbi->background,
+			 sbi_->background,
 			 "+", _("Increase the value"),
 			 true, false);
-	sbi->butPlus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
-	sbi->butMinus =
+	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
+	sbi_->button_minus =
 		new Button
 			(this, "-",
 			 but_minus_x, 0, butw, butw,
-			 sbi->background,
+			 sbi_->background,
 			 "-", _("Decrease the value"),
 			 true, false);
-	sbi->butMinus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
-	sbi->butPlus->set_repeating(true);
-	sbi->butMinus->set_repeating(true);
-	if (m_big) {
-		sbi->butTenPlus =
+	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
+	sbi_->button_plus->set_repeating(true);
+	sbi_->button_minus->set_repeating(true);
+	if (big_) {
+		sbi_->button_ten_plus_ =
 			new Button
 				(this, "++",
 				 w - 2 * butw, 0, butw * 2, butw,
-				 sbi->background,
+				 sbi_->background,
 				 "++", _("Increase the value by 10"),
 				 true, false);
-		sbi->butTenPlus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
-		sbi->butTenMinus =
+		sbi_->button_ten_plus_->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
+		sbi_->button_ten_minus =
 			new Button
 				(this, "--",
 				 0, 0, butw * 2, butw,
-				 sbi->background,
+				 sbi_->background,
 				 "--", _("Decrease the value by 10"),
 				 true, false);
-		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
-		sbi->butTenPlus->set_repeating(true);
-		sbi->butTenMinus->set_repeating(true);
-		m_buttons.push_back(sbi->butTenMinus);
-		m_buttons.push_back(sbi->butTenPlus);
+		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
+		sbi_->button_ten_plus_->set_repeating(true);
+		sbi_->button_ten_minus->set_repeating(true);
+		buttons_.push_back(sbi_->button_ten_minus);
+		buttons_.push_back(sbi_->button_ten_plus_);
 	}
 
-	m_buttons.push_back(sbi->butMinus);
-	m_buttons.push_back(sbi->butPlus);
+	buttons_.push_back(sbi_->button_minus);
+	buttons_.push_back(sbi_->button_plus);
 }
 
 SpinBox::~SpinBox() {
-	delete sbi;
-	sbi = nullptr;
+	delete sbi_;
+	sbi_ = nullptr;
 }
 
 
@@ -182,22 +182,22 @@ SpinBox::~SpinBox() {
 void SpinBox::update()
 {
 	bool was_in_list = false;
-	for (const IntValueTextReplacement& value : sbi->valrep) {
-		if (value.value == sbi->value) {
-			sbi->text->set_text(value.text);
+	for (const IntValueTextReplacement& value : sbi_->valrep) {
+		if (value.value == sbi_->value) {
+			sbi_->text->set_text(value.text);
 			was_in_list = true;
 			break;
 		}
 	}
 	if (!was_in_list) {
-		sbi->text->set_text((boost::format(_("%1$i %2$s")) % sbi->value % sbi->unit.c_str()).str());
+		sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
 	}
 
-	sbi->butMinus->set_enabled(sbi->min < sbi->value);
-	sbi->butPlus ->set_enabled           (sbi->value < sbi->max);
-	if (m_big) {
-		sbi->butTenMinus->set_enabled(sbi->min < sbi->value);
-		sbi->butTenPlus ->set_enabled           (sbi->value < sbi->max);
+	sbi_->button_minus->set_enabled(sbi_->min < sbi_->value);
+	sbi_->button_plus ->set_enabled(sbi_->value < sbi_->max);
+	if (big_) {
+		sbi_->button_ten_minus->set_enabled(sbi_->min < sbi_->value);
+		sbi_->button_ten_plus_ ->set_enabled(sbi_->value < sbi_->max);
 	}
 }
 
@@ -207,7 +207,7 @@ void SpinBox::update()
  */
 void SpinBox::change_value(int32_t const value)
 {
-	set_value(value + sbi->value);
+	set_value(value + sbi_->value);
 }
 
 
@@ -216,11 +216,11 @@ void SpinBox::change_value(int32_t const value)
  */
 void SpinBox::set_value(int32_t const value)
 {
-	sbi->value = value;
-	if (sbi->value > sbi->max)
-		sbi->value = sbi->max;
-	else if (sbi->value < sbi->min)
-		sbi->value = sbi->min;
+	sbi_->value = value;
+	if (sbi_->value > sbi_->max)
+		sbi_->value = sbi_->max;
+	else if (sbi_->value < sbi_->min)
+		sbi_->value = sbi_->min;
 	update();
 }
 
@@ -230,12 +230,12 @@ void SpinBox::set_value(int32_t const value)
  */
 void SpinBox::set_interval(int32_t const min, int32_t const max)
 {
-	sbi->max = max;
-	sbi->min = min;
-	if (sbi->value > max)
-		sbi->value = max;
-	else if (sbi->value < min)
-		sbi->value = min;
+	sbi_->max = max;
+	sbi_->min = min;
+	if (sbi_->value > max)
+		sbi_->value = max;
+	else if (sbi_->value < min)
+		sbi_->value = min;
 	update();
 }
 
@@ -245,7 +245,7 @@ void SpinBox::set_interval(int32_t const min, int32_t const max)
  */
 void SpinBox::set_unit(const std::string & unit)
 {
-	sbi->unit = unit;
+	sbi_->unit = unit;
 	update();
 }
 
@@ -255,7 +255,7 @@ void SpinBox::set_unit(const std::string & unit)
  */
 int32_t SpinBox::get_value()
 {
-	return sbi->value;
+	return sbi_->value;
 }
 
 /**
@@ -263,7 +263,7 @@ int32_t SpinBox::get_value()
  */
 std::string SpinBox::get_unit()
 {
-	return sbi->unit;
+	return sbi_->unit;
 }
 
 
@@ -271,10 +271,10 @@ std::string SpinBox::get_unit()
  * Searches for value in sbi->valrep
  * \returns the place where value was found or -1 if the value wasn't found.
  */
-int32_t SpinBox::find_replacement(int32_t value)
+int32_t SpinBox::find_replacement(int32_t value) const
 {
-	for (uint32_t i = 0; i < sbi->valrep.size(); ++i)
-		if (sbi->valrep[i].value == value)
+	for (uint32_t i = 0; i < sbi_->valrep.size(); ++i)
+		if (sbi_->valrep[i].value == value)
 			return i;
 	return -1;
 }
@@ -284,15 +284,15 @@ int32_t SpinBox::find_replacement(int32_t value)
  * Adds a replacement text for a specific value
  * overwrites an old replacement if one exists.
  */
-void SpinBox::add_replacement(int32_t value, std::string text)
+void SpinBox::add_replacement(int32_t value, const std::string& text)
 {
 	if (int32_t i = find_replacement(value) >= 0)
-		sbi->valrep[i].text = text;
+		sbi_->valrep[i].text = text;
 	else {
 		IntValueTextReplacement newtr;
 		newtr.value = value;
 		newtr.text  = text;
-		sbi->valrep.push_back(newtr);
+		sbi_->valrep.push_back(newtr);
 	}
 	update();
 }
@@ -304,14 +304,14 @@ void SpinBox::add_replacement(int32_t value, std::string text)
 void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = find_replacement(value) >= 0) {
-		sbi->valrep[i].text = (boost::format(_("%1$i %2$s")) % value % sbi->unit.c_str()).str();
+		sbi_->valrep[i].text = (boost::format(_("%1$i %2$s")) % value % sbi_->unit.c_str()).str();
 	}
 }
 
 /**
  * \returns true, if find_replacement returns an int >= 0
  */
-bool SpinBox::has_replacement(int32_t value)
+bool SpinBox::has_replacement(int32_t value) const
 {
 	return find_replacement(value) >= 0;
 }
