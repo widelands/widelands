@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-25 13:26+0000\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-05 11:34+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -122,8 +122,8 @@ msgid ""
 "have."
 msgstr "La finestra d'estadístiques d'edificis us dóna una visió general dels edificis que teniu."
 
-#: TRANSLATORS "it" refers to the building statistics window TRANSLATORS "it"
-#: refers to the stock menu window
+#. TRANSLATORS: "it" refers to the building statistics window
+#. TRANSLATORS: "it" refers to the stock menu window
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid "Open it. You can access it from the statistics menu."
@@ -168,8 +168,8 @@ msgid ""
 "‘2/4’ below your sentry: For military buildings, the stationed soldiers are "
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
-" leaves two vacant positions — we really need more soldiers."
-msgstr "«2/4» a baix de guarda sentinella: per als edificis militars, es mostren els soldats guarnint els edificis en lloc de la productivitat. Potser voleu tenir quatre soldats, però només dos hi estan estacionats en aquest tipus d'edifici. Per tant, hi ha dues places vacants: necessitem més soldats."
+" leaves two vacant positions – we really need more soldiers."
+msgstr "«2/4» a baix de la guarda sentinella: per als edificis militars, es mostren els soldats guarnint els edificis en lloc de la productivitat. Potser voleu tenir quatre soldats, però només dos hi estan estacionats en aquest tipus d'edifici. Per tant, hi ha dues places vacants: necessitem més soldats."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
@@ -245,7 +245,7 @@ msgid ""
 "up the number of taverns."
 msgstr "Heu tancat la finestra d'«Estadístiques d'edificis», encara que no heu buscat el nombre de tavernes."
 
-#: TRANSLATORS "it" refers to the building statistics window.
+#. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid "Please reopen it and choose the second tab (medium buildings)."
 msgstr "Si us plau, torneu a obrir-la i elegiu la segona pestanya (edificis mitjans)."
@@ -367,8 +367,8 @@ msgid ""
 "tutorial at any time."
 msgstr "Heu tancat la finestra d'estoc abans que acabés d'explicar-vos-ho tot. No us salteu passos del tutorial. Òbviament, si ja ho sabeu tot, podeu abandonar el tutorial en qualsevol moment."
 
-#: TRANSLATORS "it" refers to the stock menu window. TRANSLATORS "it" refers
-#: to the ware statistics window.
+#. TRANSLATORS: "it" refers to the stock menu window.
+#. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Otherwise, please reopen it and choose the third tab."
@@ -418,7 +418,7 @@ msgid ""
 "When you’ve played a lot, you will know such things by heart. But when "
 "you’re unsure what this tribe needs for a special ware, you can easily look "
 "it up in your tribe’s ware encyclopedia."
-msgstr "Quan hagueu jugat molt més, sabreu aquestes coses de memòria. Però quan no esteu segur de què necessita una tribu per obtenir un bé concret, podeu mirar-ho fàcilment a l'enciclopèdia de béns del teu clan."
+msgstr "Quan hagueu jugat molt més, sabreu aquestes coses de memòria. Però quan no esteu segur de què necessita una cultura per obtenir un bé concret, podeu mirar-ho fàcilment a l'enciclopèdia de béns de la vostra cultura."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "This encyclopedia can be accessed via"
@@ -428,7 +428,7 @@ msgstr "A l'enciclopèdia s'hi pot accedir mitjançant"
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
-msgstr "el botó d'ajuda de la part inferior. Hi ha un text breu d'ajuda per cadascun dels béns que usa el teu clan, una llista d'edificis que els produeixen i els béns que fan falta."
+msgstr "el botó d'ajuda de la part inferior. Hi ha un text breu d'ajuda per cadascun dels béns que usa la vostra cultura, una llista d'edificis que els produeixen i els béns que fan falta."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
@@ -487,7 +487,7 @@ msgstr "En el menú d'estadístiques, també hi ha"
 msgid "‘Ware statistics’ button."
 msgstr "el botó \"Estadístiques de béns\"."
 
-#: TRANSLATORS "it" refers to the ware statistics button
+#. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid "Click on it."
 msgstr "Cliqueu-la."
@@ -615,7 +615,7 @@ msgid ""
 " with my explanation. Would you please reopen it and choose the fourth tab?"
 msgstr "Heu tancat la finestra d'«Estadístiques de béns», però no he acabat l'explicació. Si us plau, podeu tornar a obrir-la i escollir la quarta pestanya?"
 
-#: TRANSLATORS "it" refers to the ware statistics window.
+#. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
 msgid "Otherwise, please reopen it and choose the fourth tab."
 msgstr "Si no, si us plau, torneu a obrir-la i elegiu la quarta pestanya."
@@ -670,8 +670,8 @@ msgstr "Primer heu de seleccionar un o més béns (també podeu clicar amb el bo
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid ""
-"Most buildings will only produce something when when the stock level in your"
-" warehouses falls below the target quantity, so you should indicate the "
+"Most buildings will only produce something when the stock level in your "
+"warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "La majoria d'edificis només produiran alguna cosa quan el nivell d'existències als magatzems caigui per baix de la quantitat desitjada. Així que hauríeu d'indicar la reserva de la que voleu disposar."
 
@@ -716,7 +716,7 @@ msgstr "Proveu-ho. L'actual quantitat desitjada de columnes de marbre és 10. In
 msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
-msgstr "Ajusteu a 20 la quantitat desitjada de columnes de marbre i espereu a que l'artesà pedrer les produeixi."
+msgstr "Ajusteu a 20 la quantitat desitjada de columnes de marbre i espereu a que el picapedrer les produeixi."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
@@ -734,7 +734,7 @@ msgstr "Per estar preparat per a fortificacions addicionals, hauríeu de produir
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr "El vostre artesà pedrer no produirà columnes de marbre si no es necessiten. Haureu d'incrementar la quantitat desitjada d'aquest bé."
+msgstr "El vostre picapedrer no produirà columnes de marbre si no es necessiten. Haureu d'incrementar la quantitat desitjada d'aquest bé."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:418
 msgid ""
@@ -753,9 +753,9 @@ msgstr "Envieu les columnes de marbre al front"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
 msgid ""
-"It is great that we are producing marble columns, but it would be great if "
-"they were stored where we need them."
-msgstr "Està molt bé que produïm columnes de marbre, però seria millor si s'emmagatzemessin al lloc on les necessitem."
+"The production of marble columns is working fine now, but it would be great "
+"if they were stored where we need them."
+msgstr "La producció de columnes de marbre està en marxa, però seria millor si s'emmagatzemessin prop del lloc on es necessitaran."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""

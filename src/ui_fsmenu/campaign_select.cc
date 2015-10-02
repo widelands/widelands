@@ -93,16 +93,10 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	m_ta_tribename.set_tooltip(_("The tribe you will be playing"));
 	m_ta_difficulty.set_tooltip(_("The difficulty of this campaign"));
 
-	ok_.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
-	m_table.selected.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
-	m_table.double_clicked.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
+	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
+	m_table.double_clicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Campaign difficulty table header */
 	m_table.add_column(45, _("Diff."), _("Difficulty"), UI::Align_Left);
@@ -123,7 +117,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 void FullscreenMenuCampaignSelect::clicked_ok()
 {
 	get_campaign();
-	end_modal(1);
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
 int32_t FullscreenMenuCampaignSelect::get_campaign()

@@ -122,6 +122,7 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
  * fill the file list
  */
 void MainMenuLoadOrSaveMap::fill_table() {
+	table_.clear();
 	std::vector<MapData> maps_data;
 	has_translated_mapname_ = false;
 

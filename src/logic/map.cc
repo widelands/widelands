@@ -24,6 +24,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -307,6 +308,11 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	m_port_spaces.clear();
+
+	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
+	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
+	// ... so we can't do it here :/
+	// filesystem_.reset(nullptr);
 }
 
 /*
@@ -330,7 +336,7 @@ void Map::create_empty_map
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
 	set_scenario_player_tribe(1, TribeDescr::get_all_tribenames()[0]);
-	set_scenario_player_name(1, _("Player 1"));
+	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);
 
@@ -346,6 +352,8 @@ void Map::create_empty_map
 		}
 	}
 	recalc_whole_map(world);
+
+	filesystem_.reset(nullptr);
 }
 
 
@@ -471,6 +479,11 @@ bool Map::get_scenario_player_closeable(const PlayerNumber p) const
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_closeables[p - 1];
+}
+
+void Map::swap_filesystem(std::unique_ptr<FileSystem>& fs)
+{
+	filesystem_.swap(fs);
 }
 
 FileSystem* Map::filesystem() const {

@@ -15,7 +15,7 @@ return {
 	--General Section
 	building_help_general_string("atlanteans", building_description,
 		_"Fishes on the coast near the house.",
-		_"The fisher’s house needs water full of fish within the working radius." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish." ) ..
+		_"The fisher’s house needs water full of fish within the work area." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish." ) ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description) ..

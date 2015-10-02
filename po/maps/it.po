@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-06-25 15:32+0000\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-21 14:59+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr "Barbari"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "Facile. Introduce i barbari"
+msgstr "Facile. Introduce i Barbari"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -153,7 +153,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Dopo aver perso un'importane battaglia contro i barbari che ha portato alla perdita di una grande parte del territorio dell'Impero, Lutius lascia Fremil per cominciare una nuova vita. Ma il suo destino porta la sua nave dentro una pesante tempesta, quasi distrugendola. Solo con molta fortuna riesce a portare a riva la sua nave danneggiata in una spiaggia deserta sconosciuta e salvare il suo popolo. Per ora."
+msgstr "Dopo aver perso un'importane battaglia contro i Barbari che ha portato alla perdita di una grande parte del territorio dell'Impero, Lutius lascia Fremil per cominciare una nuova vita. Ma il suo destino porta la sua nave dentro una pesante tempesta, quasi distrugendola. Solo con molta fortuna riesce a portare a riva la sua nave danneggiata in una spiaggia deserta sconosciuta e salvare il suo popolo. Per ora."
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -709,12 +709,6 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
 msgstr "Nel luogo in cui sorgono i tre principali vulcani sei splendide isole invitano i coloni ad avviare una nuova vita. I deserti ed una foresta che cresce rapidamente attendono di essere scoperti. Ma solamente diventando una potenza navale la tua tribù potra scoprire abbastanza risorse da competere con i suoi avversari."
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
-" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr "Squadre suggerite: rosso contro verde, (blu, giallo) contro (verde, arancio), (blu, nero) contro (verde, rosso), (blu, nero, giallo) contro (verde, rosso, arancio)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"

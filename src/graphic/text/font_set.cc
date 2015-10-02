@@ -111,6 +111,11 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 
 				// Read the fontset for the current locale.
 				try {
+					if (!fonts_table->has_key(fontsetname)) {
+						log("Font set '%s' for locale '%s' does not exist; using default instead.\n",
+							 fontsetname.c_str(), actual_localename.c_str());
+						fontsetname = "default";
+					}
 					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname);
 					font_set_table->do_not_warn_about_unaccessed_keys();
 

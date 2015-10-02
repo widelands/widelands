@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"POT-Creation-Date: 2015-09-28 06:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -341,7 +341,7 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -1694,23 +1694,23 @@ msgid ""
 "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid ""
 "planting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid ""
 "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid ""
 "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1757,7 +1757,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his working radius."
+"The fisher working out of this fisher’s hut can’t find any fish in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
@@ -1772,7 +1772,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
 msgid ""
-"The fisher’s hut needs water full of fish within the working radius."
+"The fisher’s hut needs water full of fish within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
@@ -1940,7 +1940,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his working radius. Remember that you can build a gamekeeper’s hut to release more game into the wild."
+"The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
@@ -1960,7 +1960,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
 msgid ""
-"The hunter’s hut needs animals to hunt within the working radius."
+"The hunter’s hut needs animals to hunt within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
@@ -2040,7 +2040,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
-"The lumberjack working at this lumberjack’s hut can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a rangers’s hut."
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a rangers’s hut."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
@@ -2060,7 +2060,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid ""
-"The lumberjack’s hut needs trees to fell within the working radius."
+"The lumberjack’s hut needs trees to fell within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
@@ -2205,7 +2205,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working radius."
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
@@ -2215,7 +2215,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid ""
-"The quarry needs stones to cut within the working radius."
+"The quarry needs stones to cut within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
@@ -2250,7 +2250,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the trees."
+"The ranger’s hut needs free space within the work area to plant the trees."
 msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
@@ -2535,7 +2535,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few warriors ever were able to handle those huge and powerful axes. It is produced in a war mill and used – together with food – in a training camp to train soldiers from attack level 4 to level 5."
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few warriors ever were able to handle those huge and powerful axes. It is produced in a war mill and used – together with food – in a training camp to train soldiers from attack level 4 to level 5."
 msgstr ""
 
 #: ../../tribes/barbarians/water/conf:1
@@ -2565,7 +2565,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13
@@ -2592,4 +2592,3 @@ msgstr ""
 msgid ""
 "Wheat is essential for surviving. It is produced in farms and consumed by bakeries, micro breweries and breweries. Also Cattle farms need to be supplied with wheat."
 msgstr ""
-

@@ -22,11 +22,13 @@
 #include <cstdio>
 #include <cstring>
 #include <memory>
+#include <string>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
@@ -122,14 +124,19 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 void MainMenuSaveMap::clicked_ok() {
 	assert(ok_.enabled());
 	std::string filename = editbox_->text();
+	std::string complete_filename;
 
 	if (filename == "") {  //  Maybe a directory is selected.
-		filename = table_.get_map()->filename;
+		complete_filename = filename = table_.get_map()->filename;
+	} else {
+		complete_filename = curdir_ + "/" + filename;
 	}
+	log("NOCOM clicked_ok filename = %s\n", complete_filename.c_str());
 
-	if (g_fs->is_directory(filename.c_str()) &&
-	    !Widelands::WidelandsMapLoader::is_widelands_map(filename)) {
-		curdir_ = g_fs->canonicalize_name(filename);
+	if (g_fs->is_directory(complete_filename.c_str()) &&
+		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
+		curdir_ = complete_filename;
+		log("NOCOM isdir\n");
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -150,8 +157,8 @@ void MainMenuSaveMap::clicked_ok() {
  */
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
-	if (md.run()) {
-		g_fs->ensure_directory_exists(basedir_);
+	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
 		std::string fullname = curdir_;
 		fullname += "/";
@@ -163,7 +170,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 
 void MainMenuSaveMap::clicked_edit_options() {
 	MainMenuMapOptions mo(eia(), true);
-	if (mo.run()) {
+	if (mo.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		const Widelands::Map& map = eia().egbase().map();
 		MapData::MapType maptype;
 
@@ -200,11 +207,13 @@ void MainMenuSaveMap::clicked_item() {
 void MainMenuSaveMap::double_clicked_item() {
 	const MapData& mapdata = *table_.get_map();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
+		log("NOCOM double clicked dir = %s\n", mapdata.filename.c_str());
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
 		clicked_ok();
 	}
+	edit_box_changed();
 }
 
 /**
@@ -222,8 +231,8 @@ void MainMenuSaveMap::edit_box_changed() {
  * should stay open
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
-	//  Make sure that the base directory exists.
-	g_fs->ensure_directory_exists(basedir_);
+	//  Make sure that the current directory exists and is writeable.
+	g_fs->ensure_directory_exists(curdir_);
 
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
@@ -236,19 +245,32 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		std::string s = (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
+		const std::string s = (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		                 FileSystem::fs_filename(filename.c_str())).str();
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
-		if (!mbox.run())
-			return false;
-
-		g_fs->fs_unlink(complete_filename);
+		UI::WLMessageBox mbox
+				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+				return false;
 	}
 
-	std::unique_ptr<FileSystem> fs(
-	   g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-	Widelands::MapSaver wms(*fs, eia().egbase());
-	try {
+	// save to a tmp file/dir first, rename later
+	// (important to keep script files in the script directory)
+	std::string tmp_name = complete_filename + ".tmp";
+	if (g_fs->file_exists(tmp_name)) {
+		const std::string s = (boost::format(_
+				("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
+					% FileSystem::fs_filename(filename.c_str())).str();
+		UI::WLMessageBox mbox
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return false;
+	}
+
+	{ // fs scope
+		std::unique_ptr<FileSystem> fs
+			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
+				binary ? FileSystem::ZIP : FileSystem::DIR));
+		Widelands::MapSaver wms(*fs, eia().egbase());
 
 		// Recompute seafaring tag
 		if (eia().egbase().map().allows_seafaring()) {
@@ -257,15 +279,39 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			eia().egbase().map().delete_tag("seafaring");
 		}
 
-		wms.save();
-		eia().set_need_save(false);
-	} catch (const std::exception& e) {
-		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-		                  "given:\n");
-		s += e.what();
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::OK);
-		mbox.run();
-	}
+		try {
+			wms.save();
+			eia().set_need_save(false);
+
+			// if saved to a tmp file earlier, rename now
+			if (!tmp_name.empty()) {
+				g_fs->fs_unlink(complete_filename);
+				g_fs->fs_rename(tmp_name, complete_filename);
+				// also change fs, as we assign it to the map below
+				fs.reset(g_fs->make_sub_file_system(complete_filename));
+			}
+
+			// set the filesystem of the map to the current save file / directory
+			eia().egbase().map().swap_filesystem(fs);
+			// DONT use fs as of here, its garbage now!
+
+		} catch (const std::exception & e) {
+			std::string s =
+				_
+				("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
+				 "given:\n");
+			s += e.what();
+			UI::WLMessageBox  mbox
+				(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+			mbox.run<UI::Panel::Returncodes>();
+
+			// cleanup tmp file if it was created
+			if (!tmp_name.empty()) {
+				g_fs->fs_unlink(tmp_name);
+			}
+		}
+	} // end fs scope, dont use it
+
 	die();
 	return true;
 }

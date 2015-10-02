@@ -134,7 +134,10 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		int player_nr = parent.game().player_manager()->get_number_of_players();
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
-		m_win_condition.set_text(parent.game().get_win_condition_displayname());
+		{
+			i18n::Textdomain td("win_conditions");
+			m_win_condition.set_text(_(parent.game().get_win_condition_displayname()));
+		}
 	}
 
 	m_editbox->focus();
@@ -242,8 +245,8 @@ static void dosave
 			 "Reason given:\n");
 		s += error;
 		UI::WLMessageBox mbox
-			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::OK);
-		mbox.run();
+			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
 	}
 	game.save_handler().set_current_filename(complete_filename);
 }
@@ -257,7 +260,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 			 _("Save Game Error!"),
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
 				% FileSystem::fs_filename(filename.c_str())).str(),
-			 YESNO),
+			 MBoxType::kOkCancel),
 		m_filename(filename)
 	{}
 
@@ -266,14 +269,14 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	}
 
 
-	void pressed_yes() override
+	void clicked_ok() override
 	{
 		g_fs->fs_unlink(m_filename);
 		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
-	void pressed_no() override
+	void clicked_back() override
 	{
 		die();
 	}
@@ -321,18 +324,18 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 			 str
 				 (boost::format(_("Do you really want to delete the file %s?")) %
 				  FileSystem::fs_filename(filename.c_str())),
-			 YESNO),
+			 MBoxType::kOkCancel),
 		m_filename(filename)
 	{}
 
-	void pressed_yes() override
+	void clicked_ok() override
 	{
 		g_fs->fs_unlink(m_filename);
 		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_list();
 		die();
 	}
 
-	void pressed_no() override
+	void clicked_back() override
 	{
 		die();
 	}

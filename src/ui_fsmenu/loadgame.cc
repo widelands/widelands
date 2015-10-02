@@ -183,14 +183,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		if (m_is_replay) {
 			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-			modes.push_back("SP = Single Player");
+			modes.push_back(_("SP = Single Player"));
 		}
 		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		modes.push_back("MP = Multiplayer");
+		modes.push_back(_("MP = Multiplayer"));
 		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		modes.push_back("H = Multiplayer (Host)");
+		modes.push_back(_("H = Multiplayer (Host)"));
 		const std::string mode_tooltip_1 =
 				/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 				/** TRANSLATORS: %s is a list of game modes. */
@@ -245,7 +245,7 @@ void FullscreenMenuLoadGame::clicked_ok()
 	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 	if (gamedata.errormessage.empty()) {
 		m_filename = gamedata.filename;
-		end_modal(1);
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 	}
 }
 
@@ -283,8 +283,8 @@ void FullscreenMenuLoadGame::clicked_delete()
 	}
 
 	UI::WLMessageBox confirmationBox
-		(this, _("Confirm deleting file"), message, UI::WLMessageBox::YESNO);
-	if (confirmationBox.run()) {
+		(this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
+	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->fs_unlink(gamedata.filename);
 		if (m_is_replay) {
 			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);
@@ -354,7 +354,10 @@ void FullscreenMenuLoadGame::entry_selected()
 				m_ta_version.set_text(gamedata.version);
 			}
 
-			m_ta_win_condition.set_text(gamedata.wincondition);
+			{
+				i18n::Textdomain td("win_conditions");
+				m_ta_win_condition.set_text(_(gamedata.wincondition));
+			}
 
 			std::string minimap_path = gamedata.minimap_path;
 			// Delete former image
@@ -422,7 +425,6 @@ void FullscreenMenuLoadGame::entry_selected()
 		}
 	}
 }
-
 
 /**
  * Fill the file list

@@ -4,7 +4,7 @@ output=smoked_fish
 
 [aihints]
 forced_after=900
-prohibited_till=60
+prohibited_till=180
 
 [buildcost]
 log=1

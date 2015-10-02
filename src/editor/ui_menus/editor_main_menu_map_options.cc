@@ -198,7 +198,7 @@ void MainMenuMapOptions::clicked_ok() {
 	}
 
 	if (modal_) {
-		end_modal(1);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	} else {
 		die();
 	}
@@ -206,7 +206,7 @@ void MainMenuMapOptions::clicked_ok() {
 
 void MainMenuMapOptions::clicked_cancel() {
 	if (modal_) {
-		end_modal(0);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		die();
 	}

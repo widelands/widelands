@@ -24,7 +24,7 @@ worker=fish
 
 [out_of_resource_notification]
 title=_Out of Fish
-message=_The fisher working out of this fisher’s hut can’t find any fish in his working radius.
+message=_The fisher working out of this fisher’s hut can’t find any fish in his work area.
 
 [build]
 pics=build_??.png  # ???

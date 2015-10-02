@@ -34,12 +34,9 @@
 struct MainMenuSaveMap : public MainMenuLoadOrSaveMap {
 	MainMenuSaveMap(EditorInteractive& parent);
 
-protected:
-	void clicked_ok() override;
-
 private:
-	EditorInteractive& eia();
-
+	EditorInteractive & eia();
+	void clicked_ok();
 	void clicked_make_directory();
 	void clicked_edit_options();
 	void clicked_item();

@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-21 14:57+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "Autori"
 
 #: ../../txts/AUTHORS.lua:42
 msgid "Widelands Development Team"
-msgstr "Gruppo di Sviluppo di Widelands"
+msgstr "Team di sviluppo di Widelands"
 
 #: ../../txts/LICENSE.lua:18
 msgid "License"
@@ -34,7 +34,7 @@ msgstr "Licenza"
 
 #: ../../txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
-msgstr "Informazioni sulla licenza per Widelands"
+msgstr "Informazioni sulla licenza di Widelands"
 
 #: ../../txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2015 by the Widelands Development Team."
@@ -105,7 +105,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr "Widelands è un gioco strategico in real time libero ed open source, con campagne\nper giocatore singolo ed una modalità multiplayer. Il gioco si ispira a Settelers II, ma ha\ndecisamente più varietà e profondità. Nonostante ciò, è facile imparare a giocare\ntramite tutorial giocabili."
+msgstr "Widelands è un gioco strategico in tempo reale libero ed open source, con campagne\nper giocatore singolo ed una modalità multiplayer. Il gioco si ispira a Settelers II, ma ha\ndecisamente più varietà e profondità. Nonostante ciò, è facile imparare a giocare\ntramite tutorial giocabili."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -399,7 +399,7 @@ msgstr "Programmatori"
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -415,7 +415,7 @@ msgstr "Impero"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
@@ -423,7 +423,7 @@ msgstr ""
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
@@ -444,11 +444,11 @@ msgstr "Pagina principale degli sviluppatori"
 
 #: ../../txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
@@ -488,11 +488,11 @@ msgstr "Traduttori"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:10
 msgid "README for the Widelands Editor"
@@ -500,7 +500,7 @@ msgstr "LEGGIMI per l'Editor di Widelands"
 
 #: ../../txts/editor_readme.lua:12
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "L'editor di Widelands"
 
 #: ../../txts/editor_readme.lua:16
 msgid ""
@@ -538,7 +538,7 @@ msgstr "Scorciatoie da tastiera"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
 msgid "SPACE:"
-msgstr ""
+msgstr "SPAZIO:"
 
 #: ../../txts/editor_readme.lua:26
 msgid "toggles if building spaces are shown"
@@ -546,7 +546,7 @@ msgstr ""
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
 msgid "C:"
-msgstr ""
+msgstr "C:"
 
 #: ../../txts/editor_readme.lua:28
 msgid "toggles census"
@@ -554,31 +554,31 @@ msgstr ""
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
 msgid "F:"
-msgstr ""
+msgstr "F:"
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "attiva o disattiva lo schermo intero"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
 msgid "H:"
-msgstr ""
+msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "attiva e disattiva il menù principale"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
 msgid "M:"
-msgstr ""
+msgstr "M:"
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "attiva e disattiva la minimappa"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
@@ -586,7 +586,7 @@ msgstr ""
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
 msgid "T:"
-msgstr ""
+msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
@@ -594,39 +594,39 @@ msgstr ""
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
 msgid "I:"
-msgstr ""
+msgstr "I:"
 
 #: ../../txts/editor_readme.lua:40
 msgid "activates information tool"
-msgstr ""
+msgstr "attiva lo strumento per le informazioni"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
-msgstr ""
+msgstr "CTRL+L:"
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "carica una mappa"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
-msgstr ""
+msgstr "CTRL+S:"
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "salva la mappa"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
 msgid "1-0:"
-msgstr ""
+msgstr "1-0:"
 
 #: ../../txts/editor_readme.lua:46
 msgid "changes tool size"
-msgstr ""
+msgstr "cambia la dimensione dello strumento"
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
-msgstr ""
+msgstr "SHIFT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:48
 msgid "selects first alternative tool while pressed"
@@ -634,7 +634,7 @@ msgstr ""
 
 #: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
-msgstr ""
+msgstr "ALT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:50
 msgid "Selects second alternative tool while pressed"
@@ -645,7 +645,7 @@ msgstr ""
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Alcune costruzioni, come le fattorie, hanno un'area di lavoro molto piccola. Se la costruzione è circondata da alberi o strade, la produzione si fermerà."
+msgstr "Alcuni edifici, come le fattorie, hanno un'area di lavoro molto piccola. Se l'edificio è circondato da alberi o strade, la produzione si fermerà."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -738,7 +738,7 @@ msgstr "I minatori lavoreranno solo se gli verrà fornito del cibo."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Dividi le tue strade in tratti più brevi piantando alcune bandiere, così velocizzerai il trasporto delle merci."
+msgstr "Dividi le tue strade in tratti più brevi piantando alcune bandiere, così velocizzerai il trasporto dei beni."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -793,7 +793,7 @@ msgstr "I nuovi soldati sono reclutati nel quartier generale o nel magazzino se 
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Se ti piace vivere pericolosamente, premendo Ctrl mentre si fa clic sui pulsanti migliora, smantella o distruggi le costruzioni salterà la conferma."
+msgstr "Se ti piace vivere pericolosamente, premere Ctrl mentre si fa clic sui pulsanti 'migliora', 'smantella' o 'distruggi l'edificio' ignorerà il messaggio di conferma."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -809,7 +809,7 @@ msgstr "Un'economia è composta da tutti gli edifici e le bandiere collegati da 
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Puoi usare i tasti ‘Page up’ e ‘Page down’ per aggiustare la velocità desiderata - la velocità reale è democraticamente impostata."
+msgstr "Puoi utilizzareare i tasti ‘Page up’ e ‘Page down’ per regolare la velocità desiderata - la velocità reale è democraticamente impostata."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"POT-Creation-Date: 2015-09-28 06:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -600,7 +600,7 @@ msgid ""
 "Keyboard shortcuts"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:26
 msgid ""
 "SPACE:"
@@ -611,7 +611,7 @@ msgid ""
 "toggles if building spaces are shown"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:28
 msgid ""
 "C:"
@@ -622,7 +622,7 @@ msgid ""
 "toggles census"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:30
 msgid ""
 "F:"
@@ -633,7 +633,7 @@ msgid ""
 "toggles fullscreen"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:32
 msgid ""
 "H:"
@@ -644,7 +644,7 @@ msgid ""
 "toggles main menu"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:34
 msgid ""
 "M:"
@@ -655,7 +655,7 @@ msgid ""
 "toggles minimap"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:36
 msgid ""
 "P:"
@@ -666,7 +666,7 @@ msgid ""
 "toggles player menu"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:38
 msgid ""
 "T:"
@@ -677,7 +677,7 @@ msgid ""
 "toggles tools menu"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:40
 msgid ""
 "I:"
@@ -688,7 +688,7 @@ msgid ""
 "activates information tool"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:42
 msgid ""
 "CTRL+L:"
@@ -699,7 +699,7 @@ msgid ""
 "load map"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:44
 msgid ""
 "CTRL+S:"
@@ -710,7 +710,7 @@ msgid ""
 "save map"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:46
 msgid ""
 "1-0:"
@@ -721,7 +721,7 @@ msgid ""
 "changes tool size"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:48
 msgid ""
 "SHIFT (Hold):"
@@ -732,7 +732,7 @@ msgid ""
 "selects first alternative tool while pressed"
 msgstr ""
 
-#: TRANSLATORS: This is a hotkey
+#. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:50
 msgid ""
 "ALT (Hold):"
@@ -905,4 +905,3 @@ msgstr ""
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
 msgstr ""
-

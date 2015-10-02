@@ -54,10 +54,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	edit_.set_text(dirname_);
 	edit_.changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
 	ok_button_.sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 1));
+			(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+							 boost::ref(*this),
+							 UI::Panel::Returncodes::kOk));
 	ok_button_.set_enabled(false);
 	cancel_button_.sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 0));
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+						 boost::ref(*this),
+						 UI::Panel::Returncodes::kBack));
 	center_to_parent();
 }
 

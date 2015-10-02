@@ -156,7 +156,11 @@ void FullscreenMenuMapSelect::clicked_ok()
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
-		end_modal(1 + is_scenario());
+		if (is_scenario()) {
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+		} else {
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+		}
 	}
 }
 

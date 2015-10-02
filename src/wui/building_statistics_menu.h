@@ -29,12 +29,9 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
-
-using namespace Widelands;
 
 namespace {
 
@@ -71,18 +68,19 @@ private:
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(
-	   BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column);
+		Widelands::BuildingIndex id, const Widelands::BuildingDescr& descr, int tab_index,
+		UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
 	/// Sets the label for id type to text in the chosen color with dynamic font size
-	void set_labeltext_autosize(UI::MultilineTextarea* textarea,
+	void set_labeltext_autosize(UI::Textarea* textarea,
 	                            const std::string& text,
 	                            const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
-	void set_current_building_type(BuildingIndex id);
+	void set_current_building_type(Widelands::BuildingIndex id);
 
 	/// Change the percentage where buildings are deemed unproductive
 	void low_production_changed();
@@ -102,11 +100,9 @@ private:
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
 	/// Labels with owned / under construction buildings
-	std::vector<UI::MultilineTextarea*> owned_labels_;
+	std::vector<UI::Textarea*> owned_labels_;
 	/// Labels with buildings' productivity
-	// TODO(GunChleoc): These need to be multiline, so we can give them a color.
-	// Turn into normal textareas in fh1 branch.
-	std::vector<UI::MultilineTextarea*> productivity_labels_;
+	std::vector<UI::Textarea*> productivity_labels_;
 
 	/// The buttons for stepping through buildings
 	UI::Panel navigation_panel_;
@@ -123,11 +119,11 @@ private:
 	UI::Textarea no_unproductive_label_;
 
 	/// The building type we are currently navigating
-	BuildingIndex current_building_type_;
+	Widelands::BuildingIndex current_building_type_;
 	/// The last building that was jumped to
 	int32_t last_building_index_;
 	/// The type of last building that was jumped to
-	BuildingIndex last_building_type_;
+	Widelands::BuildingIndex last_building_type_;
 	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;
 

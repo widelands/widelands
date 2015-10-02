@@ -61,13 +61,16 @@ struct HelpWindow : public Window {
 	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 	void add_heading   (std::string text);
 	void add_paragraph (std::string text);
 	void add_block     (std::string text);
 	void add_picture_li(std::string text, std::string picpath);
 
 protected:
-	virtual void pressed_ok();
+	void clicked_ok();
 
 private:
 	enum State {

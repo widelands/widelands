@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-26 07:29+0000\n"
+"POT-Creation-Date: 2015-09-28 06:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -631,11 +631,6 @@ msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
 msgstr ""
 
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr ""
-
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid ""
 "Twin Lagoons"
@@ -695,4 +690,3 @@ msgstr ""
 msgid ""
 "It seems as if this magical valley has been inhabited by wisents since the beginning of days. When your tribe came to this place, you were sure that it offered enough space for a peaceful life. But can your tribe live in peace with your neighbors?"
 msgstr ""
-

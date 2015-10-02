@@ -1,22 +1,21 @@
-# Japanese translation for widelands
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-04-21 01:54+0000\n"
-"Last-Translator: Midori <midori.tj@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -32,12 +31,9 @@ msgstr "敗北しました！"
 
 #: ../../scripting/win_condition_texts.lua:8
 msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as "
-"spectator if you want."
-msgstr ""
-"最後の倉庫を失ったため、敗北しました。\n"
-"もしよければ、\n"
-"観客として続行することができます。"
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "最後の倉庫を失ったため、敗北しました。\nもしよければ、\n観客として続行することができます。"
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
@@ -63,49 +59,54 @@ msgstr "状況"
 msgid "Player overview:"
 msgstr "プレイヤーの概況"
 
-#: ../../scripting/win_conditions/collectors.lua:15
+#: ../../scripting/win_conditions/collectors.lua:16
 msgid "Collectors"
 msgstr "コレクター"
 
-#: ../../scripting/win_conditions/collectors.lua:18
+#: ../../scripting/win_conditions/collectors.lua:19
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr ""
-"倉庫にある貴重なアイテムによって、\n"
-"ポイントが発生します。４時間後の終了時に、\n"
-"アイテムポイントがもっとも多いプレイヤーが\n"
-"勝者です。"
+msgstr "倉庫にある貴重なアイテムによって、\nポイントが発生します。４時間後の終了時に、\nアイテムポイントがもっとも多いプレイヤーが\n勝者です。"
 
-#: ../../scripting/win_conditions/collectors.lua:21
+#: ../../scripting/win_conditions/collectors.lua:22
 msgid "Points"
 msgstr "ポイント"
 
-#: ../../scripting/win_conditions/collectors.lua:100
+#: ../../scripting/win_conditions/collectors.lua:101
 msgid "Status for %s"
 msgstr "%sの状況"
 
-#: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:110
-msgid "  %1$s (%2$i P) x %3$i = %4$i P"
-msgstr "  %1$s (%2$i P) x %3$i = %4$i P"
+#: TRANSLATORS For example 'gold (3 P) x 4 = 12 P", P meaning "Points'
+#: ../../scripting/win_conditions/collectors.lua:112
+msgid "%1$s (%2$i P) x %3$i = %4$i P"
+msgstr ""
 
-#: ../../scripting/win_conditions/collectors.lua:114
+#: ../../scripting/win_conditions/collectors.lua:116
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "合計: %i point"
 
-#: TRANSLATORS: Context: 'The game will end in %s.'
-#: ../../scripting/win_conditions/collectors.lua:128
-msgid "%1$ih%2$02im"
-msgstr "%1$i時間%2$02i分"
-
+#: TRANSLATORS Context 'The game will end in (2 hours and) 30 minutes.'
 #: ../../scripting/win_conditions/collectors.lua:130
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分"
 
-#: ../../scripting/win_conditions/collectors.lua:132
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:135
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] ""
+
+#: TRANSLATORS Context 'The game will end in 2 hours.'
+#: ../../scripting/win_conditions/collectors.lua:138
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] ""
+
+#: TRANSLATORS Context 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:142
 msgid "The game will end in %s."
 msgstr "ゲームは経過時間%sに終了します。"
 
@@ -131,9 +132,7 @@ msgstr "エンドレス（霧なし）"
 
 #: ../../scripting/win_conditions/endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
-"これはルールのないエンドレスのゲームです。\n"
-"戦争の霧はありません。"
+msgstr "これはルールのないエンドレスのゲームです。\n戦争の霧はありません。"
 
 #: ../../scripting/win_conditions/territorial_lord.lua:14
 msgid "Territorial Lord"
@@ -144,12 +143,7 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
-msgstr ""
-"各プレイヤー（チーム）は、\n"
-"マップ面積の半分以上を獲得しようとします。\n"
-"勝者は、\n"
-"少なくとも20分間その面積を維持した\n"
-"プレイヤー（チーム）です。"
+msgstr "各プレイヤー（チーム）は、\nマップ面積の半分以上を獲得しようとします。\n勝者は、\n少なくとも20分間その面積を維持した\nプレイヤー（チーム）です。"
 
 #: ../../scripting/win_conditions/territorial_lord.lua:152
 #: ../../scripting/win_conditions/territorial_time.lua:24
@@ -165,9 +159,7 @@ msgstr "%sはマップ面積の半分以上を所有しています。"
 #: ../../scripting/win_conditions/territorial_time.lua:200
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
-"相手の勝利を防ぐために、\n"
-"まだ%i分の猶予があります。"
+msgstr[0] "相手の勝利を防ぐために、\nまだ%i分の猶予があります。"
 
 #: ../../scripting/win_conditions/territorial_lord.lua:161
 #: ../../scripting/win_conditions/territorial_time.lua:205
@@ -190,14 +182,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr ""
-"各プレイヤー（チーム）は、\n"
-"マップ面積の半分以上を獲得しようとします。\n"
-"勝者は、\n"
-"少なくとも20分間その面積を維持するか、\n"
-"または４時間後の時点にもっとも広い領地をもつ\n"
-"プレイヤー（チーム）です。\n"
-"どちらが先でも構いません。"
+msgstr "各プレイヤー（チーム）は、\nマップ面積の半分以上を獲得しようとします。\n勝者は、\n少なくとも20分間その面積を維持するか、\nまたは４時間後の時点にもっとも広い領地をもつ\nプレイヤー（チーム）です。\nどちらが先でも構いません。"
 
 #: ../../scripting/win_conditions/territorial_time.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -227,36 +212,27 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr ""
-"森を好む木の妖精であるあなたは、\n"
-"他のプレイヤーよりも木が多い領地にするのが\n"
-"仕事です。\n"
-"このゲームはプレイ４時間後に終了します。\n"
-"その時点でもっとも木が多いプレイヤーが勝者です。"
+msgstr "森を好む木の妖精であるあなたは、\n他のプレイヤーよりも木が多い領地にするのが\n仕事です。\nこのゲームはプレイ４時間後に終了します。\nその時点でもっとも木が多いプレイヤーが勝者です。"
 
 #: ../../scripting/win_conditions/wood_gnome.lua:19
 msgid "Trees owned"
 msgstr "所有林"
 
 #: ../../scripting/win_conditions/wood_gnome.lua:89
-#: ../../scripting/win_conditions/wood_gnome.lua:141
-#: ../../scripting/win_conditions/wood_gnome.lua:145
+#: ../../scripting/win_conditions/wood_gnome.lua:140
+#: ../../scripting/win_conditions/wood_gnome.lua:144
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i本の木"
 
 #: ../../scripting/win_conditions/wood_gnome.lua:91
 msgid "%1$s has %2$s at the moment."
-msgstr ""
-"%1$sは現在%2$sを\n"
-"所有しています。"
+msgstr "%1$sは現在%2$sを\n所有しています。"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:142
+#: ../../scripting/win_conditions/wood_gnome.lua:141
 msgid "%1$s had %2$s."
 msgstr "%1$sは%2$sを所有しました。"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:147
+#: ../../scripting/win_conditions/wood_gnome.lua:146
 msgid "The winner is %1$s with %2$s."
-msgstr ""
-"勝者は%2$sを所有している\n"
-"%1$sです。"
+msgstr "勝者は%2$sを所有している\n%1$sです。"

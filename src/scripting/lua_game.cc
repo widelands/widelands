@@ -419,7 +419,7 @@ int LuaPlayer::message_box(lua_State * L) {
 				(game.get_ipl(), luaL_checkstring(L, 2), luaL_checkstring(L, 3),
 				 button_text, posx, posy, w, h);
 
-	mb->run();
+	mb->run<UI::Panel::Returncodes>();
 	delete mb;
 
 	// Manually force the game to reevaluate it's current state,

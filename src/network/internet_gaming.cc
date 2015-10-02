@@ -582,12 +582,14 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
-				message += _("Chat message could not be sent. ");
+				message += _("Chat message could not be sent.");
 				if (reason == "NO_SUCH_USER")
-					message +=
-						(boost::format
-							(InternetGamingMessages::get_message(reason)) % packet.string().c_str())
-						.str();
+					message =
+							(boost::format ("%s %s")
+							 % message
+							 % (boost::format
+								 (InternetGamingMessages::get_message(reason)) % packet.string().c_str()))
+							.str();
 			}
 
 			else if (subcmd == IGPCMD_GAME_OPEN) {

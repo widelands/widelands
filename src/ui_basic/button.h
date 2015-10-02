@@ -40,20 +40,22 @@ struct Button : public NamedPanel {
 		(Panel * const parent,
 		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 const Image* background_pictute_id,
+		 const Image* background_picture_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
+	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const Image* background_pictute_id,
+		 const Image* background_picture_id,
 		 const Image* foreground_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat     = false);
+		 bool const flat     = false,
+		 bool const keep_image_size = false);
 	~Button();
 
 	void set_pic(const Image* pic);
@@ -99,6 +101,7 @@ protected:
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
+	bool        m_keep_image_size; // Keep image's original size and center it
 	bool        m_draw_flat_background;
 
 	int32_t     m_time_nextact;

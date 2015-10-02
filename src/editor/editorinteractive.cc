@@ -250,18 +250,18 @@ void EditorInteractive::think() {
 void EditorInteractive::exit() {
 	if (m_need_save) {
 		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-			end_modal(0);
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb
 			(this,
 			 _("Unsaved Map"),
 			 _("The map has not been saved, do you really want to quit?"),
-			 UI::WLMessageBox::YESNO);
-			if (mmb.run() == 0)
+			 UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 				return;
 		}
 	}
-	end_modal(0);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void EditorInteractive::toggle_mainmenu() {
@@ -335,6 +335,7 @@ void EditorInteractive::toolsize_menu_btn() {
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	if (tools.current().has_size_one()) {
+		set_sel_radius(0);
 		return;
 	}
 	if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
@@ -497,8 +498,18 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 void EditorInteractive::select_tool
 (EditorTool & primary, EditorTool::ToolIndex const which) {
 	if (which == EditorTool::First && & primary != tools.current_pointer) {
-		if (primary.has_size_one())
-			set_sel_radius_and_update_menu(0);
+		if (primary.has_size_one()) {
+			set_sel_radius(0);
+			if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
+				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
+				toolsize_menu.set_buttons_enabled(false);
+			}
+		} else {
+			if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
+				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
+				toolsize_menu.update(toolsize_menu.value());
+			}
+		}
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
@@ -588,8 +599,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   editor.world(),
 				   64,
 				   64,
+					/** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-				   g_options.pull_section("global").get_string("realname", _("Unknown")));
+					g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 				load_all_tribes(&editor, &loader_ui);
 
@@ -610,7 +622,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
-	eia.run();
+	eia.run<UI::Panel::Returncodes>();
 
 	editor.cleanup_objects();
 }
