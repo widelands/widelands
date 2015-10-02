@@ -67,11 +67,21 @@ struct MapData {
 		kSettlers2
 	};
 
+	enum class DisplayType {
+		kFilenames,
+		kMapnames,
+		kMapnamesLocalized
+	};
+
+
 	/// For incomplete data
-	MapData() : authors(""), nrplayers(0), width(0), height(0), maptype(MapData::MapType::kNormal) {}
+	MapData() : authors(""), nrplayers(0), width(0), height(0),
+		maptype(MapData::MapType::kNormal), displaytype(MapData::DisplayType::kMapnamesLocalized) {}
 
 	/// For normal maps and scenarios
-	MapData(const Widelands::Map& map, const std::string& init_filename, const MapData::MapType init_maptype) :
+	MapData(const Widelands::Map& map, const std::string& init_filename,
+			  const MapData::MapType& init_maptype,
+			  const MapData::DisplayType& init_displaytype) :
 		MapData() {
 		i18n::Textdomain td("maps");
 		filename = init_filename;
@@ -86,6 +96,7 @@ struct MapData {
 		suggested_teams = map.get_suggested_teams();
 		tags = map.get_tags();
 		maptype = init_maptype;
+		displaytype = init_displaytype;
 
 		if (maptype == MapData::MapType::kScenario) {
 			tags.insert("scenario");
@@ -135,6 +146,52 @@ struct MapData {
 	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams;
 	Tags tags;
 	MapData::MapType maptype;
+	MapData::DisplayType displaytype;
+
+	bool compare_names(const MapData& other) {
+		std::string this_name;
+		std::string other_name;
+		switch (displaytype) {
+			case MapData::DisplayType::kFilenames:
+				this_name = filename;
+				other_name = other.filename;
+				break;
+			case MapData::DisplayType::kMapnames:
+				this_name = name;
+				other_name = other.name;
+			break;
+			default:
+				this_name = localized_name;
+				other_name = other.localized_name;
+		}
+
+		// If there is no width, we have a directory - we want them first.
+		if (!width && !other.width) {
+			return this_name < other_name;
+		} else if (!width && other.width) {
+			return true;
+		} else if (width && !other.width) {
+			return false;
+		}
+		return this_name < other_name;
+	}
+
+	bool compare_players(const MapData& other) {
+		if (nrplayers == other.nrplayers) {
+			return compare_names(other);
+		}
+		return nrplayers < other.nrplayers;
+	}
+
+	bool compare_size(const MapData& other) {
+		if (width == other.width && height == other.height) {
+			return compare_names(other);
+		}
+		if (width != other.width) {
+			return width < other.width;
+		}
+		return height < other.height;
+	}
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

@@ -42,6 +42,10 @@ protected:
 	void toggle_mapnames();
 	void fill_table();
 
+	bool compare_players(uint32_t, uint32_t);
+	bool compare_mapnames(uint32_t, uint32_t);
+	bool compare_size(uint32_t, uint32_t);
+
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
 	int32_t const buth_;     // Button dimensions
@@ -50,6 +54,7 @@ protected:
 	int32_t const butw_;  // Button dimensions
 
 	MapTable table_;
+	std::vector<MapData> maps_data_;
 	MapDetails map_details_;
 
 	UI::Button ok_, cancel_;

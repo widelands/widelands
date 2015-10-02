@@ -91,6 +91,11 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
 	vbox->set_size(get_inner_w(), buth_);
 
+	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));
+	table_.set_column_compare(1, boost::bind(&MainMenuLoadOrSaveMap::compare_mapnames, this, _1, _2));
+	table_.set_column_compare(2, boost::bind(&MainMenuLoadOrSaveMap::compare_size, this, _1, _2));
+
+
 	table_.focus();
 	fill_table();
 
@@ -108,6 +113,25 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	move_to_top();
 }
 
+
+bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
+}
+
+
+bool MainMenuLoadOrSaveMap::compare_mapnames(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
+}
+
+
+bool MainMenuLoadOrSaveMap::compare_size(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
+}
+
+
 void MainMenuLoadOrSaveMap::toggle_mapnames() {
 	if (showing_mapames_) {
 		show_mapnames_->set_title(_("Show Map Names"));
@@ -123,7 +147,7 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
  */
 void MainMenuLoadOrSaveMap::fill_table() {
 	table_.clear();
-	std::vector<MapData> maps_data;
+	maps_data_.clear();
 	has_translated_mapname_ = false;
 
 	//  Fill it with all files we find.
@@ -132,7 +156,16 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
-		maps_data.push_back(MapData::create_parent_dir(curdir_));
+		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	}
+
+	MapData::DisplayType display_type;
+	if (!showing_mapames_) {
+		display_type = MapData::DisplayType::kFilenames;
+	} else if (cb_dont_localize_mapnames_->get_state()) {
+		display_type = MapData::DisplayType::kMapnames;
+	} else {
+		display_type = MapData::DisplayType::kMapnamesLocalized;
 	}
 
 	Widelands::Map map;
@@ -161,12 +194,12 @@ void MainMenuLoadOrSaveMap::fill_table() {
 						maptype = MapData::MapType::kSettlers2;
 					}
 
-					MapData mapdata(map, mapfilename, maptype);
+					MapData mapdata(map, mapfilename, maptype, display_type);
 
 					has_translated_mapname_ =
 					   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-					maps_data.push_back(mapdata);
+					maps_data_.push_back(mapdata);
 
 				} catch (const WException&) {
 				}  //  we simply skip illegal entries
@@ -176,16 +209,10 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
 				continue;
-			maps_data.push_back(MapData::create_directory(mapfilename));
+			maps_data_.push_back(MapData::create_directory(mapfilename));
 		}
 	}
 
-	if (!showing_mapames_) {
-		table_.fill(maps_data, MapTable::Type::kFilenames);
-	} else if (cb_dont_localize_mapnames_->get_state()) {
-		table_.fill(maps_data, MapTable::Type::kMapnames);
-	} else {
-		table_.fill(maps_data, MapTable::Type::kMapnamesLocalized);
-	}
+	table_.fill(maps_data_, display_type);
 	ok_.set_enabled(false);
 }

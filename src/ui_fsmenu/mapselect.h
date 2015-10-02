@@ -53,6 +53,10 @@ protected:
 	void fill_table() override;
 
 private:
+	bool compare_players(uint32_t, uint32_t);
+	bool compare_mapnames(uint32_t, uint32_t);
+	bool compare_size(uint32_t, uint32_t);
+
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
@@ -83,6 +87,8 @@ private:
 
 	std::vector<std::string>      tags_ordered_;
 	std::set<uint32_t>            req_tags_;
+
+	std::vector<MapData>          maps_data_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

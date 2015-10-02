@@ -30,83 +30,20 @@ MapTable::MapTable
 		(UI::Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const bool descending) :
-	UI::Table<uintptr_t>(parent, x, y, w, h, descending),
-	type_(MapTable::Type::kMapnamesLocalized) {
+	UI::Table<uintptr_t>(parent, x, y, w, h, descending) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
 	add_column(get_w() - 35 - 115, "", _("The name of the map or scenario"), UI::Align_Left);
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
-	set_column_compare(0, boost::bind(&MapTable::compare_players, this, _1, _2));
-	set_column_compare(1, boost::bind(&MapTable::compare_mapnames, this, _1, _2));
-	set_column_compare(2, boost::bind(&MapTable::compare_size, this, _1, _2));
 	set_sort_column(0);
 }
 
-// NOCOM fix column sorting
-
-bool MapTable::compare_players(uint32_t rowa, uint32_t rowb) {
-	const MapData & r1 = maps_data_[rowa];
-	const MapData & r2 = maps_data_[rowb];
-
-	if (r1.nrplayers == r2.nrplayers) {
-		return compare_mapnames(rowa, rowb);
-	}
-	return r1.nrplayers < r2.nrplayers;
-}
-
-
-bool MapTable::compare_mapnames(uint32_t rowa, uint32_t rowb) {
-	const MapData & r1 = maps_data_[rowa];
-	const MapData & r2 = maps_data_[rowb];
-
-	if (!r1.width && !r2.width) { // Directories take the localized name
-		return r1.localized_name < r2.localized_name;
-	} else if (!r1.width && r2.width) {
-		return true;
-	} else if (r1.width && !r2.width) {
-		return false;
-	}
-
-	switch (type_) {
-		case MapTable::Type::kFilenames:
-			return r1.filename < r2.filename;
-		case MapTable::Type::kMapnames:
-			return r1.name < r2.name;
-		default:
-			return r1.localized_name < r2.localized_name;
-	}
-}
-
-
-bool MapTable::compare_size(uint32_t rowa, uint32_t rowb) {
-	const MapData & r1 = maps_data_[rowa];
-	const MapData & r2 = maps_data_[rowb];
-
-	if (r1.width != r2.width) {
-		return r1.width < r2.width;
-	} else if (r1.height == r2.height) {
-		return compare_mapnames(rowa, rowb);
-	}
-	return r1.height < r2.height;
-}
-
-const MapData* MapTable::get_map() const {
-	if (!has_selection()) {
-		return nullptr;
-	}
-	return &maps_data_[get_selected()];
-}
-
-
-void MapTable::fill(const std::vector<MapData>& entries, MapTable::Type type) {
-	type_ = type;
-
-	maps_data_ = entries;
+void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType type) {
 	clear();
 
-	for (size_t i = 0; i < maps_data_.size(); ++i) {
-		const MapData& mapdata = maps_data_[i];
+	for (size_t i = 0; i < entries.size(); ++i) {
+		const MapData& mapdata = entries[i];
 		UI::Table<uintptr_t const>::EntryRecord& te = add(i);
 
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
@@ -123,7 +60,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapTable::Type type) {
 				picture = "pics/ls_s2map.png";
 			}
 
-			if (type == MapTable::Type::kFilenames) {
+			if (type == MapData::DisplayType::kFilenames) {
 				set_column_title(1, _("Filename"));
 				te.set_picture(
 							1,
@@ -131,7 +68,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapTable::Type type) {
 							FileSystem::filename_without_ext(mapdata.filename.c_str()));
 			} else {
 				set_column_title(1, _("Map Name"));
-				if (type == MapTable::Type::kMapnames) {
+				if (type == MapData::DisplayType::kMapnames) {
 					te.set_picture(1, g_gr->images().get(picture), mapdata.name);
 				} else {
 					te.set_picture(1, g_gr->images().get(picture), mapdata.localized_name);

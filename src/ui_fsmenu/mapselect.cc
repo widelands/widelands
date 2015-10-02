@@ -69,6 +69,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 	table_.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
 	table_.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	table_.set_column_compare(0, boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
+	table_.set_column_compare(1, boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
+	table_.set_column_compare(2, boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
 
 	UI::Box* vbox = new UI::Box(this, tablex_, checkboxes_y_,
 										 UI::Box::Horizontal, checkbox_space_, get_w());
@@ -135,6 +138,25 @@ void FullscreenMenuMapSelect::think()
 	}
 }
 
+
+bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
+}
+
+
+bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
+}
+
+
+bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
+{
+	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
+}
+
+
 bool FullscreenMenuMapSelect::is_scenario()
 {
 	return is_scenario_;
@@ -143,14 +165,17 @@ bool FullscreenMenuMapSelect::is_scenario()
 
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
-	return table_.get_map();
+	if (!table_.has_selection()) {
+		return nullptr;
+	}
+	return &maps_data_[table_.get_selected()];
 }
 
 
 void FullscreenMenuMapSelect::clicked_ok()
 {
 	assert(table_.has_selection());
-	const MapData& mapdata = *table_.get_map();
+	const MapData& mapdata = maps_data_[table_.get_selected()];
 
 	if (!mapdata.width) {
 		curdir_ = mapdata.filename;
@@ -179,7 +204,7 @@ bool FullscreenMenuMapSelect::set_has_selection()
 void FullscreenMenuMapSelect::entry_selected()
 {
 	if (set_has_selection()) {
-		map_details_.update(*table_.get_map(), !cb_dont_localize_mapnames_->get_state());
+		map_details_.update(maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
 	}
 }
 
@@ -205,8 +230,16 @@ void FullscreenMenuMapSelect::entry_selected()
  */
 void FullscreenMenuMapSelect::fill_table()
 {
-	std::vector<MapData> maps_data;
 	has_translated_mapname_ = false;
+
+	maps_data_.clear();
+
+	MapData::DisplayType display_type;
+	if (cb_dont_localize_mapnames_->get_state()) {
+		display_type = MapData::DisplayType::kMapnames;
+	} else {
+		display_type = MapData::DisplayType::kMapnamesLocalized;
+	}
 
 	if (settings_->settings().maps.empty()) {
 		// This is the normal case
@@ -217,7 +250,7 @@ void FullscreenMenuMapSelect::fill_table()
 		//If we are not at the top of the map directory hierarchy (we're not talking
 		//about the absolute filesystem top!) we manually add ".."
 		if (curdir_ != basedir_) {
-			maps_data.push_back(MapData::create_parent_dir(curdir_));
+			maps_data_.push_back(MapData::create_parent_dir(curdir_));
 		}
 
 		Widelands::Map map; //  MapLoader needs a place to put its preload data
@@ -245,7 +278,7 @@ void FullscreenMenuMapSelect::fill_table()
 							maptype = MapData::MapType::kSettlers2;
 						}
 
-						MapData mapdata(map, mapfilename, maptype);
+						MapData mapdata(map, mapfilename, maptype, display_type);
 
 						has_translated_mapname_ =
 								has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
@@ -256,7 +289,7 @@ void FullscreenMenuMapSelect::fill_table()
 						if (!has_all_tags) {
 							continue;
 						}
-						maps_data.push_back(mapdata);
+						maps_data_.push_back(mapdata);
 					} catch (const std::exception & e) {
 						log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 					} catch (...) {
@@ -268,7 +301,7 @@ void FullscreenMenuMapSelect::fill_table()
 				const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 				if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
 					continue;
-				maps_data.push_back(MapData::create_directory(mapfilename));
+				maps_data_.push_back(MapData::create_directory(mapfilename));
 			}
 		}
 	} else {
@@ -307,10 +340,10 @@ void FullscreenMenuMapSelect::fill_table()
 					throw wexception("Mapselect: Number of players or scenario doesn't match");
 				}
 
-				MapData mapdata(map, mapfilename, maptype);
+				MapData mapdata(map, mapfilename, maptype, display_type);
 
 				// Finally write the entry to the list
-				maps_data.push_back(mapdata);
+				maps_data_.push_back(mapdata);
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
 
@@ -326,6 +359,7 @@ void FullscreenMenuMapSelect::fill_table()
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;
 				mapdata.height      = 0;
+				mapdata.displaytype = display_type;
 
 				if (dmap.scenario) {
 					mapdata.maptype = MapData::MapType::kScenario;
@@ -337,15 +371,11 @@ void FullscreenMenuMapSelect::fill_table()
 				}
 
 				// Finally write the entry to the list
-				maps_data.push_back(mapdata);
+				maps_data_.push_back(mapdata);
 			}
 		}
 	}
-	if (cb_dont_localize_mapnames_->get_state()) {
-		table_.fill(maps_data, MapTable::Type::kMapnames);
-	} else {
-		table_.fill(maps_data, MapTable::Type::kMapnamesLocalized);
-	}
+	table_.fill(maps_data_, display_type);
 }
 
 /*

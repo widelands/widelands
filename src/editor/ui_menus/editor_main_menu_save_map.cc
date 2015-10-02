@@ -113,7 +113,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 		maptype = MapData::MapType::kNormal;
 	}
 
-	MapData mapdata(map, "", maptype);
+	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
 
 	map_details_.update(mapdata, false);
 }
@@ -126,17 +126,15 @@ void MainMenuSaveMap::clicked_ok() {
 	std::string filename = editbox_->text();
 	std::string complete_filename;
 
-	if (filename == "") {  //  Maybe a directory is selected.
-		complete_filename = filename = table_.get_map()->filename;
+	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
+		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
 		complete_filename = curdir_ + "/" + filename;
 	}
-	log("NOCOM clicked_ok filename = %s\n", complete_filename.c_str());
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		curdir_ = complete_filename;
-		log("NOCOM isdir\n");
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -181,7 +179,7 @@ void MainMenuSaveMap::clicked_edit_options() {
 			maptype = MapData::MapType::kNormal;
 		}
 
-		MapData mapdata(map, editbox_->text(), maptype);
+		MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
 
 		map_details_.update(mapdata, false);
 	}
@@ -193,9 +191,9 @@ void MainMenuSaveMap::clicked_edit_options() {
 void MainMenuSaveMap::clicked_item() {
 	// Only change editbox contents
 	if (table_.has_selection()) {
-		const MapData& mapdata = *table_.get_map();
+		const MapData& mapdata = maps_data_[table_.get_selected()];
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
-			editbox_->set_text(FileSystem::fs_filename(table_.get_map()->filename.c_str()));
+			editbox_->set_text(FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
 			edit_box_changed();
 		}
 	}
@@ -205,9 +203,9 @@ void MainMenuSaveMap::clicked_item() {
  * An Item has been doubleclicked
  */
 void MainMenuSaveMap::double_clicked_item() {
-	const MapData& mapdata = *table_.get_map();
+	assert(table_.has_selection());
+	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		log("NOCOM double clicked dir = %s\n", mapdata.filename.c_str());
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
