@@ -45,6 +45,7 @@ struct Font {
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
 
+	uint32_t size() const;
 	uint32_t ascent() const;
 	uint32_t height() const;
 	uint32_t lineskip() const;
@@ -64,6 +65,8 @@ private:
 	 */
 	int32_t m_computed_typical_miny;
 	int32_t m_computed_typical_maxy;
+
+	int m_size;
 };
 
 } // namespace UI

@@ -57,6 +57,7 @@ Font::Font(const std::string & name, int size)
 	// Load the TrueType Font
 	std::string filename = "i18n/fonts/";
 	filename += name;
+	m_size = size;
 
 	//  We must keep this File Read open, otherwise the following calls are
 	//  crashing. do not know why...
@@ -105,6 +106,14 @@ Font::~Font()
 uint32_t Font::height() const
 {
 	return TTF_FontHeight(m_font);
+}
+
+/**
+ * \return the maximum height of glyphs of this font. NOCOM
+ */
+uint32_t Font::size() const
+{
+	return m_size;
 }
 
 /**
