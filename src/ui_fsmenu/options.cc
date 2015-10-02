@@ -172,8 +172,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 _("Maximum FPS:"), UI::Align_VCenter),
 	m_sb_maxfps
 		(this,
-		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(),
-		 80, m_vbutw,
+		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(), 80,
 		 opt.maxfps, 0, 99, ""),
 
 
@@ -272,7 +271,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 get_w() - m_hmargin - 240,
 		 m_dock_windows_to_edges.get_y() + m_dock_windows_to_edges.get_h() + m_padding,
-		 240, m_vbutw,
+		 240,
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
@@ -289,7 +288,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 get_w() - m_hmargin - 240,
 		 m_sb_autosave.get_y() + m_sb_autosave.get_h() + m_padding,
-		 240, m_vbutw,
+		 240,
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
@@ -536,14 +535,12 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	// Spinboxes
 	m_sb_dis_panel
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(),
-			 get_w() / 5, m_vbutw,
+			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(), get_w() / 5,
 			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
 	m_sb_dis_border
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(),
-			 get_w() / 5, m_vbutw,
+			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(), get_w() / 5,
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
 
 	m_transparent_chat (this, Point(m_hmargin,

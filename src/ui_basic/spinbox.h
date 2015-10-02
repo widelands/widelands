@@ -38,7 +38,7 @@ class SpinBox : public Panel {
 public:
 	SpinBox
 		(Panel*,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 int32_t x, int32_t y, uint32_t w,
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 const std::string& unit = std::string(),
 		 const Image* buttonbackground = g_gr->images().get("pics/but3.png"),

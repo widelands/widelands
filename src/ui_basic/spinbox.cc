@@ -70,18 +70,19 @@ struct SpinBoxImpl {
  * SpinBox constructor:
  *
  * initializes a new spinbox with either two (big = false) or four (big = true)
- * buttons. w must be >= 20 else the spinbox would become useless and so
+ * buttons. w must be >= the normal textarea height, else the spinbox would become useless and so
  * throws an exception.
+ * The spinbox' height is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
 	 const std::string& unit,
 	 const Image* background,
 	 bool const big)
 	:
-	Panel(parent, x, y, w, h),
+	Panel(parent, x, y, w, 20), // Height needs to be > 0, otherwise the panel won't resize.
 	big_(big),
 	sbi_(new SpinBoxImpl)
 {
@@ -89,12 +90,16 @@ SpinBox::SpinBox
 	sbi_->min   = minval;
 	sbi_->max   = maxval;
 	sbi_->unit  = unit;
-
 	sbi_->background = background;
 
-	if (w < 20)
+	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
+
+	if (w < texth) {
 		throw wexception("Not enough space to draw spinbox");
-	int32_t butw = h;
+	}
+
+	set_desired_size(w, texth);
+	int32_t butw = texth;
 	int32_t textw = w - butw * 32 / 5;
 
 	int32_t but_plus_x;
@@ -116,14 +121,8 @@ SpinBox::SpinBox
 	}
 	text_x = (w - textw) / 2;
 
-	std::string unit_text = std::to_string(sbi_->value);
-	if (! sbi_->unit.empty()) {
-		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-		unit_text = (boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str();
-	}
-
 	sbi_->text = new UI::Textarea
-		(this, text_x, 0, textw, h, unit_text, Align_Center);
+		(this, text_x, 0, textw, texth, "", Align_Center);
 	if (big_) {
 		sbi_->button_plus =
 			new Button
@@ -182,6 +181,7 @@ SpinBox::SpinBox
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
+	update();
 }
 
 SpinBox::~SpinBox() {
@@ -204,6 +204,7 @@ void SpinBox::update()
 		}
 	}
 	if (!was_in_list) {
+		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
 		sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
 	}
 
