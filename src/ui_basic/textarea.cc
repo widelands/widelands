@@ -19,7 +19,6 @@
 
 #include "ui_basic/textarea.h"
 
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 

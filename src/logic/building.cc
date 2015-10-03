@@ -30,7 +30,6 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

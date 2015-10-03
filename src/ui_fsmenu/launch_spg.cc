@@ -132,9 +132,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
-	m_title  .set_textstyle(UI::TextStyle::ui_big());
-	m_mapname.set_textstyle(UI::TextStyle::ui_small());
-	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold

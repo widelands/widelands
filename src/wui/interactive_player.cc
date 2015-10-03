@@ -30,7 +30,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
-#include "graphic/font_handler.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constants.h"
