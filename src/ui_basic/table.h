@@ -185,11 +185,6 @@ public:
 	void set_sort_descending(bool const descending) {
 		m_sort_descending = descending;
 	}
-	void set_font(const std::string & fontname, int32_t const fontsize) {
-		m_fontname = fontname;
-		m_fontsize = fontsize;
-		m_headerheight = fontsize * 8 / 5;
-	}
 
 	void sort
 		(uint32_t Begin = 0,
@@ -270,7 +265,6 @@ private:
 
 	Columns            m_columns;
 	uint32_t           m_total_width;
-	std::string        m_fontname;
 	uint32_t           m_fontsize;
 	uint32_t           m_headerheight;
 	int32_t            m_lineheight;
