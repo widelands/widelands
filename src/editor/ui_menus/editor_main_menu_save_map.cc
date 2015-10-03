@@ -28,7 +28,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
