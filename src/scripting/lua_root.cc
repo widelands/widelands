@@ -83,6 +83,7 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
+	PROP_RO(LuaGame, real_speed),
 	PROP_RO(LuaGame, time),
 	PROP_RW(LuaGame, desired_speed),
 	PROP_RW(LuaGame, allow_autosaving),
@@ -105,6 +106,18 @@ void LuaGame::__unpersist(lua_State * /* L */) {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+	.. attribute:: real_speed
+
+		(RO) The speed that the current game is running at in ms.
+			  For example, for game speed = 2x, this returns 2000.
+*/
+int LuaGame::get_real_speed(lua_State * L) {
+	lua_pushinteger(L, get_game(L).game_controller()->real_speed());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: time

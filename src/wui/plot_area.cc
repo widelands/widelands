@@ -103,10 +103,13 @@ UNIT get_suggested_unit(uint32_t game_time) {
 
 std::string get_unit_name(UNIT unit) {
 	switch (unit) {
-	case UNIT_DAY:  return _("d");
-	case UNIT_HOUR: return _("h");
-	case UNIT_MIN:  return _("min");
-	default: return "invalid";
+	/** TRANSLATOR: day(s). Used in statistics. */
+	case UNIT_DAY:  return _("%1% d");
+	/** TRANSLATOR: hour(s). Used in statistics. */
+	case UNIT_HOUR: return _("%1% h");
+	/** TRANSLATOR: minute(s). Used in statistics. */
+	case UNIT_MIN:  return _("%1% min");
+	default: return "%1% invalid";
 	}
 }
 
@@ -234,7 +237,7 @@ void draw_diagram
 		 LINE_COLOR, 2);
 
 	//  print the used unit
-	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_unit_name(unit)));
+	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
 	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align_CenterLeft);
 }
 
@@ -267,7 +270,7 @@ std::vector<std::string> WuiPlotArea::get_labels() {
 	for (int32_t i = 0; i < m_game_time_id; i++) {
 		UNIT unit = get_suggested_unit(time_in_ms[i]);
 		uint32_t val = ms_to_unit(unit, time_in_ms[i]);
-		labels.push_back(boost::lexical_cast<std::string>(val) + get_unit_name(unit));
+		labels.push_back((boost::format(get_unit_name(unit)) % boost::lexical_cast<std::string>(val)).str());
 	}
 	labels.push_back(_("game"));
 	return labels;

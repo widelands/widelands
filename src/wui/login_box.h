@@ -34,11 +34,13 @@ struct LoginBox : public UI::Window {
 	bool registered()          {return cb_register->get_state();}
 	bool set_automaticlog()    {return cb_auto_log->get_state();}
 
-private:
-	void pressed_login();
-	void pressed_cancel();
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
+	void clicked_back();
+	void clicked_ok();
+
 	UI::EditBox  * eb_nickname;
 	UI::EditBox  * eb_password;
 	UI::Checkbox * cb_register;

@@ -30,8 +30,8 @@ produce=water
 
 [out_of_resource_notification]
 title=_Out of Water
-message=_The carrier working at this well can’t find any water in his working radius.
-delay_attempts=50
+message=_The carrier working at this well can’t find any water in his work area.
+productivity_threshold=33
 
 [idle]
 pics=well_i_??.png  # ???

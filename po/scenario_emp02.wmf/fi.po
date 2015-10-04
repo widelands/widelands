@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:37+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/widelands/language/fi/)\n"
+"Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,18 +67,18 @@ msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Laajenna valtakuntaasi itään, ja ala louhia marmoria vuoresta."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
-msgid "Build a stonemason and mining infrastructure"
-msgstr "Rakenna kievenhakkaaja ja kaivostalous"
+msgid "Build a stonemason’s house and mining infrastructure"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
-msgid "Stonemason and Mining Infrastructure"
+msgid "Stonemason’s house and Mining Infrastructure"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy,"
-" armor smithy and smelting works)."
+"Build a stonemason’s house and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
+" weapon smithy, armor smithy and smelting works)."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -199,16 +199,16 @@ msgstr "Kulkiessamme näissä ihmeellisissä pohjoisen metsissä Saledus ja min�
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
-"But until that day, may many years pass! For now, we must concentrate on the"
+"But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Olkoon siihen tosin vielä monta vuotta! Juuri nyt meidän on keskityttävä nykyhetkeen, ja rakennettava muutama puunhakkaajan mökki ja saha rakennusmateriaalin keräämiseksi."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
-"But we shouldn’t forget to preserve this natural bounty. These forests "
-"should last forever, so we really should build a forester’s house too."
-msgstr "Meidän ei myöskään tule haaskata tätä luonnon aarreaittaa. Näiden metsien pitää kestää ikuisesti, joten meidän tulisi rakentaa myös puunistuttajan mökki."
+"But we mustn’t forget to preserve this natural bounty. These forests should "
+"last forever, so we really have to build a forester’s house too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
@@ -257,11 +257,11 @@ msgstr "Saledus näyttää harmistuneelta"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
-"Greetings Lutius, I don’t want to start a panic, but I found something which"
-" gives me a sinking feeling in my stomach and spreads waves of fear in my "
-"heart. As I walked down to the southern shore, I found the remains of "
-"another ship. I don’t know whether these parts are all that is left of that "
-"ship. In any case, these parts do not seem to be old."
+"Sire, I don’t want to start a panic, but I found something which gives me a "
+"sinking feeling in my stomach and spreads waves of fear in my heart. As I "
+"walked down to the southern shore, I found the remains of another ship. I "
+"don’t know whether these parts are all that is left of that ship. In any "
+"case, these parts do not seem to be old."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
@@ -286,10 +286,9 @@ msgstr "Saledus hymyilee"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
-"Lutius, I’ve got good news for you: As I walked to the east, I found a "
-"larger mountain. I am not absolutely sure – a geologist should check if I am"
-" right – but I believe we could mine marble from some places on the "
-"mountain."
+"Sire, I’ve got good news for you: As I walked to the east, I found a larger "
+"mountain. I am not absolutely sure – a geologist should check if I am right "
+"– but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -300,32 +299,32 @@ msgid ""
 msgstr "Se olisi hyvä tapa kohentaa laadukkaan marmorin varastojame - kivilouhokselta sitä saadaan verrattain vähän. Ehkäpä olit oikeassa kutsuessasi tätä saarta paratiisiksi."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:170
-msgid "Let us expand to that mountain and start mining marble."
-msgstr "Laajentakaamme yhdyskuntaamme vuoren suuntaan ja aloitetaan marmorin louhiminen."
+msgid "Please, expand to that mountain and start mining marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
 msgstr "Lisää vuoria"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
-msgid "Saledus is amazed"
-msgstr "Saledus on ällistynyt"
+msgid "Saledus is excited"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. We should immediately start to build iron ore and coal mines "
-"(or at least charcoal kilns), smelting works, toolsmithies, armor and weapon"
-" smithies."
+"of iron ore. I advise you to immediately build iron ore and coal mines (or "
+"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
-"building materials. So, let’s build a stonemason, who will cut columns from "
-"marble."
-msgstr "Tosin näitä suurempia rakennuksia varten tarvitsemme parempia ja jalompia rakennusmateriaaleja.<br> Rakennetaan siis myös kivenhakkaajan mökki, jotta voimme jalostaa marmorivarannoistamme kauniita paaseja."
+"building materials. So you have to build a house for the stonemason, who "
+"will cut columns from marble."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
@@ -340,10 +339,8 @@ msgid "Amalea enters…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
-msgid ""
-"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
-"forgot something."
-msgstr "Hei, Lutius. Annathan anteeksi kärkevyyteni, mutta minusta tuntuu siltä että unohdat jotakin tärkeää."
+msgid "Lutius, don’t you think you forgot something important?"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
@@ -369,9 +366,9 @@ msgstr "Amalea hymyilee"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer"
-" they serve is really tasty. You really should have a drink there, too."
-msgstr "Tervehdys, ystäväni. Vierailin juuri uudessa krouvissamme, 'Palmujen alla'. Siellä tarjoiltu olut on vallan mainiota; sinunkin pitäisi käväistä olusilla."
+"I just visited our new tavern ‘At the palms’. The beer they serve is really "
+"tasty. You really should have a drink there, too."
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
@@ -401,7 +398,7 @@ msgstr ""
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that I was able to flee and hide "
+"throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
 msgstr ""
 

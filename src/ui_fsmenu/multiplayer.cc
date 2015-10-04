@@ -50,13 +50,13 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	lan.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kLan)));
+			 (&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kLan));
 
 	back.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kBack)));
+			 (&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -114,12 +114,12 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
 		m_register = s.get_bool("registered", false);
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
 		return;
 	}
 
 	LoginBox lb(*this);
-	if (lb.run()) {
+	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		m_nickname = lb.get_nickname();
 		m_password = lb.get_password();
 		m_register = lb.registered();
@@ -127,6 +127,10 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		s.set_bool("registered", lb.registered());
 		s.set_bool("auto_log", lb.set_automaticlog());
 
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
 	}
+}
+
+void FullscreenMenuMultiPlayer::clicked_ok() {
+	internet_login();
 }

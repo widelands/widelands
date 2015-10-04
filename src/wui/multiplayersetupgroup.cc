@@ -326,7 +326,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
-						title = (boost::format(_("AI: %s")) % _("Random")).str();
+						title = (boost::format(_("AI: %s")) % pgettext("ai_name", "Random")).str();
 						pic += "ai/Random.png";
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
@@ -340,7 +340,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->images().get(pic));
 			if (player_setting.random_tribe) {
-				std::string random = _("Random");
+				std::string random = pgettext("tribe", "Random");
 				if (!m_tribenames["random"].size())
 					m_tribepics[random] = g_gr->images().get("images/ui_fsmenu/random.png");
 				tribe->set_tooltip(random.c_str());
@@ -376,7 +376,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (settings.scenario)
 			init->set_title(_("Scenario"));
 		else if (settings.savegame)
-			init->set_title(_("Savegame"));
+			/** Translators: This is a game type */
+			init->set_title(_("Saved Game"));
 		else {
 			// for translated initialisation
 			i18n::Textdomain td(textdomain(std::string("tribe_" + player_setting.tribe).c_str()));

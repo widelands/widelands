@@ -31,17 +31,17 @@ ingame_music(this, Point(hmargin(), vmargin())),
 ingame_music_label
 	(this,
 	 hmargin() + STATEBOX_WIDTH + hspacing(), vmargin(),
-	 _("Ingame Music")),
+	 _("Enable Music")),
 ingame_sound(this, Point(hmargin(), vmargin() + STATEBOX_HEIGHT + vspacing())),
 ingame_sound_label
 	(this,
 	 hmargin() + STATEBOX_WIDTH  + hspacing(),
 	 vmargin() + STATEBOX_HEIGHT + vspacing(),
-	 _("Sound FX")),
+	 _("Enable Sound Effects")),
 ingame_music_volume_label
 	(this,
 	 hmargin(), vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing(),
-	 _("Ingame Music Volume")),
+	 _("Music Volume")),
 ingame_music_volume
 	(this,
 	 hmargin(),
@@ -55,7 +55,7 @@ ingame_sound_volume_label
 	 hmargin(),
 	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
 	 + 2 * vspacing() + slideh() + ingame_music_volume_label.get_h(),
-	 _("Sound FX Volume")),
+	 _("Sound Effects Volume")),
 ingame_sound_volume
 	(this,
 	 hmargin(),

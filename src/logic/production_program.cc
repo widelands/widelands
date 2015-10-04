@@ -811,7 +811,7 @@ void ProductionProgram::ActCheckMap::execute(Game & game, ProductionSite & ps) c
 {
 	switch (m_feature) {
 		case SEAFARING: {
-			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
+			if (game.map().allows_seafaring())
 				return ps.program_step(game, 0);
 			else {
 				ps.set_production_result("No use for ships on this map!");
@@ -1226,8 +1226,7 @@ ProductionProgram::ActMine::ActMine(
 					 "percentage", parameters);
 		}
 		std::string description =
-			/** TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource */
-			(boost::format(_("%1$s %2$s mine %3$s")) % descr->descname() % production_program_name
+			(boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name
 				% world.get_resource(m_resource)->descname())
 				.str();
 

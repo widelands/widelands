@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-05-02 09:49+0000\n"
-"PO-Revision-Date: 2015-05-09 11:55+0000\n"
-"Last-Translator: Igor Kotrasiński <ikk_pl@yahoo.co.uk>\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,7 +292,7 @@ msgstr "wykuwanie szerokiego topora"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -1493,20 +1493,20 @@ msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokład�
 msgid "Your soldiers have occupied your donjon."
 msgstr "Twoi żołnierze zajęli miejsce w twoim stołpie."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "sadzenie pszenicy"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "żęcie pszenicy"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Brak pól"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
@@ -1554,9 +1554,9 @@ msgstr "Brak ryb"
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his "
-"working radius."
-msgstr "Rybak mieszkający w tej chacie rybaka nie może znaleźć żadnych ryb w swoim obszarze pracy."
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
+msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1567,8 +1567,8 @@ msgid "Fishes on the coast near the hut."
 msgstr "Łowi ryby na brzegu w pobliżu chaty."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
-msgid "The fisher’s hut needs water full of fish within the working radius."
-msgstr "Chata rybaka potrzebuje w sąsiedztwie wód zasobnych w ryby."
+msgid "The fisher’s hut needs water full of fish within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
 msgid "The fisher pauses %s before going to work again."
@@ -1739,10 +1739,10 @@ msgstr "Brak zwierzyny"
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his "
-"working radius. Remember that you can build a gamekeeper’s hut to release "
-"more game into the wild."
-msgstr "Myśliwy działający z tej chaty myśliwego nie jest w stanie znaleźć zwierzyny w swoim obszarze pracy. Pamiętaj, że możesz zbudować w okolicy gajówkę, aby zwiększać populację zwierzyny."
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
+msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid ""
@@ -1759,8 +1759,8 @@ msgid "Hunts animals to produce meat."
 msgstr "Poluje na zwierzęta dla pozyskania mięsa."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
-msgid "The hunter’s hut needs animals to hunt within the working radius."
-msgstr "Chata myśliwego potrzebuje w swoim obszarze pracy zwierząt, na które można polować."
+msgid "The hunter’s hut needs animals to hunt within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
@@ -1851,9 +1851,9 @@ msgstr "Brak drzew"
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
-"working radius. You should consider dismantling or destroying the building "
-"or building a rangers’s hut."
-msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew w swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+"work area. You should consider dismantling or destroying the building or "
+"building a rangers’s hut."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
@@ -1871,8 +1871,8 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Ścina okoliczne drzewa i obrąbuje je do postaci kłód."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack’s hut needs trees to fell within the working radius."
-msgstr "Chata drwala potrzebuje drzew do ścinania w swoim obszarze pracy."
+msgid "The lumberjack’s hut needs trees to fell within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""
@@ -2024,17 +2024,16 @@ msgstr "Brak skał"
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
-msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał w swoim obszarze pracy."
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
 msgstr "Pozyskuje kamień z głazów w okolicy."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
-msgstr "Kamieniołom potrzebuje głazów w obszarze pracy, z których będzie pozyskiwać kamień."
+msgid "The quarry needs stones to cut within the work area."
+msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
@@ -2064,9 +2063,8 @@ msgstr "Sadzi drzewa w okolicy."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the "
-"trees."
-msgstr "Leśniczówka potrzebuje wolnej przestrzeni na obszarze pracy, na której można sadzić drzewa."
+"The ranger’s hut needs free space within the work area to plant the trees."
+msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
 msgid ""
@@ -2345,11 +2343,11 @@ msgstr "Wszystkie trzy bronie produkowane są tak samo szybko, ale lepsze bronie
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr "Topór wojownika to najgroźniejsza ze wszystkich barbarzyńskich broni. Nieliczni są w stanie posługiwać się tymi wielkimi, potężnymi toporami. Produkowane są w kuźni i wykorzystywane w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 4 do poziomu 5."
+msgstr ""
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -2376,8 +2374,8 @@ msgstr "Brak wody"
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
-msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swoim obszarze pracy."
+"The carrier working at this well can’t find any water in his work area."
+msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""

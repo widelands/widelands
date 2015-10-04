@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:01+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/widelands/language/es/)\n"
+"POT-Creation-Date: 2015-09-05 09:36+0000\n"
+"PO-Revision-Date: 2015-09-09 16:35+0000\n"
+"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,278 +21,278 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "Tu fortín ha descubierto un agresor."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Tu fortín está bajo ataque."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en tu fortín."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en uno de sus fortines."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Tu muralla ha descubierto un agresor."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Tu muralla está bajo ataque."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la muralla."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en la muralla."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Tu castillo ha descubierto un agresor."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Tu castillo está bajo ataque."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el castillo."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en el castillo."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Tu ciudadela ha descubierto un agresor."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Tu ciudadela está bajo ataque."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la ciudadela."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en la ciudadela."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "Tu mazmorra ha descubierto un agresor."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "Tu mazmorra está bajo ataque."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la mazmorra."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en la mazmorra."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Tu fortaleza ha descubierto un agresor."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Tu fortaleza está bajo ataque."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la fortaleza."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en la fortaleza."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Tu salón de guardias ha descubierto un agresor."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Tu salón de guardias está bajo ataque."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el salón de guardias."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en el salón de guardias."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Tu casa de guardia ha descubierto a un agresor."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Tu casa de guardia está bajo ataque."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la casa de guardia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en la casa de guardia."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Tu gran torre ha descubierto un agresor."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Tu gran torre está bajo ataque."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la gran torre."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en la gran torre."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Tu puesto de avanzada ha descubierto un agresor."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Tu puesto de avanzada está bajo ataque."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el puesto de avanzada."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "Tus soldados han derrotado al enemigo en el puesto de avanzada."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Tu centinela ha descubierto un agresor."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Tu centinela está bajo ataque."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en el centinela."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en el centinela."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Tu torre pequeña ha descubierto un agresor."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Tu torre pequeña está bajo ataque."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la torre pequeña."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en la torre pequeña."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Tu torre ha descubierto un agresor."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Tu torre está bajo ataque."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "El enemigo ha derrotado a tus soldados en la torre."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Tus soldados derrotaron al enemigo en la torre."
 
 #: ../../tribes/barbarians/ax/conf:1
 msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "El hacha es el arma básica de los bárbaros. Todos los soldados jovenes estan equipados con ella. "
 
 #: ../../tribes/barbarians/axfactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "forging an ax"
-msgstr ""
+msgstr "forjando un hacha"
 
 #: ../../tribes/barbarians/axfactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "forging a sharp ax"
-msgstr ""
+msgstr "forjando una hacha afilada"
 
 #: ../../tribes/barbarians/axfactory/conf:36
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "forging a broad ax"
-msgstr ""
+msgstr "forjando una hacha ancha"
 
 #: ../../tribes/barbarians/axfactory/conf:38
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -306,7 +307,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
 msgid "working"
-msgstr ""
+msgstr "trabajando"
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -324,7 +325,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "Produces axes, sharp axes and broad axes."
-msgstr ""
+msgstr "Produce hachas, hachas afiladas y hachas ancha."
 
 #: ../../tribes/barbarians/axfactory/help.lua:18
 msgid ""
@@ -368,8 +369,8 @@ msgstr ""
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d segundo"
+msgstr[1] "%d segundos"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 msgid ""
@@ -460,7 +461,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Tus soldados han ocupado tu muralla. "
 
 #: ../../tribes/barbarians/barrier/help.lua:16
 #: ../../tribes/barbarians/citadel/help.lua:16
@@ -468,7 +469,7 @@ msgstr ""
 #: ../../tribes/barbarians/fortress/help.lua:16
 #: ../../tribes/barbarians/sentry/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Guarniciona soldados para expandir tu territorio."
 
 #: ../../tribes/barbarians/barrier/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:17
@@ -484,15 +485,15 @@ msgstr ""
 #: ../../tribes/barbarians/battlearena/conf:34
 #: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "durmiendo"
 
 #: ../../tribes/barbarians/battlearena/conf:36
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "mejorando evasión de soldado de nivel 0 a nivel 1"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "mejorando evasión de soldado de nivel 1 a nivel 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -505,7 +506,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Entrena soldados en \"Evasión\"."
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid ""
@@ -534,8 +535,8 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -554,15 +555,15 @@ msgstr "La cerveza es producida en pequeñas fábricas para los mesones y posada
 #: ../../tribes/barbarians/big_inn/conf:28 ../../tribes/barbarians/inn/conf:28
 #: ../../tribes/barbarians/tavern/conf:29
 msgid "preparing a ration"
-msgstr ""
+msgstr "preparando la ración"
 
 #: ../../tribes/barbarians/big_inn/conf:30 ../../tribes/barbarians/inn/conf:30
 msgid "preparing a snack"
-msgstr ""
+msgstr "preparando el tentempié"
 
 #: ../../tribes/barbarians/big_inn/conf:32
 msgid "preparing a meal"
-msgstr ""
+msgstr "preparando la comida"
 
 #: ../../tribes/barbarians/big_inn/help.lua:29
 #: ../../tribes/barbarians/brewery/help.lua:29
@@ -578,7 +579,7 @@ msgstr ""
 #: ../../tribes/barbarians/tavern/help.lua:29
 #: ../../tribes/barbarians/weaving-mill/help.lua:29
 msgid "Calculation needed"
-msgstr ""
+msgstr "Cálculos necesarios"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -608,7 +609,7 @@ msgstr "Fabrica las mejores cervezas para mantener fuertes y felices a los guerr
 #: ../../tribes/barbarians/brewery/conf:25
 #: ../../tribes/barbarians/micro-brewery/conf:28
 msgid "brewing"
-msgstr ""
+msgstr "producción de cerveza"
 
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
@@ -626,7 +627,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Trabaja en las obras para levantar nuevos edificios."
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
@@ -662,7 +663,7 @@ msgstr "Trabaja a mayor profundidad en las minas para obtener carbón, hierro u 
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Tus soldados han ocupado tu ciudadela. "
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid ""
@@ -687,7 +688,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
-msgstr ""
+msgstr "minando"
 
 #: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
@@ -752,39 +753,39 @@ msgstr "Edificio destruido"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Field (medium)"
-msgstr ""
+msgstr "Campo (mediano)"
 
 #: ../../tribes/barbarians/conf:38
 msgid "Field (small)"
-msgstr ""
+msgstr "Campo (pequeño)"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Campo (minúsculo)"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Campo (maduro)"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Campo (cosechado)"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Junco (mediano)"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Reed (small)"
-msgstr ""
+msgstr "Junco (pequeño)"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Junco (minúsculo)"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Junco (maduro)"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator: Coal (little)"
@@ -832,7 +833,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Hacha"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
@@ -840,7 +841,7 @@ msgstr "Rodillo para Pan"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "Hacha de batalla"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Beer"
@@ -852,11 +853,11 @@ msgstr "Viga"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
-msgstr ""
+msgstr "Hacha ancha"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Hacha de bronce"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Cloth"
@@ -868,7 +869,7 @@ msgstr "Carbón"
 
 #: ../../tribes/barbarians/conf:68
 msgid "Felling Ax"
-msgstr ""
+msgstr "Hacha para talar"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Fire Tongs"
@@ -952,7 +953,7 @@ msgstr "Guadaña"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Hacha afilada"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Shovel"
@@ -972,15 +973,15 @@ msgstr "Caña"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Log"
-msgstr ""
+msgstr "Tronco"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
-msgstr ""
+msgstr "Yelmo de guerra"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Hacha de guerrero"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Water"
@@ -1028,7 +1029,7 @@ msgstr "Constructor"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Quemador de carbón"
 
 #: ../../tribes/barbarians/conf:115
 msgid "Master Miner"
@@ -1044,7 +1045,7 @@ msgstr "Granjero"
 
 #: ../../tribes/barbarians/conf:118
 msgid "Gardener"
-msgstr ""
+msgstr "Jardinero"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Fisher"
@@ -1490,20 +1491,20 @@ msgstr ""
 msgid "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1551,8 +1552,8 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his "
-"working radius."
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
@@ -1564,7 +1565,7 @@ msgid "Fishes on the coast near the hut."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
-msgid "The fisher’s hut needs water full of fish within the working radius."
+msgid "The fisher’s hut needs water full of fish within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
@@ -1736,9 +1737,9 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his "
-"working radius. Remember that you can build a gamekeeper’s hut to release "
-"more game into the wild."
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
@@ -1756,7 +1757,7 @@ msgid "Hunts animals to produce meat."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
-msgid "The hunter’s hut needs animals to hunt within the working radius."
+msgid "The hunter’s hut needs animals to hunt within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
@@ -1848,8 +1849,8 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
-"working radius. You should consider dismantling or destroying the building "
-"or building a rangers’s hut."
+"work area. You should consider dismantling or destroying the building or "
+"building a rangers’s hut."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
@@ -1868,7 +1869,7 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack’s hut needs trees to fell within the working radius."
+msgid "The lumberjack’s hut needs trees to fell within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
@@ -2021,8 +2022,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
@@ -2030,7 +2030,7 @@ msgid "Carves raw stone out of rocks in the vicinity."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
+msgid "The quarry needs stones to cut within the work area."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:29
@@ -2061,8 +2061,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the "
-"trees."
+"The ranger’s hut needs free space within the work area to plant the trees."
 msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
@@ -2342,8 +2341,8 @@ msgstr "Todas las armas requieren el mismo tiempo de fabricación, pero el consu
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
 msgstr ""
@@ -2373,7 +2372,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13

@@ -1,22 +1,23 @@
-# Widelands po/sk_SK/tribes/empire.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
-# Miroslav Remák <Unknown>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2014
+# MiroslavR <miroslavr256@gmail.com>, 2015
+# Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-08-11 22:11+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
-"Language-Team: Slovak <sk@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-17 19:18+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:39+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
@@ -279,19 +280,14 @@ msgid ""
 "This is an advanced lance with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
-"Toto je vylepšená kopija s oceľovým hrotom. Vyrába sa vo vyhni na zbrane a "
-"používa sa vo výcvikovom tábore – spolu s jedlom – na trénovanie útoku "
-"vojakov z úrovne 1 na úroveň 2."
+msgstr "Toto je vylepšená kopija s oceľovým hrotom. Vyrába sa vo vyhni na zbrane a používa sa vo výcvikovom tábore – spolu s jedlom – na trénovanie útoku vojakov z úrovne 1 na úroveň 2."
 
-#: ../../tribes/empire/arena/conf:30
-#: ../../tribes/empire/colosseum/conf:36
+#: ../../tribes/empire/arena/conf:30 ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
 msgstr ""
 
-#: ../../tribes/empire/arena/conf:32
-#: ../../tribes/empire/colosseum/conf:38
+#: ../../tribes/empire/arena/conf:32 ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
 
@@ -327,18 +323,15 @@ msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:13
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 #: ../../tribes/empire/hunters_house/help.lua:13
-#: ../../tribes/empire/inn/help.lua:13
-#: ../../tribes/empire/inn/help.lua:17
+#: ../../tribes/empire/inn/help.lua:13 ../../tribes/empire/inn/help.lua:17
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
-#: ../../tribes/empire/mill/help.lua:13
-#: ../../tribes/empire/mill/help.lua:17
+#: ../../tribes/empire/mill/help.lua:13 ../../tribes/empire/mill/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:17
-#: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/port/help.lua:17
+#: ../../tribes/empire/port/help.lua:13 ../../tribes/empire/port/help.lua:17
 #: ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:17
@@ -363,11 +356,10 @@ msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:17
 #: ../../tribes/empire/weaving-mill/help.lua:13
-#: ../../tribes/empire/well/help.lua:13
-#: ../../tribes/empire/winery/help.lua:13
+#: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr "Potrebný text"
+msgstr "Chýba text"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -379,9 +371,7 @@ msgstr "Cvičí vojakov v uhýbaní."
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr ""
-"„Uhýbanie“ zvyšuje šancu vojaka, že ho nepriateľ minie a zostane tak úplne "
-"nedotknutý."
+msgstr "„Uhýbanie“ zvyšuje šancu vojaka, že ho nepriateľ minie a zostane tak úplne nedotknutý."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -389,9 +379,7 @@ msgstr ""
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
-msgstr ""
-"Vojakov impéria nemožno cvičiť v obrane, a preto zostanú na úrovni, s ktorou "
-"začínali."
+msgstr "Vojakov impéria nemožno cvičiť v obrane, a preto zostanú na úrovni, s ktorou začínali."
 
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
@@ -421,8 +409,7 @@ msgstr "Výcvik uhýbania:"
 #: ../../tribes/empire/mill/help.lua:30
 #: ../../tribes/empire/oremine/help.lua:30
 #: ../../tribes/empire/piggery/help.lua:29
-#: ../../tribes/empire/port/help.lua:26
-#: ../../tribes/empire/quarry/help.lua:29
+#: ../../tribes/empire/port/help.lua:26 ../../tribes/empire/quarry/help.lua:29
 #: ../../tribes/empire/sawmill/help.lua:29
 #: ../../tribes/empire/scouts_house/help.lua:29
 #: ../../tribes/empire/sheepfarm/help.lua:29
@@ -435,20 +422,16 @@ msgstr "Výcvik uhýbania:"
 #: ../../tribes/empire/vineyard/help.lua:29
 #: ../../tribes/empire/weaponsmithy/help.lua:29
 #: ../../tribes/empire/weaving-mill/help.lua:29
-#: ../../tribes/empire/well/help.lua:30
-#: ../../tribes/empire/winery/help.lua:29
+#: ../../tribes/empire/well/help.lua:30 ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr "Potrebná kalkulácia"
+msgstr "Chýba výpočet"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
-"Basic armor for Empire soldiers. It is produced in the armor smithy and used "
-"in the training camp – together with food – to train soldiers from health "
+"Basic armor for Empire soldiers. It is produced in the armor smithy and used"
+" in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
-"Základná zbroj vojakov impéria. Vyrába sa vo vyhni na zbroje a používa sa vo "
-"výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 1 "
-"na úroveň 2."
+msgstr "Základná zbroj vojakov impéria. Vyrába sa vo vyhni na zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 1 na úroveň 2."
 
 #: ../../tribes/empire/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -468,25 +451,18 @@ msgstr "kutie krúžkovej zbroje"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr ""
+msgstr "kutie plátovej zbroje"
 
-#: ../../tribes/empire/armorsmithy/conf:40
-#: ../../tribes/empire/bakery/conf:25
-#: ../../tribes/empire/charcoal_kiln/conf:25
-#: ../../tribes/empire/farm/conf:29
-#: ../../tribes/empire/foresters_house/conf:21
-#: ../../tribes/empire/inn/conf:30
+#: ../../tribes/empire/armorsmithy/conf:40 ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/charcoal_kiln/conf:25 ../../tribes/empire/farm/conf:29
+#: ../../tribes/empire/foresters_house/conf:21 ../../tribes/empire/inn/conf:30
 #: ../../tribes/empire/lumberjacks_house/conf:21
-#: ../../tribes/empire/marblemine/conf:32
-#: ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:25
-#: ../../tribes/empire/shipyard/conf:29
+#: ../../tribes/empire/marblemine/conf:32 ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/sawmill/conf:25 ../../tribes/empire/shipyard/conf:30
 #: ../../tribes/empire/smelting_works/conf:31
 #: ../../tribes/empire/stonemasons_house/conf:26
-#: ../../tribes/empire/toolsmithy/conf:62
-#: ../../tribes/empire/vineyard/conf:27
-#: ../../tribes/empire/weaponsmithy/conf:44
-#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/toolsmithy/conf:62 ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/weaponsmithy/conf:44 ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
 msgstr "pracovanie"
@@ -514,8 +490,7 @@ msgstr "pracovanie"
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
-#: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/quarry/help.lua:13
+#: ../../tribes/empire/port/help.lua:13 ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/scouts_house/help.lua:13
 #: ../../tribes/empire/sentry/help.lua:13
@@ -531,10 +506,9 @@ msgstr "pracovanie"
 #: ../../tribes/empire/warehouse/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaving-mill/help.lua:13
-#: ../../tribes/empire/well/help.lua:13
-#: ../../tribes/empire/winery/help.lua:13
+#: ../../tribes/empire/well/help.lua:13 ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
-msgstr "Potrebný zdroj"
+msgstr "Chýba zdroj"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
@@ -570,10 +544,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
-"Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, "
-"môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Taktiež môžete "
-"poslať preč vojaka, na ktorého kliknete."
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Taktiež môžete poslať preč vojaka, na ktorého kliknete."
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your barrier."
@@ -583,34 +554,26 @@ msgstr "Vaši vojaci obsadili vašu hradbu."
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
-msgstr ""
-"Tento kôš potrebuje vinohradník na zber hrozna. Vyrába ho kováč nástrojov."
+msgstr "Tento kôš potrebuje vinohradník na zber hrozna. Vyrába ho kováč nástrojov."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
-"This beer is produced in a brewery out of wheat and water. It is consumed by "
-"miners in coal and iron ore mines."
-msgstr ""
-"Toto pivo sa vyrába v pivovare z pšenice a vody. Spotrebúvajú ho baníci v "
-"uhoľných a železnorudných baniach."
+"This beer is produced in a brewery out of wheat and water. It is consumed by"
+" miners in coal and iron ore mines."
+msgstr "Toto pivo sa vyrába v pivovare z pšenice a vody. Spotrebúvajú ho baníci v uhoľných a železnorudných baniach."
 
 #: ../../tribes/empire/bread/conf:1
 msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr ""
-"Pekári impéria dokážu z múky a vody vyrobiť veľmi chutný chlieb. V krčmách a "
-"hostincoch sa z neho pripravujú prídely a obedy. Chlieb sa spotrebúva aj vo "
-"výcvikových stavbách (aréna, koloseum, výcvikový tábor)."
+msgstr "Pekári impéria dokážu z múky a vody vyrobiť veľmi chutný chlieb. V krčmách a hostincoch sa z neho pripravujú prídely a obedy. Chlieb sa spotrebúva aj vo výcvikových stavbách (aréna, koloseum, výcvikový tábor)."
 
 #: ../../tribes/empire/bread_paddle/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
-msgstr ""
-"Pekárska lopata je nástrojom pekára, pričom každý potrebuje svoju vlastnú. "
-"Vyrába ju kováč nástrojov."
+msgstr "Pekárska lopata je nástrojom pekára, pričom každý potrebuje svoju vlastnú. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -641,10 +604,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr ""
-"Krúžková zbroj je stredným brnením vojakov impéria. Vyrába sa vo vyhni na "
-"zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik "
-"vojakov v zdraví z úrovne 2 na úroveň 3."
+msgstr "Krúžková zbroj je stredným brnením vojakov impéria. Vyrába sa vo vyhni na zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 2 na úroveň 3."
 
 #: ../../tribes/empire/charcoal_burner/conf:1
 msgid "Burns coal."
@@ -652,29 +612,23 @@ msgstr "Páli uhlie."
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
-"Cloth is needed to build several buildings. It is also consumed in the armor "
-"smithy."
-msgstr ""
-"Látka je potrebná na stavbu niektorých budov. Spotrebúva sa tiež vo vyhni na "
-"zbroje."
+"Cloth is needed to build several buildings. It is also consumed in the armor"
+" smithy."
+msgstr "Látka je potrebná na stavbu niektorých budov. Spotrebúva sa tiež vo vyhni na zbroje."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal kiln out of logs."
-msgstr ""
-"Do ohňov v imperiálnych taviarňach, vyhniach na zbroje a vyhniach na zbrane "
-"sa zvyčajne prikladá uhlie. Ťaží sa v uhoľných baniach alebo sa vyrába v "
-"uhliarskej peci z kmeňov stromov."
+msgstr "Do ohňov v imperiálnych taviarňach, vyhniach na zbroje a vyhniach na zbrane sa zvyčajne prikladá uhlie. Ťaží sa v uhoľných baniach alebo sa vyrába v uhliarskej peci z kmeňov stromov."
 
 #: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
 #: ../../tribes/empire/deep_goldmine/conf:27
 #: ../../tribes/empire/deep_marblemine/conf:28
 #: ../../tribes/empire/deep_oremine/conf:27
-#: ../../tribes/empire/goldmine/conf:27
-#: ../../tribes/empire/oremine/conf:27
+#: ../../tribes/empire/goldmine/conf:27 ../../tribes/empire/oremine/conf:27
 msgid "mining"
 msgstr "ťaženie"
 
@@ -687,10 +641,7 @@ msgstr "Hlavná uhoľná žila vyčerpaná"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú "
-"návratnosť investície. Mali by ste zvážiť vylepšenie, rozobratie alebo "
-"zničenie bane."
+msgstr "Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste zvážiť vylepšenie, rozobratie alebo zničenie bane."
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
@@ -713,629 +664,624 @@ msgstr "Impérium"
 msgid "This is the culture of the Roman Empire."
 msgstr "Toto je kultúra Rímskej ríše."
 
-#: ../../tribes/empire/conf:29
+#: ../../tribes/empire/conf:37
 msgid "Ashes"
 msgstr "Popol"
 
-#: ../../tribes/empire/conf:30
+#: ../../tribes/empire/conf:38
 msgid "Field (medium)"
 msgstr "Pole (stredné)"
 
-#: ../../tribes/empire/conf:31
+#: ../../tribes/empire/conf:39
 msgid "Field (small)"
 msgstr "Pole (malé)"
 
-#: ../../tribes/empire/conf:32
+#: ../../tribes/empire/conf:40
 msgid "Field (tiny)"
 msgstr "Pole (maličké)"
 
-#: ../../tribes/empire/conf:33
+#: ../../tribes/empire/conf:41
 msgid "Field (ripe)"
 msgstr "Pole (zrelé)"
 
-#: ../../tribes/empire/conf:34
+#: ../../tribes/empire/conf:42
 msgid "Field (harvested)"
 msgstr "Pole (pozberané)"
 
-#: ../../tribes/empire/conf:35
+#: ../../tribes/empire/conf:43
 msgid "Destroyed Building"
 msgstr "Zničená budova"
 
-#: ../../tribes/empire/conf:36
+#: ../../tribes/empire/conf:44
 msgid "Resource indicator: Coal (little)"
 msgstr "Ukazovateľ zdroja: Uhlie (malé množstvo)"
 
-#: ../../tribes/empire/conf:37
+#: ../../tribes/empire/conf:45
 msgid "Resource indicator: Coal (much)"
 msgstr "Ukazovateľ zdroja: Uhlie (veľké množstvo)"
 
-#: ../../tribes/empire/conf:38
+#: ../../tribes/empire/conf:46
 msgid "Resource indicator: Gold (little)"
 msgstr "Ukazovateľ zdroja: Zlato (malé množstvo)"
 
-#: ../../tribes/empire/conf:39
+#: ../../tribes/empire/conf:47
 msgid "Resource indicator: Gold (much)"
 msgstr "Ukazovateľ zdroja: Zlato (veľké množstvo)"
 
-#: ../../tribes/empire/conf:40
+#: ../../tribes/empire/conf:48
 msgid "Resource indicator: Granite (little)"
 msgstr "Ukazovateľ zdroja: Žula (malé množstvo)"
 
-#: ../../tribes/empire/conf:41
+#: ../../tribes/empire/conf:49
 msgid "Resource indicator: Granite (much)"
 msgstr "Ukazovateľ zdroja: Žula (veľké množstvo)"
 
-#: ../../tribes/empire/conf:42
+#: ../../tribes/empire/conf:50
 msgid "Resource indicator: Iron (little)"
 msgstr "Ukazovateľ zdroja: Železo (malé množstvo)"
 
-#: ../../tribes/empire/conf:43
+#: ../../tribes/empire/conf:51
 msgid "Resource indicator: Iron (much)"
 msgstr "Ukazovateľ zdroja: Železo (veľké množstvo)"
 
-#: ../../tribes/empire/conf:44
+#: ../../tribes/empire/conf:52
 msgid "Resource indicator: No resource"
 msgstr "Ukazovateľ zdroja: Žiadny zdroj"
 
-#: ../../tribes/empire/conf:45
+#: ../../tribes/empire/conf:53
 msgid "Resource indicator: Water"
 msgstr "Ukazovateľ zdroja: Voda"
 
-#: ../../tribes/empire/conf:46
+#: ../../tribes/empire/conf:54
 msgid "Vine (medium)"
 msgstr "Vinič (stredný)"
 
-#: ../../tribes/empire/conf:47
+#: ../../tribes/empire/conf:55
 msgid "Vine (small)"
 msgstr "Vinič (malý)"
 
-#: ../../tribes/empire/conf:48
+#: ../../tribes/empire/conf:56
 msgid "Vine (tiny)"
 msgstr "Vinič (maličký)"
 
-#: ../../tribes/empire/conf:49
+#: ../../tribes/empire/conf:57
 msgid "Vine (ripe)"
 msgstr "Vinič (zrelý)"
 
-#: ../../tribes/empire/conf:50
+#: ../../tribes/empire/conf:58
 msgid "Ship Construction Site"
 msgstr "Stavenisko lode"
 
-#: ../../tribes/empire/conf:53
+#: ../../tribes/empire/conf:61
 msgid "Advanced Lance"
 msgstr "Vylepšená kopija"
 
-#: ../../tribes/empire/conf:54
+#: ../../tribes/empire/conf:62
 msgid "Armor"
 msgstr "Zbroj"
 
-#: ../../tribes/empire/conf:55
+#: ../../tribes/empire/conf:63
 msgid "Ax"
 msgstr "Sekera"
 
-#: ../../tribes/empire/conf:56
+#: ../../tribes/empire/conf:64
 msgid "Bread Paddle"
 msgstr "Pekárska lopata"
 
-#: ../../tribes/empire/conf:57
+#: ../../tribes/empire/conf:65
 msgid "Basket"
 msgstr "Kôš"
 
-#: ../../tribes/empire/conf:58
+#: ../../tribes/empire/conf:66
 msgid "Beer"
 msgstr "Pivo"
 
-#: ../../tribes/empire/conf:59
+#: ../../tribes/empire/conf:67
 msgid "Bread"
 msgstr "Chlieb"
 
-#: ../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:68
 msgid "Chain Armor"
 msgstr "Krúžková zbroj"
 
-#: ../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:69
 msgid "Cloth"
 msgstr "Látka"
 
-#: ../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:70
 msgid "Coal"
 msgstr "Uhlie"
 
-#: ../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:71
 msgid "Fire Tongs"
 msgstr "Kliešte na uhlie"
 
-#: ../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:72
 msgid "Fish"
 msgstr "Ryby"
 
-#: ../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:73
 msgid "Fishing Rod"
 msgstr "Udica"
 
-#: ../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:74
 msgid "Flour"
 msgstr "Múka"
 
-#: ../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:75
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:76
 msgid "Gold Ore"
 msgstr "Zlatá ruda"
 
-#: ../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:77
 msgid "Grape"
 msgstr "Hrozno"
 
-#: ../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:78
 msgid "Hammer"
 msgstr "Kladivo"
 
-#: ../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:79
 msgid "Heavy Lance"
 msgstr "Ťažká kopija"
 
-#: ../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:80
 msgid "Helmet"
 msgstr "Helma"
 
-#: ../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:81
 msgid "Hunting Spear"
 msgstr "Lovecký oštep"
 
-#: ../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:82
 msgid "Iron"
 msgstr "Železo"
 
-#: ../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:83
 msgid "Iron Ore"
 msgstr "Železná ruda"
 
-#: ../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:84
 msgid "Kitchen Tools"
 msgstr "Kuchynské nástroje"
 
-#: ../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:85
 msgid "Lance"
 msgstr "Kopija"
 
-#: ../../tribes/empire/conf:78
+#: ../../tribes/empire/conf:86
 msgid "Marble Column"
 msgstr "Mramorový stĺp"
 
-#: ../../tribes/empire/conf:79
+#: ../../tribes/empire/conf:87
 msgid "Marble"
 msgstr "Mramor"
 
-#: ../../tribes/empire/conf:80
+#: ../../tribes/empire/conf:88
 msgid "Meal"
 msgstr "Jedlo"
 
-#: ../../tribes/empire/conf:81
+#: ../../tribes/empire/conf:89
 msgid "Meat"
 msgstr "Mäso"
 
-#: ../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:90
 msgid "Pick"
 msgstr "Krompáč"
 
-#: ../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:91
 msgid "Plate Armor"
 msgstr "Plechová zbroj"
 
-#: ../../tribes/empire/conf:84
+#: ../../tribes/empire/conf:92
 msgid "Ration"
 msgstr "Prídel"
 
-#: ../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:93
 msgid "Saw"
 msgstr "Píla"
 
-#: ../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:94
 msgid "Scythe"
 msgstr "Kosa"
 
-#: ../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:95
 msgid "Shovel"
 msgstr "Lopata"
 
-#: ../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:96
 msgid "Stones"
 msgstr "Kamene"
 
-#: ../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:97
 msgid "Log"
 msgstr "Kmeň"
 
-#: ../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:98
 msgid "War-Lance"
 msgstr "Vojenská kopija"
 
-#: ../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:99
 msgid "Water"
 msgstr "Voda"
 
-#: ../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:100
 msgid "Wheat"
 msgstr "Pšenica"
 
-#: ../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:101
 msgid "Wine"
 msgstr "Víno"
 
-#: ../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:102
 msgid "Wood"
 msgstr "Drevo"
 
-#: ../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:103
 msgid "Wood Lance"
 msgstr "Drevená kopija"
 
-#: ../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:104
 msgid "Wool"
 msgstr "Vlna"
 
-#: ../../tribes/empire/conf:99
+#: ../../tribes/empire/conf:107
 msgid "Carrier"
 msgstr "Nosič"
 
-#: ../../tribes/empire/conf:100
+#: ../../tribes/empire/conf:108
 msgid "Donkey"
 msgstr "Osol"
 
-#: ../../tribes/empire/conf:103
+#: ../../tribes/empire/conf:111
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../../tribes/empire/conf:106
+#: ../../tribes/empire/conf:114
 msgid "Armorsmith"
 msgstr "Kováč zbrojí"
 
-#: ../../tribes/empire/conf:107
+#: ../../tribes/empire/conf:115
 msgid "Baker"
 msgstr "Pekár"
 
-#: ../../tribes/empire/conf:108
+#: ../../tribes/empire/conf:116
 msgid "Brewer"
 msgstr "Pivovarník"
 
-#: ../../tribes/empire/conf:109
+#: ../../tribes/empire/conf:117
 msgid "Builder"
 msgstr "Stavbár"
 
-#: ../../tribes/empire/conf:110
+#: ../../tribes/empire/conf:118
 msgid "Charcoal Burner"
 msgstr "Uhliar"
 
-#: ../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:119
 msgid "Carpenter"
 msgstr "Tesár"
 
-#: ../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:120
 msgid "Farmer"
 msgstr "Farmár"
 
-#: ../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:121
 msgid "Fisher"
 msgstr "Rybár"
 
-#: ../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:122
 msgid "Forester"
 msgstr "Horár"
 
-#: ../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:123
 msgid "Geologist"
 msgstr "Geológ"
 
-#: ../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:124
 msgid "Hunter"
 msgstr "Lovec"
 
-#: ../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:125
 msgid "Innkeeper"
 msgstr "Krčmár"
 
-#: ../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:126
 msgid "Lumberjack"
 msgstr "Drevorubač"
 
-#: ../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:127
 msgid "Master Miner"
-msgstr "Majster baník"
+msgstr "Banský majster"
 
-#: ../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:128
 msgid "Miller"
 msgstr "Mlynár"
 
-#: ../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:129
 msgid "Miner"
 msgstr "Baník"
 
-#: ../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:130
 msgid "Pig Breeder"
 msgstr "Chovateľ ošípaných"
 
-#: ../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:131
 msgid "Shepherd"
 msgstr "Pastier"
 
-#: ../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:132
 msgid "Shipwright"
-msgstr "Staviteľ lodí"
+msgstr "Lodiar"
 
-#: ../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:133
 msgid "Smelter"
 msgstr "Tavič"
 
-#: ../../tribes/empire/conf:126
+#: ../../tribes/empire/conf:134
 msgid "Stonemason"
 msgstr "Kamenár"
 
-#: ../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:135
 msgid "Toolsmith"
 msgstr "Kováč nástrojov"
 
-#: ../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:136
 msgid "Trainer"
 msgstr "Cvičiteľ"
 
-#: ../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:137
 msgid "Weaponsmith"
 msgstr "Kováč zbraní"
 
-#: ../../tribes/empire/conf:130
+#: ../../tribes/empire/conf:138
 msgid "Weaver"
 msgstr "Tkáč"
 
-#: ../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:139
 msgid "Vine Farmer"
 msgstr "Vinohradník"
 
-#: ../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:140
 msgid "Scout"
 msgstr "Prieskumník"
 
-#: ../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:141
 msgid "Donkey Breeder"
 msgstr "Chovateľ oslov"
 
-#: ../../tribes/empire/conf:136
+#: ../../tribes/empire/conf:144
 msgid "Ship"
 msgstr "Loď"
 
-#: ../../tribes/empire/conf:139
+#: ../../tribes/empire/conf:147
 msgid "Construction Site"
 msgstr "Stavenisko"
 
-#: ../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:150
 msgid "Dismantle Site"
-msgstr "Rozobrať stavbu"
+msgstr "Miesto rozoberania"
 
-#: ../../tribes/empire/conf:145
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:153 ../../tribes/empire/conf:215
 msgid "Castle"
 msgstr "Hrad"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:154
 msgid "Guardhall"
 msgstr "Strážna hala"
 
-#: ../../tribes/empire/conf:147
+#: ../../tribes/empire/conf:155
 msgid "Guardhouse"
 msgstr "Strážnica"
 
-#: ../../tribes/empire/conf:148
+#: ../../tribes/empire/conf:156
 msgid "High Tower"
 msgstr "Vysoká veža"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:157
 msgid "Small Tower"
 msgstr "Malá veža"
 
-#: ../../tribes/empire/conf:150
-#: ../../tribes/empire/conf:206
+#: ../../tribes/empire/conf:158 ../../tribes/empire/conf:214
 msgid "Tower"
 msgstr "Veža"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:159 ../../tribes/empire/conf:212
 msgid "Barrier"
 msgstr "Hradba"
 
-#: ../../tribes/empire/conf:152
+#: ../../tribes/empire/conf:160
 msgid "Citadel"
 msgstr "Citadela"
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:161
 msgid "Donjon"
 msgstr "Donžon"
 
-#: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:162 ../../tribes/empire/conf:216
 msgid "Fortress"
 msgstr "Pevnosť"
 
-#: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:163 ../../tribes/empire/conf:210
 msgid "Sentry"
 msgstr "Strážnica"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:166
 #: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Základňa"
 
-#: ../../tribes/empire/conf:159
+#: ../../tribes/empire/conf:167
 msgid "Headquarters Shipwreck"
 msgstr "Základňa vo vraku"
 
-#: ../../tribes/empire/conf:160
+#: ../../tribes/empire/conf:168
 msgid "Warehouse"
 msgstr "Sklad"
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:169
 msgid "Port"
 msgstr "Prístav"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:172
 msgid "Quarry"
 msgstr "Kameňolom"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:173
 msgid "Lumberjack’s House"
 msgstr "Drevorubačský dom"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:174
 msgid "Forester’s House"
 msgstr "Horáreň"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:175
 msgid "Fisher’s House"
 msgstr "Rybársky dom"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:176
 msgid "Hunter’s House"
 msgstr "Lovecký dom"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:177
 msgid "Well"
 msgstr "Studňa"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:178
 msgid "Scout’s House"
 msgstr "Prieskumnícky dom"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:179
 msgid "Stonemason’s House"
 msgstr "Kamenársky dom"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:180
 msgid "Sawmill"
 msgstr "Píla"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:181
 msgid "Mill"
 msgstr "Mlyn"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:182
 msgid "Bakery"
 msgstr "Pekáreň"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:183
 msgid "Brewery"
 msgstr "Pivovar"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:184
 msgid "Vineyard"
 msgstr "Vinohrad"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:185
 msgid "Winery"
 msgstr "Vinársky závod"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:186
 msgid "Inn"
 msgstr "Krčma"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:187
 msgid "Tavern"
 msgstr "Krčma"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:188
 msgid "Charcoal Kiln"
 msgstr "Uhliarska pec"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:189
 msgid "Smelting Works"
 msgstr "Taviareň"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:190
 msgid "Shipyard"
 msgstr "Lodenica"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:191
 msgid "Toolsmithy"
 msgstr "Vyhňa na nástroje"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:192
 msgid "Armor Smithy"
 msgstr "Vyhňa na zbroje"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:193
 msgid "Donkey Farm"
 msgstr "Oslia farma"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:194
 msgid "Sheep Farm"
 msgstr "Ovčia farma"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:195
 msgid "Weaving Mill"
 msgstr "Tkáčovňa"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:196
 msgid "Piggery"
 msgstr "Chliev"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:197
 msgid "Farm"
 msgstr "Farma"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:198
 msgid "Weapon Smithy"
 msgstr "Vyhňa na zbrane"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:199
 msgid "Deep Marble Mine"
-msgstr "Hlbinný mramorový lom"
+msgstr "Hlbinná mramorová baňa"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:200
 msgid "Marble Mine"
-msgstr "Mramorový lom"
+msgstr "Mramorová baňa"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:201
 msgid "Deep Coal Mine"
 msgstr "Hlbinná uhoľná baňa"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:202
 msgid "Coal Mine"
 msgstr "Uhoľná baňa"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:203
 msgid "Deep Iron Ore Mine"
 msgstr "Hlbinná železnorudná baňa"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:204
 msgid "Iron Ore Mine"
 msgstr "Železorudná baňa"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:205
 msgid "Deep Gold Mine"
 msgstr "Hlbinná zlatá baňa"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:206
 msgid "Gold Mine"
 msgstr "Zlatá baňa"
 
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:211
 msgid "Barracks"
 msgstr "Kasárne"
 
-#: ../../tribes/empire/conf:205
+#: ../../tribes/empire/conf:213
 msgid "Outpost"
 msgstr "Pozorovateľňa"
 
-#: ../../tribes/empire/conf:212
+#: ../../tribes/empire/conf:220
 msgid "Colosseum"
 msgstr "Koloseum"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:221
 msgid "Arena"
 msgstr "Aréna"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:222
 msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
@@ -1344,10 +1290,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú "
-"návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju "
-"mali rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju mali rozobrať alebo zničiť."
 
 #: ../../tribes/empire/deep_goldmine/conf:41
 #: ../../tribes/empire/goldmine/conf:41
@@ -1359,10 +1302,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú "
-"návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju "
-"mali rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju mali rozobrať alebo zničiť."
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
@@ -1379,10 +1319,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr ""
-"Hlavná žila tohto mramorového lomu je vyčerpaná. Očakávajte preto prudko "
-"zníženú návratnosť investície. Lom už nemožno ďalej vylepšovať, takže by ste "
-"ho mali rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste mali zvážiť jej rozobratie alebo zničenie."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1398,10 +1335,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko "
-"zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by "
-"ste ju mali rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju mali rozobrať alebo zničiť."
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
@@ -1412,8 +1346,7 @@ msgstr "Ťaží železnú rudu zo zeme na horskom teréne."
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
-"Osly pomáhajú nosiť predmety po rušných cestách. Chovajú sa na oslej farme."
+msgstr "Osly pomáhajú nosiť predmety po rušných cestách. Chovajú sa na oslej farme."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -1435,17 +1368,14 @@ msgstr "sadenie pšenice"
 msgid "harvesting wheat"
 msgstr "zberanie pšenice"
 
-#: ../../tribes/empire/farm/conf:46
-#: ../../tribes/empire/vineyard/conf:43
+#: ../../tribes/empire/farm/conf:46 ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
 msgstr "Došli polia"
 
 #: ../../tribes/empire/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by "
-"mohol začať sadiť."
+msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
 
 #: ../../tribes/empire/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1459,18 +1389,13 @@ msgstr "Sadí polia."
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
-msgstr ""
-"Kliešte na uhlie sú nástrojom taviča, ktorý pracuje v taviarni. Vyrába ich "
-"kováč nástrojov."
+msgstr "Kliešte na uhlie sú nástrojom taviča, ktorý pracuje v taviarni. Vyrába ich kováč nástrojov."
 
 #: ../../tribes/empire/fish/conf:1
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
-"Okrem chleba a mäsa patria medzi potraviny impéria aj ryby. Spotrebúvajú sa "
-"v krčmách, hostincoch a vo výcvikových stavbách (aréna, koloseum, výcvikový "
-"tábor)."
+msgstr "Okrem chleba a mäsa patria medzi potraviny impéria aj ryby. Spotrebúvajú sa v krčmách, hostincoch a vo výcvikových stavbách (aréna, koloseum, výcvikový tábor)."
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1486,33 +1411,29 @@ msgstr "Došli ryby"
 
 #: ../../tribes/empire/fishers_house/conf:29
 msgid ""
-"The fisher working in this fisher’s house can’t find any fish in his working "
-"radius."
-msgstr ""
-"Rybár pracujúci v tomto rybárskom dome nedokáže nájsť vo svojej pracovnej "
-"oblasti žiadne ryby."
+"The fisher working in this fisher’s house can’t find any fish in his work "
+"area."
+msgstr "Rybár pracujúci v tomto rybárskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
 msgstr "Chytá ryby na pobreží neďaleko domu."
 
 #: ../../tribes/empire/fishers_house/help.lua:18
-msgid ""
-"The fisher’s house needs water full of fish within the working radius."
+msgid "The fisher’s house needs water full of fish within the work area."
 msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+"Fishing rods are needed by fishers, to catch fish. Produced by the "
+"toolsmith."
 msgstr "Udice potrebujú rybári na chytanie rýb. Vyrába ich kováč nástrojov."
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr ""
-"Múka sa vyrába v mlyne z pšenice a používa sa v pekárni na výrobu chutného "
-"imperiálneho chleba."
+msgstr "Múka sa vyrába v mlyne z pšenice a používa sa v pekárni na výrobu chutného imperiálneho chleba."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
@@ -1524,10 +1445,9 @@ msgstr "Sadí stromy na okolitom území."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
-"The foresters’s house needs free space within the working radius to plant "
-"the trees."
-msgstr ""
-"Horáreň vyžaduje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
+"The forester’s house needs free space within the work area to plant the "
+"trees."
+msgstr "Horáreň potrebuje vo svojej pracovnej oblasti voľné miesto na sadenie stromov."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1542,46 +1462,33 @@ msgid ""
 "Gold is the most valuable of all metals; armor and weapons are embellished "
 "with it. It is produced in the smelting works out of gold ore and processed "
 "in the armor smithy and the weapon smithy."
-msgstr ""
-"Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním zbroje a zbrane. "
-"Vyrába sa v taviarni zo zlatej rudy a spracováva sa vo vyhni na zbroje a "
-"vyhni na zbrane."
+msgstr "Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním zbroje a zbrane. Vyrába sa v taviarni zo zlatej rudy a spracováva sa vo vyhni na zbroje a vyhni na zbrane."
 
 #: ../../tribes/empire/goldmine/conf:42
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú "
-"návratnosť investície. Mali by ste vylepšiť, rozobrať alebo zničiť baňu."
+msgstr "Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste vylepšiť, rozobrať alebo zničiť baňu."
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr ""
-"Zlatá ruda sa ťaží v zlatých baniach. Tavením v taviarni sa z nej získava "
-"zlato, ktoré sa používa ako vzácny stavebný materiál a na výrobu zbraní a "
-"zbrojí."
+msgstr "Zlatá ruda sa ťaží v zlatých baniach. Tavením v taviarni sa z nej získava zlato, ktoré sa používa ako vzácny stavebný materiál a na výrobu zbraní a zbrojí."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
-"These grapes are the base for a tasty wine. They are harvested in a vineyard "
-"and processed in a winery."
-msgstr ""
-"Toto hrozno tvorí základ chutného vína. Zberá sa vo vinohrade a spracováva "
-"vo vinárskom závode."
+"These grapes are the base for a tasty wine. They are harvested in a vineyard"
+" and processed in a winery."
+msgstr "Toto hrozno tvorí základ chutného vína. Zberá sa vo vinohrade a spracováva vo vinárskom závode."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
 "The hammer is an essential tool. It is needed by geologists, builders, "
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
-msgstr ""
-"Kladivo je nevyhnutný nástroj. Potrebujú ho geológia, stavitelia, kováči "
-"zbraní aj zbrojí. Uistite sa, že máte stále nejaké v rezerve! Vyrába ho "
-"kováč nástrojov."
+msgstr "Kladivo je nevyhnutný nástroj. Potrebujú ho geológia, stavitelia, kováči zbraní aj zbrojí. Uistite sa, že máte stále nejaké v rezerve! Vyrába ho kováč nástrojov."
 
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
@@ -1589,39 +1496,32 @@ msgstr "Poskytuje ubytovanie pre obyvateľov a skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Základňa predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
+msgstr "Napriek tomu, že táto loď stroskotala, vašim obyvateľom naďalej poskytuje ubytovanie. Zároveň skladuje výrobky a nástroje."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
-msgstr ""
+msgstr "Základňa vo vraku predstavuje vašu hlavnú budovu."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
 "This is a strong lance with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
-"Toto je silná kopija s oceľovým hrotom a malou čepeľou. Vyrába sa vo vyhni "
-"na zbrane a používa vo výcvikovom tábore – spolu s jedlom – na trénovanie "
-"útoku vojakov z úrovne 2 na úroveň 3."
+msgstr "Toto je silná kopija s oceľovým hrotom a malou čepeľou. Vyrába sa vo vyhni na zbrane a používa vo výcvikovom tábore – spolu s jedlom – na trénovanie útoku vojakov z úrovne 2 na úroveň 3."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
 "The helmet is the basic defense of a warrior. It is produced in an armor "
 "smithy. In combination with a wood lance, it is the equipment to fit out "
-"young soldiers. Helmets are also used in training camps – together with food "
-"– to train soldiers from health level 0 to level 1."
-msgstr ""
-"Helma je základnou ochranou vojaka. Vyrába sa vo vyhni na zbroje. Spolu s "
-"drevenou kopijou tvorí výbavu mladých vojakov. Helmy sa tiež používajú vo "
-"výcvikových táboroch – spolu s jedlom – na trénovanie zdravia vojakov z "
-"úrovne 0 na úroveň 1."
+"young soldiers. Helmets are also used in training camps – together with food"
+" – to train soldiers from health level 0 to level 1."
+msgstr "Helma je základnou ochranou vojaka. Vyrába sa vo vyhni na zbroje. Spolu s drevenou kopijou tvorí výbavu mladých vojakov. Helmy sa tiež používajú vo výcvikových táboroch – spolu s jedlom – na trénovanie zdravia vojakov z úrovne 0 na úroveň 1."
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1638,29 +1538,24 @@ msgstr "Došla divá zver"
 #: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
-"working radius."
-msgstr ""
-"Lovec pracujúci mimo tohto loveckého domu nedokáže nájsť vo svojej pracovnej "
-"oblasti žiadnu divú zver."
+"work area."
+msgstr "Lovec pracujúci mimo tohto loveckého domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
 msgstr "Loví zvieratá pre mäso."
 
 #: ../../tribes/empire/hunters_house/help.lua:18
-msgid "The hunter’s house needs animals to hunt within the working radius."
+msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "Lovecký dom potrebuje vo svojej pracovnej oblasti lovnú zver."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by hunters."
-msgstr ""
-"Tento oštep je dosť ľahký na hod, ale zároveň dosť ťažký na to, aby dokázal "
-"skoliť zviera jednou ranou. Používajú ho len lovci."
+"This spear is light enough to be thrown, but heavy enough to kill any animal"
+" in one blow. It is only used by hunters."
+msgstr "Tento oštep je dosť ľahký na hod, ale zároveň dosť ťažký na to, aby dokázal skoliť zviera jednou ranou. Používajú ho len lovci."
 
-#: ../../tribes/empire/inn/conf:26
-#: ../../tribes/empire/tavern/conf:29
+#: ../../tribes/empire/inn/conf:26 ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
 msgstr "pripravovanie prídelu"
 
@@ -1676,44 +1571,33 @@ msgstr "Pripravuje jedlo pre baníkov."
 msgid ""
 "Weapons, armor and tools are made of iron. It is extracted from iron ore in "
 "the smelting works."
-msgstr ""
-"Zbrane, zbroje a nástroje sa vyrábajú zo železa. Získava sa zo železnej rudy "
-"v taviarni."
+msgstr "Zbrane, zbroje a nástroje sa vyrábajú zo železa. Získava sa zo železnej rudy v taviarni."
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
 "Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
 "is produced in iron mines."
-msgstr ""
-"Železná ruda sa taví v taviarni na železo. Ťažia sa v železnorudných baniach."
+msgstr "Železná ruda sa taví v taviarni na železo. Ťažia sa v železnorudných baniach."
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr ""
-"Ako možno vyrobiť prídely alebo obedy bez kuchynských nástrojov? Vyrábajú sa "
-"vo vyhni na nástroje a používajú v krčmách a hostincoch."
+msgstr "Ako možno vyrobiť prídely alebo obedy bez kuchynských nástrojov? Vyrábajú sa vo vyhni na nástroje a používajú v krčmách a hostincoch."
 
 #: ../../tribes/empire/lance/conf:1
 msgid ""
 "This lance has an iron spike. It is produced in a weapon smithy and used in "
-"a training camp – together with food – to train soldiers from attack level 0 "
-"to attack level 1."
-msgstr ""
-"Táto kopija má železný hrot. Vyrába sa vo vyhni na zbrane a používa vo "
-"výcvikovom tábore – spolu s jedlom – na výcvik vojakov v útoku z úrovne 0 na "
-"úroveň 1."
+"a training camp – together with food – to train soldiers from attack level 0"
+" to attack level 1."
+msgstr "Táto kopija má železný hrot. Vyrába sa vo vyhni na zbrane a používa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v útoku z úrovne 0 na úroveň 1."
 
 #: ../../tribes/empire/log/conf:1
 msgid ""
-"Logs are an important building material for the Empire. The lumberjacks fell "
-"the trees; foresters care for the supply of trees. Logs are also used by the "
-"charcoal kiln, the toolsmithy and the sawmill."
-msgstr ""
-"Kmene stromov sú dôležitým stavebným materiálom impéria. Drevorubači rúbu "
-"stromy; horári sa starajú o prídel stromov. Kmene sa tiež spotrebúvajú v "
-"uhliarskej peci, vyhni na nástroje a píle."
+"Logs are an important building material for the Empire. The lumberjacks fell"
+" the trees; foresters care for the supply of trees. Logs are also used by "
+"the charcoal kiln, the toolsmithy and the sawmill."
+msgstr "Kmene stromov sú dôležitým stavebným materiálom impéria. Drevorubači rúbu stromy; horári sa starajú o prídel stromov. Kmene sa tiež spotrebúvajú v uhliarskej peci, vyhni na nástroje a píle."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -1726,19 +1610,16 @@ msgstr "Došli stromy"
 #: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his working radius. You should consider dismantling or destroying the "
-"building or building a forester’s house."
-msgstr ""
-"Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej "
-"pracovnej oblasti nájsť žiadne stromy. Mali by ste rozobrať alebo zničiť "
-"budovu, prípadne postaviť horáreň."
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením lesníckej chatrče."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Rúbať stromy na okolitom území a spracovať ich na kmene."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
-msgid "The lumberjack's house needs trees to fell within the working radius."
+msgid "The lumberjack's house needs trees to fell within the work area."
 msgstr "Drevorubačský dom potrebuje vo svojej pracovnej oblasti stromy."
 
 #: ../../tribes/empire/marble/conf:1
@@ -1746,19 +1627,14 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as building material and gets chiselled into "
 "marble columns in the stonemason’s house."
-msgstr ""
-"Mramor je prekrásny kameň, ktorý sa vyrezáva z hôr alebo sa produkuje v "
-"kameňolome. Používa sa ako stavebný materiál a v kamenárskom dome sa z neho "
-"formujú mramorové stĺpy."
+msgstr "Mramor je prekrásny kameň, ktorý sa vyrezáva z hôr alebo sa produkuje v kameňolome. Používa sa ako stavebný materiál a v kamenárskom dome sa z neho formujú mramorové stĺpy."
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr ""
-"Mramorové stĺpy predstavujú vyspelú kultúru impéria, a preto ich potrebuje "
-"takmer každá väčšia budova. Vyrábajú sa z mramoru v kamenárskom dome."
+msgstr "Mramorové stĺpy predstavujú vyspelú kultúru impéria, a preto ich potrebuje takmer každá väčšia budova. Vyrábajú sa z mramoru v kamenárskom dome."
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
@@ -1773,17 +1649,13 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr ""
-"Hlavná žila tohto mramorového lomu je vyčerpaná. Očakávajte preto prudko "
-"zníženú návratnosť investície. Mali by ste vylepšiť, rozobrať alebo zničiť "
-"lom."
+msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by ste popremýšľať nad jej vylepšením, rozobratím alebo zničením."
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
 msgstr "Ťaží mramor a kamene zo skaly na horskom teréne."
 
-#: ../../tribes/empire/master-miner/conf:1
-#: ../../tribes/empire/miner/conf:1
+#: ../../tribes/empire/master-miner/conf:1 ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr "Pracuje hlboko v bani a ťaží uhlie, železnú rudu alebo zlato."
 
@@ -1791,21 +1663,15 @@ msgstr "Pracuje hlboko v bani a ťaží uhlie, železnú rudu alebo zlato."
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
-msgstr ""
-"Skutočné jedlo sa vyrába v hostincoch z chleba a rýb/mäsa. Uspokojí potreby "
-"baníkov v hlbinných baniach."
+msgstr "Skutočné jedlo sa vyrába v hostincoch z chleba a rýb/mäsa. Uspokojí potreby baníkov v hlbinných baniach."
 
 #: ../../tribes/empire/meat/conf:1
 msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and is consumed at the training sites (arena, "
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare"
+" lunch for the miners and is consumed at the training sites (arena, "
 "colosseum, training camp). There are two sources of meat: pork from "
 "piggeries and the meat of wild game hunted by the hunters."
-msgstr ""
-"Mäso obsahuje veľké množstvo energie. V hostincoch a krčmách sa z neho "
-"pripravujú obedy pre baníkov. Spotrebúva sa aj vo výcvikových stavbách "
-"(aréna, koloseum, výcvikový tábor). Existujú dva zdroje mäsa: bravčovina z "
-"chlievov a mäso divej zveri, na ktorú poľujú lovci."
+msgstr "Mäso obsahuje veľké množstvo energie. V hostincoch a krčmách sa z neho pripravujú obedy pre baníkov. Spotrebúva sa aj vo výcvikových stavbách (aréna, koloseum, výcvikový tábor). Existujú dva zdroje mäsa: bravčovina z chlievov a mäso divej zveri, na ktorú poľujú lovci."
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
@@ -1819,9 +1685,7 @@ msgstr "Mletím pšenice vyrába múku."
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko "
-"zníženú návratnosť investície. Mali by vylepšiť, rozobrať alebo zničiť baňu."
+msgstr "Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Mali by vylepšiť, rozobrať alebo zničiť baňu."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1837,7 +1701,7 @@ msgstr "Krompáč používajú kamenári a baníci. Vyrába ho kováč nástrojo
 msgid "Breeds pigs."
 msgstr "Chová ošípané."
 
-#: ../../tribes/empire/piggery/conf:25
+#: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
 msgstr "chovanie ošípaných"
 
@@ -1846,18 +1710,15 @@ msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
-"Plechová zbroj je najsilnejším brnením, aké môže vojak impéria mať. Vyrába "
-"sa vo vyhni na zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – "
-"na trénovanie zdravia vojakov z úrovne 3 na úroveň 4."
+msgstr "Plechová zbroj je najsilnejším brnením, aké môže vojak impéria mať. Vyrába sa vo vyhni na zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – na trénovanie zdravia vojakov z úrovne 3 na úroveň 4."
 
 #: ../../tribes/empire/quarry/conf:21
 msgid "quarrying stone"
-msgstr ""
+msgstr "lámanie kameňa"
 
 #: ../../tribes/empire/quarry/conf:23
 msgid "quarrying marble"
-msgstr ""
+msgstr "lámanie mramoru"
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
@@ -1865,29 +1726,23 @@ msgstr "Došli skaly"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
-msgstr ""
-"Kamenár pracujúci v tomto kameňolome nedokáže vo svojom okolí nájsť žiadne "
-"skaly."
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Kamenár pracujúci v tomto kameňolome nedokáže vo svojej pracovnej oblasti nájsť žiadne skaly."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
 msgstr "Vysekáva mramor a kameň z neďalekých skál."
 
 #: ../../tribes/empire/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
+msgid "The quarry needs stones to cut within the work area."
 msgstr "Kameňolom potrebuje vo svojej pracovnej oblasti kamene."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
-"A small bite to keep miners strong and working. Rations are also consumed by "
-"the scout on his scouting trips. They are produced in a tavern out of fish "
+"A small bite to keep miners strong and working. Rations are also consumed by"
+" the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
-msgstr ""
-"Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci. Prídely konzumuje "
-"na svojich cestách aj prieskumník. Vyrábajú sa v krčme z rýb, mäsa alebo "
-"chleba."
+msgstr "Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci. Prídely konzumuje na svojich cestách aj prieskumník. Vyrábajú sa v krčme z rýb, mäsa alebo chleba."
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
@@ -1896,9 +1751,7 @@ msgstr "Túto pílu potrebuje piliar. Vyrába ju kováč nástrojov."
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
-"Prieskumníci ako prieskumník Priemyslav preskúmali oblasť v prieskumníckom "
-"štýle."
+msgstr "Prieskumníci ako prieskumník Priemyslav preskúmavajú nepreskúmané oblasti v prieskumníckom štýle."
 
 #: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
@@ -1917,14 +1770,10 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
-"Kvôli nedostatku miesta sa nepodarilo umiestniť niektoré z vašich "
-"počiatočných budov. Ste teda v nevýhode; zvážte reštart mapy s férovými "
-"počiatočnými podmienkami."
+msgstr "Kvôli nedostatku miesta sa nepodarilo umiestniť niektoré z vašich počiatočných budov. Ste teda v nevýhode; zvážte reštart mapy s férovými počiatočnými podmienkami."
 
 #: ../../tribes/empire/scythe/conf:1
-msgid ""
-"The Scythe is the tool of the farmer. It is produced by the toolsmith."
+msgid "The Scythe is the tool of the farmer. It is produced by the toolsmith."
 msgstr "Kosa je nástroj farmárov. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/sentry/conf:7
@@ -1947,7 +1796,7 @@ msgstr "Plavbyschopná loď"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Pracuje v lodenici a stavia nové lode."
 
-#: ../../tribes/empire/shipyard/conf:27
+#: ../../tribes/empire/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "konštruovanie lode"
 
@@ -1955,9 +1804,7 @@ msgstr "konštruovanie lode"
 msgid ""
 "The shovel is needed for the proper handling of plants. Therefore the "
 "forester and the vinefarmer use it. It is produced by the toolsmith."
-msgstr ""
-"Lopata je potrebná na správne zaobchádzanie s rastlinami. Používa ju preto "
-"horár a vinohradník. Vyrába ju kováč nástrojov."
+msgstr "Lopata je potrebná na správne zaobchádzanie s rastlinami. Používa ju preto horár a vinohradník. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
@@ -1983,9 +1830,7 @@ msgstr "Obraňuj a panuj!"
 msgid ""
 "Stones are a basic building material of the Empire. They are produced in "
 "quarries and marble mines."
-msgstr ""
-"Kamene sú základným stavebným materiálom impéria. Získavajú sa v "
-"kameňolomoch a mramorových lomoch."
+msgstr "Kamene sú základným stavebným materiálom Impéria. Ťažia sa v kameňolomoch a mramorových baniach."
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
@@ -2109,22 +1954,20 @@ msgstr "oberanie hrozna"
 
 #: ../../tribes/empire/vineyard/conf:44
 msgid ""
-"The farmer working at this vineyard has no cleared soil to plant his seeds."
-msgstr ""
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Vinohradník pracujúci v tomto vinohrade nemá k dispozícii čistú pôdu, na ktorej by mohol sadiť vinič."
 
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Plant grapevines and harvest grapes."
-msgstr ""
+msgstr "Sadí vinič a zberá hrozno."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "warriors. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
-"Toto je najlepšia a najostrejšia zbraň, akú dokáže kováč zbraní pre vojakov "
-"vyrobiť. Používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik "
-"vojakov v útoku z úrovne 3 na úroveň 4."
+msgstr "Toto je najlepšia a najostrejšia zbraň, akú dokáže kováč zbraní pre vojakov vyrobiť. Používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v útoku z úrovne 3 na úroveň 4."
 
 #: ../../tribes/empire/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
@@ -2135,9 +1978,7 @@ msgid ""
 "Water is the essence of life! It is used in the bakery and the brewery. The "
 "donkey farm, the sheep farm and the piggery also need to be supplied with "
 "water."
-msgstr ""
-"Voda je základom života! Využíva sa v pekárňach a pivovaroch. Vodou "
-"zásobované musia byť aj oslie a ovčie farmy, ako aj chlievy."
+msgstr "Voda je základom života! Využíva sa v pekárňach a pivovaroch. Vodou zásobované musia byť aj oslie a ovčie farmy, ako aj chlievy."
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -2181,9 +2022,8 @@ msgstr "Došla voda"
 
 #: ../../tribes/empire/well/conf:32
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
-msgstr ""
-"Nosič pracujúci v tejto studni nedokáže vo svojom okolí nájsť žiadnu vodu."
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Nosič pracujúci v tejto studni nedokáže vo svojej pracovnej oblasti nájsť žiadnu vodu."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -2194,35 +2034,26 @@ msgid ""
 "Wheat is essential for surviving. It is produced by farms and used by mills "
 "and breweries. Donkey farms, sheep farms and piggeries also need to be "
 "supplied with wheat."
-msgstr ""
-"Pšenica je dôležitá na prežitie. Pestuje sa na farmách a spotrebúva v "
-"mlynoch a pivovaroch. Pšenicou zásobované musia byť aj oslie a ovčie farmy, "
-"ako aj chlievy."
+msgstr "Pšenica je dôležitá na prežitie. Pestuje sa na farmách a spotrebúva v mlynoch a pivovaroch. Pšenicou zásobované musia byť aj oslie a ovčie farmy, ako aj chlievy."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
-"This tasty wine is drunk by the miners working the marble and gold mines. It "
-"is produced in a winery."
-msgstr ""
-"Toto chutné víno sa spotrebúva v zlatých baniach a mramorových lomoch. "
-"Vyrába sa vo vinárenskom závode."
+"This tasty wine is drunk by the miners working the marble and gold mines. It"
+" is produced in a winery."
+msgstr "Toto chutné víno pijú baníci pracujúci v zlatých a mramorových baniach. Vyrába sa vo vinárenskom závode."
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""
 "Wood is a basic building material of the Empire. It is also used by the "
 "weapon smithy."
-msgstr ""
-"Drevo je základným stavebným materiálom impéria. Spotrebúva sa tiež vo vyhni "
-"na zbrane."
+msgstr "Drevo je základným stavebným materiálom impéria. Spotrebúva sa tiež vo vyhni na zbrane."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This wooden lance is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
-"Táto drevená kopija je základnou zbraňou imperiálnej armády. Vyrába sa vo "
-"vyhni na zbrane. Spolu s helmou tvorí výbavu mladých vojakov."
+msgstr "Táto drevená kopija je základnou zbraňou imperiálnej armády. Vyrába sa vo vyhni na zbrane. Spolu s helmou tvorí výbavu mladých vojakov."
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."

@@ -40,10 +40,11 @@ void fileview_window
 */
 class FullscreenMenuTextView : public FullscreenMenuBase {
 public:
-	FullscreenMenuTextView(const std::string & filename);
+	FullscreenMenuTextView();
 
 protected:
-	void set_text(const std::string & text);
+	void set_title(const std::string& title);
+	void set_text(const std::string& text);
 
 private:
 	UI::Textarea                                title;
@@ -59,7 +60,5 @@ class FullscreenMenuFileView : public FullscreenMenuTextView {
 public:
 	FullscreenMenuFileView(const std::string & filename);
 };
-
-
 
 #endif  // end of include guard: WL_UI_FSMENU_FILEVIEW_H

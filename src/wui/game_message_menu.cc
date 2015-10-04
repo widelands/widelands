@@ -46,7 +46,7 @@ GameMessageMenu::GameMessageMenu
 		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
 	message_body
 		(this,
-		 5, 154, 570, 216,
+		 5, 154, 570, 216 - 5 - 34, // Subtracting height for message type icon
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {

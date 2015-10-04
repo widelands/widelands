@@ -139,8 +139,8 @@ source_file = po/world/world.pot
 source_lang = en
 type = PO
 
-[widelands.translator_credits]
-file_filter = po/translator_credits/<lang>.po
-source_file = po/translator_credits/translator_credits.pot
+[widelands.translators]
+file_filter = i18n/locales/<lang>.json
+source_file = i18n/locales/locales_translators.json
 source_lang = en
-type = PO
+type = KEYVALUEJSON

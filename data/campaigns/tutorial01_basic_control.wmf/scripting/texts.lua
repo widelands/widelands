@@ -350,7 +350,7 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = rt(
-      p(_[[It seems you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, the are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
    ),
    w = 350,
    h = 250
@@ -410,7 +410,7 @@ teaching_about_messages = {
    obj_title = _"Archive all messages in your inbox",
    obj_body = rt(
       h1(_"Archive Your Inbox Messages") ..
-      p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty. ]]) ..
+      p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
       listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. Then mark all messages by checking the check box in front of them. Then, click the ‘Archive All’ button.]])

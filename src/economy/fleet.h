@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "logic/instances.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
@@ -79,6 +80,7 @@ struct Fleet : MapObject {
 	Player & owner() const {return m_owner;}
 
 	PortDock * get_dock(Flag & flag) const;
+	PortDock * get_dock(EditorGameBase &, Coords) const;
 	PortDock * get_arbitrary_dock() const;
 	void set_economy(Economy * e);
 
@@ -97,6 +99,11 @@ struct Fleet : MapObject {
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
+
+	uint32_t count_ships();
+	uint32_t count_ships_heading_here(EditorGameBase & egbase, PortDock * port);
+	uint32_t count_ports();
+	bool get_act_pending();
 
 protected:
 	void act(Game &, uint32_t data) override;

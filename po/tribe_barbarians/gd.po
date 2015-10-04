@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-04-06 08:00+0000\n"
-"PO-Revision-Date: 2015-04-06 08:01+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
+"PO-Revision-Date: 2015-09-15 11:49+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,7 +292,7 @@ msgstr "tuagh mhòr a dhèanamh"
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
-#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
 #: ../../tribes/barbarians/hardener/conf:23
 #: ../../tribes/barbarians/helmsmithy/conf:38
@@ -482,7 +482,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr "Mur urrainn dhut còmhnaidh a ghabhail ann an togalaichean ùra an airm on a tha na saighdearan air ruith ort, cleachd putan na saighde sìos gus àitichean-fuirich a thoirt air falbh on togalach seo. Cuideachd, ’s urrainn dhut briogadh air saighdear ach an tig e a-mach."
+msgstr "Mur urrainn dhut còmhnaidh a ghabhail ann an togalaichean ùra an airm on a tha na saighdearan air ruith ort, cleachd putan na saighde sìos gus àitichean-fuirich a thoirt air falbh on togalach seo. Cuideachd, ’s urrainn dhut briogadh air saighdear ach an dig e a-mach."
 
 #: ../../tribes/barbarians/battlearena/conf:34
 #: ../../tribes/barbarians/trainingcamp/conf:47
@@ -1495,20 +1495,20 @@ msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. 
 msgid "Your soldiers have occupied your donjon."
 msgstr "Ghabh na saighdearan agad còmhnaidh san tùr-fhaire agad."
 
-#: ../../tribes/barbarians/farm/conf:22
+#: ../../tribes/barbarians/farm/conf:23
 msgid "planting wheat"
 msgstr "cruithneachd a chur"
 
-#: ../../tribes/barbarians/farm/conf:24
+#: ../../tribes/barbarians/farm/conf:25
 msgid "harvesting wheat"
 msgstr "cruithneachd a bhuain"
 
-#: ../../tribes/barbarians/farm/conf:45
+#: ../../tribes/barbarians/farm/conf:46
 #: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Chan eil achadh ann"
 
-#: ../../tribes/barbarians/farm/conf:46
+#: ../../tribes/barbarians/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair ag an tuathanas seo sìol."
@@ -1556,8 +1556,8 @@ msgstr "Chan eil iasg ann"
 
 #: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
-"The fisher working out of this fisher’s hut can’t find any fish in his "
-"working radius."
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
 msgstr "Cha do lorg an t-iasgair a tha ag obair aig a’ bhothan-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
@@ -1569,8 +1569,8 @@ msgid "Fishes on the coast near the hut."
 msgstr "Iasgaichidh e air an oirthir faisg air a’ bhothan."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
-msgid "The fisher’s hut needs water full of fish within the working radius."
-msgstr "Bidh am bothan-iasgair feumach air uisge làin iasg am broinn an raoin obrach aige."
+msgid "The fisher’s hut needs water full of fish within the work area."
+msgstr "Bidh am bothan-iasgair feumach air uisge làin iasg am broinn an raoin-obrach aige."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
 msgid "The fisher pauses %s before going to work again."
@@ -1652,7 +1652,7 @@ msgid ""
 "Stonford in the year of the great flood. <br> The same man had all the 244 "
 "granite blocks ready only a week later, and they still fortify the city’s "
 "levee."
-msgstr "Seo an fhreagairt a thug am mèinnear Rimbert – air a chuireadh Rimbert aonarain an uairsin – nuair a chaidh iarraidh dha gun a bhith a’ seasamh aig coinneamh èiginneach ann an Stonford ann am bliadhna na tuile mòire.<br>Cha tug e ach seachdain gus an robh an 244 bloca graineil deiseil aig an dearbh dhuine is tha iad fhathast a’ neartachadh banca-tuile a’ bhaile."
+msgstr "Seo an fhreagairt a thug am mèinnear Rimbert – air a chuireadh Rimbert aonarain an uairsin – nuair a chaidh iarraidh dha gun a bhith a’ seasamh aig coinneamh èiginneach ann an Stonford ann am bliadhna na tuile mòire.<br>Cha dug e ach seachdain gus an robh an 244 bloca graineil deiseil aig an dearbh dhuine is tha iad fhathast a’ neartachadh banca-tuile a’ bhaile."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
@@ -1741,9 +1741,9 @@ msgstr "Chan eil sitheann ann"
 
 #: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
-"The hunter working out of this hunter’s hut can’t find any game in his "
-"working radius. Remember that you can build a gamekeeper’s hut to release "
-"more game into the wild."
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
 msgstr "Cha do lorg an sealgair a tha a’ fuireach sa bhothan-sealgair seo sitheann taobh a-staigh a raoin-obrach. Thoir an aire gur urrainn dhut bothan-geamair a thogail gus barrachd bheathaichean a leigeil fa sgaoil."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
@@ -1761,8 +1761,8 @@ msgid "Hunts animals to produce meat."
 msgstr "Sealgaidh e beathaichean gus feòil a dhèanamh."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
-msgid "The hunter’s hut needs animals to hunt within the working radius."
-msgstr "Bidh am bothan-sealgair feumach air beathaichean ri ’n sealg am broinn an raoin obrach aige."
+msgid "The hunter’s hut needs animals to hunt within the work area."
+msgstr "Bidh am bothan-sealgair feumach air beathaichean ri ’n sealg am broinn an raoin-obrach aige."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
@@ -1853,8 +1853,8 @@ msgstr "Chan eil craobhan ann"
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
-"working radius. You should consider dismantling or destroying the building "
-"or building a rangers’s hut."
+"work area. You should consider dismantling or destroying the building or "
+"building a rangers’s hut."
 msgstr "Cha do lorg an coilltear a tha ag obair aig a’ bhothan coillteir seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no bothan maoir-choille a thogail."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
@@ -1873,8 +1873,8 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Leag craobhan am fagas is nì fiodh dhiubh."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack’s hut needs trees to fell within the working radius."
-msgstr "Bidh am bothan coillteir feumach air craobhan ri ’n leagail am broinn an raoin obrach aige."
+msgid "The lumberjack’s hut needs trees to fell within the work area."
+msgstr "Bidh am bothan coillteir feumach air craobhan ri ’n leagail am broinn an raoin-obrach aige."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""
@@ -2018,7 +2018,7 @@ msgstr "Tha fuineadairean nan Tùsanach uabhasach math air aran tur ach blasta a
 
 #: ../../tribes/barbarians/quarry/conf:19
 msgid "quarrying stone"
-msgstr ""
+msgstr "clach a thochladh"
 
 #: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
@@ -2026,8 +2026,7 @@ msgstr "Chan eil creagan ann"
 
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
-"The stonemason working at this quarry can’t find any rocks in his working "
-"radius."
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr "Chan urrainn dhan chlachair a tha ag obair aig a’ choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
@@ -2035,8 +2034,8 @@ msgid "Carves raw stone out of rocks in the vicinity."
 msgstr "Tochlaidh e clachan à creagan am fagas."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
-msgid "The quarry needs stones to cut within the working radius."
-msgstr "Bidh an coireal feumach air creagan ri ’n tochladh am broinn an raoin obrach aige."
+msgid "The quarry needs stones to cut within the work area."
+msgstr "Bidh an coireal feumach air creagan ri ’n tochladh am broinn an raoin-obrach aige."
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
@@ -2066,9 +2065,8 @@ msgstr "Cuiridh e craobhan mu thimcheall."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
-"The ranger’s hut needs free space within the working radius to plant the "
-"trees."
-msgstr "Bidh am bothan maoir-choille feumach air rum shaor am broinn an raoin obrach aige gus na craobhan a chur ann."
+"The ranger’s hut needs free space within the work area to plant the trees."
+msgstr "Bidh am bothan maoir-choille feumach air rum shaor am broinn an raoin-obrach aige gus na craobhan a chur ann."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
 msgid ""
@@ -2347,8 +2345,8 @@ msgstr "Gabhaidh na h-uile seòrsa de dh’airm an aon ùine gus an dèanamh, ac
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
-"The warrior’s axe is the most dangerous of all Barbarian weapons. Only a few"
-" warriors ever were able to handle those huge and powerful axes. It is "
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
 msgstr "Is an tuagh-ghaisgich an arm as cunnartaiche aig na Tùsanaich. ’S gann na gaisgich a bhios comasach air na tuaghan làidir mòra seo a làimhseachadh. Saothraichidh tu ann an ceàrdach-cogaidh i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 4 gu leibheil 5."
@@ -2378,7 +2376,7 @@ msgstr "Chan eil uisge ann"
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
-"The carrier working at this well can’t find any water in his working radius."
+"The carrier working at this well can’t find any water in his work area."
 msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/well/help.lua:13

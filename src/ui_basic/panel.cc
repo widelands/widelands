@@ -129,7 +129,7 @@ void Panel::free_children() {
  * negative when the event loop was quit in an abnormal way (e.g. the user
  * clicked the window's close button or similar).
  */
-int32_t Panel::run()
+int Panel::do_run()
 {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication * const app = WLApplication::get();
@@ -174,7 +174,7 @@ int32_t Panel::run()
 
 		app->handle_input(&icb);
 		if (app->should_die())
-			end_modal(dying_code);
+			end_modal<Returncodes>(Returncodes::kBack);
 
 		do_think();
 
@@ -186,7 +186,7 @@ int32_t Panel::run()
 			rt.blit
 				(app->get_mouse_position() - Point(3, 7),
 				 WLApplication::get()->is_mouse_pressed() ?
-				 	s_default_cursor_click :
+					s_default_cursor_click :
 					s_default_cursor);
 
 			forefather->do_tooltip();
@@ -211,16 +211,6 @@ int32_t Panel::run()
 
 	return _retcode;
 }
-
-/**
- * Cause run() to return as soon as possible, with the given return code
- */
-void Panel::end_modal(int32_t const code)
-{
-	_running = false;
-	_retcode = code;
-}
-
 
 /**
  * \return \c true if this is the currently modal panel
@@ -679,7 +669,7 @@ bool Panel::handle_tooltip()
  * Default is enabled. Note that when mouse handling is disabled, child panels
  * don't receive mouse events either.
  *
- * \param yes rue if the panel should receive mouse events
+ * \param yes true if the panel should receive mouse events
  */
 void Panel::set_handle_mouse(bool const yes)
 {

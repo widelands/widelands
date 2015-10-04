@@ -45,7 +45,7 @@ enum class IslandExploreDirection {
 };
 
 struct NoteShipMessage {
-	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
 
 	Ship* ship;
 
@@ -114,6 +114,8 @@ struct Ship : Bob {
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
+
+	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr);
 
 	void log_general_info(const EditorGameBase &) override;
 

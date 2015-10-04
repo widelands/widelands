@@ -477,7 +477,7 @@ bool Window::handle_tooltip()
 void Window::die()
 {
 	if (is_modal()) {
-		end_modal(0);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		Panel::die();
 	}

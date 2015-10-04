@@ -124,7 +124,7 @@ SpinBox::SpinBox
 	std::string unit_text = std::to_string(sbi->value);
 	if (! sbi->unit.empty()) {
 		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-		unit_text = (boost::format(_("%i %s")) % sbi->value % sbi->unit.c_str()).str();
+		unit_text = (boost::format(_("%1$i %2$s")) % sbi->value % sbi->unit.c_str()).str();
 	}
 
 	sbi->text = new UI::Textarea
@@ -197,7 +197,7 @@ void SpinBox::update()
 		}
 	}
 	if (!was_in_list) {
-		sbi->text->set_text((boost::format("%i %s") % sbi->value % sbi->unit.c_str()).str());
+		sbi->text->set_text((boost::format(_("%1$i %2$s")) % sbi->value % sbi->unit.c_str()).str());
 	}
 
 	sbi->butMinus->set_enabled(sbi->min < sbi->value);
@@ -358,7 +358,7 @@ void SpinBox::add_replacement(int32_t value, std::string text)
 void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = find_replacement(value) >= 0) {
-		sbi->valrep[i].text = (boost::format("%i %s") % value % sbi->unit.c_str()).str();
+		sbi->valrep[i].text = (boost::format(_("%1$i %2$s")) % value % sbi->unit.c_str()).str();
 	}
 }
 

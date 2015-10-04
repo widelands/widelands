@@ -48,6 +48,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_real_speed(lua_State * L);
 	int get_time(lua_State *);
 	int get_desired_speed(lua_State *);
 	int set_desired_speed(lua_State *);

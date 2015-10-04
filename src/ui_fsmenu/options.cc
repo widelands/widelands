@@ -206,7 +206,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_label_language.get_x() + m_fx.get_w() + m_padding,
 		 m_label_music.get_y() + m_label_music.get_h() + m_padding,
 		 m_language_list.get_w(), m_fx.get_h(),
-		 _("Enable Sound"), UI::Align_VCenter),
+		 _("Enable Sound Effects"), UI::Align_VCenter),
 
 	// Second options block 'In-game options'
 	// Title 2
@@ -221,6 +221,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_single_watchwin.get_x() + m_single_watchwin.get_w() + m_padding,
 		 m_offset_second_group,
 		 get_w() - 2 * m_hmargin - m_single_watchwin.get_w(), m_single_watchwin.get_h(),
+		 /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
+		 /** TRANSLATORS: and it also lets you jump to it on the map. */
 		 _("Use single watchwindow mode"), UI::Align_VCenter),
 
 	m_auto_roadbuild_mode (this, Point(m_single_watchwin.get_x(),
@@ -303,10 +305,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 {
 	m_advanced_options.sigclicked.connect
 		(boost::bind(&FullscreenMenuOptions::advanced_options, boost::ref(*this)));
-	m_cancel.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
@@ -394,9 +394,9 @@ void FullscreenMenuOptions::update_sb_remove_replays_unit() {
 
 void FullscreenMenuOptions::advanced_options() {
 	FullscreenMenuAdvancedOptions aom(os);
-	if (aom.run() == FullscreenMenuAdvancedOptions::om_ok) {
+	if (aom.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 		os = aom.get_values();
-		end_modal(om_restart);
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kRestart);
 	}
 }
 
@@ -461,25 +461,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 }
 
 
-bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
-}
-
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
 
@@ -511,7 +492,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	(OptionsCtrl::OptionsStruct const opt)
 	:
-	FullscreenMenuBase("ui_fsmenu/ui_fsmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw   (get_h() * 333 / 10000),
@@ -581,7 +562,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		(this,
 		 m_hmargin + m_message_sound.get_w() + m_padding, m_message_sound.get_y(),
 		 get_w() - 2 * m_hmargin - m_message_sound.get_w() - m_padding, 40,
-		 _("Play a sound at message arrival."),
+		 _("Play a sound at message arrival"),
 		 UI::Align_VCenter),
 
 	m_nozip (this, Point(m_hmargin,
@@ -591,7 +572,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		(this,
 		 m_hmargin + m_nozip.get_w() + m_padding, m_nozip.get_y(),
 		 get_w() - 2 * m_hmargin - m_nozip.get_w() - m_padding, 40,
-		 _("Do not zip widelands data files (maps, replays and savegames)."),
+		 _("Do not zip widelands data files (maps, replays and savegames)"),
 		 UI::Align_VCenter),
 
 	m_remove_syncstreams (this, Point(m_hmargin,
@@ -619,41 +600,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 					 boost::ref(*this)));
 	}
 
-	m_cancel.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_back, boost::ref(*this)));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_ok, boost::ref(*this)));
 
 	m_title                .set_textstyle(UI::TextStyle::ui_big());
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_transparent_chat     .set_state(opt.transparent_chat);
-}
-
-bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
 }
 
 void FullscreenMenuAdvancedOptions::update_sb_dis_panel_unit() {
@@ -691,10 +645,10 @@ OptionsCtrl::~OptionsCtrl() {
 
 void OptionsCtrl::handle_menu()
 {
-	int32_t i = m_opt_dialog->run();
-	if (i != FullscreenMenuOptions::om_cancel)
+	FullscreenMenuBase::MenuTarget i = m_opt_dialog->run<FullscreenMenuBase::MenuTarget>();
+	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
-	if (i == FullscreenMenuOptions::om_restart) {
+	if (i == FullscreenMenuBase::MenuTarget::kRestart) {
 		delete m_opt_dialog;
 		m_opt_dialog = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu

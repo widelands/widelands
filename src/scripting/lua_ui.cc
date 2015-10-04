@@ -703,7 +703,7 @@ int LuaMapView::abort_road_building(lua_State * /* L */) {
 		example used in the widelands Lua test suite.
 */
 int LuaMapView::close(lua_State * /* l */) {
-	get()->end_modal(0);
+	get()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	return 0;
 }
 

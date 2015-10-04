@@ -143,37 +143,43 @@ MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_terrn.png"),
-		 _("Terrain")),
+		 _("Terrain"),
+		 true, false, true),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_owner.png"),
-		 _("Owner")),
+		 _("Owner"),
+		 true, false, true),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_flags.png"),
-		 _("Flags")),
+		 _("Flags"),
+		 true, false, true),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_roads.png"),
-		 _("Roads")),
+		 _("Roads"),
+		 true, false, true),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_bldns.png"),
-		 _("Buildings")),
+		 _("Buildings"),
+		 true, false, true),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 g_gr->images().get("images/wui/minimap/button_zoom.png"),
-		 _("Zoom"))
+		 _("Zoom"),
+		 true, false, true)
 {
 	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
 	button_owner.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Owner));

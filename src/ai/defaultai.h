@@ -30,6 +30,8 @@
 #include "base/i18n.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
 
 namespace Widelands {
 struct Road;
@@ -79,8 +81,10 @@ struct DefaultAI : ComputerPlayer {
 		DEFENSIVE = 0,
 	};
 
-	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers};
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
+	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
+	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
 	enum class ScheduleTasks : uint8_t {
 		kBbuildableFieldsCheck,
 		kMineableFieldsCheck,
@@ -108,12 +112,18 @@ struct DefaultAI : ComputerPlayer {
 		kExpansion,
 		kPushExpansion
 	};
+	enum class Tribes : uint8_t {
+		kNone,
+		kBarbarians,
+		kAtlanteans,
+		kEmpire
+	};
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Aggressive");
+			name = pgettext("ai_name", "Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -124,7 +134,7 @@ struct DefaultAI : ComputerPlayer {
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Normal");
+			name = pgettext("ai_name", "Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -135,7 +145,7 @@ struct DefaultAI : ComputerPlayer {
 	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = _("Defensive");
+			name = pgettext("ai_name", "Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -159,10 +169,7 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
-	void check_ware_necessity(BuildingObserver& bo,
-	                          bool* output_is_needed,
-	                          int16_t* max_preciousness,
-	                          int16_t* max_needed_preciousness);
+	void check_building_necessity(BuildingObserver& bo);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
@@ -199,6 +206,8 @@ private:
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);
 	void print_stats(uint32_t);
+	// return single number of strength of vector of soldiers
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
@@ -233,6 +242,10 @@ private:
 	void gain_ship(Widelands::Ship&, NewShip);
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
+	void soldier_trained(const Widelands::TrainingSite&);
+	bool is_productionsite_needed(int32_t outputs,
+										int32_t performance,
+										PerfEvaluation purpose);
 
 	bool check_supply(const BuildingObserver&);
 
@@ -259,6 +272,8 @@ private:
 	uint16_t last_attacked_player_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
+
+	WoodPolicy wood_policy_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -311,12 +326,23 @@ private:
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
-	//statistics for training sites per type
+	// statistics for training sites per type
 	uint8_t ts_basic_count_;
 	uint8_t ts_basic_const_count_;
 	uint8_t ts_advanced_count_;
 	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
+
+	// this is helping counter to track how many scheduler tasks are too delayed
+	// the purpose is to print out a warning that the game is pacing too fast
+	int32_t scheduler_delay_counter_;
+
+	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
+	std::vector<std::string> const armors_and_weapons =
+		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
+	// some buildings can be upgraded even when they are only one
+	// now only microbrewery get this special treatment
+	const char* preferred_upgrade[1] = {"micro-brewery"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
@@ -327,6 +353,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteProductionSiteOutOfResources>>
 	   outofresource_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTrainingSiteSoldierTrained>>
+	   soldiertrained_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
 };
 

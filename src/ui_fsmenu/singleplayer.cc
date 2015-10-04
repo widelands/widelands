@@ -50,24 +50,24 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 {
 	new_game.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kNewGame)));
+			 FullscreenMenuBase::MenuTarget::kNewGame));
 	campaign.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kCampaign)));
+			 FullscreenMenuBase::MenuTarget::kCampaign));
 	load_game.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kLoadGame)));
+			 FullscreenMenuBase::MenuTarget::kLoadGame));
 	back.sigclicked.connect
 		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 			 boost::ref(*this),
-			 static_cast<int32_t>(MenuTarget::kBack)));
+			 FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -83,4 +83,8 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	vbox.add(&back, UI::Box::AlignCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
+}
+
+void FullscreenMenuSinglePlayer::clicked_ok() {
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
 }

@@ -182,16 +182,44 @@ static int L__(lua_State * L) {
 // UNTESTED
 static int L_ngettext(lua_State * L) {
 	//  S: msgid msgid_plural n
-	const std::string msgid = luaL_checkstring(L, 1);
-	const std::string msgid_plural = luaL_checkstring(L, 2);
+	const char* msgid = luaL_checkstring(L, 1);
+	const char* msgid_plural = luaL_checkstring(L, 2);
 	const uint32_t n = luaL_checkuint32(L, 3);
 
 	lua_getglobal(L, "__TEXTDOMAIN");
 	if (!lua_isnil(L, -1)) {
-		i18n::Textdomain dom(luaL_checkstring(L, -1));
-		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
+		lua_pushstring(L, dngettext(luaL_checkstring(L, -1), msgid, msgid_plural, n));
 	} else {
-		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
+		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
+	}
+	return 1;
+}
+
+
+/* RST
+.. function:: pgettext(msgctxt, msgid)
+
+	A wrapper for the pgettext() function, needed for allowing multiple translations of the same string
+	according to context.
+
+	:arg msgctxt: a named context for this string for disambiguation
+	:type msgctxt: :class:`string`
+	:arg msgid: text to translate
+	:type msgid: :class:`string`
+
+	:returns: The translated string.
+*/
+// UNTESTED
+static int L_pgettext(lua_State * L) {
+	//  S: msgctxt msgid
+	const char* msgctxt = luaL_checkstring(L, 1);
+	const char* msgid = luaL_checkstring(L, 2);
+
+	lua_getglobal(L, "__TEXTDOMAIN");
+	if (!lua_isnil(L, -1)) {
+		lua_pushstring(L, dpgettext_expr(luaL_checkstring(L, -1), msgctxt, msgid));
+	} else {
+		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
 	}
 	return 1;
 }
@@ -238,6 +266,7 @@ const static struct luaL_Reg globals [] = {
 	{"get_build_id", &L_get_build_id},
 	{"include", &L_include},
 	{"ngettext", &L_ngettext},
+	{"pgettext", &L_pgettext},
 	{"set_textdomain", &L_set_textdomain},
 	{nullptr, nullptr}
 };

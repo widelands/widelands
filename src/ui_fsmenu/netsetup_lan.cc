@@ -98,8 +98,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 			 (&FullscreenMenuNetSetupLAN::clicked_hostgame, boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuNetSetupLAN::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(CANCEL)));
+			 (&FullscreenMenuNetSetupLAN::clicked_back, boost::ref(*this)));
 	loadlasthost.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
@@ -164,6 +163,13 @@ const std::string & FullscreenMenuNetSetupLAN::get_playername()
 	return playername.text();
 }
 
+void FullscreenMenuNetSetupLAN::clicked_ok() {
+	if (hostname.text().empty()) {
+		clicked_hostgame();
+	} else {
+		clicked_joingame();
+	}
+}
 
 void FullscreenMenuNetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {
@@ -188,7 +194,8 @@ void FullscreenMenuNetSetupLAN::update_game_info
 	switch (info.state) {
 	case LAN_GAME_OPEN:   er.set_string(2, _("Open"));   break;
 	case LAN_GAME_CLOSED: er.set_string(2, _("Closed")); break;
-	default:              er.set_string(2, _("Unknown")); break;
+	/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
+	default:              er.set_string(2, pgettext("game_state", "Unknown")); break;
 	};
 }
 
@@ -243,11 +250,11 @@ void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	g_options.pull_section("global").set_string("lasthost", hostname.text());
 
-	end_modal(JOINGAME);
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_hostgame() {
-	end_modal(HOSTGAME);
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kHostgame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {

@@ -41,8 +41,8 @@ return=skipped
 
 [out_of_resource_notification]
 title=_Out of Fields
-message=_The farmer working at this vineyard has no cleared soil to plant his seeds.
-delay_attempts=10
+message=_The vine farmer working at this vineyard has no cleared soil to plant his grapevines.
+productivity_threshold=30
 
 [idle]
 pics=vineyard_i_??.png  # ???

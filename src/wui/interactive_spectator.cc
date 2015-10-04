@@ -171,7 +171,7 @@ void InteractiveSpectator::exit_btn()
 	if (is_multiplayer()) {
 		return;
 	}
-	end_modal(0);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 

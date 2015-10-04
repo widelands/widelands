@@ -336,6 +336,14 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 			return true;
 
+		case SDLK_b:
+			if (m_mainm_windows.building_stats.window == nullptr) {
+				new BuildingStatisticsMenu(*this, m_mainm_windows.building_stats);
+			} else {
+				m_mainm_windows.building_stats.toggle();
+			}
+			return true;
+
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);

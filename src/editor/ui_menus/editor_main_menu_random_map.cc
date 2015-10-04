@@ -57,7 +57,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		{"greenland", _("Summer")},
 		{"winterland", _("Winter")},
 		{"desert", _("Desert")},
-		{"blackland", _("Black")},
+		{"blackland", _("Wasteland")},
 	}),
 	m_current_world(0) {
 	int32_t const offsx   =  5;
@@ -328,7 +328,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_goButton = new UI::Button
 		(this, "generate_map",
 		 posx, posy, width, height,
-		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Generate Map"));
 	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;
@@ -504,12 +504,13 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		<< "ID = " << m_idEditbox->text() << "\n";
 
 	MapGenerator gen(map, mapInfo, egbase);
-	map.create_empty_map(egbase.world(),
-	                     mapInfo.w,
-	                     mapInfo.h,
-	                     _("No Name"),
-	                     g_options.pull_section("global").get_string("realname", _("Unknown")),
-	                     sstrm.str().c_str());
+	map.create_empty_map(
+		egbase.world(),
+		mapInfo.w,
+		mapInfo.h,
+		_("No Name"),
+		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
+		sstrm.str().c_str());
 	loader.step(_("Generating random map..."));
 	gen.create_random_map();
 
