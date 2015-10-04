@@ -82,7 +82,7 @@ EditorMainMenu::EditorMainMenu
 	m_button_exit_editor
 		(this, "exit",
 		 hmargin, vmargin + 6 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Exit Editor"))
 {
 	m_button_new_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
