@@ -43,6 +43,22 @@ wl_library(wui_mapview_pixelfunctions
     logic_widelands_geometry
 )
 
+wl_library(wui_common
+  SRCS
+    mapdetails.cc
+    mapdetails.h
+    mapdata.h
+    maptable.cc
+    maptable.h
+    suggested_teams_box.cc
+    suggested_teams_box.h
+  DEPENDS
+    base_i18n
+    io_filesystem
+    logic
+    ui_basic
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
