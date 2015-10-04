@@ -185,6 +185,7 @@ Parser::Parser() {
 		tc.allowed_attrs.insert("padding_b");
 		tc.allowed_attrs.insert("padding_t");
 		tc.allowed_attrs.insert("db_show_spaces");
+		tc.allowed_attrs.insert("keep_spaces"); // Keeps blank spaces intact for text editing
 		tc.allowed_attrs.insert("background");
 
 		tc.allowed_childs.insert("p");

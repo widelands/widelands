@@ -37,13 +37,18 @@
 
 namespace {
 
-// We need the dots to prevent trimming of the whitespace.
-uint32_t space_width() {
-	return UI::g_fh1->render(as_uifont(". ."))->width() - UI::g_fh1->render(as_uifont(".."))->width();
+std::string as_editorfont(const std::string & txt) {
+	// UI Text is always bold due to historic reasons
+	static boost::format
+			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % UI_FONT_SIZE_SMALL;
+	f % UI_FONT_CLR_FG.hex_value();
+	f % richtext_escape(txt);
+	return f.str();
 }
 
 uint32_t text_width(const std::string text) {
-	return UI::g_fh1->render(as_uifont(text))->width();
+	return UI::g_fh1->render(as_editorfont(text))->width();
 }
 } // namespace
 
@@ -54,12 +59,12 @@ namespace UI {
  * and a default-constructed text style.
  */
 WordWrap::WordWrap() :
-	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false)
+	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
 {
 }
 
 WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
-	m_style(style), m_draw_caret(false)
+	m_style(style), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
 {
 	m_wrapwidth = gwrapwidth;
 
@@ -100,8 +105,9 @@ uint32_t WordWrap::wrapwidth() const
  * Perform the wrapping computations for the given text and fill in
  * the private data containing the wrapped results.
  */
-void WordWrap::wrap(const std::string & text)
+void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
 {
+	mode_ = mode;
 	m_lines.clear();
 	if (text.empty()) return;
 
@@ -142,11 +148,8 @@ void WordWrap::wrap(const std::string & text)
 			while ((line_width < (m_wrapwidth - margin)) && (end < unicode_word.length())) {
 				++end;
 				UChar c = unicode_word.charAt(end);
-				if (c == 0x0020) {
-					line_width += space_width();
-				} else { // NOCOM ignore diacritics
-					line_width += text_width(i18n::icuchar2string(c));
-				}
+				// NOCOM ignore diacritics
+				line_width += text_width(i18n::icuchar2string(c));
 				unicode_line += c;
 			}
 			if (end != unicode_word.length() - 1) {
@@ -299,18 +302,16 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			point.x += m_wrapwidth / 2;
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(m_lines[line].text));
+		const Image* entry_text_im = UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
+																		  as_uifont(m_lines[line].text) :
+																		  as_editorfont(m_lines[line].text));
 		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
 		dst.blit(point, entry_text_im);
 
-		if (m_draw_caret && line == caretline) {
+		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
 			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
 			int caret_x = text_width(line_to_caret);
 
-			// Add space for trailing whitespaces before caret
-			for (int i = line_to_caret.size() - 1; i >= 0 && line_to_caret.substr(i) == " "; --i) {
-				caret_x += space_width();
-			}
 			const Image* caret_image = g_gr->images().get("pics/caret.png");
 			Point caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;

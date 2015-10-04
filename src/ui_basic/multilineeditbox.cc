@@ -468,12 +468,6 @@ void MultilineEditbox::draw(RenderTarget & dst)
  */
 void MultilineEditbox::Data::insert(uint32_t where, const std::string & s)
 {
-	if (s == " ") {
-		// Block whitespace at start of text and consecutive whitespaces
-		if (where <= 0 || text.substr(where, 1) == " " || (text.substr(where - 1, 1) == " ")) {
-			return;
-		}
-	}
 	text.insert(where, s);
 	update();
 
@@ -542,7 +536,7 @@ void MultilineEditbox::Data::refresh_ww()
 	ww.set_style(textstyle);
 	ww.set_wrapwidth(owner.get_w() - ms_scrollbar_w);
 
-	ww.wrap(text);
+	ww.wrap(text, WordWrap::Mode::kEditor);
 	ww_valid = true;
 
 	int32_t textheight = ww.height();
