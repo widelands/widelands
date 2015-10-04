@@ -1,0 +1,104 @@
+The data in developers.lua is generated from developers.json
+and the files in the i18n/locales directory.
+
+The script to generate developers.lua from these files is located in
+utils/update_authors.py
+
+===================================
+|                                 |
+|   i18n/locales/<iso-code>.json  |
+|                                 |
+===================================
+
+The translator credits and locale info for each locale are located in a separate
+JSON file. Editing and generating these files is handled through Transifex.
+
+The Transifex source file for these is i18n/locales/locales_translators.json.
+For files where "translator-list" = "translator-credits", these haven't
+been translated (= no credits are listed), so these files should be ignored
+for the credits file.
+
+These JSON files are also used to generate the locale data in i18n/locales.lua.
+
+
+===================================
+|                                 |
+|       developers.json           |
+|                                 |
+===================================
+
+In order to add developer names to the Widelands credits (except for translators),
+this file has to be added manually.
+
+
+1. Each developer category has a heading,
+   a filename for an image that gets displayed before each name,
+   and a list of names:
+
+{
+   "developers":[
+      {
+         "heading": "Main heading for this developer category",
+         "image": "image-that-gets-displayed-in-front-of-each-name.jpg",
+         "entries":[
+            {
+               "members":[
+                  "list",
+                  "of",
+                  "developers"
+               ]
+            }
+         ]
+      }
+   ]
+}
+
+______________________________________________________________________
+
+
+2. A developer category can be split into subcategories with a subheading:
+
+{
+   "developers":[
+      {
+         "heading": "This list has subcategories",
+         "image": "image-that-gets-displayed-in-front-of-each-name.jpg",
+         "entries":[
+            {
+               "subheading": "The heading for the first subcategory",
+               "members":[
+                  "list",
+                  "of",
+                  "developers"
+               ]
+            },
+            {
+               "subheading": "The heading for the second subcategory",
+               "members":[
+                  "list",
+                  "of",
+                  "developers"
+               ]
+            }
+         ]
+      }
+   ]
+}
+
+______________________________________________________________________
+
+
+3. The JSON file also contains a hook for the translators list.
+   Do not change the heading definition, or you will confuse the parsers.
+   So, the only entry you can change here without breaking stuff is the
+   image filename.
+
+{
+   "developers":[
+      {
+         "heading": "Translators",
+         "image": "pics/fsel_editor_set_height.png",
+         "entries":[]
+      },
+   ]
+}

@@ -364,8 +364,9 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			m_waiting.pop_back();
 		}
 
-		if (m_waiting.empty())
+		if (m_waiting.empty()){
 			set_need_ship(game, false);
+		}
 	}
 
 	m_fleet->update(game);
@@ -406,6 +407,13 @@ uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex) {
 	}
 
 	return count;
+}
+
+/**
+ * Return the number of wares or workers waiting at the dock.
+ */
+uint32_t PortDock::count_waiting() {
+	return m_waiting.size();
 }
 
 /// \returns whether an expedition was started or is even ready

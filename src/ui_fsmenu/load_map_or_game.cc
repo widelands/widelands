@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -35,57 +33,36 @@
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
+FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
 		FullscreenMenuBase("choosemapmenu.jpg"),
 
 		// Values for alignment and size
-		m_padding(4),
-		m_indent(10),
+		padding_(4),
+		indent_(10),
 		m_label_height(20),
-		m_tablex(get_w() *  47 / 2500),
-		m_tabley(get_h() * 17 / 50),
-		m_tablew(get_w() * 711 / 1250),
-		m_tableh(get_h() * 6083 / 10000),
+		tablex_(get_w() *  47 / 2500),
+		tabley_(get_h() * 17 / 50),
+		tablew_(get_w() * 711 / 1250),
+		tableh_(get_h() * 6083 / 10000),
 		m_right_column_margin(15),
-		m_right_column_x(m_tablex + m_tablew + m_right_column_margin),
+		right_column_x_(tablex_ + tablew_ + m_right_column_margin),
 		m_buty (get_h() * 9 / 10),
-		m_butw ((get_w() - m_right_column_x - m_right_column_margin) / 2 - m_padding),
-		m_buth (get_h() * 9 / 200),
+		m_butw ((get_w() - right_column_x_ - m_right_column_margin) / 2 - padding_),
+		buth_ (get_h() * 9 / 200),
 		m_right_column_tab(get_w() - m_right_column_margin - m_butw),
 
 		// Main buttons
-		m_back
+		back_
 		  (this, "back",
-			m_right_column_x, m_buty, m_butw, m_buth,
+			right_column_x_, m_buty, m_butw, buth_,
 			g_gr->images().get("pics/but0.png"),
 			_("Back"), std::string(), true, false),
-		m_ok
+		ok_
 		  (this, "ok",
-			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
+			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, buth_,
 			g_gr->images().get("pics/but2.png"),
-			_("OK"), std::string(), false, false),
-		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
+			_("OK"), std::string(), false, false)
 	{}
-
-bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_Keysym code) {
-
-	if (!down)
-		return false;
-
-	switch (code.sym)
-	{
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
-			clicked_ok();
-			return true;
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
-		default:
-			break; // not handled
-	}
-	return FullscreenMenuBase::handle_key(down, code);
-}
 
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();

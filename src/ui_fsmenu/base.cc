@@ -77,3 +77,29 @@ uint32_t FullscreenMenuBase::fs_small() {
 uint32_t FullscreenMenuBase::fs_big() {
 	return UI_FONT_SIZE_BIG * get_h() / 600;
 }
+
+bool FullscreenMenuBase::handle_key(bool down, SDL_Keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			case SDLK_ESCAPE:
+				clicked_back();
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
+}
+
+
+void FullscreenMenuBase::clicked_back() {
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+}
+void FullscreenMenuBase::clicked_ok() {
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+}

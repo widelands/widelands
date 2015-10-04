@@ -1,31 +1,29 @@
-# Russian translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-03-06 18:08+0000\n"
-"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-29 08:37+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr ""
+msgstr "Мореплавание"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Обучение мореплаванию"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
@@ -196,21 +194,20 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid ""
-"Very good. Your shipyard is finished and your shipwright immediately started "
-"working. For the construction of ships, he needs logs, planks and "
+"Very good. Your shipyard is finished and your shipwright immediately started"
+" working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
-"and build a ship there. When the first ship is finished, it will launch onto "
-"the sea, and the shipwright will construct another one."
+"and build a ship there. When the first ship is finished, it will launch onto"
+" the sea, and the shipwright will construct another one."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
-msgid ""
-"We should wait until we have two ships. That should be enough for now."
+msgid "We should wait until we have two ships. That should be enough for now."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
@@ -271,7 +268,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr ""
 
-#: TRANSLATORS: This shall be the beginning of a poem
+#: TRANSLATORS This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr ""
@@ -333,88 +330,82 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
 msgid ""
-"Your expedition should be ready about now. If not, please wait a bit – you "
-"will receive a message."
+"Your expedition ship is ready. It is waiting for your orders in front of "
+"your port. It isn’t transporting wares anymore. Use its buttons to send your"
+" ship in any of the six main directions of the Widelands map. When it has "
+"reached a coastline, you can make it travel around the coast, where it will "
+"look for suitable places for landing."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
-msgid ""
-"Your ship will be waiting for your orders in front of your port. It won’t be "
-"transporting wares anymore. Use its buttons to send your ship in any of the "
-"six main directions of the Widelands map. When it has reached a coastline, "
-"you can make it travel around the coast, where it will look for suitable "
-"places for landing."
-msgstr ""
-
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:169
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:168
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:172
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
 msgid "Found a settlement"
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "When you have found a suitable port space, build a port there."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:184
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Conclusion"
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Congratulations"
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
 "In this scenario, you’ve learned everything about seafaring: how to build "
-"ports and ships and how to send out an expedition. Remember that expeditions "
-"are sometimes the fastest way to reach essential resources – and sometimes "
+"ports and ships and how to send out an expedition. Remember that expeditions"
+" are sometimes the fastest way to reach essential resources – and sometimes "
 "the only one."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
-"But I want to speak a word of warning. Ports are like headquarters: they can "
-"be attacked by a nearby enemy. While your headquarters has soldiers to "
+"But I want to speak a word of warning. Ports are like headquarters: they can"
+" be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
 msgstr ""
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
+#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
@@ -430,3 +421,5 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""

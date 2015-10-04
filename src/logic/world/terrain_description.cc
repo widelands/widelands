@@ -85,7 +85,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw GameDataError("%s: humidity is not in (0, 1).", name_.c_str());
 	}
 	if (temperature_ < 0) {
-		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());
+		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
 
 	 texture_paths_ =

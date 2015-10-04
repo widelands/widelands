@@ -50,9 +50,11 @@ battlearena1 = {
       p(_[[A newly created soldier has no experience and is not very good at fighting. To make him stronger, you can build training sites.]]) ..
       p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strongbeer. In a real game, you should have a good infrastructure before you build it.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[To see evade training in action, build a battle arena.]])
+      listitem_bullet(_[[To see evade training in action, build a battle arena.]]) ..
+      "</p><p font-size=8><br></p>" ..
+      p(_[[While we’re waiting for the battle arena, you’ll probably notice some soldiers walking around. They are automatically exchanged from time to time. I’ll teach you about that later.]])
    ),
-   h = 350,
+   h = 400,
    obj_name = "build_battlearena",
    obj_title = _"Build a battle arena",
    obj_body = rt(
@@ -69,8 +71,8 @@ battlearena2 = {
       h1(_"The Battle Arena Has Been Constructed") ..
       p(_[[Very good. Our battle arena has been finished, and the soldiers are already walking towards it.]]) ..
       -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strongbeer. Most steps additionally require either fish or meat.]] .. " " ..
-		_[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
+      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strongbeer, as well as either fish or meat.]] .. " " ..
+      _[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
@@ -115,7 +117,7 @@ heroes_rookies = {
    body = rt(
       h1(_"Heroes and Rookies") ..
       p(_[[While our soldiers are training, let me tell you what we can do with them.]]) ..
-      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically.]]) ..
+      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically – this is what you saw earlier.]]) ..
       p(_[[The initial setting depends on the type of the building. For the Barbarians, the sentry is the only building that prefers rookies by default. You should change this setting to fit your current needs.]]) ..
       p(_[[When you are expanding into no man’s land, you can make your buildings prefer rookies. When you are planning to attack, send heroes into that region. Conquered buildings always prefer heroes.]])
    )

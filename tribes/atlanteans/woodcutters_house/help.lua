@@ -14,7 +14,7 @@ return {
 	--General Section
 	building_help_general_string("atlanteans", building_description,
 		_"Fell trees in the surrounding area and process them into logs.",
-		_"The woodcutter's house needs trees to fell within the working radius.") ..
+		_"The woodcutter’s house needs trees to fell within the work area.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description, true) ..

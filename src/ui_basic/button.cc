@@ -68,7 +68,7 @@ Button::Button //  for pictorial buttons
 	 const Image* bg_pic,
 	 const Image* fg_pic,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat)
+	 bool const _enabled, bool const flat, const bool keep_image_size)
 	:
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -77,6 +77,7 @@ Button::Button //  for pictorial buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_keep_image_size(keep_image_size),
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
@@ -165,30 +166,51 @@ void Button::draw(RenderTarget & dst)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
-	//  if we got a picture, draw it centered
+	//  If we've got a picture, draw it centered
 	if (m_pic_custom) {
-		const int max_image_w = get_w() - 2 * kButtonImageMargin;
-		const int max_image_h = get_h() - 2 * kButtonImageMargin;
-		double image_scale =
-		   std::min(1.,
-		            std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
-		                     static_cast<double>(max_image_h) / m_pic_custom->height()));
-		int blit_width = image_scale * m_pic_custom->width();
-		int blit_height = image_scale * m_pic_custom->height();
-
-		if (m_enabled) {
-		dst.blitrect_scale(
-		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-		   m_pic_custom,
-		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
-		   1.,
-		   BlendMode::UseAlpha);
+		if (m_keep_image_size) {
+			if (m_enabled) {
+				//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
+				//  is that -1 >> 1 is -1 but -1 / 2 is 0).
+				dst.blit(
+							Point(
+								(get_w() - static_cast<int32_t>(m_pic_custom->width())) >> 1,
+								(get_h() - static_cast<int32_t>(m_pic_custom->height())) >> 1),
+							m_pic_custom);
+			} else {
+				//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
+				//  is that -1 >> 1 is -1 but -1 / 2 is 0).
+				dst.blit_monochrome(
+							Point(
+								(get_w() - static_cast<int32_t>(m_pic_custom->width())) >> 1,
+								(get_h() - static_cast<int32_t>(m_pic_custom->height())) >> 1),
+							m_pic_custom,
+							RGBAColor(255, 255, 255, 127));
+			}
 		} else {
-			dst.blitrect_scale_monochrome(
-			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-			   m_pic_custom,
-			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
-			   RGBAColor(255, 255, 255, 127));
+			const int max_image_w = get_w() - 2 * kButtonImageMargin;
+			const int max_image_h = get_h() - 2 * kButtonImageMargin;
+			double image_scale =
+				std::min(1.,
+							std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
+										static_cast<double>(max_image_h) / m_pic_custom->height()));
+			int blit_width = image_scale * m_pic_custom->width();
+			int blit_height = image_scale * m_pic_custom->height();
+
+			if (m_enabled) {
+				dst.blitrect_scale(
+					Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+					m_pic_custom,
+					Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+					1.,
+					BlendMode::UseAlpha);
+			} else {
+				dst.blitrect_scale_monochrome(
+					Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+					m_pic_custom,
+					Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+					RGBAColor(255, 255, 255, 127));
+			}
 		}
 
 	} else if (m_title.length()) {

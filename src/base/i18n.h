@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include <libintl.h>  // for ngettext.
+#include "third_party/gettext/gettext.h" // For ngettext and pgettext.
 
 #include "base/macros.h"
 #include "config.h"

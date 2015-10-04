@@ -1,34 +1,22 @@
-# Widelands po/sk_SK/worlds/desert.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# MiroslavR <miroslavr256@gmail.com>, 2015
+# Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 02:35+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Slovak <sk@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-07-21 12:51+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:45+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
@@ -228,7 +216,7 @@ msgstr "Kamene 5"
 msgid "Stones 6"
 msgstr "Kamene 6"
 
-#: TRANSLATORS: This track is made of footprints in the snow
+#: TRANSLATORS This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid "Track"
 msgstr "Stopa"
@@ -297,25 +285,25 @@ msgstr "Breza (dospelá)"
 msgid "Birch (Old)"
 msgstr "Breza (stará)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr ""
+msgstr "Cirusovník (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr ""
+msgstr "Cirusovník (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr ""
+msgstr "Cirusovník (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
-msgstr ""
+msgstr "Cirusovník (starý)"
 
 #: ../../world/immovables/trees/deadtree1/init.lua:5
 #: ../../world/immovables/trees/deadtree2/init.lua:5
@@ -346,22 +334,22 @@ msgstr "Smrekovec (dospelý)"
 msgid "Larch (Old)"
 msgstr "Smrekovec (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
 msgstr "Lianovec (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:37
 msgid "Liana Tree (Pole)"
 msgstr "Lianovec (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:61
 msgid "Liana Tree (Mature)"
 msgstr "Lianovec (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:88
 msgid "Liana Tree (Old)"
 msgstr "Lianovec (starý)"
@@ -382,65 +370,65 @@ msgstr "Javor (dospelý)"
 msgid "Maple (Old)"
 msgstr "Javor (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Hubostrom tmavý (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:37
 msgid "Dark Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Hubostrom tmavý (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:61
 msgid "Dark Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Hubostrom tmavý (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:85
 msgid "Dark Mushroom Tree (Old)"
-msgstr ""
+msgstr "Hubostrom tmavý (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Hubostrom zelený (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:37
 msgid "Green Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Hubostrom zelený (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:61
 msgid "Green Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Hubostrom zelený (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:85
 msgid "Green Mushroom Tree (Old)"
-msgstr ""
+msgstr "Hubostrom zelený (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Hubostrom červený (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:37
 msgid "Red Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Hubostrom červený (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:61
 msgid "Red Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Hubostrom červený (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:88
 msgid "Red Mushroom Tree (Old)"
-msgstr ""
+msgstr "Hubostrom červený (starý)"
 
 #: ../../world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -570,65 +558,65 @@ msgstr "Smrek (dospelý)"
 msgid "Spruce (Old)"
 msgstr "Smrek (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
-msgstr ""
+msgstr "Motúzovník (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:37
 msgid "Twine Tree (Pole)"
-msgstr ""
+msgstr "Motúzovník (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:61
 msgid "Twine Tree (Mature)"
-msgstr ""
+msgstr "Motúzovník (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:85
 msgid "Twine Tree (Old)"
-msgstr ""
+msgstr "Motúzovník (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Dáždnikovec zelený (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:37
 msgid "Green Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Dáždnikovec zelený (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:61
 msgid "Green Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Dáždnikovec zelený (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:85
 msgid "Green Umbrella Tree (Old)"
-msgstr ""
+msgstr "Dáždnikovec zelený (starý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Dáždnikovec červený (mladý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:37
 msgid "Red Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Dáždnikovec červený (žrďovina)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:61
 msgid "Red Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Dáždnikovec červený (dospelý)"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: TRANSLATORS This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:88
 msgid "Red Umbrella Tree (Old)"
-msgstr ""
+msgstr "Dáždnikovec červený (starý)"
 
 #: ../../world/init.lua:11
 msgid "Miscellaneous"
@@ -682,11 +670,9 @@ msgstr "Železo"
 msgid "Granite"
 msgstr "Žula"
 
-#: ../../world/resources/init.lua:57
-#: ../../world/terrains/init.lua:284
-#: ../../world/terrains/init.lua:515
-#: ../../world/terrains/init.lua:747
-#: ../../world/terrains/init.lua:977
+#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:292
+#: ../../world/terrains/init.lua:523 ../../world/terrains/init.lua:755
+#: ../../world/terrains/init.lua:985
 msgid "Water"
 msgstr "Voda"
 
@@ -706,123 +692,100 @@ msgstr "Pustatina"
 msgid "Winter"
 msgstr "Zima"
 
-#: ../../world/terrains/init.lua:19
-#: ../../world/terrains/init.lua:767
-#: ../../world/terrains/init.lua:917
-#: ../../world/terrains/init.lua:932
-#: ../../world/terrains/init.lua:947
+#: ../../world/terrains/init.lua:19 ../../world/terrains/init.lua:775
+#: ../../world/terrains/init.lua:925 ../../world/terrains/init.lua:940
+#: ../../world/terrains/init.lua:955
 msgid "Desert"
 msgstr "Púšť"
 
-#: ../../world/terrains/init.lua:33
-#: ../../world/terrains/init.lua:71
-#: ../../world/terrains/init.lua:87
-#: ../../world/terrains/init.lua:102
-#: ../../world/terrains/init.lua:812
+#: ../../world/terrains/init.lua:33 ../../world/terrains/init.lua:79
+#: ../../world/terrains/init.lua:95 ../../world/terrains/init.lua:110
+#: ../../world/terrains/init.lua:820
 msgid "Meadow"
-msgstr ""
+msgstr "Lúka"
 
-#: ../../world/terrains/init.lua:117
-#: ../../world/terrains/init.lua:797
+#: ../../world/terrains/init.lua:125 ../../world/terrains/init.lua:805
 msgid "Steppe"
 msgstr "Step"
 
-#: ../../world/terrains/init.lua:132
+#: ../../world/terrains/init.lua:140
 msgid "Barren Steppe"
 msgstr "Neúrodná step"
 
-#: ../../world/terrains/init.lua:147
-#: ../../world/terrains/init.lua:827
+#: ../../world/terrains/init.lua:155 ../../world/terrains/init.lua:835
 msgid "Mountain Meadow"
 msgstr "Horská lúka"
 
-#: ../../world/terrains/init.lua:162
-#: ../../world/terrains/init.lua:177
-#: ../../world/terrains/init.lua:192
-#: ../../world/terrains/init.lua:207
-#: ../../world/terrains/init.lua:408
-#: ../../world/terrains/init.lua:423
-#: ../../world/terrains/init.lua:438
-#: ../../world/terrains/init.lua:453
-#: ../../world/terrains/init.lua:625
-#: ../../world/terrains/init.lua:640
-#: ../../world/terrains/init.lua:655
-#: ../../world/terrains/init.lua:670
-#: ../../world/terrains/init.lua:857
-#: ../../world/terrains/init.lua:872
-#: ../../world/terrains/init.lua:887
-#: ../../world/terrains/init.lua:902
+#: ../../world/terrains/init.lua:170 ../../world/terrains/init.lua:185
+#: ../../world/terrains/init.lua:200 ../../world/terrains/init.lua:215
+#: ../../world/terrains/init.lua:416 ../../world/terrains/init.lua:431
+#: ../../world/terrains/init.lua:446 ../../world/terrains/init.lua:461
+#: ../../world/terrains/init.lua:633 ../../world/terrains/init.lua:648
+#: ../../world/terrains/init.lua:663 ../../world/terrains/init.lua:678
+#: ../../world/terrains/init.lua:865 ../../world/terrains/init.lua:880
+#: ../../world/terrains/init.lua:895 ../../world/terrains/init.lua:910
 msgid "Mountain"
-msgstr ""
+msgstr "Hora"
 
-#: ../../world/terrains/init.lua:222
+#: ../../world/terrains/init.lua:230
 msgid "Swamp"
 msgstr "Močiar"
 
-#: ../../world/terrains/init.lua:238
-#: ../../world/terrains/init.lua:468
-#: ../../world/terrains/init.lua:700
-#: ../../world/terrains/init.lua:962
+#: ../../world/terrains/init.lua:246 ../../world/terrains/init.lua:476
+#: ../../world/terrains/init.lua:708 ../../world/terrains/init.lua:970
 msgid "Beach"
 msgstr "Pláž"
 
-#: ../../world/terrains/init.lua:253
-#: ../../world/terrains/init.lua:610
+#: ../../world/terrains/init.lua:261 ../../world/terrains/init.lua:618
 msgid "Snow"
 msgstr "Sneh"
 
-#: ../../world/terrains/init.lua:268
+#: ../../world/terrains/init.lua:276
 msgid "Lava"
 msgstr "Láva"
 
-#: ../../world/terrains/init.lua:303
-#: ../../world/terrains/init.lua:318
+#: ../../world/terrains/init.lua:311 ../../world/terrains/init.lua:326
 msgid "Ashes"
 msgstr "Popol"
 
-#: ../../world/terrains/init.lua:333
-#: ../../world/terrains/init.lua:348
-#: ../../world/terrains/init.lua:363
-#: ../../world/terrains/init.lua:378
+#: ../../world/terrains/init.lua:341 ../../world/terrains/init.lua:356
+#: ../../world/terrains/init.lua:371 ../../world/terrains/init.lua:386
 msgid "Hard Ground"
-msgstr ""
+msgstr "Tvrdá zem"
 
-#: ../../world/terrains/init.lua:393
+#: ../../world/terrains/init.lua:401
 msgid "Igneous Rocks"
 msgstr "Vyvreté horniny"
 
-#: ../../world/terrains/init.lua:483
-#: ../../world/terrains/init.lua:499
+#: ../../world/terrains/init.lua:491 ../../world/terrains/init.lua:507
 msgid "Lava Rocks"
-msgstr ""
+msgstr "Lávové kamene"
 
-#: ../../world/terrains/init.lua:535
-#: ../../world/terrains/init.lua:550
-#: ../../world/terrains/init.lua:565
+#: ../../world/terrains/init.lua:543 ../../world/terrains/init.lua:558
+#: ../../world/terrains/init.lua:573
 msgid "Tundra"
 msgstr "Tundra"
 
-#: ../../world/terrains/init.lua:580
+#: ../../world/terrains/init.lua:588
 msgid "Tundra Taiga"
 msgstr "Tundra-tajga"
 
-#: ../../world/terrains/init.lua:595
+#: ../../world/terrains/init.lua:603
 msgid "Taiga"
 msgstr "Tajga"
 
-#: ../../world/terrains/init.lua:685
+#: ../../world/terrains/init.lua:693
 msgid "Ice"
 msgstr "Ľad"
 
-#: ../../world/terrains/init.lua:715
-#: ../../world/terrains/init.lua:731
+#: ../../world/terrains/init.lua:723 ../../world/terrains/init.lua:739
 msgid "Ice Floes"
 msgstr "Ľadové kryhy"
 
-#: ../../world/terrains/init.lua:782
+#: ../../world/terrains/init.lua:790
 msgid "Dry Soil"
 msgstr "Suchá pôda"
 
-#: ../../world/terrains/init.lua:842
+#: ../../world/terrains/init.lua:850
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Vysokohorská lúka"

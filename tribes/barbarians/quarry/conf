@@ -30,7 +30,7 @@ return=skipped
 
 [out_of_resource_notification]
 title=_Out of Rocks
-message=_The stonemason working at this quarry can’t find any rocks in his working radius.
+message=_The stonemason working at this quarry can’t find any rocks in his work area.
 
 [idle]
 pics=idle_??.png  # ???

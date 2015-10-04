@@ -28,7 +28,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/suggested_teams_box.h"
+#include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
 struct GameChatPanel;
@@ -41,12 +41,6 @@ class LuaInterface;
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
  *
- * The return values of run() are:
- *    0  - back was pressed
- *    1  - normal game
- *    2  - scenario game
- *    3  - multi player savegame
- *    4  - multi player scenario savegame <- not yet implemented
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuBase {
 public:
@@ -59,14 +53,16 @@ public:
 
 	void refresh();
 
+protected:
+	void clicked_ok() override;
+	void clicked_back() override;
+
 private:
 	LuaInterface * m_lua;
 
 	void change_map_or_save();
 	void select_map();
 	void select_saved_game();
-	void back_clicked();
-	void start_clicked();
 	void win_condition_clicked();
 	void win_condition_update();
 	void set_scenario_values();

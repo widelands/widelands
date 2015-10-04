@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-25 07:59+0000\n"
-"PO-Revision-Date: 2015-03-25 08:01+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/widelands/language/it/)\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-21 14:59+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr "Barbari"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "Facile. Introduce i barbari"
+msgstr "Facile. Introduce i Barbari"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -153,7 +153,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Dopo aver perso un'importane battaglia contro i barbari che ha portato alla perdita di una grande parte del territorio dell'Impero, Lutius lascia Fremil per cominciare una nuova vita. Ma il suo destino porta la sua nave dentro una pesante tempesta, quasi distrugendola. Solo con molta fortuna riesce a portare a riva la sua nave danneggiata in una spiaggia deserta sconosciuta e salvare il suo popolo. Per ora."
+msgstr "Dopo aver perso un'importane battaglia contro i Barbari che ha portato alla perdita di una grande parte del territorio dell'Impero, Lutius lascia Fremil per cominciare una nuova vita. Ma il suo destino porta la sua nave dentro una pesante tempesta, quasi distrugendola. Solo con molta fortuna riesce a portare a riva la sua nave danneggiata in una spiaggia deserta sconosciuta e salvare il suo popolo. Per ora."
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -205,7 +205,7 @@ msgstr "Economia"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "In questo tutorial imparerai che opzioni offre Widelands per regolare la tua economia. Consigliato ai giocatori con un po' di esperienza."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -604,7 +604,7 @@ msgstr "Alcuni dicono che le impenetrabili terre del lontano nord hanno spaventa
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr "Il nilo"
+msgstr "Il Nilo"
 
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
@@ -614,7 +614,7 @@ msgstr "Il fiume ha sempre fornito cibo e comunicazione. Questa volta otto imper
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr "Triangolo d'oasi"
+msgstr "Il triangolo delle oasi"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -658,7 +658,7 @@ msgstr "La lunga via"
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr "Un altro strano test dagli Dei. Per raggiungere l'altra sponda sembra che ci sia nessun altro modo che occupare la terra dei vostri nemici."
+msgstr "Un'altra strana prova dagli Dei. Per raggiungere l'altra sponda, sembra che non ci sia altro modo che occupare la terra dei vostri nemici."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
@@ -709,12 +709,6 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
 msgstr "Nel luogo in cui sorgono i tre principali vulcani sei splendide isole invitano i coloni ad avviare una nuova vita. I deserti ed una foresta che cresce rapidamente attendono di essere scoperti. Ma solamente diventando una potenza navale la tua tribù potra scoprire abbastanza risorse da competere con i suoi avversari."
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue,"
-" black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
-msgstr "Squadre suggerite: rosso contro verde, (blu, giallo) contro (verde, arancio), (blu, nero) contro (verde, rosso), (blu, nero, giallo) contro (verde, rosso, arancio)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
