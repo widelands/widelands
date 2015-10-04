@@ -807,8 +807,6 @@ void NetHost::run(bool const autorun)
 	game.set_write_syncstream(true);
 #endif
 
-	std::unique_ptr<InteractiveGameBase> igb;
-
 	try {
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
@@ -841,6 +839,7 @@ void NetHost::run(bool const autorun)
 
 			d->game = &game;
 			game.set_game_controller(this);
+			InteractiveGameBase * igb;
 			uint8_t pn = d->settings.playernum + 1;
 
 			if (d->settings.savegame) {
@@ -853,14 +852,16 @@ void NetHost::run(bool const autorun)
 			}
 
 			if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
-				igb.reset(new InteractivePlayer
+				igb =
+					new InteractivePlayer
 						(game, g_options.pull_section("global"),
-						pn, true));
+						pn, true);
 			} else
-				igb.reset(new InteractiveSpectator
-						(game, g_options.pull_section("global"), true));
+				igb =
+					new InteractiveSpectator
+						(game, g_options.pull_section("global"), true);
 			igb->set_chat_provider(d->chat);
-			game.set_ibase(igb.get());
+			game.set_ibase(igb);
 		}
 
 		if (!d->settings.savegame) // new game
@@ -919,8 +920,6 @@ void NetHost::run(bool const autorun)
 		WLApplication::emergency_save(game);
 		clear_computer_players();
 		d->game = nullptr;
-		igb->delete_chat_provider();
-		igb.release();
 
 		while (!d->clients.empty()) {
 			disconnect_client(0, "SERVER_CRASHED");

@@ -90,11 +90,6 @@ void ChatOverlay::set_chat_provider(ChatProvider & chat)
 	m->recompute();
 }
 
-void ChatOverlay::delete_chat_provider() {
-	m->chat_ = nullptr;
-	m->recompute();
-}
-
 /**
  * Check for message expiry.
  */

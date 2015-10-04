@@ -57,7 +57,6 @@ public:
 
 	// Chat messages
 	void set_chat_provider(ChatProvider &);
-	void delete_chat_provider();
 	ChatProvider * get_chat_provider();
 
 	// TODO(sirver): Remove the use of these methods as the strings are no longer configurable.

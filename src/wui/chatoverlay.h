@@ -36,7 +36,6 @@ struct ChatOverlay : public UI::Panel {
 	~ChatOverlay();
 
 	void set_chat_provider(ChatProvider &);
-	void delete_chat_provider();
 	void draw(RenderTarget &) override;
 	void think() override;
 
