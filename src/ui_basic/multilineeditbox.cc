@@ -29,6 +29,8 @@
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 
+// TODO(GunChleoc): Arabic: Fix positioning for Arabic
+
 namespace UI {
 
 static const int32_t ms_scrollbar_w = 24;

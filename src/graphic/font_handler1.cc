@@ -132,6 +132,7 @@ public:
 
 	void reinitialize_fontset() override {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		texture_cache_.get()->flush();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
 	}
 

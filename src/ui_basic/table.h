@@ -240,6 +240,10 @@ public:
 	uint32_t get_lineheight() const {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const {return get_w();}
 
+	/// Adjust the desired size to fit the height needed for the number of entries.
+	/// If entries == 0, the current entries are used.
+	void fit_height(uint32_t entries = 0);
+
 	// Drawing and event handling
 	void draw(RenderTarget &) override;
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;

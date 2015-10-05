@@ -29,12 +29,6 @@ namespace UI {
 // Contains font information for a locale
 struct FontSet {
 
-	// Writing direction of a script
-	enum class Direction {
-		kLeftToRight,
-		kRightToLeft
-	};
-
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
 
 	/// Create the fontset for a locale from configuration file
@@ -54,7 +48,8 @@ struct FontSet {
 	const std::string& condensed_bold() const;
 	const std::string& condensed_italic() const;
 	const std::string& condensed_bold_italic() const;
-	const FontSet::Direction& direction() const;
+	uint16_t size_offset() const;
+	bool is_rtl() const;
 
 private:
 	/// Parses font information for the given 'localename' from Lua files.
@@ -82,7 +77,8 @@ private:
 	std::string condensed_bold_;
 	std::string condensed_italic_;
 	std::string condensed_bold_italic_;
-	FontSet::Direction direction_;
+	uint16_t    size_offset_;
+	bool is_rtl_;
 };
 
 }
