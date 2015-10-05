@@ -22,6 +22,7 @@
 #include <map>
 
 #include "base/utf8.h"
+#include "graphic/font_handler1.h" // We need the fontset for the size offset
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -129,6 +130,7 @@ uint32_t Font::lineskip() const
  */
 Font * Font::get(const std::string & name, int size)
 {
+	size += UI::g_fh1->fontset().size_offset();
 	FontDescr descr;
 	descr.name = name;
 	descr.size = size;

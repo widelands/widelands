@@ -26,6 +26,7 @@
 
 #include "base/log.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "helper.h"
 
@@ -120,6 +121,7 @@ bool TextParser::parse_textblock
 	//Handle user defined line breaks, and save them
 	for (const std::string& temp_words : unwrapped_words) {
 		for (std::string line = temp_words;;) {
+			line = i18n::make_ligatures(line.c_str());
 			std::string::size_type next_break = line.find("<br>");
 
 			// Replace &lt; with <

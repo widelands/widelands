@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
+"POT-Creation-Date: 2015-09-21 19:04+0000\n"
+"PO-Revision-Date: 2015-09-21 19:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -32,85 +32,18 @@ msgid "15 minutes"
 msgstr "15 mionaidean"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:99
+#: Hopping.wmf/scripting/multiplayer_init.lua:98
 msgid "Game Status"
 msgstr "Staid a’ gheama"
 
+#. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:117
-msgid "%s Log"
-msgid_plural "%s Logs"
-msgstr[0] "%i fhiodh"
-msgstr[1] "%i fhiodh"
-msgstr[2] "%i fiodhan"
-msgstr[3] "%i fiodh"
+#: Hopping.wmf/scripting/multiplayer_init.lua:108
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:119
-msgid "%s Plank"
-msgid_plural "%s Planks"
-msgstr[0] "%s mhaide"
-msgstr[1] "%s mhaide"
-msgstr[2] "%s maidean"
-msgstr[3] "%s maide"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:121
-msgid "%s Stone"
-msgid_plural "%s Stones"
-msgstr[0] "%s chlach"
-msgstr[1] "%s chlach"
-msgstr[2] "%s clachan"
-msgstr[3] "%s clach"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:123
-msgid "%s Spidercloth"
-msgid_plural "%s Spidercloths"
-msgstr[0] "%s chlò damhain"
-msgstr[1] "%s chlò damhain"
-msgstr[2] "%s clòthan damhain"
-msgstr[3] "%s clò damhain"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:125
-msgid "%s Corn"
-msgid_plural "%s Corn"
-msgstr[0] "%s choirce"
-msgstr[1] "%s choirce"
-msgstr[2] "%s coircean"
-msgstr[3] "%s coirce"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:127
-msgid "%s Coal"
-msgid_plural "%s Coal"
-msgstr[0] "%s ghual"
-msgstr[1] "%s ghual"
-msgstr[2] "%s gual"
-msgstr[3] "%s gual"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:129
-msgid "%s Iron Ore"
-msgid_plural "%s Iron Ore"
-msgstr[0] "%s chlach-iarainn"
-msgstr[1] "%s chlach-iarainn"
-msgstr[2] "%s clachan-iarainn"
-msgstr[3] "%s clach-iarainn"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:131
-msgid "%s Gold Ore"
-msgid_plural "%s Gold Ore"
-msgstr[0] "%s chlach-òir"
-msgstr[1] "%s chlach-òir"
-msgstr[2] "%s clachan-òir"
-msgstr[3] "%s clach-òir"
-
-#. TRANSLATORS: number + resource name, e.g. '1 stone'
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Na riaghailtean"
@@ -148,7 +81,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "'S e cnag na cùise nach toir a’ chiad eilean dhut ach fiodh is clachan ’s nach fhaigh thu ach machair ’s clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-eaconamaidh air na h-eileanan roimhe fhathast ach chan fhaigh thu buannachd às ach aig an àm a ruigeas tu eilean ùr."
+msgstr "'S e cnag na cùise nach doir a’ chiad eilean dhut ach fiodh is clachan ’s nach fhaigh thu ach machair ’s clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-eaconamaidh air na h-eileanan roimhe fhathast ach chan fhaigh thu buannachd às ach aig an àm a ruigeas tu eilean ùr."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."
