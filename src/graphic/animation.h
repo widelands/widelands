@@ -94,6 +94,7 @@ private:
 */
 class AnimationManager {
 public:
+	~AnimationManager();
 	/**
 	 * Loads an animation, graphics sound and everything.
 	 *
