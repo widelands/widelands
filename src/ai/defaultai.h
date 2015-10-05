@@ -295,7 +295,7 @@ private:
 	// returns count of mines of the same type (output)
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
-	std::map<int32_t, MSiteSizeObserver> msites_per_size;
+	std::map<int32_t, MilitarySiteSizeObserver> msites_per_size;
 	// returns count of militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
@@ -347,7 +347,7 @@ private:
 	uint32_t ai_personality_attack_margin_;
 	int32_t ai_personality_wood_difference_;
 	uint32_t ai_productionsites_ratio_;
-	uint32_t ai_personality_early_msites;
+	uint32_t ai_personality_early_militarysites;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =

@@ -33,7 +33,7 @@
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 
-//there are three arrays to be used by AI
+// there are three arrays to be used by AI
 // their size is defined here
 // (all are of the same size)
 constexpr int kAIDataSize = 6;

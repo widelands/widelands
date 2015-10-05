@@ -273,12 +273,12 @@ struct BuildableField {
 	Widelands::ExtendedBool portspace_nearby_;  // prefer military buildings closer to the portspace
 	int32_t max_buildcap_nearby_;
 	// it is not necessary to check resources (stones, fish...) too frequently as they do not change fast
-	// this store time of last check
+	// this stores time of last check
 	uint32_t last_resources_check_time_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
-	// and for rangers, fichbreeders:
+	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby_;
 
 	BuildableField(const Widelands::FCoords& fc)
@@ -533,11 +533,11 @@ struct MineTypesObserver {
 };
 
 // this is used to count militarysites by their size
-struct MSiteSizeObserver {
+struct MilitarySiteSizeObserver {
 	uint16_t in_construction;
 	uint16_t finished;
 
-	MSiteSizeObserver() : in_construction(0), finished(0) {
+	MilitarySiteSizeObserver() : in_construction(0), finished(0) {
 	}
 };
 
