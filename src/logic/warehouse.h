@@ -183,7 +183,7 @@ public:
 	void incorporate_worker(EditorGameBase&, Worker* worker);
 
 	WareInstance & launch_ware(Game &, WareIndex);
-	void do_launch_ware(Game &, WareInstance &);
+	bool do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
 	void incorporate_ware(EditorGameBase&, WareInstance* ware);
