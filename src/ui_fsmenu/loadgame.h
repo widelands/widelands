@@ -85,12 +85,14 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
-	bool set_has_selection() override;
-
 
 private:
+	/// Updates buttons and text labels and returns whether a table entry is selected.
+	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
+
+	UI::Table<uintptr_t const>    m_table;
 
 	bool                          m_is_replay;
 

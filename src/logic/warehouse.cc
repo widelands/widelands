@@ -788,11 +788,17 @@ bool Warehouse::fetch_from_flag(Game & game)
 {
 	WareIndex const carrierid = descr().tribe().safe_worker_index("carrier");
 
-	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
-		insert_workers(carrierid, 1);
-
-	launch_worker(game, carrierid, Requirements()).start_task_fetchfromflag
-		(game);
+	if (!m_supply->stock_workers(carrierid))
+	{
+		if (can_create_worker(game, carrierid))
+		{
+			create_worker(game, carrierid);
+		}
+	}
+	if (m_supply->stock_workers(carrierid))
+	{
+		launch_worker(game, carrierid, Requirements()).start_task_fetchfromflag(game);
+	}
 
 	return true;
 }
@@ -930,29 +936,37 @@ WareInstance & Warehouse::launch_ware(Game & game, WareIndex const ware_index) {
 	// Create the ware
 	WareInstance & ware = *new WareInstance(ware_index, descr().tribe().get_ware_descr(ware_index));
 	ware.init(game);
-	do_launch_ware(game, ware);
-
-	m_supply->remove_wares(ware_index, 1);
-
+	if (do_launch_ware(game, ware))
+	{
+		m_supply->remove_wares(ware_index, 1);
+	}
 	return ware;
 }
 
 
 /// Get a carrier to actually move this ware out of the warehouse.
-void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
+bool Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 {
 	// Create a carrier
 	WareIndex const carrierid = descr().tribe().worker_index("carrier");
-	const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(carrierid);
 
-	Worker & worker = workerdescr.create(game, owner(), this, m_position);
-
-	// Yup, this is cheating.
+	if (!m_supply->stock_workers(carrierid))
+	{
+		if (can_create_worker(game, carrierid))
+		{
+			create_worker(game, carrierid);
+		}
+	}
 	if (m_supply->stock_workers(carrierid))
-		m_supply->remove_workers(carrierid, 1);
+	{
+		Widelands::Worker & worker = launch_worker(game, carrierid, Requirements());
+		// Setup the carrier
+		worker.start_task_dropoff(game, ware);
+		return true;
+	}
 
-	// Setup the carrier
-	worker.start_task_dropoff(game, ware);
+	//we did not launch the ware...
+	return false;
 }
 
 
