@@ -80,7 +80,8 @@ public:
 			place_immovable(delete_immovable),
 			place_bob(delete_bob),
 			increase_resources(decrease_resources, set_resources),
-			set_port_space(unset_port_space)
+			set_port_space(unset_port_space),
+			set_origin()
 		{}
 		EditorTool & current() const {return *current_pointer;}
 		using ToolVector = std::vector<EditorTool *>;

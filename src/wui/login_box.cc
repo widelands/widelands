@@ -63,7 +63,7 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
 		 200, 20,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
