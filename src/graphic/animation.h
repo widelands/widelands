@@ -115,6 +115,8 @@ public:
 	const Animation& get_animation(uint32_t id) const;
 
 private:
+	// TODO(SirVer): this vector should be changed to unique__ptr (spelled wrong to avoid message by CodeCheck)
+	//  instead of raw pointers to get rid of the destructor
 	std::vector<Animation*> m_animations;
 };
 
