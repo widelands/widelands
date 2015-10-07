@@ -696,13 +696,17 @@ std::string icuchar2string(const UChar& convertme) {
 
 
 bool can_start_line(const UChar& c) {
-	return ((kArabicDiacritics.count(c) < 1)
+	return (!is_diacritic(c)
 			  && (kCannottStartLineJapanese.count(c) < 1)
 			  && !is_punctuation_char(c));
 }
 
 bool can_end_line(const UChar& c) {
 	return (kCannotEndLineJapanese.count(c) < 1);
+}
+
+bool is_diacritic(const UChar& c) {
+	return kArabicDiacritics.count(c) == 1;
 }
 
 } // namespace UI

@@ -69,6 +69,12 @@ private:
 		size_t start;
 	};
 
+	void compute_end_of_line
+		(const std::string & text,
+		 std::string::size_type line_start,
+		 std::string::size_type & line_end,
+		 std::string::size_type & next_line_start);
+
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
 	bool m_draw_caret;

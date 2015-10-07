@@ -23,7 +23,6 @@
 
 #include "graphic/wordwrap.h"
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <unicode/uchar.h>
 #include <unicode/unistr.h>
@@ -107,92 +106,106 @@ uint32_t WordWrap::wrapwidth() const
  */
 void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
 {
+	uint32_t time = SDL_GetTicks();
 	mode_ = mode;
-	m_lines.clear();
-	if (text.empty()) return;
 
-	size_t line_start = 0;
-	size_t line_end = line_start;
+	m_lines.clear();
+
+	std::string::size_type line_start = 0;
+
+	while (line_start <= text.size()) {
+		std::string::size_type next_line_start;
+		std::string::size_type line_end;
+
+		compute_end_of_line(text, line_start, line_end, next_line_start);
+
+		LineData ld;
+		ld.start = line_start;
+		ld.text = text.substr(line_start, line_end - line_start);
+		m_lines.push_back(ld);
+
+		line_start = next_line_start;
+	}
+	log("NOCOM wrapping took %d ticks\n", SDL_GetTicks() - time);
+}
+
+
+
+/**
+ * Compute the position where the line that starts at \p line_start
+ * ends.
+ */
+void WordWrap::compute_end_of_line
+	(const std::string & text,
+	 std::string::size_type line_start,
+	 std::string::size_type & line_end,
+	 std::string::size_type & next_line_start)
+{
+	int32_t minimum_chars = 1; // So we won't get empty lines
 	uint32_t margin = 2 * LINE_MARGIN;
-	int32_t minimum_chars = 5; // So we won't get empty lines
 	assert(m_wrapwidth > margin);
 
-	std::vector<std::string> parts;
-	boost::split(parts, text, boost::is_any_of("\n"));
+	std::string::size_type orig_end = text.find('\n', line_start);
+	if (orig_end == std::string::npos)
+		orig_end = text.size();
 
-	for (const std::string& part: parts) {
-		//log("NOCOM wrapping: *%s*\n", part.c_str());
-		// NOCOM(GunChleoc): This means that ligatures can't be broken apart while editing.
-		std::string text_to_fit = i18n::make_ligatures(part.c_str());
+	if (m_wrapwidth == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= 1) {
+		// Special fast path when wrapping is disabled or
+		// original text line contains at most one character
+		line_end = orig_end;
+		next_line_start = orig_end + 1;
+		return;
+	}
 
-		while (!text_to_fit.empty()) {
-			// Does the line fit as a whole? If so, it's the last line and we're done.
-			uint32_t line_width = UI::g_fh1->render(as_uifont(text_to_fit))->width();
-			if (line_width <= m_wrapwidth - margin) {
-				line_end += text_to_fit.size();
-				LineData ld;
-				ld.start = line_start;
-				ld.text = text_to_fit;
-				m_lines.push_back(ld);
-				line_start = line_end;
-				break;
-			}
-			// Compute the end of the current line
-			std::string line;
-			const icu::UnicodeString unicode_word(text_to_fit.c_str());
-			line_width = 0;
-			int32_t end = -1;
-			icu::UnicodeString unicode_line;
-			// We just do linear search ahead until we hit the max
-			// Operating on single glyphs will keep the texture cache small.
-			while ((line_width < (m_wrapwidth - margin)) && (end < unicode_word.length())) {
-				++end;
-				UChar c = unicode_word.charAt(end);
-				// NOCOM ignore diacritics
-				line_width += text_width(i18n::icuchar2string(c));
-				unicode_line += c;
-			}
-			if (end != unicode_word.length() - 1) {
-				int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
-				if (last_space > minimum_chars) {
-					unicode_line = unicode_word.tempSubString(0, last_space);
-					line = i18n::icustring2string(unicode_line);
-					end = last_space;
-				}
-			}
-			// Make sure that diacritics stay with their base letters, and that
-			// start/end line rules are being followed. Leave an arbitrary minimum of chars.
-			while (end > minimum_chars &&
-					 !(i18n::can_start_line(unicode_line.charAt(end)) &&
-						i18n::can_end_line(unicode_line.charAt(end - 1)))) {
-				--end;
-			}
-			// Now split the string
-			line = i18n::icustring2string(unicode_word.tempSubString(0, end));
-			text_to_fit = i18n::icustring2string(unicode_word.tempSubString(end));
 
-			assert(!line.empty());
-			// We get Unicode 0xFFFF at end of text
-			if (line.empty()) {
-				//log("NOCOM Line empty - remaining = %s\n", text_to_fit.c_str());
-				break;
-			}
+	// Optimism: perhaps the entire line fits?
+	if (text_width(text.substr(line_start, orig_end - line_start))
+		 <= m_wrapwidth) {
+		line_end = orig_end;
+		next_line_start = orig_end + 1;
+		return;
+	}
 
-			// Now add the line
-			line_end += line.size();
-			LineData ld;
-			ld.start = line_start;
-			ld.text = line;
-			m_lines.push_back(ld);
-			line_start = line_end;
+	// Okay, we really do need to wrap.
+	// We just do a linear search ahead until we hit the max.
+	// Operating on single glyphs will keep the texture cache small, and we won't need to call make_ligatures.
+
+	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str());
+	std::string line;
+	uint32_t line_width = 0;
+	int32_t end = -1;
+	icu::UnicodeString unicode_line;
+
+	while ((line_width < (m_wrapwidth - margin)) && (end < unicode_word.length())) {
+		++end;
+		UChar c = unicode_word.charAt(end);
+		// Diacritics do not add to the line width
+		if (!i18n::is_diacritic(c)) {
+			line_width += text_width(i18n::icuchar2string(c));
+		}
+		unicode_line += c;
+	}
+	// Find last space
+	if (end != unicode_word.length() - 1) {
+		int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
+		if (last_space > minimum_chars) {
+			unicode_line = unicode_word.tempSubString(0, last_space);
+			line = i18n::icustring2string(unicode_line);
+			end = last_space;
 		}
 	}
-	//log("NOCOM lines: %d\n",m_lines.size());
-	/*
-	for (LineData ld: m_lines) {
-		log("NOCOM line: %d - *%s*\n",ld.start, ld.text.c_str());
+
+	// Make sure that diacritics stay with their base letters, and that
+	// start/end line rules are being followed.
+	while (end > minimum_chars &&
+			 !(i18n::can_start_line(unicode_line.charAt(end)) &&
+				i18n::can_end_line(unicode_line.charAt(end - 1)))) {
+		--end;
 	}
-	*/
+	assert(end > 0);
+
+	next_line_start = line_end =
+			(i18n::icustring2string(unicode_word.tempSubString(0, end)).size() + line_start);
 }
 
 
@@ -269,12 +282,12 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
+	// NOCOM there is a line height problem with empty lines.
 	if (m_lines.empty()) return;
 
 	uint32_t caretline, caretpos;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
-	//log("NOCOM caret: %d, line: %d, pos: %d\n",caret, caretline, caretpos);
 
 	if ((align & Align_Vertical) != Align_Top) {
 		uint32_t h = height();

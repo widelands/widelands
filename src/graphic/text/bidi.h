@@ -38,6 +38,7 @@ namespace i18n {
 	std::string icuchar2string(const UChar& convertme);
 	bool can_start_line(const UChar& c);
 	bool can_end_line(const UChar& c);
+	bool is_diacritic(const UChar& c);
 
 } // namespace UI
 
