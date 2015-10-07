@@ -49,6 +49,11 @@ std::string as_editorfont(const std::string & txt) {
 uint32_t text_width(const std::string text) {
 	return UI::g_fh1->render(as_editorfont(text))->width();
 }
+
+uint32_t text_height(const std::string text) {
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text))->height();
+}
+
 } // namespace
 
 namespace UI {
@@ -234,7 +239,7 @@ uint32_t WordWrap::height() const
 {
 	uint16_t fontheight = 0;
 	if (!m_lines.empty()) {
-		fontheight = UI::g_fh1->render(as_uifont(m_lines[0].text))->height();
+		fontheight = text_height(m_lines[0].text);
 	}
 
 	return fontheight * (m_lines.size()) + 2 * LINE_MARGIN;
@@ -282,7 +287,6 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
-	// NOCOM there is a line height problem with empty lines.
 	if (m_lines.empty()) return;
 
 	uint32_t caretline, caretpos;
@@ -302,7 +306,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 	Align alignment = mirror_alignment(align);
 
 	// Since this will eventually be used in edit boxes only, we always have standard font size here.
-	uint16_t fontheight = UI::g_fh1->render(as_uifont(m_lines[0].text))->height();
+	uint16_t fontheight = text_height(m_lines[0].text);
 	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
@@ -318,7 +322,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		const Image* entry_text_im = UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
 																		  as_uifont(m_lines[line].text) :
 																		  as_editorfont(m_lines[line].text));
-		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 
 		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
@@ -328,7 +332,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			const Image* caret_image = g_gr->images().get("pics/caret.png");
 			Point caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
-			caretpt.y = point.y + (entry_text_im->height() - caret_image->height()) / 2;
+			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 			dst.blit(caretpt, caret_image);
 		}
 	}
