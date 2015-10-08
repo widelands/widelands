@@ -39,7 +39,7 @@
 
 class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
 public:
-	// TODO(GunChleoc): Arabic Buttons need more height for Arabic
+	// TODO(GunChleoc): Arabic: Buttons need more height for Arabic
 	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
 		: UI::WLMessageBox(&parent,
 								 /** TRANSLATORS: Window label when "Exit game" has been pressed */

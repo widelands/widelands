@@ -30,7 +30,7 @@
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
-// NOCOM Fix positioning for Arabic
+// TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
 

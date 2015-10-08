@@ -79,7 +79,7 @@ EditorMainMenu::EditorMainMenu
 	button_exit_editor_
 		(&box_, "exit",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Exit Editor"))
 {
 	box_.add(&button_new_map_, UI::Box::AlignCenter);

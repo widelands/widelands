@@ -28,7 +28,6 @@
 #include <unicode/unistr.h>
 
 #include "base/log.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -203,8 +202,8 @@ void WordWrap::compute_end_of_line
 	// Make sure that diacritics stay with their base letters, and that
 	// start/end line rules are being followed.
 	while (end > minimum_chars &&
-			 !(i18n::can_start_line(unicode_line.charAt(end)) &&
-				i18n::can_end_line(unicode_line.charAt(end - 1)))) {
+			 (i18n::cannot_start_line(unicode_line.charAt(end)) ||
+			  i18n::cannot_end_line(unicode_line.charAt(end - 1)))) {
 		--end;
 	}
 	assert(end > 0);

@@ -219,7 +219,8 @@ public:
 
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
-	bool has_tag(const std::string & s) const {return m_tags.count(s);}
+	void clear_tags() {m_tags.clear();}
+	bool has_tag(const std::string& s) const {return m_tags.count(s);}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {return m_suggested_teams;}
 
@@ -386,9 +387,9 @@ public:
 	void set_origin(Coords);
 
 	/// Port space specific functions
-	bool is_port_space(const Coords& c);
+	bool is_port_space(const Coords& c) const;
 	void set_port_space(Coords c, bool allowed);
-	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
+	const PortSpacesSet& get_port_spaces() const {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 	bool allows_seafaring();
 

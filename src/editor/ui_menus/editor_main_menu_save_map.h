@@ -20,46 +20,35 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 
-#include "io/filesystem/filesystem.h"
-#include "ui_basic/window.h"
+#include <string>
 
-struct EditorInteractive;
-namespace UI {
-struct Button;
-struct EditBox;
-template <typename T> struct Listselect;
-struct MultilineTextarea;
-struct Textarea;
-}
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/editor_main_menu_load_or_save_map.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
 
 /**
  * Choose a filename and save your brand new created map
 */
-struct MainMenuSaveMap : public UI::Window {
-	MainMenuSaveMap(EditorInteractive &);
+struct MainMenuSaveMap : public MainMenuLoadOrSaveMap {
+	MainMenuSaveMap(EditorInteractive& parent);
 
 private:
 	EditorInteractive & eia();
 	void clicked_ok();
 	void clicked_make_directory();
-	void        clicked_item(uint32_t);
-	void double_clicked_item(uint32_t);
+	void clicked_edit_options();
+	void clicked_item();
+	void double_clicked_item();
 	void edit_box_changed();
 
-	void fill_list();
 	bool save_map(std::string, bool);
 
-	UI::EditBox * m_editbox;
-	UI::MultilineTextarea * m_name;
-	UI::Textarea * m_author, * m_size, * m_nrplayers;
-	UI::MultilineTextarea * m_descr;
-	UI::Listselect<const char *> * m_ls;
-	UI::Button * m_ok_btn;
+	UI::Button make_directory_, edit_options_;
 
-	std::string   m_basedir;
-	std::string   m_curdir;
-	std::string   m_parentdir;
-	FilenameSet m_mapfiles;
+	UI::Textarea editbox_label_;
+	UI::EditBox* editbox_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
