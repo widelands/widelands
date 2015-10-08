@@ -161,7 +161,6 @@ void WordWrap::compute_end_of_line
 		return;
 	}
 
-
 	// Optimism: perhaps the entire line fits?
 	if (text_width(text.substr(line_start, orig_end - line_start))
 		 <= m_wrapwidth) {
@@ -175,7 +174,6 @@ void WordWrap::compute_end_of_line
 	// Operating on single glyphs will keep the texture cache small, and we won't need to call make_ligatures.
 
 	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str());
-	std::string line;
 	uint32_t line_width = 0;
 	int32_t end = -1;
 	icu::UnicodeString unicode_line;
@@ -189,14 +187,11 @@ void WordWrap::compute_end_of_line
 		}
 		unicode_line += c;
 	}
+
 	// Find last space
-	if (end != unicode_word.length() - 1) {
-		int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
-		if (last_space > minimum_chars) {
-			unicode_line = unicode_word.tempSubString(0, last_space);
-			line = i18n::icustring2string(unicode_line);
-			end = last_space;
-		}
+	int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
+	if (last_space > minimum_chars) {
+		end = last_space;
 	}
 
 	// Make sure that diacritics stay with their base letters, and that
