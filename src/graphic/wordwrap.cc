@@ -222,8 +222,6 @@ void WordWrap::compute_end_of_line
 
 	// The line didn't fit.
 	// We just do a linear search ahead until we hit the max.
-	// Operating on single glyphs will keep the texture cache small, and we won't need to call make_ligatures.
-
 	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str());
 	uint32_t line_width = 0;
 	int32_t end = -1;
