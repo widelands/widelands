@@ -34,21 +34,25 @@
 #include "graphic/text/bidi.h"
 
 namespace {
-
-std::string as_editorfont(const std::string & txt) {
+// NOCOM call with font size etc. from text style.
+std::string as_editorfont(const std::string & txt,
+								  int ptsize = UI_FONT_SIZE_SMALL,
+								  const RGBColor& clr = UI_FONT_CLR_FG) {
 	// UI Text is always bold due to historic reasons
 	static boost::format
 			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % UI_FONT_SIZE_SMALL;
-	f % UI_FONT_CLR_FG.hex_value();
+	f % ptsize;
+	f % clr.hex_value();
 	f % richtext_escape(txt);
 	return f.str();
 }
 
+// This is inefficient; only call when we need the exact width.
 uint32_t text_width(const std::string text) {
 	return UI::g_fh1->render(as_editorfont(text))->width();
 }
 
+// This is inefficient; only call when we need the exact height.
 uint32_t text_height(const std::string text) {
 	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text))->height();
 }
@@ -146,6 +150,8 @@ void WordWrap::compute_end_of_line
 	 std::string::size_type & next_line_start)
 {
 	int32_t minimum_chars = 1; // So we won't get empty lines
+	// NOCOM we are getting some overlap, because calc_width_for_wrapping is not exact.
+	// NOCOM make margin wider?
 	uint32_t margin = 2 * LINE_MARGIN;
 	assert(m_wrapwidth > margin);
 
@@ -162,14 +168,61 @@ void WordWrap::compute_end_of_line
 	}
 
 	// Optimism: perhaps the entire line fits?
-	if (text_width(text.substr(line_start, orig_end - line_start))
-		 <= m_wrapwidth) {
+	if (m_style.calc_width_for_wrapping(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
+		 <= m_wrapwidth - margin) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
 	}
 
-	// Okay, we really do need to wrap.
+	// Okay, we really do need to wrap; get a first rough estimate using binary search
+	// Invariant: [line_start, end_lower) fits,
+	// but everything strictly longer than [line_start, end_upper) does not fit
+	// We force the lower bound to allow at least one character,
+	// otherwise the word wrap might get into an infinite loop.
+	std::string::size_type end_upper = orig_end - 1;
+	std::string::size_type end_lower = line_start + 1;
+
+	while (end_upper - end_lower > 4) {
+		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
+
+		if (m_style.calc_width_for_wrapping(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
+			 <= m_wrapwidth - margin) {
+			end_lower = mid;
+		} else {
+			end_upper = mid - 1;
+		}
+	}
+
+	// Narrow it down to a word break
+	// Invariant: space points to a space character such that [line_start, space) fits
+	std::string::size_type space = end_lower;
+
+	while (space > line_start && text[space] != ' ')
+		--space;
+
+	for (;;) {
+		std::string::size_type nextspace = text.find(' ', space + 1);
+		if (nextspace > end_upper)
+			break; // we already know that this cannot possibly fit
+
+		// check whether the next word still fits
+		if (m_style.calc_width_for_wrapping(
+				 i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()))
+			 > m_wrapwidth - margin)
+			break;
+
+		space = nextspace;
+	}
+
+	if (space > line_start) {
+		line_end = space;
+		next_line_start = space + 1;
+		return;
+	}
+
+
+	// The line didn't fit.
 	// We just do a linear search ahead until we hit the max.
 	// Operating on single glyphs will keep the texture cache small, and we won't need to call make_ligatures.
 
@@ -183,7 +236,7 @@ void WordWrap::compute_end_of_line
 		UChar c = unicode_word.charAt(end);
 		// Diacritics do not add to the line width
 		if (!i18n::is_diacritic(c)) {
-			line_width += text_width(i18n::icuchar2string(c));
+			line_width += m_style.calc_width_for_wrapping(c);
 		}
 		unicode_line += c;
 	}

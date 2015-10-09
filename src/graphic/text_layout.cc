@@ -102,13 +102,37 @@ void TextStyle::setup() const
 }
 
 /**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const UChar c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const std::string & text) const
+{
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str());
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += calc_width_for_wrapping(c);
+		}
+	}
+	return result;
+}
+
+/**
  * Compute the bare width (without caret padding) of the given string.
  */
 uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	setup();
-
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
 }
