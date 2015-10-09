@@ -113,9 +113,7 @@ uint32_t WordWrap::wrapwidth() const
  */
 void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
 {
-	uint32_t time = SDL_GetTicks();
 	mode_ = mode;
-
 	m_lines.clear();
 
 	std::string::size_type line_start = 0;
@@ -133,9 +131,7 @@ void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
 
 		line_start = next_line_start;
 	}
-	log("NOCOM wrapping took %d ticks\n", SDL_GetTicks() - time);
 }
-
 
 
 /**
@@ -149,9 +145,8 @@ void WordWrap::compute_end_of_line
 	 std::string::size_type & next_line_start)
 {
 	int32_t minimum_chars = 1; // So we won't get empty lines
-	// NOCOM we are getting some overlap, because calc_width_for_wrapping is not exact.
-	// NOCOM make margin wider?
-	uint32_t margin = 2 * LINE_MARGIN;
+	// Keep lines from getting too wide, because calc_width_for_wrapping is not exact.
+	uint32_t margin = m_style.calc_width_for_wrapping(0x2003); // Em space
 	assert(m_wrapwidth > margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
@@ -165,6 +160,7 @@ void WordWrap::compute_end_of_line
 		next_line_start = orig_end + 1;
 		return;
 	}
+
 
 	// Optimism: perhaps the entire line fits?
 	if (m_style.calc_width_for_wrapping(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
@@ -347,11 +343,11 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		else
 			where.y -= h;
 	}
+
 	++where.y;
 
 	Align alignment = mirror_alignment(align);
 
-	// Since this will eventually be used in edit boxes only, we always have standard font size here.
 	uint16_t fontheight = text_height(m_lines[0].text, m_style.font->size());
 	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
@@ -377,6 +373,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
 			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
+			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, m_style.font->size());
 
 			const Image* caret_image = g_gr->images().get("pics/caret.png");
