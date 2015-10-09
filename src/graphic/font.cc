@@ -109,7 +109,7 @@ uint32_t Font::height() const
 }
 
 /**
- * \return the maximum height of glyphs of this font. NOCOM
+ * \return the maximum height of glyphs of this font.
  */
 uint32_t Font::size() const
 {
