@@ -50,14 +50,12 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 			 _("WARNING: Password will be shown and saved readable!"),
 			 UI::Align_Left);
 
-	cb_register = new UI::Checkbox(this, Point(margin, 110));
-	ta_register =
-		new UI::Textarea(this, 40, 110, _("Log in to a registered account"));
+	cb_register = new UI::Checkbox(this, Point(margin, 110),
+											 nullptr, _("Log in to a registered account"));
 
-	cb_auto_log = new UI::Checkbox(this, Point(margin, 135));
-	ta_auto_log = new UI::MultilineTextarea
-		(this, 40, 135, get_inner_w() - cb_auto_log->get_w() - margin, 35,
-		 _("Automatically use this login information from now on."));
+	// NOCOM label was multilinetextarea
+	cb_auto_log = new UI::Checkbox(this, Point(margin, 135),
+											 nullptr, _("Automatically use this login information from now on."));
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",

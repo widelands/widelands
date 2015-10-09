@@ -19,8 +19,12 @@
 
 #include "ui_basic/checkbox.h"
 
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
+
+constexpr int kPadding = 4;
 
 namespace UI {
 /**
@@ -32,22 +36,33 @@ Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
 	 const Image* pic,
+	 const std::string& label_text,
 	 const std::string &       tooltip_text)
 	:
-	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
-	m_flags(Is_Enabled)
+	Panel  (parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+	m_flags(Is_Enabled),
+	labeltext_(label_text)
 {
-	if (pic) {
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
-		set_desired_size(w, h);
-		set_size(w, h);
+	int w, h = 0;
+	if (!labeltext_.empty()) {
+		const Image* rendered_text = UI::g_fh1->render(as_uifont(labeltext_));
+		w = rendered_text->width() + kPadding;
+		h = rendered_text->height();
+	}
 
+	if (pic) {
 		set_flags(Has_Custom_Picture, true);
 		m_pic_graphics = pic;
-	} else
+		w += m_pic_graphics->width();
+	} else {
 		m_pic_graphics =
 			g_gr->images().get("pics/checkbox_light.png");
+		w += m_pic_graphics->width() / 2;
+	}
+
+	h = std::max(m_pic_graphics->height(), h);
+	set_desired_size(w, h);
+	set_size(w, h);
 }
 
 
@@ -99,6 +114,7 @@ void Statebox::set_state(bool const on) {
 */
 void Statebox::draw(RenderTarget & dst)
 {
+	// NOCOM Stateboxes with custom pictures don't have text - create 2 constructors.
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
 		const uint16_t w = m_pic_graphics->width();
@@ -114,18 +130,34 @@ void Statebox::draw(RenderTarget & dst)
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 		}
 	} else {
-		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");
-		static_assert(0 <= STATEBOX_HEIGHT, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		Point image_anchor(0, 0);
+		Point text_anchor(kStateboxSize + kPadding, 0);
+
+		if (!labeltext_.empty()) {
+			const Image* rendered_text = UI::g_fh1->render(as_uifont(labeltext_));
+			if (UI::g_fh1->fontset().is_rtl()) {
+				text_anchor.x = 0;
+				image_anchor.x = rendered_text->width() + kPadding;
+				image_anchor.y = (get_h() - kStateboxSize) / 2;
+			}
+			dst.blit(text_anchor, rendered_text, BlendMode::UseAlpha, UI::Align::Align_Left);
+		}
+
 		dst.blitrect
-			(Point(0, 0),
+			(image_anchor,
 			 m_pic_graphics,
 			 Rect
-			 	(Point(m_flags & Is_Checked ? STATEBOX_WIDTH : 0, 0),
-			 	 STATEBOX_WIDTH, STATEBOX_HEIGHT));
+				(Point(m_flags & Is_Checked ? kStateboxSize : 0, 0),
+				 kStateboxSize, kStateboxSize));
 
 		if (m_flags & Is_Highlighted)
 			dst.draw_rect
-				(Rect(Point(0, 0), STATEBOX_WIDTH + 1, STATEBOX_HEIGHT + 1), RGBColor(100, 100,  80));
+				(Rect(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100,  80));
+		// NOCOM for testing, remove when done.
+		dst.draw_rect
+			(Rect(Point(0,0), get_w(), get_h()), RGBColor(255, 100,  80));
 	}
 }
 

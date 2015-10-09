@@ -95,7 +95,7 @@ m_click_recursion_protect(false)
 		                     &g_gr->animations()
 		                         .get_animation(descr.main_animation())
 		                         .representative_image_from_disk(),
-		                     critter_descr ? critter_descr->descname() : std::string());
+									"", critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));

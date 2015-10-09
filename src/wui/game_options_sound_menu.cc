@@ -27,25 +27,17 @@ GameOptionsSoundMenu::GameOptionsSoundMenu
 :
 UI::UniqueWindow
 	(&gb, "sound_options_menu", &registry, 160, 160, _("Sound Options")),
-ingame_music(this, Point(hmargin(), vmargin())),
-ingame_music_label
-	(this,
-	 hmargin() + STATEBOX_WIDTH + hspacing(), vmargin(),
-	 _("Enable Music")),
-ingame_sound(this, Point(hmargin(), vmargin() + STATEBOX_HEIGHT + vspacing())),
-ingame_sound_label
-	(this,
-	 hmargin() + STATEBOX_WIDTH  + hspacing(),
-	 vmargin() + STATEBOX_HEIGHT + vspacing(),
-	 _("Enable Sound Effects")),
+ingame_music(this, Point(hmargin(), vmargin()), nullptr, _("Enable Music")),
+ingame_sound(this, Point(hmargin(), vmargin() + kStateboxSize + vspacing()),
+				 nullptr, _("Enable Sound Effects")),
 ingame_music_volume_label
 	(this,
-	 hmargin(), vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing(),
+	 hmargin(), vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing(),
 	 _("Music Volume")),
 ingame_music_volume
 	(this,
 	 hmargin(),
-	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
+	 vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing()
 	 + 1 * vspacing() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),
@@ -53,13 +45,13 @@ ingame_music_volume
 ingame_sound_volume_label
 	(this,
 	 hmargin(),
-	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
+	 vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing()
 	 + 2 * vspacing() + slideh() + ingame_music_volume_label.get_h(),
 	 _("Sound Effects Volume")),
 ingame_sound_volume
 	(this,
 	 hmargin(),
-	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
+	 vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing()
 	 + 3 * vspacing() + slideh()
 	 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
@@ -92,8 +84,8 @@ ingame_sound_volume
 		(boost::bind(&GameOptionsSoundMenu::sound_volume_changed, this, _1));
 
 	uint32_t boxes_width =
-		STATEBOX_WIDTH + hspacing() +
-		std::max(ingame_music_label.get_w(), ingame_sound_label.get_w());
+		kStateboxSize + hspacing() +
+		std::max(ingame_music.get_w(), ingame_sound.get_w());
 	uint32_t labels_width = std::max
 		(ingame_music_volume_label.get_w(), ingame_sound_volume_label.get_w());
 
@@ -101,7 +93,7 @@ ingame_sound_volume
 		(std::max
 		 	(static_cast<uint32_t>(get_inner_w()),
 		 	 2 * hmargin() + std::max(boxes_width, labels_width)),
-		 2 * vmargin() + 2 * (STATEBOX_HEIGHT + vspacing())
+		 2 * vmargin() + 2 * (kStateboxSize + vspacing())
 		 + vbigspacing() + 3 * vspacing() + 2 * slideh()
 		 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h());
 

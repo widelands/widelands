@@ -25,8 +25,7 @@
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
 
-#define STATEBOX_WIDTH 20
-#define STATEBOX_HEIGHT 20
+constexpr int kStateboxSize = 20;
 
 namespace UI {
 
@@ -39,6 +38,7 @@ struct Statebox : public Panel {
 		(Panel * parent,
 		 Point,
 		 const Image* pic                  = nullptr,
+		 const std::string& label_text = std::string(),
 		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
@@ -81,6 +81,7 @@ private:
 			m_flags |= flags;
 	}
 	const Image* m_pic_graphics;
+	const std::string labeltext_;
 };
 
 
@@ -95,8 +96,9 @@ struct Checkbox : public Statebox {
 		(Panel             * const parent,
 		 Point               const p,
 		 const Image* pic        = nullptr,
-		 const std::string &       tooltip_text = std::string())
-		: Statebox(parent, p, pic, tooltip_text)
+		 const std::string&       label_text = std::string(),
+		 const std::string &      tooltip_text = std::string())
+		: Statebox(parent, p, pic, label_text, tooltip_text)
 	{}
 
 private:
