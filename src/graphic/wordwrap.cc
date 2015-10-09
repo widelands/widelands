@@ -359,7 +359,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		Point point(where.x, where.y);
 
 		if (alignment & Align_Right) {
-			point.x += m_wrapwidth;
+			point.x += m_wrapwidth - LINE_MARGIN;
 		} else if (alignment & Align_HCenter) {
 			point.x += m_wrapwidth / 2;
 		}

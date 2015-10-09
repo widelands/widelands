@@ -117,7 +117,8 @@ void MultilineTextarea::recompute()
 {
 	uint32_t height;
 
-	// Rewrap the text if there is a scrollbar. We need to do this for text that is not left aligned.
+	// We wrap the text twice. We need to do this to account for the presence/absence of the scollbar.
+	bool scroolbar_was_enabled = m_scrollbar.is_enabled();
 	for (int i = 0; i < 2; ++i) {
 		if (m_text.compare(0, 3, "<rt")) {
 			m->isrichtext = false;
@@ -141,8 +142,8 @@ void MultilineTextarea::recompute()
 		if (setbottom)
 			m_scrollbar.set_scrollpos(height - get_h());
 
-		if (!m_scrollbar.is_enabled()) {
-			break;
+		if (m_scrollbar.is_enabled() == scroolbar_was_enabled) {
+			break; // No need to wrap twice.
 		}
 	}
 
