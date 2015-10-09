@@ -34,7 +34,7 @@
 #include "graphic/text/bidi.h"
 
 namespace {
-std::string as_editorfont(const std::string & txt,
+std::string as_editorfont(const std::string& text,
 								  int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG) {
 	// UI Text is always bold due to historic reasons
@@ -42,18 +42,19 @@ std::string as_editorfont(const std::string & txt,
 			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 	f % ptsize;
 	f % clr.hex_value();
-	f % richtext_escape(txt);
+	f % richtext_escape(text);
 	return f.str();
 }
 
 // This is inefficient; only call when we need the exact width.
-uint32_t text_width(const std::string text, int ptsize) {
+uint32_t text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
 }
 
 // This is inefficient; only call when we need the exact height.
-uint32_t text_height(const std::string text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text, ptsize - UI::g_fh1->fontset().size_offset()))->height();
+uint32_t text_height(const std::string& text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
+														ptsize - UI::g_fh1->fontset().size_offset()))->height();
 }
 
 } // namespace
@@ -163,7 +164,8 @@ void WordWrap::compute_end_of_line
 
 
 	// Optimism: perhaps the entire line fits?
-	if (m_style.calc_width_for_wrapping(i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
+	if (m_style.calc_width_for_wrapping(
+			 i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
 		 <= m_wrapwidth - margin) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
@@ -181,7 +183,8 @@ void WordWrap::compute_end_of_line
 	while (end_upper - end_lower > 4) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_width_for_wrapping(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
+		if (m_style.calc_width_for_wrapping(
+				 i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
 			 <= m_wrapwidth - margin) {
 			end_lower = mid;
 		} else {
@@ -361,13 +364,14 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			point.x += m_wrapwidth / 2;
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
-																		  as_uifont(m_lines[line].text,
-																						m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-																						m_style.fg) :
-																		  as_editorfont(m_lines[line].text,
-																							 m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-																							 m_style.fg));
+		const Image* entry_text_im =
+				UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
+											as_uifont(m_lines[line].text,
+														 m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+														 m_style.fg) :
+											as_editorfont(m_lines[line].text,
+															  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+															  m_style.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 

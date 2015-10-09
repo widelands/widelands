@@ -439,7 +439,6 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
 	return true;
 }
 
-
 /**
  * Grab the focus and redraw.
  */

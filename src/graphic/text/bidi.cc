@@ -762,7 +762,6 @@ bool cannot_start_line(const UChar& c) {
 
 bool cannot_end_line(const UChar& c) {
 	return kCannotEndLineJapanese.count(c) == 1;
-
 }
 
 bool is_diacritic(const UChar& c) {

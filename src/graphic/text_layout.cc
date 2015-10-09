@@ -104,7 +104,7 @@ void TextStyle::setup() const
 /**
  * Get a width estimate for text wrapping.
  */
-uint32_t TextStyle::calc_width_for_wrapping(const UChar c) const {
+uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
 	int result = 0;
 	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
 	return result;
@@ -133,6 +133,7 @@ uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	setup();
+
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
 }
