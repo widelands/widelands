@@ -22,7 +22,6 @@
 #include <map>
 #include <string>
 
-#include <unicode/uchar.h>
 #include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
@@ -31,6 +30,139 @@
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
 // TODO(GunChleoc): Arabic: Turn this into a proper class
+
+// http://www.w3.org/TR/jlreq/#characters_not_starting_a_line
+const std::set<UChar> kCannottStartLineJapanese = {
+	{0x2019}, // RIGHT SINGLE QUOTATION MARK
+	{0x201D}, // RIGHT DOUBLE QUOTATION MARK
+	{0x0029}, // RIGHT PARENTHESIS
+	{0x3015}, // RIGHT TORTOISE SHELL BRACKET
+	{0x005D}, // RIGHT SQUARE BRACKET
+	{0x007D}, // RIGHT CURLY BRACKET
+	{0x3009}, // RIGHT ANGLE BRACKET
+	{0x300B}, // RIGHT DOUBLE ANGLE BRACKET
+	{0x300D}, // RIGHT CORNER BRACKET
+	{0x300F}, // RIGHT WHITE CORNER BRACKET
+	{0x3011}, // RIGHT BLACK LENTICULAR BRACKET
+	{0x2986}, // RIGHT WHITE PARENTHESIS
+	{0x3019}, // RIGHT WHITE TORTOISE SHELL BRACKET
+	{0x3017}, // RIGHT WHITE LENTICULAR BRACKET
+	{0xFF09}, // Fullwidth Right Parenthesis
+	{0x00BB}, // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+	{0x301F}, // LOW DOUBLE PRIME QUOTATION MARK
+	{0x2010}, // HYPHEN
+	{0x301C}, // WAVE DASH
+	{0x30A0}, // KATAKANA-HIRAGANA DOUBLE HYPHEN
+	{0x2013}, // EN DASH
+	{0x0021}, // EXCLAMATION MARK
+	{0x003F}, // QUESTION MARK
+	{0x203C}, // DOUBLE EXCLAMATION MARK
+	{0x2047}, // DOUBLE QUESTION MARK
+	{0x2048}, // QUESTION EXCLAMATION MARK
+	{0x2049}, // EXCLAMATION QUESTION MARK
+	{0x30FB}, // KATAKANA MIDDLE DOT
+	{0x003A}, // COLON
+	{0x003B}, // SEMICOLON
+	{0x3002}, // IDEOGRAPHIC FULL STOP
+	{0x002E}, // FULL STOP
+	{0x3001}, // IDEOGRAPHIC COMMA
+	{0x002C}, // COMMA
+	{0x30FD}, // KATAKANA ITERATION MARK
+	{0x30FE}, // KATAKANA VOICED ITERATION MARK
+	{0x309D}, // HIRAGANA ITERATION MARK
+	{0x309E}, // HIRAGANA VOICED ITERATION MARK
+	{0x3005}, // IDEOGRAPHIC ITERATION MARK
+	{0x303B}, // VERTICAL IDEOGRAPHIC ITERATION MARK
+	{0x30FC}, // KATAKANA-HIRAGANA PROLONGED SOUND MARK
+	{0x3041}, // HIRAGANA LETTER SMALL A
+	{0x3043}, // HIRAGANA LETTER SMALL I
+	{0x3045}, // HIRAGANA LETTER SMALL U
+	{0x3047}, // HIRAGANA LETTER SMALL E
+	{0x3049}, // HIRAGANA LETTER SMALL O
+	{0x30A1}, // KATAKANA LETTER SMALL A
+	{0x30A3}, // KATAKANA LETTER SMALL I
+	{0x30A5}, // KATAKANA LETTER SMALL U
+	{0x30A7}, // KATAKANA LETTER SMALL E
+	{0x30A9}, // KATAKANA LETTER SMALL O
+	{0x3063}, // HIRAGANA LETTER SMALL TU
+	{0x3083}, // HIRAGANA LETTER SMALL YA
+	{0x3085}, // HIRAGANA LETTER SMALL YU
+	{0x3087}, // HIRAGANA LETTER SMALL YO
+	{0x308E}, // HIRAGANA LETTER SMALL WA
+	{0x3095}, // HIRAGANA LETTER SMALL KA
+	{0x3096}, // HIRAGANA LETTER SMALL KE
+	{0x30C3}, // KATAKANA LETTER SMALL TU
+	{0x30E3}, // KATAKANA LETTER SMALL YA
+	{0x30E5}, // KATAKANA LETTER SMALL YU
+	{0x30E7}, // KATAKANA LETTER SMALL YO
+	{0x30EE}, // KATAKANA LETTER SMALL WA
+	{0x30F5}, // KATAKANA LETTER SMALL KA
+	{0x30F6}, // KATAKANA LETTER SMALL KE
+	{0x31F0}, // KATAKANA LETTER SMALL KU
+	{0x31F1}, // KATAKANA LETTER SMALL SI
+	{0x31F2}, // KATAKANA LETTER SMALL SU
+	{0x31F3}, // KATAKANA LETTER SMALL TO
+	{0x31F4}, // KATAKANA LETTER SMALL NU
+	{0x31F5}, // KATAKANA LETTER SMALL HA
+	{0x31F6}, // KATAKANA LETTER SMALL HI
+	{0x31F7}, // KATAKANA LETTER SMALL HU
+	{0x31F8}, // KATAKANA LETTER SMALL HE
+	{0x31F9}, // KATAKANA LETTER SMALL HO
+	{0x31FA}, // KATAKANA LETTER SMALL MU
+	{0x31FB}, // KATAKANA LETTER SMALL RA
+	{0x31FC}, // KATAKANA LETTER SMALL RI
+	{0x31FD}, // KATAKANA LETTER SMALL RU
+	{0x31FE}, // KATAKANA LETTER SMALL RE
+	{0x31FF}, // KATAKANA LETTER SMALL RO
+};
+
+// http://www.w3.org/TR/jlreq/#characters_not_ending_a_line
+const std::set<UChar> kCannotEndLineJapanese = {
+	{0x2018}, // LEFT SINGLE QUOTATION MARK
+	{0x201C}, // LEFT DOUBLE QUOTATION MARK
+	{0x0028}, // LEFT PARENTHESIS
+	{0x3014}, // LEFT TORTOISE SHELL BRACKET
+	{0x005B}, // LEFT SQUARE BRACKET
+	{0x007B}, // LEFT CURLY BRACKET
+	{0x3008}, // LEFT ANGLE BRACKET
+	{0x300A}, // LEFT DOUBLE ANGLE BRACKET
+	{0x300C}, // LEFT CORNER BRACKET
+	{0x300E}, // LEFT WHITE CORNER BRACKET
+	{0x3010}, // LEFT BLACK LENTICULAR BRACKET
+	{0x2985}, // LEFT WHITE PARENTHESIS
+	{0x3018}, // LEFT WHITE TORTOISE SHELL BRACKET
+	{0x3016}, // LEFT WHITE LENTICULAR BRACKET
+	{0xFF08}, // Fullwidth Left Parenthesis
+	{0x00AB}, // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+	{0x301D}, // REVERSED DOUBLE PRIME QUOTATION MARK
+};
+
+
+// http://unicode.org/faq/blocks_ranges.html
+// http://unicode-table.com/en/blocks/
+const std::set<UBlockCode> kCJKCodeBlocks = {
+	{
+		UBlockCode::UBLOCK_CJK_COMPATIBILITY,
+		UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
+		UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
+		UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
+		UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
+		UBlockCode::UBLOCK_CJK_STROKES,
+		UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
+		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
+		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
+		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
+		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
+		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
+		UBlockCode::UBLOCK_HIRAGANA,
+		UBlockCode::UBLOCK_KATAKANA,
+	},
+};
+
+bool is_cjk_character(UChar32 c) {
+	return kCJKCodeBlocks.count(ublock_getCode(c)) == 1;
+}
+
 
 // Need to mirror () etc. for LTR languages, so we're sticking them in a map.
 const std::map<UChar, UChar> kSymmetricChars = {
@@ -378,7 +510,7 @@ bool is_arabic_character(UChar32 c) {
 }
 
 
-// True if a string does not contain Latin characters
+// True if a string contains a character from an Arabic code block
 bool has_arabic_character(const char* input) {
 	bool result = false;
 	const icu::UnicodeString parseme(input);
@@ -588,6 +720,48 @@ std::string line2bidi(const char* input) {
 	std::string result;
 	stack.toUTF8String(result);
 	return result;
+}
+
+// True if a string contains a character from a CJK code block
+bool has_cjk_character(const char* input) {
+	bool result = false;
+	const icu::UnicodeString parseme(input);
+	for (int32_t i = 0; i < parseme.length(); ++i) {
+		if (is_cjk_character(parseme.char32At(i))) {
+			result = true;
+			break;
+		}
+	}
+	return result;
+}
+
+//  Split a string of CJK characters into units that can have line breaks between them.
+std::vector<std::string> split_cjk_word(const char* input) {
+	const icu::UnicodeString parseme(input);
+	std::vector<std::string> result;
+	for (int i = 0; i < parseme.length(); ++i) {
+		icu::UnicodeString temp;
+		UChar c = parseme.charAt(i);
+		temp += c;
+		if (i < parseme.length() - 1) {
+			UChar next = parseme.charAt(i + 1);
+			if (cannot_end_line(c) || cannot_start_line(next)) {
+				temp += next;
+				++i;
+			}
+		}
+		std::string temp2;
+		result.push_back(temp.toUTF8String(temp2));
+	}
+	return result;
+}
+
+bool cannot_start_line(const UChar& c) {
+	return kCannottStartLineJapanese.count(c) == 1;
+}
+
+bool cannot_end_line(const UChar& c) {
+	return kCannotEndLineJapanese.count(c) == 1;
 }
 
 } // namespace UI

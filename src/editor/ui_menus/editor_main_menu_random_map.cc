@@ -328,7 +328,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_goButton = new UI::Button
 		(this, "generate_map",
 		 posx, posy, width, height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Generate Map"));
 	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;

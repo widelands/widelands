@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2015 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009, 2011, 2014-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,29 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
-#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
+#ifndef WL_WUI_MAPTABLE_H
+#define WL_WUI_MAPTABLE_H
 
-#include <string>
+#include <vector>
 
-#include "editor/editorinteractive.h"
-#include "editor/ui_menus/editor_main_menu_load_or_save_map.h"
+#include "ui_basic/table.h"
+#include "wui/mapdata.h"
+
 
 /**
- * Choose a filename and save your brand new created map
-*/
-struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
-	MainMenuLoadMap(EditorInteractive& parent);
+ * A table listing all the available maps for saveloading.
+ * This contains a UI model only; the callig classes have to define the data model
+ * and bind the compare functions.
+ */
+class MapTable : public UI::Table<uintptr_t> {
+public:
 
-protected:
-	void clicked_ok() override;
+	MapTable(UI::Panel * parent,
+				 int32_t x, int32_t y, uint32_t w, uint32_t h,
+				 const bool descending);
 
-private:
-	void entry_selected();
+	/// Fill the table with maps and directories.
+	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
+#endif  // end of include guard: WL_WUI_MAPTABLE_H

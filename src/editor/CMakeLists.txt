@@ -51,6 +51,8 @@ wl_library(editor
     ui_menus/editor_main_menu.h
     ui_menus/editor_main_menu_load_map.cc
     ui_menus/editor_main_menu_load_map.h
+    ui_menus/editor_main_menu_load_or_save_map.cc
+    ui_menus/editor_main_menu_load_or_save_map.h
     ui_menus/editor_main_menu_map_options.cc
     ui_menus/editor_main_menu_map_options.h
     ui_menus/editor_main_menu_new_map.cc
@@ -101,7 +103,7 @@ wl_library(editor
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud
-    wui
+    wui_common
     wui_mapview_pixelfunctions
     wui_overlay_manager
 )

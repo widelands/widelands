@@ -25,13 +25,13 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
+#include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
 
-static const int32_t ms_darken_value = -20;
 static const int32_t ms_scrollbar_w = 24;
 
 struct MultilineEditbox::Data {
@@ -39,6 +39,9 @@ struct MultilineEditbox::Data {
 
 	/// The text in the edit box
 	std::string text;
+
+	/// Background tile style.
+	const Image* background;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -82,11 +85,13 @@ private:
 MultilineEditbox::MultilineEditbox
 	(Panel * parent,
 	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 const std::string & text)
+	 const std::string & text,
+	 const Image* background)
 	:
 	Panel(parent, x, y, w, h),
 	d(new Data(*this))
 {
+	d->background = background;
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -445,8 +450,35 @@ void MultilineEditbox::focus(bool topcaller) {
  */
 void MultilineEditbox::draw(RenderTarget & dst)
 {
-	//  make the whole area a bit darker
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	// Draw the background
+	dst.tile
+		(Rect(Point(0, 0), get_w(), get_h()),
+		 d->background,
+		 Point(get_x(), get_y()));
+
+	// Draw border.
+	if (get_w() >= 4 && get_h() >= 4) {
+		static const RGBColor black(0, 0, 0);
+
+		// bottom edge
+		dst.brighten_rect
+			(Rect(Point(0, get_h() - 2), get_w(), 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		// right edge
+		dst.brighten_rect
+			(Rect(Point(get_w() - 2, 0), 2, get_h() - 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		// top edge
+		dst.fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
+		dst.fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		// left edge
+		dst.fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
+		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+	}
+
+	if (has_focus())
+		dst.brighten_rect
+			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	d->refresh_ww();
 

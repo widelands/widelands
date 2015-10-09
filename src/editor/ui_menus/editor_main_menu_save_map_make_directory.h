@@ -20,15 +20,14 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
-#include <cstring>
 #include <string>
 
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace UI {
-struct EditBox;
-struct Button;
-}
 
 /**
  * Show a small modal dialog allowing the user to enter
@@ -39,12 +38,17 @@ struct Button;
 struct MainMenuSaveMapMakeDirectory : public UI::Window {
 	MainMenuSaveMapMakeDirectory(UI::Panel *, char const *);
 
-	char const * get_dirname() {return m_dirname.c_str();}
+	char const * get_dirname() {return dirname_.c_str();}
 
 private:
-	std::string               m_dirname;
-	UI::EditBox             * m_edit;
-	UI::Button * m_ok_button;
+	const int padding_;
+	const int butw_, buth_;
+	std::string dirname_;
+	UI::Box vbox_;
+	UI::Textarea label_;
+	UI::EditBox edit_;
+	UI::Button ok_button_;
+	UI::Button cancel_button_;
 	void edit_changed();
 };
 

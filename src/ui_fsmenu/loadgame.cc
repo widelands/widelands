@@ -80,23 +80,24 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
-	FullscreenMenuLoadMapOrGame(true),
+	FullscreenMenuLoadMapOrGame(),
+	m_table(this, tablex_, tabley_, tablew_, tableh_, true),
 
 	m_is_replay(is_replay),
 	// Main title
 	m_title
-		(this, get_w() / 2, m_tabley / 3,
+		(this, get_w() / 2, tabley_ / 3,
 		 m_is_replay ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
 
 	// Savegame description
 	m_label_mapname
-		(this, m_right_column_x, m_tabley, "", UI::Align_Left),
+		(this, right_column_x_, tabley_, "", UI::Align_Left),
 	m_ta_mapname(this,
-					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
+					 right_column_x_ + indent_, get_y_from_preceding(m_label_mapname) + padding_,
+					 get_right_column_w(right_column_x_ + indent_), 2 * m_label_height - padding_),
 
 	m_label_gametime
-		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_mapname) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_gametime(this,
@@ -104,7 +105,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					  get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_players
-		(this, m_right_column_x, get_y_from_preceding(m_ta_gametime),
+		(this, right_column_x_, get_y_from_preceding(m_ta_gametime),
 		 "",
 		 UI::Align_Left),
 	m_ta_players(this,
@@ -112,39 +113,39 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_version
-		(this, m_right_column_x, get_y_from_preceding(m_ta_players),
+		(this, right_column_x_, get_y_from_preceding(m_ta_players),
 		 "",
 		 UI::Align_Left),
 	m_ta_version(this,
 					 m_right_column_tab, m_label_version.get_y(), "", UI::Align_Left),
 
 	m_label_win_condition
-		(this, m_right_column_x, get_y_from_preceding(m_ta_version) + 3 * m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_version) + 3 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_win_condition(this,
-							 m_right_column_x + m_indent, get_y_from_preceding(m_label_win_condition) + m_padding,
-							 get_right_column_w(m_right_column_x + m_indent), m_label_height),
+							 right_column_x_ + indent_, get_y_from_preceding(m_label_win_condition) + padding_,
+							 get_right_column_w(right_column_x_ + indent_), m_label_height),
 
 	m_delete
 		(this, "delete",
-		 m_right_column_x, m_buty - m_buth - 2 * m_padding,
-		 m_butw, m_buth,
+		 right_column_x_, m_buty - buth_ - 2 * padding_,
+		 m_butw, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 	m_ta_errormessage
 		(this,
-		 m_right_column_x,
-		 get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
-		 get_right_column_w(m_right_column_x),
-		 m_delete.get_y() - get_y_from_preceding(m_ta_mapname) - 6 * m_padding),
+		 right_column_x_,
+		 get_y_from_preceding(m_ta_mapname) + 2 * padding_,
+		 get_right_column_w(right_column_x_),
+		 m_delete.get_y() - get_y_from_preceding(m_ta_mapname) - 6 * padding_),
 
-	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * m_padding),
-	m_minimap_w(get_right_column_w(m_right_column_x)),
-	m_minimap_h(m_delete.get_y() - get_y_from_preceding(m_ta_win_condition) - 6 * m_padding),
+	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * padding_),
+	m_minimap_w(get_right_column_w(right_column_x_)),
+	m_minimap_h(m_delete.get_y() - get_y_from_preceding(m_ta_win_condition) - 6 * padding_),
 	m_minimap_icon(this,
-						m_right_column_x, get_y_from_preceding(m_ta_win_condition) + 3 * m_padding,
+						right_column_x_, get_y_from_preceding(m_ta_win_condition) + 3 * padding_,
 						m_minimap_w, m_minimap_h, nullptr),
 
 	// "Data container" for the savegame information
@@ -159,20 +160,20 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 
 	if (m_is_replay) {
-		m_back.set_tooltip(_("Return to the main menu"));
-		m_ok.set_tooltip(_("Load this replay"));
+		back_.set_tooltip(_("Return to the main menu"));
+		ok_.set_tooltip(_("Load this replay"));
 		m_ta_mapname.set_tooltip(_("The map that this replay is based on"));
 		m_delete.set_tooltip(_("Delete this replay"));
 	} else {
-		m_back.set_tooltip(_("Return to the single player menu"));
-		m_ok.set_tooltip(_("Load this game"));
+		back_.set_tooltip(_("Return to the single player menu"));
+		ok_.set_tooltip(_("Load this game"));
 		m_ta_mapname.set_tooltip(_("The map that this game is based on"));
 		m_delete.set_tooltip(_("Delete this game"));
 	}
 	m_minimap_icon.set_visible(false);
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
-	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
@@ -296,7 +297,8 @@ void FullscreenMenuLoadGame::clicked_delete()
 
 bool FullscreenMenuLoadGame::set_has_selection()
 {
-	bool has_selection = FullscreenMenuLoadMapOrGame::set_has_selection();
+	bool has_selection = m_table.has_selection();
+	ok_.set_enabled(has_selection);
 	m_delete.set_enabled(has_selection);
 
 	if (!has_selection) {
@@ -383,7 +385,7 @@ void FullscreenMenuLoadGame::entry_selected()
 					uint16_t h = scale * m_minimap_image->height();
 
 					// Center the minimap in the available space
-					int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
+					int32_t xpos = right_column_x_ + (get_w() - m_right_column_margin - w - right_column_x_) / 2;
 					int32_t ypos = m_minimap_y;
 
 					// Set small minimaps higher up for a more harmonious look
@@ -420,7 +422,7 @@ void FullscreenMenuLoadGame::entry_selected()
 			m_minimap_image.reset();
 
 			m_ta_errormessage.set_visible(true);
-			m_ok.set_enabled(false);
+			ok_.set_enabled(false);
 		}
 	}
 }

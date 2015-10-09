@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/suggested_teams_box.h"
+#include "wui/suggested_teams_box.h"
 
 #include <set>
 #include <string>
@@ -95,7 +95,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 		for (const Widelands::Map::SuggestedTeamLineup& lineup : m_suggested_teams) {
 
 			m_lineup_box =
-					new UI::Box(this, m_indent, teamlist_offset + lineup_counter * m_label_height,
+					new UI::Box(this, m_indent, teamlist_offset + lineup_counter * (m_label_height + m_padding),
 									UI::Box::Horizontal, get_w() - m_indent);
 
 			m_lineup_box->set_size(get_w(), m_label_height + m_padding);
@@ -105,7 +105,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				if (!is_first) {
 					m_lineup_box->add_space(m_padding);
-					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align_CenterLeft);
+					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align_BottomCenter);
 					m_lineup_box->add(vs_label, UI::Box::AlignLeft);
 					vs_label->set_visible(true);
 					m_vs_labels.push_back(vs_label);
@@ -129,7 +129,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 		} // All lineups
 
 		// Adjust size to content
-		set_size(get_w(), teamlist_offset + lineup_counter * m_label_height);
+		set_size(get_w(), teamlist_offset + lineup_counter * (m_label_height + m_padding));
 	}
 }
 

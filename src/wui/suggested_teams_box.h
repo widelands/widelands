@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_SUGGESTED_TEAMS_BOX_H
-#define WL_UI_FSMENU_SUGGESTED_TEAMS_BOX_H
+#ifndef WL_WUI_SUGGESTED_TEAMS_BOX_H
+#define WL_WUI_SUGGESTED_TEAMS_BOX_H
 
 #include <set>
 #include <string>
@@ -57,4 +57,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_UI_FSMENU_SUGGESTED_TEAMS_BOX_H
+#endif  // end of include guard: WL_WUI_SUGGESTED_TEAMS_BOX_H

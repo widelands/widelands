@@ -47,10 +47,11 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
-	bool set_has_selection() override;
-
 
 private:
+	/// Updates buttons and text labels and returns whether a table entry is selected.
+	bool set_has_selection();
+
 	/**
 	 * Data about a campaign that we're interested in.
 	 */
@@ -66,6 +67,8 @@ private:
 	};
 
 	bool compare_difficulty(uint32_t, uint32_t);
+
+	UI::Table<uintptr_t const>    m_table;
 
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_campname;
@@ -97,9 +100,10 @@ public:
 protected:
 	void entry_selected() override;
 	void fill_table() override;
-	bool set_has_selection() override;
 
 private:
+	/// Updates buttons and text labels and returns whether a table entry is selected.
+	bool set_has_selection();
 	/**
 	 * Data about a campaign scenario that we're interested in.
 	 */
@@ -110,6 +114,8 @@ private:
 
 		CampaignScenarioData() : index(0) {}
 	};
+
+	UI::Table<uintptr_t const>    m_table;
 
 	UI::Textarea                  m_title;
 	UI::MultilineTextarea         m_subtitle;

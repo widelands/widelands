@@ -53,7 +53,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 	int32_t const height  = 34;
 
 
-	int32_t const num_tools = 7;
+	int32_t const num_tools = 8;
 #define ADD_BUTTON(pic, tooltip)                                              \
    m_radioselect.add_button                                                   \
       (this,                                                                  \
@@ -69,6 +69,8 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 	ADD_BUTTON("place_bob",        _("Animals"));
 	ADD_BUTTON("change_resources", _("Resources"));
 	ADD_BUTTON("set_port_space",   _("Set port space"));
+	ADD_BUTTON("set_origin",       _("Set the position that will have the coordinates (0, 0). This will "
+												"be the top-left corner of a generated minimap."));
 
 	set_inner_size
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
@@ -82,6 +84,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 			 &current == &parent.tools.place_bob          ? 4 :
 			 &current == &parent.tools.increase_resources ? 5 :
 			 &current == &parent.tools.set_port_space     ? 6 :
+			 &current == &parent.tools.set_origin         ? 7 :
 			 0);
 	}
 
@@ -130,6 +133,10 @@ void EditorToolMenu::changed_to() {
 		break;
 	case 6:
 		current_tool_pointer     = &parent.tools.set_port_space;
+		current_registry_pointer = nullptr; // no need for a window
+		break;
+	case 7:
+		current_tool_pointer     = &parent.tools.set_origin;
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:

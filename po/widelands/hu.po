@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 08:52+0100\n"
-"PO-Revision-Date: 2015-09-14 07:53+0000\n"
+"POT-Creation-Date: 2015-09-28 07:43+0100\n"
+"PO-Revision-Date: 2015-10-03 19:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -256,7 +256,7 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:177
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Névtelen"
@@ -563,14 +563,14 @@ msgstr "Mégsem"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:245
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid "%1$ix%2$i"
 msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:299
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:306
 #: ../../src/ui_fsmenu/mapselect.cc:413
 msgid "parent"
 msgstr "szülő"
@@ -693,43 +693,43 @@ msgstr "Véletlenszerű térkép generálása…"
 msgid "Make Directory"
 msgstr "Könyvtár létrehozása"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:215
 msgid "unnamed"
 msgstr "névtelen"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:254
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:261
 #, c-format
 msgid "Directory: %s"
 msgstr "Könyvtár: %s"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:263
 msgid "directory"
 msgstr "mappa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:265
 msgid "Not a map file"
 msgstr "Nem térkép fájl"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 #: ../../src/wui/game_main_menu_save_game.cc:261
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Egy fájl már létezik ezzel a névvel: '%s'. Felülírod?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:432
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:391
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:404
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:439
 msgid "Error Saving Map!"
 msgstr "Térkép mentés hiba!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:394
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:428
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:435
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"

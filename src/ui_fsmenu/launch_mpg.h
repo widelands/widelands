@@ -28,7 +28,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/suggested_teams_box.h"
+#include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
 struct GameChatPanel;
