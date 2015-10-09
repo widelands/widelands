@@ -126,7 +126,7 @@ void EditorPlayerMenu::update() {
 	Widelands::Map & map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	{
-		assert(nr_players <= 99); //  2 decimal digits
+		assert(nr_players <= MAX_PLAYERS); //  2 decimal digits
 		char text[3];
 		if (char const nr_players_10 = nr_players / 10) {
 			text[0] = '0' + nr_players_10;
@@ -176,12 +176,12 @@ void EditorPlayerMenu::update() {
 
 		// Get/Set (localized) tribe names
 		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME) {
-			m_selected_tribes[p] = map.get_scenario_player_tribe(p);
+			m_selected_tribes[p - 1] = map.get_scenario_player_tribe(p);
 		} else {
-			m_selected_tribes[p] = m_tribenames[0];
-			map.set_scenario_player_tribe(p, m_selected_tribes[p]);
+			m_selected_tribes[p - 1] = m_tribenames[0];
+			map.set_scenario_player_tribe(p, m_selected_tribes[p - 1]);
 		}
-		m_plr_set_tribes_buts[p - 1]->set_title(m_tribe_descnames.find(m_selected_tribes[p])->second);
+		m_plr_set_tribes_buts[p - 1]->set_title(m_tribe_descnames.find(m_selected_tribes[p - 1])->second);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
