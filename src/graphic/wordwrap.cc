@@ -34,7 +34,6 @@
 #include "graphic/text/bidi.h"
 
 namespace {
-// NOCOM call with font size etc. from text style.
 std::string as_editorfont(const std::string & txt,
 								  int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG) {
@@ -48,13 +47,13 @@ std::string as_editorfont(const std::string & txt,
 }
 
 // This is inefficient; only call when we need the exact width.
-uint32_t text_width(const std::string text) {
-	return UI::g_fh1->render(as_editorfont(text))->width();
+uint32_t text_width(const std::string text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
 }
 
 // This is inefficient; only call when we need the exact height.
-uint32_t text_height(const std::string text) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text))->height();
+uint32_t text_height(const std::string text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text, ptsize - UI::g_fh1->fontset().size_offset()))->height();
 }
 
 } // namespace
@@ -271,7 +270,7 @@ uint32_t WordWrap::width() const
 	uint32_t calculated_width = 0;
 
 	for (uint32_t line = 0; line < m_lines.size(); ++line) {
-		uint32_t linewidth = text_width(m_lines[line].text);
+		uint32_t linewidth = text_width(m_lines[line].text, m_style.font->size());
 		if (linewidth > calculated_width)
 			calculated_width = linewidth;
 	}
@@ -286,7 +285,7 @@ uint32_t WordWrap::height() const
 {
 	uint16_t fontheight = 0;
 	if (!m_lines.empty()) {
-		fontheight = text_height(m_lines[0].text);
+		fontheight = text_height(m_lines[0].text, m_style.font->size());
 	}
 
 	return fontheight * (m_lines.size()) + 2 * LINE_MARGIN;
@@ -353,7 +352,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 	Align alignment = mirror_alignment(align);
 
 	// Since this will eventually be used in edit boxes only, we always have standard font size here.
-	uint16_t fontheight = text_height(m_lines[0].text);
+	uint16_t fontheight = text_height(m_lines[0].text, m_style.font->size());
 	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
@@ -367,14 +366,18 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		}
 
 		const Image* entry_text_im = UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
-																		  as_uifont(m_lines[line].text) :
-																		  as_editorfont(m_lines[line].text));
+																		  as_uifont(m_lines[line].text,
+																						m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+																						m_style.fg) :
+																		  as_editorfont(m_lines[line].text,
+																							 m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+																							 m_style.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 
 		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
 			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
-			int caret_x = text_width(line_to_caret);
+			int caret_x = text_width(line_to_caret, m_style.font->size());
 
 			const Image* caret_image = g_gr->images().get("pics/caret.png");
 			Point caretpt;
