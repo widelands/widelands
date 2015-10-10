@@ -237,7 +237,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Island mode ----------
 
-	m_island_mode = new UI::Checkbox(this, Point(posx, posy), nullptr,  _("Island mode"));
+	m_island_mode = new UI::Checkbox(this, Point(posx, posy), _("Island mode"));
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_ISLAND_MODE));

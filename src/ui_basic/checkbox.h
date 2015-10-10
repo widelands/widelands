@@ -34,11 +34,25 @@ namespace UI {
  * Serves as base for Checkbox and Radiobutton.
  */
 struct Statebox : public Panel {
+
+	/**
+	 * Pictorial Statebox
+	 */
 	Statebox
 		(Panel * parent,
 		 Point,
-		 const Image* pic                  = nullptr,
-		 const std::string& label_text = std::string(),
+		 const Image* pic,
+		 const std::string & tooltip_text = std::string());
+
+	/**
+	 * Textual Statebox
+	 * If width is set to 0, the checkbox will set its width automatically.
+	 * Otherwise, it will take up multiple lines if necessary (automatic height).
+	 */
+	Statebox
+		(Panel * parent,
+		 Point,
+		 const std::string& label_text,
 		 const std::string & tooltip_text = std::string(),
 		 uint32_t width = 0);
 	~Statebox();
@@ -91,18 +105,32 @@ private:
  * can be either checked (on) or unchecked (off)
  * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
- * Width is used only when we have a label_text. If it is set to 0, the checkbox will set its width
- * automatically. Otherwise, it will take up multiple lines if necessary (automatic height).
 */
 struct Checkbox : public Statebox {
+
+	/**
+	 * Pictorial Checkbox
+	 */
 	Checkbox
 		(Panel             * const parent,
 		 Point               const p,
-		 const Image* pic        = nullptr,
-		 const std::string&       label_text = std::string(),
+		 const Image* pic,
+		 const std::string &      tooltip_text = std::string())
+		: Statebox(parent, p, pic, tooltip_text)
+	{}
+
+	/**
+	 * Textual Checkbox
+	 * If width is set to 0, the checkbox will set its width automatically.
+	 * Otherwise, it will take up multiple lines if necessary (automatic height).
+	 */
+	Checkbox
+		(Panel             * const parent,
+		 Point               const p,
+		 const std::string&       label_text,
 		 const std::string &      tooltip_text = std::string(),
 		 uint32_t width = 0)
-		: Statebox(parent, p, pic, label_text, tooltip_text, width)
+		: Statebox(parent, p, label_text, tooltip_text, width)
 	{}
 
 private:

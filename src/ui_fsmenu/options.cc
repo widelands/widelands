@@ -145,11 +145,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_fullscreen (this, Point(m_hmargin,
 									  m_reslist.get_y() +
 									  m_reslist.get_h() + m_padding),
-					  nullptr, _("Fullscreen")),
+					  _("Fullscreen")),
 	m_inputgrab (this, Point(m_hmargin,
 									 m_fullscreen.get_y() +
 									 m_fullscreen.get_h() + m_padding),
-					 nullptr, _("Grab Input")),
+					 _("Grab Input")),
 	m_label_maxfps
 		(this,
 		 m_hmargin,
@@ -177,11 +177,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_music (this, Point(m_label_language.get_x(),
 								m_language_list.get_y() +
 								m_language_list.get_h() + m_padding),
-				nullptr, _("Enable Music")),
+				_("Enable Music")),
 	m_fx (this, Point(m_label_language.get_x(),
 							m_music.get_y() +
 							m_music.get_h() + m_padding),
-			nullptr, _("Enable Sound Effects")),
+			_("Enable Sound Effects")),
 
 	// Second options block 'In-game options'
 	// Title 2
@@ -190,30 +190,30 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 get_w() / 2, get_h() / 2,
 		 _("In-game Options"), UI::Align_HCenter),
 
-	m_single_watchwin (this, Point(m_hmargin, m_offset_second_group),
-				 /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
-				 /** TRANSLATORS: and it also lets you jump to it on the map. */
-							 nullptr, _("Use single watchwindow mode")),
+	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
+	/** TRANSLATORS: and it also lets you jump to it on the map. */
+	m_single_watchwin (this, Point(m_hmargin, m_offset_second_group), _("Use single watchwindow mode")),
+
 	m_auto_roadbuild_mode (this, Point(m_single_watchwin.get_x(),
 												  m_single_watchwin.get_y() +
 												  m_single_watchwin.get_h() + m_padding),
-								  nullptr, _("Start building road after placing a flag")),
+								  _("Start building road after placing a flag")),
 	m_show_workarea_preview
 		(this, Point(m_auto_roadbuild_mode.get_x(),
 						 m_auto_roadbuild_mode.get_y() +
 						 m_auto_roadbuild_mode.get_h() + m_padding),
-		 nullptr, _("Show buildings area preview")),
+		 _("Show buildings area preview")),
 
 	m_snap_win_overlap_only
 		(this, Point(m_show_workarea_preview.get_x(),
 						 m_show_workarea_preview.get_y() +
 						 m_show_workarea_preview.get_h() + m_padding),
-		 nullptr, _("Snap windows only when overlapping")),
+		 _("Snap windows only when overlapping")),
 
 	m_dock_windows_to_edges (this, Point(m_snap_win_overlap_only.get_x(),
 													 m_snap_win_overlap_only.get_y() +
 													 m_snap_win_overlap_only.get_h() + m_padding),
-									 nullptr, _("Dock windows to edges")),
+									 _("Dock windows to edges")),
 	m_sb_autosave
 		(this,
 		 get_w() - m_hmargin - 240,
@@ -493,26 +493,26 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_transparent_chat (this, Point(m_hmargin,
 											  m_label_snap_dis_border.get_y() +
 											  m_label_snap_dis_border.get_h() + m_space),
-							  nullptr, _("Show in-game chat with transparent background"),
+							  _("Show in-game chat with transparent background"),
 							  "", get_w() - 2 * m_hmargin),
 
 	m_message_sound
 		(this, Point(m_hmargin,
 						 m_transparent_chat.get_y() +
 						 m_transparent_chat.get_h() + m_padding),
-		 nullptr, _("Play a sound at message arrival"),
+		 _("Play a sound at message arrival"),
 		 "", get_w() - 2 * m_hmargin),
 
 	m_nozip (this, Point(m_hmargin,
 								m_message_sound.get_y() +
 								m_message_sound.get_h() + m_padding),
-				nullptr, _("Do not zip widelands data files (maps, replays and savegames)"),
+				_("Do not zip widelands data files (maps, replays and savegames)"),
 				"", get_w() - 2 * m_hmargin),
 
 	m_remove_syncstreams (this, Point(m_hmargin,
 												 m_nozip.get_y() +
 												 m_nozip.get_h() + m_padding),
-								 nullptr, _("Remove Syncstream dumps on startup"),
+								 _("Remove Syncstream dumps on startup"),
 								 "", get_w() - 2 * m_hmargin),
 
 	os(opt)

@@ -37,6 +37,24 @@ Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
 	 const Image* pic,
+	 const std::string &       tooltip_text)
+	:
+	Panel  (parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+	m_flags(Is_Enabled),
+	rendered_text_(nullptr)
+{
+	uint16_t w = pic->width();
+	uint16_t h = pic->height();
+	set_desired_size(w, h);
+	set_size(w, h);
+
+	set_flags(Has_Custom_Picture, true);
+	m_pic_graphics = pic;
+}
+
+Statebox::Statebox
+	(Panel             * const parent,
+	 Point               const p,
 	 const std::string& label_text,
 	 const std::string &       tooltip_text,
 	 uint32_t width)
@@ -49,25 +67,14 @@ Statebox::Statebox
 			UI::g_fh1->render(as_uifont(label_text),
 									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
 {
-	if (pic) {
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
+	m_pic_graphics = g_gr->images().get("pics/checkbox_light.png");
+	if (rendered_text_ ) {
+		int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
+		int h = std::max(rendered_text_->height(), m_pic_graphics->height());
 		set_desired_size(w, h);
 		set_size(w, h);
-
-		set_flags(Has_Custom_Picture, true);
-		m_pic_graphics = pic;
-	} else {
-		m_pic_graphics = g_gr->images().get("pics/checkbox_light.png");
-		if (rendered_text_ ) {
-			int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
-			int h = std::max(rendered_text_->height(), m_pic_graphics->height());
-			set_desired_size(w, h);
-			set_size(w, h);
-		}
 	}
 }
-
 
 Statebox::~Statebox()
 {
