@@ -70,9 +70,9 @@ struct SpinBoxImpl {
  * SpinBox constructor:
  *
  * initializes a new spinbox with either two (big = false) or four (big = true)
- * buttons. w must be >= the normal textarea height, else the spinbox would become useless and so
+ * buttons. w must be >= the space taken up by the buttons, else the spinbox would become useless and so
  * throws an exception.
- * The spinbox' height is set automatically according to the height of its textarea.
+ * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox
 	(Panel * const parent,
