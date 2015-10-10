@@ -39,7 +39,8 @@ struct Statebox : public Panel {
 		 Point,
 		 const Image* pic                  = nullptr,
 		 const std::string& label_text = std::string(),
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string(),
+		 uint32_t width = 0);
 	~Statebox();
 
 	boost::signals2::signal<void ()> changed;
@@ -81,7 +82,7 @@ private:
 			m_flags |= flags;
 	}
 	const Image* m_pic_graphics;
-	const std::string labeltext_;
+	const Image* rendered_text_;
 };
 
 
@@ -90,6 +91,8 @@ private:
  * can be either checked (on) or unchecked (off)
  * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
+ * Width is used only when we have a label_text. If it is set to 0, the checkbox will set its width
+ * automatically. Otherwise, it will take up multiple lines if necessary (automatic height).
 */
 struct Checkbox : public Statebox {
 	Checkbox
@@ -97,8 +100,9 @@ struct Checkbox : public Statebox {
 		 Point               const p,
 		 const Image* pic        = nullptr,
 		 const std::string&       label_text = std::string(),
-		 const std::string &      tooltip_text = std::string())
-		: Statebox(parent, p, pic, label_text, tooltip_text)
+		 const std::string &      tooltip_text = std::string(),
+		 uint32_t width = 0)
+		: Statebox(parent, p, pic, label_text, tooltip_text, width)
 	{}
 
 private:

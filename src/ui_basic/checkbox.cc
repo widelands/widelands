@@ -37,17 +37,21 @@ Statebox::Statebox
 	 Point               const p,
 	 const Image* pic,
 	 const std::string& label_text,
-	 const std::string &       tooltip_text)
+	 const std::string &       tooltip_text,
+	 uint32_t width)
 	:
 	Panel  (parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
 	m_flags(Is_Enabled),
-	labeltext_(label_text)
+	rendered_text_(
+		label_text.empty() ?
+			nullptr :
+			UI::g_fh1->render(as_uifont(label_text),
+									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
 {
 	int w, h = 0;
-	if (!labeltext_.empty()) {
-		const Image* rendered_text = UI::g_fh1->render(as_uifont(labeltext_));
-		w = rendered_text->width() + kPadding;
-		h = rendered_text->height();
+	if (rendered_text_ != nullptr) {
+		w = rendered_text_->width() + kPadding;
+		h = rendered_text_->height();
 	}
 
 	if (pic) {
@@ -114,7 +118,6 @@ void Statebox::set_state(bool const on) {
 */
 void Statebox::draw(RenderTarget & dst)
 {
-	// NOCOM Stateboxes with custom pictures don't have text - create 2 constructors.
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
 		const uint16_t w = m_pic_graphics->width();
@@ -135,14 +138,13 @@ void Statebox::draw(RenderTarget & dst)
 		Point image_anchor(0, 0);
 		Point text_anchor(kStateboxSize + kPadding, 0);
 
-		if (!labeltext_.empty()) {
-			const Image* rendered_text = UI::g_fh1->render(as_uifont(labeltext_));
+		if (rendered_text_ != nullptr) {
 			if (UI::g_fh1->fontset().is_rtl()) {
 				text_anchor.x = 0;
-				image_anchor.x = rendered_text->width() + kPadding;
+				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			dst.blit(text_anchor, rendered_text, BlendMode::UseAlpha, UI::Align::Align_Left);
+			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::Align_Left);
 		}
 
 		dst.blitrect
@@ -155,9 +157,6 @@ void Statebox::draw(RenderTarget & dst)
 		if (m_flags & Is_Highlighted)
 			dst.draw_rect
 				(Rect(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100,  80));
-		// NOCOM for testing, remove when done.
-		dst.draw_rect
-			(Rect(Point(0,0), get_w(), get_h()), RGBColor(255, 100,  80));
 	}
 }
 

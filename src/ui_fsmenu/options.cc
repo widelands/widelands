@@ -493,24 +493,27 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_transparent_chat (this, Point(m_hmargin,
 											  m_label_snap_dis_border.get_y() +
 											  m_label_snap_dis_border.get_h() + m_space),
-							  nullptr, _("Show in-game chat with transparent background")),
+							  nullptr, _("Show in-game chat with transparent background"),
+							  "", get_w() - 2 * m_hmargin),
 
 	m_message_sound
 		(this, Point(m_hmargin,
 						 m_transparent_chat.get_y() +
 						 m_transparent_chat.get_h() + m_padding),
-		 nullptr, _("Play a sound at message arrival")),
+		 nullptr, _("Play a sound at message arrival"),
+		 "", get_w() - 2 * m_hmargin),
 
 	m_nozip (this, Point(m_hmargin,
 								m_message_sound.get_y() +
 								m_message_sound.get_h() + m_padding),
-				nullptr, _("Do not zip widelands data files (maps, replays and savegames)")),
+				nullptr, _("Do not zip widelands data files (maps, replays and savegames)"),
+				"", get_w() - 2 * m_hmargin),
 
-	// NOCOM the label was a multilinetextarea
 	m_remove_syncstreams (this, Point(m_hmargin,
 												 m_nozip.get_y() +
 												 m_nozip.get_h() + m_padding),
-								 nullptr, _("Remove Syncstream dumps on startup")),
+								 nullptr, _("Remove Syncstream dumps on startup"),
+								 "", get_w() - 2 * m_hmargin),
 
 	os(opt)
 {

@@ -51,11 +51,12 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 			 UI::Align_Left);
 
 	cb_register = new UI::Checkbox(this, Point(margin, 110),
-											 nullptr, _("Log in to a registered account"));
+											 nullptr, _("Log in to a registered account"),
+											 "", get_inner_w() - 2 * margin);
 
-	// NOCOM label was multilinetextarea
 	cb_auto_log = new UI::Checkbox(this, Point(margin, 135),
-											 nullptr, _("Automatically use this login information from now on."));
+											 nullptr, _("Automatically use this login information from now on."),
+											 "", get_inner_w() - 2 * margin);
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",
