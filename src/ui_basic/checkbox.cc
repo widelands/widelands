@@ -67,7 +67,7 @@ Statebox::Statebox
 									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
 {
 	m_pic_graphics = g_gr->images().get("pics/checkbox_light.png");
-	if (rendered_text_ ) {
+	if (rendered_text_) {
 		int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
 		int h = std::max(rendered_text_->height(), m_pic_graphics->height());
 		set_desired_size(w, h);
