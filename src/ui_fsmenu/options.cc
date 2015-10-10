@@ -154,11 +154,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 m_hmargin,
 		 m_inputgrab.get_y() + m_inputgrab.get_h() + m_padding,
-		 m_reslist.get_w() - 80, m_inputgrab.get_h(),
+		 m_reslist.get_w() - 105, m_inputgrab.get_h(),
 		 _("Maximum FPS:"), UI::Align_VCenter),
 	m_sb_maxfps
 		(this,
-		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(), 80,
+		 m_hmargin + m_reslist.get_w() - 105, m_label_maxfps.get_y(), 105,
 		 opt.maxfps, 0, 99, ""),
 
 

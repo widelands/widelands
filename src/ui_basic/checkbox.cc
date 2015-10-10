@@ -19,7 +19,6 @@
 
 #include "ui_basic/checkbox.h"
 
-#include "base/log.h" // NOCOM
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

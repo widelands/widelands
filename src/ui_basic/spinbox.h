@@ -24,6 +24,7 @@
 #include <list>
 
 #include "graphic/align.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "graphic/graphic.h"
 
@@ -63,6 +64,7 @@ private:
 	const bool big_;
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
+	UI::Box* box_;
 };
 
 }

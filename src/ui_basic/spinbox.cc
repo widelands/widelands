@@ -62,7 +62,7 @@ struct SpinBoxImpl {
 	Textarea * text;
 	Button * button_plus;
 	Button * button_minus;
-	Button * button_ten_plus_;
+	Button * button_ten_plus;
 	Button * button_ten_minus;
 };
 
@@ -82,7 +82,7 @@ SpinBox::SpinBox
 	 const Image* background,
 	 bool const big)
 	:
-	Panel(parent, x, y, w, 20), // Height needs to be > 0, otherwise the panel won't resize.
+	Panel(parent, x, y, w, 1), // Height needs to be > 0, otherwise the panel won't resize.
 	big_(big),
 	sbi_(new SpinBoxImpl)
 {
@@ -92,87 +92,74 @@ SpinBox::SpinBox
 	sbi_->unit  = unit;
 	sbi_->background = background;
 
+	uint32_t padding = 2;
+
 	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
+	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, w, texth, padding);
 
-	if (w < texth) {
-		throw wexception("Not enough space to draw spinbox");
+#ifndef NDEBUG //  only in debug builds
+	if (w < (big_ ? 7 * texth : 3 * texth)) {
+		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
+							  w, (big_ ? 7 * texth : 3 * texth));
 	}
+#endif
 
-	set_desired_size(w, texth);
-	int32_t butw = texth;
-	int32_t textw = w - butw * 32 / 5;
-
-	int32_t but_plus_x;
-	int32_t but_minus_x;
-	int32_t text_x;
+	sbi_->button_minus =
+		new Button
+			(box_, "-",
+			 0, 0, texth, texth,
+			 sbi_->background,
+			 g_gr->images().get(big_? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
+			 _("Decrease the value"));
+	sbi_->button_plus =
+		new Button
+			(box_, "+",
+			 0, 0, texth, texth,
+			 sbi_->background,
+			 g_gr->images().get(big_? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
+			 _("Increase the value"));
 
 	if (big_) {
-		but_plus_x = w - butw * 31 / 10;
-		but_minus_x = butw * 21 / 10;
-
-	} else {
-		but_plus_x = w - butw;
-		but_minus_x = 0;
-		textw = textw + 4 * butw;
-	}
-	while (textw <= 0) {
-		butw = butw * 3 / 4;
-		textw = w - butw * 32 / 5;
-	}
-	text_x = (w - textw) / 2;
-
-	sbi_->text = new UI::Textarea
-		(this, text_x, 0, textw, texth, "", Align_Center);
-	if (big_) {
-		sbi_->button_plus =
-			new Button
-				(this, "+",
-				 but_plus_x, 0, butw, butw,
-				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_right.png"),
-				 _("Increase the value"));
-		sbi_->button_minus =
-			new Button
-				(this, "-",
-				 but_minus_x, 0, butw, butw,
-				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_left.png"),
-				 _("Decrease the value"));
-		sbi_->button_ten_plus_ =
-			new Button
-				(this, "++",
-				 w - 2 * butw, 0, butw * 2, butw,
-				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_right_fast.png"),
-				 _("Increase the value by 10"));
-		sbi_->button_ten_plus_->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
 		sbi_->button_ten_minus =
 			new Button
-				(this, "--",
-				 0, 0, butw * 2, butw,
+				(box_, "--",
+				 0, 0, 2 * texth, texth,
 				 sbi_->background,
 				 g_gr->images().get("pics/scrollbar_left_fast.png"),
 				 _("Decrease the value by 10"));
+		sbi_->button_ten_plus =
+			new Button
+				(box_, "++",
+				 0, 0, 2 * texth, texth,
+				 sbi_->background,
+				 g_gr->images().get("pics/scrollbar_right_fast.png"),
+				 _("Increase the value by 10"));
+
+		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
 		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
-		sbi_->button_ten_plus_->set_repeating(true);
+		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
-		buttons_.push_back(sbi_->button_ten_plus_);
+		buttons_.push_back(sbi_->button_ten_plus);
+
+		sbi_->text =
+				new UI::Textarea(
+					box_, 0, 0,
+					w - 2 * sbi_->button_ten_plus->get_w() - 2 * sbi_->button_minus->get_w() - 4 * padding, texth,
+					"", Align_Center);
+
+		box_->add(sbi_->button_ten_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->text, UI::Box::AlignCenter);
+		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_ten_plus, UI::Box::AlignCenter);
 	} else {
-		sbi_->button_plus =
-			new Button
-				(this, "+",
-				 but_plus_x, 0, butw, butw,
-				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_up.png"),
-				 _("Increase the value"));
-		sbi_->button_minus =
-			new Button
-				(this, "-",
-				 but_minus_x, 0, butw, butw,
-				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_down.png"),
-				 _("Decrease the value"));
+		sbi_->text = new UI::Textarea(box_, 0, 0,
+												w - 2 * sbi_->button_minus->get_w() - 2 * padding, texth,
+												"", Align_Center);
+		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->text, UI::Box::AlignCenter);
+		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
@@ -181,6 +168,8 @@ SpinBox::SpinBox
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
+	box_->set_size(w, texth);
+	set_size(w, texth);
 	update();
 }
 
@@ -212,7 +201,7 @@ void SpinBox::update()
 	sbi_->button_plus ->set_enabled(sbi_->value < sbi_->max);
 	if (big_) {
 		sbi_->button_ten_minus->set_enabled(sbi_->min < sbi_->value);
-		sbi_->button_ten_plus_ ->set_enabled(sbi_->value < sbi_->max);
+		sbi_->button_ten_plus ->set_enabled(sbi_->value < sbi_->max);
 	}
 }
 
