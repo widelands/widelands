@@ -19,6 +19,7 @@
 
 #include "ui_basic/checkbox.h"
 
+#include "base/log.h" // NOCOM
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -48,25 +49,23 @@ Statebox::Statebox
 			UI::g_fh1->render(as_uifont(label_text),
 									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
 {
-	int w, h = 0;
-	if (rendered_text_ != nullptr) {
-		w = rendered_text_->width() + kPadding;
-		h = rendered_text_->height();
-	}
-
 	if (pic) {
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
+		set_desired_size(w, h);
+		set_size(w, h);
+
 		set_flags(Has_Custom_Picture, true);
 		m_pic_graphics = pic;
-		w += m_pic_graphics->width();
 	} else {
-		m_pic_graphics =
-			g_gr->images().get("pics/checkbox_light.png");
-		w += m_pic_graphics->width() / 2;
+		m_pic_graphics = g_gr->images().get("pics/checkbox_light.png");
+		if (rendered_text_ ) {
+			int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
+			int h = std::max(rendered_text_->height(), m_pic_graphics->height());
+			set_desired_size(w, h);
+			set_size(w, h);
+		}
 	}
-
-	h = std::max(m_pic_graphics->height(), h);
-	set_desired_size(w, h);
-	set_size(w, h);
 }
 
 
@@ -138,7 +137,7 @@ void Statebox::draw(RenderTarget & dst)
 		Point image_anchor(0, 0);
 		Point text_anchor(kStateboxSize + kPadding, 0);
 
-		if (rendered_text_ != nullptr) {
+		if (rendered_text_) {
 			if (UI::g_fh1->fontset().is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
