@@ -52,12 +52,12 @@ namespace UI {
 /**
  * Open a font file and load the corresponding font.
  */
-Font::Font(const std::string & name, int size)
+Font::Font(const std::string & name, int input_size)
 {
 	// Load the TrueType Font
 	std::string filename = "i18n/fonts/";
 	filename += name;
-	m_size = size;
+	m_size = input_size;
 
 	//  We must keep this File Read open, otherwise the following calls are
 	//  crashing. do not know why...
@@ -67,7 +67,7 @@ Font::Font(const std::string & name, int size)
 	if (!ops)
 		throw wexception("could not load font!: RWops Pointer invalid");
 
-	m_font = TTF_OpenFontIndexRW(ops, 1, size, 0);
+	m_font = TTF_OpenFontIndexRW(ops, 1, input_size, 0);
 	if (!m_font)
 		throw wexception("could not load font!: %s", TTF_GetError());
 
@@ -109,7 +109,7 @@ uint32_t Font::height() const
 }
 
 /**
- * \return the maximum height of glyphs of this font. NOCOM
+ * \return the maximum height of glyphs of this font.
  */
 uint32_t Font::size() const
 {
