@@ -365,9 +365,12 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		const EntryRecord & er = *m_entry_records[idx];
 
+		Point point(1, y);
+		uint32_t maxw = get_eff_w() - 2;
+
 		// Highlight the current selected entry
 		if (idx == m_selection) {
-			Rect r = Rect(Point(1, y), get_eff_w() - 2, m_lineheight);
+			Rect r = Rect(point, maxw, m_lineheight);
 			if (r.x < 0) {
 				r.w += r.x; r.x = 0;
 			}
@@ -382,36 +385,30 @@ void BaseListselect::draw(RenderTarget & dst)
 			}
 		}
 
-		Align draw_alignment = mirror_alignment(m_align);
+		uint32_t picw =  m_max_pic_width ? m_max_pic_width + 10 : 0;
+		point.x += picw;
 
-		int32_t const x =
-			draw_alignment & Align_Right   ? get_eff_w() -      1 :
-			draw_alignment & Align_HCenter ? get_eff_w() >>     1 :
+		Align alignment = mirror_alignment(m_align);
+		if (alignment & Align_Right) {
+			point.x += maxw - picw;
+		} else if (alignment & Align_HCenter) {
+			point.x += (maxw - picw) / 2;
+		}
 
-			// Pictures are always left aligned, leave some space here
-			m_max_pic_width         ? m_max_pic_width + 10 :
-			1;
-
-		std::string font_face = er.font_face.empty() ? m_fontname : er.font_face;
-
-		// Horizontal center the string
-		UI::g_fh->draw_text
-			(dst,
-			 TextStyle::makebold(Font::get(font_face, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
-			 Point
-			 	(x,
-			 	 y +
-				 (get_lineheight() - g_fh->get_fontheight(font_face, m_fontsize))
-			 	 /
-			 	 2),
-			 er.name,
-			 draw_alignment);
-
+		// NOCOM Pictures are always left aligned
 		// Now draw pictures
 		if (er.pic) {
-			uint16_t h = er.pic->height();
-			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
+			dst.blit(Point(1, y + (get_lineheight() - er.pic->height()) / 2), er.pic);
 		}
+
+		// NOCOM font face won't work in fh1 - we need font selection by code point.
+		//const std::string font_face = er.font_face.empty() ? m_fontname : er.font_face;
+		log("NOCOM font face: %s\n", font_face.c_str());
+
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, m_fontsize,
+																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
+		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+		dst.blitrect(point, entry_text_im, Rect(0, 0, get_eff_w(), m_lineheight));
 
 		y += lineheight;
 		++idx;
