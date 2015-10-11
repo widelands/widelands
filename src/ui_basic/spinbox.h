@@ -53,8 +53,6 @@ struct SpinBox : public Panel {
 	std::string get_unit();
 	Align align() const;
 	void set_align(Align);
-	void set_font(const std::string &, int32_t, RGBColor);
-	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t);
