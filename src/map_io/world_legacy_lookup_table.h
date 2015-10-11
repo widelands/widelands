@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H
-#define WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H
+#ifndef WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H
+#define WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H
 
 #include <map>
 #include <memory>
@@ -50,4 +50,4 @@ private:
 std::unique_ptr<WorldLegacyLookupTable>
 create_world_legacy_lookup_table(const std::string& old_world);
 
-#endif  // end of include guard: WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H
+#endif  // end of include guard: WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H

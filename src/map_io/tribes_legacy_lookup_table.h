@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
-#define WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
+#ifndef WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H
+#define WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H
 
 #include <map>
 #include <string>
@@ -48,4 +48,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(TribesLegacyLookupTable);
 };
 
-#endif  // end of include guard: WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
+#endif  // end of include guard: WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H
