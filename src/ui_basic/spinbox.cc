@@ -82,7 +82,7 @@ SpinBox::SpinBox
 	 const Image* background,
 	 bool const big)
 	:
-	Panel(parent, x, y, w, 1), // Height needs to be > 0, otherwise the panel won't resize.
+	Panel(parent, x, y, w, 0),
 	big_(big),
 	sbi_(new SpinBoxImpl)
 {
