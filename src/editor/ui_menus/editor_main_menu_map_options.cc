@@ -224,5 +224,5 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, std::string tag, std:
 	box->add_space(checkbox_space_);
 	parent->add(box, UI::Box::AlignLeft);
 	parent->add_space(padding_);
-	tags_checkboxes_.emplace(tag, cb);
+	tags_checkboxes_[tag] = cb;
 }
