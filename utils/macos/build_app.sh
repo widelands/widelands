@@ -132,8 +132,8 @@ function BuildWidelands() {
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
-      -DCMAKE_PREFIX_PATH:PATH="/usr/local"
-
+      -DCMAKE_PREFIX_PATH:PATH="/usr/local" \
+      -DICU_ROOT="$(brew --prefix icu4c)" 
    ninja
 
    echo "Done building."
