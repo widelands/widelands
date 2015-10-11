@@ -814,7 +814,7 @@ void ProductionProgram::ActCheckMap::execute(Game & game, ProductionSite & ps) c
 			if (game.map().allows_seafaring())
 				return ps.program_step(game, 0);
 			else {
-				ps.set_production_result("No use for ships on this map!");
+				ps.set_production_result(_"No use for ships on this map!");
 				return ps.program_end(game, None);
 			}
 		}
