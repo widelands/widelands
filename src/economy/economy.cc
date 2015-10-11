@@ -499,11 +499,6 @@ void Economy::remove_supply(Supply & supply)
 }
 
 
-// TODO(meitis): most (all?) production programs execute the condition and on success
-// they sleep before producing the ware. This makes it much more likely for two or more
-// productions sites to start a production though only 1 ware would need to be produced
-// the actually to do would be to change all(?) production programs to sleep after
-// producing the ware, instead before
 bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 
@@ -922,7 +917,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 	uint32_t can_create = std::numeric_limits<uint32_t>::max();
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
-	bool planAtLeastOne = false;
+	bool plan_at_least_one = false;
 	for (const std::pair<std::string, uint8_t>& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
@@ -934,11 +929,11 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		// plan at least one worker, so a request for that resource is triggered
 		WareIndex id_w = tribe.ware_index(bc.first);
 		if (0 == ware_target_quantity(id_w).permanent)
-			planAtLeastOne = true;
+			plan_at_least_one = true;
 		idx++;
 	}
 
-	if (total_planned > can_create && (!planAtLeastOne || total_planned > 1)) {
+	if (total_planned > can_create && (!plan_at_least_one || total_planned > 1)) {
 		// Eliminate some excessive plans, to make sure we never request more than
 		// there are supplies for (otherwise, cyclic transportation might happen)
 		// except in case of planAtLeastOne we continue to plan at least one
@@ -951,7 +946,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 			uint32_t planned = wh->get_planned_workers(game, index);
 			uint32_t reduce = std::min(planned, total_planned - can_create);
 
-			if (planAtLeastOne && planned > 0) {
+			if (plan_at_least_one && planned > 0) {
 				wh_with_plan = wh;
 			}
 			wh->plan_workers(game, index, planned - reduce);
@@ -979,7 +974,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		// plan at least one if required and if we haven't done already
 		// we are going to ignore stock policies of all warehouses here completely
 		// the worker we are making is not going to be stocked, there is a request for him
-		if (planAtLeastOne && 0 == total_planned) {
+		if (plan_at_least_one && 0 == total_planned) {
 			Warehouse * wh = find_closest_warehouse(open_request->target_flag());
 			if (nullptr == wh)
 				wh = m_warehouses[0];
