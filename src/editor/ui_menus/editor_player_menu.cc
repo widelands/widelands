@@ -126,7 +126,7 @@ void EditorPlayerMenu::update() {
 	Widelands::Map & map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	{
-		assert(nr_players <= MAX_PLAYERS); //  2 decimal digits
+		assert(nr_players <= 99); //  2 decimal digits
 		char text[3];
 		if (char const nr_players_10 = nr_players / 10) {
 			text[0] = '0' + nr_players_10;
@@ -248,6 +248,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
+	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
