@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 08:52+0100\n"
-"PO-Revision-Date: 2015-09-14 15:47+0000\n"
+"POT-Creation-Date: 2015-10-04 08:51+0100\n"
+"PO-Revision-Date: 2015-10-04 08:59+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -256,7 +256,7 @@ msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:177
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Sense nom"
@@ -436,7 +436,7 @@ msgid "No resources"
 msgstr "Sense recursos"
 
 #: ../../src/editor/tools/editor_info_tool.cc:152
-#: ../../src/ui_fsmenu/mapselect.cc:297
+#: ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapa:"
 
@@ -491,17 +491,18 @@ msgid "New Random Map"
 msgstr "Mapa aleatori nou"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:53
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Carrega un mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Guardeu el mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Opcions del mapa"
 
@@ -514,86 +515,126 @@ msgstr "Mostra el «LLEGEIX-ME»"
 msgid "Exit Editor"
 msgstr "Surt de l'editor"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:72
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
-msgid "Name:"
-msgstr "Nom:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:79
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
-msgid "Authors:"
-msgstr "Autors:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
-msgid "Size:"
-msgstr "Mida:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
-#: ../../src/ui_fsmenu/loadgame.cc:320
-msgid "Players:"
-msgstr "Jugadors:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
-msgid "Descr:"
-msgstr "Descr.:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:64
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 #: ../../src/scripting/lua_game.cc:385 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90 ../../src/ui_basic/messagebox.cc:97
-#: ../../src/ui_fsmenu/load_map_or_game.cc:66
+#: ../../src/ui_fsmenu/load_map_or_game.cc:64
 #: ../../src/wui/game_main_menu_save_game.cc:92
 msgid "OK"
 msgstr "Accepta"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:66
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:47
 #: ../../src/ui_basic/messagebox.cc:104 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:119 ../../src/ui_fsmenu/options.cc:511
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:245
-#, c-format
-msgid "%1$ix%2$i"
-msgstr "%1$ix%2$i"
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:80
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:137
+msgid "Show Map Names"
+msgstr "Mostra noms dels mapes"
 
-#. * TRANSLATORS: Parent directory
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:299
-#: ../../src/ui_fsmenu/mapselect.cc:413
-msgid "parent"
-msgstr "carpeta superior"
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:90
+#: ../../src/ui_fsmenu/mapselect.cc:92
+msgid "Show original map names"
+msgstr "Mostra els noms originals dels mapes"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
-#: ../../src/ui_fsmenu/loadgame.cc:318
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:139
+msgid "Show Filenames"
+msgstr "Mostra noms d'arxius"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
+#: ../../src/ui_fsmenu/loadgame.cc:320
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
 msgstr "Nom del mapa:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
-msgid "Nr Players:"
-msgstr "Nombre de jugadors:"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:95
+msgid "Authors:"
+msgstr "Autors:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:100
-msgid "Set origin"
-msgstr "Situa l'origen"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:99
+#: ../../src/ui_fsmenu/campaign_select.cc:80
+#: ../../src/ui_fsmenu/campaign_select.cc:157
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+msgid "Description:"
+msgstr "Descripció:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
-msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the "
-"top-left corner of a generated minimap."
-msgstr "Trieu la posició que tindrà coordenades (0, 0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:103
+msgid "Hint (optional):"
+msgstr "Consell (opcional):"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:113
+msgid "Tags:"
+msgstr "Etiquetes:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:114
+#: ../../src/ui_fsmenu/mapselect.cc:102
+msgid "Unbalanced"
+msgstr "Desequilibrat"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
+#: ../../src/ui_fsmenu/mapselect.cc:110
+msgid "Free for all"
+msgstr "Tots contra tots"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:116
+#: ../../src/ui_fsmenu/mapselect.cc:111
+msgid "1v1"
+msgstr "Un contra un"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:117
+#: ../../src/ui_fsmenu/mapselect.cc:118
+msgid "Teams of 2"
+msgstr "Equips de 2"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:118
+#: ../../src/ui_fsmenu/mapselect.cc:119
+msgid "Teams of 3"
+msgstr "Equips de 3"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
+#: ../../src/ui_fsmenu/mapselect.cc:120
+msgid "Teams of 4"
+msgstr "Equips de 4"
+
+#. * TRANSLATORS: Label for the list of suggested teams when choosing a map
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:122
+#: ../../src/wui/suggested_teams_box.cc:87
+msgid "Suggested Teams:"
+msgstr "Equips suggerits:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:131
+#: ../../src/ui_fsmenu/launch_mpg.cc:647
+#: ../../src/wui/game_main_menu_save_game.cc:173
+#, c-format
+msgid "%u Player"
+msgid_plural "%u Players"
+msgstr[0] "%u jugador"
+msgstr[1] "%u jugadors"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:137
+msgid "Main Options"
+msgstr "Opcions principals"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:138
+msgid "Tags"
+msgstr "Etiquetes"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:139
+msgid "Teams"
+msgstr "Equips"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:166
+msgid "Size: %1% x %2%"
+msgstr "Mida: %1% x %2%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -688,48 +729,40 @@ msgstr "Genera el mapa"
 msgid "Generating random map..."
 msgstr "S'està generant un mapa aleatori..."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:27
 msgid "Make Directory"
 msgstr "Crea el directori"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:75
+#: ../../src/ui_fsmenu/loadgame.cc:275 ../../src/ui_fsmenu/loadgame.cc:407
+msgid "Filename:"
+msgstr "Nom de l'arxiu:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:156
 msgid "unnamed"
 msgstr "sense nom"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:254
-#, c-format
-msgid "Directory: %s"
-msgstr "Directori: %s"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
-msgid "directory"
-msgstr "directori"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
-msgid "Not a map file"
-msgstr "No és un arxiu de mapa"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:245
 #: ../../src/wui/game_main_menu_save_game.cc:261
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Ja existeix un arxiu amb el nom \"%s\". Voleu sobreescriure'l?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:432
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:261
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "S'ha produït un error al guardar el mapa!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:394
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Ja existeix un arxiu amb el nom «%s.tmp». L'heu d'esborrar manualment."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:428
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -737,8 +770,8 @@ msgid ""
 "Reason given:\n"
 msgstr "S'ha produït un error al guardar el mapa!\nL'arxiu del mapa guardat pot ser corrupte!\n\nRaó donada:\n"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
-msgid "Enter Directory Name:"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:34
+msgid "Enter Directory Name: "
 msgstr "Escriviu el nom del directori:"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
@@ -828,6 +861,12 @@ msgstr "Animals"
 msgid "Set port space"
 msgstr "Defineix espais portuaris"
 
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:72
+msgid ""
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Trieu la posició que tindrà coordenades (0, 0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
+
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
 msgid "Noise Height Options"
 msgstr "Opcions del soroll d'alçada"
@@ -907,7 +946,7 @@ msgstr "Afegint jugador %u"
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
 #: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:231
-#: ../../src/ui_fsmenu/mapselect.cc:154 ../../src/wui/game_message_menu.cc:563
+#: ../../src/ui_fsmenu/mapselect.cc:104 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
 msgstr "Escenari"
@@ -930,7 +969,7 @@ msgid "Loading map"
 msgstr "S'està carregant el mapa"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:404
-#: ../../src/wlapplication.cc:1432
+#: ../../src/wlapplication.cc:1421
 msgid "Loading..."
 msgstr "S'està carregant..."
 
@@ -1276,7 +1315,7 @@ msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
-#: ../../src/map_io/s2map.cc:403
+#: ../../src/map_io/s2map.cc:402
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa del Settlers II de Bluebyte. Sense comentari definit!"
 
@@ -1485,7 +1524,7 @@ msgid ""
 msgstr "El Widelands no ha pogut establir una connexió amb l'adreça desitjada.\nO bé no funciona cap servidor del Widelands al port especificat\no bé el servidor s'ha parat quan us heu intentat connectar."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:838
-#: ../../src/wlapplication.cc:1322
+#: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "S'està preparant la partida"
 
@@ -1970,44 +2009,31 @@ msgstr "Augmenta'n el valor en 10"
 msgid "Decrease the value by 10"
 msgstr "Redueix-ne el valor en 10"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:49
+#: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Choose a campaign"
 msgstr "Escolliu una campanya"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:79
-#: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396
-#: ../../src/ui_fsmenu/mapselect.cc:69
-msgid "Description:"
-msgstr "Descripció:"
-
-#: ../../src/ui_fsmenu/campaign_select.cc:89
-#: ../../src/ui_fsmenu/campaign_select.cc:328
-#: ../../src/ui_fsmenu/loadgame.cc:161
+#: ../../src/ui_fsmenu/campaign_select.cc:90
+#: ../../src/ui_fsmenu/campaign_select.cc:329
+#: ../../src/ui_fsmenu/loadgame.cc:162
 msgid "Return to the main menu"
 msgstr "Torna al menú principal"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:90
+#: ../../src/ui_fsmenu/campaign_select.cc:91
 msgid "Play this campaign"
 msgstr "Juga aquesta campanya"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:91
+#: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "The name of this campaign"
 msgstr "Nom d'aquesta campanya"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:92
+#: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The tribe you will be playing"
 msgstr "La cultura del clan amb el que jugareu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:93
+#: ../../src/ui_fsmenu/campaign_select.cc:94
 msgid "The difficulty of this campaign"
 msgstr "Dificultat de la campanya"
-
-#: ../../src/ui_fsmenu/campaign_select.cc:94
-#: ../../src/ui_fsmenu/campaign_select.cc:336
-#: ../../src/ui_fsmenu/mapselect.cc:96
-msgid "Story and hints"
-msgstr "Història i recomanacions"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:102
@@ -2043,31 +2069,31 @@ msgstr "Clan:"
 msgid "Difficulty:"
 msgstr "Dificultat:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:288
+#: ../../src/ui_fsmenu/campaign_select.cc:289
 msgid "Choose a scenario"
 msgstr "Escolliu un escenari"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:288
+#: ../../src/ui_fsmenu/campaign_select.cc:289
 msgid "Choose a tutorial"
 msgstr "Escolliu un tutorial"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:330
+#: ../../src/ui_fsmenu/campaign_select.cc:331
 msgid "Play this tutorial"
 msgstr "Jugueu aquest tutorial"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:331
+#: ../../src/ui_fsmenu/campaign_select.cc:332
 msgid "The name of this tutorial"
 msgstr "El nom d'aquest tutorial"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:332
+#: ../../src/ui_fsmenu/campaign_select.cc:333
 msgid "What you will learn in this tutorial"
 msgstr "Què aprendreu en aquest tutorial"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:334
+#: ../../src/ui_fsmenu/campaign_select.cc:335
 msgid "Play this scenario"
 msgstr "Jugueu aquest escenari"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/campaign_select.cc:336
 msgid "The name of this scenario"
 msgstr "El nom d'aquest escenari"
 
@@ -2091,8 +2117,7 @@ msgstr "Nom de l'escenari"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395
-#: ../../src/ui_fsmenu/mapselect.cc:295
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
 msgid "Scenario:"
 msgstr "Escenari:"
 
@@ -2105,30 +2130,29 @@ msgstr "Tutorial:"
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Camí invàlid per a l'arxiu en campaigns.conf: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:422
+#: ../../src/ui_fsmenu/campaign_select.cc:421
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "La persona o equip que ha dissenyat el mapa"
 msgstr[1] "Les persones o equips que han dissenyat el mapa"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:425
+#: ../../src/ui_fsmenu/campaign_select.cc:424
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "La persona o equip que ha dissenyat l'escenari"
 msgstr[1] "Les persones o equips que han dissenyat l'escenari"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428
-#: ../../src/ui_fsmenu/mapselect.cc:321
+#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Obra de:"
 msgstr[1] "Obra de:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:452
+#: ../../src/ui_fsmenu/campaign_select.cc:451
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Escolliu un tutorial de la llista i, després cliqueu «D'acord»."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:454
+#: ../../src/ui_fsmenu/campaign_select.cc:453
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Podeu veure una descripció del tutorial seleccionat a la dreta."
@@ -2164,7 +2188,7 @@ msgstr "Comença una partida nova"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:73
-#: ../../src/ui_fsmenu/load_map_or_game.cc:61
+#: ../../src/ui_fsmenu/load_map_or_game.cc:59
 #: ../../src/ui_fsmenu/multiplayer.cc:47
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
@@ -2343,14 +2367,6 @@ msgstr "Detalls del mapa:"
 msgid "Size: %1$u x %2$u"
 msgstr "Mida: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:647
-#: ../../src/wui/game_main_menu_save_game.cc:173
-#, c-format
-msgid "%u Player"
-msgid_plural "%u Players"
-msgstr[0] "%u jugador"
-msgstr[1] "%u jugadors"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:650
 msgid "Scenario mode selected"
 msgstr "S'ha seleccionat el mode d'escenari"
@@ -2479,168 +2495,168 @@ msgstr "Desada automàtica: %1%"
 msgid "Autosave %1%: %2%"
 msgstr "Desada automàtica %1%: %2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:88
+#: ../../src/ui_fsmenu/loadgame.cc:89
 msgid "Choose a replay"
 msgstr "Escolliu una repetició"
 
-#: ../../src/ui_fsmenu/loadgame.cc:88
+#: ../../src/ui_fsmenu/loadgame.cc:89
 msgid "Choose a saved game"
 msgstr "Elegiu una partida desada"
 
-#: ../../src/ui_fsmenu/loadgame.cc:133
+#: ../../src/ui_fsmenu/loadgame.cc:134
 #: ../../src/wui/game_main_menu_save_game.cc:110
 msgid "Delete"
 msgstr "Esborra"
 
-#: ../../src/ui_fsmenu/loadgame.cc:155
+#: ../../src/ui_fsmenu/loadgame.cc:156
 msgid "The time that elapsed inside this game"
 msgstr "El temps que ha passat en aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:156
+#: ../../src/ui_fsmenu/loadgame.cc:157
 msgid "The number of players"
 msgstr "El nombre de jugadors"
 
-#: ../../src/ui_fsmenu/loadgame.cc:157
+#: ../../src/ui_fsmenu/loadgame.cc:158
 msgid "The version of Widelands that this game was played under"
 msgstr "La versió del Widelands que va fer servir aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:158
+#: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "The win condition that was set for this game"
 msgstr "La condició de victòria d'aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Load this replay"
 msgstr "Carrega aquesta repetició"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid "The map that this replay is based on"
 msgstr "El mapa en què es basa aquesta repetició"
 
-#: ../../src/ui_fsmenu/loadgame.cc:164
+#: ../../src/ui_fsmenu/loadgame.cc:165
 msgid "Delete this replay"
 msgstr "Esborra aquesta repetició"
 
-#: ../../src/ui_fsmenu/loadgame.cc:166 ../../src/ui_fsmenu/mapselect.cc:93
+#: ../../src/ui_fsmenu/loadgame.cc:167 ../../src/ui_fsmenu/mapselect.cc:65
 msgid "Return to the single player menu"
 msgstr "Torna al menú d'un jugador"
 
-#: ../../src/ui_fsmenu/loadgame.cc:167
+#: ../../src/ui_fsmenu/loadgame.cc:168
 msgid "Load this game"
 msgstr "Carrega aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:168
+#: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "The map that this game is based on"
 msgstr "El mapa en què es basa aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:169
+#: ../../src/ui_fsmenu/loadgame.cc:170
 msgid "Delete this game"
 msgstr "Esborra aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:178
+#: ../../src/ui_fsmenu/loadgame.cc:179
 msgid "Save Date"
 msgstr "Data de creació"
 
-#: ../../src/ui_fsmenu/loadgame.cc:178
+#: ../../src/ui_fsmenu/loadgame.cc:179
 msgid "The date this game was saved"
 msgstr "La data en què es va guardar la partida."
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:185
+#: ../../src/ui_fsmenu/loadgame.cc:186
 msgid "SP = Single Player"
 msgstr "1J = Un jugador"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:189
+#: ../../src/ui_fsmenu/loadgame.cc:190
 msgid "MP = Multiplayer"
 msgstr "MJ = Multijugador"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:192
+#: ../../src/ui_fsmenu/loadgame.cc:193
 msgid "H = Multiplayer (Host)"
 msgstr "H = Multijugador (hoste)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:196
+#: ../../src/ui_fsmenu/loadgame.cc:197
 #, c-format
 msgid "Game Mode: %s."
 msgstr "Mode de partida: %s"
 
-#: ../../src/ui_fsmenu/loadgame.cc:199
+#: ../../src/ui_fsmenu/loadgame.cc:200
 msgid "Numbers are the number of players."
 msgstr ". El nombre indica quants jugadors hi ha."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:205
+#: ../../src/ui_fsmenu/loadgame.cc:206
 msgid "Mode"
 msgstr "Mode"
 
-#: ../../src/ui_fsmenu/loadgame.cc:211
+#: ../../src/ui_fsmenu/loadgame.cc:212
 msgid "Description"
 msgstr "Descripció"
 
-#: ../../src/ui_fsmenu/loadgame.cc:212
+#: ../../src/ui_fsmenu/loadgame.cc:213
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr "El nom d'arxiu amb què es va desar la partida seguit del nom del mapa o bé el nom del mapa seguit de l'últim objectiu complit."
 
-#: ../../src/ui_fsmenu/loadgame.cc:265
+#: ../../src/ui_fsmenu/loadgame.cc:266
 msgid "Save Date:"
 msgstr "Data de desat:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:274 ../../src/ui_fsmenu/loadgame.cc:405
-msgid "Filename:"
-msgstr "Nom de l'arxiu:"
-
-#: ../../src/ui_fsmenu/loadgame.cc:278
+#: ../../src/ui_fsmenu/loadgame.cc:279
 msgid "Do you really want to delete this replay?"
 msgstr "Voleu esborrar aquesta repetició?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:281
+#: ../../src/ui_fsmenu/loadgame.cc:282
 msgid "Do you really want to delete this game?"
 msgstr "Voleu esborrar aquesta partida?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:285
+#: ../../src/ui_fsmenu/loadgame.cc:286
 msgid "Confirm deleting file"
 msgstr "Confirmeu l'esborrat de l'arxiu"
 
-#: ../../src/ui_fsmenu/loadgame.cc:319
+#: ../../src/ui_fsmenu/loadgame.cc:321
 msgid "Gametime:"
 msgstr "Temps jugat:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:321
+#: ../../src/ui_fsmenu/loadgame.cc:322
+msgid "Players:"
+msgstr "Jugadors:"
+
+#: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Win Condition:"
 msgstr "Condició de victòria:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:351
+#: ../../src/ui_fsmenu/loadgame.cc:353
 msgid "Widelands Version:"
 msgstr "Versió del Widelands:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:518
+#: ../../src/ui_fsmenu/loadgame.cc:520
 msgid "Today, %1%:%2%"
 msgstr "Avui, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:531
+#: ../../src/ui_fsmenu/loadgame.cc:533
 msgid "Yesterday, %1%:%2%"
 msgstr "Ahir, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:537
+#: ../../src/ui_fsmenu/loadgame.cc:539
 msgid "%2% %1%, %3%"
 msgstr "%1%-%2%-%3%"
 
@@ -2649,7 +2665,7 @@ msgstr "%1%-%2%-%3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:563
+#: ../../src/ui_fsmenu/loadgame.cc:565
 msgid "SP"
 msgstr "1J"
 
@@ -2659,7 +2675,7 @@ msgstr "1J"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:571
+#: ../../src/ui_fsmenu/loadgame.cc:573
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2669,25 +2685,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:580
+#: ../../src/ui_fsmenu/loadgame.cc:582
 msgid "MP (%1%)"
 msgstr "MJ (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:596
+#: ../../src/ui_fsmenu/loadgame.cc:598
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Aquest arxiu té un format erroni i no es pot carregar. Potser va ser creat amb una versió anterior del Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:599
+#: ../../src/ui_fsmenu/loadgame.cc:601
 msgid "Error message:"
 msgstr "Missatge d'error:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:612 ../../src/ui_fsmenu/loadgame.cc:614
+#: ../../src/ui_fsmenu/loadgame.cc:614 ../../src/ui_fsmenu/loadgame.cc:616
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatible: %s"
@@ -2745,142 +2761,32 @@ msgstr "(C) %1%-%2% de l'equip de desenvolupament del Widelands."
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Distribuït sota la llicència pública general (GPL) GNU v2.0."
 
-#: ../../src/ui_fsmenu/mapselect.cc:50
+#: ../../src/ui_fsmenu/mapselect.cc:46
 msgid "Choose a map"
 msgstr "Escolliu un mapa"
 
-#: ../../src/ui_fsmenu/mapselect.cc:88
-msgid "Return to the editor menu"
-msgstr "Torna al menú de l'editor"
-
-#: ../../src/ui_fsmenu/mapselect.cc:91
+#: ../../src/ui_fsmenu/mapselect.cc:63
 msgid "Return to the multiplayer game setup"
 msgstr "Torna a la configuració de partida multijugador"
 
-#: ../../src/ui_fsmenu/mapselect.cc:104
-msgid "Number of players"
-msgstr "Nombre de jugadors"
-
-#. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/ui_fsmenu/mapselect.cc:104
-msgid "Pl."
-msgstr "#J"
-
-#: ../../src/ui_fsmenu/mapselect.cc:105
-msgid "Map Name"
-msgstr "Nom del mapa"
-
-#: ../../src/ui_fsmenu/mapselect.cc:105
-msgid "The name of the map or scenario"
-msgstr "El nom del mapa o de l'escenari"
-
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "Size"
-msgstr "Mida"
-
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "The size of the map (Width x Height)"
-msgstr "La mida del mapa (amplada x alçada)"
-
-#: ../../src/ui_fsmenu/mapselect.cc:135
+#: ../../src/ui_fsmenu/mapselect.cc:85
 msgid "Show all maps"
 msgstr "Mostra tots els mapes"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
-#. aren't translated.
-#: ../../src/ui_fsmenu/mapselect.cc:142
-msgid "Show original map names"
-msgstr "Mostra els noms originals dels mapes"
-
-#: ../../src/ui_fsmenu/mapselect.cc:151
+#: ../../src/ui_fsmenu/mapselect.cc:101
 msgid "Official"
 msgstr "Oficial"
 
-#: ../../src/ui_fsmenu/mapselect.cc:152
-msgid "Unbalanced"
-msgstr "Desequilibrat"
-
 #. * TRANSLATORS: This is a message's type
-#: ../../src/ui_fsmenu/mapselect.cc:153 ../../src/wui/game_message_menu.cc:553
+#: ../../src/ui_fsmenu/mapselect.cc:103 ../../src/wui/game_message_menu.cc:553
 msgid "Seafaring"
 msgstr "Navegació"
 
-#: ../../src/ui_fsmenu/mapselect.cc:160
-msgid "Free for all"
-msgstr "Tots contra tots"
-
-#: ../../src/ui_fsmenu/mapselect.cc:161
-msgid "1v1"
-msgstr "Un contra un"
-
-#: ../../src/ui_fsmenu/mapselect.cc:168
-msgid "Teams of 2"
-msgstr "Equips de 2"
-
-#: ../../src/ui_fsmenu/mapselect.cc:169
-msgid "Teams of 3"
-msgstr "Equips de 3"
-
-#: ../../src/ui_fsmenu/mapselect.cc:170
-msgid "Teams of 4"
-msgstr "Equips de 4"
-
-#. * TRANSLATORS: Tooltip in map description when map names are being
-#. displayed in English.
-#. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:309
-#, c-format
-msgid "The name of this map in your language: %s"
-msgstr "El nom del mapa en el teu idioma: %s"
-
-#. * TRANSLATORS: Tooltip in map description when translated map names are
-#. being displayed.
-#. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:315
-#, c-format
-msgid "The original name of this map: %s"
-msgstr "El nom original d'aquest mapa: %s"
-
-#: ../../src/ui_fsmenu/mapselect.cc:319
-msgid "The name of this map"
-msgstr "El nom d'aquest mapa"
-
-#: ../../src/ui_fsmenu/mapselect.cc:322
-msgid "The designer of this map"
-msgid_plural "The designers of this map"
-msgstr[0] "La persona o equip que ha dissenyat el mapa"
-msgstr[1] "Les persones o equips que han dissenyat el mapa"
-
-#: ../../src/ui_fsmenu/mapselect.cc:332
-msgid "Edit this map"
-msgstr "Editeu aquest mapa"
-
-#: ../../src/ui_fsmenu/mapselect.cc:332
-msgid "Play this map"
-msgstr "Jugueu aquest mapa"
-
-#: ../../src/ui_fsmenu/mapselect.cc:335
-msgid "Directory:"
-msgstr "Directori:"
-
-#: ../../src/ui_fsmenu/mapselect.cc:337
-msgid "The name of this directory"
-msgstr "El nom d'aquest directori"
-
-#: ../../src/ui_fsmenu/mapselect.cc:343
-msgid "Open this directory"
-msgstr "Obre aquest directori"
-
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/ui_fsmenu/mapselect.cc:444
-msgid "Multiplayer Scenarios"
-msgstr "Escenaris multijugador"
-
-#: ../../src/ui_fsmenu/mapselect.cc:586
+#: ../../src/ui_fsmenu/mapselect.cc:355
 msgid "Nobody"
 msgstr "Ningú"
 
-#: ../../src/ui_fsmenu/mapselect.cc:587
+#: ../../src/ui_fsmenu/mapselect.cc:356
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -3111,16 +3017,11 @@ msgstr "Campanyes"
 msgid "Load Game"
 msgstr "Carrega partida"
 
-#. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/ui_fsmenu/suggested_teams_box.cc:87
-msgid "Suggested Teams:"
-msgstr "Equips suggerits:"
-
-#: ../../src/wlapplication.cc:1106
+#: ../../src/wlapplication.cc:1095
 msgid "Game data error"
 msgstr "Error en les dades de la partida"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1105
 #, c-format
 msgid ""
 "\n"
@@ -3128,7 +3029,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nSi us plau, informa'ns d'aquest problema per ajudar-nos a millorar el Widelands. La sortida estàndard (en Windows, stdout.txt) conté missatges relacionats. Esteu emprant «build %1$s (%2$s)»."
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1112
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3909,6 +3810,72 @@ msgstr "Sense contrasenya"
 #: ../../src/wui/login_box.cc:104
 msgid "Please enter your password!"
 msgstr "Escolliu una contrasenya."
+
+#: ../../src/wui/mapdata.h:122
+msgid "parent"
+msgstr "carpeta superior"
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/wui/mapdata.h:130
+msgid "Multiplayer Scenarios"
+msgstr "Escenaris multijugador"
+
+#: ../../src/wui/mapdetails.cc:102
+msgid "Directory:"
+msgstr "Directori:"
+
+#: ../../src/wui/mapdetails.cc:104
+msgid "The name of this directory"
+msgstr "El nom d'aquest directori"
+
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
+#. * TRANSLATORS: %s is the English name of the map.
+#: ../../src/wui/mapdetails.cc:119
+#, c-format
+msgid "The original name of this map: %s"
+msgstr "El nom original d'aquest mapa: %s"
+
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
+#. * TRANSLATORS: %s is the localized name of the map.
+#: ../../src/wui/mapdetails.cc:125
+#, c-format
+msgid "The name of this map in your language: %s"
+msgstr "El nom del mapa en el teu idioma: %s"
+
+#: ../../src/wui/mapdetails.cc:129
+msgid "The name of this map"
+msgstr "El nom d'aquest mapa"
+
+#: ../../src/wui/maptable.cc:36
+msgid "Number of players"
+msgstr "Nombre de jugadors"
+
+#. * TRANSLATORS: Column title for number of players in map list
+#: ../../src/wui/maptable.cc:36
+msgid "Pl."
+msgstr "#J"
+
+#: ../../src/wui/maptable.cc:37
+msgid "The name of the map or scenario"
+msgstr "El nom del mapa o de l'escenari"
+
+#: ../../src/wui/maptable.cc:38
+msgid "Size"
+msgstr "Mida"
+
+#: ../../src/wui/maptable.cc:38
+msgid "The size of the map (Width x Height)"
+msgstr "La mida del mapa (amplada x alçada)"
+
+#: ../../src/wui/maptable.cc:64
+msgid "Filename"
+msgstr "Nom de l'arxiu:"
+
+#: ../../src/wui/maptable.cc:70
+msgid "Map Name"
+msgstr "Nom del mapa"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
