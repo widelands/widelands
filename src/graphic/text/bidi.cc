@@ -33,108 +33,108 @@ namespace {
 
 // http://www.w3.org/TR/jlreq/#characters_not_starting_a_line
 const std::set<UChar> kCannottStartLineJapanese = {
-	{0x2019}, // RIGHT SINGLE QUOTATION MARK
-	{0x201D}, // RIGHT DOUBLE QUOTATION MARK
-	{0x0029}, // RIGHT PARENTHESIS
-	{0x3015}, // RIGHT TORTOISE SHELL BRACKET
-	{0x005D}, // RIGHT SQUARE BRACKET
-	{0x007D}, // RIGHT CURLY BRACKET
-	{0x3009}, // RIGHT ANGLE BRACKET
-	{0x300B}, // RIGHT DOUBLE ANGLE BRACKET
-	{0x300D}, // RIGHT CORNER BRACKET
-	{0x300F}, // RIGHT WHITE CORNER BRACKET
-	{0x3011}, // RIGHT BLACK LENTICULAR BRACKET
-	{0x2986}, // RIGHT WHITE PARENTHESIS
-	{0x3019}, // RIGHT WHITE TORTOISE SHELL BRACKET
-	{0x3017}, // RIGHT WHITE LENTICULAR BRACKET
-	{0xFF09}, // Fullwidth Right Parenthesis
-	{0x00BB}, // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-	{0x301F}, // LOW DOUBLE PRIME QUOTATION MARK
-	{0x2010}, // HYPHEN
-	{0x301C}, // WAVE DASH
-	{0x30A0}, // KATAKANA-HIRAGANA DOUBLE HYPHEN
-	{0x2013}, // EN DASH
-	{0x0021}, // EXCLAMATION MARK
-	{0x003F}, // QUESTION MARK
-	{0x203C}, // DOUBLE EXCLAMATION MARK
-	{0x2047}, // DOUBLE QUESTION MARK
-	{0x2048}, // QUESTION EXCLAMATION MARK
-	{0x2049}, // EXCLAMATION QUESTION MARK
-	{0x30FB}, // KATAKANA MIDDLE DOT
-	{0x003A}, // COLON
-	{0x003B}, // SEMICOLON
-	{0x3002}, // IDEOGRAPHIC FULL STOP
-	{0x002E}, // FULL STOP
-	{0x3001}, // IDEOGRAPHIC COMMA
-	{0x002C}, // COMMA
-	{0x30FD}, // KATAKANA ITERATION MARK
-	{0x30FE}, // KATAKANA VOICED ITERATION MARK
-	{0x309D}, // HIRAGANA ITERATION MARK
-	{0x309E}, // HIRAGANA VOICED ITERATION MARK
-	{0x3005}, // IDEOGRAPHIC ITERATION MARK
-	{0x303B}, // VERTICAL IDEOGRAPHIC ITERATION MARK
-	{0x30FC}, // KATAKANA-HIRAGANA PROLONGED SOUND MARK
-	{0x3041}, // HIRAGANA LETTER SMALL A
-	{0x3043}, // HIRAGANA LETTER SMALL I
-	{0x3045}, // HIRAGANA LETTER SMALL U
-	{0x3047}, // HIRAGANA LETTER SMALL E
-	{0x3049}, // HIRAGANA LETTER SMALL O
-	{0x30A1}, // KATAKANA LETTER SMALL A
-	{0x30A3}, // KATAKANA LETTER SMALL I
-	{0x30A5}, // KATAKANA LETTER SMALL U
-	{0x30A7}, // KATAKANA LETTER SMALL E
-	{0x30A9}, // KATAKANA LETTER SMALL O
-	{0x3063}, // HIRAGANA LETTER SMALL TU
-	{0x3083}, // HIRAGANA LETTER SMALL YA
-	{0x3085}, // HIRAGANA LETTER SMALL YU
-	{0x3087}, // HIRAGANA LETTER SMALL YO
-	{0x308E}, // HIRAGANA LETTER SMALL WA
-	{0x3095}, // HIRAGANA LETTER SMALL KA
-	{0x3096}, // HIRAGANA LETTER SMALL KE
-	{0x30C3}, // KATAKANA LETTER SMALL TU
-	{0x30E3}, // KATAKANA LETTER SMALL YA
-	{0x30E5}, // KATAKANA LETTER SMALL YU
-	{0x30E7}, // KATAKANA LETTER SMALL YO
-	{0x30EE}, // KATAKANA LETTER SMALL WA
-	{0x30F5}, // KATAKANA LETTER SMALL KA
-	{0x30F6}, // KATAKANA LETTER SMALL KE
-	{0x31F0}, // KATAKANA LETTER SMALL KU
-	{0x31F1}, // KATAKANA LETTER SMALL SI
-	{0x31F2}, // KATAKANA LETTER SMALL SU
-	{0x31F3}, // KATAKANA LETTER SMALL TO
-	{0x31F4}, // KATAKANA LETTER SMALL NU
-	{0x31F5}, // KATAKANA LETTER SMALL HA
-	{0x31F6}, // KATAKANA LETTER SMALL HI
-	{0x31F7}, // KATAKANA LETTER SMALL HU
-	{0x31F8}, // KATAKANA LETTER SMALL HE
-	{0x31F9}, // KATAKANA LETTER SMALL HO
-	{0x31FA}, // KATAKANA LETTER SMALL MU
-	{0x31FB}, // KATAKANA LETTER SMALL RA
-	{0x31FC}, // KATAKANA LETTER SMALL RI
-	{0x31FD}, // KATAKANA LETTER SMALL RU
-	{0x31FE}, // KATAKANA LETTER SMALL RE
-	{0x31FF}, // KATAKANA LETTER SMALL RO
+	0x2019, // RIGHT SINGLE QUOTATION MARK
+	0x201D, // RIGHT DOUBLE QUOTATION MARK
+	0x0029, // RIGHT PARENTHESIS
+	0x3015, // RIGHT TORTOISE SHELL BRACKET
+	0x005D, // RIGHT SQUARE BRACKET
+	0x007D, // RIGHT CURLY BRACKET
+	0x3009, // RIGHT ANGLE BRACKET
+	0x300B, // RIGHT DOUBLE ANGLE BRACKET
+	0x300D, // RIGHT CORNER BRACKET
+	0x300F, // RIGHT WHITE CORNER BRACKET
+	0x3011, // RIGHT BLACK LENTICULAR BRACKET
+	0x2986, // RIGHT WHITE PARENTHESIS
+	0x3019, // RIGHT WHITE TORTOISE SHELL BRACKET
+	0x3017, // RIGHT WHITE LENTICULAR BRACKET
+	0xFF09, // Fullwidth Right Parenthesis
+	0x00BB, // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+	0x301F, // LOW DOUBLE PRIME QUOTATION MARK
+	0x2010, // HYPHEN
+	0x301C, // WAVE DASH
+	0x30A0, // KATAKANA-HIRAGANA DOUBLE HYPHEN
+	0x2013, // EN DASH
+	0x0021, // EXCLAMATION MARK
+	0x003F, // QUESTION MARK
+	0x203C, // DOUBLE EXCLAMATION MARK
+	0x2047, // DOUBLE QUESTION MARK
+	0x2048, // QUESTION EXCLAMATION MARK
+	0x2049, // EXCLAMATION QUESTION MARK
+	0x30FB, // KATAKANA MIDDLE DOT
+	0x003A, // COLON
+	0x003B, // SEMICOLON
+	0x3002, // IDEOGRAPHIC FULL STOP
+	0x002E, // FULL STOP
+	0x3001, // IDEOGRAPHIC COMMA
+	0x002C, // COMMA
+	0x30FD, // KATAKANA ITERATION MARK
+	0x30FE, // KATAKANA VOICED ITERATION MARK
+	0x309D, // HIRAGANA ITERATION MARK
+	0x309E, // HIRAGANA VOICED ITERATION MARK
+	0x3005, // IDEOGRAPHIC ITERATION MARK
+	0x303B, // VERTICAL IDEOGRAPHIC ITERATION MARK
+	0x30FC, // KATAKANA-HIRAGANA PROLONGED SOUND MARK
+	0x3041, // HIRAGANA LETTER SMALL A
+	0x3043, // HIRAGANA LETTER SMALL I
+	0x3045, // HIRAGANA LETTER SMALL U
+	0x3047, // HIRAGANA LETTER SMALL E
+	0x3049, // HIRAGANA LETTER SMALL O
+	0x30A1, // KATAKANA LETTER SMALL A
+	0x30A3, // KATAKANA LETTER SMALL I
+	0x30A5, // KATAKANA LETTER SMALL U
+	0x30A7, // KATAKANA LETTER SMALL E
+	0x30A9, // KATAKANA LETTER SMALL O
+	0x3063, // HIRAGANA LETTER SMALL TU
+	0x3083, // HIRAGANA LETTER SMALL YA
+	0x3085, // HIRAGANA LETTER SMALL YU
+	0x3087, // HIRAGANA LETTER SMALL YO
+	0x308E, // HIRAGANA LETTER SMALL WA
+	0x3095, // HIRAGANA LETTER SMALL KA
+	0x3096, // HIRAGANA LETTER SMALL KE
+	0x30C3, // KATAKANA LETTER SMALL TU
+	0x30E3, // KATAKANA LETTER SMALL YA
+	0x30E5, // KATAKANA LETTER SMALL YU
+	0x30E7, // KATAKANA LETTER SMALL YO
+	0x30EE, // KATAKANA LETTER SMALL WA
+	0x30F5, // KATAKANA LETTER SMALL KA
+	0x30F6, // KATAKANA LETTER SMALL KE
+	0x31F0, // KATAKANA LETTER SMALL KU
+	0x31F1, // KATAKANA LETTER SMALL SI
+	0x31F2, // KATAKANA LETTER SMALL SU
+	0x31F3, // KATAKANA LETTER SMALL TO
+	0x31F4, // KATAKANA LETTER SMALL NU
+	0x31F5, // KATAKANA LETTER SMALL HA
+	0x31F6, // KATAKANA LETTER SMALL HI
+	0x31F7, // KATAKANA LETTER SMALL HU
+	0x31F8, // KATAKANA LETTER SMALL HE
+	0x31F9, // KATAKANA LETTER SMALL HO
+	0x31FA, // KATAKANA LETTER SMALL MU
+	0x31FB, // KATAKANA LETTER SMALL RA
+	0x31FC, // KATAKANA LETTER SMALL RI
+	0x31FD, // KATAKANA LETTER SMALL RU
+	0x31FE, // KATAKANA LETTER SMALL RE
+	0x31FF, // KATAKANA LETTER SMALL RO
 };
 
 // http://www.w3.org/TR/jlreq/#characters_not_ending_a_line
 const std::set<UChar> kCannotEndLineJapanese = {
-	{0x2018}, // LEFT SINGLE QUOTATION MARK
-	{0x201C}, // LEFT DOUBLE QUOTATION MARK
-	{0x0028}, // LEFT PARENTHESIS
-	{0x3014}, // LEFT TORTOISE SHELL BRACKET
-	{0x005B}, // LEFT SQUARE BRACKET
-	{0x007B}, // LEFT CURLY BRACKET
-	{0x3008}, // LEFT ANGLE BRACKET
-	{0x300A}, // LEFT DOUBLE ANGLE BRACKET
-	{0x300C}, // LEFT CORNER BRACKET
-	{0x300E}, // LEFT WHITE CORNER BRACKET
-	{0x3010}, // LEFT BLACK LENTICULAR BRACKET
-	{0x2985}, // LEFT WHITE PARENTHESIS
-	{0x3018}, // LEFT WHITE TORTOISE SHELL BRACKET
-	{0x3016}, // LEFT WHITE LENTICULAR BRACKET
-	{0xFF08}, // Fullwidth Left Parenthesis
-	{0x00AB}, // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-	{0x301D}, // REVERSED DOUBLE PRIME QUOTATION MARK
+	0x2018, // LEFT SINGLE QUOTATION MARK
+	0x201C, // LEFT DOUBLE QUOTATION MARK
+	0x0028, // LEFT PARENTHESIS
+	0x3014, // LEFT TORTOISE SHELL BRACKET
+	0x005B, // LEFT SQUARE BRACKET
+	0x007B, // LEFT CURLY BRACKET
+	0x3008, // LEFT ANGLE BRACKET
+	0x300A, // LEFT DOUBLE ANGLE BRACKET
+	0x300C, // LEFT CORNER BRACKET
+	0x300E, // LEFT WHITE CORNER BRACKET
+	0x3010, // LEFT BLACK LENTICULAR BRACKET
+	0x2985, // LEFT WHITE PARENTHESIS
+	0x3018, // LEFT WHITE TORTOISE SHELL BRACKET
+	0x3016, // LEFT WHITE LENTICULAR BRACKET
+	0xFF08, // Fullwidth Left Parenthesis
+	0x00AB, // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+	0x301D, // REVERSED DOUBLE PRIME QUOTATION MARK
 };
 
 
@@ -354,66 +354,66 @@ const std::map<std::pair<UChar, UChar>, UChar> kArabicLigatures = {
  * Shaddah (Shadda).
  */
 const std::set<UChar> kArabicDiacritics = {
-	{0x0670}, // Superscript Alef
+	0x0670, // Superscript Alef
 
-	{0x0618}, // Small Fatha
-	{0x064E}, // Fatha
-	{0x065E}, // Fatha with Two Dots
-	{0x08E4}, // Curly Fatha
-	{0x08F4}, // Fatha with Ring
-	{0x08F5}, // Fatha with Dot Above
-	{0xFE76}, // Fatha Isolated Form
-	{0xFE77}, // Fatha Medial Form
+	0x0618, // Small Fatha
+	0x064E, // Fatha
+	0x065E, // Fatha with Two Dots
+	0x08E4, // Curly Fatha
+	0x08F4, // Fatha with Ring
+	0x08F5, // Fatha with Dot Above
+	0xFE76, // Fatha Isolated Form
+	0xFE77, // Fatha Medial Form
 
-	{0x061A}, // Small Kasra
-	{0x0650}, // Kasra
-	{0x08E6}, // Curly Kasra
-	{0x08F6}, // Kasra with Dot Below
-	{0xFE7A}, // Kasra Isolated Form
-	{0xFE7B}, // Kasra Medial Form
+	0x061A, // Small Kasra
+	0x0650, // Kasra
+	0x08E6, // Curly Kasra
+	0x08F6, // Kasra with Dot Below
+	0xFE7A, // Kasra Isolated Form
+	0xFE7B, // Kasra Medial Form
 
-	{0x0619}, // Small Damma
-	{0x064F}, // Damma
-	{0x0657}, // Inverted Damma
-	{0x065D}, // Reversed Damma
-	{0x08E5}, // Curly Damma
-	{0x08FE}, // Damma with Dot
-	{0xFE78}, // Damma Isolated Form
-	{0xFE79}, // Damma Medial Form
+	0x0619, // Small Damma
+	0x064F, // Damma
+	0x0657, // Inverted Damma
+	0x065D, // Reversed Damma
+	0x08E5, // Curly Damma
+	0x08FE, // Damma with Dot
+	0xFE78, // Damma Isolated Form
+	0xFE79, // Damma Medial Form
 
-	{0x0652}, // Sukun
-	{0xFE7E}, // Sukun Isolated Form
-	{0xFE7F}, // Sukun Medial Form
+	0x0652, // Sukun
+	0xFE7E, // Sukun Isolated Form
+	0xFE7F, // Sukun Medial Form
 
-	{0x08F0}, // Open Fathatan
-	{0x064B}, // Fathatan
-	{0x08E7}, // Curly Fathatan
-	{0xFE70}, // Fathatan Isolated Form
-	{0xFE71}, // Tatweel with Fathatan Above
+	0x08F0, // Open Fathatan
+	0x064B, // Fathatan
+	0x08E7, // Curly Fathatan
+	0xFE70, // Fathatan Isolated Form
+	0xFE71, // Tatweel with Fathatan Above
 
-	{0x08F1}, // Open Dammatan
-	{0x064C}, // Dammatan
-	{0x08E8}, // Curly Dammatan
-	{0xFE72}, // Dammatan Isolated Form
+	0x08F1, // Open Dammatan
+	0x064C, // Dammatan
+	0x08E8, // Curly Dammatan
+	0xFE72, // Dammatan Isolated Form
 
-	{0x08F2}, // Open Kasratan
-	{0x064D}, // Kasratan
-	{0x08E9}, // Curly Kasratan
-	{0xFE74}, // Kasratan Isolated Form
+	0x08F2, // Open Kasratan
+	0x064D, // Kasratan
+	0x08E9, // Curly Kasratan
+	0xFE74, // Kasratan Isolated Form
 
-	{0x0651}, // Shadda
-	{0xFE7C}, // Shadda Isolated Form
-	{0xFE7D}, // Shadda Medial Form
+	0x0651, // Shadda
+	0xFE7C, // Shadda Isolated Form
+	0xFE7D, // Shadda Medial Form
 
-	{0xFC5E}, // Ligature Shadda with Dammatan Isolated Form
-	{0xFC5F}, // Ligature Shadda with Kasratan Isolated Form
-	{0xFC60}, // Ligature Shadda with Fatha Isolated Form
-	{0xFC61}, // Ligature Shadda with Damma Isolated Form
-	{0xFC62}, // Ligature Shadda with Kasra Isolated Form
-	{0xFC63}, // Ligature Shadda with Superscript Alef Isolated Form
-	{0xFCF2}, // Ligature Shadda with Fatha Medial Form
-	{0xFCF3}, // Ligature Shadda with Damma Medial Form
-	{0xFCF4}, // Ligature Shadda with Kasra Medial Form
+	0xFC5E, // Ligature Shadda with Dammatan Isolated Form
+	0xFC5F, // Ligature Shadda with Kasratan Isolated Form
+	0xFC60, // Ligature Shadda with Fatha Isolated Form
+	0xFC61, // Ligature Shadda with Damma Isolated Form
+	0xFC62, // Ligature Shadda with Kasra Isolated Form
+	0xFC63, // Ligature Shadda with Superscript Alef Isolated Form
+	0xFCF2, // Ligature Shadda with Fatha Medial Form
+	0xFCF3, // Ligature Shadda with Damma Medial Form
+	0xFCF4, // Ligature Shadda with Kasra Medial Form
 };
 
 
@@ -439,7 +439,6 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 	{0xFCF3, 0xFC61}, // Shadda with Damma
 	{0xFCF4, 0xFC62}, // Shadda with Kasra
 };
-
 
 const std::set<std::string> kRTLScripts = {
 	{"arabic", "devanagari", "hebrew", "mandaic", "nko", "samaritan", "syriac", "thaana"},
