@@ -348,6 +348,7 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Texture* TextNode::render(TextureCache* texture_cache) {
+	// NOCOM select font per glyph here
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	blit(Rect(0, 0, img.width(), img.height()),
@@ -621,6 +622,7 @@ FontCache::~FontCache() {
 }
 
 IFont& FontCache::get_font(NodeStyle* ns) {
+	// NOCOM select font per glyph
 	const bool is_bold = ns->font_style & IFont::BOLD;
 	const bool is_italic = ns->font_style & IFont::ITALIC;
 	if (is_bold && is_italic) {

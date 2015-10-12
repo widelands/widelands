@@ -403,7 +403,7 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		// NOCOM font face won't work in fh1 - we need font selection by code point.
 		//const std::string font_face = er.font_face.empty() ? m_fontname : er.font_face;
-		log("NOCOM font face: %s\n", font_face.c_str());
+		//log("NOCOM font face: %s\n", font_face.c_str());
 
 		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, m_fontsize,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));

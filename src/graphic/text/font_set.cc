@@ -49,6 +49,7 @@ FontSet::FontSet(const std::string& localename) {
 	assert(!condensed_bold_italic_.empty());
 }
 
+const std::string& FontSet::name() const {return name_;}
 const std::string& FontSet::serif() const {return serif_;}
 const std::string& FontSet::serif_bold() const {return serif_bold_;}
 const std::string& FontSet::serif_italic() const {return serif_italic_;}
@@ -120,6 +121,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 							 fontsetname.c_str(), actual_localename.c_str());
 						fontsetname = "default";
 					}
+					name_ = fontsetname;
 					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname);
 					font_set_table->do_not_warn_about_unaccessed_keys();
 
@@ -167,6 +169,69 @@ void FontSet::set_font_group(const LuaTable& table, const std::string& key, cons
 	*bold = get_string_with_default(table, (boost::format("%s_bold") % key).str(), *basic);
 	*italic = get_string_with_default(table, (boost::format("%s_italic") % key).str(), *basic);
 	*bold_italic = get_string_with_default(table, (boost::format("%s_bold_italic") % key).str(), *bold);
+}
+
+FontSets::FontSets() {
+	std::map<std::string, FontSets::Selector> fontset_selectors = {
+		{"default", FontSets::Selector::kDefault},
+		{"arabic", FontSets::Selector::kArabic},
+		{"cjk", FontSets::Selector::kCJK},
+		{"devanagari", FontSets::Selector::kDevanagari},
+		{"hebrew", FontSets::Selector::kHebrew},
+		{"myanmar", FontSets::Selector::kMyanmar},
+		{"sinhala", FontSets::Selector::kSinhala},
+  };
+
+	FilenameSet files = g_fs->list_directory("locale");
+	std::string localename;
+
+	try {  // Begin read locales table
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
+
+		for (const std::string& filename : files) {  // Begin scan locales directory
+			char const* const path = filename.c_str();
+			if (!strcmp(FileSystem::fs_filename(path), ".") ||
+				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				continue;
+			}
+
+			try {  // Begin read locale from table
+				localename = g_fs->filename_without_ext(path);
+
+				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
+				table->do_not_warn_about_unaccessed_keys();
+				UI::FontSet fontset(localename);
+				FontSets::Selector selector = FontSets::Selector::kDefault;
+				if (fontset_selectors.count(fontset.name()) == 1) {
+					selector = fontset_selectors.at(fontset.name());
+				} else {
+					log("No selector for fontset: %s in locale: %s. Falling back to default\n",
+						 fontset.name().c_str(), localename.c_str());
+				}
+				locale_fontsets.insert(std::make_pair(localename, selector));
+				if (fontsets.count(selector) != 1) {
+					fontsets.insert(std::make_pair(selector, fontset));
+				}
+			} catch (const WException&) {
+				log("Could not read locale fontset for: %s\n", localename.c_str());
+				locale_fontsets.insert(std::make_pair(localename, FontSets::Selector::kDefault));
+			}  // End read locale from table
+		}  // End scan locales directory
+	} catch (const LuaError& err) {
+		log("Could not read locales fontset information from file: %s\n", err.what());
+		return;  // Nothing more can be done now.
+	}  // End read locales table
+
+	// Check if all selectors have a fontset
+	for (int i = static_cast<int>(FontSets::Selector::kDefault);
+		  i < static_cast<int>(FontSets::Selector::kUnknown);
+		  ++i) {
+		if (fontsets.count(static_cast<FontSets::Selector>(i)) != 1) {
+			log("No fontset defined for FontSets::Selector enum member #%d\n", i);
+		}
+	}
 }
 
 }

@@ -139,6 +139,7 @@ public:
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
 	std::unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
+	UI::FontSets font_sets_; // All fontsets
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
 };

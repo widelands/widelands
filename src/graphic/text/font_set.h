@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_TEXT_FONT_SET_H
 #define WL_GRAPHIC_TEXT_FONT_SET_H
 
+#include <map>
 #include <string>
 
 #include "scripting/lua_table.h"
@@ -33,6 +34,9 @@ struct FontSet {
 
 	/// Create the fontset for a locale from configuration file
 	FontSet(const std::string& localename);
+
+	// The fontset's name
+	const std::string& name() const;
 
 	/// All functions below return the path of the font file used for the given
 	/// style.
@@ -65,6 +69,7 @@ private:
 							  std::string* basic, std::string* bold,
 							  std::string* italic, std::string* bold_italic);
 
+	std::string name_;
 	std::string serif_;
 	std::string serif_bold_;
 	std::string serif_italic_;
@@ -81,6 +86,25 @@ private:
 	bool is_rtl_;
 };
 
-}
+struct FontSets {
+	enum class Selector {
+		kDefault,
+		kArabic,
+		kCJK,
+		kDevanagari,
+		kHebrew,
+		kMyanmar,
+		kSinhala,
+		kUnknown
+	};
+
+	FontSets();
+
+	std::map<std::string, FontSets::Selector> locale_fontsets;
+
+	std::map<FontSets::Selector, UI::FontSet> fontsets;
+};
+
+} // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_FONT_SET_H
