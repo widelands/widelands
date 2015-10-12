@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-17 15:02+0000\n"
+"POT-Creation-Date: 2015-10-04 07:51+0000\n"
+"PO-Revision-Date: 2015-10-07 15:36+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -321,7 +321,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr "Duchovní sa oddali rozjímaniu a čoskoro zistili dôvod, prečo voda stúpa: boh Lutas stratil dôveru k Atlantíďanom kvôli drzosti ich kráľa. Rozhodol sa stiahnuť práva, ktoré udelil kráľovi Ajanthulovi a jeho deťom. A preto ich opäť navrátil pod morskú hladinu."
+msgstr "Duchovní sa oddali rozjímaniu a čoskoro zistili dôvod, prečo voda stúpa: boh Lutas stratil dôveru k Atlantíďanom pre drzosť ich kráľa. Rozhodol sa stiahnuť práva, ktoré udelil kráľovi Ajanthulovi a jeho deťom. A preto ich opäť volá pod morskú hladinu."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Uproar and Confusion"
@@ -348,7 +348,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "Jundlína, dcéra bývalého kráľa a najvyššia kňažka boha, bola najráznejšou duchovnou. Keď nespočetné ponuky nezmenili situáciu, bola presvedčená, že na utíšenie boha je potrebná veľká osobná hodnota. Preto mu ponúkla svojho najmilšieho: svojho manžela, otca\nsvojho jediného syna."
+msgstr "Jundlína, dcéra nebohého kráľa a najvyššia kňažka boha, bola najodhodlanejšou duchovnou. Keď ani nespočetné množstvo obiet nezmenilo situáciu, presvedčila samu seba, že na utíšenie boha je potrebný dar, ktorý má pre ňu veľkú osobnú hodnotu. Preto mu ponúkla to najdrahšie, čo mala: svojho manžela, otca svojho jediného dieťaťa."
 
 #. TRANSLATORS: Foreword
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:163
@@ -360,14 +360,14 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Ale ani toto nezmenilo mienku boha. Voda pokračovala v stúpaní. Takmer dohnaná k šialenstvu vinou, bolesťou a hnevom, Jundlína sa stala kacírkou. Tajne zhromaždila ľudí z obyčajného ľudu, ktorí nesúhlasili s rozhodnutím duchovných akceptovať vôľu boha. Spolu s nimi podpálila chrám a ukradla loď na únik od vplyvu boha v Atlantíde. Táto malá skupina sa začala modliť k Satulovi, bohu ohňa a najhoršiemu nepriateľovi Lutasa."
+msgstr "Ani to však nezmenilo mienku boha. Voda pokračovala v stúpaní. Takmer dohnaná k šialenstvu vinou, bolesťou a hnevom, Jundlína sa stala kacírkou. Tajne zhromaždila ľudí z obyčajného ľudu, ktorí nesúhlasili s rozhodnutím duchovných prijať vôľu boha. Spolu s nimi podpálila chrám a ukradla loď na únik od vplyvu boha nad Atlantídou. Táto skupinka sa začala modliť k Satulovi, bohu ohňa a najhoršiemu nepriateľovi Lutasa."
 
 #. TRANSLATORS: Foreword
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:165
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr "Zanechajúc umierajúcu Atlantídu a svoju minulosť, začali výpravu, aby našli miesto kryté ohňom a chránené pred morom."
+msgstr "Zanechajúc umierajúcu Atlantídu a svoju minulosť za sebou, začali výpravu s cieľom nájsť miesto kryté ohňom a chránené pred morom."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:172
 msgid "The Princess’ Memoir"
@@ -385,7 +385,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr "Opustili sme Atlantídu a plavili sa na východ. V šiesty deň sme vstúpili do zakázaného mora bez toho, aby sme si všimli nejakých prenasledovateľov z Atlantídy a aby nám Lutas zdemoloval loď. Teraz sme za jeho dosahom. O deň neskôr sme spozorovali ostrov, na ktorom, zdá sa, bola jedna z tých hôr chrliacich oheň. Považovala som to za znamenie boha ohňa a priplavili sme sa k jeho brehu."
+msgstr "Opustili sme Atlantídu a vyrazili na východ. V šiesty deň sme vstúpili do zakázaného mora bez toho, aby sme si všimli nejakých prenasledovateľov z Atlantídy a aby nám Lutas zdemoloval loď. Teraz sme za jeho dosahom. O deň nato sme spozorovali ostrov, na ktorom sa zdá byť jedna z tých hôr chrliacich oheň. Považovala som to za znamenie boha ohňa, a preto sme pristáli na jeho brehu."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178

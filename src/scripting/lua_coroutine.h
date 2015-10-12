@@ -31,9 +31,9 @@ class FileWrite;
 
 namespace Widelands {
 class Player;
+class WorkerDescr;
 struct BuildingDescr;
 struct Coords;
-struct WorkerDescr;
 }  // namespace Widelands
 
 // Easy handling of function objects and coroutines.
