@@ -578,26 +578,22 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	// This will empty the stock and launch all workers including incorporated
 	// ones.
 	if (upcast(Game, game, &egbase)) {
-		//separate behaviour for the case of loading the game
-		//(which does save/destroy/reload) and simply destroying ingame
-		if (game->is_loaded())
-		{
-			//this game is really running
-			const WareList& workers = get_workers();
-			for (WareIndex id = 0; id < workers.get_nrwareids(); ++id) {
-				const uint32_t stock = workers.stock(id);
+		const WareList& workers = get_workers();
+		for (WareIndex id = 0; id < workers.get_nrwareids(); ++id) {
+			const uint32_t stock = workers.stock(id);
+			//separate behaviour for the case of loading the game
+			//(which does save/destroy/reload) and simply destroying ingame
+			if (game->is_loaded())
+			{
+				//this game is really running
 				for (uint32_t i = 0; i < stock; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
 				assert(!m_incorporated_workers.count(id) || m_incorporated_workers[id].empty());
 			}
-		}
-		else
-		{
-			//we are in the load-game sequence...
-			const WareList& workers = get_workers();
-			for (WareIndex id = 0; id < workers.get_nrwareids(); ++id) {
-				const uint32_t stock = workers.stock(id);
+			else
+			{
+				//we are in the load-game sequence...
 				remove_workers(id, stock);
 			}
 		}
