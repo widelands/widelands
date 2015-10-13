@@ -678,5 +678,5 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		helptext = err.what();
 	}
 	/** TRANSLATORS: This is a heading for a help window */
-	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), helptext);
+	m_help = new UI::FullscreenHelpWindow(this, _("Multiplayer Game Setup"), helptext);
 }
