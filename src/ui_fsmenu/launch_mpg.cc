@@ -242,8 +242,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete m_lua;
 	delete m_mpsg;
-	if (m_help)
-		delete m_help;
 	delete m_chat;
 }
 
@@ -665,9 +663,11 @@ void FullscreenMenuLaunchMPG::load_map_info()
 
 /// Show help
 void FullscreenMenuLaunchMPG::help_clicked() {
-	if (m_help)
-		delete m_help;
-	/** TRANSLATORS: This is a heading for a help window */
-	m_help = new UI::FullscreenHelpWindow(this, m_lua, "scripting/widelands/multiplayer_help.lua",
-													  _("Multiplayer Game Setup"));
+	if (m_help) {
+		m_help->set_visible(true);
+	} else {
+		m_help.reset(new UI::FullscreenHelpWindow(this, m_lua, "scripting/widelands/multiplayer_help.lua",
+																/** TRANSLATORS: This is a heading for a help window */
+																_("Multiplayer Game Setup")));
+	}
 }
