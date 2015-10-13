@@ -667,49 +667,16 @@ void FullscreenMenuLaunchMPG::load_map_info()
 void FullscreenMenuLaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
-	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
-	m_help->add_paragraph(_("You are in the multiplayer launch game menu."));
-	m_help->add_heading(_("Client settings"));
-	m_help->add_paragraph
-		(_
-		 ("On the left side is a list of all clients including you. You can set your role "
-		  "with the button following your nickname. Available roles are:"));
-	m_help->add_picture_li
-		(_
-		 ("The player with the color of the flag. If more than one client selected the same color, these "
-		  "share control over the player (‘shared kingdom mode’)."),
-		 "pics/genstats_enable_plr_08.png");
-	m_help->add_picture_li
-		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
-		"pics/menu_tab_watch.png");
-	m_help->add_heading(_("Player settings"));
-	m_help->add_paragraph
-		(_
-		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
-		  "following:"));
-	m_help->add_picture_li
-		(_("Connected to one or more clients (see ‘Client settings’)."), "pics/genstats_nrworkers.png");
-	m_help->add_picture_li
-		(_
-		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
-		  "indicate the strength of the currently selected computer player)."),
-		"pics/ai_Normal.png");
-	m_help->add_picture_li(_("Set as shared in starting position for another player."), "pics/shared_in.png");
-	m_help->add_picture_li(_("Closed."), "pics/stop.png");
-	m_help->add_block
-		(_
-		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "
-		  "player. Hosting players can also set the initialization of each player (the set of buildings, "
-		  "wares and workers the player starts with) and the tribe and team for computer players"));
-	m_help->add_block
-		(_
-		 ("Every client connected to a player (the set ‘role’ player) can set the tribe and the team "
-		  "for that player"));
-	m_help->add_heading(_("Map details"));
-	m_help->add_paragraph
-		(_
-		 ("You can see information about the selected map or savegame on the right-hand side. "
-		  "A button next to the map name allows the host to change to a different map. "
-		  "Furthermore, the host is able to set a specific win condition, and finally "
-		  "can start the game as soon as all players are set up."));
+	std::string helptext;
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> t(lua.run_script("scripting/widelands/multiplayer_help.lua"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->resume();
+		helptext = cr->pop_string();
+	} catch (LuaError& err) {
+		helptext = err.what();
+	}
+	/** TRANSLATORS: This is a heading for a help window */
+	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), helptext);
 }

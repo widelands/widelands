@@ -25,7 +25,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -44,108 +43,31 @@ namespace UI {
 HelpWindow::HelpWindow
 	(Panel * const parent,
 	 const std::string & caption,
-	 uint32_t fontsize,
+	 const std::string & helptext,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str()),
-	textarea(new MultilineTextarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
-	m_h1(std::to_string(fontsize < 12 ? 18 : fontsize * 3 / 2)),
-	m_h2(std::to_string(fontsize < 12 ? 12 : fontsize)),
-	m_p (std::to_string(fontsize < 12 ? 10  : fontsize * 5 / 6)),
-	m_fn(ui_fn().substr(0, ui_fn().size() - 4)) // Font file - .ttf
+	Window(parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
+	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, std::string(), Align_Left))
 {
-	// Begin the text with the caption
-	m_text  = "<rt text-align=center><p font-color=#AAFFAA font-face=";
-	m_text += m_fn;
-	m_text += " font-size=";
-	m_text += m_h1;
-	m_text += ">";
-	m_text += caption;
-	m_text += "</p></rt>";
-	textarea->set_text(m_text);
-	lastentry = HEADING;
+	int margin = 5;
 
 	// Calculate sizes
-	int32_t const out_width  = (width  == 0) ? g_gr->get_xres() * 3 / 5 : width;
-	int32_t const out_height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
-	int32_t const but_height  = g_gr->get_yres() * 9 / 200;
+	width  = (width  == 0) ? g_gr->get_xres() * 3 / 5 : width;
+	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	assert(out_width  >= 80);
-	assert(out_height >= 60);
-	int32_t in_width  = out_width  - 80;
-	int32_t in_height = out_height - 60;
+	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
+									 g_gr->images().get("pics/but5.png"),
+									 _("OK"), "", true, false);
 
-	set_inner_size(in_width, in_height);
-	set_pos(Point((g_gr->get_xres() - out_width) / 2, (g_gr->get_yres() - out_height) / 2));
-
-	Button * btn = new Button
-		(this, "ok",
-		 in_width / 3, in_height - but_height * 3 / 2,
-		 in_width / 3, but_height,
-		 g_gr->images().get("pics/but5.png"),
-		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::clicked_ok, boost::ref(*this)));
-	btn->set_font(Font::get((UI::g_fh1->fontset()).serif(),
-									(fontsize < 12 ? 12 : fontsize)));
+	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
 
-	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
+	textarea_->set_size(width - 2 * margin, height - btn->get_h() - 3 * margin);
+	textarea_->set_text(helptext);
+
+	set_inner_size(width, height);
+	center_to_parent();
 	focus();
-}
-
-
-HelpWindow::~HelpWindow()
-{
-}
-
-/// Adds a new heading.
-void HelpWindow::add_heading(std::string heading) {
-	m_text += "<rt text-align=left><p font-color=#AAAAFF font-face=";
-	m_text += m_fn;
-	m_text += " font-size=";
-	m_text += m_h2;
-	m_text += "><br><br>";
-	m_text += heading;
-	m_text += "</p></rt>";
-	textarea->set_text(m_text);
-	lastentry = HEADING;
-}
-
-/// Adds a new paragraph.
-void HelpWindow::add_paragraph(std::string block) {
-	m_text += "<rt><p font-face=";
-	m_text += m_fn;
-	m_text += " font-size=";
-	m_text += m_p;
-	if (lastentry == HEADING)
-		m_text += ">";
-	else
-		m_text += "><br>";
-	lastentry = BLOCK;
-	return add_block(block);
-}
-
-/// Behaves the same as add_paragraph, just it adds only one < br> if last
-/// written entry was already a block text.
-void HelpWindow::add_block(std::string block) {
-	if (lastentry == HEADING)
-		return add_paragraph(block);
-	m_text += "<br>";
-	m_text += block;
-	m_text += "</p></rt>";
-	textarea->set_text(m_text);
-	lastentry = BLOCK;
-}
-
-void HelpWindow::add_picture_li(std::string block, std::string picpath) {
-	m_text += "<rt image=";
-	m_text += picpath;
-	m_text += " image-align=left><p font-face=";
-	m_text += m_fn;
-	m_text += " font-size=";
-	m_text += m_p;
-	m_text += ">";
-	lastentry = BLOCK;
-	return add_block(block);
 }
 
 
@@ -209,7 +131,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height,
 			(boost::format(_("Help: %s")) % building_description.descname()).str()),
-	textarea(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	try {
 		std::unique_ptr<LuaTable> t(
@@ -218,9 +140,9 @@ LuaTextHelpWindow::LuaTextHelpWindow
 		cr->push_arg(&building_description);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		textarea->set_text(help_text);
+		textarea_->set_text(help_text);
 	} catch (LuaError& err) {
-		textarea->set_text(err.what());
+		textarea_->set_text(err.what());
 	}
 }
 LuaTextHelpWindow::~LuaTextHelpWindow()
