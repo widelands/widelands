@@ -667,16 +667,7 @@ void FullscreenMenuLaunchMPG::load_map_info()
 void FullscreenMenuLaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
-	std::string helptext;
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> t(lua.run_script("scripting/widelands/multiplayer_help.lua"));
-		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
-		cr->resume();
-		helptext = cr->pop_string();
-	} catch (LuaError& err) {
-		helptext = err.what();
-	}
 	/** TRANSLATORS: This is a heading for a help window */
-	m_help = new UI::FullscreenHelpWindow(this, _("Multiplayer Game Setup"), helptext);
+	m_help = new UI::FullscreenHelpWindow(this, m_lua, "scripting/widelands/multiplayer_help.lua",
+													  _("Multiplayer Game Setup"));
 }

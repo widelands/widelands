@@ -26,14 +26,17 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
+#include "scripting/lua_coroutine.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/button.h"
 
 namespace UI {
 
 FullscreenHelpWindow::FullscreenHelpWindow
 	(Panel * const parent,
+	 LuaInterface* lua,
+	 const std::string& script_path,
 	 const std::string & caption,
-	 const std::string & helptext,
 	 uint32_t width, uint32_t height)
 	:
 	Window(parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
@@ -51,6 +54,16 @@ FullscreenHelpWindow::FullscreenHelpWindow
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
 	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
+
+	std::string helptext;
+	try {
+		std::unique_ptr<LuaTable> t(lua->run_script(script_path));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->resume();
+		helptext = cr->pop_string();
+	} catch (LuaError& err) {
+		helptext = err.what();
+	}
 
 	textarea_->set_size(width - 2 * margin, height - btn->get_h() - 3 * margin);
 	textarea_->set_text(helptext);
