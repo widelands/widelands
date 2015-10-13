@@ -19,6 +19,7 @@
 
 #include "wui/helpwindow.h"
 
+#include <memory>
 #include <string>
 
 #include <boost/format.hpp>

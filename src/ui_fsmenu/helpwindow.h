@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UI_FS_MENU_HELPWINDOW_H
-#define WL_UI_FS_MENU_HELPWINDOW_H
+#ifndef WL_UI_FSMENU_HELPWINDOW_H
+#define WL_UI_FSMENU_HELPWINDOW_H
 
 #include <memory>
 
@@ -58,4 +58,4 @@ private:
 
 } // namespace UI
 
-#endif  // end of include guard: WL_UI_FS_MENU_HELPWINDOW_H
+#endif  // end of include guard: WL_UI_FSMENU_HELPWINDOW_H
