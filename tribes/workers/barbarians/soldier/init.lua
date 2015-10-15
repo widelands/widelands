@@ -69,6 +69,8 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   default_target_quantity = 10,
+
    animations = animations,
 
 	max_hp_level = 3,
