@@ -34,7 +34,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-
+// NOCOM we have some cropping here; investigate.
 inline EditorInteractive & MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }

@@ -50,7 +50,8 @@ BaseListselect::BaseListselect
 	 Align const align, bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
-	m_lineheight(UI::g_fh1->render(as_uifont("."))->height() + kMargin), // NOCOM we want a representative glyph here.
+	m_lineheight(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset().representative_character()))->height()
+					 + kMargin),
 	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 	m_scrollpos     (0),
 	m_selection     (no_selection_index()),

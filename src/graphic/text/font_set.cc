@@ -61,6 +61,8 @@ const std::string& FontSet::condensed() const {return condensed_;}
 const std::string& FontSet::condensed_bold() const {return condensed_bold_;}
 const std::string& FontSet::condensed_italic() const {return condensed_italic_;}
 const std::string& FontSet::condensed_bold_italic() const {return condensed_bold_italic_;}
+// NOCOM Use this wherever we want the line height.
+const std::string& FontSet::representative_character() const {return representative_character_;}
 uint16_t FontSet::size_offset() const {return size_offset_;}
 bool FontSet::is_rtl() const {return is_rtl_;}
 
@@ -82,6 +84,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 
 	set_fonts(*default_font_table, kFallbackFont);
 	direction_string = default_font_table->get_string("direction");
+	representative_character_ = default_font_table->get_string("representative_character");
 	size_offset_ = default_font_table->get_int("size_offset");
 
 	// Now try to get the fontset for the actual locale.
@@ -122,7 +125,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 					}
 					name_ = fontsetname;
 					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname);
-					font_set_table->do_not_warn_about_unaccessed_keys();
+					representative_character_ = font_set_table->get_string("representative_character");
 
 					set_fonts(*font_set_table, serif_);
 					direction_string = get_string_with_default(*font_set_table, "direction", "ltr");

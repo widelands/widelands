@@ -28,6 +28,8 @@ return {
 		-- If the diection isn't defined, your font set will default to "ltr" = left-to-right.
 		-- For right-to-left or bidirectional (BiDi) languages, use "rtl".
 		direction = "ltr",
+		-- This is used to calculate line height for the fontset. Use any character for your language's script.
+		representative_character = "a",
 		size_offset = 0
 	},
 
@@ -37,15 +39,18 @@ return {
 		serif_italic = "amiri/amiri-slanted.ttf",
 		serif_bold_italic = "amiri/amiri-boldslanted.ttf",
 		direction = "rtl",
+		representative_character = "ا",
 		size_offset = 4
 	},
 
 	cjk = {
 		serif = "MicroHei/wqy-microhei.ttc",
+		representative_character = "简",
 	},
 
 	devanagari = {
 		serif = "Nakula/nakula.ttf",
+		representative_character = "ह",
 		direction = "rtl"
 	},
 
@@ -56,14 +61,17 @@ return {
 		sans = "Culmus/TaameyFrankCLM-Medium.ttf",
 		sans_bold = "TaameyFrankCLM-Bold.ttf",
 		sans_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
+		representative_character = "א",
 		direction = "rtl"
 	},
 
 	myanmar = {
 		serif = "mmrCensus/mmrCensus.ttf",
+		representative_character = "မ",
 	},
 
 	sinhala = {
 		serif = "Sinhala/lklug.ttf",
+		representative_character = "ස",
 	}
 }
