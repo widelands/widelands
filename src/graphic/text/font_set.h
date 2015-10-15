@@ -102,7 +102,7 @@ struct FontSets {
 	FontSets();
 
 	FontSet* get_fontset(UI::FontSets::Selector selector) const;
-	const UI::FontSet& get_fontset(const std::string& locale) const;
+	FontSet* get_fontset(const std::string& locale) const;
 
 private:
 	std::map<std::string, UI::FontSets::Selector> locale_fontsets;

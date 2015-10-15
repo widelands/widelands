@@ -34,10 +34,12 @@ StandaloneRenderer::StandaloneRenderer() {
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(WIDELANDS_DATA_DIR));
 	g_fs->add_file_system(&FileSystem::create(RICHTEXT_DATA_DIR));
+	UI::FontSets fontsets;
 
 	texture_cache_.reset(create_texture_cache(500 << 20));  // 500 MB
 	image_cache_.reset(new ImageCache());
-	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(), new UI::FontSet("en")));
+	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(),
+												fontsets.get_fontset("en"), fontsets));
 }
 
 StandaloneRenderer::~StandaloneRenderer() {

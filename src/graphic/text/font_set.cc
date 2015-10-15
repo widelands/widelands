@@ -238,13 +238,12 @@ FontSet* FontSets::get_fontset(FontSets::Selector selector) const {
 	return fontsets.at(selector);
 }
 
-// NOCOM unused so far
-const FontSet& FontSets::get_fontset(const std::string& locale) const {
+FontSet* FontSets::get_fontset(const std::string& locale) const {
 	FontSets::Selector selector = FontSets::Selector::kDefault;
 	if (locale_fontsets.count(locale) == 1) {
 		selector = locale_fontsets.at(locale);
 	}
-	return *fontsets.at(selector);
+	return fontsets.at(selector);
 }
 
 }
