@@ -51,12 +51,10 @@ namespace {
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
 					  const std::string& init_descname,
-					  const std::string& init_sortname,
-					  const std::string& init_fontname) :
+					  const std::string& init_sortname) :
 		localename(init_localename),
 		descname(init_descname),
-		sortname(init_sortname),
-		fontname(init_fontname) {}
+		sortname(init_sortname) {}
 
 	bool operator<(const LanguageEntry& other) const {
 		return sortname < other.sortname;
@@ -65,7 +63,6 @@ struct LanguageEntry {
 	std::string localename; // ISO code for the locale
 	std::string descname;   // Native language name
 	std::string sortname;   // ASCII Language name used for sorting
-	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
 // Locale identifiers can look like this: ca_ES@valencia.UTF-8
@@ -437,9 +434,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
-				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
-
-				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+				entries.push_back(LanguageEntry(localename, name, sortname));
 
 				if (localename == current_locale) {
 					selected_locale = current_locale;
@@ -447,7 +442,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 			} catch (const WException&) {
 				log("Could not read locale for: %s\n", localename.c_str());
-				entries.push_back(LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
+				entries.push_back(LanguageEntry(localename, localename, localename));
 			}  // End read locale from table
 		}  // End scan locales directory
 	} catch (const LuaError& err) {
@@ -460,7 +455,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	std::sort(entries.begin(), entries.end());
 	for (const LanguageEntry& entry : entries) {
 		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
-									entry.localename == selected_locale, "", entry.fontname);
+									entry.localename == selected_locale, "");
 	}
 }
 

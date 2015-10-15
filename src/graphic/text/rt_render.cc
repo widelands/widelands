@@ -1158,7 +1158,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
-
+// NOCOM we want a default font set size offset & rtl property.
 	NodeStyle default_style = {
 		fontset_,
 		renderer_style_.font_face, renderer_style_.font_size,

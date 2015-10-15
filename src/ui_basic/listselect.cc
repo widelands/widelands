@@ -24,15 +24,14 @@
 #include <boost/bind.hpp>
 
 #include "base/log.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "wlapplication.h"
+
+constexpr int kMargin = 2;
 
 namespace UI {
 /**
@@ -51,16 +50,13 @@ BaseListselect::BaseListselect
 	 Align const align, bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
-	// NOCOM get from fh1.
-	m_lineheight(g_fh->get_fontheight(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL)),
+	m_lineheight(UI::g_fh1->render(as_uifont("."))->height() + kMargin), // NOCOM we want a representative glyph here.
 	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 	m_scrollpos     (0),
 	m_selection     (no_selection_index()),
 	m_last_click_time(-10000),
 	m_last_selection(no_selection_index()),
-	m_show_check(show_check),
-	m_fontname(UI::g_fh1->fontset().serif()),
-	m_fontsize(UI_FONT_SIZE_SMALL)
+	m_show_check(show_check)
 {
 	set_thinks(false);
 
@@ -68,9 +64,8 @@ BaseListselect::BaseListselect
 	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
-	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
-	m_scrollbar.set_pagesize
-		(h - 2 * g_fh->get_fontheight(m_fontname, m_fontsize));
+	m_scrollbar.set_singlestepsize(m_lineheight);
+	m_scrollbar.set_pagesize(h - 2 * m_lineheight);
 	m_scrollbar.set_steps(1);
 
 	if (show_check) {
@@ -126,8 +121,7 @@ void BaseListselect::add
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text,
-	 const std::string  & fontname)
+	 const std::string  & tooltip_text)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -136,8 +130,7 @@ void BaseListselect::add
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
-	er->font_face = fontname;
-	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+	uint32_t entry_height = m_lineheight;
 	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
@@ -163,8 +156,7 @@ void BaseListselect::add_front
 	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text,
-	 const std::string& fontname)
+	 const std::string  & tooltip_text)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -177,9 +169,8 @@ void BaseListselect::add_front
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
-	er->font_face = fontname;
 
-	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+	uint32_t entry_height = m_lineheight;
 	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
@@ -335,7 +326,7 @@ void BaseListselect::remove_selected()
 
 uint32_t BaseListselect::get_lineheight() const
 {
-	return m_lineheight + 2;
+	return m_lineheight + kMargin;
 }
 
 uint32_t BaseListselect::get_eff_w() const
@@ -402,11 +393,7 @@ void BaseListselect::draw(RenderTarget & dst)
 			dst.blit(Point(1, y + (get_lineheight() - er.pic->height()) / 2), er.pic);
 		}
 
-		// NOCOM font face won't work in fh1 - we need font selection by code point.
-		//const std::string font_face = er.font_face.empty() ? m_fontname : er.font_face;
-		//log("NOCOM font face: %s\n", font_face.c_str());
-
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, m_fontsize,
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
 		dst.blitrect(point, entry_text_im, Rect(0, 0, get_eff_w(), m_lineheight));

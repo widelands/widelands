@@ -64,24 +64,18 @@ struct BaseListselect : public Panel {
 		 uint32_t value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string& fontname = "");
+		 const std::string & tooltip_text = std::string());
 	void add_front
 		(const std::string& name,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string& fontname = "");
+		 const std::string & tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char * name);
 
 	void switch_entries(uint32_t, uint32_t);
 
 	void set_entry_color(uint32_t, RGBColor);
-	void set_font(const std::string & fontname, int32_t const fontsize) {
-		m_fontname = fontname;
-		m_fontsize = fontsize;
-	}
 
 	uint32_t size () const {return m_entry_records.size ();}
 	bool     empty() const {return m_entry_records.empty();}
@@ -137,7 +131,6 @@ private:
 		const Image* pic;
 		std::string name;
 		std::string tooltip;
-		std::string font_face;
 	};
 	using EntryRecordDeque = std::deque<EntryRecord *>;
 
@@ -152,9 +145,6 @@ private:
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
 	const Image* m_check_pic;
-
-	std::string m_fontname;
-	uint32_t    m_fontsize;
 	std::string m_current_tooltip;
 };
 
@@ -174,11 +164,10 @@ struct Listselect : public BaseListselect {
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string & font_face = "")
+		 const std::string & tooltip_text = std::string())
 	{
 		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text, font_face);
+		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
 	}
 	void add_front
 		(const std::string& name,

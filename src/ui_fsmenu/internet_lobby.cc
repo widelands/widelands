@@ -151,7 +151,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames   .double_clicked.connect
