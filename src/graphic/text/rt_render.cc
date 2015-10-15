@@ -57,7 +57,7 @@ struct Borders {
 };
 
 struct NodeStyle {
-	const UI::FontSet* const fontset;  // Not owned.
+	UI::FontSet* fontset;
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
@@ -623,16 +623,23 @@ FontCache::~FontCache() {
 
 IFont& FontCache::get_font(NodeStyle* ns) {
 	// NOCOM select font per glyph
+	if (ns->font_face == "serif") {
+		ns->font_face = ns->fontset->serif();
+	} else if (ns->font_face == "sans") {
+		ns->font_face = ns->fontset->sans();
+	} else if (ns->font_face == "condensed") {
+		ns->font_face = ns->fontset->condensed();
+	}
 	const bool is_bold = ns->font_style & IFont::BOLD;
 	const bool is_italic = ns->font_style & IFont::ITALIC;
 	if (is_bold && is_italic) {
 		if (ns->font_face == ns->fontset->condensed() ||
-		    ns->font_face == ns->fontset->condensed_bold() ||
-		    ns->font_face == ns->fontset->condensed_italic()) {
+			 ns->font_face == ns->fontset->condensed_bold() ||
+			 ns->font_face == ns->fontset->condensed_italic()) {
 			ns->font_face = ns->fontset->condensed_bold_italic();
 		} else if (ns->font_face == ns->fontset->serif() ||
-		           ns->font_face == ns->fontset->serif_bold() ||
-		           ns->font_face == ns->fontset->serif_italic()) {
+					  ns->font_face == ns->fontset->serif_bold() ||
+					  ns->font_face == ns->fontset->serif_italic()) {
 			ns->font_face = ns->fontset->serif_bold_italic();
 		} else {
 			ns->font_face = ns->fontset->sans_bold_italic();
@@ -718,6 +725,8 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		while (ts.pos() < txt.size()) {
 			ts.skip_ws();
 			word = ts.till_any_or_end(" \t\n\r");
+			// NOCOM get font for all scripts
+			ns.fontset = i18n::find_fontset(word.c_str());
 			if (!word.empty()) {
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
@@ -755,9 +764,12 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
+			// NOCOM get font for all scripts
+			ns.fontset = i18n::find_fontset(word.c_str());
+
 			if (!word.empty()) {
 				word = i18n::make_ligatures(word.c_str());
-				if (i18n::has_cjk_character(word.c_str())) {
+				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit: units) {
 						nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, unit));
@@ -1127,7 +1139,7 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
 	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset),
-	renderer_style_(fontset->serif(), 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	renderer_style_("serif", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
 	TextureCache* render
 		(const std::string&, uint16_t, const TagSet&);
 }

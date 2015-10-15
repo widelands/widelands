@@ -34,7 +34,10 @@ namespace i18n {
 	std::vector<std::string> split_cjk_word(const char* input);
 	bool has_rtl_character(const char* input);
 	bool has_rtl_character(std::vector<std::string> input);
-	bool has_cjk_character(const char* input);
+	// True if a string contains a character from the script's code blocks
+	bool has_script_character(const char* input, UI::FontSets::Selector script);
+
+	UI::FontSet* find_fontset(const char* word);
 	bool cannot_start_line(const UChar& c);
 	bool cannot_end_line(const UChar& c);
 

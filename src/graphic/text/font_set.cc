@@ -20,7 +20,6 @@
 #include "graphic/text/font_set.h"
 
 #include <cstdlib>
-#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -202,13 +201,13 @@ FontSets::FontSets() {
 
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
-				UI::FontSet fontset(localename);
+				FontSet* const fontset = new UI::FontSet(localename);
 				FontSets::Selector selector = FontSets::Selector::kDefault;
-				if (fontset_selectors.count(fontset.name()) == 1) {
-					selector = fontset_selectors.at(fontset.name());
+				if (fontset_selectors.count(fontset->name()) == 1) {
+					selector = fontset_selectors.at(fontset->name());
 				} else {
 					log("No selector for fontset: %s in locale: %s. Falling back to default\n",
-						 fontset.name().c_str(), localename.c_str());
+						 fontset->name().c_str(), localename.c_str());
 				}
 				locale_fontsets.insert(std::make_pair(localename, selector));
 				if (fontsets.count(selector) != 1) {
@@ -232,6 +231,20 @@ FontSets::FontSets() {
 			log("No fontset defined for FontSets::Selector enum member #%d\n", i);
 		}
 	}
+}
+
+FontSet* FontSets::get_fontset(FontSets::Selector selector) const {
+	assert(fontsets.count(selector) == 1);
+	return fontsets.at(selector);
+}
+
+// NOCOM unused so far
+const FontSet& FontSets::get_fontset(const std::string& locale) const {
+	FontSets::Selector selector = FontSets::Selector::kDefault;
+	if (locale_fontsets.count(locale) == 1) {
+		selector = locale_fontsets.at(locale);
+	}
+	return *fontsets.at(selector);
 }
 
 }

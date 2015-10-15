@@ -51,6 +51,7 @@ BaseListselect::BaseListselect
 	 Align const align, bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
+	// NOCOM get from fh1.
 	m_lineheight(g_fh->get_fontheight(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL)),
 	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 	m_scrollpos     (0),

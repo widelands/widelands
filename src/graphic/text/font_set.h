@@ -86,6 +86,7 @@ private:
 	bool is_rtl_;
 };
 
+// A repository of all available fontsets
 struct FontSets {
 	enum class Selector {
 		kDefault,
@@ -100,9 +101,12 @@ struct FontSets {
 
 	FontSets();
 
-	std::map<std::string, FontSets::Selector> locale_fontsets;
+	FontSet* get_fontset(UI::FontSets::Selector selector) const;
+	const UI::FontSet& get_fontset(const std::string& locale) const;
 
-	std::map<FontSets::Selector, UI::FontSet> fontsets;
+private:
+	std::map<std::string, UI::FontSets::Selector> locale_fontsets;
+	std::map<UI::FontSets::Selector, UI::FontSet* const> fontsets;
 };
 
 } // namespace UI

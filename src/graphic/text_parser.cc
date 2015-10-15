@@ -272,7 +272,7 @@ void TextParser::parse_text_attributes
 				UI::FontSet fontset = UI::g_fh1->fontset();
 				if (val == fontset.condensed() || val == "condensed") {
 					val = fontset.condensed();
-				} else if (val == fontset.sans() || val == "serif") {
+				} else if (val == fontset.serif() || val == "serif") {
 					val = fontset.serif();
 				} else {
 					val = fontset.sans();
