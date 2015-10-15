@@ -110,7 +110,7 @@ public:
 	FontHandler1(ImageCache* image_cache)
 	   : texture_cache_(create_texture_cache(RICHTEXT_SURFACE_CACHE)),
 	     fontset_(new UI::FontSet(i18n::get_locale())),
-		  rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get(), fontsets_)),
+		  rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {}
@@ -133,7 +133,7 @@ public:
 	void reinitialize_fontset() override {
 		fontset_.reset(fontsets_.get_fontset(i18n::get_locale()));
 		texture_cache_.get()->flush();
-		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get(), fontsets_));
+		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
 
 private:

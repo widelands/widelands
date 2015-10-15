@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/test/paths.h"
@@ -31,6 +32,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 StandaloneRenderer::StandaloneRenderer() {
+	i18n::set_locale("en");
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(WIDELANDS_DATA_DIR));
 	g_fs->add_file_system(&FileSystem::create(RICHTEXT_DATA_DIR));
@@ -38,8 +40,7 @@ StandaloneRenderer::StandaloneRenderer() {
 
 	texture_cache_.reset(create_texture_cache(500 << 20));  // 500 MB
 	image_cache_.reset(new ImageCache());
-	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(),
-												fontsets.get_fontset("en"), fontsets));
+	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(), fontsets));
 }
 
 StandaloneRenderer::~StandaloneRenderer() {

@@ -29,6 +29,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/point.h"
@@ -62,7 +63,6 @@ struct NodeStyle {
 	uint16_t font_size;
 	RGBColor font_color;
 	int font_style;
-	bool is_rtl;
 
 	uint8_t spacing;
 	UI::Align halign;
@@ -1137,10 +1137,9 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 
-Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset, const UI::FontSets& fontsets) :
+Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset),
-	fontsets_(fontsets),
+	image_cache_(image_cache), texture_cache_(texture_cache), fontsets_(fontsets),
 	renderer_style_("serif", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
 	TextureCache* render
 		(const std::string&, uint16_t, const TagSet&);
@@ -1158,12 +1157,13 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
-// NOCOM we want a default font set size offset & rtl property.
+
+	UI::FontSet* fontset = fontsets_.get_fontset(i18n::get_locale());
+
 	NodeStyle default_style = {
-		fontset_,
-		renderer_style_.font_face, renderer_style_.font_size,
-		RGBColor(255, 255, 0), IFont::DEFAULT, fontset_->is_rtl(), 0,
-		UI::Align::Align_Left, UI::Align::Align_Top,
+		fontset, renderer_style_.font_face, renderer_style_.font_size,
+		RGBColor(255, 255, 0), IFont::DEFAULT,
+		0, UI::Align::Align_Left, UI::Align::Align_Top,
 		""
 	};
 
