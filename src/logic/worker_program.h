@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WORKER_PROGRAM_H
 #define WL_LOGIC_WORKER_PROGRAM_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/workarea_info.h"
 #include "logic/worker.h"
@@ -158,6 +159,7 @@ private:
 	const std::string                 m_name;
 	Actions           m_actions;
 	static ParseMap       const s_parsemap[];
+	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
 
 }

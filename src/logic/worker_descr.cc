@@ -106,32 +106,25 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	if (table.has_key("programs")) {
 		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
 		//*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
-		log("%s ", name().c_str());
+		//log("%s ", name().c_str());
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
-			WorkerProgram * program = nullptr;
 
 			try {
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
 
 				WorkerProgram::Parser parser;
-
 				parser.descr = this;
 				parser.table = items_table.get();
 
-				program = new WorkerProgram(program_name);
-
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name));
 				// NOCOM parsing is a lot slower than in trunk
-				program->parse(this, &parser, program_name.c_str(), egbase_.tribes());
-				programs_[program_name.c_str()] = program;
-			}
-
-			catch (const std::exception & e) {
-				delete program;
+				programs_[program_name]->parse(this, &parser, program_name.c_str(), egbase_.tribes());
+			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
@@ -153,13 +146,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 {}
 
 
-WorkerDescr::~WorkerDescr()
-{
-	while (programs_.size()) {
-		delete programs_.begin()->second;
-		programs_.erase(programs_.begin());
-	}
-}
+WorkerDescr::~WorkerDescr() {}
 
 
 /**
@@ -183,7 +170,7 @@ WorkerProgram const * WorkerDescr::get_program
 		throw wexception
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 
-	return it->second;
+	return it->second.get();
 }
 
 /**

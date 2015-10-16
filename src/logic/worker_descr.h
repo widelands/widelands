@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_WORKER_DESCR_H
 #define WL_LOGIC_WORKER_DESCR_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
@@ -102,7 +104,7 @@ public:
 
 	uint32_t movecaps() const override;
 
-	using Programs = std::map<std::string, WorkerProgram *>;
+	using Programs = std::map<std::string, std::unique_ptr<WorkerProgram>>;
 	const Programs & programs() const {return programs_;}
 
 protected:
