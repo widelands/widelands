@@ -106,7 +106,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	if (table.has_key("programs")) {
 		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
 		//*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
-		log("%s ", name().c_str());
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
 			std::transform

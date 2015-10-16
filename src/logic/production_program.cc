@@ -152,7 +152,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 					}
 					return
 						new ProductionProgram::ActReturn::EconomyNeedsWorker
-							(wareindex);
+							(workerindex);
 				} else
 					throw GameDataError
 						("expected %s but found \"%s\"",
