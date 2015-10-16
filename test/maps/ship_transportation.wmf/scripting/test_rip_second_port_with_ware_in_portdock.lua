@@ -14,8 +14,8 @@ run(function()
 
    -- The ship should not yet have picked up the ware from the
    -- portdock.
-   assert_equal(p1:get_wares("blackwood"), 1)
-   assert_equal(port1():get_wares("blackwood"), 0)
+   assert_equal(1, p1:get_wares("blackwood"))
+   assert_equal(0, port1():get_wares("blackwood"))
    
    while ship:get_wares() == 0 do
    	  -- ship still on the way to the bottom port
@@ -24,7 +24,7 @@ run(function()
 
    --now it is loaded with something and port empty.. 
    sleep(2000)   
-   assert_equal(port1():get_wares("blackwood"), 0)
+   assert_equal(0, port1():get_wares("blackwood"))
    -- ...and on the way to the north, so let remove the upper port
    port2():remove()
    sleep(100)
@@ -35,8 +35,8 @@ run(function()
    sleep(30000)
 
    -- Ware should be back in port.
-   assert_equal(p1:get_wares("blackwood"), 1)
-   assert_equal(port1():get_wares("blackwood"), 1)
+   assert_equal(1, p1:get_wares("blackwood"))
+   assert_equal(1, port1():get_wares("blackwood"))
 
    -- Create port again.
    create_second_port()
