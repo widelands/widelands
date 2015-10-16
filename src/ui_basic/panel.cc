@@ -1205,7 +1205,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
-	std::string style(UI::g_fh1->fontset().serif());
+	std::string style(UI::g_fh1->fontset()->serif());
 	if (g_fs->file_exists("i18n/fonts/" + style)) {
 		return style;
 	}

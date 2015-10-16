@@ -732,7 +732,7 @@ bool has_script_character(const char* input, UI::FontSets::Selector script) {
 }
 
 
-UI::FontSet* find_fontset(const char* word, const UI::FontSets& fontsets) {
+UI::FontSet const * find_fontset(const char* word, const UI::FontSets& fontsets) {
 	UI::FontSets::Selector selector;
 	if (has_script_character(word, UI::FontSets::Selector::kArabic)) {
 		selector = UI::FontSets::Selector::kArabic;

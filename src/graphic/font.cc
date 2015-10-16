@@ -130,7 +130,7 @@ uint32_t Font::lineskip() const
  */
 Font * Font::get(const std::string & name, int size)
 {
-	size += UI::g_fh1->fontset().size_offset();
+	size += UI::g_fh1->fontset()->size_offset();
 	FontDescr descr;
 	descr.name = name;
 	descr.size = size;

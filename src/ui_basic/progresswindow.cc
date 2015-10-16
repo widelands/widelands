@@ -60,7 +60,7 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset().serif(),
+	const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset()->serif(),
 														 UI_FONT_SIZE_SMALL);
 	m_label_rectangle.x = xres / 4;
 	m_label_rectangle.w = xres / 2;

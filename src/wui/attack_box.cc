@@ -152,7 +152,7 @@ void AttackBox::init() {
 	soldiers_text_.reset(&add_text(columnbox,
 	                               attack_string,
 	                               UI::Box::AlignCenter,
-	                               UI::g_fh1->fontset().serif(),
+											 UI::g_fh1->fontset()->serif(),
 	                               UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(columnbox,

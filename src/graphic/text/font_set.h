@@ -21,8 +21,10 @@
 #define WL_GRAPHIC_TEXT_FONT_SET_H
 
 #include <map>
+#include <memory>
 #include <string>
 
+#include "base/macros.h"
 #include "scripting/lua_table.h"
 
 namespace UI {
@@ -32,8 +34,8 @@ struct FontSet {
 
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
 
-	/// Create the fontset for a locale from configuration file
-	FontSet(const std::string& localename);
+	/// Create a fontset from i18n/fonts.lua
+	FontSet(const std::string& fontset_name);
 
 	// The fontset's name
 	const std::string& name() const;
@@ -53,14 +55,15 @@ struct FontSet {
 	const std::string& condensed_italic() const;
 	const std::string& condensed_bold_italic() const;
 	const std::string& representative_character() const;
+	// Some scripts need more vertical space than the default font, e.g. Arabic
 	uint16_t size_offset() const;
+	// Returns true iff the fontset's script is written from right to left.
 	bool is_rtl() const;
 
 private:
-	/// Parses font information for the given 'localename' from Lua files.
-	/// Each locale in i18n/locales.lua defines which fontset to use.
+	/// Parses font information for the given fontset name from Lua.
 	/// The fontset definitions are in i18n/fonts.lua
-	void parse_font_for_locale(const std::string& localename);
+	void parse_fontset(const std::string& fontset_name);
 
 	/// Reads and sets the fonts from 'table', using 'fallback' as the fallback font file.
 	void set_fonts(const LuaTable& table, const std::string& fallback);
@@ -86,9 +89,10 @@ private:
 	std::string representative_character_;
 	uint16_t    size_offset_;
 	bool is_rtl_;
+	DISALLOW_COPY_AND_ASSIGN(FontSet);
 };
 
-// A repository of all available fontsets
+/// A repository of all available fontsets
 struct FontSets {
 	enum class Selector {
 		kDefault,
@@ -103,12 +107,18 @@ struct FontSets {
 
 	FontSets();
 
-	FontSet* get_fontset(UI::FontSets::Selector selector) const;
-	FontSet* get_fontset(const std::string& locale) const;
+	/// Get the fontset corresponding to the given selector.
+	const FontSet* get_fontset(UI::FontSets::Selector selector) const;
+	/// Get the fontset used by the given locale ISO code.
+	const FontSet* get_fontset(const std::string& locale) const;
 
 private:
+	// Maps locale ISO codes to fontset selectors.
 	std::map<std::string, UI::FontSets::Selector> locale_fontsets;
-	std::map<UI::FontSets::Selector, UI::FontSet* const> fontsets;
+	// Contains all available fontsets, to be accessed by their selector.
+	std::map<UI::FontSets::Selector, std::unique_ptr<UI::FontSet>> fontsets;
+
+	DISALLOW_COPY_AND_ASSIGN(FontSets);
 };
 
 } // namespace UI

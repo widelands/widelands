@@ -26,7 +26,7 @@ namespace UI {
 
 // This mirrors the horizontal alignment for RTL languages.
 Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
 			case Align::Align_BottomLeft:
 				alignment = Align::Align_BottomRight;

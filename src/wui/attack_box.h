@@ -68,7 +68,7 @@ private:
 	UI::Textarea& add_text(UI::Box& parent,
 	                       std::string str,
 	                       uint32_t alignment = UI::Box::AlignTop,
-	                       const std::string& fontname = UI::g_fh1->fontset().serif(),
+								  const std::string& fontname = UI::g_fh1->fontset()->serif(),
 	                       uint32_t fontsize = UI_FONT_SIZE_SMALL);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,

@@ -77,7 +77,7 @@ EditBox::EditBox
 	set_thinks(false);
 
 	m->background = background;
-	m->fontname = UI::g_fh1->fontset().serif();
+	m->fontname = UI::g_fh1->fontset()->serif();
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 

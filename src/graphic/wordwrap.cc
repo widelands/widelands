@@ -296,7 +296,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		// Right-align text for RTL languages
 		// TODO(GunChleoc): Arabic: we have a ragged edge here for Arabic,
 		// just like in richtext.cc - bug in TTF_SizeUTF8?
-		Point drawpos(UI::g_fh1->fontset().is_rtl() ?
+		Point drawpos(UI::g_fh1->fontset()->is_rtl() ?
 							  where.x + m_wrapwidth
 							  - m_style.calc_bare_width(i18n::make_ligatures(m_lines[line].text.c_str())) - 2 :
 							  where.x,

@@ -58,7 +58,7 @@ struct Borders {
 };
 
 struct NodeStyle {
-	UI::FontSet* fontset;
+	UI::FontSet const * fontset;
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
@@ -1158,7 +1158,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
 
-	UI::FontSet* fontset = fontsets_.get_fontset(i18n::get_locale());
+	UI::FontSet const * fontset = fontsets_.get_fontset(i18n::get_locale());
 
 	NodeStyle default_style = {
 		fontset, renderer_style_.font_face, renderer_style_.font_size,

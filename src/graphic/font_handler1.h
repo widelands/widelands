@@ -51,7 +51,7 @@ public:
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 
 	/// Returns the font handler's current FontSet
-	virtual UI::FontSet& fontset() const = 0;
+	virtual UI::FontSet const * fontset() const = 0;
 
 	/// Loads the FontSet for the currently active locale into the
 	/// font handler. This needs to be called after the language of the

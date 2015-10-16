@@ -54,7 +54,7 @@ TextBlock::TextBlock() {
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = (UI::g_fh1->fontset()).sans();
+	m_font_face = (UI::g_fh1->fontset())->sans();
 	m_line_spacing = 0;
 }
 
@@ -269,7 +269,7 @@ void TextParser::parse_text_attributes
 			if (key == "font-size") {
 				element.set_font_size(atoi(val.c_str()));
 			} else if (key == "font-face") {
-				UI::FontSet fontset = UI::g_fh1->fontset();
+				const UI::FontSet& fontset = *UI::g_fh1->fontset();
 				if (val == fontset.condensed() || val == "condensed") {
 					val = fontset.condensed();
 				} else if (val == fontset.serif() || val == "serif") {

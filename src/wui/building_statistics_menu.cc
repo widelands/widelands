@@ -49,10 +49,10 @@ using namespace Widelands;
 
 namespace {
 void set_label_font(UI::Textarea* label) {
-	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+	label->set_font(UI::g_fh1->fontset()->serif(), kLabelFontSize, UI_FONT_CLR_FG);
 }
 void set_editbox_font(UI::EditBox* editbox) {
-	editbox->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+	editbox->set_font(UI::g_fh1->fontset()->serif(), kLabelFontSize, UI_FONT_CLR_FG);
 }
 
 }  // namespace
@@ -755,9 +755,9 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 
 	UI::TextStyle style;
 	if (text.length() > 5) {
-		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
+		style.font = UI::Font::get(UI::g_fh1->fontset()->condensed(), fontsize);
 	} else {
-		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
+		style.font = UI::Font::get(UI::g_fh1->fontset()->serif(), fontsize);
 	}
 	style.fg = color;
 	style.bold = true;

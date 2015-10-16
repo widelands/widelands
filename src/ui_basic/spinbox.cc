@@ -174,7 +174,7 @@ SpinBox::SpinBox
 	m_buttons.push_back(sbi->butMinus);
 	m_buttons.push_back(sbi->butPlus);
 
-	set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
+	set_font(UI::g_fh1->fontset()->serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 SpinBox::~SpinBox() {
