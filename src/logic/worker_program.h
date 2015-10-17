@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_WORKER_PROGRAM_H
 #define WL_LOGIC_WORKER_PROGRAM_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/workarea_info.h"
@@ -35,7 +37,7 @@ struct WorkerProgram : public BobProgramBase {
 	struct Parser {
 		WorkerDescr* descr;
 		std::string  directory;
-		LuaTable*    table;
+		std::unique_ptr<LuaTable> table;
 	};
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)

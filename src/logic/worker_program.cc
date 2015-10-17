@@ -22,6 +22,7 @@
 #include <memory>
 #include <string>
 
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
@@ -63,21 +64,15 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 void WorkerProgram::parse
 	(WorkerDescr * descr, Parser * parser, char const * const name, const Tribes& tribes)
 {
+	assert(parser->table->has_key<std::string>(name));
 	std::unique_ptr<LuaTable> program_table = parser->table->get_table(name);
 
-	for (uint32_t idx = 1;; ++idx) {
-		try
-		{
-			if (!program_table->has_key(idx)) {
-				break;
-			}
-
-			const std::string string = program_table->get_string(idx);
-
-			if (string.empty()) {
-				break;
-			}
-
+	for (const std::string& string : program_table->array_entries<std::string>()) {
+		if (string.empty()) {
+			log("Worker program %s for worker %s contains empty string\n", name, descr->name().c_str());
+			break;
+		}
+		try {
 			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
 			if (cmd.empty()) {
 				continue;
@@ -98,7 +93,8 @@ void WorkerProgram::parse
 
 			m_actions.push_back(act);
 		} catch (const std::exception & e) {
-			throw wexception("Line %i: %s", idx, e.what());
+			throw wexception("Error reading line '%s' in worker program %s for worker %s: %s",
+								  string.c_str(), name, descr->name().c_str(), e.what());
 		}
 	}
 }

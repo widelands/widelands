@@ -802,12 +802,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
-		log("NOCOM get mutable tribes - ");
-		Tribes* tribes = get_egbase(L).mutable_tribes();
-		log("call add_worker_type - ");
-		tribes->add_worker_type(table);
-		log(" - call add_worker_type done.\n");
+		get_egbase(L).mutable_tribes()->add_worker_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "base/point.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -96,7 +95,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		add_directional_animation(&walkload_anims_, "walkload");
 	}
 
-	// Read the becomes and experience
+	// Read what the worker can become and the needed experience
 	if (table.has_key("becomes")) {
 		becomes_ = egbase_.tribes().safe_worker_index(table.get_string("becomes"));
 		needed_experience_ = table.get_int("experience");
@@ -104,11 +103,11 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 	// Read programs
 	if (table.has_key("programs")) {
-		// NOCOM(GunChleoc) Trying to hunt down occasional double free or corruption
-		//*** Error in `./widelands': double free or corruption (!prev): 0x0000000005b79120 ***
-		//log("%s ", name().c_str());
-		items_table = table.get_table("programs");
-		for (std::string program_name : items_table->keys<std::string>()) {
+		WorkerProgram::Parser parser;
+		parser.descr = this;
+		parser.table = table.get_table("programs");
+
+		for (std::string program_name : parser.table->keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -116,10 +115,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 			try {
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
-
-				WorkerProgram::Parser parser;
-				parser.descr = this;
-				parser.table = items_table.get();
 
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name));
 				// NOCOM parsing is a lot slower than in trunk
