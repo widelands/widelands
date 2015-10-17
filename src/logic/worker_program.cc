@@ -63,7 +63,7 @@ void WorkerProgram::parse(const LuaTable& table) {
 	for (const std::string& string : table.array_entries<std::string>()) {
 		if (string.empty()) {
 			log("Worker program %s for worker %s contains empty string\n",
-				 name_.c_str(), parser_.descr.name().c_str());
+				 name_.c_str(), worker_.name().c_str());
 			break;
 		}
 		try {
@@ -91,7 +91,7 @@ void WorkerProgram::parse(const LuaTable& table) {
 			actions_.push_back(act);
 		} catch (const std::exception & e) {
 			throw wexception("Error reading line '%s' in worker program %s for worker %s: %s",
-								  string.c_str(), name_.c_str(), parser_.descr.name().c_str(), e.what());
+								  string.c_str(), name_.c_str(), worker_.name().c_str(), e.what());
 		}
 	}
 }
@@ -390,13 +390,13 @@ void WorkerProgram::parse_animation(Worker::Action* act, const std::vector<std::
 	if (cmd.size() != 3)
 		throw GameDataError("Usage: animation <name> <time>");
 
-	if (!parser_.descr.is_animation_known(cmd[1])) {
+	if (!worker_.is_animation_known(cmd[1])) {
 		throw GameDataError("unknown animation \"%s\" in worker program for worker \"%s\"",
-								  cmd[1].c_str(), parser_.descr.name().c_str());
+								  cmd[1].c_str(), worker_.name().c_str());
 	}
 
 	act->function = &Worker::run_animation;
-	act->iparam1 = parser_.descr.get_animation(cmd[1]);
+	act->iparam1 = worker_.get_animation(cmd[1]);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (*endp)
@@ -570,9 +570,9 @@ void WorkerProgram::parse_play_fx(Worker::Action* act, const std::vector<std::st
 	if (cmd.size() < 2 || cmd.size() > 3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
 
-	act->sparam1 = parser_.directory + "/" + cmd[1];
+	act->sparam1 = "/" + cmd[1];
 
-	g_sound_handler.load_fx_if_needed(parser_.directory, cmd[1], act->sparam1);
+	g_sound_handler.load_fx_if_needed("", cmd[1], act->sparam1);
 
 	act->function = &Worker::run_playfx;
 	act->iparam1 =

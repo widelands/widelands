@@ -36,18 +36,13 @@ namespace Widelands {
 class WorkerDescr;
 
 struct WorkerProgram : public BobProgramBase {
-	struct Parser {
-		Parser(const WorkerDescr& worker, const std::string& dir) : descr(worker), directory(dir) {}
-		const WorkerDescr& descr;
-		const std::string& directory;
-	};
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)
 		(Worker::Action*, const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& name, const Parser& parser, const Tribes& tribes) :
+	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes) :
 		name_(name),
-		parser_(parser),
+		worker_(worker),
 		tribes_(tribes) {}
 	virtual ~WorkerProgram() {}
 
@@ -92,7 +87,7 @@ private:
 	void parse_construct        (Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string& name_;
-	const Parser& parser_;
+	const WorkerDescr& worker_;
 	const Tribes& tribes_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
