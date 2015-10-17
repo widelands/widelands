@@ -261,7 +261,7 @@ void FullscreenMenuMapSelect::fill_table()
 		for (const std::string& mapfilename : files) {
 			// Add map file (compressed) or map directory (uncompressed)
 			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-			if (ml.get() != nullptr) {
+			if (ml != nullptr) {
 				try {
 					map.set_filename(mapfilename);
 					ml->preload_map(true);
