@@ -103,11 +103,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 	// Read programs
 	if (table.has_key("programs")) {
-		WorkerProgram::Parser parser;
-		parser.descr = this;
-		parser.table = table.get_table("programs");
-
-		for (std::string program_name : parser.table->keys<std::string>()) {
+		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
+		WorkerProgram::Parser parser(*this, directory_);
+		for (std::string program_name : programs_table->keys<std::string>()) {
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
 				 tolower);
@@ -116,9 +114,10 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
 
-				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name));
+				programs_[program_name] =
+						std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, parser, egbase_.tribes()));
 				// NOCOM parsing is a lot slower than in trunk
-				programs_[program_name]->parse(this, &parser, program_name.c_str(), egbase_.tribes());
+				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}

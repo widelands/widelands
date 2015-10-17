@@ -27,13 +27,11 @@
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
-#include "logic/tribes/tribe_descr.h"
-#include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
 
-const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
+const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
 	{"createware",        &WorkerProgram::parse_createware},
@@ -61,15 +59,11 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 /**
  * Parse a program
  */
-void WorkerProgram::parse
-	(WorkerDescr * descr, Parser * parser, char const * const name, const Tribes& tribes)
-{
-	assert(parser->table->has_key<std::string>(name));
-	std::unique_ptr<LuaTable> program_table = parser->table->get_table(name);
-
-	for (const std::string& string : program_table->array_entries<std::string>()) {
+void WorkerProgram::parse(const LuaTable& table) {
+	for (const std::string& string : table.array_entries<std::string>()) {
 		if (string.empty()) {
-			log("Worker program %s for worker %s contains empty string\n", name, descr->name().c_str());
+			log("Worker program %s for worker %s contains empty string\n",
+				 name_.c_str(), parser_.descr.name().c_str());
 			break;
 		}
 		try {
@@ -82,19 +76,22 @@ void WorkerProgram::parse
 			Worker::Action act;
 			uint32_t mapidx;
 
-			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
-				if (cmd[0] == s_parsemap[mapidx].name)
+			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
+				if (cmd[0] == parsemap_[mapidx].name) {
 					break;
+				}
+			}
 
-			if (!s_parsemap[mapidx].name)
+			if (!parsemap_[mapidx].name) {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
+			}
 
-			(this->*s_parsemap[mapidx].function)(descr, &act, parser, tribes, cmd);
+			(this->*parsemap_[mapidx].function)(&act, cmd);
 
-			m_actions.push_back(act);
+			actions_.push_back(act);
 		} catch (const std::exception & e) {
 			throw wexception("Error reading line '%s' in worker program %s for worker %s: %s",
-								  string.c_str(), name, descr->name().c_str(), e.what());
+								  string.c_str(), name_.c_str(), parser_.descr.name().c_str(), e.what());
 		}
 	}
 }
@@ -107,18 +104,13 @@ void WorkerProgram::parse
  *
  * iparam1 = ware index
  */
-void WorkerProgram::parse_createware
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string> & cmd)
+void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: createware <ware type>");
 
 	act->function = &Worker::run_createware;
-	act->iparam1 = tribes.safe_ware_index(cmd[1]);
+	act->iparam1 = tribes_.safe_ware_index(cmd[1]);
 }
 
 /**
@@ -130,12 +122,7 @@ void WorkerProgram::parse_createware
  * iparam1 = area
  * sparam1 = resource
  */
-void WorkerProgram::parse_mine
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string> & cmd)
+void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Usage: mine <ware type> <area>");
@@ -158,12 +145,7 @@ void WorkerProgram::parse_mine
  * iparam1 = area
  * sparam1 = resource
  */
-void WorkerProgram::parse_breed
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string> & cmd)
+void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Usage: breed <ware type> <area>");
@@ -187,11 +169,7 @@ void WorkerProgram::parse_breed
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setbobdescription
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+	(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: setbobdescription <bob name> <bob name> ...");
@@ -223,12 +201,7 @@ void WorkerProgram::parse_setbobdescription
  * iparam2 = attribute predicate (if >= 0)
  * sparam1 = type
  */
-void WorkerProgram::parse_findobject
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	uint32_t i;
 
@@ -262,7 +235,7 @@ void WorkerProgram::parse_findobject
 	if (act->iparam1 <= 0)
 		throw wexception("findobject: must specify radius");
 
-	m_workarea_info[act->iparam1].insert(" findobject");
+	workarea_info_[act->iparam1].insert(" findobject");
 }
 
 
@@ -303,12 +276,7 @@ void WorkerProgram::parse_findobject
  * iparam5 = Immovable attribute id
  * sparam1 = Resource
  */
-void WorkerProgram::parse_findspace
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	uint32_t i;
 
@@ -375,7 +343,7 @@ void WorkerProgram::parse_findspace
 		throw wexception("findspace: must specify radius");
 	if (act->iparam2 < 0)
 		throw wexception("findspace: must specify size");
-	m_workarea_info[act->iparam1].insert(" findspace");
+	workarea_info_[act->iparam1].insert(" findspace");
 }
 
 /**
@@ -389,12 +357,7 @@ void WorkerProgram::parse_findspace
  *
  * iparam1 = walkXXX
  */
-void WorkerProgram::parse_walk
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: walk <where>");
@@ -420,25 +383,20 @@ void WorkerProgram::parse_walk
  * iparam2 = duration
  *
  */
-void WorkerProgram::parse_animation
-	(WorkerDescr* descr,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_animation(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	char * endp;
 
 	if (cmd.size() != 3)
 		throw GameDataError("Usage: animation <name> <time>");
 
-	if (!descr->is_animation_known(cmd[1])) {
+	if (!parser_.descr.is_animation_known(cmd[1])) {
 		throw GameDataError("unknown animation \"%s\" in worker program for worker \"%s\"",
-								  cmd[1].c_str(), descr->name().c_str());
+								  cmd[1].c_str(), parser_.descr.name().c_str());
 	}
 
 	act->function = &Worker::run_animation;
-	act->iparam1 = descr->get_animation(cmd[1]);
+	act->iparam1 = parser_.descr.get_animation(cmd[1]);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (*endp)
@@ -454,12 +412,7 @@ void WorkerProgram::parse_animation
  *
  * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
-void WorkerProgram::parse_return
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>&)
+void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::string>&)
 {
 	act->function = &Worker::run_return;
 	act->iparam1 = 1; // drop a ware on our owner's flag
@@ -473,12 +426,7 @@ void WorkerProgram::parse_return
  *
  * sparam1 = object command name
  */
-void WorkerProgram::parse_object
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_object(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: object <program name>");
@@ -497,12 +445,7 @@ void WorkerProgram::parse_object
  * sparamv  list of object names
  * iparam1  one of plantXXX
  */
-void WorkerProgram::parse_plant
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes& tribes,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
 		throw wexception("Usage: plant <immovable type> <immovable type> ... [unless object]");
@@ -532,8 +475,8 @@ void WorkerProgram::parse_plant
 			// This will throw a GameDataError if the attribute doesn't exist.
 			ImmovableDescr::get_attribute_id(list[1]);
 		} else {
-			WareIndex idx = tribes.safe_immovable_index(list[1]);
-			if (!tribes.immovable_exists(idx)) {
+			WareIndex idx = tribes_.safe_immovable_index(list[1]);
+			if (!tribes_.immovable_exists(idx)) {
 				throw GameDataError("There is no tribe immovable %s for workers to plant.", list[1].c_str());
 			}
 		}
@@ -546,12 +489,7 @@ void WorkerProgram::parse_plant
  * Plants a bob (critter usually, maybe also worker later on). The immovable
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
-void WorkerProgram::parse_create_bob
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>&)
+void WorkerProgram::parse_create_bob(Worker::Action* act, const std::vector<std::string>&)
 {
 	act->function = &Worker::run_create_bob;
 }
@@ -560,12 +498,7 @@ void WorkerProgram::parse_create_bob
 /**
  * Simply remove the currently selected object - make no fuss about it.
  */
-void WorkerProgram::parse_removeobject
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>&)
+void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&)
 {
 	act->function = &Worker::run_removeobject;
 }
@@ -581,12 +514,7 @@ void WorkerProgram::parse_removeobject
  * iparam2 = radius
  * sparam1 = subcommand
  */
-void WorkerProgram::parse_geologist
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_geologist(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	char * endp;
 
@@ -611,12 +539,7 @@ void WorkerProgram::parse_geologist
  * Check resources at the current position, and plant a marker object
  * when possible.
  */
-void WorkerProgram::parse_geologist_find
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: geologist-find");
@@ -632,12 +555,7 @@ void WorkerProgram::parse_geologist_find
  * iparam1 = radius
  * iparam2 = time
  */
-void WorkerProgram::parse_scout
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 3)
 		throw wexception("Usage: scout <radius> <time>");
@@ -647,19 +565,14 @@ void WorkerProgram::parse_scout
 	act->function = &Worker::run_scout;
 }
 
-void WorkerProgram::parse_play_fx
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser* parser,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_play_fx(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2 || cmd.size() > 3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
 
-	act->sparam1 = parser->directory + "/" + cmd[1];
+	act->sparam1 = parser_.directory + "/" + cmd[1];
 
-	g_sound_handler.load_fx_if_needed(parser->directory, cmd[1], act->sparam1);
+	g_sound_handler.load_fx_if_needed(parser_.directory, cmd[1], act->sparam1);
 
 	act->function = &Worker::run_playfx;
 	act->iparam1 =
@@ -674,12 +587,7 @@ void WorkerProgram::parse_play_fx
  * Give the currently held ware of the worker to the \ref objvar1 immovable
  * for construction. This is used in ship building.
  */
-void WorkerProgram::parse_construct
-	(WorkerDescr*,
-	 Worker::Action* act,
-	 Parser*,
-	 const Tribes&,
-	 const std::vector<std::string>& cmd)
+void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: construct");
