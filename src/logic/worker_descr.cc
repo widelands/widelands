@@ -115,7 +115,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 				programs_[program_name] =
 						std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, egbase_.tribes()));
-				// NOCOM parsing is a lot slower than in trunk
 				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
