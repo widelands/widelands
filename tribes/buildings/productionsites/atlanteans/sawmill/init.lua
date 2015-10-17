@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
 				"sleep=16500", -- Much faster than barbarians' wood hardener
 				"return=skipped unless economy needs planks",
 				"consume=log:2",
-				"playFX=sound/sawmill/sawmill 192",
+				"playFX=sound/sawmill sawmill 192",
 				"animate=working 20000", -- Much faster than barbarians' wood hardener
 				"produce=planks"
 			}

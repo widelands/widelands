@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
 			actions = {
 				"call=plant_corn",
 				"call=harvest_corn",
-				"playFX=sound/farm/farm_animal 192",
+				"playFX=sound/farm farm_animal 192",
 				"return=skipped"
 			}
 		},

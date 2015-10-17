@@ -34,9 +34,9 @@ tribes:new_worker_type {
 		chop = {
 			"findobject attrib:tree radius:10",
 			"walk object",
-			"playFX sound/woodcutting/woodcutting 255",
+			"playFX sound/woodcutting woodcutting 255",
 			"animation hacking 10000",
-			"playFX sound/spoken/timber 192",
+			"playFX sound/spoken timber 192",
 			"object fall",
 			"animation idle 2000",
 			"createware log",

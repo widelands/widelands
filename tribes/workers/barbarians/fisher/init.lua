@@ -33,10 +33,10 @@ tribes:new_worker_type {
 		fish = {
 			"findspace size:any radius:7 resource:fish",
 			"walk coords",
-			"playFX sound/fisher/fisher_throw_net 192",
+			"playFX sound/fisher fisher_throw_net 192",
 			"mine fish 1",
 			"animation fishing 3000",
-			"playFX sound/fisher/fisher_pull_net 192",
+			"playFX sound/fisher fisher_pull_net 192",
 			"createware fish",
 			"return"
 		}

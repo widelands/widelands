@@ -468,10 +468,9 @@ struct ProductionProgram {
 	///    parameters ::= soundFX [priority]
 	/// Parameter semantics:
 	///    directory:
-	///       The directory of the productionsite.
+	///       The directory of the sound effect.
 	///    soundFX:
-	///       The filename of an soundFX (relative to the productionsite's
-	///       directory).
+	///       The base filename of a soundFX (without path, running numbers or file extension)
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///

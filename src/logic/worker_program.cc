@@ -49,7 +49,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"geologist",         &WorkerProgram::parse_geologist},
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
-	{"playFX",           &WorkerProgram::parse_play_fx},
+	{"playFX",            &WorkerProgram::parse_play_fx},
 	{"construct",         &WorkerProgram::parse_construct},
 
 	{nullptr, nullptr}
@@ -567,18 +567,18 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 
 void WorkerProgram::parse_play_fx(Worker::Action* act, const std::vector<std::string>& cmd)
 {
-	if (cmd.size() < 2 || cmd.size() > 3)
-		throw wexception("Usage: playFX <fx_name> [priority]");
+	if (cmd.size() < 3 || cmd.size() > 4)
+		throw wexception("Usage: playFX <fx_dir> <fx_name> [priority]");
 
-	act->sparam1 = "/" + cmd[1];
+	act->sparam1 = cmd[1] + "/" + cmd[2];
 
-	g_sound_handler.load_fx_if_needed("", cmd[1], act->sparam1);
+	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
 
 	act->function = &Worker::run_playfx;
 	act->iparam1 =
-		cmd.size() == 2 ?
+		cmd.size() == 3 ?
 		64 : //  50% chance to play, only one instance at a time
-		atoi(cmd[2].c_str());
+		atoi(cmd[3].c_str());
 }
 
 /**

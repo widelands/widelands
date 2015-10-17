@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
 				"sleep=15000",
 				"return=skipped unless economy needs atlanteans_horse",
 				"consume=corn water",
-				"playFX=sound/farm/horse 192",
+				"playFX=sound/farm horse 192",
 				"animate=working 15000", -- Feeding cute little foals ;)
 				"recruit=atlanteans_horse"
 			}

@@ -75,9 +75,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs trident_light",
 				"sleep=20000",
 				"consume=iron planks",
-				"playFX=sound/smiths/smith 192",
+				"playFX=sound/smiths smith 192",
 				"animate=working 30000",
-				"playFX=sound/smiths/sharpening 192",
+				"playFX=sound/smiths sharpening 192",
 				"produce=trident_light"
 			}
 		},
@@ -88,9 +88,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs trident_long",
 				"sleep=32000",
 				"consume=iron coal planks",
-				"playFX=sound/smiths/smith 192",
+				"playFX=sound/smiths smith 192",
 				"animate=working 45000",
-				"playFX=sound/smiths/sharpening 192",
+				"playFX=sound/smiths sharpening 192",
 				"produce=trident_long"
 			}
 		},
@@ -101,9 +101,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs trident_steel",
 				"sleep=32000",
 				"consume=iron:2 coal planks",
-				"playFX=sound/smiths/smith 192",
+				"playFX=sound/smiths smith 192",
 				"animate=working 45000",
-				"playFX=sound/smiths/sharpening 192",
+				"playFX=sound/smiths sharpening 192",
 				"produce=trident_steel"
 			}
 		},
@@ -114,9 +114,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs trident_double",
 				"sleep=32000",
 				"consume=iron coal:2 planks gold",
-				"playFX=sound/smiths/smith 192",
+				"playFX=sound/smiths smith 192",
 				"animate=working 45000",
-				"playFX=sound/smiths/sharpening 192",
+				"playFX=sound/smiths sharpening 192",
 				"produce=trident_double"
 			}
 		},
@@ -127,9 +127,9 @@ tribes:new_productionsite_type {
 				"return=skipped unless economy needs trident_heavy_double",
 				"sleep=32000",
 				"consume=iron:2 coal:2 planks gold",
-				"playFX=sound/smiths/smith 192",
+				"playFX=sound/smiths smith 192",
 				"animate=working 45000",
-				"playFX=sound/smiths/sharpening 192",
+				"playFX=sound/smiths sharpening 192",
 				"produce=trident_heavy_double"
 			}
 		},

@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h" // NOCOM
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
@@ -180,11 +181,13 @@ void Tribes::add_soldier_type(const LuaTable& table) {
 
 void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
+	uint32_t time = SDL_GetTicks();
 	workers_->add(
 				new WorkerDescr(
 					pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
 					table,
 					egbase_));
+	log("%d NOCOM Loading %s\n", SDL_GetTicks() - time, table.get_string("name").c_str());
 }
 
 void Tribes::add_tribe(const LuaTable& table) {

@@ -1524,7 +1524,8 @@ ProductionProgram::ActPlayFX::ActPlayFX
 	try {
 		bool reached_end;
 		const std::string& filepath = next_word(parameters, reached_end);
-		name = filepath;
+		const std::string& filename = next_word(parameters, reached_end);
+		name = filepath + "/" + filename;
 
 		if (!reached_end) {
 			char * endp;
@@ -1536,9 +1537,7 @@ ProductionProgram::ActPlayFX::ActPlayFX
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed(FileSystem::fs_dirname(filepath),
-													 FileSystem::fs_filename(filepath.c_str()),
-													 name);
+		g_sound_handler.load_fx_if_needed(filepath, filename, name);
 	} catch (const WException & e) {
 		throw GameDataError("playFX: %s", e.what());
 	}

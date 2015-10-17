@@ -41,7 +41,7 @@ tribes:new_worker_type {
 		search = {
 			"animation hacking 5000",
 			"animation idle 2000",
-			"playFX sound/hammering/geologist_hammer 192",
+			"playFX sound/hammering geologist_hammer 192",
 			"animation hacking 3000",
 			"geologist-find"
 		}
