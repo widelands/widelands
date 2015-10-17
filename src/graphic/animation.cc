@@ -354,3 +354,9 @@ const Animation& AnimationManager::get_animation(uint32_t id) const
 
 	return *m_animations[id - 1];
 }
+
+AnimationManager::~AnimationManager()
+{
+	for (vector<Animation*>::iterator it = m_animations.begin(); it != m_animations.end(); ++it)
+		delete *it;
+}

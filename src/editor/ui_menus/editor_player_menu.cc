@@ -165,13 +165,14 @@ void EditorPlayerMenu::update() {
 
 		// Get/Set (localized) tribe names
 		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME) {
-			m_selected_tribes[p] = map.get_scenario_player_tribe(p);
+			m_selected_tribes[p - 1] = map.get_scenario_player_tribe(p);
 		} else {
-			m_selected_tribes[p] = m_tribenames[0];
-			map.set_scenario_player_tribe(p, m_selected_tribes[p]);
+			m_selected_tribes[p - 1] = m_tribenames[0];
+			map.set_scenario_player_tribe(p, m_selected_tribes[p - 1]);
 		}
+
 		m_plr_set_tribes_buts[p - 1]
-				->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p]).descname);
+				->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -238,6 +239,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
+	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();

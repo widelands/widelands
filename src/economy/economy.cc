@@ -505,25 +505,53 @@ void Economy::remove_supply(Supply & supply)
 
 bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
-	uint32_t quantity = 0;
-	for (const Warehouse * wh : m_warehouses) {
-		quantity += wh->get_wares().stock(ware_type);
-		if (t <= quantity)
-			return false;
+
+	// we have a target quantity set
+	if (t > 0) {
+		uint32_t quantity = 0;
+		for (const Warehouse * wh : m_warehouses) {
+			quantity += wh->get_wares().stock(ware_type);
+			if (t <= quantity)
+				return false;
+		}
+		return true;
+
+	// we have target quantity set to 0, we need to check if there is an open request
+	} else {
+		for (const Request * temp_req : m_requests) {
+			const Request & req = *temp_req;
+
+			if (req.get_type() == wwWARE && req.get_index() == ware_type)
+				return true;
+		}
+		return false;
 	}
-	return true;
 }
 
 
 bool Economy::needs_worker(WareIndex const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
-	uint32_t quantity = 0;
-	for (const Warehouse * wh : m_warehouses) {
-		quantity += wh->get_workers().stock(worker_type);
-		if (t <= quantity)
-			return false;
+
+	// we have a target quantity set
+	if (t > 0) {
+		uint32_t quantity = 0;
+		for (const Warehouse * wh : m_warehouses) {
+			quantity += wh->get_workers().stock(worker_type);
+			if (t <= quantity)
+				return false;
+		}
+		return true;
+
+	// we have target quantity set to 0, we need to check if there is an open request
+	} else {
+		for (const Request * temp_req : m_requests) {
+			const Request & req = *temp_req;
+
+			if (req.get_type() == wwWORKER && req.get_index() == worker_type)
+				return true;
+		}
+		return false;
 	}
-	return true;
 }
 
 
@@ -810,11 +838,12 @@ std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal inva
  */
 void Economy::_create_requested_worker(Game & game, WareIndex index)
 {
-	unsigned demand = 0;
+	uint32_t demand = 0;
 
 	bool soldier_level_check;
 	const TribeDescr & tribe = owner().tribe();
 	const WorkerDescr & w_desc = *tribe.get_worker_descr(index);
+	Request * open_request = nullptr;
 
 	// Make a dummy soldier, which should never be assigned to any economy
 	// Minimal invasive fix of bug 1236538: never create a rookie for a request
@@ -829,8 +858,7 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 		soldier_level_check = false;
 	}
 
-
-	for (const Request * temp_req : m_requests) {
+	for (Request * temp_req : m_requests) {
 		const Request & req = *temp_req;
 
 		if (req.get_type() != wwWORKER || req.get_index() != index)
@@ -848,7 +876,11 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 				continue;
 		}
 
-		demand += req.get_open_count();
+		uint32_t current_demand = req.get_open_count();
+		demand += current_demand;
+		if (current_demand > 0) {
+			open_request = temp_req;
+		}
 	}
 
 	if (!demand)
@@ -889,28 +921,46 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 	uint32_t can_create = std::numeric_limits<uint32_t>::max();
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
+	bool plan_at_least_one = false;
 	for (const std::pair<std::string, uint8_t>& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;
 			can_create = cc;
 		}
+
+		// if the target quantity of a resource is set to 0
+		// plan at least one worker, so a request for that resource is triggered
+		WareIndex id_w = tribe.ware_index(bc.first);
+		if (0 == ware_target_quantity(id_w).permanent)
+			plan_at_least_one = true;
 		idx++;
 	}
 
-	if (total_planned > can_create) {
+	if (total_planned > can_create && (!plan_at_least_one || total_planned > 1)) {
 		// Eliminate some excessive plans, to make sure we never request more than
 		// there are supplies for (otherwise, cyclic transportation might happen)
+		// except in case of planAtLeastOne we continue to plan at least one
 		// Note that supplies might suddenly disappear outside our control because
 		// of loss of land or silly player actions.
+		Warehouse * wh_with_plan = nullptr;
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
 
 			uint32_t planned = wh->get_planned_workers(game, index);
 			uint32_t reduce = std::min(planned, total_planned - can_create);
+
+			if (plan_at_least_one && planned > 0) {
+				wh_with_plan = wh;
+			}
 			wh->plan_workers(game, index, planned - reduce);
 			total_planned -= reduce;
 		}
+
+		// in case of planAtLeastOne undo a set to zero
+		if (nullptr != wh_with_plan && 0 == total_planned)
+			wh_with_plan->plan_workers(game, index, 1);
+
 	} else if (total_planned < demand) {
 		uint32_t plan_goal = std::min(can_create, demand);
 
@@ -923,6 +973,16 @@ void Economy::_create_requested_worker(Game & game, WareIndex index)
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
 			wh->plan_workers(game, index, plan);
 			total_planned += plan;
+		}
+
+		// plan at least one if required and if we haven't done already
+		// we are going to ignore stock policies of all warehouses here completely
+		// the worker we are making is not going to be stocked, there is a request for him
+		if (plan_at_least_one && 0 == total_planned) {
+			Warehouse * wh = find_closest_warehouse(open_request->target_flag());
+			if (nullptr == wh)
+				wh = m_warehouses[0];
+			wh->plan_workers(game, index, 1);
 		}
 	}
 }

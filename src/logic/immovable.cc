@@ -662,7 +662,6 @@ void Immovable::save
 		if (get_owner() == nullptr) log(" Tribe immovable has no owner!! ");
 		fw.c_string("tribes");
 	} else {
-		log(" World immovable ");
 		fw.c_string("world");
 	}
 

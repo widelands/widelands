@@ -754,7 +754,15 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
-				nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, i18n::make_ligatures(word.c_str())));
+				word = i18n::make_ligatures(word.c_str());
+				if (i18n::has_cjk_character(word.c_str())) {
+					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
+					for (const std::string& unit: units) {
+						nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, unit));
+					}
+				} else {
+					nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+				}
 			}
 		}
 	}

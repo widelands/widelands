@@ -14,8 +14,8 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef _LIBGETTEXT_H
-#define _LIBGETTEXT_H 1
+#ifndef GETTEXT_LIBGETTEXT_H
+#define GETTEXT_LIBGETTEXT_H 1
 
 /* NLS can be disabled through the configure --disable-nls option.  */
 #define ENABLE_NLS 1
@@ -171,12 +171,12 @@ npgettext_aux (const char *domain,
 
 #if (((__GNUC__ >= 3 || __GNUG__ >= 2) && !defined __STRICT_ANSI__) \
 	  /* || __STDC_VERSION__ >= 199901L */ )
-# define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 1
+# define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 1
 #else
-# define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 0
+# define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 0
 #endif
 
-#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#if !GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
 #include <stdlib.h>
 #endif
 
@@ -193,7 +193,7 @@ dcpgettext_expr (const char *domain,
   size_t msgctxt_len = strlen (msgctxt) + 1;
   size_t msgid_len = strlen (msgid) + 1;
   const char *translation;
-#if _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#if GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
   char msg_ctxt_id[msgctxt_len + msgid_len];
 #else
   char buf[1024];
@@ -208,7 +208,7 @@ dcpgettext_expr (const char *domain,
 		msg_ctxt_id[msgctxt_len - 1] = '\004';
 		memcpy (msg_ctxt_id + msgctxt_len, msgid, msgid_len);
 		translation = dcgettext (domain, msg_ctxt_id, category);
-#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#if !GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
 		if (msg_ctxt_id != buf)
 		  free (msg_ctxt_id);
 #endif
@@ -232,7 +232,7 @@ dcnpgettext_expr (const char *domain,
   size_t msgctxt_len = strlen (msgctxt) + 1;
   size_t msgid_len = strlen (msgid) + 1;
   const char *translation;
-#if _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#if GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
   char msg_ctxt_id[msgctxt_len + msgid_len];
 #else
   char buf[1024];
@@ -247,7 +247,7 @@ dcnpgettext_expr (const char *domain,
 		msg_ctxt_id[msgctxt_len - 1] = '\004';
 		memcpy (msg_ctxt_id + msgctxt_len, msgid, msgid_len);
 		translation = dcngettext (domain, msg_ctxt_id, msgid_plural, n, category);
-#if !_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+#if !GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
 		if (msg_ctxt_id != buf)
 		  free (msg_ctxt_id);
 #endif
@@ -257,4 +257,4 @@ dcnpgettext_expr (const char *domain,
   return (n == 1 ? msgid : msgid_plural);
 }
 
-#endif /* _LIBGETTEXT_H */
+#endif /* GETTEXT_LIBGETTEXT_H */
