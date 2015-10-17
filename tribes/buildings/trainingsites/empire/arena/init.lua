@@ -27,11 +27,13 @@ tribes:new_trainingsite_type {
 
    animations = {
 		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			template = "idle_??",
+			directory = dirname,
 			hotspot = { 81, 82 }
 		},
 		build = {
-			pictures = path.list_directory(dirname, "build_\\d+.png"),
+			template = "build_??",
+			directory = dirname,
 			hotspot = { 82, 83 },
 			fps = 1
 		}

@@ -2,11 +2,13 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      template = "idle_??",
+      directory = dirname,
       hotspot = { 8, 22 }
    },
    freeing = {
-      pictures = path.list_directory(dirname, "freeing_\\d+.png"),
+      template = "freeing_??",
+      directory = dirname,
       hotspot = { 10, 19 },
       fps = 10
    }

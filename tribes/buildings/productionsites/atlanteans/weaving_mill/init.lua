@@ -22,11 +22,13 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			template = "idle_??",
+			directory = dirname,
 			hotspot = { 65, 69 },
 		},
 		working = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"), -- TODO(GunChleoc): No animation yet.
+			template = "idle_??", -- TODO(GunChleoc): No animation yet.
+			directory = dirname,
 			hotspot = { 65, 69 },
 		}
 	},

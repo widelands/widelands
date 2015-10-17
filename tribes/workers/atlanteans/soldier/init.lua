@@ -2,57 +2,68 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      template = "idle_??",
+      directory = dirname,
       hotspot = { 10, 36 },
       fps = 5
    },
    atk_ok_e = {
-      pictures = path.list_directory(dirname, "atk_ok_e_\\d+.png"),
+      template = "atk_ok_e_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_e = {
-      pictures = path.list_directory(dirname, "atk_fail_e_\\d+.png"),
+      template = "atk_fail_e_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_e = {
-      pictures = path.list_directory(dirname, "eva_ok_e_\\d+.png"),
+      template = "eva_ok_e_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_e = {
-      pictures = path.list_directory(dirname, "eva_fail_e_\\d+.png"),
+      template = "eva_fail_e_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_ok_w = {
-      pictures = path.list_directory(dirname, "atk_ok_w_\\d+.png"),
+      template = "atk_ok_w_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_w = {
-      pictures = path.list_directory(dirname, "atk_fail_w_\\d+.png"),
+      template = "atk_fail_w_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_w = {
-      pictures = path.list_directory(dirname, "eva_ok_w_\\d+.png"),
+      template = "eva_ok_w_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_w = {
-      pictures = path.list_directory(dirname, "eva_fail_w_\\d+.png"),
+      template = "eva_fail_w_??",
+      directory = dirname,
       hotspot = { 36, 40 },
       fps = 10
    },
    die_w = {
-      pictures = path.list_directory(dirname, "die_\\d+.png"),
+      template = "die_??",
+      directory = dirname,
       hotspot = { 10, 36 },
       fps = 10
    },
    die_e = {
-      pictures = path.list_directory(dirname, "eva_fail_w_\\d+.png"),
+      template = "die_??",
+      directory = dirname,
       hotspot = { 10, 36 },
       fps = 10
    }

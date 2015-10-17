@@ -22,11 +22,13 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			template = "idle_??",
+			directory = dirname,
 			hotspot = { 41, 87 },
 		},
 		working = {
-			pictures = path.list_directory(dirname, "working_\\d+.png"), -- Let's see the mill turn!
+			template = "working_??",
+			directory = dirname,
 			hotspot = { 41, 87 },
 			fps = 25
 		},

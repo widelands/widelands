@@ -19,12 +19,14 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			template = "idle_??",
+			directory = dirname,
 			hotspot = { 50, 53 },
 			fps = 10
 		},
 		build = {
-			pictures = path.list_directory(dirname, "build_\\d+.png"),
+			template = "build_??",
+			directory = dirname,
 			hotspot = { 50, 53 },
 		},
 	},

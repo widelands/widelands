@@ -186,7 +186,8 @@ include "world/immovables/trees/umbrella_red/init.lua"
 function add_walking_animations(table, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       table["walk_" .. dir] = {
-         pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+         template = basename .. "_" .. dir .. "_??",
+         directory = dirname,
          hotspot = hotspot,
          fps = fps,
       }

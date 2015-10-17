@@ -25,7 +25,8 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
 	if (fps ~= nil) then
 		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
 			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				template = basename .. "_" .. dir ..  "_??",
+				directory = dirname,
 				hotspot = hotspot,
 				fps = fps,
 			}
@@ -33,12 +34,15 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
 	else
 		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
 			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+				template = basename .. "_" .. dir ..  "_??",
+				directory = dirname,
 				hotspot = hotspot,
 			}
 		end
    end
 end
+
+-- NOCOM add_worker_animations(animations, "walkload", dirname, "walk", {13, 24}, 10)
 
 
 -- ===================================

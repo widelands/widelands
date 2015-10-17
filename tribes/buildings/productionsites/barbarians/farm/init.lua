@@ -22,19 +22,23 @@ tribes:new_productionsite_type {
 
    animations = {
 		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
+			template = "idle_??",
+			directory = dirname,
 			hotspot = { 69, 76 },
 		},
 		build = {
-			pictures = path.list_directory(dirname, "build_\\d+.png"),
+			template = "build_??",
+			directory = dirname,
 			hotspot = { 69, 76 },
 		},
 		unoccupied = {
-			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
+			template = "unoccupied_??",
+			directory = dirname,
 			hotspot = { 69, 76 },
 		},
 		working = {
-			pictures = path.list_directory(dirname, "working_\\d+.png"),
+			template = "working_??",
+			directory = dirname,
 			hotspot = { 69, 76 },
 		},
 	},

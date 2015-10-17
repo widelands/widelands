@@ -2,13 +2,14 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      template = "idle_??",
+      directory = dirname,
       hotspot = { 7, 38 },
    },
    fishing = {
-      pictures = path.list_directory(dirname, "fishing_\\d+.png"),
+      template = "idle_??",
+      directory = dirname,
       hotspot = { 9, 39 },
-      fps = 10
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {10, 38}, 20)

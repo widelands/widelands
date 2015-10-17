@@ -20,7 +20,8 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "build_\\d+.png"),
+         template = "build_??",
+         directory = dirname,
          hotspot = { 118, 94 },
          fps = 1
       },
