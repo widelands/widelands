@@ -559,7 +559,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
-				egbase.create_ship(Widelands::Coords(x, y), idx);
+				egbase.create_critter(Widelands::Coords(x, y), idx);
 			}
 		}
 	}
@@ -626,11 +626,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			uint8_t c = *pc;
 
 			switch (c & 0xF8) {
-			case 0x40: res = "coal";   amount = c & 7; break;
-			case 0x48: res = "iron";   amount = c & 7; break;
-			case 0x50: res = "gold";   amount = c & 7; break;
-			case 0x59: res = "stones"; amount = c & 7; break;
-			default:   res = "";       amount = 0; break;
+			case 0x40: res = "coal";    amount = c & 7; break;
+			case 0x48: res = "iron";    amount = c & 7; break;
+			case 0x50: res = "gold";    amount = c & 7; break;
+			case 0x59: res = "granite"; amount = c & 7; break;
+			default:   res = "";        amount = 0; break;
 			};
 
 			int32_t nres = 0;
@@ -701,13 +701,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			std::string bobname;
 			if (buildings[index] == 0x78) {
 				switch (c) {
-					// NOCOM(GunChleoc): Need somebody to test an S2 map.
-				case BOB_STONE1:        bobname = "rocks1"; break;
-				case BOB_STONE2:        bobname = "rocks2"; break;
-				case BOB_STONE3:        bobname = "rocks3"; break;
-				case BOB_STONE4:        bobname = "rocks4"; break;
-				case BOB_STONE5:        bobname = "rocks5"; break;
-				case BOB_STONE6:        bobname = "rocks6"; break;
+				case BOB_STONE1:        bobname = "stones1"; break;
+				case BOB_STONE2:        bobname = "stones2"; break;
+				case BOB_STONE3:        bobname = "stones3"; break;
+				case BOB_STONE4:        bobname = "stones4"; break;
+				case BOB_STONE5:        bobname = "stones5"; break;
+				case BOB_STONE6:        bobname = "stones6"; break;
 				default:
 					break;
 				}
