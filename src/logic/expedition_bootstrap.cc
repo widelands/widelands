@@ -260,12 +260,9 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load
-	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
-	 Game& game, MapObjectLoader& mol)
+void ExpeditionBootstrap::load(Warehouse& warehouse, FileRead& fr,
+										 Game& game, MapObjectLoader& mol)
 {
-	assert(warehouse_packet_version >= 6);
-
 	// Expedition workers
 	const uint8_t num_workers = fr.unsigned_8();
 	for (uint8_t i = 0; i < num_workers; ++i) {

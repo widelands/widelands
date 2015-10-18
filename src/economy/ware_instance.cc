@@ -544,7 +544,7 @@ Load/save support
 ==============================
 */
 
-#define WAREINSTANCE_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -599,7 +599,7 @@ void WareInstance::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWareInstance);
-	fw.unsigned_8(WAREINSTANCE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().tribe().name());
 	fw.c_string(descr().name());
 
@@ -620,28 +620,30 @@ MapObject::Loader * WareInstance::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
-		uint8_t version = fr.unsigned_8();
+		uint8_t packet_version = fr.unsigned_8();
 
-		if (version != WAREINSTANCE_SAVEGAME_VERSION)
-			throw wexception("unknown/unhandled version %i", version);
+		if (packet_version == kCurrentPacketVersion) {
 
-		const std::string tribename = fr.c_string();
-		const std::string warename = fr.c_string();
+			const std::string tribename = fr.c_string();
+			const std::string warename = fr.c_string();
 
-		egbase.manually_load_tribe(tribename);
+			egbase.manually_load_tribe(tribename);
 
-		const TribeDescr * tribe = egbase.get_tribe(tribename);
-		if (!tribe)
-			throw wexception("unknown tribe '%s'", tribename.c_str());
+			const TribeDescr * tribe = egbase.get_tribe(tribename);
+			if (!tribe)
+				throw wexception("unknown tribe '%s'", tribename.c_str());
 
-		WareIndex wareindex = tribe->ware_index(warename);
-		const WareDescr * descr = tribe->get_ware_descr(wareindex);
+			WareIndex wareindex = tribe->ware_index(warename);
+			const WareDescr * descr = tribe->get_ware_descr(wareindex);
 
-		std::unique_ptr<Loader> loader(new Loader);
-		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
-		loader->load(fr);
+			std::unique_ptr<Loader> loader(new Loader);
+			loader->init(egbase, mol, *new WareInstance(wareindex, descr));
+			loader->load(fr);
 
-		return loader.release();
+			return loader.release();
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}

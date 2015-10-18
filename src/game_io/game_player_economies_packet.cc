@@ -32,8 +32,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
-
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GamePlayerEconomiesPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -46,7 +45,7 @@ void GamePlayerEconomiesPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
@@ -85,9 +84,9 @@ void GamePlayerEconomiesPacket::read
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("economies: %s", e.what());
 	}
@@ -101,7 +100,7 @@ void GamePlayerEconomiesPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map & map = game.map();
 	const Field & field_0 = map[0];

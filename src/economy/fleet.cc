@@ -887,13 +887,13 @@ void Fleet::log_general_info(const EditorGameBase & egbase)
 	molog ("%" PRIuS " ships and %" PRIuS " ports\n",  m_ships.size(), m_ports.size());
 }
 
-#define FLEET_SAVEGAME_VERSION 4
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 Fleet::Loader::Loader()
 {
 }
 
-void Fleet::Loader::load(FileRead & fr, uint8_t version)
+void Fleet::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
@@ -909,13 +909,7 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 	for (uint32_t i = 0; i < nrports; ++i)
 		m_ports[i] = fr.unsigned_32();
 
-	if (version >= 2) {
-		fleet.m_act_pending = fr.unsigned_8();
-		if (version < 3)
-			fleet.m_act_pending = false;
-		if (version < 4)
-			fr.unsigned_32(); // m_roundrobin
-	}
+	fleet.m_act_pending = fr.unsigned_8();
 }
 
 void Fleet::Loader::load_pointers()
@@ -963,8 +957,8 @@ MapObject::Loader * Fleet::load
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError
@@ -976,9 +970,10 @@ MapObject::Loader * Fleet::load
 				throw GameDataError("owning player %u does not exist", owner_number);
 
 			loader->init(egbase, mol, *(new Fleet(*owner)));
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}
@@ -989,7 +984,7 @@ MapObject::Loader * Fleet::load
 void Fleet::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderFleet);
-	fw.unsigned_8(FLEET_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	fw.unsigned_8(m_owner.player_number());
 
