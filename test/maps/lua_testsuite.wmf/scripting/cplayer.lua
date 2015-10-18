@@ -50,13 +50,13 @@ function player_tests:test_create_flag_non_forcing_too_close()
    assert_error("Too close to other!", function() player1:place_flag(f.rn) end)
    k:remove()
 end
--- This test is currently disabled because of bug lp:536366
--- function player_tests:test_create_flag2()
---    local f = map:get_field(20,10)
---    local k = wl.Game().players[2]:place_flag(f, true)
---    assert_equal(k.owner.number, 2)
---    k:remove()
--- end
+
+function player_tests:test_create_flag2()
+   local f = map:get_field(20,10)
+   local k = egbase.players[2]:place_flag(f, true)
+   assert_equal(k.owner.number, 2)
+   k:remove()
+end
 
 -- =================
 -- place_road tests

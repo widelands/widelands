@@ -28,12 +28,14 @@
 
 namespace Widelands {
 
+constexpr uint16_t kCurrentPacketVersion = 1;
+
 void CmdIncorporate::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_INCORPORATE_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t const worker_serial = fr.unsigned_32();
 			try {
@@ -41,9 +43,10 @@ void CmdIncorporate::read
 			} catch (const WException & e) {
 				throw wexception("worker %u: %s", worker_serial, e.what());
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
+
 	} catch (const WException & e) {
 		throw wexception("incorporate: %s", e.what());
 	}
@@ -53,8 +56,7 @@ void CmdIncorporate::read
 void CmdIncorporate::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	// First, write version
-	fw.unsigned_16(CMD_INCORPORATE_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write base classes
 	GameLogicCommand::write(fw, egbase, mos);

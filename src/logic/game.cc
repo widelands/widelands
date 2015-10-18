@@ -1068,56 +1068,49 @@ void Game::sample_statistics()
  * Read statistics data from a file.
  *
  * \param fr file to read from
- * \param version indicates the kind of statistics file; the current version
- *   is 4, support for older versions (used in widelands build <= 12) was
- *   dropped after the release of build 15
  */
-void Game::read_statistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr)
 {
-	if (version >= 3) {
-		fr.unsigned_32(); // used to be last stats update time
+	fr.unsigned_32(); // used to be last stats update time
 
-		// Read general statistics
-		uint32_t entries = fr.unsigned_16();
-		const PlayerNumber nr_players = map().get_nrplayers();
-		m_general_stats.resize(nr_players);
+	// Read general statistics
+	uint32_t entries = fr.unsigned_16();
+	const PlayerNumber nr_players = map().get_nrplayers();
+	m_general_stats.resize(nr_players);
 
-		iterate_players_existing_novar(p, nr_players, *this) {
-			m_general_stats[p - 1].land_size       .resize(entries);
-			m_general_stats[p - 1].nr_workers      .resize(entries);
-			m_general_stats[p - 1].nr_buildings    .resize(entries);
-			m_general_stats[p - 1].nr_wares        .resize(entries);
-			m_general_stats[p - 1].productivity    .resize(entries);
-			m_general_stats[p - 1].nr_casualties   .resize(entries);
-			m_general_stats[p - 1].nr_kills        .resize(entries);
-			m_general_stats[p - 1].nr_msites_lost        .resize(entries);
-			m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
-			m_general_stats[p - 1].miltary_strength.resize(entries);
-			m_general_stats[p - 1].custom_statistic.resize(entries);
+	iterate_players_existing_novar(p, nr_players, *this) {
+		m_general_stats[p - 1].land_size       .resize(entries);
+		m_general_stats[p - 1].nr_workers      .resize(entries);
+		m_general_stats[p - 1].nr_buildings    .resize(entries);
+		m_general_stats[p - 1].nr_wares        .resize(entries);
+		m_general_stats[p - 1].productivity    .resize(entries);
+		m_general_stats[p - 1].nr_casualties   .resize(entries);
+		m_general_stats[p - 1].nr_kills        .resize(entries);
+		m_general_stats[p - 1].nr_msites_lost        .resize(entries);
+		m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
+		m_general_stats[p - 1].miltary_strength.resize(entries);
+		m_general_stats[p - 1].custom_statistic.resize(entries);
+	}
+
+	iterate_players_existing_novar(p, nr_players, *this)
+		for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
+		{
+			m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
+			m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
+			m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
 		}
-
-		iterate_players_existing_novar(p, nr_players, *this)
-			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
-			{
-				m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
-				m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
-				if (version == 4)
-					m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
-			}
-	} else
-		throw wexception("Unsupported version %i", version);
 }
 
 

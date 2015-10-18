@@ -1778,7 +1778,7 @@ Load/save support
 ==============================
 */
 
-#define SOLDIER_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Soldier::Loader::Loader() :
 		m_battle(0)
@@ -1789,34 +1789,38 @@ void Soldier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.unsigned_8();
-	if (version > SOLDIER_SAVEGAME_VERSION)
-		throw GameDataError("unknown/unhandled version %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	Soldier & soldier = get<Soldier>();
-	soldier.m_hp_current = fr.unsigned_32();
-	if (SOLDIER_SAVEGAME_VERSION < 2) // Hitpoints multiplied to make balance easier
-		soldier.m_hp_current *= 100;
+			Soldier & soldier = get<Soldier>();
+			soldier.m_hp_current = fr.unsigned_32();
 
-	soldier.m_hp_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
-	soldier.m_attack_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
-	soldier.m_defense_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
-	soldier.m_evade_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
+			soldier.m_hp_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
+			soldier.m_attack_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
+			soldier.m_defense_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
+			soldier.m_evade_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
-	if (soldier.m_hp_current > soldier.get_max_hitpoints())
-		soldier.m_hp_current = soldier.get_max_hitpoints();
+			if (soldier.m_hp_current > soldier.get_max_hitpoints())
+				soldier.m_hp_current = soldier.get_max_hitpoints();
 
-	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
-	if (soldier.m_combat_walking != CD_NONE) {
-		soldier.m_combat_walkstart = fr.signed_32();
-		soldier.m_combat_walkend = fr.signed_32();
+			soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
+			if (soldier.m_combat_walking != CD_NONE) {
+				soldier.m_combat_walkstart = fr.signed_32();
+				soldier.m_combat_walkend = fr.signed_32();
+			}
+
+			m_battle = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
+	} catch (const std::exception & e) {
+		throw wexception("loading soldier: %s", e.what());
 	}
-
-	m_battle = fr.unsigned_32();
 }
 
 void Soldier::Loader::load_pointers()
@@ -1849,7 +1853,7 @@ void Soldier::do_save
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.unsigned_8(SOLDIER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(m_hp_current);
 	fw.unsigned_32(m_hp_level);
 	fw.unsigned_32(m_attack_level);

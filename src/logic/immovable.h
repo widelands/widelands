@@ -256,7 +256,7 @@ protected:
         // Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		void load(FileRead &, uint8_t version);
+		void load(FileRead &, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 	};

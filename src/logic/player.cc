@@ -1310,144 +1310,73 @@ const std::string & Player::get_ai() const
  * Read statistics data from a file.
  *
  * \param fr source stream
- * \param version indicates the kind of statistics file, which may be
- *   0 - old style statistics (before WiHack 2010)
- *   1 - statistics with ware names
- *   2 - with consumption statistics
- *   3 - with stock statistics
  */
-void Player::read_statistics(FileRead & fr, uint32_t const version)
+void Player::read_statistics(FileRead & fr)
 {
-	 //version 1, 2 and 3 only differs in an additional statistic.
-	 //Use version 1 code for all of them
-	if ((version == 2) || (version == 1) || (version == 3)) {
-		uint16_t nr_wares = fr.unsigned_16();
-		uint16_t nr_entries = fr.unsigned_16();
+	uint16_t nr_wares = fr.unsigned_16();
+	uint16_t nr_entries = fr.unsigned_16();
 
-		for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i)
-			m_ware_productions[i].resize(nr_entries);
+	for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i)
+		m_ware_productions[i].resize(nr_entries);
 
-		for (uint16_t i = 0; i < nr_wares; ++i) {
-			std::string name = fr.c_string();
-			WareIndex idx = egbase().tribes().ware_index(name);
-			if (!egbase().tribes().ware_exists(idx)) {
-				log
-					("Player %u statistics: unknown ware name %s",
-					 player_number(), name.c_str());
-				continue;
-			}
-
-			m_current_produced_statistics[idx] = fr.unsigned_32();
-
-			for (uint32_t j = 0; j < nr_entries; ++j)
-				m_ware_productions[idx][j] = fr.unsigned_32();
+	for (uint16_t i = 0; i < nr_wares; ++i) {
+		std::string name = fr.c_string();
+		WareIndex idx = egbase().tribes().ware_index(name);
+		if (!egbase().tribes().ware_exists(idx)) {
+			log
+				("Player %u statistics: unknown ware name %s",
+				 player_number(), name.c_str());
+			continue;
 		}
 
-		//read consumption statistics if it exists
-		if ((version == 2) || (version == 3)) {
-			nr_wares = fr.unsigned_16();
-			nr_entries = fr.unsigned_16();
+		m_current_produced_statistics[idx] = fr.unsigned_32();
 
-			for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i)
-				m_ware_consumptions[i].resize(nr_entries);
-
-			for (uint16_t i = 0; i < nr_wares; ++i) {
-				std::string name = fr.c_string();
-				WareIndex idx = egbase().tribes().ware_index(name);
-				if (!egbase().tribes().ware_exists(idx)) {
-					log
-						("Player %u consumption statistics: unknown ware name %s",
-						player_number(), name.c_str());
-					continue;
-				}
-
-				m_current_consumed_statistics[idx] = fr.unsigned_32();
-
-				for (uint32_t j = 0; j < nr_entries; ++j)
-					m_ware_consumptions[idx][j] = fr.unsigned_32();
-			}
-
-			//read stock statistics if it exists
-			if (version == 3) {
-				nr_wares = fr.unsigned_16();
-				nr_entries = fr.unsigned_16();
-
-				for (uint32_t i = 0; i < m_ware_stocks.size(); ++i)
-					m_ware_stocks[i].resize(nr_entries);
-
-				for (uint16_t i = 0; i < nr_wares; ++i) {
-					std::string name = fr.c_string();
-					WareIndex idx = egbase().tribes().ware_index(name);
-					if (!egbase().tribes().ware_exists(idx)) {
-						log
-							("Player %u stock statistics: unknown ware name %s",
-							player_number(), name.c_str());
-						continue;
-					}
-
-					for (uint32_t j = 0; j < nr_entries; ++j)
-						m_ware_stocks[idx][j] = fr.unsigned_32();
-				}
-			}
-		}
-	} else if (version == 0) {
-		uint16_t nr_wares = fr.unsigned_16();
-		uint16_t nr_entries = fr.unsigned_16();
-
-		if (nr_wares > 0) {
-			if (nr_wares == egbase().tribes().nrwares()) {
-				assert(m_ware_productions.size() == nr_wares);
-				assert(m_current_produced_statistics.size() == nr_wares);
-
-				for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i) {
-					m_current_produced_statistics[i] = fr.unsigned_32();
-					m_ware_productions[i].resize(nr_entries);
-
-					for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
-						m_ware_productions[i][j] = fr.unsigned_32();
-				}
-			} else {
-				log
-					("Statistics for player %u (%s) has %u ware types "
-					 "(should be %u). Statistics will be discarded.",
-					 player_number(), tribe().name().c_str(),
-					 nr_wares, static_cast<unsigned int>(egbase().tribes().nrwares()));
-
-				// Eat and discard all data
-				for (uint32_t i = 0; i < nr_wares; ++i) {
-					fr.unsigned_32();
-
-					for (uint32_t j = 0; j < nr_entries; ++j)
-						fr.unsigned_32();
-				}
-			}
-		}
-	} else
-		throw wexception("Unsupported version %i", version);
-
-	//create empty consumption statistic if it is missing
-	if (version < 2) {
-		uint16_t nr_entries = m_ware_productions[0].size();
-
-		for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
-			m_ware_consumptions[i].resize(nr_entries);
-			m_current_consumed_statistics[i] = 0;
-
-			for (uint32_t j = 0; j < nr_entries; ++j)
-				m_ware_consumptions[i][j] = 0;
-		}
+		for (uint32_t j = 0; j < nr_entries; ++j)
+			m_ware_productions[idx][j] = fr.unsigned_32();
 	}
 
-	//create empty stock statistic if it is missing
-	if (version < 3) {
-		uint16_t nr_entries = m_ware_productions[0].size();
+	//read consumption statistics
+	nr_wares = fr.unsigned_16();
+	nr_entries = fr.unsigned_16();
 
-		for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
-			m_ware_stocks[i].resize(nr_entries);
+	for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i)
+		m_ware_consumptions[i].resize(nr_entries);
 
-			for (uint32_t j = 0; j < nr_entries; ++j)
-				m_ware_stocks[i][j] = 0;
+	for (uint16_t i = 0; i < nr_wares; ++i) {
+		std::string name = fr.c_string();
+		WareIndex idx = egbase().tribes().ware_index(name);
+		if (!egbase().tribes().ware_exists(idx)) {
+			log
+				("Player %u consumption statistics: unknown ware name %s",
+				player_number(), name.c_str());
+			continue;
 		}
+
+		m_current_consumed_statistics[idx] = fr.unsigned_32();
+
+		for (uint32_t j = 0; j < nr_entries; ++j)
+			m_ware_consumptions[idx][j] = fr.unsigned_32();
+	}
+
+	//read stock statistics
+	nr_wares = fr.unsigned_16();
+	nr_entries = fr.unsigned_16();
+
+	for (uint32_t i = 0; i < m_ware_stocks.size(); ++i)
+		m_ware_stocks[i].resize(nr_entries);
+
+	for (uint16_t i = 0; i < nr_wares; ++i) {
+		std::string name = fr.c_string();
+		WareIndex idx = egbase().tribes().ware_index(name);
+		if (!egbase().tribes().ware_exists(idx)) {
+			log
+				("Player %u stock statistics: unknown ware name %s",
+				player_number(), name.c_str());
+			continue;
+		}
+
+		for (uint32_t j = 0; j < nr_entries; ++j)
+			m_ware_stocks[idx][j] = fr.unsigned_32();
 	}
 
 	//all statistics should have the same size

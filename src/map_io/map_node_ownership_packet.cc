@@ -28,8 +28,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapNodeOwnershipPacket::read
 	(FileSystem            &       fs,
@@ -52,14 +51,14 @@ void MapNodeOwnershipPacket::read
 	}
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.unsigned_8());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("ownership: %s", e.what());
 	}
@@ -71,7 +70,7 @@ void MapNodeOwnershipPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	Map & map = egbase.map();
 	MapIndex const max_index = map.max_index();

@@ -544,7 +544,7 @@ Load/save support
 ==============================
 */
 
-#define WAREINSTANCE_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -599,7 +599,7 @@ void WareInstance::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWareInstance);
-	fw.unsigned_8(WAREINSTANCE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().name());
 
 	MapObject::save(egbase, mos, fw);
@@ -620,24 +620,26 @@ MapObject::Loader * WareInstance::load
 	 const TribesLegacyLookupTable& lookup_table)
 {
 	try {
-		uint8_t version = fr.unsigned_8();
+		uint8_t packet_version = fr.unsigned_8();
 
 		// Some maps may contain ware info, so we need compatibility here.
-		if (!(1 <= version && version <= WAREINSTANCE_SAVEGAME_VERSION))
-			throw wexception("unknown/unhandled version %i", version);
-		std::string warename = fr.c_string();
-		if (version == 1) {
-			warename = lookup_table.lookup_ware(warename, fr.c_string());
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			std::string warename = fr.c_string();
+			if (packet_version == 1) {
+				warename = lookup_table.lookup_ware(warename, fr.c_string());
+			}
+
+			WareIndex wareindex = egbase.tribes().ware_index(warename);
+			const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
+
+			std::unique_ptr<Loader> loader(new Loader);
+			loader->init(egbase, mol, *new WareInstance(wareindex, descr));
+			loader->load(fr);
+
+			return loader.release();
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
-
-		WareIndex wareindex = egbase.tribes().ware_index(warename);
-		const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
-
-		std::unique_ptr<Loader> loader(new Loader);
-		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
-		loader->load(fr);
-
-		return loader.release();
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
