@@ -138,7 +138,6 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
 	Bob& create_critter(Coords, int bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
@@ -209,6 +208,9 @@ public:
 	Tribes* mutable_tribes();
 
 private:
+	/// Common function for create_critter and create_ship.
+	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
+
 	/// \param preferred_player
 	///  When conquer is false, this can be used to prefer a player over other
 	///  players, when lost land is reassigned. This can for example be used to
