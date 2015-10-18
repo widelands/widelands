@@ -19,8 +19,6 @@
 
 #include "logic/buildcost.h"
 
-#include <memory>
-
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"

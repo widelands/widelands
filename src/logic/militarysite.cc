@@ -70,7 +70,6 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	m_defeated_you_str = _(items_table->get_string("defeated_you"));
 }
 
-
 /**
 ===============
 Create a new building of this type

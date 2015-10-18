@@ -176,7 +176,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 /* RST
 	.. function:: get_tribe_description(tribe_name)
 
-		:arg tribe_name: the name of the building
+		:arg tribe_name: the name of the tribe
 
 		Registers a tribe description so Lua can reference it from the game.
 
@@ -201,8 +201,8 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	.. function:: get_ware_description(ware_description.name)
 
 		:arg ware_name: the name of the ware
- Registers a ware description so Lua can reference it from the game.749
 
+		Registers a ware description so Lua can reference it from the game.
 
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
@@ -534,7 +534,7 @@ int LuaPlayerBase::place_building(lua_State * L) {
 /* RST
 	.. method:: place_ship(field)
 
-		Places a ship for the player's tribe which will be
+		Places a ship for the player's tribe, which will be
 		owned by the player.
 
 		:arg field: where the ship should be placed.

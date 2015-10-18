@@ -570,21 +570,21 @@ void ProductionProgram::ActReturn::execute
 
 		std::string result_string = "";
 		if (m_result == Failed) {
-			/** TRANSLATORS: "Did not start working because the economy needs suits of armor" */
+			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else if (m_result == Completed) {
-			/** TRANSLATORS: "Completed working because the economy needs suits of armor" */
+			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Completed %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else {
-			/** TRANSLATORS: "Skipped working because the economy needs suits of armor" */
+			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
@@ -1029,7 +1029,7 @@ ProductionProgram::ActProduce::ActProduce
 				throw GameDataError
 					(
 					 "%s is not declared as an output (\"%s\" was not "
-						"found in the \"outputs\" table)",
+					 "found in the \"outputs\" table)",
 					 ware, ware);
 		}
 	} catch (const WException & e) {
@@ -1518,9 +1518,7 @@ void ProductionProgram::ActTrain::execute
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlayFX::ActPlayFX
-	(char * parameters)
-{
+ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 	try {
 		bool reached_end;
 		const std::string& filepath = next_word(parameters, reached_end);
@@ -1779,5 +1777,4 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",
 								  _name.c_str(), building->name().c_str());
 }
-
 }

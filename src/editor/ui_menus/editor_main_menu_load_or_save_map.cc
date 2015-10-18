@@ -171,7 +171,6 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	Widelands::Map map;
 
 	for (const std::string& mapfilename : files) {
-
 		// Add map file (compressed) or map directory (uncompressed)
 		if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
 			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);

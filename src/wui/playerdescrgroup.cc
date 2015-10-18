@@ -262,7 +262,6 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	const PlayerSettings & player = settings.players.at(d->plnum);
 	const std::string & currenttribe = player.tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
-
 	bool random_tribe = false;
 	uint32_t num_tribes = settings.tribes.size();
 

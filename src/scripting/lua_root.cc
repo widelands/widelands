@@ -548,7 +548,7 @@ void LuaTribes::__unpersist(lua_State*) {
 	.. method:: new_constructionsite_type(table)
 
 		Adds a new constructionsite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -570,7 +570,7 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 	.. method:: new_dismantlesite_type(table)
 
 		Adds a new disnamtlesite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -593,7 +593,7 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 	.. method:: new_militarysite_type(table)
 
 		Adds a new militarysite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -615,7 +615,7 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 	.. method:: new_productionsite_type(table)
 
 		Adds a new productionsite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -636,8 +636,8 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 /* RST
 	.. method:: new_trainingsite_type(table)
 
-		Adds a new productionsite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		Adds a new trainingsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -658,8 +658,8 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 /* RST
 	.. method:: new_warehouse_type(table)
 
-		Adds a new productionsite building type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		Adds a new warehouse building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -681,7 +681,7 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 	.. method:: new_immovable_type(table)
 
 		Adds a new immovable type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -703,7 +703,7 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 	.. method:: new_ship_type(table)
 
 		Adds a new ship type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -725,7 +725,7 @@ int LuaTribes::new_ship_type(lua_State* L) {
 	.. method:: new_ware_type(table)
 
 		Adds a new ware type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -747,7 +747,7 @@ int LuaTribes::new_ware_type(lua_State* L) {
 	.. method:: new_carrier_type(table)
 
 		Adds a new carrier worker type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -769,7 +769,7 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 	.. method:: new_soldier_type(table)
 
 		Adds a new soldier worker type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -791,7 +791,7 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 	.. method:: new_worker_type(table)
 
 		Adds a new worker type. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -814,7 +814,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
 	.. method:: new_tribe(table)
 
 		Adds a new tribe. Takes a single argument, a table with
-		the descriptions. See the files in tribe/ for usage examples.
+		the descriptions. See the files in tribes/ for usage examples.
 
 		:returns: :const:`nil`
 */

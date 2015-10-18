@@ -222,7 +222,7 @@ struct WorldImmovableNonexistent : public FileRead::DataError {
 };
 struct BuildingNonexistent : public FileRead::DataError {
 	BuildingNonexistent(char const* const Name)
-		: DataError("tribes do not define building type \"%s\"", Name),
+	   : DataError("tribes do not define building type \"%s\"", Name),
 	     name(Name) {
 	}
 	char const* const name;
@@ -302,7 +302,6 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 	else
 		return read_immovable_type(fr, egbase.world());
 }
-
 
 // Reads a c_string and interprets it as the name of an immovable type.
 //

@@ -243,10 +243,10 @@ void MapObjectDescr::add_animation
 {
 	if (is_animation_known(animname)) {
 #ifndef NDEBUG
-		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
-#else
 		throw GameDataError
 			("Tried to add already existing animation \"%s\"", animname.c_str());
+#else
+		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
 #endif
 	} else {
 		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
@@ -339,6 +339,7 @@ uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_
 		s_dyn_attribs[name] = s_dyn_attribhigh;
 	}
 	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)
+
 	return s_dyn_attribhigh;
 }
 

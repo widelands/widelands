@@ -387,17 +387,15 @@ WareIndex TribeDescr::get_resource_indicator
 void TribeDescr::resize_ware_orders(size_t maxLength) {
 	bool need_resize = false;
 
-	//check if we actually need to resize
+	// Check if we actually need to resize.
 	for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
 		if (it->size() > maxLength) {
 			need_resize = true;
 		  }
 	 }
 
-	//resize
+	// Build new smaller wares_order.
 	if (need_resize) {
-
-		//build new smaller wares_order
 		WaresOrder new_wares_order;
 		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
 			new_wares_order.push_back(std::vector<Widelands::WareIndex>());
@@ -411,11 +409,15 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 			}
 		}
 
-		//remove old array
+		// Remove old array.
 		wares_order_.clear();
 		wares_order_ = new_wares_order;
 	}
 }
+
+/**
+  * Helper functions
+  */
 
 WareIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {

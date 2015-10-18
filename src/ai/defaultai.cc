@@ -120,10 +120,10 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-			if (note.player != player_) {
+		   	if (note.player != player_) {
 			   return;
 		   }
-			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
@@ -527,6 +527,7 @@ void DefaultAI::late_initialization() {
 					bo.upgrade_substitutes_ = true;
 				}
 			}
+
 			continue;
 		}
 
@@ -541,8 +542,7 @@ void DefaultAI::late_initialization() {
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
 				    tribe_->ware_index("planks") == temp_buildcosts.first ||
-				    tribe_->ware_index("wood") == temp_buildcosts.first ||
-					 tribe_->ware_index("granite") == temp_buildcosts.first)
+				    tribe_->ware_index("granite") == temp_buildcosts.first)
 					continue;
 
 				bo.critical_built_mat_.push_back(temp_buildcosts.first);
@@ -1400,7 +1400,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
-
 			// shortage = less then 3 items in warehouses
 			if (get_warehoused_stock(wt) < 3) {
 				bo.build_material_shortage_ = true;
@@ -1937,7 +1936,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				if (expansion_mode == MilitaryStrategy::kResourcesOrDefense &&
-					 !(bf->unowned_mines_pots_nearby_ || bf->rocks_nearby_ || bf->water_nearby_ ||
+				    !(bf->unowned_mines_pots_nearby_ || bf->rocks_nearby_ || bf->water_nearby_ ||
 				      (bf->distant_water_ && resource_necessity_water_needed_) || bf->enemy_nearby_)) {
 					continue;
 				}
@@ -2607,7 +2606,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
-
 	// if we passed grace time this will be last attempt and if it fails
 	// building is destroyes
 	bool last_attempt_ = false;
@@ -3134,7 +3132,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), 6),
 		       nullptr,
 
-				 FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) == 0) {
+		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -4527,7 +4525,6 @@ void DefaultAI::gain_building(Building& b) {
 			if (bo.is_port_) {
 				++num_ports;
 				seafaring_economy = true;
-
 				// unblock nearby fields, might be used for other buildings...
 				Map& map = game().map();
 				MapRegion<Area<FCoords>> mr(
@@ -5172,12 +5169,12 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	// we test following materials
 	const std::vector<std::string> materials = {"coal",
 	                                            "log",
-															  "iron_ore",
+	                                            "iron_ore",
 	                                            "iron",
 	                                            "marble",
-															  "planks",
+	                                            "planks",
 	                                            "water",
-															  "gold_ore",
+	                                            "gold_ore",
 	                                            "granite",
 	                                            "fish",
 	                                            "diamond",
@@ -5185,9 +5182,9 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	                                            "wheat",
 	                                            "grape",
 	                                            "quartz",
-															  "atlanteans_bread",
-															  "barbarians_bread",
-															  "empire_bread",
+	                                            "atlanteans_bread",
+	                                            "barbarians_bread",
+	                                            "empire_bread",
 	                                            "meat"};
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
@@ -5200,6 +5197,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		summary = summary + materials.at(j) + ", ";
 	}
+
 	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
 	    pn,
 	    static_cast<uint32_t>(productionsites.size()),

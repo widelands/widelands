@@ -215,7 +215,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	assert(tribe.has_building(tribe.building_index(building_description.name())));
 	try {
 		std::unique_ptr<LuaTable> t(
-			lua->run_script("tribes/scripting/help/building_help.lua"));
+		   lua->run_script("tribes/scripting/help/building_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->push_arg(building_description.name());

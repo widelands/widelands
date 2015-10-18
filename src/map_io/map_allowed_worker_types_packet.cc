@@ -74,7 +74,6 @@ void MapAllowedWorkerTypesPacket::read
 							player->allow_worker_type(worker_index, false);
 						}
 					}
-
 				} catch (const WException & e) {
 					throw GameDataError
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());

@@ -70,9 +70,8 @@ namespace {
 // stack. Returns 1.
 int wares_map_to_lua(lua_State* L, const Buildcost& wares_map) {
 	lua_newtable(L);
-	const Tribes& tribes = get_egbase(L).tribes();
 	for (const auto& cost : wares_map) {
-		lua_pushstring(L, tribes.get_ware_descr(cost.first)->name());
+		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(cost.first)->name());
 		lua_pushuint32(L, cost.second);
 		lua_settable(L, -3);
 	}
@@ -988,7 +987,6 @@ int LuaMap::place_immovable(lua_State * const L) {
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
 	} else if (from_where == "tribes") {
-
 		WareIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
@@ -1492,7 +1490,7 @@ int LuaBuildingDescription::get_destructible(lua_State * L) {
 /* RST
 	.. attribute:: directory
 
-			(RO) The file path of the directory where the init files are located.
+			(RO) The file path of the directory where the building's init files are located.
 */
 int LuaBuildingDescription::get_directory(lua_State * L) {
 	lua_pushstring(L, get()->directory());
@@ -1548,7 +1546,6 @@ int LuaBuildingDescription::get_enhancement(lua_State * L) {
 	}
 	return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhancement));
 }
-
 
 /* RST
 	.. attribute:: icon_name
@@ -1668,6 +1665,7 @@ const MethodType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Metho
 const PropertyType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
+
 
 
 /* RST
@@ -2203,13 +2201,12 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 /* RST
 	.. attribute:: directory
 
-			(RO) The directory where the init files are located.
+			(RO) The directory where the ware's init files are located.
 */
 int LuaWareDescription::get_directory(lua_State * L) {
 	lua_pushstring(L, get()->directory());
 	return 1;
 }
-
 
 
 /* RST
@@ -2343,7 +2340,7 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 /* RST
 	.. attribute:: directory
 
-			(RO) The directory where the init files are located.
+			(RO) The directory where the worker's init files are located.
 */
 int LuaWorkerDescription::get_directory(lua_State * L) {
 	lua_pushstring(L, get()->directory());
@@ -2820,6 +2817,7 @@ int LuaFlag::set_wares(lua_State * L)
 	EditorGameBase & egbase = get_egbase(L);
 	Flag * f = get(L, egbase);
 	const Tribes& tribes = egbase.tribes();
+
 	WaresMap setpoints = m_parse_set_wares_arguments(L, f->owner().tribe());
 	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
 

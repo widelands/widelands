@@ -21,10 +21,8 @@
 #define WL_LOGIC_BUILDCOST_H
 
 #include <map>
-#include <memory>
 
 #include "logic/widelands.h"
-#include "scripting/lua_table.h"
 
 class FileRead;
 class FileWrite;

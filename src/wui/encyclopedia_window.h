@@ -32,10 +32,10 @@
 #include "ui_basic/window.h"
 
 namespace Widelands {
-struct BuildingDescr;
-class TribeDescr;
+class BuildingDescr;
 class WareDescr;
 class WorkerDescr;
+class TribeDescr;
 }
 
 class InteractivePlayer;

@@ -151,7 +151,6 @@ WarehouseWaresPanel::WarehouseWaresPanel
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-
 		bool is_workers = m_type == Widelands::wwWORKER;
 		const std::set<Widelands::WareIndex> indices =
 				is_workers ? m_wh.owner().tribe().workers() : m_wh.owner().tribe().wares();

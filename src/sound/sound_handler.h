@@ -246,7 +246,7 @@ protected:
 	// Prints an error and disables the sound system.
 	void initialization_error(const std::string& msg);
 
-	void load_one_fx(const std::string&, const std::string& fx_name);
+	void load_one_fx(const std::string& path, const std::string& fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
 		(const std::string & fx_name,

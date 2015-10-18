@@ -196,7 +196,6 @@ private:
 	const Widelands::MapObjectDescr* mapobjectdescr_;
 };
 
-
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
 	const Widelands::klass* get() const {                                                           \
 		return static_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                  \
@@ -286,6 +285,7 @@ public:
 private:
 	CASTED_GET_DESCRIPTION(DismantleSiteDescr)
 };
+
 
 
 class LuaProductionSiteDescription : public LuaBuildingDescription {

@@ -69,7 +69,6 @@ Request::Request
 	m_last_request_time(m_required_time)
 {
 	assert(m_type == wwWARE || m_type == wwWORKER);
-
 	if (w == wwWARE && !_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception
 			("creating ware request with index %u, but the ware for this index doesn't exist",
@@ -182,6 +181,7 @@ void Request::write
 	fw.unsigned_16(REQUEST_VERSION);
 
 	//  Target and economy should be set. Same is true for callback stuff.
+
 	assert(m_type == wwWARE || m_type == wwWORKER);
 	if (m_type == wwWARE) {
 		assert(game.tribes().ware_exists(m_index));

@@ -206,7 +206,6 @@ void EncyclopediaWindow::building_selected(uint32_t) {
 	} catch (LuaError& err) {
 		building_text_.set_text(err.what());
 	}
-
 	building_text_.scroll_to_top();
 }
 

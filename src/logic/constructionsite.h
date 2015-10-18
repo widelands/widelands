@@ -35,10 +35,10 @@ class WaresQueue;
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-	const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
-	const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
-	uint32_t               totaltime;
-	uint32_t               completedtime;
+	const BuildingDescr* becomes; // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was; // only valid if "becomes" is an enhanced building.
+	uint32_t totaltime;
+	uint32_t completedtime;
 };
 
 /*

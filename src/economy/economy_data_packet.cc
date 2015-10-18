@@ -105,7 +105,6 @@ void EconomyDataPacket::read(FileRead & fr)
 void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
-
 	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (const WareIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity & tq =
@@ -116,7 +115,6 @@ void EconomyDataPacket::write(FileWrite & fw)
 			fw.unsigned_32(tq.permanent);
 		}
 	}
-
 	for (const WareIndex& worker_index : tribe.workers()) {
 		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[worker_index];
@@ -126,7 +124,6 @@ void EconomyDataPacket::write(FileWrite & fw)
 			fw.unsigned_32(tq.permanent);
 		}
 	}
-
 	fw.unsigned_32(0); //  terminator
 	fw.unsigned_32(m_eco->m_request_timerid);
 }

@@ -40,6 +40,7 @@
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
+
 namespace Widelands {
 
 void CritterProgram::parse(const std::vector<std::string>& lines) {
@@ -314,7 +315,7 @@ const BobProgramBase * Critter::Loader::get_program
 MapObject::Loader* Critter::load(EditorGameBase& egbase,
 												  MapObjectLoader& mol,
                                       FileRead& fr,
-												  const WorldLegacyLookupTable& lookup_table) {
+                                      const WorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {

@@ -2649,7 +2649,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
 					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
-					if (ml.get() != nullptr) {
+					if (ml != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path);
 						ml->preload_map(true);

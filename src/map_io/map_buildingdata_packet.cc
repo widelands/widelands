@@ -339,6 +339,7 @@ void MapBuildingdataPacket::read_constructionsite
 
 		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
+
 			const TribeDescr & tribe = constructionsite.owner().tribe();
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
@@ -607,7 +608,6 @@ void MapBuildingdataPacket::read_warehouse
 							 warehouse.m_next_worker_without_cost_spawn.size());
 					for (uint8_t i = 0;; ++i) {
 						assert(i < worker_types_without_cost.size());
-
 						if (worker_types_without_cost.at(i) == worker_index) {
 							if (warehouse.m_next_worker_without_cost_spawn[i] != never()) {
 								throw GameDataError

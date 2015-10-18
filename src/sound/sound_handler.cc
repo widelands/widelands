@@ -261,7 +261,6 @@ void SoundHandler::load_fx_if_needed
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
 	boost::regex re(basename + "_\\d+\\.ogg");
-
 	FilenameSet files = filter(g_fs->list_directory(dir), [&re](const std::string& fn) {
 		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
 	});

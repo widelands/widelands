@@ -439,7 +439,7 @@ void Warehouse::init(EditorGameBase & egbase)
 			}
 		}
 		// m_next_military_act is not touched in the loading code. Is only needed
-		// if there warehouse is created in the game?  I assume it's for the
+		// if the warehouse is created in the game?  I assume it's for the
 		// conquer_radius thing
 		m_next_military_act = schedule_act(*game, 1000);
 

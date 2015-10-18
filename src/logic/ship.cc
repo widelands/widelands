@@ -1089,6 +1089,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 	try {
 		// The header has been peeled away by the caller
+
 		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			try {

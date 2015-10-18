@@ -992,9 +992,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
-			 	(rdescr,
-			 	 rdescr->detectable() ?
-			 	 position.field->get_resources_amount() : 0),
+				(rdescr,
+				rdescr->detectable() ?
+				position.field->get_resources_amount() : 0),
 			 MapObjectDescr::OwnerType::kTribe);
 	}
 

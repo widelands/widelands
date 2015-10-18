@@ -85,7 +85,6 @@ Player* PlayersManager::add_player
 			m_number_of_players--;
 		}
 	}
-
 	p = new Player
 		(m_egbase,
 		 player_number,

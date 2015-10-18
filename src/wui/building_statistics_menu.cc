@@ -379,7 +379,6 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
 	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
-
 	// Only add headquarter types that are owned by player.
 	const Widelands::Player& player = iplayer().player();
 	if ((!((player.tribe().has_building(id) && (descr.is_buildable() || descr.is_enhanced())) ||

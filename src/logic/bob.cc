@@ -70,7 +70,6 @@ BobDescr::BobDescr(const std::string& init_descname, const MapObjectType init_ty
  * Only tribe bobs have a vision range, since it would be irrelevant
  * for world bobs.
  *
-  *
  * \returns radius (in fields) of area that the bob can see
  */
 uint32_t BobDescr::vision_range() const

@@ -236,7 +236,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
 			m_programs[program_name] = new ImmovableProgram(
-				program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
+			   program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
 		} catch (const std::exception& e) {
 			throw wexception("Error in program %s: %s", program_name.c_str(), e.what());
 		}
@@ -705,6 +705,7 @@ MapObject::Loader * Immovable::load
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
+
 			const std::string owner_type = fr.c_string();
 			std::string name = fr.c_string();
 			Immovable * imm = nullptr;

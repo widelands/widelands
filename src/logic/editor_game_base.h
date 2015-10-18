@@ -106,7 +106,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
-							 const std::string& tribes,
+	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
@@ -138,7 +138,6 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
 	Bob& create_critter(Coords, int bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);

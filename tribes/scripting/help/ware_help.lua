@@ -52,7 +52,7 @@ function ware_help_string(tribe, ware_description)
 	end
 	result = result .. ware_helptext(tribe)
 
-	-- NOCOM(GunChleoc): Split into purpose and note
+	-- TODO(GunChleoc): Split into purpose and note
 	-- We also want the ware quantity info collected while loading the tribes.
 
 	result = rt("image=" .. ware_description.icon_name, p(result))

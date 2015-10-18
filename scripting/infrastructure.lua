@@ -89,7 +89,7 @@ end
 --          :meth:`wl.map.Warehouse.set_workers`.  Note that ProductionSites
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
--- NOCOM(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
+-- TODO(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
 function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
       b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)

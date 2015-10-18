@@ -327,7 +327,6 @@ Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owne
 /**
  * Instantly create a critter at the given x/y location.
  *
- * idx is the bob type.
  */
 
 Bob& EditorGameBase::create_critter(Coords const c, int const bob_type_idx, Player* owner) {
@@ -341,6 +340,7 @@ Bob& EditorGameBase::create_critter(Coords c, const std::string& name, Player* o
 		                    owner->get_name().c_str());
 	return create_bob(c, *descr, owner);
 }
+
 
 /*
 ===============

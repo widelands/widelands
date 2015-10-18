@@ -42,8 +42,6 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    end
 end
 
--- NOCOM add_worker_animations(animations, "walkload", dirname, "walk", {13, 24}, 10)
-
 
 -- ===================================
 --    Ships
