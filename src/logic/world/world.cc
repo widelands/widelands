@@ -32,6 +32,7 @@
 #include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 

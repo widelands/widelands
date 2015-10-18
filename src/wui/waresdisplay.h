@@ -102,6 +102,7 @@ private:
 
 	const Widelands::TribeDescr & m_tribe;
 	Widelands::WareWorker m_type;
+	const std::set<Widelands::WareIndex> m_indices;
 	UI::Textarea        m_curware;
 	WareListSelectionType      m_selected;
 	WareListSelectionType      m_hidden;

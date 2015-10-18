@@ -269,14 +269,14 @@ int workers_map_to_lua(lua_State * L, const WorkersMap& valid_workers) {
 
 // Does most of the work of get_workers for player immovables (buildings and roads mainly).
 int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& valid_workers) {
-	const Tribes& tribes = get_egbase(L).tribes();
+	const TribeDescr& tribe = pi.owner().tribe();
 
 	bool return_number = false;
-	WorkersSet set = m_parse_get_workers_arguments(L, pi.owner().tribe(), &return_number);
+	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
-		WareIndex i = tribes.worker_index(w->descr().name());
+		WareIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
@@ -284,7 +284,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == pi.owner().tribe().get_nrworkers()) {  // Wants all returned
+	if (set.size() == tribe.get_nrworkers()) {  // Wants all returned
 		set.clear();
 		for (const WorkersMap::value_type& v : valid_workers) {
 			set.insert(v.first);
@@ -303,7 +303,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			lua_pushstring(L, tribes.get_worker_descr(i)->name());
+			lua_pushstring(L, tribe.get_worker_descr(i)->name());
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
@@ -315,13 +315,13 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 template <typename T>
 int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_workers) {
 	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+	const TribeDescr& tribe = pi->owner().tribe();
 
-	WorkersMap setpoints = m_parse_set_workers_arguments(L, pi->owner().tribe());
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
-		WareIndex i = tribes.worker_index(w->descr().name());
+		WareIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
 			c_workers.insert(WorkerAmount(i, 1));
 		else
@@ -332,7 +332,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 
 	// The idea is to change as little as possible
 	for (const WorkersMap::value_type sp : setpoints) {
-		const WorkerDescr* wdes = tribes.get_worker_descr(sp.first);
+		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
@@ -345,7 +345,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		if (d < 0) {
 			while (d) {
 				for (const Worker* w : pi->get_workers()) {
-					if (tribes.worker_index(w->descr().name()) == sp.first) {
+					if (tribe.worker_index(w->descr().name()) == sp.first) {
 						const_cast<Worker*>(w)->remove(egbase);
 						++d;
 						break;
@@ -3448,7 +3448,8 @@ int LuaProductionSite::get_valid_workers(lua_State * L) {
 // documented in parent class
 int LuaProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
-	WaresMap setpoints = m_parse_set_wares_arguments(L, ps->owner().tribe());
+	const TribeDescr& tribe = ps->owner().tribe();
+	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
@@ -3458,7 +3459,7 @@ int LuaProductionSite::set_wares(lua_State * L) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored in this building: %s!",
-						get_egbase(L).tribes().get_ware_descr(sp.first)->name().c_str(),
+						tribe.get_ware_descr(sp.first)->name().c_str(),
 						ps->descr().name().c_str());
 		}
 		WaresQueue & wq = ps->waresqueue(sp.first);
@@ -3475,10 +3476,10 @@ int LuaProductionSite::set_wares(lua_State * L) {
 // documented in parent class
 int LuaProductionSite::get_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
-	const Tribes& tribes = get_egbase(L).tribes();
+	const TribeDescr& tribe = ps->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, ps->owner().tribe(), &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
@@ -3486,7 +3487,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	}
 
 
-	if (wares_set.size() == ps->owner().tribe().get_nrwares()) // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
 
 	if (!return_number)
@@ -3501,7 +3502,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			lua_pushstring(L, tribes.get_ware_descr(ware)->name());
+			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}

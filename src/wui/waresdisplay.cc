@@ -53,6 +53,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_tribe (tribe),
 
 	m_type (type),
+	m_indices(m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares()),
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
@@ -63,10 +64,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_selection_anchor(Widelands::INVALID_INDEX),
 	m_callback_function(callback_function)
 {
-	const std::set<Widelands::WareIndex> indices =
-			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
-
-	for (const Widelands::WareIndex& index : indices) {
+	for (const Widelands::WareIndex& index : m_indices) {
 		m_selected.insert(std::make_pair(index, false));
 		m_hidden.insert(std::make_pair(index, false));
 		m_in_selection.insert(std::make_pair(index, false));
@@ -149,10 +147,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 
 	bool to_be_selected = !ware_selected(m_selection_anchor);
 
-	const std::set<Widelands::WareIndex> indices =
-			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
-
-	for (const Widelands::WareIndex& index : indices) {
+	for (const Widelands::WareIndex& index : m_indices) {
 		if (m_in_selection[index]) {
 			if (to_be_selected) {
 				select_ware(index);
@@ -279,10 +274,7 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	const std::set<Widelands::WareIndex> indices =
-			m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares();
-
-	for (const Widelands::WareIndex& index : indices) {
+	for (const Widelands::WareIndex& index : m_indices) {
 		if (!m_hidden[index]) {
 			draw_ware(dst, index);
 		}
