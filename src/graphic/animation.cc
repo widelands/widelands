@@ -155,75 +155,68 @@ private:
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
+	try {
+		get_point(*table.get_table("hotspot"), &hotspot_);
 
-	get_point(*table.get_table("hotspot"), &hotspot_);
+		if (table.has_key("sound_effect")) {
+			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 
-	if (table.has_key("sound_effect")) {
-		std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
-
-		const std::string name = sound_effects->get_string("name");
-		const std::string directory = sound_effects->get_string("directory");
-		sound_effect_ = directory + "/" + name;
-		g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
-	}
-	if (!table.has_key("directory")) {
-		throw wexception("Animation has no directory.");
-	}
-	if (!table.has_key("template")) {
-		throw wexception("Animation in directory %s has no file name template",
-							  table.get_string("directory").c_str());
-	}
-
-	/* NOCOM
-	Loading Workers
-	*** Error in `./widelands': realloc(): invalid next size: 0x00000000050e8670 ***
-	Aborted (core dumped)
-	Probably happens somewhere here, or maybe in sound loading.
-	The crash is coming from eris, so we should check the LuaTables used.
-	*/
-
-	//  In the filename template, the last sequence of '?' characters (if any)
-	//  is replaced with a number, for example the template "idle_??" is
-	//  replaced with "idle_00". Then the code looks if there is a PNG with that
-	//  name, increments the number and continues on until it can not find any
-	//  file. Then it is assumed that there are no more frames in the animation.
-	std::string picnametempl = table.get_string("directory") + table.get_string("template");
-
-	// Strip the .png extension if it has one.
-	boost::replace_all(picnametempl, ".png", "");
-
-	NumberGlob glob(picnametempl);
-	string filename_wo_ext;
-	while (glob.next(&filename_wo_ext)) {
-		const string filename = filename_wo_ext + ".png";
-		if (!g_fs->file_exists(filename))
-			break;
-		image_files_.push_back(filename);
-
-		const string pc_filename = filename_wo_ext + "_pc.png";
-		if (g_fs->file_exists(pc_filename)) {
-			hasplrclrs_ = true;
-			pc_mask_image_files_.push_back(pc_filename);
-		} else if (hasplrclrs_) {
-			throw wexception("Animation in directory %s is missing player color file: %s",
-								  table.get_string("directory").c_str(), pc_filename.c_str());
+			const std::string name = sound_effects->get_string("name");
+			const std::string directory = sound_effects->get_string("directory");
+			sound_effect_ = directory + "/" + name;
+			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
 		}
-	}
 
-	if (image_files_.empty()) {
-		throw wexception("Animation %s without pictures in directory %s. "
-							  "Make sure that the directory has a trailing slash. "
-							  "The template should look similar to this: 'idle_??' for 'idle_00.png'' etc.",
-							  table.get_string("template").c_str(), table.get_string("directory").c_str());
-	} else if (table.has_key("fps")) {
-		if (image_files_.size() == 1) {
-			throw wexception("Animation %s with one picture in directory %s must not have 'fps'",
-								  table.get_string("template").c_str(), table.get_string("directory").c_str());
+		const std::string templatedirname = table.get_string("directory");
+		const std::string templatefilename = table.get_string("template");
+
+		//  In the filename template, the last sequence of '?' characters (if any)
+		//  is replaced with a number, for example the template "idle_??" is
+		//  replaced with "idle_00". Then the code looks for a PNG file with that
+		//  name, increments the number and continues on until it cannot find any
+		//  file. Then it is assumed that there are no more frames in the animation.
+		std::string picnametempl = templatedirname + templatefilename;
+
+		// Strip the .png extension if it has one.
+		boost::replace_all(picnametempl, ".png", "");
+
+		NumberGlob glob(picnametempl);
+		string filename_wo_ext;
+		while (glob.next(&filename_wo_ext)) {
+			const std::string filename = filename_wo_ext + ".png";
+			if (!g_fs->file_exists(filename)) {
+				break;
+			}
+			image_files_.push_back(filename);
+
+			const std::string pc_filename = filename_wo_ext + "_pc.png";
+			if (g_fs->file_exists(pc_filename)) {
+				hasplrclrs_ = true;
+				pc_mask_image_files_.push_back(pc_filename);
+			} else if (hasplrclrs_) {
+				throw wexception("Animation in directory %s is missing player color file: %s",
+									  templatedirname.c_str(), pc_filename.c_str());
+			}
 		}
-		frametime_ = 1000 / get_positive_int(table, "fps");
+
+		if (image_files_.empty()) {
+			throw wexception("Animation %s without pictures in directory %s. "
+								  "Make sure that the directory has a trailing slash. "
+								  "The template should look similar to this: idle_?? for idle_00.png etc.",
+								  templatefilename.c_str(), templatedirname.c_str());
+		} else if (table.has_key("fps")) {
+			if (image_files_.size() == 1) {
+				throw wexception("Animation %s with one picture in directory %s must not have 'fps'",
+									  templatefilename.c_str(), templatedirname.c_str());
+			}
+			frametime_ = 1000 / get_positive_int(table, "fps");
+		}
+		assert(!image_files_.empty());
+		assert(pc_mask_image_files_.size() == image_files_.size() || pc_mask_image_files_.empty());
+
+	} catch (const LuaError& e) {
+		throw wexception("Error in animation table: %s", e.what());
 	}
-	assert(image_files_.size() > 0);
-	assert(pc_mask_image_files_.size() == image_files_.size() || pc_mask_image_files_.size() == 0);
 }
 
 void NonPackedAnimation::ensure_graphics_are_loaded() const {
