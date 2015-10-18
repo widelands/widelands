@@ -86,7 +86,7 @@ private:
 	void parse_play_fx          (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct        (Worker::Action* act, const std::vector<std::string>& cmd);
 
-	const std::string& name_;
+	const std::string name_;
 	const WorkerDescr& worker_;
 	const Tribes& tribes_;
 	Actions actions_;

@@ -101,7 +101,7 @@ BuildingDescr::BuildingDescr
 	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
 
 	if (table.has_key("enhancement")) {
-		const std::string& enh = table.get_string("enhancement");
+		const std::string enh = table.get_string("enhancement");
 
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
