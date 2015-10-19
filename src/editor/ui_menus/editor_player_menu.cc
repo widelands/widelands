@@ -254,18 +254,18 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n + 1])) {
+		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n])) {
 			throw wexception
-				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n + 1].c_str());
+				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n].c_str());
 		}
 		uint32_t i;
 		for (i = 0; i < m_tribenames.size(); ++i) {
-			if (m_tribenames[i] == m_selected_tribes[n + 1]) {
+			if (m_tribenames[i] == m_selected_tribes[n]) {
 				break;
 			}
 		}
-		m_selected_tribes[n + 1] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
-		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n + 1]);
+		m_selected_tribes[n] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
+		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n]);
 		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb
