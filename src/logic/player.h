@@ -500,7 +500,7 @@ public:
 	std::vector<uint32_t> const * get_ware_stock_statistics
 		(WareIndex const) const;
 
-	void read_statistics(FileRead &, uint32_t version);
+	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(WareIndex);

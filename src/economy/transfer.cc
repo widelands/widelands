@@ -312,15 +312,20 @@ Load/save support
 ==============================
 */
 
-#define TRANSFER_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 {
-	uint8_t version = fr.unsigned_8();
-	if (version != TRANSFER_SAVEGAME_VERSION)
-		throw wexception("unhandled/unknown transfer version %u", version);
-
-	rd.destination = fr.unsigned_32();
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
+			rd.destination = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException & e) {
+		throw wexception("transfer: %s", e.what());
+	}
 }
 
 void Transfer::read_pointers
@@ -332,7 +337,7 @@ void Transfer::read_pointers
 
 void Transfer::write(MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.unsigned_8(TRANSFER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
 	// not saving route right now, will be recaculated anyway
 }

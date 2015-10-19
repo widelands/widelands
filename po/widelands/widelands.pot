@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-12 08:45+0100\n"
+"POT-Creation-Date: 2015-10-19 07:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -973,6 +973,12 @@ msgid ""
 "this problem."
 msgstr ""
 
+#: ../../src/logic/game_data_error.cc:48
+msgid ""
+"This game was saved using an older version of Widelands and cannot be loaded "
+"anymore, or it's a new version that can't be handled yet."
+msgstr ""
+
 #: ../../src/logic/map.h:181
 msgctxt "author_name"
 msgid "Unknown"
@@ -1207,43 +1213,43 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/logic/ship.cc:441
+#: ../../src/logic/ship.cc:445
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:442
+#: ../../src/logic/ship.cc:446
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:557
+#: ../../src/logic/ship.cc:561
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:558
+#: ../../src/logic/ship.cc:562
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:618
+#: ../../src/logic/ship.cc:622
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:620
+#: ../../src/logic/ship.cc:624
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:664
+#: ../../src/logic/ship.cc:668
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/ship.cc:665
+#: ../../src/logic/ship.cc:669
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
-#: ../../src/logic/ship.cc:842
+#: ../../src/logic/ship.cc:846
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:843
+#: ../../src/logic/ship.cc:847
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -2743,11 +2749,11 @@ msgstr ""
 msgid "Seafaring"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:358
+#: ../../src/ui_fsmenu/mapselect.cc:355
 msgid "Nobody"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:359
+#: ../../src/ui_fsmenu/mapselect.cc:356
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
