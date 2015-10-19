@@ -309,9 +309,9 @@ void Table<void *>::draw(RenderTarget & dst)
 
 					if (entry_string.empty()) {
 						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
-							draw_x = point.x + (curw - blit_width - m_scrollbar->get_w()) / 2 ;
+							draw_x = point.x + (curw - blit_width - m_scrollbar->get_w()) / 2;
 						} else {
-							draw_x = point.x + (curw - blit_width) / 2 ;
+							draw_x = point.x + (curw - blit_width) / 2;
 						}
 					}
 
@@ -329,9 +329,9 @@ void Table<void *>::draw(RenderTarget & dst)
 				} else {
 					if (entry_string.empty()) {
 						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
-							draw_x = point.x + (curw - picw - m_scrollbar->get_w()) / 2 ;
+							draw_x = point.x + (curw - picw - m_scrollbar->get_w()) / 2;
 						} else {
-							draw_x = point.x + (curw - picw) / 2 ;
+							draw_x = point.x + (curw - picw) / 2;
 						}
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
