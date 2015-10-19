@@ -30,10 +30,7 @@
 
 //TODO(unknown): these should be defined globally for the whole UI
 #define width 200
-#define height 20
 #define margin 15
-#define hmargin margin
-#define vmargin margin
 #define vspacing 15
 
 inline EditorInteractive & EditorMainMenu::eia() {
@@ -46,58 +43,68 @@ inline EditorInteractive & EditorMainMenu::eia() {
 EditorMainMenu::EditorMainMenu
 	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
 :
-	UI::UniqueWindow
-		(&parent, "main_menu", &registry, 2 * hmargin + width,
-		 260, _("Main Menu")),
-	m_button_new_map
-		(this, "new_map",
-		 hmargin, vmargin + 0 * (height + vspacing), width, height,
+	UI::UniqueWindow(&parent, "main_menu", &registry, 2 * margin + width, 0, _("Main Menu")),
+	box_(this, margin, margin, UI::Box::Vertical,
+		  width, get_h() - 2 * margin, vspacing),
+	button_new_map_
+		(&box_, "new_map",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("New Map")),
-	m_button_new_random_map
-		(this, "new_random_map",
-		 hmargin, vmargin + 1 * (height + vspacing), width, height,
+	button_new_random_map_
+		(&box_, "new_random_map",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("New Random Map")),
-	m_button_load_map
-		(this, "load_map",
-		 hmargin, vmargin + 2 * (height + vspacing), width, height,
+	button_load_map_
+		(&box_, "load_map",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Load Map")),
-	m_button_save_map
-		(this, "save_map",
-		 hmargin, vmargin + 3 * (height + vspacing), width, height,
+	button_save_map_
+		(&box_, "save_map",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Save Map")),
-	m_button_map_options
-		(this, "map_options",
-		 hmargin, vmargin + 4 * (height + vspacing), width, height,
+	button_map_options_
+		(&box_, "map_options",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Map Options")),
-	m_button_view_readme
-		(this, "readme",
-		 hmargin, vmargin + 5 * (height + vspacing), width, height,
+	button_view_readme_
+		(&box_, "readme",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but1.png"),
 		 _("View Readme")),
-	m_button_exit_editor
-		(this, "exit",
-		 hmargin, vmargin + 6 * (height + vspacing), width, height,
+	button_exit_editor_
+		(&box_, "exit",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but5.png"),
 		 _("Exit Editor"))
 {
-	m_button_new_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
-	m_button_new_random_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
-	m_button_load_map.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
-	m_button_save_map.sigclicked.connect(boost::bind(&EditorMainMenu::save_btn, this));
-	m_button_map_options.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
+	box_.add(&button_new_map_, UI::Box::AlignCenter);
+	box_.add(&button_new_random_map_, UI::Box::AlignCenter);
+	box_.add(&button_load_map_, UI::Box::AlignCenter);
+	box_.add(&button_save_map_, UI::Box::AlignCenter);
+	box_.add(&button_map_options_, UI::Box::AlignCenter);
+	box_.add(&button_view_readme_, UI::Box::AlignCenter);
+	box_.add(&button_exit_editor_, UI::Box::AlignCenter);
+	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
+	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	m_window_readme.open_window = [this] {
-		fileview_window(eia(), m_window_readme, "txts/editor_readme.lua");
+	button_new_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
+	button_new_random_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
+	button_load_map_.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
+	button_save_map_.sigclicked.connect(boost::bind(&EditorMainMenu::save_btn, this));
+	button_map_options_.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
+
+	window_readme_.open_window = [this] {
+		fileview_window(eia(), window_readme_, "txts/editor_readme.lua");
 	};
-	m_button_view_readme.sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, m_window_readme));
+	button_view_readme_.sigclicked.connect(
+		boost::bind(&UI::UniqueWindow::Registry::toggle, window_readme_));
 
-	m_button_exit_editor.sigclicked.connect(boost::bind(&EditorMainMenu::exit_btn, this));
+	button_exit_editor_.sigclicked.connect(boost::bind(&EditorMainMenu::exit_btn, this));
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())

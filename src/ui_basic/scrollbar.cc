@@ -87,6 +87,7 @@ bool Scrollbar::is_enabled() const {
 	return m_steps != 1 || m_force_draw;
 }
 
+
 /**
  * \return the number of steps
  */

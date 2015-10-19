@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 08:52+0100\n"
-"PO-Revision-Date: 2015-09-14 07:53+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-10-12 08:45+0100\n"
+"PO-Revision-Date: 2015-10-12 18:13+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,7 +256,7 @@ msgstr "Mapa nebola uložená, naozaj chcete skončiť?"
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:177
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Bez názvu"
@@ -270,7 +270,7 @@ msgstr ""
 
 #: ../../src/editor/map_generator.cc:795
 msgid "Random Player"
-msgstr ""
+msgstr "Náhodný hráč"
 
 #: ../../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
@@ -436,7 +436,7 @@ msgid "No resources"
 msgstr "Žiadne zdroje"
 
 #: ../../src/editor/tools/editor_info_tool.cc:152
-#: ../../src/ui_fsmenu/mapselect.cc:297
+#: ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapa:"
 
@@ -476,124 +476,166 @@ msgstr "Popis: %s"
 msgid "Current:"
 msgstr "Aktuálny:"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
 msgstr "Hlavné menu"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:56
+#: ../../src/editor/ui_menus/editor_main_menu.cc:53
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
 msgid "New Map"
 msgstr "Nová mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:53
 msgid "New Random Map"
 msgstr "Nová náhodná mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:66
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:53
+#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Načítať mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:71
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:53
 msgid "Save Map"
 msgstr "Uložiť mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:70
 msgid "Map Options"
 msgstr "Možnosti mapy"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu.cc:78
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "View Readme"
 msgstr "Zobraziť Čítajma"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu.cc:83
 msgid "Exit Editor"
 msgstr "Ukončiť editor"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:72
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
-msgid "Name:"
-msgstr "Názov:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:79
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
-msgid "Authors:"
-msgstr "Autori:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
-msgid "Size:"
-msgstr "Veľkosť:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
-#: ../../src/ui_fsmenu/loadgame.cc:320
-msgid "Players:"
-msgstr "Hráči:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
-msgid "Descr:"
-msgstr "Popis:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:128
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:64
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 #: ../../src/scripting/lua_game.cc:385 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90 ../../src/ui_basic/messagebox.cc:97
-#: ../../src/ui_fsmenu/load_map_or_game.cc:66
+#: ../../src/ui_fsmenu/load_map_or_game.cc:64
 #: ../../src/wui/game_main_menu_save_game.cc:92
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:66
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:47
 #: ../../src/ui_basic/messagebox.cc:104 ../../src/ui_fsmenu/launch_mpg.cc:88
-#: ../../src/ui_fsmenu/options.cc:119 ../../src/ui_fsmenu/options.cc:511
+#: ../../src/ui_fsmenu/options.cc:121 ../../src/ui_fsmenu/options.cc:514
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:245
-#, c-format
-msgid "%1$ix%2$i"
-msgstr "%1$ix%2$i"
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:80
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:137
+msgid "Show Map Names"
+msgstr "Zobraziť názvy máp"
 
-#. * TRANSLATORS: Parent directory
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:299
-#: ../../src/ui_fsmenu/mapselect.cc:413
-msgid "parent"
-msgstr "nadradený priečinok"
+#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
+#. aren't translated.
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:90
+#: ../../src/ui_fsmenu/mapselect.cc:95
+msgid "Show original map names"
+msgstr "Zobraziť originálne názvy máp"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
-#: ../../src/ui_fsmenu/loadgame.cc:318
+#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:139
+msgid "Show Filenames"
+msgstr "Zobraziť názvy súborov"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
+#: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
 msgstr "Názov mapy:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
-msgid "Nr Players:"
-msgstr "Počet hráčov:"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:95
+msgid "Authors:"
+msgstr "Autori:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:100
-msgid "Set origin"
-msgstr "Nastaviť začiatok"
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:99
+#: ../../src/ui_fsmenu/campaign_select.cc:80
+#: ../../src/ui_fsmenu/campaign_select.cc:157
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+msgid "Description:"
+msgstr "Popis:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
-msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the "
-"top-left corner of a generated minimap."
-msgstr "Nastaviť pozíciu, ktorá bude mať súradnice (0, 0). Bude to ľavý horný roh vygenerovanej minimapy."
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:103
+msgid "Hint (optional):"
+msgstr "Rada (nepovinný údaj):"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:113
+msgid "Tags:"
+msgstr "Značky:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:114
+#: ../../src/ui_fsmenu/mapselect.cc:105
+msgid "Unbalanced"
+msgstr "Nevyvážené"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
+#: ../../src/ui_fsmenu/mapselect.cc:113
+msgid "Free for all"
+msgstr "Prístupné všetkým"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:116
+#: ../../src/ui_fsmenu/mapselect.cc:114
+msgid "1v1"
+msgstr "1 proti 1"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:117
+#: ../../src/ui_fsmenu/mapselect.cc:121
+msgid "Teams of 2"
+msgstr "2-členné tímy"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:118
+#: ../../src/ui_fsmenu/mapselect.cc:122
+msgid "Teams of 3"
+msgstr "3-členné tímy"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
+#: ../../src/ui_fsmenu/mapselect.cc:123
+msgid "Teams of 4"
+msgstr "4-členné tímy"
+
+#. * TRANSLATORS: Label for the list of suggested teams when choosing a map
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:122
+#: ../../src/wui/suggested_teams_box.cc:87
+msgid "Suggested Teams:"
+msgstr "Navrhované tímy:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:131
+#: ../../src/ui_fsmenu/launch_mpg.cc:647
+#: ../../src/wui/game_main_menu_save_game.cc:173
+#, c-format
+msgid "%u Player"
+msgid_plural "%u Players"
+msgstr[0] "%u hráč"
+msgstr[1] "%u hráči"
+msgstr[2] "%u hráčov"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:137
+msgid "Main Options"
+msgstr "Hlavné možnosti"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:138
+msgid "Tags"
+msgstr "Značky"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:139
+msgid "Teams"
+msgstr "Tímy"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:166
+msgid "Size: %1% x %2%"
+msgstr "Veľkosť: %1% x %2%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -688,48 +730,40 @@ msgstr "Vygenerovať mapu"
 msgid "Generating random map..."
 msgstr "Generuje sa náhodná mapa..."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:62
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:27
 msgid "Make Directory"
 msgstr "Vytvoriť priečinok"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:76
+#: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
+msgid "Filename:"
+msgstr "Názov súboru:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:157
 msgid "unnamed"
 msgstr "nepomenovaný"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:254
-#, c-format
-msgid "Directory: %s"
-msgstr "Priečinok: %s"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
-msgid "directory"
-msgstr "priečinok"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
-msgid "Not a map file"
-msgstr "Súbor nie je mapa"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
 #: ../../src/wui/game_main_menu_save_game.cc:261
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Súbor s názvom „%s“ už existuje. Chcete ho prepísať?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:432
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:262
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:303
 msgid "Error Saving Map!"
 msgstr "Chyba pri ukladaní mapy!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:394
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
-msgstr ""
+msgstr "Súbor s názvom „%s.tmp“ už existuje. Je potrebné zmazať ho manuálne."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:428
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:299
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -737,9 +771,9 @@ msgid ""
 "Reason given:\n"
 msgstr "Chyba pri ukladaní mapy!\nUložený súbor mapy môže byť poškodený!\n\nDôvod:\n"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
-msgid "Enter Directory Name:"
-msgstr "Zadajte názov priečinka:"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:34
+msgid "Enter Directory Name: "
+msgstr "Zadajte názov priečinka: "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Player Options"
@@ -768,11 +802,11 @@ msgstr "Počet hráčov"
 msgid "Player %u"
 msgstr "Hráč %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:278
+#: ../../src/editor/ui_menus/editor_player_menu.cc:279
 msgid "Error!"
 msgstr "Chyba!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:280
+#: ../../src/editor/ui_menus/editor_player_menu.cc:281
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -810,7 +844,7 @@ msgid "Noise height"
 msgstr "Výška šumu"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-#: ../../src/wui/minimap.cc:146
+#: ../../src/wui/minimap.cc:145
 msgid "Terrain"
 msgstr "Terén"
 
@@ -827,6 +861,12 @@ msgstr "Zvieratá"
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
 msgstr "Nastaviť miesto na prístav"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:72
+msgid ""
+"Set the position that will have the coordinates (0, 0). This will be the "
+"top-left corner of a generated minimap."
+msgstr "Nastaviť pozíciu, ktorá bude mať súradnice (0, 0). Bude to ľavý horný roh vygenerovanej minimapy."
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
 msgid "Noise Height Options"
@@ -907,7 +947,7 @@ msgstr "Pridáva sa hráč %u"
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
 #: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:231
-#: ../../src/ui_fsmenu/mapselect.cc:154 ../../src/wui/game_message_menu.cc:563
+#: ../../src/ui_fsmenu/mapselect.cc:107 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
 msgstr "Scenár"
@@ -930,7 +970,7 @@ msgid "Loading map"
 msgstr "Načítava sa mapa"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:404
-#: ../../src/wlapplication.cc:1432
+#: ../../src/wlapplication.cc:1421
 msgid "Loading..."
 msgstr "Načítava sa..."
 
@@ -1116,6 +1156,10 @@ msgstr "Dokončilo sa %1$s, pretože %2$s"
 msgid "Skipped %1$s because %2$s"
 msgstr "Nevykonalo sa %1$s, pretože %2$s"
 
+#: ../../src/logic/production_program.cc:817
+msgid "No use for ships on this map!"
+msgstr "Na tejto mape sú lode zbytočné!"
+
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
@@ -1225,7 +1269,7 @@ msgstr "Expedičná loď dosiahla pobrežie a čaká na ďalšie rozkazy."
 
 #: ../../src/logic/ship.cc:664
 msgid "New port construction site is gone"
-msgstr ""
+msgstr "Zmizlo stavenisko nového prístavu"
 
 #: ../../src/logic/ship.cc:665
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -1282,7 +1326,7 @@ msgstr "%s nevie nájsť cestu späť domov a pravdepodobne zomrie."
 msgid "Worker got lost!"
 msgstr "Pracovník sa stratil!"
 
-#: ../../src/map_io/s2map.cc:403
+#: ../../src/map_io/s2map.cc:402
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
 
@@ -1293,7 +1337,7 @@ msgstr "Problém s pripojením"
 
 #: ../../src/network/internet_gaming.cc:115
 msgid "Widelands could not connect to the metaserver."
-msgstr "Nepodarilo sa nadviazať spojenie s metaserverom."
+msgstr "Nepodarilo sa pripojiť na metaserver."
 
 #: ../../src/network/internet_gaming.cc:121 ../../src/network/netclient.cc:108
 msgid "Could not establish connection to host"
@@ -1493,7 +1537,7 @@ msgid ""
 msgstr "Nebolo možné nadviazať spojenie s danou adresou.\nBuď na príslušnom porte nebežal žiaden server hry Widelands,\nalebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:838
-#: ../../src/wlapplication.cc:1322
+#: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "Pripravuje sa hra"
 
@@ -1692,7 +1736,7 @@ msgstr "Neznámy príkaz dedikovaného servera: „%s“!"
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../src/network/nethost.cc:2059 ../../src/wui/game_summary.cc:95
+#: ../../src/network/nethost.cc:2059 ../../src/wui/game_summary.cc:106
 msgid "Player"
 msgstr "Hráč"
 
@@ -1942,7 +1986,7 @@ msgstr ""
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -1961,7 +2005,7 @@ msgstr "Pripravuje sa..."
 #: ../../src/ui_basic/spinbox.cc:361
 #, c-format
 msgid "%1$i %2$s"
-msgstr ""
+msgstr "%1$i %2$s"
 
 #: ../../src/ui_basic/spinbox.cc:138
 msgid "Increase the value"
@@ -1979,44 +2023,31 @@ msgstr "Zvýšiť hodnotu o 10"
 msgid "Decrease the value by 10"
 msgstr "Znížiť hodnotu o 10"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:49
+#: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Choose a campaign"
 msgstr "Zvoľte kampaň"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:79
-#: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396
-#: ../../src/ui_fsmenu/mapselect.cc:69
-msgid "Description:"
-msgstr "Popis:"
-
-#: ../../src/ui_fsmenu/campaign_select.cc:89
-#: ../../src/ui_fsmenu/campaign_select.cc:328
-#: ../../src/ui_fsmenu/loadgame.cc:161
+#: ../../src/ui_fsmenu/campaign_select.cc:90
+#: ../../src/ui_fsmenu/campaign_select.cc:329
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Return to the main menu"
 msgstr "Vrátiť sa do hlavného menu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:90
+#: ../../src/ui_fsmenu/campaign_select.cc:91
 msgid "Play this campaign"
 msgstr "Hrať túto kampaň"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:91
+#: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "The name of this campaign"
 msgstr "Názov tejto kampane"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:92
+#: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The tribe you will be playing"
 msgstr "Kmeň, za ktorý budete hrať"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:93
+#: ../../src/ui_fsmenu/campaign_select.cc:94
 msgid "The difficulty of this campaign"
 msgstr "Náročnosť tejto kampane"
-
-#: ../../src/ui_fsmenu/campaign_select.cc:94
-#: ../../src/ui_fsmenu/campaign_select.cc:336
-#: ../../src/ui_fsmenu/mapselect.cc:96
-msgid "Story and hints"
-msgstr "Príbeh a rady"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:102
@@ -2052,31 +2083,31 @@ msgstr "Kmeň:"
 msgid "Difficulty:"
 msgstr "Náročnosť:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:288
+#: ../../src/ui_fsmenu/campaign_select.cc:289
 msgid "Choose a scenario"
 msgstr "Zvoľte scenár"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:288
+#: ../../src/ui_fsmenu/campaign_select.cc:289
 msgid "Choose a tutorial"
 msgstr "Zvoľte tutoriál"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:330
+#: ../../src/ui_fsmenu/campaign_select.cc:331
 msgid "Play this tutorial"
 msgstr "Hrať tento tutoriál"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:331
+#: ../../src/ui_fsmenu/campaign_select.cc:332
 msgid "The name of this tutorial"
 msgstr "Názov tohto tutoriálu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:332
+#: ../../src/ui_fsmenu/campaign_select.cc:333
 msgid "What you will learn in this tutorial"
 msgstr "Čo sa dozviete v tomto tutoriáli"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:334
+#: ../../src/ui_fsmenu/campaign_select.cc:335
 msgid "Play this scenario"
 msgstr "Hrať tento scenár"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/campaign_select.cc:336
 msgid "The name of this scenario"
 msgstr "Názov tohto scenára"
 
@@ -2100,8 +2131,7 @@ msgstr "Názov scenára"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395
-#: ../../src/ui_fsmenu/mapselect.cc:295
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
 msgid "Scenario:"
 msgstr "Scenár:"
 
@@ -2114,33 +2144,32 @@ msgstr "Tutoriál:"
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Súbor campaigns.conf obsahuje neplatnú cestu k súboru: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:422
+#: ../../src/ui_fsmenu/campaign_select.cc:421
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "Dizajnér tohto tutoriálu"
 msgstr[1] "Dizajnéri tohto tutoriálu"
 msgstr[2] "Dizajnéri tohto tutoriálu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:425
+#: ../../src/ui_fsmenu/campaign_select.cc:424
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Dizajnér tohto scenára"
 msgstr[1] "Dizajnéri tohto scenára"
 msgstr[2] "Dizajnéri tohto scenára"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428
-#: ../../src/ui_fsmenu/mapselect.cc:321
+#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
 msgstr[1] "Autori:"
 msgstr[2] "Autori:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:452
+#: ../../src/ui_fsmenu/campaign_select.cc:451
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Vyberte si zo zoznamu tutoriál a potom stlačte „OK“."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:454
+#: ../../src/ui_fsmenu/campaign_select.cc:453
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Popis aktuálne vybraného tutoriálu sa zobrazuje vpravo."
@@ -2176,7 +2205,7 @@ msgstr "Otvoriť novú hru"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:73
-#: ../../src/ui_fsmenu/load_map_or_game.cc:61
+#: ../../src/ui_fsmenu/load_map_or_game.cc:59
 #: ../../src/ui_fsmenu/multiplayer.cc:47
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
@@ -2239,7 +2268,7 @@ msgid "Please select"
 msgstr "Prosím, vyberte si"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:175
-#: ../../src/ui_fsmenu/netsetup_lan.cc:118 ../../src/wui/minimap.cc:138
+#: ../../src/ui_fsmenu/netsetup_lan.cc:118 ../../src/wui/minimap.cc:137
 msgid "Map"
 msgstr "Mapa"
 
@@ -2355,15 +2384,6 @@ msgstr "Podrobnosti mapy:"
 msgid "Size: %1$u x %2$u"
 msgstr "Veľkosť: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:647
-#: ../../src/wui/game_main_menu_save_game.cc:173
-#, c-format
-msgid "%u Player"
-msgid_plural "%u Players"
-msgstr[0] "%u hráč"
-msgstr[1] "%u hráči"
-msgstr[2] "%u hráčov"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:650
 msgid "Scenario mode selected"
 msgstr "Zvolený režim scenára"
@@ -2465,7 +2485,7 @@ msgstr "Meno hráča"
 msgid "Player’s type"
 msgstr "Typ hráča"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
+#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:107
 #: ../../src/wui/multiplayersetupgroup.cc:460
 msgid "Team"
 msgstr "Tím"
@@ -2483,177 +2503,177 @@ msgid "Switch to position"
 msgstr "Prepnúť na pozíciu"
 
 #. * TRANSLATORS: %1% is a map's name.
-#: ../../src/ui_fsmenu/loadgame.cc:66
+#: ../../src/ui_fsmenu/loadgame.cc:67
 msgid "Autosave: %1%"
 msgstr "Samouloženie: %1%"
 
 #. * TRANSLATORS: %1% is a number, %2% a map's name.
-#: ../../src/ui_fsmenu/loadgame.cc:69
+#: ../../src/ui_fsmenu/loadgame.cc:70
 msgid "Autosave %1%: %2%"
 msgstr "Samouloženie %1%: %2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:88
+#: ../../src/ui_fsmenu/loadgame.cc:90
 msgid "Choose a replay"
 msgstr "Vyberte záznam hry"
 
-#: ../../src/ui_fsmenu/loadgame.cc:88
+#: ../../src/ui_fsmenu/loadgame.cc:90
 msgid "Choose a saved game"
 msgstr "Vyberte uloženú hru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:133
+#: ../../src/ui_fsmenu/loadgame.cc:135
 #: ../../src/wui/game_main_menu_save_game.cc:110
 msgid "Delete"
 msgstr "Vymazať"
 
-#: ../../src/ui_fsmenu/loadgame.cc:155
+#: ../../src/ui_fsmenu/loadgame.cc:157
 msgid "The time that elapsed inside this game"
 msgstr "Čas uplynutý v tejto hre"
 
-#: ../../src/ui_fsmenu/loadgame.cc:156
+#: ../../src/ui_fsmenu/loadgame.cc:158
 msgid "The number of players"
 msgstr "Počet hráčov"
 
-#: ../../src/ui_fsmenu/loadgame.cc:157
+#: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "The version of Widelands that this game was played under"
 msgstr "Verzia Widelands, s ktorou sa hrala táto hra"
 
-#: ../../src/ui_fsmenu/loadgame.cc:158
+#: ../../src/ui_fsmenu/loadgame.cc:160
 msgid "The win condition that was set for this game"
 msgstr "Podmienka na víťazstvo nastavená pre túto hru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid "Load this replay"
 msgstr "Načítať tento záznam"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:165
 msgid "The map that this replay is based on"
 msgstr "Mapa, na ktorej je tento záznam založený"
 
-#: ../../src/ui_fsmenu/loadgame.cc:164
+#: ../../src/ui_fsmenu/loadgame.cc:166
 msgid "Delete this replay"
 msgstr "Vymazať tento záznam"
 
-#: ../../src/ui_fsmenu/loadgame.cc:166 ../../src/ui_fsmenu/mapselect.cc:93
+#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the single player menu"
 msgstr "Vrátiť sa do menu jedného hráča"
 
-#: ../../src/ui_fsmenu/loadgame.cc:167
+#: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "Load this game"
 msgstr "Načítať túto hru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:168
+#: ../../src/ui_fsmenu/loadgame.cc:170
 msgid "The map that this game is based on"
 msgstr "Mapa, na ktorej je táto hra založená"
 
-#: ../../src/ui_fsmenu/loadgame.cc:169
+#: ../../src/ui_fsmenu/loadgame.cc:171
 msgid "Delete this game"
 msgstr "Vymazať túto hru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:178
+#: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "Save Date"
 msgstr "Dátum uloženia"
 
-#: ../../src/ui_fsmenu/loadgame.cc:178
+#: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "The date this game was saved"
 msgstr "Dátum uloženia hry"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:185
+#: ../../src/ui_fsmenu/loadgame.cc:187
 msgid "SP = Single Player"
-msgstr ""
+msgstr "SP = hra pre jedného hráča"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:189
+#: ../../src/ui_fsmenu/loadgame.cc:191
 msgid "MP = Multiplayer"
-msgstr ""
+msgstr "MP = hra pre viacerých hráčov"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:192
+#: ../../src/ui_fsmenu/loadgame.cc:194
 msgid "H = Multiplayer (Host)"
-msgstr ""
+msgstr "H = hra pre viacerých hráčov (hostiteľ)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:196
+#: ../../src/ui_fsmenu/loadgame.cc:198
 #, c-format
 msgid "Game Mode: %s."
 msgstr "Herný režim: %s."
 
-#: ../../src/ui_fsmenu/loadgame.cc:199
+#: ../../src/ui_fsmenu/loadgame.cc:201
 msgid "Numbers are the number of players."
 msgstr "Číslo predstavuje počet hráčov."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:205
+#: ../../src/ui_fsmenu/loadgame.cc:207
 msgid "Mode"
 msgstr "Režim"
 
-#: ../../src/ui_fsmenu/loadgame.cc:211
+#: ../../src/ui_fsmenu/loadgame.cc:213
 msgid "Description"
 msgstr "Popis"
 
-#: ../../src/ui_fsmenu/loadgame.cc:212
+#: ../../src/ui_fsmenu/loadgame.cc:214
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr "Názov súboru, ktorý sa použil pri uložení hry, po ktorom nasleduje názov mapy a prípadne aj posledná dokončená úloha."
 
-#: ../../src/ui_fsmenu/loadgame.cc:265
+#: ../../src/ui_fsmenu/loadgame.cc:267
 msgid "Save Date:"
 msgstr "Dátum uloženia:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:274 ../../src/ui_fsmenu/loadgame.cc:405
-msgid "Filename:"
-msgstr "Názov súboru:"
-
-#: ../../src/ui_fsmenu/loadgame.cc:278
+#: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Do you really want to delete this replay?"
 msgstr "Naozaj chcete zmazať tento záznam?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:281
+#: ../../src/ui_fsmenu/loadgame.cc:283
 msgid "Do you really want to delete this game?"
 msgstr "Naozaj chcete zmazať túto hru?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:285
+#: ../../src/ui_fsmenu/loadgame.cc:287
 msgid "Confirm deleting file"
 msgstr "Potvrdenie vymazania súboru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:319
+#: ../../src/ui_fsmenu/loadgame.cc:322
 msgid "Gametime:"
 msgstr "Herný čas:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:321
+#: ../../src/ui_fsmenu/loadgame.cc:323
+msgid "Players:"
+msgstr "Hráči:"
+
+#: ../../src/ui_fsmenu/loadgame.cc:324
 msgid "Win Condition:"
 msgstr "Podmienka na víťazstvo:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:351
+#: ../../src/ui_fsmenu/loadgame.cc:354
 msgid "Widelands Version:"
 msgstr "Verzia Widelands:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:518
+#: ../../src/ui_fsmenu/loadgame.cc:521
 msgid "Today, %1%:%2%"
 msgstr "Dnes, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:531
+#: ../../src/ui_fsmenu/loadgame.cc:534
 msgid "Yesterday, %1%:%2%"
 msgstr "Včera, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:537
+#: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "%2% %1%, %3%"
 msgstr "%1%. %2% %3%"
 
@@ -2662,9 +2682,9 @@ msgstr "%1%. %2% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:563
+#: ../../src/ui_fsmenu/loadgame.cc:566
 msgid "SP"
-msgstr ""
+msgstr "SP"
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2672,7 +2692,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:571
+#: ../../src/ui_fsmenu/loadgame.cc:574
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2682,25 +2702,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:580
+#: ../../src/ui_fsmenu/loadgame.cc:583
 msgid "MP (%1%)"
-msgstr ""
+msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:596
+#: ../../src/ui_fsmenu/loadgame.cc:599
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Tento súbor je v nesprávnom formáte a nie je možné ho načítať. Možno bol vytvorený staršou verziou hry."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:599
+#: ../../src/ui_fsmenu/loadgame.cc:602
 msgid "Error message:"
 msgstr "Chybové hlásenie:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:612 ../../src/ui_fsmenu/loadgame.cc:614
+#: ../../src/ui_fsmenu/loadgame.cc:615 ../../src/ui_fsmenu/loadgame.cc:617
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Nekompatibilné: %s"
@@ -2725,17 +2745,17 @@ msgstr "Sledovať záznam"
 msgid "Editor"
 msgstr "Editor"
 
-#: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
+#: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:69
 #: ../../src/wui/interactive_player.cc:94
 #: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Možnosti"
 
-#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:88
+#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:85
 msgid "License"
 msgstr "Licencia"
 
-#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:97
+#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:92
 msgid "Authors"
 msgstr "Autori"
 
@@ -2758,143 +2778,32 @@ msgstr "(C) %1% – %2% od vývojového tímu hry Widelands"
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Hra licencovaná pod Všeobecnou verejnou licenciou GNU, verzia 2.0"
 
-#: ../../src/ui_fsmenu/mapselect.cc:50
+#: ../../src/ui_fsmenu/mapselect.cc:49
 msgid "Choose a map"
 msgstr "Zvoľte mapu"
 
-#: ../../src/ui_fsmenu/mapselect.cc:88
-msgid "Return to the editor menu"
-msgstr "Vrátiť sa do menu editora"
-
-#: ../../src/ui_fsmenu/mapselect.cc:91
+#: ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Return to the multiplayer game setup"
 msgstr "Vrátiť sa do menu nastavenia hry viacerých hráčov"
 
-#: ../../src/ui_fsmenu/mapselect.cc:104
-msgid "Number of players"
-msgstr "Počet hráčov"
-
-#. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/ui_fsmenu/mapselect.cc:104
-msgid "Pl."
-msgstr "Hr."
-
-#: ../../src/ui_fsmenu/mapselect.cc:105
-msgid "Map Name"
-msgstr "Názov mapy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:105
-msgid "The name of the map or scenario"
-msgstr "Názov mapy alebo scenára"
-
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "Size"
-msgstr "Veľkosť"
-
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "The size of the map (Width x Height)"
-msgstr "Veľkosť mapy (šírka x výška)"
-
-#: ../../src/ui_fsmenu/mapselect.cc:135
+#: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show all maps"
 msgstr "Zobraziť všetky mapy"
 
-#. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
-#. aren't translated.
-#: ../../src/ui_fsmenu/mapselect.cc:142
-msgid "Show original map names"
-msgstr "Zobraziť originálne názvy máp"
-
-#: ../../src/ui_fsmenu/mapselect.cc:151
+#: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Official"
 msgstr "Oficiálne"
 
-#: ../../src/ui_fsmenu/mapselect.cc:152
-msgid "Unbalanced"
-msgstr "Nevyvážené"
-
 #. * TRANSLATORS: This is a message's type
-#: ../../src/ui_fsmenu/mapselect.cc:153 ../../src/wui/game_message_menu.cc:553
+#: ../../src/ui_fsmenu/mapselect.cc:106 ../../src/wui/game_message_menu.cc:553
 msgid "Seafaring"
 msgstr "Moreplavba"
 
-#: ../../src/ui_fsmenu/mapselect.cc:160
-msgid "Free for all"
-msgstr "Prístupné všetkým"
-
-#: ../../src/ui_fsmenu/mapselect.cc:161
-msgid "1v1"
-msgstr "1 proti 1"
-
-#: ../../src/ui_fsmenu/mapselect.cc:168
-msgid "Teams of 2"
-msgstr "2-členné tímy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:169
-msgid "Teams of 3"
-msgstr "3-členné tímy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:170
-msgid "Teams of 4"
-msgstr "4-členné tímy"
-
-#. * TRANSLATORS: Tooltip in map description when map names are being
-#. displayed in English.
-#. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:309
-#, c-format
-msgid "The name of this map in your language: %s"
-msgstr "Názov tejto mapy vo vašom jazyku: %s"
-
-#. * TRANSLATORS: Tooltip in map description when translated map names are
-#. being displayed.
-#. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:315
-#, c-format
-msgid "The original name of this map: %s"
-msgstr "Originálny názov tejto mapy: %s"
-
-#: ../../src/ui_fsmenu/mapselect.cc:319
-msgid "The name of this map"
-msgstr "Názov tejto mapy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:322
-msgid "The designer of this map"
-msgid_plural "The designers of this map"
-msgstr[0] "Dizajnér tejto mapy"
-msgstr[1] "Dizajnéri tejto mapy"
-msgstr[2] "Dizajnéri tejto mapy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:332
-msgid "Edit this map"
-msgstr "Editovať túto mapu"
-
-#: ../../src/ui_fsmenu/mapselect.cc:332
-msgid "Play this map"
-msgstr "Hrať túto mapu"
-
-#: ../../src/ui_fsmenu/mapselect.cc:335
-msgid "Directory:"
-msgstr "Priečinok:"
-
-#: ../../src/ui_fsmenu/mapselect.cc:337
-msgid "The name of this directory"
-msgstr "Názov tohto priečinka"
-
-#: ../../src/ui_fsmenu/mapselect.cc:343
-msgid "Open this directory"
-msgstr "Otvoriť tento priečinok"
-
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/ui_fsmenu/mapselect.cc:444
-msgid "Multiplayer Scenarios"
-msgstr "Scenáre pre viacerých hráčov"
-
-#: ../../src/ui_fsmenu/mapselect.cc:586
+#: ../../src/ui_fsmenu/mapselect.cc:358
 msgid "Nobody"
 msgstr "Nikto"
 
-#: ../../src/ui_fsmenu/mapselect.cc:587
+#: ../../src/ui_fsmenu/mapselect.cc:359
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -2970,149 +2879,149 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:522
+#: ../../src/ui_fsmenu/options.cc:116 ../../src/ui_fsmenu/options.cc:525
 msgid "Advanced Options"
 msgstr "Pokročilé možnosti"
 
-#: ../../src/ui_fsmenu/options.cc:124 ../../src/ui_fsmenu/options.cc:516
+#: ../../src/ui_fsmenu/options.cc:126 ../../src/ui_fsmenu/options.cc:519
 msgid "Apply"
 msgstr "Použiť"
 
-#: ../../src/ui_fsmenu/options.cc:130
+#: ../../src/ui_fsmenu/options.cc:132
 msgid "General Options"
 msgstr "Všeobecné možnosti"
 
-#: ../../src/ui_fsmenu/options.cc:136
+#: ../../src/ui_fsmenu/options.cc:138
 msgid "In-game resolution"
 msgstr "Rozlíšenie hry"
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:154
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
-#: ../../src/ui_fsmenu/options.cc:163
+#: ../../src/ui_fsmenu/options.cc:165
 msgid "Grab Input"
 msgstr "Prevziať vstup"
 
-#: ../../src/ui_fsmenu/options.cc:170
+#: ../../src/ui_fsmenu/options.cc:172
 msgid "Maximum FPS:"
 msgstr "Maximálne FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:183
+#: ../../src/ui_fsmenu/options.cc:185
 msgid "Language"
 msgstr "Jazyk"
 
-#: ../../src/ui_fsmenu/options.cc:199
+#: ../../src/ui_fsmenu/options.cc:201
 #: ../../src/wui/game_options_sound_menu.cc:34
 msgid "Enable Music"
 msgstr "Povoliť hudbu"
 
-#: ../../src/ui_fsmenu/options.cc:209
+#: ../../src/ui_fsmenu/options.cc:211
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Enable Sound Effects"
 msgstr "Povoliť zvukové efekty"
 
-#: ../../src/ui_fsmenu/options.cc:216
+#: ../../src/ui_fsmenu/options.cc:218
 msgid "In-game Options"
 msgstr "Možnosti hry"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:228
 msgid "Use single watchwindow mode"
 msgstr "Aktivovať režim jediného sledovacieho okna"
 
-#: ../../src/ui_fsmenu/options.cc:236
+#: ../../src/ui_fsmenu/options.cc:238
 msgid "Start building road after placing a flag"
 msgstr "Začať stavbu ciest po umiestnení vlajky"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Show buildings area preview"
 msgstr "Zobraziť náhľad oblasti budov"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:260
 msgid "Snap windows only when overlapping"
 msgstr "Uchytávať okná iba pri prekrytí"
 
-#: ../../src/ui_fsmenu/options.cc:268
+#: ../../src/ui_fsmenu/options.cc:270
 msgid "Dock windows to edges"
 msgstr "Prichytávať okná k okrajom"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:277 ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:279 ../../src/ui_fsmenu/options.cc:390
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minúta"
 msgstr[1] "minúty"
 msgstr[2] "minút"
 
-#: ../../src/ui_fsmenu/options.cc:285
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Save game automatically every"
 msgstr "Automaticky uložiť hru každých"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:294 ../../src/ui_fsmenu/options.cc:392
+#: ../../src/ui_fsmenu/options.cc:296 ../../src/ui_fsmenu/options.cc:394
 msgid "day"
 msgid_plural "days"
 msgstr[0] "deň"
 msgstr[1] "dni"
 msgstr[2] "dní"
 
-#: ../../src/ui_fsmenu/options.cc:302
+#: ../../src/ui_fsmenu/options.cc:304
 msgid "Remove replays older than:"
 msgstr "Mazať záznamy staršie ako:"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:312
+#: ../../src/ui_fsmenu/options.cc:314
 msgid "Off"
 msgstr "Vypnuté"
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:320
+#: ../../src/ui_fsmenu/options.cc:322
 msgid "Never"
 msgstr "Nikdy"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:367 ../../src/ui_fsmenu/options.cc:373
+#: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:375
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:406
+#: ../../src/ui_fsmenu/options.cc:408
 msgid "Try system language"
 msgstr "Vyskúšať jazyk systému"
 
-#: ../../src/ui_fsmenu/options.cc:528
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "Distance for windows to snap to other panels:"
 msgstr "Vzdialenosť na prichytenie okien k iným panelom:"
 
-#: ../../src/ui_fsmenu/options.cc:532
+#: ../../src/ui_fsmenu/options.cc:535
 msgid "Distance for windows to snap to borders:"
 msgstr "Vzdialenosť na prichytenie okien k okrajom obrazovky:"
 
-#: ../../src/ui_fsmenu/options.cc:539 ../../src/ui_fsmenu/options.cc:546
-#: ../../src/ui_fsmenu/options.cc:615 ../../src/ui_fsmenu/options.cc:619
+#: ../../src/ui_fsmenu/options.cc:542 ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:618 ../../src/ui_fsmenu/options.cc:622
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
 msgstr[1] "pixely"
 msgstr[2] "pixelov"
 
-#: ../../src/ui_fsmenu/options.cc:556
+#: ../../src/ui_fsmenu/options.cc:559
 msgid "Show in-game chat with transparent background"
 msgstr "Zobraziť chat v hre s priehľadným pozadím"
 
-#: ../../src/ui_fsmenu/options.cc:566
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Play a sound at message arrival"
-msgstr ""
+msgstr "Prehrať zvuk pri príchode správy"
 
-#: ../../src/ui_fsmenu/options.cc:576
+#: ../../src/ui_fsmenu/options.cc:579
 msgid "Do not zip widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Nekomprimovať dátové súbory (mapy, záznamy a uložené hry)."
 
-#: ../../src/ui_fsmenu/options.cc:586
+#: ../../src/ui_fsmenu/options.cc:589
 msgid "Remove Syncstream dumps on startup"
 msgstr "Odstrániť synchronizačné výpisy pri spustení"
 
@@ -3128,16 +3037,11 @@ msgstr "Kampane"
 msgid "Load Game"
 msgstr "Načítať hru"
 
-#. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/ui_fsmenu/suggested_teams_box.cc:87
-msgid "Suggested Teams:"
-msgstr "Navrhované tímy:"
-
-#: ../../src/wlapplication.cc:1106
+#: ../../src/wlapplication.cc:1095
 msgid "Game data error"
 msgstr "Chyba herných údajov"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1105
 #, c-format
 msgid ""
 "\n"
@@ -3145,7 +3049,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nProsím, ohláste tento problém, aby ste nám pomohli zlepšiť Widelands. Súvisiace správy nájdete v štandardnom výstupe (stdout.txt v systéme Windows). Používate zostavenie %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1112
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3275,7 +3179,7 @@ msgstr "Zobraziť ďalšiu budovu"
 #: ../../src/wui/building_statistics_menu.cc:697
 #: ../../src/wui/building_statistics_menu.cc:721
 #: ../../src/wui/building_statistics_menu.cc:723
-#: ../../src/wui/productionsitewindow.cc:180
+#: ../../src/wui/productionsitewindow.cc:181
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3355,18 +3259,18 @@ msgstr "Encyklopédia kmeňov"
 #: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/general_statistics_menu.cc:202
 #: ../../src/wui/productionsitewindow.cc:68 ../../src/wui/transport_ui.cc:61
-#: ../../src/wui/warehousewindow.cc:201
+#: ../../src/wui/warehousewindow.cc:205
 msgid "Wares"
 msgstr "Výrobky"
 
 #: ../../src/wui/encyclopedia_window.cc:140
 #: ../../src/wui/general_statistics_menu.cc:186
-#: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:211
+#: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:215
 msgid "Workers"
 msgstr "Pracovníci"
 
 #: ../../src/wui/encyclopedia_window.cc:142
-#: ../../src/wui/general_statistics_menu.cc:194 ../../src/wui/minimap.cc:174
+#: ../../src/wui/general_statistics_menu.cc:194 ../../src/wui/minimap.cc:173
 msgid "Buildings"
 msgstr "Budovy"
 
@@ -3505,7 +3409,7 @@ msgstr "Zásoby"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
-#: ../../src/wui/game_options_menu.cc:117
+#: ../../src/wui/game_options_menu.cc:108
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Uložiť hru"
@@ -3557,7 +3461,7 @@ msgstr "Správy: Schránka"
 msgid "Select"
 msgstr "Výber"
 
-#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:97
+#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:108
 msgid "Status"
 msgstr "Stav"
 
@@ -3698,45 +3602,45 @@ msgid "Objectives"
 msgstr "Úlohy"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:40
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Exit Game Confirmation"
 msgstr "Potvrdenie ukončenia hry"
 
-#: ../../src/wui/game_options_menu.cc:41
+#: ../../src/wui/game_options_menu.cc:47
 msgid "Are you sure you wish to exit this game?"
 msgstr "Naozaj chcete ukončiť hru?"
 
-#: ../../src/wui/game_options_menu.cc:79
+#: ../../src/wui/game_options_menu.cc:78
 msgid "README"
 msgstr "ČÍTAJMA"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:81
+#: ../../src/wui/game_options_menu.cc:80
 msgid "Show general information about Widelands and keyboard shortcuts"
 msgstr "Zobraziť všeobecné informácie o hre Widelands a klávesové skratky"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:90
+#: ../../src/wui/game_options_menu.cc:87
 msgid "Show the distribution licence document"
 msgstr "Zobraziť distribučnú licenciu"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99
+#: ../../src/wui/game_options_menu.cc:94
 msgid "Show information about the Widelands Development Team"
 msgstr "Zobraziť informácie o vývojovom tíme hry Widelands"
 
-#: ../../src/wui/game_options_menu.cc:106
+#: ../../src/wui/game_options_menu.cc:99
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Možnosti zvuku"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:108
+#: ../../src/wui/game_options_menu.cc:101
 msgid "Set sound effect and music options"
 msgstr "Nastaviť možnosti zvukových efektov a hudby"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:127 ../../src/wui/game_summary.cc:87
+#: ../../src/wui/game_options_menu.cc:115 ../../src/wui/game_summary.cc:97
 msgid "Exit Game"
 msgstr "Ukončiť hru"
 
@@ -3752,65 +3656,65 @@ msgstr "Hlasitosť zvukových efektov"
 msgid "Game over"
 msgstr "Koniec hry"
 
-#: ../../src/wui/game_summary.cc:59
-msgid "Elapsed time:"
-msgstr "Uplynutý čas:"
-
-#: ../../src/wui/game_summary.cc:64
+#: ../../src/wui/game_summary.cc:60
 msgid "Player info:"
 msgstr "Informácie o hráčovi:"
 
-#: ../../src/wui/game_summary.cc:79
+#: ../../src/wui/game_summary.cc:76
+msgid "Elapsed time:"
+msgstr "Uplynutý čas:"
+
+#: ../../src/wui/game_summary.cc:89
 msgid "Continue playing"
 msgstr "Pokračovať v hraní"
 
-#: ../../src/wui/game_summary.cc:98
+#: ../../src/wui/game_summary.cc:109
 msgid "Time"
 msgstr "Čas"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:167
+#: ../../src/wui/game_summary.cc:178
 msgid "Lost"
 msgstr "Prehra"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:171
+#: ../../src/wui/game_summary.cc:182
 msgid "Won"
 msgstr "Výhra"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:180
+#: ../../src/wui/game_summary.cc:191
 msgid "Resigned"
 msgstr "Vzdal sa"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:185
+#: ../../src/wui/game_summary.cc:196
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Neznámy výsledok"
 
-#: ../../src/wui/game_summary.cc:194
+#: ../../src/wui/game_summary.cc:205
 msgid "You won!"
 msgstr "Vyhrali ste!"
 
-#: ../../src/wui/game_summary.cc:196
+#: ../../src/wui/game_summary.cc:207
 msgid "You lost."
 msgstr "Prehrali ste."
 
-#: ../../src/wui/game_summary.cc:202
+#: ../../src/wui/game_summary.cc:213
 #, c-format
 msgid "%s won!"
 msgstr "%s zvíťazil!"
 
-#: ../../src/wui/game_summary.cc:205
+#: ../../src/wui/game_summary.cc:216
 msgid "Team %|1$u| won!"
 msgstr "Tím %|1$u| zvíťazil!"
 
-#: ../../src/wui/game_summary.cc:256
+#: ../../src/wui/game_summary.cc:266
 msgid "Score"
 msgstr "Skóre"
 
@@ -3930,23 +3834,89 @@ msgstr "Prádzne heslo"
 msgid "Please enter your password!"
 msgstr "Prosím, zadajte svoje heslo!"
 
+#: ../../src/wui/mapdata.h:122
+msgid "parent"
+msgstr "nadradený priečinok"
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/wui/mapdata.h:130
+msgid "Multiplayer Scenarios"
+msgstr "Scenáre pre viacerých hráčov"
+
+#: ../../src/wui/mapdetails.cc:102
+msgid "Directory:"
+msgstr "Priečinok:"
+
+#: ../../src/wui/mapdetails.cc:104
+msgid "The name of this directory"
+msgstr "Názov tohto priečinka"
+
+#. * TRANSLATORS: Tooltip in map description when translated map names are
+#. being displayed.
+#. * TRANSLATORS: %s is the English name of the map.
+#: ../../src/wui/mapdetails.cc:119
+#, c-format
+msgid "The original name of this map: %s"
+msgstr "Originálny názov tejto mapy: %s"
+
+#. * TRANSLATORS: Tooltip in map description when map names are being
+#. displayed in English.
+#. * TRANSLATORS: %s is the localized name of the map.
+#: ../../src/wui/mapdetails.cc:125
+#, c-format
+msgid "The name of this map in your language: %s"
+msgstr "Názov tejto mapy vo vašom jazyku: %s"
+
+#: ../../src/wui/mapdetails.cc:129
+msgid "The name of this map"
+msgstr "Názov tejto mapy"
+
+#: ../../src/wui/maptable.cc:36
+msgid "Number of players"
+msgstr "Počet hráčov"
+
+#. * TRANSLATORS: Column title for number of players in map list
+#: ../../src/wui/maptable.cc:36
+msgid "Pl."
+msgstr "Hr."
+
+#: ../../src/wui/maptable.cc:37
+msgid "The name of the map or scenario"
+msgstr "Názov mapy alebo scenára"
+
+#: ../../src/wui/maptable.cc:38
+msgid "Size"
+msgstr "Veľkosť"
+
+#: ../../src/wui/maptable.cc:38
+msgid "The size of the map (Width x Height)"
+msgstr "Veľkosť mapy (šírka x výška)"
+
+#: ../../src/wui/maptable.cc:64
+msgid "Filename"
+msgstr "Názov súboru"
+
+#: ../../src/wui/maptable.cc:70
+msgid "Map Name"
+msgstr "Názov mapy"
+
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
 msgstr "Vojaci"
 
-#: ../../src/wui/minimap.cc:153
+#: ../../src/wui/minimap.cc:152
 msgid "Owner"
 msgstr "Vlastník"
 
-#: ../../src/wui/minimap.cc:160
+#: ../../src/wui/minimap.cc:159
 msgid "Flags"
 msgstr "Vlajky"
 
-#: ../../src/wui/minimap.cc:167
+#: ../../src/wui/minimap.cc:166
 msgid "Roads"
 msgstr "Cesty"
 
-#: ../../src/wui/minimap.cc:181
+#: ../../src/wui/minimap.cc:180
 msgid "Zoom"
 msgstr "Priblíženie"
 
@@ -4033,7 +4003,7 @@ msgid "game"
 msgstr "hra"
 
 #: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:109
+#: ../../src/wui/productionsitewindow.cc:110
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Pracovník"
@@ -4052,11 +4022,11 @@ msgstr "Ďalšia úroveň"
 msgid "Terminate the employment of the selected worker"
 msgstr "Ukončiť zamestnanie vybraného pracovníka"
 
-#: ../../src/wui/productionsitewindow.cc:196
+#: ../../src/wui/productionsitewindow.cc:197
 msgid "(coming)"
 msgstr "(prichádza)"
 
-#: ../../src/wui/productionsitewindow.cc:196
+#: ../../src/wui/productionsitewindow.cc:197
 msgid "(vacant)"
 msgstr "(nečinný)"
 
@@ -4128,22 +4098,22 @@ msgstr "Zväčšiť kapacitu"
 msgid "Capacity"
 msgstr "Kapacita"
 
-#: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
-#: ../../src/wui/soldierlist.cc:479
+#: ../../src/wui/soldierlist.cc:390 ../../src/wui/soldierlist.cc:404
+#: ../../src/wui/soldierlist.cc:478
 msgid "Click soldier to send away"
 msgstr "Kliknutím na vojaka ho pošlete preč"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:484
+#: ../../src/wui/soldierlist.cc:408 ../../src/wui/soldierlist.cc:483
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ZD: %1$u/%2$u  ÚT: %3$u/%4$u  OB: %5$u/%6$u  UH: %7$u/%8$u"
 
-#: ../../src/wui/soldierlist.cc:421
+#: ../../src/wui/soldierlist.cc:420
 msgid "Prefer Rookies"
 msgstr "Uprednostniť začiatočníkov"
 
-#: ../../src/wui/soldierlist.cc:423
+#: ../../src/wui/soldierlist.cc:422
 msgid "Prefer Heroes"
 msgstr "Uprednostniť hrdinov"
 
@@ -4195,31 +4165,31 @@ msgstr "Spotreba"
 msgid "Economy Health"
 msgstr "Stav ekonomiky"
 
-#: ../../src/wui/warehousewindow.cc:138
+#: ../../src/wui/warehousewindow.cc:142
 msgid "Normal policy"
 msgstr "Normálny postup"
 
-#: ../../src/wui/warehousewindow.cc:139
+#: ../../src/wui/warehousewindow.cc:143
 msgid "Preferably store selected wares here"
 msgstr "Uprednostňovať tu skladovanie vybraných výrobkov"
 
-#: ../../src/wui/warehousewindow.cc:140
+#: ../../src/wui/warehousewindow.cc:144
 msgid "Do not store selected wares here"
 msgstr "Tu neskladovať vybrané výbobky"
 
-#: ../../src/wui/warehousewindow.cc:141
+#: ../../src/wui/warehousewindow.cc:145
 msgid "Remove selected wares from here"
 msgstr "Odstrániť vybrané výrobky"
 
-#: ../../src/wui/warehousewindow.cc:218
+#: ../../src/wui/warehousewindow.cc:222
 msgid "Wares in dock"
 msgstr "Výrobky v doku"
 
-#: ../../src/wui/warehousewindow.cc:223
+#: ../../src/wui/warehousewindow.cc:227
 msgid "Workers in dock"
 msgstr "Pracovníci v doku"
 
-#: ../../src/wui/warehousewindow.cc:229
+#: ../../src/wui/warehousewindow.cc:233
 msgid "Expedition"
 msgstr "Výprava"
 

@@ -75,9 +75,8 @@ public:
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
 	// packet, and there in the warehouse data packet.
-	void load
-		(uint32_t warehouse_packet_version, Warehouse& warehouse,
-		 FileRead& fr, Game& game, MapObjectLoader& mol);
+	void load(Warehouse& warehouse, FileRead& fr,
+				 Game& game, MapObjectLoader& mol);
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:

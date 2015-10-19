@@ -45,6 +45,7 @@
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
 
+// TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 namespace {
 
 // This function concatenates the filename and localized map name for a savegame/replay.

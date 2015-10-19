@@ -31,9 +31,10 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-#define PLAYERDIRNAME_TEMPLATE "player/%u"
-#define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
+constexpr uint32_t kCurrentPacketVersion = 2;
+
+constexpr const char* kPlayerDirnameTemplate = "player/%u";
+constexpr const char* kFilenameTemplate = "player/%u/messages";
 
 void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
@@ -48,11 +49,11 @@ void MapPlayersMessagesPacket::read
 			Profile prof;
 			try {
 				const std::string profile_filename =
-						(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+						(boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
 				prof.read(profile_filename.c_str(), nullptr, fs);
 			} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
-				("packet_version", CURRENT_PACKET_VERSION);
+				("packet_version", kCurrentPacketVersion);
 			MessageQueue & messages = player->messages();
 
 			{
@@ -153,7 +154,7 @@ void MapPlayersMessagesPacket::write
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
 		prof.create_section("global").set_int
-			("packet_version", CURRENT_PACKET_VERSION);
+			("packet_version", kCurrentPacketVersion);
 		const MessageQueue & messages = player->messages();
 		MapMessageSaver & message_saver = mos.message_savers[p - 1];
 		for (const std::pair<MessageId, Message *>& temp_message : messages) {
@@ -187,11 +188,11 @@ void MapPlayersMessagesPacket::write
 				s.set_int       ("serial",    fileindex);
 			}
 		}
-		fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
+		fs.ensure_directory_exists((boost::format(kPlayerDirnameTemplate)
 										  % static_cast<unsigned int>(p)).str());
 
 		const std::string profile_filename =
-				(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+				(boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
 		prof.write(profile_filename.c_str(), false, fs);
 	}
 }

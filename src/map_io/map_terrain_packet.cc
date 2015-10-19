@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapTerrainPacket::read(FileSystem& fs,
                                    EditorGameBase& egbase,
@@ -46,7 +46,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint16_t const nr_terrains = fr.unsigned_16();
 
 			using TerrainIdMap = std::map<const uint16_t, TerrainIndex>;
@@ -74,7 +74,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else {
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("terrain: %s", e.what());
@@ -88,7 +88,7 @@ void MapTerrainPacket::write
 
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.

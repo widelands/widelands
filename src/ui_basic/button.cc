@@ -33,7 +33,7 @@ namespace UI {
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kButtonImageMargin = 2;
 
-Button::Button //  for textual buttons
+Button::Button //  for textual buttons. If h = 0, h will resize according to the font's height.
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
@@ -58,6 +58,11 @@ Button::Button //  for textual buttons
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
+	// Automatically resize for font height and give it a margin.
+	if (h < 1) {
+		int new_height = m_textstyle.font->height() + 4;
+		set_desired_size(w, new_height);
+	}
 	set_thinks(false);
 }
 

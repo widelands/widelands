@@ -49,6 +49,7 @@ enum Align {
 	Align_BottomRight  = Align_Right|Align_Bottom,
 };
 
+Align mirror_alignment(Align alignment);
 void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
 
 }

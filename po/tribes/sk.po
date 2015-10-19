@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-17 19:23+0000\n"
+"POT-Creation-Date: 2015-10-12 07:45+0000\n"
+"PO-Revision-Date: 2015-10-13 20:29+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -34,20 +34,20 @@ msgstr "%1$s alebo %2$s"
 msgid "%s and"
 msgstr "%s a"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
 msgstr "Výstroj, ktorú poskytuje"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
 msgstr "a výstroj, ktorú poskytuje"
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
 msgstr "alebo výstroj, ktorú poskytuje"
@@ -61,7 +61,7 @@ msgid "Purpose:"
 msgstr "Účel:"
 
 #: ../../tribes/scripting/format_help.lua:277
-#: ../../tribes/scripting/format_help.lua:504
+#: ../../tribes/scripting/format_help.lua:505
 msgid "Note:"
 msgstr "Poznámka:"
 
@@ -96,8 +96,9 @@ msgstr "Kapacita:"
 msgid "Training:"
 msgstr "Výcvik:"
 
-#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#: numbers. ../../tribes/scripting/format_help.lua:299
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/format_help.lua:299
 #: ../../tribes/scripting/format_help.lua:303
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
@@ -141,7 +142,7 @@ msgstr "Vstupné:"
 msgid "Collects:"
 msgstr "Zbiera:"
 
-#: TRANSLATORS This is a verb (The miner mines)
+#. TRANSLATORS: This is a verb (The miner mines)
 #: ../../tribes/scripting/format_help.lua:382
 msgid "Mines:"
 msgstr "Ťaží:"
@@ -158,120 +159,122 @@ msgstr "Výstupné:"
 msgid "None"
 msgstr "Žiadne"
 
-#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../tribes/scripting/format_help.lua:481
+#. TRANSLATORS: This is the header for the "Building" section in the building
+#. help, containing size info, buildcost etc.
+#: ../../tribes/scripting/format_help.lua:482
 msgid "Building"
 msgstr "Budova"
 
-#: ../../tribes/scripting/format_help.lua:485
+#: ../../tribes/scripting/format_help.lua:486
 msgid "Mine plot"
 msgstr "Ťažobná parcela"
 
-#: ../../tribes/scripting/format_help.lua:485
-#: ../../tribes/scripting/format_help.lua:487
-#: ../../tribes/scripting/format_help.lua:490
-#: ../../tribes/scripting/format_help.lua:492
-#: ../../tribes/scripting/format_help.lua:494
-#: ../../tribes/scripting/format_help.lua:496
+#: ../../tribes/scripting/format_help.lua:486
+#: ../../tribes/scripting/format_help.lua:488
+#: ../../tribes/scripting/format_help.lua:491
+#: ../../tribes/scripting/format_help.lua:493
+#: ../../tribes/scripting/format_help.lua:495
+#: ../../tribes/scripting/format_help.lua:497
 msgid "Space required:"
 msgstr "Požadované miesto:"
 
-#: ../../tribes/scripting/format_help.lua:487
+#: ../../tribes/scripting/format_help.lua:488
 msgid "Port plot"
 msgstr "Prístavná parcela"
 
-#: ../../tribes/scripting/format_help.lua:490
+#: ../../tribes/scripting/format_help.lua:491
 msgid "Small plot"
 msgstr "Malá parcela"
 
-#: ../../tribes/scripting/format_help.lua:492
+#: ../../tribes/scripting/format_help.lua:493
 msgid "Medium plot"
 msgstr "Stredná parcela"
 
-#: ../../tribes/scripting/format_help.lua:494
+#: ../../tribes/scripting/format_help.lua:495
 msgid "Big plot"
 msgstr "Veľká parcela"
 
-#: ../../tribes/scripting/format_help.lua:496
-#: ../../tribes/scripting/format_help.lua:530
-#: ../../tribes/scripting/format_help.lua:575
-#: ../../tribes/scripting/format_help.lua:623
+#: ../../tribes/scripting/format_help.lua:497
+#: ../../tribes/scripting/format_help.lua:531
+#: ../../tribes/scripting/format_help.lua:576
+#: ../../tribes/scripting/format_help.lua:624
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: ../../tribes/scripting/format_help.lua:505
+#: ../../tribes/scripting/format_help.lua:506
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Túto budovu možno buď postaviť priamo, alebo získať vylepšením inej budovy."
 
-#: ../../tribes/scripting/format_help.lua:511
+#: ../../tribes/scripting/format_help.lua:512
 msgid "Direct build cost:"
 msgstr "Priame náklady na stavbu:"
 
-#: ../../tribes/scripting/format_help.lua:513
+#: ../../tribes/scripting/format_help.lua:514
 msgid "Build cost:"
 msgstr "Náklady na stavbu:"
 
-#: ../../tribes/scripting/format_help.lua:525
+#: ../../tribes/scripting/format_help.lua:526
 msgid "Or enhanced from:"
 msgstr "Alebo vylepšená z:"
 
-#: ../../tribes/scripting/format_help.lua:527
-#: ../../tribes/scripting/format_help.lua:530
+#: ../../tribes/scripting/format_help.lua:528
+#: ../../tribes/scripting/format_help.lua:531
 msgid "Enhanced from:"
 msgstr "Vylepšená z:"
 
-#: ../../tribes/scripting/format_help.lua:539
+#: ../../tribes/scripting/format_help.lua:540
 msgid "Cumulative cost:"
 msgstr "Celkové náklady:"
 
-#: ../../tribes/scripting/format_help.lua:580
+#: ../../tribes/scripting/format_help.lua:581
 msgid "If built directly, dismantle yields:"
 msgstr "Výnosy po rozobratí, ak je postavená priamo:"
 
-#: ../../tribes/scripting/format_help.lua:585
+#: ../../tribes/scripting/format_help.lua:586
 msgid "If enhanced, dismantle yields:"
 msgstr "Výnosy po rozobratí, ak je vylepšená:"
 
-#: ../../tribes/scripting/format_help.lua:587
-#: ../../tribes/scripting/format_help.lua:628
+#: ../../tribes/scripting/format_help.lua:588
+#: ../../tribes/scripting/format_help.lua:629
 msgid "Dismantle yields:"
 msgstr "Výnosy po rozobratí:"
 
-#: ../../tribes/scripting/format_help.lua:637
+#: ../../tribes/scripting/format_help.lua:638
 msgid "Can be enhanced to:"
 msgstr "Možno vylepšiť na:"
 
-#: ../../tribes/scripting/format_help.lua:665
+#: ../../tribes/scripting/format_help.lua:666
 msgid "Crew required:"
 msgstr "Požadovaný personál:"
 
-#: ../../tribes/scripting/format_help.lua:665
+#: ../../tribes/scripting/format_help.lua:666
 msgid "Workers"
 msgstr "Pracovníci"
 
-#: ../../tribes/scripting/format_help.lua:688
+#: ../../tribes/scripting/format_help.lua:689
 msgid "%s or better"
-msgstr ""
+msgstr "%s alebo skúsenejší"
 
-#: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/format_help.lua:702
 #: ../../tribes/scripting/worker_help.lua:67
 msgid "Experience levels:"
 msgstr "Úrovne skúseností:"
 
-#: ../../tribes/scripting/format_help.lua:702
-#: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/format_help.lua:703
+#: ../../tribes/scripting/format_help.lua:712
 #: ../../tribes/scripting/worker_help.lua:68
 #: ../../tribes/scripting/worker_help.lua:77
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s na %s (%s SB)"
 
-#: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/format_help.lua:737
 #: ../../tribes/scripting/worker_help.lua:99
 msgid "Worker uses:"
 msgid_plural "Workers use:"
@@ -279,10 +282,10 @@ msgstr[0] "Pracovník používa:"
 msgstr[1] "Pracovníci používajú:"
 msgstr[2] "Pracovníci používajú:"
 
-#: ../../tribes/scripting/format_help.lua:754
+#: ../../tribes/scripting/format_help.lua:755
 msgid "Performance:"
 msgstr "Výkonnosť:"
 
-#: ../../tribes/scripting/format_help.lua:754
+#: ../../tribes/scripting/format_help.lua:755
 msgid "Production"
 msgstr "Výroba"

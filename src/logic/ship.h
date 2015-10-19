@@ -272,7 +272,7 @@ protected:
 
 		const Task * get_task(const std::string & name) override;
 
-		void load(FileRead & fr, uint8_t version);
+		void load(FileRead & fr);
 		void load_pointers() override;
 		void load_finish() override;
 

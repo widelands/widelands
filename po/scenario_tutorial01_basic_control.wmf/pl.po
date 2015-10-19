@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
-# Tom Box <wptom@wp.pl>, 2015
+# Tomasz Pudło <wptom@wp.pl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-28 06:43+0000\n"
-"PO-Revision-Date: 2015-10-02 19:32+0000\n"
-"Last-Translator: Tom Box <wptom@wp.pl>\n"
+"POT-Creation-Date: 2015-10-04 07:51+0000\n"
+"PO-Revision-Date: 2015-10-06 14:22+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -547,21 +547,21 @@ msgstr "A teraz na temat drogi. Pamiętaj: jesteśmy już w trybie budowy drogi 
 msgid ""
 "Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select"
-msgstr ""
+msgstr "Wspaniale! Aby wejść w tryb budowania drogi od dowolnej flagi, kliknij lewym przyciskiem na flagę a następnie wybierz "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:299
 msgid ""
 "If you decide that you do not want to build a road at this time, you can "
 "cancel road building by clicking on the starting flag of the road and "
 "selecting"
-msgstr ""
+msgstr "Jeśli stwierdzisz, że nie chcesz teraz budować drogi, możesz anulować budowę poprzez kliknięcie na fladze, od której zaczęło się wyznaczanie drogi i wybranie "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:302
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr ""
+msgstr "A teraz na temat drogi. Przejdę teraz do trybu budowania drogi a następnie będę ją rozbudowywał. Klikając lewym przyciskiem myszy kolejno na sąsiednie pola, będę dokładnie kontrolowałl przebieg drogi w taki oto sposób:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
@@ -650,7 +650,7 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr ""
+msgstr "Wygląda na to, że zburzyłeś plac budowy, na którym chcieliśmy budować kamieniołom. A ponieważ kamienie będą nam potrzebne, proponuję abyś załadował wcześniej zapisany stan gry. Na szczęście tworzone są one co pewien czas. Aby to zrobić, udaj się do głównego menu i wybierz 'Jeden gracz' → 'Wczytaj grę'. A następnym razem bądź bardziej ostrożny."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -772,7 +772,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "Okno wiadomości spełnia ważną rolę w zarządzaniu bogactwami Twojego plemienia. W prawdziwej grze otrzymujesz wiele wiadomości. Aby się w nich nie pogubić, pilnuj, aby skrzynka odbiorcza była pusta. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:415
 msgid "Archive all your messages in your inbox now."
@@ -828,7 +828,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their working "
 "areas the next time they try to do some work."
-msgstr ""
+msgstr "W porządku! Zobaczymy jak funkcjonują wiadomości w prawdziwej grze, dobrze? W tym celu, zabiorę biednym kamieniarzom wszystkie kamienie z kamieniołomów. Za każdym razem gdy chcąc pracować nie znajdą niczego do roboty wyślą ci wiadomość."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -902,7 +902,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Zdobywanie terytorium sprowadza się do budowy budynku wojskowego na granicy twojego terytorium. Barbarzyńcy mogą budować kilka rodzajów takich budynków: posterunki, bariery, donżony, fortece i cytadele. Im większy budynek, tym bardziej jest kosztowny, tym więcej terenu kontroluje i tym więcej żołnierzy można w nim umieścić. Budynki różnią się także w kwestii pola widzenia: budynki z wieżami pozwalają widzieć dalej."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -912,7 +912,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "A teraz zadanie: na swojej granicy wybuduj budynek wojskowy."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
@@ -927,7 +927,7 @@ msgstr "Poszerz swoje terytorium"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:486
 msgid "Make your territory grow"
-msgstr ""
+msgstr "Powiększ swoje terytorium"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid ""
@@ -963,7 +963,7 @@ msgstr "Twoje terytorium się powiększyło!"
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr ""
+msgstr "Wspaniale. Zauważyłeś, że twoje terytorium powiększyło się w chwili, kiedy twoi żołnierze zajęli nowopowstały budynek wojskowy?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
 msgid ""

@@ -333,7 +333,6 @@ function click_button(name)
    for window_name, window in pairs(wl.ui.MapView().windows) do
       for button_name, button in pairs(window.buttons) do
          if button_name == name then
-            print(window_name, button_name)
             button:click()
             return true
          end

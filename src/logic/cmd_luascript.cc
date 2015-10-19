@@ -44,18 +44,19 @@ void CmdLuaScript::execute (Game & game) {
 	return;
 }
 
-#define CMD_LUASCRIPT_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
+
 void CmdLuaScript::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_LUASCRIPT_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			script_ = fr.string();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("lua: %s", e.what());
 	}
@@ -63,7 +64,7 @@ void CmdLuaScript::read
 void CmdLuaScript::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(CMD_LUASCRIPT_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	fw.string(script_);
