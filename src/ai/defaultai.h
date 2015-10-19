@@ -244,9 +244,12 @@ private:
 
 	bool check_supply(const BuildingObserver&);
 
-	// bool consider_attack(int32_t);
-
 	void print_land_stats();
+
+	//checks whether first value is in range, or lesser then...
+	template<typename T> void check_range(const T, const  T, const  T, const char *);
+	template<typename T> void check_range(const T, const  T, const char *);
+
 
 private:
 	// Variables of default AI
@@ -262,7 +265,7 @@ private:
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
-	uint16_t last_attacked_player_;
+	int16_t last_attacked_player_;
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;

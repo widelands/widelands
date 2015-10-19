@@ -67,7 +67,7 @@ constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
-constexpr int kPersistentData  = 0; //uint16_t
+constexpr int kPersistentData  = 0; //int16_t
 constexpr int kMilitLoneliness = 1;
 constexpr int kAttacker        = 2;
 constexpr int kAttackMargin    = 0; //uint32_t
@@ -738,7 +738,8 @@ void DefaultAI::late_initialization() {
 
 	// Here the AI persistent data either exists - then they are read
 	// or does not exist, then they are created and saved
-	const int16_t persistent_data_exists_ = player_->get_ai_data_int16(kPersistentData);
+	int16_t persistent_data_exists_ = 0;
+	player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 
 	// 0 implies no saved data exits yet
 	if (persistent_data_exists_ == 0) {
@@ -765,65 +766,39 @@ void DefaultAI::late_initialization() {
 	} else {
 		log (" %d: restoring saved AI data...\n", player_number());
 
-
 		// Restoring data and doing some basic check
-		ai_personality_military_loneliness_ = player_->get_ai_data_int16(kMilitLoneliness);
-		if (ai_personality_military_loneliness_ < -60 || ai_personality_military_loneliness_ > 60) {
-			log(" %d: unexpected value for ai_personality_military_loneliness_: %d\n",
-			player_number(), ai_personality_military_loneliness_);
-		}
+		player_->get_ai_data(&ai_personality_military_loneliness_, kMilitLoneliness);
+		check_range<int16_t>
+			(ai_personality_military_loneliness_, -60, 60, "ai_personality_military_loneliness_");
 
-		ai_personality_attack_margin_ = player_->get_ai_data_uint32(kAttackMargin);
-		if (ai_personality_attack_margin_ > 15) {
-			log(" %d: unexpected value for ai_personality_attack_margin_: %d\n",
-			player_number(), ai_personality_attack_margin_);
-		}
+		player_->get_ai_data(&ai_personality_attack_margin_, kAttackMargin);
+		check_range<uint32_t>(ai_personality_attack_margin_, 15, "ai_personality_attack_margin_");
 
-		ai_personality_wood_difference_ = player_->get_ai_data_int32(kWoodDiff);
-		if (ai_personality_wood_difference_ < -20 || ai_personality_wood_difference_ > 19) {
-			log(" %d: unexpected value for ai_personality_wood_difference_: %d\n",
-			player_number(), ai_personality_wood_difference_);
-		}
+		player_->get_ai_data(&ai_personality_wood_difference_, kWoodDiff);
+		check_range<int32_t>(ai_personality_wood_difference_, -20, 19, "ai_personality_wood_difference_");
 
-		ai_productionsites_ratio_ = player_->get_ai_data_uint32(kProdRatio);
-		if (ai_productionsites_ratio_< 5 || ai_productionsites_ratio_ > 15) {
-			log(" %d: unexpected value for ai_productionsites_ratio_: %d\n",
-			player_number(), ai_productionsites_ratio_);
-		}
+		player_->get_ai_data(&ai_productionsites_ratio_, kProdRatio);
+		check_range<uint32_t>(ai_productionsites_ratio_, 5, 15, "ai_productionsites_ratio_");
 
-		ai_personality_early_militarysites = player_->get_ai_data_uint32(kEarlyMilitary);
-		if (ai_personality_early_militarysites< 20 || ai_personality_early_militarysites > 40) {
-			log(" %d: unexpected value for ai_personality_early_msites: %d\n",
-			player_number(), ai_personality_early_militarysites);
-		}
+		player_->get_ai_data(&ai_personality_early_militarysites, kEarlyMilitary);
+		check_range<uint32_t>(ai_personality_early_militarysites, 20, 40, "ai_personality_early_militarysites");
 
 		// Now some runtime values that are generated and saved during course of game
-		last_attack_time_ = player_->get_ai_data_uint32(kLastAttack);
+		player_->get_ai_data(&last_attack_time_, kLastAttack);
 
-		last_attacked_player_ = static_cast<uint16_t>(player_->get_ai_data_int16(kAttacker));
-		if (last_attacked_player_ > 8) {
-			log(" %d: unexpected value for last_attacked_player_: %d\n",
-			player_number(), ai_personality_attack_margin_);
-		}
+		player_->get_ai_data(&last_attacked_player_, kAttacker);
+		check_range<int16_t>(last_attacked_player_, 0, 8, "last_attacked_player_");
 
-		colony_scan_area_ = player_->get_ai_data_uint32(kColonyScan);
-		if (colony_scan_area_ > 50) {
-			log(" %d: unexpected value for colony_scan_area_: %d\n",
-			player_number(), colony_scan_area_);
-		}
+		player_->get_ai_data(&colony_scan_area_, kColonyScan);
+		check_range<uint32_t>(colony_scan_area_, 50, "colony_scan_area_");
 
-		trees_around_cutters_ = player_->get_ai_data_uint32(kTreesAround);
+		player_->get_ai_data(&trees_around_cutters_, kTreesAround);
 
-		least_military_score_ = player_->get_ai_data_int32(kLeastMilit);
-		if (least_military_score_< 0 || least_military_score_ > 1000) {
-			log(" %d: unexpected value for least_military_score_: %d\n",
-			player_number(), least_military_score_);
-		}
-		target_military_score_ = player_->get_ai_data_int32(kTargetMilit);
-		if (target_military_score_< least_military_score_ || target_military_score_ > 1000) {
-			log(" %d: unexpected value for target_military_score_: %d\n",
-			player_number(), target_military_score_);
-		}
+		player_->get_ai_data(&least_military_score_, kLeastMilit);
+		check_range<uint32_t>(least_military_score_, 0, 1000, "least_military_score_");
+
+		player_->get_ai_data(&target_military_score_, kTargetMilit);
+		check_range<uint32_t>(target_military_score_, least_military_score_, 1000, "target_military_score_");
 	}
 }
 
@@ -986,7 +961,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 	// to save some CPU
 	if (mines_.size() > 8 && !resource_count_now) {
-		field.unowned_mines_pots_nearby_ = 0;
+		field.unowned_mines_spots_nearby_ = 0;
 	} else {
 		uint32_t close_mines =
 		   map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_unowned_mines_pots);
@@ -995,9 +970,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		                   nullptr,
 		                   find_unowned_mines_pots);
 		distant_mines = distant_mines - close_mines;
-		field.unowned_mines_pots_nearby_ = 4 * close_mines + distant_mines / 2;
+		field.unowned_mines_spots_nearby_ = 4 * close_mines + distant_mines / 2;
 		if (distant_mines > 0) {
-			field.unowned_mines_pots_nearby_ += 15;
+			field.unowned_mines_spots_nearby_ += 15;
 		}
 	}
 
@@ -1443,7 +1418,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// this is just helpers to improve readability of code
 	const bool too_many_ms_constructionsites =
-		((msites_in_constr() * msites_in_constr()) > militarysites.size());
+		(pow(msites_in_constr(), 2) > militarysites.size());
 	const bool too_many_vacant_mil =
 		(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
 	const int32_t kUpperLimit = 275;
@@ -1979,7 +1954,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						if (bo.space_consumer_ &&
-						    !bf->unowned_mines_pots_nearby_) {  // not close to mountains
+						    !bf->unowned_mines_spots_nearby_) {  // not close to mountains
 							prio += 1;
 						}
 					}
@@ -2040,7 +2015,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				if (bf->enemy_nearby_ && bo.fighting_type_) {
 					;
 				}  // it is ok, go on
-				else if (bf->unowned_mines_pots_nearby_ > 2 &&
+				else if (bf->unowned_mines_spots_nearby_ > 2 &&
 				         (bo.mountain_conqueror_ || bo.expansion_type_)) {
 					;
 				}  // it is ok, go on
@@ -2074,8 +2049,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += (5 - bf->own_military_sites_nearby_()) * 15;
 				}
 				prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100;
-				prio += bf->unowned_mines_pots_nearby_ * resource_necessity_mines_ / 100;
-				prio += ((bf->unowned_mines_pots_nearby_ > 0) ? 20 : 0) *
+				prio += bf->unowned_mines_spots_nearby_ * resource_necessity_mines_ / 100;
+				prio += ((bf->unowned_mines_spots_nearby_ > 0) ? 20 : 0) *
 						resource_necessity_mines_ / 100;
 				prio += bf->stones_nearby_ / 2;
 				prio += bf->water_nearby_;
@@ -3600,7 +3575,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// (we will not dismantle even if there are no mineable resources left for this level of mine
 	// and output is not needed)
 	bool forcing_upgrade = false;
-	const uint16_t minimal_mines_count = (site.bo->built_mat_producer_)?2:1;
+	const uint16_t minimal_mines_count = (site.bo->built_mat_producer_) ? 2 : 1;
 	if (has_upgrade &&
 		mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count) {
 		forcing_upgrade = true;
@@ -3931,10 +3906,10 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 										const uint32_t gametime) {
 
 	assert (militarysites.size() ==  msites_built());
-	// logically size of militerysite must in between 1 and 3 (including)
-	assert (size >= 1 && size <= 3);
+	// logically size of militarysite must in between 1 and 3 (including)
+	assert (size >= BaseImmovable::SMALL && size <= BaseImmovable::BIG);
 
-	if (size == 1) { // this function is intended for medium and bigger sites
+	if (size == BaseImmovable::SMALL) { // this function is intended for medium and bigger sites
 		return BuildingNecessity::kAllowed;
 	}
 
@@ -5558,4 +5533,23 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	    static_cast<uint32_t>(warehousesites.size() - num_ports),
 	    num_ports,
 	    summary.c_str());
+}
+
+template<typename T>
+	void DefaultAI::check_range(T value, T bottom_range, T upper_range, const char* value_name) {
+	if (value < bottom_range || value > upper_range) {
+		log(" %d: unexpected value for %s: %d\n",
+		player_number(),
+		value_name,
+		value);
+	}
+}
+
+template<typename T> void DefaultAI::check_range(T value, T upper_range, const char* value_name) {
+	if (value > upper_range) {
+		log(" %d: unexpected value for %s: %d\n",
+		player_number(),
+		value_name,
+		value);
+	}
 }

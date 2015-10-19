@@ -1314,19 +1314,19 @@ void Player::set_ai_data(int16_t value, uint32_t position) {
 	m_ai_data_int16[position] = value;
 }
 
-int32_t Player::get_ai_data_int32(uint32_t position) {
+void Player::get_ai_data(int32_t * value, uint32_t position) {
 	assert(position < kAIDataSize);
-	return m_ai_data_int32[position];
+	*value = m_ai_data_int32[position];
 }
 
-uint32_t Player::get_ai_data_uint32(uint32_t position) {
+void Player::get_ai_data(uint32_t * value, uint32_t position) {
 	assert(position < kAIDataSize);
-	return m_ai_data_uint32[position];
+	*value = m_ai_data_uint32[position];
 }
 
-int16_t Player::get_ai_data_int16(uint32_t position) {
+void Player::get_ai_data(int16_t * value, uint32_t position) {
 	assert(position < kAIDataSize);
-	return m_ai_data_int16[position];
+	*value = m_ai_data_int16[position];
 }
 
 /**

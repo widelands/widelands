@@ -244,6 +244,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 	if (!dst) {
 		//here we just do nothing, this is usually OK
 		start_task_idle(game, descr().main_animation(), 10000);
+		printf (" %d: ship lost its destination\n");
+		m_fleet->update(game);
 		return true;
 	}
 

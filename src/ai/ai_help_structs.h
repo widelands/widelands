@@ -241,7 +241,7 @@ struct BuildableField {
 	uint8_t unowned_land_nearby_;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border_;
-	uint8_t unowned_mines_pots_nearby_;
+	uint8_t unowned_mines_spots_nearby_;
 	uint8_t trees_nearby_;
 	uint8_t stones_nearby_;
 	int16_t water_nearby_;
@@ -288,7 +288,7 @@ struct BuildableField {
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
 	     near_border_(false),
-	     unowned_mines_pots_nearby_(0),
+	     unowned_mines_spots_nearby_(0),
 	     trees_nearby_(0),
 	     // explanation of starting values
 	     // this is done to save some work for AI (CPU utilization)
@@ -318,7 +318,7 @@ struct BuildableField {
 	     last_resources_check_time_(0) {
 	}
 
-	int32_t own_military_sites_nearby_(){
+	int32_t own_military_sites_nearby_() {
 		return military_stationed_ + military_unstationed_;
 	}
 };
@@ -540,7 +540,5 @@ struct MilitarySiteSizeObserver {
 	MilitarySiteSizeObserver() : in_construction(0), finished(0) {
 	}
 };
-
-
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H
