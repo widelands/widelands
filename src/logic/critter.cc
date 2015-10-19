@@ -377,7 +377,7 @@ Load / Save implementation
 ==============================
 */
 
-#define CRITTER_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 Critter::Loader::Loader()
 {
@@ -406,8 +406,9 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
 			const std::string owner = fr.c_string();
 			std::string critter_name = fr.c_string();
 			const CritterDescr * descr = nullptr;
@@ -430,8 +431,9 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading critter: %s", e.what());
 	}
@@ -443,7 +445,7 @@ void Critter::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderCritter);
-	fw.unsigned_8(CRITTER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	std::string owner =
 		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";

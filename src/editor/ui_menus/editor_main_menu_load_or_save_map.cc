@@ -171,39 +171,36 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	Widelands::Map map;
 
 	for (const std::string& mapfilename : files) {
-
 		// Add map file (compressed) or map directory (uncompressed)
-		if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-			if (ml.get() != nullptr) {
-				try {
-					ml->preload_map(true);
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+		if (ml != nullptr) {
+			try {
+				ml->preload_map(true);
 
-					if (!map.get_width() || !map.get_height()) {
-						continue;
-					}
+				if (!map.get_width() || !map.get_height()) {
+					continue;
+				}
 
-					MapData::MapType maptype;
+				MapData::MapType maptype;
 
-					if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-					    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-						maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
-						maptype = MapData::MapType::kNormal;
-					} else {
-						maptype = MapData::MapType::kSettlers2;
-					}
+				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+					 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+					maptype = MapData::MapType::kScenario;
+				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+					maptype = MapData::MapType::kNormal;
+				} else {
+					maptype = MapData::MapType::kSettlers2;
+				}
 
-					MapData mapdata(map, mapfilename, maptype, display_type);
+				MapData mapdata(map, mapfilename, maptype, display_type);
 
-					has_translated_mapname_ =
-					   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+				has_translated_mapname_ =
+					has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-					maps_data_.push_back(mapdata);
+				maps_data_.push_back(mapdata);
 
-				} catch (const WException&) {
-				}  //  we simply skip illegal entries
-			}
+			} catch (const WException&) {
+			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename)) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
