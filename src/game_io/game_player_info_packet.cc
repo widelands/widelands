@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 15
+#define CURRENT_PACKET_VERSION 16
 
 
 void GamePlayerInfoPacket::read
