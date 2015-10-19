@@ -5,12 +5,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # Tomasz Pudło <wptom@wp.pl>, 2015
+# Tomasz Pudło <wptom@wp.pl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-06 10:34+0000\n"
+"POT-Creation-Date: 2015-10-12 07:45+0000\n"
+"PO-Revision-Date: 2015-10-15 11:21+0000\n"
 "Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +64,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "Utworzenie szlaku przemytniczego wymaga zbudowania przez ciebie oraz twojego sojusznika magazynów na obu punktach - po jednym punkcie na gracza. Z chwilą nawiązania szlaku co 10 sekund szmuglowany jest pojedynczy towar. "
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:10

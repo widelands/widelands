@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-05 14:17+0000\n"
+"POT-Creation-Date: 2015-10-12 07:45+0000\n"
+"PO-Revision-Date: 2015-10-16 09:33+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Építs egy fűrészmalmot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr "Terjeszd ki területedet, és fedezd fel a szigetet"
+msgstr "Terjeszd ki területedet, és fedezd fel"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"

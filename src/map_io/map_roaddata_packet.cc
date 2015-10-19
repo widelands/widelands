@@ -39,7 +39,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 4
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 void MapRoaddataPacket::read
 	(FileSystem            &       fs,
@@ -55,19 +55,11 @@ void MapRoaddataPacket::read
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Map   &       map        = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
-			for (;;) {
-				if (2 <= packet_version && fr.end_of_file())
-					break;
+			while (! fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
-				if (packet_version < 2 && serial == 0xffffffff) {
-					if (!fr.end_of_file())
-						throw GameDataError
-							("expected end of file after serial 0xffffffff");
-					break;
-				}
 				try {
 					Game& game = dynamic_cast<Game&>(egbase);
 					Road & road = mol.get<Road>(serial);
@@ -80,10 +72,8 @@ void MapRoaddataPacket::read
 					Player & plr = egbase.player(player_index);
 
 					road.set_owner(&plr);
-					if (4 <= packet_version) {
-						road.m_busyness             = fr.unsigned_32();
-						road.m_busyness_last_update = fr.unsigned_32();
-					}
+					road.m_busyness             = fr.unsigned_32();
+					road.m_busyness_last_update = fr.unsigned_32();
 					road.m_type = fr.unsigned_32();
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -132,21 +122,13 @@ void MapRoaddataPacket::read
 					uint32_t const count = fr.unsigned_32();
 					if (!count)
 						throw GameDataError("no carrier slot");
-					if (packet_version <= 2 && 1 < count)
-						throw GameDataError
-							(
-						 	 "expected 1 but found %u carrier slots in road saved "
-						 	 "with packet version 2 (old)",
-							 count);
 
 					for (uint32_t i = 0; i < count; ++i) {
 						Carrier * carrier = nullptr;
 						Request * carrier_request = nullptr;
 
-
 						if (uint32_t const carrier_serial = fr.unsigned_32())
 							try {
-								//log("Read carrier serial %u", carrier_serial);
 								carrier = &mol.get<Carrier>(carrier_serial);
 							} catch (const WException & e) {
 								throw GameDataError
@@ -154,14 +136,9 @@ void MapRoaddataPacket::read
 							}
 						else {
 							carrier = nullptr;
-							//log("No carrier in this slot");
 						}
 
-						//delete road.m_carrier_slots[i].carrier_request;
-						//carrier_request = 0;
-
 						if (fr.unsigned_8()) {
-							//log("Reading request");
 							(carrier_request =
 							 	new Request
 							 		(road,
@@ -171,10 +148,8 @@ void MapRoaddataPacket::read
 							->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
-							//log("No request in this slot");
 						}
-						uint8_t const carrier_type =
-							packet_version < 3 ? 1 : fr.unsigned_32();
+						uint8_t const carrier_type = fr.unsigned_32();
 
 						if
 							(i < road.m_carrier_slots.size() &&
@@ -201,9 +176,9 @@ void MapRoaddataPacket::read
 					throw GameDataError("road %u: %s", serial, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("roaddata: %s", e.what());
 	}
@@ -215,7 +190,7 @@ void MapRoaddataPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map   & map        = egbase.map();
 	const Field & fields_end = map[map.max_index()];

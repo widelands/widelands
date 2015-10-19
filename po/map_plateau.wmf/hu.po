@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-04 14:49+0000\n"
+"POT-Creation-Date: 2015-10-12 07:45+0000\n"
+"PO-Revision-Date: 2015-10-16 09:28+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +115,7 @@ msgid ""
 "commands the strongest warriors. In the south, we caught sight of some food "
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can cut off our enemies’ food supply."
-msgstr "Csodálatos, hogy milyen messze el lehet látni a kastély legmagasabb tornyából. Az egész szigetet beláthatjuk. Úgyhogy csodálom, hogy Lanissa miért nem látott meg minket és miért nem készült fel. Bárhogy legyen is, néhány dolog soha nem lát napvilágot. Az egyetlen fontos kérdés, hogy még mindig maradtak ellenséges csapatok. Felfedeztünk Erwyn írányítása alatt tartott ellenséges pozíciókat a kastély északi és keleti részén. Ő tudja hogy kell erős hadúrnak lenni, és biztosan tudja irányítani a legerősebb harcosokat is. Délen megpillantottunk néhány Jomo – egy fiatalabb hadúr – által védett  étel ellátó hálózatot, gondosgodnunk kell azokról a hálózatokról, hogy el tudjuk vágni az ellenséget az utánpótlástól."
+msgstr "Csodálatos, hogy milyen messze el lehet látni a kastély legmagasabb tornyából. Az egész szigetet beláthatjuk. Úgyhogy csodálom, hogy Lanissa miért nem látott meg minket és miért nem készült fel. Bárhogy legyen is, néhány dolog soha nem lát napvilágot. Az egyetlen fontos kérdés, hogy még mindig maradtak ellenséges csapatok. Felfedeztünk Erwyn irányítása alatt tartott ellenséges pozíciókat a kastély északi és keleti részén. Ő erős hadúrként ismert , és biztosan tudja irányítani a legerősebb harcosokat is. Délen megpillantottunk néhány Jomo – egy fiatalabb hadúr – által védett  étel ellátó hálózatot, gondoskodnunk kell azokról a hálózatokról, hogy el tudjuk vágni az ellenséget az utánpótlástól."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:96
 #: ../../maps/Plateau.wmf/scripting/texts.lua:105
@@ -154,7 +154,7 @@ msgstr "Győzelem!"
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
-msgstr "Végre! Az egész sziget a miénk. Most már csak jobban meg kell védenünk, mint a korábbi hadurak."
+msgstr "Végre! Az egész sziget a miénk. Most már csak jobban kell védenünk, mint a hadurak tették."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:120
 msgid ""
