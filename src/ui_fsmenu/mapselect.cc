@@ -252,45 +252,42 @@ void FullscreenMenuMapSelect::fill_table()
 		Widelands::Map map; //  MapLoader needs a place to put its preload data
 
 		for (const std::string& mapfilename : files) {
-
 			// Add map file (compressed) or map directory (uncompressed)
-			if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-				if (ml.get() != nullptr) {
-					try {
-						map.set_filename(mapfilename);
-						ml->preload_map(true);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+			if (ml != nullptr) {
+				try {
+					map.set_filename(mapfilename);
+					ml->preload_map(true);
 
-						if (!map.get_width() || !map.get_height()) {
-							continue;
-						}
-
-						MapData::MapType maptype;
-						if (map.scenario_types() & scenario_types_) {
-							maptype = MapData::MapType::kScenario;
-						} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-							maptype = MapData::MapType::kNormal;
-						} else {
-							maptype = MapData::MapType::kSettlers2;
-						}
-
-						MapData mapdata(map, mapfilename, maptype, display_type);
-
-						has_translated_mapname_ =
-								has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-						bool has_all_tags = true;
-						for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
-							has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
-						if (!has_all_tags) {
-							continue;
-						}
-						maps_data_.push_back(mapdata);
-					} catch (const std::exception & e) {
-						log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-					} catch (...) {
-						log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
+					if (!map.get_width() || !map.get_height()) {
+						continue;
 					}
+
+					MapData::MapType maptype;
+					if (map.scenario_types() & scenario_types_) {
+						maptype = MapData::MapType::kScenario;
+					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+						maptype = MapData::MapType::kNormal;
+					} else {
+						maptype = MapData::MapType::kSettlers2;
+					}
+
+					MapData mapdata(map, mapfilename, maptype, display_type);
+
+					has_translated_mapname_ =
+							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+
+					bool has_all_tags = true;
+					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+					if (!has_all_tags) {
+						continue;
+					}
+					maps_data_.push_back(mapdata);
+				} catch (const std::exception & e) {
+					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+				} catch (...) {
+					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 				}
 			} else if (g_fs->is_directory(mapfilename)) {
 				// Add subdirectory to the list

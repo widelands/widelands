@@ -156,7 +156,7 @@ private:
 				if (m_display.ware_selected(id)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(id);
-					if (1 < tq.permanent) {
+					if (0 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
 						Game & game = dynamic_cast<Game&>(player.egbase());
 						game.send_player_command

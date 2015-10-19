@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 08:51+0100\n"
-"PO-Revision-Date: 2015-10-04 07:52+0000\n"
+"POT-Creation-Date: 2015-10-12 08:45+0100\n"
+"PO-Revision-Date: 2015-10-12 07:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -259,7 +259,7 @@ msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
 #: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Ei nimeä"
@@ -479,42 +479,42 @@ msgstr "Kuvaus: %s"
 msgid "Current:"
 msgstr "Nykyinen:"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
 msgstr "Päävalikko"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:56
+#: ../../src/editor/ui_menus/editor_main_menu.cc:53
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
 msgid "New Map"
 msgstr "Uusi kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:53
 msgid "New Random Map"
 msgstr "Uusi satunnaisluotu kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:66
+#: ../../src/editor/ui_menus/editor_main_menu.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Lataa kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:71
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
+#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:53
 msgid "Save Map"
 msgstr "Tallenna kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:51
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:70
 msgid "Map Options"
 msgstr "Kartta-asetukset"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu.cc:78
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "View Readme"
 msgstr "Lue käyttöohje"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu.cc:83
 msgid "Exit Editor"
 msgstr "Poistu editorista"
 
@@ -532,7 +532,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:47
 #: ../../src/ui_basic/messagebox.cc:104 ../../src/ui_fsmenu/launch_mpg.cc:88
-#: ../../src/ui_fsmenu/options.cc:119 ../../src/ui_fsmenu/options.cc:511
+#: ../../src/ui_fsmenu/options.cc:121 ../../src/ui_fsmenu/options.cc:514
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Peruuta"
@@ -545,7 +545,7 @@ msgstr ""
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:90
-#: ../../src/ui_fsmenu/mapselect.cc:92
+#: ../../src/ui_fsmenu/mapselect.cc:95
 msgid "Show original map names"
 msgstr "Näytä karttojen alkuperäiset nimet"
 
@@ -554,7 +554,7 @@ msgid "Show Filenames"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
-#: ../../src/ui_fsmenu/loadgame.cc:320
+#: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
 msgstr "Kartan nimi:"
@@ -579,32 +579,32 @@ msgid "Tags:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:114
-#: ../../src/ui_fsmenu/mapselect.cc:102
+#: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Unbalanced"
 msgstr "Epätasapainossa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
-#: ../../src/ui_fsmenu/mapselect.cc:110
+#: ../../src/ui_fsmenu/mapselect.cc:113
 msgid "Free for all"
 msgstr "Kaikki vastaan kaikki"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:116
-#: ../../src/ui_fsmenu/mapselect.cc:111
+#: ../../src/ui_fsmenu/mapselect.cc:114
 msgid "1v1"
 msgstr "1v1"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:117
-#: ../../src/ui_fsmenu/mapselect.cc:118
+#: ../../src/ui_fsmenu/mapselect.cc:121
 msgid "Teams of 2"
 msgstr "Kanden pelaajan joukkueet"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:118
-#: ../../src/ui_fsmenu/mapselect.cc:119
+#: ../../src/ui_fsmenu/mapselect.cc:122
 msgid "Teams of 3"
 msgstr "Kolmen pelaajan joukkueet"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
-#: ../../src/ui_fsmenu/mapselect.cc:120
+#: ../../src/ui_fsmenu/mapselect.cc:123
 msgid "Teams of 4"
 msgstr "Neljän pelaajan joukkueet"
 
@@ -732,40 +732,40 @@ msgstr "Luo kartta"
 msgid "Generating random map..."
 msgstr "Luodaan satunnainen kartta..."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:27
 msgid "Make Directory"
 msgstr "Luo hakemisto"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:275 ../../src/ui_fsmenu/loadgame.cc:407
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:76
+#: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
 msgid "Filename:"
 msgstr "Tiedoston nimi:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:156
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:157
 msgid "unnamed"
 msgstr "nimetön"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:245
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
 #: ../../src/wui/game_main_menu_save_game.cc:261
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tiedosto '%s' on jo olemassa. Ylikirjoitanko?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:261
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:262
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:303
 msgid "Error Saving Map!"
 msgstr "Kartan tallennus epäonnistui!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:299
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -804,11 +804,11 @@ msgstr "Pelaajien määrä"
 msgid "Player %u"
 msgstr "Pelaaja %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:278
+#: ../../src/editor/ui_menus/editor_player_menu.cc:279
 msgid "Error!"
 msgstr "Virhe!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:280
+#: ../../src/editor/ui_menus/editor_player_menu.cc:281
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -846,7 +846,7 @@ msgid "Noise height"
 msgstr "Arvo korkeuden muutos"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-#: ../../src/wui/minimap.cc:146
+#: ../../src/wui/minimap.cc:145
 msgid "Terrain"
 msgstr "Maasto"
 
@@ -949,7 +949,7 @@ msgstr "Lisään pelaajan %u"
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
 #: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:231
-#: ../../src/ui_fsmenu/mapselect.cc:104 ../../src/wui/game_message_menu.cc:563
+#: ../../src/ui_fsmenu/mapselect.cc:107 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
 msgstr "Skenaario"
@@ -1153,6 +1153,10 @@ msgstr "Valmistui %1$s, koska %2$s"
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Väliin jätetty %1$s, koska %2$s"
+
+#: ../../src/logic/production_program.cc:817
+msgid "No use for ships on this map!"
+msgstr ""
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1726,7 +1730,7 @@ msgstr "Tuntematon palvelinkomento \"%s\"!"
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../src/network/nethost.cc:2059 ../../src/wui/game_summary.cc:95
+#: ../../src/network/nethost.cc:2059 ../../src/wui/game_summary.cc:106
 msgid "Player"
 msgstr "Pelaaja"
 
@@ -1975,7 +1979,7 @@ msgstr "pois"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/scripting/lua_game.cc:1015 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -2018,7 +2022,7 @@ msgstr "Valitse kampanja"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:90
 #: ../../src/ui_fsmenu/campaign_select.cc:329
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Return to the main menu"
 msgstr "Palaa päävalikkoon"
 
@@ -2254,7 +2258,7 @@ msgid "Please select"
 msgstr "Valitse"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:175
-#: ../../src/ui_fsmenu/netsetup_lan.cc:118 ../../src/wui/minimap.cc:138
+#: ../../src/ui_fsmenu/netsetup_lan.cc:118 ../../src/wui/minimap.cc:137
 msgid "Map"
 msgstr "Kartta"
 
@@ -2471,7 +2475,7 @@ msgstr "Pelaajan nimi"
 msgid "Player’s type"
 msgstr "Pelaajan tyyppi"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:96
+#: ../../src/ui_fsmenu/launch_spg.cc:101 ../../src/wui/game_summary.cc:107
 #: ../../src/wui/multiplayersetupgroup.cc:460
 msgid "Team"
 msgstr "Joukkue"
@@ -2489,177 +2493,177 @@ msgid "Switch to position"
 msgstr "Siirry sijaintiin"
 
 #. * TRANSLATORS: %1% is a map's name.
-#: ../../src/ui_fsmenu/loadgame.cc:66
+#: ../../src/ui_fsmenu/loadgame.cc:67
 msgid "Autosave: %1%"
 msgstr "Automaattinen tallennus: %1%"
 
 #. * TRANSLATORS: %1% is a number, %2% a map's name.
-#: ../../src/ui_fsmenu/loadgame.cc:69
+#: ../../src/ui_fsmenu/loadgame.cc:70
 msgid "Autosave %1%: %2%"
 msgstr "Automaattinen tallennus %1%: %2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:89
+#: ../../src/ui_fsmenu/loadgame.cc:90
 msgid "Choose a replay"
 msgstr "Valitse toistettava peli"
 
-#: ../../src/ui_fsmenu/loadgame.cc:89
+#: ../../src/ui_fsmenu/loadgame.cc:90
 msgid "Choose a saved game"
 msgstr "Valitse tallennettu peli"
 
-#: ../../src/ui_fsmenu/loadgame.cc:134
+#: ../../src/ui_fsmenu/loadgame.cc:135
 #: ../../src/wui/game_main_menu_save_game.cc:110
 msgid "Delete"
 msgstr "Poista"
 
-#: ../../src/ui_fsmenu/loadgame.cc:156
+#: ../../src/ui_fsmenu/loadgame.cc:157
 msgid "The time that elapsed inside this game"
 msgstr "Vierähtänyt aika tämän pelin aikana"
 
-#: ../../src/ui_fsmenu/loadgame.cc:157
+#: ../../src/ui_fsmenu/loadgame.cc:158
 msgid "The number of players"
 msgstr "Pelaajien määrä"
 
-#: ../../src/ui_fsmenu/loadgame.cc:158
+#: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "The version of Widelands that this game was played under"
 msgstr "Versio Widelandista, jona tätä peliä pelattiin"
 
-#: ../../src/ui_fsmenu/loadgame.cc:159
+#: ../../src/ui_fsmenu/loadgame.cc:160
 msgid "The win condition that was set for this game"
 msgstr "Voittovaatimus, joka oli asetettu tätä peliä varten"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid "Load this replay"
 msgstr "Lataa pelin toisto"
 
-#: ../../src/ui_fsmenu/loadgame.cc:164
+#: ../../src/ui_fsmenu/loadgame.cc:165
 msgid "The map that this replay is based on"
 msgstr "Kartta, jossa tätä toistoa on pelattu "
 
-#: ../../src/ui_fsmenu/loadgame.cc:165
+#: ../../src/ui_fsmenu/loadgame.cc:166
 msgid "Delete this replay"
 msgstr "Poista pelin toisto"
 
-#: ../../src/ui_fsmenu/loadgame.cc:167 ../../src/ui_fsmenu/mapselect.cc:65
+#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the single player menu"
 msgstr "Palaa yksinpelivalikkoon"
 
-#: ../../src/ui_fsmenu/loadgame.cc:168
+#: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "Load this game"
 msgstr "Lataa tämä peli"
 
-#: ../../src/ui_fsmenu/loadgame.cc:169
+#: ../../src/ui_fsmenu/loadgame.cc:170
 msgid "The map that this game is based on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:170
+#: ../../src/ui_fsmenu/loadgame.cc:171
 msgid "Delete this game"
 msgstr "Poista tämä peli"
 
-#: ../../src/ui_fsmenu/loadgame.cc:179
+#: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "Save Date"
 msgstr "Tallennuspäivämäärä"
 
-#: ../../src/ui_fsmenu/loadgame.cc:179
+#: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "The date this game was saved"
 msgstr "Päivämäärä, jona tämä peli tallennettiin"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:186
+#: ../../src/ui_fsmenu/loadgame.cc:187
 msgid "SP = Single Player"
 msgstr "YP = yksinpeli"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:190
+#: ../../src/ui_fsmenu/loadgame.cc:191
 msgid "MP = Multiplayer"
 msgstr "MP = moninpeli"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/ui_fsmenu/loadgame.cc:193
+#: ../../src/ui_fsmenu/loadgame.cc:194
 msgid "H = Multiplayer (Host)"
 msgstr "I = Moninpeli (Isäntä)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:197
+#: ../../src/ui_fsmenu/loadgame.cc:198
 #, c-format
 msgid "Game Mode: %s."
 msgstr "Pelimuoto: %s"
 
-#: ../../src/ui_fsmenu/loadgame.cc:200
+#: ../../src/ui_fsmenu/loadgame.cc:201
 msgid "Numbers are the number of players."
 msgstr "Numerot ovat pelaajien numeroita"
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:206
+#: ../../src/ui_fsmenu/loadgame.cc:207
 msgid "Mode"
 msgstr "Tila"
 
-#: ../../src/ui_fsmenu/loadgame.cc:212
+#: ../../src/ui_fsmenu/loadgame.cc:213
 msgid "Description"
 msgstr "Kuvaus"
 
-#: ../../src/ui_fsmenu/loadgame.cc:213
+#: ../../src/ui_fsmenu/loadgame.cc:214
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:266
+#: ../../src/ui_fsmenu/loadgame.cc:267
 msgid "Save Date:"
 msgstr "Tallennuspäivämäärä"
 
-#: ../../src/ui_fsmenu/loadgame.cc:279
+#: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Do you really want to delete this replay?"
 msgstr "Haluatko oikeasti poistaa tämän toiston?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:282
+#: ../../src/ui_fsmenu/loadgame.cc:283
 msgid "Do you really want to delete this game?"
 msgstr "Oletko varma, että haluat poistaa tämän pelin?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:286
+#: ../../src/ui_fsmenu/loadgame.cc:287
 msgid "Confirm deleting file"
 msgstr "Varmista tiedostonpoisto"
 
-#: ../../src/ui_fsmenu/loadgame.cc:321
+#: ../../src/ui_fsmenu/loadgame.cc:322
 msgid "Gametime:"
 msgstr "Peliaika:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:322
+#: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr "Pelaajat:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:323
+#: ../../src/ui_fsmenu/loadgame.cc:324
 msgid "Win Condition:"
 msgstr "Tavoite:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:353
+#: ../../src/ui_fsmenu/loadgame.cc:354
 msgid "Widelands Version:"
 msgstr "Widelands versio:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:520
+#: ../../src/ui_fsmenu/loadgame.cc:521
 msgid "Today, %1%:%2%"
 msgstr "Tänään, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:533
+#: ../../src/ui_fsmenu/loadgame.cc:534
 msgid "Yesterday, %1%:%2%"
 msgstr "Eilen, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:539
+#: ../../src/ui_fsmenu/loadgame.cc:540
 msgid "%2% %1%, %3%"
 msgstr "%2% %1%, %3%"
 
@@ -2668,7 +2672,7 @@ msgstr "%2% %1%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:565
+#: ../../src/ui_fsmenu/loadgame.cc:566
 msgid "SP"
 msgstr "YP"
 
@@ -2678,7 +2682,7 @@ msgstr "YP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:573
+#: ../../src/ui_fsmenu/loadgame.cc:574
 msgid "H (%1%)"
 msgstr "I (%1%)"
 
@@ -2688,25 +2692,25 @@ msgstr "I (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:582
+#: ../../src/ui_fsmenu/loadgame.cc:583
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:598
+#: ../../src/ui_fsmenu/loadgame.cc:599
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:601
+#: ../../src/ui_fsmenu/loadgame.cc:602
 msgid "Error message:"
 msgstr "Virheviesti:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:614 ../../src/ui_fsmenu/loadgame.cc:616
+#: ../../src/ui_fsmenu/loadgame.cc:615 ../../src/ui_fsmenu/loadgame.cc:617
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Epäyhteensopiva: %s"
@@ -2731,17 +2735,17 @@ msgstr "Katso pelin toisto"
 msgid "Editor"
 msgstr "Muokkain"
 
-#: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
+#: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:69
 #: ../../src/wui/interactive_player.cc:94
 #: ../../src/wui/interactive_spectator.cc:58
 msgid "Options"
 msgstr "Asetukset"
 
-#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:88
+#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:85
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:97
+#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:92
 msgid "Authors"
 msgstr "Tekijät"
 
@@ -2764,32 +2768,32 @@ msgstr "(C) %1%-%2% Widelands Development Team toimesta"
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Lisensoitu GNU General Public License (GPL) V2.0 -lisenssillä."
 
-#: ../../src/ui_fsmenu/mapselect.cc:46
+#: ../../src/ui_fsmenu/mapselect.cc:49
 msgid "Choose a map"
 msgstr "Valitse kartta"
 
-#: ../../src/ui_fsmenu/mapselect.cc:63
+#: ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Return to the multiplayer game setup"
 msgstr "Palaa moninpelin peliasetuksiin"
 
-#: ../../src/ui_fsmenu/mapselect.cc:85
+#: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show all maps"
 msgstr "Näytä kaikki kartat"
 
-#: ../../src/ui_fsmenu/mapselect.cc:101
+#: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Official"
 msgstr "Virallinen"
 
 #. * TRANSLATORS: This is a message's type
-#: ../../src/ui_fsmenu/mapselect.cc:103 ../../src/wui/game_message_menu.cc:553
+#: ../../src/ui_fsmenu/mapselect.cc:106 ../../src/wui/game_message_menu.cc:553
 msgid "Seafaring"
 msgstr "Merenkäynti"
 
-#: ../../src/ui_fsmenu/mapselect.cc:355
+#: ../../src/ui_fsmenu/mapselect.cc:358
 msgid "Nobody"
 msgstr "Ei kukaan"
 
-#: ../../src/ui_fsmenu/mapselect.cc:356
+#: ../../src/ui_fsmenu/mapselect.cc:359
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -2865,146 +2869,146 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/ui_fsmenu/options.cc:114 ../../src/ui_fsmenu/options.cc:522
+#: ../../src/ui_fsmenu/options.cc:116 ../../src/ui_fsmenu/options.cc:525
 msgid "Advanced Options"
 msgstr "Tarkemmat asetukset"
 
-#: ../../src/ui_fsmenu/options.cc:124 ../../src/ui_fsmenu/options.cc:516
+#: ../../src/ui_fsmenu/options.cc:126 ../../src/ui_fsmenu/options.cc:519
 msgid "Apply"
 msgstr "Käytä"
 
-#: ../../src/ui_fsmenu/options.cc:130
+#: ../../src/ui_fsmenu/options.cc:132
 msgid "General Options"
 msgstr "Yleisasetukset"
 
-#: ../../src/ui_fsmenu/options.cc:136
+#: ../../src/ui_fsmenu/options.cc:138
 msgid "In-game resolution"
 msgstr "Pelin kuvantarkkuus"
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:154
 msgid "Fullscreen"
 msgstr "Koko ruutu"
 
-#: ../../src/ui_fsmenu/options.cc:163
+#: ../../src/ui_fsmenu/options.cc:165
 msgid "Grab Input"
 msgstr "Kaappaa syöte"
 
-#: ../../src/ui_fsmenu/options.cc:170
+#: ../../src/ui_fsmenu/options.cc:172
 msgid "Maximum FPS:"
 msgstr "FPS-yläraja:"
 
-#: ../../src/ui_fsmenu/options.cc:183
+#: ../../src/ui_fsmenu/options.cc:185
 msgid "Language"
 msgstr "Kieli"
 
-#: ../../src/ui_fsmenu/options.cc:199
+#: ../../src/ui_fsmenu/options.cc:201
 #: ../../src/wui/game_options_sound_menu.cc:34
 msgid "Enable Music"
 msgstr "Soita taustamusiikkia"
 
-#: ../../src/ui_fsmenu/options.cc:209
+#: ../../src/ui_fsmenu/options.cc:211
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Enable Sound Effects"
 msgstr "Laita päälle ääniefektit"
 
-#: ../../src/ui_fsmenu/options.cc:216
+#: ../../src/ui_fsmenu/options.cc:218
 msgid "In-game Options"
 msgstr "Peliasetukset"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:228
 msgid "Use single watchwindow mode"
 msgstr "Käytä yhtä katso-ikkuna muotoa"
 
-#: ../../src/ui_fsmenu/options.cc:236
+#: ../../src/ui_fsmenu/options.cc:238
 msgid "Start building road after placing a flag"
 msgstr "Aloita tien rakentaminen lipun asettamisen jälkeen"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Show buildings area preview"
 msgstr "Näytä rakennuksen työalueen esikatselu"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:260
 msgid "Snap windows only when overlapping"
 msgstr "Tasaa ikkunat vain kun ne menevät päällekkäin"
 
-#: ../../src/ui_fsmenu/options.cc:268
+#: ../../src/ui_fsmenu/options.cc:270
 msgid "Dock windows to edges"
 msgstr "Kytke ikkunat ruudun laitoihin"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:277 ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:279 ../../src/ui_fsmenu/options.cc:390
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuutti"
 msgstr[1] "minuuttia"
 
-#: ../../src/ui_fsmenu/options.cc:285
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Save game automatically every"
 msgstr "Tallenna peli automaattisesti"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:294 ../../src/ui_fsmenu/options.cc:392
+#: ../../src/ui_fsmenu/options.cc:296 ../../src/ui_fsmenu/options.cc:394
 msgid "day"
 msgid_plural "days"
 msgstr[0] "päivä"
 msgstr[1] "päivää"
 
-#: ../../src/ui_fsmenu/options.cc:302
+#: ../../src/ui_fsmenu/options.cc:304
 msgid "Remove replays older than:"
 msgstr "Poista vanhemmat toistot kuin:"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:312
+#: ../../src/ui_fsmenu/options.cc:314
 msgid "Off"
 msgstr "Pois päältä"
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:320
+#: ../../src/ui_fsmenu/options.cc:322
 msgid "Never"
 msgstr "Ei koskaan"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:367 ../../src/ui_fsmenu/options.cc:373
+#: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:375
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:406
+#: ../../src/ui_fsmenu/options.cc:408
 msgid "Try system language"
 msgstr "Kokeile oletuskieltä"
 
-#: ../../src/ui_fsmenu/options.cc:528
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "Distance for windows to snap to other panels:"
 msgstr "Etäisyys, jolla ikkunat kiinnittyvät muihin paneeleihin:"
 
-#: ../../src/ui_fsmenu/options.cc:532
+#: ../../src/ui_fsmenu/options.cc:535
 msgid "Distance for windows to snap to borders:"
 msgstr "Etäisyys, jolla ikkunat kiinnittyvät ruudun laitoihin:"
 
-#: ../../src/ui_fsmenu/options.cc:539 ../../src/ui_fsmenu/options.cc:546
-#: ../../src/ui_fsmenu/options.cc:615 ../../src/ui_fsmenu/options.cc:619
+#: ../../src/ui_fsmenu/options.cc:542 ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:618 ../../src/ui_fsmenu/options.cc:622
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pikseli"
 msgstr[1] "pikseliä"
 
-#: ../../src/ui_fsmenu/options.cc:556
+#: ../../src/ui_fsmenu/options.cc:559
 msgid "Show in-game chat with transparent background"
 msgstr "Käytä läpinäkyvää taustaa pelin chat-keskusteluissa"
 
-#: ../../src/ui_fsmenu/options.cc:566
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Play a sound at message arrival"
 msgstr "Soita ääni viestin saapuessa"
 
-#: ../../src/ui_fsmenu/options.cc:576
+#: ../../src/ui_fsmenu/options.cc:579
 msgid "Do not zip widelands data files (maps, replays and savegames)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:586
+#: ../../src/ui_fsmenu/options.cc:589
 msgid "Remove Syncstream dumps on startup"
 msgstr "Poista Syncstream tulosteet käynnistyksessä"
 
@@ -3162,7 +3166,7 @@ msgstr "Näytä seuraava rakennus"
 #: ../../src/wui/building_statistics_menu.cc:697
 #: ../../src/wui/building_statistics_menu.cc:721
 #: ../../src/wui/building_statistics_menu.cc:723
-#: ../../src/wui/productionsitewindow.cc:180
+#: ../../src/wui/productionsitewindow.cc:181
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -3242,18 +3246,18 @@ msgstr ""
 #: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/general_statistics_menu.cc:202
 #: ../../src/wui/productionsitewindow.cc:68 ../../src/wui/transport_ui.cc:61
-#: ../../src/wui/warehousewindow.cc:201
+#: ../../src/wui/warehousewindow.cc:205
 msgid "Wares"
 msgstr "Tuotteet"
 
 #: ../../src/wui/encyclopedia_window.cc:140
 #: ../../src/wui/general_statistics_menu.cc:186
-#: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:211
+#: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:215
 msgid "Workers"
 msgstr "Työläislista"
 
 #: ../../src/wui/encyclopedia_window.cc:142
-#: ../../src/wui/general_statistics_menu.cc:194 ../../src/wui/minimap.cc:174
+#: ../../src/wui/general_statistics_menu.cc:194 ../../src/wui/minimap.cc:173
 msgid "Buildings"
 msgstr "Rakennukset"
 
@@ -3391,7 +3395,7 @@ msgstr "Varasto"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:62
-#: ../../src/wui/game_options_menu.cc:117
+#: ../../src/wui/game_options_menu.cc:108
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Save Game"
 msgstr "Tallenna peli"
@@ -3442,7 +3446,7 @@ msgstr "Saapuneet viestit"
 msgid "Select"
 msgstr "Valitse"
 
-#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:97
+#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:108
 msgid "Status"
 msgstr "Tila"
 
@@ -3583,45 +3587,45 @@ msgid "Objectives"
 msgstr "Tavoitteet"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:40
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Exit Game Confirmation"
 msgstr ""
 
-#: ../../src/wui/game_options_menu.cc:41
+#: ../../src/wui/game_options_menu.cc:47
 msgid "Are you sure you wish to exit this game?"
 msgstr "Oletko varma että haluat poistua tästä pelistä?"
 
-#: ../../src/wui/game_options_menu.cc:79
+#: ../../src/wui/game_options_menu.cc:78
 msgid "README"
 msgstr "Ohje"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:81
+#: ../../src/wui/game_options_menu.cc:80
 msgid "Show general information about Widelands and keyboard shortcuts"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:90
+#: ../../src/wui/game_options_menu.cc:87
 msgid "Show the distribution licence document"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99
+#: ../../src/wui/game_options_menu.cc:94
 msgid "Show information about the Widelands Development Team"
 msgstr ""
 
-#: ../../src/wui/game_options_menu.cc:106
+#: ../../src/wui/game_options_menu.cc:99
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Ääniasetukset"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:108
+#: ../../src/wui/game_options_menu.cc:101
 msgid "Set sound effect and music options"
 msgstr "Aseta ääniefekti- ja musiikkivalinnat"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:127 ../../src/wui/game_summary.cc:87
+#: ../../src/wui/game_options_menu.cc:115 ../../src/wui/game_summary.cc:97
 msgid "Exit Game"
 msgstr "Poistu pelistä"
 
@@ -3637,65 +3641,65 @@ msgstr "Ääniefektien voimakkuus"
 msgid "Game over"
 msgstr "Peli päättyi"
 
-#: ../../src/wui/game_summary.cc:59
-msgid "Elapsed time:"
-msgstr "Käytetty aika:"
-
-#: ../../src/wui/game_summary.cc:64
+#: ../../src/wui/game_summary.cc:60
 msgid "Player info:"
 msgstr "Pelaaja info:"
 
-#: ../../src/wui/game_summary.cc:79
+#: ../../src/wui/game_summary.cc:76
+msgid "Elapsed time:"
+msgstr "Käytetty aika:"
+
+#: ../../src/wui/game_summary.cc:89
 msgid "Continue playing"
 msgstr "Jatka pelaamista"
 
-#: ../../src/wui/game_summary.cc:98
+#: ../../src/wui/game_summary.cc:109
 msgid "Time"
 msgstr "Aika"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:167
+#: ../../src/wui/game_summary.cc:178
 msgid "Lost"
 msgstr "Hävisi"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:171
+#: ../../src/wui/game_summary.cc:182
 msgid "Won"
 msgstr "Voitti"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:180
+#: ../../src/wui/game_summary.cc:191
 msgid "Resigned"
 msgstr "Antautui"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:185
+#: ../../src/wui/game_summary.cc:196
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/wui/game_summary.cc:194
+#: ../../src/wui/game_summary.cc:205
 msgid "You won!"
 msgstr "Voitit!"
 
-#: ../../src/wui/game_summary.cc:196
+#: ../../src/wui/game_summary.cc:207
 msgid "You lost."
 msgstr "Sinä hävisit"
 
-#: ../../src/wui/game_summary.cc:202
+#: ../../src/wui/game_summary.cc:213
 #, c-format
 msgid "%s won!"
 msgstr "%s voitti!"
 
-#: ../../src/wui/game_summary.cc:205
+#: ../../src/wui/game_summary.cc:216
 msgid "Team %|1$u| won!"
 msgstr "Joukkue %|1$u| voitti!"
 
-#: ../../src/wui/game_summary.cc:256
+#: ../../src/wui/game_summary.cc:266
 msgid "Score"
 msgstr "Arvosana"
 
@@ -3884,19 +3888,19 @@ msgstr "Kartan nimi"
 msgid "Soldiers"
 msgstr "Sotilaat"
 
-#: ../../src/wui/minimap.cc:153
+#: ../../src/wui/minimap.cc:152
 msgid "Owner"
 msgstr "Omistaja"
 
-#: ../../src/wui/minimap.cc:160
+#: ../../src/wui/minimap.cc:159
 msgid "Flags"
 msgstr "Liput"
 
-#: ../../src/wui/minimap.cc:167
+#: ../../src/wui/minimap.cc:166
 msgid "Roads"
 msgstr "Tiet"
 
-#: ../../src/wui/minimap.cc:181
+#: ../../src/wui/minimap.cc:180
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -3983,7 +3987,7 @@ msgid "game"
 msgstr "peli"
 
 #: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:109
+#: ../../src/wui/productionsitewindow.cc:110
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Työläinen"
@@ -4001,11 +4005,11 @@ msgstr "Seuraava taso"
 msgid "Terminate the employment of the selected worker"
 msgstr "Irtisano valittu työntekijä"
 
-#: ../../src/wui/productionsitewindow.cc:196
+#: ../../src/wui/productionsitewindow.cc:197
 msgid "(coming)"
 msgstr "(tulossa)"
 
-#: ../../src/wui/productionsitewindow.cc:196
+#: ../../src/wui/productionsitewindow.cc:197
 msgid "(vacant)"
 msgstr "(tyhjillään)"
 
@@ -4077,22 +4081,22 @@ msgstr "Suurenna kapasiteettia"
 msgid "Capacity"
 msgstr "Kapasiteetti"
 
-#: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
-#: ../../src/wui/soldierlist.cc:479
+#: ../../src/wui/soldierlist.cc:390 ../../src/wui/soldierlist.cc:404
+#: ../../src/wui/soldierlist.cc:478
 msgid "Click soldier to send away"
 msgstr "Lähetä sotilas pois napsauttamalla sotilasta"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:484
+#: ../../src/wui/soldierlist.cc:408 ../../src/wui/soldierlist.cc:483
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "HP: %1$u/%2$u AT: %3$u/%4$u DE: %5$u/%6$u EV: %7$u/%8$u"
 
-#: ../../src/wui/soldierlist.cc:421
+#: ../../src/wui/soldierlist.cc:420
 msgid "Prefer Rookies"
 msgstr "Suosi alokkaita"
 
-#: ../../src/wui/soldierlist.cc:423
+#: ../../src/wui/soldierlist.cc:422
 msgid "Prefer Heroes"
 msgstr "Suosi ammattisotilaita"
 
@@ -4144,31 +4148,31 @@ msgstr "Kulutus"
 msgid "Economy Health"
 msgstr "Talouden kunto"
 
-#: ../../src/wui/warehousewindow.cc:138
+#: ../../src/wui/warehousewindow.cc:142
 msgid "Normal policy"
 msgstr "Tavallinen politiikka"
 
-#: ../../src/wui/warehousewindow.cc:139
+#: ../../src/wui/warehousewindow.cc:143
 msgid "Preferably store selected wares here"
 msgstr "Suosi valittujen tuotteiden varastoimista tänne"
 
-#: ../../src/wui/warehousewindow.cc:140
+#: ../../src/wui/warehousewindow.cc:144
 msgid "Do not store selected wares here"
 msgstr "Älä varastoi valittuja tuotteita tänne"
 
-#: ../../src/wui/warehousewindow.cc:141
+#: ../../src/wui/warehousewindow.cc:145
 msgid "Remove selected wares from here"
 msgstr "Poista valitut tuotteet täältä"
 
-#: ../../src/wui/warehousewindow.cc:218
+#: ../../src/wui/warehousewindow.cc:222
 msgid "Wares in dock"
 msgstr "Satamavaraston tavarat"
 
-#: ../../src/wui/warehousewindow.cc:223
+#: ../../src/wui/warehousewindow.cc:227
 msgid "Workers in dock"
 msgstr "Sataman työntekijät"
 
-#: ../../src/wui/warehousewindow.cc:229
+#: ../../src/wui/warehousewindow.cc:233
 msgid "Expedition"
 msgstr "Tutkimusmatka"
 

@@ -27,73 +27,69 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
-#define CURRENT_ECONOMY_VERSION 3
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 namespace Widelands {
 
 void EconomyDataPacket::read(FileRead & fr)
 {
-	uint16_t const version = fr.unsigned_16();
-
 	try {
-		if (1 <= version && version <= CURRENT_ECONOMY_VERSION) {
-			if (2 <= version)
-				try {
-					const TribeDescr & tribe = m_eco->owner().tribe();
-					while (Time const last_modified = fr.unsigned_32()) {
-						char const * const type_name = fr.c_string();
-						uint32_t const permanent = fr.unsigned_32();
-						if (version <= 2)
-							fr.unsigned_32();
-						WareIndex i = tribe.ware_index(type_name);
-						if (i != INVALID_INDEX) {
-							if (tribe.get_ware_descr(i)->default_target_quantity() ==
-							    std::numeric_limits<uint32_t>::max())
-								log("WARNING: target quantity configured for %s, "
-								    "which should not have target quantity, "
-								    "ignoring\n",
-								    type_name);
-							else {
-								Economy::TargetQuantity & tq =
-									m_eco->m_ware_target_quantities[i];
-								if (tq.last_modified)
-									throw GameDataError
-										("duplicated entry for %s", type_name);
-								tq.permanent         = permanent;
-								tq.last_modified     = last_modified;
-							}
-						} else if ((i = tribe.worker_index(type_name)) != INVALID_INDEX) {
-							if
-								(tribe.get_worker_descr(i)->default_target_quantity()
-								 ==
-								 std::numeric_limits<uint32_t>::max())
-								log
-									("WARNING: target quantity configured for %s, "
-									 "which should not have target quantity, "
-									 "ignoring\n",
-									 type_name);
-							else {
-								Economy::TargetQuantity & tq =
-									m_eco->m_worker_target_quantities[i];
-								if (tq.last_modified)
-									throw GameDataError
-										("duplicated entry for %s", type_name);
-								tq.permanent         = permanent;
-								tq.last_modified     = last_modified;
-							}
-						} else
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			try {
+				const TribeDescr & tribe = m_eco->owner().tribe();
+				while (Time const last_modified = fr.unsigned_32()) {
+					char const * const type_name = fr.c_string();
+					uint32_t const permanent = fr.unsigned_32();
+					WareIndex i = tribe.ware_index(type_name);
+					if (i != INVALID_INDEX) {
+						if (tribe.get_ware_descr(i)->default_target_quantity() ==
+							 std::numeric_limits<uint32_t>::max())
+							log("WARNING: target quantity configured for %s, "
+								 "which should not have target quantity, "
+								 "ignoring\n",
+								 type_name);
+						else {
+							Economy::TargetQuantity & tq =
+								m_eco->m_ware_target_quantities[i];
+							if (tq.last_modified)
+								throw GameDataError
+									("duplicated entry for %s", type_name);
+							tq.permanent         = permanent;
+							tq.last_modified     = last_modified;
+						}
+					} else if ((i = tribe.worker_index(type_name)) != INVALID_INDEX) {
+						if
+							(tribe.get_worker_descr(i)->default_target_quantity()
+							 ==
+							 std::numeric_limits<uint32_t>::max())
 							log
-								("WARNING: target quantity configured for \"%s\", "
-								 "which is not a ware or worker type defined in tribe "
-								 "%s, ignoring\n",
-								 type_name, tribe.name().c_str());
-					}
-				} catch (const WException & e) {
-					throw GameDataError("target quantities: %s", e.what());
+								("WARNING: target quantity configured for %s, "
+								 "which should not have target quantity, "
+								 "ignoring\n",
+								 type_name);
+						else {
+							Economy::TargetQuantity & tq =
+								m_eco->m_worker_target_quantities[i];
+							if (tq.last_modified)
+								throw GameDataError
+									("duplicated entry for %s", type_name);
+							tq.permanent         = permanent;
+							tq.last_modified     = last_modified;
+						}
+					} else
+						log
+							("WARNING: target quantity configured for \"%s\", "
+							 "which is not a ware or worker type defined in tribe "
+							 "%s, ignoring\n",
+							 type_name, tribe.name().c_str());
 				}
-			m_eco->m_request_timerid = fr.unsigned_32();
+			} catch (const WException & e) {
+				throw GameDataError("target quantities: %s", e.what());
+			}
+		m_eco->m_request_timerid = fr.unsigned_32();
 		} else {
-			throw GameDataError("unknown version %u", version);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw GameDataError("economy: %s", e.what());
@@ -102,7 +98,7 @@ void EconomyDataPacket::read(FileRead & fr)
 
 void EconomyDataPacket::write(FileWrite & fw)
 {
-	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (WareIndex i = tribe.get_nrwares(); i;) {
 		--i;

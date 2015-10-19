@@ -34,17 +34,18 @@ void CmdCalculateStatistics::execute (Game & game) {
 		 (game.get_gametime() + STATISTICS_SAMPLE_TIME));
 }
 
-#define CMD_CALCULATE_STATISTICS_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
+
 void CmdCalculateStatistics::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_CALCULATE_STATISTICS_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("calculate statistics function: %s", e.what());
 	}
@@ -52,7 +53,7 @@ void CmdCalculateStatistics::read
 void CmdCalculateStatistics::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(CMD_CALCULATE_STATISTICS_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 }

@@ -37,17 +37,17 @@
 
 namespace Widelands {
 
-#define LOWEST_SUPPORTED_VERSION           1
-#define PRIORITIES_INTRODUCED_IN_VERSION   2
-#define CURRENT_PACKET_VERSION             3
+constexpr uint16_t kCurrentPacketVersion = 3;
 
+// constants to handle special building types
+constexpr uint8_t kTypeBuilding = 0;
+constexpr uint8_t kTypeConstructionSite = 1;
+constexpr uint8_t kTypeDismantleSite = 2;
 
-void MapBuildingPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &       mol)
-{
+void MapBuildingPacket::read(FileSystem& fs,
+									  EditorGameBase& egbase,
+									  bool const skip,
+									  MapObjectLoader& mol) {
 	if (skip)
 		return;
 	FileRead fr;
@@ -55,7 +55,7 @@ void MapBuildingPacket::read
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			uint16_t const width  = map.get_width ();
 			uint16_t const height = map.get_height();
@@ -63,10 +63,10 @@ void MapBuildingPacket::read
 			for (c.y = 0; c.y < height; ++c.y) {
 				for (c.x = 0; c.x < width; ++c.x) {
 					if (fr.unsigned_8()) {
-						PlayerNumber const p                   = fr.unsigned_8 ();
+						PlayerNumber  const p                   = fr.unsigned_8 ();
 						Serial        const serial              = fr.unsigned_32();
 						char  const * const name                = fr.c_string   ();
-						uint8_t       const special_type        = fr.unsigned_8 ();
+						uint8_t const building_type             = fr.unsigned_8 ();
 
 						//  No building lives on more than one main place.
 
@@ -83,9 +83,9 @@ void MapBuildingPacket::read
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building * building;
-							if (special_type == 1) { // Constructionsite
+							if (building_type == kTypeConstructionSite) {
 								building = &egbase.warp_constructionsite(c, p, index, true);
-							} else if (special_type == 2) {// DismantleSite
+							} else if (building_type == kTypeDismantleSite) {
 								Building::FormerBuildings formers = {index};
 								building = &egbase.warp_dismantlesite(c, p, true, formers);
 							} else {
@@ -94,8 +94,7 @@ void MapBuildingPacket::read
 
 							mol.register_object<Building> (serial, *building);
 
-							if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
-								read_priorities (*building, fr);
+							read_priorities (*building, fr);
 
 							//  Reference the players tribe if in editor.
 							if (g_gr) // but not on dedicated servers ;)
@@ -105,9 +104,9 @@ void MapBuildingPacket::read
 					}
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("buildings: %s", e.what());
 	}
@@ -123,7 +122,7 @@ void MapBuildingPacket::write
 	FileWrite fw;
 
 	// now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
@@ -140,18 +139,19 @@ void MapBuildingPacket::write
 			fw.unsigned_8(building->owner().player_number());
 			fw.unsigned_32(mos.register_object(*building));
 
-			upcast(PartiallyFinishedBuilding const, pfb, building);
-			fw.c_string
-				((pfb ? *pfb->m_building : building->descr())
-				 .name().c_str());
+			if (building->descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+				upcast(PartiallyFinishedBuilding const, pfb, building);
+				fw.c_string((*pfb->m_building).name().c_str());
+				fw.unsigned_8(kTypeConstructionSite);
 
-			if (!pfb)
-				fw.unsigned_8(0);
-			else {
-				if (is_a(ConstructionSite, pfb))
-					fw.unsigned_8(1);
-				else // DismantleSite
-					fw.unsigned_8(2);
+			} else if (building->descr().type() == MapObjectType::DISMANTLESITE) {
+				upcast(PartiallyFinishedBuilding const, pfb, building);
+				fw.c_string((*pfb->m_building).name().c_str());
+				fw.unsigned_8(kTypeDismantleSite);
+
+			} else {
+				fw.c_string(building->descr().name().c_str());
+				fw.unsigned_8(kTypeBuilding);
 			}
 
 			write_priorities(*building, fw);

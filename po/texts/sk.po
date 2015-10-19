@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-15 11:53+0000\n"
+"POT-Creation-Date: 2015-10-12 07:45+0000\n"
+"PO-Revision-Date: 2015-10-13 18:01+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -534,7 +534,8 @@ msgstr "Tieto stránky môžu byť kompletnejšie a novšie ako tento súbor a m
 msgid "Keyboard shortcuts"
 msgstr "Klávesové skratky"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr "MEDZERNÍK:"
 
@@ -542,7 +543,8 @@ msgstr "MEDZERNÍK:"
 msgid "toggles if building spaces are shown"
 msgstr "prepne zobrazenie stavebných miest"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr "C:"
 
@@ -550,7 +552,8 @@ msgstr "C:"
 msgid "toggles census"
 msgstr "prepne zobrazovanie názvov budov"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr "F:"
 
@@ -558,15 +561,17 @@ msgstr "F:"
 msgid "toggles fullscreen"
 msgstr "prepne režim celej obrazovky"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "prepne zobrazenie hlavného menu"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr "M:"
 
@@ -574,7 +579,8 @@ msgstr "M:"
 msgid "toggles minimap"
 msgstr "prepne minimapu"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr "P:"
 
@@ -582,7 +588,8 @@ msgstr "P:"
 msgid "toggles player menu"
 msgstr "prepne menu hráčov"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr "T:"
 
@@ -590,7 +597,8 @@ msgstr "T:"
 msgid "toggles tools menu"
 msgstr "prepne menu nástrojov"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr "I:"
 
@@ -598,7 +606,8 @@ msgstr "I:"
 msgid "activates information tool"
 msgstr "aktivuje informačný nástroj"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr "CTRL+L:"
 
@@ -606,7 +615,8 @@ msgstr "CTRL+L:"
 msgid "load map"
 msgstr "načíta mapu"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr "CTRL+S:"
 
@@ -614,7 +624,8 @@ msgstr "CTRL+S:"
 msgid "save map"
 msgstr "uloží mapu"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr "1-0:"
 
@@ -622,7 +633,8 @@ msgstr "1-0:"
 msgid "changes tool size"
 msgstr "menia veľkosť nástroja"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr "SHIFT (pri podržaní):"
 
@@ -630,7 +642,8 @@ msgstr "SHIFT (pri podržaní):"
 msgid "selects first alternative tool while pressed"
 msgstr "počas toho, ako ho držíte stlačený, vyberie sa prvý alternatívny nástroj"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr "ALT (pri podržaní):"
 

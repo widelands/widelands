@@ -95,7 +95,7 @@ Request::~Request()
 }
 
 // Modified to allow Requirements and SoldierRequests
-#define REQUEST_VERSION 6
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 /**
  * Read this request from a file
@@ -109,8 +109,8 @@ void Request::read
 	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const version = fr.unsigned_16();
-		if (version == 6) {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
 			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.c_string();
 			WareIndex const wai = tribe.ware_index(type_name);
@@ -167,8 +167,9 @@ void Request::read
 			m_requirements.read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw wexception("request: %s", e.what());
 	}
@@ -180,7 +181,7 @@ void Request::read
 void Request::write
 	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
-	fw.unsigned_16(REQUEST_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 

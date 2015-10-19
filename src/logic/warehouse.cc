@@ -581,10 +581,21 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		const WareList& workers = get_workers();
 		for (WareIndex id = 0; id < workers.get_nrwareids(); ++id) {
 			const uint32_t stock = workers.stock(id);
-			for (uint32_t i = 0; i < stock; ++i) {
-				launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+			//separate behaviour for the case of loading the game
+			//(which does save/destroy/reload) and simply destroying ingame
+			if (game->is_loaded())
+			{
+				//this game is really running
+				for (uint32_t i = 0; i < stock; ++i) {
+					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+				}
+				assert(!m_incorporated_workers.count(id) || m_incorporated_workers[id].empty());
 			}
-			assert(!m_incorporated_workers.count(id) || m_incorporated_workers[id].empty());
+			else
+			{
+				//we are in the load-game sequence...
+				remove_workers(id, stock);
+			}
 		}
 	}
 	m_incorporated_workers.clear();
