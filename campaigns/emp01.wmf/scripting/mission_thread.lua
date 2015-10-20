@@ -13,7 +13,7 @@ function mission_thread()
    -- Show the sea
    p1:reveal_fields(sea:region(6))
    local ship = p1:place_ship(sea)
-   sleep(200)
+   sleep(1000)
    campaign_message_box(diary_page_2)
    -- Hide the sea after 5 seconds
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
@@ -44,7 +44,7 @@ function mission_thread()
    campaign_message_box(amalea_2)
    p1:allow_buildings{"empire_sawmill"}
    o = add_campaign_objective(obj_build_sawmill_and_lumberjacks)
-   while not check_for_buildings(p1, { lempire_umberjacks_house = 3, empire_sawmill = 1})
+   while not check_for_buildings(p1, { empire_lumberjacks_house = 3, empire_sawmill = 1})
       do sleep(2343) end
    o.done = true
 
