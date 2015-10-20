@@ -3,13 +3,13 @@ run(function()
    game.desired_speed = 10 * 1000
 
    create_first_port()
-   create_second_port()
+   create_northern_port()
 
    start_building_farm()
-   port1():set_wares{
+   southern_port():set_wares{
       blackwood = 1,
    }
-   port1():set_workers{
+   southern_port():set_workers{
       builder = 1,
    }
 
@@ -23,8 +23,8 @@ run(function()
    -- kill the farm while the blackwood is in transit.
    farm():remove()
 
-   while not (port2():get_wares("blackwood") == 1
-      and port2():get_workers("builder") == 1) do
+   while not (northern_port():get_wares("blackwood") == 1
+      and northern_port():get_workers("builder") == 1) do
       sleep(100)
    end
 

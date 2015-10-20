@@ -16,11 +16,15 @@ function create_first_port()
    })
 end
 
-function port1()
+function southern_port()
    return map:get_field(16, 16).immovable
 end
 
-function create_second_port()
+function southern_port()
+   return map:get_field(16, 16).immovable
+end
+
+function create_northern_port()
    prefilled_buildings(p1,
    { "port", 16, 2,
       wares = {},
@@ -29,7 +33,15 @@ function create_second_port()
    })
 end
 
-function port2()
+function northern_port()
+   local o = map:get_field(16, 2).immovable
+   if o and o.descr.name == "port" then
+      return o
+   end
+   return nil
+end
+
+function northern_port()
    local o = map:get_field(16, 2).immovable
    if o and o.descr.name == "port" then
       return o

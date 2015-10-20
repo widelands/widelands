@@ -242,12 +242,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State&) {
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		// The ship has lost its destination (port is gone perhaps) so
-		// stop and start being idle
+		// The ship has no destination, so let it sleep
 		start_task_idle(game, descr().main_animation(), 10000);
-		// ...but let the fleet recalcualte ships destinations (this ship
-		// needs new destination)
-		m_fleet->update(game);
 		return true;
 	}
 

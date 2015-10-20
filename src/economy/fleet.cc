@@ -578,8 +578,13 @@ void Fleet::remove_port(EditorGameBase & egbase, PortDock * port)
 			Economy::check_split(m_ports[0]->base_flag(), port->base_flag());
 	}
 
-	if (m_ships.empty() && m_ports.empty())
+	if (m_ships.empty() && m_ports.empty()) {
 		remove(egbase);
+	} else if (upcast(Game, game, &egbase)) {
+		// Some ship perhaps losses its destination now, so new destination must be appointed (if any)
+		molog("Port removed from fleet, triggering fleet update\n");
+		update(egbase);
+	}
 }
 
 /**

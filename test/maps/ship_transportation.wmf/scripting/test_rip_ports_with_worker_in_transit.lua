@@ -3,10 +3,10 @@ run(function()
    game.desired_speed = 10 * 1000
 
    create_first_port()
-   create_second_port()
+   create_northern_port()
 
    start_building_farm()
-   port1():set_workers{
+   southern_port():set_workers{
       builder = 1,
    }
 
@@ -15,17 +15,17 @@ run(function()
    assert_equal(p1:get_workers("builder"), 1)
 
    -- kill the port while the builder is in transit.
-   local flag_oversea = port2().flag
-   port2():remove()
+   local flag_oversea = northern_port().flag
+   northern_port():remove()
    assert_equal(p1:get_workers("builder"), 1)
    sleep(1000)
 
    assert_equal(p1:get_workers("builder"), 1)
-   assert_equal(ship.debug_economy, port1().debug_economy)
+   assert_equal(ship.debug_economy, southern_port().debug_economy)
    assert_not_equal(ship.debug_economy, flag_oversea.debug_economy)
 
    -- now kill the first port too.
-   port1():remove()
+   southern_port():remove()
    sleep(1000)
 
    stable_save("no_ports")
@@ -46,7 +46,7 @@ run(function()
    assert_equal(p1:get_workers("builder"), 1)
 
    -- Wait (and hope) that the ship will eventually return the builder.
-   while port1():get_workers("builder") == 0 do
+   while southern_port():get_workers("builder") == 0 do
       sleep(5000)
    end
 
