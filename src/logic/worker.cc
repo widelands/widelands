@@ -1317,12 +1317,10 @@ void Worker::create_needed_experience(Game & /* game */)
  * needed_experience he levels
  */
 WareIndex Worker::gain_experience(Game & game) {
-	if (descr().get_needed_experience() == INVALID_INDEX) {
-		return INVALID_INDEX;
-	} else if (++m_current_exp < descr().get_needed_experience()) {
-		return level(game);
-	}
-	return INVALID_INDEX;
+	return (descr().get_needed_experience() == INVALID_INDEX ||
+			  ++m_current_exp < descr().get_needed_experience()) ?
+				INVALID_INDEX :
+				level(game);
 }
 
 

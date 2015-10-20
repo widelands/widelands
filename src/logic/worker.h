@@ -132,7 +132,7 @@ public:
 	WareIndex level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return descr().get_needed_experience() != -1;}
+	bool needs_experience() const {return descr().get_needed_experience() != INVALID_INDEX;}
 
 	// debug
 	void log_general_info(const EditorGameBase &) override;
