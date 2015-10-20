@@ -138,8 +138,7 @@ int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 
 Command::~Command () {}
 
-
-#define BASE_CMD_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 /**
  * Write variables from the base command to a file.
@@ -155,8 +154,7 @@ void GameLogicCommand::write
 #endif
 	 MapObjectSaver &)
 {
-	// First version
-	fw.unsigned_16(BASE_CMD_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write duetime
 	assert(egbase.get_gametime() <= duetime());
@@ -173,15 +171,15 @@ void GameLogicCommand::read
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == BASE_CMD_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			set_duetime(fr.unsigned_32());
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("game logic: %s", e.what());
 	}

@@ -40,6 +40,18 @@ class FontCache;
 class Parser;
 class RenderNode;
 
+struct RendererStyle {
+	RendererStyle(const std::string& font_face_, uint8_t font_size_,
+						  uint16_t remaining_width_, uint16_t overall_width_) :
+		font_face(font_face_), font_size(font_size_),
+		remaining_width(remaining_width_), overall_width(overall_width_) {}
+
+	std::string font_face;
+	uint8_t font_size;
+	uint16_t remaining_width;
+	uint16_t overall_width;
+};
+
 /**
  * Wrapper object around a font.
  *
@@ -104,6 +116,7 @@ private:
 	ImageCache* const image_cache_;  // Not owned.
 	TextureCache* const texture_cache_;  // Not owned.
 	UI::FontSet* const fontset_;  // Not owned.
+	RendererStyle renderer_style_; // Properties that all render nodes need to know about
 };
 
 }

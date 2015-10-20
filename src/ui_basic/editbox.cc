@@ -30,6 +30,8 @@
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
+// TODO(GunChleoc): Arabic: Fix positioning for Arabic
+
 namespace UI {
 
 struct EditBoxImpl {

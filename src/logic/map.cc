@@ -1396,7 +1396,7 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 }
 
 /// \returns true, if Coordinates are in port space list
-bool Map::is_port_space(const Coords& c) {
+bool Map::is_port_space(const Coords& c) const {
 	return m_port_spaces.count(c);
 }
 
@@ -1408,7 +1408,6 @@ void Map::set_port_space(Coords c, bool allowed) {
 		m_port_spaces.erase(c);
 	}
 }
-
 
 /**
  * Calculate the (Manhattan) distance from a to b

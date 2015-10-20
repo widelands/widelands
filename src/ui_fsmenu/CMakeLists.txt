@@ -32,8 +32,6 @@ wl_library(ui_fsmenu
     options.h
     singleplayer.cc
     singleplayer.h
-    suggested_teams_box.cc
-    suggested_teams_box.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -61,6 +59,6 @@ wl_library(ui_fsmenu
     sound
     ui_basic
     widelands_ball_of_mud
-    wui
     wui_chat_ui
+    wui_common
 )

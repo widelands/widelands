@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-10-04 07:51+0000\n"
+"PO-Revision-Date: 2015-10-04 08:22+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "A gazdaságod és beállításai"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
-msgstr ""
+msgstr "Gazdaság"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
@@ -69,7 +70,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "A fogadó lángokban áll!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"

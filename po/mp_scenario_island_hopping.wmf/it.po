@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-09-21 19:04+0000\n"
+"PO-Revision-Date: 2015-09-24 21:20+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,69 +32,18 @@ msgid "15 minutes"
 msgstr "15 minuti"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:99
+#: Hopping.wmf/scripting/multiplayer_init.lua:98
 msgid "Game Status"
 msgstr "Stato della partita"
 
+#. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:117
-msgid "%s Log"
-msgid_plural "%s Logs"
-msgstr[0] "%s tronco"
-msgstr[1] "%s tronchi"
+#: Hopping.wmf/scripting/multiplayer_init.lua:108
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:119
-msgid "%s Plank"
-msgid_plural "%s Planks"
-msgstr[0] "%s asse"
-msgstr[1] "%s assi"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:121
-msgid "%s Stone"
-msgid_plural "%s Stones"
-msgstr[0] "%s pietra"
-msgstr[1] "%s pietre"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:123
-msgid "%s Spidercloth"
-msgid_plural "%s Spidercloths"
-msgstr[0] "%s stoffa di ragno"
-msgstr[1] "%s stoffe di ragno"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:125
-msgid "%s Corn"
-msgid_plural "%s Corn"
-msgstr[0] "%s granoturco"
-msgstr[1] "%s granoturco"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:127
-msgid "%s Coal"
-msgid_plural "%s Coal"
-msgstr[0] "%s carbone"
-msgstr[1] "%s carbone"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:129
-msgid "%s Iron Ore"
-msgid_plural "%s Iron Ore"
-msgstr[0] "%s ferro grezzo"
-msgstr[1] "%s ferro grezzo"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:131
-msgid "%s Gold Ore"
-msgid_plural "%s Gold Ore"
-msgstr[0] "%s oro grezzo"
-msgstr[1] "%s oro grezzo"
-
-#. TRANSLATORS: number + resource name, e.g. '1 stone'
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Regole"

@@ -84,10 +84,10 @@ ProductionSiteWindow::ProductionSiteWindow
 		m_worker_table->add_column(60, _("Exp"));
 		m_worker_table->add_column(150, _("Next Level"));
 
-		for
-			(unsigned int i = 0;
-			 i < productionsite().descr().nr_working_positions(); ++i)
+		for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
 			m_worker_table->add(i);
+		}
+		m_worker_table->fit_height();
 
 		if (igbase().can_act(building().owner().player_number())) {
 			m_worker_caps->add_inf_space();
@@ -102,6 +102,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		}
 
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
+		worker_box->add_space(4);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
 			("workers", g_gr->images().get(pic_tab_workers),

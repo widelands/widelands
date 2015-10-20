@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-10-04 07:51+0000\n"
+"PO-Revision-Date: 2015-10-04 08:52+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr "Birodalom"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr "A birodalom bemutatása"
+msgstr "Könnyű. A birodalom bemutatása"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -166,7 +166,7 @@ msgstr "Végül megjavították a hajót, így Lutius és emberei folytatták ú
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr "Alapvető kezelés"
+msgstr "Alapvető vezérlés"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
@@ -205,15 +205,15 @@ msgstr "Gazdaság"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Widelands gazdaságod finomhangolására. Némi tapasztalattal már rendelkező játékosoknak ajánljuk."
+msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Widelands gazdaságod finomhangolására. Némi tapasztalattal rendelkező játékosoknak ajánljuk. "
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
-msgstr "Atoll"
+msgstr "Korallzátony"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr "Ki lesz a nagy atoll igazi királya?"
+msgstr "Ki lesz a nagy korallzátony igazi királya?"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -228,7 +228,7 @@ msgstr "Öröm ezen a gönyörű hasadékvidéken letelepedni. De csak hosszú �
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "Sakktábla"
+msgstr "Sakk-matt"
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

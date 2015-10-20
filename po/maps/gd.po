@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"POT-Creation-Date: 2015-09-14 07:52+0000\n"
+"PO-Revision-Date: 2015-09-15 11:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "O chionn sia mìosan, chaidh, Lutius – ceann-armailt òg na h-Impireachd – a chur còmhla ri 150 saighdear dha na crìochan taobh thall nan coilltean tuathach far an robh treubhan nan tùsanach a’ briseadh a-steach do ranntair na h-Impireachd. B’ e a dhleastanas tìr na h-Impireachd a dhìon. Bha a h-uile càil socair aig an toiseach. Bhruidhinn e ri clann nan tùsanach fiù ’s agus bha beatha sìtheil fainear dha – ri taobh na muinntir àrsaidh ud. Thòisich e a’ faireachdainn sàbhailte agus cha tug am feachd aige aire air an t-sluagh a bhiodh nàimhdeil ma dh’fhaoidte tuilleadh. Seo na mhill iad. B’ e oidhche sa Mhàirt a bh’ ann nuair a thug 100 coisridh nan tùsanach ionnsaigh air an fheachd aige nach robh ullamh ’s chaidh an sgaoileadh fada ’s farsaing. ’S gann gun do mhair e fhèin is grunnan dhe na saighdearan aige beò."
+msgstr "O chionn sia mìosan, chaidh, Lutius – ceann-armailt òg na h-Impireachd – a chur còmhla ri 150 saighdear dha na crìochan taobh thall nan coilltean tuathach far an robh treubhan nan tùsanach a’ briseadh a-steach do ranntair na h-Impireachd. B’ e a dhleastanas tìr na h-Impireachd a dhìon. Bha a h-uile càil socair aig an toiseach. Bhruidhinn e ri clann nan tùsanach fiù ’s agus bha beatha sìtheil fainear dha – ri taobh na muinntir àrsaidh ud. Thòisich e a’ faireachdainn sàbhailte agus cha dug am feachd aige aire air an t-sluagh a bhiodh nàimhdeil ma dh’fhaoidte tuilleadh. Seo na mhill iad. B’ e oidhche sa Mhàirt a bh’ ann nuair a thug 100 coisridh nan tùsanach ionnsaigh air an fheachd aige nach robh ullamh ’s chaidh an sgaoileadh fada ’s farsaing. ’S gann gun do mhair e fhèin is grunnan dhe na saighdearan aige beò."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -161,7 +161,7 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chuideachd orra àite math a lorg far an tòisicheadh iad beatha ùr. Cha tug e ach beagan làithean gus an do ràinig iad eilean blàth uaine le coltas a’ phàrrais air. Thòisich iad air an àite-còmhnaidh ùr aca a rùrachadh le deagh shunnd."
+msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chuideachd orra àite math a lorg far an tòisicheadh iad beatha ùr. Cha dug e ach beagan làithean gus an do ràinig iad eilean blàth uaine le coltas a’ phàrrais air. Thòisich iad air an àite-còmhnaidh ùr aca a rùrachadh le deagh shunnd."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
@@ -427,7 +427,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many, and will the prophecy come true?"
-msgstr "Tha seann-sgeulachd a’ toirt rabhadh dhuinn gun tig cogadh uabhasach air na seachd rìoghachdan seo aig a bha soirbheachas fad linntean. An robh am brathadh mu deireadh agad cus is an tig an fhàisneachd gu ìre?"
+msgstr "Tha seann-sgeulachd a’ toirt rabhadh dhuinn gun dig cogadh uabhasach air na seachd rìoghachdan seo aig a bha soirbheachas fad linntean. An robh am brathadh mu deireadh agad cus is an tig an fhàisneachd gu ìre?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -600,7 +600,7 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile "
 "tribes."
-msgstr "Tha cuid ag ràdh gun do chum an tìr dho-inntrig fada tuath fiù ’s an luchd-tuineachaidh ’s na gaisgich as dàna air falbh. ’S e seann choilltean mòra dìomhair a bh’ ann làn bheathaichean sealgair mòra eadar talamh fliuch ’s cnuic. Dh’innseadh an fheadhainn a thill beò às mu thogalaichean mòra le sgeadachadh snaidhte ’s òir orra agus gun tàinig an t-òr à monaidhean àite air choireigin san fhàsach. Bliadhnaichean mòra às dèidh seo, chan eil ach fuighill còmhdaichte le còinneach ’s craobhan air fhàgail dhen bheatha mhath a b’ àbhaist a bhith ann. Cha toir an cruthan ach beachd farsaing dhut mu cheàird an luchd-togail àrsaidh. Chan eil fios aig duine carson a dh’fhalbh iad. Chan eil fios aig duine carson. Thathar ag ràdh nach eil dad a’ bacadh an rathad dhan bheairteas a-nis. Ach gheibh mòran dhiubh bàs air an reubadh le madaidhean-allaidh, air an dol fodha ann am boglach... le treubhan nàimhdeil timcheall orra."
+msgstr "Tha cuid ag ràdh gun do chum an tìr dho-inntrig fada tuath fiù ’s an luchd-tuineachaidh ’s na gaisgich as dàna air falbh. ’S e seann choilltean mòra dìomhair a bh’ ann làn bheathaichean sealgair mòra eadar talamh fliuch ’s cnuic. Dh’innseadh an fheadhainn a thill beò às mu thogalaichean mòra le sgeadachadh snaidhte ’s òir orra agus gun dàinig an t-òr à monaidhean àite air choireigin san fhàsach. Bliadhnaichean mòra às dèidh seo, chan eil ach fuighill còmhdaichte le còinneach ’s craobhan air fhàgail dhen bheatha mhath a b’ àbhaist a bhith ann. Cha doir an cruthan ach beachd farsaing dhut mu cheàird an luchd-togail àrsaidh. Chan eil fios aig duine carson a dh’fhalbh iad. Chan eil fios aig duine carson. Thathar ag ràdh nach eil dad a’ bacadh an rathad dhan bheairteas a-nis. Ach gheibh mòran dhiubh bàs air an reubadh le madaidhean-allaidh, air an dol fodha ann am boglach... le treubhan nàimhdeil timcheall orra."
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"

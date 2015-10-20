@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
+"POT-Creation-Date: 2015-09-21 19:04+0000\n"
+"PO-Revision-Date: 2015-09-21 19:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -31,69 +31,18 @@ msgid "15 minutes"
 msgstr "15 minuten"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:99
+#: Hopping.wmf/scripting/multiplayer_init.lua:98
 msgid "Game Status"
 msgstr "Spelstatus"
 
+#. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:117
-msgid "%s Log"
-msgid_plural "%s Logs"
-msgstr[0] "%s Boomstam"
-msgstr[1] "%s Boomstammen"
+#: Hopping.wmf/scripting/multiplayer_init.lua:108
+msgid "%1$dx %2$s"
+msgstr ""
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:119
-msgid "%s Plank"
-msgid_plural "%s Planks"
-msgstr[0] "%s Plank"
-msgstr[1] "%s Planken"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:121
-msgid "%s Stone"
-msgid_plural "%s Stones"
-msgstr[0] "%s Steen"
-msgstr[1] "%s Stenen"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:123
-msgid "%s Spidercloth"
-msgid_plural "%s Spidercloths"
-msgstr[0] "%s Spinnendoek"
-msgstr[1] "%s Spinnendoek"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:125
-msgid "%s Corn"
-msgid_plural "%s Corn"
-msgstr[0] "%s Maïs"
-msgstr[1] "%s Maïs"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:127
-msgid "%s Coal"
-msgid_plural "%s Coal"
-msgstr[0] "%s Kolen"
-msgstr[1] "%s Kolen"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:129
-msgid "%s Iron Ore"
-msgid_plural "%s Iron Ore"
-msgstr[0] "%s IJzererts"
-msgstr[1] "%s IJzererts"
-
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:131
-msgid "%s Gold Ore"
-msgid_plural "%s Gold Ore"
-msgstr[0] "%s Gouderts"
-msgstr[1] "%s Gouderts"
-
-#. TRANSLATORS: number + resource name, e.g. '1 stone'
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:245 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Spelregels"

@@ -50,13 +50,14 @@ void CmdDestroyMapObject::execute(Game & game)
 		obj->destroy (game);
 }
 
-#define CMD_DESTROY_MAP_OBJECT_VERSION 1
+constexpr uint16_t kCurrentPacketVersionDestroyMapObject = 1;
+
 void CmdDestroyMapObject::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
+		if (packet_version == kCurrentPacketVersionDestroyMapObject) {
 			GameLogicCommand::read(fr, egbase, mol);
 			if (Serial const serial = fr.unsigned_32())
 				try {
@@ -66,9 +67,9 @@ void CmdDestroyMapObject::read
 				}
 			else
 				obj_serial = 0;
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersionDestroyMapObject);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("destroy map object: %s", e.what());
 	}
@@ -77,7 +78,7 @@ void CmdDestroyMapObject::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(CMD_DESTROY_MAP_OBJECT_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionDestroyMapObject);
 
 	// Write base classes
 	GameLogicCommand::write(fw, egbase, mos);
@@ -100,13 +101,14 @@ void CmdAct::execute(Game & game)
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
-#define CMD_ACT_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdAct = 1;
+
 void CmdAct::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_ACT_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdAct) {
 			GameLogicCommand::read(fr, egbase, mol);
 			if (Serial const object_serial = fr.unsigned_32())
 				try {
@@ -118,9 +120,9 @@ void CmdAct::read
 			else
 				obj_serial = 0;
 			arg = fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdAct);
+		}
 	} catch (const WException & e) {
 		throw wexception("act: %s", e.what());
 	}
@@ -129,7 +131,7 @@ void CmdAct::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(CMD_ACT_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdAct);
 
 	// Write base classes
 	GameLogicCommand::write(fw, egbase, mos);
@@ -483,7 +485,6 @@ void MapObject::molog(char const * fmt, ...) const
 	log("MO(%u,%s): %s", m_serial, descr().name().c_str(), buffer);
 }
 
-
 bool MapObject::is_reserved_by_worker() const
 {
 	return m_reserved_by_worker;
@@ -495,7 +496,7 @@ void MapObject::set_reserved_by_worker(bool reserve)
 }
 
 
-#define CURRENT_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersionMapObject = 2;
 
 /**
  * Load the entire data package from the given file.
@@ -514,9 +515,10 @@ void MapObject::Loader::load(FileRead & fr)
 			throw wexception
 				("header is %u, expected %u", header, HeaderMapObject);
 
-		uint8_t const version = fr.unsigned_8();
-		if (version <= 0 || version > CURRENT_SAVEGAME_VERSION)
-			throw GameDataError("unknown/unhandled version %u", version);
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersionMapObject);
+		}
 
 		Serial const serial = fr.unsigned_32();
 		try {
@@ -525,8 +527,9 @@ void MapObject::Loader::load(FileRead & fr)
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		if (version == CURRENT_SAVEGAME_VERSION)
+		if (packet_version == kCurrentPacketVersionMapObject) {
 			get_object()->m_reserved_by_worker = fr.unsigned_8();
+		}
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
@@ -565,7 +568,7 @@ void MapObject::save
 	(EditorGameBase &, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderMapObject);
-	fw.unsigned_8(CURRENT_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
 	fw.unsigned_8(m_reserved_by_worker);

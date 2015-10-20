@@ -64,10 +64,14 @@ m_warehouse(wh)
 {
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
-	if (type == Widelands::wwWORKER) {
-		Widelands::WareIndex carrier_index =
-			m_warehouse.descr().tribe().worker_index("carrier");
-		hide_ware(carrier_index);
+	if (type == Widelands::wwWORKER)
+	{
+		const std::vector<Widelands::WareIndex> & worker_types_without_cost =
+			m_warehouse.descr().tribe().worker_types_without_cost();
+		for (size_t i = 0; i < worker_types_without_cost.size(); ++i)
+		{
+			hide_ware(worker_types_without_cost.at(i));
+		}
 	}
 }
 

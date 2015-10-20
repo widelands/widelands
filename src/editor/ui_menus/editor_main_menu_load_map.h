@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,40 +20,22 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H
 
-#include "io/filesystem/filesystem.h"
-#include "ui_basic/window.h"
+#include <string>
 
-struct EditorInteractive;
-namespace UI {
-struct Button;
-template <typename T> struct Listselect;
-struct Textarea;
-struct MultilineTextarea;
-}
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/editor_main_menu_load_or_save_map.h"
 
 /**
  * Choose a filename and save your brand new created map
 */
-struct MainMenuLoadMap : public UI::Window {
-	MainMenuLoadMap(EditorInteractive &);
+struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
+	MainMenuLoadMap(EditorInteractive& parent);
+
+protected:
+	void clicked_ok() override;
 
 private:
-	void clicked_ok();
-	void selected      (uint32_t);
-	void double_clicked(uint32_t);
-
-	void fill_list();
-
-	UI::MultilineTextarea * m_name;
-	UI::Textarea * m_author, * m_size, * m_nrplayers;
-	UI::MultilineTextarea * m_descr;
-	UI::Listselect<const char *> * m_ls;
-	UI::Button * m_ok_btn;
-
-	std::string m_basedir;
-	std::string m_curdir;
-	std::string m_parentdir;
-	FilenameSet m_mapfiles;
+	void entry_selected();
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

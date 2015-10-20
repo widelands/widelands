@@ -409,7 +409,6 @@ void WLApplication::run()
 
 				// Load the requested map
 				Widelands::Map map;
-				i18n::Textdomain td("maps");
 				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
@@ -420,18 +419,8 @@ void WLApplication::run()
 				}
 				ml->preload_map(true);
 
-				// fill in the mapdata structure
-				MapData mapdata;
-				mapdata.filename = m_filename;
-				mapdata.name = map.get_name();
-				mapdata.authors.parse(map.get_author());
-				mapdata.description = map.get_description();
-				mapdata.nrplayers = map.get_nrplayers();
-				mapdata.width = map.get_width();
-				mapdata.height = map.get_height();
-
 				// set the map
-				netgame.set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
+				netgame.set_map(map.get_name(), map.get_filename(), map.get_nrplayers());
 
 				// run the network game
 				// -> autostarts when a player sends "/start" as pm to the server.

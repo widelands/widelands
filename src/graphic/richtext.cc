@@ -22,9 +22,11 @@
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h" // Needed for fontset's direction
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
 
@@ -32,7 +34,7 @@ namespace UI {
 
 namespace {
 int32_t const h_space = 3;
-}
+} // namespace
 
 /**
  * Layouted rich text is essentially a bunch of drawable elements, each with a
@@ -73,19 +75,46 @@ struct TextlineElement : Element {
 	void draw(RenderTarget & dst) override
 	{
 		assert(words.size());
-		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
+		uint32_t spacewidth = style.calc_bare_width(" ");
 
-		std::vector<std::string>::const_iterator it = words.begin() + 1;
-		if (it != words.end()) {
-			uint32_t spacewidth = style.calc_bare_width(" ");
+		std::vector<std::string> result_words;
+		std::vector<std::string>::iterator it = result_words.begin();
 
+		// Reorder words for BiDi
+		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
+			std::string previous_word;
+			for (std::vector<std::string>::iterator source_it = words.begin();
+				  source_it != words.end(); ++source_it) {
+				const std::string& word = *source_it;
+				if (source_it != words.end()) {
+					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
+						it = result_words.insert(result_words.begin(), word);
+					} else { // Sequences of Latin words go to the right from current position
+						if (it < result_words.end()) {
+							++it;
+						}
+						it = result_words.insert(it, word);
+					}
+					previous_word = word;
+				}
+			}
+		} else {
+			for (const std::string& word: words) {
+				result_words.push_back(word);
+			}
+		}
+		// Now render
+		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), result_words[0]);
+
+		it = result_words.begin() + 1;
+		if (it != result_words.end()) {
 			do {
 				if (style.underline)
 					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
 				else
 					x += spacewidth;
 				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
-			} while (it != words.end());
+			} while (it != result_words.end());
 		}
 	}
 
@@ -262,7 +291,7 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((richtext->get_image_align() & Align_Horizontal) == Align_Right) {
+				if ((mirror_alignment(richtext->get_image_align()) & Align_Horizontal) == Align_Right) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -273,7 +302,7 @@ struct TextBuilder {
 
 			int32_t textleft;
 
-			switch (richtext->get_text_align() & Align_Horizontal) {
+			switch (mirror_alignment(richtext->get_text_align()) & Align_Horizontal) {
 			case Align_Right:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
@@ -359,7 +388,7 @@ void RichText::parse(const std::string & rtext)
 
 		if ((text.richtext->get_image_align() & Align_Horizontal) == Align_HCenter)
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		else if ((text.richtext->get_image_align() & Align_Horizontal) == Align_Right)
+		else if ((mirror_alignment(text.richtext->get_image_align()) & Align_Horizontal) == Align_Right)
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)
@@ -411,6 +440,7 @@ void RichText::parse(const std::string & rtext)
 				bbox.w = 0;
 				bbox.h = text.style.font->height();
 
+				// TODO(GunChleoc): Arabic: width calculation for alignment is broken (Arabic)
 				do {
 					uint32_t wordwidth = text.style.calc_bare_width(words[word_cnt + nrwords]);
 

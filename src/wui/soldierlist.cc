@@ -32,7 +32,6 @@
 #include "logic/soldiercontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/table.h"
 #include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"

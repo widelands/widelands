@@ -57,6 +57,7 @@ public:
 	void set_pagesize(int32_t pagesize);
 	void set_scrollpos(int32_t pos);
 
+	bool is_enabled() const;
 	uint32_t get_steps() const;
 	uint32_t get_singlestepsize() const {return m_singlestepsize;}
 	uint32_t get_pagesize() const {return m_pagesize;}

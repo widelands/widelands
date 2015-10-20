@@ -30,8 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapExplorationPacket::read
 	(FileSystem            &       fs,
@@ -59,21 +58,7 @@ void MapExplorationPacket::read
 	MapIndex const max_index = map.max_index();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == 1)
-			for (MapIndex i = 0; i < max_index; ++i) {
-				uint32_t const data = fr.unsigned_16();
-				for (uint8_t j = 0; j < nr_players; ++j) {
-					bool const see = data & (1 << j);
-					if (Player * const player = egbase.get_player(j + 1))
-						player->m_fields[i].vision = see ? 1 : 0;
-					else if (see)
-						log
-							("MapExplorationPacket::read: WARNING: Player %u, "
-							 "which does not exist, sees field %u.\n",
-							 j + 1, i);
-				}
-			}
-		else if (packet_version == CURRENT_PACKET_VERSION)
+		if (packet_version == kCurrentPacketVersion) {
 			for (MapIndex i = 0; i < max_index; ++i) {
 				uint32_t const data = fr.unsigned_32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
@@ -87,9 +72,9 @@ void MapExplorationPacket::read
 						 j + 1, i);
 				}
 			}
-		else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("seen: %s", e.what());
 	}
@@ -101,7 +86,7 @@ void MapExplorationPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
