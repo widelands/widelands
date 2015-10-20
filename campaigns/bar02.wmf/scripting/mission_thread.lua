@@ -196,7 +196,7 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {trainingcamp = 1, battlearena = 1}) do
+   while not check_for_buildings(p1, {barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
       sleep(6523)
    end
    o.done = true
@@ -216,11 +216,11 @@ function check_weapon_productions_obj(o)
    o.done = true
 end
 function check_warehouse_obj(o)
-   while not check_for_buildings(p1, {warehouse = 1}) do sleep(3827) end
+   while not check_for_buildings(p1, {barbarians_warehouse = 1}) do sleep(3827) end
    o.done = true
 end
 function check_helmsmithy_obj(o)
-   while not check_for_buildings(p1, {helmsmithy = 1}) do sleep(3827) end
+   while not check_for_buildings(p1, {barbarians_helmsmithy = 1}) do sleep(3827) end
    o.done = true
 end
 
