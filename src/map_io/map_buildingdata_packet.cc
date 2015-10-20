@@ -411,9 +411,7 @@ void MapBuildingdataPacket::read_warehouse
 					assert(i < worker_types_without_cost.size());
 					if (worker_types_without_cost.at(i) == worker_index) {
 						if
-							(warehouse.m_next_worker_without_cost_spawn[i]
-							 !=
-							 static_cast<uint32_t>(never()))
+							(warehouse.m_next_worker_without_cost_spawn[i] != never())
 							throw GameDataError
 								(
 								 "%s %u has a next_spawn time for worker type "
@@ -422,8 +420,7 @@ void MapBuildingdataPacket::read_warehouse
 								 warehouse.descr().descname().c_str(), warehouse.serial(),
 								 worker_typename, next_spawn,
 								 warehouse.m_next_worker_without_cost_spawn[i]);
-						warehouse.m_next_worker_without_cost_spawn[i] =
-							next_spawn;
+						warehouse.m_next_worker_without_cost_spawn[i] = next_spawn;
 						break;
 					}
 				}
