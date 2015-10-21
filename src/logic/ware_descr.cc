@@ -26,16 +26,20 @@
 #include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
+#include "logic/game_data_error.h"
 #include "logic/tribes/tribe_descr.h"
 
 namespace Widelands {
 
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
-	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
-	icon_fname_(table.get_string("icon")),
-	icon_(g_gr->images().get("pics/but0.png")) {
+	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
 
-	assert(is_animation_known("idle"));
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Ware %s has no idle animation", table.get_string("name").c_str());
+	}
+	if (icon_filename().empty()) {
+		throw GameDataError("Ware %s has no menu icon", table.get_string("name").c_str());
+	}
 	i18n::Textdomain td("tribes");
 
 	directory_ = table.get_string("directory");
@@ -64,16 +68,6 @@ WareIndex WareDescr::default_target_quantity(const std::string& tribename) const
 		return default_target_quantities_.at(tribename);
 	}
 	return kInvalidWare;
-}
-
-
-/**
- * Load all static graphics
- */
-void WareDescr::load_graphics()
-{
-	// NOCOM shift to MapObject
-	icon_ = g_gr->images().get(icon_fname_);
 }
 
 bool WareDescr::has_demand_check(const std::string& tribename) const {

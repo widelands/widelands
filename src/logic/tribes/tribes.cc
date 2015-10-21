@@ -345,18 +345,6 @@ void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) cons
 
 void Tribes::load_graphics()
 {
-	for (Widelands::WareIndex i = 0; i < workers_->size(); ++i) {
-		workers_->get_mutable(i)->load_graphics();
-	}
-
-	for (Widelands::WareIndex i = 0; i < wares_->size(); ++i) {
-		wares_->get_mutable(i)->load_graphics();
-	}
-
-	for (Widelands::WareIndex i = 0; i < buildings_->size(); ++i) {
-		buildings_->get_mutable(i)->load_graphics();
-	}
-
 	// Construct and hold on to the texture atlas that contains all road images.
 	TextureAtlas ta;
 

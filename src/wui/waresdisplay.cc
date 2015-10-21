@@ -480,7 +480,7 @@ std::string waremap_to_richtext
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<sub width=30 padding=2><p align=center>"
 						 "<sub width=26 background=454545><p align=center><img src=\""
-						+ tribe.get_ware_descr(c->first)->icon_name()
+						+ tribe.get_ware_descr(c->first)->icon_filename()
 						+ "\"></p></sub><sub width=26 background=000000><p><font size=9>"
 						+ boost::lexical_cast<std::string>(static_cast<int32_t>(c->second))
 						+ "</font></p></sub></p></sub>";

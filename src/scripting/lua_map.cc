@@ -1311,6 +1311,7 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
 	PROP_RO(LuaMapObjectDescription, descname),
+	PROP_RO(LuaMapObjectDescription, icon_name),
 	PROP_RO(LuaMapObjectDescription, name),
 	PROP_RO(LuaMapObjectDescription, type_name),
 	PROP_RO(LuaMapObjectDescription, representative_image),
@@ -1341,6 +1342,16 @@ void LuaMapObjectDescription::__unpersist(lua_State*) {
 
 int LuaMapObjectDescription::get_descname(lua_State * L) {
 	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+/* RST
+	.. attribute:: icon_name
+
+			(RO) the filename for the menu icon.
+*/
+int LuaMapObjectDescription::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get()->icon_filename());
 	return 1;
 }
 
@@ -1405,7 +1416,6 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, enhanced_from),
 	PROP_RO(LuaBuildingDescription, enhancement_cost),
 	PROP_RO(LuaBuildingDescription, enhancement),
-	PROP_RO(LuaBuildingDescription, icon_name),
 	PROP_RO(LuaBuildingDescription, is_mine),
 	PROP_RO(LuaBuildingDescription, is_port),
 	PROP_RO(LuaBuildingDescription, returned_wares),
@@ -1542,16 +1552,6 @@ int LuaBuildingDescription::get_enhancement(lua_State * L) {
 		return 0;
 	}
 	return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhancement));
-}
-
-/* RST
-	.. attribute:: icon_name
-
-			(RO) the filename for the menu icon.
-*/
-int LuaBuildingDescription::get_icon_name(lua_State * L) {
-	lua_pushstring(L, get()->icon_name());
-	return 1;
 }
 
 
@@ -2153,7 +2153,6 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
 	PROP_RO(LuaWareDescription, directory),
-	PROP_RO(LuaWareDescription, icon_name),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
@@ -2205,16 +2204,6 @@ int LuaWareDescription::get_directory(lua_State * L) {
 	return 1;
 }
 
-
-/* RST
-	.. attribute:: icon_name
-
-			(RO) the filename for the menu icon.
-*/
-int LuaWareDescription::get_icon_name(lua_State * L) {
-	lua_pushstring(L, get()->icon_name());
-	return 1;
-}
 
 /* RST
 	.. attribute:: is_construction_material
@@ -2275,7 +2264,6 @@ const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
 	PROP_RO(LuaWorkerDescription, directory),
-	PROP_RO(LuaWorkerDescription, icon_name),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
 };
@@ -2345,17 +2333,6 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 */
 int LuaWorkerDescription::get_directory(lua_State * L) {
 	lua_pushstring(L, get()->directory());
-	return 1;
-}
-
-
-/* RST
-	.. attribute:: icon_name
-
-			(RO) the filename for the menu icon.
-*/
-int LuaWorkerDescription::get_icon_name(lua_State * L) {
-	lua_pushstring(L, get()->icon_name());
 	return 1;
 }
 

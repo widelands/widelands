@@ -144,6 +144,11 @@ struct MapObjectDescr {
 	/// is empty otherwise
 	const std::string& representative_image_filename() const;
 
+	/// Returns the menu image if the MapObject has one, nullptr otherwise
+	const Image* icon() const;
+	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
+	const std::string& icon_filename() const;
+
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
 	// attributes are allowed to appear - i.e. resi are fine for immovables.
@@ -162,7 +167,8 @@ private:
 	Anims               m_anims;
 	static uint32_t     s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap    s_dyn_attribs;
-	std::string representative_image_filename_;
+	std::string representative_image_filename_; // Image for big represenations, e.g. on buttons
+	std::string icon_filename_; // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };

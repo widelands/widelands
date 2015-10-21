@@ -244,7 +244,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
-							 building_descr.get_icon(),
+							 building_descr.icon(),
 							 enhance_tooltip);
 
 					//  button id = building id

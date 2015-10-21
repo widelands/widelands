@@ -232,7 +232,8 @@ MapObjectDescr IMPLEMENTATION
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 				 const std::string& init_name,
 				 const std::string& init_descname)
-	: m_type(init_type), m_name(init_name), m_descname(init_descname), representative_image_filename_("") {
+	: m_type(init_type), m_name(init_name), m_descname(init_descname),
+	  representative_image_filename_(""), icon_filename_("") {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 				 const std::string& init_name,
@@ -246,6 +247,10 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		assert(is_animation_known("idle"));
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
 													.representative_image_from_disk_filename();
+	}
+	if (table.has_key("icon")) {
+		icon_filename_ = table.get_string("icon");
+		assert(!icon_filename().empty());
 	}
 }
 MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
@@ -312,6 +317,16 @@ const Image* MapObjectDescr::representative_image() const {
 }
 const std::string& MapObjectDescr::representative_image_filename() const {
 	return representative_image_filename_;
+}
+
+const Image* MapObjectDescr::icon() const {
+	if (!icon_filename_.empty()) {
+		return g_gr->images().get(icon_filename_);
+	}
+	return nullptr;
+}
+const std::string& MapObjectDescr::icon_filename() const {
+	return icon_filename_;
 }
 
 

@@ -42,13 +42,14 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 								 const EditorGameBase& egbase) :
 	BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
 	ware_hotspot_      (Point(0, 15)),
-	icon_fname_        (table.get_string("icon")),
-	icon_              (nullptr),
 	buildable_         (false),
 	needed_experience_ (INVALID_INDEX),
 	becomes_           (INVALID_INDEX),
 	egbase_            (egbase)
 {
+	if (icon_filename().empty()) {
+		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
+	}
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
@@ -139,16 +140,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 
 WorkerDescr::~WorkerDescr() {}
-
-
-/**
- * Load graphics (other than animations).
- */
-void WorkerDescr::load_graphics()
-{
-	// NOCOM shift to MapObject
-	icon_ = g_gr->images().get(icon_fname_);
-}
 
 
 /**

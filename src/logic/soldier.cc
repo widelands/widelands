@@ -147,12 +147,8 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 	// die_*           -> soldier is dying
 	add_battle_animation(table.get_table("die_w"), &m_die_w_name);
 	add_battle_animation(table.get_table("die_e"), &m_die_e_name);
-}
 
-/**
- * Load the graphics
- */
-void SoldierDescr::load_graphics() {
+	// Load Graphics
 	m_hp_pics     .resize(m_max_hp_level      + 1);
 	m_attack_pics .resize(m_max_attack_level  + 1);
 	m_defense_pics.resize(m_max_defense_level + 1);
@@ -168,9 +164,7 @@ void SoldierDescr::load_graphics() {
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i] =
 			g_gr->images().get(m_evade_pics_fn[i]);
-	WorkerDescr::load_graphics();
 }
-
 
 /**
  * Get random animation of specified type

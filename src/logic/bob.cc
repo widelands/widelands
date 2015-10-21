@@ -59,7 +59,9 @@ BobDescr::BobDescr(const std::string& init_descname, const MapObjectType init_ty
 	// Only tribe bobs have a vision range, since it would be irrelevant for world bobs.
 	vision_range_ (owner_type == MapObjectDescr::OwnerType::kTribe ? table.get_int("vision_range") : 0)
 {
-	assert(is_animation_known("idle"));
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Bob %s has no idle animation", table.get_string("name").c_str());
+	}
 }
 
 /**

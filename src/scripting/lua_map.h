@@ -171,9 +171,11 @@ public:
 	 * Properties
 	 */
 	int get_descname(lua_State *);
+	int get_icon_name(lua_State*);
 	int get_name(lua_State *);
 	int get_type_name(lua_State *);
 	int get_representative_image(lua_State *);
+
 
 	/*
 	 * Lua methods
@@ -229,7 +231,6 @@ public:
 	int get_enhanced_from(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancement(lua_State *);
-	int get_icon_name(lua_State*);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
 	int get_isproductionsite(lua_State *);
@@ -454,7 +455,6 @@ public:
 	 */
 	int get_consumers(lua_State *);
 	int get_directory(lua_State*);
-	int get_icon_name(lua_State*);
 	int get_producers(lua_State *);
 
 	/*
@@ -493,7 +493,6 @@ public:
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_directory(lua_State*);
-	int get_icon_name(lua_State*);
 	int get_needed_experience(lua_State*);
 
 	/*

@@ -55,8 +55,6 @@ public:
 
 	Bob & create_object() const override;
 
-	virtual void load_graphics();
-
 	bool is_buildable() const {return buildable_;}
 	const Buildcost & buildcost() const {
 		assert(is_buildable());
@@ -85,8 +83,6 @@ public:
 
 	std::string directory() const {return directory_;}
 
-	const Image* icon() const {return icon_;}
-	std::string icon_name() const {return icon_fname_;}
 	const DirAnimations & get_walk_anims() const {return walk_anims_;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
@@ -111,8 +107,6 @@ protected:
 	Point             ware_hotspot_;
 	uint32_t          default_target_quantity_;
 	std::string       directory_;  /// The directory where the init files are located
-	std::string const icon_fname_; ///< Filename of worker's icon
-	const Image     * icon_;       ///< Pointer to icon into picture stack
 	DirAnimations     walk_anims_;
 	DirAnimations     walkload_anims_;
 	bool              buildable_;

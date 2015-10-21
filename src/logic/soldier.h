@@ -49,8 +49,6 @@ public:
 					 const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
-	void load_graphics() override;
-
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
 	uint32_t get_max_defense_level     () const {return m_max_defense_level;}

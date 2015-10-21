@@ -184,7 +184,7 @@ void EncyclopediaWindow::fill_buildings() {
 
 	for (uint32_t i = 0; i < building_vec.size(); i++) {
 		Building cur = building_vec[i];
-		buildings_.add(cur.descr_->descname(), cur.index_, cur.descr_->get_icon());
+		buildings_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
 	}
 }
 
@@ -251,7 +251,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	for (const BuildingIndex& building_index : selected_ware_->producers()) {
 		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		if (tribe.has_building(building_index)) {
-			prod_sites_.add(building_descr->descname(), building_index, building_descr->get_icon());
+			prod_sites_.add(building_descr->descname(), building_index, building_descr->icon());
 		}
 	}
 

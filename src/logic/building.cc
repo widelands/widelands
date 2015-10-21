@@ -62,7 +62,6 @@ BuildingDescr::BuildingDescr
 	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
 	egbase_         (egbase),
 	m_buildable     (false),
-	m_icon          (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -72,7 +71,10 @@ BuildingDescr::BuildingDescr
 	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
-	assert(is_animation_known("idle"));
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
+	}
+
 	i18n::Textdomain td("tribes");
 
 	try {
@@ -156,13 +158,13 @@ BuildingDescr::BuildingDescr
 
 	directory_ = table.get_string("directory");
 
-	if (m_buildable || m_enhanced_building) {
-		//  get build icon
-		m_icon_fname = table.get_string("icon");
-	}
-
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
+	}
+
+	// NOCOM(GunChleoc): We want icons for all of them.
+	if ((m_buildable || m_enhanced_building) && icon_filename().empty()) {
+		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
 	}
 }
 
@@ -215,18 +217,6 @@ uint32_t BuildingDescr::vision_range() const
 	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
 
-
-/*
-===============
-Called whenever building graphics need to be loaded.
-===============
-*/
-void BuildingDescr::load_graphics()
-{
-	// NOCOM shift to MapObject
-	if (!m_icon_fname.empty())
-		m_icon = g_gr->images().get(m_icon_fname);
-}
 
 /*
 ===============

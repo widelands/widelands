@@ -64,12 +64,6 @@ public:
 
 	std::string directory() const {return directory_;}
 
-	/// \return index to ware's icon inside picture stack
-	const Image* icon() const {return icon_;}
-	std::string icon_name() const {return icon_fname_;}
-
-	void load_graphics();
-
 	bool has_demand_check(const std::string& tribename) const;
 
 	/// Called when a demand check for this ware type is encountered during
@@ -97,8 +91,6 @@ private:
 	std::set<BuildingIndex> producers_; // Buildings that produce this ware
 
 	std::string  directory_;  /// The directory where the init files are located
-	std::string  icon_fname_; ///< Filename of ware's main picture
-	const Image* icon_;       ///< Index of ware's picture in picture stack
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 
