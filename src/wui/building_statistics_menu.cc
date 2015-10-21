@@ -174,13 +174,18 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	const TribeDescr& tribe = iplayer().player().tribe();
 	std::vector<BuildingIndex> buildings_to_add;
 	for (BuildingIndex index: tribe.buildings()) {
-		buildings_to_add.push_back(index);
+		// Only add headquarter types that are owned by player.
+		const BuildingDescr& descr = *tribe.get_building_descr(index);
+		const Widelands::Player& player = iplayer().player();
+		if (descr.is_buildable() || descr.is_enhanced() || !player.get_building_statistics(index).empty()) {
+			buildings_to_add.push_back(index);
+		}
 	}
 
 	// We want to add other tribes' militarysites on the bottom
 	for (BuildingIndex index = 0; index < nr_buildings; ++index) {
 		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
-		if ((!tribe.has_building(index)) && descr.type() == MapObjectType::MILITARYSITE) {
+		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
 			buildings_to_add.push_back(index);
 		}
 	}
@@ -379,13 +384,6 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
 	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
-	// Only add headquarter types that are owned by player.
-	const Widelands::Player& player = iplayer().player();
-	if ((!((player.tribe().has_building(id) && (descr.is_buildable() || descr.is_enhanced())) ||
-		  descr.type() == MapObjectType::MILITARYSITE)) &&
-		 player.get_building_statistics(id).empty()) {
-		return false;
-	}
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
