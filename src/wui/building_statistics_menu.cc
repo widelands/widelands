@@ -393,9 +393,7 @@ bool BuildingStatisticsMenu::add_button(
 														kBuildGridCellWidth,
 														kBuildGridCellHeight,
 														g_gr->images().get("pics/but1.png"),
-														&g_gr->animations()
-															 .get_animation(descr.get_animation("idle"))
-															 .representative_image_from_disk(),
+														descr.representative_image(),
 														"",
 														false,
 														true);

@@ -98,7 +98,6 @@ public:
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
-	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -123,7 +122,8 @@ public:
 		 bool                   loading = false,
 		 FormerBuildings former_buildings = FormerBuildings())
 		const;
-	virtual void load_graphics();
+
+	void load_graphics();
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
@@ -186,10 +186,6 @@ public:
 
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
-
-	//Return the animation ID that is used for the building in UI items
-	//(the building UI, messages, etc..)
-	virtual uint32_t get_ui_anim() const {return descr().get_ui_anim();}
 
 	Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;

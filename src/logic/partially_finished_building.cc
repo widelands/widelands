@@ -147,9 +147,9 @@ Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
-uint32_t PartiallyFinishedBuilding::get_ui_anim() const
+const Image* PartiallyFinishedBuilding::representative_image() const
 {
-	return m_building->get_animation("idle");
+	return m_building->representative_image();
 }
 
 

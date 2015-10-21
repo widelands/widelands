@@ -59,7 +59,7 @@ BuildingDescr::BuildingDescr
 	(const std::string& init_descname, const MapObjectType _type,
 	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, table.get_string("name"), init_descname),
+	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
 	egbase_         (egbase),
 	m_buildable     (false),
 	m_icon          (nullptr),
@@ -72,6 +72,7 @@ BuildingDescr::BuildingDescr
 	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
+	assert(is_animation_known("idle"));
 	i18n::Textdomain td("tribes");
 
 	try {
@@ -160,15 +161,9 @@ BuildingDescr::BuildingDescr
 		m_icon_fname = table.get_string("icon");
 	}
 
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	for (const std::string& animation : anims->keys<std::string>()) {
-		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-	}
-
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
-	assert(is_animation_known("idle"));
 }
 
 
@@ -228,6 +223,7 @@ Called whenever building graphics need to be loaded.
 */
 void BuildingDescr::load_graphics()
 {
+	// NOCOM shift to MapObject
 	if (!m_icon_fname.empty())
 		m_icon = g_gr->images().get(m_icon_fname);
 }
@@ -886,8 +882,7 @@ void Building::send_message
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
-	const std::string& img = g_gr->animations().get_animation
-		(get_ui_anim()).representative_image_from_disk_filename();
+	const std::string& img = descr().representative_image_filename();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +

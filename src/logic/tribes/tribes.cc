@@ -345,15 +345,15 @@ void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) cons
 
 void Tribes::load_graphics()
 {
-	for (WareIndex i = 0; i < static_cast<WareIndex>(workers_->size()); ++i) {
+	for (Widelands::WareIndex i = 0; i < workers_->size(); ++i) {
 		workers_->get_mutable(i)->load_graphics();
 	}
 
-	for (WareIndex i = 0; i < static_cast<WareIndex>(wares_->size()); ++i) {
+	for (Widelands::WareIndex i = 0; i < wares_->size(); ++i) {
 		wares_->get_mutable(i)->load_graphics();
 	}
 
-	for (BuildingIndex i = 0; i < buildings_->size(); ++i) {
+	for (Widelands::WareIndex i = 0; i < buildings_->size(); ++i) {
 		buildings_->get_mutable(i)->load_graphics();
 	}
 

@@ -359,6 +359,7 @@ void EncyclopediaWindow::worker_selected(uint32_t) {
 		std::unique_ptr<LuaTable> t(
 			iaplayer().egbase().lua().run_script("tribes/scripting/help/worker_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(tribe.name());
 		cr->push_arg(&selected_worker);
 		cr->resume();
 		const std::string help_text = cr->pop_string();

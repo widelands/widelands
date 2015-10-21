@@ -123,7 +123,6 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const Image& representative_image_from_disk() const override;
 	const std::string& representative_image_from_disk_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
@@ -285,11 +284,6 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
-}
-
-const Image& NonPackedAnimation::representative_image_from_disk() const {
-	ensure_graphics_are_loaded();
-	return *frames_[0];
 }
 
 const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {

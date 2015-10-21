@@ -1364,9 +1364,7 @@ int LuaMapObjectDescription::get_name(lua_State * L) {
 			of the map object's idle animation
 */
 int LuaMapObjectDescription::get_representative_image(lua_State * L) {
-	const std::string& filepath = g_gr->animations().get_animation
-		(get()->get_animation("idle")).representative_image_from_disk_filename();
-	lua_pushstring(L, filepath);
+	lua_pushstring(L, get()->representative_image_filename());
 	return 1;
 }
 
@@ -1517,7 +1515,6 @@ int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 	if (get()->is_enhanced()) {
 		const BuildingIndex& enhanced_from = get()->enhanced_from();
 		assert(get_egbase(L).tribes().building_exists(enhanced_from));
-		log(" from: %s\n", get_egbase(L).tribes().get_building_descr(enhanced_from)->name().c_str());
 		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
 	}
 	lua_pushnil(L);
@@ -2329,10 +2326,14 @@ int LuaWorkerDescription::get_becomes(lua_State * L) {
 int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const auto& buildcost_pair : get()->buildcost()) {
-		lua_pushint32(L, index++);
-		lua_pushstring(L, buildcost_pair.first);
-		lua_settable(L, -3);
+	if (get()->is_buildable()) {
+		for (const auto& buildcost_pair : get()->buildcost()) {
+			lua_pushint32(L, index++);
+			lua_pushstring(L, buildcost_pair.first);
+			lua_settable(L, -3);
+		}
+	} else {
+		lua_pushnil(L);
 	}
 	return 1;
 }

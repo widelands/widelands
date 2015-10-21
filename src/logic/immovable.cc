@@ -210,9 +210,11 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 										 const LuaTable& table,
 										 MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
-	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname),
+	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
 	m_size(BaseImmovable::NONE),
 	owner_type_(input_type) {
+	assert(is_animation_known("idle"));
+
 	if (table.has_key("size")) {
 		m_size = string_to_size(table.get_string("size"));
 	}
@@ -225,12 +227,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		add_attributes(table.get_table("attributes")->
 							array_entries<std::string>(), {MapObject::Attribute::RESI});
 	}
-
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	for (const std::string& animation : anims->keys<std::string>()) {
-		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-	}
-	assert(is_animation_known("idle"));
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {

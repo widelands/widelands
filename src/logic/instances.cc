@@ -23,10 +23,12 @@
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
@@ -227,6 +229,27 @@ MapObjectDescr IMPLEMENTATION
 
 ==============================================================================
 */
+MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
+				 const std::string& init_name,
+				 const std::string& init_descname)
+	: m_type(init_type), m_name(init_name), m_descname(init_descname), representative_image_filename_("") {
+}
+MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
+				 const std::string& init_name,
+				 const std::string& init_descname, const LuaTable& table)
+	: MapObjectDescr(init_type,  init_name, init_descname) {
+	if (table.has_key("animations")) {
+		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+		for (const std::string& animation : anims->keys<std::string>()) {
+			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+		}
+		assert(is_animation_known("idle"));
+		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
+													.representative_image_from_disk_filename();
+	}
+}
+MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
+
 
 uint32_t MapObjectDescr::s_dyn_attribhigh =
 	MapObject::HIGHEST_FIXED_ATTRIBUTE;
@@ -279,6 +302,16 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	// Never here
 	assert(false);
 	return "";
+}
+
+const Image* MapObjectDescr::representative_image() const {
+	if (!representative_image_filename_.empty()) {
+		return g_gr->images().get(representative_image_filename_);
+	}
+	return nullptr;
+}
+const std::string& MapObjectDescr::representative_image_filename() const {
+	return representative_image_filename_;
 }
 
 
@@ -432,6 +465,10 @@ void MapObject::init(EditorGameBase & egbase)
 void MapObject::cleanup(EditorGameBase & egbase)
 {
 	egbase.objects().remove(*this);
+}
+
+const Image* MapObject::representative_image() const {
+	return descr().representative_image();
 }
 
 /**

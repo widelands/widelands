@@ -37,10 +37,13 @@ end
 --
 --    Displays the worker with a helptext, an image and the tool used
 --
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe
+--                that we are displaying this help for.
+--
 --    :arg worker_description: the worker_description from C++.
 --    :returns: Help string for the worker
 --
-function worker_help_string(worker_description)
+function worker_help_string(tribe, worker_description)
 	include(worker_description.directory .. "helptexts.lua")
 
 	local result = rt(h2(_"Lore")) ..
@@ -48,9 +51,9 @@ function worker_help_string(worker_description)
 
 	-- Get the tools for the workers.
 	local toolnames = {}
-	if(worker_description.buildable) then
+	if (worker_description.buildable) then
 		for j, buildcost in ipairs(worker_description.buildcost) do
-			if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
+			if(not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
 				toolnames[#toolnames + 1] = buildcost
 			end
 		end
@@ -62,7 +65,7 @@ function worker_help_string(worker_description)
 
 	-- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
 	local becomes_description = worker_description.becomes
-	if(becomes_description) then
+	if (becomes_description) then
 
 		result = result .. rt(h3(_"Experience levels:"))
 		local exp_string = _"%s to %s (%s EP)":format(
@@ -106,8 +109,9 @@ end
 
 
 return {
-   func = function(worker_description)
+   func = function(tribename, worker_description)
       set_textdomain("tribes_encyclopedia")
-      return worker_help_string(worker_description)
+      local tribe = wl.Game():get_tribe_description(tribename)
+      return worker_help_string(tribename, worker_description)
    end
 }

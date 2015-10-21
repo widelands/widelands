@@ -68,10 +68,7 @@ public:
 	/// so the caller has to adjust for the hotspot himself.
 	virtual const Point& hotspot() const = 0;
 
-	// An image frame that is guaranteed to be a path to a file on disc. This is
-	// a clutch needed to make sure that messages can always be displayed, even
-	// no image processing has taken place before.
-	virtual const Image& representative_image_from_disk() const = 0;
+	/// Returns the disk filename for the first image in the animation
 	virtual const std::string& representative_image_from_disk_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index

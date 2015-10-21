@@ -68,7 +68,7 @@ public:
 	const Image* icon() const {return icon_;}
 	std::string icon_name() const {return icon_fname_;}
 
-	virtual void load_graphics();
+	void load_graphics();
 
 	bool has_demand_check(const std::string& tribename) const;
 

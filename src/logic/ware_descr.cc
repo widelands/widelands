@@ -31,10 +31,11 @@
 namespace Widelands {
 
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
-	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname),
+	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
 	icon_fname_(table.get_string("icon")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
+	assert(is_animation_known("idle"));
 	i18n::Textdomain td("tribes");
 
 	directory_ = table.get_string("directory");
@@ -48,12 +49,6 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
 	for (const std::string& key : items_table->keys<std::string>()) {
 		preciousnesses_.emplace(key, items_table->get_int(key));
 	}
-
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	for (const std::string& animation : anims->keys<std::string>()) {
-		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-	}
-	assert(is_animation_known("idle"));
 }
 
 int WareDescr::preciousness(const std::string& tribename) const {
@@ -77,6 +72,7 @@ WareIndex WareDescr::default_target_quantity(const std::string& tribename) const
  */
 void WareDescr::load_graphics()
 {
+	// NOCOM shift to MapObject
 	icon_ = g_gr->images().get(icon_fname_);
 }
 

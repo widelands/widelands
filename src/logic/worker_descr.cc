@@ -146,6 +146,7 @@ WorkerDescr::~WorkerDescr() {}
  */
 void WorkerDescr::load_graphics()
 {
+	// NOCOM shift to MapObject
 	icon_ = g_gr->images().get(icon_fname_);
 }
 

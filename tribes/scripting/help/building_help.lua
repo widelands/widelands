@@ -684,9 +684,12 @@ end
 --
 --    Displays the building's workers with an image and the tool they use
 --
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe
+--                that we are displaying this help for.
+--
 --    :arg building_description: The :class:`LuaBuildingDescription` for the building
 --                               that we are displaying this help for.
---    :arg building_description: the building_description from C++.
+--
 --    :returns: Workers/Crew section of the help file
 --
 function building_help_crew_string(tribe, building_description)
@@ -705,9 +708,11 @@ function building_help_crew_string(tribe, building_description)
 		for i, worker_description in ipairs(building_description.working_positions) do
 
 			-- Get the tools for the workers.
-			for j, buildcost in ipairs(worker_description.buildcost) do
-				if( not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
-					toolnames[#toolnames + 1] = buildcost
+			if (worker_description.buildable) then
+				for j, buildcost in ipairs(worker_description.buildcost) do
+					if( not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
+						toolnames[#toolnames + 1] = buildcost
+					end
 				end
 			end
 

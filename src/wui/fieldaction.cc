@@ -100,9 +100,7 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
 	UI::IconGrid::add(descr.name(),
-	                  &g_gr->animations()
-	                      .get_animation(descr.get_animation("idle"))
-	                      .representative_image_from_disk(),
+							descr.representative_image(),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
 	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
