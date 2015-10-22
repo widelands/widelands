@@ -58,7 +58,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
-			int32_t value;
 			try {
 				if (buildcost_.count(key)) {
 					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
@@ -71,15 +70,15 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 						 "declaration order?)",
 						 key.c_str());
 				}
-				value = items_table->get_int(key);
+				int32_t value = items_table->get_int(key);
 				uint8_t const count = value;
 				if (count != value)
 					throw GameDataError("count is out of range 1 .. 255");
 				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
 			} catch (const WException & e) {
 				throw GameDataError
-					("[buildcost] \"%s=%d\": %s",
-					 key.c_str(), value, e.what());
+					("[buildcost] \"%s\": %s",
+					 key.c_str(), e.what());
 			}
 		}
 	}
