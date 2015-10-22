@@ -278,7 +278,7 @@ Soldier *
 MilitarySite::find_least_suited_soldier()
 {
 	const std::vector<Soldier *> present = present_soldiers();
-	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
+	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1 : 1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
 	for (Soldier* sld : present) {

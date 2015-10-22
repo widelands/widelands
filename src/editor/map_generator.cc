@@ -833,7 +833,7 @@ void MapGenerator::create_random_map()
 			 &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = -1;
+		uint32_t min_distance = 0;
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);

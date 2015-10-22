@@ -2567,7 +2567,7 @@ void Worker::fugitive_update(Game & game, State & state)
 			(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
 			 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
-		int32_t bestdist = -1;
+		uint32_t bestdist = 0;
 		Flag *  best     =  nullptr;
 
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
@@ -2578,7 +2578,7 @@ void Worker::fugitive_update(Game & game, State & state)
 			if (game.logic_rand() % 2 == 0)
 				continue;
 
-			int32_t const dist =
+			uint32_t const dist =
 				map.calc_distance(get_position(), tmp_flag.coords);
 
 			if (!best || bestdist > dist) {

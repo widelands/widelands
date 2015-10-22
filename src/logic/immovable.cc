@@ -502,7 +502,7 @@ void Immovable::draw_construction
 
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.drawanim(pos, m_anim, (current_frame-1) * frametime, get_owner());
+		dst.drawanim(pos, m_anim, (current_frame - 1) * frametime, get_owner());
 	}
 
 	assert(lines <= curh);

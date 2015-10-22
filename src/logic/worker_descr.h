@@ -114,7 +114,7 @@ protected:
 
 	/**
 	 * Number of experience points required for leveling up,
-	 * or -1 if the worker cannot level up.
+	 * or INVALID_INDEX if the worker cannot level up.
 	 */
 	int32_t needed_experience_;
 

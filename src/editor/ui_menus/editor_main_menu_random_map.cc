@@ -555,7 +555,7 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 
 		// Update other values in UI as well
-		button_clicked(static_cast<ButtonId>(-1));
+		button_clicked(ButtonId::NO_BUTTON);
 
 		m_goButton->set_enabled(true);
 	}

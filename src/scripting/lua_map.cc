@@ -4458,7 +4458,7 @@ int LuaField::set_terd(lua_State * L) {
 	const World& world = egbase.world();
 	const TerrainIndex td =
 		world.terrains().get_index(name);
-	if (td == static_cast<TerrainIndex>(-1))
+	if (td == static_cast<TerrainIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain

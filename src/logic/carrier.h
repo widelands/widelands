@@ -48,7 +48,7 @@ struct Carrier : public Worker {
 	MO_DESCR(CarrierDescr)
 
 	Carrier(const CarrierDescr & carrier_descr)
-		: Worker(carrier_descr), m_promised_pickup_to(-1)
+		: Worker(carrier_descr), m_promised_pickup_to(NOONE)
 	{}
 	virtual ~Carrier() {}
 
