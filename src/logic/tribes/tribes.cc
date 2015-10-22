@@ -69,9 +69,8 @@ TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
 				return info;
 			}
 		}
-	} else {
-		throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 	}
+	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 	assert(false); // A TribeBasicInfo should have been found
 }
 
