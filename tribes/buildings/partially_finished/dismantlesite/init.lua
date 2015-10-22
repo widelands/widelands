@@ -6,6 +6,7 @@ tribes:new_dismantlesite_type {
    -- TRANSLATORS: This is a name used in lists of buildings for buildings being taken apart
    descname = pgettext("building", "Dismantle Site"),
    directory = dirname,
+   icon = dirname .. "menu.png",
    size = "small", -- Dummy; overridden by building size
    vision_range = 2,
 

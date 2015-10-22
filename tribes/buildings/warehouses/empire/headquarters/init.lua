@@ -6,6 +6,7 @@ tribes:new_warehouse_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Headquarters"),
    directory = dirname,
+   icon = dirname .. "menu.png",
    size = "big",
    destructible = false,
 

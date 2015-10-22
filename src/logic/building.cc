@@ -74,6 +74,9 @@ BuildingDescr::BuildingDescr
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
 	}
+	if (icon_filename().empty()) {
+		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
+	}
 
 	i18n::Textdomain td("tribes");
 
@@ -160,11 +163,6 @@ BuildingDescr::BuildingDescr
 
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
-	}
-
-	// NOCOM(GunChleoc): We want icons for all of them.
-	if ((m_buildable || m_enhanced_building) && icon_filename().empty()) {
-		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
 	}
 }
 

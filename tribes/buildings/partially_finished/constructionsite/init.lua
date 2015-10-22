@@ -6,6 +6,7 @@ tribes:new_constructionsite_type {
    -- TRANSLATORS: This is a name used in lists of buildings for buildings under construction
    descname = pgettext("building", "Construction Site"),
    directory = dirname,
+   icon = dirname .. "menu.png",
    size = "small", -- Dummy; overridden by building size
    vision_range = 2,
 
