@@ -100,7 +100,7 @@ function build_food_environment()
       atlanteans_sawmill = 1,
       atlanteans_well = 1,
       atlanteans_bakery = 1,
-      hunters_house = 1,
+      atlanteans_hunters_house = 1,
       atlanteans_fishers_house = 1,
       atlanteans_fishbreeders_house = 1,
       atlanteans_smokery = 2,
