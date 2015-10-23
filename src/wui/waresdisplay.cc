@@ -26,7 +26,6 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

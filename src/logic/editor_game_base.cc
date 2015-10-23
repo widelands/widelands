@@ -30,7 +30,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "logic/battle.h"
 #include "logic/building.h"

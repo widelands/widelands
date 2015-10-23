@@ -237,13 +237,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Island mode ----------
 
-	Point pos(get_inner_w() - spacing - height, posy);
-	m_island_mode = new UI::Checkbox(this, pos);
+	m_island_mode = new UI::Checkbox(this, Point(posx, posy), _("Island mode"));
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_ISLAND_MODE));
-
-	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
 
 

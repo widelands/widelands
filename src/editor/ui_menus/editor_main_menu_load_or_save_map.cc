@@ -80,15 +80,11 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                                _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::AlignLeft, true);
 
-	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
 	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
-	vbox->add_space(padding_);
-	UI::Textarea* ta_dont_localize_mapnames =
-	   /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-	   new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
-	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
 	vbox->set_size(get_inner_w(), buth_);
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));
@@ -102,8 +98,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
-
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::fill_table, boost::ref(*this)));
 	show_mapnames_->sigclicked.connect(

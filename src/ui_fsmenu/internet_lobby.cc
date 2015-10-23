@@ -130,7 +130,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
-	clientsonline .set_font(m_fn, m_fs);
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
 		% "<rt><p><font underline=yes>"
 		% _("User Status")
