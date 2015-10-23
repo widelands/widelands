@@ -19,7 +19,7 @@
 
 #include "ui_basic/button.h"
 
-#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -53,13 +53,11 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	m_title         (title_text),
 	m_pic_background(bg_pic),
 	m_pic_custom    (nullptr),
-	m_textstyle(UI::TextStyle::ui_small()),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	m_clr_down      (229, 161, 2)
 {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		int new_height = m_textstyle.font->height() + 4;
+		int new_height = UI::g_fh1->render(as_uifont("."))->height() + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}
@@ -87,9 +85,7 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_textstyle(UI::TextStyle::ui_small()),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	m_clr_down      (229, 161, 2)
 {
 	set_thinks(false);
 }
@@ -219,14 +215,13 @@ void Button::draw(RenderTarget & dst)
 		}
 
 	} else if (m_title.length()) {
-		//  otherwise draw title string centered
-
-		m_textstyle.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
-
-		UI::g_fh->draw_text
-			(dst, m_textstyle, Point(get_w() / 2, get_h() / 2),
-			 m_title, Align_Center,
-			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
+		//  Otherwise draw title string centered
+		const Image* entry_text_im = UI::g_fh1->render(
+												  as_uifont(m_title,
+																UI_FONT_SIZE_SMALL,
+																m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED));
+		dst.blit(Point((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
+					entry_text_im);
 	}
 
 	//  draw border
