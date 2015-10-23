@@ -815,7 +815,7 @@ void ProductionProgram::ActCheckMap::execute(Game & game, ProductionSite & ps) c
 				return ps.program_step(game, 0);
 			else {
 				ps.set_production_result(_("No use for ships on this map!"));
-				return ps.program_end(game, None);
+				return ps.program_end(game, Failed);
 			}
 		}
 		default:
