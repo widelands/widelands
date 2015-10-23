@@ -21,7 +21,7 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {},
+   buildcost = {}, -- This will give the worker the property "buildable"
 
    animations = animations,
 }

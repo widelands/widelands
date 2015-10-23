@@ -2315,13 +2315,11 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 	if (get()->is_buildable()) {
-		for (const auto& buildcost_pair : get()->buildcost()) {
+		for (const std::pair<std::string, uint8_t>& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
 			lua_settable(L, -3);
 		}
-	} else {
-		lua_pushnil(L);
 	}
 	return 1;
 }

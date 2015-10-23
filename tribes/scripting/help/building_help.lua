@@ -708,11 +708,9 @@ function building_help_crew_string(tribe, building_description)
 		for i, worker_description in ipairs(building_description.working_positions) do
 
 			-- Get the tools for the workers.
-			if (worker_description.buildable) then
-				for j, buildcost in ipairs(worker_description.buildcost) do
-					if( not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
-						toolnames[#toolnames + 1] = buildcost
-					end
+			for j, buildcost in ipairs(worker_description.buildcost) do
+				if (buildcost ~= nil and tribe:has_ware(buildcost)) then
+					toolnames[#toolnames + 1] = buildcost
 				end
 			end
 

@@ -51,11 +51,9 @@ function worker_help_string(tribe, worker_description)
 
 	-- Get the tools for the workers.
 	local toolnames = {}
-	if (worker_description.buildable) then
-		for j, buildcost in ipairs(worker_description.buildcost) do
-			if(not (buildcost == tribe.carrier.name or buildcost == "none" or buildcost == nil)) then
-				toolnames[#toolnames + 1] = buildcost
-			end
+	for j, buildcost in ipairs(worker_description.buildcost) do
+		if (buildcost ~= nil and tribe:has_ware(buildcost)) then
+			toolnames[#toolnames + 1] = buildcost
 		end
 	end
 
@@ -112,6 +110,6 @@ return {
    func = function(tribename, worker_description)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
-      return worker_help_string(tribename, worker_description)
+      return worker_help_string(tribe, worker_description)
    end
 }
