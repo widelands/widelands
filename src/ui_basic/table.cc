@@ -22,7 +22,6 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -50,10 +49,9 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_fontname        (UI::g_fh1->fontset().serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (g_fh->get_fontheight(m_fontname, m_fontsize) + 4),
-	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
+	m_headerheight    (UI::g_fh1->render(as_uifont(".", m_fontsize))->height() + 4),
+	m_lineheight      (UI::g_fh1->render(as_uifont(".", m_fontsize))->height()),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
 	m_selection       (no_selection_index()),
@@ -134,9 +132,8 @@ void Table<void *>::add_column
 				 false);
 		m_scrollbar->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		m_scrollbar->set_steps(1);
-		uint32_t const lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
-		m_scrollbar->set_singlestepsize(lineheight);
-		m_scrollbar->set_pagesize(get_h() - lineheight);
+		m_scrollbar->set_singlestepsize(m_lineheight);
+		m_scrollbar->set_pagesize(get_h() - m_lineheight);
 	}
 }
 
@@ -478,10 +475,6 @@ void Table<void *>::select(const uint32_t i)
 Table<void *>::EntryRecord & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
-	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
-	if (entry_height > m_lineheight)
-		m_lineheight = entry_height;
-
 	EntryRecord & result = *new EntryRecord(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());

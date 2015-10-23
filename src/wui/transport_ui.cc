@@ -18,7 +18,6 @@
  */
 
 #include "economy/economy.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"

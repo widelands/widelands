@@ -27,7 +27,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
