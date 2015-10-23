@@ -65,9 +65,6 @@ struct Button : public NamedPanel {
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
-	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
-	void set_font(Font * font) {m_textstyle.font = font;}
-	void set_textstyle(const UI::TextStyle& textstyle) {m_textstyle = textstyle;}
 	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
@@ -110,10 +107,8 @@ protected:
 
 	const Image* m_pic_background; //  background texture (picture ID)
 	const Image* m_pic_custom;     //  custom icon on the button
-	UI::TextStyle m_textstyle;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
-	bool        m_draw_caret;
 };
 
 } // namespace UI
