@@ -147,7 +147,7 @@ void WordWrap::compute_end_of_line
 {
 	int32_t minimum_chars = 1; // So we won't get empty lines
 	// Keep lines from getting too wide, because calc_width_for_wrapping is not exact.
-	uint32_t margin = m_style.calc_width_for_wrapping(0x2003); // Em space
+	uint32_t margin = 4 * m_style.calc_width_for_wrapping(0x2003); // Em space
 	assert(m_wrapwidth > margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
