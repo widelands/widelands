@@ -50,7 +50,8 @@ void MainMenuLoadMap::clicked_ok() {
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 		eia.load(mapdata.filename);
-		eia.hide_minimap();
+		eia.toggle_minimap();
+		eia.toggle_minimap();
 		die();
 	}
 }
