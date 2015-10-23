@@ -108,7 +108,6 @@ void Table<void *>::add_column
 					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
-			c.btn->set_font(Font::get(m_fontname, m_fontsize));
 		}
 		c.width = width;
 		c.alignment = alignment;
@@ -157,7 +156,6 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
-		column.btn->set_font(Font::get(m_fontname, m_fontsize));
 	} else if (title.empty()) { //  had title before, not now
 		if (column.btn) {
 			delete column.btn;

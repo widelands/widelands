@@ -85,9 +85,6 @@ HelpWindow::HelpWindow
 		 g_gr->images().get("pics/but5.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::clicked_ok, boost::ref(*this)));
-	btn->set_font(Font::get((UI::g_fh1->fontset()).serif(),
-									(fontsize < 12 ? 12 : fontsize)));
-
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
 	focus();
 }

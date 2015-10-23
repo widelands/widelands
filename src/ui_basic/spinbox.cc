@@ -173,8 +173,6 @@ SpinBox::SpinBox
 
 	m_buttons.push_back(sbi->butMinus);
 	m_buttons.push_back(sbi->butPlus);
-
-	set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 SpinBox::~SpinBox() {
@@ -292,32 +290,6 @@ void SpinBox::set_align(Align alignm)
 		sbi->align = alignm;
 		update();
 	}
-}
-
-
-/**
- * Sets the font of all UI elements
- *
- * @deprecated, see set_textstyle
- */
-void SpinBox::set_font(const std::string & name, int32_t size, RGBColor color)
-{
-	set_textstyle(TextStyle::makebold(Font::get(name, size), color));
-}
-
-/**
- * Sets the font and textstyle of all UI elements
- */
-void SpinBox::set_textstyle(const TextStyle & textstyle)
-{
-	sbi->text->set_textstyle(textstyle);
-	sbi->butPlus->set_font(textstyle.font);
-	sbi->butMinus->set_font(textstyle.font);
-	if (m_big) {
-		sbi->butTenPlus->set_font(textstyle.font);
-		sbi->butTenMinus->set_font(textstyle.font);
-	}
-	update();
 }
 
 
