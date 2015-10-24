@@ -14,7 +14,10 @@ world:new_editor_immovable_category{
 
 world:new_editor_immovable_category{
    name = "artifacts",
-   descname = _ "Artifacts",
+	-- NOCOM: A newline would be nice, but neither \n nor </p><p ...> work.
+   descname = _ "Artifacts." .. " " ..
+	--TRANSLATORS: Make sure you translate “Artifacts” consistently
+	_"These immovables are used by the win condition “Artifacts”.",
    picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
 }
 

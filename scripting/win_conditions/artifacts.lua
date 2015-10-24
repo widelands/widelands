@@ -10,8 +10,6 @@ set_textdomain("win_conditions")
 
 include "scripting/win_condition_texts.lua"
 
--- NOCOM add this file to init.lua
-
 local wc_name = "Artifacts"
 -- This needs to be exactly like wc_name, but localized, because wc_name
 -- will be used as the key to fetch the translation in C++
@@ -35,20 +33,18 @@ return {
 		end
 		
 		local artifact_fields = {}
-                local artifact_names = {'artifact00', 'artifact01', 'artifact02', 'artifact03'}
 		local map = wl.Game().map
+
 		local i = 1
+		-- find all artifacts
 		for x=0, map.width-1 do
 			for y=0, map.height-1 do
 				local field = map:get_field(x,y)
-				-- find all artifacts
-                                for idx, artifact in pairs(artifact_names) do
-                                    if field.immovable and field.immovable.descr.name == artifact then
+                                if field.immovable and field.immovable.descr.name:match("artifact%d*") then
 					-- this assumes that the immovable has size small or medium, i.e. only occupies one field
 					artifact_fields[i] = map:get_field(x,y)
 					i = i + 1
-                                    end
-				end
+                                end
 			end
 		end
 
@@ -102,8 +98,8 @@ return {
 				if s == "" then
 					s = p.name
 				else
-					-- NOCOM: is this fine translation-wise?
-					s = s .. ", " .. p.name
+					-- TRANSLATORS: This is used to seperate players’ names in a list, e.g. "Steve, Robert, David"
+					s = s .. _", " .. p.name
 				end
 			end
 			return s
