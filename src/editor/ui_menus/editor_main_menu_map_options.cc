@@ -217,10 +217,8 @@ void MainMenuMapOptions::clicked_cancel() {
  */
 void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, std::string tag, std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0));
+	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	box->add(cb, UI::Box::AlignLeft, true);
-	box->add_space(padding_);
-	box->add(new UI::Textarea(box, displ_name, UI::Align_CenterLeft), UI::Box::AlignLeft);
 	box->add_space(checkbox_space_);
 	parent->add(box, UI::Box::AlignLeft);
 	parent->add_space(padding_);

@@ -201,8 +201,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 			 (&FullscreenMenuLaunchMPG::help_clicked,
 			  boost::ref(*this)));
 
-	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
-
 	m_lua = new LuaInterface();
 	win_condition_clicked();
 
