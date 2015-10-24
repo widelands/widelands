@@ -57,8 +57,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	basedir_("maps"),
 	settings_(settings),
 	ctrl_(ctrl),
-	has_translated_mapname_(false),
-	is_scenario_(false)
+	has_translated_mapname_(false)
 {
 	curdir_ = basedir_,
 	title_.set_textstyle(UI::TextStyle::ui_big());
@@ -153,12 +152,6 @@ bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
 }
 
 
-bool FullscreenMenuMapSelect::is_scenario()
-{
-	return is_scenario_;
-}
-
-
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
 	if (!table_.has_selection()) {
@@ -177,7 +170,7 @@ void FullscreenMenuMapSelect::clicked_ok()
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
-		if (is_scenario()) {
+		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
