@@ -113,6 +113,7 @@ world:new_immovable_type{
          directory = dirname .. "old/",
          hotspot = { 10, 60 },
          fps = 10,
+         play_once = true
       },
    },
 }
