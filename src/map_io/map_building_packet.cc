@@ -109,7 +109,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapBuildingPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("buildings: %s", e.what());

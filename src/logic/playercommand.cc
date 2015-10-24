@@ -164,7 +164,7 @@ void PlayerCommand::read
 				throw GameDataError("player %u does not exist", m_sender);
 			m_cmdserial = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionPlayerCommand);
+			throw UnhandledVersionError("PlayerCommand", packet_version, kCurrentPacketVersionPlayerCommand);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player command: %s", e.what());
@@ -205,7 +205,8 @@ void CmdBulldoze::read
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
 			recurse = 2 <= packet_version ? fr.unsigned_8() : false;
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdBulldoze);
+			throw UnhandledVersionError("CmdBulldoze",
+												 packet_version, kCurrentPacketVersionCmdBulldoze);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("bulldoze: %s", e.what());
@@ -258,7 +259,8 @@ void CmdBuild::read
 			bi = fr.unsigned_16();
 			coords = read_coords_32(&fr, egbase.map().extent());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdBuild);
+			throw UnhandledVersionError("CmdBuild",
+												 packet_version, kCurrentPacketVersionCmdBuild);
 		}
 
 	} catch (const WException & e) {
@@ -309,7 +311,8 @@ void CmdBuildFlag::read
 			PlayerCommand::read(fr, egbase, mol);
 			coords = read_coords_32(&fr, egbase.map().extent());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdBuildFlag);
+			throw UnhandledVersionError("CmdBuildFlag",
+												 packet_version, kCurrentPacketVersionCmdBuildFlag);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("build flag: %s", e.what());
@@ -398,7 +401,8 @@ void CmdBuildRoad::read
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			steps[i] = fr.unsigned_8();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdBuildRoad);
+			throw UnhandledVersionError("CmdBuildRoad",
+												 packet_version, kCurrentPacketVersionCmdBuildRoad);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("build road: %s", e.what());
@@ -454,7 +458,8 @@ void CmdFlagAction::read
 			fr                             .unsigned_8 ();
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdFlagAction);
+			throw UnhandledVersionError("CmdFlagAction",
+												 packet_version, kCurrentPacketVersionCmdFlagAction);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("flag action: %s", e.what());
@@ -506,7 +511,8 @@ void CmdStartStopBuilding::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdStartStopBuilding);
+			throw UnhandledVersionError("CmdStartStopBuilding",
+												 packet_version, kCurrentPacketVersionCmdStartStopBuilding);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
@@ -574,7 +580,8 @@ void CmdMilitarySiteSetSoldierPreference::read
 			preference = fr.unsigned_8();
 			serial = get_object_serial_or_zero<MilitarySite>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionSoldierPreference);
+			throw UnhandledVersionError("CmdMilitarySiteSetSoldierPreference",
+												 packet_version, kCurrentPacketVersionSoldierPreference);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
@@ -614,7 +621,8 @@ void CmdStartOrCancelExpedition::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Warehouse>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionExpedition);
+			throw UnhandledVersionError("CmdStartOrCancelExpedition",
+												 packet_version, kCurrentPacketVersionExpedition);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
@@ -668,7 +676,8 @@ void CmdEnhanceBuilding::read
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			bi = fr.unsigned_16();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
+			throw UnhandledVersionError("CmdEnhanceBuilding",
+												 packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("enhance building: %s", e.what());
@@ -721,7 +730,8 @@ void CmdDismantleBuilding::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionDismantleBuilding);
+			throw UnhandledVersionError("CmdDismantleBuilding",
+												 packet_version, kCurrentPacketVersionDismantleBuilding);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("dismantle building: %s", e.what());
@@ -772,7 +782,8 @@ void CmdEvictWorker::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Worker>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdEvictWorker);
+			throw UnhandledVersionError("CmdEvictWorker",
+												 packet_version, kCurrentPacketVersionCmdEvictWorker);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("evict worker: %s", e.what());
@@ -840,7 +851,8 @@ void CmdShipScoutDirection::read
 			// direction
 			dir = static_cast<WalkingDir>(fr.unsigned_8());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionShipScoutDirection);
+			throw UnhandledVersionError("CmdShipScoutDirection",
+												 packet_version, kCurrentPacketVersionShipScoutDirection);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship scout: %s", e.what());
@@ -908,7 +920,8 @@ void CmdShipConstructPort::read
 			// Coords
 			coords = read_coords_32(&fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionShipConstructPort);
+			throw UnhandledVersionError("CmdShipConstructPort",
+												 packet_version, kCurrentPacketVersionShipConstructPort);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship construct port: %s", e.what());
@@ -978,7 +991,8 @@ void CmdShipExploreIsland::read
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionShipExploreIsland);
+			throw UnhandledVersionError("CmdShipExploreIsland",
+												 packet_version, kCurrentPacketVersionShipExploreIsland);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
@@ -1033,7 +1047,8 @@ void CmdShipSink::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdShipSink);
+			throw UnhandledVersionError("CmdShipSink", packet_version,
+												 kCurrentPacketVersionCmdShipSink);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
@@ -1085,7 +1100,8 @@ void CmdShipCancelExpedition::read
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionShipCancelExpedition);
+			throw UnhandledVersionError("CmdShipCancelExpedition",
+												 packet_version, kCurrentPacketVersionShipCancelExpedition);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
@@ -1156,7 +1172,8 @@ void CmdSetWarePriority::read
 			m_index = fr.signed_32();
 			m_priority = fr.signed_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdSetWarePriority);
+			throw UnhandledVersionError("CmdSetWarePriority",
+												 packet_version, kCurrentPacketVersionCmdSetWarePriority);
 		}
 
 	} catch (const WException & e) {
@@ -1231,7 +1248,8 @@ void CmdSetWareMaxFill::read
 			m_index = fr.signed_32();
 			m_max_fill = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
+			throw UnhandledVersionError("CmdSetWareMaxFill",
+												 packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("set ware max fill: %s", e.what());
@@ -1339,7 +1357,8 @@ void CmdSetWareTargetQuantity::read
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionSetWareTargetQuantity);
+			throw UnhandledVersionError("CmdSetWareTargetQuantity",
+												 packet_version, kCurrentPacketVersionSetWareTargetQuantity);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("set ware target quantity: %s", e.what());
@@ -1402,7 +1421,8 @@ void CmdResetWareTargetQuantity::read
 		if (packet_version == kCurrentPacketVersionResetWareTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionResetWareTargetQuantity);
+			throw UnhandledVersionError("CmdResetWareTargetQuantity",
+												 packet_version, kCurrentPacketVersionResetWareTargetQuantity);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("reset target quantity: %s", e.what());
@@ -1459,7 +1479,8 @@ void CmdSetWorkerTargetQuantity::read
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionSetWorkerTargetQuantity);
+			throw UnhandledVersionError("CmdSetWorkerTargetQuantity",
+												 packet_version, kCurrentPacketVersionSetWorkerTargetQuantity);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("set worker target quantity: %s", e.what());
@@ -1522,7 +1543,8 @@ void CmdResetWorkerTargetQuantity::read
 		if (packet_version == kCurrentPacketVersionResetWorkerTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionResetWorkerTargetQuantity);
+			throw UnhandledVersionError("CmdResetWorkerTargetQuantity",
+												 packet_version, kCurrentPacketVersionResetWorkerTargetQuantity);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("reset worker target quantity: %s", e.what());
@@ -1578,7 +1600,8 @@ void CmdChangeTrainingOptions::read
 			attribute = fr.unsigned_16();
 			value     = fr.unsigned_16();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionChangeTrainingOptions);
+			throw UnhandledVersionError("CmdChangeTrainingOptions",
+												 packet_version, kCurrentPacketVersionChangeTrainingOptions);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("change training options: %s", e.what());
@@ -1636,7 +1659,8 @@ void CmdDropSoldier::read
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
 			soldier = get_object_serial_or_zero<Soldier>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdDropSoldier);
+			throw UnhandledVersionError("CmdDropSoldier",
+												 packet_version, kCurrentPacketVersionCmdDropSoldier);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("drop soldier: %s", e.what());
@@ -1696,7 +1720,8 @@ void CmdChangeSoldierCapacity::read
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			val = fr.signed_16();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionChangeSoldierCapacity);
+			throw UnhandledVersionError("CmdChangeSoldierCapacity",
+												 packet_version, kCurrentPacketVersionChangeSoldierCapacity);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("change soldier capacity: %s", e.what());
@@ -1781,7 +1806,8 @@ void CmdEnemyFlagAction::read
 			fr           .unsigned_8 ();
 			number   = fr.unsigned_8 ();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
+			throw UnhandledVersionError("CmdEnemyFlagAction",
+												 packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("enemy flag action: %s", e.what());
@@ -1826,7 +1852,8 @@ void PlayerMessageCommand::read
 				throw GameDataError
 					("(player %u): message id is null", sender());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionPlayerMessageCommand);
+			throw UnhandledVersionError("PlayerMessageCommand",
+												 packet_version, kCurrentPacketVersionPlayerMessageCommand);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player message: %s", e.what());
@@ -1977,7 +2004,8 @@ void CmdSetStockPolicy::read
 			m_ware = WareIndex(fr.unsigned_8());
 			m_policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdSetStockPolicy);
+			throw UnhandledVersionError("CmdSetStockPolicy",
+												 packet_version, kCurrentPacketVersionCmdSetStockPolicy);
 		}
 	} catch (const std::exception & e) {
 		throw GameDataError("Cmd_SetStockPolicy: %s", e.what());

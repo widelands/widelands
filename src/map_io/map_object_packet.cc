@@ -98,7 +98,7 @@ void MapObjectPacket::read
 				throw GameDataError("unknown object header %u", header);
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw GameDataError("map objects: %s", e.what());

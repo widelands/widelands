@@ -209,7 +209,7 @@ void MapBuildingdataPacket::read
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapBuildingdataPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("buildingdata: %s", e.what());
@@ -270,7 +270,8 @@ void MapBuildingdataPacket::read_partially_finished_building
 			pfb.m_work_completed = fr.unsigned_32();
 			pfb.m_work_steps     = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketPFBuilding);
+			throw UnhandledVersionError("MapBuildingdataPacket - Partially Finished Building",
+												 packet_version, kCurrentPacketPFBuilding);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("partially_constructed_buildings: %s", e.what());
@@ -298,7 +299,8 @@ void MapBuildingdataPacket::read_constructionsite
 
 			constructionsite.m_fetchfromflag  = fr.  signed_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionConstructionsite);
+			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite",
+												 packet_version, kCurrentPacketVersionConstructionsite);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("constructionsite: %s", e.what());
@@ -318,7 +320,8 @@ void MapBuildingdataPacket::read_dismantlesite
 
 			// Nothing to do
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionDismantlesite);
+			throw UnhandledVersionError("MapBuildingdataPacket - Dismantlesite",
+												 packet_version, kCurrentPacketVersionDismantlesite);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("dismantlesite: %s", e.what());
@@ -500,7 +503,8 @@ void MapBuildingdataPacket::read_warehouse
 			warehouse.m_next_military_act = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionWarehouse);
+			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse",
+												 packet_version, kCurrentPacketVersionWarehouse);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("warehouse: %s", e.what());
@@ -578,7 +582,8 @@ void MapBuildingdataPacket::read_militarysite
 			militarysite.m_doing_upgrade_request = 0 != fr.unsigned_8() ? true : false;
 
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionMilitarysite);
+			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite",
+												 packet_version, kCurrentPacketVersionMilitarysite);
 		}
 
 		//  If the site's capacity is outside the allowed range (can happen if
@@ -777,7 +782,8 @@ void MapBuildingdataPacket::read_productionsite
 			productionsite.m_statistics_string_on_changed_statistics = fr.c_string();
 			productionsite.m_production_result = fr.c_string();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionProductionsite);
+			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite",
+												 packet_version, kCurrentPacketVersionProductionsite);
 		}
 
 	} catch (const WException & e) {
@@ -845,7 +851,8 @@ void MapBuildingdataPacket::read_trainingsite
 				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionTrainingsite);
+			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite",
+												 packet_version, kCurrentPacketVersionTrainingsite);
 		}
 
 		//  If the site's capacity is outside the allowed range (can happen if
