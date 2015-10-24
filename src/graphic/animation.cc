@@ -39,6 +39,7 @@
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -123,7 +124,8 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const std::string& representative_image_from_disk_filename() const override;
+	const Image* representative_image(const RGBColor* clr) const override;
+	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
@@ -286,7 +288,33 @@ const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {
+const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
+	assert(!image_files_.empty());
+
+	const Image* image = g_gr->images().get(image_files_[0]);
+	int w = image->width();
+	int h = image->height();
+
+	Texture* rv = new Texture(w, h);
+	if (!hasplrclrs_ || clr == nullptr) {
+		::blit(Rect(Point(0, 0), w, h),
+				 *image,
+				 Rect(Point(0, 0), w, h),
+				 1.,
+				 BlendMode::UseAlpha,
+				 rv);
+	} else {
+		blit_blended(Rect(Point(0, 0), w, h),
+						 *image,
+						 *g_gr->images().get(pc_mask_image_files_[0]),
+						 Rect(Point(0, 0), w, h),
+						 *clr,
+						 rv);
+	}
+	return rv;
+}
+
+const std::string& NonPackedAnimation::representative_image_filename() const {
 	return image_files_[0];
 }
 

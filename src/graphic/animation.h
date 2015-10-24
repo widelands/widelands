@@ -68,13 +68,17 @@ public:
 	/// so the caller has to adjust for the hotspot himself.
 	virtual const Point& hotspot() const = 0;
 
-	/// Returns the disk filename for the first image in the animation
-	virtual const std::string& representative_image_from_disk_filename() const = 0;
+	/// An image of the first frame, blended with the given player color.
+	/// The 'clr' is the player color used for blending - the parameter can be
+	/// 'nullptr', in which case the neutral image will be returned.
+	virtual const Image* representative_image(const RGBColor* clr) const = 0;
+	/// The filename of the image used for the first frame, without player color.
+	virtual const std::string& representative_image_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// so that the given point is at the top left of the frame. Srcrc defines
 	/// the part of the animation that should be blitted. The 'clr' is the player
-	/// color used for blitting - the parameter can be NULL in which case the
+	/// color used for blitting - the parameter can be 'nullptr', in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;

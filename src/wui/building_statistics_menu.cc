@@ -393,7 +393,8 @@ bool BuildingStatisticsMenu::add_button(
 														kBuildGridCellWidth,
 														kBuildGridCellHeight,
 														g_gr->images().get("pics/but1.png"),
-														descr.representative_image(),
+														descr.representative_image(&iplayer().get_player()
+																							->get_playercolor()),
 														"",
 														false,
 														true);
