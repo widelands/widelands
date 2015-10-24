@@ -2,7 +2,7 @@ size=big
 output=meat
 
 [aihints]
-forced_after=9000
+forced_after=1800
 
 [buildcost]
 log=2

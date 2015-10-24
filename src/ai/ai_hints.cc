@@ -32,7 +32,7 @@ BuildingHints::BuildingHints(Section* const section)
      fighting_(section ? section->get_bool("fighting") : false),
      mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
      prohibited_till_(section ? section->get_natural("prohibited_till", 0) : 0),
-     forced_after_(section ? section->get_natural("forced_after", 864000) : 0),  // 10 days default
+     forced_after_(section ? section->get_natural("forced_after", 864000) : 864000),  // 10 days default
      mines_percent_(section ? section->get_int("mines_percent", 100) : 0),
      trainingsite_type_(TrainingSiteType::kNoTS)
 

@@ -2,7 +2,7 @@ size=small
 output=meat
 
 [aihints]
-prohibited_till=300
+prohibited_till=500
 
 [buildcost]
 log=4

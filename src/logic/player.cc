@@ -166,7 +166,11 @@ Player::Player
 	m_current_consumed_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ()),
 	m_ware_consumptions  (tribe_descr.get_nrwares    ()),
-	m_ware_stocks  (tribe_descr.get_nrwares          ())
+	m_ware_stocks  (tribe_descr.get_nrwares          ()),
+	m_ai_data_int32          (),
+	m_ai_data_uint32         (),
+	m_ai_data_int16          ()
+
 {
 	set_name(name);
 
@@ -1283,15 +1287,46 @@ void Player::update_building_statistics
 			 building_position.x, building_position.y);
 	}
 }
+/**
+ * Functions used by AI to save/read AI data stored in Player class.
+ */
 
-void Player::set_ai(const std::string & ai)
-{
+void Player::set_ai(const std::string & ai) {
 	m_ai = ai;
 }
 
-const std::string & Player::get_ai() const
-{
+const std::string & Player::get_ai() const {
 	return m_ai;
+}
+
+void Player::set_ai_data(int32_t value, uint32_t position) {
+	assert(position < kAIDataSize);
+	m_ai_data_int32[position] = value;
+}
+
+void Player::set_ai_data(uint32_t value, uint32_t position) {
+	assert(position < kAIDataSize);
+	m_ai_data_uint32[position] = value;
+}
+
+void Player::set_ai_data(int16_t value, uint32_t position) {
+	assert(position < kAIDataSize);
+	m_ai_data_int16[position] = value;
+}
+
+void Player::get_ai_data(int32_t * value, uint32_t position) {
+	assert(position < kAIDataSize);
+	*value = m_ai_data_int32[position];
+}
+
+void Player::get_ai_data(uint32_t * value, uint32_t position) {
+	assert(position < kAIDataSize);
+	*value = m_ai_data_uint32[position];
+}
+
+void Player::get_ai_data(int16_t * value, uint32_t position) {
+	assert(position < kAIDataSize);
+	*value = m_ai_data_int16[position];
 }
 
 /**
