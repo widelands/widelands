@@ -13,7 +13,7 @@ output=scythe
 output=shovel
 
 [aihints]
-forced_after=900
+forced_after=500
 prohibited_till=450
 
 [buildcost]

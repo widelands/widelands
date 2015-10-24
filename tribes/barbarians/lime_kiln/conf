@@ -1,6 +1,9 @@
 size=medium
 output=grout
 
+[aihints]
+forced_after=600
+
 [buildcost]
 log=4
 raw_stone=2

@@ -3,8 +3,9 @@ output=stone
 output=marble
 
 [aihints]
-forced_after=0
 stoneproducer=true
+forced_after=240
+prohibited_till=240
 
 [buildcost]
 log=2

@@ -2,8 +2,8 @@ size=small
 output=raw_stone
 
 [aihints]
-forced_after=0
 stoneproducer=true
+prohibited_till=240
 
 [buildcost]
 log=4
