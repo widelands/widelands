@@ -347,7 +347,7 @@ inline static MapObjectData read_unseen_immovable
 					m.csi.completedtime =  immovables_file.unsigned_32();
 				}
 			} else {
-				throw UnhandledVersionError(version, kCurrentPacketVersionImmovables);
+				throw UnhandledVersionError("MapPlayersViewPacket", version, kCurrentPacketVersionImmovables);
 			}
 			break;
 		case 4: // The player sees a port dock
@@ -660,7 +660,8 @@ void MapPlayersViewPacket::read
 					if (node_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						imm_kind = node_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(node_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Node Immovable kinds",
+															 node_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -677,7 +678,8 @@ void MapPlayersViewPacket::read
 						f_player_field.border_br = borders & 4;
 						f_player_field.border_bl = borders & 8;
 					} else {
-						throw UnhandledVersionError(border_file_version, kCurrentPacketVersionBorder);
+						throw UnhandledVersionError("MapPlayersViewPacket - Border file",
+															 border_file_version, kCurrentPacketVersionBorder);
 					}
 					break;
 				}
@@ -720,13 +722,15 @@ void MapPlayersViewPacket::read
 					if (terrains_file_version == kCurrentPacketVersionTerrains) {
 						f_player_field.terrains.d = terrains_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(terrains_file_version, kCurrentPacketVersionTerrains);
+						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
+															 terrains_file_version, kCurrentPacketVersionTerrains);
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						im_kind = triangle_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(triangle_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+															 triangle_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -747,13 +751,15 @@ void MapPlayersViewPacket::read
 					if (terrains_file_version == kCurrentPacketVersionTerrains) {
 						f_player_field.terrains.r = terrains_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(terrains_file_version, kCurrentPacketVersionTerrains);
+						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
+															 terrains_file_version, kCurrentPacketVersionTerrains);
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						im_kind = triangle_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(triangle_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+															 triangle_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -772,7 +778,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads = roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen | br_seen) {
@@ -783,7 +790,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads |= roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen |  r_seen) {
@@ -794,7 +802,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads |= roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					roads |= f.field->get_roads() & mask;
@@ -811,13 +820,15 @@ void MapPlayersViewPacket::read
 						survey = (f_everseen & bl_everseen & br_everseen)
 							 && surveys_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(surveys_file_version, kCurrentPacketVersionSurveys);
+						throw UnhandledVersionError("MapPlayersViewPacket - Surveys file",
+															 surveys_file_version, kCurrentPacketVersionSurveys);
 					}
 					if (survey) {
 						if (survey_amounts_file_version == kCurrentPacketVersionSurveyAmounts) {
 							f_player_field.resource_amounts.d = survey_amounts_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(survey_amounts_file_version,
+							throw UnhandledVersionError("MapPlayersViewPacket - Survey amounts",
+																 survey_amounts_file_version,
 																 kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
@@ -847,13 +858,15 @@ void MapPlayersViewPacket::read
 						survey = (f_everseen & br_everseen &  r_everseen)
 							&& surveys_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(surveys_file_version, kCurrentPacketVersionSurveys);
+						throw UnhandledVersionError("MapPlayersViewPacket - Surveys file",
+															 surveys_file_version, kCurrentPacketVersionSurveys);
 					}
 					if (survey) {
 						if (survey_amounts_file_version == kCurrentPacketVersionSurveyAmounts) {
 							f_player_field.resource_amounts.r = survey_amounts_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(survey_amounts_file_version,
+							throw UnhandledVersionError("MapPlayersViewPacket - Survey amounts",
+																 survey_amounts_file_version,
 																 kCurrentPacketVersionSurveyAmounts);
 						}
 						try {

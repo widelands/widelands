@@ -38,7 +38,7 @@ void GameClassPacket::read
 		if (packet_version == kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("game class: %s", e.what());

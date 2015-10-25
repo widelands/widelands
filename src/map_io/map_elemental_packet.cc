@@ -103,7 +103,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
 		} else
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapElementalPacket", packet_version, kCurrentPacketVersion);
 	} catch (const WException & e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}
