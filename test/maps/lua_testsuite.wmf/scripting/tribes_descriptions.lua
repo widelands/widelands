@@ -103,7 +103,7 @@ function test_descr:test_get_workers()
    tribe = egbase:get_tribe_description("barbarians")
    assert_equal(31, noworkers(tribe.workers))
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(31, noworkers(tribe.workers))
+   assert_equal(32, noworkers(tribe.workers))
 end
 
 function test_descr:test_has_building()
