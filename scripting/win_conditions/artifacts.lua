@@ -19,6 +19,7 @@ local wc_desc = _ "Search for the ancient artifacts. Once all of them are found,
 return {
 	name = wc_name,
 	description = wc_desc,
+	map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available
 	func = function()
 		-- set the objective with the game type for all players
 		broadcast_objective("win_condition", wc_descname, wc_desc)
@@ -31,7 +32,7 @@ return {
 				return p.team
 			end
 		end
-		
+
 		local artifact_fields = {}
 		local map = wl.Game().map
 
@@ -40,11 +41,11 @@ return {
 		for x=0, map.width-1 do
 			for y=0, map.height-1 do
 				local field = map:get_field(x,y)
-                                if field.immovable and field.immovable.descr.name:match("artifact%d*") then
-					-- this assumes that the immovable has size small or medium, i.e. only occupies one field
-					artifact_fields[i] = map:get_field(x,y)
-					i = i + 1
-                                end
+					if field.immovable and field.immovable:has_attribute("artifact") then
+						-- this assumes that the immovable has size small or medium, i.e. only occupies one field
+						artifact_fields[i] = map:get_field(x,y)
+						i = i + 1
+					end
 			end
 		end
 
@@ -71,12 +72,12 @@ return {
 			end
 		until all_artifacts_found
 
-		-- All artifacts are found, the game is over.			
+		-- All artifacts are found, the game is over.
 		local artifacts_per_team = {}
 		for idx, p in ipairs(plrs) do
 			artifacts_per_team[_getkey(p)] = 0
 		end
-		
+
 		for idx, f in ipairs(artifact_fields) do
 			local key = _getkey(f.owner)
 			artifacts_per_team[key] = artifacts_per_team[key] + 1
@@ -89,9 +90,9 @@ return {
 			end
 			return max
 		end
-		
+
 		local max_artifacts = _max(artifacts_per_team)
-		
+
 		local function _get_member_names(t)
 			local s = ""
 			for idx, p in ipairs(t) do
@@ -104,7 +105,7 @@ return {
 			end
 			return s
 		end
-		
+
 		local teams = {}
 		local msg = _"Overview:" .. "\n"
 		for idx, p in ipairs(plrs) do
@@ -126,8 +127,8 @@ return {
 			-- TRANSLATORS: %3$s is something like "x artifact(s)"
 			msg = msg .. "\n" .. (_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts)
 		end
-		
-		
+
+
 		for idx, p in ipairs(plrs) do
 			local key = _getkey(p)
 			-- If two or more teams have the same amount of artifacts, they are all considered winners.
@@ -141,4 +142,4 @@ return {
 		end
 	end,
 }
- 
+

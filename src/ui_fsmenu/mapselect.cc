@@ -98,6 +98,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
+	_add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 

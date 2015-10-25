@@ -2063,6 +2063,16 @@ bool Map::allows_seafaring() {
 	return false;
 }
 
+bool Map::has_artifacts(const World& world) {
+	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
+		const ImmovableDescr& descr = *world.get_immovable_descr(i);
+		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
+			return true;
+		}
+	}
+	return false;
+}
+
 
 #define MAX_RADIUS 32
 MilitaryInfluence Map::calc_influence

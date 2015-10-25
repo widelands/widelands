@@ -5,7 +5,7 @@ world:new_immovable_type{
    descname = _ "Artifact 2",
    editor_category = "artifacts",
    size = "small",
-   attributes = {},
+   attributes = { "artifact" },
    programs = {},
    animations = {
       idle = {

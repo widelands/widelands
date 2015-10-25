@@ -289,6 +289,7 @@ void FullscreenMenuLaunchMPG::win_condition_clicked()
  * update win conditions information
  */
 void FullscreenMenuLaunchMPG::win_condition_update() {
+	bool is_usable = true;
 	if (m_settings->settings().scenario) {
 		m_wincondition.set_title(_("Scenario"));
 		m_wincondition.set_tooltip
@@ -299,10 +300,23 @@ void FullscreenMenuLaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->get_win_condition_script());
-		t->do_not_warn_about_unaccessed_keys();
-
 		try {
+			std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->get_win_condition_script());
+			t->do_not_warn_about_unaccessed_keys();
+
+			// Skip this win condition if the map doesn't have all the required tags
+			if (t->has_key("map_tags") && !m_settings->settings().mapfilename.empty()) {
+				Widelands::Map map;
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_settings->settings().mapfilename);
+				ml->preload_map(true);
+				for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+					if (!map.has_tag(map_tag)) {
+						is_usable = false;
+						break;
+					}
+				}
+			}
+
 			std::string name = t->get_string("name");
 			std::string descr = t->get_string("description");
 
@@ -313,8 +327,11 @@ void FullscreenMenuLaunchMPG::win_condition_update() {
 			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
-			win_condition_clicked();
+			is_usable = false;
 		}
+	}
+	if (!is_usable) {
+		win_condition_clicked();
 	}
 }
 

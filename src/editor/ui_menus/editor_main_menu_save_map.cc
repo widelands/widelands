@@ -277,6 +277,12 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			eia().egbase().map().delete_tag("seafaring");
 		}
 
+		if (eia().egbase().map().has_artifacts(eia().egbase().world())) {
+			eia().egbase().map().add_tag("artifacts");
+		} else {
+			eia().egbase().map().delete_tag("artifacts");
+		}
+
 		try {
 			wms.save();
 			eia().set_need_save(false);
