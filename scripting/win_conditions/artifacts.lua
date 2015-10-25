@@ -57,17 +57,54 @@ return {
 			return
 		end
 
+		local found_artifact = {
+			title = _"New Artifact Found",
+			body = rt(p(_[[Your team found a new artifact.]]))
+		}
+		local lost_artifact = {
+			title = _"Artifact Lost",
+			body = rt(p(_[[An artifact your team owned was stolen by an enemy.]]))
+		}
+		local stole_artifact = {
+			title = _"New Artifact",
+			body = rt(p(_[[Your team stole an artifact from an enemy.]]))
+		}
+
+		local function _broadcast_to_team(player, msg, f)
+			if player.team == 0 then
+				player:send_message(msg.title, msg.body, {msg, field = f})
+			else
+				for idx, p in ipairs(plrs) do
+					if p.team == player.team then
+						p:send_message(msg.title, msg.body, {msg, field = f})
+					end
+				end
+			end
+		end
+
 		-- Iterate all players, if one is defeated, remove him
 		-- from the list, send him a defeated message and give him full vision
 		-- Check if all artifacts have been found (i.e. controlled by a player)
+		local artifacts_owner = {}
 		repeat
-			sleep(5000)
+			sleep(1000)
 			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
 			local all_artifacts_found = true
 			for idx, f in ipairs(artifact_fields) do
-				if not f.owner then
+				if f.owner then
+					if artifacts_owner[f] then
+						if f.owner.team ~= artifacts_owner[f].team or (f.owner.team == 0 and f.owner.number ~= artifacts_owner[f].number) then
+							-- a new team has this artifact
+							_broadcast_to_team(f.owner, stole_artifact, f)
+							_broadcast_to_team(artifacts_owner[f], lost_artifact, f)
+							artifacts_owner[f] = f.owner
+						end
+					else
+						_broadcast_to_team(f.owner, found_artifact, f)
+						artifacts_owner[f] = f.owner
+					end
+				else
 					all_artifacts_found = false
-					break
 				end
 			end
 		until all_artifacts_found
@@ -78,8 +115,8 @@ return {
 			artifacts_per_team[_getkey(p)] = 0
 		end
 
-		for idx, f in ipairs(artifact_fields) do
-			local key = _getkey(f.owner)
+		for idx, p in pairs(artifacts_owner) do
+			local key = _getkey(p)
 			artifacts_per_team[key] = artifacts_per_team[key] + 1
 		end
 
