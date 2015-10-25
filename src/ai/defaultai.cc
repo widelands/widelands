@@ -3891,10 +3891,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else {
 			return BuildingNecessity::kNotNeeded;
 		}
-	} else {
-		// impossible but still
-		assert(false);
 	}
+	throw wexception("Never here.");
 }
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
