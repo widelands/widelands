@@ -173,7 +173,7 @@ function mining_and_trainingsites()
 
    campaign_message_box(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
-      "barbarians_axfactory",
+      "barbarians_ax_workshop",
       "barbarians_warmill",
       "barbarians_helmsmithy",
       "barbarians_battlearena",
@@ -205,10 +205,10 @@ function check_weapon_productions_obj(o)
    while true do
       local rv = p1:get_buildings{
 			"barbarians_metal_workshop",
-			"barbarians_axfactory",
+			"barbarians_ax_workshop",
 			"barbarians_warmill"}
       if #rv.barbarians_metal_workshop > 0 and
-			(#rv.barbarians_axfactory + #rv.barbarians_warmill > 0) then
+			(#rv.barbarians_ax_workshop + #rv.barbarians_warmill > 0) then
          break
       end
       sleep(6523)

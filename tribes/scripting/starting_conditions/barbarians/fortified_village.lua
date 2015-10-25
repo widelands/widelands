@@ -81,7 +81,7 @@ return {
       place_building_in_region(plr, "barbarians_metalworks", sf:region(12), {
          wares = { iron = 8 },
       })
-      place_building_in_region(plr, "barbarians_axfactory", sf:region(12), {
+      place_building_in_region(plr, "barbarians_ax_workshop", sf:region(12), {
          wares = { coal = 8 },
       })
       place_building_in_region(plr, "barbarians_hardener", sf:region(12), {

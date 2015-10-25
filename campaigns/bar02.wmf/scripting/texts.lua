@@ -79,7 +79,7 @@ obj_build_training_infrastructure = {
    number = 4,
    body = objective_text(_"Build a training infrastructure",
       listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
-      listitem_bullet(_"Enhance your metal workshop to an axfactory in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the axfactory to a war mill, which will produce additional weapons.") ..
+      listitem_bullet(_"Enhance your metal workshop to an ax workshop in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the ax workshop to a war mill, which will produce additional weapons.") ..
       listitem_bullet(_"Build a helm smithy to the west of the mountains to provide your soldiers with better armor."))
 }
 
@@ -109,7 +109,7 @@ obj_build_weapon_productions = {
    title = _"Build weapons production",
    number = 3,
    body = objective_text(_"Build weapons production",
-      listitem_bullet(_"Enhance your metal workshop to an axfactory in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the axfactory to a war mill, which will produce additional weapons."))
+      listitem_bullet(_"Enhance your metal workshop to an ax workshop in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the ax workshop to a war mill, which will produce additional weapons."))
 }
 
 obj_build_a_helmsmithy = {

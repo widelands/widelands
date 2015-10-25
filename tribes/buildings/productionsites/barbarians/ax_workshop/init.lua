@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
-   name = "barbarians_axfactory",
+   name = "barbarians_ax_workshop",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("barbarians_building", "Axfactory"),
+   descname = pgettext("barbarians_building", "Ax Workshop"),
    directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",

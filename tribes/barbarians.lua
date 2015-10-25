@@ -202,7 +202,7 @@ tribes:new_tribe {
 		"barbarians_shipyard",
 		"barbarians_metal_workshop",
 		"barbarians_warmill",
-		"barbarians_axfactory",
+		"barbarians_ax_workshop",
 
 		-- Big
 		"barbarians_cattlefarm",

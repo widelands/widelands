@@ -72,7 +72,7 @@ end
 
 function test_descr:test_enhanced()
    assert_equal(false, egbase:get_building_description("barbarians_headquarters").enhanced)
-   assert_equal(true, egbase:get_building_description("barbarians_axfactory").enhanced)
+   assert_equal(true, egbase:get_building_description("barbarians_ax_workshop").enhanced)
 end
 
 function test_descr:test_enhancement_cost()
@@ -351,7 +351,7 @@ function test_descr:test_consumers()
    assert_equal(true, find_building("empire_smelting_works", ware_description.consumers))
    assert_equal(true, find_building("atlanteans_smelting_works", ware_description.consumers))
    assert_equal(true, find_building("barbarians_warmill", ware_description.consumers))
-   assert_equal(true, find_building("barbarians_axfactory", ware_description.consumers))
+   assert_equal(true, find_building("barbarians_ax_workshop", ware_description.consumers))
    assert_equal(true, find_building("barbarians_helmsmithy", ware_description.consumers))
    assert_equal(false, find_building("atlanteans_crystalmine", ware_description.producers))
 end

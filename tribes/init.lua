@@ -371,7 +371,7 @@ include "tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua"
 include "tribes/buildings/productionsites/barbarians/smelting_works/init.lua"
 include "tribes/buildings/productionsites/barbarians/shipyard/init.lua"
 include "tribes/buildings/productionsites/barbarians/warmill/init.lua"
-include "tribes/buildings/productionsites/barbarians/axfactory/init.lua"
+include "tribes/buildings/productionsites/barbarians/ax_workshop/init.lua"
 include "tribes/buildings/productionsites/barbarians/metal_workshop/init.lua"
 -- Barbarians big
 include "tribes/buildings/productionsites/barbarians/cattlefarm/init.lua"

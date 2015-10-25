@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_axfactory",
+   enhancement = "barbarians_ax_workshop",
 
    buildcost = {
 		log = 1,

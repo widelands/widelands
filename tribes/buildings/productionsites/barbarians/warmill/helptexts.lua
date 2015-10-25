@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
 	-- TRANSLATORS: Note helptext for a building
-	return pgettext("barbarians_building", "The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an axfactory.")
+	return pgettext("barbarians_building", "The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an ax workshop.")
 end
 
 function building_helptext_performance()
