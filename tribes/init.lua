@@ -287,6 +287,7 @@ include "tribes/workers/empire/stonemason/init.lua"
 include "tribes/workers/empire/toolsmith/init.lua"
 include "tribes/workers/empire/trainer/init.lua"
 include "tribes/workers/empire/vinefarmer/init.lua"
+include "tribes/workers/empire/vintner/init.lua"
 include "tribes/workers/empire/weaponsmith/init.lua"
 include "tribes/workers/empire/weaver/init.lua"
 

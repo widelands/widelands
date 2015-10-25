@@ -124,8 +124,9 @@ tribes:new_tribe {
 			"empire_miller",
 			"empire_baker",
 			"empire_brewer",
-			"empire_pigbreeder",
 			"empire_vinefarmer",
+			"empire_vintner",
+			"empire_pigbreeder",
 			"empire_innkeeper"
 		},
 		{

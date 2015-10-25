@@ -40,7 +40,7 @@ tribes:new_productionsite_type {
    },
 
 	working_positions = {
-		empire_brewer = 1 -- TODO(GunChleoc): We want a vintner, but don't have the graphics.
+		empire_vintner = 1
 	},
 
    inputs = {
