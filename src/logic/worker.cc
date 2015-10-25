@@ -2560,8 +2560,8 @@ void Worker::fugitive_update(Game & game, State & state)
 	// We always have a high probability to see flags within our vision range,
 	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
-	int32_t vision = descr().vision_range();
-	int32_t maxdist = 4 * vision;
+	uint32_t vision = descr().vision_range();
+	uint32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
 			(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
