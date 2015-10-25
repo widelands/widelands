@@ -91,7 +91,7 @@ void MapAllowedBuildingTypesPacket::read
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapAllowedBuildingTypesPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("allowed buildings: %s", e.what());

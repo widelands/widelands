@@ -69,11 +69,16 @@ void GamePlayerInfoPacket::read
 					player.m_msites_defeated     = fr.unsigned_32();
 					player.m_civil_blds_lost     = fr.unsigned_32();
 					player.m_civil_blds_defeated = fr.unsigned_32();
+					for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
+						player.m_ai_data_int32[ai_pos] = fr.signed_32();
+						player.m_ai_data_uint32[ai_pos] = fr.unsigned_32();
+						player.m_ai_data_int16[ai_pos] = fr.unsigned_16();
+					}
 				}
 			}
 			game.read_statistics(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player info: %s", e.what());
@@ -116,6 +121,11 @@ void GamePlayerInfoPacket::write
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
+		for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
+			fw.signed_32(plr->m_ai_data_int32[ai_pos]);
+			fw.unsigned_32(plr->m_ai_data_uint32[ai_pos]);
+			fw.unsigned_16(plr->m_ai_data_int16[ai_pos]);
+		}
 	} else
 		fw.unsigned_8(0); //  Player is NOT in game.
 

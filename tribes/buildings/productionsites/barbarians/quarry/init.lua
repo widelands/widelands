@@ -36,6 +36,7 @@ tribes:new_productionsite_type {
 
    aihints = {
 		forced_after = 0,
+		prohibited_till = 240,
 		graniteproducer = true
    },
 

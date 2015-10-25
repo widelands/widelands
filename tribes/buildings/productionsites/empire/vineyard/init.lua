@@ -30,7 +30,7 @@ tribes:new_productionsite_type {
 
    aihints = {
 		space_consumer = true,
-		forced_after = 120
+		forced_after = 300
    },
 
 	working_positions = {

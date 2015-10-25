@@ -32,7 +32,9 @@ tribes:new_productionsite_type {
 		},
 	},
 
-	aihints = {},
+	aihints = {
+		forced_after = 600
+	},
 
 	working_positions = {
 		barbarians_lime_burner = 1

@@ -41,12 +41,14 @@ GameDataError::GameDataError(char const * const fmt, ...)
 }
 
 
-UnhandledVersionError::UnhandledVersionError(int32_t packet_version,
+UnhandledVersionError::UnhandledVersionError(const char* packet_name, int32_t packet_version,
 											int32_t current_packet_version)
 {
-	m_what = (boost::format("\n\nUnhandledVersionError: %s\n\nSaved Version: %i\nCurrent Version: %i")
+	m_what = (boost::format
+				 ("\n\nUnhandledVersionError: %s\n\nPacket Name: %s\nSaved Version: %i\nCurrent Version: %i")
 				 % _("This game was saved using an older version of Widelands and cannot be loaded anymore, "
 					  "or it's a new version that can't be handled yet.")
+				 % packet_name
 				 % static_cast<int>(packet_version)
 				 % static_cast<int>(current_packet_version)).str();
 }

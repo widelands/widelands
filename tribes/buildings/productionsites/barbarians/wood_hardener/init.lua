@@ -42,7 +42,8 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		forced_after = 0
+		forced_after = 250,
+		rohibited_till = 250
    },
 
 	working_positions = {

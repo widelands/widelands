@@ -80,7 +80,7 @@ void MapAllowedWorkerTypesPacket::read
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapAllowedWorkerTypesPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("allowed worker types: %s", e.what());

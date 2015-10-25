@@ -87,7 +87,7 @@ void MapBobPacket::read(FileSystem& fs,
 				}
 			}
 		else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapBobPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("bobs: %s", e.what());

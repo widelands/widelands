@@ -11,7 +11,7 @@ tribes:new_ware_type {
 		empire = 20
 	},
    preciousness = {
-		empire = 5
+		empire = 7
 	},
 
    animations = {

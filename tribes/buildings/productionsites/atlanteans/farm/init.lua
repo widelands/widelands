@@ -33,8 +33,8 @@ tribes:new_productionsite_type {
 		space_consumer = true,
 		 -- Farm needs spidercloth to be built and spidercloth needs corn for production
 		 -- -> farm should be built ASAP!
-		forced_after = 180,
-		prohibited_till = 120
+		forced_after = 400,
+		prohibited_till = 200
    },
 
 	working_positions = {

@@ -1810,7 +1810,7 @@ void Soldier::Loader::load(FileRead & fr)
 
 			m_battle = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Soldier", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading soldier: %s", e.what());

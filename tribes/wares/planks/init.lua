@@ -12,8 +12,8 @@ tribes:new_ware_type {
 		empire = 40
 	},
    preciousness = {
-		atlanteans = 7,
-		empire = 7
+		atlanteans = 10,
+		empire = 10
 	},
 
    animations = {

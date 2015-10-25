@@ -344,7 +344,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Critter", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading critter: %s", e.what());

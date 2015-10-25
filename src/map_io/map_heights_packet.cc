@@ -45,7 +45,7 @@ void MapHeightsPacket::read
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_height(fr.unsigned_8());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapHeightsPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("heights: %s", e.what());

@@ -543,7 +543,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("PortDock", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading portdock: %s", e.what());

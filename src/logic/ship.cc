@@ -1115,7 +1115,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				throw GameDataError("Failed to load ship: %s", e.what());
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Ship", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ship: %s", e.what());
