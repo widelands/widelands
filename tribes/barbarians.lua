@@ -49,7 +49,7 @@ tribes:new_tribe {
 			 "wheat",
 			 "barbarians_bread",
 			 "beer",
-			 "stout",
+			 "beer_strong",
 			 "ration",
 			 "snack",
 			 "meal"

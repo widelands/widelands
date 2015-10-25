@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "stout",
+   name = "beer_strong",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Stout"),
+   descname = pgettext("ware", "Strong Beer"),
    directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {

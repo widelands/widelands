@@ -63,7 +63,7 @@ tribes:new_trainingsite_type {
 		barbarians_bread = 10,
 		fish = 6,
 		meat = 6,
-		stout = 6
+		beer_strong = 6
 	},
 	outputs = {
 		"barbarians_soldier",
@@ -74,7 +74,7 @@ tribes:new_trainingsite_type {
 		max_level = 1,
 		food = {
 			{"fish", "meat"},
-			{"stout"},
+			{"beer_strong"},
 			{"barbarians_bread"}
 		}
 	},
@@ -95,7 +95,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
 				"sleep=15000",
 				"check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
-				"consume=barbarians_bread fish,meat stout",
+				"consume=barbarians_bread fish,meat beer_strong",
 				"animate=working 15000",
 				"train=soldier evade 0 1"
 			}
@@ -107,7 +107,7 @@ tribes:new_trainingsite_type {
 				"check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
 				"sleep=15000",
 				"check_soldier=soldier evade 1", -- Because the soldier can be expulsed by the player
-				"consume=barbarians_bread:2 fish,meat stout",
+				"consume=barbarians_bread:2 fish,meat beer_strong",
 				"animate=working 15000",
 				"train=soldier evade 1 2"
 			}

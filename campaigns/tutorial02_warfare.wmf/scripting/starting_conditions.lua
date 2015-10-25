@@ -46,7 +46,7 @@ function init_player()
             helmet = 20,
             helmet_mask = 20,
             helmet_warhelm = 20,
-            stout = 50,
+            beer_strong = 50,
             barbarians_bread = 200,
             meat = 200
          }

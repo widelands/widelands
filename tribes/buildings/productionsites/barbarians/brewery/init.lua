@@ -46,19 +46,19 @@ tribes:new_productionsite_type {
 		wheat = 8
 	},
    outputs = {
-		"stout"
+		"beer_strong"
    },
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start brewing stout because ...
-			descname = _"brewing stout",
+			-- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
+			descname = _"brewing strong beer",
 			actions = {
 				"sleep=30000",
-				"return=skipped unless economy needs stout",
+				"return=skipped unless economy needs beer_strong",
 				"consume=water wheat",
 				"animate=working 30000",
-				"produce=stout"
+				"produce=beer_strong"
 			}
 		},
 	},

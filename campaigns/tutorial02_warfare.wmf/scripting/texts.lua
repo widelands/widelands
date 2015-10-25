@@ -48,7 +48,7 @@ battlearena1 = {
    body = rt(
       p(_[[Now I have talked about training and levels. Let me elaborate on that.]]) ..
       p(_[[A newly created soldier has no experience and is not very good at fighting. To make him stronger, you can build training sites.]]) ..
-      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and stout. In a real game, you should have a good infrastructure before you build it.]]) ..
+      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strong beer. In a real game, you should have a good infrastructure before you build it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[To see evade training in action, build a battle arena.]]) ..
       "</p><p font-size=8><br></p>" ..
@@ -71,7 +71,7 @@ battlearena2 = {
       h1(_"The Battle Arena Has Been Constructed") ..
       p(_[[Very good. Our battle arena has been finished, and the soldiers are already walking towards it.]]) ..
       -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and stout, as well as either fish or meat.]] .. " " ..
+      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strong beer, as well as either fish or meat.]] .. " " ..
       _[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
@@ -105,7 +105,7 @@ trainingcamp2 = {
    title = _"The Training Camp",
    body = rt(
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
-      p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no stout. Instead, they need different axes for attack training and helmets for health training.]]) ..
+      p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]]) ..
       p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
       p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
    )
