@@ -311,7 +311,7 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_animation(get_animation("idle")).representative_image(player_color);
+		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
 	}
 	return nullptr;
 }

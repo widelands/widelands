@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -71,7 +72,7 @@ public:
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
 	/// 'nullptr', in which case the neutral image will be returned.
-	virtual const Image* representative_image(const RGBColor* clr) const = 0;
+	virtual Image* representative_image(const RGBColor* clr) const = 0;
 	/// The filename of the image used for the first frame, without player color.
 	virtual const std::string& representative_image_filename() const = 0;
 
@@ -95,7 +96,6 @@ private:
 */
 class AnimationManager {
 public:
-	~AnimationManager();
 	/**
 	 * Loads an animation, graphics sound and everything from a Lua table.
 	 *
@@ -109,10 +109,14 @@ public:
 	/// unknown.
 	const Animation& get_animation(uint32_t id) const;
 
+	/// Returns the representative image, using the given player color.
+	/// If this image has been generated before, it is pulled from the cache using
+	/// the clr argument that was used previously.
+	const Image* get_representative_image(uint32_t id, const RGBColor* clr = nullptr);
+
 private:
-	// TODO(SirVer): this vector should be changed to unique__ptr (spelled wrong to avoid message by CodeCheck)
-	//  instead of raw pointers to get rid of the destructor
-	std::vector<Animation*> m_animations;
+	std::vector<std::unique_ptr<Animation>> animations_;
+	std::map<uint32_t, std::unique_ptr<Image>> representative_images_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_H
