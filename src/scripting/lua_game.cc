@@ -767,15 +767,15 @@ int LuaPlayer::get_buildings(lua_State * L) {
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State * L) {
 	Game & game = get_game(L);
-	const TribeDescr & tribe = get(L, game).tribe();
+	const Tribes& tribes = game.tribes();
 
 	const char * name = luaL_checkstring(L, 2);
-	BuildingIndex i = tribe.building_index(name);
-	if (!tribe.has_building(i))
+	BuildingIndex i = tribes.building_index(name);
+	if (!tribes.building_exists(i))
 		report_error(L, "Unknown building type: <%s>", name);
 
 	lua_pushint32
-		(L, tribe.get_building_descr(i)->suitability
+		(L, tribes.get_building_descr(i)->suitability
 		 (game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L))
 		);
 	return 1;
@@ -859,6 +859,7 @@ int LuaPlayer::switchplayer(lua_State * L) {
 void LuaPlayer::m_parse_building_list
 	(lua_State * L, const TribeDescr & tribe, std::vector<BuildingIndex> & rv)
 {
+	const Tribes& tribes = get_egbase(L).tribes();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
@@ -866,7 +867,6 @@ void LuaPlayer::m_parse_building_list
 		}
 		// Only act on buildings that the tribe has or could conquer
 		const TribeDescr& tribe_descr = get(L, get_egbase(L)).tribe();
-		const Tribes& tribes = get_egbase(L).tribes();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
 			const BuildingIndex& building_index = static_cast<BuildingIndex>(i);
 			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
@@ -882,7 +882,7 @@ void LuaPlayer::m_parse_building_list
 		while (lua_next(L, -2) != 0) {
 			const char * name = luaL_checkstring(L, -1);
 			BuildingIndex i = tribe.building_index(name);
-			if (!tribe.has_building(i))
+			if (!tribes.building_exists(i))
 				report_error(L, "Unknown building type: '%s'", name);
 
 			rv.push_back(i);
