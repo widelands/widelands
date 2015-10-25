@@ -163,7 +163,7 @@ TribesLegacyLookupTable::TribesLegacyLookupTable() :
 			{"pittabread", "barbarians_bread"},
 			{"raw_stone", "granite"},
 			{"sharpax", "ax_sharp"},
-			{"strongbeer", "stout"},
+			{"strongbeer", "beer_strong"},
 			{"thatchreed", "thatch_reed"},
 			{"warhelm", "helmet_warhelm"},
 			{"warriorsax", "ax_warriors"},
