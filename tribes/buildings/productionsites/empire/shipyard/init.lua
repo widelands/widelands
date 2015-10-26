@@ -59,9 +59,6 @@ tribes:new_productionsite_type {
 		log = 2,
 		cloth = 4
 	},
-   outputs = {
-		"beer"
-   },
 
 	programs = {
 		work = {

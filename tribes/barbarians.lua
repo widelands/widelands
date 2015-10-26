@@ -189,8 +189,8 @@ tribes:new_tribe {
 
 		-- Medium
 		"barbarians_wood_hardener",
-		"barbarians_lime_kiln",
 		"barbarians_reed_yard",
+		"barbarians_lime_kiln",
 		"barbarians_bakery",
 		"barbarians_micro_brewery",
 		"barbarians_brewery",

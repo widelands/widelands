@@ -1582,7 +1582,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				|| bo.new_building_ == BuildingNecessity::kForced
 				|| bo.new_building_ == BuildingNecessity::kAllowed
 				|| bo.new_building_ == BuildingNecessity::kNeededPending) && !bo.outputs_.empty()) {
-					assert (bo.max_needed_preciousness_ > 0);
+				if (bo.max_needed_preciousness_ <= 0) {
+					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
+										  bo.desc->name().c_str());
+				}
 			} else {
 				// For other situations we set max_needed_preciousness_ to zero
 				bo.max_needed_preciousness_ = 0;
