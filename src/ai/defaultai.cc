@@ -5076,7 +5076,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 	// adding power of team (minus my power) divided by 2
 	// (if I am a part of a team of course)
-	const TeamNumber team_number = player_ ? player_->team_number() : 0;
+	const TeamNumber team_number = player_->team_number();
 	if (team_number > 0) {
 		my_power += (team_power[team_number] - my_power) / 2;
 	}
