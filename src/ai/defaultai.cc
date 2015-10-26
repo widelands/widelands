@@ -5023,7 +5023,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// summing team power, creating team_power std::map of team_number:strength
 	std::map<TeamNumber, uint32_t> team_power;
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		TeamNumber const tm = (game().get_player(j)) ? game().get_player(j)->team_number() : 0;
+		const Player* other = game().get_player(j);
+		const TeamNumber tm = other ? other->team_number() : 0;
 		if (tm == 0) {
 			continue;
 		}
@@ -5075,9 +5076,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 	// adding power of team (minus my power) divided by 2
 	// (if I am a part of a team of course)
-	TeamNumber team_number = (game().get_player(pn)) ? game().get_player(pn)->team_number() : 0;
-	if (team_number > 0) {
-		my_power += (team_power[team_number] - my_power) / 2;
+	{
+		const Player* other = game().get_player(pn);
+		const TeamNumber team_number = other ? other->team_number() : 0;
+		if (team_number > 0) {
+			my_power += (team_power[team_number] - my_power) / 2;
+		}
 	}
 
 	// now we test all players to identify 'attackable' ones
@@ -5088,7 +5092,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			continue;
 		}
 		// if we are the same team
-		TeamNumber other_team_number = (game().get_player(j)) ? game().get_player(j)->team_number() : 0;
+		const Player* other = game().get_player(j);
+		const TeamNumber other_team_number = other ? other->team_number() : 0;
 		if (team_number > 0 && team_number == other_team_number) {
 			player_attackable[j - 1] = false;
 			continue;
