@@ -5076,12 +5076,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 	// adding power of team (minus my power) divided by 2
 	// (if I am a part of a team of course)
-	{
-		const Player* other = game().get_player(pn);
-		const TeamNumber team_number = other ? other->team_number() : 0;
-		if (team_number > 0) {
-			my_power += (team_power[team_number] - my_power) / 2;
-		}
+	const Player* other_player = game().get_player(pn);
+	const TeamNumber team_number = other_player ? other_player->team_number() : 0;
+	if (team_number > 0) {
+		my_power += (team_power[team_number] - my_power) / 2;
 	}
 
 	// now we test all players to identify 'attackable' ones
@@ -5107,8 +5105,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				players_power += genstats.at(j - 1).miltary_strength.back();
 			}
 			// +power of team (if member of a team)
-			if (game().get_player(j) && game().get_player(j)->team_number() > 0) {
-				players_power += (team_power[game().get_player(j)->team_number()] - players_power) / 2;
+			const Player* other = game().get_player(j);
+			const TeamNumber tm = other ? other->team_number() : 0;
+			if (tm > 0) {
+				players_power += (team_power[tm] - players_power) / 2;
 			}
 
 			if (players_power == 0) {
