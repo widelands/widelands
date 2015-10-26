@@ -506,6 +506,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		if (dynamic_cast<const Game *>(&ibase().egbase())) {
 			if (!building_descr->is_buildable() || !m_plr->is_building_type_allowed(building_index))
 				continue;
+			if (building_descr->needs_seafaring() && ibase().egbase().map().get_port_spaces().size() < 2)
+				continue;
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 

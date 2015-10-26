@@ -96,6 +96,7 @@ public:
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
+	bool needs_seafaring() const {return m_needs_seafaring;}
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -145,6 +146,7 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
+	bool          m_needs_seafaring; // THis building should only be built on seafaring maps.
 	BuildingIndex  m_enhancement;
 	BuildingIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable

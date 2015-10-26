@@ -8,6 +8,7 @@ tribes:new_productionsite_type {
    directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
+   needs_seafaring = true,
 
    buildcost = {
 		log = 3,
