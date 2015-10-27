@@ -57,8 +57,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	basedir_("maps"),
 	settings_(settings),
 	ctrl_(ctrl),
-	has_translated_mapname_(false),
-	is_scenario_(false)
+	has_translated_mapname_(false)
 {
 	curdir_ = basedir_,
 	title_.set_textstyle(UI::TextStyle::ui_big());
@@ -80,7 +79,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 										 UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
-	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	cb_dont_localize_mapnames_->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
@@ -90,12 +89,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	cb_show_all_maps_->set_state(true);
 
 	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
-	UI::Textarea * ta_dont_localize_mapnames =
-			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
-	vbox->add_space(padding_);
-	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
-	vbox->add_space(checkbox_space_);
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
@@ -131,7 +124,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
 }
 
 void FullscreenMenuMapSelect::think()
@@ -160,12 +152,6 @@ bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
 }
 
 
-bool FullscreenMenuMapSelect::is_scenario()
-{
-	return is_scenario_;
-}
-
-
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
 	if (!table_.has_selection()) {
@@ -184,7 +170,7 @@ void FullscreenMenuMapSelect::clicked_ok()
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
-		if (is_scenario()) {
+		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
@@ -376,6 +362,11 @@ void FullscreenMenuMapSelect::fill_table()
 		}
 	}
 	table_.fill(maps_data_, display_type);
+	if (table_.size() > 0) {
+		table_.select(0);
+	} else {
+		ok_.set_enabled(false);
+	}
 }
 
 /*
@@ -387,16 +378,12 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 	int32_t id = tags_ordered_.size();
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
+	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	cb->changedto.connect
 		(boost::bind(&FullscreenMenuMapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
-	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
-	box->add_space(padding_);
-	box->add(ta, UI::Box::AlignLeft);
 	box->add_space(checkbox_space_);
-
 	tags_checkboxes_.push_back(cb);
 
 	return cb;

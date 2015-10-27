@@ -47,8 +47,6 @@ private:
 	UI::Checkbox * cb_auto_log;
 	UI::Textarea * ta_nickname;
 	UI::Textarea * ta_password;
-	UI::Textarea * ta_register;
-	UI::MultilineTextarea * ta_auto_log;
 	UI::MultilineTextarea * pwd_warning;
 };
 

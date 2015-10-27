@@ -3,7 +3,7 @@ output=smoked_meat
 output=smoked_fish
 
 [aihints]
-forced_after=900
+forced_after=800
 prohibited_till=180
 
 [buildcost]

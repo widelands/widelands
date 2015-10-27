@@ -2,7 +2,7 @@ size=medium
 output=pittabread
 
 [aihints]
-prohibited_till=600
+prohibited_till=800
 
 [buildcost]
 log=2

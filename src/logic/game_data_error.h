@@ -40,7 +40,7 @@ protected:
 /// \param packet_version:         The version of the packet that Widelands is trying to load.
 /// \param current_packet_version: The packet version that Widelands is currently using.
 struct UnhandledVersionError : public GameDataError {
-	explicit UnhandledVersionError(int32_t packet_version,
+	explicit UnhandledVersionError(const char* packet_name, int32_t packet_version,
 									 int32_t current_packet_version);
 
 	char const * what() const noexcept override {return m_what.c_str();}

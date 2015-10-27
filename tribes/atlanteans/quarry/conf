@@ -2,7 +2,8 @@ size=small
 output=stone
 
 [aihints]
-forced_after=60
+prohibited_till=240
+forced_after=240
 stoneproducer=true
 
 [buildcost]

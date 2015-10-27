@@ -1,7 +1,7 @@
 help=_Flour is produced by the mill out of wheat and is needed in the bakery to produce the tasty Empire bread.
 
 default_target_quantity=20
-preciousness=5
+preciousness=9
 
 [idle]
 pics=flour_idle.png

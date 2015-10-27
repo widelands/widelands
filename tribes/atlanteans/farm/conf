@@ -3,9 +3,9 @@ output=corn
 
 [aihints]
 space_consumer=true
-forced_after=180 # farm needs spidercloth to be build and spidercloth needs
+forced_after=400 # farm needs spidercloth to be build and spidercloth needs
               # corn for production -> farm should be build ASAP!
-prohibited_till=120
+prohibited_till=200
 
 [buildcost]
 log=3

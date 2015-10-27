@@ -64,7 +64,7 @@ void MapScriptingPacket::read
 				upcast(LuaGameInterface, lgi, &g->lua());
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 			} else {
-				throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+				throw UnhandledVersionError("MapScriptingPacket", packet_version, kCurrentPacketVersion);
 			}
 		} catch (const WException & e) {
 			throw GameDataError("scripting: %s", e.what());

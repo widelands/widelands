@@ -75,7 +75,7 @@ void MapPlayerNamesAndTribesPacket::pre_read
 				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player names and tribes: %s", e.what());

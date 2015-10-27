@@ -65,7 +65,7 @@ void CmdCallEconomyBalance::read
 				m_flag = &mol.get<Flag>(serial);
 			m_timerid = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("call economy balance: %s", e.what());

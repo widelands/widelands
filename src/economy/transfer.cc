@@ -321,7 +321,7 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 		if (packet_version == kCurrentPacketVersion) {
 			rd.destination = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Transfer", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("transfer: %s", e.what());

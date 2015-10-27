@@ -69,7 +69,7 @@ void GameCmdQueuePacket::read
 				++ cmdq.m_ncmds;
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("command queue: %s", e.what());
