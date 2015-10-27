@@ -642,7 +642,7 @@ MapObject::Loader * WareInstance::load
 
 			return loader.release();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("WareInstance", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());

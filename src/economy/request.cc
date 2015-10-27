@@ -168,7 +168,7 @@ void Request::read
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("request: %s", e.what());

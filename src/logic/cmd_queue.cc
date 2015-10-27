@@ -178,7 +178,7 @@ void GameLogicCommand::read
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("game logic: %s", e.what());

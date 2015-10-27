@@ -68,7 +68,8 @@ void CmdDestroyMapObject::read
 			else
 				obj_serial = 0;
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionDestroyMapObject);
+			throw UnhandledVersionError("CmdDestroyMapObject",
+												 packet_version, kCurrentPacketVersionDestroyMapObject);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("destroy map object: %s", e.what());
@@ -121,7 +122,7 @@ void CmdAct::read
 				obj_serial = 0;
 			arg = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdAct);
+			throw UnhandledVersionError("CmdAct", packet_version, kCurrentPacketVersionCmdAct);
 		}
 	} catch (const WException & e) {
 		throw wexception("act: %s", e.what());
@@ -517,7 +518,7 @@ void MapObject::Loader::load(FileRead & fr)
 
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionMapObject);
+			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
 
 		Serial const serial = fr.unsigned_32();

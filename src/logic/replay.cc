@@ -106,7 +106,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 
 		const uint8_t packet_version = m_cmdlog->unsigned_8();
 		if (packet_version != kCurrentPacketVersion) {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
 		}
 		game.rng().read_state(*m_cmdlog);
 	}
