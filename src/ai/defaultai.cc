@@ -1863,7 +1863,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += std::min<uint8_t>(bf->producers_nearby_.at(bo.production_hint_), 4) * 5 -
 						        new_buildings_stop_ * 15 -
 						       	bf->space_consumers_nearby_ * 5  -
-						       	bf->rocks_nearby_ / 3 +
+								  bf->rocks_nearby_ / 3 +
 						        bf->trees_nearby_ / 2 +
 						        std::min<uint8_t>(bf->supporters_nearby_.at(bo.production_hint_), 4) * 3;
 
@@ -3888,10 +3888,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else {
 			return BuildingNecessity::kNotNeeded;
 		}
-	} else {
-		// impossible but still
-		assert(false);
 	}
+	throw wexception("Never here.");
 }
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
@@ -5020,7 +5018,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// summing team power, creating team_power std::map of team_number:strength
 	std::map<TeamNumber, uint32_t> team_power;
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		TeamNumber const tm = game().get_player(j)->team_number();
+		const Player* other = game().get_player(j);
+		const TeamNumber tm = other ? other->team_number() : 0;
 		if (tm == 0) {
 			continue;
 		}
@@ -5072,8 +5071,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 	// adding power of team (minus my power) divided by 2
 	// (if I am a part of a team of course)
-	if (game().get_player(pn)->team_number() > 0) {
-		my_power += (team_power[game().get_player(pn)->team_number()] - my_power) / 2;
+	const TeamNumber team_number = player_->team_number();
+	if (team_number > 0) {
+		my_power += (team_power[team_number] - my_power) / 2;
 	}
 
 	// now we test all players to identify 'attackable' ones
@@ -5084,8 +5084,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			continue;
 		}
 		// if we are the same team
-		if (game().get_player(pn)->team_number() > 0 &&
-		game().get_player(pn)->team_number() == game().get_player(j)->team_number()) {
+		const Player* other = game().get_player(j);
+		const TeamNumber tm = other ? other->team_number() : 0;
+		if (team_number > 0 && team_number == tm) {
 			player_attackable[j - 1] = false;
 			continue;
 		}
@@ -5098,8 +5099,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				players_power += genstats.at(j - 1).miltary_strength.back();
 			}
 			// +power of team (if member of a team)
-			if (game().get_player(j)->team_number() > 0) {
-				players_power += (team_power[game().get_player(j)->team_number()] - players_power) / 2;
+			if (tm > 0) {
+				players_power += (team_power[tm] - players_power) / 2;
 			}
 
 			if (players_power == 0) {
