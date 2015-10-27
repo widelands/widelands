@@ -608,16 +608,16 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			for (WareIndex i = 0;  i < static_cast<int>(game.tribes().nrworkers()); ++i) {
-				const WorkerDescr& worker_descr = *game.tribes().get_worker_descr(i);
-				if (worker_descr.becomes() == idx) {
-					idx = i;
-					worker_placed = true;
+			WareIndex nuwo    = game.tribes().nrworkers();
+			WareIndex current = 0;
+			for (; current < nuwo; ++current) {
+				WorkerDescr const * worker = game.tribes().get_worker_descr(current);
+				if (worker->becomes() == idx) {
+					idx = current;
 					break;
 				}
 			}
-
-			if (!worker_placed)
+			if (current == nuwo)
 				throw
 					wexception
 						("Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
