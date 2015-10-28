@@ -239,7 +239,6 @@ install(
   DIRECTORY
     campaigns
     i18n
-    global
     tribes
     txts
     world
