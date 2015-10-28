@@ -11,7 +11,7 @@ end
 
 function building_helptext_purpose()
 	-- TRANSLATORS: Purpose helptext for a building
-	return pgettext("barbarians_building", "Fishes on the coast near the hut.")
+	return pgettext("barbarians_building", "Releases animals into the wild to steady the meat production.")
 end
 
 function building_helptext_note()

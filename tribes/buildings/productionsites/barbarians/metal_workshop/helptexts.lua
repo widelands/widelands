@@ -10,12 +10,12 @@ end
 
 function building_helptext_purpose()
 	-- TRANSLATORS: Purpose helptext for a building
-	return pgettext("barbarians_building", "The barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels.")
+	return pgettext("barbarians_building", "The Barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels.")
 end
 
 function building_helptext_note()
 	-- TRANSLATORS: Note helptext for a building
-	return pgettext("barbarians_building", "The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.")
+	return pgettext("barbarians_building", "The Barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons.")
 end
 
 function building_helptext_performance()

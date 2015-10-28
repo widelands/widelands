@@ -46,7 +46,7 @@ end
 function worker_help_string(tribe, worker_description)
 	include(worker_description.directory .. "helptexts.lua")
 
-	local result = rt(h2(_"Lore")) ..
+	local result = rt(h2(_"Purpose")) ..
 		rt("image=" .. worker_description.icon_name, p(worker_helptext()))
 
 	-- Get the tools for the workers.

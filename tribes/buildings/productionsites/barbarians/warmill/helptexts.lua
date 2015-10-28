@@ -13,12 +13,12 @@ end
 
 function building_helptext_purpose()
 	-- TRANSLATORS: Purpose helptext for a building
-	return pgettext("barbarians_building", "The war mill produces all the axes that the barbarians use for warfare.")
+	return pgettext("barbarians_building", "The war mill produces all the axes that the Barbarians use for warfare.")
 end
 
 function building_helptext_note()
 	-- TRANSLATORS: Note helptext for a building
-	return pgettext("barbarians_building", "The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an ax workshop.")
+	return pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an ax workshop.")
 end
 
 function building_helptext_performance()
