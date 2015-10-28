@@ -199,10 +199,10 @@ tribes:new_tribe {
 		"barbarians_big_inn",
 		"barbarians_charcoal_kiln",
 		"barbarians_smelting_works",
-		"barbarians_shipyard",
 		"barbarians_metal_workshop",
 		"barbarians_warmill",
 		"barbarians_ax_workshop",
+		"barbarians_shipyard",
 
 		-- Big
 		"barbarians_cattlefarm",
@@ -222,16 +222,16 @@ tribes:new_tribe {
 		"barbarians_goldmine_deep",
 		"barbarians_goldmine_deeper",
 
+		-- Training Sites
+		"barbarians_battlearena",
+		"barbarians_trainingcamp",
+
 		-- Military Sites
 		"barbarians_sentry",
 		"barbarians_barrier",
 		"barbarians_tower",
 		"barbarians_fortress",
 		"barbarians_citadel",
-
-		-- Training Sites
-		"barbarians_battlearena",
-		"barbarians_trainingcamp",
 
 		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",

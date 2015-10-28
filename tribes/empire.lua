@@ -205,9 +205,9 @@ tribes:new_tribe {
 		"empire_inn",
 		"empire_charcoal_kiln",
 		"empire_smelting_works",
-		"empire_shipyard",
 		"empire_toolsmithy",
 		"empire_armorsmithy",
+		"empire_shipyard",
 
 		-- Big
 		"empire_donkeyfarm",
@@ -228,6 +228,11 @@ tribes:new_tribe {
 		"empire_goldmine",
 		"empire_goldmine_deep",
 
+		-- Training Sites
+		"empire_arena",
+		"empire_colosseum",
+		"empire_trainingcamp",
+
 		-- Military Sites
 		"empire_blockhouse",
 		"empire_sentry",
@@ -236,11 +241,6 @@ tribes:new_tribe {
 		"empire_tower",
 		"empire_fortress",
 		"empire_castle",
-
-		-- Training Sites
-		"empire_arena",
-		"empire_colosseum",
-		"empire_trainingcamp",
 
 		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",

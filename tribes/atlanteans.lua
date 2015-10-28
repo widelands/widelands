@@ -199,10 +199,10 @@ tribes:new_tribe {
 		"atlanteans_bakery",
 		"atlanteans_charcoal_kiln",
 		"atlanteans_smelting_works",
-		"atlanteans_shipyard",
 		"atlanteans_toolsmithy",
 		"atlanteans_weaponsmithy",
 		"atlanteans_armorsmithy",
+		"atlanteans_shipyard",
 
 		-- Big
 		"atlanteans_horsefarm",
@@ -217,6 +217,10 @@ tribes:new_tribe {
 		"atlanteans_ironmine",
 		"atlanteans_goldmine",
 
+		-- Training Sites
+		"atlanteans_dungeon",
+		"atlanteans_labyrinth",
+
 		-- Military Sites
 		"atlanteans_guardhouse",
 		"atlanteans_guardhall",
@@ -224,10 +228,6 @@ tribes:new_tribe {
 		"atlanteans_tower",
 		"atlanteans_tower_high",
 		"atlanteans_castle",
-
-		-- Training Sites
-		"atlanteans_dungeon",
-		"atlanteans_labyrinth",
 
 		-- Partially Finished Buildings - these are the same 2 buildings for all tribes
 		"constructionsite",
