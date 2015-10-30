@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-	-- #TRANSLATORS: Performance helptext for a building
-	return no_performance_text_yet()
+	-- TRANSLATORS: Performance helptext for a building
+	return pgettext("barbarians_building", "The innkeeper needs 85 seconds on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs 48 seconds on average to prepare one ration or one meal.")
 end

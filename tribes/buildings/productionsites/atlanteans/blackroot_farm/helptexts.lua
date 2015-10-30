@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-	-- #TRANSLATORS: Performance helptext for a building
-	return no_performance_text_yet()
+	-- TRANSLATORS: Performance helptext for a building
+	return pgettext("barbarians_building", "The farmer needs 80 seconds on average to sow and harvest a bundle of blackroot.")
 end
