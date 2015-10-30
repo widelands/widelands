@@ -115,7 +115,7 @@ ProductionSiteDescr::ProductionSiteDescr
 							throw wexception("duplicated");
 						}
 					}
-					m_inputs.push_back(std::pair<WareIndex, uint8_t>(idx, amount));
+					m_inputs.push_back(WareAmount(idx, amount));
 				} else {
 					throw wexception
 						("tribes do not define a ware type with this name");
@@ -782,8 +782,7 @@ bool ProductionSite::get_building_work
 	if (!m_produced_wares.empty()) {
 		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
-		std::pair<WareIndex, uint8_t> & ware_type_with_count =
-			*m_produced_wares.rbegin();
+		WareAmount& ware_type_with_count = *m_produced_wares.rbegin();
 		{
 			WareIndex const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
@@ -805,8 +804,7 @@ bool ProductionSite::get_building_work
 	if (!m_recruited_workers.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
-		std::pair<WareIndex, uint8_t> & worker_type_with_count =
-			*m_recruited_workers.rbegin();
+		WareAmount& worker_type_with_count = *m_recruited_workers.rbegin();
 		{
 			const WorkerDescr & worker_descr =
 				*owner().tribe().get_worker_descr(worker_type_with_count.first);

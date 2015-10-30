@@ -195,7 +195,7 @@ Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const
 			if (count != value) {
 				throw GameDataError("count is out of range 1 .. 255");
 			}
-			result.insert(std::pair<WareIndex, uint8_t>(idx, count));
+			result.insert(WareAmount(idx, count));
 		} catch (const WException& e) {
 			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}

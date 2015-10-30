@@ -51,6 +51,10 @@ class World;
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
 
+	/// A group of ware types with a count.
+	using WareTypeGroup = std::pair<std::set<WareIndex>, uint8_t>;
+	using Groups = std::vector<WareTypeGroup>;
+
 	/// Can be executed on a ProductionSite.
 	struct Action {
 		Action() = default;
@@ -72,12 +76,18 @@ struct ProductionProgram {
 		 */
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 
+		const Groups& consumed_wares() const {return consumed_wares_;}
+		const BillOfMaterials& produced_wares() const {return produced_wares_;}
+		const BillOfMaterials& recruited_workers() const {return recruited_workers_;}
+
+	protected:
+		// NOCOM uniqueptr?
+		Groups consumed_wares_;
+		BillOfMaterials produced_wares_;
+		BillOfMaterials recruited_workers_;
 	private:
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
-
-	/// A group of ware types with a count.
-	using WareTypeGroup = std::pair<std::set<WareIndex>, uint8_t>;
 
 	/// Parse a group of ware types followed by an optional count and terminated
 	/// by a space or null. Example: "fish,meat:2".
@@ -374,10 +384,6 @@ struct ProductionProgram {
 	struct ActConsume : public Action {
 		ActConsume(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game &, ProductionSite &) const override;
-		using Groups = std::vector<WareTypeGroup>;
-		const Groups & groups() const {return m_groups;}
-	private:
-		Groups m_groups;
 	};
 
 	/// Produces wares.
@@ -399,10 +405,6 @@ struct ProductionProgram {
 		ActProduce(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
-		const Items & items() const {return m_items;}
-	private:
-		Items m_items;
 	};
 
 	/// Recruits workers.
@@ -424,10 +426,6 @@ struct ProductionProgram {
 		ActRecruit(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
-		const Items & items() const {return m_items;}
-	private:
-		Items m_items;
 	};
 
 	struct ActMine : public Action {
@@ -535,10 +533,10 @@ struct ProductionProgram {
 	using Actions = std::vector<Action *>;
 	const Actions & actions() const {return m_actions;}
 
-
 private:
 	std::string m_name;
 	std::string m_descname;
+	// NOCOM uniqueptr
 	Actions     m_actions;
 };
 

@@ -865,16 +865,17 @@ ProductionProgram::ActConsume::ActConsume
 {
 	try {
 		for (;;) {
-			m_groups.resize(m_groups.size() + 1);
+			consumed_wares_.resize(consumed_wares_.size() + 1);
 			parse_ware_type_group
-				(parameters, *m_groups.rbegin(), tribes, descr.inputs());
+				(parameters, *consumed_wares_.rbegin(), tribes, descr.inputs());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
 		}
-		if (m_groups.empty())
+		if (consumed_wares_.empty()) {
 			throw GameDataError
 				("expected ware_type1[,ware_type2[,...]][:N] ...");
+		}
 	} catch (const WException & e) {
 		throw GameDataError("consume: %s", e.what());
 	}
@@ -887,7 +888,7 @@ void ProductionProgram::ActConsume::execute
 	size_t const nr_warequeues = warequeues.size();
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
 
-	Groups l_groups = m_groups; //  make a copy for local modification
+	Groups l_groups = consumed_wares_; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
 	//  Iterate over all input queues and see how much we should consume from
@@ -988,8 +989,8 @@ ProductionProgram::ActProduce::ActProduce
 {
 	try {
 		for (bool more = true; more; ++parameters) {
-			m_items.resize(m_items.size() + 1);
-			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
+			produced_wares_.resize(produced_wares_.size() + 1);
+			WareAmount& item = *produced_wares_.rbegin();
 			skip(parameters);
 			char const * ware = parameters;
 			for (;; ++parameters) {
@@ -1042,14 +1043,14 @@ void ProductionProgram::ActProduce::execute
 {
 	//ps.molog("  Produce\n");
 	assert(ps.m_produced_wares.empty());
-	ps.m_produced_wares = m_items;
+	ps.m_produced_wares = produced_wares_;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
-	assert(m_items.size());
+	assert(produced_wares_.size());
 
 	std::vector<std::string> ware_descnames;
-	for (const auto& item_pair : m_items) {
+	for (const auto& item_pair : produced_wares_) {
 		uint8_t const count = item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): needs ngettext when we have one_tribe.
@@ -1084,8 +1085,8 @@ ProductionProgram::ActRecruit::ActRecruit
 {
 	try {
 		for (bool more = true; more; ++parameters) {
-			m_items.resize(m_items.size() + 1);
-			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
+			recruited_workers_.resize(recruited_workers_.size() + 1);
+			WareAmount& item = *recruited_workers_.rbegin();
 			skip(parameters);
 			char const * worker = parameters;
 			for (;; ++parameters) {
@@ -1137,13 +1138,13 @@ void ProductionProgram::ActRecruit::execute
 	(Game & game, ProductionSite & ps) const
 {
 	assert(ps.m_recruited_workers.empty());
-	ps.m_recruited_workers = m_items;
+	ps.m_recruited_workers = recruited_workers_;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
-	assert(m_items.size());
+	assert(recruited_workers_.size());
 	std::vector<std::string> worker_descnames;
-	for (const auto& item_pair : m_items) {
+	for (const auto& item_pair : recruited_workers_) {
 		uint8_t const count = item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): needs ngettext when we have one_tribe.
