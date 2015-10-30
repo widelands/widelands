@@ -66,7 +66,7 @@ return {
 			body = rt(p(_[[An artifact your team owned was stolen by an enemy.]]))
 		}
 		local stole_artifact = {
-			title = _"New Artifact",
+			title = _"Artifact Conquered",
 			body = rt(p(_[[Your team stole an artifact from an enemy.]]))
 		}
 
