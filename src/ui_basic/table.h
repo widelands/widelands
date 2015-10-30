@@ -80,6 +80,7 @@ public:
 	EntryRecord & add(void * const entry, const bool select_this = false);
 
 	uint32_t size() const;
+	bool empty() const;
 	Entry operator[](uint32_t) const;
 	static uint32_t no_selection_index();
 	bool has_selection() const;
@@ -194,6 +195,7 @@ public:
 	EntryRecord & add(void * entry = nullptr, bool select = false);
 
 	uint32_t size() const {return m_entry_records.size();}
+	bool empty() const {return m_entry_records.empty();}
 	void * operator[](uint32_t const i) const {
 		assert(i < m_entry_records.size());
 		return m_entry_records[i]->entry();
