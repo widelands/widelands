@@ -64,6 +64,9 @@ constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 
+// least radius to scan terrain when considering colonization port
+constexpr int kColonyScanMinArea = 10;
+
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
@@ -761,6 +764,12 @@ void DefaultAI::late_initialization() {
 		ai_personality_early_militarysites = std::rand() % 20 + 20;
 		player_->set_ai_data(ai_personality_early_militarysites, kEarlyMilitary);
 
+		// same defaults are directly saved to avoid inconsistency
+		player_->set_ai_data(colony_scan_area_, kColonyScan);
+		player_->set_ai_data(last_attacked_player_, kLastAttack);
+		player_->set_ai_data(least_military_score_, kLeastMilit);
+		player_->set_ai_data(target_military_score_, kTargetMilit);
+
 	} else {
 		log (" %d: restoring saved AI data...\n", player_number());
 
@@ -788,7 +797,7 @@ void DefaultAI::late_initialization() {
 		check_range<int16_t>(last_attacked_player_, 0, 8, "last_attacked_player_");
 
 		player_->get_ai_data(&colony_scan_area_, kColonyScan);
-		check_range<uint32_t>(colony_scan_area_, 50, "colony_scan_area_");
+		check_range<uint32_t>(colony_scan_area_, kColonyScanMinArea, 50, "colony_scan_area_");
 
 		player_->get_ai_data(&trees_around_cutters_, kTreesAround);
 
@@ -4520,7 +4529,6 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		}
 	}
 	*tested_fields = done.size();
-
 	return false;  // no players found
 }
 
@@ -4623,10 +4631,11 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		}
 
 		// decreasing colony_scan_area_
-		if (colony_scan_area_ > 10 && gametime % 10 == 0) {
+		if (colony_scan_area_ > kColonyScanMinArea && gametime % 5 == 0) {
 			colony_scan_area_ -= 1;
 			player_->set_ai_data(colony_scan_area_, kColonyScan);
 		}
+		assert(colony_scan_area_ >= kColonyScanMinArea);
 	}
 
 	// if we are here, port was not ordered above
