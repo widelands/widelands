@@ -1,3 +1,5 @@
+-- NOCOM we should have a common include for the helper functions.
+
 --  =======================================================
 --  *************** Basic helper functions ****************
 --  =======================================================
@@ -27,6 +29,26 @@ function image_line(image, count, text)
 	end
 end
 
+-- RST
+-- .. function:: dependencies(items[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg items: ware, worker and/or building descriptions in the correct order
+--                from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies(items, text)
+	if not text then
+		text = ""
+	end
+	local string = "image=" .. items[1].icon_name
+	for k,v in ipairs({table.unpack(items,2)}) do
+		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
+	end
+	return rt(string, p(text))
+end
 
 --  =======================================================
 --  ************* Main worker help functions *************
@@ -44,25 +66,47 @@ end
 function ware_help_string(tribe, ware_description)
 	include(ware_description.directory .. "helptexts.lua")
 
-	local result = ware_helptext()
-	if (result ~= "") then
-		result = result .. " "
-	else
-		result = ""
+	local purpose_text = ware_helptext()
+	if (purpose_text ~= "") then
+		purpose_text = purpose_text .. " "
 	end
-	result = result .. ware_helptext(tribe)
+	purpose_text = ware_helptext() .. ware_helptext(tribe.name)
+
+	local result = rt(h2(_"Purpose")) ..
+		rt("image=" .. ware_description.icon_name, p(purpose_text))
+
+	result = result .. rt(h3(_"Producers:"))
+
+	for j, building in ipairs(ware_description.producers) do
+		if (tribe:has_building(building.name)) then
+			result = result .. dependencies(
+				{building, ware_description},
+				building.descname
+			)
+		end
+	end
+
+	result = result .. rt(h3(_"Consumers:"))
+
+	for j, building in ipairs(ware_description.consumers) do
+		if (tribe:has_building(building.name)) then
+			result = result .. dependencies(
+				{building, ware_description},
+				building.descname
+			)
+		end
+	end
 
 	-- TODO(GunChleoc): Split into purpose and note
 	-- We also want the ware quantity info collected while loading the tribes.
-
-	result = rt("image=" .. ware_description.icon_name, p(result))
 	return result
 end
 
 
 return {
-   func = function(tribe, ware_description)
+   func = function(tribename, ware_description)
       set_textdomain("tribes_encyclopedia")
+      local tribe = wl.Game():get_tribe_description(tribename)
 	   return ware_help_string(tribe, ware_description)
    end
 }
