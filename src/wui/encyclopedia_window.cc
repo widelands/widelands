@@ -267,68 +267,51 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 
 	if (upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prod_sites_.get_selected()))) {
-		const ProductionSiteDescr::Programs & programs = descr->programs();
-
-		//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
-		//  the program name is not any of produce_iron, smelt_iron, prog_iron
-		//  or work. What matters is whether the program has a statement such
-		//  as "produce iron" or "createware iron". The program name is not
-		//  supposed to have any meaning to the game logic except to uniquely
-		//  identify the program.
-		//  Only shows information from the first program that has a name indicating
-		//  that it produces the considered ware type.
-		std::map<std::string, ProductionProgram *>::const_iterator programIt =
-			programs.find(std::string("produce_") + selected_ware_->name());
-
-		if (programIt == programs.end())
-			programIt = programs.find(std::string("smelt_")  + selected_ware_->name());
-
-		if (programIt == programs.end())
-			programIt = programs.find(std::string("smoke_")  + selected_ware_->name());
-
-		if (programIt == programs.end())
-			programIt = programs.find(std::string("mine_")   + selected_ware_->name());
-
-		if (programIt == programs.end())
-			programIt = programs.find("work");
-
-		if (programIt != programs.end()) {
-			const ProductionProgram::Actions & actions =
-				programIt->second->actions();
-
-			for (const ProductionProgram::Action * temp_action : actions) {
-				if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
-					const ProductionProgram::ActConsume::Groups & groups =
-						action->groups();
-
-					for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
-						const std::set<WareIndex> & ware_types = temp_group.first;
-						assert(ware_types.size());
-						std::vector<std::string> ware_type_descnames;
-						for (const WareIndex& ware_index : ware_types) {
-							ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
+		WareIndex selected_ware_index = tribe.ware_index(selected_ware_->name());
+		// Only check programs for the production sites that produce the ware.
+		if (descr->is_output_ware_type(selected_ware_index)) {
+			for (const std::pair<std::string, ProductionProgram *>& program : descr->programs()) {
+				// Filter for the production programs that actually produce this ware.
+				bool add_program = false;
+				for (const ProductionProgram::Action* action : program.second->actions()) {
+					for (const WareAmount& produced_ware : action->produced_wares()) {
+						if (produced_ware.first == selected_ware_index) {
+							add_program = true;
+							break;
 						}
-						no_of_wares = no_of_wares + ware_types.size();
-
-						std::string ware_type_names =
-								i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
-
-						//  Make sure to detect if someone changes the type so that it
-						//  needs more than 3 decimal digits to represent.
-						static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
-
-						//  picture only of first ware type in group
-						UI::Table<uintptr_t>::EntryRecord & tableEntry =
-							cond_table_.add(0);
-						tableEntry.set_picture
-							(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
-						tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
-						cond_table_.set_sort_column(0);
-						cond_table_.sort();
 					}
 				}
-			}
-		}
+				if (add_program) {
+					// Now iterate through the programs and fetch the exact wares consumed.
+					for (const ProductionProgram::Action* action : program.second->actions()) {
+						for (const ProductionProgram::WareTypeGroup& group : action->consumed_wares()) {
+							const std::set<WareIndex> & ware_types = group.first;
+							assert(ware_types.size());
+							no_of_wares = no_of_wares + ware_types.size();
+
+							std::vector<std::string> ware_type_descnames;
+							for (const WareIndex& ware_index : ware_types) {
+								ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
+							}
+							std::string ware_type_names =
+									i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
+
+							//  Make sure to detect if someone changes the type so that it
+							//  needs more than 3 decimal digits to represent.
+							static_assert(sizeof(group.second) == 1, "Number is too big for 3 char string.");
+
+							//  picture only of first ware type in group
+							UI::Table<uintptr_t>::EntryRecord & tableEntry = cond_table_.add(0);
+							tableEntry.set_picture
+								(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
+							tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(group.second)));
+							cond_table_.set_sort_column(0);
+							cond_table_.sort();
+						} // groups
+					} // action
+				} // add_program
+			} // programs
+		} // is_output_ware_type
 	}
 	cond_table_.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
 }
