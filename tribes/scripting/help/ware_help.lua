@@ -98,9 +98,11 @@ function ware_help_string(tribe, ware_description)
 
 	for i, building in ipairs(ware_description.producers) do
 		if (tribe:has_building(building.name)) then
+			-- TRANSLATORS: Ware Encyclopedia: A building producing a ware
 			result = result .. rt(h2(_"Producer"))
 			local produced_wares_string = ""
 			local consumed_wares_string = ""
+			local consumed_wares_counter = 0
 			result = result .. dependencies({building, ware_description}, building.descname)
 			-- Find out which programs in the building produce this ware and collect the info
 			local producing_programs = {}
@@ -128,6 +130,7 @@ function ware_help_string(tribe, ware_description)
 						consumed_images[count] = ware_description.icon_name
 						consumed_amount[count] = amount
 						count = count + 1
+						consumed_wares_counter = consumed_wares_counter + 1
 					end
 					local text = localize_list(consumed_warenames, "or")
 					if (countlist > 1) then
@@ -149,18 +152,22 @@ function ware_help_string(tribe, ware_description)
 					consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
 				end
 			end
-			result = result .. rt(h3(_"Wares consumed:")) .. consumed_wares_string
+			if (consumed_wares_counter > 0) then
+				-- TRANSLATORS: Ware Encyclopedia: Wares consumed by a productionsite
+				result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
+				result = result .. consumed_wares_string
+			end
 			result = result .. rt(h3(_"Amount produced:")) .. produced_wares_string
 		end
 	end
 
-	-- Now showing the buildings that consume this ware
-	local consumers = ""
+	-- Now collecting the buildings that consume this ware
+	local consumers_string = ""
 	local consumers_amount = 0
 
 	for i, building in ipairs(ware_description.consumers) do
 		if (tribe:has_building(building.name)) then
-			consumers = consumers .. dependencies({building, ware_description}, building.descname)
+			consumers_string = consumers_string .. dependencies({ware_description, building}, building.descname)
 			consumers_amount = consumers_amount + 1
 		end
 	end
@@ -168,17 +175,39 @@ function ware_help_string(tribe, ware_description)
 	-- Constructionsite isn't listed with the consumers, so we need a special check
 	if (ware_description:is_construction_material(tribe.name)) then
 		local constructionsite_description = wl.Game():get_building_description("constructionsite")
-		consumers = consumers .. dependencies({ware_description, constructionsite_description},
-														 constructionsite_description.descname)
+		consumers_string = consumers_string
+			.. dependencies({ware_description, constructionsite_description}, constructionsite_description.descname)
 		consumers_amount = consumers_amount + 1
 	end
 
-	if (consumers ~= "") then
-		result = result .. rt(h2(ngettext("Consumer", "Consumers", consumers_amount)))
-		result = result .. consumers
+	-- Now collecting the workers that use this ware as a tool
+	local workers_string = ""
+	for i, workername in ipairs(tribe.workers) do
+	local worker = wl.Game():get_worker_description(workername)
+		local add_this_worker = false
+		for j, buildcost in ipairs(worker.buildcost) do
+			if (buildcost ~= nil and buildcost == ware_description.name) then
+				add_this_worker = true
+				consumers_amount = consumers_amount + 1
+				break
+			end
+		end
+		if(add_this_worker) then
+			workers_string = workers_string .. image_line(worker.icon_name, 1, p(worker.descname))
+		end
 	end
 
-	-- NOCOM workers
+	-- Now show consumers (buildings + workers)
+	if (consumers_amount > 0) then
+		-- TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that consume a ware
+		result = result .. rt(h2(_("Used by")))
+		if (consumers ~= "") then
+			result = result .. consumers_string
+		end
+		if (workers_string ~= "") then
+			result = result .. workers_string
+		end
+	end
 	return result
 end
 

@@ -1799,7 +1799,8 @@ int LuaProductionSiteDescription::get_working_positions(lua_State * L) {
 		:arg program_name: the name of the production program that we want to get the consumed wares for
 		:type tribename: :class:`string`
 
-		(RO) NOCOM lile food_list? Returns a table of {ware name, ware amount} for the wares produced by this production program
+		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
+			  Multiple entries in {ware name} are alternatives (OR logic)).
 */
 int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 	std::string program_name = luaL_checkstring(L, -1);
