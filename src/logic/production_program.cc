@@ -1773,6 +1773,16 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 			throw GameDataError("unknown command type \"%s\" in production program \"%s\" for building \"%s\"",
 									  arguments.get(), _name.c_str(), building->name().c_str());
 		m_actions.push_back(action);
+
+		for (const WareTypeGroup& group : action->consumed_wares()) {
+			consumed_wares_.push_back(group);
+		}
+		for (const WareAmount& wares : action->produced_wares()) {
+			produced_wares_.push_back(wares);
+		}
+		for (const WareAmount& workers : action->recruited_workers()) {
+			recruited_workers_.push_back(workers);
+		}
 	}
 	if (m_actions.empty())
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",

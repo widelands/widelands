@@ -532,12 +532,18 @@ struct ProductionProgram {
 
 	using Actions = std::vector<Action *>;
 	const Actions & actions() const {return m_actions;}
+	const Groups& consumed_wares() const {return consumed_wares_;}
+	const BillOfMaterials& produced_wares() const {return produced_wares_;}
+	const BillOfMaterials& recruited_workers() const {return recruited_workers_;}
 
 private:
 	std::string m_name;
 	std::string m_descname;
 	// NOCOM uniqueptr
 	Actions     m_actions;
+	Groups consumed_wares_;
+	BillOfMaterials produced_wares_;
+	BillOfMaterials recruited_workers_;
 };
 
 }
