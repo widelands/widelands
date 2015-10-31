@@ -31,6 +31,7 @@ tribes:new_militarysite_type {
 		}
 	},
 
+   -- NOCOM(#codereview): Output seems a weird name for this. Occupants?
 	outputs = {
 		"atlanteans_soldier",
    },

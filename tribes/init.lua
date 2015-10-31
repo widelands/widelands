@@ -25,6 +25,12 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
 	if (fps ~= nil) then
 		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
 			table[animationname .. "_" .. dir] = {
+            -- NOCOM(#codereview): get rid of template and directory, instead
+            -- use 'path.list_directory'. See world/ for examples. No globbing
+            -- code should be necessary in c++. Update: I just realized that
+            -- the critters do the same in the world - I still think it should
+            -- be done in Lua, not in c++, but a TODO/Bug is probably
+            -- sufficient for now.
 				template = basename .. "_" .. dir ..  "_??",
 				directory = dirname,
 				hotspot = hotspot,
@@ -46,6 +52,9 @@ end
 -- ===================================
 --    Ships
 -- ===================================
+
+-- TODO(sirver): Adding timing informations here would be really useful, also
+-- for world/. This needs some sort of wrapping for the ScopedTimer class.
 
 print("Loading Ships")
 include "tribes/ships/atlanteans/init.lua"
