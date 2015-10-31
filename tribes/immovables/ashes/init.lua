@@ -6,9 +6,9 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ashes"),
    programs = {
-		program = {
-			"animate=idle 45000",
-			"remove=",
+      program = {
+         "animate=idle 45000",
+         "remove=",
       }
    },
 

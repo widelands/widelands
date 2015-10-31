@@ -10,36 +10,36 @@ tribes:new_militarysite_type {
    size = "big",
 
    buildcost = {
-		planks = 4,
-		granite = 7,
-		log = 5,
-		spidercloth = 2,
-		diamond = 1,
-		quartz = 1
-	},
-	return_on_dismantle = {
-		planks = 2,
-		granite = 5,
-		log = 2
-	},
-
-   animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 91, 91 },
-		}
-	},
-
-   aihints = {
-		expansion = true,
-		fighting = true,
-		mountain_conqueror = true,
-		prohibited_till = 1500
+      planks = 4,
+      granite = 7,
+      log = 5,
+      spidercloth = 2,
+      diamond = 1,
+      quartz = 1
+   },
+   return_on_dismantle = {
+      planks = 2,
+      granite = 5,
+      log = 2
    },
 
-	outputs = {
-		"atlanteans_soldier",
+   animations = {
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 91, 91 },
+      }
+   },
+
+   aihints = {
+      expansion = true,
+      fighting = true,
+      mountain_conqueror = true,
+      prohibited_till = 1500
+   },
+
+   outputs = {
+      "atlanteans_soldier",
    },
 
    max_soldiers = 12,
@@ -48,10 +48,10 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-		occupied = _"Your soldiers have occupied your castle.",
-		aggressor = _"Your castle discovered an aggressor.",
-		attack = _"Your castle is under attack.",
-		defeated_enemy = _"The enemy defeated your soldiers at the castle.",
-		defeated_you = _"Your soldiers defeated the enemy at the castle."
+      occupied = _"Your soldiers have occupied your castle.",
+      aggressor = _"Your castle discovered an aggressor.",
+      attack = _"Your castle is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the castle.",
+      defeated_you = _"Your soldiers defeated the enemy at the castle."
    },
 }

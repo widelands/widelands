@@ -12,4 +12,3 @@ function test_egbase:test_player_numbers()
    assert_equal(2, egbase.players[2].number)
    assert_equal(3, egbase.players[3].number)
 end
-   

@@ -8,12 +8,12 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "ripe_reed", "field" },
    programs = {
-		program = {
-			"animate=idle 500000",
-			"remove=",
+      program = {
+         "animate=idle 500000",
+         "remove=",
       },
-		harvest = {
-			"remove=",
+      harvest = {
+         "remove=",
       }
    },
 

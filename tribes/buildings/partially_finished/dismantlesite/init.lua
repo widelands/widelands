@@ -12,12 +12,12 @@ tribes:new_dismantlesite_type {
    vision_range = 2,
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 5, 5 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 5, 5 },
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 }

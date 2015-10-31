@@ -19,14 +19,14 @@ local wc_name = "Collectors"
 local wc_descname = _("Collectors")
 local wc_version = 2
 local wc_desc = _ (
-	"You get points for precious wares in your warehouses. The player with " ..
-	"the highest number of wares at the end of 4 hours wins the game."
+   "You get points for precious wares in your warehouses. The player with " ..
+   "the highest number of wares at the end of 4 hours wins the game."
 )
 local wc_points = _"Points"
 return {
-	name = wc_name,
-	description = wc_desc,
-	func = function()
+   name = wc_name,
+   description = wc_desc,
+   func = function()
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
@@ -131,16 +131,16 @@ return {
       -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
       local time = ""
       if m > 0 then
-			time = (ngettext("%i minute", "%i minutes", m)):format(m)
-		end
+         time = (ngettext("%i minute", "%i minutes", m)):format(m)
+      end
       if h > 0 then
-			if m > 0 then
-				-- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-				time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
-			else
-				-- TRANSLATORS: Context: 'The game will end in 2 hours.'
-				time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
-			end
+         if m > 0 then
+            -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+            time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
+         else
+            -- TRANSLATORS: Context: 'The game will end in 2 hours.'
+            time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+         end
       end
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
       local msg = p(_"The game will end in %s."):format(time)
@@ -153,7 +153,7 @@ return {
       end
 
       for idx, plr in ipairs(plrs) do
-			send_message(plr, game_status.title,  "<rt>" .. msg .. "</rt>", {popup = true})
+         send_message(plr, game_status.title,  "<rt>" .. msg .. "</rt>", {popup = true})
       end
    end
 

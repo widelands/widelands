@@ -22,8 +22,8 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1
-	},
+      empire_carrier = 1
+   },
 
    animations = animations,
 }

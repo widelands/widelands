@@ -10,30 +10,30 @@ tribes:new_militarysite_type {
    size = "small",
 
    buildcost = {
-		log = 1,
-		planks = 1,
-		granite = 1
-	},
-	return_on_dismantle = {
-		granite = 1
-	},
+      log = 1,
+      planks = 1,
+      granite = 1
+   },
+   return_on_dismantle = {
+      granite = 1
+   },
 
    aihints = {
-		expansion = true,
-		mountain_conqueror = true
+      expansion = true,
+      mountain_conqueror = true
    },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 33, 41 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 33, 41 },
+      }
+   },
 
    -- NOCOM(#codereview): Output seems a weird name for this. Occupants?
-	outputs = {
-		"atlanteans_soldier",
+   outputs = {
+      "atlanteans_soldier",
    },
 
    max_soldiers = 2,
@@ -42,10 +42,10 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-		occupied = _"Your soldiers have occupied your guardhouse.",
-		aggressor = _"Your guardhouse discovered an aggressor.",
-		attack = _"Your guardhouse is under attack.",
-		defeated_enemy = _"The enemy defeated your soldiers at the guardhouse.",
-		defeated_you = _"Your soldiers defeated the enemy at the guardhouse."
+      occupied = _"Your soldiers have occupied your guardhouse.",
+      aggressor = _"Your guardhouse discovered an aggressor.",
+      attack = _"Your guardhouse is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the guardhouse.",
+      defeated_you = _"Your soldiers defeated the enemy at the guardhouse."
    },
 }

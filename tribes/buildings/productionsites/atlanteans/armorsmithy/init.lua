@@ -10,79 +10,79 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 2,
-		planks = 2,
-		quartz = 1
-	},
-	return_on_dismantle = {
-		granite = 1,
-		planks = 1,
-		quartz = 1
-	},
+      log = 2,
+      granite = 2,
+      planks = 2,
+      quartz = 1
+   },
+   return_on_dismantle = {
+      granite = 1,
+      planks = 1,
+      quartz = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 53, 60 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 53, 60 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 53, 60 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 53, 60 },
+      }
+   },
 
    aihints = {
-		prohibited_till = 900
+      prohibited_till = 900
    },
 
-	working_positions = {
-		atlanteans_armorsmith = 1
-	},
+   working_positions = {
+      atlanteans_armorsmith = 1
+   },
 
    inputs = {
-		iron = 8,
-		gold = 8,
-		coal = 8
-	},
+      iron = 8,
+      gold = 8,
+      coal = 8
+   },
    outputs = {
-		"shield_advanced",
-		"shield_steel"
+      "shield_advanced",
+      "shield_steel"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
-			actions = {
-				"call=produce_shield_steel",
-				"call=produce_shield_advanced",
-				"return=skipped"
-			}
-		},
-		produce_shield_steel = {
-			-- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
-			descname = _"forging a steel shield",
-			actions = {
-				"return=skipped unless economy needs shield_steel",
-				"sleep=32000",
-				"consume=iron:2 coal:2",
-				"animate=working 35000",
-				"produce=shield_steel"
-			}
-		},
-		produce_shield_advanced = {
-			-- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
-			descname = _"forging an advanced shield",
-			actions = {
-				"return=skipped unless economy needs shield_advanced",
-				"sleep=32000",
-				"consume=iron:2 coal:2 gold",
-				"animate=working 45000",
-				"produce=shield_advanced"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_shield_steel",
+            "call=produce_shield_advanced",
+            "return=skipped"
+         }
+      },
+      produce_shield_steel = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
+         descname = _"forging a steel shield",
+         actions = {
+            "return=skipped unless economy needs shield_steel",
+            "sleep=32000",
+            "consume=iron:2 coal:2",
+            "animate=working 35000",
+            "produce=shield_steel"
+         }
+      },
+      produce_shield_advanced = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
+         descname = _"forging an advanced shield",
+         actions = {
+            "return=skipped unless economy needs shield_advanced",
+            "sleep=32000",
+            "consume=iron:2 coal:2 gold",
+            "animate=working 45000",
+            "produce=shield_advanced"
+         }
+      },
+   },
 }

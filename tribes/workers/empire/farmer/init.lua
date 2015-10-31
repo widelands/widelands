@@ -39,30 +39,30 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		scythe = 1
-	},
+      empire_carrier = 1,
+      scythe = 1
+   },
 
-	programs = {
-		plant = {
-			"findspace size:any radius:2 space",
-			"walk coords",
-			"animation planting 4000",
-			"plant tribe:field_tiny",
-			"animation planting 4000",
-			"return",
-		},
-		harvest = {
-			"findobject attrib:ripe_wheat radius:2",
-			"walk object",
-			"playFX sound/farm scythe 220",
-			"animation harvesting 10000",
-			"object harvest",
-			"animation gathering 4000",
-			"createware wheat",
-			"return"
-		}
-	},
+   programs = {
+      plant = {
+         "findspace size:any radius:2 space",
+         "walk coords",
+         "animation planting 4000",
+         "plant tribe:field_tiny",
+         "animation planting 4000",
+         "return",
+      },
+      harvest = {
+         "findobject attrib:ripe_wheat radius:2",
+         "walk object",
+         "playFX sound/farm scythe 220",
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 4000",
+         "createware wheat",
+         "return"
+      }
+   },
 
    animations = animations,
 }

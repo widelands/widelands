@@ -358,11 +358,11 @@ function expansion()
    local soldier_inside = false
    while not soldier_inside do
       local military_buildings = array_combine(
-			plr:get_buildings("barbarians_sentry"),
-			plr:get_buildings("barbarians_tower"),
-			plr:get_buildings("barbarians_barrier"),
-			plr:get_buildings("barbarians_fortress"),
-			plr:get_buildings("barbarians_citadel"))
+         plr:get_buildings("barbarians_sentry"),
+         plr:get_buildings("barbarians_tower"),
+         plr:get_buildings("barbarians_barrier"),
+         plr:get_buildings("barbarians_fortress"),
+         plr:get_buildings("barbarians_citadel"))
       for i = 1,#military_buildings do
          for k,v in pairs(military_buildings[i]:get_soldiers("all")) do
             soldier_inside = true
@@ -390,4 +390,3 @@ end
 
 run(bad_boy_sentry)
 run(starting_infos)
-

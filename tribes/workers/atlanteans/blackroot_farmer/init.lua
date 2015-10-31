@@ -39,29 +39,29 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		shovel = 1
-	},
+      atlanteans_carrier = 1,
+      shovel = 1
+   },
 
-	programs = {
-		plant = {
-			"findspace size:any radius:2",
-			"walk coords",
-			"animation planting 4000",
-			"plant tribe:blackrootfield_tiny",
-			"animation planting 4000",
-			"return"
-		},
-		harvest = {
-			"findobject attrib:ripe_blackroot radius:2",
-			"walk object",
-			"animation harvesting 10000",
-			"object harvest",
-			"animation gathering 2000",
-			"createware blackroot",
-			"return"
-		}
-	},
+   programs = {
+      plant = {
+         "findspace size:any radius:2",
+         "walk coords",
+         "animation planting 4000",
+         "plant tribe:blackrootfield_tiny",
+         "animation planting 4000",
+         "return"
+      },
+      harvest = {
+         "findobject attrib:ripe_blackroot radius:2",
+         "walk object",
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 2000",
+         "createware blackroot",
+         "return"
+      }
+   },
 
    animations = animations,
 }

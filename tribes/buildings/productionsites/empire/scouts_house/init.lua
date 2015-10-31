@@ -10,46 +10,46 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 2,
-		granite = 1
-	},
-	return_on_dismantle = {
-		log = 1
-	},
+      log = 2,
+      granite = 1
+   },
+   return_on_dismantle = {
+      log = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 50, 53 },
-			fps = 10
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 50, 53 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 50, 53 },
+         fps = 10
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 50, 53 },
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 
-	working_positions = {
-		empire_scout = 1
-	},
+   working_positions = {
+      empire_scout = 1
+   },
 
    inputs = {
-		ration = 2
-	},
+      ration = 2
+   },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-			descname = _"scouting",
-			actions = {
-				"sleep=30000",
-				"consume=ration",
-				"worker=scout"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+         descname = _"scouting",
+         actions = {
+            "sleep=30000",
+            "consume=ration",
+            "worker=scout"
+         }
+      },
+   },
 }

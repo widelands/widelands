@@ -21,15 +21,15 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1
-	},
+      barbarians_carrier = 1
+   },
 
-	programs = {
-		scout = {
-			"scout 15 75000", -- radius 15, 75 seconds until return
-			"return"
-		}
-	},
+   programs = {
+      scout = {
+         "scout 15 75000", -- radius 15, 75 seconds until return
+         "return"
+      }
+   },
 
    animations = animations,
 }

@@ -106,30 +106,30 @@ end
 
 --function cancel_expedition_or_sink_in_shipwindow()
     --if second_ship then
-	--ship_to_click=second_ship
-	--elseif first_ship then
-	--ship_to_click=first_ship
-	--else
-		--assert(false)
-		--end
+   --ship_to_click=second_ship
+   --elseif first_ship then
+   --ship_to_click=first_ship
+   --else
+      --assert(false)
+      --end
 
    --click_on_ship(ship_to_click)
    --if click_button("cancel_expedition") then
-		--sleep(100)
-		--assert_true(click_button("ok"))
-		--sleep(100)
-		--close_windows()
-		--sleep(100)
-		--print (" DEBUG expedition cancelled")
+      --sleep(100)
+      --assert_true(click_button("ok"))
+      --sleep(100)
+      --close_windows()
+      --sleep(100)
+      --print (" DEBUG expedition cancelled")
    --else
-		--click_on_ship(ship_to_click)
-		--assert_true(click_button("sink"))
-		--sleep(100)
-		--assert_true(click_button("ok"))
-		--sleep(100)
-		--close_windows()
-		--sleep(100)
-		--print (" DEBUG ship sunk")
+      --click_on_ship(ship_to_click)
+      --assert_true(click_button("sink"))
+      --sleep(100)
+      --assert_true(click_button("ok"))
+      --sleep(100)
+      --close_windows()
+      --sleep(100)
+      --print (" DEBUG ship sunk")
    --end
 --end
 

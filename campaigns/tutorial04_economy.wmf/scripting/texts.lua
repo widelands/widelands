@@ -454,4 +454,3 @@ conclusion = {
    ) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>")
 }
-

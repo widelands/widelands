@@ -27,22 +27,22 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		fishing_net = 1
-	},
+      atlanteans_carrier = 1,
+      fishing_net = 1
+   },
 
-	programs = {
-		fish = {
-			"findspace size:any radius:7 resource:fish",
-			"walk coords",
-			"playFX sound/fisher fisher_throw_net 192",
-			"mine fish 1",
-			"animation fishing 3000",
-			"playFX sound/fisher fisher_pull_net 192",
-			"createware fish",
-			"return"
-		}
-	},
+   programs = {
+      fish = {
+         "findspace size:any radius:7 resource:fish",
+         "walk coords",
+         "playFX sound/fisher fisher_throw_net 192",
+         "mine fish 1",
+         "animation fishing 3000",
+         "playFX sound/fisher fisher_pull_net 192",
+         "createware fish",
+         "return"
+      }
+   },
 
    animations = animations,
 }

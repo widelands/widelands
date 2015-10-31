@@ -1,5 +1,5 @@
 -- ===================
--- Testing objectives 
+-- Testing objectives
 -- ===================
 objective_creation_tests = lunit.TestCase("Objective Creation")
 function objective_creation_tests:setup()
@@ -9,7 +9,7 @@ function objective_creation_tests:teardown()
    for idx,o in ipairs(self.o) do
       pcall(function() o:remove() end)
    end
-   
+
 end
 function objective_creation_tests:test_creation_for_non_interactive_player()
    local o = player2:add_objective("test1", "blah", "blah 1")
@@ -81,4 +81,3 @@ function objective_tests:test_delete_twice()
    self.o1:remove()
    assert_error("Already removed!", function() self.o1:remove() end)
 end
-

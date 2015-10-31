@@ -25,4 +25,3 @@ function filled_buildings(p, ...)
       elseif b.valid_wares then b:set_wares(b.valid_wares) end
    end
 end
-

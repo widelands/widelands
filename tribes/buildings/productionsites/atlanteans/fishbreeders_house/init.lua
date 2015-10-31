@@ -10,41 +10,41 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 1,
-		planks = 1,
-		granite = 1
-	},
-	return_on_dismantle = {
-		granite = 1
-	},
-
-   animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 34, 42 },
-		},
-	},
-
-   aihints = {
-		needs_water = true,
-		renews_map_resource = "fish",
-		prohibited_till = 700,
-		forced_after = 900
+      log = 1,
+      planks = 1,
+      granite = 1
+   },
+   return_on_dismantle = {
+      granite = 1
    },
 
-	working_positions = {
-		atlanteans_fishbreeder = 1
-	},
+   animations = {
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 34, 42 },
+      },
+   },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-			descname = _"breeding fish",
-			actions = {
-				"sleep=24000",
-				"worker=breed"
-			}
-		},
-	},
+   aihints = {
+      needs_water = true,
+      renews_map_resource = "fish",
+      prohibited_till = 700,
+      forced_after = 900
+   },
+
+   working_positions = {
+      atlanteans_fishbreeder = 1
+   },
+
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+         descname = _"breeding fish",
+         actions = {
+            "sleep=24000",
+            "worker=breed"
+         }
+      },
+   },
 }

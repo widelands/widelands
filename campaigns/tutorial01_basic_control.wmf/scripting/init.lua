@@ -33,4 +33,3 @@ include "map:scripting/helper_functions.lua"
 include "map:scripting/helper_functions_demonstration.lua"
 
 include "map:scripting/mission_thread.lua"
-

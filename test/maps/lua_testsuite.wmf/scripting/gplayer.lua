@@ -144,4 +144,3 @@ function player_building_access:test_access()
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end
-

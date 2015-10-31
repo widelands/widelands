@@ -2,13 +2,13 @@
 
 function immovable_helptext(tribe)
    local helptext = {
-		default = ""
+      default = ""
    }
    local result = ""
    if tribe then
-		result = helptext[tribe]
-	else
-		result = helptext["default"]
+      result = helptext[tribe]
+   else
+      result = helptext["default"]
    end
    if (result == nil) then result = "" end
    return result

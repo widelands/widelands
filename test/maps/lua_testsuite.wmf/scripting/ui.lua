@@ -188,5 +188,3 @@ function mv_tests:test_statistics()
    assert_equal(true, self.mv.statistics)
    assert_equal(false, self.mv.census)
 end
-
-

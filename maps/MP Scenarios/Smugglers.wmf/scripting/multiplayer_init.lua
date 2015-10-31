@@ -114,7 +114,7 @@ function place_headquarters()
 end
 
 function setup_statistics_hook()
-	hooks.custom_statistic = {
+   hooks.custom_statistic = {
       name = _"Wares Smuggled",
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p)

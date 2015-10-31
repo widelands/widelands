@@ -10,49 +10,49 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 2,
-		granite = 1
-	},
-	return_on_dismantle = {
-		log = 1
-	},
+      log = 2,
+      granite = 1
+   },
+   return_on_dismantle = {
+      log = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 41, 44 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 41, 44 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 41, 44 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 41, 44 },
+      }
+   },
 
-	aihints = {},
+   aihints = {},
 
-	working_positions = {
-		atlanteans_scout = 1
-	},
+   working_positions = {
+      atlanteans_scout = 1
+   },
 
    inputs = {
-		smoked_fish = 2,
-		atlanteans_bread = 2
-	},
+      smoked_fish = 2,
+      atlanteans_bread = 2
+   },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-			descname = _"scouting",
-			actions = {
-				"sleep=30000",
-				"consume=smoked_fish",
-				"worker=scout",
-				"sleep=30000",
-				"consume=atlanteans_bread",
-				"worker=scout"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+         descname = _"scouting",
+         actions = {
+            "sleep=30000",
+            "consume=smoked_fish",
+            "worker=scout",
+            "sleep=30000",
+            "consume=atlanteans_bread",
+            "worker=scout"
+         }
+      },
+   },
 }

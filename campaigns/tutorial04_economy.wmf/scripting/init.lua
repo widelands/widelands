@@ -28,4 +28,3 @@ include "map:scripting/texts.lua"
 include "map:scripting/starting_conditions.lua"
 
 include "map:scripting/mission_thread.lua"
-

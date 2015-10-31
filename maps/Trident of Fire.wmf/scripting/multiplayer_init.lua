@@ -24,40 +24,40 @@ hp3 = 0
 
 --Identify the players which have been closed and must be replaced by AI players
 if map.player_slots[1].tribe_name == map.player_slots[4].tribe_name then
-	hp1 = 1
-	if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
-		hp2 = 2
-		if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-			hp3 = 3
-		end
-	end
+   hp1 = 1
+   if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
+      hp2 = 2
+      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
+         hp3 = 3
+      end
+   end
 else
-	if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
-		hp2 = 1
-		if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-			hp3 = 2
-		end
-	else
-		if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
-			hp3 = 1
-		end
-	end
+   if map.player_slots[2].tribe_name == map.player_slots[5].tribe_name then
+      hp2 = 1
+      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
+         hp3 = 2
+      end
+   else
+      if map.player_slots[3].tribe_name == map.player_slots[6].tribe_name then
+         hp3 = 1
+      end
+   end
 end
 
 if hp1 == 0 then
-	AIp1 = math.max(hp2,hp3) + 1
+   AIp1 = math.max(hp2,hp3) + 1
 else
-	AIp1 = 0
+   AIp1 = 0
 end
 if hp2 == 0 then
-	AIp2 = math.max(hp1,hp3,AIp1) + 1
+   AIp2 = math.max(hp1,hp3,AIp1) + 1
 else
-	AIp2 = 0
+   AIp2 = 0
 end
 if hp3 == 0 then
-	AIp3 = 3
+   AIp3 = 3
 else
-	AIp3 = 0
+   AIp3 = 0
 end
 AIp4 = 4
 AIp5 = 5
@@ -98,27 +98,27 @@ aip6_f_shipyard = map:get_field(7, 67)
 
 -- if true then
 if hp1 > 0 then
-	a = init_human_player(game.players[hp1], hp1_f_hq, game.players[hp1].tribe_name)
+   a = init_human_player(game.players[hp1], hp1_f_hq, game.players[hp1].tribe_name)
 end
 if hp2 > 0 then
-	a = init_human_player(game.players[hp2], hp2_f_hq, game.players[hp2].tribe_name)
+   a = init_human_player(game.players[hp2], hp2_f_hq, game.players[hp2].tribe_name)
 end
 if hp3 > 0 then
-	a = init_human_player(game.players[hp3], hp3_f_hq, game.players[hp3].tribe_name)
+   a = init_human_player(game.players[hp3], hp3_f_hq, game.players[hp3].tribe_name)
 end
 if AIp1 > 0 then
-	a = init_AI_player(game.players[AIp1], aip1_f_hq, aip1_f_port, aip1_f_vineyard, aip1_f_shipyard, game.players[AIp1].tribe_name)
+   a = init_AI_player(game.players[AIp1], aip1_f_hq, aip1_f_port, aip1_f_vineyard, aip1_f_shipyard, game.players[AIp1].tribe_name)
 end
 if AIp2 > 0 then
-	a = init_AI_player(game.players[AIp2], aip2_f_hq, aip2_f_port, aip2_f_vineyard, aip2_f_shipyard, game.players[AIp2].tribe_name)
+   a = init_AI_player(game.players[AIp2], aip2_f_hq, aip2_f_port, aip2_f_vineyard, aip2_f_shipyard, game.players[AIp2].tribe_name)
 end
 if AIp3 > 0 then
-	a = init_AI_player(game.players[AIp3], aip3_f_hq, aip3_f_port, aip3_f_vineyard, aip3_f_shipyard, game.players[AIp3].tribe_name)
+   a = init_AI_player(game.players[AIp3], aip3_f_hq, aip3_f_port, aip3_f_vineyard, aip3_f_shipyard, game.players[AIp3].tribe_name)
 end
 if true then
-	a = init_AI_player(game.players[AIp4], aip4_f_hq, aip4_f_port, aip4_f_vineyard, aip4_f_shipyard, game.players[AIp4].tribe_name)
-	a = init_AI_player(game.players[AIp5], aip5_f_hq, aip5_f_port, aip5_f_vineyard, aip5_f_shipyard, game.players[AIp5].tribe_name)
-	a = init_AI_player(game.players[AIp6], aip6_f_hq, aip6_f_port, aip6_f_vineyard, aip6_f_shipyard, game.players[AIp6].tribe_name)
+   a = init_AI_player(game.players[AIp4], aip4_f_hq, aip4_f_port, aip4_f_vineyard, aip4_f_shipyard, game.players[AIp4].tribe_name)
+   a = init_AI_player(game.players[AIp5], aip5_f_hq, aip5_f_port, aip5_f_vineyard, aip5_f_shipyard, game.players[AIp5].tribe_name)
+   a = init_AI_player(game.players[AIp6], aip6_f_hq, aip6_f_port, aip6_f_vineyard, aip6_f_shipyard, game.players[AIp6].tribe_name)
 end
 
 

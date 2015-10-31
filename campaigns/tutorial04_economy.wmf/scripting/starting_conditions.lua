@@ -170,4 +170,3 @@ function init_player()
    connected_road(plr,map:get_field(115,25).immovable,"bl,bl")
    connected_road(plr,map:get_field(97,54).immovable,"r,r,tr")
 end
-

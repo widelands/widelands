@@ -10,8 +10,8 @@ run(function()
    portdock_fields[1].immovable:remove()
    sleep(100)
    --portdock should be back, as port is still there
-   assert (portdock_fields[1].immovable) 
-   
+   assert (portdock_fields[1].immovable)
+
    start_building_farm()
    port1():set_workers{
       barbarians_builder = 1,
@@ -28,7 +28,7 @@ run(function()
    sleep(100)
    --verify that also portdock was removed
    assert (not portdock_fields[1].immovable)
-   
+
    sleep(100)
 
    stable_save("worker_in_portdock")

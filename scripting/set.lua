@@ -188,5 +188,3 @@ function Set:__tostring()
    table.sort(l)
    return '{' .. table.concat(l, ", ") .. '}'
 end
-
-

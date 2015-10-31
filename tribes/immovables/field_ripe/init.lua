@@ -8,13 +8,13 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "ripe_wheat", "field" },
    programs = {
-		program = {
-			"animate=idle 500000",
-			"remove=",
-		},
-		harvest = {
-			"transform=field_harvested"
-		}
+      program = {
+         "animate=idle 500000",
+         "remove=",
+      },
+      harvest = {
+         "transform=field_harvested"
+      }
    },
 
    animations = {

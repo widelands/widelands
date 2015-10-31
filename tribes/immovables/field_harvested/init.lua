@@ -7,10 +7,10 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Field (harvested)"),
    attributes = { "field" },
    programs = {
-		disappear = {
-			"animate=idle 500000",
-			"remove=",
-		}
+      disappear = {
+         "animate=idle 500000",
+         "remove=",
+      }
    },
 
    animations = {

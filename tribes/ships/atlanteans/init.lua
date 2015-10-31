@@ -1,18 +1,18 @@
 dirname = path.dirname(__file__)
 
 animations = {
-	idle = {
-		template = "idle_??",
-		directory = dirname,
-		hotspot = { 89, 86 },
-		fps = 10
-	},
-	sinking = {
-		template = "sinking_??",
-		directory = dirname,
-		hotspot = { 89, 86 },
-		fps = 7
-	}
+   idle = {
+      template = "idle_??",
+      directory = dirname,
+      hotspot = { 89, 86 },
+      fps = 10
+   },
+   sinking = {
+      template = "sinking_??",
+      directory = dirname,
+      hotspot = { 89, 86 },
+      fps = 7
+   }
 }
 add_worker_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
 

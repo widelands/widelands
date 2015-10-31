@@ -27,22 +27,22 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		saw = 1
-	},
+      atlanteans_carrier = 1,
+      saw = 1
+   },
 
-	programs = {
-		harvest = {
-			"findobject attrib:tree radius:10",
-			"walk object",
-			"playFX sound/sawmill sawmill 230",
-			"animation sawing 10000",
-			"object fall",
-			"animation idle 2000",
-			"createware log",
-			"return"
-		}
-	},
+   programs = {
+      harvest = {
+         "findobject attrib:tree radius:10",
+         "walk object",
+         "playFX sound/sawmill sawmill 230",
+         "animation sawing 10000",
+         "object fall",
+         "animation idle 2000",
+         "createware log",
+         "return"
+      }
+   },
 
    animations = animations,
 }

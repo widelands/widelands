@@ -8,15 +8,15 @@ tribes:new_ware_type {
    directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 20,
-		barbarians = 20,
-		empire = 10
-	},
+      atlanteans = 20,
+      barbarians = 20,
+      empire = 10
+   },
    preciousness = {
-		atlanteans = 4,
-		barbarians = 3,
-		empire = 3
-	},
+      atlanteans = 4,
+      barbarians = 3,
+      empire = 3
+   },
 
    animations = {
       idle = {

@@ -10,56 +10,56 @@ tribes:new_productionsite_type {
    size = "big",
 
    buildcost = {
-		log = 2,
-		granite = 2,
-		planks = 2
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 2
-	},
+      log = 2,
+      granite = 2,
+      planks = 2
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 73, 60 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 73, 60 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 73, 60 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 73, 60 },
+      },
+   },
 
    aihints = {
-		prohibited_till = 600
+      prohibited_till = 600
    },
 
-	working_positions = {
-		empire_shepherd = 1
-	},
+   working_positions = {
+      empire_shepherd = 1
+   },
 
    inputs = {
-		wheat = 7,
-		water = 7
-	},
+      wheat = 7,
+      water = 7
+   },
    outputs = {
-		"wool"
+      "wool"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-			descname = _"breeding sheep",
-			actions = {
-				"sleep=25000",
-				"return=skipped unless economy needs wool",
-				"consume=water wheat",
-				"playFX=sound/farm sheep 192",
-				"animate=working 30000",
-				"produce=wool"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
+         descname = _"breeding sheep",
+         actions = {
+            "sleep=25000",
+            "return=skipped unless economy needs wool",
+            "consume=water wheat",
+            "playFX=sound/farm sheep 192",
+            "animate=working 30000",
+            "produce=wool"
+         }
+      },
+   },
 }

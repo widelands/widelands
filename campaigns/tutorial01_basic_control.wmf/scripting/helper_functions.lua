@@ -29,4 +29,3 @@ function remove_all_rocks(fields, g_sleeptime)
       end
    end
 end
-

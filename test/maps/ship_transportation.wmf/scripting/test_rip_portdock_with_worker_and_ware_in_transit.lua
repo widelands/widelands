@@ -29,7 +29,7 @@ run(function()
 
    local flag_oversea = port2().flag
 
- 	stable_save("restored_port")
+   stable_save("restored_port")
 
    -- remove the portdock while the blackwood is in transit.
    port2_portdock=port2().portdock

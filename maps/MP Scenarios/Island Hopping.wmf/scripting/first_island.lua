@@ -85,4 +85,3 @@ function watch_hill()
       end
    end
 end
-

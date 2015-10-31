@@ -12,19 +12,19 @@ tribes:new_constructionsite_type {
    vision_range = 2,
 
    animations = {
-		-- The constructionsite is a mess. Not nice and clean, but rather some
-		-- logs lying around on piles, maybe some tools.
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 5, 5 },
-		},
-		idle_with_worker = {
-			template = "idle_with_worker_??",
-			directory = dirname,
-			hotspot = { 33, 36 },
-		}
-	},
+      -- The constructionsite is a mess. Not nice and clean, but rather some
+      -- logs lying around on piles, maybe some tools.
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 5, 5 },
+      },
+      idle_with_worker = {
+         template = "idle_with_worker_??",
+         directory = dirname,
+         hotspot = { 33, 36 },
+      }
+   },
 
-	aihints = {},
+   aihints = {},
 }

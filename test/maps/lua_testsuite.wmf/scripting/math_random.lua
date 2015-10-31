@@ -1,5 +1,5 @@
 -- =============================
--- Test random number generation 
+-- Test random number generation
 -- =============================
 -- Widelands overwrites Luas random generator with it's own so that
 -- games stay in sync over networks and can be replayed
@@ -35,5 +35,3 @@ function random_test:test_create_integer_range()
    end
    assert_true(do_test(f))
 end
-
-

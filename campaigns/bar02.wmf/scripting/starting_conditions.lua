@@ -113,10 +113,10 @@ p4:forbid_buildings("all")
 wh = p4:place_building("barbarians_warehouse", wl.Game().map:get_field(132,110), false, true)
 wh:set_wares {log = 10}
 wh:set_workers {
-	barbarians_carrier = 40,
-	barbarians_builder = 1,
-	barbarians_blacksmith = 1,
-	barbarians_blacksmith_master = 1
+   barbarians_carrier = 40,
+   barbarians_builder = 1,
+   barbarians_blacksmith = 1,
+   barbarians_blacksmith_master = 1
 }
 
 prefilled_buildings(p4,
@@ -135,4 +135,3 @@ prefilled_buildings(p4,
    }},
    {"barbarians_warmill", 135, 7}
 )
-

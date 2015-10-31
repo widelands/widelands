@@ -9,8 +9,8 @@
 --    :returns: _"Text needed"
 --
 function no_lore_text_yet()
-	-- TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
-	return _"Text needed"
+   -- TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
+   return _"Text needed"
 end
 
 -- RST
@@ -20,8 +20,8 @@ end
 --    :returns: _"Source needed"
 --
 function no_lore_author_text_yet()
-	-- TRANSLATORS: Lore author (source for a quote) helptext for a building - it hasn't been written yet.
-	return _"Source needed"
+   -- TRANSLATORS: Lore author (source for a quote) helptext for a building - it hasn't been written yet.
+   return _"Source needed"
 end
 
 -- RST
@@ -31,8 +31,8 @@ end
 --    :returns: _"Text needed"
 --
 function no_purpose_text_yet()
-	-- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-	return _"Text needed"
+   -- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
+   return _"Text needed"
 end
 
 -- RST
@@ -42,6 +42,6 @@ end
 --    :returns: _"Calculation needed"
 --
 function no_performance_text_yet()
-	-- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
-	return _"Calculation needed"
+   -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
+   return _"Calculation needed"
 end
