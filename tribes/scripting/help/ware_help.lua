@@ -1,5 +1,7 @@
 -- NOCOM we should have a common include for the helper functions.
 
+include "scripting/formatting.lua"
+
 --  =======================================================
 --  *************** Basic helper functions ****************
 --  =======================================================
@@ -50,6 +52,24 @@ function dependencies(items, text)
 	return rt(string, p(text))
 end
 
+-- Helper function for building_help_building_section
+function building_help_building_line(ware_description, amount)
+	amount = tonumber(amount)
+	local image = ware_description.icon_name
+	local result = ""
+	local imgperline = 6
+	local temp_amount = amount
+
+	while (temp_amount > imgperline) do
+		result = result .. image_line(image, imgperline)
+		temp_amount = temp_amount - imgperline
+	end
+	-- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+	result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
+	return result
+
+end
+
 --  =======================================================
 --  ************* Main worker help functions *************
 --  =======================================================
@@ -72,33 +92,93 @@ function ware_help_string(tribe, ware_description)
 	end
 	purpose_text = ware_helptext() .. ware_helptext(tribe.name)
 
+	-- TODO(GunChleoc): Split into purpose and note
 	local result = rt(h2(_"Purpose")) ..
 		rt("image=" .. ware_description.icon_name, p(purpose_text))
 
-	result = result .. rt(h3(_"Producers:"))
-
-	for j, building in ipairs(ware_description.producers) do
+	for i, building in ipairs(ware_description.producers) do
 		if (tribe:has_building(building.name)) then
-			result = result .. dependencies(
-				{building, ware_description},
-				building.descname
-			)
+			result = result .. rt(h2(_"Producer"))
+			local produced_wares_string = ""
+			local consumed_wares_string = ""
+			result = result .. dependencies({building, ware_description}, building.descname)
+			-- Find out which programs in the building produce this ware and collect the info
+			local producing_programs = {}
+			for j, program_name in ipairs(building.production_programs) do
+				for ware, amount in pairs(building:produced_wares(program_name)) do
+					if (ware_description.name == ware) then
+						local produced_ware_description = wl.Game():get_ware_description(ware)
+						produced_wares_string = produced_wares_string
+							.. building_help_building_line(produced_ware_description, amount)
+						table.insert(producing_programs, program_name)
+					end
+				end
+			end
+			-- Now collect the consumed wares
+			for j, program_name in ipairs(producing_programs) do
+				local consumed_wares = building:consumed_wares(program_name)
+				for countlist, warelist in pairs(consumed_wares) do
+					local consumed_warenames = {}
+					local consumed_images = {}
+					local consumed_amount = {}
+					local count = 1
+					for consumed_ware, amount in pairs(warelist) do
+						local ware_description = wl.Game():get_ware_description(consumed_ware)
+						consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, ware_description.descname)
+						consumed_images[count] = ware_description.icon_name
+						consumed_amount[count] = amount
+						count = count + 1
+					end
+					local text = localize_list(consumed_warenames, "or")
+					if (countlist > 1) then
+						text = _"%s and":bformat(text)
+					end
+					local images = consumed_images[1]
+					local image_counter = 2
+					while (image_counter <= consumed_amount[1]) do
+						images = images .. ";" .. consumed_images[1]
+						image_counter = image_counter + 1
+					end
+					for k, v in ipairs({table.unpack(consumed_images,2)}) do
+						image_counter = 1
+						while (image_counter <= consumed_amount[k + 1]) do
+							images = images .. ";" .. v
+							image_counter = image_counter + 1
+						end
+					end
+					consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
+				end
+			end
+			result = result .. rt(h3(_"Wares consumed:")) .. consumed_wares_string
+			result = result .. rt(h3(_"Amount produced:")) .. produced_wares_string
 		end
 	end
 
-	result = result .. rt(h3(_"Consumers:"))
+	-- Now showing the buildings that consume this ware
+	local consumers = ""
+	local consumers_amount = 0
 
-	for j, building in ipairs(ware_description.consumers) do
+	for i, building in ipairs(ware_description.consumers) do
 		if (tribe:has_building(building.name)) then
-			result = result .. dependencies(
-				{building, ware_description},
-				building.descname
-			)
+			consumers = consumers .. dependencies({building, ware_description}, building.descname)
+			consumers_amount = consumers_amount + 1
 		end
 	end
 
-	-- TODO(GunChleoc): Split into purpose and note
-	-- We also want the ware quantity info collected while loading the tribes.
+	-- Constructionsite isn't listed with the consumers, so we need a special check
+	if (ware_description:is_construction_material(tribe.name)) then
+		local constructionsite_description = wl.Game():get_building_description("constructionsite")
+		consumers = consumers .. dependencies({ware_description, constructionsite_description},
+														 constructionsite_description.descname)
+		consumers_amount = consumers_amount + 1
+	end
+
+	if (consumers ~= "") then
+		result = result .. rt(h2(ngettext("Consumer", "Consumers", consumers_amount)))
+		result = result .. consumers
+	end
+
+	-- NOCOM workers
 	return result
 end
 

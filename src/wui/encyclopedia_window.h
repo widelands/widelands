@@ -100,15 +100,10 @@ private:
 	// Wares
 	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
 	UI::Box wares_box_;          // Main contents box for Wares tab
-	UI::Box wares_details_box_;  // Horizontal alignment for prod_sites_ and cond_table_
 	UI::Listselect<Widelands::WareIndex> wares_;
 	UI::MultilineTextarea    ware_text_;
-	UI::Listselect<Widelands::BuildingIndex> prod_sites_;
-	UI::Table     <uintptr_t>                 cond_table_;
-	Widelands::WareDescr const * selected_ware_;
 	void fill_wares();
 	void ware_selected(uint32_t);
-	void prod_site_selected(uint32_t);
 
 	// Workers
 	UI::Box workers_tab_box_;  // Wrapper box so we can add some padding

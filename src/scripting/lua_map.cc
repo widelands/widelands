@@ -66,13 +66,14 @@ namespace LuaMaps {
 
 namespace {
 
-// Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
+// Pushes a lua table with (name, count) pairs for the given 'wares_container' on the
 // stack. Returns 1.
-int wares_map_to_lua(lua_State* L, const Buildcost& wares_map) {
+template<typename T>
+int wares_container_to_lua(lua_State* L, const T& wares_container) {
 	lua_newtable(L);
-	for (const auto& cost : wares_map) {
-		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(cost.first)->name());
-		lua_pushuint32(L, cost.second);
+	for (const auto& ware_amount : wares_container) {
+		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_amount.first)->name());
+		lua_pushuint32(L, ware_amount.second);
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1458,7 +1459,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 			(RO) a list of ware build cost for the building.
 */
 int LuaBuildingDescription::get_build_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->buildcost());
+	return wares_container_to_lua<Buildcost>(L, get()->buildcost());
 }
 
 
@@ -1538,7 +1539,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 			(RO) a list of ware cost for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->enhancement_cost());
+	return wares_container_to_lua<Buildcost>(L, get()->enhancement_cost());
 }
 
 /* RST
@@ -1581,7 +1582,7 @@ int LuaBuildingDescription::get_is_port(lua_State * L) {
 			(RO) a list of wares returned upon dismantling.
 */
 int LuaBuildingDescription::get_returned_wares(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares());
+	return wares_container_to_lua<Buildcost>(L, get()->returned_wares());
 }
 
 
@@ -1591,7 +1592,7 @@ int LuaBuildingDescription::get_returned_wares(lua_State * L) {
 			(RO) a list of wares returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares_enhanced());
+	return wares_container_to_lua<Buildcost>(L, get()->returned_wares_enhanced());
 }
 
 
@@ -1679,12 +1680,15 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
+	METHOD(LuaProductionSiteDescription, consumed_wares),
+	METHOD(LuaProductionSiteDescription, produced_wares),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::Properties[] = {
 	PROP_RO(LuaProductionSiteDescription, inputs),
 	PROP_RO(LuaProductionSiteDescription, output_ware_types),
 	PROP_RO(LuaProductionSiteDescription, output_worker_types),
+	PROP_RO(LuaProductionSiteDescription, production_programs),
 	PROP_RO(LuaProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
@@ -1750,6 +1754,22 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: production_programs
+
+		(RO) An array with the production program names as string.
+*/
+int LuaProductionSiteDescription::get_production_programs(lua_State * L) {
+	lua_newtable(L);
+	int index = 1;
+	for (const std::pair<std::string, ProductionProgram *>& program : get()->programs()) {
+		lua_pushint32(L, index++);
+		lua_pushstring(L, program.first);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
 	.. attribute:: working_positions
 		(RO) An array with :class:`WorkerDescription` containing the workers that
 		can work here with their multiplicity, i.e. for a atlantean mine this
@@ -1771,6 +1791,57 @@ int LuaProductionSiteDescription::get_working_positions(lua_State * L) {
 	}
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: consumed_wares
+
+		:arg program_name: the name of the production program that we want to get the consumed wares for
+		:type tribename: :class:`string`
+
+		(RO) NOCOM lile food_list? Returns a table of {ware name, ware amount} for the wares produced by this production program
+*/
+int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		lua_newtable(L);
+		int counter = 0;
+		for (const Widelands::ProductionProgram::WareTypeGroup& group: program.consumed_wares()) {
+			lua_pushnumber(L, ++counter);
+			lua_newtable(L);
+			for (const WareIndex& ware_index : group.first) {
+				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
+				lua_pushnumber(L, group.second);
+				lua_settable(L, -3);
+			}
+			lua_settable(L, -3);
+		}
+	}
+	return 1;
+}
+
+
+
+/* RST
+	.. attribute:: produced_wares
+
+		:arg program_name: the name of the production program that we want to get the produced wares for
+		:type tribename: :class:`string`
+
+		(RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
+*/
+int LuaProductionSiteDescription::produced_wares(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		return wares_container_to_lua<BillOfMaterials>(L, program.produced_wares());
+	}
+	return 1;
+}
+
 
 
 /* RST

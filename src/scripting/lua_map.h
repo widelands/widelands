@@ -308,11 +308,15 @@ public:
 	int get_inputs(lua_State *);
 	int get_output_ware_types(lua_State *);
 	int get_output_worker_types(lua_State *);
+	int get_production_programs(lua_State *);
 	int get_working_positions(lua_State *);
 
 	/*
 	 * Lua methods
 	 */
+
+	int consumed_wares(lua_State *);
+	int produced_wares(lua_State *);
 
 	/*
 	 * C methods

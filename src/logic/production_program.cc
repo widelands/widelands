@@ -1788,4 +1788,4 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",
 								  _name.c_str(), building->name().c_str());
 }
-}
+} // namespace Widelands
