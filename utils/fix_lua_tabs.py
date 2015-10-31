@@ -60,8 +60,8 @@ def main():
             m = LEADING_TABS.match(line)
             if m is not None:
                 line = line[m.start():m.end()].expandtabs(SPACES_PER_TAB) + line[m.end():]
-            new_lines.append(line.rstrip())
-        write_text_file(filename, "\n".join(new_lines))
+            new_lines.append(line.rstrip() + "\n")
+        write_text_file(filename, "".join(new_lines))
     return 0
 
 if __name__ == "__main__":
