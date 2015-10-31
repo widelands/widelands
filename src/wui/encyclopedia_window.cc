@@ -188,6 +188,7 @@ void EncyclopediaWindow::fill_buildings() {
 	}
 }
 
+// NOCOM(#codereview): lot of duplicated code in the *selected functions. Pull out a helper function?
 void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(buildings_.get_selected());
