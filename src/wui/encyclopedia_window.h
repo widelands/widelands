@@ -20,9 +20,10 @@
 #ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
-#include "logic/building.h"
-#include "logic/ware_descr.h"
-#include "logic/worker_descr.h"
+#include <map>
+#include <memory>
+
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -31,87 +32,53 @@
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
 
-namespace Widelands {
-class BuildingDescr;
-class WareDescr;
-class WorkerDescr;
-class TribeDescr;
-}
 
 class InteractivePlayer;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
 private:
-	struct Building {
-		Building(Widelands::BuildingIndex i, const Widelands::BuildingDescr * descr)
+	struct EncyclopediaEntry {
+		EncyclopediaEntry(const EncyclopediaEntry& other) :
+			EncyclopediaEntry(other.index_, other.descname_, other.icon_)
+		{}
+		EncyclopediaEntry(const Widelands::WareIndex index, const std::string& descname, const Image* icon)
 			:
-			index_(i),
-			descr_(descr)
-			{}
-		Widelands::BuildingIndex index_;
-		const Widelands::BuildingDescr * descr_;
-
-		bool operator<(const Building o) const {
-			return descr_->descname() < o.descr_->descname();
-		}
-	};
-
-	struct Ware {
-		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
-			:
-			index_(i),
-			descr_(descr)
+			index_(index),
+			descname_(descname),
+			icon_(icon)
 			{}
 		Widelands::WareIndex index_;
-		const Widelands::WareDescr * descr_;
+		std::string descname_;
+		const Image* icon_;
 
-		bool operator<(const Ware o) const {
-			return descr_->descname() < o.descr_->descname();
+		bool operator<(const EncyclopediaEntry other) const {
+			return descname_ < other.descname_;
 		}
 	};
-
-	struct Worker {
-		Worker(Widelands::WareIndex i, const Widelands::WorkerDescr * descr)
-			:
-			index_(i),
-			descr_(descr)
-			{}
-		Widelands::WareIndex index_;
-		const Widelands::WorkerDescr * descr_;
-
-		bool operator<(const Worker o) const {
-			return descr_->descname() < o.descr_->descname();
-		}
-	};
-
 
 	InteractivePlayer & iaplayer() const;
-	UI::TabPanel tabs_;
+
+	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
 
 	// Buildings
-	UI::Box buildings_tab_box_;  // Wrapper box so we can add some padding
-	UI::Box buildings_box_;      // Main contents box for Buildings tab
-	UI::Listselect<Widelands::BuildingIndex> buildings_;
-	UI::MultilineTextarea building_text_;
 	void fill_buildings();
 	void building_selected(uint32_t);
 
 	// Wares
-	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
-	UI::Box wares_box_;          // Main contents box for Wares tab
-	UI::Listselect<Widelands::WareIndex> wares_;
-	UI::MultilineTextarea    ware_text_;
 	void fill_wares();
 	void ware_selected(uint32_t);
 
 	// Workers
-	UI::Box workers_tab_box_;  // Wrapper box so we can add some padding
-	UI::Box workers_box_;      // Main contents box for Workers tab
-	UI::Listselect<Widelands::WareIndex> workers_;
-	UI::MultilineTextarea worker_text_;
 	void fill_workers();
 	void worker_selected(uint32_t);
+
+	UI::TabPanel tabs_;
+
+	std::map<std::string, std::unique_ptr<UI::Box>> wrapper_boxes_;  // Wrapper boxes so we can add some padding
+	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;  // Main contents box for Workers tab
+	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::WareIndex>>> lists_; // Table of contents
+	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;  // The contents shown when an entry is selected
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

@@ -25,28 +25,20 @@
 #include <memory>
 #include <set>
 #include <string>
-#include <typeinfo>
 #include <vector>
 
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/macros.h"
-#include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "logic/building.h"
 #include "logic/player.h"
-#include "logic/production_program.h"
-#include "logic/productionsite.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
-#include "logic/warelist.h"
+#include "logic/worker_descr.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/table.h"
-#include "ui_basic/unique_window.h"
-#include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
@@ -77,64 +69,55 @@ EncyclopediaWindow::EncyclopediaWindow
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribal Encyclopedia")),
-	tabs_(this, 0, 0, nullptr),
-	buildings_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
-	buildings_box_(&buildings_tab_box_, 0, 0, UI::Box::Horizontal),
-	buildings_    (&buildings_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
-	building_text_(&buildings_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
-
-	wares_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
-	wares_box_(&wares_tab_box_, 0, 0, UI::Box::Horizontal),
-	wares_    (&wares_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
-	ware_text_(&wares_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
-
-	workers_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
-	workers_box_(&workers_tab_box_, 0, 0, UI::Box::Horizontal),
-	workers_    (&workers_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
-	worker_text_(&workers_box_, 0, 0,
-						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding)
+	tabs_(this, 0, 0, nullptr)
 {
-	// Buildings
-	buildings_box_.add(&buildings_, UI::Align_Left);
-	buildings_box_.add_space(kPadding);
-	buildings_box_.add(&building_text_, UI::Align_Left);
+	std::set<std::string> keys({"buildings", "wares", "workers"});
 
-	buildings_tab_box_.add_space(kPadding);
-	buildings_tab_box_.add(&buildings_box_, UI::Align_Left);
+	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
+	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
-	// Wares
-	wares_box_.add(&wares_, UI::Align_Left);
-	wares_box_.add_space(kPadding);
-	wares_box_.add(&ware_text_, UI::Align_Left);
+	for (const std::string& key : keys) {
+		wrapper_boxes_.insert(
+					std::make_pair(key,
+										std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
 
-	wares_tab_box_.add_space(kPadding);
-	wares_tab_box_.add(&wares_box_, UI::Align_Left);
+		boxes_.insert(
+					std::make_pair(key,
+										std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(key).get(),
+																						 0, 0, UI::Box::Horizontal))));
 
-	// Workers
-	workers_box_.add(&workers_, UI::Align_Left);
-	workers_box_.add_space(kPadding);
-	workers_box_.add(&worker_text_, UI::Align_Left);
+		lists_.insert(
+					std::make_pair(key,
+										std::unique_ptr<UI::Listselect<Widelands::WareIndex>>(
+											new UI::Listselect<Widelands::WareIndex>
+											(boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
 
-	workers_tab_box_.add_space(kPadding);
-	workers_tab_box_.add(&workers_box_, UI::Align_Left);
+		contents_.insert(
+					std::make_pair(key,
+										std::unique_ptr<UI::MultilineTextarea>(
+											new UI::MultilineTextarea
+											(boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
+
+		boxes_.at(key)->add(lists_.at(key).get(), UI::Align_Left);
+		boxes_.at(key)->add_space(kPadding);
+		boxes_.at(key)->add(contents_.at(key).get(), UI::Align_Left);
+
+		wrapper_boxes_.at(key)->add_space(kPadding);
+		wrapper_boxes_.at(key)->add(boxes_.at(key).get(), UI::Align_Left);
+	}
 
 	tabs_.add("encyclopedia_wares", g_gr->images().get("pics/genstats_nrwares.png"),
-				 &wares_tab_box_, _("Wares"));
+				 wrapper_boxes_.at("wares").get(), _("Wares"));
 	tabs_.add("encyclopedia_workers", g_gr->images().get("pics/genstats_nrworkers.png"),
-				 &workers_tab_box_, _("Workers"));
+				 wrapper_boxes_.at("workers").get(), _("Workers"));
 	tabs_.add("encyclopedia_buildings", g_gr->images().get("pics/genstats_nrbuildings.png"),
-				 &buildings_tab_box_, _("Buildings"));
+				 wrapper_boxes_.at("buildings").get(), _("Buildings"));
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// Content
-	buildings_.selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
-	wares_.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
-	workers_.selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
+	lists_.at("buildings")->selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
+	lists_.at("wares")->selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
+	lists_.at("workers")->selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
 
 	fill_buildings();
 	fill_wares();
@@ -146,30 +129,34 @@ EncyclopediaWindow::EncyclopediaWindow
 }
 
 
-void EncyclopediaWindow::fill_buildings() {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	std::vector<Building> building_vec;
+void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries) {
+	std::sort(entries.begin(), entries.end());
+	for (uint32_t i = 0; i < entries.size(); i++) {
+		EncyclopediaEntry cur = entries[i];
+		lists_.at(key)->add(cur.descname_, cur.index_, cur.icon_);
+	}
+	lists_.at(key)->select(0);
+}
 
+
+void EncyclopediaWindow::fill_buildings() {
 	const Tribes& tribes = iaplayer().egbase().tribes();
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<EncyclopediaEntry> entries;
+
 	for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
 		const BuildingDescr* building = tribes.get_building_descr(i);
 		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
-			Building b(i, building);
-			building_vec.push_back(b);
+			EncyclopediaEntry entry(i, building->descname(), building->icon());
+			entries.push_back(entry);
 		}
 	}
-
-	std::sort(building_vec.begin(), building_vec.end());
-
-	for (uint32_t i = 0; i < building_vec.size(); i++) {
-		Building cur = building_vec[i];
-		buildings_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
-	}
+	fill_entries("buildings", entries);
 }
 
 void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(buildings_.get_selected());
+	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(lists_.at("buildings")->get_selected());
 
 	assert(tribe.has_building(tribe.building_index(selected_building.name())) ||
 			 selected_building.type() == MapObjectType::MILITARYSITE);
@@ -181,33 +168,28 @@ void EncyclopediaWindow::building_selected(uint32_t) {
 		cr->push_arg(selected_building.name());
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		building_text_.set_text(help_text);
+		contents_.at("buildings")->set_text(help_text);
 	} catch (LuaError& err) {
-		building_text_.set_text(err.what());
+		contents_.at("buildings")->set_text(err.what());
 	}
-	building_text_.scroll_to_top();
+	contents_.at("buildings")->scroll_to_top();
 }
 
 void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	std::vector<Ware> ware_vec;
+	std::vector<EncyclopediaEntry> entries;
 
-	for (const WareIndex& ware_index : tribe.wares()) {
-		Ware w(ware_index, tribe.get_ware_descr(ware_index));
-		ware_vec.push_back(w);
+	for (const WareIndex& i : tribe.wares()) {
+		const WareDescr* ware = tribe.get_ware_descr(i);
+		EncyclopediaEntry entry(i, ware->descname(), ware->icon());
+		entries.push_back(entry);
 	}
-
-	std::sort(ware_vec.begin(), ware_vec.end());
-
-	for (uint32_t i = 0; i < ware_vec.size(); i++) {
-		Ware cur = ware_vec[i];
-		wares_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
-	}
+	fill_entries("wares", entries);
 }
 
 void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	const Widelands::WareDescr& selected_ware = *tribe.get_ware_descr(wares_.get_selected());
+	const Widelands::WareDescr& selected_ware = *tribe.get_ware_descr(lists_.at("wares")->get_selected());
 
 	try {
 		std::unique_ptr<LuaTable> t(
@@ -217,34 +199,28 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 		cr->push_arg(&selected_ware);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		ware_text_.set_text(help_text);
+		contents_.at("wares")->set_text(help_text);
 	} catch (LuaError& err) {
-		ware_text_.set_text(err.what());
+		contents_.at("wares")->set_text(err.what());
 	}
-	ware_text_.scroll_to_top();
+	contents_.at("wares")->scroll_to_top();
 }
 
 void EncyclopediaWindow::fill_workers() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	std::vector<Worker> worker_vec;
+	std::vector<EncyclopediaEntry> entries;
 
 	for (const WareIndex& i: tribe.workers()) {
-		WorkerDescr const * worker = tribe.get_worker_descr(i);
-		Worker w(i, worker);
-		worker_vec.push_back(w);
+		const WorkerDescr* worker = tribe.get_worker_descr(i);
+		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
+		entries.push_back(entry);
 	}
-
-	std::sort(worker_vec.begin(), worker_vec.end());
-
-	for (uint32_t i = 0; i < worker_vec.size(); i++) {
-		Worker cur = worker_vec[i];
-		workers_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
-	}
+	fill_entries("workers", entries);
 }
 
 void EncyclopediaWindow::worker_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::WorkerDescr& selected_worker = *tribe.get_worker_descr(workers_.get_selected());
+	const Widelands::WorkerDescr& selected_worker = *tribe.get_worker_descr(lists_.at("workers")->get_selected());
 
 	try {
 		std::unique_ptr<LuaTable> t(
@@ -254,12 +230,12 @@ void EncyclopediaWindow::worker_selected(uint32_t) {
 		cr->push_arg(&selected_worker);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		worker_text_.set_text((boost::format("%s%s")
+		contents_.at("workers")->set_text((boost::format("%s%s")
 									  % heading(selected_worker.descname())
 									  % help_text).str());
 	} catch (LuaError& err) {
-		worker_text_.set_text(err.what());
+		contents_.at("workers")->set_text(err.what());
 	}
 
-	worker_text_.scroll_to_top();
+	contents_.at("workers")->scroll_to_top();
 }
