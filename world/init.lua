@@ -25,6 +25,8 @@ world:new_editor_immovable_category{
 }
 
 world:new_editor_immovable_category{
+   -- NOCOM(#codereview): I think this rename should have been done after this
+   -- has been merged, it is essentially orthogonal to one_tribe.
    name = "rocks",
    descname = _ "Rocks",
    picture = "world/immovables/rocks/greenland_rocks6/idle.png",

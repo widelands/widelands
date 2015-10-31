@@ -28,9 +28,11 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
             -- NOCOM(#codereview): get rid of template and directory, instead
             -- use 'path.list_directory'. See world/ for examples. No globbing
             -- code should be necessary in c++. Update: I just realized that
-            -- the critters do the same in the world - I still think it should
-            -- be done in Lua, not in c++, but a TODO/Bug is probably
-            -- sufficient for now.
+            -- you went the other way in the world too. We should discuss that,
+            -- I think it should be done in Lua, not in c++. My reasoning is
+            -- that the engine should get passed in hard data as much as
+            -- possible and not needing to dig around in directories for the
+            -- correct files.
 				template = basename .. "_" .. dir ..  "_??",
 				directory = dirname,
 				hotspot = hotspot,
