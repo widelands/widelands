@@ -100,24 +100,42 @@ function ware_help_string(tribe, ware_description)
 		if (tribe:has_building(building.name)) then
 			-- TRANSLATORS: Ware Encyclopedia: A building producing a ware
 			result = result .. rt(h2(_"Producer"))
-			local produced_wares_string = ""
-			local consumed_wares_string = ""
-			local consumed_wares_counter = 0
 			result = result .. dependencies({building, ware_description}, building.descname)
-			-- Find out which programs in the building produce this ware and collect the info
+
+			-- Find out which programs in the building produce this ware
 			local producing_programs = {}
+			local produced_wares_strings = {}
 			for j, program_name in ipairs(building.production_programs) do
 				for ware, amount in pairs(building:produced_wares(program_name)) do
 					if (ware_description.name == ware) then
-						local produced_ware_description = wl.Game():get_ware_description(ware)
-						produced_wares_string = produced_wares_string
-							.. building_help_building_line(produced_ware_description, amount)
 						table.insert(producing_programs, program_name)
 					end
 				end
 			end
-			-- Now collect the consumed wares
+
+			-- Now collect all produced wares by the filtered programs
+			-- NOCOM amounts are wrong, e.g. Granite - Marblemine
 			for j, program_name in ipairs(producing_programs) do
+				local produced_wares_amount = {}
+				for ware, amount in pairs(building:produced_wares(program_name)) do
+					if (produced_wares_amount[ware] == nil) then
+						produced_wares_amount[ware] = 0
+					end
+					produced_wares_amount[ware] = produced_wares_amount[ware] + amount
+				end
+				local produced_wares_string = ""
+				for ware, amount in pairs(produced_wares_amount) do
+				local ware_descr = wl.Game():get_ware_description(ware)
+					produced_wares_string = produced_wares_string
+						.. building_help_building_line(ware_descr, amount)
+				end
+				produced_wares_strings[program_name] = produced_wares_string
+			end
+
+			-- Now collect the consumed wares for each filtered program and print the program info
+			for j, program_name in ipairs(producing_programs) do
+				local consumed_wares_string = ""
+				local consumed_wares_counter = 0
 				local consumed_wares = building:consumed_wares(program_name)
 				for countlist, warelist in pairs(consumed_wares) do
 					local consumed_warenames = {}
@@ -130,7 +148,7 @@ function ware_help_string(tribe, ware_description)
 						consumed_images[count] = ware_description.icon_name
 						consumed_amount[count] = amount
 						count = count + 1
-						consumed_wares_counter = consumed_wares_counter + 1
+						consumed_wares_counter = consumed_wares_counter + amount
 					end
 					local text = localize_list(consumed_warenames, "or")
 					if (countlist > 1) then
@@ -151,13 +169,17 @@ function ware_help_string(tribe, ware_description)
 					end
 					consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
 				end
+				if (consumed_wares_counter > 0) then
+					-- TRANSLATORS: Ware Encyclopedia: Wares consumed by a productionsite
+					result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
+					result = result .. consumed_wares_string
+				end
+				if (produced_wares_strings[program_name]) then
+					-- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
+					result = result .. rt(h3(_"Amount produced:")) .. produced_wares_strings[program_name]
+				end
 			end
-			if (consumed_wares_counter > 0) then
-				-- TRANSLATORS: Ware Encyclopedia: Wares consumed by a productionsite
-				result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
-				result = result .. consumed_wares_string
-			end
-			result = result .. rt(h3(_"Amount produced:")) .. produced_wares_string
+
 		end
 	end
 
@@ -200,7 +222,7 @@ function ware_help_string(tribe, ware_description)
 	-- Now show consumers (buildings + workers)
 	if (consumers_amount > 0) then
 		-- TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that consume a ware
-		result = result .. rt(h2(_("Used by")))
+		result = result .. rt(h2(ngettext("Consumer", "Consumers", consumers_amount)))
 		if (consumers ~= "") then
 			result = result .. consumers_string
 		end
