@@ -19,6 +19,9 @@
 
 #include "map_io/tribes_legacy_lookup_table.h"
 
+// NOCOM(#codereview): Why do we need this table? It seems it should only be
+// needed for savegames - which we break anyways. Did you find any maps in the
+// wild that requires this?
 TribesLegacyLookupTable::TribesLegacyLookupTable() :
 	// Workers
 	workers_

@@ -29,6 +29,8 @@ class TribesLegacyLookupTable {
 public:
 	TribesLegacyLookupTable();
 
+	// NOCOM(#codereview): can all return const std::string& since the
+	// references are valid till destruction of the table.
 	/// Looks up the new name for the 'worker'.
 	std::string lookup_worker(const std::string& tribe, const std::string& worker) const;
 
