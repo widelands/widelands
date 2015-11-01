@@ -1,15 +1,12 @@
-[global]
-packet_version=1
-map_w=112
-map_h=112
-nr_players=4
-world=greenland
-name=_Four Castles
-author=Winterwind
-descr=_ "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
-tags="official,ffa,2teams"
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
-[teams00]
-team1=0,1
-team2=2,3
-# (blue, red) vs. (yellow, green)
+[global]
+packet_version="1"
+map_w="112"
+map_h="112"
+nr_players="4"
+name="Four Castles"
+author="Winterwind"
+descr="Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+hint=
+tags="2teams,artifacts,ffa,official"

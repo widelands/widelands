@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+name="The Pass Through the Mountains"
+author="Quappo"
+descr="In this mountainous area two princes have settled. Now they are expanding their territories, unaware of the fact that they are not alone!"
+hint=
+tags="artifacts,official,unbalanced"

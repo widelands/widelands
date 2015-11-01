@@ -1,12 +1,12 @@
-# Automatically created by Widelands svn3295
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
 [global]
 packet_version="1"
 map_w="144"
 map_h="144"
 nr_players="3"
-world="greenland"
-name=_ "The Thaw"
+name="The Thaw"
 author="Another Barbarian"
-descr=_ "Another thaw set in. Three tribes were sheltering from severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
-tags="official,ffa"
+descr="Another thaw set in. Three tribes were sheltering from severe winter among majestic mountains. At the time of the solstice they listened to the oracle and went to war. The only survivor will sacrifice his enemies’ treasures on the ancient altar, build there a splendid castle and gain the goodwill and respect of the Gods."
+hint=
+tags="artifacts,ffa,official"

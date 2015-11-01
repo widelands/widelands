@@ -19,7 +19,7 @@ local wc_desc = _ "Search for the ancient artifacts. Once all of them are found,
 return {
 	name = wc_name,
 	description = wc_desc,
-	map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available
+	map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suited maps
 	func = function()
 		-- set the objective with the game type for all players
 		broadcast_objective("win_condition", wc_descname, wc_desc)
@@ -45,6 +45,7 @@ return {
 						-- this assumes that the immovable has size small or medium, i.e. only occupies one field
 						artifact_fields[i] = map:get_field(x,y)
 						i = i + 1
+						print("Artifact on map: " .. x .. "|" .. y) -- NOCOM: remove before merging
 					end
 			end
 		end
@@ -52,7 +53,7 @@ return {
 		local plrs = wl.Game().players
 		if #artifact_fields == 0 then
 			for idx, plr in ipairs(plrs) do
-				send_message(plr, _"No Artifacts", rt(p(_"There are no artifacts on this map. Please make sure you choose a suitable map.")), {popup = true})
+				send_message(plr, _"No Artifacts", rt(p(_"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load.")), {popup = true})
 			end
 			return
 		end

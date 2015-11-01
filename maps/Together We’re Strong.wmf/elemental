@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
+[global]
+packet_version="1"
+map_w="176"
+map_h="176"
+nr_players="2"
+name="Together We’re Strong"
+author="Nasenbaer"
+descr="The four mighty harbors of the Craw Islands have been trading their goods among each other for ages. All of them needed resources that they could not produce in their own territory and in exchange provided other resources to those that could not produce them. Based on these trades, a very friendly commerce was common between the four harbors and the people living on the Craw Islands – until recently, when two of the harbors united to form an exclusive trade alliance, forcing the other two to do the same. Suddenly, it seems only a matter of time before the first fights between the harbors will shatter the peaceful life that has lasted for so long..."
+hint=
+tags="1v1,artifacts,official,seafaring"

@@ -1,15 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
 packet_version="1"
 map_w="176"
 map_h="112"
 nr_players="4"
-world="greenland"
-name=_"Swamp Monks"
+name="Swamp Monks"
 author="Nasenbaer"
-descr=_ "It is said that the old war monks, living in the even older swamps, are the key to control over the whole island."
-tags="official,2teams"
-
-[teams00]
-team1=0,1
-team2=2,3
-# (blue, red) vs. (yellow, green)
+descr="It is said that the old war monks, living in the even older swamps, are the key to control over the whole island."
+hint=
+tags="2teams,artifacts,official"
