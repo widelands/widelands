@@ -75,10 +75,14 @@ private:
 
 	UI::TabPanel tabs_;
 
-	std::map<std::string, std::unique_ptr<UI::Box>> wrapper_boxes_;  // Wrapper boxes so we can add some padding
-	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;  // Main contents box for Workers tab
-	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::WareIndex>>> lists_; // Table of contents
-	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;  // The contents shown when an entry is selected
+	// Wrapper boxes so we can add some padding
+	std::map<std::string, std::unique_ptr<UI::Box>> wrapper_boxes_;
+	// Main contents boxes for each tab
+	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;
+	// A tab's table of contents
+	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::WareIndex>>> lists_;
+	// The contents shown when an entry is selected in a tab
+	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

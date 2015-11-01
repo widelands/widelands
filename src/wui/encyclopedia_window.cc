@@ -156,7 +156,8 @@ void EncyclopediaWindow::fill_buildings() {
 
 void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(lists_.at("buildings")->get_selected());
+	const Widelands::BuildingDescr& selected_building =
+			*tribe.get_building_descr(lists_.at("buildings")->get_selected());
 
 	assert(tribe.has_building(tribe.building_index(selected_building.name())) ||
 			 selected_building.type() == MapObjectType::MILITARYSITE);
@@ -220,7 +221,8 @@ void EncyclopediaWindow::fill_workers() {
 
 void EncyclopediaWindow::worker_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::WorkerDescr& selected_worker = *tribe.get_worker_descr(lists_.at("workers")->get_selected());
+	const Widelands::WorkerDescr& selected_worker =
+			*tribe.get_worker_descr(lists_.at("workers")->get_selected());
 
 	try {
 		std::unique_ptr<LuaTable> t(
