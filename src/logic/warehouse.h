@@ -29,7 +29,6 @@
 #include "logic/wareworker.h"
 
 class InteractivePlayer;
-class Profile;
 
 namespace Widelands {
 

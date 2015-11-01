@@ -59,7 +59,6 @@
 #include "logic/tribes/tribe_descr.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "profile/profile.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"

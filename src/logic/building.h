@@ -41,7 +41,6 @@
 namespace UI {class Window;}
 struct BuildingHints;
 class InteractiveGameBase;
-class Profile;
 class Image;
 
 namespace Widelands {

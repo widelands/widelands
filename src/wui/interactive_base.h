@@ -28,6 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
+#include "profile/profile.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"

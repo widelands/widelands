@@ -50,7 +50,6 @@
 #include "logic/trainingsite.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"

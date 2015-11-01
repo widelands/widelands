@@ -34,7 +34,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"

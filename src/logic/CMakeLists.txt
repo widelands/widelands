@@ -252,7 +252,6 @@ wl_library(logic
     map_io_map_loader
     network
     notifications
-    profile
     random
     scripting_coroutine
     scripting_logic

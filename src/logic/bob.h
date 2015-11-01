@@ -29,8 +29,6 @@
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
 
-class Profile;
-
 namespace Widelands {
 class Map;
 struct Route;

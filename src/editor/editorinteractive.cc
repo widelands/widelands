@@ -43,7 +43,6 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"

@@ -34,7 +34,6 @@
 class LuaTable;
 class TribesLegacyLookupTable;
 class WorldLegacyLookupTable;
-class Profile;
 
 namespace Widelands {
 
