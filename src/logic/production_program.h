@@ -516,32 +516,21 @@ struct ProductionProgram {
 							const EditorGameBase& egbase,
 							ProductionSiteDescr* building);
 
-	~ProductionProgram() {
-		for (Action * action : m_actions) {
-			delete action;
-		}
-	}
+	const std::string& name() const;
+	const std::string& descname() const;
 
-	const std::string & name() const {return m_name;}
-	const std::string & descname() const {return m_descname;}
-	int32_t get_size() const {return m_actions.size();}
-	const Action & operator[](size_t const idx) const {
-		assert(idx < m_actions.size());
-		return *m_actions[idx];
-	}
+	size_t size() const;
+	const ProductionProgram::Action& operator[](size_t const idx) const;
 
-	using Actions = std::vector<Action *>;
-	const Actions & actions() const {return m_actions;}
-	const Groups& consumed_wares() const {return consumed_wares_;}
-	const BillOfMaterials& produced_wares() const {return produced_wares_;}
-	const BillOfMaterials& recruited_workers() const {return recruited_workers_;}
+	const ProductionProgram::Groups& consumed_wares() const;
+	const BillOfMaterials& produced_wares() const;
+	const BillOfMaterials& recruited_workers() const;
 
 private:
-	std::string m_name;
-	std::string m_descname;
-	// NOCOM uniqueptr
-	Actions     m_actions;
-	Groups consumed_wares_;
+	std::string name_;
+	std::string descname_;
+	std::vector<std::unique_ptr<Action>> actions_;
+	ProductionProgram::Groups consumed_wares_;
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 };

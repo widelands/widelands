@@ -660,7 +660,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 			}
 
 			State & state = top_state();
-			if (state.program->get_size() <= state.ip)
+			if (state.program->size() <= state.ip)
 				return program_end(game, Completed);
 
 			if (m_anim != descr().get_animation(m_default_anim)) {
@@ -763,7 +763,7 @@ bool ProductionSite::get_building_work
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
 		State * state = get_state();
-		if (state->ip < state->program->get_size())
+		if (state->ip < state->program->size())
 			(*state->program)[state->ip].building_work_failed(game, *this, worker);
 	}
 
@@ -847,7 +847,7 @@ bool ProductionSite::get_building_work
 		//m_program_timer = true;
 		find_and_start_next_program(game);
 		// m_program_time = schedule_act(game, 10);
-	} else if (state->ip < state->program->get_size()) {
+	} else if (state->ip < state->program->size()) {
 		const ProductionProgram::Action & action = (*state->program)[state->ip];
 		return action.get_building_work(game, *this, worker);
 	}

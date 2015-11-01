@@ -206,7 +206,7 @@ protected:
 protected:
 	struct State {
 		const ProductionProgram * program; ///< currently running program
-		int32_t  ip; ///< instruction pointer
+		size_t  ip; ///< instruction pointer
 		uint32_t phase; ///< micro-step index (instruction dependent)
 		uint32_t flags; ///< pfXXX flags
 
