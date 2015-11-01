@@ -1,91 +1,27 @@
--- NOCOM we should have a common include for the helper functions.
+include "tribes/scripting/help/format_help.lua"
 
-include "scripting/formatting.lua"
+
+-- RST
+-- ware_help.lua
+-- ---------------
+
+-- Functions used in the ingame ware help windows for formatting the text and pictures.
+
 
 --  =======================================================
---  *************** Basic helper functions ****************
+--  ************* Main ware help functions *************
 --  =======================================================
 
 -- RST
--- .. function:: image_line(image, count[, text = nil])
+-- .. function ware_help_general_string(tribe, ware_description)
 --
---    Aligns the image to a row on the right side with text on the left.
---
---    :arg image: the picture to be aligned to a row.
---    :arg count: length of the picture row.
---    :arg text: if given the text aligned on the left side, formatted via
---       formatting.lua functions.
---    :returns: the text on the left and a picture row on the right.
---
-function image_line(image, count, text)
-	local imgs={}
-	for i=1,count do
-		imgs[#imgs + 1] = image
-	end
-	local imgstr = table.concat(imgs, ";")
-
-	if text then
-		return rt("image=" .. imgstr .. " image-align=right", "  " .. text)
-	else
-		return rt("image=" .. imgstr .. " image-align=right", "")
-	end
-end
-
--- RST
--- .. function:: dependencies(items[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg items: ware, worker and/or building descriptions in the correct order
---                from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies(items, text)
-	if not text then
-		text = ""
-	end
-	local string = "image=" .. items[1].icon_name
-	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
-	end
-	return rt(string, p(text))
-end
-
--- Helper function for building_help_building_section
-function building_help_building_line(ware_description, amount)
-	amount = tonumber(amount)
-	local image = ware_description.icon_name
-	local result = ""
-	local imgperline = 6
-	local temp_amount = amount
-
-	while (temp_amount > imgperline) do
-		result = result .. image_line(image, imgperline)
-		temp_amount = temp_amount - imgperline
-	end
-	-- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-	result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
-	return result
-
-end
-
---  =======================================================
---  ************* Main worker help functions *************
---  =======================================================
-
--- RST
--- .. function ware_help_string(tribe, ware_description)
---
---    Displays the ware with a helptext and an image
+--    Displays general info texts about the ware
 --
 --    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
---    :arg ware_description: the worker_description from C++.
---    :returns: Help string for the ware
+--    :arg ware_description: the ware_description from C++.
+--    :returns: General info about the ware
 --
-function ware_help_string(tribe, ware_description)
-	include(ware_description.directory .. "helptexts.lua")
-
+function ware_help_general_string(tribe, ware_description)
 	local purpose_text = ware_helptext()
 	if (purpose_text ~= "") then
 		purpose_text = purpose_text .. " "
@@ -95,7 +31,21 @@ function ware_help_string(tribe, ware_description)
 	-- TODO(GunChleoc): Split into purpose and note
 	local result = rt(h2(_"Purpose")) ..
 		rt("image=" .. ware_description.icon_name, p(purpose_text))
+	return result
+end
 
+-- RST
+-- .. function ware_help_producers_string(tribe, ware_description)
+--
+--    Displays the buildings that produce this ware with information about
+--    wares consumed in their production programs
+--
+--    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
+--    :arg ware_description: the ware_description from C++.
+--    :returns: Info about buildings producing this ware and the production cost.
+--
+function ware_help_producers_string(tribe, ware_description)
+	local result = ""
 	for i, building in ipairs(ware_description.producers) do
 		if (tribe:has_building(building.name)) then
 			-- TRANSLATORS: Ware Encyclopedia: A building producing a ware
@@ -129,7 +79,7 @@ function ware_help_string(tribe, ware_description)
 				for ware, amount in pairs(produced_wares_amount) do
 				local ware_descr = wl.Game():get_ware_description(ware)
 					produced_wares_string = produced_wares_string
-						.. building_help_building_line(ware_descr, amount)
+						.. help_ware_amount_line(ware_descr, amount)
 				end
 				produced_wares_strings[program_name] = produced_wares_string
 			end
@@ -177,8 +127,8 @@ function ware_help_string(tribe, ware_description)
 					result = result .. consumed_wares_string
 				end
 				if (produced_wares_counters[program_name] > 0) then
-					-- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
 					result = result
+						-- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
 						.. rt(h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name])))
 						.. produced_wares_strings[program_name]
 				end
@@ -186,6 +136,21 @@ function ware_help_string(tribe, ware_description)
 
 		end
 	end
+	return result
+end
+
+-- RST
+-- .. function ware_help_consumers_string(tribe, ware_description)
+--
+--    Displays the buildings that consume this ware and about
+--    workers that use this ware as a tool
+--
+--    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
+--    :arg ware_description: the ware_description from C++.
+--    :returns: Info about buildings and workers that use this ware
+--
+function ware_help_consumers_string(tribe, ware_description)
+	local result = ""
 
 	-- Now collecting the buildings that consume this ware
 	local consumers_string = ""
@@ -242,6 +207,9 @@ return {
    func = function(tribename, ware_description)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
-	   return ware_help_string(tribe, ware_description)
+      include(ware_description.directory .. "helptexts.lua")
+	   return ware_help_general_string(tribe, ware_description)
+			.. ware_help_producers_string(tribe, ware_description)
+			.. ware_help_consumers_string(tribe, ware_description)
    end
 }
