@@ -1790,11 +1790,21 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		for (const WareTypeGroup& group : action.consumed_wares()) {
 			consumed_wares_.push_back(group);
 		}
-		for (const WareAmount& wares : action.produced_wares()) {
-			produced_wares_.push_back(wares);
+		// Add produced wares. If the ware already exists, increase the amount
+		for (const WareAmount& ware : action.produced_wares()) {
+			if (produced_wares_.count(ware.first) == 1) {
+				produced_wares_.at(ware.first) += ware.second;
+			} else {
+				produced_wares_.insert(ware);
+			}
 		}
-		for (const WareAmount& workers : action.recruited_workers()) {
-			recruited_workers_.push_back(workers);
+		// Add recruited workers. If the worker already exists, increase the amount
+		for (const WareAmount& worker : action.recruited_workers()) {
+			if (recruited_workers_.count(worker.first) == 1) {
+				recruited_workers_.at(worker.first) += worker.second;
+			} else {
+				recruited_workers_.insert(worker);
+			}
 		}
 	}
 	if (actions_.empty())
@@ -1811,6 +1821,6 @@ const ProductionProgram::Action& ProductionProgram::operator[](size_t const idx)
 }
 
 const ProductionProgram::Groups& ProductionProgram::consumed_wares() const {return consumed_wares_;}
-const BillOfMaterials& ProductionProgram::produced_wares() const {return produced_wares_;}
-const BillOfMaterials& ProductionProgram::recruited_workers() const {return recruited_workers_;}
+const Buildcost& ProductionProgram::produced_wares() const {return produced_wares_;}
+const Buildcost& ProductionProgram::recruited_workers() const {return recruited_workers_;}
 } // namespace Widelands

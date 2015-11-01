@@ -113,15 +113,17 @@ function ware_help_string(tribe, ware_description)
 				end
 			end
 
+			local produced_wares_counters = {}
 			-- Now collect all produced wares by the filtered programs
-			-- NOCOM amounts are wrong, e.g. Granite - Marblemine
 			for j, program_name in ipairs(producing_programs) do
 				local produced_wares_amount = {}
+				produced_wares_counters[program_name] = 0
 				for ware, amount in pairs(building:produced_wares(program_name)) do
 					if (produced_wares_amount[ware] == nil) then
 						produced_wares_amount[ware] = 0
 					end
 					produced_wares_amount[ware] = produced_wares_amount[ware] + amount
+					produced_wares_counters[program_name] = produced_wares_counters[program_name] + amount
 				end
 				local produced_wares_string = ""
 				for ware, amount in pairs(produced_wares_amount) do
@@ -174,9 +176,11 @@ function ware_help_string(tribe, ware_description)
 					result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
 					result = result .. consumed_wares_string
 				end
-				if (produced_wares_strings[program_name]) then
+				if (produced_wares_counters[program_name] > 0) then
 					-- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-					result = result .. rt(h3(_"Amount produced:")) .. produced_wares_strings[program_name]
+					result = result
+						.. rt(h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name])))
+						.. produced_wares_strings[program_name]
 				end
 			end
 

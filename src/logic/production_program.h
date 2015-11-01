@@ -32,6 +32,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/bill_of_materials.h"
+#include "logic/buildcost.h"
 #include "logic/editor_game_base.h"
 #include "logic/program_result.h"
 #include "logic/training_attribute.h"
@@ -81,10 +82,10 @@ struct ProductionProgram {
 		const BillOfMaterials& recruited_workers() const {return recruited_workers_;}
 
 	protected:
-		// NOCOM uniqueptr?
 		Groups consumed_wares_;
 		BillOfMaterials produced_wares_;
 		BillOfMaterials recruited_workers_;
+
 	private:
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
@@ -523,16 +524,16 @@ struct ProductionProgram {
 	const ProductionProgram::Action& operator[](size_t const idx) const;
 
 	const ProductionProgram::Groups& consumed_wares() const;
-	const BillOfMaterials& produced_wares() const;
-	const BillOfMaterials& recruited_workers() const;
+	const Buildcost& produced_wares() const;
+	const Buildcost& recruited_workers() const;
 
 private:
 	std::string name_;
 	std::string descname_;
 	std::vector<std::unique_ptr<Action>> actions_;
 	ProductionProgram::Groups consumed_wares_;
-	BillOfMaterials produced_wares_;
-	BillOfMaterials recruited_workers_;
+	Buildcost produced_wares_;
+	Buildcost recruited_workers_;
 };
 
 }

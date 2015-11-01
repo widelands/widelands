@@ -1838,7 +1838,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State * L) {
 	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const ProductionProgram& program = *programs.at(program_name);
-		return wares_container_to_lua<BillOfMaterials>(L, program.produced_wares());
+		return wares_container_to_lua<Buildcost>(L, program.produced_wares());
 	}
 	return 1;
 }
