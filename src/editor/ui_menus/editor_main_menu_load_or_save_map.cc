@@ -205,7 +205,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	}
 
 	table_.fill(maps_data_, display_type);
-	if (table_.size() > 0) {
+	if (!table_.empty()) {
 		table_.select(0);
 	} else {
 		ok_.set_enabled(false);

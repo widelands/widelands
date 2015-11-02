@@ -460,7 +460,7 @@ void Table<void *>::move_selection(const int32_t offset)
  */
 void Table<void *>::select(const uint32_t i)
 {
-	if (m_selection == i)
+	if (empty() || m_selection == i)
 		return;
 
 	m_selection = i;

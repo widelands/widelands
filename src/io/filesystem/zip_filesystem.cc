@@ -182,8 +182,12 @@ bool ZipFilesystem::is_directory(const std::string & path) {
 FileSystem * ZipFilesystem::make_sub_file_system(const std::string & path) {
 	m_open_unzip();
 
-	assert(file_exists(path));
-	assert(is_directory(path));
+	if (!file_exists(path)) {
+		throw wexception("ZipFilesystem::make_sub_file_system: The path does not exist.");
+	}
+	if (!is_directory(path)) {
+		throw wexception("ZipFilesystem::make_sub_file_system: The path needs to be a directory.");
+	}
 
 	m_close();
 
@@ -206,7 +210,9 @@ FileSystem * ZipFilesystem::make_sub_file_system(const std::string & path) {
 // see Filesystem::create
 FileSystem * ZipFilesystem::create_sub_file_system(const std::string & path, Type const type)
 {
-	assert(!file_exists(path));
+	if (file_exists(path)) {
+		throw wexception("ZipFilesystem::create_sub_file_system: Sub file system already exists.");
+	}
 
 	if (type != FileSystem::DIR)
 		throw ZipOperationError

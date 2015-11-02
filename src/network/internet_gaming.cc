@@ -184,7 +184,9 @@ bool InternetGaming::login
 /// Relogin to metaserver after loosing connection
 bool InternetGaming::relogin()
 {
-	assert(error());
+	if (!error()) {
+		throw wexception("InternetGaming::relogin: This only makes sense if there was an error.");
+	}
 
 	initialize_connection();
 
