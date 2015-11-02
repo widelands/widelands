@@ -40,8 +40,6 @@
 
 namespace UI {
 
-// NOCOM(#codereview): Move to wui? This is not ui_basic anymore.
-
 HelpWindow::HelpWindow
 	(Panel * const parent,
 	 const std::string & caption,

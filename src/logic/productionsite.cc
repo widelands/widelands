@@ -74,7 +74,8 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
-	// NOCOM(#codereview): I can still not really fathom what outputs means for military sites.
+	// TODO(GunChleoc): This should not be here for Militarysites.
+	// Check if they can inherit from Building directly.
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
@@ -155,7 +156,8 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
-	// NOCOM(#codereview): this mixes militarysite concepts into the production site - maybe those building should not be in a inheritance relationship.
+	// TODO(SirVer): this mixes militarysite concepts into the production site
+	// - maybe those building should not be in a inheritance relationship.
 	if (working_positions().empty() && !table.has_key("max_soldiers")) {
 		throw wexception("no working/soldier positions");
 	}

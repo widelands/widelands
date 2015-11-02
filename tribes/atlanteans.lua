@@ -33,7 +33,6 @@ tribes:new_tribe {
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.
-   -- NOCOM(#codereview): Beautiful! So much better than conf files.
    wares_order = {
       {
          -- Building Materials

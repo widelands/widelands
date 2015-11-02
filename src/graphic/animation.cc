@@ -179,7 +179,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		// Strip the .png extension if it has one.
 		boost::replace_all(picnametempl, ".png", "");
 
-		// NOCOM(#codereview): NumberGlob could go away if you'd use
+		// TODO(GunChleoc): NumberGlob could go away if you'd use
 		// path.list_directory from Lua and we'd know earlier which files will be
 		// used.
 		NumberGlob glob(picnametempl);

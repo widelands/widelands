@@ -26,9 +26,6 @@ namespace  {
 /// If the map is newish and there is no old world to convert names from, we use
 /// this one that simply returns the looked up values, except for some renaming
 /// introduced through the merging of the tribes, which are handled here.
-// NOCOM(#codereview): uh... hat feels iffy. that is not a scalable way of
-// tracking renames. We should stop doing that. It already becomse confusing
-// with having two tables for world renames.
 class PostOneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
 	PostOneWorldLegacyLookupTable();

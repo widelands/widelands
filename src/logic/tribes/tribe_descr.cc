@@ -209,9 +209,9 @@ size_t TribeDescr::get_nrbuildings() const {return buildings_.size();}
 size_t TribeDescr::get_nrwares() const {return wares_.size();}
 size_t TribeDescr::get_nrworkers() const {return workers_.size();}
 
-const std::vector<BuildingIndex> TribeDescr::buildings() const {return buildings_;}
-const std::set<WareIndex> TribeDescr::wares() const {return wares_;}
-const std::set<WareIndex> TribeDescr::workers() const {return workers_;}
+const std::vector<BuildingIndex>& TribeDescr::buildings() const {return buildings_;}
+const std::set<WareIndex>& TribeDescr::wares() const {return wares_;}
+const std::set<WareIndex>& TribeDescr::workers() const {return workers_;}
 
 bool TribeDescr::has_building(const BuildingIndex& index) const {
 	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();

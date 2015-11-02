@@ -180,7 +180,7 @@ ImmovableDescr IMPLEMENTATION
 ==============================================================================
 */
 
-// NOCOM(#codereview): I see no reason why this is a static method? It does not access any private stuff from ImmovableDescr. Prefer free methods to static ones - they have even less coupling.
+// TODO(GunChleoc): Buildcost should parse itself
 Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) {
 	Buildcost result;
 	for (const std::string& warename : table->keys<std::string>()) {

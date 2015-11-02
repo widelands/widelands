@@ -284,7 +284,6 @@ void MapObjectDescr::add_animation
 	}
 }
 
-// NOCOM(#codereview): I think this should be taken care for in Lua and I thought it was with add_walking_animations (for example in world/init.lua). Why do we need this still?
 void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 	for (int32_t dir = 1; dir <= 6; ++dir) {

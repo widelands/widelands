@@ -19,9 +19,6 @@
 
 #include "map_io/tribes_legacy_lookup_table.h"
 
-// NOCOM(#codereview): Why do we need this table? It seems it should only be
-// needed for savegames - which we break anyways. Did you find any maps in the
-// wild that requires this?
 TribesLegacyLookupTable::TribesLegacyLookupTable() :
 	// Workers
 	workers_
@@ -243,7 +240,7 @@ TribesLegacyLookupTable::TribesLegacyLookupTable() :
 	 }
 {}
 
-std::string TribesLegacyLookupTable::lookup_worker(const std::string& tribe,
+const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& tribe,
 																	  const std::string& worker) const {
 	if (workers_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_workers = workers_.at(tribe);
@@ -255,7 +252,7 @@ std::string TribesLegacyLookupTable::lookup_worker(const std::string& tribe,
 	return worker;
 }
 
-std::string TribesLegacyLookupTable::lookup_ware(const std::string& tribe, const std::string& ware) const {
+const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& tribe, const std::string& ware) const {
 	if (wares_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_wares = wares_.at(tribe);
 		const auto& i = tribe_wares.find(ware);
@@ -266,7 +263,7 @@ std::string TribesLegacyLookupTable::lookup_ware(const std::string& tribe, const
 	return ware;
 }
 
-std::string TribesLegacyLookupTable::lookup_immovable(const std::string& tribe,
+const std::string& TribesLegacyLookupTable::lookup_immovable(const std::string& tribe,
 																		  const std::string& immovable) const {
 	if (immovables_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_immovables = immovables_.at(tribe);

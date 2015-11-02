@@ -25,7 +25,7 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    if (fps ~= nil) then
       for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
          table[animationname .. "_" .. dir] = {
-            -- NOCOM(#codereview): get rid of template and directory, instead
+            -- TODO(SirVer): get rid of template and directory, instead
             -- use 'path.list_directory'. See world/ for examples. No globbing
             -- code should be necessary in c++. Update: I just realized that
             -- you went the other way in the world too. We should discuss that,

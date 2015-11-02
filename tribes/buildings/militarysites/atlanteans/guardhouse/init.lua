@@ -31,7 +31,7 @@ tribes:new_militarysite_type {
       }
    },
 
-   -- NOCOM(#codereview): Output seems a weird name for this. Occupants?
+   -- TODO(GunChleoc): Get rid of this when we inherit from BuildingDescr directly.
    outputs = {
       "atlanteans_soldier",
    },

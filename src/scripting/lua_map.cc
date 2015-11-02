@@ -1415,10 +1415,6 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, buildable),
 	PROP_RO(LuaBuildingDescription, conquers),
 	PROP_RO(LuaBuildingDescription, destructible),
-	// NOCOM(#codereview): I think the engine should not have any insight in
-	// where and how the data files are stored. They could be loaded from the
-	// internet for all it knows. Or from a zip file. 'directory' violates that.
-	// Not only for Buildings of course. Where is it used?
 	PROP_RO(LuaBuildingDescription, directory),
 	PROP_RO(LuaBuildingDescription, enhanced),
 	PROP_RO(LuaBuildingDescription, enhanced_from),
