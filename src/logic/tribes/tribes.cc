@@ -30,6 +30,7 @@
 namespace Widelands {
 
 Tribes::Tribes(EditorGameBase& egbase) :
+	// NOCOM(#codereview): You only use egbase_ in the add_ methods. Why don't you pass it there as argument? Keeping state around makes refactorings harder.
 	egbase_(egbase),
 	buildings_(new DescriptionMaintainer<BuildingDescr>()),
 	immovables_(new DescriptionMaintainer<ImmovableDescr>()),
@@ -39,7 +40,7 @@ Tribes::Tribes(EditorGameBase& egbase) :
 	tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
-
+// NOCOM(#codereview): no need to be static?
 std::vector<std::string> Tribes::get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
@@ -52,6 +53,7 @@ std::vector<std::string> Tribes::get_all_tribenames() {
 	return tribenames;
 }
 
+// NOCOM(#codereview): no need to be static?
 std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;

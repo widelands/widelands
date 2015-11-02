@@ -245,6 +245,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
+		// NOCOM(#codereview): aren't these asserts rather data errors? Or are they checked elsewhere?
 		assert(is_animation_known("idle"));
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
 													.representative_image_from_disk_filename();
@@ -273,17 +274,14 @@ void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 	if (is_animation_known(animname)) {
-#ifndef NDEBUG
 		throw GameDataError
 			("Tried to add already existing animation \"%s\"", animname.c_str());
-#else
-		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
-#endif
 	} else {
 		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 	}
 }
 
+// NOCOM(#codereview): I think this should be taken care for in Lua and I thought it was with add_walking_animations (for example in world/init.lua). Why do we need this still?
 void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 	for (int32_t dir = 1; dir <= 6; ++dir) {

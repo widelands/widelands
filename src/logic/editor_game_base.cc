@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -122,6 +122,7 @@ World* EditorGameBase::mutable_world() {
 	return world_.get();
 }
 
+// NOCOM(#codereview): How useful is that still? It seems that we always need to load tribes/worlds anyways, maybe we can just do it when the EditorGameBase is created now?
 const Tribes& EditorGameBase::tribes() const {
 	// Const casts are evil, but this is essentially lazy evaluation and the
 	// caller should really not modify this.

@@ -59,6 +59,10 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
 	// undefined.
+	// NOCOM(#codereview): This should return a const T& - the idea is that you
+	// can see at the callsite if the object is maybe modified (in which case
+	// get_mutable() must be used) or not (in which case get() is fine).
+	// Compare EditorGameBase::tribes and mutable_tribes.
 	T& get(const Widelands::WareIndex index) const {
 		assert(index < items_.size());
 		return *items_.at(index);

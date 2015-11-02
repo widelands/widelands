@@ -74,6 +74,7 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
+	// NOCOM(#codereview): I can still not really fathom what outputs means for military sites.
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
@@ -154,6 +155,7 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
+	// NOCOM(#codereview): this mixes militarysite concepts into the production site - maybe those building should not be in a inheritance relationship.
 	if (working_positions().empty() && !table.has_key("max_soldiers")) {
 		throw wexception("no working/soldier positions");
 	}
@@ -246,6 +248,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 }
 
 ProductionSite::~ProductionSite() {
+	// TODO(sirver): Use std::vector<std::unique_ptr<>> to avoid naked delete.
 	delete[] m_working_positions;
 }
 

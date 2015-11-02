@@ -2,6 +2,8 @@ dirname = path.dirname(__file__)
 
 set_textdomain("tribes")
 
+-- NOCOM(#codereview): Add a comment what this file is all about?
+
 return {
    -- Basic information for the Barbarian tribe
    {
