@@ -1070,17 +1070,17 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-// Only base classes can be persisted.
-void LuaTribeDescription::__persist(lua_State*) {
-	// NOCOM(#codereview): there is no base class for this, rigth? I think it should be persistable and there should be
-	// a test for it in the persisting test.
-	// A simple solution: write out the tribe name here, see other __persist functions, in __unpersist recreate the tribedescr_
-	// pointer like you do in get_tribe_descr
-	assert(false);
+void LuaTribeDescription::__persist(lua_State* L) {
+	const TribeDescr* descr = get();
+	PERS_STRING("name", descr->name());
 }
 
-void LuaTribeDescription::__unpersist(lua_State*) {
-	assert(false);
+void LuaTribeDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name);
+	const Tribes& tribes = get_egbase(L).tribes();
+	WareIndex idx = tribes.safe_tribe_index(name);
+	set_description_pointer(tribes.get_tribe_descr(idx));
 }
 
 /*
