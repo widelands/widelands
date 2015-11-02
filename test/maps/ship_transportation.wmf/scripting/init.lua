@@ -20,10 +20,6 @@ function southern_port()
    return map:get_field(16, 16).immovable
 end
 
-function southern_port()
-   return map:get_field(16, 16).immovable
-end
-
 function create_northern_port()
    prefilled_buildings(p1,
    { "port", 16, 2,
@@ -31,14 +27,6 @@ function create_northern_port()
       workers = {},
       soldiers = {}
    })
-end
-
-function northern_port()
-   local o = map:get_field(16, 2).immovable
-   if o and o.descr.name == "port" then
-      return o
-   end
-   return nil
 end
 
 function northern_port()
