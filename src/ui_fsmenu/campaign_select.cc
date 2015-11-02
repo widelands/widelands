@@ -432,6 +432,11 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 			m_ta_description.set_text(_(map.get_description()));
 		}
 		m_ta_description.scroll_to_top();
+
+		// The dummy scenario can't be played, so we disable the OK button.
+		if (campmapfile == "campaigns/dummy.wmf") {
+			ok_.set_enabled(false);
+		}
 	}
 }
 

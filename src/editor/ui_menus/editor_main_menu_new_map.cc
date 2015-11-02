@@ -154,6 +154,8 @@ void MainMenuNewMap::clicked_create_map() {
 	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }
