@@ -253,7 +253,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n])) {
+		if (!menu.egbase().tribes().tribe_exists(m_selected_tribes[n])) {
 			throw wexception
 				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n].c_str());
 		}

@@ -593,6 +593,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				loader_ui.step("Creating empty map...");
 				map.create_empty_map(
 				   editor.world(),
+					editor.tribes(),
 				   64,
 				   64,
 					/** TRANSLATORS: Default name for new map */

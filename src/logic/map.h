@@ -32,6 +32,7 @@
 #include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
+#include "logic/tribes/tribes.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -175,6 +176,7 @@ public:
 
 	void create_empty_map  // for editor
 	   (const World& world,
+		 const Tribes& tribes,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
 		 const std::string& name = _("No Name"),

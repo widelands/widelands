@@ -38,18 +38,6 @@ Tribes::Tribes() :
 	tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
-// NOCOM(#codereview): no need to be static?
-std::vector<std::string> Tribes::get_all_tribenames() {
-	std::vector<std::string> tribenames;
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
-	for (const int key : table->keys<int>()) {
-		std::unique_ptr<LuaTable> info = table->get_table(key);
-		info->do_not_warn_about_unaccessed_keys();
-		tribenames.push_back(info->get_string("name"));
-	}
-	return tribenames;
-}
 
 // NOCOM(#codereview): no need to be static?
 std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
@@ -72,6 +60,14 @@ TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 	assert(false); // A TribeBasicInfo should have been found
+}
+
+std::vector<std::string> Tribes::get_all_tribenames() {
+	std::vector<std::string> tribenames;
+	for (const TribeDescr* tribe : tribes_) {
+		tribenames.push_back(tribe->name());
+	}
+	return tribenames;
 }
 
 bool Tribes::tribe_exists(const std::string& tribename) {
@@ -189,7 +185,7 @@ void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase
 void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	const std::string name = table.get_string("name");
 	if (tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase.tribes()));
+		tribes_->add(new TribeDescr(table, egbase.tribes().tribeinfo(name), egbase.tribes()));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}

@@ -142,6 +142,7 @@ void MainMenuNewMap::clicked_create_map() {
 
 	map.create_empty_map(
 				egbase.world(),
+				egbase.tribes(),
 				Widelands::MAP_DIMENSIONS[m_w],
 				Widelands::MAP_DIMENSIONS[m_h],
 				_("No Name"),
