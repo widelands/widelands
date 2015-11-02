@@ -54,7 +54,6 @@ function ware_help_producers_string(tribe, ware_description)
 
 			-- Find out which programs in the building produce this ware
 			local producing_programs = {}
-			local produced_wares_strings = {}
 			for j, program_name in ipairs(building.production_programs) do
 				for ware, amount in pairs(building:produced_wares(program_name)) do
 					if (ware_description.name == ware) then
@@ -63,8 +62,9 @@ function ware_help_producers_string(tribe, ware_description)
 				end
 			end
 
+			-- Now collect all wares produced by the filtered programs
+			local produced_wares_strings = {}
 			local produced_wares_counters = {}
-			-- Now collect all produced wares by the filtered programs
 			for j, program_name in ipairs(producing_programs) do
 				local produced_wares_amount = {}
 				produced_wares_counters[program_name] = 0
@@ -86,46 +86,7 @@ function ware_help_producers_string(tribe, ware_description)
 
 			-- Now collect the consumed wares for each filtered program and print the program info
 			for j, program_name in ipairs(producing_programs) do
-				local consumed_wares_string = ""
-				local consumed_wares_counter = 0
-				local consumed_wares = building:consumed_wares(program_name)
-				for countlist, warelist in pairs(consumed_wares) do
-					local consumed_warenames = {}
-					local consumed_images = {}
-					local consumed_amount = {}
-					local count = 1
-					for consumed_ware, amount in pairs(warelist) do
-						local ware_description = wl.Game():get_ware_description(consumed_ware)
-						consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, ware_description.descname)
-						consumed_images[count] = ware_description.icon_name
-						consumed_amount[count] = amount
-						count = count + 1
-						consumed_wares_counter = consumed_wares_counter + amount
-					end
-					local text = localize_list(consumed_warenames, "or")
-					if (countlist > 1) then
-						text = _"%s and":bformat(text)
-					end
-					local images = consumed_images[1]
-					local image_counter = 2
-					while (image_counter <= consumed_amount[1]) do
-						images = images .. ";" .. consumed_images[1]
-						image_counter = image_counter + 1
-					end
-					for k, v in ipairs({table.unpack(consumed_images,2)}) do
-						image_counter = 1
-						while (image_counter <= consumed_amount[k + 1]) do
-							images = images .. ";" .. v
-							image_counter = image_counter + 1
-						end
-					end
-					consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
-				end
-				if (consumed_wares_counter > 0) then
-					-- TRANSLATORS: Ware Encyclopedia: Wares consumed by a productionsite
-					result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
-					result = result .. consumed_wares_string
-				end
+				result = result .. help_consumed_wares(building, program_name)
 				if (produced_wares_counters[program_name] > 0) then
 					result = result
 						-- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite

@@ -107,7 +107,63 @@ function help_tool_string(tribe, toolnames, no_of_workers)
 		end
 	end
 	if (result ~= "") then
+		-- TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
 		result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers))) .. result
+	end
+	return result
+end
+
+
+-- RST
+-- .. function help_consumed_wares(building, program_name)
+--
+--    Returns information for which wares in which amounts are consumed by a produciton program.
+--
+--    :arg tribe: The :class:`LuaBuildingDescription` for the building that runs the program
+--    :arg program_name: The name of the production program that the info is collected for
+--    :returns: A "Ware(s) consumed:" section with image_lines
+--
+function help_consumed_wares(building, program_name)
+	local result = ""
+	local consumed_wares_string = ""
+	local consumed_wares_counter = 0
+	local consumed_wares = building:consumed_wares(program_name)
+	for countlist, warelist in pairs(consumed_wares) do
+		local consumed_warenames = {}
+		local consumed_images = {}
+		local consumed_amount = {}
+		local count = 1
+		for consumed_ware, amount in pairs(warelist) do
+			local ware_description = wl.Game():get_ware_description(consumed_ware)
+			consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, ware_description.descname)
+			consumed_images[count] = ware_description.icon_name
+			consumed_amount[count] = amount
+			count = count + 1
+			consumed_wares_counter = consumed_wares_counter + amount
+		end
+		local text = localize_list(consumed_warenames, "or")
+		if (countlist > 1) then
+			text = _"%s and":bformat(text)
+		end
+		local images = consumed_images[1]
+		local image_counter = 2
+		while (image_counter <= consumed_amount[1]) do
+			images = images .. ";" .. consumed_images[1]
+			image_counter = image_counter + 1
+		end
+		for k, v in ipairs({table.unpack(consumed_images,2)}) do
+			image_counter = 1
+			while (image_counter <= consumed_amount[k + 1]) do
+				images = images .. ";" .. v
+				image_counter = image_counter + 1
+			end
+		end
+		consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
+	end
+	if (consumed_wares_counter > 0) then
+		-- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
+		result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
+		result = result .. consumed_wares_string
 	end
 	return result
 end

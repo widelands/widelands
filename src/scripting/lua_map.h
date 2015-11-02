@@ -317,6 +317,7 @@ public:
 
 	int consumed_wares(lua_State *);
 	int produced_wares(lua_State *);
+	int recruited_workers(lua_State *);
 
 	/*
 	 * C methods
@@ -497,6 +498,7 @@ public:
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_directory(lua_State*);
+	int get_is_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
 
 	/*

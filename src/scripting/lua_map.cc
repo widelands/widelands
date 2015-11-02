@@ -66,13 +66,21 @@ namespace LuaMaps {
 
 namespace {
 
-// Pushes a lua table with (name, count) pairs for the given 'wares_container' on the
-// stack. Returns 1.
-template<typename T>
-int wares_container_to_lua(lua_State* L, const T& wares_container) {
+// Pushes a lua table with (name, count) pairs for the given 'ware_amount_container' on the
+// stack. The 'type' needs to be WARE or WORKER. Returns 1.
+int wares_or_workers_map_to_lua(lua_State* L, const Buildcost& ware_amount_map, MapObjectType type) {
 	lua_newtable(L);
-	for (const auto& ware_amount : wares_container) {
-		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_amount.first)->name());
+	for (const auto& ware_amount : ware_amount_map) {
+		switch (type) {
+		case MapObjectType::WORKER:
+			lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(ware_amount.first)->name());
+			break;
+		case MapObjectType::WARE:
+			lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_amount.first)->name());
+			break;
+		default:
+			throw wexception("wares_or_workers_map_to_lua needs a ware or worker");
+		}
 		lua_pushuint32(L, ware_amount.second);
 		lua_settable(L, -3);
 	}
@@ -1459,7 +1467,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 			(RO) a list of ware build cost for the building.
 */
 int LuaBuildingDescription::get_build_cost(lua_State * L) {
-	return wares_container_to_lua<Buildcost>(L, get()->buildcost());
+	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
 
@@ -1539,7 +1547,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 			(RO) a list of ware cost for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State * L) {
-	return wares_container_to_lua<Buildcost>(L, get()->enhancement_cost());
+	return wares_or_workers_map_to_lua(L, get()->enhancement_cost(), MapObjectType::WARE);
 }
 
 /* RST
@@ -1582,7 +1590,7 @@ int LuaBuildingDescription::get_is_port(lua_State * L) {
 			(RO) a list of wares returned upon dismantling.
 */
 int LuaBuildingDescription::get_returned_wares(lua_State * L) {
-	return wares_container_to_lua<Buildcost>(L, get()->returned_wares());
+	return wares_or_workers_map_to_lua(L, get()->returned_wares(), MapObjectType::WARE);
 }
 
 
@@ -1592,7 +1600,7 @@ int LuaBuildingDescription::get_returned_wares(lua_State * L) {
 			(RO) a list of wares returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	return wares_container_to_lua<Buildcost>(L, get()->returned_wares_enhanced());
+	return wares_or_workers_map_to_lua(L, get()->returned_wares_enhanced(), MapObjectType::WARE);
 }
 
 
@@ -1682,6 +1690,7 @@ const char LuaProductionSiteDescription::className[] = "ProductionSiteDescriptio
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
 	METHOD(LuaProductionSiteDescription, consumed_wares),
 	METHOD(LuaProductionSiteDescription, produced_wares),
+	METHOD(LuaProductionSiteDescription, recruited_workers),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::Properties[] = {
@@ -1824,7 +1833,6 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 }
 
 
-
 /* RST
 	.. attribute:: produced_wares
 
@@ -1838,11 +1846,29 @@ int LuaProductionSiteDescription::produced_wares(lua_State * L) {
 	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const ProductionProgram& program = *programs.at(program_name);
-		return wares_container_to_lua<Buildcost>(L, program.produced_wares());
+		return wares_or_workers_map_to_lua(L, program.produced_wares(), MapObjectType::WARE);
 	}
 	return 1;
 }
 
+/* RST
+	.. attribute:: recruited_workers
+
+		:arg program_name: the name of the production program that we want to get the recruited workers for
+		:type tribename: :class:`string`
+
+		(RO) Returns a table of {worker name, worker amount} for the workers recruited
+			  by this production program
+*/
+int LuaProductionSiteDescription::recruited_workers(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		return wares_or_workers_map_to_lua(L, program.recruited_workers(), MapObjectType::WORKER);
+	}
+	return 1;
+}
 
 
 /* RST
@@ -2336,6 +2362,7 @@ const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
 	PROP_RO(LuaWorkerDescription, directory),
+	PROP_RO(LuaWorkerDescription, is_buildable),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
 };
@@ -2403,6 +2430,16 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 */
 int LuaWorkerDescription::get_directory(lua_State * L) {
 	lua_pushstring(L, get()->directory());
+	return 1;
+}
+
+/* RST
+	.. attribute:: is_buildable
+
+		(RO) returns true if this worker is buildable
+*/
+int LuaWorkerDescription::get_is_buildable(lua_State * L) {
+	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
 
