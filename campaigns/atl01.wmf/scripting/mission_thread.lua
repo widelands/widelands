@@ -6,7 +6,7 @@
 -- ==============
 -- Logic Threads
 -- ==============
-function intro() 
+function intro()
    sleep(1000)
 
    msg_boxes(initial_messages)
