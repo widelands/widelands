@@ -278,7 +278,7 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 		//  identify the program.
 		//  Only shows information from the first program that has a name indicating
 		//  that it produces the considered ware type.
-		std::map<std::string, ProductionProgram *>::const_iterator programIt =
+		Widelands::ProductionSiteDescr::Programs::const_iterator programIt =
 			programs.find(std::string("produce_") + selected_ware_->name());
 
 		if (programIt == programs.end())

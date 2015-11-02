@@ -7,8 +7,6 @@ tribes:new_constructionsite_type {
    descname = pgettext("building", "Construction Site"),
    directory = dirname,
    icon = dirname .. "menu.png",
-   -- NOCOM(#codereview): can we get rid of size then?
-   size = "small", -- Dummy; overridden by building size
    vision_range = 2,
 
    animations = {

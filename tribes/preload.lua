@@ -2,7 +2,8 @@ dirname = path.dirname(__file__)
 
 set_textdomain("tribes")
 
--- NOCOM(#codereview): Add a comment what this file is all about?
+-- This file contains the basic information for all tribes that is
+-- needed before a game is loaded or the editor has been started.
 
 return {
    -- Basic information for the Barbarian tribe

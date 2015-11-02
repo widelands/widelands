@@ -79,27 +79,30 @@ BuildingDescr::BuildingDescr
 
 	i18n::Textdomain td("tribes");
 
-	try {
-		const std::string size = table.get_string("size");
-		if (boost::iequals(size, "small")) {
-			m_size = BaseImmovable::SMALL;
-		} else if (boost::iequals(size, "medium")) {
-			m_size = BaseImmovable::MEDIUM;
-		} else if (boost::iequals(size, "big")) {
-			m_size = BaseImmovable::BIG;
-		} else if (boost::iequals(size, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else if (boost::iequals(size, "port")) {
-			m_size = BaseImmovable::BIG;
-			m_port = true;
-		} else {
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+	// Partially finished buildings get their sizes from their associated building
+	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+		try {
+			const std::string size = table.get_string("size");
+			if (boost::iequals(size, "small")) {
+				m_size = BaseImmovable::SMALL;
+			} else if (boost::iequals(size, "medium")) {
+				m_size = BaseImmovable::MEDIUM;
+			} else if (boost::iequals(size, "big")) {
+				m_size = BaseImmovable::BIG;
+			} else if (boost::iequals(size, "mine")) {
+				m_size = BaseImmovable::SMALL;
+				m_mine = true;
+			} else if (boost::iequals(size, "port")) {
+				m_size = BaseImmovable::BIG;
+				m_port = true;
+			} else {
+				throw GameDataError
+					("expected %s but found \"%s\"",
+					 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+			}
+		} catch (const WException & e) {
+			throw GameDataError("size: %s", e.what());
 		}
-	} catch (const WException & e) {
-		throw GameDataError("size: %s", e.what());
 	}
 
 	// Parse build options

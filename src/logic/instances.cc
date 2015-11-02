@@ -245,14 +245,17 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
-		// NOCOM(#codereview): aren't these asserts rather data errors? Or are they checked elsewhere?
-		assert(is_animation_known("idle"));
+		if (!is_animation_known("idle")) {
+			throw GameDataError("Map object %s has animations but no idle animation", init_name.c_str());
+		}
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
 													.representative_image_from_disk_filename();
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
-		assert(!icon_filename().empty());
+		if (icon_filename_.empty()) {
+			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
+		}
 	}
 }
 MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
