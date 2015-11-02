@@ -7,7 +7,7 @@ p1 = game.players[1]
 
 p1:allow_workers("all")
 
-function create_first_port()
+function create_southern_port()
    prefilled_buildings(p1,
    { "port", 16, 16,
       wares = {},

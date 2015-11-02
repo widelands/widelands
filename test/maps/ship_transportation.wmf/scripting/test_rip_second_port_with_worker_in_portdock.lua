@@ -2,7 +2,7 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
+   create_southern_port()
    create_northern_port()
 
    --removing portdock first
@@ -24,7 +24,7 @@ run(function()
    assert_equal(1, p1:get_workers("builder"))
    assert_equal(0, southern_port():get_workers("builder"))
 
-  -- so wait till buil is loaded on ship
+  -- so wait till builder is loaded on ship
   while (ship:get_workers("builder") == 0) do
    	sleep(100)
   end

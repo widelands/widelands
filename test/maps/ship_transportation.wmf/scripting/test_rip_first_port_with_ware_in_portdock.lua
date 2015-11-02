@@ -2,7 +2,7 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
+   create_southern_port()
    local wh = p1:place_building("warehouse", map:get_field(13, 16), false, false)
    connected_road(p1, wh.flag, "r,r,r", true)
    create_northern_port()
@@ -29,7 +29,7 @@ run(function()
    sleep(5000)
 
    -- Create port again.
-   create_first_port()
+   create_southern_port()
    wh:set_wares("blackwood", 1)
 
    sleep(200)

@@ -2,7 +2,7 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
+   create_southern_port()
    create_northern_port()
 
    start_building_farm()
@@ -41,7 +41,7 @@ run(function()
    sleep(30000)
 
    -- Recreate the first port.
-   create_first_port()
+   create_southern_port()
    sleep(1000)
    assert_equal(p1:get_wares("blackwood"), 1)
 
