@@ -49,54 +49,46 @@ constexpr int kTabHeight = 35;
 
 using namespace Widelands;
 
-inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
+inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 namespace {
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
-								  "%s<br></p><p font-size=8> <br></p></rt>") % text).str());
+	                       "%s<br></p><p font-size=8> <br></p></rt>") %
+	         text).str());
 }
-} // namespace
+}  // namespace
 
-
-EncyclopediaWindow::EncyclopediaWindow
-	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
-:
-	UI::UniqueWindow
-		(&parent, "encyclopedia",
-		 &registry,
-		 WINDOW_WIDTH, WINDOW_HEIGHT,
-		 _("Tribal Encyclopedia")),
-	tabs_(this, 0, 0, nullptr)
-{
+EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
+													UI::UniqueWindow::Registry& registry) :
+	UI::UniqueWindow(
+		&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
+     tabs_(this, 0, 0, nullptr) {
 	std::set<std::string> keys({"buildings", "wares", "workers"});
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
 	for (const std::string& key : keys) {
-		wrapper_boxes_.insert(
-					std::make_pair(key,
-										std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+		wrapper_boxes_.insert(std::make_pair(
+		   key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
 
-		boxes_.insert(
-					std::make_pair(key,
-										std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(key).get(),
-																						 0, 0, UI::Box::Horizontal))));
+		boxes_.insert(std::make_pair(key,
+		                             std::unique_ptr<UI::Box>(new UI::Box(
+		                                wrapper_boxes_.at(key).get(), 0, 0, UI::Box::Horizontal))));
 
 		lists_.insert(
-					std::make_pair(key,
-										std::unique_ptr<UI::Listselect<Widelands::WareIndex>>(
-											new UI::Listselect<Widelands::WareIndex>
-											(boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
+		   std::make_pair(key,
+		                  std::unique_ptr<UI::Listselect<Widelands::WareIndex>>(
+		                     new UI::Listselect<Widelands::WareIndex>(
+		                        boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
 
 		contents_.insert(
-					std::make_pair(key,
-										std::unique_ptr<UI::MultilineTextarea>(
-											new UI::MultilineTextarea
-											(boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
+		   std::make_pair(key,
+		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
+		                     boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
 
 		boxes_.at(key)->add(lists_.at(key).get(), UI::Align_Left);
 		boxes_.at(key)->add_space(kPadding);
@@ -106,18 +98,26 @@ EncyclopediaWindow::EncyclopediaWindow
 		wrapper_boxes_.at(key)->add(boxes_.at(key).get(), UI::Align_Left);
 	}
 
-	tabs_.add("encyclopedia_wares", g_gr->images().get("pics/genstats_nrwares.png"),
-				 wrapper_boxes_.at("wares").get(), _("Wares"));
-	tabs_.add("encyclopedia_workers", g_gr->images().get("pics/genstats_nrworkers.png"),
-				 wrapper_boxes_.at("workers").get(), _("Workers"));
-	tabs_.add("encyclopedia_buildings", g_gr->images().get("pics/genstats_nrbuildings.png"),
-				 wrapper_boxes_.at("buildings").get(), _("Buildings"));
+	tabs_.add("encyclopedia_wares",
+	          g_gr->images().get("pics/genstats_nrwares.png"),
+	          wrapper_boxes_.at("wares").get(),
+	          _("Wares"));
+	tabs_.add("encyclopedia_workers",
+	          g_gr->images().get("pics/genstats_nrworkers.png"),
+	          wrapper_boxes_.at("workers").get(),
+	          _("Workers"));
+	tabs_.add("encyclopedia_buildings",
+	          g_gr->images().get("pics/genstats_nrbuildings.png"),
+	          wrapper_boxes_.at("buildings").get(),
+	          _("Buildings"));
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// Content
-	lists_.at("buildings")->selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
+	lists_.at("buildings")
+	   ->selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
 	lists_.at("wares")->selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
-	lists_.at("workers")->selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
+	lists_.at("workers")
+	   ->selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
 
 	fill_buildings();
 	fill_wares();
@@ -127,7 +127,6 @@ EncyclopediaWindow::EncyclopediaWindow
 		center_to_parent();
 	}
 }
-
 
 void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries) {
 	std::sort(entries.begin(), entries.end());
@@ -154,7 +153,7 @@ void EncyclopediaWindow::fill_buildings() {
 }
 
 void EncyclopediaWindow::fill_wares() {
-	const TribeDescr & tribe = iaplayer().player().tribe();
+	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
 	for (const WareIndex& i : tribe.wares()) {
@@ -169,7 +168,7 @@ void EncyclopediaWindow::fill_workers() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
-	for (const WareIndex& i: tribe.workers()) {
+	for (const WareIndex& i : tribe.workers()) {
 		const WorkerDescr* worker = tribe.get_worker_descr(i);
 		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
 		entries.push_back(entry);
@@ -177,53 +176,48 @@ void EncyclopediaWindow::fill_workers() {
 	fill_entries("workers", entries);
 }
 
-
-template<typename T>
+template <typename T>
 void EncyclopediaWindow::entry_selected(const Widelands::TribeDescr& tribe,
-													 const T& map_object,
-													 const char* tab,
-													 const char* script_name) {
+                                        const T& map_object,
+                                        const char* tab,
+                                        const char* script_name) {
 	try {
-		std::unique_ptr<LuaTable> t(
-			iaplayer().egbase().lua().run_script(script_name));
+		std::unique_ptr<LuaTable> t(iaplayer().egbase().lua().run_script(script_name));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->push_arg(&map_object);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		contents_.at(tab)->set_text((boost::format("%s%s")
-									  % heading(map_object.descname())
-									  % help_text).str());
+		contents_.at(tab)
+		   ->set_text((boost::format("%s%s") % heading(map_object.descname()) % help_text).str());
 	} catch (LuaError& err) {
 		contents_.at(tab)->set_text(err.what());
 	}
 	contents_.at(tab)->scroll_to_top();
 }
 
-
 void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	entry_selected<Widelands::BuildingDescr>(
-				tribe,
-				*tribe.get_building_descr(lists_.at("buildings")->get_selected()),
-				"buildings",
-				"tribes/scripting/help/building_help.lua");
+	   tribe,
+	   *tribe.get_building_descr(lists_.at("buildings")->get_selected()),
+	   "buildings",
+	   "tribes/scripting/help/building_help.lua");
 }
 
 void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
-	entry_selected<Widelands::WareDescr>(
-				tribe,
-				*tribe.get_ware_descr(lists_.at("wares")->get_selected()),
-				"wares",
-				"tribes/scripting/help/ware_help.lua");
+	entry_selected<Widelands::WareDescr>(tribe,
+	                                     *tribe.get_ware_descr(lists_.at("wares")->get_selected()),
+	                                     "wares",
+	                                     "tribes/scripting/help/ware_help.lua");
 }
 
 void EncyclopediaWindow::worker_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	entry_selected<Widelands::WorkerDescr>(
-				tribe,
-				*tribe.get_worker_descr(lists_.at("workers")->get_selected()),
-				"workers",
-				"tribes/scripting/help/worker_help.lua");
+	   tribe,
+	   *tribe.get_worker_descr(lists_.at("workers")->get_selected()),
+	   "workers",
+	   "tribes/scripting/help/worker_help.lua");
 }

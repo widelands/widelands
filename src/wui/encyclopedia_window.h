@@ -33,22 +33,21 @@
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
 
-
 class InteractivePlayer;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
+	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&);
+
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry& other) :
-			EncyclopediaEntry(other.index_, other.descname_, other.icon_)
-		{}
-		EncyclopediaEntry(const Widelands::WareIndex index, const std::string& descname, const Image* icon)
-			:
-			index_(index),
-			descname_(descname),
-			icon_(icon)
-			{}
+		EncyclopediaEntry(const EncyclopediaEntry& other)
+		   : EncyclopediaEntry(other.index_, other.descname_, other.icon_) {
+		}
+		EncyclopediaEntry(const Widelands::WareIndex index,
+		                  const std::string& descname,
+		                  const Image* icon)
+		   : index_(index), descname_(descname), icon_(icon) {
+		}
 		Widelands::WareIndex index_;
 		std::string descname_;
 		const Image* icon_;
@@ -58,7 +57,7 @@ private:
 		}
 	};
 
-	InteractivePlayer & iaplayer() const;
+	InteractivePlayer& iaplayer() const;
 
 	// Fill table of contents
 	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
@@ -67,11 +66,11 @@ private:
 	void fill_workers();
 
 	// Update contents when an entry is selected
-	template<typename T>
+	template <typename T>
 	void entry_selected(const Widelands::TribeDescr& tribe,
-							  const T& map_object,
-							  const char* tab,
-							  const char* script_name);
+	                    const T& map_object,
+	                    const char* tab,
+	                    const char* script_name);
 
 	void building_selected(uint32_t);
 	void ware_selected(uint32_t);
