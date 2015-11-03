@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-10-25 20:03+0000\n"
+"PO-Revision-Date: 2015-10-31 19:50+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,18 +293,18 @@ msgstr "former en bred økse"
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
 #: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
-#: ../../tribes/barbarians/hardener/conf:23
+#: ../../tribes/barbarians/hardener/conf:24
 #: ../../tribes/barbarians/helmsmithy/conf:38
 #: ../../tribes/barbarians/inn/conf:32
-#: ../../tribes/barbarians/lime_kiln/conf:23
-#: ../../tribes/barbarians/lumberjacks_hut/conf:19
+#: ../../tribes/barbarians/lime_kiln/conf:26
+#: ../../tribes/barbarians/lumberjacks_hut/conf:20
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:21
-#: ../../tribes/barbarians/reed_yard/conf:25
+#: ../../tribes/barbarians/reed_yard/conf:26
 #: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
 #: ../../tribes/barbarians/warmill/conf:48
-#: ../../tribes/barbarians/well/conf:19
+#: ../../tribes/barbarians/well/conf:20
 msgid "working"
 msgstr "arbejder"
 
@@ -482,7 +482,7 @@ msgid ""
 msgstr "Hvis du mangler soldater til at indtage nye militær faciliteter, så brug pil ned-knappen til at minske kapaciteten. Du kan også klikke på en soldat for at sende ham væk."
 
 #: ../../tribes/barbarians/battlearena/conf:34
-#: ../../tribes/barbarians/trainingcamp/conf:47
+#: ../../tribes/barbarians/trainingcamp/conf:48
 msgid "sleeping"
 msgstr "sover"
 
@@ -1499,7 +1499,7 @@ msgid "harvesting wheat"
 msgstr "høster hvede"
 
 #: ../../tribes/barbarians/farm/conf:46
-#: ../../tribes/barbarians/reed_yard/conf:41
+#: ../../tribes/barbarians/reed_yard/conf:42
 msgid "Out of Fields"
 msgstr "Ikke flere marker"
 
@@ -1565,7 +1565,7 @@ msgstr "Fisker langs kysten nær hytten."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
 msgid "The fisher’s hut needs water full of fish within the work area."
-msgstr ""
+msgstr "Fiskerhuset kræver vand fuld af fisk indenfor dets fiskeriradius."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
 msgid "The fisher pauses %s before going to work again."
@@ -1704,7 +1704,7 @@ msgid ""
 "A helmet is a basic tool to protect warriors. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "En hjelm er grundlæggende udstyr i beskyttelsen af krigere. Den fremstilles i hjelmsmedjen og bruges i træningslejren - sammen med mad - til at træne soldater fra helbredsniveau 0 til niveau 1."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -1757,7 +1757,7 @@ msgstr "Jager dyr for fremstilling af kød."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
 msgid "The hunter’s hut needs animals to hunt within the work area."
-msgstr ""
+msgstr "Jægerhuset kræver jagtdyr indenfor dets arbejdsradius."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
@@ -1841,11 +1841,11 @@ msgstr "Træstammer er et grundlæggende byggemateriale for barbarerne. Træerne
 msgid "Fells trees."
 msgstr "Fælder træer."
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:26
+#: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid "Out of Trees"
 msgstr "Ikke flere træer"
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:27
+#: ../../tribes/barbarians/lumberjacks_hut/conf:28
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
@@ -1970,20 +1970,20 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "Udbredt uro blandt minearbejdere"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr ""
+msgstr "»Lad den første fjerne sulten, den anden give dig ro; når du har tømt din tredje, så er det tid for næste skift!«"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:17
 msgid ""
 "The micro brewery produces Beer of the lower grade. This beer is a vital "
 "component of the snacks that inns and big inns prepare for miners in deep "
 "mines."
-msgstr ""
+msgstr "Mikrobryggeret fremstiller øl i lav kvalitet. Denne øl er en vital komponent i mellemmåltider som kroer og store kroer fremstiller for minearbejdere i de dybe miner."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:29
 msgid ""
@@ -2013,7 +2013,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:19
 msgid "quarrying stone"
-msgstr ""
+msgstr "hugger sten ud"
 
 #: ../../tribes/barbarians/quarry/conf:32
 msgid "Out of Rocks"
@@ -2022,7 +2022,7 @@ msgstr "Ikke flere sten"
 #: ../../tribes/barbarians/quarry/conf:33
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "Stenhuggeren, der arbejder i stenbruddet, kan ikke finde flere sten indenfor sin radius."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
@@ -2030,17 +2030,17 @@ msgstr "Hugger rå sten ud indenfor synsfeltet."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the work area."
-msgstr ""
+msgstr "Stenbruddet kræver sten indenfor sin arbejdsradius."
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
-msgstr ""
+msgstr "Stenhuggeren holder pause i %s før han går på arbejde igen."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
 msgstr "Planter træer."
 
-#: ../../tribes/barbarians/rangers_hut/conf:18
+#: ../../tribes/barbarians/rangers_hut/conf:19
 msgid "planting trees"
 msgstr "Plantning af træer"
 
@@ -2052,7 +2052,7 @@ msgstr "Chat'Karuth i samtale med en skovridder"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
-msgstr ""
+msgstr "»Den som kan gro to træer hvor normalt kun et træ vil gro overgår den mest vigtige general!«"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:18
 msgid "Plants trees in the surrounding area."
@@ -2082,15 +2082,15 @@ msgid ""
 "in quarries and granite mines."
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:21
+#: ../../tribes/barbarians/reed_yard/conf:22
 msgid "planting reed"
 msgstr "planter strå"
 
-#: ../../tribes/barbarians/reed_yard/conf:23
+#: ../../tribes/barbarians/reed_yard/conf:24
 msgid "harvesting reed"
 msgstr "høster strå"
 
-#: ../../tribes/barbarians/reed_yard/conf:42
+#: ../../tribes/barbarians/reed_yard/conf:43
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
@@ -2231,35 +2231,35 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr "Træner soldaterne."
 
-#: ../../tribes/barbarians/trainingcamp/conf:49
+#: ../../tribes/barbarians/trainingcamp/conf:50
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "opgraderer soldaterangreb fra niveau 0 til niveau 1"
 
-#: ../../tribes/barbarians/trainingcamp/conf:51
+#: ../../tribes/barbarians/trainingcamp/conf:52
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "opgrader soldaterangreb fra niveau 1 til niveau 2"
 
-#: ../../tribes/barbarians/trainingcamp/conf:53
+#: ../../tribes/barbarians/trainingcamp/conf:54
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "opgrader soldaterangreb fra niveau 2 til niveau 3"
 
-#: ../../tribes/barbarians/trainingcamp/conf:55
+#: ../../tribes/barbarians/trainingcamp/conf:56
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "opgrader soldaterangreb fra niveau 3 til niveau 4"
 
-#: ../../tribes/barbarians/trainingcamp/conf:57
+#: ../../tribes/barbarians/trainingcamp/conf:58
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "opgrader soldaterangreb fra niveau 4 til niveau 5"
 
-#: ../../tribes/barbarians/trainingcamp/conf:59
+#: ../../tribes/barbarians/trainingcamp/conf:60
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "opgraderer soldaterhelbred fra niveau 0 til niveau 1"
 
-#: ../../tribes/barbarians/trainingcamp/conf:61
+#: ../../tribes/barbarians/trainingcamp/conf:62
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "opgraderer soldaterhelbred fra niveau 1 til niveau 2"
 
-#: ../../tribes/barbarians/trainingcamp/conf:63
+#: ../../tribes/barbarians/trainingcamp/conf:64
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "opgraderer soldaterhelbred fra niveau 2 til niveau 3"
 
@@ -2271,7 +2271,7 @@ msgstr "Overhovedet Chat'Karuth taler til sin hær."
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr ""
+msgstr "»Den som er stærk skal aldrig tilgive eller glemme, men hævne uretfærdighed - i fortiden og for al fremtid«."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
@@ -2365,26 +2365,26 @@ msgstr "Væveri"
 msgid "Weaves cloth out of thatch reed."
 msgstr "Væver klæde fra strå."
 
-#: ../../tribes/barbarians/well/conf:28
+#: ../../tribes/barbarians/well/conf:29
 msgid "Out of Water"
 msgstr "Ikke mere vand"
 
-#: ../../tribes/barbarians/well/conf:29
+#: ../../tribes/barbarians/well/conf:30
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "Fragtmanden, der arbejder med denne brønd, kan ikke finde mere vand indenfor arbejdsradiussen."
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Sang skrevet af Sigurd the Bard<br>da den første regn faldt efter Den Store Tørke i det 21. år i Chat'karuths rige."
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr ""
+msgstr "»Oh hvor sød er livets kilde ikke,<br>som kommer ned fra himlen<br>og lader jorden drikke«."
 
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Draws water out of the deep."
