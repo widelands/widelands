@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -31,13 +32,14 @@
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
-struct WareDescr;
 struct ProductionProgram;
-class Soldier;
 class Request;
+class Soldier;
+class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
@@ -52,14 +54,14 @@ class WorkerDescr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSiteDescr : public BuildingDescr {
+class ProductionSiteDescr : public BuildingDescr {
+public:
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr
-		(MapObjectType type, char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &, const World&);
-	~ProductionSiteDescr() override;
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt, MapObjectType type,
+							  const LuaTable& t, const EditorGameBase& egbase);
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt,
+							  const LuaTable& t, const EditorGameBase& egbase);
 
 	Building & create_object() const override;
 
@@ -84,7 +86,7 @@ struct ProductionSiteDescr : public BuildingDescr {
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	using Programs = std::map<std::string, ProductionProgram *>;
+	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {

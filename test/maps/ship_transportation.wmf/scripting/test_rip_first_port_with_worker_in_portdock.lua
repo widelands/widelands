@@ -3,17 +3,17 @@ run(function()
    game.desired_speed = 10 * 1000
 
    create_southern_port()
-   local wh = p1:place_building("warehouse", map:get_field(13, 16), false, false)
+   local wh = p1:place_building("barbarians_warehouse", map:get_field(13, 16), false, false)
    connected_road(p1, wh.flag, "r,r,r", true)
    create_northern_port()
 
    start_building_farm()
    southern_port():set_workers{
-      builder = 1,
+      barbarians_builder = 1,
    }
 
    -- Wait till the worker transfers to the portdock.
-   while southern_port():get_workers("builder") == 1 do
+   while southern_port():get_workers("barbarians_builder") == 1 do
       sleep(200)
    end
    sleep(3000)
@@ -23,7 +23,7 @@ run(function()
    stable_save("port1_just_removed")
 
    -- Wait till the worker runs to the warehouse.
-   while wh:get_workers("builder") == 0 do
+   while wh:get_workers("barbarians_builder") == 0 do
       sleep(200)
    end
 

@@ -58,9 +58,6 @@ private:
 
 	std::vector<std::string> m_tribenames;
 
-	/// tribename, descname
-	std::map<std::string, std::string> m_tribe_descnames;
-
 	/// List of the tribes currently selected for all players
 	std::string m_selected_tribes[MAX_PLAYERS];
 

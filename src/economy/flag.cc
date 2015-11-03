@@ -31,7 +31,7 @@
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 

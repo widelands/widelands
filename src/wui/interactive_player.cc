@@ -39,7 +39,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"

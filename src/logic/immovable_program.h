@@ -32,8 +32,6 @@
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 
-class Profile;
-
 namespace Widelands {
 
 /// Ordered sequence of actions (at least 1). Has a name.
@@ -122,7 +120,6 @@ struct ImmovableProgram {
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
-		bool        tribe;
 		uint8_t probability;
 	};
 
@@ -142,7 +139,7 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(const std::string & directory, char * parameters, const ImmovableDescr &);
+		ActPlayFX(char* parameters, const ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
@@ -163,7 +160,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruction : public Action {
-		ActConstruction(char * parameters, ImmovableDescr &, const std::string & directory, Profile &);
+		ActConstruction(char* parameters, ImmovableDescr&);
 		void execute(Game &, Immovable &) const override;
 
 		Duration buildtime() const {return m_buildtime;}
@@ -186,13 +183,6 @@ struct ImmovableProgram {
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr* immovable);
-
-	/// Create a program by parsing a conf-file section.
-	ImmovableProgram
-		(const std::string    & directory,
-		 Profile              &,
-		 const std::string    & name,
-		 ImmovableDescr      &);
 
 	~ImmovableProgram() {
 		for (Action * action : m_actions) {

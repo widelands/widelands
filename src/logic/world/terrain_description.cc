@@ -29,7 +29,6 @@
 #include "logic/game_data_error.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -112,11 +111,11 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 
 	int editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index < 0) {
+	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(
 		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
 	}
-	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
+	editor_category_ = world.editor_terrain_categories().get_mutable(editor_category_index);
 }
 
 TerrainDescription::~TerrainDescription() {

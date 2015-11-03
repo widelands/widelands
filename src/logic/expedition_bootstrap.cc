@@ -132,7 +132,7 @@ void ExpeditionBootstrap::start() {
 	workers_.emplace_back
 		(new ExpeditionWorker
 		 (new Request(*warehouse,
-						  warehouse->owner().tribe().safe_worker_index("builder"),
+						  warehouse->owner().tribe().builder(),
 						  ExpeditionBootstrap::worker_callback, wwWORKER))
 	);
 

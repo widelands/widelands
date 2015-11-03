@@ -24,10 +24,11 @@
 
 #include <SDL_keyboard.h>
 
-#include "wui/interactive_gamebase.h"
 #include "logic/message_id.h"
+#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+#include "wui/interactive_gamebase.h"
 
 namespace UI {
 struct MultilineTextarea;

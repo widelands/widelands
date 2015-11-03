@@ -1,8 +1,0 @@
-help=_Cornflour is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries.
-
-default_target_quantity=15
-preciousness=7
-
-[idle]
-pics=idle.png
-hotspot=4 15

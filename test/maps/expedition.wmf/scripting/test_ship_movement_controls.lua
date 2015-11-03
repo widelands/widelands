@@ -2,15 +2,15 @@ run(function()
    game.desired_speed = 30 * 1000
 
     -- placing a ship on coast
-	p1:place_bob("ship", map:get_field(8, 8))
+	p1:place_ship(map:get_field(8, 8))
 	sleep(1000)
-	
+
 	--getting table with all our ships (single one only)
 	ships = p1:get_ships()
 
 	--ships table should contain 1 item (1 ship)
   	assert_equal(1, #ships)
-	
+
 	--waiting till it is pulled from coast
 	while ships[1].field.x == 8 and ships[1].field.xy == 8 do
 		print ("ship still on coast")

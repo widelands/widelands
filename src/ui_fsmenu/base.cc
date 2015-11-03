@@ -31,7 +31,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
-#include "profile/profile.h"
 #include "wlapplication.h"
 
 /*

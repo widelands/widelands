@@ -1,8 +1,0 @@
-help=_Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread.
-
-default_target_quantity=15
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=4 15

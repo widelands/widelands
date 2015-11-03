@@ -1,9 +1,0 @@
-help=_This is the basic weapon of the Atlantean soldiers. Together with a tabard, it makes up the equipment of young soldiers. Light tridents are produced in the weapon smithy as are all other tridents.
-
-default_target_quantity=30
-preciousness=1
-
-# A simple trident
-[idle]
-pics=idle.png
-hotspot=10 17

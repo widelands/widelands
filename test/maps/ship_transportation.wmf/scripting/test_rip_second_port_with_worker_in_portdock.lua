@@ -10,22 +10,22 @@ run(function()
    portdock_fields[1].immovable:remove()
    sleep(100)
    --portdock should be back, as port is still there
-   assert (portdock_fields[1].immovable) 
-   
+   assert (portdock_fields[1].immovable)
+
    start_building_farm()
    southern_port():set_workers{
-      builder = 1,
+      barbarians_builder = 1,
    }
-	
+
 	sleep(2000)
-	
+
    -- The ship should not yet have picked up the worker from the
    -- portdock.
-   assert_equal(1, p1:get_workers("builder"))
-   assert_equal(0, southern_port():get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
+   assert_equal(0, southern_port():get_workers("barbarians_builder"))
 
   -- so wait till builder is loaded on ship
-  while (ship:get_workers("builder") == 0) do
+  while (ship:get_workers("barbarians_builder") == 0) do
    	sleep(100)
   end
   sleep(5000)
@@ -35,7 +35,7 @@ run(function()
    sleep(100)
    --verify that also portdock was removed
    assert (not portdock_fields[1].immovable)
-   
+
    sleep(100)
 
    stable_save("worker_in_portdock")
@@ -47,8 +47,8 @@ run(function()
    sleep(2000)
 
    -- Worker should be back in the southern port.
-   assert_equal(p1:get_workers("builder"), 1)
-   assert_equal(southern_port():get_workers("builder"), 1)
+   assert_equal(p1:get_workers("barbarians_builder"), 1)
+   assert_equal(southern_port():get_workers("barbarians_builder"), 1)
 
    -- Create port again.
    create_northern_port()

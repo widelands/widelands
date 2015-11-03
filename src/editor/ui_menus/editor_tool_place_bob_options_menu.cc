@@ -62,11 +62,9 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const Image& pic = g_gr->animations()
-		                      .get_animation(world.get_bob_descr(j)->main_animation())
-		                      .representative_image_from_disk();
-		uint16_t w = pic.width();
-		uint16_t h = pic.height();
+		const Image* pic = world.get_bob_descr(j)->representative_image();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		if (w > width)
 			width = w;
 		if (h > height)
@@ -92,9 +90,7 @@ m_click_recursion_protect(false)
 		UI::Checkbox& cb =
 		   *new UI::Checkbox(box,
 		                     pos,
-		                     &g_gr->animations()
-		                         .get_animation(descr.main_animation())
-		                         .representative_image_from_disk(),
+									descr.representative_image(),
 		                     critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);

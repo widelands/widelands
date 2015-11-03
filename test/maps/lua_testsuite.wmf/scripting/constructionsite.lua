@@ -8,8 +8,8 @@ function constructionsite_tests:setup()
    player1:conquer(self.f1, 3)
    player1:conquer(self.f2, 3)
 
-   player1:place_building("lumberjacks_hut", self.f1, true)
-   player1:place_building("fortress", self.f2, true)
+   player1:place_building("barbarians_lumberjacks_hut", self.f1, true)
+   player1:place_building("barbarians_fortress", self.f2, true)
 
    self.l = self.f1.immovable
    self.f = self.f2.immovable
@@ -41,6 +41,6 @@ function constructionsite_tests:test_size()
 end
 
 function constructionsite_tests:test_building()
-   assert_equal("lumberjacks_hut", self.l.building)
-   assert_equal("fortress", self.f.building)
+   assert_equal("barbarians_lumberjacks_hut", self.l.building)
+   assert_equal("barbarians_fortress", self.f.building)
 end
