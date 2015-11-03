@@ -22,8 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building
-   -- TRANSLATORS: %1$s = X minute(s)
-   -- TRANSLATORS: %2$s = X second(s)
+   -- TRANSLATORS: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
    return pgettext("barbarians_building", "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average."):bformat(ngettext("%d minute", "%d minutes", 4):bformat(4), ngettext("%d second", "%d seconds", 40):bformat(40))
 end
