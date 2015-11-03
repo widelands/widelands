@@ -502,7 +502,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	MapGenerator gen(map, mapInfo, egbase);
 	map.create_empty_map(
 		egbase.world(),
-		egbase.tribes(),
 		mapInfo.w,
 		mapInfo.h,
 		_("No Name"),
