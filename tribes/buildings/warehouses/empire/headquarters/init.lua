@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "empire_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Headquarters"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    destructible = false,

@@ -5,7 +5,7 @@ tribes:new_ware_type {
    name = "marble_column",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Marble Column"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
 		empire = 10

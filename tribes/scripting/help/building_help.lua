@@ -720,7 +720,7 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help(tribe, building_description)
-	include(building_description.directory .. "helptexts.lua")
+	include(building_description.helptext_script)
 
 	if (building_description.type_name == "productionsite") then
 		return building_help_general_string(building_description) ..

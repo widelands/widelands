@@ -62,7 +62,7 @@ public:
   ///  and should not be configurable.
 	WareIndex default_target_quantity(const std::string& tribename) const;
 
-	std::string directory() const {return directory_;}
+	std::string helptext_script() const {return helptext_script_;}
 
 	bool has_demand_check(const std::string& tribename) const;
 
@@ -90,7 +90,7 @@ private:
 	std::set<BuildingIndex> consumers_; // Buildings that consume this ware
 	std::set<BuildingIndex> producers_; // Buildings that produce this ware
 
-	std::string  directory_;  /// The directory where the init files are located
+	std::string  helptext_script_;  // The path and filename to the ware's helptext script
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 

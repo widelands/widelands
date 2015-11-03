@@ -42,7 +42,7 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
 	}
 	i18n::Textdomain td("tribes");
 
-	directory_ = table.get_string("directory");
+	helptext_script_ = table.get_string("helptext_script");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
 	for (const std::string& key : items_table->keys<std::string>()) {

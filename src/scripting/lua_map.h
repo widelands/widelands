@@ -226,7 +226,7 @@ public:
 	int get_buildable(lua_State *);
 	int get_conquers(lua_State *);
 	int get_destructible(lua_State *);
-	int get_directory(lua_State *);
+	int get_helptext_script(lua_State *);
 	int get_enhanced(lua_State *);
 	int get_enhanced_from(lua_State *);
 	int get_enhancement_cost(lua_State *);
@@ -459,7 +459,7 @@ public:
 	 * Properties
 	 */
 	int get_consumers(lua_State *);
-	int get_directory(lua_State*);
+	int get_helptext_script(lua_State*);
 	int get_producers(lua_State *);
 
 	/*
@@ -497,7 +497,7 @@ public:
 	 */
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
-	int get_directory(lua_State*);
+	int get_helptext_script(lua_State*);
 	int get_is_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
 

@@ -1420,12 +1420,7 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, buildable),
 	PROP_RO(LuaBuildingDescription, conquers),
 	PROP_RO(LuaBuildingDescription, destructible),
-	// NOCOM(#codereview): I think the engine should not have any insight in
-	// where and how the data files are stored. They could be loaded from the
-	// internet for all it knows. Or from a zip file. 'directory' violates that.
-	// Not only for Buildings of course. Where is it used?
-	// It is used only in the help files to load directory .. helptexts.lua
-	PROP_RO(LuaBuildingDescription, directory),
+	PROP_RO(LuaBuildingDescription, helptext_script),
 	PROP_RO(LuaBuildingDescription, enhanced),
 	PROP_RO(LuaBuildingDescription, enhanced_from),
 	PROP_RO(LuaBuildingDescription, enhancement_cost),
@@ -1510,12 +1505,12 @@ int LuaBuildingDescription::get_destructible(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The file path of the directory where the building's init files are located.
+			(RO) The path and filename to the building's helptext script
 */
-int LuaBuildingDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaBuildingDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2255,7 +2250,7 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
-	PROP_RO(LuaWareDescription, directory),
+	PROP_RO(LuaWareDescription, helptext_script),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
@@ -2298,12 +2293,12 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The directory where the ware's init files are located.
+			(RO) The path and filename to the ware's helptext script
 */
-int LuaWareDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaWareDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2366,7 +2361,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
-	PROP_RO(LuaWorkerDescription, directory),
+	PROP_RO(LuaWorkerDescription, helptext_script),
 	PROP_RO(LuaWorkerDescription, is_buildable),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
@@ -2429,12 +2424,12 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The directory where the worker's init files are located.
+			(RO) The path and filename to the worker's helptext script
 */
-int LuaWorkerDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaWorkerDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 

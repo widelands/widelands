@@ -158,7 +158,7 @@ BuildingDescr::BuildingDescr
 		}
 	}
 
-	directory_ = table.get_string("directory");
+	helptext_script_ = table.get_string("helptext_script");
 
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");

@@ -168,7 +168,7 @@ return {
    func = function(tribename, ware_description)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
-      include(ware_description.directory .. "helptexts.lua")
+      include(ware_description.helptext_script)
 	   return ware_help_general_string(tribe, ware_description)
 			.. ware_help_producers_string(tribe, ware_description)
 			.. ware_help_consumers_string(tribe, ware_description)
