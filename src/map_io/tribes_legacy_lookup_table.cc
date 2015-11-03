@@ -252,7 +252,8 @@ const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& tri
 	return worker;
 }
 
-const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& tribe, const std::string& ware) const {
+const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& tribe,
+																		  const std::string& ware) const {
 	if (wares_.count(tribe)) {
 		const std::map<std::string, std::string>& tribe_wares = wares_.at(tribe);
 		const auto& i = tribe_wares.find(ware);

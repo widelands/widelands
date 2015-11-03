@@ -20,6 +20,7 @@
 #include "logic/buildcost.h"
 
 #include <map>
+#include <memory>
 
 #include "base/wexception.h"
 #include "io/fileread.h"
