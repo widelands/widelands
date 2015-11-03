@@ -479,7 +479,7 @@ struct ShipObserver {
 	// is assigned only once
 	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
-	int32_t last_command_time = 0;
+	uint32_t last_command_time = 0;
 };
 
 struct WareObserver {

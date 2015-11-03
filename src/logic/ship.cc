@@ -237,17 +237,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 }
 
 /// updates a ships tasks in transport mode \returns false if failed to update tasks
-bool Ship::ship_update_transport(Game& game, Bob::State&) {
+bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	Map& map = game.map();
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		// The ship has lost its destination (port is gone perhaps) so
-		// stop and start being idle
-		start_task_idle(game, descr().main_animation(), 10000);
-		// ...but let the fleet recalcualte ships destinations (this ship
-		// needs new destination)
-		m_fleet->update(game);
+		// The ship has no destination, so let it sleep
+		ship_update_idle(game, state);
 		return true;
 	}
 
@@ -455,6 +451,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
+
 	if (state.ivar1) {
 		// We've just completed one step, so give neighbours
 		// a chance to move away first
