@@ -138,7 +138,6 @@ void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaE
 	lists_.at(key)->select(0);
 }
 
-
 void EncyclopediaWindow::fill_buildings() {
 	const Tribes& tribes = iaplayer().egbase().tribes();
 	const TribeDescr& tribe = iaplayer().player().tribe();
@@ -154,29 +153,6 @@ void EncyclopediaWindow::fill_buildings() {
 	fill_entries("buildings", entries);
 }
 
-// NOCOM(#codereview): lot of duplicated code in the *selected functions. Pull out a helper function?
-void EncyclopediaWindow::building_selected(uint32_t) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::BuildingDescr& selected_building =
-			*tribe.get_building_descr(lists_.at("buildings")->get_selected());
-
-	assert(tribe.has_building(tribe.building_index(selected_building.name())) ||
-			 selected_building.type() == MapObjectType::MILITARYSITE);
-	try {
-		std::unique_ptr<LuaTable> t(
-				iaplayer().egbase().lua().run_script("tribes/scripting/help/building_help.lua"));
-		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
-		cr->push_arg(tribe.name());
-		cr->push_arg(selected_building.name());
-		cr->resume();
-		const std::string help_text = cr->pop_string();
-		contents_.at("buildings")->set_text(help_text);
-	} catch (LuaError& err) {
-		contents_.at("buildings")->set_text(err.what());
-	}
-	contents_.at("buildings")->scroll_to_top();
-}
-
 void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
@@ -187,25 +163,6 @@ void EncyclopediaWindow::fill_wares() {
 		entries.push_back(entry);
 	}
 	fill_entries("wares", entries);
-}
-
-void EncyclopediaWindow::ware_selected(uint32_t) {
-	const TribeDescr & tribe = iaplayer().player().tribe();
-	const Widelands::WareDescr& selected_ware = *tribe.get_ware_descr(lists_.at("wares")->get_selected());
-
-	try {
-		std::unique_ptr<LuaTable> t(
-			iaplayer().egbase().lua().run_script("tribes/scripting/help/ware_help.lua"));
-		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
-		cr->push_arg(tribe.name());
-		cr->push_arg(&selected_ware);
-		cr->resume();
-		const std::string help_text = cr->pop_string();
-		contents_.at("wares")->set_text(help_text);
-	} catch (LuaError& err) {
-		contents_.at("wares")->set_text(err.what());
-	}
-	contents_.at("wares")->scroll_to_top();
 }
 
 void EncyclopediaWindow::fill_workers() {
@@ -220,25 +177,53 @@ void EncyclopediaWindow::fill_workers() {
 	fill_entries("workers", entries);
 }
 
-void EncyclopediaWindow::worker_selected(uint32_t) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	const Widelands::WorkerDescr& selected_worker =
-			*tribe.get_worker_descr(lists_.at("workers")->get_selected());
 
+template<typename T>
+void EncyclopediaWindow::entry_selected(const Widelands::TribeDescr& tribe,
+													 const T& map_object,
+													 const char* tab,
+													 const char* script_name) {
 	try {
 		std::unique_ptr<LuaTable> t(
-			iaplayer().egbase().lua().run_script("tribes/scripting/help/worker_help.lua"));
+			iaplayer().egbase().lua().run_script(script_name));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
-		cr->push_arg(&selected_worker);
+		cr->push_arg(&map_object);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		contents_.at("workers")->set_text((boost::format("%s%s")
-									  % heading(selected_worker.descname())
+		contents_.at(tab)->set_text((boost::format("%s%s")
+									  % heading(map_object.descname())
 									  % help_text).str());
 	} catch (LuaError& err) {
-		contents_.at("workers")->set_text(err.what());
+		contents_.at(tab)->set_text(err.what());
 	}
+	contents_.at(tab)->scroll_to_top();
+}
 
-	contents_.at("workers")->scroll_to_top();
+
+void EncyclopediaWindow::building_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	entry_selected<Widelands::BuildingDescr>(
+				tribe,
+				*tribe.get_building_descr(lists_.at("buildings")->get_selected()),
+				"buildings",
+				"tribes/scripting/help/building_help.lua");
+}
+
+void EncyclopediaWindow::ware_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	entry_selected<Widelands::WareDescr>(
+				tribe,
+				*tribe.get_ware_descr(lists_.at("wares")->get_selected()),
+				"wares",
+				"tribes/scripting/help/ware_help.lua");
+}
+
+void EncyclopediaWindow::worker_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	entry_selected<Widelands::WorkerDescr>(
+				tribe,
+				*tribe.get_worker_descr(lists_.at("workers")->get_selected()),
+				"workers",
+				"tribes/scripting/help/worker_help.lua");
 }

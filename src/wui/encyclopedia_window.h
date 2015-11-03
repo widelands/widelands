@@ -23,7 +23,8 @@
 #include <map>
 #include <memory>
 
-#include "logic/widelands.h"
+#include "logic/instances.h"
+#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -59,20 +60,24 @@ private:
 
 	InteractivePlayer & iaplayer() const;
 
+	// Fill table of contents
 	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
-
-	// Buildings
 	void fill_buildings();
-	void building_selected(uint32_t);
-
-	// Wares
 	void fill_wares();
-	void ware_selected(uint32_t);
-
-	// Workers
 	void fill_workers();
+
+	// Update contents when an entry is selected
+	template<typename T>
+	void entry_selected(const Widelands::TribeDescr& tribe,
+							  const T& map_object,
+							  const char* tab,
+							  const char* script_name);
+
+	void building_selected(uint32_t);
+	void ware_selected(uint32_t);
 	void worker_selected(uint32_t);
 
+	// UI elements
 	UI::TabPanel tabs_;
 
 	// Wrapper boxes so we can add some padding
