@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-03 18:29+0000\n"
+"POT-Creation-Date: 2015-11-03 18:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -16,17 +16,17 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
-"Build a barracks"
+"Build a blockhouse"
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid ""
-"Barracks"
+"Blockhouse"
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
-"Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters."
+"Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
@@ -202,7 +202,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
-"You really should build a barracks in the eastern portion of the forest. Then one of my men can keep watch in the darkness and keep us safe from these creatures."
+"You really should build a blockhouse in the eastern portion of the forest. Then one of my men can keep watch in the darkness and keep us safe from these creatures."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
@@ -218,7 +218,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
-"Sire, I saw that the construction of the barracks was completed, so I have assigned one of my best soldiers to it to keep watch on the desert."
+"Sire, I saw that the construction of the blockhouse was completed, so I have assigned one of my best soldiers to it to keep watch on the desert."
 msgstr ""
 
 #. TRANSLATORS: Saledus
@@ -248,7 +248,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:159
 msgid ""
-"He told me about the barracks. Well, I don’t think we need more barracks – instead, we might concentrate on other things now."
+"He told me about the blockhouse. Well, I don’t think we need more blockhouses – instead, we might concentrate on other things now."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -271,7 +271,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:174
 msgid ""
-"But unfortunately the logs are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build a sawmill – as soon as we have enough space for this."
+"But unfortunately the logs are useless for repairing our ship – we need to turn them into planks, which are needed by every ship and every bigger building too. So we should build a sawmill – as soon as we have enough space for this."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
