@@ -23,6 +23,7 @@
 #include <map>
 
 #include "logic/widelands.h"
+#include "scripting/lua_table.h"
 
 class FileRead;
 class FileWrite;
@@ -30,8 +31,12 @@ class FileWrite;
 namespace Widelands {
 
 class TribeDescr;
+class Tribes;
 
 struct Buildcost : std::map<WareIndex, uint8_t> {
+
+	Buildcost();
+	Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
 
 	uint32_t total() const;
 
