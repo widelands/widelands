@@ -8,7 +8,7 @@ run(function()
    -- Send expedition to port space.
    port:start_expedition()
    wait_for_message("Expedition")
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
 
 
@@ -25,14 +25,14 @@ run(function()
    assert_equal("ccw",expedition_ship.island_explore_direction)
    wait_for_message("Port Space")
    sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    stable_save("reached_port_space")
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)
    sleep(20000)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
    -- Dismantle the hardener to make sure that the builder is able to do his work.

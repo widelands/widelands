@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-14 07:52+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-10-25 20:03+0000\n"
+"PO-Revision-Date: 2015-10-31 19:47+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -290,12 +290,12 @@ msgstr "smedning af et avanceret skjold"
 
 #: ../../tribes/atlanteans/armorsmithy/conf:33
 #: ../../tribes/atlanteans/bakery/conf:27
-#: ../../tribes/atlanteans/blackroot_farm/conf:27
+#: ../../tribes/atlanteans/blackroot_farm/conf:28
 #: ../../tribes/atlanteans/charcoal_kiln/conf:24
 #: ../../tribes/atlanteans/farm/conf:30
-#: ../../tribes/atlanteans/fish_breeders_house/conf:21
+#: ../../tribes/atlanteans/fish_breeders_house/conf:22
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
-#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:22
+#: ../../tribes/atlanteans/mill/conf:31 ../../tribes/atlanteans/quarry/conf:23
 #: ../../tribes/atlanteans/sawmill/conf:24
 #: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
@@ -305,7 +305,7 @@ msgstr "smedning af et avanceret skjold"
 #: ../../tribes/atlanteans/weaponsmithy/conf:44
 #: ../../tribes/atlanteans/weaving-mill/conf:35
 #: ../../tribes/atlanteans/well/conf:23
-#: ../../tribes/atlanteans/woodcutters_house/conf:21
+#: ../../tribes/atlanteans/woodcutters_house/conf:22
 msgid "working"
 msgstr "arbejder"
 
@@ -452,24 +452,24 @@ msgid ""
 "flour for making bread."
 msgstr "Rodfrugter er en speciel slags rødder fremstillet i rodfrugtlandbrug og behandlet i møller. Atlanteanerne kan lide deres stærke smag og bruger deres mel til fremstilling af brød."
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:23
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 msgid "planting blackroot"
 msgstr "planter rodfrugter"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:25
+#: ../../tribes/atlanteans/blackroot_farm/conf:26
 msgid "harvesting blackroot"
 msgstr "høster rodfrugter"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:43
+#: ../../tribes/atlanteans/blackroot_farm/conf:44
 #: ../../tribes/atlanteans/farm/conf:47
 msgid "Out of Fields"
 msgstr "Ingen marker"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:44
+#: ../../tribes/atlanteans/blackroot_farm/conf:45
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr ""
+msgstr "Landmanden på denne rodfrugtgård har ingen ryddet jort til sine frø."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -1221,19 +1221,19 @@ msgstr "sover"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "opgraderer soldaterangreb fra niveau 0 til niveau 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "opgraderer soldaterangreb fra niveau 1 til niveau 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "opgraderer  soldaterangreb fra niveau 2 til niveau 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "opgraderer soldaterangreb fra niveau 3 til niveau 4"
 
 #: ../../tribes/atlanteans/dungeon/help.lua:19
 msgid "Trains soldiers in ‘Attack’."
@@ -1298,7 +1298,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr ""
+msgstr "Fiskeren fra dette fiskerhus kan ikke finde nogle fisk indenfor sin fiskeradius. Husk at du kan øge antallet af eksisterende fisk ved at bygge et fiskeopdræt."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1312,7 +1312,7 @@ msgstr "Byg et fiskeopdræt tæt på fiskerhuset for at sikre, at du ikke udtøm
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Fiskerhuset kræver vand fuld af fisk indenfor dets fiskeriradius."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1334,7 +1334,7 @@ msgstr "Planter træer i det omkringliggende område."
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Skovfogedhuset kræver ledig plads indenfor arbejdsradiusen for at plante træerne."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1434,7 +1434,7 @@ msgstr "Heste hjælper med at transportere varer langs med travle veje. De opdr�
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong Atlantean horses."
-msgstr ""
+msgstr "Avler stærke atlanteanerheste."
 
 #: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
@@ -1460,7 +1460,7 @@ msgstr "Ikke mere vildt"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "Jægeren, der arbejder fra jægerhuset, kan ikke finde mere vildt indenfor sin radius."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1468,7 +1468,7 @@ msgstr "Jager dyr for fremstilling af kød."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Jægerhuset kræver jagtdyr indenfor dets radius."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
@@ -1602,19 +1602,19 @@ msgid ""
 " use planks to produce the different tridents and mighty ships."
 msgstr "Brædder er vigtigte byggematerialer for atlanteanerne. De fremstilles af træstammer i savværket. Våbensmedjen og skibsværftet bruger også brædder til at fremstille forskellige treforke og mægtige skibe."
 
-#: ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/quarry/conf:21
 msgid "quarrying stone"
 msgstr "hugger sten ud"
 
-#: ../../tribes/atlanteans/quarry/conf:33
+#: ../../tribes/atlanteans/quarry/conf:34
 msgid "Out of Rocks"
 msgstr "Ikke flere sten"
 
-#: ../../tribes/atlanteans/quarry/conf:34
+#: ../../tribes/atlanteans/quarry/conf:35
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr ""
+msgstr "Stenhuggeren, der arbejder i stenbruddet, kan ikke finde flere sten indenfor sin arbejdsradius."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
@@ -1622,7 +1622,7 @@ msgstr "Hugger sten ud indenfor synsfeltet."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the work area."
-msgstr ""
+msgstr "Stenbruddet kræver sten indenfor sin arbejdsradius."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1896,7 +1896,7 @@ msgstr "Ikke mere vand"
 #: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "Fragtmanden, der arbejder med denne brønd, kan ikke finde mere vand indenfor arbejdsradiussen."
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -1906,16 +1906,16 @@ msgstr "Trækker vand ud af undergrunden."
 msgid "Fells trees."
 msgstr "Fælder træer."
 
-#: ../../tribes/atlanteans/woodcutters_house/conf:28
+#: ../../tribes/atlanteans/woodcutters_house/conf:29
 msgid "Out of Trees"
 msgstr "Ikke flere træer"
 
-#: ../../tribes/atlanteans/woodcutters_house/conf:29
+#: ../../tribes/atlanteans/woodcutters_house/conf:30
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "Skovhuggeren, der arbejder i dette skovhuggerhus, kan ikke finde nogle træer indenfor sin arbejdsradius. Du bør overveje at rive huset ned eller ødelægge bygningen eller eventuelt at bygge et skovfogedhus."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1923,4 +1923,4 @@ msgstr "Fælder træer i det omkringliggende område og laver dem til træstamme
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Skovhuggerens hus kræver træer indenfor arbejdsradiussen."

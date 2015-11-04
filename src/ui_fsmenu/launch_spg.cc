@@ -38,7 +38,6 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"

@@ -24,13 +24,22 @@
 
 #include "base/macros.h"
 #include "logic/partially_finished_building.h"
-#include "logic/player.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
 class Building;
 class Request;
 class WaresQueue;
+
+/// Per-player and per-field constructionsite information
+struct ConstructionsiteInformation {
+	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
+	const BuildingDescr* becomes; // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was; // only valid if "becomes" is an enhanced building.
+	uint32_t totaltime;
+	uint32_t completedtime;
+};
 
 /*
 ConstructionSite
@@ -50,11 +59,9 @@ with the transport and Flag code.
 Every tribe has exactly one ConstructionSiteDescr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
-struct ConstructionSiteDescr : public BuildingDescr {
-	ConstructionSiteDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr & tribe);
+class ConstructionSiteDescr : public BuildingDescr {
+public:
+	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~ConstructionSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -73,7 +80,7 @@ class ConstructionSite : public PartiallyFinishedBuilding {
 public:
 	ConstructionSite(const ConstructionSiteDescr & descr);
 
-	const Player::ConstructionsiteInformation & get_info() {return m_info;}
+	const ConstructionsiteInformation & get_info() {return m_info;}
 
 	WaresQueue & waresqueue(WareIndex) override;
 
@@ -104,7 +111,7 @@ private:
 	int32_t     m_fetchfromflag;  // # of wares to fetch from flag
 
 	bool        m_builder_idle;   // used to determine whether the builder is idle
-	Player::ConstructionsiteInformation m_info; // asked for by player point of view for the gameview
+	ConstructionsiteInformation m_info; // asked for by player point of view for the gameview
 };
 
 }

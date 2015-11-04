@@ -65,7 +65,7 @@ function place_headquarters()
    for idx,player in ipairs(game.players) do
       local sf = map.player_slots[player.number].starting_field
 
-      prefilled_buildings(player, { "headquarters", sf.x, sf.y,
+      prefilled_buildings(player, { "barbarians_headquarters", sf.x, sf.y,
          wares = {
             ax = 5,
             bread_paddle = 2,
@@ -81,34 +81,34 @@ function place_headquarters()
             hammer = 12,
             hunting_spear = 2,
             iron = 12,
-            ironore = 5,
+            iron_ore = 5,
             kitchen_tools = 4,
             meal = 4,
             meat = 6,
             pick = 14,
-            pittabread = 8,
+            barbarians_bread = 8,
             ration = 12,
-            raw_stone = 40,
+            granite = 40,
             scythe = 6,
             shovel = 4,
             snack = 3,
-            thatchreed = 24,
+            thatch_reed = 24,
             log = 80,
          },
          workers = {
-            blacksmith = 2,
-            brewer = 1,
-            builder = 10,
-            carrier = 40,
-            charcoal_burner = 1,
-            gardener = 1,
-            geologist = 4,
-            ["lime-burner"] = 1,
-            lumberjack = 3,
-            miner = 4,
-            ranger = 1,
-            stonemason = 2,
-            ox = 5,
+            barbarians_blacksmith = 2,
+            barbarians_brewer = 1,
+            barbarians_builder = 10,
+            barbarians_carrier = 40,
+            barbarians_charcoal_burner = 1,
+            barbarians_gardener = 1,
+            barbarians_geologist = 4,
+            barbarians_lime_burner = 1,
+            barbarians_lumberjack = 3,
+            barbarians_miner = 4,
+            barbarians_ranger = 1,
+            barbarians_stonemason = 2,
+            barbarians_ox = 5,
          },
          soldiers = {
             [{0,0,0,0}] = 45,
@@ -118,7 +118,7 @@ function place_headquarters()
 end
 
 function setup_statistics_hook()
-	hooks.custom_statistic = {
+   hooks.custom_statistic = {
       name = _"Wares Smuggled",
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p)

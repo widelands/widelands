@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-03 18:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -340,13 +340,13 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armorsmithy/conf:33
 #: ../../tribes/atlanteans/bakery/conf:27
-#: ../../tribes/atlanteans/blackroot_farm/conf:27
+#: ../../tribes/atlanteans/blackroot_farm/conf:28
 #: ../../tribes/atlanteans/charcoal_kiln/conf:24
 #: ../../tribes/atlanteans/farm/conf:30
-#: ../../tribes/atlanteans/fish_breeders_house/conf:21
+#: ../../tribes/atlanteans/fish_breeders_house/conf:22
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
 #: ../../tribes/atlanteans/mill/conf:31
-#: ../../tribes/atlanteans/quarry/conf:22
+#: ../../tribes/atlanteans/quarry/conf:23
 #: ../../tribes/atlanteans/sawmill/conf:24
 #: ../../tribes/atlanteans/shipyard/conf:31
 #: ../../tribes/atlanteans/smelting_works/conf:31
@@ -356,7 +356,7 @@ msgstr ""
 #: ../../tribes/atlanteans/weaponsmithy/conf:44
 #: ../../tribes/atlanteans/weaving-mill/conf:35
 #: ../../tribes/atlanteans/well/conf:23
-#: ../../tribes/atlanteans/woodcutters_house/conf:21
+#: ../../tribes/atlanteans/woodcutters_house/conf:22
 msgid ""
 "working"
 msgstr ""
@@ -506,23 +506,23 @@ msgid ""
 "Blackroots are a special kind of root produced in blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread."
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:23
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 msgid ""
 "planting blackroot"
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:25
+#: ../../tribes/atlanteans/blackroot_farm/conf:26
 msgid ""
 "harvesting blackroot"
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:43
+#: ../../tribes/atlanteans/blackroot_farm/conf:44
 #: ../../tribes/atlanteans/farm/conf:47
 msgid ""
 "Out of Fields"
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:44
+#: ../../tribes/atlanteans/blackroot_farm/conf:45
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1822,17 +1822,17 @@ msgid ""
 "Planks are an important building material of the Atlanteans. They are produced out of logs by the sawmill. The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
 msgstr ""
 
-#: ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/quarry/conf:21
 msgid ""
 "quarrying stone"
 msgstr ""
 
-#: ../../tribes/atlanteans/quarry/conf:33
+#: ../../tribes/atlanteans/quarry/conf:34
 msgid ""
 "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/atlanteans/quarry/conf:34
+#: ../../tribes/atlanteans/quarry/conf:35
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work area."
 msgstr ""
@@ -2157,12 +2157,12 @@ msgid ""
 "Fells trees."
 msgstr ""
 
-#: ../../tribes/atlanteans/woodcutters_house/conf:28
+#: ../../tribes/atlanteans/woodcutters_house/conf:29
 msgid ""
 "Out of Trees"
 msgstr ""
 
-#: ../../tribes/atlanteans/woodcutters_house/conf:29
+#: ../../tribes/atlanteans/woodcutters_house/conf:30
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
 msgstr ""

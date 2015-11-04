@@ -77,7 +77,7 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 
 			m_cr = lgi->read_coroutine(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("CmdLuaCoroutine", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("lua function: %s", e.what());

@@ -56,7 +56,7 @@ void MapPortSpacesPacket::read
 				map.set_port_space(get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("port_spaces data: %s", e.what());

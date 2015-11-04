@@ -1,7 +1,0 @@
-help=_The bread paddle is the tool of the baker, each baker needs one. It is produced by the toolsmith.
-
-default_target_quantity=1
-
-[idle]
-pics=idle.png
-hotspot=6 6

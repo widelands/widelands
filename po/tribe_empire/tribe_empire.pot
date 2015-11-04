@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-03 18:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -493,35 +493,35 @@ msgid ""
 "Produces armor for the soldiers."
 msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:32
+#: ../../tribes/empire/armorsmithy/conf:33
 msgid ""
 "forging a helm"
 msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:34
+#: ../../tribes/empire/armorsmithy/conf:35
 msgid ""
 "forging an armor"
 msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:36
+#: ../../tribes/empire/armorsmithy/conf:37
 msgid ""
 "forging a chain armor"
 msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:38
+#: ../../tribes/empire/armorsmithy/conf:39
 msgid ""
 "forging a plate armor"
 msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:40
-#: ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/armorsmithy/conf:41
+#: ../../tribes/empire/bakery/conf:26
 #: ../../tribes/empire/charcoal_kiln/conf:25
 #: ../../tribes/empire/farm/conf:29
-#: ../../tribes/empire/foresters_house/conf:21
+#: ../../tribes/empire/foresters_house/conf:22
 #: ../../tribes/empire/inn/conf:30
-#: ../../tribes/empire/lumberjacks_house/conf:21
+#: ../../tribes/empire/lumberjacks_house/conf:22
 #: ../../tribes/empire/marblemine/conf:32
-#: ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/quarry/conf:26
 #: ../../tribes/empire/sawmill/conf:25
 #: ../../tribes/empire/shipyard/conf:30
 #: ../../tribes/empire/smelting_works/conf:31
@@ -529,7 +529,7 @@ msgstr ""
 #: ../../tribes/empire/toolsmithy/conf:62
 #: ../../tribes/empire/vineyard/conf:27
 #: ../../tribes/empire/weaponsmithy/conf:44
-#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/well/conf:23
 #: ../../tribes/empire/winery/conf:27
 msgid ""
 "working"
@@ -1839,12 +1839,12 @@ msgid ""
 "Fells trees."
 msgstr ""
 
-#: ../../tribes/empire/lumberjacks_house/conf:28
+#: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
 "Out of Trees"
 msgstr ""
 
-#: ../../tribes/empire/lumberjacks_house/conf:29
+#: ../../tribes/empire/lumberjacks_house/conf:30
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
 msgstr ""
@@ -1945,22 +1945,22 @@ msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4."
 msgstr ""
 
-#: ../../tribes/empire/quarry/conf:21
+#: ../../tribes/empire/quarry/conf:22
 msgid ""
 "quarrying stone"
 msgstr ""
 
-#: ../../tribes/empire/quarry/conf:23
+#: ../../tribes/empire/quarry/conf:24
 msgid ""
 "quarrying marble"
 msgstr ""
 
-#: ../../tribes/empire/quarry/conf:46
+#: ../../tribes/empire/quarry/conf:47
 msgid ""
 "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/empire/quarry/conf:47
+#: ../../tribes/empire/quarry/conf:48
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
@@ -2300,12 +2300,12 @@ msgid ""
 "Weaves cloth out of wool."
 msgstr ""
 
-#: ../../tribes/empire/well/conf:31
+#: ../../tribes/empire/well/conf:32
 msgid ""
 "Out of Water"
 msgstr ""
 
-#: ../../tribes/empire/well/conf:32
+#: ../../tribes/empire/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
 msgstr ""

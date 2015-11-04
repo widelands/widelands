@@ -1,0 +1,286 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Volkan Gezer <volkangezer@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../tribes/scripting/format_help.lua:150
+#: ../../tribes/scripting/format_help.lua:442
+msgid "Dependencies"
+msgstr "Bağımlılıklar"
+
+#: ../../tribes/scripting/format_help.lua:150
+msgid "Soldiers:"
+msgstr "Askerler:"
+
+#: ../../tribes/scripting/format_help.lua:181
+msgid "%1$s or %2$s"
+msgstr "%1$s veya %2$s"
+
+#: ../../tribes/scripting/format_help.lua:188
+msgid "%s and"
+msgstr "%s ve"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:219
+msgid "Equipment from"
+msgstr "Şuradan donanım"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:221
+msgid "and equipment from"
+msgstr "ve şuradan donanım"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:223
+msgid "or equipment from"
+msgstr "veya şuradan donanım"
+
+#: ../../tribes/scripting/format_help.lua:270
+msgid "General"
+msgstr "Genel"
+
+#: ../../tribes/scripting/format_help.lua:271
+msgid "Purpose:"
+msgstr "Amaç:"
+
+#: ../../tribes/scripting/format_help.lua:277
+#: ../../tribes/scripting/format_help.lua:504
+msgid "Note:"
+msgstr "Not:"
+
+#: ../../tribes/scripting/format_help.lua:281
+msgid "Work area radius:"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:285
+#: ../../tribes/scripting/format_help.lua:290
+msgid "Healing:"
+msgstr "İyileşme:"
+
+#: ../../tribes/scripting/format_help.lua:286
+#: ../../tribes/scripting/format_help.lua:291
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../tribes/scripting/format_help.lua:287
+#: ../../tribes/scripting/format_help.lua:293
+msgid "Conquer range:"
+msgstr "Fethetme menzili:"
+
+#: ../../tribes/scripting/format_help.lua:292
+#: ../../tribes/scripting/format_help.lua:314
+msgid "Capacity:"
+msgstr "Kapasite:"
+
+#: ../../tribes/scripting/format_help.lua:296
+msgid "Training:"
+msgstr "Eğitim:"
+
+#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#: numbers. ../../tribes/scripting/format_help.lua:299
+#: ../../tribes/scripting/format_help.lua:303
+#: ../../tribes/scripting/format_help.lua:307
+#: ../../tribes/scripting/format_help.lua:311
+msgid "Trains ‘%1$s’ from %2$s up to %3$s"
+msgstr "‘%1$s’ eğitimini %2$s ile %3$s seviyesine kadar yapar"
+
+#: ../../tribes/scripting/format_help.lua:300
+msgid "Attack"
+msgstr "Saldırı"
+
+#: ../../tribes/scripting/format_help.lua:304
+msgid "Defense"
+msgstr "Savunma"
+
+#: ../../tribes/scripting/format_help.lua:308
+msgid "Evade"
+msgstr "Kurtulma"
+
+#: ../../tribes/scripting/format_help.lua:312
+msgid "Health"
+msgstr "Sağlı"
+
+#: ../../tribes/scripting/format_help.lua:316
+msgid "Vision range:"
+msgstr "Görme menzili:"
+
+#: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
+msgid "Lore"
+msgstr "İlim"
+
+#: ../../tribes/scripting/format_help.lua:361
+msgid "%1$s from: %2$s"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:366
+msgid "Incoming:"
+msgstr "Gelen:"
+
+#: ../../tribes/scripting/format_help.lua:370
+msgid "Collects:"
+msgstr "Biriktirme:"
+
+#: TRANSLATORS This is a verb (The miner mines)
+#: ../../tribes/scripting/format_help.lua:382
+msgid "Mines:"
+msgstr "Madenler:"
+
+#: ../../tribes/scripting/format_help.lua:404
+msgid "Produces:"
+msgstr "Üretim:"
+
+#: ../../tribes/scripting/format_help.lua:439
+msgid "Outgoing:"
+msgstr "Giden:"
+
+#: ../../tribes/scripting/format_help.lua:441
+msgid "None"
+msgstr "Hiçbiri"
+
+#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../tribes/scripting/format_help.lua:459
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
+
+#: ../../tribes/scripting/format_help.lua:481
+msgid "Building"
+msgstr "Yapı"
+
+#: ../../tribes/scripting/format_help.lua:485
+msgid "Mine plot"
+msgstr "Maden haritası"
+
+#: ../../tribes/scripting/format_help.lua:485
+#: ../../tribes/scripting/format_help.lua:487
+#: ../../tribes/scripting/format_help.lua:490
+#: ../../tribes/scripting/format_help.lua:492
+#: ../../tribes/scripting/format_help.lua:494
+#: ../../tribes/scripting/format_help.lua:496
+msgid "Space required:"
+msgstr "Gerekli boşluk:"
+
+#: ../../tribes/scripting/format_help.lua:487
+msgid "Port plot"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:490
+msgid "Small plot"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:492
+msgid "Medium plot"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:494
+msgid "Big plot"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:496
+#: ../../tribes/scripting/format_help.lua:530
+#: ../../tribes/scripting/format_help.lua:575
+#: ../../tribes/scripting/format_help.lua:623
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: ../../tribes/scripting/format_help.lua:505
+msgid ""
+"This building can either be built directly or obtained by enhancing another "
+"building."
+msgstr "Bu bina doğrudan inşa edilebilir veya başka bir bina iyileştirilerek edinilebilir."
+
+#: ../../tribes/scripting/format_help.lua:511
+msgid "Direct build cost:"
+msgstr "Doğrudan inşa ücreti:"
+
+#: ../../tribes/scripting/format_help.lua:513
+msgid "Build cost:"
+msgstr "İnşa ücreti:"
+
+#: ../../tribes/scripting/format_help.lua:525
+msgid "Or enhanced from:"
+msgstr "Veya şuradan iyileştirilmiş:"
+
+#: ../../tribes/scripting/format_help.lua:527
+#: ../../tribes/scripting/format_help.lua:530
+msgid "Enhanced from:"
+msgstr "Şuradan iyileştirilmiş:"
+
+#: ../../tribes/scripting/format_help.lua:539
+msgid "Cumulative cost:"
+msgstr "Artan masraf:"
+
+#: ../../tribes/scripting/format_help.lua:580
+msgid "If built directly, dismantle yields:"
+msgstr "Doğrudan inşa edilmişse parçalama getirisi:"
+
+#: ../../tribes/scripting/format_help.lua:585
+msgid "If enhanced, dismantle yields:"
+msgstr "İyileştirilmişse parçalama getirisi:"
+
+#: ../../tribes/scripting/format_help.lua:587
+#: ../../tribes/scripting/format_help.lua:628
+msgid "Dismantle yields:"
+msgstr "Parçalama getirisi:"
+
+#: ../../tribes/scripting/format_help.lua:637
+msgid "Can be enhanced to:"
+msgstr "Şuraya iyileştirilebilir:"
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Crew required:"
+msgstr "Gerekli eleman:"
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Workers"
+msgstr "İşçiler"
+
+#: ../../tribes/scripting/format_help.lua:688
+msgid "%s or better"
+msgstr "%s veya daha iy"
+
+#: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
+msgid "Experience levels:"
+msgstr "Deneyim seviyeleri:"
+
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
+msgid "%s to %s (%s EP)"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
+msgid "Worker uses:"
+msgid_plural "Workers use:"
+msgstr[0] "İşçi şunu kullanıyor:"
+msgstr[1] "İşçiler şunu kullanıyor:"
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Performance:"
+msgstr "Performans:"
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Production"
+msgstr "Üretim"

@@ -603,7 +603,7 @@ void Carrier::Loader::load(FileRead & fr)
 			Carrier & carrier = get<Carrier>();
 			carrier.m_promised_pickup_to = fr.signed_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("loading carrier: %s", e.what());

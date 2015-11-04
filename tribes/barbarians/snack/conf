@@ -1,8 +1,0 @@
-help=_A bigger morsel than the ration to provide miners in deep mines. It is produced in an inn or a big inn out of fish/meat, pitta bread and beer.
-
-default_target_quantity=15
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=5 5

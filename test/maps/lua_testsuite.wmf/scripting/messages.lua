@@ -36,7 +36,7 @@ function messages_tests:test_heading()
    assert_equal("long heading", m.heading)
 end
 function messages_tests:test_icon_name()
-   local ware_description = game:get_ware_description("barbarians", "log")
+   local ware_description = game:get_ware_description("log")
    local m = player1:send_message("Hallo", "World!", {icon=ware_description.icon_name})
    assert_equal(ware_description.icon_name, m.icon_name)
 end
@@ -67,4 +67,3 @@ function messages_tests:test_inbox()
    assert_equal(m1, player1.inbox[1])
    assert_equal(m2, player1.inbox[2])
 end
-

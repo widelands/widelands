@@ -55,16 +55,16 @@ function click_on_panel(panel, g_T, g_sleeptime)
 
    sleep(sleeptime)
    if panel ~= nil then
-		if not panel.active then -- If this is a tab and already on, do nothing
-			mouse_smoothly_to_panel(panel, g_T)
-			sleep(sleeptime)
-			if panel.press then panel:press() sleep(250) end
-			if panel.click then panel:click() end
-			sleep(sleeptime)
-		end
+      if not panel.active then -- If this is a tab and already on, do nothing
+         mouse_smoothly_to_panel(panel, g_T)
+         sleep(sleeptime)
+         if panel.press then panel:press() sleep(250) end
+         if panel.click then panel:click() end
+         sleep(sleeptime)
+      end
    else
       print('Attempt to click on a non-existing panel.')
-	end
+   end
    blocker:lift_blocks()
 end
 

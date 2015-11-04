@@ -95,7 +95,7 @@ void Path::load(FileRead & fr, const Map & map)
 			while (steps--)
 				append(map, read_direction_8(&fr));
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Path", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player names and tribes: %s", e.what());

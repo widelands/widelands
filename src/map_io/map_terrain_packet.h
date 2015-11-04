@@ -22,7 +22,7 @@
 
 #include <string>
 
-class OneWorldLegacyLookupTable;
+class WorldLegacyLookupTable;
 class FileSystem;
 
 namespace Widelands {
@@ -31,7 +31,7 @@ class EditorGameBase;
 
 class MapTerrainPacket {
 public:
-	void read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable& lookup_table);
+	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable& lookup_table);
 	void write(FileSystem&, EditorGameBase&);
 };
 

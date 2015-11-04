@@ -24,4 +24,3 @@ game_status = {
   title = _"Status",
   body = rt(p(_"Player overview:"))
 }
-

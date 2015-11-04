@@ -32,7 +32,6 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
-#include "profile/profile.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 

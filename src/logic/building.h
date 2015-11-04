@@ -36,11 +36,11 @@
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "logic/workarea_info.h"
+#include "scripting/lua_table.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
 class InteractiveGameBase;
-class Profile;
 class Image;
 
 namespace Widelands {
@@ -59,19 +59,17 @@ class Building;
 /*
  * Common to all buildings!
  */
-struct BuildingDescr : public MapObjectDescr {
+class BuildingDescr : public MapObjectDescr {
+public:
 	using FormerBuildings = std::vector<BuildingIndex>;
 
-	BuildingDescr
-		(MapObjectType type, char const * _name, char const * _descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
+	BuildingDescr(const std::string& init_descname, MapObjectType type,
+					  const LuaTable& t, const EditorGameBase& egbase);
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
-	bool global() const {return m_global;}
 
 	/**
 	 * The build cost for direct construction
@@ -92,16 +90,19 @@ struct BuildingDescr : public MapObjectDescr {
 	 * The returned wares for a enhaced building
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
-	const Image* get_icon() const {return m_icon;}
-	std::string icon_name() const {return m_icon_fname;}
+
+	std::string directory() const {return directory_;}
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
-	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
 	const BuildingIndex & enhancement() const {return m_enhancement;}
+	// Returns the building from which this building can be enhanced or
+	// INVALID_INDEX if it cannot be built as an enhanced building.
+	const BuildingIndex& enhanced_from() const {return m_enhanced_from;}
+	void set_enhanced_from(const BuildingIndex& index) {m_enhanced_from = index;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -118,14 +119,10 @@ struct BuildingDescr : public MapObjectDescr {
 		 bool                   loading = false,
 		 FormerBuildings former_buildings = FormerBuildings())
 		const;
-	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
-	bool has_help_text() const {return m_helptext_script != "";}
-	std::string helptext_script() const {return m_helptext_script;}
 
-	const TribeDescr & tribe() const {return m_tribe;}
 	WorkareaInfo m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -136,23 +133,21 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	const TribeDescr & m_tribe;
+	const EditorGameBase& egbase_;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
 	Buildcost     m_return_dismantle; // Returned wares on dismantle
 	Buildcost     m_enhance_cost;     // cost for enhancing
 	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
-	const Image*     m_icon;       // if buildable: picture in the build dialog
-	std::string   m_icon_fname; // filename for this icon
+	std::string   directory_;         // The directory where the init files are located
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
 	BuildingIndex  m_enhancement;
+	BuildingIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
-	bool          m_global;            // whether this is a "global" building
-	std::string   m_helptext_script;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
@@ -161,7 +156,7 @@ private:
 
 
 class Building : public PlayerImmovable {
-	friend struct BuildingDescr;
+	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
 
 	MO_DESCR(BuildingDescr)
@@ -177,17 +172,13 @@ public:
 	using FormerBuildings = std::vector<BuildingIndex>;
 
 public:
-	Building(const BuildingDescr &);
+	Building(const BuildingDescr&);
 	virtual ~Building();
 
 	void load_finish(EditorGameBase &) override;
 
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
-
-	//Return the animation ID that is used for the building in UI items
-	//(the building UI, messages, etc..)
-	virtual uint32_t get_ui_anim() const {return descr().get_ui_anim();}
 
 	Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;

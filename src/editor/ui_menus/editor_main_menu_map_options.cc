@@ -28,7 +28,6 @@
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/multilinetextarea.h"

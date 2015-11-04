@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-03 18:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -343,18 +343,18 @@ msgstr ""
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
 #: ../../tribes/barbarians/farm/conf:27
 #: ../../tribes/barbarians/gamekeepers_hut/conf:20
-#: ../../tribes/barbarians/hardener/conf:23
+#: ../../tribes/barbarians/hardener/conf:24
 #: ../../tribes/barbarians/helmsmithy/conf:38
 #: ../../tribes/barbarians/inn/conf:32
-#: ../../tribes/barbarians/lime_kiln/conf:23
-#: ../../tribes/barbarians/lumberjacks_hut/conf:19
+#: ../../tribes/barbarians/lime_kiln/conf:26
+#: ../../tribes/barbarians/lumberjacks_hut/conf:20
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:21
-#: ../../tribes/barbarians/reed_yard/conf:25
+#: ../../tribes/barbarians/reed_yard/conf:26
 #: ../../tribes/barbarians/shipyard/conf:30
 #: ../../tribes/barbarians/smelting_works/conf:34
 #: ../../tribes/barbarians/warmill/conf:48
-#: ../../tribes/barbarians/well/conf:19
+#: ../../tribes/barbarians/well/conf:20
 msgid ""
 "working"
 msgstr ""
@@ -533,7 +533,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:34
-#: ../../tribes/barbarians/trainingcamp/conf:47
+#: ../../tribes/barbarians/trainingcamp/conf:48
 msgid ""
 "sleeping"
 msgstr ""
@@ -1705,7 +1705,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:46
-#: ../../tribes/barbarians/reed_yard/conf:41
+#: ../../tribes/barbarians/reed_yard/conf:42
 msgid ""
 "Out of Fields"
 msgstr ""
@@ -2033,12 +2033,12 @@ msgid ""
 "Fells trees."
 msgstr ""
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:26
+#: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "Out of Trees"
 msgstr ""
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:27
+#: ../../tribes/barbarians/lumberjacks_hut/conf:28
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a rangers’s hut."
 msgstr ""
@@ -2228,7 +2228,7 @@ msgid ""
 "Plants trees."
 msgstr ""
 
-#: ../../tribes/barbarians/rangers_hut/conf:18
+#: ../../tribes/barbarians/rangers_hut/conf:19
 msgid ""
 "planting trees"
 msgstr ""
@@ -2268,17 +2268,17 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced in quarries and granite mines."
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:21
+#: ../../tribes/barbarians/reed_yard/conf:22
 msgid ""
 "planting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:23
+#: ../../tribes/barbarians/reed_yard/conf:24
 msgid ""
 "harvesting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:42
+#: ../../tribes/barbarians/reed_yard/conf:43
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his seeds."
 msgstr ""
@@ -2418,42 +2418,42 @@ msgid ""
 "Trains the soldiers."
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:49
+#: ../../tribes/barbarians/trainingcamp/conf:50
 msgid ""
 "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:51
+#: ../../tribes/barbarians/trainingcamp/conf:52
 msgid ""
 "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:53
+#: ../../tribes/barbarians/trainingcamp/conf:54
 msgid ""
 "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:55
+#: ../../tribes/barbarians/trainingcamp/conf:56
 msgid ""
 "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:57
+#: ../../tribes/barbarians/trainingcamp/conf:58
 msgid ""
 "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:59
+#: ../../tribes/barbarians/trainingcamp/conf:60
 msgid ""
 "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:61
+#: ../../tribes/barbarians/trainingcamp/conf:62
 msgid ""
 "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:63
+#: ../../tribes/barbarians/trainingcamp/conf:64
 msgid ""
 "upgrading soldier health from level 2 to level 3"
 msgstr ""
@@ -2558,12 +2558,12 @@ msgid ""
 "Weaves cloth out of thatch reed."
 msgstr ""
 
-#: ../../tribes/barbarians/well/conf:28
+#: ../../tribes/barbarians/well/conf:29
 msgid ""
 "Out of Water"
 msgstr ""
 
-#: ../../tribes/barbarians/well/conf:29
+#: ../../tribes/barbarians/well/conf:30
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
 msgstr ""

@@ -18,7 +18,6 @@ wl_library(sound
     io_filesystem
     logic
     logic_widelands_geometry
-    profile
     random
     wui
     wui_mapview_pixelfunctions

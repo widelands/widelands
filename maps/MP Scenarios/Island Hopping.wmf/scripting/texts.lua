@@ -57,7 +57,3 @@ lost_control = rt(p(_
 ))
 had_control_for = rt(p(_[[%1$s has been King of the Hill for %2$s!]]))
 player_won = rt(p(_[[%s has won the game. Congratulations!]]))
-
-
-
-

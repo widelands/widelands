@@ -62,10 +62,11 @@ inline Duration endless() {return 0xffffffff;}
 
 using Serial = uint32_t; /// Serial number for MapObject.
 
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 using WareIndex = uint8_t;
 using BuildingIndex = uint8_t;
 using Direction = uint8_t;
+constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr WareIndex kInvalidWare = INVALID_INDEX - 1;
 
 struct SoldierStrength {
 	uint8_t hp, attack, defense, evade;

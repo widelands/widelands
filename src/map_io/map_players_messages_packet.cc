@@ -142,7 +142,7 @@ void MapPlayersMessagesPacket::read
 				}
 				prof.check_used();
 			} else {
-				throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+				throw UnhandledVersionError("MapPlayersMessagesPacket", packet_version, kCurrentPacketVersion);
 			}
 		} catch (const WException & e) {
 			throw GameDataError
