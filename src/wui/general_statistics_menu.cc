@@ -31,7 +31,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warelist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

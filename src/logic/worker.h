@@ -26,6 +26,7 @@
 #include "economy/ware_instance.h"
 #include "logic/productionsite.h"
 #include "logic/worker_descr.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 class Building;
@@ -131,7 +132,7 @@ public:
 	WareIndex level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return descr().get_needed_experience() != -1;}
+	bool needs_experience() const {return descr().get_needed_experience() != INVALID_INDEX;}
 
 	// debug
 	void log_general_info(const EditorGameBase &) override;
@@ -277,7 +278,8 @@ public:
 		(EditorGameBase &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &, const TribesLegacyLookupTable& lookup_table,
+		 uint8_t packet_version);
 };
 
 }

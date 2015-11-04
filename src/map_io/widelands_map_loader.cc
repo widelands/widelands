@@ -28,7 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_allowed_building_types_packet.h"
 #include "map_io/map_allowed_worker_types_packet.h"
 #include "map_io/map_bob_packet.h"
@@ -55,7 +55,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -144,16 +145,17 @@ int32_t WidelandsMapLoader::load_map_complete
 	{MapHeightsPacket        p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
-		(create_one_world_legacy_lookup_table(m_old_world_name));
+	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table
+		(create_world_legacy_lookup_table(m_old_world_name));
+	std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
-	{MapTerrainPacket p; p.read(*m_fs, egbase, *lookup_table);}
+	{MapTerrainPacket p; p.read(*m_fs, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.read(*m_fs, egbase, *m_mol, *lookup_table);
+	mapobjects.read(*m_fs, egbase, *m_mol, *world_lookup_table, *tribe_lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
@@ -170,13 +172,13 @@ int32_t WidelandsMapLoader::load_map_complete
 		log("Reading (legacy) Bob Data ... ");
 		{
 			MapBobPacket p;
-			p.read(*m_fs, egbase, *m_mol, *lookup_table);
+			p.read(*m_fs, egbase, *m_mol, *world_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Resources Data ... ");
-	{MapResourcesPacket      p; p.read(*m_fs, egbase, *lookup_table);}
+	{MapResourcesPacket      p; p.read(*m_fs, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT

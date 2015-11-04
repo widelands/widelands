@@ -35,7 +35,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 
 namespace Widelands {
@@ -45,8 +45,8 @@ Economy::Economy(Player & player) :
 	m_request_timerid(0)
 {
 	const TribeDescr & tribe = player.tribe();
-	WareIndex const nr_wares   = tribe.get_nrwares();
-	WareIndex const nr_workers = tribe.get_nrworkers();
+	WareIndex const nr_wares   = player.egbase().tribes().nrwares();
+	WareIndex const nr_workers = player.egbase().tribes().nrworkers();
 	m_wares.set_nrwares(nr_wares);
 	m_workers.set_nrwares(nr_workers);
 
@@ -55,8 +55,12 @@ Economy::Economy(Player & player) :
 	m_ware_target_quantities   = new TargetQuantity[nr_wares];
 	for (WareIndex i = 0; i < nr_wares; ++i) {
 		TargetQuantity tq;
-		tq.permanent =
-			tribe.get_ware_descr(i)->default_target_quantity();
+		if (tribe.has_ware(i)) {
+			tq.permanent =
+				tribe.get_ware_descr(i)->default_target_quantity(tribe.name());
+		} else {
+			tq.permanent = 0;
+		}
 		tq.last_modified = 0;
 		m_ware_target_quantities[i] = tq;
 	}
@@ -381,7 +385,7 @@ void Economy::add_workers(WareIndex const id, uint32_t const count)
 */
 void Economy::remove_wares(WareIndex const id, uint32_t const count)
 {
-	assert(id < m_owner.tribe().get_nrwares());
+	assert(m_owner.egbase().tribes().ware_exists(id));
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
 	m_wares.remove(id, count);
@@ -559,19 +563,20 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (WareIndex i = m_owner.tribe().get_nrwares(); i;) {
-		--i;
-		TargetQuantity other_tq = e.m_ware_target_quantities[i];
-		TargetQuantity & this_tq = m_ware_target_quantities[i];
-		if (this_tq.last_modified < other_tq.last_modified)
+	for (const WareIndex& ware_index : m_owner.tribe().wares()) {
+		TargetQuantity other_tq = e.m_ware_target_quantities[ware_index];
+		TargetQuantity& this_tq = m_ware_target_quantities[ware_index];
+		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
+		}
 	}
-	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
-		--i;
-		TargetQuantity other_tq = e.m_worker_target_quantities[i];
-		TargetQuantity & this_tq = m_worker_target_quantities[i];
-		if (this_tq.last_modified < other_tq.last_modified)
+
+	for (const WareIndex& worker_index : m_owner.tribe().workers()) {
+		TargetQuantity other_tq = e.m_worker_target_quantities[worker_index];
+		TargetQuantity& this_tq = m_worker_target_quantities[worker_index];
+		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
+		}
 	}
 
 	//  If the options window for e is open, but not the one for *this, the user
@@ -612,13 +617,12 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (WareIndex i = m_owner.tribe().get_nrwares  (); i;) {
-		--i;
-		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
+	for (const WareIndex& ware_index : m_owner.tribe().wares()) {
+		e.m_ware_target_quantities[ware_index] = m_ware_target_quantities[ware_index];
 	}
-	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
-		--i;
-		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
+
+	for (const WareIndex& worker_index : m_owner.tribe().workers()) {
+		e.m_worker_target_quantities[worker_index] = m_worker_target_quantities[worker_index];
 	}
 
 	for (const OPtr<Flag> temp_flag : flags) {
@@ -992,17 +996,11 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	const TribeDescr & tribe = owner().tribe();
-	for
-		(WareIndex index = 0;
-		 index < tribe.get_nrworkers(); ++index)
-	{
-		if (!owner().is_worker_type_allowed(index))
-			continue;
-		if (!tribe.get_worker_descr(index)->is_buildable())
-			continue;
-
-		_create_requested_worker(game, index);
+	for (const WareIndex& worker_index : owner().tribe().workers()) {
+		if (owner().is_worker_type_allowed(worker_index) &&
+			 owner().tribe().get_worker_descr(worker_index)->is_buildable()) {
+			_create_requested_worker(game, worker_index);
+		}
 	}
 }
 

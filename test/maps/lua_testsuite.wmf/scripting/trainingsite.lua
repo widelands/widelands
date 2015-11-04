@@ -15,7 +15,7 @@ trainingsite_tests = lunit.TestCase("MilitarySite Tests")
 function trainingsite_tests:setup()
    self.f1 = map:get_field(10,10)
 
-   self.camp = player1:place_building("trainingcamp", self.f1)
+   self.camp = player1:place_building("barbarians_trainingcamp", self.f1)
 end
 function trainingsite_tests:teardown()
    pcall(function()
@@ -24,7 +24,7 @@ function trainingsite_tests:teardown()
 end
 
 function trainingsite_tests:test_name()
-   assert_equal("trainingcamp", self.camp.descr.name)
+   assert_equal("barbarians_trainingcamp", self.camp.descr.name)
 end
 function trainingsite_tests:test_type()
    assert_equal("trainingsite", self.camp.descr.type_name)
@@ -38,25 +38,25 @@ function trainingsite_tests:test_no_workers_initially()
 end
 function trainingsite_tests:test_valid_workers()
    assert_equal(1, _cnt(self.camp.valid_workers))
-   assert_equal(1, self.camp.valid_workers.trainer)
+   assert_equal(1, self.camp.valid_workers.barbarians_trainer)
 end
 function trainingsite_tests:test_set_workers()
-   self.camp:set_workers("trainer", 1)
+   self.camp:set_workers("barbarians_trainer", 1)
    assert_equal(1, _cnt(self.camp:get_workers("all")))
-   assert_equal(1, self.camp:get_workers("trainer"))
-   self.camp:set_workers{trainer=1}
+   assert_equal(1, self.camp:get_workers("barbarians_trainer"))
+   self.camp:set_workers{barbarians_trainer=1}
    assert_equal(1, _cnt(self.camp:get_workers("all")))
-   assert_equal(1, self.camp:get_workers("trainer"))
-   local rv = self.camp:get_workers{"trainer", "carrier"}
-   assert_equal(1, rv.trainer)
-   assert_equal(0, rv.carrier)
-   assert_equal(nil, rv.blacksmith)
+   assert_equal(1, self.camp:get_workers("barbarians_trainer"))
+   local rv = self.camp:get_workers{"barbarians_trainer", "barbarians_carrier"}
+   assert_equal(1, rv.barbarians_trainer)
+   assert_equal(0, rv.barbarians_carrier)
+   assert_equal(nil, rv.barbarians_blacksmith)
 end
 function trainingsite_tests:test_get_workers_all()
-   self.camp:set_workers{trainer=1}
+   self.camp:set_workers{barbarians_trainer=1}
    local rv = self.camp:get_workers("all")
-   assert_equal(1, rv.trainer)
-   assert_equal(nil, rv["master-blacksmith"])
+   assert_equal(1, rv.barbarians_trainer)
+   assert_equal(nil, rv.barbarians_blacksmith_master)
 end
 
 function trainingsite_tests:test_illegal_name()
@@ -66,12 +66,12 @@ function trainingsite_tests:test_illegal_name()
 end
 function trainingsite_tests:test_illegal_worker()
   assert_error("illegal worker", function()
-      self.camp:set_workers("lumberjack", 1)
+      self.camp:set_workers("barbarians_lumberjack", 1)
   end)
 end
 function trainingsite_tests:test_no_space()
   assert_error("no_space", function()
-      self.camp:set_workers{trainer=2}
+      self.camp:set_workers{barbarians_trainer=2}
   end)
 end
 
@@ -84,17 +84,17 @@ function trainingsite_tests:test_houses_empty_at_creation()
    end
 end
 function trainingsite_tests:test_valid_wares()
-   assert_equal(10, self.camp.valid_wares.pittabread)
+   assert_equal(10, self.camp.valid_wares.barbarians_bread)
    assert_equal(6, self.camp.valid_wares.fish)
    assert_equal(6, self.camp.valid_wares.meat)
-   assert_equal(2, self.camp.valid_wares.sharpax)
-   assert_equal(2, self.camp.valid_wares.broadax)
-   assert_equal(2, self.camp.valid_wares.bronzeax)
-   assert_equal(2, self.camp.valid_wares.battleax)
-   assert_equal(2, self.camp.valid_wares.warriorsax)
-   assert_equal(2, self.camp.valid_wares.helm)
-   assert_equal(2, self.camp.valid_wares.mask)
-   assert_equal(2, self.camp.valid_wares.warhelm)
+   assert_equal(2, self.camp.valid_wares.ax_sharp)
+   assert_equal(2, self.camp.valid_wares.ax_broad)
+   assert_equal(2, self.camp.valid_wares.ax_bronze)
+   assert_equal(2, self.camp.valid_wares.ax_battle)
+   assert_equal(2, self.camp.valid_wares.ax_warriors)
+   assert_equal(2, self.camp.valid_wares.helmet)
+   assert_equal(2, self.camp.valid_wares.helmet_mask)
+   assert_equal(2, self.camp.valid_wares.helmet_warhelm)
    assert_equal(nil, self.camp.valid_wares.water)
 end
 function trainingsite_tests:test_valid_wares_correct_length()
@@ -142,13 +142,13 @@ function trainingsite_tests:test_get_wares_array_arg()
    rv = self.camp:get_wares{"fish", "meat"}
    assert_equal(3, rv.fish)
    assert_equal(2, rv.meat)
-   assert_equal(nil, rv.helm)
+   assert_equal(nil, rv.helmet)
 end
 function trainingsite_tests:test_get_wares_all_arg()
    self.camp:set_wares{fish=3, meat=2}
    rv = self.camp:get_wares("all")
-   assert_equal(0, rv.pittabread)
-   assert_equal(0, rv.helm)
+   assert_equal(0, rv.barbarians_bread)
+   assert_equal(0, rv.helmet)
    assert_equal(2, rv.meat)
    assert_equal(3, rv.fish)
    assert_equal(nil, rv.log)
@@ -158,7 +158,7 @@ function trainingsite_tests:test_get_wares_string_arg()
    assert_equal(2, self.camp:get_wares("meat"))
    assert_equal(3, self.camp:get_wares("fish"))
    assert_equal(0, self.camp:get_wares("beer"))
-   assert_equal(0, self.camp:get_wares("strongbeer"))
+   assert_equal(0, self.camp:get_wares("beer_strong"))
    assert_equal(0, self.camp:get_wares("log"))
 end
 function trainingsite_tests:test_get_wares_non_storable_wares()
@@ -167,7 +167,7 @@ function trainingsite_tests:test_get_wares_non_storable_wares()
    assert_equal(0, rv.log)
    assert_equal(2, rv.meat)
    assert_equal(3, rv.fish)
-   assert_equal(nil, rv.strongbeer)
+   assert_equal(nil, rv.beer_strong)
 end
 function trainingsite_tests:test_get_wares_non_existant_name()
    assert_error("non existent ware", function()

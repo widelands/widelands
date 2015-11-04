@@ -1,8 +1,0 @@
-help=_Marble columns represent the high culture of the Empire, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house.
-
-default_target_quantity=10
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=3 9

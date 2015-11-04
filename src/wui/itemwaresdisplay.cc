@@ -19,10 +19,9 @@
 
 #include "wui/itemwaresdisplay.h"
 
-#include <logic/player.h>
-#include <logic/tribe.h>
-
 #include "graphic/rendertarget.h"
+#include "logic/player.h"
+#include "logic/tribes/tribe_descr.h"
 
 namespace {
 

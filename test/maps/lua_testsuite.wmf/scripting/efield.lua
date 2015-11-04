@@ -12,12 +12,12 @@ function field_resources_tests:test_default_resource_in_editor()
 end
 
 function field_resources_tests:test_initial_resource_in_editor()
-	-- making sure that (set_)	resource_amount sets also starting resource in the editor
-	assert_equal("coal", self.f.resource)
-	self.f.resource_amount=10
-	assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
-	assert_equal(10, self.f.initial_resource_amount)
-	self.f.resource_amount=20
-	assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
-	assert_equal(20, self.f.initial_resource_amount)
+   -- making sure that (set_) resource_amount sets also starting resource in the editor
+   assert_equal("coal", self.f.resource)
+   self.f.resource_amount=10
+   assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
+   assert_equal(10, self.f.initial_resource_amount)
+   self.f.resource_amount=20
+   assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
+   assert_equal(20, self.f.initial_resource_amount)
 end

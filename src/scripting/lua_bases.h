@@ -59,6 +59,7 @@ public:
 	 * Lua methods
 	 */
 	int get_building_description(lua_State * L);
+	int get_tribe_description(lua_State * L);
 	int get_ware_description(lua_State * L);
 	int get_worker_description(lua_State * L);
 
@@ -102,7 +103,7 @@ public:
 	int place_flag(lua_State * L);
 	int place_road(lua_State * L);
 	int place_building(lua_State * L);
-	int place_bob(lua_State* L);
+	int place_ship(lua_State* L);
 	int conquer(lua_State * L);
 	int get_workers(lua_State* L);
 	int get_wares(lua_State* L);

@@ -200,6 +200,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
 	 const Widelands::BuildingDescr& building_description,
+	 const Widelands::TribeDescr& tribe,
 	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:
@@ -207,11 +208,13 @@ LuaTextHelpWindow::LuaTextHelpWindow
 			(boost::format(_("Help: %s")) % building_description.descname()).str()),
 	textarea(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
+	assert(tribe.has_building(tribe.building_index(building_description.name())));
 	try {
 		std::unique_ptr<LuaTable> t(
-		   lua->run_script(building_description.helptext_script()));
+		   lua->run_script("tribes/scripting/help/building_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
-		cr->push_arg(&building_description);
+		cr->push_arg(tribe.name());
+		cr->push_arg(building_description.name());
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea->set_text(help_text);

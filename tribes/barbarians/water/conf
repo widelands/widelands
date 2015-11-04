@@ -1,8 +1,0 @@
-help=_Water is the essence of life! It is used in the bakery, the micro brewery and the brewery. The lime kiln and the cattle farm also need to be supplied with water.
-
-default_target_quantity=25 # currently not used
-preciousness=8
-
-[idle]
-pics=water_idle.png
-hotspot=4 8

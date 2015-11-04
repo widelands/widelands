@@ -19,4 +19,3 @@ function scroll_smoothly_nordwards_to(f, g_T)
 
    return scroll_smoothly_to_pos(x - mv.width / 2, y - mv.height / 2, g_T)
 end
-

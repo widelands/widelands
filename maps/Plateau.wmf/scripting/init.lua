@@ -53,7 +53,7 @@ function mission_thread()
    o = add_campaign_objective(obj_capture_ancient_castle)
 
    -- Wait till we conquered the castle
-   while #p1:get_buildings"castle.atlanteans" < 1 do sleep(2345) end
+   while #p1:get_buildings"atlanteans_castle" < 1 do sleep(2345) end
    o.done = true
 
    scroll_smoothly_to(castle)

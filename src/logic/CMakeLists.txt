@@ -144,7 +144,6 @@ wl_library(logic
     militarysite.h
     nodecaps.h
     objective.h
-    parse_map_object_types.h
     partially_finished_building.cc
     partially_finished_building.h
     path.cc
@@ -184,9 +183,12 @@ wl_library(logic
     training_attribute.h
     trainingsite.cc
     trainingsite.h
-    tribe.cc
-    tribe.h
-    tribe_basic_info.h
+    tribes/tribe_basic_info.h
+    tribes/tribe_basic_info.cc
+    tribes/tribe_descr.cc
+    tribes/tribe_descr.h
+    tribes/tribes.h
+    tribes/tribes.cc
     walkingdir.cc
     walkingdir.h
     ware_descr.cc
@@ -250,7 +252,6 @@ wl_library(logic
     map_io_map_loader
     network
     notifications
-    profile
     random
     scripting_coroutine
     scripting_logic

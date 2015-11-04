@@ -1,0 +1,295 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Anton Khabarov <2233009@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Yuriy Sokolov <lention@mail.ru>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-09-21 19:04+0000\n"
+"PO-Revision-Date: 2015-09-25 03:53+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: ../../tribes/scripting/format_help.lua:150
+#: ../../tribes/scripting/format_help.lua:442
+msgid "Dependencies"
+msgstr "зависимости"
+
+#: ../../tribes/scripting/format_help.lua:150
+msgid "Soldiers:"
+msgstr "солдаты:"
+
+#: ../../tribes/scripting/format_help.lua:181
+msgid "%1$s or %2$s"
+msgstr "%1$s или %2$s"
+
+#: ../../tribes/scripting/format_help.lua:188
+msgid "%s and"
+msgstr "%s и"
+
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:219
+msgid "Equipment from"
+msgstr "снабжение из"
+
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:221
+msgid "and equipment from"
+msgstr "и снабжение из"
+
+#. TRANSLATORS: This is a headline, you can see it in the building help for
+#. trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:223
+msgid "or equipment from"
+msgstr "или снабжение из"
+
+#: ../../tribes/scripting/format_help.lua:270
+msgid "General"
+msgstr "главное"
+
+#: ../../tribes/scripting/format_help.lua:271
+msgid "Purpose:"
+msgstr "цель:"
+
+#: ../../tribes/scripting/format_help.lua:277
+#: ../../tribes/scripting/format_help.lua:505
+msgid "Note:"
+msgstr "примечание:"
+
+#: ../../tribes/scripting/format_help.lua:281
+msgid "Work area radius:"
+msgstr "рабочая область:"
+
+#: ../../tribes/scripting/format_help.lua:285
+#: ../../tribes/scripting/format_help.lua:290
+msgid "Healing:"
+msgstr "лечение:"
+
+#: ../../tribes/scripting/format_help.lua:286
+#: ../../tribes/scripting/format_help.lua:291
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] "Размещенные здесь солдаты лечатся на %s очко здоровья за секунду"
+msgstr[1] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+msgstr[2] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+msgstr[3] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+
+#: ../../tribes/scripting/format_help.lua:287
+#: ../../tribes/scripting/format_help.lua:293
+msgid "Conquer range:"
+msgstr "пределы завоевания:"
+
+#: ../../tribes/scripting/format_help.lua:292
+#: ../../tribes/scripting/format_help.lua:314
+msgid "Capacity:"
+msgstr "объём"
+
+#: ../../tribes/scripting/format_help.lua:296
+msgid "Training:"
+msgstr "Тренировка"
+
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/format_help.lua:299
+#: ../../tribes/scripting/format_help.lua:303
+#: ../../tribes/scripting/format_help.lua:307
+#: ../../tribes/scripting/format_help.lua:311
+msgid "Trains ‘%1$s’ from %2$s up to %3$s"
+msgstr "Повышает ‘%1$s’ с %2$s до %3$s"
+
+#: ../../tribes/scripting/format_help.lua:300
+msgid "Attack"
+msgstr "сила"
+
+#: ../../tribes/scripting/format_help.lua:304
+msgid "Defense"
+msgstr "защита"
+
+#: ../../tribes/scripting/format_help.lua:308
+msgid "Evade"
+msgstr "ловкость"
+
+#: ../../tribes/scripting/format_help.lua:312
+msgid "Health"
+msgstr "здоровье"
+
+#: ../../tribes/scripting/format_help.lua:316
+msgid "Vision range:"
+msgstr "пределы видимости:"
+
+#: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
+msgid "Lore"
+msgstr "предания"
+
+#: ../../tribes/scripting/format_help.lua:361
+msgid "%1$s from: %2$s"
+msgstr "%1$s из: %2$s"
+
+#: ../../tribes/scripting/format_help.lua:366
+msgid "Incoming:"
+msgstr "получено:"
+
+#: ../../tribes/scripting/format_help.lua:370
+msgid "Collects:"
+msgstr "собрано:"
+
+#. TRANSLATORS: This is a verb (The miner mines)
+#: ../../tribes/scripting/format_help.lua:382
+msgid "Mines:"
+msgstr "шахты:"
+
+#: ../../tribes/scripting/format_help.lua:404
+msgid "Produces:"
+msgstr "производено:"
+
+#: ../../tribes/scripting/format_help.lua:439
+msgid "Outgoing:"
+msgstr "отправлено:"
+
+#: ../../tribes/scripting/format_help.lua:441
+msgid "None"
+msgstr "отсутствует"
+
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../tribes/scripting/format_help.lua:459
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
+
+#. TRANSLATORS: This is the header for the "Building" section in the building
+#. help, containing size info, buildcost etc.
+#: ../../tribes/scripting/format_help.lua:482
+msgid "Building"
+msgstr "строение"
+
+#: ../../tribes/scripting/format_help.lua:486
+msgid "Mine plot"
+msgstr "область шахт"
+
+#: ../../tribes/scripting/format_help.lua:486
+#: ../../tribes/scripting/format_help.lua:488
+#: ../../tribes/scripting/format_help.lua:491
+#: ../../tribes/scripting/format_help.lua:493
+#: ../../tribes/scripting/format_help.lua:495
+#: ../../tribes/scripting/format_help.lua:497
+msgid "Space required:"
+msgstr "необходимо место:"
+
+#: ../../tribes/scripting/format_help.lua:488
+msgid "Port plot"
+msgstr "портовая область"
+
+#: ../../tribes/scripting/format_help.lua:491
+msgid "Small plot"
+msgstr "малая область"
+
+#: ../../tribes/scripting/format_help.lua:493
+msgid "Medium plot"
+msgstr "средняя область"
+
+#: ../../tribes/scripting/format_help.lua:495
+msgid "Big plot"
+msgstr "большая область"
+
+#: ../../tribes/scripting/format_help.lua:497
+#: ../../tribes/scripting/format_help.lua:531
+#: ../../tribes/scripting/format_help.lua:576
+#: ../../tribes/scripting/format_help.lua:624
+msgid "Unknown"
+msgstr "неизвестно"
+
+#: ../../tribes/scripting/format_help.lua:506
+msgid ""
+"This building can either be built directly or obtained by enhancing another "
+"building."
+msgstr "Это здание можно построить сразу, или получить путем улучшения другого здания."
+
+#: ../../tribes/scripting/format_help.lua:512
+msgid "Direct build cost:"
+msgstr "затраты на строительство \"с нуля\":"
+
+#: ../../tribes/scripting/format_help.lua:514
+msgid "Build cost:"
+msgstr "стоимость строительства"
+
+#: ../../tribes/scripting/format_help.lua:526
+msgid "Or enhanced from:"
+msgstr "или перестроить из:"
+
+#: ../../tribes/scripting/format_help.lua:528
+#: ../../tribes/scripting/format_help.lua:531
+msgid "Enhanced from:"
+msgstr "перестроить из:"
+
+#: ../../tribes/scripting/format_help.lua:540
+msgid "Cumulative cost:"
+msgstr "общая стоимость:"
+
+#: ../../tribes/scripting/format_help.lua:581
+msgid "If built directly, dismantle yields:"
+msgstr "если строить с нуля, демонтаж даст:"
+
+#: ../../tribes/scripting/format_help.lua:586
+msgid "If enhanced, dismantle yields:"
+msgstr "если улучшать, демонтаж даст:"
+
+#: ../../tribes/scripting/format_help.lua:588
+#: ../../tribes/scripting/format_help.lua:629
+msgid "Dismantle yields:"
+msgstr "демонтаж даст:"
+
+#: ../../tribes/scripting/format_help.lua:638
+msgid "Can be enhanced to:"
+msgstr "можно улучшить в:"
+
+#: ../../tribes/scripting/format_help.lua:666
+msgid "Crew required:"
+msgstr "нужны работники:"
+
+#: ../../tribes/scripting/format_help.lua:666
+msgid "Workers"
+msgstr "работники"
+
+#: ../../tribes/scripting/format_help.lua:689
+msgid "%s or better"
+msgstr "%s или выше"
+
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/worker_help.lua:67
+msgid "Experience levels:"
+msgstr "уровни опыта:"
+
+#: ../../tribes/scripting/format_help.lua:703
+#: ../../tribes/scripting/format_help.lua:712
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
+msgid "%s to %s (%s EP)"
+msgstr "%s к %s (%s ЛО)"
+
+#: ../../tribes/scripting/format_help.lua:737
+#: ../../tribes/scripting/worker_help.lua:99
+msgid "Worker uses:"
+msgid_plural "Workers use:"
+msgstr[0] "рабочий использует:"
+msgstr[1] "рабочие используют:"
+msgstr[2] "рабочие используют:"
+msgstr[3] "рабочие используют:"
+
+#: ../../tribes/scripting/format_help.lua:755
+msgid "Performance:"
+msgstr "производительность:"
+
+#: ../../tribes/scripting/format_help.lua:755
+msgid "Production"
+msgstr "производство"

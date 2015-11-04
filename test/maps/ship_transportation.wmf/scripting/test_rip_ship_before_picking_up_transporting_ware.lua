@@ -2,15 +2,15 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
-   create_second_port()
+   create_southern_port()
+   create_northern_port()
 
    start_building_farm()
-   port1():set_wares{
+   southern_port():set_wares{
       blackwood = 1,
    }
-   port2():set_workers{
-      builder = 1,
+   northern_port():set_workers{
+      barbarians_builder = 1,
    }
 
    sleep(12000)
@@ -23,9 +23,9 @@ run(function()
 
    assert_equal(1, p1:get_wares("blackwood"))
    -- It is not in the port (still in the dock)
-   assert_equal(0, port1():get_wares("blackwood"))
+   assert_equal(0, southern_port():get_wares("blackwood"))
 
-   local new_ship = p1:place_bob("ship", map:get_field(10, 10))
+   local new_ship = p1:place_ship(map:get_field(10, 10))
    sleep(1000)
 
    assert_equal(1, p1:get_wares("blackwood"))

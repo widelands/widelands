@@ -25,7 +25,8 @@
 #include "logic/instances.h"
 
 class FileSystem;
-class OneWorldLegacyLookupTable;
+class WorldLegacyLookupTable;
+class TribesLegacyLookupTable;
 
 namespace Widelands {
 
@@ -56,7 +57,8 @@ struct MapObjectPacket {
 
 	void read
 		(FileSystem &, EditorGameBase &, MapObjectLoader &,
-		 const OneWorldLegacyLookupTable& lookup_table);
+		 const WorldLegacyLookupTable& world_lookup_table,
+		 const TribesLegacyLookupTable& tribe_lookup_table);
 
 	void load_finish();
 

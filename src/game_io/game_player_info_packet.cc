@@ -25,12 +25,12 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 17;
+constexpr uint16_t kCurrentPacketVersion = 18;
 
 void GamePlayerInfoPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *) {
@@ -42,7 +42,6 @@ void GamePlayerInfoPacket::read
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
-
 				if (fr.unsigned_8()) {
 					bool const see_all = fr.unsigned_8();
 
@@ -54,11 +53,13 @@ void GamePlayerInfoPacket::read
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const * const tribe_name = fr.c_string();
-					std::string const name = fr.c_string();
-					game.add_player(plnum, 0, tribe_name, name, team);
 
+					std::string const name = fr.c_string();
+
+					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
 					player.set_see_all(see_all);
+
 					player.set_ai(fr.c_string());
 					player.read_statistics(fr);
 

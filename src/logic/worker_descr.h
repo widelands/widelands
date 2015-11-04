@@ -20,10 +20,13 @@
 #ifndef WL_LOGIC_WORKER_DESCR_H
 #define WL_LOGIC_WORKER_DESCR_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
+#include "scripting/lua_table.h"
 
 class Image;
 
@@ -44,33 +47,27 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr
-		(MapObjectType type, char const * const name, char const * const descname,
-		 const std::string & directory, Profile &,  Section & global_s,
-		 const TribeDescr &);
+	WorkerDescr(const std::string& init_descname,
+					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
+	WorkerDescr(const std::string& init_descname,
+					const LuaTable& t, const EditorGameBase& egbase);
 	~WorkerDescr() override;
 
 	Bob & create_object() const override;
 
-	virtual void load_graphics();
-
-	bool is_buildable() const {return m_buildable;}
+	bool is_buildable() const {return buildable_;}
 	const Buildcost & buildcost() const {
 		assert(is_buildable());
-		return m_buildcost;
+		return buildcost_;
 	}
 
-	/// The tribe in which this worker is defined.
-	const TribeDescr & tribe() const;
-
-	std::string helptext() const {return m_helptext;}
-	Point get_ware_hotspot() const {return m_ware_hotspot;}
+	Point get_ware_hotspot() const {return ware_hotspot_;}
 
 	/// How much of the worker type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
 	/// not be configurable.
-	uint32_t default_target_quantity() const {return m_default_target_quantity;}
+	uint32_t default_target_quantity() const {return default_target_quantity_;}
 
 	bool has_demand_check() const {
 		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
@@ -80,21 +77,21 @@ public:
 	/// parsing. If there was no default target quantity set in the ware type's
 	/// configuration, set the default value 1.
 	void set_has_demand_check() {
-		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
-			m_default_target_quantity = 1;
+		if (default_target_quantity_ == std::numeric_limits<uint32_t>::max())
+			default_target_quantity_ = 1;
 	}
 
-	const Image* icon() const {return m_icon;}
-	std::string icon_name() const {return m_icon_fname;}
-	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
+	std::string directory() const {return directory_;}
+
+	const DirAnimations & get_walk_anims() const {return walk_anims_;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
-		return carries_ware ? m_walkload_anims : m_walk_anims;
+		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
 	WorkerProgram const * get_program(const std::string &) const;
 
 	// For leveling
-	int32_t get_needed_experience() const {return m_needed_experience;}
-	WareIndex becomes() const {return m_becomes;}
+	int32_t get_needed_experience() const {return needed_experience_;}
+	WareIndex becomes() const {return becomes_;}
 	WareIndex worker_index() const;
 	bool can_act_as(WareIndex) const;
 
@@ -103,33 +100,31 @@ public:
 
 	uint32_t movecaps() const override;
 
-	using Programs = std::map<std::string, WorkerProgram *>;
-	const Programs & programs() const {return m_programs;}
+	using Programs = std::map<std::string, std::unique_ptr<WorkerProgram>>;
+	const Programs & programs() const {return programs_;}
 
 protected:
-
-	std::string       m_helptext;   ///< Short (tooltip-like) help text
-	Point             m_ware_hotspot;
-	uint32_t          m_default_target_quantity;
-	std::string const m_icon_fname; ///< Filename of worker's icon
-	const Image     * m_icon;       ///< Pointer to icon into picture stack
-	DirAnimations     m_walk_anims;
-	DirAnimations     m_walkload_anims;
-	bool              m_buildable;
-	Buildcost         m_buildcost;
+	Point             ware_hotspot_;
+	uint32_t          default_target_quantity_;
+	std::string       directory_;  /// The directory where the init files are located
+	DirAnimations     walk_anims_;
+	DirAnimations     walkload_anims_;
+	bool              buildable_;
+	Buildcost         buildcost_;
 
 	/**
 	 * Number of experience points required for leveling up,
-	 * or -1 if the worker cannot level up.
+	 * or INVALID_INDEX if the worker cannot level up.
 	 */
-	int32_t m_needed_experience;
+	int32_t needed_experience_;
 
 	/**
 	 * Type that this worker can become, i.e. level up to (or null).
 	 */
-	WareIndex  m_becomes;
-	Programs    m_programs;
+	WareIndex becomes_;
+	Programs  programs_;
 private:
+	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 

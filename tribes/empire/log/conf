@@ -1,8 +1,0 @@
-help=_Logs are an important building material for the Empire. The lumberjacks fell the trees; foresters care for the supply of trees. Logs are also used by the charcoal kiln, the toolsmithy and the sawmill.
-
-default_target_quantity=40
-preciousness=14
-
-[idle]
-pics=idle.png
-hotspot=6 7
