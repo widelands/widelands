@@ -20,7 +20,7 @@ function build_port()
    wl.ui.MapView().buildhelp = true -- so that the player sees the port building icon
    local o = message_box_objective(plr, tell_about_port_building)
 
-   while #plr:get_buildings("port") < 2 do sleep(200) end
+   while #plr:get_buildings("atlanteans_port") < 2 do sleep(200) end
    o.done = true
 
    build_ships()
@@ -29,9 +29,9 @@ end
 function build_ships()
    sleep(200)
    local o = message_box_objective(plr, tell_about_shipyard)
-   plr:allow_buildings{"shipyard"}
+   plr:allow_buildings{"atlanteans_shipyard"}
 
-   while #plr:get_buildings("shipyard") < 1 do sleep(200) end
+   while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(200) end
    o.done = true
 
    local o = message_box_objective(plr, tell_about_ships)
@@ -62,7 +62,7 @@ function expedition()
 
    local o2 = message_box_objective(plr, expedition3)
 
-   while #plr:get_buildings("port") < 3 do sleep(200) end
+   while #plr:get_buildings("atlanteans_port") < 3 do sleep(200) end
    o.done = true
 
    -- places 5 signs with iron to show the player he really found some iron ore
@@ -73,7 +73,7 @@ function expedition()
          local idx = math.random(#fields)
          f = fields[idx]
          if ((f.resource == "iron") and not f.immovable) then
-            map:place_immovable("resi_iron2",f,"atlanteans")
+            map:place_immovable("resi_iron2",f,"tribes")
             successful = true
          end
          table.remove(fields,idx)
@@ -89,4 +89,3 @@ function conclude()
 end
 
 run(introduction)
-

@@ -40,11 +40,12 @@
 
 
 namespace Widelands {
-	struct SoldierDescr;
-	struct BuildingDescr;
-	struct WareDescr;
-	class WorkerDescr;
+	class SoldierDescr;
+	class BuildingDescr;
 	class Bob;
+	class WareDescr;
+	class WorkerDescr;
+	class TribeDescr;
 }
 
 namespace LuaMaps {
@@ -93,6 +94,63 @@ private:
 };
 
 
+class LuaTribeDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTribeDescription);
+
+	virtual ~LuaTribeDescription() {}
+
+	LuaTribeDescription() : tribedescr_(nullptr) {}
+	LuaTribeDescription(const Widelands::TribeDescr* const tribedescr)
+		: tribedescr_(tribedescr) {}
+	LuaTribeDescription(lua_State* L) : tribedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaTribeDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_buildings(lua_State *);
+	int get_carrier(lua_State *);
+	int get_carrier2(lua_State *);
+	int get_descname(lua_State *);
+	int get_headquarters(lua_State *);
+	int get_geologist(lua_State *);
+	int get_name(lua_State *);
+	int get_port(lua_State *);
+	int get_ship(lua_State *);
+	int get_soldier(lua_State *);
+	int get_wares(lua_State *);
+	int get_workers(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int has_building(lua_State *);
+	int has_ware(lua_State *);
+	int has_worker(lua_State *);
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::TribeDescr* get() const {
+		assert(tribedescr_ != nullptr);
+		return tribedescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::TribeDescr* pointer) {
+		tribedescr_ = pointer;
+	}
+
+private:
+	const Widelands::TribeDescr* tribedescr_;
+};
+
+
 class LuaMapObjectDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaMapObjectDescription);
@@ -113,9 +171,11 @@ public:
 	 * Properties
 	 */
 	int get_descname(lua_State *);
+	int get_icon_name(lua_State*);
 	int get_name(lua_State *);
 	int get_type_name(lua_State *);
 	int get_representative_image(lua_State *);
+
 
 	/*
 	 * Lua methods
@@ -166,10 +226,11 @@ public:
 	int get_buildable(lua_State *);
 	int get_conquers(lua_State *);
 	int get_destructible(lua_State *);
+	int get_directory(lua_State *);
 	int get_enhanced(lua_State *);
+	int get_enhanced_from(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancement(lua_State *);
-	int get_icon_name(lua_State*);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
 	int get_isproductionsite(lua_State *);
@@ -310,6 +371,10 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_food_attack(lua_State *);
+	int get_food_defense(lua_State *);
+	int get_food_evade(lua_State *);
+	int get_food_hp(lua_State *);
 	int get_max_attack(lua_State *);
 	int get_max_defense(lua_State *);
 	int get_max_evade(lua_State *);
@@ -319,6 +384,10 @@ public:
 	int get_min_defense(lua_State *);
 	int get_min_evade(lua_State *);
 	int get_min_hp(lua_State *);
+	int get_weapons_attack(lua_State *);
+	int get_weapons_defense(lua_State *);
+	int get_weapons_evade(lua_State *);
+	int get_weapons_hp(lua_State *);
 
 	/*
 	 * Lua methods
@@ -385,12 +454,13 @@ public:
 	 * Properties
 	 */
 	int get_consumers(lua_State *);
-	int get_icon_name(lua_State*);
+	int get_directory(lua_State*);
 	int get_producers(lua_State *);
 
 	/*
 	 * Lua methods
 	 */
+	int is_construction_material(lua_State *);
 
 	/*
 	 * C methods
@@ -421,12 +491,9 @@ public:
 	 * Properties
 	 */
 	int get_becomes(lua_State*);
-	int get_buildable(lua_State*);
 	int get_buildcost(lua_State*);
-	int get_helptext(lua_State*);
-	int get_icon_name(lua_State*);
+	int get_directory(lua_State*);
 	int get_needed_experience(lua_State*);
-	int get_tribename(lua_State*);
 
 	/*
 	 * Lua methods

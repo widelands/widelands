@@ -35,42 +35,13 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
-#include "profile/profile.h"
+#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 
 namespace Widelands {
-
-namespace {
-
-// Parses program lines in a section into a vector of strings.
-std::vector<std::string> section_to_strings(Section* section) {
-	std::vector<std::string> return_value;
-	for (uint32_t idx = 0;; ++idx) {
-		char const* const string = section->get_string(std::to_string(idx).c_str(), nullptr);
-		if (!string)
-			break;
-		return_value.emplace_back(string);
-	}
-	// Check for line numbering problems
-	if (section->get_num_values() != return_value.size())
-		throw wexception("Line numbers appear to be wrong");
-	return return_value;
-}
-
-// Sets the dir animations in 'anims' with the animations
-// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
-void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
-	for (int32_t dir = 1; dir <= 6; ++dir) {
-		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
-	}
-}
-
-}  // namespace
 
 void CritterProgram::parse(const std::vector<std::string>& lines) {
 	for (const std::string& line : lines) {
@@ -131,66 +102,10 @@ bool Critter::run_remove
 ===========================================================================
 */
 
-CritterDescr::CritterDescr(char const* const _name,
-                                     char const* const _descname,
-                                     const std::string& directory,
-                                     Profile& prof,
-                                     Section& global_s,
-												 TribeDescr & _tribe)
-	:
-	BobDescr(MapObjectType::CRITTER, _name, _descname, &_tribe)
+CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& table)
+	: BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
 {
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-
-	// Parse attributes
-	{
-		std::vector<std::string> attributes;
-		while (Section::Value const* val = global_s.get_next_val("attrib")) {
-			attributes.emplace_back(val->get_string());
-		}
-		add_attributes(attributes, std::set<uint32_t>());
-	}
-
-	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str();
-	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
-
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string program_name = v->get_string();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		CritterProgram * prog = nullptr;
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-
-			prog = new CritterProgram(v->get_string());
-			std::vector<std::string> lines(section_to_strings(&prof.get_safe_section(program_name)));
-			prog->parse(lines);
-			m_programs[program_name] = prog;
-		} catch (const std::exception & e) {
-			delete prog;
-			throw wexception
-				("Parse error in program %s: %s", v->get_string(), e.what());
-		}
-	}
-}
-
-CritterDescr::CritterDescr(const LuaTable& table)
-	: BobDescr(MapObjectType::CRITTER, table.get_string("name"),
-              table.get_string("descname"),
-              nullptr)  // Can only handle world critters.
-{
-	{
-		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-		for (const std::string& animation : anims->keys<std::string>()) {
-			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-		}
-		assign_diranimation(&m_walk_anims, *this, "walk");
-	}
+	add_directional_animation(&m_walk_anims, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
@@ -400,7 +315,7 @@ const BobProgramBase * Critter::Loader::get_program
 MapObject::Loader* Critter::load(EditorGameBase& egbase,
 												  MapObjectLoader& mol,
                                       FileRead& fr,
-                                      const OneWorldLegacyLookupTable& lookup_table) {
+                                      const WorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -418,11 +333,8 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 				descr =
 					dynamic_cast<const CritterDescr*>(egbase.world().get_bob_descr(critter_name));
 			} else {
-				egbase.manually_load_tribe(owner);
-
-				if (const TribeDescr * tribe = egbase.get_tribe(owner))
-					descr = dynamic_cast<const CritterDescr *>
-						(tribe->get_bob_descr(critter_name));
+				throw GameDataError
+					("Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());
 			}
 
 			if (!descr)
@@ -447,8 +359,10 @@ void Critter::save
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	std::string owner =
-		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
+	const std::string owner =
+		descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
+				"" : // Tribes don't have critters
+				"world";
 	fw.c_string(owner);
 	fw.c_string(descr().name());
 

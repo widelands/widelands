@@ -1,9 +1,0 @@
-program=disappear
-
-[disappear]
-animate=idle 50000
-remove=
-
-[idle]
-pics=field2_??.png
-hotspot=15 18

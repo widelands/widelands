@@ -84,7 +84,7 @@ double probability_to_grow(const TerrainAffinity& affinity,
 
 	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature, &terrains](
 	   const int terrain_index) {
-		const TerrainDescription& t = terrains.get_unmutable(terrain_index);
+		const TerrainDescription& t = terrains.get(terrain_index);
 		terrain_humidity += t.humidity() / 6.;
 		terrain_temperature += t.temperature() / 6.;
 		terrain_fertility += t.fertility() / 6.;

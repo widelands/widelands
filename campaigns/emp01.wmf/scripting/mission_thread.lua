@@ -12,8 +12,8 @@ function mission_thread()
 
    -- Show the sea
    p1:reveal_fields(sea:region(6))
-   local ship = p1:place_bob("ship",sea)
-   sleep(200)
+   local ship = p1:place_ship(sea)
+   sleep(1000)
    campaign_message_box(diary_page_2)
    -- Hide the sea after 5 seconds
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
@@ -27,40 +27,40 @@ function mission_thread()
    sleep(400)
 
    campaign_message_box(saledus_1)
-   p1:allow_buildings{"barracks"}
-   local o = add_campaign_objective(obj_build_barracks)
-   while #p1:get_buildings("barracks") < 1 do sleep(3249) end
+   p1:allow_buildings{"empire_blockhouse"}
+   local o = add_campaign_objective(obj_build_blockhouse)
+   while #p1:get_buildings("empire_blockhouse") < 1 do sleep(3249) end
    o.done = true
 
-   -- Barracks are completed now
+   -- Blockhouse is completed now
    campaign_message_box(saledus_2)
-   p1:allow_buildings{"lumberjacks_house"}
+   p1:allow_buildings{"empire_lumberjacks_house"}
    o = add_campaign_objective(obj_build_lumberjack)
    campaign_message_box(amalea_1)
-   while #p1:get_buildings("lumberjacks_house") < 1 do sleep(3249) end
+   while #p1:get_buildings("empire_lumberjacks_house") < 1 do sleep(3249) end
    o.done = true
 
    -- Lumberjack is now build
    campaign_message_box(amalea_2)
-   p1:allow_buildings{"sawmill"}
+   p1:allow_buildings{"empire_sawmill"}
    o = add_campaign_objective(obj_build_sawmill_and_lumberjacks)
-   while not check_for_buildings(p1, { lumberjacks_house = 3, sawmill = 1})
+   while not check_for_buildings(p1, { empire_lumberjacks_house = 3, empire_sawmill = 1})
       do sleep(2343) end
    o.done = true
 
    -- Now the lady demands a forester after having us cut down the whole forest.
    campaign_message_box(amalea_3)
    o = add_campaign_objective(obj_build_forester)
-   p1:allow_buildings{"foresters_house"}
-   while not check_for_buildings(p1, { foresters_house = 1 }) do sleep(2434) end
+   p1:allow_buildings{"empire_foresters_house"}
+   while not check_for_buildings(p1, { empire_foresters_house = 1 }) do sleep(2434) end
    o.done = true
 
 
    -- Now a quarry
    campaign_message_box(saledus_3)
    o = add_campaign_objective(obj_build_quarry)
-   p1:allow_buildings{"quarry"}
-   while not check_for_buildings(p1, { quarry = 1 }) do sleep(2434) end
+   p1:allow_buildings{"empire_quarry"}
+   while not check_for_buildings(p1, { empire_quarry = 1 }) do sleep(2434) end
    o.done = true
 
    -- All buildings done. Got home
@@ -72,9 +72,9 @@ function mission_thread()
    p1:reveal_scenario("empiretut01")
 end
 
--- Show a funny message when the player has build 10 barracks
+-- Show a funny message when the player has build 10 blockhouses
 function easter_egg()
-   while not check_for_buildings(p1, {barracks = 10}) do sleep(4253) end
+   while not check_for_buildings(p1, {empire_blockhouse = 10}) do sleep(4253) end
 
    campaign_message_box(safe_peninsula)
 end
@@ -82,4 +82,3 @@ end
 
 run(mission_thread)
 run(easter_egg)
-

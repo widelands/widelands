@@ -26,4 +26,3 @@ function filled_buildings_one_soldier(p, ...)
       elseif b.valid_wares then b:set_wares(b.valid_wares) end
    end
 end
-

@@ -23,10 +23,12 @@
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
@@ -228,35 +230,71 @@ MapObjectDescr IMPLEMENTATION
 
 ==============================================================================
 */
+MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
+				 const std::string& init_name,
+				 const std::string& init_descname)
+	: m_type(init_type), m_name(init_name), m_descname(init_descname),
+	  representative_image_filename_(""), icon_filename_("") {
+}
+MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
+				 const std::string& init_name,
+				 const std::string& init_descname, const LuaTable& table)
+	: MapObjectDescr(init_type,  init_name, init_descname) {
+	if (table.has_key("animations")) {
+		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+		for (const std::string& animation : anims->keys<std::string>()) {
+			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+		}
+		if (!is_animation_known("idle")) {
+			throw GameDataError("Map object %s has animations but no idle animation", init_name.c_str());
+		}
+		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
+													.representative_image_from_disk_filename();
+	}
+	if (table.has_key("icon")) {
+		icon_filename_ = table.get_string("icon");
+		if (icon_filename_.empty()) {
+			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
+		}
+	}
+}
+MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
+
 
 uint32_t MapObjectDescr::s_dyn_attribhigh =
 	MapObject::HIGHEST_FIXED_ATTRIBUTE;
 MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
 
+
+bool MapObjectDescr::is_animation_known(const std::string & animname) const {
+	return (m_anims.count(animname) == 1);
+}
+
 /**
  * Add this animation for this map object under this name
  */
-bool MapObjectDescr::is_animation_known(const std::string & animname) const {
-	for (const std::pair<std::string, uint32_t>& anim : m_anims) {
-		if (anim.first == animname) {
-			return true;
-		}
-	}
-	return false;
-}
-
 void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
-#ifndef NDEBUG
-	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
-		if (temp_anim.first == animname) {
-			throw wexception
-				("adding already existing animation \"%s\"", animname.c_str());
+	if (is_animation_known(animname)) {
+		throw GameDataError
+			("Tried to add already existing animation \"%s\"", animname.c_str());
+	} else {
+		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
+	}
+}
+
+void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
+	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+	for (int32_t dir = 1; dir <= 6; ++dir) {
+		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
+		try {
+			anims->set_animation(dir, get_animation(anim_name));
+		} catch (const MapObjectDescr::AnimationNonexistent&) {
+			throw GameDataError("MO: no directional animation '%s'",
+									  anim_name.c_str());
 		}
 	}
-#endif
-	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
 std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
@@ -270,6 +308,26 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	// Never here
 	assert(false);
 	return "";
+}
+
+const Image* MapObjectDescr::representative_image() const {
+	if (!representative_image_filename_.empty()) {
+		return g_gr->images().get(representative_image_filename_);
+	}
+	return nullptr;
+}
+const std::string& MapObjectDescr::representative_image_filename() const {
+	return representative_image_filename_;
+}
+
+const Image* MapObjectDescr::icon() const {
+	if (!icon_filename_.empty()) {
+		return g_gr->images().get(icon_filename_);
+	}
+	return nullptr;
+}
+const std::string& MapObjectDescr::icon_filename() const {
+	return icon_filename_;
 }
 
 
@@ -298,7 +356,7 @@ void MapObjectDescr::add_attribute(uint32_t const attr)
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 									  const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute);
+		uint32_t const attrib = get_attribute_id(attribute, true);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
 				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
@@ -310,22 +368,27 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
- * before, we add it to the map.
+ * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-uint32_t MapObjectDescr::get_attribute_id(const std::string & name) {
+uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_not_exists) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
-	if (it != s_dyn_attribs.end())
+	if (it != s_dyn_attribs.end()) {
 		return it->second;
+	}
 
-	if      (name == "worker")
+	if (name == "worker") {
 		return MapObject::WORKER;
-	else if (name == "resi")
+	} else if (name == "resi") {
 		return MapObject::RESI;
+	}
 
-	++s_dyn_attribhigh;
-	s_dyn_attribs[name] = s_dyn_attribhigh;
-
+	if (!add_if_not_exists) {
+		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
+	} else {
+		++s_dyn_attribhigh;
+		s_dyn_attribs[name] = s_dyn_attribhigh;
+	}
 	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)
 
 	return s_dyn_attribhigh;
@@ -418,6 +481,10 @@ void MapObject::init(EditorGameBase & egbase)
 void MapObject::cleanup(EditorGameBase & egbase)
 {
 	egbase.objects().remove(*this);
+}
+
+const Image* MapObject::representative_image() const {
+	return descr().representative_image();
 }
 
 /**

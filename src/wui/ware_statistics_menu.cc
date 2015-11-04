@@ -24,7 +24,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warelist.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -139,7 +139,7 @@ UI::UniqueWindow
 	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
-	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares();
+	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
 
 	//init color sets
 	m_color_map.resize(nr_wares);

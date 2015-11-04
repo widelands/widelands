@@ -25,7 +25,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -41,9 +41,10 @@ void MapAllowedWorkerTypesPacket::read
 	if (skip)
 		return;
 
-	// Worker types are allowed by default - this is to make sure that old maps
-	// remain playable without change even if new worker types are introduced. If
-	// our file is not there, there is nothing to be done.
+	// Worker types that the tribe has are allowed by default - this is to make sure that old maps
+	// remain playable without change even if new worker types are introduced.
+	// Worker types that the tribe doesn't have are always disallowed.
+	// If our file is not there, there is nothing to be done.
 	Profile prof;
 	try {
 		prof.read("allowed_worker_types", nullptr, fs);
@@ -63,11 +64,15 @@ void MapAllowedWorkerTypesPacket::read
 					if (s == nullptr)
 						continue;
 
-					for (WareIndex w = 0; w < tribe.get_nrworkers(); ++w) {
-						const WorkerDescr & w_descr = *tribe.get_worker_descr(w);
-						if (w_descr.is_buildable())
-							player->allow_worker_type
-								(w, s->get_bool(w_descr.name().c_str(), true));
+					// Only allow workers that the player's tribe has.
+					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
+						const WareIndex& worker_index = static_cast<WareIndex>(i);
+						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
+						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
+							player->allow_worker_type(worker_index, s->get_bool(worker_descr.name().c_str(), true));
+						} else {
+							player->allow_worker_type(worker_index, false);
+						}
 					}
 				} catch (const WException & e) {
 					throw GameDataError
@@ -98,9 +103,10 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
-		for (WareIndex b = 0; b < tribe.get_nrworkers(); ++b) {
-			if (!player->is_worker_type_allowed(b)) {
-				section.set_bool(tribe.get_worker_descr(b)->name().c_str(), false);
+		for (const WareIndex& worker_index : tribe.workers()) {
+			if (!player->is_worker_type_allowed(worker_index)) {
+				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
+				section.set_bool(worker_descr->name().c_str(), false);
 				forbidden_worker_seen = true;
 			}
 		}

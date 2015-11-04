@@ -25,13 +25,14 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("spruce_summer_old", field)
-   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
+   tree = map:place_immovable("spruce_summer_old", field, "world")
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34), "world")
    removed_tree:remove()
 
-   building_descr = game:get_building_description("barbarians", "lumberjacks_hut")
-   ware_descr = game:get_ware_description("barbarians", "ax")
-   worker_descr = game:get_worker_description("barbarians", "lumberjack")
+   tribe_descr = game:get_tribe_description("atlanteans")
+   building_descr = game:get_building_description("barbarians_lumberjacks_hut")
+   ware_descr = game:get_ware_description("ax")
+   worker_descr = game:get_worker_description("barbarians_lumberjack")
 
    corout = coroutine.create(function()
       local a = 100
@@ -96,9 +97,10 @@ function check_coroutine()
    assert_equal(34, field.y)
    assert_equal(tree, field.immovable)
 
-   assert_equal("lumberjacks_hut", building_descr.name)
+   assert_equal("atlanteans", tribe_descr.name)
+   assert_equal("barbarians_lumberjacks_hut", building_descr.name)
    assert_equal("ax", ware_descr.name)
-   assert_equal("lumberjack", worker_descr.name)
+   assert_equal("barbarians_lumberjack", worker_descr.name)
 
    assert_equal(global_value_1, false)
    assert_thread(corout)

@@ -27,14 +27,14 @@
 #include "logic/map.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapResourcesPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
+	(FileSystem & fs, EditorGameBase & egbase, const WorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
@@ -58,7 +58,7 @@ void MapResourcesPacket::read
 				uint8_t const id = fr.unsigned_16();
 				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
 				int32_t const res = world.get_resource(resource_name.c_str());
-				if (res == -1)
+				if (res == Widelands::INVALID_INDEX)
 					throw GameDataError
 						("resource '%s' exists in map but not in world", resource_name.c_str());
 				smap[id] = res;

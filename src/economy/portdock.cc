@@ -476,8 +476,7 @@ constexpr uint8_t kCurrentPacketVersion = 3;
 PortDock::Loader::Loader() : m_warehouse(0) {
 }
 
-void PortDock::Loader::load(FileRead & fr)
-{
+void PortDock::Loader::load(FileRead & fr) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();

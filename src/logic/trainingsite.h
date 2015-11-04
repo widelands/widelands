@@ -31,11 +31,9 @@ namespace Widelands {
 
 class World;
 
-struct TrainingSiteDescr : public ProductionSiteDescr {
-	TrainingSiteDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr & tribe, const World& world);
+class TrainingSiteDescr : public ProductionSiteDescr {
+public:
+	TrainingSiteDescr(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -52,11 +50,40 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 	int32_t get_max_level(TrainingAttribute) const;
 	int32_t get_max_stall() const;
 
+	const std::vector<std::vector<std::string>>& get_food_hp() const {
+		return food_hp_;
+	}
+	const std::vector<std::vector<std::string>>& get_food_attack() const {
+		return food_attack_;
+	}
+	const std::vector<std::vector<std::string>>& get_food_defense() const {
+		return food_defense_;
+	}
+	const std::vector<std::vector<std::string>>& get_food_evade() const {
+		return food_evade_;
+	}
+	const std::vector<std::string>& get_weapons_hp() const {
+		return weapons_hp_;
+	}
+	const std::vector<std::string>& get_weapons_attack() const {
+		return weapons_attack_;
+	}
+	const std::vector<std::string>& get_weapons_defense() const {
+		return weapons_defense_;
+	}
+	const std::vector<std::string>& get_weapons_evade() const {
+		return weapons_evade_;
+	}
+
 private:
+	// Read the table to add needed food and weapons for training a property.
+	// Properties are hp, attack, defense, and evade.
+	void add_training_inputs(const LuaTable& table,
+			std::vector<std::vector<std::string>>* food, std::vector<std::string>* weapons);
+
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
-
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
@@ -87,6 +114,16 @@ private:
 	int32_t m_max_defense;
 	/** Maximum evasion a soldier can acquire at this site*/
 	int32_t m_max_evade;
+
+	// For building help
+	std::vector<std::vector<std::string>> food_hp_;
+	std::vector<std::vector<std::string>> food_attack_;
+	std::vector<std::vector<std::string>> food_defense_;
+	std::vector<std::vector<std::string>> food_evade_;
+	std::vector<std::string> weapons_hp_;
+	std::vector<std::string> weapons_attack_;
+	std::vector<std::string> weapons_defense_;
+	std::vector<std::string> weapons_evade_;
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;

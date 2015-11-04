@@ -30,7 +30,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -46,7 +46,7 @@
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
-namespace Widelands {struct BuildingDescr;}
+namespace Widelands {class BuildingDescr;}
 using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;
@@ -100,9 +100,7 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
 	UI::IconGrid::add(descr.name(),
-	                  &g_gr->animations()
-	                      .get_animation(descr.get_animation("idle"))
-	                      .representative_image_from_disk(),
+							descr.representative_image(),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
 	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
@@ -499,38 +497,33 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
-	const Widelands::BuildingIndex nr_buildings = tribe.get_nrbuildings();
-	for
-		(Widelands::BuildingIndex id = 0;
-		 id < nr_buildings;
-		 ++id)
-	{
-		const Widelands::BuildingDescr & descr = *tribe.get_building_descr(id);
+	for (const Widelands::BuildingIndex& building_index : tribe.buildings()) {
+		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid * * ppgrid;
 
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game *>(&ibase().egbase())) {
-			if (!descr.is_buildable() || !m_plr->is_building_type_allowed(id))
+			if (!building_descr->is_buildable() || !m_plr->is_building_type_allowed(building_index))
 				continue;
-		} else if (!descr.is_buildable() && !descr.is_enhanced())
+		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
-		if (descr.get_ismine()) {
+		if (building_descr->get_ismine()) {
 			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
 				continue;
 
 			ppgrid = &bbg_mine;
 		} else {
-			int32_t size = descr.get_size() - Widelands::BaseImmovable::SMALL;
+			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
-			if (descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
 				continue;
 
-			if (descr.get_isport())
+			if (building_descr->get_isport())
 				ppgrid = &bbg_house[3];
 			else
 				ppgrid = &bbg_house[size];
@@ -548,7 +541,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		}
 
 		// Add it to the grid
-		(*ppgrid)->add(id);
+		(*ppgrid)->add(building_index);
 	}
 
 	// Add all necessary tabs

@@ -31,7 +31,7 @@
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
@@ -102,7 +102,7 @@ BuildingWindow::~BuildingWindow()
 	m_registry = nullptr;
 }
 
-namespace Widelands {struct BuildingDescr;}
+namespace Widelands {class BuildingDescr;}
 using Widelands::Building;
 
 /*
@@ -116,13 +116,12 @@ void BuildingWindow::draw(RenderTarget & dst)
 
 	// TODO(sirver): chang this to directly blit the animation. This needs support for or removal of
 	// RenderTarget.
-	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
-	const Image* image = &anim.representative_image_from_disk();
+	const Image* image = building().representative_image();
 	dst.blitrect_scale(Rect((get_inner_w() - image->width()) / 2,
 	                        (get_inner_h() - image->height()) / 2,
 	                        image->width(),
-	                        image->height()),
-	                   &anim.representative_image_from_disk(),
+									image->height()),
+							 image,
 	                   Rect(0, 0, image->width(), image->height()),
 	                   0.5,
 	                   BlendMode::UseAlpha);
@@ -245,7 +244,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
-							 building_descr.get_icon(),
+							 building_descr.icon(),
 							 enhance_tooltip);
 
 					//  button id = building id
@@ -345,30 +344,28 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			(gotobtn,
 			 UI::Box::AlignCenter);
 
-		if (m_building.descr().has_help_text()) {
-			if (!requires_destruction_separator) {
-				// When there was no separation of destruction buttons put
-				// the infinite space here (e.g. Warehouses)
-				capsbuttons->add_inf_space();
-			}
-
-			UI::Button * helpbtn =
-				new UI::Button
-					(capsbuttons, "help", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
-					 g_gr->images().get("pics/menu_help.png"),
-					 _("Help"));
-
-			UI::UniqueWindow::Registry& registry =
-			   igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
-			registry.open_window = [this, &registry] {
-				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
-			};
-
-			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
-			capsbuttons->add(helpbtn, UI::Box::AlignCenter);
+		if (!requires_destruction_separator) {
+			// When there was no separation of destruction buttons put
+			// the infinite space here (e.g. Warehouses)
+			capsbuttons->add_inf_space();
 		}
+
+		UI::Button * helpbtn =
+			new UI::Button
+				(capsbuttons, "help", 0, 0, 34, 34,
+				 g_gr->images().get("pics/but4.png"),
+				 g_gr->images().get("pics/menu_help.png"),
+				 _("Help"));
+
+		UI::UniqueWindow::Registry& registry =
+			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
+		registry.open_window = [this, &registry] {
+			new UI::LuaTextHelpWindow(
+				&igbase(), registry, m_building.descr(), building().owner().tribe(), &igbase().egbase().lua());
+		};
+
+		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
+		capsbuttons->add(helpbtn, UI::Box::AlignCenter);
 	}
 }
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-03 18:29+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -69,12 +69,12 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
-"Build a donjon"
+"Build a tower"
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
-"Build a donjon at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks by enemies."
+"Build a tower at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks by enemies."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
@@ -125,7 +125,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the axfactory to a war mill, which will produce additional weapons."
+"Enhance your metal workshop to an ax workshop in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the ax workshop to a war mill, which will produce additional weapons."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
@@ -392,7 +392,7 @@ msgstr ""
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
-"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a donjon, to have a greater visual range over the area around our hall to protect our people from sudden attacks."
+"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower,  to have a greater visual range over the area around our hall to protect our people from sudden attacks."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
@@ -453,7 +453,7 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
-"Finally! The fortress has just been completed, so the entrance to our settlement should be safe for now. For the future, we might think on building some more fortifications like barriers and donjons at the passages, but for now we can take a deep breath."
+"Finally! The fortress has just been completed, so the entrance to our settlement should be safe for now. For the future, we might think on building some more fortifications like barriers and towers at the passages, but for now we can take a deep breath."
 msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300

@@ -111,7 +111,6 @@ wl_library(scripting_logic
     logic_game_controller
     logic_widelands_geometry
     map_io
-    profile
     scripting_base
     scripting_coroutine
     scripting_errors

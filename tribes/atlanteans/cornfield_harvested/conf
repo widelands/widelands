@@ -1,9 +1,0 @@
-program=disappear
-
-[disappear]
-animate=idle 50000
-remove=
-
-[idle]
-pics=cornfield_harvested_??.png
-hotspot=31 30
