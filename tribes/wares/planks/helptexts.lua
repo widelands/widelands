@@ -1,17 +1,17 @@
 function ware_helptext(tribe)
    local helptext = {
-		-- TRANSLATORS: Helptext for a ware: Planks
-		default = pgettext("ware", "Planks are an important building material. They are produced out of logs by the sawmill."),
-		-- TRANSLATORS: Helptext for a ware: Planks
-		atlanteans = pgettext("atlanteans_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."),
-		-- TRANSLATORS: Helptext for a ware: Planks
-		empire = pgettext("empire_ware", "They are also used by the weapon smithy.")
+      -- TRANSLATORS: Helptext for a ware: Planks
+      default = pgettext("ware", "Planks are an important building material. They are produced out of logs by the sawmill."),
+      -- TRANSLATORS: Helptext for a ware: Planks
+      atlanteans = pgettext("atlanteans_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."),
+      -- TRANSLATORS: Helptext for a ware: Planks
+      empire = pgettext("empire_ware", "They are also used by the weapon smithy.")
    }
    local result = ""
    if tribe then
-		result = helptext[tribe]
-	else
-		result = helptext["default"]
+      result = helptext[tribe]
+   else
+      result = helptext["default"]
    end
    if (result == nil) then result = "" end
    return result

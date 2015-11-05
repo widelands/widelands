@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-25 20:03+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid ""
-"Build a mill to make cornflour and blackroot flour"
+"Build a mill to make cornmeal and blackroot flour"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
-"Build a bakery to bake bread from cornflour, blackroot flour and water"
+"Build a bakery to bake bread from cornmeal, blackroot flour and water"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
@@ -151,7 +151,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
-"The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold yarn and spideryarn as raw material. Spideryarn is produced by the spider farm, while gold yarn is produced by the gold spinning mill out of gold."
+"The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold thread and spider silk as raw material. Spider silk is produced by the spider farm, while gold thread is produced by the gold spinning mill out of gold."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77

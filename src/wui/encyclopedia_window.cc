@@ -196,6 +196,7 @@ void EncyclopediaWindow::entry_selected(const Widelands::TribeDescr& tribe,
 	contents_.at(tab)->scroll_to_top();
 }
 
+
 void EncyclopediaWindow::building_selected(uint32_t) {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	entry_selected<Widelands::BuildingDescr>(

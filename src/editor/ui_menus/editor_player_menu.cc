@@ -31,7 +31,6 @@
 #include "logic/player.h"
 #include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"

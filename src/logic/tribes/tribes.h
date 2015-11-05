@@ -48,7 +48,7 @@ class WorkerDescr;
 
 class Tribes {
 public:
-	Tribes(EditorGameBase&);
+	Tribes();
 	~Tribes() {}
 
 	/// Returns a string vector with the names of all tribes.
@@ -64,22 +64,22 @@ public:
 	static bool tribe_exists(const std::string & tribename);
 
 	/// Adds this building type to the tribe description.
-	void add_constructionsite_type(const LuaTable& table);
+	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this building type to the tribe description.
-	void add_dismantlesite_type(const LuaTable& table);
+	void add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this building type to the tribe description.
-	void add_militarysite_type(const LuaTable& table);
+	void add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this building type to the tribe description.
-	void add_productionsite_type(const LuaTable& table);
+	void add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this building type to the tribe description.
-	void add_trainingsite_type(const LuaTable& table);
+	void add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this building type to the tribe description.
-	void add_warehouse_type(const LuaTable& table);
+	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
@@ -91,16 +91,16 @@ public:
 	void add_ware_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_carrier_type(const LuaTable& table);
+	void add_carrier_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this worker type to the tribe description.
-	void add_soldier_type(const LuaTable& table);
+	void add_soldier_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds this worker type to the tribe description.
-	void add_worker_type(const LuaTable& table);
+	void add_worker_type(const LuaTable& table, const EditorGameBase& egbase);
 
 	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table);
+	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
@@ -146,7 +146,6 @@ public:
 	void postload();
 
 private:
-	EditorGameBase& egbase_;
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;

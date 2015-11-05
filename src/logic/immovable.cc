@@ -180,29 +180,6 @@ ImmovableDescr IMPLEMENTATION
 ==============================================================================
 */
 
-Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) {
-	Buildcost result;
-	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value(-1);
-		try {
-			WareIndex const idx = tribes.safe_ware_index(warename);
-			if (result.count(idx)) {
-				throw GameDataError(
-				   "a buildcost item of this ware type has already been defined: %s", warename.c_str());
-			}
-			value = table->get_int(warename);
-			uint8_t const count = value;
-			if (count != value) {
-				throw GameDataError("count is out of range 1 .. 255");
-			}
-			result.insert(WareAmount(idx, count));
-		} catch (const WException& e) {
-			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
-		}
-	}
-	return result;
-}
-
 /**
  * Parse a common immovable functions from init file.
  */
@@ -266,7 +243,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 										 const Tribes& tribes) :
 	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
 	if (table.has_key("buildcost")) {
-		m_buildcost = ImmovableDescr::parse_buildcost(table.get_table("buildcost"), tribes);
+		m_buildcost = Buildcost(table.get_table("buildcost"), tribes);
 	}
 }
 

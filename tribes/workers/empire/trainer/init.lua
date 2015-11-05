@@ -21,10 +21,10 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		armor_helmet = 1,
-		spear_wooden = 1
-	},
+      empire_carrier = 1,
+      armor_helmet = 1,
+      spear_wooden = 1
+   },
 
    animations = animations,
 }

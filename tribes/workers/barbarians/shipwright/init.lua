@@ -31,21 +31,21 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1,
-		hammer = 1
-	},
+      barbarians_carrier = 1,
+      hammer = 1
+   },
 
-	programs = {
-		buildship = {
-			"walk object-or-coords",
-			"plant tribe:barbarians_shipconstruction unless object",
-			"playFX sound/sawmill sawmill 230",
-			"animation work 500",
-			"construct",
-			"animation work 5000",
-			"return"
-		}
-	},
+   programs = {
+      buildship = {
+         "walk object-or-coords",
+         "plant tribe:barbarians_shipconstruction unless object",
+         "playFX sound/sawmill sawmill 230",
+         "animation work 500",
+         "construct",
+         "animation work 5000",
+         "return"
+      }
+   },
 
    animations = animations,
 }

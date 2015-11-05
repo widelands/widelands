@@ -33,20 +33,20 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1
-	},
+      barbarians_carrier = 1
+   },
 
-	programs = {
-		release = {
-			"setbobdescription wildboar stag sheep",
-			"findspace size:any radius:3",
-			"walk coords",
-			"animation releasein 2000",
-			"create_bob",
-			"animation releaseout 2000",
-			"return"
-		}
-	},
+   programs = {
+      release = {
+         "setbobdescription wildboar stag sheep",
+         "findspace size:any radius:3",
+         "walk coords",
+         "animation releasein 2000",
+         "create_bob",
+         "animation releaseout 2000",
+         "return"
+      }
+   },
 
    animations = animations,
 }

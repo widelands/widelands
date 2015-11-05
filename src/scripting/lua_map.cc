@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -1079,13 +1081,17 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-// Only base classes can be persisted.
-void LuaTribeDescription::__persist(lua_State*) {
-	assert(false);
+void LuaTribeDescription::__persist(lua_State* L) {
+	const TribeDescr* descr = get();
+	PERS_STRING("name", descr->name());
 }
 
-void LuaTribeDescription::__unpersist(lua_State*) {
-	assert(false);
+void LuaTribeDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name);
+	const Tribes& tribes = get_egbase(L).tribes();
+	WareIndex idx = tribes.safe_tribe_index(name);
+	set_description_pointer(tribes.get_tribe_descr(idx));
 }
 
 /*
@@ -1770,7 +1776,7 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State * L) {
 int LuaProductionSiteDescription::get_production_programs(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const std::pair<std::string, ProductionProgram *>& program : get()->programs()) {
+	for (const auto& program : get()->programs()) {
 		lua_pushint32(L, index++);
 		lua_pushstring(L, program.first);
 		lua_settable(L, -3);

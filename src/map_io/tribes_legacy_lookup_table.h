@@ -30,13 +30,13 @@ public:
 	TribesLegacyLookupTable();
 
 	/// Looks up the new name for the 'worker'.
-	std::string lookup_worker(const std::string& tribe, const std::string& worker) const;
+	const std::string& lookup_worker(const std::string& tribe, const std::string& worker) const;
 
 	/// Looks up the new name for the 'ware'.
-	std::string lookup_ware(const std::string& tribe, const std::string& ware) const;
+	const std::string& lookup_ware(const std::string& tribe, const std::string& ware) const;
 
 	/// Looks up the new name for the 'immovable'.
-	std::string lookup_immovable(const std::string& tribe, const std::string& immovable) const;
+	const std::string& lookup_immovable(const std::string& tribe, const std::string& immovable) const;
 
 
 private:

@@ -19,12 +19,41 @@
 
 #include "logic/buildcost.h"
 
+#include <map>
+#include <memory>
+
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/game_data_error.h"
 #include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 
 namespace Widelands {
+
+Buildcost::Buildcost() : std::map<WareIndex, uint8_t>() {}
+
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) :
+	std::map<WareIndex, uint8_t>() {
+	for (const std::string& warename : table->keys<std::string>()) {
+		int32_t value = INVALID_INDEX;
+		try {
+			WareIndex const idx = tribes.safe_ware_index(warename);
+			if (count(idx)) {
+				throw GameDataError(
+					"A buildcost item of this ware type has already been defined: %s", warename.c_str());
+			}
+			value = table->get_int(warename);
+			const uint8_t ware_count = value;
+			if (ware_count != value) {
+				throw GameDataError("Ware count is out of range 1 .. 255");
+			}
+			insert(std::pair<WareIndex, uint8_t>(idx, ware_count));
+		} catch (const WException& e) {
+			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
+		}
+	}
+}
 
 /**
  * Compute the total buildcost.

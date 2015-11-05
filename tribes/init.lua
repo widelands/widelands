@@ -22,23 +22,31 @@ tribes = wl.Tribes()
 -- 'animationname' is the name of the animation, e.g. "walkload"
 -- 'fps' are the frames per second. Only use this if the animation has more than 1 frame.
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
-	if (fps ~= nil) then
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				template = basename .. "_" .. dir ..  "_??",
-				directory = dirname,
-				hotspot = hotspot,
-				fps = fps,
-			}
-		end
-	else
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				template = basename .. "_" .. dir ..  "_??",
-				directory = dirname,
-				hotspot = hotspot,
-			}
-		end
+   if (fps ~= nil) then
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            -- TODO(SirVer): get rid of template and directory, instead
+            -- use 'path.list_directory'. See world/ for examples. No globbing
+            -- code should be necessary in c++. Update: I just realized that
+            -- you went the other way in the world too. We should discuss that,
+            -- I think it should be done in Lua, not in c++. My reasoning is
+            -- that the engine should get passed in hard data as much as
+            -- possible and not needing to dig around in directories for the
+            -- correct files.
+            template = basename .. "_" .. dir ..  "_??",
+            directory = dirname,
+            hotspot = hotspot,
+            fps = fps,
+         }
+      end
+   else
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            template = basename .. "_" .. dir ..  "_??",
+            directory = dirname,
+            hotspot = hotspot,
+         }
+      end
    end
 end
 
@@ -46,6 +54,9 @@ end
 -- ===================================
 --    Ships
 -- ===================================
+
+-- TODO(sirver): Adding timing informations here would be really useful, also
+-- for world/. This needs some sort of wrapping for the ScopedTimer class.
 
 print("Loading Ships")
 include "tribes/ships/atlanteans/init.lua"

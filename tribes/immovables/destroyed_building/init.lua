@@ -7,9 +7,9 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Destroyed building"),
    size = "big",
    programs = {
-		program = {
-			"animate=idle 30000",
-			"transform=ashes",
+      program = {
+         "animate=idle 30000",
+         "transform=ashes",
       }
    },
 

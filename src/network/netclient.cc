@@ -44,7 +44,6 @@
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
 #include "network/network_system.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"

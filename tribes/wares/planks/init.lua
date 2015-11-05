@@ -8,13 +8,13 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 40,
-		empire = 40
-	},
+      atlanteans = 40,
+      empire = 40
+   },
    preciousness = {
-		atlanteans = 10,
-		empire = 10
-	},
+      atlanteans = 10,
+      empire = 10
+   },
 
    animations = {
       idle = {

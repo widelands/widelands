@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -62,8 +63,6 @@ public:
 	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt,
 							  const LuaTable& t, const EditorGameBase& egbase);
 
-	~ProductionSiteDescr() override;
-
 	Building & create_object() const override;
 
 	uint32_t nr_working_positions() const {
@@ -87,7 +86,7 @@ public:
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	using Programs = std::map<std::string, ProductionProgram *>;
+	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {

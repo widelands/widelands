@@ -59,7 +59,7 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
 	// undefined.
-	T& get(const Widelands::WareIndex index) const {
+	const T& get(const Widelands::WareIndex index) const {
 		assert(index < items_.size());
 		return *items_.at(index);
 	}

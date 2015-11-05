@@ -235,7 +235,7 @@ public:
 	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const WorldLegacyLookupTable& one_world_legacy_lookup_table_;
+	const WorldLegacyLookupTable& world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
@@ -245,7 +245,7 @@ private:
 
 TerrainConverter::TerrainConverter
 		(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table) :
-	one_world_legacy_lookup_table_(lookup_table),
+	world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_
 	{
@@ -303,7 +303,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.terrains().get_index(
-	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
+	   world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
 }
 
 }  // namespace

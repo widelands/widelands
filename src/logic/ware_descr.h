@@ -32,8 +32,6 @@
 
 class Image;
 class LuaTable;
-class Profile;
-class Section;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons

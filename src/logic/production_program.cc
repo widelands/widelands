@@ -617,7 +617,7 @@ ProductionProgram::ActCall::ActCall
 					 "the program \"%s\" has not (yet) been declared in %s "
 					 "(wrong declaration order?)",
 					 program_name, descr.descname().c_str());
-			m_program = it->second;
+			m_program = it->second.get();
 		}
 
 		//  Override with specified handling methods.

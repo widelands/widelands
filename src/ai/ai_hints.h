@@ -28,8 +28,6 @@
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
-class Section;
-
 enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
 
 /// This struct is used to read out the data given in [aihints] section of a

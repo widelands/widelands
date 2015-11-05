@@ -79,27 +79,30 @@ BuildingDescr::BuildingDescr
 
 	i18n::Textdomain td("tribes");
 
-	try {
-		const std::string size = table.get_string("size");
-		if (boost::iequals(size, "small")) {
-			m_size = BaseImmovable::SMALL;
-		} else if (boost::iequals(size, "medium")) {
-			m_size = BaseImmovable::MEDIUM;
-		} else if (boost::iequals(size, "big")) {
-			m_size = BaseImmovable::BIG;
-		} else if (boost::iequals(size, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else if (boost::iequals(size, "port")) {
-			m_size = BaseImmovable::BIG;
-			m_port = true;
-		} else {
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+	// Partially finished buildings get their sizes from their associated building
+	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+		try {
+			const std::string size = table.get_string("size");
+			if (boost::iequals(size, "small")) {
+				m_size = BaseImmovable::SMALL;
+			} else if (boost::iequals(size, "medium")) {
+				m_size = BaseImmovable::MEDIUM;
+			} else if (boost::iequals(size, "big")) {
+				m_size = BaseImmovable::BIG;
+			} else if (boost::iequals(size, "mine")) {
+				m_size = BaseImmovable::SMALL;
+				m_mine = true;
+			} else if (boost::iequals(size, "port")) {
+				m_size = BaseImmovable::BIG;
+				m_port = true;
+			} else {
+				throw GameDataError
+					("expected %s but found \"%s\"",
+					 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+			}
+		} catch (const WException & e) {
+			throw GameDataError("size: %s", e.what());
 		}
-	} catch (const WException & e) {
-		throw GameDataError("size: %s", e.what());
 	}
 
 	// Parse build options
@@ -134,10 +137,8 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("buildcost")) {
 		m_buildable = true;
 		try {
-			m_buildcost =
-					ImmovableDescr::parse_buildcost(table.get_table("buildcost"), egbase_.tribes());
-			m_return_dismantle = ImmovableDescr::parse_buildcost(
-											table.get_table("return_on_dismantle"), egbase_.tribes());
+			m_buildcost = Buildcost(table.get_table("buildcost"), egbase_.tribes());
+			m_return_dismantle = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -147,10 +148,8 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("enhancement_cost")) {
 		m_enhanced_building = true;
 		try {
-			m_enhance_cost = ImmovableDescr::parse_buildcost(
-									  table.get_table("enhancement_cost"), egbase_.tribes());
-			m_return_enhanced = ImmovableDescr::parse_buildcost(
-										  table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+			m_enhance_cost = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			m_return_enhanced = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("An enhanced building must define \"enhancement_cost\""

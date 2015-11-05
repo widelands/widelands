@@ -4214,7 +4214,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		}
 	} else {
 
-		int32_t unused1 = 0;
+		uint32_t unused1 = 0;
 		uint16_t unused2 = 0;
 
 		mso.enemies_nearby_ = false;
@@ -4443,7 +4443,7 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 // usually scanning radius is enough but sometimes we must walk to
 // verify that an enemy territory is really accessible by land
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
-                                        int32_t* tested_fields,
+                                        uint32_t* tested_fields,
                                         uint16_t* mineable_fields_count,
                                         const Widelands::Coords starting_spot,
                                         const WalkSearch type) {
@@ -4537,12 +4537,20 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	uint8_t score = 0;
 	uint16_t mineable_fields_count = 0;
-	int32_t tested_fields = 0;
+	uint32_t tested_fields = 0;
+
+	// On the beginning we search for completely deserted area,
+	// but later we will accept also area adjacent to own teritorry
+	WalkSearch search_type = WalkSearch::kAnyPlayer;
+	if (colony_scan_area_ < 25) {
+		search_type = WalkSearch::kEnemy;
+	}
+
 	const bool other_player = other_player_accessible(colony_scan_area_,
 	                                                  &tested_fields,
 	                                                  &mineable_fields_count,
 	                                                  candidate_spot,
-	                                                  WalkSearch::kAnyPlayer);
+	                                                  search_type);
 
 	// if we run into other player
 	// (maybe we should check for enemies, rather?)
@@ -4551,8 +4559,10 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	Map& map = game().map();
-	// if the island is too small
-	if (tested_fields < 50) {
+	// If the available area (island) is too small...
+	// colony_scan_area_ is a radius (distance) and has no direct relevance to the size of area,
+	// but it seems a good measurement
+	if (tested_fields < colony_scan_area_) {
 		return 0;
 	}
 
@@ -4631,7 +4641,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		}
 
 		// decreasing colony_scan_area_
-		if (colony_scan_area_ > kColonyScanMinArea && gametime % 5 == 0) {
+		if (colony_scan_area_ > kColonyScanMinArea && gametime % 4 == 0) {
 			colony_scan_area_ -= 1;
 			player_->set_ai_data(colony_scan_area_, kColonyScan);
 		}

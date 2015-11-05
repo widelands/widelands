@@ -33,29 +33,29 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1,
-		shovel = 1
-	},
+      barbarians_carrier = 1,
+      shovel = 1
+   },
 
-	programs = {
-		plantreed = {
-			"findspace size:any radius:1",
-			"walk coords",
-			"animation planting 1500",
-			"plant tribe:reed_tiny",
-			"animation planting 1500",
-			"return"
-		},
-		harvestreed = {
-			"findobject attrib:ripe_reed radius:1",
-			"walk object",
-			"animation harvesting 12000",
-			"object harvest",
-			"animation harvesting 1",
-			"createware thatch_reed",
-			"return"
-		},
-	},
+   programs = {
+      plantreed = {
+         "findspace size:any radius:1",
+         "walk coords",
+         "animation planting 1500",
+         "plant tribe:reed_tiny",
+         "animation planting 1500",
+         "return"
+      },
+      harvestreed = {
+         "findobject attrib:ripe_reed radius:1",
+         "walk object",
+         "animation harvesting 12000",
+         "object harvest",
+         "animation harvesting 1",
+         "createware thatch_reed",
+         "return"
+      },
+   },
 
    animations = animations,
 }

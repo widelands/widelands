@@ -103,8 +103,8 @@ end
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
-		local ware_description = wl.Game():get_ware_description(name)
-		-- TRANSLATORS: number + resource name, e.g. '1x Log'
+      local ware_description = wl.Game():get_ware_description(name)
+      -- TRANSLATORS: number + resource name, e.g. '1x Log'
       rv[#rv + 1] = _"%1$dx %2$s":bformat(count, ware_description.descname) .. "<br>\n"
    end
    return table.concat(rv)

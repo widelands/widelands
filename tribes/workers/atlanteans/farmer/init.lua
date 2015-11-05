@@ -39,30 +39,30 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		scythe = 1
-	},
+      atlanteans_carrier = 1,
+      scythe = 1
+   },
 
-	programs = {
-		plant = {
-			"findspace size:any radius:2",
-			"walk coords",
-			"animation planting 4000",
-			"plant tribe:cornfield_tiny",
-			"animation planting 4000",
-			"return"
-		},
-		harvest = {
-			"findobject attrib:ripe_corn radius:2",
-			"walk object",
-			"playFX sound/farm scythe 220",
-			"animation harvesting 10000",
-			"object harvest",
-			"animation gathering 4000",
-			"createware corn",
-			"return"
-		}
-	},
+   programs = {
+      plant = {
+         "findspace size:any radius:2",
+         "walk coords",
+         "animation planting 4000",
+         "plant tribe:cornfield_tiny",
+         "animation planting 4000",
+         "return"
+      },
+      harvest = {
+         "findobject attrib:ripe_corn radius:2",
+         "walk object",
+         "playFX sound/farm scythe 220",
+         "animation harvesting 10000",
+         "object harvest",
+         "animation gathering 4000",
+         "createware corn",
+         "return"
+      }
+   },
 
    animations = animations,
 }

@@ -67,14 +67,16 @@ public:
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
-	const std::vector<BuildingIndex> buildings() const;
-	const std::set<WareIndex> wares() const;
-	const std::set<WareIndex> workers() const;
+	const std::vector<BuildingIndex>& buildings() const;
+	const std::set<WareIndex>& wares() const;
+	const std::set<WareIndex>& workers() const;
 
 	bool has_building(const BuildingIndex& index) const;
 	bool has_ware(const WareIndex& index) const;
 	bool has_worker(const WareIndex& index) const;
 	bool has_immovable(int index) const;
+
+	// A ware is a construction material if it appears in a building's buildcost or enhancement cost
 	bool is_construction_material(const WareIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;

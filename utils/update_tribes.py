@@ -22,8 +22,8 @@ base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardi
 dst_path = os.path.normpath(base_path + "/po/tribes_encyclopedia/")
 pot = os.path.normpath(base_path + "/po/tribes_encyclopedia/tribes_encyclopedia.pot")
 
-source_path = os.path.normpath(base_path + "/po/tribes")
-#source_path = os.path.normpath(base_path + "/po/tribe_atlanteans")
+#source_path = os.path.normpath(base_path + "/po/tribes")
+source_path = os.path.normpath(base_path + "/po/tribe_atlanteans")
 #source_path = os.path.normpath(base_path + "/po/tribe_barbarians")
 #source_path = os.path.normpath(base_path + "/po/tribe_empire")
 
@@ -32,7 +32,7 @@ source_path = os.path.normpath(base_path + "/po/tribes")
 #pot = os.path.normpath(base_path + "/po/tribes/tribes.pot")
 
 #source_path = os.path.normpath(base_path + "/po/tribe_atlanteans")
-#source_path = os.path.normpath(base_path + "/po/tribe_barbarians")
+#source_path = os.path.normpath(base_path + tribes.pottribes.pot"/po/tribe_barbarians")
 #source_path = os.path.normpath(base_path + "/po/tribe_empire")
 
 source_files = sorted(os.listdir(source_path), key=str.lower)

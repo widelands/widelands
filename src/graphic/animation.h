@@ -33,7 +33,6 @@
 
 class Image;
 class LuaTable;
-class Section;
 class Surface;
 struct RGBColor;
 

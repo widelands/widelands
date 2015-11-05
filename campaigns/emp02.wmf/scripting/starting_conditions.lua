@@ -136,4 +136,3 @@ prefilled_buildings(p2,
       [{0,0,0,0}] = 45,
    }
 })
-

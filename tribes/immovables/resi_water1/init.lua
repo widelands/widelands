@@ -7,9 +7,9 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Water Vein"),
    attributes = { "resi" },
    programs = {
-		program = {
-			"animate=idle 600000",
-			"remove="
+      program = {
+         "animate=idle 600000",
+         "remove="
       }
    },
 

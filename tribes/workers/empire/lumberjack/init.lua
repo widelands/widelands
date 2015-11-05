@@ -28,23 +28,23 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		felling_ax = 1
-	},
+      empire_carrier = 1,
+      felling_ax = 1
+   },
 
-	programs = {
-		chop = {
-			"findobject attrib:tree radius:10",
-			"walk object",
-			"playFX sound/woodcutting fast_woodcutting 250",
-			"animation hacking 10000",
-			"playFX sound/spoken timber 156",
-			"object fall",
-			"animation idle 2000",
-			"createware log",
-			"return"
-		}
-	},
+   programs = {
+      chop = {
+         "findobject attrib:tree radius:10",
+         "walk object",
+         "playFX sound/woodcutting fast_woodcutting 250",
+         "animation hacking 10000",
+         "playFX sound/spoken timber 156",
+         "object fall",
+         "animation idle 2000",
+         "createware log",
+         "return"
+      }
+   },
 
    animations = animations,
 }

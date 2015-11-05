@@ -10,55 +10,55 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 4
-	},
-	return_on_dismantle = {
-		log = 2
-	},
+      log = 4
+   },
+   return_on_dismantle = {
+      log = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 39, 52 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 39, 52 },
-		},
-		unoccupied = {
-			template = "unoccupied_??",
-			directory = dirname,
-			hotspot = { 39, 52 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 39, 52 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 39, 52 },
+      },
+      unoccupied = {
+         template = "unoccupied_??",
+         directory = dirname,
+         hotspot = { 39, 52 },
+      },
+   },
 
    aihints = {
-		needs_water = true,
-		prohibited_till = 900
+      needs_water = true,
+      prohibited_till = 900
    },
 
-	working_positions = {
-		barbarians_fisher = 1
-	},
+   working_positions = {
+      barbarians_fisher = 1
+   },
 
    outputs = {
-		"fish"
+      "fish"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-			descname = _"fishing",
-			actions = {
-				"sleep=18000",
-				"worker=fish"
-			}
-		},
-	},
-	out_of_resource_notification = {
-		title = _"Out of Fish",
-		message = pgettext("barbarians_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing",
+         actions = {
+            "sleep=18000",
+            "worker=fish"
+         }
+      },
+   },
+   out_of_resource_notification = {
+      title = _"Out of Fish",
+      message = pgettext("barbarians_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
+   },
 }

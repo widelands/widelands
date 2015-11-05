@@ -74,6 +74,8 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
+	// TODO(GunChleoc): This should not be here for Militarysites.
+	// Check if they can inherit from Building directly.
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
@@ -154,6 +156,8 @@ ProductionSiteDescr::ProductionSiteDescr
 		}
 	}
 
+	// TODO(SirVer): this mixes militarysite concepts into the production site
+	// - maybe those building should not be in a inheritance relationship.
 	if (working_positions().empty() && !table.has_key("max_soldiers")) {
 		throw wexception("no working/soldier positions");
 	}
@@ -171,9 +175,12 @@ ProductionSiteDescr::ProductionSiteDescr
 				}
 				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
 				m_programs[program_name] =
-						new ProductionProgram(program_name, program_table->get_string("descname"),
-													 program_table->get_table("actions"),
-													 egbase, this);
+						std::unique_ptr<ProductionProgram>(
+							new ProductionProgram(program_name,
+														 program_table->get_string("descname"),
+														 program_table->get_table("actions"),
+														 egbase,
+														 this));
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
@@ -190,15 +197,6 @@ ProductionSiteDescr::ProductionSiteDescr
 {}
 
 
-ProductionSiteDescr::~ProductionSiteDescr()
-{
-	while (m_programs.size()) {
-		delete m_programs.begin()->second;
-		m_programs.erase(m_programs.begin());
-	}
-}
-
-
 /**
  * Get the program of the given name.
  */
@@ -209,7 +207,7 @@ const ProductionProgram * ProductionSiteDescr::get_program
 	if (it == m_programs.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
-	return it->second;
+	return it->second.get();
 }
 
 /**
@@ -246,6 +244,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 }
 
 ProductionSite::~ProductionSite() {
+	// TODO(sirver): Use std::vector<std::unique_ptr<>> to avoid naked delete.
 	delete[] m_working_positions;
 }
 

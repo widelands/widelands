@@ -817,7 +817,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			ImmovableDescr& immovable_descr = immovables.get(i);
+			const ImmovableDescr& immovable_descr = immovables.get(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}

@@ -44,19 +44,19 @@ obj_build_mines = {
    body = objective_text(_"Build coal and iron mines",
       listitem_bullet(_"Build a coal mine and an iron mine.") ..
       listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
-		"</rt>" ..
-		rt("image=tribes/immovables/resi_coal1/idle_00.png", p(_"a bit of coal")) ..
-		rt("image=tribes/immovables/resi_coal2/idle_00.png", p(_"a lot of coal")) ..
-		rt("image=tribes/immovables/resi_iron1/idle_00.png", p(_"a bit of iron")) ..
-		rt("image=tribes/immovables/resi_iron2/idle_00.png", p(_"a lot of iron")) ..
-		rt("image=tribes/immovables/resi_gold1/idle_00.png", p(_"a bit of gold")) ..
-		rt("image=tribes/immovables/resi_gold2/idle_00.png", p(_"a lot of gold")) ..
-		rt("image=tribes/immovables/resi_stones1/idle_00.png", p(_"a bit of granite")) ..
-		rt("image=tribes/immovables/resi_stones2/idle_00.png", p(_"a lot of granite")) ..
-		rt("image=tribes/immovables/resi_water1/idle_00.png", p(_"water")) ..
-		rt("image=tribes/immovables/resi_none/idle_00.png", p(_"nothing was found here")) ..
-		"<rt>" ..
-			p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
+      "</rt>" ..
+      rt("image=tribes/immovables/resi_coal1/idle_00.png", p(_"a bit of coal")) ..
+      rt("image=tribes/immovables/resi_coal2/idle_00.png", p(_"a lot of coal")) ..
+      rt("image=tribes/immovables/resi_iron1/idle_00.png", p(_"a bit of iron")) ..
+      rt("image=tribes/immovables/resi_iron2/idle_00.png", p(_"a lot of iron")) ..
+      rt("image=tribes/immovables/resi_gold1/idle_00.png", p(_"a bit of gold")) ..
+      rt("image=tribes/immovables/resi_gold2/idle_00.png", p(_"a lot of gold")) ..
+      rt("image=tribes/immovables/resi_stones1/idle_00.png", p(_"a bit of granite")) ..
+      rt("image=tribes/immovables/resi_stones2/idle_00.png", p(_"a lot of granite")) ..
+      rt("image=tribes/immovables/resi_water1/idle_00.png", p(_"water")) ..
+      rt("image=tribes/immovables/resi_none/idle_00.png", p(_"nothing was found here")) ..
+      "<rt>" ..
+         p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
 }
 
 obj_basic_food = {
@@ -313,7 +313,7 @@ order_msg_1 = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Brave Boldreth steps to your side…",
       -- TRANSLATORS: Boldreth
-		_([[So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time.]]))
+      _([[So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time.]]))
 }
 
 
@@ -321,7 +321,7 @@ order_msg_2 = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh joins in…",
       -- TRANSLATORS: Khantrukh
-		_([[I beg your forgiveness, chieftain, but I have a grave concern to discuss with you. The rocks close to our camp are shrinking fast under our workers’ tools, and it is a matter of little time only before they are all gone.]]))
+      _([[I beg your forgiveness, chieftain, but I have a grave concern to discuss with you. The rocks close to our camp are shrinking fast under our workers’ tools, and it is a matter of little time only before they are all gone.]]))
 }
 
 order_msg_3 = {
@@ -508,7 +508,7 @@ msg_mission_complete = {
       -- TRANSLATORS: Thron
       _([[The news he brought changed everything…]]))
       .. objective_text(_"Victory",
-			_[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])
+         _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])
 }
 
 msg_story_1 = {
@@ -547,4 +547,3 @@ msg_village = {
       _([[But they fear that the war around Al’thunran will set an end to this life. Therefore, they have decided to join us, hoping that we can help each other.]])
    )
 }
-

@@ -8,15 +8,15 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 20,
-		barbarians = 20,
-		empire = 20
-	},
+      atlanteans = 20,
+      barbarians = 20,
+      empire = 20
+   },
    preciousness = {
-		atlanteans = 2,
-		barbarians = 3,
-		empire = 2
-	},
+      atlanteans = 2,
+      barbarians = 3,
+      empire = 2
+   },
 
    animations = {
       idle = {

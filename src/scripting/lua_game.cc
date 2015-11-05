@@ -34,7 +34,6 @@
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/tribes/tribe_descr.h"
-#include "profile/profile.h"
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"

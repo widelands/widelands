@@ -39,7 +39,6 @@
 #include "io/filesystem/zip_filesystem.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"

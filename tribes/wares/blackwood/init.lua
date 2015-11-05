@@ -8,11 +8,11 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		barbarians = 40
-	},
+      barbarians = 40
+   },
    preciousness = {
-		barbarians = 10
-	},
+      barbarians = 10
+   },
 
    animations = {
       idle = {

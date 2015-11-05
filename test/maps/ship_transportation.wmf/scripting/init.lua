@@ -8,7 +8,7 @@ p1 = game.players[1]
 
 p1:allow_workers("all")
 
-function create_first_port()
+function create_southern_port()
    prefilled_buildings(p1,
    { "barbarians_port", 16, 16,
       wares = {},
@@ -17,11 +17,11 @@ function create_first_port()
    })
 end
 
-function port1()
+function southern_port()
    return map:get_field(16, 16).immovable
 end
 
-function create_second_port()
+function create_northern_port()
    prefilled_buildings(p1,
    { "barbarians_port", 16, 2,
       wares = {},
@@ -30,7 +30,7 @@ function create_second_port()
    })
 end
 
-function port2()
+function northern_port()
    local o = map:get_field(16, 2).immovable
    if o and o.descr.name == "barbarians_port" then
       return o

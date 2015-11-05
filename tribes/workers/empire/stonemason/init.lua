@@ -28,30 +28,30 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		pick = 1
-	},
+      empire_carrier = 1,
+      pick = 1
+   },
 
-	programs = {
-		cut_granite = {
-			"findobject attrib:rocks radius:6",
-			"walk object",
-			"playFX sound/stonecutting stonecutter 220",
-			"animation hacking 10000",
-			"object shrink",
-			"createware granite",
-			"return"
-		},
-		cut_marble = {
-			"findobject attrib:rocks radius:6",
-			"walk object",
-			"playFX sound/stonecutting stonecutter 220",
-			"animation hacking 10000",
-			"object shrink",
-			"createware marble",
-			"return"
-		}
-	},
+   programs = {
+      cut_granite = {
+         "findobject attrib:rocks radius:6",
+         "walk object",
+         "playFX sound/stonecutting stonecutter 220",
+         "animation hacking 10000",
+         "object shrink",
+         "createware granite",
+         "return"
+      },
+      cut_marble = {
+         "findobject attrib:rocks radius:6",
+         "walk object",
+         "playFX sound/stonecutting stonecutter 220",
+         "animation hacking 10000",
+         "object shrink",
+         "createware marble",
+         "return"
+      }
+   },
 
    animations = animations,
 }

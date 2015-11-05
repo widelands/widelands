@@ -10,49 +10,49 @@ tribes:new_militarysite_type {
    size = "medium",
 
    buildcost = {
-		blackwood = 5,
-		grout = 2
-	},
-	return_on_dismantle = {
-		blackwood = 2,
-		grout = 1
-	},
+      blackwood = 5,
+      grout = 2
+   },
+   return_on_dismantle = {
+      blackwood = 2,
+      grout = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 44, 62 },
-			fps = 10
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 44, 62 },
-		},
-		unoccupied = {
-			template = "unoccupied_??",
-			directory = dirname,
-			hotspot = { 44, 62 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 44, 62 },
+         fps = 10
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 44, 62 },
+      },
+      unoccupied = {
+         template = "unoccupied_??",
+         directory = dirname,
+         hotspot = { 44, 62 },
+      }
+   },
 
-	outputs = {
-		"barbarians_soldier",
+   outputs = {
+      "barbarians_soldier",
    },
 
    aihints = {},
 
-	max_soldiers = 5,
+   max_soldiers = 5,
    heal_per_second = 130,
    conquers = 8,
    prefer_heroes = true,
 
    messages = {
-		occupied = _"Your soldiers have occupied your barrier.",
-		aggressor = _"Your barrier discovered an aggressor.",
-		attack = _"Your barrier is under attack.",
-		defeated_enemy = _"The enemy defeated your soldiers at the barrier.",
-		defeated_you = _"Your soldiers defeated the enemy at the barrier."
+      occupied = _"Your soldiers have occupied your barrier.",
+      aggressor = _"Your barrier discovered an aggressor.",
+      attack = _"Your barrier is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the barrier.",
+      defeated_you = _"Your soldiers defeated the enemy at the barrier."
    },
 }

@@ -27,6 +27,7 @@ wl_library(graphic_text
     base_i18n
     base_log
     base_macros
+    graphic
     graphic_color
     graphic_image_cache
     graphic_image_io

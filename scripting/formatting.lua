@@ -22,25 +22,25 @@
 --
 -- Same algorithm as in src/base/i18n
 function localize_list(items, listtype)
-	local result = ""
-	for i, item in pairs(items) do
-		if (i == 1) then
-			result = item
-		elseif (i == #items) then
-			if (listtype == "&") then
-				result = _"%1$s & %2$s":bformat(result, item)
-			elseif (listtype == "or") then
-				result = _"%1$s or %2$s":bformat(result, item)
-			elseif (listtype == ",") then
-				result = _"%1$s, %2$s":bformat(result, item)
-			else
-				result = _"%1$s and %2$s":bformat(result, item)
-		end
-		else
-			result = _"%1$s, %2$s":bformat(result, item)
-		end
-	end
-	return result
+   local result = ""
+   for i, item in pairs(items) do
+      if (i == 1) then
+         result = item
+      elseif (i == #items) then
+         if (listtype == "&") then
+            result = _"%1$s & %2$s":bformat(result, item)
+         elseif (listtype == "or") then
+            result = _"%1$s or %2$s":bformat(result, item)
+         elseif (listtype == ",") then
+            result = _"%1$s, %2$s":bformat(result, item)
+         else
+            result = _"%1$s and %2$s":bformat(result, item)
+      end
+      else
+         result = _"%1$s, %2$s":bformat(result, item)
+      end
+   end
+   return result
 end
 
 
