@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-28 14:23+0000\n"
-"Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -535,7 +535,8 @@ msgstr "Les pàgines s'aniran completant i mantenint actualitzades més sovint q
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr "Espai:"
 
@@ -543,7 +544,8 @@ msgstr "Espai:"
 msgid "toggles if building spaces are shown"
 msgstr "commuta entre mostrar o no mostrar els espais per construir"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr "C:"
 
@@ -551,7 +553,8 @@ msgstr "C:"
 msgid "toggles census"
 msgstr "commuta el cens"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr "F:"
 
@@ -559,7 +562,8 @@ msgstr "F:"
 msgid "toggles fullscreen"
 msgstr "commuta el mode de pantalla completa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr "H:"
 
@@ -567,7 +571,8 @@ msgstr "H:"
 msgid "toggles main menu"
 msgstr "commuta el menú principal"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr "M:"
 
@@ -575,7 +580,8 @@ msgstr "M:"
 msgid "toggles minimap"
 msgstr "commuta el minimapa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr "P:"
 
@@ -583,7 +589,8 @@ msgstr "P:"
 msgid "toggles player menu"
 msgstr "commuta el menú del jugador"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr "T:"
 
@@ -591,7 +598,8 @@ msgstr "T:"
 msgid "toggles tools menu"
 msgstr "commuta el menú d'eines"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr "I:"
 
@@ -599,7 +607,8 @@ msgstr "I:"
 msgid "activates information tool"
 msgstr "activa l'eina d'informació"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr "Ctrl+L:"
 
@@ -607,7 +616,8 @@ msgstr "Ctrl+L:"
 msgid "load map"
 msgstr "carrega un mapa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr "Ctrl+S:"
 
@@ -615,7 +625,8 @@ msgstr "Ctrl+S:"
 msgid "save map"
 msgstr "desa el mapa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr "1-0:"
 
@@ -623,7 +634,8 @@ msgstr "1-0:"
 msgid "changes tool size"
 msgstr "canvia la mida d'eina"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr "Maj (+acció):"
 
@@ -631,7 +643,8 @@ msgstr "Maj (+acció):"
 msgid "selects first alternative tool while pressed"
 msgstr "selecciona la funció alternativa quan es manté premuda"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr "Alt (+acció):"
 
@@ -726,8 +739,8 @@ msgstr "Assegureu-vos d'enviar un geòleg abans de construir un pou o una mina."
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "El vostre territori es pot expandir construint diferents edificis militars: guardes sentinella, fortaleses, barracons, etc."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

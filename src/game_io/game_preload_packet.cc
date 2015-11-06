@@ -70,7 +70,7 @@ void GamePreloadPacket::read
 			m_savetimestamp = static_cast<time_t>(s.get_natural("savetimestamp"));
 			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("preload: %s", e.what());

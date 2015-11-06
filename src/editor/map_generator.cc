@@ -105,16 +105,13 @@ void MapGenerator::generate_bobs
 			(fc,
 			 bobCategory->get_immovable
 			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-			 nullptr);
+			 MapObjectDescr::OwnerType::kWorld);
 
 	if (set_moveable && (num = bobCategory->num_critters()))
-		egbase_.create_bob
-			(fc,
-			 egbase_.world().get_bob
-			 	(bobCategory->get_critter
-			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-			 	 .c_str()),
-			 nullptr);
+		egbase_.create_critter(
+		   fc, egbase_.world().get_bob(
+		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
+		             .c_str()));
 }
 
 void MapGenerator::generate_resources(uint32_t const* const random1,
@@ -836,7 +833,7 @@ void MapGenerator::create_random_map()
 			 &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = -1;
+		uint32_t min_distance = 0;
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);

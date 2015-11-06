@@ -26,12 +26,18 @@
 #include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/constants.h"
+#include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
+
+// there are three arrays to be used by AI
+// their size is defined here
+// (all are of the same size)
+constexpr int kAIDataSize = 6;
 
 class Node;
 namespace Widelands {
@@ -127,15 +133,6 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
-
-	/// Per-player and per-field constructionsite information
-	struct ConstructionsiteInformation {
-		ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-		const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
-		const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
-		uint32_t               totaltime;
-		uint32_t               completedtime;
-	};
 
 	/// Per-player field information.
 	struct Field {
@@ -517,6 +514,14 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
+	// set of functions to be used by AI to save and read own data within this class
+	void set_ai_data(int32_t value, uint32_t position);
+	void set_ai_data(uint32_t value, uint32_t position);
+	void set_ai_data(int16_t value, uint32_t position);
+	void get_ai_data(int32_t * value, uint32_t position);
+	void get_ai_data(uint32_t * value, uint32_t position);
+	void get_ai_data(int16_t * value, uint32_t position);
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
@@ -586,13 +591,22 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
+
+	/**
+	 * AI internal data. These will be ignored by human player
+	 * AI is managing the content of these arrays
+	 */
+	int32_t m_ai_data_int32 [kAIDataSize];
+	uint32_t m_ai_data_uint32 [kAIDataSize];
+	int16_t m_ai_data_int16 [kAIDataSize];
+
 	PlayerBuildingStats m_building_stats;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings
-	(const TribeDescr & tribe_descr, const BuildingIndex bi,
+	(const Tribes& tribes, const BuildingIndex bi,
 	 Building::FormerBuildings* former_buildings);
 
 }

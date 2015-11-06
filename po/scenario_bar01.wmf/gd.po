@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-15 14:52+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -58,12 +58,12 @@ msgid "Start building mines on the mountain"
 msgstr "Tòisich air mèinnean a thogail air a’ bheinn"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "Build coal and iron ore mines"
-msgstr "Tog mèinnean guail is iarainn"
+msgid "Build coal and iron mines"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
-msgid "Build a coal mine and an iron ore mine."
-msgstr "Tog mèinn guail ’s mèinn iarainn."
+msgid "Build a coal mine and an iron mine."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -234,11 +234,11 @@ msgstr "Tog cruadhaichear fiodha"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
-"building materials. They cannot be built out of simple logs – the wood has "
+"building materials. They cannot be built out of simple logs – the logs have "
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Tha togalaichean nas fhearr ’s nas motha  – a’ gabhail a-steach a h-uile togalach an airm – feumach air stuthan togail nas fhearr. cha ghabh an togail a-mach à fiodh simplidh  –  feumaidh cruadhaichear fiodha am fiodh a leasachadh gu fiodh an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha mus ruith thu a-mach à fiodh cruaidh oir chan urrainn dhut do ranntair a leudachadh às aonais."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"

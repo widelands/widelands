@@ -1,8 +1,0 @@
-help=_Gold is the most valuable of all metals; armor and weapons are embellished with it. It is produced in the smelting works out of gold ore and processed in the armor smithy and the weapon smithy.
-
-default_target_quantity=20
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=6 10

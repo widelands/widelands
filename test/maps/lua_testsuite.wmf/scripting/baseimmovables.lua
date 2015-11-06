@@ -9,8 +9,8 @@
 -- works because serial is a property of a MapObject.
 immovable_creation_tests = lunit.TestCase("Immovable Creation")
 function immovable_creation_tests:test_create()
-   imm = map:place_immovable("aspen_summer_old", map:get_field(9, 10))
-   imm2 = map:place_immovable("oak_summer_old", map:get_field(10, 10))
+   imm = map:place_immovable("aspen_summer_old", map:get_field(9, 10), "world")
+   imm2 = map:place_immovable("oak_summer_old", map:get_field(10, 10), "world")
    assert_table(imm)
    assert_table(imm2)
    assert_true(imm.serial > 0)
@@ -21,25 +21,26 @@ function immovable_creation_tests:test_create()
    imm2:remove()
 end
 function immovable_creation_tests:test_create_tribe_immovables()
-   imm = map:place_immovable("field2", map:get_field(10,10), "barbarians")
+   imm = map:place_immovable("field_harvested", map:get_field(10,10), "tribes")
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables()
    imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), "world")
    imm:remove()
 end
-function immovable_creation_tests:test_create_world_immovables1()
-   imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), nil)
-   imm:remove()
+function immovable_creation_tests:test_create_immovables_type_is_nil()
+   assert_error("Immovables are for world or tribes!", function()
+      imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), nil)
+   end)
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
-   assert_error("Illegal tribe!", function()
-      imm = map:place_immovable("field2", map:get_field(10,10), "blablub")
+   assert_error("Immovables are for world or tribes!", function()
+      imm = map:place_immovable("field_harvested", map:get_field(10,10), "blablub")
    end)
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()
-   assert_error("Illegal tribe!", function()
-      imm = map:place_immovable("b", map:get_field(10,10), "barbarians")
+   assert_error("Tribes immovable does not exist!", function()
+      imm = map:place_immovable("b", map:get_field(10,10), "tribes")
    end)
 end
 function immovable_creation_tests:test_create_wrong_usage()
@@ -56,7 +57,7 @@ end
 -- ===================
 immovable_tests = lunit.TestCase("Immovable usage")
 function immovable_tests:setup()
-   self.i = map:place_immovable("aspen_summer_old", map:get_field(9, 10))
+   self.i = map:place_immovable("aspen_summer_old", map:get_field(9, 10), "world")
 end
 function immovable_tests:teardown()
    pcall(self.i.remove, self.i)
@@ -95,14 +96,14 @@ end
 -- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
-   self.none = map:place_immovable("pebble1", map:get_field(19, 10))
-   self.small = map:place_immovable("aspen_summer_old", map:get_field(18, 10))
+   self.none = map:place_immovable("pebble1", map:get_field(19, 10), "world")
+   self.small = map:place_immovable("aspen_summer_old", map:get_field(18, 10), "world")
    self.medium = player1:place_building(
-      "charcoal_kiln", map:get_field(10,10), false, true
+      "barbarians_charcoal_kiln", map:get_field(10,10), false, true
    )
-   self.big = map:place_immovable("greenland_stones4", map:get_field(20, 10))
+   self.big = map:place_immovable("greenland_rocks4", map:get_field(20, 10), "world")
    self.big_building = player1:place_building(
-      "fortress", map:get_field(15,11), false, true
+      "barbarians_fortress", map:get_field(15,11), false, true
    )
 end
 function immovable_property_tests:teardown()
@@ -136,13 +137,13 @@ function immovable_property_tests:test_name_tree()
    assert_equal("aspen_summer_old", self.small.descr.name)
 end
 function immovable_property_tests:test_name_charcoal_kiln()
-   assert_equal("charcoal_kiln", self.medium.descr.name)
+   assert_equal("barbarians_charcoal_kiln", self.medium.descr.name)
 end
-function immovable_property_tests:test_name_stone()
-   assert_equal("greenland_stones4", self.big.descr.name)
+function immovable_property_tests:test_name_rock()
+   assert_equal("greenland_rocks4", self.big.descr.name)
 end
 function immovable_property_tests:test_name_fortress()
-   assert_equal("fortress", self.big_building.descr.name)
+   assert_equal("barbarians_fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_type_pebble()
@@ -153,14 +154,14 @@ function immovable_property_tests:test_type_tree()
 end
 function immovable_property_tests:test_type_charcoal_kiln()
    assert_equal("productionsite", self.medium.descr.type_name)
-   assert_equal("charcoal_kiln", self.medium.descr.name)
+   assert_equal("barbarians_charcoal_kiln", self.medium.descr.name)
 end
 function immovable_property_tests:test_type_stone()
    assert_equal("immovable", self.big.descr.type_name)
 end
 function immovable_property_tests:test_type_fortress()
    assert_equal("militarysite", self.big_building.descr.type_name)
-   assert_equal("fortress", self.big_building.descr.name)
+   assert_equal("barbarians_fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_fields_pebble()

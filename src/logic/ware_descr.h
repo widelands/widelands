@@ -22,15 +22,16 @@
 
 #include <cstring>
 #include <string>
+#include <unordered_map>
 
 #include <stdint.h>
 
 #include "base/macros.h"
 #include "logic/instances.h"
+#include "scripting/lua_table.h"
 
-class Profile;
-class Section;
 class Image;
+class LuaTable;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -45,52 +46,49 @@ class TribeDescr;
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
 */
-struct WareDescr : public MapObjectDescr {
-	WareDescr
-		(const TribeDescr & tribe, char const * const name,
-		 char const * const descname, const std::string & directory,
-		 Profile &, Section & global_s);
+class WareDescr : public MapObjectDescr {
+public:
+	WareDescr(const std::string& init_descname, const LuaTable& t);
 	~WareDescr() override {}
 
-	const TribeDescr & tribe() const {return m_tribe;}
+	/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
+	/// It is used by the computer player.
+	int preciousness(const std::string& tribename) const;
 
-	/// \return index to ware's icon inside picture stack
-	const Image* icon() const {return m_icon;}
-	std::string icon_name() const {return m_icon_fname;}
+	/// How much of the ware type an economy should store in warehouses.
+	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked
+  ///  and should not be configurable.
+	WareIndex default_target_quantity(const std::string& tribename) const;
 
-	/// \return ware's localized descriptive text
-	const std::string & helptext() const {return m_helptext;}
+	std::string directory() const {return directory_;}
 
-	/// How much of the ware type that an economy should store in warehouses.
-	/// The special value std::numeric_limits<uint32_t>::max() means that the
-	/// the target quantity of this ware type will never be checked and should
-	/// not be configurable.
-	uint32_t default_target_quantity() const {return m_default_target_quantity;}
-
-	bool has_demand_check() const {
-		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
-	}
+	bool has_demand_check(const std::string& tribename) const;
 
 	/// Called when a demand check for this ware type is encountered during
 	/// parsing. If there was no default target quantity set in the ware type's
-	/// configuration, set the default value 1.
-	void set_has_demand_check() {
-		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
-			m_default_target_quantity = 1;
-	}
+	/// configuration for the 'tribename', sets the default value to 1.
+	void set_has_demand_check(const std::string& tribename);
 
-	virtual void load_graphics();
+	// Add a building to the list of consumers
+	void add_consumer(const BuildingIndex& building_index);
+	// Add a building to the list of producers
+	void add_producer(const BuildingIndex& building_index);
 
-	/// returns the preciousness of the ware. It is used by the computer player
-	uint8_t preciousness() const {return m_preciousness;}
+	// The buildings that consume this ware
+	const std::set<BuildingIndex>& consumers() const;
+	// The buildings that produce this ware
+	const std::set<BuildingIndex>& producers() const;
 
 private:
-	const TribeDescr & m_tribe;
-	std::string m_helptext;   ///< Long descriptive text
-	uint32_t    m_default_target_quantity;
-	std::string m_icon_fname; ///< Filename of ware's main picture
-	const Image* m_icon;       ///< Index of ware's picture in picture stack
-	uint8_t     m_preciousness;
+	// tribename, quantity. No default.
+	std::unordered_map<std::string, int> default_target_quantities_;
+	// tribename, preciousness. No default.
+	std::unordered_map<std::string, int> preciousnesses_;
+
+	std::set<BuildingIndex> consumers_; // Buildings that consume this ware
+	std::set<BuildingIndex> producers_; // Buildings that produce this ware
+
+	std::string  directory_;  /// The directory where the init files are located
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 

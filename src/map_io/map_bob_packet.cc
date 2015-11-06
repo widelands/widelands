@@ -21,11 +21,11 @@
 
 #include "io/fileread.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -35,7 +35,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 									 EditorGameBase& egbase,
 									 MapObjectLoader&,
 									 Coords const coords,
-									 const OneWorldLegacyLookupTable& lookup_table) {
+									 const WorldLegacyLookupTable& lookup_table) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
@@ -70,7 +70,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 void MapBobPacket::read(FileSystem& fs,
 								EditorGameBase& egbase,
 								MapObjectLoader& mol,
-								const OneWorldLegacyLookupTable& lookup_table) {
+								const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 
@@ -87,7 +87,7 @@ void MapBobPacket::read(FileSystem& fs,
 				}
 			}
 		else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapBobPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("bobs: %s", e.what());

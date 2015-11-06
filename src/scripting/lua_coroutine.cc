@@ -105,9 +105,21 @@ void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	++m_ninput_args;
 }
 
+void LuaCoroutine::push_arg(const Widelands::WareDescr* ware_descr) {
+	assert(ware_descr != nullptr);
+	to_lua<LuaMaps::LuaWareDescription>(m_L, new LuaMaps::LuaWareDescription(ware_descr));
+	++m_ninput_args;
+}
+
 void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
 	assert(worker_descr != nullptr);
 	to_lua<LuaMaps::LuaWorkerDescription>(m_L, new LuaMaps::LuaWorkerDescription(worker_descr));
+	++m_ninput_args;
+}
+
+void LuaCoroutine::push_arg(const std::string& string) {
+	assert(!string.empty());
+	lua_pushstring(m_L, string);
 	++m_ninput_args;
 }
 

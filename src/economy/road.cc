@@ -28,7 +28,7 @@
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 
 namespace Widelands {
 
@@ -358,7 +358,7 @@ void Road::_request_carrier(CarrierSlot & slot)
 		slot.carrier_request =
 			new Request
 				(*this,
-				 owner().tribe().safe_worker_index("carrier"),
+				 owner().tribe().carrier(),
 				 Road::_request_carrier_callback,
 				 wwWORKER);
 	else

@@ -32,8 +32,10 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
+#include "scripting/lua_table.h"
 
 class FileRead;
 class RenderTarget;
@@ -89,12 +91,19 @@ std::string to_string(MapObjectType type);
  */
 struct MapObjectDescr {
 
+	enum class OwnerType {
+		kWorld,
+		kTribe
+	};
+
 	MapObjectDescr(const MapObjectType init_type,
-					 const std::string& init_name,
-					 const std::string& init_descname)
-		: m_type(init_type), m_name(init_name), m_descname(init_descname) {
-	}
-	virtual ~MapObjectDescr() {m_anims.clear();}
+						const std::string& init_name,
+						const std::string& init_descname);
+	MapObjectDescr(const MapObjectType init_type,
+						const std::string& init_name,
+						const std::string& init_descname,
+						const LuaTable& table);
+	virtual ~MapObjectDescr();
 
 	const std::string &     name() const {return m_name;}
 	const std::string &     descname() const {return m_descname;}
@@ -114,16 +123,31 @@ struct MapObjectDescr {
 	}
 
 	uint32_t main_animation() const {
-		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
+		return !m_anims.empty()? m_anims.begin()->second : 0;
 	}
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
 	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string & name);
+	static uint32_t get_attribute_id(const std::string & name, bool add_if_not_exists = false);
 	static std::string get_attribute_name(uint32_t id);
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
+
+	/// Sets the directional animations in 'anims' with the animations '<prefix>_(ne|e|se|sw|w|nw)'.
+	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
+
+	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
+	/// nullptr otherwise
+	const Image* representative_image() const;
+	/// Returns the image fileneme for first frame of the idle animation if the MapObject has animations,
+	/// is empty otherwise
+	const std::string& representative_image_filename() const;
+
+	/// Returns the menu image if the MapObject has one, nullptr otherwise
+	const Image* icon() const;
+	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
+	const std::string& icon_filename() const;
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
@@ -143,6 +167,8 @@ private:
 	Anims               m_anims;
 	static uint32_t     s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap    s_dyn_attribs;
+	std::string representative_image_filename_; // Image for big represenations, e.g. on buttons
+	std::string icon_filename_; // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -210,6 +236,8 @@ public:
 	};
 
 	virtual void load_finish(EditorGameBase &) {}
+
+	virtual const Image* representative_image() const;
 
 protected:
 	MapObject(MapObjectDescr const * descr);

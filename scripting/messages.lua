@@ -26,8 +26,8 @@ include "scripting/ui.lua"
 --                     The popup parameter must be set.
 --
 function send_message(player, title, body, parameters)
-	if (parameters["popup"]) then
-		wait_for_roadbuilding()
+   if (parameters["popup"]) then
+      wait_for_roadbuilding()
    end
    player:send_message(title, body, parameters)
 end
@@ -122,11 +122,11 @@ function message_box_objective(player, message)
          x,y = wl.ui.MapView().viewpoint_x, wl.ui.MapView().viewpoint_y
          -- player:message_box jumps, so nothing to do for us
       else
-		-- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
-		-- In this time, could user can scroll elsewhere, giving weird results.
+      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
+      -- In this time, could user can scroll elsewhere, giving weird results.
          if not message.show_instantly then
-				wait_for_roadbuilding()
-			end
+            wait_for_roadbuilding()
+         end
          way = scroll_smoothly_to(message.field)
       end
    end

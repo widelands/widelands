@@ -24,7 +24,7 @@
 
 #include <boost/signals2.hpp>
 
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "ui_basic/textarea.h"
@@ -88,7 +88,7 @@ protected:
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList *>;
-	using WareListSelectionType = std::vector<bool>;
+	using WareListSelectionType = std::map<const Widelands::WareIndex, bool>;
 
 	/**
 	 * Update the anchored selection. When first mouse button is pressed on a
@@ -102,6 +102,7 @@ private:
 
 	const Widelands::TribeDescr & m_tribe;
 	Widelands::WareWorker m_type;
+	const std::set<Widelands::WareIndex> m_indices;
 	UI::Textarea        m_curware;
 	WareListSelectionType      m_selected;
 	WareListSelectionType      m_hidden;

@@ -145,8 +145,8 @@ void DitherProgram::maybe_add_dithering_triangle(
 		return;
 	}
 	const Widelands::TerrainDescription& other_terrain_description =
-	   terrains.get_unmutable(other_terrain);
-	if (terrains.get_unmutable(my_terrain).dither_layer() <
+	   terrains.get(other_terrain);
+	if (terrains.get(my_terrain).dither_layer() <
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
 		   other_terrain_description.get_texture(gametime).texture_coordinates().top_left();
@@ -270,6 +270,6 @@ void DitherProgram::draw(const uint32_t gametime,
 		}
 	}
 
-	const Texture& texture = terrains.get_unmutable(0).get_texture(0);
+	const Texture& texture = terrains.get(0).get_texture(0);
 	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
 }

@@ -33,5 +33,3 @@ function test_map:test_playerslots_starting_field()
    assert_equal(map:get_field(30,10), map.player_slots[2].starting_field)
    assert_equal(map:get_field(50,10), map.player_slots[3].starting_field)
 end
-
-

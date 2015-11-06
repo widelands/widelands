@@ -476,8 +476,7 @@ constexpr uint8_t kCurrentPacketVersion = 3;
 PortDock::Loader::Loader() : m_warehouse(0) {
 }
 
-void PortDock::Loader::load(FileRead & fr)
-{
+void PortDock::Loader::load(FileRead & fr) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
@@ -544,7 +543,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("PortDock", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading portdock: %s", e.what());

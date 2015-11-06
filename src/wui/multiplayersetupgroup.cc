@@ -32,8 +32,7 @@
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
+#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
@@ -322,14 +321,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribe->set_tooltip(random.c_str());
 				tribe->set_pic(m_tribepics[random]);
 			} else {
-				std::string tribepath("tribes/" + player_setting.tribe);
 				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
-					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
-					Section & global = prof.get_safe_section("tribe");
-					m_tribenames[player_setting.tribe] = global.get_safe_string("name");
-					m_tribepics[player_setting.tribe] =
-						g_gr->images().get((tribepath + "/") + global.get_safe_string("icon"));
+					i18n::Textdomain td("tribes");
+					for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+						m_tribenames[tribeinfo.name] = _(tribeinfo.descname);
+						m_tribepics[tribeinfo.name] = g_gr->images().get(tribeinfo.icon);
+					}
 				}
 				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
 				tribe->set_pic(m_tribepics[player_setting.tribe]);
@@ -355,11 +353,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			/** Translators: This is a game type */
 			init->set_title(_("Saved Game"));
 		else {
-			std::string tribepath("tribes/" + player_setting.tribe);
-			i18n::Textdomain td(tribepath); // for translated initialisation
+			i18n::Textdomain td("tribes"); // for translated initialisation
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
-					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).second));
+					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).descname));
 					break;
 				}
 			}

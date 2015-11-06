@@ -40,15 +40,15 @@ world:new_resource_type{
 }
 
 world:new_resource_type{
-   name = "granite",
-   descname = _ "Granite",
+   name = "stones",
+   descname = _ "Stones",
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = pics_dir .. "granite1.png",
-      [10] = pics_dir .. "granite2.png",
-      [15] = pics_dir .. "granite3.png",
-      [1000] = pics_dir .. "granite4.png",
+      [5] = pics_dir .. "stones1.png",
+      [10] = pics_dir .. "stones2.png",
+      [15] = pics_dir .. "stones3.png",
+      [1000] = pics_dir .. "stones4.png",
    }
 }
 

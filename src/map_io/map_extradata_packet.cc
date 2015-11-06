@@ -66,7 +66,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapExtradataPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("extradata: %s", e.what());

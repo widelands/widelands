@@ -1,8 +1,0 @@
-help=_Stone is a basic building ware of the Atlanteans. It is produced in a quarry or a crystal mine.
-
-default_target_quantity=20
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=7 8

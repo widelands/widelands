@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-04 14:23+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -535,7 +535,8 @@ msgstr "Stránky mohou být podrobnější a aktuálnější než tento soubor. 
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr ""
 
@@ -543,7 +544,8 @@ msgstr ""
 msgid "toggles if building spaces are shown"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr ""
 
@@ -551,7 +553,8 @@ msgstr ""
 msgid "toggles census"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr ""
 
@@ -559,7 +562,8 @@ msgstr ""
 msgid "toggles fullscreen"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr ""
 
@@ -567,7 +571,8 @@ msgstr ""
 msgid "toggles main menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr ""
 
@@ -575,7 +580,8 @@ msgstr ""
 msgid "toggles minimap"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr ""
 
@@ -583,7 +589,8 @@ msgstr ""
 msgid "toggles player menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr ""
 
@@ -591,7 +598,8 @@ msgstr ""
 msgid "toggles tools menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr ""
 
@@ -599,7 +607,8 @@ msgstr ""
 msgid "activates information tool"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr ""
 
@@ -607,7 +616,8 @@ msgstr ""
 msgid "load map"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr ""
 
@@ -615,7 +625,8 @@ msgstr ""
 msgid "save map"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr ""
 
@@ -623,7 +634,8 @@ msgstr ""
 msgid "changes tool size"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr ""
 
@@ -631,7 +643,8 @@ msgstr ""
 msgid "selects first alternative tool while pressed"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr ""
 
@@ -726,8 +739,8 @@ msgstr "Předtím než postavíš důl nebo studnu, určitě pošli na vyhlédnu
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "Své území můžeš rozšiřovat stavěním různých vojenských budov - hlásek, pevností, kasáren, atd."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

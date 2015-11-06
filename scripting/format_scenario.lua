@@ -94,7 +94,7 @@ end
 --
 --    :returns: <br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>
 function listdivider()
-	return ("<br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>")
+   return ("<br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>")
 end
 
 -- RST
@@ -138,11 +138,10 @@ function new_objectives(...)
    local sum = 0
    local s = ""
    for idx,obj in ipairs{...} do
-   	s = s .. obj.body
+      s = s .. obj.body
       sum = sum + obj.number
    end
    return rt("<p font-size=10> <br></p>" ..
-	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
-	   .. ngettext("New Objective", "New Objectives", sum) .. "</p>") .. s
+      "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
+      .. ngettext("New Objective", "New Objectives", sum) .. "</p>") .. s
 end
-

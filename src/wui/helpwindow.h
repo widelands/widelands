@@ -23,13 +23,14 @@
 #include <memory>
 
 #include "graphic/align.h"
+#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 
 class LuaInterface;
 
 namespace Widelands {
-struct BuildingDescr;
+class BuildingDescr;
 }
 
 namespace UI {
@@ -43,6 +44,7 @@ public:
 	BuildingHelpWindow
 		(Panel * parent, UI::UniqueWindow::Registry& reg,
 		 const Widelands::BuildingDescr& building_description,
+		 const Widelands::TribeDescr& tribe,
 		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 

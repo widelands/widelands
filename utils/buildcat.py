@@ -58,7 +58,22 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/*.lua",
+        "../../tribes/scripting/starting_conditions/*/*.lua"
+        "../../tribes/*.lua",
+        "../../tribes/*/init.lua",
+        "../../tribes/*/*/init.lua",
+        "../../tribes/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/*/init.lua",
+    ]),
+
+    ("tribes_encyclopedia/tribes_encyclopedia", [
+        "../../tribes/scripting/help/*.lua",
+        "../../tribes/*/helptexts.lua",
+        "../../tribes/*/*/helptexts.lua",
+        "../../tribes/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
@@ -89,30 +104,6 @@ ITERATIVEPOTS = [
     ),
     ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
          [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
-    ),
-    ("tribe_atlanteans/tribe_atlanteans", "tribes/",
-        ["../../tribes/atlanteans/conf",
-         "../../tribes/atlanteans/*/conf",
-         "../../tribes/atlanteans/scripting/*.lua",
-         "../../tribes/atlanteans/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_barbarians/tribe_barbarians", "tribes/",
-        ["../../tribes/barbarians/conf",
-         "../../tribes/barbarians/*/conf",
-         "../../tribes/barbarians/scripting/*.lua",
-         "../../tribes/barbarians/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_empire/tribe_empire", "tribes/",
-        ["../../tribes/empire/conf",
-         "../../tribes/empire/*/conf",
-         "../../tribes/empire/scripting/*.lua",
-         "../../tribes/empire/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
     ),
 ]
 

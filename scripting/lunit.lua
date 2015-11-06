@@ -1,4 +1,3 @@
-
 --[[--------------------------------------------------------------------------
 
     This file is part of lunit 0.3 (alpha).
@@ -342,13 +341,13 @@ function lunit.run()
   ---------------------------
   -- Initialize statistics --
   ---------------------------
-  lunit.stats.ntestcases = 0	-- Total number of Test Cases
-  lunit.stats.tests = 0	-- Total number of all Tests in all Test Cases
-  lunit.stats.run = 0		-- Number of Tests run
-  lunit.stats.notrun = 0	-- Number of Tests not run
-  lunit.stats.failed = 0	-- Number of Tests failed
-  lunit.stats.passed = 0	-- Number of Test passed
-  lunit.stats.assertions = 0	-- Number of all assertions made in all Test in all Test Cases
+  lunit.stats.ntestcases = 0  -- Total number of Test Cases
+  lunit.stats.tests = 0  -- Total number of all Tests in all Test Cases
+  lunit.stats.run = 0  -- Number of Tests run
+  lunit.stats.notrun = 0  -- Number of Tests not run
+  lunit.stats.failed = 0  -- Number of Tests failed
+  lunit.stats.passed = 0  -- Number of Test passed
+  lunit.stats.assertions = 0  -- Number of all assertions made in all Test in all Test Cases
 
   --------------------------------
   -- Count Test Cases and Tests --
@@ -381,7 +380,7 @@ function lunit.run()
   local msg_assertions = lunit.stats.assertions.." Assertions checked. "
   local msg_passed     = lunit.stats.passed == lunit.stats.tests and "All Tests passed" or  lunit.stats.passed.." Tests passed"
   local msg_failed     = lunit.stats.failed > 0 and ", "..lunit.stats.failed.." failed" or ""
-  local msg_run	       = lunit.stats.notrun > 0 and ", "..lunit.stats.notrun.." not run" or ""
+  local msg_run        = lunit.stats.notrun > 0 and ", "..lunit.stats.notrun.." not run" or ""
 
   print()
   print(msg_assertions..msg_passed..msg_failed..msg_run.."!")

@@ -1,9 +1,0 @@
-help=_Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and is consumed at the training sites (arena, colosseum, training camp). There are two sources of meat: pork from piggeries and the meat of wild game hunted by the hunters. 
-
-default_target_quantity=20
-preciousness=2
-
-[idle]
-pics=meat_idle.png
-hotspot=5 6
-

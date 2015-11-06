@@ -29,7 +29,7 @@
 #include "logic/map.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -37,7 +37,7 @@ constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapTerrainPacket::read(FileSystem& fs,
                                    EditorGameBase& egbase,
-                                   const OneWorldLegacyLookupTable& lookup_table) {
+                                   const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
@@ -74,7 +74,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapTerrainPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("terrain: %s", e.what());
@@ -94,7 +94,7 @@ void MapTerrainPacket::write
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
 	const World & world = egbase.world();
-	TerrainIndex const nr_terrains = world.terrains().get_nitems();
+	TerrainIndex const nr_terrains = world.terrains().size();
 	fw.unsigned_16(nr_terrains);
 
 	std::map<const char * const, TerrainIndex> smap;

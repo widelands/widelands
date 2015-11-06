@@ -12,13 +12,13 @@ function remove_all_rocks(fields, g_sleeptime)
       local remove_field = true
 
       if f.immovable then
-         local n = f.immovable.descr.name:match("greenland_stones(%d*)")
+         local n = f.immovable.descr.name:match("greenland_rocks(%d*)")
          if n then
             n = tonumber(n)
             f.immovable:remove()
             if n > 1 then
                remove_field = false
-               map:place_immovable("greenland_stones" .. n-1, f)
+               map:place_immovable("greenland_rocks" .. n-1, f, "world")
             end
             sleep(sleeptime)
          end
@@ -29,4 +29,3 @@ function remove_all_rocks(fields, g_sleeptime)
       end
    end
 end
-

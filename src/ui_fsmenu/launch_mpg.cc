@@ -590,10 +590,14 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		m_settings->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		Profile tribe((new std::string("tribes/" + player_save_tribe[i - 1] + "/conf"))->c_str(),
-				nullptr, "tribe_" + player_save_tribe[i - 1]);
-		Section & global = tribe.get_safe_section("tribe");
-		player_save_tribe[i - 1] = global.get_safe_string("name");
+		for (const TribeBasicInfo& tribeinfo : m_settings->settings().tribes) {
+			if (tribeinfo.name == player_save_tribe[i - 1]) {
+				i18n::Textdomain td("tribes"); // for translated initialisation
+				player_save_tribe[i - 1] = _(tribeinfo.descname);
+				break;
+			}
+		}
+
 		infotext += " (";
 		infotext += player_save_tribe[i - 1];
 		infotext += "):\n    ";

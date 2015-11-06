@@ -82,7 +82,6 @@ private:
 	UI::Checkbox*                 cb_show_all_maps_;
 	std::vector<UI::Checkbox*>    tags_checkboxes_;
 
-	bool                          is_scenario_;
 	Map::ScenarioTypes            scenario_types_;
 
 	std::vector<std::string>      tags_ordered_;

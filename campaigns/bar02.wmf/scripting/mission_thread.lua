@@ -26,9 +26,9 @@ function remember_cattlefarm()
 
    campaign_message_box(cattlefarm_01)
 
-   p1:allow_buildings{"cattlefarm"}
+   p1:allow_buildings{"barbarians_cattlefarm"}
    local o = add_campaign_objective(obj_build_cattlefarm)
-   while not check_for_buildings(p1, {cattlefarm = 1}) do
+   while not check_for_buildings(p1, {barbarians_cattlefarm = 1}) do
       sleep(1223) end
    o.done = true
 
@@ -42,23 +42,24 @@ function initial_message_and_small_food_economy()
    campaign_message_box(briefing_msg_1)
    campaign_message_box(order_msg_1_small_food_economy)
 
-   p1:allow_buildings{"fishers_hut",
-      "hunters_hut",
-      "gamekeepers_hut",
-      "tavern",
-      "farm",
-      "well",
-      "bakery",
-      "sentry",
+   p1:allow_buildings{
+      "barbarians_fishers_hut",
+      "barbarians_hunters_hut",
+      "barbarians_gamekeepers_hut",
+      "barbarians_tavern",
+      "barbarians_farm",
+      "barbarians_well",
+      "barbarians_bakery",
+      "barbarians_sentry",
    }
 
    local o = add_campaign_objective(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
-         fishers_hut = 1,
-         hunters_hut = 1,
-         well = 1,
-         farm = 1,
-         bakery = 1,
+         barbarians_fishers_hut = 1,
+         barbarians_hunters_hut = 1,
+         barbarians_well = 1,
+         barbarians_farm = 1,
+         barbarians_bakery = 1,
       }) do sleep(3413) end
    o.done = true
    campaign_message_box(story_note_1)
@@ -70,7 +71,7 @@ end
 function foottracks()
    -- Hunter build and some time passed or expanded east
    while true do
-      if game.time > 900000 and #p1:get_buildings("hunters_hut") > 0
+      if game.time > 900000 and #p1:get_buildings("barbarians_hunters_hut") > 0
       then break end
       if check_conquered_footprints()
       then break end
@@ -86,10 +87,10 @@ function foottracks()
 
    local pts = scroll_smoothly_to(game.map:get_field(67,19))
 
-   campaign_message_box(order_msg_2_build_a_donjon)
-   local o = add_campaign_objective(obj_build_a_donjon)
-   p1:forbid_buildings{"sentry"}
-   p1:allow_buildings{"donjon"}
+   campaign_message_box(order_msg_2_build_a_tower)
+   local o = add_campaign_objective(obj_build_a_tower)
+   p1:forbid_buildings{"barbarians_sentry"}
+   p1:allow_buildings{"barbarians_tower"}
 
    timed_scroll(array_reverse(pts), 10)
 
@@ -97,13 +98,13 @@ function foottracks()
    sleep(5003)
    p1:hide_fields(fields)
 
-   while not check_for_buildings(p1, {donjon=1}) do sleep(2341) end
+   while not check_for_buildings(p1, {barbarians_tower=1}) do sleep(2341) end
    o.done = true
    campaign_message_box(order_msg_3_explore_further)
    -- "explore further" is active untill "Boldreth shout out", so the player always has one open objectve.
    exploration_objective = add_campaign_objective(obj_explore_further)
 
-   p1:allow_buildings{"sentry", "barrier"}
+   p1:allow_buildings{"barbarians_sentry", "barbarians_barrier"}
 
    -- Wait till we see the mountain and at least one frontier
    while true do
@@ -133,26 +134,33 @@ function mining_and_trainingsites()
    local o = add_campaign_objective(obj_build_mining_economy)
 
    p1:allow_buildings{
-      "coalmine",
-      "oremine",
-      "goldmine",
-      "granitemine",
-      "smelting_works",
-      "metalworks",
-      "charcoal_kiln",
-      "micro-brewery",
+      "barbarians_coalmine",
+      "barbarians_ironmine",
+      "barbarians_goldmine",
+      "barbarians_granitemine",
+      "barbarians_smelting_works",
+      "barbarians_metal_workshop",
+      "barbarians_charcoal_kiln",
+      "barbarians_micro_brewery",
    }
 
    timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while true do
-      local h = p1:get_buildings{"coalmine","charcoal_kiln", "oremine",
-         "tavern", "smelting_works", "metalworks"}
+      local h = p1:get_buildings{
+         "barbarians_coalmine",
+         "barbarians_charcoal_kiln",
+         "barbarians_ironmine",
+         "barbarians_tavern",
+         "barbarians_smelting_works",
+         "barbarians_metal_workshop"}
 
-      if (#h.coalmine + #h.charcoal_kiln > 0) and
-         #h.oremine > 0 and #h.tavern > 0 and #h.smelting_works > 0 and
-         #h.metalworks > 0
+      if (#h.barbarians_coalmine + #h.barbarians_charcoal_kiln > 0) and
+          #h.barbarians_ironmine > 0 and
+          #h.barbarians_tavern > 0 and
+          #h.barbarians_smelting_works > 0 and
+          #h.barbarians_metal_workshop > 0
       then
          break
       end
@@ -165,21 +173,21 @@ function mining_and_trainingsites()
 
    campaign_message_box(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
-      "axfactory",
-      "warmill",
-      "helmsmithy",
-      "battlearena",
-      "trainingcamp",
-      "inn",
-      "big_inn",
-      "deep_coalmine",
-      "deep_goldmine",
-      "deep_oremine",
-      "deeper_coalmine",
-      "deeper_goldmine",
-      "deeper_oremine",
-      "warehouse",
-      "brewery",
+      "barbarians_ax_workshop",
+      "barbarians_warmill",
+      "barbarians_helmsmithy",
+      "barbarians_battlearena",
+      "barbarians_trainingcamp",
+      "barbarians_inn",
+      "barbarians_big_inn",
+      "barbarians_coalmine_deep",
+      "barbarians_goldmine_deep",
+      "barbarians_ironmine_deep",
+      "barbarians_coalmine_deeper",
+      "barbarians_goldmine_deeper",
+      "barbarians_ironmine_deeper",
+      "barbarians_warehouse",
+      "barbarians_brewery",
    }
    run(check_warehouse_obj, add_campaign_objective(obj_build_a_warehouse))
    run(check_trainingssite_obj, add_campaign_objective(obj_build_trainingssites))
@@ -188,15 +196,19 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {trainingcamp = 1, battlearena = 1}) do
+   while not check_for_buildings(p1, {barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
       sleep(6523)
    end
    o.done = true
 end
 function check_weapon_productions_obj(o)
    while true do
-      local rv = p1:get_buildings{"metalworks", "axfactory", "warmill"}
-      if #rv.metalworks > 0 and (#rv.axfactory + #rv.warmill > 0) then
+      local rv = p1:get_buildings{
+         "barbarians_metal_workshop",
+         "barbarians_ax_workshop",
+         "barbarians_warmill"}
+      if #rv.barbarians_metal_workshop > 0 and
+         (#rv.barbarians_ax_workshop + #rv.barbarians_warmill > 0) then
          break
       end
       sleep(6523)
@@ -204,11 +216,11 @@ function check_weapon_productions_obj(o)
    o.done = true
 end
 function check_warehouse_obj(o)
-   while not check_for_buildings(p1, {warehouse = 1}) do sleep(3827) end
+   while not check_for_buildings(p1, {barbarians_warehouse = 1}) do sleep(3827) end
    o.done = true
 end
 function check_helmsmithy_obj(o)
-   while not check_for_buildings(p1, {helmsmithy = 1}) do sleep(3827) end
+   while not check_for_buildings(p1, {barbarians_helmsmithy = 1}) do sleep(3827) end
    o.done = true
 end
 
@@ -219,9 +231,9 @@ function fortress()
 
    campaign_message_box(order_msg_5_build_a_fortress)
    local o = add_campaign_objective(obj_build_a_fortress)
-   p1:allow_buildings{"fortress"}
+   p1:allow_buildings{"barbarians_fortress"}
 
-   while #p1:get_buildings("fortress") == 0 do sleep(6523) end
+   while #p1:get_buildings("barbarians_fortress") == 0 do sleep(6523) end
 
    o.done = true
    campaign_message_box(story_note_3)
@@ -248,12 +260,12 @@ end
 
 -- checks if all military buildings are drestroyed (the build-in function "defeated" only checks if all warehouses are destroyed)
 function check_player_completely_defeated(dp)
-    if #dp:get_buildings("fortress")  > 0 then return false end
-    if #dp:get_buildings("citadel")   > 0 then return false end
-    if #dp:get_buildings("donjon")    > 0 then return false end
-    if #dp:get_buildings("barrier")   > 0 then return false end
-    if #dp:get_buildings("sentry")    > 0 then return false end
-    if #dp:get_buildings("warehouse") > 0 then return false end
+    if #dp:get_buildings("barbarians_fortress")  > 0 then return false end
+    if #dp:get_buildings("barbarians_citadel")   > 0 then return false end
+    if #dp:get_buildings("barbarians_tower")    > 0 then return false end
+    if #dp:get_buildings("barbarians_barrier")   > 0 then return false end
+    if #dp:get_buildings("barbarians_sentry")    > 0 then return false end
+    if #dp:get_buildings("barbarians_warehouse") > 0 then return false end
     return true
 end
 
@@ -295,14 +307,14 @@ function renegade_fortresses()
    do sleep(6833) end
 
    prefilled_buildings(p1,
-      {"barrier", 118, 100, soldiers =
+      {"barbarians_barrier", 118, 100, soldiers =
          {[{0,0,0,0}]= 1, [{1,1,0,1}] = 1, [{0,1,0,0}] = 1}
       },
-      {"citadel", 117, 97, soldiers = {
+      {"barbarians_citadel", 117, 97, soldiers = {
          [{0,0,0,0}]=3, [{1,1,0,0}]=1, [{0,0,0,1}]=2,
          [{0,1,0,1}]=1, [{1,1,0,1}]=1, [{2,1,0,2}]=1,
       }},
-      {"sentry", 116, 98 }
+      {"barbarians_sentry", 116, 98 }
    )
 
    -- Some something of the enemy land
@@ -350,4 +362,3 @@ run(kalitath)
 run(renegade_fortresses)
 run(mission_complete)
 run(mining_and_trainingsites)
-
