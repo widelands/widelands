@@ -1,8 +1,0 @@
-help=_This yarn is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill.
-
-default_target_quantity=10
-preciousness=11
-
-[idle]
-pics=idle.png
-hotspot=9 16

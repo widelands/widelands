@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-07 07:40+0000\n"
-"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "Dostarczamy również GPL w postaci dokumentu tekstowego razem z Widelan
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Na linuksie plik COPYING znajdziesz w głównym katalogu źródła lub pakietu binarnego, bądź też w katalogu instalacji (np. '%1%')."
+msgstr "Na Linuksie plik COPYING znajdziesz w głównym katalogu źródła lub pakietu binarnego, bądź też w katalogu instalacji (np. \"%1%\")."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
@@ -84,7 +84,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Gra dostarczana jest w stanie \"jak widać\" i bez żadnej gwarancji. Więcej informacji i wsparcie znajdziesz na stronie %1% (strona główna, wiki, forum lub wsparcie ogólne), %2% (bug tracker) oraz %3% (tłumaczenia)."
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -208,7 +208,7 @@ msgstr "O: przełącza zadania do wykonania"
 
 #: ../../txts/README.lua:70
 msgid "B: toggles building statistics"
-msgstr ""
+msgstr "S: przełącza statystyki budynków"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
@@ -398,7 +398,7 @@ msgstr "Programiści"
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -414,15 +414,15 @@ msgstr "Imperium"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Była starszyzna"
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
@@ -443,11 +443,11 @@ msgstr "Programiści strony internetowej"
 
 #: ../../txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
@@ -487,11 +487,11 @@ msgstr "Tłumacze"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:10
 msgid "README for the Widelands Editor"
@@ -499,7 +499,7 @@ msgstr "Pomoc do edytora Widelands"
 
 #: ../../txts/editor_readme.lua:12
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Edytor Widelands"
 
 #: ../../txts/editor_readme.lua:16
 msgid ""
@@ -507,23 +507,23 @@ msgid ""
 "to use with Widelands. As you can see, this Editor is heavy work in progress"
 " and as the Editor becomes better and better, this text will also get longer"
 " and more complete."
-msgstr ""
+msgstr "Edytor jest przeznaczony dla graczy, którzy chcą stworzyć własne mapy do gry. Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz z jego rozwojem polepszy się i ta dokumentacja."
 
 #: ../../txts/editor_readme.lua:17
 msgid ""
 "This Editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Edytor przeznaczony jest dla graczy, którzy chcieliby tworzyć własne mapy do Widelands."
 
 #: ../../txts/editor_readme.lua:18
 msgid ""
 "As you can see, this Editor is heavy work in progress and as the Editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz z jego rozwojem polepszy się i ta dokumentacja."
 
 #: ../../txts/editor_readme.lua:19
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Sprawdź nasze instrukcje dla użytkowników na naszych stronach wiki na: %s"
 
 #: ../../txts/editor_readme.lua:20
 msgid ""
@@ -538,119 +538,119 @@ msgstr "Skróty klawiszowe"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
-msgstr ""
+msgstr "SPACJA:"
 
 #: ../../txts/editor_readme.lua:26
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "wyświetla miejsca pod budowę"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:28
 msgid "C:"
-msgstr ""
+msgstr "C:"
 
 #: ../../txts/editor_readme.lua:28
 msgid "toggles census"
-msgstr ""
+msgstr "przełącza spis ludności"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:30
 msgid "F:"
-msgstr ""
+msgstr "F:"
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "przełącza pełny ekran"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:32
 msgid "H:"
-msgstr ""
+msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "przełącza menu główne"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:34
 msgid "M:"
-msgstr ""
+msgstr "M:"
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "przełącza minimapę"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:36
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "przełącza menu gracza"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:38
 msgid "T:"
-msgstr ""
+msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "przełącza menu narzędzi"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:40
 msgid "I:"
-msgstr ""
+msgstr "I:"
 
 #: ../../txts/editor_readme.lua:40
 msgid "activates information tool"
-msgstr ""
+msgstr "przełącza narzędzie informacyjne"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
-msgstr ""
+msgstr "CTRL+L:"
 
 #: ../../txts/editor_readme.lua:42
 msgid "load map"
-msgstr ""
+msgstr "wczytuje mapę"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
-msgstr ""
+msgstr "CTRL+S:"
 
 #: ../../txts/editor_readme.lua:44
 msgid "save map"
-msgstr ""
+msgstr "zapisuje mapę"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:46
 msgid "1-0:"
-msgstr ""
+msgstr "1-0:"
 
 #: ../../txts/editor_readme.lua:46
 msgid "changes tool size"
-msgstr ""
+msgstr "zmienia rozmiar narzędzi"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
-msgstr ""
+msgstr "SHIFT (przytrzymaj):"
 
 #: ../../txts/editor_readme.lua:48
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "wybiera pierwsze alternatywne narzędzie podczas przytrzymania"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
-msgstr ""
+msgstr "ALT (przytrzymaj):"
 
 #: ../../txts/editor_readme.lua:50
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "wybiera drugie alternatywne narzędzie podczas przytrzymania"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
@@ -739,8 +739,8 @@ msgstr "Zanim zbudujesz kopalnię czy studnię, wyślij geologa do zbadania tere
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "Twoje terytorium może zostać rozszerzone poprzez budowanie różnych budowli -  strażnicy, fortecy, koszarów, itp."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-15 11:45+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -739,8 +739,8 @@ msgstr "Dèan cinnteach gun cuir thu clach-eòlaiche airson làraichean a rùrac
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "’S urrainn dhut barrachd tìr a ghabhail ma thogas tu togalaichean an airm a leithid freiceadanan, dùin, taighean-feachd agus msaa."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

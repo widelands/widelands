@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-25 20:03+0000\n"
+"POT-Creation-Date: 2015-11-06 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – from there on out, you can search backwards."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-15 11:46+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -74,9 +74,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Tòisichidh tu air geama le aon phrìomh-àras mar as trice. Seo an togalach mòr leis a’ bhratach ghorm air a bheulaibh. ’S e taigh-stòrais a ghlèidheas bathair, obraichean is saighdearan a tha sa phrìomh-àras. Bidh feum air cuid a bhathar gus taighean a thogail is air cuid eile gus bathar eile a dhèanamh. Gu follaiseach, cha mhair am bathar sa phrìomh-àras gu bràth is feumaidh tu dèanamh cinnteach gun dèan thu barrachd dheth. Is fiodh agus clachan am bathar togail bunasach as cudromaiche aig toiseach a’ gheama. Dèanamaid cinnteach nach ruith am fiodh oirnn. Bidh feum againn air coilltear agus air bothan sa ghabhas e còmhnaidh."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -288,8 +288,8 @@ msgstr "Tha am bothan coillteir deiseil."
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Taghta. Tha am bothan coillteir deiseil. Gabhaidh coilltear còmhnaidh ann a-nis is tòisichidh e air craobhan a leagail. Mar sin, tha teachd a-steach an fhiodha agad cinnteach aig an àm seo. Nise, dhan chlach."
+"the granite."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -301,11 +301,11 @@ msgstr "A’ togail coireall"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Gabhaidh clachan a thochladh ann am mèinnean graineil, ach tha e nas fhasa coireall a thogail faisg air creagan air an talamh. Nach goireasach gu bheil tòrr dhiubh dìreach gu siar (gu clì) air a’ phrìomh-àras agad. Innsidh mi dhut mar a ghluaiseas tu an sealladh agad ann."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -658,8 +658,8 @@ msgstr "Tog coireall eile"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Nuair a bhios torr chreagan ann, thoir fainear dhut an tog thu coireall eile. Gheibh thu clachan nas luaithe mar sin."
+"will make the granite production faster."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -896,12 +896,12 @@ msgstr "Tha rud ann a bu toil leam ionnsachadh dhut fhathast: ’s e seo mar a m
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Tha meudachadh na tìre agad cho simplidh ri togail togalach an airm air crìochan do dhùthcha. Tha roghainn de thogalaichean an airm aig na Tùsanaich: freiceadain, taighean-faire, tùir-fhaire is cathraichean. Mar as motha an togalach ’s ann as cosgaile a bhios e, ’s ann as motha an tìr a cheannsaicheas e is ’s ann as motha an àireamh de shaighdearan a ghabhas còmhnaidh ann. Tha astar lèirsinne eadar-dhealaichte aig gach togalach cuideachd: chì togalaichean aig a bheil tùr nas fhaide na càch."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -938,9 +938,9 @@ msgstr "Ann am Widelands, feumaidh gu iomadh togalach a thogail agus bidh feum a
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Tha ceithir togalaichean an airm aig na tùsanaich as urrainn dhut togail: am freiceadan (beag), an taigh-faire agus an tùr-faire (meadhanach an dà chuid dhiubh) agus an dùn (mòr). Tagh am fear as fhearr leat."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

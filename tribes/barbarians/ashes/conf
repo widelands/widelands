@@ -1,8 +1,0 @@
-program=program
-[program]
-animate=idle 45000
-remove=
-
-[idle]
-pics=ashes_??.png
-hotspot=40 39

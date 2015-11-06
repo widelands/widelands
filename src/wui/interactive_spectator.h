@@ -22,8 +22,9 @@
 
 #include <SDL_keyboard.h>
 
-#include "wui/interactive_gamebase.h"
+#include "profile/profile.h"
 #include "ui_basic/button.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {class Game;}
 

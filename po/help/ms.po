@@ -1,0 +1,284 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# abuyop <abuyop@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-12 06:27+0000\n"
+"PO-Revision-Date: 2015-08-16 06:48+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ms\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../tribes/scripting/format_help.lua:150
+#: ../../tribes/scripting/format_help.lua:442
+msgid "Dependencies"
+msgstr "Dependensi"
+
+#: ../../tribes/scripting/format_help.lua:150
+msgid "Soldiers:"
+msgstr "Askar:"
+
+#: ../../tribes/scripting/format_help.lua:181
+msgid "%1$s or %2$s"
+msgstr "%1$s atau %2$s"
+
+#: ../../tribes/scripting/format_help.lua:188
+msgid "%s and"
+msgstr "%s dan"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:219
+msgid "Equipment from"
+msgstr "Peralatan daripada"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:221
+msgid "and equipment from"
+msgstr "dan peralatan daripada"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:223
+msgid "or equipment from"
+msgstr "atau peralatan daripada"
+
+#: ../../tribes/scripting/format_help.lua:270
+msgid "General"
+msgstr "Jeneral"
+
+#: ../../tribes/scripting/format_help.lua:271
+msgid "Purpose:"
+msgstr "Tujuan:"
+
+#: ../../tribes/scripting/format_help.lua:277
+#: ../../tribes/scripting/format_help.lua:504
+msgid "Note:"
+msgstr "Perhatian:"
+
+#: ../../tribes/scripting/format_help.lua:281
+msgid "Work area radius:"
+msgstr "Radius kawasan kerja:"
+
+#: ../../tribes/scripting/format_help.lua:285
+#: ../../tribes/scripting/format_help.lua:290
+msgid "Healing:"
+msgstr "Penyembuhan:"
+
+#: ../../tribes/scripting/format_help.lua:286
+#: ../../tribes/scripting/format_help.lua:291
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] "Askar bergarison sembuh %s mata hayat per saat"
+
+#: ../../tribes/scripting/format_help.lua:287
+#: ../../tribes/scripting/format_help.lua:293
+msgid "Conquer range:"
+msgstr "Julat penguasaan:"
+
+#: ../../tribes/scripting/format_help.lua:292
+#: ../../tribes/scripting/format_help.lua:314
+msgid "Capacity:"
+msgstr "Kapasiti:"
+
+#: ../../tribes/scripting/format_help.lua:296
+msgid "Training:"
+msgstr "Latihan:"
+
+#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#: numbers. ../../tribes/scripting/format_help.lua:299
+#: ../../tribes/scripting/format_help.lua:303
+#: ../../tribes/scripting/format_help.lua:307
+#: ../../tribes/scripting/format_help.lua:311
+msgid "Trains ‘%1$s’ from %2$s up to %3$s"
+msgstr "Latih‘%1$s’ dari %2$s sehingga %3$s"
+
+#: ../../tribes/scripting/format_help.lua:300
+msgid "Attack"
+msgstr "Serangan"
+
+#: ../../tribes/scripting/format_help.lua:304
+msgid "Defense"
+msgstr "Pertahanan"
+
+#: ../../tribes/scripting/format_help.lua:308
+msgid "Evade"
+msgstr "Elak Diri"
+
+#: ../../tribes/scripting/format_help.lua:312
+msgid "Health"
+msgstr "Kesihatan"
+
+#: ../../tribes/scripting/format_help.lua:316
+msgid "Vision range:"
+msgstr "Julat penglihatan:"
+
+#: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
+msgid "Lore"
+msgstr "Peribudaya"
+
+#: ../../tribes/scripting/format_help.lua:361
+msgid "%1$s from: %2$s"
+msgstr "%1$s daripada: %2$s"
+
+#: ../../tribes/scripting/format_help.lua:366
+msgid "Incoming:"
+msgstr "Masukan:"
+
+#: ../../tribes/scripting/format_help.lua:370
+msgid "Collects:"
+msgstr "Kutipan:"
+
+#: TRANSLATORS This is a verb (The miner mines)
+#: ../../tribes/scripting/format_help.lua:382
+msgid "Mines:"
+msgstr "Lombong:"
+
+#: ../../tribes/scripting/format_help.lua:404
+msgid "Produces:"
+msgstr "Pengeluaran:"
+
+#: ../../tribes/scripting/format_help.lua:439
+msgid "Outgoing:"
+msgstr "Keluaran:"
+
+#: ../../tribes/scripting/format_help.lua:441
+msgid "None"
+msgstr "Tiada"
+
+#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../tribes/scripting/format_help.lua:459
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
+
+#: ../../tribes/scripting/format_help.lua:481
+msgid "Building"
+msgstr "Bangunan"
+
+#: ../../tribes/scripting/format_help.lua:485
+msgid "Mine plot"
+msgstr "Plot lombong"
+
+#: ../../tribes/scripting/format_help.lua:485
+#: ../../tribes/scripting/format_help.lua:487
+#: ../../tribes/scripting/format_help.lua:490
+#: ../../tribes/scripting/format_help.lua:492
+#: ../../tribes/scripting/format_help.lua:494
+#: ../../tribes/scripting/format_help.lua:496
+msgid "Space required:"
+msgstr "Ruang diperlukan:"
+
+#: ../../tribes/scripting/format_help.lua:487
+msgid "Port plot"
+msgstr "Plot pelabuhan"
+
+#: ../../tribes/scripting/format_help.lua:490
+msgid "Small plot"
+msgstr "Plot kecil"
+
+#: ../../tribes/scripting/format_help.lua:492
+msgid "Medium plot"
+msgstr "Plot sederhana"
+
+#: ../../tribes/scripting/format_help.lua:494
+msgid "Big plot"
+msgstr "Plot besar"
+
+#: ../../tribes/scripting/format_help.lua:496
+#: ../../tribes/scripting/format_help.lua:530
+#: ../../tribes/scripting/format_help.lua:575
+#: ../../tribes/scripting/format_help.lua:623
+msgid "Unknown"
+msgstr "Tidak Diketahui"
+
+#: ../../tribes/scripting/format_help.lua:505
+msgid ""
+"This building can either be built directly or obtained by enhancing another "
+"building."
+msgstr "Bangunan ini boleh dibina terus atau diperoleh dengan menaik taraf bangunan lain."
+
+#: ../../tribes/scripting/format_help.lua:511
+msgid "Direct build cost:"
+msgstr "Kos binaan langsung:"
+
+#: ../../tribes/scripting/format_help.lua:513
+msgid "Build cost:"
+msgstr "Kos pembinaan:"
+
+#: ../../tribes/scripting/format_help.lua:525
+msgid "Or enhanced from:"
+msgstr "Atau dinaik taraf dari:"
+
+#: ../../tribes/scripting/format_help.lua:527
+#: ../../tribes/scripting/format_help.lua:530
+msgid "Enhanced from:"
+msgstr "Dinaik taraf dari:"
+
+#: ../../tribes/scripting/format_help.lua:539
+msgid "Cumulative cost:"
+msgstr "Kos terkumpul:"
+
+#: ../../tribes/scripting/format_help.lua:580
+msgid "If built directly, dismantle yields:"
+msgstr "Jika dibina terus, hasil rombak:"
+
+#: ../../tribes/scripting/format_help.lua:585
+msgid "If enhanced, dismantle yields:"
+msgstr "Jika dinaik taraf, hasil rombak:"
+
+#: ../../tribes/scripting/format_help.lua:587
+#: ../../tribes/scripting/format_help.lua:628
+msgid "Dismantle yields:"
+msgstr "Hasil rombak:"
+
+#: ../../tribes/scripting/format_help.lua:637
+msgid "Can be enhanced to:"
+msgstr "Boleh dinaik taraf kepada:"
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Crew required:"
+msgstr "Krew diperlukan:"
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Workers"
+msgstr "Pekerja"
+
+#: ../../tribes/scripting/format_help.lua:688
+msgid "%s or better"
+msgstr "%s atau lebih baik"
+
+#: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
+msgid "Experience levels:"
+msgstr "Aras pengalaman:"
+
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
+msgid "%s to %s (%s EP)"
+msgstr "%s hingga %s (%s EP)"
+
+#: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
+msgid "Worker uses:"
+msgid_plural "Workers use:"
+msgstr[0] "Pekerja diguna:"
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Performance:"
+msgstr "Prestasi:"
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Production"
+msgstr "Pengeluaran"

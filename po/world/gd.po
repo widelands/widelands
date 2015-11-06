@@ -1,84 +1,85 @@
-# Gaelic; Scottish translation for widelands
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2013-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-08 02:41+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 08:50+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:44+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
-#: ../../world/critters/badger/init.lua:14
+#: ../../world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Broc"
 
-#: ../../world/critters/brownbear/init.lua:14
+#: ../../world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Mathan"
 
-#: ../../world/critters/bunny/init.lua:13
+#: ../../world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Coineanach"
 
-#: ../../world/critters/chamois/init.lua:14
+#: ../../world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Gobhar-shamaidh"
 
-#: ../../world/critters/deer/init.lua:14
+#: ../../world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Fiadh"
 
-#: ../../world/critters/duck/init.lua:18
+#: ../../world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Tunnag"
 
-#: ../../world/critters/elk/init.lua:14
+#: ../../world/critters/elk/init.lua:15
 msgid "Elk"
 msgstr "Lon"
 
-#: ../../world/critters/fox/init.lua:14
+#: ../../world/critters/fox/init.lua:15
 msgid "Fox"
 msgstr "Sionnach"
 
-#: ../../world/critters/lynx/init.lua:14
+#: ../../world/critters/lynx/init.lua:15
 msgid "Lynx"
 msgstr "Lincs"
 
-#: ../../world/critters/marten/init.lua:14
+#: ../../world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Taghan"
 
-#: ../../world/critters/reindeer/init.lua:14
+#: ../../world/critters/reindeer/init.lua:15
 msgid "Reindeer"
 msgstr "Fast"
 
-#: ../../world/critters/sheep/init.lua:18
+#: ../../world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Caora"
 
-#: ../../world/critters/stag/init.lua:14
+#: ../../world/critters/stag/init.lua:15
 msgid "Stag"
 msgstr "Damh"
 
-#: ../../world/critters/wildboar/init.lua:14
+#: ../../world/critters/wildboar/init.lua:15
 msgid "Wild boar"
 msgstr "Torc"
 
-#: ../../world/critters/wisent/init.lua:14
+#: ../../world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Tarbh-allaidh"
 
-#: ../../world/critters/wolf/init.lua:14
+#: ../../world/critters/wolf/init.lua:15
 msgid "Wolf"
 msgstr "Madadh-allaidh"
 
@@ -139,6 +140,48 @@ msgstr "Balgan-buachair"
 msgid "Pebble"
 msgstr "Morghan"
 
+#: ../../world/immovables/rocks/blackland_rocks1/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks1/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks1/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks1/init.lua:13
+msgid "Rocks 1"
+msgstr ""
+
+#: ../../world/immovables/rocks/blackland_rocks2/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks2/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks2/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks2/init.lua:13
+msgid "Rocks 2"
+msgstr ""
+
+#: ../../world/immovables/rocks/blackland_rocks3/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks3/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks3/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks3/init.lua:13
+msgid "Rocks 3"
+msgstr ""
+
+#: ../../world/immovables/rocks/blackland_rocks4/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks4/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks4/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks4/init.lua:13
+msgid "Rocks 4"
+msgstr ""
+
+#: ../../world/immovables/rocks/blackland_rocks5/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks5/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks5/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks5/init.lua:13
+msgid "Rocks 5"
+msgstr ""
+
+#: ../../world/immovables/rocks/blackland_rocks6/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks6/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks6/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks6/init.lua:13
+msgid "Rocks 6"
+msgstr ""
+
 #: ../../world/immovables/skeleton1/init.lua:5
 #: ../../world/immovables/skeleton3/init.lua:5
 msgid "Skeleton"
@@ -174,49 +217,7 @@ msgstr "Slige"
 msgid "Standing Stone"
 msgstr "Tursa"
 
-#: ../../world/immovables/stones/blackland_stones1/init.lua:12
-#: ../../world/immovables/stones/desert_stones1/init.lua:12
-#: ../../world/immovables/stones/greenland_stones1/init.lua:12
-#: ../../world/immovables/stones/winterland_stones1/init.lua:12
-msgid "Stones 1"
-msgstr "Clachan 1"
-
-#: ../../world/immovables/stones/blackland_stones2/init.lua:12
-#: ../../world/immovables/stones/desert_stones2/init.lua:12
-#: ../../world/immovables/stones/greenland_stones2/init.lua:12
-#: ../../world/immovables/stones/winterland_stones2/init.lua:12
-msgid "Stones 2"
-msgstr "Clachan 2"
-
-#: ../../world/immovables/stones/blackland_stones3/init.lua:12
-#: ../../world/immovables/stones/desert_stones3/init.lua:12
-#: ../../world/immovables/stones/greenland_stones3/init.lua:12
-#: ../../world/immovables/stones/winterland_stones3/init.lua:12
-msgid "Stones 3"
-msgstr "Clachan 3"
-
-#: ../../world/immovables/stones/blackland_stones4/init.lua:12
-#: ../../world/immovables/stones/desert_stones4/init.lua:12
-#: ../../world/immovables/stones/greenland_stones4/init.lua:12
-#: ../../world/immovables/stones/winterland_stones4/init.lua:12
-msgid "Stones 4"
-msgstr "Clachan 4"
-
-#: ../../world/immovables/stones/blackland_stones5/init.lua:12
-#: ../../world/immovables/stones/desert_stones5/init.lua:12
-#: ../../world/immovables/stones/greenland_stones5/init.lua:12
-#: ../../world/immovables/stones/winterland_stones5/init.lua:12
-msgid "Stones 5"
-msgstr "Clachan 5"
-
-#: ../../world/immovables/stones/blackland_stones6/init.lua:12
-#: ../../world/immovables/stones/desert_stones6/init.lua:12
-#: ../../world/immovables/stones/greenland_stones6/init.lua:12
-#: ../../world/immovables/stones/winterland_stones6/init.lua:12
-msgid "Stones 6"
-msgstr "Clachan 6"
-
-#: TRANSLATORS: This track is made of footprints in the snow
+#. TRANSLATORS: This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid "Track"
 msgstr "Slighe"
@@ -225,15 +226,15 @@ msgstr "Slighe"
 msgid "Alder (Sapling)"
 msgstr "Fiùran feàrna"
 
-#: ../../world/immovables/trees/alder/init.lua:43
+#: ../../world/immovables/trees/alder/init.lua:44
 msgid "Alder (Pole)"
 msgstr "Craobhag-fheàrna"
 
-#: ../../world/immovables/trees/alder/init.lua:66
+#: ../../world/immovables/trees/alder/init.lua:68
 msgid "Alder (Mature)"
 msgstr "Craobh-fheàrna inbheach"
 
-#: ../../world/immovables/trees/alder/init.lua:89
+#: ../../world/immovables/trees/alder/init.lua:92
 msgid "Alder (Old)"
 msgstr "Seann chraobh-fheàrna"
 
@@ -241,15 +242,15 @@ msgstr "Seann chraobh-fheàrna"
 msgid "Aspen (Sapling)"
 msgstr "Fiùran crithinn"
 
-#: ../../world/immovables/trees/aspen/init.lua:35
+#: ../../world/immovables/trees/aspen/init.lua:36
 msgid "Aspen (Pole)"
 msgstr "Craobhag-chrithinn"
 
-#: ../../world/immovables/trees/aspen/init.lua:58
+#: ../../world/immovables/trees/aspen/init.lua:60
 msgid "Aspen (Mature)"
 msgstr "Craobh-chrithinn inbheach"
 
-#: ../../world/immovables/trees/aspen/init.lua:84
+#: ../../world/immovables/trees/aspen/init.lua:87
 msgid "Aspen (Old)"
 msgstr "Seann chraobh-chrithinn"
 
@@ -257,15 +258,15 @@ msgstr "Seann chraobh-chrithinn"
 msgid "Beech (Sapling)"
 msgstr "Fiùran faidhbhile"
 
-#: ../../world/immovables/trees/beech/init.lua:35
+#: ../../world/immovables/trees/beech/init.lua:36
 msgid "Beech (Pole)"
 msgstr "Craobhag-fhaidhbhile"
 
-#: ../../world/immovables/trees/beech/init.lua:58
+#: ../../world/immovables/trees/beech/init.lua:60
 msgid "Beech (Mature)"
 msgstr "Craobh-fhaidhbhile inbheach"
 
-#: ../../world/immovables/trees/beech/init.lua:81
+#: ../../world/immovables/trees/beech/init.lua:84
 msgid "Beech (Old)"
 msgstr "Seann chraobh-fhaidhbhile"
 
@@ -273,35 +274,35 @@ msgstr "Seann chraobh-fhaidhbhile"
 msgid "Birch (Sapling)"
 msgstr "Fiùran beithe"
 
-#: ../../world/immovables/trees/birch/init.lua:35
+#: ../../world/immovables/trees/birch/init.lua:36
 msgid "Birch (Pole)"
 msgstr "Craobhag-bheithe"
 
-#: ../../world/immovables/trees/birch/init.lua:58
+#: ../../world/immovables/trees/birch/init.lua:60
 msgid "Birch (Mature)"
 msgstr "Craobh-bheithe inbheach"
 
-#: ../../world/immovables/trees/birch/init.lua:84
+#: ../../world/immovables/trees/birch/init.lua:87
 msgid "Birch (Old)"
 msgstr "Seann chraobh-bheithe"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
 msgstr "Fiùran sgòtha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:38
 msgid "Cirrus Tree (Pole)"
 msgstr "Craobhag-sgòtha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:63
 msgid "Cirrus Tree (Mature)"
 msgstr "Craobh-sgòtha inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:88
 msgid "Cirrus Tree (Old)"
 msgstr "Seann chraobh-sgòtha"
 
@@ -314,7 +315,7 @@ msgstr "Seann chraobh-sgòtha"
 msgid "Dead Tree"
 msgstr "Craobh mharbh"
 
-#: ../../world/immovables/trees/fallentree/init.lua:12
+#: ../../world/immovables/trees/fallentree/init.lua:13
 msgid "Fallen Tree"
 msgstr "Craobh ’na laighe"
 
@@ -322,35 +323,35 @@ msgstr "Craobh ’na laighe"
 msgid "Larch (Sapling)"
 msgstr "Fiùran learaige"
 
-#: ../../world/immovables/trees/larch/init.lua:35
+#: ../../world/immovables/trees/larch/init.lua:36
 msgid "Larch (Pole)"
 msgstr "Craobhag-learaige"
 
-#: ../../world/immovables/trees/larch/init.lua:58
+#: ../../world/immovables/trees/larch/init.lua:60
 msgid "Larch (Mature)"
 msgstr "Craobh-learaige inbheach"
 
-#: ../../world/immovables/trees/larch/init.lua:81
+#: ../../world/immovables/trees/larch/init.lua:84
 msgid "Larch (Old)"
 msgstr "Seann chraobh-learaige"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
 msgstr "Fiùran lìn"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:38
 msgid "Liana Tree (Pole)"
 msgstr "Craobhag-lìn"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:63
 msgid "Liana Tree (Mature)"
 msgstr "Craobh-lìn inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:91
 msgid "Liana Tree (Old)"
 msgstr "Seann chraobh-lìn"
 
@@ -358,75 +359,75 @@ msgstr "Seann chraobh-lìn"
 msgid "Maple (Sapling)"
 msgstr "Fiùran malpais"
 
-#: ../../world/immovables/trees/maple/init.lua:35
+#: ../../world/immovables/trees/maple/init.lua:36
 msgid "Maple (Pole)"
 msgstr "Craobhag-mhalpais"
 
-#: ../../world/immovables/trees/maple/init.lua:58
+#: ../../world/immovables/trees/maple/init.lua:60
 msgid "Maple (Mature)"
 msgstr "Craobh-mhalpais inbheach"
 
-#: ../../world/immovables/trees/maple/init.lua:81
+#: ../../world/immovables/trees/maple/init.lua:84
 msgid "Maple (Old)"
 msgstr "Seann chraobh-mhalpais"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
 msgstr "Fiùran builg dorcha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:38
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "Craobhag-bhuilg dhorcha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:63
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "Craobh-bhuilg dhorcha inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:88
 msgid "Dark Mushroom Tree (Old)"
 msgstr "Seann chraobh-bhuilg dhorcha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
 msgstr "Fiùran builg uaine"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:38
 msgid "Green Mushroom Tree (Pole)"
 msgstr "Craobhag-bhuilg uaine"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:63
 msgid "Green Mushroom Tree (Mature)"
 msgstr "Craobh-bhuilg uaine inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:88
 msgid "Green Mushroom Tree (Old)"
 msgstr "Seann chraobh-bhuilg uaine"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
 msgstr "Fiùran builg dearg"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:38
 msgid "Red Mushroom Tree (Pole)"
 msgstr "Craobhag-bhuilg dhearg"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:63
 msgid "Red Mushroom Tree (Mature)"
 msgstr "Craobh-bhuilg dhearg inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:91
 msgid "Red Mushroom Tree (Old)"
 msgstr "Seann chraobh-bhuilg dhearg"
 
@@ -434,15 +435,15 @@ msgstr "Seann chraobh-bhuilg dhearg"
 msgid "Oak (Sapling)"
 msgstr "Fiùran daraich"
 
-#: ../../world/immovables/trees/oak/init.lua:35
+#: ../../world/immovables/trees/oak/init.lua:36
 msgid "Oak (Pole)"
 msgstr "Craobhag-dharaich"
 
-#: ../../world/immovables/trees/oak/init.lua:58
+#: ../../world/immovables/trees/oak/init.lua:60
 msgid "Oak (Mature)"
 msgstr "Craobh-dharaich inbheach"
 
-#: ../../world/immovables/trees/oak/init.lua:81
+#: ../../world/immovables/trees/oak/init.lua:84
 msgid "Oak (Old)"
 msgstr "Seann chraobh-dharaich"
 
@@ -450,15 +451,15 @@ msgstr "Seann chraobh-dharaich"
 msgid "Borassus Palm (Sapling)"
 msgstr "Fiùran pailm Bhorassus"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:35
+#: ../../world/immovables/trees/palm_borassus/init.lua:36
 msgid "Borassus Palm (Pole)"
 msgstr "Craobhag-phailm Bhorassus"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:58
+#: ../../world/immovables/trees/palm_borassus/init.lua:60
 msgid "Borassus Palm (Mature)"
 msgstr "Craobh-phailm Bhorassus inbheach"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:81
+#: ../../world/immovables/trees/palm_borassus/init.lua:84
 msgid "Borassus Palm (Old)"
 msgstr "Seann chraobh-phailm Bhorassus"
 
@@ -466,15 +467,15 @@ msgstr "Seann chraobh-phailm Bhorassus"
 msgid "Coconut Palm (Sapling)"
 msgstr "Fiùran pailm còco"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:35
+#: ../../world/immovables/trees/palm_coconut/init.lua:36
 msgid "Coconut Palm (Pole)"
 msgstr "Craobhag-phailm chòco"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:58
+#: ../../world/immovables/trees/palm_coconut/init.lua:60
 msgid "Coconut Palm (Mature)"
 msgstr "Craobh-phailm chòco inbheach"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:81
+#: ../../world/immovables/trees/palm_coconut/init.lua:84
 msgid "Coconut Palm (Old)"
 msgstr "Seann chraobh-phailm chòco"
 
@@ -482,15 +483,15 @@ msgstr "Seann chraobh-phailm chòco"
 msgid "Date Palm (Sapling)"
 msgstr "Fiùran pailm deite"
 
-#: ../../world/immovables/trees/palm_date/init.lua:35
+#: ../../world/immovables/trees/palm_date/init.lua:36
 msgid "Date Palm (Pole)"
 msgstr "Craobhag-phailm dheite"
 
-#: ../../world/immovables/trees/palm_date/init.lua:58
+#: ../../world/immovables/trees/palm_date/init.lua:60
 msgid "Date Palm (Mature)"
 msgstr "Craobh-phailm dheite inbheach"
 
-#: ../../world/immovables/trees/palm_date/init.lua:84
+#: ../../world/immovables/trees/palm_date/init.lua:87
 msgid "Date Palm (Old)"
 msgstr "Seann chraobh-phailm dheite"
 
@@ -498,15 +499,15 @@ msgstr "Seann chraobh-phailm dheite"
 msgid "Oil Palm (Sapling)"
 msgstr "Fiùran pailm ola"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:35
+#: ../../world/immovables/trees/palm_oil/init.lua:36
 msgid "Oil Palm (Pole)"
 msgstr "Craobhag-phailm ola"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:58
+#: ../../world/immovables/trees/palm_oil/init.lua:60
 msgid "Oil Palm (Mature)"
 msgstr "Craobh-phailm ola inbheach"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:85
+#: ../../world/immovables/trees/palm_oil/init.lua:88
 msgid "Oil Palm (Old)"
 msgstr "Seann chraobh-phailm ola"
 
@@ -514,15 +515,15 @@ msgstr "Seann chraobh-phailm ola"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "Fiùran pailm Roystonea regia"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:35
+#: ../../world/immovables/trees/palm_roystonea/init.lua:36
 msgid "Roystonea regia Palm (Pole)"
 msgstr "Craobhag-phailm Roystonea regia"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:58
+#: ../../world/immovables/trees/palm_roystonea/init.lua:60
 msgid "Roystonea regia Palm (Mature)"
 msgstr "Craobh-phailm Roystonea regia inbheach"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:81
+#: ../../world/immovables/trees/palm_roystonea/init.lua:84
 msgid "Roystonea regia Palm (Old)"
 msgstr "Seann chraobh-phailm Roystonea regia"
 
@@ -530,15 +531,15 @@ msgstr "Seann chraobh-phailm Roystonea regia"
 msgid "Rowan (Sapling)"
 msgstr "Fiùran caorainn"
 
-#: ../../world/immovables/trees/rowan/init.lua:35
+#: ../../world/immovables/trees/rowan/init.lua:36
 msgid "Rowan (Pole)"
 msgstr "Craobhag-chaorainn"
 
-#: ../../world/immovables/trees/rowan/init.lua:58
+#: ../../world/immovables/trees/rowan/init.lua:60
 msgid "Rowan (Mature)"
 msgstr "Craobh-chaorainn inbheach"
 
-#: ../../world/immovables/trees/rowan/init.lua:84
+#: ../../world/immovables/trees/rowan/init.lua:87
 msgid "Rowan (Old)"
 msgstr "Seann chraobh-chaorainn"
 
@@ -546,75 +547,75 @@ msgstr "Seann chraobh-chaorainn"
 msgid "Spruce (Sapling)"
 msgstr "Fiùran giuthais"
 
-#: ../../world/immovables/trees/spruce/init.lua:35
+#: ../../world/immovables/trees/spruce/init.lua:36
 msgid "Spruce (Pole)"
 msgstr "Craobhag-ghiuthais"
 
-#: ../../world/immovables/trees/spruce/init.lua:58
+#: ../../world/immovables/trees/spruce/init.lua:60
 msgid "Spruce (Mature)"
 msgstr "Craobh-ghiuthais inbheach"
 
-#: ../../world/immovables/trees/spruce/init.lua:81
+#: ../../world/immovables/trees/spruce/init.lua:84
 msgid "Spruce (Old)"
 msgstr "Seann chraobh-ghiuthais"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
 msgstr "Fiùran snìomha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:38
 msgid "Twine Tree (Pole)"
 msgstr "Craobhag-shnìomha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:63
 msgid "Twine Tree (Mature)"
 msgstr "Craobh-shnìomha inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:88
 msgid "Twine Tree (Old)"
 msgstr "Seann chraobh-shnìomha"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
 msgstr "Fiùran fasgadain"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:38
 msgid "Green Umbrella Tree (Pole)"
 msgstr "Craobhag-fhasgadain"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:63
 msgid "Green Umbrella Tree (Mature)"
 msgstr "Craobh-fhasgadain inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:88
 msgid "Green Umbrella Tree (Old)"
 msgstr "Seann chraobh-fhasgadain"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
 msgstr "Fiùran fasgadain dearg"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:38
 msgid "Red Umbrella Tree (Pole)"
 msgstr "Craobhag-fhasgadain dhearg"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:63
 msgid "Red Umbrella Tree (Mature)"
 msgstr "Craobh-fhasgadain dhearg inbheach"
 
-#: TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:91
 msgid "Red Umbrella Tree (Old)"
 msgstr "Seann chraobh-fhasgadain dhearg"
 
@@ -631,8 +632,8 @@ msgid "Standing Stones"
 msgstr "Tursachan"
 
 #: ../../world/init.lua:29
-msgid "Stones"
-msgstr "Clachan"
+msgid "Rocks"
+msgstr ""
 
 #: ../../world/init.lua:35
 msgid "Coniferous Trees"
@@ -667,14 +668,12 @@ msgid "Iron"
 msgstr "Iarann"
 
 #: ../../world/resources/init.lua:44
-msgid "Granite"
-msgstr "Graineal"
+msgid "Stones"
+msgstr "Clachan"
 
-#: ../../world/resources/init.lua:57
-#: ../../world/terrains/init.lua:284
-#: ../../world/terrains/init.lua:515
-#: ../../world/terrains/init.lua:747
-#: ../../world/terrains/init.lua:977
+#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:305
+#: ../../world/terrains/init.lua:552 ../../world/terrains/init.lua:800
+#: ../../world/terrains/init.lua:1044
 msgid "Water"
 msgstr "Uisge"
 
@@ -694,123 +693,100 @@ msgstr "Talamh fàs"
 msgid "Winter"
 msgstr "Geamhradh"
 
-#: ../../world/terrains/init.lua:19
-#: ../../world/terrains/init.lua:767
-#: ../../world/terrains/init.lua:917
-#: ../../world/terrains/init.lua:932
-#: ../../world/terrains/init.lua:947
+#: ../../world/terrains/init.lua:19 ../../world/terrains/init.lua:822
+#: ../../world/terrains/init.lua:980 ../../world/terrains/init.lua:996
+#: ../../world/terrains/init.lua:1012
 msgid "Desert"
 msgstr "Fàsach"
 
-#: ../../world/terrains/init.lua:33
-#: ../../world/terrains/init.lua:71
-#: ../../world/terrains/init.lua:87
-#: ../../world/terrains/init.lua:102
-#: ../../world/terrains/init.lua:812
+#: ../../world/terrains/init.lua:33 ../../world/terrains/init.lua:80
+#: ../../world/terrains/init.lua:97 ../../world/terrains/init.lua:113
+#: ../../world/terrains/init.lua:868
 msgid "Meadow"
-msgstr ""
+msgstr "Faiche"
 
-#: ../../world/terrains/init.lua:117
-#: ../../world/terrains/init.lua:797
+#: ../../world/terrains/init.lua:129 ../../world/terrains/init.lua:852
 msgid "Steppe"
 msgstr "Steip"
 
-#: ../../world/terrains/init.lua:132
+#: ../../world/terrains/init.lua:145
 msgid "Barren Steppe"
 msgstr "Steip sheasg"
 
-#: ../../world/terrains/init.lua:147
-#: ../../world/terrains/init.lua:827
+#: ../../world/terrains/init.lua:161 ../../world/terrains/init.lua:884
 msgid "Mountain Meadow"
 msgstr "Cluain"
 
-#: ../../world/terrains/init.lua:162
-#: ../../world/terrains/init.lua:177
-#: ../../world/terrains/init.lua:192
-#: ../../world/terrains/init.lua:207
-#: ../../world/terrains/init.lua:408
-#: ../../world/terrains/init.lua:423
-#: ../../world/terrains/init.lua:438
-#: ../../world/terrains/init.lua:453
-#: ../../world/terrains/init.lua:625
-#: ../../world/terrains/init.lua:640
-#: ../../world/terrains/init.lua:655
-#: ../../world/terrains/init.lua:670
-#: ../../world/terrains/init.lua:857
-#: ../../world/terrains/init.lua:872
-#: ../../world/terrains/init.lua:887
-#: ../../world/terrains/init.lua:902
+#: ../../world/terrains/init.lua:177 ../../world/terrains/init.lua:193
+#: ../../world/terrains/init.lua:209 ../../world/terrains/init.lua:225
+#: ../../world/terrains/init.lua:438 ../../world/terrains/init.lua:454
+#: ../../world/terrains/init.lua:470 ../../world/terrains/init.lua:486
+#: ../../world/terrains/init.lua:670 ../../world/terrains/init.lua:686
+#: ../../world/terrains/init.lua:702 ../../world/terrains/init.lua:718
+#: ../../world/terrains/init.lua:916 ../../world/terrains/init.lua:932
+#: ../../world/terrains/init.lua:948 ../../world/terrains/init.lua:964
 msgid "Mountain"
-msgstr ""
+msgstr "Beinn"
 
-#: ../../world/terrains/init.lua:222
+#: ../../world/terrains/init.lua:241
 msgid "Swamp"
 msgstr "Boglach"
 
-#: ../../world/terrains/init.lua:238
-#: ../../world/terrains/init.lua:468
-#: ../../world/terrains/init.lua:700
-#: ../../world/terrains/init.lua:962
+#: ../../world/terrains/init.lua:258 ../../world/terrains/init.lua:502
+#: ../../world/terrains/init.lua:750 ../../world/terrains/init.lua:1028
 msgid "Beach"
 msgstr "Tràigh"
 
-#: ../../world/terrains/init.lua:253
-#: ../../world/terrains/init.lua:610
+#: ../../world/terrains/init.lua:272 ../../world/terrains/init.lua:654
 msgid "Snow"
 msgstr "Sneachd"
 
-#: ../../world/terrains/init.lua:268
+#: ../../world/terrains/init.lua:288
 msgid "Lava"
 msgstr "Làbha"
 
-#: ../../world/terrains/init.lua:303
-#: ../../world/terrains/init.lua:318
+#: ../../world/terrains/init.lua:326 ../../world/terrains/init.lua:342
 msgid "Ashes"
 msgstr "Luaithre"
 
-#: ../../world/terrains/init.lua:333
-#: ../../world/terrains/init.lua:348
-#: ../../world/terrains/init.lua:363
-#: ../../world/terrains/init.lua:378
+#: ../../world/terrains/init.lua:358 ../../world/terrains/init.lua:374
+#: ../../world/terrains/init.lua:390 ../../world/terrains/init.lua:406
 msgid "Hard Ground"
-msgstr ""
+msgstr "Talamh chruaidh"
 
-#: ../../world/terrains/init.lua:393
+#: ../../world/terrains/init.lua:422
 msgid "Igneous Rocks"
 msgstr "Clach theinnteach"
 
-#: ../../world/terrains/init.lua:483
-#: ../../world/terrains/init.lua:499
+#: ../../world/terrains/init.lua:518 ../../world/terrains/init.lua:535
 msgid "Lava Rocks"
-msgstr ""
+msgstr "Creagan làbha"
 
-#: ../../world/terrains/init.lua:535
-#: ../../world/terrains/init.lua:550
-#: ../../world/terrains/init.lua:565
+#: ../../world/terrains/init.lua:574 ../../world/terrains/init.lua:590
+#: ../../world/terrains/init.lua:606
 msgid "Tundra"
 msgstr "Tundra"
 
-#: ../../world/terrains/init.lua:580
+#: ../../world/terrains/init.lua:622
 msgid "Tundra Taiga"
 msgstr "Tundra taidhgea"
 
-#: ../../world/terrains/init.lua:595
+#: ../../world/terrains/init.lua:638
 msgid "Taiga"
 msgstr "Taidhgea"
 
-#: ../../world/terrains/init.lua:685
+#: ../../world/terrains/init.lua:734
 msgid "Ice"
 msgstr "Deigh"
 
-#: ../../world/terrains/init.lua:715
-#: ../../world/terrains/init.lua:731
+#: ../../world/terrains/init.lua:766 ../../world/terrains/init.lua:783
 msgid "Ice Floes"
 msgstr "Clàran-deighe"
 
-#: ../../world/terrains/init.lua:782
+#: ../../world/terrains/init.lua:838
 msgid "Dry Soil"
 msgstr "Ùir thioram"
 
-#: ../../world/terrains/init.lua:842
+#: ../../world/terrains/init.lua:900
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Àilean beinne"

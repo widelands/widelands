@@ -29,7 +29,6 @@
 #include "logic/wareworker.h"
 
 class InteractivePlayer;
-class Profile;
 
 namespace Widelands {
 
@@ -48,11 +47,9 @@ Warehouse
 */
 struct WarehouseSupply;
 
-struct WarehouseDescr : public BuildingDescr {
-	WarehouseDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
+class WarehouseDescr : public BuildingDescr {
+public:
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~WarehouseDescr() override {}
 
 	Building & create_object() const override;
@@ -225,6 +222,8 @@ public:
 	void log_general_info(const EditorGameBase &) override;
 
 protected:
+	/// Initializes the container sizes for the owner's tribe.
+	void init_containers(Player& owner);
 	/// Create the warehouse information window.
 	virtual void create_options_window
 		(InteractiveGameBase &, UI::Window * & registry) override;
@@ -267,9 +266,9 @@ private:
 	using WorkerList = std::vector<Worker *>;
 	using IncorporatedWorkers = std::map<WareIndex, WorkerList>;
 	IncorporatedWorkers        m_incorporated_workers;
-	uint32_t                 * m_next_worker_without_cost_spawn;
-	uint32_t                   m_next_military_act;
-	uint32_t m_next_stock_remove_act;
+	std::vector<Time>          m_next_worker_without_cost_spawn;
+	Time                       m_next_military_act;
+	Time                       m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
 

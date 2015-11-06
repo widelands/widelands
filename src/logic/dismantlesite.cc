@@ -32,18 +32,15 @@
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
 
-DismantleSiteDescr::DismantleSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
+DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
+													const LuaTable& table, const EditorGameBase& egbase)
+	: BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase)
 {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
@@ -134,7 +131,7 @@ void DismantleSite::count_returned_wares
 {
 	for (BuildingIndex former_idx : building->get_former_buildings()) {
 		const std::map<WareIndex, uint8_t> * return_wares;
-		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
+		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {
@@ -196,7 +193,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			const WareDescr & wd = *descr().tribe().get_ware_descr(wq.get_ware());
+			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());
 			WareInstance & ware = *new WareInstance(wq.get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);

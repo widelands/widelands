@@ -29,7 +29,7 @@
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 
 constexpr int kBuildGridCellHeight = 50;
 constexpr int kBuildGridCellWidth = 55;
@@ -156,9 +156,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							_("Ports"));
 	}
 
-	const TribeDescr& tribe = iplayer().player().tribe();
-
-	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
+	const BuildingIndex nr_buildings = parent.egbase().tribes().nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
@@ -172,7 +170,27 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
 	}
 
-	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
+	// We want to add player tribe's buildings in correct order
+	const TribeDescr& tribe = iplayer().player().tribe();
+	std::vector<BuildingIndex> buildings_to_add;
+	for (BuildingIndex index: tribe.buildings()) {
+		// Only add headquarter types that are owned by player.
+		const BuildingDescr& descr = *tribe.get_building_descr(index);
+		const Widelands::Player& player = iplayer().player();
+		if (descr.is_buildable() || descr.is_enhanced() || !player.get_building_statistics(index).empty()) {
+			buildings_to_add.push_back(index);
+		}
+	}
+
+	// We want to add other tribes' militarysites on the bottom
+	for (BuildingIndex index = 0; index < nr_buildings; ++index) {
+		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
+		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
+			buildings_to_add.push_back(index);
+		}
+	}
+
+	for (BuildingIndex id : buildings_to_add) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
 
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
@@ -366,11 +384,6 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
 	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
-	// Only add headquarter types that are owned by player.
-	if (!(descr.is_buildable() || descr.is_enhanced() || descr.global()) &&
-		 iplayer().get_player()->get_building_statistics(id).empty()) {
-		return false;
-	}
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
@@ -380,9 +393,7 @@ bool BuildingStatisticsMenu::add_button(
 														kBuildGridCellWidth,
 														kBuildGridCellHeight,
 														g_gr->images().get("pics/but1.png"),
-														&g_gr->animations()
-															 .get_animation(descr.get_animation("idle"))
-															 .representative_image_from_disk(),
+														descr.representative_image(),
 														"",
 														false,
 														true);
@@ -583,7 +594,7 @@ void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
 	const Map& map = iplayer().game().map();
-	const BuildingIndex nr_buildings = tribe.get_nrbuildings();
+	const BuildingIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
 	no_owned_label_.set_visible(false);
@@ -716,7 +727,7 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		std::string owned_text = "";
-		if (!building.global() && (building.is_buildable() || building.is_enhanced())) {
+		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
 			/** TRANSLATORS Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
 		} else {
@@ -734,7 +745,7 @@ void BuildingStatisticsMenu::update() {
 			no_owned_label_.set_visible(true);
 			navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
 			navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
-			if (!building.global() && building.is_buildable()) {
+			if (player.tribe().has_building(id) && building.is_buildable()) {
 				no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
 				navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
 				navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);

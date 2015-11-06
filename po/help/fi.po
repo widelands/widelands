@@ -1,0 +1,286 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# Teppo Mäenpää <teppo@runbox.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../tribes/scripting/format_help.lua:150
+#: ../../tribes/scripting/format_help.lua:442
+msgid "Dependencies"
+msgstr "Riippuvuudet"
+
+#: ../../tribes/scripting/format_help.lua:150
+msgid "Soldiers:"
+msgstr "Sotilaat:"
+
+#: ../../tribes/scripting/format_help.lua:181
+msgid "%1$s or %2$s"
+msgstr "%1$s tai %2$s"
+
+#: ../../tribes/scripting/format_help.lua:188
+msgid "%s and"
+msgstr "%s ja"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:219
+msgid "Equipment from"
+msgstr "Tarvikelähde:"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:221
+msgid "and equipment from"
+msgstr "ja tarvikkesampona"
+
+#: TRANSLATORS This is a headline, you can see it in the building help for
+#: trainingsites, in the dependencies section
+#: ../../tribes/scripting/format_help.lua:223
+msgid "or equipment from"
+msgstr "tai tarvikkeita paikasta"
+
+#: ../../tribes/scripting/format_help.lua:270
+msgid "General"
+msgstr "Yleistä"
+
+#: ../../tribes/scripting/format_help.lua:271
+msgid "Purpose:"
+msgstr "Tarkoitus:"
+
+#: ../../tribes/scripting/format_help.lua:277
+#: ../../tribes/scripting/format_help.lua:504
+msgid "Note:"
+msgstr "Huom:"
+
+#: ../../tribes/scripting/format_help.lua:281
+msgid "Work area radius:"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:285
+#: ../../tribes/scripting/format_help.lua:290
+msgid "Healing:"
+msgstr "Parantuminen:"
+
+#: ../../tribes/scripting/format_help.lua:286
+#: ../../tribes/scripting/format_help.lua:291
+msgid "Garrisoned soldiers heal %d health point per second"
+msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../tribes/scripting/format_help.lua:287
+#: ../../tribes/scripting/format_help.lua:293
+msgid "Conquer range:"
+msgstr "Valvonta-alue:"
+
+#: ../../tribes/scripting/format_help.lua:292
+#: ../../tribes/scripting/format_help.lua:314
+msgid "Capacity:"
+msgstr "Kapasiteetti:"
+
+#: ../../tribes/scripting/format_help.lua:296
+msgid "Training:"
+msgstr "Koulutus:"
+
+#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#: numbers. ../../tribes/scripting/format_help.lua:299
+#: ../../tribes/scripting/format_help.lua:303
+#: ../../tribes/scripting/format_help.lua:307
+#: ../../tribes/scripting/format_help.lua:311
+msgid "Trains ‘%1$s’ from %2$s up to %3$s"
+msgstr "Kouluttaa sotilastaitoa ‘%1$s’ tasolta %2$s tasolle %3$s"
+
+#: ../../tribes/scripting/format_help.lua:300
+msgid "Attack"
+msgstr "hyökkäys"
+
+#: ../../tribes/scripting/format_help.lua:304
+msgid "Defense"
+msgstr "puollustus"
+
+#: ../../tribes/scripting/format_help.lua:308
+msgid "Evade"
+msgstr "väistö"
+
+#: ../../tribes/scripting/format_help.lua:312
+msgid "Health"
+msgstr "iskunkesto"
+
+#: ../../tribes/scripting/format_help.lua:316
+msgid "Vision range:"
+msgstr "Näkökenttä:"
+
+#: ../../tribes/scripting/format_help.lua:333
+#: ../../tribes/scripting/worker_help.lua:46
+msgid "Lore"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:361
+msgid "%1$s from: %2$s"
+msgstr "%1$s paikasta %2$s"
+
+#: ../../tribes/scripting/format_help.lua:366
+msgid "Incoming:"
+msgstr "Saapuva:"
+
+#: ../../tribes/scripting/format_help.lua:370
+msgid "Collects:"
+msgstr "Kerää:"
+
+#: TRANSLATORS This is a verb (The miner mines)
+#: ../../tribes/scripting/format_help.lua:382
+msgid "Mines:"
+msgstr "Louhii:"
+
+#: ../../tribes/scripting/format_help.lua:404
+msgid "Produces:"
+msgstr "Tuottaa:"
+
+#: ../../tribes/scripting/format_help.lua:439
+msgid "Outgoing:"
+msgstr "Poistuva:"
+
+#: ../../tribes/scripting/format_help.lua:441
+msgid "None"
+msgstr "Ei mitään"
+
+#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../tribes/scripting/format_help.lua:459
+msgid "%1$dx %2$s"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:481
+msgid "Building"
+msgstr "Rakennus"
+
+#: ../../tribes/scripting/format_help.lua:485
+msgid "Mine plot"
+msgstr "Kaivospaikka"
+
+#: ../../tribes/scripting/format_help.lua:485
+#: ../../tribes/scripting/format_help.lua:487
+#: ../../tribes/scripting/format_help.lua:490
+#: ../../tribes/scripting/format_help.lua:492
+#: ../../tribes/scripting/format_help.lua:494
+#: ../../tribes/scripting/format_help.lua:496
+msgid "Space required:"
+msgstr "Tilantarve:"
+
+#: ../../tribes/scripting/format_help.lua:487
+msgid "Port plot"
+msgstr "Satama-aihio"
+
+#: ../../tribes/scripting/format_help.lua:490
+msgid "Small plot"
+msgstr "Pieni tontti"
+
+#: ../../tribes/scripting/format_help.lua:492
+msgid "Medium plot"
+msgstr "Keskikokoinen tontti"
+
+#: ../../tribes/scripting/format_help.lua:494
+msgid "Big plot"
+msgstr "Laaja tontti"
+
+#: ../../tribes/scripting/format_help.lua:496
+#: ../../tribes/scripting/format_help.lua:530
+#: ../../tribes/scripting/format_help.lua:575
+#: ../../tribes/scripting/format_help.lua:623
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: ../../tribes/scripting/format_help.lua:505
+msgid ""
+"This building can either be built directly or obtained by enhancing another "
+"building."
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:511
+msgid "Direct build cost:"
+msgstr "Välittömät rakennuskustannukset:"
+
+#: ../../tribes/scripting/format_help.lua:513
+msgid "Build cost:"
+msgstr "Rakennuskustannukset:"
+
+#: ../../tribes/scripting/format_help.lua:525
+msgid "Or enhanced from:"
+msgstr "Tai paranneltu rakennuksesta "
+
+#: ../../tribes/scripting/format_help.lua:527
+#: ../../tribes/scripting/format_help.lua:530
+msgid "Enhanced from:"
+msgstr "Laajennettu rakennuksesta "
+
+#: ../../tribes/scripting/format_help.lua:539
+msgid "Cumulative cost:"
+msgstr "Kasautuva kulu: "
+
+#: ../../tribes/scripting/format_help.lua:580
+msgid "If built directly, dismantle yields:"
+msgstr "Jos rakennettu suoraan, purettaessa saadaan: "
+
+#: ../../tribes/scripting/format_help.lua:585
+msgid "If enhanced, dismantle yields:"
+msgstr "Jos rakennettu paloittain, purettaessa saadaan: "
+
+#: ../../tribes/scripting/format_help.lua:587
+#: ../../tribes/scripting/format_help.lua:628
+msgid "Dismantle yields:"
+msgstr "Purettaessa saadaan: "
+
+#: ../../tribes/scripting/format_help.lua:637
+msgid "Can be enhanced to:"
+msgstr "Voidaan laajentaa rakennukseksi "
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Crew required:"
+msgstr "Henkilökuntatarve: "
+
+#: ../../tribes/scripting/format_help.lua:665
+msgid "Workers"
+msgstr "Työläiset"
+
+#: ../../tribes/scripting/format_help.lua:688
+msgid "%s or better"
+msgstr "%s tai kokeneempi"
+
+#: ../../tribes/scripting/format_help.lua:701
+#: ../../tribes/scripting/worker_help.lua:67
+msgid "Experience levels:"
+msgstr "Taitotaso: "
+
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/format_help.lua:711
+#: ../../tribes/scripting/worker_help.lua:68
+#: ../../tribes/scripting/worker_help.lua:77
+msgid "%s to %s (%s EP)"
+msgstr ""
+
+#: ../../tribes/scripting/format_help.lua:736
+#: ../../tribes/scripting/worker_help.lua:99
+msgid "Worker uses:"
+msgid_plural "Workers use:"
+msgstr[0] "Työkalu: "
+msgstr[1] "Työvälineet: "
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Performance:"
+msgstr "Suoriutuminen: "
+
+#: ../../tribes/scripting/format_help.lua:754
+msgid "Production"
+msgstr "Tuotanto "

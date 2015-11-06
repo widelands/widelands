@@ -46,10 +46,10 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 
 // following is in miliseconds (widelands counts time in ms)
 constexpr int kFieldInfoExpiration = 12 * 1000;
@@ -408,27 +408,30 @@ void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
-	WareIndex const nr_wares = tribe_->get_nrwares();
-	wares.resize(nr_wares);
 
-	for (WareIndex i = 0; i < nr_wares; ++i) {
+	wares.resize(game().tribes().nrwares());
+	for (WareIndex i = 0; i < static_cast<WareIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
-		wares.at(i).preciousness_ = tribe_->get_ware_descr(i)->preciousness();
+		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
 	}
 
-	// collect information about the different buildings our tribe can construct
-	BuildingIndex const nr_buildings = tribe_->get_nrbuildings();
-	const World& world = game().world();
+	const BuildingIndex& nr_buildings = game().tribes().nrbuildings();
 
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const BuildingDescr& bld = *tribe_->get_building_descr(i);
+
+	// Collect information about the different buildings that our tribe can have
+	for (BuildingIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+		const BuildingDescr& bld = *tribe_->get_building_descr(building_index);
+		if (!tribe_->has_building(building_index) && bld.type() != MapObjectType::MILITARYSITE) {
+			continue;
+		}
+
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
 		BuildingObserver& bo = buildings_.back();
 		bo.name = building_name.c_str();
-		bo.id = i;
+		bo.id = building_index;
 		bo.desc = &bld;
 		bo.type = BuildingObserver::BORING;
 		bo.cnt_built_ = 0;
@@ -449,7 +452,7 @@ void DefaultAI::late_initialization() {
 		bo.primary_priority_ = 0;
 		bo.is_buildable_ = bld.is_buildable();
 		bo.need_trees_ = bh.is_logproducer();
-		bo.need_stones_ = bh.is_stoneproducer();
+		bo.need_rocks_ = bh.is_graniteproducer();
 		bo.need_water_ = bh.get_needs_water();
 		bo.mines_water_ = bh.mines_water();
 		bo.recruitment_ = bh.for_recruitment();
@@ -492,7 +495,7 @@ void DefaultAI::late_initialization() {
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
 				if (bh.get_mines()) {
-					bo.mines_ = world.get_resource(bh.get_mines());
+					bo.mines_ = game().world().get_resource(bh.get_mines());
 				}
 
 				bo.mines_percent_ = bh.get_mines_percent();
@@ -517,11 +520,7 @@ void DefaultAI::late_initialization() {
 				bo.is_fisher_ = false;
 			}
 
-			if (building_name == "shipyard") {
-				bo.is_shipyard_ = true;
-			} else {
-				bo.is_shipyard_ = false;
-			}
+			bo.is_shipyard_ = bh.is_shipyard();
 
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
@@ -584,8 +583,7 @@ void DefaultAI::late_initialization() {
 				// bellow are non-critical wares (well, various types of wood)
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
-				    tribe_->ware_index("planks") == temp_buildcosts.first ||
-				    tribe_->ware_index("wood") == temp_buildcosts.first)
+				    tribe_->ware_index("planks") == temp_buildcosts.first)
 					continue;
 
 				bo.critical_built_mat_.push_back(temp_buildcosts.first);
@@ -635,7 +633,7 @@ void DefaultAI::late_initialization() {
 	}
 
 	// atlanteans they consider water as a resource
-	// (together with mines, stones and wood)
+	// (together with mines, rocks and wood)
 	if (tribe_->name() == "atlanteans") {
 		resource_necessity_water_needed_ = true;
 	}
@@ -1126,16 +1124,16 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			}
 		}
 
-		// stones are not renewable, we will count them only if previous state is nonzero
-		if (field.stones_nearby_ > 0 && resource_count_now) {
+		// Rocks are not renewable, we will count them only if previous state is nonzero
+		if (field.rocks_nearby_ > 0 && resource_count_now) {
 
-			field.stones_nearby_ =
+			field.rocks_nearby_ =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), 6),
 					nullptr,
-		            FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite")));
+						FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 
-			// adding 10 if stones found
-			field.stones_nearby_ = (field.stones_nearby_ > 0) ? field.stones_nearby_ + 10:0;
+			// adding 10 if rocks found
+			field.rocks_nearby_ = (field.rocks_nearby_ > 0) ? field.rocks_nearby_ + 10:0;
 		}
 
 		// ground water is not renewable and its amount can only fall, we will count them only if
@@ -1548,9 +1546,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// testing big military buildings, whether critical construction
 	// material is available (at least in amount of
 	// 2/3 of default target amount)
-	for (uint32_t j = 0; j < buildings_.size(); ++j) {
-
-		BuildingObserver& bo = buildings_.at(j);
+	for (BuildingObserver& bo : buildings_) {
 		if (!bo.buildable(*player_)) {
 			continue;
 		}
@@ -1595,7 +1591,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				|| bo.new_building_ == BuildingNecessity::kForced
 				|| bo.new_building_ == BuildingNecessity::kAllowed
 				|| bo.new_building_ == BuildingNecessity::kNeededPending) && !bo.outputs_.empty()) {
-					assert (bo.max_needed_preciousness_ > 0);
+				if (bo.max_needed_preciousness_ <= 0) {
+					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
+										  bo.desc->name().c_str());
+				}
 			} else {
 				// For other situations we set max_needed_preciousness_ to zero
 				bo.max_needed_preciousness_ = 0;
@@ -1682,9 +1681,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 
 		// For every field test all buildings
-		for (uint32_t j = 0; j < buildings_.size(); ++j) {
-			BuildingObserver& bo = buildings_.at(j);
-
+		for (BuildingObserver& bo : buildings_) {
 			if (!bo.buildable(*player_)) {
 				continue;
 			}
@@ -1775,12 +1772,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					prio += 2 * bf->trees_nearby_;
 
-				} else if (bo.need_stones_) {
+				} else if (bo.need_rocks_) {
 
-					// quaries are generally to be built everywhere where stones are
-					// no matter the need for stones, as stones are considered an obstacle
+					// Quarries are generally to be built everywhere where rocks are
+					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					prio = 2 * bf->stones_nearby_;
+					prio = 2 * bf->rocks_nearby_;
 
 					// value is initialized with 1 but minimal value that can be
 					// calculated is 11
@@ -1875,7 +1872,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += std::min<uint8_t>(bf->producers_nearby_.at(bo.production_hint_), 4) * 5 -
 						        new_buildings_stop_ * 15 -
 						       	bf->space_consumers_nearby_ * 5  -
-						        bf->stones_nearby_ / 3 +
+								  bf->rocks_nearby_ / 3 +
 						        bf->trees_nearby_ / 2 +
 						        std::min<uint8_t>(bf->supporters_nearby_.at(bo.production_hint_), 4) * 3;
 
@@ -2061,7 +2058,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				prio += bf->unowned_mines_spots_nearby_ * resource_necessity_mines_ / 100;
 				prio += ((bf->unowned_mines_spots_nearby_ > 0) ? 20 : 0) *
 						resource_necessity_mines_ / 100;
-				prio += bf->stones_nearby_ / 2;
+				prio += bf->rocks_nearby_ / 2;
 				prio += bf->water_nearby_;
 				prio += bf->distant_water_ * resource_necessity_water_needed_ / 100;
 				prio += bf->military_loneliness_ / 10;
@@ -2264,8 +2261,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		if (!mineable_fields.empty()) {
 
-			for (uint32_t i = 0; i < buildings_.size() && productionsites.size() > 8; ++i) {
-				BuildingObserver& bo = buildings_.at(i);
+			for (BuildingObserver& bo : buildings_) {
+				if (productionsites.size() <= 8) break;
 
 				if (bo.type != BuildingObserver::MINE) {
 					continue;
@@ -3162,13 +3159,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// Quarry handling
-	if (site.bo->need_stones_) {
+	if (site.bo->need_rocks_) {
 
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), 6),
 		       nullptr,
 
-		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
+		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -3183,7 +3180,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		if (site.unoccupied_till_ + 6 * 60 * 1000 < gametime &&
 		    site.site->get_statistics_percent() == 0) {
-			// it is possible that there are stones but quary is not able to mine them
+			// it is possible that there are rocks but quarry is not able to mine them
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
@@ -3691,7 +3688,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 		WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 
-		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity() / 3;
+		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name()) / 3;
 		// at least  1
 		target = std::max<uint16_t>(target, 1);
 
@@ -3833,8 +3830,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNotNeeded;
 			}
 			return BuildingNecessity::kNeeded;
-		} else if (bo.need_stones_ && bo.cnt_under_construction_ + bo.unoccupied_count_ == 0) {
-			bo.max_needed_preciousness_ = bo.max_preciousness_; // even when stones are not needed
+		} else if (bo.need_rocks_ && bo.cnt_under_construction_ + bo.unoccupied_count_ == 0) {
+			bo.max_needed_preciousness_ = bo.max_preciousness_; // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
 		} else if (bo.production_hint_ >= 0 && bo.cnt_under_construction_ + bo.unoccupied_count_ == 0) {
 			return BuildingNecessity::kAllowed;
@@ -4217,7 +4214,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		}
 	} else {
 
-		int32_t unused1 = 0;
+		uint32_t unused1 = 0;
 		uint16_t unused2 = 0;
 
 		mso.enemies_nearby_ = false;
@@ -4339,9 +4336,9 @@ BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
 		late_initialization();
 	}
 
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		if (!strcmp(buildings_.at(i).name, name)) {
-			return buildings_.at(i);
+	for (BuildingObserver& bo : buildings_) {
+		if (!strcmp(bo.name, name)) {
+			return bo;
 		}
 	}
 
@@ -4446,7 +4443,7 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 // usually scanning radius is enough but sometimes we must walk to
 // verify that an enemy territory is really accessible by land
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
-                                        int32_t* tested_fields,
+                                        uint32_t* tested_fields,
                                         uint16_t* mineable_fields_count,
                                         const Widelands::Coords starting_spot,
                                         const WalkSearch type) {
@@ -4540,12 +4537,20 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	uint8_t score = 0;
 	uint16_t mineable_fields_count = 0;
-	int32_t tested_fields = 0;
+	uint32_t tested_fields = 0;
+
+	// On the beginning we search for completely deserted area,
+	// but later we will accept also area adjacent to own teritorry
+	WalkSearch search_type = WalkSearch::kAnyPlayer;
+	if (colony_scan_area_ < 25) {
+		search_type = WalkSearch::kEnemy;
+	}
+
 	const bool other_player = other_player_accessible(colony_scan_area_,
 	                                                  &tested_fields,
 	                                                  &mineable_fields_count,
 	                                                  candidate_spot,
-	                                                  WalkSearch::kAnyPlayer);
+	                                                  search_type);
 
 	// if we run into other player
 	// (maybe we should check for enemies, rather?)
@@ -4554,8 +4559,10 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	Map& map = game().map();
-	// if the island is too small
-	if (tested_fields < 50) {
+	// If the available area (island) is too small...
+	// colony_scan_area_ is a radius (distance) and has no direct relevance to the size of area,
+	// but it seems a good measurement
+	if (tested_fields < colony_scan_area_) {
 		return 0;
 	}
 
@@ -4565,25 +4572,25 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 		score += 1;
 	}
 
-	// here we check for surface stones + trees
+	// here we check for surface rocks + trees
 	std::vector<ImmovableFound> immovables;
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
-	int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
-	uint16_t stones = 0;
+	int32_t const rocks_attr = MapObjectDescr::get_attribute_id("rocks");
+	uint16_t rocks = 0;
 	int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
 	for (uint32_t j = 0; j < immovables.size(); ++j) {
-		if (immovables.at(j).object->has_attribute(stone_attr)) {
-			++stones;
+		if (immovables.at(j).object->has_attribute(rocks_attr)) {
+			++rocks;
 		}
 		if (immovables.at(j).object->has_attribute(tree_attr)) {
 			++trees;
 		}
 	}
-	if (stones > 1) {
+	if (rocks > 1) {
 		score += 1;
 	}
 	if (trees > 1) {
@@ -4615,8 +4622,6 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces()->front());
 
 		if ((gametime / 10) % 8 < spot_score) {  // we build a port here
-			// const Coords last_portspace = so.ship->exp_port_spaces()->front();
-			// remote_ports_coords.insert(coords_hash(last_portspace));
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
@@ -4636,7 +4641,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		}
 
 		// decreasing colony_scan_area_
-		if (colony_scan_area_ > kColonyScanMinArea && gametime % 5 == 0) {
+		if (colony_scan_area_ > kColonyScanMinArea && gametime % 4 == 0) {
 			colony_scan_area_ -= 1;
 			player_->set_ai_data(colony_scan_area_, kColonyScan);
 		}
@@ -5411,9 +5416,9 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	}
 
 	for (EconomyObserver* observer : economies) {
-		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
+		WareIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::WareIndex id = 0; id < nritems; ++id) {
-			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity();
+			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 			                              gametime,
@@ -5507,26 +5512,27 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	// we test following materials
 	const std::vector<std::string> materials = {"coal",
 	                                            "log",
-	                                            "ironore",
+	                                            "iron_ore",
 	                                            "iron",
 	                                            "marble",
-	                                            "plank",
+	                                            "planks",
 	                                            "water",
-	                                            "goldore",
+	                                            "gold_ore",
 	                                            "granite",
 	                                            "fish",
 	                                            "diamond",
-	                                            "stone",
 	                                            "corn",
 	                                            "wheat",
 	                                            "grape",
 	                                            "quartz",
-	                                            "bread",
+	                                            "atlanteans_bread",
+	                                            "barbarians_bread",
+	                                            "empire_bread",
 	                                            "meat"};
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
 		WareIndex const index = tribe_->ware_index(materials.at(j));
-		if (index == INVALID_INDEX) {
+		if (!tribe_->has_ware(index)) {
 			continue;
 		}
 		if (get_warehoused_stock(index) > 0) {

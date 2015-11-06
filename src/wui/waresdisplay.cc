@@ -20,6 +20,7 @@
 #include "wui/waresdisplay.h"
 
 #include <cstdio>
+#include <utility>
 
 #include <boost/lexical_cast.hpp>
 
@@ -31,7 +32,8 @@
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/ware_descr.h"
 #include "logic/worker.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
@@ -50,25 +52,23 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_tribe (tribe),
 
 	m_type (type),
+	m_indices(m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares()),
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
 
-	m_selected
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
-	m_hidden
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
-	m_in_selection
-		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
 	m_selection_anchor(Widelands::INVALID_INDEX),
 	m_callback_function(callback_function)
 {
+	for (const Widelands::WareIndex& index : m_indices) {
+		m_selected.insert(std::make_pair(index, false));
+		m_hidden.insert(std::make_pair(index, false));
+		m_in_selection.insert(std::make_pair(index, false));
+	}
+
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
@@ -117,7 +117,8 @@ bool AbstractWaresDisplay::handle_mousepress
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::WareIndex ware = ware_at_point(x, y);
-		if (ware == Widelands::INVALID_INDEX) {
+
+		if (!m_tribe.has_ware(ware) && !m_tribe.has_worker(ware)) {
 			return false;
 		}
 		if (!m_selectable) {
@@ -143,25 +144,23 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
 
-	Widelands::WareIndex const number =
-		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
-
 	bool to_be_selected = !ware_selected(m_selection_anchor);
-	for (Widelands::WareIndex i = 0; i < number; ++i)
-	{
-		if (!m_in_selection[i]) {
-			continue;
-		}
-		if (to_be_selected) {
-			select_ware(i);
-		} else {
-			unselect_ware(i);
+
+	for (const Widelands::WareIndex& index : m_indices) {
+		if (m_in_selection[index]) {
+			if (to_be_selected) {
+				select_ware(index);
+			} else {
+				unselect_ware(index);
+			}
 		}
 	}
 
 	// Release anchor, empty selection
 	m_selection_anchor = Widelands::INVALID_INDEX;
-	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	for (std::pair<const Widelands::WareIndex&, bool> resetme : m_in_selection) {
+		m_in_selection[resetme.first] = false;
+	}
 	return true;
 }
 
@@ -184,8 +183,9 @@ Widelands::WareIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) c
 		j = s;
 	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
-		Widelands::WareIndex ware = icons_order()[i][j];
-		if (!m_hidden[ware]) {
+		const Widelands::WareIndex& ware = icons_order()[i][j];
+		assert(m_hidden.count(ware) == 1);
+		if (!(m_hidden.find(ware)->second)) {
 			return ware;
 		}
 	}
@@ -203,7 +203,10 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		return;
 	}
 
-	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	for (std::pair<const Widelands::WareIndex&, bool> resetme : m_in_selection) {
+		m_in_selection[resetme.first] = false;
+	}
+
 	Point anchor_pos = ware_position(m_selection_anchor);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
@@ -237,18 +240,15 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	}
 
 	for (unsigned int cur_ware_x = left_ware_idx; cur_ware_x <= right_ware_idx; cur_ware_x++) {
-		if (cur_ware_x >= icons_order().size()) {
-			continue;
-		}
-		for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
-			if (cur_ware_y >= icons_order()[cur_ware_x].size()) {
-				continue;
+		if (cur_ware_x < icons_order().size()) {
+			for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
+				if (cur_ware_y < icons_order()[cur_ware_x].size()) {
+					Widelands::WareIndex ware = icons_order()[cur_ware_x][cur_ware_y];
+					if (!m_hidden[ware]) {
+						m_in_selection[ware] = true;
+					}
+				}
 			}
-			Widelands::WareIndex ware = icons_order()[cur_ware_x][cur_ware_y];
-			if (m_hidden[ware]) {
-				continue;
-			}
-			m_in_selection[ware] = true;
 		}
 	}
 	update();
@@ -273,20 +273,10 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	Widelands::WareIndex number =
-		m_type == Widelands::wwWORKER ?
-		m_tribe.get_nrworkers() :
-		m_tribe.get_nrwares();
-
-	uint8_t totid = 0;
-	for
-		(Widelands::WareIndex id = 0;
-		 id < number;
-		 ++id, ++totid)
-	{
-		if (m_hidden[id]) continue;
-
-		draw_ware(dst, id);
+	for (const Widelands::WareIndex& index : m_indices) {
+		if (!m_hidden[index]) {
+			draw_ware(dst, index);
+		}
 	}
 }
 
@@ -449,9 +439,10 @@ WaresDisplay::~WaresDisplay()
 }
 
 std::string WaresDisplay::info_for_ware(Widelands::WareIndex ware) {
-	uint32_t totalstock = 0;
-	for (Widelands::WareIndex i = 0; i < m_warelists.size(); ++i)
-		totalstock += m_warelists[i]->stock(ware);
+	int totalstock = 0;
+	for (const Widelands::WareList* warelist : m_warelists) {
+		totalstock += warelist->stock(ware);
+	}
 	return boost::lexical_cast<std::string>(totalstock);
 }
 
@@ -488,7 +479,7 @@ std::string waremap_to_richtext
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<sub width=30 padding=2><p align=center>"
 						 "<sub width=26 background=454545><p align=center><img src=\""
-						+ tribe.get_ware_descr(c->first)->icon_name()
+						+ tribe.get_ware_descr(c->first)->icon_filename()
 						+ "\"></p></sub><sub width=26 background=000000><p><font size=9>"
 						+ boost::lexical_cast<std::string>(static_cast<int32_t>(c->second))
 						+ "</font></p></sub></p></sub>";
