@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-03 18:29+0000\n"
-"PO-Revision-Date: 2015-11-03 19:55+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -65,14 +65,14 @@ msgstr "Tal com creixen la colònia i els seus camins, hauríeu de fer un bon ú
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
-msgid "Build a donjon"
-msgstr "Construïu una torrassa"
+msgid "Build a tower"
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
-"Build a donjon at the north-east border of your territory to get greater "
+"Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Construïu una torrassa a la frontera nord-est del vostre territori per aconseguir un major rang visual i protegir l'assentament d'atacs imprevistos."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -119,11 +119,12 @@ msgstr "Construïu una palestra d'entrenament i un camp d'entrenament a l'oest d
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and"
-" build up a second metal workshop to ensure the production of tools. When "
-"the blacksmith reaches his next level (master blacksmith), you can even "
-"enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr "Milloreu el taller de metall a fàbrica de destrals per produir armes i construïu un altre taller de metall per assegurar la producció d'eines. Quan el forjador arribi al següent nivell (mestre forjador), llavors podeu millorar la fàbrica de destrals a taller de guerra, que produirà armes addicionals."
+"Enhance your metal workshop to an ax workshop in order to produce weapons, "
+"and build up a second metal workshop to ensure the production of tools. When"
+" the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the ax workshop to a war mill, which will produce additional "
+"weapons."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -421,10 +422,10 @@ msgstr "Vies"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a donjon, to have a greater visual"
+"settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "En Thron m'ha dit que ha descobert rastres a la neu cap al nord-est del nostre assentament. Ens ha ordenat construir una torrassa, per aconseguir un major rang visual dels voltants i protegir la nostra gent d'atacs imprevistos."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -501,9 +502,9 @@ msgstr "S'ha completat la fortalesa"
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
-"building some more fortifications like barriers and donjons at the passages,"
-" but for now we can take a deep breath."
-msgstr "Per fi! S'ha completat la fortalesa. L'entrada al nostre assentament hauria de ser segura per ara. De cara al futur, hauríem de pensar en construir més fortificacions com ara casernes i torrasses als passos estrets. Però per ara podem respirar tranquils."
+"building some more fortifications like barriers and towers at the passages, "
+"but for now we can take a deep breath."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"

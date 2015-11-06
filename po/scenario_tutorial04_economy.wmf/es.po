@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-07 10:20+0000\n"
-"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -173,7 +173,7 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "'2/4' por debajo de tu centinela: Para los edificios militares, los soldados estacionados se muestran en lugar de la productividad. ¿Quieres tener cuatro soldados en sus centinelas, pero sólo dos soldados están estacionados en este tipo de edificio. Esto deja dos puestos vacantes - realmente necesitamos más soldados."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
@@ -436,9 +436,9 @@ msgstr "el botón de ayuda de abajo. Para todas las mercancías relativas a tu t
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
-msgstr "Si quieres, puedes probarlo. Un soldado necesita una lanza de madera y un casco – desde ahí puedes ir buscando mercancías hacia atrás."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
+msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
