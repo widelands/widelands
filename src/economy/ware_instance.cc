@@ -33,7 +33,7 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/ship.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/map_object_loader.h"
@@ -544,7 +544,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -600,7 +600,6 @@ void WareInstance::save
 {
 	fw.unsigned_8(HeaderWareInstance);
 	fw.unsigned_8(kCurrentPacketVersion);
-	fw.c_string(descr().tribe().name());
 	fw.c_string(descr().name());
 
 	MapObject::save(egbase, mos, fw);
@@ -617,24 +616,21 @@ void WareInstance::save
 }
 
 MapObject::Loader * WareInstance::load
-	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const TribesLegacyLookupTable& lookup_table)
 {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 
-		if (packet_version == kCurrentPacketVersion) {
+		// Some maps may contain ware info, so we need compatibility here.
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			std::string warename = fr.c_string();
+			if (packet_version == 1) {
+				warename = lookup_table.lookup_ware(warename, fr.c_string());
+			}
 
-			const std::string tribename = fr.c_string();
-			const std::string warename = fr.c_string();
-
-			egbase.manually_load_tribe(tribename);
-
-			const TribeDescr * tribe = egbase.get_tribe(tribename);
-			if (!tribe)
-				throw wexception("unknown tribe '%s'", tribename.c_str());
-
-			WareIndex wareindex = tribe->ware_index(warename);
-			const WareDescr * descr = tribe->get_ware_descr(wareindex);
+			WareIndex wareindex = egbase.tribes().ware_index(warename);
+			const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
 
 			std::unique_ptr<Loader> loader(new Loader);
 			loader->init(egbase, mol, *new WareInstance(wareindex, descr));
@@ -642,7 +638,7 @@ MapObject::Loader * WareInstance::load
 
 			return loader.release();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("WareInstance", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());

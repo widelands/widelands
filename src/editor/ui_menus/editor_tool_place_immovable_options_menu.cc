@@ -39,13 +39,11 @@ namespace {
 using namespace Widelands;
 
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr& immovable_descr) {
-	const Image& pic = g_gr->animations()
-	                      .get_animation(immovable_descr.main_animation())
-	                      .representative_image_from_disk();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), &pic, immovable_descr.descname());
+	const Image* pic = immovable_descr.representative_image();
+	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), pic, immovable_descr.descname());
 	const int kMinClickableArea = 24;
-	cb->set_desired_size(std::max<int>(pic.width(), kMinClickableArea),
-	                     std::max<int>(pic.height(), kMinClickableArea));
+	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
+								std::max<int>(pic->height(), kMinClickableArea));
 	return cb;
 }
 

@@ -140,7 +140,6 @@ end
 --    :arg title:   The title to be displayed for the objective
 --    :arg body:    The content text to be displayed for the objective
 function broadcast_objective(name, title, body)
-	local plrs = wl.Game().players
-	plrs[1]:add_objective(name, title, body)
+   local plrs = wl.Game().players
+   plrs[1]:add_objective(name, title, body)
 end
-

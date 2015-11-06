@@ -34,7 +34,7 @@
 #include "logic/field.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
 
 
@@ -103,7 +103,7 @@ constexpr uint8_t kCurrentPacketVersionBorder = 1;
 struct MapObjectData {
 	MapObjectData() : map_object_descr(nullptr) {}
 	const MapObjectDescr                     * map_object_descr;
-	Player::ConstructionsiteInformation         csi;
+	ConstructionsiteInformation         csi;
 };
 
 namespace {
@@ -139,7 +139,7 @@ namespace {
 				throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "  \
 				                      "\"%s\" for reading. This file should exist when \"%s\" exists", \
 				                      plnum,                                                           \
-											 filename,                                                        \
+				                      filename,                                                        \
 				                      unseen_times_filename);                                          \
 		}                                                                                            \
 	}
@@ -194,12 +194,10 @@ struct WorldImmovableNonexistent : public FileRead::DataError {
 	char const* const name;
 };
 struct BuildingNonexistent : public FileRead::DataError {
-	BuildingNonexistent(const std::string& Tribename, char const* const Name)
-	   : DataError("tribe %s does not define building type \"%s\"", Tribename.c_str(), Name),
-	     tribename(Tribename),
+	BuildingNonexistent(char const* const Name)
+	   : DataError("tribes do not define building type \"%s\"", Name),
 	     name(Name) {
 	}
-	const std::string& tribename;
 	char const* const name;
 };
 
@@ -211,8 +209,8 @@ struct BuildingNonexistent : public FileRead::DataError {
 // name in the tribe.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->c_string();
-	int32_t const index = tribe.get_immovable_index(name);
-	if (index == -1)
+	WareIndex const index = tribe.immovable_index(name);
+	if (!tribe.has_immovable(index))
 		throw TribeImmovableNonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
 }
@@ -223,11 +221,13 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& trib
 //
 // \throws Tribe_Nonexistent if the there is no tribe with that name.
 const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
-	char const* const name = fr->c_string();
-	if (TribeDescr const* const result = egbase.get_tribe(name))
-		return *result;
-	else
-		throw TribeNonexistent(name);
+	const std::string& name = fr->c_string();
+	const Tribes& tribes = egbase.tribes();
+	if (tribes.tribe_exists(name)) {
+		return *tribes.get_tribe_descr(tribes.tribe_index(name));
+	} else {
+		throw TribeNonexistent(name.c_str());
+	}
 }
 
 // Reads a c_string and interprets it as the name of a tribe.
@@ -238,14 +238,17 @@ const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
 // \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 // with that name.
 TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
-	char const* const name = fr->c_string();
-	if (*name)
-		if (TribeDescr const* const result = egbase.get_tribe(name))
-			return result;
-		else
-			throw TribeNonexistent(name);
-	else
+	const std::string& name = fr->c_string();
+	const Tribes& tribes = egbase.tribes();
+	if (!name.empty()) {
+		if (tribes.tribe_exists(name)) {
+			return tribes.get_tribe_descr(tribes.tribe_index(name));
+		} else {
+			throw TribeNonexistent(name.c_str());
+		}
+	} else {
 		return nullptr;
+	}
 }
 
 // Reads a c_string and interprets it as the name of an immovable type.
@@ -256,8 +259,8 @@ TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& eg
 // name in the World.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
 	char const* const name = fr->c_string();
-	int32_t const index = world.get_immovable_index(name);
-	if (index == -1)
+	WareIndex const index = world.get_immovable_index(name);
+	if (index == Widelands::INVALID_INDEX)
 		throw WorldImmovableNonexistent(name);
 	return *world.get_immovable_descr(index);
 }
@@ -277,21 +280,14 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 //
 // \returns a reference to the building type description.
 //
-// \throws Building_Nonexistent if there is no building type with that
-const BuildingDescr& read_building_type(StreamRead* fr, const TribeDescr& tribe) {
-	char const* const name = fr->c_string();
-	BuildingIndex const index = tribe.building_index(name);
-	if (index == INVALID_INDEX)
-		throw BuildingNonexistent(tribe.name(), name);
-	return *tribe.get_building_descr(index);
-}
-
-// Calls read_tribe(const EditorGameBase &) to read a tribe and then reads a
-// c_string and interprets it as the name of a building type in that tribe.
-//
-// \returns a reference to the building type description.
+// \throws Building_Nonexistent if there is no building type with that name
 const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
-	return read_building_type(fr, read_tribe(fr, egbase));
+	char const* const name = fr->c_string();
+	BuildingIndex const index = egbase.tribes().building_index(name);
+	if (!egbase.tribes().building_exists(index)) {
+		throw BuildingNonexistent(name);
+	}
+	return *egbase.tribes().get_building_descr(index);
 }
 
 // Encode a tribe into 'wr'.
@@ -306,13 +302,12 @@ void write_tribe(StreamWrite* wr, TribeDescr const* tribe) {
 
 // Encode a Immovable_Type into 'wr'.
 void write_immovable_type(StreamWrite* wr, const ImmovableDescr& immovable) {
-	write_tribe(wr, immovable.get_owner_tribe());
+	wr->unsigned_8(static_cast<uint8_t>(immovable.owner_type()));
 	wr->string(immovable.name());
 }
 
 // Encode a Building_Type into 'wr'.
 void write_building_type(StreamWrite* wr, const BuildingDescr& building) {
-	write_tribe(wr, building.tribe());
 	wr->string(building.name());
 }
 
@@ -347,7 +342,7 @@ inline static MapObjectData read_unseen_immovable
 					m.csi.completedtime =  immovables_file.unsigned_32();
 				}
 			} else {
-				throw UnhandledVersionError(version, kCurrentPacketVersionImmovables);
+				throw UnhandledVersionError("MapPlayersViewPacket", version, kCurrentPacketVersionImmovables);
 			}
 			break;
 		case 4: // The player sees a port dock
@@ -535,12 +530,12 @@ void MapPlayersViewPacket::read
 		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead, roads_file,
 			 roads_filename, road_file_version,
-			 ROADS_FILENAME_TEMPLATE,        kCurrentPacketVersionRoads);
+			 ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
 
 		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead, terrains_file,
 			 terrains_filename, terrains_file_version,
-			 TERRAINS_FILENAME_TEMPLATE,     kCurrentPacketVersionTerrains);
+			 TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains);
 
 		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead, triangle_immovable_kinds_file,
@@ -556,12 +551,12 @@ void MapPlayersViewPacket::read
 
 		OPEN_INPUT_FILE
 			(FileRead,       owners_file,         owners_filename,
-			 OWNERS_FILENAME_TEMPLATE,       kCurrentPacketVersionOwners);
+			 OWNERS_FILENAME_TEMPLATE, kCurrentPacketVersionOwners);
 
 		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead, surveys_file,
 			 surveys_filename, surveys_file_version,
-			 SURVEYS_FILENAME_TEMPLATE,      kCurrentPacketVersionSurveys);
+			 SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys);
 
 		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead, survey_amounts_file,
@@ -660,7 +655,8 @@ void MapPlayersViewPacket::read
 					if (node_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						imm_kind = node_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(node_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Node Immovable kinds",
+															 node_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -677,7 +673,8 @@ void MapPlayersViewPacket::read
 						f_player_field.border_br = borders & 4;
 						f_player_field.border_bl = borders & 8;
 					} else {
-						throw UnhandledVersionError(border_file_version, kCurrentPacketVersionBorder);
+						throw UnhandledVersionError("MapPlayersViewPacket - Border file",
+															 border_file_version, kCurrentPacketVersionBorder);
 					}
 					break;
 				}
@@ -720,13 +717,15 @@ void MapPlayersViewPacket::read
 					if (terrains_file_version == kCurrentPacketVersionTerrains) {
 						f_player_field.terrains.d = terrains_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(terrains_file_version, kCurrentPacketVersionTerrains);
+						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
+															 terrains_file_version, kCurrentPacketVersionTerrains);
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						im_kind = triangle_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(triangle_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+															 triangle_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -747,13 +746,15 @@ void MapPlayersViewPacket::read
 					if (terrains_file_version == kCurrentPacketVersionTerrains) {
 						f_player_field.terrains.r = terrains_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(terrains_file_version, kCurrentPacketVersionTerrains);
+						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
+															 terrains_file_version, kCurrentPacketVersionTerrains);
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
 						im_kind = triangle_immovable_kinds_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(triangle_immovable_kinds_file_version,
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+															 triangle_immovable_kinds_file_version,
 															 kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod =
@@ -772,7 +773,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads = roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen | br_seen) {
@@ -783,7 +785,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads |= roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen |  r_seen) {
@@ -794,7 +797,8 @@ void MapPlayersViewPacket::read
 						if (road_file_version == kCurrentPacketVersionRoads) {
 							roads |= roads_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(road_file_version, kCurrentPacketVersionRoads);
+							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
+																 road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					roads |= f.field->get_roads() & mask;
@@ -811,13 +815,15 @@ void MapPlayersViewPacket::read
 						survey = (f_everseen & bl_everseen & br_everseen)
 							 && surveys_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(surveys_file_version, kCurrentPacketVersionSurveys);
+						throw UnhandledVersionError("MapPlayersViewPacket - Surveys file",
+															 surveys_file_version, kCurrentPacketVersionSurveys);
 					}
 					if (survey) {
 						if (survey_amounts_file_version == kCurrentPacketVersionSurveyAmounts) {
 							f_player_field.resource_amounts.d = survey_amounts_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(survey_amounts_file_version,
+							throw UnhandledVersionError("MapPlayersViewPacket - Survey amounts",
+																 survey_amounts_file_version,
 																 kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
@@ -847,13 +853,15 @@ void MapPlayersViewPacket::read
 						survey = (f_everseen & br_everseen &  r_everseen)
 							&& surveys_file.unsigned_8();
 					} else {
-						throw UnhandledVersionError(surveys_file_version, kCurrentPacketVersionSurveys);
+						throw UnhandledVersionError("MapPlayersViewPacket - Surveys file",
+															 surveys_file_version, kCurrentPacketVersionSurveys);
 					}
 					if (survey) {
 						if (survey_amounts_file_version == kCurrentPacketVersionSurveyAmounts) {
 							f_player_field.resource_amounts.r = survey_amounts_file.unsigned_8();
 						} else {
-							throw UnhandledVersionError(survey_amounts_file_version,
+							throw UnhandledVersionError("MapPlayersViewPacket - Survey amounts",
+																 survey_amounts_file_version,
 																 kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
@@ -902,7 +910,7 @@ inline static void write_unseen_immovable
 	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
 	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
-	const Player::ConstructionsiteInformation & csi = map_object_data->csi;
+	const ConstructionsiteInformation & csi = map_object_data->csi;
 	assert(!Road::is_road_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
@@ -1110,7 +1118,7 @@ void MapPlayersViewPacket::write
 
 			WRITE
 				(roads_file,
-				 ROADS_FILENAME_TEMPLATE,    kCurrentPacketVersionRoads);
+				 ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
 
 			WRITE
 				(terrains_file,
@@ -1128,11 +1136,11 @@ void MapPlayersViewPacket::write
 
 			WRITE
 				(owners_file,
-				 OWNERS_FILENAME_TEMPLATE,   kCurrentPacketVersionOwners);
+				 OWNERS_FILENAME_TEMPLATE, kCurrentPacketVersionOwners);
 
 			WRITE
 				(surveys_file,
-				 SURVEYS_FILENAME_TEMPLATE,  kCurrentPacketVersionSurveys);
+				 SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys);
 
 			WRITE
 				(survey_amounts_file,

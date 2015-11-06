@@ -25,9 +25,9 @@ world:new_editor_immovable_category{
 }
 
 world:new_editor_immovable_category{
-   name = "stones",
-   descname = _ "Stones",
-   picture = "world/immovables/stones/greenland_stones6/idle.png",
+   name = "rocks",
+   descname = _ "Rocks",
+   picture = "world/immovables/rocks/greenland_rocks6/idle.png",
 }
 
 world:new_editor_immovable_category{
@@ -123,31 +123,31 @@ include "world/immovables/standing_stones/standing_stone5_winter/init.lua"
 include "world/immovables/standing_stones/standing_stone6/init.lua"
 include "world/immovables/standing_stones/standing_stone7/init.lua"
 
--- Stones
-include "world/immovables/stones/blackland_stones1/init.lua"
-include "world/immovables/stones/blackland_stones2/init.lua"
-include "world/immovables/stones/blackland_stones3/init.lua"
-include "world/immovables/stones/blackland_stones4/init.lua"
-include "world/immovables/stones/blackland_stones5/init.lua"
-include "world/immovables/stones/blackland_stones6/init.lua"
-include "world/immovables/stones/desert_stones1/init.lua"
-include "world/immovables/stones/desert_stones2/init.lua"
-include "world/immovables/stones/desert_stones3/init.lua"
-include "world/immovables/stones/desert_stones4/init.lua"
-include "world/immovables/stones/desert_stones5/init.lua"
-include "world/immovables/stones/desert_stones6/init.lua"
-include "world/immovables/stones/greenland_stones1/init.lua"
-include "world/immovables/stones/greenland_stones2/init.lua"
-include "world/immovables/stones/greenland_stones3/init.lua"
-include "world/immovables/stones/greenland_stones4/init.lua"
-include "world/immovables/stones/greenland_stones5/init.lua"
-include "world/immovables/stones/greenland_stones6/init.lua"
-include "world/immovables/stones/winterland_stones1/init.lua"
-include "world/immovables/stones/winterland_stones2/init.lua"
-include "world/immovables/stones/winterland_stones3/init.lua"
-include "world/immovables/stones/winterland_stones4/init.lua"
-include "world/immovables/stones/winterland_stones5/init.lua"
-include "world/immovables/stones/winterland_stones6/init.lua"
+-- Rocks
+include "world/immovables/rocks/blackland_rocks1/init.lua"
+include "world/immovables/rocks/blackland_rocks2/init.lua"
+include "world/immovables/rocks/blackland_rocks3/init.lua"
+include "world/immovables/rocks/blackland_rocks4/init.lua"
+include "world/immovables/rocks/blackland_rocks5/init.lua"
+include "world/immovables/rocks/blackland_rocks6/init.lua"
+include "world/immovables/rocks/desert_rocks1/init.lua"
+include "world/immovables/rocks/desert_rocks2/init.lua"
+include "world/immovables/rocks/desert_rocks3/init.lua"
+include "world/immovables/rocks/desert_rocks4/init.lua"
+include "world/immovables/rocks/desert_rocks5/init.lua"
+include "world/immovables/rocks/desert_rocks6/init.lua"
+include "world/immovables/rocks/greenland_rocks1/init.lua"
+include "world/immovables/rocks/greenland_rocks2/init.lua"
+include "world/immovables/rocks/greenland_rocks3/init.lua"
+include "world/immovables/rocks/greenland_rocks4/init.lua"
+include "world/immovables/rocks/greenland_rocks5/init.lua"
+include "world/immovables/rocks/greenland_rocks6/init.lua"
+include "world/immovables/rocks/winterland_rocks1/init.lua"
+include "world/immovables/rocks/winterland_rocks2/init.lua"
+include "world/immovables/rocks/winterland_rocks3/init.lua"
+include "world/immovables/rocks/winterland_rocks4/init.lua"
+include "world/immovables/rocks/winterland_rocks5/init.lua"
+include "world/immovables/rocks/winterland_rocks6/init.lua"
 
 -- Trees
 include "world/immovables/trees/alder/init.lua"
@@ -186,7 +186,8 @@ include "world/immovables/trees/umbrella_red/init.lua"
 function add_walking_animations(table, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       table["walk_" .. dir] = {
-         pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+         template = basename .. "_" .. dir .. "_??",
+         directory = dirname,
          hotspot = hotspot,
          fps = fps,
       }

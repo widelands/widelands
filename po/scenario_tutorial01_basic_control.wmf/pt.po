@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -74,9 +74,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Habitualmente começas o jogo com um Quartel-general que é o edifício maior como uma bandeira azul à sua frente. O Quartel-general é uma armazém onde são guardadas as mercadorias e onde habitam os trabalhadores e os soldados. Algumas mercadorias são necessárias para construir casas e outras são os componentes de outras mercadorias. Obviamente que as mercadorias agora em armazém não vão durar para sempre, por isso tens de tratar de produzir mais. No inicio do jogo as mais importantes são os materiais de construção básicos: troncos e pedra. Vamos assegurar-nos que não vamos esgotar o estoque de troncos. Para isto precisamos de um Lenhador e duma Cabana para ele morar."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -288,8 +288,8 @@ msgstr "A Cabana do Lenhador está pronta !"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Excelente ! A cabana do Lenhador esta pronta. O lenhador agora virá para a habitar e começar a abater árvores, para que a produção de troncos fique assegurada por agora. Passemos então à pedra em bruto."
+"the granite."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -301,11 +301,11 @@ msgstr "Pondo uma Pedreira a funcionar"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "As pedras podem ser minadas nas Minas de granito, mas é mais fácil de as obter construindo uma Pedreira perto dos rochedos. Por acaso existe um grande rochedo a Oeste (à esquerda) do Quartel-general. Vou ensinar-te como mover  a vista do ecrã para esse local."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -658,7 +658,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
+"will make the granite production faster."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
@@ -896,12 +896,12 @@ msgstr "Existe mais uma coisa que gostaria de te ensinar: Expandires o teu terri
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "A expansão é tão simples como a construção de um edifício militar num canto do seu território. Os bárbaros têm alguns instalações militares diferentes: sentinelas, barreiras, torres de menagem, fortalezas e cidadelas. Quanto maior o edifício, o mais caro é para construir, e mais terra conquista em torno de si e mais soldados podem ser ali estacionados . Os edifícios também variam no seu campo de visão: prédios com uma torre podem ver mais longe do que outros."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -938,7 +938,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
 msgstr ""
 

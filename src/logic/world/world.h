@@ -35,10 +35,10 @@ namespace Widelands {
 class BobDescr;
 class EditorCategory;
 class EditorGameBase;
+class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;
 struct CritterDescr;
-struct ImmovableDescr;
 
 /// This is the in memory descriptions of the world and provides access to
 /// terrains, immovables and resources.
@@ -59,14 +59,14 @@ public:
 	int32_t get_nr_bobs() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	int32_t get_immovable_index(char const* const l) const;
-	int32_t get_nr_immovables() const;
-	ImmovableDescr const* get_immovable_descr(int32_t index) const;
+	WareIndex get_immovable_index(const std::string& name) const;
+	WareIndex get_nr_immovables() const;
+	ImmovableDescr const* get_immovable_descr(WareIndex index) const;
 
-	int32_t get_resource(const char* const name) const;
+	ResourceIndex get_resource(const char* const name) const;
 	ResourceDescription const* get_resource(ResourceIndex res) const;
-	int32_t get_nr_resources() const;
-	int32_t safe_resource_index(const char* const warename) const;
+	ResourceIndex get_nr_resources() const;
+	ResourceIndex safe_resource_index(const char* const warename) const;
 
 	/// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);

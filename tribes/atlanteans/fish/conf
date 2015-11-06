@@ -1,8 +1,0 @@
-help=_Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts.
-
-default_target_quantity=20 # currently not used
-preciousness=4
-
-[idle]
-pics=idle.png
-hotspot=8 6

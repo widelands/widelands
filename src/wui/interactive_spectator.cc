@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
+#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"

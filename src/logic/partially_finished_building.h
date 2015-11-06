@@ -45,7 +45,7 @@ public:
 
 	int32_t get_size() const override;
 	uint32_t get_playercaps() const override;
-	uint32_t get_ui_anim() const override;
+	const Image* representative_image() const override;
 	void cleanup(EditorGameBase &) override;
 	void init   (EditorGameBase &) override;
 	void set_economy(Economy *) override;

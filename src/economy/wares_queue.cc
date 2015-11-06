@@ -27,7 +27,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -282,7 +282,7 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("WaresQueue", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const GameDataError & e) {
 		throw GameDataError("waresqueue: %s", e.what());

@@ -27,17 +27,16 @@
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
 #include "logic/soldiercontrol.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
 class Soldier;
 class World;
 
-struct MilitarySiteDescr : public ProductionSiteDescr {
-	MilitarySiteDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &,  Section & global_s,
-		 const TribeDescr & tribe, const World& world);
+class MilitarySiteDescr : public ProductionSiteDescr {
+public:
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;

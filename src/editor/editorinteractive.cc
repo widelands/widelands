@@ -39,11 +39,10 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -59,11 +58,8 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	for (const std::string& tribename : Widelands::TribeDescr::get_all_tribenames()) {
-		ScopedTimer timer((boost::format("Loading %s took %%ums.") % tribename).str());
-		loader_ui->stepf(_("Loading tribe: %s"), tribename.c_str());
-		egbase->manually_load_tribe(tribename);
-	}
+	loader_ui->step(_("Loading tribes"));
+	egbase->tribes();
 }
 
 }  // namespace
@@ -207,7 +203,7 @@ void EditorInteractive::load(const std::string & filename) {
 	}
 
 	ml->load_map_complete(egbase(), true);
-	loader_ui.step(_("Loading graphics..."));
+
 	egbase().load_graphics(loader_ui);
 
 	register_overlays();
@@ -605,7 +601,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 				load_all_tribes(&editor, &loader_ui);
 
-				loader_ui.step(_("Loading graphics..."));
 				editor.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {

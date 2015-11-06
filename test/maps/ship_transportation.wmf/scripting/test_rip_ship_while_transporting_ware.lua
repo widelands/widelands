@@ -2,15 +2,15 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
-   create_second_port()
+   create_southern_port()
+   create_northern_port()
 
    start_building_farm()
-   port1():set_wares{
+   southern_port():set_wares{
       blackwood = 1,
    }
-   port2():set_workers{
-      builder = 1,
+   northern_port():set_workers{
+      barbarians_builder = 1,
    }
 
    assert_equal(p1:get_wares("blackwood"), 1)
@@ -26,8 +26,8 @@ run(function()
    -- No more blackwood.
    assert_equal(p1:get_wares("blackwood"), 0)
 
-   local new_ship = p1:place_bob("ship", map:get_field(10, 10))
-   port1():set_wares{
+   local new_ship = p1:place_ship(map:get_field(10, 10))
+   southern_port():set_wares{
       blackwood = 1,
    }
    sleep(1000)

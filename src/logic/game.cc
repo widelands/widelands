@@ -56,10 +56,9 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "profile/profile.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -226,17 +225,21 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
-	loaderUI.step (_("Preloading a map"));
+	loaderUI.step (_("Preloading map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
 		loaderUI.set_background(background);
 	}
+	loaderUI.step(_("Loading world"));
+	world();
+	loaderUI.step(_("Loading tribes"));
+	tribes();
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf (_("Adding player %u"), p);
+		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -250,7 +253,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loaderUI.step (_("Loading a map"));
+	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
@@ -286,6 +289,17 @@ void Game::init_newgame
 	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
+
+	if (loaderUI) {
+		loaderUI->step(_("Loading world"));
+	}
+	world();
+
+	if (loaderUI) {
+		loaderUI->step(_("Loading tribes"));
+	}
+	tribes();
+
 	std::string const background = map().get_background();
 	if (loaderUI) {
 		if (!background.empty()) {
@@ -637,11 +651,6 @@ void Game::cleanup_for_load()
 
 	EditorGameBase::cleanup_for_load();
 
-	for (TribeDescr* tribe : tribes_) {
-		delete tribe;
-	}
-
-	tribes_.clear();
 	cmdqueue().flush();
 
 	// Statistics
@@ -743,7 +752,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 void Game::send_player_build
 	(int32_t const pid, Coords const coords, BuildingIndex const id)
 {
-	assert(id != INVALID_INDEX);
+	assert(tribes().building_exists(id));
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
 }
 
@@ -788,7 +797,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 void Game::send_player_enhance_building
 	(Building & building, BuildingIndex const id)
 {
-	assert(id != INVALID_INDEX);
+	assert(building.owner().tribe().has_building(id));
 
 	send_player_command
 		(*new CmdEnhanceBuilding
@@ -984,22 +993,16 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
-			WareIndex const tribe_wares = tribe.get_nrwares();
-			for
-				(WareIndex wareid = 0;
-				 wareid < tribe_wares;
-				 ++wareid)
-				wastock += eco->stock_ware(wareid);
-			WareIndex const tribe_workers = tribe.get_nrworkers();
-			for
-				(WareIndex workerid = 0;
-				 workerid < tribe_workers;
-				 ++workerid)
-				if
-					(!
-					 dynamic_cast<CarrierDescr const *>
-					 	(tribe.get_worker_descr(workerid)))
-					wostock += eco->stock_worker(workerid);
+
+			for (const WareIndex& ware_index : tribe.wares()) {
+				wastock += eco->stock_ware(ware_index);
+			}
+
+			for (const WareIndex& worker_index : tribe.workers()) {
+				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
+					wostock += eco->stock_worker(worker_index);
+				}
+			}
 		}
 		nr_wares  [p - 1] = wastock;
 		nr_workers[p - 1] = wostock;

@@ -172,7 +172,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 		if (packet_version == kCurrentPacketVersion) {
 			m_serial = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("shipping item: %s", e.what());

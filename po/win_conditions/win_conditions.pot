@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-06 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -84,13 +84,13 @@ msgid ""
 "Status for %s"
 msgstr ""
 
-#. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:115
+#. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
+#: ../../scripting/win_conditions/collectors.lua:116
 msgid ""
 "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/collectors.lua:119
+#: ../../scripting/win_conditions/collectors.lua:120
 msgid ""
 "Total: %i point"
 msgid_plural ""
@@ -99,7 +99,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:133
+#: ../../scripting/win_conditions/collectors.lua:134
 msgid ""
 "%i minute"
 msgid_plural ""
@@ -108,7 +108,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:138
+#: ../../scripting/win_conditions/collectors.lua:139
 msgid ""
 "%1% hour and %2%"
 msgid_plural ""
@@ -117,7 +117,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../scripting/win_conditions/collectors.lua:141
+#: ../../scripting/win_conditions/collectors.lua:142
 msgid ""
 "%1% hour"
 msgid_plural ""
@@ -126,7 +126,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:145
+#: ../../scripting/win_conditions/collectors.lua:146
 msgid ""
 "The game will end in %s."
 msgstr ""

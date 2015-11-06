@@ -1,8 +1,0 @@
-help=_A tabard and a light trident are the basic equipment for young soldiers. Tabards are produced in the weaving mill.
-
-default_target_quantity=30
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=5 10

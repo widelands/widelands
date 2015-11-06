@@ -20,6 +20,7 @@
 #include "logic/bob.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <stdint.h>
 
@@ -27,6 +28,7 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -40,42 +42,37 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 
 namespace Widelands {
 
-BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
-                  const std::string& init_descname,
-                  TribeDescr const* tribe)
+BobDescr::BobDescr(const std::string& init_descname, const MapObjectType init_type,
+						 MapObjectDescr::OwnerType owner_type, const LuaTable& table)
 	:
-	MapObjectDescr(object_type, init_name, init_descname),
-	owner_tribe_    (tribe)
+	MapObjectDescr(init_type,  table.get_string("name"), init_descname, table),
+	owner_type_   (owner_type),
+	// Only tribe bobs have a vision range, since it would be irrelevant for world bobs.
+	vision_range_ (owner_type == MapObjectDescr::OwnerType::kTribe ? table.get_int("vision_range") : 0)
 {
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Bob %s has no idle animation", table.get_string("name").c_str());
+	}
 }
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
  * for world bobs.
  *
- * Currently, all bobs use the tribe's default vision range.
- *
  * \returns radius (in fields) of area that the bob can see
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (owner_tribe_) {
-		if (upcast(const ShipDescr, ship, this))
-			return ship->vision_range();
-		return owner_tribe_->get_bob_vision_range();
-	}
-
-	return 0;
+	return vision_range_;
 }
 
 /**
@@ -1146,7 +1143,7 @@ void Bob::Loader::load(FileRead & fr)
 					state.program = get_program(programname);
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Bob", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("loading bob: %s", e.what());

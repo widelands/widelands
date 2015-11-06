@@ -170,7 +170,7 @@ void TerrainProgram::draw(uint32_t gametime,
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
 			const FloatPoint texture_offset =
-			   terrains.get_unmutable(field.ter_d).get_texture(gametime).texture_coordinates().top_left();
+			   terrains.get(field.ter_d).get_texture(gametime).texture_coordinates().top_left();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(bln_index), texture_offset);
 			add_vertex(fields_to_draw.at(brn_index), texture_offset);
@@ -180,13 +180,13 @@ void TerrainProgram::draw(uint32_t gametime,
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
 			const FloatPoint texture_offset =
-			   terrains.get_unmutable(field.ter_r).get_texture(gametime).texture_coordinates().top_left();
+			   terrains.get(field.ter_r).get_texture(gametime).texture_coordinates().top_left();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(brn_index), texture_offset);
 			add_vertex(fields_to_draw.at(rn_index), texture_offset);
 		}
 	}
 
-	const Texture& texture = terrains.get_unmutable(0).get_texture(0);
+	const Texture& texture = terrains.get(0).get_texture(0);
 	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
 }

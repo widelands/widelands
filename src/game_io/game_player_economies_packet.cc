@@ -85,7 +85,7 @@ void GamePlayerEconomiesPacket::read
 					throw GameDataError("player %u: %s", p, e.what());
 				}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GamePlayerEconomiesPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("economies: %s", e.what());

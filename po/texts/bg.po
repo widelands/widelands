@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-11 21:02+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:50+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -737,8 +737,8 @@ msgstr "Преди да построите кладенец или мина, з�
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "Територията Ви може да бъде разширена чрез построяване на различни военни сгради – караулна, крепост, казарма и т.н."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr "Територията Ви може да бъде разширена чрез построяване на различни военни сгради – караулна, крепост, блокпост и т.н."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

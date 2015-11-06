@@ -139,7 +139,7 @@ end
 
 
 function place_building_tests:test_place_building_no_cs()
-   local k = player1:place_building("warehouse", self.f)
+   local k = player1:place_building("barbarians_warehouse", self.f)
    self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
    assert_equal("warehouse", k.descr.type_name)
@@ -149,7 +149,7 @@ function place_building_tests:test_something_in_the_way_no_cs()
    local f = player1:place_flag(self.f)
    self.pis[#self.pis + 1] = f
    assert_error("Something in the way!", function()
-      local k = player1:place_building("lumberjacks_hut", self.f)
+      local k = player1:place_building("barbarians_lumberjacks_hut", self.f)
       self.pis[#self.pis + 1] = k
    end)
 end
@@ -157,13 +157,13 @@ end
 function place_building_tests:test_force_building_no_cs()
    local f = player1:place_flag(self.f)
    self.pis[#self.pis + 1] = f
-   local k = player1:place_building("lumberjacks_hut", self.f, false, true)
+   local k = player1:place_building("barbarians_lumberjacks_hut", self.f, false, true)
    self.pis[#self.pis + 1] = k
    assert_equal("productionsite", k.descr.type_name)
 end
 
 function place_building_tests:test_place_building_cs()
-   local k = player1:place_building("warehouse", self.f, true)
+   local k = player1:place_building("barbarians_warehouse", self.f, true)
    self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
    assert_equal("constructionsite", k.descr.type_name)
@@ -173,7 +173,7 @@ function place_building_tests:test_something_in_the_way_cs()
    local f = player1:place_flag(self.f)
    self.pis[#self.pis + 1] = f
    assert_error("Something in the way!", function()
-      local k = player1:place_building("lumberjacks_hut", self.f, true)
+      local k = player1:place_building("barbarians_lumberjacks_hut", self.f, true)
       self.pis[#self.pis + 1] = k
    end)
 end
@@ -181,7 +181,7 @@ end
 function place_building_tests:test_force_building_cs()
    local f = player1:place_flag(self.f)
    self.pis[#self.pis + 1] = f
-   local k = player1:place_building("lumberjacks_hut", self.f, true, true)
+   local k = player1:place_building("barbarians_lumberjacks_hut", self.f, true, true)
    self.pis[#self.pis + 1] = k
    assert_equal("constructionsite", k.descr.type_name)
 end

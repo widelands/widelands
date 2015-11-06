@@ -32,7 +32,6 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "scripting/logic.h"
 
 namespace Widelands {
@@ -64,7 +63,7 @@ void MapScriptingPacket::read
 				upcast(LuaGameInterface, lgi, &g->lua());
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 			} else {
-				throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+				throw UnhandledVersionError("MapScriptingPacket", packet_version, kCurrentPacketVersion);
 			}
 		} catch (const WException & e) {
 			throw GameDataError("scripting: %s", e.what());

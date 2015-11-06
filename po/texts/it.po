@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-21 14:57+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -536,7 +536,8 @@ msgstr "Queste pagine possono essere più complete ed aggiornate di questo file.
 msgid "Keyboard shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr "SPAZIO:"
 
@@ -544,7 +545,8 @@ msgstr "SPAZIO:"
 msgid "toggles if building spaces are shown"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr "C:"
 
@@ -552,7 +554,8 @@ msgstr "C:"
 msgid "toggles census"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr "F:"
 
@@ -560,7 +563,8 @@ msgstr "F:"
 msgid "toggles fullscreen"
 msgstr "attiva o disattiva lo schermo intero"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr "H:"
 
@@ -568,7 +572,8 @@ msgstr "H:"
 msgid "toggles main menu"
 msgstr "attiva e disattiva il menù principale"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr "M:"
 
@@ -576,7 +581,8 @@ msgstr "M:"
 msgid "toggles minimap"
 msgstr "attiva e disattiva la minimappa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr "P:"
 
@@ -584,7 +590,8 @@ msgstr "P:"
 msgid "toggles player menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr "T:"
 
@@ -592,7 +599,8 @@ msgstr "T:"
 msgid "toggles tools menu"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr "I:"
 
@@ -600,7 +608,8 @@ msgstr "I:"
 msgid "activates information tool"
 msgstr "attiva lo strumento per le informazioni"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr "CTRL+L:"
 
@@ -608,7 +617,8 @@ msgstr "CTRL+L:"
 msgid "load map"
 msgstr "carica una mappa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr "CTRL+S:"
 
@@ -616,7 +626,8 @@ msgstr "CTRL+S:"
 msgid "save map"
 msgstr "salva la mappa"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr "1-0:"
 
@@ -624,7 +635,8 @@ msgstr "1-0:"
 msgid "changes tool size"
 msgstr "cambia la dimensione dello strumento"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr "SHIFT (Tieni premuto):"
 
@@ -632,7 +644,8 @@ msgstr "SHIFT (Tieni premuto):"
 msgid "selects first alternative tool while pressed"
 msgstr ""
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr "ALT (Tieni premuto):"
 
@@ -727,8 +740,8 @@ msgstr "Assicurati di mandare un geologo ad esaminare i luoghi prima di costruir
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr "Il tuo territorio può essere esteso costruendo vari edifici militari - guardiole, fortezze, caserme, ecc."
+"Sentry, Fortress, Blockhouse, etc."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

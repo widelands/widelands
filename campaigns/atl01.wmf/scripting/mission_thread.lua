@@ -46,7 +46,8 @@ function build_warehouse_and_horsefarm()
 
    local o = add_campaign_objective(obj_horsefarm_and_warehouse)
    while not check_for_buildings(p1, {
-      horsefarm = 1, warehouse = 1,
+      atlanteans_horsefarm = 1,
+      atlanteans_warehouse = 1,
    }) do sleep(2384) end
    o.done = true
 end
@@ -56,7 +57,8 @@ function build_training()
 
    local o = add_campaign_objective(obj_make_training_buildings)
    while not check_for_buildings(p1, {
-      dungeon = 1, labyrinth = 1
+      atlanteans_dungeon = 1,
+      atlanteans_labyrinth = 1
    }) do sleep(3874) end
    o.done = true
 
@@ -68,9 +70,14 @@ function build_heavy_industrys_and_mining()
 
    local o = add_campaign_objective(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
-      coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
-      smelting_works = 1, weaponsmithy = 1, armorsmithy = 1,
-      toolsmithy = 1,
+      atlanteans_coalmine = 1,
+      atlanteans_ironmine = 1,
+      atlanteans_goldmine = 1,
+      atlanteans_crystalmine = 1,
+      atlanteans_smelting_works = 1,
+      atlanteans_weaponsmithy = 1,
+      atlanteans_armorsmithy = 1,
+      atlanteans_toolsmithy = 1,
    }) do sleep(3478) end
    o.done = true
 
@@ -88,10 +95,15 @@ function build_food_environment()
 
    local o = add_campaign_objective(obj_make_food_infrastructure)
    while not check_for_buildings(p1, {
-      farm = 1, blackroot_farm = 1,
-      sawmill = 1, well = 1, bakery = 1,
-      hunters_house = 1, fishers_house = 1,
-      fish_breeders_house = 1, smokery = 2,
+      atlanteans_farm = 1,
+      atlanteans_blackroot_farm = 1,
+      atlanteans_sawmill = 1,
+      atlanteans_well = 1,
+      atlanteans_bakery = 1,
+      atlanteans_hunters_house = 1,
+      atlanteans_fishers_house = 1,
+      atlanteans_fishbreeders_house = 1,
+      atlanteans_smokery = 2,
    }) do sleep(2789) end
    o.done = true
 
@@ -106,7 +118,9 @@ function make_spidercloth_production()
    local o = add_campaign_objective(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
-      spiderfarm = 1, ["gold-spinning-mill"] = 1, ["weaving-mill"] = 1
+      atlanteans_spiderfarm = 1,
+      atlanteans_gold_spinning_mill = 1,
+      atlanteans_weaving_mill = 1
    }) do sleep(6273) end
    o.done = true
 
@@ -121,10 +135,10 @@ function build_environment()
    expand_objective = add_campaign_objective(obj_expand)
 
    while not check_for_buildings(p1, {
-      woodcutters_house = 2,
-      foresters_house = 2,
-      quarry = 1,
-      sawmill = 1,
+      atlanteans_woodcutters_house = 2,
+      atlanteans_foresters_house = 2,
+      atlanteans_quarry = 1,
+      atlanteans_sawmill = 1,
    }) do sleep(3731) end
    o.done = true
 
@@ -169,30 +183,8 @@ end
 
 function check_for_ships()
    -- Check if the ships are done, then the mission ends successfully
-   local lake_fields = Set:new()
-   for idx,f in ipairs(map:get_field(75,80):region(12)) do
-      if f:has_caps("swimmable") then
-         lake_fields:add(f)
-      end
-   end
-
-   while true do
-      local nships = 0
-      -- Count the ships
-      for f in lake_fields:items() do
-         local bobs = f.bobs
-         if #bobs then
-            for idx, b in ipairs(bobs) do
-               if b.descr.type_name == "ship" then
-                  nships = nships + 1
-               end
-            end
-         end
-      end
-      if nships >= 3 then
-         break
-      end
-      sleep(8234)
+   while #p1:get_ships() < 3 do
+        sleep(8234)
    end
 
    -- Success
@@ -215,7 +207,7 @@ function water_rising()
             wait_for_roadbuilding_and_scroll(f)
             msg_boxes(field_flooded_msg)
             add_campaign_objective(obj_build_ships)
-            p1:allow_buildings{"shipyard"}
+            p1:allow_buildings{"atlanteans_shipyard"}
             run(check_for_ships)
          end)
       end

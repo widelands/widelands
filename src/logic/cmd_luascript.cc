@@ -55,7 +55,7 @@ void CmdLuaScript::read
 			GameLogicCommand::read(fr, egbase, mol);
 			script_ = fr.string();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("CmdLuaScript", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("lua: %s", e.what());

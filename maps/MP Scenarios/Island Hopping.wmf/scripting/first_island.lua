@@ -45,7 +45,7 @@ function watch_hill()
       while castle_field == nil do
          sleep(7477)
          for idx, f in pairs(hill) do
-            if f.immovable and f.immovable.descr.name == "castle"
+            if f.immovable and f.immovable.descr.name == "atlanteans_castle"
             then
                castle_field = f
                started_claiming = game.time
@@ -60,7 +60,7 @@ function watch_hill()
       while true do
          sleep(1049)
          local imm = castle_field.immovable
-         if not imm or imm.descr.name ~= "castle" or imm.owner ~= claiming_player then
+         if not imm or imm.descr.name ~= "atlanteans_castle" or imm.owner ~= claiming_player then
             send_to_all(lost_control:format(claiming_player.name))
             break
          end
@@ -85,4 +85,3 @@ function watch_hill()
       end
    end
 end
-
