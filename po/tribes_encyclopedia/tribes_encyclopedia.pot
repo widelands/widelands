@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-06 09:18+0000\n"
+"POT-Creation-Date: 2015-11-06 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -124,14 +124,14 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Fishes on the coast near the house."
+"Fishes on the coast near the fisher’s house."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid ""
-"Fishes on the coast near the house."
+"Fishes on the coast near the fisher’s house."
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
@@ -569,7 +569,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"Fishes on the coast near the hut."
+"Fishes on the coast near the fisher’s hut."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building

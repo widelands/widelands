@@ -56,7 +56,6 @@ MAINPOTS = [
         "../../world/*/*/*/*/*.lua",
         "../../world/*/*/*/*/*/*.lua",
     ]),
-    # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
     ("tribes/tribes", [
         "../../tribes/scripting/starting_conditions/*/*.lua"
         "../../tribes/*.lua",
@@ -66,7 +65,7 @@ MAINPOTS = [
         "../../tribes/*/*/*/*/init.lua",
         "../../tribes/*/*/*/*/*/init.lua",
     ]),
-    # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
+
     ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../tribes/scripting/help/*.lua",
         "../../tribes/*/helptexts.lua",
