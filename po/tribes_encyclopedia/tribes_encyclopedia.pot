@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-06 09:25+0000\n"
+"POT-Creation-Date: 2015-11-06 19:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -137,7 +137,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid ""
-"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
+"Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1706,7 +1706,7 @@ msgstr ""
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2)."
+"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge from attack level 1 to attack level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
@@ -2578,7 +2578,7 @@ msgstr ""
 #: ../../tribes/wares/trident_steel/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food)."
+"This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon  – together with food – to train from attack level 1 to level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
