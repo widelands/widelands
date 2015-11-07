@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -655,9 +655,9 @@ msgstr "Mentre es prem aquesta tecla, s'activa la funció alternativa de l'eina"
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Alguns edificis, com les granges, tenen una àrea de treball molt petita. Si l'edifici està envoltat d'arbres, banderes, camins i altres, l'edifici no serà productiu."
+msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -668,8 +668,8 @@ msgstr "Construïu sempre cases de guarda forestal i criador de peixos, per a no
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
-msgstr "Vigileu els pescadors. Després que s'esgoten els recursos pesquers en la seva àrea de treball, ja no us seran útils."
+"work area, they will stop fishing."
+msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -740,7 +740,7 @@ msgstr "Assegureu-vos d'enviar un geòleg abans de construir un pou o una mina."
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "El vostre territori es pot expandir construint diferents edificis militars: guardes sentinella, fortaleses, barracons, etc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

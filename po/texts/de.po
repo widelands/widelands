@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:31+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unte
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Website: %s"
+msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Webseite: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -658,9 +658,9 @@ msgstr "Aktiviert das zweite alternative Werkzeug"
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie zu dicht von Straßen oder Bäumen umgeben sind."
+msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -671,8 +671,8 @@ msgstr "Baue immer ein Förster- und ein Fischzüchterhaus, damit du nie ohne Ho
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
-msgstr "Beobachte deine Fischer. Wenn die Fischbestände schwinden, werden die Fischer aufhören zu arbeiten."
+"work area, they will stop fishing."
+msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""

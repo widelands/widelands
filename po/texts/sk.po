@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -654,9 +654,9 @@ msgstr "počas toho, ako ho držíte stlačený, vyberie sa druhý alternatívny
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Niektoré budovy, ako farma, majú veľmi malú pracovnú oblasť. Ak je budova obklopená stromami alebo cestami, zastaví sa produkcia."
+msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -667,8 +667,8 @@ msgstr "Nezabudnite vždy postaviť horáreň a rybnikársky dom, aby vám nedo�
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
-msgstr "Dozrite na svojich rybárov. Keď sa v ich pracovnej oblasti minú zdroje rýb, prestanú chytať ryby."
+"work area, they will stop fishing."
+msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 16:22+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -67,13 +67,13 @@ msgstr "Fhad 's a tha na rathaidean agad a' fàs nas fhaide 's an eaconamaidh ag
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Tog tùr"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Tog tùr aig crìoch ear-thuath do ranntair gus cur ris an astar lèirsinne agad agus gus do mhuinntir a dhìon o dh'ionnsaighean obann an nàmhad."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -96,7 +96,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Leudaich do ranntair dha na beanntan, cuir clach-eòlaichean gus lorg airson clach-mhèinneir 's guail agus tog eaconamaidh mèinnearachd le mèinnean, taighean-tàirn, ceàrdaich leaghadair 'S ceàrdach meatailt."
+msgstr "Leudaich do ranntair dha na beanntan, cuir clach-eòlaichean gus lorg airson clach-mhèinneir 's guail agus tog eaconamaidh mèinnearachd le mèinnean, taighean-tàirn, ceàrdaich leaghadair ’s ceàrdach meatailt."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
@@ -125,7 +125,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Leasaich a’ cheàrdach meatailt agad gu ceàrdach thuaghan ach an dèan thu airm agus tog ceàrdach meatailt eile gus an dèan thu acainnean fhathast. Nuair a ruigeas an gobha agad ath-leibheil (sàr-ghobha), 's urrainn dhut fiù 's ceàrdach-cogaidh a dhèanamh dhen cheàrdach thuaghan a bheir barrachd arm dhut."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -426,7 +426,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Dh’innis Tron dhomh gun do mhothaich e dha lorgan san t-sneachd gu ear-thuath air an tuineachadh againn. Iarr e oirnn tùr a thogail ach am faiceamaid na b’ fhaide mun cuairt air an talla againn is ach an dìonamaid ar muinntir o dh’ionnsaighean obann."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -505,7 +505,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Mu dheireadh thall! Tha sinn air an dùn a thogail, mar sin bu chòir dhan t-slighe a-steach dhan tuineachadh againn a bhith sàbhailte an-dràsta. San àm ri teachd, bu chòir dhuinn beachdachadh air barrachd daingneachaidh a togail, can taighean-faire is tùir aig na slighean a-steach. ’S urrainn dhuinn ar n-anail a ghabhail greis co-dhiù."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"

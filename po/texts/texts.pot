@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-06 19:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -747,7 +747,7 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+"Some buildings, such as the farm, have a very small work area. If the building is surrounded with trees or roads, production will stop."
 msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:6
@@ -758,7 +758,7 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
 msgid ""
-"Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop fishing."
+"Keep an eye on your fishers. After fish resources are exhausted in their work area, they will stop fishing."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10

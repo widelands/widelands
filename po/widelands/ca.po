@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 20:36+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -918,7 +918,7 @@ msgstr "%u%% desmantellat"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
-msgstr ""
+msgstr "S'estan carregant els gràfics..."
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:142
@@ -932,7 +932,7 @@ msgstr "S'està precarregant un mapa"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "S'està carregant el món"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -1290,7 +1290,7 @@ msgstr "Teniu un nou magatzem sota control."
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "hauria d'extreure %s, que no existeix en aquest món; la cultura no és compatible amb aquest món"
+msgstr "hauria d'extraure %s, que no existeix en aquest món; la cultura no és compatible amb aquest món"
 
 #: ../../src/logic/worker.cc:225
 #, c-format
@@ -3961,7 +3961,7 @@ msgstr "IA aleatòria"
 
 #: ../../src/wui/playerdescrgroup.cc:187
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Es situarà el clan aleatòriament."
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"

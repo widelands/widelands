@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:30+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -434,7 +434,7 @@ msgstr "el botó d'ajuda de la part inferior. Hi ha un text breu d'ajuda per cad
 msgid ""
 "If you want, you can try it out. A soldier needs a wooden spear and a helmet"
 " – from there on out, you can search backwards."
-msgstr ""
+msgstr "Si voleu, podeu provar-ho. Un soldat necessita una llança de fusta i un casc. Des d'on esteu, podeu buscar cap enrere."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
@@ -789,7 +789,7 @@ msgstr "Per aconseguir-ho, haureu de fer dues coses. Primer, donar preferència 
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr "Llavors, per moure les columnes de marbre fora del quarter general, haureu de clicar el botó d'extreure el bé."
+msgstr "Llavors, per moure les columnes de marbre fora del quarter general, haureu de clicar el botó d'extraure el bé."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid "Bring 20 marble columns to the front line."
