@@ -12,8 +12,8 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
-   -- #TRANSLATORS: Purpose helptext for a building
-   return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("building", "Hardens wood by fire into blackwood, which is used to construct robust buildings.")
 end
 
 function building_helptext_note()
