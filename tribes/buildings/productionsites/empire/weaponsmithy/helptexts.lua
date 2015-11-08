@@ -11,9 +11,8 @@ function building_helptext_lore_author()
    return no_lore_author_text_yet()
 end
 
-function building_helptext_purpose()
-   -- #TRANSLATORS: Purpose helptext for a building
-   return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp.")
 end
 
 function building_helptext_note()
