@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2008-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -566,7 +566,7 @@ struct NetHostImpl {
 
 	/// Whether we're waiting for all clients to report back.
 	bool    waiting;
-	int32_t lastframe;
+	uint32_t lastframe;
 
 	/**
 	 * The speed, in milliseconds per second, that is effective as long
@@ -869,7 +869,7 @@ void NetHost::run(bool const autorun)
 			game.init_savegame(loaderUI.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
-		d->lastframe = WLApplication::get()->get_time();
+		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
 
 		d->committed_networktime = d->pseudo_networktime;
@@ -934,7 +934,7 @@ void NetHost::think()
 	handle_network();
 
 	if (d->game) {
-		int32_t curtime = WLApplication::get()->get_time();
+		uint32_t curtime = SDL_GetTicks();
 		int32_t delta = curtime - d->lastframe;
 		d->lastframe = curtime;
 

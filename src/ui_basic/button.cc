@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -287,7 +287,7 @@ void Button::think()
 	Panel::think();
 
 	if (m_highlighted) {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 		if (m_time_nextact <= time) {
 			m_time_nextact += MOUSE_BUTTON_AUTOREPEAT_TICK; //  schedule next tick
 			if (m_time_nextact < time)
@@ -335,7 +335,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		m_pressed = true;
 		if (m_repeating) {
 			m_time_nextact =
-				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			set_thinks(true);
 		}
 	}

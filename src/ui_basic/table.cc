@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -369,11 +369,11 @@ bool Table<void *>::handle_mousepress
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 
 		//  This hick hack is needed if any of the callback functions calls clear
 		//  to forget the last clicked time.
-		int32_t const real_last_click_time = m_last_click_time;
+		uint32_t const real_last_click_time = m_last_click_time;
 
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
