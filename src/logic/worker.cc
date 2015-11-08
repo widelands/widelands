@@ -989,13 +989,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		}
 
 		const TribeDescr & t = owner().tribe();
-		game.create_immovable
+		Immovable & newimm = game.create_immovable
 			(position,
 			 t.get_resource_indicator
 				(rdescr,
 				rdescr->detectable() ?
 				position.field->get_resources_amount() : 0),
 			 MapObjectDescr::OwnerType::kTribe);
+		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;
