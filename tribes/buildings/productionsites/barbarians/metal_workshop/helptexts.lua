@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Forges all the tools that your workers need.")
+   return pgettext("building", "Forges all the tools that your workers need.")
 end
 
 function building_helptext_note()

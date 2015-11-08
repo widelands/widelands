@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+   return pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
 end
 
 function building_helptext_note()
