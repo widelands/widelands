@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("atlanteans_building", "Makes bread paddles, buckets, fire tongs, fishing nets, hammers, hook poles, hunting bows, milking tongs, picks, saws, scythes and shovels.")
+   return pgettext("atlanteans_building", "Forges all the tools that your workers need.")
 end
 
 function building_helptext_note()
