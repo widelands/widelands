@@ -76,7 +76,10 @@ void MapBuildingPacket::read(FileSystem& fs,
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const TribeDescr & tribe = player->tribe();
 							const BuildingIndex index = tribe.building_index(name);
-							if (!tribe.has_building(index)) {
+							const BuildingDescr *bd = tribe.get_building_descr(index);
+							// Check if tribe has this building itself 
+							// OR alternatively if this building might be a conquered militarysite
+							if (!tribe.has_building(index) && !(bd && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
