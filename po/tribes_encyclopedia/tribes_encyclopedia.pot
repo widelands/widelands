@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -80,7 +80,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Sow and harvest blackroot."
+"Sows and harvests blackroot."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -117,27 +117,27 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Sow and harvest corn."
+"Sows and harvests corn."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Fishes on the coast near the house."
+"Fishes on the coast near the fisher’s house."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid ""
-"Fishes on the coast near the house."
+"Fishes on the coast near the fisher’s house."
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid ""
-"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
+"Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -548,14 +548,14 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"Sow and harvest wheat."
+"Sows and harvests wheat."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "empire_building"
 msgid ""
-"Sow and harvest wheat."
+"Sows and harvests wheat."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -569,7 +569,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"Fishes on the coast near the hut."
+"Fishes on the coast near the fisher’s hut."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -787,7 +787,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The lime kiln processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry."
+"Processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -850,7 +850,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels."
+"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -885,7 +885,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The micro brewery produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines."
+"Produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -962,7 +962,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The reed yard cultivates reed that serves two different purposes for the Barbarian tribe."
+"Cultivates reed that serves two different purposes for the Barbarian tribe."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -983,7 +983,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"The war mill produces all the axes that the Barbarians use for warfare."
+"Produces all the axes that the Barbarians use for warfare."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1272,24 +1272,45 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Warehouses store soldiers, wares and tools."
+"Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"Warehouses store soldiers, wares and tools."
+"Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 msgctxt "empire_building"
 msgid ""
-"Warehouses store soldiers, wares and tools."
+"Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1699,14 +1720,14 @@ msgstr ""
 #: ../../tribes/wares/ax_battle/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax factory. Only trained warriors are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4."
+"This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax workshop. Only trained warriors are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2)."
+"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge from attack level 1 to attack level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
@@ -1720,7 +1741,7 @@ msgstr ""
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in axfactories and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
+"Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in ax workshops and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
@@ -1948,7 +1969,7 @@ msgstr ""
 #: ../../tribes/wares/fire_tongs/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid ""
-"Produced by the metal works (but they cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+"Produced by the metal workshop (but they cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fish
@@ -2578,7 +2599,7 @@ msgstr ""
 #: ../../tribes/wares/trident_steel/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food)."
+"This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon  – together with food – to train from attack level 1 to level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
@@ -2604,6 +2625,7 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:10
+msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water."
 msgstr ""

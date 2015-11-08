@@ -443,7 +443,7 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = rt(
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
+      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]])
    ),
    h = 300,
    w = 350

@@ -1,26 +1,29 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
+# 
 # Translators:
+# GunChleoc, 2015
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
+# GunChleoc, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Venatrix, 2015
 # Venatrix, 2015
 # wl-zocker, 2015
-# bratzbert <fios@foramnagaidhlig.net>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:04+0100\n"
-"Last-Translator: bratzbert <fios@foramnagaidhlig.net>\n"
-"Language-Team: Fòram na Gàidhlig\n"
-"Language: de\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 19:12+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:7
@@ -30,7 +33,6 @@ msgstr "Burg"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/castle/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Castle"
 msgstr "Burg"
@@ -120,14 +122,12 @@ msgstr "Wachturm"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Tower"
 msgstr "Wachturm"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/tower/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Tower"
 msgstr "Wachturm"
@@ -216,23 +216,20 @@ msgstr "Deine Soldaten haben den Feind am Spähturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Barrier"
 msgstr "Barriere"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Barrier"
 msgstr "Barriere"
 
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:56
-#, fuzzy
 msgid "Your soldiers have occupied your barrier."
-msgstr "Deine Soldaten haben deinen Wachturm besetzt."
+msgstr "Deine Soldaten haben deine Barriere besetzt."
 
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:53
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:57
@@ -256,15 +253,13 @@ msgstr "Deine Soldaten haben den Feind an der Barriere besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Citadel"
 msgstr "Zitadelle"
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:56
-#, fuzzy
 msgid "Your soldiers have occupied your citadel."
-msgstr "Deine Soldaten haben deine Burg besetzt."
+msgstr "Deine Soldaten haben deine Zitadelle besetzt."
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:57
 msgid "Your citadel discovered an aggressor."
@@ -284,23 +279,20 @@ msgstr "Deine Soldaten haben den Feind an der Zitadelle besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Fortress"
 msgstr "Festung"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Fortress"
 msgstr "Festung"
 
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:62
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:58
-#, fuzzy
 msgid "Your soldiers have occupied your fortress."
-msgstr "Deine Soldaten haben deinen Wachturm besetzt."
+msgstr "Deine Soldaten haben deine Festung besetzt."
 
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:63
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:59
@@ -324,23 +316,20 @@ msgstr "Deine Soldaten haben den Feind an der Festung besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Sentry"
 msgstr "Wachposten"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sentry"
 msgstr "Wachposten"
 
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:53
-#, fuzzy
 msgid "Your soldiers have occupied your sentry."
-msgstr "Deine Soldaten haben deinen Wachturm besetzt."
+msgstr "Deine Soldaten haben deinen Wachposten besetzt."
 
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:55
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:54
@@ -366,44 +355,37 @@ msgstr "Deine Soldaten haben den Feind am Wachposten besiegt."
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:7
 msgctxt "empire_building"
 msgid "Blockhouse"
-msgstr ""
+msgstr "Baracke"
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:41
-#, fuzzy
 msgid "Your soldiers have occupied your blockhouse."
-msgstr "Deine Soldaten haben dein Wachhaus besetzt."
+msgstr "Deine Soldaten haben deine Baracke besetzt."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:42
-#, fuzzy
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Bei deinem Wachhaus wurden Angreifer entdeckt."
+msgstr "Bei deiner Baracke wurden Angreifer entdeckt."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:43
-#, fuzzy
 msgid "Your blockhouse is under attack."
-msgstr "Dein Wachhaus wird angegriffen."
+msgstr "Deine Baracke wird angegriffen."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:44
-#, fuzzy
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr "Der Feind hat deine Soldaten am Wachhaus besiegt."
+msgstr "Der Feind hat deine Soldaten an der Baracke besiegt."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:45
-#, fuzzy
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Deine Soldaten haben den Feind am Wachhaus besiegt."
+msgstr "Deine Soldaten haben den Feind an der Baracke besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Outpost"
 msgstr "Außenposten"
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:47
-#, fuzzy
 msgid "Your soldiers have occupied your outpost."
-msgstr "Deine Soldaten haben deinen Wachturm besetzt."
+msgstr "Deine Soldaten haben deinen Außenposten besetzt."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:48
 msgid "Your outpost discovered an aggressor."
@@ -421,16 +403,16 @@ msgstr "Der Feind hat deine Soldaten am Außenposten besiegt."
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "Deine Soldaten haben den Feind am Außenposten besiegt."
 
-#. TRANSLATORS: This is a name used in lists of buildings for buildings under construction
+#. TRANSLATORS: This is a name used in lists of buildings for buildings under
+#. construction
 #: ../../tribes/buildings/partially_finished/constructionsite/init.lua:7
-#, fuzzy
 msgctxt "building"
 msgid "Construction Site"
 msgstr "Baustelle"
 
-#. TRANSLATORS: This is a name used in lists of buildings for buildings being taken apart
+#. TRANSLATORS: This is a name used in lists of buildings for buildings being
+#. taken apart
 #: ../../tribes/buildings/partially_finished/dismantlesite/init.lua:7
-#, fuzzy
 msgctxt "building"
 msgid "Dismantle Site"
 msgstr "Abriss des Gebäudes"
@@ -443,7 +425,6 @@ msgstr "Rüstungsschmiede"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Armor Smithy"
 msgstr "Rüstungsschmiede"
@@ -490,12 +471,14 @@ msgstr "Rüstungsschmiede"
 msgid "working"
 msgstr "Das Arbeiten"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:67
 msgid "forging a steel shield"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr "Das Schmieden eines Helms"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:78
 msgid "forging an advanced shield"
 msgstr "Das Schmieden eines verbesserten Schilds"
@@ -508,14 +491,12 @@ msgstr "Bäckerei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Bakery"
 msgstr "Bäckerei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/bakery/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Bäckerei"
@@ -524,9 +505,8 @@ msgstr "Bäckerei"
 #: ../../tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
 #: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:61
 #: ../../tribes/buildings/productionsites/empire/bakery/init.lua:61
-#, fuzzy
 msgid "baking bread"
-msgstr "Das Herstellen eines Brotschiebers"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -539,7 +519,8 @@ msgstr "Dunkelrübenfarm"
 msgid "planting blackroot"
 msgstr "Das Pflanzen von Dunkelrüben"
 
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
 msgid "harvesting blackroot"
 msgstr "Das Ernten von Dunkelrüben"
@@ -555,10 +536,10 @@ msgstr "Keine Felder"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 msgctxt "atlanteans_building"
-msgid "The blackroot farmer working at this blackroot farm has no cleared soil to plant his seeds."
-msgstr ""
-"Der Dunkelrübenbauer dieser Dunkelrübenfarm hat keinen freien Platz, um "
-"Dunkelrüben zu säen."
+msgid ""
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
+msgstr "Der Dunkelrübenbauer dieser Dunkelrübenfarm hat keinen freien Platz, um Dunkelrüben zu säen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
@@ -568,14 +549,12 @@ msgstr "Köhlerei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Charcoal Kiln"
 msgstr "Köhlerei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Charcoal Kiln"
 msgstr "Köhlerei"
@@ -595,14 +574,12 @@ msgstr "Kohlemine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Kohlemine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Kohlemine"
@@ -614,9 +591,8 @@ msgstr "Kohlemine"
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:60
-#, fuzzy
 msgid "mining coal"
-msgstr "Das Abbauen"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
@@ -629,10 +605,10 @@ msgstr "Hauptkohleader erschöpft"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
 msgctxt "atlanteans_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -644,9 +620,8 @@ msgstr "Kristallmine"
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:73
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:87
-#, fuzzy
 msgid "mining granite"
-msgstr "Das Abbauen von Steinen"
+msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
@@ -664,10 +639,10 @@ msgstr "Hauptkristallader erschöpft"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgctxt "atlanteans_building"
-msgid "This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kristallmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This crystal mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Kristallmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -677,14 +652,12 @@ msgstr "Bauernhof"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Farm"
 msgstr "Bauernhof"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Farm"
 msgstr "Bauernhof"
@@ -701,23 +674,21 @@ msgstr "Das Ernten von Mais"
 
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
 msgctxt "atlanteans_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
-#, fuzzy
 msgctxt "empire_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -727,9 +698,8 @@ msgstr "Fischzüchterhaus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:43
-#, fuzzy
 msgid "breeding fish"
-msgstr "Züchtet Fische."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
@@ -739,7 +709,6 @@ msgstr "Fischerhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Fischerhaus"
@@ -759,11 +728,11 @@ msgstr "Kein Fisch"
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 msgctxt "atlanteans_building"
-msgid "The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fishbreeder’s house."
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area. Remember that you can increase the number of existing fish by "
+"building a fish breeder’s house."
 msgstr ""
-"Der Fischer in diesem Fischerhaus kann keinen Fisch in seinem Arbeitsbereich "
-"finden. Denke daran, dass du die Anzahl der vorhandenen Fische mit einem "
-"Fischzüchterhaus vergrößern kannst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
@@ -773,7 +742,6 @@ msgstr "Forsthaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "Forsthaus"
@@ -793,9 +761,8 @@ msgstr "Goldspinnerei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:53
-#, fuzzy
 msgid "spinning gold"
-msgstr "Das Schmelzen von Gold"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
@@ -805,14 +772,12 @@ msgstr "Goldmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr "Goldmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Goldmine"
@@ -824,9 +789,8 @@ msgstr "Goldmine"
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:60
-#, fuzzy
 msgid "mining gold"
-msgstr "Das Schmelzen von Gold"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
@@ -839,10 +803,10 @@ msgstr "Hauptgoldader erschöpft"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
 msgctxt "atlanteans_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -863,7 +827,6 @@ msgstr "Jagdhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Hunter’s House"
 msgstr "Jagdhaus"
@@ -885,37 +848,33 @@ msgstr "Keine Tiere"
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 msgctxt "atlanteans_building"
-msgid "The hunter working out of this hunter’s house can’t find any game in his work area."
-msgstr ""
-"Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#, fuzzy
 msgctxt "empire_building"
-msgid "The hunter working out of this hunter’s house can’t find any game in his work area."
-msgstr ""
-"Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
 msgstr "Eisenerzmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr "Eisenerzmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Eisenerzmine"
@@ -927,9 +886,8 @@ msgstr "Eisenerzmine"
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
-#, fuzzy
 msgid "mining iron"
-msgstr "Das Abbauen von Steinen"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
@@ -941,12 +899,11 @@ msgid "Main Iron Vein Exhausted"
 msgstr "Haupteisenader erschöpft"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -956,7 +913,6 @@ msgstr "Mühle"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/mill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Mill"
 msgstr "Mühle"
@@ -979,14 +935,12 @@ msgstr "Steinbruch"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Steinbruch"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Quarry"
 msgstr "Steinbruch"
@@ -995,9 +949,8 @@ msgstr "Steinbruch"
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:60
-#, fuzzy
 msgid "quarrying granite"
-msgstr "Das Abbauen von Steinen"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:74
@@ -1006,25 +959,23 @@ msgid "Out of Rocks"
 msgstr "Keine Felsen"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "The stonecutter working at this quarry can’t find any rocks in his work area."
-msgstr ""
-"Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem "
-"Arbeitsbereich finden."
+msgid ""
+"The stonecutter working at this quarry can’t find any rocks in his work "
+"area."
+msgstr "Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Sawmill"
-msgstr "Sägemühle"
+msgstr "Sägewerk"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sawmill"
-msgstr "Sägemühle"
+msgstr "Sägewerk"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
 #: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
@@ -1040,7 +991,6 @@ msgstr "Kundschafterhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Scout’s House"
 msgstr "Kundschafterhaus"
@@ -1060,19 +1010,18 @@ msgstr "Werft"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr "Werft"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Shipyard"
 msgstr "Werft"
 
-#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
+#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
 #: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
 #: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:75
@@ -1087,14 +1036,12 @@ msgstr "Hochofen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Smelting Works"
 msgstr "Hochofen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Smelting Works"
 msgstr "Hochofen"
@@ -1143,33 +1090,33 @@ msgstr "Werkzeugmacher"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Toolsmithy"
 msgstr "Werkzeugmacher"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:87
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:96
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
 msgid "making a bread paddle"
 msgstr "Das Herstellen eines Brotschiebers"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
-#, fuzzy
 msgid "making a pair of buckets"
-msgstr "Das Herstellen eines Eimers"
+msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:109
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:120
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
-#, fuzzy
 msgid "making fire tongs"
-msgstr "Das Herstellen einer Melkzange"
+msgstr "Das Herstellen einer Feuerzange"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 msgid "making a fishing net"
 msgstr "Das Herstellen eines Fischernetzes"
@@ -1186,13 +1133,14 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a hook pole"
 msgstr "Das Herstellen einer Hakenstange"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:153
-#, fuzzy
 msgid "making a hunting bow"
-msgstr "Das Herstellen eines Bogens"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 msgid "making milking tongs"
 msgstr "Das Herstellen einer Melkzange"
@@ -1232,32 +1180,36 @@ msgstr "Waffenschmiede"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Weapon Smithy"
 msgstr "Waffenschmiede"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:75
 msgid "forging a light trident"
 msgstr "Das Schmieden eines leichten Dreizacks"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
 msgstr "Das Schmieden eines langen Dreizacks"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr "Das Schmieden eines Stahl-Dreizacks"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:114
 msgid "forging a double trident"
 msgstr "Das Schmieden eines Doppel-Dreizacks"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:127
 msgid "forging a heavy double trident"
 msgstr "Das Schmieden eines schweren Doppel-Dreizacks"
@@ -1270,19 +1222,18 @@ msgstr "Weberei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Weaving Mill"
 msgstr "Weberei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Weaving Mill"
 msgstr "Weberei"
 
-#. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
+#. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
 msgid "weaving spidercloth"
 msgstr "Das Weben von Spinnenstoff"
@@ -1292,7 +1243,8 @@ msgstr "Das Weben von Spinnenstoff"
 msgid "tailoring a tabard"
 msgstr "Das Schneidern eines Wappenrocks"
 
-#. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
+#. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
 msgid "tailoring a golden tabard"
 msgstr "Das Schneidern eines goldenen Wappenrocks"
@@ -1305,14 +1257,12 @@ msgstr "Brunnen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Brunnen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Brunnen"
@@ -1325,26 +1275,21 @@ msgstr "Kein Wasser"
 
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid "The carrier working at this well can’t find any water in his work area."
-msgstr ""
-"Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich finden."
 
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The carrier working at this well can’t find any water in his work area."
-msgstr ""
-"Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich finden."
 
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:63
-#, fuzzy
 msgctxt "empire_building"
-msgid "The carrier working at this well can’t find any water in his work area."
-msgstr ""
-"Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Der Träger in diesem Brunnen kann kein Wasser in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1356,9 +1301,8 @@ msgstr "Holzfällerhaus"
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
-#, fuzzy
 msgid "felling trees"
-msgstr "Das Pflanzen von Bäumen"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
@@ -1368,11 +1312,11 @@ msgstr "Keine Bäume"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
 msgctxt "atlanteans_building"
-msgid "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
-msgstr ""
-"Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem "
-"Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören "
-"oder ein Forsthaus bauen."
+msgid ""
+"The woodcutter working at this woodcutter’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören oder ein Forsthaus bauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1383,29 +1327,26 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:86
-#, fuzzy
 msgid "forging an ax"
-msgstr "Das Schmieden eines langen Dreizacks"
+msgstr "Das Schmieden einer Axt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:99
-#, fuzzy
 msgid "forging a sharp ax"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr "Das Schmieden einer scharfen Axt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:112
-#, fuzzy
 msgid "forging a broad ax"
-msgstr "Das Schmieden eines Doppel-Dreizacks"
+msgstr "Das Schmieden einer Breitaxt"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
 msgctxt "barbarians_building"
 msgid "Big Inn"
-msgstr ""
+msgstr "Gaststätte"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:73
@@ -1414,34 +1355,34 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:66
 #: ../../tribes/buildings/productionsites/empire/tavern/init.lua:58
 msgid "preparing a ration"
-msgstr ""
+msgstr "Das Zubereiten einer Ration"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
 #: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:81
-#, fuzzy
 msgid "preparing a snack"
-msgstr "Das Herstellen einer Säge"
+msgstr "Das Zubereiten eines Snacks"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:93
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:77
 msgid "preparing a meal"
-msgstr ""
+msgstr "Das Zubereiten einer Mahlzeit"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Brauerei"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/brewery/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Brauerei"
 
-#. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
+#. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:55
 msgid "brewing strong beer"
 msgstr ""
@@ -1450,284 +1391,257 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Rinderzucht"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:54
 msgid "rearing cattle"
-msgstr ""
+msgstr "Das Züchten eines Ochsen"
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Coal Mine"
-msgstr "Kohlemine"
+msgstr "Tiefe Kohlemine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Coal Mine"
-msgstr "Kohlemine"
+msgstr "Tiefe Kohlemine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
-msgstr "Kohlemine"
+msgstr "Tiefste Kohlemine"
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
-#, fuzzy
 msgid "planting wheat"
-msgstr "Das Pflanzen von Bäumen"
+msgstr "Das Pflanzen von Weizen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
-#, fuzzy
 msgid "harvesting wheat"
-msgstr "Das Ernten von Dunkelrüben"
+msgstr "Das Ernten von Weizen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr "Fischerhaus"
+msgstr "Fischerhütte"
 
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The fisher working out of this fisher’s hut can’t find any fish in his work area."
-msgstr ""
-"Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
+msgstr "Der Fischer in dieser Fischerhütte kann keine Fische in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Wildhüterhütte"
 
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Gold Mine"
-msgstr "Goldmine"
+msgstr "Tiefe Goldmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Gold Mine"
-msgstr "Goldmine"
+msgstr "Tiefe Goldmine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
-msgstr "Goldmine"
+msgstr "Tiefste Goldmine"
 
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Granite Mine"
-msgstr "Eisenerzmine"
+msgstr "Granitmine"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
-#, fuzzy
 msgid "Main Granite Vein Exhausted"
-msgstr "Haupteisenader erschöpft"
+msgstr "Hauptgranitader erschöpft"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This granite mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Granitmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Helm Smithy"
-msgstr "Rüstungsschmiede"
+msgstr "Helmschmiede"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:82
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:84
-#, fuzzy
 msgid "forging a helmet"
-msgstr "Das Schmieden eines Stahl-Dreizacks"
+msgstr "Das Schmieden eines Helms"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:93
-#, fuzzy
 msgid "forging a mask"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr "Das Schmieden einer Maske"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
-#, fuzzy
 msgid "forging a warhelm"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr "Das Schmieden eines Kriegshelms"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "Jagdhaus"
+msgstr ""
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."
+msgid ""
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
 msgstr ""
-"Der Fischer in diesem Fischerhaus kann keinen Fisch in seinem Arbeitsbereich "
-"finden. Denke daran, dass du die Anzahl der vorhandenen Fische mit einem "
-"Fischzüchterhaus vergrößern kannst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:7
 msgctxt "barbarians_building"
 msgid "Inn"
-msgstr ""
+msgstr "Wirtshaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:7
 msgctxt "empire_building"
 msgid "Inn"
-msgstr ""
+msgstr "Wirtshaus"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Iron Mine"
-msgstr "Eisenerzmine"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Iron Mine"
-msgstr "Eisenerzmine"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
-msgstr "Eisenerzmine"
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
-"Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird "
-"stark einbrechen. Du solltest diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1737,9 +1651,8 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
-#, fuzzy
 msgid "mixing grout"
-msgstr "Das Abbauen von Bergkristall"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
@@ -1748,13 +1661,12 @@ msgid "Lumberjack’s Hut"
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."
+msgid ""
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his "
+"work area. You should consider dismantling or destroying the building or "
+"building a ranger’s hut."
 msgstr ""
-"Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem "
-"Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören "
-"oder ein Forsthaus bauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -1762,33 +1674,33 @@ msgctxt "barbarians_building"
 msgid "Metal Workshop"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:108
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
-#, fuzzy
 msgid "making a felling ax"
-msgstr "Das Herstellen eines Fischernetzes"
+msgstr "Das Herstellen einer Holzfälleraxt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:132
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
-#, fuzzy
 msgid "making a fishing rod"
-msgstr "Das Herstellen eines Fischernetzes"
+msgstr "Das Herstellen einer Angel"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:156
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
-#, fuzzy
 msgid "making a hunting spear"
-msgstr "Das Herstellen eines Fischernetzes"
+msgstr "Das Herstellen eines Jagdspeers"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:168
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
-#, fuzzy
 msgid "making kitchen tools"
-msgstr "Das Herstellen einer Melkzange"
+msgstr "Das Herstellen eines Küchengeräts"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
@@ -1800,30 +1712,25 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
 #: ../../tribes/buildings/productionsites/empire/brewery/init.lua:55
 msgid "brewing beer"
-msgstr ""
+msgstr "Das Brauen"
 
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The stonemason working at this quarry can’t find any rocks in his work area."
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
-"Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem "
-"Arbeitsbereich finden."
 
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
-#, fuzzy
 msgctxt "empire_building"
-msgid "The stonemason working at this quarry can’t find any rocks in his work area."
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
-"Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem "
-"Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "Jagdhaus"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
@@ -1833,74 +1740,68 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:55
-#, fuzzy
 msgid "planting reed"
-msgstr "Das Pflanzen von Bäumen"
+msgstr "Das Pflanzen von Reet"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:63
-#, fuzzy
 msgid "harvesting reed"
-msgstr "Das Ernten von Mais"
+msgstr "Das Ernten von Reet"
 
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The gardener working at this reed yard has no cleared soil to plant his seeds."
+msgid ""
+"The gardener working at this reed yard has no cleared soil to plant his "
+"seeds."
 msgstr ""
-"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Scout’s Hut"
-msgstr "Kundschafterhaus"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Tavern"
-msgstr "Weber"
+msgstr "Taverne"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/tavern/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Tavern"
-msgstr "Weber"
+msgstr "Taverne"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "War Mill"
-msgstr "Weberei"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:125
-#, fuzzy
 msgid "forging a bronze ax"
-msgstr "Das Schmieden eines langen Dreizacks"
+msgstr "Das Schmieden einer Bronzeaxt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:138
-#, fuzzy
 msgid "forging a battle ax"
-msgstr "Das Schmieden eines Doppel-Dreizacks"
+msgstr "Das Schmieden einer Kriegsaxt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:151
 msgid "forging a warrior’s ax"
-msgstr ""
+msgstr "Das Schmieden einer Kriegeraxt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:58
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
-#, fuzzy
 msgid "weaving"
-msgstr "Weberei"
+msgstr "Das Weben"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -1910,228 +1811,211 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:63
-#, fuzzy
 msgid "hardening wood"
-msgstr "Das Ernten von Mais"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
-#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
-#, fuzzy
-msgid "forging a suit of armor"
-msgstr "Das Schmieden eines Stahl-Dreizacks"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
-#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
-msgid "forging a suit of chain armor"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
+msgid "forging a suit of armor"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
+msgid "forging a suit of chain armor"
+msgstr "Das Schmieden eines Kettenhemds"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:117
-#, fuzzy
 msgid "forging a suit of gilded armor"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr "Pferdezucht"
+msgstr "Eselsfarm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:54
-#, fuzzy
 msgid "rearing donkeys"
-msgstr "Das Züchten von Pferden"
+msgstr "Das Züchten von Eseln"
 
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
-#, fuzzy
 msgctxt "empire_building"
-msgid "The fisher working out of this fisher’s house can’t find any fish in his work area."
-msgstr ""
-"Der Jäger in diesem Jagdhaus kann keine Tiere in seinem Arbeitsbereich "
-"finden."
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area."
+msgstr "Der Fischer in diesem Fischerhaus kann keinen Fisch in seinem Arbeitsbereich finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Jagdhaus"
+msgstr "Holzfällerhaus"
 
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
-#, fuzzy
 msgctxt "empire_building"
-msgid "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
-msgstr ""
-"Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem "
-"Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören "
-"oder ein Forsthaus bauen."
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Der Holzfäller in diesem Holzfällerhaus kann keine Bäume in seinem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören oder ein Forsthaus bauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Marble Mine"
-msgstr "Kohlemine"
+msgstr "Marmormine"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
-#, fuzzy
 msgid "mining marble"
-msgstr "Das Abbauen von Bergkristall"
+msgstr "Das Abbauen von Marmor"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:102
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:76
-#, fuzzy
 msgid "Main Marble Vein Exhausted"
-msgstr "Hauptkohleader erschöpft"
+msgstr "Hauptmarmorader erschöpft"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
-#, fuzzy
 msgctxt "empire_building"
-msgid "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr "Die Hauptader dieser Marmormine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine erweitern, abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "Tiefe Marmormine"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
-#, fuzzy
 msgctxt "empire_building"
-msgid "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr ""
-"Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark "
-"einbrechen. Du solltest diese Mine abreißen oder zerstören."
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Die Hauptader dieser Marmormine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../tribes/buildings/productionsites/empire/mill/init.lua:55
-#, fuzzy
 msgid "grinding wheat"
-msgstr "Das Mahlen von Dunkelrüben"
+msgstr "Das Mahlen von Weizen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:7
 msgctxt "empire_building"
 msgid "Piggery"
-msgstr ""
+msgstr "Schweinezucht"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:56
 msgid "raising pigs"
-msgstr ""
+msgstr "Das Aufziehen von Schweinen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:70
-#, fuzzy
 msgid "quarrying marble"
-msgstr "Das Abbauen von Steinen"
+msgstr "Das Abbauen von Marmor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr "Spinnenfarm"
+msgstr "Schäferei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
-#, fuzzy
 msgid "breeding sheep"
-msgstr "Das Züchten von Pferden"
+msgstr "Das Züchten von Schafen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Kundschafterhaus"
+msgstr "Steinmetz"
 
-#. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
+#. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
 msgid "sculpting a marble column"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
-#, fuzzy
 msgid "making a basket"
-msgstr "Das Herstellen eines Eimers"
+msgstr "Das Herstellen eines Korbs"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr "Werft"
+msgstr "Weinberg"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
+#. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:56
-#, fuzzy
 msgid "planting grapevines"
-msgstr "Das Pflanzen von Bäumen"
+msgstr "Das Pflanzen von Weinreben"
 
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:64
-#, fuzzy
 msgid "harvesting grapes"
-msgstr "Das Ernten von Mais"
+msgstr "Das Ernten von Weintrauben"
 
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
-#, fuzzy
 msgctxt "empire_building"
-msgid "The vine farmer working at this vineyard has no cleared soil to plant his grapevines."
-msgstr ""
-"Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
+msgid ""
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Der Winzer in diesem Weinberg hat keinen freien Platz, um Weinreben zu pflanzen."
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:81
-#, fuzzy
 msgid "forging a wooden spear"
-msgstr "Das Schneidern eines goldenen Wappenrocks"
+msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:94
-#, fuzzy
 msgid "forging a spear"
-msgstr "Das Schmieden eines Stahl-Dreizacks"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
-#, fuzzy
 msgid "forging an advanced spear"
-msgstr "Das Schmieden eines verbesserten Schilds"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
-#, fuzzy
 msgid "forging a heavy spear"
-msgstr "Das Schmieden eines schweren Doppel-Dreizacks"
+msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:133
-#, fuzzy
 msgid "forging a war spear"
-msgstr "Das Schmieden eines Stahlschilds"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Winery"
-msgstr "Bergmann"
+msgstr "Weinkellerei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
-#, fuzzy
 msgid "making wine"
-msgstr "Das Herstellen eines Bogens"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:7
@@ -2226,51 +2110,47 @@ msgstr ""
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
 msgctxt "barbarians_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Ausbildungslager"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Ausbildungslager"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
-#, fuzzy
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 3 auf 4"
+msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 4 auf 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:178
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
-#, fuzzy
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
-#, fuzzy
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 2 auf 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
 msgctxt "empire_building"
 msgid "Arena"
-msgstr ""
+msgstr "Arena"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
-msgstr ""
+msgstr "Kolosseum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
-#, fuzzy
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
+msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 3 auf 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
@@ -2281,14 +2161,12 @@ msgstr "Hauptquartier"
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/headquarters/init.lua:7
 #: ../../tribes/buildings/warehouses/barbarians/headquarters_interim/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Headquarters"
 msgstr "Hauptquartier"
@@ -2301,14 +2179,12 @@ msgstr "Hafen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/port/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Port"
 msgstr "Hafen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/port/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Port"
 msgstr "Hafen"
@@ -2321,24 +2197,21 @@ msgstr "Lagerhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr "Lagerhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/warehouse/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Warehouse"
 msgstr "Lagerhaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr "Hauptquartier"
+msgstr "Schiffswrack-Hauptquartier"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/ashes/init.lua:7
@@ -2414,136 +2287,117 @@ msgstr "Zerstörtes Gebäude"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_harvested/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (harvested)"
-msgstr "Maisfeld (abgeerntet)"
+msgstr "Feld (abgeerntet)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (medium)"
-msgstr "Maisfeld (mittel)"
+msgstr "Feld (mittel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Feld (reif)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (small)"
-msgstr "Maisfeld (klein)"
+msgstr "Feld (klein)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (tiny)"
-msgstr "Maisfeld (jung)"
+msgstr "Feld (jung)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Maisfeld (mittel)"
+msgstr "Weinreben (mittel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr ""
+msgstr "Weinreben (reif)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr "Maisfeld (klein)"
+msgstr "Weinreben (klein)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Maisfeld (jung)"
+msgstr "Weinreben (jung)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr "Maisfeld (mittel)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (ripe)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr "Maisfeld (klein)"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr "Maisfeld (jung)"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_coal1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Coal Vein"
-msgstr "Kohlemine"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_coal2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Coal Vein"
-msgstr "Hauptkohleader erschöpft"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Gold Vein"
-msgstr "Goldmine"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Gold Vein"
-msgstr "Hauptgoldader erschöpft"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Iron Vein"
-msgstr "Eisenerzmine"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Iron Vein"
-msgstr "Haupteisenader erschöpft"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_none/init.lua:7
@@ -2553,10 +2407,9 @@ msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Some Stones"
-msgstr "Stein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones2/init.lua:7
@@ -2566,10 +2419,9 @@ msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_water1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Water Vein"
-msgstr "Wasser"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2588,16 +2440,15 @@ msgstr "Schiff"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Armor"
-msgstr "Rüstungsschmied"
+msgstr "Harnisch"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_chain/init.lua:7
 msgctxt "ware"
 msgid "Chain Armor"
-msgstr ""
+msgstr "Kettenhemd"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_gilded/init.lua:7
@@ -2609,19 +2460,19 @@ msgstr ""
 #: ../../tribes/wares/armor_helmet/init.lua:7
 msgctxt "empire_ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Helm"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/helmet/init.lua:7
 msgctxt "barbarians_ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Helm"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax/init.lua:7
 msgctxt "ware"
 msgid "Ax"
-msgstr ""
+msgstr "Axt"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_battle/init.lua:7
@@ -2657,13 +2508,13 @@ msgstr ""
 #: ../../tribes/wares/basket/init.lua:7
 msgctxt "ware"
 msgid "Basket"
-msgstr ""
+msgstr "Korb"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer/init.lua:7
 msgctxt "ware"
 msgid "Beer"
-msgstr ""
+msgstr "Bier"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer_strong/init.lua:7
@@ -2685,10 +2536,9 @@ msgstr "Dunkelrübenmehl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/blackwood/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Blackwood"
-msgstr "Dunkelrübe"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_atlanteans/init.lua:7
@@ -2698,17 +2548,15 @@ msgstr "Brot"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_empire/init.lua:7
-#, fuzzy
 msgctxt "empire_ware"
 msgid "Bread"
 msgstr "Brot"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_barbarians/init.lua:7
-#, fuzzy
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr "Brot"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_paddle/init.lua:7
@@ -2726,7 +2574,7 @@ msgstr "Eimer"
 #: ../../tribes/wares/cloth/init.lua:7
 msgctxt "ware"
 msgid "Cloth"
-msgstr ""
+msgstr "Stoff"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/coal/init.lua:7
@@ -2742,10 +2590,9 @@ msgstr "Mais"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/cornmeal/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr "Maisfeld"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/diamond/init.lua:7
@@ -2779,16 +2626,15 @@ msgstr "Fischernetz"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/fishing_rod/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Fishing Rod"
-msgstr "Fischernetz"
+msgstr "Angel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/flour/init.lua:7
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Mehl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold/init.lua:7
@@ -2804,10 +2650,9 @@ msgstr "Golderz"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold_thread/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Gold Thread"
-msgstr "Golderz"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/granite/init.lua:7
@@ -2819,7 +2664,7 @@ msgstr ""
 #: ../../tribes/wares/grape/init.lua:7
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Weintrauben"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grout/init.lua:7
@@ -2859,10 +2704,9 @@ msgstr "Jagdbogen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/hunting_spear/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Jagdbogen"
+msgstr "Jagdspeer"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/iron/init.lua:7
@@ -2880,7 +2724,7 @@ msgstr "Eisenerz"
 #: ../../tribes/wares/kitchen_tools/init.lua:7
 msgctxt "ware"
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Küchengeräte"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/log/init.lua:7
@@ -2892,19 +2736,19 @@ msgstr "Stamm"
 #: ../../tribes/wares/marble/init.lua:7
 msgctxt "ware"
 msgid "Marble"
-msgstr ""
+msgstr "Marmor"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/marble_column/init.lua:7
 msgctxt "ware"
 msgid "Marble Column"
-msgstr ""
+msgstr "Marmorsäule"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meal/init.lua:7
 msgctxt "ware"
 msgid "Meal"
-msgstr ""
+msgstr "Mahlzeit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meat/init.lua:7
@@ -2940,7 +2784,7 @@ msgstr "Bergkristall"
 #: ../../tribes/wares/ration/init.lua:7
 msgctxt "ware"
 msgid "Ration"
-msgstr ""
+msgstr "Ration"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/saw/init.lua:7
@@ -2998,10 +2842,9 @@ msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_advanced/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr "Verbesserter Schild"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_heavy/init.lua:7
@@ -3023,10 +2866,9 @@ msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spider_silk/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr "Spinnenfarm"
+msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spidercloth/init.lua:7
@@ -3092,19 +2934,19 @@ msgstr "Wasser"
 #: ../../tribes/wares/wheat/init.lua:7
 msgctxt "ware"
 msgid "Wheat"
-msgstr ""
+msgstr "Weizen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wine/init.lua:7
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Wein"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wool/init.lua:7
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Wolle"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/armorsmith/init.lua:18
@@ -3114,7 +2956,6 @@ msgstr "Rüstungsschmied"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/armorsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Armorsmith"
 msgstr "Rüstungsschmied"
@@ -3127,14 +2968,12 @@ msgstr "Bäcker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/baker/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "Bäcker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/baker/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Baker"
 msgstr "Bäcker"
@@ -3153,14 +2992,12 @@ msgstr "Bauarbeiter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/builder/init.lua:29
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Bauarbeiter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/builder/init.lua:29
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Builder"
 msgstr "Bauarbeiter"
@@ -3173,14 +3010,12 @@ msgstr "Träger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/carrier/init.lua:19
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Carrier"
 msgstr "Träger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/carrier/init.lua:19
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Carrier"
 msgstr "Träger"
@@ -3193,14 +3028,12 @@ msgstr "Köhler"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/charcoal_burner/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "Köhler"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/charcoal_burner/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
 msgstr "Köhler"
@@ -3213,14 +3046,12 @@ msgstr "Bauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/farmer/init.lua:36
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "Bauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/farmer/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Farmer"
 msgstr "Bauer"
@@ -3239,14 +3070,12 @@ msgstr "Fischer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/fisher/init.lua:24
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "Fischer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/fisher/init.lua:23
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Fisher"
 msgstr "Fischer"
@@ -3259,7 +3088,6 @@ msgstr "Förster"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/forester/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Forester"
 msgstr "Förster"
@@ -3272,14 +3100,12 @@ msgstr "Geologe"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/geologist/init.lua:25
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "Geologe"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/geologist/init.lua:25
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Geologist"
 msgstr "Geologe"
@@ -3304,14 +3130,12 @@ msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/hunter/init.lua:19
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/hunter/init.lua:19
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Hunter"
 msgstr "Jäger"
@@ -3324,7 +3148,6 @@ msgstr "Müller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miller/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Miller"
 msgstr "Müller"
@@ -3337,14 +3160,12 @@ msgstr "Bergmann"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "Bergmann"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miner/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Miner"
 msgstr "Bergmann"
@@ -3363,14 +3184,12 @@ msgstr "Kundschafter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/scout/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "Kundschafter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/scout/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Scout"
 msgstr "Kundschafter"
@@ -3383,14 +3202,12 @@ msgstr "Schiffbauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/shipwright/init.lua:28
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Schiffbauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/shipwright/init.lua:28
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Shipwright"
 msgstr "Schiffbauer"
@@ -3403,14 +3220,12 @@ msgstr "Schmelzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/smelter/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "Schmelzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/smelter/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Smelter"
 msgstr "Schmelzer"
@@ -3429,14 +3244,12 @@ msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/soldier/init.lua:78
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Soldier"
-msgstr "Soldat"
+msgstr "Krieger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/soldier/init.lua:78
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "Soldat"
@@ -3461,7 +3274,6 @@ msgstr "Werkzeugmacher"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/toolsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Toolsmith"
 msgstr "Werkzeugmacher"
@@ -3474,14 +3286,12 @@ msgstr "Ausbilder"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/trainer/init.lua:17
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "Ausbilder"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/trainer/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Trainer"
 msgstr "Ausbilder"
@@ -3494,7 +3304,6 @@ msgstr "Waffenschmied"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/weaponsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Weaponsmith"
 msgstr "Waffenschmied"
@@ -3507,14 +3316,12 @@ msgstr "Weber"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/weaver/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "Weber"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/weaver/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Weaver"
 msgstr "Weber"
@@ -3527,10 +3334,9 @@ msgstr "Holzfäller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/blacksmith/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
-msgstr "Dunkelrübe"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/blacksmith_master/init.lua:18
@@ -3552,17 +3358,15 @@ msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/brewer_master/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
-msgstr "Pferdezüchter"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/cattlebreeder/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
-msgstr "Pferdezüchter"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/gamekeeper/init.lua:30
@@ -3578,22 +3382,21 @@ msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/helmsmith/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Werkzeugmacher"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/innkeeper/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Wirt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/innkeeper/init.lua:18
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Wirt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/lime_burner/init.lua:18
@@ -3605,32 +3408,31 @@ msgstr ""
 #: ../../tribes/workers/barbarians/lumberjack/init.lua:25
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
-msgstr ""
+msgstr "Holzfäller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/lumberjack/init.lua:25
 msgctxt "empire_worker"
 msgid "Lumberjack"
-msgstr ""
+msgstr "Holzfäller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner_chief/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr "Bergmann"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner_master/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Bergwerksmeister"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miner_master/init.lua:18
 msgctxt "empire_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Bergwerksmeister"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/ox/init.lua:20
@@ -3646,473 +3448,54 @@ msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/stonemason/init.lua:25
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Stein"
+msgstr "Steinmetz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/stonemason/init.lua:25
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Stein"
+msgstr "Steinmetz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/carpenter/init.lua:18
 msgctxt "empire_worker"
 msgid "Carpenter"
-msgstr ""
+msgstr "Zimmermann"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkey/init.lua:19
 msgctxt "empire_worker"
 msgid "Donkey"
-msgstr ""
+msgstr "Esel"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkeybreeder/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Donkey Breeder"
-msgstr "Pferdezüchter"
+msgstr "Eselzüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/pigbreeder/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr "Fischzüchter"
+msgstr "Schweinezüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/shepherd/init.lua:18
 msgctxt "empire_worker"
 msgid "Shepherd"
-msgstr ""
+msgstr "Schäfer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vinefarmer/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr "Bauer"
+msgstr "Winzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vintner/init.lua:19
 msgctxt "empire_worker"
 msgid "Vintner"
 msgstr ""
-
-#~ msgid "Your barracks discovered an aggressor."
-#~ msgstr "Bei deiner Baracke wurden Angreifer entdeckt."
-
-#~ msgid "Your barracks is under attack."
-#~ msgstr "Deine Baracke wird angegriffen."
-
-#~ msgid "The enemy defeated your soldiers at the barracks."
-#~ msgstr "Der Feind hat deine Soldaten an der Baracke besiegt."
-
-#~ msgid "Your soldiers defeated the enemy at the barracks."
-#~ msgstr "Deine Soldaten haben den Feind an der Baracke besiegt."
-
-#~ msgid "Your donjon discovered an aggressor."
-#~ msgstr "Bei deinem Wachturm wurden Angreifer entdeckt."
-
-#~ msgid "Your donjon is under attack."
-#~ msgstr "Dein Wachturm wird angegriffen."
-
-#~ msgid "The enemy defeated your soldiers at the donjon."
-#~ msgstr "Der Feind hat deine Soldaten am Wachturm besiegt."
-
-#~ msgid "Your soldiers defeated the enemy at the donjon."
-#~ msgstr "Deine Soldaten haben den Feind am Wachturm besiegt."
-
-#~ msgid "These advanced shields are used by the best soldiers of the Atlanteans. They are produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from Defense level 1 to level 2."
-#~ msgstr "Die verbesserten Schilde werden von den besten Soldaten der Atlanter verwendet. Sie werden in der Rüstungsschmiede hergestellt und im Labyrinth – zusammen mit Nahrung – verwendet, um Soldaten von der Verteidungsstufe 1 auf 2 zu trainieren."
-
-#~ msgid "Produces armor for the soldiers."
-#~ msgstr "Schmiedet Rüstungen für Soldaten."
-
-#~ msgid "Source needed"
-#~ msgstr "Quelle benötigt"
-
-#~ msgid "Text needed"
-#~ msgstr "Text benötigt"
-
-#~ msgid "Calculation needed"
-#~ msgstr "Berechnung erforderlich"
-
-#~ msgid "Bakes bread for workers."
-#~ msgstr "Bäckt Brot für Arbeiter."
-
-#~ msgid "Blackroots are a special kind of root produced in blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread."
-#~ msgstr "Dunkelrüben sind eine besondere Art Wurzeln, die auf Dunkelrübenfarmen hergestellt und in Mühlen weiterverarbeitet werden. Die Atlanter mögen ihren kräftigen Geschmack und verwenden ihr Mehl zum Brotbacken."
-
-#~ msgid "Sow and harvest blackroot."
-#~ msgstr "Sät und erntet Dunkelrüben."
-
-#~ msgid "Plants and harvests blackroot."
-#~ msgstr "Pflanzt und erntet Dunkelrüben."
-
-#~ msgid "Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread."
-#~ msgstr "Dunkelrübenmehl wird in Mühlen aus Dunkelrüben hergestellt. Es wird in Bäckereien verwendet, um leckeres Brot zu backen."
-
-#~ msgid "This tasty bread is made in bakeries out of cornflour, blackroot flour and water. It is appreciated as basic food for miners, scouts and soldiers in training sites (labyrinth and dungeon)."
-#~ msgstr "Dieses köstliche Brot wird in Bäckerein aus Maismehl, Dunkelrübenmehl und Wasser hergestellt. Es wird von Bergleuten, Kundschaftern und Soldaten in Trainingsgebäuden (Verlies und Labyrinth) als Grundnahrungsmittel geschätzt."
-
-#~ msgid "The bread paddle is the tool of the baker, each baker needs one. It is produced by the toolsmith."
-#~ msgstr "Der Brotschieber ist das Werkzeug der Bäcker, jeder Bäcker benötigt einen eigenen. Er wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "Big buckets for the fish breeder – produced by the toolsmith."
-#~ msgstr "Große Eimer für den Fischzüchter – produziert vom Werkzeugmacher."
-
-#~ msgid "Works at construction sites to raise new buildings."
-#~ msgstr "Arbeitet auf Baustellen, um Gebäude zu bauen."
-
-#~ msgid "Carries items along your roads."
-#~ msgstr "Trägt Waren über deine Straßen."
-
-#~ msgid "Garrisons soldiers to expand your territory."
-#~ msgstr "Beherbergt Soldaten, um dein Gebiet zu erweitern."
-
-#~ msgid "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."
-#~ msgstr "Wenn du nur wenige Soldaten hast, die neue Militärgebäude besetzen können, benutze die Schaltfläche mit dem nach unten zeigenden Pfeil, um die Kapazität in diesem Gebäude zu verringern. Du kannst auch auf einen Soldaten klicken, um ihn wegzuschicken (er wird, wenn möglich, ersetzt werden)."
-
-#~ msgid "Burns coal."
-#~ msgstr "Brennt Kohle."
-
-#~ msgid "The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal. This coal is mined in coal mines or produced out of logs by a charcoal kiln."
-#~ msgstr "Die atlantischen Feuer in Hochöfen, Rüstungs- und Waffenschmieden werden mit Kohle geheizt. Diese Kohle wird in Kohleminen abgebaut oder aus Stämmen in einer Köhlerei hergestellt."
-
-#~ msgid "Digs coal out of the ground in mountain terrain."
-#~ msgstr "Fördert Kohle aus bergigem Gelände."
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "Das Widelands-Entwicklerteam"
-
-#~ msgid "Atlanteans"
-#~ msgstr "Atlanter"
-
-#~ msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
-#~ msgstr "Dieser Stamm wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter von Atlantis."
-
-#~ msgid "Blackroot Field"
-#~ msgstr "Dunkelrübenfeld"
-
-#~ msgid "Resource indicator: Coal (little)"
-#~ msgstr "Rohstoffanzeige: Kohle (wenig)"
-
-#~ msgid "Resource indicator: Coal (much)"
-#~ msgstr "Rohstoffanzeige: Kohle (viel)"
-
-#~ msgid "Resource indicator: Gold (little)"
-#~ msgstr "Rohstoffanzeige: Gold (wenig)"
-
-#~ msgid "Resource indicator: Gold (much)"
-#~ msgstr "Rohstoffanzeige: Gold (viel)"
-
-#~ msgid "Resource indicator: Granite (little)"
-#~ msgstr "Rohstoffanzeige: Kristall (wenig)"
-
-#~ msgid "Resource indicator: Granite (much)"
-#~ msgstr "Rohstoffanzeige: Kristall (viel)"
-
-#~ msgid "Resource indicator: Iron (little)"
-#~ msgstr "Rohstoffanzeige: Eisen (wenig)"
-
-#~ msgid "Resource indicator: Iron (much)"
-#~ msgstr "Rohstoffanzeige: Eisen (viel)"
-
-#~ msgid "Resource indicator: No resource"
-#~ msgstr "Rohstoffanzeige: Keine Rohstoffe"
-
-#~ msgid "Resource indicator: Water"
-#~ msgstr "Rohstoffanzeige: Wasser"
-
-#~ msgid "Cornflour"
-#~ msgstr "Maismehl"
-
-#~ msgid "Gold Yarn"
-#~ msgstr "Goldgarn"
-
-#~ msgid "Spideryarn"
-#~ msgstr "Spinnengarn"
-
-#~ msgid "Donjon"
-#~ msgstr "Wachturm"
-
-#~ msgid "Barracks"
-#~ msgstr "Baracke"
-
-#~ msgid "This corn is processed in the mill into fine cornflour that every Atlantean baker needs for a good bread. Also horse and spider farms need to be provided with corn."
-#~ msgstr "Dieser Mais wird in der Mühle zu Maismehl weiterverarbeitet, welches jeder atlantischer Bäcker für gutes Brot benötigt. Auch bei der Pferdezucht und auf Spinnenfarmen wird Mais benötigt."
-
-#~ msgid "Cornflour is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries."
-#~ msgstr "Maismehl wird in einer Mühle aus Mais hergestellt und ist einer der drei Zutaten des atlantischen Brots, welches in der Bäckerei hergestellt wird."
-
-#~ msgid "Carve precious stones out of the rock in mountain terrain."
-#~ msgstr "Schlägt wertvolle Steine aus den Granitvorkommen in den Bergen."
-
-#~ msgid "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine."
-#~ msgstr "Diese wunderbaren Diamanten werden beim Bau einiger besonderer Gebäude verwendet. Sie werden in der Kristallmine abgebaut."
-
-#~ msgid "The double trident is one of the best tridents produced by the Atlantean weapon smithy. It is used in a dungeon – together with food – to train soldiers from attack level 2 to level 3."
-#~ msgstr "Der Doppel-Dreizack ist einer der besten Dreizacke, der in der atlantischen Waffenschmiede produziert wird. Er wird in einem Verlies – zusammen mit Nahrung – verwendet, um Soldaten von der Angriffsstufe 2 auf 3 zu trainieren."
-
-#~ msgid "Trains soldiers in ‘Attack’."
-#~ msgstr "Trainiert Soldaten in „Angriff“."
-
-#~ msgid "Attack Training:"
-#~ msgstr "Angriffstraining:"
-
-#~ msgid "Sow and harvest corn."
-#~ msgstr "Sät und erntet Mais."
-
-#~ msgid "Plants fields."
-#~ msgstr "Bestellt Felder."
-
-#~ msgid "Fire tongs are tools of the smelter, who works in the smelting works. They are produced by the toolsmith."
-#~ msgstr "Die Feuerzange ist das Werkzeug des Schmelzers, der am Hochofen arbeitet. Sie wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts."
-#~ msgstr "Fisch ist eine der Hauptnahrungsquellen der Atlanter. Er muss in einer Räucherei geräuchert werden, bevor er zu den Minen, Trainingsgebäuden und Kundschaftern gebracht wird."
-
-#~ msgid "The fisher fishes delicious fish."
-#~ msgstr "Der Fischer fischt leckeren Fisch."
-
-#~ msgid "Fishes on the coast near the house."
-#~ msgstr "Fischt an der Küste in der Nähe des Hauses."
-
-#~ msgid "Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
-#~ msgstr "Baue ein Fischzüchterhaus in der Nähe eines Fischerhauses um sicherzustellen, dass dir der Fisch nicht ausgeht."
-
-#~ msgid "The fisher’s house needs water full of fish within the work area."
-#~ msgstr "Das Fischerhaus braucht Wasser mit Fischen innerhalb seines Arbeitsbereichs."
-
-#~ msgid "The fishing net is used by the fisher and produced by the toolsmith."
-#~ msgstr "Das Fischernetz wird vom Fischer benutzt und vom Werkzeugmacher hergestellt."
-
-#~ msgid "Plants trees."
-#~ msgstr "Pflanzt Bäume."
-
-#~ msgid "Plants trees in the surrounding area."
-#~ msgstr "Pflanzt Bäume in der Umgebung."
-
-#~ msgid "The forester’s house needs free space within the work area to plant the trees."
-#~ msgstr "Das Forsthaus braucht freien Raum innerhalb seines Arbeitsbereichs, um Bäume zu pflanzen."
-
-#~ msgid "Discovers resources for mining."
-#~ msgstr "Sucht Rohstoffe zum Schürfen."
-
-#~ msgid "Spins goldyarn out of gold."
-#~ msgstr "Spinnt Gold zu Goldgarn."
-
-#~ msgid "Gold is one of the most valuable materials. It is produced out of gold ore in the smelting works. Gold is used by the armor smithy, the weapon smithy and the gold spinning mill."
-#~ msgstr "Gold ist eines der wertvollsten Materialien. Es wird aus Golderz im Hochofen hergestellt. Gold wird von der Rüstungs- und Waffenschmiede und von der Goldspinnerei verwendet."
-
-#~ msgid "Golden tabards are produced in Atlantean weaving mills out of gold yarn. They are used in the labyrinth – together with food – to train soldiers from health level 0 to level 1."
-#~ msgstr "Goldene Wappenröcke werden in der atlantischen Weberei aus Goldgarn hergestellt. Sie werden im Labyrinth – zusammen mit Nahrung – verwendet, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu trainieren."
-
-#~ msgid "Digs gold ore out of the ground in mountain terrain."
-#~ msgstr "Fördert Golderz aus bergigem Gelände."
-
-#~ msgid "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor."
-#~ msgstr "Golderz wird in Goldminen abgebaut. Im Hochofen wird es zu Gold verhüttet, welches für einige große Gebäude und zur Herstellung von Waffen und Rüstungen benötigt wird."
-
-#~ msgid "This yarn, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill."
-#~ msgstr "Dieses Garn, das aus Gold in der Goldspinnerei hergestellt wurde, wird zum Weben der einzigartigen goldenen Wappenröcken in der Weberei verwendet."
-
-#~ msgid "The hammer is an essential tool. It is needed by geologists, builders, weaponsmiths and armorsmiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-#~ msgstr "Der Hammer ist ein unverzichtbares Werkzeug. Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er wird vom Werkzeugmacher produziert."
-
-#~ msgid "Accommodation for your people. Also stores your wares and tools."
-#~ msgstr "Die Unterkunft deines Volks. Hier werden auch deine Waren und Werkzeuge gelagert."
-
-#~ msgid "The headquarters is your main building."
-#~ msgstr "Das Hauptquartier ist dein Hauptgebäude."
-
-#~ msgid "This is the most dangerous weapon of the Atlantean military. Only the best of the best soldiers may use it. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 3 to level 4."
-#~ msgstr "Das ist die gefährlichste Waffe des atlantischen Militärs. Nur die besten Soldaten können sie verwenden. Sie wird in der Waffenschmiede hergestellt und im Verlies – zusammen mit Nahrung – verwendet, um die Angriffsstufe von Soldaten von 3 auf 4 zu trainieren."
-
-#~ msgid "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith."
-#~ msgstr "Diese Hakenstange wird vom Räucherer verwendet, um das das Fleisch und den Fisch oben in der Räucherei aufzuhängen. Sie wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "Horses help to carry items along busy roads. They are reared in a horse farm."
-#~ msgstr "Pferde helfen dabei, Gegenstände entlang ausgelasteter Straßen zu transportieren. Sie werden in einer Pferdezucht aufgezogen."
-
-#~ msgid "Breeds the strong Atlantean horses."
-#~ msgstr "Züchtet die starken atlantischen Pferde."
-
-#~ msgid "Breeds horses for adding them to the transportation system."
-#~ msgstr "Züchtet Pferde, die beim Transport der Waren helfen."
-
-#~ msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-#~ msgstr "Der Jäger bringt gutes Fleisch zu den Atlantern."
-
-#~ msgid "Hunts animals to produce meat."
-#~ msgstr "Jagt Tiere, um Fleisch herzustellen."
-
-#~ msgid "The hunter’s house needs animals to hunt within the work area."
-#~ msgstr "Das Jagdhaus braucht Tiere innerhalb seines Arbeitsberechs."
-
-#~ msgid "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-#~ msgstr "Dieser Bogen wird von atlantischen Jägern verwendet. Er wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "Iron is made out of iron ore in the smelting works. It is used in the toolsmithy, armor smithy and weapon smithy."
-#~ msgstr "Eisen wird in Hochöfen aus Eisenerz hergestellt. Es wird in der Rüstungs- und Waffenschmiede und beim Werkzeugmacher verwendet."
-
-#~ msgid "Digs iron ore out of the ground in mountain terrain."
-#~ msgstr "Fördert Eisenerz aus bergigem Gelände."
-
-#~ msgid "Iron ore is mined in iron mines. It is smelted in a smelting works to retrieve the iron."
-#~ msgstr "Eisenerz wird in Eisenerzminen abgebaut. Es wird in Hochöfen geschmolzen, um Eisen zu erhalten."
-
-#~ msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-#~ msgstr "Trainiert Soldaten in „Verteidigung“, „Ausweichen“ und „Lebenspunkte“."
-
-#~ msgid "Defense Training:"
-#~ msgstr "Verteidigungstraining:"
-
-#~ msgid "Evade Training:"
-#~ msgstr "Ausweichtraining:"
-
-#~ msgid "Health Training:"
-#~ msgstr "Lebenspunkte-Training:"
-
-#~ msgid "This is the basic weapon of the Atlantean soldiers. Together with a tabard, it makes up the equipment of young soldiers. Light tridents are produced in the weapon smithy as are all other tridents."
-#~ msgstr "Dies ist die Grundwaffe der atlantischen Soldaten. Zusammen mit dem Wappenrock ist er die Grundausrüstung für junge Soldaten. Leichte Dreizacke werden, wie alle anderen Dreizacke auch, in der Waffenschmiede hergestellt."
-
-#~ msgid "Logs are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work."
-#~ msgstr "Stämme sind das Ausgangsmaterial für Bretter, die für fast jedes Gebäude der Atlanter gebraucht werden. Außer der Sägemühle brauchen auch die Köhlerei, der Werkzeugmacher und die Räucherei Stämme für ihre Arbeit."
-
-#~ msgid "The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 0 to level 1."
-#~ msgstr "Der lange Dreizack ist der erste Dreizack im Training der Soldaten. Er wird in der Waffenschmiede hergestellt und im Verlies – zusammen mit Nahrung – verwendet, um Soldaten von der Angriffsstufe 0 auf 1 zu trainieren."
-
-#~ msgid "Meat is one food resource of the Atlanteans. It is obtained from wild game taken by the hunter and has to be smoked in a smokery before being delivered to mines and training sites (dungeon and labyrinth)."
-#~ msgstr "Fleisch ist eine der Nahrungsquellen der Atlanter. Es wird vom Jäger aus Wild gewonnen und muss in einer Räucherei geräuchert werden, bevor es zu Minen und Trainingsgebäuden (Verlies und Labyrinth) gebracht wird."
-
-#~ msgid "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith."
-#~ msgstr "Die Melkzange wird vom Spinnenzüchter zum Melken der Spinnen verwendet. Sie wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "Mills blackroot and corn to produce blackroot flour and corn flour, respectively."
-#~ msgstr "Mahlt Dunkelrüben zu Dunkelrübenmehl und Mais zu Maismehl."
-
-#~ msgid "Works deep in the mines to produce coal, iron or gold."
-#~ msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
-
-#~ msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
-#~ msgstr "Spitzhacken werden von Steinmetzen und Bergleuten verwendet. Sie werden vom Werkzeugmacher hergestellt."
-
-#~ msgid "Planks are an important building material of the Atlanteans. They are produced out of logs by the sawmill. The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
-#~ msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter. Sie werden in der Sägemühle aus Stämmen hergestellt. Ebenso werden sie in der Waffenschmiede für Dreizacke sowie in der Werft für mächtige Schiffe benötigt."
-
-#~ msgid "Carves stones out of rocks in the vicinity."
-#~ msgstr "Schneidet Stein aus den Felsen in der Umgebung."
-
-#~ msgid "The quarry needs stones to cut within the work area."
-#~ msgstr "Der Steinbruch braucht Felsen innerhalb seines Arbeitsbereichs."
-
-#~ msgid "These transparent quartz’ are used to build some exclusive buildings. They are produced in a crystal mine."
-#~ msgstr "Dieser durchsichtige Bergkristall wird beim Bau einiger besonderer Gebäude verwendet. Er wird in der Kristallmine abgebaut."
-
-#~ msgid "The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith."
-#~ msgstr "Die Säge wird vom Holzfäller und vom Werkzeugmacher benötigt. Sie wird vom Werkzeugmacher produziert."
-
-#~ msgid "Saws wood to produce planks."
-#~ msgstr "Sägt Holz um Bretter herzustellen."
-
-#~ msgid "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-#~ msgstr "Kunderschafter wie Kundigunde, der Erkunder, erkunden das unerkundete Gebiet auf erkundliche Weise."
-
-#~ msgid "Fortified Village"
-#~ msgstr "Befestigtes Dorf"
-
-#~ msgid "Not enough space"
-#~ msgstr "Nicht ausreichend Platz"
-
-#~ msgid "Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition."
-#~ msgstr "Einige deiner Startgebäude hatten nicht genug Platz und wurden nicht gebaut. Du bist damit im Nachteil; vielleicht solltest du die Karte mit gerechten Startbedingungen neu starten."
-
-#~ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-#~ msgstr "Die Sense ist das Werkzeug der Bauern. Sie wird vom Werkzeugmacher hergestellt."
-
-#~ msgid "A sea-worthy ship"
-#~ msgstr "Ein seetüchtiges Schiff"
-
-#~ msgid "Works at the shipyard and constructs new ships."
-#~ msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
-
-#~ msgid "Shovels are needed for the proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
-#~ msgstr "Schaufeln werden zum richtigen Umgang mit Pflanzen gebraucht. Daher verwenden sie die Förster und Dunkelrübenbauern. Sie werden vom Werkzeugmacher hergestellt."
-
-#~ msgid "Smelts iron."
-#~ msgstr "Verhüttet Eisenerz."
-
-#~ msgid "Smelts iron ore into iron and gold ore into gold."
-#~ msgstr "Verhüttet Eisenerz zu Eisen und Golderz zu Gold."
-
-#~ msgid "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible."
-#~ msgstr "Da die Atlanter Fisch nicht roh mögen, wird er üblicherweise in einer Räucherei geräuchert, um ihn genießbar zu machen."
-
-#~ msgid "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves."
-#~ msgstr "Geräuchertes Fleisch wird aus Fleisch in einer Räucherei hergestellt. Es wird in die die Minen und Trainingsgebäude (Labyrinth und Verlies) geliefert, wo die Bergleute und Soldaten ein nahrhaftes Mittagessen für sich selbst zubereiten."
-
-#~ msgid "Smokes meat and fish."
-#~ msgstr "Räuchert Fleisch und Fisch."
-
-#~ msgid "Defend and Conquer!"
-#~ msgstr "Verteidige und erobere!"
-
-#~ msgid "Breeds spider for yarn."
-#~ msgstr "Züchtet Spinnen für Spinnengarn."
-
-#~ msgid "Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction."
-#~ msgstr "Spinnenstoff wird aus Spinnengarn in einer Weberei hergestellt. Er wird vom Werkzeugmacher und der Werft verwendet. Einige fortgeschrittenere Gebäude brauchen ebenfalls Spinnenstoff zum Bau."
-
-#~ msgid "This yarn is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill."
-#~ msgstr "Dieses Garn wird von Spinnen hergestellt, die in Spinnenfarmen gezüchtet werden. Es wird in einer Weberei zu Spinnenstoff weiterverarbeitet."
-
-#~ msgid "This steel shield is produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from defense level 0 to level 1."
-#~ msgstr "Dieser Stahlschild wird in der Rüstungsschmiede hergestellt und im Labyrinth – zusammen mit Nahrung – verwendet, um die Verteidigungsstufe von Soldaten von 0 auf 1 zu trainieren."
-
-#~ msgid "This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food)."
-#~ msgstr "Das ist der mittlere Dreizack. Er wird in der Waffenschmiede hergestellt und von fortgeschrittenen Soldaten im Verlies – zusammen mit Nahrung – verwendet, um die Angriffsstufe von Soldaten von 1 auf 2 zu trainieren."
-
-#~ msgid "Stone is a basic building ware of the Atlanteans. It is produced in a quarry or a crystal mine."
-#~ msgstr "Stein ist eines der Grundbaumaterialien der Atlanter. Er wird in einem Steinbruch oder in einer Kristallmine abgebaut."
-
-#~ msgid "Cuts raw pieces of granite out of rocks."
-#~ msgstr "Bricht grobe Steinblöcke aus Felsen."
-
-#~ msgid "A tabard and a light trident are the basic equipment for young soldiers. Tabards are produced in the weaving mill."
-#~ msgstr "Ein Wappenrock und ein leichter Dreizack sind die Grundausstattung für junge Soldaten. Wappenröcke werden in der Weberei hergestellt."
-
-#~ msgid "Produces tools for the workers."
-#~ msgstr "Schmiedet Werkzeuge für Arbeiter."
-
-#~ msgid "Trains the soldiers."
-#~ msgstr "Trainiert Soldaten."
-
-#~ msgid "Warehouses store soldiers, wares and tools."
-#~ msgstr "Lagerhäuser lagern Soldaten, Waren und Werkzeuge."
-
-#~ msgid "Water is the essence of life! It is used in the bakery and the horse and spider farms."
-#~ msgstr "Wasser ist Leben! Es wird in der Bäckerei, der Pferdezucht und der Spinnenfarm verwendet."
-
-#~ msgid "Produces weapons for the soldiers."
-#~ msgstr "Schmiedet Waffen für Soldaten."
-
-#~ msgid "Produces cloth for buildings, ships and soldiers."
-#~ msgstr "Stellt Stoffe für Gebäude, Schiffe und Soldaten her."
-
-#~ msgid "Draws water out of the deep."
-#~ msgstr "Holt Wasser aus der Tiefe."
-
-#~ msgid "Fells trees."
-#~ msgstr "Fällt Bäume."
-
-#~ msgid "Fell trees in the surrounding area and process them into logs."
-#~ msgstr "Fällt Bäume in der Umgebung und verarbeitet sie zu Stämmen."
-
-#~ msgid "The woodcutter’s house needs trees to fell within the work area."
-#~ msgstr "Das Holzfällerhaus braucht Bäume innerhalb seines Arbeitsbereichs."

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-11 21:00+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,9 +72,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Обикновено започвате играта с един щаб. Това е голямата сграда със синия флаг отпред. Щабът е склад, в който може да има стоки, работници и войници. Някои от стоките трябват за строежа на къщи, други за направа на други стоки. Ясно е, че стоките в щаба не са неизчерпаеми, така че трябва да подсигурите запасяването с тях. Най-важните стоки в началото на играта са основните строителни материали: дървени трупи и необработени камъни. Да подсигурим запаса си от дървени трупи. Първо ни трябва дървар и хижа, около която да работи."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr "Обикновено започвате играта с един щаб. Това е голямата сграда със синия флаг отпред. Щабът е склад, в който може да има стоки, работници и войници. Някои от стоките трябват за строежа на къщи, други за направа на други стоки. Ясно е, че стоките в щаба не са неизчерпаеми, така че трябва да подсигурите запасяването с тях. Най-важните стоки в началото на играта са основните строителни материали: дървени трупи и гранит. Да подсигурим запаса си от дървени трупи. Първо ни трябва дървар и хижа, около която да работи."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -286,8 +286,8 @@ msgstr "Дърварят е готов"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Чудесно. Дърварската хижа е готова. Сега някой дървар ще се нанесе и ще започне да сече дървета; така запасът ни от дървени трупи ще бъде подсигурен. Сега да видим какво можем да направим за необработените камъни."
+"the granite."
+msgstr "Чудесно. Дърварската хижа е готова. Сега някой дървар ще се нанесе и ще започне да сече дървета; така запасът ни от дървени трупи ще бъде подсигурен. Сега да видим какво можем да направим за гранита."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -299,11 +299,11 @@ msgstr "Строеж на кариера"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Камъните могат да бъдат добити от мини за гранит, но е много по-лесно да построим кариера близо до скали. Изглежда има купчина скали на запад (вляво) от щаба Ви. Ще Ви науча как да преместите изгледа си натам."
+msgstr "Гранитът може да бъде добиван от мини за гранит, но е много по-лесно да построим кариера близо до скали. Изглежда има купчина скали на запад (вляво) от щаба Ви. Ще Ви покажа как да преместите изгледа си натам."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -656,8 +656,8 @@ msgstr "Постройте втора кариера"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Там, където има много скали, можете да построите повече от една кариара. Това ще направи добива на камъни по-бърз."
+"will make the granite production faster."
+msgstr "Там, където има много скали, можете да построите повече от една кариара. Това ще направи добива на гранит по-бърз."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -823,9 +823,9 @@ msgstr "Сега затворете прозореца със съобщения
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Добра работа! Да видим ли как работят съобщенията в една истинска игра? Сега ще отнема всички скали от каменоделците в кариерите. След това всеки от тях ще изпрати съобщение за това, че не може да намери скали в работната си област, следващия път, когато се опита да работи."
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -894,12 +894,12 @@ msgstr "Има още нещо, на което искам да Ви науча:
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "За разширяването е нужно просто да построите военна сграда на края на територията си. Варварите имат голям избор на военни сгради: караулни, прегради, донжони, крепости и цитадели. Колкото по-голяма е сградата, толкова по-скъпа е за строеж, но и толкова повече територия ще завзема около себе си, както и ще може да събира повече войници. Сградите се различават и по обхвата си на видимост: сградите с кула имат по-голяма видимост от другите."
+msgstr "За разширяването е нужно просто да построите военна сграда на края на територията си. Варварите имат голям избор на военни сгради: караулни, прегради, кули, крепости и цитадели. Колкото по-голяма е сградата, толкова по-скъпа е за строеж, но и толкова повече територия ще завзема около себе си, както и ще може да събира повече войници. Сградите се различават и по обхвата си на видимост: сградите с кула имат по-голяма видимост от другите."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -936,9 +936,9 @@ msgstr "В Widelands често се налага да строите сград
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Варварите имат четири различни военни сгради, които можете да построите: караулна (малка), преграда и донжон (и двете са средни) и крепост (голяма). Просто изберете коя от тях искате."
+msgstr "Варварите имат четири различни военни сгради, които можете да построите: караулна (малка), преграда и кула (и двете са средни) и крепост (голяма). Просто изберете коя от тях искате."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

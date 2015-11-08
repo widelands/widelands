@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-#
+# 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-03 19:03+0000\n"
-"PO-Revision-Date: 2015-11-04 06:44+0100\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 19:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -60,7 +60,10 @@ msgstr ""
 #: ../../tribes/buildings/militarysites/empire/sentry/helptexts.lua:21
 #: ../../tribes/buildings/militarysites/empire/tower/helptexts.lua:21
 msgctxt "building"
-msgid "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."
+msgid ""
+"If you’re low on soldiers to occupy new military sites, use the downward "
+"arrow button to decrease the capacity. You can also click on a soldier to "
+"send him away."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -72,15 +75,17 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
 msgctxt "building"
-msgid "A building is being dismantled at this dismantlesite, returning some of the resources that were used during this building’s construction to your tribe’s stores."
+msgid ""
+"A building is being dismantled at this dismantlesite, returning some of the "
+"resources that were used during this building’s construction to your tribe’s"
+" stores."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Sow and harvest blackroot."
-msgstr "小麦の種を蒔き、収穫します。"
+msgstr "甘草の種を蒔き収穫します。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -110,28 +115,27 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Sow and harvest corn."
-msgstr "小麦の種を蒔き、収穫します。"
+msgstr "甘草の種を蒔き収穫します。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "Fishes on the coast near the house."
-msgstr "小屋のそばの岸辺で魚を釣ります。"
+msgid "Fishes on the coast near the fisher’s house."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
-msgid "Fishes on the coast near the house."
-msgstr "小屋のそばの岸辺で魚を釣ります。"
+msgid "Fishes on the coast near the fisher’s house."
+msgstr ""
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
-msgid "Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
+msgid ""
+"Build a fish breeder’s house close to the fisher’s house to make sure that "
+"you don’t run out of fish."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -148,34 +152,36 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Plants trees in the surrounding area."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Plants trees in the surrounding area."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:21
 msgctxt "atlanteans_building"
-msgid "The forester’s house needs free space within the work area to plant the trees."
+msgid ""
+"The forester’s house needs free space within the work area to plant the "
+"trees."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:21
 msgctxt "empire_building"
-msgid "The forester’s house needs free space within the work area to plant the trees."
+msgid ""
+"The forester’s house needs free space within the work area to plant the "
+"trees."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -207,17 +213,19 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/horsefarm/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "Breeds the strong Atlantean horses for adding them to the transportation system."
-msgstr "アイテムの輸送を助ける、強い牛を育てます。"
+msgid ""
+"Breeds the strong Atlantean horses for adding them to the transportation "
+"system."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Horse Breeder
 #: ../../tribes/workers/atlanteans/horsebreeder/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
-msgid "Breeds the strong Atlantean horses for adding them to the transportation system."
-msgstr "アイテムの輸送を助ける、強い牛を育てます。"
+msgid ""
+"Breeds the strong Atlantean horses for adding them to the transportation "
+"system."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
@@ -272,17 +280,15 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../tribes/workers/atlanteans/stonecutter/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:21
@@ -292,7 +298,6 @@ msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:21
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr ""
@@ -341,23 +346,21 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "周辺で木を伐り、丸太に加工します。"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:21
@@ -369,29 +372,33 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:3
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:6
 msgctxt "barbarians_building"
-msgid "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’"
+msgid ""
+"‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
+"its maker.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:11
 msgctxt "barbarians_building"
-msgid "An old Barbarian proverb<br> meaning that you need to take some risks sometimes."
+msgid ""
+"An old Barbarian proverb<br> meaning that you need to take some risks "
+"sometimes."
 msgstr ""
-"バーバリアンの古いことわざ\n"
-"ときにはリスクを取るべきという意味"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces axes, sharp axes and broad axes."
-msgstr "船と兵士のために布をつくります。"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:18
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is an upgrade from the metal workshop but doesn’t require additional qualification for the worker."
+msgid ""
+"The Barbarian ax workshop is the intermediate production site in a series of"
+" three buildings. It is an upgrade from the metal workshop but doesn’t "
+"require additional qualification for the worker."
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
@@ -427,49 +434,52 @@ msgstr[0] ""
 
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "All three weapons take the same time for making, but the required raw materials vary."
+msgid ""
+"All three weapons take the same time for making, but the required raw "
+"materials vary."
 msgstr ""
-"三つの武器すべては、\n"
-"つくるために同じ時間がかかりますが、\n"
-"必要な原材料は変わります。"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce each "
+"type of ax in about %s on average."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr "労働者のためにパンを焼きます。"
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce a pitta bread in %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce a pitta"
+" bread in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr "アイテムの輸送を助ける、強い牛を育てます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Cattle Breeder
 #: ../../tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr "アイテムの輸送を助ける、強い牛を育てます。"
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce an ox in %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce an ox "
+"in %s on average."
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:3
@@ -485,7 +495,9 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:19
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:19
 msgctxt "barbarians_building"
-msgid "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal."
+msgid ""
+"This mine exploits only %s of the resource. From there on out, it will only "
+"have a 5%% chance of finding any coal."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -493,41 +505,42 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
 msgctxt "barbarians_building"
-msgid "If the food supply is steady, this mine can produce coal in %s on average."
+msgid ""
+"If the food supply is steady, this mine can produce coal in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
 msgctxt "barbarians_building"
-msgid "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal."
+msgid ""
+"This mine exploits all of the resource down to the deepest level. But even "
+"after having done so, it will still have a %s chance of finding some more "
+"coal."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Sow and harvest wheat."
-msgstr "小麦の種を蒔き、収穫します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sow and harvest wheat."
-msgstr "小麦の種を蒔き、収穫します。"
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
 msgstr ""
-"「なんだと！\n"
-"　俺の魚が腐ってるってか！？」"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
 msgctxt "barbarians_building"
-msgid "Fishes on the coast near the hut."
-msgstr "小屋のそばの岸辺で魚を釣ります。"
+msgid "Fishes on the coast near the fisher’s hut."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:18
@@ -553,15 +566,13 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Barbarian nursery rhyme"
-msgstr "バーバリアン"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Releases animals into the wild to steady the meat production."
 msgstr ""
-"食肉生産を保つために、\n"
-"動物を野生にかえします。"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
@@ -574,25 +585,27 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:3
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’"
+msgid ""
+"‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
+"sun, wrought into eternity ...’"
 msgstr ""
-"「やわらかくしなやか\n"
-"　時にも気候にも色褪せない\n"
-"　永遠の太陽のしずく...」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:8
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:8
 msgctxt "barbarians_building"
-msgid "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "バーバリアンの民謡「われらが地下宝物」より"
+msgid ""
+"Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."
+msgid ""
+"This mine exploits only %s of the resource. From there on out, it will only "
+"have a 5%% chance of finding any gold ore."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -600,13 +613,18 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "If the food supply is steady, this mine can produce gold ore in %s on average."
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in %s on "
+"average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."
+msgid ""
+"This mine exploits all of the resource down to the deepest level. But even "
+"after having done so, it will still have a %s chance of finding some more "
+"gold ore."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -614,34 +632,31 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
-"「俺は石の舌を操るぜ、なあ？\n"
-"　だが、あんたの馬鹿げた話は\n"
-"　もううんざりだ」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
 msgctxt "barbarians_building"
-msgid "This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee."
+msgid ""
+"This phrase was the reply Rimbert the miner – later known as Rimbert the "
+"loner – gave, when he was asked to remain seated on an emergency meeting at "
+"Stonford in the year of the great flood. <br> The same man had all the 244 "
+"granite blocks ready only a week later, and they still fortify the city’s "
+"levee."
 msgstr ""
-"このフレーズは、リンバート\n"
-"――のちにリンバートは一匹狼として知られる――が、\n"
-"大洪水の年のストンフォード緊急会議にて\n"
-"座したまま頼まれたときの回答。\n"
-"<br>同じ男が、まだ市内の堤防を強化するために、\n"
-"その一週間後に244個の花崗岩のブロックすべてを準備した。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:13
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:19
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite."
+msgid ""
+"This mine exploits all of the resource down to the deepest level. But even "
+"after having done so, it will still have a %s chance of finding some more "
+"granite."
 msgstr ""
 
 #. TRANSLATORS: 'It' is a mine
@@ -652,26 +667,25 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "If the food supply is steady, this mine can produce granite in %s on average."
+msgid ""
+"If the food supply is steady, this mine can produce granite in %s on "
+"average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’"
+msgid ""
+"‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
+"arrow,<br> as deadly as a viper.’"
 msgstr ""
-"「豹のように静かに\n"
-"　イタチのように巧みに\n"
-"　矢のように素早く\n"
-"　毒蛇のように死に至らしめる」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "「狩りの芸術」"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -690,12 +704,10 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:3
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘I look at my own pick wearing away day by day and I realize why my work is important.’"
+msgid ""
+"‘I look at my own pick wearing away day by day and I realize why my work is "
+"important.’"
 msgstr ""
-"「日々磨り減っていく\n"
-"　ツルハシを見ていると、\n"
-"　自分の仕事の大切さが\n"
-"　よくわかる」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -703,13 +715,15 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Quote from an anonymous miner."
-msgstr "匿名の鉱夫からの引用"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:18
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."
+msgid ""
+"This mine exploits only %s of the resource. From there on out, it will only "
+"have a 5%% chance of finding any iron ore."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -717,13 +731,18 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "If the food supply is steady, this mine can produce iron ore in %s on average."
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in %s on "
+"average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore."
+msgid ""
+"This mine exploits all of the resource down to the deepest level. But even "
+"after having done so, it will still have a %s chance of finding some more "
+"iron ore."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -731,48 +750,46 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
 msgstr ""
-"「火と水を使って、古い石を\n"
-"　新しい石にするんだ」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
 msgctxt "barbarians_building"
-msgid "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His ‘new stone’ now is an important building material."
+msgid ""
+"Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
+" ‘new stone’ now is an important building material."
 msgstr ""
-"石捨て場で何をしているのかという\n"
-"子供の問いに対するラグナルドの答え。\n"
-"彼の「新しい石」はいまや重要な建築材料です。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The lime kiln processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry."
+msgid ""
+"The lime kiln processes granite to make ‘grout’, a substance that solidifies"
+" and so reinforces masonry."
 msgstr ""
-"石灰窯は、\n"
-"石くずを固化してから強化した物質「モルタル」を\n"
-"つくるために、原石を処理します。"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."
+msgid ""
+"The lime kiln’s output will only go to construction sites that need it. "
+"Those are predominantly houses that work with fire, and some military sites."
 msgstr ""
-"石灰釜の出力先は、\n"
-"それを必要とする建設地に供給されるだけです。\n"
-"それらは主に、\n"
-"火を扱う施設やいくつかの軍事施設です。"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce grout in about %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce grout "
+"in about %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’"
+msgid ""
+"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
+"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
+" lumberjack.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
@@ -790,82 +807,93 @@ msgstr ""
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."
+msgid ""
+"The lumberjack needs %s to fell a tree, not counting the time he needs to "
+"reach the destination and go home again."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "「われらは作動させる！」"
+msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
 msgctxt "barbarians_building"
-msgid "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, the eldest known smithy."
+msgid ""
+"Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
+"the eldest known smithy."
 msgstr ""
-"ハラルドシャインにある、\n"
-"いまや崩れた最古の工房、\n"
-"『古鍛冶炉』の戸口の碑文"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
-msgid "The Barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels."
+msgid ""
+"The Barbarian metal workshop can make bread paddles, felling axes, fire "
+"tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
+"and shovels."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "The Barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons."
+msgid ""
+"The Barbarian metal workshop is the basic production site in a series of "
+"three buildings and creates all the tools that Barbarians need. The others "
+"are for weapons."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce each tool in about %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce each "
+"tool in about %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it’s time for the next shift!’"
+msgid ""
+"‘Let the first one drive away the hunger, the second one put you at ease; "
+"when you have swallowed up your third one, it’s time for the next shift!’"
 msgstr ""
-"「一杯が飢えを癒やし\n"
-"　二杯にくつろぐ\n"
-"　三杯飲んだら次の交代時間！」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Widespread toast among miners"
-msgstr "鉱夫のあいだで広まった乾杯"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
-msgid "The micro brewery produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines."
+msgid ""
+"The micro brewery produces beer of the lower grade. This beer is a vital "
+"component of the snacks that inns and big inns prepare for miners in deep "
+"mines."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, this building can produce beer in about %s on average."
+msgid ""
+"If all needed wares are delivered in time, this building can produce beer in"
+" about %s on average."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Stonemason
 #: ../../tribes/workers/barbarians/stonemason/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
@@ -876,52 +904,58 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:4
 msgctxt "barbarians_building"
-msgid "‘He who can grow two trees where normally only one will grow exceeds the most important general!’"
+msgid ""
+"‘He who can grow two trees where normally only one will grow exceeds the "
+"most important general!’"
 msgstr ""
-"「普通は木の一本しか育たぬ土地に\n"
-"　二本を育てるものは、\n"
-"　大将軍にもまさるだろう！」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Chat’Karuth in a conversation with a Ranger"
-msgstr "チャ・カルーの植樹小屋との会話より"
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:19
 msgctxt "barbarians_building"
-msgid "The ranger’s hut needs free space within the work area to plant the trees."
+msgid ""
+"The ranger’s hut needs free space within the work area to plant the trees."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:24
 msgctxt "barbarians_building"
-msgid "The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again."
+msgid ""
+"The ranger needs %s to plant a tree, not counting the time he needs to reach"
+" the destination and go home again."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "「われわれは屋根を育てる」"
+msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the Guild of Gardeners"
-msgstr "カヤ農夫ギルドのスローガン"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
-msgid "The reed yard cultivates reed that serves two different purposes for the Barbarian tribe."
+msgid ""
+"The reed yard cultivates reed that serves two different purposes for the "
+"Barbarian tribe."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
 msgctxt "barbarians_building"
-msgid "Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."
+msgid ""
+"Thatch reed is the traditional material for roofing, and it is woven into "
+"the extremely durable cloth that they use for their ships’ sails."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -933,24 +967,24 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "The war mill produces all the axes that the Barbarians use for warfare."
+msgid ""
+"The war mill produces all the axes that the Barbarians use for warfare."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The Barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an ax workshop."
+msgid ""
+"The Barbarian war mill is their most advanced production site for weapons. "
+"As such it needs to be upgraded from an ax workshop."
 msgstr ""
 
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
-msgid "All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."
+msgid ""
+"All weapons require the same time for making, but the consumption of the "
+"same raw materials increases from step to step. The last two need gold."
 msgstr ""
-"すべての武器は、\n"
-"つくるために同じ時間がかかりますが、\n"
-"原材料の消費はだんだん増加します。\n"
-"最後の二つの斧は金を必要とします。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
@@ -961,20 +995,18 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink.’"
+msgid ""
+"‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
+"and lets the earth drink.’"
 msgstr ""
-"「ああ生命の源のなんと甘いこと\n"
-"　空から降り注ぎ\n"
-"　大地を潤す」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
 msgctxt "barbarians_building"
-msgid "Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat’Karuth’s reign."
+msgid ""
+"Song written by Sigurd the Bard<br>when the first rain fell after the Great "
+"Drought in the 21st year of Chat’Karuth’s reign."
 msgstr ""
-"吟遊詩人シグルドが\n"
-"チャ・カルー治世21年の大干ばつ後にはじめての雨が降った時に\n"
-"書いた歌"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -985,13 +1017,17 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Breeds cute and helpful donkeys for adding them to the transportation system."
+msgid ""
+"Breeds cute and helpful donkeys for adding them to the transportation "
+"system."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Donkey Breeder
 #: ../../tribes/workers/empire/donkeybreeder/helptexts.lua:3
 msgctxt "empire_worker"
-msgid "Breeds cute and helpful donkeys for adding them to the transportation system."
+msgid ""
+"Breeds cute and helpful donkeys for adding them to the transportation "
+"system."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1009,17 +1045,15 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Stonemason
 #: ../../tribes/workers/empire/stonemason/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr "岩から、花崗岩の原石を切り出します。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
@@ -1035,7 +1069,6 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:17
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Trains soldiers in ‘Attack’."
 msgstr "兵士を訓練します。"
@@ -1065,18 +1098,15 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘No better friend you have in battle than the enemy’s blow that misses.’"
+msgid ""
+"‘No better friend you have in battle than the enemy’s blow that misses.’"
 msgstr ""
-"「敵の打ち損じ\n"
-"　同様に、\n"
-"　戦いに親友は\n"
-"　ありえない」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "有名な教官、ナイトハルトの開始の言葉"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:14
@@ -1087,34 +1117,32 @@ msgstr "兵士を訓練します。"
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/empire/arena/helptexts.lua:17
 #: ../../tribes/buildings/trainingsites/empire/colosseum/helptexts.lua:17
-#, fuzzy
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Evade’."
 msgstr "兵士を訓練します。"
 
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected."
+msgid ""
+"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
+"remain totally unaffected."
 msgstr ""
-"「回避」は、兵士が敵に打たれないようにして、\n"
-"影響をまったく受けないようになる機会を\n"
-"増やします。"
 
 #: ../../tribes/buildings/trainingsites/empire/arena/helptexts.lua:19
 #: ../../tribes/buildings/trainingsites/empire/colosseum/helptexts.lua:19
-#, fuzzy
 msgctxt "empire_building"
-msgid "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected."
+msgid ""
+"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
+"remain totally unaffected."
 msgstr ""
-"「回避」は、兵士が敵に打たれないようにして、\n"
-"影響をまったく受けないようになる機会を\n"
-"増やします。"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:21
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:21
 msgctxt "barbarians_building"
-msgid "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."
+msgid ""
+"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
+"initial level."
 msgstr ""
 
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
@@ -1126,29 +1154,24 @@ msgstr[0] ""
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %1$s and %2$s on average."
+msgid ""
+"If all needed wares are delivered in time, a battle arena can train evade "
+"for one soldier from 0 to the highest level in %1$s and %2$s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:3
 msgctxt "barbarians_building"
-msgid "‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’"
+msgid ""
+"‘He who is strong shall neither forgive nor forget, but revenge injustice "
+"suffered – in the past and for all future.’"
 msgstr ""
-"「強い者は\n"
-"許すことも\n"
-"忘れることも\n"
-"しない。\n"
-"だが、受けた\n"
-"不当には\n"
-"復讐をせよ\n"
-"――これまでと\n"
-"将来のために」"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Chief Chat’Karuth in a speech to his army."
-msgstr "長チャ・カルーの彼の軍隊への演説。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:14
@@ -1162,10 +1185,14 @@ msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr ""
 
-#. TRANSLATORS: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
+#. TRANSLATORS: Performance helptext for a building. Placeholders are for "4
+#. minutes" and "40 seconds"
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 msgctxt "barbarians_building"
-msgid "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average."
+msgid ""
+"If all needed wares are delivered in time, a training camp can train one new"
+" soldier in attack and health to the final level in %1$s and %2$s on "
+"average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1173,7 +1200,9 @@ msgstr ""
 #: ../../tribes/buildings/trainingsites/empire/colosseum/helptexts.lua:24
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:24
 msgctxt "empire_building"
-msgid "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."
+msgid ""
+"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
+"level with which they came."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1216,28 +1245,28 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Warehouses store soldiers, wares and tools."
-msgstr "兵士のための武器と労働者のための道具を、つくります。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Warehouses store soldiers, wares and tools."
-msgstr "兵士のための武器と労働者のための道具を、つくります。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
-#, fuzzy
 msgctxt "empire_building"
 msgid "Warehouses store soldiers, wares and tools."
-msgstr "兵士のための武器と労働者のための道具を、つくります。"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Although this ship ran aground, it still serves as accommodation for your people. It also stores your wares and tools."
+msgid ""
+"Although this ship ran aground, it still serves as accommodation for your "
+"people. It also stores your wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1264,9 +1293,8 @@ msgid "Lore"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:242
-#, fuzzy
 msgid "General"
-msgstr "カヤ農夫"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:243
 msgid "Purpose:"
@@ -1310,7 +1338,8 @@ msgstr ""
 msgid "%1$s from: %2$s"
 msgstr ""
 
-#. TRANSLATORS: Heading in the building help for wares that a building accepts (e.g. wheat for a mill).
+#. TRANSLATORS: Heading in the building help for wares that a building accepts
+#. (e.g. wheat for a mill).
 #: ../../tribes/scripting/help/building_help.lua:324
 msgid "Incoming:"
 msgstr ""
@@ -1321,9 +1350,8 @@ msgstr ""
 
 #. TRANSLATORS: This is a verb (The miner mines)
 #: ../../tribes/scripting/help/building_help.lua:340
-#, fuzzy
 msgid "Mines:"
-msgstr "鉱夫"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:360
 msgid "Produces:"
@@ -1342,11 +1370,11 @@ msgid "Dependencies"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:422
-#, fuzzy
 msgid "Health Training"
-msgstr "回避訓練:"
+msgstr ""
 
-#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
 #: ../../tribes/scripting/help/building_help.lua:423
 #: ../../tribes/scripting/help/building_help.lua:437
 #: ../../tribes/scripting/help/building_help.lua:449
@@ -1362,32 +1390,28 @@ msgstr ""
 #: ../../tribes/scripting/help/building_help.lua:439
 #: ../../tribes/scripting/help/building_help.lua:451
 #: ../../tribes/scripting/help/building_help.lua:464
-#, fuzzy
 msgid "Soldiers:"
-msgstr "兵士"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:435
-#, fuzzy
 msgid "Attack Training"
-msgstr "回避訓練:"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:438
 msgid "Attack"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:448
-#, fuzzy
 msgid "Defense Training"
-msgstr "回避訓練:"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:450
 msgid "Defense"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:461
-#, fuzzy
 msgid "Evade Training"
-msgstr "回避訓練:"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:463
 msgid "Evade"
@@ -1398,11 +1422,11 @@ msgstr ""
 msgid "%1$dx %2$s"
 msgstr ""
 
-#. TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
+#. TRANSLATORS: This is the header for the "Building" section in the building
+#. help, containing size info, buildcost etc.
 #: ../../tribes/scripting/help/building_help.lua:508
-#, fuzzy
 msgid "Building"
-msgstr "建築人"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:512
 msgid "Mine plot"
@@ -1418,14 +1442,12 @@ msgid "Space required:"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:514
-#, fuzzy
 msgid "Port plot"
-msgstr "港"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:517
-#, fuzzy
 msgid "Small plot"
-msgstr "小監視塔"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:519
 msgid "Medium plot"
@@ -1442,7 +1464,9 @@ msgid "Unknown"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:532
-msgid "This building can either be built directly or obtained by enhancing another building."
+msgid ""
+"This building can either be built directly or obtained by enhancing another "
+"building."
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:538
@@ -1473,12 +1497,12 @@ msgstr ""
 msgid "If enhanced, dismantle yields:"
 msgstr ""
 
-#. TRANSLATORS: This is a heading for the resources that you will get back when you dismantle a building of this type. What dismantling will give you.
+#. TRANSLATORS: This is a heading for the resources that you will get back
+#. when you dismantle a building of this type. What dismantling will give you.
 #: ../../tribes/scripting/help/building_help.lua:620
 #: ../../tribes/scripting/help/building_help.lua:661
-#, fuzzy
 msgid "Dismantle yields:"
-msgstr "解体地"
+msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:670
 msgid "Can be enhanced to:"
@@ -1531,12 +1555,14 @@ msgstr ""
 msgid "Text needed"
 msgstr "テキストなし"
 
-#. TRANSLATORS: Lore author (source for a quote) helptext for a building - it hasn't been written yet.
+#. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
+#. hasn't been written yet.
 #: ../../tribes/scripting/help/global_helptexts.lua:24
 msgid "Source needed"
 msgstr "出典なし"
 
-#. TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
+#. TRANSLATORS: Performance helptext for a building - it hasn't been written
+#. yet.
 #: ../../tribes/scripting/help/global_helptexts.lua:46
 msgid "Calculation needed"
 msgstr "計算なし"
@@ -1547,157 +1573,183 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../tribes/wares/armor/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "Basic armor for Empire soldiers. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 1 to level 2."
-msgstr ""
-"ヘルムは戦士を保護する基本道具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル０から体力レベル１に訓練するために――食物とともに――使用されます。"
+msgid ""
+"Basic armor for Empire soldiers. It is produced in the armor smithy and used"
+" in the training camp – together with food – to train soldiers from health "
+"level 1 to level 2."
+msgstr "帝国の兵士の基本防具です。\n　防具工房で製造され、訓練場で、兵士の体力レベル０から体力レベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../tribes/wares/armor_chain/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "The chain armor is a medium armor for Empire soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3."
-msgstr ""
-"ウォーヘルムはバーバリアンの戦士の強化防具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル１から体力レベル２に訓練するために――食物とともに――使用されます。"
+msgid ""
+"The chain armor is a medium armor for Empire soldiers. It is produced in an "
+"armor smithy and used in a training camp – together with food – to train "
+"soldiers from health level 2 to level 3."
+msgstr "チェインアーマーは、帝国の兵士の中級鎧です。\n　防具工房で製造され、訓練場で兵士の体力レベル２を体力レベル３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../tribes/wares/armor_gilded/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "The gilded armor is the strongest armor an Empire soldier can have. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4."
+msgid ""
+"The gilded armor is the strongest armor an Empire soldier can have. It is "
+"produced in the armor smithy and used in the training camp – together with "
+"food – to train soldiers from health level 3 to level 4."
 msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../tribes/wares/armor_helmet/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1."
-msgstr ""
-"ヘルムは戦士を保護する基本道具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル０から体力レベル１に訓練するために――食物とともに――使用されます。"
+msgid ""
+"The helmet is the basic defense of a warrior. It is produced in an armor "
+"smithy. In combination with a wooden spear, it is the equipment to fit out "
+"young soldiers. Helmets are also used in training camps – together with food"
+" – to train soldiers from health level 0 to level 1."
+msgstr "ヘルムは戦士の基本防具です。\n　防具工房で製造されます。ウッドランスとともに、若い兵士が着用するための装備です。ヘルムは、訓練場で兵士の体力レベル０を体力レベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../tribes/wares/ax/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "The ax is the basic weapon of the Barbarians. All young soldiers are equipped with it."
-msgstr "アックスはバーバリアンの基本武器です。すべての若い兵士はそれを装備します。"
+msgid ""
+"The ax is the basic weapon of the Barbarians. All young soldiers are "
+"equipped with it."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../tribes/wares/ax_battle/helptexts.lua:4
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax factory. Only trained warriors are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4."
+msgid ""
+"This is a dangerous weapon the Barbarians are able to produce. It is "
+"produced in the ax workshop. Only trained warriors are able to wield such a "
+"weapon. It is used – together with food – in the training camp to train "
+"soldiers from attack level 3 to 4."
 msgstr ""
-"これはバーバリアンが製造することができる危険な武器です。斧工房で製造されます。訓練された戦士だけが、そのような武器を扱うことができます。\n"
-"　訓練場で兵士を攻撃レベル３から４に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2)."
+msgid ""
+"The broad ax is produced by the ax workshop and the war mill. It is used in "
+"the training camp – together with food – to train warriors with a "
+"fundamental fighting knowledge from attack level 1 to attack level 2."
 msgstr ""
-"ブロードアックスは斧工房と戦斧工房で製造されます。\n"
-"　訓練施設（訓練場と闘技場）で、戦士を基本的な戦いの知識（攻撃レベル１からレベル２に）で訓練するために――食物とともに――消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../tribes/wares/ax_bronze/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "The bronze ax is considered a weapon that is hard to handle. Only skilled warriors can use it. It is produced at the war mill and used in the training camp (it trains – together with food – from attack level 2 to level 3)."
+msgid ""
+"The bronze ax is considered a weapon that is hard to handle. Only skilled "
+"warriors can use it. It is produced at the war mill and used in the training"
+" camp (it trains – together with food – from attack level 2 to level 3)."
 msgstr ""
-"ブロンズアックスはもっとも取扱いが難しい武器だと言われています。熟練の戦士のみがこれを扱うことができます。\n"
-"　戦斧工房で製造され、（――食物とともに――攻撃レベル２から３に訓練する）訓練施設で使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in axfactories and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
+msgid ""
+"Young warriors are proud to learn to fight with this powerful weapon. It is "
+"heavier and sharper than the ordinary ax. It is produced in ax workshops and"
+" war mills. In training camps, it is used – together with food – to train "
+"soldiers from attack level 0 to level 1."
 msgstr ""
-"若い戦士は、この強力な武器で戦いを学ぶことを誇りに思います。それは、普通の斧よりも重く、より鋭いです。\n"
-"　斧工房と戦斧工房で製造されます。訓練場で兵士を攻撃レベル０からレベル１まで訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../tribes/wares/ax_warriors/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few warriors ever were able to handle those huge and powerful axes. It is produced in a war mill and used – together with food – in a training camp to train soldiers from attack level 4 to level 5."
+msgid ""
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
+"produced in a war mill and used – together with food – in a training camp to"
+" train soldiers from attack level 4 to level 5."
 msgstr ""
-"これはバーバリアンが製造することができる危険な武器です。斧工房で製造されます。訓練された戦士だけが、そのような武器を扱うことができます。\n"
-"　訓練場で兵士を攻撃レベル３から４に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../tribes/wares/basket/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "This basket is needed by the vine farmer for harvesting the grapes. It is produced by the toolsmith."
-msgstr ""
+msgid ""
+"This basket is needed by the vine farmer for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr "このかごは、ブドウ農夫がブドウを収穫するために必要とされます。\n　道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../tribes/wares/beer/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "Beer is produced in micro breweries and used in inns and big inns to produce snacks."
-msgstr "ビールはビール工房で製造され、軽食をつくるために食堂と大食堂で使用されます。"
+msgid ""
+"Beer is produced in micro breweries and used in inns and big inns to produce"
+" snacks."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../tribes/wares/beer/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "This beer is produced in a brewery out of wheat and water. It is consumed by miners in coal and iron mines."
+msgid ""
+"This beer is produced in a brewery out of wheat and water. It is consumed by"
+" miners in coal and iron mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Strong Beer
 #: ../../tribes/wares/beer_strong/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "Only this beer is acceptable for the warriors in a battle arena. Some say that the whole power of the Barbarians lies in this ale. It helps to train the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big inns to prepare meals."
+msgid ""
+"Only this beer is acceptable for the warriors in a battle arena. Some say "
+"that the whole power of the Barbarians lies in this ale. It helps to train "
+"the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
+"inns to prepare meals."
 msgstr ""
-"このビールは闘技場の戦士が受け取るだけです。この蒸留酒はバーバリアンの力の源だと言われています。\n"
-"　兵士の回避レベルを０から１また２に訓練するために役立ちます。ストロングビールは食事を用意するために大食堂でも使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Blackroots are a special kind of root produced at blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread."
-msgstr ""
+msgid ""
+"Blackroots are a special kind of root produced at blackroot farms and "
+"processed in mills. The Atlanteans like their strong taste and use their "
+"flour for making bread."
+msgstr "甘草は甘草園で作られる特殊な根っこで、製粉所で粉に挽かれます。アトラスはこの強い風味を好み、パンを作る粉として使用します。"
 
 #. TRANSLATORS: Helptext for a ware: Blackroot Flour
 #: ../../tribes/wares/blackroot_flour/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread."
-msgstr ""
+msgid ""
+"Blackroot Flour is produced in mills out of blackroots. It is used in "
+"bakeries to make a tasty bread."
+msgstr "甘草粉は製粉所で甘草から生産されます。パン工房で美味しいパンをつくるために使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Blackwood
 #: ../../tribes/wares/blackwood/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener."
+msgid ""
+"This fire-hardened wood is as hard as iron and it is used for several "
+"buildings. It is produced out of logs in the wood hardener."
 msgstr ""
-"この火で硬化させた木材は、鉄と同じくらい硬く、そして複数の建物のために使用されます。\n"
-"　製材所で丸太を使用して製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../tribes/wares/bread_atlanteans/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This tasty bread is made in bakeries out of cornmeal, blackroot flour and water. It is appreciated as basic food by miners, scouts and soldiers in training sites (labyrinth and dungeon)."
-msgstr ""
+msgid ""
+"This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
+"water. It is appreciated as basic food by miners, scouts and soldiers in "
+"training sites (labyrinth and dungeon)."
+msgstr "この美味しいパンは、トウモロコシ粉、甘草粉、水を使用して生産されます。\n　鉱夫、偵察兵、訓練施設（アリーナ、コロッセオ、訓練場）の兵士のための基本食として認識されています。"
 
 #. TRANSLATORS: Helptext for a ware: Pitta Bread
 #: ../../tribes/wares/bread_barbarians/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "The Barbarian bakers are best in making this flat and tasty pitta bread. It is made out of wheat and water following a secret recipe. Pitta bread is used in the taverns, inns and big inns to prepare rations, snacks and meals. It is also consumed at training sites (training camp and battle arena)."
+msgid ""
+"The Barbarian bakers are best in making this flat and tasty pitta bread. It "
+"is made out of wheat and water following a secret recipe. Pitta bread is "
+"used in the taverns, inns and big inns to prepare rations, snacks and meals."
+" It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
-"バーバリアンのパン職人はこの平たく美味しいピタパンをつくることに長けています。それは小麦と水を使用して、秘密のレシピに従ってつくられます。\n"
-"　ピタパンは、糧食、軽食、食事をつくるために酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../tribes/wares/bread_empire/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "The bakers of the Empire make really tasty bread out of flour and water. It is used in taverns and inns to prepare rations and meals. Bread is also consumed at the training sites (arena, colosseum, training camp)."
-msgstr ""
-"バーバリアンのパン職人はこの平たく美味しいピタパンをつくることに長けています。それは小麦と水を使用して、秘密のレシピに従ってつくられます。\n"
-"　ピタパンは、糧食、軽食、食事をつくるために酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
+msgid ""
+"The bakers of the Empire make really tasty bread out of flour and water. It "
+"is used in taverns and inns to prepare rations and meals. Bread is also "
+"consumed at the training sites (arena, colosseum, training camp)."
+msgstr "帝国のパン職人は、小麦粉と水を使用してほんとうに美味しいパンをつくります。\n　酒場と食堂で、糧食と食事を用意するために使用されます。パンは訓練施設（アリーナ、コロッセオ、訓練場）でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../tribes/wares/bread_paddle/helptexts.lua:4
@@ -1719,75 +1771,90 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../tribes/wares/bread_paddle/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Bread paddles are produced in the metal workshop like all other tools (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Bread paddles are produced in the metal workshop like all other tools (but "
+"cease to be produced by the building if it is enhanced to an ax workshop and"
+" war mill)."
 msgstr ""
-"パンパドルは、パン職人の道具であり、それぞれのパン職人が自分専用のものをもちます。\n"
-"　ほかのすべての道具と同様に、鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../tribes/wares/buckets/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr ""
+msgstr "養魚番のための大きなバケツです――道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "Cloth is needed for Barbarian ships. It is produced out of thatch reed."
+msgid ""
+"Cloth is needed for Barbarian ships. It is produced out of thatch reed."
 msgstr ""
-"布はバーバリアンの船に必要です。\n"
-"　カヤを使用して製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../tribes/wares/cloth/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "Cloth is needed to build several buildings. It is also consumed in the armor smithy."
-msgstr ""
+msgid ""
+"Cloth is needed to build several buildings. It is also consumed in the armor"
+" smithy."
+msgstr "布は複数の建物を建設するために必要とされます。防具工房でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:4
 msgctxt "ware"
-msgid "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
+msgid ""
+"Coal is mined in coal mines or produced out of logs by a charcoal kiln."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal."
+msgid ""
+"The Atlantean fires in smelting works, armor smithies and weapon smithies "
+"are fed with coal."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "The fires of the Barbarians are usually fed with coal. Consumers are several buildings: lime kiln, smelting works, ax workshop, war mill, and helm smithy."
+msgid ""
+"The fires of the Barbarians are usually fed with coal. Consumers are several"
+" buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
+"smithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal."
+msgid ""
+"The fires of the Empire smelting works, armor smithies and weapon smithies "
+"are usually fed with coal."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../tribes/wares/corn/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This corn is processed in the mill into fine cornmeal that every Atlantean baker needs for a good bread. Also horse and spider farms need to be provided with corn."
-msgstr ""
+msgid ""
+"This corn is processed in the mill into fine cornmeal that every Atlantean "
+"baker needs for a good bread. Also horse and spider farms need to be "
+"provided with corn."
+msgstr "このトウモロコシは、製粉所で、アトラスのすべてのパン職人がおいしいパンをつくるために必要とする、トウモロコシ粉に破砕するために消費されます。また馬牧場と蜘蛛園もトウモロコシの供給を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Cornmeal
 #: ../../tribes/wares/cornmeal/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Cornmeal is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries."
-msgstr ""
+msgid ""
+"Cornmeal is produced in a mill out of corn and is one of three parts of the "
+"Atlantean bread produced in bakeries."
+msgstr "トウモロコシ粉は製粉所で生産されます。これはパン工房で生産されるアトラスのパンをつくる三つの材料のうちの一つです。"
 
 #. TRANSLATORS: Helptext for a ware: Diamond
 #: ../../tribes/wares/diamond/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine."
-msgstr ""
+msgid ""
+"These wonderful diamonds are used to build some exclusive buildings. They "
+"are mined in a crystal mine."
+msgstr "この素晴らしいダイヤモンドは、いくつかの高級な建物を建設するために使用されます。\n　水晶鉱山で採掘されます。"
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../tribes/wares/felling_ax/helptexts.lua:4
@@ -1797,12 +1864,11 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../tribes/wares/felling_ax/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Felling axes are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Felling axes are produced in the metal workshop (but cease to be produced by"
+" the building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
-"大鎌は、農夫の道具です。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../tribes/wares/felling_ax/helptexts.lua:8
@@ -1813,8 +1879,9 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
-msgid "Fire tongs are the tools of the smelter, who works in the smelting works."
-msgstr ""
+msgid ""
+"Fire tongs are the tools of the smelter, who works in the smelting works."
+msgstr "火ばさみは製錬所で働く製錬人の道具です。道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:6
@@ -1834,41 +1901,43 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Produced by the metal works (but they cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Produced by the metal workshop (but they cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
-"大鎌は、農夫の道具です。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../tribes/wares/fish/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts."
-msgstr ""
+msgid ""
+"Fish is one of the biggest food resources of the Atlanteans. It has to be "
+"smoked in a smokery before being delivered to mines, training sites and "
+"scouts."
+msgstr "魚は、アトラスの最大の食料源の一つです。鉱山、訓練場、偵察小屋に運ぶ前に、燻製工房で燻製にする必要があります。"
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../tribes/wares/fish/helptexts.lua:6
 msgctxt "barbarians_ware"
-msgid "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. It is used in the taverns, inns and big inns and at the training sites (training camp and battle arena)."
+msgid ""
+"Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
+"It is used in the taverns, inns and big inns and at the training sites "
+"(training camp and battle arena)."
 msgstr ""
-"ピタパンと肉にならび、魚もバーバリアンのための食物です。\n"
-"　酒場、食堂、大食堂、訓練施設（訓練場と闘技場）で使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../tribes/wares/fish/helptexts.lua:8
-#, fuzzy
 msgctxt "empire_ware"
-msgid "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
-"ピタパンと肉にならび、魚もバーバリアンのための食物です。\n"
-"　酒場、食堂、大食堂、訓練施設（訓練場と闘技場）で使用されます。"
+msgid ""
+"Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
+"used in taverns, inns and training sites (arena, colosseum, training camp)."
+msgstr "ピタパンと肉にならび、魚も帝国人のための食物です。\n　魚は酒場、食堂、訓練施設（アリーナ、コロッセオ、訓練場）で使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../tribes/wares/fishing_net/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "魚網は漁師が使用します。\n　道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../tribes/wares/fishing_rod/helptexts.lua:4
@@ -1878,59 +1947,69 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../tribes/wares/fishing_rod/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "They are one of the basic tools produced in a metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"They are one of the basic tools produced in a metal workshop (but cease to "
+"be produced by the building if it is enhanced to an ax workshop and war "
+"mill)."
 msgstr ""
-"大鎌は、農夫の道具です。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Flour
 #: ../../tribes/wares/flour/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "Flour is produced by the mill out of wheat and is needed in the bakery to produce the tasty Empire bread."
-msgstr ""
+msgid ""
+"Flour is produced by the mill out of wheat and is needed in the bakery to "
+"produce the tasty Empire bread."
+msgstr "小麦粉は、製粉所で小麦から生産され、パン工房で帝国人の美味しいパンをつくるために必要とされます。"
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:4
 msgctxt "ware"
-msgid "Gold is the most valuable of all metals, and it is obtained out of gold ore in a smelting works."
+msgid ""
+"Gold is the most valuable of all metals, and it is obtained out of gold ore "
+"in a smelting works."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "Gold is used by the armor smithy, the weapon smithy and the gold spinning mill."
+msgid ""
+"Gold is used by the armor smithy, the weapon smithy and the gold spinning "
+"mill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Only very important things are embellished with gold. It is used as a precious building material and to produce different axes (in the war mill) and different parts of armor (in the helm smithy)."
+msgid ""
+"Only very important things are embellished with gold. It is used as a "
+"precious building material and to produce different axes (in the war mill) "
+"and different parts of armor (in the helm smithy)."
 msgstr ""
-"金は、すべての金属のなかで最も貴重です。非常に重要なものだけに、それがあしらわれます。それは、製錬所で金鉱石から得ることができます。\n"
-"　貴重な建築材料として、そして、（戦斧工房で）別々の斧を、（兜工房で）別々の鎧を製造するために使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Armor and weapons are embellished with gold in the armor smithy and the weapon smithy."
+msgid ""
+"Armor and weapons are embellished with gold in the armor smithy and the "
+"weapon smithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../tribes/wares/gold_ore/helptexts.lua:4
-#, fuzzy
 msgctxt "ware"
-msgid "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor."
-msgstr ""
-"金鉱石は金鉱山で採掘されます。\n"
-"　製錬所で製錬されて金になります。金は、武器や鎧の製造や貴重な建築材料として使用されます。"
+msgid ""
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
+msgstr "金鉱石は金鉱山で採掘されます。\n　製錬所で製錬されて金になります。金は、武器や鎧の製造や貴重な建築材料として使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../tribes/wares/gold_thread/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This thread, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill."
+msgid ""
+"This thread, made of gold by the gold spinning mill, is used for weaving the"
+" exclusive golden tabard in the weaving mill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Granite
@@ -1960,17 +2039,18 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Grape
 #: ../../tribes/wares/grape/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery."
-msgstr ""
+msgid ""
+"These grapes are the base for a tasty wine. They are harvested in a vineyard"
+" and processed in a winery."
+msgstr "ブドウは美味しいワインの元になります。\n　ブドウ園で生産され、ワイナリーで消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Grout
 #: ../../tribes/wares/grout/helptexts.lua:4
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Granite can be processed into grout which provides a solid, non burning building material. Grout is produced in a lime kiln."
+msgid ""
+"Granite can be processed into grout which provides a solid, non burning "
+"building material. Grout is produced in a lime kiln."
 msgstr ""
-"原石は、硬い不燃性の建築材料であるモルタルに加工することができます。\n"
-"　モルタルは石灰釜で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:4
@@ -1981,83 +2061,92 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith."
+msgid ""
+"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the toolsmith."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith."
+msgid ""
+"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the toolsmith."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
+"sure you’ve always got some in reserve! They are one of the basic tools "
+"produced at the metal workshop (but cease to be produced by the building if "
+"it is enhanced to an ax workshop and war mill)."
 msgstr ""
-"ハンマーは、必要不可欠の道具です。それは地質学者、建築人、鍛冶職人たち、兜職人が必要とします。常に予備をいくつか持つようにしてください！\n"
-"　鍛冶工房で製造される基本道具です（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../tribes/wares/helmet/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "A helmet is a basic tool to protect warriors. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1."
+msgid ""
+"A helmet is a basic tool to protect warriors. It is produced in the helm "
+"smithy and used in the training camp – together with food – to train "
+"soldiers from health level 0 to level 1."
 msgstr ""
-"ヘルムは戦士を保護する基本道具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル０から体力レベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../tribes/wares/helmet_mask/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "This is the most enhanced Barbarian armor. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 2 to level 3."
+msgid ""
+"This is the most enhanced Barbarian armor. It is produced in the helm smithy"
+" and used in the training camp – together with food – to train soldiers from"
+" health level 2 to level 3."
 msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../tribes/wares/helmet_warhelm/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "A warhelm is an enhanced armor for Barbarian warriors. It is produced in a helm smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2."
+msgid ""
+"A warhelm is an enhanced armor for Barbarian warriors. It is produced in a "
+"helm smithy and used in a training camp – together with food – to train "
+"soldiers from health level 1 to level 2."
 msgstr ""
-"ウォーヘルムはバーバリアンの戦士の強化防具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル１から体力レベル２に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../tribes/wares/hook_pole/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith."
-msgstr ""
+msgid ""
+"This hook pole is used by the smoker to suspend all the meat and fish from "
+"the top of the smokery. It is created by the toolsmith."
+msgstr "このかぎ棒は、燻製職人が燻製工房の上の棚に、肉や魚を吊り下げるために使用されます。\n　道具職人によって製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Hunting Bow
 #: ../../tribes/wares/hunting_bow/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr ""
+msgid ""
+"This bow is used by the Atlantean hunter. It is produced by the toolsmith."
+msgstr "この狩猟弓は、アトラスの狩人が使用します。\n　道具職人が製造します。"
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/hunting_spear/helptexts.lua:4
-#, fuzzy
 msgctxt "ware"
-msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."
-msgstr ""
-"この槍は、投げるために丁度良い軽さで、しかも獣を一撃死させるには十分な重さです。狩人のみが使用します。\n"
-"　鍛冶工房で製造されます（ただし戦斧工房に拡張した場合は、製造されなくなります）。"
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal"
+" in one blow. It is only used by hunters."
+msgstr "この槍は、投げるために丁度良い軽さで、しかも獣を一撃死させるには十分な重さです。狩人のみが使用します。"
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/hunting_spear/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Hunting spears are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Hunting spears are produced in the metal workshop (but cease to be produced "
+"by the building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
-"大鎌は、農夫の道具です。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is extracted from iron ore in the smelting works."
-msgstr ""
+msgstr "武器、防具、道具は鉄から製造されます。\n　製錬所で鉄鉱石から取り出されます。"
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:6
@@ -2067,12 +2156,11 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "It is used to produce weapons and tools in the metal workshop, ax workshop, war mill and helm smithy."
+msgid ""
+"It is used to produce weapons and tools in the metal workshop, ax workshop, "
+"war mill and helm smithy."
 msgstr ""
-"鉄は製錬所で鉄鉱石から得ることができます。\n"
-"　鍛冶工房、斧工房、戦斧工房、兜工房で、武器と道具を製造するために使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:10
@@ -2082,147 +2170,181 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../tribes/wares/iron_ore/helptexts.lua:4
-#, fuzzy
 msgctxt "default_ware"
-msgid "Iron ore is mined in iron mines. It is smelted in a smelting works to retrieve the iron."
-msgstr ""
-"鉄鉱石は鉄鉱山で採掘されます。\n"
-"　製錬所で製錬され、鉄をもたらします。"
+msgid ""
+"Iron ore is mined in iron mines. It is smelted in a smelting works to "
+"retrieve the iron."
+msgstr "鉄鉱石は、鉄を得るために製錬所で製錬されることを必要とします。\n　鉄鉱石は鉄鉱山で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../tribes/wares/kitchen_tools/helptexts.lua:4
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "How can one create a meal, snack or ration, if there are no kitchen tools? Be sure to have a metal workshop to produce this basic tool (but it ceases to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"How can one create a meal, snack or ration, if there are no kitchen tools? "
+"Be sure to have a metal workshop to produce this basic tool (but it ceases "
+"to be produced by the building if it is enhanced to an ax workshop and war "
+"mill)."
 msgstr ""
-"料理道具がないならば、どうして食事、軽食、糧食をつくることができるでしょう？\n"
-"　この基本道具を製造するために、鍛冶工房をもつことを忘れないでください（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../tribes/wares/kitchen_tools/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "How can one create a ration or meal if there are no kitchen tools? They are produced in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgid ""
+"How can one create a ration or meal if there are no kitchen tools? They are "
+"produced in a toolsmithy and used in taverns and inns."
+msgstr "料理道具がないならば、どうして食事や糧食をつくることができるでしょう？\n　道具工房で製造され、酒場、食堂で使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:4
-#, fuzzy
 msgctxt "ware"
-msgid "Logs are an important basic building material. They are produced by felling trees."
+msgid ""
+"Logs are an important basic building material. They are produced by felling "
+"trees."
 msgstr ""
-"原石はバーバリアンの基本建築材料です。\n"
-"　採石場と花崗岩鉱山で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "Atlanteans use logs also as the base for planks, which are used in nearly every building. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work."
+msgid ""
+"Atlanteans use logs also as the base for planks, which are used in nearly "
+"every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
+"the smokery also need logs for their work."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Barbarian lumberjacks fell the trees; rangers take care of the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal kiln for the production of coal. The wood hardener refines logs into blackwood by hardening them with fire."
+msgid ""
+"Barbarian lumberjacks fell the trees; rangers take care of the supply of "
+"trees. Logs are also used in the metal workshop to build basic tools, and in"
+" the charcoal kiln for the production of coal. The wood hardener refines "
+"logs into blackwood by hardening them with fire."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Imperial lumberjacks fell the trees; foresters take care of the supply of trees. Logs are also used by the charcoal kiln, the toolsmithy and the sawmill."
+msgid ""
+"Imperial lumberjacks fell the trees; foresters take care of the supply of "
+"trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
+"sawmill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Marble
 #: ../../tribes/wares/marble/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as a building material and gets chiseled into marble columns in the stonemason’s house."
-msgstr ""
+msgid ""
+"Marble is the beautiful stone which is cut out of the mountains or produced "
+"in a quarry. Marble is used as a building material and gets chiseled into "
+"marble columns in the stonemason’s house."
+msgstr "大理石は、山から切り出されるか、採石場で生産される、美しい石です。大理石は建築材料として使用され、石工小屋で大理石の石柱につくり変えられます。"
 
 #. TRANSLATORS: Helptext for a ware: Marble Column
 #: ../../tribes/wares/marble_column/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "Marble columns represent the high culture of the Empire, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house."
-msgstr ""
+msgid ""
+"Marble columns represent the high culture of the Empire, so they are needed "
+"for nearly every larger building. They are produced out of marble at a "
+"stonemason’s house."
+msgstr "大理石の石柱は、帝国の高度な文化をあらわし、ほぼすべての大規模な建物に必要とされます。\n　石工小屋で大理石を使用して製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../tribes/wares/meal/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. This substantial food is exactly what workers in a deeper mine need."
-msgstr "食事はピタパン、ストロングビール、魚／肉を使用して大食堂でつくられます。このたっぷりの食物は、より深い鉱山の鉱夫がまさに必要としているものです。"
+msgid ""
+"A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
+"This substantial food is exactly what workers in a deeper mine need."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../tribes/wares/meal/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "A real meal is made in inns out of bread and fish/meat. It satisfies the needs of miners in deep mines."
-msgstr ""
+msgid ""
+"A real meal is made in inns out of bread and fish/meat. It satisfies the "
+"needs of miners in deep mines."
+msgstr "本来の食事は、パン、魚／肉を使用して食堂でつくられます。それは、深い鉱山で鉱夫の要求を満たします。"
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:4
 msgctxt "ware"
-msgid "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."
+msgid ""
+"Meat contains a lot of energy, and it is obtained from wild game taken by "
+"hunters."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "Meat has to be smoked in a smokery before being delivered to mines and training sites (dungeon and labyrinth)."
+msgid ""
+"Meat has to be smoked in a smokery before being delivered to mines and "
+"training sites (dungeon and labyrinth)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Meat is used in the taverns, inns and big inns to prepare rations, snacks and meals for the miners. It is also consumed at the training sites (training camp and battle arena)."
+msgid ""
+"Meat is used in the taverns, inns and big inns to prepare rations, snacks "
+"and meals for the miners. It is also consumed at the training sites "
+"(training camp and battle arena)."
 msgstr ""
-"肉にはたくさんのエネルギーが含まれます。\n"
-"　狩人によって生産され、鉱夫のための糧食、軽食、食事を用意するために、酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:10
-#, fuzzy
 msgctxt "empire_ware"
-msgid "Meat can also be obtained as pork from piggeries. It is used in the inns and taverns to prepare lunch for the miners and is consumed at the training sites (arena, colosseum, training camp)."
+msgid ""
+"Meat can also be obtained as pork from piggeries. It is used in the inns and"
+" taverns to prepare lunch for the miners and is consumed at the training "
+"sites (arena, colosseum, training camp)."
 msgstr ""
-"肉にはたくさんのエネルギーが含まれます。\n"
-"　狩人によって生産され、鉱夫のための糧食、軽食、食事を用意するために、酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../tribes/wares/milking_tongs/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith."
-msgstr ""
+msgid ""
+"Milking tongs are used by the spider breeder to milk the spiders. They are "
+"produced by the toolsmith."
+msgstr "糸ばさみは、蜘蛛園主が蜘蛛糸を搾り取るために使用されます。\n　道具職人が製造します。"
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../tribes/wares/pick/helptexts.lua:4
 msgctxt "ware"
-msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
-msgstr ""
+msgid ""
+"Picks are used by stonecutters and miners. They are produced by the "
+"toolsmith."
+msgstr "このツルハシは、石工と鉱夫に使用されます。\n　道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../tribes/wares/pick/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Picks are used by stonemasons and miners. They are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Picks are used by stonemasons and miners. They are produced in the metal "
+"workshop (but cease to be produced by the building if it is enhanced to an "
+"ax workshop and war mill)."
 msgstr ""
-"このツルハシは、石工と鉱夫が使用します。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../tribes/wares/pick/helptexts.lua:8
 msgctxt "empire_ware"
-msgid "Picks are used by stonemasons and miners. They are produced by the toolsmith."
-msgstr ""
+msgid ""
+"Picks are used by stonemasons and miners. They are produced by the "
+"toolsmith."
+msgstr "このツルハシは、石工と鉱夫に使用されます。\n　道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
-msgid "Planks are an important building material. They are produced out of logs by the sawmill."
+msgid ""
+"Planks are an important building material. They are produced out of logs by "
+"the sawmill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
+msgid ""
+"The weapon smithy and the shipyard also use planks to produce the different "
+"tridents and mighty ships."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Planks
@@ -2234,26 +2356,26 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Quartz
 #: ../../tribes/wares/quartz/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal mine."
-msgstr ""
+msgid ""
+"These transparent quartz gems are used to build some exclusive buildings. "
+"They are produced in a crystal mine."
+msgstr "この透明な水晶は、いくつかの高級な建物を建設するために使用されます。\n　水晶鉱山で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../tribes/wares/ration/helptexts.lua:4
-#, fuzzy
 msgctxt "ware"
-msgid "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."
+msgid ""
+"A small bite to keep miners strong and working. The scout also consumes "
+"rations on his scouting trips."
 msgstr ""
-"鉱夫が力強く働き続けるための小さなひとかじり。偵察兵も偵察の旅のために糧食を消費します。\n"
-"　糧食は、魚または肉、ピタパンを使用して、酒場、食堂、大食堂で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../tribes/wares/ration/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Rations are produced in a tavern, an inn or a big inn out of fish or meat or pitta bread."
+msgid ""
+"Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
+" pitta bread."
 msgstr ""
-"鉱夫が力強く働き続けるための小さなひとかじり。偵察兵も偵察の旅のために糧食を消費します。\n"
-"　糧食は、魚または肉、ピタパンを使用して、酒場、食堂、大食堂で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../tribes/wares/ration/helptexts.lua:8
@@ -2264,14 +2386,16 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith."
-msgstr ""
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the"
+" toolsmith."
+msgstr "ノコギリは、製材人と道具職人が必要とします。\n　道具工房で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "このノコギリは、製材人が必要とします。\n　道具工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:4
@@ -2293,30 +2417,28 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Scythes are produced by the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Scythes are produced by the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
-"大鎌は、農夫の道具です。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Advanced Shield
 #: ../../tribes/wares/shield_advanced/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "These advanced shields are used by the best soldiers of the Atlanteans. They are produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from Defense level 1 to level 2."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"These advanced shields are used by the best soldiers of the Atlanteans. They"
+" are produced in the armor smithy and used in the labyrinth – together with "
+"food – to train soldiers from Defense level 1 to level 2."
+msgstr "この強化された盾は、最高のアトランティス兵士が使用します。\n　防具工房で製造され、迷宮で兵士を防御レベル１からレベル２に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../tribes/wares/shield_steel/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "This steel shield is produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from defense level 0 to level 1."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"This steel shield is produced in the armor smithy and used in the labyrinth "
+"– together with food – to train soldiers from defense level 0 to level 1."
+msgstr "この鋼鉄製の盾は、防具工房で製造され、迷宮で兵士を防御レベル０からレベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:4
@@ -2327,158 +2449,185 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "Therefore the forester and the blackroot farmer use them. They are produced by the toolsmith."
+msgid ""
+"Therefore the forester and the blackroot farmer use them. They are produced "
+"by the toolsmith."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Therefore the gardener and the ranger use them. Produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill)."
+msgid ""
+"Therefore the gardener and the ranger use them. Produced at the metal "
+"workshop (but cease to be produced by the building if it is enhanced to an "
+"ax workshop and war mill)."
 msgstr ""
-"シャベルは、植物の適切な取扱いに必要です。したがって、カヤ農夫と植樹番がそれを使用します。\n"
-"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Therefore the forester and the vine farmer use them. They are produced by the toolsmith."
+msgid ""
+"Therefore the forester and the vine farmer use them. They are produced by "
+"the toolsmith."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../tribes/wares/smoked_fish/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible."
-msgstr ""
+msgid ""
+"As no Atlantean likes raw fish, smoking it in a smokery is the most common "
+"way to make it edible."
+msgstr "アトラスは生魚を嫌います。燻製工房で燻製にするのが、もっとも一般的な食べ方です。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../tribes/wares/smoked_meat/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves."
-msgstr ""
+msgid ""
+"Smoked meat is made out of meat in a smokery. It is delivered to the mines "
+"and training sites (labyrinth and dungeon) where the miners and soldiers "
+"prepare a nutritious lunch for themselves."
+msgstr "燻製肉は、燻製工房で肉を使用して生産されます。\n　鉱夫と兵士が自分の手で栄養価の高い弁当をとるために、鉱山や訓練施設（迷宮、ダンジョンタワー）に運ばれます。"
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../tribes/wares/snack/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "A bigger morsel than the ration to provide miners in deep mines. It is produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr "深い鉱山の鉱夫に用意するための、糧食よりも大きな食物です。魚／肉、ピタパン、ビールを消費して、食堂と大食堂で生産されます。"
+msgid ""
+"A bigger morsel than the ration to provide miners in deep mines. It is "
+"produced in an inn or a big inn out of fish/meat, pitta bread and beer."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../tribes/wares/spear/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "This spear has an iron spike. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to attack level 1."
+msgid ""
+"This spear has an iron spike. It is produced in a weapon smithy and used in "
+"a training camp – together with food – to train soldiers from attack level 0"
+" to attack level 1."
 msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../tribes/wares/spear_advanced/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "This is an advanced spear with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2."
+msgid ""
+"This is an advanced spear with a steel tip. It is produced in a weapon "
+"smithy and used in a training camp – together with food – to train soldiers "
+"from attack level 1 to level 2."
 msgstr ""
-"ウォーヘルムはバーバリアンの戦士の強化防具です。\n"
-"　兜工房で製造され、訓練場で、兵士の体力レベル１から体力レベル２に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../tribes/wares/spear_heavy/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "This is a strong spear with a steel-tip and a little blade. It is produced in the weapon smithy and used in the training camp – together with food – train soldiers from attack level 2 to level 3."
+msgid ""
+"This is a strong spear with a steel-tip and a little blade. It is produced "
+"in the weapon smithy and used in the training camp – together with food – "
+"train soldiers from attack level 2 to level 3."
 msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../tribes/wares/spear_war/helptexts.lua:4
-#, fuzzy
 msgctxt "empire_ware"
-msgid "This is the best and sharpest weapon the Empire weaponsmith creates for the warriors. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"This is the best and sharpest weapon the Empire weaponsmith creates for the "
+"warriors. It is used in the training camp – together with food – to train "
+"soldiers from attack level 3 to level 4."
+msgstr "これは、帝国の武器職人が戦士のためにつくる、もっとも鋭利な武器です。\n　訓練場で兵士を攻撃レベル３からレベル４に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../tribes/wares/spear_wooden/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "This wooden spear is the basic weapon in the Empire military system. It is produced in the weapon smithy. In combination with a helmet, it is the equipment to fit out young soldiers."
+msgid ""
+"This wooden spear is the basic weapon in the Empire military system. It is "
+"produced in the weapon smithy. In combination with a helmet, it is the "
+"equipment to fit out young soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../tribes/wares/spider_silk/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill."
+msgid ""
+"Spider silk is produced by spiders, which are bred by spider farms. It is "
+"processed into spidercloth in a weaving mill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../tribes/wares/spidercloth/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction."
-msgstr ""
+msgid ""
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
+"toolsmithy and the shipyard. Also some higher developed buildings need "
+"spidercloth for their construction."
+msgstr "蜘蛛布は、機織所で蜘蛛糸を使用して生産されます。\n　道具工房と造船所で使用されます。またいくつかの高度に開発された建物が、その建設のために蜘蛛布を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../tribes/wares/tabard/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "A tabard and a light trident are the basic equipment for young soldiers. Tabards are produced in the weaving mill."
-msgstr ""
+msgid ""
+"A tabard and a light trident are the basic equipment for young soldiers. "
+"Tabards are produced in the weaving mill."
+msgstr "タバードとライトトライデントは、若い兵士の標準的な装備です。タバードは機織所で作られます。"
 
 #. TRANSLATORS: Helptext for a ware: Golden Tabard
 #: ../../tribes/wares/tabard_golden/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "Golden tabards are produced in Atlantean weaving mills out of gold thread. They are used in the labyrinth – together with food – to train soldiers from health level 0 to level 1."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"Golden tabards are produced in Atlantean weaving mills out of gold thread. "
+"They are used in the labyrinth – together with food – to train soldiers from"
+" health level 0 to level 1."
+msgstr "ゴールデンタバードは、アトラスの機織所で金糸を使用して製造されます。訓練場で兵士の体力レベル０からレベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../tribes/wares/thatch_reed/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid "Thatch reed is produced in a reed yard and used to make the roofs of buildings waterproof."
-msgstr "カヤは、カヤ園で生産され、建物の屋根の防水のために使用されます。"
+msgid ""
+"Thatch reed is produced in a reed yard and used to make the roofs of "
+"buildings waterproof."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../tribes/wares/trident_double/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "The double trident is one of the best tridents produced by the Atlantean weapon smithy. It is used in a dungeon – together with food – to train soldiers from attack level 2 to level 3."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"The double trident is one of the best tridents produced by the Atlantean "
+"weapon smithy. It is used in a dungeon – together with food – to train "
+"soldiers from attack level 2 to level 3."
+msgstr "ダブルトライデントは、アトラスの武器工房でつくられる最高の槍です。\n　ダンジョンタワーで、兵士の攻撃レベル２からレベル３へ訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Heavy Double Trident
 #: ../../tribes/wares/trident_heavy_double/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "This is the most dangerous weapon of the Atlantean military. Only the best of the best soldiers may use it. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 3 to level 4."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"This is the most dangerous weapon of the Atlantean military. Only the best "
+"of the best soldiers may use it. It is produced in the weapon smithy and "
+"used in the dungeon – together with food – to train soldiers from attack "
+"level 3 to level 4."
+msgstr "これは、アトランティス軍のもっとも危険な武器です。最強中の最強の兵士のみが使用します。\n　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル３からレベル４に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Light Trident
 #: ../../tribes/wares/trident_light/helptexts.lua:4
 msgctxt "atlanteans_ware"
-msgid "This is the basic weapon of the Atlantean soldiers. Together with a tabard, it makes up the equipment of young soldiers. Light tridents are produced in the weapon smithy as are all other tridents."
-msgstr ""
+msgid ""
+"This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
+"it makes up the equipment of young soldiers. Light tridents are produced in "
+"the weapon smithy as are all other tridents."
+msgstr "これは、アトランティス兵士の基本の武器です。タバードとともに、若い兵士が着用するための装備です。ライトトライデントは、ほかのすべての槍をつくる武器工房で製造されます。"
 
 #. TRANSLATORS: Helptext for a ware: Long Trident
 #: ../../tribes/wares/trident_long/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 0 to level 1."
-msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
+msgid ""
+"The long trident is the first trident in the training of soldiers. It is "
+"produced in the weapon smithy and used in the dungeon – together with food –"
+" to train soldiers from attack level 0 to level 1."
+msgstr "この槍は、鉄の穂先をもちます。\n　武器工房で製造され、訓練場で兵士を攻撃レベル０からレベル１に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Steel Trident
 #: ../../tribes/wares/trident_steel/helptexts.lua:4
-#, fuzzy
 msgctxt "atlanteans_ware"
-msgid "This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food)."
+msgid ""
+"This is the medium trident. It is produced in the weapon smithy and used by "
+"advanced soldiers in the dungeon  – together with food – to train from "
+"attack level 1 to level 2."
 msgstr ""
-"これはバーバリアンの最強化防具です。\n"
-"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:4
@@ -2494,20 +2643,19 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:8
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Water is used in the bakery, the micro brewery and the brewery. The lime kiln and the cattle farm also need to be supplied with water."
+msgid ""
+"Water is used in the bakery, the micro brewery and the brewery. The lime "
+"kiln and the cattle farm also need to be supplied with water."
 msgstr ""
-"水は生命に不可欠です！\n"
-"　パン工房、ビール工房、醸造工房に使用されます。石灰釜と牛牧場にも水を供給する必要があります。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:10
-#, fuzzy
-msgid "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water."
+msgctxt "empire_ware"
+msgid ""
+"Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
+" and the piggery also need to be supplied with water."
 msgstr ""
-"水は生命に不可欠です！\n"
-"　パン工房、ビール工房、醸造工房に使用されます。石灰釜と牛牧場にも水を供給する必要があります。"
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:4
@@ -2517,71 +2665,65 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:6
-#, fuzzy
 msgctxt "barbarians_ware"
-msgid "Wheat is produced by farms and consumed by bakeries, micro breweries and breweries. Cattle farms also need to be supplied with wheat."
+msgid ""
+"Wheat is produced by farms and consumed by bakeries, micro breweries and "
+"breweries. Cattle farms also need to be supplied with wheat."
 msgstr ""
-"小麦は生存のために不可欠です。\n"
-"　農場で生産され、パン工房とビール工房と醸造工房で消費されます。牛牧場にも小麦を供給する必要があります。"
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:8
-#, fuzzy
-msgid "Wheat is produced by farms and used by mills and breweries. Donkey farms, sheep farms and piggeries also need to be supplied with wheat."
+msgid ""
+"Wheat is produced by farms and used by mills and breweries. Donkey farms, "
+"sheep farms and piggeries also need to be supplied with wheat."
 msgstr ""
-"小麦は生存のために不可欠です。\n"
-"　農場で生産され、パン工房とビール工房と醸造工房で消費されます。牛牧場にも小麦を供給する必要があります。"
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../tribes/wares/wine/helptexts.lua:4
 msgctxt "empire_ware"
-msgid "This tasty wine is drunk by the miners working the marble and gold mines. It is produced in a winery."
-msgstr ""
+msgid ""
+"This tasty wine is drunk by the miners working the marble and gold mines. It"
+" is produced in a winery."
+msgstr "この美味しいワインは、大理石鉱山と金鉱山で消費されます。\n　ワイナリーで生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "羊毛は、羊の体毛です。機織所が布を生産するために使用します。"
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../tribes/workers/atlanteans/armorsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
-msgstr "船と兵士のために布をつくります。"
+msgstr "兵士のために防具をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../tribes/workers/empire/armorsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces armor for the soldiers."
-msgstr "船と兵士のために布をつくります。"
+msgstr "兵士のために防具をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../tribes/workers/atlanteans/baker/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Bakes bread for workers."
 msgstr "労働者のためにパンを焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../tribes/workers/empire/baker/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Bakes bread for workers."
 msgstr "労働者のためにパンを焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Blackroot Farmer
 #: ../../tribes/workers/atlanteans/blackroot_farmer/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests blackroot."
-msgstr "小麦の種を蒔き、収穫します。"
+msgstr "甘草の種を蒔き収穫します。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../tribes/workers/atlanteans/builder/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Works at construction sites to raise new buildings."
 msgstr "新しい建物を立ち上げる建設地で働きます。"
@@ -2594,74 +2736,66 @@ msgstr "新しい建物を立ち上げる建設地で働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../tribes/workers/empire/builder/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Works at construction sites to raise new buildings."
 msgstr "新しい建物を立ち上げる建設地で働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../tribes/workers/atlanteans/carrier/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Carries items along your roads."
-msgstr "道路にそってアイテムを運びます。"
+msgstr "道路に沿って物を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../tribes/workers/barbarians/carrier/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Carries items along your roads."
-msgstr "道路にそってアイテムを運びます。"
+msgstr "道路に沿って物を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../tribes/workers/empire/carrier/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Carries items along your roads."
-msgstr "道路にそってアイテムを運びます。"
+msgstr "道路に沿って物を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../tribes/workers/atlanteans/charcoal_burner/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "木炭を燃やします。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Burns coal."
 msgstr "木炭を燃やします。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../tribes/workers/empire/charcoal_burner/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Burns coal."
 msgstr "木炭を燃やします。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/atlanteans/farmer/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr "小麦を育てます。"
+msgstr "甘草の種を蒔き収穫します。"
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds fish."
-msgstr ""
+msgstr "魚を育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The fisher fishes delicious fish."
-msgstr ""
+msgstr "漁師はおいしい魚を釣り上げます。"
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../tribes/workers/atlanteans/forester/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Plants trees."
 msgstr "木を植えます。"
@@ -2674,14 +2808,12 @@ msgstr "木を植えます。"
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../tribes/workers/empire/forester/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Plants trees."
 msgstr "木を植えます。"
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../tribes/workers/atlanteans/geologist/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Discovers resources for mining."
 msgstr "採掘する資源を発見します。"
@@ -2694,23 +2826,20 @@ msgstr "採掘する資源を発見します。"
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../tribes/workers/empire/geologist/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Discovers resources for mining."
 msgstr "採掘する資源を発見します。"
 
 #. TRANSLATORS: Helptext for a worker: Horse
 #: ../../tribes/workers/atlanteans/horse/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
-msgid "Horses help to carry items along busy roads. They are reared in a horse farm."
-msgstr ""
-"雄牛は、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n"
-"　牛牧場で育てられます。"
+msgid ""
+"Horses help to carry items along busy roads. They are reared in a horse "
+"farm."
+msgstr "馬は交通の激しい道路でアイテムを運ぶのを助けます。馬は馬牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../tribes/workers/atlanteans/hunter/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
 msgstr "狩人は入植者においしい肉をもたらします。"
@@ -2723,7 +2852,6 @@ msgstr "狩人は入植者においしい肉をもたらします。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../tribes/workers/empire/hunter/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
 msgstr "狩人は入植者においしい肉をもたらします。"
@@ -2731,45 +2859,46 @@ msgstr "狩人は入植者においしい肉をもたらします。"
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
-msgid "Mills blackroot and corn to produce blackroot flour and corn flour, respectively."
-msgstr ""
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr "甘草粉とトウモロコシ粉をつくるために、\n甘草とトウモロコシをそれぞれ\n粉挽きします。"
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../tribes/workers/atlanteans/miner/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr "石炭、鉄、金を得るために、地下の鉱山で働きます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../tribes/workers/atlanteans/sawyer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr ""
+msgstr "板材をつくるために、丸太を製材します。"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../tribes/workers/atlanteans/scout/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
-msgid "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
+msgid ""
+"Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
+msgid ""
+"Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../tribes/workers/empire/scout/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
-msgid "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
+msgid ""
+"Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../tribes/workers/atlanteans/shipwright/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "新しい船を造り上げる造船所で働きます。"
@@ -2782,7 +2911,6 @@ msgstr "新しい船を造り上げる造船所で働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../tribes/workers/empire/shipwright/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "新しい船を造り上げる造船所で働きます。"
@@ -2809,11 +2937,10 @@ msgstr ""
 #: ../../tribes/workers/atlanteans/smoker/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "肉と魚を燻製にします。"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../tribes/workers/atlanteans/soldier/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Defend and Conquer!"
 msgstr "守って攻めろ！"
@@ -2826,7 +2953,6 @@ msgstr "守って攻めろ！"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../tribes/workers/empire/soldier/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Defend and Conquer!"
 msgstr "守って攻めろ！"
@@ -2839,21 +2965,18 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../tribes/workers/atlanteans/toolsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Produces tools for the workers."
-msgstr "鉱夫のために食物をつくります。"
+msgstr "労働者のために道具をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../tribes/workers/empire/toolsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces tools for the workers."
-msgstr "鉱夫のために食物をつくります。"
+msgstr "労働者のために道具をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../tribes/workers/atlanteans/trainer/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Trains the soldiers."
 msgstr "兵士を訓練します。"
@@ -2866,35 +2989,30 @@ msgstr "兵士を訓練します。"
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../tribes/workers/empire/trainer/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Trains the soldiers."
 msgstr "兵士を訓練します。"
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../tribes/workers/atlanteans/weaponsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Produces weapons for the soldiers."
-msgstr "船と兵士のために布をつくります。"
+msgstr "兵士のために武器をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../tribes/workers/empire/weaponsmith/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces weapons for the soldiers."
-msgstr "船と兵士のために布をつくります。"
+msgstr "兵士のために武器をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/atlanteans/weaver/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "船と兵士のために布をつくります。"
+msgstr "建物、船、兵士のために布をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../tribes/workers/atlanteans/woodcutter/helptexts.lua:3
-#, fuzzy
 msgctxt "atlanteans_worker"
 msgid "Fells trees."
 msgstr "木を伐採します。"
@@ -2907,17 +3025,15 @@ msgstr "木を伐採します。"
 
 #. TRANSLATORS: Helptext for a worker: Lumberjack
 #: ../../tribes/workers/empire/lumberjack/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Fells trees."
 msgstr "木を伐採します。"
 
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../tribes/workers/barbarians/baker/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr "労働者のためにパンを焼きます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
@@ -2925,24 +3041,20 @@ msgstr "労働者のためにパンを焼きます。"
 #: ../../tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr "兵士のための武器と労働者のための道具を、つくります。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/barbarians/brewer/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr ""
-"戦士を訓練中に強く楽しくさせ続けるために、\n"
-"美味しい蒸留酒をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Produces the finest ales to keep warriors strong and happy in training."
+msgid ""
+"Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"戦士を訓練中に強く楽しくさせ続けるために、\n"
-"美味しい蒸留酒をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -2952,7 +3064,6 @@ msgstr "小麦を育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/empire/farmer/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Plants fields."
 msgstr "小麦を育てます。"
@@ -2965,7 +3076,6 @@ msgstr "海で魚を捕まえます。"
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../tribes/workers/empire/fisher/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Catches fish in the sea."
 msgstr "海で魚を捕まえます。"
@@ -2973,20 +3083,22 @@ msgstr "海で魚を捕まえます。"
 #. TRANSLATORS: Helptext for a worker: Gamekeeper
 #: ../../tribes/workers/barbarians/gamekeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "The gamekeeper makes sure that the natural population of animals never drops too low."
-msgstr "狩猟番は、動物の自然な頭数があまり低い状態に陥らないように注意します。"
+msgid ""
+"The gamekeeper makes sure that the natural population of animals never drops"
+" too low."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr "カヤを育てます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr "兵士のために兜をつくります。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/barbarians/innkeeper/helptexts.lua:3
@@ -2996,7 +3108,6 @@ msgstr "鉱夫のために食物をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/empire/innkeeper/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces food for miners."
 msgstr "鉱夫のために食物をつくります。"
@@ -3005,7 +3116,7 @@ msgstr "鉱夫のために食物をつくります。"
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns lime in the lime kiln."
-msgstr "石灰釜で石灰を燃やします。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -3013,730 +3124,83 @@ msgstr "石灰釜で石灰を燃やします。"
 #: ../../tribes/workers/barbarians/miner/helptexts.lua:3
 #: ../../tribes/workers/barbarians/miner_chief/helptexts.lua:3
 #: ../../tribes/workers/barbarians/miner_master/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr "石炭、鉄、金を得るために、地下の鉱山で働きます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Oxen help to carry items along busy roads. They are reared in a cattle farm."
+msgid ""
+"Oxen help to carry items along busy roads. They are reared in a cattle farm."
 msgstr ""
-"雄牛は、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n"
-"　牛牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/barbarians/weaver/helptexts.lua:3
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr "船と兵士のために布をつくります。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/empire/brewer/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr "鉱夫のために食物をつくります。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "製材所で働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../tribes/workers/empire/donkey/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
-msgid "Donkeys help to carry items along busy roads. They are reared in a donkey farm."
-msgstr ""
-"雄牛は、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n"
-"　牛牧場で育てられます。"
+msgid ""
+"Donkeys help to carry items along busy roads. They are reared in a donkey "
+"farm."
+msgstr "ロバは、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n　ロバ牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "小麦粉を生産するために小麦を粉びきします。"
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../tribes/workers/empire/miner/helptexts.lua:3
 #: ../../tribes/workers/empire/miner_master/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr "石炭、鉄、金を得るために、地下の鉱山で働きます。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "豚を育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Shepherd
 #: ../../tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "羊を飼います。"
 
 #. TRANSLATORS: Helptext for a worker: Vine Farmer
 #: ../../tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "ブドウを育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/empire/vintner/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr "鉱夫のために食物をつくります。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/empire/weaver/helptexts.lua:3
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
 msgstr "船と兵士のために布をつくります。"
-
-#~ msgid "Your barracks discovered an aggressor."
-#~ msgstr "兵舎が侵略者を発見しました。"
-
-#~ msgid "Your barracks is under attack."
-#~ msgstr "兵舎が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the barracks."
-#~ msgstr "敵が兵舎であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the barracks."
-#~ msgstr "あなたの兵士が兵舎で敵を討伐しました。"
-
-#~ msgid "Your barrier discovered an aggressor."
-#~ msgstr "関所が侵略者を発見しました。"
-
-#~ msgid "Your barrier is under attack."
-#~ msgstr "関所が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the barrier."
-#~ msgstr "敵が関所であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the barrier."
-#~ msgstr "あなたの兵士が関所で敵を討伐しました。"
-
-#~ msgid "Your castle discovered an aggressor."
-#~ msgstr "城郭が侵略者を発見しました。"
-
-#~ msgid "Your castle is under attack."
-#~ msgstr "城郭が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the castle."
-#~ msgstr "敵が城郭であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the castle."
-#~ msgstr "あなたの兵士が城郭で敵を討伐しました。"
-
-#~ msgid "Your citadel discovered an aggressor."
-#~ msgstr "城塞が侵略者を発見しました。"
-
-#~ msgid "Your citadel is under attack."
-#~ msgstr "城塞が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the citadel."
-#~ msgstr "敵が城塞であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the citadel."
-#~ msgstr "あなたの兵士が城塞で敵を討伐しました。"
-
-#~ msgid "Your donjon discovered an aggressor."
-#~ msgstr "物見塔が侵略者を発見しました。"
-
-#~ msgid "Your donjon is under attack."
-#~ msgstr "物見塔が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the donjon."
-#~ msgstr "敵が物見塔であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the donjon."
-#~ msgstr "あなたの兵士が物見塔で敵を討伐しました。"
-
-#~ msgid "Your fortress discovered an aggressor."
-#~ msgstr "要塞が侵略者を発見しました。"
-
-#~ msgid "Your fortress is under attack."
-#~ msgstr "要塞が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the fortress."
-#~ msgstr "敵が要塞であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the fortress."
-#~ msgstr "あなたの兵士が要塞で敵を討伐しました。"
-
-#~ msgid "Your guardhall discovered an aggressor."
-#~ msgstr "警備所が侵略者を発見しました。"
-
-#~ msgid "Your guardhall is under attack."
-#~ msgstr "警備所が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the guardhall."
-#~ msgstr "敵が警備所であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the guardhall."
-#~ msgstr "あなたの兵士が警備所で敵を討伐しました。"
-
-#~ msgid "Your guardhouse discovered an aggressor."
-#~ msgstr "警備小屋が侵略者を発見しました。"
-
-#~ msgid "Your guardhouse is under attack."
-#~ msgstr "警備小屋が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the guardhouse."
-#~ msgstr "敵が警備小屋であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the guardhouse."
-#~ msgstr "あなたの兵士が警備小屋で敵を討伐しました。"
-
-#~ msgid "Your high tower discovered an aggressor."
-#~ msgstr "高監視塔が侵略者を発見しました。"
-
-#~ msgid "Your high tower is under attack."
-#~ msgstr "高監視塔が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the high tower."
-#~ msgstr "敵が高監視塔であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the high tower."
-#~ msgstr "あなたの兵士が高監視塔で敵を討伐しました。"
-
-#~ msgid "Your outpost discovered an aggressor."
-#~ msgstr "前哨基地が侵略者を発見しました。"
-
-#~ msgid "Your outpost is under attack."
-#~ msgstr "前哨基地が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the outpost."
-#~ msgstr "敵が前哨基地であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the outpost."
-#~ msgstr "あなたの兵士が前哨基地で敵を討伐しました。"
-
-#~ msgid "Your sentry discovered an aggressor."
-#~ msgstr "歩哨所が侵略者を発見しました。"
-
-#~ msgid "Your sentry is under attack."
-#~ msgstr "歩哨所が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the sentry."
-#~ msgstr "敵が歩哨所であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the sentry."
-#~ msgstr "あなたの兵士が歩哨所で敵を討伐しました。"
-
-#~ msgid "Your small tower discovered an aggressor."
-#~ msgstr "小監視塔が侵略者を発見しました。"
-
-#~ msgid "Your small tower is under attack."
-#~ msgstr "小監視塔が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the small tower."
-#~ msgstr "敵が小監視塔であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the small tower."
-#~ msgstr "あなたの兵士が小監視塔で敵を討伐しました。"
-
-#~ msgid "Your tower discovered an aggressor."
-#~ msgstr "監視塔が侵略者を発見しました。"
-
-#~ msgid "Your tower is under attack."
-#~ msgstr "監視塔が攻撃を受けています。"
-
-#~ msgid "The enemy defeated your soldiers at the tower."
-#~ msgstr "敵が監視塔であなたの兵士を倒しました。"
-
-#~ msgid "Your soldiers defeated the enemy at the tower."
-#~ msgstr "あなたの兵士が監視塔で敵を討伐しました。"
-
-#~ msgid "Your soldiers have occupied your barrier."
-#~ msgstr ""
-#~ "あなたの兵士が\n"
-#~ "あなたの関所を占拠しました。"
-
-#~ msgid "Your soldiers have occupied your citadel."
-#~ msgstr ""
-#~ "あなたの兵士が\n"
-#~ "あなたの城塞を占拠しました。"
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "Widelands開発チーム"
-
-#~ msgid "The mighty tribes of the east-lands!"
-#~ msgstr "東方の地の強大な部族です！"
-
-#~ msgid "Ashes"
-#~ msgstr "焼け跡"
-
-#~ msgid "Destroyed building"
-#~ msgstr "破壊された建物"
-
-#~ msgid "Field (medium)"
-#~ msgstr "麦畑(中)"
-
-#~ msgid "Field (small)"
-#~ msgstr "麦畑(小)"
-
-#~ msgid "Field (tiny)"
-#~ msgstr "麦畑(幼)"
-
-#~ msgid "Field (ripe)"
-#~ msgstr "麦畑(成熟)"
-
-#~ msgid "Field (harvested)"
-#~ msgstr "麦畑(刈入)"
-
-#~ msgid "Reed (medium)"
-#~ msgstr "カヤ畑(中)"
-
-#~ msgid "Reed (small)"
-#~ msgstr "カヤ畑(小)"
-
-#~ msgid "Reed (tiny)"
-#~ msgstr "カヤ畑(幼)"
-
-#~ msgid "Reed (ripe)"
-#~ msgstr "カヤ畑(成熟)"
-
-#~ msgid "Resource indicator: Coal (little)"
-#~ msgstr "資源指標 石炭(少)"
-
-#~ msgid "Resource indicator: Coal (much)"
-#~ msgstr "資源指標 石炭(多)"
-
-#~ msgid "Resource indicator: Gold (little)"
-#~ msgstr "資源指標 金(少)"
-
-#~ msgid "Resource indicator: Gold (much)"
-#~ msgstr "資源指標 金(多)"
-
-#~ msgid "Resource indicator: Granite (little)"
-#~ msgstr "資源指標 花崗岩(少)"
-
-#~ msgid "Resource indicator: Granite (much)"
-#~ msgstr "資源指標 花崗岩(多)"
-
-#~ msgid "Resource indicator: Iron (little)"
-#~ msgstr "資源指標 鉄(少)"
-
-#~ msgid "Resource indicator: Iron (much)"
-#~ msgstr "資源指標 鉄(多)"
-
-#~ msgid "Resource indicator: No resource"
-#~ msgstr "資源指標 資源なし"
-
-#~ msgid "Resource indicator: Water"
-#~ msgstr "資源指標 水"
-
-#~ msgid "Ship Construction Site"
-#~ msgstr "造船地"
-
-#~ msgid "Ax"
-#~ msgstr "アックス"
-
-#~ msgid "Bread Paddle"
-#~ msgstr "パンパドル"
-
-#~ msgid "Battle Ax"
-#~ msgstr "バトルアックス"
-
-#~ msgid "Beer"
-#~ msgstr "ビール"
-
-#~ msgid "Blackwood"
-#~ msgstr "黒材"
-
-#~ msgid "Broad Ax"
-#~ msgstr "ブロードアックス"
-
-#~ msgid "Bronze Ax"
-#~ msgstr "ブロンズアックス"
-
-#~ msgid "Cloth"
-#~ msgstr "布"
-
-#~ msgid "Coal"
-#~ msgstr "石炭"
-
-#~ msgid "Felling Ax"
-#~ msgstr "伐採斧"
-
-#~ msgid "Fire Tongs"
-#~ msgstr "火ばさみ"
-
-#~ msgid "Fish"
-#~ msgstr "魚"
-
-#~ msgid "Fishing Rod"
-#~ msgstr "釣竿"
-
-#~ msgid "Gold"
-#~ msgstr "金"
-
-#~ msgid "Gold Ore"
-#~ msgstr "金鉱石"
-
-#~ msgid "Grout"
-#~ msgstr "モルタル"
-
-#~ msgid "Hammer"
-#~ msgstr "ハンマー"
-
-#~ msgid "Helmet"
-#~ msgstr "ヘルム"
-
-#~ msgid "Hunting Spear"
-#~ msgstr "狩猟槍"
-
-#~ msgid "Iron"
-#~ msgstr "鉄"
-
-#~ msgid "Iron Ore"
-#~ msgstr "鉄鉱石"
-
-#~ msgid "Kitchen Tools"
-#~ msgstr "調理用具"
-
-#~ msgid "Mask"
-#~ msgstr "マスク"
-
-#~ msgid "Meal"
-#~ msgstr "食事"
-
-#~ msgid "Meat"
-#~ msgstr "肉"
-
-#~ msgid "Pick"
-#~ msgstr "ツルハシ"
-
-#~ msgid "Pitta Bread"
-#~ msgstr "ピタパン"
-
-#~ msgid "Ration"
-#~ msgstr "糧食"
-
-#~ msgid "Raw Stone"
-#~ msgstr "原石"
-
-#~ msgid "Scythe"
-#~ msgstr "大鎌"
-
-#~ msgid "Sharp Ax"
-#~ msgstr "シャープアックス"
-
-#~ msgid "Shovel"
-#~ msgstr "シャベル"
-
-#~ msgid "Snack"
-#~ msgstr "軽食"
-
-#~ msgid "Strong Beer"
-#~ msgstr "ストロングビール"
-
-#~ msgid "Thatch Reed"
-#~ msgstr "カヤ"
-
-#~ msgid "Log"
-#~ msgstr "丸太"
-
-#~ msgid "Warhelm"
-#~ msgstr "ウォーヘルム"
-
-#~ msgid "Warrior’s Ax"
-#~ msgstr "ウォリアーズアックス"
-
-#~ msgid "Water"
-#~ msgstr "水"
-
-#~ msgid "Wheat"
-#~ msgstr "小麦"
-
-#~ msgid "Carrier"
-#~ msgstr "運搬人"
-
-#~ msgid "Ox"
-#~ msgstr "牛"
-
-#~ msgid "Baker"
-#~ msgstr "パン職人"
-
-#~ msgid "Master Blacksmith"
-#~ msgstr "鍛冶師"
-
-#~ msgid "Blacksmith"
-#~ msgstr "鍛冶職人"
-
-#~ msgid "Master Brewer"
-#~ msgstr "醸造師"
-
-#~ msgid "Brewer"
-#~ msgstr "醸造職人"
-
-#~ msgid "Master Miner"
-#~ msgstr "鉱山師"
-
-#~ msgid "Chief Miner"
-#~ msgstr "鉱夫長"
-
-#~ msgid "Farmer"
-#~ msgstr "農夫"
-
-#~ msgid "Fisher"
-#~ msgstr "漁師"
-
-#~ msgid "Gamekeeper"
-#~ msgstr "狩猟番"
-
-#~ msgid "Geologist"
-#~ msgstr "地質学者"
-
-#~ msgid "Helmsmith"
-#~ msgstr "兜職人"
-
-#~ msgid "Hunter"
-#~ msgstr "狩人"
-
-#~ msgid "Innkeeper"
-#~ msgstr "料理人"
-
-#~ msgid "Lime-Burner"
-#~ msgstr "石焼人"
-
-#~ msgid "Lumberjack"
-#~ msgstr "木こり"
-
-#~ msgid "Ranger"
-#~ msgstr "植樹番"
-
-#~ msgid "Shipwright"
-#~ msgstr "船大工"
-
-#~ msgid "Smelter"
-#~ msgstr "製錬人"
-
-#~ msgid "Stonemason"
-#~ msgstr "石工"
-
-#~ msgid "Trainer"
-#~ msgstr "教官"
-
-#~ msgid "Weaver"
-#~ msgstr "機織人"
-
-#~ msgid "Scout"
-#~ msgstr "偵察兵"
-
-#~ msgid "Cattle Breeder"
-#~ msgstr "牛飼い"
-
-#~ msgid "Ship"
-#~ msgstr "船"
-
-#~ msgid "Construction Site"
-#~ msgstr "建設地"
-
-#~ msgid "Castle"
-#~ msgstr "城郭"
-
-#~ msgid "Guardhall"
-#~ msgstr "警備所"
-
-#~ msgid "Guardhouse"
-#~ msgstr "警備小屋"
-
-#~ msgid "High Tower"
-#~ msgstr "高監視塔"
-
-#~ msgid "Tower"
-#~ msgstr "監視塔"
-
-#~ msgid "Sentry"
-#~ msgstr "歩哨所"
-
-#~ msgid "Barracks"
-#~ msgstr "兵舎"
-
-#~ msgid "Barrier"
-#~ msgstr "関所"
-
-#~ msgid "Fortress"
-#~ msgstr "要塞"
-
-#~ msgid "Outpost"
-#~ msgstr "前哨基地"
-
-#~ msgid "Headquarters"
-#~ msgstr "本拠地"
-
-#~ msgid "Warehouse"
-#~ msgstr "倉庫"
-
-#~ msgid "Quarry"
-#~ msgstr "採石場"
-
-#~ msgid "Lumberjack’s Hut"
-#~ msgstr "木こり小屋"
-
-#~ msgid "Ranger’s Hut"
-#~ msgstr "植樹番小屋"
-
-#~ msgid "Fisher’s Hut"
-#~ msgstr "漁師小屋"
-
-#~ msgid "Hunter’s Hut"
-#~ msgstr "狩人小屋"
-
-#~ msgid "Gamekeeper’s Hut"
-#~ msgstr "狩猟番小屋"
-
-#~ msgid "Well"
-#~ msgstr "井戸"
-
-#~ msgid "Scout’s Hut"
-#~ msgstr "偵察小屋"
-
-#~ msgid "Wood Hardener"
-#~ msgstr "製材所"
-
-#~ msgid "Lime Kiln"
-#~ msgstr "石灰窯"
-
-#~ msgid "Reed Yard"
-#~ msgstr "カヤ畑"
-
-#~ msgid "Bakery"
-#~ msgstr "パン工房"
-
-#~ msgid "Brewery"
-#~ msgstr "醸造工房"
-
-#~ msgid "Micro Brewery"
-#~ msgstr "ビール工房"
-
-#~ msgid "Big Inn"
-#~ msgstr "大食堂"
-
-#~ msgid "Inn"
-#~ msgstr "食堂"
-
-#~ msgid "Tavern"
-#~ msgstr "酒場"
-
-#~ msgid "Smelting Works"
-#~ msgstr "製錬所"
-
-#~ msgid "Shipyard"
-#~ msgstr "造船所"
-
-#~ msgid "War Mill"
-#~ msgstr "戦斧工房"
-
-#~ msgid "Axfactory"
-#~ msgstr "斧工房"
-
-#~ msgid "Metal Workshop"
-#~ msgstr "鍛冶工房"
-
-#~ msgid "Cattle Farm"
-#~ msgstr "牛牧場"
-
-#~ msgid "Weaving Mill"
-#~ msgstr "機織所"
-
-#~ msgid "Farm"
-#~ msgstr "農場"
-
-#~ msgid "Helm Smithy"
-#~ msgstr "兜工房"
-
-#~ msgid "Granite Mine"
-#~ msgstr "花崗岩鉱山"
-
-#~ msgid "Deeper Coal Mine"
-#~ msgstr "より深い炭鉱"
-
-#~ msgid "Deep Coal Mine"
-#~ msgstr "深い炭鉱"
-
-#~ msgid "Coal Mine"
-#~ msgstr "炭鉱"
-
-#~ msgid "Deeper Iron Ore Mine"
-#~ msgstr "より深い鉄鉱山"
-
-#~ msgid "Deep Iron Ore Mine"
-#~ msgstr "深い鉄鉱山"
-
-#~ msgid "Iron Ore Mine"
-#~ msgstr "鉄鉱山"
-
-#~ msgid "Deeper Gold Mine"
-#~ msgstr "より深い金鉱山"
-
-#~ msgid "Deep Gold Mine"
-#~ msgstr "深い金鉱山"
-
-#~ msgid "Gold Mine"
-#~ msgstr "金鉱山"
-
-#~ msgid "Citadel"
-#~ msgstr "城塞"
-
-#~ msgid "Donjon"
-#~ msgstr "物見塔"
-
-#~ msgid "Battle Arena"
-#~ msgstr "闘技場"
-
-#~ msgid "Training Camp"
-#~ msgstr "訓練場"
-
-#~ msgid "Your soldiers have occupied your donjon."
-#~ msgstr ""
-#~ "あなたの兵士が\n"
-#~ "あなたの物見塔を占拠しました。"
-
-#~ msgid "The felling ax is the tool of the lumberjack to take down trees. It is produced in the metal workshop (but it ceases to be produced by the building if it is enhanced to an axfactory and war mill)."
-#~ msgstr ""
-#~ "伐採斧は、木を伐る木こりの道具です。\n"
-#~ "　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
-
-#~ msgid "Fire tongs are tools of the smelter, who works in the smelting works. Produced by the metal works (but they cease to be produced by the building if it is enhanced to an axfactory and war mill)."
-#~ msgstr ""
-#~ "火ばさみは、製錬所で作業する、製錬人の道具です。\n"
-#~ "　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing. They are one of the basic tools produced in a metal workshop (but they cease to be produced by the building if it is enhanced to an axfactory and war mill)."
-#~ msgstr ""
-#~ "釣竿は、釣りをするバーバリアンの漁師が必要とします。\n"
-#~ "　鍛冶工房で製造される基本道具の一つです（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
-
-#~ msgid "Your soldiers have occupied your fortress."
-#~ msgstr ""
-#~ "あなたの兵士が\n"
-#~ "あなたの要塞を占拠しました。"
-
-#~ msgid "Not enough space"
-#~ msgstr "スペース不足"
-
-#~ msgid "Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition."
-#~ msgstr ""
-#~ "開始時のいくつかの建物は、十分なスペースがないために建設されませんでした。\n"
-#~ "これによって不利な状態になります。公平な開始状態にするには、このマップの再スタートを検討してください。"
-
-#~ msgid "Your soldiers have occupied your sentry."
-#~ msgstr ""
-#~ "あなたの兵士が\n"
-#~ "あなたの歩哨所を占拠しました。"
-
-#~ msgid "Smelts iron."
-#~ msgstr "鉄を精錬します"

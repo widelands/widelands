@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-07 16:07+0000\n"
-"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,14 +64,14 @@ msgstr "Keď sa začne rozrastať vaša cestná sieť a ekonomika, mali by ste z
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
-msgid "Build a donjon"
-msgstr "Postavte donžon"
+msgid "Build a tower"
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
-"Build a donjon at the north-east border of your territory to get greater "
+"Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Postavte donžon na severovýchodnej hranici svojho územia. Takto zväčšíte dosah viditeľnosti a poskytnete svojim ľuďom ochranu pred náhlymi útokmi nepriateľov."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -118,11 +118,12 @@ msgstr "Postavte zápasnícku arénu a výcvikový tábor na západ od hôr."
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and"
-" build up a second metal workshop to ensure the production of tools. When "
-"the blacksmith reaches his next level (master blacksmith), you can even "
-"enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr "Vylepšením kovodielne na továreň na sekery zabezpečte výrobu zbraní a postavte druhú kovodielňu na zaistenie výroby nástrojov. Keď kováč dosiahne nasledujúcu úroveň (kováčsky majster), továreň na sekery budete môcť vylepšiť až na vojenský závod, v ktorom sa vyrábajú ďalšie zbrane."
+"Enhance your metal workshop to an ax workshop in order to produce weapons, "
+"and build up a second metal workshop to ensure the production of tools. When"
+" the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the ax workshop to a war mill, which will produce additional "
+"weapons."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -420,10 +421,10 @@ msgstr "Stopy"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a donjon, to have a greater visual"
+"settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "Thron mi oznámil, že na severovýchod od našej osady objavil v snehu stopy. Prikázal nám postaviť donžon, z ktorého dovidieť na väčšiu oblasť okolo základne, aby sme mohli ochrániť ľudí pred náhlymi útokmi."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -500,9 +501,9 @@ msgstr "Dokončenie pevnosti"
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
-"building some more fortifications like barriers and donjons at the passages,"
-" but for now we can take a deep breath."
-msgstr "Konečne! Práve dokončili pevnosť, takže vstup do našej osady by mal byť nateraz chránený. Pre budúcnosť by sme mohli uvažovať o postavení iných opevnení ako hradieb a donžonov na priechodoch, ale zatiaľ sa môžeme zhlboka nadýchnuť."
+"building some more fortifications like barriers and towers at the passages, "
+"but for now we can take a deep breath."
+msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"

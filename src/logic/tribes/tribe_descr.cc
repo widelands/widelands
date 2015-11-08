@@ -161,12 +161,12 @@ TribeDescr::TribeDescr
 				// Register construction materials
 				for (WareAmount build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
-						construction_materials_.emplace(build_cost.first);
+						construction_materials_.insert(build_cost.first);
 					}
 				}
 				for (WareAmount enhancement_cost : get_building_descr(index)->enhancement_cost()) {
 					if (!is_construction_material(enhancement_cost.first)) {
-						construction_materials_.emplace(enhancement_cost.first);
+						construction_materials_.insert(enhancement_cost.first);
 					}
 				}
 			} catch (const WException& e) {

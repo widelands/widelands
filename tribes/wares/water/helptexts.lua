@@ -7,7 +7,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Water
       barbarians = pgettext("barbarians_ware", "Water is used in the bakery, the micro brewery and the brewery. The lime kiln and the cattle farm also need to be supplied with water."),
       -- TRANSLATORS: Helptext for a ware: Water
-      empire = _"Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water."
+      empire =  pgettext("empire_ware", "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water.")
    }
    local result = ""
    if tribe then

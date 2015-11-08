@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-25 20:03+0000\n"
-"PO-Revision-Date: 2015-11-02 14:04+0000\n"
-"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,9 +74,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Na začátku hry máš obvykle jednu základnu. To je ta velká budova s modrou vlajkou před vstupem. Základna slouží jako skladiště, kde se přechovává zboží, pracovníci a vojáci. Některé zboží je potřebné ke stavbě domů, z jiného se vyrábí další zboží. Zboží v základně pochopitelně nevydrží navěky, proto musíš zajistit také jeho přísun. Nejdůležitějším zbožím na začátku hry je základní stavební materiál: klády a kámen. Nyní zařídíme, aby nám nedošly klády. K tomu potřebujeme dřevorubce a chatu, ve které bude přebývat."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -288,8 +288,8 @@ msgstr "Dřevorubec je hotov"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Výborbě. Dřevorubcův srub je hotov. Dřevorubec se může nastěhovat a začít kácet stromy. Zajistí to tak příjem dříví. Teď ke kamenivu."
+"the granite."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -301,11 +301,11 @@ msgstr "Otevírání lomu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Kameny lze těžit v žulových lomech, ale nejsnazší je vystavět lom vedle nalezených skal. Celkem náhodou je hromada skal hned vedle na západ (vlevo) od velitelství. Naučím vás, jak tam posunout pohled."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -658,8 +658,8 @@ msgstr "Postav druhý lom"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Jestli je k dispozici více skal, zamysli se nad vybudování dalšího lomu. To uspíší výrobu kamene."
+"will make the granite production faster."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -825,9 +825,9 @@ msgstr "Zavři okno se zprávami pravým kliknutím do něj."
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Pěkná práce! Teď se podíváme, jak zprávy fungují v reálné hře. Abychom to mohli vyzkoušet, seberu chudákovi kameníkovi všechen materiál v lomu. Pak bude posílat zprávu vždy, když bude chtít pracovat, ale nepodaří se mu ve své pracovní oblasti nic najít"
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -896,12 +896,12 @@ msgstr "Je tu jedna další věc, kterou bych tě chtěl teď naučit : Rozšiř
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Expanze je jednoduchá, stačí jen postavit novou vojenskou základnu na kraji ovládané oblasti. Barbaři mají na výběr z několika typů: strážnice, valy, věže, pevnosti a citadely. Čím je budova větší, tím je i nákladnější ji postavit, ale tím více území kolem sebe dokáže ovládnout a tím více vojáků v ní může pobývat. Budovy se také liší dohledem: stavby s věží dohlédnou mnohem dále, než ostatní."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -938,9 +938,9 @@ msgstr "Ve Widelands je potřeba postavit hodně staveb, které zabírají spous
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Barbaři mají čtyři typy vojenských základen, které můžeš postavit: strážnice (malý), val a věž (střední) a pevnost (velká). Vyber tu, která ti nejvíce vyhovuje."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

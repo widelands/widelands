@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 09:21+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,9 +72,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general és un magatzem que guarda els béns, els treballadors i els soldats que encara no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns del quarter general no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i pedra en brut. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per què hi visqui."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general és un magatzem que guarda els béns, els treballadors i els soldats que encara no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns del quarter general no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana on hi visqui."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -286,8 +286,8 @@ msgstr "La cabana del llenyataire està llesta"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, a per les roques en brut."
+"the granite."
+msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, a pel granit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -299,11 +299,11 @@ msgstr "Muntant una pedrera"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Les roques poden extreure's de les mines de granit, però la forma més fàcil és construir una pedrera on hi hagi roques al voltant. Dóna la casualitat que n'hi ha una bona pila a l'oest (cap a l'esquerra) del quarter general. Us ensenyaré ara com moure la vista cap allí."
+msgstr "El granit pot extraure's de les mines de granit, però la forma més fàcil és construir una pedrera on hi hagi roques al voltant. Dóna la casualitat que n'hi ha una bona pila a l'oest (cap a l'esquerra) del quarter general. Us ensenyaré ara com moure la vista cap allí."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -656,8 +656,8 @@ msgstr "Construïu una segona pedrera"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Quan hi ha moltes roques, podeu considerar construir una altra pedrera. Això millorarà la producció de roques."
+"will make the granite production faster."
+msgstr "Quan hi ha moltes roques, podeu considerar construir una altra pedrera. Això accelerarà la producció de granit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -823,9 +823,9 @@ msgstr "Tanqueu la finestra de missatges ara, fent-hi clic dret a sobre."
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Ben fet! Vegem com funcionen els missatges en una partida real. Per a fer-ho, treure totes les roques de prop de les pedreres. Llavors, els pedrers hauran d'enviar un missatge dient que no poden trobar pedres a la seva àrea de treball quan hagin de treballar de nou."
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -894,12 +894,12 @@ msgstr "Hi ha una altra cosa que m'agradaria ensenyar-vos: com expandir el terri
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Expandir-se és tan senzill com construir un edifici militar a la frontera del territori. Els bàrbars tenen una bona selecció de diferents edificis militars: guardes sentinella, casernes, torrasses, fortaleses i ciutadelles. Com major sigui la construcció, més recursos es necessiten per construir-lo, però més terreny conquerirà al seu voltant i més soldats podrà guarnir. Els diversos edificis també tenen diferents rangs de visió: els edificis amb torres poden veure més lluny que els que no en tenen."
+msgstr "Expandir-se és tan senzill com construir un edifici militar a la frontera del territori. Els bàrbars tenen una bona selecció de diferents edificis militars: guardes sentinella, casernes, torres, fortaleses i ciutadelles. Com major sigui la construcció, més recursos es necessiten per construir-lo, però més terreny conquerirà al seu voltant i més soldats podrà guarnir. Els diversos edificis també tenen diferents rangs de visió: els edificis amb torres poden veure més lluny que els que no en tenen."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -936,9 +936,9 @@ msgstr "En el Widelands, és necessari construir molts edificis, que ocupen molt
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Els bàrbars tenen quatre edificis militars diferents: la guarda sentinella (petit), la caserna i la torrassa (ambdós mitjans) i la fortalesa (gran). Trieu el que més goig us faci."
+msgstr "Els bàrbars tenen quatre edificis militars diferents: la guarda sentinella (edifici petit), la caserna i la torre (ambdós edificis mitjans) i la fortalesa (edifici gran). Trieu el que més goig us faci."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

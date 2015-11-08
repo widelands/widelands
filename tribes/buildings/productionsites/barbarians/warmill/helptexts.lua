@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "The war mill produces all the axes that the Barbarians use for warfare.")
+   return pgettext("barbarians_building", "Produces all the axes that the Barbarians use for warfare.")
 end
 
 function building_helptext_note()
