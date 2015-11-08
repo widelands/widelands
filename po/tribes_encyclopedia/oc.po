@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 19:12+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 08:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Occitan (post 1500) (http://www.transifex.com/widelands/widelands/language/oc/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest blackroot."
+msgid "Sows and harvests blackroot."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -117,7 +117,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest corn."
+msgid "Sows and harvests corn."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -523,13 +523,13 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Sow and harvest wheat."
+msgid "Sows and harvests wheat."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Sow and harvest wheat."
+msgid "Sows and harvests wheat."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -765,8 +765,8 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The lime kiln processes granite to make ‘grout’, a substance that solidifies"
-" and so reinforces masonry."
+"Processes granite to make ‘grout’, a substance that solidifies and so "
+"reinforces masonry."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -832,9 +832,8 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian metal workshop can make bread paddles, felling axes, fire "
-"tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
-"and shovels."
+"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, "
+"hunting spears, kitchen tools, picks, scythes and shovels."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -872,9 +871,8 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The micro brewery produces beer of the lower grade. This beer is a vital "
-"component of the snacks that inns and big inns prepare for miners in deep "
-"mines."
+"Produces beer of the lower grade. This beer is a vital component of the "
+"snacks that inns and big inns prepare for miners in deep mines."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
@@ -948,8 +946,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The reed yard cultivates reed that serves two different purposes for the "
-"Barbarian tribe."
+"Cultivates reed that serves two different purposes for the Barbarian tribe."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -969,8 +966,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid ""
-"The war mill produces all the axes that the Barbarians use for warfare."
+msgid "Produces all the axes that the Barbarians use for warfare."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
@@ -1247,21 +1243,45 @@ msgid "The headquarters is your main building."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Warehouses store soldiers, wares and tools."
+msgid "Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Warehouses store soldiers, wares and tools."
+msgid "Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Warehouses store soldiers, wares and tools."
+msgid "Stores soldiers, wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building

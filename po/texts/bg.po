@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 19:57+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -655,7 +655,7 @@ msgstr "избира втория алтернативен инструмент,
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -667,7 +667,7 @@ msgstr "Винаги стройте лесничейска и рибовъдск
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Наглеждайте рибарите си. След като рибните ресурси в работната им област се изчерпат, те ще спрат да работят."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""

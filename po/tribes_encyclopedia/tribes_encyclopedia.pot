@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"POT-Creation-Date: 2015-11-08 15:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1720,35 +1720,35 @@ msgstr ""
 #: ../../tribes/wares/ax_battle/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax workshop. Only trained warriors are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4."
+"This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax workshop. Only trained soldiers are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge from attack level 1 to attack level 2."
+"The broad ax is produced by the ax workshop and the war mill. It is used in the training camp – together with food – to train soldiers with a fundamental fighting knowledge from attack level 1 to attack level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../tribes/wares/ax_bronze/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"The bronze ax is considered a weapon that is hard to handle. Only skilled warriors can use it. It is produced at the war mill and used in the training camp (it trains – together with food – from attack level 2 to level 3)."
+"The bronze ax is considered a weapon that is hard to handle. Only skilled soldiers can use it. It is produced at the war mill and used in the training camp – together with food – to train soldiers from attack level 2 to level 3."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in ax workshops and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
+"Young soldiers are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in ax workshops and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../tribes/wares/ax_warriors/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few warriors ever were able to handle those huge and powerful axes. It is produced in a war mill and used – together with food – in a training camp to train soldiers from attack level 4 to level 5."
+"The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few soldiers ever were able to handle this huge and powerful ax. It is produced in a war mill and used – together with food – in a training camp to train soldiers from attack level 4 to level 5."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Basket
@@ -1776,7 +1776,7 @@ msgstr ""
 #: ../../tribes/wares/beer_strong/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Only this beer is acceptable for the warriors in a battle arena. Some say that the whole power of the Barbarians lies in this ale. It helps to train the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big inns to prepare meals."
+"Only this beer is acceptable for the soldiers in a battle arena. Some say that the whole power of the Barbarians lies in this ale. It helps to train the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big inns to prepare meals."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
@@ -2137,7 +2137,7 @@ msgstr ""
 #: ../../tribes/wares/helmet/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A helmet is a basic tool to protect warriors. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1."
+"A helmet is a basic tool to protect soldiers. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Mask
@@ -2151,7 +2151,7 @@ msgstr ""
 #: ../../tribes/wares/helmet_warhelm/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A warhelm is an enhanced armor for Barbarian warriors. It is produced in a helm smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2."
+"A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a helm smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
@@ -2522,7 +2522,7 @@ msgstr ""
 #: ../../tribes/wares/spear_war/helptexts.lua:4
 msgctxt "empire_ware"
 msgid ""
-"This is the best and sharpest weapon the Empire weaponsmith creates for the warriors. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4."
+"This is the best and sharpest weapon the Empire weaponsmith creates for the soldiers. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
@@ -3076,7 +3076,7 @@ msgstr ""
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
-"Produces the finest ales to keep warriors strong and happy in training."
+"Produces the finest ales to keep soldiers strong and happy in training."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer

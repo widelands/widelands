@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:48+0000\n"
+"PO-Revision-Date: 2015-11-08 15:36+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -312,7 +312,7 @@ msgstr " Flagge"
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/logic/building.cc:503
 msgid "mine"
-msgstr "Baue ab"
+msgstr "Mine"
 
 #. * TRANSLATORS: Editor terrain property: port space
 #: ../../src/editor/tools/editor_info_tool.cc:75

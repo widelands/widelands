@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:37+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-08 15:36+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr "Es liegt bei dir, was du baust. Aber bedenke: Kohlen-  und Eisenerzminen benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch bestehen."
+msgstr "Es liegt bei dir, was du baust. Aber bedenke: Kohle-  und Eisenerzminen benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch bestehen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -202,7 +202,7 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr "Als Saledus und ich durch diesen wunderbaren Wald im Norden spazierten, fühlten wir wie unsere Zukunft begonnen hat. Dieses Land ist so friedlich, gut und schön, dass ich hier für den Rest meines Lebens bleiben könnte."
+msgstr "Als Saledus und ich durch diesen wunderbaren Wald im Norden spazierten, fühlten wir, dass unsere Zukunft eben erst begonnen hat. Dieses Land ist so friedlich, gut und schön, dass ich hier für den Rest meines Lebens verbringen könnte."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:125
@@ -236,7 +236,7 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr "Abermals fühlte ich mich wie im Paradies, als ich bemerkte, wie einige marmorähnliche Steine rund um die Felsen zu sehen waren. Es scheint, als ob wir schon bald große und luxuriöse Gebäude werden bauen können, wie diejenigen in Fremil."
+msgstr "Abermals fühlte ich mich wie im Paradies, als ich bemerkte, wie einige marmorähnliche Steine rund um die Felsen zu sehen waren. Es scheint, als ob wir schon bald große und luxuriöse Gebäude bauen können werden, wie diejenigen in Fremil."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
@@ -258,7 +258,7 @@ msgstr "Steine für die Kolonie"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stones to construct larger buildings."
-msgstr "Großartig! Heute wurde der Bau des Steinmetzes abgeschlossen. Nun erhalten wir genügend Steine, um größere Gebäude zu errichten."
+msgstr "Großartig! Heute wurde der Bau des Steinbruchs abgeschlossen. Nun erhalten wir genügend Steine, um größere Gebäude zu errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"

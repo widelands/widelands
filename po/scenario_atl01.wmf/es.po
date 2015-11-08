@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:58+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +106,7 @@ msgstr "Construye una granja y una granja de raíces negras"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Construye un molino para hacer harina de maíz y harina de raíz negra"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -113,7 +114,7 @@ msgstr "Construye un pozo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Construye una panadería para hornear pan hecho de harina de maíz, harina de raíz negra y agua"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -384,7 +385,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr ""
+msgstr "Salimos de la Atlántida y navegamos al este. Entramos en el mar prohibido al sexto día sin notar a los perseguidores de la Atlántida y sin Lutas destrozando nuestra nave. Ahora, estamos fuera de su alcance. Un día después, avistamos una isla que parece tener una de estas montañas que escupen fuego. Consideré esto una señal del dios del fuego y aterricé en su orilla."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178
@@ -564,7 +565,7 @@ msgstr "Jundlina está revisando los informes"
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "Parece que nuestra producción de alimentos ha terminado y todos están trabajando muy bien juntos. Realmente se empieza a sentir como en casa."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
@@ -663,7 +664,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:313
 msgid "Sidolus Seems Contrite"
-msgstr ""
+msgstr "Sidolus parece arrepentido"
 
 #. TRANSLATORS: Sidolus
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:316
@@ -825,7 +826,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:418
 msgid "Ostur Seems Confident"
-msgstr ""
+msgstr "Ostur parece confiar"
 
 #. TRANSLATORS: Ostur
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:427

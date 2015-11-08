@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:24+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,11 +170,11 @@ msgstr "Atajos de teclado (durante el juego)"
 
 #: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "RE PAG: Aumenta la velocidad del juego"
 
 #: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "AV PAG: Reduce la velocidad del juego"
 
 #: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
@@ -182,39 +182,39 @@ msgstr "PAUSA: detiene el juego"
 
 #: ../../txts/README.lua:63
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "ESPACIO: Alterna la visibilidad de los espacios de construcción"
 
 #: ../../txts/README.lua:64
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: Alterna la visibilidad del minimapa"
 
 #: ../../txts/README.lua:65
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: Alterna la visibilidad de los mensajes ('noticias')"
 
 #: ../../txts/README.lua:66
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: Alterna la visibilidad del censo"
 
 #: ../../txts/README.lua:67
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: Alterna la visibilidad de las estadísticas"
 
 #: ../../txts/README.lua:68
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: Alterna la visibilidad del inventario de existencias"
 
 #: ../../txts/README.lua:69
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: Alterna la visibilidad de los objetivos"
 
 #: ../../txts/README.lua:70
 msgid "B: toggles building statistics"
-msgstr ""
+msgstr "B: Alterna la visibilidad de las estadísticas de construcción"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: Cambia a pantalla completa (si es soportado por el S.O.)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -544,7 +544,7 @@ msgstr "ESPACIO:"
 
 #: ../../txts/editor_readme.lua:26
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "Alterna la visibilidad de los espacios de construcción"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:28
@@ -553,7 +553,7 @@ msgstr "C:"
 
 #: ../../txts/editor_readme.lua:28
 msgid "toggles census"
-msgstr ""
+msgstr "Alterna la visibilidad del censo"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:30
@@ -562,7 +562,7 @@ msgstr "F:"
 
 #: ../../txts/editor_readme.lua:30
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "Alterna el modo de juego en pantalla completa"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:32
@@ -571,7 +571,7 @@ msgstr "H:"
 
 #: ../../txts/editor_readme.lua:32
 msgid "toggles main menu"
-msgstr ""
+msgstr "Alterna la visibilidad del menú principal"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:34
@@ -580,7 +580,7 @@ msgstr "M:"
 
 #: ../../txts/editor_readme.lua:34
 msgid "toggles minimap"
-msgstr ""
+msgstr "Alterna la visibilidad del minimapa"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:36
@@ -589,7 +589,7 @@ msgstr "P:"
 
 #: ../../txts/editor_readme.lua:36
 msgid "toggles player menu"
-msgstr ""
+msgstr "Alterna la visibilidad del menú del jugador"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:38
@@ -598,7 +598,7 @@ msgstr "T:"
 
 #: ../../txts/editor_readme.lua:38
 msgid "toggles tools menu"
-msgstr ""
+msgstr "Alterna la visibilidad del menú de herramientas"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:40

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 08:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -657,7 +657,7 @@ msgstr "Taghaidh seo an t-inneal dàrnach eile fhad ’s a thèid a chumail sìo
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean mar an tuathanas. Ma thèid an togalach a chuairteachadh le craobhan no rathaidean, sguiridh an saothrachadh."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -669,7 +669,7 @@ msgstr "Tog bothan maoir-choille is taigh tàrmachair èisg an-còmhnaidh ach na
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Cum sùil air na h-iasgairean agad. Sguiridh iad de dh’iasgach nuair nach eil iasg san raon-obrach aca tuilleadh."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""

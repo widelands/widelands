@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-08 15:35+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,7 +163,7 @@ msgstr "Wenn du STRG drückst, während du eine Straße baust, werden automatisc
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
-msgstr "Du kannst die Bestätigungsfenster für unumkehrbare Aktionen  wie Abreißen etc. umgehen, indem du STRG gedrückt hältst, während du auf das jeweiligen Aktionsfeld klickst."
+msgstr "Du kannst die Bestätigungsfenster für unumkehrbare Aktionen wie das Abreißen etc. umgehen, indem du STRG gedrückt hältst, während du auf das jeweilige Aktionsfeld klickst."
 
 #: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
@@ -223,7 +223,7 @@ msgstr "Pos1: Zentriert die Ansicht an der Startposition"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(STRG+) 0-9: Speichert die aktuelle Position auf der Karte um schnell zurückkehren zu können"
+msgstr "(STRG+) 0-9: Speichert die aktuelle Position auf der Karte, um schnell zurückkehren zu können"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
@@ -247,7 +247,7 @@ msgstr "STRG+Linksklick: Überspringt das Bestätigungsfenster"
 
 #: ../../txts/README.lua:79
 msgid "CTRL+F11: takes a screenshot"
-msgstr "STRG+F11: Macht einen Screenshot"
+msgstr "STRG+F11: Erstellt einen Screenshot"
 
 #: ../../txts/README.lua:81
 msgid ""

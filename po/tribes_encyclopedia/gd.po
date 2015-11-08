@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 19:12+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 09:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -87,8 +87,8 @@ msgstr "Tha togalach ’ga thoirt às a chèile an-seo. Tillidh seo cuid dhe na 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest blackroot."
-msgstr "Cuir is buain freumhagan."
+msgid "Sows and harvests blackroot."
+msgstr "Cuiridh is buainidh e freumhagan."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -119,8 +119,8 @@ msgstr "Tochlaidh e seudan às na beanntan."
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest corn."
-msgstr "Cuir is buain coirce."
+msgid "Sows and harvests corn."
+msgstr "Cuiridh is buainidh e coirce."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -139,7 +139,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build a fish breeder’s house close to the fisher’s house to make sure that "
 "you don’t run out of fish."
-msgstr ""
+msgstr "Tog taigh tàrmachair èisg faisg air an taigh-iasgair gus dèanamh cinnteach nach ruith an t-iasg ort."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
@@ -527,14 +527,14 @@ msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Sow and harvest wheat."
-msgstr "Cuir is buain cruithneachd."
+msgid "Sows and harvests wheat."
+msgstr "Cuiridh is buainidh e cruithneachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Sow and harvest wheat."
-msgstr "Cuir is buain cruithneachd."
+msgid "Sows and harvests wheat."
+msgstr "Cuiridh is buainidh e cruithneachd."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
@@ -769,9 +769,9 @@ msgstr "Seo na dh’fhreagair e do Raghnall Beag nuair a dh’fhaighnich e na bh
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The lime kiln processes granite to make ‘grout’, a substance that solidifies"
-" and so reinforces masonry."
-msgstr "Nì àth-aoil aol-tàthaidh de ghaireal, seo stuth a nì clachaireachd nas treasa seasmhaiche."
+"Processes granite to make ‘grout’, a substance that solidifies and so "
+"reinforces masonry."
+msgstr "Nì e aol-tàthaidh de ghaireal, seo stuth a nì clachaireachd nas treasa seasmhaiche."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -836,10 +836,9 @@ msgstr "Snaidh-sgrìobhadh air stairsneach seann cheàrdach gobhainn Harradsheim
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian metal workshop can make bread paddles, felling axes, fire "
-"tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
-"and shovels."
-msgstr "Nì ceàrdach meatailt nan Tùsanach crainn-arain, tuaghan leagail, clobhan teine, slatan-iasgaich, ùird, sleaghan seilg, acainnean cidsin, piocaidean, fàil is sluasaidean."
+"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, "
+"hunting spears, kitchen tools, picks, scythes and shovels."
+msgstr "Nì e crainn-arain, tuaghan leagail, clobhan teine, slatan-iasgaich, ùird, sleaghan seilg, acainnean cidsin, piocaidean, fàil is sluasaidean."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
@@ -876,10 +875,9 @@ msgstr "Deoch-slàinte chumanta nam mèinnearan"
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The micro brewery produces beer of the lower grade. This beer is a vital "
-"component of the snacks that inns and big inns prepare for miners in deep "
-"mines."
-msgstr "Nì an taigh-grùide beag leann an ìre ìosal. ’S e co-phàirt cudromach sna lòin a th’ ann a nì na taighean-òil is taighean-seinnse airson nam mèinnearan sna mèinnean domhain."
+"Produces beer of the lower grade. This beer is a vital component of the "
+"snacks that inns and big inns prepare for miners in deep mines."
+msgstr "Nì e leann an ìre ìosal. ’S e co-phàirt cudromach sna lòin a th’ ann a nì na taighean-òil is taighean-seinnse airson nam mèinnearan sna mèinnean domhain."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
@@ -952,9 +950,8 @@ msgstr "Facal-suaicheantais aig comann nan gàirnealair"
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The reed yard cultivates reed that serves two different purposes for the "
-"Barbarian tribe."
-msgstr "Togaidh am feur-lios feur a choileanas dà fheumalachdan do threubh nan Tùsanach."
+"Cultivates reed that serves two different purposes for the Barbarian tribe."
+msgstr "Togaidh e feur a choileanas dà fheumalachdan do threubh nan Tùsanach."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
@@ -973,9 +970,8 @@ msgstr "Saothrachaidh feur-lios sguab feòir gach %s sa chuibheas."
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid ""
-"The war mill produces all the axes that the Barbarians use for warfare."
-msgstr "Nì an ceàrdach-cogaidh na tuaghan uile a chleachdas na tùsanaich air a’ bhlàr."
+msgid "Produces all the axes that the Barbarians use for warfare."
+msgstr "Nì e na tuaghan uile a chleachdas na Tùsanaich air a’ bhlàr."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
@@ -1253,22 +1249,46 @@ msgid "The headquarters is your main building."
 msgstr "’S e am prìomh togalach agad a th’ anns a’ phrìomh-àras."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Cumaidh taigh-stòrais saighdearan, bathar ’s acainnean."
+msgid "Stores soldiers, wares and tools."
+msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Cumaidh taigh-stòrais saighdearan, bathar ’s acainnean."
+msgid "Stores soldiers, wares and tools."
+msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Cumaidh taigh-stòrais saighdearan, bathar ’s acainnean."
+msgid "Stores soldiers, wares and tools."
+msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -1648,7 +1668,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr ""
+msgstr "Saothraichidh a’ cheàrdach thuaghan is a’ cheàrdach-cogaidh tuaghan mòra. Thèid an cleachdadh – le biadh – gus gaisgich a thrèanadh air eòlas sabaide bunasach o ionnsaigh leibheil 1 gu ionnsaigh leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../tribes/wares/ax_bronze/helptexts.lua:4

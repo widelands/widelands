@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-11 10:21+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-08 15:29+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,40 +81,40 @@ msgstr "Punkte"
 msgid "Status for %s"
 msgstr "Status für %s"
 
-#. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:115
+#. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
+#: ../../scripting/win_conditions/collectors.lua:116
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../scripting/win_conditions/collectors.lua:119
+#: ../../scripting/win_conditions/collectors.lua:120
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Insgesamt: %i Punkt"
 msgstr[1] "Insgesamt: %i Punkte"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:133
+#: ../../scripting/win_conditions/collectors.lua:134
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i Minute"
 msgstr[1] "%i Minuten"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:138
+#: ../../scripting/win_conditions/collectors.lua:139
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% Stunde und %2%"
 msgstr[1] "%1% Stunden und %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../scripting/win_conditions/collectors.lua:141
+#: ../../scripting/win_conditions/collectors.lua:142
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% Stunde"
 msgstr[1] "%1% Stunden"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:145
+#: ../../scripting/win_conditions/collectors.lua:146
 msgid "The game will end in %s."
 msgstr "Das Spiel wird in %s enden."
 
@@ -196,11 +196,11 @@ msgstr "Jeder Spieler bzw. jedes Team versucht, mehr als die Hälfte der Kartenf
 
 #: ../../scripting/win_conditions/territorial_time.lua:25
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s hat %2$3.0f%% der Kartenfläche (%3$i von %4$i)."
+msgstr "%1$s hat %2$3.0f%% der Landfläche (%3$i von %4$i)."
 
 #: ../../scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s hatte %2$3.0f%% des Landes (%3$i von %4$i)."
+msgstr "%1$s hatte %2$3.0f%% der Landfläche (%3$i von %4$i)."
 
 #: ../../scripting/win_conditions/territorial_time.lua:224
 msgid "Otherwise the game will end in %i minute."

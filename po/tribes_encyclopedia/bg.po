@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 22:17+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 20:00+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Тук се демонтира сграда, което ще върне 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest blackroot."
+msgid "Sows and harvests blackroot."
 msgstr "Сее и вади черен корен."
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -117,7 +117,7 @@ msgstr "Добива ценни камъни от скалите на плани
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest corn."
+msgid "Sows and harvests corn."
 msgstr "Сади и бере царевица."
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -523,13 +523,13 @@ msgstr "Тази мина оползотворява всички ресурси
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Sow and harvest wheat."
+msgid "Sows and harvests wheat."
 msgstr "Сее и жъне пшеница."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Sow and harvest wheat."
+msgid "Sows and harvests wheat."
 msgstr "Сее и жъне пшеница."
 
 #. TRANSLATORS: Lore helptext for a building
@@ -765,9 +765,9 @@ msgstr "Отговорът на Рагналд детето на въпроса 
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The lime kiln processes granite to make ‘grout’, a substance that solidifies"
-" and so reinforces masonry."
-msgstr "Варджийницата преработва гранита във „вар“ – вещество, което се втвърдява и така укрепва зидарията."
+"Processes granite to make ‘grout’, a substance that solidifies and so "
+"reinforces masonry."
+msgstr "Преработва гранита във „вар“ – вещество, което се втвърдява и така укрепва зидарията."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -832,10 +832,9 @@ msgstr "Надпис на прага на порутената Стара Ков
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian metal workshop can make bread paddles, felling axes, fire "
-"tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
-"and shovels."
-msgstr "Работилницата за метали на варварите може да прави лопати за хляб, брадви за сеч, маши, въдици, чукове, ловни копия, кухненски инструменти, кирки, коси и лопати."
+"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, "
+"hunting spears, kitchen tools, picks, scythes and shovels."
+msgstr "Пправи лопати за хляб, брадви за сеч, маши, въдици, чукове, ловни копия, кухненски инструменти, кирки, коси и лопати."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
@@ -872,10 +871,9 @@ msgstr "Популярен сред миньорите тост"
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The micro brewery produces beer of the lower grade. This beer is a vital "
-"component of the snacks that inns and big inns prepare for miners in deep "
-"mines."
-msgstr "Микро пивоварната произвежда бира от по-ниско качество. Тази бира е съществена част от дажбите, които хановете и големите ханове приготвят за миньорите в дълбоките мини."
+"Produces beer of the lower grade. This beer is a vital component of the "
+"snacks that inns and big inns prepare for miners in deep mines."
+msgstr "Произвежда бира от по-ниско качество. Тази бира е съществена част от дажбите, които хановете и големите ханове приготвят за миньорите в дълбоките мини."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
@@ -948,9 +946,8 @@ msgstr "Лозунг на съюза на градинарите"
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The reed yard cultivates reed that serves two different purposes for the "
-"Barbarian tribe."
-msgstr "На полето за тръстика се отглежда тръстика, която се използва по два начина от варварското племе."
+"Cultivates reed that serves two different purposes for the Barbarian tribe."
+msgstr "Отглежда тръстика, която се използва по два начина от варварското племе."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
@@ -969,9 +966,8 @@ msgstr "Полето за тръстика може да произведе сн
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid ""
-"The war mill produces all the axes that the Barbarians use for warfare."
-msgstr "Оръжейната произвежда всички брадви, които варварите използват в бой."
+msgid "Produces all the axes that the Barbarians use for warfare."
+msgstr "Произвежда всички брадви, които варварите използват в бой."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
@@ -1247,22 +1243,46 @@ msgid "The headquarters is your main building."
 msgstr "Щабът е основната Ви сграда."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Служи като база за колонизация и търговия. Също така е място за войниците, стоките и инструментите Ви."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Служи като база за колонизация и търговия. Също така е място за войниците, стоките и инструментите Ви."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Служи като база за колонизация и търговия. Също така е място за войниците, стоките и инструментите Ви."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Складовете са място за войниците, стоките и инструментите."
+msgid "Stores soldiers, wares and tools."
+msgstr "Място за войниците, стоките и инструментите."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Складовете са място за войниците, стоките и инструментите."
+msgid "Stores soldiers, wares and tools."
+msgstr "Място за войниците, стоките и инструментите."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Складовете са място за войниците, стоките и инструментите."
+msgid "Stores soldiers, wares and tools."
+msgstr "Място за войниците, стоките и инструментите.Място за войниците, стоките и инструментите."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16

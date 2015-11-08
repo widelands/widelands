@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:48+0000\n"
+"PO-Revision-Date: 2015-11-08 12:33+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -918,7 +918,7 @@ msgstr "%u%% skilt ad"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
-msgstr ""
+msgstr "Indlæser grafik"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:142
@@ -932,7 +932,7 @@ msgstr "Indlæser kort"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "Indlæser verden"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -3961,7 +3961,7 @@ msgstr "KI: Vilkårlig"
 
 #: ../../src/wui/playerdescrgroup.cc:187
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Stammen vælges vilkårligt."
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"

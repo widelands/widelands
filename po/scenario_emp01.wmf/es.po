@@ -4,13 +4,14 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:37+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +151,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
-msgstr ""
+msgstr "El mar agitado"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
@@ -159,7 +160,7 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "Parece como si la navegación en el Golfo de Perl fuera uno de nuestros mayores errores. La naturaleza estaba en contra de nosotros y nos llevó a una oscura y salvaje tormenta. Realmente no sé cuántas horas han pasado desde que las olas se elevaron más alto que nuestro barco, pero aún así sería un suicidio salir."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:105
@@ -191,7 +192,7 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "Realmente parece como si hubiéramos aterrizado bajo las únicas palmeras existentes en este lejano desierto de arena. Me temo que no vamos a encontrar la ayuda que necesitamos para conseguir reparar nuestro barco a tiempo."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
@@ -359,7 +360,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
-msgstr ""
+msgstr "Un paso adelante"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"

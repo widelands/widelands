@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 20:45+0000\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 17:30+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -86,8 +86,8 @@ msgstr "S'està desmantellant l'edifici, recuperant part dels materials de const
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest blackroot."
-msgstr "Sembra i collita de negrarrel."
+msgid "Sows and harvests blackroot."
+msgstr "Sembra i recol·lecta negrarrel."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -118,8 +118,8 @@ msgstr "Talla pedres precioses de roques en terreny muntanyós."
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Sow and harvest corn."
-msgstr "Sembra i collita de panís."
+msgid "Sows and harvests corn."
+msgstr "Sembra i recol·lecta el panís."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -138,7 +138,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build a fish breeder’s house close to the fisher’s house to make sure that "
 "you don’t run out of fish."
-msgstr ""
+msgstr "Construïu una casa de criador de peixos a prop de la casa del pescador per assegurar que no es quedi sense peixos."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
@@ -524,14 +524,14 @@ msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar carbó és del
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Sow and harvest wheat."
-msgstr "Sembra i collita de blat."
+msgid "Sows and harvests wheat."
+msgstr "Sembra i recol·lecta blat."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Sow and harvest wheat."
-msgstr "Sembra i collita de blat."
+msgid "Sows and harvests wheat."
+msgstr "Sembra i recol·lecta blat."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
@@ -766,9 +766,9 @@ msgstr "La resposta del fill d'en Ragnald quan se li preguntà què feia amb aqu
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The lime kiln processes granite to make ‘grout’, a substance that solidifies"
-" and so reinforces masonry."
-msgstr "El forn de calç processa les roques en brut per fer-ne «lletades de calç», una substància que es solidifica i reforça les estructures."
+"Processes granite to make ‘grout’, a substance that solidifies and so "
+"reinforces masonry."
+msgstr "Processa el granit per fer-ne «lletades de calç», una substància que es solidifica i reforça les estructures."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -833,10 +833,9 @@ msgstr "Inscripció de l'entrada de l'ara ruïnosa Vella Forja de Harradsheim, l
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian metal workshop can make bread paddles, felling axes, fire "
-"tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
-"and shovels."
-msgstr "El taller de metall bàrbar fabrica pales de forner, destrals d'arbres, tenalles, canyes de pescar, martells, llances de caça, estris de cuina, pics, dalles i pales."
+"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, "
+"hunting spears, kitchen tools, picks, scythes and shovels."
+msgstr "Fabrica eines com ara pales de forner, destrals per talar arbres, tenalles, canyes de pescar, martells, llances de caça, estris de cuina, pics, dalles o pales."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
@@ -873,10 +872,9 @@ msgstr "Un brindis generalitzat entre els miners"
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The micro brewery produces beer of the lower grade. This beer is a vital "
-"component of the snacks that inns and big inns prepare for miners in deep "
-"mines."
-msgstr "La cerveseria petita produeix cervesa de baixa graduació. La cervesa és un component vital dels aperitius que els hostals normals i grans preparen per als miners de les mines profundes."
+"Produces beer of the lower grade. This beer is a vital component of the "
+"snacks that inns and big inns prepare for miners in deep mines."
+msgstr "Produeix cervesa de baixa graduació. La cervesa és un component vital dels aperitius que els hostals normals i grans preparen per als miners de les mines profundes."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
@@ -949,9 +947,8 @@ msgstr "Lema del gremi de jardiners"
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
-"The reed yard cultivates reed that serves two different purposes for the "
-"Barbarian tribe."
-msgstr "El camp de juncs serveix per cultivar juncs, que tenen dos usos per a la cultura bàrbara."
+"Cultivates reed that serves two different purposes for the Barbarian tribe."
+msgstr "Cultiva juncs, que tenen dos usos per a la cultura bàrbara."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
@@ -959,7 +956,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr ""
+msgstr "La fibra de junc és el material tradicional per fer teulades i es teixeix per fer-ne tela que després fan servir com a veles de les seves naus."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
@@ -970,9 +967,8 @@ msgstr "Un camp de juncs pot produir un feix de juncs cada %s de mitjana."
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid ""
-"The war mill produces all the axes that the Barbarians use for warfare."
-msgstr "El taller de guerra produeix les destrals que els bàrbars usen a les seves guerres."
+msgid "Produces all the axes that the Barbarians use for warfare."
+msgstr "Produeix les destrals que els bàrbars usen a les seves guerres."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
@@ -1080,17 +1076,17 @@ msgstr "Entrena soldats en atac."
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:19
 msgctxt "atlanteans_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Equipa els soldats amb les armes i armadures que necessitin."
 
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Equipa els soldats amb les armes i armadures que necessitin."
 
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:19
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Equipa els soldats amb les armes i armadures que necessitin."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:17
@@ -1248,22 +1244,46 @@ msgid "The headquarters is your main building."
 msgstr "El quarter general és l'edifici principal."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 msgctxt "atlanteans_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Els magatzems guarden béns, soldats i treballadors."
+msgid "Stores soldiers, wares and tools."
+msgstr "Emmagatzema soldats, béns i eines."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 msgctxt "barbarians_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Els magatzems guarden béns, soldats i treballadors."
+msgid "Stores soldiers, wares and tools."
+msgstr "Emmagatzema soldats, béns i eines."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 msgctxt "empire_building"
-msgid "Warehouses store soldiers, wares and tools."
-msgstr "Els magatzems guarden béns, soldats i treballadors."
+msgid "Stores soldiers, wares and tools."
+msgstr "Emmagatzema soldats, béns i eines."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -1285,11 +1305,11 @@ msgstr "%s i"
 
 #: ../../tribes/scripting/help/building_help.lua:164
 msgid "Food:"
-msgstr ""
+msgstr "Menjar:"
 
 #: ../../tribes/scripting/help/building_help.lua:212
 msgid "Equipment:"
-msgstr ""
+msgstr "Equipament:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
 #: ../../tribes/scripting/help/building_help.lua:234
@@ -1575,7 +1595,7 @@ msgstr "Manca càlcul"
 
 #: ../../tribes/scripting/help/worker_help.lua:49
 msgid "Purpose"
-msgstr ""
+msgstr "Finalitat:"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../tribes/wares/armor/helptexts.lua:4
@@ -1584,7 +1604,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
+msgstr "L'armadura bàsica dels soldats imperials es produeix al taller d'armadures i s'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell de salut dels soldats de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../tribes/wares/armor_chain/helptexts.lua:4
@@ -1593,7 +1613,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr ""
+msgstr "La cota de malla és l'armadura mitjana dels soldats de l'Imperi. Es produeix al taller d'armadures i s'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell de salut dels soldats de nivell 2 a nivell 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../tribes/wares/armor_gilded/helptexts.lua:4
@@ -1612,7 +1632,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Un casc és l'eina bàsica per protegir els soldats. El produeix el taller d'armadures. En combinació amb una llança de fusta, és l'equipament necessari per reclutar un soldat. Els cascos també s'utilitzen en camps d'entrenament, juntament amb menjar, per entrenar el nivell de salut dels soldats de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../tribes/wares/ax/helptexts.lua:4
@@ -1620,7 +1640,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "The ax is the basic weapon of the Barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "La destral és l'arma bàsica dels bàrbars. És l'únic equipament que necessiten els soldats novells."
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../tribes/wares/ax_battle/helptexts.lua:4
@@ -1639,7 +1659,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr ""
+msgstr "La destral ampla es produeix al taller de destrals i al taller de guerra. S'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell d'atac dels guerrers de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../tribes/wares/ax_bronze/helptexts.lua:4
@@ -1648,7 +1668,7 @@ msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
 "warriors can use it. It is produced at the war mill and used in the training"
 " camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr ""
+msgstr "La destral de bronze és difícil de brandar. Només els guerrers més hàbils poden emprar-la. Es produeix al taller d'armes i s'usa al camp d'entrenament, juntament amb menjar, per entrenar el nivell d'atac dels soldats de nivell 2 a nivell 3."
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
@@ -1668,7 +1688,7 @@ msgid ""
 "warriors ever were able to handle those huge and powerful axes. It is "
 "produced in a war mill and used – together with food – in a training camp to"
 " train soldiers from attack level 4 to level 5."
-msgstr ""
+msgstr "La destral del guerrer és l'arma perillosa que els bàrbars són capaços de produir. Només els soldats entrenats són capaços d'empunyar aquestes destrals enormes i poderoses. Es produeix al taller de guerra i s'usa, juntament amb menjar, en el camp d'entrenament per millorar el nivell d'atac dels soldats de nivell 4 a nivell 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../tribes/wares/basket/helptexts.lua:4
@@ -1676,7 +1696,7 @@ msgctxt "empire_ware"
 msgid ""
 "This basket is needed by the vine farmer for harvesting the grapes. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "El cistell l'utilitza el vinyater per recol·lectar el raïm. El produeix el taller d'eines."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../tribes/wares/beer/helptexts.lua:4
@@ -1782,7 +1802,7 @@ msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
 "cease to be produced by the building if it is enhanced to an ax workshop and"
 " war mill)."
-msgstr ""
+msgstr "Les pales de forner es produeixen al taller de metall com totes les altres eines (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../tribes/wares/buckets/helptexts.lua:4
@@ -1810,7 +1830,7 @@ msgstr "La tela és necessària per la construcció d'alguns edificis. També la
 msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
-msgstr ""
+msgstr "El carbó s'extrau de les mines de carbó o s'obté a partir de troncs en un kiln de carbó vegetal."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:6
@@ -1818,7 +1838,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal."
-msgstr ""
+msgstr "Els focs de les forges atlants i els tallers d'armes i armadures s'alimenten de carbó."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:8
@@ -1827,7 +1847,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr ""
+msgstr "Els focs dels bàrbars s'alimenten de carbó. El consumeixen diferents edificis: el forn de calç, el forn de metalls i els tallers de destrals, de guerra i de cascos."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../tribes/wares/coal/helptexts.lua:10
@@ -1835,7 +1855,7 @@ msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal."
-msgstr ""
+msgstr "Els focs de les forges imperials i els tallers d'armes i armadures s'alimenten de carbó."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../tribes/wares/corn/helptexts.lua:4
@@ -1866,7 +1886,7 @@ msgstr "Aquests meravellosos diamants s'utilitzen en la construcció d'alguns ed
 #: ../../tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
 msgid "The felling ax is the tool of the lumberjack to chop down trees."
-msgstr ""
+msgstr "La destral per talar arbres és l'eina del llenyataire."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../tribes/wares/felling_ax/helptexts.lua:6
@@ -1874,13 +1894,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Les destrals per talar arbres es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Felling axes are produced by the toolsmith."
-msgstr ""
+msgstr "Les destrals per talar arbres les fabriquen els fabricants d'eines."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:4
@@ -1911,7 +1931,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../tribes/wares/fish/helptexts.lua:4
@@ -1929,7 +1949,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "A banda de la pita i de la carn, el peix és un altre aliment bàsic dels bàrbars. Els peixos s'usen a les tavernes, hostals normals i grans i llocs d'entrenament (camp d'entrenament i palestra d'entrenament)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../tribes/wares/fish/helptexts.lua:8
@@ -1937,7 +1957,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "A banda del pa i de la carn, el peix és un altre aliment bàsic de l'Imperi. Els peixos s'usen a les tavernes, hostals i llocs d'entrenament (palestra, coliseu i camp d'entrenament)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../tribes/wares/fishing_net/helptexts.lua:4
@@ -1958,7 +1978,7 @@ msgid ""
 "They are one of the basic tools produced in a metal workshop (but cease to "
 "be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si es millora aquest a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Flour
 #: ../../tribes/wares/flour/helptexts.lua:4
@@ -1974,7 +1994,7 @@ msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is obtained out of gold ore "
 "in a smelting works."
-msgstr ""
+msgstr "L'or és el metall més valuós. S'obté en forma de lingots a partir de mineral d'or en el forn de metalls."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:6
@@ -1982,7 +2002,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Gold is used by the armor smithy, the weapon smithy and the gold spinning "
 "mill."
-msgstr ""
+msgstr "Els lingots d'or s'empren als tallers d'armes i armadures i a la filadora d'or."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../tribes/wares/gold/helptexts.lua:8
@@ -2016,13 +2036,13 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Aquest fil, fet per la filadora d'or, s'empra per teixir l'elegant tabard daurat en el taller de teixir."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../tribes/wares/granite/helptexts.lua:4
 msgctxt "ware"
 msgid "Granite is a basic building material."
-msgstr ""
+msgstr "El granit és un material de construcció bàsic."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../tribes/wares/granite/helptexts.lua:6
@@ -2115,7 +2135,7 @@ msgid ""
 "A warhelm is an enhanced armor for Barbarian warriors. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "El casc de guerra és l'armadura millorada dels guerrers bàrbars. Es produeix al taller de cascos i s'usa en el camp d'entrenament, juntament amb menjar, per entrenar el nivell de vida dels soldats de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../tribes/wares/hook_pole/helptexts.lua:4
@@ -2138,7 +2158,7 @@ msgctxt "ware"
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal"
 " in one blow. It is only used by hunters."
-msgstr ""
+msgstr "Aquesta llança és ideal per a la caça. Només l'usen els caçadors."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/hunting_spear/helptexts.lua:6
@@ -2190,7 +2210,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "No es poden preparar racions, aperitius i àpats sense estris de cuina. Assegureu-vos de tenir un taller de metall per produir aquesta i altres eines bàsiques (però recordeu que no es faran més eines a l'edifici si es millora aquest a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../tribes/wares/kitchen_tools/helptexts.lua:6
@@ -2587,7 +2607,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "Les fibres de junc es produeix en en els camps de junc i s'empren per fer teulades d'edificis resistents a la pluja."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../tribes/wares/trident_double/helptexts.lua:4
@@ -2639,7 +2659,7 @@ msgstr ""
 #: ../../tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "L'aigua és essencial per a la vida!"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:6
@@ -2667,7 +2687,7 @@ msgstr ""
 #: ../../tribes/wares/wheat/helptexts.lua:4
 msgctxt "ware"
 msgid "Wheat is essential for survival."
-msgstr ""
+msgstr "El blat és essencial per sobreviure."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:6
@@ -2690,13 +2710,13 @@ msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr ""
+msgstr "Aquest saborós vi és el que beuen els miners que treballen en mines de marbre i mines d'or. Es produeix als cellers."
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "La llana és el pèl de les ovelles. Els tallers de teixir l'utilitzen per fer teles."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../tribes/workers/atlanteans/armorsmith/helptexts.lua:3
@@ -2786,7 +2806,7 @@ msgstr "Crema troncs per produir carbó vegetal."
 #: ../../tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr ""
+msgstr "Sembra i recol·lecta panís."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -2874,7 +2894,7 @@ msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de
 #: ../../tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr ""
+msgstr "Treballa en mines profundes per obtenir carbó, pedres precioses o minerals d'or o de ferro."
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -2925,19 +2945,19 @@ msgstr "Treballa a la drassana i construeix vaixells."
 #: ../../tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Fon i redueix els metalls dels minerals."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Fon i redueix els metalls dels minerals."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Fon i redueix els metalls dels minerals."
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../tribes/workers/atlanteans/smoker/helptexts.lua:3
@@ -2967,7 +2987,7 @@ msgstr "Defenseu i conqueriu!"
 #: ../../tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Cria aranyes per aconseguir-ne seda."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../tribes/workers/atlanteans/toolsmith/helptexts.lua:3
@@ -3039,7 +3059,7 @@ msgstr "Tala arbres."
 #: ../../tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr ""
+msgstr "Forneja pita per als miners."
 
 #. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
@@ -3047,20 +3067,20 @@ msgstr ""
 #: ../../tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produeix armes per als soldats i eines per als treballadors."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Produeix cervesa per mantenir els miners forts i feliços."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
-msgstr ""
+msgstr "Produeix les millors cerveses per mantenir els guerrers forts i feliços quan s'entrenen."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -3078,13 +3098,13 @@ msgstr "Planta camps de blat."
 #: ../../tribes/workers/barbarians/fisher/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Pesca en aigües properes."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../tribes/workers/empire/fisher/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Pesca en aigües properes."
 
 #. TRANSLATORS: Helptext for a worker: Gamekeeper
 #: ../../tribes/workers/barbarians/gamekeeper/helptexts.lua:3
@@ -3092,37 +3112,37 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "El guarda de peces de caça reintrodueix animals a l'ecosistema, assegurant que la població d'aquests no desapareix."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Cultiva fibres de junc."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Forja cascos per als soldats."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/barbarians/innkeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produeix aliment per als miners."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/empire/innkeeper/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produeix aliment per als miners."
 
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Crema calç en el forn de calç per obtenir lletades de calç."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -3132,32 +3152,32 @@ msgstr ""
 #: ../../tribes/workers/barbarians/miner_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Treballa en mines profundes per obtenir carbó, granit o minerals d'or o de ferro."
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "Els bous ajuden a transportar béns en camins molt transitats. Es crien en granges de bous."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Fabrica teles per a les veles dels vaixells."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Produeix cervesa."
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Treballa a la serradora."
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../tribes/workers/empire/donkey/helptexts.lua:3
@@ -3165,13 +3185,13 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
+msgstr "Els ases ajuden a transportar béns en camins molt transitats. Es crien en granges d'ases."
 
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Mol el blat per produir-ne farina."
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
@@ -3179,34 +3199,34 @@ msgstr ""
 #: ../../tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Treballa en mines profundes per obtenir carbó, marbre o minerals d'or o ferro."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Cria porcs."
 
 #. TRANSLATORS: Helptext for a worker: Shepherd
 #: ../../tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Cria ovelles."
 
 #. TRANSLATORS: Helptext for a worker: Vine Farmer
 #: ../../tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Cultiva ceps."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Produeix vi."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/empire/weaver/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Fabrica teles per a vaixells i soldats."
