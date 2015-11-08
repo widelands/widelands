@@ -31,6 +31,7 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/tribes/tribe_descr.h"
@@ -54,6 +55,26 @@ inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
 }
 
 namespace {
+
+struct EncyclopediaTab {
+	EncyclopediaTab(const std::string& _key,
+	                const std::string& _image_filename,
+	                const std::string& _tooltip,
+	                const std::string& _script_path,
+	                const Widelands::MapObjectType _type)
+	   : key(_key),
+	     image_filename(_image_filename),
+	     tooltip(_tooltip),
+	     script_path(_script_path),
+	     type(_type) {
+	}
+	const std::string key;
+	const std::string image_filename;
+	const std::string tooltip;
+	const std::string script_path;
+	const Widelands::MapObjectType type;
+};
+
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
 	                       "%s<br></p><p font-size=8> <br></p></rt>") %
@@ -66,58 +87,80 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
 	UI::UniqueWindow(
 		&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
      tabs_(this, 0, 0, nullptr) {
-	std::set<std::string> keys({"buildings", "wares", "workers"});
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
-	for (const std::string& key : keys) {
-		wrapper_boxes_.insert(std::make_pair(
-		   key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+	std::vector<std::unique_ptr<EncyclopediaTab>> tab_definitions;
 
-		boxes_.insert(std::make_pair(key,
-		                             std::unique_ptr<UI::Box>(new UI::Box(
-		                                wrapper_boxes_.at(key).get(), 0, 0, UI::Box::Horizontal))));
+	tab_definitions.push_back(
+	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
+	                                                        "pics/genstats_nrwares.png",
+	                                                        _("Wares"),
+	                                                        "tribes/scripting/help/ware_help.lua",
+	                                                        Widelands::MapObjectType::WARE)));
+
+	tab_definitions.push_back(
+	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
+	                                                        "pics/genstats_nrworkers.png",
+	                                                        _("Workers"),
+	                                                        "tribes/scripting/help/worker_help.lua",
+	                                                        Widelands::MapObjectType::WORKER)));
+
+	tab_definitions.push_back(std::unique_ptr<EncyclopediaTab>(
+	   new EncyclopediaTab("buildings",
+	                       "pics/genstats_nrbuildings.png",
+	                       _("Buildings"),
+	                       "tribes/scripting/help/building_help.lua",
+	                       Widelands::MapObjectType::BUILDING)));
+
+	for (const auto& tab : tab_definitions) {
+		// Make sure that all paths exist
+		if (!g_fs->file_exists(tab->script_path)) {
+			throw wexception("Script path %s for tab %s does not exist!",
+			                 tab->script_path.c_str(),
+			                 tab->key.c_str());
+		}
+		if (!g_fs->file_exists(tab->image_filename)) {
+			throw wexception("Image path %s for tab %s does not exist!",
+			                 tab->image_filename.c_str(),
+			                 tab->key.c_str());
+		}
+
+		wrapper_boxes_.insert(std::make_pair(
+		   tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+
+		boxes_.insert(
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::Box>(new UI::Box(
+		                     wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
 
 		lists_.insert(
-		   std::make_pair(key,
+		   std::make_pair(tab->key,
 		                  std::unique_ptr<UI::Listselect<Widelands::WareIndex>>(
 		                     new UI::Listselect<Widelands::WareIndex>(
-		                        boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
+		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
+		lists_.at(tab->key)->selected.connect(boost::bind(
+		   &EncyclopediaWindow::entry_selected, this, tab->key, tab->script_path, tab->type));
 
 		contents_.insert(
-		   std::make_pair(key,
+		   std::make_pair(tab->key,
 		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-		                     boxes_.at(key).get(), 0, 0, contents_width, contents_height))));
+		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 
-		boxes_.at(key)->add(lists_.at(key).get(), UI::Align_Left);
-		boxes_.at(key)->add_space(kPadding);
-		boxes_.at(key)->add(contents_.at(key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add_space(kPadding);
+		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align_Left);
 
-		wrapper_boxes_.at(key)->add_space(kPadding);
-		wrapper_boxes_.at(key)->add(boxes_.at(key).get(), UI::Align_Left);
+		wrapper_boxes_.at(tab->key)->add_space(kPadding);
+		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align_Left);
+
+		tabs_.add("encyclopedia_" + tab->key,
+		          g_gr->images().get(tab->image_filename),
+		          wrapper_boxes_.at(tab->key).get(),
+		          tab->tooltip);
 	}
-
-	tabs_.add("encyclopedia_wares",
-	          g_gr->images().get("pics/genstats_nrwares.png"),
-	          wrapper_boxes_.at("wares").get(),
-	          _("Wares"));
-	tabs_.add("encyclopedia_workers",
-	          g_gr->images().get("pics/genstats_nrworkers.png"),
-	          wrapper_boxes_.at("workers").get(),
-	          _("Workers"));
-	tabs_.add("encyclopedia_buildings",
-	          g_gr->images().get("pics/genstats_nrbuildings.png"),
-	          wrapper_boxes_.at("buildings").get(),
-	          _("Buildings"));
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	// Content
-	lists_.at("buildings")
-	   ->selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
-	lists_.at("wares")->selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
-	lists_.at("workers")
-	   ->selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
 
 	fill_buildings();
 	fill_wares();
@@ -132,7 +175,7 @@ void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaE
 	std::sort(entries.begin(), entries.end());
 	for (uint32_t i = 0; i < entries.size(); i++) {
 		EncyclopediaEntry cur = entries[i];
-		lists_.at(key)->add(cur.descname_, cur.index_, cur.icon_);
+		lists_.at(key)->add(cur.descname, cur.index, cur.icon);
 	}
 	lists_.at(key)->select(0);
 }
@@ -176,49 +219,65 @@ void EncyclopediaWindow::fill_workers() {
 	fill_entries("workers", entries);
 }
 
-template <typename T>
-void EncyclopediaWindow::entry_selected(const Widelands::TribeDescr& tribe,
-                                        const T& map_object,
-                                        const char* tab,
-                                        const char* script_name) {
+void EncyclopediaWindow::entry_selected(const std::string& key,
+                                        const std::string& script_path,
+                                        const Widelands::MapObjectType& type) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
 	try {
-		std::unique_ptr<LuaTable> t(iaplayer().egbase().lua().run_script(script_name));
-		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script(script_path));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
-		cr->push_arg(&map_object);
+
+		std::string descname = "";
+
+		switch (type) {
+		case (Widelands::MapObjectType::BUILDING):
+		case (Widelands::MapObjectType::CONSTRUCTIONSITE):
+		case (Widelands::MapObjectType::DISMANTLESITE):
+		case (Widelands::MapObjectType::WAREHOUSE):
+		case (Widelands::MapObjectType::PRODUCTIONSITE):
+		case (Widelands::MapObjectType::MILITARYSITE):
+		case (Widelands::MapObjectType::TRAININGSITE): {
+			const Widelands::BuildingDescr* descr =
+			   tribe.get_building_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
+		}
+		case (Widelands::MapObjectType::WARE): {
+			const Widelands::WareDescr* descr = tribe.get_ware_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
+		}
+		case (Widelands::MapObjectType::WORKER):
+		case (Widelands::MapObjectType::CARRIER):
+		case (Widelands::MapObjectType::SOLDIER): {
+			const Widelands::WorkerDescr* descr =
+			   tribe.get_worker_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
+		}
+		case (Widelands::MapObjectType::MAPOBJECT):
+		case (Widelands::MapObjectType::BATTLE):
+		case (Widelands::MapObjectType::FLEET):
+		case (Widelands::MapObjectType::BOB):
+		case (Widelands::MapObjectType::CRITTER):
+		case (Widelands::MapObjectType::SHIP):
+		case (Widelands::MapObjectType::IMMOVABLE):
+		case (Widelands::MapObjectType::FLAG):
+		case (Widelands::MapObjectType::ROAD):
+		case (Widelands::MapObjectType::PORTDOCK):
+		default:
+			throw wexception("EncyclopediaWindow: No MapObjectType defined for tab.");
+		}
+
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		contents_.at(tab)
-		   ->set_text((boost::format("%s%s") % heading(map_object.descname()) % help_text).str());
+		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
 	} catch (LuaError& err) {
-		contents_.at(tab)->set_text(err.what());
+		contents_.at(key)->set_text(err.what());
 	}
-	contents_.at(tab)->scroll_to_top();
-}
-
-
-void EncyclopediaWindow::building_selected(uint32_t) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	entry_selected<Widelands::BuildingDescr>(
-	   tribe,
-	   *tribe.get_building_descr(lists_.at("buildings")->get_selected()),
-	   "buildings",
-	   "tribes/scripting/help/building_help.lua");
-}
-
-void EncyclopediaWindow::ware_selected(uint32_t) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	entry_selected<Widelands::WareDescr>(tribe,
-	                                     *tribe.get_ware_descr(lists_.at("wares")->get_selected()),
-	                                     "wares",
-	                                     "tribes/scripting/help/ware_help.lua");
-}
-
-void EncyclopediaWindow::worker_selected(uint32_t) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
-	entry_selected<Widelands::WorkerDescr>(
-	   tribe,
-	   *tribe.get_worker_descr(lists_.at("workers")->get_selected()),
-	   "workers",
-	   "tribes/scripting/help/worker_help.lua");
+	contents_.at(key)->scroll_to_top();
 }

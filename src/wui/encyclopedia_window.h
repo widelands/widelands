@@ -41,19 +41,19 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 private:
 	struct EncyclopediaEntry {
 		EncyclopediaEntry(const EncyclopediaEntry& other)
-		   : EncyclopediaEntry(other.index_, other.descname_, other.icon_) {
+		   : EncyclopediaEntry(other.index, other.descname, other.icon) {
 		}
-		EncyclopediaEntry(const Widelands::WareIndex index,
-		                  const std::string& descname,
-		                  const Image* icon)
-		   : index_(index), descname_(descname), icon_(icon) {
+		EncyclopediaEntry(const Widelands::WareIndex _index,
+		                  const std::string& _descname,
+		                  const Image* _icon)
+		   : index(_index), descname(_descname), icon(_icon) {
 		}
-		Widelands::WareIndex index_;
-		std::string descname_;
-		const Image* icon_;
+		Widelands::WareIndex index;
+		std::string descname;
+		const Image* icon;
 
 		bool operator<(const EncyclopediaEntry other) const {
-			return descname_ < other.descname_;
+			return descname < other.descname;
 		}
 	};
 
@@ -66,15 +66,9 @@ private:
 	void fill_workers();
 
 	// Update contents when an entry is selected
-	template <typename T>
-	void entry_selected(const Widelands::TribeDescr& tribe,
-	                    const T& map_object,
-	                    const char* tab,
-	                    const char* script_name);
-
-	void building_selected(uint32_t);
-	void ware_selected(uint32_t);
-	void worker_selected(uint32_t);
+	void entry_selected(const std::string& key,
+	                    const std::string& script_path,
+	                    const Widelands::MapObjectType& type);
 
 	// UI elements
 	UI::TabPanel tabs_;
