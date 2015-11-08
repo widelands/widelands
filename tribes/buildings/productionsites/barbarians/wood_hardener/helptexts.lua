@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Hardens wood by fire into blackwood, which is used to construct robust buildings.")
+   return pgettext("barbarians_building", "Hardens wood by fire into blackwood, which is used to construct robust buildings.")
 end
 
 function building_helptext_note()
