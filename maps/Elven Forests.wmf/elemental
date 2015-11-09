@@ -10,3 +10,13 @@ author="Winterwind"
 descr=_"The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
 hint=
 tags="2teams,artifacts,ffa,official"
+
+[teams00]
+team1=0,1
+team2=2,3
+# (blue, red) vs. (yellow, green)
+
+[teams01]
+team1=0,2
+team2=1,3
+# (blue, yellow) vs. (red, green)

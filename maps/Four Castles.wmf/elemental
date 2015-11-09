@@ -10,3 +10,8 @@ author="Winterwind"
 descr=_"Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 hint=
 tags="2teams,artifacts,ffa,official"
+
+[teams00]
+team1=0,1
+team2=2,3
+# (blue, red) vs. (yellow, green)

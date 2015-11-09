@@ -10,3 +10,8 @@ author="Nasenbaer"
 descr=_"You are standing on an island, crowned by mighty mountains which keep a wonderful and mighty treasure in their middle – The Green Plateau, which is hard to conquer but easy to lose. So, if you want it, be aware of the other clans."
 hint=
 tags="1v1,artifacts,official"
+
+[teams00]
+team1=0
+team2=2
+# blue vs. yellow

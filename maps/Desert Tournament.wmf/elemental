@@ -10,3 +10,8 @@ author="ivh"
 descr=_"Four tribes struggle with their nearest neighbor to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
 hint=
 tags="2teams,artifacts,ffa,official"
+
+[teams00]
+team1=0,1
+team2=2,3
+# (blue, red) vs. (yellow, green)

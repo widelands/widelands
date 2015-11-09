@@ -10,3 +10,8 @@ author="Nasenbaer"
 descr=_"It is said that the old war monks, living in the even older swamps, are the key to control over the whole island."
 hint=
 tags="2teams,artifacts,official"
+
+[teams00]
+team1=0,1
+team2=2,3
+# (blue, red) vs. (yellow, green)
