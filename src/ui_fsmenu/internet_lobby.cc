@@ -433,8 +433,11 @@ void FullscreenMenuInternetLobby::clicked_hostgame()
 {
 	// Save selected servername as default for next time and during that take care that the name is not empty.
 	std::string servername_ui = servername.text();
-	if (servername_ui.empty())
-		servername_ui = _("unnamed");
+	if (servername_ui.empty()) {
+		/** TRANSLATORS: This is shown for multiplayer games when no host */
+		/** TRANSLATORS: server to connect to has been specified yet. */
+		servername_ui = pgettext("server_name", "unnamed");
+	}
 
 	g_options.pull_section("global").set_string("servername", servername_ui);
 
