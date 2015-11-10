@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:37+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-08 15:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -169,8 +169,8 @@ msgid ""
 msgstr "Nasz statek został poważnie uszkodzony i nabiera coraz więcej wody. Tylko bogowie mogą sprawić, że wyjdziemy z tego cali."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
-msgstr "Ocalony"
+msgid "Survivors"
+msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-08 15:54+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-08 16:02+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -172,7 +172,7 @@ msgid ""
 msgstr "Unser Schiff ist schwer beschädigt und es fasst immer mehr Wasser. Wir können den Göttern danken, wenn wir diese schwarze Nacht überleben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
+msgid "Survivors"
 msgstr "Überlebende"
 
 #. TRANSLATORS: Lutius - Diary

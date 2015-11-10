@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:48+0000\n"
-"PO-Revision-Date: 2015-11-08 12:33+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-09 08:44+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -239,16 +239,16 @@ msgstr "Widelands kunne ikke indlæse filen »%s«. Filformatet ser ud til at v�
 msgid "Creating players"
 msgstr "Opretter spillere"
 
-#: ../../src/editor/editorinteractive.cc:253
+#: ../../src/editor/editorinteractive.cc:251
 msgid "Unsaved Map"
 msgstr "Kort er ikke gemt"
 
-#: ../../src/editor/editorinteractive.cc:254
+#: ../../src/editor/editorinteractive.cc:252
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Kortet er ikke blevet gemt, ønsker du at afslutte?"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:599
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:507
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -256,7 +256,7 @@ msgstr "Kortet er ikke blevet gemt, ønsker du at afslutte?"
 msgid "No Name"
 msgstr "Intet navn"
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:598
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
 msgctxt "map_name"
@@ -797,6 +797,7 @@ msgid "Player %u"
 msgstr "Spiller %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:272
+#: ../../src/ui_fsmenu/multiplayer.cc:144
 msgid "Error!"
 msgstr "Fejl!"
 
@@ -956,7 +957,7 @@ msgid "Configuring players"
 msgstr "Opsætter spillere"
 
 #: ../../src/logic/game.cc:384 ../../src/logic/game.cc:418
-#: ../../src/wlapplication.cc:1421
+#: ../../src/wlapplication.cc:1411
 msgid "Loading..."
 msgstr "Indlæser ..."
 
@@ -1220,11 +1221,11 @@ msgstr "Enden af genafspilningen er nået og derfor spillet er sat på pause. Du
 msgid "Saving game..."
 msgstr "Gemmer spil ..."
 
-#: ../../src/logic/save_handler.cc:120
+#: ../../src/logic/save_handler.cc:121
 msgid "Saving failed!"
 msgstr "Kunne ikke gemme!"
 
-#: ../../src/logic/save_handler.cc:139
+#: ../../src/logic/save_handler.cc:140
 msgid "Game saved"
 msgstr "Spil gemt"
 
@@ -1303,12 +1304,12 @@ msgstr "bør avle ressourcetype %s, som ikke findes i denne verden; stammen kan 
 msgid "A geologist found resources."
 msgstr "En geolog har fundet ressourcer."
 
-#: ../../src/logic/worker.cc:1876
+#: ../../src/logic/worker.cc:1877
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Din %s kan ikke finde hjem og vil sandsynligvis dø."
 
-#: ../../src/logic/worker.cc:1884
+#: ../../src/logic/worker.cc:1885
 msgid "Worker got lost!"
 msgstr "Arbejder farede vild!"
 
@@ -1521,7 +1522,7 @@ msgid ""
 msgstr "Widelands kunne ikke oprette en forbindelse til den givne adresse.\nEnten kørte ingen Widelands-server på den formodede port eller\nogså lukkede serveren ned, da du forsøgte at oprette forbindelse."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:837
-#: ../../src/wlapplication.cc:1311
+#: ../../src/wlapplication.cc:1301
 msgid "Preparing game"
 msgstr "Forbereder spil"
 
@@ -2185,7 +2186,7 @@ msgstr "Åbn et nyt spil"
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:59
-#: ../../src/ui_fsmenu/multiplayer.cc:47
+#: ../../src/ui_fsmenu/multiplayer.cc:49
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
 msgid "Back"
@@ -2235,6 +2236,13 @@ msgstr "Tidsudløb på forbindelsen"
 #: ../../src/ui_fsmenu/internet_lobby.cc:418
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands kunne ikke forbinde til værten."
+
+#. * TRANSLATORS: This is shown for multiplayer games when no host
+#. * TRANSLATORS: server to connect to has been specified yet.
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
+msgctxt "server_name"
+msgid "unnamed"
+msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."
@@ -2788,23 +2796,23 @@ msgid ""
 "sent by the server."
 msgstr "Denne kortfil er ikke til stede i dit filsystem. Dataene vist her blev sendt af serveren."
 
-#: ../../src/ui_fsmenu/multiplayer.cc:34
+#: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
 msgstr "Vælg spiltype"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:41
+#: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Internet game"
 msgstr "Internetspil"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:44
+#: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "LAN / Direct IP"
 msgstr "LAN / Direkte IP"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:84
+#: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
 msgstr "Vis loginddialog"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:114
+#: ../../src/ui_fsmenu/multiplayer.cc:116
 #: ../../src/ui_fsmenu/netsetup_lan.cc:112 ../../src/wui/login_box.cc:76
 msgid "nobody"
 msgstr "ingen"
@@ -3013,11 +3021,11 @@ msgstr "Missioner"
 msgid "Load Game"
 msgstr "Hent spil"
 
-#: ../../src/wlapplication.cc:1095
+#: ../../src/wlapplication.cc:1085
 msgid "Game data error"
 msgstr "Fejl ved spildata"
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1095
 #, c-format
 msgid ""
 "\n"
@@ -3025,7 +3033,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nRapporter venligst dette problem så vi kan forbedre Widelands. Du kan finde forbundne beskeder i standardud (stdout.txt på Windows). Du bruger version %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1102
 msgid ""
 "Please add this information to your report.\n"
 "\n"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-07 08:48+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
@@ -1340,7 +1340,7 @@ msgstr ""
 #: ../../tribes/scripting/help/building_help.lua:280
 #: ../../tribes/scripting/help/building_help.lua:285
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1646,7 +1646,7 @@ msgstr "Asciae arma simplicia Barbara sunt. Omnes iuvenes milites eas accipiunt.
 msgctxt "barbarians_ware"
 msgid ""
 "This is a dangerous weapon the Barbarians are able to produce. It is "
-"produced in the ax workshop. Only trained warriors are able to wield such a "
+"produced in the ax workshop. Only trained soldiers are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
@@ -1656,7 +1656,7 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
-"the training camp – together with food – to train warriors with a "
+"the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
 msgstr ""
 
@@ -1665,15 +1665,16 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
-"warriors can use it. It is produced at the war mill and used in the training"
-" camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
+"soldiers can use it. It is produced at the war mill and used in the training"
+" camp – together with food – to train soldiers from attack level 2 to level "
+"3."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Young warriors are proud to learn to fight with this powerful weapon. It is "
+"Young soldiers are proud to learn to fight with this powerful weapon. It is "
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
@@ -1684,10 +1685,10 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
-"warriors ever were able to handle those huge and powerful axes. It is "
-"produced in a war mill and used – together with food – in a training camp to"
-" train soldiers from attack level 4 to level 5."
-msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
+"soldiers ever were able to handle this huge and powerful ax. It is produced "
+"in a war mill and used – together with food – in a training camp to train "
+"soldiers from attack level 4 to level 5."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../tribes/wares/basket/helptexts.lua:4
@@ -1717,7 +1718,7 @@ msgstr ""
 #: ../../tribes/wares/beer_strong/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Only this beer is acceptable for the warriors in a battle arena. Some say "
+"Only this beer is acceptable for the soldiers in a battle arena. Some say "
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
@@ -2113,10 +2114,10 @@ msgstr ""
 #: ../../tribes/wares/helmet/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A helmet is a basic tool to protect warriors. It is produced in the helm "
+"A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../tribes/wares/helmet_mask/helptexts.lua:4
@@ -2131,10 +2132,10 @@ msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum
 #: ../../tribes/wares/helmet_warhelm/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A warhelm is an enhanced armor for Barbarian warriors. It is produced in a "
+"A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr "Galea ferramentum elementarium pro militibus protegendo est. In Galearum fabrica facta est et in castris exercendi usa est cum cibo, ut miles ab punctis valetudinis gradus 0 ad puncti valetudinis gradus 1 excolatur."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../tribes/wares/hook_pole/helptexts.lua:4
@@ -2412,15 +2413,15 @@ msgstr ""
 #: ../../tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"The saw is needed by the woodcutter and the toolsmith. It is produced by the"
-" toolsmith."
-msgstr "Falx instrumentum agricolae est. Quae a fabre facitur."
+"The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
+"produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr "Rete piscarium ab instrumentorum fabro factum a piscatore utitur."
+msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:4
@@ -2454,7 +2455,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
-"food – to train soldiers from Defense level 1 to level 2."
+"food – to train soldiers from defense level 1 to level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
@@ -2553,7 +2554,7 @@ msgstr ""
 msgctxt "empire_ware"
 msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
-"warriors. It is used in the training camp – together with food – to train "
+"soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
 
@@ -2578,7 +2579,7 @@ msgstr ""
 #: ../../tribes/wares/spidercloth/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
+"Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
@@ -3078,8 +3079,8 @@ msgstr ""
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
-"Produces the finest ales to keep warriors strong and happy in training."
-msgstr "Facit bonam cervisiam, ut milites fortius et leatius exerceant."
+"Produces the finest ales to keep soldiers strong and happy in training."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/barbarians/farmer/helptexts.lua:3

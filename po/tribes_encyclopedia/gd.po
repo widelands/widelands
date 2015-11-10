@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-07 09:06+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1079,17 +1079,17 @@ msgstr "Trèanaidh e “Ionnsaigh” nan saighdearan."
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:19
 msgctxt "atlanteans_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Armaichidh e na saighdearan leis na h-airm is an armachd a dh’fheumas iad."
 
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Armaichidh e na saighdearan leis na h-airm is an armachd a dh’fheumas iad."
 
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:19
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Armaichidh e na saighdearan leis na h-airm is an armachd a dh’fheumas iad."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:17
@@ -1254,7 +1254,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
@@ -1262,7 +1262,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/port/helptexts.lua:16
@@ -1270,7 +1270,7 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
@@ -1346,11 +1346,11 @@ msgstr "Slàinte:"
 #: ../../tribes/scripting/help/building_help.lua:280
 #: ../../tribes/scripting/help/building_help.lua:285
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Gheibh saighdearan a tha san togalach seo slànachadh le %s phuing gach diog"
-msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %s phuing gach diog"
-msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %s puingean gach diog"
-msgstr[3] "Gheibh saighdearan a tha san togalach seo slànachadh le %s puing gach diog"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog"
+msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog"
+msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puingean gach diog"
+msgstr[3] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puing gach diog"
 
 #: ../../tribes/scripting/help/building_help.lua:281
 #: ../../tribes/scripting/help/building_help.lua:287
@@ -1641,7 +1641,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "’S e acainn bunasach a th’ anns a’ chlogaid gus gaisgeach a dhìon. Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh le sleagh fiodha gus gaisgich òga uidheamachadh. Thèid clogaidean a chleachdadh sa champa trèanaidh cuideachd – le biadh – gus saighdearan a thrèanadh o shlàinte leibheil 0 gu slàinte leibheil 1."
+msgstr "’S e acainn bunasach a th’ anns a’ chlogaid gus gaisgeach a dhìon. Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh le sleagh fiodha gus saighdearan òga uidheamachadh. Thèid clogaidean a chleachdadh sa champa trèanaidh cuideachd – le biadh – gus saighdearan a thrèanadh o shlàinte leibheil 0 gu slàinte leibheil 1."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../tribes/wares/ax/helptexts.lua:4
@@ -1656,48 +1656,49 @@ msgstr "’S e an t-arm bunasach aig na Tùsanaich a th’ anns an tuagh. Beirid
 msgctxt "barbarians_ware"
 msgid ""
 "This is a dangerous weapon the Barbarians are able to produce. It is "
-"produced in the ax workshop. Only trained warriors are able to wield such a "
+"produced in the ax workshop. Only trained soldiers are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
-msgstr "Seo arm cunnartach a nì na Tùsanaich. Thèid a shaothrachadh sa cheàrdach thuaghan. Chan urrainn ach gaisgich a fhuair trèanadh arm mar sin iomairt. Thèid a chleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
+msgstr "Seo arm cunnartach a nì na Tùsanaich. Thèid a shaothrachadh sa cheàrdach thuaghan. Chan urrainn ach saighdearan a fhuair trèanadh arm mar sin iomairt. Thèid a chleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
-"the training camp – together with food – to train warriors with a "
+"the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr "Saothraichidh a’ cheàrdach thuaghan is a’ cheàrdach-cogaidh tuaghan mòra. Thèid an cleachdadh – le biadh – gus gaisgich a thrèanadh air eòlas sabaide bunasach o ionnsaigh leibheil 1 gu ionnsaigh leibheil 2."
+msgstr "Saothraichidh a’ cheàrdach thuaghan is a’ cheàrdach-cogaidh tuaghan mòra. Thèid an cleachdadh – le biadh – gus saighdearan a thrèanadh air eòlas sabaide bunasach o ionnsaigh leibheil 1 gu ionnsaigh leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../tribes/wares/ax_bronze/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
-"warriors can use it. It is produced at the war mill and used in the training"
-" camp (it trains – together with food – from attack level 2 to level 3)."
-msgstr "Thathar ag ràdh gur e arm a tha doirbh làimhseachadh a th’ anns an tuagh umha. Chan urrainn ach gaisgich sgileil ga cleachdadh. Thèid a saothrachadh sa cheàrdach-cogaidh is a cleachdadh ann an campa trèanaidh (trèanaichidh e – le biadh – an ionnsaigh o leibheil 2 gu leibheil 3)."
+"soldiers can use it. It is produced at the war mill and used in the training"
+" camp – together with food – to train soldiers from attack level 2 to level "
+"3."
+msgstr "Thathar ag ràdh gur e arm a tha doirbh làimhseachadh a th’ anns an tuagh umha. Chan urrainn ach saighdearan sgileil a cleachdadh. Thèid a saothrachadh ann an ceàrdach-cogaidh is a cleachdadh ann an campa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../tribes/wares/ax_sharp/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Young warriors are proud to learn to fight with this powerful weapon. It is "
+"Young soldiers are proud to learn to fight with this powerful weapon. It is "
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr "Tha gach gaisgeach òr moiteil a dh’ionnsaicheas sabaid leis an arm chumhachdach seo. Tha e nas truime gèire na an tuagh àbhaisteach. Saothraichidh tu sa cheàrdach thuaghan i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
+msgstr "Tha gach saighdear òg moiteil a dh’ionnsaicheas sabaid leis an arm chumhachdach seo. Tha e nas truime gèire na an tuagh àbhaisteach. Saothraichidh tu sa cheàrdach thuaghan i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../tribes/wares/ax_warriors/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
 "The warrior’s ax is the most dangerous of all Barbarian weapons. Only a few "
-"warriors ever were able to handle those huge and powerful axes. It is "
-"produced in a war mill and used – together with food – in a training camp to"
-" train soldiers from attack level 4 to level 5."
-msgstr "Is an tuagh-ghaisgich an arm as cunnartaiche aig na Tùsanaich. ’S gann na gaisgich a bhios comasach air na tuaghan làidir mòra seo a làimhseachadh. Saothraichidh tu sa cheàrdach-cogaidh i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 4 gu leibheil 5."
+"soldiers ever were able to handle this huge and powerful ax. It is produced "
+"in a war mill and used – together with food – in a training camp to train "
+"soldiers from attack level 4 to level 5."
+msgstr "Is an tuagh-ghaisgich an arm as cunnartaiche aig na Tùsanaich. ’S gann na saighdearan a bhios comasach air an tuagh làidir mhòr seo a làimhseachadh. Saothraichidh tu sa cheàrdach-cogaidh i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 4 gu leibheil 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../tribes/wares/basket/helptexts.lua:4
@@ -1727,11 +1728,11 @@ msgstr "Nì thu an leann seo ann an taigh-grùide à cruithneachd is uisge. Òla
 #: ../../tribes/wares/beer_strong/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"Only this beer is acceptable for the warriors in a battle arena. Some say "
+"Only this beer is acceptable for the soldiers in a battle arena. Some say "
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
-msgstr "Cha ghabh na gaisgich ann an raon catha ach ris an leann seo. Tha cuid ag ràdh gu bheil neart slàn nan Tùsanach san leann seo. Cuidichidh e ach an trèanaich thu teàrnadh saighdeir o leibheil 0 gu 1 gu 2. Cleachdaidh na taighean-seinnse leann làidir cuideachd gus miasan ullachadh."
+msgstr "Cha ghabh na saighdearan ann an raon catha ach ris an leann seo. Tha cuid ag ràdh gu bheil neart slàn nan Tùsanach san leann seo. Cuidichidh e ach an trèanaich thu teàrnadh saighdeir o leibheil 0 gu 1 gu 2. Cleachdaidh na taighean-seinnse leann làidir cuideachd gus miasan ullachadh."
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../tribes/wares/blackroot/helptexts.lua:4
@@ -2091,7 +2092,7 @@ msgstr "Nì thu aol-tàthaidh de ghaireal a bheir stuth togail seasmhach dhut na
 #: ../../tribes/wares/hammer/helptexts.lua:4
 msgctxt "ware"
 msgid "The hammer is an essential tool."
-msgstr ""
+msgstr "’S e acainn riatanach a th’ anns an òrd."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:6
@@ -2099,7 +2100,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Feumaidh gach clach-eòlaiche, togalaiche, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:10
@@ -2107,7 +2108,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Feumaidh gach clach-eòlaiche, togalaiche, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../tribes/wares/hammer/helptexts.lua:8
@@ -2123,10 +2124,10 @@ msgstr "Feumaidh gach clach-eòlaiche, togalaiche, gobha is gobha chlogaidean ò
 #: ../../tribes/wares/helmet/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A helmet is a basic tool to protect warriors. It is produced in the helm "
+"A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "’S e acainn bunasach a th’ anns a’ chlogaid gus saighdearan a dhìon. Saothraichidh tu ann an ceàrdach chlogaidean i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o shlàinte 0 gu slàinte leibheil 1."
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../tribes/wares/helmet_mask/helptexts.lua:4
@@ -2135,16 +2136,16 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr ""
+msgstr "Seo an armachd as adhartaiche aig na Tùsanaich. Saothraichidh tu ann an ceàrdach chlogaidean e is thèid a chleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o shlàinte leibheil 2 gu slàinte leibheil 3."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../tribes/wares/helmet_warhelm/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"A warhelm is an enhanced armor for Barbarian warriors. It is produced in a "
+"A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "’S e armachd leasaichte a th’ anns a’ chlogaid cogaidh gus saighdearan nan Tùsanach a dhìon. Saothraichidh tu ann an ceàrdach chlogaidean e is thèid a chleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o shlàinte leibheil 1 gu slàinte leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../tribes/wares/hook_pole/helptexts.lua:4
@@ -2167,7 +2168,7 @@ msgctxt "ware"
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal"
 " in one blow. It is only used by hunters."
-msgstr ""
+msgstr "Tha an t-sleagh seo aotrom gu leòr ach an tilg thu i, ach trom gu leòr ach am marbh thu beathach sam bith leatha le aon bhuille. Cha chleachd ach sealgairean i."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/hunting_spear/helptexts.lua:6
@@ -2181,13 +2182,13 @@ msgstr "Thèid sleaghan seilg a saothrachadh sa cheàrdach meatailt (ach cha sao
 #: ../../tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is extracted from iron ore in the smelting works."
-msgstr ""
+msgstr "Gheibh tu iarainn à clach-iarainn ann an ceàrdach leaghadair."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr ""
+msgstr "Cleachdaidh do threubh e sa cheàrdach acainnean, sa cheàrdach armachd agus sa cheàrdach arm."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../tribes/wares/iron/helptexts.lua:8
@@ -2201,7 +2202,7 @@ msgstr "Cleachdaidh do threubh e gus airm is acainnean a dhèanamh sa cheàrdach
 #: ../../tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Weapons, armor and tools are made of iron."
-msgstr ""
+msgstr "Nì thu airm, armachd is acainnean de dh’iarainn."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../tribes/wares/iron_ore/helptexts.lua:4
@@ -2227,7 +2228,7 @@ msgctxt "empire_ware"
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgstr "Ciamar a dhèanadh tu greimeag no mias às aonais acainnean cidsin? Nì gobha acainnean iad is thèid an cleachdadh ann an taighean-tàirn is taighean-seinnse."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:4
@@ -2235,7 +2236,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr ""
+msgstr "’S e stuth togail bunasach a tha san fhiodh. Leagaidh tu craobhan gus fhaighinn."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:6
@@ -2244,7 +2245,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr ""
+msgstr "Nì na h-Atlantaich maidean de dh’fhiodh is thèid an cleachdadh airson cha mhòr gach togalach aca. A bharrachd air a’ mhuileann-sàbhaidh, feumaidh an àth-ghuail, a’ cheàrdach acainnean is an taigh-toitidh fiodhan airson an cuid obrach."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../tribes/wares/log/helptexts.lua:8
@@ -2263,7 +2264,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr ""
+msgstr "Thèid na craobhan a leagail le coilltearan nah-Impireachd is gabhaidh planntairean-coille cùram dhe na craobhan. Cleachdaich an àth-ghuail, a’ cheàrdach acainnean is am muileann sàbhaidh fiodh cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Marble
 #: ../../tribes/wares/marble/helptexts.lua:4
@@ -2272,7 +2273,7 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as a building material and gets chiseled into "
 "marble columns in the stonemason’s house."
-msgstr ""
+msgstr "’S e clach àlainn a th’ anns a’ mharmor a thèid a ghearradh às na beanntan no a shaothrachadh ann an coireall. Cleachdaidh tu e mar stuth togail is nì thu colbhan marmoir dheth ann an taigh clachair."
 
 #. TRANSLATORS: Helptext for a ware: Marble Column
 #: ../../tribes/wares/marble_column/helptexts.lua:4
@@ -2281,7 +2282,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr ""
+msgstr "Riochdaichidh colbhan marmoir àrd-chultar na h-Impireachd, mar sin bi feum orra airson a’ mhòrchuid de na togalaichean mòra. Thèid an saothrachadh à marmor ann an taigh clachair."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../tribes/wares/meal/helptexts.lua:4
@@ -2289,7 +2290,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
-msgstr ""
+msgstr "Nì thu mias à aran tur, leann làidir is iasg/feòil ann an taigh-seinnse. Seo am biadh mòr air a bhios an luchd-obrach sna mèinnean as doimhne feumach."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../tribes/wares/meal/helptexts.lua:6
@@ -2297,7 +2298,7 @@ msgctxt "empire_ware"
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
-msgstr ""
+msgstr "Thèid mias ceart a dhèanamh ann an taighean-òil à aran is iasg/feòil. Coileanaidh i feumalachdan nam mèinnearan ann am mèinnean domhain."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:4
@@ -2305,7 +2306,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunters."
-msgstr ""
+msgstr "Tha tòrr chumhachd san fheòil agus gheibh thu o na sealgairean i a shealgas sitheann dhut."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:6
@@ -2313,7 +2314,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to mines and "
 "training sites (dungeon and labyrinth)."
-msgstr ""
+msgstr "Feumaidh tu feòil a thoiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean is làraichean-trèanaidh (toll-dubh is cuartan) iad."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:8
@@ -2322,7 +2323,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Cleachdaidh tu feòil sna taighean-tàirn, taighean-òil is taighean-seinnse gus greimeagan, lòin is miasan ullachadh do na mèinnearan. Ithidh na saigheadan i sna làraichean-trèanaidh cuideachd (campaichean trèanaidh is raointean catha)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../tribes/wares/meat/helptexts.lua:10
@@ -2331,7 +2332,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Gheibh thu feòil na muicfheoil on fhail cuideachd. Thèid a cleachdadh sna taighean-tàirn is taighean-òil gus biadh ullachadh do na mèinnearan. Ithidh na saighdearan i sna làraichean-trèanaidh cuideachd (raointean spòrs, coileasaman is campaichean trèanaidh)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../tribes/wares/milking_tongs/helptexts.lua:4
@@ -2364,7 +2365,7 @@ msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
 "toolsmith."
-msgstr ""
+msgstr "Cleachdaidh clachairean is mèinnearan piocaidean. Saothraichidh an gobha acainnean iad."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:4
@@ -2372,7 +2373,7 @@ msgctxt "ware"
 msgid ""
 "Planks are an important building material. They are produced out of logs by "
 "the sawmill."
-msgstr ""
+msgstr "’S e stuth togail cudromach a th’ anns na maidean. Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:6
@@ -2380,13 +2381,13 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
-msgstr ""
+msgstr "Cleachdaidh a’ cheàrdach arm is an doca maidean cuideachd gus muirgheadhan is longan cumhachdach a thogail."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
-msgstr ""
+msgstr "Cleachdaidh a’ cheàrdach arm iad cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Quartz
 #: ../../tribes/wares/quartz/helptexts.lua:4
@@ -2402,7 +2403,7 @@ msgctxt "ware"
 msgid ""
 "A small bite to keep miners strong and working. The scout also consumes "
 "rations on his scouting trips."
-msgstr ""
+msgstr "Seo biadh beag a chumas na mèinnearan làidir is ag obair. Ithidh an rabhadair greimeagan air na tursan aige cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../tribes/wares/ration/helptexts.lua:6
@@ -2410,45 +2411,45 @@ msgctxt "barbarians_ware"
 msgid ""
 "Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
 " pitta bread."
-msgstr ""
+msgstr "Nì thu greimeagan de dh’èisg, feòil no aran tur ann an taigh-tàirn, taigh-òil no taigh-seinnse."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../tribes/wares/ration/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
-msgstr ""
+msgstr "Nì thu greimeagan de dh’èisg, feòil no aran ann an taigh-tàirn."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"The saw is needed by the woodcutter and the toolsmith. It is produced by the"
-" toolsmith."
-msgstr "Feumaidh am buaineadair-fiodha is an gobha acainnean sàbh. Thèid a shaothrachadh leis a’ ceàrdach acainnean."
+"The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
+"produced by the toolsmith."
+msgstr "Feumaidh an saor, am buaineadair-fiodha is an gobha acainnean sàbh. Thèid a shaothrachadh leis a’ ceàrdach acainnean."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
-msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr "Cleachdaidh sàbhadair an sàbh seo. Saothraichidh a’ cheàrdach acainnean e."
+msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
+msgstr "Tha sàbhadairean feumach air an t-sàbh seo. Nì an ceàrdach acainnean e."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:4
 msgctxt "ware"
 msgid "The scythe is the tool of the farmers."
-msgstr ""
+msgstr "Tha tuathanaich feumach air an fhàl seo."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Thèid fàil a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Thèid fàil a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:8
@@ -2464,8 +2465,8 @@ msgctxt "atlanteans_ware"
 msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
-"food – to train soldiers from Defense level 1 to level 2."
-msgstr "Cleachdaidh na saighdearan as fhearr aig na h-Atlantaich na sgiathan adhartach seo. Saothraichidh tu sa cheàrdach arm iad is thèid an cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
+"food – to train soldiers from defense level 1 to level 2."
+msgstr "Cleachdaidh na saighdearan as fhearr aig na h-Atlantaich na sgiathan adhartach seo. Saothraichidh tu ann an ceàrdach arm iad is thèid an cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../tribes/wares/shield_steel/helptexts.lua:4
@@ -2479,7 +2480,7 @@ msgstr "Saothraichidh tu an sgiath stàilinn seo sa cheàrdach arm is thèid a c
 #: ../../tribes/wares/shovel/helptexts.lua:4
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
-msgstr ""
+msgstr "Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:6
@@ -2487,7 +2488,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Therefore the forester and the blackroot farmer use them. They are produced "
 "by the toolsmith."
-msgstr ""
+msgstr "Mar sin, cleachdaidh am planntair-coille is an tuathanach fhreumhagan tè. Thèid a saothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../tribes/wares/shovel/helptexts.lua:8
@@ -2504,7 +2505,7 @@ msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Mar sin, cleachdaidh am planntair-coille is an tuathanach-fìona tè. Thèid a saothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../tribes/wares/smoked_fish/helptexts.lua:4
@@ -2529,7 +2530,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "Seo greim bidhe nas motha na a’ ghreimeag gus mèinnearan ann am mèinnean domhain a bhiadhadh. Nì taigh-òil no taigh-seinnse e dhe iasg/feòil, aran tur is leann."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../tribes/wares/spear/helptexts.lua:4
@@ -2538,7 +2539,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr ""
+msgstr "Tha spìc iarainn aig an t-sleagh seo. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../tribes/wares/spear_advanced/helptexts.lua:4
@@ -2547,7 +2548,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
+msgstr "Seo sleagh leasaichte le barr stàilinn. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../tribes/wares/spear_heavy/helptexts.lua:4
@@ -2556,16 +2557,16 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "Seo sleagh làidir le barr stàilinn is lann bheag. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../tribes/wares/spear_war/helptexts.lua:4
 msgctxt "empire_ware"
 msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
-"warriors. It is used in the training camp – together with food – to train "
+"soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
+msgstr "Seo an arm as fhearr is as geura a nì airm-chiùird na h-Impireachd airson nan saighdearan. Thèid a chleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../tribes/wares/spear_wooden/helptexts.lua:4
@@ -2574,7 +2575,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
+msgstr "’S e an t-arm bunasach ann an siostam arm na h-Impireachd a th’ anns an t-sleagh fiodha. Thèid a shaothrachadh ann an ceàrdach arm. Beiridh gach saighdear òg tè is clogaid."
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../tribes/wares/spider_silk/helptexts.lua:4
@@ -2582,16 +2583,16 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "Saothraichidh damhain a thogas tu ann an tuathanasan dhamhan snàth-sìoda. Nì thu sìoda às ann an taigh nam beart."
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../tribes/wares/spidercloth/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
+"Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "Nì thu sìoda à snàth-sìoda ann an taigh nam beart. Cleachdaidh a’ cheàrdach acainnean is an cala e. Feumaidh tu sìoda cuideachd gus cuid a thogalaichean adhartach a thogail."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../tribes/wares/tabard/helptexts.lua:4
@@ -2608,7 +2609,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr ""
+msgstr "Nì thu lèine òir de shnàth òir ann an taigh nam beart. Thèid a cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o slàinte leibheil 0 gu slàinte leibheil 1."
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../tribes/wares/thatch_reed/helptexts.lua:4
@@ -2616,7 +2617,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "Nì thu feur tughaidh ann am feur-lios is dìonaidh tu mullaich nan taighean an aghaidh an uisge leis."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../tribes/wares/trident_double/helptexts.lua:4
@@ -2662,19 +2663,19 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon  – together with food – to train from "
 "attack level 1 to level 2."
-msgstr ""
+msgstr "Seo a’ mhuirgheadh mheadhanach. Saothraichidh tu sa cheàrdach arm i is thèid a cleachdadh le saighdearan adhartach san toll-dubh – le biadh – gus an ionnsaigh a thrèanadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "Is bith-bhrìgh an t-uisge!"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "Cleachdaidh an taigh-fuine, an tuathanas each is an tuathanas dhamhan e."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:8
@@ -2682,7 +2683,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Water is used in the bakery, the micro brewery and the brewery. The lime "
 "kiln and the cattle farm also need to be supplied with water."
-msgstr ""
+msgstr "Cleachdaidh an taigh-fuine, an taigh-grùide beag is an taigh-grùide e. Tha an àth-aoil is an tuathanas crodh feumach air uisge cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../tribes/wares/water/helptexts.lua:10
@@ -2690,13 +2691,13 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr ""
+msgstr "Cleachdaidh an taigh-fuine is an taigh-grùide e. Tha an tuathanas asalan, an tuathanas chaorach is an fhail feumach air uisge cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:4
 msgctxt "ware"
 msgid "Wheat is essential for survival."
-msgstr ""
+msgstr "Cha mhair thu beò gun chruithneachd."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:6
@@ -2704,14 +2705,14 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr ""
+msgstr "Saothraichidh na tuathanasan a’ chruithneachd is thèid a cleachdadh leis na taighean-fuine, na taighean-grùide beag is na taighean-grùide. Tha tuathanasan crodh feumach air cruithneachd cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../tribes/wares/wheat/helptexts.lua:8
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Saothraichidh na tuathanasan a’ chruithneachd is thèid a cleachdadh leis na muileannan is na taighean-grùide. Tha tuathanasan asalan, tuathanasan chaorach is failean feumach air cruithneachd cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../tribes/wares/wine/helptexts.lua:4
@@ -2719,13 +2720,13 @@ msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr ""
+msgstr "Òlaidh na mèinnearan am fìon blasta seo sna mèinnean marmoir is òir. Nì thu ann am fìon-lann e."
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "’S e gaoisid nan caorach a th’ anns a’ chlòimh. Cleachdaidh taighean nam beart i gus clò a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../tribes/workers/atlanteans/armorsmith/helptexts.lua:3
@@ -2815,7 +2816,7 @@ msgstr "Loisgidh e gual."
 #: ../../tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr ""
+msgstr "Cuiridh is buainidh e achaidhean coirce."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -2954,19 +2955,19 @@ msgstr "Obraichidh e aig an doca is togaidh e longan ùra."
 #: ../../tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Leaghaidh e clach-mhèinnir gus meatailt a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Leaghaidh e clach-mhèinnir gus meatailt a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Leaghaidh e clach-mhèinnir gus meatailt a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../tribes/workers/atlanteans/smoker/helptexts.lua:3
@@ -3068,7 +3069,7 @@ msgstr "Leagaidh e craobhan."
 #: ../../tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr ""
+msgstr "Fuinidh e aran tur airson nam mèinnearan."
 
 #. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
@@ -3076,20 +3077,20 @@ msgstr ""
 #: ../../tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Nì e airm airson saighdearan is acainnean airson an luchd-obrach."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Nì e leann am bi na mèinnearan làidir toilichte."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
-"Produces the finest ales to keep warriors strong and happy in training."
-msgstr ""
+"Produces the finest ales to keep soldiers strong and happy in training."
+msgstr "Nì e na leannan as fhearr ach am bi na saighdearan làidir toilichte fhad ’s a bhios iad a’ trèanadh."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -3121,37 +3122,37 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "Nì an geamair cinnteach nach bi ro bheag dhe bheathaichean fiadhaich ann."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Fàsaidh e feur tughaidh."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Nì e clogaidean airson saighdearan."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/barbarians/innkeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Nì e biadh airson mèinnearan."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../tribes/workers/empire/innkeeper/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Nì e biadh airson mèinnearan."
 
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Loisgidh e aol san àth-aoil."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -3168,25 +3169,25 @@ msgstr "Obraichidh e sìos sna mèinnean gus gual, iarrann, òr no gaireal fhaig
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "Cuidichidh daimh le giùlan nan nithean air rathaidean a tha trang. Togaidh tu ann an tuathanas crodh iad."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Nì e clò airson siùil nan longan."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Nì e leann."
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Obraichidh e sa mhuileann sàbhaidh."
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../tribes/workers/empire/donkey/helptexts.lua:3
@@ -3194,13 +3195,13 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
+msgstr "Cuidichidh asalan le giùlan nan nithean air rathaidean a tha trang. Togaidh tu ann an tuathanas asalan iad."
 
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Bleithidh e a’ chruithneachd gus flùr a shaothrachadh."
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
@@ -3208,19 +3209,19 @@ msgstr ""
 #: ../../tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Obraichidh e sìos sna mèinnean gus gual, iarrann, òr no marmor fhaighinn."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Tàrmaichidh e mucan."
 
 #. TRANSLATORS: Helptext for a worker: Shepherd
 #: ../../tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "A’ cumail caoraich."
 
 #. TRANSLATORS: Helptext for a worker: Vine Farmer
 #: ../../tribes/workers/empire/vinefarmer/helptexts.lua:3
@@ -3232,10 +3233,10 @@ msgstr "Cuiridh e crainn-fhìona."
 #: ../../tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Nì e fìon."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/empire/weaver/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Nì e clò airson longan is saighdearan."
