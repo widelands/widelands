@@ -12,8 +12,8 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
-   -- #TRANSLATORS: Purpose helptext for a building
-   return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("empire_building", "Carves marble columns out of marble.")
 end
 
 function building_helptext_note()
