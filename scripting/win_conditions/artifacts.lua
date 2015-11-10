@@ -15,11 +15,11 @@ local wc_name = "Artifacts"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Artifacts")
 local wc_version = 1
-local wc_desc = _ "Search for the ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
+local wc_desc = _ "Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
 return {
 	name = wc_name,
 	description = wc_desc,
-	map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suited maps
+	map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suitable maps
 	func = function()
 		-- set the objective with the game type for all players
 		broadcast_objective("win_condition", wc_descname, wc_desc)
@@ -41,12 +41,12 @@ return {
 		for x=0, map.width-1 do
 			for y=0, map.height-1 do
 				local field = map:get_field(x,y)
-					if field.immovable and field.immovable:has_attribute("artifact") then
-						-- this assumes that the immovable has size small or medium, i.e. only occupies one field
-						artifact_fields[i] = map:get_field(x,y)
-						i = i + 1
-						print("Artifact on map: " .. x .. "|" .. y) -- NOCOM: remove before merging
-					end
+				if field.immovable and field.immovable:has_attribute("artifact") then
+					-- this assumes that the immovable has size small or medium, i.e. only occupies one field
+					artifact_fields[i] = map:get_field(x,y)
+					i = i + 1
+					print("Artifact on map: " .. x .. "|" .. y) -- NOCOM: remove before merging
+				end
 			end
 		end
 
@@ -64,7 +64,7 @@ return {
 		}
 		local lost_artifact = {
 			title = _"Artifact Lost",
-			body = rt(p(_[[An artifact your team owned was stolen by an enemy.]]))
+			body = rt(p(_[[One of your team’s artifacts was stolen by an enemy.]]))
 		}
 		local stole_artifact = {
 			title = _"Artifact Conquered",
@@ -161,8 +161,7 @@ return {
 		for idx, t in ipairs(teams) do
 			local members = _get_member_names(t)
 			local artifacts = (ngettext("%i artifact", "%i artifacts", artifacts_per_team[_getkey(t[1])])):format(artifacts_per_team[_getkey(t[1])])
-			-- TRANSLATORS: %1$i is the team's number; %2$s is a list of team members (e.g. "Steve, Robert, David")
-			-- TRANSLATORS: %3$s is something like "x artifact(s)"
+			-- TRANSLATORS: %1$i is the team's number; %2$s is a list of team members (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 			msg = msg .. "\n" .. (_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts)
 		end
 
