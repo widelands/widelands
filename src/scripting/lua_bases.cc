@@ -164,7 +164,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	}
 	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
-	const BuildingIndex building_index = tribes.building_index(building_name);
+	const DescriptionIndex building_index = tribes.building_index(building_name);
 	if (!tribes.building_exists(building_index)) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
@@ -503,7 +503,7 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
-	BuildingIndex building_index = tribes.building_index(name);
+	DescriptionIndex building_index = tribes.building_index(name);
 
 	BuildingDescr::FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);

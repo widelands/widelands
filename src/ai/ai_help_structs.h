@@ -355,7 +355,7 @@ struct EconomyObserver {
 
 struct BuildingObserver {
 	char const* name;
-	Widelands::BuildingIndex id;
+	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
 
 	enum {

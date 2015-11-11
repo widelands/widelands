@@ -283,7 +283,7 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 // \throws Building_Nonexistent if there is no building type with that name
 const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->c_string();
-	BuildingIndex const index = egbase.tribes().building_index(name);
+	DescriptionIndex const index = egbase.tribes().building_index(name);
 	if (!egbase.tribes().building_exists(index)) {
 		throw BuildingNonexistent(name);
 	}

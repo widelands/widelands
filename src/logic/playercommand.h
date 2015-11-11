@@ -95,7 +95,7 @@ struct CmdBuild:public PlayerCommand {
 		(const int32_t        _duetime,
 		 const int32_t        p,
 		 const Coords         c,
-		 const BuildingIndex i)
+		 const DescriptionIndex i)
 		: PlayerCommand(_duetime, p), coords(c), bi(i)
 	{}
 
@@ -111,7 +111,7 @@ struct CmdBuild:public PlayerCommand {
 
 private:
 	Coords         coords;
-	BuildingIndex bi;
+	DescriptionIndex bi;
 };
 
 struct CmdBuildFlag:public PlayerCommand {
@@ -244,7 +244,7 @@ struct CmdEnhanceBuilding:public PlayerCommand {
 		(const int32_t        _duetime,
 		 const int32_t        p,
 		 Building           & b,
-		 const BuildingIndex i)
+		 const DescriptionIndex i)
 		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
 	{}
 
@@ -261,7 +261,7 @@ struct CmdEnhanceBuilding:public PlayerCommand {
 
 private:
 	Serial serial;
-	BuildingIndex bi;
+	DescriptionIndex bi;
 };
 
 struct CmdDismantleBuilding:public PlayerCommand {

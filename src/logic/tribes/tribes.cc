@@ -218,7 +218,7 @@ bool Tribes::worker_exists(const DescriptionIndex& index) const {
 bool Tribes::building_exists(const std::string& buildingname) const {
 	return buildings_->exists(buildingname) != nullptr;
 }
-bool Tribes::building_exists(const BuildingIndex& index) const {
+bool Tribes::building_exists(const DescriptionIndex& index) const {
 	return buildings_->get_mutable(index) != nullptr;
 }
 bool Tribes::immovable_exists(DescriptionIndex index) const {
@@ -231,8 +231,8 @@ bool Tribes::tribe_exists(int index) const {
 	return tribes_->get_mutable(index) != nullptr;
 }
 
-BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
-	const BuildingIndex result = building_index(buildingname);
+DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
+	const DescriptionIndex result = building_index(buildingname);
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -280,7 +280,7 @@ DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const 
 }
 
 
-BuildingIndex Tribes::building_index(const std::string& buildingname) const {
+DescriptionIndex Tribes::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
 
@@ -306,7 +306,7 @@ DescriptionIndex Tribes::worker_index(const std::string& workername) const {
 }
 
 
-const BuildingDescr* Tribes::get_building_descr(BuildingIndex buildingindex) const {
+const BuildingDescr* Tribes::get_building_descr(DescriptionIndex buildingindex) const {
 	return buildings_->get_mutable(buildingindex);
 }
 
@@ -375,7 +375,7 @@ void Tribes::load_graphics()
 }
 
 void Tribes::postload() {
-	for (BuildingIndex i = 0; i < buildings_->size(); ++i) {
+	for (DescriptionIndex i = 0; i < buildings_->size(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get_mutable(i);
 
 		// Add consumers and producers to wares.
@@ -389,7 +389,7 @@ void Tribes::postload() {
 		}
 
 		// Register which buildings buildings can have been enhanced from
-		const BuildingIndex& enhancement = building_descr.enhancement();
+		const DescriptionIndex& enhancement = building_descr.enhancement();
 		if (building_exists(enhancement)) {
 			buildings_->get_mutable(enhancement)->set_enhanced_from(i);
 		}

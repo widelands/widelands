@@ -1098,7 +1098,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 int LuaTribeDescription::get_buildings(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (BuildingIndex building : get()->buildings()) {
+	for (DescriptionIndex building : get()->buildings()) {
 		lua_pushinteger(L, ++counter);
 		lua_pushstring(L, get_egbase(L).tribes().get_building_descr(building)->name());
 		lua_settable(L, -3);
@@ -1256,7 +1256,7 @@ int LuaTribeDescription::get_workers(lua_State * L) {
 */
 int LuaTribeDescription::has_building(lua_State * L) {
 	const std::string buildingname = luaL_checkstring(L, 2);
-	const BuildingIndex index = get_egbase(L).tribes().building_index(buildingname);
+	const DescriptionIndex index = get_egbase(L).tribes().building_index(buildingname);
 	lua_pushboolean(L, get()->has_building(index));
 	return 1;
 }
@@ -1444,7 +1444,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
 	const Tribes& tribes = get_egbase(L).tribes();
-	BuildingIndex idx = tribes.safe_building_index(name.c_str());
+	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
 }
 
@@ -1527,7 +1527,7 @@ int LuaBuildingDescription::get_enhanced(lua_State * L) {
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 	if (get()->is_enhanced()) {
-		const BuildingIndex& enhanced_from = get()->enhanced_from();
+		const DescriptionIndex& enhanced_from = get()->enhanced_from();
 		assert(get_egbase(L).tribes().building_exists(enhanced_from));
 		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
 	}
@@ -1551,7 +1551,7 @@ int LuaBuildingDescription::get_enhancement_cost(lua_State * L) {
 		(RO) a building description that this building can enhance to.
 */
 int LuaBuildingDescription::get_enhancement(lua_State * L) {
-	const BuildingIndex enhancement = get()->enhancement();
+	const DescriptionIndex enhancement = get()->enhancement();
 	if (enhancement == INVALID_INDEX) {
 		return 0;
 	}
@@ -2190,7 +2190,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 int LuaWareDescription::get_consumers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const BuildingIndex& building_index : get()->consumers()) {
+	for (const DescriptionIndex& building_index : get()->consumers()) {
 		lua_pushint32(L, index++);
 		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
@@ -2240,7 +2240,7 @@ int LuaWareDescription::is_construction_material(lua_State * L) {
 int LuaWareDescription::get_producers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const BuildingIndex& building_index : get()->producers()) {
+	for (const DescriptionIndex& building_index : get()->producers()) {
 		lua_pushint32(L, index++);
 		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);

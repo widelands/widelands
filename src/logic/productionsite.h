@@ -153,7 +153,7 @@ public:
 		return m_working_positions;
 	}
 
-	virtual bool has_workers(BuildingIndex targetSite, Game & game);
+	virtual bool has_workers(DescriptionIndex targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 

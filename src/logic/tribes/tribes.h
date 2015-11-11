@@ -110,26 +110,26 @@ public:
 	bool ware_exists(const DescriptionIndex& index) const;
 	bool worker_exists(const DescriptionIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
-	bool building_exists(const BuildingIndex& index) const;
+	bool building_exists(const DescriptionIndex& index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(int index) const;
 	bool tribe_exists(int index) const;
 
-	BuildingIndex safe_building_index(const std::string& buildingname) const;
+	DescriptionIndex safe_building_index(const std::string& buildingname) const;
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
 	DescriptionIndex safe_ship_index(const std::string& shipname) const;
 	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
 	DescriptionIndex safe_ware_index(const std::string& warename) const;
 	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
-	BuildingIndex building_index(const std::string& buildingname) const;
+	DescriptionIndex building_index(const std::string& buildingname) const;
 	DescriptionIndex immovable_index(const std::string& immovablename) const;
 	DescriptionIndex ship_index(const std::string& shipname) const;
 	DescriptionIndex tribe_index(const std::string& tribename) const;
 	DescriptionIndex ware_index(const std::string& warename) const;
 	DescriptionIndex worker_index(const std::string& workername) const;
 
-	const BuildingDescr* get_building_descr(BuildingIndex building_index) const;
+	const BuildingDescr* get_building_descr(DescriptionIndex building_index) const;
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;

@@ -172,7 +172,7 @@ void EncyclopediaWindow::fill_buildings() {
 	std::vector<Building> building_vec;
 
 	const Tribes& tribes = iaplayer().egbase().tribes();
-	for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+	for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 		const BuildingDescr* building = tribes.get_building_descr(i);
 		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
 			Building b(i, building);
@@ -249,7 +249,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	prod_sites_.clear();
 	cond_table_.clear();
 
-	for (const BuildingIndex& building_index : selected_ware_->producers()) {
+	for (const DescriptionIndex& building_index : selected_ware_->producers()) {
 		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		if (tribe.has_building(building_index)) {
 			prod_sites_.add(building_descr->descname(), building_index, building_descr->icon());

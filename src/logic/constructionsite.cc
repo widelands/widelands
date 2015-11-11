@@ -117,7 +117,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	const std::map<DescriptionIndex, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
 		// Enhancement
-		BuildingIndex was_index = m_old_buildings.back();
+		DescriptionIndex was_index = m_old_buildings.back();
 		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
@@ -156,7 +156,7 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		BuildingIndex becomes_idx = owner().tribe().building_index(m_building->name());
+		DescriptionIndex becomes_idx = owner().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
@@ -376,7 +376,7 @@ void ConstructionSite::draw
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
-		BuildingIndex prev_idx = m_old_buildings.back();
+		DescriptionIndex prev_idx = m_old_buildings.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.

@@ -125,12 +125,12 @@ public:
 	Building&
 	warp_building(Coords,
 					  PlayerNumber,
-					  BuildingIndex,
+					  DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_constructionsite(Coords,
 								 PlayerNumber,
-								 BuildingIndex,
+								 DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&

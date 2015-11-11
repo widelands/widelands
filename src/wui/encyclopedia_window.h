@@ -44,12 +44,12 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
 private:
 	struct Building {
-		Building(Widelands::BuildingIndex i, const Widelands::BuildingDescr * descr)
+		Building(Widelands::DescriptionIndex i, const Widelands::BuildingDescr * descr)
 			:
 			index_(i),
 			descr_(descr)
 			{}
-		Widelands::BuildingIndex index_;
+		Widelands::DescriptionIndex index_;
 		const Widelands::BuildingDescr * descr_;
 
 		bool operator<(const Building o) const {
@@ -92,7 +92,7 @@ private:
 	// Buildings
 	UI::Box buildings_tab_box_;  // Wrapper box so we can add some padding
 	UI::Box buildings_box_;      // Main contents box for Buildings tab
-	UI::Listselect<Widelands::BuildingIndex> buildings_;
+	UI::Listselect<Widelands::DescriptionIndex> buildings_;
 	UI::MultilineTextarea building_text_;
 	void fill_buildings();
 	void building_selected(uint32_t);
@@ -103,7 +103,7 @@ private:
 	UI::Box wares_details_box_;  // Horizontal alignment for prod_sites_ and cond_table_
 	UI::Listselect<Widelands::DescriptionIndex> wares_;
 	UI::MultilineTextarea    ware_text_;
-	UI::Listselect<Widelands::BuildingIndex> prod_sites_;
+	UI::Listselect<Widelands::DescriptionIndex> prod_sites_;
 	UI::Table     <uintptr_t>                 cond_table_;
 	Widelands::WareDescr const * selected_ware_;
 	void fill_wares();

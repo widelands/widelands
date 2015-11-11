@@ -261,7 +261,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
  * \li former_buildings is the list of former buildings
  */
 Building & EditorGameBase::warp_building
-	(Coords const c, PlayerNumber const owner, BuildingIndex const idx,
+	(Coords const c, PlayerNumber const owner, DescriptionIndex const idx,
 		Building::FormerBuildings former_buildings)
 {
 	Player & plr = player(owner);
@@ -281,7 +281,7 @@ Building & EditorGameBase::warp_building
  */
 Building & EditorGameBase::warp_constructionsite
 	(Coords const c, PlayerNumber const owner,
-	 BuildingIndex idx, bool loading,
+	 DescriptionIndex idx, bool loading,
 	 Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);

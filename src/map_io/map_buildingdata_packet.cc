@@ -145,7 +145,7 @@ void MapBuildingdataPacket::read
 					}
 
 					while (fr.unsigned_8()) {
-						BuildingIndex oldidx = building.owner().tribe().safe_building_index(fr.c_string());
+						DescriptionIndex oldidx = building.owner().tribe().safe_building_index(fr.c_string());
 						building.m_old_buildings.push_back(oldidx);
 					}
 					// Only construction sites may have an empty list
@@ -926,7 +926,7 @@ void MapBuildingdataPacket::write
 			}
 			{
 				const TribeDescr& td = building->owner().tribe();
-				for (BuildingIndex b_idx : building->m_old_buildings) {
+				for (DescriptionIndex b_idx : building->m_old_buildings) {
 					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());

@@ -152,7 +152,7 @@ TribeDescr::TribeDescr
 
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
-				BuildingIndex index = tribes_.safe_building_index(buildingname);
+				DescriptionIndex index = tribes_.safe_building_index(buildingname);
 				if (has_building(index)) {
 					throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 				}
@@ -209,11 +209,11 @@ size_t TribeDescr::get_nrbuildings() const {return buildings_.size();}
 size_t TribeDescr::get_nrwares() const {return wares_.size();}
 size_t TribeDescr::get_nrworkers() const {return workers_.size();}
 
-const std::vector<BuildingIndex>& TribeDescr::buildings() const {return buildings_;}
+const std::vector<DescriptionIndex>& TribeDescr::buildings() const {return buildings_;}
 const std::set<DescriptionIndex>& TribeDescr::wares() const {return wares_;}
 const std::set<DescriptionIndex>& TribeDescr::workers() const {return workers_;}
 
-bool TribeDescr::has_building(const BuildingIndex& index) const {
+bool TribeDescr::has_building(const DescriptionIndex& index) const {
 	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();
 }
 bool TribeDescr::has_ware(const DescriptionIndex& index) const {
@@ -229,7 +229,7 @@ bool TribeDescr::is_construction_material(const DescriptionIndex& index) const {
 	return construction_materials_.count(index) == 1;
 }
 
-BuildingIndex TribeDescr::building_index(const std::string & buildingname) const {
+DescriptionIndex TribeDescr::building_index(const std::string & buildingname) const {
 	return tribes_.building_index(buildingname);
 }
 
@@ -243,7 +243,7 @@ DescriptionIndex TribeDescr::worker_index(const std::string & workername) const 
 	return tribes_.worker_index(workername);
 }
 
-BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
+DescriptionIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
 	return tribes_.safe_building_index(buildingname);
 }
 
@@ -261,7 +261,7 @@ WorkerDescr const* TribeDescr::get_worker_descr(const DescriptionIndex& index) c
 	return tribes_.get_worker_descr(index);
 }
 
-BuildingDescr const * TribeDescr::get_building_descr(const BuildingIndex& index) const {
+BuildingDescr const * TribeDescr::get_building_descr(const DescriptionIndex& index) const {
 	return tribes_.get_building_descr(index);
 }
 ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
@@ -292,11 +292,11 @@ DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
 }
-BuildingIndex TribeDescr::headquarters() const {
+DescriptionIndex TribeDescr::headquarters() const {
 	assert(tribes_.building_exists(headquarters_));
 	return headquarters_;
 }
-BuildingIndex TribeDescr::port() const {
+DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
@@ -431,9 +431,9 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	}
 }
 
-BuildingIndex TribeDescr::add_special_building(const std::string& buildingname) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname) {
 	try {
-		BuildingIndex building = tribes_.safe_building_index(buildingname);
+		DescriptionIndex building = tribes_.safe_building_index(buildingname);
 		if (!has_building(building)) {
 			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
 		}

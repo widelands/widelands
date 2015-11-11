@@ -114,7 +114,7 @@ BuildingDescr::BuildingDescr
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		BuildingIndex const en_i = egbase_.tribes().building_index(enh);
+		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
 		if (egbase_.tribes().building_exists(en_i)) {
 			m_enhancement = en_i;
 
@@ -177,7 +177,7 @@ Building & BuildingDescr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	for (BuildingIndex idx : former_buildings) {
+	for (DescriptionIndex idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {

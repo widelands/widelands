@@ -287,7 +287,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
  * Detect if the workers are experienced enough for an upgrade
  * @param idx Index of the enhancement
  */
-bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
+bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {

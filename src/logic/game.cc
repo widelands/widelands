@@ -750,7 +750,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, BuildingIndex const id)
+	(int32_t const pid, Coords const coords, DescriptionIndex const id)
 {
 	assert(tribes().building_exists(id));
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
@@ -795,7 +795,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 }
 
 void Game::send_player_enhance_building
-	(Building & building, BuildingIndex const id)
+	(Building & building, DescriptionIndex const id)
 {
 	assert(building.owner().tribe().has_building(id));
 

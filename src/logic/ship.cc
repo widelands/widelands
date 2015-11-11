@@ -856,7 +856,7 @@ WalkingDir Ship::get_scouting_direction() {
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
 	assert(m_expedition);
-	BuildingIndex port_idx = get_owner()->tribe().port();
+	DescriptionIndex port_idx = get_owner()->tribe().port();
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }

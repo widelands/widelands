@@ -72,7 +72,7 @@ PartiallyFinishedBuilding(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	for (BuildingIndex former_idx : former_buildings) {
+	for (DescriptionIndex former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -129,7 +129,7 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<DescriptionIndex, uint8_t>   & res)
 {
-	for (BuildingIndex former_idx : building->get_former_buildings()) {
+	for (DescriptionIndex former_idx : building->get_former_buildings()) {
 		const std::map<DescriptionIndex, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {

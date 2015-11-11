@@ -81,19 +81,19 @@ void WareDescr::set_has_demand_check(const std::string& tribename) {
 	}
 }
 
-void WareDescr::add_consumer(const BuildingIndex& building_index) {
+void WareDescr::add_consumer(const DescriptionIndex& building_index) {
 	consumers_.insert(building_index);
 }
 
-void WareDescr::add_producer(const BuildingIndex& building_index) {
+void WareDescr::add_producer(const DescriptionIndex& building_index) {
 	producers_.insert(building_index);
 }
 
-const std::set<BuildingIndex>& WareDescr::consumers() const {
+const std::set<DescriptionIndex>& WareDescr::consumers() const {
 	return consumers_;
 }
 
-const std::set<BuildingIndex>& WareDescr::producers() const {
+const std::set<DescriptionIndex>& WareDescr::producers() const {
 	return producers_;
 }
 

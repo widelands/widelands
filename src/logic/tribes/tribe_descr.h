@@ -67,11 +67,11 @@ public:
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
-	const std::vector<BuildingIndex>& buildings() const;
+	const std::vector<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
 
-	bool has_building(const BuildingIndex& index) const;
+	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
 	bool has_worker(const DescriptionIndex& index) const;
 	bool has_immovable(int index) const;
@@ -79,19 +79,19 @@ public:
 	// A ware is a construction material if it appears in a building's buildcost or enhancement cost
 	bool is_construction_material(const DescriptionIndex& ware_index) const;
 
-	BuildingIndex building_index(const std::string & buildingname) const;
+	DescriptionIndex building_index(const std::string & buildingname) const;
 	DescriptionIndex immovable_index(const std::string & immovablename) const;
 	DescriptionIndex ware_index(const std::string & warename) const;
 	DescriptionIndex worker_index(const std::string & workername) const;
 
 	/// Return the given building or die trying
-	BuildingIndex safe_building_index(const std::string& buildingname) const;
+	DescriptionIndex safe_building_index(const std::string& buildingname) const;
 	/// Return the given ware or die trying
 	DescriptionIndex safe_ware_index(const std::string & warename) const;
 	/// Return the given worker or die trying
 	DescriptionIndex safe_worker_index(const std::string & workername) const;
 
-	BuildingDescr const * get_building_descr(const BuildingIndex& index) const;
+	BuildingDescr const * get_building_descr(const DescriptionIndex& index) const;
 	ImmovableDescr const * get_immovable_descr(int index) const;
 	WareDescr const * get_ware_descr(const DescriptionIndex& index) const;
 	WorkerDescr const * get_worker_descr(const DescriptionIndex& index) const;
@@ -102,8 +102,8 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
-	BuildingIndex headquarters() const;
-	BuildingIndex port() const;
+	DescriptionIndex headquarters() const;
+	DescriptionIndex port() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
@@ -148,7 +148,7 @@ private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)
-	BuildingIndex add_special_building(const std::string& buildingname);
+	DescriptionIndex add_special_building(const std::string& buildingname);
 
 	const std::string name_;
 	const std::string descname_;
@@ -160,7 +160,7 @@ private:
 	std::vector<std::string> busy_road_paths_;
 	RoadTextures road_textures_;
 
-	std::vector<BuildingIndex>  buildings_;
+	std::vector<DescriptionIndex>  buildings_;
 	std::set<DescriptionIndex>         immovables_;  // The player immovables
 	std::set<DescriptionIndex>         workers_;
 	std::set<DescriptionIndex>         wares_;
@@ -172,8 +172,8 @@ private:
 	DescriptionIndex                   geologist_; // This tribe's geologist worker
 	DescriptionIndex                   soldier_;  // The soldier that this tribe uses
 	DescriptionIndex                   ship_;     // The ship that this tribe uses
-	BuildingIndex               headquarters_; // The tribe's default headquarters, needed by the editor
-	BuildingIndex               port_;     // The port that this tribe uses
+	DescriptionIndex               headquarters_; // The tribe's default headquarters, needed by the editor
+	DescriptionIndex               port_;     // The port that this tribe uses
 	std::vector<DescriptionIndex>      worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                  wares_order_;

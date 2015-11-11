@@ -61,7 +61,7 @@ class Building;
  */
 class BuildingDescr : public MapObjectDescr {
 public:
-	using FormerBuildings = std::vector<BuildingIndex>;
+	using FormerBuildings = std::vector<DescriptionIndex>;
 
 	BuildingDescr(const std::string& init_descname, MapObjectType type,
 					  const LuaTable& t, const EditorGameBase& egbase);
@@ -98,11 +98,11 @@ public:
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
-	const BuildingIndex & enhancement() const {return m_enhancement;}
+	const DescriptionIndex & enhancement() const {return m_enhancement;}
 	// Returns the building from which this building can be enhanced or
 	// INVALID_INDEX if it cannot be built as an enhanced building.
-	const BuildingIndex& enhanced_from() const {return m_enhanced_from;}
-	void set_enhanced_from(const BuildingIndex& index) {m_enhanced_from = index;}
+	const DescriptionIndex& enhanced_from() const {return m_enhanced_from;}
+	void set_enhanced_from(const DescriptionIndex& index) {m_enhanced_from = index;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -144,8 +144,8 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	BuildingIndex  m_enhancement;
-	BuildingIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
+	DescriptionIndex  m_enhancement;
+	DescriptionIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 
@@ -169,7 +169,7 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
-	using FormerBuildings = std::vector<BuildingIndex>;
+	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
 	Building(const BuildingDescr&);

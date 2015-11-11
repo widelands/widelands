@@ -416,11 +416,11 @@ void DefaultAI::late_initialization() {
 		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
 	}
 
-	const BuildingIndex& nr_buildings = game().tribes().nrbuildings();
+	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
 
 
 	// Collect information about the different buildings that our tribe can have
-	for (BuildingIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
 		const BuildingDescr& bld = *tribe_->get_building_descr(building_index);
 		if (!tribe_->has_building(building_index) && bld.type() != MapObjectType::MILITARYSITE) {
 			continue;
@@ -524,7 +524,7 @@ void DefaultAI::late_initialization() {
 
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
-			const BuildingIndex enhancement = bld.enhancement();
+			const DescriptionIndex enhancement = bld.enhancement();
 			if (enhancement != INVALID_INDEX && bo.type == BuildingObserver::PRODUCTIONSITE) {
 				std::unordered_set<DescriptionIndex> enh_outputs;
 				const ProductionSiteDescr& enh_prod
@@ -3003,14 +3003,14 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// c) yet there are buildings that might be upgraded, even when
 	// there is no second buiding of the kind (flag upgrade_substitutes_)
 
-	const BuildingIndex enhancement = site.site->descr().enhancement();
+	const DescriptionIndex enhancement = site.site->descr().enhancement();
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
 		(site.bo->cnt_built_ - site.bo->unoccupied_count_ > 1 ||
 		((site.bo->upgrade_substitutes_ || site.bo->upgrade_extends_) &&
 	    gametime > 45 * 60 * 1000 &&
 	    gametime > site.built_time_ + 20 * 60 * 1000))) {
 
-		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
+		DescriptionIndex enbld = INVALID_INDEX;  // to get rid of this
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions too fast
@@ -3569,7 +3569,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	const BuildingIndex enhancement = site.site->descr().enhancement();
+	const DescriptionIndex enhancement = site.site->descr().enhancement();
 	bool has_upgrade = false;
 	if (enhancement != INVALID_INDEX) {
 		if (player_->is_building_type_allowed(enhancement)) {
@@ -3726,7 +3726,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// To skip unnecessary calculation, we calculate this only if we have 0 count of the buildings
 	bool has_substitution_building = false;
 	if (bo.total_count() == 0 && bo.upgrade_substitutes_ && bo.type == BuildingObserver::PRODUCTIONSITE) {
-		const BuildingIndex enhancement = bo.desc->enhancement();
+		const DescriptionIndex enhancement = bo.desc->enhancement();
 		BuildingObserver& en_bo
 			= get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
 		if (en_bo.total_count() > 0) {
@@ -4036,7 +4036,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
-	const BuildingIndex enhancement = ts->descr().enhancement();
+	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    (ts_basic_const_count_ + ts_advanced_const_count_) == 0 && ts_advanced_count_ > 0) {
