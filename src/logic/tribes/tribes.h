@@ -107,37 +107,37 @@ public:
 	size_t nrwares() const;
 	size_t nrworkers() const;
 
-	bool ware_exists(const WareIndex& index) const;
-	bool worker_exists(const WareIndex& index) const;
+	bool ware_exists(const DescriptionIndex& index) const;
+	bool worker_exists(const DescriptionIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const BuildingIndex& index) const;
-	bool immovable_exists(WareIndex index) const;
+	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(int index) const;
 	bool tribe_exists(int index) const;
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
-	WareIndex safe_immovable_index(const std::string& immovablename) const;
-	WareIndex safe_ship_index(const std::string& shipname) const;
-	WareIndex safe_tribe_index(const std::string& tribename) const;
-	WareIndex safe_ware_index(const std::string& warename) const;
-	WareIndex safe_worker_index(const std::string& workername) const;
+	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
+	DescriptionIndex safe_ship_index(const std::string& shipname) const;
+	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
+	DescriptionIndex safe_ware_index(const std::string& warename) const;
+	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
 	BuildingIndex building_index(const std::string& buildingname) const;
-	WareIndex immovable_index(const std::string& immovablename) const;
-	WareIndex ship_index(const std::string& shipname) const;
-	WareIndex tribe_index(const std::string& tribename) const;
-	WareIndex ware_index(const std::string& warename) const;
-	WareIndex worker_index(const std::string& workername) const;
+	DescriptionIndex immovable_index(const std::string& immovablename) const;
+	DescriptionIndex ship_index(const std::string& shipname) const;
+	DescriptionIndex tribe_index(const std::string& tribename) const;
+	DescriptionIndex ware_index(const std::string& warename) const;
+	DescriptionIndex worker_index(const std::string& workername) const;
 
 	const BuildingDescr* get_building_descr(BuildingIndex building_index) const;
-	const ImmovableDescr* get_immovable_descr(WareIndex immovable_index) const;
-	const ShipDescr* get_ship_descr(WareIndex ship_index) const;
-	const WareDescr* get_ware_descr(WareIndex ware_index) const;
-	const WorkerDescr* get_worker_descr(WareIndex worker_index) const;
-	const TribeDescr* get_tribe_descr(WareIndex tribe_index) const;
+	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
+	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
+	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
+	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
+	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	void set_ware_type_has_demand_check(const WareIndex& ware_index, const std::string& tribename) const;
-	void set_worker_type_has_demand_check(const WareIndex& worker_index) const;
+	void set_ware_type_has_demand_check(const DescriptionIndex& ware_index, const std::string& tribename) const;
+	void set_worker_type_has_demand_check(const DescriptionIndex& worker_index) const;
 
 	/// Load tribes' graphics
 	void load_graphics();

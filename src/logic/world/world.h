@@ -59,9 +59,9 @@ public:
 	int32_t get_nr_bobs() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	WareIndex get_immovable_index(const std::string& name) const;
-	WareIndex get_nr_immovables() const;
-	ImmovableDescr const* get_immovable_descr(WareIndex index) const;
+	DescriptionIndex get_immovable_index(const std::string& name) const;
+	DescriptionIndex get_nr_immovables() const;
+	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
 	ResourceIndex get_resource(const char* const name) const;
 	ResourceDescription const* get_resource(ResourceIndex res) const;

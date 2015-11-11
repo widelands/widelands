@@ -94,7 +94,7 @@ void ItemWaresDisplay::recalc_desired_size()
 /**
  * Add an item to the end of the internal list.
  */
-void ItemWaresDisplay::add(bool worker, Widelands::WareIndex index)
+void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index)
 {
 	Item it;
 	it.worker = worker;

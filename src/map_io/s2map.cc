@@ -684,7 +684,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	auto place_immovable = [&egbase, &lookup_table, &world](
 	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::WareIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
+		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}

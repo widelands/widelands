@@ -82,7 +82,7 @@ void ConstructionSite::update_statistics_string(std::string* s)
 Access to the wares queues by id
 =======
 */
-WaresQueue & ConstructionSite::waresqueue(WareIndex const wi) {
+WaresQueue & ConstructionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue * ware : m_wares) {
 		if (ware->get_ware() == wi) {
 			return *ware;
@@ -114,7 +114,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<WareIndex, uint8_t> * buildcost;
+	const std::map<DescriptionIndex, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		BuildingIndex was_index = m_old_buildings.back();
@@ -130,7 +130,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<WareIndex, uint8_t>::const_iterator it = buildcost->begin();
+	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
@@ -304,7 +304,7 @@ Called by WaresQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-	(Game & game, WaresQueue *, WareIndex, void * const data)
+	(Game & game, WaresQueue *, DescriptionIndex, void * const data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 

@@ -68,43 +68,43 @@ public:
 	size_t get_nrworkers() const;
 
 	const std::vector<BuildingIndex>& buildings() const;
-	const std::set<WareIndex>& wares() const;
-	const std::set<WareIndex>& workers() const;
+	const std::set<DescriptionIndex>& wares() const;
+	const std::set<DescriptionIndex>& workers() const;
 
 	bool has_building(const BuildingIndex& index) const;
-	bool has_ware(const WareIndex& index) const;
-	bool has_worker(const WareIndex& index) const;
+	bool has_ware(const DescriptionIndex& index) const;
+	bool has_worker(const DescriptionIndex& index) const;
 	bool has_immovable(int index) const;
 
 	// A ware is a construction material if it appears in a building's buildcost or enhancement cost
-	bool is_construction_material(const WareIndex& ware_index) const;
+	bool is_construction_material(const DescriptionIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;
-	WareIndex immovable_index(const std::string & immovablename) const;
-	WareIndex ware_index(const std::string & warename) const;
-	WareIndex worker_index(const std::string & workername) const;
+	DescriptionIndex immovable_index(const std::string & immovablename) const;
+	DescriptionIndex ware_index(const std::string & warename) const;
+	DescriptionIndex worker_index(const std::string & workername) const;
 
 	/// Return the given building or die trying
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	/// Return the given ware or die trying
-	WareIndex safe_ware_index(const std::string & warename) const;
+	DescriptionIndex safe_ware_index(const std::string & warename) const;
 	/// Return the given worker or die trying
-	WareIndex safe_worker_index(const std::string & workername) const;
+	DescriptionIndex safe_worker_index(const std::string & workername) const;
 
 	BuildingDescr const * get_building_descr(const BuildingIndex& index) const;
 	ImmovableDescr const * get_immovable_descr(int index) const;
-	WareDescr const * get_ware_descr(const WareIndex& index) const;
-	WorkerDescr const * get_worker_descr(const WareIndex& index) const;
+	WareDescr const * get_ware_descr(const DescriptionIndex& index) const;
+	WorkerDescr const * get_worker_descr(const DescriptionIndex& index) const;
 
-	WareIndex builder() const;
-	WareIndex carrier() const;
-	WareIndex carrier2() const;
-	WareIndex geologist() const;
-	WareIndex soldier() const;
-	WareIndex ship() const;
+	DescriptionIndex builder() const;
+	DescriptionIndex carrier() const;
+	DescriptionIndex carrier2() const;
+	DescriptionIndex geologist() const;
+	DescriptionIndex soldier() const;
+	DescriptionIndex ship() const;
 	BuildingIndex headquarters() const;
 	BuildingIndex port() const;
-	const std::vector<WareIndex>& worker_types_without_cost() const;
+	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
@@ -122,7 +122,7 @@ public:
 	// The road textures used for drawing roads.
 	const RoadTextures& road_textures() const;
 
-	WareIndex get_resource_indicator
+	DescriptionIndex get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
@@ -130,7 +130,7 @@ public:
 		return m_initializations.at(index);
 	}
 
-	using WaresOrder = std::vector<std::vector<Widelands::WareIndex>>;
+	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
 	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder & wares_order() const {return wares_order_;}
 	const WaresOrderCoords & wares_order_coords() const {
@@ -146,7 +146,7 @@ public:
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
-	WareIndex add_special_worker(const std::string& workername);
+	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)
 	BuildingIndex add_special_building(const std::string& buildingname);
 
@@ -161,20 +161,20 @@ private:
 	RoadTextures road_textures_;
 
 	std::vector<BuildingIndex>  buildings_;
-	std::set<WareIndex>         immovables_;  // The player immovables
-	std::set<WareIndex>         workers_;
-	std::set<WareIndex>         wares_;
-	std::set<WareIndex>         construction_materials_; // The wares that are used by construction sites
+	std::set<DescriptionIndex>         immovables_;  // The player immovables
+	std::set<DescriptionIndex>         workers_;
+	std::set<DescriptionIndex>         wares_;
+	std::set<DescriptionIndex>         construction_materials_; // The wares that are used by construction sites
 	// Special units
-	WareIndex                   builder_;  // The builder for this tribe
-	WareIndex                   carrier_;  // The basic carrier for this tribe
-	WareIndex                   carrier2_; // Additional carrier for busy roads
-	WareIndex                   geologist_; // This tribe's geologist worker
-	WareIndex                   soldier_;  // The soldier that this tribe uses
-	WareIndex                   ship_;     // The ship that this tribe uses
+	DescriptionIndex                   builder_;  // The builder for this tribe
+	DescriptionIndex                   carrier_;  // The basic carrier for this tribe
+	DescriptionIndex                   carrier2_; // Additional carrier for busy roads
+	DescriptionIndex                   geologist_; // This tribe's geologist worker
+	DescriptionIndex                   soldier_;  // The soldier that this tribe uses
+	DescriptionIndex                   ship_;     // The ship that this tribe uses
 	BuildingIndex               headquarters_; // The tribe's default headquarters, needed by the editor
 	BuildingIndex               port_;     // The port that this tribe uses
-	std::vector<WareIndex>      worker_types_without_cost_;
+	std::vector<DescriptionIndex>      worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                  wares_order_;
 	WaresOrderCoords            wares_order_coords_;

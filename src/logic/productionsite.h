@@ -75,14 +75,14 @@ public:
 	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const WareIndex& i) const {
+	bool is_output_ware_type  (const DescriptionIndex& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const WareIndex& i) const {
+	bool is_output_worker_type(const DescriptionIndex& i) const {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	using Output = std::set<WareIndex>;
+	using Output = std::set<DescriptionIndex>;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
@@ -167,7 +167,7 @@ public:
 		m_production_result = text;
 	}
 
-	WaresQueue & waresqueue(WareIndex) override;
+	WaresQueue & waresqueue(DescriptionIndex) override;
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -225,9 +225,9 @@ protected:
 			coord(Coords::null()) {}
 	};
 
-	Request & request_worker(WareIndex);
+	Request & request_worker(DescriptionIndex);
 	static void request_worker_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -298,15 +298,15 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const WareIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const DescriptionIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 
-	WareIndex ware() const {return m_ware;}
+	DescriptionIndex ware() const {return m_ware;}
 	uint8_t     max() const {return m_max;}
 
 private:
-	WareIndex m_ware;
+	DescriptionIndex m_ware;
 	uint8_t    m_max;
 };
 

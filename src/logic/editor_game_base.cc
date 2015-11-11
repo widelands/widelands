@@ -367,7 +367,7 @@ Immovable & EditorGameBase::create_immovable
 Immovable & EditorGameBase::create_immovable
 	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
-	WareIndex idx;
+	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
 		if (!tribes().immovable_exists(idx)) {

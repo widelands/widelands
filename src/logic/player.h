@@ -416,10 +416,10 @@ public:
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const WareIndex& i) const {
+	bool is_worker_type_allowed(const DescriptionIndex& i) const {
 		return m_allowed_worker_types.at(i);
 	}
-	void allow_worker_type(WareIndex, bool allow);
+	void allow_worker_type(DescriptionIndex, bool allow);
 
 	// Allowed buildings
 	bool is_building_type_allowed(const BuildingIndex& i) const {
@@ -489,20 +489,20 @@ public:
 	const BuildingStatsVector& get_building_statistics(const BuildingIndex& i) const;
 
 	std::vector<uint32_t> const * get_ware_production_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_consumption_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_stock_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(WareIndex);
+	void ware_produced(DescriptionIndex);
 
-	void ware_consumed(WareIndex, uint8_t);
+	void ware_consumed(DescriptionIndex, uint8_t);
 	void next_ware_production_period();
 
 	void set_ai(const std::string &);

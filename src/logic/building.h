@@ -196,7 +196,7 @@ public:
 	}
 
 	/// \returns the queue for a ware type or \throws WException.
-	virtual WaresQueue & waresqueue(WareIndex);
+	virtual WaresQueue & waresqueue(DescriptionIndex);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase &) override;
@@ -217,11 +217,11 @@ public:
 	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
 	// values adjusted to the preciousness of the ware in general are returned.
 	virtual int32_t get_priority
-		(WareWorker type, WareIndex, bool adjust = true) const;
-	void set_priority(int32_t type, WareIndex ware_index, int32_t new_priority);
+		(WareWorker type, DescriptionIndex, bool adjust = true) const;
+	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
 
 	void collect_priorities
-		(std::map<int32_t, std::map<WareIndex, int32_t> > & p) const;
+		(std::map<int32_t, std::map<DescriptionIndex, int32_t> > & p) const;
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
@@ -295,7 +295,7 @@ protected:
 	PlayerNumber           m_defeating_player;
 
 	int32_t m_priority; // base priority
-	std::map<WareIndex, int32_t> m_ware_priorities;
+	std::map<DescriptionIndex, int32_t> m_ware_priorities;
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool m_seeing;

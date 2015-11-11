@@ -77,7 +77,7 @@ struct ProductionProgram {
 	};
 
 	/// A group of ware types with a count.
-	using WareTypeGroup = std::pair<std::set<WareIndex>, uint8_t>;
+	using WareTypeGroup = std::pair<std::set<DescriptionIndex>, uint8_t>;
 
 	/// Parse a group of ware types followed by an optional count and terminated
 	/// by a space or null. Example: "fish,meat:2".
@@ -165,22 +165,22 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct EconomyNeedsWare : public Condition {
-			EconomyNeedsWare(const WareIndex& i) : ware_type(i) {}
+			EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
 		private:
-			WareIndex ware_type;
+			DescriptionIndex ware_type;
 		};
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct EconomyNeedsWorker : public Condition {
-			EconomyNeedsWorker(const WareIndex& i) : worker_type(i) {}
+			EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
 		private:
-			WareIndex worker_type;
+			DescriptionIndex worker_type;
 		};
 
 		/// Tests whether the site has the specified (or implied) number of
@@ -399,7 +399,7 @@ struct ProductionProgram {
 		ActProduce(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
+		using Items = std::vector<std::pair<DescriptionIndex, uint8_t>>;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
@@ -424,7 +424,7 @@ struct ProductionProgram {
 		ActRecruit(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
+		using Items = std::vector<std::pair<DescriptionIndex, uint8_t>>;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;

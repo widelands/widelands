@@ -63,7 +63,7 @@ int WareDescr::preciousness(const std::string& tribename) const {
 }
 
 
-WareIndex WareDescr::default_target_quantity(const std::string& tribename) const {
+DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename) const {
 	if (default_target_quantities_.count(tribename) > 0) {
 		return default_target_quantities_.at(tribename);
 	}

@@ -209,10 +209,10 @@ size_t Tribes::nrworkers() const {
 	return workers_->size();
 }
 
-bool Tribes::ware_exists(const WareIndex& index) const {
+bool Tribes::ware_exists(const DescriptionIndex& index) const {
 	return wares_->get_mutable(index) != nullptr;
 }
-bool Tribes::worker_exists(const WareIndex& index) const {
+bool Tribes::worker_exists(const DescriptionIndex& index) const {
 	return workers_->get_mutable(index) != nullptr;
 }
 bool Tribes::building_exists(const std::string& buildingname) const {
@@ -221,7 +221,7 @@ bool Tribes::building_exists(const std::string& buildingname) const {
 bool Tribes::building_exists(const BuildingIndex& index) const {
 	return buildings_->get_mutable(index) != nullptr;
 }
-bool Tribes::immovable_exists(WareIndex index) const {
+bool Tribes::immovable_exists(DescriptionIndex index) const {
 	return immovables_->get_mutable(index) != nullptr;
 }
 bool Tribes::ship_exists(int index) const {
@@ -239,15 +239,15 @@ BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const
 	return result;
 }
 
-WareIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const WareIndex result = immovable_index(immovablename);
+DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
+	const DescriptionIndex result = immovable_index(immovablename);
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
 	return result;
 }
 
-WareIndex Tribes::safe_ship_index(const std::string& shipname) const {
+DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
 	const int result = ship_index(shipname);
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
@@ -255,7 +255,7 @@ WareIndex Tribes::safe_ship_index(const std::string& shipname) const {
 	return result;
 }
 
-WareIndex Tribes::safe_tribe_index(const std::string& tribename) const {
+DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 	const int result = tribe_index(tribename);
 	if (!tribe_exists(result)) {
 		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
@@ -263,16 +263,16 @@ WareIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 	return result;
 }
 
-WareIndex Tribes::safe_ware_index(const std::string& warename) const {
-	const WareIndex result = ware_index(warename);
+DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
+	const DescriptionIndex result = ware_index(warename);
 	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
 	return result;
 }
 
-WareIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const WareIndex result = worker_index(workername);
+DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
+	const DescriptionIndex result = worker_index(workername);
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
@@ -284,24 +284,24 @@ BuildingIndex Tribes::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
 
-WareIndex Tribes::immovable_index(const std::string& immovablename) const {
+DescriptionIndex Tribes::immovable_index(const std::string& immovablename) const {
 	return immovables_->get_index(immovablename);
 }
 
-WareIndex Tribes::ship_index(const std::string& shipname) const {
+DescriptionIndex Tribes::ship_index(const std::string& shipname) const {
 	return ships_->get_index(shipname);
 }
 
-WareIndex Tribes::tribe_index(const std::string& tribename) const {
+DescriptionIndex Tribes::tribe_index(const std::string& tribename) const {
 	return tribes_->get_index(tribename);
 }
 
 
-WareIndex Tribes::ware_index(const std::string& warename) const {
+DescriptionIndex Tribes::ware_index(const std::string& warename) const {
 	return wares_->get_index(warename);
 }
 
-WareIndex Tribes::worker_index(const std::string& workername) const {
+DescriptionIndex Tribes::worker_index(const std::string& workername) const {
 	return workers_->get_index(workername);
 }
 
@@ -310,32 +310,32 @@ const BuildingDescr* Tribes::get_building_descr(BuildingIndex buildingindex) con
 	return buildings_->get_mutable(buildingindex);
 }
 
-const ImmovableDescr* Tribes::get_immovable_descr(WareIndex immovableindex) const {
+const ImmovableDescr* Tribes::get_immovable_descr(DescriptionIndex immovableindex) const {
 	return immovables_->get_mutable(immovableindex);
 }
 
-const ShipDescr* Tribes::get_ship_descr(WareIndex shipindex) const {
+const ShipDescr* Tribes::get_ship_descr(DescriptionIndex shipindex) const {
 	return ships_->get_mutable(shipindex);
 }
 
 
-const WareDescr* Tribes::get_ware_descr(WareIndex wareindex) const {
+const WareDescr* Tribes::get_ware_descr(DescriptionIndex wareindex) const {
 	return wares_->get_mutable(wareindex);
 }
 
-const WorkerDescr* Tribes::get_worker_descr(WareIndex workerindex) const {
+const WorkerDescr* Tribes::get_worker_descr(DescriptionIndex workerindex) const {
 	return workers_->get_mutable(workerindex);
 }
 
-const TribeDescr* Tribes::get_tribe_descr(WareIndex tribeindex) const {
+const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const WareIndex& wareindex, const std::string& tribename) const {
+void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex, const std::string& tribename) const {
 	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
 }
 
-void Tribes::set_worker_type_has_demand_check(const WareIndex& workerindex) const {
+void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerindex) const {
 	workers_->get_mutable(workerindex)->set_has_demand_check();
 }
 
@@ -383,7 +383,7 @@ void Tribes::postload() {
 			for (const WareAmount& ware_amount : de->inputs()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
-			for (const WareIndex& wareindex : de->output_ware_types()) {
+			for (const DescriptionIndex& wareindex : de->output_ware_types()) {
 				wares_->get_mutable(wareindex)->add_producer(i);
 			}
 		}
@@ -396,7 +396,7 @@ void Tribes::postload() {
 	}
 	// Resize the configuration of our wares if they won't fit in the current window (12 = info label size)
 	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-	for (WareIndex i = 0; i < tribes_->size(); ++i) {
+	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		tribes_->get_mutable(i)->resize_ware_orders(number);
 	}
 }

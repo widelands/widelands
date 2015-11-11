@@ -159,15 +159,15 @@ int32_t World::get_nr_bobs() const {
 	return bobs_->size();
 }
 
-WareIndex World::get_immovable_index(const std::string& name) const {
+DescriptionIndex World::get_immovable_index(const std::string& name) const {
 	return immovables_->get_index(name);
 }
 
-WareIndex World::get_nr_immovables() const {
+DescriptionIndex World::get_nr_immovables() const {
 	return immovables_->size();
 }
 
-ImmovableDescr const* World::get_immovable_descr(WareIndex const index) const {
+ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) const {
 	return immovables_->get_mutable(index);
 }
 

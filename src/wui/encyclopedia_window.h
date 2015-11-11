@@ -58,12 +58,12 @@ private:
 	};
 
 	struct Ware {
-		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
+		Ware(Widelands::DescriptionIndex i, const Widelands::WareDescr * descr)
 			:
 			index_(i),
 			descr_(descr)
 			{}
-		Widelands::WareIndex index_;
+		Widelands::DescriptionIndex index_;
 		const Widelands::WareDescr * descr_;
 
 		bool operator<(const Ware o) const {
@@ -72,12 +72,12 @@ private:
 	};
 
 	struct Worker {
-		Worker(Widelands::WareIndex i, const Widelands::WorkerDescr * descr)
+		Worker(Widelands::DescriptionIndex i, const Widelands::WorkerDescr * descr)
 			:
 			index_(i),
 			descr_(descr)
 			{}
-		Widelands::WareIndex index_;
+		Widelands::DescriptionIndex index_;
 		const Widelands::WorkerDescr * descr_;
 
 		bool operator<(const Worker o) const {
@@ -101,7 +101,7 @@ private:
 	UI::Box wares_tab_box_;      // Wrapper box so we can add some padding
 	UI::Box wares_box_;          // Main contents box for Wares tab
 	UI::Box wares_details_box_;  // Horizontal alignment for prod_sites_ and cond_table_
-	UI::Listselect<Widelands::WareIndex> wares_;
+	UI::Listselect<Widelands::DescriptionIndex> wares_;
 	UI::MultilineTextarea    ware_text_;
 	UI::Listselect<Widelands::BuildingIndex> prod_sites_;
 	UI::Table     <uintptr_t>                 cond_table_;
@@ -113,7 +113,7 @@ private:
 	// Workers
 	UI::Box workers_tab_box_;  // Wrapper box so we can add some padding
 	UI::Box workers_box_;      // Main contents box for Workers tab
-	UI::Listselect<Widelands::WareIndex> workers_;
+	UI::Listselect<Widelands::DescriptionIndex> workers_;
 	UI::MultilineTextarea worker_text_;
 	void fill_workers();
 	void worker_selected(uint32_t);

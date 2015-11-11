@@ -58,7 +58,7 @@ public:
 	/// How much of the ware type an economy should store in warehouses.
 	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked
   ///  and should not be configurable.
-	WareIndex default_target_quantity(const std::string& tribename) const;
+	DescriptionIndex default_target_quantity(const std::string& tribename) const;
 
 	std::string directory() const {return directory_;}
 

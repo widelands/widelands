@@ -798,10 +798,10 @@ int LuaPlayer::allow_workers(lua_State * L) {
 	const TribeDescr & tribe = get(L, game).tribe();
 	Player & player = get(L, game);
 
-	const std::vector<WareIndex> & worker_types_without_cost =
+	const std::vector<DescriptionIndex> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
-	for (const WareIndex& worker_index : tribe.workers()) {
+	for (const DescriptionIndex& worker_index : tribe.workers()) {
 		const WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
 		if (!worker_descr->is_buildable()) {
 			continue;

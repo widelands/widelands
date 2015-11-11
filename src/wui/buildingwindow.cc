@@ -273,7 +273,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
-			std::map<Widelands::WareIndex, uint8_t> wares;
+			std::map<Widelands::DescriptionIndex, uint8_t> wares;
 			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button

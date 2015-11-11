@@ -173,9 +173,9 @@ public:
 	void send_player_enhance_building (Building &, BuildingIndex);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
-		(PlayerImmovable &, int32_t type, WareIndex index, int32_t prio);
+		(PlayerImmovable &, int32_t type, DescriptionIndex index, int32_t prio);
 	void send_player_set_ware_max_fill
-		(PlayerImmovable &, WareIndex index, uint32_t);
+		(PlayerImmovable &, DescriptionIndex index, uint32_t);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);

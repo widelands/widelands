@@ -170,7 +170,7 @@ Player::Player
 
 	// Disallow workers that the player's tribe doesn't have.
 	for (size_t worker_index = 0; worker_index < m_allowed_worker_types.size(); ++worker_index) {
-		if (!tribe().has_worker(static_cast<WareIndex>(worker_index))) {
+		if (!tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
 			m_allowed_worker_types[worker_index] = false;
 		}
 	}
@@ -796,7 +796,7 @@ void Player::flagaction(Flag & flag)
 }
 
 
-void Player::allow_worker_type(WareIndex const i, bool const allow) {
+void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
 	assert(i < static_cast<int>(m_allowed_worker_types.size()));
 	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
 	m_allowed_worker_types[i] = allow;
@@ -1170,7 +1170,7 @@ void Player::sample_statistics()
 		for (Widelands::Warehouse * warehouse : warehouses) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(WareIndex(id));
+				stocks[id] += wares.stock(DescriptionIndex(id));
 			}
 		}
 	}
@@ -1192,7 +1192,7 @@ void Player::sample_statistics()
 /**
  * A ware was produced. Update the corresponding statistics.
  */
-void Player::ware_produced(WareIndex const wareid) {
+void Player::ware_produced(DescriptionIndex const wareid) {
 	assert (m_ware_productions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
@@ -1207,7 +1207,7 @@ void Player::ware_produced(WareIndex const wareid) {
  * \param wareid the ID of the consumed wares
  * \param count the number of consumed wares
  */
-void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
+void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
 	assert (m_ware_consumptions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
@@ -1219,7 +1219,7 @@ void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
  * Get current ware production statistics
  */
 const std::vector<uint32_t> * Player::get_ware_production_statistics
-		(WareIndex const ware) const
+		(DescriptionIndex const ware) const
 {
 	assert(ware < static_cast<int>(m_ware_productions.size()));
 	return &m_ware_productions[ware];
@@ -1230,7 +1230,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
  * Get current ware consumption statistics
  */
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
-		(WareIndex const ware) const {
+		(DescriptionIndex const ware) const {
 
 	assert(ware < static_cast<int>(m_ware_consumptions.size()));
 
@@ -1238,7 +1238,7 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 }
 
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
-		(WareIndex const ware) const
+		(DescriptionIndex const ware) const
 {
 	assert(ware < static_cast<int>(m_ware_stocks.size()));
 
@@ -1354,7 +1354,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u statistics: unknown ware name %s",
@@ -1377,7 +1377,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u consumption statistics: unknown ware name %s",
@@ -1400,7 +1400,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u stock statistics: unknown ware name %s",
