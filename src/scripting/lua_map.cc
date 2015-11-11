@@ -4437,8 +4437,8 @@ int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const TerrainIndex td = world.terrains().get_index(name);
-	if (td == static_cast<TerrainIndex>(-1))
+	const DescriptionIndex td = world.terrains().get_index(name);
+	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
@@ -4458,9 +4458,9 @@ int LuaField::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const TerrainIndex td =
+	const DescriptionIndex td =
 		world.terrains().get_index(name);
-	if (td == static_cast<TerrainIndex>(INVALID_INDEX))
+	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain

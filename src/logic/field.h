@@ -74,7 +74,7 @@ struct Field {
 	using ResourceAmount = uint8_t;
 
 	struct Terrains {
-		TerrainIndex d, r;
+		DescriptionIndex d, r;
 	};
 	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
 	struct Resources        {ResourceIndex  d : 4, r : 4;};
@@ -135,18 +135,18 @@ public:
 	uint16_t get_caps()     const {return caps;}
 
 	Terrains      get_terrains() const {return terrains;}
-	TerrainIndex terrain_d   () const {return terrains.d;}
-	TerrainIndex terrain_r   () const {return terrains.r;}
+	DescriptionIndex terrain_d   () const {return terrains.d;}
+	DescriptionIndex terrain_r   () const {return terrains.r;}
 	void          set_terrains(const Terrains & i) {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex& t, TerrainIndex const i)
+		(const TCoords<FCoords>::TriangleIndex& t, DescriptionIndex const i)
 
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
 		else set_terrain_r(i);
 	}
-	void set_terrain_d(TerrainIndex const i) {terrains.d = i;}
-	void set_terrain_r(TerrainIndex const i) {terrains.r = i;}
+	void set_terrain_d(DescriptionIndex const i) {terrains.d = i;}
+	void set_terrain_r(DescriptionIndex const i) {terrains.r = i;}
 
 	Bob * get_first_bob() const {return bobs;}
 	const BaseImmovable * get_immovable() const {return immovable;}

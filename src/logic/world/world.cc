@@ -134,7 +134,7 @@ ResourceIndex World::safe_resource_index(const char* const resourcename) const {
 	return result;
 }
 
-TerrainDescription& World::terrain_descr(TerrainIndex const i) const {
+TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 	return *terrains_->get_mutable(i);
 }
 

@@ -46,7 +46,7 @@ inline PlayerNumber neutral() {return 0;}
  */
 using TeamNumber = uint8_t;
 
-using TerrainIndex = uint8_t;
+using DescriptionIndex = uint8_t;
 using ResourceIndex = uint8_t;  /// 4 bits used, so 0 .. 15.
 using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
@@ -60,7 +60,6 @@ inline Duration endless() {return 0xffffffff;}
 
 using Serial = uint32_t; /// Serial number for MapObject.
 
-using DescriptionIndex = uint8_t;
 using Direction = uint8_t;
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;

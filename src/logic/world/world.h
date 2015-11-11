@@ -50,7 +50,7 @@ public:
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
-	TerrainDescription& terrain_descr(TerrainIndex i) const;
+	TerrainDescription& terrain_descr(DescriptionIndex i) const;
 	TerrainDescription const* get_ter(char const* const name) const;
 
 	int32_t get_bob(char const* const l) const;

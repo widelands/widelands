@@ -123,7 +123,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// TODO(unknown): Check how the editor handles this...
 
 	const World& world = egbase_.world();
-	TerrainIndex const tix = fc.field->get_terrains().d;
+	DescriptionIndex const tix = fc.field->get_terrains().d;
 	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
 
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
@@ -439,7 +439,7 @@ rng:         is the random number generator to be used.
 terrType:    Returns the terrain-Type fpor this triangle
 ===============
 */
-TerrainIndex MapGenerator::figure_out_terrain
+DescriptionIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
