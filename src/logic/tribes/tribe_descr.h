@@ -164,7 +164,8 @@ private:
 	std::set<DescriptionIndex>         immovables_;  // The player immovables
 	std::set<DescriptionIndex>         workers_;
 	std::set<DescriptionIndex>         wares_;
-	std::set<DescriptionIndex>         construction_materials_; // The wares that are used by construction sites
+	// The wares that are used by construction sites
+	std::set<DescriptionIndex>         construction_materials_;
 	// Special units
 	DescriptionIndex                   builder_;  // The builder for this tribe
 	DescriptionIndex                   carrier_;  // The basic carrier for this tribe

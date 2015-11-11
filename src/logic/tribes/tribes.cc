@@ -331,7 +331,8 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex, const std::string& tribename) const {
+void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex,
+														  const std::string& tribename) const {
 	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
 }
 
