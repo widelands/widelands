@@ -85,26 +85,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
-	enum class ScheduleTasks : uint8_t {
-		kBbuildableFieldsCheck,
-		kMineableFieldsCheck,
-		kRoadCheck,
-		kUnbuildableFCheck,
-		kCheckEconomies,
-		kProductionsitesStats,
-		kConstructBuilding,
-		kCheckProductionsites,
-		kCheckShips,
-		KMarineDecisions,
-		kCheckMines,
-		kWareReview,
-		kPrintStats,
-		kIdle,
-		kCheckMilitarysites,
-		kCheckTrainingsites,
-		kCountMilitaryVacant,
-		kCheckEnemySites
-	};
+
 	enum class Tribes : uint8_t {
 		kNone,
 		kBarbarians,
@@ -170,7 +151,10 @@ private:
 	Widelands::BuildingNecessity check_building_necessity
 		(uint8_t, uint32_t);
 
-	ScheduleTasks get_oldest_task(uint32_t);
+	void sort_task_pool();
+	void sort_by_priority();
+	void set_taskpool_task_time(uint32_t, Widelands::schedulerTaskID);
+	uint32_t get_taskpool_task_time(Widelands::schedulerTaskID);
 
 	bool construct_building(uint32_t);
 
@@ -291,7 +275,9 @@ private:
 	std::list<WarehouseSiteObserver> warehousesites;
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
-	std::map<ScheduleTasks, uint32_t> taskDue;
+	// This is a vector that is filled up on initiatlization
+	// and not items are added/removed afterwards
+	std::vector<SchedulerTask> taskPool;
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, MineTypesObserver> mines_per_type;

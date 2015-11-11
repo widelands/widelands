@@ -44,6 +44,26 @@ class MilitarySite;
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 enum class BuildingNecessity : uint8_t
 	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending};
+enum class schedulerTaskID : uint8_t {
+		kBbuildableFieldsCheck,
+		kMineableFieldsCheck,
+		kRoadCheck,
+		kUnbuildableFCheck,
+		kCheckEconomies,
+		kProductionsitesStats,
+		kConstructBuilding,
+		kCheckProductionsites,
+		kCheckShips,
+		KMarineDecisions,
+		kCheckMines,
+		kWareReview,
+		kPrintStats,
+		kCheckMilitarysites,
+		kCheckTrainingsites,
+		kCountMilitaryVacant,
+		kCheckEnemySites,
+		kUnset
+	};
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -538,6 +558,27 @@ struct MilitarySiteSizeObserver {
 	uint16_t finished;
 
 	MilitarySiteSizeObserver() : in_construction(0), finished(0) {
+	}
+};
+
+// this contains some info about scheduler task
+struct SchedulerTask {
+	uint32_t due_time;
+	Widelands::schedulerTaskID id;
+	// used when AI has to perform more task at once
+	uint8_t priority;
+	// used only for debug purposes
+	std::string descr;
+
+	SchedulerTask
+		(const uint32_t time, const Widelands::schedulerTaskID t, const uint8_t p, const char* d):
+		due_time(time), id(t), priority(p), descr(d){}
+
+};
+
+struct LowerPriority {
+    inline bool operator() (const SchedulerTask& item1, const SchedulerTask& item2) {
+	    return (item1.priority < item2.priority);
 	}
 };
 
