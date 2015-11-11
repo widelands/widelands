@@ -561,11 +561,11 @@ struct MilitarySiteSizeObserver {
 	}
 };
 
-// this contains some info about scheduler task
+// this represents a scheduler task
 struct SchedulerTask {
 	uint32_t due_time;
 	Widelands::schedulerTaskID id;
-	// used when AI has to perform more task at once
+	// used to sort jobs when AI has to perform more jobs at once
 	uint8_t priority;
 	// used only for debug purposes
 	std::string descr;
@@ -576,6 +576,7 @@ struct SchedulerTask {
 
 };
 
+// for sorting of task by their priority
 struct LowerPriority {
     inline bool operator() (const SchedulerTask& item1, const SchedulerTask& item2) {
 	    return (item1.priority < item2.priority);

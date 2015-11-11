@@ -276,7 +276,7 @@ private:
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
 	// This is a vector that is filled up on initiatlization
-	// and not items are added/removed afterwards
+	// and no items are added/removed afterwards
 	std::vector<SchedulerTask> taskPool;
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
