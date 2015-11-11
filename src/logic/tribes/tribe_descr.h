@@ -74,7 +74,7 @@ public:
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
 	bool has_worker(const DescriptionIndex& index) const;
-	bool has_immovable(int index) const;
+	bool has_immovable(const DescriptionIndex& index) const;
 
 	// A ware is a construction material if it appears in a building's buildcost or enhancement cost
 	bool is_construction_material(const DescriptionIndex& ware_index) const;
@@ -92,7 +92,7 @@ public:
 	DescriptionIndex safe_worker_index(const std::string & workername) const;
 
 	BuildingDescr const * get_building_descr(const DescriptionIndex& index) const;
-	ImmovableDescr const * get_immovable_descr(int index) const;
+	ImmovableDescr const * get_immovable_descr(const DescriptionIndex& index) const;
 	WareDescr const * get_ware_descr(const DescriptionIndex& index) const;
 	WorkerDescr const * get_worker_descr(const DescriptionIndex& index) const;
 

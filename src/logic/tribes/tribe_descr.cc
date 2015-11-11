@@ -222,7 +222,7 @@ bool TribeDescr::has_ware(const DescriptionIndex& index) const {
 bool TribeDescr::has_worker(const DescriptionIndex& index) const {
 	return workers_.count(index) == 1;
 }
-bool TribeDescr::has_immovable(int index) const {
+bool TribeDescr::has_immovable(const DescriptionIndex& index) const {
 	return immovables_.count(index) == 1;
 }
 bool TribeDescr::is_construction_material(const DescriptionIndex& index) const {
@@ -264,7 +264,7 @@ WorkerDescr const* TribeDescr::get_worker_descr(const DescriptionIndex& index) c
 BuildingDescr const * TribeDescr::get_building_descr(const DescriptionIndex& index) const {
 	return tribes_.get_building_descr(index);
 }
-ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
+ImmovableDescr const * TribeDescr::get_immovable_descr(const DescriptionIndex& index) const {
 	return tribes_.get_immovable_descr(index);
 }
 
