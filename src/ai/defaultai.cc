@@ -323,33 +323,30 @@ void DefaultAI::think() {
 	//ordering temporary queue so that higher priority (lower number) is on the begining
 	std::sort(current_task_queue.begin(), current_task_queue.end(), LowerPriority());
 
-	// Performing tasks form temporary queue one by one
+	// Performing tasks from temporary queue one by one
 	for (uint8_t i = 0; i < current_task_queue.size(); i += 1) {
 
 		DueTask = current_task_queue[i].id;
 
 		schedStat[static_cast<uint32_t>(DueTask)] += 1;
 
-		// now AI runs a job selected above to be performed in this turn
+		// Now AI runs a job selected above to be performed in this turn
 		// (only one but some of them needs to run check_economies() to
 		// guarantee consistency)
 		// job names are selfexplanatory
 		switch (DueTask) {
 			case schedulerTaskID::kBbuildableFieldsCheck :
 				update_all_buildable_fields(gametime);
-				//taskDue[schedulerTaskID::kBbuildableFieldsCheck] = gametime + kMinBFCheckInterval;
 				set_taskpool_task_time(gametime + kMinBFCheckInterval, schedulerTaskID::kBbuildableFieldsCheck);
 				break;
 			case schedulerTaskID::kMineableFieldsCheck :
 				update_all_mineable_fields(gametime);
-				//taskDue[schedulerTaskID::kMineableFieldsCheck] = gametime + kMinMFCheckInterval;
 				set_taskpool_task_time(gametime + kMinMFCheckInterval, schedulerTaskID::kMineableFieldsCheck);
 				break;
 			case schedulerTaskID::kRoadCheck :
 				if (check_economies()) {  // is a must
 					return;
 				};
-				//taskDue[schedulerTaskID::kRoadCheck] = gametime + 1000;
 				set_taskpool_task_time(gametime + 1000, schedulerTaskID::kRoadCheck);
 				// testing 5 roads
 				{
@@ -364,13 +361,11 @@ void DefaultAI::think() {
 				}
 				break;
 			case schedulerTaskID::kUnbuildableFCheck :
-				//taskDue[schedulerTaskID::kUnbuildableFCheck] = gametime + 4000;
 				set_taskpool_task_time(gametime + 4000, schedulerTaskID::kUnbuildableFCheck);
 				update_all_not_buildable_fields();
 				break;
 			case schedulerTaskID::kCheckEconomies :
 				check_economies();
-				//taskDue[schedulerTaskID::kCheckEconomies] = gametime + 8000;
 				set_taskpool_task_time(gametime + 8000, schedulerTaskID::kCheckEconomies);
 				break;
 			case schedulerTaskID::kProductionsitesStats :
@@ -381,10 +376,8 @@ void DefaultAI::think() {
 					return;
 				}
 				if (gametime < 15000) { //more frequent on the beginning of game
-					//taskDue[schedulerTaskID::kConstructBuilding] = gametime + 2000;
 					set_taskpool_task_time(gametime + 2000, schedulerTaskID::kConstructBuilding);
 				} else {
-					//taskDue[schedulerTaskID::kConstructBuilding] = gametime + 6000;
 					set_taskpool_task_time(gametime + 6000, schedulerTaskID::kConstructBuilding);
 				}
 				if (construct_building(gametime)) {
@@ -406,7 +399,6 @@ void DefaultAI::think() {
 						};
 					}
 				}
-				//taskDue[schedulerTaskID::kCheckProductionsites] = gametime + 15000;
 				set_taskpool_task_time(gametime + 15000, schedulerTaskID::kCheckProductionsites);
 				break;
 			case schedulerTaskID::kCheckShips :
@@ -419,7 +411,6 @@ void DefaultAI::think() {
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-				//taskDue[schedulerTaskID::kCheckMines] = gametime + 15000;
 				set_taskpool_task_time(gametime + 15000, schedulerTaskID::kCheckMines);
 				// checking 3 mines if possible
 				{
@@ -441,14 +432,12 @@ void DefaultAI::think() {
 				break;
 			case schedulerTaskID::kCountMilitaryVacant :
 				count_military_vacant_positions();
-				//taskDue[schedulerTaskID::kCountMilitaryVacant] = gametime + 45 * 1000;
 				set_taskpool_task_time(gametime + 45 * 1000, schedulerTaskID::kCountMilitaryVacant);
 				break;
 			case schedulerTaskID::kWareReview :
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-				//taskDue[schedulerTaskID::kWareReview] = gametime + 15 * 60 * 1000;
 				set_taskpool_task_time(gametime + 15 * 60 * 1000, schedulerTaskID::kWareReview);
 				review_wares_targets(gametime);
 				break;
@@ -460,7 +449,6 @@ void DefaultAI::think() {
 				break;
 			case schedulerTaskID::kCheckEnemySites :
 				check_enemy_sites(gametime);
-				//taskDue[schedulerTaskID::kCheckEnemySites] = gametime + 19 * 1000;
 				set_taskpool_task_time(gametime + 19 * 60 * 1000, schedulerTaskID::kCheckEnemySites);
 				break;
 			default:
@@ -712,7 +700,7 @@ void DefaultAI::late_initialization() {
 		resource_necessity_water_needed_ = true;
 	}
 
-	// Populating taskPool with starting times
+	// Populating taskPool with all AI jobs and their starting times
 	taskPool.push_back(SchedulerTask(
 		gametime +              0, schedulerTaskID::kConstructBuilding,     6, "construct a building"));
 	taskPool.push_back(SchedulerTask(
@@ -1359,7 +1347,6 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 /// Updates the production and MINE sites statistics needed for construction decision.
 void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
 	// Updating the stats every 10 seconds should be enough
-	//taskDue[schedulerTaskID::kProductionsitesStats] = gametime + 10000;
 	set_taskpool_task_time(gametime + 10000, schedulerTaskID::kProductionsitesStats);
 	uint16_t fishers_count = 0;  // used for atlanteans only
 
@@ -3438,12 +3425,10 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 
 	if (!seafaring_economy) {
-		//taskDue[schedulerTaskID::KMarineDecisions] = std::numeric_limits<uint32_t>::max();
 		set_taskpool_task_time(std::numeric_limits<uint32_t>::max(), schedulerTaskID::KMarineDecisions);
 		return false;
 	}
 
-	//taskDue[schedulerTaskID::KMarineDecisions] = gametime + kMarineDecisionInterval;
 	set_taskpool_task_time(gametime + kMarineDecisionInterval, schedulerTaskID::KMarineDecisions);
 
 	// getting some base statistics
@@ -3549,7 +3534,6 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	}
 
 	if (!seafaring_economy) {
-		//taskDue[schedulerTaskID::kCheckShips] = std::numeric_limits<int32_t>::max();
 		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), schedulerTaskID::kCheckShips);
 		return false;
 	}
@@ -3614,10 +3598,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	}
 
 	if (action_taken) {
-		//taskDue[schedulerTaskID::kCheckShips] = gametime + kShipCheckInterval;
 		set_taskpool_task_time(gametime + kShipCheckInterval, schedulerTaskID::kCheckShips);
 	} else {
-		//taskDue[schedulerTaskID::kCheckShips] = gametime + 3 * kShipCheckInterval;
 		set_taskpool_task_time(gametime + 3 * kShipCheckInterval, schedulerTaskID::kCheckShips);
 	}
 
@@ -4122,11 +4104,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		return false;
 	}
 	if (!trainingsites.empty()) {
-		//taskDue[schedulerTaskID::kCheckTrainingsites] = gametime + kTrainingSitesCheckInterval;
 		set_taskpool_task_time(
 			gametime + kTrainingSitesCheckInterval, schedulerTaskID::kCheckTrainingsites);
 	} else {
-		//taskDue[schedulerTaskID::kCheckTrainingsites] = gametime + 2 * kTrainingSitesCheckInterval;
 		set_taskpool_task_time(
 			gametime + 2 * kTrainingSitesCheckInterval, schedulerTaskID::kCheckTrainingsites);
 		return false;
@@ -4246,7 +4226,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	}
 
 	// just to be sure the value is reset
-	//taskDue[schedulerTaskID::kCheckMilitarysites] = gametime + 4 * 1000;  // 4 seconds is really fine
+	// 4 seconds is really fine
 	set_taskpool_task_time(gametime + 4 * 1000, schedulerTaskID::kCheckMilitarysites);
 
 	// Only useable, if defaultAI owns at least one militarysite
@@ -4357,7 +4337,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
-	//taskDue[schedulerTaskID::kCheckMilitarysites] = gametime + 5 * 1000;  // 10 seconds is really fine
+	// 10 seconds is really fine
 	set_taskpool_task_time(gametime + 5 * 1000, schedulerTaskID::kCheckMilitarysites);
 	return changed;
 }
@@ -5612,11 +5592,9 @@ uint32_t DefaultAI::msites_built() const{
 void DefaultAI::print_stats(uint32_t const gametime) {
 
 	if (!kPrintStats) {
-		//taskDue[schedulerTaskID::kPrintStats] = std::numeric_limits<int32_t>::max();
 		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), schedulerTaskID::kPrintStats);
 		return;
 	}
-	//taskDue[schedulerTaskID::kPrintStats] = gametime + 30 * 60 * 1000;
 	set_taskpool_task_time(gametime + 30 * 60 * 1000, schedulerTaskID::kPrintStats);
 
 	PlayerNumber const pn = player_number();
