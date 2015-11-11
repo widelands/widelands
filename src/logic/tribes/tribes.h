@@ -112,8 +112,8 @@ public:
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const DescriptionIndex& index) const;
 	bool immovable_exists(DescriptionIndex index) const;
-	bool ship_exists(int index) const;
-	bool tribe_exists(int index) const;
+	bool ship_exists(DescriptionIndex index) const;
+	bool tribe_exists(DescriptionIndex index) const;
 
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;

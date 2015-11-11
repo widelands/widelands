@@ -224,10 +224,10 @@ bool Tribes::building_exists(const DescriptionIndex& index) const {
 bool Tribes::immovable_exists(DescriptionIndex index) const {
 	return immovables_->get_mutable(index) != nullptr;
 }
-bool Tribes::ship_exists(int index) const {
+bool Tribes::ship_exists(DescriptionIndex index) const {
 	return ships_->get_mutable(index) != nullptr;
 }
-bool Tribes::tribe_exists(int index) const {
+bool Tribes::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
 }
 
@@ -248,7 +248,7 @@ DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) 
 }
 
 DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
-	const int result = ship_index(shipname);
+	const DescriptionIndex result = ship_index(shipname);
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
@@ -256,7 +256,7 @@ DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
 }
 
 DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
-	const int result = tribe_index(tribename);
+	const DescriptionIndex result = tribe_index(tribename);
 	if (!tribe_exists(result)) {
 		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
 	}
