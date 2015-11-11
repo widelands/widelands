@@ -237,6 +237,36 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
+   name = "forested_mountain_1",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "green",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "green/forested_mountain_00.png" },
+   dither_layer = 71,
+   temperature = 50,
+   humidity = 0.75,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
+   name = "forested_mountain_2",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "green",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "green/forested_mountain_01.png" },
+   dither_layer = 71,
+   temperature = 50,
+   humidity = 0.75,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
    name = "sumpf",
    descname = _ "Swamp",
    editor_category = "green",
@@ -251,7 +281,6 @@ world:new_terrain_type{
    humidity = 0.999,
    fertility = 0.1,
 }
-
 
 world:new_terrain_type{
    name = "strand",
