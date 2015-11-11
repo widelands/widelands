@@ -112,7 +112,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
@@ -217,7 +217,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError

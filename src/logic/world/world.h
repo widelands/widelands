@@ -63,10 +63,10 @@ public:
 	DescriptionIndex get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-	ResourceIndex get_resource(const char* const name) const;
-	ResourceDescription const* get_resource(ResourceIndex res) const;
-	ResourceIndex get_nr_resources() const;
-	ResourceIndex safe_resource_index(const char* const warename) const;
+	DescriptionIndex get_resource(const char* const name) const;
+	ResourceDescription const* get_resource(DescriptionIndex res) const;
+	DescriptionIndex get_nr_resources() const;
+	DescriptionIndex safe_resource_index(const char* const warename) const;
 
 	/// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);

@@ -438,7 +438,7 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 
 	private:
-		ResourceIndex m_resource;
+		DescriptionIndex m_resource;
 		uint8_t        m_distance; // width/radius of mine
 		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
 		uint8_t        m_chance; // odds of finding resources from empty mine

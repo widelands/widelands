@@ -47,7 +47,6 @@ inline PlayerNumber neutral() {return 0;}
 using TeamNumber = uint8_t;
 
 using DescriptionIndex = uint8_t;
-using ResourceIndex = uint8_t;  /// 4 bits used, so 0 .. 15.
 using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
 using Vision = uint16_t;

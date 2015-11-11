@@ -126,7 +126,7 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 	return *editor_immovable_categories_;
 }
 
-ResourceIndex World::safe_resource_index(const char* const resourcename) const {
+DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
@@ -171,16 +171,16 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 	return immovables_->get_mutable(index);
 }
 
-ResourceIndex World::get_resource(const char* const name) const {
+DescriptionIndex World::get_resource(const char* const name) const {
 	return resources_->get_index(name);
 }
 
-ResourceDescription const* World::get_resource(ResourceIndex const res) const {
+ResourceDescription const* World::get_resource(DescriptionIndex const res) const {
 	assert(res < resources_->size());
 	return resources_->get_mutable(res);
 }
 
-ResourceIndex World::get_nr_resources() const {
+DescriptionIndex World::get_nr_resources() const {
 	return resources_->size();
 }
 

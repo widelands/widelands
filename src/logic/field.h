@@ -77,7 +77,7 @@ struct Field {
 		DescriptionIndex d, r;
 	};
 	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
-	struct Resources        {ResourceIndex  d : 4, r : 4;};
+	struct Resources        {DescriptionIndex  d : 4, r : 4;};
 	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
 	struct ResourceAmounts {ResourceAmount d : 4, r : 4;};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
@@ -123,7 +123,7 @@ private:
 
 	OwnerInfoAndSelectionsType owner_info_and_selections;
 
-	ResourceIndex m_resources; ///< Resource type on this field, if any
+	DescriptionIndex m_resources; ///< Resource type on this field, if any
 	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
 	uint8_t m_res_amount; ///< Current amount of m_resources
 
@@ -205,7 +205,7 @@ public:
 		roads |= type << dir;
 	}
 
-	// TODO(unknown): This should return ResourceIndex
+	// TODO(unknown): This should return DescriptionIndex
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t const res, uint8_t const amount) {
