@@ -555,7 +555,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 
 			if (!bobname.empty()) {
-				int32_t const idx = world.get_bob(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.get_bob(bobname.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}

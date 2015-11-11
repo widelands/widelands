@@ -143,11 +143,11 @@ TerrainDescription const* World::get_ter(char const* const name) const {
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
 
-int32_t World::get_bob(char const* const l) const {
+DescriptionIndex World::get_bob(char const* const l) const {
 	return bobs_->get_index(l);
 }
 
-BobDescr const* World::get_bob_descr(uint16_t const index) const {
+BobDescr const* World::get_bob_descr(DescriptionIndex index) const {
 	return bobs_->get_mutable(index);
 }
 

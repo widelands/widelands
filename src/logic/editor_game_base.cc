@@ -328,7 +328,7 @@ Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owne
  *
  */
 
-Bob& EditorGameBase::create_critter(Coords const c, int const bob_type_idx, Player* owner) {
+Bob& EditorGameBase::create_critter(Coords const c, DescriptionIndex const bob_type_idx, Player* owner) {
 	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
 }
 
