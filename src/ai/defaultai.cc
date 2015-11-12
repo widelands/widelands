@@ -449,7 +449,7 @@ void DefaultAI::think() {
 				break;
 			case schedulerTaskID::kCheckEnemySites :
 				check_enemy_sites(gametime);
-				set_taskpool_task_time(gametime + 19 * 60 * 1000, schedulerTaskID::kCheckEnemySites);
+				set_taskpool_task_time(gametime +   19 * 1000, schedulerTaskID::kCheckEnemySites);
 				break;
 			default:
 				assert(false);
@@ -701,40 +701,40 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Populating taskPool with all AI jobs and their starting times
-	taskPool.push_back(SchedulerTask(
-		gametime +              0, schedulerTaskID::kConstructBuilding,     6, "construct a building"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 *      1000, schedulerTaskID::kRoadCheck,             2, "roads check"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 15 *      1000, schedulerTaskID::kCheckProductionsites,  5, "productionsites check"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 30 *      1000, schedulerTaskID::kProductionsitesStats,  1, "productionsites statistics"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 30 *      1000, schedulerTaskID::kCheckMines,            5, "check mines"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 0 *      1000, schedulerTaskID::kCheckMilitarysites,    5, "check militarysites"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 30 *      1000, schedulerTaskID::kCheckShips,            5, "check ships"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 *      1000, schedulerTaskID::kCheckEconomies,        1, "check economies"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 30 *      1000, schedulerTaskID::KMarineDecisions,       5, "marine decisions"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  2 * 60 * 1000, schedulerTaskID::kCheckTrainingsites,    5, "check training sites"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 *      1000, schedulerTaskID::kBbuildableFieldsCheck, 2, "check buildable fields"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 *      1000, schedulerTaskID::kMineableFieldsCheck,   2, "check mineable fields"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 *      1000, schedulerTaskID::kUnbuildableFCheck,     1, "check unbuildable fields"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 15 * 60 * 1000, schedulerTaskID::kWareReview,            9, "wares review"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 30 * 60 * 1000, schedulerTaskID::kPrintStats,            9, "print statistics"));
-	taskPool.push_back(SchedulerTask(
-		gametime +  1 * 60 * 1000, schedulerTaskID::kCountMilitaryVacant,   2, "count military vacant"));
-	taskPool.push_back(SchedulerTask(
-		gametime + 10 * 60 * 1000, schedulerTaskID::kCheckEnemySites,       6, "check enemy sites"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,              0),
+								schedulerTaskID::kConstructBuilding,     6, "construct a building"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 *      1000),
+								schedulerTaskID::kRoadCheck,             2, "roads check"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 15 *      1000),
+								schedulerTaskID::kCheckProductionsites,  5, "productionsites check"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 *      1000),
+								schedulerTaskID::kProductionsitesStats,  1, "productionsites statistics"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 *      1000),
+								schedulerTaskID::kCheckMines,            5, "check mines"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  0 *      1000),
+								schedulerTaskID::kCheckMilitarysites,    5, "check militarysites"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 *      1000),
+								schedulerTaskID::kCheckShips,            5, "check ships"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 *      1000),
+								schedulerTaskID::kCheckEconomies,        1, "check economies"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 *      1000),
+								schedulerTaskID::KMarineDecisions,       5, "marine decisions"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  2 * 60 * 1000),
+								schedulerTaskID::kCheckTrainingsites,    5, "check training sites"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 *      1000),
+								schedulerTaskID::kBbuildableFieldsCheck, 2, "check buildable fields"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 *      1000),
+								schedulerTaskID::kMineableFieldsCheck,   2, "check mineable fields"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 *      1000),
+								schedulerTaskID::kUnbuildableFCheck,     1, "check unbuildable fields"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 15 * 60 * 1000),
+								schedulerTaskID::kWareReview,            9, "wares review"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 * 60 * 1000),
+								schedulerTaskID::kPrintStats,            9, "print statistics"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 * 60 * 1000),
+								schedulerTaskID::kCountMilitaryVacant,   2, "count military vacant"));
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
+								schedulerTaskID::kCheckEnemySites,       6, "check enemy sites"));
 
 	Map& map = game().map();
 
