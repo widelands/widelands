@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-06 09:25+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -828,7 +828,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 msgctxt "atlanteans_building"
 msgid ""
-"The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fishbreeder’s house."
+"The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fish breeder’s house."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings

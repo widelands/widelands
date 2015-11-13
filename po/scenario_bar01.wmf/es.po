@@ -4,13 +4,14 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:53+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr "Construye edificios militares (como centilas o muros) para expandir tu t
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Llega a las rocas del noreste y construye allí una cantera."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -172,7 +173,7 @@ msgstr "Construye una fundición"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "El mineral de hierro que tus mineros excavan aún no es utilizable - tienes que fundirlo en hierro primero."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
@@ -180,7 +181,7 @@ msgstr "Mejora los edificios y construye una pequeña fábrica de cerveza"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Mejora una mina y la taberna, y construye una pequeña fábrica de cerveza."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
@@ -426,7 +427,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Boldreth parece cada vez más destrozado conforme pasan los días. Los espíritus de mis compañeros se hunden a medida que se acerca la temporada de frío, y todavía están viviendo en chozas y barracas. Nunca tuve la intención de permanecer aquí en el desierto durante tanto tiempo - pero nunca pensé que mis hermanos participarían en esta batalla sin sentido durante tanto tiempo tampoco."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:232
@@ -439,7 +440,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Alguien se acerca a ti"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
@@ -823,7 +824,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldreth parece preocupado..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:452
@@ -878,7 +879,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:483
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh parece aliviado..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:485
@@ -995,7 +996,7 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:534
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Hasta el momento, parece que ni la oración se cumplió."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "A friendly village has joined us!"

@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "The micro brewery produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.")
+   return pgettext("barbarians_building", "Produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.")
 end
 
 function building_helptext_note()

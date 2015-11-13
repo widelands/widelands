@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:50+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-09 08:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -240,16 +240,16 @@ msgstr "Cha deach le Widelands am faidhle “%s” a luchdadh. Tha fòrmat an fh
 msgid "Creating players"
 msgstr "A’ cruthachadh cluicheadairean"
 
-#: ../../src/editor/editorinteractive.cc:253
+#: ../../src/editor/editorinteractive.cc:251
 msgid "Unsaved Map"
 msgstr "Mapa gun sàbhaladh"
 
-#: ../../src/editor/editorinteractive.cc:254
+#: ../../src/editor/editorinteractive.cc:252
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson fàgail?"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:599
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:507
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -257,7 +257,7 @@ msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airs
 msgid "No Name"
 msgstr "Gun ainm"
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:598
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
 msgctxt "map_name"
@@ -800,6 +800,7 @@ msgid "Player %u"
 msgstr "Cluicheadair %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:272
+#: ../../src/ui_fsmenu/multiplayer.cc:144
 msgid "Error!"
 msgstr "Mearachd!"
 
@@ -921,7 +922,7 @@ msgstr "%u%% dheth às a chèile"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
-msgstr ""
+msgstr "A’ luchdadh na grafaigeachd"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:142
@@ -935,7 +936,7 @@ msgstr "A’ ro-luchdadh a’ mhapa"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "A’ luchdadh an t-saoghail"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -959,7 +960,7 @@ msgid "Configuring players"
 msgstr "A’ rèiteachadh nan cluicheadairean"
 
 #: ../../src/logic/game.cc:384 ../../src/logic/game.cc:418
-#: ../../src/wlapplication.cc:1421
+#: ../../src/wlapplication.cc:1411
 msgid "Loading..."
 msgstr "’Ga luchdadh..."
 
@@ -1235,11 +1236,11 @@ msgstr "Ràinig sinn deireadh na h-ath-chluiche is chaidh an geama a chur ’na 
 msgid "Saving game..."
 msgstr "A’ sàbhaladh a’ gheama..."
 
-#: ../../src/logic/save_handler.cc:120
+#: ../../src/logic/save_handler.cc:121
 msgid "Saving failed!"
 msgstr "Dh’fhàillig leis an t-sàbhaladh!"
 
-#: ../../src/logic/save_handler.cc:139
+#: ../../src/logic/save_handler.cc:140
 msgid "Game saved"
 msgstr "Chaidh an geama a shàbhaladh"
 
@@ -1318,12 +1319,12 @@ msgstr "bu chòir dha stòras %s a thàrmachadh nach eil air an t-saoghal seo; m
 msgid "A geologist found resources."
 msgstr "Tha clach-eòlaiche air stòras a lorg."
 
-#: ../../src/logic/worker.cc:1876
+#: ../../src/logic/worker.cc:1877
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e bàs."
 
-#: ../../src/logic/worker.cc:1884
+#: ../../src/logic/worker.cc:1885
 msgid "Worker got lost!"
 msgstr "Chaidh obraiche air chall!"
 
@@ -1540,7 +1541,7 @@ msgid ""
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\nCha robh frithealaiche Widelands a’ ruith aig a’ phort sin air neo\nchaidh am frithealaiche a dhùnadh sìos fhad ’s a bha thu a’ feuchainn ri ceangal."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:837
-#: ../../src/wlapplication.cc:1311
+#: ../../src/wlapplication.cc:1301
 msgid "Preparing game"
 msgstr "Ag ullachadh a’ gheama"
 
@@ -2212,7 +2213,7 @@ msgstr "Fosgail geama ùr"
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:59
-#: ../../src/ui_fsmenu/multiplayer.cc:47
+#: ../../src/ui_fsmenu/multiplayer.cc:49
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
 msgid "Back"
@@ -2262,6 +2263,13 @@ msgstr "Dh’fhalbh an ùine air a’ cheangal"
 #: ../../src/ui_fsmenu/internet_lobby.cc:418
 msgid "Widelands was unable to connect to the host."
 msgstr "Cha deach le Widelands ceangal ris an òstair."
+
+#. * TRANSLATORS: This is shown for multiplayer games when no host
+#. * TRANSLATORS: server to connect to has been specified yet.
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
+msgctxt "server_name"
+msgid "unnamed"
+msgstr "gun_ainm"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."
@@ -2815,23 +2823,23 @@ msgid ""
 "sent by the server."
 msgstr "Chan eil am faidhle mapa seo san t-siostam-fhaidhlichean agad. Chaidh an dàta a chì thu an-seo a chur leis an fhrithealaiche."
 
-#: ../../src/ui_fsmenu/multiplayer.cc:34
+#: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
 msgstr "Tagh seòrsa a’ gheama"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:41
+#: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Internet game"
 msgstr "Geama eadar-lìn"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:44
+#: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "LAN / Direct IP"
 msgstr "LAN / IP dìreach"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:84
+#: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
 msgstr "Seall còmhradh logaidh a-steach"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:114
+#: ../../src/ui_fsmenu/multiplayer.cc:116
 #: ../../src/ui_fsmenu/netsetup_lan.cc:112 ../../src/wui/login_box.cc:76
 msgid "nobody"
 msgstr "gun_ainm"
@@ -3046,11 +3054,11 @@ msgstr "Iomairtean"
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/wlapplication.cc:1095
+#: ../../src/wlapplication.cc:1085
 msgid "Game data error"
 msgstr "Mearachd le dàta a’ gheama"
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1095
 #, c-format
 msgid ""
 "\n"
@@ -3058,7 +3066,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nNach innis thu dhuinn mun duilgheadas seo ach an doir sinn piseach air Widelands? Chì thu teachdaireachdan co-cheangailte ris san às-chur stannardach (stdout.txt air Windows). Tha thu a’ chleachdadh an togail %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1102
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -4000,7 +4008,7 @@ msgstr "IF thuaireamach"
 
 #: ../../src/wui/playerdescrgroup.cc:187
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Thèid an treubh a shuidheachadh air thuaiream."
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"

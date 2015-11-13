@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -629,7 +629,7 @@ void Game::think()
 		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
 		// check if autosave is needed
-		m_savehandler.think(*this, WLApplication::get()->get_time());
+		m_savehandler.think(*this, get_gametime_pointer());
 	}
 }
 

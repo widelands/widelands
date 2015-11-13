@@ -108,7 +108,7 @@ diary_page_2 = {
 }
 
 diary_page_3 = {
-   title=_"Survivor",
+   title=_"Survivors",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
       _([[Finally, the Gods were with us!]])

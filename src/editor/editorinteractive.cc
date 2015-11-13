@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	InteractiveBase(e, g_options.pull_section("global")),
 	m_need_save(false),
-	m_realtime(WLApplication::get()->get_time()),
+	m_realtime(SDL_GetTicks()),
 	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
 
@@ -232,13 +232,11 @@ void EditorInteractive::start() {
 void EditorInteractive::think() {
 	InteractiveBase::think();
 
-	int32_t lasttime = m_realtime;
-	int32_t frametime;
+	uint32_t lasttime = m_realtime;
 
-	m_realtime = WLApplication::get()->get_time();
-	frametime = m_realtime - lasttime;
+	m_realtime = SDL_GetTicks();
 
-	egbase().get_gametime_pointer() += frametime;
+	egbase().get_gametime_pointer() += m_realtime - lasttime;
 }
 
 

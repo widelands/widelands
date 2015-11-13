@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-08 15:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Kinyarwanda (http://www.transifex.com/widelands/widelands/language/rw/)\n"
 "MIME-Version: 1.0\n"
@@ -167,7 +167,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
+msgid "Survivors"
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary

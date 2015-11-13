@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Persian (http://www.transifex.com/widelands/widelands/language/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -141,212 +141,212 @@ msgstr ""
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down CTRL."
 msgstr ""
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr ""
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
 
-#: ../../txts/README.lua:58
+#: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr ""
 
-#: ../../txts/README.lua:60
+#: ../../txts/README.lua:58
 msgid "PAGEUP: increases game speed"
 msgstr ""
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:59
 msgid "PAGEDOWN: decreases game speed"
 msgstr ""
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:60
 msgid "PAUSE: pauses the game"
 msgstr ""
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:61
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:62
 msgid "M: toggles minimap"
 msgstr ""
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:63
 msgid "N: toggles messages (‘news’)"
 msgstr ""
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:64
 msgid "C: toggles census"
 msgstr ""
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:65
 msgid "S: toggles statistics"
 msgstr ""
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:66
 msgid "I: toggles stock inventory"
 msgstr ""
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:67
 msgid "O: toggles objectives"
 msgstr ""
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:68
 msgid "B: toggles building statistics"
 msgstr ""
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:69
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:70
 msgid "Home: centers main mapview on starting location"
 msgstr ""
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:71
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
 msgstr ""
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:73
 msgid ".: goes to the next location"
 msgstr ""
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:74
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:75
 msgid "CTRL+F10: quits the game immediately"
 msgstr ""
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:76
 msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr ""
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:77
 msgid "CTRL+F11: takes a screenshot"
 msgstr ""
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:81
 msgid "0: shows all messages"
 msgstr ""
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:82
 msgid "1: shows geologists' messages only"
 msgstr ""
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
 msgstr ""
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:84
 msgid "3: shows seafaring messages only"
 msgstr ""
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:85
 msgid "4: shows warfare messages only"
 msgstr ""
 
-#: ../../txts/README.lua:88
+#: ../../txts/README.lua:86
 msgid "5: shows scenario messages only"
 msgstr ""
 
-#: ../../txts/README.lua:89
+#: ../../txts/README.lua:87
 msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:88
 msgid "DELETE: archives/restores the current message"
 msgstr ""
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:90
 msgid "Online Help"
 msgstr ""
 
-#: ../../txts/README.lua:94
+#: ../../txts/README.lua:92
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:96
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:98
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
 
-#: ../../txts/README.lua:104
+#: ../../txts/README.lua:102
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:104
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:106
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:108
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr ""
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:111
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../txts/README.lua:116
+#: ../../txts/README.lua:114
 msgid "- Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:116
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../txts/README.lua:121
+#: ../../txts/README.lua:119
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:123
 msgid "Replays"
 msgstr ""
 
-#: ../../txts/README.lua:127
+#: ../../txts/README.lua:125
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -355,7 +355,7 @@ msgid ""
 "you the time you started the game."
 msgstr ""
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:131
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -365,7 +365,7 @@ msgid ""
 "different version of the game."
 msgstr ""
 
-#: ../../txts/README.lua:140
+#: ../../txts/README.lua:138
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
@@ -652,7 +652,7 @@ msgstr ""
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 
@@ -665,7 +665,7 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
+"work area, they will stop fishing."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10

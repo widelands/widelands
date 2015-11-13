@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,8 @@ using Widelands::GameSaver;
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
-	initialize(realtime);
+void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
+	initialize(gametime);
 	std::string filename = "wl_autosave";
 
 	if (!m_allow_saving) {
@@ -67,7 +67,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			return; // no autosave requested
 		}
 
-		const int32_t elapsed = (realtime - m_last_saved_time) / 1000;
+		const int32_t elapsed = (gametime - m_last_saved_gametime) / 1000;
 		if (elapsed < autosave_interval_in_seconds) {
 			return;
 		}
@@ -115,6 +115,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	}
 
 	std::string error;
+	uint32_t before = SDL_GetTicks();
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
 		game.get_ibase()->log_message(_("Saving failed!"));
@@ -126,8 +127,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			}
 			g_fs->fs_rename(backup_filename, complete_filename);
 		}
-		// Wait 30 seconds until next save try
-		m_last_saved_time = m_last_saved_time + 30000;
+		// Wait 30 in game seconds until next save try
+		m_last_saved_gametime = m_last_saved_gametime + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -135,18 +136,19 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->fs_unlink(backup_filename);
 	}
 
-	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
+	log("Autosave: save took %d ms\n", SDL_GetTicks() - before);
 	game.get_ibase()->log_message(_("Game saved"));
+	m_last_saved_gametime = gametime;
 }
 
 /**
 * Initialize autosave timer
  */
-void SaveHandler::initialize(int32_t currenttime) {
+void SaveHandler::initialize(uint32_t gametime) {
 	if (m_initialized)
 		return;
 
-	m_last_saved_time = currenttime;
+	m_last_saved_gametime = gametime;
 	m_initialized = true;
 }
 
@@ -202,9 +204,6 @@ bool SaveHandler::save_game
 			*error = e.what();
 		result = false;
 	}
-
-	if (result)
-		m_last_saved_time = WLApplication::get()->get_time();
 
 	return result;
 }

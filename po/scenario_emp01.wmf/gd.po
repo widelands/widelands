@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:37+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-08 15:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,17 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Tog taigh-bloca"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
-msgstr ""
+msgstr "Taigh-bloca"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Tog taigh-bloca aig an t-samhla taighe dheirg taobh an ear sa choille, gu ear air a' phrìomh-àras shealach agad."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
@@ -170,8 +170,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
-msgstr "Neach-tarrsainn"
+msgid "Survivors"
+msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114

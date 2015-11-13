@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:34+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-08 16:02+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,7 +172,7 @@ msgid ""
 msgstr "Unser Schiff ist schwer beschädigt und es fasst immer mehr Wasser. Wir können den Göttern danken, wenn wir diese schwarze Nacht überleben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
+msgid "Survivors"
 msgstr "Überlebende"
 
 #. TRANSLATORS: Lutius - Diary
@@ -241,7 +241,7 @@ msgstr "Saledus spricht erleichtert …"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr "Herr, wie ich gesehen habe ist der Bau der Baracke fertiggestellt, sodass ich einen unserer besten Soldaten dort stationiert habe, um die Wüste und den Wald im Auge zu behalten."
+msgstr "Herr, ich habe gesehen, dass die Baracke fertiggestellt ist, also habe ich einen unserer besten Soldaten dort stationiert, um die Wüste und den Wald im Auge zu behalten."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:148

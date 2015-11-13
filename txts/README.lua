@@ -44,9 +44,7 @@ creating new maps – get in touch on our homepage.]])
    .. h2(_
 [[General game control]]
    ) .. p(_
-[[To close an open window, right-click on it. To minimize/maximize a window, click
-on the title bar of that window either with the middle mouse button or with the left
-mouse button while holding down CTRL.]]
+[[To close an open window, right-click on it. To minimize/maximize a window, click on it with the middle mouse button or with the left mouse button while holding down CTRL.]]
    ) .. p(_
 [[If you hold CTRL while building a road, flags will be placed automatically.
 If you hold CTRL while removing a road, all flags up to the first junction are

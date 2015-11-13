@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "The reed yard cultivates reed that serves two different purposes for the Barbarian tribe.")
+   return pgettext("barbarians_building", "Cultivates reed that serves two different purposes for the Barbarian tribe.")
 end
 
 function building_helptext_note()

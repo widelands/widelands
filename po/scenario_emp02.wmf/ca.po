@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:30+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,11 +51,11 @@ msgstr "Protegiu la colònia"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Construïu alguns barracons i guardes sentinella al voltant de la colònia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
-msgstr "Comenceu a extreure marbre"
+msgstr "Comenceu a extraure marbre"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:57
 msgid "Marble"
@@ -63,7 +63,7 @@ msgstr "Marbre"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr "Expandiu-vos a l'est, per començar a extreure marbre de la muntanya."
+msgstr "Expandiu-vos a l'est, per començar a extraure marbre de la muntanya."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:64
 msgid "Build a stonemason’s house and mining infrastructure"
@@ -223,7 +223,7 @@ msgstr "Les roques"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stones for our larger buildings."
-msgstr ""
+msgstr "Després, vaig caminar fins a les roques del sud i vaig buscar un lloc on construir-hi una pedrera per aconseguir pedres per als edificis més grans."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:140
@@ -246,14 +246,14 @@ msgstr "Bones notícies! Avui s'ha completat l'economia de producció de fusta. 
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr ""
+msgstr "Pedra per a la colònia"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stones to construct larger buildings."
-msgstr ""
+msgstr "Bé! S'ha acabat de construir la pedrera. Ara obtindrem prou pedra per construir edificis més grans."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
@@ -285,7 +285,7 @@ msgstr "Potser la mateixa tempesta va sorprendre la gent d'aquell vaixell. Segur
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Us recomano cautela i que construïu alguns barracons o guardes sentinella al voltant de la colònia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"
@@ -301,7 +301,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr "Senyor, tinc bones notícies per vós: mentre caminava per l'est, he trobat una muntanya més gran. No estic del tot segur, un geòleg ho podrà comprovar, però crec que podríem extreure marbre d'alguns llocs de la muntanya."
+msgstr "Senyor, tinc bones notícies per vós: mentre caminava per l'est, he trobat una muntanya més gran. No estic del tot segur, un geòleg ho podrà comprovar, però crec que podríem extraure marbre d'alguns llocs de la muntanya."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
@@ -314,7 +314,7 @@ msgstr "Tindríem una bona font per reforçar el subministrament de marbre de qu
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:185
 msgid "Please, expand to that mountain and start mining marble."
-msgstr "Si us plau, expandiu el territori cap aquella muntanya i comenceu a extreure'n marbre."
+msgstr "Si us plau, expandiu el territori cap aquella muntanya i comenceu a extraure'n marbre."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid "Further Mountains"

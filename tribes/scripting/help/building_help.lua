@@ -277,12 +277,12 @@ function building_help_general_string(building_description)
 
    elseif(building_description.type_name == "warehouse") then
       result = result .. rt(h3(_"Healing:")
-         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %s health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
+         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %d health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
       result = result .. text_line(_"Conquer range:", building_description.conquers)
 
    elseif(building_description.type_name == "militarysite") then
       result = result .. rt(h3(_"Healing:")
-         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %s health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
+         .. p(ngettext("Garrisoned soldiers heal %d health point per second", "Garrisoned soldiers heal %d health points per second", building_description.heal_per_second):bformat(building_description.heal_per_second)))
       result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
       result = result .. text_line(_"Conquer range:", building_description.conquers)
 

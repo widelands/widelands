@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 16:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "Is an raon catha aon dhe na làraichean trèanaidh ud. ’S e togalach daor mòr a th’ ann agus trèanaidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
@@ -179,7 +179,7 @@ msgstr "Glè mhath. Chaidh an raon catha againn a thogail agus tha na saighdeara
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "Tha am bathar air a bheil feum ’ga ghiùlan an-siud cuideachd. Bidh feum agad air aran tur agus leann làidir cho math ri iasg no feòil ach an soirbhich leis an trèanadh."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
 msgid ""
@@ -251,7 +251,7 @@ msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "Gus trèanadh a dhèanamh sa champa trèanaidh, bidh na saighdearan againn feumach air biadh mar a tha san raon catha ach cha bhi feum aca air leann làidir. Bidh iad feumach air diofar seòrsa de thuaghan ’na àite airson trèanadh ionnsaighe agus air clogaidean airson trèanadh slàinte."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid ""

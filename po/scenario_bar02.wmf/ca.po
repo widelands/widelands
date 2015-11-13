@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:10+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,13 +66,13 @@ msgstr "Tal com creixen la colònia i els seus camins, hauríeu de fer un bon ú
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Construïu una torre"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Construïu una torre a la frontera nord-est del vostre territori per aconseguir un major rang visual i protegir l'assentament d'atacs imprevistos."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -124,7 +124,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Milloreu el taller de metall a fàbrica de destrals per produir armes i construïu un altre taller de metall per assegurar la producció d'eines. Quan el forjador arribi al següent nivell (mestre forjador), llavors podeu millorar la fàbrica de destrals a taller de guerra, que produirà armes addicionals."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -425,7 +425,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "En Thron m'ha dit que ha descobert rastres a la neu cap al nord-est del nostre assentament. Ens ha ordenat construir una torre, per aconseguir un major rang visual dels voltants i protegir la nostra gent d'atacs imprevistos."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -504,7 +504,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Per fi! S'ha completat la fortalesa. L'entrada al nostre assentament hauria de ser segura per ara. De cara al futur, hauríem de pensar en construir més fortificacions com ara casernes i torres als passos estrets. Però per ara podem respirar tranquils."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"

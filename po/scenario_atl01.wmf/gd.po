@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 16:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "'S e iasg-rèiste 's feòil-rèiste a th' anns an dà seòrsa bhìdh eile a tha cudromach. Bheir thu feòil on t-sealgair. Togaidh iasgair èisg on mhuir fhad 's a nì an tàrmachair iasg cinnteach nach tèid a h-uile iasg à bith. Dèan cinnteach gum bi èisg sa mhuir agad an-còmhnaidh oir cha tèid leis an tàrmachair cur riutha. Nì thu an toiteadh san taigh-toitidh is feumaidh tu dà dhiubh a thogail air a char as lugha."
+msgstr "'S e iasg-rèiste 's feòil-rèiste a th' anns an dà seòrsa bhìdh eile a tha cudromach. Bheir thu feòil on t-sealgair. Togaidh iasgair èisg on mhuir fhad 's a nì an tàrmachair èisg cinnteach nach tèid a h-uile iasg à bith. Dèan cinnteach gum bi èisg sa mhuir agad an-còmhnaidh oir cha tèid leis an tàrmachair cur riutha. Nì thu an toiteadh san taigh-toitidh is feumaidh tu dà dhiubh a thogail air a char as lugha."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
@@ -107,7 +107,7 @@ msgstr "Tog tuathanas 's tuathanas fhreumhagan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Tog muileann gus min-coirce 's min-freumhaige a dhèanamh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -115,7 +115,7 @@ msgstr "Tog tobar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Tog taigh-fuine gus aran a dhèanamh à min-coirce, min-freumhaige 's uisge"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -129,7 +129,7 @@ msgstr "Tog taigh-iasgair faisg air uisge gus èisg a thogail"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Tog taigh tàrmachair iasg faisg air an taigh-iasgair ach nach tèid na h-èisg à bith"
+msgstr "Tog taigh tàrmachair èisg faisg air an taigh-iasgair ach nach tèid na h-èisg à bith"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -266,7 +266,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "Tog doca faisg air an loch gus longan a thogail"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"

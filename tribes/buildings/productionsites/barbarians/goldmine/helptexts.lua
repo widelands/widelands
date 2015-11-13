@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Digs gold ore out of the ground in mountain terrain.")
+   return pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
 end
 
 function building_helptext_note()

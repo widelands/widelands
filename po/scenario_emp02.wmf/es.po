@@ -5,13 +5,14 @@
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:54+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,7 +134,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
-msgstr ""
+msgstr "Para ver al interior del territorio enemigo, construye una torre."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
@@ -233,7 +234,7 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr ""
+msgstr "Una vez más, me sentí como si estuviera en el paraíso cuando me di cuenta que algunas piedras que parecían mármol estaban entre las rocas. Parece que pronto seremos capaces de construir fuertes, edificios lujosos, como a los que estábamos acostumbrados en Fremil."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
@@ -334,7 +335,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron ore and coal mines (or "
 "at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Por los dioses, este es un increíble golpe de suerte! Hay dos montañas más, y parece que una tiene una gran cantidad de carbón y la otra mineral de hierro. Aconsejo construir de inmediato minas de mineral de hierro y carbón (o al menos hornos de carbón), obras de fundición, fabricas de herramientas, armaduras y herrerías de armas."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:196
@@ -410,7 +411,7 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
+msgstr "Por los dioses! Esto es absolutamente terrible. Parece como si nos encontraramos cerca de una prueba - y parece que Saledus tenía razón con su temor relacionado con el naufragio que encontró."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:235
