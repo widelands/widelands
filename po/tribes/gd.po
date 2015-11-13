@@ -1,22 +1,23 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-#
+# 
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# GunChleoc, 2013-2014
+# GunChleoc, 2015
+# GunChleoc, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:04+0100\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
-"Language: gd\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -27,7 +28,6 @@ msgstr "Caisteal"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/castle/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Castle"
 msgstr "Caisteal"
@@ -50,12 +50,12 @@ msgstr "Tha an caisteal agad fo ionnsaigh."
 #: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:54
 #: ../../tribes/buildings/militarysites/empire/castle/init.lua:48
 msgid "The enemy defeated your soldiers at the castle."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig caisteal."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ chaisteal."
 
 #: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:55
 #: ../../tribes/buildings/militarysites/empire/castle/init.lua:49
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig caisteal."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ chaisteal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:7
@@ -77,11 +77,11 @@ msgstr "Tha an talla-faire agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:49
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig talla-faire."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an talla-faire."
 
 #: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig talla-faire."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an talla-faire."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:7
@@ -103,11 +103,11 @@ msgstr "Tha am bothan-faire agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig bothan-faire."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ bhothan-fhaire."
 
 #: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:49
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig bothan-faire."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ bhothan-fhaire."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:7
@@ -117,14 +117,12 @@ msgstr "Tùr"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Tower"
 msgstr "Tùr"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/tower/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Tower"
 msgstr "Tùr"
@@ -151,13 +149,13 @@ msgstr "Tha an tùr agad fo ionnsaigh."
 #: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:62
 #: ../../tribes/buildings/militarysites/empire/tower/init.lua:56
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr."
 
 #: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:54
 #: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:63
 #: ../../tribes/buildings/militarysites/empire/tower/init.lua:57
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:7
@@ -179,11 +177,11 @@ msgstr "Tha an tùr àrd agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:45
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr àrd."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr àrd."
 
 #: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:46
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr àrd."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr àrd."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:7
@@ -205,31 +203,28 @@ msgstr "Tha an tùr beag agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:48
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr beag."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr bheag."
 
 #: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr beag."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr bheag."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Barrier"
 msgstr "Taigh-faire"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Barrier"
 msgstr "Taigh-faire"
 
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:56
-#, fuzzy
 msgid "Your soldiers have occupied your barrier."
-msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh san taigh-fhaire agad."
 
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:53
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:57
@@ -244,24 +239,22 @@ msgstr "Tha an taigh-faire agad fo ionnsaigh."
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:55
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:59
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig taigh-faire."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an taigh-fhaire."
 
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:60
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig taigh-faire."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an taigh-fhaire."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Citadel"
 msgstr "Cathair"
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:56
-#, fuzzy
 msgid "Your soldiers have occupied your citadel."
-msgstr "Ghabh na saighdearan agad còmhnaidh sa chaisteal agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh sa chathair agad."
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:57
 msgid "Your citadel discovered an aggressor."
@@ -273,31 +266,28 @@ msgstr "Tha a’ chathair agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:59
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig cathair."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ chathair."
 
 #: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:60
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig cathair."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ chathair."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Fortress"
 msgstr "Dùn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Fortress"
 msgstr "Dùn"
 
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:62
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:58
-#, fuzzy
 msgid "Your soldiers have occupied your fortress."
-msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh san dùn agad."
 
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:63
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:59
@@ -312,32 +302,29 @@ msgstr "Tha an dùn agad fo ionnsaigh."
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:65
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:61
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig dùn."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an dùn."
 
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:66
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:62
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig dùn."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an dùn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Sentry"
 msgstr "Freiceadan"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sentry"
 msgstr "Freiceadan"
 
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:53
-#, fuzzy
 msgid "Your soldiers have occupied your sentry."
-msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh san fhreiceadan agad."
 
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:55
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:54
@@ -352,55 +339,48 @@ msgstr "Tha am freiceadan agad fo ionnsaigh."
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:57
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:56
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig freiceadan."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an fhreiceadan."
 
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:58
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:57
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig freiceadan."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an fhreiceadan."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:7
 msgctxt "empire_building"
 msgid "Blockhouse"
-msgstr ""
+msgstr "Taigh-bloca"
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:41
-#, fuzzy
 msgid "Your soldiers have occupied your blockhouse."
-msgstr "Ghabh na saighdearan agad còmhnaidh sa bhothan-fhaire agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh san taigh-bhloca agad."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:42
-#, fuzzy
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Mhothaich am bothan-faire agad dha dh’ionnsaigh."
+msgstr "Mhothaich an taigh-bloca agad dha dh’ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:43
-#, fuzzy
 msgid "Your blockhouse is under attack."
-msgstr "Tha am bothan-faire agad fo ionnsaigh."
+msgstr "Tha an taigh-bloca agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:44
-#, fuzzy
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig bothan-faire."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an taigh-bloca."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:45
-#, fuzzy
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig bothan-faire."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an taigh-bloca."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Outpost"
 msgstr "Gearastan"
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:47
-#, fuzzy
 msgid "Your soldiers have occupied your outpost."
-msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
+msgstr "Ghabh na saighdearan agad còmhnaidh sa ghearastan agad."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:48
 msgid "Your outpost discovered an aggressor."
@@ -412,22 +392,22 @@ msgstr "Tha an gearastan agad fo ionnsaigh."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:50
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig gearastan."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ ghearastan."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:51
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig gearastan."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ ghearastan."
 
-#. TRANSLATORS: This is a name used in lists of buildings for buildings under construction
+#. TRANSLATORS: This is a name used in lists of buildings for buildings under
+#. construction
 #: ../../tribes/buildings/partially_finished/constructionsite/init.lua:7
-#, fuzzy
 msgctxt "building"
 msgid "Construction Site"
 msgstr "Làrach-togail"
 
-#. TRANSLATORS: This is a name used in lists of buildings for buildings being taken apart
+#. TRANSLATORS: This is a name used in lists of buildings for buildings being
+#. taken apart
 #: ../../tribes/buildings/partially_finished/dismantlesite/init.lua:7
-#, fuzzy
 msgctxt "building"
 msgid "Dismantle Site"
 msgstr "’Ga thoirt às a chèile"
@@ -440,7 +420,6 @@ msgstr "Ceàrdach armachd"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Armor Smithy"
 msgstr "Ceàrdach armachd"
@@ -487,12 +466,14 @@ msgstr "Ceàrdach armachd"
 msgid "working"
 msgstr "obair"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:67
 msgid "forging a steel shield"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "clogaid a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:78
 msgid "forging an advanced shield"
 msgstr "sgiath adhartach a dhèanamh"
@@ -505,14 +486,12 @@ msgstr "Taigh-fuine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Bakery"
 msgstr "Taigh-fuine"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/bakery/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Taigh-fuine"
@@ -521,9 +500,8 @@ msgstr "Taigh-fuine"
 #: ../../tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
 #: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:61
 #: ../../tribes/buildings/productionsites/empire/bakery/init.lua:61
-#, fuzzy
 msgid "baking bread"
-msgstr "crann-arain a dhèanamh"
+msgstr "aran fhuineadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -536,7 +514,8 @@ msgstr "Tuathanas fhreumhagan"
 msgid "planting blackroot"
 msgstr "freumhagan a chur"
 
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
 msgid "harvesting blackroot"
 msgstr "freumhagan a bhuain"
@@ -552,7 +531,9 @@ msgstr "Chan eil achadh ann"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 msgctxt "atlanteans_building"
-msgid "The blackroot farmer working at this blackroot farm has no cleared soil to plant his seeds."
+msgid ""
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
 msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach fhreumhagan a tha ag obair aig an tuathanas fhreumhagan seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -563,14 +544,12 @@ msgstr "Àth-ghuail"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Charcoal Kiln"
 msgstr "Àth-ghuail"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Charcoal Kiln"
 msgstr "Àth-ghuail"
@@ -580,7 +559,7 @@ msgstr "Àth-ghuail"
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:58
 #: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:54
 msgid "producing coal"
-msgstr ""
+msgstr "gual a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:7
@@ -590,14 +569,12 @@ msgstr "Mèinn guail"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Mèinn guail"
@@ -609,9 +586,8 @@ msgstr "Mèinn guail"
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:60
-#, fuzzy
 msgid "mining coal"
-msgstr "stòras a thogail"
+msgstr "gual a thochladh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
@@ -624,8 +600,10 @@ msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
 msgctxt "atlanteans_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -637,19 +615,18 @@ msgstr "Mèinn criostail"
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:73
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:87
-#, fuzzy
 msgid "mining granite"
-msgstr "clach a thogail"
+msgstr "gaireal a thochladh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
 msgid "mining quartz"
-msgstr "èiteag a thogail"
+msgstr "èiteag a thochladh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:112
 msgid "mining diamonds"
-msgstr "daoimean a thogail"
+msgstr "daoimean a thochladh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
 msgid "Main Crystal Vein Exhausted"
@@ -657,8 +634,10 @@ msgstr "Tha prìomh-chuisle criostail air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgctxt "atlanteans_building"
-msgid "This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne criostail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This crystal mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne criostail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -668,14 +647,12 @@ msgstr "Tuathanas"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Farm"
 msgstr "Tuathanas"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Farm"
 msgstr "Tuathanas"
@@ -692,32 +669,32 @@ msgstr "coirce a bhuain"
 
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
 msgctxt "atlanteans_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag an tuathanas seo sìol."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas seo sìol."
 
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag an tuathanas seo sìol."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas seo sìol."
 
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
-#, fuzzy
 msgctxt "empire_building"
-msgid "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag an tuathanas seo sìol."
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
-msgstr "Taigh tàrmachair iasg"
+msgstr "Taigh tàrmachair èisg"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:43
-#, fuzzy
 msgid "breeding fish"
-msgstr "Tàrmaichidh e èisg."
+msgstr "iasg a thàrmachadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
@@ -727,7 +704,6 @@ msgstr "Taigh-iasgair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Taigh-iasgair"
@@ -747,8 +723,11 @@ msgstr "Chan eil iasg ann"
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 msgctxt "atlanteans_building"
-msgid "The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fishbreeder’s house."
-msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn dhut cur ris na tha ann de dh’èisg ma thogas tu taigh tàrmachair iasg."
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area. Remember that you can increase the number of existing fish by "
+"building a fish breeder’s house."
+msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn dhut cur ris na tha ann de dh’èisg ma thogas tu taigh tàrmachair èisg."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
@@ -758,7 +737,6 @@ msgstr "Taigh planntair-choille"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Forester’s House"
 msgstr "Taigh planntair-choille"
@@ -778,9 +756,8 @@ msgstr "Ceàrdach snìomhadair òir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:53
-#, fuzzy
 msgid "spinning gold"
-msgstr "òr a leaghadh"
+msgstr "òr a shnìomh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
@@ -790,14 +767,12 @@ msgstr "Mèinn òir"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
@@ -809,9 +784,8 @@ msgstr "Mèinn òir"
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:60
-#, fuzzy
 msgid "mining gold"
-msgstr "òr a leaghadh"
+msgstr "òr a thochladh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
@@ -824,8 +798,10 @@ msgstr "Tha prìomh-chuisle òir air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
 msgctxt "atlanteans_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -846,7 +822,6 @@ msgstr "Taigh-sealgair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Hunter’s House"
 msgstr "Taigh-sealgair"
@@ -868,33 +843,33 @@ msgstr "Chan eil sitheann ann"
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 msgctxt "atlanteans_building"
-msgid "The hunter working out of this hunter’s house can’t find any game in his work area."
-msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-sealgair seo sitheann taobh a-staigh a raoin-obrach tuilleadh."
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-shealgair seo sitheann taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#, fuzzy
 msgctxt "empire_building"
-msgid "The hunter working out of this hunter’s house can’t find any game in his work area."
-msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-sealgair seo sitheann taobh a-staigh a raoin-obrach tuilleadh."
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-shealgair seo sitheann taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
-#, fuzzy
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
@@ -906,9 +881,8 @@ msgstr "Mèinn iarainn"
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
-#, fuzzy
 msgid "mining iron"
-msgstr "clach a thogail"
+msgstr "iarann a thochladh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
@@ -920,10 +894,11 @@ msgid "Main Iron Vein Exhausted"
 msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -933,7 +908,6 @@ msgstr "Muileann"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/mill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Mill"
 msgstr "Muileann"
@@ -956,14 +930,12 @@ msgstr "Coireall"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Coireall"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Quarry"
 msgstr "Coireall"
@@ -972,9 +944,8 @@ msgstr "Coireall"
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:60
-#, fuzzy
 msgid "quarrying granite"
-msgstr "clach a thochladh"
+msgstr "gaireal a thochladh"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:74
@@ -983,10 +954,11 @@ msgid "Out of Rocks"
 msgstr "Chan eil creagan ann"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#, fuzzy
 msgctxt "atlanteans_building"
-msgid "The stonecutter working at this quarry can’t find any rocks in his work area."
-msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a’ choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
+msgid ""
+"The stonecutter working at this quarry can’t find any rocks in his work "
+"area."
+msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a' choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:7
@@ -996,7 +968,6 @@ msgstr "Muileann sàbhaidh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sawmill"
 msgstr "Muileann sàbhaidh"
@@ -1005,7 +976,7 @@ msgstr "Muileann sàbhaidh"
 #: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:54
 msgid "sawing logs"
-msgstr ""
+msgstr "fiodh a shàbhadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:7
@@ -1015,7 +986,6 @@ msgstr "Taigh-rabhadair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Scout’s House"
 msgstr "Taigh-rabhadair"
@@ -1035,19 +1005,18 @@ msgstr "Doca"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr "Doca"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Shipyard"
 msgstr "Doca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
+#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
 #: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
 #: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:75
@@ -1062,14 +1031,12 @@ msgstr "Ceàrdach leaghadair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Smelting Works"
 msgstr "Ceàrdach leaghadair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Smelting Works"
 msgstr "Ceàrdach leaghadair"
@@ -1118,33 +1085,33 @@ msgstr "Ceàrdach acainnean"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Toolsmithy"
 msgstr "Ceàrdach acainnean"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:87
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:96
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
 msgid "making a bread paddle"
 msgstr "crann-arain a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
-#, fuzzy
 msgid "making a pair of buckets"
-msgstr "peile a dhèanamh"
+msgstr "dà pheile a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:109
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:120
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
-#, fuzzy
 msgid "making fire tongs"
-msgstr "clobha bleoghainn a dhèanamh"
+msgstr "clobha teine a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 msgid "making a fishing net"
 msgstr "lìon-èisg a dhèanamh"
@@ -1161,13 +1128,14 @@ msgstr "òrd a dhèanamh"
 msgid "making a hook pole"
 msgstr "crann-greimiche a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:153
-#, fuzzy
 msgid "making a hunting bow"
 msgstr "bogha seilg a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 msgid "making milking tongs"
 msgstr "clobha bleoghainn a dhèanamh"
@@ -1207,32 +1175,36 @@ msgstr "Ceàrdach arm"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Weapon Smithy"
 msgstr "Ceàrdach arm"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:75
 msgid "forging a light trident"
 msgstr "muirgheadh aotrom a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
 msgstr "muirgheadh fhada a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr "muirgheadh stàilinn a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:114
 msgid "forging a double trident"
 msgstr "muirgheadh dhùbailte a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:127
 msgid "forging a heavy double trident"
 msgstr "muirgheadh dhùbailte throm a dhèanamh"
@@ -1245,19 +1217,18 @@ msgstr "Taigh nam beart"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Weaving Mill"
 msgstr "Taigh nam beart"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Weaving Mill"
 msgstr "Taigh nam beart"
 
-#. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
+#. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
+#. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
 msgid "weaving spidercloth"
 msgstr "sìoda fhighe"
@@ -1267,7 +1238,8 @@ msgstr "sìoda fhighe"
 msgid "tailoring a tabard"
 msgstr "lèine a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
+#. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
+#. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
 msgid "tailoring a golden tabard"
 msgstr "lèine òir a dhèanamh"
@@ -1280,14 +1252,12 @@ msgstr "Tobar"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Tobar"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Well"
 msgstr "Tobar"
@@ -1300,19 +1270,20 @@ msgstr "Chan eil uisge ann"
 
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
 msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
 msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:63
-#, fuzzy
 msgctxt "empire_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
 msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1325,9 +1296,8 @@ msgstr "Taigh buaineadair-fhiodha"
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
-#, fuzzy
 msgid "felling trees"
-msgstr "craobh a chur"
+msgstr "craobh a leagail"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
@@ -1337,41 +1307,41 @@ msgstr "Chan eil craobhan ann"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
 msgctxt "atlanteans_building"
-msgid "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
-msgstr "Cha do lorg am buaineadair-fiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
+msgid ""
+"The woodcutter working at this woodcutter’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Cha do lorg an coilltear a tha ag obair aig an taigh coillteir seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ax Workshop"
-msgstr ""
+msgstr "Ceàrdach thuaghan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:86
-#, fuzzy
 msgid "forging an ax"
-msgstr "muirgheadh fhada a dhèanamh"
+msgstr "tuagh a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:99
-#, fuzzy
 msgid "forging a sharp ax"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "tuagh gheur a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:112
-#, fuzzy
 msgid "forging a broad ax"
-msgstr "muirgheadh dhùbailte a dhèanamh"
+msgstr "tuagh mhòr a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
 msgctxt "barbarians_building"
 msgid "Big Inn"
-msgstr ""
+msgstr "Taigh-seinnse"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:73
@@ -1380,675 +1350,667 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:66
 #: ../../tribes/buildings/productionsites/empire/tavern/init.lua:58
 msgid "preparing a ration"
-msgstr ""
+msgstr "ullachadh greimeige"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
 #: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:81
-#, fuzzy
 msgid "preparing a snack"
-msgstr "sàbh a dhèanamh"
+msgstr "ullachadh lòin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:93
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:77
 msgid "preparing a meal"
-msgstr ""
+msgstr "ullachadh mèis"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Taigh-grùide"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/brewery/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Taigh-grùide"
 
-#. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
+#. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:55
 msgid "brewing strong beer"
-msgstr ""
+msgstr "togail grùdaireachd"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Tuathanas crodh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:54
 msgid "rearing cattle"
-msgstr ""
+msgstr "crodh àrachadh"
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Coal Mine"
-msgstr "Mèinn guail"
+msgstr "Mèinn guail dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Coal Mine"
-msgstr "Mèinn guail"
+msgstr "Mèinn guail dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
-msgstr "Mèinn guail"
+msgstr "Mèinn guail as doimhne"
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
-#, fuzzy
 msgid "planting wheat"
-msgstr "craobh a chur"
+msgstr "cruithneachd a chur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
-#, fuzzy
 msgid "harvesting wheat"
-msgstr "freumhagan a bhuain"
+msgstr "cruithneachd a bhuain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr "Taigh-iasgair"
+msgstr "Bothan-iasgair"
 
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The fisher working out of this fisher’s hut can’t find any fish in his work area."
-msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-sealgair seo sitheann taobh a-staigh a raoin-obrach tuilleadh."
+msgid ""
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
+msgstr "Cha do lorg an t-iasgair a tha ag obair aig a’ bhothan-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Bothan-geamair"
 
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Gold Mine"
-msgstr "Mèinn òir"
+msgstr "Mèinn òir dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Gold Mine"
-msgstr "Mèinn òir"
+msgstr "Mèinn òir dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
-msgstr "Mèinn òir"
+msgstr "Mèinn òir as doimhne"
 
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Granite Mine"
-msgstr "Mèinn iarainn"
+msgstr "Mèinn gaireil"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
-#, fuzzy
 msgid "Main Granite Vein Exhausted"
-msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
+msgstr "Tha prìomh-chuisle gaireil air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This granite mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne gaireil seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Helm Smithy"
-msgstr "Ceàrdach armachd"
+msgstr "Ceàrdach chlogaidean"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:82
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:84
-#, fuzzy
 msgid "forging a helmet"
-msgstr "muirgheadh stàilinn a dhèanamh"
+msgstr "clogaid a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:93
-#, fuzzy
 msgid "forging a mask"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "aghaidh-choimheach a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
-#, fuzzy
 msgid "forging a warhelm"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "clogaid cogaidh a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "Taigh-sealgair"
+msgstr "Bothan-sealgair"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."
-msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn dhut cur ris na tha ann de dh’èisg ma thogas tu taigh tàrmachair iasg."
+msgid ""
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
+msgstr "Cha do lorg an sealgair a tha a' fuireach sa bhothan-sealgair seo sitheann taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn dhut bothan-geamair a thogail gus barrachd bheathaichean a leigeil fa sgaoil."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:7
 msgctxt "barbarians_building"
 msgid "Inn"
-msgstr ""
+msgstr "Taigh-òil"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:7
 msgctxt "empire_building"
 msgid "Inn"
-msgstr ""
+msgstr "Taigh-òil"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:82
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
-#, fuzzy
 msgctxt "empire_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deep Iron Mine"
-msgstr "Mèinn iarainn"
+msgstr "Mèinn iarainn dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Deep Iron Mine"
-msgstr "Mèinn iarainn"
+msgstr "Mèinn iarainn dhomhain"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
-msgstr "Mèinn iarainn"
+msgstr "Mèinn iarainn as doimhne"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
-#, fuzzy
 msgctxt "empire_building"
-msgid "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
 msgctxt "barbarians_building"
 msgid "Lime Kiln"
-msgstr ""
+msgstr "Àth-aoil"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
-#, fuzzy
 msgid "mixing grout"
-msgstr "èiteag a thogail"
+msgstr "aol-tàthaidh a mheasgadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Bothan coillteir"
 
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."
-msgstr "Cha do lorg am buaineadair-fiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
+msgid ""
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his "
+"work area. You should consider dismantling or destroying the building or "
+"building a ranger’s hut."
+msgstr "Cha do lorg an coilltear a tha ag obair aig a' bhothan coillteir seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no bothan maoir-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
 msgctxt "barbarians_building"
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Ceàrdach meatailt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:108
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
-#, fuzzy
 msgid "making a felling ax"
-msgstr "lìon-èisg a dhèanamh"
+msgstr "tuagh leagail a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:132
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
-#, fuzzy
 msgid "making a fishing rod"
-msgstr "lìon-èisg a dhèanamh"
+msgstr "slat-iasgaich a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:156
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
-#, fuzzy
 msgid "making a hunting spear"
-msgstr "lìon-èisg a dhèanamh"
+msgstr "sleagh seilg a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:168
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
-#, fuzzy
 msgid "making kitchen tools"
-msgstr "clobha bleoghainn a dhèanamh"
+msgstr "acainnean cidsin a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Taigh-grùide beag"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
 #: ../../tribes/buildings/productionsites/empire/brewery/init.lua:55
 msgid "brewing beer"
-msgstr ""
+msgstr "togail grùdaireachd"
 
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a’ choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Chan urrainn dhan chlachair a tha ag obair aig a' choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
-#, fuzzy
 msgctxt "empire_building"
-msgid "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a’ choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Chan urrainn dhan chlachair a tha ag obair aig a' choireall seo creag a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "Taigh-sealgair"
+msgstr "Bothan maoir-choille"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr ""
+msgstr "Feur-lios"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:55
-#, fuzzy
 msgid "planting reed"
-msgstr "craobh a chur"
+msgstr "feur tughaidh a chur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:63
-#, fuzzy
 msgid "harvesting reed"
-msgstr "coirce a bhuain"
+msgstr "feur tughaidh a bhuain"
 
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
-#, fuzzy
 msgctxt "barbarians_building"
-msgid "The gardener working at this reed yard has no cleared soil to plant his seeds."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag an tuathanas seo sìol."
+msgid ""
+"The gardener working at this reed yard has no cleared soil to plant his "
+"seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an gàirnealair a tha ag obair san fheur-lios seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Scout’s Hut"
-msgstr "Taigh-rabhadair"
+msgstr "Bothan-rabhadair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Tavern"
-msgstr "Figheadair"
+msgstr "Taigh-tàirn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/tavern/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Tavern"
-msgstr "Figheadair"
+msgstr "Taigh-tàirn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "War Mill"
-msgstr "Taigh nam beart"
+msgstr "Ceàrdach-cogaidh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:125
-#, fuzzy
 msgid "forging a bronze ax"
-msgstr "muirgheadh fhada a dhèanamh"
+msgstr "tuagh umha a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:138
-#, fuzzy
 msgid "forging a battle ax"
-msgstr "muirgheadh dhùbailte a dhèanamh"
+msgstr "tuagh-chatha a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
+#. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:151
 msgid "forging a warrior’s ax"
-msgstr ""
+msgstr "tuagh-ghaisgich a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:58
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
-#, fuzzy
 msgid "weaving"
-msgstr "Taigh nam beart"
+msgstr "fighe a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
 msgctxt "barbarians_building"
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Cruadhaichear fiodha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:63
-#, fuzzy
 msgid "hardening wood"
-msgstr "coirce a bhuain"
+msgstr "fiodh a chruadhachadh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
-#, fuzzy
 msgid "forging a suit of armor"
-msgstr "muirgheadh stàilinn a dhèanamh"
+msgstr "armachd a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
 msgid "forging a suit of chain armor"
-msgstr ""
+msgstr "màilleach a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:117
-#, fuzzy
 msgid "forging a suit of gilded armor"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "lùireach òir a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr "Tuathanas each"
+msgstr "Tuathanas asalan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:54
-#, fuzzy
 msgid "rearing donkeys"
-msgstr "each àrachadh"
+msgstr "asal àrachadh"
 
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
-#, fuzzy
 msgctxt "empire_building"
-msgid "The fisher working out of this fisher’s house can’t find any fish in his work area."
-msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-sealgair seo sitheann taobh a-staigh a raoin-obrach tuilleadh."
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area."
+msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Taigh-sealgair"
+msgstr "Taigh coillteir"
 
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
-#, fuzzy
 msgctxt "empire_building"
-msgid "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
-msgstr "Cha do lorg am buaineadair-fiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Cha do lorg an coilltear a tha ag obair aig an taigh coillteir seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Marble Mine"
-msgstr "Mèinn guail"
+msgstr "Mèinn marmoir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
-#, fuzzy
 msgid "mining marble"
-msgstr "èiteag a thogail"
+msgstr "marmor a thogail"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:102
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:76
-#, fuzzy
 msgid "Main Marble Vein Exhausted"
-msgstr "Tha prìomh-chuisle guail air a caitheamh"
+msgstr "Tha prìomh-chuisle marmoir air a caitheamh"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
-#, fuzzy
 msgctxt "empire_building"
-msgid "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr "Tha prìomh-chuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "Mèinn marmoir dhomhain"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
-#, fuzzy
 msgctxt "empire_building"
-msgid "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
-msgstr "Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../tribes/buildings/productionsites/empire/mill/init.lua:55
-#, fuzzy
 msgid "grinding wheat"
-msgstr "freumhagan a bhleith"
+msgstr "cruithneachd a bhleith"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:7
 msgctxt "empire_building"
 msgid "Piggery"
-msgstr ""
+msgstr "Fail"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:56
 msgid "raising pigs"
-msgstr ""
+msgstr "muc àrachadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:70
-#, fuzzy
 msgid "quarrying marble"
-msgstr "clach a thochladh"
+msgstr "marmor a thochladh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr "Tuathanas dhamhan"
+msgstr "Tuathanas chaorach"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
-#, fuzzy
 msgid "breeding sheep"
-msgstr "each àrachadh"
+msgstr "caora àrachadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Taigh-rabhadair"
+msgstr "Taigh clachair"
 
-#. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
+#. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
 msgid "sculpting a marble column"
-msgstr ""
+msgstr "colbh marmoir a shnaidheadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
-#, fuzzy
 msgid "making a basket"
-msgstr "peile a dhèanamh"
+msgstr "basgaid a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr "Doca"
+msgstr "Fìon-lios"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
+#. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:56
-#, fuzzy
 msgid "planting grapevines"
-msgstr "craobh a chur"
+msgstr "crann-fìona a chur"
 
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:64
-#, fuzzy
 msgid "harvesting grapes"
-msgstr "coirce a bhuain"
+msgstr "dearcan-fìona a bhuain"
 
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
-#, fuzzy
 msgctxt "empire_building"
-msgid "The vine farmer working at this vineyard has no cleared soil to plant his grapevines."
-msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag an tuathanas seo sìol."
+msgid ""
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach-fìona a tha ag obair aig an fhìon-lios seo sìol."
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:81
-#, fuzzy
 msgid "forging a wooden spear"
-msgstr "lèine òir a dhèanamh"
+msgstr "sleagh fiodha a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:94
-#, fuzzy
 msgid "forging a spear"
-msgstr "muirgheadh stàilinn a dhèanamh"
+msgstr "sleagh a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
+#. because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
-#, fuzzy
 msgid "forging an advanced spear"
-msgstr "sgiath adhartach a dhèanamh"
+msgstr "sleagh adhartach a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
-#, fuzzy
 msgid "forging a heavy spear"
-msgstr "muirgheadh dhùbailte throm a dhèanamh"
+msgstr "sleagh throm a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
+#. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:133
-#, fuzzy
 msgid "forging a war spear"
-msgstr "sgiath stàilinn a dhèanamh"
+msgstr "sleagh cogaidh a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Winery"
-msgstr "Mèinnear"
+msgstr "Fìon-lann"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
-#, fuzzy
 msgid "making wine"
-msgstr "bogha seilg a dhèanamh"
+msgstr "fìon a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:7
@@ -2137,57 +2099,53 @@ msgstr "teàrnadh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr ""
+msgstr "Raon catha"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
 msgctxt "barbarians_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Campa trèanaidh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Campa trèanaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
-#, fuzzy
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "ionnsaigh saighdeir àrdachadh o leibheil 3 gu leibheil 4"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 4 gu leibheil 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:178
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
-#, fuzzy
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+msgstr "slàinte saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
-#, fuzzy
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+msgstr "slàinte saighdeir àrdachadh o leibheil 2 gu leibheil 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
 msgctxt "empire_building"
 msgid "Arena"
-msgstr ""
+msgstr "Raon spòrs"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
-msgstr ""
+msgstr "Coileasam"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
-#, fuzzy
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+msgstr "slàinte saighdeir àrdachadh o leibheil 3 gu leibheil 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
@@ -2198,14 +2156,12 @@ msgstr "Prìomh-àras"
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/headquarters/init.lua:7
 #: ../../tribes/buildings/warehouses/barbarians/headquarters_interim/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Headquarters"
 msgstr "Prìomh-àras"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Headquarters"
 msgstr "Prìomh-àras"
@@ -2218,14 +2174,12 @@ msgstr "Port"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/port/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Port"
 msgstr "Port"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/port/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Port"
 msgstr "Port"
@@ -2238,24 +2192,21 @@ msgstr "Taigh-stòrais"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
-#, fuzzy
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/warehouse/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
-#, fuzzy
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr "Prìomh-àras"
+msgstr "Long bhriste ’na phrìomh-àras"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/ashes/init.lua:7
@@ -2279,7 +2230,7 @@ msgstr "Achadh fhreumhagan (meadhanach)"
 #: ../../tribes/immovables/blackrootfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "Achadh fhreumhagan (beag bìodach)"
+msgstr "Achadh fhreumhagan (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/blackrootfield_small/init.lua:7
@@ -2309,7 +2260,7 @@ msgstr "Achadh coirce (meadhanach)"
 #: ../../tribes/immovables/cornfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "Achadh coirce (beag bìodach)"
+msgstr "Achadh coirce (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/cornfield_small/init.lua:7
@@ -2331,162 +2282,141 @@ msgstr "Togalach air a mhilleadh"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_harvested/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (harvested)"
-msgstr "Achadh coirce (air a bhuain)"
+msgstr "Achadh (air a bhuain)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (medium)"
-msgstr "Achadh coirce (meadhanach)"
+msgstr "Achadh (meadhanach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Achadh (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (small)"
-msgstr "Achadh coirce (beag)"
+msgstr "Achadh (beag)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/field_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Field (tiny)"
-msgstr "Achadh coirce (beag bìodach)"
+msgstr "Achadh (beag bìodach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Achadh coirce (meadhanach)"
+msgstr "Crann-fìona (meadhanach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr ""
+msgstr "Crann-fìona (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr "Achadh coirce (beag)"
+msgstr "Crann-fìona (beag)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Achadh coirce (beag bìodach)"
+msgstr "Crann-fìona (beag bìodach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_medium/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr "Achadh coirce (meadhanach)"
+msgstr "Feur (meadhanach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_ripe/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Feur (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_small/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr "Achadh coirce (beag)"
+msgstr "Feur (beag)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_tiny/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr "Achadh coirce (beag bìodach)"
+msgstr "Feur (beag bìodach)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_coal1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Coal Vein"
-msgstr "Mèinn guail"
+msgstr "Cuisle guail"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_coal2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Coal Vein"
-msgstr "Tha prìomh-chuisle guail air a caitheamh"
+msgstr "Prìomh-chuisle guail"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Gold Vein"
-msgstr "Mèinn òir"
+msgstr "Cuisle òir"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Gold Vein"
-msgstr "Tha prìomh-chuisle òir air a caitheamh"
+msgstr "Prìomh-chuisle òir"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Iron Vein"
-msgstr "Mèinn iarainn"
+msgstr "Cuisle iarainn"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron2/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Main Iron Vein"
-msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
+msgstr "Prìomh-chuisle iarainn"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
 msgid "No Resources"
-msgstr ""
+msgstr "Gun stòras"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Some Stones"
-msgstr "Clach shnaidhte"
+msgstr "Beagan chleachan"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
 msgid "A Lot of Stones"
-msgstr ""
+msgstr "Torr chlachan"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_water1/init.lua:7
-#, fuzzy
 msgctxt "immovable"
 msgid "Water Vein"
-msgstr "Uisge"
+msgstr "Cuisle uisge"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2505,88 +2435,87 @@ msgstr "Long"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Armor"
-msgstr "Ceàrd-armachd"
+msgstr "Armachd"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_chain/init.lua:7
 msgctxt "ware"
 msgid "Chain Armor"
-msgstr ""
+msgstr "Màilleach"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_gilded/init.lua:7
 msgctxt "ware"
 msgid "Gilded Armor"
-msgstr ""
+msgstr "Lùireach òir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_helmet/init.lua:7
 msgctxt "empire_ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Clogaid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/helmet/init.lua:7
 msgctxt "barbarians_ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Clogaid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax/init.lua:7
 msgctxt "ware"
 msgid "Ax"
-msgstr ""
+msgstr "Tuagh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_battle/init.lua:7
 msgctxt "ware"
 msgid "Battle Ax"
-msgstr ""
+msgstr "Tuagh-chatha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_broad/init.lua:7
 msgctxt "ware"
 msgid "Broad Ax"
-msgstr ""
+msgstr "Tuagh mhòr"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_bronze/init.lua:7
 msgctxt "ware"
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Tuagh umha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_sharp/init.lua:7
 msgctxt "ware"
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Tuagh gheur"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/ax_warriors/init.lua:7
 msgctxt "ware"
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Tuagh-ghaisgich"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/basket/init.lua:7
 msgctxt "ware"
 msgid "Basket"
-msgstr ""
+msgstr "Basgaid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer/init.lua:7
 msgctxt "ware"
 msgid "Beer"
-msgstr ""
+msgstr "Leann"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer_strong/init.lua:7
 msgctxt "ware"
 msgid "Strong Beer"
-msgstr ""
+msgstr "Leann làidir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/blackroot/init.lua:7
@@ -2602,10 +2531,9 @@ msgstr "Min-freumhaige"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/blackwood/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Blackwood"
-msgstr "Freumhag"
+msgstr "Fiodh cruaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_atlanteans/init.lua:7
@@ -2615,17 +2543,15 @@ msgstr "Aran"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_empire/init.lua:7
-#, fuzzy
 msgctxt "empire_ware"
 msgid "Bread"
 msgstr "Aran"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_barbarians/init.lua:7
-#, fuzzy
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr "Aran"
+msgstr "Aran tur"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_paddle/init.lua:7
@@ -2643,7 +2569,7 @@ msgstr "Peilichean"
 #: ../../tribes/wares/cloth/init.lua:7
 msgctxt "ware"
 msgid "Cloth"
-msgstr ""
+msgstr "Clò"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/coal/init.lua:7
@@ -2659,10 +2585,9 @@ msgstr "Coirce"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/cornmeal/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr "Achadh coirce"
+msgstr "Min-coirce"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/diamond/init.lua:7
@@ -2674,7 +2599,7 @@ msgstr "Daoimean"
 #: ../../tribes/wares/felling_ax/init.lua:7
 msgctxt "ware"
 msgid "Felling Ax"
-msgstr ""
+msgstr "Tuagh leagail"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/fire_tongs/init.lua:7
@@ -2696,16 +2621,15 @@ msgstr "Lìon-èisg"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/fishing_rod/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Fishing Rod"
-msgstr "Lìon-èisg"
+msgstr "Slat-iasgaich"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/flour/init.lua:7
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Flùr"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold/init.lua:7
@@ -2721,28 +2645,27 @@ msgstr "Clach-òir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold_thread/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Gold Thread"
-msgstr "Clach-òir"
+msgstr "Snàth òir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/granite/init.lua:7
 msgctxt "ware"
 msgid "Granite"
-msgstr ""
+msgstr "Gaireal"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grape/init.lua:7
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Fìon-dhearc"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grout/init.lua:7
 msgctxt "ware"
 msgid "Grout"
-msgstr ""
+msgstr "Aol-tàthaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/hammer/init.lua:7
@@ -2754,13 +2677,13 @@ msgstr "Òrd"
 #: ../../tribes/wares/helmet_mask/init.lua:7
 msgctxt "ware"
 msgid "Mask"
-msgstr ""
+msgstr "Aghaidh-choimheach"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/helmet_warhelm/init.lua:7
 msgctxt "ware"
 msgid "Warhelm"
-msgstr ""
+msgstr "Clogaid cogaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/hook_pole/init.lua:7
@@ -2776,10 +2699,9 @@ msgstr "Bogha seilg"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/hunting_spear/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Bogha seilg"
+msgstr "Sleagh seilg"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/iron/init.lua:7
@@ -2797,7 +2719,7 @@ msgstr "Clach-iarainn"
 #: ../../tribes/wares/kitchen_tools/init.lua:7
 msgctxt "ware"
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Acainnean cidsin"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/log/init.lua:7
@@ -2809,19 +2731,19 @@ msgstr "Fiodh"
 #: ../../tribes/wares/marble/init.lua:7
 msgctxt "ware"
 msgid "Marble"
-msgstr ""
+msgstr "Marmor"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/marble_column/init.lua:7
 msgctxt "ware"
 msgid "Marble Column"
-msgstr ""
+msgstr "Colbh marmoir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meal/init.lua:7
 msgctxt "ware"
 msgid "Meal"
-msgstr ""
+msgstr "Mias"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meat/init.lua:7
@@ -2857,7 +2779,7 @@ msgstr "Èiteag"
 #: ../../tribes/wares/ration/init.lua:7
 msgctxt "ware"
 msgid "Ration"
-msgstr ""
+msgstr "Greimeag"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/saw/init.lua:7
@@ -2905,45 +2827,43 @@ msgstr "Feòil-rèiste"
 #: ../../tribes/wares/snack/init.lua:7
 msgctxt "ware"
 msgid "Snack"
-msgstr ""
+msgstr "Lòn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear/init.lua:7
 msgctxt "ware"
 msgid "Spear"
-msgstr ""
+msgstr "Sleagh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_advanced/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr "Sgiath adhartach"
+msgstr "Sàr-shleagh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_heavy/init.lua:7
 msgctxt "ware"
 msgid "Heavy Spear"
-msgstr ""
+msgstr "Sleagh throm"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_war/init.lua:7
 msgctxt "ware"
 msgid "War Spear"
-msgstr ""
+msgstr "Sleagh cogaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_wooden/init.lua:7
 msgctxt "ware"
 msgid "Wooden Spear"
-msgstr ""
+msgstr "Sleagh fiodha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spider_silk/init.lua:7
-#, fuzzy
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr "Tuathanas dhamhan"
+msgstr "Snàth-sìoda"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spidercloth/init.lua:7
@@ -2967,7 +2887,7 @@ msgstr "Lèine òir"
 #: ../../tribes/wares/thatch_reed/init.lua:7
 msgctxt "ware"
 msgid "Thatch Reed"
-msgstr ""
+msgstr "Feur tughaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/trident_double/init.lua:7
@@ -3009,19 +2929,19 @@ msgstr "Uisge"
 #: ../../tribes/wares/wheat/init.lua:7
 msgctxt "ware"
 msgid "Wheat"
-msgstr ""
+msgstr "Cruithneachd"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wine/init.lua:7
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Fìon"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wool/init.lua:7
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Clòimh"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/armorsmith/init.lua:18
@@ -3031,7 +2951,6 @@ msgstr "Ceàrd-armachd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/armorsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Armorsmith"
 msgstr "Ceàrd-armachd"
@@ -3044,14 +2963,12 @@ msgstr "Fuineadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/baker/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "Fuineadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/baker/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Baker"
 msgstr "Fuineadair"
@@ -3070,14 +2987,12 @@ msgstr "Togalaiche"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/builder/init.lua:29
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Togalaiche"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/builder/init.lua:29
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Builder"
 msgstr "Togalaiche"
@@ -3090,14 +3005,12 @@ msgstr "Giùlanair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/carrier/init.lua:19
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Carrier"
 msgstr "Giùlanair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/carrier/init.lua:19
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Carrier"
 msgstr "Giùlanair"
@@ -3110,14 +3023,12 @@ msgstr "Loisgeadair fiodha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/charcoal_burner/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "Loisgeadair fiodha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/charcoal_burner/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
 msgstr "Loisgeadair fiodha"
@@ -3130,14 +3041,12 @@ msgstr "Tuathanach"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/farmer/init.lua:36
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "Tuathanach"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/farmer/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Farmer"
 msgstr "Tuathanach"
@@ -3146,7 +3055,7 @@ msgstr "Tuathanach"
 #: ../../tribes/workers/atlanteans/fishbreeder/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Fish Breeder"
-msgstr "Tàrmachair iasg"
+msgstr "Tàrmachair èisg"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/fisher/init.lua:24
@@ -3156,14 +3065,12 @@ msgstr "Iasgair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/fisher/init.lua:24
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "Iasgair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/fisher/init.lua:23
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Fisher"
 msgstr "Iasgair"
@@ -3176,7 +3083,6 @@ msgstr "Planntair-coille"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/forester/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Forester"
 msgstr "Planntair-coille"
@@ -3189,14 +3095,12 @@ msgstr "Clach-eòlaiche"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/geologist/init.lua:25
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "Clach-eòlaiche"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/geologist/init.lua:25
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Geologist"
 msgstr "Clach-eòlaiche"
@@ -3221,14 +3125,12 @@ msgstr "Sealgair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/hunter/init.lua:19
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "Sealgair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/hunter/init.lua:19
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Hunter"
 msgstr "Sealgair"
@@ -3241,7 +3143,6 @@ msgstr "Muillear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miller/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Miller"
 msgstr "Muillear"
@@ -3254,14 +3155,12 @@ msgstr "Mèinnear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "Mèinnear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miner/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Miner"
 msgstr "Mèinnear"
@@ -3270,7 +3169,7 @@ msgstr "Mèinnear"
 #: ../../tribes/workers/atlanteans/sawyer/init.lua:18
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
-msgstr "Sàbhadair"
+msgstr "Saor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/scout/init.lua:16
@@ -3280,14 +3179,12 @@ msgstr "Rabhadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/scout/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "Rabhadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/scout/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Scout"
 msgstr "Rabhadair"
@@ -3300,14 +3197,12 @@ msgstr "Saor-luinge"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/shipwright/init.lua:28
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Saor-luinge"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/shipwright/init.lua:28
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Shipwright"
 msgstr "Saor-luinge"
@@ -3320,14 +3215,12 @@ msgstr "Leaghadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/smelter/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "Leaghadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/smelter/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Smelter"
 msgstr "Leaghadair"
@@ -3346,14 +3239,12 @@ msgstr "Saighdear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/soldier/init.lua:78
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Soldier"
 msgstr "Saighdear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/soldier/init.lua:78
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "Saighdear"
@@ -3378,7 +3269,6 @@ msgstr "Ceàrd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/toolsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Toolsmith"
 msgstr "Ceàrd"
@@ -3391,14 +3281,12 @@ msgstr "Maighstir"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/trainer/init.lua:17
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "Maighstir"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/trainer/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Trainer"
 msgstr "Maighstir"
@@ -3411,7 +3299,6 @@ msgstr "Airm-cheàrd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/weaponsmith/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Weaponsmith"
 msgstr "Airm-cheàrd"
@@ -3424,14 +3311,12 @@ msgstr "Figheadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/weaver/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "Figheadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/weaver/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Weaver"
 msgstr "Figheadair"
@@ -3444,592 +3329,168 @@ msgstr "Buaineadair-fiodha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/blacksmith/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
-msgstr "Freumhag"
+msgstr "Gobha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/blacksmith_master/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Sàr-ghobha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/brewer/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Leannair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/brewer/init.lua:18
 msgctxt "empire_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Leannair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/brewer_master/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
-msgstr "Tàrmachair each"
+msgstr "Sàr-leannair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/cattlebreeder/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
-msgstr "Tàrmachair each"
+msgstr "Tàrmachair crodh"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/gamekeeper/init.lua:30
 msgctxt "barbarians_worker"
 msgid "Gamekeeper"
-msgstr ""
+msgstr "Geamair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/gardener/init.lua:30
 msgctxt "barbarians_worker"
 msgid "Gardener"
-msgstr ""
+msgstr "Gàirnealair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/helmsmith/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Ceàrd"
+msgstr "Gobha chlogaidean"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/innkeeper/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Tàrnadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/innkeeper/init.lua:18
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Tàrnadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/lime_burner/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
-msgstr ""
+msgstr "Loisgeadair aoil"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/lumberjack/init.lua:25
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
-msgstr ""
+msgstr "Coilltear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/lumberjack/init.lua:25
 msgctxt "empire_worker"
 msgid "Lumberjack"
-msgstr ""
+msgstr "Coilltear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner_chief/init.lua:18
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr "Mèinnear"
+msgstr "Àrd-mhèinnear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner_master/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Sàr-mhèinnear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/miner_master/init.lua:18
 msgctxt "empire_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Sàr-mhèinnear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/ox/init.lua:20
 msgctxt "barbarians_worker"
 msgid "Ox"
-msgstr ""
+msgstr "Damh"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/ranger/init.lua:36
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr ""
+msgstr "Maor-coille"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/stonemason/init.lua:25
-#, fuzzy
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Clach shnaidhte"
+msgstr "Clachair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/stonemason/init.lua:25
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Clach shnaidhte"
+msgstr "Clachair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/carpenter/init.lua:18
 msgctxt "empire_worker"
 msgid "Carpenter"
-msgstr ""
+msgstr "Saor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkey/init.lua:19
 msgctxt "empire_worker"
 msgid "Donkey"
-msgstr ""
+msgstr "Asal"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkeybreeder/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Donkey Breeder"
-msgstr "Tàrmachair each"
+msgstr "Tàrmachair asalan"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/pigbreeder/init.lua:18
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr "Tàrmachair iasg"
+msgstr "Tàrmachair mhucan"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/shepherd/init.lua:18
 msgctxt "empire_worker"
 msgid "Shepherd"
-msgstr ""
+msgstr "Cìobair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vinefarmer/init.lua:36
-#, fuzzy
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr "Tuathanach"
+msgstr "Tuathanach-fìona"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vintner/init.lua:19
 msgctxt "empire_worker"
 msgid "Vintner"
-msgstr ""
-
-#~ msgid "Your barracks discovered an aggressor."
-#~ msgstr "Mhothaich na taighean-feachd agad dha dh’ionnsaigh."
-
-#~ msgid "Your barracks is under attack."
-#~ msgstr "Tha na taighean-feachd agad fo ionnsaigh."
-
-#~ msgid "The enemy defeated your soldiers at the barracks."
-#~ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig taighean-feachd."
-
-#~ msgid "Your soldiers defeated the enemy at the barracks."
-#~ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig taighean-feachd."
-
-#~ msgid "Your donjon discovered an aggressor."
-#~ msgstr "Mhothaich an tùr-faire agad dha dh’ionnsaigh."
-
-#~ msgid "Your donjon is under attack."
-#~ msgstr "Tha an tùr-faire agad fo ionnsaigh."
-
-#~ msgid "The enemy defeated your soldiers at the donjon."
-#~ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr-faire."
-
-#~ msgid "Your soldiers defeated the enemy at the donjon."
-#~ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr-faire."
-
-#~ msgid "These advanced shields are used by the best soldiers of the Atlanteans. They are produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from Defense level 1 to level 2."
-#~ msgstr "Cleachdaidh na saighdearan as fhearr aig na h-Atlantaich na sgiathan adhartach seo. Saothraichidh tu ann an ceàrdach arm iad is thèid an cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
-
-#~ msgid "Produces armor for the soldiers."
-#~ msgstr "Nì e armachd airson nan saighdearan."
-
-#~ msgid "Source needed"
-#~ msgstr "Tha tùs a dhìth"
-
-#~ msgid "Text needed"
-#~ msgstr "Tha teacsa a dhìth"
-
-#~ msgid "Calculation needed"
-#~ msgstr "Cha deach seo àireamhachadh fhathast"
-
-#~ msgid "Bakes bread for workers."
-#~ msgstr "Fuinidh e aran airson nan obraichean."
-
-#~ msgid "Blackroots are a special kind of root produced in blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread."
-#~ msgstr "Saothraichidh tu freumhagan ann an tuathanasan fhreumhagan is bheir thu dhan mhuileann iad an uairsin. Is toil leis na h-Atlantaich am blas làidir is cleachdaidh iad am min gus aran a dhèanamh."
-
-#~ msgid "Sow and harvest blackroot."
-#~ msgstr "Cuir is buain freumhagan."
-
-#~ msgid "Plants and harvests blackroot."
-#~ msgstr "Cuiridh is buainidh e freumhagan."
-
-#~ msgid "Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread."
-#~ msgstr "Thèid min-freumhaige a shaothrachadh à freumhagan ann am muileann. Cleachdaidh tu ann an taighean-fuine i gus aran blasta a dhèanamh."
-
-#~ msgid "This tasty bread is made in bakeries out of cornflour, blackroot flour and water. It is appreciated as basic food for miners, scouts and soldiers in training sites (labyrinth and dungeon)."
-#~ msgstr "Nì thu an t-aran blasta seo à min-coirce, min-freumhaige is uisge ann an taighean-fuine. Tha na mèinnearan, rabhadairean is saighdearan ann an làraichean-trèanaidh (cuartanan is tuill-dhubha) measail air mar bhiadh bunasach."
-
-#~ msgid "The bread paddle is the tool of the baker, each baker needs one. It is produced by the toolsmith."
-#~ msgstr "Is acainn an fhuineadair a th’ anns a’ chrann-arain is bith feum aig gach fuineadair air fear aige fhèin. Thèid a shaothrachadh leis a’ cheàrdach acainnean."
-
-#~ msgid "Big buckets for the fish breeder – produced by the toolsmith."
-#~ msgstr "Peilichean mòra airson an tàrmachair iasg a thèid an saothrachadh leis a’ cheàrdach acainnean."
-
-#~ msgid "Works at construction sites to raise new buildings."
-#~ msgstr "Obraichidh e aig làraichean-thogail gus togalach ur a thogail."
-
-#~ msgid "Carries items along your roads."
-#~ msgstr "Giùlainidh e rudan air na rathaidean agad."
-
-#~ msgid "Garrisons soldiers to expand your territory."
-#~ msgstr "Cuir saighdearan ’nan gearastan ann gus do ranntair a leudachadh."
-
-#~ msgid "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."
-#~ msgstr "Mur urrainn dhut còmhnaidh a ghabhail ann an togalaichean ùra an airm on a tha na saighdearan air ruith ort, cleachd putan na saighde sìos gus àitichean-fuirich a thoirt air falbh on togalach seo. Cuideachd, ’s urrainn dhut briogadh air saighdear ach an dig e a-mach."
-
-#~ msgid "Burns coal."
-#~ msgstr "Loisgidh e gual."
-
-#~ msgid "The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal. This coal is mined in coal mines or produced out of logs by a charcoal kiln."
-#~ msgstr "Thèid teintean nan Atlantach ann an ceàrdaichean leaghadair, armachd is arm a bhiadhadh le gual. Gheibh thu gual à mèinn guail no nì thu de dh’fhiodh e ann an àth-ghuail."
-
-#~ msgid "Digs coal out of the ground in mountain terrain."
-#~ msgstr "Tochlaidh i gual às na beanntan."
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "An sgioba leasachaidh Widelands"
-
-#~ msgid "Atlanteans"
-#~ msgstr "Na h-Atlantaich"
-
-#~ msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
-#~ msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlantais."
-
-#~ msgid "Blackroot Field"
-#~ msgstr "Achadh fhreumhagan"
-
-#~ msgid "Resource indicator: Coal (little)"
-#~ msgstr "Taisbeanair-stòrasan – beagan guail"
-
-#~ msgid "Resource indicator: Coal (much)"
-#~ msgstr "Taisbeanair-stòrasan – mòran guail"
-
-#~ msgid "Resource indicator: Gold (little)"
-#~ msgstr "Taisbeanair-stòrasan – beagan òir"
-
-#~ msgid "Resource indicator: Gold (much)"
-#~ msgstr "Taisbeanair-stòrasan – mòran òir"
-
-#~ msgid "Resource indicator: Granite (little)"
-#~ msgstr "Taisbeanair-stòrasan – beagan graineil"
-
-#~ msgid "Resource indicator: Granite (much)"
-#~ msgstr "Taisbeanair-stòrasan – mòran graineil"
-
-#~ msgid "Resource indicator: Iron (little)"
-#~ msgstr "Taisbeanair-stòrasan – beagan iarainn"
-
-#~ msgid "Resource indicator: Iron (much)"
-#~ msgstr "Taisbeanair-stòrasan – mòran iarainn"
-
-#~ msgid "Resource indicator: No resource"
-#~ msgstr "Taisbeanair-stòrasan – gun stòras"
-
-#~ msgid "Resource indicator: Water"
-#~ msgstr "Taisbeanair-stòrasan – uisge"
-
-#~ msgid "Cornflour"
-#~ msgstr "Min-coirce"
-
-#~ msgid "Gold Yarn"
-#~ msgstr "Snàth òir"
-
-#~ msgid "Spideryarn"
-#~ msgstr "Snàth damhain"
-
-#~ msgid "Donjon"
-#~ msgstr "Tùr-faire"
-
-#~ msgid "Barracks"
-#~ msgstr "Taighean-feachd"
-
-#~ msgid "This corn is processed in the mill into fine cornflour that every Atlantean baker needs for a good bread. Also horse and spider farms need to be provided with corn."
-#~ msgstr "Tha gach fuineadair nan Atlantach feumach air a’ min-coirce a nì thu às a’ choirce seo ann am muileann ach an dèan e aran math. Feumaidh na tuathanasan each is dhamhan coirce cuideachd."
-
-#~ msgid "Cornflour is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries."
-#~ msgstr "Saothraichidh tu min-coirce à coirce ann am muileann is ’s e seo aon dhe na trì pàirtean dhen aran a nì na h-Atlantaich sna taighean-fuine."
-
-#~ msgid "Carve precious stones out of the rock in mountain terrain."
-#~ msgstr "Tochlaidh i seudan às na beanntan."
-
-#~ msgid "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine."
-#~ msgstr "Cleachdaidh tu na daoimeanan àlainn seo gus togalaichean uasail a thogail. Tochlaidh tu ann am mèinn criostail i."
-
-#~ msgid "The double trident is one of the best tridents produced by the Atlantean weapon smithy. It is used in a dungeon – together with food – to train soldiers from attack level 2 to level 3."
-#~ msgstr "’S e aon dhe na muirgheadhan as fhearr a nì ceàrdach arm nan Atlantach a th’ anns a mhuirgheadh dhùbailte. Thèid a cleachdadh san toll-dubh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
-
-#~ msgid "Trains soldiers in ‘Attack’."
-#~ msgstr "Trèanaidh e “Ionnsaigh” nan saighdearan."
-
-#~ msgid "Attack Training:"
-#~ msgstr "Trèanadh ionnsaigh:"
-
-#~ msgid "Sow and harvest corn."
-#~ msgstr "Cuir is buain coirce."
-
-#~ msgid "Plants fields."
-#~ msgstr "Cuiridh e achaidhean."
-
-#~ msgid "Fire tongs are tools of the smelter, who works in the smelting works. They are produced by the toolsmith."
-#~ msgstr "’S e acainn a chleachdas an leaghadair a tha sa chlobha teine a dh’obraicheas ann an ceàrdach leaghadair. Thèid a saothrachadh leis a’ cheàrdach acainnean."
-
-#~ msgid "Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts."
-#~ msgstr "’S e aon dhe na stòrasan bìdh as motha aig na h-Atlantaich a th’ anns na h-èisg. Feumaidh tu an toiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean, làraichean-trèanaidh is rabhadairean iad."
-
-#~ msgid "The fisher fishes delicious fish."
-#~ msgstr "Iasgaichidh an t-iasgair iasg gu h-èasgaidh."
-
-#~ msgid "Fishes on the coast near the house."
-#~ msgstr "Iasgaichidh e air an oirthir faisg air an taigh."
-
-#~ msgid "Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."
-#~ msgstr "Tog taigh tàrmachair iasg faisg air an taigh-iasgair gus dèanamh cinnteach nach ruith an t-iasg ort."
-
-#~ msgid "The fisher’s house needs water full of fish within the work area."
-#~ msgstr "Bidh an taigh-iasgair feumach air uisge làin iasg am broinn an raoin-obrach aige."
-
-#~ msgid "The fishing net is used by the fisher and produced by the toolsmith."
-#~ msgstr "Cleachdaidh an t-iasgair an lìon-èisg is saothraichidh an ceàrdach acainnean e."
-
-#~ msgid "Plants trees."
-#~ msgstr "Cuiridh e craobhan."
-
-#~ msgid "Plants trees in the surrounding area."
-#~ msgstr "Cuiridh e craobhan mu thimcheall."
-
-#~ msgid "The forester’s house needs free space within the work area to plant the trees."
-#~ msgstr "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin-obrach aige gus na craobhan a chur ann."
-
-#~ msgid "Discovers resources for mining."
-#~ msgstr "Lorgaidh e stòrasan airson mèinneadh."
-
-#~ msgid "Spins goldyarn out of gold."
-#~ msgstr "Snìomhaidh e snàth òir a-mach à òr."
-
-#~ msgid "Gold is one of the most valuable materials. It is produced out of gold ore in the smelting works. Gold is used by the armor smithy, the weapon smithy and the gold spinning mill."
-#~ msgstr "’S e stuth luachmhor a th’ anns an òr. Gheibh thu à clach-òir e ann an ceàrdach leaghadair. Cleachdaidh an ceàrdach armachd, an ceàrdach arm is an ceàrdach snìomhadair òir e."
-
-#~ msgid "Golden tabards are produced in Atlantean weaving mills out of gold yarn. They are used in the labyrinth – together with food – to train soldiers from health level 0 to level 1."
-#~ msgstr "Nì thu lèine òir de shnàth òir ann an taigh nam beart. Thèid a cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o slàinte leibheil 0 gu slàinte leibheil 1."
-
-#~ msgid "Digs gold ore out of the ground in mountain terrain."
-#~ msgstr "Tochlaidh i clach-òir às na beanntan."
-
-#~ msgid "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor."
-#~ msgstr "Tochlaidh tu clach-òir ann am mèinn òir. Thèid e na òr ma leaghas tu ann an ceàrdach leaghadair e is thèid a chleachdadh mas stuth togail uasal is gus airm is armachd a shaothrachadh."
-
-#~ msgid "This yarn, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill."
-#~ msgstr "Thèid an snàth seo a nì an ceàrdach snìomhadair òir à òr a chleachdadh ann an taigh nam beart gus lèintean òir uasail a dhèanamh."
-
-#~ msgid "The hammer is an essential tool. It is needed by geologists, builders, weaponsmiths and armorsmiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-#~ msgstr "’S e acainn riatanach a th’ anns an òrd. Feumaidh gach clach-eòlaiche, togalaiche, ceàrd-armachd is airm-cheàrd fear. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
-
-#~ msgid "Accommodation for your people. Also stores your wares and tools."
-#~ msgstr "Seo àite-fuirich do mhuinntir. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
-
-#~ msgid "The headquarters is your main building."
-#~ msgstr "’S e am prìomh togalach agad a th’ anns a’ phrìomh-àras."
-
-#~ msgid "This is the most dangerous weapon of the Atlantean military. Only the best of the best soldiers may use it. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 3 to level 4."
-#~ msgstr "Seo an t-arm as cunnartaiche aig arm nan Atlantach. Chan fhaod ach fìor-ghaisgich a cleachdadh. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh  san toll-dubh – le biadh – gus an ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
-
-#~ msgid "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith."
-#~ msgstr "Cleachdaidh an toitear an crann-greimiche seo gus feòil is èisg a chrochadh gu h-àrd san taigh-toitidh. Nì an ceàrdach acainnean fear."
-
-#~ msgid "Horses help to carry items along busy roads. They are reared in a horse farm."
-#~ msgstr "Cuidichidh eich le giùlan nan nithean air rathaidean a tha trang. Togaidh tu ann an tuathanas each iad."
-
-#~ msgid "Breeds the strong Atlantean horses."
-#~ msgstr "Tàrmaichidh e na h-eich Atlantach làidir."
-
-#~ msgid "Breeds horses for adding them to the transportation system."
-#~ msgstr "Togaidh e eich ach an cuidich iad thu gus bathar a ghiùlan."
-
-#~ msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-#~ msgstr "Bheir an sealgair sitheann amh ùr dha na h-Atlantaich."
-
-#~ msgid "Hunts animals to produce meat."
-#~ msgstr "Sealgaidh e beathaichean gus feòil a dhèanamh."
-
-#~ msgid "The hunter’s house needs animals to hunt within the work area."
-#~ msgstr "Bidh an taigh-sealgair feumach air beathaichean ri ’n sealg am broinn an raoin-obrach aige."
-
-#~ msgid "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-#~ msgstr "Cleachdaidh sealgairean nan Atlantach am bogha seo. Saothraichidh an ceàrdach acainnean e."
-
-#~ msgid "Iron is made out of iron ore in the smelting works. It is used in the toolsmithy, armor smithy and weapon smithy."
-#~ msgstr "Gheibh thu iarainn o chlach-iarainn ann an ceàrdach leaghadair. Cleachdaidh tu ann an ceàrdach acainnean, ceàrdach armachd is ceàrdach arm e."
-
-#~ msgid "Digs iron ore out of the ground in mountain terrain."
-#~ msgstr "Tochlaidh i clach-iarainn às na beanntan."
-
-#~ msgid "Iron ore is mined in iron mines. It is smelted in a smelting works to retrieve the iron."
-#~ msgstr "Tochlaidh tu clach-iarainn ann am mèinnean iarainn. Bheir seo iarainn dhut ma leaghas tu i ann an ceàrdach leaghadair."
-
-#~ msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-#~ msgstr "Trèanaidh e “Dìon”, “Teàrnadh” agus “Slàinte” nan saighdearan."
-
-#~ msgid "Defense Training:"
-#~ msgstr "Trèanadh dìona:"
-
-#~ msgid "Evade Training:"
-#~ msgstr "Trèanadh teàrnaidh:"
-
-#~ msgid "Health Training:"
-#~ msgstr "Trèanadh slàinte:"
-
-#~ msgid "This is the basic weapon of the Atlantean soldiers. Together with a tabard, it makes up the equipment of young soldiers. Light tridents are produced in the weapon smithy as are all other tridents."
-#~ msgstr "Seo arm bunasach nan saighdearan Atlantach. Le lèine, ’s e acainn bunasach nan saighdearan òga a th’ ann. Saothraichidh tu muirgheadhan aotrom ann an ceàrdach arm mar a shaothraicheas tu gach muirgheadh eile."
-
-#~ msgid "Logs are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work."
-#~ msgstr "Nì thu maidean de dh’fhiodh is thèid an cleachdadh airson cha mhòr gach togalach nan Atlantach. A bharrachd air a’ mhuileann-sàbhaidh, feumaidh an àth-ghuail, a’ cheàrdach acainnean is an taigh-toitidh fiodhan airson an cuid obrach."
-
-#~ msgid "The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 0 to level 1."
-#~ msgstr "’S e a’ chiad mhuirgheadh a thèid a chleachdadh gus saighdearan a thrèanadh th’ anns a mhuirgheadh fhada. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh san toll-dubh – le biadh – gus ionnsaigh nan saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
-
-#~ msgid "Meat is one food resource of the Atlanteans. It is obtained from wild game taken by the hunter and has to be smoked in a smokery before being delivered to mines and training sites (dungeon and labyrinth)."
-#~ msgstr "Cleachdaidh na h-Atlantaich feòil mar stòras bìdh. Gheibh thu i o shitheann a shealgas an sealgair is feumaidh tu a toiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean is làraichean-trèanaidh (tuill-dhubha is cuartanan) i."
-
-#~ msgid "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith."
-#~ msgstr "Cleachdaidh an tàrmachair dhamhan clobha bleoghainn gus na damhain a bhleoghainn. Saothraichidh an ceàrdach acainnean fear."
-
-#~ msgid "Mills blackroot and corn to produce blackroot flour and corn flour, respectively."
-#~ msgstr "Bleithidh e freumhagan is coirce gus min-freumhaige is min-coirce a dhèanamh."
-
-#~ msgid "Works deep in the mines to produce coal, iron or gold."
-#~ msgstr "Obraichidh e sìos sna mèinnean gus gual, iarrann no òr a shaothrachadh."
-
-#~ msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
-#~ msgstr "Cleachdaidh tochailtearan is mèinnearan piocaidean. Saothraichidh an ceàrdach acainnean iad."
-
-#~ msgid "Planks are an important building material of the Atlanteans. They are produced out of logs by the sawmill. The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
-#~ msgstr "’S e stuth togail cudromach do na h-Atlantaich a th’ anns na maidean. Thèid an dèanamh de fhiodhan leis a’ mhuileann shàbhaidh. Cleachdaidh an ceàrdach arm is an doca maidean cuideachd gus muirgheadhan is longan cumhachdach a thogail."
-
-#~ msgid "Carves stones out of rocks in the vicinity."
-#~ msgstr "Tochlaidh e clachan à creagan am fagas."
-
-#~ msgid "The quarry needs stones to cut within the work area."
-#~ msgstr "Bidh an coireal feumach air creagan ri ’n tochladh am broinn an raoin-obrach aige."
-
-#~ msgid "These transparent quartz’ are used to build some exclusive buildings. They are produced in a crystal mine."
-#~ msgstr "Cleachdaidh tu an èiteag shoilleir seo gus togalaichean uasail a thogail. Saothraichidh tu ann am mèinn criostail i."
-
-#~ msgid "The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith."
-#~ msgstr "Feumaidh am buaineadair-fiodha is an gobha acainnean sàbh. Thèid a shaothrachadh leis a’ ceàrdach acainnean."
-
-#~ msgid "Saws wood to produce planks."
-#~ msgstr "Sàbhaidh e fiodh gus maidean a shaothrachadh."
-
-#~ msgid "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-#~ msgstr "An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air nach eil fios no fàth air."
-
-#~ msgid "Fortified Village"
-#~ msgstr "Baile daingnichte"
-
-#~ msgid "Not enough space"
-#~ msgstr "Chan eil rum gu leòr ann"
-
-#~ msgid "Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition."
-#~ msgstr "Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a’ mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
-
-#~ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-#~ msgstr "Tha tuathanaich feumach air an fhàl seo. Nì an ceàrdach acainnean e."
-
-#~ msgid "A sea-worthy ship"
-#~ msgstr "Long muir-acainneach"
-
-#~ msgid "Works at the shipyard and constructs new ships."
-#~ msgstr "Obraichidh e aig an doca is togaidh e longan ùra."
-
-#~ msgid "Shovels are needed for the proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
-#~ msgstr "Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, cleachdaidh am planntair-coille is an tuathanach fhreumhagan tè. Thèid a saothrachadh leis a’ cheàrdach acainnean."
-
-#~ msgid "Smelts iron."
-#~ msgstr "Leaghaidh e iarann."
-
-#~ msgid "Smelts iron ore into iron and gold ore into gold."
-#~ msgstr "Leaghaidh e clach-iarainn gus iarann a dhèanamh ’s clach-òir gus òr a dhèanamh."
-
-#~ msgid "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible."
-#~ msgstr "Is lugha air na h-Atlantaich iasg amh is thèid a thoiteadh ann an taigh-toitidh mar as trice ach an gabh e ithe."
-
-#~ msgid "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves."
-#~ msgstr "Nì thu feòil-rèiste à feòil ann an taigh-toitidh. Thèid a lìbhrigeadh dha na mèinnean is làraichean-trèanaidh (cuartanan is tuill-dhubha) far an ullaich na mèinnearan is saighdearan biadh beathachail dhaibh fhèin."
-
-#~ msgid "Smokes meat and fish."
-#~ msgstr "Toitidh e feòil is èisg."
-
-#~ msgid "Defend and Conquer!"
-#~ msgstr "Dìon is ceannsaich!"
-
-#~ msgid "Breeds spider for yarn."
-#~ msgstr "Tàrmaichidh e damhain airson snàth."
-
-#~ msgid "Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction."
-#~ msgstr "Nì thu sìoda à snàth damhain ann an taigh nam beart. Cleachdaidh a’ cheàrdach acainnean is an doca e. Bidh feum agad air sìoda cuideachd gus cuid a thogalaichean adhartach a thogail."
-
-#~ msgid "This yarn is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill."
-#~ msgstr "Saothraichidh damhain a thogas tu ann an tuathanasan dhamhan an snàth seo. Nì thu sìoda às ann an taigh nam beart."
-
-#~ msgid "This steel shield is produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from defense level 0 to level 1."
-#~ msgstr "Saothraichidh tu an sgiath stàilinn seo ann an ceàrdach arm is thèid a cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
-
-#~ msgid "This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food)."
-#~ msgstr "Seo a’ mhuirgheadh mheadhanach. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh le saighdearan adhartach san toll-dubh – le biadh – gus an ionnsaigh a thrèanadh o leibheil 1 gu leibheil 2."
-
-#~ msgid "Stone is a basic building ware of the Atlanteans. It is produced in a quarry or a crystal mine."
-#~ msgstr "’S e bathar togail bunasach aig na h-Atlantaich a th’ anns na clachan snaidhte. Thèid an saothrachadh ann an coirill no ann am mèinnean criostail."
-
-#~ msgid "Cuts raw pieces of granite out of rocks."
-#~ msgstr "Gearraidh e pìosan de ghraineal à chlachan."
-
-#~ msgid "A tabard and a light trident are the basic equipment for young soldiers. Tabards are produced in the weaving mill."
-#~ msgstr "’S e acainn bunasach nan saighdearan òga a th’ anns an lèine is muirgheadh. Nì thu lèintean ann an taighean nam beart."
-
-#~ msgid "Produces tools for the workers."
-#~ msgstr "Nì e acainnean airson nan obraichean."
-
-#~ msgid "Trains the soldiers."
-#~ msgstr "Trèanaidh e na saighdearan."
-
-#~ msgid "Warehouses store soldiers, wares and tools."
-#~ msgstr "Cumaidh taigh-stòrais saighdearan, bathar ’s acainnean."
-
-#~ msgid "Water is the essence of life! It is used in the bakery and the horse and spider farms."
-#~ msgstr "Is bith-bhrìgh an t-uisge! Cleachdaidh an taigh-fuine, an tuathanas each is an tuathanas dhamhan e."
-
-#~ msgid "Produces weapons for the soldiers."
-#~ msgstr "Nì e airm airson nan saighdearan."
-
-#~ msgid "Produces cloth for buildings, ships and soldiers."
-#~ msgstr "Nì e sìoda airson togalaichean, longan is saighdearan."
-
-#~ msgid "Draws water out of the deep."
-#~ msgstr "Togaidh e uisge on doimhneachd."
-
-#~ msgid "Fells trees."
-#~ msgstr "Leagaidh e craobhan."
-
-#~ msgid "Fell trees in the surrounding area and process them into logs."
-#~ msgstr "Leag craobhan am fagas is nì fiodh dhiubh."
-
-#~ msgid "The woodcutter’s house needs trees to fell within the work area."
-#~ msgstr "Bidh an taigh buaineadair-fhiodha feumach air craobhan ri ’n leagail am broinn an raoin-obrach aige."
+msgstr "Grùdair"

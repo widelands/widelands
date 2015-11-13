@@ -173,7 +173,7 @@ public:
 	bool fetch_from_flag(Game &) override;
 
 	uint32_t count_workers(const Game &, WareIndex, const Requirements &);
-	Worker & launch_worker(Game &, WareIndex, const Requirements &);
+	Worker & launch_worker(Game &, WareIndex worker, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.

@@ -17,7 +17,7 @@ run(function()
       barbarians_builder = 1,
    }
 
-	sleep(2000)
+   sleep(2000)
 
    -- The ship should not yet have picked up the worker from the
    -- portdock.
@@ -26,7 +26,7 @@ run(function()
 
   -- so wait till builder is loaded on ship
   while (ship:get_workers("barbarians_builder") == 0) do
-   	sleep(100)
+      sleep(100)
   end
   sleep(5000)
 
@@ -42,7 +42,7 @@ run(function()
 
    -- Wait till a ship unloads a worked at the souther port
    while (ship:get_workers("builder") == 1) do
-   	 sleep(100)
+       sleep(100)
    end
    sleep(2000)
 

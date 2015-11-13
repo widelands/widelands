@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -989,13 +989,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		}
 
 		const TribeDescr & t = owner().tribe();
-		game.create_immovable
+		Immovable & newimm = game.create_immovable
 			(position,
 			 t.get_resource_indicator
 				(rdescr,
 				rdescr->detectable() ?
 				position.field->get_resources_amount() : 0),
 			 MapObjectDescr::OwnerType::kTribe);
+		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;

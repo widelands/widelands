@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Warehouses store soldiers, wares and tools.")
+   return pgettext("barbarians_building", "Stores soldiers, wares and tools.")
 end
 
 function building_helptext_note()

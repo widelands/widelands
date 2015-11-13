@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,9 +32,9 @@ namespace Widelands {class Game;}
 
 class SaveHandler {
 public:
-	SaveHandler() : m_last_saved_time(0), m_initialized(false), m_allow_saving(true),
+	SaveHandler() : m_last_saved_gametime(0), m_initialized(false), m_allow_saving(true),
 		m_save_requested(false), m_save_filename("") {}
-	void think(Widelands::Game &, int32_t currenttime);
+	void think(Widelands::Game &, uint32_t gametime);
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game
 		(Widelands::Game   &,
@@ -53,14 +53,14 @@ public:
 	}
 
 private:
-	int32_t m_last_saved_time;
+	uint32_t m_last_saved_gametime;
 	bool m_initialized;
 	bool m_allow_saving;
 	bool m_save_requested;
 	std::string m_save_filename;
 	std::string m_current_filename;
 
-	void initialize(int32_t currenttime);
+	void initialize(uint32_t gametime);
 };
 
 #endif  // end of include guard: WL_LOGIC_SAVE_HANDLER_H

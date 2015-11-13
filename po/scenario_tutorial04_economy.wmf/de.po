@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 19:37+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 18:57+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -435,9 +435,9 @@ msgstr "der Schaltfläche „Warenlexikon des Stammes“ unten erreicht werden. 
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
-msgstr "Wenn du möchtest, kannst du es ausprobieren. Ein Soldat braucht eine Holzlanze und einen Helm – von dort aus kannst du rückwärts suchen."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
+msgstr "Wenn du möchtest, kannst du es ausprobieren. Ein Soldat braucht einen Holzspeer und einen Helm – von dort aus kannst du rückwärts suchen."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
@@ -748,7 +748,7 @@ msgstr "Klicke dazu auf eine Flagge und wähle „Wirtschaftseinstellungen“. I
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:425
 msgid "Warehouse Preferences"
-msgstr "Lagerhausbevorzugung"
+msgstr "Lagerhauseinstellungen"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 msgid "Bring the marble columns to the front line"

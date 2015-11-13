@@ -13,12 +13,12 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("atlanteans_building", "Fishes on the coast near the house.")
+   return pgettext("atlanteans_building", "Fishes on the coast near the fisher’s house.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("atlanteans_building", "The fisher’s house needs water full of fish within the work area.") .. " " .. pgettext("atlanteans_building", "Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
+   return pgettext("atlanteans_building", "The fisher’s house needs water full of fish within the work area.") .. " " .. pgettext("atlanteans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
 end
 
 function building_helptext_performance()

@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-16 12:08+0000\n"
-"Last-Translator: Venatrix\n"
-"Language-Team: German (http://www.transifex.com/projects/p/widelands/language/de/)\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:46+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +52,7 @@ msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unte
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Website: %s"
+msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Webseite: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -147,212 +147,212 @@ msgstr "Allgemeine Spielkontrolle"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
-msgstr "Um ein offenes Fenster zu schließen, klicke mit der rechten Maustaste auf das Fenster.\nUm das Fenster zu verkleinern oder wieder groß zu machen, klicke entweder mit der\nmittleren Maustaste oder mit der linken Maustaste bei gedrückter STRG-Taste auf die Titelleiste des Fensters."
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down CTRL."
+msgstr ""
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr "Wenn du STRG drückst, während du eine Straße baust, werden automatisch Flaggen gesetzt.\nWenn du STRG drückst, wenn du eine Flagge entfernst, werden Straße und Flaggen bis zur\nnächsten Kreuzung entfernt."
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
-msgstr "Du kannst die Bestätigungsfenster für unumkehrbare Aktionen  wie Abreißen etc. umgehen, indem du STRG gedrückt hältst, während du auf das jeweiligen Aktionsfeld klickst."
+msgstr "Du kannst die Bestätigungsfenster für unumkehrbare Aktionen wie das Abreißen etc. umgehen, indem du STRG gedrückt hältst, während du auf das jeweilige Aktionsfeld klickst."
 
-#: ../../txts/README.lua:58
+#: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Tastaturbefehle im Spiel"
 
-#: ../../txts/README.lua:60
+#: ../../txts/README.lua:58
 msgid "PAGEUP: increases game speed"
 msgstr "BILD AUF: Erhöht die Spielgeschwindigkeit"
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:59
 msgid "PAGEDOWN: decreases game speed"
 msgstr "BILD AB: Verringert die Spielgeschwindigkeit"
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:60
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: Pausiert das Spiel"
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:61
 msgid "SPACE: toggles if building spaces are shown"
 msgstr "Leertaste: Schaltet die Bauhilfe ein und aus"
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:62
 msgid "M: toggles minimap"
 msgstr "M: Öffnet/schließt die Minikarte"
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:63
 msgid "N: toggles messages (‘news’)"
 msgstr "N: Öffnet/schließt das Nachrichtenfenster"
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:64
 msgid "C: toggles census"
 msgstr "C: Schaltet die Gebäudenamen an/aus"
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:65
 msgid "S: toggles statistics"
 msgstr "S: Öffnet/schließt das Statistikmenü"
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:66
 msgid "I: toggles stock inventory"
 msgstr "I: Öffnet/schließt die Lagerstandsübersicht"
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:67
 msgid "O: toggles objectives"
 msgstr "O: Öffnet/schließt das Aufgabenfenster"
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:68
 msgid "B: toggles building statistics"
 msgstr "B: Öffnet/schließt das Gebäudestatistik-Fenster"
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:69
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr "F: Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:70
 msgid "Home: centers main mapview on starting location"
 msgstr "Pos1: Zentriert die Ansicht an der Startposition"
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:71
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(STRG+) 0-9: Speichert die aktuelle Position auf der Karte um schnell zurückkehren zu können"
+msgstr "(STRG+) 0-9: Speichert die aktuelle Position auf der Karte, um schnell zurückkehren zu können"
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
 msgstr ",: Springt zur vorherigen Position auf der Karte"
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:73
 msgid ".: goes to the next location"
 msgstr ".: Springt zur nächsten Position auf der Karte"
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:74
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: Zeigt die Debug-Konsole (nur in Debugversionen)"
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:75
 msgid "CTRL+F10: quits the game immediately"
 msgstr "STRG+F10: Beendet das Spiel sofort"
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:76
 msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr "STRG+Linksklick: Überspringt das Bestätigungsfenster"
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:77
 msgid "CTRL+F11: takes a screenshot"
-msgstr "STRG+F11: Macht einen Screenshot"
+msgstr "STRG+F11: Erstellt einen Screenshot"
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Im Nachrichtenfenster sind folgende zusätzliche Tastaturbefehle verfügbar:"
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:81
 msgid "0: shows all messages"
 msgstr "0: Zeigt alle Nachrichten"
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:82
 msgid "1: shows geologists' messages only"
 msgstr "1: Zeigt nur Nachrichten vom Geologen"
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
 msgstr "2: Zeigt nur Wirtschaftsnachrichten"
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:84
 msgid "3: shows seafaring messages only"
 msgstr "3: Zeigt nur Seefahrtsnachrichten"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:85
 msgid "4: shows warfare messages only"
 msgstr "4: Zeigt nur Militärnachrichten"
 
-#: ../../txts/README.lua:88
+#: ../../txts/README.lua:86
 msgid "5: shows scenario messages only"
 msgstr "5: Zeigt nur Szenarionachrichten"
 
-#: ../../txts/README.lua:89
+#: ../../txts/README.lua:87
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: Wechselt auf der Karte zu der Position, auf die sich das Ereignis bezieht"
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:88
 msgid "DELETE: archives/restores the current message"
 msgstr "ENTF: Archiviert die aktuelle Nachricht/stellt sie wieder her"
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:90
 msgid "Online Help"
 msgstr "Onlinehilfe"
 
-#: ../../txts/README.lua:94
+#: ../../txts/README.lua:92
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr "Falls du eine Dokumentation oder Hilfe für Widelands oder den Widelands-Editor benötigst,\nschaue auf unserer Homepage nach. Dort findest du eine aktuelle Hilfe in unserem Wiki\nund detaillierte Beschreibungen der unterschiedlichen Wirtschaftszweige der Völker in\nunserem Nachschlagewerk."
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:96
 msgid "Reporting Bugs"
 msgstr "Fehler melden"
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:98
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Falls du auf einen Fehler stößt, melde ihn bitte auf unserem Bugtracker:"
 
-#: ../../txts/README.lua:104
+#: ../../txts/README.lua:102
 msgid "Please provide enough background information. Tell us:"
 msgstr "Bitte schreibe alle wichtigen Informationen auf. Also:"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:104
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- Wenn möglich, eine detailierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:106
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "- Was du erwartet hast und was tatsächlich passiert ist."
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:108
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr "- Welche Version von Widelands benutzt du? (Zum Beispiel „build-18“ oder\n„bzr7428[trunk]“, falls du eine Entwicklungsversion benutzt.)"
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:111
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr "- Bitte gib auch an, auf welchem Betriebssystem du Widelands verwendest.\nManche Fehler können vom Betriebssystem abhängen."
 
-#: ../../txts/README.lua:116
+#: ../../txts/README.lua:114
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Welche Karte du gespielt hast, als der Fehler auftrat."
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:116
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr "- Füge bitte einen oder mehrere Screenshots bei, falls der Fehler ein Darstellungsfehler ist,\noder falls diese die Erklärung des Fehlers vereinfachen."
 
-#: ../../txts/README.lua:121
+#: ../../txts/README.lua:119
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr "- Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehler auftritt (zum Beispiel\nein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an.\nFür weitere Informationen schaue unter dem Abschnitt „Aufzeichnungen“ weiter unten nach."
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:123
 msgid "Replays"
 msgstr "Aufzeichnungen"
 
-#: ../../txts/README.lua:127
+#: ../../txts/README.lua:125
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -361,7 +361,7 @@ msgid ""
 "you the time you started the game."
 msgstr "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine dieser Dateien hat\ndie Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere Datei hat die\nEndung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben wurde, wie zum\nBeispiel eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des Dateinamen teilt dir\ndie Zeit mit, an der du das Spiel gestartet hast."
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:131
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -371,7 +371,7 @@ msgid ""
 "different version of the game."
 msgstr "Mit der Option „Aufzeichnung abspielen“ im Hauptmenü wird ein früher gespieltes Spiel\ngenauso nochmals vorgespielt. Beachte aber, dass auch kleine Änderungen im\nSpieldatensatz oder der Widelands Ausführungsdatei (widelands.exe) eine\nAufzeichnung inkompatibel machen können oder „out of sync“ geht. Das\nist ähnlich wie bei Netzwerkspielen, die unter einem Zeitversatz leiden (laggen),\nwenn unterschiedliche Versionen gespielt werden."
 
-#: ../../txts/README.lua:140
+#: ../../txts/README.lua:138
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
@@ -538,7 +538,8 @@ msgstr "Die Seiten sind vermutlich aktueller und vollständiger als diese Datei;
 msgid "Keyboard shortcuts"
 msgstr "Tastaturbefehle"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:26
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:26
 msgid "SPACE:"
 msgstr "Leertaste:"
 
@@ -546,7 +547,8 @@ msgstr "Leertaste:"
 msgid "toggles if building spaces are shown"
 msgstr "Schaltet die Bauhilfe ein und aus"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:28
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:28
 msgid "C:"
 msgstr "C:"
 
@@ -554,7 +556,8 @@ msgstr "C:"
 msgid "toggles census"
 msgstr " Schaltet die Gebäudenamen an/aus"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:30
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:30
 msgid "F:"
 msgstr "F:"
 
@@ -562,7 +565,8 @@ msgstr "F:"
 msgid "toggles fullscreen"
 msgstr "Schaltet den Vollbildmodus an/aus"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:32
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:32
 msgid "H:"
 msgstr "H:"
 
@@ -570,7 +574,8 @@ msgstr "H:"
 msgid "toggles main menu"
 msgstr "Zeigt/versteckt das Hauptmenü"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:34
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:34
 msgid "M:"
 msgstr "M:"
 
@@ -578,7 +583,8 @@ msgstr "M:"
 msgid "toggles minimap"
 msgstr "Öffnet/schließt die Minikarte"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:36
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:36
 msgid "P:"
 msgstr "P:"
 
@@ -586,7 +592,8 @@ msgstr "P:"
 msgid "toggles player menu"
 msgstr "Zeigt/versteckt das Spielermenü"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:38
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:38
 msgid "T:"
 msgstr "T:"
 
@@ -594,7 +601,8 @@ msgstr "T:"
 msgid "toggles tools menu"
 msgstr "Zeigt/versteckt das Werkzeugmenü"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:40
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:40
 msgid "I:"
 msgstr "I:"
 
@@ -602,7 +610,8 @@ msgstr "I:"
 msgid "activates information tool"
 msgstr "Aktiviert das Informationswerkzeug"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:42
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:42
 msgid "CTRL+L:"
 msgstr "Strg+L:"
 
@@ -610,7 +619,8 @@ msgstr "Strg+L:"
 msgid "load map"
 msgstr "Karte laden"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:44
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:44
 msgid "CTRL+S:"
 msgstr "Strg+S:"
 
@@ -618,7 +628,8 @@ msgstr "Strg+S:"
 msgid "save map"
 msgstr "Karte speichern"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:46
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:46
 msgid "1-0:"
 msgstr "1-0:"
 
@@ -626,7 +637,8 @@ msgstr "1-0:"
 msgid "changes tool size"
 msgstr "Ändert die Werkzeuggröße"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:48
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:48
 msgid "SHIFT (Hold):"
 msgstr "Umschalt (gedrückt halten):"
 
@@ -634,7 +646,8 @@ msgstr "Umschalt (gedrückt halten):"
 msgid "selects first alternative tool while pressed"
 msgstr "Aktiviert das erste alternative Werkzeug"
 
-#: TRANSLATORS This is a hotkey ../../txts/editor_readme.lua:50
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:50
 msgid "ALT (Hold):"
 msgstr "Alt (gedrückt halten):"
 
@@ -645,7 +658,7 @@ msgstr "Aktiviert das zweite alternative Werkzeug"
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie zu dicht von Straßen oder Bäumen umgeben sind."
 
@@ -658,7 +671,7 @@ msgstr "Baue immer ein Förster- und ein Fischzüchterhaus, damit du nie ohne Ho
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
+"work area, they will stop fishing."
 msgstr "Beobachte deine Fischer. Wenn die Fischbestände schwinden, werden die Fischer aufhören zu arbeiten."
 
 #: ../../txts/tips/barbarians.tip:10
@@ -729,7 +742,7 @@ msgstr "Sende erst einen Geologen zur Bodenerkundung aus, bevor du Minen oder Br
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
+"Sentry, Fortress, Blockhouse, etc."
 msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie Wachposten, Baracken oder Festungen vergrößern."
 
 #: ../../txts/tips/general_game.tip:14
