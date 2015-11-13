@@ -858,19 +858,19 @@ uint32_t Warehouse::count_workers
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
 Worker & Warehouse::launch_worker
-	(Game & game, WareIndex ware, const Requirements & req)
+	(Game & game, WareIndex worker_id, const Requirements & req)
 {
 	do {
-		if (m_supply->stock_workers(ware)) {
-			uint32_t unincorporated = m_supply->stock_workers(ware);
+		if (m_supply->stock_workers(worker_id)) {
+			uint32_t unincorporated = m_supply->stock_workers(worker_id);
 
 			//  look if we got one of those in stock
-			if (m_incorporated_workers.count(ware)) {
+			if (m_incorporated_workers.count(worker_id)) {
 				// On cleanup, it could be that the worker was deleted under
 				// us, so we erase the pointer we had to it and create a new
 				// one.
-				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
-				WorkerList& incorporated_workers = m_incorporated_workers[ware];
+				remove_no_longer_existing_workers(game, &m_incorporated_workers[worker_id]);
+				WorkerList& incorporated_workers = m_incorporated_workers[worker_id];
 
 				for (std::vector<Worker *>::iterator worker_iter = incorporated_workers.begin();
 					 worker_iter != incorporated_workers.end(); ++worker_iter)
@@ -883,30 +883,30 @@ Worker & Warehouse::launch_worker
 						worker->set_location(this); //  back in a economy
 						incorporated_workers.erase(worker_iter);
 
-						m_supply->remove_workers(ware, 1);
+						m_supply->remove_workers(worker_id, 1);
 						return *worker;
 					}
 				}
 			}
 
-			assert(unincorporated <= m_supply->stock_workers(ware));
+			assert(unincorporated <= m_supply->stock_workers(worker_id));
 
 			if (unincorporated) {
 				// Create a new one
 				// NOTE: This code lies about the TrainingAttributes of the new worker
-				m_supply->remove_workers(ware, 1);
-				const WorkerDescr & workerdescr = *game.tribes().get_worker_descr(ware);
+				m_supply->remove_workers(worker_id, 1);
+				const WorkerDescr & workerdescr = *game.tribes().get_worker_descr(worker_id);
 				return workerdescr.create(game, owner(), this, m_position);
 			}
 		}
 
-		if (can_create_worker(game, ware)) {
+		if (can_create_worker(game, worker_id)) {
 			// don't want to use an upgraded worker, so create new one.
-			create_worker(game, ware);
+			create_worker(game, worker_id);
 		} else {
-			ware = game.tribes().get_worker_descr(ware)->becomes();
+			worker_id = game.tribes().get_worker_descr(worker_id)->becomes();
 		}
-	} while (owner().tribe().has_ware(ware));
+	} while (owner().tribe().has_worker(worker_id));
 
 	throw wexception
 		("Warehouse::launch_worker: worker does not actually exist");
