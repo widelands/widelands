@@ -33,10 +33,10 @@
 #include "logic/productionsite.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
-#include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
+#include "wui/helpwindow.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
@@ -360,8 +360,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		UI::UniqueWindow::Registry& registry =
 			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 		registry.open_window = [this, &registry] {
-			new UI::LuaTextHelpWindow(
-				&igbase(), registry, m_building.descr(), building().owner().tribe(), &igbase().egbase().lua());
+			new UI::BuildingHelpWindow(
+				&igbase(), registry, m_building.descr(), m_building.owner().tribe(), &igbase().egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
