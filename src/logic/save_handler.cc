@@ -32,6 +32,7 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 
@@ -40,8 +41,9 @@ using Widelands::GameSaver;
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
-	initialize(gametime);
+void SaveHandler::think(Widelands::Game & game) {
+	uint32_t realtime = SDL_GetTicks();
+	initialize(realtime);
 	std::string filename = "wl_autosave";
 
 	if (!m_allow_saving) {
@@ -61,21 +63,25 @@ void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
 		m_save_filename = "";
 	} else {
 		const int32_t autosave_interval_in_seconds =
-			g_options.pull_section("global").get_int
-				("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+			g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 		if (autosave_interval_in_seconds <= 0) {
 			return; // no autosave requested
 		}
 
-		const int32_t elapsed = (gametime - m_last_saved_gametime) / 1000;
+		const int32_t elapsed = (realtime - m_last_saved_realtime) / 1000;
 		if (elapsed < autosave_interval_in_seconds) {
+			return;
+		}
+
+		if (game.game_controller()->is_paused()) { // check if game is paused
+			// Wait 30 seconds until next save try
+			m_last_saved_realtime = m_last_saved_realtime + 30000;
 			return;
 		}
 		//roll autosaves
 		int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
 		std::string filename_previous =
-			create_file_name(get_base_dir(),
-								(boost::format("%s_%02d") % filename % number_of_rolls).str());
+			create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
 		if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
 			g_fs->fs_unlink(filename_previous);
 			log("Autosave: Deleted %s\n", filename_previous.c_str());
@@ -83,8 +89,7 @@ void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
 		number_of_rolls--;
 		while (number_of_rolls >= 0) {
 			const std::string filename_next =
-				create_file_name(get_base_dir(),
-									(boost::format("%s_%02d") % filename % number_of_rolls).str());
+				create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
 			if (g_fs->file_exists(filename_next)) {
 				g_fs->fs_rename(filename_next, filename_previous);
 				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
@@ -115,7 +120,6 @@ void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
 	}
 
 	std::string error;
-	uint32_t before = SDL_GetTicks();
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
 		game.get_ibase()->log_message(_("Saving failed!"));
@@ -127,8 +131,8 @@ void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
 			}
 			g_fs->fs_rename(backup_filename, complete_filename);
 		}
-		// Wait 30 in game seconds until next save try
-		m_last_saved_gametime = m_last_saved_gametime + 30000;
+		// Wait 30 seconds until next save try
+		m_last_saved_realtime = m_last_saved_realtime + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -136,19 +140,19 @@ void SaveHandler::think(Widelands::Game & game, uint32_t gametime) {
 			g_fs->fs_unlink(backup_filename);
 	}
 
-	log("Autosave: save took %d ms\n", SDL_GetTicks() - before);
+	log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 	game.get_ibase()->log_message(_("Game saved"));
-	m_last_saved_gametime = gametime;
+	m_last_saved_realtime = realtime;
 }
 
 /**
 * Initialize autosave timer
  */
-void SaveHandler::initialize(uint32_t gametime) {
+void SaveHandler::initialize(uint32_t realtime) {
 	if (m_initialized)
 		return;
 
-	m_last_saved_gametime = gametime;
+	m_last_saved_realtime = realtime;
 	m_initialized = true;
 }
 
@@ -182,8 +186,7 @@ bool SaveHandler::save_game
 {
 	ScopedTimer save_timer("SaveHandler::save_game() took %ums");
 
-	bool const binary =
-		!g_options.pull_section("global").get_bool("nozip", false);
+	bool const binary = !g_options.pull_section("global").get_bool("nozip", false);
 	// Make sure that the base directory exists
 	g_fs->ensure_directory_exists(get_base_dir());
 

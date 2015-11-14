@@ -149,7 +149,7 @@ public:
 	Bob& create_ship(Coords, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(Coords, const std::string& name, Player* owner = nullptr);
 
-	int32_t get_gametime() const {
+	uint32_t get_gametime() const {
 		return gametime_;
 	}
 	InteractiveBase* get_ibase() const {
@@ -177,7 +177,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t& get_gametime_pointer() {
+	uint32_t& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b) {
@@ -247,9 +247,7 @@ private:
 	// sends notifications about this.
 	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
 
-	// TODO(unknown): -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
-	// uint32.
-	int32_t gametime_;
+	uint32_t gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;

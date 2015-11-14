@@ -456,7 +456,7 @@ void Immovable::draw_construction
 		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
 			(&(*m_program)[m_program_ptr]);
 
-	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	const uint32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 
 	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
