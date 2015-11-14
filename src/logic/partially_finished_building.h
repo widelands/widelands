@@ -55,7 +55,7 @@ public:
 
 	uint32_t get_built_per64k() const;
 	Request * get_builder_request() {return m_builder_request;}
-	static void request_builder_callback(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+	static void request_builder_callback(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 private:
 	void request_builder(Game &);

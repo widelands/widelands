@@ -125,12 +125,12 @@ public:
 	Building&
 	warp_building(Coords,
 					  PlayerNumber,
-					  BuildingIndex,
+					  DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_constructionsite(Coords,
 								 PlayerNumber,
-								 BuildingIndex,
+								 DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
@@ -138,7 +138,7 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob& create_critter(Coords, int bob_type_idx, Player* owner = nullptr);
+	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
 										 uint32_t idx,

@@ -46,7 +46,7 @@ private:
 	std::vector<bool> m_active_colors;
 
 	void clicked_help();
-	void cb_changed_to(Widelands::WareIndex, bool);
+	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
 
 

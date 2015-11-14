@@ -56,7 +56,7 @@ struct IdleWareSupply : public Supply {
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
 	bool has_storage() const override;
-	void get_ware_type(WareWorker & type, WareIndex & ware) const override;
+	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 	void send_to_storage(Game &, Warehouse * wh) override;
 
 	uint32_t nr_supplies(const Game &, const Request &) const override;
@@ -131,7 +131,7 @@ bool IdleWareSupply::has_storage()  const
 	return m_ware.is_moving();
 }
 
-void IdleWareSupply::get_ware_type(WareWorker & type, WareIndex & ware) const
+void IdleWareSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware) const
 {
 	type = wwWARE;
 	ware = m_ware.descr_index();
@@ -183,7 +183,7 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance
-	(WareIndex const i, const WareDescr * const ware_descr)
+	(DescriptionIndex const i, const WareDescr * const ware_descr)
 :
 MapObject   (ware_descr),
 m_economy    (nullptr),
@@ -629,7 +629,7 @@ MapObject::Loader * WareInstance::load
 				warename = lookup_table.lookup_ware(warename, fr.c_string());
 			}
 
-			WareIndex wareindex = egbase.tribes().ware_index(warename);
+			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
 			const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
 
 			std::unique_ptr<Loader> loader(new Loader);

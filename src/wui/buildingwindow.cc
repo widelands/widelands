@@ -228,7 +228,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const Widelands::BuildingIndex & enhancement =
+			const Widelands::DescriptionIndex & enhancement =
 				m_building.descr().enhancement();
 			const Widelands::TribeDescr & tribe  = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
@@ -273,7 +273,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
-			std::map<Widelands::WareIndex, uint8_t> wares;
+			std::map<Widelands::DescriptionIndex, uint8_t> wares;
 			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
@@ -433,7 +433,7 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 Callback for enhancement request
 ===============
 */
-void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
+void BuildingWindow::act_enhance(Widelands::DescriptionIndex id)
 {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)

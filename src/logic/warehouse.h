@@ -148,10 +148,10 @@ public:
 	 */
 	Workers get_incorporated_workers();
 
-	void insert_wares  (WareIndex, uint32_t count);
-	void remove_wares  (WareIndex, uint32_t count);
-	void insert_workers(WareIndex, uint32_t count);
-	void remove_workers(WareIndex, uint32_t count);
+	void insert_wares  (DescriptionIndex, uint32_t count);
+	void remove_wares  (DescriptionIndex, uint32_t count);
+	void insert_workers(DescriptionIndex, uint32_t count);
+	void remove_workers(DescriptionIndex, uint32_t count);
 
 	/* SoldierControl implementation */
 	std::vector<Soldier *> present_soldiers() const override;
@@ -172,26 +172,26 @@ public:
 
 	bool fetch_from_flag(Game &) override;
 
-	uint32_t count_workers(const Game &, WareIndex, const Requirements &);
-	Worker & launch_worker(Game &, WareIndex worker, const Requirements &);
+	uint32_t count_workers(const Game &, DescriptionIndex, const Requirements &);
+	Worker & launch_worker(Game &, DescriptionIndex worker, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
 	void incorporate_worker(EditorGameBase&, Worker* worker);
 
-	WareInstance & launch_ware(Game &, WareIndex);
+	WareInstance & launch_ware(Game &, DescriptionIndex);
 	bool do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
 	void incorporate_ware(EditorGameBase&, WareInstance* ware);
 
-	bool can_create_worker(Game &, WareIndex) const;
-	void     create_worker(Game &, WareIndex);
+	bool can_create_worker(Game &, DescriptionIndex) const;
+	void     create_worker(Game &, DescriptionIndex);
 
-	uint32_t get_planned_workers(Game &, WareIndex index) const;
-	void plan_workers(Game &, WareIndex index, uint32_t amount);
+	uint32_t get_planned_workers(Game &, DescriptionIndex index) const;
+	void plan_workers(Game &, DescriptionIndex index, uint32_t amount);
 	std::vector<uint32_t> calc_available_for_worker
-		(Game &, WareIndex index) const;
+		(Game &, DescriptionIndex index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
@@ -203,21 +203,21 @@ public:
 	bool attack   (Soldier &) override;
 	// End Attackable implementation
 
-	void receive_ware(Game &, WareIndex ware) override;
+	void receive_ware(Game &, DescriptionIndex ware) override;
 	void receive_worker(Game &, Worker & worker) override;
 
-	StockPolicy get_ware_policy(WareIndex ware) const;
-	StockPolicy get_worker_policy(WareIndex ware) const;
-	StockPolicy get_stock_policy(WareWorker waretype, WareIndex wareindex) const;
-	void set_ware_policy(WareIndex ware, StockPolicy policy);
-	void set_worker_policy(WareIndex ware, StockPolicy policy);
+	StockPolicy get_ware_policy(DescriptionIndex ware) const;
+	StockPolicy get_worker_policy(DescriptionIndex ware) const;
+	StockPolicy get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const;
+	void set_ware_policy(DescriptionIndex ware, StockPolicy policy);
+	void set_worker_policy(DescriptionIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
 
 	// Returns the waresqueue of the expedition if this is a port. Will
 	// assert(false) otherwise.
-	WaresQueue& waresqueue(WareIndex) override;
+	WaresQueue& waresqueue(DescriptionIndex) override;
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -238,7 +238,7 @@ private:
 	 */
 	struct PlannedWorkers {
 		/// Index of the worker type we plan to create
-		WareIndex index;
+		DescriptionIndex index;
 
 		/// How many workers of this type are we supposed to create?
 		uint32_t amount;
@@ -250,7 +250,7 @@ private:
 	};
 
 	static void request_cb
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
 	bool _load_finish_planned_worker(PlannedWorkers & pw);
@@ -264,7 +264,7 @@ private:
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<Worker *>;
-	using IncorporatedWorkers = std::map<WareIndex, WorkerList>;
+	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers        m_incorporated_workers;
 	std::vector<Time>          m_next_worker_without_cost_spawn;
 	Time                       m_next_military_act;

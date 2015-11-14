@@ -389,7 +389,7 @@ void PortDock::set_need_ship(Game& game, bool need) {
 /**
  * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex) {
+uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex) {
 	uint32_t count = 0;
 
 	for (ShippingItem& shipping_item : m_waiting) {

@@ -209,7 +209,7 @@ struct BuildingNonexistent : public FileRead::DataError {
 // name in the tribe.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->c_string();
-	WareIndex const index = tribe.immovable_index(name);
+	DescriptionIndex const index = tribe.immovable_index(name);
 	if (!tribe.has_immovable(index))
 		throw TribeImmovableNonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
@@ -259,7 +259,7 @@ TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& eg
 // name in the World.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
 	char const* const name = fr->c_string();
-	WareIndex const index = world.get_immovable_index(name);
+	DescriptionIndex const index = world.get_immovable_index(name);
 	if (index == Widelands::INVALID_INDEX)
 		throw WorldImmovableNonexistent(name);
 	return *world.get_immovable_descr(index);
@@ -283,7 +283,7 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& 
 // \throws Building_Nonexistent if there is no building type with that name
 const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->c_string();
-	BuildingIndex const index = egbase.tribes().building_index(name);
+	DescriptionIndex const index = egbase.tribes().building_index(name);
 	if (!egbase.tribes().building_exists(index)) {
 		throw BuildingNonexistent(name);
 	}

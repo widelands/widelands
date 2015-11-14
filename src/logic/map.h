@@ -370,7 +370,7 @@ public:
 	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain(const World& world, TCoords<FCoords>, TerrainIndex);
+	int32_t change_terrain(const World& world, TCoords<FCoords>, DescriptionIndex);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {

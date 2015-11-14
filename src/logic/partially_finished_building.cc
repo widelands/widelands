@@ -195,7 +195,7 @@ Called by transfer code when the builder has arrived on site.
 void PartiallyFinishedBuilding::request_builder_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

@@ -156,7 +156,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							_("Ports"));
 	}
 
-	const BuildingIndex nr_buildings = parent.egbase().tribes().nrbuildings();
+	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
@@ -172,8 +172,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	// We want to add player tribe's buildings in correct order
 	const TribeDescr& tribe = iplayer().player().tribe();
-	std::vector<BuildingIndex> buildings_to_add;
-	for (BuildingIndex index: tribe.buildings()) {
+	std::vector<DescriptionIndex> buildings_to_add;
+	for (DescriptionIndex index: tribe.buildings()) {
 		// Only add headquarter types that are owned by player.
 		const BuildingDescr& descr = *tribe.get_building_descr(index);
 		const Widelands::Player& player = iplayer().player();
@@ -183,14 +183,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	// We want to add other tribes' militarysites on the bottom
-	for (BuildingIndex index = 0; index < nr_buildings; ++index) {
+	for (DescriptionIndex index = 0; index < nr_buildings; ++index) {
 		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
 		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
 			buildings_to_add.push_back(index);
 		}
 	}
 
-	for (BuildingIndex id : buildings_to_add) {
+	for (DescriptionIndex id : buildings_to_add) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
 
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
@@ -383,7 +383,7 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
-	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
+	DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
@@ -594,7 +594,7 @@ void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
 	const Map& map = iplayer().game().map();
-	const BuildingIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
+	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
 	no_owned_label_.set_visible(false);
@@ -612,7 +612,7 @@ void BuildingStatisticsMenu::update() {
 	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
 	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
-	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
+	for (DescriptionIndex id = 0; id < nr_buildings; ++id) {
 		const BuildingDescr& building = *tribe.get_building_descr(id);
 		if (building_buttons_[id] == nullptr) {
 			continue;
@@ -778,10 +778,10 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	textarea->set_visible(true);
 }
 
-void BuildingStatisticsMenu::set_current_building_type(BuildingIndex id) {
+void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
 	current_building_type_ = id;
-	for (BuildingIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
+	for (DescriptionIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
 		if (building_buttons_[i] != nullptr) {
 			building_buttons_[i]->set_flat(true);
 		}
