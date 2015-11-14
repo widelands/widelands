@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,6 +81,13 @@ constexpr uint8_t kCurrentPacketVersionBorder = 1;
 
 #define FILENAME_SIZE 48
 
+enum {
+	UNSEEN_NONE         = 0,
+	UNSEEN_TRIBEORWORLD = 1,
+	UNSEEN_FLAG         = 2,
+	UNSEEN_BUILDING     = 3,
+	UNSEEN_PORTDOCK     = 4
+};
 
 //  The map is traversed by row and column. In each step we process of one map
 //  field (which is 1 node, 2 triangles and 3 edges that are stored together).
@@ -176,14 +183,11 @@ struct TribeNonexistent : public FileRead::DataError {
 	char const* const name;
 };
 struct TribeImmovableNonexistent : public FileRead::DataError {
-	TribeImmovableNonexistent(const std::string& Tribename, const std::string& Name)
-	   : DataError(
-	        "tribe %s does not define immovable type \"%s\"", Tribename.c_str(), Name.c_str()),
-	     tribename(Tribename),
+	TribeImmovableNonexistent(const std::string& Name)
+	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
 	     name(Name) {
 	}
 
-	std::string tribename;
 	std::string name;
 };
 struct WorldImmovableNonexistent : public FileRead::DataError {
@@ -201,79 +205,22 @@ struct BuildingNonexistent : public FileRead::DataError {
 	char const* const name;
 };
 
-// Reads a c_string and interprets it as the name of an immovable type.
-//
-// \returns a reference to the immovable type description.
-//
-// \throws Immovable_Nonexistent if there is no imovable type with that
-// name in the tribe.
-const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
-	std::string name = fr->c_string();
-	DescriptionIndex const index = tribe.immovable_index(name);
-	if (!tribe.has_immovable(index))
-		throw TribeImmovableNonexistent(tribe.name(), name);
-	return *tribe.get_immovable_descr(index);
-}
-
-// Reads a c_string and interprets it as the name of a tribe.
-//
-// \returns a pointer to the tribe description.
-//
-// \throws Tribe_Nonexistent if the there is no tribe with that name.
-const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
-	const std::string& name = fr->c_string();
-	const Tribes& tribes = egbase.tribes();
-	if (tribes.tribe_exists(name)) {
-		return *tribes.get_tribe_descr(tribes.tribe_index(name));
-	} else {
-		throw TribeNonexistent(name.c_str());
-	}
-}
-
-// Reads a c_string and interprets it as the name of a tribe.
-//
-// \returns 0 if the name is empty, otherwise a pointer to the tribe
-// description.
-//
-// \throws Tribe_Nonexistent if the name is not empty and there is no tribe
-// with that name.
-TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
-	const std::string& name = fr->c_string();
-	const Tribes& tribes = egbase.tribes();
-	if (!name.empty()) {
-		if (tribes.tribe_exists(name)) {
-			return tribes.get_tribe_descr(tribes.tribe_index(name));
-		} else {
-			throw TribeNonexistent(name.c_str());
-		}
-	} else {
-		return nullptr;
-	}
-}
-
-// Reads a c_string and interprets it as the name of an immovable type.
-//
-// \returns a reference to the immovable type description.
-//
-// \throws Immovable_Nonexistent if there is no imovable type with that
-// name in the World.
-const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
-	char const* const name = fr->c_string();
-	DescriptionIndex const index = world.get_immovable_index(name);
-	if (index == Widelands::INVALID_INDEX)
-		throw WorldImmovableNonexistent(name);
-	return *world.get_immovable_descr(index);
-}
-
-// Calls Tribe_allow_null(const EditorGameBase &). If it returns a tribe,
-// Immovable_Type(const TribeDescr &) is called with that tribe and the
-// result is returned. Otherwise Immovable_Type(const World &) is called
-// and the result is returned.
+// reads an immovable depending on whether it is a tribe or world immovable
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& egbase) {
-	if (TribeDescr const* const tribe = read_tribe_allow_null(fr, egbase))
-		return read_immovable_type(fr, *tribe);
-	else
-		return read_immovable_type(fr, egbase.world());
+	uint8_t owner = fr->unsigned_8();
+	char const* const name = fr->c_string();
+	if (owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kWorld)) {
+		DescriptionIndex const index = egbase.world().get_immovable_index(name);
+		if (index == Widelands::INVALID_INDEX)
+			throw WorldImmovableNonexistent(name);
+		return *egbase.world().get_immovable_descr(index);
+	} else {
+		assert(owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kTribe));
+		DescriptionIndex const index = egbase.tribes().immovable_index(name);
+		if (index == Widelands::INVALID_INDEX)
+			throw TribeImmovableNonexistent(name);
+		return *egbase.tribes().get_immovable_descr(index);
+	}
 }
 
 // Reads a c_string and interprets it as the name of an immovable type.
@@ -288,16 +235,6 @@ const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& eg
 		throw BuildingNonexistent(name);
 	}
 	return *egbase.tribes().get_building_descr(index);
-}
-
-// Encode a tribe into 'wr'.
-void write_tribe(StreamWrite* wr, const TribeDescr& tribe) {
-	wr->string(tribe.name());
-}
-
-// Encode a tribe into 'wr'.
-void write_tribe(StreamWrite* wr, TribeDescr const* tribe) {
-	wr->c_string(tribe ? tribe->name().c_str() : "");
 }
 
 // Encode a Immovable_Type into 'wr'.
@@ -323,13 +260,13 @@ inline static MapObjectData read_unseen_immovable
 	MapObjectData m;
 	try {
 		switch (immovable_kind) {
-		case 0:  //  The player sees no immovable.
+		case UNSEEN_NONE:  //  The player sees no immovable.
 			m.map_object_descr = nullptr;                                       break;
-		case 1: //  The player sees a tribe or world immovable.
+		case UNSEEN_TRIBEORWORLD: //  The player sees a tribe or world immovable.
 			m.map_object_descr = &read_immovable_type(&immovables_file, egbase); break;
-		case 2:  //  The player sees a flag.
+		case UNSEEN_FLAG:  //  The player sees a flag.
 			m.map_object_descr = &g_flag_descr;                           break;
-		case 3: //  The player sees a building.
+		case UNSEEN_BUILDING: //  The player sees a building.
 			m.map_object_descr = &read_building_type(&immovables_file, egbase);
 			if (version == kCurrentPacketVersionImmovables) {
 				// Read data from immovables file
@@ -345,7 +282,7 @@ inline static MapObjectData read_unseen_immovable
 				throw UnhandledVersionError("MapPlayersViewPacket", version, kCurrentPacketVersionImmovables);
 			}
 			break;
-		case 4: // The player sees a port dock
+		case UNSEEN_PORTDOCK: // The player sees a port dock
 			m.map_object_descr = &g_portdock_descr;                       break;
 		default:
 			throw GameDataError("Unknown immovable-kind type %d", immovable_kind);
@@ -915,14 +852,14 @@ inline static void write_unseen_immovable
 	uint8_t immovable_kind = 255;
 
 	if (!map_object_descr)
-		immovable_kind = 0;
+		immovable_kind = UNSEEN_NONE;
 	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
-		immovable_kind = 1;
+		immovable_kind = UNSEEN_TRIBEORWORLD;
 		write_immovable_type(&immovables_file, *immovable_descr);
 	} else if (map_object_descr->type() == MapObjectType::FLAG)
-		immovable_kind = 2;
+		immovable_kind = UNSEEN_FLAG;
 	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
-		immovable_kind = 3;
+		immovable_kind = UNSEEN_BUILDING;
 		write_building_type(&immovables_file, *building_descr);
 		if (!csi.becomes)
 			immovables_file.unsigned_8(0);
@@ -941,7 +878,7 @@ inline static void write_unseen_immovable
 			immovables_file.unsigned_32(csi.completedtime);
 		}
 	} else if (map_object_descr->type() == MapObjectType::PORTDOCK)
-		immovable_kind = 4;
+		immovable_kind = UNSEEN_PORTDOCK;
 	else
 	{
 		// We should never get here.. debugging code until assert(false)
