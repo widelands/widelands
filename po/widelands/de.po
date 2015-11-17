@@ -10,14 +10,15 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
 # Venatrix, 2015
+# w_laenger <ovvv@web.de>, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-09 08:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 16:05+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2247,7 +2248,7 @@ msgstr "Widelands konnte keine Verbindung zum Host erstellen."
 #: ../../src/ui_fsmenu/internet_lobby.cc:439
 msgctxt "server_name"
 msgid "unnamed"
-msgstr ""
+msgstr "unbenannt"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-10 08:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 17:57+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
 " holding down CTRL."
-msgstr ""
+msgstr "Ak chcete zatvoriť otvorené okno, kliknite naň pravým tlačidlom myši. Ak chcete minimalizovať/maximalizovať okno, podržte CTRL a kliknite na okno buď stredným, alebo ľavým tlačidlom myši."
 
 #: ../../txts/README.lua:49
 msgid ""
@@ -656,7 +656,7 @@ msgstr "počas toho, ako ho držíte stlačený, vyberie sa druhý alternatívny
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Niektoré budovy, ako napríklad farma, majú veľmi malú pracovnú oblasť. Ak je budova obklopená stromami alebo cestami, zastaví sa jej produkcia."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -668,7 +668,7 @@ msgstr "Nezabudnite vždy postaviť horáreň a rybnikársky dom, aby vám nedo�
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Sledujte činnosť svojich rybárov. Keď sa v ich pracovnej oblasti minú zdroje rýb, prestanú chytať ryby."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -739,7 +739,7 @@ msgstr "Predtým, než postavíte studňu alebo baňu, pošlite na preskúmanie 
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Svoje územie môžete rozšíriť postavením rôznych vojenských budov – strážnic, pevností, vojenských zrubov atď."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -786,13 +786,13 @@ msgstr "Stlačením klávesov , (čiarka) a . (bodka) sa môžete presúvať med
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr "Stlačením Ctrl+(0-9) uchováte dôležité miesta a stlačením 0-9 sa na ne presuniete."
+msgstr "Stlačením Ctrl+(0-9) môžete uchovať polohu dôležitých miest a stlačením 0-9 sa na ne presunúť."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr "Zrušením cesty, držiac Ctrl, odstránite všetky vlajky až po prvú križovatku."
+msgstr "Ak pri zrušení cesty podržíte Ctrl, odstránia sa všetky vlajky až po prvú križovatku."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""

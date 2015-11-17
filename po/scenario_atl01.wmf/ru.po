@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-10 21:06+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgstr "Постройте ферму и козельцовую ферму"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Постройте мельницу для производства кукурузной муки и козельцовой муки"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -117,7 +117,7 @@ msgstr "Постройте колодец"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Постройте пекарню, чтобы выпекать хлеб из кукурузной муки, козельцовой муки и воды"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"

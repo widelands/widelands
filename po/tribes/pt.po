@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2015
 # GunChleoc, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 19:12+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-10 18:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -857,19 +858,19 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mina de Ferro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
 msgctxt "barbarians_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mina de Ferro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
 msgctxt "empire_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mina de Ferro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:61
@@ -1605,19 +1606,19 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mina de ferro funda"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mina de ferro funda"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
-msgstr ""
+msgstr "Mina de ferro profunda"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
 msgctxt "barbarians_building"
@@ -1828,7 +1829,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr ""
+msgstr "Criação de Burros"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:54
@@ -1846,7 +1847,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa do Lenhador"
 
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgctxt "empire_building"
@@ -1860,7 +1861,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:7
 msgctxt "empire_building"
 msgid "Marble Mine"
-msgstr ""
+msgstr "Mina de Mármore"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:72
@@ -1885,7 +1886,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "Mina de Mármore funda"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
 msgctxt "empire_building"
@@ -1904,7 +1905,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:7
 msgctxt "empire_building"
 msgid "Piggery"
-msgstr ""
+msgstr "Criação de porcos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:56
@@ -1920,7 +1921,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr ""
+msgstr "Ovinocultura"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
@@ -1931,7 +1932,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr ""
+msgstr "Casa do Pedreiro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -1948,7 +1949,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:7
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr ""
+msgstr "Vinha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
@@ -2002,7 +2003,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:7
 msgctxt "empire_building"
 msgid "Winery"
-msgstr ""
+msgstr "Adega"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
@@ -2131,13 +2132,13 @@ msgstr ""
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
 msgctxt "empire_building"
 msgid "Arena"
-msgstr ""
+msgstr "Arena"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
 msgctxt "empire_building"
 msgid "Colosseum"
-msgstr ""
+msgstr "Coliseu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
@@ -2203,7 +2204,7 @@ msgstr "Armazém"
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Quartel-general naufrágio"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/ashes/init.lua:7
@@ -2311,25 +2312,25 @@ msgstr "Campo muito pequeno"
 #: ../../tribes/immovables/grapevine_medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr ""
+msgstr "Vinha média"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr ""
+msgstr "Vinha madura"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_small/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr ""
+msgstr "Vinha pequena"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr ""
+msgstr "Vinha muito pequena"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_medium/init.lua:7
@@ -2434,13 +2435,13 @@ msgstr "Navio"
 #: ../../tribes/wares/armor/init.lua:7
 msgctxt "ware"
 msgid "Armor"
-msgstr ""
+msgstr "Amadura"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_chain/init.lua:7
 msgctxt "ware"
 msgid "Chain Armor"
-msgstr ""
+msgstr "Cota de malha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_gilded/init.lua:7
@@ -2500,7 +2501,7 @@ msgstr "Machado de guerreiro"
 #: ../../tribes/wares/basket/init.lua:7
 msgctxt "ware"
 msgid "Basket"
-msgstr ""
+msgstr "Cesto"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer/init.lua:7
@@ -2584,7 +2585,7 @@ msgstr "Milho"
 #: ../../tribes/wares/cornmeal/init.lua:7
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr ""
+msgstr "Farinha de Milho"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/diamond/init.lua:7
@@ -2626,7 +2627,7 @@ msgstr "Cana de pesca"
 #: ../../tribes/wares/flour/init.lua:7
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Farinha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold/init.lua:7
@@ -2644,19 +2645,19 @@ msgstr "Minério de Ouro"
 #: ../../tribes/wares/gold_thread/init.lua:7
 msgctxt "ware"
 msgid "Gold Thread"
-msgstr ""
+msgstr "Fio de Ouro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/granite/init.lua:7
 msgctxt "ware"
 msgid "Granite"
-msgstr ""
+msgstr "Granito"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grape/init.lua:7
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Uvas"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grout/init.lua:7
@@ -2728,13 +2729,13 @@ msgstr ""
 #: ../../tribes/wares/marble/init.lua:7
 msgctxt "ware"
 msgid "Marble"
-msgstr ""
+msgstr "Mármore"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/marble_column/init.lua:7
 msgctxt "ware"
 msgid "Marble Column"
-msgstr ""
+msgstr "Coluna de Mármore"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meal/init.lua:7
@@ -2932,13 +2933,13 @@ msgstr "Trigo"
 #: ../../tribes/wares/wine/init.lua:7
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Vinho"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wool/init.lua:7
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Lã"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/armorsmith/init.lua:18
@@ -3454,37 +3455,37 @@ msgstr "Pedreiro"
 #: ../../tribes/workers/empire/carpenter/init.lua:18
 msgctxt "empire_worker"
 msgid "Carpenter"
-msgstr ""
+msgstr "Carpinteiro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkey/init.lua:19
 msgctxt "empire_worker"
 msgid "Donkey"
-msgstr ""
+msgstr "Burro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/donkeybreeder/init.lua:18
 msgctxt "empire_worker"
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Criador de burros"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/pigbreeder/init.lua:18
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr ""
+msgstr "Criador de Porcos"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/shepherd/init.lua:18
 msgctxt "empire_worker"
 msgid "Shepherd"
-msgstr ""
+msgstr "Ovinocultor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vinefarmer/init.lua:36
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr ""
+msgstr "Viticultor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vintner/init.lua:19
