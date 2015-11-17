@@ -64,7 +64,7 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 5,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry in the south to cut some stones and marble out of the rocks.]]) ..
+      listitem_bullet(_[[Build a quarry in the south to cut some granite and marble out of the rocks.]]) ..
       listitem_arrow(_[[These might be used for future buildings.]])
    ),
 }
