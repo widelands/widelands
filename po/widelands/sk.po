@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-09 08:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 15:41+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,7 +698,7 @@ msgstr "Hory: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:239
 msgid "Island mode"
-msgstr ""
+msgstr "Režim ostrova"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:252
 msgid "Low"
@@ -911,16 +911,16 @@ msgstr "Veľký"
 #: ../../src/logic/constructionsite.cc:77 ../../src/logic/immovable.cc:495
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "postavených %i %%"
 
 #: ../../src/logic/dismantlesite.cc:96
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% rozobraný"
+msgstr "rozobratých %u %%"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
-msgstr ""
+msgstr "Načítava sa grafika"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:142
@@ -934,7 +934,7 @@ msgstr "Prednačítava sa mapa"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "Načítava sa svet"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -981,7 +981,7 @@ msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočn
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr ""
+msgstr "Táto hra bola uložená pomocou staršej verzie Widelands a už sa nedá načítať, alebo ide o novšiu verziu, ktorú zatiaľ nie je možné spracovať."
 
 #: ../../src/logic/map.h:181
 msgctxt "author_name"
@@ -1940,42 +1940,42 @@ msgstr "Klient %1$s bude automaticky vyhodený, ak nepríde žiadna odpoveď do 
 #. console
 #: ../../src/profile/profile.cc:49
 msgid "true"
-msgstr ""
+msgstr "pravda"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/profile/profile.cc:53
 msgid "yes"
-msgstr ""
+msgstr "áno"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/profile/profile.cc:57
 msgid "on"
-msgstr ""
+msgstr "zap"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/profile/profile.cc:67
 msgid "false"
-msgstr ""
+msgstr "nepravda"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/profile/profile.cc:71
 msgid "no"
-msgstr ""
+msgstr "nie"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/profile/profile.cc:75
 msgid "off"
-msgstr ""
+msgstr "vyp"
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -2255,7 +2255,7 @@ msgstr "Nepodarilo sa pripojiť k hostiteľovi."
 #: ../../src/ui_fsmenu/internet_lobby.cc:439
 msgctxt "server_name"
 msgid "unnamed"
-msgstr ""
+msgstr "bez názvu"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."
@@ -3988,7 +3988,7 @@ msgstr "AI: Náhodný"
 
 #: ../../src/wui/playerdescrgroup.cc:187
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Kmeň sa nastaví náhodne."
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"

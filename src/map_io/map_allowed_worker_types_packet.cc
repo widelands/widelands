@@ -66,7 +66,7 @@ void MapAllowedWorkerTypesPacket::read
 
 					// Only allow workers that the player's tribe has.
 					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
-						const WareIndex& worker_index = static_cast<WareIndex>(i);
+						const DescriptionIndex& worker_index = static_cast<DescriptionIndex>(i);
 						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
 						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
 							player->allow_worker_type(worker_index, s->get_bool(worker_descr.name().c_str(), true));
@@ -103,7 +103,7 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
-		for (const WareIndex& worker_index : tribe.workers()) {
+		for (const DescriptionIndex& worker_index : tribe.workers()) {
 			if (!player->is_worker_type_allowed(worker_index)) {
 				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
 				section.set_bool(worker_descr->name().c_str(), false);

@@ -82,7 +82,7 @@ public:
 
 	const ConstructionsiteInformation & get_info() {return m_info;}
 
-	WaresQueue & waresqueue(WareIndex) override;
+	WaresQueue & waresqueue(DescriptionIndex) override;
 
 	void set_building(const BuildingDescr &) override;
 	const BuildingDescr & building() const {return *m_building;}
@@ -103,7 +103,7 @@ protected:
 		(InteractiveGameBase &, UI::Window * & registry) override;
 
 	static void wares_queue_callback
-		(Game &, WaresQueue *, WareIndex, void * data);
+		(Game &, WaresQueue *, DescriptionIndex, void * data);
 
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 

@@ -45,14 +45,14 @@ struct ItemWaresDisplay : UI::Panel {
 	void set_items_per_row(uint32_t nr);
 
 	void clear();
-	void add(bool worker, Widelands::WareIndex index);
+	void add(bool worker, Widelands::DescriptionIndex index);
 
 	void draw(RenderTarget &) override;
 
 private:
 	struct Item {
 		bool worker;
-		Widelands::WareIndex index;
+		Widelands::DescriptionIndex index;
 	};
 
 	void recalc_desired_size();

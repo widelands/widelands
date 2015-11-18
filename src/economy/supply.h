@@ -69,7 +69,7 @@ struct Supply : public Trackable {
 	 *
 	 * \note This is only valid if \ref has_storage returns \c false.
 	 */
-	virtual void get_ware_type(WareWorker & type, WareIndex & ware) const = 0;
+	virtual void get_ware_type(WareWorker & type, DescriptionIndex & ware) const = 0;
 
 	/**
 	 * Send this to the given warehouse.

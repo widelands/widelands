@@ -126,7 +126,7 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 	return *editor_immovable_categories_;
 }
 
-ResourceIndex World::safe_resource_index(const char* const resourcename) const {
+DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
@@ -134,7 +134,7 @@ ResourceIndex World::safe_resource_index(const char* const resourcename) const {
 	return result;
 }
 
-TerrainDescription& World::terrain_descr(TerrainIndex const i) const {
+TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 	return *terrains_->get_mutable(i);
 }
 
@@ -143,11 +143,11 @@ TerrainDescription const* World::get_ter(char const* const name) const {
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
 
-int32_t World::get_bob(char const* const l) const {
+DescriptionIndex World::get_bob(char const* const l) const {
 	return bobs_->get_index(l);
 }
 
-BobDescr const* World::get_bob_descr(uint16_t const index) const {
+BobDescr const* World::get_bob_descr(DescriptionIndex index) const {
 	return bobs_->get_mutable(index);
 }
 
@@ -159,28 +159,28 @@ int32_t World::get_nr_bobs() const {
 	return bobs_->size();
 }
 
-WareIndex World::get_immovable_index(const std::string& name) const {
+DescriptionIndex World::get_immovable_index(const std::string& name) const {
 	return immovables_->get_index(name);
 }
 
-WareIndex World::get_nr_immovables() const {
+DescriptionIndex World::get_nr_immovables() const {
 	return immovables_->size();
 }
 
-ImmovableDescr const* World::get_immovable_descr(WareIndex const index) const {
+ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) const {
 	return immovables_->get_mutable(index);
 }
 
-ResourceIndex World::get_resource(const char* const name) const {
+DescriptionIndex World::get_resource(const char* const name) const {
 	return resources_->get_index(name);
 }
 
-ResourceDescription const* World::get_resource(ResourceIndex const res) const {
+ResourceDescription const* World::get_resource(DescriptionIndex const res) const {
 	assert(res < resources_->size());
 	return resources_->get_mutable(res);
 }
 
-ResourceIndex World::get_nr_resources() const {
+DescriptionIndex World::get_nr_resources() const {
 	return resources_->size();
 }
 

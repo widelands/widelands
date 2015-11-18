@@ -86,11 +86,11 @@ TribeDescr::TribeDescr
 		wares_order_coords_.resize(tribes_.nrwares());
 		int columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
-			std::vector<WareIndex> column;
+			std::vector<DescriptionIndex> column;
 			std::vector<std::string> warenames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
 				try {
-					WareIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
+					DescriptionIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
 					if (has_ware(wareindex)) {
 						throw GameDataError("Duplicate definition of ware '%s'", warenames[rowindex].c_str());
 					}
@@ -111,11 +111,11 @@ TribeDescr::TribeDescr
 		workers_order_coords_.resize(tribes_.nrworkers());
 		columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
-			std::vector<WareIndex> column;
+			std::vector<DescriptionIndex> column;
 			std::vector<std::string> workernames = items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
 				try {
-					WareIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
+					DescriptionIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
 					if (has_worker(workerindex)) {
 						throw GameDataError("Duplicate definition of worker '%s'", workernames[rowindex].c_str());
 					}
@@ -140,7 +140,7 @@ TribeDescr::TribeDescr
 		std::vector<std::string> immovables = table.get_table("immovables")->array_entries<std::string>();
 		for (const std::string& immovablename : immovables) {
 			try {
-				WareIndex index = tribes_.safe_immovable_index(immovablename);
+				DescriptionIndex index = tribes_.safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
 					throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 				}
@@ -152,19 +152,19 @@ TribeDescr::TribeDescr
 
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
-				BuildingIndex index = tribes_.safe_building_index(buildingname);
+				DescriptionIndex index = tribes_.safe_building_index(buildingname);
 				if (has_building(index)) {
 					throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 				}
 				buildings_.push_back(index);
 
 				// Register construction materials
-				for (std::pair<WareIndex, uint8_t> build_cost : get_building_descr(index)->buildcost()) {
+				for (std::pair<DescriptionIndex, uint8_t> build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
 						construction_materials_.insert(build_cost.first);
 					}
 				}
-				for (std::pair<WareIndex, uint8_t> enhancement_cost :
+				for (std::pair<DescriptionIndex, uint8_t> enhancement_cost :
 					  get_building_descr(index)->enhancement_cost()) {
 					if (!is_construction_material(enhancement_cost.first)) {
 						construction_materials_.insert(enhancement_cost.first);
@@ -209,98 +209,98 @@ size_t TribeDescr::get_nrbuildings() const {return buildings_.size();}
 size_t TribeDescr::get_nrwares() const {return wares_.size();}
 size_t TribeDescr::get_nrworkers() const {return workers_.size();}
 
-const std::vector<BuildingIndex>& TribeDescr::buildings() const {return buildings_;}
-const std::set<WareIndex>& TribeDescr::wares() const {return wares_;}
-const std::set<WareIndex>& TribeDescr::workers() const {return workers_;}
+const std::vector<DescriptionIndex>& TribeDescr::buildings() const {return buildings_;}
+const std::set<DescriptionIndex>& TribeDescr::wares() const {return wares_;}
+const std::set<DescriptionIndex>& TribeDescr::workers() const {return workers_;}
 
-bool TribeDescr::has_building(const BuildingIndex& index) const {
+bool TribeDescr::has_building(const DescriptionIndex& index) const {
 	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();
 }
-bool TribeDescr::has_ware(const WareIndex& index) const {
+bool TribeDescr::has_ware(const DescriptionIndex& index) const {
 	return wares_.count(index) == 1;
 }
-bool TribeDescr::has_worker(const WareIndex& index) const {
+bool TribeDescr::has_worker(const DescriptionIndex& index) const {
 	return workers_.count(index) == 1;
 }
-bool TribeDescr::has_immovable(int index) const {
+bool TribeDescr::has_immovable(const DescriptionIndex& index) const {
 	return immovables_.count(index) == 1;
 }
-bool TribeDescr::is_construction_material(const WareIndex& index) const {
+bool TribeDescr::is_construction_material(const DescriptionIndex& index) const {
 	return construction_materials_.count(index) == 1;
 }
 
-BuildingIndex TribeDescr::building_index(const std::string & buildingname) const {
+DescriptionIndex TribeDescr::building_index(const std::string & buildingname) const {
 	return tribes_.building_index(buildingname);
 }
 
-WareIndex TribeDescr::immovable_index(const std::string & immovablename) const {
+DescriptionIndex TribeDescr::immovable_index(const std::string & immovablename) const {
 	return tribes_.immovable_index(immovablename);
 }
-WareIndex TribeDescr::ware_index(const std::string & warename) const {
+DescriptionIndex TribeDescr::ware_index(const std::string & warename) const {
 	return tribes_.ware_index(warename);
 }
-WareIndex TribeDescr::worker_index(const std::string & workername) const {
+DescriptionIndex TribeDescr::worker_index(const std::string & workername) const {
 	return tribes_.worker_index(workername);
 }
 
-BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
+DescriptionIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
 	return tribes_.safe_building_index(buildingname);
 }
 
-WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
+DescriptionIndex TribeDescr::safe_ware_index(const std::string & warename) const {
 	return tribes_.safe_ware_index(warename);
 }
-WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
+DescriptionIndex TribeDescr::safe_worker_index(const std::string& workername) const {
 	return tribes_.safe_worker_index(workername);
 }
 
-WareDescr const * TribeDescr::get_ware_descr(const WareIndex& index) const {
+WareDescr const * TribeDescr::get_ware_descr(const DescriptionIndex& index) const {
 	return tribes_.get_ware_descr(index);
 }
-WorkerDescr const* TribeDescr::get_worker_descr(const WareIndex& index) const {
+WorkerDescr const* TribeDescr::get_worker_descr(const DescriptionIndex& index) const {
 	return tribes_.get_worker_descr(index);
 }
 
-BuildingDescr const * TribeDescr::get_building_descr(const BuildingIndex& index) const {
+BuildingDescr const * TribeDescr::get_building_descr(const DescriptionIndex& index) const {
 	return tribes_.get_building_descr(index);
 }
-ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
+ImmovableDescr const * TribeDescr::get_immovable_descr(const DescriptionIndex& index) const {
 	return tribes_.get_immovable_descr(index);
 }
 
-WareIndex TribeDescr::builder() const {
+DescriptionIndex TribeDescr::builder() const {
 	assert(tribes_.worker_exists(builder_));
 	return builder_;
 }
-WareIndex TribeDescr::carrier() const {
+DescriptionIndex TribeDescr::carrier() const {
 	assert(tribes_.worker_exists(carrier_));
 	return carrier_;
 }
-WareIndex TribeDescr::carrier2() const {
+DescriptionIndex TribeDescr::carrier2() const {
 	assert(tribes_.worker_exists(carrier2_));
 	return carrier2_;
 }
-WareIndex TribeDescr::geologist() const {
+DescriptionIndex TribeDescr::geologist() const {
 	assert(tribes_.worker_exists(geologist_));
 	return geologist_;
 }
-WareIndex TribeDescr::soldier() const {
+DescriptionIndex TribeDescr::soldier() const {
 	assert(tribes_.worker_exists(soldier_));
 	return soldier_;
 }
-WareIndex TribeDescr::ship() const {
+DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
 }
-BuildingIndex TribeDescr::headquarters() const {
+DescriptionIndex TribeDescr::headquarters() const {
 	assert(tribes_.building_exists(headquarters_));
 	return headquarters_;
 }
-BuildingIndex TribeDescr::port() const {
+DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
-const std::vector<WareIndex>& TribeDescr::worker_types_without_cost() const {
+const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() const {
 	return worker_types_without_cost_;
 }
 
@@ -337,10 +337,10 @@ const RoadTextures& TribeDescr::road_textures() const {
 Find the best matching indicator for the given amount.
 ==============
 */
-WareIndex TribeDescr::get_resource_indicator
+DescriptionIndex TribeDescr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const {
 	if (!res || !amount) {
-		WareIndex idx = immovable_index("resi_none");
+		DescriptionIndex idx = immovable_index("resi_none");
 		if (!has_immovable(idx)) {
 			throw GameDataError("There is no resource indicator for resi_none!");
 		}
@@ -398,10 +398,10 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 	if (need_resize) {
 		WaresOrder new_wares_order;
 		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::WareIndex>());
-			for (std::vector<Widelands::WareIndex>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
+			new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
+			for (std::vector<Widelands::DescriptionIndex>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
 				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::WareIndex>());
+					new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
 				}
 				new_wares_order.rbegin()->push_back(*it2);
 				wares_order_coords_[*it2].first = new_wares_order.size() - 1;
@@ -419,9 +419,9 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
   * Helper functions
   */
 
-WareIndex TribeDescr::add_special_worker(const std::string& workername) {
+DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
-		WareIndex worker = tribes_.safe_worker_index(workername);
+		DescriptionIndex worker = tribes_.safe_worker_index(workername);
 		if (!has_worker(worker)) {
 			throw GameDataError("This tribe doesn't have the worker '%s'", workername.c_str());
 		}
@@ -431,9 +431,9 @@ WareIndex TribeDescr::add_special_worker(const std::string& workername) {
 	}
 }
 
-BuildingIndex TribeDescr::add_special_building(const std::string& buildingname) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname) {
 	try {
-		BuildingIndex building = tribes_.safe_building_index(buildingname);
+		DescriptionIndex building = tribes_.safe_building_index(buildingname);
 		if (!has_building(building)) {
 			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
 		}

@@ -367,7 +367,7 @@ void TrainingSite::request_soldier_callback
 #else
 	 Request         &,
 #endif
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

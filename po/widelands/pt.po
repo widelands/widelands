@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-09 08:43+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-10 18:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../src/ai/computer_player.cc:40
 msgctxt "ai_name"
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:120
@@ -260,7 +260,7 @@ msgstr "Sem Nome"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
 msgctxt "map_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../../src/editor/map_generator.cc:792
 msgid "Random Player"
@@ -984,7 +984,7 @@ msgstr ""
 #: ../../src/logic/map.h:181
 msgctxt "author_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
@@ -2863,7 +2863,7 @@ msgstr "Fechado"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:197
 msgctxt "game_state"
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../../src/ui_fsmenu/options.cc:116 ../../src/ui_fsmenu/options.cc:470
 msgid "Advanced Options"
@@ -3676,7 +3676,7 @@ msgstr ""
 #: ../../src/wui/game_summary.cc:196
 msgctxt "player_won"
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../../src/wui/game_summary.cc:205
 msgid "You won!"
