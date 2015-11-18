@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-16 18:56+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-11-17 08:09+0000\n"
+"PO-Revision-Date: 2015-11-17 09:06+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -433,7 +433,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "„Eine neue Kriegeraxt weckt das Beste in dem, der sie trägt – oder das Schlimmste in dem, der sie fertigt.“"
+msgstr "„Die neue Axt eines Kriegers weckt das Beste in dem, der sie trägt – oder das Schlimmste in dem, der sie fertigt.“"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -3053,7 +3053,7 @@ msgstr "Der Jäger bringt gutes Fleisch zu den Siedlern."
 #: ../../tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr "Arbeitet tief in den Minen, um Kohle, Eisen, Gold oder wertvolle Gesteine zu schürfen."
+msgstr "Arbeitet tief in den Minen, um Kohle, Eisen, Gold oder wertvolles Gestein zu schürfen."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../tribes/workers/atlanteans/scout/helptexts.lua:3
