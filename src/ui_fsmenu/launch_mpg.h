@@ -66,6 +66,7 @@ private:
 	void select_saved_game();
 	void win_condition_clicked();
 	void win_condition_update();
+	void win_condition_load();
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();

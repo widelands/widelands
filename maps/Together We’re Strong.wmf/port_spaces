@@ -1,0 +1,11 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
+[global]
+packet_version="1"
+number_of_port_spaces="4"
+
+[port_spaces]
+0="37 75"
+1="150 79"
+2="38 103"
+3="139 105"

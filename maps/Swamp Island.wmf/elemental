@@ -1,13 +1,12 @@
-# Automatically created by Widelands bzr6709[widelands] (Debug)
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
 [global]
 packet_version="1"
 map_w="144"
 map_h="112"
 nr_players="3"
-world="blackland"
 name=_"Swamp Island"
 author="Nasenbaer"
 descr=_"It smells like swamp, it looks like swamp and it is a swamp. But it is the place you were born and where you’ve lived your whole life. If you don’t want to lose it, defend it!"
 hint=
-tags="official,unbalanced,seafaring"
+tags="artifacts,official,seafaring,unbalanced"

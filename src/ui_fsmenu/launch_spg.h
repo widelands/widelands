@@ -66,6 +66,7 @@ private:
 	void select_map();
 	void win_condition_clicked();
 	void win_condition_update();
+	void win_condition_load();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
