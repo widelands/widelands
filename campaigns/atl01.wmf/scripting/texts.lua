@@ -190,7 +190,7 @@ first_briefing_messages = {
       title = _"Loftomor Speaks",
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of logs alone. Stronger buildings also need stone, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly.]]))
+         _([[May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of logs alone. Stronger buildings also need granite, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly.]]))
          .. new_objectives(obj_ensure_build_wares_production)
    },
    {

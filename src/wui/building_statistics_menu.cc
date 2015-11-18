@@ -91,16 +91,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		unproductive_label_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the first part of productivity with input field */
-			/** TRANSLATORS: Building statistics window -  'Low Production: <input>%' */
-			_("Low Production: "),
+			/** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
+			_("Low Productivity "),
 			UI::Align_BottomLeft),
 		unproductive_percent_(
 			&unproductive_box_, 0, 0, 35, kLabelHeight, g_gr->images().get("pics/but1.png")),
 		unproductive_label2_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the second part of productivity with input field */
-			/** TRANSLATORS: Building statistics window -  'Low Production: <input>%' */
-			_("%"),
+			/** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
+			_("%:"),
 			UI::Align_BottomLeft),
 		no_owned_label_(&navigation_panel_,
 							 get_inner_w() - 2 * kButtonRowHeight - kMargin,
@@ -271,6 +271,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_percent_.set_max_length(4);
 	unproductive_label2_.set_size(unproductive_label2_.get_w(), kButtonRowHeight);
 	unproductive_box_.add(&unproductive_label_, UI::Align_Left);
+	unproductive_box_.add_space(2);
 	unproductive_box_.add(&unproductive_percent_, UI::Align_Left);
 	unproductive_box_.add(&unproductive_label2_, UI::Align_Left);
 	unproductive_box_.set_size(
@@ -688,7 +689,7 @@ void BuildingStatisticsMenu::update() {
 																											0);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Production: "));
+				unproductive_label_.set_text(_("Low Productivity "));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
 				unproductive_percent_.set_visible(true);
