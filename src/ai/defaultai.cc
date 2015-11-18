@@ -410,17 +410,17 @@ void DefaultAI::late_initialization() {
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
 
 	wares.resize(game().tribes().nrwares());
-	for (WareIndex i = 0; i < static_cast<WareIndex>(game().tribes().nrwares()); ++i) {
+	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
 		wares.at(i).preciousness_ = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
 	}
 
-	const BuildingIndex& nr_buildings = game().tribes().nrbuildings();
+	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
 
 
 	// Collect information about the different buildings that our tribe can have
-	for (BuildingIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
 		const BuildingDescr& bld = *tribe_->get_building_descr(building_index);
 		if (!tribe_->has_building(building_index) && bld.type() != MapObjectType::MILITARYSITE) {
 			continue;
@@ -488,7 +488,7 @@ void DefaultAI::late_initialization() {
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			for (const WareIndex& temp_output : prod.output_ware_types()) {
+			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs_.push_back(temp_output);
 			}
 
@@ -524,34 +524,34 @@ void DefaultAI::late_initialization() {
 
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
-			const BuildingIndex enhancement = bld.enhancement();
+			const DescriptionIndex enhancement = bld.enhancement();
 			if (enhancement != INVALID_INDEX && bo.type == BuildingObserver::PRODUCTIONSITE) {
-				std::unordered_set<WareIndex> enh_outputs;
+				std::unordered_set<DescriptionIndex> enh_outputs;
 				const ProductionSiteDescr& enh_prod
 					=
 					dynamic_cast<const ProductionSiteDescr&>(*tribe_->get_building_descr(enhancement));
 
 				// collecting wares that are produced in enhanced building
-				for (const WareIndex& ware : enh_prod.output_ware_types()) {
+				for (const DescriptionIndex& ware : enh_prod.output_ware_types()) {
 					enh_outputs.insert(ware);
 				}
 				// now testing outputs of current building
 				// and comparing
 				bo.upgrade_substitutes_ = true;
-				for (WareIndex ware : bo.outputs_) {
+				for (DescriptionIndex ware : bo.outputs_) {
 					if (enh_outputs.count(ware) == 0) {
 						bo.upgrade_substitutes_ = false;
 						break;
 					}
 				}
 
-				std::unordered_set<WareIndex> cur_outputs;
+				std::unordered_set<DescriptionIndex> cur_outputs;
 				// collecting wares that are produced in enhanced building
-				for (const WareIndex& ware : bo.outputs_) {
+				for (const DescriptionIndex& ware : bo.outputs_) {
 						cur_outputs.insert(ware);
 					}
 				bo.upgrade_extends_ = false;
-				for (WareIndex ware : enh_outputs) {
+				for (DescriptionIndex ware : enh_outputs) {
 					if (cur_outputs.count(ware) == 0) {
 						bo.upgrade_extends_ = true;
 						break;
@@ -561,7 +561,7 @@ void DefaultAI::late_initialization() {
 
 			// now we identify producers of critical build materials
 			// hardwood now
-			for (WareIndex ware : bo.outputs_) {
+			for (DescriptionIndex ware : bo.outputs_) {
 				// iterating over wares subsitutes
 				if (tribe_->ware_index("wood")     == ware ||
 				    tribe_->ware_index("blackwood") == ware ||
@@ -1484,7 +1484,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// we must calculate wood policy
-	const WareIndex wood_index = tribe_->safe_ware_index("log");
+	const DescriptionIndex wood_index = tribe_->safe_ware_index("log");
 	// stocked wood is to be in some propotion to productionsites and
 	// constructionsites (this proportion is bit artifical, or we can say
 	// it is proportion to the size of economy). Plus some positive 'margin'
@@ -1563,7 +1563,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
-			WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
+			DescriptionIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 			// shortage = less then 3 items in warehouses
 			if (get_warehoused_stock(wt) < 3) {
 				bo.build_material_shortage_ = true;
@@ -3003,14 +3003,14 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// c) yet there are buildings that might be upgraded, even when
 	// there is no second buiding of the kind (flag upgrade_substitutes_)
 
-	const BuildingIndex enhancement = site.site->descr().enhancement();
+	const DescriptionIndex enhancement = site.site->descr().enhancement();
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
 		(site.bo->cnt_built_ - site.bo->unoccupied_count_ > 1 ||
 		((site.bo->upgrade_substitutes_ || site.bo->upgrade_extends_) &&
 	    gametime > 45 * 60 * 1000 &&
 	    gametime > site.built_time_ + 20 * 60 * 1000))) {
 
-		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
+		DescriptionIndex enbld = INVALID_INDEX;  // to get rid of this
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions too fast
@@ -3569,7 +3569,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	const BuildingIndex enhancement = site.site->descr().enhancement();
+	const DescriptionIndex enhancement = site.site->descr().enhancement();
 	bool has_upgrade = false;
 	if (enhancement != INVALID_INDEX) {
 		if (player_->is_building_type_allowed(enhancement)) {
@@ -3658,7 +3658,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 // this count ware as hints
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
-	WareIndex wt(hintoutput);
+	DescriptionIndex wt(hintoutput);
 	for (EconomyObserver* observer : economies) {
 		// Don't check if the economy has no warehouse.
 		if (observer->economy.warehouses().empty()) {
@@ -3686,7 +3686,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	bo.max_needed_preciousness_ = 0;
 
 	for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-		WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
+		DescriptionIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 
 		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name()) / 3;
 		// at least  1
@@ -3726,7 +3726,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// To skip unnecessary calculation, we calculate this only if we have 0 count of the buildings
 	bool has_substitution_building = false;
 	if (bo.total_count() == 0 && bo.upgrade_substitutes_ && bo.type == BuildingObserver::PRODUCTIONSITE) {
-		const BuildingIndex enhancement = bo.desc->enhancement();
+		const DescriptionIndex enhancement = bo.desc->enhancement();
 		BuildingObserver& en_bo
 			= get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
 		if (en_bo.total_count() > 0) {
@@ -3964,7 +3964,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 			}
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-				WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
+				DescriptionIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 				if (count > observer->economy.stock_ware(wt)) {
 					count = observer->economy.stock_ware(wt);
 				}
@@ -3977,7 +3977,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(WareIndex wt) {
+uint32_t DefaultAI::get_stocklevel(DescriptionIndex wt) {
 	uint32_t count = 0;
 
 	for (EconomyObserver* observer : economies) {
@@ -3993,7 +3993,7 @@ uint32_t DefaultAI::get_stocklevel(WareIndex wt) {
 
 // counts produced output in warehouses (only)
 // perhaps it will be able to replace get_stocklevel
-uint32_t DefaultAI::get_warehoused_stock(WareIndex wt) {
+uint32_t DefaultAI::get_warehoused_stock(DescriptionIndex wt) {
 	uint32_t count = 0;
 
 	for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
@@ -4036,7 +4036,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
-	const BuildingIndex enhancement = ts->descr().enhancement();
+	const DescriptionIndex enhancement = ts->descr().enhancement();
 
 	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    (ts_basic_const_count_ + ts_advanced_const_count_) == 0 && ts_advanced_count_ > 0) {
@@ -5416,8 +5416,8 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	}
 
 	for (EconomyObserver* observer : economies) {
-		WareIndex nritems = player_->egbase().tribes().nrwares();
-		for (Widelands::WareIndex id = 0; id < nritems; ++id) {
+		DescriptionIndex nritems = player_->egbase().tribes().nrwares();
+		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
 			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
@@ -5531,7 +5531,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	                                            "meat"};
 	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
-		WareIndex const index = tribe_->ware_index(materials.at(j));
+		DescriptionIndex const index = tribe_->ware_index(materials.at(j));
 		if (!tribe_->has_ware(index)) {
 			continue;
 		}

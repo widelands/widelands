@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-10 08:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-12 17:40+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,28 +84,41 @@ msgid ""
 msgstr "S'està desmantellant l'edifici, recuperant part dels materials de construcció i enviant-los als magatzems del clan."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Forges shields that are used for training soldiers’ defense in the "
+"labyrinth."
+msgstr "Forja escuts que s'usen per entrenar el nivell de defensa dels soldats en els laberints."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/bakery/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid "Bakes bread to feed the scouts and miners and to train soldiers."
+msgstr "Forneja pa per alimentar els exploradors i miners i per entrenar els soldats."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
 msgstr "Sembra i recol·lecta negrarrel."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Digs coal out of the ground in mountain terrain."
-msgstr "Extreu carbó del terra en terreny muntanyós."
+#: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
+msgctxt "building"
+msgid "Burns logs into charcoal."
+msgstr "Crema troncs per produir carbó vegetal."
 
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:14
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:14
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:14
-msgctxt "barbarians_building"
-msgid "Digs coal out of the ground in mountain terrain."
-msgstr "Extreu carbó del terra en terreny muntanyós."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/coalmine/helptexts.lua:16
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Extreu carbó del terra en terreny muntanyós."
 
@@ -120,6 +133,18 @@ msgstr "Talla pedres precioses de roques en terreny muntanyós."
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
 msgstr "Sembra i recol·lecta el panís."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
+msgctxt "building"
+msgid "Breeds fish."
+msgstr "Cria peixos."
+
+#. TRANSLATORS: Helptext for a worker: Fish Breeder
+#: ../../tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Breeds fish."
+msgstr "Cria peixos."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -154,19 +179,9 @@ msgstr "La casa del pescador necessita accés a aigua amb peixos dins la seva à
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Plants trees in the surrounding area."
-msgstr "Planta arbres a l'àrea de treball."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:14
-msgctxt "barbarians_building"
-msgid "Plants trees in the surrounding area."
-msgstr "Planta arbres a l'àrea de treball."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Plants trees in the surrounding area."
 msgstr "Planta arbres a l'àrea de treball."
 
@@ -194,22 +209,12 @@ msgstr "Teixeix fil d'or a partir de lingots d'or."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr "Extreu mineral d'or del terra en terreny muntanyós."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:13
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:13
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:13
-msgctxt "barbarians_building"
-msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr "Extreu mineral d'or del terra en terreny muntanyós."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/goldmine/helptexts.lua:16
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr "Extreu mineral d'or del terra en terreny muntanyós."
 
@@ -231,19 +236,9 @@ msgstr "Cria forts cavalls atlants per ajudar al sistema de transport,"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Hunts animals to produce meat."
-msgstr "Caça animals per produir carn."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:13
-msgctxt "barbarians_building"
-msgid "Hunts animals to produce meat."
-msgstr "Caça animals per produir carn."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Hunts animals to produce meat."
 msgstr "Caça animals per produir carn."
 
@@ -261,24 +256,30 @@ msgstr "El caçador que viu en aquesta casa necessita animals per caçar dins la
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:13
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:13
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:13
-msgctxt "barbarians_building"
+#: ../../tribes/buildings/productionsites/empire/ironmine/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/helptexts.lua:16
+msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../tribes/buildings/productionsites/empire/ironmine/helptexts.lua:16
-#: ../../tribes/buildings/productionsites/empire/ironmine_deep/helptexts.lua:16
-msgctxt "empire_building"
-msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
+#: ../../tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"respectively."
+msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de panís, respectivament."
+
+#. TRANSLATORS: Helptext for a worker: Miller
+#: ../../tribes/workers/atlanteans/miller/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid ""
+"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"respectively."
+msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de panís, respectivament."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -311,56 +312,101 @@ msgid "The quarry needs rocks to cut within the work area."
 msgstr "La pedrera necessita roques per tallar dins la seva àrea de treball."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/sawmill/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/sawmill/helptexts.lua:16
+msgctxt "building"
+msgid "Saws logs to produce planks."
+msgstr "Serra fusta per obtenir-ne taulons."
+
+#. TRANSLATORS: Helptext for a worker: Sawyer
+#: ../../tribes/workers/atlanteans/sawyer/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Saws logs to produce planks."
+msgstr "Serra fusta per obtenir-ne taulons."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
+msgctxt "building"
+msgid "Explores unknown territory."
+msgstr "Explora territoris desconeguts."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/shipyard/helptexts.lua:16
+msgctxt "building"
+msgid ""
+"Constructs ships that are used for overseas colonization and for trading "
+"between ports."
+msgstr "Construeix vaixells per comerciar i per a la colonització per la via marítima a través de ports."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr "Redueix els minerals de ferro i d'or i n'obté, respectivament, ferro i or."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
-msgctxt "barbarians_building"
+#: ../../tribes/buildings/productionsites/empire/smelting_works/helptexts.lua:16
+msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
 msgstr "Redueix els minerals de ferro i d'or i n'obté, respectivament, ferro i or."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../tribes/buildings/productionsites/empire/smelting_works/helptexts.lua:16
-msgctxt "empire_building"
-msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr "Redueix els minerals de ferro i d'or i n'obté, respectivament, ferro i or."
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Smokes meat and fish to feed the scouts and miners and to train soldiers in "
+"the dungeon."
+msgstr "Fuma carn i peix per alimentar els exploradors i els miners. També es podrà emprar el peix i la carn fumada per entrenar els soldats a les masmorres."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/helptexts.lua:16
+msgctxt "building"
+msgid "Breeds spiders for silk."
+msgstr "Cria aranyes per aconseguir-ne seda."
+
+#. TRANSLATORS: Helptext for a worker: Spider Breeder
+#: ../../tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Breeds spiders for silk."
+msgstr "Cria aranyes per aconseguir-ne seda."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/helptexts.lua:16
+msgctxt "building"
+msgid "Forges all the tools that your workers need."
+msgstr "Forja totes les eines que necessiten els vostres treballadors."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Forges tridents to equip the soldiers and to train their attack in the "
+"dungeon."
+msgstr "Forja tridents per equipar els soldats i entrenar el seu nivell d'atac en les masmorres."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid ""
+"Weaves spidercloth for buildings and ships’ sails, and tabards to equip and "
+"train the soldiers."
+msgstr "Teixeix tela de seda d'aranya per construir les veles dels vaixells i tabards per equipar i entrenar els soldats."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Draws water out of the deep."
-msgstr "Extrau aigua del sòl"
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
-msgctxt "barbarians_building"
-msgid "Draws water out of the deep."
-msgstr "Extrau aigua del sòl"
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/well/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Draws water out of the deep."
-msgstr "Extrau aigua del sòl"
+msgstr "Extrau aigua del sòl."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:13
-msgctxt "barbarians_building"
-msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
 
@@ -466,6 +512,27 @@ msgid ""
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot elaborar una pita cada %s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Prepares rations for scouts and rations, snacks and meals to feed all "
+"miners."
+msgstr "Elabora racions per alimentar els exploradors i racions, aperitius i àpats per alimentar els miners."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:16
+#: ../../tribes/buildings/productionsites/empire/brewery/helptexts.lua:16
+msgctxt "building"
+msgid "Produces beer to keep the miners strong and happy."
+msgstr "Produeix cervesa per mantenir els miners forts i feliços."
+
+#. TRANSLATORS: Helptext for a worker: Brewer
+#: ../../tribes/workers/barbarians/brewer/helptexts.lua:3
+msgctxt "barbarians_worker"
+msgid "Produces beer to keep the miners strong and happy."
+msgstr "Produeix cervesa per mantenir els miners forts i feliços."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
@@ -523,13 +590,8 @@ msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar carbó és del
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
-msgctxt "barbarians_building"
-msgid "Sows and harvests wheat."
-msgstr "Sembra i recol·lecta blat."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:16
-msgctxt "empire_building"
+msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Sembra i recol·lecta blat."
 
@@ -676,6 +738,14 @@ msgid ""
 "average."
 msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir granit cada %s de mitjana."
 
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Forges helmets that are used for training soldiers’ health in the training "
+"camp."
+msgstr "Forja cascos que s'usen per entrenar el nivell de salut dels soldats en els camps d'entrenament."
+
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:3
 msgctxt "barbarians_building"
@@ -701,6 +771,14 @@ msgstr "El caçador que viu en aquesta cabana necessita animals per caçar dins 
 msgctxt "barbarians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr "El caçador fa una pausa de %s abans de tornar a treballar de nou."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
+msgctxt "building"
+msgid ""
+"Prepares rations for scouts and rations and snacks to feed the miners in the"
+" basic and deep mines."
+msgstr "Elabora racions per als exploradors i miners de les mines bàsiques. També elabora aperitius per als miners de mines profundes."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:3
@@ -828,14 +906,6 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr "Inscripció de l'entrada de l'ara ruïnosa Vella Forja de Harradsheim, la ferreria més antiga."
-
-#. TRANSLATORS: Purpose helptext for a building
-#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:13
-msgctxt "barbarians_building"
-msgid ""
-"Makes bread paddles, felling axes, fire tongs, fishing rods, hammers, "
-"hunting spears, kitchen tools, picks, scythes and shovels."
-msgstr "Fabrica eines com ara pales de forner, destrals per talar arbres, tenalles, canyes de pescar, martells, llances de caça, estris de cuina, pics, dalles o pales."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
@@ -965,6 +1035,18 @@ msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
 msgstr "Un camp de juncs pot produir un feix de juncs cada %s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
+msgctxt "building"
+msgid "Prepares rations to feed the scouts and miners."
+msgstr "Elabora racions per alimentar els exploradors i els miners."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/tavern/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Prepares rations to feed the scouts and miners."
+msgstr "Elabora racions per alimentar els exploradors i els miners."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
@@ -1014,6 +1096,28 @@ msgid "The carrier needs %s to get one bucket full of water."
 msgstr "El transportista necessita %s per aconseguir un poal ple d'aigua."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid ""
+"Hardens wood by fire into blackwood, which is used to construct robust "
+"buildings."
+msgstr "Endureix la fusta dels troncs amb un procediment amb foc. Aquesta fusta endurida serveix per construir edificis més robustos."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Forges armor and helmets that are used for training soldiers’ health in the "
+"training camp."
+msgstr "Forja cascos i armadures que s'usen per entrenar el nivell de salut dels soldats en els camps d'entrenament."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/bakery/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Bakes bread for soldiers and miners alike."
+msgstr "Forneja pa per als soldats i els miners."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
 msgctxt "empire_building"
 msgid ""
@@ -1029,6 +1133,14 @@ msgid ""
 "system."
 msgstr "Cria ases per ajudar al sistema de transport."
 
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/inn/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Prepares rations for scouts and rations and snacks to feed the miners in all"
+" mines."
+msgstr "Elabora racions per alimentar els exploradors i aperitius per alimentar els miners."
+
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
 msgctxt "empire_building"
@@ -1043,6 +1155,24 @@ msgid "Carves marble and granite out of the rock in mountain terrain."
 msgstr "Talla marbre i granit de les roques de la muntanya."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:16
+msgctxt "building"
+msgid "Grinds wheat to produce flour."
+msgstr "Mol el blat per produir-ne farina."
+
+#. TRANSLATORS: Helptext for a worker: Miller
+#: ../../tribes/workers/empire/miller/helptexts.lua:3
+msgctxt "empire_worker"
+msgid "Grinds wheat to produce flour."
+msgstr "Mol el blat per produir-ne farina."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Breeds pigs for their meat."
+msgstr "Cria porcs per obtenir-ne carn."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
@@ -1055,16 +1185,48 @@ msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
 msgstr "Talla blocs de granit i marbre de les roques properes."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/sheepfarm/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Keeps sheep for their wool."
+msgstr "Cuida ovelles per obtenir-ne llana."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/stonemasons_house/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Carves marble columns out of marble."
+msgstr "Talla magnífiques columnes de marbre a partir de peces de marbre en brut."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Plants grapevines and harvests grapes."
 msgstr "Planta ceps i en recull el raïm produït."
 
 #. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/helptexts.lua:16
+msgctxt "empire_building"
+msgid ""
+"Forges spears to equip the soldiers and to train their attack in the "
+"training camp."
+msgstr "Forja llances per equipar els soldats i entrenar el seu nivell d'atac en el camp d'entrenament."
+
+#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Weaves cloth out of wool."
 msgstr "Teixeix tela amb llana."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../tribes/buildings/productionsites/empire/winery/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Produces wine."
+msgstr "Produeix vi."
+
+#. TRANSLATORS: Helptext for a worker: Brewer
+#: ../../tribes/workers/empire/vintner/helptexts.lua:3
+msgctxt "empire_worker"
+msgid "Produces wine."
+msgstr "Produeix vi."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:17
@@ -2416,13 +2578,13 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "La serra l'empra el serrador, el llenyataire i el fabricant d'eines. Es fabrica al taller d'eines."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
 msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
-msgstr ""
+msgstr "El fuster necessita una serra. Es fabrica al taller d'eines."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../tribes/wares/scythe/helptexts.lua:4
@@ -2457,7 +2619,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr ""
+msgstr "L'escut avançat l'utilitzen els millors soldats dels atlants. El produeix el taller d'armadures i s'usa al laberint, juntament amb menjar, per entrenar el nivell de defensa dels soldats de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../tribes/wares/shield_steel/helptexts.lua:4
@@ -2809,12 +2971,6 @@ msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
 msgstr "Sembra i recol·lecta panís."
 
-#. TRANSLATORS: Helptext for a worker: Fish Breeder
-#: ../../tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
-msgctxt "atlanteans_worker"
-msgid "Breeds fish."
-msgstr "Cria peixos."
-
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -2883,25 +3039,11 @@ msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
 msgstr "El caçador aconsegueix carn fresca per als atlants."
 
-#. TRANSLATORS: Helptext for a worker: Miller
-#: ../../tribes/workers/atlanteans/miller/helptexts.lua:3
-msgctxt "atlanteans_worker"
-msgid ""
-"Mills blackroot and corn to produce blackroot flour and corn flour, "
-"respectively."
-msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de panís, respectivament."
-
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
 msgstr "Treballa en mines profundes per obtenir carbó, pedres precioses o minerals d'or o de ferro."
-
-#. TRANSLATORS: Helptext for a worker: Sawyer
-#: ../../tribes/workers/atlanteans/sawyer/helptexts.lua:3
-msgctxt "atlanteans_worker"
-msgid "Saws logs to produce planks."
-msgstr "Serra fusta per obtenir-ne taulons."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../tribes/workers/atlanteans/scout/helptexts.lua:3
@@ -2984,12 +3126,6 @@ msgctxt "empire_worker"
 msgid "Defend and Conquer!"
 msgstr "Defenseu i conqueriu!"
 
-#. TRANSLATORS: Helptext for a worker: Spider Breeder
-#: ../../tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
-msgctxt "atlanteans_worker"
-msgid "Breeds spiders for silk."
-msgstr "Cria aranyes per aconseguir-ne seda."
-
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../tribes/workers/atlanteans/toolsmith/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -3069,12 +3205,6 @@ msgstr "Forneja pita per als miners."
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Produeix armes per als soldats i eines per als treballadors."
-
-#. TRANSLATORS: Helptext for a worker: Brewer
-#: ../../tribes/workers/barbarians/brewer/helptexts.lua:3
-msgctxt "barbarians_worker"
-msgid "Produces beer to keep the miners strong and happy."
-msgstr "Produeix cervesa per mantenir els miners forts i feliços."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../tribes/workers/barbarians/brewer_master/helptexts.lua:3
@@ -3188,12 +3318,6 @@ msgid ""
 "farm."
 msgstr "Els ases ajuden a transportar béns en camins molt transitats. Es crien en granges d'ases."
 
-#. TRANSLATORS: Helptext for a worker: Miller
-#: ../../tribes/workers/empire/miller/helptexts.lua:3
-msgctxt "empire_worker"
-msgid "Grinds wheat to produce flour."
-msgstr "Mol el blat per produir-ne farina."
-
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../tribes/workers/empire/miner/helptexts.lua:3
@@ -3219,12 +3343,6 @@ msgstr "Cria ovelles."
 msgctxt "empire_worker"
 msgid "Grows grapevines."
 msgstr "Cultiva ceps."
-
-#. TRANSLATORS: Helptext for a worker: Brewer
-#: ../../tribes/workers/empire/vintner/helptexts.lua:3
-msgctxt "empire_worker"
-msgid "Produces wine."
-msgstr "Produeix vi."
 
 #. TRANSLATORS: Helptext for a worker: Weaver
 #: ../../tribes/workers/empire/weaver/helptexts.lua:3

@@ -358,7 +358,7 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
+		Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int initial_amount = m_coords.field->get_initial_res_amount();
 

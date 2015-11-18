@@ -856,7 +856,7 @@ WalkingDir Ship::get_scouting_direction() {
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
 	assert(m_expedition);
-	BuildingIndex port_idx = get_owner()->tribe().port();
+	DescriptionIndex port_idx = get_owner()->tribe().port();
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
@@ -1098,12 +1098,12 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 					if (!(egbase.tribes().tribe_exists(tribe_name))) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
 					}
-					const WareIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
+					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
 					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
 					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
 				} else {
 					std::string name = fr.c_string();
-					const WareIndex& ship_index = egbase.tribes().safe_ship_index(name);
+					const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
 					descr = egbase.tribes().get_ship_descr(ship_index);
 				}
 				loader->init(egbase, mol, descr->create_object());

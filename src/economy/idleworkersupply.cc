@@ -76,7 +76,7 @@ bool IdleWorkerSupply::has_storage() const
 	return m_worker.get_transfer();
 }
 
-void IdleWorkerSupply::get_ware_type(WareWorker & type, WareIndex & ware) const
+void IdleWorkerSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware) const
 {
 	type = wwWORKER;
 	ware = m_worker.descr().worker_index();

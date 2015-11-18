@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-08 15:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 16:07+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,17 +21,17 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Postavte vojenský zrub"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
-msgstr ""
+msgstr "Vojenský zrub"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Postavte vojenský zrub na symbole červeného domu na východnej strane lesa, napravo od vašej dočasnej základne."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
@@ -171,7 +171,7 @@ msgstr "Naša loď je vážne poškodená a dostáva sa do nej čoraz viac vody.
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
-msgstr ""
+msgstr "Prežili sme"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
@@ -224,7 +224,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Mali by ste postaviť vojenský zrub vo východnej časti lesa. Jeden z mojich mužov by potom po zotmení mohol držať hliadku a ochrániť nás pred tými tvormi."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Safe For Now"
@@ -239,7 +239,7 @@ msgstr "Saledus s výdychom úľavy prehovorí…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "Pane, všimol som si, že sa dokončil vojenský zrub. Preto som poslal jedného zo svojich najlepších vojakov strážiť púšť."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:148
@@ -268,7 +268,7 @@ msgstr "Zdravím ťa, Lutius! Práve som vonku stretla Saleda."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Povedal mi o dokončení vojenského zrubu. Nuž, podľa mňa ich viac nepotrebujeme – naopak, teraz by sme sa mohli sústrediť na iné veci."
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
@@ -276,7 +276,7 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr "Je celkom jasné, že na opravu našej lode potrebujeme drevo. Preto som sa včera vybrala do lesa hľadať vhodné miesto pre drevorubačský dom a jedno také som našla južne od našej dočasnej základne."
+msgstr "Je celkom jasné, že na opravu našej lode potrebujeme drevo. Preto som sa včera vybrala do lesa hľadať vyhovujúce miesto pre drevorubačský dom a jedno také našla južne od našej dočasnej základne."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"
@@ -298,7 +298,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Žiaľ, surové kmene nám pri oprave lode nebudú na nič. Musíme z nich vyrobiť dosky, ktoré vyžaduje ako každá loď, tak i každá väčšia budova. Z tohto dôvodu by sme mali postaviť pílu – hneď ako pre ňu bude dostatok miesta."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"

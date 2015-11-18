@@ -1,6 +1,6 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]])
+   return pgettext("barbarians_building", [[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity…’]])
 end
 
 function building_helptext_lore_author()

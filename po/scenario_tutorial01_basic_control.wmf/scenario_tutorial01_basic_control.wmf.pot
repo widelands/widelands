@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -578,7 +578,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
-"It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time."
+"It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361

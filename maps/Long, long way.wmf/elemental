@@ -1,15 +1,15 @@
-# Automatically created by Widelands bzr6716[widelands] (Debug)
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
 [global]
 packet_version="1"
 map_w="256"
 map_h="256"
 nr_players="8"
-world="greenland"
 name=_"Long, long way"
 author="Einstein13"
 descr=_">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a long, long way to conquer all the islands. Good luck!"
-tags="seafaring,official,2teams,3teams,4teams"
+hint=
+tags="2teams,3teams,4teams,artifacts,official,seafaring"
 
 [teams00]
 team1=0
