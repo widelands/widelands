@@ -1,10 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
-packet_version=1
-map_w=96
-map_h=96
-nr_players=2
-world=greenland
-name=_Checkmate
-author=Winterwind
+packet_version="1"
+map_w="96"
+map_h="96"
+nr_players="2"
+name=_"Checkmate"
+author="Winterwind"
 descr=_"Whether just one of nature’s strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
-tags="official,1v1"
+hint=
+tags="1v1,artifacts,official"
