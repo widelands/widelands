@@ -45,7 +45,6 @@ return {
 					-- this assumes that the immovable has size small or medium, i.e. only occupies one field
 					artifact_fields[i] = map:get_field(x,y)
 					i = i + 1
-					print("Artifact on map: " .. x .. "|" .. y) -- NOCOM: remove before merging
 				end
 			end
 		end
