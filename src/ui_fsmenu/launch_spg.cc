@@ -248,7 +248,8 @@ void FullscreenMenuLaunchSPG::win_condition_load() {
 		// Skip this win condition if the map doesn't have all the required tags
 		if (t->has_key("map_tags") && !m_settings->settings().mapfilename.empty()) {
 			Widelands::Map map;
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_settings->settings().mapfilename);
+			std::unique_ptr<Widelands::MapLoader> ml =
+					map.get_correct_loader(m_settings->settings().mapfilename);
 			ml->preload_map(true);
 			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!map.has_tag(map_tag)) {
