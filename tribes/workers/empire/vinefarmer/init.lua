@@ -39,30 +39,30 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		shovel = 1,
-		basket = 1
-	},
+      empire_carrier = 1,
+      shovel = 1,
+      basket = 1
+   },
 
-	programs = {
-		plantvine = {
-			"findspace size:any radius:1",
-			"walk coords",
-			"animation dig 2000",
-			"plant tribe:grapevine_tiny",
-			"animation plant 3000",
-			"return"
-		},
-		harvestvine = {
-			"findobject attrib:ripe_grapes radius:1",
-			"walk object",
-			"animation gather 10000",
-			"object harvest",
-			"animation gather 2000",
-			"createware grape",
-			"return"
-		}
-	},
+   programs = {
+      plantvine = {
+         "findspace size:any radius:1",
+         "walk coords",
+         "animation dig 2000",
+         "plant tribe:grapevine_tiny",
+         "animation plant 3000",
+         "return"
+      },
+      harvestvine = {
+         "findobject attrib:ripe_grapes radius:1",
+         "walk object",
+         "animation gather 10000",
+         "object harvest",
+         "animation gather 2000",
+         "createware grape",
+         "return"
+      }
+   },
 
    animations = animations,
 }

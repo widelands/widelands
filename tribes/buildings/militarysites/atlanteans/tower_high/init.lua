@@ -11,26 +11,26 @@ tribes:new_militarysite_type {
    vision_range = 21,
 
    enhancement_cost = {
-		log = 1,
-		planks = 1,
-		granite = 2
-	},
-	return_on_dismantle_on_enhanced = {
-		granite = 1
-	},
+      log = 1,
+      planks = 1,
+      granite = 2
+   },
+   return_on_dismantle_on_enhanced = {
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 50, 73 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 50, 73 },
+      }
+   },
 
-	aihints = {},
+   aihints = {},
 
-	outputs = {
-		"atlanteans_soldier",
+   outputs = {
+      "atlanteans_soldier",
    },
 
    max_soldiers = 5,
@@ -39,10 +39,10 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-		occupied = _"Your soldiers have occupied your high tower.",
-		aggressor = _"Your high tower discovered an aggressor.",
-		attack = _"Your high tower is under attack.",
-		defeated_enemy = _"The enemy defeated your soldiers at the high tower.",
-		defeated_you = _"Your soldiers defeated the enemy at the high tower."
+      occupied = _"Your soldiers have occupied your high tower.",
+      aggressor = _"Your high tower discovered an aggressor.",
+      attack = _"Your high tower is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the high tower.",
+      defeated_you = _"Your soldiers defeated the enemy at the high tower."
    },
 }

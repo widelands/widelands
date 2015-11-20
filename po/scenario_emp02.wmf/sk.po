@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-12 07:45+0000\n"
-"PO-Revision-Date: 2015-10-13 16:37+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-17 01:36+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,8 @@ msgid "Protect Your Colony"
 msgstr "Ochráňte svoju osadu"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
-msgid "Build some barracks and sentries around the colony."
-msgstr "Postavte kasárne a strážnice okolo osady."
+msgid "Build some blockhouses and sentries around the colony."
+msgstr "Postavte niekoľko vojenských zrubov alebo strážnic v okolí kolónie."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -223,8 +223,8 @@ msgstr "Skaly"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
-"we could build a quarry to get some hard stone for our larger buildings."
-msgstr "Neskôr som zostúpil ku skalám na juhu a hľadal miesto, kde môžeme postaviť kameňolom na ťažbu tvrdého kameňa pre väčšie budovy."
+"we could build a quarry to get some hard stones for our larger buildings."
+msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:140
@@ -246,15 +246,15 @@ msgid ""
 msgstr "Dobrá správa! Dnes sa dokončilo naše lesné hospodárstvo. Teraz máme isto dostatok dreva pre naše budúce stavebné projekty."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
-msgid "Stone for the Colony"
-msgstr "Kameň pre osadu"
+msgid "Stones for the Colony"
+msgstr "Kamene pre kolóniu"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
-"enough stone to construct larger buildings."
-msgstr "Výborne! Dnes sa dokončila stavba kameňolomu. Teraz dostávame dostatok kameňa na stavbu väčších budov."
+"enough stones to construct larger buildings."
+msgstr "Výborne! Dnes sa dostaval kameňolom. Teraz môžeme získať dostatok kameňov na stavbu väčších budov."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
@@ -284,9 +284,9 @@ msgstr "Možno ľudia na palube tej lode boli zastihnutí rovnakou búrkou, ktor
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:171
 msgid ""
-"I beg you to be cautious and to build some barracks or sentries around our "
-"colony."
-msgstr "Prosím vás, buďte opatrný a postavte okolo nás kasárne alebo strážnice."
+"I beg you to be cautious and to build some blockhouses or sentries around "
+"our colony."
+msgstr "Prosím vás, buďte opatrný a v okolí našej kolónie postavte vojenské zruby alebo strážnice."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"

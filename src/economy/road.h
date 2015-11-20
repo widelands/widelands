@@ -126,7 +126,7 @@ private:
 
 	void _request_carrier(CarrierSlot &);
 	static void _request_carrier_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 private:
 

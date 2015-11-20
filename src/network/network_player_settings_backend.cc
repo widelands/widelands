@@ -24,7 +24,6 @@
 #include "logic/game_settings.h"
 #include "logic/player.h"
 #include "logic/tribes/tribe_descr.h"
-#include "profile/profile.h"
 
 
 /// Toggle through the types

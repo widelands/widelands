@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-13 01:23+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-12 21:04+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -136,9 +136,9 @@ msgstr "Novovytvorený vojak nemá žiadne skúsenosti a nie je veľmi zručný 
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
-msgstr "Jednou z týchto výcvikových budov je zápasnícka aréna. Je to veľká a drahá budova a slúži na výcvik vojakov v uhýbaní. Keďže vojaci počas cvičenia poriadne vyhladnú, táto budova požaduje množstvo jedla a silného piva. Prv ako ju postavíte v skutočnej hre, uistite sa, že máte vybudovanú vhodnú infraštruktúru."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
+msgstr "Jednou z týchto výcvikových budov je zápasnícka aréna. Je to veľká a drahá budova, ktorá slúži na výcvik vojakov v uhýbaní. Pretože vojaci počas cvičenia poriadne vyhladnú, táto budova požaduje množstvo jedla a silného piva. Prv ako ju postavíte v skutočnej hre, uistite sa, že máte vybudovanú vhodnú infraštruktúru."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
@@ -178,7 +178,7 @@ msgstr "Výborne. Zápasnícka aréna je hotová a vojaci sú už na ceste k nej
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
+" pitta bread and strong beer, as well as either fish or meat."
 msgstr "Donesú sa tam aj všetky výrobky potrebné na výcvik – pita a silné pivo, ako aj buď ryby, alebo mäso."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
@@ -249,9 +249,9 @@ msgstr "Skvele, práve sa dokončil aj výcvikový tábor. Nič nám už nebrán
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Na výcvik vo výcvikovom tábore vojaci potrebujú jedlo, rovnako ako v zápasníckej aréne, ale silné pivo nie. Namiesto neho potrebujú na výcvik útoku rôzne sekery a na výcvik zdravia helmy."
+msgstr "Na výcvik vo výcvikovom tábore vojaci, rovnako ako v zápasníckej aréne, potrebujú jedlo, ale silné pivo nie. Namiesto neho potrebujú na výcvik útoku rôzne sekery a na výcvik zdravia helmy."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid ""

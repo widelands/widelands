@@ -34,7 +34,6 @@
 class LuaTable;
 class TribesLegacyLookupTable;
 class WorldLegacyLookupTable;
-class Profile;
 
 namespace Widelands {
 
@@ -114,8 +113,6 @@ struct ImmovableActionData;
 class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram *>;
-
-	static Buildcost parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
 
 	/// World immovable
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
@@ -201,7 +198,7 @@ public:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void switch_program(Game & game, const std::string & programname);
-	bool construct_ware(Game & game, WareIndex index);
+	bool construct_ware(Game & game, DescriptionIndex index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
 
@@ -325,7 +322,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 * functionality, which has to do with setting up locations.
 	 */
 	/*@{*/
-	virtual void receive_ware(Game &, WareIndex ware);
+	virtual void receive_ware(Game &, DescriptionIndex ware);
 	virtual void receive_worker(Game &, Worker & worker);
 	/*@}*/
 

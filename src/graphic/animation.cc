@@ -125,7 +125,7 @@ public:
 	const Point& hotspot() const override;
 	const std::string& representative_image_from_disk_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
-	   const override;
+		const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
@@ -135,6 +135,8 @@ private:
 
 	// Load the needed graphics from disk.
 	void load_graphics();
+
+	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -149,11 +151,13 @@ private:
 	// TODO(sirver): this should be done using playFX in a program instead of
 	// binding it to the animation.
 	string sound_effect_;
+	bool play_once_;
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
-		  hasplrclrs_(false) {
+		  hasplrclrs_(false),
+		  play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -164,6 +168,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + "/" + name;
 			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+		}
+
+		if (table.has_key("play_once")) {
+			play_once_ = table.get_bool("play_once");
 		}
 
 		const std::string templatedirname = table.get_string("directory");
@@ -179,6 +187,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		// Strip the .png extension if it has one.
 		boost::replace_all(picnametempl, ".png", "");
 
+		// TODO(GunChleoc): NumberGlob could go away if you'd use
+		// path.list_directory from Lua and we'd know earlier which files will be
+		// used.
 		NumberGlob glob(picnametempl);
 		string filename_wo_ext;
 		while (glob.next(&filename_wo_ext)) {
@@ -290,11 +301,22 @@ const std::string& NonPackedAnimation::representative_image_from_disk_filename()
 	return image_files_[0];
 }
 
+uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
+	if (nr_frames() > 1) {
+		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
+					static_cast<uint32_t>(nr_frames() - 1) :
+					time / frametime_ % nr_frames();
+	}
+	return 0;
+}
+
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
 	if (sound_effect_.empty()) {
 		return;
 	}
-	const uint32_t framenumber = time / frametime_ % nr_frames();
+
+	const uint32_t framenumber = current_frame(time);
+
 	if (framenumber == 0) {
 		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
 	}
@@ -305,7 +327,7 @@ void NonPackedAnimation::blit
 {
 	assert(target);
 
-	const int idx = time / frametime_ % nr_frames();
+	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
 	if (!hasplrclrs_ || clr == nullptr) {

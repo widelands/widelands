@@ -22,19 +22,19 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		hunting_spear = 1
-	},
-	programs = {
-		hunt = {
-			"findobject type:bob radius:13 attrib:eatable",
-			"walk object",
-			"animation idle 1000",
-			"object remove",
-			"createware meat",
-			"return"
-		}
-	},
+      empire_carrier = 1,
+      hunting_spear = 1
+   },
+   programs = {
+      hunt = {
+         "findobject type:bob radius:13 attrib:eatable",
+         "walk object",
+         "animation idle 1000",
+         "object remove",
+         "createware meat",
+         "return"
+      }
+   },
 
    animations = animations,
 }

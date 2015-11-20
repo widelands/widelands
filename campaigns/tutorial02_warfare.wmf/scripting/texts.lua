@@ -212,4 +212,3 @@ conclude_tutorial = {
       p(_[[You are now ready to play the campaigns. They will teach you about the different economies of the tribes. You can also play the remaining tutorials, but they are not crucial for succeeding in the campaigns.]])
    )
 }
-

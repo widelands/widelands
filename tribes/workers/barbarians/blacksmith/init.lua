@@ -21,12 +21,12 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1,
-		hammer = 1
-	},
+      barbarians_carrier = 1,
+      hammer = 1
+   },
 
-	experience = 24,
-	becomes = "barbarians_blacksmith_master",
+   experience = 24,
+   becomes = "barbarians_blacksmith_master",
 
    animations = animations,
 }

@@ -33,7 +33,6 @@
 
 class Image;
 class LuaTable;
-class Section;
 class Surface;
 struct RGBColor;
 
@@ -74,7 +73,7 @@ public:
 	/// Blit the animation frame that should be displayed at the given time index
 	/// so that the given point is at the top left of the frame. Srcrc defines
 	/// the part of the animation that should be blitted. The 'clr' is the player
-	/// color used for blitting - the parameter can be NULL in which case the
+	/// color used for blitting - the parameter can be nullptr in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;

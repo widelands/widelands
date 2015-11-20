@@ -1,13 +1,15 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
-packet_version=1
-map_w=160
-map_h=160
-nr_players=4
-world=greenland
-name=_Elven Forests
-author=Winterwind
-descr=_ "The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
-tags=official,2teams,ffa
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="4"
+name=_"Elven Forests"
+author="Winterwind"
+descr=_"The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
+hint=
+tags="2teams,artifacts,ffa,official"
 
 [teams00]
 team1=0,1

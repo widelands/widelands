@@ -14,17 +14,17 @@
 --    :returns: the text on the left and a picture row on the right.
 --
 function image_line(image, count, text)
-	local imgs={}
-	for i=1,count do
-		imgs[#imgs + 1] = image
-	end
-	local imgstr = table.concat(imgs, ";")
+   local imgs={}
+   for i=1,count do
+      imgs[#imgs + 1] = image
+   end
+   local imgstr = table.concat(imgs, ";")
 
-	if text then
-		return rt("image=" .. imgstr .. " image-align=right", "  " .. text)
-	else
-		return rt("image=" .. imgstr .. " image-align=right", "")
-	end
+   if text then
+      return rt("image=" .. imgstr .. " image-align=right", "  " .. text)
+   else
+      return rt("image=" .. imgstr .. " image-align=right", "")
+   end
 end
 
 
@@ -44,46 +44,46 @@ end
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)
-	include(worker_description.directory .. "helptexts.lua")
+   include(worker_description.directory .. "helptexts.lua")
 
-	local result = rt(h2(_"Purpose")) ..
-		rt("image=" .. worker_description.icon_name, p(worker_helptext()))
+   local result = rt(h2(_"Purpose")) ..
+      rt("image=" .. worker_description.icon_name, p(worker_helptext()))
 
-	-- Get the tools for the workers.
-	local toolnames = {}
-	for j, buildcost in ipairs(worker_description.buildcost) do
-		if (buildcost ~= nil and tribe:has_ware(buildcost)) then
-			toolnames[#toolnames + 1] = buildcost
-		end
-	end
+   -- Get the tools for the workers.
+   local toolnames = {}
+   for j, buildcost in ipairs(worker_description.buildcost) do
+      if (buildcost ~= nil and tribe:has_ware(buildcost)) then
+         toolnames[#toolnames + 1] = buildcost
+      end
+   end
 
-	if(#toolnames > 0) then
-		result = result .. worker_help_tool_string(toolnames)
-	end
+   if(#toolnames > 0) then
+      result = result .. worker_help_tool_string(toolnames)
+   end
 
-	-- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
-	local becomes_description = worker_description.becomes
-	if (becomes_description) then
+   -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
+   local becomes_description = worker_description.becomes
+   if (becomes_description) then
 
-		result = result .. rt(h3(_"Experience levels:"))
-		local exp_string = _"%s to %s (%s EP)":format(
-				worker_description.descname,
-				becomes_description.descname,
-				worker_description.needed_experience
-			)
+      result = result .. rt(h3(_"Experience levels:"))
+      local exp_string = _"%s to %s (%s EP)":format(
+            worker_description.descname,
+            becomes_description.descname,
+            worker_description.needed_experience
+         )
 
-		worker_description = becomes_description
-		becomes_description = worker_description.becomes
-		if(becomes_description) then
-			exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
-					worker_description.descname,
-					becomes_description.descname,
-					worker_description.needed_experience
-				)
-		end
-		result = result ..  rt("text-align=right", p(exp_string))
-	end
-	return result
+      worker_description = becomes_description
+      becomes_description = worker_description.becomes
+      if(becomes_description) then
+         exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+               worker_description.descname,
+               becomes_description.descname,
+               worker_description.needed_experience
+            )
+      end
+      result = result ..  rt("text-align=right", p(exp_string))
+   end
+   return result
 end
 
 
@@ -96,13 +96,13 @@ end
 --    :returns: image_line for the tools
 --
 function worker_help_tool_string(toolnames)
-	local result = rt(h3(ngettext("Worker uses:","Workers use:", 1)))
-	local game  = wl.Game();
-	for i, toolname in ipairs(toolnames) do
-		local ware_description = game:get_ware_description(toolname)
-		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
-	end
-	return result
+   local result = rt(h3(ngettext("Worker uses:","Workers use:", 1)))
+   local game  = wl.Game();
+   for i, toolname in ipairs(toolnames) do
+      local ware_description = game:get_ware_description(toolname)
+      result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+   end
+   return result
 end
 
 

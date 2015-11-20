@@ -10,57 +10,57 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 3
-	},
-	return_on_dismantle = {
-		log = 2
-	},
+      log = 3
+   },
+   return_on_dismantle = {
+      log = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 43, 45 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 43, 45 },
-		},
-		unoccupied = {
-			template = "unoccupied_??",
-			directory = dirname,
-			hotspot = { 43, 45 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 43, 45 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 43, 45 },
+      },
+      unoccupied = {
+         template = "unoccupied_??",
+         directory = dirname,
+         hotspot = { 43, 45 },
+      },
+   },
 
    aihints = {
-		forced_after = 180,
-		prohibited_till = 180,
-		logproducer = true
+      forced_after = 180,
+      prohibited_till = 180,
+      logproducer = true
    },
 
-	working_positions = {
-		barbarians_lumberjack = 1
-	},
+   working_positions = {
+      barbarians_lumberjack = 1
+   },
 
    outputs = {
-		"log"
+      "log"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-			descname = _"felling trees",
-			actions = {
-				"sleep=25000", -- Sleeps shorter than any other tribes.
-				"worker=chop"
-			}
-		},
-	},
-	out_of_resource_notification = {
-		title = _"Out of Trees",
-		message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
-		productivity_threshold = 66
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
+         descname = _"felling trees",
+         actions = {
+            "sleep=25000", -- Sleeps shorter than any other tribes.
+            "worker=chop"
+         }
+      },
+   },
+   out_of_resource_notification = {
+      title = _"Out of Trees",
+      message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
+      productivity_threshold = 66
+   },
 }

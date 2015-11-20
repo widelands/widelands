@@ -33,10 +33,10 @@
 #include "logic/productionsite.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
-#include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
+#include "wui/helpwindow.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
@@ -228,7 +228,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const Widelands::BuildingIndex & enhancement =
+			const Widelands::DescriptionIndex & enhancement =
 				m_building.descr().enhancement();
 			const Widelands::TribeDescr & tribe  = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
@@ -273,7 +273,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
-			std::map<Widelands::WareIndex, uint8_t> wares;
+			std::map<Widelands::DescriptionIndex, uint8_t> wares;
 			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
@@ -360,8 +360,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		UI::UniqueWindow::Registry& registry =
 			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 		registry.open_window = [this, &registry] {
-			new UI::LuaTextHelpWindow(
-				&igbase(), registry, m_building.descr(), building().owner().tribe(), &igbase().egbase().lua());
+			new UI::BuildingHelpWindow(
+				&igbase(), registry, m_building.descr(), m_building.owner().tribe(), &igbase().egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
@@ -433,7 +433,7 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 Callback for enhancement request
 ===============
 */
-void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
+void BuildingWindow::act_enhance(Widelands::DescriptionIndex id)
 {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)

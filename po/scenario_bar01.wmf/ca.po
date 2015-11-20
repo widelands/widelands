@@ -4,12 +4,13 @@
 # Translators:
 # Juanjo, 2015
 # Juanjo, 2015
+# Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-12 07:45+0000\n"
-"PO-Revision-Date: 2015-10-14 21:39+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:08+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -56,12 +57,12 @@ msgid "Start building mines on the mountain"
 msgstr "Comenceu a construir mines a la muntanya"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "Build coal and iron ore mines"
+msgid "Build coal and iron mines"
 msgstr "Construïu mines de carbó i de mineral de ferro"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
-msgid "Build a coal mine and an iron ore mine."
-msgstr "Construïu una mina de carbó i una mina de mineral de ferro"
+msgid "Build a coal mine and an iron mine."
+msgstr "Construïu una mina de carbó i una mina de mineral de ferro."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -232,7 +233,7 @@ msgstr "Construïu un enduridor de fusta"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
-"building materials. They cannot be built out of simple logs – the wood has "
+"building materials. They cannot be built out of simple logs – the logs have "
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."

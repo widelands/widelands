@@ -26,21 +26,21 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		hammer = 1
-	},
+      atlanteans_carrier = 1,
+      hammer = 1
+   },
 
-	programs = {
-		buildship = {
-			"walk object-or-coords",
-			"plant tribe:atlanteans_shipconstruction unless object",
-			"playFX sound/sawmill sawmill 230",
-			"animation idle 500",
-			"construct",
-			"animation idle 5000",
-			"return"
-		}
-	},
+   programs = {
+      buildship = {
+         "walk object-or-coords",
+         "plant tribe:atlanteans_shipconstruction unless object",
+         "playFX sound/sawmill sawmill 230",
+         "animation idle 500",
+         "construct",
+         "animation idle 5000",
+         "return"
+      }
+   },
 
    animations = animations,
 }

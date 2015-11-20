@@ -232,10 +232,10 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table);
-	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
+	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const WorldLegacyLookupTable& one_world_legacy_lookup_table_;
+	const WorldLegacyLookupTable& world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
@@ -245,7 +245,7 @@ private:
 
 TerrainConverter::TerrainConverter
 		(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table) :
-	one_world_legacy_lookup_table_(lookup_table),
+	world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_
 	{
@@ -270,7 +270,7 @@ TerrainConverter::TerrainConverter
 	}
 {}
 
-Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
+Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -303,7 +303,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.terrains().get_index(
-	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
+	   world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
 }
 
 }  // namespace
@@ -555,7 +555,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 
 			if (!bobname.empty()) {
-				int32_t const idx = world.get_bob(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.get_bob(bobname.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
@@ -684,7 +684,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	auto place_immovable = [&egbase, &lookup_table, &world](
 	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::WareIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
+		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	WareIndex const wareid(action.iparam1);
+	DescriptionIndex const wareid(action.iparam1);
 	WareInstance & ware =
 		*new WareInstance(wareid, player.tribe().get_ware_descr(wareid));
 	ware.init(game);
@@ -112,7 +112,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
@@ -217,7 +217,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
@@ -783,12 +783,12 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, WareIndex>> best_suited_immovables_index;
+	std::set<std::tuple<double, DescriptionIndex>> best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-		const WareIndex index, const ImmovableDescr& immovable_description) {
+		const DescriptionIndex index, const ImmovableDescr& immovable_description) {
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
@@ -817,7 +817,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			ImmovableDescr& immovable_descr = immovables.get(i);
+			const ImmovableDescr& immovable_descr = immovables.get(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}
@@ -825,7 +825,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		}
 	} else {
 		state.svar1 = "tribe";
-		WareIndex immovable_index = game.tribes().immovable_index(list[1]);
+		DescriptionIndex immovable_index = game.tribes().immovable_index(list[1]);
 
 		if (game.tribes().immovable_exists(immovable_index)) {
 			const ImmovableDescr* imm = game.tribes().get_immovable_descr(immovable_index);
@@ -989,13 +989,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		}
 
 		const TribeDescr & t = owner().tribe();
-		game.create_immovable
+		Immovable & newimm = game.create_immovable
 			(position,
 			 t.get_resource_indicator
 				(rdescr,
 				rdescr->detectable() ?
 				position.field->get_resources_amount() : 0),
 			 MapObjectDescr::OwnerType::kTribe);
+		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;
@@ -1038,7 +1039,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 		return true;
 	}
 
-	WareIndex wareindex = ware->descr_index();
+	DescriptionIndex wareindex = ware->descr_index();
 	if (!imm->construct_ware(game, wareindex)) {
 		molog("run_construct: construct_ware failed");
 		send_signal(game, "fail");
@@ -1316,7 +1317,7 @@ void Worker::create_needed_experience(Game & /* game */)
  * of the worker by one, if he reaches
  * needed_experience he levels
  */
-WareIndex Worker::gain_experience(Game & game) {
+DescriptionIndex Worker::gain_experience(Game & game) {
 	return (descr().get_needed_experience() == INVALID_INDEX ||
 			  ++m_current_exp < descr().get_needed_experience()) ?
 				INVALID_INDEX :
@@ -1328,7 +1329,7 @@ WareIndex Worker::gain_experience(Game & game) {
  * Level this worker to the next higher level. this includes creating a
  * new worker with his propertys and removing this worker
  */
-WareIndex Worker::level(Game & game) {
+DescriptionIndex Worker::level(Game & game) {
 
 	// We do not really remove this worker, all we do
 	// is to overwrite his description with the new one and to
@@ -1338,8 +1339,8 @@ WareIndex Worker::level(Game & game) {
 	// circumstances)
 	assert(descr().becomes() != INVALID_INDEX);
 	const TribeDescr & t = owner().tribe();
-	WareIndex const old_index = t.worker_index(descr().name());
-	WareIndex const new_index = descr().becomes();
+	DescriptionIndex const old_index = t.worker_index(descr().name());
+	DescriptionIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(t.has_worker(new_index));
 

@@ -245,13 +245,17 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
-		assert(is_animation_known("idle"));
+		if (!is_animation_known("idle")) {
+			throw GameDataError("Map object %s has animations but no idle animation", init_name.c_str());
+		}
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
 													.representative_image_from_disk_filename();
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
-		assert(!icon_filename().empty());
+		if (icon_filename_.empty()) {
+			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
+		}
 	}
 }
 MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
@@ -273,12 +277,8 @@ void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 	if (is_animation_known(animname)) {
-#ifndef NDEBUG
 		throw GameDataError
 			("Tried to add already existing animation \"%s\"", animname.c_str());
-#else
-		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
-#endif
 	} else {
 		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 	}

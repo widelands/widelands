@@ -2,26 +2,26 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-	-- #TRANSLATORS: Lore helptext for a building
-	return no_lore_text_yet()
+   -- #TRANSLATORS: Lore helptext for a building
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author()
-	-- #TRANSLATORS: Lore author helptext for a building
-	return no_lore_author_text_yet()
+   -- #TRANSLATORS: Lore author helptext for a building
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
-	-- #TRANSLATORS: Purpose helptext for a building
-	return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("empire_building", "Prepares rations for scouts and rations and snacks to feed the miners in all mines.")
 end
 
 function building_helptext_note()
-	-- #TRANSLATORS: Note helptext for a building
-	return ""
+   -- #TRANSLATORS: Note helptext for a building
+   return ""
 end
 
 function building_helptext_performance()
 	-- TRANSLATORS: Performance helptext for a building
-	return pgettext("barbarians_building", "The innkeeper needs 85 seconds on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs 48 seconds on average to prepare one ration or one meal.")
+	return pgettext("empire_building", "The innkeeper needs 85 seconds on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs 48 seconds on average to prepare one ration or one meal.")
 end

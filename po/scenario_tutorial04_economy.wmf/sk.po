@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-12 07:45+0000\n"
-"PO-Revision-Date: 2015-10-12 14:19+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-12 18:49+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -432,8 +432,8 @@ msgstr "príslušného tlačidla naspodku obrazovky. Pre každý výrobok vášh
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
 msgstr "Ak chcete, môžete si to vyskúšať. Vojak potrebuje drevenú kopiju a helmu – odtiaľ možno hľadať spätne."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237

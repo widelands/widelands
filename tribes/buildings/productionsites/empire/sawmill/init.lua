@@ -10,56 +10,56 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 1,
-		planks = 1
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 1
-	},
+      log = 2,
+      granite = 1,
+      planks = 1
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 54, 70 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 54, 70 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 54, 70 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 54, 70 },
+      },
+   },
 
    aihints = {
-		forced_after = 250,
-		prohibited_till = 250
+      forced_after = 250,
+      prohibited_till = 250
    },
 
-	working_positions = {
-		empire_carpenter = 1
-	},
+   working_positions = {
+      empire_carpenter = 1
+   },
 
    inputs = {
-		log = 8
-	},
+      log = 8
+   },
    outputs = {
-		"planks"
+      "planks"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-			descname = _"sawing logs",
-			actions = {
-				"sleep=16500", -- Much faster than barbarians' wood hardener
-				"return=skipped unless economy needs planks",
-				"consume=log:2",
-				"playFX=sound/sawmill sawmill 180",
-				"animate=working 20000", -- Much faster than barbarians' wood hardener
-				"produce=planks"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
+         descname = _"sawing logs",
+         actions = {
+            "sleep=16500", -- Much faster than barbarians' wood hardener
+            "return=skipped unless economy needs planks",
+            "consume=log:2",
+            "playFX=sound/sawmill sawmill 180",
+            "animate=working 20000", -- Much faster than barbarians' wood hardener
+            "produce=planks"
+         }
+      },
+   },
 }

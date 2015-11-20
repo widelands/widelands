@@ -50,7 +50,6 @@
 #include "logic/trainingsite.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
@@ -112,19 +111,19 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  * filled with the BuildingDescr.
  */
 void find_former_buildings
-	(const Tribes& tribes, const Widelands::BuildingIndex bi,
+	(const Tribes& tribes, const Widelands::DescriptionIndex bi,
 	 Widelands::Building::FormerBuildings* former_buildings)
 {
 	assert(former_buildings && former_buildings->empty());
 	former_buildings->push_back(bi);
 
 	for (;;) {
-		Widelands::BuildingIndex oldest_idx = former_buildings->front();
+		Widelands::DescriptionIndex oldest_idx = former_buildings->front();
 		const Widelands::BuildingDescr * oldest = tribes.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+		for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 			const BuildingDescr* building_descr = tribes.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), i);
@@ -171,7 +170,7 @@ Player::Player
 
 	// Disallow workers that the player's tribe doesn't have.
 	for (size_t worker_index = 0; worker_index < m_allowed_worker_types.size(); ++worker_index) {
-		if (!tribe().has_worker(static_cast<WareIndex>(worker_index))) {
+		if (!tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
 			m_allowed_worker_types[worker_index] = false;
 		}
 	}
@@ -179,7 +178,7 @@ Player::Player
 	// Disallow buildings that the player's tribe doesn't have and
 	// that aren't militarysites that the tribe could conquer.
 	for (size_t i = 0; i < m_allowed_building_types.size(); ++i) {
-		const BuildingIndex& building_index = static_cast<BuildingIndex>(i);
+		const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
 		const BuildingDescr& descr = *tribe().get_building_descr(building_index);
 		if (!tribe().has_building(building_index) && descr.type() != MapObjectType::MILITARYSITE) {
 			m_allowed_building_types[i] = false;
@@ -517,7 +516,7 @@ Building & Player::force_building
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	BuildingIndex idx = former_buildings.back();
+	DescriptionIndex idx = former_buildings.back();
 	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
@@ -530,12 +529,12 @@ Building & Player::force_building
 }
 
 Building& Player::force_csite
-	(Coords const location, BuildingIndex b_idx,
+	(Coords const location, DescriptionIndex b_idx,
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	if (!former_buildings.empty()) {
-		BuildingIndex idx = former_buildings.back();
+		DescriptionIndex idx = former_buildings.back();
 		const BuildingDescr * descr = egbase().tribes().get_building_descr(idx);
 		terraform_for_building(egbase(), player_number(), location, descr);
 	}
@@ -556,7 +555,7 @@ Place a construction site or building, checking that it's legal to do so.
 ===============
 */
 Building * Player::build
-	(Coords c, BuildingIndex const idx, bool constructionsite,
+	(Coords c, DescriptionIndex const idx, bool constructionsite,
 	 BuildingDescr::FormerBuildings & former_buildings)
 {
 	int32_t buildcaps;
@@ -727,7 +726,7 @@ void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t
  * an idea of enhancing
  */
 void Player::enhance_building
-	(Building * building, BuildingIndex const index_of_new_building)
+	(Building * building, DescriptionIndex const index_of_new_building)
 {
 	_enhance_or_dismantle(building, index_of_new_building);
 }
@@ -740,7 +739,7 @@ void Player::dismantle_building(Building * building) {
 	_enhance_or_dismantle(building, INVALID_INDEX);
 }
 void Player::_enhance_or_dismantle
-	(Building * building, BuildingIndex const index_of_new_building)
+	(Building * building, DescriptionIndex const index_of_new_building)
 {
 	if (&building->owner() ==
 	    this && (index_of_new_building == INVALID_INDEX ||
@@ -797,7 +796,7 @@ void Player::flagaction(Flag & flag)
 }
 
 
-void Player::allow_worker_type(WareIndex const i, bool const allow) {
+void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
 	assert(i < static_cast<int>(m_allowed_worker_types.size()));
 	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
 	m_allowed_worker_types[i] = allow;
@@ -809,7 +808,7 @@ void Player::allow_worker_type(WareIndex const i, bool const allow) {
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building_type(BuildingIndex const i, bool const allow) {
+void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 	assert(i < m_allowed_building_types.size());
 	m_allowed_building_types[i] = allow;
 }
@@ -1171,7 +1170,7 @@ void Player::sample_statistics()
 		for (Widelands::Warehouse * warehouse : warehouses) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(WareIndex(id));
+				stocks[id] += wares.stock(DescriptionIndex(id));
 			}
 		}
 	}
@@ -1193,7 +1192,7 @@ void Player::sample_statistics()
 /**
  * A ware was produced. Update the corresponding statistics.
  */
-void Player::ware_produced(WareIndex const wareid) {
+void Player::ware_produced(DescriptionIndex const wareid) {
 	assert (m_ware_productions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
@@ -1208,7 +1207,7 @@ void Player::ware_produced(WareIndex const wareid) {
  * \param wareid the ID of the consumed wares
  * \param count the number of consumed wares
  */
-void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
+void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
 	assert (m_ware_consumptions.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
 
@@ -1220,7 +1219,7 @@ void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
  * Get current ware production statistics
  */
 const std::vector<uint32_t> * Player::get_ware_production_statistics
-		(WareIndex const ware) const
+		(DescriptionIndex const ware) const
 {
 	assert(ware < static_cast<int>(m_ware_productions.size()));
 	return &m_ware_productions[ware];
@@ -1231,7 +1230,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
  * Get current ware consumption statistics
  */
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
-		(WareIndex const ware) const {
+		(DescriptionIndex const ware) const {
 
 	assert(ware < static_cast<int>(m_ware_consumptions.size()));
 
@@ -1239,19 +1238,19 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 }
 
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
-		(WareIndex const ware) const
+		(DescriptionIndex const ware) const
 {
 	assert(ware < static_cast<int>(m_ware_stocks.size()));
 
 	return &m_ware_stocks[ware];
 }
 
-const Player::BuildingStatsVector& Player::get_building_statistics(const BuildingIndex& i) const {
+const Player::BuildingStatsVector& Player::get_building_statistics(const DescriptionIndex& i) const {
 	return *const_cast<Player*>(this)->get_mutable_building_statistics(i);
 }
 
-Player::BuildingStatsVector* Player::get_mutable_building_statistics(const BuildingIndex& i) {
-	BuildingIndex const nr_buildings = egbase().tribes().nrbuildings();
+Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
+	DescriptionIndex const nr_buildings = egbase().tribes().nrbuildings();
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 	return &m_building_stats[i];
@@ -1355,7 +1354,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u statistics: unknown ware name %s",
@@ -1378,7 +1377,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u consumption statistics: unknown ware name %s",
@@ -1401,7 +1400,7 @@ void Player::read_statistics(FileRead & fr)
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		std::string name = fr.c_string();
-		WareIndex idx = egbase().tribes().ware_index(name);
+		DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log
 				("Player %u stock statistics: unknown ware name %s",

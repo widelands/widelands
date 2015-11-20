@@ -2,26 +2,26 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-	-- #TRANSLATORS: Lore helptext for a building
-	return no_lore_text_yet()
+   -- #TRANSLATORS: Lore helptext for a building
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author()
-	-- #TRANSLATORS: Lore author helptext for a building
-	return no_lore_author_text_yet()
+   -- #TRANSLATORS: Lore author helptext for a building
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
-	-- #TRANSLATORS: Purpose helptext for a building
-	return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("empire_building", "Breeds pigs for their meat.")
 end
 
 function building_helptext_note()
-	-- #TRANSLATORS: Note helptext for a building
-	return ""
+   -- #TRANSLATORS: Note helptext for a building
+   return ""
 end
 
 function building_helptext_performance()
 	-- TRANSLATORS: Performance helptext for a building
-	return pgettext("barbarians_building", "The pig breeder needs 60 seconds on average to raise and slaughter a pig.")
+	return pgettext("empire_building", "The pig breeder needs 60 seconds on average to raise and slaughter a pig.")
 end

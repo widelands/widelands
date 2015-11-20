@@ -2,52 +2,52 @@ run(function()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   create_first_port()
-   create_second_port()
+   create_southern_port()
+   create_northern_port()
 
-   --removing builder from port2
-    port2():set_workers{
+   --removing builder from northern port
+    northern_port():set_workers{
       barbarians_builder = 0,
    }
 
-   assert_equal(port2():get_workers("barbarians_builder"), 0)
+   assert_equal(northern_port():get_workers("barbarians_builder"), 0)
 
    start_building_farm()
-   port1():set_workers{
+   southern_port():set_workers{
       barbarians_builder = 1,
    }
-   port1():set_wares{
+   southern_port():set_wares{
       blackwood = 1,
    }
 
-   assert_equal(port1():get_workers("barbarians_builder"), 1)
-   assert_equal(port1():get_wares("blackwood"), 1)
+   assert_equal(southern_port():get_workers("barbarians_builder"), 1)
+   assert_equal(southern_port():get_wares("blackwood"), 1)
 
    while ship:get_workers() == 0 or ship:get_wares() == 0  do
       sleep(500)
    end
 
-   local flag_oversea = port2().flag
+   local flag_oversea = northern_port().flag
 
- 	stable_save("restored_port")
+   stable_save("restored_port")
 
    -- remove the portdock while the blackwood is in transit.
-   port2_portdock=port2().portdock
-   assert(port2_portdock)
-   port2_portdock:remove()
+   north_port_portdock=northern_port().portdock
+   assert(north_port_portdock)
+   north_port_portdock:remove()
 
    sleep(5000)
 
    assert_equal(p1:get_workers("barbarians_builder"), 1)
    assert_equal(p1:get_wares("blackwood"), 1)
-   assert_equal(ship.debug_economy, port1().debug_economy)
+   assert_equal(ship.debug_economy, southern_port().debug_economy)
    assert_equal(ship.debug_economy, flag_oversea.debug_economy)
 
    sleep(5000)
 
-   --just wait till everything is gone to port2
+   --just wait till everything is gone to northern port
    while ship:get_workers() > 0 or ship:get_wares() > 0 or
-    port1():get_workers("barbarians_builder") > 0 or  port1():get_wares("blackwood") > 0 do
+    southern_port():get_workers("barbarians_builder") > 0 or  southern_port():get_wares("blackwood") > 0 do
       sleep(50)
    end
 

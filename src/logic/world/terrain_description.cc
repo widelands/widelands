@@ -152,7 +152,7 @@ const EditorCategory& TerrainDescription::editor_category() const {
 	return *editor_category_;
 }
 
-ResourceIndex TerrainDescription::get_valid_resource(uint8_t index) const {
+DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
 	return valid_resources_[index];
 }
 

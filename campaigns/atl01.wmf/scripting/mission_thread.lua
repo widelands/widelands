@@ -183,30 +183,8 @@ end
 
 function check_for_ships()
    -- Check if the ships are done, then the mission ends successfully
-   local lake_fields = Set:new()
-   for idx,f in ipairs(map:get_field(75,80):region(12)) do
-      if f:has_caps("swimmable") then
-         lake_fields:add(f)
-      end
-   end
-
-   while true do
-      local nships = 0
-      -- Count the ships
-      for f in lake_fields:items() do
-         local bobs = f.bobs
-         if #bobs then
-            for idx, b in ipairs(bobs) do
-               if b.descr.type_name == "atlanteans_ship" then
-                  nships = nships + 1
-               end
-            end
-         end
-      end
-      if nships >= 3 then
-         break
-      end
-      sleep(8234)
+   while #p1:get_ships() < 3 do
+        sleep(8234)
    end
 
    -- Success

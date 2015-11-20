@@ -180,28 +180,6 @@ ImmovableDescr IMPLEMENTATION
 ==============================================================================
 */
 
-Buildcost ImmovableDescr::parse_buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) {
-	Buildcost result;
-	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value(-1);
-		try {
-			WareIndex const idx = tribes.safe_ware_index(warename);
-			if (result.count(idx)) {
-				throw GameDataError(
-				   "a buildcost item of this ware type has already been defined: %s", warename.c_str());
-			}
-			value = table->get_int(warename);
-			uint8_t const count = value;
-			if (count != value) {
-				throw GameDataError("count is out of range 1 .. 255");
-			}
-			result.insert(std::pair<WareIndex, uint8_t>(idx, count));
-		} catch (const WException& e) {
-			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
-		}
-	}
-	return result;
-}
 
 /**
  * Parse a common immovable functions from init file.
@@ -266,7 +244,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 										 const Tribes& tribes) :
 	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
 	if (table.has_key("buildcost")) {
-		m_buildcost = ImmovableDescr::parse_buildcost(table.get_table("buildcost"), tribes);
+		m_buildcost = Buildcost(table.get_table("buildcost"), tribes);
 	}
 }
 
@@ -478,7 +456,7 @@ void Immovable::draw_construction
 		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
 			(&(*m_program)[m_program_ptr]);
 
-	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	const uint32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 
 	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
@@ -715,7 +693,7 @@ MapObject::Loader * Immovable::load
 				if (packet_version < 7) {
 					name = tribes_lookup_table.lookup_immovable(owner_type, name);
 				}
-				const WareIndex idx = egbase.tribes().immovable_index(name);
+				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
 				} else {
@@ -725,7 +703,7 @@ MapObject::Loader * Immovable::load
 			} else { //  world immovable
 				const World & world = egbase.world();
 				name = world_lookup_table.lookup_immovable(name);
-				const WareIndex idx = world.get_immovable_index(name.c_str());
+				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError
 						("world does not define immovable type \"%s\"", name.c_str());
@@ -1194,7 +1172,7 @@ bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * bui
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_ware(Game & game, WareIndex index)
+bool Immovable::construct_ware(Game & game, DescriptionIndex index)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)
@@ -1347,7 +1325,7 @@ void PlayerImmovable::cleanup(EditorGameBase & egbase)
  * We are the destination of the given ware's transfer, which is not associated
  * with any request.
  */
-void PlayerImmovable::receive_ware(Game &, WareIndex ware)
+void PlayerImmovable::receive_ware(Game &, DescriptionIndex ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",

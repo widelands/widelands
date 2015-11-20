@@ -41,7 +41,7 @@ void EconomyDataPacket::read(FileRead & fr)
 				while (Time const last_modified = fr.unsigned_32()) {
 					char const * const type_name = fr.c_string();
 					uint32_t const permanent = fr.unsigned_32();
-					WareIndex i = tribe.ware_index(type_name);
+					DescriptionIndex i = tribe.ware_index(type_name);
 					if (tribe.has_ware(i)) {
 						if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) == kInvalidWare) {
 							log("WARNING: target quantity configured for %s, "
@@ -98,7 +98,7 @@ void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.unsigned_16(kCurrentPacketVersion);
 	const TribeDescr & tribe = m_eco->owner().tribe();
-	for (const WareIndex& ware_index : tribe.wares()) {
+	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[ware_index];
 		if (Time const last_modified = tq.last_modified) {
@@ -107,7 +107,7 @@ void EconomyDataPacket::write(FileWrite & fw)
 			fw.unsigned_32(tq.permanent);
 		}
 	}
-	for (const WareIndex& worker_index : tribe.workers()) {
+	for (const DescriptionIndex& worker_index : tribe.workers()) {
 		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[worker_index];
 		if (Time const last_modified = tq.last_modified) {

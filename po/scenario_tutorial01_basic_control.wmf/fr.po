@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-07 08:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -75,9 +75,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Vous commencez habituellement la partie avec un quartier général. C'est le gros édifice avec le drapeau bleu devant. Le quartier général est un entrepôt qui stocke les marchandises, les travailleurs et les soldats. Certaines marchandises sont requises pour la construction de maisons, d'autres pour produire d'autres biens. Évidemment, les marchandises qui se trouvent dans le quartier général ne dureront pas éternellement, il vous faut donc vous assurer de les remplacer. Les marchandises les plus importantes au début de la partie sont les matériaux de construction de base : troncs et pierre brute. Assurons-nous que nous ne manquerons pas de troncs. Pour ce faire, nous aurons besoin d'un bûcheron et d'une cabane pour l'héberger."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -289,8 +289,8 @@ msgstr "La cabane de bûcheron est achevée."
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Excellent, La hutte du bucheron est faite. Un bucheron va maintenant venir et commencer à abattre des arbres, nos rentrées de bois sont assurées pour l'instant. Passons maintenant à la pierre brute."
+"the granite."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -302,11 +302,11 @@ msgstr "Construisez une carrière."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Les pierres peuvent êtres extraites des mines de granite, mais il est plus facile de construire une carrière à proximité de roches environnantes. En l'occurrence, il y en a un tas juste à l'Ouest (gauche) de votre quartier-général. Je vais vous apprendre maintenant à déplacer votre vue vers là-bas."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -659,8 +659,8 @@ msgstr "Construisez une seconde carrière"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Quand il y a beaucoup de roches, vous pouvez construire une autre carrière. Cela accélérera la production de pierres. "
+"will make the granite production faster."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -826,9 +826,9 @@ msgstr "Maintenant, fermez la fenêtre des messages en faisant un clic droit."
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Bien joué ! Voyons comment marchent réellement les messages dans le jeu. Pour cela, je vais enlever toutes les roches aux pauvres tailleurs de pierre dans leurs carrières. Ils vont chacun envoyer un message comme quoi ils ne peuvent trouver de travail dans leur périmètre la prochaine fois qu'ils vont vouloir travailler. "
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -897,12 +897,12 @@ msgstr "Il y a autre chose que j'aimerais vous apprendre maintenant : l'expansio
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "L'expansion de votre territoire est aussi simple que la construction d'un bâtiment militaire aux limites de votre territoire. Les Barbares ont une sélection de construction militaire différente : des factionnaires, des barrières, des donjons, des forteresses et des citadelles. Plus grand est la construction, plus cher sera sa construction, mais plus il y a de terres conquises autour de lui, plus de soldats pourront être placés ici. Les bâtiments varient aussi dans leur champ de vision : les bâtiments avec une tour voient plus loin que les autres."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -939,9 +939,9 @@ msgstr "Dans Widelands, il est nécessaire de construire baucoup de construction
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Les Barbares ont 4 bâtiments militaires différents que vous pouvez construire : la guérite(petite), la barrière et le donjon(moyens) et la forteresse (grande). Choisissez juste celui que vous aimez le plus."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
