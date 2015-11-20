@@ -58,9 +58,9 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua"
+        "../../tribes/scripting/starting_conditions/*/*.lua" # NOCOM the starting conditions aren't being picked up.
         "../../tribes/*.lua",
-        "../../tribes/preload.lua",
+        "../../tribes/preload.lua", # NOCOM Why do I have to load both *.lua and preload.lua for this to work?
         "../../tribes/*/init.lua",
         "../../tribes/*/*/init.lua",
         "../../tribes/*/*/*/init.lua",
