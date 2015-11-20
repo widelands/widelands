@@ -142,7 +142,7 @@ private:
 	void update_buildable_field(BuildableField&, uint16_t = 6, bool = false);
 	void update_mineable_field(MineableField&);
 
-	void update_productionsite_stats(uint32_t);
+	void update_productionsite_stats();
 
 	// for productionsites
 	Widelands::BuildingNecessity check_building_necessity
@@ -185,10 +185,10 @@ private:
 	bool check_trainingsites(uint32_t);
 	bool check_mines_(uint32_t);
 	bool check_militarysites(uint32_t);
-	bool marine_main_decisions(uint32_t);
+	bool marine_main_decisions();
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);
-	void print_stats(uint32_t);
+	void print_stats();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);

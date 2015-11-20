@@ -86,6 +86,9 @@ constexpr int kLeastMilit      = 2;
 // duration of military campaign
 constexpr int kCampaignDuration = 15 * 60 * 1000;
 
+// for scheduler
+constexpr int kMaxJobs = 4;
+
 using namespace Widelands;
 
 DefaultAI::AggressiveImpl DefaultAI::aggressiveImpl;
@@ -283,7 +286,6 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-// NOCOM(#codereview): I moved this up a bit. Agreed?
 	if (jobs_to_run_count == 0) {
 		// well we have nothing to do now
 		return;
@@ -302,9 +304,8 @@ void DefaultAI::think() {
 		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 500));
 	}
 
-// NOCOM(#codereview): should 4 be a const int variable max_jobs?
-	jobs_to_run_count = (jobs_to_run_count > 4) ? 4 : jobs_to_run_count;
-	assert (jobs_to_run_count > 0 && jobs_to_run_count <= 4);
+	jobs_to_run_count = (jobs_to_run_count > kMaxJobs) ? kMaxJobs : jobs_to_run_count;
+	assert (jobs_to_run_count > 0 && jobs_to_run_count <= kMaxJobs);
 	assert (jobs_to_run_count < taskPool.size());
 
 	// Pool of tasks to be executed this run. In ideal situation it will consist of one task only.
@@ -323,7 +324,7 @@ void DefaultAI::think() {
 	assert (!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
-	std::sort(current_task_queue.begin(), current_task_queue.end(), LowerPriority());
+	std::sort(current_task_queue.begin(), current_task_queue.end());
 
 	// Performing tasks from temporary queue one by one
 	for (uint8_t i = 0; i < current_task_queue.size(); ++i) {
@@ -371,8 +372,9 @@ void DefaultAI::think() {
 				set_taskpool_task_time(gametime + 8000, SchedulerTaskId::kCheckEconomies);
 				break;
 			case SchedulerTaskId::kProductionsitesStats :
-				update_productionsite_stats(gametime);
-// NOCOM(#codereview): set_taskpool_task_time?
+				update_productionsite_stats();
+				// Updating the stats every 10 seconds should be enough
+				set_taskpool_task_time(gametime + 10000, SchedulerTaskId::kProductionsitesStats);
 				break;
 			case SchedulerTaskId::kConstructBuilding :
 				if (check_economies()) {  // economies must be consistent
@@ -392,6 +394,7 @@ void DefaultAI::think() {
 					return;
 				}
 				{
+					set_taskpool_task_time(gametime + 15000, SchedulerTaskId::kCheckProductionsites);
 					// testing 5 productionsites (if there are 5 of them)
 					int32_t ps_to_check = (productionsites.size() < 5) ? productionsites.size() : 5;
 					for (int j = 0; j < ps_to_check; j += 1) {
@@ -402,19 +405,14 @@ void DefaultAI::think() {
 						};
 					}
 				}
-				set_taskpool_task_time(gametime + 15000, SchedulerTaskId::kCheckProductionsites);
 				break;
 			case SchedulerTaskId::kCheckShips :
+				set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
 				check_ships(gametime);
-// NOCOM(#codereview): set_taskpool_task_time?
-// It is confusing to have some of them set here and some of them set in the functions.
-// Best set them all in this switch statement.
-// Mabe you can do 1 global check below this switch statement?
-// You could intilialize the next check time with gametime + 15000 above this switch statement and change it in the cases were needed.
 				break;
 			case SchedulerTaskId::KMarineDecisions :
-				marine_main_decisions(gametime);
-// NOCOM(#codereview): set_taskpool_task_time?
+				set_taskpool_task_time(gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
+				marine_main_decisions();
 				break;
 			case SchedulerTaskId::kCheckMines :
 				if (check_economies()) {  // economies must be consistent
@@ -434,12 +432,15 @@ void DefaultAI::think() {
 				}
 				break;
 			case SchedulerTaskId::kCheckMilitarysites :
+				// just to be sure the value is reset
+				// 4 seconds is really fine
+				set_taskpool_task_time(gametime + 4 * 1000, SchedulerTaskId::kCheckMilitarysites);
 				check_militarysites(gametime);
-// NOCOM(#codereview): set_taskpool_task_time?
 				break;
 			case SchedulerTaskId::kCheckTrainingsites :
+				set_taskpool_task_time(
+					gametime + kTrainingSitesCheckInterval, SchedulerTaskId::kCheckTrainingsites);
 				check_trainingsites(gametime);
-// NOCOM(#codereview): set_taskpool_task_time?
 				break;
 			case SchedulerTaskId::kCountMilitaryVacant :
 				count_military_vacant_positions();
@@ -456,8 +457,8 @@ void DefaultAI::think() {
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-// NOCOM(#codereview): set_taskpool_task_time?
-				print_stats(gametime);
+				set_taskpool_task_time(gametime + 30 * 60 * 1000, SchedulerTaskId::kPrintStats);
+				print_stats();
 				break;
 			case SchedulerTaskId::kCheckEnemySites :
 				check_enemy_sites(gametime);
@@ -1357,9 +1358,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 }
 
 /// Updates the production and MINE sites statistics needed for construction decision.
-void DefaultAI::update_productionsite_stats(uint32_t const gametime) {
-	// Updating the stats every 10 seconds should be enough
-	set_taskpool_task_time(gametime + 10000, SchedulerTaskId::kProductionsitesStats);
+void DefaultAI::update_productionsite_stats() {
 	uint16_t fishers_count = 0;  // used for atlanteans only
 
 	// Reset statistics for all buildings
@@ -3431,17 +3430,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
-	if (gametime < get_taskpool_task_time(SchedulerTaskId::KMarineDecisions)) {
-		return false;
-	}
+bool DefaultAI::marine_main_decisions() {
 
 	if (!seafaring_economy) {
 		set_taskpool_task_time(std::numeric_limits<uint32_t>::max(), SchedulerTaskId::KMarineDecisions);
 		return false;
 	}
-
-	set_taskpool_task_time(gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
 
 	// getting some base statistics
 	player_ = game().get_player(player_number());
@@ -3541,9 +3535,6 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(uint32_t const gametime) {
-	if (gametime < get_taskpool_task_time(SchedulerTaskId::kCheckShips)) {
-		return false;
-	}
 
 	if (!seafaring_economy) {
 		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kCheckShips);
@@ -3611,10 +3602,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 	if (action_taken) {
 		set_taskpool_task_time(gametime + kShipCheckInterval, SchedulerTaskId::kCheckShips);
-	} else {
-		set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
 	}
-
 	return true;
 }
 
@@ -4115,10 +4103,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	if (get_taskpool_task_time(SchedulerTaskId::kCheckTrainingsites) > gametime) {
 		return false;
 	}
-	if (!trainingsites.empty()) {
-		set_taskpool_task_time(
-			gametime + kTrainingSitesCheckInterval, SchedulerTaskId::kCheckTrainingsites);
-	} else {
+	if (trainingsites.empty()) {
 		set_taskpool_task_time(
 			gametime + 2 * kTrainingSitesCheckInterval, SchedulerTaskId::kCheckTrainingsites);
 		return false;
@@ -4233,13 +4218,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
  * \returns true if something was changed
  */
 bool DefaultAI::check_militarysites(uint32_t gametime) {
-	if (get_taskpool_task_time(SchedulerTaskId::kCheckMilitarysites) > gametime) {
-		return false;
-	}
-
-	// just to be sure the value is reset
-	// 4 seconds is really fine
-	set_taskpool_task_time(gametime + 4 * 1000, SchedulerTaskId::kCheckMilitarysites);
 
 	// Only useable, if defaultAI owns at least one militarysite
 	if (militarysites.empty()) {
@@ -4349,8 +4327,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
-	// 10 seconds is really fine
-	set_taskpool_task_time(gametime + 5 * 1000, SchedulerTaskId::kCheckMilitarysites);
 	return changed;
 }
 
@@ -5528,26 +5504,25 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 
 // Sets due_time based on job ID
 void DefaultAI::set_taskpool_task_time(const uint32_t gametime, const Widelands::SchedulerTaskId task) {
-// NOCOM(#codereview): Use a range-based loop: for (SchedulerTask& task : taskPool) {
-	for (std::vector<SchedulerTask>::iterator t_it = taskPool.begin(); t_it != taskPool.end();
-			     t_it += 1) {
-		if (t_it->id == task) {
-			t_it->due_time = gametime;
+
+	for (auto& item : taskPool) {
+		if (item.id == task) {
+			item.due_time = gametime;
 			return;
 		}
 	}
+
 	assert(false);
 }
 
 // Retrieves due time of the task based on its ID
 uint32_t DefaultAI::get_taskpool_task_time(const Widelands::SchedulerTaskId task) {
-// NOCOM(#codereview): Use a range-based loop: for (const SchedulerTask& task : taskPool) {
-	for (std::vector<SchedulerTask>::iterator t_it = taskPool.begin(); t_it != taskPool.end();
-			     t_it += 1) {
-		if (t_it->id == task) {
-			return t_it->due_time;
+	for (const auto& item : taskPool) {
+		if (item.id == task) {
+			return item.due_time;
 		}
 	}
+
 	assert (false);
 }
 
@@ -5603,13 +5578,13 @@ uint32_t DefaultAI::msites_built() const{
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats(uint32_t const gametime) {
+void DefaultAI::print_stats() {
 
 	if (!kPrintStats) {
 		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kPrintStats);
 		return;
 	}
-	set_taskpool_task_time(gametime + 30 * 60 * 1000, SchedulerTaskId::kPrintStats);
+
 
 	PlayerNumber const pn = player_number();
 

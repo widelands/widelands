@@ -570,18 +570,14 @@ struct SchedulerTask {
 	// used only for debug purposes
 	std::string descr;
 
+	bool operator<(SchedulerTask other) const {
+		return priority > other.priority;
+	}
+
 	SchedulerTask
 		(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d):
 		due_time(time), id(t), priority(p), descr(d){}
 
-};
-
-// NOCOM(#codereview): Thiy is this not simply the default sorting operator for the SchedulerTask class?
-// for sorting of task by their priority
-struct LowerPriority {
-    inline bool operator() (const SchedulerTask& item1, const SchedulerTask& item2) {
-	    return (item1.priority < item2.priority);
-	}
 };
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H
