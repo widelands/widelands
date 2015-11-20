@@ -430,7 +430,7 @@ void Immovable::act(Game & game, uint32_t const data)
 {
 	BaseImmovable::act(game, data);
 
-	if (m_program_step <= game.get_gametime()) {
+	if (static_cast<uint32_t>(m_program_step) <= game.get_gametime()) {
 		//  Might delete itself!
 		(*m_program)[m_program_ptr].execute(game, *this);
 	}

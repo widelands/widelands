@@ -2613,7 +2613,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		}
 	}
 
-	if (state.ivar1 < game.get_gametime()) { //  time to die?
+	if (static_cast<uint32_t>(state.ivar1) < game.get_gametime()) { //  time to die?
 		molog("[fugitive]: die\n");
 		return schedule_destroy(game);
 	}

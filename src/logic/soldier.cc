@@ -487,7 +487,7 @@ Point Soldier::calc_drawpos
 			static_cast<float>(game.get_gametime() - m_combat_walkstart)
 			/
 			(m_combat_walkend - m_combat_walkstart);
-		assert(m_combat_walkstart <= game.get_gametime());
+		assert(static_cast<uint32_t>(m_combat_walkstart) <= game.get_gametime());
 		assert(m_combat_walkstart < m_combat_walkend);
 
 		if (f < 0)
@@ -1590,7 +1590,7 @@ void Soldier::die_update(Game & game, State & state)
 		signal_handled();
 	}
 
-	if (state.ivar1 > game.get_gametime())
+	if (static_cast<uint32_t>(state.ivar1) > game.get_gametime())
 		return schedule_act(game, state.ivar1 - game.get_gametime());
 
 	// When task updated, dead is near!
