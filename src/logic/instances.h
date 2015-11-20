@@ -306,15 +306,6 @@ public:
 		HeaderFleet = 11,
 	};
 
-	protected:
-	/**
-	 * MapObjects like trees are reserved by a worker that is walking
-	 * towards them, so that e.g. two lumberjacks don't attempt to
-	 * work on the same tree simultaneously or two hunters try to hunt
-	 * the same animal.
-	 */
-	bool m_reserved_by_worker;
-
 	public:
 
 	/**
@@ -392,6 +383,14 @@ protected:
 	const MapObjectDescr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
+
+	/**
+	 * MapObjects like trees are reserved by a worker that is walking
+	 * towards them, so that e.g. two lumberjacks don't attempt to
+	 * work on the same tree simultaneously or two hunters try to hunt
+	 * the same animal.
+	 */
+	bool m_reserved_by_worker;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
