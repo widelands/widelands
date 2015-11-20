@@ -5,12 +5,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # MiroslavR <miroslavr256@gmail.com>, 2015
 # Miroslav Remák <Unknown>, 2014
+# MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-07 15:36+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-13 11:26+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -105,16 +106,16 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Postavte farmu a čiernokoreňovú farmu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
-msgid "Build a mill to make cornflour and blackroot flour"
-msgstr "Postavte mlyn na výrobu kukuričnej múky a prášku z čierneho koreňa"
+msgid "Build a mill to make cornmeal and blackroot flour"
+msgstr "Postavte mlyn na výrobu kukuričnej múky a čiernokoreňovej múky"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
 msgstr "Postavte studňu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
-msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr "Postavte pekáreň na výrobu chleba z kukuričnej múky, prášku z čierneho koreňa a vody."
+msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
+msgstr "Postavte pekáreň na výrobu chleba z kukuričnej múky, čiernokoreňovej múky a vody."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -146,10 +147,10 @@ msgstr "Produkcia pavúčej látky"
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving mill. Spidercloth"
 " is needed for the construction of some buildings and clothing, while "
-"tabards are the uniforms of soldiers. The weaving mill needs gold yarn and "
-"spideryarn as raw material. Spideryarn is produced by the spider farm, while"
-" gold yarn is produced by the gold spinning mill out of gold."
-msgstr "Tkáči vyrábajú v tkáčovni pavúčiu látku a kabátce. Pavúčia látka je potrebná na zhotovenie niektorých budov a oblečení a kabátce slúžia ako uniformy vojakov. Na stavbu tkáčovne je potrebná zlatá priadza a pavúčie vlákno. Pavúčie vlákno sa produkuje na pavúčej farme, kým zlatá priadza sa vyrába zo zlata v pradiarni zlata."
+"tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
+" spider silk as raw material. Spider silk is produced by the spider farm, "
+"while gold thread is produced by the gold spinning mill out of gold."
+msgstr "Tkáči vyrábajú v tkáčovni pavúčiu látku a kabátce. Pavúčia látka je potrebná na zhotovenie niektorých budov a oblečení a kabátce slúžia ako uniformy vojakov. Tkáčovňa potrebuje ako suroviny zlatú niť a pavúčí hodváb. Pavúčí hodváb sa produkuje na pavúčej farme, kým zlatá niť sa vyrába zo zlata v pradiarni zlata."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"

@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
+# GunChleoc, 2014
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-28 06:43+0000\n"
-"PO-Revision-Date: 2015-10-03 18:33+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-14 09:45+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -57,11 +58,11 @@ msgid "Start building mines on the mountain"
 msgstr "Láss hozzá bányák építéséhez a hegyen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "Build coal and iron ore mines"
-msgstr "Építs szén- és vasércbányákat"
+msgid "Build coal and iron mines"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
-msgid "Build a coal mine and an iron ore mine."
+msgid "Build a coal mine and an iron mine."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
@@ -137,13 +138,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy elfogyjanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
+msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy kihaljanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Ez az első, de nem az utolsó példa olyan árura, amit felhasználás előtt egy másik épületben fel kell dolgozni."
+msgstr "Ez az első, de nem az utolsó példa olyan árura, amit finomítani kell mielőtt egy másik épületben használhatnád."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
@@ -163,7 +164,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Dolgozd fel a kibányászott kincseket"
+msgstr "Finomítsd a kibányászott nyersanyagokat"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
@@ -233,11 +234,11 @@ msgstr "Építs egy faedzőműhelyt"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
-"building materials. They cannot be built out of simple logs – the wood has "
+"building materials. They cannot be built out of simple logs – the logs have "
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "A nagyobb és jobb épületek – beleértve az összes katonait is – jobb építőanyagokat igényelnek. Nem lehet őket egyszerű farönkökből építeni – a fát először meg kell edzeni egy faedző műhelyben. Sose feledkezz meg egy faedző műhely építéséről, még mielőtt kifogysz az edzett fából, hiszen enélkül nem tudsz terjeszkedni."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"

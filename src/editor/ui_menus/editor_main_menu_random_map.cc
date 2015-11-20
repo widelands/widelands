@@ -517,6 +517,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	eia.set_need_save(true);
 	eia.register_overlays();
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }

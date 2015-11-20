@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,8 +141,6 @@ struct WLApplication {
 
 	/// \warning true if an external entity wants us to quit
 	bool should_die() const {return m_should_die;}
-
-	int32_t get_time();
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness

@@ -13,6 +13,12 @@ world:new_editor_immovable_category{
 }
 
 world:new_editor_immovable_category{
+   name = "artifacts",
+   descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
+   picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
+}
+
+world:new_editor_immovable_category{
    name = "plants",
    descname = _ "Plants",
    picture = "world/immovables/cactus3/idle.png",
@@ -72,6 +78,10 @@ include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
 include "world/immovables/grass2/init.lua"
 include "world/immovables/grass3/init.lua"
+include "world/immovables/manmade/artifacts/artifact00/init.lua"
+include "world/immovables/manmade/artifacts/artifact01/init.lua"
+include "world/immovables/manmade/artifacts/artifact02/init.lua"
+include "world/immovables/manmade/artifacts/artifact03/init.lua"
 include "world/immovables/manmade/bar-ruin00/init.lua"
 include "world/immovables/manmade/bar-ruin01/init.lua"
 include "world/immovables/manmade/bar-ruin02/init.lua"

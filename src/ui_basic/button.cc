@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "ui_basic/button.h"
 
-#include "base/log.h"
 #include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
@@ -58,7 +57,9 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		set_desired_size(w, UI::g_fh1->render(as_uifont("."))->height() + 4);
+		int new_height = UI::g_fh1->render(as_uifont("."))->height() + 4;
+		set_desired_size(w, new_height);
+		set_size(w, new_height);
 	}
 	set_thinks(false);
 }
@@ -287,7 +288,7 @@ void Button::think()
 	Panel::think();
 
 	if (m_highlighted) {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 		if (m_time_nextact <= time) {
 			m_time_nextact += MOUSE_BUTTON_AUTOREPEAT_TICK; //  schedule next tick
 			if (m_time_nextact < time)
@@ -335,7 +336,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		m_pressed = true;
 		if (m_repeating) {
 			m_time_nextact =
-				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			set_thinks(true);
 		}
 	}

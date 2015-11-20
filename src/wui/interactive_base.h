@@ -82,7 +82,8 @@ public:
 
 	bool buildhelp();
 	void show_buildhelp(bool t);
-	void toggle_buildhelp ();
+	void toggle_buildhelp();
+	void toggle_minimap();
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -127,8 +128,8 @@ public:
 	}
 
 protected:
-	void toggle_minimap();
 	void hide_minimap();
+
 	UI::UniqueWindow::Registry & minimap_registry();
 
 	void mainview_move(int32_t x, int32_t y);

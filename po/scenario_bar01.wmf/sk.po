@@ -3,13 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# GunChleoc, 2014
+# MiroslavR <miroslavr256@gmail.com>, 2015
 # MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-14 08:36+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 19:34+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -56,11 +58,11 @@ msgid "Start building mines on the mountain"
 msgstr "Postavte bane na hore"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "Build coal and iron ore mines"
+msgid "Build coal and iron mines"
 msgstr "Postavte uhoľné a železnorudné bane"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
-msgid "Build a coal mine and an iron ore mine."
+msgid "Build a coal mine and an iron mine."
 msgstr "Postavte uhoľnú baňu a železnorudnú baňu."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
@@ -232,11 +234,11 @@ msgstr "Postavte sušiareň dreva"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
-"building materials. They cannot be built out of simple logs – the wood has "
+"building materials. They cannot be built out of simple logs – the logs have "
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Väčšie a kvalitnejšie budovy – vrátane všetkých vojenských – vyžadujú lepšie stavebné materiály. Nemožno ich postaviť z obyčajných kmeňov – drevo najprv treba zdokonaliť v sušiarni. Nezabúdajte vždy postaviť sušiareň dreva, aby vám nedošlo upravené drevo, lebo bez neho expanzia nie je možná."
+msgstr "Väčšie a kvalitnejšie budovy – vrátane všetkých vojenských – vyžadujú lepšie stavebné materiály. Nemožno ich postaviť z obyčajných kmeňov – tie najprv treba zdokonaliť v sušiarni dreva. Predtým, ako sa vám minie upravené drevo, bez ktorého sa nemôžete rozpínať, nezabúdajte vždy postaviť sušiareň dreva."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -313,12 +315,12 @@ msgid "Oxen are bred in cattle farms out of wheat and water."
 msgstr "Voly sa chovajú v kravínoch za spotreby pšenice a vody."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:156
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:166
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:178
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:189
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:196
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:206
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:168
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:182
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:195
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:203
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:215
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:226
 msgid "The Story Begins"
 msgstr "Príbeh sa začína"
 
@@ -326,37 +328,43 @@ msgstr "Príbeh sa začína"
 msgid "Thron sighs…"
 msgstr "Thron si povzdychne…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:158
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
 msgstr "Prešli mesiace a my sa stále skrývame tam, kde sú lesy staré a temné."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:160
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:162
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr "Moji bojovníci cez deň lovia a v noci bdejú, počúvajúc zvuky krutého krviprelievania, ktoré sa zďaleka ozývajú medzi prastarými lesmi."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:168
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:171
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr "Odtiaľto, na míle ďaleko, vidno zúrivé plamene, ktoré hltajú Al'thunran."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:170
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:174
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr "Červené svetlá iskria v tme a tancujú do rytmu vojnových bubnov, ktoré ma prenasledujú i v nočných morách."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:180
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:185
 msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
 msgstr "Kosti môjho otca pokojne odpočívajú v zemi, na ktorej raz ukončil to nezmyselné krviprelievanie, ktoré sa medzi nami prehnalo. Bolí ma, že tento mier vydržal len jednu generáciu."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:182
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:188
 msgid ""
 "Boldreth, my loyal companion and friend is a source of peace and comfort to "
 "me in these dark times. He keeps my spirits high and those of my warriors "
@@ -364,24 +372,27 @@ msgid ""
 "well."
 msgstr "Boldreth, môj verný spoločník a priateľ, je pre mňa zdrojom pokoja a útechy v týchto temných časoch. Udržiava ma v dobrej nálade, vojakov v ostražitosti a taktiež nedovolí chamtivosti alebo zúfalstvu zničiť putá, ktoré nás spájajú."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:191
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:198
 msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
 msgstr "Ako mi otec povedal, sú chvíle, kedy treba bojovať, a chvíle, kedy treba ležať a čakať, pokúšajúc sa nezaspať alebo neumrieť skôr, ako príde pravý čas. Nuž čakám."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:197
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
 msgstr "Thron krúti hlavou…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:198
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:206
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
 msgstr "Vojna aj tak pokračuje. Čoraz viac našich bratov a sestier uteká pred tou krutou vojnou, ktorá sa preháňa hlavným mestom pod stromami."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:200
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:209
 msgid ""
 "The stories they tell about the deeds of our kin are sad to hear. I’ve spent"
 " nights lying awake, restless, more tired than I ever believed one could be."
@@ -390,7 +401,8 @@ msgid ""
 "our kin, became the wedge that drives us apart."
 msgstr "Príbehy o skutkoch nášho rodu, ktoré nám rozprávajú, sa ťažko počúvajú. Ležiac som prebdel veľa nocí, nepokojný a viac unavený, ako by som bol schopný uveriť, že niekto môže byť. No kedykoľvek zavriem oči, vidím v plameňoch pevnosť, ktorú postavil môj otec. Trón medzi stromami, symbol jednoty a pokoja nášho rodu, sa stal klinom vrazeným medzi nás."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:208
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:218
 msgid ""
 "Today my hunters brought men, women and little children before me who had "
 "hidden out in the forests, trying to escape the war, hate and revenge that "
@@ -401,22 +413,25 @@ msgid ""
 "this slaughter, unless… is this it? As father told me?"
 msgstr "Moji lovci dnes ku mne priviedli mužov, ženy a malé deti, ktoré sa skrývali v lesoch, pokúšajúc sa uniknúť pred vojnou, nenávisťou a pomstou zúriacou medzi kmeňmi, navzájom bojujúcich ako za starých čias, keď sme neboli nič viac ako divoké šelmy riadené a ovládané inštinktami. Ani jeden z mojich bratov si viac neudrží kontrolu nad dreveným trónom, žiaden kmeň nebude taký silný, aby si podmanil ten druhý. Toto zabíjanie nikdy neskončí, iba ak… je to ono? Ako mi otec povedal?"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:210
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:221
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
 msgstr "Búr sa proti každému, kto ohrozuje našu holú existenciu, aj keby mu v žilách tiekla tvoja krv, aj keby zmýšľal ako ty?"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:217
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:229
 msgid ""
 "Boldreth seems more and more torn as the days go by. The spirits of my "
 "fellows sink as the cold season approaches, and we are still living in no "
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Ako plynú dni, Boldreth vyzerá čoraz zlomenejšie. Duše mojich spoločníkov klesajú s príchodom chladného obdobia, a my stále žijeme len v chatrčiach a kasárňach. Nikdy som nemal v úmysle zostať tu, v divočine, nadlho, ale ani som si nikdy nemyslel, že by sa moji bratia zapojili do tejto nezmyselnej bitky na takú dlhú dobu."
+msgstr "Ako plynú dni, Boldreth pôsobí čoraz zlomenejšie. Moji spoločníci strácajú pokojnú náladu s príchodom chladného obdobia, veď stále žijeme len v chatrčiach a kasárňach. Nikdy som nemal v úmysle zostať tu, v divočine, nadlho, ale ani som si nikdy nemyslel, že by sa moji bratia zapojili do tejto nezmyselnej bitky na takú dlhú dobu."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:219
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:232
 msgid ""
 "Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps"
 " it’s time to give those who still live and think united a new home, "
@@ -424,117 +439,128 @@ msgid ""
 "called our home…"
 msgstr "Možno je načase zabezpečiť, aby sme sa tu cítili aspoň o trochu lepšie. Možno je načase poskytnúť tým, čo spoločne žijú a myslia, nový domov ako náhradu za ten, o ktorý sme prišli? Kým sa nebudeme môcť vrátiť na miesto, ktoré sme kedysi nazývali domovom…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:224
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Somebody Comes up to You"
 msgstr "Niekto sa k vám blíži"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:225
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
 msgstr "Starec vraví…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:226
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:240
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr "Buďte pozdravený, náčelník. Som Khantrukh a prežil som veľa zím. Prosím, dovoľte mi poradiť vám v týchto temných časoch."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:228
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
 msgstr "Len bohovia vedia, ako dlho ešte sa tu musíme skrývať. Bojovníci každým dňom čakajú na slávnostný pochod späť. Silne však pochybujem, že nastane čoskoro. Navyše dni sú krátke a mrazivé…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:233
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:294
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:308
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:315
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:338
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:354
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:371
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:248
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:321
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:337
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:345
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:373
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:392
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:419
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:428
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:413
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:438
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:471
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:482
 msgid "The Advisor"
 msgstr "Radca"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:234
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
 msgstr "Khantrukh poznamená…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:235
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:251
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
 msgstr "Všimol som si, že ste už postavili kameňolom a dve drevorubačské chatrče. Je to dobrý začiatok, keď tu chceme zostať dlhšie."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:237
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:254
 msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr "Nezabúdajte však, že tieto lesy sú naším dedičstvom, ktoré nám zverili naši predkovia. Musíme si ich ctiť a starať sa o ne. Čo zoberieme, musíme opäť vrátiť."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:239
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:257
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
 msgstr "Náhradu za zoťaté stromy nám poskytnú lesnícke chatrče. Treba ich postaviť niekoľko, najlepšie v blízkosti drevorubačských chatrčí."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:245
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
 msgstr "V noci"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:246
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:258
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:264
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says…"
 msgstr "Thron vraví…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:247
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:266
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
 msgstr "Počas ďalšej nespavej noci som sa vybral na kopec a uprene zahľadel na sever. Ohne ešte stále horia, utišujúc si svoj hlad na dedičstve môjho otca."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:249
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
 msgstr "Stále nám pripomínajú, prečo sa tu musíme skrývať… a prečo sa nakoniec musíme vrátiť!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:257
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "At the Tomb"
 msgstr "V hrobke"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:259
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
 msgstr "Opäť som sa vybral do posvätného hája, kde je pochovaný môj otec, na úpätí samého vrcholu pohoria Kal’mavrath. Ostal som tam nečinne stáť a nepociťoval som ani ubiehať čas, ani studený dážď, ktorý sa lial zo zatemnenej oblohy…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:261
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:283
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
 msgstr "Pripadalo mi to ako rozlúčka. Po prvý raz som bol zvedavý, čo mi budúcnosť prinesie…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:269
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:291
 msgid "The Other Day"
 msgstr "Ďalší deň"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:270
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:292
 msgid "Thron says thoughtfully…"
 msgstr "Thron prehovorí zamyslene…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:271
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:294
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr "Prednedávnom ma navštívil Boldreth. Poradil nám, aby sme sa premiestnili niekam bližšie k domovu – a mohli tak zasiahnuť pri prvých známkach úpadku síl mojich bratov."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:273
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:297
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
@@ -542,42 +568,45 @@ msgid ""
 " too fast would cause on both sides…"
 msgstr "Hľadiac na nebo ponad vrcholky stromov, stále vidím stúpať čierny dym. Viem, že je priskoro a jeho túžby sa ešte nemajú naplniť. Možno má pravdu, no obávam sa krviprelievania, ktoré by prirýchly návrat vyvolal na oboch stranách…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:278
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "The Oath"
 msgstr "Sľub"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:279
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:303
 msgid "Thron looks furious…"
 msgstr "Thron vyzerá nazlostene…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:280
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:305
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr "Moji bojovníci dnes objavili starého muža, ktorý putoval temným lesom chorý a ranený. Zhrozili sme sa, keď nám povedal o zverstvách, ktoré sa dejú v Al'thunrane."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:282
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr "Týmto obnovujem svoj sľub – zastavím toto šialenstvo za každú cenu!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:287
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:300
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:321
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:330
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:345
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:313
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:328
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:352
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:363
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:385
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:401
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:410
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:381
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:403
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:430
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:449
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:460
 msgid "Your Loyal Companion"
 msgstr "Váš verný spoločník"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:288
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
 msgstr "Prikročí k vám statočný Boldreth…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:289
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:316
 msgid ""
 "So you want to prepare us for a longer stay in these forests, Thron? Well, I"
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
@@ -585,22 +614,24 @@ msgid ""
 " battlefield, and our axes and swords have turned rusty over time."
 msgstr "Takže vy nás chcete pripraviť na dlhší pobyt v týchto lesoch, Thron? Nuž považujem to za rozumný nápad, aj keď moje srdce neprestáva túžiť po spanilom návrate do Al’thunranu. Príliš dlho sme čakali v nečinnosti, zatiaľ čo naši bratia bojovali, a naše sekery a meče časom zhrdzaveli."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:295
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
 msgstr "Khantrukh sa pridá…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:296
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:324
 msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr "Prosím o odpustenie, náčelník, ale mám vážnu obavu, o ktorej s vami chcem diskutovať. Skaly v blízkosti nášho tábora sa rýchlo zmenšujú pod nástrojmi našich robotníkov a je len otázkou času, kedy všetky pominú."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:302
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
 msgstr "Boldreth vyskočí…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:303
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid ""
 "While it is certainly no worthy task for a warrior, at least it is something"
 " to do! Thron, what would you say about my taking a few of our most restless"
@@ -608,58 +639,65 @@ msgid ""
 " – maybe we will find some more big rocks to please the old man?"
 msgstr "Hoci to určite nie je úloha hodná bojovníka, aspoň je to nejaká robota! Thron, čo by ste povedali na to, keby som vzal pár nepokojných bojovníkov na cestu o čosi bližšie k mohutnej hore Kal’mavrath? Možno tam nájdeme viac skalísk, ktoré by potešili starca."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:310
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
 msgstr "Khantrukh zafrfle…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:311
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:341
 msgid "Old man? Disrespectful youth!"
 msgstr "Starca? Neúctivá mládež!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:316
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:347
 msgid "Khantrukh nods satisfied…"
 msgstr "Khantrukh spokojne prikývne…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:317
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
 msgstr "Konečne! Tieto skaly by mali na chvíľu postačiť."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:322
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
 msgstr "Boldreth vykríkne…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:323
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr "Len sa na to pozrite! Na východe leží veľká hora Kal’mavrath! Som zvedavý, aké poklady mohla príroda ukryť pod jej majestátnymi úbočiami!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:325
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:358
 msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr "Rozšírme územie na východ. Raz za čas aj starší majú možnosť byť užitoční! Vyšlime niektorých z tých, ktorí rozumejú reči kameňov, aby objasnili tajomstvá tej hory!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:331
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth laughs…"
 msgstr "Boldreth sa pustí do smiechu…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:332
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:366
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr "Pri Chat’Karuthovej brade, to je úžasné! Len si predstavte, na čo všetko nám toto uhlie a železná ruda môže poslúžiť!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:334
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:369
 msgid "It might even be enough to…"
 msgstr "Možno to bude stačiť aj na…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:339
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:374
 msgid "Khantrukh interrupts…"
 msgstr "Do reči vstúpi Khantrukh…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:340
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:376
 msgid ""
 "While this is true, we should consider it later, for now other obstacles are"
 " at hand. The miners will definitely demand greater rations for working high"
@@ -667,70 +705,78 @@ msgid ""
 "not be easy."
 msgstr "Pravda, no je priskoro nad tým premýšľať. Zatiaľ stoja v ceste iné prekážky. Baníci, pracujúci vysoko v horách v ukrutnej zime, budú určite požadovať väčšie prídely jedla a zásobovať ich nemusí byť ľahká úloha."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:346
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:382
 msgid "Boldreth nods…"
 msgstr "Boldreth prikývne…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:347
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:384
 msgid "I have to hand it to you: you are right here, old man."
 msgstr "Musím uznať, že máte pravdu, starec."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:349
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:387
 msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr "Zdá sa, že v tunajších lesoch žije pomerne veľké množstvo zveri – mohli by sme ich loviť vo väčšej miere. A, samozrejme, ľudí by potešila nová krčma – hej, ak chcete, mohli by sme ju nazvať „Thronova hrdosť“ alebo tak nejak!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:355
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
 msgstr "Starec vyskočí do vzduchu…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:356
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:395
 msgid "Wisdom commands to seek variety."
 msgstr "Múdrosť káže hľadať rozmanitosť."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:358
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:398
 msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
 msgstr "Na sever od veľkej hory sa rozprestiera rozsiahla rovina – prečo nevyužiť priestor, ktorý nám matka príroda ponúka, a nepostaviť tam farmu? Minimálne ja by som pre zmenu ocenil čerstvo upečenú pitu…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:364
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
 msgstr "Boldreth sa rozveselí…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:365
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "Our hunters are out in the forests, Thron."
 msgstr "Naši lovci sa vybrali do lesov, Thron."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:367
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:409
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
 msgstr "Sľubujem vám, že skôr, ako zapadne slnko, dostanete veľkolepé jedlo hodné náčelníka všetkých klanov!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:372
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
 msgstr "Khantrukh sa zahľadí na pláne…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:373
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:416
 msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr "Nie je krásny – ten pohľad na zlaté polia, pokojne rastúce, tancujúce do vetra? Nuž verím, že pekár je práve na ceste sem so svojím najchutnejším chlebom vyhradeným pre samého náčelníka!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:377
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:420
 msgid "A Beautiful Morning"
 msgstr "Nádherné ráno"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:378
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
 msgstr "Thron uznáva…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:379
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:423
 msgid ""
 "A tavern opened for our people yesterday. While I am hardly in the mood for "
 "celebration, I noticed how much this tiny bit of home means to my people. "
@@ -738,16 +784,18 @@ msgid ""
 "spirits still the day after."
 msgstr "Včera sa pre našich ľudí otvorila krčma. Hoci mám ťažko náladu oslavovať, všimol som si, ako veľa tento malý kúsok domova pre ľudí znamenal. Ich piesne sa preháňali vzduchom do neskorej noci a povznesená nálada im zostala aj na ďalší deň."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:381
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:426
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
 msgstr "Možno tu ozaj pomaly vytvárame miesto, ktoré môžeme… nazvať domovom."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:386
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Boldreth remarks…"
 msgstr "Boldreth poznamená…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:387
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:433
 msgid ""
 "So now that we have both the mines and the food to sustain them, we should "
 "bring what our brave miners gain for us into a more useful state. The iron "
@@ -755,61 +803,68 @@ msgid ""
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
 msgstr "No a teraz, keď máme obe bane a jedlo na ich udržiavanie, je načase premeniť to, čo pre nás naši statoční baníci získavajú, na užitočnejší stav. Železná ruda sa musí roztaviť na železo, ktoré možno okovať na čo len chceme. Potrebujeme tiež uhlie do pece taviča."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:393
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:435
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:439
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:490
 msgid "Khantrukh speaks…"
 msgstr "Khantrukh prehovorí…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:394
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:441
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
 msgstr "Naši baníci každým dňom vyťažujú čoraz menej surovín. Pokiaľ chceme získať všetky poklady hory, musíme sa prekopať hlbšie, bližšie k jej jadru."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:396
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:444
 msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
 msgstr "Samozrejme, v takých hĺbkach je tma a zima a len málokto sa tam odváži dobrovoľne vstúpiť. Za takúto statočnosť by sme ich mali odmeniť väčším prídelom jedla. A krčahom piva či dvomi na zlepšenie nálady."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:402
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
 msgstr "Boldreth pôsobí znepokojene…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:403
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:452
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
 msgstr "Ako som práve zistil, dochádza nám upravené drevo! Vojakov nemôžeme ubytovať v nejakých rozpadávajúcich sa chatrčiach, už vôbec nie v časoch takých nebezpečných, aké sú tie naše!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:405
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "We need a wood hardener, and we need one now!"
 msgstr "Potrebujeme sušiareň dreva, a to naliehavo!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:411
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:461
 msgid "Boldreth smiles…"
 msgstr "Boldreth sa usmeje…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:412
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:463
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
 msgstr "Nuž, starý priateľu, toto by malo zabezpečiť, aby sa naše pevnosti nezrútili hneď pri prvom bojovom pokriku nepriateľov. Teraz nám nič nebráni v rozpínaní."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:414
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:466
 msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
 msgstr "Nebolo by však na škodu zhromaždiť nejakú maltu pre budúce ťaženie. V čase núdze by sme tak mohli postaviť pevnosť, akú svet ešte nevidel!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:420
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "Khantrukh steps in…"
 msgstr "Khantrukh sa zapojí…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:421
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid ""
 "Chieftain, this is a disgrace! It is well that we can produce grout for "
 "mighty fortifications and great buildings now – only this does not prevent "
@@ -818,25 +873,28 @@ msgid ""
 "dripping on my face!"
 msgstr "Náčelník, to je nehoráznosť! Je v poriadku, že teraz môžeme vyrábať maltu na stavbu veľkolepých opevnení a veľkých budov, lenže to nezabráni presakovaniu striech! Tí mladí možno radi trávia noci v daždi, no ja proste nedokážem ani na sekundu zaspať, keď mi do tváre ustavične padajú kvapky."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:423
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:477
 msgid "Now this is a problem we should do something about!"
 msgstr "Toto je problém, s ktorým by sme mali niečo urobiť!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:429
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:483
 msgid "Khantrukh seems relieved…"
 msgstr "Khantrukh pôsobí uvoľnene…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:430
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:485
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr "Skvelé! Z našich striech už viac nekvapká a máme všetok materiál potrebný pre, nuž, každú monumentálnu budovu, ktorú uznáme za vhodnú!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:434
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:489
 msgid "We Need Oxen!"
 msgstr "Potrebujeme voly!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:436
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:492
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
@@ -844,30 +902,33 @@ msgid ""
 "oxen."
 msgstr "S neustálym rozpínaním našej ríše prenos na cestách ohromne narastá. Naši úbohí nosiči už nie sú schopní prenášať tovar tak rýchlo, ako to od nich vyžadujeme. Navrhujem, aby sme ich trochu podporili chovom volov."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:438
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:495
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr "Úžasné zvieratá. Sú také rýchle ako človek, omnoho silnejšie a veľmi skromné: na ich chov stačí len pšenica a voda a ony vykonajú svoju prácu na cestách verne a spoľahlivo."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:443
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:500
 msgid "Mission Complete"
 msgstr "Misia splnená"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:444
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:456
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:474
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:516
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:539
 msgid "Thron speaks…"
 msgstr "Thron prehovorí…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:445
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:503
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "Pred pár dňami ma Boldreth pozval do nového hostinca. ‚Rozveselilo by ma to,‘ povedal."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:447
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:506
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -875,31 +936,34 @@ msgid ""
 "the forest for the past days and I could see how weary he was."
 msgstr "Keď som sa obzrel okolo seba, zbadal som verné tváre, plné dôvery, že ich dokážem previesť týmito temnými časmi. No skôr, ako som mohol vysloviť akékoľvek slová vďačnosti či povzbudenia, vbehol do hostinca jeden z mojich vojakov. Posledné dni trávil ďaleko v lese a bolo na ňom vidieť, aký je ustatý."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:449
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
 msgstr "Správa, ktorú priniesol, zmenila všetko…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:450
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
 msgstr "Víťazstvo"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:451
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:511
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Dokončili ste túto misiu. Ak chcete, môžete pokračovať v hraní. V opačnom prípade prejdite k ďalšej misii."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:455
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:515
 msgid "One Full Moon Night"
 msgstr "Jednej noci za splnu"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:457
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Jednej noci, keď mesiac jasne svietil, vyliezol som na vrchol hory Kal’mavrath."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:459
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:521
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -907,48 +971,54 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Uprene som sa zahľadel na obzor a v diaľke stále bolo vidno iskriť tmavočervené svetlá. Je neuveriteľné, s akou vášňou bojujú v tejto vojne moji bratia. Bojím sa chvíle, keď opäť uvidím Al’thunran – zostane z nášho krásneho mesta aj niečo iné ako zrúcaniny a popol?"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:463
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "Another Cold Day"
 msgstr "Ďalší studený deň"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:464
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
 msgstr "Thron má obavy…"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:465
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
 msgstr "Doľahla na nás zima. Mnohí z nás sú nachladnutí, napriek tomu musíme vydržať. Deň návratu už nemôže byť ďaleko – už nesmie byť ďaleko."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:467
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Modlil som sa, aby sa znova oteplilo, aj aby sa tá vojna už konečne skončila."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:469
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:534
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Ako sa zdá, žiadna modlitba sa zatiaľ nesplnila."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:473
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "A friendly village has joined us!"
 msgstr "Pripojila sa k nám priateľská osada!"
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:475
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:541
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Našli sme dedinu obývanú priateľskými a produktívnymi ľuďmi, ohromenými naším majetkom, technológiou a silou."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:477
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:544
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Žijú si jednoduchým, ale bezstarostným životom ako lovci a roľníci. Nikdy sa nezúčastnili na žiadnom vojenskom konflikte a nie sú pripravení na boj."
 
-#: ../../campaigns/bar01.wmf/scripting/texts.lua:479
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:547
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."

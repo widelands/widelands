@@ -93,7 +93,7 @@ world:new_immovable_type{
          "seed=aspen_summer_sapling",
       },
       fall = {
-         "animate=falling 1200",
+         "animate=falling 1400",
          "transform=fallentree",
       },
    },
@@ -111,6 +111,7 @@ world:new_immovable_type{
          pictures = path.list_files(dirname .. "old/f_tree_??.png"),
          hotspot = { 20, 59 },
          fps = 10,
+         play_once = true
       },
    },
 }

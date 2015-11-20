@@ -134,7 +134,7 @@ diary_page_5_2 = {
    posy = 1,
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Later, I walked down to the rocks in the south and looked for a place where we could build a quarry to get some hard stones for our larger buildings.]])
+      _([[Later, I walked down to the rocks in the south and looked for a place where we could build a quarry to get some granite for our larger buildings.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[Again, I felt like I was in paradise when I noticed that some marble-like stones were among the rocks. It seems that we will soon be able to build strong, luxurious buildings, like those we were accustomed to in Fremil.]]))

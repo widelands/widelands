@@ -21,6 +21,7 @@
 #define WL_LOGIC_BUILDCOST_H
 
 #include <map>
+#include <memory>
 
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -33,7 +34,7 @@ namespace Widelands {
 class TribeDescr;
 class Tribes;
 
-struct Buildcost : std::map<WareIndex, uint8_t> {
+struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
 	Buildcost();
 	Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);

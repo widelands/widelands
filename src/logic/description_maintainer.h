@@ -33,17 +33,17 @@
 template <typename T> struct DescriptionMaintainer {
 	// Adds the 'entry', will assert() if it is already registered. Returns the
 	// index of the entry. Ownership is taken.
-	Widelands::WareIndex add(T* entry);
+	Widelands::DescriptionIndex add(T* entry);
 
 	// Returns the number of entries in the container.
-	Widelands::WareIndex size() const {return items_.size();}
+	Widelands::DescriptionIndex size() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
 
 	// Returns the index of the entry with the given 'name' or INVALID_INDEX if the entry
 	// is not in the container.
-	Widelands::WareIndex get_index(const std::string& name) const {
+	Widelands::DescriptionIndex get_index(const std::string& name) const {
 		NameToIndexMap::const_iterator i = name_to_index_.find(name);
 		if (i == name_to_index_.end()) {
 			return Widelands::INVALID_INDEX;
@@ -53,13 +53,13 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the entry with the given 'idx' or nullptr if 'idx' is out of
 	// bounds. Ownership is retained.
-	T* get_mutable(const Widelands::WareIndex idx) const {
+	T* get_mutable(const Widelands::DescriptionIndex idx) const {
 		return (idx < items_.size()) ? items_[idx].get() : nullptr;
 	}
 
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
 	// undefined.
-	const T& get(const Widelands::WareIndex index) const {
+	const T& get(const Widelands::DescriptionIndex index) const {
 		assert(index < items_.size());
 		return *items_.at(index);
 	}
@@ -72,7 +72,7 @@ private:
 
 
 template <typename T>
-Widelands::WareIndex DescriptionMaintainer<T>::add(T * const item) {
+Widelands::DescriptionIndex DescriptionMaintainer<T>::add(T * const item) {
 	if (exists(item->name()) != nullptr) {
 		throw wexception("Tried to add %s twice.", item->name().c_str());
 	}

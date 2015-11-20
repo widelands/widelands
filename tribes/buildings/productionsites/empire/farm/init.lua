@@ -49,7 +49,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_wheat",
             "call=harvest_wheat",
-            "playFX=sound/farm farm_animal 192",
             "return=skipped"
          }
       },

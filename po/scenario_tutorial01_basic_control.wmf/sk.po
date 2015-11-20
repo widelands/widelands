@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-12 18:13+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-12 20:57+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -74,9 +74,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Zvyčajne začínate hru s jednou základňou. To je tá veľká budova, pred ktorou stojí modrá vlajka. Základňa je sklad, kde sa skladujú výrobky, žijú robotníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných výrobkov. Samozrejme, výrobky v základni nevydržia na večnosť, takže musíte dbať na to, aby sa opäť vyrobili. Najdôležitejšie výrobky na začiatku hry sú základné stavebné výrobky: kmene stromov a kamene. Zabezpečme, aby nám nedošlo drevo. Na to budeme potrebovať drevorubača a chatrč, v ktorej bude bývať."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr "Zvyčajne začínate hru s jednou základňou. To je tá veľká budova, pred ktorou stojí modrá vlajka. Základňa je sklad, kde sa skladujú výrobky, žijú robotníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných výrobkov. Samozrejme, výrobky v základni nevydržia večne, takže musíte dbať na to, aby sa opäť vyrobili. V začiatočných fázach hry sú najdôležitejšími výrobkami základné stavebné výrobky: kmene stromov a žula. Zabezpečme, aby nám nedošlo drevo. Na to budeme potrebovať drevorubača a chatrč, v ktorej bude bývať."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -288,8 +288,8 @@ msgstr "Chatrč drevorubača je hotová"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Výborne. Drevorubačská chatrč je hotová. Onedlho sa tam nasťahuje drevorubač a začne stínať stromy, čím nám zatiaľ zabezpečí prísun dreva. Teraz prejdime k ťažbe kameňa."
+"the granite."
+msgstr "Výborne. Drevorubačská chatrč je hotová. Onedlho sa tam nasťahuje drevorubač a začne stínať stromy. Prísun dreva je teda zatiaľ zaistený. Teraz prejdime k ťažbe žuly."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -301,11 +301,11 @@ msgstr "Stavba kameňolomu"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Kamene možno ťažiť v žulových baniach, ale ľahšie je postaviť kameňolom pri skalách ležiacich nablízku. Čírou náhodou je ich tu hromada na západ (vľavo) od základne. Teraz vás naučím, ako tam presunúť pohľad."
+msgstr "Jedným zo spôsobov získavania žuly je ťažba v žulových baniach. Jednoduchšie je však postaviť kameňolom niekde pri nejakých skalách. Čírou náhodou je ich tu hromada na západ (vľavo) od základne. Teraz vás naučím, ako tam presunúť pohľad."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -658,8 +658,8 @@ msgstr "Postavte druhý kameňolom"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Keď je skál veľké množstvo, mali by ste postaviť ďalší kameňolom. Zrýchlite tak produkciu kameňa."
+"will make the granite production faster."
+msgstr "Keď je skál veľké množstvo, mali by ste postaviť ďalší kameňolom. Zrýchlite tak produkciu žuly."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -825,9 +825,9 @@ msgstr "Teraz kliknutím pravým tlačidlom myši zavrite okno správ."
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Výborne! Teraz sa pozrime, ako správy fungujú v skutočnej hre. Demonštrujem to tak, že úbohým kamenárom v kameňolomoch zoberiem všetky skaly. Keď sa nabudúce pokúsia pracovať, každý z nich odošle správu, že vo svojej pracovnej oblasti nemôže žiadne nájsť."
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr "Výborne! Teraz sa pozrime, ako správy fungujú v skutočnej hre. Demonštrujem to tak, že úbohým kamenárom v kameňolomoch vezmem všetky skaly. Keď sa pri najbližšej príležitosti pokúsia pracovať, každý z nich odošle správu, že vo svojej pracovnej oblasti nemôže žiadne nájsť."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -896,12 +896,12 @@ msgstr "Chcel by som vás ešte naučiť jednu ďalšiu vec: rozširovanie územ
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Svoje územie rozšírite, ak na jeho kraji postavíte vojenskú budovu. Barbari majú niekoľko odlišných vojenských budov: strážnice, hradby, donžony, pevnosti a citadely. Čím je budova väčšia, tým nákladnejšie je ju postaviť, ale aj tým viac územia si okolo seba podmaní a tým viac vojakov v nej možno umiestniť. Budovy sa tiež líšia vo svojom dohľade: budovy s vežou dovidia ďalej ako tie ostatné."
+msgstr "Svoje územie jednoducho rozšírite tak, že na jeho kraji postavíte vojenskú budovu. Barbari majú niekoľko odlišných vojenských budov: strážnice, hradby, veže, pevnosti a citadely. Čím je budova väčšia, tým nákladnejšie je ju postaviť, ale aj tým viac územia si okolo seba podmaní a tým viac vojakov v nej možno umiestniť. Budovy sa okrem toho líšia vo svojom dohľade: budovy s vežou dovidia ďalej ako tie ostatné."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -938,9 +938,9 @@ msgstr "V hre Widelands je nevyhnutné staviať množstvo budov, ktoré zaberaj�
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Barbari môžu postaviť štyri odlišné vojenské budovy: strážnicu (malá), hradbu  a donžon (obe stredné) a pevnosť (veľká). Vyberte si tú, ktorá sa vám najviac páči."
+msgstr "Barbari môžu postaviť štyri odlišné vojenské budovy: strážnicu (malá), hradbu a vežu (obe stredné) a pevnosť (veľká). Vyberte si tú, ktorá sa vám páči najviac."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

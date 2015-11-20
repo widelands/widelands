@@ -132,11 +132,11 @@ EditorToolChangeResourcesOptionsMenu
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
 	const Widelands::World & world = parent.egbase().world();
-	Widelands::ResourceIndex const nr_resources = world.get_nr_resources();
+	Widelands::DescriptionIndex const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
 	int resource_pic_max_width = 0, resource_pic_max_height = 0;
-	for (Widelands::ResourceIndex i = 0; i < nr_resources; ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
 		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
 		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
@@ -156,7 +156,7 @@ EditorToolChangeResourcesOptionsMenu
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for
-		(Widelands::ResourceIndex i = 0;
+		(Widelands::DescriptionIndex i = 0;
 		 i < nr_resources;
 		 pos.x += resource_pic_max_width + hspacing(), ++cur_x, ++i)
 	{

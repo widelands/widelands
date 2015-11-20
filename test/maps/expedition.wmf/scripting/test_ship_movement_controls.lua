@@ -1,27 +1,31 @@
 run(function()
    game.desired_speed = 30 * 1000
-   p1:place_ship(map:get_field(10, 10))
 
-   port = map:get_field(16, 16).immovable
-   port:set_wares("log", 10) -- no sense to wait
-   port:set_wares("blackwood", 10)
+    -- placing a ship on coast
+   p1:place_ship(map:get_field(8, 8))
+   sleep(1000)
 
    --getting table with all our ships (single one only)
    ships = p1:get_ships()
 
-   --veryfing that ship is indeed placed where should be :)
-   assert_equal(10,ships[1].field.x)
-   assert_equal(10,ships[1].field.y)
-
    --ships table should contain 1 item (1 ship)
    assert_equal(1, #ships)
+
+   --waiting till it is pulled from coast
+   while ships[1].field.x == 8 and ships[1].field.xy == 8 do
+      print ("ship still on coast")
+      sleep(1000)
+   end
+
+   port = map:get_field(16, 16).immovable
+   port:set_wares("log", 10) -- no sense to wait
+   port:set_wares("blackwood", 10)
 
    --ship has no wares on it
    assert_equal(0,ships[1]:get_wares())
 
    --no destination is set
    assert(not ships[1].destination)
-
    --ships in transport state
    assert_equal("transport", ships[1].state)
 
@@ -33,15 +37,17 @@ run(function()
    port:start_expedition()
    sleep (300)
    assert(port.expedition_in_progress)
+   assert(ships[1])
 
    --ships changes state when exp ready
    while ships[1].state == "transport" do sleep(2000) end
    assert_equal("exp_waiting", ships[1].state)
-
    --sending NW and verifying
    ships[1].scouting_direction="nw"
+
    sleep(6000)
    assert_equal("nw", ships[1].scouting_direction)
+
    assert_equal("exp_scouting", ships[1].state)
 
    while ships[1].scouting_direction == "nw" do

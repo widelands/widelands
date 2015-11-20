@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    attributes = { "ripe_blackroot", "field" },
    programs = {
       program = {
-         "animate=idle 50000",
+         "animate=idle 500000",
          "remove=",
       },
       harvest = {

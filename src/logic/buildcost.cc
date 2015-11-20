@@ -20,6 +20,7 @@
 #include "logic/buildcost.h"
 
 #include <map>
+#include <memory>
 
 #include "base/wexception.h"
 #include "io/fileread.h"
@@ -30,14 +31,14 @@
 
 namespace Widelands {
 
-Buildcost::Buildcost() : std::map<WareIndex, uint8_t>() {}
+Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {}
 
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) :
-	std::map<WareIndex, uint8_t>() {
+	std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
 		int32_t value = INVALID_INDEX;
 		try {
-			WareIndex const idx = tribes.safe_ware_index(warename);
+			DescriptionIndex const idx = tribes.safe_ware_index(warename);
 			if (count(idx)) {
 				throw GameDataError(
 					"A buildcost item of this ware type has already been defined: %s", warename.c_str());
@@ -47,7 +48,7 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) :
 			if (ware_count != value) {
 				throw GameDataError("Ware count is out of range 1 .. 255");
 			}
-			insert(std::pair<WareIndex, uint8_t>(idx, ware_count));
+			insert(std::pair<DescriptionIndex, uint8_t>(idx, ware_count));
 		} catch (const WException& e) {
 			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}
@@ -81,7 +82,7 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 		if (name.empty())
 			break;
 
-		WareIndex index = tribe.ware_index(name);
+		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.unsigned_8();
