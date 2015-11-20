@@ -44,7 +44,7 @@ class MilitarySite;
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 enum class BuildingNecessity : uint8_t
 	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending};
-enum class schedulerTaskID : uint8_t {
+enum class SchedulerTaskId : uint8_t {
 		kBbuildableFieldsCheck,
 		kMineableFieldsCheck,
 		kRoadCheck,
@@ -564,18 +564,19 @@ struct MilitarySiteSizeObserver {
 // this represents a scheduler task
 struct SchedulerTask {
 	uint32_t due_time;
-	Widelands::schedulerTaskID id;
+	Widelands::SchedulerTaskId id;
 	// used to sort jobs when AI has to perform more jobs at once
 	uint8_t priority;
 	// used only for debug purposes
 	std::string descr;
 
 	SchedulerTask
-		(const uint32_t time, const Widelands::schedulerTaskID t, const uint8_t p, const char* d):
+		(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d):
 		due_time(time), id(t), priority(p), descr(d){}
 
 };
 
+// NOCOM(#codereview): Thiy is this not simply the default sorting operator for the SchedulerTask class?
 // for sorting of task by their priority
 struct LowerPriority {
     inline bool operator() (const SchedulerTask& item1, const SchedulerTask& item2) {

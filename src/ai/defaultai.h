@@ -153,8 +153,8 @@ private:
 
 	void sort_task_pool();
 	void sort_by_priority();
-	void set_taskpool_task_time(uint32_t, Widelands::schedulerTaskID);
-	uint32_t get_taskpool_task_time(Widelands::schedulerTaskID);
+	void set_taskpool_task_time(uint32_t, Widelands::SchedulerTaskId);
+	uint32_t get_taskpool_task_time(Widelands::SchedulerTaskId);
 
 	bool construct_building(uint32_t);
 
@@ -240,7 +240,7 @@ private:
 	uint8_t type_;
 
 	// collect statistics on how many times which job was run
-	uint32_t schedStat[20] = {0};
+	uint32_t sched_stat_[20] = {0};
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
