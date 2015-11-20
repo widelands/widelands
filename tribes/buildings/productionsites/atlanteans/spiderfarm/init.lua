@@ -10,56 +10,56 @@ tribes:new_productionsite_type {
    size = "big",
 
    buildcost = {
-		log = 2,
-		granite = 2,
-		planks = 2
-	},
-	return_on_dismantle = {
-		granite = 1,
-		planks = 1
-	},
+      log = 2,
+      granite = 2,
+      planks = 2
+   },
+   return_on_dismantle = {
+      granite = 1,
+      planks = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 87, 75 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 87, 75 },
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 87, 75 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 87, 75 },
+      }
+   },
 
    aihints = {
-		forced_after = 150,
-		prohibited_till = 60
+      forced_after = 450,
+      prohibited_till = 350
    },
 
-	working_positions = {
-		atlanteans_spiderbreeder = 1
-	},
+   working_positions = {
+      atlanteans_spiderbreeder = 1
+   },
 
    inputs = {
-		corn = 7,
-		water = 7
-	},
+      corn = 7,
+      water = 7
+   },
    outputs = {
-		"spider_silk"
+      "spider_silk"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
-			actions = {
-				"sleep=25000",
-				"return=skipped unless economy needs spider_silk",
-				"consume=corn water",
-				"animate=working 30000",
-				"produce=spider_silk"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "sleep=25000",
+            "return=skipped unless economy needs spider_silk",
+            "consume=corn water",
+            "animate=working 30000",
+            "produce=spider_silk"
+         }
+      },
+   },
 }

@@ -389,7 +389,7 @@ void PortDock::set_need_ship(Game& game, bool need) {
 /**
  * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex) {
+uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex) {
 	uint32_t count = 0;
 
 	for (ShippingItem& shipping_item : m_waiting) {
@@ -543,7 +543,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("PortDock", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading portdock: %s", e.what());

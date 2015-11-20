@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,8 +75,11 @@ void MapBuildingPacket::read(FileSystem& fs,
 						//  Get the tribe and the building index.
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const TribeDescr & tribe = player->tribe();
-							const BuildingIndex index = tribe.building_index(name);
-							if (!tribe.has_building(index)) {
+							const DescriptionIndex index = tribe.building_index(name);
+							const BuildingDescr* bd = tribe.get_building_descr(index);
+							// Check if tribe has this building itself
+							// OR alternatively if this building might be a conquered militarysite
+							if (!tribe.has_building(index) && !(bd && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
@@ -109,7 +112,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 				}
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapBuildingPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("buildings: %s", e.what());
@@ -174,8 +177,8 @@ void MapBuildingPacket::write_priorities
 	// Used to be base_priority which is no longer used. Remove after b20.
 	fw.unsigned_32(0);
 
-	std::map<int32_t, std::map<WareIndex, int32_t> > type_to_priorities;
-	std::map<int32_t, std::map<WareIndex, int32_t> >::iterator it;
+	std::map<int32_t, std::map<DescriptionIndex, int32_t> > type_to_priorities;
+	std::map<int32_t, std::map<DescriptionIndex, int32_t> >::iterator it;
 
 	const TribeDescr & tribe = building.owner().tribe();
 	building.collect_priorities(type_to_priorities);
@@ -189,11 +192,11 @@ void MapBuildingPacket::write_priorities
 		fw.unsigned_8(ware_type);
 		fw.unsigned_8(it->second.size());
 
-		std::map<WareIndex, int32_t>::iterator it2;
+		std::map<DescriptionIndex, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
 			std::string name;
-			WareIndex const ware_index = it2->first;
+			DescriptionIndex const ware_index = it2->first;
 			if (wwWARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
 			else if (wwWORKER == ware_type)
@@ -218,13 +221,13 @@ void MapBuildingPacket::read_priorities
 	fr.unsigned_32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const TribeDescr & tribe = building.owner().tribe();
-	Widelands::WareIndex ware_type = INVALID_INDEX;
+	Widelands::DescriptionIndex ware_type = INVALID_INDEX;
 	// read ware type
 	while (0xff != (ware_type = fr.unsigned_8())) {
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.unsigned_8();
 		for (uint8_t i = 0; i < count; ++i) {
-			WareIndex idx;
+			DescriptionIndex idx;
 			if (wwWARE == ware_type)
 				idx = tribe.safe_ware_index(fr.c_string());
 			else if (wwWORKER == ware_type)

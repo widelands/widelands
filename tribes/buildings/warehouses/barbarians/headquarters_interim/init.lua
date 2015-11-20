@@ -10,18 +10,18 @@ tribes:new_warehouse_type {
    size = "big",
    destructible = false,
 
-	-- The interim headquarters of the barbarians is a simple stone building thatched
-	-- with reed and coated with many different wares.
+   -- The interim headquarters of the barbarians is a simple stone building thatched
+   -- with reed and coated with many different wares.
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 64, 106 }
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 64, 106 }
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 
-	heal_per_second = 170,
-	conquers = 9,
+   heal_per_second = 170,
+   conquers = 9,
 }

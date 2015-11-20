@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 11:52+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:43+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -134,8 +134,8 @@ msgstr "Новосъздаден войник няма никакъв опит �
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr "Една от тези тренировъчни сгради е бойната арена. Тя е голяма и скъпа сграда, която тренира ловкостта на войниците. Тъй като войниците огладняват много по време на обучението, тази сграда се нуждае от много храна и силна бира. В една истинска игра, би трябвало да имате добра инфраструктура, преди да можете да я построите."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -176,7 +176,7 @@ msgstr "Много добре. Нашата бойна арена е завър�
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
+" pitta bread and strong beer, as well as either fish or meat."
 msgstr "Нужните стоки също се доставят тук. За успешно обучение, Ви трябват питки и силна бира, както и риба или месо."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
@@ -247,7 +247,7 @@ msgstr "Чудесно, нашият тренировъчен лагер същ�
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr "За да тренират в тренировъчния лагер, войниците се нуждаят от храна, също както в бойната арена, но нямат нужда от силна бира. Вместо това, им трябват различни видове брадви за трениране на атаката и шлемове за трениране на здравето."
 

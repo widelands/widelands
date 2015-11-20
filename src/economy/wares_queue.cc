@@ -38,7 +38,7 @@ namespace Widelands {
 */
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
-	 WareIndex        const _ware,
+	 DescriptionIndex        const _ware,
 	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
@@ -122,7 +122,7 @@ void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 void WaresQueue::request_callback
 	(Game            &       game,
 	 Request         &,
-	 WareIndex        const ware,
+	 DescriptionIndex        const ware,
 #ifndef NDEBUG
 	 Worker          * const w,
 #else
@@ -282,7 +282,7 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("WaresQueue", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const GameDataError & e) {
 		throw GameDataError("waresqueue: %s", e.what());

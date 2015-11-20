@@ -39,7 +39,7 @@ function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
    end)
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()
-   assert_error("Treibes immovable does not exist!", function()
+   assert_error("Tribes immovable does not exist!", function()
       imm = map:place_immovable("b", map:get_field(10,10), "tribes")
    end)
 end

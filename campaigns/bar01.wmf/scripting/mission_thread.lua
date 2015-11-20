@@ -199,19 +199,19 @@ function mines_and_food_thread()
    end
    message_box_objective(plr, order_msg_15_mines_exhausted)
    plr:allow_buildings{
-		"barbarians_coalmine_deep",
-		"barbarians_ironmine_deep",
-		"barbarians_inn",
-		"barbarians_micro_brewery"}
+      "barbarians_coalmine_deep",
+      "barbarians_ironmine_deep",
+      "barbarians_inn",
+      "barbarians_micro_brewery"}
    local obj = add_campaign_objective(obj_enhance_buildings)
 
    run(function()
       while true do
          local rv = plr:get_buildings{
-				"barbarians_coalmine_deep",
-				"barbarians_ironmine_deep",
-				"barbarians_inn",
-				"barbarians_micro_brewery"}
+            "barbarians_coalmine_deep",
+            "barbarians_ironmine_deep",
+            "barbarians_inn",
+            "barbarians_micro_brewery"}
          if (#rv.barbarians_inn > 0 and #rv["barbarians_micro_brewery"] > 0) and
             (#rv.barbarians_coalmine_deep + #rv.barbarians_ironmine_deep > 0) then
             break
@@ -256,8 +256,8 @@ function build_materials_thread()
    -- Wait for the buildings to be built
    while true do
       local rv = plr:get_buildings{
-			"barbarians_lime_kiln",
-			"barbarians_well",
+         "barbarians_lime_kiln",
+         "barbarians_well",
          "barbarians_coalmine",
          "barbarians_coalmine_deep",
          "barbarians_charcoal_kiln"}

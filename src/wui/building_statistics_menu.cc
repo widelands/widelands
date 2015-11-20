@@ -91,16 +91,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		unproductive_label_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the first part of productivity with input field */
-			/** TRANSLATORS: Building statistics window -  'Low Production: <input>%' */
-			_("Low Production: "),
+			/** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
+			_("Low Productivity "),
 			UI::Align_BottomLeft),
 		unproductive_percent_(
 			&unproductive_box_, 0, 0, 35, kLabelHeight, g_gr->images().get("pics/but1.png")),
 		unproductive_label2_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the second part of productivity with input field */
-			/** TRANSLATORS: Building statistics window -  'Low Production: <input>%' */
-			_("%"),
+			/** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
+			_("%:"),
 			UI::Align_BottomLeft),
 		no_owned_label_(&navigation_panel_,
 							 get_inner_w() - 2 * kButtonRowHeight - kMargin,
@@ -156,7 +156,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							_("Ports"));
 	}
 
-	const BuildingIndex nr_buildings = parent.egbase().tribes().nrbuildings();
+	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
@@ -172,8 +172,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	// We want to add player tribe's buildings in correct order
 	const TribeDescr& tribe = iplayer().player().tribe();
-	std::vector<BuildingIndex> buildings_to_add;
-	for (BuildingIndex index: tribe.buildings()) {
+	std::vector<DescriptionIndex> buildings_to_add;
+	for (DescriptionIndex index: tribe.buildings()) {
 		// Only add headquarter types that are owned by player.
 		const BuildingDescr& descr = *tribe.get_building_descr(index);
 		const Widelands::Player& player = iplayer().player();
@@ -183,14 +183,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	// We want to add other tribes' militarysites on the bottom
-	for (BuildingIndex index = 0; index < nr_buildings; ++index) {
+	for (DescriptionIndex index = 0; index < nr_buildings; ++index) {
 		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
 		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
 			buildings_to_add.push_back(index);
 		}
 	}
 
-	for (BuildingIndex id : buildings_to_add) {
+	for (DescriptionIndex id : buildings_to_add) {
 		const BuildingDescr& descr = *tribe.get_building_descr(id);
 
 		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
@@ -271,6 +271,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_percent_.set_max_length(4);
 	unproductive_label2_.set_size(unproductive_label2_.get_w(), kButtonRowHeight);
 	unproductive_box_.add(&unproductive_label_, UI::Align_Left);
+	unproductive_box_.add_space(2);
 	unproductive_box_.add(&unproductive_percent_, UI::Align_Left);
 	unproductive_box_.add(&unproductive_label2_, UI::Align_Left);
 	unproductive_box_.set_size(
@@ -383,7 +384,7 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 // - Buildings owned, steps through constructionsites
 // - Productivity, steps though buildings with low productivity and stopped buildings
 bool BuildingStatisticsMenu::add_button(
-	BuildingIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
+	DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
 
 	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(button_box,
@@ -595,7 +596,7 @@ void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
 	const Map& map = iplayer().game().map();
-	const BuildingIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
+	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
 	no_owned_label_.set_visible(false);
@@ -613,7 +614,7 @@ void BuildingStatisticsMenu::update() {
 	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
 	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
-	for (BuildingIndex id = 0; id < nr_buildings; ++id) {
+	for (DescriptionIndex id = 0; id < nr_buildings; ++id) {
 		const BuildingDescr& building = *tribe.get_building_descr(id);
 		if (building_buttons_[id] == nullptr) {
 			continue;
@@ -689,7 +690,7 @@ void BuildingStatisticsMenu::update() {
 																											0);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Production: "));
+				unproductive_label_.set_text(_("Low Productivity "));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
 				unproductive_percent_.set_visible(true);
@@ -779,10 +780,10 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	textarea->set_visible(true);
 }
 
-void BuildingStatisticsMenu::set_current_building_type(BuildingIndex id) {
+void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
 	current_building_type_ = id;
-	for (BuildingIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
+	for (DescriptionIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
 		if (building_buttons_[i] != nullptr) {
 			building_buttons_[i]->set_flat(true);
 		}

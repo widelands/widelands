@@ -131,7 +131,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 			try {
 				bool reached_end;
 				char const * const type_name = next_word(parameters, reached_end);
-				const WareIndex& wareindex = tribes.ware_index(type_name);
+				const DescriptionIndex& wareindex = tribes.ware_index(type_name);
 				if (tribes.ware_exists(wareindex)) {
 					for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
 						const TribeDescr& tribe_descr = *tribes.get_tribe_descr(i);
@@ -143,7 +143,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 						new ProductionProgram::ActReturn::EconomyNeedsWare
 							(wareindex);
 				} else if (tribes.worker_exists(tribes.worker_index(type_name))) {
-					const WareIndex& workerindex = tribes.worker_index(type_name);
+					const DescriptionIndex& workerindex = tribes.worker_index(type_name);
 					for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
 						const TribeDescr* tribe_descr = tribes.get_tribe_descr(i);
 						if (tribe_descr->has_worker(workerindex)) {
@@ -221,7 +221,7 @@ void ProductionProgram::parse_ware_type_group
 	 const Tribes& tribes,
 	 const BillOfMaterials& inputs)
 {
-	std::set<WareIndex>::iterator last_insert_pos = group.first.end();
+	std::set<DescriptionIndex>::iterator last_insert_pos = group.first.end();
 	uint8_t count     = 1;
 	uint8_t count_max = 0;
 	for (;;) {
@@ -233,7 +233,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 
-		WareIndex const ware_index = tribes.safe_ware_index(ware);
+		DescriptionIndex const ware_index = tribes.safe_ware_index(ware);
 
 		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
 			if (input_it == inputs.end()) {
@@ -396,7 +396,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description
 	(const Tribes& tribes) const
 {
 	std::vector<std::string> condition_list;
-	for (const WareIndex& temp_ware : group.first) {
+	for (const DescriptionIndex& temp_ware : group.first) {
 		condition_list.push_back(tribes.get_ware_descr(temp_ware)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
@@ -418,7 +418,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation
 	(const Tribes& tribes) const
 {
 	std::vector<std::string> condition_list;
-	for (const WareIndex& temp_ware : group.first) {
+	for (const DescriptionIndex& temp_ware : group.first) {
 		condition_list.push_back(tribes.get_ware_descr(temp_ware)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
@@ -617,7 +617,7 @@ ProductionProgram::ActCall::ActCall
 					 "the program \"%s\" has not (yet) been declared in %s "
 					 "(wrong declaration order?)",
 					 program_name, descr.descname().c_str());
-			m_program = it->second;
+			m_program = it->second.get();
 		}
 
 		//  Override with specified handling methods.
@@ -810,7 +810,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 {
 	switch (m_feature) {
 		case SEAFARING: {
-			if (game.map().allows_seafaring())
+			if (game.map().get_port_spaces().size() > 1)
 				return ps.program_step(game, 0);
 			else {
 				ps.set_production_result(_("No use for ships on this map!"));
@@ -893,7 +893,7 @@ void ProductionProgram::ActConsume::execute
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
 	for (size_t i = 0; i < nr_warequeues; ++i) {
-		WareIndex const ware_type = warequeues[i]->get_ware();
+		DescriptionIndex const ware_type = warequeues[i]->get_ware();
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities[i] = 0;
 
@@ -928,7 +928,7 @@ void ProductionProgram::ActConsume::execute
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
-			for (const WareIndex& ware : group.first) {
+			for (const DescriptionIndex& ware : group.first) {
 				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
@@ -989,7 +989,7 @@ ProductionProgram::ActProduce::ActProduce
 	try {
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
-			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
+			std::pair<DescriptionIndex, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * ware = parameters;
 			for (;; ++parameters) {
@@ -1085,7 +1085,7 @@ ProductionProgram::ActRecruit::ActRecruit
 	try {
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
-			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
+			std::pair<DescriptionIndex, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * worker = parameters;
 			for (;; ++parameters) {
@@ -1588,7 +1588,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 
 	// Early check for no resources
 	const Buildcost & buildcost = descr.buildcost();
-	WareIndex available_resource = INVALID_INDEX;
+	DescriptionIndex available_resource = INVALID_INDEX;
 
 	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
 		if (psite.waresqueue(it->first).get_filled() > 0) {

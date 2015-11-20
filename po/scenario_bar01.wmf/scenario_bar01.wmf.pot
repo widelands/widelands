@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -57,12 +57,12 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
 msgid ""
-"Build coal and iron ore mines"
+"Build coal and iron mines"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid ""
-"Build a coal mine and an iron ore mine."
+"Build a coal mine and an iron mine."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
-"Bigger and better buildings – including all military ones – require better building materials. They cannot be built out of simple logs – the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."
+"Bigger and better buildings – including all military ones – require better building materials. They cannot be built out of simple logs – the logs have to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
-"Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner."
+"Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner."
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118

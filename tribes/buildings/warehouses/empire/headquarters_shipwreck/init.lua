@@ -11,15 +11,15 @@ tribes:new_warehouse_type {
    destructible = false,
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 93, 40 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 93, 40 },
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 
-	heal_per_second = 170,
-	conquers = 9,
+   heal_per_second = 170,
+   conquers = 9,
 }

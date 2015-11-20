@@ -10,59 +10,60 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 4
-	},
-	return_on_dismantle = {
-		log = 2
-	},
+      log = 4
+   },
+   return_on_dismantle = {
+      log = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 19, 33 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 19, 33 },
-		},
-		working = {
-			template = "working_??",
-			directory = dirname,
-			hotspot = { 19, 33 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 19, 33 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 19, 33 },
+      },
+      working = {
+         template = "working_??",
+         directory = dirname,
+         hotspot = { 19, 33 },
+      },
+   },
 
    aihints = {
-		mines_water = true,
-		prohibited_till = 600
+      mines_water = true,
+      prohibited_till = 800,
+      forced_after = 800
    },
 
-	working_positions = {
-		barbarians_carrier = 1
-	},
+   working_positions = {
+      barbarians_carrier = 1
+   },
 
    outputs = {
-		"water"
+      "water"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
-			actions = {
-				"sleep=20000",
-				"animate=working 20000",
-				"mine=water 1 100 65 2",
-				"produce=water",
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "sleep=20000",
+            "animate=working 20000",
+            "mine=water 1 100 65 2",
+            "produce=water",
+         }
+      },
+   },
 
-	out_of_resource_notification = {
-		title = _"Out of Water",
-		message = pgettext("barbarians_building", "The carrier working at this well can’t find any water in his work area."),
-		productivity_threshold = 33
-	},
+   out_of_resource_notification = {
+      title = _"Out of Water",
+      message = pgettext("barbarians_building", "The carrier working at this well can’t find any water in his work area."),
+      productivity_threshold = 33
+   },
 }

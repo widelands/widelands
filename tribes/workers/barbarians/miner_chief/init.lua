@@ -20,8 +20,8 @@ tribes:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-	experience = 28,
-	becomes = "barbarians_miner_master",
+   experience = 28,
+   becomes = "barbarians_miner_master",
 
    animations = animations,
 }

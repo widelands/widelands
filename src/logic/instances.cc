@@ -70,7 +70,8 @@ void CmdDestroyMapObject::read
 			else
 				obj_serial = 0;
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionDestroyMapObject);
+			throw UnhandledVersionError("CmdDestroyMapObject",
+												 packet_version, kCurrentPacketVersionDestroyMapObject);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("destroy map object: %s", e.what());
@@ -123,7 +124,7 @@ void CmdAct::read
 				obj_serial = 0;
 			arg = fr.unsigned_32();
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionCmdAct);
+			throw UnhandledVersionError("CmdAct", packet_version, kCurrentPacketVersionCmdAct);
 		}
 	} catch (const WException & e) {
 		throw wexception("act: %s", e.what());
@@ -244,13 +245,17 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
-		assert(is_animation_known("idle"));
+		if (!is_animation_known("idle")) {
+			throw GameDataError("Map object %s has animations but no idle animation", init_name.c_str());
+		}
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
 													.representative_image_filename();
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
-		assert(!icon_filename().empty());
+		if (icon_filename_.empty()) {
+			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
+		}
 	}
 }
 MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
@@ -272,12 +277,8 @@ void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 	if (is_animation_known(animname)) {
-#ifndef NDEBUG
 		throw GameDataError
 			("Tried to add already existing animation \"%s\"", animname.c_str());
-#else
-		log("Warning: tried to add already existing animation \"%s\"", animname.c_str());
-#endif
 	} else {
 		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 	}
@@ -584,7 +585,7 @@ void MapObject::Loader::load(FileRead & fr)
 
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version <= 0 || packet_version > kCurrentPacketVersionMapObject) {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersionMapObject);
+			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
 
 		Serial const serial = fr.unsigned_32();

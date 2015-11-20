@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2004-2008, 2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ private:
 	int32_t m_networktime;
 	int32_t m_time;
 
-	int32_t m_lastframe;
+	uint32_t m_lastframe;
 
 	/// This is an attempt to measure how far behind the network time we are.
 	uint32_t m_latency;

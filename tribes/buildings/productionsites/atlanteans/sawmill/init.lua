@@ -10,56 +10,56 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 3
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 2
-	},
+      log = 2,
+      granite = 3
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 53, 60 },
-		},
-		working = {
-			template = "working_??",
-			directory = dirname,
-			hotspot = { 53, 60 },
-			fps = 25
-		}
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 53, 60 },
+      },
+      working = {
+         template = "working_??",
+         directory = dirname,
+         hotspot = { 53, 60 },
+         fps = 25
+      }
+   },
 
    aihints = {
-		forced_after = 120,
-		prohibited_till = 60
+      forced_after = 250,
+      prohibited_till = 250
    },
 
-	working_positions = {
-		atlanteans_sawyer = 1
-	},
+   working_positions = {
+      atlanteans_sawyer = 1
+   },
 
    inputs = {
-		log = 8
-	},
+      log = 8
+   },
    outputs = {
-		"planks"
+      "planks"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-			descname = _"sawing logs",
-			actions = {
-				"sleep=16500", -- Much faster than barbarians' wood hardener
-				"return=skipped unless economy needs planks",
-				"consume=log:2",
-				"playFX=sound/sawmill sawmill 192",
-				"animate=working 20000", -- Much faster than barbarians' wood hardener
-				"produce=planks"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
+         descname = _"sawing logs",
+         actions = {
+            "sleep=16500", -- Much faster than barbarians' wood hardener
+            "return=skipped unless economy needs planks",
+            "consume=log:2",
+            "playFX=sound/sawmill sawmill 192",
+            "animate=working 20000", -- Much faster than barbarians' wood hardener
+            "produce=planks"
+         }
+      },
+   },
 }

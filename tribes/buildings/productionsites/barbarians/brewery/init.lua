@@ -10,56 +10,56 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-		log = 3,
-		granite = 1,
-		thatch_reed = 1
-	},
-	return_on_dismantle_on_enhanced = {
-		log = 1,
-		granite = 1
-	},
+      log = 3,
+      granite = 1,
+      thatch_reed = 1
+   },
+   return_on_dismantle_on_enhanced = {
+      log = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 60, 59 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 60, 59 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 60, 59 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 60, 59 },
+      },
+   },
 
    aihints = {
-		prohibited_till = 600,
+      prohibited_till = 600,
    },
 
-	working_positions = {
-		barbarians_brewer_master = 1,
-		barbarians_brewer = 1,
-	},
+   working_positions = {
+      barbarians_brewer_master = 1,
+      barbarians_brewer = 1,
+   },
 
    inputs = {
-		water = 8,
-		wheat = 8
-	},
+      water = 8,
+      wheat = 8
+   },
    outputs = {
-		"stout"
+      "beer_strong"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start brewing stout because ...
-			descname = _"brewing stout",
-			actions = {
-				"sleep=30000",
-				"return=skipped unless economy needs stout",
-				"consume=water wheat",
-				"animate=working 30000",
-				"produce=stout"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
+         descname = _"brewing strong beer",
+         actions = {
+            "sleep=30000",
+            "return=skipped unless economy needs beer_strong",
+            "consume=water wheat",
+            "animate=working 30000",
+            "produce=beer_strong"
+         }
+      },
+   },
 }

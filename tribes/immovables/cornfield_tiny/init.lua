@@ -8,9 +8,9 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field" },
    programs = {
-		program = {
-			"animate=idle 30000",
-			"transform=cornfield_small",
+      program = {
+         "animate=idle 30000",
+         "transform=cornfield_small",
       }
    },
 

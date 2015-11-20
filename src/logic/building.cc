@@ -79,27 +79,30 @@ BuildingDescr::BuildingDescr
 
 	i18n::Textdomain td("tribes");
 
-	try {
-		const std::string size = table.get_string("size");
-		if (boost::iequals(size, "small")) {
-			m_size = BaseImmovable::SMALL;
-		} else if (boost::iequals(size, "medium")) {
-			m_size = BaseImmovable::MEDIUM;
-		} else if (boost::iequals(size, "big")) {
-			m_size = BaseImmovable::BIG;
-		} else if (boost::iequals(size, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else if (boost::iequals(size, "port")) {
-			m_size = BaseImmovable::BIG;
-			m_port = true;
-		} else {
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+	// Partially finished buildings get their sizes from their associated building
+	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+		try {
+			const std::string size = table.get_string("size");
+			if (boost::iequals(size, "small")) {
+				m_size = BaseImmovable::SMALL;
+			} else if (boost::iequals(size, "medium")) {
+				m_size = BaseImmovable::MEDIUM;
+			} else if (boost::iequals(size, "big")) {
+				m_size = BaseImmovable::BIG;
+			} else if (boost::iequals(size, "mine")) {
+				m_size = BaseImmovable::SMALL;
+				m_mine = true;
+			} else if (boost::iequals(size, "port")) {
+				m_size = BaseImmovable::BIG;
+				m_port = true;
+			} else {
+				throw GameDataError
+					("expected %s but found \"%s\"",
+					 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+			}
+		} catch (const WException & e) {
+			throw GameDataError("size: %s", e.what());
 		}
-	} catch (const WException & e) {
-		throw GameDataError("size: %s", e.what());
 	}
 
 	// Parse build options
@@ -111,7 +114,7 @@ BuildingDescr::BuildingDescr
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		BuildingIndex const en_i = egbase_.tribes().building_index(enh);
+		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
 		if (egbase_.tribes().building_exists(en_i)) {
 			m_enhancement = en_i;
 
@@ -134,10 +137,8 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("buildcost")) {
 		m_buildable = true;
 		try {
-			m_buildcost =
-					ImmovableDescr::parse_buildcost(table.get_table("buildcost"), egbase_.tribes());
-			m_return_dismantle = ImmovableDescr::parse_buildcost(
-											table.get_table("return_on_dismantle"), egbase_.tribes());
+			m_buildcost = Buildcost(table.get_table("buildcost"), egbase_.tribes());
+			m_return_dismantle = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -147,10 +148,8 @@ BuildingDescr::BuildingDescr
 	if (table.has_key("enhancement_cost")) {
 		m_enhanced_building = true;
 		try {
-			m_enhance_cost = ImmovableDescr::parse_buildcost(
-									  table.get_table("enhancement_cost"), egbase_.tribes());
-			m_return_enhanced = ImmovableDescr::parse_buildcost(
-										  table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+			m_enhance_cost = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			m_return_enhanced = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("An enhanced building must define \"enhancement_cost\""
@@ -178,7 +177,7 @@ Building & BuildingDescr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	for (BuildingIndex idx : former_buildings) {
+	for (DescriptionIndex idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -543,7 +542,7 @@ std::string Building::info_string(const std::string & format) {
 }
 
 
-WaresQueue & Building::waresqueue(WareIndex const wi) {
+WaresQueue & Building::waresqueue(DescriptionIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -729,13 +728,13 @@ void Building::draw_help
 }
 
 int32_t Building::get_priority
-	(WareWorker type, WareIndex const ware_index, bool adjust) const
+	(WareWorker type, DescriptionIndex const ware_index, bool adjust) const
 {
 	int32_t priority = DEFAULT_PRIORITY;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
-		std::map<WareIndex, int32_t>::const_iterator it =
+		std::map<DescriptionIndex, int32_t>::const_iterator it =
 			m_ware_priorities.find(ware_index);
 		if (it != m_ware_priorities.end())
 			priority = adjust
@@ -751,12 +750,12 @@ int32_t Building::get_priority
 * priorities are identified by ware type and index
  */
 void Building::collect_priorities
-	(std::map<int32_t, std::map<WareIndex, int32_t> > & p) const
+	(std::map<int32_t, std::map<DescriptionIndex, int32_t> > & p) const
 {
 	if (m_ware_priorities.empty())
 		return;
-	std::map<WareIndex, int32_t> & ware_priorities = p[wwWARE];
-	std::map<WareIndex, int32_t>::const_iterator it;
+	std::map<DescriptionIndex, int32_t> & ware_priorities = p[wwWARE];
+	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
 			continue;
@@ -769,7 +768,7 @@ void Building::collect_priorities
  */
 void Building::set_priority
 	(int32_t    const type,
-	 WareIndex const ware_index,
+	 DescriptionIndex const ware_index,
 	 int32_t    const new_priority)
 {
 	if (type == wwWARE) {

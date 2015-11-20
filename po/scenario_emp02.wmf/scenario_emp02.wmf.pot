@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-19 06:32+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid ""
-"Build some barracks and sentries around the colony."
+"Build some blockhouses and sentries around the colony."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
@@ -220,7 +220,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
-"Later, I walked down to the rocks in the south and looked for a place where we could build a quarry to get some hard stone for our larger buildings."
+"Later, I walked down to the rocks in the south and looked for a place where we could build a quarry to get some granite for our larger buildings."
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
@@ -242,13 +242,13 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid ""
-"Stone for the Colony"
+"Stones for the Colony"
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
-"Great! Today the building of the quarry was completed. Now we will get enough stone to construct larger buildings."
+"Great! Today the building of the quarry was completed. Now we will get enough stones to construct larger buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
@@ -276,7 +276,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:171
 msgid ""
-"I beg you to be cautious and to build some barracks or sentries around our colony."
+"I beg you to be cautious and to build some blockhouses or sentries around our colony."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176

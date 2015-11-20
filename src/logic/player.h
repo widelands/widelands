@@ -34,6 +34,11 @@
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 
+// there are three arrays to be used by AI
+// their size is defined here
+// (all are of the same size)
+constexpr int kAIDataSize = 6;
+
 class Node;
 namespace Widelands {
 
@@ -411,16 +416,16 @@ public:
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const WareIndex& i) const {
+	bool is_worker_type_allowed(const DescriptionIndex& i) const {
 		return m_allowed_worker_types.at(i);
 	}
-	void allow_worker_type(WareIndex, bool allow);
+	void allow_worker_type(DescriptionIndex, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(const BuildingIndex& i) const {
+	bool is_building_type_allowed(const DescriptionIndex& i) const {
 		return m_allowed_building_types[i];
 	}
-	void allow_building_type(BuildingIndex, bool allow);
+	void allow_building_type(DescriptionIndex, bool allow);
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
@@ -433,16 +438,16 @@ public:
 		 const Building::FormerBuildings &);
 	Building & force_csite
 		(const Coords,
-		 BuildingIndex,
+		 DescriptionIndex,
 		 const Building::FormerBuildings & = Building::FormerBuildings());
-	Building * build(Coords, BuildingIndex, bool, Building::FormerBuildings &);
+	Building * build(Coords, DescriptionIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
 	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
 	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
-		(Building *, BuildingIndex index_of_new_building);
+		(Building *, DescriptionIndex index_of_new_building);
 	void dismantle_building (Building *);
 
 	// Economy stuff
@@ -481,23 +486,23 @@ public:
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	// Statistics
-	const BuildingStatsVector& get_building_statistics(const BuildingIndex& i) const;
+	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
 
 	std::vector<uint32_t> const * get_ware_production_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_consumption_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_stock_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(WareIndex);
+	void ware_produced(DescriptionIndex);
 
-	void ware_consumed(WareIndex, uint8_t);
+	void ware_consumed(DescriptionIndex, uint8_t);
 	void next_ware_production_period();
 
 	void set_ai(const std::string &);
@@ -509,13 +514,21 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
+	// set of functions to be used by AI to save and read own data within this class
+	void set_ai_data(int32_t value, uint32_t position);
+	void set_ai_data(uint32_t value, uint32_t position);
+	void set_ai_data(int16_t value, uint32_t position);
+	void get_ai_data(int32_t * value, uint32_t position);
+	void get_ai_data(uint32_t * value, uint32_t position);
+	void get_ai_data(int16_t * value, uint32_t position);
+
 private:
-	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
+	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
 	void _enhance_or_dismantle
-		(Building *, BuildingIndex const index_of_new_building);
+		(Building *, DescriptionIndex const index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -578,13 +591,22 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
+
+	/**
+	 * AI internal data. These will be ignored by human player
+	 * AI is managing the content of these arrays
+	 */
+	int32_t m_ai_data_int32 [kAIDataSize];
+	uint32_t m_ai_data_uint32 [kAIDataSize];
+	int16_t m_ai_data_int16 [kAIDataSize];
+
 	PlayerBuildingStats m_building_stats;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings
-	(const Tribes& tribes, const BuildingIndex bi,
+	(const Tribes& tribes, const DescriptionIndex bi,
 	 Building::FormerBuildings* former_buildings);
 
 }

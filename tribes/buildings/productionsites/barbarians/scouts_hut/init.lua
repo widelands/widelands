@@ -10,51 +10,51 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 2,
-		granite = 1
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 1
-	},
+      log = 2,
+      granite = 1
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 45, 92 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 45, 92 },
-		},
-		unoccupied = {
-			template = "unoccupied_??",
-			directory = dirname,
-			hotspot = { 45, 92 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 45, 92 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 45, 92 },
+      },
+      unoccupied = {
+         template = "unoccupied_??",
+         directory = dirname,
+         hotspot = { 45, 92 },
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 
-	working_positions = {
-		barbarians_scout = 1
-	},
+   working_positions = {
+      barbarians_scout = 1
+   },
 
    inputs = {
-		ration = 2
-	},
+      ration = 2
+   },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-			descname = _"scouting",
-			actions = {
-				"sleep=30000",
-				"consume=ration",
-				"worker=scout"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+         descname = _"scouting",
+         actions = {
+            "sleep=30000",
+            "consume=ration",
+            "worker=scout"
+         }
+      },
+   },
 }

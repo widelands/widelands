@@ -43,7 +43,7 @@ function initial_message_and_small_food_economy()
    campaign_message_box(order_msg_1_small_food_economy)
 
    p1:allow_buildings{
-		"barbarians_fishers_hut",
+      "barbarians_fishers_hut",
       "barbarians_hunters_hut",
       "barbarians_gamekeepers_hut",
       "barbarians_tavern",
@@ -149,9 +149,9 @@ function mining_and_trainingsites()
 
    while true do
       local h = p1:get_buildings{
-			"barbarians_coalmine",
-			"barbarians_charcoal_kiln",
-			"barbarians_ironmine",
+         "barbarians_coalmine",
+         "barbarians_charcoal_kiln",
+         "barbarians_ironmine",
          "barbarians_tavern",
          "barbarians_smelting_works",
          "barbarians_metal_workshop"}
@@ -173,7 +173,7 @@ function mining_and_trainingsites()
 
    campaign_message_box(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
-      "barbarians_axfactory",
+      "barbarians_ax_workshop",
       "barbarians_warmill",
       "barbarians_helmsmithy",
       "barbarians_battlearena",
@@ -204,11 +204,11 @@ end
 function check_weapon_productions_obj(o)
    while true do
       local rv = p1:get_buildings{
-			"barbarians_metal_workshop",
-			"barbarians_axfactory",
-			"barbarians_warmill"}
+         "barbarians_metal_workshop",
+         "barbarians_ax_workshop",
+         "barbarians_warmill"}
       if #rv.barbarians_metal_workshop > 0 and
-			(#rv.barbarians_axfactory + #rv.barbarians_warmill > 0) then
+         (#rv.barbarians_ax_workshop + #rv.barbarians_warmill > 0) then
          break
       end
       sleep(6523)
@@ -362,4 +362,3 @@ run(kalitath)
 run(renegade_fortresses)
 run(mission_complete)
 run(mining_and_trainingsites)
-

@@ -1143,7 +1143,7 @@ void Bob::Loader::load(FileRead & fr)
 					state.program = get_program(programname);
 			}
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("Bob", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("loading bob: %s", e.what());

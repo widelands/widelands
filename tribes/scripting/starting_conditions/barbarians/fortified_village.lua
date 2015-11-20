@@ -81,7 +81,7 @@ return {
       place_building_in_region(plr, "barbarians_metalworks", sf:region(12), {
          wares = { iron = 8 },
       })
-      place_building_in_region(plr, "barbarians_axfactory", sf:region(12), {
+      place_building_in_region(plr, "barbarians_ax_workshop", sf:region(12), {
          wares = { coal = 8 },
       })
       place_building_in_region(plr, "barbarians_hardener", sf:region(12), {
@@ -92,9 +92,9 @@ return {
       })
    end) then
       plr:send_message(
-			_"Not enough space",
-			_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]),
-			{popup=true}
+         _"Not enough space",
+         _([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]),
+         {popup=true}
       )
    end
 end,

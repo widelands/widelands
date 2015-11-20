@@ -10,57 +10,57 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 2,
-		granite = 1,
-		planks = 1
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 1
-	},
+      log = 2,
+      granite = 1,
+      planks = 1
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 31, 32 },
-		},
-		working = {
-			template = "idle_??", -- TODO(GunChleoc): No animation yet.
-			directory = dirname,
-			hotspot = { 31, 32 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 31, 32 },
+      },
+      working = {
+         template = "idle_??", -- TODO(GunChleoc): No animation yet.
+         directory = dirname,
+         hotspot = { 31, 32 },
+      },
+   },
 
    aihints = {
-		mines_water = true,
-		forced_after = 600,
-		prohibited_till = 300
+      mines_water = true,
+      forced_after = 800,
+      prohibited_till = 450
    },
 
-	working_positions = {
-		atlanteans_carrier = 1
-	},
+   working_positions = {
+      atlanteans_carrier = 1
+   },
 
    outputs = {
-		"water"
+      "water"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
-			actions = {
-				"sleep=20000",
-				"animate=working 20000",
-				"mine=water 1 100 65 2",
-				"produce=water"
-			}
-		},
-	},
-	out_of_resource_notification = {
-		title = _"Out of Water",
-		message = pgettext("atlanteans_building", "The carrier working at this well can’t find any water in his work area."),
-		productivity_threshold = 33
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "sleep=20000",
+            "animate=working 20000",
+            "mine=water 1 100 65 2",
+            "produce=water"
+         }
+      },
+   },
+   out_of_resource_notification = {
+      title = _"Out of Water",
+      message = pgettext("atlanteans_building", "The carrier working at this well can’t find any water in his work area."),
+      productivity_threshold = 33
+   },
 }

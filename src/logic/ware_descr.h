@@ -32,8 +32,6 @@
 
 class Image;
 class LuaTable;
-class Profile;
-class Section;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -60,7 +58,7 @@ public:
 	/// How much of the ware type an economy should store in warehouses.
 	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked
   ///  and should not be configurable.
-	WareIndex default_target_quantity(const std::string& tribename) const;
+	DescriptionIndex default_target_quantity(const std::string& tribename) const;
 
 	std::string directory() const {return directory_;}
 
@@ -72,14 +70,14 @@ public:
 	void set_has_demand_check(const std::string& tribename);
 
 	// Add a building to the list of consumers
-	void add_consumer(const BuildingIndex& building_index);
+	void add_consumer(const DescriptionIndex& building_index);
 	// Add a building to the list of producers
-	void add_producer(const BuildingIndex& building_index);
+	void add_producer(const DescriptionIndex& building_index);
 
 	// The buildings that consume this ware
-	const std::set<BuildingIndex>& consumers() const;
+	const std::set<DescriptionIndex>& consumers() const;
 	// The buildings that produce this ware
-	const std::set<BuildingIndex>& producers() const;
+	const std::set<DescriptionIndex>& producers() const;
 
 private:
 	// tribename, quantity. No default.
@@ -87,8 +85,8 @@ private:
 	// tribename, preciousness. No default.
 	std::unordered_map<std::string, int> preciousnesses_;
 
-	std::set<BuildingIndex> consumers_; // Buildings that consume this ware
-	std::set<BuildingIndex> producers_; // Buildings that produce this ware
+	std::set<DescriptionIndex> consumers_; // Buildings that consume this ware
+	std::set<DescriptionIndex> producers_; // Buildings that produce this ware
 
 	std::string  directory_;  /// The directory where the init files are located
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);

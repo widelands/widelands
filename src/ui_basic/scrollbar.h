@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ private:
 	uint32_t  m_steps;
 
 	Area m_pressed; ///< area that the user clicked on (None if mouse is up)
-	int32_t   m_time_nextact;
+	uint32_t  m_time_nextact;
 	int32_t   m_knob_grabdelta; ///< only while m_pressed == Knob
 
 	const Image* m_pic_minus;      ///< left/up

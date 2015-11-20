@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,8 +98,8 @@ void CmdQueue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
-	int32_t const final = game_time_var + interval;
+int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
+	uint32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
 
 	while (game_time_var < final) {
@@ -178,7 +178,7 @@ void GameLogicCommand::read
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
 		} else {
-			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("game logic: %s", e.what());
