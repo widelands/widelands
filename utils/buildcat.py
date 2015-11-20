@@ -60,6 +60,7 @@ MAINPOTS = [
     ("tribes/tribes", [
         "../../tribes/scripting/starting_conditions/*/*.lua"
         "../../tribes/*.lua",
+        "../../tribes/preload.lua",
         "../../tribes/*/init.lua",
         "../../tribes/*/*/init.lua",
         "../../tribes/*/*/*/init.lua",
