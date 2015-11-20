@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-	-- TRANSLATORS: Performance helptext for a building
-	return pgettext("barbarians_building", "The farmer needs 100 seconds on average to sow and harvest a sheaf of wheat.")
+   -- TRANSLATORS: Performance helptext for a building
+   return pgettext("barbarians_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 40))
 end
