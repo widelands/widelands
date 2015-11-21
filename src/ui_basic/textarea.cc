@@ -192,6 +192,10 @@ void Textarea::expand()
 {
 	int32_t x = get_x();
 	int32_t y = get_y();
+// NOCOM old version
+	uint32_t w = m_textstyle.calc_bare_width(m_text);
+	uint16_t h = m_textstyle.font->height();
+/* NOCOM change 2
 	const Image* image = UI::g_fh1->render(
 									as_uifont(m_text,
 												 m_textstyle.font->size() - UI::g_fh1->fontset().size_offset(),
@@ -205,6 +209,7 @@ void Textarea::expand()
 							  m_textstyle.font->size() - UI::g_fh1->fontset().size_offset(),
 							  m_textstyle.fg))->height();
 	}
+*/
 
 	if      (m_align & Align_HCenter)
 		x -= w >> 1;
